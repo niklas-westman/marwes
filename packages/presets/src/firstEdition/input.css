@@ -1,0 +1,67 @@
+/* 
+ * Input Component Styles
+ * Based on Figma node 1:969 (Component - Text field)
+ * States: default (1:984), pressed (1:989), active (1:994), error (1:999), disabled (1:1004)
+ * Focus state follows Figma node 120:927 specification
+ */
+
+.mw-input {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--mw-radius);
+  border: 1px solid var(--mw-border);
+  background: var(--mw-surface);
+  color: var(--mw-text);
+  font-family: var(--mw-font-primary, inherit);
+  width: 260px;
+  transition: border-color 150ms ease, outline 150ms ease;
+}
+
+.mw-input::placeholder {
+  color: var(--mw-text-muted);
+}
+
+/* Hover state (pressed in Figma) - node 1:989 */
+.mw-input:hover:not(:disabled):not(:focus) {
+  border-color: color-mix(in srgb, var(--mw-border) 70%, var(--mw-text));
+}
+
+/* Focus/Active state - node 1:994, follows focus spec from node 120:927 */
+.mw-input:focus-visible {
+  outline: 2px solid var(--mw-focus);
+  outline-offset: 2px;
+}
+
+/* Error/Danger tone - node 1:999 */
+.mw-input.is-invalid,
+.mw-input--danger {
+  border-color: var(--mw-danger);
+}
+
+.mw-input.is-invalid:focus-visible,
+.mw-input--danger:focus-visible {
+  outline-color: var(--mw-danger);
+}
+
+/* Success tone */
+.mw-input--success {
+  border-color: var(--mw-success);
+}
+
+.mw-input--success:focus-visible {
+  outline-color: var(--mw-success);
+}
+
+/* Disabled state - node 1:1004 */
+.mw-input:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Dark mode disabled state */
+@media (prefers-color-scheme: dark) {
+  .mw-input:disabled {
+    opacity: 0.4;
+  }
+}

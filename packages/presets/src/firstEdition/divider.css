@@ -1,0 +1,80 @@
+/* 
+ * Divider Component Styles
+ * Based on Figma node 1:932 (Component - Divider)
+ * Variants: 80px (1:939), 64px (1:941), 48px (1:944), 32px (1:945), 16px (1:946), 8px (1:947), 1px (1:948)
+ * Supports both horizontal and vertical orientations
+ */
+
+.mw-divider {
+  border: none;
+  background: var(--mw-divider-color, var(--mw-border));
+  margin: 0;
+}
+
+/* Horizontal divider (default) */
+.mw-divider--horizontal {
+  width: 100%;
+  height: var(--mw-divider-size, 1px);
+  margin-top: var(--mw-divider-spacing, 1rem);
+  margin-bottom: var(--mw-divider-spacing, 1rem);
+}
+
+/* Vertical divider */
+.mw-divider--vertical {
+  height: 100%;
+  width: var(--mw-divider-size, 1px);
+  margin-left: var(--mw-divider-spacing, 1rem);
+  margin-right: var(--mw-divider-spacing, 1rem);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Size variants - xxs: 1px (Figma node 1:948) */
+.mw-divider--xxs {
+  /* Uses CSS variable from recipe: --mw-divider-size: 1px */
+  /* Spacing: 0.5rem */
+}
+
+/* xs: 8px (Figma node 1:947) */
+.mw-divider--xs {
+  /* Uses CSS variable from recipe: --mw-divider-size: 8px */
+  /* Spacing: 1rem */
+}
+
+/* sm: 16px (Figma node 1:946) */
+.mw-divider--sm {
+  /* Uses CSS variable from recipe: --mw-divider-size: 16px */
+  /* Spacing: 1.5rem */
+}
+
+/* md: 32px (Figma node 1:945) */
+.mw-divider--md {
+  /* Uses CSS variable from recipe: --mw-divider-size: 32px */
+  /* Spacing: 2rem */
+}
+
+/* lg: 48px (Figma node 1:944) */
+.mw-divider--lg {
+  /* Uses CSS variable from recipe: --mw-divider-size: 48px */
+  /* Spacing: 2.5rem */
+}
+
+/* xl: 64px (Figma node 1:941) */
+.mw-divider--xl {
+  /* Uses CSS variable from recipe: --mw-divider-size: 64px */
+  /* Spacing: 3rem */
+}
+
+/* xxl: 80px (Figma node 1:939) */
+.mw-divider--xxl {
+  /* Uses CSS variable from recipe: --mw-divider-size: 80px */
+  /* Spacing: 4rem */
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .mw-divider {
+    /* Theme variable will automatically adapt to dark mode */
+    background: var(--mw-divider-color, var(--mw-border));
+  }
+}

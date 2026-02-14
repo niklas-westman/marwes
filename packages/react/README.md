@@ -1,0 +1,81 @@
+# @marwes/react
+
+React adapter for Marwes core recipes.
+
+## Responsibilities
+- Provide React components and provider APIs.
+- Resolve theme from context and call core recipes.
+- Apply typed RenderKit output to React elements.
+
+## Non-Responsibilities
+- No component logic duplication from core.
+- No preset CSS ownership.
+
+## Install
+```bash
+pnpm add @marwes/core @marwes/react @marwes/presets
+```
+
+## Quick Start
+```tsx
+import { MarwesProvider, Button, Input, Checkbox } from "@marwes/react";
+import { firstEdition } from "@marwes/presets";
+import "@marwes/presets/firstEdition/styles.css";
+
+export function App() {
+  return (
+    <MarwesProvider preset={firstEdition} theme={{ color: { primary: "#5B8CFF" } }}>
+      <Button tone="primary">Save</Button>
+      <Input placeholder="Email" onValueChange={(v) => console.log(v)} />
+      <Checkbox ariaLabel="Subscribe" />
+    </MarwesProvider>
+  );
+}
+```
+
+## Current Exports
+Provider and hooks:
+- `MarwesProvider`
+- `useTheme`
+- `useSystem`
+
+Atoms:
+- `Button`
+- `Input`
+- `Icon`
+- `Checkbox`
+- `H1`, `H2`, `H3`
+- `Paragraph`
+
+Molecules:
+- `CheckboxField`
+
+Utilities:
+- `useRenderKitDebug`
+
+## Adapter Rules
+- Treat `@marwes/core` as source of truth for behavior and a11y.
+- Apply RenderKit fields explicitly.
+- Keep component wrappers thin and predictable.
+- Do not hardcode Figma design values in adapters.
+
+## Package Structure
+- `src/provider/*` - provider + hooks
+- `src/components/*` - React wrappers around core recipes
+- `src/index.ts` - public exports
+
+## Figma Mapping
+If design changes originate in Figma, align token/state mapping with:
+- `../../docs/FIGMA_TO_MARWES.md`
+
+Most Figma changes should land in core theme/recipes and presets CSS first, then flow into React automatically.
+
+## Scripts
+- `pnpm --filter @marwes/react dev`
+- `pnpm --filter @marwes/react build`
+- `pnpm --filter @marwes/react typecheck`
+
+## Related Docs
+- `../../docs/PROJECT.md`
+- `../../docs/ARCHITECTURE.md`
+- `../../docs/ENGINEERING.md`

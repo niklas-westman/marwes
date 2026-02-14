@@ -1,0 +1,41 @@
+/**
+ * InputField (Molecule)
+ * 
+ * Layout for label + input + helper/error text
+ */
+
+.mw-input-field {
+  display: grid;
+  gap: 6px;
+}
+
+.mw-input-field__label {
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mw-input-field__helper {
+  opacity: 0.75;
+  font-size: 0.875em;
+  color: var(--mw-neutral-600, #6b7280);
+}
+
+.mw-input-field__error {
+  font-size: 0.875em;
+  color: var(--mw-danger, #dc2626);
+}
+
+/* State modifiers */
+.mw-input-field--disabled .mw-input-field__label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.mw-input-field--readonly .mw-input-field__label {
+  cursor: default;
+}
+
+.mw-input-field--invalid .mw-input-field__label {
+  /* Label styling when field has error - could add red accent if needed */
+}

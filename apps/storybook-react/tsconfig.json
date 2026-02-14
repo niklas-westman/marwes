@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "paths": {
+      "@marwes/core": ["../../packages/core/src/index.ts"],
+      "@marwes/react": ["../../packages/react/src/index.ts"],
+      "@marwes/presets": ["../../packages/presets/src/index.ts"],
+      "@marwes/presets/firstEdition": [
+        "../../packages/presets/src/firstEdition/index.ts"
+      ],
+      "@marwes/presets/firstEdition/styles.css": [
+        "../../packages/presets/src/firstEdition/styles.css"
+      ]
+    }
+  },
+  "include": ["src", ".storybook", "vite-env.d.ts", "vite.config.ts"]
+}

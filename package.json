@@ -1,0 +1,35 @@
+{
+  "name": "marwes",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:packages": "pnpm -r --parallel --filter \"./packages/*\" dev",
+    "dev:playground": "pnpm --filter \"./apps/playground-react\" dev",
+    "dev:storybook": "pnpm --filter \"./apps/storybook-react\" storybook",
+    "dev": "pnpm dev:packages & pnpm dev:playground",
+    "build:packages": "pnpm -r --filter \"./packages/*\" build",
+    "build:apps": "pnpm -r --filter \"./apps/*\" build",
+    "build": "pnpm build:packages && pnpm build:apps",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean || true"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^19.2.4",
+    "rimraf": "^6.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  }
+}

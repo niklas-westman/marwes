@@ -1,0 +1,210 @@
+/* FirstEdition - Checkbox
+   - Figma node: 82:1612 (Component - Checkbox)
+   - States: enabled, hover, disabled, error
+   - Selections: checked, unchecked
+   - Styles expect: <input type="checkbox" class="mw-checkbox ...">
+   - Theme tokens map to vars like --mw-primary, --mw-radius, etc.
+*/
+
+.mw-checkbox {
+  /* Component-level CSS variables (overridden by modifiers) */
+  --mw-checkbox-size: 18px;
+  --mw-checkbox-radius: var(--mw-radius);
+  --mw-checkbox-border: var(--mw-border);
+  --mw-checkbox-bg: var(--mw-surface);
+  --mw-checkbox-checked-bg: var(--mw-primary);
+  --mw-checkbox-check: var(--mw-on-primary);
+
+  /* Size and layout */
+  inline-size: var(--mw-checkbox-size);
+  block-size: var(--mw-checkbox-size);
+
+  /* Reset native appearance */
+  appearance: none;
+  -webkit-appearance: none;
+
+  /* Flexbox for checkmark centering */
+  display: inline-grid;
+  place-content: center;
+
+  /* Visual styling - aligned with Figma design */
+  border-radius: max(2px, calc(var(--mw-checkbox-radius) * 0.4));
+  border: 1px solid var(--mw-checkbox-border);
+  background: var(--mw-checkbox-bg);
+
+  /* Interaction */
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 150ms ease;
+
+  /* Typography */
+  font-family: var(--mw-font-primary, inherit);
+}
+
+/* ============================================
+   SIZE VARIANTS - Figma node 82:1612
+   ============================================ */
+
+.mw-checkbox--sm {
+  --mw-checkbox-size: 16px;
+}
+
+.mw-checkbox--md {
+  --mw-checkbox-size: 18px;
+}
+
+.mw-checkbox--lg {
+  --mw-checkbox-size: 22px;
+}
+
+/* ============================================
+   FOCUS STATE - Figma node 120:927
+   ============================================ */
+
+.mw-checkbox:focus-visible {
+  outline: 2px solid var(--mw-focus);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   HOVER STATE - Light mode (nodes 120:1361, 122:943, 120:1326)
+   ============================================ */
+
+.mw-checkbox:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--mw-border) 60%, var(--mw-primary));
+}
+
+.mw-checkbox:checked:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* ============================================
+   CHECKED STATE - Figma node 82:1707
+   ============================================ */
+
+.mw-checkbox:checked {
+  background: var(--mw-checkbox-checked-bg);
+  border-color: var(--mw-checkbox-checked-bg);
+}
+
+/* ============================================
+   INDETERMINATE STATE
+   ============================================ */
+
+.mw-checkbox:indeterminate {
+  background: var(--mw-checkbox-checked-bg);
+  border-color: var(--mw-checkbox-checked-bg);
+}
+
+/* Checkmark / mixed mark */
+.mw-checkbox::before {
+  content: "";
+  inline-size: var(--mw-checkbox-size);
+  block-size: var(--mw-checkbox-size);
+  transform: scale(0);
+  transition: transform 180ms ease;
+
+  margin-top: 1px; /* visually center the check/mixed mark within the box */
+
+  /* “check” via mask so color can be controlled */
+  background: var(--mw-checkbox-check);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* Check icon from icon registry - Figma aligned checkmark */
+.mw-checkbox:checked::before {
+  transform: scale(1);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+
+/* mixed icon */
+.mw-checkbox:indeterminate::before {
+  transform: scale(1);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6 12h12'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6 12h12'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   DISABLED STATE - Light mode (nodes 120:1332, 122:945)
+   ============================================ */
+
+.mw-checkbox:disabled,
+.mw-checkbox--disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
+/* ============================================
+   ERROR/INVALID STATE - Figma node 120:1336, 122:947
+   ============================================ */
+
+.mw-checkbox--invalid,
+.mw-checkbox[aria-invalid="true"] {
+  border-color: var(--mw-danger);
+}
+
+.mw-checkbox:checked.mw-checkbox--invalid,
+.mw-checkbox:checked[aria-invalid="true"] {
+  background: var(--mw-danger);
+  border-color: var(--mw-danger);
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+/* Dark mode override example:
+  .mw-theme--dark .mw-checkbox {
+    Kept for future reference
+  }
+*/
+
+.mw-theme--dark .mw-checkbox:not(:checked) {
+  background: transparent;
+}
+
+/* Dark mode: Hover state with subtle opacity */
+.mw-theme--dark .mw-checkbox:hover:not(:disabled) {
+  border-color: color-mix(in srgb, #ffffff 40%, var(--mw-primary));
+}
+
+.mw-theme--dark .mw-checkbox:checked:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+/* Dark mode: Disabled state (40% opacity, middle of 20-60% range) */
+.mw-theme--dark .mw-checkbox:disabled,
+.mw-theme--dark .mw-checkbox--disabled {
+  opacity: 0.4;
+}
+
+/* Dark mode: Error state maintains visibility on dark backgrounds */
+.mw-theme--dark .mw-checkbox--invalid,
+.mw-theme--dark .mw-checkbox[aria-invalid="true"] {
+  border-color: var(--mw-danger);
+}
+
+.mw-theme--dark .mw-checkbox:checked.mw-checkbox--invalid,
+.mw-theme--dark .mw-checkbox:checked[aria-invalid="true"] {
+  background: var(--mw-danger);
+  border-color: var(--mw-danger);
+}
+
+/* ============================================
+   CHECKBOX FIELD COMPONENTS
+   ============================================ */
+
+.mw-checkbox-field__label {
+  cursor: pointer;
+  font-family: var(--mw-font-primary, inherit);
+}
+
+.mw-checkbox-field__description {
+  font-family: var(--mw-font-primary, inherit);
+}

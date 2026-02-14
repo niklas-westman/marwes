@@ -1,0 +1,43 @@
+export type Density = "compact" | "comfortable" | "spacious";
+export type UiVariant = "solid" | "soft" | "outline" | "ghost";
+
+export type Theme = {
+  color: {
+    primary: string;
+    secondary: string;
+    background: string;
+    surface: string;
+    text: string;
+    textMuted: string;
+    border: string;
+    danger: string;
+    success: string;
+    warning: string;
+  };
+  font: {
+    primary: string;
+    secondary: string;
+    mono: string;
+  };
+  ui: {
+    radius: number;
+    density: Density;
+    variant: UiVariant;
+  };
+};
+
+export type ThemeOverrides = {
+  color?: Partial<Theme["color"]>;
+  font?: Partial<Theme["font"]>;
+  ui?: Partial<Theme["ui"]>;
+};
+
+export type Preset = {
+  name: string;
+  theme?: ThemeOverrides;
+};
+
+export type System = {
+  theme: Theme;
+  preset?: Preset;
+};

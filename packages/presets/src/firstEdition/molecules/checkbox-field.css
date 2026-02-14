@@ -1,0 +1,33 @@
+.mw-checkbox-field {
+  display: grid;
+  gap: 8px;
+}
+
+.mw-checkbox-field__row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mw-checkbox-field__label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.mw-checkbox-field__description {
+  opacity: 0.75;
+  margin-left: 28px;
+  font-size: 0.875em;
+}
+
+.mw-checkbox-field__error {
+  margin-left: 28px;
+  font-size: 0.875em;
+  color: var(--mw-danger, #dc2626);
+}
+
+/* Optional state hooks */
+.mw-checkbox-field--disabled .mw-checkbox-field__label {
+  cursor: not-allowed;
+  opacity: 0.7;
+}

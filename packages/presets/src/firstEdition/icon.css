@@ -1,0 +1,72 @@
+/* ============================================
+   Icon Component Styles - firstEdition
+   ============================================ */
+
+/* BASE */
+.mw-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  width: var(--mw-icon-size);
+  height: var(--mw-icon-size);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--mw-icon-stroke-width);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* SIZES */
+.mw-icon--xs {
+  --mw-icon-size: 16px;
+}
+
+.mw-icon--sm {
+  --mw-icon-size: 24px;
+}
+
+.mw-icon--md {
+  --mw-icon-size: 32px;
+}
+
+.mw-icon--lg {
+  --mw-icon-size: 40px;
+}
+
+/* COLORS */
+.mw-icon--currentColor {
+  stroke: currentColor;
+}
+
+.mw-icon--primary {
+  stroke: var(--mw-icon-primary);
+}
+
+.mw-icon--secondary {
+  stroke: var(--mw-icon-secondary);
+}
+
+.mw-icon--muted {
+  stroke: var(--mw-icon-muted);
+}
+
+/* CONTEXT-SPECIFIC: Icon in Button */
+.mw-btn .mw-icon {
+  pointer-events: none;
+}
+
+.mw-btn--xs .mw-icon {
+  --mw-icon-size: 16px;
+}
+
+.mw-btn--sm .mw-icon {
+  --mw-icon-size: 20px;
+}
+
+.mw-btn--md .mw-icon {
+  --mw-icon-size: 24px;
+}
+
+.mw-btn--lg .mw-icon {
+  --mw-icon-size: 28px;
+}

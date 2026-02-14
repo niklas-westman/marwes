@@ -1,0 +1,17 @@
+/**
+ * firstEdition Preset Styles
+ * 
+ * Main stylesheet that imports all component styles.
+ * Each component has its own CSS file for better organization.
+ */
+
+@import "./button.css";
+@import "./input.css";
+@import "./icon.css";
+@import "./checkbox.css";
+@import "./divider.css";
+@import "./typography.css";
+
+/* Molecules */
+@import "./molecules/checkbox-field.css";
+@import "./molecules/input-field.css";

@@ -1,0 +1,33 @@
+/* ============================================
+   Typography Component Styles - firstEdition
+   ============================================ */
+
+/* BASE HEADING */
+.mw-heading {
+  font-family: var(--mw-heading-font, inherit);
+  font-size: var(--mw-heading-size);
+  line-height: var(--mw-heading-line-height);
+  font-weight: var(--mw-heading-weight);
+  letter-spacing: var(--mw-heading-letter-spacing);
+  color: var(--mw-heading-color);
+  margin: 0;
+}
+
+/* Heading sizes are controlled via CSS variables set by the recipe */
+/* .mw-heading--h1 uses --mw-heading-size: 32px, --mw-heading-line-height: 1.2, --mw-heading-weight: 600 */
+/* .mw-heading--h2 uses --mw-heading-size: 24px, --mw-heading-line-height: 1.3, --mw-heading-weight: 600 */
+/* .mw-heading--h3 uses --mw-heading-size: 20px, --mw-heading-line-height: 1.4, --mw-heading-weight: 600 */
+
+/* BASE PARAGRAPH */
+.mw-p {
+  font-family: var(--mw-p-font, inherit);
+  font-size: var(--mw-p-size);
+  line-height: var(--mw-p-line-height);
+  color: var(--mw-p-color);
+  margin: 0;
+}
+
+/* Paragraph sizes are controlled via CSS variables set by the recipe */
+/* .mw-p--sm uses --mw-p-size: 14px, --mw-p-line-height: 1.5 */
+/* .mw-p--md uses --mw-p-size: 16px, --mw-p-line-height: 1.6 */
+/* .mw-p--lg uses --mw-p-size: 18px, --mw-p-line-height: 1.7 */
