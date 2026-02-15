@@ -1,6 +1,6 @@
-import { InputField } from "@marwes/react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { InputField } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
+import { useState } from "react"
 
 const meta: Meta<typeof InputField> = {
   title: "Input/Field",
@@ -12,11 +12,11 @@ const meta: Meta<typeof InputField> = {
   args: {
     label: "Input Field Label",
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof InputField>;
+type Story = StoryObj<typeof InputField>
 
 /**
  * Recommended usage - minimal InputField with just a label
@@ -24,13 +24,10 @@ type Story = StoryObj<typeof InputField>;
 export const FieldRecommended: Story = {
   render: () => (
     <div style={{ width: "320px" }}>
-      <InputField
-        label="Email address"
-        input={{ type: "email", placeholder: "you@example.com" }}
-      />
+      <InputField label="Email address" input={{ type: "email", placeholder: "you@example.com" }} />
     </div>
   ),
-};
+}
 
 /**
  * InputField with helper text to guide the user
@@ -45,7 +42,7 @@ export const FieldWithHelperText: Story = {
       />
     </div>
   ),
-};
+}
 
 /**
  * InputField with error message - automatically marks input as invalid
@@ -60,7 +57,7 @@ export const FieldWithError: Story = {
       />
     </div>
   ),
-};
+}
 
 /**
  * Disabled input field
@@ -75,7 +72,7 @@ export const FieldDisabled: Story = {
       />
     </div>
   ),
-};
+}
 
 /**
  * Read-only input field
@@ -83,31 +80,28 @@ export const FieldDisabled: Story = {
 export const FieldReadOnly: Story = {
   render: () => (
     <div style={{ width: "320px" }}>
-      <InputField
-        label="Account created"
-        input={{ value: "January 15, 2026", readOnly: true }}
-      />
+      <InputField label="Account created" input={{ value: "January 15, 2026", readOnly: true }} />
     </div>
   ),
-};
+}
 
 /**
  * Controlled input field with state management
  */
 export const FieldControlled: Story = {
   render: () => {
-    const [email, setEmail] = useState("");
-    const [error, setError] = useState<string | undefined>();
+    const [email, setEmail] = useState("")
+    const [error, setError] = useState<string | undefined>()
 
     const handleChange = (value: string) => {
-      setEmail(value);
+      setEmail(value)
       // Simple validation example
       if (value && !value.includes("@")) {
-        setError("Please enter a valid email address.");
+        setError("Please enter a valid email address.")
       } else {
-        setError(undefined);
+        setError(undefined)
       }
-    };
+    }
 
     return (
       <div style={{ width: "320px" }}>
@@ -126,9 +120,9 @@ export const FieldControlled: Story = {
           Current value: {email || "(empty)"}
         </p>
       </div>
-    );
+    )
   },
-};
+}
 
 /**
  * Different input types
@@ -144,7 +138,7 @@ export const FieldTypes: Story = {
       <InputField label="URL" input={{ type: "url" }} />
     </div>
   ),
-};
+}
 
 /**
  * Required field indicator
@@ -159,4 +153,4 @@ export const FieldRequired: Story = {
       />
     </div>
   ),
-};
+}

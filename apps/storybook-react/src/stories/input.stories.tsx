@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Input } from "@marwes/react";
+import { Input } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
   title: "Input/Input",
@@ -17,18 +17,18 @@ const meta = {
   args: {
     placeholder: "Type something…",
   },
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Input>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const WithValue: Story = {
   args: {
     defaultValue: "hello@marwes.dev",
   },
-};
+}
 
 export const Invalid: Story = {
   args: {
@@ -36,11 +36,11 @@ export const Invalid: Story = {
     tone: "danger",
     placeholder: "Invalid input…",
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: "Disabled",
   },
-};
+}

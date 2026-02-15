@@ -1,0 +1,12 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome-staged
+      glob: "*.{js,jsx,ts,tsx,json,jsonc,css,md,yml,yaml}"
+      run: pnpm exec biome check --write {staged_files}
+      stage_fixed: true
+
+pre-push:
+  jobs:
+    - name: repo-check
+      run: pnpm check

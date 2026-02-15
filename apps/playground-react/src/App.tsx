@@ -1,7 +1,7 @@
-import { firstEdition } from "@marwes/presets";
-import { Button, MarwesProvider } from "@marwes/react";
+import { firstEdition } from "@marwes/presets"
+import { Button, MarwesProvider } from "@marwes/react"
 
-import "@marwes/presets/firstEdition/styles.css";
+import "@marwes/presets/firstEdition/styles.css"
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         </div>
       </MarwesProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

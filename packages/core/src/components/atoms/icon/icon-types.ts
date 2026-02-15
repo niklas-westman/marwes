@@ -32,7 +32,14 @@ export type IconA11yProps = {
  * Valid SVG element types used in icon definitions.
  * This ensures type safety when rendering icon nodes.
  */
-export type SvgElementType = "path" | "circle" | "line" | "polygon" | "polyline" | "rect" | "ellipse"
+export type SvgElementType =
+  | "path"
+  | "circle"
+  | "line"
+  | "polygon"
+  | "polyline"
+  | "rect"
+  | "ellipse"
 
 export type SvgNode = {
   tag: SvgElementType

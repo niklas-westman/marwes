@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Icon } from "@marwes/react";
+import { Icon } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 
 // Import from core (adjust if you export these elsewhere)
-import { iconNames } from "@marwes/core";
-import type { IconName } from "@marwes/core";
+import { iconNames } from "@marwes/core"
+import type { IconName } from "@marwes/core"
 
 type Args = {
-  size: "xs" | "sm" | "md" | "lg";
-  strokeWidth: "xs" | "sm" | "md" | "lg";
-  search: string;
-  columns: number;
-};
+  size: "xs" | "sm" | "md" | "lg"
+  strokeWidth: "xs" | "sm" | "md" | "lg"
+  search: string
+  columns: number
+}
 
 const meta: Meta<Args> = {
   title: "Icons/Gallery",
@@ -37,19 +37,19 @@ const meta: Meta<Args> = {
       control: { type: "range", min: 4, max: 14, step: 1 },
     },
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<Args>;
+type Story = StoryObj<Args>
 
 export const Gallery: Story = {
   render: (args) => {
-    const q = args.search.trim().toLowerCase();
+    const q = args.search.trim().toLowerCase()
 
     const list = (iconNames as IconName[])
       .filter((name) => (q ? String(name).toLowerCase().includes(q) : true))
-      .sort((a, b) => String(a).localeCompare(String(b)));
+      .sort((a, b) => String(a).localeCompare(String(b)))
 
     return (
       <div
@@ -86,11 +86,7 @@ export const Gallery: Story = {
               }}
               title={String(name)}
             >
-              <Icon
-                name={name}
-                size={args.size}
-                strokeWidth={args.strokeWidth}
-              />
+              <Icon name={name} size={args.size} strokeWidth={args.strokeWidth} />
               <div
                 style={{
                   fontSize: 11,
@@ -105,6 +101,6 @@ export const Gallery: Story = {
           ))}
         </div>
       </div>
-    );
+    )
   },
-};
+}

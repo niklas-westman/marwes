@@ -1,6 +1,6 @@
-import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { Checkbox, Paragraph } from "@marwes/react";
+import { Checkbox, Paragraph } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
+import * as React from "react"
 
 const meta: Meta<typeof Checkbox> = {
   title: "Checkbox/Atom",
@@ -22,42 +22,38 @@ const meta: Meta<typeof Checkbox> = {
     indeterminate: { control: "boolean" },
     ariaLabel: { control: "text" },
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof Checkbox>
 
 export const Playground: Story = {
   args: {
     ariaLabel: "Accept terms",
   },
-};
+}
 
 export const UncontrolledDefaultChecked: Story = {
   render: () => <Checkbox ariaLabel="Uncontrolled" defaultChecked />,
-};
+}
 
 export const Controlled: Story = {
   render: () => {
-    const [checked, setChecked] = React.useState(false);
+    const [checked, setChecked] = React.useState(false)
     return (
       <div style={{ display: "grid", gap: 12 }}>
-        <Checkbox
-          ariaLabel="Controlled"
-          checked={checked}
-          onCheckedChange={setChecked}
-        />
+        <Checkbox ariaLabel="Controlled" checked={checked} onCheckedChange={setChecked} />
         <Paragraph size="sm">checked: {String(checked)}</Paragraph>
       </div>
-    );
+    )
   },
-};
+}
 
 export const Indeterminate: Story = {
   render: () => {
-    const [checked, setChecked] = React.useState(false);
-    const [indeterminate, setIndeterminate] = React.useState(true);
+    const [checked, setChecked] = React.useState(false)
+    const [indeterminate, setIndeterminate] = React.useState(true)
 
     return (
       <div style={{ display: "grid", gap: 12 }}>
@@ -67,17 +63,17 @@ export const Indeterminate: Story = {
           indeterminate={indeterminate}
           onCheckedChange={(next) => {
             // Typical UX: first click clears indeterminate and sets checked=true
-            setIndeterminate(false);
-            setChecked(next);
+            setIndeterminate(false)
+            setChecked(next)
           }}
         />
         <Paragraph size="sm">
           checked: {String(checked)}, indeterminate: {String(indeterminate)}
         </Paragraph>
       </div>
-    );
+    )
   },
-};
+}
 
 export const Disabled: Story = {
   render: () => (
@@ -86,7 +82,7 @@ export const Disabled: Story = {
       <Checkbox ariaLabel="Disabled checked" disabled checked />
     </div>
   ),
-};
+}
 
 export const Invalid: Story = {
   render: () => (
@@ -95,7 +91,7 @@ export const Invalid: Story = {
       <Checkbox ariaLabel="Invalid checked" invalid checked />
     </div>
   ),
-};
+}
 
 export const Sizes: Story = {
   render: () => (
@@ -114,7 +110,7 @@ export const Sizes: Story = {
       </div>
     </div>
   ),
-};
+}
 
 export const AllStates: Story = {
   render: () => (
@@ -152,4 +148,4 @@ export const AllStates: Story = {
       </div>
     </div>
   ),
-};
+}
