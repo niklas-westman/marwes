@@ -1,0 +1,59 @@
+name: CI
+# Continuous Integration workflow that runs on every pull request and push to main
+# Validates code quality, type safety, tests, and build success before merging
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: lint-typecheck-test-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI: true
+
+    steps:
+      # Clone the repository code to the runner
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Install pnpm package manager (reads version from packageManager field in package.json)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      # Install Node.js runtime environment with pnpm store caching
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      # Install all project dependencies using the exact versions from pnpm-lock.yaml
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Run code linting and formatting checks using Biome
+      - name: Biome
+        run: pnpm biome check .
+
+      # Run TypeScript type checking across all workspace packages
+      - name: Typecheck
+        run: pnpm -r typecheck
+
+      # Run unit tests across all workspace packages
+      - name: Test
+        run: pnpm -r test
+
+      # Build all workspace packages for production
+      - name: Build
+        run: pnpm -r build

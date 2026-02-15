@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "typecheck": "tsc -b --noEmit",
+    "test": "echo \"No tests in playground-react\"",
     "build": "tsc -b --noEmit && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
