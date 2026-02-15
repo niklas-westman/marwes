@@ -1,13 +1,10 @@
-import type { Theme } from "../../../theme/theme-types";
-import type { InputOptions, InputRenderKit } from "./input-types";
-import { resolveInputA11y } from "./input-a11y";
+import type { Theme } from "../../../theme/theme-types"
+import { resolveInputA11y } from "./input-a11y"
+import type { InputOptions, InputRenderKit } from "./input-types"
 
-export function createInputRecipe(
-  theme: Theme,
-  opts: InputOptions,
-): InputRenderKit {
-  const tone = opts.tone ?? "default";
-  const invalid = opts.invalid === true ? "is-invalid" : "is-valid";
+export function createInputRecipe(theme: Theme, opts: InputOptions): InputRenderKit {
+  const tone = opts.tone ?? "default"
+  const invalid = opts.invalid === true ? "is-invalid" : "is-valid"
 
   return {
     tag: "input",
@@ -25,5 +22,5 @@ export function createInputRecipe(
       "--mw-font-primary": theme.font.primary,
     },
     a11y: resolveInputA11y(opts),
-  };
+  }
 }

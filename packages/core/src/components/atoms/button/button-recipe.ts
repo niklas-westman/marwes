@@ -1,16 +1,13 @@
-import type { Theme } from "../../../theme/theme-types";
-import type { ButtonOptions, ButtonRenderKit } from "./button-types";
-import { resolveButtonA11y } from "./button-a11y";
+import type { Theme } from "../../../theme/theme-types"
+import { resolveButtonA11y } from "./button-a11y"
+import type { ButtonOptions, ButtonRenderKit } from "./button-types"
 
-export function createButtonRecipe(
-  theme: Theme,
-  opts: ButtonOptions,
-): ButtonRenderKit {
-  const { tag, a11y, blockClick } = resolveButtonA11y(opts);
+export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRenderKit {
+  const { tag, a11y, blockClick } = resolveButtonA11y(opts)
 
-  const size = opts.size ?? "md";
-  const tone = opts.tone ?? "primary";
-  const action = opts.action ?? (tag === "button" ? "button" : "navigate");
+  const size = opts.size ?? "md"
+  const tone = opts.tone ?? "primary"
+  const action = opts.action ?? (tag === "button" ? "button" : "navigate")
 
   return {
     tag,
@@ -46,5 +43,5 @@ export function createButtonRecipe(
       "--mw-radius": `${theme.ui.radius}px`,
       "--mw-font-primary": theme.font.primary,
     },
-  };
+  }
 }

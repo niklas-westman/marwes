@@ -1,37 +1,37 @@
-import * as React from "react";
 import {
+  type IconSize,
+  type IconStrokeWidth,
   iconRegistry,
   resolveIconSize,
   resolveIconStrokeWidth,
-  type IconSize,
-  type IconStrokeWidth,
-} from "@marwes/core";
-import { useTheme } from "../../provider/use-theme";
+} from "@marwes/core"
+import type * as React from "react"
+import { useTheme } from "../../provider/use-theme"
 
-type IconName = keyof typeof iconRegistry;
+type IconName = keyof typeof iconRegistry
 
 export type IconProps = {
-  name: IconName;
+  name: IconName
 
   /**
    * Token ("xs"|"sm"|"md"|"lg") or a raw px number.
    * Defaults to system.theme.icon.size
    */
-  size?: IconSize | number;
+  size?: IconSize | number
 
   /**
    * Token ("xs"|"sm"|"md"|"lg") or a raw number.
    * Defaults to system.theme.icon.strokeWidth
    */
-  strokeWidth?: IconStrokeWidth | number;
+  strokeWidth?: IconStrokeWidth | number
 
   /**
    * Common props
    */
-  className?: string;
-  "aria-label"?: string;
-  decorative?: boolean;
-};
+  className?: string
+  "aria-label"?: string
+  decorative?: boolean
+}
 
 export function Icon({
   name,
@@ -41,16 +41,16 @@ export function Icon({
   "aria-label": ariaLabel,
   decorative,
 }: IconProps) {
-  const theme = useTheme();
-  const themeIcon = theme.icon;
+  const theme = useTheme()
+  const themeIcon = theme.icon
 
-  const px = resolveIconSize(size ?? themeIcon.size);
-  const sw = resolveIconStrokeWidth(strokeWidth ?? themeIcon.strokeWidth);
+  const px = resolveIconSize(size ?? themeIcon.size)
+  const sw = resolveIconStrokeWidth(strokeWidth ?? themeIcon.strokeWidth)
 
-  const def = iconRegistry[name];
+  const def = iconRegistry[name]
 
   // If no aria-label => decorative
-  const isDecorative = decorative || !ariaLabel;
+  const isDecorative = decorative || !ariaLabel
 
   return (
     <svg
@@ -68,10 +68,11 @@ export function Icon({
       role={isDecorative ? undefined : "img"}
       focusable="false"
     >
-      {def.nodes.map((n, i) => {
-        const Tag = n.tag as keyof JSX.IntrinsicElements;
-        return <Tag key={i} {...(n.attrs as any)} />;
+      {def.nodes.map((iconNode, nodeIndex) => {
+        const TagName = iconNode.tag
+        // biome-ignore lint/suspicious/noArrayIndexKey: Icon nodes are static and never reordered
+        return <TagName key={nodeIndex} {...(iconNode.attrs as React.SVGAttributes<SVGElement>)} />
       })}
     </svg>
-  );
+  )
 }

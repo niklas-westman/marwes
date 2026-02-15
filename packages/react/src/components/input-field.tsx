@@ -1,30 +1,30 @@
-import * as React from "react";
-import { Input } from "./input";
-import type { InputProps } from "./input";
-import { Paragraph } from "./paragraph";
+import * as React from "react"
+import { Input } from "./input"
+import type { InputProps } from "./input"
+import { Paragraph } from "./paragraph"
 
 export type InputFieldProps = {
   /** Optional: if omitted, we generate one via useId(). */
-  id?: string;
+  id?: string
 
   /** Field label (required for accessibility). */
-  label: React.ReactNode;
+  label: React.ReactNode
 
   /** Optional helper text shown below the input. */
-  helperText?: React.ReactNode;
+  helperText?: React.ReactNode
 
   /** Optional error message. When present, input is marked invalid. */
-  error?: React.ReactNode;
+  error?: React.ReactNode
 
   /** Props forwarded to the Input atom. */
-  input: InputProps;
+  input: InputProps
 
   /** Additional aria-describedby IDs to merge with internal helper/error IDs. */
-  ariaDescribedBy?: string;
-};
+  ariaDescribedBy?: string
+}
 
 function cx(...parts: Array<string | false>): string {
-  return parts.filter(Boolean).join(" ");
+  return parts.filter(Boolean).join(" ")
 }
 
 /**
@@ -117,42 +117,39 @@ function cx(...parts: Array<string | false>): string {
  * ```
  */
 export function InputField(props: InputFieldProps): React.ReactElement {
-  const reactId = React.useId();
-  const id = props.id ?? `mw-input-${reactId}`;
+  const reactId = React.useId()
+  const id = props.id ?? `mw-input-${reactId}`
 
-  const hasHelperText = props.helperText !== undefined;
-  const hasError = props.error !== undefined;
+  const hasHelperText = props.helperText !== undefined
+  const hasError = props.error !== undefined
 
-  const helperTextId = hasHelperText ? `${id}-helper` : undefined;
-  const errorId = hasError ? `${id}-error` : undefined;
+  const helperTextId = hasHelperText ? `${id}-helper` : undefined
+  const errorId = hasError ? `${id}-error` : undefined
 
   // Merge aria-describedby from multiple sources
-  const describedByParts = [props.ariaDescribedBy, helperTextId, errorId].filter(
-    Boolean,
-  );
-  const mergedDescribedBy =
-    describedByParts.length > 0 ? describedByParts.join(" ") : undefined;
+  const describedByParts = [props.ariaDescribedBy, helperTextId, errorId].filter(Boolean)
+  const mergedDescribedBy = describedByParts.length > 0 ? describedByParts.join(" ") : undefined
 
-  const disabled = props.input.disabled || false;
-  const readOnly = props.input.readOnly || false;
-  const invalid = hasError || props.input.invalid || false;
+  const disabled = props.input.disabled || false
+  const readOnly = props.input.readOnly || false
+  const invalid = hasError || props.input.invalid || false
 
   const wrapperClass = cx(
     "mw-input-field",
     disabled && "mw-input-field--disabled",
     invalid && "mw-input-field--invalid",
     readOnly && "mw-input-field--readonly",
-  );
+  )
 
   // Prepare input props with proper describedBy merging
   const inputProps: InputProps = {
     ...props.input,
     id,
     invalid,
-  };
+  }
 
   if (mergedDescribedBy) {
-    inputProps.describedBy = mergedDescribedBy;
+    inputProps.describedBy = mergedDescribedBy
   }
 
   return (
@@ -170,14 +167,10 @@ export function InputField(props: InputFieldProps): React.ReactElement {
       )}
 
       {hasError && (
-        <div
-          className="mw-input-field__error"
-          id={errorId}
-          aria-live="polite"
-        >
+        <div className="mw-input-field__error" id={errorId} aria-live="polite">
           <Paragraph size="sm">{props.error}</Paragraph>
         </div>
       )}
     </div>
-  );
+  )
 }

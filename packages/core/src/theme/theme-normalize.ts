@@ -1,5 +1,5 @@
-import type { Theme } from "./theme-types";
-import { defaultTheme } from "./theme-defaults";
+import { defaultTheme } from "./theme-defaults"
+import type { Theme } from "./theme-types"
 
 // For now this is intentionally minimal.
 // Later we can generate derived values (hover/active/soft) and add dev warnings.
@@ -29,5 +29,5 @@ export function normalizeTheme(theme: Theme): Theme {
         },
       },
     },
-  };
+  }
 }

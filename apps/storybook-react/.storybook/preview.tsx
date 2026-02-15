@@ -1,8 +1,8 @@
-import type { Preview, Decorator } from "@storybook/react";
-import { MarwesProvider } from "@marwes/react";
-import type { ThemeMode } from "@marwes/core";
-import { firstEdition } from "@marwes/presets";
-import "@marwes/presets/firstEdition/styles.css";
+import type { ThemeMode } from "@marwes/core"
+import { firstEdition } from "@marwes/presets"
+import { MarwesProvider } from "@marwes/react"
+import type { Decorator, Preview } from "@storybook/react"
+import "@marwes/presets/firstEdition/styles.css"
 
 /**
  * Marwes decorator with theme mode switching support.
@@ -26,8 +26,8 @@ import "@marwes/presets/firstEdition/styles.css";
  */
 const withMarwes: Decorator = (Story, context) => {
   // Get theme mode from Storybook's global toolbar
-  const storybookTheme = context.globals.theme as ThemeMode | undefined;
-  const mode: ThemeMode = storybookTheme === "dark" ? "dark" : "light";
+  const storybookTheme = context.globals.theme as ThemeMode | undefined
+  const mode: ThemeMode = storybookTheme === "dark" ? "dark" : "light"
 
   return (
     <MarwesProvider
@@ -40,8 +40,8 @@ const withMarwes: Decorator = (Story, context) => {
         <Story />
       </div>
     </MarwesProvider>
-  );
-};
+  )
+}
 
 const preview: Preview = {
   decorators: [withMarwes],
@@ -69,6 +69,6 @@ const preview: Preview = {
       },
     },
   },
-};
+}
 
-export default preview;
+export default preview

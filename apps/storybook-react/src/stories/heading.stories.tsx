@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { H1, H2, H3, Paragraph } from "@marwes/react";
+import { H1, H2, H3, Paragraph } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
   title: "Typography/Heading",
@@ -8,31 +8,31 @@ const meta = {
     layout: "padded",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof H1>;
+} satisfies Meta<typeof H1>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 /**
  * H1 - Semantic top-level heading
  */
 export const HeadingOne: Story = {
   render: () => <H1>This is a Heading 1</H1>,
-};
+}
 
 /**
  * H2 - Semantic section heading
  */
 export const HeadingTwo: Story = {
   render: () => <H2>This is a Heading 2</H2>,
-};
+}
 
 /**
  * H3 - Semantic subsection heading
  */
 export const HeadingThree: Story = {
   render: () => <H3>This is a Heading 3</H3>,
-};
+}
 
 /**
  * All heading levels together
@@ -45,7 +45,7 @@ export const AllLevels: Story = {
       <H3>Heading 3 - Subsection Title</H3>
     </div>
   ),
-};
+}
 
 /**
  * Size override example - H1 with H2 visual styling
@@ -58,7 +58,7 @@ export const SizeOverride: Story = {
       <H1 size="h3">H1 with h3 size (semantic h1, visual h3)</H1>
     </div>
   ),
-};
+}
 
 /**
  * With custom className
@@ -69,7 +69,7 @@ export const WithCustomClass: Story = {
       Styled Heading
     </H1>
   ),
-};
+}
 
 /**
  * With ID for anchor linking
@@ -81,12 +81,11 @@ export const WithID: Story = {
       <H2 id="getting-started">Getting Started</H2>
       <H3 id="installation">Installation</H3>
       <Paragraph>
-        Use these IDs for anchor links: #introduction, #getting-started,
-        #installation
+        Use these IDs for anchor links: #introduction, #getting-started, #installation
       </Paragraph>
     </div>
   ),
-};
+}
 
 /**
  * Long heading text
@@ -95,15 +94,13 @@ export const LongText: Story = {
   render: () => (
     <div style={{ maxWidth: "600px" }}>
       <H1>
-        This is a Very Long Heading That Might Wrap to Multiple Lines Depending
-        on the Viewport Width
+        This is a Very Long Heading That Might Wrap to Multiple Lines Depending on the Viewport
+        Width
       </H1>
-      <H2>
-        This is also a long heading but at H2 level with different styling
-      </H2>
+      <H2>This is also a long heading but at H2 level with different styling</H2>
     </div>
   ),
-};
+}
 
 /**
  * Real-world content hierarchy
@@ -132,9 +129,7 @@ export const ContentHierarchy: Story = {
       </Paragraph>
 
       <H2 style={{ marginTop: "32px" }}>Components</H2>
-      <Paragraph style={{ marginTop: "12px" }}>
-        Explore the available component library.
-      </Paragraph>
+      <Paragraph style={{ marginTop: "12px" }}>Explore the available component library.</Paragraph>
     </div>
   ),
-};
+}

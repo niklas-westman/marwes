@@ -11,7 +11,8 @@
       "**/build/**",
       "**/.turbo/**",
       "**/.storybook/**/storybook-static/**",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/tsconfig*.json"
     ]
   },
   "formatter": {

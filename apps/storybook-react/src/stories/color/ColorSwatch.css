@@ -1,7 +1,7 @@
 .color-swatch {
   display: flex;
   flex-direction: column;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
   background: white;
@@ -20,7 +20,7 @@
   padding: 12px;
   font-weight: 500;
   font-size: 14px;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Courier New', monospace;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
 }
 
 .color-swatch__hex-on-color {
@@ -54,27 +54,27 @@
   align-items: center;
   gap: 8px;
   padding: 6px 8px;
-  background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 4px;
   font-size: 13px;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Courier New', monospace;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
   cursor: pointer;
   transition: all 0.15s;
   text-align: left;
 }
 
 .color-swatch__value:hover {
-  background: #F3F4F6;
-  border-color: #9CA3AF;
+  background: #f3f4f6;
+  border-color: #9ca3af;
 }
 
 .color-swatch__value:active {
-  background: #E5E7EB;
+  background: #e5e7eb;
 }
 
 .color-swatch__value-label {
-  color: #5B5B5F;
+  color: #5b5b5f;
   font-weight: 600;
   min-width: 32px;
 }
@@ -103,18 +103,18 @@
 
 .color-swatch__description {
   font-size: 13px;
-  color: #5B5B5F;
+  color: #5b5b5f;
   line-height: 1.5;
   padding-top: 4px;
-  border-top: 1px solid #E5E7EB;
+  border-top: 1px solid #e5e7eb;
 }
 
 .color-swatch__usage {
   font-size: 12px;
-  color: #5B5B5F;
+  color: #5b5b5f;
   line-height: 1.5;
   padding: 8px;
-  background: #F9FAFB;
+  background: #f9fafb;
   border-radius: 4px;
   margin-top: 4px;
 }

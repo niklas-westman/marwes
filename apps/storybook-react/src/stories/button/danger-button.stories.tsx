@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, DangerButton } from "@marwes/react";
-import { iconRegistry } from "@marwes/core";
+import { iconRegistry } from "@marwes/core"
+import { type Button, DangerButton } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
 
-const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>;
+const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>
 
 const meta = {
   title: "Buttons/Purpose/DangerButton",
@@ -28,15 +28,12 @@ const meta = {
       control: "boolean",
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
 
 export const DangerExample: StoryObj<typeof DangerButton> = {
-  render: () => (
-    <DangerButton iconLeft="arrowLeft">Delete Project</DangerButton>
-  ),
+  render: () => <DangerButton iconLeft="arrowLeft">Delete Project</DangerButton>,
   parameters: {
     docs: {
       description: {
@@ -45,4 +42,4 @@ export const DangerExample: StoryObj<typeof DangerButton> = {
       },
     },
   },
-};
+}

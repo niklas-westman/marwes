@@ -1,46 +1,40 @@
-import { useState } from "react";
-import "./ColorSwatch.css";
-import { Paragraph } from "@marwes/react";
+import { useState } from "react"
+import "./ColorSwatch.css"
+import { Paragraph } from "@marwes/react"
 
 export interface ColorSwatchProps {
   /** Display name of the color */
-  name: string;
+  name: string
   /** Hex color value */
-  hex: string;
+  hex: string
   /** CSS variable name (e.g., --mw-primary) */
-  cssVar: string;
+  cssVar: string
   /** Optional description */
-  description?: string;
+  description?: string
   /** Optional usage examples */
-  usage?: string;
+  usage?: string
 }
 
-export function ColorSwatch({
-  name,
-  hex,
-  cssVar,
-  description,
-  usage,
-}: ColorSwatchProps) {
-  const [copied, setCopied] = useState<"hex" | "var" | null>(null);
+export function ColorSwatch({ name, hex, cssVar, description, usage }: ColorSwatchProps) {
+  const [copied, setCopied] = useState<"hex" | "var" | null>(null)
 
   const copyToClipboard = (text: string, type: "hex" | "var") => {
-    navigator.clipboard.writeText(text);
-    setCopied(type);
-    setTimeout(() => setCopied(null), 2000);
-  };
+    navigator.clipboard.writeText(text)
+    setCopied(type)
+    setTimeout(() => setCopied(null), 2000)
+  }
 
   // Calculate contrast ratio for text color
   const getContrastColor = (hexColor: string): string => {
-    const rgb = parseInt(hexColor.slice(1), 16);
-    const r = (rgb >> 16) & 0xff;
-    const g = (rgb >> 8) & 0xff;
-    const b = (rgb >> 0) & 0xff;
-    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-    return luma > 165 ? "#000000" : "#FFFFFF";
-  };
+    const rgb = Number.parseInt(hexColor.slice(1), 16)
+    const r = (rgb >> 16) & 0xff
+    const g = (rgb >> 8) & 0xff
+    const b = (rgb >> 0) & 0xff
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return luma > 165 ? "#000000" : "#FFFFFF"
+  }
 
-  const textColor = getContrastColor(hex);
+  const textColor = getContrastColor(hex)
 
   return (
     <div className="color-swatch">
@@ -64,9 +58,7 @@ export function ColorSwatch({
             <Paragraph size="sm" style={{ color: textColor }}>
               {hex}
             </Paragraph>
-            {copied === "hex" && (
-              <span className="color-swatch__copied">✓</span>
-            )}
+            {copied === "hex" && <span className="color-swatch__copied">✓</span>}
           </button>
 
           <button
@@ -77,9 +69,7 @@ export function ColorSwatch({
           >
             <Paragraph size="sm">CSS:</Paragraph>
             <Paragraph size="sm">{cssVar}</Paragraph>
-            {copied === "var" && (
-              <span className="color-swatch__copied">✓</span>
-            )}
+            {copied === "var" && <span className="color-swatch__copied">✓</span>}
           </button>
         </div>
 
@@ -92,5 +82,5 @@ export function ColorSwatch({
         )}
       </div>
     </div>
-  );
+  )
 }

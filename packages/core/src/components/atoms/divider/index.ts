@@ -3,7 +3,7 @@
  * Figma reference: node-id=1-932
  */
 
-export { createDividerRecipe } from "./divider-recipe";
+export { createDividerRecipe } from "./divider-recipe"
 export type {
   DividerSize,
   DividerOrientation,
@@ -11,4 +11,4 @@ export type {
   DividerA11y,
   DividerDataAttributes,
   DividerRenderKit,
-} from "./divider-types";
+} from "./divider-types"

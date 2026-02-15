@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, CreateButton } from "@marwes/react";
-import { iconRegistry } from "@marwes/core";
+import { iconRegistry } from "@marwes/core"
+import { type Button, CreateButton } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
 
-const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>;
+const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>
 
 const meta = {
   title: "Buttons/Purpose/CreateButton",
@@ -28,14 +28,13 @@ const meta = {
       control: "boolean",
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
 
 export const CreateExample: StoryObj<typeof CreateButton> = {
   args: {
     children: "Create",
     iconRight: "plus",
   },
-};
+}

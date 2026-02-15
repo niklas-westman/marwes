@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useTheme, H2, H3, Paragraph } from "@marwes/react";
-import { ColorSwatch } from "./ColorSwatch";
+import { H2, H3, Paragraph, useTheme } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
+import { ColorSwatch } from "./ColorSwatch"
 
 const meta = {
   title: "Design System/Colors",
@@ -14,13 +14,13 @@ const meta = {
       },
     },
   },
-} satisfies Meta;
+} satisfies Meta
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 function ColorPalette() {
-  const theme = useTheme();
+  const theme = useTheme()
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "48px" }}>
@@ -28,8 +28,8 @@ function ColorPalette() {
       <section>
         <H2>Primary Colors</H2>
         <Paragraph style={{ marginBottom: "24px" }}>
-          Main brand colors used throughout the interface. Primary is typically
-          used for buttons, links, and key UI elements.
+          Main brand colors used throughout the interface. Primary is typically used for buttons,
+          links, and key UI elements.
         </Paragraph>
         <div
           style={{
@@ -89,8 +89,7 @@ function ColorPalette() {
       <section>
         <H2>Semantic Colors</H2>
         <Paragraph style={{ marginBottom: "24px" }}>
-          Contextual colors that communicate meaning (success, error, warning
-          states).
+          Contextual colors that communicate meaning (success, error, warning states).
         </Paragraph>
         <div
           style={{
@@ -314,16 +313,16 @@ function ColorPalette() {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
 export const AllColors: Story = {
   render: () => <ColorPalette />,
-};
+}
 
 export const PrimaryOnly: Story = {
   render: () => {
-    const theme = useTheme();
+    const theme = useTheme()
     return (
       <div
         style={{
@@ -345,13 +344,13 @@ export const PrimaryOnly: Story = {
           description="Text/icons on primary backgrounds"
         />
       </div>
-    );
+    )
   },
-};
+}
 
 export const SemanticOnly: Story = {
   render: () => {
-    const theme = useTheme();
+    const theme = useTheme()
     return (
       <div
         style={{
@@ -366,11 +365,7 @@ export const SemanticOnly: Story = {
           cssVar="--mw-success"
           description="Field Green - Positive states"
         />
-        <ColorSwatch
-          name="On Success"
-          hex={theme.color.onSuccess}
-          cssVar="--mw-on-success"
-        />
+        <ColorSwatch name="On Success" hex={theme.color.onSuccess} cssVar="--mw-on-success" />
 
         <ColorSwatch
           name="Danger"
@@ -378,11 +373,7 @@ export const SemanticOnly: Story = {
           cssVar="--mw-danger"
           description="Coral Red - Error states"
         />
-        <ColorSwatch
-          name="On Danger"
-          hex={theme.color.onDanger}
-          cssVar="--mw-on-danger"
-        />
+        <ColorSwatch name="On Danger" hex={theme.color.onDanger} cssVar="--mw-on-danger" />
 
         <ColorSwatch
           name="Warning"
@@ -390,12 +381,8 @@ export const SemanticOnly: Story = {
           cssVar="--mw-warning"
           description="Amber Yellow - Warning states"
         />
-        <ColorSwatch
-          name="On Warning"
-          hex={theme.color.onWarning}
-          cssVar="--mw-on-warning"
-        />
+        <ColorSwatch name="On Warning" hex={theme.color.onWarning} cssVar="--mw-on-warning" />
       </div>
-    );
+    )
   },
-};
+}

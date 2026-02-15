@@ -1,4 +1,4 @@
-import type { Theme, ThemeOverrides } from "./theme-types";
+import type { Theme, ThemeOverrides } from "./theme-types"
 
 export function mergeTheme(
   base: Theme,
@@ -61,5 +61,5 @@ export function mergeTheme(
         },
       },
     },
-  };
+  }
 }

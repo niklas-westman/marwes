@@ -5,10 +5,10 @@
  * - Sets `indeterminate` via DOM property (not an HTML attribute).
  */
 
-import * as React from "react";
-import { checkboxRecipe } from "@marwes/core";
-import type { CheckboxProps as CoreCheckboxProps } from "@marwes/core";
-import { useTheme } from "../../provider/use-theme";
+import { checkboxRecipe } from "@marwes/core"
+import type { CheckboxProps as CoreCheckboxProps } from "@marwes/core"
+import * as React from "react"
+import { useTheme } from "../../provider/use-theme"
 
 export type CheckboxProps = CoreCheckboxProps & {
   /**
@@ -16,14 +16,14 @@ export type CheckboxProps = CoreCheckboxProps & {
    * For indeterminate state: browser toggling typically results in `checked=true` and `indeterminate=false`
    * unless you keep controlling it.
    */
-  onCheckedChange?: (checked: boolean) => void;
+  onCheckedChange?: (checked: boolean) => void
 
   /**
    * Escape hatch for consumers that want raw event access.
    * (Optional – keep if you want parity with other components.)
    */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-};
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
+}
 
 /**
  * Checkbox (Atom)
@@ -88,27 +88,27 @@ export type CheckboxProps = CoreCheckboxProps & {
  */
 
 export function Checkbox(props: CheckboxProps): React.ReactElement {
-  const { onCheckedChange, onChange, ...coreProps } = props;
+  const { onCheckedChange, onChange, ...coreProps } = props
 
-  const theme = useTheme();
+  const theme = useTheme()
 
-  const kit = checkboxRecipe({ ...coreProps, theme });
+  const kit = checkboxRecipe({ ...coreProps, theme })
 
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null)
 
   // Keep DOM property in sync.
   React.useLayoutEffect(() => {
-    const el = inputRef.current;
-    if (!el) return;
-    el.indeterminate = kit.indeterminate;
-  }, [kit.indeterminate]);
+    const el = inputRef.current
+    if (!el) return
+    el.indeterminate = kit.indeterminate
+  }, [kit.indeterminate])
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange?.(e);
-    onCheckedChange?.(e.currentTarget.checked);
-  };
+    onChange?.(e)
+    onCheckedChange?.(e.currentTarget.checked)
+  }
 
-  const { a11y } = kit;
+  const { a11y } = kit
 
   return (
     <input
@@ -130,5 +130,5 @@ export function Checkbox(props: CheckboxProps): React.ReactElement {
       defaultChecked={kit.defaultChecked}
       onChange={handleChange}
     />
-  );
+  )
 }

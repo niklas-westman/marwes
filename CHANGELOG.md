@@ -64,6 +64,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - React component style prop merging with CSS variables
 - Checkbox CSS undefined variables (`--mw-fg`, `--mw-bg`)
 - Checkbox using wrong color for checkmark (now uses `onPrimary`)
+- **Build configuration cleanup**:
+  - Removed 152 build artifact files from `packages/core/src` and `packages/presets/src`
+  - Added `noEmit: true` to all package `tsconfig.json` files to prevent accidental TypeScript compilation in source directories
+  - Updated `.gitignore` to prevent future commits of build artifacts in `src/` directories
+  - Storybook build now correctly uses `storybook build` instead of Vite build
+  - All packages now cleanly output only to `dist/` folders
 
 ### Documentation
 - Updated `FIGMA_TO_MARWES.md` with complete color token mapping

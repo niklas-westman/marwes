@@ -4,12 +4,12 @@
  * - stable classnames, modifier classes, css vars, strict a11y
  */
 
-import type { CheckboxProps, CheckboxRenderKit } from "./checkbox-types";
-import { buildCheckboxA11y } from "./checkbox-a11y";
-import type { Theme } from "../../../theme/theme-types";
+import type { Theme } from "../../../theme/theme-types"
+import { buildCheckboxA11y } from "./checkbox-a11y"
+import type { CheckboxProps, CheckboxRenderKit } from "./checkbox-types"
 
 function cx(...parts: Array<string | false>): string {
-  return parts.filter(Boolean).join(" ");
+  return parts.filter(Boolean).join(" ")
 }
 
 export function checkboxRecipe({
@@ -18,7 +18,7 @@ export function checkboxRecipe({
   invalid = false,
   ...props
 }: CheckboxProps & { theme: Theme }): CheckboxRenderKit {
-  const size = props.size ?? "md";
+  const size = props.size ?? "md"
 
   const className = cx(
     "mw-checkbox",
@@ -27,9 +27,9 @@ export function checkboxRecipe({
     size === "lg" && "mw-checkbox--lg",
     disabled && "mw-checkbox--disabled",
     invalid && "mw-checkbox--invalid",
-  );
+  )
 
-  const a11y = buildCheckboxA11y({ disabled, invalid, ...props });
+  const a11y = buildCheckboxA11y({ disabled, invalid, ...props })
   // No component-specific vars required initially.
   // (Edition CSS should target .mw-checkbox + modifiers.)
   const vars = {
@@ -37,8 +37,7 @@ export function checkboxRecipe({
     "--mw-checkbox-bg": theme.color.surface,
     "--mw-checkbox-radius": `${theme.ui.radius}px`,
     "--mw-radius": `${theme.ui.radius}px`,
-    "--mw-checkbox-size":
-      size === "sm" ? "16px" : size === "md" ? "18px" : "22px",
+    "--mw-checkbox-size": size === "sm" ? "16px" : size === "md" ? "18px" : "22px",
     "--mw-checkbox-checked-bg": theme.color.primary,
     "--mw-danger": theme.color.danger,
     "--mw-on-primary": theme.color.onPrimary, // Fixed: use onPrimary instead of primary
@@ -47,7 +46,7 @@ export function checkboxRecipe({
     "--mw-surface": theme.color.surface,
     "--mw-focus": theme.color.focus,
     "--mw-font-primary": theme.font.primary,
-  };
+  }
 
   // Controlled vs uncontrolled:
   // - If `checked` is present, adapter should pass it through and handle onChange.
@@ -58,13 +57,13 @@ export function checkboxRecipe({
     vars,
     a11y,
     indeterminate: props.indeterminate ?? false,
-  };
-
-  if (props.checked !== undefined) {
-    kit.checked = props.checked;
-  } else if (props.defaultChecked !== undefined) {
-    kit.defaultChecked = props.defaultChecked;
   }
 
-  return kit;
+  if (props.checked !== undefined) {
+    kit.checked = props.checked
+  } else if (props.defaultChecked !== undefined) {
+    kit.defaultChecked = props.defaultChecked
+  }
+
+  return kit
 }

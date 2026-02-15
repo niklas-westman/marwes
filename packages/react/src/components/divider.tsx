@@ -6,17 +6,13 @@
  * - Figma reference: node-id=1-932
  */
 
-import * as React from "react";
-import { createDividerRecipe } from "@marwes/core";
-import type {
-  DividerOptions,
-  DividerSize,
-  DividerOrientation,
-} from "@marwes/core";
-import type { CssVars } from "@marwes/core";
-import { useTheme } from "../provider/use-theme";
+import { createDividerRecipe } from "@marwes/core"
+import type { DividerOptions, DividerOrientation, DividerSize } from "@marwes/core"
+import type { CssVars } from "@marwes/core"
+import * as React from "react"
+import { useTheme } from "../provider/use-theme"
 
-type StyleWithVars = React.CSSProperties & CssVars;
+type StyleWithVars = React.CSSProperties & CssVars
 
 export type DividerProps = DividerOptions &
   Omit<React.HTMLAttributes<HTMLHRElement>, "children"> & {
@@ -25,24 +21,24 @@ export type DividerProps = DividerOptions &
      * Maps to pixel values: xxs=1px, xs=8px, sm=16px, md=32px, lg=48px, xl=64px, xxl=80px
      * @default "md"
      */
-    size?: DividerSize;
+    size?: DividerSize
 
     /**
      * Orientation of the divider.
      * @default "horizontal"
      */
-    orientation?: DividerOrientation;
+    orientation?: DividerOrientation
 
     /**
      * Additional CSS class names.
      */
-    className?: string;
+    className?: string
 
     /**
      * Inline styles.
      */
-    style?: React.CSSProperties;
-  };
+    style?: React.CSSProperties
+  }
 
 /**
  * Divider
@@ -77,29 +73,17 @@ export type DividerProps = DividerOptions &
  * ```
  */
 
-export const Divider = React.forwardRef<HTMLHRElement, DividerProps>(
-  (props, ref) => {
-    const { className: customClassName, style: customStyle, ...opts } = props;
+export const Divider = React.forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
+  const { className: customClassName, style: customStyle, ...opts } = props
 
-    const theme = useTheme();
+  const theme = useTheme()
 
-    const kit = createDividerRecipe(theme, opts);
+  const kit = createDividerRecipe(theme, opts)
 
-    const style = { ...(kit.vars as StyleWithVars), ...customStyle };
-    const className = customClassName
-      ? `${kit.className} ${customClassName}`
-      : kit.className;
+  const style = { ...(kit.vars as StyleWithVars), ...customStyle }
+  const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
-    return (
-      <hr
-        ref={ref}
-        {...kit.a11y}
-        {...kit.dataAttributes}
-        className={className}
-        style={style}
-      />
-    );
-  },
-);
+  return <hr ref={ref} {...kit.a11y} {...kit.dataAttributes} className={className} style={style} />
+})
 
-Divider.displayName = "Divider";
+Divider.displayName = "Divider"

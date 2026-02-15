@@ -1,26 +1,23 @@
-import type { Theme } from "../../../theme/theme-types";
-import type { IconOptions, IconRenderKit } from "./icon-types";
-import { iconRegistry } from "./icon-registry";
-import { resolveIconSize, resolveIconStrokeWidth } from "./icon-scales";
+import type { Theme } from "../../../theme/theme-types"
+import { iconRegistry } from "./icon-registry"
+import { resolveIconSize, resolveIconStrokeWidth } from "./icon-scales"
+import type { IconOptions, IconRenderKit } from "./icon-types"
 
 function resolveIconA11y(opts: IconOptions): IconRenderKit["a11y"] {
-  if (!opts.ariaLabel) return { ariaHidden: true };
-  return { role: "img", ariaLabel: opts.ariaLabel };
+  if (!opts.ariaLabel) return { ariaHidden: true }
+  return { role: "img", ariaLabel: opts.ariaLabel }
 }
 
-export function createIconRecipe(
-  theme: Theme,
-  opts: IconOptions,
-): IconRenderKit {
-  const def = (iconRegistry as any)[opts.name];
+export function createIconRecipe(theme: Theme, opts: IconOptions): IconRenderKit {
+  const def = iconRegistry[opts.name]
 
   if (!def) {
-    throw new Error(`Icon "${opts.name}" not found in registry`);
+    throw new Error(`Icon "${opts.name}" not found in registry`)
   }
 
-  const px = resolveIconSize(opts.size ?? theme.icon.size);
-  const sw = resolveIconStrokeWidth(opts.strokeWidth ?? theme.icon.strokeWidth);
-  const color = opts.color ?? "currentColor";
+  const px = resolveIconSize(opts.size ?? theme.icon.size)
+  const sw = resolveIconStrokeWidth(opts.strokeWidth ?? theme.icon.strokeWidth)
+  const color = opts.color ?? "currentColor"
 
   return {
     tag: "svg",
@@ -40,5 +37,5 @@ export function createIconRecipe(
       height: px,
       type: "stroke",
     },
-  };
+  }
 }

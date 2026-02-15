@@ -1,6 +1,6 @@
-import { CheckboxField } from "@marwes/react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { CheckboxField } from "@marwes/react"
+import type { Meta, StoryObj } from "@storybook/react"
+import { useState } from "react"
 
 const meta: Meta<typeof CheckboxField> = {
   title: "Checkbox/Field",
@@ -24,20 +24,18 @@ const meta: Meta<typeof CheckboxField> = {
       ariaLabel: { control: "text" },
     },
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof CheckboxField>;
+type Story = StoryObj<typeof CheckboxField>
 
 /**
  * Recommended usage - minimal CheckboxField with just a label
  */
 export const FieldRecommended: Story = {
-  render: () => (
-    <CheckboxField label="Subscribe to updates" checkbox={{ size: "md" }} />
-  ),
-};
+  render: () => <CheckboxField label="Subscribe to updates" checkbox={{ size: "md" }} />,
+}
 
 /**
  * CheckboxField with description text to provide additional context
@@ -50,7 +48,7 @@ export const FieldWithDescription: Story = {
       checkbox={{ size: "md" }}
     />
   ),
-};
+}
 
 /**
  * CheckboxField with error message - automatically marks checkbox as invalid
@@ -63,7 +61,7 @@ export const FieldWithError: Story = {
       checkbox={{ required: true }}
     />
   ),
-};
+}
 
 /**
  * Disabled checkbox field
@@ -76,7 +74,7 @@ export const FieldDisabled: Story = {
       checkbox={{ disabled: true }}
     />
   ),
-};
+}
 
 /**
  * Different checkbox sizes
@@ -85,22 +83,19 @@ export const FieldSizes: Story = {
   render: () => (
     <div style={{ display: "grid", gap: 16 }}>
       <CheckboxField label="Small checkbox" checkbox={{ size: "sm" }} />
-      <CheckboxField
-        label="Medium checkbox (default)"
-        checkbox={{ size: "md" }}
-      />
+      <CheckboxField label="Medium checkbox (default)" checkbox={{ size: "md" }} />
       <CheckboxField label="Large checkbox" checkbox={{ size: "lg" }} />
     </div>
   ),
-};
+}
 
 /**
  * Indeterminate (mixed) state - commonly used for "select all" scenarios
  */
 export const FieldIndeterminate: Story = {
   render: () => {
-    const [checked, setChecked] = useState(false);
-    const [mixed, setMixed] = useState(true);
+    const [checked, setChecked] = useState(false)
+    const [mixed, setMixed] = useState(true)
 
     return (
       <CheckboxField
@@ -110,21 +105,21 @@ export const FieldIndeterminate: Story = {
           checked,
           indeterminate: mixed,
           onCheckedChange: (next) => {
-            setMixed(false);
-            setChecked(next);
+            setMixed(false)
+            setChecked(next)
           },
         }}
       />
-    );
+    )
   },
-};
+}
 
 /**
  * Controlled checkbox field with state management
  */
 export const FieldControlled: Story = {
   render: () => {
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(false)
 
     return (
       <div>
@@ -140,28 +135,26 @@ export const FieldControlled: Story = {
           Status: {checked ? "Enabled" : "Disabled"}
         </p>
       </div>
-    );
+    )
   },
-};
+}
 
 /**
  * CheckboxField with validation and error handling
  */
 export const FieldWithValidation: Story = {
   render: () => {
-    const [accepted, setAccepted] = useState(false);
-    const [error, setError] = useState<string | undefined>(
-      "You must accept the terms to proceed.",
-    );
+    const [accepted, setAccepted] = useState(false)
+    const [error, setError] = useState<string | undefined>("You must accept the terms to proceed.")
 
     const handleChange = (value: boolean) => {
-      setAccepted(value);
+      setAccepted(value)
       if (value) {
-        setError(undefined);
+        setError(undefined)
       } else {
-        setError("You must accept the terms to proceed.");
+        setError("You must accept the terms to proceed.")
       }
-    };
+    }
 
     return (
       <CheckboxField
@@ -173,6 +166,6 @@ export const FieldWithValidation: Story = {
           required: true,
         }}
       />
-    );
+    )
   },
-};
+}

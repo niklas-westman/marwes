@@ -1,4 +1,4 @@
-import type { Theme } from "./theme-types";
+import type { Theme } from "./theme-types"
 
 /**
  * Light theme defaults (default mode).
@@ -92,7 +92,7 @@ export const lightThemeDefaults: Theme = {
       },
     },
   },
-};
+}
 
 /**
  * Dark theme defaults.
@@ -190,10 +190,10 @@ export const darkThemeDefaults: Theme = {
       },
     },
   },
-};
+}
 
 /**
  * Default theme (alias for light theme).
  * Maintained for backward compatibility.
  */
-export const defaultTheme = lightThemeDefaults;
+export const defaultTheme = lightThemeDefaults
