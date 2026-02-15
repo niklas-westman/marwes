@@ -1,6 +1,9 @@
 {
   "name": "@marwes/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "private": false,
   "type": "module",
   "sideEffects": false,

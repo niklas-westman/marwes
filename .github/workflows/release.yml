@@ -1,0 +1,70 @@
+name: Release
+# Post-merge workflow that runs CI checks and then publishes packages to npm
+# Ensures code quality before releasing by running full CI suite first
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  # Run CI checks on the merged code and upload build artifacts
+  ci:
+    uses: ./.github/workflows/_ci.yml
+    with:
+      upload-build: true
+
+  # Publish packages to npm after CI passes
+  release:
+    name: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [ci]
+
+    steps:
+      # Clone the repository with full git history for changelog generation
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Install pnpm package manager (reads version from packageManager field in package.json)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      # Install Node.js with npm registry configuration and dependency caching
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      # Install all project dependencies using exact versions from pnpm-lock.yaml
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Download build artifacts from CI job to avoid rebuilding
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: packages
+
+      # Create release PR or publish packages to npm using changesets
+      - name: Create Release PR or Publish
+        uses: changesets/action@v1
+        with:
+          version: pnpm version-packages
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
