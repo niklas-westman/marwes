@@ -1,5 +1,5 @@
-import { MarwesProvider, Button } from "@marwes/react";
 import { firstEdition } from "@marwes/presets";
+import { Button, MarwesProvider } from "@marwes/react";
 
 import "@marwes/presets/firstEdition/styles.css";
 

@@ -1,26 +1,26 @@
-import { createElement, useState, useEffect } from "react";
+import { createElement, useEffect, useState } from "react"
 
-const RENDERKIT_EVENT = "marwes/renderkit/renderkit-update";
+const RENDERKIT_EVENT = "marwes/renderkit/renderkit-update"
 
 export const RenderKitPanel = ({ active }) => {
-  const [renderKit, setRenderKit] = useState(null);
+  const [renderKit, setRenderKit] = useState(null)
 
   useEffect(() => {
     const handleRenderKit = (event) => {
-      console.log("[RenderKit Panel] Event received:", event.detail);
-      setRenderKit(event.detail);
-    };
+      console.log("[RenderKit Panel] Event received:", event.detail)
+      setRenderKit(event.detail)
+    }
 
     if (typeof window !== "undefined") {
-      console.log("[RenderKit Panel] Registering event listener");
-      window.addEventListener(RENDERKIT_EVENT, handleRenderKit);
+      console.log("[RenderKit Panel] Registering event listener")
+      window.addEventListener(RENDERKIT_EVENT, handleRenderKit)
       return () => {
-        window.removeEventListener(RENDERKIT_EVENT, handleRenderKit);
-      };
+        window.removeEventListener(RENDERKIT_EVENT, handleRenderKit)
+      }
     }
-  }, []);
+  }, [])
 
-  if (!active) return null;
+  if (!active) return null
 
   if (!renderKit) {
     return createElement(
@@ -29,7 +29,7 @@ export const RenderKitPanel = ({ active }) => {
         style: { padding: "20px", color: "#999", textAlign: "center" },
       },
       "No RenderKit data available. Select a component story to see data.",
-    );
+    )
   }
 
   return createElement(
@@ -49,5 +49,5 @@ export const RenderKitPanel = ({ active }) => {
       },
       JSON.stringify(renderKit, null, 2),
     ),
-  );
-};
+  )
+}

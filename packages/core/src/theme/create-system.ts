@@ -1,13 +1,7 @@
-import type {
-  Preset,
-  System,
-  Theme,
-  ThemeMode,
-  ThemeOverrides,
-} from "./theme-types";
-import { lightThemeDefaults, darkThemeDefaults } from "./theme-defaults";
-import { mergeTheme } from "./theme-merge";
-import { normalizeTheme } from "./theme-normalize";
+import { darkThemeDefaults, lightThemeDefaults } from "./theme-defaults"
+import { mergeTheme } from "./theme-merge"
+import { normalizeTheme } from "./theme-normalize"
+import type { Preset, System, Theme, ThemeMode, ThemeOverrides } from "./theme-types"
 
 /**
  * Creates a new design system by merging theme defaults with preset and custom overrides.
@@ -19,23 +13,22 @@ import { normalizeTheme } from "./theme-normalize";
  */
 
 export function createSystem(args: {
-  preset: Preset;
-  theme?: ThemeOverrides;
+  preset: Preset
+  theme?: ThemeOverrides
 }): System {
   // Select base defaults based on requested mode (default to light)
-  const requestedMode = args.theme?.mode ?? "light";
-  const baseDefaults =
-    requestedMode === "dark" ? darkThemeDefaults : lightThemeDefaults;
+  const requestedMode = args.theme?.mode ?? "light"
+  const baseDefaults = requestedMode === "dark" ? darkThemeDefaults : lightThemeDefaults
 
   // Merge: base defaults → preset overrides → custom theme overrides
-  const merged = mergeTheme(baseDefaults, args.preset.theme, args.theme);
-  const theme = normalizeTheme(merged);
+  const merged = mergeTheme(baseDefaults, args.preset.theme, args.theme)
+  const theme = normalizeTheme(merged)
 
   if (args.preset !== undefined) {
-    return { theme, preset: args.preset };
+    return { theme, preset: args.preset }
   }
 
-  return { theme, preset: args.preset };
+  return { theme, preset: args.preset }
 }
 
 /**
@@ -47,16 +40,15 @@ export function createSystem(args: {
  * @returns A new system with the switched mode
  */
 export function switchMode(currentSystem: System, newMode: ThemeMode): System {
-  const currentTheme = currentSystem.theme;
+  const currentTheme = currentSystem.theme
 
   // If already in the requested mode, return as-is
   if (currentTheme.mode === newMode) {
-    return currentSystem;
+    return currentSystem
   }
 
   // Get the target mode defaults
-  const targetDefaults =
-    newMode === "dark" ? darkThemeDefaults : lightThemeDefaults;
+  const targetDefaults = newMode === "dark" ? darkThemeDefaults : lightThemeDefaults
 
   // Create new theme with swapped colors, preserving other properties
   const newTheme: Theme = {
@@ -67,10 +59,10 @@ export function switchMode(currentSystem: System, newMode: ThemeMode): System {
       // Preserve any user-customized semantic colors if they differ from defaults
       // This ensures custom brand colors persist across mode switches
     },
-  };
+  }
 
   return {
     theme: newTheme,
     preset: currentSystem.preset,
-  };
+  }
 }

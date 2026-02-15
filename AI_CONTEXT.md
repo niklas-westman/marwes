@@ -81,3 +81,15 @@ pnpm dev:playground      # playground app
 pnpm build               # full build
 pnpm typecheck           # all packages/apps
 ```
+
+## Build System Notes
+- **Package builds**: Use `tsup` to generate `dist/` folders. Never run `tsc` directly in packages.
+- **Type checking**: Use `pnpm typecheck` for type errors without emitting files.
+- **Storybook build**: Use `storybook build` (not `vite build`) to generate deployable static site.
+- **Build artifacts**: Only `dist/` and `storybook-static/` should exist. `src/` directories must never contain `.js`, `.d.ts`, or `.map` files.
+
+### If You See Build Artifacts in src/
+```bash
+# Clean up accidental tsc output
+find packages/*/src -type f \( -name "*.js" -o -name "*.d.ts" -o -name "*.map" \) -delete
+```

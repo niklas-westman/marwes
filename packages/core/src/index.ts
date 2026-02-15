@@ -4,11 +4,11 @@ export type {
   ThemeOverrides,
   Preset,
   System,
-} from "./theme/theme-types";
-export { defaultTheme, lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults";
-export { mergeTheme } from "./theme/theme-merge";
-export { normalizeTheme } from "./theme/theme-normalize";
-export { createSystem, switchMode } from "./theme/create-system";
+} from "./theme/theme-types"
+export { defaultTheme, lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
+export { mergeTheme } from "./theme/theme-merge"
+export { normalizeTheme } from "./theme/theme-normalize"
+export { createSystem, switchMode } from "./theme/create-system"
 
 // /* Button */
 // export { createButtonRecipe } from "./components/atoms/button";
@@ -45,7 +45,7 @@ export { createSystem, switchMode } from "./theme/create-system";
 //   CheckboxRenderKit,
 // } from "./components/atoms/checkbox";
 
-export type { CssVars } from "./shared/css-vars";
+export type { CssVars } from "./shared/css-vars"
 
 export type {
   ButtonOptions,
@@ -63,6 +63,6 @@ export type {
   ParagraphOptions,
   ParagraphRenderKit,
   ParagraphSize,
-} from "./components/atoms";
+} from "./components/atoms"
 
-export * from "./components/atoms";
+export * from "./components/atoms"

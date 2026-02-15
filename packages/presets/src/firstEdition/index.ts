@@ -1,7 +1,7 @@
-import type { Preset } from "@marwes/core";
-import "@fontsource/instrument-sans/400.css";
-import "@fontsource/instrument-sans/500.css";
-import "@fontsource/instrument-sans/600.css";
+import type { Preset } from "@marwes/core"
+import "@fontsource/instrument-sans/400.css"
+import "@fontsource/instrument-sans/500.css"
+import "@fontsource/instrument-sans/600.css"
 
 export const firstEdition: Preset = {
   name: "firstEdition",
@@ -19,4 +19,4 @@ export const firstEdition: Preset = {
       strokeWidth: "sm",
     },
   },
-};
+}

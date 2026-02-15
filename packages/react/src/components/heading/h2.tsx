@@ -4,13 +4,13 @@
  * - Supports size override for visual/semantic mismatch.
  */
 
-import * as React from "react";
-import { headingRecipe } from "@marwes/core";
-import type { HeadingOptions, HeadingSize } from "@marwes/core";
-import type { CssVars } from "@marwes/core";
-import { useTheme } from "../../provider/use-theme";
+import { headingRecipe } from "@marwes/core"
+import type { HeadingOptions, HeadingSize } from "@marwes/core"
+import type { CssVars } from "@marwes/core"
+import type * as React from "react"
+import { useTheme } from "../../provider/use-theme"
 
-type StyleWithVars = React.CSSProperties & CssVars;
+type StyleWithVars = React.CSSProperties & CssVars
 
 export type H2Props = Omit<HeadingOptions, "level"> & {
   /**
@@ -18,23 +18,23 @@ export type H2Props = Omit<HeadingOptions, "level"> & {
    * Allows using h2 semantics with different visual styling.
    * @default "h2"
    */
-  size?: HeadingSize;
+  size?: HeadingSize
 
   /**
    * Content of the heading.
    */
-  children?: React.ReactNode;
+  children?: React.ReactNode
 
   /**
    * Additional CSS class names.
    */
-  className?: string;
+  className?: string
 
   /**
    * Inline styles.
    */
-  style?: React.CSSProperties;
-};
+  style?: React.CSSProperties
+}
 
 /**
  * H2 (Heading Level 2)
@@ -53,24 +53,17 @@ export type H2Props = Omit<HeadingOptions, "level"> & {
  * ```
  */
 export function H2(props: H2Props): React.ReactElement {
-  const { children, className: customClassName, style: customStyle, ...opts } = props;
-  const theme = useTheme();
+  const { children, className: customClassName, style: customStyle, ...opts } = props
+  const theme = useTheme()
 
-  const kit = headingRecipe({ ...opts, level: 2 }, theme);
+  const kit = headingRecipe({ ...opts, level: 2 }, theme)
 
-  const style = { ...(kit.vars as StyleWithVars), ...customStyle };
-  const className = customClassName
-    ? `${kit.className} ${customClassName}`
-    : kit.className;
+  const style = { ...(kit.vars as StyleWithVars), ...customStyle }
+  const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
   return (
-    <h2
-      id={kit.a11y.id}
-      aria-label={kit.a11y.ariaLabel}
-      className={className}
-      style={style}
-    >
+    <h2 id={kit.a11y.id} aria-label={kit.a11y.ariaLabel} className={className} style={style}>
       {children}
     </h2>
-  );
+  )
 }

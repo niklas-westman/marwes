@@ -4,8 +4,8 @@
  * - Supports size variants: sm/md/lg.
  */
 
-import type { CssVars } from "../../../shared/css-vars";
-import type { ParagraphSize } from "../../../theme/theme-types";
+import type { CssVars } from "../../../shared/css-vars"
+import type { ParagraphSize } from "../../../theme/theme-types"
 
 /** Public props the adapter can pass into core. */
 export type ParagraphOptions = {
@@ -13,30 +13,30 @@ export type ParagraphOptions = {
    * Visual size variant.
    * Default: "md"
    */
-  size?: ParagraphSize;
+  size?: ParagraphSize
 
   /**
    * Optional ID.
    */
-  id?: string;
-};
+  id?: string
+}
 
 /** Strict a11y output (minimal for paragraphs). */
 export type ParagraphA11y = {
-  id?: string;
-};
+  id?: string
+}
 
 /** Render kit output. */
 export type ParagraphRenderKit = {
   /** Always <p> tag. */
-  tag: "p";
+  tag: "p"
 
   /** CSS class names. */
-  className: string;
+  className: string
 
   /** CSS variables for theming. */
-  vars: CssVars;
+  vars: CssVars
 
   /** Accessibility props. */
-  a11y: ParagraphA11y;
-};
+  a11y: ParagraphA11y
+}

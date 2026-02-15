@@ -4,36 +4,36 @@
  * - Supports size variants: sm/md/lg.
  */
 
-import * as React from "react";
-import { paragraphRecipe } from "@marwes/core";
-import type { ParagraphOptions, ParagraphSize } from "@marwes/core";
-import type { CssVars } from "@marwes/core";
-import { useTheme } from "../../provider/use-theme";
+import { paragraphRecipe } from "@marwes/core"
+import type { ParagraphOptions, ParagraphSize } from "@marwes/core"
+import type { CssVars } from "@marwes/core"
+import type * as React from "react"
+import { useTheme } from "../../provider/use-theme"
 
-type StyleWithVars = React.CSSProperties & CssVars;
+type StyleWithVars = React.CSSProperties & CssVars
 
 export type ParagraphProps = ParagraphOptions & {
   /**
    * Size variant.
    * @default "md"
    */
-  size?: ParagraphSize;
+  size?: ParagraphSize
 
   /**
    * Content of the paragraph.
    */
-  children?: React.ReactNode;
+  children?: React.ReactNode
 
   /**
    * Additional CSS class names.
    */
-  className?: string;
+  className?: string
 
   /**
    * Inline styles.
    */
-  style?: React.CSSProperties;
-};
+  style?: React.CSSProperties
+}
 
 /**
  * Paragraph
@@ -58,19 +58,17 @@ export type ParagraphProps = ParagraphOptions & {
  * ```
  */
 export function Paragraph(props: ParagraphProps): React.ReactElement {
-  const { children, className: customClassName, style: customStyle, ...opts } = props;
-  const theme = useTheme();
+  const { children, className: customClassName, style: customStyle, ...opts } = props
+  const theme = useTheme()
 
-  const kit = paragraphRecipe(opts, theme);
+  const kit = paragraphRecipe(opts, theme)
 
-  const style = { ...(kit.vars as StyleWithVars), ...customStyle };
-  const className = customClassName
-    ? `${kit.className} ${customClassName}`
-    : kit.className;
+  const style = { ...(kit.vars as StyleWithVars), ...customStyle }
+  const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
   return (
     <p id={kit.a11y.id} className={className} style={style}>
       {children}
     </p>
-  );
+  )
 }

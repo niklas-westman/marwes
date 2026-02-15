@@ -22,10 +22,15 @@ Marwes is a small, high‑quality component system with a framework‑agnostic c
 - `apps/playground-react` — integration testing
 
 **Common dev scripts**
-- `pnpm dev` — packages + playground
-- `pnpm dev:storybook` — Storybook
-- `pnpm dev:playground` — React playground
-- `pnpm build` — build packages + apps
+- `pnpm dev` — packages + playground (development mode)
+- `pnpm dev:storybook` — Storybook component development
+- `pnpm dev:playground` — React playground app
+- `pnpm build` — build all packages and apps (generates `dist/` folders)
+- `pnpm typecheck` — type-check all packages without emitting files
 - `pnpm test` — run tests
+
+**Build outputs**
+- `packages/*/dist/` — npm-ready package bundles (ESM + TypeScript declarations)
+- `apps/storybook-react/storybook-static/` — deployable Storybook static site
 
 If you are new to the codebase, start with `docs/PROJECT.md` and `docs/ARCHITECTURE.md`, then read `SPEC.md` and `docs/ENGINEERING.md` before implementing changes.

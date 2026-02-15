@@ -1,8 +1,8 @@
-export { iconRegistry } from "./icon-registry";
+export { iconRegistry } from "./icon-registry"
 
-export * from "./icon-scales";
-export * from "./icon-types";
+export * from "./icon-scales"
+export * from "./icon-types"
 
-export type { IconPreset } from "./icon-preset";
+export type { IconPreset } from "./icon-preset"
 
-export * from "./icon-recipe";
+export * from "./icon-recipe"

@@ -1,11 +1,11 @@
-import * as React from "react";
 import {
+  type IconSize,
+  type IconStrokeWidth,
   iconRegistry,
   resolveIconSize,
   resolveIconStrokeWidth,
-  type IconSize,
-  type IconStrokeWidth,
 } from "@marwes/core";
+import type * as React from "react";
 import { useTheme } from "../../provider/use-theme";
 
 type IconName = keyof typeof iconRegistry;
@@ -68,9 +68,10 @@ export function Icon({
       role={isDecorative ? undefined : "img"}
       focusable="false"
     >
-      {def.nodes.map((n, i) => {
-        const Tag = n.tag as keyof JSX.IntrinsicElements;
-        return <Tag key={i} {...(n.attrs as any)} />;
+      {def.nodes.map((iconNode, nodeIndex) => {
+        const TagName = iconNode.tag;
+        // biome-ignore lint/suspicious/noArrayIndexKey: Icon nodes are static and never reordered
+        return <TagName key={nodeIndex} {...(iconNode.attrs as React.SVGAttributes<SVGElement>)} />;
       })}
     </svg>
   );

@@ -3,6 +3,6 @@ export type {
   InputRenderKit,
   InputA11yProps,
   InputTone,
-} from "./input-types";
+} from "./input-types"
 
-export { createInputRecipe } from "./input-recipe";
+export { createInputRecipe } from "./input-recipe"

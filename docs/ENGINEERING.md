@@ -35,6 +35,53 @@ Adapters must apply the RenderKit explicitly and avoid loose prop spreading.
 - Public component contracts live in `*.types.ts`.
 - A11y output types must be explicit and predictable.
 
+## Code Style - Variable Naming
+All variable and parameter names must be **pedagogical and self-documenting**. Avoid cryptic abbreviations that require context to understand.
+
+### Bad Examples (Avoid)
+```typescript
+// ❌ Cryptic single-letter names
+def.nodes.map((n, i) => {
+  const Tag = n.tag;
+  return <Tag key={i} {...n.attrs} />;
+});
+
+// ❌ Unclear abbreviations
+const btn = document.querySelector('.button');
+const usr = getCurrentUser();
+const msg = formatMessage(data);
+```
+
+### Good Examples (Use)
+```typescript
+// ✅ Clear, descriptive names
+def.nodes.map((iconNode, nodeIndex) => {
+  const TagName = iconNode.tag;
+  return <TagName key={nodeIndex} {...iconNode.attrs} />;
+});
+
+// ✅ Self-documenting variables
+const buttonElement = document.querySelector('.button');
+const currentUser = getCurrentUser();
+const formattedMessage = formatMessage(data);
+```
+
+### Allowed Exceptions
+Short names are acceptable in these specific contexts:
+- **Coordinates**: `x`, `y`, `z` for spatial positioning
+- **Generics**: `T`, `K`, `V`, `P` for type parameters
+- **Very short scope**: Variables used within 2-3 lines (e.g., `const x = props.x * 2; return x;`)
+- **Standard conventions**: `i`, `j`, `k` for pure numeric iteration where no semantic meaning exists
+- **Well-known abbreviations**: `id`, `url`, `html`, `css`, `svg` (when universally understood)
+
+### Rationale
+- **Readability**: Code is read far more often than written
+- **Onboarding**: New contributors understand code faster
+- **Maintenance**: Reduces cognitive load when debugging or refactoring
+- **AI Assistance**: Tools like GitHub Copilot work better with descriptive names
+
+When in doubt, choose clarity over brevity.
+
 ## Event Naming Policy
 - Prefer `onValueChange(value)` for value‑based controls.
 - Adapters may expose `onChange(value)` as an alias but internal contracts must use `onValueChange`.
@@ -55,6 +102,37 @@ Each component in `@marwes/core` follows a consistent structure:
 5. Add preset CSS in `@marwes/presets`.
 6. Add the adapter component in `@marwes/react`.
 7. Add a Storybook story and a playground example.
+
+## Build System
+
+### Package Build Configuration
+All packages (`@marwes/core`, `@marwes/presets`, `@marwes/react`) use **tsup** for bundling:
+- **Output**: `dist/` folder with ESM bundle, TypeScript declarations, and source maps
+- **Entry**: `src/index.ts`
+- **Format**: ESM only (`type: "module"`)
+- **Published files**: Only the `dist/` folder (configured in `package.json` `files` field)
+
+**Key Point**: TypeScript `tsconfig.json` files in packages have `noEmit: true` to prevent accidental build artifacts in `src/` directories. Only tsup generates output, and only to `dist/`.
+
+### Building Packages
+```bash
+# Build all packages
+pnpm build
+
+# Build specific package
+pnpm --filter @marwes/react build
+
+# Clean and rebuild
+pnpm --filter @marwes/react clean && pnpm --filter @marwes/react build
+```
+
+### Publishing to npm
+```bash
+cd packages/react
+npm publish  # or pnpm publish
+```
+
+Ensure `version` is bumped and `CHANGELOG.md` is updated before publishing.
 
 ## Anti‑Patterns (Avoid)
 - Duplicating logic in adapters.

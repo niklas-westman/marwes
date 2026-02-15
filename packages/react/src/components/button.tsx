@@ -1,31 +1,27 @@
-import * as React from "react";
-import type { CssVars, ButtonOptions } from "@marwes/core";
-import { createButtonRecipe } from "@marwes/core";
-import { useTheme } from "../provider/use-theme";
-import { useRenderKitDebug } from "../hooks/use-renderkit-debug";
-import { Icon } from "./icon";
+import type { ButtonOptions, CssVars } from "@marwes/core"
+import { createButtonRecipe } from "@marwes/core"
+import type * as React from "react"
+import { useRenderKitDebug } from "../hooks/use-renderkit-debug"
+import { useTheme } from "../provider/use-theme"
+import { Icon } from "./icon"
 
-type StyleWithVars = React.CSSProperties & CssVars;
+type StyleWithVars = React.CSSProperties & CssVars
 
 export type ButtonProps = ButtonOptions & {
-  children?: React.ReactNode;
-  onClick?: (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) => void;
-  className?: string;
-};
+  children?: React.ReactNode
+  onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
+  className?: string
+}
 
 export function Button(props: ButtonProps) {
-  const theme = useTheme();
-  const kit = createButtonRecipe(theme, props);
+  const theme = useTheme()
+  const kit = createButtonRecipe(theme, props)
 
   // Debug hook for Storybook RenderKit addon
-  useRenderKitDebug(kit, "Button");
+  useRenderKitDebug(kit, "Button")
 
-  const style = kit.vars as StyleWithVars;
-  const className = props.className
-    ? `${kit.className} ${props.className}`
-    : kit.className;
+  const style = kit.vars as StyleWithVars
+  const className = props.className ? `${kit.className} ${props.className}` : kit.className
 
   const content = (
     <>
@@ -33,7 +29,7 @@ export function Button(props: ButtonProps) {
       {props.children}
       {props.iconRight && <Icon name={props.iconRight} size="xs" decorative />}
     </>
-  );
+  )
 
   if (kit.tag === "button") {
     return (
@@ -54,7 +50,7 @@ export function Button(props: ButtonProps) {
       >
         {content}
       </button>
-    );
+    )
   }
 
   return (
@@ -73,14 +69,14 @@ export function Button(props: ButtonProps) {
       style={style}
       onClick={(e) => {
         if (kit.blockClick) {
-          e.preventDefault();
-          return;
+          e.preventDefault()
+          return
         }
-        props.onClick?.(e);
+        props.onClick?.(e)
       }}
       {...kit.dataAttributes}
     >
       {content}
     </a>
-  );
+  )
 }

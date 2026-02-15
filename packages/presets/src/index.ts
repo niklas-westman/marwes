@@ -1,2 +1,2 @@
-export { firstEdition } from "./firstEdition";
-export type { Preset } from "@marwes/core";
+export { firstEdition } from "./firstEdition"
+export type { Preset } from "@marwes/core"

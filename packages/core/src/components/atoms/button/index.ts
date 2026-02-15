@@ -4,6 +4,6 @@ export type {
   ButtonRenderKit,
   ButtonSize,
   ButtonTone,
-} from "./button-types";
+} from "./button-types"
 
-export { createButtonRecipe } from "./button-recipe";
+export { createButtonRecipe } from "./button-recipe"

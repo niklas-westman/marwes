@@ -1,1 +1,1 @@
-export type CssVars = Record<`--mw-${string}`, string>;
+export type CssVars = Record<`--mw-${string}`, string>

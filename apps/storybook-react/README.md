@@ -165,3 +165,29 @@ pnpm dev              # Start the local Vite app in this workspace
 pnpm build            # Build the local Vite app
 pnpm preview          # Preview local Vite app build
 ```
+
+## Deployment
+
+### Building for Production
+
+```bash
+pnpm build  # or pnpm build-storybook
+```
+
+This generates a static site in `storybook-static/` ready for deployment to:
+- **CloudFront/S3**: Upload the entire `storybook-static/` folder
+- **Netlify/Vercel**: Point to `apps/storybook-react` with build command `pnpm build`
+- **GitHub Pages**: Deploy the `storybook-static/` directory
+
+The static build includes:
+- All stories with interactive controls
+- Accessibility testing addon
+- Auto-generated documentation
+- Theme switching support
+
+**Note**: The `build` script runs type-checking before building to catch errors early. Use `build-storybook` to skip type-checking if needed.
+
+### Local Preview
+```bash
+npx serve storybook-static
+```

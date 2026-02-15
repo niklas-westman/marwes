@@ -6,13 +6,13 @@
  * - Figma reference: node-id=1-932
  */
 
-import type { CssVars } from "../../../shared/css-vars";
+import type { CssVars } from "../../../shared/css-vars"
 
 /** Size variants for divider thickness/height. */
-export type DividerSize = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+export type DividerSize = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"
 
 /** Orientation of the divider. */
-export type DividerOrientation = "horizontal" | "vertical";
+export type DividerOrientation = "horizontal" | "vertical"
 
 /** Public props the adapter can pass into core. */
 export type DividerOptions = {
@@ -26,47 +26,47 @@ export type DividerOptions = {
    * - xl: 64px
    * - xxl: 80px
    */
-  size?: DividerSize;
+  size?: DividerSize
 
   /**
    * Orientation of the divider.
    * Default: "horizontal"
    */
-  orientation?: DividerOrientation;
+  orientation?: DividerOrientation
 
   /**
    * Optional ID.
    */
-  id?: string;
-};
+  id?: string
+}
 
 /** Strict a11y output for dividers. */
 export type DividerA11y = {
-  id?: string;
-  role: "separator";
-  "aria-orientation": "horizontal" | "vertical";
-};
+  id?: string
+  role: "separator"
+  "aria-orientation": "horizontal" | "vertical"
+}
 
 /** Data attributes for divider. */
 export type DividerDataAttributes = {
-  "data-orientation": "horizontal" | "vertical";
-  "data-size": DividerSize;
-};
+  "data-orientation": "horizontal" | "vertical"
+  "data-size": DividerSize
+}
 
 /** Render kit output. */
 export type DividerRenderKit = {
   /** Always <hr> tag for semantic separators. */
-  tag: "hr";
+  tag: "hr"
 
   /** CSS class names. */
-  className: string;
+  className: string
 
   /** CSS variables for theming. */
-  vars: CssVars;
+  vars: CssVars
 
   /** Accessibility props. */
-  a11y: DividerA11y;
+  a11y: DividerA11y
 
   /** Data attributes for styling hooks. */
-  dataAttributes: DividerDataAttributes;
-};
+  dataAttributes: DividerDataAttributes
+}
