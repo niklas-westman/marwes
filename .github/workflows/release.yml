@@ -48,6 +48,12 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
+      # Configure npm authentication
+      - name: Configure npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          cat ~/.npmrc
+
       # Install all project dependencies using exact versions from pnpm-lock.yaml
       - name: Install
         run: pnpm install --frozen-lockfile
@@ -58,6 +64,10 @@ jobs:
         with:
           name: dist
           path: packages
+
+      # Verify npm authentication works
+      - name: Verify npm auth
+        run: npm whoami
 
       # Create release PR or publish packages to npm using changesets
       - name: Create Release PR or Publish
