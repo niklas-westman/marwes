@@ -5,8 +5,8 @@
  * - Sets `indeterminate` via DOM property (not an HTML attribute).
  */
 
-import { checkboxRecipe } from "@marwes/core"
-import type { CheckboxProps as CoreCheckboxProps } from "@marwes/core"
+import { checkboxRecipe } from "@marwes-ui/core"
+import type { CheckboxProps as CoreCheckboxProps } from "@marwes-ui/core"
 import * as React from "react"
 import { useTheme } from "../../provider/use-theme"
 

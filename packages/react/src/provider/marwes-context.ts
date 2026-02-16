@@ -1,4 +1,4 @@
-import type { System, ThemeMode } from "@marwes/core"
+import type { System, ThemeMode } from "@marwes-ui/core"
 import * as React from "react"
 
 export type MarwesContextValue = {

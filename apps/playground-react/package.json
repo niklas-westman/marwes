@@ -12,8 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@marwes/presets": "workspace:^",
-    "@marwes/react": "workspace:^",
+    "@marwes-ui/presets": "workspace:^",
+    "@marwes-ui/react": "workspace:^",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

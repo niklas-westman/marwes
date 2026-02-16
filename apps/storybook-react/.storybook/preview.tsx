@@ -1,8 +1,8 @@
-import type { ThemeMode } from "@marwes/core"
-import { firstEdition } from "@marwes/presets"
-import { MarwesProvider } from "@marwes/react"
+import type { ThemeMode } from "@marwes-ui/core"
+import { firstEdition } from "@marwes-ui/presets"
+import { MarwesProvider } from "@marwes-ui/react"
 import type { Decorator, Preview } from "@storybook/react"
-import "@marwes/presets/firstEdition/styles.css"
+import "@marwes-ui/presets/firstEdition/styles.css"
 
 /**
  * Marwes decorator with theme mode switching support.

@@ -87,7 +87,7 @@ When in doubt, choose clarity over brevity.
 - Adapters may expose `onChange(value)` as an alias but internal contracts must use `onValueChange`.
 
 ## Component File Layout (Core)
-Each component in `@marwes/core` follows a consistent structure:
+Each component in `@marwes-ui/core` follows a consistent structure:
 - `*.types.ts` — public contracts
 - `*.a11y.ts` — accessibility mapping
 - `*.styles.ts` — theme/state to CSS variables + modifiers
@@ -99,14 +99,14 @@ Each component in `@marwes/core` follows a consistent structure:
 2. Implement a11y in `*.a11y.ts`.
 3. Implement styles in `*.styles.ts`.
 4. Build the RenderKit in `*.recipe.ts`.
-5. Add preset CSS in `@marwes/presets`.
-6. Add the adapter component in `@marwes/react`.
+5. Add preset CSS in `@marwes-ui/presets`.
+6. Add the adapter component in `@marwes-ui/react`.
 7. Add a Storybook story and a playground example.
 
 ## Build System
 
 ### Package Build Configuration
-All packages (`@marwes/core`, `@marwes/presets`, `@marwes/react`) use **tsup** for bundling:
+All packages (`@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`) use **tsup** for bundling:
 - **Output**: `dist/` folder with ESM bundle, TypeScript declarations, and source maps
 - **Entry**: `src/index.ts`
 - **Format**: ESM only (`type: "module"`)
@@ -120,10 +120,10 @@ All packages (`@marwes/core`, `@marwes/presets`, `@marwes/react`) use **tsup** f
 pnpm build
 
 # Build specific package
-pnpm --filter @marwes/react build
+pnpm --filter @marwes-ui/react build
 
 # Clean and rebuild
-pnpm --filter @marwes/react clean && pnpm --filter @marwes/react build
+pnpm --filter @marwes-ui/react clean && pnpm --filter @marwes-ui/react build
 ```
 
 ### Publishing to npm
@@ -139,6 +139,6 @@ Ensure `version` is bumped and `CHANGELOG.md` is updated before publishing.
 - Mixing styling logic into core recipes.
 - Adding ad‑hoc classnames without preset CSS support.
 - Using inline styles for anything other than CSS variables.
-- Introducing framework dependencies in `@marwes/core`.
+- Introducing framework dependencies in `@marwes-ui/core`.
 
 If a change would break these rules, it needs explicit discussion and a documented decision.

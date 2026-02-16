@@ -1,5 +1,5 @@
-import { iconRegistry } from "@marwes/core"
-import { LinkButton } from "@marwes/react"
+import { iconRegistry } from "@marwes-ui/core"
+import { LinkButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>

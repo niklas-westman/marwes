@@ -31,7 +31,7 @@ export type DangerButtonProps = Omit<ButtonProps, "tone" | "action"> & {
  *
  * @example
  * ```tsx
- * import { DangerButton } from "@marwes/react";
+ * import { DangerButton } from "@marwes-ui/react";
  *
  * export function Example() {
  *   return <DangerButton onClick={deleteProject}>Delete Project</DangerButton>;

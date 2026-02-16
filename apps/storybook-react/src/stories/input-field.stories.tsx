@@ -1,4 +1,4 @@
-import { InputField } from "@marwes/react"
+import { InputField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
 

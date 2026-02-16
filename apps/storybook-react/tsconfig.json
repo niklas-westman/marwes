@@ -4,13 +4,13 @@
     "baseUrl": ".",
     "types": ["vite/client"],
     "paths": {
-      "@marwes/core": ["../../packages/core/src/index.ts"],
-      "@marwes/react": ["../../packages/react/src/index.ts"],
-      "@marwes/presets": ["../../packages/presets/src/index.ts"],
-      "@marwes/presets/firstEdition": [
+      "@marwes-ui/core": ["../../packages/core/src/index.ts"],
+      "@marwes-ui/react": ["../../packages/react/src/index.ts"],
+      "@marwes-ui/presets": ["../../packages/presets/src/index.ts"],
+      "@marwes-ui/presets/firstEdition": [
         "../../packages/presets/src/firstEdition/index.ts"
       ],
-      "@marwes/presets/firstEdition/styles.css": [
+      "@marwes-ui/presets/firstEdition/styles.css": [
         "../../packages/presets/src/firstEdition/styles.css"
       ]
     }

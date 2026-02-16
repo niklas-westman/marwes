@@ -71,10 +71,10 @@ describe('createButtonRecipe', () => {
 ### Run Core Tests
 ```bash
 # Current baseline
-pnpm --filter @marwes/core typecheck
+pnpm --filter @marwes-ui/core typecheck
 
 # Planned once test script is added
-# pnpm --filter @marwes/core test
+# pnpm --filter @marwes-ui/core test
 ```
 
 **Why Core Tests Matter:**
@@ -104,7 +104,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Button } from '../button'
 import { MarwesProvider } from '../../provider/marwes-provider'
-import { firstEdition } from '@marwes/presets'
+import { firstEdition } from '@marwes-ui/presets'
 
 const renderWithProvider = (ui: React.ReactElement) => {
   return render(
@@ -148,10 +148,10 @@ describe('Button', () => {
 ### Run React Tests
 ```bash
 # Current baseline
-pnpm --filter @marwes/react typecheck
+pnpm --filter @marwes-ui/react typecheck
 
 # Planned once test script is added
-# pnpm --filter @marwes/react test
+# pnpm --filter @marwes-ui/react test
 ```
 
 ---
@@ -308,9 +308,9 @@ Use React DevTools Profiler to measure:
 
 | Package | Target Coverage | Current |
 |---------|----------------|---------|
-| `@marwes/core` | 90% | TBD |
-| `@marwes/react` | 80% | TBD |
-| `@marwes/presets` | N/A (CSS only) | - |
+| `@marwes-ui/core` | 90% | TBD |
+| `@marwes-ui/react` | 80% | TBD |
+| `@marwes-ui/presets` | N/A (CSS only) | - |
 
 ---
 

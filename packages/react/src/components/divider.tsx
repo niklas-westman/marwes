@@ -6,9 +6,9 @@
  * - Figma reference: node-id=1-932
  */
 
-import { createDividerRecipe } from "@marwes/core"
-import type { DividerOptions, DividerOrientation, DividerSize } from "@marwes/core"
-import type { CssVars } from "@marwes/core"
+import { createDividerRecipe } from "@marwes-ui/core"
+import type { DividerOptions, DividerOrientation, DividerSize } from "@marwes-ui/core"
+import type { CssVars } from "@marwes-ui/core"
 import * as React from "react"
 import { useTheme } from "../provider/use-theme"
 

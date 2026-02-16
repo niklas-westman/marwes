@@ -4,7 +4,7 @@ Framework-agnostic component logic for Marwes.
 
 ## Philosophy
 
-Each component in `@marwes/core` is **pure logic** - no DOM, no React, no styling execution. This makes components:
+Each component in `@marwes-ui/core` is **pure logic** - no DOM, no React, no styling execution. This makes components:
 
 - ✅ Testable without a browser
 - ✅ Framework-agnostic (works with React, Vue, Svelte, etc.)

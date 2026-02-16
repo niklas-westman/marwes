@@ -4,7 +4,7 @@ This guide defines how design data from Figma should map into Marwes so implemen
 
 ## Scope
 - Source design: Figma file tokens and component variants/states.
-- Target implementation: `@marwes/core`, `@marwes/presets`, `@marwes/react`.
+- Target implementation: `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`.
 - Current preset focus: `firstEdition`.
 
 ## Connection Setup (MCP)
@@ -140,7 +140,7 @@ Required Figma tokens:
 - Paragraph scale: sm, md, lg (font size, line height).
 
 ## Implementation Rules
-- Do not hardcode Figma hex values in adapters (`@marwes/react`).
+- Do not hardcode Figma hex values in adapters (`@marwes-ui/react`).
 - Put logic and mapping in core recipes and theme contracts.
 - Put visual styling in preset CSS only.
 - Keep CSS variable names on `--mw-*`.
@@ -150,7 +150,7 @@ Required Figma tokens:
 1. Confirm Figma tokens and component variants/states are final.
 2. Update theme contract/defaults if new semantic token is needed.
 3. Update `firstEdition` preset defaults for preset-specific baselines.
-4. Update component recipe vars/class modifiers in `@marwes/core`.
+4. Update component recipe vars/class modifiers in `@marwes-ui/core`.
 5. Update matching CSS in `packages/presets/src/firstEdition`.
 6. Verify in Storybook and playground.
 7. Document any new token/variant in this file and package docs.

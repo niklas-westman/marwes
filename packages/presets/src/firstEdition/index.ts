@@ -1,4 +1,4 @@
-import type { Preset } from "@marwes/core"
+import type { Preset } from "@marwes-ui/core"
 import "@fontsource/instrument-sans/400.css"
 import "@fontsource/instrument-sans/500.css"
 import "@fontsource/instrument-sans/600.css"

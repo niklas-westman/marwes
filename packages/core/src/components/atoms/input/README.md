@@ -21,9 +21,9 @@ User Code (React)
   invalid={errors.email}
 />
   ↓
-[@marwes/react] input.tsx calls createInputRecipe(theme, props)
+[@marwes-ui/react] input.tsx calls createInputRecipe(theme, props)
   ↓
-[@marwes/core] input-recipe.ts
+[@marwes-ui/core] input-recipe.ts
   ├─ resolveInputA11y(opts) → a11y props (id, name, type, aria-*)
   ├─ Build className: "mw-input mw-input--default is-invalid"
   └─ Build CSS vars: { "--mw-primary": "#5B8CFF", "--mw-border": "...", ... }
@@ -41,9 +41,9 @@ Returns RenderKit:
   }
 }
   ↓
-[@marwes/react] input.tsx applies className + style={vars} + a11y props
+[@marwes-ui/react] input.tsx applies className + style={vars} + a11y props
   ↓
-[@marwes/presets] styles.css provides .mw-input { ... } rules
+[@marwes-ui/presets] styles.css provides .mw-input { ... } rules
   ↓
 Browser renders styled, accessible input
 ```
@@ -57,7 +57,7 @@ Browser renders styled, accessible input
 ## Example Usage (React)
 
 ```tsx
-import { Input } from "@marwes/react";
+import { Input } from "@marwes-ui/react";
 
 <Input
   label="Email"
@@ -126,7 +126,7 @@ The [input-a11y.ts](input-a11y.ts) file handles:
 
 ```bash
 # Validate core package
-pnpm --filter @marwes/core typecheck
+pnpm --filter @marwes-ui/core typecheck
 
 # View in Storybook
 pnpm dev:storybook

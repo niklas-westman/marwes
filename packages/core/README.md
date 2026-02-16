@@ -1,4 +1,4 @@
-# @marwes/core
+# @marwes-ui/core
 
 Framework-agnostic Marwes core: theme system, typed component recipes, and a11y mapping.
 
@@ -58,9 +58,9 @@ When implementing design changes from Figma, map tokens into theme keys and reci
 - `../../docs/FIGMA_TO_MARWES.md`
 
 ## Scripts
-- `pnpm --filter @marwes/core dev`
-- `pnpm --filter @marwes/core build`
-- `pnpm --filter @marwes/core typecheck`
+- `pnpm --filter @marwes-ui/core dev`
+- `pnpm --filter @marwes-ui/core build`
+- `pnpm --filter @marwes-ui/core typecheck`
 
 ## Related Docs
 - `../../docs/PROJECT.md`

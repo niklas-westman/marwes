@@ -1,7 +1,7 @@
-import { firstEdition } from "@marwes/presets"
-import { Button, MarwesProvider } from "@marwes/react"
+import { firstEdition } from "@marwes-ui/presets"
+import { Button, MarwesProvider } from "@marwes-ui/react"
 
-import "@marwes/presets/firstEdition/styles.css"
+import "@marwes-ui/presets/firstEdition/styles.css"
 
 function App() {
   return (

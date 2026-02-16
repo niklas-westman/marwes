@@ -1,4 +1,4 @@
-import { CheckboxField } from "@marwes/react"
+import { CheckboxField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
 

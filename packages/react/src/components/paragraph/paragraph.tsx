@@ -4,9 +4,9 @@
  * - Supports size variants: sm/md/lg.
  */
 
-import { paragraphRecipe } from "@marwes/core"
-import type { ParagraphOptions, ParagraphSize } from "@marwes/core"
-import type { CssVars } from "@marwes/core"
+import { paragraphRecipe } from "@marwes-ui/core"
+import type { ParagraphOptions, ParagraphSize } from "@marwes-ui/core"
+import type { CssVars } from "@marwes-ui/core"
 import type * as React from "react"
 import { useTheme } from "../../provider/use-theme"
 

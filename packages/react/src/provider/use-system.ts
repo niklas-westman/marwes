@@ -1,4 +1,4 @@
-import type { System } from "@marwes/core"
+import type { System } from "@marwes-ui/core"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 

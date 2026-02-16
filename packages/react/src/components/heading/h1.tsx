@@ -4,9 +4,9 @@
  * - Supports size override for visual/semantic mismatch.
  */
 
-import { headingRecipe } from "@marwes/core"
-import type { HeadingOptions, HeadingSize } from "@marwes/core"
-import type { CssVars } from "@marwes/core"
+import { headingRecipe } from "@marwes-ui/core"
+import type { HeadingOptions, HeadingSize } from "@marwes-ui/core"
+import type { CssVars } from "@marwes-ui/core"
 import type * as React from "react"
 import { useTheme } from "../../provider/use-theme"
 
