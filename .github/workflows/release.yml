@@ -40,19 +40,17 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      # Install Node.js with npm registry configuration and dependency caching
+      # Install Node.js with dependency caching (NO registry-url to avoid conflicts)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-          registry-url: https://registry.npmjs.org
 
-      # Configure npm authentication
+      # Configure npm authentication manually
       - name: Configure npm auth
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-          cat ~/.npmrc
 
       # Install all project dependencies using exact versions from pnpm-lock.yaml
       - name: Install
