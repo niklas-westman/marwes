@@ -1,5 +1,13 @@
 # playground-react
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`c5e3b1a`](https://github.com/niklas-westman/marwes/commit/c5e3b1a1368556f9afbb1a0a9f9fca94a58e5e1d)]:
+  - @marwes-ui/presets@0.0.3
+  - @marwes-ui/react@0.0.3
+
 ## 0.0.3
 
 ### Patch Changes

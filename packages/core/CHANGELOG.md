@@ -1,5 +1,11 @@
 # @marwes-ui/core
 
+## 0.0.3
+
+### Patch Changes
+
+- [#9](https://github.com/niklas-westman/marwes/pull/9) [`c5e3b1a`](https://github.com/niklas-westman/marwes/commit/c5e3b1a1368556f9afbb1a0a9f9fca94a58e5e1d) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Initial package release attempt
+
 ## 0.0.2
 
 ### Patch Changes
