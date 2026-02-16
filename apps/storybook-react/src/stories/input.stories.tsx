@@ -1,4 +1,4 @@
-import { Input } from "@marwes/react"
+import { Input } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {

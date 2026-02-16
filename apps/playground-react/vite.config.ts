@@ -7,26 +7,26 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      // CSS imports - must come before other @marwes/presets aliases
+      // CSS imports - must come before other @marwes-ui/presets aliases
       {
-        find: /^@marwes\/presets\/firstEdition\/styles\.css$/,
+        find: /^@marwes-ui\/presets\/firstEdition\/styles\.css$/,
         replacement: path.resolve(__dirname, "../../packages/presets/src/firstEdition/styles.css"),
       },
       // TypeScript module imports
       {
-        find: /^@marwes\/presets\/firstEdition$/,
+        find: /^@marwes-ui\/presets\/firstEdition$/,
         replacement: path.resolve(__dirname, "../../packages/presets/src/firstEdition/index.ts"),
       },
       {
-        find: /^@marwes\/presets$/,
+        find: /^@marwes-ui\/presets$/,
         replacement: path.resolve(__dirname, "../../packages/presets/src/index.ts"),
       },
       {
-        find: /^@marwes\/core$/,
+        find: /^@marwes-ui\/core$/,
         replacement: path.resolve(__dirname, "../../packages/core/src/index.ts"),
       },
       {
-        find: /^@marwes\/react$/,
+        find: /^@marwes-ui\/react$/,
         replacement: path.resolve(__dirname, "../../packages/react/src/index.ts"),
       },
     ],

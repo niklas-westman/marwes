@@ -11,15 +11,15 @@ Marwes is a component system designed to get teams up and running fast with beau
 ## How It Is Connected
 Marwes is intentionally split into three layers that interact in a strict, predictable way:
 
-1. **`@marwes/core`** (TypeScript only)
+1. **`@marwes-ui/core`** (TypeScript only)
    - Pure logic: theme normalization, a11y rules, component recipes.
    - Outputs a typed RenderKit (tag, className, vars, a11y).
 
-2. **`@marwes/presets`** (CSS + tokens)
+2. **`@marwes-ui/presets`** (CSS + tokens)
    - Static CSS using `.mw-*` classnames and CSS variables.
    - Defines the “edition” look and feel (e.g., `firstEdition`).
 
-3. **`@marwes/react`** (React adapter)
+3. **`@marwes-ui/react`** (React adapter)
    - Applies the RenderKit to actual React elements.
    - No duplicated logic; only rendering and wiring.
 

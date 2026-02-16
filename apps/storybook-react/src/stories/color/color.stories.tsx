@@ -1,4 +1,4 @@
-import { H2, H3, Paragraph, useTheme } from "@marwes/react"
+import { H2, H3, Paragraph, useTheme } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { ColorSwatch } from "./ColorSwatch"
 

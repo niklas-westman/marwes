@@ -106,10 +106,10 @@ Vision and feature planning for the Marwes component system.
 **Goal:** Extend beyond React to support more frameworks.
 
 ### Framework Adapters
-- [ ] `@marwes/vue` - Vue 3 adapter
-- [ ] `@marwes/svelte` - Svelte adapter
-- [ ] `@marwes/solid` - SolidJS adapter (maybe)
-- [ ] `@marwes/core-dom` - Vanilla JS utilities
+- [ ] `@marwes-ui/vue` - Vue 3 adapter
+- [ ] `@marwes-ui/svelte` - Svelte adapter
+- [ ] `@marwes-ui/solid` - SolidJS adapter (maybe)
+- [ ] `@marwes-ui/core-dom` - Vanilla JS utilities
 
 ### Tooling
 - [ ] Framework-agnostic playground

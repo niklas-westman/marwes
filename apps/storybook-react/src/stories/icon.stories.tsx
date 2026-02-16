@@ -1,9 +1,9 @@
-import { Icon } from "@marwes/react"
+import { Icon } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 // Import from core (adjust if you export these elsewhere)
-import { iconNames } from "@marwes/core"
-import type { IconName } from "@marwes/core"
+import { iconNames } from "@marwes-ui/core"
+import type { IconName } from "@marwes-ui/core"
 
 type Args = {
   size: "xs" | "sm" | "md" | "lg"

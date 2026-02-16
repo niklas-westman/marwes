@@ -4,7 +4,7 @@ import {
   iconRegistry,
   resolveIconSize,
   resolveIconStrokeWidth,
-} from "@marwes/core"
+} from "@marwes-ui/core"
 import type * as React from "react"
 import { useTheme } from "../../provider/use-theme"
 

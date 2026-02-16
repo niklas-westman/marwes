@@ -42,7 +42,7 @@ Opens at `http://localhost:5173`
 ```tsx
 // src/examples/SignupForm.tsx
 import { useState } from 'react'
-import { Input, Checkbox, CheckboxField, Button } from '@marwes/react'
+import { Input, Checkbox, CheckboxField, Button } from '@marwes-ui/react'
 
 export function SignupForm() {
   const [email, setEmail] = useState('')
@@ -97,8 +97,8 @@ export function SignupForm() {
 
 ```tsx
 // src/App.tsx
-import { MarwesProvider } from '@marwes/react'
-import { firstEdition } from '@marwes/presets'
+import { MarwesProvider } from '@marwes-ui/react'
+import { firstEdition } from '@marwes-ui/presets'
 
 function App() {
   return (
@@ -181,7 +181,7 @@ Use the playground to verify:
 ### Theme Issues
 ```tsx
 // Log current theme to console
-import { useTheme } from '@marwes/react'
+import { useTheme } from '@marwes-ui/react'
 
 function DebugTheme() {
   const theme = useTheme()
@@ -193,8 +193,8 @@ function DebugTheme() {
 ### RenderKit Output
 ```tsx
 // See what core is generating
-import { createButtonRecipe } from '@marwes/core'
-import { useTheme } from '@marwes/react'
+import { createButtonRecipe } from '@marwes-ui/core'
+import { useTheme } from '@marwes-ui/react'
 
 function DebugButton() {
   const theme = useTheme()

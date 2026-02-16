@@ -1,6 +1,6 @@
-import type { Preset, System, ThemeMode, ThemeOverrides } from "@marwes/core"
-import { createSystem, switchMode } from "@marwes/core"
-import { firstEdition } from "@marwes/presets"
+import type { Preset, System, ThemeMode, ThemeOverrides } from "@marwes-ui/core"
+import { createSystem, switchMode } from "@marwes-ui/core"
+import { firstEdition } from "@marwes-ui/presets"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 

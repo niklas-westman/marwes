@@ -1,4 +1,4 @@
-import { Checkbox, Paragraph } from "@marwes/react"
+import { Checkbox, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 

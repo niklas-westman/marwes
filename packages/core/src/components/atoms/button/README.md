@@ -16,9 +16,9 @@ User Code (React)
   ↓
 <Button variant="solid" tone="primary">Save</Button>
   ↓
-[@marwes/react] button.tsx calls createButtonRecipe(theme, props)
+[@marwes-ui/react] button.tsx calls createButtonRecipe(theme, props)
   ↓
-[@marwes/core] button-recipe.ts
+[@marwes-ui/core] button-recipe.ts
   ├─ resolveButtonA11y(opts) → { tag, a11y, blockClick }
   ├─ Build className: "mw-btn mw-btn--solid mw-btn--primary"
   └─ Build CSS vars: { "--mw-primary": "#5B8CFF", ... }
@@ -32,9 +32,9 @@ Returns RenderKit:
   blockClick: false
 }
   ↓
-[@marwes/react] button.tsx applies className + style={vars} + a11y props
+[@marwes-ui/react] button.tsx applies className + style={vars} + a11y props
   ↓
-[@marwes/presets] styles.css provides .mw-btn { ... } rules
+[@marwes-ui/presets] styles.css provides .mw-btn { ... } rules
   ↓
 Browser renders styled, accessible button
 ```
@@ -48,7 +48,7 @@ Browser renders styled, accessible button
 ## Example Usage (React)
 
 ```tsx
-import { Button } from "@marwes/react";
+import { Button } from "@marwes-ui/react";
 
 <Button variant="solid" tone="primary" onClick={handleClick}>
   Save Changes
@@ -105,7 +105,7 @@ The [button-a11y.ts](button-a11y.ts) file handles:
 
 ```bash
 # Validate core package
-pnpm --filter @marwes/core typecheck
+pnpm --filter @marwes-ui/core typecheck
 
 # View in Storybook
 pnpm dev:storybook

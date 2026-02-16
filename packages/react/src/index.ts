@@ -4,7 +4,7 @@ export { useSystem } from "./provider/use-system"
 export { useTheme } from "./provider/use-theme"
 
 // Re-export core types for good DX
-export type { Theme, ThemeOverrides, System, Preset } from "@marwes/core"
+export type { Theme, ThemeOverrides, System, Preset } from "@marwes-ui/core"
 
 /* Button */
 export { Button } from "./components/button"

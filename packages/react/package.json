@@ -1,5 +1,5 @@
 {
-  "name": "@marwes/react",
+  "name": "@marwes-ui/react",
   "version": "0.0.1",
   "publishConfig": {
     "access": "public"
@@ -20,14 +20,14 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"No tests in @marwes/react\"",
+    "test": "echo \"No tests in @marwes-ui/react\"",
     "clean": "rimraf dist",
     "lint": "biome lint .",
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@marwes/core": "workspace:*",
-    "@marwes/presets": "workspace:*"
+    "@marwes-ui/core": "workspace:*",
+    "@marwes-ui/presets": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18",

@@ -44,10 +44,10 @@ importers:
 
   apps/playground-react:
     dependencies:
-      '@marwes/presets':
+      '@marwes-ui/presets':
         specifier: workspace:^
         version: link:../../packages/presets
-      '@marwes/react':
+      '@marwes-ui/react':
         specifier: workspace:^
         version: link:../../packages/react
       react:
@@ -96,13 +96,13 @@ importers:
 
   apps/storybook-react:
     dependencies:
-      '@marwes/core':
+      '@marwes-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@marwes/presets':
+      '@marwes-ui/presets':
         specifier: workspace:*
         version: link:../../packages/presets
-      '@marwes/react':
+      '@marwes-ui/react':
         specifier: workspace:*
         version: link:../../packages/react
       react:
@@ -220,7 +220,7 @@ importers:
       '@fontsource/instrument-sans':
         specifier: ^5.2.8
         version: 5.2.8
-      '@marwes/core':
+      '@marwes-ui/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -236,10 +236,10 @@ importers:
 
   packages/react:
     dependencies:
-      '@marwes/core':
+      '@marwes-ui/core':
         specifier: workspace:*
         version: link:../core
-      '@marwes/presets':
+      '@marwes-ui/presets':
         specifier: workspace:*
         version: link:../presets
     devDependencies:

@@ -57,9 +57,9 @@ Storybook is configured to resolve workspace packages as if installed:
 import { Button } from '../../../packages/react/src/components/button'
 
 // Use package names:
-import { Button } from '@marwes/react'
-import { firstEdition } from '@marwes/presets'
-import { createButtonRecipe } from '@marwes/core'
+import { Button } from '@marwes-ui/react'
+import { firstEdition } from '@marwes-ui/presets'
+import { createButtonRecipe } from '@marwes-ui/core'
 ```
 
 **Configuration:** See `.storybook/main.ts` `viteFinal` function.
@@ -79,7 +79,7 @@ import { createButtonRecipe } from '@marwes/core'
 ```tsx
 // src/stories/button.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from '@marwes/react'
+import { Button } from '@marwes-ui/react'
 
 const meta = {
   title: 'Components/Button',

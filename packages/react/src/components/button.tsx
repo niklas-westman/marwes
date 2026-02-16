@@ -1,5 +1,5 @@
-import type { ButtonOptions, CssVars } from "@marwes/core"
-import { createButtonRecipe } from "@marwes/core"
+import type { ButtonOptions, CssVars } from "@marwes-ui/core"
+import { createButtonRecipe } from "@marwes-ui/core"
 import type * as React from "react"
 import { useRenderKitDebug } from "../hooks/use-renderkit-debug"
 import { useTheme } from "../provider/use-theme"

@@ -80,9 +80,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added - Initial Setup
 - Monorepo structure with pnpm workspaces
-- `@marwes/core` package - Framework-agnostic component logic
-- `@marwes/presets` package - firstEdition preset with CSS
-- `@marwes/react` package - React adapter components
+- `@marwes-ui/core` package - Framework-agnostic component logic
+- `@marwes-ui/presets` package - firstEdition preset with CSS
+- `@marwes-ui/react` package - React adapter components
 - Core components:
   - Button (with variants: solid, outline, soft, ghost)
   - Input (with validation states)

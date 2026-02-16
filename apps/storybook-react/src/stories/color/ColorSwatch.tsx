@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./ColorSwatch.css"
-import { Paragraph } from "@marwes/react"
+import { Paragraph } from "@marwes-ui/react"
 
 export interface ColorSwatchProps {
   /** Display name of the color */

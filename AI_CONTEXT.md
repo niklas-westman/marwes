@@ -16,7 +16,7 @@ If docs conflict, follow this precedence:
 4. Package-level READMEs
 
 ## Current Snapshot (2026-02-11)
-- Architecture: 3 layers (`@marwes/core` -> `@marwes/presets` -> `@marwes/react`)
+- Architecture: 3 layers (`@marwes-ui/core` -> `@marwes-ui/presets` -> `@marwes-ui/react`)
 - Implemented atoms: Button, Input, Checkbox, Icon, H1, H2, H3, Paragraph
 - Implemented molecules: CheckboxField
 - Planned next: Select, Textarea, FormField, Card, Divider, Spinner
@@ -61,13 +61,13 @@ For every non-trivial change, follow this order:
 
 ## Definition of Done (AI Changes)
 - Behavior is traceable to acceptance criteria in `SPEC.md`
-- No framework logic leaked into `@marwes/core`
+- No framework logic leaked into `@marwes-ui/core`
 - No hardcoded design values in adapters
 - A11y behavior lives in core mappings
 - Docs are updated if behavior/API changes
 
 ## Anti-Patterns to Avoid
-- React logic inside `@marwes/core`
+- React logic inside `@marwes-ui/core`
 - Core behavior duplicated in adapters
 - Inline styles except CSS variable objects
 - Untracked decisions made only in code (must be in `SPEC.md`)

@@ -1,4 +1,4 @@
-# @marwes/react
+# @marwes-ui/react
 
 React adapter for Marwes core recipes.
 
@@ -13,14 +13,14 @@ React adapter for Marwes core recipes.
 
 ## Install
 ```bash
-pnpm add @marwes/core @marwes/react @marwes/presets
+pnpm add @marwes-ui/core @marwes-ui/react @marwes-ui/presets
 ```
 
 ## Quick Start
 ```tsx
-import { MarwesProvider, Button, Input, Checkbox } from "@marwes/react";
-import { firstEdition } from "@marwes/presets";
-import "@marwes/presets/firstEdition/styles.css";
+import { MarwesProvider, Button, Input, Checkbox } from "@marwes-ui/react";
+import { firstEdition } from "@marwes-ui/presets";
+import "@marwes-ui/presets/firstEdition/styles.css";
 
 export function App() {
   return (
@@ -54,7 +54,7 @@ Utilities:
 - `useRenderKitDebug`
 
 ## Adapter Rules
-- Treat `@marwes/core` as source of truth for behavior and a11y.
+- Treat `@marwes-ui/core` as source of truth for behavior and a11y.
 - Apply RenderKit fields explicitly.
 - Keep component wrappers thin and predictable.
 - Do not hardcode Figma design values in adapters.
@@ -71,9 +71,9 @@ If design changes originate in Figma, align token/state mapping with:
 Most Figma changes should land in core theme/recipes and presets CSS first, then flow into React automatically.
 
 ## Scripts
-- `pnpm --filter @marwes/react dev`
-- `pnpm --filter @marwes/react build`
-- `pnpm --filter @marwes/react typecheck`
+- `pnpm --filter @marwes-ui/react dev`
+- `pnpm --filter @marwes-ui/react build`
+- `pnpm --filter @marwes-ui/react typecheck`
 
 ## Package Structure
 

@@ -1,5 +1,5 @@
-import type { CssVars, InputOptions } from "@marwes/core"
-import { createInputRecipe } from "@marwes/core"
+import type { CssVars, InputOptions } from "@marwes-ui/core"
+import { createInputRecipe } from "@marwes-ui/core"
 import type * as React from "react"
 import { useRenderKitDebug } from "../hooks/use-renderkit-debug"
 import { useTheme } from "../provider/use-theme"

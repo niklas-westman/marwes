@@ -17,9 +17,9 @@ User Code (React)
   ↓
 <Divider size="md" orientation="horizontal" />
   ↓
-[@marwes/react] divider.tsx calls createDividerRecipe(theme, props)
+[@marwes-ui/react] divider.tsx calls createDividerRecipe(theme, props)
   ↓
-[@marwes/core] divider-recipe.ts
+[@marwes-ui/core] divider-recipe.ts
   ├─ Map size to pixel value (md → 32px)
   ├─ Build className: "mw-divider mw-divider--horizontal mw-divider--md"
   └─ Build CSS vars: { "--mw-divider-color": "#E5E7EB", "--mw-divider-size": "32px" }
@@ -33,9 +33,9 @@ Returns RenderKit:
   dataAttributes: { "data-orientation": "horizontal", "data-size": "md" }
 }
   ↓
-[@marwes/react] divider.tsx applies className + style={vars} + a11y props
+[@marwes-ui/react] divider.tsx applies className + style={vars} + a11y props
   ↓
-[@marwes/presets] divider.css provides .mw-divider { ... } rules
+[@marwes-ui/presets] divider.css provides .mw-divider { ... } rules
   ↓
 Browser renders styled, accessible divider
 ```
@@ -70,7 +70,7 @@ Both orientations set the appropriate `aria-orientation` for accessibility.
 ## Example Usage (React)
 
 ```tsx
-import { Divider } from "@marwes/react";
+import { Divider } from "@marwes-ui/react";
 
 // Horizontal divider (default)
 <Divider size="md" />

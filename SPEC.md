@@ -26,13 +26,13 @@ Marwes is a component system that prioritizes:
 
 ## 4. Architecture Contract
 Marwes uses three layers:
-1. `@marwes/core`
+1. `@marwes-ui/core`
    - Theme contract + normalization
    - Component recipes
    - A11y mappings
-2. `@marwes/presets`
+2. `@marwes-ui/presets`
    - Static CSS and preset defaults
-3. `@marwes/react`
+3. `@marwes-ui/react`
    - Thin adapter that applies core RenderKit output
 
 ### RenderKit Contract

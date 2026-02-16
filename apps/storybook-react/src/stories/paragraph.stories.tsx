@@ -1,5 +1,5 @@
-import { Divider, Paragraph } from "@marwes/react"
-import { H1 } from "@marwes/react"
+import { Divider, Paragraph } from "@marwes-ui/react"
+import { H1 } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {

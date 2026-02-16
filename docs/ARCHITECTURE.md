@@ -8,7 +8,7 @@ Marwes separates concerns into three distinct packages:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    @marwes/core                             │
+│                    @marwes-ui/core                             │
 │  Framework-agnostic logic (TypeScript only)                 │
 │  • Theme system (merge, normalize, defaults)                │
 │  • Component recipes (Button, Input, etc.)                  │
@@ -18,7 +18,7 @@ Marwes separates concerns into three distinct packages:
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                  @marwes/presets                            │
+│                  @marwes-ui/presets                            │
 │  Design system tokens + CSS (Vanilla CSS + CSS Variables)  │
 │  • firstEdition preset (theme defaults)                     │
 │  • CSS files with .mw-* classes                             │
@@ -27,7 +27,7 @@ Marwes separates concerns into three distinct packages:
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                  @marwes/react                              │
+│                  @marwes-ui/react                              │
 │  React adapter (framework-specific rendering)               │
 │  • MarwesProvider (theme context)                           │
 │  • Component wrappers (Button, Input, etc.)                 │
@@ -43,9 +43,9 @@ Let's trace how a Button goes from user code → rendered HTML:
 ### 1. User Code (React App)
 
 ```tsx
-import { MarwesProvider, Button } from "@marwes/react"
-import { firstEdition } from "@marwes/presets"
-import "@marwes/presets/firstEdition/styles.css"
+import { MarwesProvider, Button } from "@marwes-ui/react"
+import { firstEdition } from "@marwes-ui/presets"
+import "@marwes-ui/presets/firstEdition/styles.css"
 
 function App() {
   return (
@@ -236,8 +236,8 @@ test('creates solid primary button', () => {
 
 ### ✅ Swappable Presets
 ```tsx
-import { materialEdition } from "@marwes/presets/material"
-import "@marwes/presets/material/styles.css"
+import { materialEdition } from "@marwes-ui/presets/material"
+import "@marwes-ui/presets/material/styles.css"
 
 <MarwesProvider preset={materialEdition}> // Same components, different look
 ```

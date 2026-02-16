@@ -1,5 +1,5 @@
 {
-  "name": "@marwes/presets",
+  "name": "@marwes-ui/presets",
   "version": "0.0.1",
   "publishConfig": {
     "access": "public"
@@ -25,14 +25,14 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"No tests in @marwes/presets\"",
+    "test": "echo \"No tests in @marwes-ui/presets\"",
     "clean": "rimraf dist",
     "lint": "biome lint .",
     "format": "biome format --write ."
   },
   "dependencies": {
     "@fontsource/instrument-sans": "^5.2.8",
-    "@marwes/core": "workspace:*"
+    "@marwes-ui/core": "workspace:*"
   },
   "devDependencies": {
     "rimraf": "^6.0.0",

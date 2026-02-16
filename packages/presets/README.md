@@ -1,4 +1,4 @@
-# @marwes/presets
+# @marwes-ui/presets
 
 Design presets for Marwes. Presets define theme defaults and static CSS for component classnames.
 
@@ -14,9 +14,9 @@ Design presets for Marwes. Presets define theme defaults and static CSS for comp
 
 ## Install and Use
 ```tsx
-import { MarwesProvider } from "@marwes/react";
-import { firstEdition } from "@marwes/presets";
-import "@marwes/presets/firstEdition/styles.css";
+import { MarwesProvider } from "@marwes-ui/react";
+import { firstEdition } from "@marwes-ui/presets";
+import "@marwes-ui/presets/firstEdition/styles.css";
 
 <MarwesProvider preset={firstEdition}>
   <App />
@@ -58,9 +58,9 @@ When syncing design changes from Figma, follow:
 This ensures token names and state variants map predictably into preset CSS.
 
 ## Scripts
-- `pnpm --filter @marwes/presets dev`
-- `pnpm --filter @marwes/presets build`
-- `pnpm --filter @marwes/presets typecheck`
+- `pnpm --filter @marwes-ui/presets dev`
+- `pnpm --filter @marwes-ui/presets build`
+- `pnpm --filter @marwes-ui/presets typecheck`
 
 ## Related Docs
 - `../../docs/PROJECT.md`

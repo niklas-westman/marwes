@@ -4,4 +4,4 @@
 "@marwes-ui/core": patch
 ---
 
-Initial release
+Rename packages from @marwes to @marwes-ui

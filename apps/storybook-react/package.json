@@ -14,9 +14,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@marwes/core": "workspace:*",
-    "@marwes/presets": "workspace:*",
-    "@marwes/react": "workspace:*",
+    "@marwes-ui/core": "workspace:*",
+    "@marwes-ui/presets": "workspace:*",
+    "@marwes-ui/react": "workspace:*",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
