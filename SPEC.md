@@ -10,12 +10,12 @@ Marwes is a component system that prioritizes:
 - Consistent accessibility behavior
 - Framework-agnostic core logic
 
-## 2. Current Status (2026-02-11)
-- Repository version: `0.0.0`
+## 2. Current Status (2026-02-18)
+- Repository version: `0.0.3`
 - Delivery phase: v0.1 foundation
-- Implemented atoms: Button, Input, Checkbox, Icon, H1, H2, H3, Paragraph
+- Implemented atoms: Button, Input, Checkbox, Icon, H1, H2, H3, Paragraph, Divider
 - Implemented molecules: CheckboxField
-- In active scope: Select (native), Textarea, FormField, Card, Divider, Spinner
+- In active scope: Select (native), Textarea, FormField, Card, Spinner
 
 ## 3. Core Principles
 - Simple surface API, strong internal consistency
