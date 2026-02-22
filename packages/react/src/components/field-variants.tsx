@@ -353,7 +353,7 @@ export function CurrencyField(props: CurrencyFieldProps): React.ReactElement {
 
   return (
     <div data-purpose="currency" data-currency={currency}>
-      <InputField {...restProps} input={enhancedInput} helperText={helperText} />
+      <InputField {...restProps} input={enhancedInput} helperText={helperText || ""} />
     </div>
   )
 }
