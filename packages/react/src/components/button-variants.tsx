@@ -1,3 +1,4 @@
+import { ButtonAction, ButtonVariant, IconName } from "@marwes-ui/core"
 import { Button, type ButtonProps } from "./button"
 
 /**
@@ -12,7 +13,7 @@ import { Button, type ButtonProps } from "./button"
 // DANGER BUTTON - Destructive Actions
 // ============================================================================
 
-export type DangerButtonProps = Omit<ButtonProps, "tone" | "action"> & {
+export type DangerButtonProps = Omit<ButtonProps, "variant" | "action"> & {
   /**
    * Override automatic confirmation requirement.
    * Defaults to `true` for destructive actions.
@@ -24,7 +25,7 @@ export type DangerButtonProps = Omit<ButtonProps, "tone" | "action"> & {
  * DangerButton - For destructive actions like delete, remove, or irreversible operations.
  *
  * **AI Context:**
- * - Sets `tone="danger"` for visual warning
+ * - Sets `variant="primary"` with error state for visual warning
  * - Sets `action="delete"` to indicate destructive behavior
  * - Enables confirmation by default
  * - Adds `data-destructive="true"` for AI parsing
@@ -44,8 +45,9 @@ export function DangerButton(props: DangerButtonProps) {
   return (
     <Button
       {...restProps}
-      tone="primary"
-      action="delete"
+      variant={ButtonVariant.primary}
+      action={ButtonAction.delete}
+      iconRight={IconName.Minus}
       confirmation={confirmation}
       dataAttributes={{
         ...props.dataAttributes,
@@ -82,7 +84,7 @@ export function CreateButton(props: CreateButtonProps) {
     <Button
       {...props}
       action="create"
-      tone={props.tone ?? "primary"}
+      variant={props.variant ?? "primary"}
       dataAttributes={{
         ...props.dataAttributes,
         "data-creative": "true",
@@ -128,14 +130,14 @@ export function SubmitButton(props: SubmitButtonProps) {
 // CANCEL BUTTON - Cancel/Reset Actions
 // ============================================================================
 
-export type CancelButtonProps = Omit<ButtonProps, "action" | "variant">
+export type CancelButtonProps = Omit<ButtonProps, "action">
 
 /**
  * CancelButton - For cancel or reset actions.
  *
  * **AI Context:**
  * - Sets `action="cancel"` to indicate cancellation
- * - Uses ghost variant and secondary tone by default
+ * - Uses secondary variant by default
  * - Adds `data-cancel="true"` for AI parsing
  *
  * @example
@@ -150,7 +152,7 @@ export function CancelButton(props: CancelButtonProps) {
     <Button
       {...props}
       action="cancel"
-      tone={props.tone ?? "secondary"}
+      variant={props.variant ?? "secondary"}
       dataAttributes={{
         ...props.dataAttributes,
         "data-cancel": "true",
@@ -203,7 +205,7 @@ export function LinkButton(props: LinkButtonProps) {
 // PRIMARY BUTTON - General Actions
 // ============================================================================
 
-export type PrimaryButtonProps = Omit<ButtonProps, "tone" | "as"> & {}
+export type PrimaryButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
 /**
  * PrimaryButton - For general use when no specific semantic variant fits.
@@ -216,14 +218,14 @@ export type PrimaryButtonProps = Omit<ButtonProps, "tone" | "as"> & {}
  * ```
  */
 export function PrimaryButton(props: PrimaryButtonProps) {
-  return <Button {...props} tone="primary" as="button" />
+  return <Button {...props} variant="primary" as="button" />
 }
 
 // ============================================================================
 // SECONDARY BUTTON - General Actions
 // ============================================================================
 
-export type SecondaryButtonProps = Omit<ButtonProps, "tone" | "as"> & {}
+export type SecondaryButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
 /**
  * SecondaryButton - For general use when no specific semantic variant fits.
@@ -236,14 +238,14 @@ export type SecondaryButtonProps = Omit<ButtonProps, "tone" | "as"> & {}
  * ```
  */
 export function SecondaryButton(props: SecondaryButtonProps) {
-  return <Button {...props} tone="secondary" as="button" />
+  return <Button {...props} variant="secondary" as="button" />
 }
 
 // ============================================================================
 // TEXT BUTTON - General Actions
 // ============================================================================
 
-export type TextButtonProps = Omit<ButtonProps, "tone" | "as"> & {}
+export type TextButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
 /**
  * TextButton - For general use when no specific semantic variant fits.
@@ -256,5 +258,5 @@ export type TextButtonProps = Omit<ButtonProps, "tone" | "as"> & {}
  * ```
  */
 export function TextButton(props: TextButtonProps) {
-  return <Button {...props} tone="text" as="button" />
+  return <Button {...props} variant="text" as="button" />
 }

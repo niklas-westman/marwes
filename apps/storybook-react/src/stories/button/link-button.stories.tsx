@@ -1,4 +1,6 @@
-import { iconRegistry } from "@marwes-ui/core"
+// import { ButtonVariant } from "@marwes-ui/core";
+// import { ButtonVariant } from "@marwes-ui/core";
+import { ButtonVariant, IconName, iconRegistry } from "@marwes-ui/core"
 import { LinkButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
@@ -12,7 +14,7 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    tone: {
+    variant: {
       control: "select",
       options: ["primary", "secondary", "text"],
     },
@@ -33,7 +35,11 @@ const meta = {
 export default meta
 
 export const LinkExample: StoryObj<typeof LinkButton> = {
-  render: () => <LinkButton href="/dashboard">Go to Dashboard</LinkButton>,
+  args: {
+    children: "Go here",
+    iconRight: IconName.ArrowRight,
+    variant: ButtonVariant.text,
+  },
   parameters: {
     docs: {
       description: {

@@ -18,6 +18,7 @@ Vision and feature planning for the Marwes component system.
 - [x] Icon component (lucide icons)
 - [x] CheckboxField molecule
 - [x] Typography components (H1, H2, H3, Paragraph)
+- [x] Divider component
 - [x] Figma MCP integration
 - [x] Storybook setup
 - [x] Documentation structure
@@ -27,7 +28,6 @@ Vision and feature planning for the Marwes component system.
 - [ ] Textarea component
 - [ ] FormField wrapper
 - [ ] Card component
-- [ ] Divider component
 - [ ] Spinner/Loading component
 
 ### 📋 Planned

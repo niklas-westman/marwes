@@ -23,11 +23,13 @@
     "test": "echo \"No tests in @marwes-ui/core\"",
     "clean": "rimraf dist",
     "lint": "biome lint .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "generate:icons": "tsx scripts/generate-icon-names.ts"
   },
   "devDependencies": {
     "rimraf": "^6.0.0",
     "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
     "typescript": "^5.4.0"
   }
 }

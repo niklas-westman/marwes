@@ -1,17 +1,22 @@
 import type { CssVars } from "../../../shared/css-vars"
-import { iconRegistry } from "./icon-registry"
+import { IconName, iconNamesList } from "./icon-names"
+import type { IconName as IconNameType } from "./icon-names"
+
+// Re-export from generated file
+export { IconName, iconNamesList }
+export type { IconNameType }
 
 export type IconSize = "xs" | "sm" | "md" | "lg"
 export type IconStrokeWidth = "xs" | "sm" | "md" | "lg"
 export type IconColor = "currentColor" | "primary" | "secondary" | "muted"
 
-export type IconName = keyof typeof iconRegistry
-
-// Runtime list (useful for docs, search, etc.)
-export const iconNames = Object.keys(iconRegistry) as IconName[]
+/**
+ * @deprecated Use `iconNamesList` instead
+ */
+export const iconNames = iconNamesList
 
 export type IconOptions = {
-  name: IconName
+  name: IconNameType
   size?: IconSize
   strokeWidth?: IconStrokeWidth
   color?: IconColor

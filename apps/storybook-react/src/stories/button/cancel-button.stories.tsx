@@ -12,7 +12,7 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    tone: {
+    variant: {
       control: "select",
       options: ["primary", "secondary", "text"],
     },
