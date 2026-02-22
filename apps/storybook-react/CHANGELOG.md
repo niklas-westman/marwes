@@ -1,5 +1,14 @@
 # storybook-react
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`afdb19e`](https://github.com/niklas-westman/marwes/commit/afdb19edd7c3620a895f3a83d7b670497b3f60a0)]:
+  - @marwes-ui/presets@0.0.4
+  - @marwes-ui/react@0.0.4
+  - @marwes-ui/core@0.0.4
+
 ## 0.0.4
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @marwes-ui/presets
 
+## 0.0.4
+
+### Patch Changes
+
+- [#12](https://github.com/niklas-westman/marwes/pull/12) [`afdb19e`](https://github.com/niklas-westman/marwes/commit/afdb19edd7c3620a895f3a83d7b670497b3f60a0) Thanks [@niklas-westman](https://github.com/niklas-westman)! - button and input purpose components setup
+
+- Updated dependencies [[`afdb19e`](https://github.com/niklas-westman/marwes/commit/afdb19edd7c3620a895f3a83d7b670497b3f60a0)]:
+  - @marwes-ui/core@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
