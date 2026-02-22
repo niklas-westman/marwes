@@ -18,20 +18,51 @@ pnpm add @marwes-ui/core @marwes-ui/react @marwes-ui/presets
 
 ## Quick Start
 ```tsx
-import { MarwesProvider, Button, Input, Checkbox } from "@marwes-ui/react";
+import { MarwesProvider, Button, ButtonVariant, Input, Checkbox } from "@marwes-ui/react";
 import { firstEdition } from "@marwes-ui/presets";
 import "@marwes-ui/presets/firstEdition/styles.css";
 
 export function App() {
   return (
     <MarwesProvider preset={firstEdition} theme={{ color: { primary: "#5B8CFF" } }}>
-      <Button tone="primary">Save</Button>
+      <Button variant={ButtonVariant.primary}>Save</Button>
       <Input placeholder="Email" onValueChange={(v) => console.log(v)} />
       <Checkbox ariaLabel="Subscribe" />
     </MarwesProvider>
   );
 }
 ```
+
+## Button Philosophy
+
+Marwes buttons follow a **semantic-first** approach:
+
+### Recommended: Semantic Components
+```tsx
+import { CancelButton, SubmitButton, CreateButton, DangerButton } from "@marwes-ui/react";
+
+// These auto-set AI-friendly action metadata
+<CancelButton onClick={handleCancel}>Cancel</CancelButton>
+<SubmitButton>Save</SubmitButton>
+<CreateButton onClick={handleCreate}>New Item</CreateButton>
+<DangerButton onClick={handleDelete}>Delete</DangerButton>
+```
+
+### Advanced: Raw Props with Type-Safe Enums
+```tsx
+import { Button, ButtonVariant, ButtonSize, ButtonAction } from "@marwes-ui/react";
+
+// For dynamic or custom scenarios
+<Button
+  variant={ButtonVariant.primary}
+  size={ButtonSize.md}
+  action={ButtonAction.submit}
+>
+  Submit
+</Button>
+```
+
+Semantic components are preferred for guaranteed AI context and consistent UX.
 
 ## Current Exports
 Provider and hooks:
@@ -40,12 +71,18 @@ Provider and hooks:
 - `useSystem`
 
 Atoms:
-- `Button`
+- `Button`, `PrimaryButton`, `SecondaryButton`, `TextButton`
+- `CancelButton`, `SubmitButton`, `CreateButton`, `DangerButton`, `LinkButton`
 - `Input`
 - `Icon`
 - `Checkbox`
 - `H1`, `H2`, `H3`
 - `Paragraph`
+
+Enums (const objects):
+- `ButtonVariant` - `primary`, `secondary`, `text`
+- `ButtonSize` - `xs`, `sm`, `md`, `lg`
+- `ButtonAction` - `submit`, `cancel`, `create`, `delete`, `navigate`, `edit`, `reset`, `button`
 
 Molecules:
 - `CheckboxField`

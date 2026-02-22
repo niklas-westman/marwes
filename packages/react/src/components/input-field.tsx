@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Icon } from "./icon"
 import { Input } from "./input"
 import type { InputProps } from "./input"
 import { Paragraph } from "./paragraph"
@@ -8,13 +9,13 @@ export type InputFieldProps = {
   id?: string
 
   /** Field label (required for accessibility). */
-  label: React.ReactNode
+  label: string
 
   /** Optional helper text shown below the input. */
-  helperText?: React.ReactNode
+  helperText?: string
 
   /** Optional error message. When present, input is marked invalid. */
-  error?: React.ReactNode
+  error?: string
 
   /** Props forwarded to the Input atom. */
   input: InputProps
@@ -120,6 +121,23 @@ export function InputField(props: InputFieldProps): React.ReactElement {
   const reactId = React.useId()
   const id = props.id ?? `mw-input-${reactId}`
 
+  // Password visibility toggle
+  const isPasswordField = props.input.type === "password"
+  const [showPassword, setShowPassword] = React.useState(false)
+
+  // Search clear button - track if search has value
+  const isSearchField = props.input.type === "search"
+  const [searchValue, setSearchValue] = React.useState(
+    props.input.value || props.input.defaultValue || "",
+  )
+
+  // Determine if clear button should show based on controlled vs uncontrolled
+  const hasSearchValue =
+    isSearchField &&
+    (props.input.value !== undefined
+      ? String(props.input.value).length > 0
+      : String(searchValue).length > 0)
+
   const hasHelperText = props.helperText !== undefined
   const hasError = props.error !== undefined
 
@@ -148,8 +166,39 @@ export function InputField(props: InputFieldProps): React.ReactElement {
     invalid,
   }
 
+  // Override type when showing password
+  if (isPasswordField && showPassword) {
+    inputProps.type = "text"
+  }
+
+  // Track search value changes and make search inputs controlled
+  if (isSearchField) {
+    const originalOnValueChange = props.input.onValueChange
+
+    // Use parent's value if controlled, otherwise use local state
+    if (props.input.value === undefined) {
+      inputProps.value = searchValue
+    }
+
+    inputProps.onValueChange = (value: string) => {
+      setSearchValue(value)
+      originalOnValueChange?.(value)
+    }
+  }
+
   if (mergedDescribedBy) {
     inputProps.describedBy = mergedDescribedBy
+  }
+
+  const handleTogglePassword = () => {
+    setShowPassword((prev) => !prev)
+  }
+
+  const handleClearSearch = () => {
+    // For controlled inputs: notify parent to update state
+    // For uncontrolled: update local state
+    setSearchValue("")
+    props.input.onValueChange?.("")
   }
 
   return (
@@ -158,7 +207,33 @@ export function InputField(props: InputFieldProps): React.ReactElement {
         <Paragraph size="md">{props.label}</Paragraph>
       </label>
 
-      <Input {...inputProps} />
+      <div className="mw-input-field__input-wrapper">
+        <Input {...inputProps} />
+
+        {isPasswordField && (
+          <button
+            type="button"
+            className="mw-input-field__toggle-password"
+            onClick={handleTogglePassword}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            tabIndex={0}
+          >
+            <Icon name={showPassword ? "eyeOff" : "eye"} size="xs" decorative />
+          </button>
+        )}
+
+        {hasSearchValue && (
+          <button
+            type="button"
+            className="mw-input-field__clear-search"
+            onClick={handleClearSearch}
+            aria-label="Clear search"
+            tabIndex={0}
+          >
+            <Icon name="x" size="xs" decorative />
+          </button>
+        )}
+      </div>
 
       {hasHelperText && !hasError && (
         <div className="mw-input-field__helper" id={helperTextId}>

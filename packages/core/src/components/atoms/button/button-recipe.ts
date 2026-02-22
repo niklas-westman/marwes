@@ -6,7 +6,7 @@ export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRen
   const { tag, a11y, blockClick } = resolveButtonA11y(opts)
 
   const size = opts.size ?? "md"
-  const tone = opts.tone ?? "primary"
+  const variant = opts.variant ?? "primary"
   const action = opts.action ?? (tag === "button" ? "button" : "navigate")
 
   return {
@@ -18,9 +18,8 @@ export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRen
     },
     className: [
       "mw-btn",
-      //   `mw-btn--${variant}`, --- Example left for later use ---
       `mw-btn--${size}`,
-      `mw-btn--${tone}`,
+      `mw-btn--${variant}`,
       opts.error ? "mw-btn--error" : "",
     ]
       .filter(Boolean)
@@ -28,7 +27,7 @@ export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRen
     dataAttributes: {
       "data-component": "button",
       "data-action": action,
-      "data-tone": tone,
+      "data-variant": variant,
       "data-size": size,
       "data-error": opts.error ? "true" : undefined,
       ...opts.dataAttributes,

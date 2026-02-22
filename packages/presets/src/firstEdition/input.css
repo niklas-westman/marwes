@@ -57,11 +57,27 @@
   opacity: 0.2;
   cursor: not-allowed;
   pointer-events: none;
+  background: #f3f4f6;
 }
 
 /* Dark mode disabled state */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
+  .mw-input:disabled {
+    background: #3E3E3E;
+  }
+}
+
+@media (prefers-color-scheme: light) {
   .mw-input:disabled {
     opacity: 0.4;
   }
+} */
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+/* Dark mode: Primary button hover state uses opacity instead of lightening */
+.mw-theme--dark .mw-input {
+  background: #3e3e3e;
 }

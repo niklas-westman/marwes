@@ -6,17 +6,123 @@
 
 .mw-input-field {
   display: grid;
-  gap: 6px;
+  gap: 4px;
 }
 
 .mw-input-field__label {
   display: block;
   cursor: pointer;
   user-select: none;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+
+  p {
+    line-height: 1;
+    font-size: 14px;
+  }
+}
+
+.mw-input-field__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  /* Add padding to input when password toggle is present */
+  .mw-input {
+    flex: 1;
+  }
+
+  &:has(.mw-input-field__toggle-password) .mw-input {
+    padding-right: 40px;
+  }
+}
+
+.mw-input-field__toggle-password {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--mw-neutral-600, #6b7280);
+  transition: color 0.2s ease;
+  border-radius: 4px;
+
+  &:hover {
+    color: var(--mw-neutral-900, #111827);
+    background: var(--mw-neutral-100, #f3f4f6);
+  }
+
+  &:focus {
+    outline: 2px solid var(--mw-primary, #3b82f6);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    background: var(--mw-neutral-200, #e5e7eb);
+  }
+}
+
+.mw-input-field__clear-search {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--mw-neutral-600, #6b7280);
+  transition: color 0.2s ease;
+  border-radius: 4px;
+
+  &:hover {
+    color: var(--mw-neutral-900, #111827);
+    background: var(--mw-neutral-100, #f3f4f6);
+  }
+
+  &:focus {
+    outline: 2px solid var(--mw-primary, #3b82f6);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    background: var(--mw-neutral-200, #e5e7eb);
+  }
+}
+
+/* Hide native search input clear button */
+.mw-input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Add padding to search input when clear button is present */
+.mw-input-field__input-wrapper:has(.mw-input-field__clear-search) .mw-input {
+  padding-right: 40px;
+}
+
+/* Label opacity: 1 when input is focused */
+.mw-input-field:focus-within .mw-input-field__label {
+  opacity: 1;
+}
+
+/* Label opacity: 1 when hovering over input-field */
+.mw-input-field:hover .mw-input-field__label {
+  opacity: 1;
+}
+
+/* Label opacity: 1 when input has value */
+.mw-input-field[data-has-value="true"] .mw-input-field__label {
+  opacity: 1;
 }
 
 .mw-input-field__helper {
-  opacity: 0.75;
+  opacity: 0.6;
   font-size: 0.875em;
   color: var(--mw-neutral-600, #6b7280);
 }
@@ -32,10 +138,18 @@
   opacity: 0.6;
 }
 
+/* Disabled state overwrite hover/focus states */
+.mw-input-field--disabled:hover .mw-input-field__label,
+.mw-input-field--disabled:focus-within .mw-input-field__label {
+  opacity: 0.6;
+}
+
 .mw-input-field--readonly .mw-input-field__label {
   cursor: default;
 }
 
-.mw-input-field--invalid .mw-input-field__label {
-  /* Label styling when field has error - could add red accent if needed */
+.mw-input-field--invalid .mw-input-field__label .mw-p,
+.mw-input-field--invalid .mw-input-field__error .mw-p {
+  /* Label styling when field has error - could add red accent if needed  */
+  color: var(--mw-danger, #dc2626);
 }

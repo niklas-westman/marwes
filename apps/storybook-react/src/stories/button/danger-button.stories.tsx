@@ -12,7 +12,7 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    tone: {
+    variant: {
       control: "select",
       options: ["primary", "secondary", "text"],
     },
@@ -33,7 +33,11 @@ const meta = {
 export default meta
 
 export const DangerExample: StoryObj<typeof DangerButton> = {
-  render: () => <DangerButton iconLeft="arrowLeft">Delete Project</DangerButton>,
+  args: {
+    children: "Delete",
+    iconRight: "minusSquare",
+    error: true,
+  },
   parameters: {
     docs: {
       description: {

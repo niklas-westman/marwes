@@ -1,7 +1,6 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
 import { createButtonRecipe } from "@marwes-ui/core"
 import type * as React from "react"
-import { useRenderKitDebug } from "../hooks/use-renderkit-debug"
 import { useTheme } from "../provider/use-theme"
 import { Icon } from "./icon"
 
@@ -16,9 +15,6 @@ export type ButtonProps = ButtonOptions & {
 export function Button(props: ButtonProps) {
   const theme = useTheme()
   const kit = createButtonRecipe(theme, props)
-
-  // Debug hook for Storybook RenderKit addon
-  useRenderKitDebug(kit, "Button")
 
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className

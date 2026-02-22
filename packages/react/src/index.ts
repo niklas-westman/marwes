@@ -9,6 +9,7 @@ export type { Theme, ThemeOverrides, System, Preset } from "@marwes-ui/core"
 /* Button */
 export { Button } from "./components/button"
 export type { ButtonProps } from "./components/button"
+export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 export {
   DangerButton,
   CreateButton,
@@ -37,6 +38,7 @@ export type { InputProps } from "./components/input"
 /* Icon */
 export { Icon } from "./components/icon"
 export type { IconProps } from "./components/icon"
+export { IconName } from "@marwes-ui/core"
 
 /* Hooks */
 export { useRenderKitDebug } from "./hooks/use-renderkit-debug"
@@ -66,3 +68,21 @@ export type { CheckboxFieldProps } from "./components/checkbox/checkbox-field"
 /* InputField */
 export { InputField } from "./components/input-field"
 export type { InputFieldProps } from "./components/input-field"
+
+/* Field Variants */
+export {
+  SearchField,
+  PasswordField,
+  EmailField,
+  PhoneField,
+  URLField,
+  CurrencyField,
+} from "./components/field-variants"
+export type {
+  SearchFieldProps,
+  PasswordFieldProps,
+  EmailFieldProps,
+  PhoneFieldProps,
+  URLFieldProps,
+  CurrencyFieldProps,
+} from "./components/field-variants"

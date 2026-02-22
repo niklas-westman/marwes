@@ -1,0 +1,319 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Fields/Introduction" />
+
+# Field Components
+
+Marwes provides purpose-specific field components that encapsulate best practices
+and automatically set AI-friendly metadata. Each field variant is optimized for
+its specific use case with appropriate semantic HTML attributes.
+
+## Field Architecture
+
+```
+InputField (General molecule)
+     ↓
+Field Variants (Purpose-specific)
+  ├─ SearchField
+  ├─ PasswordField
+  ├─ EmailField
+  ├─ PhoneField
+  ├─ URLField
+  └─ CurrencyField
+```
+
+## Recommended: Purpose Field Components
+
+Use purpose-built field components that automatically set the correct `type`, `inputMode`, `autoComplete`, and other semantic attributes:
+
+```tsx
+import { 
+  SearchField, 
+  PasswordField, 
+  EmailField, 
+  PhoneField, 
+  URLField, 
+  CurrencyField 
+} from "@marwes-ui/react"
+
+// ✅ Search with automatic clear button
+<SearchField 
+  label="Search products"
+  input={{ value: query, onValueChange: setQuery }}
+/>
+
+// ✅ Password with show/hide toggle
+<PasswordField 
+  label="Password"
+  input={{ value: password, onValueChange: setPassword }}
+/>
+
+// ✅ Email with proper validation and keyboard
+<EmailField 
+  label="Email address"
+  input={{ value: email, onValueChange: setEmail }}
+/>
+
+// ✅ Phone with phone keyboard on mobile
+<PhoneField 
+  label="Phone number"
+  input={{ value: phone, onValueChange: setPhone }}
+/>
+
+// ✅ URL with URL keyboard and validation
+<URLField 
+  label="Website"
+  input={{ value: url, onValueChange: setUrl }}
+/>
+
+// ✅ Currency with decimal keyboard
+<CurrencyField 
+  label="Amount"
+  currency="USD"
+  input={{ value: amount, onValueChange: setAmount }}
+/>
+```
+
+### Why Purpose Field Components?
+
+1. **Automatic semantic attributes** - Correct `type`, `inputMode`, `autoComplete` set automatically
+2. **Built-in functionality** - Password toggle, search clear button, etc. included
+3. **Mobile-optimized** - Proper keyboard layouts on mobile devices
+4. **AI-friendly** - `data-purpose` attributes for AI parsing and understanding
+5. **Less boilerplate** - No need to remember which attributes to set
+6. **Self-documenting** - Code intent is clear from component name
+
+## Field Comparison
+
+| Field | Type | inputMode | autoComplete | Special Features |
+|-------|------|-----------|--------------|------------------|
+| **SearchField** | `search` | `search` | - | Clear button (X icon) when has value |
+| **PasswordField** | `password` | - | `current-password` or `new-password` | Show/hide toggle (eye icon) |
+| **EmailField** | `email` | `email` | `email` | Email validation, @ keyboard |
+| **PhoneField** | `tel` | `tel` | `tel` | Phone keyboard, accepts any format |
+| **URLField** | `url` | `url` | `url` | URL validation, .com keyboard |
+| **CurrencyField** | `text` | `decimal` | - | Decimal keyboard, currency label |
+
+## When to Use Each Field
+
+### SearchField
+- Search bars and filters
+- Product search
+- User/content lookup
+- Any search functionality
+
+**Example:**
+```tsx
+<SearchField
+  label="Search orders"
+  helperText="Search by order number, customer name, or product"
+  input={{ value: search, onValueChange: setSearch }}
+/>
+```
+
+### PasswordField
+- Login/signup forms
+- Password change forms
+- Security settings
+
+**Props:**
+- `autoComplete="current-password"` (default) - For login
+- `autoComplete="new-password"` - For signup/reset
+
+**Example:**
+```tsx
+<PasswordField
+  label="New Password"
+  autoComplete="new-password"
+  helperText="Must be at least 8 characters"
+  input={{ value: password, onValueChange: setPassword }}
+/>
+```
+
+### EmailField
+- Email address inputs
+- Contact forms
+- Newsletter signups
+- User registration
+
+**Example:**
+```tsx
+<EmailField
+  label="Email address"
+  helperText="We'll send a confirmation to this email"
+  input={{ value: email, onValueChange: setEmail }}
+/>
+```
+
+### PhoneField
+- Phone number inputs
+- Contact information
+- SMS verification setup
+
+**Note:** Formatting should be handled by parent component or library.
+
+**Example:**
+```tsx
+<PhoneField
+  label="Phone number"
+  helperText="Include country code for international numbers"
+  input={{ value: phone, onValueChange: setPhone }}
+/>
+```
+
+### URLField
+- Website/portfolio links
+- Social media profiles
+- Resource links
+- Any URL input
+
+**Example:**
+```tsx
+<URLField
+  label="Portfolio website"
+  helperText="Include https:// or http://"
+  input={{ value: url, onValueChange: setUrl }}
+/>
+```
+
+### CurrencyField
+- Prices and monetary amounts
+- Payment forms
+- Financial data entry
+- Donation amounts
+
+**Props:**
+- `currency` - ISO currency code (USD, EUR, GBP, etc.)
+
+**Note:** Uses `type="text"` for better control. Formatting should be handled by parent.
+
+**Example:**
+```tsx
+<CurrencyField
+  label="Product price"
+  currency="USD"
+  input={{ value: price, onValueChange: setPrice }}
+/>
+```
+
+## Advanced: General InputField
+
+For custom input types not covered by purpose fields, use the base `InputField`:
+
+```tsx
+import { InputField } from "@marwes-ui/react"
+
+<InputField
+  label="Custom field"
+  input={{
+    type: "text",
+    inputMode: "numeric",
+    pattern: "[0-9]*",
+    value: value,
+    onValueChange: setValue
+  }}
+/>
+```
+
+## Common Props
+
+All field components support the same base props:
+
+```tsx
+type BaseFieldProps = {
+  label: string                    // Required: Field label
+  helperText?: string             // Optional: Helper text below input
+  error?: string                  // Optional: Error message (marks invalid)
+  id?: string                     // Optional: Custom ID (auto-generated if omitted)
+  ariaDescribedBy?: string        // Optional: Additional aria-describedby IDs
+  input: {
+    value?: string                // Controlled value
+    defaultValue?: string         // Uncontrolled default value
+    onValueChange?: (value: string) => void
+    placeholder?: string
+    disabled?: boolean
+    readOnly?: boolean
+    required?: boolean
+    // ... and other input-specific props
+  }
+}
+```
+
+## Controlled vs Uncontrolled
+
+### Controlled (Recommended)
+```tsx
+const [email, setEmail] = useState("")
+
+<EmailField
+  label="Email"
+  input={{
+    value: email,
+    onValueChange: setEmail
+  }}
+/>
+```
+
+### Uncontrolled
+```tsx
+<EmailField
+  label="Email"
+  input={{
+    defaultValue: "user@example.com"
+  }}
+/>
+```
+
+## Validation Pattern
+
+```tsx
+const [email, setEmail] = useState("")
+const [error, setError] = useState<string>()
+
+const validateEmail = (value: string) => {
+  if (!value) {
+    setError("Email is required")
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    setError("Please enter a valid email address")
+  } else {
+    setError(undefined)
+  }
+}
+
+<EmailField
+  label="Email address"
+  error={error}
+  input={{
+    value: email,
+    onValueChange: (value) => {
+      setEmail(value)
+      validateEmail(value)
+    }
+  }}
+/>
+```
+
+## AI-Friendly Attributes
+
+All field variants automatically set `data-purpose` attributes for AI parsing:
+
+```html
+<div data-purpose="email">
+  <label>Email address</label>
+  <input type="email" inputmode="email" autocomplete="email" />
+</div>
+
+<div data-purpose="password">
+  <label>Password</label>
+  <input type="password" autocomplete="current-password" />
+  <button aria-label="Show password">👁</button>
+</div>
+
+<div data-purpose="currency" data-currency="USD">
+  <label>Amount</label>
+  <input type="text" inputmode="decimal" />
+  <p>Amount in USD</p>
+</div>
+```
+
+These attributes help AI tools understand field purpose and provide better assistance.
