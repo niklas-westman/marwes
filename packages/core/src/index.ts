@@ -46,6 +46,12 @@ export { createSystem, switchMode } from "./theme/create-system"
 // } from "./components/atoms/checkbox";
 
 export type { CssVars } from "./shared/css-vars"
+export {
+  mergeIdRefs,
+  buildInputFieldA11yIds,
+  buildCheckboxFieldA11yIds,
+  buildCurrencyHelperText,
+} from "./shared/field-helpers"
 
 export type {
   ButtonOptions,

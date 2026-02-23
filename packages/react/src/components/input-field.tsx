@@ -1,3 +1,4 @@
+import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
 import { Icon } from "./icon"
 import { Input } from "./input"
@@ -141,12 +142,16 @@ export function InputField(props: InputFieldProps): React.ReactElement {
   const hasHelperText = props.helperText !== undefined
   const hasError = props.error !== undefined
 
-  const helperTextId = hasHelperText ? `${id}-helper` : undefined
-  const errorId = hasError ? `${id}-error` : undefined
-
-  // Merge aria-describedby from multiple sources
-  const describedByParts = [props.ariaDescribedBy, helperTextId, errorId].filter(Boolean)
-  const mergedDescribedBy = describedByParts.length > 0 ? describedByParts.join(" ") : undefined
+  const {
+    helperTextId,
+    errorId,
+    describedBy: mergedDescribedBy,
+  } = buildInputFieldA11yIds({
+    id,
+    hasHelperText,
+    hasError,
+    externalDescribedBy: props.ariaDescribedBy,
+  })
 
   const disabled = props.input.disabled || false
   const readOnly = props.input.readOnly || false

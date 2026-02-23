@@ -1,0 +1,42 @@
+{
+  "name": "storybook-vue",
+  "private": true,
+  "version": "0.0.4",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -b --noEmit",
+    "test": "echo \"No tests in storybook-vue\"",
+    "build": "tsc -b --noEmit && storybook build",
+    "storybook": "storybook dev -p 6007",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@marwes-ui/core": "workspace:*",
+    "@marwes-ui/presets": "workspace:*",
+    "@marwes-ui/vue": "workspace:*",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.0",
+    "@storybook/addon-a11y": "^10.2.6",
+    "@storybook/addon-docs": "^10.2.6",
+    "@storybook/addon-themes": "^10.2.8",
+    "@storybook/addon-vitest": "^10.2.6",
+    "@storybook/manager-api": "^10.2.6",
+    "@storybook/vue3": "^10.2.6",
+    "@storybook/vue3-vite": "^10.2.6",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/coverage-v8": "^4.0.18",
+    "playwright": "^1.58.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.4",
+    "storybook": "^10.2.6",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vitest": "^4.0.18"
+  }
+}
