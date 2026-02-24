@@ -1,9 +1,10 @@
+import type { InputProps } from "@marwes-ui/vue"
 import { Input } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
   title: "Input/Input",
-  component: Input,
+  component: Input as unknown as object,
   parameters: {
     layout: "centered",
   },
@@ -17,10 +18,10 @@ const meta = {
   args: {
     placeholder: "Type something…",
   },
-} satisfies Meta<typeof Input>
+} satisfies Meta<InputProps>
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<InputProps>
 
 export const Default: Story = {}
 

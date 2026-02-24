@@ -21,24 +21,30 @@ Framework-agnostic • Static CSS • Type-safe • A11y-first
 <td width="50%">
 
 ### 🎯 **Framework-Agnostic Core**
+
 Pure TypeScript logic. No React dependencies in the core. Add Vue/Svelte adapters in minutes.
 
 ### ♿ **Accessibility First**
+
 A11y isn't bolted on—it lives in dedicated logic files. ARIA, focus management, keyboard nav all testable.
 
 ### 🚀 **Zero Runtime CSS**
+
 No CSS-in-JS overhead. Static CSS with CSS variables. Ship less JavaScript, load faster.
 
 </td>
 <td width="50%">
 
 ### 🎨 **Beautiful Defaults**
+
 Ships with firstEdition preset—modern typography, semantic colors, WCAG AA contrast ratios.
 
 ### 🔧 **Simple Theme API**
+
 Override what matters. No bloated config objects.
 
 ### 📐 **Figma Integration**
+
 Design tokens map to theme keys. Component specs reference Figma nodes. Design-to-code workflow included.
 
 </td>
@@ -54,16 +60,18 @@ pnpm add @marwes-ui/react @marwes-ui/presets
 ```
 
 ```tsx
-import { MarwesProvider, Button } from '@marwes-ui/react'
-import { firstEdition } from '@marwes-ui/presets'
-import '@marwes-ui/presets/firstEdition/styles.css'
+import { MarwesProvider, Button } from "@marwes-ui/react";
+import { firstEdition } from "@marwes-ui/presets";
+import "@marwes-ui/presets/firstEdition/styles.css";
 
 function App() {
   return (
     <MarwesProvider preset={firstEdition}>
-      <Button variant="solid" tone="primary">Click me</Button>
+      <Button variant="solid" tone="primary">
+        Click me
+      </Button>
     </MarwesProvider>
-  )
+  );
 }
 ```
 
@@ -89,6 +97,7 @@ What makes Marwes different? **Complete separation of concerns:**
 ```
 
 **Why this matters:**
+
 - Core has **zero runtime dependencies** (not even React types)
 - Adapters are **community-contributable** (~100 lines each)
 - CSS ships **optimized and static** (no JS bundle bloat)
@@ -99,6 +108,7 @@ What makes Marwes different? **Complete separation of concerns:**
 ## 🧩 Components
 
 **Available now:**
+
 - Button (solid, outline, text variants)
 - Input & InputField
 - Checkbox & CheckboxField
@@ -115,16 +125,16 @@ What makes Marwes different? **Complete separation of concerns:**
 Override theme values with a simple, typed API:
 
 ```tsx
-<MarwesProvider 
+<MarwesProvider
   preset={firstEdition}
   theme={{
-    color: { 
+    color: {
       primary: "#5B8CFF",
-      secondary: "#FF6B9D" 
+      secondary: "#FF6B9D",
     },
-    ui: { 
-      radius: 12
-    }
+    ui: {
+      radius: 12,
+    },
   }}
 >
   <App />
@@ -137,14 +147,14 @@ Override theme values with a simple, typed API:
 
 ## 📚 Documentation
 
-| Guide | Description |
-|-------|-------------|
-| [Project Overview](docs/PROJECT.md) | Purpose, goals, philosophy |
-| [Architecture](docs/ARCHITECTURE.md) | How the three layers work |
-| [Engineering](docs/ENGINEERING.md) | Coding conventions |
-| [Figma Workflow](docs/FIGMA_TO_MARWES.md) | Design-to-code sync |
-| [Specification](SPEC.md) | Full product spec |
-| [Roadmap](docs/ROADMAP.md) | Feature planning |
+| Guide                                     | Description                |
+| ----------------------------------------- | -------------------------- |
+| [Project Overview](docs/PROJECT.md)       | Purpose, goals, philosophy |
+| [Architecture](docs/ARCHITECTURE.md)      | How the three layers work  |
+| [Engineering](docs/ENGINEERING.md)        | Coding conventions         |
+| [Figma Workflow](docs/FIGMA_TO_MARWES.md) | Design-to-code sync        |
+| [Specification](SPEC.md)                  | Full product spec          |
+| [Roadmap](docs/ROADMAP.md)                | Feature planning           |
 
 ---
 
@@ -168,6 +178,7 @@ pnpm test
 ```
 
 **Repo structure:**
+
 - `packages/core` — Framework-agnostic TypeScript logic
 - `packages/presets` — Design tokens and static CSS
 - `packages/react` — React adapter
@@ -178,11 +189,11 @@ pnpm test
 
 ## 📦 Packages
 
-| Package | Description |
-|---------|-------------|
-| `@marwes-ui/core` | Framework-agnostic logic |
-| `@marwes-ui/presets` | Static CSS presets |
-| `@marwes-ui/react` | React adapter |
+| Package              | Description              |
+| -------------------- | ------------------------ |
+| `@marwes-ui/core`    | Framework-agnostic logic |
+| `@marwes-ui/presets` | Static CSS presets       |
+| `@marwes-ui/react`   | React adapter            |
 
 ---
 

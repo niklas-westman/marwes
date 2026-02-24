@@ -1,8 +1,12 @@
 import { Icon } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
-// Import from core (adjust if you export these elsewhere)
-import { iconNames } from "@marwes-ui/core"
+import {
+  storybookIconGalleryArgTypes,
+  storybookIconGalleryDefaults,
+  storybookIconNames,
+  storybookLayout,
+} from "@marwes-ui/core"
 import type { IconName } from "@marwes-ui/core"
 
 type Args = {
@@ -14,29 +18,9 @@ type Args = {
 
 const meta: Meta<Args> = {
   title: "Icons/Gallery",
-  parameters: {
-    layout: "fullscreen",
-  },
-  args: {
-    size: "sm",
-    strokeWidth: "md",
-    search: "",
-    columns: 8,
-  },
-  argTypes: {
-    size: {
-      control: "inline-radio",
-      options: ["xs", "sm", "md", "lg"],
-    },
-    strokeWidth: {
-      control: "inline-radio",
-      options: ["xs", "sm", "md", "lg"],
-    },
-    search: { control: "text" },
-    columns: {
-      control: { type: "range", min: 4, max: 14, step: 1 },
-    },
-  },
+  parameters: storybookLayout.fullscreen,
+  args: storybookIconGalleryDefaults,
+  argTypes: storybookIconGalleryArgTypes,
 }
 
 export default meta
@@ -47,7 +31,7 @@ export const Gallery: Story = {
   render: (args) => {
     const q = args.search.trim().toLowerCase()
 
-    const list = (iconNames as IconName[])
+    const list = (storybookIconNames as IconName[])
       .filter((name) => (q ? String(name).toLowerCase().includes(q) : true))
       .sort((a, b) => String(a).localeCompare(String(b)))
 
@@ -59,7 +43,7 @@ export const Gallery: Story = {
         }}
       >
         <div style={{ marginBottom: 12, fontSize: 12, opacity: 0.7 }}>
-          Showing {list.length} of {(iconNames as IconName[]).length}
+          Showing {list.length} of {(storybookIconNames as IconName[]).length}
         </div>
 
         <div

@@ -19,12 +19,17 @@ export type IconProps = {
   decorative?: boolean
 }
 
-export const Icon = defineComponent({
-  name: "MarwesIcon",
-  inheritAttrs: false,
-  props: ["name", "size", "strokeWidth", "className", "ariaLabel", "decorative"],
-  setup(rawProps) {
-    const props = rawProps as unknown as IconProps
+const iconPropKeys = [
+  "name",
+  "size",
+  "strokeWidth",
+  "className",
+  "ariaLabel",
+  "decorative",
+] as const
+
+export const Icon = defineComponent(
+  (props: IconProps) => {
     const attrs = useAttrs()
     const theme = useTheme()
 
@@ -47,9 +52,9 @@ export const Icon = defineComponent({
           viewBox: iconDefinition.viewBox,
           fill: "none",
           stroke: "currentColor",
-          strokeWidth,
-          strokeLinecap: "round",
-          strokeLinejoin: "round",
+          "stroke-width": strokeWidth,
+          "stroke-linecap": "round",
+          "stroke-linejoin": "round",
           class: [props.className, attrs.class],
           "aria-hidden": isDecorative ? "true" : undefined,
           "aria-label": ariaLabel,
@@ -60,4 +65,9 @@ export const Icon = defineComponent({
       )
     }
   },
-})
+  {
+    name: "MarwesIcon",
+    inheritAttrs: false,
+    props: [...iconPropKeys],
+  },
+)

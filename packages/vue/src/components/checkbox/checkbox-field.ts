@@ -15,12 +15,18 @@ export type CheckboxFieldProps = {
   modelValue?: boolean
 }
 
-export const CheckboxField = defineComponent({
-  name: "MarwesCheckboxField",
-  props: ["id", "label", "description", "error", "checkbox", "ariaDescribedBy", "modelValue"],
-  emits: ["update:modelValue", "checked-change"],
-  setup(rawProps, { slots, emit }) {
-    const props = rawProps as unknown as CheckboxFieldProps
+const checkboxFieldPropKeys = [
+  "id",
+  "label",
+  "description",
+  "error",
+  "checkbox",
+  "ariaDescribedBy",
+  "modelValue",
+] as const
+
+export const CheckboxField = defineComponent(
+  (props: CheckboxFieldProps, { slots, emit }) => {
     const localCheckboxId = createLocalId("mw-checkbox")
     const id = computed(() => props.id ?? localCheckboxId)
     const sourceCheckbox = computed<CheckboxProps>(() => props.checkbox ?? {})
@@ -104,4 +110,9 @@ export const CheckboxField = defineComponent({
           : null,
       ])
   },
-})
+  {
+    name: "MarwesCheckboxField",
+    props: [...checkboxFieldPropKeys],
+    emits: ["update:modelValue", "checked-change"],
+  },
+)

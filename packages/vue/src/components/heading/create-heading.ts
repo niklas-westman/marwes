@@ -14,13 +14,15 @@ type HeadingBaseProps = Omit<HeadingOptions, "level"> & {
   className?: string
 }
 
-export function createHeadingComponent(level: 1 | 2 | 3, tagName: "h1" | "h2" | "h3") {
-  return defineComponent({
-    name: `Marwes${tagName.toUpperCase()}`,
-    inheritAttrs: false,
-    props: ["size", "id", "ariaLabel", "className"],
-    setup(rawProps, { slots }) {
-      const props = rawProps as unknown as HeadingBaseProps
+export type HeadingLevel = 1 | 2 | 3
+type HeadingTag = `h${HeadingLevel}`
+
+const headingPropKeys = ["size", "id", "ariaLabel", "className"] as const
+
+export function createHeadingComponent<L extends HeadingLevel>(level: L) {
+  const tagName = `h${level}` as HeadingTag
+  return defineComponent(
+    (props: HeadingBaseProps, { slots }) => {
       const attrs = useAttrs()
       const theme = useTheme()
       const kit = computed(() => headingRecipe({ ...props, level }, theme.value))
@@ -44,7 +46,13 @@ export function createHeadingComponent(level: 1 | 2 | 3, tagName: "h1" | "h2" | 
         )
       }
     },
-  })
+    {
+      name: `Marwes${tagName.toUpperCase()}`,
+      inheritAttrs: false,
+      props: [...headingPropKeys],
+    },
+  )
 }
 
 export type { HeadingBaseProps }
+export type HeadingProps = HeadingBaseProps

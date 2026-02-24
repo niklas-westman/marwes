@@ -1,10 +1,10 @@
 import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
-import { createLocalId } from "../internal/id"
-import { mergeClassNames } from "../internal/render-utils"
-import { Icon } from "./icon"
+import { createLocalId } from "../../internal/id"
+import { mergeClassNames } from "../../internal/render-utils"
+import { Icon } from "../icon"
+import { Paragraph } from "../paragraph"
 import { Input, type InputProps } from "./input"
-import { Paragraph } from "./paragraph"
 
 export type InputFieldProps = {
   id?: string
@@ -16,12 +16,18 @@ export type InputFieldProps = {
   modelValue?: string
 }
 
-export const InputField = defineComponent({
-  name: "MarwesInputField",
-  props: ["id", "label", "helperText", "error", "input", "ariaDescribedBy", "modelValue"],
-  emits: ["update:modelValue", "value-change"],
-  setup(rawProps, { slots, emit }) {
-    const props = rawProps as unknown as InputFieldProps
+const inputFieldPropKeys = [
+  "id",
+  "label",
+  "helperText",
+  "error",
+  "input",
+  "ariaDescribedBy",
+  "modelValue",
+] as const
+
+export const InputField = defineComponent(
+  (props: InputFieldProps, { slots, emit }) => {
     const localInputId = createLocalId("mw-input")
     const id = computed(() => props.id ?? localInputId)
     const sourceInput = computed<InputProps>(() => props.input ?? {})
@@ -191,4 +197,9 @@ export const InputField = defineComponent({
           : null,
       ])
   },
-})
+  {
+    name: "MarwesInputField",
+    props: [...inputFieldPropKeys],
+    emits: ["update:modelValue", "value-change"],
+  },
+)

@@ -11,31 +11,28 @@ export type CheckboxProps = CoreCheckboxProps & {
   className?: string
 }
 
-export const Checkbox = defineComponent({
-  name: "MarwesCheckbox",
-  inheritAttrs: false,
-  props: [
-    "size",
-    "checked",
-    "modelValue",
-    "defaultChecked",
-    "indeterminate",
-    "disabled",
-    "required",
-    "invalid",
-    "id",
-    "name",
-    "value",
-    "ariaLabel",
-    "ariaLabelledBy",
-    "ariaDescribedBy",
-    "onCheckedChange",
-    "onChange",
-    "className",
-  ],
-  emits: ["update:modelValue", "checked-change", "change"],
-  setup(rawProps, { emit }) {
-    const props = rawProps as unknown as CheckboxProps
+const checkboxPropKeys = [
+  "size",
+  "checked",
+  "modelValue",
+  "defaultChecked",
+  "indeterminate",
+  "disabled",
+  "required",
+  "invalid",
+  "id",
+  "name",
+  "value",
+  "ariaLabel",
+  "ariaLabelledBy",
+  "ariaDescribedBy",
+  "onCheckedChange",
+  "onChange",
+  "className",
+] as const
+
+export const Checkbox = defineComponent(
+  (props: CheckboxProps, { emit }) => {
     const attrs = useAttrs()
     const theme = useTheme()
     const inputRef = ref<HTMLInputElement | null>(null)
@@ -47,7 +44,8 @@ export const Checkbox = defineComponent({
       if (checked !== undefined) {
         nextRecipeInput.checked = checked
       } else {
-        nextRecipeInput.checked = undefined
+        // biome-ignore lint/performance/noDelete: Required for exactOptionalPropertyTypes compatibility
+        delete nextRecipeInput.checked
       }
 
       return nextRecipeInput
@@ -101,4 +99,10 @@ export const Checkbox = defineComponent({
       })
     }
   },
-})
+  {
+    name: "MarwesCheckbox",
+    inheritAttrs: false,
+    props: [...checkboxPropKeys],
+    emits: ["update:modelValue", "checked-change", "change"],
+  },
+)

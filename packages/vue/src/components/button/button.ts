@@ -6,45 +6,42 @@ import {
   mergeClassNames,
   mergeStyles,
   omitAttrs,
-} from "../internal/render-utils"
-import { useTheme } from "../provider/use-theme"
-import { Icon } from "./icon"
+} from "../../internal/render-utils"
+import { useTheme } from "../../provider/use-theme"
+import { Icon } from "../icon"
 
 export type ButtonProps = ButtonOptions & {
   onClick?: (event: MouseEvent) => void
   className?: string
 }
 
-export const Button = defineComponent({
-  name: "MarwesButton",
-  inheritAttrs: false,
-  props: [
-    "as",
-    "href",
-    "size",
-    "variant",
-    "disabled",
-    "loading",
-    "error",
-    "toggle",
-    "pressed",
-    "ariaLabel",
-    "hasVisibleText",
-    "ariaExpanded",
-    "ariaControls",
-    "iconLeft",
-    "iconRight",
-    "iconOnly",
-    "action",
-    "tooltip",
-    "confirmation",
-    "dataAttributes",
-    "onClick",
-    "className",
-  ],
-  emits: ["click"],
-  setup(rawProps, { slots, emit }) {
-    const props = rawProps as unknown as ButtonProps
+const buttonPropKeys = [
+  "as",
+  "href",
+  "size",
+  "variant",
+  "disabled",
+  "loading",
+  "error",
+  "toggle",
+  "pressed",
+  "ariaLabel",
+  "hasVisibleText",
+  "ariaExpanded",
+  "ariaControls",
+  "iconLeft",
+  "iconRight",
+  "iconOnly",
+  "action",
+  "tooltip",
+  "confirmation",
+  "dataAttributes",
+  "onClick",
+  "className",
+] as const
+
+export const Button = defineComponent(
+  (props: ButtonProps, { slots, emit }) => {
     const attrs = useAttrs()
     const theme = useTheme()
 
@@ -102,7 +99,7 @@ export const Button = defineComponent({
           ...renderKit.dataAttributes,
           href: renderKit.a11y.href,
           role: renderKit.a11y.role,
-          tabIndex: renderKit.a11y.tabIndex,
+          tabindex: renderKit.a11y.tabIndex,
           "aria-label": renderKit.a11y.ariaLabel,
           "aria-busy": renderKit.a11y.ariaBusy,
           "aria-disabled": renderKit.a11y.ariaDisabled,
@@ -125,4 +122,10 @@ export const Button = defineComponent({
       )
     }
   },
-})
+  {
+    name: "MarwesButton",
+    inheritAttrs: false,
+    props: [...buttonPropKeys],
+    emits: ["click"],
+  },
+)

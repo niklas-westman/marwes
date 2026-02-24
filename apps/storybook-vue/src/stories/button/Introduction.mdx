@@ -1,0 +1,180 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  buttonActionSemanticPurposes,
+  buttonVariantVisualStyles,
+  buttonWhySemanticComponents,
+} from "@marwes-ui/core"
+
+<Meta title="Buttons/Introduction" />
+
+# Button Components
+
+Marwes provides a powerful button system with two complementary approaches:
+**semantic components** for common patterns and **raw props** for advanced control.
+
+## Recommended: Semantic Components
+
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```vue
+<script setup lang="ts">
+import {
+  CancelButton,
+  SubmitButton,
+  CreateButton,
+  DangerButton,
+  LinkButton,
+} from "@marwes-ui/vue"
+</script>
+
+<template>
+  <!-- ✅ Preferred - auto-sets action="cancel", variant="secondary" -->
+  <CancelButton @click="handleCancel">Cancel</CancelButton>
+
+  <!-- ✅ Preferred - auto-sets action="submit", uses form submission -->
+  <SubmitButton>Save Changes</SubmitButton>
+
+  <!-- ✅ Preferred - auto-sets action="create" -->
+  <CreateButton @click="handleCreate">New Project</CreateButton>
+
+  <!-- ✅ Preferred - auto-sets action="delete", data-destructive="true" -->
+  <DangerButton @click="handleDelete">Delete</DangerButton>
+
+  <!-- ✅ Preferred - auto-sets action="navigate", renders as anchor -->
+  <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
+</template>
+```
+
+### Why Semantic Components?
+
+<ol>
+  {buttonWhySemanticComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+## Advanced: Raw Props
+
+For dynamic or custom scenarios, use the base `Button` with explicit props:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { Button, ButtonVariant, ButtonAction, ButtonSize } from "@marwes-ui/vue"
+
+const isEditing = ref(false)
+</script>
+
+<template>
+  <!-- Dynamic action based on state -->
+  <Button
+    :variant="ButtonVariant.primary"
+    :size="ButtonSize.md"
+    :action="isEditing ? ButtonAction.edit : ButtonAction.create"
+  >
+    {{ isEditing ? "Update" : "Create" }}
+  </Button>
+
+  <!-- Custom action not covered by semantic components -->
+  <Button
+    :variant="ButtonVariant.secondary"
+    :action="ButtonAction.reset"
+  >
+    Reset Form
+  </Button>
+</template>
+```
+
+### Type-Safe Enums
+
+All button enums are exported for IDE autocomplete:
+
+```ts
+import { ButtonVariant, ButtonSize, ButtonAction } from "@marwes-ui/vue"
+
+ButtonVariant.primary   // "primary"
+ButtonVariant.secondary // "secondary"
+ButtonVariant.text      // "text"
+
+ButtonSize.xs  // "xs"
+ButtonSize.sm  // "sm"
+ButtonSize.md  // "md"
+ButtonSize.lg  // "lg"
+
+ButtonAction.submit   // "submit"
+ButtonAction.cancel   // "cancel"
+ButtonAction.create   // "create"
+ButtonAction.delete   // "delete"
+ButtonAction.navigate // "navigate"
+ButtonAction.edit     // "edit"
+ButtonAction.reset    // "reset"
+ButtonAction.button   // "button"
+```
+
+## Variant vs Action
+
+### `variant` - Visual Style
+
+Controls how the button **looks**. Choose based on visual hierarchy:
+
+<ul>
+  {buttonVariantVisualStyles.map((item) => (
+    <li key={item.label}>
+      <strong>
+        <code>{item.label}</code>
+      </strong>{" "}
+      - {item.text}
+    </li>
+  ))}
+</ul>
+
+### `action` - Semantic Purpose
+
+Controls what the button **does** (AI-readable metadata):
+
+<ul>
+  {buttonActionSemanticPurposes.map((item) => (
+    <li key={item.label}>
+      <strong>
+        <code>{item.label}</code>
+      </strong>{" "}
+      - {item.text}
+    </li>
+  ))}
+</ul>
+
+> **Note:** These are independent. A `DangerButton` uses `variant="primary"` (filled) with error styling, while `CancelButton` uses `variant="secondary"` (outlined).
+
+---
+
+## Component Reference
+
+### General Buttons
+
+**`PrimaryButton`** - General primary actions  
+Sets: `variant="primary"`
+
+**`SecondaryButton`** - General secondary actions  
+Sets: `variant="secondary"`
+
+**`TextButton`** - Subtle/inline actions  
+Sets: `variant="text"`
+
+### Purpose Buttons (AI-Friendly)
+
+**`SubmitButton`** - Form submissions  
+Sets: `action="submit"`
+
+**`CancelButton`** - Cancel/dismiss actions  
+Sets: `action="cancel"`, `variant="secondary"`
+
+**`CreateButton`** - Creating new items  
+Sets: `action="create"`
+
+**`DangerButton`** - Destructive actions  
+Sets: `action="delete"`, error styling, `data-destructive="true"`
+
+**`LinkButton`** - Navigation links  
+Sets: `action="navigate"`, renders as `<a>` element

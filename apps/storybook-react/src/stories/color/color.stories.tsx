@@ -1,3 +1,4 @@
+import { storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
 import { H2, H3, Paragraph, useTheme } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { ColorSwatch } from "./ColorSwatch"
@@ -6,11 +7,10 @@ const meta = {
   title: "Design System/Colors",
   tags: ["autodocs"],
   parameters: {
-    layout: "padded",
+    ...storybookLayout.padded,
     docs: {
       description: {
-        component:
-          "Complete color palette from Figma design system. All colors are semantic tokens that map to CSS variables for theming.",
+        component: storybookDocsDescription.colors,
       },
     },
   },

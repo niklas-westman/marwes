@@ -14,12 +14,10 @@ export type ParagraphProps = ParagraphOptions & {
   className?: string
 }
 
-export const Paragraph = defineComponent({
-  name: "MarwesParagraph",
-  inheritAttrs: false,
-  props: ["size", "id", "className"],
-  setup(rawProps, { slots }) {
-    const props = rawProps as unknown as ParagraphProps
+const paragraphPropKeys = ["size", "id", "className"] as const
+
+export const Paragraph = defineComponent(
+  (props: ParagraphProps, { slots }) => {
     const attrs = useAttrs()
     const theme = useTheme()
     const kit = computed(() => paragraphRecipe(props, theme.value))
@@ -42,4 +40,9 @@ export const Paragraph = defineComponent({
       )
     }
   },
-})
+  {
+    name: "MarwesParagraph",
+    inheritAttrs: false,
+    props: [...paragraphPropKeys],
+  },
+)

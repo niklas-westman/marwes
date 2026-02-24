@@ -1,9 +1,9 @@
 import type { CssVars, InputOptions } from "@marwes-ui/core"
 import { createInputRecipe } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
-import { useRenderKitDebug } from "../hooks/use-renderkit-debug"
-import { mergeClassNames, mergeStyles, omitAttrs } from "../internal/render-utils"
-import { useTheme } from "../provider/use-theme"
+import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
+import { useTheme } from "../../provider/use-theme"
 
 export type InputProps = InputOptions & {
   modelValue?: string
@@ -11,32 +11,29 @@ export type InputProps = InputOptions & {
   className?: string
 }
 
-export const Input = defineComponent({
-  name: "MarwesInput",
-  inheritAttrs: false,
-  props: [
-    "id",
-    "name",
-    "value",
-    "modelValue",
-    "defaultValue",
-    "placeholder",
-    "disabled",
-    "readOnly",
-    "required",
-    "inputMode",
-    "type",
-    "autoComplete",
-    "tone",
-    "invalid",
-    "describedBy",
-    "ariaLabel",
-    "onValueChange",
-    "className",
-  ],
-  emits: ["update:modelValue", "value-change", "change"],
-  setup(rawProps, { emit }) {
-    const props = rawProps as unknown as InputProps
+const inputPropKeys = [
+  "id",
+  "name",
+  "value",
+  "modelValue",
+  "defaultValue",
+  "placeholder",
+  "disabled",
+  "readOnly",
+  "required",
+  "inputMode",
+  "type",
+  "autoComplete",
+  "tone",
+  "invalid",
+  "describedBy",
+  "ariaLabel",
+  "onValueChange",
+  "className",
+] as const
+
+export const Input = defineComponent(
+  (props: InputProps, { emit }) => {
     const attrs = useAttrs()
     const theme = useTheme()
     const kit = computed(() => createInputRecipe(theme.value, props))
@@ -79,4 +76,10 @@ export const Input = defineComponent({
       })
     }
   },
-})
+  {
+    name: "MarwesInput",
+    inheritAttrs: false,
+    props: [...inputPropKeys],
+    emits: ["update:modelValue", "value-change", "change"],
+  },
+)
