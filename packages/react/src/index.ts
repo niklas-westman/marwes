@@ -35,6 +35,10 @@ export type {
 export { Input } from "./components/input"
 export type { InputProps } from "./components/input"
 
+/* Dropdown */
+export { Dropdown } from "./components/dropdown"
+export type { DropdownProps, DropdownOption } from "./components/dropdown"
+
 /* Icon */
 export { Icon } from "./components/icon"
 export type { IconProps } from "./components/icon"

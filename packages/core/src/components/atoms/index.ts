@@ -1,6 +1,7 @@
 export * from "./button"
 export * from "./checkbox"
 export * from "./divider"
+export * from "./dropdown"
 export * from "./icon"
 export * from "./input"
 export * from "./heading"
@@ -27,3 +28,9 @@ export type {
   ParagraphRenderKit,
   ParagraphSize,
 } from "./paragraph"
+export type {
+  DropdownOptions,
+  DropdownRenderKit,
+  DropdownTone,
+  DropdownSize,
+} from "./dropdown"
