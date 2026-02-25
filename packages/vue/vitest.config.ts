@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url"
 import { defineConfig } from "vitest/config"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const enableAllure = process.env.MARWES_ALLURE === "1"
 
 export default defineConfig({
   resolve: {
@@ -24,8 +25,21 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    setupFiles: ["./vitest.setup.ts"],
+    setupFiles: enableAllure ? ["allure-vitest/setup", "./vitest.setup.ts"] : ["./vitest.setup.ts"],
     include: ["src/**/__tests__/*.test.ts"],
     restoreMocks: true,
+    ...(enableAllure
+      ? {
+          reporters: [
+            "default",
+            [
+              "allure-vitest/reporter",
+              {
+                resultsDir: "../../.allure/results",
+              },
+            ],
+          ],
+        }
+      : {}),
   },
 })
