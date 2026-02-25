@@ -24,6 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Validate GitHub Actions workflow files (syntax + common config issues)
+      - name: actionlint
+        uses: rhysd/actionlint@v1
+
       # Install pnpm package manager (reads version from packageManager field in package.json)
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
