@@ -1,8 +1,8 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
 import { createButtonRecipe } from "@marwes-ui/core"
 import type * as React from "react"
-import { useTheme } from "../provider/use-theme"
-import { Icon } from "./icon"
+import { useTheme } from "../../provider/use-theme"
+import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
 

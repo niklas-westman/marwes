@@ -19,7 +19,7 @@ export {
   PrimaryButton,
   SecondaryButton,
   TextButton,
-} from "./components/button-variants"
+} from "./components/button"
 export type {
   DangerButtonProps,
   CreateButtonProps,
@@ -29,7 +29,7 @@ export type {
   PrimaryButtonProps,
   SecondaryButtonProps,
   TextButtonProps,
-} from "./components/button-variants"
+} from "./components/button"
 
 /* Input */
 export { Input } from "./components/input"

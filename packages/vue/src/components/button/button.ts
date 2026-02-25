@@ -84,7 +84,6 @@ export const Button = defineComponent(
             class: className,
             style,
             onClick: (event: MouseEvent) => {
-              props.onClick?.(event)
               emit("click", event)
             },
           },
@@ -114,7 +113,6 @@ export const Button = defineComponent(
               event.preventDefault()
               return
             }
-            props.onClick?.(event)
             emit("click", event)
           },
         },

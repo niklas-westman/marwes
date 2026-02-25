@@ -25,14 +25,18 @@ const checkboxFieldPropKeys = [
   "modelValue",
 ] as const
 
+function hasTextContent(value: string | undefined): boolean {
+  return value !== undefined && value.trim().length > 0
+}
+
 export const CheckboxField = defineComponent(
   (props: CheckboxFieldProps, { slots, emit }) => {
     const localCheckboxId = createLocalId("mw-checkbox")
     const id = computed(() => props.id ?? localCheckboxId)
     const sourceCheckbox = computed<CheckboxProps>(() => props.checkbox ?? {})
 
-    const hasDescription = computed(() => props.description !== undefined)
-    const hasError = computed(() => props.error !== undefined)
+    const hasDescription = computed(() => hasTextContent(props.description))
+    const hasError = computed(() => hasTextContent(props.error))
     const ids = computed(() =>
       buildCheckboxFieldA11yIds({
         id: id.value,

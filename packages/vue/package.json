@@ -20,7 +20,8 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"No tests in @marwes-ui/vue\"",
+    "test:typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
     "clean": "rimraf dist",
     "lint": "biome lint .",
     "format": "biome format --write ."
@@ -33,9 +34,11 @@
     "vue": ">=3.4"
   },
   "devDependencies": {
+    "@testing-library/vue": "^8.1.0",
     "rimraf": "^6.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",
+    "vitest": "^4.0.18",
     "vue": "^3.5.0"
   }
 }

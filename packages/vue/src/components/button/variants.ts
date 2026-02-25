@@ -36,13 +36,13 @@ export const DangerButton = defineComponent({
   name: "MarwesDangerButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as DangerButtonProps
+      const props = rawProps as unknown as DangerButtonProps
       return h(
         Button,
         {
+          ...attrs,
           ...props,
           variant: ButtonVariant.primary,
           action: ButtonAction.delete,
@@ -66,13 +66,13 @@ export const CreateButton = defineComponent({
   name: "MarwesCreateButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as CreateButtonProps
+      const props = rawProps as unknown as CreateButtonProps
       return h(
         Button,
         {
+          ...attrs,
           ...props,
           action: "create",
           variant: props.variant ?? "primary",
@@ -93,13 +93,13 @@ export const SubmitButton = defineComponent({
   name: "MarwesSubmitButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as SubmitButtonProps
+      const props = rawProps as unknown as SubmitButtonProps
       return h(
         Button,
         {
+          ...attrs,
           ...props,
           as: "button",
           action: "submit",
@@ -120,13 +120,13 @@ export const CancelButton = defineComponent({
   name: "MarwesCancelButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as CancelButtonProps
+      const props = rawProps as unknown as CancelButtonProps
       return h(
         Button,
         {
+          ...attrs,
           ...props,
           action: "cancel",
           variant: props.variant ?? "secondary",
@@ -149,13 +149,13 @@ export const LinkButton = defineComponent({
   name: "MarwesLinkButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as LinkButtonProps
+      const props = rawProps as unknown as LinkButtonProps
       return h(
         Button,
         {
+          ...attrs,
           ...props,
           as: "a",
           action: "navigate",
@@ -176,11 +176,10 @@ export const PrimaryButton = defineComponent({
   name: "MarwesPrimaryButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as PrimaryButtonProps
-      return h(Button, { ...props, variant: "primary", as: "button" }, slots)
+      const props = rawProps as unknown as PrimaryButtonProps
+      return h(Button, { ...attrs, ...props, variant: "primary", as: "button" }, slots)
     }
   },
 })
@@ -191,11 +190,10 @@ export const SecondaryButton = defineComponent({
   name: "MarwesSecondaryButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as SecondaryButtonProps
-      return h(Button, { ...props, variant: "secondary", as: "button" }, slots)
+      const props = rawProps as unknown as SecondaryButtonProps
+      return h(Button, { ...attrs, ...props, variant: "secondary", as: "button" }, slots)
     }
   },
 })
@@ -206,11 +204,10 @@ export const TextButton = defineComponent({
   name: "MarwesTextButton",
   inheritAttrs: false,
   props: [...buttonPropKeys],
-  emits: ["click"],
-  setup(_, { attrs, slots }) {
+  setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = attrs as unknown as TextButtonProps
-      return h(Button, { ...props, variant: "text", as: "button" }, slots)
+      const props = rawProps as unknown as TextButtonProps
+      return h(Button, { ...attrs, ...props, variant: "text", as: "button" }, slots)
     }
   },
 })

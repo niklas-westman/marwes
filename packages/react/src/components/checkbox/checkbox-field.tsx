@@ -24,6 +24,18 @@ function cx(...parts: Array<string | false>): string {
   return parts.filter(Boolean).join(" ")
 }
 
+function hasContent(value: React.ReactNode | undefined): boolean {
+  if (value === undefined || value === null || value === false) {
+    return false
+  }
+
+  if (typeof value === "string") {
+    return value.trim().length > 0
+  }
+
+  return true
+}
+
 /**
  * CheckboxField (Molecule) — Recommended
  *
@@ -118,8 +130,8 @@ export function CheckboxField(props: CheckboxFieldProps): React.ReactElement {
   const reactId = React.useId()
   const id = props.id ?? `mw-checkbox-${reactId}`
 
-  const hasDescription = props.description !== undefined
-  const hasError = props.error !== undefined
+  const hasDescription = hasContent(props.description)
+  const hasError = hasContent(props.error)
 
   const {
     descriptionId: descId,

@@ -20,7 +20,8 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"No tests in @marwes-ui/react\"",
+    "test:typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
     "clean": "rimraf dist",
     "lint": "biome lint .",
     "format": "biome format --write ."
@@ -34,12 +35,14 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "rimraf": "^6.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "vitest": "^4.0.18"
   }
 }

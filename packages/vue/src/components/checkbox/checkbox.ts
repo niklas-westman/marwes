@@ -86,8 +86,7 @@ export const Checkbox = defineComponent(
         "aria-describedby": a11y.ariaDescribedBy,
         "aria-checked": a11y.ariaChecked,
         "aria-invalid": a11y.ariaInvalid === true ? true : undefined,
-        checked: renderKit.checked,
-        defaultChecked: renderKit.checked === undefined ? renderKit.defaultChecked : undefined,
+        checked: renderKit.checked ?? renderKit.defaultChecked,
         onChange: (event: Event) => {
           props.onChange?.(event)
           const target = event.target as HTMLInputElement

@@ -29,6 +29,10 @@ function cx(...parts: Array<string | false>): string {
   return parts.filter(Boolean).join(" ")
 }
 
+function hasTextContent(value: string | undefined): boolean {
+  return value !== undefined && value.trim().length > 0
+}
+
 /**
  * InputField (Molecule) — Recommended
  *
@@ -139,8 +143,8 @@ export function InputField(props: InputFieldProps): React.ReactElement {
       ? String(props.input.value).length > 0
       : String(searchValue).length > 0)
 
-  const hasHelperText = props.helperText !== undefined
-  const hasError = props.error !== undefined
+  const hasHelperText = hasTextContent(props.helperText)
+  const hasError = hasTextContent(props.error)
 
   const {
     helperTextId,

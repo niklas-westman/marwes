@@ -196,12 +196,13 @@ export const CurrencyField = defineComponent({
   setup(_, { attrs, slots, emit }) {
     return () => {
       const props = attrs as unknown as CurrencyFieldProps
+      const helperText = buildCurrencyHelperText(props.helperText, props.currency)
       return h("div", { "data-purpose": "currency", "data-currency": props.currency }, [
         h(
           InputField,
           {
             ...props,
-            helperText: buildCurrencyHelperText(props.helperText, props.currency) ?? "",
+            ...(helperText ? { helperText } : {}),
             input: {
               ...props.input,
               type: "text",

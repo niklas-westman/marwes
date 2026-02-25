@@ -46,6 +46,7 @@ export const Input = defineComponent(
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
       const style = mergeStyles(renderKit.vars as CssVars, attrs.style)
       const controlledValue = props.modelValue ?? props.value
+      const inputValue = controlledValue ?? props.defaultValue
 
       return h("input", {
         ...passthroughAttrs,
@@ -63,8 +64,7 @@ export const Input = defineComponent(
         "aria-label": renderKit.a11y.ariaLabel,
         "aria-invalid": renderKit.a11y.ariaInvalid,
         "aria-describedby": renderKit.a11y.ariaDescribedBy,
-        value: controlledValue,
-        defaultValue: controlledValue === undefined ? props.defaultValue : undefined,
+        value: inputValue,
         onInput: (event: Event) => {
           const target = event.target as HTMLInputElement
           const nextValue = target.value

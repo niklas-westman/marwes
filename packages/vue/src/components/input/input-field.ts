@@ -26,6 +26,10 @@ const inputFieldPropKeys = [
   "modelValue",
 ] as const
 
+function hasTextContent(value: string | undefined): boolean {
+  return value !== undefined && value.trim().length > 0
+}
+
 export const InputField = defineComponent(
   (props: InputFieldProps, { slots, emit }) => {
     const localInputId = createLocalId("mw-input")
@@ -60,8 +64,8 @@ export const InputField = defineComponent(
       return String(searchValue.value).length > 0
     })
 
-    const hasHelperText = computed(() => props.helperText !== undefined)
-    const hasError = computed(() => props.error !== undefined)
+    const hasHelperText = computed(() => hasTextContent(props.helperText))
+    const hasError = computed(() => hasTextContent(props.error))
 
     const a11yIds = computed(() =>
       buildInputFieldA11yIds({
