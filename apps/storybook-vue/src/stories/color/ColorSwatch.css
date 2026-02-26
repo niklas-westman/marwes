@@ -1,0 +1,124 @@
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  transition: box-shadow 0.2s;
+}
+
+.color-swatch:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.color-swatch__preview {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+}
+
+.color-swatch__hex-on-color {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.color-swatch__info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.color-swatch__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #141414;
+}
+
+.color-swatch__values {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.color-swatch__value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.color-swatch__value:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.color-swatch__value:active {
+  background: #e5e7eb;
+}
+
+.color-swatch__value-label {
+  color: #5b5b5f;
+  font-weight: 600;
+  min-width: 32px;
+}
+
+.color-swatch__value-text {
+  color: #141414;
+  flex: 1;
+}
+
+.color-swatch__copied {
+  color: #006633;
+  font-weight: 700;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.color-swatch__description {
+  font-size: 13px;
+  color: #5b5b5f;
+  line-height: 1.5;
+  padding-top: 4px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.color-swatch__usage {
+  font-size: 12px;
+  color: #5b5b5f;
+  line-height: 1.5;
+  padding: 8px;
+  background: #f9fafb;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.color-swatch__usage strong {
+  color: #141414;
+}

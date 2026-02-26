@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import { fieldComparisonRows, fieldWhyPurposeComponents } from "@marwes-ui/core"
 
 <Meta title="Fields/Introduction" />
 
@@ -76,23 +77,44 @@ import {
 
 ### Why Purpose Field Components?
 
-1. **Automatic semantic attributes** - Correct `type`, `inputMode`, `autoComplete` set automatically
-2. **Built-in functionality** - Password toggle, search clear button, etc. included
-3. **Mobile-optimized** - Proper keyboard layouts on mobile devices
-4. **AI-friendly** - `data-purpose` attributes for AI parsing and understanding
-5. **Less boilerplate** - No need to remember which attributes to set
-6. **Self-documenting** - Code intent is clear from component name
+<ol>
+  {fieldWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
 
 ## Field Comparison
 
-| Field | Type | inputMode | autoComplete | Special Features |
-|-------|------|-----------|--------------|------------------|
-| **SearchField** | `search` | `search` | - | Clear button (X icon) when has value |
-| **PasswordField** | `password` | - | `current-password` or `new-password` | Show/hide toggle (eye icon) |
-| **EmailField** | `email` | `email` | `email` | Email validation, @ keyboard |
-| **PhoneField** | `tel` | `tel` | `tel` | Phone keyboard, accepts any format |
-| **URLField** | `url` | `url` | `url` | URL validation, .com keyboard |
-| **CurrencyField** | `text` | `decimal` | - | Decimal keyboard, currency label |
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>inputMode</th>
+      <th>autoComplete</th>
+      <th>Special Features</th>
+    </tr>
+  </thead>
+  <tbody>
+    {fieldComparisonRows.map((row) => (
+      <tr key={row.field}>
+        <td>
+          <strong>
+            <code>{row.field}</code>
+          </strong>
+        </td>
+        <td>
+          <code>{row.type}</code>
+        </td>
+        <td>{row.inputMode === "-" ? "-" : <code>{row.inputMode}</code>}</td>
+        <td>{row.autoComplete === "-" ? "-" : <code>{row.autoComplete}</code>}</td>
+        <td>{row.features}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
 ## When to Use Each Field
 

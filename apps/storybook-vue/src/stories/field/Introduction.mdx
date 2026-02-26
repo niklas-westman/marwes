@@ -1,0 +1,393 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { fieldComparisonRows, fieldWhyPurposeComponents } from "@marwes-ui/core"
+
+<Meta title="Fields/Introduction" />
+
+# Field Components
+
+Marwes provides purpose-specific field components that encapsulate best practices
+and automatically set AI-friendly metadata. Each field variant is optimized for
+its specific use case with appropriate semantic HTML attributes.
+
+## Field Architecture
+
+```
+InputField (General molecule)
+     ↓
+Field Variants (Purpose-specific)
+  ├─ SearchField
+  ├─ PasswordField
+  ├─ EmailField
+  ├─ PhoneField
+  ├─ URLField
+  └─ CurrencyField
+```
+
+## Recommended: Purpose Field Components
+
+Use purpose-built field components that automatically set the correct `type`, `inputMode`, `autoComplete`, and other semantic attributes:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import {
+  SearchField,
+  PasswordField,
+  EmailField,
+  PhoneField,
+  URLField,
+  CurrencyField,
+} from "@marwes-ui/vue"
+
+const query = ref("")
+const password = ref("")
+const email = ref("")
+const phone = ref("")
+const url = ref("")
+const amount = ref("")
+</script>
+
+<template>
+  <!-- ✅ Search with automatic clear button -->
+  <SearchField label="Search products" v-model="query" />
+
+  <!-- ✅ Password with show/hide toggle -->
+  <PasswordField label="Password" v-model="password" />
+
+  <!-- ✅ Email with proper validation and keyboard -->
+  <EmailField label="Email address" v-model="email" />
+
+  <!-- ✅ Phone with phone keyboard on mobile -->
+  <PhoneField label="Phone number" v-model="phone" />
+
+  <!-- ✅ URL with URL keyboard and validation -->
+  <URLField label="Website" v-model="url" />
+
+  <!-- ✅ Currency with decimal keyboard -->
+  <CurrencyField label="Amount" currency="USD" v-model="amount" />
+</template>
+```
+
+### Why Purpose Field Components?
+
+<ol>
+  {fieldWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+## Field Comparison
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>inputMode</th>
+      <th>autoComplete</th>
+      <th>Special Features</th>
+    </tr>
+  </thead>
+  <tbody>
+    {fieldComparisonRows.map((row) => (
+      <tr key={row.field}>
+        <td>
+          <strong>
+            <code>{row.field}</code>
+          </strong>
+        </td>
+        <td>
+          <code>{row.type}</code>
+        </td>
+        <td>{row.inputMode === "-" ? "-" : <code>{row.inputMode}</code>}</td>
+        <td>{row.autoComplete === "-" ? "-" : <code>{row.autoComplete}</code>}</td>
+        <td>{row.features}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+## When to Use Each Field
+
+### SearchField
+- Search bars and filters
+- Product search
+- User/content lookup
+- Any search functionality
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { SearchField } from "@marwes-ui/vue"
+
+const search = ref("")
+</script>
+
+<template>
+  <SearchField
+    label="Search orders"
+    helperText="Search by order number, customer name, or product"
+    v-model="search"
+  />
+</template>
+```
+
+### PasswordField
+- Login/signup forms
+- Password change forms
+- Security settings
+
+**Props:**
+- `autoComplete="current-password"` (default) - For login
+- `autoComplete="new-password"` - For signup/reset
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { PasswordField } from "@marwes-ui/vue"
+
+const password = ref("")
+</script>
+
+<template>
+  <PasswordField
+    label="New Password"
+    autoComplete="new-password"
+    helperText="Must be at least 8 characters"
+    v-model="password"
+  />
+</template>
+```
+
+### EmailField
+- Email address inputs
+- Contact forms
+- Newsletter signups
+- User registration
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { EmailField } from "@marwes-ui/vue"
+
+const email = ref("")
+</script>
+
+<template>
+  <EmailField
+    label="Email address"
+    helperText="We'll send a confirmation to this email"
+    v-model="email"
+  />
+</template>
+```
+
+### PhoneField
+- Phone number inputs
+- Contact information
+- SMS verification setup
+
+**Note:** Formatting should be handled by parent component or library.
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { PhoneField } from "@marwes-ui/vue"
+
+const phone = ref("")
+</script>
+
+<template>
+  <PhoneField
+    label="Phone number"
+    helperText="Include country code for international numbers"
+    v-model="phone"
+  />
+</template>
+```
+
+### URLField
+- Website/portfolio links
+- Social media profiles
+- Resource links
+- Any URL input
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { URLField } from "@marwes-ui/vue"
+
+const url = ref("")
+</script>
+
+<template>
+  <URLField
+    label="Portfolio website"
+    helperText="Include https:// or http://"
+    v-model="url"
+  />
+</template>
+```
+
+### CurrencyField
+- Prices and monetary amounts
+- Payment forms
+- Financial data entry
+- Donation amounts
+
+**Props:**
+- `currency` - ISO currency code (USD, EUR, GBP, etc.)
+
+**Note:** Uses `type="text"` for better control. Formatting should be handled by parent.
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { CurrencyField } from "@marwes-ui/vue"
+
+const price = ref("")
+</script>
+
+<template>
+  <CurrencyField
+    label="Product price"
+    currency="USD"
+    v-model="price"
+  />
+</template>
+```
+
+## Advanced: General InputField
+
+For custom input types not covered by purpose fields, use the base `InputField`:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { InputField } from "@marwes-ui/vue"
+
+const value = ref("")
+</script>
+
+<template>
+  <InputField
+    label="Custom field"
+    v-model="value"
+    :input="{
+      type: 'text',
+      inputMode: 'numeric',
+      pattern: '[0-9]*'
+    }"
+  />
+</template>
+```
+
+## Common Props
+
+All field components support the same base props:
+
+```ts
+type BaseFieldProps = {
+  label: string                    // Required: Field label
+  helperText?: string             // Optional: Helper text below input
+  error?: string                  // Optional: Error message (marks invalid)
+  id?: string                     // Optional: Custom ID (auto-generated if omitted)
+  ariaDescribedBy?: string        // Optional: Additional aria-describedby IDs
+  modelValue?: string             // Vue v-model value
+  input?: {
+    value?: string                // Controlled value (React-parity API)
+    defaultValue?: string         // Uncontrolled default value
+    onValueChange?: (value: string) => void
+    placeholder?: string
+    disabled?: boolean
+    readOnly?: boolean
+    required?: boolean
+    // ... and other input-specific props
+  }
+}
+```
+
+## Controlled vs Uncontrolled
+
+### Controlled (Recommended)
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { EmailField } from "@marwes-ui/vue"
+
+const email = ref("")
+</script>
+
+<template>
+  <EmailField label="Email" v-model="email" />
+</template>
+```
+
+### Uncontrolled
+```vue
+<template>
+  <EmailField
+    label="Email"
+    :input="{ defaultValue: 'user@example.com' }"
+  />
+</template>
+```
+
+## Validation Pattern
+
+```vue
+<script setup lang="ts">
+import { computed, ref } from "vue"
+import { EmailField } from "@marwes-ui/vue"
+
+const email = ref("")
+const error = computed(() => {
+  if (!email.value) return "Email is required"
+  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email.value)) {
+    return "Please enter a valid email address"
+  }
+  return undefined
+})
+</script>
+
+<template>
+  <EmailField
+    label="Email address"
+    :error="error"
+    v-model="email"
+  />
+</template>
+```
+
+## AI-Friendly Attributes
+
+All field variants automatically set `data-purpose` attributes for AI parsing:
+
+```html
+<div data-purpose="email">
+  <label>Email address</label>
+  <input type="email" inputmode="email" autocomplete="email" />
+</div>
+
+<div data-purpose="password">
+  <label>Password</label>
+  <input type="password" autocomplete="current-password" />
+  <button aria-label="Show password">...</button>
+</div>
+
+<div data-purpose="currency" data-currency="USD">
+  <label>Amount</label>
+  <input type="text" inputmode="decimal" />
+  <p>Amount in USD</p>
+</div>
+```
+
+These attributes help AI tools understand field purpose and provide better assistance.

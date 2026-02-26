@@ -1,4 +1,9 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  buttonActionSemanticPurposes,
+  buttonVariantVisualStyles,
+  buttonWhySemanticComponents,
+} from "@marwes-ui/core"
 
 <Meta title="Buttons/Introduction" />
 
@@ -32,10 +37,13 @@ import { CancelButton, SubmitButton, CreateButton, DangerButton, LinkButton } fr
 
 ### Why Semantic Components?
 
-1. **Guaranteed AI context** - action metadata is always set correctly
-2. **Consistent UX** - enforces design patterns across your app
-3. **Less boilerplate** - no need to remember which props to set
-4. **Self-documenting** - code intent is clear from component name
+<ol>
+  {buttonWhySemanticComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
 
 ## Advanced: Raw Props
 
@@ -94,22 +102,31 @@ ButtonAction.button   // "button"
 
 Controls how the button **looks**. Choose based on visual hierarchy:
 
-- **`primary`** — Filled, high emphasis (main actions)
-- **`secondary`** — Outlined, medium emphasis (secondary actions)  
-- **`text`** — Minimal, low emphasis (tertiary/inline actions)
+<ul>
+  {buttonVariantVisualStyles.map((item) => (
+    <li key={item.label}>
+      <strong>
+        <code>{item.label}</code>
+      </strong>{" "}
+      - {item.text}
+    </li>
+  ))}
+</ul>
 
 ### `action` — Semantic Purpose
 
 Controls what the button **does** (AI-readable metadata):
 
-- **`submit`** — Form submission
-- **`cancel`** — Dismiss/cancel operation
-- **`create`** — Create new item
-- **`delete`** — Remove/destroy item
-- **`navigate`** — Go to another page
-- **`edit`** — Modify existing item
-- **`reset`** — Reset form state
-- **`button`** — Generic action (default)
+<ul>
+  {buttonActionSemanticPurposes.map((item) => (
+    <li key={item.label}>
+      <strong>
+        <code>{item.label}</code>
+      </strong>{" "}
+      - {item.text}
+    </li>
+  ))}
+</ul>
 
 > **Note:** These are independent. A `DangerButton` uses `variant="primary"` (filled) with error styling, while `CancelButton` uses `variant="secondary"` (outlined).
 

@@ -1,33 +1,13 @@
-import { iconRegistry } from "@marwes-ui/core"
+import { storybookButtonPurposeArgTypes, storybookLayout } from "@marwes-ui/core"
 import { type Button, CreateButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
-
-const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>
 
 const meta = {
   title: "Buttons/Purpose/CreateButton",
   component: CreateButton,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: storybookLayout.centered,
   tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "text"],
-    },
-    iconLeft: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    iconRight: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    disabled: {
-      control: "boolean",
-    },
-  },
+  argTypes: storybookButtonPurposeArgTypes,
 } satisfies Meta<typeof Button>
 
 export default meta

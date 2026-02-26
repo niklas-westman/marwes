@@ -1,3 +1,4 @@
+import { buildCurrencyHelperText } from "@marwes-ui/core"
 import type * as React from "react"
 import type { InputProps } from "./input"
 import { InputField, type InputFieldProps } from "./input-field"
@@ -344,12 +345,7 @@ export function CurrencyField(props: CurrencyFieldProps): React.ReactElement {
     inputMode: "decimal",
   }
 
-  // Add currency to helper text if provided
-  const helperText = currency
-    ? props.helperText
-      ? `${props.helperText} (${currency})`
-      : `Amount in ${currency}`
-    : props.helperText
+  const helperText = buildCurrencyHelperText(props.helperText, currency)
 
   return (
     <div data-purpose="currency" data-currency={currency}>

@@ -24,6 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Validate GitHub Actions workflow files (syntax + common config issues)
+      - name: actionlint
+        uses: devops-actions/actionlint@v0.1.10
+
       # Install pnpm package manager (reads version from packageManager field in package.json)
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -47,9 +51,51 @@ jobs:
       - name: Typecheck
         run: pnpm -r typecheck
 
-      # Run unit tests across all workspace packages
+      # Run package tests and emit Allure results for a human-friendly report
       - name: Test
-        run: pnpm -r test
+        run: pnpm test:packages:allure
+
+      # Generate Allure HTML report from collected test results (best effort on failures)
+      - name: Generate Allure report
+        if: always()
+        run: |
+          if [ -d ".allure/results" ]; then
+            pnpm allure:generate:ci
+          else
+            echo "No Allure results found; skipping report generation"
+          fi
+
+      # Upload generated report for PR/CI review
+      - name: Upload Allure report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: .allure/report
+          if-no-files-found: ignore
+          retention-days: 7
+
+      # Upload raw results so the report can be regenerated/debugged if needed
+      - name: Upload Allure results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: .allure/results
+          if-no-files-found: ignore
+          retention-days: 7
+
+      # Add a short Actions summary with artifact names
+      - name: Allure summary
+        if: always()
+        run: |
+          {
+            echo "## Test Report"
+            echo ""
+            echo "- Package test command: \`pnpm test:packages:allure\`"
+            echo "- HTML report artifact: \`allure-report\`"
+            echo "- Raw results artifact: \`allure-results\`"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # Build all workspace packages for production
       - name: Build

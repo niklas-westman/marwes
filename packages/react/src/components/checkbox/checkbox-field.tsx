@@ -1,3 +1,4 @@
+import { buildCheckboxFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
 import { Checkbox } from "."
 import type { CheckboxProps } from "."
@@ -21,6 +22,18 @@ export type CheckboxFieldProps = {
 
 function cx(...parts: Array<string | false>): string {
   return parts.filter(Boolean).join(" ")
+}
+
+function hasContent(value: React.ReactNode | undefined): boolean {
+  if (value === undefined || value === null || value === false) {
+    return false
+  }
+
+  if (typeof value === "string") {
+    return value.trim().length > 0
+  }
+
+  return true
 }
 
 /**
@@ -117,15 +130,19 @@ export function CheckboxField(props: CheckboxFieldProps): React.ReactElement {
   const reactId = React.useId()
   const id = props.id ?? `mw-checkbox-${reactId}`
 
-  const hasDescription = props.description !== undefined
-  const hasError = props.error !== undefined
+  const hasDescription = hasContent(props.description)
+  const hasError = hasContent(props.error)
 
-  const descId = hasDescription ? `${id}-desc` : undefined
-  const errorId = hasError ? `${id}-error` : undefined
-
-  // Merge aria-describedby from multiple sources
-  const describedByParts = [props.ariaDescribedBy, descId, errorId].filter(Boolean)
-  const mergedDescribedBy = describedByParts.length > 0 ? describedByParts.join(" ") : undefined
+  const {
+    descriptionId: descId,
+    errorId,
+    describedBy: mergedDescribedBy,
+  } = buildCheckboxFieldA11yIds({
+    id,
+    hasDescription,
+    hasError,
+    externalDescribedBy: props.ariaDescribedBy,
+  })
 
   const disabled = props.checkbox.disabled || false
   const invalid = hasError || props.checkbox.invalid || false

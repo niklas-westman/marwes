@@ -1,33 +1,17 @@
-import { iconRegistry } from "@marwes-ui/core"
+import {
+  storybookButtonPurposeArgTypes,
+  storybookDocsDescription,
+  storybookLayout,
+} from "@marwes-ui/core"
 import { type Button, DangerButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
-
-const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>
 
 const meta = {
   title: "Buttons/Purpose/DangerButton",
   component: DangerButton,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: storybookLayout.centered,
   tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "text"],
-    },
-    iconLeft: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    iconRight: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    disabled: {
-      control: "boolean",
-    },
-  },
+  argTypes: storybookButtonPurposeArgTypes,
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -41,8 +25,7 @@ export const DangerExample: StoryObj<typeof DangerButton> = {
   parameters: {
     docs: {
       description: {
-        story:
-          "DangerButton automatically sets destructive metadata and requires confirmation by default.",
+        story: storybookDocsDescription.dangerButton,
       },
     },
   },

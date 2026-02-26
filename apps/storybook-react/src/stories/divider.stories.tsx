@@ -1,25 +1,13 @@
+import { storybookDividerArgTypes, storybookLayout } from "@marwes-ui/core"
 import { Divider, H1, H2, H3, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
   title: "Atoms/Divider",
   component: Divider,
-  parameters: {
-    layout: "padded",
-  },
+  parameters: storybookLayout.padded,
   tags: ["autodocs"],
-  argTypes: {
-    size: {
-      control: "select",
-      options: ["xxs", "xs", "sm", "md", "lg", "xl", "xxl"],
-      description: "Size variant (xxs=1px, xs=8px, sm=16px, md=32px, lg=48px, xl=64px, xxl=80px)",
-    },
-    orientation: {
-      control: "select",
-      options: ["horizontal", "vertical"],
-      description: "Orientation of the divider",
-    },
-  },
+  argTypes: storybookDividerArgTypes,
   args: {
     size: "md",
     orientation: "horizontal",

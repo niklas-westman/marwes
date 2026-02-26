@@ -41,6 +41,7 @@ pnpm-debug.log*
 
 # Local tool/state directories
 .figma/
+.allure/
 
 # Temporary files
 *.tmp

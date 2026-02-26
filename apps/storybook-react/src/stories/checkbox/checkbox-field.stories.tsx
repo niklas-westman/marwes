@@ -1,3 +1,4 @@
+import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import { CheckboxField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -5,24 +6,13 @@ import { useState } from "react"
 const meta: Meta<typeof CheckboxField> = {
   title: "Checkbox/Field",
   component: CheckboxField,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: storybookLayout.centered,
   tags: ["autodocs"],
   args: {
     label: "Checkbox Field Label",
   },
   argTypes: {
-    checkbox: {
-      size: { control: "radio", options: ["sm", "md", "lg"] },
-      disabled: { control: "boolean" },
-      required: { control: "boolean" },
-      invalid: { control: "boolean" },
-      checked: { control: "boolean" },
-      defaultChecked: { control: "boolean" },
-      indeterminate: { control: "boolean" },
-      ariaLabel: { control: "text" },
-    },
+    checkbox: storybookCheckboxArgTypes,
   },
 }
 
