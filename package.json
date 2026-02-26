@@ -31,7 +31,7 @@
     "test:vue": "pnpm --filter @marwes-ui/vue test",
     "allure:clean": "rimraf .allure",
     "allure:generate": "pnpm exec allure generate .allure/results --output .allure/report",
-    "allure:generate:ci": "pnpm exec allure generate .allure/results --output .allure/report",
+    "allure:generate:ci": "pnpm exec allure classic .allure/results --single-file --output .allure/report",
     "allure:open": "pnpm exec allure open .allure/report",
     "test:report": "pnpm allure:clean && pnpm test:packages:allure && pnpm allure:generate",
     "test:typecheck:contracts": "tsc -p tests/tsconfig.json --noEmit",
