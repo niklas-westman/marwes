@@ -24,6 +24,8 @@ Core recipes return a typed RenderKit used by adapters:
 
 Adapters must apply the RenderKit explicitly and avoid loose prop spreading.
 
+RenderKit debug instrumentation is opt-in. Set `window.__MARWES_RENDERKIT_DEBUG__ = true` in development to emit `marwes/renderkit/renderkit-update` events.
+
 ## Styling Rules
 - **No CSS‑in‑JS runtime styling.**
 - CSS variables and classnames are the contract.

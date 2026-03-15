@@ -1,5 +1,5 @@
 import { firstEdition } from "@marwes-ui/presets"
-import { Button, MarwesProvider } from "@marwes-ui/react"
+import { Button, ButtonVariant, IconName, MarwesProvider, SecondaryButton } from "@marwes-ui/react"
 
 import "@marwes-ui/presets/firstEdition/styles.css"
 
@@ -11,14 +11,18 @@ function App() {
       <MarwesProvider
         preset={firstEdition}
         theme={{
-          color: { primary: "#5B8CFF", secondary: "#111111" },
-          ui: { radius: 12 },
+          color: { primary: " #5B8CFF", secondary: "#b216c4" },
+          font: {
+            primary: "Open sans",
+          },
+          // color: { primary: "#5B8CFF", secondary: "#111111" },
+          // ui: { radius: 12 },
         }}
       >
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <Button>Primary</Button>
+          <SecondaryButton iconLeft={IconName.Music}>Danger</SecondaryButton>
 
-          <Button variant="secondary">Secondary</Button>
+          <Button variant={ButtonVariant.secondary}>Secondary</Button>
           <Button as="a" href="https://example.com" variant="text">
             Link Button
           </Button>

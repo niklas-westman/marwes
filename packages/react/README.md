@@ -90,6 +90,15 @@ Molecules:
 Utilities:
 - `useRenderKitDebug`
 
+## RenderKit Debug (Opt-In)
+The RenderKit debug stream is disabled by default. Enable it explicitly in development when you need to inspect adapter output:
+
+```ts
+window.__MARWES_RENDERKIT_DEBUG__ = true
+```
+
+When enabled, `useRenderKitDebug` dispatches `marwes/renderkit/renderkit-update` events on `window`.
+
 ## Adapter Rules
 - Treat `@marwes-ui/core` as source of truth for behavior and a11y.
 - Apply RenderKit fields explicitly.

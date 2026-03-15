@@ -51,6 +51,10 @@ jobs:
       - name: Typecheck
         run: pnpm -r typecheck
 
+      # Validate shared adapter contracts compile against current public APIs
+      - name: Contract typecheck
+        run: pnpm test:typecheck:contracts
+
       # Run package tests and emit Allure results for a human-friendly report
       - name: Test
         run: pnpm test:packages:allure

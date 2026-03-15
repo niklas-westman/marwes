@@ -197,6 +197,25 @@ Storybook has `@storybook/addon-a11y` enabled. Check for:
 pnpm dev:storybook
 ```
 
+### RenderKit Debug Stream (Opt-In)
+`useRenderKitDebug` is disabled by default in both adapters. To emit RenderKit events in Storybook/dev, enable:
+
+```ts
+window.__MARWES_RENDERKIT_DEBUG__ = true
+```
+
+You can set this once in your browser console, or persist it in Storybook preview setup:
+
+```ts
+// .storybook/preview.ts
+if (typeof window !== "undefined") {
+  const renderKitDebugWindow = window as Window & { __MARWES_RENDERKIT_DEBUG__?: boolean }
+  renderKitDebugWindow.__MARWES_RENDERKIT_DEBUG__ = true
+}
+```
+
+When enabled, adapters emit `marwes/renderkit/renderkit-update` events with the current RenderKit payload.
+
 ---
 
 ## Playground Testing (Manual)

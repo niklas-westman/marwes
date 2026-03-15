@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marwes Theme — Color Derivation Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ================================================================
+     RESET & BASE
+     ================================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+  :root {
+    --page-bg: #0E0F14;
+    --page-text: #C8CAD0;
+    --page-text-muted: #6B6E7B;
+    --page-surface: #16171E;
+    --page-border: #23252F;
+    --page-accent: #5B8CFF;
+    --font-body: "DM Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--page-bg);
+    color: var(--page-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
+  }
+
+  /* ================================================================
+     MARWES CSS VARIABLE CONTRACT
+     These are what components consume. Never raw hex values.
+     ================================================================ */
+
+  /* -- Primary role -- */
+  .mw-root {
+    --mw-primary-base:            #5B8CFF;
+    --mw-primary-hover:           #4A7AE0;
+    --mw-primary-pressed:         #3A68C0;
+    --mw-primary-disabled:        rgba(91,140,255,0.35);
+    --mw-primary-label:           #FFFFFF;
+    --mw-primary-label-disabled:  rgba(255,255,255,0.5);
+
+    /* -- Secondary role (outline variant) -- */
+    --mw-secondary-base:            transparent;
+    --mw-secondary-hover:           rgba(91,140,255,0.08);
+    --mw-secondary-pressed:         rgba(91,140,255,0.15);
+    --mw-secondary-disabled:        transparent;
+    --mw-secondary-border:          var(--mw-primary-base);
+    --mw-secondary-border-disabled: rgba(91,140,255,0.35);
+    --mw-secondary-label:           var(--mw-primary-base);
+    --mw-secondary-label-disabled:  rgba(91,140,255,0.5);
+
+    /* -- Danger role -- */
+    --mw-danger-base:            #E53E3E;
+    --mw-danger-hover:           #CC3636;
+    --mw-danger-pressed:         #B32D2D;
+    --mw-danger-disabled:        rgba(229,62,62,0.35);
+    --mw-danger-label:           #FFFFFF;
+    --mw-danger-label-disabled:  rgba(255,255,255,0.5);
+
+    /* -- Shared UI tokens -- */
+    --mw-radius:       6px;
+    --mw-border-width: 1.5px;
+    --mw-focus-ring:   0 0 0 3px rgba(91,140,255,0.35);
+    --mw-duration:     150ms;
+    --mw-easing:       cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  /* ================================================================
+     .mw-button — PURE CSS COMPONENT
+     Only reads CSS variables. Zero knowledge of colors.
+     ================================================================ */
+
+  .mw-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--mw-radius);
+    border: var(--mw-border-width) solid transparent;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background var(--mw-duration) var(--mw-easing),
+      border-color var(--mw-duration) var(--mw-easing),
+      color var(--mw-duration) var(--mw-easing),
+      box-shadow var(--mw-duration) var(--mw-easing),
+      transform 80ms var(--mw-easing);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mw-button:focus-visible {
+    box-shadow: var(--mw-focus-ring);
+  }
+
+  .mw-button:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* --- variant: primary (filled) --- */
+  .mw-button--primary {
+    background: var(--mw-primary-base);
+    color: var(--mw-primary-label);
+  }
+  .mw-button--primary:hover:not(:disabled) {
+    background: var(--mw-primary-hover);
+  }
+  .mw-button--primary:active:not(:disabled) {
+    background: var(--mw-primary-pressed);
+  }
+  .mw-button--primary:disabled {
+    background: var(--mw-primary-disabled);
+    color: var(--mw-primary-label-disabled);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* --- variant: secondary (outline) --- */
+  .mw-button--secondary {
+    background: var(--mw-secondary-base);
+    color: var(--mw-secondary-label);
+    border-color: var(--mw-secondary-border);
+  }
+  .mw-button--secondary:hover:not(:disabled) {
+    background: var(--mw-secondary-hover);
+  }
+  .mw-button--secondary:active:not(:disabled) {
+    background: var(--mw-secondary-pressed);
+  }
+  .mw-button--secondary:disabled {
+    border-color: var(--mw-secondary-border-disabled);
+    color: var(--mw-secondary-label-disabled);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* --- variant: danger --- */
+  .mw-button--danger {
+    background: var(--mw-danger-base);
+    color: var(--mw-danger-label);
+  }
+  .mw-button--danger:hover:not(:disabled) {
+    background: var(--mw-danger-hover);
+  }
+  .mw-button--danger:active:not(:disabled) {
+    background: var(--mw-danger-pressed);
+  }
+  .mw-button--danger:disabled {
+    background: var(--mw-danger-disabled);
+    color: var(--mw-danger-label-disabled);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* --- size modifiers --- */
+  .mw-button--sm {
+    font-size: 0.8125rem;
+    padding: 0.4375rem 0.875rem;
+  }
+  .mw-button--lg {
+    font-size: 1rem;
+    padding: 0.75rem 1.75rem;
+  }
+
+
+  /* ================================================================
+     DEMO PAGE LAYOUT
+     ================================================================ */
+
+  .demo-container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .demo-header {
+    margin-bottom: 3rem;
+  }
+
+  .demo-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #F0F1F4;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .demo-header p {
+    color: var(--page-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .demo-section {
+    background: var(--page-surface);
+    border: 1px solid var(--page-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .demo-section h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--page-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .demo-row:last-child { margin-bottom: 0; }
+
+  .demo-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--page-text-muted);
+    min-width: 80px;
+  }
+
+  /* Color picker section */
+  .color-input-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--page-border);
+    border-radius: 10px;
+  }
+
+  .color-input-area label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #F0F1F4;
+    white-space: nowrap;
+  }
+
+  .color-input-area input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--page-border);
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+    padding: 2px;
+  }
+  .color-input-area input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  .color-input-area input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+  }
+
+  .color-input-area input[type="text"] {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    background: var(--page-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 6px;
+    color: #F0F1F4;
+    padding: 0.5rem 0.75rem;
+    width: 110px;
+    outline: none;
+    transition: border-color 150ms;
+  }
+  .color-input-area input[type="text"]:focus {
+    border-color: var(--page-accent);
+  }
+
+  /* Derived swatch display */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .swatch {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--page-border);
+  }
+
+  .swatch-color {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+  }
+
+  .swatch-meta {
+    padding: 0.5rem 0.625rem;
+    background: var(--page-surface);
+  }
+
+  .swatch-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #F0F1F4;
+  }
+
+  .swatch-value {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--page-text-muted);
+  }
+
+  /* Code block */
+  .code-block {
+    background: var(--page-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--page-text);
+    overflow-x: auto;
+    white-space: pre;
+    margin-top: 1rem;
+  }
+
+  .code-block .hl-key   { color: #7EC8E3; }
+  .code-block .hl-str   { color: #A8D8A8; }
+  .code-block .hl-comm  { color: #555; font-style: italic; }
+  .code-block .hl-fn    { color: #C4A7E7; }
+</style>
+</head>
+<body>
+<div class="mw-root demo-container" id="root">
+
+  <div class="demo-header">
+    <h1>Marwes — Color Derivation Engine</h1>
+    <p>Pick one primary color. Everything else is calculated.</p>
+  </div>
+
+  <!-- Color input -->
+  <div class="color-input-area">
+    <label for="primary-picker">primary:</label>
+    <input type="color" id="primary-picker" value="#5B8CFF">
+    <input type="text" id="primary-hex" value="#5B8CFF" spellcheck="false" maxlength="7">
+  </div>
+
+  <!-- Derived swatches -->
+  <div class="demo-section">
+    <h2>Derived Color Role</h2>
+    <div class="swatch-grid" id="swatches"></div>
+    <div class="code-block" id="code-output"></div>
+  </div>
+
+  <!-- Live buttons -->
+  <div class="demo-section">
+    <h2>Button — Primary (filled)</h2>
+    <div class="demo-row">
+      <span class="demo-label">default</span>
+      <button class="mw-button mw-button--primary mw-button--sm">Small</button>
+      <button class="mw-button mw-button--primary">Continue</button>
+      <button class="mw-button mw-button--primary mw-button--lg">Get Started</button>
+    </div>
+    <div class="demo-row">
+      <span class="demo-label">disabled</span>
+      <button class="mw-button mw-button--primary mw-button--sm" disabled>Small</button>
+      <button class="mw-button mw-button--primary" disabled>Continue</button>
+      <button class="mw-button mw-button--primary mw-button--lg" disabled>Get Started</button>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Button — Secondary (outline)</h2>
+    <div class="demo-row">
+      <span class="demo-label">default</span>
+      <button class="mw-button mw-button--secondary mw-button--sm">Cancel</button>
+      <button class="mw-button mw-button--secondary">Learn More</button>
+      <button class="mw-button mw-button--secondary mw-button--lg">Documentation</button>
+    </div>
+    <div class="demo-row">
+      <span class="demo-label">disabled</span>
+      <button class="mw-button mw-button--secondary mw-button--sm" disabled>Cancel</button>
+      <button class="mw-button mw-button--secondary" disabled>Learn More</button>
+      <button class="mw-button mw-button--secondary mw-button--lg" disabled>Documentation</button>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Button — Danger</h2>
+    <div class="demo-row">
+      <span class="demo-label">default</span>
+      <button class="mw-button mw-button--danger mw-button--sm">Remove</button>
+      <button class="mw-button mw-button--danger">Delete Account</button>
+    </div>
+    <div class="demo-row">
+      <span class="demo-label">disabled</span>
+      <button class="mw-button mw-button--danger mw-button--sm" disabled>Remove</button>
+      <button class="mw-button mw-button--danger" disabled>Delete Account</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ================================================================
+//  MARWES COLOR ENGINE
+//  This is the actual library code — portable to your core package.
+// ================================================================
+
+/**
+ * Parse a hex color (#RRGGBB or #RGB) into [r, g, b] (0-255)
+ */
+function parseHex(hex) {
+  hex = hex.replace("#", "");
+  if (hex.length === 3) {
+    hex = hex[0]+hex[0] + hex[1]+hex[1] + hex[2]+hex[2];
+  }
+  return [
+    parseInt(hex.slice(0, 2), 16),
+    parseInt(hex.slice(2, 4), 16),
+    parseInt(hex.slice(4, 6), 16),
+  ];
+}
+
+/**
+ * Convert RGB (0-255) to hex string
+ */
+function rgbToHex(r, g, b) {
+  const toHex = (n) => Math.round(Math.max(0, Math.min(255, n)))
+    .toString(16).padStart(2, "0");
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+}
+
+/**
+ * RGB → HSL (all 0-1)
+ */
+function rgbToHSL(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  if (max === min) return [0, 0, l];
+  const d = max - min;
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  let h;
+  if (max === r)      h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+  else if (max === g)  h = ((b - r) / d + 2) / 6;
+  else                 h = ((r - g) / d + 4) / 6;
+  return [h, s, l];
+}
+
+/**
+ * HSL (0-1) → RGB (0-255)
+ */
+function hslToRGB(h, s, l) {
+  if (s === 0) { const v = Math.round(l * 255); return [v, v, v]; }
+  const hue2rgb = (p, q, t) => {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1/6) return p + (q - p) * 6 * t;
+    if (t < 1/2) return q;
+    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+    return p;
+  };
+  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  const p = 2 * l - q;
+  return [
+    Math.round(hue2rgb(p, q, h + 1/3) * 255),
+    Math.round(hue2rgb(p, q, h) * 255),
+    Math.round(hue2rgb(p, q, h - 1/3) * 255),
+  ];
+}
+
+/**
+ * Perceived lightness using relative luminance (0-1).
+ * > 0.6 means the color reads as "light" to human eyes.
+ */
+function perceivedLightness(hex) {
+  const [r, g, b] = parseHex(hex);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+}
+
+/**
+ * Shift lightness by `amount` (-1 to +1).
+ * Negative = darker, positive = lighter.
+ */
+function adjustLightness(hex, amount) {
+  const [r, g, b] = parseHex(hex);
+  const [h, s, l] = rgbToHSL(r, g, b);
+  const newL = Math.max(0, Math.min(1, l + amount));
+  const [nr, ng, nb] = hslToRGB(h, s, newL);
+  return rgbToHex(nr, ng, nb);
+}
+
+/**
+ * Return an rgba() string with the given alpha.
+ */
+function setAlpha(hex, alpha) {
+  const [r, g, b] = parseHex(hex);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+
+// ================================================================
+//  resolveColorRole — THE KEY FUNCTION
+//  Input: one hex string
+//  Output: complete interaction palette
+// ================================================================
+
+function resolveColorRole(base) {
+  const isLight = perceivedLightness(base) > 0.6;
+
+  return {
+    base:           base,
+    hover:          adjustLightness(base, isLight ? -0.08 : -0.1),
+    pressed:        adjustLightness(base, isLight ? -0.15 : -0.2),
+    disabled:       setAlpha(base, 0.35),
+    label:          isLight ? "#141414" : "#FFFFFF",
+    labelDisabled:  isLight ? "rgba(20,20,20,0.5)" : "rgba(255,255,255,0.5)",
+  };
+}
+
+
+// ================================================================
+//  Apply resolved role → CSS variables on .mw-root
+// ================================================================
+
+function applyPrimaryToRoot(role) {
+  const root = document.getElementById("root");
+
+  // Primary filled
+  root.style.setProperty("--mw-primary-base",           role.base);
+  root.style.setProperty("--mw-primary-hover",          role.hover);
+  root.style.setProperty("--mw-primary-pressed",        role.pressed);
+  root.style.setProperty("--mw-primary-disabled",       role.disabled);
+  root.style.setProperty("--mw-primary-label",          role.label);
+  root.style.setProperty("--mw-primary-label-disabled", role.labelDisabled);
+
+  // Secondary outline (derived from primary)
+  root.style.setProperty("--mw-secondary-border",          role.base);
+  root.style.setProperty("--mw-secondary-border-disabled", role.disabled);
+  root.style.setProperty("--mw-secondary-label",           role.base);
+  root.style.setProperty("--mw-secondary-label-disabled",  setAlpha(role.base, 0.5));
+  root.style.setProperty("--mw-secondary-hover",           setAlpha(role.base, 0.08));
+  root.style.setProperty("--mw-secondary-pressed",         setAlpha(role.base, 0.15));
+
+  // Focus ring
+  root.style.setProperty("--mw-focus-ring", `0 0 0 3px ${setAlpha(role.base, 0.35)}`);
+}
+
+
+// ================================================================
+//  DEMO INTERACTIVITY
+// ================================================================
+
+const pickerEl = document.getElementById("primary-picker");
+const hexEl    = document.getElementById("primary-hex");
+const swatchEl = document.getElementById("swatches");
+const codeEl   = document.getElementById("code-output");
+
+function update(hex) {
+  // Normalize
+  hex = hex.toUpperCase();
+  if (!/^#[0-9A-F]{6}$/.test(hex)) return;
+
+  // Derive
+  const role = resolveColorRole(hex);
+
+  // Apply to live buttons
+  applyPrimaryToRoot(role);
+
+  // Render swatches
+  const entries = [
+    { name: "base",          value: role.base },
+    { name: "hover",         value: role.hover },
+    { name: "pressed",       value: role.pressed },
+    { name: "disabled",      value: role.disabled },
+    { name: "label",         value: role.label },
+    { name: "labelDisabled", value: role.labelDisabled },
+  ];
+
+  swatchEl.innerHTML = entries.map(e => {
+    const bgIsLight = perceivedLightness(
+      e.value.startsWith("rgba") ? hex : e.value
+    ) > 0.5;
+    const fg = bgIsLight ? "#141414" : "#FFFFFF";
+    const bg = e.value;
+    return `
+      <div class="swatch">
+        <div class="swatch-color" style="background:${bg}; color:${fg}">${e.value}</div>
+        <div class="swatch-meta">
+          <div class="swatch-name">${e.name}</div>
+          <div class="swatch-value">${e.value}</div>
+        </div>
+      </div>`;
+  }).join("");
+
+  // Show the code a developer would see
+  const indent = "    ";
+  codeEl.innerHTML = [
+    `<span class="hl-comm">// User writes:</span>`,
+    `<span class="hl-fn">primary</span>: <span class="hl-str">"${hex}"</span>`,
+    ``,
+    `<span class="hl-comm">// resolveColorRole("${hex}") produces:</span>`,
+    `{`,
+    `${indent}<span class="hl-key">base</span>:          <span class="hl-str">"${role.base}"</span>,`,
+    `${indent}<span class="hl-key">hover</span>:         <span class="hl-str">"${role.hover}"</span>,`,
+    `${indent}<span class="hl-key">pressed</span>:       <span class="hl-str">"${role.pressed}"</span>,`,
+    `${indent}<span class="hl-key">disabled</span>:      <span class="hl-str">"${role.disabled}"</span>,`,
+    `${indent}<span class="hl-key">label</span>:         <span class="hl-str">"${role.label}"</span>,`,
+    `${indent}<span class="hl-key">labelDisabled</span>: <span class="hl-str">"${role.labelDisabled}"</span>,`,
+    `}`,
+  ].join("\n");
+}
+
+// Sync inputs
+pickerEl.addEventListener("input", (e) => {
+  hexEl.value = e.target.value.toUpperCase();
+  update(e.target.value);
+});
+
+hexEl.addEventListener("input", (e) => {
+  let v = e.target.value;
+  if (v.length === 7 && /^#[0-9a-fA-F]{6}$/.test(v)) {
+    pickerEl.value = v;
+    update(v);
+  }
+});
+
+// Initial render
+update("#5B8CFF");
+</script>
+</body>
+</html>
