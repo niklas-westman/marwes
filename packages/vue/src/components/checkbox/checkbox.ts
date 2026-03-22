@@ -2,7 +2,6 @@ import { checkboxRecipe } from "@marwes-ui/core"
 import type { CheckboxProps as CoreCheckboxProps, CssVars } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, ref, useAttrs, watch } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
-import { useTheme } from "../../provider/use-theme"
 
 export type CheckboxProps = CoreCheckboxProps & {
   modelValue?: boolean
@@ -34,7 +33,6 @@ const checkboxPropKeys = [
 export const Checkbox = defineComponent(
   (props: CheckboxProps, { emit }) => {
     const attrs = useAttrs()
-    const theme = useTheme()
     const inputRef = ref<HTMLInputElement | null>(null)
 
     const recipeInput = computed<CoreCheckboxProps>(() => {
@@ -51,7 +49,7 @@ export const Checkbox = defineComponent(
       return nextRecipeInput
     })
 
-    const kit = computed(() => checkboxRecipe({ ...recipeInput.value, theme: theme.value }))
+    const kit = computed(() => checkboxRecipe({ ...recipeInput.value }))
 
     const syncIndeterminate = () => {
       if (!inputRef.value) {

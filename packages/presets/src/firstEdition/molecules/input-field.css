@@ -6,7 +6,7 @@
 
 .mw-input-field {
   display: grid;
-  gap: 4px;
+  gap: var(--mw-density-field-gap);
 }
 
 .mw-input-field__label {
@@ -18,7 +18,7 @@
 
   p {
     line-height: 1;
-    font-size: 14px;
+    font-size: var(--mw-density-font-size);
   }
 }
 
@@ -47,22 +47,22 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--mw-neutral-600, #6b7280);
+  color: var(--mw-color-text-muted, #6b7280);
   transition: color 0.2s ease;
   border-radius: 4px;
 
   &:hover {
-    color: var(--mw-neutral-900, #111827);
-    background: var(--mw-neutral-100, #f3f4f6);
+    color: var(--mw-color-text, #111827);
+    background: var(--mw-color-surface, #f3f4f6);
   }
 
   &:focus {
-    outline: 2px solid var(--mw-primary, #3b82f6);
+    outline: 2px solid var(--mw-color-primary-base, #3b82f6);
     outline-offset: 2px;
   }
 
   &:active {
-    background: var(--mw-neutral-200, #e5e7eb);
+    background: var(--mw-color-border-subtle, #e5e7eb);
   }
 }
 
@@ -76,22 +76,22 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--mw-neutral-600, #6b7280);
+  color: var(--mw-color-text-muted, #6b7280);
   transition: color 0.2s ease;
   border-radius: 4px;
 
   &:hover {
-    color: var(--mw-neutral-900, #111827);
-    background: var(--mw-neutral-100, #f3f4f6);
+    color: var(--mw-color-text, #111827);
+    background: var(--mw-color-surface, #f3f4f6);
   }
 
   &:focus {
-    outline: 2px solid var(--mw-primary, #3b82f6);
+    outline: 2px solid var(--mw-color-primary-base, #3b82f6);
     outline-offset: 2px;
   }
 
   &:active {
-    background: var(--mw-neutral-200, #e5e7eb);
+    background: var(--mw-color-border-subtle, #e5e7eb);
   }
 }
 
@@ -124,12 +124,12 @@
 .mw-input-field__helper {
   opacity: 0.6;
   font-size: 0.875em;
-  color: var(--mw-neutral-600, #6b7280);
+  color: var(--mw-color-text-muted, #6b7280);
 }
 
 .mw-input-field__error {
   font-size: 0.875em;
-  color: var(--mw-danger, #dc2626);
+  color: var(--mw-color-danger-base, #dc2626);
 }
 
 /* State modifiers */
@@ -151,5 +151,5 @@
 .mw-input-field--invalid .mw-input-field__label .mw-p,
 .mw-input-field--invalid .mw-input-field__error .mw-p {
   /* Label styling when field has error - could add red accent if needed  */
-  color: var(--mw-danger, #dc2626);
+  color: var(--mw-color-danger-base, #dc2626);
 }

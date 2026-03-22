@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest"
 import { headingRecipe } from "../../src/components/atoms/heading/heading-recipe"
-import { defaultTheme } from "../../src/theme/theme-defaults"
+import { resolveThemeInput } from "../../src/theme/theme-normalize"
+
+const testTheme = resolveThemeInput({})
 
 describe("headingRecipe", () => {
   it("uses heading level for semantic tag and visual size by default", () => {
-    const renderKit = headingRecipe({ level: 2 }, defaultTheme)
+    const renderKit = headingRecipe({ level: 2 }, testTheme)
 
     expect(renderKit.tag).toBe("h2")
     expect(renderKit.className).toContain("mw-heading")
@@ -19,7 +21,7 @@ describe("headingRecipe", () => {
         id: "hero-title",
         ariaLabel: "Hero title",
       },
-      defaultTheme,
+      testTheme,
     )
 
     expect(renderKit.tag).toBe("h3")

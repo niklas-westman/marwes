@@ -55,6 +55,7 @@
     "@types/node": "^24.10.10",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@types/styled-components": "^5.1.36",
     "@vitest/runner": "^4.0.18",
     "allure": "3.0.0-beta.23",
     "allure-vitest": "^3.4.1",
@@ -66,5 +67,8 @@
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",
     "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "styled-components": "^6.3.11"
   }
 }

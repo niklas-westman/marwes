@@ -6,7 +6,6 @@ import {
   resolveIconStrokeWidth,
 } from "@marwes-ui/core"
 import type * as React from "react"
-import { useTheme } from "../../provider/use-theme"
 
 type IconName = keyof typeof iconRegistry
 
@@ -41,11 +40,8 @@ export function Icon({
   "aria-label": ariaLabel,
   decorative,
 }: IconProps) {
-  const theme = useTheme()
-  const themeIcon = theme.icon
-
-  const px = resolveIconSize(size ?? themeIcon.size)
-  const sw = resolveIconStrokeWidth(strokeWidth ?? themeIcon.strokeWidth)
+  const px = resolveIconSize(size ?? "sm")
+  const sw = resolveIconStrokeWidth(strokeWidth ?? "md")
 
   const def = iconRegistry[name]
 

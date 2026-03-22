@@ -1,0 +1,69 @@
+import { createAccordionRecipe } from "@marwes-ui/core"
+import { computed, defineComponent, h, useAttrs } from "vue"
+import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
+
+export interface AccordionProps {
+  id: string
+  open?: boolean
+  disabled?: boolean
+  className?: string
+  onToggle?: () => void
+}
+
+const accordionPropKeys = ["id", "open", "disabled", "className", "onToggle"] as const
+
+export const Accordion = defineComponent(
+  (props: AccordionProps, { slots }) => {
+    const attrs = useAttrs()
+
+    const kit = computed(() => {
+      const opts: import("@marwes-ui/core").AccordionOptions = { id: props.id }
+      if (props.open !== undefined) opts.open = props.open
+      if (props.disabled !== undefined) opts.disabled = props.disabled
+      return createAccordionRecipe(opts)
+    })
+
+    return () => {
+      const renderKit = kit.value
+      const a11y = renderKit.a11y
+      const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
+      const className = mergeClassNames(renderKit.className, props.className, attrs.class)
+
+      return h("div", { ...passthroughAttrs, class: className }, [
+        h(
+          "button",
+          {
+            id: a11y.triggerId,
+            type: "button",
+            class: "mw-accordion__trigger",
+            "aria-expanded": a11y.ariaExpanded,
+            "aria-controls": a11y.panelId,
+            "aria-disabled": a11y.ariaDisabled,
+            onClick: () => props.onToggle?.(),
+          },
+          [
+            h("span", { class: "mw-accordion__title" }, slots.title?.()),
+            h("span", { class: "mw-accordion__icon", "aria-hidden": "true" }),
+          ],
+        ),
+        h(
+          "div",
+          {
+            id: a11y.panelId,
+            role: "region",
+            "aria-labelledby": a11y.triggerId,
+            class: "mw-accordion__panel",
+            hidden: !props.open,
+          },
+          [h("div", { class: "mw-accordion__content" }, slots.default?.())],
+        ),
+      ])
+    }
+  },
+  {
+    name: "MarwesAccordion",
+    inheritAttrs: false,
+    props: [...accordionPropKeys],
+    emits: ["toggle"],
+  },
+)

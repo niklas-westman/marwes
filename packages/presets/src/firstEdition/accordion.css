@@ -1,0 +1,133 @@
+/*
+ * Accordion Component Styles
+ * Figma: 1364:11755 (light) / 1369:6310 (dark)
+ *
+ * Tokens (from Figma nodes.json):
+ *   accordion/title   (light): #141414    (dark): #f9fafb
+ *   accordion/icon    (light): #4b5563    (dark): #9ca3af
+ *   accordion/content (light): #4b5563    (dark): #9ca3af
+ *   accordion/surface (light): #ffffff    (dark): #1f2937
+ *   accordion/border  (light): #e5e7eb    (dark): #374151
+ *
+ * Structure:
+ *   .mw-accordion
+ *     .mw-accordion__trigger (button)
+ *       .mw-accordion__title
+ *       .mw-accordion__icon
+ *     .mw-accordion__panel (div[hidden])
+ *       .mw-accordion__content
+ */
+
+.mw-accordion {
+  --mw-accordion-title: #141414;
+  --mw-accordion-icon: #4b5563;
+  --mw-accordion-content: #4b5563;
+  --mw-accordion-surface: #ffffff;
+  --mw-accordion-border: #e5e7eb;
+
+  background: var(--mw-accordion-surface);
+  border: 1px solid var(--mw-accordion-border);
+  border-radius: var(--mw-ui-radius, 6px);
+  overflow: hidden;
+}
+
+/* ============================================
+   TRIGGER (header button)
+   ============================================ */
+
+.mw-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 12px;
+}
+
+.mw-accordion__title {
+  flex: 1;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--mw-accordion-title);
+}
+
+/* Chevron icon via CSS mask */
+.mw-accordion__icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--mw-accordion-icon);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  transition: transform 200ms ease;
+}
+
+.mw-accordion--open .mw-accordion__icon {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   TRIGGER STATES
+   ============================================ */
+
+.mw-accordion__trigger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--mw-accordion-border) 40%, transparent);
+}
+
+.mw-accordion__trigger:focus-visible {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: -2px;
+}
+
+/* ============================================
+   PANEL
+   ============================================ */
+
+.mw-accordion__panel {
+  border-top: 1px solid var(--mw-accordion-border);
+}
+
+/* [hidden] sets display:none — panel is invisible when closed */
+
+.mw-accordion__content {
+  padding: 12px 16px 16px;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  line-height: 1.6;
+  color: var(--mw-accordion-content);
+}
+
+/* ============================================
+   DISABLED STATE
+   ============================================ */
+
+.mw-accordion--disabled .mw-accordion__trigger {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-accordion {
+  --mw-accordion-title: #f9fafb;
+  --mw-accordion-icon: #9ca3af;
+  --mw-accordion-content: #9ca3af;
+  --mw-accordion-surface: #1f2937;
+  --mw-accordion-border: #374151;
+}

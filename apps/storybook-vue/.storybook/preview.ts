@@ -1,5 +1,5 @@
 import type { ThemeMode } from "@marwes-ui/core"
-import { firstEdition } from "@marwes-ui/presets"
+import { firstEditionTheme } from "@marwes-ui/presets"
 import { MarwesProvider } from "@marwes-ui/vue"
 import type { Decorator, Preview } from "@storybook/vue3-vite"
 import { h, isVNode } from "vue"
@@ -11,7 +11,7 @@ const withMarwes: Decorator = (story, context) => {
 
   return {
     setup() {
-      return { mode, firstEdition }
+      return { mode }
     },
     render() {
       const storyResult = story()
@@ -19,20 +19,9 @@ const withMarwes: Decorator = (story, context) => {
 
       return h(
         MarwesProvider,
+        { theme: { ...firstEditionTheme, mode } },
         {
-          preset: firstEdition,
-          mode,
-        },
-        {
-          default: () => [
-            h(
-              "div",
-              {
-                style: { padding: "24px" },
-              },
-              [storyNode],
-            ),
-          ],
+          default: () => [h("div", { style: { padding: "24px" } }, [storyNode])],
         },
       )
     },

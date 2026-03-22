@@ -1,0 +1,60 @@
+/*
+ * Tab Component Styles
+ * Figma: 1364:11703 (light) / 1368:6067 (dark)
+ *
+ * Tokens:
+ *   tab/surface   → --mw-color-surface        (#ffffff light / #1f2937 dark)
+ *   tab/label     → --mw-color-text-muted      (#4b5563 light / #9ca3af dark)
+ *   tab/indicator → --mw-color-primary-base    (#2f31fc light / #5859fc dark hardcode)
+ */
+
+.mw-tab {
+  --mw-tab-surface: var(--mw-color-surface);
+  --mw-tab-label: var(--mw-color-text-muted);
+  --mw-tab-indicator: var(--mw-color-primary-base);
+
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--mw-tab-surface);
+  color: var(--mw-tab-label);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 1.5;
+  /* 2px bottom indicator — transparent by default, coloured when selected */
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.mw-tab--selected {
+  border-bottom-color: var(--mw-tab-indicator);
+  color: var(--mw-color-text);
+}
+
+.mw-tab--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mw-tab:hover:not(.mw-tab--disabled) {
+  color: var(--mw-color-text);
+}
+
+.mw-tab:focus-visible {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-tab {
+  /* Dark indicator deviates from primary-base — Figma token: #5859fc */
+  --mw-tab-indicator: #5859fc;
+}

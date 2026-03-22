@@ -1,2 +1,2 @@
-export { firstEdition } from "./firstEdition"
-export type { Preset } from "@marwes-ui/core"
+export { firstEditionTheme } from "./firstEdition"
+export type { ThemeInput } from "@marwes-ui/core"

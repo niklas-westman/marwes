@@ -7,6 +7,17 @@ This guide defines how design data from Figma should map into Marwes so implemen
 - Target implementation: `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`.
 - Current preset focus: `firstEdition`.
 
+## Node Reference (Local Offline Resources)
+
+When the Figma MCP server is unavailable, the following local files provide everything needed to work with the V3 component library:
+
+- [`.figma/NODE_REFERENCE.md`](../.figma/NODE_REFERENCE.md) — human-readable reference: all 13 V3 components, frame IDs, states/variants, CSS tokens, variable definitions (light + dark), MCP usage guide
+- [`.figma/nodes.json`](../.figma/nodes.json) — machine-readable structured data: meta, verified variable defs (2026-03-18), all component node IDs
+
+Both files are MCP-verified as of 2026-03-18.
+
+---
+
 ## Connection Setup (MCP)
 Use this once per environment:
 1. Configure a `figma` MCP server in Codex settings.
@@ -19,85 +30,92 @@ If you only log in but do not enable/select the server, Codex will not be able t
 ## Source of Truth
 - Theme contract: `packages/core/src/theme/theme-types.ts`.
 - Theme defaults: `packages/core/src/theme/theme-defaults.ts`.
+- Color derivation: `packages/core/src/theme/color-resolve.ts`.
+- CSS variable mapping: `packages/core/src/theme/theme-css.ts`.
 - Preset defaults: `packages/presets/src/firstEdition/index.ts`.
 - Preset styling: `packages/presets/src/firstEdition/*.css`.
 
 Always map Figma values into these contracts before touching component adapters.
 
+## Theme Engine (v3)
+
+Colors flow through a derivation pipeline:
+
+```
+ThemeInput (consumer API)
+  → resolveThemeInput()
+    → ResolvedTheme (ColorRole objects, not raw hex)
+      → themeToCSSVars() / applyTheme()
+        → CSS custom properties on provider element
+```
+
+Derivable color roles (`primary`, `danger`, `success`, `warning`) accept a `ColorInput` — either a plain hex string or an override object. All interaction states (hover, pressed, disabled, label) are auto-derived. `secondary` and `info` are always derived from `primary` — never configured directly.
+
 ## Token Mapping
 
-### Color Tokens
+### Color Roles (derived)
 
-#### Primary & Secondary Colors
-| Figma token | Marwes key | CSS var | Figma Color Name |
-|---|---|---|---|
-| `color.primary` | `theme.color.primary` | `--mw-primary` | Rich Black (#141414) |
-| `color.onPrimary` | `theme.color.onPrimary` | `--mw-on-primary` | Text/Default-inverted (#F9FAFB) |
-| `color.secondary` | `theme.color.secondary` | `--mw-secondary` | Soft White (#F9FAFB) |
-| `color.onSecondary` | `theme.color.onSecondary` | `--mw-on-secondary` | Text/Default (#141414) |
+Each role produces 6 CSS variables. Labels are auto-derived via WCAG contrast.
 
-#### Background & Surface
-| Figma token | Marwes key | CSS var | Figma Color Name |
-|---|---|---|---|
-| `color.background` | `theme.color.background` | `--mw-background` | Default White (#FFFFFF) |
-| `color.surface` | `theme.color.surface` | `--mw-surface` | Soft White (#F9FAFB) |
-| `color.surfaceInverted` | `theme.color.surfaceInverted` | `--mw-surface-inverted` | Surface - Inverted (#141414) |
+| Figma token | ThemeInput key | CSS variables |
+|---|---|---|
+| `color.primary` | `color.primary` | `--mw-color-primary-{base,hover,pressed,disabled,label,label-disabled}` |
+| `color.danger` | `color.danger` | `--mw-color-danger-{base,hover,pressed,disabled,label,label-disabled}` |
+| `color.success` | `color.success` | `--mw-color-success-{base,hover,pressed,disabled,label,label-disabled}` |
+| `color.warning` | `color.warning` | `--mw-color-warning-{base,hover,pressed,disabled,label,label-disabled}` |
 
-#### Text Colors
-| Figma token | Marwes key | CSS var | Figma Color Name |
-|---|---|---|---|
-| `color.text` | `theme.color.text` | `--mw-text` | Text/Default (#141414) |
-| `color.textMuted` | `theme.color.textMuted` | `--mw-text-muted` | Medium Grey (#9CA3AF) |
-| `color.textInverted` | `theme.color.textInverted` | `--mw-text-inverted` | Text/Default-inverted (#F9FAFB) |
+**Derived-only roles (not configurable):**
 
-#### Borders
-| Figma token | Marwes key | CSS var | Figma Color Name |
-|---|---|---|---|
-| `color.border` | `theme.color.border` | `--mw-border` | Light Grey (#E5E7EB) |
-| `color.borderSubtle` | `theme.color.borderSubtle` | `--mw-border-subtle` | Border Low (#00000033, 20% opacity) |
+| Role | Derived from | CSS variables |
+|---|---|---|
+| `secondary` | `primary.base` | `--mw-color-secondary-{base,hover,pressed,disabled,label,label-disabled,border,border-disabled}` |
+| `info` | `primary` | `--mw-color-info-{base,hover,pressed,disabled,label,label-disabled}` |
 
-#### Semantic Colors
-| Figma token | Marwes key | CSS var | Figma Color Name |
-|---|---|---|---|
-| `color.danger` | `theme.color.danger` | `--mw-danger` | Error / Coral Red (#D90429) |
-| `color.onDanger` | `theme.color.onDanger` | `--mw-on-danger` | White (#FFFFFF) |
-| `color.success` | `theme.color.success` | `--mw-success` | Success / Field Green (#006633) |
-| `color.onSuccess` | `theme.color.onSuccess` | `--mw-on-success` | White (#FFFFFF) |
-| `color.warning` | `theme.color.warning` | `--mw-warning` | Warning / Amber Yellow (#FFB703) |
-| `color.onWarning` | `theme.color.onWarning` | `--mw-on-warning` | Rich Black (#141414) |
+**Label derivation replaces manual `on-*` tokens:**
+- Old: `onPrimary`, `onDanger`, etc. were manually configured
+- New: `label` and `labelDisabled` are auto-derived using WCAG relative luminance contrast
 
-**Contrast Color Pattern (`on-*`):**
-- `on-*` colors represent text/icons displayed **on** their paired color background
-- Ensures WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text)
-- Example: `onPrimary` is the text color when `primary` is the background
-- Used in buttons, badges, alerts, and any component with solid color backgrounds
+### Surface & Semantic Colors (direct)
+| Figma token | ThemeInput key | CSS var |
+|---|---|---|
+| `color.background` | `color.background` | `--mw-color-background` |
+| `color.surface` | `color.surface` | `--mw-color-surface` |
+| `color.surfaceInverted` | `color.surfaceInverted` | `--mw-color-surface-inverted` |
+| `color.text` | `color.text` | `--mw-color-text` |
+| `color.textMuted` | `color.textMuted` | `--mw-color-text-muted` |
+| `color.textInverted` | `color.textInverted` | `--mw-color-text-inverted` |
+| `color.border` | `color.border` | `--mw-color-border` |
+| `color.borderSubtle` | `color.borderSubtle` | `--mw-color-border-subtle` |
+| `color.focus` | `color.focus` | `--mw-color-focus` |
 
-**Dark Mode Preparation:**
-- `surfaceInverted` and `textInverted` are ready for dark mode implementation
-- Future: Flip `surface` ↔ `surfaceInverted` and `text` ↔ `textInverted` for dark mode
-- `on-*` colors remain consistent across modes
+### Dark Mode
+Dark mode is built in via `ThemeInput.mode`:
+- `mode: "light"` (default) — dark text on light backgrounds
+- `mode: "dark"` — light text on dark backgrounds
+
+Surface/text colors swap automatically based on mode defaults. Color roles re-derive with mode-appropriate lightness shifts.
 
 ### Typography Tokens
-| Figma token | Marwes key | CSS var |
+| Figma token | ThemeInput key | CSS var |
 |---|---|---|
-| `font.family.primary` | `theme.font.primary` | `--mw-font-primary` |
-| `font.family.secondary` | `theme.font.secondary` | as needed per component |
-| `font.family.mono` | `theme.font.mono` | as needed per component |
-| `typography.h1.*` | `theme.typography.h1.*` | `--mw-heading-*` |
-| `typography.h2.*` | `theme.typography.h2.*` | `--mw-heading-*` |
-| `typography.h3.*` | `theme.typography.h3.*` | `--mw-heading-*` |
-| `typography.paragraph.sm.*` | `theme.typography.paragraph.sm.*` | `--mw-p-*` |
-| `typography.paragraph.md.*` | `theme.typography.paragraph.md.*` | `--mw-p-*` |
-| `typography.paragraph.lg.*` | `theme.typography.paragraph.lg.*` | `--mw-p-*` |
+| `font.family.primary` | `font.primary` | `--mw-font-primary` |
+| `font.family.secondary` | `font.secondary` | `--mw-font-secondary` |
+| `font.family.mono` | `font.mono` | `--mw-font-mono` |
+| `typography.h1.*` | `typography.h1.*` | `--mw-typography-h1-{font-size,line-height,font-weight,letter-spacing}` |
+| `typography.h2.*` | `typography.h2.*` | `--mw-typography-h2-{...}` |
+| `typography.h3.*` | `typography.h3.*` | `--mw-typography-h3-{...}` |
+| `typography.paragraph.sm.*` | `typography.paragraph.sm.*` | `--mw-typography-paragraph-sm-{font-size,line-height}` |
+| `typography.paragraph.md.*` | `typography.paragraph.md.*` | `--mw-typography-paragraph-md-{...}` |
+| `typography.paragraph.lg.*` | `typography.paragraph.lg.*` | `--mw-typography-paragraph-lg-{...}` |
 
 ### UI Tokens
-| Figma token | Marwes key | CSS var |
+| Figma token | ThemeInput key | CSS var |
 |---|---|---|
-| `radius.base` | `theme.ui.radius` | `--mw-radius` |
-| `density` | `theme.ui.density` | layout/component modifier behavior |
-| `variant.default` | `theme.ui.variant` | component modifier behavior |
-| `icon.size` | `theme.icon.size` | icon recipe vars |
-| `icon.strokeWidth` | `theme.icon.strokeWidth` | icon recipe vars |
+| `radius.base` | `ui.radius` | `--mw-ui-radius` |
+| `density` | `ui.density` | layout/component modifier behavior |
+| `variant.default` | `ui.variant` | component modifier behavior |
+
+Icon size and stroke width are handled by the icon recipe directly, not via theme tokens.
 
 ## Component Mapping
 
@@ -140,11 +158,12 @@ Required Figma tokens:
 - Paragraph scale: sm, md, lg (font size, line height).
 
 ## Implementation Rules
-- Do not hardcode Figma hex values in adapters (`@marwes-ui/react`).
+- Do not hardcode Figma hex values in adapters (`@marwes-ui/react`, `@marwes-ui/vue`).
 - Put logic and mapping in core recipes and theme contracts.
 - Put visual styling in preset CSS only.
 - Keep CSS variable names on `--mw-*`.
 - Keep classnames stable (`.mw-*`) for preset compatibility.
+- Components consume CSS variables only — never theme objects directly.
 
 ## Update Workflow
 1. Confirm Figma tokens and component variants/states are final.

@@ -1,12 +1,12 @@
 .mw-checkbox-field {
   display: grid;
-  gap: 8px;
+  gap: var(--mw-density-gap);
 }
 
 .mw-checkbox-field__row {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--mw-density-gap);
 }
 
 .mw-checkbox-field__label {
@@ -16,14 +16,14 @@
 
 .mw-checkbox-field__description {
   opacity: 0.75;
-  margin-left: 28px;
-  font-size: 0.875em;
+  margin-left: calc(var(--mw-density-checkbox-size) + var(--mw-density-gap));
+  font-size: var(--mw-density-font-size-sm);
 }
 
 .mw-checkbox-field__error {
-  margin-left: 28px;
-  font-size: 0.875em;
-  color: var(--mw-danger, #dc2626);
+  margin-left: calc(var(--mw-density-checkbox-size) + var(--mw-density-gap));
+  font-size: var(--mw-density-font-size-sm);
+  color: var(--mw-color-danger-base, #dc2626);
 }
 
 /* Optional state hooks */

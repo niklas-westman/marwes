@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest"
 import { IconName } from "../../src/components/atoms/icon"
 import { createIconRecipe } from "../../src/components/atoms/icon/icon-recipe"
-import { defaultTheme } from "../../src/theme/theme-defaults"
 
 describe("createIconRecipe", () => {
   it("creates decorative icon output by default", () => {
-    const renderKit = createIconRecipe(defaultTheme, {
+    const renderKit = createIconRecipe({
       name: IconName.Search,
     })
 
@@ -17,7 +16,7 @@ describe("createIconRecipe", () => {
   })
 
   it("supports labelled icons with size and stroke variants", () => {
-    const renderKit = createIconRecipe(defaultTheme, {
+    const renderKit = createIconRecipe({
       name: IconName.Search,
       ariaLabel: "Search",
       size: "lg",

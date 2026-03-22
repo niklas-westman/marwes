@@ -25,7 +25,7 @@ export function createHeadingComponent<L extends HeadingLevel>(level: L) {
     (props: HeadingBaseProps, { slots }) => {
       const attrs = useAttrs()
       const theme = useTheme()
-      const kit = computed(() => headingRecipe({ ...props, level }, theme.value))
+      const kit = computed(() => headingRecipe({ ...props, level }, theme))
 
       return () => {
         const renderKit = kit.value

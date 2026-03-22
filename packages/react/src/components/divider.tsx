@@ -10,7 +10,6 @@ import { createDividerRecipe } from "@marwes-ui/core"
 import type { DividerOptions, DividerOrientation, DividerSize } from "@marwes-ui/core"
 import type { CssVars } from "@marwes-ui/core"
 import * as React from "react"
-import { useTheme } from "../provider/use-theme"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -76,9 +75,7 @@ export type DividerProps = DividerOptions &
 export const Divider = React.forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
   const { className: customClassName, style: customStyle, ...opts } = props
 
-  const theme = useTheme()
-
-  const kit = createDividerRecipe(theme, opts)
+  const kit = createDividerRecipe(opts)
 
   const style = { ...(kit.vars as StyleWithVars), ...customStyle }
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className

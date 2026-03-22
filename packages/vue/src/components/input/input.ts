@@ -3,7 +3,6 @@ import { createInputRecipe } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
-import { useTheme } from "../../provider/use-theme"
 
 export type InputProps = InputOptions & {
   modelValue?: string
@@ -35,8 +34,7 @@ const inputPropKeys = [
 export const Input = defineComponent(
   (props: InputProps, { emit }) => {
     const attrs = useAttrs()
-    const theme = useTheme()
-    const kit = computed(() => createInputRecipe(theme.value, props))
+    const kit = computed(() => createInputRecipe(props))
 
     useRenderKitDebug(kit, "Input")
 

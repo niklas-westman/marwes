@@ -4,12 +4,12 @@
 
 /* BASE HEADING */
 .mw-heading {
-  font-family: var(--mw-heading-font, inherit);
+  font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-heading-size);
   line-height: var(--mw-heading-line-height);
   font-weight: var(--mw-heading-weight);
   letter-spacing: var(--mw-heading-letter-spacing);
-  color: var(--mw-heading-color);
+  color: var(--mw-color-text);
   margin: 0;
 }
 
@@ -20,10 +20,10 @@
 
 /* BASE PARAGRAPH */
 .mw-p {
-  font-family: var(--mw-p-font, inherit);
+  font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-p-size);
   line-height: var(--mw-p-line-height);
-  color: var(--mw-p-color);
+  color: var(--mw-color-text);
   margin: 0;
 }
 

@@ -7,7 +7,7 @@
 
 .mw-divider {
   border: none;
-  background: var(--mw-divider-color, var(--mw-border));
+  background: var(--mw-color-border);
   margin: 0;
 }
 
@@ -15,16 +15,16 @@
 .mw-divider--horizontal {
   width: 100%;
   height: var(--mw-divider-size, 1px);
-  margin-top: var(--mw-divider-spacing, 1rem);
-  margin-bottom: var(--mw-divider-spacing, 1rem);
+  margin-top: calc(var(--mw-divider-spacing, 1rem) * var(--mw-density-spacing-multiplier, 1));
+  margin-bottom: calc(var(--mw-divider-spacing, 1rem) * var(--mw-density-spacing-multiplier, 1));
 }
 
 /* Vertical divider */
 .mw-divider--vertical {
   height: 100%;
   width: var(--mw-divider-size, 1px);
-  margin-left: var(--mw-divider-spacing, 1rem);
-  margin-right: var(--mw-divider-spacing, 1rem);
+  margin-left: calc(var(--mw-divider-spacing, 1rem) * var(--mw-density-spacing-multiplier, 1));
+  margin-right: calc(var(--mw-divider-spacing, 1rem) * var(--mw-density-spacing-multiplier, 1));
   display: inline-block;
   vertical-align: middle;
 }
@@ -75,6 +75,6 @@
 @media (prefers-color-scheme: dark) {
   .mw-divider {
     /* Theme variable will automatically adapt to dark mode */
-    background: var(--mw-divider-color, var(--mw-border));
+    background: var(--mw-color-border);
   }
 }

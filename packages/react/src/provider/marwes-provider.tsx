@@ -1,68 +1,53 @@
-import type { Preset, System, ThemeMode, ThemeOverrides } from "@marwes-ui/core"
-import { createSystem, switchMode } from "@marwes-ui/core"
-import { firstEdition } from "@marwes-ui/presets"
+import type { ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
+import {
+  applyTheme,
+  extractFontFamilyName,
+  extractUsedWeights,
+  isSystemFont,
+  loadGoogleFont,
+  resolveThemeInput,
+} from "@marwes-ui/core"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 
 export type MarwesProviderProps = {
-  preset?: Preset
-  theme?: ThemeOverrides
-  /**
-   * Current theme mode. Determines light or dark color palette.
-   * When changed, efficiently switches theme colors without recreating the entire system.
-   */
-  mode?: ThemeMode
-  /**
-   * Callback fired when mode should change.
-   * Users are responsible for managing mode state and persistence (e.g., localStorage).
-   *
-   * Example with persistence:
-   * ```tsx
-   * const [mode, setMode] = useState<ThemeMode>(
-   *   () => (localStorage.getItem('theme-mode') as ThemeMode) ?? 'light'
-   * );
-   *
-   * const handleModeChange = (newMode: ThemeMode) => {
-   *   setMode(newMode);
-   *   localStorage.setItem('theme-mode', newMode);
-   * };
-   *
-   * <MarwesProvider mode={mode} onModeChange={handleModeChange}>
-   * ```
-   */
+  theme?: ThemeInput
   onModeChange?: (mode: ThemeMode) => void
   children: React.ReactNode
 }
 
-export function MarwesProvider({
-  preset = firstEdition,
-  theme,
-  mode = "light",
-  onModeChange,
-  children,
-}: MarwesProviderProps) {
-  // Create initial system
-  const initialSystem = React.useMemo(() => {
-    return createSystem({
-      preset,
-      theme: theme ? { ...theme, mode } : { mode },
-    })
-  }, [preset, theme, mode])
+export function MarwesProvider({ theme, onModeChange, children }: MarwesProviderProps) {
+  const rootRef = React.useRef<HTMLDivElement>(null)
 
-  // Optimize mode switching using switchMode() instead of recreating system
-  const system: System = React.useMemo(() => {
-    if (mode === initialSystem.theme.mode) {
-      return initialSystem
+  const resolved: ResolvedTheme = React.useMemo(() => resolveThemeInput(theme ?? {}), [theme])
+
+  React.useEffect(() => {
+    if (rootRef.current) {
+      applyTheme(rootRef.current, resolved)
     }
-    return switchMode(initialSystem, mode)
-  }, [initialSystem, mode])
+  }, [resolved])
 
-  // Apply theme class to container for CSS-based dark mode overrides
-  const themeClass = `mw-theme--${system.theme.mode}`
+  React.useEffect(() => {
+    loadNonSystemFonts(resolved)
+  }, [resolved])
 
   return (
-    <MarwesContext.Provider value={{ system, onModeChange }}>
-      <div className={themeClass}>{children}</div>
+    <MarwesContext.Provider value={{ theme: resolved, onModeChange }}>
+      <div ref={rootRef} className={`mw-theme--${theme?.mode ?? "light"}`}>
+        {children}
+      </div>
     </MarwesContext.Provider>
   )
+}
+
+function loadNonSystemFonts(resolved: ResolvedTheme): void {
+  const weights = extractUsedWeights(resolved.typography)
+  const fontStacks = [resolved.font.primary, resolved.font.secondary]
+
+  for (const stack of fontStacks) {
+    const familyName = extractFontFamilyName(stack)
+    if (familyName && !isSystemFont(familyName)) {
+      loadGoogleFont({ family: familyName, weights })
+    }
+  }
 }

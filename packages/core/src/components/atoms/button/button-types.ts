@@ -36,6 +36,7 @@ export const ButtonVariant = {
   primary: "primary",
   secondary: "secondary",
   text: "text",
+  success: "success",
 } as const
 export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
 

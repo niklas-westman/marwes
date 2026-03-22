@@ -211,3 +211,30 @@ export const TextButton = defineComponent({
     }
   },
 })
+
+export type SuccessButtonProps = Omit<ButtonProps, "variant" | "as">
+
+export const SuccessButton = defineComponent({
+  name: "MarwesSuccessButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as SuccessButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: "success",
+          as: "button",
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-outcome": "positive",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})

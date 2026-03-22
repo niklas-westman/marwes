@@ -1,0 +1,194 @@
+/*
+ * Toast Component Styles
+ * Figma: 1365:12526 (light) / 1368:3596 (dark)
+ *
+ * Variants (from Figma nodes.json):
+ *   subtle  — surface #ffffff, border #c7c8c9, text/icon/action #141414
+ *   outline — surface #ffffff, border #ababfd, icon #2527ca, text/action #1b1d97
+ *   rich    — surface #eeeeff, border #2527ca, icon #2527ca, text/action #1b1d97
+ *
+ * Dark overrides:
+ *   subtle  — surface #1f2937, border #374151, text/icon/action #f9fafb
+ *   outline — surface #1f2937, border #8182fc, icon #8182fc, text/action #ababfd
+ *   rich    — surface #040519, border #8182fc, icon #8182fc, text/action #ababfd
+ *
+ * Structure:
+ *   .mw-toast
+ *     .mw-toast__icon   (optional)
+ *     .mw-toast__body
+ *       .mw-toast__text
+ *       .mw-toast__action (optional)
+ *     .mw-toast__dismiss (optional button)
+ */
+
+.mw-toast {
+  --mw-toast-surface: #ffffff;
+  --mw-toast-border: #c7c8c9;
+  --mw-toast-icon: #141414;
+  --mw-toast-text: #141414;
+  --mw-toast-action: #141414;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--mw-ui-radius, 6px);
+  border: 1px solid var(--mw-toast-border);
+  background: var(--mw-toast-surface);
+  min-width: 240px;
+  max-width: 480px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   ICON
+   ============================================ */
+
+.mw-toast__icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--mw-toast-icon);
+  margin-top: 1px;
+}
+
+/* ============================================
+   BODY
+   ============================================ */
+
+.mw-toast__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.mw-toast__text {
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--mw-toast-text);
+}
+
+.mw-toast__action {
+  display: inline-flex;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mw-toast-action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.mw-toast__action:hover {
+  opacity: 0.8;
+}
+
+/* ============================================
+   DISMISS BUTTON
+   ============================================ */
+
+.mw-toast__dismiss {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin-top: 1px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--mw-toast-icon);
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+}
+
+.mw-toast__dismiss:hover {
+  opacity: 1;
+}
+
+.mw-toast__dismiss:focus-visible {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ×  via mask icon */
+.mw-toast__dismiss::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline x1='18' y1='6' x2='6' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='6' y1='6' x2='18' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline x1='18' y1='6' x2='6' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='6' y1='6' x2='18' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* ============================================
+   VARIANTS — LIGHT
+   ============================================ */
+
+.mw-toast--subtle {
+  --mw-toast-surface: #ffffff;
+  --mw-toast-border: #c7c8c9;
+  --mw-toast-icon: #141414;
+  --mw-toast-text: #141414;
+  --mw-toast-action: #141414;
+}
+
+.mw-toast--outline {
+  --mw-toast-surface: #ffffff;
+  --mw-toast-border: #ababfd;
+  --mw-toast-icon: #2527ca;
+  --mw-toast-text: #1b1d97;
+  --mw-toast-action: #1b1d97;
+}
+
+.mw-toast--rich {
+  --mw-toast-surface: #eeeeff;
+  --mw-toast-border: #2527ca;
+  --mw-toast-icon: #2527ca;
+  --mw-toast-text: #1b1d97;
+  --mw-toast-action: #1b1d97;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-toast--subtle {
+  --mw-toast-surface: #1f2937;
+  --mw-toast-border: #374151;
+  --mw-toast-icon: #f9fafb;
+  --mw-toast-text: #f9fafb;
+  --mw-toast-action: #f9fafb;
+}
+
+.mw-theme--dark .mw-toast--outline {
+  --mw-toast-surface: #1f2937;
+  --mw-toast-border: #8182fc;
+  --mw-toast-icon: #8182fc;
+  --mw-toast-text: #ababfd;
+  --mw-toast-action: #ababfd;
+}
+
+.mw-theme--dark .mw-toast--rich {
+  --mw-toast-surface: #040519;
+  --mw-toast-border: #8182fc;
+  --mw-toast-icon: #8182fc;
+  --mw-toast-text: #ababfd;
+  --mw-toast-action: #ababfd;
+}

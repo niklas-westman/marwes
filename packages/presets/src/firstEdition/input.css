@@ -6,50 +6,51 @@
  */
 
 .mw-input {
-  height: 40px;
-  padding: 0 12px;
-  border-radius: var(--mw-radius);
-  border: 1px solid var(--mw-border);
-  background: var(--mw-surface);
-  color: var(--mw-text);
+  height: var(--mw-density-height);
+  padding: 0 var(--mw-density-padding-x);
+  border-radius: var(--mw-ui-radius);
+  border: 1px solid var(--mw-color-border);
+  background: var(--mw-color-surface);
+  color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size);
   width: 260px;
   transition: border-color 150ms ease, outline 150ms ease;
 }
 
 .mw-input::placeholder {
-  color: var(--mw-text-muted);
+  color: var(--mw-color-text-muted);
 }
 
 /* Hover state (pressed in Figma) - node 1:989 */
 .mw-input:hover:not(:disabled):not(:focus) {
-  border-color: color-mix(in srgb, var(--mw-border) 70%, var(--mw-text));
+  border-color: color-mix(in srgb, var(--mw-color-border) 70%, var(--mw-color-text));
 }
 
 /* Focus/Active state - node 1:994, follows focus spec from node 120:927 */
 .mw-input:focus-visible {
-  outline: 2px solid var(--mw-focus);
+  outline: 2px solid var(--mw-color-focus);
   outline-offset: 2px;
 }
 
 /* Error/Danger tone - node 1:999 */
 .mw-input.is-invalid,
 .mw-input--danger {
-  border-color: var(--mw-danger);
+  border-color: var(--mw-color-danger-base);
 }
 
 .mw-input.is-invalid:focus-visible,
 .mw-input--danger:focus-visible {
-  outline-color: var(--mw-danger);
+  outline-color: var(--mw-color-danger-base);
 }
 
 /* Success tone */
 .mw-input--success {
-  border-color: var(--mw-success);
+  border-color: var(--mw-color-success-base);
 }
 
 .mw-input--success:focus-visible {
-  outline-color: var(--mw-success);
+  outline-color: var(--mw-color-success-base);
 }
 
 /* Disabled state - node 1:1004 */
@@ -77,7 +78,7 @@
    DARK MODE OVERRIDES
    ============================================ */
 
-/* Dark mode: Primary button hover state uses opacity instead of lightening */
+/* Dark mode input styles */
 .mw-theme--dark .mw-input {
   background: #3e3e3e;
 }

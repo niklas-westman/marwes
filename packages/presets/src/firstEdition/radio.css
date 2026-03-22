@@ -1,0 +1,119 @@
+/*
+ * Radio Component Styles
+ * Figma: 1368:6734 (light) / 1368:6900 (dark)
+ *
+ * Tokens (from Figma nodes.json):
+ *   radio/surface (light): #f9fafb    (dark): #141414
+ *   radio/border  (light): #e5e7eb    (dark): #374151
+ *   radio/dot     (light): #2f31fc    (dark): #2f31fc  (= primary-base)
+ *   radio/label   (light): #141414    (dark): #f9fafb  (= text)
+ *   Dimensions: 16×16px circle, 6px inner dot
+ */
+
+.mw-radio {
+  --mw-radio-surface: #f9fafb;
+  --mw-radio-border: #e5e7eb;
+  --mw-radio-dot: var(--mw-color-primary-base, #2f31fc);
+
+  /* Reset native appearance */
+  appearance: none;
+  -webkit-appearance: none;
+
+  /* Grid centering for ::before dot */
+  display: inline-grid;
+  place-content: center;
+
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--mw-radio-border);
+  background: var(--mw-radio-surface);
+
+  cursor: pointer;
+  vertical-align: middle;
+  transition: border-color 150ms ease, background 150ms ease;
+  font-family: var(--mw-font-primary, inherit);
+}
+
+/* Inner dot — hidden by default, scales in when checked */
+.mw-radio::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mw-radio-dot);
+  transform: scale(0);
+  transition: transform 180ms ease;
+}
+
+/* ============================================
+   CHECKED STATE
+   ============================================ */
+
+.mw-radio:checked {
+  border-color: var(--mw-radio-dot);
+  background: var(--mw-radio-surface);
+}
+
+.mw-radio:checked::before {
+  transform: scale(1);
+}
+
+/* ============================================
+   HOVER STATE
+   ============================================ */
+
+.mw-radio:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--mw-radio-border) 60%, var(--mw-radio-dot));
+}
+
+/* ============================================
+   FOCUS
+   ============================================ */
+
+.mw-radio:focus-visible {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   DISABLED STATE
+   ============================================ */
+
+.mw-radio:disabled,
+.mw-radio--disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
+/* ============================================
+   INVALID STATE
+   ============================================ */
+
+.mw-radio--invalid,
+.mw-radio[aria-invalid="true"] {
+  border-color: var(--mw-color-danger-base);
+}
+
+.mw-radio:checked.mw-radio--invalid::before,
+.mw-radio:checked[aria-invalid="true"]::before {
+  background: var(--mw-color-danger-base);
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-radio {
+  --mw-radio-surface: #141414;
+  --mw-radio-border: #374151;
+}
+
+.mw-theme--dark .mw-radio:hover:not(:disabled) {
+  border-color: color-mix(in srgb, #ffffff 40%, var(--mw-radio-dot));
+}
+
+.mw-theme--dark .mw-radio:disabled,
+.mw-theme--dark .mw-radio--disabled {
+  opacity: 0.4;
+}

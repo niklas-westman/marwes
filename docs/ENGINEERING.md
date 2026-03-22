@@ -97,13 +97,41 @@ Each component in `@marwes-ui/core` follows a consistent structure:
 - `index.ts` — exports
 
 ## When Adding a Component
-1. Define types in `*.types.ts`.
-2. Implement a11y in `*.a11y.ts`.
-3. Implement styles in `*.styles.ts`.
-4. Build the RenderKit in `*.recipe.ts`.
-5. Add preset CSS in `@marwes-ui/presets`.
-6. Add the adapter component in `@marwes-ui/react`.
-7. Add a Storybook story and a playground example.
+
+Follow this layer order strictly — never skip ahead or work across layers simultaneously:
+
+```
+1. core          *.types.ts      — public contracts, InteractionState, props
+2. core          *.a11y.ts       — ARIA attribute mapping
+3. core          *.styles.ts     — state × variant → CSS variables + class modifiers
+4. core          *.recipe.ts     — combines into a RenderKit
+5. presets       *.css           — CSS classes + --mw-* variable consumption
+6. react         component       — React adapter (applies RenderKit, wires events)
+7. react         *.stories.ts    — Storybook stories covering all states and variants
+8. vue           component       — Vue adapter (same RenderKit, same API surface)
+9. vue           *.stories.ts    — Storybook stories matching React coverage
+```
+
+Each layer must be complete and passing before the next begins. Tests are written **before** the implementation they cover (TDD). A layer is done when:
+- All tests pass
+- `tsc --noEmit` clean
+- Lint clean
+- No regressions in visual snapshots (Chromatic)
+
+## Implementation Workflow (Plan Agent TDD)
+
+Non-trivial work follows the plan-agent flow before any implementation begins:
+
+```
+Research → Spec → Tickets → Implement
+```
+
+- **Research** — read the codebase, understand what exists, surface risks and options. Produces `research.md`.
+- **Spec** — locked-down requirements, architecture, acceptance criteria. Produces `spec.md` (updates `docs/SPEC.md` for shared decisions).
+- **Tickets** — TDD-style task list. Each ticket: write the test first, then implement. Produces `todo.md`.
+- **Implement** — execute tickets in order, one at a time.
+
+Each phase gates on explicit confirmation. No implementation without a signed-off spec.
 
 ## Build System
 

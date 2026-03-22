@@ -2,7 +2,6 @@ import type { CssVars, InputOptions } from "@marwes-ui/core"
 import { createInputRecipe } from "@marwes-ui/core"
 import type * as React from "react"
 import { useRenderKitDebug } from "../hooks/use-renderkit-debug"
-import { useTheme } from "../provider/use-theme"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -12,8 +11,7 @@ export type InputProps = InputOptions & {
 }
 
 export function Input(props: InputProps) {
-  const theme = useTheme()
-  const kit = createInputRecipe(theme, props)
+  const kit = createInputRecipe(props)
 
   // Debug hook for Storybook RenderKit addon
   useRenderKitDebug(kit, "Input")

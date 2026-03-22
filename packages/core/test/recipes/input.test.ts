@@ -1,10 +1,9 @@
 import { describe, expect, it } from "vitest"
 import { createInputRecipe } from "../../src/components/atoms/input/input-recipe"
-import { defaultTheme } from "../../src/theme/theme-defaults"
 
 describe("createInputRecipe", () => {
   it("creates invalid state class and a11y wiring", () => {
-    const kit = createInputRecipe(defaultTheme, {
+    const kit = createInputRecipe({
       ariaLabel: "Email",
       invalid: true,
       describedBy: "email-help",

@@ -4,6 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "license": "MIT",
   "private": false,
   "type": "module",
   "sideEffects": false,

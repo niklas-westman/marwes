@@ -1,7 +1,6 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
 import { createButtonRecipe } from "@marwes-ui/core"
 import type * as React from "react"
-import { useTheme } from "../../provider/use-theme"
 import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -13,8 +12,7 @@ export type ButtonProps = ButtonOptions & {
 }
 
 export function Button(props: ButtonProps) {
-  const theme = useTheme()
-  const kit = createButtonRecipe(theme, props)
+  const kit = createButtonRecipe(props)
 
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className

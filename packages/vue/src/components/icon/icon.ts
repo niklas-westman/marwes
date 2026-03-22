@@ -6,7 +6,6 @@ import {
   resolveIconStrokeWidth,
 } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
-import { useTheme } from "../../provider/use-theme"
 
 type IconName = keyof typeof iconRegistry
 
@@ -31,12 +30,10 @@ const iconPropKeys = [
 export const Icon = defineComponent(
   (props: IconProps) => {
     const attrs = useAttrs()
-    const theme = useTheme()
 
     return () => {
-      const themeIcon = theme.value.icon
-      const px = resolveIconSize(props.size ?? themeIcon.size)
-      const strokeWidth = resolveIconStrokeWidth(props.strokeWidth ?? themeIcon.strokeWidth)
+      const px = resolveIconSize(props.size ?? "sm")
+      const strokeWidth = resolveIconStrokeWidth(props.strokeWidth ?? "md")
       const iconDefinition = iconRegistry[props.name]
       const ariaLabelFromAttrs =
         typeof attrs["aria-label"] === "string" ? (attrs["aria-label"] as string) : undefined

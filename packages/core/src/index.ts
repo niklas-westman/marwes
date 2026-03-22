@@ -1,14 +1,17 @@
 export type {
   Theme,
   ThemeMode,
-  ThemeOverrides,
-  Preset,
-  System,
+  ThemeInput,
+  ThemeInputColor,
+  ColorInput,
+  ColorRole,
+  SecondaryColorRole,
+  Density,
 } from "./theme/theme-types"
-export { defaultTheme, lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
-export { mergeTheme } from "./theme/theme-merge"
-export { normalizeTheme } from "./theme/theme-normalize"
-export { createSystem, switchMode } from "./theme/create-system"
+export { lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
+export { resolveThemeInput } from "./theme/theme-normalize"
+export type { ResolvedTheme } from "./theme/theme-css"
+export { themeToCSSVars, applyTheme } from "./theme/theme-css"
 
 // /* Button */
 // export { createButtonRecipe } from "./components/atoms/button";
@@ -44,6 +47,18 @@ export { createSystem, switchMode } from "./theme/create-system"
 //   CheckboxProps,
 //   CheckboxRenderKit,
 // } from "./components/atoms/checkbox";
+
+export type { ToneName } from "./theme/tone"
+export { resolveTone } from "./theme/tone"
+export type { DensityScale } from "./theme/density"
+export { DENSITY_SCALES, densityToCSSVars } from "./theme/density"
+export {
+  loadGoogleFont,
+  extractFontFamilyName,
+  isSystemFont,
+  extractUsedWeights,
+  resetFontLoaderState,
+} from "./theme/font-loader"
 
 export type { CssVars } from "./shared/css-vars"
 export {

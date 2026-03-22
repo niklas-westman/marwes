@@ -1,0 +1,109 @@
+/*
+ * Badge Component Styles
+ * Figma: 1364:11603 (light) / 1368:5847 (dark)
+ *
+ * Tokens (neutral variant directly from Figma nodes.json):
+ *   badge/surface (light): #f3f4f6    badge/surface (dark): #1f2937
+ *   badge/border  (light): #e5e7eb    badge/border  (dark): #374151
+ *   badge/label   (light): #4b5563    badge/label   (dark): #9ca3af
+ *
+ * Colored variants use color-mix() with theme CSS vars.
+ */
+
+.mw-badge {
+  --mw-badge-surface: transparent;
+  --mw-badge-border: transparent;
+  --mw-badge-label: inherit;
+
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--mw-badge-border);
+  background: var(--mw-badge-surface);
+  color: var(--mw-badge-label);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* ============================================
+   LIGHT VARIANTS
+   ============================================ */
+
+.mw-badge--neutral {
+  --mw-badge-surface: #f3f4f6;
+  --mw-badge-border: #e5e7eb;
+  --mw-badge-label: #4b5563;
+}
+
+.mw-badge--brand {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-primary-base) 12%, white);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-primary-base) 30%, white);
+  --mw-badge-label: var(--mw-color-primary-base);
+}
+
+.mw-badge--info {
+  --mw-badge-surface: #eff6ff;
+  --mw-badge-border: #bfdbfe;
+  --mw-badge-label: #1d4ed8;
+}
+
+.mw-badge--success {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 12%, white);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-success-base) 30%, white);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-success-base) 90%, black);
+}
+
+.mw-badge--warning {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 15%, white);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-warning-base) 35%, white);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 70%, black);
+}
+
+.mw-badge--error {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, white);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-danger-base) 30%, white);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 90%, black);
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-badge--neutral {
+  --mw-badge-surface: #1f2937;
+  --mw-badge-border: #374151;
+  --mw-badge-label: #9ca3af;
+}
+
+.mw-theme--dark .mw-badge--brand {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-primary-base) 20%, black);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-primary-base) 50%, black);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-primary-base) 80%, white);
+}
+
+.mw-theme--dark .mw-badge--info {
+  --mw-badge-surface: #1e3a5f;
+  --mw-badge-border: #1d4ed8;
+  --mw-badge-label: #93c5fd;
+}
+
+.mw-theme--dark .mw-badge--success {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 20%, black);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-success-base) 50%, black);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-success-base) 80%, white);
+}
+
+.mw-theme--dark .mw-badge--warning {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 20%, black);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-warning-base) 50%, black);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 80%, white);
+}
+
+.mw-theme--dark .mw-badge--error {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 20%, black);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-danger-base) 50%, black);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 80%, white);
+}

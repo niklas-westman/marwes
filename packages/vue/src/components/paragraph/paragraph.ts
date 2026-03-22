@@ -20,7 +20,7 @@ export const Paragraph = defineComponent(
   (props: ParagraphProps, { slots }) => {
     const attrs = useAttrs()
     const theme = useTheme()
-    const kit = computed(() => paragraphRecipe(props, theme.value))
+    const kit = computed(() => paragraphRecipe(props, theme))
 
     return () => {
       const renderKit = kit.value

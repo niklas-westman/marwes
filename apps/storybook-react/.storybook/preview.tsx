@@ -1,41 +1,15 @@
 import type { ThemeMode } from "@marwes-ui/core"
-import { firstEdition } from "@marwes-ui/presets"
+import { firstEditionTheme } from "@marwes-ui/presets"
 import { MarwesProvider } from "@marwes-ui/react"
 import type { Decorator, Preview } from "@storybook/react"
 import "@marwes-ui/presets/firstEdition/styles.css"
 
-/**
- * Marwes decorator with theme mode switching support.
- *
- * Users implementing this pattern should handle persistence like this:
- *
- * ```tsx
- * const [mode, setMode] = useState<ThemeMode>(
- *   () => (localStorage.getItem('marwes:theme:mode') as ThemeMode) ?? 'light'
- * );
- *
- * const handleModeChange = (newMode: ThemeMode) => {
- *   setMode(newMode);
- *   localStorage.setItem('marwes:theme:mode', newMode);
- * };
- *
- * <MarwesProvider mode={mode} onModeChange={handleModeChange} preset={firstEdition}>
- *   <App />
- * </MarwesProvider>
- * ```
- */
 const withMarwes: Decorator = (Story, context) => {
-  // Get theme mode from Storybook's global toolbar
   const storybookTheme = context.globals.theme as ThemeMode | undefined
   const mode: ThemeMode = storybookTheme === "dark" ? "dark" : "light"
 
   return (
-    <MarwesProvider
-      preset={firstEdition}
-      mode={mode}
-      // onModeChange would be provided by user's app, not in Storybook
-      // Example: onModeChange={(newMode) => { localStorage.setItem('marwes:theme:mode', newMode); }}
-    >
+    <MarwesProvider theme={{ ...firstEditionTheme, mode }}>
       <div style={{ padding: 24 }}>
         <Story />
       </div>

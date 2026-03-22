@@ -7,7 +7,6 @@ import {
   mergeStyles,
   omitAttrs,
 } from "../../internal/render-utils"
-import { useTheme } from "../../provider/use-theme"
 import { Icon } from "../icon"
 
 export type ButtonProps = ButtonOptions & {
@@ -43,9 +42,8 @@ const buttonPropKeys = [
 export const Button = defineComponent(
   (props: ButtonProps, { slots, emit }) => {
     const attrs = useAttrs()
-    const theme = useTheme()
 
-    const kit = computed(() => createButtonRecipe(theme.value, props))
+    const kit = computed(() => createButtonRecipe(props))
 
     return () => {
       const renderKit = kit.value

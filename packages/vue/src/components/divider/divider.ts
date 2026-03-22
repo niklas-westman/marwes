@@ -2,7 +2,6 @@ import { createDividerRecipe } from "@marwes-ui/core"
 import type { CssVars, DividerOptions, DividerOrientation, DividerSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
-import { useTheme } from "../../provider/use-theme"
 
 export type DividerProps = DividerOptions & {
   size?: DividerSize
@@ -15,8 +14,7 @@ const dividerPropKeys = ["size", "orientation", "id", "className"] as const
 export const Divider = defineComponent(
   (props: DividerProps) => {
     const attrs = useAttrs()
-    const theme = useTheme()
-    const kit = computed(() => createDividerRecipe(theme.value, props))
+    const kit = computed(() => createDividerRecipe(props))
 
     return () => {
       const renderKit = kit.value

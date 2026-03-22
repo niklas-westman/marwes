@@ -1,5 +1,15 @@
+// Re-export color role types so consumers import from one place
+export type { ColorInput, ColorRole, SecondaryColorRole } from "./color-resolve"
+export type { ToneName } from "./tone"
+
 export type Density = "compact" | "comfortable" | "spacious"
+
+/**
+ * @deprecated UiVariant has been removed. Button variants (primary|secondary|text)
+ * are unrelated. Remove any references to UiVariant from your code.
+ */
 export type UiVariant = "solid" | "soft" | "outline" | "ghost"
+
 export type IconStrokeWidth = "xs" | "sm" | "md" | "lg"
 export type IconSize = "xs" | "sm" | "md" | "lg"
 export type HeadingSize = "h1" | "h2" | "h3"
@@ -20,13 +30,8 @@ export type Theme = {
   mode: ThemeMode
 
   color: {
-    // Primary colors
+    // Primary
     primary: string
-    onPrimary: string
-
-    // Secondary colors
-    secondary: string
-    onSecondary: string
 
     // Background & Surface
     background: string
@@ -50,13 +55,8 @@ export type Theme = {
 
     // Semantic colors
     danger: string
-    onDanger: string
-
     success: string
-    onSuccess: string
-
     warning: string
-    onWarning: string
   }
   font: {
     primary: string
@@ -66,11 +66,6 @@ export type Theme = {
   ui: {
     radius: number
     density: Density
-    variant: UiVariant
-  }
-  icon: {
-    size: IconSize
-    strokeWidth: IconStrokeWidth
   }
   typography: {
     h1: {
@@ -108,12 +103,49 @@ export type Theme = {
   }
 }
 
-export type ThemeOverrides = {
+// ─── V3 Input API ─────────────────────────────────────────────────────────────
+// ThemeInput is the consumer-facing input type for the Phase 0 theme engine.
+// Derivable roles (primary, danger, success, warning) accept ColorInput — a
+// plain hex string or an override object. The on* fields and secondary are
+// intentionally absent: they are derived automatically by resolveColorRole /
+// resolveSecondaryRole.
+
+import type { ColorInput } from "./color-resolve"
+import type { ToneName } from "./tone"
+
+export interface ThemeInputColor {
+  primary: ColorInput
+  danger: ColorInput
+  success: ColorInput
+  warning: ColorInput
+  // Surface and semantic tokens — not derived, configured directly
+  background: string
+  surface: string
+  surfaceInverted: string
+  text: string
+  textMuted: string
+  textInverted: string
+  border: string
+  borderSubtle: string
+  focus: string
+
+  // Removed in v3 — typed never so consumers get a descriptive TS error
+  /** @deprecated Removed in v3. Label color is now derived via WCAG contrast. Remove this field. */
+  onPrimary?: never
+  /** @deprecated Removed in v3. Secondary is always derived from primary. Remove this field. */
+  secondary?: never
+  onSecondary?: never
+  onDanger?: never
+  onSuccess?: never
+  onWarning?: never
+}
+
+export interface ThemeInput {
   mode?: ThemeMode
-  color?: Partial<Theme["color"]>
+  tone?: ToneName
+  color?: Partial<ThemeInputColor>
   font?: Partial<Theme["font"]>
   ui?: Partial<Theme["ui"]>
-  icon?: Partial<Theme["icon"]>
   typography?: Partial<{
     h1?: Partial<Theme["typography"]["h1"]>
     h2?: Partial<Theme["typography"]["h2"]>
@@ -124,14 +156,4 @@ export type ThemeOverrides = {
       lg?: Partial<Theme["typography"]["paragraph"]["lg"]>
     }>
   }>
-}
-
-export type Preset = {
-  name: string
-  theme?: ThemeOverrides
-}
-
-export type System = {
-  theme: Theme
-  preset: Preset
 }

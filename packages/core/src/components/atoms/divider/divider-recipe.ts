@@ -7,7 +7,6 @@
  */
 
 import type { CssVars } from "../../../shared/css-vars"
-import type { Theme } from "../../../theme/theme-types"
 import type {
   DividerOptions,
   DividerOrientation,
@@ -37,7 +36,7 @@ const SPACING_MAP: Record<DividerSize, number> = {
   xxl: 4, // 4rem
 }
 
-export function createDividerRecipe(theme: Theme, opts: DividerOptions = {}): DividerRenderKit {
+export function createDividerRecipe(opts: DividerOptions = {}): DividerRenderKit {
   // Default size to "md", orientation to "horizontal".
   const size: DividerSize = opts.size ?? "md"
   const orientation: DividerOrientation = opts.orientation ?? "horizontal"
@@ -53,7 +52,6 @@ export function createDividerRecipe(theme: Theme, opts: DividerOptions = {}): Di
 
   // CSS variables.
   const vars: CssVars = {
-    "--mw-divider-color": theme.color.border,
     "--mw-divider-size": `${sizeValue}px`,
     "--mw-divider-spacing": `${spacingValue}rem`,
   }

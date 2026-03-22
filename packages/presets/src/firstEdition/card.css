@@ -1,0 +1,73 @@
+/*
+ * Card Component Styles
+ * Figma: 1364:11556 (light) / 1368:5891 (dark)
+ *
+ * Tokens (from Figma nodes.json):
+ *   card/surface (light): #ffffff    (dark): #374151
+ *   card/border  (light): #e5e7eb    (dark): #374151
+ *   card/title   (light): #141414    (dark): #f9fafb
+ *   card/body    (light): #4b5563    (dark): #9ca3af
+ *   Spacing: sp-24 = 24px
+ *
+ * Structure:
+ *   .mw-card
+ *     .mw-card__header  (optional — wraps .mw-card__title)
+ *     .mw-card__body    (main content area)
+ */
+
+.mw-card {
+  --mw-card-surface: #ffffff;
+  --mw-card-border: #e5e7eb;
+  --mw-card-title: #141414;
+  --mw-card-body: #4b5563;
+
+  background: var(--mw-card-surface);
+  border: 1px solid var(--mw-card-border);
+  border-radius: var(--mw-ui-radius, 8px);
+  overflow: hidden;
+}
+
+/* ============================================
+   HEADER (optional)
+   ============================================ */
+
+.mw-card__header {
+  padding: 20px 24px 0;
+}
+
+.mw-card__title {
+  display: block;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--mw-card-title);
+}
+
+/* ============================================
+   BODY
+   ============================================ */
+
+.mw-card__body {
+  padding: 16px 24px 24px;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  line-height: 1.6;
+  color: var(--mw-card-body);
+}
+
+/* When no header, body gets full top padding */
+.mw-card__body:first-child {
+  padding-top: 24px;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-card {
+  --mw-card-surface: #374151;
+  --mw-card-border: #374151;
+  --mw-card-title: #f9fafb;
+  --mw-card-body: #9ca3af;
+}

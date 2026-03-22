@@ -14,12 +14,11 @@ Framework-agnostic Marwes core: theme system, typed component recipes, and a11y 
 - No runtime styling engine.
 
 ## Public API
-Theme and system:
-- `defaultTheme`
-- `mergeTheme`
-- `normalizeTheme`
-- `createSystem`
-- Types: `Theme`, `ThemeOverrides`, `Preset`, `System`, `CssVars`
+Theme engine:
+- `lightThemeDefaults` / `darkThemeDefaults`
+- `resolveThemeInput`
+- `themeToCSSVars` / `applyTheme`
+- Types: `Theme`, `ThemeMode`, `ThemeInput`, `ThemeInputColor`, `ResolvedTheme`, `ColorRole`, `SecondaryColorRole`, `ColorInput`, `CssVars`
 
 Atoms (recipes + types):
 - `createButtonRecipe`

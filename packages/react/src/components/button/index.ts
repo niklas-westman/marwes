@@ -10,6 +10,7 @@ export {
   PrimaryButton,
   SecondaryButton,
   TextButton,
+  SuccessButton,
 } from "./variants"
 
 export type {
@@ -21,4 +22,5 @@ export type {
   PrimaryButtonProps,
   SecondaryButtonProps,
   TextButtonProps,
+  SuccessButtonProps,
 } from "./variants"

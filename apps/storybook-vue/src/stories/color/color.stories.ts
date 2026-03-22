@@ -39,12 +39,12 @@ const ColorPalette = defineComponent({
   theme={{
     color: {
       primary: "#5B8CFF",
-      onPrimary: "#FFFFFF",
     }
   }}
 >
   <App />
-</MarwesProvider>`
+</MarwesProvider>
+// Label color is auto-derived via WCAG contrast — no onPrimary needed`
 
     return { theme, cssExample, providerExample }
   },
@@ -59,16 +59,16 @@ const ColorPalette = defineComponent({
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
           <ColorSwatch
             name="Primary"
-            :hex="theme.color.primary"
+            :hex="theme.color.primary.base"
             cssVar="--mw-primary"
             description="Rich Black - Main brand color"
             usage="Buttons, links, active states"
           />
           <ColorSwatch
-            name="On Primary"
-            :hex="theme.color.onPrimary"
-            cssVar="--mw-on-primary"
-            description="Text/icons on primary backgrounds"
+            name="Primary Label"
+            :hex="theme.color.primary.label"
+            cssVar="--mw-primary-label"
+            description="Text/icons on primary backgrounds (WCAG-derived)"
             usage="Text on primary buttons"
           />
         </div>
@@ -82,16 +82,16 @@ const ColorPalette = defineComponent({
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
           <ColorSwatch
             name="Secondary"
-            :hex="theme.color.secondary"
+            :hex="theme.color.secondary.base"
             cssVar="--mw-secondary"
-            description="Soft White - Secondary brand color"
+            description="Derived from primary - Secondary brand color"
             usage="Secondary buttons, backgrounds"
           />
           <ColorSwatch
-            name="On Secondary"
-            :hex="theme.color.onSecondary"
-            cssVar="--mw-on-secondary"
-            description="Text/icons on secondary backgrounds"
+            name="Secondary Label"
+            :hex="theme.color.secondary.label"
+            cssVar="--mw-secondary-label"
+            description="Text/icons on secondary backgrounds (WCAG-derived)"
             usage="Text on secondary buttons"
           />
         </div>
@@ -103,12 +103,12 @@ const ColorPalette = defineComponent({
           Contextual colors that communicate meaning (success, error, warning states).
         </Paragraph>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-          <ColorSwatch name="Success" :hex="theme.color.success" cssVar="--mw-success" description="Field Green - Positive states" usage="Success messages, checkmarks" />
-          <ColorSwatch name="On Success" :hex="theme.color.onSuccess" cssVar="--mw-on-success" description="Text/icons on success backgrounds" usage="Text on success banners" />
-          <ColorSwatch name="Danger" :hex="theme.color.danger" cssVar="--mw-danger" description="Coral Red - Error states" usage="Error messages, delete actions" />
-          <ColorSwatch name="On Danger" :hex="theme.color.onDanger" cssVar="--mw-on-danger" description="Text/icons on danger backgrounds" usage="Text on error banners" />
-          <ColorSwatch name="Warning" :hex="theme.color.warning" cssVar="--mw-warning" description="Amber Yellow - Warning states" usage="Warning messages, caution indicators" />
-          <ColorSwatch name="On Warning" :hex="theme.color.onWarning" cssVar="--mw-on-warning" description="Text/icons on warning backgrounds" usage="Text on warning banners" />
+          <ColorSwatch name="Success" :hex="theme.color.success.base" cssVar="--mw-success" description="Field Green - Positive states" usage="Success messages, checkmarks" />
+          <ColorSwatch name="Success Label" :hex="theme.color.success.label" cssVar="--mw-success-label" description="Text/icons on success backgrounds (WCAG-derived)" usage="Text on success banners" />
+          <ColorSwatch name="Danger" :hex="theme.color.danger.base" cssVar="--mw-danger" description="Coral Red - Error states" usage="Error messages, delete actions" />
+          <ColorSwatch name="Danger Label" :hex="theme.color.danger.label" cssVar="--mw-danger-label" description="Text/icons on danger backgrounds (WCAG-derived)" usage="Text on error banners" />
+          <ColorSwatch name="Warning" :hex="theme.color.warning.base" cssVar="--mw-warning" description="Amber Yellow - Warning states" usage="Warning messages, caution indicators" />
+          <ColorSwatch name="Warning Label" :hex="theme.color.warning.label" cssVar="--mw-warning-label" description="Text/icons on warning backgrounds (WCAG-derived)" usage="Text on warning banners" />
         </div>
       </section>
 
@@ -183,15 +183,15 @@ export const PrimaryOnly: Story = {
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
         <ColorSwatch
           name="Primary"
-          :hex="theme.color.primary"
+          :hex="theme.color.primary.base"
           cssVar="--mw-primary"
           description="Rich Black - Main brand color"
         />
         <ColorSwatch
-          name="On Primary"
-          :hex="theme.color.onPrimary"
-          cssVar="--mw-on-primary"
-          description="Text/icons on primary backgrounds"
+          name="Primary Label"
+          :hex="theme.color.primary.label"
+          cssVar="--mw-primary-label"
+          description="Text/icons on primary backgrounds (WCAG-derived)"
         />
       </div>
     `,
@@ -207,14 +207,14 @@ export const SemanticOnly: Story = {
     },
     template: `
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
-        <ColorSwatch name="Success" :hex="theme.color.success" cssVar="--mw-success" description="Field Green - Positive states" />
-        <ColorSwatch name="On Success" :hex="theme.color.onSuccess" cssVar="--mw-on-success" />
+        <ColorSwatch name="Success" :hex="theme.color.success.base" cssVar="--mw-success" description="Field Green - Positive states" />
+        <ColorSwatch name="Success Label" :hex="theme.color.success.label" cssVar="--mw-success-label" />
 
-        <ColorSwatch name="Danger" :hex="theme.color.danger" cssVar="--mw-danger" description="Coral Red - Error states" />
-        <ColorSwatch name="On Danger" :hex="theme.color.onDanger" cssVar="--mw-on-danger" />
+        <ColorSwatch name="Danger" :hex="theme.color.danger.base" cssVar="--mw-danger" description="Coral Red - Error states" />
+        <ColorSwatch name="Danger Label" :hex="theme.color.danger.label" cssVar="--mw-danger-label" />
 
-        <ColorSwatch name="Warning" :hex="theme.color.warning" cssVar="--mw-warning" description="Amber Yellow - Warning states" />
-        <ColorSwatch name="On Warning" :hex="theme.color.onWarning" cssVar="--mw-on-warning" />
+        <ColorSwatch name="Warning" :hex="theme.color.warning.base" cssVar="--mw-warning" description="Amber Yellow - Warning states" />
+        <ColorSwatch name="Warning Label" :hex="theme.color.warning.label" cssVar="--mw-warning-label" />
       </div>
     `,
   }),

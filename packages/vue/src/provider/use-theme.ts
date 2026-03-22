@@ -1,8 +1,13 @@
-import type { Theme } from "@marwes-ui/core"
-import { computed } from "vue"
-import { useSystem } from "./use-system"
+import type { ResolvedTheme } from "@marwes-ui/core"
+import { inject } from "vue"
+import { marwesContextKey } from "./marwes-context"
 
-export function useTheme() {
-  const system = useSystem()
-  return computed<Theme>(() => system.value.theme)
+export function useTheme(): ResolvedTheme {
+  const context = inject(marwesContextKey, null)
+
+  if (!context) {
+    throw new Error("MarwesProvider is missing. Wrap your app in <MarwesProvider />.")
+  }
+
+  return context.theme.value
 }

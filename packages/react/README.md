@@ -19,18 +19,28 @@ pnpm add @marwes-ui/core @marwes-ui/react @marwes-ui/presets
 ## Quick Start
 ```tsx
 import { MarwesProvider, Button, ButtonVariant, Input, Checkbox } from "@marwes-ui/react";
-import { firstEdition } from "@marwes-ui/presets";
+import { firstEditionTheme } from "@marwes-ui/presets";
 import "@marwes-ui/presets/firstEdition/styles.css";
 
+// Drop-in — full firstEdition look out of the box
 export function App() {
   return (
-    <MarwesProvider preset={firstEdition} theme={{ color: { primary: "#5B8CFF" } }}>
+    <MarwesProvider theme={firstEditionTheme}>
       <Button variant={ButtonVariant.primary}>Save</Button>
       <Input placeholder="Email" onValueChange={(v) => console.log(v)} />
       <Checkbox ariaLabel="Subscribe" />
     </MarwesProvider>
   );
 }
+
+// Brand override — spread and replace what you need
+<MarwesProvider theme={{ ...firstEditionTheme, color: { primary: "#5B8CFF" } }}>
+
+// Dark mode
+<MarwesProvider theme={{ ...firstEditionTheme, mode: "dark" }}>
+
+// Dark mode + brand override
+<MarwesProvider theme={{ ...firstEditionTheme, mode: "dark", color: { primary: "#5B8CFF" } }}>
 ```
 
 ## Button Philosophy
@@ -68,7 +78,6 @@ Semantic components are preferred for guaranteed AI context and consistent UX.
 Provider and hooks:
 - `MarwesProvider`
 - `useTheme`
-- `useSystem`
 
 Atoms:
 - `Button`, `PrimaryButton`, `SecondaryButton`, `TextButton`

@@ -260,3 +260,37 @@ export type TextButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 export function TextButton(props: TextButtonProps) {
   return <Button {...props} variant="text" as="button" />
 }
+
+// ============================================================================
+// SUCCESS BUTTON - Positive Confirmation Actions
+// ============================================================================
+
+export type SuccessButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
+
+/**
+ * SuccessButton - For positive confirmation actions like approve, confirm, or complete.
+ *
+ * **AI Context:**
+ * - Sets `variant="success"` for green visual treatment
+ * - Adds `data-outcome="positive"` for AI parsing
+ *
+ * @example
+ * ```tsx
+ * <SuccessButton onClick={handleApprove}>
+ *   Approve
+ * </SuccessButton>
+ * ```
+ */
+export function SuccessButton(props: SuccessButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant="success"
+      as="button"
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-outcome": "positive",
+      }}
+    />
+  )
+}

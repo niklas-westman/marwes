@@ -1,40 +1,34 @@
-import type { Preset, System, ThemeMode, ThemeOverrides } from "@marwes-ui/core"
-import { createSystem, switchMode } from "@marwes-ui/core"
-import { firstEdition } from "@marwes-ui/presets"
-import { computed, defineComponent, h, provide } from "vue"
+import type { ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
+import { applyTheme, resolveThemeInput } from "@marwes-ui/core"
+import { computed, defineComponent, h, onMounted, provide, ref, watch } from "vue"
 import { marwesContextKey } from "./marwes-context"
 
 export type MarwesProviderProps = {
-  preset?: Preset
-  theme?: ThemeOverrides
-  mode?: ThemeMode
+  theme?: ThemeInput
   onModeChange?: (mode: ThemeMode) => void
 }
 
 export const MarwesProvider = defineComponent({
   name: "MarwesProvider",
-  props: ["preset", "theme", "mode", "onModeChange"],
+  props: ["theme", "onModeChange"],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps
 
-    const system = computed<System>(() => {
-      const preset = props.preset ?? firstEdition
-      const mode = props.mode ?? "light"
+    const resolved = computed<ResolvedTheme>(() => resolveThemeInput(props.theme ?? {}))
 
-      const initialSystem = createSystem({
-        preset,
-        theme: props.theme ? { ...props.theme, mode } : { mode },
-      })
+    const rootRef = ref<HTMLElement | null>(null)
 
-      if (mode === initialSystem.theme.mode) {
-        return initialSystem
+    function applyVars() {
+      if (rootRef.value) {
+        applyTheme(rootRef.value, resolved.value)
       }
+    }
 
-      return switchMode(initialSystem, mode)
-    })
+    onMounted(applyVars)
+    watch(resolved, applyVars)
 
     provide(marwesContextKey, {
-      system,
+      theme: resolved,
       onModeChange: props.onModeChange,
     })
 
@@ -42,7 +36,8 @@ export const MarwesProvider = defineComponent({
       h(
         "div",
         {
-          class: `mw-theme--${system.value.theme.mode}`,
+          ref: rootRef,
+          class: `mw-theme--${props.theme?.mode ?? "light"}`,
         },
         slots.default?.(),
       )
