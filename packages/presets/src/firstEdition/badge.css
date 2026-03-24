@@ -22,6 +22,7 @@
   border: 1px solid var(--mw-badge-border);
   background: var(--mw-badge-surface);
   color: var(--mw-badge-label);
+  font-family: var(--mw-font-primary, inherit);
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
@@ -106,4 +107,9 @@
   --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 20%, black);
   --mw-badge-border: color-mix(in srgb, var(--mw-color-danger-base) 50%, black);
   --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 80%, white);
+}
+
+.mw-badge-group__items {
+  display: inline-flex;
+  gap: 4px;
 }

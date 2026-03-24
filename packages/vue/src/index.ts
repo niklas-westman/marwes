@@ -122,6 +122,18 @@ export type {
 export { Badge } from "./components/badge"
 export type { BadgeProps } from "./components/badge"
 
+/* BadgeGroup */
+export { BadgeGroup } from "./components/badge"
+export type { BadgeGroupProps } from "./components/badge"
+
+/* Badge Variants */
+export { StatusBadge, PriorityBadge, NotificationBadge } from "./components/badge"
+export type {
+  StatusBadgeProps,
+  PriorityBadgeProps,
+  NotificationBadgeProps,
+} from "./components/badge"
+
 /* Switch */
 export { Switch } from "./components/switch"
 export type { SwitchProps } from "./components/switch"

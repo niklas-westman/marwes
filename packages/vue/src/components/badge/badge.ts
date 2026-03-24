@@ -6,9 +6,11 @@ import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-u
 export type BadgeProps = BadgeOptions & {
   className?: string
   id?: string
+  /** Data attributes for AI-friendly metadata (used by context variants). */
+  dataAttributes?: Record<string, string>
 }
 
-const badgePropKeys = ["variant", "ariaLabel", "className", "id"] as const
+const badgePropKeys = ["variant", "ariaLabel", "className", "id", "dataAttributes"] as const
 
 export const Badge = defineComponent(
   (props: BadgeProps, { slots }) => {
@@ -32,6 +34,7 @@ export const Badge = defineComponent(
         "span",
         {
           ...passthroughAttrs,
+          ...(props.dataAttributes ?? {}),
           id: props.id,
           class: className,
           style,

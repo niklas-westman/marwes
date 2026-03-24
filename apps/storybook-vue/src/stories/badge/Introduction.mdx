@@ -1,20 +1,89 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  badgeWhyContextVariants,
+  badgeContextVariantPurposes,
+} from "@marwes-ui/core"
 
 <Meta title="Badge/Introduction" />
 
 # Badge Components
 
-Badges communicate compact status and metadata in a low-footprint UI element.
+Marwes provides a badge system with three layers:
+**context variants** for common patterns, **BadgeGroup** for grouping related badges,
+and the raw **Badge** atom for standalone use.
 
-## Component Architecture
+## Recommended: Context Variants
 
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```vue
+<script setup lang="ts">
+import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <!-- Operational status — auto-sets data-purpose="status" -->
+  <StatusBadge variant="success">Active</StatusBadge>
+  <StatusBadge variant="error">Offline</StatusBadge>
+
+  <!-- Priority levels — auto-sets data-purpose="priority" -->
+  <PriorityBadge variant="error">Critical</PriorityBadge>
+  <PriorityBadge variant="warning">High</PriorityBadge>
+
+  <!-- Notification counts — auto-sets data-purpose="notification" -->
+  <NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>
+  <NotificationBadge variant="brand">New</NotificationBadge>
+</template>
 ```
-Badge (Atom)
+
+### Why Context Variants?
+
+<ol>
+  {badgeWhyContextVariants.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Context Variant Reference
+
+<ul>
+  {badgeContextVariantPurposes.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: BadgeGroup (Molecule)
+
+For grouping related badges with accessible label association, use `BadgeGroup`:
+
+```vue
+<script setup lang="ts">
+import { BadgeGroup, Badge } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <BadgeGroup label="Tags">
+    <Badge variant="info">Frontend</Badge>
+    <Badge variant="success">Approved</Badge>
+    <Badge variant="warning">Review</Badge>
+  </BadgeGroup>
+</template>
 ```
 
-## Recommended Usage
+### BadgeGroup Features
 
-Use `Badge` for short, meaningful labels such as state, category, or severity.
+- **Accessible group** — `<fieldset>` with `aria-labelledby` wiring
+- **Visible label** — rendered as a `<legend>` with Paragraph typography
+- **Data attributes** — supports `dataAttributes` for AI-friendly metadata
+- **Composable** — accepts any Badge children including context variants
+
+## Low-level: Badge (Atom)
+
+Use the raw `Badge` atom for standalone badges or when building custom compositions:
 
 ```vue
 <script setup lang="ts">
@@ -23,11 +92,44 @@ import { Badge } from "@marwes-ui/vue"
 
 <template>
   <Badge variant="success">Active</Badge>
+  <Badge variant="error" ariaLabel="critical status">!</Badge>
 </template>
 ```
 
+> **Note:** When using `Badge` directly, you are responsible for:
+> - Providing appropriate context through surrounding markup
+> - Setting `ariaLabel` for non-text or ambiguous content
+> - Grouping related badges in a `BadgeGroup` when needed
+
+---
+
+## Component Reference
+
+### Context Variants (AI-Friendly)
+
+**`StatusBadge`** — Operational or lifecycle status
+Sets: `data-purpose="status"`
+
+**`PriorityBadge`** — Urgency or importance levels
+Sets: `data-purpose="priority"`
+
+**`NotificationBadge`** — Notification counts and alerts
+Sets: `data-purpose="notification"`
+
+### Base Molecule
+
+**`BadgeGroup`** — Accessible badge group with label association
+Provides: `<fieldset>`, `aria-labelledby`, visible label
+
+### Atom
+
+**`Badge`** — Low-level status indicator with variant styling
+Use when you need standalone badges or custom compositions
+
 ## Story Coverage
 
-- `Default` for baseline usage
-- `AllVariants` for semantic palette comparison
-- `DarkVariants` for dark theme readability
+- **Atom**: `Default`, `AllVariants`, `DarkVariants`
+- **Molecule**: `Default`, `AllVariants`, `WithCustomClass`
+- **Context/Status**: `Default`, `AllStatuses`
+- **Context/Priority**: `Default`, `AllPriorities`
+- **Context/Notification**: `Default`, `AllNotifications`

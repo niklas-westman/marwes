@@ -1,0 +1,88 @@
+import { render, screen } from "@testing-library/vue"
+import { describe, expect, it } from "vitest"
+import { defineComponent, h } from "vue"
+import { MarwesProvider } from "../../../provider/marwes-provider"
+import { NotificationBadge, PriorityBadge, StatusBadge } from "../variants"
+
+function renderWithProvider(component: unknown, props: Record<string, unknown>) {
+  render(
+    defineComponent({
+      setup() {
+        return () =>
+          h(MarwesProvider, null, {
+            default: () => h(component as never, props, { default: () => props.children }),
+          })
+      },
+    }),
+  )
+}
+
+describe("Vue StatusBadge (Context)", () => {
+  it("renders with data-purpose=status", () => {
+    renderWithProvider(StatusBadge, { variant: "success", children: "Active" })
+
+    const badge = screen.getByText("Active")
+    const wrapper = badge.closest("[data-purpose]")
+    expect(wrapper?.getAttribute("data-purpose")).toBe("status")
+  })
+
+  it("renders as a Badge atom with expected variant class", () => {
+    renderWithProvider(StatusBadge, { variant: "success", children: "Active" })
+
+    const badge = screen.getByText("Active")
+    expect(badge.className).toContain("mw-badge")
+    expect(badge.className).toContain("mw-badge--success")
+  })
+
+  it("defaults to neutral variant when not specified", () => {
+    renderWithProvider(StatusBadge, { children: "Unknown" })
+
+    const badge = screen.getByText("Unknown")
+    expect(badge.className).toContain("mw-badge--neutral")
+  })
+})
+
+describe("Vue PriorityBadge (Context)", () => {
+  it("renders with data-purpose=priority", () => {
+    renderWithProvider(PriorityBadge, { variant: "error", children: "Critical" })
+
+    const badge = screen.getByText("Critical")
+    const wrapper = badge.closest("[data-purpose]")
+    expect(wrapper?.getAttribute("data-purpose")).toBe("priority")
+  })
+
+  it("renders as a Badge atom with expected variant class", () => {
+    renderWithProvider(PriorityBadge, { variant: "warning", children: "High" })
+
+    const badge = screen.getByText("High")
+    expect(badge.className).toContain("mw-badge--warning")
+  })
+})
+
+describe("Vue NotificationBadge (Context)", () => {
+  it("renders with data-purpose=notification", () => {
+    renderWithProvider(NotificationBadge, { variant: "info", children: "5" })
+
+    const badge = screen.getByText("5")
+    const wrapper = badge.closest("[data-purpose]")
+    expect(wrapper?.getAttribute("data-purpose")).toBe("notification")
+  })
+
+  it("renders as a Badge atom with expected variant class", () => {
+    renderWithProvider(NotificationBadge, { variant: "brand", children: "New" })
+
+    const badge = screen.getByText("New")
+    expect(badge.className).toContain("mw-badge--brand")
+  })
+
+  it("passes ariaLabel for accessibility", () => {
+    renderWithProvider(NotificationBadge, {
+      variant: "info",
+      ariaLabel: "5 unread messages",
+      children: "5",
+    })
+
+    const badge = screen.getByText("5")
+    expect(badge.getAttribute("aria-label")).toBe("5 unread messages")
+  })
+})

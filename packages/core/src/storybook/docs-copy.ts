@@ -158,3 +158,37 @@ export const accordionContextVariantPurposes: LabeledCopy[] = [
     text: 'Generic collapsible sections — flexible open mode, data-purpose="sections"',
   },
 ]
+
+export const badgeWhyContextVariants: LabeledCopy[] = [
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  {
+    label: "Consistent UX",
+    text: "enforces accessible badge patterns across your app",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces a Badge with preconfigured data attributes",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (StatusBadge vs generic Badge)",
+  },
+]
+
+export const badgeContextVariantPurposes: LabeledCopy[] = [
+  {
+    label: "StatusBadge",
+    text: 'Operational or lifecycle status — active/inactive, online/offline, data-purpose="status"',
+  },
+  {
+    label: "PriorityBadge",
+    text: 'Urgency or importance levels — critical/high/medium/low, data-purpose="priority"',
+  },
+  {
+    label: "NotificationBadge",
+    text: 'Notification counts and alerts — unread counts, new items, data-purpose="notification"',
+  },
+]
