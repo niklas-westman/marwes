@@ -7,13 +7,12 @@ export interface AccordionProps {
   open?: boolean
   disabled?: boolean
   className?: string
-  onToggle?: () => void
 }
 
-const accordionPropKeys = ["id", "open", "disabled", "className", "onToggle"] as const
+const accordionPropKeys = ["id", "open", "disabled", "className"] as const
 
 export const Accordion = defineComponent(
-  (props: AccordionProps, { slots }) => {
+  (props: AccordionProps, { slots, emit }) => {
     const attrs = useAttrs()
 
     const kit = computed(() => {
@@ -22,6 +21,11 @@ export const Accordion = defineComponent(
       if (props.disabled !== undefined) opts.disabled = props.disabled
       return createAccordionRecipe(opts)
     })
+
+    function handleTriggerClick(): void {
+      if (props.disabled) return
+      emit("toggle")
+    }
 
     return () => {
       const renderKit = kit.value
@@ -39,7 +43,7 @@ export const Accordion = defineComponent(
             "aria-expanded": a11y.ariaExpanded,
             "aria-controls": a11y.panelId,
             "aria-disabled": a11y.ariaDisabled,
-            onClick: () => props.onToggle?.(),
+            onClick: handleTriggerClick,
           },
           [
             h("span", { class: "mw-accordion__title" }, slots.title?.()),

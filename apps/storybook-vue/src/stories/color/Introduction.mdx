@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Design System/Introduction" />
+
+# Color System
+
+Color tokens define brand, semantic, text, and surface behavior across all components.
+
+## Token Architecture
+
+```
+Design Tokens
+  -> Brand (primary/secondary)
+  -> Semantic (success/danger/warning)
+  -> Text and Surface
+  -> Border
+```
+
+## Recommended Usage
+
+Use theme tokens and CSS variables rather than hardcoded color values.
+
+```css
+.button {
+  background: var(--mw-primary);
+  color: var(--mw-primary-label);
+  border: 1px solid var(--mw-border);
+}
+```
+
+## Story Coverage
+
+- `AllColors` for full token inventory
+- `PrimaryOnly` for brand color focus
+- `SemanticOnly` for state-driven color mapping

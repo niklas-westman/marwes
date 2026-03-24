@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
 
 const meta: Meta<typeof CheckboxField> = {
-  title: "Checkbox/Field",
+  title: "Checkbox/Molecule/CheckboxField",
   component: CheckboxField,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

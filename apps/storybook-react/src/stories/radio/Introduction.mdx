@@ -1,0 +1,178 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  radioWhyContextVariants,
+  radioContextVariantPurposes,
+} from "@marwes-ui/core"
+
+<Meta title="Radio/Introduction" />
+
+# Radio Components
+
+Marwes provides a radio system with three layers:
+**context variants** for common patterns, **RadioGroupField** for custom option lists,
+and the raw **Radio** atom for advanced control.
+
+## Recommended: Context Variants
+
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```tsx
+import { YesNoRadioGroup, RatingRadioGroup, OptionRadioGroup } from "@marwes-ui/react"
+
+// Binary yes/no — auto-sets data-purpose="binary-choice"
+<YesNoRadioGroup
+  name="accept-terms"
+  label="Do you accept the terms?"
+  defaultValue="no"
+/>
+
+// Numeric rating scale — auto-sets data-purpose="rating"
+<RatingRadioGroup
+  name="satisfaction"
+  label="How satisfied are you?"
+  defaultValue="3"
+/>
+
+// General labeled options — auto-sets data-purpose="selection"
+<OptionRadioGroup
+  name="theme"
+  label="Select theme"
+  options={[
+    { value: "light", label: "Light" },
+    { value: "dark", label: "Dark" },
+    { value: "system", label: "System" },
+  ]}
+  defaultValue="system"
+/>
+```
+
+### Why Context Variants?
+
+<ol>
+  {radioWhyContextVariants.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Context Variant Reference
+
+<ul>
+  {radioContextVariantPurposes.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: RadioGroupField
+
+For custom option lists that don't fit a context variant, use `RadioGroupField` directly:
+
+```tsx
+import { RadioGroupField } from "@marwes-ui/react"
+
+// Uncontrolled with defaultValue
+<RadioGroupField
+  name="shipping"
+  label="Shipping method"
+  description="Choose how you'd like your order delivered."
+  options={[
+    { value: "standard", label: "Standard (5-7 days)" },
+    { value: "express", label: "Express (2-3 days)" },
+    { value: "overnight", label: "Overnight" },
+  ]}
+  defaultValue="standard"
+/>
+
+// Controlled with value + onChange
+const [method, setMethod] = React.useState("standard")
+
+<RadioGroupField
+  name="shipping"
+  label="Shipping method"
+  options={[
+    { value: "standard", label: "Standard" },
+    { value: "express", label: "Express" },
+  ]}
+  value={method}
+  onChange={setMethod}
+/>
+
+// With error state
+<RadioGroupField
+  name="plan"
+  label="Select a plan"
+  error="Please select a plan to continue."
+  options={[
+    { value: "free", label: "Free" },
+    { value: "pro", label: "Pro" },
+  ]}
+/>
+```
+
+### RadioGroupField Features
+
+- **Accessible group** — `role="radiogroup"` with `aria-labelledby` and `aria-describedby`
+- **Label + description + error** — field semantics with automatic a11y wiring
+- **Controlled & uncontrolled** — `value`/`onChange` or `defaultValue`
+- **Disabled** — disables all options in the group
+- **Required** — marks the group as required
+
+## Low-level: Radio Atom
+
+Use the raw `Radio` atom only when you need fully custom layout (tables, list rows, custom wrappers):
+
+```tsx
+import { Radio } from "@marwes-ui/react"
+
+const [selected, setSelected] = React.useState("a")
+
+<div role="radiogroup" aria-label="Preference">
+  {options.map(({ value, label }) => (
+    <label key={value}>
+      <Radio
+        name="preference"
+        value={value}
+        checked={selected === value}
+        onCheckedChange={(checked) => {
+          if (checked) setSelected(value)
+        }}
+      />
+      {label}
+    </label>
+  ))}
+</div>
+```
+
+> **Note:** When using `Radio` directly, you are responsible for:
+> - Wrapping in a `role="radiogroup"` container
+> - Providing `aria-label` or `aria-labelledby` on the group
+> - Managing selection state
+> - Wiring labels with `htmlFor`/`id` or wrapping in `<label>`
+
+---
+
+## Component Reference
+
+### Context Variants (AI-Friendly)
+
+**`YesNoRadioGroup`** — Binary yes/no choices
+Sets: `data-purpose="binary-choice"`, pre-built "Yes"/"No" options
+
+**`RatingRadioGroup`** — Numeric scale selection
+Sets: `data-purpose="rating"`, generates options from `min` to `max` (default 1-5)
+
+**`OptionRadioGroup`** — General labeled options
+Sets: `data-purpose="selection"`, pass your own `options` array
+
+### Base Molecule
+
+**`RadioGroupField`** — Accessible radio group with field semantics
+Provides: `role="radiogroup"`, label, description, error, state management
+
+### Atom
+
+**`Radio`** — Low-level native `<input type="radio">`
+Use when you need fully custom layout or grouping

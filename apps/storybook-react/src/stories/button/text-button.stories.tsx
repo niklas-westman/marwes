@@ -3,7 +3,7 @@ import { type Button, TextButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
-  title: "Buttons/General/Text",
+  title: "Buttons/Variant/TextButton",
   component: TextButton,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

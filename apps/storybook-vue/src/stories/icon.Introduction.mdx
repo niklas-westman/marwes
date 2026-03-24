@@ -1,0 +1,33 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Icons/Gallery/Introduction" />
+
+# Icon Gallery
+
+The icon gallery is a discovery surface for all available icon tokens.
+
+## Component Architecture
+
+```
+Icon (Atom)
+```
+
+## Recommended Usage
+
+Search by name, then validate size and stroke width in context.
+
+```vue
+<script setup lang="ts">
+import { Icon } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Icon name="search" size="sm" strokeWidth="md" />
+</template>
+```
+
+## Story Coverage
+
+- Full icon inventory with live filtering
+- Size and stroke width controls
+- Responsive grid density controls

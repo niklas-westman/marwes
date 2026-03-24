@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { computed, ref } from "vue"
 
 const meta: Meta<CheckboxFieldProps> = {
-  title: "Checkbox/Field",
+  title: "Checkbox/Molecule/CheckboxField",
   component: CheckboxField as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

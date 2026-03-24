@@ -8,6 +8,13 @@ const meta: Meta<typeof Accordion> = {
   component: Accordion,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div style={{ width: "66vw" }}>
+        <Story />
+      </div>
+    ),
+  ],
   argTypes: {
     open: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -79,7 +86,7 @@ export const AccordionList: Story = {
     ]
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 400 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {items.map((item, i) => (
           <Accordion
             key={item.title}

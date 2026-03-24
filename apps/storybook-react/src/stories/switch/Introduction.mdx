@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Switch/Introduction" />
+
+# Switch Components
+
+Switches represent immediate on/off state for a single setting.
+
+## Component Architecture
+
+```
+Switch (Atom)
+```
+
+## Recommended Usage
+
+Use `Switch` for binary preferences where state changes are applied instantly.
+
+```tsx
+import { Switch } from "@marwes-ui/react"
+
+<Switch checked={enabled} onClick={() => setEnabled((prev) => !prev)}>
+  Enable notifications
+</Switch>
+```
+
+## Story Coverage
+
+- `Default`, `Checked`, and `Disabled` for baseline states
+- `CheckedDisabled` for locked-on settings
+- `AllStates` for side-by-side behavior validation

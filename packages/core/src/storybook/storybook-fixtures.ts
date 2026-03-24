@@ -81,6 +81,17 @@ export const storybookIconGalleryArgTypes = {
   },
 } as const
 
+export const storybookRadioArgTypes = {
+  checked: { control: "boolean" },
+  defaultChecked: { control: "boolean" },
+  disabled: { control: "boolean" },
+  required: { control: "boolean" },
+  invalid: { control: "boolean" },
+  name: { control: "text" },
+  value: { control: "text" },
+  ariaLabel: { control: "text" },
+} as const
+
 export const storybookDocsDescription = {
   linkButton: "LinkButton renders as an anchor tag with button styling and navigation metadata.",
   dangerButton:

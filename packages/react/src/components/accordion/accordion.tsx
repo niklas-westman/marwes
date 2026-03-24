@@ -32,6 +32,11 @@ export function Accordion(props: AccordionProps): React.ReactElement {
   const kit = createAccordionRecipe(opts)
   const { a11y } = kit
 
+  function handleTriggerClick(): void {
+    if (disabled) return
+    onToggle?.()
+  }
+
   return (
     <div className={[kit.className, className].filter(Boolean).join(" ")}>
       <button
@@ -41,7 +46,7 @@ export function Accordion(props: AccordionProps): React.ReactElement {
         aria-expanded={a11y.ariaExpanded}
         aria-controls={a11y.panelId}
         aria-disabled={a11y.ariaDisabled}
-        onClick={onToggle}
+        onClick={handleTriggerClick}
       >
         <span className="mw-accordion__title">{title}</span>
         <span className="mw-accordion__icon" aria-hidden="true" />

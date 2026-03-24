@@ -1,0 +1,46 @@
+/**
+ * AccordionField (Molecule)
+ *
+ * Layout for label + accordion items group + description/error text.
+ * The accordion items themselves are styled by accordion.css (atom).
+ */
+
+.mw-accordion-field {
+  display: grid;
+  gap: var(--mw-density-field-gap, 8px);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mw-accordion-field__label {
+  display: block;
+  user-select: none;
+}
+
+.mw-accordion-field__items {
+  display: grid;
+  gap: var(--mw-density-gap, 4px);
+}
+
+.mw-accordion-field__description {
+  opacity: 0.6;
+  font-size: 0.875em;
+  color: var(--mw-color-text-muted, #6b7280);
+}
+
+.mw-accordion-field__error {
+  font-size: 0.875em;
+  color: var(--mw-color-danger-base, #dc2626);
+}
+
+/* State modifiers */
+.mw-accordion-field--disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.mw-accordion-field--invalid .mw-accordion-field__label .mw-p,
+.mw-accordion-field--invalid .mw-accordion-field__error .mw-p {
+  color: var(--mw-color-danger-base, #dc2626);
+}

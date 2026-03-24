@@ -91,3 +91,70 @@ export const fieldComparisonRows: FieldComparisonRow[] = [
     features: "Decimal keyboard, currency label",
   },
 ]
+
+export const radioWhyContextVariants: LabeledCopy[] = [
+  {
+    label: "Pre-built options",
+    text: "no need to manually create option lists for common patterns",
+  },
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  { label: "Consistent UX", text: "enforces accessible radio group patterns across your app" },
+  { label: "Less boilerplate", text: "one component replaces a RadioGroupField + options array" },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (YesNoRadioGroup vs generic options)",
+  },
+]
+
+export const radioContextVariantPurposes: LabeledCopy[] = [
+  {
+    label: "YesNoRadioGroup",
+    text: "Binary yes/no choices — accept terms, opt in/out, enable/disable",
+  },
+  {
+    label: "RatingRadioGroup",
+    text: "Numeric scale selection — satisfaction ratings, priority levels, scores",
+  },
+  { label: "OptionRadioGroup", text: "General labeled options — preferences, categories, modes" },
+]
+
+export const accordionWhyContextVariants: LabeledCopy[] = [
+  {
+    label: "Pre-configured behaviour",
+    text: "single-open or multi-open is set automatically based on the use case",
+  },
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  {
+    label: "Consistent UX",
+    text: "enforces accessible accordion group patterns across your app",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces an AccordionField with preconfigured props",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (FAQAccordion vs generic field)",
+  },
+]
+
+export const accordionContextVariantPurposes: LabeledCopy[] = [
+  {
+    label: "FAQAccordion",
+    text: 'Question-and-answer sections — single-open, data-purpose="faq"',
+  },
+  {
+    label: "SettingsAccordion",
+    text: 'Configuration panels — multi-open, data-purpose="settings"',
+  },
+  {
+    label: "SectionsAccordion",
+    text: 'Generic collapsible sections — flexible open mode, data-purpose="sections"',
+  },
+]

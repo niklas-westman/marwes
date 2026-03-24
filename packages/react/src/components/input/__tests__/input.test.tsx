@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event"
 import type * as React from "react"
 import { runInputContract } from "../../../../../../tests/contracts/input.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
-import { Input } from "../../input"
+import { Input } from "../input"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)

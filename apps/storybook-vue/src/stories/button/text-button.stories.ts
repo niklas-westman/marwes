@@ -3,7 +3,7 @@ import { TextButton } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
-  title: "Buttons/General/Text",
+  title: "Buttons/Variant/TextButton",
   component: TextButton,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

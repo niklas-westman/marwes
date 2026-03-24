@@ -1,0 +1,50 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Checkbox/Introduction" />
+
+# Checkbox Components
+
+Checkbox stories are organized with a simple two-layer structure to keep discovery fast.
+
+## Checkbox Architecture
+
+```
+Checkbox (Atom)
+     ↓
+CheckboxField (Molecule)
+```
+
+## Atom: Checkbox
+
+Use `Checkbox` for low-level control when you manage label/layout yourself.
+
+```vue
+<script setup lang="ts">
+import { Checkbox } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <label>
+    <Checkbox ariaLabel="Accept terms" />
+    Accept terms
+  </label>
+</template>
+```
+
+## Molecule: CheckboxField
+
+Use `CheckboxField` when you want built-in field semantics and accessibility wiring.
+
+```vue
+<script setup lang="ts">
+import { CheckboxField } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <CheckboxField
+    label="Subscribe to updates"
+    description="We'll only send important product updates."
+    :checkbox="{ size: 'md' }"
+  />
+</template>
+```

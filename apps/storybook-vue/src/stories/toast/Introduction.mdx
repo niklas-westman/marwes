@@ -1,0 +1,36 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Toast/Introduction" />
+
+# Toast Components
+
+Toasts communicate transient status updates without interrupting workflow.
+
+## Component Architecture
+
+```
+Toast (Atom)
+```
+
+## Recommended Usage
+
+Use `Toast` for confirmation, warning, and action follow-up feedback.
+
+```vue
+<script setup lang="ts">
+import { Toast } from "@marwes-ui/vue"
+
+const onDismiss = () => {}
+</script>
+
+<template>
+  <Toast variant="rich" ariaLive="polite" :onDismiss="onDismiss">
+    Your changes have been saved.
+  </Toast>
+</template>
+```
+
+## Story Coverage
+
+- `Default` and `WithDismiss` for core behavior
+- `AllVariants` and `DarkVariants` for style parity

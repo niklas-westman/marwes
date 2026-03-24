@@ -29,10 +29,10 @@ runIconContract("vue", {
     renderWithProvider(Icon, iconProps)
   },
   getByRole(role, options) {
-    return screen.getByRole(role, options) as SVGElement
+    return screen.getByRole(role, options) as unknown as SVGElement
   },
   queryByRole(role) {
-    return screen.queryByRole(role) as SVGElement | null
+    return screen.queryByRole(role) as unknown as SVGElement | null
   },
   querySvg() {
     return document.querySelector("svg")

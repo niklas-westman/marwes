@@ -3,7 +3,7 @@ import { PrimaryButton } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
-  title: "Buttons/General/Primary",
+  title: "Buttons/Variant/PrimaryButton",
   component: PrimaryButton,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

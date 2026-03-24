@@ -9,6 +9,7 @@ const meta = {
   component: Accordion as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
+  decorators: [() => ({ template: '<div style="width: 100%; max-width: 640px"><story /></div>' })],
   argTypes: {
     open: { control: "boolean" },
     disabled: { control: "boolean" },
@@ -77,7 +78,7 @@ export const AccordionList: Story = {
       return { openIndex, items }
     },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 8px; width: 400px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
         <Accordion
           v-for="(item, i) in items"
           :key="i"

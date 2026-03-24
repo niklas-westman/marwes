@@ -25,10 +25,13 @@
   --mw-accordion-surface: #ffffff;
   --mw-accordion-border: #e5e7eb;
 
+  width: 100%;
   background: var(--mw-accordion-surface);
   border: 1px solid var(--mw-accordion-border);
   border-radius: var(--mw-ui-radius, 6px);
   overflow: hidden;
+
+  cursor: pointer;
 }
 
 /* ============================================
@@ -83,7 +86,7 @@
    TRIGGER STATES
    ============================================ */
 
-.mw-accordion__trigger:hover:not(:disabled) {
+.mw-accordion:hover:not(:disabled) {
   background: color-mix(in srgb, var(--mw-accordion-border) 40%, transparent);
 }
 
@@ -97,7 +100,7 @@
    ============================================ */
 
 .mw-accordion__panel {
-  border-top: 1px solid var(--mw-accordion-border);
+  /* border-top: 1px solid var(--mw-accordion-border); - not relevant at this time*/
 }
 
 /* [hidden] sets display:none — panel is invisible when closed */

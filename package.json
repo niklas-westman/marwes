@@ -11,7 +11,6 @@
     "prepare": "lefthook install",
     "dev:packages": "pnpm -r --parallel --filter \"./packages/*\" dev",
     "dev:playground": "pnpm --filter \"./apps/playground-react\" dev",
-    "dev:storybook": "pnpm --filter \"./apps/storybook-react\" storybook",
     "dev:storybook:react": "pnpm --filter \"./apps/storybook-react\" storybook",
     "dev:storybook:vue": "pnpm --filter \"./apps/storybook-vue\" storybook",
     "dev": "pnpm dev:packages & pnpm dev:playground",

@@ -8,6 +8,14 @@ function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
 
+function toSvgElement(element: Element | null): SVGElement {
+  if (element instanceof SVGElement) {
+    return element
+  }
+
+  throw new TypeError("Expected an SVGElement")
+}
+
 runIconContract("react", {
   async renderIcon(args = {}) {
     const iconProps = {
@@ -20,12 +28,13 @@ runIconContract("react", {
     renderWithProvider(<Icon {...iconProps} />)
   },
   getByRole(role, options) {
-    return screen.getByRole(role, options) as SVGElement
+    return toSvgElement(screen.getByRole(role, options))
   },
   queryByRole(role) {
-    return screen.queryByRole(role) as SVGElement | null
+    const element = screen.queryByRole(role)
+    return element ? toSvgElement(element) : null
   },
   querySvg() {
-    return document.querySelector("svg")
+    return document.querySelector<SVGElement>("svg")
   },
 })

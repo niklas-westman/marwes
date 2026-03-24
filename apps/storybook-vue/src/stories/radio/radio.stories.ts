@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
 import type { RadioProps } from "@marwes-ui/vue"
 import { Radio } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -9,14 +9,7 @@ const meta = {
   component: Radio as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
-  argTypes: {
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
-    invalid: { control: "boolean" },
-    name: { control: "text" },
-    value: { control: "text" },
-    ariaLabel: { control: "text" },
-  },
+  argTypes: storybookRadioArgTypes,
 } satisfies Meta<RadioProps>
 
 export default meta

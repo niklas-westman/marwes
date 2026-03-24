@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
 import { Radio } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -8,14 +8,7 @@ const meta: Meta<typeof Radio> = {
   component: Radio,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
-  argTypes: {
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
-    invalid: { control: "boolean" },
-    name: { control: "text" },
-    value: { control: "text" },
-    ariaLabel: { control: "text" },
-  },
+  argTypes: storybookRadioArgTypes,
 }
 
 export default meta
@@ -23,11 +16,17 @@ export default meta
 type Story = StoryObj<typeof Radio>
 
 export const Default: Story = {
-  args: { ariaLabel: "Option A", name: "demo" },
+  render: () => {
+    const [checked, setChecked] = React.useState(false)
+    return <Radio ariaLabel="Option A" name="demo" checked={checked} onCheckedChange={setChecked} />
+  },
 }
 
 export const Checked: Story = {
-  args: { ariaLabel: "Option A", name: "demo", checked: true, onChange: () => {} },
+  render: () => {
+    const [checked, setChecked] = React.useState(true)
+    return <Radio ariaLabel="Option A" name="demo" checked={checked} onCheckedChange={setChecked} />
+  },
 }
 
 export const Disabled: Story = {

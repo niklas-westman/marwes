@@ -1,0 +1,29 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Typography/Paragraph/Introduction" />
+
+# Paragraph
+
+Paragraph is the baseline text primitive for body copy and supporting content.
+
+## Component Architecture
+
+```
+Paragraph (Atom)
+```
+
+## Recommended Usage
+
+Default to `md`; use `sm` for secondary text and `lg` for lead text.
+
+```tsx
+import { Paragraph } from "@marwes-ui/react"
+
+<Paragraph size="md">Body text content.</Paragraph>
+```
+
+## Story Coverage
+
+- All size variants (`sm`, `md`, `lg`)
+- Long-form copy and article composition
+- Custom class usage and spacing patterns

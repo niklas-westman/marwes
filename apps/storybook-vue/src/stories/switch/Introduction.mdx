@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Switch/Introduction" />
+
+# Switch Components
+
+Switches represent immediate on/off state for a single setting.
+
+## Component Architecture
+
+```
+Switch (Atom)
+```
+
+## Recommended Usage
+
+Use `Switch` for binary preferences where state changes are applied instantly.
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { Switch } from "@marwes-ui/vue"
+
+const enabled = ref(false)
+</script>
+
+<template>
+  <Switch :checked="enabled" @click="enabled = !enabled">Enable notifications</Switch>
+</template>
+```
+
+## Story Coverage
+
+- `Default`, `Checked`, and `Disabled` for baseline states
+- `AllStates` for side-by-side behavior validation

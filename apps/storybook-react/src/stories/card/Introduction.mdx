@@ -1,0 +1,29 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Card/Introduction" />
+
+# Card Components
+
+Cards group related content into a single surface with optional heading context.
+
+## Component Architecture
+
+```
+Card (Atom)
+```
+
+## Recommended Usage
+
+Use `Card` as a compositional container for summaries, settings blocks, and grouped details.
+
+```tsx
+import { Card } from "@marwes-ui/react"
+
+<Card title="Project status">Build pipeline is healthy.</Card>
+```
+
+## Story Coverage
+
+- `Default`, `WithTitle`, and `BodyOnly` for structure options
+- `AllVariants` for content density examples
+- `DarkVariants` for theme parity

@@ -65,6 +65,8 @@ export {
   mergeIdRefs,
   buildInputFieldA11yIds,
   buildCheckboxFieldA11yIds,
+  buildRadioGroupFieldA11yIds,
+  buildAccordionFieldA11yIds,
   buildCurrencyHelperText,
 } from "./shared/field-helpers"
 export * from "./storybook"

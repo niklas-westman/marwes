@@ -20,5 +20,6 @@
 @import "./typography.css";
 
 /* Molecules */
+@import "./molecules/accordion-field.css";
 @import "./molecules/checkbox-field.css";
 @import "./molecules/input-field.css";

@@ -47,6 +47,54 @@ export function buildCheckboxFieldA11yIds(args: {
   return result
 }
 
+export type RadioGroupFieldA11yIds = {
+  labelId: string
+  descriptionId?: string
+  errorId?: string
+  describedBy?: string
+}
+
+export function buildRadioGroupFieldA11yIds(args: {
+  id: string
+  hasDescription: boolean
+  hasError: boolean
+  externalDescribedBy?: string | undefined
+}): RadioGroupFieldA11yIds {
+  const labelId = `${args.id}-label`
+  const descriptionId = args.hasDescription ? `${args.id}-desc` : undefined
+  const errorId = args.hasError ? `${args.id}-error` : undefined
+  const describedBy = mergeIdRefs(args.externalDescribedBy, descriptionId, errorId)
+  const result: RadioGroupFieldA11yIds = { labelId }
+  if (descriptionId) result.descriptionId = descriptionId
+  if (errorId) result.errorId = errorId
+  if (describedBy) result.describedBy = describedBy
+  return result
+}
+
+export type AccordionFieldA11yIds = {
+  labelId: string
+  descriptionId?: string
+  errorId?: string
+  describedBy?: string
+}
+
+export function buildAccordionFieldA11yIds(args: {
+  id: string
+  hasDescription: boolean
+  hasError: boolean
+  externalDescribedBy?: string | undefined
+}): AccordionFieldA11yIds {
+  const labelId = `${args.id}-label`
+  const descriptionId = args.hasDescription ? `${args.id}-desc` : undefined
+  const errorId = args.hasError ? `${args.id}-error` : undefined
+  const describedBy = mergeIdRefs(args.externalDescribedBy, descriptionId, errorId)
+  const result: AccordionFieldA11yIds = { labelId }
+  if (descriptionId) result.descriptionId = descriptionId
+  if (errorId) result.errorId = errorId
+  if (describedBy) result.describedBy = describedBy
+  return result
+}
+
 export function buildCurrencyHelperText(
   helperText: string | undefined,
   currency: string | undefined,

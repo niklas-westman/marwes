@@ -12,6 +12,41 @@ import {
 Marwes provides a powerful button system with two complementary approaches:
 **semantic components** for common patterns and **raw props** for advanced control.
 
+Buttons are organized as Atom -> Variant wrappers -> Purpose wrappers to make Storybook navigation obvious.
+
+## Button Architecture
+
+```
+Button (Atom)
+     ↓
+Variant Wrappers
+  ├─ PrimaryButton
+  ├─ SecondaryButton
+  └─ TextButton
+     ↓
+Purpose Wrappers
+  ├─ SubmitButton
+  ├─ CancelButton
+  ├─ CreateButton
+  ├─ DangerButton
+  └─ LinkButton
+```
+
+## Atom: Button
+
+Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`):
+
+```vue
+<script setup lang="ts">
+import { Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Button variant="primary" action="button">Base Button</Button>
+  <Button variant="secondary" action="navigate" href="/dashboard">Go to dashboard</Button>
+</template>
+```
+
 ## Recommended: Semantic Components
 
 Use purpose-built components that automatically set AI-friendly metadata:
@@ -151,15 +186,15 @@ Controls what the button **does** (AI-readable metadata):
 
 ## Component Reference
 
-### General Buttons
+### Variant Buttons
 
-**`PrimaryButton`** - General primary actions  
+**`PrimaryButton`** - Common primary style wrapper  
 Sets: `variant="primary"`
 
-**`SecondaryButton`** - General secondary actions  
+**`SecondaryButton`** - Common secondary style wrapper  
 Sets: `variant="secondary"`
 
-**`TextButton`** - Subtle/inline actions  
+**`TextButton`** - Common low-emphasis style wrapper  
 Sets: `variant="text"`
 
 ### Purpose Buttons (AI-Friendly)

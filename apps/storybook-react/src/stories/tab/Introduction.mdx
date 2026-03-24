@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Tab/Introduction" />
+
+# Tab Components
+
+Tabs provide segmented navigation between peer content sections.
+
+## Component Architecture
+
+```
+Tab (Atom)
+```
+
+## Recommended Usage
+
+Use `Tab` inside a `role="tablist"` with coordinated selected state and panel wiring.
+
+```tsx
+import { Tab } from "@marwes-ui/react"
+
+<div role="tablist" aria-label="Profile sections">
+  <Tab selected ariaControls="panel-overview">Overview</Tab>
+  <Tab ariaControls="panel-activity">Activity</Tab>
+</div>
+```
+
+## Story Coverage
+
+- `Default`, `Selected`, and `Disabled` for state validation
+- `TabList` for interactive row behavior
+- `AllStates` for quick visual regression checks
