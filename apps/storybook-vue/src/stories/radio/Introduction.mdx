@@ -1,15 +1,15 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { radioContextVariantPurposes, radioWhyContextVariants } from "@marwes-ui/core"
+import { radioPurposeComponentReference, radioWhyPurposeComponents } from "@marwes-ui/core"
 
 <Meta title="Radio/Introduction" />
 
 # Radio Components
 
 Marwes provides a radio system with three layers:
-**context variants** for common patterns, **RadioGroupField** for custom option lists,
+**purpose components** for common patterns, **RadioGroupField** for custom option lists,
 and the raw **Radio** atom for advanced control.
 
-## Recommended: Context Variants
+## Recommended: Purpose Components
 
 Use purpose-built components that automatically set AI-friendly metadata:
 
@@ -44,20 +44,20 @@ import { OptionRadioGroup, RatingRadioGroup, YesNoRadioGroup } from "@marwes-ui/
 </template>
 ```
 
-### Why Context Variants?
+### Why Purpose Components?
 
 <ol>
-  {radioWhyContextVariants.map((item) => (
+  {radioWhyPurposeComponents.map((item) => (
     <li key={item.label}>
       <strong>{item.label}</strong> - {item.text}
     </li>
   ))}
 </ol>
 
-### Context Variant Reference
+### Purpose Component Reference
 
 <ul>
-  {radioContextVariantPurposes.map((item) => (
+  {radioPurposeComponentReference.map((item) => (
     <li key={item.label}>
       <strong><code>{item.label}</code></strong> - {item.text}
     </li>
@@ -66,7 +66,7 @@ import { OptionRadioGroup, RatingRadioGroup, YesNoRadioGroup } from "@marwes-ui/
 
 ## Base: RadioGroupField
 
-For custom option lists that do not fit a context variant, use `RadioGroupField` directly:
+For custom option lists that do not fit a purpose component, use `RadioGroupField` directly:
 
 ```vue
 <script setup lang="ts">

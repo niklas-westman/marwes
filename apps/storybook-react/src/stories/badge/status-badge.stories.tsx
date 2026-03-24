@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
 const meta: Meta<typeof StatusBadge> = {
-  title: "Badge/Context/Status",
+  title: "Badge/Purpose/Status",
   component: StatusBadge,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

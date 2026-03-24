@@ -9,15 +9,15 @@ function readStoryFile(fileName: string): string {
 }
 
 describe("Vue radio story taxonomy", () => {
-  it("keeps atom, molecule, and context titles", () => {
+  it("keeps atom, molecule, and purpose titles", () => {
     expect(readStoryFile("radio.stories.ts")).toContain('title: "Radio/Atom"')
     expect(readStoryFile("radio-group-field.stories.ts")).toContain('title: "Radio/Molecule"')
-    expect(readStoryFile("yes-no-radio-group.stories.ts")).toContain('title: "Radio/Context/YesNo"')
+    expect(readStoryFile("yes-no-radio-group.stories.ts")).toContain('title: "Radio/Purpose/YesNo"')
     expect(readStoryFile("rating-radio-group.stories.ts")).toContain(
-      'title: "Radio/Context/Rating"',
+      'title: "Radio/Purpose/Rating"',
     )
     expect(readStoryFile("option-radio-group.stories.ts")).toContain(
-      'title: "Radio/Context/Option"',
+      'title: "Radio/Purpose/Option"',
     )
   })
 })

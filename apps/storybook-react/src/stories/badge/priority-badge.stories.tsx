@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
 const meta: Meta<typeof PriorityBadge> = {
-  title: "Badge/Context/Priority",
+  title: "Badge/Purpose/Priority",
   component: PriorityBadge,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

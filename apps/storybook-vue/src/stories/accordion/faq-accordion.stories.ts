@@ -14,7 +14,7 @@ const faqItems = [
 ]
 
 const meta = {
-  title: "Accordion/Context/FAQ",
+  title: "Accordion/Purpose/FAQ",
   component: FAQAccordion as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

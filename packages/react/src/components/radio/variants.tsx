@@ -2,11 +2,11 @@ import type * as React from "react"
 import { RadioGroupField, type RadioGroupFieldProps } from "./radio-group-field"
 
 /**
- * Context Variant Radio Groups - AI-Friendly Components
+ * Purpose Components — Radio Group
  *
- * These variants encode common radio group patterns and automatically set
- * AI-friendly metadata, making it easier for both developers and AI tools
- * to understand the purpose of each radio group.
+ * Pre-configured radio group compositions that encode a specific semantic purpose.
+ * Each sets `data-purpose` for machine-readable intent while keeping the
+ * visual `variant` prop for presentation only.
  */
 
 // ============================================================================
@@ -152,7 +152,7 @@ export type OptionRadioGroupProps = RadioGroupFieldProps
  *
  * **AI Context:**
  * - Same API as `RadioGroupField` with `data-purpose="selection"` for AI parsing
- * - Use when no more specific context variant fits
+ * - Use when no more specific purpose component fits
  * - Preferences, categories, modes, or any custom option list
  *
  * @example

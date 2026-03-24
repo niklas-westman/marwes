@@ -13,7 +13,7 @@ const faqItems = [
 ]
 
 const meta: Meta<typeof FAQAccordion> = {
-  title: "Accordion/Context/FAQ",
+  title: "Accordion/Purpose/FAQ",
   component: FAQAccordion,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

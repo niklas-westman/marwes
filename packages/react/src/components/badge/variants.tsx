@@ -1,9 +1,9 @@
 /**
- * Context Variant Badges - AI-Friendly Components
+ * Purpose Components — Badge
  *
- * These variants encode common badge patterns and automatically set
- * AI-friendly metadata, making it easier for both developers and AI tools
- * to understand the purpose of each badge.
+ * Pre-configured badge compositions that encode a specific semantic purpose.
+ * Each sets `data-purpose` for machine-readable intent while keeping the
+ * visual `variant` prop for presentation only.
  */
 
 import type * as React from "react"

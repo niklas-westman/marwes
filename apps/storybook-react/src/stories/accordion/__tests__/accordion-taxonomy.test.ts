@@ -21,13 +21,13 @@ describe("React accordion story taxonomy", () => {
     expect(moleculeStory).toContain('title: "Accordion/Molecule"')
   })
 
-  it("keeps context variant stories under Accordion/Context", () => {
-    expect(readStoryFile("faq-accordion.stories.tsx")).toContain('title: "Accordion/Context/FAQ"')
+  it("keeps purpose component stories under Accordion/Purpose", () => {
+    expect(readStoryFile("faq-accordion.stories.tsx")).toContain('title: "Accordion/Purpose/FAQ"')
     expect(readStoryFile("settings-accordion.stories.tsx")).toContain(
-      'title: "Accordion/Context/Settings"',
+      'title: "Accordion/Purpose/Settings"',
     )
     expect(readStoryFile("sections-accordion.stories.tsx")).toContain(
-      'title: "Accordion/Context/Sections"',
+      'title: "Accordion/Purpose/Sections"',
     )
   })
 })

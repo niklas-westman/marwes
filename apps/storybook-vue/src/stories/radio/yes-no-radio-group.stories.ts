@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
 
 const meta = {
-  title: "Radio/Context/YesNo",
+  title: "Radio/Purpose/YesNo",
   component: YesNoRadioGroup as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

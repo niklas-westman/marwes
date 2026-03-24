@@ -4,7 +4,7 @@ import { NotificationBadge } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
-  title: "Badge/Context/Notification",
+  title: "Badge/Purpose/Notification",
   component: NotificationBadge as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
 const meta: Meta<typeof YesNoRadioGroup> = {
-  title: "Radio/Context/YesNo",
+  title: "Radio/Purpose/YesNo",
   component: YesNoRadioGroup,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

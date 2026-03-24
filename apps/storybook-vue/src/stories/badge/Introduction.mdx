@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import {
-  badgeWhyContextVariants,
-  badgeContextVariantPurposes,
+  badgeWhyPurposeComponents,
+  badgePurposeComponentReference,
 } from "@marwes-ui/core"
 
 <Meta title="Badge/Introduction" />
@@ -9,10 +9,10 @@ import {
 # Badge Components
 
 Marwes provides a badge system with three layers:
-**context variants** for common patterns, **BadgeGroup** for grouping related badges,
+**purpose components** for common patterns, **BadgeGroup** for grouping related badges,
 and the raw **Badge** atom for standalone use.
 
-## Recommended: Context Variants
+## Recommended: Purpose Components
 
 Use purpose-built components that automatically set AI-friendly metadata:
 
@@ -36,20 +36,20 @@ import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/vue"
 </template>
 ```
 
-### Why Context Variants?
+### Why Purpose Components?
 
 <ol>
-  {badgeWhyContextVariants.map((item) => (
+  {badgeWhyPurposeComponents.map((item) => (
     <li key={item.label}>
       <strong>{item.label}</strong> - {item.text}
     </li>
   ))}
 </ol>
 
-### Context Variant Reference
+### Purpose Component Reference
 
 <ul>
-  {badgeContextVariantPurposes.map((item) => (
+  {badgePurposeComponentReference.map((item) => (
     <li key={item.label}>
       <strong><code>{item.label}</code></strong> - {item.text}
     </li>
@@ -79,7 +79,7 @@ import { BadgeGroup, Badge } from "@marwes-ui/vue"
 - **Accessible group** — `<fieldset>` with `aria-labelledby` wiring
 - **Visible label** — rendered as a `<legend>` with Paragraph typography
 - **Data attributes** — supports `dataAttributes` for AI-friendly metadata
-- **Composable** — accepts any Badge children including context variants
+- **Composable** — accepts any Badge children including purpose components
 
 ## Low-level: Badge (Atom)
 
@@ -105,7 +105,7 @@ import { Badge } from "@marwes-ui/vue"
 
 ## Component Reference
 
-### Context Variants (AI-Friendly)
+### Purpose Components (AI-Friendly)
 
 **`StatusBadge`** — Operational or lifecycle status
 Sets: `data-purpose="status"`
@@ -130,6 +130,6 @@ Use when you need standalone badges or custom compositions
 
 - **Atom**: `Default`, `AllVariants`, `DarkVariants`
 - **Molecule**: `Default`, `AllVariants`, `WithCustomClass`
-- **Context/Status**: `Default`, `AllStatuses`
-- **Context/Priority**: `Default`, `AllPriorities`
-- **Context/Notification**: `Default`, `AllNotifications`
+- **Purpose/Status**: `Default`, `AllStatuses`
+- **Purpose/Priority**: `Default`, `AllPriorities`
+- **Purpose/Notification**: `Default`, `AllNotifications`

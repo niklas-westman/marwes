@@ -17,7 +17,7 @@ const sectionItems = [
 ]
 
 const meta: Meta<typeof SectionsAccordion> = {
-  title: "Accordion/Context/Sections",
+  title: "Accordion/Purpose/Sections",
   component: SectionsAccordion,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

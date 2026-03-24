@@ -2,11 +2,11 @@ import type * as React from "react"
 import { AccordionField, type AccordionFieldProps } from "./accordion-field"
 
 /**
- * Context Variant Accordion Groups - AI-Friendly Components
+ * Purpose Components — Accordion
  *
- * These variants encode common accordion patterns and automatically set
- * AI-friendly metadata, making it easier for both developers and AI tools
- * to understand the purpose of each accordion group.
+ * Pre-configured accordion compositions that encode a specific semantic purpose.
+ * Each sets `data-purpose` for machine-readable intent while keeping the
+ * visual `variant` prop for presentation only.
  */
 
 // ============================================================================
@@ -111,7 +111,7 @@ export type SectionsAccordionProps = AccordionFieldProps
  * **AI Context:**
  * - Same API as `AccordionField` with `data-purpose="sections"` for AI parsing
  * - Defaults to multi-open but can be overridden with `multiple={false}`
- * - Use when no more specific context variant fits
+ * - Use when no more specific purpose component fits
  * - Documentation, product details, order breakdowns
  *
  * @example

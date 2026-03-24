@@ -92,7 +92,7 @@ export const fieldComparisonRows: FieldComparisonRow[] = [
   },
 ]
 
-export const radioWhyContextVariants: LabeledCopy[] = [
+export const radioWhyPurposeComponents: LabeledCopy[] = [
   {
     label: "Pre-built options",
     text: "no need to manually create option lists for common patterns",
@@ -109,7 +109,7 @@ export const radioWhyContextVariants: LabeledCopy[] = [
   },
 ]
 
-export const radioContextVariantPurposes: LabeledCopy[] = [
+export const radioPurposeComponentReference: LabeledCopy[] = [
   {
     label: "YesNoRadioGroup",
     text: "Binary yes/no choices — accept terms, opt in/out, enable/disable",
@@ -121,7 +121,7 @@ export const radioContextVariantPurposes: LabeledCopy[] = [
   { label: "OptionRadioGroup", text: "General labeled options — preferences, categories, modes" },
 ]
 
-export const accordionWhyContextVariants: LabeledCopy[] = [
+export const accordionWhyPurposeComponents: LabeledCopy[] = [
   {
     label: "Pre-configured behaviour",
     text: "single-open or multi-open is set automatically based on the use case",
@@ -144,7 +144,7 @@ export const accordionWhyContextVariants: LabeledCopy[] = [
   },
 ]
 
-export const accordionContextVariantPurposes: LabeledCopy[] = [
+export const accordionPurposeComponentReference: LabeledCopy[] = [
   {
     label: "FAQAccordion",
     text: 'Question-and-answer sections — single-open, data-purpose="faq"',
@@ -159,7 +159,7 @@ export const accordionContextVariantPurposes: LabeledCopy[] = [
   },
 ]
 
-export const badgeWhyContextVariants: LabeledCopy[] = [
+export const badgeWhyPurposeComponents: LabeledCopy[] = [
   {
     label: "AI-friendly metadata",
     text: "data-purpose attributes are set automatically for AI parsing",
@@ -178,7 +178,7 @@ export const badgeWhyContextVariants: LabeledCopy[] = [
   },
 ]
 
-export const badgeContextVariantPurposes: LabeledCopy[] = [
+export const badgePurposeComponentReference: LabeledCopy[] = [
   {
     label: "StatusBadge",
     text: 'Operational or lifecycle status — active/inactive, online/offline, data-purpose="status"',

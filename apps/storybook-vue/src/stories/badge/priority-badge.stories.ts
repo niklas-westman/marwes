@@ -4,7 +4,7 @@ import { PriorityBadge } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
-  title: "Badge/Context/Priority",
+  title: "Badge/Purpose/Priority",
   component: PriorityBadge as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

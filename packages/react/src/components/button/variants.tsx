@@ -2,11 +2,11 @@ import { ButtonAction, ButtonVariant, IconName } from "@marwes-ui/core"
 import { Button, type ButtonProps } from "./button"
 
 /**
- * Semantic Button Variants - AI-Friendly Components
+ * Purpose Components — Button
  *
- * These variants encode best practices and automatically set AI-friendly
- * metadata, making it easier for both developers and AI tools to understand
- * the purpose and behavior of each button.
+ * Pre-configured button compositions that encode a specific semantic purpose.
+ * Each sets `data-purpose` for machine-readable intent while keeping the
+ * visual `variant` prop for presentation only.
  */
 
 // ============================================================================
@@ -51,6 +51,7 @@ export function DangerButton(props: DangerButtonProps) {
       confirmation={confirmation}
       dataAttributes={{
         ...props.dataAttributes,
+        "data-purpose": "destructive",
         "data-destructive": "true",
         "data-confirmation-required": confirmation ? "true" : "false",
       }}
@@ -87,6 +88,7 @@ export function CreateButton(props: CreateButtonProps) {
       variant={props.variant ?? "primary"}
       dataAttributes={{
         ...props.dataAttributes,
+        "data-purpose": "create",
         "data-creative": "true",
       }}
     />
@@ -119,6 +121,7 @@ export function SubmitButton(props: SubmitButtonProps) {
       as="button"
       action="submit"
       dataAttributes={{
+        "data-purpose": "submit",
         "data-context": "form-submit",
         ...props.dataAttributes,
       }}
@@ -155,6 +158,7 @@ export function CancelButton(props: CancelButtonProps) {
       variant={props.variant ?? "secondary"}
       dataAttributes={{
         ...props.dataAttributes,
+        "data-purpose": "cancel",
         "data-cancel": "true",
       }}
     />
@@ -195,6 +199,7 @@ export function LinkButton(props: LinkButtonProps) {
       action="navigate"
       dataAttributes={{
         ...props.dataAttributes,
+        "data-purpose": "navigation",
         "data-navigation": "true",
       }}
     />
@@ -289,6 +294,7 @@ export function SuccessButton(props: SuccessButtonProps) {
       as="button"
       dataAttributes={{
         ...props.dataAttributes,
+        "data-purpose": "success",
         "data-outcome": "positive",
       }}
     />

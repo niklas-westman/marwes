@@ -13,7 +13,7 @@ const settingsItems = [
 ]
 
 const meta: Meta<typeof SettingsAccordion> = {
-  title: "Accordion/Context/Settings",
+  title: "Accordion/Purpose/Settings",
   component: SettingsAccordion,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

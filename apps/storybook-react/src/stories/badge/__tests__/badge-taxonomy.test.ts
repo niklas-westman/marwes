@@ -21,11 +21,11 @@ describe("React badge story taxonomy", () => {
     expect(moleculeStory).toContain('title: "Badge/Molecule"')
   })
 
-  it("keeps context variant stories under Badge/Context", () => {
-    expect(readStoryFile("status-badge.stories.tsx")).toContain('title: "Badge/Context/Status"')
-    expect(readStoryFile("priority-badge.stories.tsx")).toContain('title: "Badge/Context/Priority"')
+  it("keeps purpose component stories under Badge/Purpose", () => {
+    expect(readStoryFile("status-badge.stories.tsx")).toContain('title: "Badge/Purpose/Status"')
+    expect(readStoryFile("priority-badge.stories.tsx")).toContain('title: "Badge/Purpose/Priority"')
     expect(readStoryFile("notification-badge.stories.tsx")).toContain(
-      'title: "Badge/Context/Notification"',
+      'title: "Badge/Purpose/Notification"',
     )
   })
 })

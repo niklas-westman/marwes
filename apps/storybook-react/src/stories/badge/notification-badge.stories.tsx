@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
 const meta: Meta<typeof NotificationBadge> = {
-  title: "Badge/Context/Notification",
+  title: "Badge/Purpose/Notification",
   component: NotificationBadge,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

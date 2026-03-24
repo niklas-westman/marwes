@@ -9,7 +9,7 @@ function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
 
-describe("StatusBadge (Context)", () => {
+describe("StatusBadge (Purpose)", () => {
   it("renders with data-purpose=status", () => {
     renderWithProvider(<StatusBadge variant="success">Active</StatusBadge>)
 
@@ -34,7 +34,7 @@ describe("StatusBadge (Context)", () => {
   })
 })
 
-describe("PriorityBadge (Context)", () => {
+describe("PriorityBadge (Purpose)", () => {
   it("renders with data-purpose=priority", () => {
     renderWithProvider(<PriorityBadge variant="error">Critical</PriorityBadge>)
 
@@ -51,7 +51,7 @@ describe("PriorityBadge (Context)", () => {
   })
 })
 
-describe("NotificationBadge (Context)", () => {
+describe("NotificationBadge (Purpose)", () => {
   it("renders with data-purpose=notification", () => {
     renderWithProvider(<NotificationBadge variant="info">5</NotificationBadge>)
 
