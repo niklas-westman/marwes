@@ -61,7 +61,7 @@ export const AllStates: Story = {
         </div>
         <div>
           <p style={{ marginBottom: 8, fontSize: 12, color: "#6b7280" }}>Interactive</p>
-          <Switch checked={on} onClick={() => setOn((v) => !v)}>
+          <Switch checked={on} onCheckedChange={setOn}>
             {on ? "On" : "Off"}
           </Switch>
         </div>

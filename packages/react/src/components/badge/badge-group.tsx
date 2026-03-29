@@ -10,9 +10,11 @@
  *
  * @example
  * ```tsx
+ * import { BadgeVariant } from "@marwes-ui/core";
+ *
  * <BadgeGroup label="Status">
- *   <Badge variant="success">Active</Badge>
- *   <Badge variant="warning">Pending review</Badge>
+ *   <Badge variant={BadgeVariant.success}>Active</Badge>
+ *   <Badge variant={BadgeVariant.warning}>Pending review</Badge>
  * </BadgeGroup>
  * ```
  */

@@ -45,6 +45,11 @@ describe("createSwitchRecipe", () => {
     expect(kit.a11y.ariaLabelledby).toBe("switch-label")
   })
 
+  it("ariaDescribedBy is passed through", () => {
+    const kit = createSwitchRecipe({ ariaDescribedBy: "switch-desc" })
+    expect(kit.a11y.ariaDescribedBy).toBe("switch-desc")
+  })
+
   it("vars is always empty object", () => {
     const kit = createSwitchRecipe({ checked: true })
     expect(kit.vars).toEqual({})

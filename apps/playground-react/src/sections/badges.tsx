@@ -1,7 +1,8 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import { Badge } from "@marwes-ui/react"
 import { ComponentRow, PreviewSection, SectionTitle } from "./section.styles"
 
-const VARIANTS = ["neutral", "brand", "info", "success", "warning", "error"] as const
+const VARIANTS = Object.values(BadgeVariant)
 
 function BadgesSection(): JSX.Element {
   return (

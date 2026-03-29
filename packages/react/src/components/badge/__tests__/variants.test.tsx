@@ -1,3 +1,4 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
@@ -11,7 +12,7 @@ function renderWithProvider(ui: React.ReactElement) {
 
 describe("StatusBadge (Purpose)", () => {
   it("renders with data-purpose=status", () => {
-    renderWithProvider(<StatusBadge variant="success">Active</StatusBadge>)
+    renderWithProvider(<StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>)
 
     const badge = screen.getByText("Active")
     const wrapper = badge.closest("[data-purpose]")
@@ -19,7 +20,7 @@ describe("StatusBadge (Purpose)", () => {
   })
 
   it("renders as a Badge atom with expected variant class", () => {
-    renderWithProvider(<StatusBadge variant="success">Active</StatusBadge>)
+    renderWithProvider(<StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>)
 
     const badge = screen.getByText("Active")
     expect(badge.className).toContain("mw-badge")
@@ -36,7 +37,7 @@ describe("StatusBadge (Purpose)", () => {
 
 describe("PriorityBadge (Purpose)", () => {
   it("renders with data-purpose=priority", () => {
-    renderWithProvider(<PriorityBadge variant="error">Critical</PriorityBadge>)
+    renderWithProvider(<PriorityBadge variant={BadgeVariant.error}>Critical</PriorityBadge>)
 
     const badge = screen.getByText("Critical")
     const wrapper = badge.closest("[data-purpose]")
@@ -44,7 +45,7 @@ describe("PriorityBadge (Purpose)", () => {
   })
 
   it("renders as a Badge atom with expected variant class", () => {
-    renderWithProvider(<PriorityBadge variant="warning">High</PriorityBadge>)
+    renderWithProvider(<PriorityBadge variant={BadgeVariant.warning}>High</PriorityBadge>)
 
     const badge = screen.getByText("High")
     expect(badge.className).toContain("mw-badge--warning")
@@ -53,7 +54,7 @@ describe("PriorityBadge (Purpose)", () => {
 
 describe("NotificationBadge (Purpose)", () => {
   it("renders with data-purpose=notification", () => {
-    renderWithProvider(<NotificationBadge variant="info">5</NotificationBadge>)
+    renderWithProvider(<NotificationBadge variant={BadgeVariant.info}>5</NotificationBadge>)
 
     const badge = screen.getByText("5")
     const wrapper = badge.closest("[data-purpose]")
@@ -61,7 +62,7 @@ describe("NotificationBadge (Purpose)", () => {
   })
 
   it("renders as a Badge atom with expected variant class", () => {
-    renderWithProvider(<NotificationBadge variant="brand">New</NotificationBadge>)
+    renderWithProvider(<NotificationBadge variant={BadgeVariant.brand}>New</NotificationBadge>)
 
     const badge = screen.getByText("New")
     expect(badge.className).toContain("mw-badge--brand")
@@ -69,7 +70,7 @@ describe("NotificationBadge (Purpose)", () => {
 
   it("passes ariaLabel for accessibility", () => {
     renderWithProvider(
-      <NotificationBadge variant="info" ariaLabel="5 unread messages">
+      <NotificationBadge variant={BadgeVariant.info} ariaLabel="5 unread messages">
         5
       </NotificationBadge>,
     )

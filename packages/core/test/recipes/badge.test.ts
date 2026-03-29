@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { BadgeVariant } from "../../src/components/atoms/badge"
 import { createBadgeRecipe } from "../../src/components/atoms/badge/badge-recipe"
 
 describe("createBadgeRecipe", () => {
@@ -9,27 +10,27 @@ describe("createBadgeRecipe", () => {
   })
 
   it("variant brand: adds mw-badge--brand", () => {
-    const kit = createBadgeRecipe({ variant: "brand" })
+    const kit = createBadgeRecipe({ variant: BadgeVariant.brand })
     expect(kit.className).toBe("mw-badge mw-badge--brand")
   })
 
   it("variant info: adds mw-badge--info", () => {
-    const kit = createBadgeRecipe({ variant: "info" })
+    const kit = createBadgeRecipe({ variant: BadgeVariant.info })
     expect(kit.className).toBe("mw-badge mw-badge--info")
   })
 
   it("variant success: adds mw-badge--success", () => {
-    const kit = createBadgeRecipe({ variant: "success" })
+    const kit = createBadgeRecipe({ variant: BadgeVariant.success })
     expect(kit.className).toBe("mw-badge mw-badge--success")
   })
 
   it("variant warning: adds mw-badge--warning", () => {
-    const kit = createBadgeRecipe({ variant: "warning" })
+    const kit = createBadgeRecipe({ variant: BadgeVariant.warning })
     expect(kit.className).toBe("mw-badge mw-badge--warning")
   })
 
   it("variant error: adds mw-badge--error", () => {
-    const kit = createBadgeRecipe({ variant: "error" })
+    const kit = createBadgeRecipe({ variant: BadgeVariant.error })
     expect(kit.className).toBe("mw-badge mw-badge--error")
   })
 
@@ -44,7 +45,7 @@ describe("createBadgeRecipe", () => {
   })
 
   it("vars is always empty object (no inline vars for badge)", () => {
-    const kit = createBadgeRecipe({ variant: "success" })
+    const kit = createBadgeRecipe({ variant: BadgeVariant.success })
     expect(kit.vars).toEqual({})
   })
 })

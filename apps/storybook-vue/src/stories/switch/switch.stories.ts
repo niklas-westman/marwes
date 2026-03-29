@@ -67,7 +67,7 @@ export const AllStates: Story = {
         </div>
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Interactive</p>
-          <Switch :checked="on" @click="on = !on">{{ on ? 'On' : 'Off' }}</Switch>
+          <Switch v-model="on">{{ on ? 'On' : 'Off' }}</Switch>
         </div>
       </div>
     `,

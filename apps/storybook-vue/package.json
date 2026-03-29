@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc -b --noEmit",
-    "test": "echo \"No tests in storybook-vue\"",
+    "test": "vitest run",
     "build": "tsc -b --noEmit && storybook build",
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build"

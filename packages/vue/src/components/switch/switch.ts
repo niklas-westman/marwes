@@ -5,30 +5,37 @@ import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-u
 
 export type SwitchProps = SwitchOptions & {
   className?: string
+  modelValue?: boolean
+  onCheckedChange?: (checked: boolean) => void
   onClick?: (event: MouseEvent) => void
   id?: string
 }
 
 const switchPropKeys = [
   "checked",
+  "modelValue",
   "disabled",
   "ariaLabel",
   "ariaLabelledby",
+  "ariaDescribedBy",
   "className",
+  "onCheckedChange",
   "onClick",
   "id",
 ] as const
 
 export const Switch = defineComponent(
-  (props: SwitchProps, { slots }) => {
+  (props: SwitchProps, { slots, emit }) => {
     const attrs = useAttrs()
 
     const kit = computed(() => {
       const opts: SwitchOptions = {}
-      if (props.checked !== undefined) opts.checked = props.checked
+      const checked = props.modelValue ?? props.checked
+      if (checked !== undefined) opts.checked = checked
       if (props.disabled !== undefined) opts.disabled = props.disabled
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
       if (props.ariaLabelledby !== undefined) opts.ariaLabelledby = props.ariaLabelledby
+      if (props.ariaDescribedBy !== undefined) opts.ariaDescribedBy = props.ariaDescribedBy
       return createSwitchRecipe(opts)
     })
 
@@ -52,8 +59,13 @@ export const Switch = defineComponent(
           "aria-disabled": a11y.ariaDisabled,
           "aria-label": a11y.ariaLabel,
           "aria-labelledby": a11y.ariaLabelledby,
+          "aria-describedby": a11y.ariaDescribedBy,
           onClick: (event: MouseEvent) => {
             props.onClick?.(event)
+            const nextChecked = !(props.modelValue ?? props.checked ?? false)
+            props.onCheckedChange?.(nextChecked)
+            emit("update:modelValue", nextChecked)
+            emit("checked-change", nextChecked)
           },
         },
         [
@@ -67,6 +79,6 @@ export const Switch = defineComponent(
     name: "MarwesSwitch",
     inheritAttrs: false,
     props: [...switchPropKeys],
-    emits: ["click"],
+    emits: ["update:modelValue", "checked-change"],
   },
 )

@@ -1,3 +1,4 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
@@ -10,7 +11,7 @@ function renderWithProvider(ui: React.ReactElement) {
 
 describe("Badge (Atom)", () => {
   it("renders a span with recipe class for given variant", () => {
-    renderWithProvider(<Badge variant="info">Info</Badge>)
+    renderWithProvider(<Badge variant={BadgeVariant.info}>Info</Badge>)
 
     const badge = screen.getByText("Info")
     expect(badge.tagName).toBe("SPAN")

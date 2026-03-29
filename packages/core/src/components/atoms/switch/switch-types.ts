@@ -9,6 +9,7 @@ export interface SwitchOptions {
   /** Required when no visible label text is provided */
   ariaLabel?: string
   ariaLabelledby?: string
+  ariaDescribedBy?: string
 }
 
 export interface SwitchA11yProps {
@@ -17,6 +18,7 @@ export interface SwitchA11yProps {
   ariaDisabled?: true
   ariaLabel?: string
   ariaLabelledby?: string
+  ariaDescribedBy?: string
 }
 
 export interface SwitchRenderKit {

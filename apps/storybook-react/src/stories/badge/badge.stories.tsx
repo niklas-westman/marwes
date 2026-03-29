@@ -1,9 +1,9 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
 import { Badge } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
-const VARIANTS = ["neutral", "brand", "info", "success", "warning", "error"] as const
+const VARIANTS = Object.values(BadgeVariant)
 
 const meta: Meta<typeof Badge> = {
   title: "Badge/Atom",
@@ -24,7 +24,7 @@ export default meta
 type Story = StoryObj<typeof Badge>
 
 export const Default: Story = {
-  args: { children: "Neutral", variant: "neutral" },
+  args: { children: "Neutral", variant: BadgeVariant.neutral },
 }
 
 export const AllVariants: Story = {

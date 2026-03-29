@@ -1,3 +1,4 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
@@ -13,8 +14,8 @@ describe("BadgeGroup (Molecule)", () => {
   it("renders a labeled group container with badge children", () => {
     renderWithProvider(
       <BadgeGroup label="Tags">
-        <Badge variant="info">Alpha</Badge>
-        <Badge variant="success">Beta</Badge>
+        <Badge variant={BadgeVariant.info}>Alpha</Badge>
+        <Badge variant={BadgeVariant.success}>Beta</Badge>
       </BadgeGroup>,
     )
 

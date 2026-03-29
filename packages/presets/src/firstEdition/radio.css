@@ -5,15 +5,15 @@
  * Tokens (from Figma nodes.json):
  *   radio/surface (light): #f9fafb    (dark): #141414
  *   radio/border  (light): #e5e7eb    (dark): #374151
- *   radio/dot     (light): #2f31fc    (dark): #2f31fc  (= primary-base)
+ *   radio/dot     (light): #2f31fc    (dark): #2f31fc  (fixed Figma blue)
  *   radio/label   (light): #141414    (dark): #f9fafb  (= text)
- *   Dimensions: 16×16px circle, 6px inner dot
+ *   Dimensions: 18×18px circle, 10px inner dot (from Figma)
  */
 
 .mw-radio {
   --mw-radio-surface: #f9fafb;
   --mw-radio-border: #e5e7eb;
-  --mw-radio-dot: var(--mw-color-primary-base, #2f31fc);
+  --mw-radio-dot: #2f31fc;
 
   /* Reset native appearance */
   appearance: none;
@@ -23,14 +23,16 @@
   display: inline-grid;
   place-content: center;
 
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
+  margin: 0;
   border: 1.5px solid var(--mw-radio-border);
   background: var(--mw-radio-surface);
 
   cursor: pointer;
   vertical-align: middle;
+  flex-shrink: 0;
   transition: border-color 150ms ease, background 150ms ease;
   font-family: var(--mw-font-primary, inherit);
 }
@@ -38,8 +40,8 @@
 /* Inner dot — hidden by default, scales in when checked */
 .mw-radio::before {
   content: "";
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--mw-radio-dot);
   transform: scale(0);
@@ -51,7 +53,7 @@
    ============================================ */
 
 .mw-radio:checked {
-  border-color: var(--mw-radio-dot);
+  border-color: var(--mw-radio-border);
   background: var(--mw-radio-surface);
 }
 

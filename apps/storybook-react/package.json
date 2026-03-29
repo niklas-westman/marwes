@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc -b --noEmit",
-    "test": "echo \"No tests in storybook-react\"",
+    "test": "vitest run",
     "build": "tsc -b --noEmit && storybook build",
     "lint": "eslint .",
     "preview": "vite preview",

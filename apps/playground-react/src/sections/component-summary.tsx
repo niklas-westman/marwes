@@ -1,3 +1,4 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import {
   Accordion,
   Badge,
@@ -30,7 +31,7 @@ import {
 } from "./component-summary.styles"
 import { ComponentRow } from "./section.styles"
 
-const BADGE_VARIANTS = ["neutral", "brand", "info", "success", "warning", "error"] as const
+const BADGE_VARIANTS = Object.values(BadgeVariant)
 
 const PREVIEW_ICONS: IconName[] = [
   IconName.Heart,
@@ -66,7 +67,7 @@ function ComponentSummary(): JSX.Element {
             <InputField label="Email" input={{ placeholder: "jane@example.com" }} />
             <PreviewHeroActions>
               <PrimaryButton>Create account</PrimaryButton>
-              <Badge variant="success">Active</Badge>
+              <Badge variant={BadgeVariant.success}>Active</Badge>
             </PreviewHeroActions>
           </PreviewHeroBody>
         </Card>

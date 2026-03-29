@@ -1,9 +1,9 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
 import type { BadgeProps } from "@marwes-ui/vue"
 import { Badge } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
-const VARIANTS = ["neutral", "brand", "info", "success", "warning", "error"] as const
+const VARIANTS = Object.values(BadgeVariant)
 
 const meta = {
   title: "Badge/Atom",
@@ -25,7 +25,10 @@ type Story = StoryObj<BadgeProps>
 export const Default: Story = {
   render: () => ({
     components: { Badge },
-    template: `<Badge variant="neutral">Neutral</Badge>`,
+    setup() {
+      return { BadgeVariant }
+    },
+    template: `<Badge :variant="BadgeVariant.neutral">Neutral</Badge>`,
   }),
 }
 

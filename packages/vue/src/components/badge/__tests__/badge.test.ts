@@ -1,3 +1,4 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
@@ -27,7 +28,7 @@ describe("Vue Badge (Atom)", () => {
   })
 
   it("applies variant class", () => {
-    renderWithProvider(Badge, { variant: "success", children: "Done" })
+    renderWithProvider(Badge, { variant: BadgeVariant.success, children: "Done" })
 
     const badge = screen.getByText("Done")
     expect(badge.className).toContain("mw-badge--success")

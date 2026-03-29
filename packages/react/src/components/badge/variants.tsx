@@ -24,8 +24,10 @@ export type StatusBadgeProps = BadgeProps
  *
  * @example
  * ```tsx
- * <StatusBadge variant="success">Active</StatusBadge>
- * <StatusBadge variant="error">Offline</StatusBadge>
+ * import { BadgeVariant } from "@marwes-ui/core";
+ *
+ * <StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>
+ * <StatusBadge variant={BadgeVariant.error}>Offline</StatusBadge>
  * ```
  */
 export function StatusBadge(props: StatusBadgeProps): React.ReactElement {
@@ -55,8 +57,10 @@ export type PriorityBadgeProps = BadgeProps
  *
  * @example
  * ```tsx
- * <PriorityBadge variant="error">Critical</PriorityBadge>
- * <PriorityBadge variant="warning">High</PriorityBadge>
+ * import { BadgeVariant } from "@marwes-ui/core";
+ *
+ * <PriorityBadge variant={BadgeVariant.error}>Critical</PriorityBadge>
+ * <PriorityBadge variant={BadgeVariant.warning}>High</PriorityBadge>
  * ```
  */
 export function PriorityBadge(props: PriorityBadgeProps): React.ReactElement {
@@ -87,8 +91,10 @@ export type NotificationBadgeProps = BadgeProps
  *
  * @example
  * ```tsx
- * <NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>
- * <NotificationBadge variant="brand">New</NotificationBadge>
+ * import { BadgeVariant } from "@marwes-ui/core";
+ *
+ * <NotificationBadge variant={BadgeVariant.info} ariaLabel="5 unread messages">5</NotificationBadge>
+ * <NotificationBadge variant={BadgeVariant.brand}>New</NotificationBadge>
  * ```
  */
 export function NotificationBadge(props: NotificationBadgeProps): React.ReactElement {

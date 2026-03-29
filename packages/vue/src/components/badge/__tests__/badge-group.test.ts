@@ -1,3 +1,4 @@
+import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
@@ -14,8 +15,8 @@ function renderBadgeGroup(props: Record<string, unknown>) {
             default: () =>
               h(BadgeGroup as unknown as string, props, {
                 default: () => [
-                  h(Badge, { variant: "info" }, { default: () => "Alpha" }),
-                  h(Badge, { variant: "success" }, { default: () => "Beta" }),
+                  h(Badge, { variant: BadgeVariant.info }, { default: () => "Alpha" }),
+                  h(Badge, { variant: BadgeVariant.success }, { default: () => "Beta" }),
                 ],
               }),
           })

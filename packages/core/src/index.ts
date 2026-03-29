@@ -67,6 +67,7 @@ export {
   buildCheckboxFieldA11yIds,
   buildRadioGroupFieldA11yIds,
   buildAccordionFieldA11yIds,
+  buildSwitchFieldA11yIds,
   buildCurrencyHelperText,
 } from "./shared/field-helpers"
 export * from "./storybook"

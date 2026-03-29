@@ -1,7 +1,9 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
 import type { NotificationBadgeProps } from "@marwes-ui/vue"
 import { NotificationBadge } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
+
+const VARIANTS = Object.values(BadgeVariant)
 
 const meta = {
   title: "Badge/Purpose/Notification",
@@ -11,7 +13,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["neutral", "brand", "info", "success", "warning", "error"],
+      options: VARIANTS,
     },
   },
 } satisfies Meta<NotificationBadgeProps>
@@ -22,18 +24,24 @@ type Story = StoryObj<NotificationBadgeProps>
 export const Default: Story = {
   render: () => ({
     components: { NotificationBadge },
-    template: `<NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>`,
+    setup() {
+      return { BadgeVariant }
+    },
+    template: `<NotificationBadge :variant="BadgeVariant.info" ariaLabel="5 unread messages">5</NotificationBadge>`,
   }),
 }
 
 export const AllNotifications: Story = {
   render: () => ({
     components: { NotificationBadge },
+    setup() {
+      return { BadgeVariant }
+    },
     template: `
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-        <NotificationBadge variant="info" ariaLabel="3 new messages">3</NotificationBadge>
-        <NotificationBadge variant="brand">New</NotificationBadge>
-        <NotificationBadge variant="error" ariaLabel="99+ alerts">99+</NotificationBadge>
+        <NotificationBadge :variant="BadgeVariant.info" ariaLabel="3 new messages">3</NotificationBadge>
+        <NotificationBadge :variant="BadgeVariant.brand">New</NotificationBadge>
+        <NotificationBadge :variant="BadgeVariant.error" ariaLabel="99+ alerts">99+</NotificationBadge>
       </div>
     `,
   }),

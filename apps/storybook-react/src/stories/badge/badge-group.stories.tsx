@@ -1,9 +1,9 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
 import { Badge, BadgeGroup } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
-const VARIANTS = ["neutral", "brand", "info", "success", "warning", "error"] as const
+const VARIANTS = Object.values(BadgeVariant)
 
 const meta: Meta<typeof BadgeGroup> = {
   title: "Badge/Molecule",
@@ -28,9 +28,9 @@ export const Default: Story = {
     label: "Tags",
     children: (
       <>
-        <Badge variant="info">Frontend</Badge>
-        <Badge variant="success">Approved</Badge>
-        <Badge variant="warning">Review</Badge>
+        <Badge variant={BadgeVariant.info}>Frontend</Badge>
+        <Badge variant={BadgeVariant.success}>Approved</Badge>
+        <Badge variant={BadgeVariant.warning}>Review</Badge>
       </>
     ),
   },
@@ -54,8 +54,8 @@ export const WithCustomClass: Story = {
     className: "custom-badge-group",
     children: (
       <>
-        <Badge variant="brand">Alpha</Badge>
-        <Badge variant="brand">Beta</Badge>
+        <Badge variant={BadgeVariant.brand}>Alpha</Badge>
+        <Badge variant={BadgeVariant.brand}>Beta</Badge>
       </>
     ),
   },

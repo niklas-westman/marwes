@@ -1,31 +1,138 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  switchPurposeComponentReference,
+  switchWhyPurposeComponents,
+} from "@marwes-ui/core"
 
 <Meta title="Switch/Introduction" />
 
 # Switch Components
 
-Switches represent immediate on/off state for a single setting.
+Marwes provides a switch system with three layers:
+**purpose components** for common toggle use cases, **SwitchField** for standard
+field composition, and the raw **Switch** atom for custom layouts.
 
-## Component Architecture
+## Recommended: Purpose Components
 
+Use purpose-built components when the toggle has a clear product meaning:
+
+```tsx
+import { FeatureToggle, PermissionSwitch, PreferenceSwitch } from "@marwes-ui/react"
+
+const [featureEnabled, setFeatureEnabled] = React.useState(true)
+
+<FeatureToggle
+  label="Enable beta dashboard"
+  description="Turn on early access to the redesigned analytics experience."
+  switch={{ checked: featureEnabled, onCheckedChange: setFeatureEnabled }}
+/>
+
+<PreferenceSwitch
+  label="Use compact layout"
+  description="Show denser spacing in lists and tables."
+  switch={{ checked: false }}
+/>
+
+<PermissionSwitch
+  label="Can manage billing"
+  description="Grant access to invoices and subscription changes."
+  switch={{ checked: true }}
+/>
 ```
-Switch (Atom)
+
+### Why Purpose Components?
+
+<ol>
+  {switchWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {switchPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: SwitchField (Molecule)
+
+For a single labeled switch with optional description and error text, use `SwitchField`:
+
+```tsx
+import { SwitchField } from "@marwes-ui/react"
+
+const [enabled, setEnabled] = React.useState(false)
+
+<SwitchField
+  label="Enable notifications"
+  description="Receive important account and product updates."
+  switch={{ checked: enabled, onCheckedChange: setEnabled }}
+/>
+
+<SwitchField
+  label="Require review before publishing"
+  error="Review mode must stay enabled for this workspace."
+  switch={{ checked: false }}
+/>
 ```
 
-## Recommended Usage
+### SwitchField Features
 
-Use `Switch` for binary preferences where state changes are applied instantly.
+- **Accessible field wiring** - uses `aria-labelledby` for the visible label and merges description/error ids into `aria-describedby`
+- **Label + description + error** - standard field semantics without repeating layout boilerplate
+- **Controlled toggling** - forward `checked` and `onCheckedChange` through the nested `switch` prop
+- **Purpose-ready wrapper** - accepts `dataAttributes` so context variants can layer in metadata
+
+## Low-level: Switch (Atom)
+
+Use the raw `Switch` atom when you need a custom layout or non-standard composition:
 
 ```tsx
 import { Switch } from "@marwes-ui/react"
 
-<Switch checked={enabled} onClick={() => setEnabled((prev) => !prev)}>
-  Enable notifications
-</Switch>
+const [enabled, setEnabled] = React.useState(false)
+
+<div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+  <Switch
+    checked={enabled}
+    onCheckedChange={setEnabled}
+    ariaLabel="Enable notifications"
+  />
+  <span>Enable notifications</span>
+</div>
 ```
 
-## Story Coverage
+> **Note:** When using `Switch` directly, you are responsible for:
+> - Providing an accessible name via visible content, `ariaLabel`, or `aria-labelledby`
+> - Wiring any supporting text through `aria-describedby`
+> - Managing checked state in the parent
 
-- `Default`, `Checked`, and `Disabled` for baseline states
-- `CheckedDisabled` for locked-on settings
-- `AllStates` for side-by-side behavior validation
+## Component Reference
+
+### Purpose Components
+
+**`FeatureToggle`** - Feature enablement and product rollout controls
+
+**`PreferenceSwitch`** - User or workspace setting preferences
+
+**`PermissionSwitch`** - Access and capability toggles
+
+### Base Molecule
+
+**`SwitchField`** - Accessible labeled switch with description and error wiring
+
+### Atom
+
+**`Switch`** - Low-level `<button role="switch">`
+
+- `Switch (Atom)`
+- `SwitchField (Molecule)`
+- `FeatureToggle`
+- `PreferenceSwitch`
+- `PermissionSwitch`

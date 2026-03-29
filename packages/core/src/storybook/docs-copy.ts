@@ -192,3 +192,37 @@ export const badgePurposeComponentReference: LabeledCopy[] = [
     text: 'Notification counts and alerts — unread counts, new items, data-purpose="notification"',
   },
 ]
+
+export const switchWhyPurposeComponents: LabeledCopy[] = [
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  {
+    label: "Consistent UX",
+    text: "enforces accessible switch patterns across your app",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces a SwitchField with preconfigured data attributes",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (FeatureToggle vs generic SwitchField)",
+  },
+]
+
+export const switchPurposeComponentReference: LabeledCopy[] = [
+  {
+    label: "FeatureToggle",
+    text: 'Enables/disables product features — data-purpose="feature-toggle"',
+  },
+  {
+    label: "PreferenceSwitch",
+    text: 'User preference or settings toggle — data-purpose="preference"',
+  },
+  {
+    label: "PermissionSwitch",
+    text: 'Access control or permissions toggle — data-purpose="permission"',
+  },
+]

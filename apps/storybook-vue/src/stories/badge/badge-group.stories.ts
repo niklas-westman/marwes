@@ -1,9 +1,9 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
 import type { BadgeGroupProps } from "@marwes-ui/vue"
 import { Badge, BadgeGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
-const VARIANTS = ["neutral", "brand", "info", "success", "warning", "error"] as const
+const VARIANTS = Object.values(BadgeVariant)
 
 const meta = {
   title: "Badge/Molecule",
@@ -19,11 +19,14 @@ type Story = StoryObj<BadgeGroupProps>
 export const Default: Story = {
   render: () => ({
     components: { BadgeGroup, Badge },
+    setup() {
+      return { BadgeVariant }
+    },
     template: `
       <BadgeGroup label="Tags">
-        <Badge variant="info">Frontend</Badge>
-        <Badge variant="success">Approved</Badge>
-        <Badge variant="warning">Review</Badge>
+        <Badge :variant="BadgeVariant.info">Frontend</Badge>
+        <Badge :variant="BadgeVariant.success">Approved</Badge>
+        <Badge :variant="BadgeVariant.warning">Review</Badge>
       </BadgeGroup>
     `,
   }),
@@ -48,10 +51,13 @@ export const AllVariants: Story = {
 export const WithCustomClass: Story = {
   render: () => ({
     components: { BadgeGroup, Badge },
+    setup() {
+      return { BadgeVariant }
+    },
     template: `
       <BadgeGroup label="Custom Styled" className="custom-badge-group">
-        <Badge variant="brand">Alpha</Badge>
-        <Badge variant="brand">Beta</Badge>
+        <Badge :variant="BadgeVariant.brand">Alpha</Badge>
+        <Badge :variant="BadgeVariant.brand">Beta</Badge>
       </BadgeGroup>
     `,
   }),

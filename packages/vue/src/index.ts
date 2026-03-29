@@ -121,6 +121,7 @@ export type {
 /* Badge */
 export { Badge } from "./components/badge"
 export type { BadgeProps } from "./components/badge"
+export { BadgeVariant } from "@marwes-ui/core"
 
 /* BadgeGroup */
 export { BadgeGroup } from "./components/badge"
@@ -135,8 +136,20 @@ export type {
 } from "./components/badge"
 
 /* Switch */
-export { Switch } from "./components/switch"
-export type { SwitchProps } from "./components/switch"
+export {
+  Switch,
+  SwitchField,
+  FeatureToggle,
+  PreferenceSwitch,
+  PermissionSwitch,
+} from "./components/switch"
+export type {
+  SwitchProps,
+  SwitchFieldProps,
+  FeatureToggleProps,
+  PreferenceSwitchProps,
+  PermissionSwitchProps,
+} from "./components/switch"
 
 /* Tab */
 export { Tab } from "./components/tab"

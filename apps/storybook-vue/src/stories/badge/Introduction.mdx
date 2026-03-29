@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import {
+  BadgeVariant,
   badgeWhyPurposeComponents,
   badgePurposeComponentReference,
 } from "@marwes-ui/core"
@@ -23,16 +24,16 @@ import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/vue"
 
 <template>
   <!-- Operational status — auto-sets data-purpose="status" -->
-  <StatusBadge variant="success">Active</StatusBadge>
-  <StatusBadge variant="error">Offline</StatusBadge>
+  <StatusBadge :variant="BadgeVariant.success">Active</StatusBadge>
+  <StatusBadge :variant="BadgeVariant.error">Offline</StatusBadge>
 
   <!-- Priority levels — auto-sets data-purpose="priority" -->
-  <PriorityBadge variant="error">Critical</PriorityBadge>
-  <PriorityBadge variant="warning">High</PriorityBadge>
+  <PriorityBadge :variant="BadgeVariant.error">Critical</PriorityBadge>
+  <PriorityBadge :variant="BadgeVariant.warning">High</PriorityBadge>
 
   <!-- Notification counts — auto-sets data-purpose="notification" -->
-  <NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>
-  <NotificationBadge variant="brand">New</NotificationBadge>
+  <NotificationBadge :variant="BadgeVariant.info" ariaLabel="5 unread messages">5</NotificationBadge>
+  <NotificationBadge :variant="BadgeVariant.brand">New</NotificationBadge>
 </template>
 ```
 
@@ -67,9 +68,9 @@ import { BadgeGroup, Badge } from "@marwes-ui/vue"
 
 <template>
   <BadgeGroup label="Tags">
-    <Badge variant="info">Frontend</Badge>
-    <Badge variant="success">Approved</Badge>
-    <Badge variant="warning">Review</Badge>
+    <Badge :variant="BadgeVariant.info">Frontend</Badge>
+    <Badge :variant="BadgeVariant.success">Approved</Badge>
+    <Badge :variant="BadgeVariant.warning">Review</Badge>
   </BadgeGroup>
 </template>
 ```
@@ -91,8 +92,8 @@ import { Badge } from "@marwes-ui/vue"
 </script>
 
 <template>
-  <Badge variant="success">Active</Badge>
-  <Badge variant="error" ariaLabel="critical status">!</Badge>
+  <Badge :variant="BadgeVariant.success">Active</Badge>
+  <Badge :variant="BadgeVariant.error" ariaLabel="critical status">!</Badge>
 </template>
 ```
 

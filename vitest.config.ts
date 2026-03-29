@@ -7,6 +7,7 @@ export default defineConfig({
       "packages/presets/vitest.config.ts",
       "packages/react/vitest.config.ts",
       "packages/vue/vitest.config.ts",
+      "apps/storybook-react/vitest.config.ts",
     ],
   },
 })
