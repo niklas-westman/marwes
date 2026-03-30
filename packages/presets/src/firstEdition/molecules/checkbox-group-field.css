@@ -1,0 +1,50 @@
+.mw-checkbox-group-field {
+  display: grid;
+  gap: var(--mw-density-field-gap, 8px);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mw-checkbox-group-field__label {
+  display: block;
+  user-select: none;
+}
+
+.mw-checkbox-group-field__options {
+  display: grid;
+  gap: 0;
+}
+
+.mw-checkbox-group-field__option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mw-density-gap);
+  min-height: 32px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mw-checkbox-group-field__option .mw-p {
+  line-height: 1;
+}
+
+.mw-checkbox-group-field__description {
+  opacity: 0.75;
+  font-size: var(--mw-density-font-size-sm);
+}
+
+.mw-checkbox-group-field__error {
+  font-size: var(--mw-density-font-size-sm);
+  color: var(--mw-color-danger-base, #dc2626);
+}
+
+.mw-checkbox-group-field--disabled .mw-checkbox-group-field__option {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.mw-checkbox-group-field--invalid .mw-checkbox-group-field__label .mw-p,
+.mw-checkbox-group-field--invalid .mw-checkbox-group-field__error .mw-p {
+  color: var(--mw-color-danger-base, #dc2626);
+}

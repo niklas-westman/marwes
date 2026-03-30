@@ -1,0 +1,41 @@
+import { describe, expect, it } from "vitest"
+import * as inputComponents from ".."
+import * as publicApi from "../../../index"
+
+describe("input barrel exports", () => {
+  it("exports the complete input domain surface", () => {
+    expect(inputComponents.Input).toBeDefined()
+    expect(inputComponents.Select).toBeDefined()
+    expect(inputComponents.Textarea).toBeDefined()
+    expect(inputComponents.InputField).toBeDefined()
+    expect(inputComponents.SelectField).toBeDefined()
+    expect(inputComponents.TextareaField).toBeDefined()
+    expect(inputComponents.DropdownField).toBeDefined()
+    expect(inputComponents.SearchField).toBeDefined()
+    expect(inputComponents.PasswordField).toBeDefined()
+    expect(inputComponents.EmailField).toBeDefined()
+    expect(inputComponents.DateOfBirthField).toBeDefined()
+    expect(inputComponents.ZipCodeField).toBeDefined()
+    expect(inputComponents.PhoneField).toBeDefined()
+    expect(inputComponents.URLField).toBeDefined()
+    expect(inputComponents.CurrencyField).toBeDefined()
+  })
+
+  it("re-exports the same input symbols from package root", () => {
+    expect(publicApi.Input).toBe(inputComponents.Input)
+    expect(publicApi.Select).toBe(inputComponents.Select)
+    expect(publicApi.Textarea).toBe(inputComponents.Textarea)
+    expect(publicApi.InputField).toBe(inputComponents.InputField)
+    expect(publicApi.SelectField).toBe(inputComponents.SelectField)
+    expect(publicApi.TextareaField).toBe(inputComponents.TextareaField)
+    expect(publicApi.DropdownField).toBe(inputComponents.DropdownField)
+    expect(publicApi.SearchField).toBe(inputComponents.SearchField)
+    expect(publicApi.PasswordField).toBe(inputComponents.PasswordField)
+    expect(publicApi.EmailField).toBe(inputComponents.EmailField)
+    expect(publicApi.DateOfBirthField).toBe(inputComponents.DateOfBirthField)
+    expect(publicApi.ZipCodeField).toBe(inputComponents.ZipCodeField)
+    expect(publicApi.PhoneField).toBe(inputComponents.PhoneField)
+    expect(publicApi.URLField).toBe(inputComponents.URLField)
+    expect(publicApi.CurrencyField).toBe(inputComponents.CurrencyField)
+  })
+})
