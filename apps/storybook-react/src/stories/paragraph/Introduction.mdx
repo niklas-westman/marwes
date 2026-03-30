@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Paragraph/Introduction" />
+
+# Paragraph Component
+
+Marwes provides `Paragraph` as the atom-level text primitive for body copy,
+supporting content, and long-form reading layouts. Default to `md` for standard
+body text, use `sm` for secondary copy, and use `lg` for lead paragraphs or
+introductory emphasis.
+
+## Component Architecture
+
+```
+Paragraph (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Paragraph` atom directly and control spacing from the surrounding
+layout rather than relying on built-in margins.
+
+```tsx
+import { Paragraph } from "@marwes-ui/react"
+
+<Paragraph size="md">Body text content.</Paragraph>
+<Paragraph size="lg">Lead text content.</Paragraph>
+```
+
+## Usage Notes
+
+- `size="md"` is the default for standard body copy
+- Use `sm` for secondary notes and de-emphasized supporting text
+- Apply layout spacing externally with wrapper styles or sibling layout
+  primitives
+
+## Component Reference
+
+**`Paragraph`** - Body text atom for reading content, explanatory copy, and
+supporting text blocks
+
+## Story Coverage
+
+- Size variants (`sm`, `md`, `lg`)
+- Long-form text, article layouts, and multiple paragraph compositions
+- Custom class usage and external spacing control

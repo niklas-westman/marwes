@@ -1,0 +1,45 @@
+.mw-toast-container {
+  position: fixed;
+  z-index: 1000;
+  display: grid;
+  gap: 12px;
+  width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.mw-toast-container--top-right {
+  top: 16px;
+  right: 16px;
+}
+
+.mw-toast-container--top-left {
+  top: 16px;
+  left: 16px;
+}
+
+.mw-toast-container--bottom-right {
+  right: 16px;
+  bottom: 16px;
+}
+
+.mw-toast-container--bottom-left {
+  bottom: 16px;
+  left: 16px;
+}
+
+.mw-toast-container__item {
+  pointer-events: auto;
+  animation: mw-toast-enter 180ms ease-out;
+}
+
+@keyframes mw-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

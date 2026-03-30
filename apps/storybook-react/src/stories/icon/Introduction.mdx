@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Icon/Introduction" />
+
+# Icon Component
+
+Marwes provides `Icon` as the atom-level primitive for rendering named icon
+tokens throughout the interface. Use the gallery to discover available names,
+then validate `size` and `strokeWidth` in the context where the icon will be
+used.
+
+## Component Architecture
+
+```
+Icon (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Icon` atom directly and choose the icon name first, then tune
+visual weight with `size` and `strokeWidth`.
+
+```tsx
+import { Icon } from "@marwes-ui/react"
+
+<Icon name="search" size="sm" strokeWidth="md" />
+```
+
+## Usage Notes
+
+- `name` selects the icon token from the available icon inventory
+- `size` controls the rendered icon dimensions
+- `strokeWidth` adjusts the visual weight to match nearby text or UI chrome
+
+## Component Reference
+
+**`Icon`** - Named icon atom for inline UI affordances, navigation, and status
+adjuncts
+
+## Story Coverage
+
+- Full icon inventory with live filtering
+- `size` and `strokeWidth` controls
+- Responsive grid density controls for icon discovery

@@ -4,8 +4,8 @@
 
 Upgrade all components to the gold-standard Atom → Molecule → Purpose pattern established by Accordion, Badge, Button, Checkbox, and Input.
 
-Completed so far: **Radio, Switch, Card, Tab, Toast**.
-Next up: **Divider**.
+Completed so far: **Radio, Switch, Card, Tab, Toast, Divider, Heading, Paragraph, Icon**.
+Next up: **None — migration complete**.
 
 Each component gets:
 
@@ -18,8 +18,7 @@ Each component gets:
 
 | Tier | Components | Work |
 | ---- | ---------- | ---- |
-| **Done** | Radio, Switch, Card, Tab, Toast | Completed in React + Vue with stories, docs, tests, exports, and preset support where needed |
-| **C — Structure migration** | Divider, Heading, Icon, Paragraph | Move files, update titles, rewrite docs, add tests |
+| **Done** | Radio, Switch, Card, Tab, Toast, Divider, Heading, Paragraph, Icon | Completed in React + Vue with stories, docs, tests, exports, and preset support where needed |
 
 ## Execution Order
 
@@ -32,11 +31,11 @@ One component at a time. Fully complete before moving on.
 | 3 | **Card** | Done | Purpose variants + docs/tests shipped |
 | 4 | **Tab** | Done | TabGroup, TabPanel, purpose variants, docs/tests shipped |
 | 5 | **Toast** | Done | ToastContainer + useToast hook, new imperative pattern |
-| 6 | **Divider** | Next | Move to folder, update title, rewrite docs, add tests |
-| 7 | **Heading** | Queued | Same as Divider |
-| 8 | **Paragraph** | Queued | Same as Divider |
-| 9 | **Icon** | Queued | Same as Divider |
-| | **Remaining** | **~1.5–2 hrs** | Tier C migrations |
+| 6 | **Divider** | Done | Folder move, title update, docs rewrite, tests added |
+| 7 | **Heading** | Done | Folder move, title update, docs rewrite, tests added |
+| 8 | **Paragraph** | Done | Folder move, title update, docs rewrite, tests added |
+| 9 | **Icon** | Done | Folder move, title update, docs rewrite, tests added |
+| | **Remaining** | **0 hrs** | Migration complete |
 
 ## Per-Component Plans
 
@@ -115,23 +114,29 @@ React + Vue Storybook docs/tests are in place.
 
 **Delivered:** `ToastContainer`, `ToastProvider`, `useToast`, purpose variants, preset CSS, React/Vue Storybook docs/tests, and package exports.
 
-### 6–9. Divider, Heading, Paragraph, Icon (Tier C)
+### 6. Divider (Tier C)
 
-**Status:** Flat files, old title pattern (`Atoms/Divider`, `Typography/Heading`, etc.), minimal docs.
+**Status:** ✅ Complete.
 
-**Same steps for each:**
+Structure/docs/tests migration completed in React + Vue.
 
-| Step | What |
-| ---- | ---- |
-| Move | `component.stories.tsx` → `component/component.stories.tsx` |
-| Move | `component.Introduction.mdx` → `component/Introduction.mdx` |
-| Update title | `"Atoms/Divider"` → `"Divider/Atom"` etc. |
-| Rewrite Introduction.mdx | Single-layer architecture (Atom only), consistent format |
-| Add tests | `__tests__/component-taxonomy.test.ts`, `component-introduction-docs.test.ts` |
-| Delete old files | Remove flat files |
-| Vue mirror | Same changes in `apps/storybook-vue/` |
+### 7. Heading (Tier C)
 
-**No new React/Vue/core code.** Documentation + structure only.
+**Status:** ✅ Complete.
+
+Structure/docs/tests migration completed in React + Vue.
+
+### 8. Paragraph (Tier C)
+
+**Status:** ✅ Complete.
+
+Structure/docs/tests migration completed in React + Vue.
+
+### 9. Icon (Tier C)
+
+**Status:** ✅ Complete.
+
+Structure/docs/tests migration completed in React + Vue.
 
 ## Cross-Cutting
 

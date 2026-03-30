@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Divider/Introduction" />
+
+# Divider Component
+
+Marwes provides Divider as a single atom for separating related content without
+introducing extra structure. Use it to create visual breaks between stacked
+sections or as a vertical separator in inline layouts.
+
+## Component Architecture
+
+```
+Divider (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Divider` atom directly. Choose horizontal dividers for stacked
+content and vertical dividers inside flex or inline layouts.
+
+```tsx
+import { Divider } from "@marwes-ui/react"
+
+<Divider size="sm" />
+<Divider orientation="vertical" size="xs" />
+```
+
+## Usage Notes
+
+- `size` controls both divider thickness and the built-in surrounding spacing
+- `orientation="horizontal"` is the default for content sections
+- `orientation="vertical"` works best in containers that define their own height
+
+## Component Reference
+
+**`Divider`** - Low-level separator atom for horizontal or vertical content
+boundaries
+
+## Story Coverage
+
+- Size scale (`xxs` to `xxl`)
+- Horizontal and vertical orientation
+- Real content separation and visual hierarchy examples
