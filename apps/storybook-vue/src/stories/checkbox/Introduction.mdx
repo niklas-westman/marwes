@@ -10,8 +10,9 @@ Checkbox stories are organized with a simple two-layer structure to keep discove
 
 ```
 Checkbox (Atom)
-     ↓
+     ↓        ↓
 CheckboxField (Molecule)
+CheckboxGroupField (Molecule)
 ```
 
 ## Atom: Checkbox
@@ -45,6 +46,28 @@ import { CheckboxField } from "@marwes-ui/vue"
     label="Subscribe to updates"
     description="We'll only send important product updates."
     :checkbox="{ size: 'md' }"
+  />
+</template>
+```
+
+## Molecule: CheckboxGroupField
+
+Use `CheckboxGroupField` when you need a labeled multi-select checkbox list with shared helper/error text.
+
+```vue
+<script setup lang="ts">
+import { CheckboxGroupField } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <CheckboxGroupField
+    label="Notification preferences"
+    description="Choose every channel you want us to use."
+    :options="[
+      { value: 'email', label: 'Email updates' },
+      { value: 'sms', label: 'SMS alerts' },
+      { value: 'push', label: 'Push notifications' },
+    ]"
   />
 </template>
 ```

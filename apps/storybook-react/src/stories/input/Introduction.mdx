@@ -17,8 +17,8 @@ using a clear Atom -> Molecule -> Purpose progression.
 
 ### Field naming
 
-Components that wrap the raw `Input` atom with label, helper text, and error semantics
-are called **Fields** (e.g. `InputField`, `SearchField`, `EmailField`).
+Components that wrap raw input-domain atoms with label, helper text, and error semantics
+are called **Fields** (e.g. `InputField`, `SelectField`, `DropdownField`, `SearchField`, `EmailField`).
 The suffix signals that the component provides full field-level UX — accessible labelling,
 validation display, and AI-friendly `data-purpose` attributes — so you don't have to wire
 those concerns yourself.
@@ -26,14 +26,23 @@ those concerns yourself.
 ## Input Architecture
 
 ```
-Input (Atom)
-     ↓
-InputField (Molecule)
-     ↓
-Purpose Variants
+Atoms
+  ├─ Input
+  ├─ Select
+  └─ Textarea
+
+Molecules
+  ├─ InputField
+  ├─ SelectField
+  └─ TextareaField
+
+Purpose Variants (Input-based)
+  ├─ DropdownField
   ├─ SearchField
   ├─ PasswordField
   ├─ EmailField
+  ├─ DateOfBirthField
+  ├─ ZipCodeField
   ├─ PhoneField
   ├─ URLField
   └─ CurrencyField
@@ -54,19 +63,67 @@ import { Input } from "@marwes-ui/react"
 />
 ```
 
+## Atom: Select
+
+Use `Select` for the compact select atom. Set `native={true}` when you explicitly want the browser's built-in dropdown chrome:
+
+```tsx
+import { Select } from "@marwes-ui/react"
+
+<Select
+  placeholder="Choose a country"
+  options={[
+    { value: "se", label: "Sweden" },
+    { value: "us", label: "United States" },
+  ]}
+  value={country}
+  onValueChange={setCountry}
+/>
+```
+
+## Atom: Textarea
+
+Use `Textarea` when you need multiline freeform text entry without label/helper/error wrappers:
+
+```tsx
+import { Textarea } from "@marwes-ui/react"
+
+<Textarea
+  rows={4}
+  placeholder="Add more detail"
+  value={value}
+  onValueChange={setValue}
+/>
+```
+
 ## Recommended: Purpose Input Components
 
 Use purpose-built input components that automatically set the correct `type`, `inputMode`, `autoComplete`, and other semantic attributes:
 
 ```tsx
 import {
+  DropdownField,
   SearchField,
   PasswordField,
   EmailField,
+  DateOfBirthField,
+  ZipCodeField,
   PhoneField,
   URLField,
   CurrencyField
 } from "@marwes-ui/react"
+
+// ✅ Figma dropdown presentation with locked Marwes styling
+<DropdownField
+  label="Country"
+  select={{
+    placeholder: "Choose a country",
+    options: [
+      { value: "se", label: "Sweden" },
+      { value: "us", label: "United States" },
+    ],
+  }}
+/>
 
 // ✅ Search with automatic clear button
 <SearchField
@@ -84,6 +141,18 @@ import {
 <EmailField
   label="Email address"
   input={{ value: email, onValueChange: setEmail }}
+/>
+
+// ✅ Date of birth with native date semantics and birthday autofill
+<DateOfBirthField
+  label="Date of birth"
+  input={{ value: dateOfBirth, onValueChange: setDateOfBirth }}
+/>
+
+// ✅ ZIP/postal code with numeric keypad and autofill
+<ZipCodeField
+  label="ZIP code"
+  input={{ value: zipCode, onValueChange: setZipCode }}
 />
 
 // ✅ Phone with phone keyboard on mobile
@@ -151,6 +220,29 @@ import {
 
 ## When to Use Each Field
 
+### DropdownField
+
+- Figma-aligned dropdown presentation
+- Cases where the custom Marwes open-state should stay visually consistent
+- Forms that need the same field semantics as `SelectField`, but a fixed visual treatment
+
+**Example:**
+
+```tsx
+<DropdownField
+  label="Country"
+  helperText="Uses the Marwes dropdown presentation."
+  select={{
+    value: country,
+    onValueChange: setCountry,
+    options: [
+      { value: "se", label: "Sweden" },
+      { value: "us", label: "United States" },
+    ],
+  }}
+/>
+```
+
 ### SearchField
 
 - Search bars and filters
@@ -204,6 +296,38 @@ import {
   label="Email address"
   helperText="We'll send a confirmation to this email"
   input={{ value: email, onValueChange: setEmail }}
+/>
+```
+
+### DateOfBirthField
+
+- Birthday collection in signup or onboarding forms
+- Age-gated flows that need a real calendar date
+- Profile details that benefit from `autoComplete="bday"`
+
+**Example:**
+
+```tsx
+<DateOfBirthField
+  label="Date of birth"
+  helperText="Used for age verification and onboarding."
+  input={{ value: dateOfBirth, onValueChange: setDateOfBirth }}
+/>
+```
+
+### ZipCodeField
+
+- Shipping, billing, and service-availability forms
+- Postal-code capture that should preserve leading zeros
+- Address flows that benefit from `autoComplete="postal-code"`
+
+**Example:**
+
+```tsx
+<ZipCodeField
+  label="ZIP code"
+  helperText="Used for shipping estimates and tax lookup."
+  input={{ value: zipCode, onValueChange: setZipCode }}
 />
 ```
 
@@ -284,9 +408,49 @@ import { InputField } from "@marwes-ui/react";
 />;
 ```
 
+## Molecule: SelectField
+
+Use `SelectField` when a select control also needs label, helper text, and error wiring:
+
+```tsx
+import { SelectField } from "@marwes-ui/react";
+
+<SelectField
+  label="Country"
+  helperText="Used to tailor currency and shipping defaults."
+  select={{
+    placeholder: "Choose a country",
+    options: [
+      { value: "se", label: "Sweden" },
+      { value: "us", label: "United States" },
+    ],
+    value: country,
+    onValueChange: setCountry,
+  }}
+/>
+```
+
+## Molecule: TextareaField
+
+Use `TextareaField` for multiline content that still needs the same label, helper text, and error treatment:
+
+```tsx
+import { TextareaField } from "@marwes-ui/react";
+
+<TextareaField
+  label="Project description"
+  helperText="A short summary is usually enough."
+  textarea={{
+    rows: 4,
+    value: description,
+    onValueChange: setDescription,
+  }}
+/>
+```
+
 ## Common Props
 
-All input components support the same base props:
+Input-based field components support the same base props:
 
 ```tsx
 type BaseFieldProps = {
@@ -307,6 +471,10 @@ type BaseFieldProps = {
   };
 };
 ```
+
+`SelectField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards select control props under `select`. Use `select.native={false}` (default) for the custom Marwes dropdown state from Figma node `1364:7701`, or `select.native={true}` for platform chrome. `TextareaField` does the same for multiline control props under `textarea`.
+
+`DropdownField` reuses the `SelectField` API, defaults `select.native` to `false`, and opts into the browser dropdown only when `select.native={true}` is passed.
 
 ## Controlled vs Uncontrolled
 

@@ -9,5 +9,6 @@ describe("React checkbox introduction docs", () => {
 
     expect(introDoc).toContain("Checkbox (Atom)")
     expect(introDoc).toContain("CheckboxField (Molecule)")
+    expect(introDoc).toContain("CheckboxGroupField (Molecule)")
   })
 })

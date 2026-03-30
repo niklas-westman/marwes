@@ -41,14 +41,16 @@ Imported component styles:
 ## Contract with Core
 Core recipes emit:
 - stable classes such as `mw-btn`, `mw-input`, `mw-checkbox`
-- CSS vars such as `--mw-primary`, `--mw-radius`
+- optional component-scoped vars when needed
+
+Theme vars such as `--mw-color-primary-base` and `--mw-ui-radius` are emitted by the provider.
 
 Presets must style those classes/vars consistently and should not require adapter-specific hacks.
 
 ## CSS Conventions
 - Keep prefix `--mw-*` for variables.
 - Keep classname prefix `.mw-*`.
-- Prefer semantic vars from core (`--mw-primary`, `--mw-text`, `--mw-surface`) over hardcoded colors.
+- Prefer emitted semantic theme vars such as `--mw-color-primary-base`, `--mw-color-text`, and `--mw-color-surface` over hardcoded colors.
 - Keep focus-visible and disabled states explicit in CSS.
 
 ## Figma Mapping

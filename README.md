@@ -67,7 +67,7 @@ import "@marwes-ui/presets/firstEdition/styles.css";
 function App() {
   return (
     <MarwesProvider preset={firstEdition}>
-      <Button variant="solid" tone="primary">
+      <Button variant="primary">
         Click me
       </Button>
     </MarwesProvider>
@@ -109,7 +109,7 @@ What makes Marwes different? **Complete separation of concerns:**
 
 **Available now:**
 
-- Button (solid, outline, text variants)
+- Button (primary, secondary, text, success variants)
 - Input & InputField
 - Checkbox & CheckboxField
 - Typography (H1, H2, H3, Paragraph)

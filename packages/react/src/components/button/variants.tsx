@@ -207,6 +207,300 @@ export function LinkButton(props: LinkButtonProps) {
 }
 
 // ============================================================================
+// SAVE BUTTON - Save/Persist Actions
+// ============================================================================
+
+export type SaveButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * SaveButton - For save or persist actions.
+ */
+export function SaveButton(props: SaveButtonProps) {
+  return (
+    <Button
+      {...props}
+      action={ButtonAction.submit}
+      variant={props.variant ?? ButtonVariant.primary}
+      iconRight={props.iconRight ?? IconName.Save}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "save",
+        "data-persist": "true",
+      }}
+    />
+  )
+}
+
+// ============================================================================
+// CONFIRM BUTTON - Positive Confirmation Actions
+// ============================================================================
+
+export type ConfirmButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+
+/**
+ * ConfirmButton - For affirmative confirmation actions.
+ */
+export function ConfirmButton(props: ConfirmButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={ButtonVariant.success}
+      as="button"
+      iconRight={props.iconRight ?? IconName.Check}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "confirm",
+        "data-outcome": "positive",
+      }}
+    />
+  )
+}
+
+// ============================================================================
+// VERIFY BUTTON - Positive Verification Actions
+// ============================================================================
+
+export type VerifyButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+
+/**
+ * VerifyButton - For verification or approval actions.
+ */
+export function VerifyButton(props: VerifyButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={ButtonVariant.success}
+      as="button"
+      iconRight={props.iconRight ?? IconName.CheckCircle}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "verify",
+        "data-outcome": "positive",
+        "data-verification": "true",
+      }}
+    />
+  )
+}
+
+// ============================================================================
+// EDIT BUTTON - Edit/Modify Actions
+// ============================================================================
+
+export type EditButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * EditButton - For edit or update flows.
+ */
+export function EditButton(props: EditButtonProps) {
+  return (
+    <Button
+      {...props}
+      action={ButtonAction.edit}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.Edit}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "edit",
+        "data-edit": "true",
+      }}
+    />
+  )
+}
+
+// ============================================================================
+// CLOSE BUTTON - Close/Dismiss Actions
+// ============================================================================
+
+export type CloseButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * CloseButton - For close or dismiss actions.
+ */
+export function CloseButton(props: CloseButtonProps) {
+  return (
+    <Button
+      {...props}
+      action={ButtonAction.cancel}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.X}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "close",
+        "data-close": "true",
+      }}
+    />
+  )
+}
+
+// ============================================================================
+// REFRESH BUTTON - Refresh/Reload Actions
+// ============================================================================
+
+export type RefreshButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * RefreshButton - For reload or refresh actions.
+ */
+export function RefreshButton(props: RefreshButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.RefreshCw}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "refresh",
+        "data-refresh": "true",
+      }}
+    />
+  )
+}
+
+// ============================================================================
+// WAVE 2 UTILITY BUTTONS - Upload/Download/Search Utilities
+// ============================================================================
+
+export type UploadButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * UploadButton - For upload or import actions.
+ */
+export function UploadButton(props: UploadButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.Upload}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "upload",
+        "data-transfer": "upload",
+      }}
+    />
+  )
+}
+
+export type DownloadButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * DownloadButton - For export or download actions.
+ */
+export function DownloadButton(props: DownloadButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.Download}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "download",
+        "data-transfer": "download",
+      }}
+    />
+  )
+}
+
+export type CopyButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * CopyButton - For copy-to-clipboard or duplication flows.
+ */
+export function CopyButton(props: CopyButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.Copy}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "copy",
+        "data-copy": "true",
+      }}
+    />
+  )
+}
+
+export type SearchButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * SearchButton - For explicit search triggers.
+ */
+export function SearchButton(props: SearchButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.Search}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "search",
+        "data-search": "true",
+      }}
+    />
+  )
+}
+
+export type FilterButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * FilterButton - For filter panels and query refinement.
+ */
+export function FilterButton(props: FilterButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.Sliders}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "filter",
+        "data-filter": "true",
+      }}
+    />
+  )
+}
+
+export type SortButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * SortButton - For sort controls or ordering changes.
+ */
+export function SortButton(props: SortButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.ChevronsDown}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "sort",
+        "data-sort": "true",
+      }}
+    />
+  )
+}
+
+export type DropdownButtonProps = Omit<ButtonProps, "action">
+
+/**
+ * DropdownButton - For disclosure-style action menus.
+ */
+export function DropdownButton(props: DropdownButtonProps) {
+  return (
+    <Button
+      {...props}
+      variant={props.variant ?? ButtonVariant.secondary}
+      iconRight={props.iconRight ?? IconName.ChevronDown}
+      dataAttributes={{
+        ...props.dataAttributes,
+        "data-purpose": "dropdown",
+        "data-dropdown": "true",
+      }}
+    />
+  )
+}
+
+// ============================================================================
 // PRIMARY BUTTON - General Actions
 // ============================================================================
 

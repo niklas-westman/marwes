@@ -17,17 +17,48 @@ describe("Vue input story taxonomy", () => {
     expect(inputStory).toMatch(/export const\s+Basic\s*:/)
   })
 
+  it("uses Atom title for Textarea story", () => {
+    const textareaStory = readStoryFile("textarea.stories.ts")
+
+    expect(textareaStory).toContain('title: "Input/Atom/Textarea"')
+    expect(textareaStory).toContain("component: Textarea")
+    expect(textareaStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
+  it("uses Atom title for Select story", () => {
+    const selectStory = readStoryFile("select.stories.ts")
+
+    expect(selectStory).toContain('title: "Input/Atom/Select"')
+    expect(selectStory).toContain("component: Select")
+    expect(selectStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
   it("uses Molecule title for InputField story", () => {
     const inputFieldStory = readStoryFile("input-field.stories.ts")
 
     expect(inputFieldStory).toContain('title: "Input/Molecule/InputField"')
   })
 
+  it("uses Molecule title for TextareaField story", () => {
+    const textareaFieldStory = readStoryFile("textarea-field.stories.ts")
+
+    expect(textareaFieldStory).toContain('title: "Input/Molecule/TextareaField"')
+  })
+
+  it("uses Molecule title for SelectField story", () => {
+    const selectFieldStory = readStoryFile("select-field.stories.ts")
+
+    expect(selectFieldStory).toContain('title: "Input/Molecule/SelectField"')
+  })
+
   it("keeps purpose stories under Input/Purpose", () => {
     const purposeStories = [
+      "dropdown-field.stories.ts",
       "search-field.stories.ts",
       "password-field.stories.ts",
       "email-field.stories.ts",
+      "date-of-birth-field.stories.ts",
+      "zip-code-field.stories.ts",
       "phone-field.stories.ts",
       "url-field.stories.ts",
       "currency-field.stories.ts",

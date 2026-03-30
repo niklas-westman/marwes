@@ -3,6 +3,7 @@ import type { FeatureToggleProps } from "@marwes-ui/vue"
 import { FeatureToggle } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta = {
   title: "Switch/Purpose/FeatureToggle",
@@ -23,6 +24,7 @@ export const Default: Story = {
       checked: true,
     },
   },
+  render: createToggleableSwitchFieldRender("FeatureToggle", FeatureToggle),
 }
 
 export const Controlled: Story = {

@@ -19,7 +19,7 @@ Every component follows the same structure:
 button/
 ├── button-types.ts      # Public contracts (Options, RenderKit, A11y types)
 ├── button-a11y.ts       # Accessibility logic (props → ARIA attributes)
-├── button-recipe.ts     # Main recipe (theme + options → RenderKit)
+├── button-recipe.ts     # Main recipe (options → RenderKit)
 └── index.ts             # Public exports
 ```
 
@@ -35,7 +35,7 @@ Core recipes return a **RenderKit** - a plain object that framework adapters con
 interface RenderKit {
   tag: string                    // HTML tag to render ("button", "input", "a")
   className: string              // Space-separated CSS classes
-  vars: Record<string, string>   // CSS variables (--mw-primary: #5B8CFF)
+  vars: Record<string, string>   // Optional component-scoped CSS variables
   a11y: A11yProps                // ARIA attributes (strongly typed)
   blockClick?: boolean           // For disabled links
 }
@@ -45,13 +45,13 @@ interface RenderKit {
 
 ```ts
 // 1. Core produces RenderKit
-const kit = createButtonRecipe(theme, { variant: "solid", tone: "primary" })
+const kit = createButtonRecipe({ variant: "primary" })
 
 // Returns:
 {
   tag: "button",
-  className: "mw-btn mw-btn--solid mw-btn--primary",
-  vars: { "--mw-primary": "#5B8CFF" },
+  className: "mw-btn mw-btn--md mw-btn--primary",
+  vars: {},
   a11y: { type: "button", disabled: false }
 }
 
@@ -66,8 +66,8 @@ const kit = createButtonRecipe(theme, { variant: "solid", tone: "primary" })
 </button>
 
 // 3. Preset CSS styles it
-.mw-btn { height: 40px; border-radius: var(--mw-radius); }
-.mw-btn--solid { background: var(--mw-primary); }
+.mw-btn { height: 40px; border-radius: var(--mw-ui-radius); }
+.mw-btn--primary { background: var(--mw-color-primary-base); }
 ```
 
 ## Why This Pattern?
@@ -86,7 +86,7 @@ const kit = createButtonRecipe(theme, { variant: "solid", tone: "primary" })
 ## Components
 
 ### Implemented
-- **[Button](atoms/button/)** - Action trigger (solid, outline, soft, ghost variants)
+- **[Button](atoms/button/)** - Action trigger (primary, secondary, text, success variants)
 - **[Input](atoms/input/)** - Text input with validation states
 - **Checkbox** - Selection control with mixed state support
 - **Icon** - Icon recipe and registry mapping

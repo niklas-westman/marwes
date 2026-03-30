@@ -15,7 +15,7 @@ using a clear Atom -> Molecule -> Purpose progression.
 ### Field naming
 
 Components that wrap the raw `Input` atom with label, helper text, and error semantics
-are called **Fields** (e.g. `InputField`, `SearchField`, `EmailField`).
+are called **Fields** (e.g. `InputField`, `SelectField`, `DropdownField`, `SearchField`, `EmailField`).
 The suffix signals that the component provides full field-level UX — accessible labelling,
 validation display, and AI-friendly `data-purpose` attributes — so you don't have to wire
 those concerns yourself.
@@ -23,14 +23,23 @@ those concerns yourself.
 ## Input Architecture
 
 ```
-Input (Atom)
-     ↓
-InputField (Molecule)
-     ↓
-Purpose Variants
+Atoms
+  ├─ Input
+  ├─ Select
+  └─ Textarea
+
+Molecules
+  ├─ InputField
+  ├─ SelectField
+  └─ TextareaField
+
+Purpose Variants (Input-based)
+  ├─ DropdownField
   ├─ SearchField
   ├─ PasswordField
   ├─ EmailField
+  ├─ DateOfBirthField
+  ├─ ZipCodeField
   ├─ PhoneField
   ├─ URLField
   └─ CurrencyField
@@ -57,6 +66,51 @@ const value = ref("")
 </template>
 ```
 
+## Atom: Select
+
+Use `Select` for the compact select atom. Set `native` to `true` when you explicitly want the browser's built-in dropdown chrome:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { Select } from "@marwes-ui/vue"
+
+const country = ref("")
+</script>
+
+<template>
+  <Select
+    placeholder="Choose a country"
+    :options="[
+      { value: 'se', label: 'Sweden' },
+      { value: 'us', label: 'United States' }
+    ]"
+    v-model="country"
+  />
+</template>
+```
+
+## Atom: Textarea
+
+Use `Textarea` when you need multiline freeform text entry without field-level wrapper UI:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { Textarea } from "@marwes-ui/vue"
+
+const value = ref("")
+</script>
+
+<template>
+  <Textarea
+    rows="4"
+    placeholder="Add more detail"
+    v-model="value"
+  />
+</template>
+```
+
 ## Recommended: Purpose Input Components
 
 Use purpose-built field components that automatically set the correct `type`, `inputMode`, `autoComplete`, and other semantic attributes:
@@ -65,23 +119,41 @@ Use purpose-built field components that automatically set the correct `type`, `i
 <script setup lang="ts">
 import { ref } from "vue"
 import {
+  DropdownField,
   SearchField,
   PasswordField,
   EmailField,
+  DateOfBirthField,
+  ZipCodeField,
   PhoneField,
   URLField,
   CurrencyField,
 } from "@marwes-ui/vue"
 
 const query = ref("")
+const country = ref("")
 const password = ref("")
 const email = ref("")
+const dateOfBirth = ref("")
+const zipCode = ref("")
 const phone = ref("")
 const url = ref("")
 const amount = ref("")
 </script>
 
 <template>
+  <DropdownField
+    label="Country"
+    v-model="country"
+    :select="{
+      placeholder: 'Choose a country',
+      options: [
+        { value: 'se', label: 'Sweden' },
+        { value: 'us', label: 'United States' }
+      ]
+    }"
+  />
+
   <!-- ✅ Search with automatic clear button -->
   <SearchField label="Search products" v-model="query" />
 
@@ -90,6 +162,12 @@ const amount = ref("")
 
   <!-- ✅ Email with proper validation and keyboard -->
   <EmailField label="Email address" v-model="email" />
+
+  <!-- ✅ Date of birth with native date semantics and birthday autofill -->
+  <DateOfBirthField label="Date of birth" v-model="dateOfBirth" />
+
+  <!-- ✅ ZIP/postal code with numeric keypad and autofill -->
+  <ZipCodeField label="ZIP code" v-model="zipCode" />
 
   <!-- ✅ Phone with phone keyboard on mobile -->
   <PhoneField label="Phone number" v-model="phone" />
@@ -144,6 +222,35 @@ const amount = ref("")
 </table>
 
 ## When to Use Each Field
+
+### DropdownField
+- Figma-aligned dropdown presentation
+- Cases where the custom Marwes open-state should stay visually consistent
+- Forms that need the same field semantics as `SelectField`, but a fixed visual treatment
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { DropdownField } from "@marwes-ui/vue"
+
+const country = ref("")
+</script>
+
+<template>
+  <DropdownField
+    label="Country"
+    helperText="Uses the Marwes dropdown presentation."
+    v-model="country"
+    :select="{
+      options: [
+        { value: 'se', label: 'Sweden' },
+        { value: 'us', label: 'United States' }
+      ]
+    }"
+  />
+</template>
+```
 
 ### SearchField
 - Search bars and filters
@@ -217,6 +324,52 @@ const email = ref("")
     label="Email address"
     helperText="We'll send a confirmation to this email"
     v-model="email"
+  />
+</template>
+```
+
+### DateOfBirthField
+- Birthday collection in signup or onboarding forms
+- Age-gated flows that need a real calendar date
+- Profile details that benefit from `autoComplete="bday"`
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { DateOfBirthField } from "@marwes-ui/vue"
+
+const dateOfBirth = ref("")
+</script>
+
+<template>
+  <DateOfBirthField
+    label="Date of birth"
+    helperText="Used for age verification and onboarding."
+    v-model="dateOfBirth"
+  />
+</template>
+```
+
+### ZipCodeField
+- Shipping, billing, and service-availability forms
+- Postal-code capture that should preserve leading zeros
+- Address flows that benefit from `autoComplete="postal-code"`
+
+**Example:**
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { ZipCodeField } from "@marwes-ui/vue"
+
+const zipCode = ref("")
+</script>
+
+<template>
+  <ZipCodeField
+    label="ZIP code"
+    helperText="Used for shipping estimates and tax lookup."
+    v-model="zipCode"
   />
 </template>
 ```
@@ -324,9 +477,61 @@ const value = ref("")
 </template>
 ```
 
+## Molecule: SelectField
+
+Use `SelectField` when a select control also needs label, helper text, and error wiring:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { SelectField } from "@marwes-ui/vue"
+
+const country = ref("")
+</script>
+
+<template>
+  <SelectField
+    label="Country"
+    helperText="Used to tailor currency and shipping defaults."
+    v-model="country"
+    :select="{
+      placeholder: 'Choose a country',
+      options: [
+        { value: 'se', label: 'Sweden' },
+        { value: 'us', label: 'United States' }
+      ]
+    }"
+  />
+</template>
+```
+
+## Molecule: TextareaField
+
+Use `TextareaField` for multiline content that still needs the same label, helper text, and error treatment:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { TextareaField } from "@marwes-ui/vue"
+
+const description = ref("")
+</script>
+
+<template>
+  <TextareaField
+    label="Project description"
+    helperText="A short summary is usually enough."
+    v-model="description"
+    :textarea="{
+      rows: 4
+    }"
+  />
+</template>
+```
+
 ## Common Props
 
-All field components support the same base props:
+Input-based field components support the same base props:
 
 ```ts
 type BaseFieldProps = {
@@ -348,6 +553,12 @@ type BaseFieldProps = {
   }
 }
 ```
+
+`SelectField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards select control props under `select`. Use `select.native={false}` (default) for the custom Marwes dropdown state from Figma node `1364:7701`, or `select.native={true}` for platform chrome. `TextareaField` does the same for multiline control props under `textarea`.
+
+`DropdownField` reuses the `SelectField` API, defaults `select.native` to `false`, and opts into the browser dropdown only when `select.native={true}` is passed.
+
+`TextareaField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards multiline control props under `textarea` instead of `input`.
 
 ## Controlled vs Uncontrolled
 

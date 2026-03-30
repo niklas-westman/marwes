@@ -2,6 +2,7 @@ import { storybookLayout } from "@marwes-ui/core"
 import { PreferenceSwitch } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta: Meta<typeof PreferenceSwitch> = {
   title: "Switch/Purpose/Preference",
@@ -22,6 +23,7 @@ export const Default: Story = {
       checked: false,
     },
   },
+  render: createToggleableSwitchFieldRender(PreferenceSwitch),
 }
 
 export const Controlled: Story = {

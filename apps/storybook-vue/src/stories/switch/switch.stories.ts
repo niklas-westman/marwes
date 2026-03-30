@@ -1,8 +1,9 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { SwitchSize, storybookLayout } from "@marwes-ui/core"
 import type { SwitchProps } from "@marwes-ui/vue"
 import { Switch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+import { createToggleableSwitchRender } from "./story-helpers"
 
 const meta = {
   title: "Switch/Atom",
@@ -13,6 +14,10 @@ const meta = {
     checked: { control: "boolean" },
     disabled: { control: "boolean" },
     ariaLabel: { control: "text" },
+    size: {
+      control: { type: "inline-radio" },
+      options: Object.values(SwitchSize),
+    },
   },
 } satisfies Meta<SwitchProps>
 
@@ -20,17 +25,12 @@ export default meta
 type Story = StoryObj<SwitchProps>
 
 export const Default: Story = {
-  render: () => ({
-    components: { Switch },
-    template: "<Switch>Enable notifications</Switch>",
-  }),
+  render: createToggleableSwitchRender("Enable notifications"),
 }
 
 export const Checked: Story = {
-  render: () => ({
-    components: { Switch },
-    template: `<Switch :checked="true">Enable notifications</Switch>`,
-  }),
+  args: { checked: true },
+  render: createToggleableSwitchRender("Enable notifications"),
 }
 
 export const Disabled: Story = {
@@ -44,18 +44,20 @@ export const AllStates: Story = {
   render: () => ({
     components: { Switch },
     setup() {
-      const on = ref(false)
-      return { on }
+      const startsOff = ref(false)
+      const startsOn = ref(true)
+      const interactive = ref(false)
+      return { startsOff, startsOn, interactive }
     },
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <div>
-          <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Off</p>
-          <Switch>Enable notifications</Switch>
+          <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Starts off</p>
+          <Switch v-model="startsOff">Enable notifications</Switch>
         </div>
         <div>
-          <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">On</p>
-          <Switch :checked="true">Enable notifications</Switch>
+          <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Starts on</p>
+          <Switch v-model="startsOn">Enable notifications</Switch>
         </div>
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Disabled off</p>
@@ -67,8 +69,27 @@ export const AllStates: Story = {
         </div>
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Interactive</p>
-          <Switch v-model="on">{{ on ? 'On' : 'Off' }}</Switch>
+          <Switch v-model="interactive">{{ interactive ? 'On' : 'Off' }}</Switch>
         </div>
+      </div>
+    `,
+  }),
+}
+
+export const SizeComparison: Story = {
+  render: () => ({
+    components: { Switch },
+    setup() {
+      const compact = ref(false)
+      const wide = ref(true)
+      const rich = ref(false)
+      return { compact, wide, rich, SwitchSize }
+    },
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <Switch v-model="compact" :size="SwitchSize.compact">Compact 24x16</Switch>
+        <Switch v-model="wide" :size="SwitchSize.wide">Wide 30x16</Switch>
+        <Switch v-model="rich" :size="SwitchSize.rich">Rich 30x20</Switch>
       </div>
     `,
   }),

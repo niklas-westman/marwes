@@ -2,6 +2,7 @@ import { storybookLayout } from "@marwes-ui/core"
 import { PermissionSwitch } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta: Meta<typeof PermissionSwitch> = {
   title: "Switch/Purpose/Permission",
@@ -22,6 +23,7 @@ export const Default: Story = {
       checked: true,
     },
   },
+  render: createToggleableSwitchFieldRender(PermissionSwitch),
 }
 
 export const Controlled: Story = {

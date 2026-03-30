@@ -26,13 +26,13 @@ User Code (React)
 [@marwes-ui/core] input-recipe.ts
   ├─ resolveInputA11y(opts) → a11y props (id, name, type, aria-*)
   ├─ Build className: "mw-input mw-input--default is-invalid"
-  └─ Build CSS vars: { "--mw-primary": "#5B8CFF", "--mw-border": "...", ... }
+  └─ Use provider-emitted theme vars in preset CSS
   ↓
 Returns RenderKit:
 {
   tag: "input",
   className: "mw-input mw-input--default is-invalid",
-  vars: { "--mw-primary": "#5B8CFF", "--mw-border": "#D9D9DE", ... },
+  vars: {},
   a11y: { 
     type: "text", 
     id: "email", 
@@ -72,7 +72,6 @@ import { Input } from "@marwes-ui/react";
 // Renders:
 <input
   class="mw-input mw-input--default is-invalid"
-  style="--mw-primary: #5B8CFF; --mw-border: #D9D9DE; ..."
   type="email"
   id="email"
   placeholder="you@example.com"
@@ -94,16 +93,7 @@ createInputRecipe(theme, {
 {
   tag: "input",
   className: "mw-input mw-input--danger is-invalid",
-  vars: {
-    "--mw-primary": "#5B8CFF",
-    "--mw-border": "#D9D9DE",
-    "--mw-text": "#111111",
-    "--mw-text-muted": "#5B5B5F",
-    "--mw-surface": "#F7F7F8",
-    "--mw-danger": "#D92D20",
-    "--mw-success": "#067647",
-    "--mw-radius": "10px"
-  },
+  vars: {},
   a11y: {
     type: "email",
     "aria-invalid": true

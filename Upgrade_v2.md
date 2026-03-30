@@ -9,7 +9,8 @@ This file is different: it tracks **components and component-level gaps that sti
 Important clarification:
 
 - All top-level V3 families from the Figma quick reference already exist in the repo: Button, Badge, Tab, Card, Switch, Accordion, Checkbox, Radio, Toast, Input, Divider, and Typography.
-- The remaining work is inside those families: missing purpose wrappers, missing field types, one missing group component, and one missing size system.
+- The remaining work is now concentrated in one area inside those families: the final purpose-button wave.
+- Already shipped from this backlog: `CheckboxGroupField`, `Textarea`, `TextareaField`, `SelectField`, `DropdownField`, `DateOfBirthField`, `ZipCodeField`, Purpose Buttons Wave 1 (`SaveButton`, `ConfirmButton`, `VerifyButton`, `EditButton`, `CloseButton`, `RefreshButton`), Purpose Buttons Wave 2 (`UploadButton`, `DownloadButton`, `CopyButton`, `SearchButton`, `FilterButton`, `SortButton`, `DropdownButton`), and the switch size API (`Compact`, `Wide`, `Rich`).
 
 ## What Is Already Covered
 
@@ -31,102 +32,110 @@ These are already represented in code and do **not** belong in this backlog:
 Existing purpose-button coverage already maps these Figma intents:
 
 - `Submit` → `SubmitButton`
+- `Save` → `SaveButton`
 - `Cancel` → `CancelButton`
+- `Confirm` → `ConfirmButton`
+- `Verify` → `VerifyButton`
 - `Create` → `CreateButton`
+- `Edit` → `EditButton`
+- `Upload` → `UploadButton`
+- `Download` → `DownloadButton`
+- `Copy` → `CopyButton`
+- `Search` → `SearchButton`
+- `Filter` → `FilterButton`
+- `Sort` → `SortButton`
+- `Dropdown` → `DropdownButton`
 - `Delete` → `DangerButton`
 - `Link` → `LinkButton`
+- `Close` → `CloseButton`
+- `Refresh` → `RefreshButton`
 
 ## Missing Component Inventory
 
 | Area | Figma Reference | Missing Components / Gaps | Notes |
 | ---- | --------------- | ------------------------- | ----- |
-| Purpose Buttons | `1371:8933` | `SaveButton`, `ConfirmButton`, `VerifyButton`, `EditButton`, `UploadButton`, `DownloadButton`, `CopyButton`, `SearchButton`, `FilterButton`, `SortButton`, `DropdownButton`, `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, `SettingsButton`, `CloseButton`, `RefreshButton` | Current repo only ships a small subset of Figma's 25 purpose buttons |
-| Input Family | `1364:11372`, `1364:11817` | `Textarea`, `TextareaField`, `DateOfBirthField`, `ZipCodeField`, `DropdownField`, `SelectField` | `SearchField`, `PasswordField`, `PhoneField`, and base text input already exist |
-| Checkbox Group | `1369:4673` | `CheckboxGroupField` | Figma includes a labeled group with helper/error text and vertical checkbox list |
-| Switch Sizes | `1371:12357`, `1371:12370`, `1371:12383` | Size API for `Compact`, `Wide`, `Rich` | Current implementation only covers the 24×16 / 12px switch |
+| Purpose Buttons | `1371:8933` | `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, `SettingsButton` | Wave 1 and Wave 2 now ship; remaining work is Wave 3 |
+| Input Family | `1364:11372`, `1364:11817` | None | `Textarea`, `TextareaField`, `SelectField`, `DropdownField`, `DateOfBirthField`, and `ZipCodeField` now ship |
+| Switch Sizes | `1371:12357`, `1371:12370`, `1371:12383` | None | `Compact`, `Wide`, and `Rich` now ship via the shared `size` API |
 
 ## Recommended Build Order
 
-Build one backlog item at a time. Fully complete it before moving on.
+Wave 1 and Wave 2 are complete, and the switch size API now ships. One backlog item remains.
 
 | # | Backlog Item | Effort | Why |
 |---|--------------|--------|-----|
-| 1 | `CheckboxGroupField` | Medium | Entirely missing molecule with clear Figma reference and no API overlap risk |
-| 2 | `Textarea` + `TextareaField` | Medium | Biggest missing input type and likely foundation for other multiline cases |
-| 3 | `SelectField` | Medium / High | New control family with its own interaction model |
-| 4 | `DropdownField` | Medium / High | Likely shares work with select, so build after select primitives settle |
-| 5 | `DateOfBirthField` | Medium | Missing Figma field variant; can reuse input-field structure |
-| 6 | `ZipCodeField` | Low / Medium | Small purpose field once input-family additions are in place |
-| 7 | Purpose Buttons — Wave 1 | Low | `Save`, `Confirm`, `Verify`, `Edit`, `Close`, `Refresh` are small wrappers with high everyday value |
-| 8 | Purpose Buttons — Wave 2 | Low | `Upload`, `Download`, `Copy`, `Search`, `Filter`, `Sort`, `Dropdown` share the same wrapper pattern |
-| 9 | Purpose Buttons — Wave 3 | Low | `Back`, `Next`, `Message`, `Share`, `Login`, `Logout`, `Help`, `Settings` can land as a final wrapper batch |
-| 10 | Switch size API | Medium | Real Figma gap, but lower leverage than the missing components above |
+| 1 | Purpose Buttons — Wave 3 | Low | `Back`, `Next`, `Message`, `Share`, `Login`, `Logout`, `Help`, `Settings` can land as a final wrapper batch |
 
 ## Per-Item Plans
 
 ### 1. CheckboxGroupField
 
-**Status:** Not started.
+**Status:** Complete.
 
 **Goal:** Add the missing checkbox-list molecule shown in Figma node `1369:4673`.
 
-| Layer | Files / Work |
-| ----- | ------------ |
-| Core | Add a11y helpers for group label / description / error wiring if current checkbox helpers are too narrow |
-| React | Add `checkbox-group-field.tsx` with controlled/uncontrolled checked-value handling |
-| Vue | Mirror React API and behavior |
-| Presets | Add molecule CSS or extend existing checkbox-field CSS intentionally |
-| Stories | Atom remains as-is; add molecule stories for default, helper, error, disabled, indeterminate parent checkbox if relevant |
-| Tests | Add adapter tests plus Storybook taxonomy/docs tests |
-| Exports | Add to `packages/react/src/index.ts` and `packages/vue/src/index.ts` |
+`CheckboxGroupField` now ships in React and Vue with stories, tests, and package exports.
 
 ### 2. Input Family Expansion
 
-**Status:** Not started.
+**Status:** Complete.
 
-These should be handled as separate backlog items, but under one shared input-family track.
+These were handled as separate backlog items under one shared input-family track.
 
 #### 2a. Textarea + TextareaField
 
-- Add a textarea-capable core recipe or a dedicated textarea recipe
-- Mirror the current `Input` / `InputField` architecture
-- Add React + Vue adapters, stories, docs, tests, exports
+**Status:** Complete.
+
+- `Textarea` and `TextareaField` now ship in React and Vue with stories, docs, tests, and exports
 
 #### 2b. SelectField
 
-- Decide whether this is native `<select>` first or a custom trigger/listbox abstraction
-- Match the Figma `Select` presentation from `1364:11817`
-- Ship React + Vue parity, docs, tests, exports
+**Status:** Complete.
+
+- `SelectField` now ships in React and Vue with native and Marwes-custom select support, plus stories, docs, tests, and exports
 
 #### 2c. DropdownField
 
-- Confirm whether this is a field-wrapped trigger variant distinct from `SelectField`
-- Reuse select/listbox infrastructure if possible
-- Ship only after the API boundary between `DropdownField` and `SelectField` is explicit
+**Status:** Complete.
+
+- `DropdownField` now ships as a semantic wrapper around `SelectField`
+- The API boundary is explicit: `SelectField` remains the generic field-wrapped select, while `DropdownField` defaults `select.native` to `false` for the Marwes/Figma dropdown treatment and allows `select.native={true}` as an opt-out
+- Reuse the existing `SelectField` infrastructure, including the custom Marwes trigger/listbox path for non-native mode, instead of introducing a separate public stack
 
 #### 2d. DateOfBirthField
 
-- Decide whether this should be native date input, masked text input, or segmented input
-- Keep the first implementation low-regret and Figma-aligned
-- Ship as a purpose field built on the settled input-family primitives
+**Status:** Complete.
+
+- `DateOfBirthField` ships as a low-regret native date field with `autoComplete="bday"` and shared input-field semantics across React and Vue
 
 #### 2e. ZipCodeField
 
-- Add country/format assumptions explicitly
-- Default to a simple text/numeric field unless a stricter format requirement is confirmed in Figma or product usage
+**Status:** Complete.
+
+- `ZipCodeField` ships as a low-regret purpose field built on `InputField`
+- Current contract keeps `type="text"` to preserve leading zeros, uses `inputMode="numeric"` for mobile keyboards, and sets `autoComplete="postal-code"`
 
 ### 3. Purpose Buttons Expansion
 
-**Status:** Partially built.
+**Status:** Partially built. Waves 1 and 2 are complete.
 
-**Already covered:** `SubmitButton`, `CancelButton`, `CreateButton`, `DangerButton`, `LinkButton`, `SuccessButton`, plus the visual wrappers.
+**Already covered:** `SubmitButton`, `SaveButton`, `CancelButton`, `ConfirmButton`, `VerifyButton`, `CreateButton`, `EditButton`, `DangerButton`, `LinkButton`, `CloseButton`, `RefreshButton`, `SuccessButton`, plus the visual wrappers.
 
-**Still missing from Figma purpose set:**
+**Completed in Wave 1:**
 
 - `SaveButton`
 - `ConfirmButton`
 - `VerifyButton`
 - `EditButton`
+- `CloseButton`
+- `RefreshButton`
+
+These now ship in React and Vue with stories, docs, tests, and root exports.
+
+**Completed in Wave 2:**
+
+**Status:** Complete.
+
 - `UploadButton`
 - `DownloadButton`
 - `CopyButton`
@@ -134,6 +143,11 @@ These should be handled as separate backlog items, but under one shared input-fa
 - `FilterButton`
 - `SortButton`
 - `DropdownButton`
+
+These now ship in React and Vue with stories, docs, tests, and root exports.
+
+**Still missing from Figma purpose set:**
+
 - `BackButton`
 - `NextButton`
 - `MessageButton`
@@ -142,8 +156,6 @@ These should be handled as separate backlog items, but under one shared input-fa
 - `LogoutButton`
 - `HelpButton`
 - `SettingsButton`
-- `CloseButton`
-- `RefreshButton`
 
 **Shared implementation pattern**
 
@@ -161,7 +173,7 @@ These should be handled as separate backlog items, but under one shared input-fa
 
 ### 4. Switch Size API
 
-**Status:** Not started.
+**Status:** Complete.
 
 **Goal:** Match the three Figma sizes:
 
@@ -169,16 +181,18 @@ These should be handled as separate backlog items, but under one shared input-fa
 - `Wide` — `1371:12370`
 - `Rich` — `1371:12383`
 
-**Plan**
+The size API now ships in React and Vue with preset CSS, stories, tests, and root exports.
+
+**Delivered**
 
 | Layer | Files / Work |
 | ----- | ------------ |
-| Core | Add `size` to switch options/types |
-| Presets | Add size-specific track/thumb dimensions and translation distances |
-| React | Pass `size` through and expose it in stories |
-| Vue | Mirror React API |
-| Stories | Add size comparison story in both frameworks |
-| Tests | Recipe + adapter coverage for size classnames / DOM output |
+| Core | `size` now exists in switch options/types and maps to stable modifier classes |
+| Presets | Size-specific track/thumb dimensions and translation distances now ship |
+| React | `size` passes through and is documented in stories |
+| Vue | Mirrors the React API |
+| Stories | Size comparison story now exists in both frameworks |
+| Tests | Recipe + adapter coverage now verifies size classnames / DOM output |
 
 ## Cross-Cutting Rules
 

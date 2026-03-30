@@ -75,7 +75,7 @@
    Uses .mw-btn.mw-btn--text to override size classes (--sm, --md, etc.) */
 .mw-btn.mw-btn--text {
   background: transparent;
-  color: var(--mw-color-text-label, #141414);
+  color: var(--mw-color-text);
   border-color: transparent;
   height: auto;
   padding: 0.25rem 0.5rem;
@@ -85,11 +85,11 @@
 }
 
 .mw-btn--text:hover:not(:disabled) {
-  background: var(--mw-color-text-surface, #f3f4f6);
+  background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
 }
 
 .mw-btn--text:active:not(:disabled) {
-  background: var(--mw-color-text-surface-pressed, #e5e7eb);
+  background: color-mix(in srgb, var(--mw-color-text) 12%, transparent);
 }
 
 /* SIZES */

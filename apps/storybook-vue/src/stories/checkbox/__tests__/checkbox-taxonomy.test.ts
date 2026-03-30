@@ -21,4 +21,11 @@ describe("Vue checkbox story taxonomy", () => {
     expect(fieldStory).toContain('title: "Checkbox/Molecule/CheckboxField"')
     expect(fieldStory).not.toContain('title: "Checkbox/Field"')
   })
+
+  it("uses molecule title for CheckboxGroupField story", () => {
+    const groupStory = readStoryFile("checkbox-group-field.stories.ts")
+
+    expect(groupStory).toContain('title: "Checkbox/Molecule/CheckboxGroupField"')
+    expect(groupStory).not.toContain('title: "Checkbox/Field"')
+  })
 })

@@ -10,8 +10,9 @@ Checkbox stories are organized with a simple two-layer structure to keep discove
 
 ```
 Checkbox (Atom)
-     ↓
+     ↓        ↓
 CheckboxField (Molecule)
+CheckboxGroupField (Molecule)
 ```
 
 ## Atom: Checkbox
@@ -38,5 +39,23 @@ import { CheckboxField } from "@marwes-ui/react"
   label="Subscribe to updates"
   description="We'll only send important product updates."
   checkbox={{ size: "md" }}
+/>
+```
+
+## Molecule: CheckboxGroupField
+
+Use `CheckboxGroupField` when you need a labeled multi-select checkbox list with shared helper/error text.
+
+```tsx
+import { CheckboxGroupField } from "@marwes-ui/react"
+
+<CheckboxGroupField
+  label="Notification preferences"
+  description="Choose every channel you want us to use."
+  options={[
+    { value: "email", label: "Email updates" },
+    { value: "sms", label: "SMS alerts" },
+    { value: "push", label: "Push notifications" },
+  ]}
 />
 ```

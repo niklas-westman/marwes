@@ -3,7 +3,24 @@ import type * as React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
-import { Button, LinkButton, PrimaryButton } from ".."
+import {
+  Button,
+  CloseButton,
+  ConfirmButton,
+  CopyButton,
+  DownloadButton,
+  DropdownButton,
+  EditButton,
+  FilterButton,
+  LinkButton,
+  PrimaryButton,
+  RefreshButton,
+  SaveButton,
+  SearchButton,
+  SortButton,
+  UploadButton,
+  VerifyButton,
+} from ".."
 import { runButtonContract } from "../../../../../../tests/contracts/button.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 
@@ -62,5 +79,124 @@ describe("React adapter specifics: Button", () => {
     const button = screen.getByRole("button", { name: /styled/i })
     expect(button).toHaveClass("custom-class")
     expect(button.className).toContain("mw-btn")
+  })
+
+  it("applies Wave 1 semantic defaults for save, confirm, and verify", () => {
+    renderWithProvider(
+      <>
+        <SaveButton>Save</SaveButton>
+        <ConfirmButton>Confirm</ConfirmButton>
+        <VerifyButton>Verify</VerifyButton>
+      </>,
+    )
+
+    const saveButton = screen.getByRole("button", { name: /save/i })
+    expect(saveButton).toHaveAttribute("data-action", "submit")
+    expect(saveButton).toHaveAttribute("data-purpose", "save")
+    expect(saveButton).toHaveClass("mw-btn--primary")
+    expect(saveButton.querySelector("svg")).not.toBeNull()
+
+    const confirmButton = screen.getByRole("button", { name: /confirm/i })
+    expect(confirmButton).toHaveAttribute("data-purpose", "confirm")
+    expect(confirmButton).toHaveAttribute("data-outcome", "positive")
+    expect(confirmButton).toHaveClass("mw-btn--success")
+    expect(confirmButton.querySelector("svg")).not.toBeNull()
+
+    const verifyButton = screen.getByRole("button", { name: /verify/i })
+    expect(verifyButton).toHaveAttribute("data-purpose", "verify")
+    expect(verifyButton).toHaveAttribute("data-verification", "true")
+    expect(verifyButton).toHaveClass("mw-btn--success")
+    expect(verifyButton.querySelector("svg")).not.toBeNull()
+  })
+
+  it("applies Wave 1 semantic defaults for edit, close, and refresh", () => {
+    renderWithProvider(
+      <>
+        <EditButton>Edit</EditButton>
+        <CloseButton>Close</CloseButton>
+        <RefreshButton>Refresh</RefreshButton>
+      </>,
+    )
+
+    const editButton = screen.getByRole("button", { name: /edit/i })
+    expect(editButton).toHaveAttribute("data-action", "edit")
+    expect(editButton).toHaveAttribute("data-purpose", "edit")
+    expect(editButton).toHaveClass("mw-btn--secondary")
+    expect(editButton.querySelector("svg")).not.toBeNull()
+
+    const closeButton = screen.getByRole("button", { name: /close/i })
+    expect(closeButton).toHaveAttribute("data-action", "cancel")
+    expect(closeButton).toHaveAttribute("data-purpose", "close")
+    expect(closeButton).toHaveClass("mw-btn--secondary")
+    expect(closeButton.querySelector("svg")).not.toBeNull()
+
+    const refreshButton = screen.getByRole("button", { name: /refresh/i })
+    expect(refreshButton).toHaveAttribute("data-action", "button")
+    expect(refreshButton).toHaveAttribute("data-purpose", "refresh")
+    expect(refreshButton).toHaveClass("mw-btn--secondary")
+    expect(refreshButton.querySelector("svg")).not.toBeNull()
+  })
+
+  it("applies Wave 2 semantic defaults for utility purpose buttons", () => {
+    renderWithProvider(
+      <>
+        <UploadButton>Upload</UploadButton>
+        <DownloadButton>Download</DownloadButton>
+        <CopyButton>Copy</CopyButton>
+        <SearchButton>Search</SearchButton>
+        <FilterButton>Filter</FilterButton>
+        <SortButton>Sort</SortButton>
+        <DropdownButton>Dropdown</DropdownButton>
+      </>,
+    )
+
+    const uploadButton = screen.getByRole("button", { name: /upload/i })
+    expect(uploadButton).toHaveAttribute("data-action", "button")
+    expect(uploadButton).toHaveAttribute("data-purpose", "upload")
+    expect(uploadButton).toHaveAttribute("data-transfer", "upload")
+    expect(uploadButton).toHaveClass("mw-btn--secondary")
+    expect(uploadButton.querySelector("svg")).not.toBeNull()
+
+    const downloadButton = screen.getByRole("button", { name: /download/i })
+    expect(downloadButton).toHaveAttribute("data-action", "button")
+    expect(downloadButton).toHaveAttribute("data-purpose", "download")
+    expect(downloadButton).toHaveAttribute("data-transfer", "download")
+    expect(downloadButton).toHaveClass("mw-btn--secondary")
+    expect(downloadButton.querySelector("svg")).not.toBeNull()
+
+    const copyButton = screen.getByRole("button", { name: /copy/i })
+    expect(copyButton).toHaveAttribute("data-action", "button")
+    expect(copyButton).toHaveAttribute("data-purpose", "copy")
+    expect(copyButton).toHaveAttribute("data-copy", "true")
+    expect(copyButton).toHaveClass("mw-btn--secondary")
+    expect(copyButton.querySelector("svg")).not.toBeNull()
+
+    const searchButton = screen.getByRole("button", { name: /search/i })
+    expect(searchButton).toHaveAttribute("data-action", "button")
+    expect(searchButton).toHaveAttribute("data-purpose", "search")
+    expect(searchButton).toHaveAttribute("data-search", "true")
+    expect(searchButton).toHaveClass("mw-btn--secondary")
+    expect(searchButton.querySelector("svg")).not.toBeNull()
+
+    const filterButton = screen.getByRole("button", { name: /filter/i })
+    expect(filterButton).toHaveAttribute("data-action", "button")
+    expect(filterButton).toHaveAttribute("data-purpose", "filter")
+    expect(filterButton).toHaveAttribute("data-filter", "true")
+    expect(filterButton).toHaveClass("mw-btn--secondary")
+    expect(filterButton.querySelector("svg")).not.toBeNull()
+
+    const sortButton = screen.getByRole("button", { name: /sort/i })
+    expect(sortButton).toHaveAttribute("data-action", "button")
+    expect(sortButton).toHaveAttribute("data-purpose", "sort")
+    expect(sortButton).toHaveAttribute("data-sort", "true")
+    expect(sortButton).toHaveClass("mw-btn--secondary")
+    expect(sortButton.querySelector("svg")).not.toBeNull()
+
+    const dropdownButton = screen.getByRole("button", { name: /dropdown/i })
+    expect(dropdownButton).toHaveAttribute("data-action", "button")
+    expect(dropdownButton).toHaveAttribute("data-purpose", "dropdown")
+    expect(dropdownButton).toHaveAttribute("data-dropdown", "true")
+    expect(dropdownButton).toHaveClass("mw-btn--secondary")
+    expect(dropdownButton.querySelector("svg")).not.toBeNull()
   })
 })

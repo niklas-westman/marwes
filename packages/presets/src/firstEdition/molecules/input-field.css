@@ -27,8 +27,9 @@
   display: flex;
   align-items: center;
 
-  /* Add padding to input when password toggle is present */
-  .mw-input {
+  .mw-input,
+  .mw-select,
+  .mw-textarea {
     flex: 1;
   }
 
@@ -93,6 +94,10 @@
   &:active {
     background: var(--mw-color-border-subtle, #e5e7eb);
   }
+}
+
+.mw-input-field--textarea .mw-input-field__input-wrapper {
+  align-items: stretch;
 }
 
 /* Hide native search input clear button */

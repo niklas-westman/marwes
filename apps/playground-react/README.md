@@ -135,8 +135,8 @@ function App() {
   <Input label="Search" placeholder="Type to search..." />
   
   <div style={{ display: 'flex', gap: '8px' }}>
-    <Button tone="primary">Submit</Button>
-    <Button variant="outline">Cancel</Button>
+    <Button variant="primary">Submit</Button>
+    <Button variant="secondary">Cancel</Button>
   </div>
 </Card>
 ```
@@ -194,11 +194,9 @@ function DebugTheme() {
 ```tsx
 // See what core is generating
 import { createButtonRecipe } from '@marwes-ui/core'
-import { useTheme } from '@marwes-ui/react'
 
 function DebugButton() {
-  const theme = useTheme()
-  const kit = createButtonRecipe(theme, { tone: 'primary' })
+  const kit = createButtonRecipe({ variant: 'primary' })
   console.log('Button RenderKit:', kit)
   return <button className={kit.className}>Test</button>
 }

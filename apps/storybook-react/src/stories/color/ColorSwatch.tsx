@@ -7,7 +7,7 @@ export interface ColorSwatchProps {
   name: string
   /** Hex color value */
   hex: string
-  /** CSS variable name (e.g., --mw-primary) */
+  /** CSS variable name (e.g., --mw-color-primary-base) */
   cssVar: string
   /** Optional description */
   description?: string

@@ -18,5 +18,11 @@ describe("Vue switch introduction docs", () => {
     for (const componentName of componentNames) {
       expect(introDoc).toContain(componentName)
     }
+
+    const sizeLabels = ["compact", "wide", "rich", "24×16", "30×16", "30×20"]
+
+    for (const sizeLabel of sizeLabels) {
+      expect(introDoc).toContain(sizeLabel)
+    }
   })
 })

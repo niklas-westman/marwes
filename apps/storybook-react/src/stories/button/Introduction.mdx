@@ -26,10 +26,23 @@ Variant Wrappers
      ↓
 Purpose Wrappers
   ├─ SubmitButton
+  ├─ SaveButton
   ├─ CancelButton
+  ├─ ConfirmButton
+  ├─ VerifyButton
   ├─ CreateButton
+  ├─ EditButton
+  ├─ UploadButton
+  ├─ DownloadButton
+  ├─ CopyButton
+  ├─ SearchButton
+  ├─ FilterButton
+  ├─ SortButton
+  ├─ DropdownButton
   ├─ DangerButton
-  └─ LinkButton
+  ├─ LinkButton
+  ├─ CloseButton
+  └─ RefreshButton
 ```
 
 ## Atom: Button
@@ -48,7 +61,26 @@ import { Button } from "@marwes-ui/react"
 Use purpose-built components that automatically set AI-friendly metadata:
 
 ```tsx
-import { CancelButton, SubmitButton, CreateButton, DangerButton, LinkButton } from "@marwes-ui/react"
+import {
+  CancelButton,
+  SubmitButton,
+  SaveButton,
+  ConfirmButton,
+  VerifyButton,
+  CreateButton,
+  EditButton,
+  UploadButton,
+  DownloadButton,
+  CopyButton,
+  SearchButton,
+  FilterButton,
+  SortButton,
+  DropdownButton,
+  DangerButton,
+  LinkButton,
+  CloseButton,
+  RefreshButton,
+} from "@marwes-ui/react"
 
 // ✅ Preferred - auto-sets action="cancel", variant="secondary"
 <CancelButton onClick={handleCancel}>Cancel</CancelButton>
@@ -56,15 +88,44 @@ import { CancelButton, SubmitButton, CreateButton, DangerButton, LinkButton } fr
 // ✅ Preferred - auto-sets action="submit", uses form submission
 <SubmitButton>Save Changes</SubmitButton>
 
+// ✅ Preferred - save-specific wrapper with icon and save metadata
+<SaveButton onClick={handleSave}>Save Draft</SaveButton>
+
+// ✅ Preferred - affirmative success wrapper for confirmation flows
+<ConfirmButton onClick={handleConfirm}>Confirm</ConfirmButton>
+
+// ✅ Preferred - success wrapper for verification/approval flows
+<VerifyButton onClick={handleVerify}>Verify Account</VerifyButton>
+
 // ✅ Preferred - auto-sets action="create"
 <CreateButton onClick={handleCreate}>New Project</CreateButton>
+
+// ✅ Preferred - edit-specific wrapper with icon and edit metadata
+<EditButton onClick={handleEdit}>Edit Profile</EditButton>
+
+// ✅ Preferred - utility wrappers keep secondary styling with purpose metadata
+<UploadButton onClick={handleUpload}>Upload File</UploadButton>
+<DownloadButton onClick={handleDownload}>Download CSV</DownloadButton>
+<CopyButton onClick={handleCopy}>Copy Link</CopyButton>
+<SearchButton onClick={handleSearch}>Search</SearchButton>
+<FilterButton onClick={openFilters}>Filter</FilterButton>
+<SortButton onClick={toggleSort}>Sort</SortButton>
+<DropdownButton ariaExpanded={isMenuOpen} ariaControls="action-menu">
+  More Actions
+</DropdownButton>
 
 // ✅ Preferred - auto-sets action="delete", data-destructive="true"
 <DangerButton onClick={handleDelete}>Delete</DangerButton>
 
 // ✅ Preferred - auto-sets action="navigate", renders as anchor
 <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
+
+// ✅ Preferred - close and refresh semantics without manual prop wiring
+<CloseButton onClick={handleClose}>Close</CloseButton>
+<RefreshButton onClick={handleRefresh}>Refresh</RefreshButton>
 ```
+
+> **Skipped in the current docs surface:** `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, and `SettingsButton` remain intentionally omitted until that final purpose-button wave ships.
 
 ### Why Semantic Components?
 
@@ -111,6 +172,7 @@ import { ButtonVariant, ButtonSize, ButtonAction } from "@marwes-ui/react"
 ButtonVariant.primary   // "primary"
 ButtonVariant.secondary // "secondary"
 ButtonVariant.text      // "text"
+ButtonVariant.success   // "success"
 
 ButtonSize.xs  // "xs"
 ButtonSize.sm  // "sm"
@@ -181,14 +243,55 @@ Sets: `variant="text"`
 **`SubmitButton`** — Form submissions  
 Sets: `action="submit"`
 
+**`SaveButton`** — Save/persist actions  
+Sets: `action="submit"`, default save icon
+
 **`CancelButton`** — Cancel/dismiss actions  
 Sets: `action="cancel"`, `variant="secondary"`
 
+**`ConfirmButton`** — Affirmative confirmation actions  
+Sets: `variant="success"`, positive outcome metadata
+
+**`VerifyButton`** — Verification/approval actions  
+Sets: `variant="success"`, verification metadata
+
 **`CreateButton`** — Creating new items  
 Sets: `action="create"`
+
+**`EditButton`** — Edit/modify actions  
+Sets: `action="edit"`, `variant="secondary"`
+
+**`UploadButton`** — Upload/import actions  
+Sets: `variant="secondary"`, upload metadata, upload icon
+
+**`DownloadButton`** — Download/export actions  
+Sets: `variant="secondary"`, download metadata, download icon
+
+**`CopyButton`** — Copy/duplicate actions  
+Sets: `variant="secondary"`, copy metadata, copy icon
+
+**`SearchButton`** — Explicit search triggers  
+Sets: `variant="secondary"`, search metadata, search icon
+
+**`FilterButton`** — Filter and refine controls  
+Sets: `variant="secondary"`, filter metadata, filter icon
+
+**`SortButton`** — Sort/order controls  
+Sets: `variant="secondary"`, sort metadata, ordering icon
+
+**`DropdownButton`** — Disclosure or action-menu triggers  
+Sets: `variant="secondary"`, dropdown metadata, chevron icon
 
 **`DangerButton`** — Destructive actions  
 Sets: `action="delete"`, error styling, `data-destructive="true"`
 
 **`LinkButton`** — Navigation links  
 Sets: `action="navigate"`, renders as `<a>` element
+
+**`CloseButton`** — Close/dismiss affordances  
+Sets: `action="cancel"`, `variant="secondary"`
+
+**`RefreshButton`** — Refresh/reload actions  
+Sets: `variant="secondary"`, refresh metadata
+
+**Skipped until implemented** — `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, `SettingsButton`

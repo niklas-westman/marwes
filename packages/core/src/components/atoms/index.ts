@@ -35,7 +35,17 @@ export type {
   DividerOrientation,
 } from "./divider"
 export type { IconOptions, IconRenderKit } from "./icon"
-export type { InputOptions, InputRenderKit } from "./input"
+export type {
+  InputOptions,
+  InputRenderKit,
+  SelectAppearance,
+  SelectOptions,
+  SelectRenderKit,
+  SelectOption,
+  TextareaOptions,
+  TextareaRenderKit,
+  TextareaResize,
+} from "./input"
 export type {
   HeadingOptions,
   HeadingRenderKit,

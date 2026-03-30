@@ -36,11 +36,31 @@ describe("resolveThemeInput — color role overrides", () => {
     expect(resolveThemeInput({ color: { primary: "#5B8CFF" } }).color.primary.base).toBe("#5B8CFF")
   })
 
+  it("string primary override still auto-derives label contrast", () => {
+    expect(resolveThemeInput({ color: { primary: "#5B8CFF" } }).color.primary.label).toBe("#141414")
+  })
+
   it("object primary override with hover sets hover, derives rest", () => {
     const result = resolveThemeInput({ color: { primary: { base: "#5B8CFF", hover: "#FF0000" } } })
     expect(result.color.primary.hover).toBe("#FF0000")
     expect(result.color.primary.base).toBe("#5B8CFF")
     expect(["#141414", "#FFFFFF"]).toContain(result.color.primary.label)
+  })
+
+  it("object primary override can explicitly set label and labelDisabled", () => {
+    const result = resolveThemeInput({
+      color: {
+        primary: {
+          base: "#5B8CFF",
+          label: "#FFFFFF",
+          labelDisabled: "rgba(255,255,255,0.5)",
+        },
+      },
+    })
+
+    expect(result.color.primary.base).toBe("#5B8CFF")
+    expect(result.color.primary.label).toBe("#FFFFFF")
+    expect(result.color.primary.labelDisabled).toBe("rgba(255,255,255,0.5)")
   })
 
   it("danger override", () => {

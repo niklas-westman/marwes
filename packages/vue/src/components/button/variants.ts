@@ -50,6 +50,7 @@ export const DangerButton = defineComponent({
           confirmation: props.confirmation ?? true,
           dataAttributes: {
             ...props.dataAttributes,
+            "data-purpose": "destructive",
             "data-destructive": "true",
             "data-confirmation-required": props.confirmation === false ? "false" : "true",
           },
@@ -78,6 +79,7 @@ export const CreateButton = defineComponent({
           variant: props.variant ?? "primary",
           dataAttributes: {
             ...props.dataAttributes,
+            "data-purpose": "create",
             "data-creative": "true",
           },
         },
@@ -104,6 +106,7 @@ export const SubmitButton = defineComponent({
           as: "button",
           action: "submit",
           dataAttributes: {
+            "data-purpose": "submit",
             "data-context": "form-submit",
             ...props.dataAttributes,
           },
@@ -132,6 +135,7 @@ export const CancelButton = defineComponent({
           variant: props.variant ?? "secondary",
           dataAttributes: {
             ...props.dataAttributes,
+            "data-purpose": "cancel",
             "data-cancel": "true",
           },
         },
@@ -161,7 +165,378 @@ export const LinkButton = defineComponent({
           action: "navigate",
           dataAttributes: {
             ...props.dataAttributes,
+            "data-purpose": "navigation",
             "data-navigation": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type SaveButtonProps = Omit<ButtonProps, "action">
+
+export const SaveButton = defineComponent({
+  name: "MarwesSaveButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as SaveButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          action: ButtonAction.submit,
+          variant: props.variant ?? ButtonVariant.primary,
+          iconRight: props.iconRight ?? IconName.Save,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "save",
+            "data-persist": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type ConfirmButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+
+export const ConfirmButton = defineComponent({
+  name: "MarwesConfirmButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as ConfirmButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: ButtonVariant.success,
+          as: "button",
+          iconRight: props.iconRight ?? IconName.Check,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "confirm",
+            "data-outcome": "positive",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type VerifyButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+
+export const VerifyButton = defineComponent({
+  name: "MarwesVerifyButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as VerifyButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: ButtonVariant.success,
+          as: "button",
+          iconRight: props.iconRight ?? IconName.CheckCircle,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "verify",
+            "data-outcome": "positive",
+            "data-verification": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type EditButtonProps = Omit<ButtonProps, "action">
+
+export const EditButton = defineComponent({
+  name: "MarwesEditButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as EditButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          action: ButtonAction.edit,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.Edit,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "edit",
+            "data-edit": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type CloseButtonProps = Omit<ButtonProps, "action">
+
+export const CloseButton = defineComponent({
+  name: "MarwesCloseButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as CloseButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          action: ButtonAction.cancel,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.X,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "close",
+            "data-close": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type RefreshButtonProps = Omit<ButtonProps, "action">
+
+export const RefreshButton = defineComponent({
+  name: "MarwesRefreshButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as RefreshButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.RefreshCw,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "refresh",
+            "data-refresh": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type UploadButtonProps = Omit<ButtonProps, "action">
+
+export const UploadButton = defineComponent({
+  name: "MarwesUploadButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as UploadButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.Upload,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "upload",
+            "data-transfer": "upload",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type DownloadButtonProps = Omit<ButtonProps, "action">
+
+export const DownloadButton = defineComponent({
+  name: "MarwesDownloadButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as DownloadButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.Download,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "download",
+            "data-transfer": "download",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type CopyButtonProps = Omit<ButtonProps, "action">
+
+export const CopyButton = defineComponent({
+  name: "MarwesCopyButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as CopyButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.Copy,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "copy",
+            "data-copy": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type SearchButtonProps = Omit<ButtonProps, "action">
+
+export const SearchButton = defineComponent({
+  name: "MarwesSearchButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as SearchButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.Search,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "search",
+            "data-search": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type FilterButtonProps = Omit<ButtonProps, "action">
+
+export const FilterButton = defineComponent({
+  name: "MarwesFilterButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as FilterButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.Sliders,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "filter",
+            "data-filter": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type SortButtonProps = Omit<ButtonProps, "action">
+
+export const SortButton = defineComponent({
+  name: "MarwesSortButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as SortButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.ChevronsDown,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "sort",
+            "data-sort": "true",
+          },
+        },
+        slots,
+      )
+    }
+  },
+})
+
+export type DropdownButtonProps = Omit<ButtonProps, "action">
+
+export const DropdownButton = defineComponent({
+  name: "MarwesDropdownButton",
+  inheritAttrs: false,
+  props: [...buttonPropKeys],
+  setup(rawProps, { attrs, slots }) {
+    return () => {
+      const props = rawProps as unknown as DropdownButtonProps
+      return h(
+        Button,
+        {
+          ...attrs,
+          ...props,
+          variant: props.variant ?? ButtonVariant.secondary,
+          iconRight: props.iconRight ?? IconName.ChevronDown,
+          dataAttributes: {
+            ...props.dataAttributes,
+            "data-purpose": "dropdown",
+            "data-dropdown": "true",
           },
         },
         slots,
@@ -230,6 +605,7 @@ export const SuccessButton = defineComponent({
           as: "button",
           dataAttributes: {
             ...props.dataAttributes,
+            "data-purpose": "success",
             "data-outcome": "positive",
           },
         },

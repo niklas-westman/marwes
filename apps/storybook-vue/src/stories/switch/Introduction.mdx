@@ -1,8 +1,5 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import {
-  switchPurposeComponentReference,
-  switchWhyPurposeComponents,
-} from "@marwes-ui/core"
+import { switchPurposeComponentReference, switchWhyPurposeComponents } from "@marwes-ui/core"
 
 <Meta title="Switch/Introduction" />
 
@@ -105,17 +102,37 @@ Use the raw `Switch` atom when you need a custom layout or non-standard composit
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue"
-import { Switch } from "@marwes-ui/vue"
+  import { ref } from "vue"
+  import { Switch, SwitchSize } from "@marwes-ui/vue"
 
 const enabled = ref(false)
 </script>
 
 <template>
   <div style="display: flex; align-items: center; gap: 12px;">
-    <Switch v-model="enabled" ariaLabel="Enable notifications" />
+    <Switch v-model="enabled" :size="SwitchSize.wide" ariaLabel="Enable notifications" />
     <span>Enable notifications</span>
   </div>
+</template>
+```
+
+## Size API
+
+`Switch` supports three Figma-matched sizes. `compact` remains the default.
+
+- `compact` - 24×16 track with 12px thumb
+- `wide` - 30×16 track with 12px thumb
+- `rich` - 30×20 track with 16px thumb
+
+```vue
+<script setup lang="ts">
+import { SwitchSize } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Switch :size="SwitchSize.compact" ariaLabel="Compact switch" />
+  <Switch :size="SwitchSize.wide" ariaLabel="Wide switch" />
+  <Switch :size="SwitchSize.rich" ariaLabel="Rich switch" />
 </template>
 ```
 

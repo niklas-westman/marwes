@@ -3,6 +3,7 @@ import type { PreferenceSwitchProps } from "@marwes-ui/vue"
 import { PreferenceSwitch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta = {
   title: "Switch/Purpose/Preference",
@@ -23,6 +24,7 @@ export const Default: Story = {
       checked: false,
     },
   },
+  render: createToggleableSwitchFieldRender("PreferenceSwitch", PreferenceSwitch),
 }
 
 export const Controlled: Story = {

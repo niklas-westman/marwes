@@ -3,6 +3,7 @@ import type { SwitchFieldProps } from "@marwes-ui/vue"
 import { SwitchField } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta = {
   title: "Switch/Molecule",
@@ -23,6 +24,7 @@ export const Playground: Story = {
       checked: false,
     },
   },
+  render: createToggleableSwitchFieldRender("SwitchField", SwitchField),
 }
 
 export const Controlled: Story = {
@@ -53,6 +55,7 @@ export const WithError: Story = {
       checked: false,
     },
   },
+  render: createToggleableSwitchFieldRender("SwitchField", SwitchField),
 }
 
 export const Disabled: Story = {

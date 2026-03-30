@@ -114,7 +114,7 @@ export const WithCustomClass: Story = {
   render: () => ({
     components: { Paragraph },
     template: `
-      <Paragraph class="custom-paragraph" style="color: var(--mw-primary); font-style: italic;">
+      <Paragraph class="custom-paragraph" style="color: var(--mw-color-primary-base); font-style: italic;">
         This paragraph has custom styling applied.
       </Paragraph>
     `,

@@ -64,7 +64,7 @@ export const SizeOverride: Story = {
  */
 export const WithCustomClass: Story = {
   render: () => (
-    <H1 className="custom-class" style={{ color: "var(--mw-primary)" }}>
+    <H1 className="custom-class" style={{ color: "var(--mw-color-primary-base)" }}>
       Styled Heading
     </H1>
   ),

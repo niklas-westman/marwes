@@ -2,6 +2,8 @@ import { buildCurrencyHelperText } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
 import type { InputProps } from "./input"
 import { InputField, type InputFieldProps } from "./input-field"
+import type { SelectProps } from "./select"
+import { SelectField, type SelectFieldProps } from "./select-field"
 
 // Shared field prop keys (from InputFieldProps)
 const fieldPropKeys = [
@@ -13,6 +15,49 @@ const fieldPropKeys = [
   "ariaDescribedBy",
   "modelValue",
 ] as const
+
+const dropdownFieldPropKeys = [
+  "id",
+  "label",
+  "helperText",
+  "error",
+  "select",
+  "ariaDescribedBy",
+  "modelValue",
+] as const
+
+export type DropdownFieldProps = Omit<SelectFieldProps, "select"> & {
+  select: Omit<SelectProps, "appearance"> & {
+    native?: boolean
+  }
+}
+
+export const DropdownField = defineComponent({
+  name: "MarwesDropdownField",
+  inheritAttrs: false,
+  props: [...dropdownFieldPropKeys],
+  emits: ["update:modelValue", "value-change"],
+  setup(rawProps, { slots, emit }) {
+    return () => {
+      const props = rawProps as unknown as DropdownFieldProps
+      return h("div", { "data-purpose": "dropdown" }, [
+        h(
+          SelectField,
+          {
+            ...props,
+            select: {
+              ...(props.select ?? {}),
+              native: props.select?.native ?? false,
+            },
+            "onValue-change": (value: string) => emit("value-change", value),
+            "onUpdate:modelValue": (value: string) => emit("update:modelValue", value),
+          },
+          slots,
+        ),
+      ])
+    }
+  },
+})
 
 export type SearchFieldProps = Omit<InputFieldProps, "input"> & {
   input?: Omit<InputProps, "type">
@@ -104,6 +149,71 @@ export const EmailField = defineComponent({
               type: "email",
               inputMode: "email",
               autoComplete: "email",
+            },
+            "onValue-change": (value: string) => emit("value-change", value),
+            "onUpdate:modelValue": (value: string) => emit("update:modelValue", value),
+          },
+          slots,
+        ),
+      ])
+    }
+  },
+})
+
+export type DateOfBirthFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputProps, "type" | "inputMode" | "autoComplete">
+}
+
+export const DateOfBirthField = defineComponent({
+  name: "MarwesDateOfBirthField",
+  inheritAttrs: false,
+  props: [...fieldPropKeys],
+  emits: ["update:modelValue", "value-change"],
+  setup(rawProps, { slots, emit }) {
+    return () => {
+      const props = rawProps as unknown as DateOfBirthFieldProps
+      return h("div", { "data-purpose": "date-of-birth" }, [
+        h(
+          InputField,
+          {
+            ...props,
+            input: {
+              ...props.input,
+              type: "date",
+              autoComplete: "bday",
+            },
+            "onValue-change": (value: string) => emit("value-change", value),
+            "onUpdate:modelValue": (value: string) => emit("update:modelValue", value),
+          },
+          slots,
+        ),
+      ])
+    }
+  },
+})
+
+export type ZipCodeFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputProps, "type" | "inputMode" | "autoComplete">
+}
+
+export const ZipCodeField = defineComponent({
+  name: "MarwesZipCodeField",
+  inheritAttrs: false,
+  props: [...fieldPropKeys],
+  emits: ["update:modelValue", "value-change"],
+  setup(rawProps, { slots, emit }) {
+    return () => {
+      const props = rawProps as unknown as ZipCodeFieldProps
+      return h("div", { "data-purpose": "zip-code" }, [
+        h(
+          InputField,
+          {
+            ...props,
+            input: {
+              ...props.input,
+              type: "text",
+              inputMode: "numeric",
+              autoComplete: "postal-code",
             },
             "onValue-change": (value: string) => emit("value-change", value),
             "onUpdate:modelValue": (value: string) => emit("update:modelValue", value),

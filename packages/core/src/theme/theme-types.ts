@@ -108,7 +108,9 @@ export type Theme = {
 // Derivable roles (primary, danger, success, warning) accept ColorInput — a
 // plain hex string or an override object. The on* fields and secondary are
 // intentionally absent: they are derived automatically by resolveColorRole /
-// resolveSecondaryRole.
+// resolveSecondaryRole. Object-form ColorInput is the sanctioned way to keep
+// automatic role derivation while overriding fields such as label/labelDisabled
+// for brand-specific filled surfaces.
 
 import type { ColorInput } from "./color-resolve"
 import type { ToneName } from "./tone"

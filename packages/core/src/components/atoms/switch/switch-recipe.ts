@@ -5,6 +5,7 @@
  */
 
 import { resolveSwitchA11y } from "./switch-a11y"
+import { SwitchSize } from "./switch-types"
 import type { SwitchOptions, SwitchRenderKit } from "./switch-types"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -12,10 +13,13 @@ function cx(...parts: Array<string | false | undefined>): string {
 }
 
 export function createSwitchRecipe(opts: SwitchOptions): SwitchRenderKit {
+  const size = opts.size ?? SwitchSize.compact
+
   return {
     tag: "button",
     className: cx(
       "mw-switch",
+      `mw-switch--${size}`,
       opts.checked && "mw-switch--checked",
       opts.disabled && "mw-switch--disabled",
     ),

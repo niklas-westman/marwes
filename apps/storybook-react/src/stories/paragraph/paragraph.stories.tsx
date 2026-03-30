@@ -121,7 +121,7 @@ export const WithCustomClass: Story = {
     className: "custom-paragraph",
   },
   render: (args) => (
-    <Paragraph {...args} style={{ color: "var(--mw-primary)", fontStyle: "italic" }} />
+    <Paragraph {...args} style={{ color: "var(--mw-color-primary-base)", fontStyle: "italic" }} />
   ),
 }
 

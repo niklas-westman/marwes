@@ -18,14 +18,30 @@ Design Tokens
 
 ## Recommended Usage
 
-Use theme tokens and CSS variables rather than hardcoded color values.
+Use theme tokens and CSS variables rather than hardcoded color values. String color inputs keep
+automatic label contrast, while object-form color inputs let a preset or app override
+`label`/`labelDisabled` for brand fills that should force white.
 
 ```css
 .button {
-  background: var(--mw-primary);
-  color: var(--mw-primary-label);
-  border: 1px solid var(--mw-border);
+  background: var(--mw-color-primary-base);
+  color: var(--mw-color-primary-label);
+  border: 1px solid var(--mw-color-border);
 }
+```
+
+```tsx
+<MarwesProvider
+  theme={{
+    color: {
+      primary: {
+        base: "#5B8CFF",
+        label: "#FFFFFF",
+        labelDisabled: "rgba(255,255,255,0.5)",
+      },
+    },
+  }}
+/>
 ```
 
 ## Story Coverage

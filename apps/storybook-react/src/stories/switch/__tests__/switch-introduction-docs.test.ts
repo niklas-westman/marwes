@@ -15,5 +15,11 @@ describe("React switch introduction docs", () => {
     for (const variantName of variants) {
       expect(introDoc).toContain(variantName)
     }
+
+    const sizeLabels = ["compact", "wide", "rich", "24×16", "30×16", "30×20"]
+
+    for (const sizeLabel of sizeLabels) {
+      expect(introDoc).toContain(sizeLabel)
+    }
   })
 })

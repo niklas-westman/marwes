@@ -41,15 +41,15 @@ function ColorPalette() {
           <ColorSwatch
             name="Primary"
             hex={theme.color.primary.base}
-            cssVar="--mw-primary"
-            description="Rich Black - Main brand color"
+            cssVar="--mw-color-primary-base"
+            description="Brand primary color"
             usage="Buttons, links, active states"
           />
           <ColorSwatch
             name="Primary Label"
             hex={theme.color.primary.label}
-            cssVar="--mw-primary-label"
-            description="Text/icons on primary backgrounds (WCAG-derived)"
+            cssVar="--mw-color-primary-label"
+            description="Resolved text/icons on primary backgrounds"
             usage="Text on primary buttons"
           />
         </div>
@@ -71,15 +71,15 @@ function ColorPalette() {
           <ColorSwatch
             name="Secondary"
             hex={theme.color.secondary.base}
-            cssVar="--mw-secondary"
+            cssVar="--mw-color-secondary-base"
             description="Derived from primary - Secondary brand color"
             usage="Secondary buttons, backgrounds"
           />
           <ColorSwatch
             name="Secondary Label"
             hex={theme.color.secondary.label}
-            cssVar="--mw-secondary-label"
-            description="Text/icons on secondary backgrounds (WCAG-derived)"
+            cssVar="--mw-color-secondary-label"
+            description="Resolved text/icons on secondary buttons"
             usage="Text on secondary buttons"
           />
         </div>
@@ -101,45 +101,45 @@ function ColorPalette() {
           <ColorSwatch
             name="Success"
             hex={theme.color.success.base}
-            cssVar="--mw-success"
+            cssVar="--mw-color-success-base"
             description="Field Green - Positive states"
             usage="Success messages, checkmarks"
           />
           <ColorSwatch
             name="Success Label"
             hex={theme.color.success.label}
-            cssVar="--mw-success-label"
-            description="Text/icons on success backgrounds (WCAG-derived)"
+            cssVar="--mw-color-success-label"
+            description="Resolved text/icons on success backgrounds"
             usage="Text on success banners"
           />
 
           <ColorSwatch
             name="Danger"
             hex={theme.color.danger.base}
-            cssVar="--mw-danger"
+            cssVar="--mw-color-danger-base"
             description="Coral Red - Error states"
             usage="Error messages, delete actions"
           />
           <ColorSwatch
             name="Danger Label"
             hex={theme.color.danger.label}
-            cssVar="--mw-danger-label"
-            description="Text/icons on danger backgrounds (WCAG-derived)"
+            cssVar="--mw-color-danger-label"
+            description="Resolved text/icons on danger backgrounds"
             usage="Text on error banners"
           />
 
           <ColorSwatch
             name="Warning"
             hex={theme.color.warning.base}
-            cssVar="--mw-warning"
+            cssVar="--mw-color-warning-base"
             description="Amber Yellow - Warning states"
             usage="Warning messages, caution indicators"
           />
           <ColorSwatch
             name="Warning Label"
             hex={theme.color.warning.label}
-            cssVar="--mw-warning-label"
-            description="Text/icons on warning backgrounds (WCAG-derived)"
+            cssVar="--mw-color-warning-label"
+            description="Resolved text/icons on warning backgrounds"
             usage="Text on warning banners"
           />
         </div>
@@ -161,21 +161,21 @@ function ColorPalette() {
           <ColorSwatch
             name="Text"
             hex={theme.color.text}
-            cssVar="--mw-text"
+            cssVar="--mw-color-text"
             description="Default text color"
             usage="Body text, headings"
           />
           <ColorSwatch
             name="Text Muted"
             hex={theme.color.textMuted}
-            cssVar="--mw-text-muted"
+            cssVar="--mw-color-text-muted"
             description="Medium Grey - Secondary text"
             usage="Helper text, placeholders, captions"
           />
           <ColorSwatch
             name="Text Inverted"
             hex={theme.color.textInverted}
-            cssVar="--mw-text-inverted"
+            cssVar="--mw-color-text-inverted"
             description="Text on dark backgrounds"
             usage="Text on dark surfaces"
           />
@@ -198,21 +198,21 @@ function ColorPalette() {
           <ColorSwatch
             name="Background"
             hex={theme.color.background}
-            cssVar="--mw-background"
+            cssVar="--mw-color-background"
             description="Default White - Page background"
             usage="Main app background"
           />
           <ColorSwatch
             name="Surface"
             hex={theme.color.surface}
-            cssVar="--mw-surface"
+            cssVar="--mw-color-surface"
             description="Soft White - Card/panel backgrounds"
             usage="Cards, panels, dialogs"
           />
           <ColorSwatch
             name="Surface Inverted"
             hex={theme.color.surfaceInverted}
-            cssVar="--mw-surface-inverted"
+            cssVar="--mw-color-surface-inverted"
             description="Dark surface for contrast"
             usage="Dark mode surfaces, inverted UI"
           />
@@ -235,14 +235,14 @@ function ColorPalette() {
           <ColorSwatch
             name="Border"
             hex={theme.color.border}
-            cssVar="--mw-border"
+            cssVar="--mw-color-border"
             description="Light Grey - Default borders"
             usage="Input borders, dividers, outlines"
           />
           <ColorSwatch
             name="Border Subtle"
             hex={theme.color.borderSubtle}
-            cssVar="--mw-border-subtle"
+            cssVar="--mw-color-border-subtle"
             description="20% opacity black - Subtle dividers"
             usage="Subtle separators, light borders"
           />
@@ -274,13 +274,13 @@ function ColorPalette() {
               }}
             >
               {`.button {
-  background: var(--mw-primary);
-  color: var(--mw-on-primary);
-  border: 1px solid var(--mw-border);
+  background: var(--mw-color-primary-base);
+  color: var(--mw-color-primary-label);
+  border: 1px solid var(--mw-color-border);
 }
 
 .button:hover {
-  background: color-mix(in srgb, var(--mw-primary) 90%, white);
+  background: color-mix(in srgb, var(--mw-color-primary-base) 90%, white);
 }`}
             </pre>
           </div>
@@ -298,7 +298,8 @@ function ColorPalette() {
                 fontFamily: "'SF Mono', Monaco, 'Cascadia Code', monospace",
               }}
             >
-              {`<MarwesProvider
+              {`// Automatic label contrast
+<MarwesProvider
   theme={{
     color: {
       primary: "#5B8CFF",
@@ -307,7 +308,21 @@ function ColorPalette() {
 >
   <App />
 </MarwesProvider>
-// Label color is auto-derived via WCAG contrast — no onPrimary needed`}
+
+// Explicit brand override for filled text/icons
+<MarwesProvider
+  theme={{
+    color: {
+      primary: {
+        base: "#5B8CFF",
+        label: "#FFFFFF",
+        labelDisabled: "rgba(255,255,255,0.5)",
+      },
+    }
+  }}
+>
+  <App />
+</MarwesProvider>`}
             </pre>
           </div>
         </div>
@@ -334,14 +349,14 @@ export const PrimaryOnly: Story = {
         <ColorSwatch
           name="Primary"
           hex={theme.color.primary.base}
-          cssVar="--mw-primary"
-          description="Rich Black - Main brand color"
+          cssVar="--mw-color-primary-base"
+          description="Brand primary color"
         />
         <ColorSwatch
           name="Primary Label"
           hex={theme.color.primary.label}
-          cssVar="--mw-primary-label"
-          description="Text/icons on primary backgrounds (WCAG-derived)"
+          cssVar="--mw-color-primary-label"
+          description="Resolved text/icons on primary backgrounds"
         />
       </div>
     )
@@ -362,37 +377,37 @@ export const SemanticOnly: Story = {
         <ColorSwatch
           name="Success"
           hex={theme.color.success.base}
-          cssVar="--mw-success"
+          cssVar="--mw-color-success-base"
           description="Field Green - Positive states"
         />
         <ColorSwatch
           name="Success Label"
           hex={theme.color.success.label}
-          cssVar="--mw-success-label"
+          cssVar="--mw-color-success-label"
         />
 
         <ColorSwatch
           name="Danger"
           hex={theme.color.danger.base}
-          cssVar="--mw-danger"
+          cssVar="--mw-color-danger-base"
           description="Coral Red - Error states"
         />
         <ColorSwatch
           name="Danger Label"
           hex={theme.color.danger.label}
-          cssVar="--mw-danger-label"
+          cssVar="--mw-color-danger-label"
         />
 
         <ColorSwatch
           name="Warning"
           hex={theme.color.warning.base}
-          cssVar="--mw-warning"
+          cssVar="--mw-color-warning-base"
           description="Amber Yellow - Warning states"
         />
         <ColorSwatch
           name="Warning Label"
           hex={theme.color.warning.label}
-          cssVar="--mw-warning-label"
+          cssVar="--mw-color-warning-label"
         />
       </div>
     )

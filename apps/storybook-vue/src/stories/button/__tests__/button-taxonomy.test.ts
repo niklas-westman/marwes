@@ -30,10 +30,16 @@ describe("Vue button story taxonomy", () => {
   it("keeps semantic wrappers under Buttons/Purpose", () => {
     const purposeStories = [
       "cancel-button.stories.ts",
+      "close-button.stories.ts",
+      "confirm-button.stories.ts",
       "create-button.stories.ts",
       "danger-button.stories.ts",
+      "edit-button.stories.ts",
       "link-button.stories.ts",
+      "refresh-button.stories.ts",
+      "save-button.stories.ts",
       "submit-button.stories.ts",
+      "verify-button.stories.ts",
     ]
 
     for (const storyName of purposeStories) {
@@ -49,10 +55,16 @@ describe("Vue button story taxonomy", () => {
       "secondary-button.stories.ts",
       "text-button.stories.ts",
       "cancel-button.stories.ts",
+      "close-button.stories.ts",
+      "confirm-button.stories.ts",
       "create-button.stories.ts",
       "danger-button.stories.ts",
+      "edit-button.stories.ts",
       "link-button.stories.ts",
+      "refresh-button.stories.ts",
+      "save-button.stories.ts",
       "submit-button.stories.ts",
+      "verify-button.stories.ts",
     ]
 
     for (const storyName of files) {

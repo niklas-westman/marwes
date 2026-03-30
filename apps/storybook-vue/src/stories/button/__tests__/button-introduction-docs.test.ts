@@ -16,13 +16,32 @@ describe("Vue button introduction docs", () => {
       "SecondaryButton",
       "TextButton",
       "SubmitButton",
+      "SaveButton",
       "CancelButton",
+      "ConfirmButton",
+      "VerifyButton",
       "CreateButton",
+      "EditButton",
+      "UploadButton",
+      "DownloadButton",
+      "CopyButton",
+      "SearchButton",
+      "FilterButton",
+      "SortButton",
+      "DropdownButton",
       "DangerButton",
       "LinkButton",
+      "CloseButton",
+      "RefreshButton",
     ]
 
     for (const buttonName of buttonNames) {
+      expect(introDoc).toContain(buttonName)
+    }
+
+    const skippedButtonNames = ["BackButton", "NextButton", "SettingsButton"]
+
+    for (const buttonName of skippedButtonNames) {
       expect(introDoc).toContain(buttonName)
     }
   })

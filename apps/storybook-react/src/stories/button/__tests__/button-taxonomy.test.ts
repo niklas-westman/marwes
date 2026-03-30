@@ -30,10 +30,23 @@ describe("React button story taxonomy", () => {
   it("keeps semantic wrappers under Buttons/Purpose", () => {
     const purposeStories = [
       "cancel-button.stories.tsx",
+      "close-button.stories.tsx",
+      "confirm-button.stories.tsx",
       "create-button.stories.tsx",
       "danger-button.stories.tsx",
+      "download-button.stories.tsx",
+      "dropdown-button.stories.tsx",
+      "edit-button.stories.tsx",
+      "filter-button.stories.tsx",
       "link-button.stories.tsx",
+      "copy-button.stories.tsx",
+      "refresh-button.stories.tsx",
+      "save-button.stories.tsx",
+      "search-button.stories.tsx",
+      "sort-button.stories.tsx",
       "submit-button.stories.tsx",
+      "upload-button.stories.tsx",
+      "verify-button.stories.tsx",
     ]
 
     for (const storyName of purposeStories) {
@@ -49,10 +62,23 @@ describe("React button story taxonomy", () => {
       "secondary-button.stories.tsx",
       "text-button.stories.tsx",
       "cancel-button.stories.tsx",
+      "close-button.stories.tsx",
+      "confirm-button.stories.tsx",
       "create-button.stories.tsx",
       "danger-button.stories.tsx",
+      "download-button.stories.tsx",
+      "dropdown-button.stories.tsx",
+      "edit-button.stories.tsx",
+      "filter-button.stories.tsx",
       "link-button.stories.tsx",
+      "copy-button.stories.tsx",
+      "refresh-button.stories.tsx",
+      "save-button.stories.tsx",
+      "search-button.stories.tsx",
+      "sort-button.stories.tsx",
       "submit-button.stories.tsx",
+      "upload-button.stories.tsx",
+      "verify-button.stories.tsx",
     ]
 
     for (const storyName of files) {

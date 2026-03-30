@@ -4,8 +4,17 @@ import "@fontsource/instrument-sans/500.css"
 import "@fontsource/instrument-sans/600.css"
 
 // Drop-in ThemeInput for MarwesProvider.
-// Color is intentionally omitted so resolveThemeInput picks the correct per-mode default.
+// firstEdition carries an explicit brand primary plus a white label override so
+// filled controls render with the preset brand contrast instead of the generic
+// WCAG-derived default for this blue.
 export const firstEditionTheme: ThemeInput = {
+  color: {
+    primary: {
+      base: "#5B8CFF",
+      label: "#FFFFFF",
+      labelDisabled: "rgba(255,255,255,0.5)",
+    },
+  },
   font: { primary: "Instrument Sans, system-ui, -apple-system, sans-serif" },
   ui: { radius: 4, density: "comfortable" },
 }

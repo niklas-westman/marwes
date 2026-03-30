@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 import { PreviewSection, SectionDescription, SectionTitle } from "./section.styles"
 
-const COLOR_STATES = ["base", "hover", "pressed", "disabled"] as const
+const COLOR_SWATCHES = ["base", "hover", "pressed", "disabled", "label"] as const
 
 const SwatchContainer = styled.div`
   margin-bottom: 16px;
@@ -43,18 +43,25 @@ function SwatchRow({ colorRole }: { colorRole: string }): JSX.Element {
     <SwatchContainer>
       <SwatchRoleLabel>{colorRole}</SwatchRoleLabel>
       <SwatchGrid>
-        {COLOR_STATES.map((state) => (
-          <Swatch
-            key={state}
-            style={{
-              background: `var(--mw-color-${colorRole}-${state})`,
-              color: `var(--mw-color-${colorRole}-label)`,
-            }}
-          >
-            {state}
-            <span>{`--mw-color-${colorRole}-${state}`}</span>
-          </Swatch>
-        ))}
+        {COLOR_SWATCHES.map((state) => {
+          const background =
+            state === "label"
+              ? `var(--mw-color-${colorRole}-base)`
+              : `var(--mw-color-${colorRole}-${state})`
+
+          return (
+            <Swatch
+              key={state}
+              style={{
+                background,
+                color: `var(--mw-color-${colorRole}-label)`,
+              }}
+            >
+              {state}
+              <span>{`--mw-color-${colorRole}-${state}`}</span>
+            </Swatch>
+          )
+        })}
       </SwatchGrid>
     </SwatchContainer>
   )
@@ -65,8 +72,9 @@ function ColorPaletteSection(): JSX.Element {
     <PreviewSection>
       <SectionTitle>Derived Color Palette</SectionTitle>
       <SectionDescription>
-        Each swatch is rendered from CSS variables derived automatically from the hex value you
-        picked in the sidebar.
+        String theme colors derive hover, pressed, disabled, and label tokens automatically.
+        Object-form color inputs can override `label` and `labelDisabled` when a preset or app wants
+        white text/icons on a brand fill.
       </SectionDescription>
       <SwatchRow colorRole="primary" />
       <SwatchRow colorRole="danger" />

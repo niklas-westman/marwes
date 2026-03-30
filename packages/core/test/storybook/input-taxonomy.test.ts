@@ -12,10 +12,18 @@ const vueLegacyFieldStoriesDirectory = resolve(
 
 const expectedInputTitles = new Set([
   "Input/Introduction",
+  "Input/Atom/Input",
+  "Input/Atom/Select",
+  "Input/Atom/Textarea",
   "Input/Molecule/InputField",
+  "Input/Molecule/SelectField",
+  "Input/Molecule/TextareaField",
+  "Input/Purpose/DropdownField",
   "Input/Purpose/SearchField",
   "Input/Purpose/PasswordField",
   "Input/Purpose/EmailField",
+  "Input/Purpose/DateOfBirthField",
+  "Input/Purpose/ZipCodeField",
   "Input/Purpose/PhoneField",
   "Input/Purpose/URLField",
   "Input/Purpose/CurrencyField",

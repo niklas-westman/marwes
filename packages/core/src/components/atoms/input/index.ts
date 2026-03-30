@@ -6,3 +6,24 @@ export type {
 } from "./input-types"
 
 export { createInputRecipe } from "./input-recipe"
+
+export type {
+  SelectAppearance,
+  SelectMode,
+  SelectOptions,
+  SelectRenderKit,
+  SelectA11yProps,
+  SelectOption,
+} from "./select-types"
+
+export { createSelectRecipe } from "./select-recipe"
+export { resolveSelectMode } from "./select-types"
+
+export type {
+  TextareaOptions,
+  TextareaRenderKit,
+  TextareaA11yProps,
+  TextareaResize,
+} from "./textarea-types"
+
+export { createTextareaRecipe } from "./textarea-recipe"

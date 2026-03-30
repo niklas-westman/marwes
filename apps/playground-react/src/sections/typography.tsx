@@ -16,7 +16,8 @@ function TypographySection(): JSX.Element {
       </Paragraph>
       <Paragraph>
         Default body text. Color roles are derived from a single hex value — hover, pressed,
-        disabled, and label contrast are all computed automatically.
+        disabled, and label contrast are all computed automatically unless a preset or app
+        explicitly overrides the label token for a brand color.
       </Paragraph>
       <Paragraph size="sm">
         Small paragraph for captions, helper text, and secondary information.

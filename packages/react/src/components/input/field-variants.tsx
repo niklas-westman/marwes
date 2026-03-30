@@ -2,6 +2,8 @@ import { buildCurrencyHelperText } from "@marwes-ui/core"
 import type * as React from "react"
 import type { InputProps } from "./input"
 import { InputField, type InputFieldProps } from "./input-field"
+import type { SelectProps } from "./select"
+import { SelectField, type SelectFieldProps } from "./select-field"
 
 /**
  * Field Variants - AI-Friendly Components
@@ -13,6 +15,61 @@ import { InputField, type InputFieldProps } from "./input-field"
  * Each variant manages its own purpose-specific logic (password toggle,
  * search clear, etc.) and sets appropriate semantic attributes.
  */
+
+// ============================================================================
+// DROPDOWN FIELD - Figma dropdown wrapper
+// ============================================================================
+
+export type DropdownFieldProps = Omit<SelectFieldProps, "select"> & {
+  /**
+   * Select-specific props. Use `native` to opt back into the browser dropdown.
+   */
+  select: Omit<SelectProps, "appearance"> & {
+    native?: boolean
+  }
+}
+
+/**
+ * DropdownField - For the Figma-aligned dropdown presentation.
+ *
+ * **AI Context:**
+ * - Reuses `SelectField` accessibility and state wiring
+ * - Defaults to the Marwes dropdown presentation
+ * - Allows `native={true}` to fall back to the browser dropdown
+ * - Adds `data-purpose="dropdown"` for semantic parsing
+ *
+ * **Features:**
+ * - Same label/helper/error contract as `SelectField`
+ * - Controlled and uncontrolled modes supported
+ * - Prevents API drift between generic select and dropdown styling
+ *
+ * @example
+ * ```tsx
+ * <DropdownField
+ *   label="Country"
+ *   select={{
+ *     placeholder: "Choose a country",
+ *     options: [
+ *       { value: "se", label: "Sweden" },
+ *       { value: "us", label: "United States" },
+ *     ],
+ *   }}
+ * />
+ * ```
+ */
+export function DropdownField(props: DropdownFieldProps): React.ReactElement {
+  return (
+    <div data-purpose="dropdown">
+      <SelectField
+        {...props}
+        select={{
+          ...props.select,
+          native: props.select.native ?? false,
+        }}
+      />
+    </div>
+  )
+}
 
 // ============================================================================
 // SEARCH FIELD - Search inputs with clear button
@@ -188,6 +245,84 @@ export function EmailField(props: EmailFieldProps): React.ReactElement {
 
   return (
     <div data-purpose="email">
+      <InputField {...props} input={enhancedInput} />
+    </div>
+  )
+}
+
+// ============================================================================
+// DATE OF BIRTH FIELD - Birthday inputs with native date semantics
+// ============================================================================
+
+export type DateOfBirthFieldProps = Omit<InputFieldProps, "input"> & {
+  /**
+   * Input-specific props (type, inputMode, autoComplete auto-set)
+   */
+  input?: Omit<InputProps, "type" | "inputMode" | "autoComplete">
+}
+
+/**
+ * DateOfBirthField - For birthday inputs with native date semantics.
+ *
+ * **AI Context:**
+ * - Sets `type="date"` for native browser date controls
+ * - Sets `autoComplete="bday"` for profile/password-manager autofill
+ * - Adds `data-purpose="date-of-birth"` for AI parsing
+ *
+ * **Features:**
+ * - Native date picker where the platform supports it
+ * - ISO value handling (`YYYY-MM-DD`) for predictable form state
+ * - Keeps the same label/helper/error contract as `InputField`
+ */
+export function DateOfBirthField(props: DateOfBirthFieldProps): React.ReactElement {
+  const enhancedInput: InputProps = {
+    ...props.input,
+    type: "date",
+    autoComplete: "bday",
+  }
+
+  return (
+    <div data-purpose="date-of-birth">
+      <InputField {...props} input={enhancedInput} />
+    </div>
+  )
+}
+
+// ============================================================================
+// ZIP CODE FIELD - Postal code inputs with low-regret semantics
+// ============================================================================
+
+export type ZipCodeFieldProps = Omit<InputFieldProps, "input"> & {
+  /**
+   * Input-specific props (type, inputMode, autoComplete auto-set)
+   */
+  input?: Omit<InputProps, "type" | "inputMode" | "autoComplete">
+}
+
+/**
+ * ZipCodeField - For postal/ZIP code inputs that should keep text semantics.
+ *
+ * **AI Context:**
+ * - Sets `type="text"` to preserve leading zeros
+ * - Sets `inputMode="numeric"` for the mobile number keypad
+ * - Sets `autoComplete="postal-code"` for address autofill
+ * - Adds `data-purpose="zip-code"` for AI parsing
+ *
+ * **Features:**
+ * - Low-regret default for US ZIP and broader postal-code entry
+ * - Avoids number-input quirks like spinner UI and lost leading zeroes
+ * - Keeps the same label/helper/error contract as `InputField`
+ */
+export function ZipCodeField(props: ZipCodeFieldProps): React.ReactElement {
+  const enhancedInput: InputProps = {
+    ...props.input,
+    type: "text",
+    inputMode: "numeric",
+    autoComplete: "postal-code",
+  }
+
+  return (
+    <div data-purpose="zip-code">
       <InputField {...props} input={enhancedInput} />
     </div>
   )

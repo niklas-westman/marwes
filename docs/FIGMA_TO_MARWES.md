@@ -49,13 +49,13 @@ ThemeInput (consumer API)
         → CSS custom properties on provider element
 ```
 
-Derivable color roles (`primary`, `danger`, `success`, `warning`) accept a `ColorInput` — either a plain hex string or an override object. All interaction states (hover, pressed, disabled, label) are auto-derived. `secondary` and `info` are always derived from `primary` — never configured directly.
+Derivable color roles (`primary`, `danger`, `success`, `warning`) accept a `ColorInput` — either a plain hex string or an override object. String input auto-derives interaction states (hover, pressed, disabled, label); object input can override derived fields such as `label` and `labelDisabled` for brand-specific filled surfaces. `secondary` and `info` are always derived from `primary` — never configured directly.
 
 ## Token Mapping
 
 ### Color Roles (derived)
 
-Each role produces 6 CSS variables. Labels are auto-derived via WCAG contrast.
+Each role produces 6 CSS variables. Labels are auto-derived via WCAG contrast by default, but can be explicitly overridden through object-form `ColorInput`.
 
 | Figma token | ThemeInput key | CSS variables |
 |---|---|---|

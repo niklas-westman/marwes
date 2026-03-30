@@ -64,7 +64,7 @@ export const WithCustomClass: Story = {
   render: () => ({
     components: { H1 },
     template: `
-      <H1 class="custom-class" style="color: var(--mw-primary);">
+      <H1 class="custom-class" style="color: var(--mw-color-primary-base);">
         Styled Heading
       </H1>
     `,

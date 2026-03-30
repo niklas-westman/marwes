@@ -15,7 +15,7 @@ export type InputOptions = {
   required?: boolean
 
   inputMode?: "text" | "email" | "numeric" | "tel" | "url" | "search" | "decimal"
-  type?: "text" | "email" | "password" | "search" | "tel" | "url"
+  type?: "text" | "email" | "password" | "search" | "tel" | "url" | "date"
 
   autoComplete?: string
 

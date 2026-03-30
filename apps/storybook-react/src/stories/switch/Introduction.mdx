@@ -94,7 +94,7 @@ const [enabled, setEnabled] = React.useState(false)
 Use the raw `Switch` atom when you need a custom layout or non-standard composition:
 
 ```tsx
-import { Switch } from "@marwes-ui/react"
+import { Switch, SwitchSize } from "@marwes-ui/react"
 
 const [enabled, setEnabled] = React.useState(false)
 
@@ -102,6 +102,7 @@ const [enabled, setEnabled] = React.useState(false)
   <Switch
     checked={enabled}
     onCheckedChange={setEnabled}
+    size={SwitchSize.wide}
     ariaLabel="Enable notifications"
   />
   <span>Enable notifications</span>
@@ -112,6 +113,22 @@ const [enabled, setEnabled] = React.useState(false)
 > - Providing an accessible name via visible content, `ariaLabel`, or `aria-labelledby`
 > - Wiring any supporting text through `aria-describedby`
 > - Managing checked state in the parent
+
+## Size API
+
+`Switch` supports three Figma-matched sizes. `compact` remains the default.
+
+- `compact` - 24×16 track with 12px thumb
+- `wide` - 30×16 track with 12px thumb
+- `rich` - 30×20 track with 16px thumb
+
+```tsx
+import { Switch, SwitchSize } from "@marwes-ui/react"
+
+<Switch size={SwitchSize.compact} ariaLabel="Compact switch" />
+<Switch size={SwitchSize.wide} ariaLabel="Wide switch" />
+<Switch size={SwitchSize.rich} ariaLabel="Rich switch" />
+```
 
 ## Component Reference
 

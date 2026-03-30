@@ -2,6 +2,7 @@ import { storybookLayout } from "@marwes-ui/core"
 import { SwitchField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta: Meta<typeof SwitchField> = {
   title: "Switch/Molecule",
@@ -22,6 +23,7 @@ export const Playground: Story = {
       checked: false,
     },
   },
+  render: createToggleableSwitchFieldRender(SwitchField),
 }
 
 export const Controlled: Story = {
@@ -49,6 +51,7 @@ export const WithError: Story = {
       checked: false,
     },
   },
+  render: createToggleableSwitchFieldRender(SwitchField),
 }
 
 export const Disabled: Story = {

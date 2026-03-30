@@ -3,6 +3,7 @@ import type { PermissionSwitchProps } from "@marwes-ui/vue"
 import { PermissionSwitch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+import { createToggleableSwitchFieldRender } from "./story-helpers"
 
 const meta = {
   title: "Switch/Purpose/Permission",
@@ -23,6 +24,7 @@ export const Default: Story = {
       checked: true,
     },
   },
+  render: createToggleableSwitchFieldRender("PermissionSwitch", PermissionSwitch),
 }
 
 export const Controlled: Story = {

@@ -32,31 +32,28 @@ Marwes uses a **layered testing strategy** matching the 3-layer architecture:
 
 import { describe, it, expect } from 'vitest'
 import { createButtonRecipe } from '../button-recipe'
-import { defaultTheme } from '../../../theme/theme-defaults'
 
 describe('createButtonRecipe', () => {
-  it('should create solid primary button RenderKit', () => {
-    const kit = createButtonRecipe(defaultTheme, {
-      variant: 'solid',
-      tone: 'primary'
+  it('should create primary button RenderKit', () => {
+    const kit = createButtonRecipe({
+      variant: 'primary'
     })
 
     expect(kit.tag).toBe('button')
-    expect(kit.className).toContain('mw-btn--solid')
     expect(kit.className).toContain('mw-btn--primary')
-    expect(kit.vars['--mw-primary']).toBe(defaultTheme.color.primary)
+    expect(kit.vars).toEqual({})
     expect(kit.a11y.type).toBe('button')
   })
 
   it('should handle disabled state correctly', () => {
-    const kit = createButtonRecipe(defaultTheme, { disabled: true })
+    const kit = createButtonRecipe({ disabled: true })
 
     expect(kit.a11y.disabled).toBe(true)
     expect(kit.a11y.ariaDisabled).toBe(true)
   })
 
   it('should render as link when href is provided', () => {
-    const kit = createButtonRecipe(defaultTheme, { 
+    const kit = createButtonRecipe({ 
       href: '/home',
       as: 'a' 
     })
@@ -128,13 +125,12 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('should apply correct classes for variant and tone', () => {
+  it('should apply correct classes for variant', () => {
     renderWithProvider(
-      <Button variant="solid" tone="primary">Button</Button>
+      <Button variant="primary">Button</Button>
     )
     
     const button = screen.getByRole('button')
-    expect(button.className).toContain('mw-btn--solid')
     expect(button.className).toContain('mw-btn--primary')
   })
 

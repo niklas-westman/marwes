@@ -12,6 +12,7 @@ export type SwitchProps = SwitchOptions & {
 }
 
 const switchPropKeys = [
+  "size",
   "checked",
   "modelValue",
   "disabled",
@@ -30,6 +31,7 @@ export const Switch = defineComponent(
 
     const kit = computed(() => {
       const opts: SwitchOptions = {}
+      if (props.size !== undefined) opts.size = props.size
       const checked = props.modelValue ?? props.checked
       if (checked !== undefined) opts.checked = checked
       if (props.disabled !== undefined) opts.disabled = props.disabled

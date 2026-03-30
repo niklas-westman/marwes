@@ -6,7 +6,7 @@ Framework-agnostic button logic for Marwes.
 
 - **[button-types.ts](button-types.ts)** - TypeScript interfaces for Button options, a11y props, and render kit
 - **[button-a11y.ts](button-a11y.ts)** - Accessibility logic: maps props → ARIA attributes + semantic behavior
-- **[button-recipe.ts](button-recipe.ts)** - Main recipe: combines theme + options → RenderKit (className, vars, a11y)
+- **[button-recipe.ts](button-recipe.ts)** - Main recipe: combines options → RenderKit (className, vars, a11y)
 - **[index.ts](index.ts)** - Public exports
 
 ## Flow: How Button Works
@@ -14,20 +14,19 @@ Framework-agnostic button logic for Marwes.
 ```
 User Code (React)
   ↓
-<Button variant="solid" tone="primary">Save</Button>
+<Button variant="primary">Save</Button>
   ↓
-[@marwes-ui/react] button.tsx calls createButtonRecipe(theme, props)
+[@marwes-ui/react] button.tsx calls createButtonRecipe(props)
   ↓
 [@marwes-ui/core] button-recipe.ts
   ├─ resolveButtonA11y(opts) → { tag, a11y, blockClick }
-  ├─ Build className: "mw-btn mw-btn--solid mw-btn--primary"
-  └─ Build CSS vars: { "--mw-primary": "#5B8CFF", ... }
+  └─ Build className: "mw-btn mw-btn--md mw-btn--primary"
   ↓
 Returns RenderKit:
 {
   tag: "button",
-  className: "mw-btn mw-btn--solid mw-btn--primary",
-  vars: { "--mw-primary": "#5B8CFF", "--mw-radius": "10px" },
+  className: "mw-btn mw-btn--md mw-btn--primary",
+  vars: {},
   a11y: { type: "button", disabled: false },
   blockClick: false
 }
@@ -50,14 +49,13 @@ Browser renders styled, accessible button
 ```tsx
 import { Button } from "@marwes-ui/react";
 
-<Button variant="solid" tone="primary" onClick={handleClick}>
+<Button variant="primary" onClick={handleClick}>
   Save Changes
 </Button>
 
 // Renders:
 <button 
-  class="mw-btn mw-btn--solid mw-btn--primary"
-  style="--mw-primary: #5B8CFF; --mw-radius: 10px"
+  class="mw-btn mw-btn--md mw-btn--primary"
   type="button"
 >
   Save Changes
@@ -67,21 +65,16 @@ import { Button } from "@marwes-ui/react";
 ## RenderKit Output Example
 
 ```ts
-createButtonRecipe(theme, { 
-  variant: "outline", 
-  tone: "secondary",
-  disabled: true 
+createButtonRecipe({
+  variant: "secondary",
+  disabled: true,
 })
 
 // Returns:
 {
   tag: "button",
-  className: "mw-btn mw-btn--outline mw-btn--secondary",
-  vars: {
-    "--mw-primary": "#5B8CFF",
-    "--mw-secondary": "#111111",
-    "--mw-radius": "10px"
-  },
+  className: "mw-btn mw-btn--md mw-btn--secondary",
+  vars: {},
   a11y: {
     type: "button",
     disabled: true,

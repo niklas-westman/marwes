@@ -22,6 +22,7 @@ export const buttonVariantVisualStyles: LabeledCopy[] = [
   { label: "primary", text: "Filled, high emphasis (main actions)" },
   { label: "secondary", text: "Outlined, medium emphasis (secondary actions)" },
   { label: "text", text: "Minimal, low emphasis (tertiary/inline actions)" },
+  { label: "success", text: "Filled, positive emphasis (confirm/verify actions)" },
 ]
 
 export const buttonActionSemanticPurposes: LabeledCopy[] = [
@@ -68,6 +69,20 @@ export const fieldComparisonRows: FieldComparisonRow[] = [
     inputMode: "email",
     autoComplete: "email",
     features: "Email validation, @ keyboard",
+  },
+  {
+    field: "DateOfBirthField",
+    type: "date",
+    inputMode: "-",
+    autoComplete: "bday",
+    features: "Native date picker, birthday autofill",
+  },
+  {
+    field: "ZipCodeField",
+    type: "text",
+    inputMode: "numeric",
+    autoComplete: "postal-code",
+    features: "Numeric keypad, preserves leading zeros",
   },
   {
     field: "PhoneField",

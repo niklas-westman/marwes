@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import { resolveThemeInput } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 import { firstEditionTheme } from "../src/firstEdition"
 
@@ -22,13 +23,24 @@ describe("@marwes-ui/presets package exports", () => {
     expect(existsSync(resolve(pkgDir, "src/firstEdition/index.ts"))).toBe(true)
   })
 
-  it("firstEditionTheme is a valid ThemeInput with expected font and ui fields", () => {
+  it("firstEditionTheme is a valid ThemeInput with expected brand, font, and ui fields", () => {
+    expect(firstEditionTheme.color?.primary).toEqual({
+      base: "#5B8CFF",
+      label: "#FFFFFF",
+      labelDisabled: "rgba(255,255,255,0.5)",
+    })
     expect(firstEditionTheme.font?.primary).toContain("Instrument Sans")
     expect(firstEditionTheme.ui?.radius).toBe(4)
     expect(firstEditionTheme.ui?.density).toBe("comfortable")
     // Must NOT include icon — removed from ThemeInput in Phase 0
     expect((firstEditionTheme as Record<string, unknown>).icon).toBeUndefined()
-    // Must NOT include color — color is intentionally omitted so mode-defaults apply
-    expect(firstEditionTheme.color).toBeUndefined()
+  })
+
+  it("firstEditionTheme resolves a white primary label for filled components", () => {
+    const resolved = resolveThemeInput(firstEditionTheme)
+
+    expect(resolved.color.primary.base).toBe("#5B8CFF")
+    expect(resolved.color.primary.label).toBe("#FFFFFF")
+    expect(resolved.color.primary.labelDisabled).toBe("rgba(255,255,255,0.5)")
   })
 })
