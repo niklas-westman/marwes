@@ -7,9 +7,17 @@ export interface ToastProps extends ToastOptions {
   onDismiss?: () => void
   className?: string
   id?: string
+  dataAttributes?: Record<string, string>
 }
 
-const toastPropKeys = ["variant", "ariaLive", "onDismiss", "className", "id"] as const
+const toastPropKeys = [
+  "variant",
+  "ariaLive",
+  "onDismiss",
+  "className",
+  "id",
+  "dataAttributes",
+] as const
 
 export const Toast = defineComponent(
   (props: ToastProps, { slots }) => {
@@ -50,6 +58,7 @@ export const Toast = defineComponent(
         "div",
         {
           ...passthroughAttrs,
+          ...(props.dataAttributes ?? {}),
           id: props.id,
           class: className,
           role: a11y.role,

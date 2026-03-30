@@ -4,6 +4,9 @@
 
 Upgrade all components to the gold-standard Atom → Molecule → Purpose pattern established by Accordion, Badge, Button, Checkbox, and Input.
 
+Completed so far: **Radio, Switch, Card, Tab, Toast**.
+Next up: **Divider**.
+
 Each component gets:
 
 - **Folder-based story structure** with `Introduction.mdx` and `__tests__/`
@@ -15,8 +18,7 @@ Each component gets:
 
 | Tier | Components | Work |
 | ---- | ---------- | ---- |
-| **A — Tests only** | Radio | Add `__tests__/` |
-| **B — Molecule + Purpose** | Switch, Card, Tab, Toast | New code + stories + docs + tests |
+| **Done** | Radio, Switch, Card, Tab, Toast | Completed in React + Vue with stories, docs, tests, exports, and preset support where needed |
 | **C — Structure migration** | Divider, Heading, Icon, Paragraph | Move files, update titles, rewrite docs, add tests |
 
 ## Execution Order
@@ -25,31 +27,28 @@ One component at a time. Fully complete before moving on.
 
 | # | Component | Effort | Why |
 | --- | --------- | ------ | --- |
-| 1 | **Radio** | ~5 min | Copy taxonomy/docs tests from Badge, change names |
-| 2 | **Switch** | ~45 min | SwitchField ≈ CheckboxField, same pattern |
-| 3 | **Card** | ~30 min | Purpose variants only — no molecule needed |
-| 4 | **Tab** | ~2 hrs | TabGroup with keyboard nav is genuinely complex |
-| 5 | **Toast** | ~3 hrs | ToastContainer + useToast hook, new imperative pattern |
-| 6 | **Divider** | ~15 min | Move to folder, update title, rewrite docs, add tests |
-| 7 | **Heading** | ~15 min | Same as Divider |
-| 8 | **Paragraph** | ~15 min | Same as Divider |
-| 9 | **Icon** | ~15 min | Same as Divider |
-| | **Total** | **~5–6 hrs** | |
+| 1 | **Radio** | Done | Taxonomy/docs tests added |
+| 2 | **Switch** | Done | Molecule + purpose variants shipped |
+| 3 | **Card** | Done | Purpose variants + docs/tests shipped |
+| 4 | **Tab** | Done | TabGroup, TabPanel, purpose variants, docs/tests shipped |
+| 5 | **Toast** | Done | ToastContainer + useToast hook, new imperative pattern |
+| 6 | **Divider** | Next | Move to folder, update title, rewrite docs, add tests |
+| 7 | **Heading** | Queued | Same as Divider |
+| 8 | **Paragraph** | Queued | Same as Divider |
+| 9 | **Icon** | Queued | Same as Divider |
+| | **Remaining** | **~1.5–2 hrs** | Tier C migrations |
 
 ## Per-Component Plans
 
 ### 1. Radio (Tier A)
 
-**Status:** ✅ Atom/Molecule/Purpose stories + rich Introduction.mdx. ❌ Missing `__tests__/`.
+**Status:** ✅ Complete.
 
-**Deliverables:**
-
-- `apps/storybook-react/src/stories/radio/__tests__/radio-taxonomy.test.ts`
-- `apps/storybook-react/src/stories/radio/__tests__/radio-introduction-docs.test.ts`
+React + Vue Storybook docs/tests are in place.
 
 ### 2. Switch (Tier B)
 
-**Status:** Atom only. Missing `onCheckedChange`, no molecule, no purpose variants.
+**Status:** ✅ Complete.
 
 | Layer | Files |
 | ----- | ----- |
@@ -66,7 +65,7 @@ One component at a time. Fully complete before moving on.
 
 ### 3. Card (Tier B — Purpose Only)
 
-**Status:** Atom only. Empty `CardOptions`.
+**Status:** ✅ Complete.
 
 | Layer | Files |
 | ----- | ----- |
@@ -82,7 +81,7 @@ One component at a time. Fully complete before moving on.
 
 ### 4. Tab (Tier B)
 
-**Status:** Atom only. Tab is a single button — no tablist, tabpanel, keyboard nav.
+**Status:** ✅ Complete.
 
 | Layer | Files |
 | ----- | ----- |
@@ -96,11 +95,11 @@ One component at a time. Fully complete before moving on.
 | Tests | `__tests__/tab-taxonomy.test.ts`, `tab-introduction-docs.test.ts` |
 | Exports | Update `packages/react/src/index.ts` |
 
-**Note:** Most complex molecule — keyboard navigation and panel management.
+**Delivered:** `TabGroup`, `TabPanel`, keyboard navigation, purpose variants, preset CSS, React/Vue Storybook docs/tests, and package exports.
 
 ### 5. Toast (Tier B)
 
-**Status:** Atom only. No toast management exists in the codebase.
+**Status:** ✅ Complete.
 
 | Layer | Files |
 | ----- | ----- |
@@ -114,7 +113,7 @@ One component at a time. Fully complete before moving on.
 | Tests | `__tests__/toast-taxonomy.test.ts`, `toast-introduction-docs.test.ts` |
 | Exports | Update `packages/react/src/index.ts` |
 
-**Note:** Heaviest lift. Introduces imperative `useToast()` pattern + `ToastProvider` context.
+**Delivered:** `ToastContainer`, `ToastProvider`, `useToast`, purpose variants, preset CSS, React/Vue Storybook docs/tests, and package exports.
 
 ### 6–9. Divider, Heading, Paragraph, Icon (Tier C)
 
@@ -136,7 +135,7 @@ One component at a time. Fully complete before moving on.
 
 ## Cross-Cutting
 
-- **Exports:** New molecules/variants added to `packages/react/src/index.ts`
+- **Exports:** New molecules/variants added to `packages/react/src/index.ts` and `packages/vue/src/index.ts`
 - **Vue parity:** Every React molecule/variant gets a Vue mirror
 - **Preset CSS:** New molecules need CSS in `packages/presets/src/firstEdition/molecules/` + import in `styles.css`
 - **Core docs-copy:** Each component with purpose variants needs `*WhyPurposeComponents` + `*PurposeComponentReference` in `docs-copy.ts`
@@ -144,7 +143,7 @@ One component at a time. Fully complete before moving on.
 ## Verification (after each component)
 
 ```bash
+pnpm typecheck
 pnpm test
-pnpm tsc --noEmit
 pnpm lint
 ```

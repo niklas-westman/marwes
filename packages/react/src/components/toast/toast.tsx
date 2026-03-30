@@ -2,6 +2,10 @@ import { createToastRecipe } from "@marwes-ui/core"
 import type { ToastOptions } from "@marwes-ui/core"
 import type * as React from "react"
 
+function cx(...parts: Array<string | false | undefined>): string {
+  return parts.filter(Boolean).join(" ")
+}
+
 export interface ToastProps extends ToastOptions {
   /** Main notification message */
   children: React.ReactNode
@@ -13,20 +17,22 @@ export interface ToastProps extends ToastOptions {
   onDismiss?: () => void
   className?: string
   id?: string
+  dataAttributes?: Record<string, string>
 }
 
 export function Toast(props: ToastProps): React.ReactElement {
-  const { children, icon, action, onDismiss, className, id, ...coreProps } = props
+  const { children, icon, action, onDismiss, className, id, dataAttributes, ...coreProps } = props
   const kit = createToastRecipe(coreProps)
   const { a11y } = kit
 
   return (
     <div
       id={id}
-      className={[kit.className, className].filter(Boolean).join(" ")}
+      className={cx(kit.className, className)}
       role={a11y.role}
       aria-live={a11y.ariaLive}
       aria-atomic="true"
+      {...dataAttributes}
     >
       {icon && (
         <span className="mw-toast__icon" aria-hidden="true">

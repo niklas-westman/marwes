@@ -226,3 +226,117 @@ export const switchPurposeComponentReference: LabeledCopy[] = [
     text: 'Access control or permissions toggle — data-purpose="permission"',
   },
 ]
+
+export const cardWhyPurposeComponents: LabeledCopy[] = [
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  {
+    label: "Consistent UX",
+    text: "enforces semantic card patterns across your app",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces a Card with preconfigured data attributes",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (ProductCard vs generic Card)",
+  },
+]
+
+export const cardPurposeComponentReference: LabeledCopy[] = [
+  {
+    label: "ProductCard",
+    text: 'Product summaries and catalog surfaces — data-purpose="product-card"',
+  },
+  {
+    label: "ProfileCard",
+    text: 'People, team, or identity summaries — data-purpose="profile-card"',
+  },
+  {
+    label: "StatCard",
+    text: 'Metric snapshots and KPI highlights — data-purpose="stat-card"',
+  },
+]
+
+export const tabWhyPurposeComponents: LabeledCopy[] = [
+  {
+    label: "Pre-configured tab sets",
+    text: "common navigation patterns ship with labels, order, and metadata already in place",
+  },
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  {
+    label: "Consistent UX",
+    text: "enforces accessible tablist, roving focus, and tabpanel wiring across your app",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces a TabGroup plus repeated panel and keyboard setup",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (SettingsTabs vs generic TabGroup)",
+  },
+]
+
+export const tabPurposeComponentReference: LabeledCopy[] = [
+  {
+    label: "NavigationTabs",
+    text: 'Section switching for peer views — data-purpose="navigation-tabs"',
+  },
+  {
+    label: "ContentTabs",
+    text: 'Segmented content presentation — data-purpose="content-tabs"',
+  },
+  {
+    label: "SettingsTabs",
+    text: 'Grouped settings surfaces and admin sections — data-purpose="settings-tabs"',
+  },
+]
+
+export const toastWhyPurposeComponents: LabeledCopy[] = [
+  {
+    label: "Status semantics built in",
+    text: "success, error, warning, and info toasts ship with matching icons and urgency defaults",
+  },
+  {
+    label: "Consistent feedback UX",
+    text: "keeps transient messaging visually and behaviorally consistent across surfaces",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces repeated icon, aria-live, and metadata setup",
+  },
+  {
+    label: "Imperative workflow support",
+    text: "pairs naturally with ToastProvider and useToast for action-driven feedback flows",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (ErrorToast vs generic Toast)",
+  },
+]
+
+export const toastPurposeComponentReference: LabeledCopy[] = [
+  {
+    label: "SuccessToast",
+    text: 'Positive completion and confirmation feedback — data-purpose="success-toast"',
+  },
+  {
+    label: "ErrorToast",
+    text: 'Failed actions, blocking issues, and urgent alerts — data-purpose="error-toast"',
+  },
+  {
+    label: "WarningToast",
+    text: 'Cautionary states and risky follow-up actions — data-purpose="warning-toast"',
+  },
+  {
+    label: "InfoToast",
+    text: 'Contextual notices and neutral updates — data-purpose="info-toast"',
+  },
+]

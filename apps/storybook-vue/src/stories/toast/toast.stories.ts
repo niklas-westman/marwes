@@ -22,11 +22,16 @@ type Story = StoryObj<ToastProps>
 export const Default: Story = {
   render: () => ({
     components: { Toast },
-    template: "<Toast>Your changes have been saved.</Toast>",
+    template: `
+      <Toast>
+        Your changes have been saved.
+        <template #action>Close</template>
+      </Toast>
+    `,
   }),
 }
 
-export const WithDismiss: Story = {
+export const DismissIconEscapeHatch: Story = {
   render: () => ({
     components: { Toast },
     setup() {
@@ -36,16 +41,29 @@ export const WithDismiss: Story = {
   }),
 }
 
+export const WithCustomAction: Story = {
+  render: () => ({
+    components: { Toast },
+    template: `
+      <Toast>
+        File uploaded successfully.
+        <template #action>View file</template>
+      </Toast>
+    `,
+  }),
+}
+
 export const AllVariants: Story = {
   render: () => ({
     components: { Toast },
     setup() {
-      return { variants: VARIANTS, onDismiss: () => {} }
+      return { variants: VARIANTS }
     },
     template: `
       <div style="display: flex; flex-direction: column; gap: 12px;">
-        <Toast v-for="v in variants" :key="v" :variant="v" :onDismiss="onDismiss">
+        <Toast v-for="v in variants" :key="v" :variant="v">
           {{ v.charAt(0).toUpperCase() + v.slice(1) }} — Your changes have been saved.
+          <template #action>Close</template>
         </Toast>
       </div>
     `,
@@ -56,12 +74,13 @@ export const DarkVariants: Story = {
   render: () => ({
     components: { Toast },
     setup() {
-      return { variants: VARIANTS, onDismiss: () => {} }
+      return { variants: VARIANTS }
     },
     template: `
       <div class="mw-theme--dark" style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: #111827; border-radius: 8px;">
-        <Toast v-for="v in variants" :key="v" :variant="v" :onDismiss="onDismiss">
+        <Toast v-for="v in variants" :key="v" :variant="v">
           {{ v.charAt(0).toUpperCase() + v.slice(1) }} — Dark mode toast.
+          <template #action>Close</template>
         </Toast>
       </div>
     `,

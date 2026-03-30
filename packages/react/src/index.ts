@@ -82,12 +82,37 @@ export { Paragraph } from "./components/paragraph"
 export type { ParagraphProps } from "./components/paragraph"
 
 /* Card */
-export { Card } from "./components/card"
-export type { CardProps } from "./components/card"
+export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"
+export type {
+  CardProps,
+  ProductCardProps,
+  ProfileCardProps,
+  StatCardProps,
+} from "./components/card"
 
 /* Toast */
-export { Toast } from "./components/toast"
-export type { ToastProps } from "./components/toast"
+export {
+  Toast,
+  ToastContainer,
+  ToastProvider,
+  useToast,
+  SuccessToast,
+  ErrorToast,
+  WarningToast,
+  InfoToast,
+} from "./components/toast"
+export type {
+  ToastProps,
+  ManagedToast,
+  ShowToastOptions,
+  ToastContainerProps,
+  ToastController,
+  ToastProviderProps,
+  SuccessToastProps,
+  ErrorToastProps,
+  WarningToastProps,
+  InfoToastProps,
+} from "./components/toast"
 
 /* Accordion */
 export { Accordion } from "./components/accordion"
@@ -159,8 +184,23 @@ export type {
 } from "./components/switch"
 
 /* Tab */
-export { Tab } from "./components/tab"
-export type { TabProps } from "./components/tab"
+export {
+  Tab,
+  TabGroup,
+  TabPanel,
+  NavigationTabs,
+  ContentTabs,
+  SettingsTabs,
+} from "./components/tab"
+export type {
+  TabProps,
+  TabGroupItem,
+  TabGroupProps,
+  TabPanelProps,
+  NavigationTabsProps,
+  ContentTabsProps,
+  SettingsTabsProps,
+} from "./components/tab"
 
 // ======= MOLECULES =======
 

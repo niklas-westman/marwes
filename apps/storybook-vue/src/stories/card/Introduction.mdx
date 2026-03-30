@@ -1,20 +1,74 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  cardPurposeComponentReference,
+  cardWhyPurposeComponents,
+} from "@marwes-ui/core"
 
 <Meta title="Card/Introduction" />
 
 # Card Components
 
-Cards group related content into a single surface with optional heading context.
+Marwes provides cards at two layers: **purpose components** for common semantic
+surfaces and the raw **Card** atom for custom composition.
 
 ## Component Architecture
 
 ```
+Purpose Card
+    ↓
 Card (Atom)
 ```
 
-## Recommended Usage
+## Recommended: Purpose Components
 
-Use `Card` as a compositional container for summaries, settings blocks, and grouped details.
+Use purpose-built cards when the surface has a clear product meaning:
+
+```vue
+<script setup lang="ts">
+import { ProductCard, ProfileCard, StatCard } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <ProductCard>
+    <template #title>Pro plan</template>
+    Unlimited projects, advanced analytics, and priority support.
+  </ProductCard>
+
+  <ProfileCard>
+    <template #title>Niklas Westman</template>
+    Design systems engineer with ownership of component primitives.
+  </ProfileCard>
+
+  <StatCard>
+    <template #title>Monthly recurring revenue</template>
+    $128,400
+  </StatCard>
+</template>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {cardWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {cardPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: Card (Atom)
+
+Use the raw `Card` atom when you need a custom surface layout:
 
 ```vue
 <script setup lang="ts">
@@ -22,15 +76,34 @@ import { Card } from "@marwes-ui/vue"
 </script>
 
 <template>
-  <Card>
+  <Card :data-attributes="{ 'data-surface': 'summary-card' }">
     <template #title>Project status</template>
     Build pipeline is healthy.
   </Card>
 </template>
 ```
 
-## Story Coverage
+### Card Features
 
-- `Default` and `WithTitle` for structure options
-- `AllVariants` for content composition examples
-- `DarkVariants` for theme parity
+- **Optional title header** - renders consistent header spacing when a `title` slot is provided
+- **Composition-friendly body** - accepts any Vue content through the default slot
+- **Purpose-ready wrapper** - supports `dataAttributes` so semantic variants can layer metadata
+
+## Component Reference
+
+### Purpose Components
+
+**`ProductCard`** - Product summaries and offer surfaces
+
+**`ProfileCard`** - Identity and account summary surfaces
+
+**`StatCard`** - KPI and snapshot metric surfaces
+
+### Atom
+
+**`Card`** - Low-level titled surface container
+
+- `Card (Atom)`
+- `ProductCard`
+- `ProfileCard`
+- `StatCard`

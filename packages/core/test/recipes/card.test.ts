@@ -17,4 +17,12 @@ describe("createCardRecipe", () => {
     const kit = createCardRecipe({})
     expect(kit.className).toBe("mw-card")
   })
+
+  it("passes data attributes through the render kit", () => {
+    const kit = createCardRecipe({
+      dataAttributes: { "data-purpose": "product-card" },
+    })
+
+    expect(kit.dataAttributes).toEqual({ "data-purpose": "product-card" })
+  })
 })

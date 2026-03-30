@@ -64,8 +64,8 @@ Both orientations set the appropriate `aria-orientation` for accessibility.
 ## Related Files
 
 - **CSS Styles:** [packages/presets/src/firstEdition/divider.css](../../../../../presets/src/firstEdition/divider.css)
-- **React Adapter:** [packages/react/src/components/divider.tsx](../../../../../react/src/components/divider.tsx)
-- **Storybook Stories:** [apps/storybook-react/src/stories/divider.stories.tsx](../../../../../../apps/storybook-react/src/stories/divider.stories.tsx)
+- **React Adapter:** [packages/react/src/components/divider/divider.tsx](../../../../../react/src/components/divider/divider.tsx)
+- **Storybook Stories:** [apps/storybook-react/src/stories/divider/divider.stories.tsx](../../../../../../apps/storybook-react/src/stories/divider/divider.stories.tsx)
 
 ## Example Usage (React)
 

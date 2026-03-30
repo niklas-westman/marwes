@@ -1,7 +1,6 @@
 import { storybookLayout } from "@marwes-ui/core"
 import { Toast } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
-import * as React from "react"
 
 const VARIANTS = ["subtle", "outline", "rich"] as const
 
@@ -20,22 +19,17 @@ export default meta
 type Story = StoryObj<typeof Toast>
 
 export const Default: Story = {
-  args: { children: "Your changes have been saved." },
+  args: { children: "Your changes have been saved.", action: "Close" },
 }
 
-export const WithDismiss: Story = {
+export const DismissIconEscapeHatch: Story = {
   args: { children: "Your changes have been saved.", onDismiss: () => {} },
 }
 
-export const WithAction: Story = {
+export const WithCustomAction: Story = {
   args: {
     children: "File uploaded successfully.",
-    action: (
-      <button type="button" style={{ all: "unset", cursor: "pointer" }}>
-        View file
-      </button>
-    ),
-    onDismiss: () => {},
+    action: "View file",
   },
 }
 
@@ -43,7 +37,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {VARIANTS.map((v) => (
-        <Toast key={v} variant={v} onDismiss={() => {}}>
+        <Toast key={v} variant={v} action="Close">
           {v.charAt(0).toUpperCase() + v.slice(1)} — Your changes have been saved.
         </Toast>
       ))}
@@ -65,7 +59,7 @@ export const DarkVariants: Story = {
       }}
     >
       {VARIANTS.map((v) => (
-        <Toast key={v} variant={v} onDismiss={() => {}}>
+        <Toast key={v} variant={v} action="Close">
           {v.charAt(0).toUpperCase() + v.slice(1)} — Dark mode toast.
         </Toast>
       ))}
@@ -78,6 +72,6 @@ export const Urgent: Story = {
     children: "Session expired. Please log in again.",
     variant: "rich",
     ariaLive: "assertive",
-    onDismiss: () => {},
+    action: "Close",
   },
 }

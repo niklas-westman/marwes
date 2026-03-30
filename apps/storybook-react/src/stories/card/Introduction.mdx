@@ -1,29 +1,100 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  cardPurposeComponentReference,
+  cardWhyPurposeComponents,
+} from "@marwes-ui/core"
 
 <Meta title="Card/Introduction" />
 
 # Card Components
 
-Cards group related content into a single surface with optional heading context.
+Marwes provides cards at two layers: **purpose components** for common semantic
+surfaces and the raw **Card** atom for custom composition.
 
 ## Component Architecture
 
 ```
+Purpose Card
+    ↓
 Card (Atom)
 ```
 
-## Recommended Usage
+## Recommended: Purpose Components
 
-Use `Card` as a compositional container for summaries, settings blocks, and grouped details.
+Use purpose-built cards when the surface has a clear product meaning:
+
+```tsx
+import { ProductCard, ProfileCard, StatCard } from "@marwes-ui/react"
+
+<ProductCard title="Pro plan">
+  Unlimited projects, advanced analytics, and priority support.
+</ProductCard>
+
+<ProfileCard title="Niklas Westman">
+  Design systems engineer with ownership of component primitives.
+</ProfileCard>
+
+<StatCard title="Monthly recurring revenue">
+  $128,400
+</StatCard>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {cardWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {cardPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: Card (Atom)
+
+Use the raw `Card` atom when you need a custom surface layout:
 
 ```tsx
 import { Card } from "@marwes-ui/react"
 
-<Card title="Project status">Build pipeline is healthy.</Card>
+<Card
+  title="Project status"
+  dataAttributes={{ "data-surface": "summary-card" }}
+>
+  Build pipeline is healthy.
+</Card>
 ```
 
-## Story Coverage
+### Card Features
 
-- `Default`, `WithTitle`, and `BodyOnly` for structure options
-- `AllVariants` for content density examples
-- `DarkVariants` for theme parity
+- **Optional title header** - renders consistent header spacing when `title` is provided
+- **Composition-friendly body** - accepts any React content as children
+- **Purpose-ready wrapper** - supports `dataAttributes` so semantic variants can layer metadata
+
+## Component Reference
+
+### Purpose Components
+
+**`ProductCard`** - Product summaries and offer surfaces
+
+**`ProfileCard`** - Identity and account summary surfaces
+
+**`StatCard`** - KPI and snapshot metric surfaces
+
+### Atom
+
+**`Card`** - Low-level titled surface container
+
+- `Card (Atom)`
+- `ProductCard`
+- `ProfileCard`
+- `StatCard`

@@ -3,7 +3,14 @@ export type { AccordionOptions, AccordionRenderKit } from "./accordion"
 export * from "./card"
 export type { CardOptions, CardRenderKit } from "./card"
 export * from "./toast"
-export type { ToastOptions, ToastRenderKit, ToastVariant } from "./toast"
+export type {
+  ToastOptions,
+  ToastRenderKit,
+  ToastVariant,
+  ToastContainerOptions,
+  ToastIntent,
+  ToastPlacement,
+} from "./toast"
 export * from "./badge"
 export type { BadgeOptions, BadgeRenderKit } from "./badge"
 export * from "./button"
@@ -40,4 +47,4 @@ export type {
   ParagraphRenderKit,
   ParagraphSize,
 } from "./paragraph"
-export type { TabOptions, TabRenderKit } from "./tab"
+export type { TabOptions, TabRenderKit, TabGroupA11yIds, TabGroupItemState } from "./tab"

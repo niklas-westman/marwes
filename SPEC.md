@@ -251,7 +251,7 @@ Use this format when resolving an open decision:
   - Preset imports: `packages/presets/src/firstEdition/styles.css`
   - React: `packages/react/src/components/divider.tsx`
   - React exports: `packages/react/src/index.ts`
-  - Stories: `apps/storybook-react/src/stories/divider.stories.tsx`
+- Stories: `apps/storybook-react/src/stories/divider/divider.stories.tsx`
 
 **Design decisions**:
 - Size mapping: xxs=1px, xs=8px, sm=16px, md=32px, lg=48px, xl=64px, xxl=80px

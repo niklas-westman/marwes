@@ -1,31 +1,138 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  toastPurposeComponentReference,
+  toastWhyPurposeComponents,
+} from "@marwes-ui/core"
 
 <Meta title="Toast/Introduction" />
 
 # Toast Components
 
-Toasts communicate transient status updates without interrupting workflow.
+Marwes provides toast feedback at three layers: **purpose components** for common
+status messages, **ToastContainer** plus **ToastProvider/useToast** for stacked
+imperative delivery, and the raw **Toast** atom for custom layouts.
 
-## Component Architecture
+## Recommended: Purpose Components
 
+Use purpose-built toasts when the message intent is already known:
+
+```tsx
+import {
+  ErrorToast,
+  InfoToast,
+  SuccessToast,
+  WarningToast,
+} from "@marwes-ui/react"
+
+<SuccessToast>Project saved successfully.</SuccessToast>
+<ErrorToast>Publishing failed. Please try again.</ErrorToast>
+<WarningToast>Storage is almost full.</WarningToast>
+<InfoToast>New release notes are available.</InfoToast>
 ```
-Toast (Atom)
+
+### Why Purpose Components?
+
+<ol>
+  {toastWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {toastPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: ToastContainer + useToast (Molecule)
+
+Use `ToastContainer` when you already own toast state. Use `ToastProvider` plus
+`useToast` when actions need to enqueue toasts imperatively.
+
+```tsx
+import { ToastProvider, useToast } from "@marwes-ui/react"
+
+function SaveButton() {
+  const toast = useToast()
+
+  return (
+    <button
+      type="button"
+      onClick={() => toast.show({ intent: "success", children: "Project saved." })}
+    >
+      Save project
+    </button>
+  )
+}
+
+<ToastProvider>
+  <SaveButton />
+</ToastProvider>
 ```
 
-## Recommended Usage
+### ToastContainer Features
 
-Use `Toast` for confirmation, warning, and action follow-up feedback.
+- **Stacking and placement** - supports top/bottom plus left/right viewport placement
+- **Imperative workflow support** - `useToast()` exposes `show`, `dismiss`, and `clear`
+- **Auto-dismiss** - provider-managed toasts close automatically unless `duration` is `null`
+- **Purpose-aware rendering** - `intent` routes through the matching purpose toast variant
+
+## Low-level: Toast (Atom)
+
+Use the raw `Toast` atom when you need a bespoke layout or custom delivery
+mechanism.
 
 ```tsx
 import { Toast } from "@marwes-ui/react"
 
-<Toast variant="rich" ariaLive="polite" onDismiss={() => {}}>
+<Toast variant="rich" ariaLive="polite" action="Close">
   Your changes have been saved.
 </Toast>
 ```
 
-## Story Coverage
+The referenced Toast Figma frames use an inline `"Close"` text action inside the
+toast surface. That action is not a standard `Button` or `CancelButton`; it is a
+toast-local text treatment.
 
-- `Default`, `WithDismiss`, and `WithAction` for core behaviors
-- `AllVariants` and `DarkVariants` for style parity
-- `Urgent` for assertive announcements
+`onDismiss` is still supported when you explicitly want an icon-only dismiss
+control, but that `×` affordance is an adapter escape hatch rather than part of
+the referenced Toast Figma frames.
+
+## Component Reference
+
+### Purpose Components
+
+**`SuccessToast`** - Positive completion and confirmation feedback
+
+**`ErrorToast`** - Failed actions and urgent alerts
+
+**`WarningToast`** - Cautionary follow-up and risky state changes
+
+**`InfoToast`** - Neutral updates and contextual notices
+
+### Base Molecule
+
+**`ToastContainer`** - Positioned toast viewport with stacking and dismiss handling
+
+**`ToastProvider`** - Context provider that owns toast queue state
+
+**`useToast`** - Imperative toast controller hook
+
+### Atom
+
+**`Toast`** - Low-level transient feedback surface
+
+- `Toast (Atom)`
+- `ToastContainer`
+- `ToastProvider`
+- `useToast`
+- `SuccessToast`
+- `ErrorToast`
+- `WarningToast`
+- `InfoToast`
