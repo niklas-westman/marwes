@@ -34,17 +34,17 @@
   }
 
   &:has(.mw-input-field__toggle-password) .mw-input {
-    padding-right: 40px;
+    padding-right: var(--mw-spacing-xl);
   }
 }
 
 .mw-input-field__toggle-password {
   position: absolute;
-  right: 8px;
+  right: var(--mw-spacing-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 6px; /* off-scale — no token */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -69,11 +69,11 @@
 
 .mw-input-field__clear-search {
   position: absolute;
-  right: 8px;
+  right: var(--mw-spacing-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 6px; /* off-scale — no token */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -108,7 +108,7 @@
 
 /* Add padding to search input when clear button is present */
 .mw-input-field__input-wrapper:has(.mw-input-field__clear-search) .mw-input {
-  padding-right: 40px;
+  padding-right: var(--mw-spacing-xl);
 }
 
 /* Label opacity: 1 when input is focused */

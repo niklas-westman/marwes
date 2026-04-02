@@ -24,7 +24,7 @@
 
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--mw-spacing-xs);
   padding: 0;
   border: none;
   background: none;

@@ -95,30 +95,30 @@
 /* SIZES */
 .mw-btn--xs {
   height: 30px;
-  padding: 0 10px;
+  padding: 0 10px; /* off-scale — no token */
   font-size: 12px;
-  gap: 4px;
+  gap: var(--mw-spacing-xxs);
 }
 
 button.mw-btn--sm {
   height: 34px;
-  padding: 0 12px;
+  padding: 0 12px; /* off-scale — no token */
   font-size: 13px;
-  gap: 4px;
+  gap: var(--mw-spacing-xxs);
 }
 
 button.mw-btn--md {
   height: 40px;
-  padding: 12px 16px;
+  padding: 12px 16px; /* off-scale — no token */
   font-size: 14px;
-  gap: 4px;
+  gap: var(--mw-spacing-xxs);
 }
 
 button.mw-btn--lg {
   height: 46px;
   padding: 0 16px;
   font-size: 15px;
-  gap: 10px;
+  gap: 10px; /* off-scale — no token */
 }
 
 /* DISABLED STATE - Figma spec: opacity 20% (#000000 20% for light mode) */

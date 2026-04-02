@@ -1,0 +1,6 @@
+.mw-spacing {
+  display: block;
+  width: 100%;
+  height: var(--mw-spacing-value, 24px);
+  flex-shrink: 0;
+}

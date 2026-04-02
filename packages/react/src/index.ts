@@ -115,6 +115,12 @@ export type { CheckboxProps } from "./components/checkbox"
 export { Divider } from "./components/divider/divider"
 export type { DividerProps } from "./components/divider/divider"
 
+/* Spacing */
+export { Spacing } from "./components/spacing"
+export type { SpacingProps } from "./components/spacing"
+export { Spacings } from "@marwes-ui/core"
+export type { SpacingSize } from "@marwes-ui/core"
+
 /* Heading */
 export { H1, H2, H3 } from "./components/heading"
 export type { H1Props, H2Props, H3Props } from "./components/heading"
@@ -244,6 +250,23 @@ export type {
   ContentTabsProps,
   SettingsTabsProps,
 } from "./components/tab"
+
+/* Dialog */
+export {
+  Dialog,
+  DialogModal,
+  ConfirmDialog,
+  DestructiveDialog,
+  InfoDialog,
+} from "./components/dialog"
+export type {
+  DialogProps,
+  DialogFooterControls,
+  DialogModalProps,
+  ConfirmDialogProps,
+  DestructiveDialogProps,
+  InfoDialogProps,
+} from "./components/dialog"
 
 // ======= MOLECULES =======
 

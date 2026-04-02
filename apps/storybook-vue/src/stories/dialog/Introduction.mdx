@@ -1,0 +1,138 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  dialogPurposeComponentReference,
+  dialogWhyPurposeComponents,
+} from "@marwes-ui/core"
+
+<Meta title="Dialog/Introduction" />
+
+# Dialog Components
+
+Marwes provides dialogs at three layers: **purpose components** for common modal
+workflows, **DialogModal** for stateful overlay composition, and the raw
+**Dialog** atom for custom shells.
+
+## Recommended: Purpose Components
+
+Use purpose-built components when the dialog intent is already known:
+
+```vue
+<script setup lang="ts">
+import {
+  ConfirmDialog,
+  DestructiveDialog,
+  InfoDialog,
+  Paragraph,
+} from "@marwes-ui/vue"
+</script>
+
+<ConfirmDialog :open="true" title="Publish update" description="This sends the release immediately.">
+  <Paragraph>Review the release summary before confirming.</Paragraph>
+</ConfirmDialog>
+
+<DestructiveDialog :open="true" title="Delete workspace" description="This action cannot be undone.">
+  <Paragraph>Export anything you need before continuing.</Paragraph>
+</DestructiveDialog>
+
+<InfoDialog :open="true" title="Scheduled maintenance" description="The workspace will be read-only briefly.">
+  <Paragraph>Save drafts before the maintenance window begins.</Paragraph>
+</InfoDialog>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {dialogWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {dialogPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: DialogModal (Molecule)
+
+Use `DialogModal` when you need custom content or action wiring, but still want
+the library to manage the modal overlay.
+
+```vue
+<script setup lang="ts">
+import {
+  CancelButton,
+  ConfirmButton,
+  DialogModal,
+  Paragraph,
+} from "@marwes-ui/vue"
+</script>
+
+<DialogModal
+  :open="true"
+  title="Invite teammates"
+  description="Select a role and invite collaborators to the workspace."
+>
+  <Paragraph>Choose a role before sending the invitation.</Paragraph>
+  <template #footer>
+    <CancelButton>Cancel</CancelButton>
+    <ConfirmButton>Continue</ConfirmButton>
+  </template>
+</DialogModal>
+```
+
+### DialogModal Features
+
+- **Teleport + scrim** - renders above the app surface with an internal backdrop
+- **Controlled or uncontrolled state** - use `open` or `defaultOpen`
+- **Dismiss behavior** - supports close button, Escape, and scrim click rules
+- **Focus restoration** - returns focus to the prior trigger when the modal closes
+
+## Low-level: Dialog (Atom)
+
+Use the raw `Dialog` atom when parent code already owns the overlay and state
+management, or when you need a custom shell composition.
+
+```vue
+<script setup lang="ts">
+import { CancelButton, ConfirmButton, Dialog, Paragraph } from "@marwes-ui/vue"
+</script>
+
+<Dialog title="Dialog title" description="Describe the purpose of the dialog.">
+  <Paragraph>Custom content goes here.</Paragraph>
+  <template #footer>
+    <CancelButton>Cancel</CancelButton>
+    <ConfirmButton>Confirm</ConfirmButton>
+  </template>
+</Dialog>
+```
+
+## Component Reference
+
+### Purpose Components
+
+**`ConfirmDialog`** - Neutral confirmation and approval prompts
+
+**`DestructiveDialog`** - Irreversible or high-risk actions
+
+**`InfoDialog`** - Read-and-acknowledge messaging
+
+### Base Molecule
+
+**`DialogModal`** - Modal overlay with portal, scrim, dismissal, and focus handling
+
+### Atom
+
+**`Dialog`** - Low-level shell with header, content, and optional footer
+
+- `Dialog (Atom)`
+- `DialogModal`
+- `ConfirmDialog`
+- `DestructiveDialog`
+- `InfoDialog`

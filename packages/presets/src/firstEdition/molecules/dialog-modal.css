@@ -1,0 +1,30 @@
+.mw-dialog-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mw-spacing-md);
+}
+
+.mw-dialog-modal__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.mw-dialog-modal__surface {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .mw-dialog-modal {
+    padding: 12px; /* off-scale — no token */
+    align-items: flex-end;
+  }
+}

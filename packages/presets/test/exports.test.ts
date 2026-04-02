@@ -25,7 +25,7 @@ describe("@marwes-ui/presets package exports", () => {
 
   it("firstEditionTheme is a valid ThemeInput with expected brand, font, and ui fields", () => {
     expect(firstEditionTheme.color?.primary).toEqual({
-      base: "#5B8CFF",
+      base: "#2F31FC",
       label: "#FFFFFF",
       labelDisabled: "rgba(255,255,255,0.5)",
     })
@@ -39,7 +39,7 @@ describe("@marwes-ui/presets package exports", () => {
   it("firstEditionTheme resolves a white primary label for filled components", () => {
     const resolved = resolveThemeInput(firstEditionTheme)
 
-    expect(resolved.color.primary.base).toBe("#5B8CFF")
+    expect(resolved.color.primary.base).toBe("#2F31FC")
     expect(resolved.color.primary.label).toBe("#FFFFFF")
     expect(resolved.color.primary.labelDisabled).toBe("rgba(255,255,255,0.5)")
   })

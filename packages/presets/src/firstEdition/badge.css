@@ -17,7 +17,7 @@
 
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
+  padding: var(--mw-spacing-xxxs) var(--mw-spacing-xs);
   border-radius: 4px;
   border: 1px solid var(--mw-badge-border);
   background: var(--mw-badge-surface);
@@ -111,5 +111,5 @@
 
 .mw-badge-group__items {
   display: inline-flex;
-  gap: 4px;
+  gap: var(--mw-spacing-xxs);
 }

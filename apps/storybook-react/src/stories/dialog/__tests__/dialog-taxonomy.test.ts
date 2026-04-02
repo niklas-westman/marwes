@@ -1,0 +1,26 @@
+import { readFileSync } from "node:fs"
+import path from "node:path"
+import { describe, expect, it } from "vitest"
+
+const storiesDir = path.resolve(__dirname, "..")
+
+function readStoryFile(fileName: string): string {
+  return readFileSync(path.join(storiesDir, fileName), "utf8")
+}
+
+describe("React dialog story taxonomy", () => {
+  it("keeps atom and molecule stories in the correct tiers", () => {
+    expect(readStoryFile("dialog.stories.tsx")).toContain('title: "Dialog/Atom"')
+    expect(readStoryFile("dialog-modal.stories.tsx")).toContain('title: "Dialog/Molecule"')
+  })
+
+  it("keeps purpose stories under Dialog/Purpose", () => {
+    expect(readStoryFile("confirm-dialog.stories.tsx")).toContain(
+      'title: "Dialog/Purpose/ConfirmDialog"',
+    )
+    expect(readStoryFile("destructive-dialog.stories.tsx")).toContain(
+      'title: "Dialog/Purpose/DestructiveDialog"',
+    )
+    expect(readStoryFile("info-dialog.stories.tsx")).toContain('title: "Dialog/Purpose/InfoDialog"')
+  })
+})

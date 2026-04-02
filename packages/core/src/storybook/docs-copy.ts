@@ -355,3 +355,41 @@ export const toastPurposeComponentReference: LabeledCopy[] = [
     text: 'Contextual notices and neutral updates — data-purpose="info-toast"',
   },
 ]
+
+export const dialogWhyPurposeComponents: LabeledCopy[] = [
+  {
+    label: "Modal semantics built in",
+    text: "confirmation, destructive, and informational dialogs ship with consistent actions and dismiss patterns",
+  },
+  {
+    label: "Consistent overlay UX",
+    text: "keeps scrim, escape handling, focus restoration, and footer actions aligned across products",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces repeated open state, button wiring, and aria-modal setup",
+  },
+  {
+    label: "Safe defaults",
+    text: "purpose wrappers make the expected primary and secondary actions obvious for the workflow",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (DestructiveDialog vs generic DialogModal)",
+  },
+]
+
+export const dialogPurposeComponentReference: LabeledCopy[] = [
+  {
+    label: "ConfirmDialog",
+    text: 'Neutral confirmation flows and approval prompts — data-purpose="confirm-dialog"',
+  },
+  {
+    label: "DestructiveDialog",
+    text: 'Irreversible or risky actions that require explicit confirmation — data-purpose="destructive-dialog"',
+  },
+  {
+    label: "InfoDialog",
+    text: 'Read-and-acknowledge messaging with a single follow-up action — data-purpose="info-dialog"',
+  },
+]

@@ -2,6 +2,8 @@ export * from "./accordion"
 export type { AccordionOptions, AccordionRenderKit } from "./accordion"
 export * from "./card"
 export type { CardOptions, CardRenderKit } from "./card"
+export * from "./dialog"
+export type { DialogOptions, DialogRenderKit, DialogSize } from "./dialog"
 export * from "./toast"
 export type {
   ToastOptions,
@@ -25,6 +27,7 @@ export * from "./input"
 export * from "./heading"
 export * from "./paragraph"
 export * from "./tab"
+export * from "./spacing"
 
 export type { ButtonOptions, ButtonRenderKit } from "./button"
 export type { CheckboxProps, CheckboxRenderKit } from "./checkbox"
@@ -58,3 +61,4 @@ export type {
   ParagraphSize,
 } from "./paragraph"
 export type { TabOptions, TabRenderKit, TabGroupA11yIds, TabGroupItemState } from "./tab"
+export type { SpacingOptions, SpacingRenderKit, SpacingSize } from "./spacing"

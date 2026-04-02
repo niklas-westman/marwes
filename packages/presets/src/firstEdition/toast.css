@@ -30,8 +30,8 @@
 
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 16px;
+  gap: var(--mw-spacing-xs);
+  padding: var(--mw-spacing-sm);
   border-radius: var(--mw-ui-radius, 8px);
   border: 1px solid var(--mw-toast-border);
   background: var(--mw-toast-surface);
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--mw-spacing-sm);
   min-width: 0;
 }
 

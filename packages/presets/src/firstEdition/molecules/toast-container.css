@@ -2,29 +2,29 @@
   position: fixed;
   z-index: 1000;
   display: grid;
-  gap: 12px;
-  width: min(420px, calc(100vw - 32px));
+  gap: 12px; /* off-scale — no token */
+  width: min(420px, calc(100vw - var(--mw-spacing-lg)));
   pointer-events: none;
 }
 
 .mw-toast-container--top-right {
-  top: 16px;
-  right: 16px;
+  top: var(--mw-spacing-sm);
+  right: var(--mw-spacing-sm);
 }
 
 .mw-toast-container--top-left {
-  top: 16px;
-  left: 16px;
+  top: var(--mw-spacing-sm);
+  left: var(--mw-spacing-sm);
 }
 
 .mw-toast-container--bottom-right {
-  right: 16px;
-  bottom: 16px;
+  right: var(--mw-spacing-sm);
+  bottom: var(--mw-spacing-sm);
 }
 
 .mw-toast-container--bottom-left {
-  bottom: 16px;
-  left: 16px;
+  bottom: var(--mw-spacing-sm);
+  left: var(--mw-spacing-sm);
 }
 
 .mw-toast-container__item {

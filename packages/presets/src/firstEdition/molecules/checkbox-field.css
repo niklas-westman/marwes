@@ -16,12 +16,20 @@
 
 .mw-checkbox-field__description {
   opacity: 0.75;
-  margin-left: calc(var(--mw-density-checkbox-size) + var(--mw-density-gap));
+  margin-left: calc(
+    var(--mw-density-checkbox-size) +
+    var(--mw-spacing-xs) +
+    var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
+  );
   font-size: var(--mw-density-font-size-sm);
 }
 
 .mw-checkbox-field__error {
-  margin-left: calc(var(--mw-density-checkbox-size) + var(--mw-density-gap));
+  margin-left: calc(
+    var(--mw-density-checkbox-size) +
+    var(--mw-spacing-xs) +
+    var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
+  );
   font-size: var(--mw-density-font-size-sm);
   color: var(--mw-color-danger-base, #dc2626);
 }

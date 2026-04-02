@@ -59,6 +59,36 @@ export const storybookDividerArgTypes = {
   },
 } as const
 
+export const storybookSpacingArgTypes = {
+  size: {
+    control: "select",
+    options: [
+      "xxxs",
+      "xxs",
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "xxl",
+      "xxxl",
+      "4xl",
+      "5xl",
+      "6xl",
+      "7xl",
+      "8xl",
+      "9xl",
+      "10xl",
+      "11xl",
+    ],
+    description: "Size variant (xxxs=2 … md=24 … 6xl=80 … 11xl=120px)",
+  },
+  scale: {
+    control: { type: "number", min: 1, max: 8, step: 0.5 },
+    description: "Multiplies the token value. scale=2 doubles any size.",
+  },
+} as const
+
 export const storybookIconGalleryDefaults = {
   size: "sm",
   strokeWidth: "md",

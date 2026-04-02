@@ -10,7 +10,7 @@ import "@fontsource/instrument-sans/600.css"
 export const firstEditionTheme: ThemeInput = {
   color: {
     primary: {
-      base: "#5B8CFF",
+      base: "#2F31FC",
       label: "#FFFFFF",
       labelDisabled: "rgba(255,255,255,0.5)",
     },

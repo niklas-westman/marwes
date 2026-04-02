@@ -32,7 +32,7 @@
    ============================================ */
 
 .mw-card__header {
-  padding: 20px 24px 0;
+  padding: 20px 24px 0; /* off-scale — no token (20px) */
 }
 
 .mw-card__title {
@@ -49,7 +49,7 @@
    ============================================ */
 
 .mw-card__body {
-  padding: 16px 24px 24px;
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md) var(--mw-spacing-md);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size, 14px);
   line-height: 1.6;
@@ -58,7 +58,7 @@
 
 /* When no header, body gets full top padding */
 .mw-card__body:first-child {
-  padding-top: 24px;
+  padding-top: var(--mw-spacing-md);
 }
 
 /* ============================================

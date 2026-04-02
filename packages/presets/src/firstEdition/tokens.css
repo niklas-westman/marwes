@@ -1,0 +1,33 @@
+/* FirstEdition — Design Tokens
+   Static, density-independent values available across all component CSS files.
+   The theme engine (theme-css.ts) handles color, density, and typography vars.
+   These are fixed primitives that do not change with theme or density.
+*/
+
+:root,
+[data-marwes-theme] {
+  /* ── Spacing scale ──────────────────────────────────────────────────────────
+     Named with t-shirt sizing. Use these instead of hardcoded px values.
+     xxxs → 2px  |  xxs → 4px  |  xs → 8px  |  sm → 16px  |  md → 24px
+     lg → 32px   |  xl → 40px  |  xxl → 48px | xxxl → 56px
+     4xl → 64px  |  5xl → 72px |  6xl → 80px  | 7xl → 88px
+     8xl → 96px  |  9xl → 104px | 10xl → 112px | 11xl → 120px
+  */
+  --mw-spacing-xxxs: 2px;
+  --mw-spacing-xxs: 4px;
+  --mw-spacing-xs: 8px;
+  --mw-spacing-sm: 16px;
+  --mw-spacing-md: 24px;
+  --mw-spacing-lg: 32px;
+  --mw-spacing-xl: 40px;
+  --mw-spacing-xxl: 48px;
+  --mw-spacing-xxxl: 56px;
+  --mw-spacing-4xl: 64px;
+  --mw-spacing-5xl: 72px;
+  --mw-spacing-6xl: 80px;
+  --mw-spacing-7xl: 88px;
+  --mw-spacing-8xl: 96px;
+  --mw-spacing-9xl: 104px;
+  --mw-spacing-10xl: 112px;
+  --mw-spacing-11xl: 120px;
+}

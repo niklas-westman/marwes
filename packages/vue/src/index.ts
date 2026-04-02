@@ -116,6 +116,12 @@ export type {
 export { Divider } from "./components/divider"
 export type { DividerProps } from "./components/divider"
 
+/* Spacing */
+export { Spacing } from "./components/spacing"
+export type { SpacingProps } from "./components/spacing"
+export { Spacings } from "@marwes-ui/core"
+export type { SpacingSize } from "@marwes-ui/core"
+
 /* Heading */
 export { H1, H2, H3, createHeadingComponent } from "./components/heading"
 export type { HeadingProps, HeadingLevel } from "./components/heading"
@@ -242,3 +248,20 @@ export type {
   ContentTabsProps,
   SettingsTabsProps,
 } from "./components/tab"
+
+/* Dialog */
+export {
+  Dialog,
+  DialogModal,
+  ConfirmDialog,
+  DestructiveDialog,
+  InfoDialog,
+} from "./components/dialog"
+export type {
+  DialogProps,
+  DialogFooterControls,
+  DialogModalProps,
+  ConfirmDialogProps,
+  DestructiveDialogProps,
+  InfoDialogProps,
+} from "./components/dialog"

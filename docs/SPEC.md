@@ -1,279 +1,283 @@
-# Marwes — Architecture Decisions & Acceptance Criteria
+# Marwes Specification
 
-Per `docs/ENGINEERING.md`: all non-trivial work maps to explicit decisions and acceptance criteria here before implementation begins. Every decision below was resolved during the V1 → V3 migration architectural review (2026-03-15).
+This file is the canonical specification for Marwes.
+If implementation, docs, or behavior diverge from this file, either the implementation is wrong or this spec must be updated explicitly.
 
----
+## 1. Product Intent
+Marwes is a component system that prioritizes:
+- Strong defaults
+- Small override API
+- Consistent accessibility behavior
+- Framework-agnostic core logic
 
-## Pre-Phase 0 — Preset CSS Audit
+## 2. Current Status (2026-02-18)
+- Repository version: `0.0.3`
+- Delivery phase: v0.1 foundation
+- Implemented atoms: Button, Input, Checkbox, Icon, H1, H2, H3, Paragraph, Divider
+- Implemented molecules: CheckboxField
+- In active scope: Select (native), Textarea, FormField, Card, Spinner
 
-### D11 — CSS Variable Rename Map
+## 3. Core Principles
+- Simple surface API, strong internal consistency
+- Core is framework agnostic (no React, no DOM runtime behavior)
+- Presets are static CSS (`.mw-*` classes and `--mw-*` vars)
+- Accessibility behavior is authored in core
+- Strict TypeScript (no `any`)
 
-**Decision:** Before any Phase 0 code is written, all preset CSS files are audited and renamed atomically in the same PR that introduces `themeToCSSVars()`. Old and new variable names must never coexist.
+## 4. Architecture Contract
+Marwes uses three layers:
+1. `@marwes-ui/core`
+   - Theme contract + normalization
+   - Component recipes
+   - A11y mappings
+2. `@marwes-ui/presets`
+   - Static CSS and preset defaults
+3. `@marwes-ui/react`
+   - Thin adapter that applies core RenderKit output
 
-**Rename map:**
-
-| Current variable | New variable |
-|-----------------|--------------|
-| `--mw-primary` | `--mw-color-primary-base` |
-| `--mw-on-primary` | `--mw-color-primary-label` |
-| `--mw-secondary` | `--mw-color-secondary-base` |
-| `--mw-on-secondary` | `--mw-color-secondary-label` |
-| `--mw-danger` | `--mw-color-danger-base` |
-| `--mw-on-danger` | `--mw-color-danger-label` |
-| `--mw-focus` | `--mw-color-focus` |
-| `--mw-radius` | `--mw-ui-radius` |
-| `--mw-border-width` | `--mw-ui-border-width` |
-
-**Affected files:**
-- `packages/presets/src/firstEdition/button.css`
-- `packages/presets/src/firstEdition/checkbox.css`
-- `packages/presets/src/firstEdition/input.css`
-- `packages/presets/src/firstEdition/divider.css`
-- `packages/presets/src/firstEdition/typography.css`
-- `packages/presets/src/firstEdition/icon.css`
-- `packages/presets/src/firstEdition/styles.css`
-
-**Rule:** Document as a breaking change in `CHANGELOG.md`. No backwards-compatibility shims.
-
----
-
-## Phase 0 — Theme Engine Rework
-
-### D1 — Color Space: OKLCH (not HSL)
-
-**Decision:** `adjustLightness()` operates in OKLCH color space.
-
-**Rejected:** HSL
-
-**Why OKLCH:** HSL shifts at equal percentages produce visually unequal results across hues — a 10% shift on a blue feels different than the same shift on a yellow. OKLCH is perceptually uniform: equal `L` steps produce equal perceived changes regardless of hue or chroma. This is essential for a design system where hover/pressed states must feel consistent across any brand color.
-
-**Implementation path:** `hex → linear-sRGB → XYZ-D65 → Oklab → OKLCH → shift L → clamp(0, 1) → Oklab → XYZ-D65 → linear-sRGB → hex`. The full pipeline is ~30 lines of math with no runtime dependency.
-
-**Acceptance criteria:**
-- Shifting `#FF0000` (red) and `#0000FF` (blue) by the same `ΔL` produces visually equal perceived steps
-- `adjustLightness` is a pure function with no side effects
-
----
-
-### D2 — Label Contrast: WCAG Relative Luminance (not threshold)
-
-**Decision:** `pickContrastColor(base)` uses WCAG relative luminance to select between `#141414` and `#FFFFFF`.
-
-**Rejected:** `perceivedLightness(base) > 0.6` flat threshold
-
-**Why WCAG:** The flat threshold fails for saturated mid-range colors (e.g. `#FF8C00` reads as "light" but produces insufficient contrast with a dark label). WCAG relative luminance with proper gamma correction is the W3C standard for accessibility and is mathematically correct for human vision.
-
-**Formula:**
-```
-relativeLuminance(hex):
-  [r, g, b] = parseHex(hex).map(channel => {
-    const sRGB = channel / 255
-    return sRGB <= 0.04045
-      ? sRGB / 12.92
-      : ((sRGB + 0.055) / 1.055) ** 2.4
-  })
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b
-
-contrastRatio(L1, L2):
-  const lighter = Math.max(L1, L2)
-  const darker  = Math.min(L1, L2)
-  return (lighter + 0.05) / (darker + 0.05)
-
-pickContrastColor(base):
-  const lum      = relativeLuminance(base)
-  const darkLabel  = relativeLuminance("#141414")  // ≈ 0.0059
-  const lightLabel = relativeLuminance("#FFFFFF")  // 1.0
-  return contrastRatio(lum, darkLabel) >= contrastRatio(lum, lightLabel)
-    ? "#141414"
-    : "#FFFFFF"
-```
-
-**AA exemption:** `labelDisabled` at 50% alpha is exempt from WCAG AA (disabled controls are not required to meet contrast ratios per WCAG 1.4.3). Use the same hue as `label` at `opacity: 0.5`.
-
-**Acceptance criteria:**
-- `#FFE066` (light yellow) → dark label (`#141414`) with contrast ≥ 4.5:1
-- `#1A1A2E` (dark navy) → white label (`#FFFFFF`) with contrast ≥ 4.5:1
-- `#FF8C00` (saturated orange) → correct label (test manually — threshold approach gets this wrong)
-
----
-
-### D3 — `info` Color Role: Alias for Primary
-
-**Decision:** `info` is not a configurable `ColorInput`. Its CSS variables (`--mw-color-info-*`) are emitted but mirror the resolved `primary` role.
-
-**Why:** V3 Figma maps `--toast/outline/border (info)` → `--mw-color-primary-base`. A separately-configurable info color creates a brand fork risk.
-
-**Escape hatch:** Consumers who need a distinct info color can override `--mw-color-info-*` directly in their own CSS after the provider scope.
-
-**API:** `ThemeInput.color` does not expose an `info` property. `resolveThemeInput()` copies the resolved primary role into the info slot after derivation.
-
----
-
-### D4 — `secondary` Color Role: Derived-Only by Default
-
-**Decision:** `secondary` is fully derived from `primary.base`. It is NOT exposed as a `ColorInput` in the Phase 0 API.
-
-**Derivation:**
-```
---mw-color-secondary-base:             transparent
---mw-color-secondary-hover:            setAlpha(primary.base, 0.08)
---mw-color-secondary-pressed:          setAlpha(primary.base, 0.15)
---mw-color-secondary-border:           primary.base
---mw-color-secondary-border-disabled:  primary.disabled
---mw-color-secondary-label:            primary.base
---mw-color-secondary-label-disabled:   setAlpha(primary.base, 0.5)
-```
-
-**Why:** V3 Figma secondary = outline treatment of primary. One primary hex → both filled and outline buttons styled. Independent secondary configuration is deferred to a future minor release if brand demand justifies it.
-
-**Future path:** If needed, add `secondary?: ColorInput` to `ThemeInput`. The resolver checks: if provided, treat as an independent `ColorRole`; if absent, derive from primary as above.
-
----
-
-### D5 — Dark Mode Architecture: `.mw-theme--dark` Class
-
-**Decision:** Dark mode uses the `.mw-theme--dark` CSS class on the provider root element. This is the existing approach in all preset CSS files and stays for Phases 0–4.
-
-**Provider responsibility:** `MarwesProvider` sets/removes `.mw-theme--dark` based on its `colorScheme` prop.
-
-**Example preset pattern** (already in `button.css`):
-```css
-.mw-button--primary { background: var(--mw-color-primary-base); }
-.mw-theme--dark .mw-button--primary { /* dark vars override */ }
-```
-
-**Why not `prefers-color-scheme`:** Refactoring all preset CSS to `@media (prefers-color-scheme: dark)` is a large scope change with no user-visible benefit at this stage. The class approach gives consumer apps explicit control.
-
-**Path to adaptive tokens (post-Phase 4):**
-```css
-[data-marwes-theme] { --mw-color-primary-base: #5B8CFF; }
-[data-marwes-theme].mw-theme--dark { --mw-color-primary-base: #4A7AE0; }
-@media (prefers-color-scheme: dark) {
-  [data-marwes-theme]:not(.mw-theme--light) { --mw-color-primary-base: #4A7AE0; }
+### RenderKit Contract
+Core recipes return:
+```ts
+{
+  tag: string,
+  className: string,
+  vars: Record<string, string>,
+  a11y: Record<string, unknown>,
+  policy?: {
+    blockClick?: boolean,
+    preventDefault?: boolean,
+  }
 }
 ```
 
----
+Adapter requirements:
+- Render `tag`
+- Apply `className`
+- Apply `style={vars}`
+- Apply typed `a11y`
+- Respect `policy`
 
-### D6 — CSS Variable Scope: `[data-marwes-theme]` Attribute
+## 5. v0.1 Scope
+### In Scope
+- Core theme system
+- Foundational form and typography components
+- React adapter for in-scope components
+- Storybook and playground validation
 
-**Decision:** CSS variables are injected on the element that has `data-marwes-theme="true"`, not on `:root` or a class.
+### Out of Scope
+- Complex widgets (DatePicker, DataTable, Combobox)
+- Runtime CSS-in-JS
 
-**Why:** Attribute selectors support nested providers (two subtrees with different themes on the same page). Class selectors collide. `:root` prevents per-subtree theming.
+## 6. Spec-Driven Development Workflow (Required)
+Every non-trivial change must follow this sequence:
 
-**Implementation:**
-```ts
-// applyTheme(element, resolvedTheme)
-element.setAttribute('data-marwes-theme', 'true')
-const vars = themeToCSSVars(resolvedTheme)
-for (const [property, value] of Object.entries(vars)) {
-  element.style.setProperty(property, value)
-}
+1. **Spec first**
+   - Add or update requirement(s) in this file.
+2. **Acceptance criteria**
+   - Each requirement includes testable outcomes.
+3. **Implementation mapping**
+   - Identify impacted files across core/presets/react.
+4. **Validation**
+   - Typecheck/build and targeted behavior checks.
+5. **Documentation + changelog**
+   - Update relevant docs when behavior/API changes.
+6. **Decision capture**
+   - Record architecture/product tradeoffs in Section 9.
+
+## 7. Requirement Template (Use For New Work)
+Copy this block when adding a feature or behavior:
+
+```md
+### REQ-XXX: <short name>
+- Problem:
+- Scope:
+- Non-goals:
+- Acceptance criteria:
+  - [ ] AC1 ...
+  - [ ] AC2 ...
+- Validation:
+  - Unit:
+  - Integration/manual:
+- Files expected to change:
 ```
 
-**Preset CSS** must scope component styles within `[data-marwes-theme]` or its descendants. The `.mw-theme--dark` class lives on the same element.
+## 8. Traceability Matrix (Use In PRs)
+Keep this mapping in PR description (or add temporarily to this file for major work):
 
-**Acceptance criteria:**
-- Two `<MarwesProvider>` elements on the same page with different `primary` colors must produce visually distinct components within each subtree
-- No CSS variable leaks between provider subtrees
+| Requirement | Core files | Preset files | Adapter files | Tests/Verification |
+|---|---|---|---|---|
+| REQ-XXX | `...` | `...` | `...` | `...` |
 
----
+## 9. Open Decisions
+- DEC-001: Should v0.1 Select stay native only?
+  - Status: Open
+  - Lean: Yes
+- DEC-002: Should value controls standardize on `onValueChange` at core boundaries?
+  - Status: Open
+  - Lean: Yes
+- DEC-003: Preset naming after v1 (`firstEdition` keep or version by era)?
+  - Status: Open
+  - Lean: Keep for v0.x
+- DEC-004: Vue adapter event API should be React-parity only or dual (Vue emits + parity callbacks)?
+  - Status: Resolved (see Decision Log)
+  - Lean: Dual support
+- DEC-005: Where should adapter-shared non-rendering logic live?
+  - Status: Resolved (see Decision Log)
+  - Lean: Extend `@marwes-ui/core`
 
-### D10 — Visual Regression Gate Before Phase 1
+## 10. Decision Log
+Use this format when resolving an open decision:
 
-**Decision:** A visual regression baseline must be committed to `main` before Phase 1 begins.
-
-**Baseline scope:** All existing Storybook stories for Button, Divider, Checkbox, Input.
-
-**Tooling:** Chromatic integration in `.github/workflows/_ci.yml`. Regressions block merge.
-
-**Why:** Phase 1 renames CSS variables (`--mw-primary` → `--mw-color-primary-base`). This is a silent visual change — unit tests will not catch missing variable names in CSS. Snapshots are the safety net.
-
-**Gate:** Phase 1 PR description must include a link to the Chromatic baseline and confirm zero unintentional regressions.
-
----
-
-## Shared Types
-
-### D7 — `InteractionState` Shared Union Type
-
-**Decision:** Define a canonical `InteractionState` type in `packages/core/src/types/index.ts`:
-
-```ts
-export type InteractionState =
-  | 'default'
-  | 'hover'
-  | 'pressed'
-  | 'disabled'
-  | 'focus'
-  | 'error'
+```md
+### DEC-00X - <title>
+- Date: YYYY-MM-DD
+- Decision:
+- Rationale:
+- Impacted docs/files:
 ```
 
-All component `*.types.ts` files use this type. Components that don't support `error` use `Exclude<InteractionState, 'error'>`.
+## 11. Constraints
+- Browser support: modern evergreen browsers
+- Accessibility baseline: WCAG 2.1 AA
+- Core runtime dependencies: zero
+- Styling contract: static CSS + CSS variables
 
-**Why:** V3 Figma applies identical 5–6 state rows across all components. A shared type enforces the contract and prevents per-component drift. It also enables cross-component state propagation (e.g., a form field propagating error state to a child checkbox).
+## 12. Component Requirements
 
----
+### REQ-VUE-001: Vue Adapter Package (`@marwes-ui/vue`)
+- **Problem**: Marwes core and presets are framework-agnostic, but only a React adapter exists, which blocks Vue users from consuming the same components and behaviors.
+- **Scope**:
+  - Add a new `@marwes-ui/vue` package under `packages/`
+  - Implement a Vue provider/composables layer equivalent to React (`MarwesProvider`, `useSystem`, `useTheme`)
+  - Implement Vue components for the current React export surface (atoms + molecules + semantic variants)
+  - Keep core recipes/a11y as the source of truth (no duplicated a11y logic in Vue)
+  - Support Vue-idiomatic events/model binding while preserving parity callback props where practical
+- **Non-goals**:
+  - Rewriting `@marwes-ui/core` recipes around Vue-specific types
+  - Replacing `@marwes-ui/react` or changing its public API semantics
+  - Introducing a runtime styling system or Vue-only preset CSS
+- **Acceptance criteria**:
+  - [ ] `packages/vue` builds as `@marwes-ui/vue` with ESM + types and publishes from `dist/`
+  - [ ] Vue provider/composables use `createSystem`/`switchMode` from core and support light/dark mode
+  - [ ] Vue adapter exports the same component set currently exported by `@marwes-ui/react` for in-scope components
+  - [ ] Vue adapter renders core RenderKit outputs (className, vars, typed a11y) without re-implementing core a11y logic
+  - [ ] Vue adapter supports idiomatic Vue event usage (`emits` / `v-model` where applicable) and parity callbacks (`onValueChange`, `onCheckedChange`)
+  - [ ] React adapter behavior remains unchanged for existing stories/manual checks
+- **Validation**:
+  - Unit: TypeScript typecheck passes for `packages/vue`
+  - Integration/manual: Verify representative components in Vue Storybook (button, input, checkbox, divider, field)
+- **Files expected to change**:
+  - New package: `packages/vue/*`
+  - Root config: `tsconfig.base.json`, `package.json` scripts if needed
+  - Shared logic: `packages/core/src/*` (adapter-independent helpers only)
+  - Docs/changelog: package README/CHANGELOG and root docs as needed
 
-## Engineering Conventions
+### REQ-VUE-002: Vue Storybook Parity (`apps/storybook-vue`)
+- **Problem**: There is no Vue Storybook to validate and demonstrate the Vue adapter with the same preset/theme behavior used in React Storybook.
+- **Scope**:
+  - Add `apps/storybook-vue` using `@storybook/vue3-vite`
+  - Mirror local workspace aliasing used in React Storybook for `@marwes-ui/core`, `@marwes-ui/presets`, and adapter package source files
+  - Add a Vue preview decorator that wraps stories in `MarwesProvider` and supports theme mode toolbar switching
+  - Create a representative initial story set, then expand toward parity with React Storybook
+- **Non-goals**:
+  - Exact 1:1 file duplication of every React story before the app is functional
+  - Replacing React Storybook as the primary reference during migration
+- **Acceptance criteria**:
+  - [ ] `apps/storybook-vue` runs locally and renders Vue adapter components using `firstEdition` preset CSS
+  - [ ] Theme toolbar switches between light and dark mode using Vue `MarwesProvider`
+  - [ ] Vue Storybook includes smoke stories for representative atoms/molecules
+  - [ ] Storybook local aliases resolve package source code (not only published `dist`)
+  - [ ] Custom RenderKit debug panel is reusable or functionally matched for Vue stories
+- **Validation**:
+  - Integration/manual: `storybook dev` launches and representative stories render correctly
+  - Build: `storybook build` succeeds for Vue Storybook app
+- **Files expected to change**:
+  - New app: `apps/storybook-vue/*`
+  - Shared Storybook helpers/config (if extracted)
+  - Root workspace config (if additional scripts/aliases are needed)
 
-### D9 — RTL: CSS Logical Properties from Phase 0 Onwards
+### REQ-VUE-003: Shared Adapter/Story Logic Extraction (Duplication Reduction)
+- **Problem**: Copying React adapter and stories directly into Vue will create maintenance-heavy duplication for logic that is framework-independent.
+- **Scope**:
+  - Extract adapter-independent derivation logic into `@marwes-ui/core` (e.g., id suffix naming, `aria-describedby` merging, field state derivation, data-only semantic variant prop composition)
+  - Extract reusable Storybook fixtures/config data where framework-neutral (args, argTypes, common parameters, icon option lists)
+  - Keep rendering, framework lifecycle hooks, and framework-specific story render functions in adapter/app layers
+- **Non-goals**:
+  - Creating a generic cross-framework rendering abstraction
+  - Moving React/Vue component rendering into core
+- **Acceptance criteria**:
+  - [ ] New shared helpers in core are framework-agnostic and contain no React/Vue imports
+  - [ ] React and Vue adapters both consume shared helpers for at least one molecule/variant flow
+  - [ ] Shared Storybook fixture/config extraction reduces repeated args/argTypes definitions for equivalent stories
+  - [ ] Shared extraction does not change visual output or a11y behavior of React stories
+- **Validation**:
+  - Unit/type: Shared helpers typecheck in core and adapter consumers typecheck
+  - Integration/manual: React and Vue story parity check for at least one shared fixture-backed component
+- **Files expected to change**:
+  - `packages/core/src/*` (new helper modules + exports)
+  - `packages/react/src/*` (consuming helpers)
+  - `packages/vue/src/*` (consuming helpers)
+  - `apps/storybook-react/src/*` and `apps/storybook-vue/src/*` (shared story fixtures if extracted)
 
-**Decision:** All component CSS written or modified from Phase 0 onwards uses CSS logical properties.
+### REQ-DIV-001: Divider Component
+- **Figma reference**: node-id=1-932
+- **Problem**: Need a semantic separator component for visually dividing content sections
+- **Scope**: 
+  - Horizontal and vertical orientation support
+  - 7 size variants matching Figma spec (1px, 8px, 16px, 32px, 48px, 64px, 80px)
+  - Semantic HTML using `<hr>` element
+  - Built-in spacing based on divider size
+  - Light and dark mode support via theme colors
+- **Non-goals**:
+  - Text-embedded dividers ("or" dividers) in v0.1
+  - Custom colors beyond theme tokens in v0.1
+  - Animated dividers
+- **Acceptance criteria**:
+  - [x] Core recipe produces RenderKit with correct className, vars, and a11y props
+  - [x] Size API uses semantic names (xxs, xs, sm, md, lg, xl, xxl) mapped to pixel values
+  - [x] Orientation prop supports "horizontal" (default) and "vertical"
+  - [x] Generates aria-orientation attribute based on orientation
+  - [x] Uses theme.color.border for divider color
+  - [x] Preset CSS implements all 7 size variants with correct dimensions
+  - [x] React adapter applies RenderKit to semantic `<hr>` element
+  - [x] Storybook story demonstrates all sizes and both orientations
+- **Validation**:
+  - Unit: TypeScript typecheck passes, build completes
+  - Integration/manual: Visual verification in Storybook against Figma designs
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/divider/` (types, recipe, index)
+  - Core exports: `packages/core/src/components/atoms/index.ts`
+  - Preset: `packages/presets/src/firstEdition/divider.css`
+  - Preset imports: `packages/presets/src/firstEdition/styles.css`
+  - React: `packages/react/src/components/divider.tsx`
+  - React exports: `packages/react/src/index.ts`
+- Stories: `apps/storybook-react/src/stories/divider/divider.stories.tsx`
 
-**Mapping:**
-| Physical property | Logical equivalent |
-|-------------------|-------------------|
-| `padding-left` / `padding-right` | `padding-inline-start` / `padding-inline-end` |
-| `margin-left` / `margin-right` | `margin-inline-start` / `margin-inline-end` |
-| `border-left` / `border-right` | `border-inline-start` / `border-inline-end` |
-| `left` / `right` (positioned) | `inset-inline-start` / `inset-inline-end` |
-| `text-align: left` | `text-align: start` |
+**Design decisions**:
+- Size mapping: xxs=1px, xs=8px, sm=16px, md=32px, lg=48px, xl=64px, xxl=80px
+- Spacing: Built-in via CSS based on size (larger dividers = more surrounding space)
+- Element: `<hr>` for semantic meaning and native accessibility
+- Orientation: Explicit prop for better API clarity and accessibility
 
-**Why:** V3 Figma Radio Button explicitly shows RTL layout (`1368:6854`). Logical properties handle direction automatically via `dir="rtl"` on the document or subtree — no JS direction management needed.
+### DEC-004 - Vue adapter event API supports parity callbacks and Vue emits
+- Date: 2026-02-23
+- Decision:
+  - `@marwes-ui/vue` will support Vue-idiomatic emits / `v-model` style usage for value controls while also accepting parity callback props such as `onValueChange` and `onCheckedChange`.
+- Rationale:
+  - This preserves cross-framework API familiarity for Marwes docs/examples and internal conventions while giving Vue users ergonomic integration with standard Vue patterns.
+- Impacted docs/files:
+  - `SPEC.md`
+  - `packages/vue/*`
+  - Vue Storybook examples/docs
 
-**Scope:** Existing V1 preset CSS is exempt until it is touched during a migration phase.
-
----
-
-## Phase 4 Decisions — Purpose Buttons
-
-### D8 — Purpose Button Intent Registry: Typed + Extensible
-
-**Decision:** The intent registry is a typed record with a named extension API.
-
-**Core type** (in `packages/core/src/recipes/purpose-button.ts`):
-```ts
-export type BuiltInPurposeIntent =
-  | 'submit' | 'save' | 'cancel' | 'confirm' | 'delete' | 'verify'
-  | 'create' | 'edit' | 'upload' | 'download' | 'copy' | 'search'
-  | 'filter' | 'sort' | 'dropdown' | 'back' | 'next' | 'link'
-  | 'message' | 'share' | 'login' | 'logout' | 'help' | 'settings'
-  | 'close' | 'refresh'
-
-export interface PurposeButtonConfig {
-  variant: 'primary' | 'secondary' | 'danger' | 'success'
-  icon: string    // icon name from the Marwes icon system
-  label: string   // default accessible label
-}
-```
-
-**Extension API:**
-```ts
-// Called once in consumer app entry point
-registerPurposeButtonIntent('approve', {
-  variant: 'success',
-  icon: 'check-circle',
-  label: 'Approve',
-})
-```
-
-The recipe accepts `intent: BuiltInPurposeIntent | string`. Unknown intents look up the consumer registry and throw a descriptive `UnknownIntentError` if not found.
-
-**Why:** 25 built-in intents need a central source of truth. Consumer apps need custom semantic buttons without forking the library.
-
----
-
-## Open Decisions
-
-*(None — all items from the architectural review of 2026-03-15 are resolved above.)*
+### DEC-005 - Adapter-independent helper extraction extends core
+- Date: 2026-02-23
+- Decision:
+  - Adapter-shared non-rendering logic will be added to `@marwes-ui/core` rather than creating a separate internal `adapter-shared` package.
+- Rationale:
+  - The logic is framework-agnostic and belongs close to RenderKit/a11y contracts. This avoids a fourth architectural layer and keeps shared behavior discoverable.
+- Impacted docs/files:
+  - `SPEC.md`
+  - `packages/core/src/*`
+  - `packages/react/src/*`
+  - `packages/vue/src/*`

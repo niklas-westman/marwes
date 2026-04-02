@@ -1,0 +1,68 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Spacing/Introduction" />
+
+# Spacing Component
+
+Marwes provides `Spacing` as a pure layout primitive for inserting a fixed vertical
+gap between elements. Replace ad-hoc margin and padding hacks with a semantic,
+token-driven spacer.
+
+## Component Architecture
+
+```
+Spacing (Atom)
+```
+
+## Recommended Usage
+
+Use the `Spacings` const to avoid magic strings. Pass any of the 9 t-shirt sizes.
+
+```tsx
+import { Spacing, Spacings } from "@marwes-ui/react"
+
+<H1>Hello</H1>
+<Spacing size={Spacings.md} />
+<Paragraph>World</Paragraph>
+```
+
+```vue
+<script setup>
+import { Spacing, Spacings } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <H1>Hello</H1>
+  <Spacing :size="Spacings.md" />
+  <Paragraph>World</Paragraph>
+</template>
+```
+
+## Token Scale
+
+| Size  | Pixels |
+|-------|--------|
+| xxxs  | 2px    |
+| xxs   | 4px    |
+| xs    | 8px    |
+| sm    | 16px   |
+| md    | 24px (default) |
+| lg    | 32px   |
+| xl    | 40px   |
+| xxl   | 48px   |
+| xxxl  | 56px   |
+
+## Usage Notes
+
+- `Spacing` renders an `aria-hidden` div — it carries no semantic meaning
+- Use `Spacings.md` (or any size key) instead of raw strings for type safety
+- `flex-shrink: 0` is applied so the spacer holds its size inside flex containers
+
+## Component Reference
+
+**`Spacing`** — Layout primitive for inserting token-driven vertical space
+
+## Story Coverage
+
+- Full size scale (xxxs → xxxl)
+- In-context usage with `H1` and `Paragraph`

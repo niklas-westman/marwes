@@ -29,8 +29,8 @@ describe("firstEdition select css contract", () => {
   it("keeps selected dropdown options neutral while using compact menu spacing", () => {
     const css = readFileSync(selectCssPath, "utf8")
 
-    expect(css).toContain("padding: 4px 0;")
-    expect(css).toContain("padding: 8px 16px;")
+    expect(css).toContain("padding: var(--mw-spacing-xxs) 0;")
+    expect(css).toContain("padding: var(--mw-spacing-xs) var(--mw-spacing-sm);")
     expect(css).toContain("font-family: var(--mw-font-primary, inherit);")
     expect(css).toContain("font-size: 14px;")
     expect(css).toContain("line-height: 16px;")
