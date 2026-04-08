@@ -1,4 +1,5 @@
-import { buildCurrencyHelperText } from "@marwes-ui/core"
+import { buildCurrencyHelperText, getCurrencySymbol, sanitizeCurrencyValue } from "@marwes-ui/core"
+import type { CurrencyCode } from "@marwes-ui/core"
 import type * as React from "react"
 import type { InputProps } from "./input"
 import { InputField, type InputFieldProps } from "./input-field"
@@ -439,10 +440,10 @@ export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
   input?: Omit<InputProps, "type" | "inputMode">
 
   /**
-   * Currency code (e.g., "USD", "EUR", "GBP")
-   * Used for helper text and context
+   * Currency code (e.g., "USD", "EUR", "GBP").
+   * Typed as CurrencyCode union for dropdown selection in Storybook.
    */
-  currency?: string
+  currency?: CurrencyCode
 }
 
 /**
@@ -458,7 +459,12 @@ export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
  * - Decimal keyboard on mobile
  * - Currency code display in helper text
  * - Better input control than type="number"
+ * - Sanitizes values passed through `input.onValueChange`
  * - Note: Formatting should be handled by parent component
+ *
+ * **Controlled usage recommended:**
+ * - Use `input.value` + `input.onValueChange` when you need guaranteed sanitized state
+ * - In uncontrolled usage, the callback still receives sanitized values, but the DOM input may temporarily display unsanitized text
  *
  * @example
  * ```tsx
@@ -467,7 +473,11 @@ export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
  * <CurrencyField
  *   label="Amount"
  *   currency="USD"
- *   input={{ placeholder: "0.00" }}
+ *   input={{
+ *     value: amount,
+ *     onValueChange: setAmount,
+ *     placeholder: "0.00",
+ *   }}
  * />
  * ```
  */
@@ -478,13 +488,23 @@ export function CurrencyField(props: CurrencyFieldProps): React.ReactElement {
     ...props.input,
     type: "text",
     inputMode: "decimal",
+    onValueChange: (rawValue: string) => {
+      const sanitizedValue = sanitizeCurrencyValue(rawValue)
+      props.input?.onValueChange?.(sanitizedValue)
+    },
   }
 
   const helperText = buildCurrencyHelperText(props.helperText, currency)
+  const leadingSymbol = getCurrencySymbol(currency)
 
   return (
     <div data-purpose="currency" data-currency={currency}>
-      <InputField {...restProps} input={enhancedInput} helperText={helperText || ""} />
+      <InputField
+        {...restProps}
+        input={enhancedInput}
+        helperText={helperText || ""}
+        {...(leadingSymbol ? { leadingSymbol } : {})}
+      />
     </div>
   )
 }

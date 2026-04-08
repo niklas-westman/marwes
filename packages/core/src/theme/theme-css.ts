@@ -16,12 +16,19 @@ export interface ResolvedTheme {
     info: ColorRole // always mirrors primary (D3)
     background: string
     surface: string
+    surfaceSubtle: string
+    surfaceElevated: string
+    surfaceDisabled: string
     surfaceInverted: string
     text: string
     textMuted: string
+    textSubtle: string
+    textDisabled: string
     textInverted: string
     border: string
     borderSubtle: string
+    borderStrong: string
+    borderDisabled: string
     focus: string
   }
   font: {
@@ -62,7 +69,7 @@ function colorRoleVars(role: string, cr: ColorRole): Record<string, string> {
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 79 entries total. `variant` is excluded — it is deprecated.
+ * Returns 86 entries total. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -83,15 +90,22 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-secondary-border": color.secondary.border,
     "--mw-color-secondary-border-disabled": color.secondary.borderDisabled,
 
-    // Surface / semantic (9)
+    // Surface / semantic neutrals (16)
     "--mw-color-background": color.background,
     "--mw-color-surface": color.surface,
+    "--mw-color-surface-subtle": color.surfaceSubtle,
+    "--mw-color-surface-elevated": color.surfaceElevated,
+    "--mw-color-surface-disabled": color.surfaceDisabled,
     "--mw-color-surface-inverted": color.surfaceInverted,
     "--mw-color-text": color.text,
     "--mw-color-text-muted": color.textMuted,
+    "--mw-color-text-subtle": color.textSubtle,
+    "--mw-color-text-disabled": color.textDisabled,
     "--mw-color-text-inverted": color.textInverted,
     "--mw-color-border": color.border,
     "--mw-color-border-subtle": color.borderSubtle,
+    "--mw-color-border-strong": color.borderStrong,
+    "--mw-color-border-disabled": color.borderDisabled,
     "--mw-color-focus": color.focus,
 
     // Font (3)
@@ -135,7 +149,7 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
 
 /**
  * Stamps `data-marwes-theme="true"` on the element (D6 scope selector) and
- * sets all 79 CSS variables via style.setProperty. Called by MarwesProvider
+ * sets all 86 CSS variables via style.setProperty. Called by MarwesProvider
  * on mount and whenever the resolved theme changes.
  */
 export function applyTheme(element: HTMLElement, theme: ResolvedTheme): void {

@@ -119,6 +119,22 @@ describe("resolveThemeInput — surface overrides", () => {
   it("text override", () => {
     expect(resolveThemeInput({ color: { text: "#333333" } }).color.text).toBe("#333333")
   })
+
+  it("surfaceElevated override", () => {
+    expect(resolveThemeInput({ color: { surfaceElevated: "#FAFAFA" } }).color.surfaceElevated).toBe(
+      "#FAFAFA",
+    )
+  })
+
+  it("textSubtle override", () => {
+    expect(resolveThemeInput({ color: { textSubtle: "#777777" } }).color.textSubtle).toBe("#777777")
+  })
+
+  it("borderStrong override", () => {
+    expect(resolveThemeInput({ color: { borderStrong: "#101010" } }).color.borderStrong).toBe(
+      "#101010",
+    )
+  })
 })
 
 describe("resolveThemeInput — font / ui / typography overrides", () => {

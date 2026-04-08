@@ -34,9 +34,9 @@
    ============================================ */
 
 .mw-badge--neutral {
-  --mw-badge-surface: #f3f4f6;
+  --mw-badge-surface: var(--mw-color-surface-subtle);
   --mw-badge-border: #e5e7eb;
-  --mw-badge-label: #4b5563;
+  --mw-badge-label: var(--mw-color-text-muted);
 }
 
 .mw-badge--brand {
@@ -46,9 +46,9 @@
 }
 
 .mw-badge--info {
-  --mw-badge-surface: #eff6ff;
-  --mw-badge-border: #bfdbfe;
-  --mw-badge-label: #1d4ed8;
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 12%, white);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-info-base) 30%, white);
+  --mw-badge-label: var(--mw-color-info-base);
 }
 
 .mw-badge--success {
@@ -74,9 +74,9 @@
    ============================================ */
 
 .mw-theme--dark .mw-badge--neutral {
-  --mw-badge-surface: #1f2937;
+  --mw-badge-surface: var(--mw-color-surface-elevated);
   --mw-badge-border: #374151;
-  --mw-badge-label: #9ca3af;
+  --mw-badge-label: var(--mw-color-text-muted);
 }
 
 .mw-theme--dark .mw-badge--brand {
@@ -86,9 +86,9 @@
 }
 
 .mw-theme--dark .mw-badge--info {
-  --mw-badge-surface: #1e3a5f;
-  --mw-badge-border: #1d4ed8;
-  --mw-badge-label: #93c5fd;
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 20%, black);
+  --mw-badge-border: color-mix(in srgb, var(--mw-color-info-base) 50%, black);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-info-base) 80%, white);
 }
 
 .mw-theme--dark .mw-badge--success {

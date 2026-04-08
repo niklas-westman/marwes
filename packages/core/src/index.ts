@@ -61,6 +61,7 @@ export {
 } from "./theme/font-loader"
 
 export type { CssVars } from "./shared/css-vars"
+export type { CurrencyCode } from "./shared/field-helpers"
 export {
   mergeIdRefs,
   buildInputFieldA11yIds,
@@ -70,6 +71,9 @@ export {
   buildAccordionFieldA11yIds,
   buildSwitchFieldA11yIds,
   buildCurrencyHelperText,
+  getCurrencySymbol,
+  currencyCodes,
+  sanitizeCurrencyValue,
 } from "./shared/field-helpers"
 export * from "./storybook"
 

@@ -16,10 +16,10 @@
  */
 
 .mw-card {
-  --mw-card-surface: #ffffff;
+  --mw-card-surface: var(--mw-color-surface-elevated, #ffffff);
   --mw-card-border: #e5e7eb;
-  --mw-card-title: #141414;
-  --mw-card-body: #4b5563;
+  --mw-card-title: var(--mw-color-text, #141414);
+  --mw-card-body: var(--mw-color-text-muted, #4b5563);
 
   background: var(--mw-card-surface);
   border: 1px solid var(--mw-card-border);
@@ -66,8 +66,8 @@
    ============================================ */
 
 .mw-theme--dark .mw-card {
-  --mw-card-surface: #374151;
+  --mw-card-surface: var(--mw-color-surface-elevated);
   --mw-card-border: #374151;
-  --mw-card-title: #f9fafb;
-  --mw-card-body: #9ca3af;
+  --mw-card-title: var(--mw-color-text);
+  --mw-card-body: var(--mw-color-text-muted);
 }

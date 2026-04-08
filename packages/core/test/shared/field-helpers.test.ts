@@ -5,7 +5,9 @@ import {
   buildCurrencyHelperText,
   buildInputFieldA11yIds,
   buildRadioGroupFieldA11yIds,
+  getCurrencySymbol,
   mergeIdRefs,
+  sanitizeCurrencyValue,
 } from "../../src/shared/field-helpers"
 
 describe("field helpers", () => {
@@ -161,6 +163,86 @@ describe("field helpers", () => {
         descriptionId: "acc-4-desc",
         describedBy: "acc-4-desc",
       })
+    })
+  })
+
+  describe("getCurrencySymbol", () => {
+    it("returns symbols for well-known fiat currencies", () => {
+      expect(getCurrencySymbol("USD")).toBe("$")
+      expect(getCurrencySymbol("EUR")).toBe("€")
+      expect(getCurrencySymbol("GBP")).toBe("£")
+      expect(getCurrencySymbol("JPY")).toBe("¥")
+    })
+
+    it("returns multi-character symbols", () => {
+      expect(getCurrencySymbol("SEK")).toBe("kr")
+    })
+
+    it("returns symbols for crypto currencies", () => {
+      expect(getCurrencySymbol("BTC")).toBe("₿")
+    })
+
+    it("is case-insensitive", () => {
+      expect(getCurrencySymbol("usd")).toBe("$")
+      expect(getCurrencySymbol("eur")).toBe("€")
+    })
+
+    it("returns undefined for unknown currency codes", () => {
+      expect(getCurrencySymbol("DOESNOTEXIST")).toBeUndefined()
+    })
+
+    it("returns undefined when code is undefined", () => {
+      expect(getCurrencySymbol(undefined)).toBeUndefined()
+    })
+  })
+
+  describe("sanitizeCurrencyValue", () => {
+    it("passes through valid numeric strings", () => {
+      expect(sanitizeCurrencyValue("123.45")).toBe("123.45")
+    })
+
+    it("strips letters completely", () => {
+      expect(sanitizeCurrencyValue("abc")).toBe("")
+    })
+
+    it("strips letters mixed with digits", () => {
+      expect(sanitizeCurrencyValue("12abc34")).toBe("1234")
+    })
+
+    it("keeps only the first decimal point", () => {
+      expect(sanitizeCurrencyValue("12.34.56")).toBe("12.3456")
+    })
+
+    it("allows a leading minus sign", () => {
+      expect(sanitizeCurrencyValue("-5.00")).toBe("-5.00")
+    })
+
+    it("strips duplicate minus signs", () => {
+      expect(sanitizeCurrencyValue("--5")).toBe("-5")
+    })
+
+    it("strips commas", () => {
+      expect(sanitizeCurrencyValue("1,234")).toBe("1234")
+    })
+
+    it("passes through empty string", () => {
+      expect(sanitizeCurrencyValue("")).toBe("")
+    })
+
+    it("allows a lone decimal point", () => {
+      expect(sanitizeCurrencyValue(".")).toBe(".")
+    })
+
+    it("allows a lone minus sign", () => {
+      expect(sanitizeCurrencyValue("-")).toBe("-")
+    })
+
+    it("allows negative decimal without leading zero", () => {
+      expect(sanitizeCurrencyValue("-.5")).toBe("-.5")
+    })
+
+    it("strips minus signs that are not at the start", () => {
+      expect(sanitizeCurrencyValue("5-3")).toBe("53")
     })
   })
 })

@@ -15,16 +15,23 @@ export const lightThemeDefaults: Theme = {
     // Background & Surface (from Figma: Neutrals)
     background: "#FFFFFF",
     surface: "#F9FAFB",
+    surfaceSubtle: "#F3F4F6",
+    surfaceElevated: "#FFFFFF",
+    surfaceDisabled: "#F3F4F6",
     surfaceInverted: "#141414",
 
     // Text (from Figma: Colours/Text)
     text: "#141414",
     textMuted: "#9CA3AF",
+    textSubtle: "#9CA3AF",
+    textDisabled: "rgba(20,20,20,0.4)",
     textInverted: "#F9FAFB",
 
     // Borders (from Figma: Colours/Border and Neutrals)
     border: "rgba(0,0,0,0.4)",
     borderSubtle: "#00000033",
+    borderStrong: "#141414",
+    borderDisabled: "rgba(20,20,20,0.16)",
 
     // Focus color (from Figma: node 120:927 - Accessible blue)
     focus: "#2684FF",
@@ -94,16 +101,23 @@ export const darkThemeDefaults: Theme = {
     // Background & Surface - Inverted
     background: "#141414",
     surface: "#141414",
+    surfaceSubtle: "#111827",
+    surfaceElevated: "#1F2937",
+    surfaceDisabled: "#3E3E3E",
     surfaceInverted: "#F9FAFB",
 
     // Text - Inverted
     text: "#F9FAFB",
     textMuted: "#9CA3AF",
+    textSubtle: "#6B7280",
+    textDisabled: "rgba(249,250,251,0.4)",
     textInverted: "#141414",
 
     // Borders - Adjusted for dark mode
     border: "#d9d9d9",
     borderSubtle: "#d4d4d433",
+    borderStrong: "#F9FAFB",
+    borderDisabled: "rgba(255,255,255,0.16)",
 
     // Focus color - Same accessible blue works in both modes
     focus: "#2684FF",

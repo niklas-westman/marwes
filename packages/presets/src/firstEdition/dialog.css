@@ -1,5 +1,5 @@
 .mw-dialog {
-  --mw-dialog-surface: var(--mw-color-surface, #ffffff);
+  --mw-dialog-surface: var(--mw-color-surface-elevated, #ffffff);
   --mw-dialog-border: color-mix(in srgb, var(--mw-color-border, #d1d5db) 78%, transparent);
   --mw-dialog-title: var(--mw-color-text, #141414);
   --mw-dialog-description: var(--mw-color-text-muted, #4b5563);
@@ -108,10 +108,10 @@
 }
 
 .mw-theme--dark .mw-dialog {
-  --mw-dialog-surface: #111827;
+  --mw-dialog-surface: var(--mw-color-surface-elevated);
   --mw-dialog-border: #374151;
-  --mw-dialog-title: #f9fafb;
-  --mw-dialog-description: #d1d5db;
+  --mw-dialog-title: var(--mw-color-text);
+  --mw-dialog-description: var(--mw-color-text-muted);
 }
 
 @media (max-width: 640px) {

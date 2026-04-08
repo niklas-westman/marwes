@@ -96,6 +96,92 @@
   }
 }
 
+.mw-input-field__leading-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: var(--mw-spacing-sm);
+  white-space: nowrap;
+  color: var(--mw-color-text-muted, #6b7280);
+  pointer-events: none;
+  font-weight: 400;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size);
+  line-height: 1;
+}
+
+/**
+ * When a leading symbol is present the wrapper takes over the input's border
+ * so the symbol appears visually inside the field boundary.
+ */
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol) {
+  border: 1px solid var(--mw-color-border);
+  border-radius: var(--mw-ui-radius);
+  background: var(--mw-color-surface);
+  transition: border-color 150ms ease, outline 150ms ease;
+}
+
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol) .mw-input {
+  width: 100%;
+  min-width: 0;
+  padding-left: var(--mw-spacing-xs);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Hover — forward to wrapper when symbol is present */
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):hover:not(:has(:disabled)):not(
+    :has(:focus)
+  ) {
+  border-color: color-mix(in srgb, var(--mw-color-border) 70%, var(--mw-color-text));
+}
+
+/* Focus — wrapper gets outline when symbol is present */
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(:focus-visible) {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: 2px;
+}
+
+/* Remove input's own focus outline when wrapper handles it */
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol) .mw-input:focus-visible {
+  outline: none;
+}
+
+/* Error/Danger — wrapper border when symbol is present */
+.mw-input-field--invalid .mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol),
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(.mw-input--danger) {
+  border-color: var(--mw-color-danger-base);
+}
+
+.mw-input-field--invalid
+  .mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(:focus-visible),
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(.mw-input--danger):has(
+    :focus-visible
+  ) {
+  outline-color: var(--mw-color-danger-base);
+}
+
+/* Success — wrapper border when symbol is present */
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(.mw-input--success) {
+  border-color: var(--mw-color-success-base);
+}
+
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(.mw-input--success):has(
+    :focus-visible
+  ) {
+  outline-color: var(--mw-color-success-base);
+}
+
+/* Disabled — wrapper when symbol is present */
+.mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(:disabled) {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--mw-color-border-disabled);
+  background: var(--mw-color-surface-disabled);
+}
+
 .mw-input-field--textarea .mw-input-field__input-wrapper {
   align-items: stretch;
 }

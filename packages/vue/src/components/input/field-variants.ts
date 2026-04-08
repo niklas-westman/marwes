@@ -1,4 +1,5 @@
-import { buildCurrencyHelperText } from "@marwes-ui/core"
+import { buildCurrencyHelperText, getCurrencySymbol, sanitizeCurrencyValue } from "@marwes-ui/core"
+import type { CurrencyCode } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
 import type { InputProps } from "./input"
 import { InputField, type InputFieldProps } from "./input-field"
@@ -293,7 +294,7 @@ export const URLField = defineComponent({
 
 export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
   input?: Omit<InputProps, "type" | "inputMode">
-  currency?: string
+  currency?: CurrencyCode
 }
 
 const currencyFieldPropKeys = [...fieldPropKeys, "currency"] as const
@@ -303,23 +304,38 @@ export const CurrencyField = defineComponent({
   inheritAttrs: false,
   props: [...currencyFieldPropKeys],
   emits: ["update:modelValue", "value-change"],
-  setup(_, { attrs, slots, emit }) {
+  setup(componentProps, { attrs, slots, emit }) {
     return () => {
-      const props = attrs as unknown as CurrencyFieldProps
-      const helperText = buildCurrencyHelperText(props.helperText, props.currency)
-      return h("div", { "data-purpose": "currency", "data-currency": props.currency }, [
+      const fieldProps = componentProps as unknown as CurrencyFieldProps
+      const currency = fieldProps.currency
+      const inputProps = fieldProps.input
+      const helperText = buildCurrencyHelperText(fieldProps.helperText, currency)
+      const leadingSymbol = getCurrencySymbol(currency)
+      const originalOnValueChange = inputProps?.onValueChange
+
+      return h("div", { "data-purpose": "currency", "data-currency": currency }, [
         h(
           InputField,
           {
-            ...props,
+            ...attrs,
+            ...fieldProps,
             ...(helperText ? { helperText } : {}),
+            ...(leadingSymbol ? { leadingSymbol } : {}),
             input: {
-              ...props.input,
+              ...inputProps,
               type: "text",
               inputMode: "decimal",
+              onValueChange: (rawValue: string) => {
+                const sanitizedValue = sanitizeCurrencyValue(rawValue)
+                originalOnValueChange?.(sanitizedValue)
+              },
             },
-            "onValue-change": (value: string) => emit("value-change", value),
-            "onUpdate:modelValue": (value: string) => emit("update:modelValue", value),
+            "onValue-change": (value: string) => {
+              emit("value-change", sanitizeCurrencyValue(value))
+            },
+            "onUpdate:modelValue": (value: string) => {
+              emit("update:modelValue", sanitizeCurrencyValue(value))
+            },
           },
           slots,
         ),

@@ -37,6 +37,7 @@ Imported component styles:
 - `icon.css`
 - `typography.css`
 - `molecules/checkbox-field.css`
+- `molecules/input-field.css`
 
 ## Contract with Core
 Core recipes emit:
@@ -65,6 +66,7 @@ This ensures token names and state variants map predictably into preset CSS.
 - `pnpm --filter @marwes-ui/presets typecheck`
 
 ## Related Docs
+- `COLORS.md`
 - `../../docs/PROJECT.md`
 - `../../docs/ARCHITECTURE.md`
 - `../../docs/ENGINEERING.md`

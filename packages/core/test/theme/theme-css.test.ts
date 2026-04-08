@@ -24,12 +24,19 @@ const fixture: ResolvedTheme = {
     info: resolveInfoRole(primary),
     background: "#FFFFFF",
     surface: "#F9FAFB",
+    surfaceSubtle: "#F3F4F6",
+    surfaceElevated: "#FFFFFF",
+    surfaceDisabled: "#F3F4F6",
     surfaceInverted: "#141414",
     text: "#141414",
     textMuted: "#9CA3AF",
+    textSubtle: "#9CA3AF",
+    textDisabled: "rgba(20,20,20,0.4)",
     textInverted: "#F9FAFB",
     border: "rgba(0,0,0,0.4)",
     borderSubtle: "#00000033",
+    borderStrong: "#141414",
+    borderDisabled: "rgba(20,20,20,0.16)",
     focus: "#2684FF",
   },
   font: {
@@ -138,6 +145,18 @@ describe("themeToCSSVars — surface / semantic", () => {
     expect(themeToCSSVars(fixture)["--mw-color-surface"]).toBe("#F9FAFB")
   })
 
+  it("surface-subtle equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-surface-subtle"]).toBe("#F3F4F6")
+  })
+
+  it("surface-elevated equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-surface-elevated"]).toBe("#FFFFFF")
+  })
+
+  it("surface-disabled equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-surface-disabled"]).toBe("#F3F4F6")
+  })
+
   it("surface-inverted equals fixture value", () => {
     expect(themeToCSSVars(fixture)["--mw-color-surface-inverted"]).toBe("#141414")
   })
@@ -150,12 +169,28 @@ describe("themeToCSSVars — surface / semantic", () => {
     expect(themeToCSSVars(fixture)["--mw-color-text-muted"]).toBe("#9CA3AF")
   })
 
+  it("text-subtle equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-text-subtle"]).toBe("#9CA3AF")
+  })
+
+  it("text-disabled equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-text-disabled"]).toBe("rgba(20,20,20,0.4)")
+  })
+
   it("focus equals fixture value", () => {
     expect(themeToCSSVars(fixture)["--mw-color-focus"]).toBe("#2684FF")
   })
 
   it("border equals fixture value", () => {
     expect(themeToCSSVars(fixture)["--mw-color-border"]).toBe("rgba(0,0,0,0.4)")
+  })
+
+  it("border-strong equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-border-strong"]).toBe("#141414")
+  })
+
+  it("border-disabled equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-border-disabled"]).toBe("rgba(20,20,20,0.16)")
   })
 })
 
@@ -258,8 +293,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 79 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(79)
+  it("emits exactly 86 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(86)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {
@@ -294,14 +329,14 @@ describe("applyTheme", () => {
     expect(setProperty).toHaveBeenCalledWith("--mw-color-primary-base", primary.base)
   })
 
-  it("calls style.setProperty exactly 79 times", () => {
+  it("calls style.setProperty exactly 86 times", () => {
     const setAttribute = vi.fn()
     const setProperty = vi.fn()
     const el = { setAttribute, style: { setProperty } } as unknown as HTMLElement
 
     applyTheme(el, fixture)
 
-    expect(setProperty).toHaveBeenCalledTimes(79)
+    expect(setProperty).toHaveBeenCalledTimes(86)
   })
 
   it("sets backgroundColor to the resolved background color", () => {

@@ -153,3 +153,30 @@ export function buildCurrencyHelperText(
 
   return helperText ? `${helperText} (${currency})` : `Amount in ${currency}`
 }
+
+export { getCurrencySymbol, currencyCodes } from "../data/currency-symbols"
+export type { CurrencyCode } from "../data/currency-symbols"
+
+/**
+ * Strips non-numeric characters from a currency input value.
+ * Allows digits, a single decimal point, and an optional leading minus sign.
+ */
+export function sanitizeCurrencyValue(rawValue: string): string {
+  let hasDecimal = false
+  let result = ""
+
+  for (let i = 0; i < rawValue.length; i++) {
+    const character = rawValue.charAt(i)
+
+    if (character === "-" && i === 0) {
+      result += character
+    } else if (character === "." && !hasDecimal) {
+      hasDecimal = true
+      result += character
+    } else if (character >= "0" && character <= "9") {
+      result += character
+    }
+  }
+
+  return result
+}

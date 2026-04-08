@@ -53,9 +53,11 @@
   opacity: 0.2;
   cursor: not-allowed;
   pointer-events: none;
-  background: #f3f4f6;
+  border-color: var(--mw-color-border-disabled);
+  background: var(--mw-color-surface-disabled);
+  color: var(--mw-color-text-disabled);
 }
 
 .mw-theme--dark .mw-textarea {
-  background: #3e3e3e;
+  background: var(--mw-color-surface);
 }

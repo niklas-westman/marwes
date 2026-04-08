@@ -1,3 +1,4 @@
+import { currencyCodes } from "@marwes-ui/core"
 import type { CurrencyFieldProps } from "@marwes-ui/vue"
 import { CurrencyField, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,6 +9,12 @@ const meta = {
   component: CurrencyField as unknown as object,
   parameters: {
     layout: "centered",
+  },
+  argTypes: {
+    currency: {
+      control: "select",
+      options: currencyCodes,
+    },
   },
   tags: ["autodocs"],
 } satisfies Meta<CurrencyFieldProps>

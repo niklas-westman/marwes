@@ -23,6 +23,9 @@ export type InputFieldProps = {
 
   /** Additional aria-describedby IDs to merge with internal helper/error IDs. */
   ariaDescribedBy?: string
+
+  /** Optional leading text symbol displayed inside the input on the left (e.g. "$", "€", "kr"). */
+  leadingSymbol?: string
 }
 
 function cx(...parts: Array<string | false>): string {
@@ -217,9 +220,14 @@ export function InputField(props: InputFieldProps): React.ReactElement {
       </label>
 
       <div className="mw-input-field__input-wrapper">
+        {props.leadingSymbol && (
+          <span className="mw-input-field__leading-symbol" aria-hidden="true">
+            {props.leadingSymbol}
+          </span>
+        )}
         <Input {...inputProps} />
 
-        {isPasswordField && (
+        {isPasswordField && !disabled && (
           <button
             type="button"
             className="mw-input-field__toggle-password"
@@ -231,7 +239,7 @@ export function InputField(props: InputFieldProps): React.ReactElement {
           </button>
         )}
 
-        {hasSearchValue && (
+        {hasSearchValue && !disabled && (
           <button
             type="button"
             className="mw-input-field__clear-search"

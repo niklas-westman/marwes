@@ -1,3 +1,4 @@
+import { currencyCodes } from "@marwes-ui/core"
 import { CurrencyField, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -7,6 +8,12 @@ const meta: Meta<typeof CurrencyField> = {
   component: CurrencyField,
   parameters: {
     layout: "centered",
+  },
+  argTypes: {
+    currency: {
+      control: "select",
+      options: currencyCodes,
+    },
   },
   tags: ["autodocs"],
 }
@@ -99,7 +106,6 @@ export const PoundCurrency: Story = {
             value: amount,
             onValueChange: setAmount,
           }}
-          {...args}
         />
       </div>
     )

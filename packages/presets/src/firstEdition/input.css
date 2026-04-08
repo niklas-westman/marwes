@@ -58,7 +58,9 @@
   opacity: 0.2;
   cursor: not-allowed;
   pointer-events: none;
-  background: #f3f4f6;
+  border-color: var(--mw-color-border-disabled);
+  background: var(--mw-color-surface-disabled);
+  color: var(--mw-color-text-disabled);
 }
 
 /* Dark mode disabled state */
@@ -80,5 +82,5 @@
 
 /* Dark mode input styles */
 .mw-theme--dark .mw-input {
-  background: #3e3e3e;
+  background: var(--mw-color-surface);
 }

@@ -36,16 +36,23 @@ export type Theme = {
     // Background & Surface
     background: string
     surface: string
+    surfaceSubtle: string
+    surfaceElevated: string
+    surfaceDisabled: string
     surfaceInverted: string
 
     // Text
     text: string
     textMuted: string
+    textSubtle: string
+    textDisabled: string
     textInverted: string
 
     // Borders
     border: string
     borderSubtle: string
+    borderStrong: string
+    borderDisabled: string
 
     /**
      * Focus color used for focus-visible outlines on interactive elements.
@@ -123,12 +130,19 @@ export interface ThemeInputColor {
   // Surface and semantic tokens — not derived, configured directly
   background: string
   surface: string
+  surfaceSubtle: string
+  surfaceElevated: string
+  surfaceDisabled: string
   surfaceInverted: string
   text: string
   textMuted: string
+  textSubtle: string
+  textDisabled: string
   textInverted: string
   border: string
   borderSubtle: string
+  borderStrong: string
+  borderDisabled: string
   focus: string
 
   // Removed in v3 — typed never so consumers get a descriptive TS error

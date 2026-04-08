@@ -75,9 +75,15 @@ describe("ThemeInputColor", () => {
   it("accepts plain string for surface fields", () => {
     const color: Partial<ThemeInputColor> = {
       background: "#FFFFFF",
+      surfaceElevated: "#FFFFFF",
+      textSubtle: "#9CA3AF",
+      borderStrong: "#141414",
       focus: "#2684FF",
     }
     expect(color.background).toBe("#FFFFFF")
+    expect(color.surfaceElevated).toBe("#FFFFFF")
+    expect(color.textSubtle).toBe("#9CA3AF")
+    expect(color.borderStrong).toBe("#141414")
   })
 })
 

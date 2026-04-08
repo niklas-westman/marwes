@@ -14,6 +14,8 @@ export type InputFieldProps = {
   input?: InputProps
   ariaDescribedBy?: string
   modelValue?: string
+  /** Optional leading text symbol displayed inside the input on the left (e.g. "$", "€", "kr"). */
+  leadingSymbol?: string
 }
 
 const inputFieldPropKeys = [
@@ -24,6 +26,7 @@ const inputFieldPropKeys = [
   "input",
   "ariaDescribedBy",
   "modelValue",
+  "leadingSymbol",
 ] as const
 
 function hasTextContent(value: string | undefined): boolean {
@@ -138,9 +141,14 @@ export const InputField = defineComponent(
         ]),
 
         h("div", { class: "mw-input-field__input-wrapper" }, [
+          props.leadingSymbol
+            ? h("span", { class: "mw-input-field__leading-symbol", "aria-hidden": "true" }, [
+                props.leadingSymbol,
+              ])
+            : null,
           h(Input, mergedInputProps.value),
 
-          isPasswordField.value
+          isPasswordField.value && !disabled.value
             ? h(
                 "button",
                 {
@@ -162,7 +170,7 @@ export const InputField = defineComponent(
               )
             : null,
 
-          hasSearchValue.value
+          hasSearchValue.value && !disabled.value
             ? h(
                 "button",
                 {
