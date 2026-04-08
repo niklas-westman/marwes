@@ -10,7 +10,32 @@ const options = [
 ]
 
 const FIGMA_DROPDOWN_NODE = "1364:7701"
-const DEMO_WIDTH = "320px"
+const DEMO_WIDTH = "89px"
+const SELECT_FIELD_LABEL = "Option"
+const selectFieldStoryStyles = `
+  .mw-select-field-story-preview {
+    width: ${DEMO_WIDTH};
+    min-width: ${DEMO_WIDTH};
+    max-width: ${DEMO_WIDTH};
+    inline-size: ${DEMO_WIDTH};
+    min-inline-size: ${DEMO_WIDTH};
+    max-inline-size: ${DEMO_WIDTH};
+  }
+
+  .mw-select-field-story-preview .mw-input-field,
+  .mw-select-field-story-preview .mw-input-field__input-wrapper,
+  .mw-select-field-story-preview .mw-select-field__control,
+  .mw-select-field-story-preview .mw-select-field__trigger,
+  .mw-select-field-story-preview .mw-select__control,
+  .mw-select-field-story-preview .mw-select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+`
 
 type SelectFieldStoryArgs = SelectFieldProps & {
   native: boolean
@@ -33,12 +58,17 @@ const meta = {
       control: "boolean",
       description: `Use native={false} for the Marwes dropdown field (${FIGMA_DROPDOWN_NODE}) or native={true} for browser select chrome.`,
     },
+    label: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
   },
   args: {
     native: false,
-    label: "Country",
     select: {
-      placeholder: "Choose a country",
+      placeholder: "Option",
       options,
     },
   },
@@ -50,6 +80,7 @@ const meta = {
 
         return {
           ...rest,
+          label: SELECT_FIELD_LABEL,
           select: {
             ...select,
             native,
@@ -60,7 +91,8 @@ const meta = {
       return { fieldArgs }
     },
     template: `
-      <div style="width: ${DEMO_WIDTH};">
+      <style>${selectFieldStoryStyles}</style>
+      <div class="mw-select-field-story-preview">
         <SelectField v-bind="fieldArgs" />
       </div>
     `,
@@ -81,7 +113,7 @@ export const WithHelperText: Story = {
 
 export const WithError: Story = {
   args: {
-    error: "Country is required.",
+    error: "Option is required.",
   },
 }
 
@@ -100,7 +132,7 @@ export const Required: Story = {
     helperText: "Required for tax calculation.",
     select: {
       options,
-      placeholder: "Choose a country",
+      placeholder: "Option",
       required: true,
     },
   },
@@ -116,6 +148,7 @@ export const Controlled: Story = {
 
         return {
           ...rest,
+          label: SELECT_FIELD_LABEL,
           select: {
             ...select,
             native,
@@ -126,9 +159,12 @@ export const Controlled: Story = {
       return { fieldArgs, value }
     },
     template: `
-      <div style="width: ${DEMO_WIDTH};">
-        <SelectField v-bind="fieldArgs" v-model="value" />
-        <Paragraph style="margin-top: 16px; font-size: 14px; color: #666;">
+      <div style="display: grid; gap: 16px; justify-items: start;">
+        <style>${selectFieldStoryStyles}</style>
+        <div class="mw-select-field-story-preview">
+          <SelectField v-bind="fieldArgs" v-model="value" />
+        </div>
+        <Paragraph style="font-size: 14px; color: #666;">
           Current value: {{ value || "(empty)" }}
         </Paragraph>
       </div>

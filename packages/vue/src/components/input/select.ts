@@ -4,10 +4,11 @@ import type {
   CssVars,
   SelectOptions,
 } from "@marwes-ui/core"
-import { createSelectRecipe } from "@marwes-ui/core"
+import { createSelectRecipe, resolveSelectMode } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
+import { SelectArrowIcon } from "./select-arrow-icon"
 
 export type SelectAppearance = CoreSelectAppearance
 export type SelectOption = CoreSelectOption
@@ -62,6 +63,7 @@ export const Select = defineComponent(
   (props: SelectProps, { emit }) => {
     const attrs = useAttrs()
     const kit = computed(() => createSelectRecipe(props))
+    const mode = computed(() => resolveSelectMode(props))
     const uncontrolledValue = ref(getInitialSelectValue(props))
     const currentValue = computed(() => props.modelValue ?? props.value ?? uncontrolledValue.value)
     const placeholderSelected = computed(
@@ -76,7 +78,7 @@ export const Select = defineComponent(
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
       const style = mergeStyles(renderKit.vars as CssVars, attrs.style)
 
-      return h(
+      const selectElement = h(
         "select",
         {
           ...passthroughAttrs,
@@ -124,6 +126,15 @@ export const Select = defineComponent(
           ),
         ],
       )
+
+      if (mode.value === "native") {
+        return selectElement
+      }
+
+      return h("span", { class: "mw-select__control" }, [
+        selectElement,
+        h(SelectArrowIcon, { className: "mw-select__control-icon" }),
+      ])
     }
   },
   {

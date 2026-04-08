@@ -2,6 +2,8 @@ import { Meta } from "@storybook/addon-docs/blocks";
 import {
   fieldComparisonRows,
   fieldWhyPurposeComponents,
+  richTextFormattingReference,
+  richTextWhyUseIt,
 } from "@marwes-ui/core";
 
 <Meta title="Input/Introduction" />
@@ -18,7 +20,7 @@ using a clear Atom -> Molecule -> Purpose progression.
 ### Field naming
 
 Components that wrap raw input-domain atoms with label, helper text, and error semantics
-are called **Fields** (e.g. `InputField`, `SelectField`, `DropdownField`, `SearchField`, `EmailField`).
+are called **Fields** (e.g. `InputField`, `SelectField`, `TextareaField`, `RichTextField`, `DropdownField`, `SearchField`, `EmailField`).
 The suffix signals that the component provides full field-level UX — accessible labelling,
 validation display, and AI-friendly `data-purpose` attributes — so you don't have to wire
 those concerns yourself.
@@ -29,12 +31,14 @@ those concerns yourself.
 Atoms
   ├─ Input
   ├─ Select
-  └─ Textarea
+  ├─ Textarea
+  └─ RichText
 
 Molecules
   ├─ InputField
   ├─ SelectField
-  └─ TextareaField
+  ├─ TextareaField
+  └─ RichTextField
 
 Purpose Variants (Input-based)
   ├─ DropdownField
@@ -95,6 +99,40 @@ import { Textarea } from "@marwes-ui/react"
   onValueChange={setValue}
 />
 ```
+
+## Atom: RichText
+
+Use `RichText` when the authored content itself needs inline emphasis such as bold, italic, or underline. Use `Textarea` when the content should stay plain text.
+
+```tsx
+import { RichText } from "@marwes-ui/react"
+
+<RichText
+  placeholder="Write a formatted update"
+  value={html}
+  onValueChange={setHtml}
+/>
+```
+
+### Why use RichText?
+
+<ul>
+  {richTextWhyUseIt.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}:</strong> {item.text}
+    </li>
+  ))}
+</ul>
+
+### Supported MVP formatting
+
+<ul>
+  {richTextFormattingReference.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}:</strong> {item.text}
+    </li>
+  ))}
+</ul>
 
 ## Recommended: Purpose Input Components
 
@@ -446,6 +484,24 @@ import { TextareaField } from "@marwes-ui/react";
     rows: 4,
     value: description,
     onValueChange: setDescription,
+  }}
+/>
+```
+
+## Molecule: RichTextField
+
+Use `RichTextField` when the editor needs the same label, helper text, and error treatment as other Marwes field wrappers:
+
+```tsx
+import { RichTextField } from "@marwes-ui/react";
+
+<RichTextField
+  label="Release notes"
+  helperText="Use bold and italics to call out important changes."
+  editor={{
+    value: notes,
+    onValueChange: setNotes,
+    placeholder: "Write a formatted summary",
   }}
 />
 ```

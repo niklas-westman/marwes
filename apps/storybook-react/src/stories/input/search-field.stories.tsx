@@ -16,7 +16,7 @@ type Story = StoryObj<typeof SearchField>
 
 /**
  * Basic search field with controlled state.
- * Type to see the clear button (X icon) appear automatically.
+ * A search icon appears on the right until the field has content, then the clear button (X icon) appears automatically.
  */
 export const SearchExample: Story = {
   args: {
@@ -131,6 +131,7 @@ export const Disabled: Story = {
 
 /**
  * Read-only search field.
+ * The search icon stays visible as a passive affordance.
  */
 export const ReadOnly: Story = {
   args: {

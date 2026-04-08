@@ -10,7 +10,32 @@ const options = [
 ]
 
 const FIGMA_DROPDOWN_NODE = "1364:7701"
-const DEMO_WIDTH = "320px"
+const DEMO_WIDTH = "120px"
+const SELECT_FIELD_LABEL = ""
+const selectFieldStoryStyles = `
+  .mw-select-field-story-preview {
+    width: ${DEMO_WIDTH};
+    min-width: ${DEMO_WIDTH};
+    max-width: ${DEMO_WIDTH};
+    inline-size: ${DEMO_WIDTH};
+    min-inline-size: ${DEMO_WIDTH};
+    max-inline-size: ${DEMO_WIDTH};
+  }
+
+  .mw-select-field-story-preview .mw-input-field,
+  .mw-select-field-story-preview .mw-input-field__input-wrapper,
+  .mw-select-field-story-preview .mw-select-field__control,
+  .mw-select-field-story-preview .mw-select-field__trigger,
+  .mw-select-field-story-preview .mw-select__control,
+  .mw-select-field-story-preview .mw-select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+`
 
 type SelectFieldStoryArgs = SelectFieldProps & {
   native: boolean
@@ -20,9 +45,12 @@ function renderSelectField(args: SelectFieldStoryArgs) {
   const { native, select, ...fieldProps } = args
 
   return (
-    <div style={{ width: DEMO_WIDTH }}>
-      <SelectField {...fieldProps} select={{ ...select, native }} />
-    </div>
+    <>
+      <style>{selectFieldStoryStyles}</style>
+      <div className="mw-select-field-story-preview">
+        <SelectField {...fieldProps} label={SELECT_FIELD_LABEL} select={{ ...select, native }} />
+      </div>
+    </>
   )
 }
 
@@ -43,12 +71,17 @@ const meta: Meta<SelectFieldStoryArgs> = {
       control: "boolean",
       description: `Use native={false} for the Marwes dropdown field (${FIGMA_DROPDOWN_NODE}) or native={true} for browser select chrome.`,
     },
+    label: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
   },
   args: {
     native: false,
-    label: "Country",
     select: {
-      placeholder: "Choose a country",
+      placeholder: "Option",
       options,
     },
   },
@@ -69,7 +102,7 @@ export const WithHelperText: Story = {
 
 export const WithError: Story = {
   args: {
-    error: "Country is required.",
+    error: "Option is required.",
   },
 }
 
@@ -88,7 +121,7 @@ export const Required: Story = {
     helperText: "Required for tax calculation.",
     select: {
       options,
-      placeholder: "Choose a country",
+      placeholder: "Option",
       required: true,
     },
   },
@@ -100,17 +133,21 @@ export const Controlled: Story = {
     const { native, select, ...fieldProps } = args
 
     return (
-      <div style={{ width: DEMO_WIDTH }}>
-        <SelectField
-          {...fieldProps}
-          select={{
-            ...select,
-            native,
-            value,
-            onValueChange: setValue,
-          }}
-        />
-        <Paragraph style={{ marginTop: "16px", fontSize: "14px", color: "#666" }}>
+      <div style={{ display: "grid", gap: "16px", justifyItems: "start" }}>
+        <style>{selectFieldStoryStyles}</style>
+        <div className="mw-select-field-story-preview">
+          <SelectField
+            {...fieldProps}
+            label={SELECT_FIELD_LABEL}
+            select={{
+              ...select,
+              native,
+              value,
+              onValueChange: setValue,
+            }}
+          />
+        </div>
+        <Paragraph style={{ fontSize: "14px", color: "#666" }}>
           Current value: {value || "(empty)"}
         </Paragraph>
       </div>

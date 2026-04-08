@@ -11,10 +11,15 @@
 
 .mw-input-field__label {
   display: block;
+  padding: 0;
+  background: none;
+  border: none;
   cursor: pointer;
   user-select: none;
   opacity: 0.6;
   transition: opacity 0.2s ease;
+  text-align: left;
+  font: inherit;
 
   p {
     line-height: 1;
@@ -33,7 +38,9 @@
     flex: 1;
   }
 
-  &:has(.mw-input-field__toggle-password) .mw-input {
+  &:has(.mw-input-field__toggle-password) .mw-input,
+  &:has(.mw-input-field__search-icon) .mw-input,
+  &:has(.mw-input-field__clear-search) .mw-input {
     padding-right: var(--mw-spacing-xl);
   }
 }
@@ -65,6 +72,17 @@
   &:active {
     background: var(--mw-color-border-subtle, #e5e7eb);
   }
+}
+
+.mw-input-field__search-icon {
+  position: absolute;
+  right: var(--mw-spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px; /* off-scale — no token */
+  color: var(--mw-color-text-muted, #6b7280);
+  pointer-events: none;
 }
 
 .mw-input-field__clear-search {
@@ -182,7 +200,8 @@
   background: var(--mw-color-surface-disabled);
 }
 
-.mw-input-field--textarea .mw-input-field__input-wrapper {
+.mw-input-field--textarea .mw-input-field__input-wrapper,
+.mw-input-field--rich-text .mw-input-field__input-wrapper {
   align-items: stretch;
 }
 
@@ -190,11 +209,6 @@
 .mw-input[type="search"]::-webkit-search-cancel-button {
   display: none;
   -webkit-appearance: none;
-}
-
-/* Add padding to search input when clear button is present */
-.mw-input-field__input-wrapper:has(.mw-input-field__clear-search) .mw-input {
-  padding-right: var(--mw-spacing-xl);
 }
 
 /* Label opacity: 1 when input is focused */

@@ -1,7 +1,7 @@
 import type { SelectProps } from "@marwes-ui/vue"
 import { Paragraph, Select } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
-import { ref } from "vue"
+import { h, ref } from "vue"
 
 const options = [
   { value: "starter", label: "Starter" },
@@ -10,6 +10,27 @@ const options = [
 ]
 
 const FIGMA_SELECT_NODE = "1364:7707"
+const SELECT_STORY_WIDTH = "89px"
+const selectStoryStyles = `
+  .mw-select-story-preview {
+    width: ${SELECT_STORY_WIDTH};
+    min-width: ${SELECT_STORY_WIDTH};
+    max-width: ${SELECT_STORY_WIDTH};
+    inline-size: ${SELECT_STORY_WIDTH};
+    min-inline-size: ${SELECT_STORY_WIDTH};
+    max-inline-size: ${SELECT_STORY_WIDTH};
+  }
+
+  .mw-select-story-preview .mw-select__control,
+  .mw-select-story-preview .mw-select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    inline-size: 100%;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+`
 
 const meta = {
   title: "Input/Atom/Select",
@@ -40,23 +61,42 @@ export default meta
 
 type Story = StoryObj<SelectProps>
 
-export const Basic: Story = {}
+export const Basic: Story = {
+  render: (args) => ({
+    setup() {
+      return () =>
+        h("div", null, [
+          h("style", null, selectStoryStyles),
+          h("div", { class: "mw-select-story-preview" }, [h(Select, args)]),
+        ])
+    },
+  }),
+}
 
 export const Controlled: Story = {
   render: (args) => ({
-    components: { Select, Paragraph },
     setup() {
       const value = ref("growth")
-      return { args, value }
+
+      return () =>
+        h("div", { style: { display: "grid", gap: "16px", justifyItems: "start" } }, [
+          h("style", null, selectStoryStyles),
+          h("div", { class: "mw-select-story-preview" }, [
+            h(Select, {
+              ...args,
+              modelValue: value.value,
+              "onUpdate:modelValue": (nextValue: string) => {
+                value.value = nextValue
+              },
+            }),
+          ]),
+          h(
+            Paragraph,
+            { style: { fontSize: "14px", color: "#666" } },
+            { default: () => `Current value: ${value.value || "(empty)"}` },
+          ),
+        ])
     },
-    template: `
-      <div style="width: 320px;">
-        <Select v-bind="args" v-model="value" />
-        <Paragraph style="margin-top: 16px; font-size: 14px; color: #666;">
-          Current value: {{ value || "(empty)" }}
-        </Paragraph>
-      </div>
-    `,
   }),
 }
 
@@ -65,6 +105,15 @@ export const Disabled: Story = {
     disabled: true,
     defaultValue: "growth",
   },
+  render: (args) => ({
+    setup() {
+      return () =>
+        h("div", null, [
+          h("style", null, selectStoryStyles),
+          h("div", { class: "mw-select-story-preview" }, [h(Select, args)]),
+        ])
+    },
+  }),
 }
 
 export const Invalid: Story = {
@@ -74,17 +123,17 @@ export const Invalid: Story = {
     describedBy: "select-error",
   },
   render: (args) => ({
-    components: { Select, Paragraph },
     setup() {
-      return { args }
+      return () =>
+        h("div", { style: { display: "grid", gap: "8px", justifyItems: "start" } }, [
+          h("style", null, selectStoryStyles),
+          h("div", { class: "mw-select-story-preview" }, [h(Select, args)]),
+          h(
+            Paragraph,
+            { id: "select-error", size: "sm" },
+            { default: () => "Invalid state for validation errors." },
+          ),
+        ])
     },
-    template: `
-      <div style="width: 320px;">
-        <Select v-bind="args" />
-        <Paragraph id="select-error" size="sm" style="margin-top: 8px;">
-          Invalid state for validation errors.
-        </Paragraph>
-      </div>
-    `,
   }),
 }

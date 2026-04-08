@@ -1,5 +1,10 @@
 import { Meta } from "@storybook/addon-docs/blocks"
-import { fieldComparisonRows, fieldWhyPurposeComponents } from "@marwes-ui/core"
+import {
+  fieldComparisonRows,
+  fieldWhyPurposeComponents,
+  richTextFormattingReference,
+  richTextWhyUseIt,
+} from "@marwes-ui/core"
 
 <Meta title="Input/Introduction" />
 
@@ -15,7 +20,7 @@ using a clear Atom -> Molecule -> Purpose progression.
 ### Field naming
 
 Components that wrap the raw `Input` atom with label, helper text, and error semantics
-are called **Fields** (e.g. `InputField`, `SelectField`, `DropdownField`, `SearchField`, `EmailField`).
+are called **Fields** (e.g. `InputField`, `SelectField`, `TextareaField`, `RichTextField`, `DropdownField`, `SearchField`, `EmailField`).
 The suffix signals that the component provides full field-level UX — accessible labelling,
 validation display, and AI-friendly `data-purpose` attributes — so you don't have to wire
 those concerns yourself.
@@ -26,12 +31,14 @@ those concerns yourself.
 Atoms
   ├─ Input
   ├─ Select
-  └─ Textarea
+  ├─ Textarea
+  └─ RichText
 
 Molecules
   ├─ InputField
   ├─ SelectField
-  └─ TextareaField
+  ├─ TextareaField
+  └─ RichTextField
 
 Purpose Variants (Input-based)
   ├─ DropdownField
@@ -110,6 +117,46 @@ const value = ref("")
   />
 </template>
 ```
+
+## Atom: RichText
+
+Use `RichText` when the authored content itself needs inline emphasis such as bold, italic, or underline. Use `Textarea` when the content should stay plain text.
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { RichText } from "@marwes-ui/vue"
+
+const html = ref("")
+</script>
+
+<template>
+  <RichText
+    placeholder="Write a formatted update"
+    v-model="html"
+  />
+</template>
+```
+
+### Why use RichText?
+
+<ul>
+  {richTextWhyUseIt.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}:</strong> {item.text}
+    </li>
+  ))}
+</ul>
+
+### Supported MVP formatting
+
+<ul>
+  {richTextFormattingReference.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}:</strong> {item.text}
+    </li>
+  ))}
+</ul>
 
 ## Recommended: Purpose Input Components
 
@@ -524,6 +571,30 @@ const description = ref("")
     v-model="description"
     :textarea="{
       rows: 4
+    }"
+  />
+</template>
+```
+
+## Molecule: RichTextField
+
+Use `RichTextField` when the editor needs the same label, helper text, and error treatment as other Marwes field wrappers:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { RichTextField } from "@marwes-ui/vue"
+
+const notes = ref("")
+</script>
+
+<template>
+  <RichTextField
+    label="Release notes"
+    helperText="Use bold and italics to call out important changes."
+    v-model="notes"
+    :editor="{
+      placeholder: 'Write a formatted summary'
     }"
   />
 </template>

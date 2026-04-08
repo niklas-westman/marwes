@@ -60,3 +60,32 @@ describe("Vue InputField leadingSymbol", () => {
     expect(leadingSymbolWrapper).toBeNull()
   })
 })
+
+describe("Vue InputField search affordance", () => {
+  it("renders a search icon when the search field is empty", () => {
+    renderWithProvider({ label: "Search", input: { type: "search" } })
+
+    const searchIconWrapper = document.querySelector(".mw-input-field__search-icon")
+    expect(searchIconWrapper).not.toBeNull()
+    expect(searchIconWrapper?.getAttribute("aria-hidden")).toBe("true")
+    expect(searchIconWrapper?.querySelector("svg")).not.toBeNull()
+    expect(screen.queryByLabelText("Clear search")).toBeNull()
+  })
+
+  it("renders the clear button instead of the search icon when the search field has a value", () => {
+    renderWithProvider({ label: "Search", input: { type: "search", value: "laptop" } })
+
+    expect(screen.getByLabelText("Clear search")).toBeInTheDocument()
+    expect(document.querySelector(".mw-input-field__search-icon")).toBeNull()
+  })
+
+  it("keeps the search icon for read-only search fields with a value", () => {
+    renderWithProvider({
+      label: "Search",
+      input: { type: "search", value: "laptop", readOnly: true },
+    })
+
+    expect(screen.queryByLabelText("Clear search")).toBeNull()
+    expect(document.querySelector(".mw-input-field__search-icon")).not.toBeNull()
+  })
+})

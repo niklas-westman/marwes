@@ -27,3 +27,19 @@ export type {
 } from "./textarea-types"
 
 export { createTextareaRecipe } from "./textarea-recipe"
+
+export type {
+  RichTextOptions,
+  RichTextRenderKit,
+  RichTextA11yProps,
+  RichTextFormat,
+} from "./rich-text-types"
+
+export { createRichTextRecipe } from "./rich-text-recipe"
+export {
+  normalizeRichTextHtml,
+  isRichTextHtmlEmpty,
+  escapeRichTextHtml,
+  richTextCommandByFormat,
+} from "./rich-text-html"
+export { resolveRichTextAllowedFormats } from "./rich-text-styles"

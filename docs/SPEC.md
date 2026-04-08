@@ -124,6 +124,9 @@ Keep this mapping in PR description (or add temporarily to this file for major w
 - DEC-005: Where should adapter-shared non-rendering logic live?
   - Status: Resolved (see Decision Log)
   - Lean: Extend `@marwes-ui/core`
+- DEC-006: Should rich text formatting extend `Textarea` / `TextareaField` or ship as a separate input-family component pair?
+  - Status: Resolved (see Decision Log)
+  - Lean: Separate `RichText` + `RichTextField`
 
 ## 10. Decision Log
 Use this format when resolving an open decision:
@@ -219,6 +222,47 @@ Use this format when resolving an open decision:
   - `packages/vue/src/*` (consuming helpers)
   - `apps/storybook-react/src/*` and `apps/storybook-vue/src/*` (shared story fixtures if extracted)
 
+### REQ-INPUT-RT-001: RichText + RichTextField
+- **Figma reference**: use `Text field` (`1364:7662`) and `Text area` (`1364:7696`) as the current visual baselines from `.figma/marwes/components/text-field.json` and `.figma/marwes/components/text-area.json` until a dedicated rich-text node is added
+- **Problem**: Marwes has plain-text multiline controls (`Textarea`, `TextareaField`) but no Input-family component for inline formatting such as bold, italic, and underline.
+- **Scope**:
+  - Add a new Input-family atom `RichText`
+  - Add a new Input-family molecule `RichTextField`
+  - Keep `Textarea` and `TextareaField` as plain-text controls
+  - Support toolbar actions for `bold`, `italic`, and `underline`
+  - Support controlled and uncontrolled usage
+  - Support disabled, read-only, invalid, helper-text, and error states
+  - Use a constrained HTML string as the MVP value format
+  - Add framework-agnostic core contracts and shared a11y helpers in `@marwes-ui/core`
+  - Add React and Vue adapters, Storybook stories/docs, contracts, exports, and preset CSS
+- **Non-goals**:
+  - Retrofitting native `Textarea` into a rich text editor
+  - Shipping links, lists, images, tables, headings, alignment, or arbitrary embedded media in MVP
+  - Storing arbitrary unsanitized HTML as part of the public contract
+  - Adding editor runtime dependencies to `@marwes-ui/core`
+- **Acceptance criteria**:
+  - [ ] `RichText` ships as a new atom under the Input family in core, React, Vue, and Storybook
+  - [ ] `RichTextField` ships as a new molecule under the Input family in React, Vue, and Storybook
+  - [ ] `Textarea` and `TextareaField` remain plain-text components with unchanged conceptual scope
+  - [ ] MVP formatting actions support `bold`, `italic`, and `underline`
+  - [ ] The public value contract is an HTML string with a small, documented supported subset
+  - [ ] Core exposes rich-text types/recipe metadata and a dedicated helper for field labelling/description wiring
+  - [ ] React and Vue adapters stay in parity for props, value flow, disabled/read-only behavior, and toolbar actions
+  - [ ] Storybook titles follow the Input taxonomy: `Input/Atom/RichText` and `Input/Molecule/RichTextField`
+  - [ ] Input Introduction docs in both Storybooks explain when to use `RichText` / `RichTextField` vs `Textarea` / `TextareaField`
+  - [ ] Shared contracts cover atom behavior and field-level accessibility expectations across both adapters
+- **Validation**:
+  - Unit: Core types/recipes typecheck; React/Vue adapter tests cover formatting actions and value flow
+  - Integration/manual: Verify React and Vue Storybook stories for basic, helper, error, disabled, read-only, and controlled states
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/input/rich-text-*`, `packages/core/src/shared/field-helpers.ts`, `packages/core/src/components/atoms/input/index.ts`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`
+  - Presets: `packages/presets/src/firstEdition/rich-text.css`, optional `packages/presets/src/firstEdition/molecules/rich-text-field.css`, `packages/presets/src/firstEdition/styles.css`
+  - React: `packages/react/src/components/input/rich-text.tsx`, `packages/react/src/components/input/rich-text-field.tsx`, adapter tests, package exports, and adapter dependencies
+  - Vue: `packages/vue/src/components/input/rich-text.ts`, `packages/vue/src/components/input/rich-text-field.ts`, adapter tests, package exports, and adapter dependencies
+  - Storybook: React/Vue input stories, `Introduction.mdx`, taxonomy tests, intro-docs tests
+  - Shared tests: `tests/contracts/rich-text.contract.ts`, `tests/contracts/rich-text-field.contract.ts`
+  - Docs/backlog: `docs/Upgrade_v2.md`
+
 ### REQ-DIV-001: Divider Component
 - **Figma reference**: node-id=1-932
 - **Problem**: Need a semantic separator component for visually dividing content sections
@@ -281,3 +325,19 @@ Use this format when resolving an open decision:
   - `packages/core/src/*`
   - `packages/react/src/*`
   - `packages/vue/src/*`
+
+### DEC-006 - Rich text ships as a separate Input-family component pair
+- Date: 2026-04-08
+- Decision:
+  - Rich text editing will ship as new Input-family components, `RichText` and `RichTextField`, rather than extending `Textarea` or `TextareaField`.
+- Rationale:
+  - A native `<textarea>` is a plain-text control and cannot provide true inline formatting for selected ranges. Splitting the concepts keeps the API honest, preserves the existing plain-text surface, and aligns the feature with the Marwes Atom → Molecule → Storybook taxonomy.
+- Impacted docs/files:
+  - `SPEC.md`
+  - `docs/Upgrade_v2.md`
+  - `packages/core/src/components/atoms/input/*`
+  - `packages/presets/src/firstEdition/*`
+  - `packages/react/src/components/input/*`
+  - `packages/vue/src/components/input/*`
+  - `apps/storybook-react/src/stories/input/*`
+  - `apps/storybook-vue/src/stories/input/*`

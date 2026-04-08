@@ -48,13 +48,38 @@ export const fieldWhyPurposeComponents: LabeledCopy[] = [
   { label: "Self-documenting", text: "Code intent is clear from component name" },
 ]
 
+export const richTextWhyUseIt: LabeledCopy[] = [
+  {
+    label: "Inline emphasis",
+    text: "Bold, italic, and underline can be applied directly inside the editor surface",
+  },
+  {
+    label: "Textarea-like layout",
+    text: "Uses the same field framing as other input controls while supporting formatted content",
+  },
+  {
+    label: "Accessible editing surface",
+    text: "Role, labels, descriptions, and error wiring stay aligned with the Marwes field contract",
+  },
+  {
+    label: "Separate plain-text boundary",
+    text: "Textarea remains the plain-text choice, so rich formatting is explicit in the component name",
+  },
+]
+
+export const richTextFormattingReference: LabeledCopy[] = [
+  { label: "Bold", text: "Highlights important words or short phrases" },
+  { label: "Italic", text: "Adds emphasis or styling nuance without changing structure" },
+  { label: "Underline", text: "Signals extra emphasis when the design language calls for it" },
+]
+
 export const fieldComparisonRows: FieldComparisonRow[] = [
   {
     field: "SearchField",
     type: "search",
     inputMode: "search",
     autoComplete: "-",
-    features: "Clear button (X icon) when has value",
+    features: "Search icon by default, clear button (X icon) when has value",
   },
   {
     field: "PasswordField",

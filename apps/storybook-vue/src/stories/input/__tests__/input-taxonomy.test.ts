@@ -25,6 +25,14 @@ describe("Vue input story taxonomy", () => {
     expect(textareaStory).toMatch(/export const\s+Basic\s*:/)
   })
 
+  it("uses Atom title for RichText story", () => {
+    const richTextStory = readStoryFile("rich-text.stories.ts")
+
+    expect(richTextStory).toContain('title: "Input/Atom/RichText"')
+    expect(richTextStory).toContain("component: RichText")
+    expect(richTextStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
   it("uses Atom title for Select story", () => {
     const selectStory = readStoryFile("select.stories.ts")
 
@@ -43,6 +51,12 @@ describe("Vue input story taxonomy", () => {
     const textareaFieldStory = readStoryFile("textarea-field.stories.ts")
 
     expect(textareaFieldStory).toContain('title: "Input/Molecule/TextareaField"')
+  })
+
+  it("uses Molecule title for RichTextField story", () => {
+    const richTextFieldStory = readStoryFile("rich-text-field.stories.ts")
+
+    expect(richTextFieldStory).toContain('title: "Input/Molecule/RichTextField"')
   })
 
   it("uses Molecule title for SelectField story", () => {

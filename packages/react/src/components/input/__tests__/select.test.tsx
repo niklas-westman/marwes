@@ -57,8 +57,25 @@ describe("Select", () => {
     expect(select).toHaveAttribute("data-placeholder-selected", "true")
   })
 
+  it("renders the provided arrow svg in Marwes mode", () => {
+    const { container } = renderWithProvider(
+      <Select
+        ariaLabel="Country"
+        options={[
+          { value: "se", label: "Sweden" },
+          { value: "us", label: "United States" },
+        ]}
+      />,
+    )
+
+    const selectArrowIcon = container.querySelector(".mw-select__control-icon")
+
+    expect(selectArrowIcon).not.toBeNull()
+    expect(selectArrowIcon).toHaveAttribute("viewBox", "0 0 16 16")
+  })
+
   it("supports the native appearance without losing select semantics", () => {
-    renderWithProvider(
+    const { container } = renderWithProvider(
       <Select
         ariaLabel="Plan"
         appearance="native"
@@ -73,6 +90,7 @@ describe("Select", () => {
 
     expect(select.tagName).toBe("SELECT")
     expect(select).toHaveClass("mw-select--native")
+    expect(container.querySelector(".mw-select__control-icon")).toBeNull()
   })
 
   it("supports the native boolean alias", () => {

@@ -5,6 +5,7 @@ import { mergeClassNames } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { Paragraph } from "../paragraph"
 import { Select, type SelectProps } from "./select"
+import { SelectArrowIcon } from "./select-arrow-icon"
 
 export type SelectFieldProps = {
   id?: string
@@ -411,11 +412,8 @@ export const SelectField = defineComponent(
                     },
                     [
                       h("span", { class: "mw-select-field__trigger-text" }, displayText.value),
-                      h(Icon, {
+                      h(SelectArrowIcon, {
                         className: "mw-select-field__trigger-icon",
-                        name: IconName.ChevronDown,
-                        size: "xs",
-                        decorative: true,
                       }),
                     ],
                   ),

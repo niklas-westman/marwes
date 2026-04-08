@@ -84,12 +84,12 @@ export type SearchFieldProps = Omit<InputFieldProps, "input"> & {
 }
 
 /**
- * SearchField - For search inputs with automatic clear button functionality.
+ * SearchField - For search inputs with an automatic search affordance and clear button.
  *
  * **AI Context:**
  * - Sets `type="search"` automatically
  * - Sets `inputMode="search"` for mobile keyboards
- * - Shows clear button (X icon) when field has content
+ * - Shows a search icon by default and a clear button (X icon) when field has content
  * - Adds `data-purpose="search"` for AI parsing
  *
  * **Features:**

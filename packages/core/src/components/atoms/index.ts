@@ -48,6 +48,9 @@ export type {
   TextareaOptions,
   TextareaRenderKit,
   TextareaResize,
+  RichTextOptions,
+  RichTextRenderKit,
+  RichTextFormat,
 } from "./input"
 export type {
   HeadingOptions,

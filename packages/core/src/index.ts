@@ -65,6 +65,7 @@ export type { CurrencyCode } from "./shared/field-helpers"
 export {
   mergeIdRefs,
   buildInputFieldA11yIds,
+  buildRichTextFieldA11yIds,
   buildCheckboxFieldA11yIds,
   buildCheckboxGroupFieldA11yIds,
   buildRadioGroupFieldA11yIds,
@@ -96,6 +97,9 @@ export type {
   TextareaOptions,
   TextareaRenderKit,
   TextareaResize,
+  RichTextOptions,
+  RichTextRenderKit,
+  RichTextFormat,
   HeadingOptions,
   HeadingRenderKit,
   HeadingLevel,

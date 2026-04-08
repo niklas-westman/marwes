@@ -82,6 +82,10 @@ export const InputField = defineComponent(
     const disabled = computed(() => sourceInput.value.disabled || false)
     const readOnly = computed(() => sourceInput.value.readOnly || false)
     const invalid = computed(() => hasError.value || sourceInput.value.invalid || false)
+    const showSearchClearButton = computed(
+      () => hasSearchValue.value && !disabled.value && !readOnly.value,
+    )
+    const showSearchIcon = computed(() => isSearchField.value && !showSearchClearButton.value)
 
     const wrapperClass = computed(() =>
       mergeClassNames(
@@ -170,7 +174,13 @@ export const InputField = defineComponent(
               )
             : null,
 
-          hasSearchValue.value && !disabled.value
+          showSearchIcon.value
+            ? h("span", { class: "mw-input-field__search-icon", "aria-hidden": "true" }, [
+                h(Icon, { name: "search", size: "xs", decorative: true }),
+              ])
+            : null,
+
+          showSearchClearButton.value
             ? h(
                 "button",
                 {

@@ -163,6 +163,8 @@ export function InputField(props: InputFieldProps): React.ReactElement {
   const disabled = props.input.disabled || false
   const readOnly = props.input.readOnly || false
   const invalid = hasError || props.input.invalid || false
+  const showSearchClearButton = hasSearchValue && !disabled && !readOnly
+  const showSearchIcon = isSearchField && !showSearchClearButton
 
   const wrapperClass = cx(
     "mw-input-field",
@@ -239,7 +241,13 @@ export function InputField(props: InputFieldProps): React.ReactElement {
           </button>
         )}
 
-        {hasSearchValue && !disabled && (
+        {showSearchIcon && (
+          <span className="mw-input-field__search-icon" aria-hidden="true">
+            <Icon name="search" size="xs" decorative />
+          </span>
+        )}
+
+        {showSearchClearButton && (
           <button
             type="button"
             className="mw-input-field__clear-search"

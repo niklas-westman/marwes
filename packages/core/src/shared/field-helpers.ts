@@ -9,6 +9,13 @@ export type InputFieldA11yIds = {
   describedBy?: string
 }
 
+export type RichTextFieldA11yIds = {
+  labelId: string
+  helperTextId?: string
+  errorId?: string
+  describedBy?: string
+}
+
 export function buildInputFieldA11yIds(args: {
   id: string
   hasHelperText: boolean
@@ -19,6 +26,23 @@ export function buildInputFieldA11yIds(args: {
   const errorId = args.hasError ? `${args.id}-error` : undefined
   const describedBy = mergeIdRefs(args.externalDescribedBy, helperTextId, errorId)
   const result: InputFieldA11yIds = {}
+  if (helperTextId) result.helperTextId = helperTextId
+  if (errorId) result.errorId = errorId
+  if (describedBy) result.describedBy = describedBy
+  return result
+}
+
+export function buildRichTextFieldA11yIds(args: {
+  id: string
+  hasHelperText: boolean
+  hasError: boolean
+  externalDescribedBy?: string | undefined
+}): RichTextFieldA11yIds {
+  const labelId = `${args.id}-label`
+  const helperTextId = args.hasHelperText ? `${args.id}-helper` : undefined
+  const errorId = args.hasError ? `${args.id}-error` : undefined
+  const describedBy = mergeIdRefs(args.externalDescribedBy, helperTextId, errorId)
+  const result: RichTextFieldA11yIds = { labelId }
   if (helperTextId) result.helperTextId = helperTextId
   if (errorId) result.errorId = errorId
   if (describedBy) result.describedBy = describedBy

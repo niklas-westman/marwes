@@ -4,6 +4,7 @@ import { Icon } from "../icon"
 import { Paragraph } from "../paragraph"
 import { Select } from "./select"
 import type { SelectProps } from "./select"
+import { SelectArrowIcon } from "./select-arrow-icon"
 
 export type SelectFieldProps = {
   id?: string
@@ -288,12 +289,7 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
         onKeyDown={handleKeyDown}
       >
         <span className="mw-select-field__trigger-text">{displayText}</span>
-        <Icon
-          className="mw-select-field__trigger-icon"
-          name={IconName.ChevronDown}
-          size="xs"
-          decorative
-        />
+        <SelectArrowIcon className="mw-select-field__trigger-icon" />
       </button>
 
       {select.name ? (
