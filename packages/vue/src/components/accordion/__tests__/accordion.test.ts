@@ -52,9 +52,23 @@ describe("Vue Accordion atom", () => {
     renderAccordion({ id: "acc-3", open: false, disabled: true, onToggle: toggleHandler })
 
     const trigger = screen.getByRole("button", { name: /test title/i })
+    expect(trigger).toBeDisabled()
+
     await user.click(trigger)
 
     expect(toggleHandler).not.toHaveBeenCalled()
+  })
+
+  it("generates aria ids when id is omitted", () => {
+    renderAccordion({ open: true })
+
+    const trigger = screen.getByRole("button", { name: /test title/i })
+    const panel = screen.getByRole("region")
+
+    expect(trigger.id).toMatch(/^mw-accordion-\d+-trigger$/)
+    expect(panel.id).toMatch(/^mw-accordion-\d+-panel$/)
+    expect(trigger).toHaveAttribute("aria-controls", panel.id)
+    expect(panel).toHaveAttribute("aria-labelledby", trigger.id)
   })
 
   it("works with v-model-like @toggle pattern in templates", async () => {

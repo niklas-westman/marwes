@@ -22,7 +22,7 @@ Then:
 
 ## Components
 
-- [ ] accordion
+- [x] accordion
   - Refs: `/figma-sync refs marwes accordion`
   - Core: `packages/core/src/components/atoms/accordion/`
   - React: `packages/react/src/components/accordion/`

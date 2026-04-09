@@ -1,9 +1,10 @@
 import { createAccordionRecipe } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { createLocalId } from "../../internal/id"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface AccordionProps {
-  id: string
+  id?: string
   open?: boolean
   disabled?: boolean
   className?: string
@@ -14,9 +15,11 @@ const accordionPropKeys = ["id", "open", "disabled", "className"] as const
 export const Accordion = defineComponent(
   (props: AccordionProps, { slots, emit }) => {
     const attrs = useAttrs()
+    const localId = createLocalId("mw-accordion")
+    const resolvedId = computed(() => props.id ?? localId)
 
     const kit = computed(() => {
-      const opts: import("@marwes-ui/core").AccordionOptions = { id: props.id }
+      const opts: import("@marwes-ui/core").AccordionOptions = { id: resolvedId.value }
       if (props.open !== undefined) opts.open = props.open
       if (props.disabled !== undefined) opts.disabled = props.disabled
       return createAccordionRecipe(opts)
@@ -43,6 +46,7 @@ export const Accordion = defineComponent(
             "aria-expanded": a11y.ariaExpanded,
             "aria-controls": a11y.panelId,
             "aria-disabled": a11y.ariaDisabled,
+            disabled: props.disabled,
             onClick: handleTriggerClick,
           },
           [

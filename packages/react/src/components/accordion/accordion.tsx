@@ -46,6 +46,7 @@ export function Accordion(props: AccordionProps): React.ReactElement {
         aria-expanded={a11y.ariaExpanded}
         aria-controls={a11y.panelId}
         aria-disabled={a11y.ariaDisabled}
+        disabled={disabled}
         onClick={handleTriggerClick}
       >
         <span className="mw-accordion__title">{title}</span>
