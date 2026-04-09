@@ -53,7 +53,10 @@ export function resolveButtonA11y(opts: ButtonOptions): {
   if (opts.ariaControls) common.ariaControls = opts.ariaControls
 
   if (tag === "button") {
-    const a11y: ButtonA11yProps = { ...common, type: "button" }
+    const nativeButtonType =
+      opts.action === "submit" ? "submit" : opts.action === "reset" ? "reset" : "button"
+
+    const a11y: ButtonA11yProps = { ...common, type: nativeButtonType }
     if (isDisabled) a11y.disabled = true
 
     return { tag, a11y, blockClick: false }

@@ -12,10 +12,21 @@
  */
 
 .mw-switch {
-  --mw-switch-track: #e5e7eb;
+  --mw-switch-track-off: #e5e7eb;
+  --mw-switch-track-off-hover: #a3a3a3;
+  --mw-switch-track-off-active: #e5e7eb;
+  --mw-switch-track-off-disabled: #e5e7eb;
   --mw-switch-track-on: var(--mw-color-primary-base, #2f31fc);
-  --mw-switch-thumb: #f9fafb;
+  --mw-switch-track-on-hover: #2527ca;
+  --mw-switch-track-on-active: #1b1d97;
+  --mw-switch-track-on-disabled: #8182fc;
+  --mw-switch-thumb-off: #f9fafb;
+  --mw-switch-thumb-off-disabled: #f3f4f6;
   --mw-switch-thumb-on: #ffffff;
+  --mw-switch-thumb-on-disabled: #f3f4f6;
+  --mw-switch-label: #141414;
+  --mw-switch-label-disabled: #737373;
+  --mw-switch-focus-ring: var(--mw-color-focus, #2f31fc);
   --mw-switch-track-width: 24px;
   --mw-switch-track-height: 16px;
   --mw-switch-thumb-size: 12px;
@@ -24,16 +35,16 @@
 
   display: inline-flex;
   align-items: center;
-  gap: var(--mw-spacing-xs);
+  gap: var(--mw-spacing-xs, 8px);
   padding: 0;
   border: none;
   background: none;
   cursor: pointer;
-  color: var(--mw-color-text, #141414);
+  color: var(--mw-switch-label);
   font-family: var(--mw-font-primary, inherit);
-  font-size: var(--mw-density-font-size, 14px);
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1;
+  line-height: 18px;
 }
 
 .mw-switch__track {
@@ -41,7 +52,7 @@
   width: var(--mw-switch-track-width);
   height: var(--mw-switch-track-height);
   border-radius: 9999px;
-  background: var(--mw-switch-track);
+  background: var(--mw-switch-track-off);
   flex-shrink: 0;
   transition: background 150ms ease;
 }
@@ -53,8 +64,7 @@
   width: var(--mw-switch-thumb-size);
   height: var(--mw-switch-thumb-size);
   border-radius: 50%;
-  background: var(--mw-switch-thumb);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: var(--mw-switch-thumb-off);
   transition: transform 150ms ease, background 150ms ease;
 }
 
@@ -70,10 +80,6 @@
   --mw-switch-thumb-translate: 10px;
 }
 
-/* ============================================
-   CHECKED STATE
-   ============================================ */
-
 .mw-switch--checked .mw-switch__track {
   background: var(--mw-switch-track-on);
 }
@@ -83,31 +89,68 @@
   background: var(--mw-switch-thumb-on);
 }
 
-/* ============================================
-   DISABLED STATE
-   ============================================ */
+.mw-switch:not(.mw-switch--disabled):hover .mw-switch__track {
+  background: var(--mw-switch-track-off-hover);
+}
+
+.mw-switch:not(.mw-switch--disabled).mw-switch--checked:hover .mw-switch__track {
+  background: var(--mw-switch-track-on-hover);
+}
+
+.mw-switch:not(.mw-switch--disabled):active .mw-switch__track {
+  background: var(--mw-switch-track-off-active);
+}
+
+.mw-switch:not(.mw-switch--disabled).mw-switch--checked:active .mw-switch__track {
+  background: var(--mw-switch-track-on-active);
+}
 
 .mw-switch--disabled {
-  opacity: 0.4;
   cursor: not-allowed;
+  color: var(--mw-switch-label-disabled);
   pointer-events: none;
 }
 
-/* ============================================
-   FOCUS
-   ============================================ */
+.mw-switch--disabled .mw-switch__track {
+  background: var(--mw-switch-track-off-disabled);
+}
+
+.mw-switch--disabled .mw-switch__thumb {
+  background: var(--mw-switch-thumb-off-disabled);
+}
+
+.mw-switch--disabled.mw-switch--checked .mw-switch__track {
+  background: var(--mw-switch-track-on-disabled);
+}
+
+.mw-switch--disabled.mw-switch--checked .mw-switch__thumb {
+  background: var(--mw-switch-thumb-on-disabled);
+}
+
+.mw-switch:focus-visible {
+  outline: none;
+}
 
 .mw-switch:focus-visible .mw-switch__track {
-  outline: 2px solid var(--mw-color-focus);
+  outline: 2px solid var(--mw-switch-focus-ring);
   outline-offset: 2px;
   border-radius: 9999px;
 }
 
-/* ============================================
-   DARK MODE OVERRIDES
-   ============================================ */
-
 .mw-theme--dark .mw-switch {
-  --mw-switch-track: #374151;
-  --mw-switch-thumb: #141414;
+  --mw-switch-track-off: #474747;
+  --mw-switch-track-off-hover: #a3a3a3;
+  --mw-switch-track-off-active: #737373;
+  --mw-switch-track-off-disabled: #474747;
+  --mw-switch-track-on: #2f31fc;
+  --mw-switch-track-on-hover: #5859fc;
+  --mw-switch-track-on-active: #8182fc;
+  --mw-switch-track-on-disabled: #121365;
+  --mw-switch-thumb-off: #141414;
+  --mw-switch-thumb-off-disabled: #000000;
+  --mw-switch-thumb-on: #ffffff;
+  --mw-switch-thumb-on-disabled: #000000;
+  --mw-switch-label: #f9fafb;
+  --mw-switch-label-disabled: #595959;
+  --mw-switch-focus-ring: #5859fc;
 }

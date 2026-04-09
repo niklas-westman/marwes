@@ -1,123 +1,90 @@
 /*
  * Toast Component Styles
- * Figma: 1365:12526 (light) / 1368:3596 (dark)
+ * Figma: 1365:12526 (light) / 2276:56938 (dark)
  *
- * Variants (from Figma nodes.json):
- *   subtle  — surface #ffffff, border #c7c8c9, text/icon/action #141414
- *   outline — surface #ffffff, border #ababfd, icon #2527ca, text/action #1b1d97
- *   rich    — surface #eeeeff, border #2527ca, icon #2527ca, text/action #1b1d97
+ * Toast supports three emphasis levels:
+ *   subtle  — quiet, low-contrast surface
+ *   outline — default emphasis
+ *   rich    — high-emphasis, use sparingly
  *
- * Dark overrides:
- *   subtle  — surface #1f2937, border #4b5563, text/icon/action #f9fafb
- *   outline — surface #1f2937, border #8182fc, icon #8182fc, text/action #ababfd
- *   rich    — surface #040519, border #8182fc, icon #8182fc, text/action #ababfd
+ * Supported intent mappings:
+ *   neutral, info, success, warning, error, brand
  *
- * Structure:
- *   .mw-toast
- *     .mw-toast__icon   (optional)
- *     .mw-toast__body
- *       .mw-toast__text
- *       .mw-toast__action (optional)
- *     .mw-toast__dismiss (optional button)
+ * Purpose toasts map semantic intents automatically in the React/Vue adapters.
+ * Raw <Toast> can opt into the neutral/brand primitives with data-intent.
  */
 
 .mw-toast {
   --mw-toast-surface: #ffffff;
-  --mw-toast-border: #c7c8c9;
-  --mw-toast-icon: #141414;
+  --mw-toast-border: #c2c2c2;
+  --mw-toast-icon: #a3a3a3;
   --mw-toast-text: #141414;
   --mw-toast-action: #141414;
 
   display: flex;
   align-items: center;
   gap: var(--mw-spacing-xs);
-  padding: var(--mw-spacing-sm);
-  border-radius: var(--mw-ui-radius, 8px);
-  border: 1px solid var(--mw-toast-border);
-  background: var(--mw-toast-surface);
   min-width: 288px;
   max-width: 480px;
+  padding: var(--mw-spacing-sm);
+  border: 1px solid var(--mw-toast-border);
+  border-radius: var(--mw-ui-radius, 8px);
+  background: var(--mw-toast-surface);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* ============================================
-   ICON
-   ============================================ */
-
 .mw-toast__icon {
+  display: flex;
   width: 16px;
   height: 16px;
-  align-items: center;
-  display: flex;
   flex-shrink: 0;
+  align-items: center;
   color: var(--mw-toast-icon);
 }
 
-/* ============================================
-   BODY
-   ============================================ */
-
 .mw-toast__body {
-  flex: 1;
   display: flex;
+  min-width: 0;
+  flex: 1;
   align-items: center;
   gap: var(--mw-spacing-xs);
-  min-width: 0;
 }
 
 .mw-toast__text {
+  min-width: 0;
+  flex: 1;
+  color: var(--mw-toast-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size, 16px);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.03em;
-  color: var(--mw-toast-text);
-  flex: 1;
-  min-width: 0;
 }
 
 .mw-toast__action {
   display: inline-flex;
+  flex-shrink: 0;
+  color: var(--mw-toast-action);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size, 16px);
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.03em;
-  color: var(--mw-toast-action);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
+  white-space: nowrap;
 }
-
-.mw-toast__action:hover {
-  opacity: 0.8;
-}
-
-/* ============================================
-   DISMISS BUTTON
-   ============================================ */
 
 .mw-toast__dismiss {
   display: flex;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
   padding: 0;
   border: none;
   background: none;
-  cursor: pointer;
   color: var(--mw-toast-icon);
-  opacity: 0.6;
-  transition: opacity 150ms ease;
-}
-
-.mw-toast__dismiss:hover {
-  opacity: 1;
+  cursor: pointer;
 }
 
 .mw-toast__dismiss:focus-visible {
@@ -126,7 +93,6 @@
   border-radius: 2px;
 }
 
-/* ×  via mask icon */
 .mw-toast__dismiss::before {
   content: "";
   display: block;
@@ -143,16 +109,21 @@
   -webkit-mask-size: contain;
 }
 
-/* ============================================
-   VARIANTS — LIGHT
-   ============================================ */
+/* --------------------------------------------
+   Light mode
+   -------------------------------------------- */
 
 .mw-toast--subtle {
   --mw-toast-surface: #ffffff;
-  --mw-toast-border: #c7c8c9;
-  --mw-toast-icon: #141414;
+  --mw-toast-border: #c2c2c2;
+  --mw-toast-icon: #a3a3a3;
   --mw-toast-text: #141414;
   --mw-toast-action: #141414;
+}
+
+.mw-toast--subtle[data-intent="error"],
+.mw-toast--subtle[data-intent="brand"] {
+  --mw-toast-icon: #141414;
 }
 
 .mw-toast--outline {
@@ -163,12 +134,11 @@
   --mw-toast-action: #1b1d97;
 }
 
-.mw-toast--rich {
-  --mw-toast-surface: #eeeeff;
-  --mw-toast-border: #2527ca;
-  --mw-toast-icon: #2527ca;
-  --mw-toast-text: #1b1d97;
-  --mw-toast-action: #1b1d97;
+.mw-toast--outline[data-intent="neutral"] {
+  --mw-toast-border: #a3a3a3;
+  --mw-toast-icon: #595959;
+  --mw-toast-text: #141414;
+  --mw-toast-action: #141414;
 }
 
 .mw-toast--outline[data-intent="success"] {
@@ -192,12 +162,28 @@
   --mw-toast-action: #a8031f;
 }
 
+.mw-toast--rich {
+  --mw-toast-surface: #eeeeff;
+  --mw-toast-border: #2527ca;
+  --mw-toast-icon: #2527ca;
+  --mw-toast-text: #1b1d97;
+  --mw-toast-action: #2527ca;
+}
+
+.mw-toast--rich[data-intent="neutral"] {
+  --mw-toast-surface: #f3f4f6;
+  --mw-toast-border: #e5e7eb;
+  --mw-toast-icon: #595959;
+  --mw-toast-text: #141414;
+  --mw-toast-action: #595959;
+}
+
 .mw-toast--rich[data-intent="success"] {
   --mw-toast-surface: #e6f4ed;
   --mw-toast-border: #006d48;
   --mw-toast-icon: #006d48;
   --mw-toast-text: #006633;
-  --mw-toast-action: #006633;
+  --mw-toast-action: #006d48;
 }
 
 .mw-toast--rich[data-intent="warning"] {
@@ -205,7 +191,7 @@
   --mw-toast-border: #b45309;
   --mw-toast-icon: #d97706;
   --mw-toast-text: #b45309;
-  --mw-toast-action: #b45309;
+  --mw-toast-action: #d97706;
 }
 
 .mw-toast--rich[data-intent="error"] {
@@ -213,35 +199,34 @@
   --mw-toast-border: #d90429;
   --mw-toast-icon: #d90429;
   --mw-toast-text: #a8031f;
-  --mw-toast-action: #a8031f;
+  --mw-toast-action: #d90429;
 }
 
-/* ============================================
-   DARK MODE OVERRIDES
-   ============================================ */
+/* --------------------------------------------
+   Dark mode
+   -------------------------------------------- */
 
 .mw-theme--dark .mw-toast--subtle {
-  --mw-toast-surface: #1f2937;
-  --mw-toast-border: #4b5563;
+  --mw-toast-surface: #2e2e2e;
+  --mw-toast-border: #595959;
   --mw-toast-icon: #f9fafb;
   --mw-toast-text: #f9fafb;
   --mw-toast-action: #f9fafb;
 }
 
 .mw-theme--dark .mw-toast--outline {
-  --mw-toast-surface: #1f2937;
+  --mw-toast-surface: #2e2e2e;
   --mw-toast-border: #8182fc;
-  --mw-toast-icon: #8182fc;
-  --mw-toast-text: #ababfd;
-  --mw-toast-action: #ababfd;
+  --mw-toast-icon: #5859fc;
+  --mw-toast-text: #8182fc;
+  --mw-toast-action: #8182fc;
 }
 
-.mw-theme--dark .mw-toast--rich {
-  --mw-toast-surface: #040519;
-  --mw-toast-border: #8182fc;
-  --mw-toast-icon: #8182fc;
-  --mw-toast-text: #ababfd;
-  --mw-toast-action: #ababfd;
+.mw-theme--dark .mw-toast--outline[data-intent="neutral"] {
+  --mw-toast-border: #a3a3a3;
+  --mw-toast-icon: #a3a3a3;
+  --mw-toast-text: #f9fafb;
+  --mw-toast-action: #f9fafb;
 }
 
 .mw-theme--dark .mw-toast--outline[data-intent="success"] {
@@ -252,7 +237,7 @@
 }
 
 .mw-theme--dark .mw-toast--outline[data-intent="warning"] {
-  --mw-toast-border: #f9b21a;
+  --mw-toast-border: #b45309;
   --mw-toast-icon: #f9b21a;
   --mw-toast-text: #fcc94a;
   --mw-toast-action: #fcc94a;
@@ -265,20 +250,36 @@
   --mw-toast-action: #ff5566;
 }
 
+.mw-theme--dark .mw-toast--rich {
+  --mw-toast-surface: #040519;
+  --mw-toast-border: #5859fc;
+  --mw-toast-icon: #5859fc;
+  --mw-toast-text: #8182fc;
+  --mw-toast-action: #5859fc;
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="neutral"] {
+  --mw-toast-surface: #000000;
+  --mw-toast-border: #474747;
+  --mw-toast-icon: #a3a3a3;
+  --mw-toast-text: #f9fafb;
+  --mw-toast-action: #a3a3a3;
+}
+
 .mw-theme--dark .mw-toast--rich[data-intent="success"] {
   --mw-toast-surface: #001a0c;
   --mw-toast-border: #5db189;
   --mw-toast-icon: #5db189;
   --mw-toast-text: #90caad;
-  --mw-toast-action: #90caad;
+  --mw-toast-action: #5db189;
 }
 
 .mw-theme--dark .mw-toast--rich[data-intent="warning"] {
   --mw-toast-surface: #221004;
-  --mw-toast-border: #f9b21a;
+  --mw-toast-border: #b45309;
   --mw-toast-icon: #f9b21a;
   --mw-toast-text: #fcc94a;
-  --mw-toast-action: #fcc94a;
+  --mw-toast-action: #f9b21a;
 }
 
 .mw-theme--dark .mw-toast--rich[data-intent="error"] {
@@ -286,5 +287,5 @@
   --mw-toast-border: #ff2847;
   --mw-toast-icon: #ff2847;
   --mw-toast-text: #ff5566;
-  --mw-toast-action: #ff5566;
+  --mw-toast-action: #ff2847;
 }

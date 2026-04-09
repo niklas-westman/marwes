@@ -123,6 +123,12 @@ export function CheckboxGroupField(props: CheckboxGroupFieldProps): React.ReactE
         <Paragraph size="md">{props.label}</Paragraph>
       </legend>
 
+      {hasDescription && (
+        <div className="mw-checkbox-group-field__description" id={descriptionId}>
+          <Paragraph size="sm">{props.description}</Paragraph>
+        </div>
+      )}
+
       <div className="mw-checkbox-group-field__options">
         {props.options.map((option, index) => {
           const optionId = `${id}-option-${index}`
@@ -152,17 +158,11 @@ export function CheckboxGroupField(props: CheckboxGroupFieldProps): React.ReactE
               htmlFor={optionId}
             >
               <Checkbox {...checkboxProps} />
-              <Paragraph size="sm">{option.label}</Paragraph>
+              <Paragraph size="md">{option.label}</Paragraph>
             </label>
           )
         })}
       </div>
-
-      {hasDescription && (
-        <div className="mw-checkbox-group-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
-        </div>
-      )}
 
       {hasError && (
         <div className="mw-checkbox-group-field__error" id={errorId} aria-live="polite">

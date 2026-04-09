@@ -13,6 +13,9 @@ export type { RichTextProps } from "./rich-text"
 export { InputField } from "./input-field"
 export type { InputFieldProps } from "./input-field"
 
+export { InputOtp } from "./input-otp"
+export type { InputOtpProps } from "./input-otp"
+
 export { SelectField } from "./select-field"
 export type { SelectFieldProps } from "./select-field"
 

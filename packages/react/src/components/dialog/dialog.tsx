@@ -43,6 +43,10 @@ export function Dialog(props: DialogProps): React.ReactElement {
     dismissible,
   }
 
+  if (props.dataAttributes) {
+    dialogOptions.dataAttributes = props.dataAttributes
+  }
+
   if (props.size) {
     dialogOptions.size = props.size
   }
@@ -75,7 +79,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
       {...(kit.a11y.ariaLabelledBy ? { "aria-labelledby": kit.a11y.ariaLabelledBy } : {})}
       {...(kit.a11y.ariaDescribedBy ? { "aria-describedby": kit.a11y.ariaDescribedBy } : {})}
       tabIndex={-1}
-      {...props.dataAttributes}
+      {...kit.dataAttributes}
     >
       {(hasTitle || kit.showCloseButton) && (
         <>

@@ -19,10 +19,10 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize]
  *
  * @property primary - High-emphasis buttons for primary actions (e.g., "Save", "Submit", "Create").
  *                    Use sparingly - typically one primary action per view.
- * @property secondary - Medium-emphasis buttons for secondary actions (e.g., "Cancel", "Back").
- *                      Good for actions that complement the primary action.
- * @property text - Low-emphasis buttons for tertiary actions or inline text-like buttons.
- *                 Minimal visual weight, ideal for less important actions.
+ * @property secondary - Medium-emphasis outlined buttons for secondary actions.
+ * @property neutral - Low-chroma outlined buttons for neutral utility actions.
+ * @property text - Minimal text-like buttons for tertiary or inline actions.
+ * @property success - Positive emphasis buttons for confirm-style actions.
  *
  * @example
  * ```tsx
@@ -35,6 +35,7 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize]
 export const ButtonVariant = {
   primary: "primary",
   secondary: "secondary",
+  neutral: "neutral",
   text: "text",
   success: "success",
 } as const
@@ -127,7 +128,7 @@ export type ButtonA11yProps = {
 
   // <button>
   disabled?: boolean
-  type?: "button"
+  type?: "button" | "submit" | "reset"
 
   // <a>
   href?: string

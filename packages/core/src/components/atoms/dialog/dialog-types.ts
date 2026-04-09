@@ -12,6 +12,7 @@ export interface DialogOptions {
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
+  dataAttributes?: Record<string, string | boolean | undefined>
 }
 
 export interface DialogA11yProps {
@@ -30,4 +31,5 @@ export interface DialogRenderKit {
   showFooter: boolean
   showCloseButton: boolean
   a11y: DialogA11yProps
+  dataAttributes: Record<string, string | boolean | undefined>
 }

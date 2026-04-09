@@ -10,7 +10,7 @@ function renderWithProvider(props: Record<string, unknown>) {
       setup() {
         return () =>
           h(MarwesProvider, null, {
-            default: () => h(SliderField, props),
+            default: () => h(SliderField as never, props),
           })
       },
     }),
@@ -56,5 +56,20 @@ describe("Vue SliderField", () => {
     expect(screen.getByText("Cold")).toBeInTheDocument()
     expect(screen.getByText("Hot")).toBeInTheDocument()
     expect(slider).toHaveAttribute("aria-invalid", "true")
+  })
+
+  it("supports the inline label-position variant from Figma", () => {
+    renderWithProvider({
+      label: "Volume",
+      labelPosition: "inline",
+      slider: { min: 0, max: 100, defaultValue: 40 },
+    })
+
+    const slider = screen.getByRole("slider", { name: "Volume" })
+    const wrapper = slider.closest('[data-label-position="inline"]')
+
+    expect(wrapper).toHaveClass("mw-slider-field--label-inline")
+    expect(screen.getByText("0")).toBeInTheDocument()
+    expect(screen.getByText("100")).toBeInTheDocument()
   })
 })

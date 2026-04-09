@@ -38,6 +38,36 @@ runCheckboxGroupFieldContract("React", {
 })
 
 describe("React adapter specifics: CheckboxGroupField", () => {
+  it("renders helper text before the option list and uses checkbox-sized option labels", () => {
+    renderWithProvider(
+      <CheckboxGroupField
+        label="Notification channels"
+        description="Choose how we can reach you."
+        options={[
+          { value: "email", label: "Email" },
+          { value: "sms", label: "SMS" },
+        ]}
+      />,
+    )
+
+    const description = screen
+      .getByText("Choose how we can reach you.")
+      .closest(".mw-checkbox-group-field__description") as HTMLElement | null
+    const options = document.querySelector(
+      ".mw-checkbox-group-field__options",
+    ) as HTMLElement | null
+    const optionLabel = screen.getByText("Email").closest("p") as HTMLElement | null
+
+    expect(description).not.toBeNull()
+    expect(options).not.toBeNull()
+    expect(
+      description && options
+        ? description.compareDocumentPosition(options) & Node.DOCUMENT_POSITION_FOLLOWING
+        : 0,
+    ).toBeTruthy()
+    expect(optionLabel).toHaveClass("mw-p--md")
+  })
+
   it("disables only the flagged option when option.disabled is set", () => {
     renderWithProvider(
       <CheckboxGroupField

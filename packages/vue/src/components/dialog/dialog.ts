@@ -79,6 +79,10 @@ export const Dialog = defineComponent(
         dismissible: dismissible.value,
       }
 
+      if (props.dataAttributes) {
+        dialogOptions.dataAttributes = props.dataAttributes
+      }
+
       if (props.size) {
         dialogOptions.size = props.size
       }
@@ -107,7 +111,7 @@ export const Dialog = defineComponent(
         "section",
         {
           ...attrsWithoutClass.value,
-          ...(props.dataAttributes ?? {}),
+          ...kit.value.dataAttributes,
           id: id.value,
           class: mergeClassNames(kit.value.className, props.className, attrs.class),
           role: kit.value.a11y.role,

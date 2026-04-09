@@ -81,6 +81,19 @@ It is the brand accent color.
 - `--mw-color-focus`
   - focus ring only
 
+## Shared preset variables first
+
+When writing CSS in `packages/presets`, prefer existing global semantic variables before creating
+component-local ones.
+
+Rules:
+- reach for shared tokens like `--mw-color-*`, `--mw-font-*`, `--mw-ui-*`, and shared spacing vars first
+- only introduce component-local variables when a component truly needs a private alias or composed value
+- if the same meaning appears across multiple components, promote that meaning to a shared preset variable instead of duplicating local vars
+- keep component CSS thin: local CSS should mostly consume shared variables, not redefine the same semantics over and over
+
+This keeps components aligned with each other and makes the core/preset CSS structure simpler to maintain.
+
 ## Practical examples
 
 ### Good: neutral open dropdown state

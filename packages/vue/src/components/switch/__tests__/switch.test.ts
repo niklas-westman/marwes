@@ -1,5 +1,6 @@
+import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Switch } from "../switch"
@@ -33,5 +34,23 @@ describe("Vue adapter specifics: Switch", () => {
 
     const switchButton = screen.getByRole("switch", { name: "Custom switch" })
     expect(switchButton).toHaveClass("mw-switch", "mw-switch--wide", "custom-class")
+  })
+
+  it("renders a disabled button and does not emit checked changes", async () => {
+    const onCheckedChange = vi.fn()
+
+    renderWithProvider({
+      ariaLabel: "Disabled switch",
+      checked: true,
+      disabled: true,
+      "onUpdate:modelValue": onCheckedChange,
+    })
+
+    const switchButton = screen.getByRole("switch", { name: "Disabled switch" })
+    expect(switchButton).toBeDisabled()
+
+    await userEvent.setup().click(switchButton)
+
+    expect(onCheckedChange).not.toHaveBeenCalled()
   })
 })

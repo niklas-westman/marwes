@@ -53,6 +53,7 @@ export const Tab = defineComponent(
           "aria-label": a11y.ariaLabel,
           "aria-controls": a11y.ariaControls,
           tabindex: a11y.tabIndex,
+          disabled: props.disabled ? true : undefined,
           onClick: (event: MouseEvent) => {
             props.onClick?.(event)
           },

@@ -76,7 +76,7 @@ describe("RadioGroupField", () => {
     }
   })
 
-  it("wires description into aria-describedby", () => {
+  it("wires description into aria-describedby and keeps it above the options", () => {
     renderWithProvider(
       <RadioGroupField
         name="test"
@@ -90,12 +90,16 @@ describe("RadioGroupField", () => {
     const describedBy = group.getAttribute("aria-describedby") ?? ""
     const descriptionText = screen.getByText("Choose your favorite")
     const descriptionEl = descriptionText.closest("[id]") as HTMLElement | null
+    const wrapperChildren = Array.from(group.parentElement?.children ?? [])
 
     expect(descriptionEl).not.toBeNull()
     expect(describedBy.split(/\s+/)).toContain(descriptionEl?.id ?? "")
+    expect(wrapperChildren.indexOf(descriptionEl as HTMLElement)).toBeLessThan(
+      wrapperChildren.indexOf(group),
+    )
   })
 
-  it("shows error with aria-invalid and live region", () => {
+  it("shows error with aria-invalid, propagates invalid state to radios, and renders a live region", () => {
     renderWithProvider(
       <RadioGroupField
         name="test"
@@ -107,6 +111,10 @@ describe("RadioGroupField", () => {
 
     const group = screen.getByRole("radiogroup")
     expect(group.getAttribute("aria-invalid")).toBe("true")
+
+    for (const radio of screen.getAllByRole("radio")) {
+      expect(radio.getAttribute("aria-invalid")).toBe("true")
+    }
 
     const errorText = screen.getByText("Selection required")
     expect(errorText.closest('[aria-live="polite"]')).not.toBeNull()

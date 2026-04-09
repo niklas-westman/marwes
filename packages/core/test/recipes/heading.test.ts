@@ -11,6 +11,10 @@ describe("headingRecipe", () => {
     expect(renderKit.tag).toBe("h2")
     expect(renderKit.className).toContain("mw-heading")
     expect(renderKit.className).toContain("mw-heading--h2")
+    expect(renderKit.vars["--mw-heading-size"]).toBe("24px")
+    expect(renderKit.vars["--mw-heading-line-height"]).toBe("1.25")
+    expect(renderKit.vars["--mw-heading-weight"]).toBe("500")
+    expect(renderKit.vars["--mw-heading-letter-spacing"]).toBe("-0.72px")
   })
 
   it("supports visual size override and heading metadata", () => {
@@ -28,5 +32,9 @@ describe("headingRecipe", () => {
     expect(renderKit.className).toContain("mw-heading--h1")
     expect(renderKit.a11y.id).toBe("hero-title")
     expect(renderKit.a11y.ariaLabel).toBe("Hero title")
+    expect(renderKit.vars["--mw-heading-size"]).toBe("32px")
+    expect(renderKit.vars["--mw-heading-line-height"]).toBe("1.1875")
+    expect(renderKit.vars["--mw-heading-weight"]).toBe("700")
+    expect(renderKit.vars["--mw-heading-letter-spacing"]).toBe("-0.96px")
   })
 })

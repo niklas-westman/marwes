@@ -20,9 +20,10 @@ export const buttonWhySemanticComponents: LabeledCopy[] = [
 
 export const buttonVariantVisualStyles: LabeledCopy[] = [
   { label: "primary", text: "Filled, high emphasis (main actions)" },
-  { label: "secondary", text: "Outlined, medium emphasis (secondary actions)" },
+  { label: "secondary", text: "Outlined, brand-accent emphasis (action utilities)" },
+  { label: "neutral", text: "Outlined, low-chroma emphasis (cancel/close/filter actions)" },
   { label: "text", text: "Minimal, low emphasis (tertiary/inline actions)" },
-  { label: "success", text: "Filled, positive emphasis (confirm/verify actions)" },
+  { label: "success", text: "Filled, positive emphasis (confirm actions)" },
 ]
 
 export const buttonActionSemanticPurposes: LabeledCopy[] = [

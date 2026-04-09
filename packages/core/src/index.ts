@@ -91,6 +91,8 @@ export type {
   IconRenderKit,
   InputOptions,
   InputRenderKit,
+  InputOtpOptions,
+  InputOtpRenderKit,
   SelectAppearance,
   SelectOptions,
   SelectRenderKit,

@@ -7,15 +7,13 @@
 import type { CardOptions, CardRenderKit } from "./card-types"
 
 export function createCardRecipe(opts: CardOptions = {}): CardRenderKit {
-  const renderKit: CardRenderKit = {
+  return {
     tag: "div",
     className: "mw-card",
     vars: {},
+    dataAttributes: {
+      ...opts.dataAttributes,
+      "data-component": "card",
+    },
   }
-
-  if (opts.dataAttributes) {
-    renderKit.dataAttributes = opts.dataAttributes
-  }
-
-  return renderKit
 }

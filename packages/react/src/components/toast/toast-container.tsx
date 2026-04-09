@@ -42,8 +42,11 @@ function renderToastByIntent(
     sharedProps.ariaLive = toast.ariaLive
   }
 
-  if (toast.dataAttributes !== undefined) {
-    sharedProps.dataAttributes = toast.dataAttributes
+  if (toast.dataAttributes !== undefined || toast.intent !== undefined) {
+    sharedProps.dataAttributes = {
+      ...(toast.dataAttributes ?? {}),
+      ...(toast.intent !== undefined ? { "data-intent": toast.intent } : {}),
+    }
   }
 
   switch (toast.intent as ToastIntent | undefined) {

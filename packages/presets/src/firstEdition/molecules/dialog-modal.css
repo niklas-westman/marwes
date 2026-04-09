@@ -22,6 +22,10 @@
   justify-content: center;
 }
 
+.mw-dialog-modal__surface > .mw-dialog {
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
+}
+
 @media (max-width: 640px) {
   .mw-dialog-modal {
     padding: 12px; /* off-scale — no token */

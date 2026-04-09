@@ -1,73 +1,127 @@
 /*
- * Card Component Styles
- * Figma: 1364:11556 (light) / 1368:5891 (dark)
+ * Card component styles
+ * Figma frames:
+ * - light states: 1364:11556
+ * - dark states: 1368:5891
  *
- * Tokens (from Figma nodes.json):
- *   card/surface (light): #ffffff    (dark): #374151
- *   card/border  (light): #e5e7eb    (dark): #374151
- *   card/title   (light): #141414    (dark): #f9fafb
- *   card/body    (light): #4b5563    (dark): #9ca3af
- *   Spacing: sp-24 = 24px
+ * Live Figma values from the synced state matrix:
+ * - container: 8px radius, 24px padding, 8px gap
+ * - title: 16/18, weight 500
+ * - body: 14/18, weight 400
  *
- * Structure:
- *   .mw-card
- *     .mw-card__header  (optional — wraps .mw-card__title)
- *     .mw-card__body    (main content area)
+ * Light mode:
+ * - default border: #e5e7eb
+ * - hover/pressed border: #a3a3a3
+ * - focus border: #2f31fc
+ * - disabled surface: #f3f4f6
+ * - disabled text: #737373
+ *
+ * Dark mode:
+ * - default surface/border: #474747
+ * - pressed surface: #2e2e2e
+ * - focus border: #5859fc
+ * - disabled surface: #000000
+ * - disabled text: #595959
  */
 
 .mw-card {
-  --mw-card-surface: var(--mw-color-surface-elevated, #ffffff);
+  --mw-card-surface: #ffffff;
   --mw-card-border: #e5e7eb;
-  --mw-card-title: var(--mw-color-text, #141414);
-  --mw-card-body: var(--mw-color-text-muted, #4b5563);
+  --mw-card-title: #141414;
+  --mw-card-body: #595959;
 
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  box-sizing: border-box;
   background: var(--mw-card-surface);
   border: 1px solid var(--mw-card-border);
-  border-radius: var(--mw-ui-radius, 8px);
-  overflow: hidden;
+  border-radius: 8px;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
 }
 
-/* ============================================
-   HEADER (optional)
-   ============================================ */
-
 .mw-card__header {
-  padding: 20px 24px 0; /* off-scale — no token (20px) */
+  min-width: 0;
 }
 
 .mw-card__title {
   display: block;
+  margin: 0;
+  color: var(--mw-card-title);
   font-family: var(--mw-font-primary, inherit);
   font-size: 16px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--mw-card-title);
+  font-weight: 500;
+  line-height: 18px;
 }
-
-/* ============================================
-   BODY
-   ============================================ */
 
 .mw-card__body {
-  padding: var(--mw-spacing-sm) var(--mw-spacing-md) var(--mw-spacing-md);
-  font-family: var(--mw-font-primary, inherit);
-  font-size: var(--mw-density-font-size, 14px);
-  line-height: 1.6;
+  min-width: 0;
+  margin: 0;
   color: var(--mw-card-body);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
 }
 
-/* When no header, body gets full top padding */
-.mw-card__body:first-child {
-  padding-top: var(--mw-spacing-md);
+.mw-card:hover,
+.mw-card--state-hover {
+  --mw-card-border: #a3a3a3;
 }
 
-/* ============================================
-   DARK MODE OVERRIDES
-   ============================================ */
+.mw-card:active,
+.mw-card--state-pressed {
+  --mw-card-border: #a3a3a3;
+}
+
+.mw-card:focus-visible,
+.mw-card--state-focus {
+  --mw-card-border: #2f31fc;
+  outline: none;
+}
+
+.mw-card--disabled,
+.mw-card[data-disabled="true"],
+.mw-card[aria-disabled="true"] {
+  --mw-card-surface: #f3f4f6;
+  --mw-card-border: #e5e7eb;
+  --mw-card-title: #737373;
+  --mw-card-body: #737373;
+
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 .mw-theme--dark .mw-card {
-  --mw-card-surface: var(--mw-color-surface-elevated);
-  --mw-card-border: #374151;
-  --mw-card-title: var(--mw-color-text);
-  --mw-card-body: var(--mw-color-text-muted);
+  --mw-card-surface: #474747;
+  --mw-card-border: #474747;
+  --mw-card-title: #f9fafb;
+  --mw-card-body: #a3a3a3;
+}
+
+.mw-theme--dark .mw-card:hover,
+.mw-theme--dark .mw-card--state-hover {
+  --mw-card-border: #a3a3a3;
+}
+
+.mw-theme--dark .mw-card:active,
+.mw-theme--dark .mw-card--state-pressed {
+  --mw-card-surface: #2e2e2e;
+  --mw-card-border: #a3a3a3;
+}
+
+.mw-theme--dark .mw-card:focus-visible,
+.mw-theme--dark .mw-card--state-focus {
+  --mw-card-border: #5859fc;
+}
+
+.mw-theme--dark .mw-card--disabled,
+.mw-theme--dark .mw-card[data-disabled="true"],
+.mw-theme--dark .mw-card[aria-disabled="true"] {
+  --mw-card-surface: #000000;
+  --mw-card-border: #474747;
+  --mw-card-title: #595959;
+  --mw-card-body: #595959;
 }

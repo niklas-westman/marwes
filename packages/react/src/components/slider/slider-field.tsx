@@ -4,6 +4,8 @@ import { Paragraph } from "../paragraph"
 import { Slider } from "./slider"
 import type { SliderProps } from "./slider"
 
+export type SliderFieldLabelPosition = "top" | "inline"
+
 export type SliderFieldProps = {
   id?: string
   label: React.ReactNode
@@ -13,6 +15,7 @@ export type SliderFieldProps = {
   ariaDescribedBy?: string
   minValueLabel?: React.ReactNode
   maxValueLabel?: React.ReactNode
+  labelPosition?: SliderFieldLabelPosition
   showEdgeValues?: boolean
   dataAttributes?: Record<string, string>
 }
@@ -45,7 +48,6 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
   const id = props.id ?? `mw-slider-${reactId}`
   const hasDescription = hasContent(props.description)
   const hasError = hasContent(props.error)
-  const showEdgeValues = props.showEdgeValues !== false
   const { labelId, descriptionId, errorId, describedBy } = buildSliderFieldA11yIds({
     id,
     hasDescription,
@@ -54,12 +56,16 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
   })
 
   const disabled = props.slider.disabled || false
+  const labelPosition = props.labelPosition ?? "top"
+  const showEdgeValues = props.showEdgeValues !== false
   const minValue = props.slider.min ?? 0
   const maxValue = props.slider.max ?? 100
   const minValueLabel = resolveEdgeValueLabel(props.minValueLabel, minValue)
   const maxValueLabel = resolveEdgeValueLabel(props.maxValueLabel, maxValue)
   const wrapperClass = cx(
     "mw-slider-field",
+    labelPosition === "top" && "mw-slider-field--label-top",
+    labelPosition === "inline" && "mw-slider-field--label-inline",
     disabled && "mw-slider-field--disabled",
     hasError && "mw-slider-field--invalid",
   )
@@ -72,8 +78,14 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
     ...sliderProps
   } = props.slider
 
+  const renderEdgeValue = (position: "min" | "max", value: React.ReactNode): React.ReactElement => (
+    <span className={`mw-slider-field__edge-value mw-slider-field__edge-value--${position}`}>
+      <Paragraph size="sm">{value}</Paragraph>
+    </span>
+  )
+
   return (
-    <div className={wrapperClass} {...props.dataAttributes}>
+    <div className={wrapperClass} data-label-position={labelPosition} {...props.dataAttributes}>
       <div className="mw-slider-field__header">
         <div className="mw-slider-field__label" id={labelId}>
           <Paragraph size="md">{props.label}</Paragraph>
@@ -86,12 +98,17 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
         </div>
       )}
 
+      {labelPosition === "top" && showEdgeValues ? (
+        <div className="mw-slider-field__values-row">
+          {renderEdgeValue("min", minValueLabel)}
+          {renderEdgeValue("max", maxValueLabel)}
+        </div>
+      ) : null}
+
       <div className="mw-slider-field__control-row">
-        {showEdgeValues ? (
-          <span className="mw-slider-field__edge-value mw-slider-field__edge-value--min">
-            <Paragraph size="sm">{minValueLabel}</Paragraph>
-          </span>
-        ) : null}
+        {labelPosition === "inline" && showEdgeValues
+          ? renderEdgeValue("min", minValueLabel)
+          : null}
 
         <div className="mw-slider-field__slider">
           <Slider
@@ -104,11 +121,9 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
           />
         </div>
 
-        {showEdgeValues ? (
-          <span className="mw-slider-field__edge-value mw-slider-field__edge-value--max">
-            <Paragraph size="sm">{maxValueLabel}</Paragraph>
-          </span>
-        ) : null}
+        {labelPosition === "inline" && showEdgeValues
+          ? renderEdgeValue("max", maxValueLabel)
+          : null}
       </div>
 
       {hasError && (

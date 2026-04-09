@@ -109,6 +109,14 @@ export const RadioGroupField = defineComponent(
             h(Paragraph, { size: "md" }, { default: labelContent }),
           ]),
 
+          hasDescription.value
+            ? h(
+                "div",
+                { class: "mw-radio-group-field__description", id: a11yIds.value.descriptionId },
+                [h(Paragraph, { size: "sm" }, { default: descriptionContent })],
+              )
+            : null,
+
           h(
             "div",
             {
@@ -137,6 +145,7 @@ export const RadioGroupField = defineComponent(
                     value: option.value,
                     checked: selectedValue.value === option.value,
                     disabled: isOptionDisabled,
+                    invalid: hasError.value,
                     ...(props.required ? { required: true } : {}),
                     onCheckedChange: (checked: boolean) => {
                       if (checked) {
@@ -149,14 +158,6 @@ export const RadioGroupField = defineComponent(
               )
             }),
           ),
-
-          hasDescription.value
-            ? h(
-                "div",
-                { class: "mw-radio-group-field__description", id: a11yIds.value.descriptionId },
-                [h(Paragraph, { size: "sm" }, { default: descriptionContent })],
-              )
-            : null,
 
           hasError.value
             ? h(

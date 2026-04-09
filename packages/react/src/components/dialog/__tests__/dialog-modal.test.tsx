@@ -67,12 +67,12 @@ describe("DialogModal", () => {
 
     expect(screen.getByRole("dialog", { name: /invite teammate/i })).toBeTruthy()
 
-    const overlay = document.querySelector(".mw-dialog-modal")
-    if (!(overlay instanceof HTMLElement)) {
-      throw new Error("Expected dialog overlay to exist")
+    const scrim = document.querySelector(".mw-dialog-modal__scrim")
+    if (!(scrim instanceof HTMLElement)) {
+      throw new Error("Expected dialog scrim to exist")
     }
 
-    await user.click(overlay)
+    await user.click(scrim)
 
     await waitFor(() => {
       expect(screen.queryByRole("dialog", { name: /invite teammate/i })).toBeNull()

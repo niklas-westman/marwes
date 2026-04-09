@@ -51,4 +51,21 @@ describe("React SliderField", () => {
     expect(screen.getByText("Hot")).toBeInTheDocument()
     expect(slider).toHaveAttribute("aria-invalid", "true")
   })
+
+  it("supports the inline label-position variant from Figma", () => {
+    renderWithProvider(
+      <SliderField
+        label="Volume"
+        labelPosition="inline"
+        slider={{ min: 0, max: 100, defaultValue: 40 }}
+      />,
+    )
+
+    const slider = screen.getByRole("slider", { name: "Volume" })
+    const wrapper = slider.closest('[data-label-position="inline"]')
+
+    expect(wrapper).toHaveClass("mw-slider-field--label-inline")
+    expect(screen.getByText("0")).toBeInTheDocument()
+    expect(screen.getByText("100")).toBeInTheDocument()
+  })
 })

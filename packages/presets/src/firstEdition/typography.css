@@ -14,9 +14,9 @@
 }
 
 /* Heading sizes are controlled via CSS variables set by the recipe */
-/* .mw-heading--h1 uses --mw-heading-size: 32px, --mw-heading-line-height: 1.2, --mw-heading-weight: 600 */
-/* .mw-heading--h2 uses --mw-heading-size: 24px, --mw-heading-line-height: 1.3, --mw-heading-weight: 600 */
-/* .mw-heading--h3 uses --mw-heading-size: 20px, --mw-heading-line-height: 1.4, --mw-heading-weight: 600 */
+/* .mw-heading--h1 uses 32/38, weight 700, letter-spacing -0.96px */
+/* .mw-heading--h2 uses 24/30, weight 500, letter-spacing -0.72px */
+/* .mw-heading--h3 uses 20/26, weight 500, letter-spacing -0.6px */
 
 /* BASE PARAGRAPH */
 .mw-p {

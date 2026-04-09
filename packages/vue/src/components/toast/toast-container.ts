@@ -44,8 +44,11 @@ function renderToastByIntent(toast: ManagedToast, onDismiss?: (id: string) => vo
     toastProps.onDismiss = () => onDismiss(toast.id)
   }
 
-  if (toast.dataAttributes !== undefined) {
-    toastProps.dataAttributes = toast.dataAttributes
+  if (toast.dataAttributes !== undefined || toast.intent !== undefined) {
+    toastProps.dataAttributes = {
+      ...(toast.dataAttributes ?? {}),
+      ...(toast.intent !== undefined ? { "data-intent": toast.intent } : {}),
+    }
   }
 
   return h(component as never, toastProps, {

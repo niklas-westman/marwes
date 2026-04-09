@@ -5,6 +5,8 @@ import { mergeClassNames } from "../../internal/render-utils"
 import { Paragraph } from "../paragraph"
 import { Slider, type SliderProps } from "./slider"
 
+export type SliderFieldLabelPosition = "top" | "inline"
+
 export type SliderFieldProps = {
   id?: string
   label: string
@@ -14,6 +16,7 @@ export type SliderFieldProps = {
   ariaDescribedBy?: string
   minValueLabel?: string
   maxValueLabel?: string
+  labelPosition?: SliderFieldLabelPosition
   showEdgeValues?: boolean
   dataAttributes?: Record<string, string>
   modelValue?: number
@@ -28,6 +31,7 @@ const sliderFieldPropKeys = [
   "ariaDescribedBy",
   "minValueLabel",
   "maxValueLabel",
+  "labelPosition",
   "showEdgeValues",
   "dataAttributes",
   "modelValue",
@@ -44,6 +48,7 @@ export const SliderField = defineComponent(
     const sourceSlider = computed<SliderProps>(() => props.slider ?? {})
     const hasDescription = computed(() => hasTextContent(props.description))
     const hasError = computed(() => hasTextContent(props.error))
+    const labelPosition = computed<SliderFieldLabelPosition>(() => props.labelPosition ?? "top")
     const showEdgeValues = computed(() => props.showEdgeValues !== false)
     const a11yIds = computed(() =>
       buildSliderFieldA11yIds({
@@ -58,6 +63,8 @@ export const SliderField = defineComponent(
     const wrapperClass = computed(() =>
       mergeClassNames(
         "mw-slider-field",
+        labelPosition.value === "top" && "mw-slider-field--label-top",
+        labelPosition.value === "inline" && "mw-slider-field--label-inline",
         disabled.value && "mw-slider-field--disabled",
         hasError.value && "mw-slider-field--invalid",
       ),
@@ -102,11 +109,20 @@ export const SliderField = defineComponent(
       slots.description?.() ?? (props.description ? [props.description] : [])
     const errorContent = () => slots.error?.() ?? (props.error ? [props.error] : [])
 
+    function renderEdgeValue(position: "min" | "max", value: string) {
+      return h(
+        "span",
+        { class: `mw-slider-field__edge-value mw-slider-field__edge-value--${position}` },
+        [h(Paragraph, { size: "sm" }, { default: () => [value] })],
+      )
+    }
+
     return () =>
       h(
         "div",
         {
           class: wrapperClass.value,
+          "data-label-position": labelPosition.value,
           ...(props.dataAttributes ?? {}),
         },
         [
@@ -122,13 +138,16 @@ export const SliderField = defineComponent(
               ])
             : null,
 
+          labelPosition.value === "top" && showEdgeValues.value
+            ? h("div", { class: "mw-slider-field__values-row" }, [
+                renderEdgeValue("min", minValueLabel.value),
+                renderEdgeValue("max", maxValueLabel.value),
+              ])
+            : null,
+
           h("div", { class: "mw-slider-field__control-row" }, [
-            showEdgeValues.value
-              ? h(
-                  "span",
-                  { class: "mw-slider-field__edge-value mw-slider-field__edge-value--min" },
-                  [h(Paragraph, { size: "sm" }, { default: () => [minValueLabel.value] })],
-                )
+            labelPosition.value === "inline" && showEdgeValues.value
+              ? renderEdgeValue("min", minValueLabel.value)
               : null,
             h("div", { class: "mw-slider-field__slider" }, [
               h(Slider, {
@@ -136,12 +155,8 @@ export const SliderField = defineComponent(
                 "aria-invalid": hasError.value ? true : undefined,
               }),
             ]),
-            showEdgeValues.value
-              ? h(
-                  "span",
-                  { class: "mw-slider-field__edge-value mw-slider-field__edge-value--max" },
-                  [h(Paragraph, { size: "sm" }, { default: () => [maxValueLabel.value] })],
-                )
+            labelPosition.value === "inline" && showEdgeValues.value
+              ? renderEdgeValue("max", maxValueLabel.value)
               : null,
           ]),
 

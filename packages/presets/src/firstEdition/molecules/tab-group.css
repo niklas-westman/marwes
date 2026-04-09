@@ -13,7 +13,7 @@
   align-items: stretch;
   gap: 0;
   width: fit-content;
-  border-bottom: 1px solid color-mix(in srgb, var(--mw-color-border, #d1d5db) 85%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--mw-color-text, #141414) 20%, transparent);
 }
 
 .mw-tab-group__panels {

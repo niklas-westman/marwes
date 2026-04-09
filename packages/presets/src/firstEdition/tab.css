@@ -1,60 +1,78 @@
 /*
  * Tab Component Styles
- * Figma: 1364:11703 (light) / 1368:6067 (dark)
+ * Figma refs: 1364:11703 (light) / 1368:6067 (dark)
  *
- * Tokens:
- *   tab/surface   → --mw-color-surface        (#ffffff light / #1f2937 dark)
- *   tab/label     → --mw-color-text-muted      (#4b5563 light / #9ca3af dark)
- *   tab/indicator → --mw-color-primary-base    (#2f31fc light / #5859fc dark hardcode)
+ * The live sync uses tab-specific state colours that do not map 1:1 to the
+ * shared theme tokens yet, so the preset keeps them component-scoped here.
  */
 
 .mw-tab {
-  --mw-tab-surface: var(--mw-color-surface);
-  --mw-tab-label: var(--mw-color-text-muted);
-  --mw-tab-indicator: var(--mw-color-primary-base);
+  --mw-tab-surface: #ffffff;
+  --mw-tab-surface-hover: #f3f4f6;
+  --mw-tab-surface-pressed: #e5e7eb;
+  --mw-tab-label: #595959;
+  --mw-tab-label-active: var(--mw-color-text, #141414);
+  --mw-tab-label-disabled: #737373;
+  --mw-tab-indicator: var(--mw-color-primary-base, #2f31fc);
+  --mw-tab-indicator-disabled: #e5e7eb;
 
+  appearance: none;
   display: inline-flex;
   align-items: center;
-  padding: var(--mw-spacing-xs) var(--mw-spacing-sm);
+  justify-content: center;
+  padding: var(--mw-spacing-xs, 8px) var(--mw-spacing-sm, 16px);
   background: var(--mw-tab-surface);
   color: var(--mw-tab-label);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size, 14px);
   font-weight: 500;
-  line-height: 1.5;
-  /* 2px bottom indicator — transparent by default, coloured when selected */
+  line-height: 16px;
   border: none;
   border-bottom: 2px solid transparent;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 150ms ease, border-color 150ms ease;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
 }
 
 .mw-tab--selected {
   border-bottom-color: var(--mw-tab-indicator);
-  color: var(--mw-color-text);
 }
 
-.mw-tab--disabled {
-  opacity: 0.4;
+.mw-tab:hover:not(:disabled):not(.mw-tab--disabled) {
+  background: var(--mw-tab-surface-hover);
+  color: var(--mw-tab-label-active);
+}
+
+.mw-tab:active:not(:disabled):not(.mw-tab--disabled) {
+  background: var(--mw-tab-surface-pressed);
+  color: var(--mw-tab-label-active);
+}
+
+.mw-tab--disabled,
+.mw-tab:disabled {
+  background: var(--mw-tab-surface);
+  color: var(--mw-tab-label-disabled);
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.mw-tab:hover:not(.mw-tab--disabled) {
-  color: var(--mw-color-text);
+.mw-tab--selected.mw-tab--disabled,
+.mw-tab--selected:disabled {
+  border-bottom-color: var(--mw-tab-indicator-disabled);
 }
 
 .mw-tab:focus-visible {
-  outline: 2px solid var(--mw-color-focus);
+  outline: 2px solid var(--mw-color-focus, #2684ff);
   outline-offset: 2px;
 }
 
-/* ============================================
-   DARK MODE OVERRIDES
-   ============================================ */
-
 .mw-theme--dark .mw-tab {
-  /* Dark indicator deviates from primary-base — Figma token: #5859fc */
+  --mw-tab-surface: #2e2e2e;
+  --mw-tab-surface-hover: #595959;
+  --mw-tab-surface-pressed: #737373;
+  --mw-tab-label: #a3a3a3;
+  --mw-tab-label-active: #f9fafb;
+  --mw-tab-label-disabled: #595959;
   --mw-tab-indicator: #5859fc;
+  --mw-tab-indicator-disabled: #474747;
 }

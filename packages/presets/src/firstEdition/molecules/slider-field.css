@@ -1,10 +1,11 @@
 .mw-slider-field {
   display: grid;
-  gap: var(--mw-density-gap);
+  gap: 8px;
   width: min(100%, 560px);
 }
 
 .mw-slider-field__header,
+.mw-slider-field__values-row,
 .mw-slider-field__control-row {
   display: grid;
   align-items: center;
@@ -14,9 +15,21 @@
   gap: 0.25rem;
 }
 
+.mw-slider-field__values-row {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
 .mw-slider-field__control-row {
+  gap: 0.5rem;
+}
+
+.mw-slider-field--label-top .mw-slider-field__control-row {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.mw-slider-field--label-inline .mw-slider-field__control-row {
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: var(--mw-density-gap);
 }
 
 .mw-slider-field__label {
@@ -39,8 +52,15 @@
 
 .mw-slider-field__edge-value {
   min-width: 2rem;
-  color: var(--mw-color-text-muted, #6b7280);
-  text-align: center;
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-slider-field__edge-value--min {
+  text-align: left;
+}
+
+.mw-slider-field__edge-value--max {
+  text-align: right;
 }
 
 .mw-slider-field__error {

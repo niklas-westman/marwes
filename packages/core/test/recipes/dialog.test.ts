@@ -14,6 +14,12 @@ describe("createDialogRecipe", () => {
     expect(kit.showCloseButton).toBe(true)
     expect(kit.a11y.role).toBe("dialog")
     expect(kit.a11y.ariaModal).toBe(true)
+    expect(kit.dataAttributes).toEqual({
+      "data-component": "dialog",
+      "data-size": "medium",
+      "data-footer": "true",
+      "data-dismissible": "true",
+    })
   })
 
   it("supports small and large size modifiers", () => {
@@ -28,6 +34,8 @@ describe("createDialogRecipe", () => {
     expect(kit.className).not.toContain("mw-dialog--dismissible")
     expect(kit.showFooter).toBe(false)
     expect(kit.showCloseButton).toBe(false)
+    expect(kit.dataAttributes["data-footer"]).toBe("false")
+    expect(kit.dataAttributes["data-dismissible"]).toBe("false")
   })
 
   it("passes through dialog labelling attributes", () => {

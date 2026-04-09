@@ -42,7 +42,7 @@ describe("Vue Card (Atom)", () => {
     expect(card?.tagName).toBe("DIV")
   })
 
-  it("spreads dataAttributes onto the outer card element", () => {
+  it("spreads recipe and custom dataAttributes onto the outer card element", () => {
     renderWithProvider(
       Card,
       { dataAttributes: { "data-purpose": "profile-card" } },
@@ -52,6 +52,7 @@ describe("Vue Card (Atom)", () => {
     const body = screen.getByText("Owner details")
     const card = body.closest(".mw-card")
 
+    expect(card?.getAttribute("data-component")).toBe("card")
     expect(card?.getAttribute("data-purpose")).toBe("profile-card")
   })
 

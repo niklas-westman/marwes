@@ -26,8 +26,8 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).font.primary).toContain("Instrument Sans")
   })
 
-  it("default typography.h1.fontSize is 44", () => {
-    expect(resolveThemeInput({}).typography.h1.fontSize).toBe(44)
+  it("default typography.h1.fontSize is 32", () => {
+    expect(resolveThemeInput({}).typography.h1.fontSize).toBe(32)
   })
 })
 
@@ -160,7 +160,7 @@ describe("resolveThemeInput — font / ui / typography overrides", () => {
   it("typography.h1.lineHeight preserved when only fontSize overridden", () => {
     expect(
       resolveThemeInput({ typography: { h1: { fontSize: 48 } } }).typography.h1.lineHeight,
-    ).toBe(1.18)
+    ).toBe(1.1875)
   })
 
   it("typography.paragraph.sm.fontSize override", () => {

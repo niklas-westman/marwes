@@ -1,4 +1,4 @@
-export type ToastIntent = "success" | "error" | "warning" | "info"
+export type ToastIntent = "neutral" | "info" | "success" | "warning" | "error" | "brand"
 
 export type ToastPlacement = "top-right" | "top-left" | "bottom-right" | "bottom-left"
 

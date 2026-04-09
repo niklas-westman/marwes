@@ -44,6 +44,7 @@ export const Switch = defineComponent(
     return () => {
       const renderKit = kit.value
       const a11y = renderKit.a11y
+      const isDisabled = a11y.ariaDisabled === true
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
       const style = mergeStyles(renderKit.vars, attrs.style)
@@ -56,6 +57,7 @@ export const Switch = defineComponent(
           type: "button",
           class: className,
           style,
+          disabled: isDisabled,
           role: a11y.role,
           "aria-checked": a11y.ariaChecked,
           "aria-disabled": a11y.ariaDisabled,
@@ -64,7 +66,12 @@ export const Switch = defineComponent(
           "aria-describedby": a11y.ariaDescribedBy,
           onClick: (event: MouseEvent) => {
             props.onClick?.(event)
-            const nextChecked = !(props.modelValue ?? props.checked ?? false)
+
+            if (isDisabled || event.defaultPrevented) {
+              return
+            }
+
+            const nextChecked = !a11y.ariaChecked
             props.onCheckedChange?.(nextChecked)
             emit("update:modelValue", nextChecked)
             emit("checked-change", nextChecked)

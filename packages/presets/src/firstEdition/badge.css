@@ -1,13 +1,13 @@
 /*
  * Badge Component Styles
- * Figma: 1364:11603 (light) / 1368:5847 (dark)
+ * Validated against:
+ * - .figma/marwes/components/checkboxbadge.json
+ * - .figma/marwes/pages/-badge/-badge_1364-11603.json
+ * - .figma/marwes/pages/-badge/-badge-dark_2276-56582.json
+ * - .figma/marwes/pages/-badge/component-container_1369-6125.json
  *
- * Tokens (neutral variant directly from Figma nodes.json):
- *   badge/surface (light): #f3f4f6    badge/surface (dark): #1f2937
- *   badge/border  (light): #e5e7eb    badge/border  (dark): #374151
- *   badge/label   (light): #4b5563    badge/label   (dark): #9ca3af
- *
- * Colored variants use color-mix() with theme CSS vars.
+ * The live sync uses exact semantic badge tones rather than generic color-mix()
+ * derivations, especially for the brand/info split and dark-mode surfaces.
  */
 
 .mw-badge {
@@ -17,15 +17,18 @@
 
   display: inline-flex;
   align-items: center;
+  gap: var(--mw-spacing-xxs);
   padding: var(--mw-spacing-xxxs) var(--mw-spacing-xs);
+  border: none;
   border-radius: 4px;
-  border: 1px solid var(--mw-badge-border);
+  box-shadow: inset 0 0 0 1px var(--mw-badge-border);
   background: var(--mw-badge-surface);
   color: var(--mw-badge-label);
   font-family: var(--mw-font-primary, inherit);
   font-size: 12px;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 16px;
+  letter-spacing: 0;
   white-space: nowrap;
 }
 
@@ -34,39 +37,39 @@
    ============================================ */
 
 .mw-badge--neutral {
-  --mw-badge-surface: var(--mw-color-surface-subtle);
+  --mw-badge-surface: #f3f4f6;
   --mw-badge-border: #e5e7eb;
-  --mw-badge-label: var(--mw-color-text-muted);
+  --mw-badge-label: #595959;
 }
 
 .mw-badge--brand {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-primary-base) 12%, white);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-primary-base) 30%, white);
-  --mw-badge-label: var(--mw-color-primary-base);
+  --mw-badge-surface: #eeeeff;
+  --mw-badge-border: #2f31fc;
+  --mw-badge-label: #2f31fc;
 }
 
 .mw-badge--info {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 12%, white);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-info-base) 30%, white);
-  --mw-badge-label: var(--mw-color-info-base);
+  --mw-badge-surface: #eeeeff;
+  --mw-badge-border: #ababfd;
+  --mw-badge-label: #1b1d97;
 }
 
 .mw-badge--success {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 12%, white);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-success-base) 30%, white);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-success-base) 90%, black);
+  --mw-badge-surface: #e6f4ed;
+  --mw-badge-border: #90caad;
+  --mw-badge-label: #006633;
 }
 
 .mw-badge--warning {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 15%, white);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-warning-base) 35%, white);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 70%, black);
+  --mw-badge-surface: #fff8e6;
+  --mw-badge-border: #fde08a;
+  --mw-badge-label: #b45309;
 }
 
 .mw-badge--error {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, white);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-danger-base) 30%, white);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 90%, black);
+  --mw-badge-surface: #ffe8eb;
+  --mw-badge-border: #ff8a95;
+  --mw-badge-label: #a8031f;
 }
 
 /* ============================================
@@ -74,39 +77,39 @@
    ============================================ */
 
 .mw-theme--dark .mw-badge--neutral {
-  --mw-badge-surface: var(--mw-color-surface-elevated);
-  --mw-badge-border: #374151;
-  --mw-badge-label: var(--mw-color-text-muted);
+  --mw-badge-surface: #000000;
+  --mw-badge-border: #474747;
+  --mw-badge-label: #a3a3a3;
 }
 
 .mw-theme--dark .mw-badge--brand {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-primary-base) 20%, black);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-primary-base) 50%, black);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-primary-base) 80%, white);
+  --mw-badge-surface: #090a32;
+  --mw-badge-border: #5859fc;
+  --mw-badge-label: #8182fc;
 }
 
 .mw-theme--dark .mw-badge--info {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 20%, black);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-info-base) 50%, black);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-info-base) 80%, white);
+  --mw-badge-surface: #040519;
+  --mw-badge-border: #8182fc;
+  --mw-badge-label: #8182fc;
 }
 
 .mw-theme--dark .mw-badge--success {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 20%, black);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-success-base) 50%, black);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-success-base) 80%, white);
+  --mw-badge-surface: #001a0c;
+  --mw-badge-border: #5db189;
+  --mw-badge-label: #90caad;
 }
 
 .mw-theme--dark .mw-badge--warning {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 20%, black);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-warning-base) 50%, black);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 80%, white);
+  --mw-badge-surface: #221004;
+  --mw-badge-border: #e46f00;
+  --mw-badge-label: #fcc94a;
 }
 
 .mw-theme--dark .mw-badge--error {
-  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 20%, black);
-  --mw-badge-border: color-mix(in srgb, var(--mw-color-danger-base) 50%, black);
-  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 80%, white);
+  --mw-badge-surface: #240006;
+  --mw-badge-border: #ff2847;
+  --mw-badge-label: #ff5566;
 }
 
 .mw-badge-group__items {

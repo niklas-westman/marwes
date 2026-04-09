@@ -1,0 +1,107 @@
+/*
+ * Input OTP component styles
+ * Based on .figma/marwes/pages/-input-otp/
+ */
+
+.mw-input-otp {
+  --mw-input-otp-label-color: var(--mw-color-text);
+  --mw-input-otp-helper-color: var(--mw-color-text-muted);
+  --mw-input-otp-cell-border: var(--mw-color-border);
+  --mw-input-otp-cell-surface: var(--mw-color-surface);
+  --mw-input-otp-cell-text: var(--mw-color-text-muted);
+  --mw-input-otp-cell-filled-text: var(--mw-color-text);
+
+  display: grid;
+  gap: var(--mw-spacing-xxs);
+  width: max-content;
+}
+
+.mw-input-otp__label {
+  color: var(--mw-input-otp-label-color);
+}
+
+.mw-input-otp__label .mw-p {
+  color: var(--mw-input-otp-label-color);
+}
+
+.mw-input-otp__cells {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--mw-input-otp-cell-count, 6), minmax(0, 40px));
+  gap: var(--mw-spacing-xs);
+}
+
+.mw-input-otp__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--mw-input-otp-cell-border);
+  border-radius: var(--mw-spacing-xxs);
+  background: var(--mw-input-otp-cell-surface);
+  color: var(--mw-input-otp-cell-text);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size);
+  font-weight: 500;
+  line-height: 1;
+  transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease;
+}
+
+.mw-input-otp__cell--filled {
+  color: var(--mw-input-otp-cell-filled-text);
+}
+
+.mw-input-otp__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  opacity: 0;
+}
+
+.mw-input-otp:not(.mw-input-otp--disabled):not(.mw-input-otp--invalid):hover .mw-input-otp__cell {
+  border-color: color-mix(in srgb, var(--mw-color-border) 55%, var(--mw-color-text));
+}
+
+.mw-input-otp:focus-within:not(.mw-input-otp--invalid) .mw-input-otp__cell {
+  border-color: var(--mw-color-focus);
+}
+
+.mw-input-otp__helper,
+.mw-input-otp__error {
+  color: var(--mw-input-otp-helper-color);
+}
+
+.mw-input-otp__helper .mw-p,
+.mw-input-otp__error .mw-p {
+  color: var(--mw-input-otp-helper-color);
+}
+
+.mw-input-otp--invalid {
+  --mw-input-otp-cell-border: var(--mw-color-danger-base);
+  --mw-input-otp-helper-color: var(--mw-color-danger-base);
+}
+
+.mw-input-otp--disabled {
+  --mw-input-otp-label-color: var(--mw-color-text-disabled);
+  --mw-input-otp-helper-color: var(--mw-color-text-disabled);
+  --mw-input-otp-cell-border: var(--mw-color-border-disabled);
+  --mw-input-otp-cell-surface: var(--mw-color-surface-disabled);
+  --mw-input-otp-cell-text: var(--mw-color-text-disabled);
+  --mw-input-otp-cell-filled-text: var(--mw-color-text-disabled);
+}
+
+.mw-input-otp--disabled .mw-input-otp__input {
+  cursor: not-allowed;
+}
+
+.mw-input-otp--readonly .mw-input-otp__input {
+  cursor: default;
+}

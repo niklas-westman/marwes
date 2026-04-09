@@ -31,6 +31,7 @@ export function Tab(props: TabProps): React.ReactElement {
       aria-label={a11y.ariaLabel}
       aria-controls={a11y.ariaControls}
       tabIndex={a11y.tabIndex}
+      disabled={coreProps.disabled}
       onClick={onClick}
       type="button"
     >

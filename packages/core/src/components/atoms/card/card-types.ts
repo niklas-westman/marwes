@@ -14,5 +14,5 @@ export interface CardRenderKit {
   tag: "div"
   className: string
   vars: Record<string, string>
-  dataAttributes?: CardDataAttributes
+  dataAttributes: CardDataAttributes
 }

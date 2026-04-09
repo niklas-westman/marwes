@@ -47,7 +47,7 @@ export function DangerButton(props: DangerButtonProps) {
       {...restProps}
       variant={ButtonVariant.primary}
       action={ButtonAction.delete}
-      iconRight={IconName.Minus}
+      error
       confirmation={confirmation}
       dataAttributes={{
         ...props.dataAttributes,
@@ -155,7 +155,7 @@ export function CancelButton(props: CancelButtonProps) {
     <Button
       {...props}
       action="cancel"
-      variant={props.variant ?? "secondary"}
+      variant={props.variant ?? "neutral"}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "cancel",
@@ -221,7 +221,6 @@ export function SaveButton(props: SaveButtonProps) {
       {...props}
       action={ButtonAction.submit}
       variant={props.variant ?? ButtonVariant.primary}
-      iconRight={props.iconRight ?? IconName.Save}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "save",
@@ -246,7 +245,6 @@ export function ConfirmButton(props: ConfirmButtonProps) {
       {...props}
       variant={ButtonVariant.success}
       as="button"
-      iconRight={props.iconRight ?? IconName.Check}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "confirm",
@@ -269,7 +267,7 @@ export function VerifyButton(props: VerifyButtonProps) {
   return (
     <Button
       {...props}
-      variant={ButtonVariant.success}
+      variant={ButtonVariant.secondary}
       as="button"
       iconRight={props.iconRight ?? IconName.CheckCircle}
       dataAttributes={{
@@ -321,8 +319,7 @@ export function CloseButton(props: CloseButtonProps) {
     <Button
       {...props}
       action={ButtonAction.cancel}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.X}
+      variant={props.variant ?? ButtonVariant.neutral}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "close",
@@ -345,7 +342,7 @@ export function RefreshButton(props: RefreshButtonProps) {
   return (
     <Button
       {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
+      variant={props.variant ?? ButtonVariant.neutral}
       iconRight={props.iconRight ?? IconName.RefreshCw}
       dataAttributes={{
         ...props.dataAttributes,
@@ -409,8 +406,7 @@ export function CopyButton(props: CopyButtonProps) {
   return (
     <Button
       {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.Copy}
+      variant={props.variant ?? ButtonVariant.neutral}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "copy",
@@ -429,7 +425,7 @@ export function SearchButton(props: SearchButtonProps) {
   return (
     <Button
       {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
+      variant={props.variant ?? ButtonVariant.primary}
       iconRight={props.iconRight ?? IconName.Search}
       dataAttributes={{
         ...props.dataAttributes,
@@ -449,8 +445,7 @@ export function FilterButton(props: FilterButtonProps) {
   return (
     <Button
       {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.Sliders}
+      variant={props.variant ?? ButtonVariant.neutral}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "filter",
@@ -469,8 +464,7 @@ export function SortButton(props: SortButtonProps) {
   return (
     <Button
       {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.ChevronsDown}
+      variant={props.variant ?? ButtonVariant.neutral}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "sort",

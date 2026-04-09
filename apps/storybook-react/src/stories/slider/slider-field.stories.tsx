@@ -48,6 +48,18 @@ export const Controlled: Story = {
   },
 }
 
+export const InlineLabels: Story = {
+  args: {
+    label: "Volume",
+    labelPosition: "inline",
+    slider: {
+      min: 0,
+      max: 100,
+      defaultValue: 50,
+    },
+  },
+}
+
 export const WithError: Story = {
   args: {
     label: "Temperature",

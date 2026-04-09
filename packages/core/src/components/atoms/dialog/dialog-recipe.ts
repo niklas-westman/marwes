@@ -23,5 +23,12 @@ export function createDialogRecipe(opts: DialogOptions = {}): DialogRenderKit {
     showFooter,
     showCloseButton,
     a11y: resolveDialogA11y(opts),
+    dataAttributes: {
+      "data-component": "dialog",
+      "data-size": size,
+      "data-footer": showFooter ? "true" : "false",
+      "data-dismissible": showCloseButton ? "true" : "false",
+      ...opts.dataAttributes,
+    },
   }
 }

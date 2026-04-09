@@ -43,6 +43,8 @@ export type { IconOptions, IconRenderKit } from "./icon"
 export type {
   InputOptions,
   InputRenderKit,
+  InputOtpOptions,
+  InputOtpRenderKit,
   SelectAppearance,
   SelectOptions,
   SelectRenderKit,

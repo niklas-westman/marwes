@@ -197,7 +197,15 @@ export const DialogModal = defineComponent(
           onKeydown: handleKeydown,
         },
         [
-          h("div", { class: "mw-dialog-modal__scrim", "aria-hidden": "true" }),
+          h("div", {
+            class: "mw-dialog-modal__scrim",
+            "aria-hidden": "true",
+            onClick: () => {
+              if (closeOnScrimClick.value) {
+                close()
+              }
+            },
+          }),
           h("div", { class: "mw-dialog-modal__surface" }, [
             h(
               Dialog as unknown as string,

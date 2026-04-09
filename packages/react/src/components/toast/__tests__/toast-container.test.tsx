@@ -42,6 +42,24 @@ describe("ToastContainer", () => {
 
     expect(handleDismiss).toHaveBeenCalledWith("toast-1")
   })
+
+  it("forwards primitive intents to the raw toast for neutral and brand styling", () => {
+    renderWithProvider(
+      <ToastContainer
+        toasts={[
+          { id: "toast-1", children: "Neutral message.", intent: "neutral" },
+          { id: "toast-2", children: "Brand message.", intent: "brand" },
+        ]}
+      />,
+    )
+
+    expect(
+      screen.getByText("Neutral message.").closest("[role='status']")?.getAttribute("data-intent"),
+    ).toBe("neutral")
+    expect(
+      screen.getByText("Brand message.").closest("[role='status']")?.getAttribute("data-intent"),
+    ).toBe("brand")
+  })
 })
 
 describe("ToastProvider", () => {

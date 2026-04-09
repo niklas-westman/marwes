@@ -22,7 +22,7 @@ describe("Card (Atom)", () => {
     expect(card?.tagName).toBe("DIV")
   })
 
-  it("spreads dataAttributes onto the outer card element", () => {
+  it("spreads recipe and custom data attributes onto the outer card element", () => {
     renderWithProvider(
       <Card dataAttributes={{ "data-purpose": "stat-card" }}>Monthly recurring revenue</Card>,
     )
@@ -30,12 +30,13 @@ describe("Card (Atom)", () => {
     const body = screen.getByText("Monthly recurring revenue")
     const card = body.closest(".mw-card")
 
+    expect(card?.getAttribute("data-component")).toBe("card")
     expect(card?.getAttribute("data-purpose")).toBe("stat-card")
   })
 
-  it("merges a custom className and id onto the outer card element", () => {
+  it("passes through native div props while merging className", () => {
     renderWithProvider(
-      <Card id="account-card" className="custom-card">
+      <Card id="account-card" className="custom-card" tabIndex={0} aria-disabled="true">
         Account owner
       </Card>,
     )
@@ -46,5 +47,7 @@ describe("Card (Atom)", () => {
     expect(card?.id).toBe("account-card")
     expect(card?.className).toContain("mw-card")
     expect(card?.className).toContain("custom-card")
+    expect(card?.getAttribute("tabindex")).toBe("0")
+    expect(card?.getAttribute("aria-disabled")).toBe("true")
   })
 })

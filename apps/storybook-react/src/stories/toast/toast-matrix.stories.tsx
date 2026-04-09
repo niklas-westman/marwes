@@ -1,8 +1,10 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { IconName, storybookLayout } from "@marwes-ui/core"
 import {
   ErrorToast,
+  Icon,
   InfoToast,
   SuccessToast,
+  Toast,
   type ToastProps,
   WarningToast,
 } from "@marwes-ui/react"
@@ -12,9 +14,9 @@ import type * as React from "react"
 type ToastVariant = NonNullable<ToastProps["variant"]>
 
 type MatrixEntry = {
-  component: (props: ToastProps) => React.ReactElement
+  key: string
   label: string
-  message: string
+  render: (props: { className: string; variant: ToastVariant }) => React.ReactElement
 }
 
 const TOAST_VARIANTS: Array<{ label: string; variant: ToastVariant }> = [
@@ -24,10 +26,72 @@ const TOAST_VARIANTS: Array<{ label: string; variant: ToastVariant }> = [
 ]
 
 const MATRIX_ENTRIES: MatrixEntry[] = [
-  { component: InfoToast, label: "Information", message: "Meeting starts in 10 min" },
-  { component: SuccessToast, label: "Success", message: "Your email is verified" },
-  { component: WarningToast, label: "Warning", message: "Connection unstable" },
-  { component: ErrorToast, label: "Error", message: "Something went wrong" },
+  {
+    key: "neutral",
+    label: "Neutral",
+    render: ({ className, variant }) => (
+      <Toast
+        variant={variant}
+        className={className}
+        action="Close"
+        icon={<Icon name={IconName.XCircle} decorative />}
+        dataAttributes={{ "data-intent": "neutral" }}
+      >
+        Neutral message
+      </Toast>
+    ),
+  },
+  {
+    key: "info",
+    label: "Information",
+    render: ({ className, variant }) => (
+      <InfoToast variant={variant} className={className} action="Close">
+        Meeting starts in 10 min
+      </InfoToast>
+    ),
+  },
+  {
+    key: "success",
+    label: "Success",
+    render: ({ className, variant }) => (
+      <SuccessToast variant={variant} className={className} action="Close">
+        Your email is verified
+      </SuccessToast>
+    ),
+  },
+  {
+    key: "warning",
+    label: "Warning",
+    render: ({ className, variant }) => (
+      <WarningToast variant={variant} className={className} action="Close">
+        Connection unstable
+      </WarningToast>
+    ),
+  },
+  {
+    key: "error",
+    label: "Error",
+    render: ({ className, variant }) => (
+      <ErrorToast variant={variant} className={className} action="Close">
+        Something went wrong
+      </ErrorToast>
+    ),
+  },
+  {
+    key: "brand",
+    label: "Brand",
+    render: ({ className, variant }) => (
+      <Toast
+        variant={variant}
+        className={className}
+        action="Close"
+        icon={<Icon name={IconName.XCircle} decorative />}
+        dataAttributes={{ "data-intent": "brand" }}
+      >
+        Brand
+      </Toast>
+    ),
+  },
 ]
 
 const matrixToastClassName = "mw-toast--figma-matrix"
@@ -50,7 +114,7 @@ function SectionDivider(props: { dark?: boolean }): React.ReactElement {
       style={{
         width: "100%",
         height: 1,
-        background: props.dark ? "rgba(255, 255, 255, 0.08)" : "rgba(20, 20, 20, 0.12)",
+        background: props.dark ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.2)",
       }}
     />
   )
@@ -67,7 +131,7 @@ function ToastMatrixFrame(props: {
     <div
       className={isDark ? "mw-theme--dark" : undefined}
       style={{
-        background: isDark ? "#1f2937" : "#ffffff",
+        background: isDark ? "#2e2e2e" : "#ffffff",
         color: isDark ? "#f9fafb" : "#141414",
         minHeight: "100vh",
         padding: 48,
@@ -95,7 +159,7 @@ function ToastMatrixFrame(props: {
         <p
           style={{
             margin: "4px 0 0",
-            color: isDark ? "#9ca3af" : "#4b5563",
+            color: isDark ? "#a3a3a3" : "#595959",
             fontSize: 12,
             lineHeight: "16px",
             letterSpacing: "-0.03em",
@@ -116,35 +180,22 @@ function ToastMatrixFrame(props: {
             )}
             <div
               style={{
+                marginBottom: 16,
+                color: isDark ? "#a3a3a3" : "#595959",
                 fontSize: 11,
                 fontWeight: 500,
                 lineHeight: "16px",
                 letterSpacing: "0.08em",
-                color: isDark ? "#9ca3af" : "#4b5563",
-                marginBottom: 16,
               }}
             >
               {row.label}
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-              {MATRIX_ENTRIES.map((entry) => {
-                const Component = entry.component
-
-                return (
-                  <div
-                    key={`${row.variant}-${entry.label}`}
-                    style={{ flex: "0 0 360px", width: 360 }}
-                  >
-                    <Component
-                      variant={row.variant}
-                      action="Close"
-                      className={matrixToastClassName}
-                    >
-                      {entry.message}
-                    </Component>
-                  </div>
-                )
-              })}
+              {MATRIX_ENTRIES.map((entry) => (
+                <div key={`${row.variant}-${entry.key}`} style={{ flex: "0 0 360px", width: 360 }}>
+                  {entry.render({ className: matrixToastClassName, variant: row.variant })}
+                </div>
+              ))}
             </div>
             {rowIndex < TOAST_VARIANTS.length - 1 && <div style={{ height: 24 }} />}
           </div>
@@ -168,7 +219,7 @@ export const Dark: Story = {
     <ToastMatrixFrame
       dark
       title="Toast — Dark"
-      caption="Semantic mode: Dark · Copy this frame, switch to Light mode → instant light version"
+      caption="Outline (default) · Subtle (quiet) · Rich (high-emphasis, use sparingly) · Toast states → Semantic → Brand → Primitives"
     />
   ),
 }

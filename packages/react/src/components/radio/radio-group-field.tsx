@@ -166,6 +166,12 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
         <Paragraph size="md">{props.label}</Paragraph>
       </div>
 
+      {hasDescription && (
+        <div className="mw-radio-group-field__description" id={descriptionId}>
+          <Paragraph size="sm">{props.description}</Paragraph>
+        </div>
+      )}
+
       <div
         role="radiogroup"
         aria-labelledby={labelId}
@@ -186,6 +192,7 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
                 value={value}
                 checked={selectedValue === value}
                 disabled={isDisabled}
+                invalid={isInvalid}
                 {...(props.required ? { required: true } : {})}
                 onCheckedChange={(checked) => {
                   if (checked) handleSelect(value)
@@ -196,12 +203,6 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
           )
         })}
       </div>
-
-      {hasDescription && (
-        <div className="mw-radio-group-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
-        </div>
-      )}
 
       {hasError && (
         <div className="mw-radio-group-field__error" id={errorId} aria-live="polite">

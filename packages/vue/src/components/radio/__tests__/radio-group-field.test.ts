@@ -67,7 +67,28 @@ describe("RadioGroupField", () => {
     expect(onChange).toHaveBeenCalledWith("b")
   })
 
-  it("shows error and marks group invalid", () => {
+  it("keeps description above the options and wires aria-describedby", () => {
+    renderWithProvider({
+      name: "test",
+      label: "Pick one",
+      options: testOptions,
+      description: "Choose your favorite",
+    })
+
+    const group = screen.getByRole("radiogroup")
+    const descriptionText = screen.getByText("Choose your favorite")
+    const descriptionEl = descriptionText.closest("[id]") as HTMLElement | null
+    const describedBy = group.getAttribute("aria-describedby") ?? ""
+    const wrapperChildren = Array.from(group.parentElement?.children ?? [])
+
+    expect(descriptionEl).not.toBeNull()
+    expect(describedBy.split(/\s+/)).toContain(descriptionEl?.id ?? "")
+    expect(wrapperChildren.indexOf(descriptionEl as HTMLElement)).toBeLessThan(
+      wrapperChildren.indexOf(group),
+    )
+  })
+
+  it("shows error, marks the group invalid, and propagates invalid state to radios", () => {
     renderWithProvider({
       name: "test",
       label: "Pick one",
@@ -77,6 +98,11 @@ describe("RadioGroupField", () => {
 
     const group = screen.getByRole("radiogroup")
     expect(group.getAttribute("aria-invalid")).toBe("true")
+
+    for (const radio of screen.getAllByRole("radio")) {
+      expect(radio.getAttribute("aria-invalid")).toBe("true")
+    }
+
     expect(screen.getByText("Selection required").closest('[aria-live="polite"]')).not.toBeNull()
   })
 })

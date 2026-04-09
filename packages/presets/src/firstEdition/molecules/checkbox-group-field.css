@@ -1,6 +1,6 @@
 .mw-checkbox-group-field {
   display: grid;
-  gap: var(--mw-density-field-gap, 8px);
+  gap: 4px;
   border: none;
   padding: 0;
   margin: 0;
@@ -14,6 +14,7 @@
 .mw-checkbox-group-field__options {
   display: grid;
   gap: 0;
+  margin-top: 4px;
 }
 
 .mw-checkbox-group-field__option {
@@ -23,10 +24,6 @@
   min-height: 32px;
   cursor: pointer;
   user-select: none;
-}
-
-.mw-checkbox-group-field__option .mw-p {
-  line-height: 1;
 }
 
 .mw-checkbox-group-field__description {

@@ -8,6 +8,14 @@ export type {
 export { createInputRecipe } from "./input-recipe"
 
 export type {
+  InputOtpOptions,
+  InputOtpRenderKit,
+  InputOtpA11yProps,
+} from "./input-otp-types"
+
+export { createInputOtpRecipe, sanitizeInputOtpValue } from "./input-otp-recipe"
+
+export type {
   SelectAppearance,
   SelectMode,
   SelectOptions,

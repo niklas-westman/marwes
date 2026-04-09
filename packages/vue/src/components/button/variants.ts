@@ -46,7 +46,7 @@ export const DangerButton = defineComponent({
           ...props,
           variant: ButtonVariant.primary,
           action: ButtonAction.delete,
-          iconRight: IconName.Minus,
+          error: true,
           confirmation: props.confirmation ?? true,
           dataAttributes: {
             ...props.dataAttributes,
@@ -132,7 +132,7 @@ export const CancelButton = defineComponent({
           ...attrs,
           ...props,
           action: "cancel",
-          variant: props.variant ?? "secondary",
+          variant: props.variant ?? "neutral",
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "cancel",
@@ -191,7 +191,6 @@ export const SaveButton = defineComponent({
           ...props,
           action: ButtonAction.submit,
           variant: props.variant ?? ButtonVariant.primary,
-          iconRight: props.iconRight ?? IconName.Save,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "save",
@@ -220,7 +219,6 @@ export const ConfirmButton = defineComponent({
           ...props,
           variant: ButtonVariant.success,
           as: "button",
-          iconRight: props.iconRight ?? IconName.Check,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "confirm",
@@ -247,7 +245,7 @@ export const VerifyButton = defineComponent({
         {
           ...attrs,
           ...props,
-          variant: ButtonVariant.success,
+          variant: ButtonVariant.secondary,
           as: "button",
           iconRight: props.iconRight ?? IconName.CheckCircle,
           dataAttributes: {
@@ -307,8 +305,7 @@ export const CloseButton = defineComponent({
           ...attrs,
           ...props,
           action: ButtonAction.cancel,
-          variant: props.variant ?? ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.X,
+          variant: props.variant ?? ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "close",
@@ -335,7 +332,7 @@ export const RefreshButton = defineComponent({
         {
           ...attrs,
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
+          variant: props.variant ?? ButtonVariant.neutral,
           iconRight: props.iconRight ?? IconName.RefreshCw,
           dataAttributes: {
             ...props.dataAttributes,
@@ -419,8 +416,7 @@ export const CopyButton = defineComponent({
         {
           ...attrs,
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.Copy,
+          variant: props.variant ?? ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "copy",
@@ -447,7 +443,7 @@ export const SearchButton = defineComponent({
         {
           ...attrs,
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
+          variant: props.variant ?? ButtonVariant.primary,
           iconRight: props.iconRight ?? IconName.Search,
           dataAttributes: {
             ...props.dataAttributes,
@@ -475,8 +471,7 @@ export const FilterButton = defineComponent({
         {
           ...attrs,
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.Sliders,
+          variant: props.variant ?? ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "filter",
@@ -503,8 +498,7 @@ export const SortButton = defineComponent({
         {
           ...attrs,
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.ChevronsDown,
+          variant: props.variant ?? ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "sort",

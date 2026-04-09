@@ -158,6 +158,14 @@ export const CheckboxGroupField = defineComponent(
             h(Paragraph, { size: "md" }, { default: labelContent }),
           ]),
 
+          hasDescription.value
+            ? h(
+                "div",
+                { class: "mw-checkbox-group-field__description", id: a11yIds.value.descriptionId },
+                [h(Paragraph, { size: "sm" }, { default: descriptionContent })],
+              )
+            : null,
+
           h(
             "div",
             { class: "mw-checkbox-group-field__options" },
@@ -196,19 +204,11 @@ export const CheckboxGroupField = defineComponent(
                 },
                 [
                   h(Checkbox, checkboxProps),
-                  h(Paragraph, { size: "sm" }, { default: () => [option.label] }),
+                  h(Paragraph, { size: "md" }, { default: () => [option.label] }),
                 ],
               )
             }),
           ),
-
-          hasDescription.value
-            ? h(
-                "div",
-                { class: "mw-checkbox-group-field__description", id: a11yIds.value.descriptionId },
-                [h(Paragraph, { size: "sm" }, { default: descriptionContent })],
-              )
-            : null,
 
           hasError.value
             ? h(

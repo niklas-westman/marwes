@@ -1,7 +1,8 @@
 import type * as React from "react"
 
 import { render, screen } from "@testing-library/react"
-import { describe, expect, it } from "vitest"
+import userEvent from "@testing-library/user-event"
+import { describe, expect, it, vi } from "vitest"
 import { Switch } from ".."
 import { MarwesProvider } from "../../../provider/marwes-provider"
 
@@ -29,5 +30,20 @@ describe("React adapter specifics: Switch", () => {
 
     const switchButton = screen.getByRole("switch", { name: "Custom switch" })
     expect(switchButton).toHaveClass("mw-switch", "mw-switch--wide", "custom-class")
+  })
+
+  it("renders a disabled button and does not emit checked changes", async () => {
+    const onCheckedChange = vi.fn()
+
+    renderWithProvider(
+      <Switch ariaLabel="Disabled switch" checked disabled onCheckedChange={onCheckedChange} />,
+    )
+
+    const switchButton = screen.getByRole("switch", { name: "Disabled switch" })
+    expect(switchButton).toBeDisabled()
+
+    await userEvent.setup().click(switchButton)
+
+    expect(onCheckedChange).not.toHaveBeenCalled()
   })
 })

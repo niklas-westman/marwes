@@ -100,6 +100,10 @@ The referenced Toast Figma frames use an inline `"Close"` text action inside the
 toast surface. That action is not a standard `Button` or `CancelButton`; it is a
 toast-local text treatment.
 
+Use `dataAttributes={{ "data-intent": "neutral" }}` or
+`dataAttributes={{ "data-intent": "brand" }}` with the raw atom when you need
+the neutral or brand primitives from the Figma matrix.
+
 `onDismiss` is still supported when you explicitly want an icon-only dismiss
 control, but that `×` affordance is an adapter escape hatch rather than part of
 the referenced Toast Figma frames.

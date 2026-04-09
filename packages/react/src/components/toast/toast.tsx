@@ -11,7 +11,7 @@ export interface ToastProps extends ToastOptions {
   children: React.ReactNode
   /** Icon element shown on the left (e.g. an <Icon> component) */
   icon?: React.ReactNode
-  /** Action element shown below the message (e.g. a <button> or <a>) */
+  /** Action element shown inline after the message (e.g. a text action or <a>) */
   action?: React.ReactNode
   /** When provided, renders a dismiss (×) button and calls this on click */
   onDismiss?: () => void

@@ -78,4 +78,21 @@ describe("Vue TabGroup", () => {
     expect(updateHandler).toHaveBeenCalledWith("settings")
     expect(screen.getByRole("tabpanel").textContent).toContain("Overview panel")
   })
+
+  it("does not activate disabled tabs when clicked", async () => {
+    const user = userEvent.setup()
+
+    renderTabGroup({
+      label: "Account sections",
+      tabs: testTabs,
+      defaultActiveTab: "overview",
+    })
+
+    await user.click(screen.getByRole("tab", { name: /analytics/i }))
+
+    expect(screen.getByRole("tab", { name: /overview/i }).getAttribute("aria-selected")).toBe(
+      "true",
+    )
+    expect(screen.getByRole("tabpanel").textContent).toContain("Overview panel")
+  })
 })

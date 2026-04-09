@@ -1,11 +1,3 @@
-/**
- * Divider recipe: theme + options → render kit.
- * - Supports 7 size variants: xxs/xs/sm/md/lg/xl/xxl (maps to 1px-80px).
- * - Supports horizontal and vertical orientation.
- * - Built-in spacing based on divider size.
- * - Figma reference: node-id=1-932
- */
-
 import type { CssVars } from "../../../shared/css-vars"
 import type {
   DividerOptions,
@@ -14,66 +6,40 @@ import type {
   DividerSize,
 } from "./divider-types"
 
-/** Saved for later use if to adapt divider size (not spacing) */
-// const SIZE_MAP: Record<DividerSize, number> = {
-//   xxs: 1,
-//   xs: 8,
-//   sm: 16,
-//   md: 32,
-//   lg: 48,
-//   xl: 64,
-//   xxl: 80,
-// };
+const DIVIDER_LINE_THICKNESS_PX = 1
 
-/** Map sizes to spacing multipliers for vertical spacing. */
-const SPACING_MAP: Record<DividerSize, number> = {
-  xxs: 0.5, // 0.5rem for hairline
-  xs: 1, // 1rem
-  sm: 1.5, // 1.5rem
-  md: 2, // 2rem (default)
-  lg: 2.5, // 2.5rem
-  xl: 3, // 3rem
-  xxl: 4, // 4rem
+const DIVIDER_SPACING_BY_SIZE: Record<DividerSize, number> = {
+  xxs: 1,
+  xs: 8,
+  sm: 16,
+  md: 32,
+  lg: 48,
+  xl: 64,
+  xxl: 80,
 }
 
-export function createDividerRecipe(opts: DividerOptions = {}): DividerRenderKit {
-  // Default size to "md", orientation to "horizontal".
-  const size: DividerSize = opts.size ?? "md"
-  const orientation: DividerOrientation = opts.orientation ?? "horizontal"
+export function createDividerRecipe(options: DividerOptions = {}): DividerRenderKit {
+  const size: DividerSize = options.size ?? "md"
+  const orientation: DividerOrientation = options.orientation ?? "horizontal"
 
-  // Build class name.
-  const className = ["mw-divider", `mw-divider--${orientation}`, `mw-divider--${size}`]
-    .filter(Boolean)
-    .join(" ")
-
-  // Get pixel value for size.
-  const sizeValue = 2
-  const spacingValue = SPACING_MAP[size]
-
-  // CSS variables.
   const vars: CssVars = {
-    "--mw-divider-size": `${sizeValue}px`,
-    "--mw-divider-spacing": `${spacingValue}rem`,
-  }
-
-  // Build a11y props.
-  const a11y: DividerRenderKit["a11y"] = {
-    role: "separator",
-    "aria-orientation": orientation,
-  }
-  if (opts.id) a11y.id = opts.id
-
-  // Data attributes for styling hooks.
-  const dataAttributes: DividerRenderKit["dataAttributes"] = {
-    "data-orientation": orientation,
-    "data-size": size,
+    "--mw-divider-line-thickness": `${DIVIDER_LINE_THICKNESS_PX}px`,
+    "--mw-divider-spacing": `${DIVIDER_SPACING_BY_SIZE[size]}px`,
   }
 
   return {
     tag: "hr",
-    className,
+    className: ["mw-divider", `mw-divider--${orientation}`, `mw-divider--${size}`].join(" "),
     vars,
-    a11y,
-    dataAttributes,
+    a11y: {
+      ...(options.id ? { id: options.id } : {}),
+      role: "separator",
+      "aria-orientation": orientation,
+    },
+    dataAttributes: {
+      "data-component": "divider",
+      "data-orientation": orientation,
+      "data-size": size,
+    },
   }
 }

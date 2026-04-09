@@ -52,22 +52,22 @@ export const lightThemeDefaults: Theme = {
   },
   typography: {
     h1: {
-      fontSize: 44,
-      lineHeight: 1.18,
-      fontWeight: 700,
-      letterSpacing: -1.32,
-    },
-    h2: {
       fontSize: 32,
-      lineHeight: 1.25,
+      lineHeight: 1.1875,
       fontWeight: 700,
       letterSpacing: -0.96,
     },
-    h3: {
+    h2: {
       fontSize: 24,
+      lineHeight: 1.25,
+      fontWeight: 500,
+      letterSpacing: -0.72,
+    },
+    h3: {
+      fontSize: 20,
       lineHeight: 1.3,
-      fontWeight: 600,
-      letterSpacing: -0.48,
+      fontWeight: 500,
+      letterSpacing: -0.6,
     },
     paragraph: {
       sm: {
@@ -141,22 +141,22 @@ export const darkThemeDefaults: Theme = {
 
   typography: {
     h1: {
-      fontSize: 44,
-      lineHeight: 1.18,
-      fontWeight: 700,
-      letterSpacing: -1.32,
-    },
-    h2: {
       fontSize: 32,
-      lineHeight: 1.25,
+      lineHeight: 1.1875,
       fontWeight: 700,
       letterSpacing: -0.96,
     },
-    h3: {
+    h2: {
       fontSize: 24,
+      lineHeight: 1.25,
+      fontWeight: 500,
+      letterSpacing: -0.72,
+    },
+    h3: {
+      fontSize: 20,
       lineHeight: 1.3,
-      fontWeight: 600,
-      letterSpacing: -0.48,
+      fontWeight: 500,
+      letterSpacing: -0.6,
     },
     paragraph: {
       sm: {

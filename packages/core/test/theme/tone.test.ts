@@ -58,7 +58,7 @@ describe("resolveTone — playful", () => {
 
   it("typography h1 lineHeight is generous", () => {
     const lineHeight = resolveTone("playful").typography?.h1?.lineHeight ?? 0
-    expect(lineHeight).toBeGreaterThan(1.18)
+    expect(lineHeight).toBeGreaterThan(1.1875)
   })
 })
 
@@ -83,12 +83,12 @@ describe("resolveTone — editorial", () => {
 
   it("typography h1 letterSpacing is wider than default", () => {
     const letterSpacing = resolveTone("editorial").typography?.h1?.letterSpacing ?? -2
-    expect(letterSpacing).toBeGreaterThan(-1.32)
+    expect(letterSpacing).toBeGreaterThan(-0.96)
   })
 
   it("typography h1 lineHeight is taller than default", () => {
     const lineHeight = resolveTone("editorial").typography?.h1?.lineHeight ?? 0
-    expect(lineHeight).toBeGreaterThan(1.18)
+    expect(lineHeight).toBeGreaterThan(1.1875)
   })
 })
 

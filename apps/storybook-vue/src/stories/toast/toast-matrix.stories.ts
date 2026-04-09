@@ -1,9 +1,17 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { IconName, storybookLayout } from "@marwes-ui/core"
 import type { ToastProps } from "@marwes-ui/vue"
-import { ErrorToast, InfoToast, SuccessToast, WarningToast } from "@marwes-ui/vue"
+import { ErrorToast, Icon, InfoToast, SuccessToast, Toast, WarningToast } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 type ToastVariant = NonNullable<ToastProps["variant"]>
+
+type MatrixEntry = {
+  key: string
+  component: string
+  iconName?: IconName
+  intent?: "neutral" | "brand"
+  message: string
+}
 
 const TOAST_VARIANTS: Array<{ label: string; variant: ToastVariant }> = [
   { label: "SUBTLE", variant: "subtle" },
@@ -11,12 +19,42 @@ const TOAST_VARIANTS: Array<{ label: string; variant: ToastVariant }> = [
   { label: "RICH", variant: "rich" },
 ]
 
-const MATRIX_ENTRIES = [
-  { key: "info", component: "InfoToast", message: "Meeting starts in 10 min" },
-  { key: "success", component: "SuccessToast", message: "Your email is verified" },
-  { key: "warning", component: "WarningToast", message: "Connection unstable" },
-  { key: "error", component: "ErrorToast", message: "Something went wrong" },
-] as const
+const MATRIX_ENTRIES: MatrixEntry[] = [
+  {
+    key: "neutral",
+    component: "Toast",
+    iconName: IconName.XCircle,
+    intent: "neutral",
+    message: "Neutral message",
+  },
+  {
+    key: "info",
+    component: "InfoToast",
+    message: "Meeting starts in 10 min",
+  },
+  {
+    key: "success",
+    component: "SuccessToast",
+    message: "Your email is verified",
+  },
+  {
+    key: "warning",
+    component: "WarningToast",
+    message: "Connection unstable",
+  },
+  {
+    key: "error",
+    component: "ErrorToast",
+    message: "Something went wrong",
+  },
+  {
+    key: "brand",
+    component: "Toast",
+    iconName: IconName.XCircle,
+    intent: "brand",
+    message: "Brand",
+  },
+]
 
 const matrixToastClassName = "mw-toast--figma-matrix"
 
@@ -33,11 +71,20 @@ type Story = StoryObj<ToastProps>
 
 function renderMatrix(args: { dark?: boolean; title: string; caption: string }) {
   return {
-    components: { InfoToast, SuccessToast, WarningToast, ErrorToast },
+    components: { ErrorToast, Icon, InfoToast, SuccessToast, Toast, WarningToast },
     setup() {
+      function entryProps(entry: MatrixEntry, variant: ToastVariant) {
+        return {
+          variant,
+          className: matrixToastClassName,
+          ...(entry.intent ? { dataAttributes: { "data-intent": entry.intent } } : {}),
+        }
+      }
+
       return {
         caption: args.caption,
         dark: args.dark ?? false,
+        entryProps,
         matrixEntries: MATRIX_ENTRIES,
         matrixToastClassName,
         title: args.title,
@@ -46,7 +93,7 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
     },
     template: `
       <div :class="dark ? 'mw-theme--dark' : undefined" :style="{
-        background: dark ? '#1f2937' : '#ffffff',
+        background: dark ? '#2e2e2e' : '#ffffff',
         color: dark ? '#f9fafb' : '#141414',
         minHeight: '100vh',
         padding: '48px',
@@ -64,7 +111,7 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
           </h1>
           <p :style="{
             margin: '4px 0 0',
-            color: dark ? '#9ca3af' : '#4b5563',
+            color: dark ? '#a3a3a3' : '#595959',
             fontSize: '12px',
             lineHeight: '16px',
             letterSpacing: '-0.03em',
@@ -78,7 +125,7 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
               <div :style="{
                 width: '100%',
                 height: '1px',
-                background: dark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(20, 20, 20, 0.12)',
+                background: dark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
               }" />
               <div style="height: 24px;" />
             </template>
@@ -88,7 +135,7 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
               fontWeight: '500',
               lineHeight: '16px',
               letterSpacing: '0.08em',
-              color: dark ? '#9ca3af' : '#4b5563',
+              color: dark ? '#a3a3a3' : '#595959',
               marginBottom: '16px',
             }">
               {{ row.label }}
@@ -100,12 +147,11 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
                 :key="row.variant + '-' + entry.key"
                 style="flex: 0 0 360px; width: 360px;"
               >
-                <component
-                  :is="entry.component"
-                  :variant="row.variant"
-                  :class-name="matrixToastClassName"
-                >
+                <component :is="entry.component" v-bind="entryProps(entry, row.variant)">
                   {{ entry.message }}
+                  <template v-if="entry.iconName" #icon>
+                    <Icon :name="entry.iconName" decorative />
+                  </template>
                   <template #action>Close</template>
                 </component>
               </div>
@@ -134,6 +180,6 @@ export const Dark: Story = {
       dark: true,
       title: "Toast — Dark",
       caption:
-        "Semantic mode: Dark · Copy this frame, switch to Light mode → instant light version",
+        "Outline (default) · Subtle (quiet) · Rich (high-emphasis, use sparingly) · Toast states → Semantic → Brand → Primitives",
     }),
 }

@@ -6,9 +6,11 @@ import { runButtonContract } from "../../../../../../tests/contracts/button.cont
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Button } from "../button"
 import {
+  CancelButton,
   CloseButton,
   ConfirmButton,
   CopyButton,
+  DangerButton,
   DownloadButton,
   DropdownButton,
   EditButton,
@@ -98,38 +100,47 @@ describe("Vue adapter specifics: Button", () => {
 
     const saveButton = screen.getByRole("button", { name: /save/i })
     expect(saveButton).toHaveAttribute("data-action", "submit")
+    expect(saveButton).toHaveAttribute("type", "submit")
     expect(saveButton).toHaveAttribute("data-purpose", "save")
     expect(saveButton).toHaveClass("mw-btn--primary")
-    expect(saveButton.querySelector("svg")).not.toBeNull()
+    expect(saveButton.querySelector("svg")).toBeNull()
 
     const confirmButton = screen.getByRole("button", { name: /confirm/i })
     expect(confirmButton).toHaveAttribute("data-purpose", "confirm")
     expect(confirmButton).toHaveAttribute("data-outcome", "positive")
     expect(confirmButton).toHaveClass("mw-btn--success")
-    expect(confirmButton.querySelector("svg")).not.toBeNull()
+    expect(confirmButton.querySelector("svg")).toBeNull()
 
     const verifyButton = screen.getByRole("button", { name: /verify/i })
     expect(verifyButton).toHaveAttribute("data-purpose", "verify")
     expect(verifyButton).toHaveAttribute("data-verification", "true")
-    expect(verifyButton).toHaveClass("mw-btn--success")
+    expect(verifyButton).toHaveClass("mw-btn--secondary")
     expect(verifyButton.querySelector("svg")).not.toBeNull()
   })
 
-  it("applies Wave 1 semantic defaults for edit, close, and refresh", () => {
+  it("applies Figma-aligned defaults for cancel, edit, close, refresh, and danger", () => {
     renderWithProvider(
       defineComponent({
         setup() {
           return () =>
             h(MarwesProvider, null, {
               default: () => [
+                h(CancelButton, null, { default: () => "Cancel" }),
                 h(EditButton, null, { default: () => "Edit" }),
                 h(CloseButton, null, { default: () => "Close" }),
                 h(RefreshButton, null, { default: () => "Refresh" }),
+                h(DangerButton, null, { default: () => "Delete" }),
               ],
             })
         },
       }),
     )
+
+    const cancelButton = screen.getByRole("button", { name: /cancel/i })
+    expect(cancelButton).toHaveAttribute("data-action", "cancel")
+    expect(cancelButton).toHaveAttribute("data-purpose", "cancel")
+    expect(cancelButton).toHaveClass("mw-btn--neutral")
+    expect(cancelButton.querySelector("svg")).toBeNull()
 
     const editButton = screen.getByRole("button", { name: /edit/i })
     expect(editButton).toHaveAttribute("data-action", "edit")
@@ -140,14 +151,21 @@ describe("Vue adapter specifics: Button", () => {
     const closeButton = screen.getByRole("button", { name: /close/i })
     expect(closeButton).toHaveAttribute("data-action", "cancel")
     expect(closeButton).toHaveAttribute("data-purpose", "close")
-    expect(closeButton).toHaveClass("mw-btn--secondary")
-    expect(closeButton.querySelector("svg")).not.toBeNull()
+    expect(closeButton).toHaveClass("mw-btn--neutral")
+    expect(closeButton.querySelector("svg")).toBeNull()
 
     const refreshButton = screen.getByRole("button", { name: /refresh/i })
     expect(refreshButton).toHaveAttribute("data-action", "button")
     expect(refreshButton).toHaveAttribute("data-purpose", "refresh")
-    expect(refreshButton).toHaveClass("mw-btn--secondary")
+    expect(refreshButton).toHaveClass("mw-btn--neutral")
     expect(refreshButton.querySelector("svg")).not.toBeNull()
+
+    const dangerButton = screen.getByRole("button", { name: /delete/i })
+    expect(dangerButton).toHaveAttribute("data-action", "delete")
+    expect(dangerButton).toHaveAttribute("data-purpose", "destructive")
+    expect(dangerButton).toHaveClass("mw-btn--primary")
+    expect(dangerButton).toHaveClass("mw-btn--error")
+    expect(dangerButton.querySelector("svg")).toBeNull()
   })
 
   it("applies Wave 2 semantic defaults for utility purpose buttons", () => {
@@ -188,29 +206,29 @@ describe("Vue adapter specifics: Button", () => {
     expect(copyButton).toHaveAttribute("data-action", "button")
     expect(copyButton).toHaveAttribute("data-purpose", "copy")
     expect(copyButton).toHaveAttribute("data-copy", "true")
-    expect(copyButton).toHaveClass("mw-btn--secondary")
-    expect(copyButton.querySelector("svg")).not.toBeNull()
+    expect(copyButton).toHaveClass("mw-btn--neutral")
+    expect(copyButton.querySelector("svg")).toBeNull()
 
     const searchButton = screen.getByRole("button", { name: /search/i })
     expect(searchButton).toHaveAttribute("data-action", "button")
     expect(searchButton).toHaveAttribute("data-purpose", "search")
     expect(searchButton).toHaveAttribute("data-search", "true")
-    expect(searchButton).toHaveClass("mw-btn--secondary")
+    expect(searchButton).toHaveClass("mw-btn--primary")
     expect(searchButton.querySelector("svg")).not.toBeNull()
 
     const filterButton = screen.getByRole("button", { name: /filter/i })
     expect(filterButton).toHaveAttribute("data-action", "button")
     expect(filterButton).toHaveAttribute("data-purpose", "filter")
     expect(filterButton).toHaveAttribute("data-filter", "true")
-    expect(filterButton).toHaveClass("mw-btn--secondary")
-    expect(filterButton.querySelector("svg")).not.toBeNull()
+    expect(filterButton).toHaveClass("mw-btn--neutral")
+    expect(filterButton.querySelector("svg")).toBeNull()
 
     const sortButton = screen.getByRole("button", { name: /sort/i })
     expect(sortButton).toHaveAttribute("data-action", "button")
     expect(sortButton).toHaveAttribute("data-purpose", "sort")
     expect(sortButton).toHaveAttribute("data-sort", "true")
-    expect(sortButton).toHaveClass("mw-btn--secondary")
-    expect(sortButton.querySelector("svg")).not.toBeNull()
+    expect(sortButton).toHaveClass("mw-btn--neutral")
+    expect(sortButton.querySelector("svg")).toBeNull()
 
     const dropdownButton = screen.getByRole("button", { name: /dropdown/i })
     expect(dropdownButton).toHaveAttribute("data-action", "button")

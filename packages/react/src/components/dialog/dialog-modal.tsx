@@ -72,6 +72,7 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen)
   const resolvedOpen = isControlled ? open : internalOpen
   const overlayRef = React.useRef<HTMLDivElement>(null)
+  const surfaceRef = React.useRef<HTMLDivElement>(null)
   const lastFocusedElementRef = React.useRef<HTMLElement | null>(null)
 
   const close = React.useCallback(() => {
@@ -180,14 +181,26 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
       ref={overlayRef}
       className={cx("mw-dialog-modal", overlayClassName)}
       onClick={(event) => {
-        if (event.target === event.currentTarget && closeOnScrimClick) {
-          close()
+        if (!closeOnScrimClick) {
+          return
         }
+
+        const clickTarget = event.target
+
+        if (!(clickTarget instanceof Node)) {
+          return
+        }
+
+        if (surfaceRef.current?.contains(clickTarget)) {
+          return
+        }
+
+        close()
       }}
       onKeyDown={handleKeyDown}
     >
       <div className="mw-dialog-modal__scrim" aria-hidden="true" />
-      <div className="mw-dialog-modal__surface">
+      <div ref={surfaceRef} className="mw-dialog-modal__surface">
         <Dialog {...dialogProps} footer={renderedFooter} onClose={close} />
       </div>
     </div>
