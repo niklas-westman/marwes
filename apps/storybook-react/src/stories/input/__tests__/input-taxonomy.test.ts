@@ -41,6 +41,14 @@ describe("React input story taxonomy", () => {
     expect(selectStory).toMatch(/export const\s+Basic\s*:/)
   })
 
+  it("uses Atom title for InputOtp story", () => {
+    const inputOtpStory = readStoryFile("input-otp.stories.tsx")
+
+    expect(inputOtpStory).toContain('title: "Input/Atom/InputOtp"')
+    expect(inputOtpStory).toContain("component: InputOtp")
+    expect(inputOtpStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
   it("uses Molecule title for InputField story", () => {
     const inputFieldStory = readStoryFile("input-field.stories.tsx")
 
