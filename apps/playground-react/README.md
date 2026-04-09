@@ -206,8 +206,8 @@ function DebugButton() {
 
 - [Main README](../../README.md) - Monorepo overview
 - [Storybook](../storybook-react/README.md) - Component development
-- [Architecture](../../docs/ARCHITECTURE.md) - System design
-- [Testing Guide](../../docs/TESTING.md) - Test strategy
+- [Architecture](../../docs/reference/architecture.md) - System design
+- [Testing Guide](../../docs/reference/testing.md) - Test strategy
 
 ## Scripts
 

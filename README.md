@@ -6,7 +6,7 @@
 
 Framework-agnostic • Static CSS • Type-safe • A11y-first
 
-[Documentation](docs/PROJECT.md) • [Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
+[Documentation](docs/README.md) • [Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -109,12 +109,13 @@ What makes Marwes different? **Complete separation of concerns:**
 
 **Available now:**
 
-- Button (primary, secondary, text, success variants)
-- Input & InputField
-- Checkbox & CheckboxField
-- Typography (H1, H2, H3, Paragraph)
-- Divider
-- Icon (lucide icons)
+- Buttons, purpose buttons, and semantic button variants
+- Input family: `Input`, `Select`, `Textarea`, `RichText`, and field wrappers
+- Checkbox family: `Checkbox`, `CheckboxField`, `CheckboxGroupField`
+- Radio family: `Radio`, `RadioGroupField`, purpose radio groups
+- `Switch`, `Accordion`, `Badge`, `Card`, `Toast`, `Slider`, `Spacing`
+- Typography: `H1`, `H2`, `H3`, `Paragraph`
+- Utilities and primitives: `Icon`, `Divider`
 
 [👉 **Browse all components in Storybook**](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
 
@@ -147,14 +148,15 @@ Override theme values with a simple, typed API:
 
 ## 📚 Documentation
 
-| Guide                                     | Description                |
-| ----------------------------------------- | -------------------------- |
-| [Project Overview](docs/PROJECT.md)       | Purpose, goals, philosophy |
-| [Architecture](docs/ARCHITECTURE.md)      | How the three layers work  |
-| [Engineering](docs/ENGINEERING.md)        | Coding conventions         |
-| [Figma Workflow](docs/FIGMA_TO_MARWES.md) | Design-to-code sync        |
-| [Specification](SPEC.md)                  | Full product spec          |
-| [Roadmap](docs/ROADMAP.md)                | Feature planning           |
+| Guide | Description |
+| --- | --- |
+| [Docs index](docs/README.md) | Best starting point for understanding the repo |
+| [Architecture](docs/reference/architecture.md) | Package boundaries, RenderKit flow, and repo structure |
+| [Specification](docs/reference/spec.md) | Formal requirements and decisions |
+| [Testing](docs/reference/testing.md) | Test layers and current commands |
+| [Adding components](docs/guides/adding-components.md) | Step-by-step implementation workflow |
+| [Figma to Marwes](docs/guides/figma-to-marwes.md) | Design-to-code mapping and token workflow |
+| [Component backlog](docs/planning/component-backlog.md) | Remaining component-level gaps |
 
 ---
 
@@ -164,17 +166,23 @@ Override theme values with a simple, typed API:
 # Install dependencies
 pnpm install
 
-# Start development
-pnpm dev
+# Watch package builds
+pnpm dev:packages
 
-# Component development
-pnpm dev:storybook
+# Run the React playground
+pnpm dev:playground
 
-# Build everything
+# Run Storybook
+pnpm dev:storybook:react
+pnpm dev:storybook:vue
+
+# Validate the repo
+pnpm typecheck
+pnpm test
 pnpm build
 
-# Run tests
-pnpm test
+# Check internal markdown links
+pnpm docs:links
 ```
 
 **Repo structure:**
@@ -182,18 +190,21 @@ pnpm test
 - `packages/core` — Framework-agnostic TypeScript logic
 - `packages/presets` — Design tokens and static CSS
 - `packages/react` — React adapter
-- `apps/storybook-react` — Component development
-- `apps/playground-react` — Integration testing
+- `packages/vue` — Vue adapter
+- `apps/storybook-react` — React component documentation
+- `apps/storybook-vue` — Vue component documentation
+- `apps/playground-react` — Integration testing and manual verification
 
 ---
 
 ## 📦 Packages
 
-| Package              | Description              |
-| -------------------- | ------------------------ |
-| `@marwes-ui/core`    | Framework-agnostic logic |
-| `@marwes-ui/presets` | Static CSS presets       |
-| `@marwes-ui/react`   | React adapter            |
+| Package | Description |
+| --- | --- |
+| `@marwes-ui/core` | Framework-agnostic logic |
+| `@marwes-ui/presets` | Static CSS presets |
+| `@marwes-ui/react` | React adapter |
+| `@marwes-ui/vue` | Vue adapter |
 
 ---
 
@@ -219,6 +230,6 @@ See [LICENSE](LICENSE) for details.
 
 **Built with care for teams who value quality, accessibility, and performance.**
 
-[⭐ Star on GitHub](https://github.com/niklas-westman/marwes) • [📖 Docs](docs/PROJECT.md) • [🎨 Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
+[⭐ Star on GitHub](https://github.com/niklas-westman/marwes) • [📖 Docs](docs/README.md) • [🎨 Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
 
 </div>

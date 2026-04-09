@@ -1,0 +1,102 @@
+# Marwes Documentation
+
+This folder is the canonical documentation hub for the repository.
+
+If you are new to Marwes, start here.
+
+## Read order
+
+1. [Architecture](./reference/architecture.md)
+2. [Specification](./reference/spec.md)
+3. [Adding Components](./guides/adding-components.md)
+4. [Figma to Marwes](./guides/figma-to-marwes.md)
+5. [Testing](./reference/testing.md)
+
+## Documentation map
+
+```mermaid
+graph TD
+  Docs[docs/]
+  Docs --> Reference[reference/]
+  Docs --> Guides[guides/]
+  Docs --> Planning[planning/]
+  Docs --> Tooling[tooling/]
+
+  Reference --> Architecture[architecture.md]
+  Reference --> Spec[spec.md]
+  Reference --> Testing[testing.md]
+
+  Guides --> Adding[adding-components.md]
+  Guides --> Figma[figma-to-marwes.md]
+
+  Planning --> Backlog[component-backlog.md]
+  Planning --> Migration[upgrade-migration.md]
+
+  Tooling --> Allure[allure.md]
+```
+
+## What lives where
+
+### Reference
+Long-lived, canonical project docs.
+
+- [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
+- [Specification](./reference/spec.md) — formal requirements and decisions
+- [Testing](./reference/testing.md) — test layers, commands, and expectations
+
+### Guides
+Practical how-to documents.
+
+- [Adding Components](./guides/adding-components.md) — step-by-step workflow for introducing a new component
+- [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
+
+### Planning
+Active or historical planning documents.
+
+- [Component Backlog](./planning/component-backlog.md) — remaining component-level gaps against the design system
+- [Upgrade Migration](./planning/upgrade-migration.md) — completed migration work and historical implementation notes
+
+### Tooling
+Docs for optional tooling and workflows.
+
+- [Allure](./tooling/allure.md) — optional HTML reporting for package tests
+
+## How the repo fits together
+
+```mermaid
+graph LR
+  Figma[Figma + .figma cache]
+  Core[@marwes-ui/core]
+  Presets[@marwes-ui/presets]
+  React[@marwes-ui/react]
+  Vue[@marwes-ui/vue]
+  Storybook[Storybook apps]
+  Playground[Playground app]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Presets --> React
+  Presets --> Vue
+  React --> Storybook
+  Vue --> Storybook
+  React --> Playground
+```
+
+## Related entry points outside `docs/`
+
+- [Repository README](../README.md)
+- [Figma source index](../.figma/INDEX.md)
+- [Curated Figma node reference](../.figma/NODE_REFERENCE.md)
+- [Changelog](../CHANGELOG.md)
+
+## Documentation rules
+
+When updating the repo:
+
+- Prefer one canonical doc per topic
+- Fix links when files move
+- Update docs when behavior or public API changes
+- Put backlog and migration notes in `docs/planning/`, not in reference docs
+- Prefer short diagrams when they explain structure faster than prose

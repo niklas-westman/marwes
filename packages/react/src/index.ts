@@ -116,8 +116,8 @@ export { Checkbox } from "./components/checkbox"
 export type { CheckboxProps } from "./components/checkbox"
 
 /* Divider */
-export { Divider } from "./components/divider/divider"
-export type { DividerProps } from "./components/divider/divider"
+export { Divider } from "./components/divider"
+export type { DividerProps } from "./components/divider"
 
 /* Spacing */
 export { Spacing } from "./components/spacing"

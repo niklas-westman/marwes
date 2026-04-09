@@ -3,6 +3,16 @@
 This file is the canonical specification for Marwes.
 If implementation, docs, or behavior diverge from this file, either the implementation is wrong or this spec must be updated explicitly.
 
+```mermaid
+flowchart LR
+  Requirement[Requirement in spec] --> Plan[Implementation plan]
+  Plan --> Core[Core changes]
+  Core --> Presets[Preset CSS changes]
+  Presets --> Adapters[React and Vue adapter changes]
+  Adapters --> Stories[Storybook and tests]
+  Stories --> Docs[Docs and changelog updates]
+```
+
 ## 1. Product Intent
 Marwes is a component system that prioritizes:
 - Strong defaults
@@ -10,12 +20,11 @@ Marwes is a component system that prioritizes:
 - Consistent accessibility behavior
 - Framework-agnostic core logic
 
-## 2. Current Status (2026-02-18)
-- Repository version: `0.0.3`
-- Delivery phase: v0.1 foundation
-- Implemented atoms: Button, Input, Checkbox, Icon, H1, H2, H3, Paragraph, Divider
-- Implemented molecules: CheckboxField
-- In active scope: Select (native), Textarea, FormField, Card, Spinner
+## 2. Current Status (2026-04-09)
+- Repository shape: pnpm monorepo with `core`, `presets`, `react`, `vue`, Storybook apps, and a React playground
+- Adapter support: React and Vue are both first-class packages
+- Current focus: keep docs, Storybook coverage, and implementation aligned with the V3 Figma component set
+- Remaining backlog is component-level, not architecture-level, and is tracked in `docs/planning/component-backlog.md`
 
 ## 3. Core Principles
 - Simple surface API, strong internal consistency
@@ -32,8 +41,8 @@ Marwes uses three layers:
    - A11y mappings
 2. `@marwes-ui/presets`
    - Static CSS and preset defaults
-3. `@marwes-ui/react`
-   - Thin adapter that applies core RenderKit output
+3. Framework adapters (`@marwes-ui/react`, `@marwes-ui/vue`)
+   - Thin adapters that apply core RenderKit output
 
 ### RenderKit Contract
 Core recipes return:
@@ -57,16 +66,17 @@ Adapter requirements:
 - Apply typed `a11y`
 - Respect `policy`
 
-## 5. v0.1 Scope
+## 5. Active Scope
 ### In Scope
-- Core theme system
-- Foundational form and typography components
-- React adapter for in-scope components
+- Core theme system and preset CSS
+- React and Vue adapter parity for shipped components
 - Storybook and playground validation
+- Continued alignment with the synced V3 Figma references
 
 ### Out of Scope
-- Complex widgets (DatePicker, DataTable, Combobox)
+- Replacing the three-layer architecture
 - Runtime CSS-in-JS
+- Pushing framework logic down into core
 
 ## 6. Spec-Driven Development Workflow (Required)
 Every non-trivial change must follow this sequence:
@@ -76,7 +86,7 @@ Every non-trivial change must follow this sequence:
 2. **Acceptance criteria**
    - Each requirement includes testable outcomes.
 3. **Implementation mapping**
-   - Identify impacted files across core/presets/react.
+   - Identify impacted files across core, presets, React, and Vue.
 4. **Validation**
    - Typecheck/build and targeted behavior checks.
 5. **Documentation + changelog**
@@ -109,7 +119,7 @@ Keep this mapping in PR description (or add temporarily to this file for major w
 | REQ-XXX | `...` | `...` | `...` | `...` |
 
 ## 9. Open Decisions
-- DEC-001: Should v0.1 Select stay native only?
+- DEC-001: Should Select stay native only by default?
   - Status: Open
   - Lean: Yes
 - DEC-002: Should value controls standardize on `onValueChange` at core boundaries?
@@ -147,6 +157,8 @@ Use this format when resolving an open decision:
 
 ## 12. Component Requirements
 
+> Requirement entries are kept as a traceable record of why work was started. Some entries describe an original problem statement for work that is now complete. Use the acceptance checkboxes and decision log to understand current status.
+
 ### REQ-VUE-001: Vue Adapter Package (`@marwes-ui/vue`)
 - **Problem**: Marwes core and presets are framework-agnostic, but only a React adapter exists, which blocks Vue users from consuming the same components and behaviors.
 - **Scope**:
@@ -160,12 +172,12 @@ Use this format when resolving an open decision:
   - Replacing `@marwes-ui/react` or changing its public API semantics
   - Introducing a runtime styling system or Vue-only preset CSS
 - **Acceptance criteria**:
-  - [ ] `packages/vue` builds as `@marwes-ui/vue` with ESM + types and publishes from `dist/`
-  - [ ] Vue provider/composables use `createSystem`/`switchMode` from core and support light/dark mode
-  - [ ] Vue adapter exports the same component set currently exported by `@marwes-ui/react` for in-scope components
-  - [ ] Vue adapter renders core RenderKit outputs (className, vars, typed a11y) without re-implementing core a11y logic
-  - [ ] Vue adapter supports idiomatic Vue event usage (`emits` / `v-model` where applicable) and parity callbacks (`onValueChange`, `onCheckedChange`)
-  - [ ] React adapter behavior remains unchanged for existing stories/manual checks
+  - [x] `packages/vue` builds as `@marwes-ui/vue` with ESM + types and publishes from `dist/`
+  - [x] Vue provider/composables use `createSystem`/`switchMode` from core and support light/dark mode
+  - [x] Vue adapter exports the same component set currently exported by `@marwes-ui/react` for in-scope components
+  - [x] Vue adapter renders core RenderKit outputs (className, vars, typed a11y) without re-implementing core a11y logic
+  - [x] Vue adapter supports idiomatic Vue event usage (`emits` / `v-model` where applicable) and parity callbacks (`onValueChange`, `onCheckedChange`)
+  - [x] React adapter behavior remains unchanged for existing stories/manual checks
 - **Validation**:
   - Unit: TypeScript typecheck passes for `packages/vue`
   - Integration/manual: Verify representative components in Vue Storybook (button, input, checkbox, divider, field)
@@ -186,11 +198,11 @@ Use this format when resolving an open decision:
   - Exact 1:1 file duplication of every React story before the app is functional
   - Replacing React Storybook as the primary reference during migration
 - **Acceptance criteria**:
-  - [ ] `apps/storybook-vue` runs locally and renders Vue adapter components using `firstEdition` preset CSS
-  - [ ] Theme toolbar switches between light and dark mode using Vue `MarwesProvider`
-  - [ ] Vue Storybook includes smoke stories for representative atoms/molecules
-  - [ ] Storybook local aliases resolve package source code (not only published `dist`)
-  - [ ] Custom RenderKit debug panel is reusable or functionally matched for Vue stories
+  - [x] `apps/storybook-vue` runs locally and renders Vue adapter components using `firstEdition` preset CSS
+  - [x] Theme toolbar switches between light and dark mode using Vue `MarwesProvider`
+  - [x] Vue Storybook includes smoke stories for representative atoms/molecules
+  - [x] Storybook local aliases resolve package source code (not only published `dist`)
+  - [x] Custom RenderKit debug panel is reusable or functionally matched for Vue stories
 - **Validation**:
   - Integration/manual: `storybook dev` launches and representative stories render correctly
   - Build: `storybook build` succeeds for Vue Storybook app
@@ -209,10 +221,10 @@ Use this format when resolving an open decision:
   - Creating a generic cross-framework rendering abstraction
   - Moving React/Vue component rendering into core
 - **Acceptance criteria**:
-  - [ ] New shared helpers in core are framework-agnostic and contain no React/Vue imports
-  - [ ] React and Vue adapters both consume shared helpers for at least one molecule/variant flow
-  - [ ] Shared Storybook fixture/config extraction reduces repeated args/argTypes definitions for equivalent stories
-  - [ ] Shared extraction does not change visual output or a11y behavior of React stories
+  - [x] New shared helpers in core are framework-agnostic and contain no React/Vue imports
+  - [x] React and Vue adapters both consume shared helpers for at least one molecule/variant flow
+  - [x] Shared Storybook fixture/config extraction reduces repeated args/argTypes definitions for equivalent stories
+  - [x] Shared extraction does not change visual output or a11y behavior of React stories
 - **Validation**:
   - Unit/type: Shared helpers typecheck in core and adapter consumers typecheck
   - Integration/manual: React and Vue story parity check for at least one shared fixture-backed component
@@ -241,16 +253,16 @@ Use this format when resolving an open decision:
   - Storing arbitrary unsanitized HTML as part of the public contract
   - Adding editor runtime dependencies to `@marwes-ui/core`
 - **Acceptance criteria**:
-  - [ ] `RichText` ships as a new atom under the Input family in core, React, Vue, and Storybook
-  - [ ] `RichTextField` ships as a new molecule under the Input family in React, Vue, and Storybook
-  - [ ] `Textarea` and `TextareaField` remain plain-text components with unchanged conceptual scope
-  - [ ] MVP formatting actions support `bold`, `italic`, and `underline`
-  - [ ] The public value contract is an HTML string with a small, documented supported subset
-  - [ ] Core exposes rich-text types/recipe metadata and a dedicated helper for field labelling/description wiring
-  - [ ] React and Vue adapters stay in parity for props, value flow, disabled/read-only behavior, and toolbar actions
-  - [ ] Storybook titles follow the Input taxonomy: `Input/Atom/RichText` and `Input/Molecule/RichTextField`
-  - [ ] Input Introduction docs in both Storybooks explain when to use `RichText` / `RichTextField` vs `Textarea` / `TextareaField`
-  - [ ] Shared contracts cover atom behavior and field-level accessibility expectations across both adapters
+  - [x] `RichText` ships as a new atom under the Input family in core, React, Vue, and Storybook
+  - [x] `RichTextField` ships as a new molecule under the Input family in React, Vue, and Storybook
+  - [x] `Textarea` and `TextareaField` remain plain-text components with unchanged conceptual scope
+  - [x] MVP formatting actions support `bold`, `italic`, and `underline`
+  - [x] The public value contract is an HTML string with a small, documented supported subset
+  - [x] Core exposes rich-text types/recipe metadata and a dedicated helper for field labelling/description wiring
+  - [x] React and Vue adapters stay in parity for props, value flow, disabled/read-only behavior, and toolbar actions
+  - [x] Storybook titles follow the Input taxonomy: `Input/Atom/RichText` and `Input/Molecule/RichTextField`
+  - [x] Input Introduction docs in both Storybooks explain when to use `RichText` / `RichTextField` vs `Textarea` / `TextareaField`
+  - [x] Shared contracts cover atom behavior and field-level accessibility expectations across both adapters
 - **Validation**:
   - Unit: Core types/recipes typecheck; React/Vue adapter tests cover formatting actions and value flow
   - Integration/manual: Verify React and Vue Storybook stories for basic, helper, error, disabled, read-only, and controlled states
@@ -261,7 +273,7 @@ Use this format when resolving an open decision:
   - Vue: `packages/vue/src/components/input/rich-text.ts`, `packages/vue/src/components/input/rich-text-field.ts`, adapter tests, package exports, and adapter dependencies
   - Storybook: React/Vue input stories, `Introduction.mdx`, taxonomy tests, intro-docs tests
   - Shared tests: `tests/contracts/rich-text.contract.ts`, `tests/contracts/rich-text-field.contract.ts`
-  - Docs/backlog: `docs/Upgrade_v2.md`
+  - Docs/backlog: `docs/planning/component-backlog.md`
 
 ### REQ-DIV-001: Divider Component
 - **Figma reference**: node-id=1-932
@@ -310,7 +322,7 @@ Use this format when resolving an open decision:
 - Rationale:
   - This preserves cross-framework API familiarity for Marwes docs/examples and internal conventions while giving Vue users ergonomic integration with standard Vue patterns.
 - Impacted docs/files:
-  - `SPEC.md`
+  - `docs/reference/spec.md`
   - `packages/vue/*`
   - Vue Storybook examples/docs
 
@@ -321,7 +333,7 @@ Use this format when resolving an open decision:
 - Rationale:
   - The logic is framework-agnostic and belongs close to RenderKit/a11y contracts. This avoids a fourth architectural layer and keeps shared behavior discoverable.
 - Impacted docs/files:
-  - `SPEC.md`
+  - `docs/reference/spec.md`
   - `packages/core/src/*`
   - `packages/react/src/*`
   - `packages/vue/src/*`
@@ -333,8 +345,8 @@ Use this format when resolving an open decision:
 - Rationale:
   - A native `<textarea>` is a plain-text control and cannot provide true inline formatting for selected ranges. Splitting the concepts keeps the API honest, preserves the existing plain-text surface, and aligns the feature with the Marwes Atom → Molecule → Storybook taxonomy.
 - Impacted docs/files:
-  - `SPEC.md`
-  - `docs/Upgrade_v2.md`
+  - `docs/reference/spec.md`
+  - `docs/planning/component-backlog.md`
   - `packages/core/src/components/atoms/input/*`
   - `packages/presets/src/firstEdition/*`
   - `packages/react/src/components/input/*`

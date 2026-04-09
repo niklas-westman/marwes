@@ -12,7 +12,7 @@ function cx(...parts: Array<string | false | undefined>): string {
 }
 
 export function createToastRecipe(opts: ToastOptions): ToastRenderKit {
-  const variant = opts.variant ?? "subtle"
+  const variant = opts.variant ?? "outline"
   return {
     tag: "div",
     className: cx("mw-toast", `mw-toast--${variant}`),

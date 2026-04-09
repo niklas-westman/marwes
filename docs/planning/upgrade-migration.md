@@ -1,4 +1,6 @@
-# UPGRADE.md — Component Library: Atom/Molecule/Purpose Migration
+# Upgrade Migration
+
+> Historical planning document. This migration is complete and is kept for implementation context.
 
 ## Overview
 

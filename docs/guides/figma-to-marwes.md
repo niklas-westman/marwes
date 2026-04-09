@@ -4,15 +4,15 @@ This guide defines how design data from Figma should map into Marwes so implemen
 
 ## Scope
 - Source design: Figma file tokens and component variants/states.
-- Target implementation: `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`.
+- Target implementation: `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`, and `@marwes-ui/vue`.
 - Current preset focus: `firstEdition`.
 
 ## Node Reference (Local Offline Resources)
 
 When the Figma MCP server is unavailable, the following local files provide everything needed to work with the V3 component library:
 
-- [`.figma/NODE_REFERENCE.md`](../.figma/NODE_REFERENCE.md) — human-readable reference: all 13 V3 components, frame IDs, states/variants, CSS tokens, variable definitions (light + dark), MCP usage guide
-- [`.figma/nodes.json`](../.figma/nodes.json) — machine-readable structured data: meta, verified variable defs (2026-03-18), all component node IDs
+- [`.figma/NODE_REFERENCE.md`](../../.figma/NODE_REFERENCE.md) — human-readable reference: all 13 V3 components, frame IDs, states/variants, CSS tokens, variable definitions (light + dark), MCP usage guide
+- [`.figma/nodes.json`](../../.figma/nodes.json) — machine-readable structured data: meta, verified variable defs (2026-03-18), all component node IDs
 
 Both files are MCP-verified as of 2026-03-18.
 
@@ -26,6 +26,18 @@ Use this once per environment:
 4. Confirm the server is enabled for your Codex session.
 
 If you only log in but do not enable/select the server, Codex will not be able to read file data.
+
+## Flow
+
+```mermaid
+flowchart LR
+  Figma[Figma file or local .figma cache] --> Mapping[Token and state mapping]
+  Mapping --> Core[Core theme contracts and recipes]
+  Core --> Presets[Preset CSS]
+  Core --> Adapters[React and Vue adapters]
+  Presets --> Adapters
+  Adapters --> Verification[Storybook and playground verification]
+```
 
 ## Source of Truth
 - Theme contract: `packages/core/src/theme/theme-types.ts`.
@@ -180,4 +192,4 @@ Required Figma tokens:
 - Core emits typed vars/a11y only.
 - Preset CSS matches recipe classnames and vars.
 - New variants/states are represented in Storybook.
-- Docs updated (`docs/FIGMA_TO_MARWES.md` and package README if needed).
+- Docs updated (`docs/guides/figma-to-marwes.md` and package README if needed).

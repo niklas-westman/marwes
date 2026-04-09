@@ -56,7 +56,7 @@ Presets must style those classes/vars consistently and should not require adapte
 
 ## Figma Mapping
 When syncing design changes from Figma, follow:
-- `../../docs/FIGMA_TO_MARWES.md`
+- `../../docs/guides/figma-to-marwes.md`
 
 This ensures token names and state variants map predictably into preset CSS.
 
@@ -66,7 +66,6 @@ This ensures token names and state variants map predictably into preset CSS.
 - `pnpm --filter @marwes-ui/presets typecheck`
 
 ## Related Docs
-- `COLORS.md`
-- `../../docs/PROJECT.md`
-- `../../docs/ARCHITECTURE.md`
-- `../../docs/ENGINEERING.md`
+- `../../docs/README.md`
+- `../../docs/reference/architecture.md`
+- `../../docs/guides/figma-to-marwes.md`

@@ -147,14 +147,14 @@ When syncing components from Figma:
 3. Update theme/preset/component as needed
 4. Verify visual match in Storybook
 
-See [FIGMA_TO_MARWES.md](../../docs/FIGMA_TO_MARWES.md) for workflow.
+See [Figma to Marwes](../../docs/guides/figma-to-marwes.md) for workflow.
 
 ## Related Documentation
 
 - [Main README](../../README.md) - Monorepo overview
 - [React Package](../../packages/react/README.md) - Component API reference
-- [Testing Guide](../../docs/TESTING.md) - Test strategy
-- [Architecture](../../docs/ARCHITECTURE.md) - System design
+- [Testing Guide](../../docs/reference/testing.md) - Test strategy
+- [Architecture](../../docs/reference/architecture.md) - System design
 
 ## Scripts
 

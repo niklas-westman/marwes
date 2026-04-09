@@ -54,7 +54,7 @@ Core recipes return typed render data consumed by adapters:
 
 ## Figma Mapping
 When implementing design changes from Figma, map tokens into theme keys and recipe vars as documented in:
-- `../../docs/FIGMA_TO_MARWES.md`
+- `../../docs/guides/figma-to-marwes.md`
 
 ## Scripts
 - `pnpm --filter @marwes-ui/core dev`
@@ -62,6 +62,6 @@ When implementing design changes from Figma, map tokens into theme keys and reci
 - `pnpm --filter @marwes-ui/core typecheck`
 
 ## Related Docs
-- `../../docs/PROJECT.md`
-- `../../docs/ARCHITECTURE.md`
-- `../../docs/ENGINEERING.md`
+- `../../docs/README.md`
+- `../../docs/reference/architecture.md`
+- `../../docs/reference/spec.md`

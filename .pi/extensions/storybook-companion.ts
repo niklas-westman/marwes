@@ -6,6 +6,8 @@ import type { ExtensionAPI } from "@mariozechner/pi-coding-agent"
 import { Box, Text } from "@mariozechner/pi-tui"
 import type { AutocompleteItem } from "@mariozechner/pi-tui"
 
+import { storybookCompanionConfig } from "../storybook-companion.config"
+
 const STORYBOOK_REPORT_TYPE = "storybook-companion-report"
 
 type FrameworkName = "react" | "vue"
@@ -106,6 +108,18 @@ function uniqueSorted(paths: string[]): string[] {
   return [...new Set(paths)].sort((left, right) => left.localeCompare(right))
 }
 
+function getFamilyConfig(family: string) {
+  return storybookCompanionConfig.families[family]
+}
+
+function isStoryOnlyFamily(family: string): boolean {
+  return getFamilyConfig(family)?.storyOnly ?? false
+}
+
+function isExcludedFamily(family: string): boolean {
+  return getFamilyConfig(family)?.excluded ?? false
+}
+
 function createEmptyExportSummary(): ExportSummary {
   return {
     valueExports: [],
@@ -196,6 +210,12 @@ async function resolveFamilyInput(input: string, cwd: string): Promise<FamilyRes
     trimmedInput.includes("/") || trimmedInput.includes("\\") || trimmedInput.startsWith(".")
 
   if (!looksLikePath) {
+    if (isExcludedFamily(trimmedInput)) {
+      throw new Error(
+        `Family "${trimmedInput}" is currently excluded from Storybook companion audits`,
+      )
+    }
+
     return {
       repoRoot,
       family: trimmedInput,
@@ -214,11 +234,17 @@ async function resolveFamilyInput(input: string, cwd: string): Promise<FamilyRes
 
     if (repoRelativePath.startsWith(sourcePrefix)) {
       const family = repoRelativePath.slice(sourcePrefix.length).split("/")[0]
+      if (isExcludedFamily(family)) {
+        throw new Error(`Family "${family}" is currently excluded from Storybook companion audits`)
+      }
       return { repoRoot, family, targetPath: absoluteTargetPath, targetFramework: framework }
     }
 
     if (repoRelativePath.startsWith(storyPrefix)) {
       const family = repoRelativePath.slice(storyPrefix.length).split("/")[0]
+      if (isExcludedFamily(family)) {
+        throw new Error(`Family "${family}" is currently excluded from Storybook companion audits`)
+      }
       return { repoRoot, family, targetPath: absoluteTargetPath, targetFramework: framework }
     }
   }
@@ -259,7 +285,7 @@ function getAvailableFamiliesSync(startPath: string): string[] {
     return []
   }
 
-  const families = frameworksInOrder.flatMap((framework) => {
+  const componentFamilies = frameworksInOrder.flatMap((framework) => {
     const config = frameworkConfigs[framework]
     const rootPath = join(repoRoot, config.sourceRoot)
     if (!existsSync(rootPath)) {
@@ -271,7 +297,21 @@ function getAvailableFamiliesSync(startPath: string): string[] {
       .map((entry) => entry.name)
   })
 
-  return uniqueSorted(families)
+  const supportedStoryOnlyFamilies = Object.entries(storybookCompanionConfig.families)
+    .filter(([, familyConfig]) => familyConfig.storyOnly)
+    .map(([family]) => family)
+    .filter((family) => {
+      return frameworksInOrder.some((framework) => {
+        const config = frameworkConfigs[framework]
+        return existsSync(join(repoRoot, config.storyRoot, family))
+      })
+    })
+
+  return uniqueSorted(
+    [...componentFamilies, ...supportedStoryOnlyFamilies].filter(
+      (family) => !isExcludedFamily(family),
+    ),
+  )
 }
 
 function getFamilyArgumentCompletions(prefix: string): AutocompleteItem[] | null {
@@ -304,15 +344,61 @@ function getStemWithoutExtension(path: string): string {
   return fileName.replace(/\.stories\.(ts|tsx|js|jsx|mdx)$/, "").replace(/\.[^.]+$/, "")
 }
 
+function shouldIgnoreComponentStemForStoryCoverage(stem: string): boolean {
+  const ignoredStemPatterns = storybookCompanionConfig.ignoredComponentStemPatterns
+
+  if (ignoredStemPatterns.exact.includes(stem)) {
+    return true
+  }
+
+  return (
+    ignoredStemPatterns.suffixes.some((suffix) => stem.endsWith(suffix)) ||
+    ignoredStemPatterns.prefixes.some((prefix) => stem.startsWith(prefix))
+  )
+}
+
+function getStoryBearingComponentStems(componentFiles: string[], family?: string): Set<string> {
+  const canonicalComponentStems = family
+    ? getFamilyConfig(family)?.canonicalComponentStems
+    : undefined
+
+  if (canonicalComponentStems) {
+    return new Set(canonicalComponentStems)
+  }
+
+  return new Set(
+    componentFiles
+      .map((path) => getStemWithoutExtension(path))
+      .filter((stem) => !shouldIgnoreComponentStemForStoryCoverage(stem)),
+  )
+}
+
+function extractMetaTitle(content: string): string | undefined {
+  const metaTitleMatchers = [
+    /const\s+meta[\s\S]*?=\s*\{[\s\S]*?\btitle\s*:\s*["'`](.*?)["'`]/,
+    /export\s+default\s+\{[\s\S]*?\btitle\s*:\s*["'`](.*?)["'`]/,
+    /title\s*:\s*["'`](.*?)["'`]/,
+  ]
+
+  for (const matcher of metaTitleMatchers) {
+    const match = content.match(matcher)
+    if (match?.[1]) {
+      return match[1]
+    }
+  }
+
+  return undefined
+}
+
 async function extractStoryFileSummary(filePath: string): Promise<StoryFileSummary> {
   const content = await readFile(filePath, "utf8")
-  const titleMatch = content.match(/title\s*:\s*["'`](.*?)["'`]/)
+  const title = extractMetaTitle(content)
   const exports = [...content.matchAll(/export const\s+([A-Za-z0-9_]+)/g)].map((match) => match[1])
 
   return {
     path: filePath,
     stem: getStemWithoutExtension(filePath),
-    title: titleMatch?.[1],
+    title,
     exports,
   }
 }
@@ -430,6 +516,12 @@ function renderPathList(repoRoot: string, paths: string[]): string {
 }
 
 function getExpectedStoryTitle(family: string, stem: string): string {
+  const configuredTitle = getFamilyConfig(family)?.titleByStem?.[stem]
+
+  if (configuredTitle) {
+    return configuredTitle
+  }
+
   const familyName = toPascalCase(family)
 
   if (stem === family) {
@@ -437,6 +529,22 @@ function getExpectedStoryTitle(family: string, stem: string): string {
   }
 
   return `${familyName}/Molecule/${toPascalCase(stem)}`
+}
+
+function isSemanticStoryGroupTitle(title: string | undefined): boolean {
+  if (!title) {
+    return false
+  }
+
+  return title.includes("/Purpose/") || title.includes("/Variant/")
+}
+
+function getCanonicalStoryStems(storyFiles: StoryFileSummary[]): Set<string> {
+  return new Set(
+    storyFiles
+      .filter((storyFile) => !isSemanticStoryGroupTitle(storyFile.title))
+      .map((storyFile) => storyFile.stem),
+  )
 }
 
 function buildFrameworkMapSection(map: FamilyMap, framework: FrameworkName): string {
@@ -489,12 +597,11 @@ function buildFrameworkMapSection(map: FamilyMap, framework: FrameworkName): str
 function buildFrameworkCoverageWarnings(map: FamilyMap, framework: FrameworkName): string[] {
   const frameworkMap = getFrameworkMap(map, framework)
   const warnings: string[] = []
-  const componentStems = new Set(
-    frameworkMap.componentFiles.map((path) => getStemWithoutExtension(path)),
-  )
-  const storyStems = new Set(frameworkMap.storyFiles.map((storyFile) => storyFile.stem))
+  const componentStems = getStoryBearingComponentStems(frameworkMap.componentFiles, map.family)
+  const storyStems = getCanonicalStoryStems(frameworkMap.storyFiles)
+  const isStoryOnly = isStoryOnlyFamily(map.family)
 
-  if (!frameworkMap.sourceDirExists) {
+  if (!frameworkMap.sourceDirExists && !isStoryOnly) {
     warnings.push(`${frameworkMap.label} source directory is missing for this family`)
   }
 
@@ -502,11 +609,11 @@ function buildFrameworkCoverageWarnings(map: FamilyMap, framework: FrameworkName
     warnings.push(`${frameworkMap.label} Storybook directory is missing for this family`)
   }
 
-  if (frameworkMap.componentFiles.length === 0) {
+  if (frameworkMap.componentFiles.length === 0 && !isStoryOnly) {
     warnings.push(`No ${frameworkMap.label} component files were found`)
   }
 
-  if (!frameworkMap.sourceIndexFile) {
+  if (!frameworkMap.sourceIndexFile && !isStoryOnly) {
     warnings.push(`No ${frameworkMap.label} index.ts export surface was found for the family`)
   }
 
@@ -528,19 +635,21 @@ function buildFrameworkCoverageWarnings(map: FamilyMap, framework: FrameworkName
     )
   }
 
-  for (const componentStem of componentStems) {
-    if (!storyStems.has(componentStem)) {
-      warnings.push(
-        `Missing ${frameworkMap.label} story file for component stem \"${componentStem}\"`,
-      )
+  if (!isStoryOnly) {
+    for (const componentStem of componentStems) {
+      if (!storyStems.has(componentStem)) {
+        warnings.push(
+          `Missing ${frameworkMap.label} story file for component stem \"${componentStem}\"`,
+        )
+      }
     }
-  }
 
-  for (const storyStem of storyStems) {
-    if (!componentStems.has(storyStem)) {
-      warnings.push(
-        `Story stem \"${storyStem}\" has no matching ${frameworkMap.label} component file`,
-      )
+    for (const storyStem of storyStems) {
+      if (!componentStems.has(storyStem)) {
+        warnings.push(
+          `Story stem \"${storyStem}\" has no matching ${frameworkMap.label} component file`,
+        )
+      }
     }
   }
 
@@ -562,6 +671,10 @@ function buildFrameworkCoverageWarnings(map: FamilyMap, framework: FrameworkName
 }
 
 function buildCrossFrameworkExportWarnings(map: FamilyMap): string[] {
+  if (getFamilyConfig(map.family)?.exportParityExempt || isStoryOnlyFamily(map.family)) {
+    return []
+  }
+
   const reactMap = getFrameworkMap(map, "react")
   const vueMap = getFrameworkMap(map, "vue")
   const warnings: string[] = []
@@ -596,24 +709,26 @@ function buildCrossFrameworkExportWarnings(map: FamilyMap): string[] {
 function buildCrossFrameworkWarnings(map: FamilyMap): string[] {
   const reactMap = getFrameworkMap(map, "react")
   const vueMap = getFrameworkMap(map, "vue")
-  const reactStems = new Set(reactMap.componentFiles.map((path) => getStemWithoutExtension(path)))
-  const vueStems = new Set(vueMap.componentFiles.map((path) => getStemWithoutExtension(path)))
+  const reactStems = getStoryBearingComponentStems(reactMap.componentFiles, map.family)
+  const vueStems = getStoryBearingComponentStems(vueMap.componentFiles, map.family)
   const warnings: string[] = []
 
-  for (const reactStem of reactStems) {
-    if (!vueStems.has(reactStem)) {
-      warnings.push(`React component stem \"${reactStem}\" has no matching Vue component file`)
+  if (!isStoryOnlyFamily(map.family)) {
+    for (const reactStem of reactStems) {
+      if (!vueStems.has(reactStem)) {
+        warnings.push(`React component stem \"${reactStem}\" has no matching Vue component file`)
+      }
+    }
+
+    for (const vueStem of vueStems) {
+      if (!reactStems.has(vueStem)) {
+        warnings.push(`Vue component stem \"${vueStem}\" has no matching React component file`)
+      }
     }
   }
 
-  for (const vueStem of vueStems) {
-    if (!reactStems.has(vueStem)) {
-      warnings.push(`Vue component stem \"${vueStem}\" has no matching React component file`)
-    }
-  }
-
-  const reactStoryStems = new Set(reactMap.storyFiles.map((storyFile) => storyFile.stem))
-  const vueStoryStems = new Set(vueMap.storyFiles.map((storyFile) => storyFile.stem))
+  const reactStoryStems = getCanonicalStoryStems(reactMap.storyFiles)
+  const vueStoryStems = getCanonicalStoryStems(vueMap.storyFiles)
 
   for (const reactStoryStem of reactStoryStems) {
     if (!vueStoryStems.has(reactStoryStem)) {
@@ -894,10 +1009,8 @@ function buildStrengths(map: FamilyMap): string[] {
 
   for (const framework of frameworksInOrder) {
     const frameworkMap = getFrameworkMap(map, framework)
-    const componentStems = new Set(
-      frameworkMap.componentFiles.map((path) => getStemWithoutExtension(path)),
-    )
-    const storyStems = new Set(frameworkMap.storyFiles.map((storyFile) => storyFile.stem))
+    const componentStems = getStoryBearingComponentStems(frameworkMap.componentFiles, map.family)
+    const storyStems = getCanonicalStoryStems(frameworkMap.storyFiles)
 
     if (frameworkMap.sourceDirExists && frameworkMap.storyDirExists) {
       strengths.push(`${frameworkMap.label} source and Storybook family directories both exist`)
