@@ -9,6 +9,8 @@
       "archiveDir": ".figma/archive/generated-syncs/marwes",
       "docsFile": ".figma/INDEX.md",
       "complete": true,
+      "tokenEnvVar": "FIGMA_API_TOKEN",
+      "envFiles": [".env.local"],
       "manualReferenceFiles": [".figma/nodes.json", ".figma/NODE_REFERENCE.md"]
     }
   }
