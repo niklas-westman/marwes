@@ -167,6 +167,30 @@ export function buildSwitchFieldA11yIds(args: {
   return result
 }
 
+export type SliderFieldA11yIds = {
+  labelId: string
+  descriptionId?: string
+  errorId?: string
+  describedBy?: string
+}
+
+export function buildSliderFieldA11yIds(args: {
+  id: string
+  hasDescription: boolean
+  hasError: boolean
+  externalDescribedBy?: string | undefined
+}): SliderFieldA11yIds {
+  const labelId = `${args.id}-label`
+  const descriptionId = args.hasDescription ? `${args.id}-desc` : undefined
+  const errorId = args.hasError ? `${args.id}-error` : undefined
+  const describedBy = mergeIdRefs(args.externalDescribedBy, descriptionId, errorId)
+  const result: SliderFieldA11yIds = { labelId }
+  if (descriptionId) result.descriptionId = descriptionId
+  if (errorId) result.errorId = errorId
+  if (describedBy) result.describedBy = describedBy
+  return result
+}
+
 export function buildCurrencyHelperText(
   helperText: string | undefined,
   currency: string | undefined,

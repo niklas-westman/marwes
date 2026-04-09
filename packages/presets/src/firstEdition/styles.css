@@ -23,6 +23,7 @@
 @import "./spacing.css";
 @import "./radio.css";
 @import "./switch.css";
+@import "./slider.css";
 @import "./tab.css";
 @import "./typography.css";
 
@@ -33,6 +34,7 @@
 @import "./molecules/dialog-modal.css";
 @import "./molecules/input-field.css";
 @import "./molecules/radio-group-field.css";
+@import "./molecules/slider-field.css";
 @import "./molecules/switch-field.css";
 @import "./molecules/tab-group.css";
 @import "./molecules/toast-container.css";

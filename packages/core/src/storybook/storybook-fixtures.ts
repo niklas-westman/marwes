@@ -122,6 +122,20 @@ export const storybookRadioArgTypes = {
   ariaLabel: { control: "text" },
 } as const
 
+export const storybookSliderArgTypes = {
+  min: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  max: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  step: { control: { type: "number", min: 0.1, max: 100, step: 0.1 } },
+  value: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  defaultValue: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  disabled: { control: "boolean" },
+  required: { control: "boolean" },
+  showTooltip: { control: "boolean" },
+  showTouchArea: { control: "boolean" },
+  ariaLabel: { control: "text" },
+  ariaValueText: { control: "text" },
+} as const
+
 export const storybookDocsDescription = {
   linkButton: "LinkButton renders as an anchor tag with button styling and navigation metadata.",
   dangerButton:

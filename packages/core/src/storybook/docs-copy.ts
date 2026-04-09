@@ -267,6 +267,40 @@ export const switchPurposeComponentReference: LabeledCopy[] = [
   },
 ]
 
+export const sliderWhyPurposeComponents: LabeledCopy[] = [
+  {
+    label: "AI-friendly metadata",
+    text: "data-purpose attributes are set automatically for AI parsing",
+  },
+  {
+    label: "Consistent UX",
+    text: "common slider semantics ship with clear labels, bounds, and tooltip defaults",
+  },
+  {
+    label: "Less boilerplate",
+    text: "one component replaces repeated SliderField setup for standard controls",
+  },
+  {
+    label: "Self-documenting",
+    text: "component name communicates intent (RadiusSlider vs generic SliderField)",
+  },
+]
+
+export const sliderPurposeComponentReference: LabeledCopy[] = [
+  {
+    label: "VolumeSlider",
+    text: 'Audio and media level controls — data-purpose="volume"',
+  },
+  {
+    label: "BrightnessSlider",
+    text: 'Display and visual intensity adjustments — data-purpose="brightness"',
+  },
+  {
+    label: "RadiusSlider",
+    text: 'Design-system radius and corner-rounding controls — data-purpose="radius"',
+  },
+]
+
 export const cardWhyPurposeComponents: LabeledCopy[] = [
   {
     label: "AI-friendly metadata",

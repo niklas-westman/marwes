@@ -234,6 +234,22 @@ export type {
 } from "./components/switch"
 export { SwitchSize } from "@marwes-ui/core"
 
+/* Slider */
+export {
+  Slider,
+  SliderField,
+  VolumeSlider,
+  BrightnessSlider,
+  RadiusSlider,
+} from "./components/slider"
+export type {
+  SliderProps,
+  SliderFieldProps,
+  VolumeSliderProps,
+  BrightnessSliderProps,
+  RadiusSliderProps,
+} from "./components/slider"
+
 /* Tab */
 export {
   Tab,
