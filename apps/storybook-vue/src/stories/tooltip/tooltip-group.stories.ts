@@ -4,7 +4,7 @@ import { TooltipGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
-  title: "Tooltip/Molecule",
+  title: "Tooltip/Molecule/TooltipGroup",
   component: TooltipGroup as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

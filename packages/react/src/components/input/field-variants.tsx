@@ -441,9 +441,10 @@ export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
 
   /**
    * Currency code (e.g., "USD", "EUR", "GBP").
-   * Typed as CurrencyCode union for dropdown selection in Storybook.
+   * Prefer `CurrencyCode` for autocomplete and Storybook controls.
+   * Unknown strings are tolerated and simply render without a leading symbol.
    */
-  currency?: CurrencyCode
+  currency?: CurrencyCode | string
 }
 
 /**

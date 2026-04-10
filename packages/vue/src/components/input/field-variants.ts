@@ -294,7 +294,7 @@ export const URLField = defineComponent({
 
 export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
   input?: Omit<InputProps, "type" | "inputMode">
-  currency?: CurrencyCode
+  currency?: CurrencyCode | string
 }
 
 const currencyFieldPropKeys = [...fieldPropKeys, "currency"] as const

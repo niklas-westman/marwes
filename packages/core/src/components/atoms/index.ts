@@ -28,6 +28,7 @@ export * from "./slider"
 export type { SliderOptions, SliderRenderKit } from "./slider"
 export * from "./checkbox"
 export * from "./divider"
+export * from "./spinner"
 export * from "./icon"
 export * from "./input"
 export * from "./heading"
@@ -43,6 +44,16 @@ export type {
   DividerSize,
   DividerOrientation,
 } from "./divider"
+export type {
+  SpinnerOptions,
+  SpinnerRenderKit,
+  SpinnerSize,
+  SpinnerA11yProps,
+  SpinnerDataAttributes,
+  SpinnerSvgElement,
+  SpinnerSvgNode,
+  SpinnerSvgDefinition,
+} from "./spinner"
 export type { IconOptions, IconRenderKit } from "./icon"
 export type {
   InputOptions,

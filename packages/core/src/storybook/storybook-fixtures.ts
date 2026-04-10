@@ -59,6 +59,28 @@ export const storybookDividerArgTypes = {
   },
 } as const
 
+export const storybookSpinnerArgTypes = {
+  variant: {
+    control: "select",
+    options: ["classic", "ring", "dual", "dots-round", "dots-square", "lines", "cross"],
+    description: "Visual style from the synced Spinner showcase",
+  },
+  size: {
+    control: "select",
+    options: ["xs", "sm", "md", "lg"],
+    description: "Token size (xs=16px, sm=24px, md=32px, lg=40px)",
+  },
+  decorative: {
+    control: "boolean",
+    description:
+      "Hide the spinner from assistive technology when nearby text already communicates loading",
+  },
+  ariaLabel: {
+    control: "text",
+    description: "Accessible label for standalone loading indicators",
+  },
+} as const
+
 export const storybookSpacingArgTypes = {
   size: {
     control: "select",

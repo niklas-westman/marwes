@@ -12,14 +12,14 @@ runAvatarGroupContract("react", {
   async renderAvatarGroup(args = {}) {
     renderWithProvider(
       <AvatarGroup
-        ariaLabel={args.ariaLabel}
+        {...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {})}
         items={[
           { id: "mw", initials: "MW" },
           { id: "nk", initials: "NK" },
           { id: "as", initials: "AS" },
           { id: "guest", type: "icon", ariaLabel: "Guest member" },
         ]}
-        overflowCount={args.overflowCount}
+        {...(args.overflowCount !== undefined ? { overflowCount: args.overflowCount } : {})}
       />,
     )
   },

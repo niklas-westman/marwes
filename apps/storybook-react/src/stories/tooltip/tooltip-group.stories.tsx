@@ -3,7 +3,7 @@ import { TooltipGroup } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof TooltipGroup> = {
-  title: "Tooltip/Molecule",
+  title: "Tooltip/Molecule/TooltipGroup",
   component: TooltipGroup,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],

@@ -40,6 +40,11 @@ describe("DENSITY_SCALES", () => {
 
 // ─── densityToCSSVars ─────────────────────────────────────────────────────────
 
+function requireCssVar(value: string | undefined): string {
+  expect(value).toBeDefined()
+  return value ?? ""
+}
+
 describe("densityToCSSVars", () => {
   it("emits exactly 10 CSS variables", () => {
     expect(Object.keys(densityToCSSVars("comfortable"))).toHaveLength(10)
@@ -67,9 +72,9 @@ describe("densityToCSSVars", () => {
   })
 
   it("height values track the density order", () => {
-    const compact = densityToCSSVars("compact")["--mw-density-height"]
-    const comfortable = densityToCSSVars("comfortable")["--mw-density-height"]
-    const spacious = densityToCSSVars("spacious")["--mw-density-height"]
+    const compact = requireCssVar(densityToCSSVars("compact")["--mw-density-height"])
+    const comfortable = requireCssVar(densityToCSSVars("comfortable")["--mw-density-height"])
+    const spacious = requireCssVar(densityToCSSVars("spacious")["--mw-density-height"])
 
     expect(Number.parseInt(compact)).toBeLessThan(Number.parseInt(comfortable))
     expect(Number.parseInt(comfortable)).toBeLessThan(Number.parseInt(spacious))

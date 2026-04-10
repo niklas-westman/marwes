@@ -161,6 +161,20 @@ Required Figma variants/states to support:
 - `size`: `sm`, `md`, `lg`.
 - states: `unchecked`, `checked`, `mixed`, `focus-visible`, `disabled`, `invalid`.
 
+### Spinner
+- Contract: `packages/core/src/components/atoms/spinner/spinner-types.ts`.
+- Recipe: `packages/core/src/components/atoms/spinner/spinner-recipe.ts`.
+- CSS: `packages/presets/src/firstEdition/spinner.css`.
+
+Required Figma variants and sizes to support:
+- visual styles: `classic`, `ring`, `dual`, `dots-round`, `dots-square`, `lines`, `cross`.
+- size scale: `16`, `24`, `32`, `40` via the `xs`/`sm`/`md`/`lg` API.
+- contexts shown in Figma: button loading treatment and centered empty-state treatment.
+
+Accessibility mapping:
+- default atom usage should be decorative when nearby text already communicates loading.
+- standalone status usage should provide an `ariaLabel` so adapters expose an accessible loading state.
+
 ### Typography
 - Contracts: `packages/core/src/components/atoms/heading/heading-types.ts`, `packages/core/src/components/atoms/paragraph/paragraph-types.ts`.
 - CSS: `packages/presets/src/firstEdition/typography.css`.

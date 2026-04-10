@@ -142,6 +142,10 @@ export type {
 export { Divider } from "./components/divider"
 export type { DividerProps } from "./components/divider"
 
+/* Spinner */
+export { Spinner } from "./components/spinner"
+export type { SpinnerProps } from "./components/spinner"
+
 /* Spacing */
 export { Spacing } from "./components/spacing"
 export type { SpacingProps } from "./components/spacing"

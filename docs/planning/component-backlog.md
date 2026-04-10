@@ -19,6 +19,7 @@ flowchart LR
   Done --> Switches[Switch size API]
   Done --> Avatar[Avatar atom + molecules]
   Done --> Tooltip[Tooltip atom + group]
+  Done --> Spinner[Spinner atom foundation]
 
   Remaining --> Wave3[Purpose Buttons Wave 3]
 ```
@@ -40,6 +41,7 @@ All top-level V3 families from the curated Figma references already exist in the
 - Tooltip
 - Input
 - Divider
+- Spinner
 - Typography
 
 Already shipped from this backlog:
@@ -57,6 +59,7 @@ Already shipped from this backlog:
 - `RichTextField`
 - `Tooltip`
 - `TooltipGroup`
+- `Spinner`
 - Purpose Buttons Wave 1
 - Purpose Buttons Wave 2
 - Switch size API: `compact`, `wide`, `rich`

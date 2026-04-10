@@ -315,6 +315,50 @@ Use this format when resolving an open decision:
 - Element: `<hr>` for semantic meaning and native accessibility
 - Orientation: Explicit prop for better API clarity and accessibility
 
+### REQ-SPINNER-001: Spinner Atom Foundation
+- **Figma reference**:
+  - `.figma/marwes/components/spinnerclassic.json`
+  - `.figma/marwes/components/spinnerring.json`
+  - `.figma/marwes/components/spinnerdual.json`
+  - `.figma/marwes/components/spinnerdots-round.json`
+  - `.figma/marwes/components/spinnerdots-square.json`
+  - `.figma/marwes/components/spinnerlines.json`
+  - `.figma/marwes/components/spinnercross.json`
+  - `.figma/marwes/pages/-spinner/-spinner_1737-10635.json`
+  - `.figma/marwes/pages/-spinner/-spinner-dark_1780-1543.json`
+  - `.figma/marwes/pages/cover/spinnerdots-round_1825-30933.json`
+  - `.figma/marwes/components/newspinner.json`
+  - `.figma/marwes/components/spinner-animation.json`
+- **Problem**: The synced V3 Figma library includes a dedicated Spinner family, but the repo has no base Spinner atom that adapters and future semantic wrappers can reuse.
+- **Scope**:
+  - Add a base `Spinner` atom to core, presets, React, Vue, and Storybook
+  - Support the seven synced Spinner visual styles: `classic`, `ring`, `dual`, `dots-round`, `dots-square`, `lines`, and `cross`
+  - Support the synced token sizes `16`, `24`, `32`, and `40` via the `xs`/`sm`/`md`/`lg` API
+  - Support custom pixel sizing for larger empty-state or dashboard loading treatments
+  - Keep the atom decorative by default, but support standalone accessible status usage through `ariaLabel`
+  - Keep future semantic/contextual spinner wrappers out of scope for this change
+- **Non-goals**:
+  - Shipping button-specific or empty-state-specific wrapper components in this change
+  - Adding progress percentages, determinate loading, or skeleton behavior
+  - Adding theme-level spinner token APIs beyond the atom CSS-variable contract
+- **Acceptance criteria**:
+  - [x] `Spinner` ships as a standalone atom with stable `variant` and `size` contracts in core, React, and Vue
+  - [x] The atom covers the seven synced Spinner visual styles from the Figma showcase
+  - [x] The size API covers the synced 16/24/32/40px scale and also accepts custom pixel sizes
+  - [x] Preset CSS provides the loading animation shell plus light and dark indicator defaults aligned with the synced designs
+  - [x] The atom is decorative by default and exposes an accessible standalone status mode when `ariaLabel` is provided
+  - [x] React and Vue Storybook document the atom and cover style, size, and composition examples
+- **Validation**:
+  - Unit: Core recipe tests plus React/Vue adapter contract tests pass
+  - Integration/manual: Verify React and Vue Spinner stories against the synced Figma Spinner page in light and dark mode
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/spinner/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/test/recipes/spinner.test.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/spinner.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/spinner-css-contract.test.ts`
+  - React: `packages/react/src/components/spinner/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/spinner/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/spinner/*`, `apps/storybook-vue/src/stories/spinner/*`
+  - Shared tests/docs: `tests/contracts/spinner.contract.ts`, `docs/reference/spec.md`, `docs/planning/component-backlog.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
+
 ### REQ-AVATAR-001: Avatar Atom
 - **Figma reference**:
   - `.figma/marwes/components/avatar.json`

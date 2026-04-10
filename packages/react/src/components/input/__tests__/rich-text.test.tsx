@@ -122,7 +122,9 @@ describe("RichText toolbar", () => {
       commandState[commandId] = !commandState[commandId]
       return true
     })
-    richTextDocument.queryCommandState = vi.fn((commandId: string) => commandState[commandId])
+    richTextDocument.queryCommandState = vi.fn(
+      (commandId: string) => commandState[commandId] ?? false,
+    )
 
     renderWithProvider(
       <RichText ariaLabel="Editor" defaultValue="<strong><em>Hello</em></strong>" />,
