@@ -80,6 +80,8 @@ export {
 export * from "./storybook"
 
 export type {
+  AvatarOptions,
+  AvatarRenderKit,
   ButtonOptions,
   ButtonRenderKit,
   CheckboxProps,

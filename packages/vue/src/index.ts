@@ -106,6 +106,26 @@ export { Icon } from "./components/icon"
 export type { IconProps } from "./components/icon"
 export { IconName } from "@marwes-ui/core"
 
+/* Avatar */
+export {
+  Avatar,
+  AvatarBadge,
+  AvatarGroup,
+  ProfileAvatar,
+  PresenceAvatar,
+  TeamAvatarGroup,
+} from "./components/avatar"
+export type {
+  AvatarProps,
+  AvatarBadgeProps,
+  AvatarGroupItem,
+  AvatarGroupProps,
+  ProfileAvatarProps,
+  PresenceAvatarProps,
+  TeamAvatarGroupProps,
+} from "./components/avatar"
+export { AvatarSize, AvatarType } from "@marwes-ui/core"
+
 /* Hooks */
 export { useRenderKitDebug } from "./hooks/use-renderkit-debug"
 

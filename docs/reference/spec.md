@@ -315,6 +315,95 @@ Use this format when resolving an open decision:
 - Element: `<hr>` for semantic meaning and native accessibility
 - Orientation: Explicit prop for better API clarity and accessibility
 
+### REQ-AVATAR-001: Avatar Atom
+- **Figma reference**:
+  - `.figma/marwes/components/avatar.json`
+  - `.figma/marwes/pages/-avatar/-avatar_1574-27460.json`
+  - `.figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json`
+- **Problem**: The synced V3 Figma library includes Avatar as a top-level family, but the repo has no base Avatar atom yet.
+- **Scope**:
+  - Add a base `Avatar` atom to core, presets, React, Vue, and Storybook
+  - Support the current Figma base variants: `small`, `medium`, `large`
+  - Support the current Figma content types: `initials`, `icon`, `image`
+  - Use a user icon fallback when no initials or image source is provided
+  - Keep the core contract framework-agnostic and let adapters render the actual inner content
+- **Non-goals**:
+  - Shipping `Avatar badge` in this change
+  - Shipping `Avatar group` in this change
+  - Adding upload, editing, or other interactive avatar behavior
+- **Acceptance criteria**:
+  - [x] Core recipe returns stable classnames and data attributes for avatar size and resolved content type
+  - [x] Base avatar supports initials, icon fallback, and image content across all three sizes
+  - [x] Preset CSS matches the current light and dark Figma treatments for initials, icon, and image shells
+  - [x] React and Vue adapters render the same visual and accessibility contract from the core recipe
+  - [x] Storybook documents the atom and shows all size × type combinations in light and dark mode
+- **Validation**:
+  - Unit: Core, React, and Vue typecheck passes; cross-adapter avatar contracts pass
+  - Integration/manual: React and Vue Storybook avatar stories match the current synced Figma references
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/avatar/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`
+  - Presets: `packages/presets/src/firstEdition/avatar.css`, `packages/presets/src/firstEdition/styles.css`
+  - React: `packages/react/src/components/avatar/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/avatar/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
+  - Shared tests: `tests/contracts/avatar.contract.ts`
+  - Docs/changelog: `docs/planning/component-backlog.md`, `.changeset/*`
+
+### REQ-AVATAR-002: Avatar Molecules
+- **Figma reference**:
+  - `.figma/marwes/pages/-avatar/component-container_1574-27051.json`
+  - `.figma/marwes/pages/-avatar/component-container_1574-27408.json`
+  - `.figma/marwes/pages/-avatar/-avatar_1574-27460.json`
+  - `.figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json`
+  - `.figma/marwes/pages/cover/avatar-group_1825-30447.json`
+- **Problem**: The synced Avatar family includes two composition patterns beyond the base atom: the online presence badge and the stacked avatar group with overflow counter.
+- **Scope**:
+  - Add `AvatarBadge` as a molecule built on top of `Avatar`
+  - Add `AvatarGroup` as a molecule built on top of `Avatar`
+  - Match the current Figma online-indicator treatment and stacked medium-avatar group treatment
+  - Keep these compositions in adapters and presets while reusing the existing Avatar atom contract
+- **Non-goals**:
+  - Inventing semantic avatar purpose wrappers in this change
+  - Adding interactive menu, upload, edit, or click behavior to avatar molecules
+  - Expanding AvatarGroup beyond the current stacked medium-avatar layout from Figma
+- **Acceptance criteria**:
+  - [x] `AvatarBadge` renders the online indicator in light and dark mode across the Figma avatar sizes
+  - [x] `AvatarGroup` renders the overlapping medium-avatar pattern with an optional overflow counter
+  - [x] React and Vue expose matching molecule APIs and Storybook coverage
+  - [x] Package exports include the new molecules
+- **Validation**:
+  - Unit: React/Vue molecule tests and barrel export tests pass
+  - Integration/manual: React and Vue Storybook molecule stories match the synced Figma references
+- **Files expected to change**:
+  - Presets: `packages/presets/src/firstEdition/avatar.css`
+  - React: `packages/react/src/components/avatar/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/avatar/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
+  - Shared tests: `tests/contracts/avatar-badge.contract.ts`, `tests/contracts/avatar-group.contract.ts`
+
+### REQ-AVATAR-003: Avatar Purpose Components
+- **Problem**: The base Avatar atom and Figma molecules now exist, but the library still needs semantic wrappers for common avatar intents so product code can express meaning directly and attach stable AI-friendly metadata.
+- **Scope**:
+  - Add purpose wrappers for base profile identity, online presence, and grouped team/member clusters
+  - Keep wrappers thin and build them on top of `Avatar`, `AvatarBadge`, and `AvatarGroup`
+  - Expose the same purpose wrapper surface in React, Vue, and Storybook
+- **Non-goals**:
+  - Adding new visual states beyond the existing avatar atom and molecules
+  - Adding interaction logic such as menus, upload/edit flows, or presence state switching
+- **Acceptance criteria**:
+  - [x] `ProfileAvatar` wraps `Avatar` and sets stable semantic metadata
+  - [x] `PresenceAvatar` wraps `AvatarBadge` and sets stable semantic metadata
+  - [x] `TeamAvatarGroup` wraps `AvatarGroup` and sets stable semantic metadata
+  - [x] React and Vue exports, tests, and Storybook purpose stories stay in parity
+- **Validation**:
+  - Unit: React/Vue purpose wrapper tests and barrel export tests pass
+  - Integration/manual: Storybook purpose stories render correctly in React and Vue
+- **Files expected to change**:
+  - React: `packages/react/src/components/avatar/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/avatar/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
+  - Docs/changelog: `docs/reference/spec.md`, `.changeset/*`
+
 ### DEC-004 - Vue adapter event API supports parity callbacks and Vue emits
 - Date: 2026-02-23
 - Decision:

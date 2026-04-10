@@ -17,6 +17,7 @@ flowchart LR
   Done --> Fields[CheckboxGroupField]
   Done --> Buttons[Purpose Buttons Wave 1 and Wave 2]
   Done --> Switches[Switch size API]
+  Done --> Avatar[Avatar atom + molecules]
 
   Remaining --> Wave3[Purpose Buttons Wave 3]
 ```
@@ -31,6 +32,7 @@ All top-level V3 families from the curated Figma references already exist in the
 - Card
 - Switch
 - Accordion
+- Avatar
 - Checkbox
 - Radio
 - Toast
@@ -39,6 +41,9 @@ All top-level V3 families from the curated Figma references already exist in the
 - Typography
 
 Already shipped from this backlog:
+- `Avatar`
+- `AvatarBadge`
+- `AvatarGroup`
 - `CheckboxGroupField`
 - `Textarea`
 - `TextareaField`

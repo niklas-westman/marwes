@@ -145,6 +145,16 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
         ...mapTitles("Tab/Purpose", ["navigation-tabs", "content-tabs", "settings-tabs"]),
       },
     },
+    avatar: {
+      titleByStem: {
+        avatar: "Avatar/Atom",
+        "avatar-badge": "Avatar/Molecule/AvatarBadge",
+        "avatar-group": "Avatar/Molecule/AvatarGroup",
+        "profile-avatar": "Avatar/Purpose/ProfileAvatar",
+        "presence-avatar": "Avatar/Purpose/PresenceAvatar",
+        "team-avatar-group": "Avatar/Purpose/TeamAvatarGroup",
+      },
+    },
     toast: {
       titleByStem: {
         toast: "Toast/Atom",

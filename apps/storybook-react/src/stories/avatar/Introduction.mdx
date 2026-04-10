@@ -1,0 +1,105 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Avatar/Introduction" />
+
+# Avatar Components
+
+Marwes provides avatars at three layers: **purpose components** for common
+identity contexts, **molecules** for presence and grouped layouts, and the raw
+**Avatar** atom for custom composition.
+
+## Component Architecture
+
+```
+Purpose Components
+  ↓
+AvatarBadge / AvatarGroup (Molecules)
+  ↓
+Avatar (Atom)
+```
+
+## Recommended: Purpose Components
+
+Use semantic wrappers when the avatar surface has a clear product meaning.
+They add AI-friendly `data-purpose` metadata while preserving the same visual
+contracts.
+
+```tsx
+import { ProfileAvatar, PresenceAvatar, TeamAvatarGroup } from "@marwes-ui/react"
+
+<ProfileAvatar initials="MW" />
+<PresenceAvatar initials="MW" statusLabel="Online" />
+<TeamAvatarGroup
+  ariaLabel="Project members"
+  items={[
+    { id: "mw", initials: "MW" },
+    { id: "nk", initials: "NK" },
+    { id: "guest", type: "icon", ariaLabel: "Guest member" },
+  ]}
+  overflowCount={3}
+/>
+```
+
+## Base Layers
+
+Use the raw `Avatar` atom for standalone identity rendering. Use the molecules
+when you need the exact presence and stacked-group patterns from Figma.
+
+```tsx
+import { Avatar, AvatarBadge, AvatarGroup } from "@marwes-ui/react"
+
+<Avatar initials="MW" />
+<AvatarBadge initials="MW" />
+<AvatarGroup
+  ariaLabel="Project members"
+  items={[
+    { id: "mw", initials: "MW" },
+    { id: "nk", initials: "NK" },
+    { id: "guest", type: "icon", ariaLabel: "Guest member" },
+  ]}
+  overflowCount={3}
+/>
+```
+
+## Usage Notes
+
+- `Avatar` supports `small`, `medium`, and `large`
+- `Avatar` supports `initials`, `icon`, and `image`
+- `AvatarBadge` adds the online green-dot indicator from Figma
+- `AvatarGroup` renders the medium stacked layout with an optional overflow counter
+- `ProfileAvatar` sets `data-purpose="profile"`
+- `PresenceAvatar` sets `data-purpose="presence"`
+- `TeamAvatarGroup` sets `data-purpose="team"`
+- `initials` are normalized to two uppercase characters
+- `alt` labels image avatars, while non-image avatars use `ariaLabel`
+- `decorative` hides Avatar and AvatarBadge from assistive technology when nearby text
+  already identifies the person
+
+## Component Reference
+
+### Purpose Components
+
+**`ProfileAvatar`** - Identity avatar for account, member, or user profile surfaces
+
+**`PresenceAvatar`** - Presence-aware avatar with online status metadata
+
+**`TeamAvatarGroup`** - Grouped avatars for team, roster, or participant clusters
+
+### Molecules
+
+**`AvatarBadge`** - Avatar molecule with the online presence indicator
+
+**`AvatarGroup`** - Medium stacked avatar molecule with optional overflow counter
+
+### Atom
+
+**`Avatar`** - Base avatar atom for initials, icon fallback, and image content
+
+## Story Coverage
+
+- **Atom**: `Default`, `AllVariants`, `DarkVariants`
+- **Molecule/AvatarBadge**: `Default`, `AllSizes`, `DarkSizes`
+- **Molecule/AvatarGroup**: `Default`, `WithoutOverflow`, `DarkPreview`
+- **Purpose/ProfileAvatar**: `Default`
+- **Purpose/PresenceAvatar**: `Default`
+- **Purpose/TeamAvatarGroup**: `Default`

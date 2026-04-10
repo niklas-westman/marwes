@@ -1,5 +1,7 @@
 export * from "./accordion"
 export type { AccordionOptions, AccordionRenderKit } from "./accordion"
+export * from "./avatar"
+export type { AvatarOptions, AvatarRenderKit } from "./avatar"
 export * from "./card"
 export type { CardOptions, CardRenderKit } from "./card"
 export * from "./dialog"
