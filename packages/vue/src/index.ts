@@ -189,6 +189,10 @@ export type {
   InfoToastProps,
 } from "./components/toast"
 
+/* Tooltip */
+export { Tooltip, TooltipGroup } from "./components/tooltip"
+export type { TooltipProps, TooltipGroupProps } from "./components/tooltip"
+
 /* Accordion */
 export { Accordion } from "./components/accordion"
 export type { AccordionProps } from "./components/accordion"

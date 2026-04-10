@@ -114,6 +114,8 @@ export type {
   ParagraphOptions,
   ParagraphRenderKit,
   ParagraphSize,
+  TooltipOptions,
+  TooltipRenderKit,
 } from "./components/atoms"
 
 export * from "./components/atoms"

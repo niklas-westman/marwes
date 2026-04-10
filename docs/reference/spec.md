@@ -404,6 +404,42 @@ Use this format when resolving an open decision:
   - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
   - Docs/changelog: `docs/reference/spec.md`, `.changeset/*`
 
+### REQ-TOOLTIP-001: Tooltip Family
+- **Figma reference**:
+  - `.figma/marwes/components/tooltip.json`
+  - `.figma/marwes/components/tooltip-group.json`
+  - `.figma/marwes/pages/-tooltip/tooltip_1364-7739.json`
+  - `.figma/marwes/pages/-tooltip/tooltip-group_1574-21100.json`
+  - `.figma/marwes/pages/-tooltip/-tooltip-group_1574-21179.json`
+  - `.figma/marwes/pages/-tooltip/-tooltip-group-dark_1574-21235.json`
+- **Problem**: The synced V3 Figma library includes a standalone tooltip bubble and an icon-trigger tooltip group, but the repo has no shipped Tooltip family yet.
+- **Scope**:
+  - Add a `Tooltip` atom to core, presets, React, Vue, and Storybook
+  - Add a `TooltipGroup` molecule in React and Vue that matches the current Figma icon-trigger pattern
+  - Support the current help and info trigger icons shown in Figma
+  - Support hover and focus reveal behavior for the tooltip group
+  - Support light and dark mode treatments through preset CSS and theme variables
+- **Non-goals**:
+  - General-purpose floating-positioning or collision detection in this change
+  - Arbitrary trigger composition APIs outside the current icon-trigger Figma pattern
+  - Adding arrows, delays, or animation variants not present in the current synced design files
+- **Acceptance criteria**:
+  - [x] `Tooltip` ships as a standalone atom with a stable RenderKit contract and `role="tooltip"`
+  - [x] `TooltipGroup` ships as a molecule with the default help icon trigger and swappable info icon
+  - [x] React and Vue adapters expose matching `Tooltip` and `TooltipGroup` APIs with open-state parity
+  - [x] Storybook includes Tooltip atom and TooltipGroup molecule stories in React and Vue
+  - [x] Preset CSS matches the current inverse-surface tooltip bubble treatment in light and dark mode
+- **Validation**:
+  - Unit: Core recipe tests plus React/Vue tooltip atom and molecule tests pass
+  - Integration/manual: Verify Tooltip and TooltipGroup stories against the current synced Figma references in light and dark mode
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/tooltip/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/test/recipes/tooltip.test.ts`
+  - Presets: `packages/presets/src/firstEdition/tooltip.css`, `packages/presets/src/firstEdition/styles.css`
+  - React: `packages/react/src/components/tooltip/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/tooltip/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/tooltip/*`, `apps/storybook-vue/src/stories/tooltip/*`
+  - Docs/changelog: `docs/reference/spec.md`, `docs/planning/component-backlog.md`, `.changeset/*`
+
 ### DEC-004 - Vue adapter event API supports parity callbacks and Vue emits
 - Date: 2026-02-23
 - Decision:

@@ -18,6 +18,7 @@ flowchart LR
   Done --> Buttons[Purpose Buttons Wave 1 and Wave 2]
   Done --> Switches[Switch size API]
   Done --> Avatar[Avatar atom + molecules]
+  Done --> Tooltip[Tooltip atom + group]
 
   Remaining --> Wave3[Purpose Buttons Wave 3]
 ```
@@ -36,6 +37,7 @@ All top-level V3 families from the curated Figma references already exist in the
 - Checkbox
 - Radio
 - Toast
+- Tooltip
 - Input
 - Divider
 - Typography
@@ -53,6 +55,8 @@ Already shipped from this backlog:
 - `ZipCodeField`
 - `RichText`
 - `RichTextField`
+- `Tooltip`
+- `TooltipGroup`
 - Purpose Buttons Wave 1
 - Purpose Buttons Wave 2
 - Switch size API: `compact`, `wide`, `rich`

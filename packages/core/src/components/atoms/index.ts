@@ -15,6 +15,8 @@ export type {
   ToastIntent,
   ToastPlacement,
 } from "./toast"
+export * from "./tooltip"
+export type { TooltipOptions, TooltipRenderKit } from "./tooltip"
 export * from "./badge"
 export type { BadgeOptions, BadgeRenderKit } from "./badge"
 export * from "./button"
