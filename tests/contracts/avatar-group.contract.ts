@@ -21,7 +21,7 @@ export function runAvatarGroupContract(
       const avatarGroupElement = harness.getByRole("group", { name: /project members/i })
       const renderedAvatars = harness.queryRenderedAvatars()
 
-      expect(avatarGroupElement.tagName).toBe("DIV")
+      expect(avatarGroupElement.tagName).toBe("FIELDSET")
       expect(avatarGroupElement.className).toContain("mw-avatar-group")
       expect(renderedAvatars).toHaveLength(4)
     })

@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const CloseExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { CloseButton },
-    template: "<CloseButton>Close</CloseButton>",
+    setup() {
+      return { args }
+    },
+    template: `<CloseButton v-bind="args">Close</CloseButton>`,
   }),
   parameters: {
     docs: {

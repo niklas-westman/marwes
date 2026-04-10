@@ -11,7 +11,7 @@ describe("Vue spinner story taxonomy", () => {
     expect(story).toContain('title: "Spinner/Atom"')
   })
 
-  it("keeps purpose stories under Spinner/Purpose", () => {
+  it("keeps spinner compositions under Spinner/Molecule", () => {
     const buttonSpinnerStory = readFileSync(
       path.join(storiesDir, "button-spinner.stories.ts"),
       "utf8",
@@ -21,7 +21,7 @@ describe("Vue spinner story taxonomy", () => {
       "utf8",
     )
 
-    expect(buttonSpinnerStory).toContain('title: "Spinner/Purpose/ButtonSpinner"')
-    expect(emptyStateSpinnerStory).toContain('title: "Spinner/Purpose/EmptyStateSpinner"')
+    expect(buttonSpinnerStory).toContain('title: "Spinner/Molecule/ButtonSpinner"')
+    expect(emptyStateSpinnerStory).toContain('title: "Spinner/Molecule/EmptyStateSpinner"')
   })
 })

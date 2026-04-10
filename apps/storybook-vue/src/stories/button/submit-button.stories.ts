@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const SubmitExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { SubmitButton },
-    template: "<SubmitButton>Submit Form</SubmitButton>",
+    setup() {
+      return { args }
+    },
+    template: `<SubmitButton v-bind="args">Submit Form</SubmitButton>`,
   }),
   parameters: {
     docs: {

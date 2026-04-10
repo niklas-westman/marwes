@@ -3,7 +3,7 @@ import {
   storybookDocsDescription,
   storybookLayout,
 } from "@marwes-ui/core"
-import { type Button, CopyButton } from "@marwes-ui/react"
+import { CopyButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
@@ -12,7 +12,7 @@ const meta = {
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
   argTypes: storybookButtonPurposeArgTypes,
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof CopyButton>
 
 export default meta
 

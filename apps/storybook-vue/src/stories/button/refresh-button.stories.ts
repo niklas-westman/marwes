@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const RefreshExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { RefreshButton },
-    template: "<RefreshButton>Refresh</RefreshButton>",
+    setup() {
+      return { args }
+    },
+    template: `<RefreshButton v-bind="args">Refresh</RefreshButton>`,
   }),
   parameters: {
     docs: {

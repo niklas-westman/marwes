@@ -1,19 +1,87 @@
 import { ButtonAction, ButtonVariant, IconName } from "@marwes-ui/core"
 import { Button, type ButtonProps } from "./button"
 
+type PurposeButtonForbiddenProp = "variant" | "action" | "as"
+type ButtonPropKey = keyof ButtonProps
+
+function isDevelopmentEnvironment(): boolean {
+  const nodeProcess = (
+    globalThis as unknown as {
+      process?: { env?: Record<string, string | undefined> }
+    }
+  ).process
+
+  const nodeEnv = nodeProcess?.env?.NODE_ENV
+  if (nodeEnv) {
+    return nodeEnv !== "production"
+  }
+
+  const meta = import.meta as unknown as {
+    env?: { MODE?: string; PROD?: boolean }
+  }
+
+  if (typeof meta.env?.PROD === "boolean") {
+    return !meta.env.PROD
+  }
+
+  if (meta.env?.MODE) {
+    return meta.env.MODE !== "production"
+  }
+
+  return true
+}
+
+function warnForForbiddenPurposeProps(
+  componentName: string,
+  rawProps: Partial<ButtonProps>,
+  forbiddenProps: readonly PurposeButtonForbiddenProp[],
+): void {
+  if (!isDevelopmentEnvironment()) {
+    return
+  }
+
+  const warningByProp: Record<PurposeButtonForbiddenProp, string> = {
+    variant: "Use Button if you need a custom visual treatment.",
+    action: "Use Button if you need a custom semantic action.",
+    as: "Use Button if you need a custom element mode.",
+  }
+
+  for (const forbiddenProp of forbiddenProps) {
+    if (!Object.prototype.hasOwnProperty.call(rawProps, forbiddenProp)) {
+      continue
+    }
+
+    console.warn(
+      `[marwes] ${componentName} does not support \`${forbiddenProp}\`. ${warningByProp[forbiddenProp]}`,
+    )
+  }
+}
+
+function omitButtonProps(
+  rawProps: Partial<ButtonProps>,
+  omittedKeys: readonly ButtonPropKey[],
+): ButtonProps {
+  const forwardedProps: Partial<ButtonProps> = { ...rawProps }
+
+  for (const omittedKey of omittedKeys) {
+    delete forwardedProps[omittedKey]
+  }
+
+  return forwardedProps as ButtonProps
+}
+
 /**
  * Purpose Components — Button
  *
  * Pre-configured button compositions that encode a specific semantic purpose.
- * Each sets `data-purpose` for machine-readable intent while keeping the
- * visual `variant` prop for presentation only.
+ * Purpose buttons lock semantic intent and canonical visual treatment.
  */
 
 // ============================================================================
 // DANGER BUTTON - Destructive Actions
 // ============================================================================
 
-export type DangerButtonProps = Omit<ButtonProps, "variant" | "action"> & {
+export type DangerButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
   /**
    * Override automatic confirmation requirement.
    * Defaults to `true` for destructive actions.
@@ -21,36 +89,24 @@ export type DangerButtonProps = Omit<ButtonProps, "variant" | "action"> & {
   confirmation?: boolean
 }
 
-/**
- * DangerButton - For destructive actions like delete, remove, or irreversible operations.
- *
- * **AI Context:**
- * - Sets `variant="primary"` with error state for visual warning
- * - Sets `action="delete"` to indicate destructive behavior
- * - Enables confirmation by default
- * - Adds `data-destructive="true"` for AI parsing
- *
- * @example
- * ```tsx
- * import { DangerButton } from "@marwes-ui/react";
- *
- * export function Example() {
- *   return <DangerButton onClick={deleteProject}>Delete Project</DangerButton>;
- * }
- * ```
- */
 export function DangerButton(props: DangerButtonProps) {
-  const { confirmation = true, ...restProps } = props
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("DangerButton", rawProps, ["variant", "action", "as"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action", "as", "href"])
+  const confirmation = props.confirmation ?? true
 
   return (
     <Button
-      {...restProps}
+      {...forwardedProps}
+      as="button"
       variant={ButtonVariant.primary}
       action={ButtonAction.delete}
       error
       confirmation={confirmation}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "destructive",
         "data-destructive": "true",
         "data-confirmation-required": confirmation ? "true" : "false",
@@ -63,31 +119,22 @@ export function DangerButton(props: DangerButtonProps) {
 // CREATE BUTTON - Creation Actions
 // ============================================================================
 
-export type CreateButtonProps = Omit<ButtonProps, "action">
+export type CreateButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * CreateButton - For creation actions like adding new items or entities.
- *
- * **AI Context:**
- * - Sets `action="create"` to indicate creation behavior
- * - Uses primary tone by default
- * - Adds `data-creative="true"` for AI parsing
- *
- * @example
- * ```tsx
- * <CreateButton onClick={createProject}>
- *   New Project
- * </CreateButton>
- * ```
- */
 export function CreateButton(props: CreateButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("CreateButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      action="create"
-      variant={props.variant ?? "primary"}
+      {...forwardedProps}
+      action={ButtonAction.create}
+      variant={ButtonVariant.primary}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "create",
         "data-creative": "true",
       }}
@@ -99,31 +146,25 @@ export function CreateButton(props: CreateButtonProps) {
 // SUBMIT BUTTON - Form Submissions
 // ============================================================================
 
-export type SubmitButtonProps = Omit<ButtonProps, "action" | "as">
+export type SubmitButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href">
 
-/**
- * SubmitButton - For form submissions.
- *
- * **AI Context:**
- * - Sets `action="submit"` and `type="submit"`
- * - Adds `data-context="form-submit"` for AI parsing
- * - Automatically uses button element (not anchor)
- *
- * @example
- * ```tsx
- * <SubmitButton>Submit</SubmitButton>
- * ```
- */
 export function SubmitButton(props: SubmitButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("SubmitButton", rawProps, ["variant", "action", "as"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action", "as", "href"])
+
   return (
     <Button
-      {...props}
+      {...forwardedProps}
       as="button"
-      action="submit"
+      action={ButtonAction.submit}
+      variant={ButtonVariant.primary}
       dataAttributes={{
+        ...forwardedProps.dataAttributes,
         "data-purpose": "submit",
         "data-context": "form-submit",
-        ...props.dataAttributes,
       }}
     />
   )
@@ -133,31 +174,22 @@ export function SubmitButton(props: SubmitButtonProps) {
 // CANCEL BUTTON - Cancel/Reset Actions
 // ============================================================================
 
-export type CancelButtonProps = Omit<ButtonProps, "action">
+export type CancelButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * CancelButton - For cancel or reset actions.
- *
- * **AI Context:**
- * - Sets `action="cancel"` to indicate cancellation
- * - Uses secondary variant by default
- * - Adds `data-cancel="true"` for AI parsing
- *
- * @example
- * ```tsx
- * <CancelButton onClick={handleCancel}>
- *   Cancel
- * </CancelButton>
- * ```
- */
 export function CancelButton(props: CancelButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("CancelButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      action="cancel"
-      variant={props.variant ?? "neutral"}
+      {...forwardedProps}
+      action={ButtonAction.cancel}
+      variant={ButtonVariant.neutral}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "cancel",
         "data-cancel": "true",
       }}
@@ -169,36 +201,25 @@ export function CancelButton(props: CancelButtonProps) {
 // LINK BUTTON - Navigation Actions
 // ============================================================================
 
-export type LinkButtonProps = Omit<ButtonProps, "action" | "as"> & {
-  /**
-   * The URL to navigate to. Required for LinkButton.
-   */
+export type LinkButtonProps = Omit<ButtonProps, "variant" | "action" | "as"> & {
   href: string
 }
 
-/**
- * LinkButton - For navigation actions that look like buttons.
- *
- * **AI Context:**
- * - Sets `action="navigate"` to indicate navigation
- * - Uses anchor element with button styling
- * - Adds `data-navigation="true"` for AI parsing
- *
- * @example
- * ```tsx
- * <LinkButton href="/dashboard">
- *   Go to Dashboard
- * </LinkButton>
- * ```
- */
 export function LinkButton(props: LinkButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("LinkButton", rawProps, ["variant", "action", "as"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action", "as"])
+
   return (
     <Button
-      {...props}
+      {...forwardedProps}
       as="a"
-      action="navigate"
+      action={ButtonAction.navigate}
+      variant={ButtonVariant.text}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "navigation",
         "data-navigation": "true",
       }}
@@ -210,19 +231,22 @@ export function LinkButton(props: LinkButtonProps) {
 // SAVE BUTTON - Save/Persist Actions
 // ============================================================================
 
-export type SaveButtonProps = Omit<ButtonProps, "action">
+export type SaveButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * SaveButton - For save or persist actions.
- */
 export function SaveButton(props: SaveButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("SaveButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
+      {...forwardedProps}
       action={ButtonAction.submit}
-      variant={props.variant ?? ButtonVariant.primary}
+      variant={ButtonVariant.primary}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "save",
         "data-persist": "true",
       }}
@@ -234,19 +258,23 @@ export function SaveButton(props: SaveButtonProps) {
 // CONFIRM BUTTON - Positive Confirmation Actions
 // ============================================================================
 
-export type ConfirmButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+export type ConfirmButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href">
 
-/**
- * ConfirmButton - For affirmative confirmation actions.
- */
 export function ConfirmButton(props: ConfirmButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("ConfirmButton", rawProps, ["variant", "action", "as"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action", "as", "href"])
+
   return (
     <Button
-      {...props}
-      variant={ButtonVariant.success}
+      {...forwardedProps}
       as="button"
+      action={ButtonAction.button}
+      variant={ButtonVariant.success}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "confirm",
         "data-outcome": "positive",
       }}
@@ -258,20 +286,24 @@ export function ConfirmButton(props: ConfirmButtonProps) {
 // VERIFY BUTTON - Positive Verification Actions
 // ============================================================================
 
-export type VerifyButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+export type VerifyButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href">
 
-/**
- * VerifyButton - For verification or approval actions.
- */
 export function VerifyButton(props: VerifyButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("VerifyButton", rawProps, ["variant", "action", "as"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action", "as", "href"])
+
   return (
     <Button
-      {...props}
-      variant={ButtonVariant.secondary}
+      {...forwardedProps}
       as="button"
-      iconRight={props.iconRight ?? IconName.CheckCircle}
+      action={ButtonAction.button}
+      variant={ButtonVariant.secondary}
+      iconRight={forwardedProps.iconRight ?? IconName.CheckCircle}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "verify",
         "data-outcome": "positive",
         "data-verification": "true",
@@ -284,20 +316,23 @@ export function VerifyButton(props: VerifyButtonProps) {
 // EDIT BUTTON - Edit/Modify Actions
 // ============================================================================
 
-export type EditButtonProps = Omit<ButtonProps, "action">
+export type EditButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * EditButton - For edit or update flows.
- */
 export function EditButton(props: EditButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("EditButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
+      {...forwardedProps}
       action={ButtonAction.edit}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.Edit}
+      variant={ButtonVariant.secondary}
+      iconRight={forwardedProps.iconRight ?? IconName.Edit}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "edit",
         "data-edit": "true",
       }}
@@ -309,19 +344,22 @@ export function EditButton(props: EditButtonProps) {
 // CLOSE BUTTON - Close/Dismiss Actions
 // ============================================================================
 
-export type CloseButtonProps = Omit<ButtonProps, "action">
+export type CloseButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * CloseButton - For close or dismiss actions.
- */
 export function CloseButton(props: CloseButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("CloseButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
+      {...forwardedProps}
       action={ButtonAction.cancel}
-      variant={props.variant ?? ButtonVariant.neutral}
+      variant={ButtonVariant.neutral}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "close",
         "data-close": "true",
       }}
@@ -333,19 +371,23 @@ export function CloseButton(props: CloseButtonProps) {
 // REFRESH BUTTON - Refresh/Reload Actions
 // ============================================================================
 
-export type RefreshButtonProps = Omit<ButtonProps, "action">
+export type RefreshButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * RefreshButton - For reload or refresh actions.
- */
 export function RefreshButton(props: RefreshButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("RefreshButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.neutral}
-      iconRight={props.iconRight ?? IconName.RefreshCw}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.neutral}
+      iconRight={forwardedProps.iconRight ?? IconName.RefreshCw}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "refresh",
         "data-refresh": "true",
       }}
@@ -357,19 +399,23 @@ export function RefreshButton(props: RefreshButtonProps) {
 // WAVE 2 UTILITY BUTTONS - Upload/Download/Search Utilities
 // ============================================================================
 
-export type UploadButtonProps = Omit<ButtonProps, "action">
+export type UploadButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * UploadButton - For upload or import actions.
- */
 export function UploadButton(props: UploadButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("UploadButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.Upload}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.secondary}
+      iconRight={forwardedProps.iconRight ?? IconName.Upload}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "upload",
         "data-transfer": "upload",
       }}
@@ -377,19 +423,23 @@ export function UploadButton(props: UploadButtonProps) {
   )
 }
 
-export type DownloadButtonProps = Omit<ButtonProps, "action">
+export type DownloadButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * DownloadButton - For export or download actions.
- */
 export function DownloadButton(props: DownloadButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("DownloadButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.Download}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.secondary}
+      iconRight={forwardedProps.iconRight ?? IconName.Download}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "download",
         "data-transfer": "download",
       }}
@@ -397,18 +447,22 @@ export function DownloadButton(props: DownloadButtonProps) {
   )
 }
 
-export type CopyButtonProps = Omit<ButtonProps, "action">
+export type CopyButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * CopyButton - For copy-to-clipboard or duplication flows.
- */
 export function CopyButton(props: CopyButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("CopyButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.neutral}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.neutral}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "copy",
         "data-copy": "true",
       }}
@@ -416,19 +470,23 @@ export function CopyButton(props: CopyButtonProps) {
   )
 }
 
-export type SearchButtonProps = Omit<ButtonProps, "action">
+export type SearchButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * SearchButton - For explicit search triggers.
- */
 export function SearchButton(props: SearchButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("SearchButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.primary}
-      iconRight={props.iconRight ?? IconName.Search}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.primary}
+      iconRight={forwardedProps.iconRight ?? IconName.Search}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "search",
         "data-search": "true",
       }}
@@ -436,18 +494,22 @@ export function SearchButton(props: SearchButtonProps) {
   )
 }
 
-export type FilterButtonProps = Omit<ButtonProps, "action">
+export type FilterButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * FilterButton - For filter panels and query refinement.
- */
 export function FilterButton(props: FilterButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("FilterButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.neutral}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.neutral}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "filter",
         "data-filter": "true",
       }}
@@ -455,18 +517,22 @@ export function FilterButton(props: FilterButtonProps) {
   )
 }
 
-export type SortButtonProps = Omit<ButtonProps, "action">
+export type SortButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * SortButton - For sort controls or ordering changes.
- */
 export function SortButton(props: SortButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("SortButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.neutral}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.neutral}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "sort",
         "data-sort": "true",
       }}
@@ -474,19 +540,23 @@ export function SortButton(props: SortButtonProps) {
   )
 }
 
-export type DropdownButtonProps = Omit<ButtonProps, "action">
+export type DropdownButtonProps = Omit<ButtonProps, "variant" | "action">
 
-/**
- * DropdownButton - For disclosure-style action menus.
- */
 export function DropdownButton(props: DropdownButtonProps) {
+  const rawProps = props as ButtonProps
+
+  warnForForbiddenPurposeProps("DropdownButton", rawProps, ["variant", "action"])
+
+  const forwardedProps = omitButtonProps(rawProps, ["variant", "action"])
+
   return (
     <Button
-      {...props}
-      variant={props.variant ?? ButtonVariant.secondary}
-      iconRight={props.iconRight ?? IconName.ChevronDown}
+      {...forwardedProps}
+      action={ButtonAction.button}
+      variant={ButtonVariant.secondary}
+      iconRight={forwardedProps.iconRight ?? IconName.ChevronDown}
       dataAttributes={{
-        ...props.dataAttributes,
+        ...forwardedProps.dataAttributes,
         "data-purpose": "dropdown",
         "data-dropdown": "true",
       }}
@@ -500,16 +570,6 @@ export function DropdownButton(props: DropdownButtonProps) {
 
 export type PrimaryButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
-/**
- * PrimaryButton - For general use when no specific semantic variant fits.
- *
- * @example
- * ```tsx
- * <PrimaryButton onClick={handlePrimaryAction}>
- *   Do something important
- * </PrimaryButton>
- * ```
- */
 export function PrimaryButton(props: PrimaryButtonProps) {
   return <Button {...props} variant="primary" as="button" />
 }
@@ -520,16 +580,6 @@ export function PrimaryButton(props: PrimaryButtonProps) {
 
 export type SecondaryButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
-/**
- * SecondaryButton - For general use when no specific semantic variant fits.
- *
- * @example
- * ```tsx
- * <SecondaryButton onClick={handleSecondaryAction}>
- *   Do something important
- * </SecondaryButton>
- * ```
- */
 export function SecondaryButton(props: SecondaryButtonProps) {
   return <Button {...props} variant="secondary" as="button" />
 }
@@ -540,16 +590,6 @@ export function SecondaryButton(props: SecondaryButtonProps) {
 
 export type TextButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
-/**
- * TextButton - For general use when no specific semantic variant fits.
- *
- * @example
- * ```tsx
- * <TextButton onClick={handleTextAction}>
- *   Do something important
- * </TextButton>
- * ```
- */
 export function TextButton(props: TextButtonProps) {
   return <Button {...props} variant="text" as="button" />
 }
@@ -560,20 +600,6 @@ export function TextButton(props: TextButtonProps) {
 
 export type SuccessButtonProps = Omit<ButtonProps, "variant" | "as"> & {}
 
-/**
- * SuccessButton - For positive confirmation actions like approve, confirm, or complete.
- *
- * **AI Context:**
- * - Sets `variant="success"` for green visual treatment
- * - Adds `data-outcome="positive"` for AI parsing
- *
- * @example
- * ```tsx
- * <SuccessButton onClick={handleApprove}>
- *   Approve
- * </SuccessButton>
- * ```
- */
 export function SuccessButton(props: SuccessButtonProps) {
   return (
     <Button

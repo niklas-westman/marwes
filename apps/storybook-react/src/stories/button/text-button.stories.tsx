@@ -1,5 +1,5 @@
 import { storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
-import { type Button, TextButton } from "@marwes-ui/react"
+import { TextButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
@@ -8,7 +8,7 @@ const meta = {
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
   argTypes: storybookButtonGeneralArgTypes,
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof TextButton>
 
 export default meta
 type Story = StoryObj<typeof meta>

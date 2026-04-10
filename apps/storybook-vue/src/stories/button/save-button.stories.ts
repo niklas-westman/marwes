@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const SaveExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { SaveButton },
-    template: "<SaveButton>Save</SaveButton>",
+    setup() {
+      return { args }
+    },
+    template: `<SaveButton v-bind="args">Save</SaveButton>`,
   }),
   parameters: {
     docs: {

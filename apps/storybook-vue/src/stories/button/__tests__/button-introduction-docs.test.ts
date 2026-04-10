@@ -45,6 +45,11 @@ describe("Vue button introduction docs", () => {
       expect(introDoc).toContain(buttonName)
     }
 
+    expect(introDoc).toContain(
+      "Purpose buttons lock their semantic intent and canonical visual treatment.",
+    )
+    expect(introDoc).toContain("drop down to `Button`")
+    expect(introDoc).toContain('Locks: `action="cancel"`, `variant="neutral"`')
     expect(introDoc).toContain("structured loading object")
     expect(introDoc).toContain("disableWhileLoading")
     expect(introDoc).toContain("loadingLabel")

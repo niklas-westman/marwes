@@ -1,8 +1,10 @@
 import { ButtonAction, ButtonVariant, IconName } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { omitAttrs } from "../../internal/render-utils"
 import { Button, type ButtonProps } from "./button"
 
-// Shared button prop keys (subset from ButtonProps, excluding the ones we override)
+type PurposeButtonForbiddenProp = "variant" | "action" | "as"
+
 const buttonPropKeys = [
   "as",
   "href",
@@ -28,22 +30,137 @@ const buttonPropKeys = [
   "className",
 ] as const
 
-export type DangerButtonProps = Omit<ButtonProps, "variant" | "action"> & {
+const purposeButtonPropKeys = [
+  "as",
+  "href",
+  "size",
+  "disabled",
+  "loading",
+  "error",
+  "toggle",
+  "pressed",
+  "ariaLabel",
+  "hasVisibleText",
+  "ariaExpanded",
+  "ariaControls",
+  "iconLeft",
+  "iconRight",
+  "iconOnly",
+  "tooltip",
+  "confirmation",
+  "dataAttributes",
+  "onClick",
+  "className",
+] as const
+
+const fixedModePurposeButtonPropKeys = [
+  "size",
+  "disabled",
+  "loading",
+  "error",
+  "toggle",
+  "pressed",
+  "ariaLabel",
+  "hasVisibleText",
+  "ariaExpanded",
+  "ariaControls",
+  "iconLeft",
+  "iconRight",
+  "iconOnly",
+  "tooltip",
+  "confirmation",
+  "dataAttributes",
+  "onClick",
+  "className",
+] as const
+
+const anchorPurposeButtonPropKeys = ["href", ...fixedModePurposeButtonPropKeys] as const
+
+function isDevelopmentEnvironment(): boolean {
+  const nodeProcess = (
+    globalThis as unknown as {
+      process?: { env?: Record<string, string | undefined> }
+    }
+  ).process
+
+  const nodeEnv = nodeProcess?.env?.NODE_ENV
+  if (nodeEnv) {
+    return nodeEnv !== "production"
+  }
+
+  const meta = import.meta as unknown as {
+    env?: { MODE?: string; PROD?: boolean }
+  }
+
+  if (typeof meta.env?.PROD === "boolean") {
+    return !meta.env.PROD
+  }
+
+  if (meta.env?.MODE) {
+    return meta.env.MODE !== "production"
+  }
+
+  return true
+}
+
+function warnForForbiddenPurposeProps(
+  componentName: string,
+  rawProps: Record<string, unknown>,
+  attrs: Record<string, unknown>,
+  forbiddenProps: readonly PurposeButtonForbiddenProp[],
+): void {
+  if (!isDevelopmentEnvironment()) {
+    return
+  }
+
+  const warningByProp: Record<PurposeButtonForbiddenProp, string> = {
+    variant: "Use Button if you need a custom visual treatment.",
+    action: "Use Button if you need a custom semantic action.",
+    as: "Use Button if you need a custom element mode.",
+  }
+
+  for (const forbiddenProp of forbiddenProps) {
+    const wasProvidedViaProps = Object.prototype.hasOwnProperty.call(rawProps, forbiddenProp)
+    const wasProvidedViaAttrs = Object.prototype.hasOwnProperty.call(attrs, forbiddenProp)
+
+    if (!wasProvidedViaProps && !wasProvidedViaAttrs) {
+      continue
+    }
+
+    console.warn(
+      `[marwes] ${componentName} does not support \`${forbiddenProp}\`. ${warningByProp[forbiddenProp]}`,
+    )
+  }
+}
+
+function filterForwardedAttrs(
+  attrs: Record<string, unknown>,
+  omittedKeys: readonly string[],
+): Record<string, unknown> {
+  return omitAttrs(attrs, omittedKeys)
+}
+
+export type DangerButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
   confirmation?: boolean
 }
 
 export const DangerButton = defineComponent({
   name: "MarwesDangerButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...fixedModePurposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as DangerButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("DangerButton", rawProps, rawAttrs, ["variant", "action", "as"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action", "as", "href"]),
           ...props,
+          as: "button",
           variant: ButtonVariant.primary,
           action: ButtonAction.delete,
           error: true,
@@ -61,22 +178,26 @@ export const DangerButton = defineComponent({
   },
 })
 
-export type CreateButtonProps = Omit<ButtonProps, "action">
+export type CreateButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const CreateButton = defineComponent({
   name: "MarwesCreateButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as CreateButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("CreateButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          action: "create",
-          variant: props.variant ?? "primary",
+          action: ButtonAction.create,
+          variant: ButtonVariant.primary,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "create",
@@ -89,26 +210,31 @@ export const CreateButton = defineComponent({
   },
 })
 
-export type SubmitButtonProps = Omit<ButtonProps, "action" | "as">
+export type SubmitButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href">
 
 export const SubmitButton = defineComponent({
   name: "MarwesSubmitButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...fixedModePurposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as SubmitButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("SubmitButton", rawProps, rawAttrs, ["variant", "action", "as"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action", "as", "href"]),
           ...props,
           as: "button",
-          action: "submit",
+          action: ButtonAction.submit,
+          variant: ButtonVariant.primary,
           dataAttributes: {
+            ...props.dataAttributes,
             "data-purpose": "submit",
             "data-context": "form-submit",
-            ...props.dataAttributes,
           },
         },
         slots,
@@ -117,22 +243,26 @@ export const SubmitButton = defineComponent({
   },
 })
 
-export type CancelButtonProps = Omit<ButtonProps, "action">
+export type CancelButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const CancelButton = defineComponent({
   name: "MarwesCancelButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as CancelButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("CancelButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          action: "cancel",
-          variant: props.variant ?? "neutral",
+          action: ButtonAction.cancel,
+          variant: ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "cancel",
@@ -145,24 +275,29 @@ export const CancelButton = defineComponent({
   },
 })
 
-export type LinkButtonProps = Omit<ButtonProps, "action" | "as"> & {
+export type LinkButtonProps = Omit<ButtonProps, "variant" | "action" | "as"> & {
   href: string
 }
 
 export const LinkButton = defineComponent({
   name: "MarwesLinkButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...anchorPurposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as LinkButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("LinkButton", rawProps, rawAttrs, ["variant", "action", "as"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action", "as"]),
           ...props,
           as: "a",
-          action: "navigate",
+          action: ButtonAction.navigate,
+          variant: ButtonVariant.text,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "navigation",
@@ -175,22 +310,26 @@ export const LinkButton = defineComponent({
   },
 })
 
-export type SaveButtonProps = Omit<ButtonProps, "action">
+export type SaveButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const SaveButton = defineComponent({
   name: "MarwesSaveButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as SaveButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("SaveButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
           action: ButtonAction.submit,
-          variant: props.variant ?? ButtonVariant.primary,
+          variant: ButtonVariant.primary,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "save",
@@ -203,22 +342,27 @@ export const SaveButton = defineComponent({
   },
 })
 
-export type ConfirmButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+export type ConfirmButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href">
 
 export const ConfirmButton = defineComponent({
   name: "MarwesConfirmButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...fixedModePurposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as ConfirmButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("ConfirmButton", rawProps, rawAttrs, ["variant", "action", "as"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action", "as", "href"]),
           ...props,
           variant: ButtonVariant.success,
           as: "button",
+          action: ButtonAction.button,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "confirm",
@@ -231,22 +375,27 @@ export const ConfirmButton = defineComponent({
   },
 })
 
-export type VerifyButtonProps = Omit<ButtonProps, "variant" | "action" | "as">
+export type VerifyButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href">
 
 export const VerifyButton = defineComponent({
   name: "MarwesVerifyButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...fixedModePurposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as VerifyButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("VerifyButton", rawProps, rawAttrs, ["variant", "action", "as"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action", "as", "href"]),
           ...props,
           variant: ButtonVariant.secondary,
           as: "button",
+          action: ButtonAction.button,
           iconRight: props.iconRight ?? IconName.CheckCircle,
           dataAttributes: {
             ...props.dataAttributes,
@@ -261,22 +410,26 @@ export const VerifyButton = defineComponent({
   },
 })
 
-export type EditButtonProps = Omit<ButtonProps, "action">
+export type EditButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const EditButton = defineComponent({
   name: "MarwesEditButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as EditButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("EditButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
           action: ButtonAction.edit,
-          variant: props.variant ?? ButtonVariant.secondary,
+          variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.Edit,
           dataAttributes: {
             ...props.dataAttributes,
@@ -290,22 +443,26 @@ export const EditButton = defineComponent({
   },
 })
 
-export type CloseButtonProps = Omit<ButtonProps, "action">
+export type CloseButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const CloseButton = defineComponent({
   name: "MarwesCloseButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as CloseButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("CloseButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
           action: ButtonAction.cancel,
-          variant: props.variant ?? ButtonVariant.neutral,
+          variant: ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "close",
@@ -318,21 +475,26 @@ export const CloseButton = defineComponent({
   },
 })
 
-export type RefreshButtonProps = Omit<ButtonProps, "action">
+export type RefreshButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const RefreshButton = defineComponent({
   name: "MarwesRefreshButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as RefreshButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("RefreshButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.neutral,
+          action: ButtonAction.button,
+          variant: ButtonVariant.neutral,
           iconRight: props.iconRight ?? IconName.RefreshCw,
           dataAttributes: {
             ...props.dataAttributes,
@@ -346,21 +508,26 @@ export const RefreshButton = defineComponent({
   },
 })
 
-export type UploadButtonProps = Omit<ButtonProps, "action">
+export type UploadButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const UploadButton = defineComponent({
   name: "MarwesUploadButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as UploadButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("UploadButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
+          action: ButtonAction.button,
+          variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.Upload,
           dataAttributes: {
             ...props.dataAttributes,
@@ -374,21 +541,26 @@ export const UploadButton = defineComponent({
   },
 })
 
-export type DownloadButtonProps = Omit<ButtonProps, "action">
+export type DownloadButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const DownloadButton = defineComponent({
   name: "MarwesDownloadButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as DownloadButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("DownloadButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
+          action: ButtonAction.button,
+          variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.Download,
           dataAttributes: {
             ...props.dataAttributes,
@@ -402,21 +574,26 @@ export const DownloadButton = defineComponent({
   },
 })
 
-export type CopyButtonProps = Omit<ButtonProps, "action">
+export type CopyButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const CopyButton = defineComponent({
   name: "MarwesCopyButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as CopyButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("CopyButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.neutral,
+          action: ButtonAction.button,
+          variant: ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "copy",
@@ -429,21 +606,26 @@ export const CopyButton = defineComponent({
   },
 })
 
-export type SearchButtonProps = Omit<ButtonProps, "action">
+export type SearchButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const SearchButton = defineComponent({
   name: "MarwesSearchButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as SearchButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("SearchButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.primary,
+          action: ButtonAction.button,
+          variant: ButtonVariant.primary,
           iconRight: props.iconRight ?? IconName.Search,
           dataAttributes: {
             ...props.dataAttributes,
@@ -457,21 +639,26 @@ export const SearchButton = defineComponent({
   },
 })
 
-export type FilterButtonProps = Omit<ButtonProps, "action">
+export type FilterButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const FilterButton = defineComponent({
   name: "MarwesFilterButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as FilterButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("FilterButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.neutral,
+          action: ButtonAction.button,
+          variant: ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "filter",
@@ -484,21 +671,26 @@ export const FilterButton = defineComponent({
   },
 })
 
-export type SortButtonProps = Omit<ButtonProps, "action">
+export type SortButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const SortButton = defineComponent({
   name: "MarwesSortButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as SortButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("SortButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.neutral,
+          action: ButtonAction.button,
+          variant: ButtonVariant.neutral,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "sort",
@@ -511,21 +703,26 @@ export const SortButton = defineComponent({
   },
 })
 
-export type DropdownButtonProps = Omit<ButtonProps, "action">
+export type DropdownButtonProps = Omit<ButtonProps, "variant" | "action">
 
 export const DropdownButton = defineComponent({
   name: "MarwesDropdownButton",
   inheritAttrs: false,
-  props: [...buttonPropKeys],
+  props: [...purposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
       const props = rawProps as unknown as DropdownButtonProps
+      const rawAttrs = attrs as Record<string, unknown>
+
+      warnForForbiddenPurposeProps("DropdownButton", rawProps, rawAttrs, ["variant", "action"])
+
       return h(
         Button,
         {
-          ...attrs,
+          ...filterForwardedAttrs(rawAttrs, ["variant", "action"]),
           ...props,
-          variant: props.variant ?? ButtonVariant.secondary,
+          action: ButtonAction.button,
+          variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.ChevronDown,
           dataAttributes: {
             ...props.dataAttributes,

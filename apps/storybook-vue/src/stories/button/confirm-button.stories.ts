@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const ConfirmExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { ConfirmButton },
-    template: "<ConfirmButton>Confirm</ConfirmButton>",
+    setup() {
+      return { args }
+    },
+    template: `<ConfirmButton v-bind="args">Confirm</ConfirmButton>`,
   }),
   parameters: {
     docs: {

@@ -129,7 +129,7 @@ describe("extractUsedWeights", () => {
   it("extracts weights from lightThemeDefaults typography", () => {
     const weights = extractUsedWeights(lightThemeDefaults.typography)
     expect(weights).toContain(400)
-    expect(weights).toContain(600)
+    expect(weights).toContain(500)
     expect(weights).toContain(700)
   })
 

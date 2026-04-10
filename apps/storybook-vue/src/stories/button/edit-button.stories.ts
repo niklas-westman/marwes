@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const EditExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { EditButton },
-    template: "<EditButton>Edit</EditButton>",
+    setup() {
+      return { args }
+    },
+    template: `<EditButton v-bind="args">Edit</EditButton>`,
   }),
   parameters: {
     docs: {

@@ -10,6 +10,8 @@ const skippedDirectories = new Set([
   "storybook-static",
   ".turbo",
   ".next",
+  "mai6-debreif",
+  "mai6-debrief",
 ])
 
 async function collectMarkdownFiles(directoryPath) {

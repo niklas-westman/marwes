@@ -21,7 +21,6 @@ export const LinkExample: Story = {
   args: {
     href: "#",
     iconRight: "arrowRight",
-    variant: "text",
   },
   render: (args) => ({
     components: { LinkButton },

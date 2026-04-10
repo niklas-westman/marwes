@@ -6,12 +6,17 @@ import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Badge } from "../badge"
 
 function renderWithProvider(component: unknown, props: Record<string, unknown>) {
+  const { children, ...componentProps } = props
+
   render(
     defineComponent({
       setup() {
         return () =>
           h(MarwesProvider, null, {
-            default: () => h(component as never, props, { default: () => props.children }),
+            default: () =>
+              h(component as never, componentProps, {
+                default: () => children,
+              }),
           })
       },
     }),

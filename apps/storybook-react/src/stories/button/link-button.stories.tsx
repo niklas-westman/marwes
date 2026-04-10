@@ -1,7 +1,4 @@
-// import { ButtonVariant } from "@marwes-ui/core";
-// import { ButtonVariant } from "@marwes-ui/core";
 import {
-  ButtonVariant,
   IconName,
   storybookButtonPurposeArgTypes,
   storybookDocsDescription,
@@ -24,7 +21,6 @@ export const LinkExample: StoryObj<typeof LinkButton> = {
   args: {
     children: "Go here",
     iconRight: IconName.ArrowRight,
-    variant: ButtonVariant.text,
   },
   parameters: {
     docs: {

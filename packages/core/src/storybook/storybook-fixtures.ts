@@ -28,10 +28,6 @@ export const storybookButtonGeneralArgTypes = {
 } as const
 
 export const storybookButtonPurposeArgTypes = {
-  variant: {
-    control: "select",
-    options: ["primary", "secondary", "neutral", "text", "success"],
-  },
   ...storybookButtonIconArgTypes,
 } as const
 
@@ -159,29 +155,34 @@ export const storybookSliderArgTypes = {
 } as const
 
 export const storybookDocsDescription = {
-  linkButton: "LinkButton renders as an anchor tag with button styling and navigation metadata.",
+  linkButton:
+    "LinkButton locks navigation semantics, renders as an anchor, and keeps the canonical text treatment. Use Button for intentional visual deviations.",
   dangerButton:
-    "DangerButton automatically sets destructive metadata and requires confirmation by default.",
-  submitButton: "SubmitButton automatically sets type='submit' and form-related metadata.",
-  saveButton: "SaveButton defaults to the primary treatment with save metadata.",
-  confirmButton: "ConfirmButton locks to the success treatment for affirmative confirmation flows.",
+    "DangerButton locks destructive semantics, uses the canonical primary + error treatment, and requires confirmation by default. Use Button for intentional exceptions.",
+  submitButton:
+    "SubmitButton locks form-submit semantics, always renders as a button, and keeps the canonical primary treatment.",
+  saveButton:
+    "SaveButton locks save semantics and the canonical primary treatment. Use Button if you need a different visual hierarchy.",
+  confirmButton:
+    "ConfirmButton locks affirmative confirmation semantics, always renders as a button, and keeps the canonical success treatment.",
   verifyButton:
-    "VerifyButton uses the secondary treatment and verification metadata for approval-style actions.",
-  editButton: "EditButton defaults to the secondary treatment with edit metadata and an edit icon.",
+    "VerifyButton locks verification semantics, always renders as a button, and keeps the canonical secondary treatment with a check-circle icon by default.",
+  editButton:
+    "EditButton locks edit semantics and the canonical secondary treatment with an edit icon by default.",
   uploadButton:
-    "UploadButton defaults to the secondary treatment with upload metadata and an upload icon.",
+    "UploadButton locks upload semantics and the canonical secondary treatment with an upload icon by default.",
   downloadButton:
-    "DownloadButton defaults to the secondary treatment with download metadata and an export affordance.",
-  copyButton: "CopyButton defaults to the neutral treatment with copy metadata.",
+    "DownloadButton locks download semantics and the canonical secondary treatment with a download icon by default.",
+  copyButton: "CopyButton locks copy semantics and the canonical neutral treatment.",
   searchButton:
-    "SearchButton defaults to the primary treatment with search metadata and a search affordance.",
-  filterButton: "FilterButton defaults to the neutral treatment with filter metadata.",
-  sortButton: "SortButton defaults to the neutral treatment with sort metadata.",
+    "SearchButton locks search semantics and the canonical primary treatment with a search icon by default.",
+  filterButton: "FilterButton locks filter semantics and the canonical neutral treatment.",
+  sortButton: "SortButton locks sort semantics and the canonical neutral treatment.",
   dropdownButton:
-    "DropdownButton defaults to the secondary treatment with dropdown metadata and a disclosure affordance.",
-  closeButton: "CloseButton defaults to the neutral treatment with close metadata.",
+    "DropdownButton locks disclosure semantics and the canonical secondary treatment with a chevron-down icon by default.",
+  closeButton: "CloseButton locks dismiss semantics and the canonical neutral treatment.",
   refreshButton:
-    "RefreshButton defaults to the neutral treatment with refresh metadata and reload affordance.",
+    "RefreshButton locks refresh semantics and the canonical neutral treatment with a refresh icon by default.",
   colors:
     "Complete color palette from the design system. Semantic roles map to CSS variables, with label colors auto-derived by default and overrideable for brand-specific fills.",
 } as const

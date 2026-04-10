@@ -9,8 +9,8 @@ import {
 
 # Button Components
 
-Marwes provides a powerful button system with two complementary approaches:
-**semantic components** for common patterns and **raw props** for advanced control.
+Marwes provides two complementary button layers:
+**purpose buttons** for canonical semantic flows and the base **Button** for deliberate exceptions.
 
 Buttons are organized as Atom -> Variant wrappers -> Purpose wrappers to make Storybook navigation obvious.
 
@@ -22,7 +22,8 @@ Button (Atom)
 Variant Wrappers
   ├─ PrimaryButton
   ├─ SecondaryButton
-  └─ TextButton
+  ├─ TextButton
+  └─ SuccessButton
      ↓
 Purpose Wrappers
   ├─ SubmitButton
@@ -47,18 +48,23 @@ Purpose Wrappers
 
 ## Atom: Button
 
-Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`):
+Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`).
+It is also the explicit escape hatch when you want purpose semantics with a non-canonical visual treatment.
 
 ```tsx
 import { Button } from "@marwes-ui/react"
 
 <Button variant="primary" action="button">Base Button</Button>
-<Button variant="secondary" action="navigate" href="/dashboard">Go to dashboard</Button>
+<Button variant="secondary" action="navigate" href="/dashboard">
+  Go to dashboard
+</Button>
+<Button action="cancel" variant="success">Cancel</Button>
 ```
 
-## Recommended: Semantic Components
+## Recommended: Purpose Buttons
 
-Use purpose-built components that automatically set AI-friendly metadata:
+Use purpose-built components when the semantic intent is known ahead of time.
+Purpose buttons lock their semantic intent and canonical visual treatment.
 
 ```tsx
 import {
@@ -82,28 +88,28 @@ import {
   RefreshButton,
 } from "@marwes-ui/react"
 
-// ✅ Preferred - auto-sets action="cancel", variant="secondary"
+// ✅ Canonical purpose button
 <CancelButton onClick={handleCancel}>Cancel</CancelButton>
 
-// ✅ Preferred - auto-sets action="submit", uses form submission
+// ✅ Canonical form submit action
 <SubmitButton>Save Changes</SubmitButton>
 
-// ✅ Preferred - save-specific wrapper with icon and save metadata
+// ✅ Canonical save CTA
 <SaveButton onClick={handleSave}>Save Draft</SaveButton>
 
-// ✅ Preferred - affirmative success wrapper for confirmation flows
+// ✅ Canonical affirmative success action
 <ConfirmButton onClick={handleConfirm}>Confirm</ConfirmButton>
 
-// ✅ Preferred - success wrapper for verification/approval flows
+// ✅ Canonical approval action
 <VerifyButton onClick={handleVerify}>Verify Account</VerifyButton>
 
-// ✅ Preferred - auto-sets action="create"
+// ✅ Canonical create CTA
 <CreateButton onClick={handleCreate}>New Project</CreateButton>
 
-// ✅ Preferred - edit-specific wrapper with icon and edit metadata
+// ✅ Canonical edit affordance
 <EditButton onClick={handleEdit}>Edit Profile</EditButton>
 
-// ✅ Preferred - utility wrappers keep secondary styling with purpose metadata
+// ✅ Canonical utility treatments
 <UploadButton onClick={handleUpload}>Upload File</UploadButton>
 <DownloadButton onClick={handleDownload}>Download CSV</DownloadButton>
 <CopyButton onClick={handleCopy}>Copy Link</CopyButton>
@@ -114,15 +120,25 @@ import {
   More Actions
 </DropdownButton>
 
-// ✅ Preferred - auto-sets action="delete", data-destructive="true"
+// ✅ Canonical destructive treatment
 <DangerButton onClick={handleDelete}>Delete</DangerButton>
 
-// ✅ Preferred - auto-sets action="navigate", renders as anchor
+// ✅ Canonical text-like navigation treatment
 <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
 
-// ✅ Preferred - close and refresh semantics without manual prop wiring
+// ✅ Canonical neutral utility treatments
 <CloseButton onClick={handleClose}>Close</CloseButton>
 <RefreshButton onClick={handleRefresh}>Refresh</RefreshButton>
+```
+
+If you intentionally need a different visual treatment, drop down to `Button`.
+
+```tsx
+// ✅ Explicit exception path
+<Button action="cancel" variant="success">Cancel</Button>
+
+// 🚫 Avoid mixing a purpose button with conflicting visual meaning
+<CancelButton {...({ variant: "success" } as never)}>Cancel</CancelButton>
 ```
 
 > **Skipped in the current docs surface:** `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, and `SettingsButton` remain intentionally omitted until that final purpose-button wave ships.
@@ -137,14 +153,32 @@ import {
   ))}
 </ol>
 
+## Variant Wrappers
+
+Use visual wrappers when you want a stable visual pattern without purpose semantics.
+These are visual-only wrappers, not semantic purpose buttons.
+
+```tsx
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
+  SuccessButton,
+} from "@marwes-ui/react"
+
+<PrimaryButton>Continue</PrimaryButton>
+<SecondaryButton>Back</SecondaryButton>
+<TextButton>Learn more</TextButton>
+<SuccessButton>Approved</SuccessButton>
+```
+
 ## Advanced: Raw Props
 
-For dynamic or custom scenarios, use the base `Button` with explicit props:
+For dynamic or custom scenarios, use the base `Button` with explicit props.
 
 ```tsx
 import { Button, ButtonVariant, ButtonAction, ButtonSize } from "@marwes-ui/react"
 
-// Dynamic action based on state
 <Button
   variant={ButtonVariant.primary}
   size={ButtonSize.md}
@@ -153,11 +187,7 @@ import { Button, ButtonVariant, ButtonAction, ButtonSize } from "@marwes-ui/reac
   {isEditing ? "Update" : "Create"}
 </Button>
 
-// Custom action not covered by semantic components
-<Button
-  variant={ButtonVariant.secondary}
-  action={ButtonAction.reset}
->
+<Button variant={ButtonVariant.secondary} action={ButtonAction.reset}>
   Reset Form
 </Button>
 ```
@@ -197,7 +227,7 @@ import { Button } from "@marwes-ui/react"
 </Button>
 ```
 
-The object form supports:
+The structured loading object supports:
 
 - `isLoading` — explicit loading state
 - `disableWhileLoading` — defaults to `true`
@@ -230,25 +260,25 @@ All button enums are exported for IDE autocomplete:
 ```tsx
 import { ButtonVariant, ButtonSize, ButtonAction } from "@marwes-ui/react"
 
-ButtonVariant.primary   // "primary"
-ButtonVariant.secondary // "secondary"
-ButtonVariant.neutral   // "neutral"
-ButtonVariant.text      // "text"
-ButtonVariant.success   // "success"
+ButtonVariant.primary
+ButtonVariant.secondary
+ButtonVariant.neutral
+ButtonVariant.text
+ButtonVariant.success
 
-ButtonSize.xs  // "xs"
-ButtonSize.sm  // "sm"
-ButtonSize.md  // "md"
-ButtonSize.lg  // "lg"
+ButtonSize.xs
+ButtonSize.sm
+ButtonSize.md
+ButtonSize.lg
 
-ButtonAction.submit   // "submit"
-ButtonAction.cancel   // "cancel"
-ButtonAction.create   // "create"
-ButtonAction.delete   // "delete"
-ButtonAction.navigate // "navigate"
-ButtonAction.edit     // "edit"
-ButtonAction.reset    // "reset"
-ButtonAction.button   // "button"
+ButtonAction.submit
+ButtonAction.cancel
+ButtonAction.create
+ButtonAction.delete
+ButtonAction.navigate
+ButtonAction.edit
+ButtonAction.reset
+ButtonAction.button
 ```
 
 ## Variant vs Action
@@ -270,7 +300,7 @@ Controls how the button **looks**. Choose based on visual hierarchy:
 
 ### `action` — Semantic Purpose
 
-Controls what the button **does** (AI-readable metadata):
+Controls what the button **does** as machine-readable metadata:
 
 <ul>
   {buttonActionSemanticPurposes.map((item) => (
@@ -283,7 +313,7 @@ Controls what the button **does** (AI-readable metadata):
   ))}
 </ul>
 
-> **Note:** These are independent. A `DangerButton` uses `variant="primary"` (filled) with error styling, while `CancelButton` uses `variant="secondary"` (outlined).
+> **Note:** On the base `Button`, `variant` and `action` are independent. On purpose buttons, both are intentionally locked to the canonical pattern.
 
 ---
 
@@ -292,68 +322,71 @@ Controls what the button **does** (AI-readable metadata):
 ### Variant Buttons
 
 **`PrimaryButton`** — Common primary style wrapper  
-Sets: `variant="primary"`
+Locks: `variant="primary"`
 
 **`SecondaryButton`** — Common secondary style wrapper  
-Sets: `variant="secondary"`
+Locks: `variant="secondary"`
 
 **`TextButton`** — Common low-emphasis style wrapper  
-Sets: `variant="text"`
+Locks: `variant="text"`
 
-### Purpose Buttons (AI-Friendly)
+**`SuccessButton`** — Common positive visual wrapper  
+Locks: `variant="success"`
+
+### Purpose Buttons (Canonical Semantic + Visual Pattern)
 
 **`SubmitButton`** — Form submissions  
-Sets: `action="submit"`
+Locks: `action="submit"`, `variant="primary"`, `as="button"`
 
-**`SaveButton`** — Save/persist actions  
-Sets: `action="submit"`, default save icon
+**`SaveButton`** — Save and persist actions  
+Locks: `action="submit"`, `variant="primary"`
 
-**`CancelButton`** — Cancel/dismiss actions  
-Sets: `action="cancel"`, `variant="secondary"`
+**`CancelButton`** — Cancel and dismiss actions  
+Locks: `action="cancel"`, `variant="neutral"`
 
 **`ConfirmButton`** — Affirmative confirmation actions  
-Sets: `variant="success"`, positive outcome metadata
+Locks: `variant="success"`, `as="button"`
 
-**`VerifyButton`** — Verification/approval actions  
-Sets: `variant="success"`, verification metadata
+**`VerifyButton`** — Verification and approval actions  
+Locks: `variant="secondary"`, `as="button"`, default check-circle icon
 
 **`CreateButton`** — Creating new items  
-Sets: `action="create"`
+Locks: `action="create"`, `variant="primary"`
 
-**`EditButton`** — Edit/modify actions  
-Sets: `action="edit"`, `variant="secondary"`
+**`EditButton`** — Edit and modify actions  
+Locks: `action="edit"`, `variant="secondary"`, default edit icon
 
-**`UploadButton`** — Upload/import actions  
-Sets: `variant="secondary"`, upload metadata, upload icon
+**`UploadButton`** — Upload and import actions  
+Locks: `variant="secondary"`, default upload icon
 
-**`DownloadButton`** — Download/export actions  
-Sets: `variant="secondary"`, download metadata, download icon
+**`DownloadButton`** — Download and export actions  
+Locks: `variant="secondary"`, default download icon
 
-**`CopyButton`** — Copy/duplicate actions  
-Sets: `variant="secondary"`, copy metadata, copy icon
+**`CopyButton`** — Copy and duplicate actions  
+Locks: `variant="neutral"`
 
 **`SearchButton`** — Explicit search triggers  
-Sets: `variant="secondary"`, search metadata, search icon
+Locks: `variant="primary"`, default search icon
 
 **`FilterButton`** — Filter and refine controls  
-Sets: `variant="secondary"`, filter metadata, filter icon
+Locks: `variant="neutral"`
 
-**`SortButton`** — Sort/order controls  
-Sets: `variant="secondary"`, sort metadata, ordering icon
+**`SortButton`** — Sort and ordering controls  
+Locks: `variant="neutral"`
 
 **`DropdownButton`** — Disclosure or action-menu triggers  
-Sets: `variant="secondary"`, dropdown metadata, chevron icon
+Locks: `variant="secondary"`, default chevron-down icon
 
 **`DangerButton`** — Destructive actions  
-Sets: `action="delete"`, error styling, `data-destructive="true"`
+Locks: `action="delete"`, `variant="primary"`, error styling, `as="button"`
 
 **`LinkButton`** — Navigation links  
-Sets: `action="navigate"`, renders as `<a>` element
+Locks: `action="navigate"`, `variant="text"`, `as="a"`
 
-**`CloseButton`** — Close/dismiss affordances  
-Sets: `action="cancel"`, `variant="secondary"`
+**`CloseButton`** — Close and dismiss affordances  
+Locks: `action="cancel"`, `variant="neutral"`
 
-**`RefreshButton`** — Refresh/reload actions  
-Sets: `variant="secondary"`, refresh metadata
+**`RefreshButton`** — Refresh and reload actions  
+Locks: `variant="neutral"`, default refresh icon
 
 **Skipped until implemented** — `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, `SettingsButton`

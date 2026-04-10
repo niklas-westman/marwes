@@ -18,9 +18,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const VerifyExample: Story = {
-  render: () => ({
+  args: {},
+  render: (args) => ({
     components: { VerifyButton },
-    template: "<VerifyButton>Verify</VerifyButton>",
+    setup() {
+      return { args }
+    },
+    template: `<VerifyButton v-bind="args">Verify</VerifyButton>`,
   }),
   parameters: {
     docs: {

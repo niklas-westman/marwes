@@ -1,5 +1,5 @@
 import { SpinnerVariants, storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
-import { type Button, PrimaryButton } from "@marwes-ui/react"
+import { PrimaryButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
@@ -18,7 +18,7 @@ const meta = {
         "Boolean shorthand or loading config object with isLoading, disableWhileLoading, spinnerVariant, and loadingLabel.",
     },
   },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof PrimaryButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
