@@ -17,13 +17,14 @@ export default meta
 type Story = StoryObj<BadgeGroupProps>
 
 export const Default: Story = {
-  render: () => ({
+  args: { label: "Tags" },
+  render: (args) => ({
     components: { BadgeGroup, Badge },
     setup() {
-      return { BadgeVariant }
+      return { args, BadgeVariant }
     },
     template: `
-      <BadgeGroup label="Tags">
+      <BadgeGroup v-bind="args">
         <Badge :variant="BadgeVariant.info">Frontend</Badge>
         <Badge :variant="BadgeVariant.success">Approved</Badge>
         <Badge :variant="BadgeVariant.warning">Review</Badge>
@@ -33,15 +34,16 @@ export const Default: Story = {
 }
 
 export const AllVariants: Story = {
-  render: () => ({
+  args: { label: "All Variants" },
+  render: (args) => ({
     components: { BadgeGroup, Badge },
     setup() {
-      return { variants: VARIANTS }
+      return { args, variants: VARIANTS }
     },
     template: `
-      <BadgeGroup label="All Variants">
-        <Badge v-for="v in variants" :key="v" :variant="v">
-          {{ v.charAt(0).toUpperCase() + v.slice(1) }}
+      <BadgeGroup v-bind="args">
+        <Badge v-for="variant in variants" :key="variant" :variant="variant">
+          {{ variant.charAt(0).toUpperCase() + variant.slice(1) }}
         </Badge>
       </BadgeGroup>
     `,
@@ -49,10 +51,17 @@ export const AllVariants: Story = {
 }
 
 export const WithCustomClass: Story = {
-  render: () => ({
+  args: {
+    label: "Custom Styled",
+    className: "custom-badge-group",
+  },
+  render: (args) => ({
     components: { BadgeGroup, Badge },
+    setup() {
+      return { args }
+    },
     template: `
-      <BadgeGroup label="Custom Styled" className="custom-badge-group">
+      <BadgeGroup v-bind="args">
         <Badge>Alpha</Badge>
         <Badge>Beta</Badge>
       </BadgeGroup>

@@ -25,19 +25,28 @@ export const Default: Story = {
 }
 
 export const AllStatuses: Story = {
-  render: () => (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 8,
-        alignItems: "center",
-      }}
-    >
-      <StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>
-      <StatusBadge variant={BadgeVariant.error}>Offline</StatusBadge>
-      <StatusBadge variant={BadgeVariant.warning}>Degraded</StatusBadge>
-      <StatusBadge variant={BadgeVariant.neutral}>Unknown</StatusBadge>
-    </div>
-  ),
+  args: { variant: BadgeVariant.success },
+  argTypes: {
+    children: { control: false, table: { disable: true } },
+    id: { control: false, table: { disable: true } },
+  },
+  render: (args) => {
+    const { children: _children, id: _id, ...sharedBadgeProps } = args
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 8,
+          alignItems: "center",
+        }}
+      >
+        <StatusBadge {...sharedBadgeProps}>Active</StatusBadge>
+        <StatusBadge {...sharedBadgeProps}>Offline</StatusBadge>
+        <StatusBadge {...sharedBadgeProps}>Degraded</StatusBadge>
+        <StatusBadge {...sharedBadgeProps}>Unknown</StatusBadge>
+      </div>
+    )
+  },
 }

@@ -27,14 +27,19 @@ export const Default: Story = {
 }
 
 export const AllNotifications: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-      <NotificationBadge variant={BadgeVariant.info} ariaLabel="3 new messages">
-        3
-      </NotificationBadge>
-      <NotificationBadge variant={BadgeVariant.error} ariaLabel="99+ alerts">
-        99+
-      </NotificationBadge>
-    </div>
-  ),
+  args: { variant: BadgeVariant.info, ariaLabel: "Unread notifications" },
+  argTypes: {
+    children: { control: false, table: { disable: true } },
+    id: { control: false, table: { disable: true } },
+  },
+  render: (args) => {
+    const { children: _children, id: _id, ...sharedBadgeProps } = args
+
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+        <NotificationBadge {...sharedBadgeProps}>3</NotificationBadge>
+        <NotificationBadge {...sharedBadgeProps}>99+</NotificationBadge>
+      </div>
+    )
+  },
 }

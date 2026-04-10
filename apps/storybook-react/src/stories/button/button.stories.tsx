@@ -36,7 +36,7 @@ export const AsLink: Story = {
     children: "Go to docs",
     href: "https://example.com",
     action: "navigate",
-    variant: "secondary",
+    variant: "text",
   },
 }
 

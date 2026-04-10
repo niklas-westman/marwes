@@ -23,25 +23,31 @@ export default meta
 type Story = StoryObj<BadgeProps>
 
 export const Default: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.neutral },
+  render: (args) => ({
     components: { Badge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
-    template: `<Badge :variant="BadgeVariant.neutral">Neutral</Badge>`,
+    template: `<Badge v-bind="args">Neutral</Badge>`,
   }),
 }
 
 export const AllVariants: Story = {
-  render: () => ({
+  args: { ariaLabel: "Badge example" },
+  argTypes: {
+    id: { control: false, table: { disable: true } },
+    variant: { control: false, table: { disable: true } },
+  },
+  render: (args) => ({
     components: { Badge },
     setup() {
-      return { variants: VARIANTS }
+      return { args, variants: VARIANTS }
     },
     template: `
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-        <Badge v-for="v in variants" :key="v" :variant="v">
-          {{ v.charAt(0).toUpperCase() + v.slice(1) }}
+        <Badge v-for="variant in variants" :key="variant" v-bind="args" :variant="variant">
+          {{ variant.charAt(0).toUpperCase() + variant.slice(1) }}
         </Badge>
       </div>
     `,
@@ -49,15 +55,20 @@ export const AllVariants: Story = {
 }
 
 export const DarkVariants: Story = {
-  render: () => ({
+  args: { ariaLabel: "Badge example" },
+  argTypes: {
+    id: { control: false, table: { disable: true } },
+    variant: { control: false, table: { disable: true } },
+  },
+  render: (args) => ({
     components: { Badge },
     setup() {
-      return { variants: VARIANTS }
+      return { args, variants: VARIANTS }
     },
     template: `
       <div class="mw-theme--dark" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 16px; background: #111827; border-radius: 8px;">
-        <Badge v-for="v in variants" :key="v" :variant="v">
-          {{ v.charAt(0).toUpperCase() + v.slice(1) }}
+        <Badge v-for="variant in variants" :key="variant" v-bind="args" :variant="variant">
+          {{ variant.charAt(0).toUpperCase() + variant.slice(1) }}
         </Badge>
       </div>
     `,

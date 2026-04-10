@@ -22,27 +22,32 @@ export default meta
 type Story = StoryObj<PriorityBadgeProps>
 
 export const Default: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.warning },
+  render: (args) => ({
     components: { PriorityBadge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
-    template: `<PriorityBadge :variant="BadgeVariant.warning">High</PriorityBadge>`,
+    template: `<PriorityBadge v-bind="args">High</PriorityBadge>`,
   }),
 }
 
 export const AllPriorities: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.warning },
+  argTypes: {
+    id: { control: false, table: { disable: true } },
+  },
+  render: (args) => ({
     components: { PriorityBadge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
     template: `
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-        <PriorityBadge :variant="BadgeVariant.error">Critical</PriorityBadge>
-        <PriorityBadge :variant="BadgeVariant.warning">High</PriorityBadge>
-        <PriorityBadge :variant="BadgeVariant.info">Medium</PriorityBadge>
-        <PriorityBadge :variant="BadgeVariant.neutral">Low</PriorityBadge>
+        <PriorityBadge v-bind="args">Critical</PriorityBadge>
+        <PriorityBadge v-bind="args">High</PriorityBadge>
+        <PriorityBadge v-bind="args">Medium</PriorityBadge>
+        <PriorityBadge v-bind="args">Low</PriorityBadge>
       </div>
     `,
   }),

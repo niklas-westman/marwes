@@ -22,27 +22,32 @@ export default meta
 type Story = StoryObj<StatusBadgeProps>
 
 export const Default: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.success },
+  render: (args) => ({
     components: { StatusBadge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
-    template: `<StatusBadge :variant="BadgeVariant.success">Active</StatusBadge>`,
+    template: `<StatusBadge v-bind="args">Active</StatusBadge>`,
   }),
 }
 
 export const AllStatuses: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.success },
+  argTypes: {
+    id: { control: false, table: { disable: true } },
+  },
+  render: (args) => ({
     components: { StatusBadge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
     template: `
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-        <StatusBadge :variant="BadgeVariant.success">Active</StatusBadge>
-        <StatusBadge :variant="BadgeVariant.error">Offline</StatusBadge>
-        <StatusBadge :variant="BadgeVariant.warning">Degraded</StatusBadge>
-        <StatusBadge :variant="BadgeVariant.neutral">Unknown</StatusBadge>
+        <StatusBadge v-bind="args">Active</StatusBadge>
+        <StatusBadge v-bind="args">Offline</StatusBadge>
+        <StatusBadge v-bind="args">Degraded</StatusBadge>
+        <StatusBadge v-bind="args">Unknown</StatusBadge>
       </div>
     `,
   }),

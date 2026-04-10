@@ -27,12 +27,21 @@ export const Default: Story = {
 }
 
 export const AllPriorities: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-      <PriorityBadge variant={BadgeVariant.error}>Critical</PriorityBadge>
-      <PriorityBadge variant={BadgeVariant.warning}>High</PriorityBadge>
-      <PriorityBadge variant={BadgeVariant.info}>Medium</PriorityBadge>
-      <PriorityBadge variant={BadgeVariant.neutral}>Low</PriorityBadge>
-    </div>
-  ),
+  args: { variant: BadgeVariant.warning },
+  argTypes: {
+    children: { control: false, table: { disable: true } },
+    id: { control: false, table: { disable: true } },
+  },
+  render: (args) => {
+    const { children: _children, id: _id, ...sharedBadgeProps } = args
+
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+        <PriorityBadge {...sharedBadgeProps}>Critical</PriorityBadge>
+        <PriorityBadge {...sharedBadgeProps}>High</PriorityBadge>
+        <PriorityBadge {...sharedBadgeProps}>Medium</PriorityBadge>
+        <PriorityBadge {...sharedBadgeProps}>Low</PriorityBadge>
+      </div>
+    )
+  },
 }

@@ -37,15 +37,25 @@ export const Default: Story = {
 }
 
 export const AllVariants: Story = {
-  render: () => (
-    <BadgeGroup label="All Variants">
-      {VARIANTS.map((v) => (
-        <Badge key={v} variant={v}>
-          {v.charAt(0).toUpperCase() + v.slice(1)}
-        </Badge>
-      ))}
-    </BadgeGroup>
-  ),
+  args: {
+    label: "All Variants",
+  },
+  argTypes: {
+    children: { control: false, table: { disable: true } },
+  },
+  render: (args) => {
+    const { children: _children, ...groupProps } = args
+
+    return (
+      <BadgeGroup {...groupProps}>
+        {VARIANTS.map((variant) => (
+          <Badge key={variant} variant={variant}>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)}
+          </Badge>
+        ))}
+      </BadgeGroup>
+    )
+  },
 }
 
 export const WithCustomClass: Story = {

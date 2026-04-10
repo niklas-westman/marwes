@@ -22,25 +22,30 @@ export default meta
 type Story = StoryObj<NotificationBadgeProps>
 
 export const Default: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.info, ariaLabel: "5 unread messages" },
+  render: (args) => ({
     components: { NotificationBadge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
-    template: `<NotificationBadge :variant="BadgeVariant.info" ariaLabel="5 unread messages">5</NotificationBadge>`,
+    template: `<NotificationBadge v-bind="args">5</NotificationBadge>`,
   }),
 }
 
 export const AllNotifications: Story = {
-  render: () => ({
+  args: { variant: BadgeVariant.info, ariaLabel: "Unread notifications" },
+  argTypes: {
+    id: { control: false, table: { disable: true } },
+  },
+  render: (args) => ({
     components: { NotificationBadge },
     setup() {
-      return { BadgeVariant }
+      return { args }
     },
     template: `
       <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
-        <NotificationBadge :variant="BadgeVariant.info" ariaLabel="3 new messages">3</NotificationBadge>
-        <NotificationBadge :variant="BadgeVariant.error" ariaLabel="99+ alerts">99+</NotificationBadge>
+        <NotificationBadge v-bind="args">3</NotificationBadge>
+        <NotificationBadge v-bind="args">99+</NotificationBadge>
       </div>
     `,
   }),
