@@ -29,7 +29,7 @@ describe("React button introduction docs", () => {
       "FilterButton",
       "SortButton",
       "DropdownButton",
-      "DangerButton",
+      "DestructiveButton",
       "LinkButton",
       "CloseButton",
       "RefreshButton",

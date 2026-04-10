@@ -37,11 +37,11 @@ export function Button(props: ButtonProps) {
           inverted={isFilledButtonVariant(resolvedVariant)}
         />
       ) : props.iconLeft ? (
-        <Icon name={props.iconLeft} size="xs" decorative />
+        <Icon name={props.iconLeft} size="xs" strokeWidth="sm" decorative />
       ) : null}
       {visibleLabel}
       {!resolvedLoading.isLoading && props.iconRight ? (
-        <Icon name={props.iconRight} size="xs" decorative />
+        <Icon name={props.iconRight} size="xs" strokeWidth="sm" decorative />
       ) : null}
     </>
   )

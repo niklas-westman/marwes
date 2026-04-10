@@ -13,7 +13,7 @@ export { Button } from "./components/button"
 export type { ButtonProps } from "./components/button"
 export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 export {
-  DangerButton,
+  DestructiveButton,
   CreateButton,
   SubmitButton,
   CancelButton,
@@ -37,7 +37,7 @@ export {
   SuccessButton,
 } from "./components/button"
 export type {
-  DangerButtonProps,
+  DestructiveButtonProps,
   CreateButtonProps,
   SubmitButtonProps,
   CancelButtonProps,

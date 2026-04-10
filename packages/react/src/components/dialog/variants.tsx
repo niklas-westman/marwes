@@ -1,5 +1,5 @@
 import type * as React from "react"
-import { CancelButton, ConfirmButton, DangerButton } from "../button"
+import { CancelButton, ConfirmButton, DestructiveButton } from "../button"
 import { DialogModal, type DialogModalProps } from "./dialog-modal"
 
 export type ConfirmDialogProps = Omit<DialogModalProps, "footer"> & {
@@ -86,14 +86,14 @@ export function DestructiveDialog(props: DestructiveDialogProps): React.ReactEle
           >
             {cancelLabel}
           </CancelButton>
-          <DangerButton
+          <DestructiveButton
             onClick={() => {
               onConfirm?.()
               close()
             }}
           >
             {confirmLabel}
-          </DangerButton>
+          </DestructiveButton>
         </>
       )}
     />

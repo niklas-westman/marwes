@@ -2,7 +2,7 @@ export { Button } from "./button"
 export type { ButtonProps } from "./button"
 
 export {
-  DangerButton,
+  DestructiveButton,
   CreateButton,
   SubmitButton,
   CancelButton,
@@ -27,7 +27,7 @@ export {
 } from "./variants"
 
 export type {
-  DangerButtonProps,
+  DestructiveButtonProps,
   CreateButtonProps,
   SubmitButtonProps,
   CancelButtonProps,

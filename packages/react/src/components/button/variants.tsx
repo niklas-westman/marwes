@@ -78,10 +78,10 @@ function omitButtonProps(
  */
 
 // ============================================================================
-// DANGER BUTTON - Destructive Actions
+// DESTRUCTIVE BUTTON - Destructive Actions
 // ============================================================================
 
-export type DangerButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
+export type DestructiveButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
   /**
    * Override automatic confirmation requirement.
    * Defaults to `true` for destructive actions.
@@ -89,10 +89,10 @@ export type DangerButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | 
   confirmation?: boolean
 }
 
-export function DangerButton(props: DangerButtonProps) {
+export function DestructiveButton(props: DestructiveButtonProps) {
   const rawProps = props as ButtonProps
 
-  warnForForbiddenPurposeProps("DangerButton", rawProps, ["variant", "action", "as"])
+  warnForForbiddenPurposeProps("DestructiveButton", rawProps, ["variant", "action", "as"])
 
   const forwardedProps = omitButtonProps(rawProps, ["variant", "action", "as", "href"])
   const confirmation = props.confirmation ?? true

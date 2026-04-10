@@ -4,7 +4,7 @@ import {
   Badge,
   Card,
   CheckboxField,
-  DangerButton,
+  DestructiveButton,
   H3,
   Icon,
   IconName,
@@ -79,7 +79,7 @@ function ComponentSummary(): JSX.Element {
         <ComponentRow>
           <PrimaryButton>Primary</PrimaryButton>
           <SecondaryButton>Secondary</SecondaryButton>
-          <DangerButton>Danger</DangerButton>
+          <DestructiveButton>Danger</DestructiveButton>
           <TextButton>Text</TextButton>
         </ComponentRow>
       </PreviewCell>

@@ -10,7 +10,7 @@ import {
   CloseButton,
   ConfirmButton,
   CopyButton,
-  DangerButton,
+  DestructiveButton,
   DownloadButton,
   DropdownButton,
   EditButton,
@@ -238,7 +238,7 @@ describe("React adapter specifics: Button", () => {
         <EditButton>Edit</EditButton>
         <CloseButton>Close</CloseButton>
         <RefreshButton>Refresh</RefreshButton>
-        <DangerButton>Delete</DangerButton>
+        <DestructiveButton>Delete</DestructiveButton>
       </>,
     )
 
@@ -266,12 +266,12 @@ describe("React adapter specifics: Button", () => {
     expect(refreshButton).toHaveClass("mw-btn--neutral")
     expect(refreshButton.querySelector("svg")).not.toBeNull()
 
-    const dangerButton = screen.getByRole("button", { name: /delete/i })
-    expect(dangerButton).toHaveAttribute("data-action", "delete")
-    expect(dangerButton).toHaveAttribute("data-purpose", "destructive")
-    expect(dangerButton).toHaveClass("mw-btn--primary")
-    expect(dangerButton).toHaveClass("mw-btn--error")
-    expect(dangerButton.querySelector("svg")).toBeNull()
+    const destructiveButton = screen.getByRole("button", { name: /delete/i })
+    expect(destructiveButton).toHaveAttribute("data-action", "delete")
+    expect(destructiveButton).toHaveAttribute("data-purpose", "destructive")
+    expect(destructiveButton).toHaveClass("mw-btn--primary")
+    expect(destructiveButton).toHaveClass("mw-btn--error")
+    expect(destructiveButton.querySelector("svg")).toBeNull()
   })
 
   it("applies Wave 2 semantic defaults for utility purpose buttons", () => {

@@ -2,7 +2,7 @@ import {
   Button,
   CancelButton,
   CreateButton,
-  DangerButton,
+  DestructiveButton,
   Divider,
   IconName,
   LinkButton,
@@ -30,7 +30,7 @@ function ButtonsSection(): JSX.Element {
         <PrimaryButton iconLeft={IconName.Check}>Primary</PrimaryButton>
         <SecondaryButton iconLeft={IconName.Plus}>Secondary</SecondaryButton>
         <TextButton>Text</TextButton>
-        <DangerButton iconLeft={IconName.Trash}>Delete</DangerButton>
+        <DestructiveButton iconLeft={IconName.Trash}>Delete</DestructiveButton>
       </ComponentRow>
 
       <Divider size="xs" />

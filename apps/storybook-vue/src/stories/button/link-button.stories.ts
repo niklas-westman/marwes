@@ -11,6 +11,9 @@ const meta = {
   component: LinkButton,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
+  args: {
+    href: "#",
+  },
   argTypes: storybookButtonPurposeArgTypes,
 } satisfies Meta<typeof LinkButton>
 
@@ -19,7 +22,6 @@ type Story = StoryObj<typeof meta>
 
 export const LinkExample: Story = {
   args: {
-    href: "#",
     iconRight: "arrowRight",
   },
   render: (args) => ({

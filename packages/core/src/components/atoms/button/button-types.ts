@@ -69,7 +69,7 @@ export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
  * <Button action={ButtonAction.delete} iconRight={IconName.Trash}>Delete</Button>
  *
  * // Prefer semantic variants when possible:
- * <DangerButton>Delete Project</DangerButton>  // Sets action="delete" automatically
+ * <DestructiveButton>Delete Project</DestructiveButton>  // Sets action="delete" automatically
  * ```
  */
 export const ButtonAction = {

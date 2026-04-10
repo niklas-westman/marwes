@@ -36,7 +36,7 @@ src/
 │   ├── button/
 │   │   ├── primary-button.stories.tsx
 │   │   ├── secondary-button.stories.tsx
-│   │   ├── danger-button.stories.tsx
+│   │   ├── destructive-button.stories.tsx
 │   │   └── ...
 │   └── checkbox/
 │       ├── checkbox.stories.tsx

@@ -140,20 +140,26 @@ function filterForwardedAttrs(
   return omitAttrs(attrs, omittedKeys)
 }
 
-export type DangerButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
+// DESTRUCTIVE BUTTON - Destructive Actions
+
+export type DestructiveButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
   confirmation?: boolean
 }
 
-export const DangerButton = defineComponent({
-  name: "MarwesDangerButton",
+export const DestructiveButton = defineComponent({
+  name: "MarwesDestructiveButton",
   inheritAttrs: false,
   props: [...fixedModePurposeButtonPropKeys],
   setup(rawProps, { attrs, slots }) {
     return () => {
-      const props = rawProps as unknown as DangerButtonProps
+      const props = rawProps as unknown as DestructiveButtonProps
       const rawAttrs = attrs as Record<string, unknown>
 
-      warnForForbiddenPurposeProps("DangerButton", rawProps, rawAttrs, ["variant", "action", "as"])
+      warnForForbiddenPurposeProps("DestructiveButton", rawProps, rawAttrs, [
+        "variant",
+        "action",
+        "as",
+      ])
 
       return h(
         Button,

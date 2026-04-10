@@ -69,7 +69,9 @@ export const Button = defineComponent(
           }),
         )
       } else if (props.iconLeft) {
-        content.push(h(Icon, { name: props.iconLeft, size: "xs", decorative: true }))
+        content.push(
+          h(Icon, { name: props.iconLeft, size: "xs", strokeWidth: "sm", decorative: true }),
+        )
       }
 
       if (resolvedLoading.isLoading && resolvedLoading.loadingLabel !== undefined) {
@@ -79,7 +81,9 @@ export const Button = defineComponent(
       }
 
       if (!resolvedLoading.isLoading && props.iconRight) {
-        content.push(h(Icon, { name: props.iconRight, size: "xs", decorative: true }))
+        content.push(
+          h(Icon, { name: props.iconRight, size: "xs", strokeWidth: "sm", decorative: true }),
+        )
       }
 
       if (renderKit.tag === "button") {

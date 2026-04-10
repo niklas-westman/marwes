@@ -7,7 +7,7 @@ export type { Theme, ThemeMode, ResolvedTheme, ThemeInput } from "@marwes-ui/cor
 /* Button */
 export {
   Button,
-  DangerButton,
+  DestructiveButton,
   CreateButton,
   SubmitButton,
   CancelButton,
@@ -32,7 +32,7 @@ export {
 } from "./components/button"
 export type {
   ButtonProps,
-  DangerButtonProps,
+  DestructiveButtonProps,
   CreateButtonProps,
   SubmitButtonProps,
   CancelButtonProps,

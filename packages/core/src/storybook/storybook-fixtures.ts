@@ -157,8 +157,8 @@ export const storybookSliderArgTypes = {
 export const storybookDocsDescription = {
   linkButton:
     "LinkButton locks navigation semantics, renders as an anchor, and keeps the canonical text treatment. Use Button for intentional visual deviations.",
-  dangerButton:
-    "DangerButton locks destructive semantics, uses the canonical primary + error treatment, and requires confirmation by default. Use Button for intentional exceptions.",
+  destructiveButton:
+    "DestructiveButton locks destructive semantics, uses the canonical primary + error treatment, and requires confirmation by default. Use Button for intentional exceptions.",
   submitButton:
     "SubmitButton locks form-submit semantics, always renders as a button, and keeps the canonical primary treatment.",
   saveButton:

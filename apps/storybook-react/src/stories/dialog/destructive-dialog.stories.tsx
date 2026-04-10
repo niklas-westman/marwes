@@ -1,5 +1,5 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { CancelButton, DangerButton, Dialog, Paragraph } from "@marwes-ui/react"
+import { CancelButton, DestructiveButton, Dialog, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof Dialog> = {
@@ -25,7 +25,7 @@ export const Default: Story = {
       footer={
         <>
           <CancelButton>Cancel</CancelButton>
-          <DangerButton>Delete</DangerButton>
+          <DestructiveButton>Delete</DestructiveButton>
         </>
       }
     >

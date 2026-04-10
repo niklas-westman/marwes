@@ -90,7 +90,7 @@ Existing purpose-button coverage maps these intents:
 - `Filter` → `FilterButton`
 - `Sort` → `SortButton`
 - `Dropdown` → `DropdownButton`
-- `Delete` → `DangerButton`
+- `Delete` → `DestructiveButton`
 - `Link` → `LinkButton`
 - `Close` → `CloseButton`
 - `Refresh` → `RefreshButton`

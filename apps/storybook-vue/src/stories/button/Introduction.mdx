@@ -40,7 +40,7 @@ Purpose Wrappers
   ├─ FilterButton
   ├─ SortButton
   ├─ DropdownButton
-  ├─ DangerButton
+  ├─ DestructiveButton
   ├─ LinkButton
   ├─ CloseButton
   └─ RefreshButton
@@ -87,7 +87,7 @@ import {
   FilterButton,
   SortButton,
   DropdownButton,
-  DangerButton,
+  DestructiveButton,
   LinkButton,
   CloseButton,
   RefreshButton,
@@ -113,7 +113,7 @@ import {
     More Actions
   </DropdownButton>
 
-  <DangerButton @click="handleDelete">Delete</DangerButton>
+  <DestructiveButton @click="handleDelete">Delete</DestructiveButton>
   <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
   <CloseButton @click="handleClose">Close</CloseButton>
   <RefreshButton @click="handleRefresh">Refresh</RefreshButton>
@@ -385,7 +385,7 @@ Locks: `variant="neutral"`
 **`DropdownButton`** — Disclosure or action-menu triggers  
 Locks: `variant="secondary"`, default chevron-down icon
 
-**`DangerButton`** — Destructive actions  
+**`DestructiveButton`** — Destructive actions  
 Locks: `action="delete"`, `variant="primary"`, error styling, `as="button"`
 
 **`LinkButton`** — Navigation links  

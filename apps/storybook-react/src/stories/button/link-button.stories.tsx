@@ -12,6 +12,9 @@ const meta = {
   component: LinkButton,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
+  args: {
+    href: "#",
+  },
   argTypes: storybookButtonPurposeArgTypes,
 } satisfies Meta<typeof LinkButton>
 

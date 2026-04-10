@@ -44,7 +44,7 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
           "confirm-button",
           "copy-button",
           "create-button",
-          "danger-button",
+          "destructive-button",
           "download-button",
           "dropdown-button",
           "edit-button",

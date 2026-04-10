@@ -1,6 +1,6 @@
 import type { VNodeChild } from "vue"
 import { defineComponent, h } from "vue"
-import { CancelButton, ConfirmButton, DangerButton } from "../button"
+import { CancelButton, ConfirmButton, DestructiveButton } from "../button"
 import { DialogModal, type DialogModalProps } from "./dialog-modal"
 
 export type ConfirmDialogProps = Omit<DialogModalProps, "footer"> & {
@@ -144,7 +144,7 @@ export const DestructiveDialog = defineComponent({
               { default: () => (cancelLabel !== undefined ? [cancelLabel] : ["Cancel"]) },
             ),
             h(
-              DangerButton,
+              DestructiveButton,
               {
                 onClick: () => {
                   onConfirm?.()

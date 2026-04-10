@@ -84,7 +84,7 @@ Steps:
 - Props types: `<Name>Props` (adapters), `<Name>Options` (core)
 - CSS class prefix: `.mw-<name>`
 - Data attributes: `data-component="<name>"`, `data-variant`, `data-action`
-- Purpose variants: Named by semantic intent (`DangerButton`, `SaveButton`) — not by style
+- Purpose variants: Named by semantic intent (`DestructiveButton`, `SaveButton`) — not by style
 
 ## Key Commands
 

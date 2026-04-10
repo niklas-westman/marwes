@@ -49,13 +49,13 @@ Marwes buttons follow a **semantic-first** approach:
 
 ### Recommended: Semantic Components
 ```tsx
-import { CancelButton, SubmitButton, CreateButton, DangerButton } from "@marwes-ui/react";
+import { CancelButton, SubmitButton, CreateButton, DestructiveButton } from "@marwes-ui/react";
 
 // These auto-set AI-friendly action metadata
 <CancelButton onClick={handleCancel}>Cancel</CancelButton>
 <SubmitButton>Save</SubmitButton>
 <CreateButton onClick={handleCreate}>New Item</CreateButton>
-<DangerButton onClick={handleDelete}>Delete</DangerButton>
+<DestructiveButton onClick={handleDelete}>Delete</DestructiveButton>
 ```
 
 ### Advanced: Raw Props with Type-Safe Enums
@@ -81,7 +81,7 @@ Provider and hooks:
 
 Atoms:
 - `Button`, `PrimaryButton`, `SecondaryButton`, `TextButton`
-- `CancelButton`, `SubmitButton`, `CreateButton`, `DangerButton`, `LinkButton`
+- `CancelButton`, `SubmitButton`, `CreateButton`, `DestructiveButton`, `LinkButton`
 - `Input`
 - `Icon`
 - `Checkbox`
