@@ -1,9 +1,14 @@
-import type { ButtonOptions, CssVars } from "@marwes-ui/core"
+import type { ButtonOptions, ButtonVariant, CssVars } from "@marwes-ui/core"
 import { createButtonRecipe } from "@marwes-ui/core"
 import type * as React from "react"
 import { Icon } from "../icon"
+import { ButtonSpinner } from "../spinner"
 
 type StyleWithVars = React.CSSProperties & CssVars
+
+function isFilledButtonVariant(variant: ButtonVariant): boolean {
+  return variant === "primary" || variant === "success"
+}
 
 export type ButtonProps = ButtonOptions & {
   children?: React.ReactNode
@@ -17,11 +22,27 @@ export function Button(props: ButtonProps) {
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className
 
+  const resolvedVariant = (props.variant ?? "primary") as ButtonVariant
+  const resolvedLoading = kit.loading
+  const visibleLabel =
+    resolvedLoading.isLoading && resolvedLoading.loadingLabel !== undefined
+      ? resolvedLoading.loadingLabel
+      : props.children
+
   const content = (
     <>
-      {props.iconLeft && <Icon name={props.iconLeft} size="xs" decorative />}
-      {props.children}
-      {props.iconRight && <Icon name={props.iconRight} size="xs" decorative />}
+      {resolvedLoading.isLoading ? (
+        <ButtonSpinner
+          variant={resolvedLoading.spinnerVariant}
+          inverted={isFilledButtonVariant(resolvedVariant)}
+        />
+      ) : props.iconLeft ? (
+        <Icon name={props.iconLeft} size="xs" decorative />
+      ) : null}
+      {visibleLabel}
+      {!resolvedLoading.isLoading && props.iconRight ? (
+        <Icon name={props.iconRight} size="xs" decorative />
+      ) : null}
     </>
   )
 

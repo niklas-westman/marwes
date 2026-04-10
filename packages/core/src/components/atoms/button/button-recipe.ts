@@ -1,8 +1,10 @@
 import { resolveButtonA11y } from "./button-a11y"
+import { resolveButtonLoading } from "./button-loading"
 import type { ButtonOptions, ButtonRenderKit } from "./button-types"
 
 export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
-  const { tag, a11y, blockClick } = resolveButtonA11y(opts)
+  const resolvedLoading = resolveButtonLoading(opts.loading)
+  const { tag, a11y, blockClick } = resolveButtonA11y(opts, resolvedLoading)
 
   const size = opts.size ?? "md"
   const variant = opts.variant ?? "primary"
@@ -11,9 +13,15 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
   return {
     tag,
     blockClick,
+    loading: resolvedLoading,
     a11y: {
       ...a11y,
-      title: opts.tooltip || (opts.iconOnly ? a11y.ariaLabel : undefined),
+      title:
+        opts.tooltip ||
+        (opts.iconOnly
+          ? (a11y.ariaLabel ??
+            (resolvedLoading.isLoading ? resolvedLoading.loadingLabel : undefined))
+          : undefined),
     },
     className: [
       "mw-btn",

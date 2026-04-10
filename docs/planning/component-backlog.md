@@ -60,6 +60,8 @@ Already shipped from this backlog:
 - `Tooltip`
 - `TooltipGroup`
 - `Spinner`
+- `ButtonSpinner`
+- `EmptyStateSpinner`
 - Purpose Buttons Wave 1
 - Purpose Buttons Wave 2
 - Switch size API: `compact`, `wide`, `rich`

@@ -175,6 +175,77 @@ const isEditing = ref(false)
 </template>
 ```
 
+## Loading States
+
+`Button` supports both a boolean shorthand and a structured loading object.
+
+### Boolean shorthand
+
+Use the boolean form for the default loading treatment:
+
+```vue
+<script setup lang="ts">
+import { Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Button loading>Save</Button>
+</template>
+```
+
+This keeps the existing button label visible, shows the classic button spinner, and disables interaction while loading.
+
+### Object loading API
+
+Use the object form when you need explicit control over loading behavior:
+
+```vue
+<script setup lang="ts">
+import { SpinnerVariants } from "@marwes-ui/core"
+import { Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Button
+    :loading="{
+      isLoading: true,
+      loadingLabel: 'Saving…',
+      spinnerVariant: SpinnerVariants.dual,
+    }"
+  >
+    Save
+  </Button>
+</template>
+```
+
+The object form supports:
+
+- `isLoading` — explicit loading state
+- `disableWhileLoading` — defaults to `true`
+- `spinnerVariant` — defaults to `SpinnerVariants.classic`
+- `loadingLabel` — replaces the visible label while loading
+
+### Non-blocking loading
+
+For refresh-style actions, keep the button interactive while still showing loading feedback:
+
+```vue
+<template>
+  <Button
+    :loading="{
+      isLoading: true,
+      disableWhileLoading: false,
+      loadingLabel: 'Refreshing…',
+    }"
+    variant="secondary"
+  >
+    Refresh
+  </Button>
+</template>
+```
+
+If the button is icon-only while loading, provide either `ariaLabel` or `loadingLabel` so it still has an accessible name.
+
 ### Type-Safe Enums
 
 All button enums are exported for IDE autocomplete:

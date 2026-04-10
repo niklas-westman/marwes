@@ -44,5 +44,10 @@ describe("React button introduction docs", () => {
     for (const buttonName of skippedButtonNames) {
       expect(introDoc).toContain(buttonName)
     }
+
+    expect(introDoc).toContain("structured loading object")
+    expect(introDoc).toContain("disableWhileLoading")
+    expect(introDoc).toContain("loadingLabel")
+    expect(introDoc).toContain("SpinnerVariants")
   })
 })

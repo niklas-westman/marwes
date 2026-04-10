@@ -1,4 +1,4 @@
-import type { ButtonOptions, CssVars } from "@marwes-ui/core"
+import type { ButtonOptions, ButtonVariant, CssVars } from "@marwes-ui/core"
 import { createButtonRecipe } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import {
@@ -8,6 +8,11 @@ import {
   omitAttrs,
 } from "../../internal/render-utils"
 import { Icon } from "../icon"
+import { ButtonSpinner } from "../spinner"
+
+function isFilledButtonVariant(variant: ButtonVariant): boolean {
+  return variant === "primary" || variant === "success"
+}
 
 export type ButtonProps = ButtonOptions & {
   onClick?: (event: MouseEvent) => void
@@ -53,14 +58,27 @@ export const Button = defineComponent(
 
       const slotChildren = getDefaultSlotChildren(slots)
       const content = []
+      const resolvedVariant = (props.variant ?? "primary") as ButtonVariant
+      const resolvedLoading = renderKit.loading
 
-      if (props.iconLeft) {
+      if (resolvedLoading.isLoading) {
+        content.push(
+          h(ButtonSpinner, {
+            variant: resolvedLoading.spinnerVariant,
+            inverted: isFilledButtonVariant(resolvedVariant),
+          }),
+        )
+      } else if (props.iconLeft) {
         content.push(h(Icon, { name: props.iconLeft, size: "xs", decorative: true }))
       }
-      if (slotChildren) {
+
+      if (resolvedLoading.isLoading && resolvedLoading.loadingLabel !== undefined) {
+        content.push(resolvedLoading.loadingLabel)
+      } else if (slotChildren) {
         content.push(...slotChildren)
       }
-      if (props.iconRight) {
+
+      if (!resolvedLoading.isLoading && props.iconRight) {
         content.push(h(Icon, { name: props.iconRight, size: "xs", decorative: true }))
       }
 

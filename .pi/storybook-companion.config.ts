@@ -60,6 +60,9 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
         ]),
       },
     },
+    spinner: {
+      canonicalComponentStems: ["spinner", "button-spinner", "empty-state-spinner"],
+    },
     input: {
       titleByStem: {
         ...mapTitles("Input/Atom", ["input", "textarea", "rich-text", "select"]),

@@ -4,6 +4,7 @@ export type ButtonContractHarness = {
   renderPrimary(args?: {
     text?: string
     disabled?: boolean
+    loading?: boolean
     onClick?: () => void
   }): Promise<void> | void
   renderLink(args: {
@@ -32,6 +33,18 @@ export function runButtonContract(adapterName: string, h: ButtonContractHarness)
       await h.click(button)
 
       expect(clicks).toBe(1)
+    })
+
+    it("loading PrimaryButton is busy and disabled", async () => {
+      await h.renderPrimary({
+        text: "Saving",
+        loading: true,
+      })
+
+      const button = h.getByRole("button", { name: /saving/i })
+      expect(button).toHaveAttribute("aria-busy", "true")
+      expect(button).toHaveAttribute("aria-disabled", "true")
+      expect(button).toBeDisabled()
     })
 
     it("LinkButton renders a navigation button element backed by an anchor href", async () => {

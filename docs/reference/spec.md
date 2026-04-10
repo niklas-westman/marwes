@@ -359,6 +359,36 @@ Use this format when resolving an open decision:
   - Storybook: `apps/storybook-react/src/stories/spinner/*`, `apps/storybook-vue/src/stories/spinner/*`
   - Shared tests/docs: `tests/contracts/spinner.contract.ts`, `docs/reference/spec.md`, `docs/planning/component-backlog.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
 
+### REQ-SPINNER-002: Spinner Context Variants + Button Loading Integration
+- **Figma reference**:
+  - `.figma/marwes/pages/-spinner/-spinner_1737-10635.json`
+  - `.figma/marwes/pages/-spinner/-spinner-dark_1780-1543.json`
+  - Button usage row from the synced Spinner page (classic 16px loading treatment)
+  - Empty-state row from the synced Spinner page (dots-round 40px treatment)
+- **Problem**: The base Spinner atom now exists, but the library still needs the first context-specific compositions and the existing Button loading prop should use the synced spinner treatment instead of only toggling accessibility state.
+- **Scope**:
+  - Wire `Button loading` to render a prepended `ButtonSpinner`
+  - Hide button icon affordances while loading and keep the button disabled/busy
+  - Add `ButtonSpinner` and `EmptyStateSpinner` purpose wrappers in React and Vue
+  - Document the purpose wrappers in Storybook with dedicated purpose stories
+- **Non-goals**:
+  - Adding molecule-level loading panels or full-page loading layouts
+  - Expanding button API beyond the existing `loading` prop
+  - Adding new core spinner variants beyond the existing atom contract
+- **Acceptance criteria**:
+  - [x] `Button loading` renders the synced classic spinner treatment before button content in React and Vue
+  - [x] Button loading hides icon affordances and preserves disabled/busy behavior across both adapters
+  - [x] `ButtonSpinner` and `EmptyStateSpinner` ship as thin purpose wrappers in React and Vue
+  - [x] Purpose wrappers attach stable semantic metadata and Storybook purpose coverage
+- **Validation**:
+  - Unit: React/Vue button tests and spinner purpose-wrapper tests pass
+  - Integration/manual: Verify Button loading plus Spinner purpose stories in React and Vue Storybook
+- **Files expected to change**:
+  - React: `packages/react/src/components/button/*`, `packages/react/src/components/spinner/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/button/*`, `packages/vue/src/components/spinner/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/spinner/*`, `apps/storybook-vue/src/stories/spinner/*`, existing button stories as needed
+  - Shared docs/tests: `tests/contracts/button.contract.ts`, `docs/reference/spec.md`, `.changeset/*`
+
 ### REQ-AVATAR-001: Avatar Atom
 - **Figma reference**:
   - `.figma/marwes/components/avatar.json`

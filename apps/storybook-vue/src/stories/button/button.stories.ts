@@ -1,4 +1,4 @@
-import { storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
+import { SpinnerVariants, storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { ButtonProps } from "@marwes-ui/vue"
 import { Button } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -57,5 +57,61 @@ export const Loading: Story = {
       return { args }
     },
     template: `<Button v-bind="args">Saving...</Button>`,
+  }),
+}
+
+export const LoadingWithLabel: Story = {
+  args: {
+    loading: {
+      isLoading: true,
+      loadingLabel: "Saving…",
+    },
+    variant: "primary",
+    action: "submit",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind="args">Save</Button>`,
+  }),
+}
+
+export const LoadingInteractive: Story = {
+  args: {
+    loading: {
+      isLoading: true,
+      disableWhileLoading: false,
+      loadingLabel: "Refreshing…",
+    },
+    variant: "secondary",
+    action: "button",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind="args">Refresh</Button>`,
+  }),
+}
+
+export const LoadingWithCustomSpinner: Story = {
+  args: {
+    loading: {
+      isLoading: true,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Refreshing…",
+    },
+    variant: "secondary",
+    action: "button",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind="args">Refresh</Button>`,
   }),
 }

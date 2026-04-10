@@ -1,0 +1,55 @@
+/*
+ * Spinner atom styles
+ * Figma references:
+ * - .figma/marwes/components/spinnerclassic.json
+ * - .figma/marwes/components/spinnerring.json
+ * - .figma/marwes/components/spinnerdual.json
+ * - .figma/marwes/components/spinnerdots-round.json
+ * - .figma/marwes/components/spinnerdots-square.json
+ * - .figma/marwes/components/spinnerlines.json
+ * - .figma/marwes/components/spinnercross.json
+ * - .figma/marwes/pages/-spinner/-spinner_1737-10635.json
+ * - .figma/marwes/pages/-spinner/-spinner-dark_1780-1543.json
+ */
+
+.mw-spinner {
+  --mw-spinner-size: 24px;
+  --mw-spinner-track-color: #a3a3a3;
+  --mw-spinner-indicator-color: #2f31fc;
+  --mw-spinner-rotation-duration: 800ms;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  inline-size: var(--mw-spinner-size);
+  block-size: var(--mw-spinner-size);
+  line-height: 0;
+}
+
+.mw-spinner__svg {
+  inline-size: 100%;
+  block-size: 100%;
+  animation: mw-spinner-rotate var(--mw-spinner-rotation-duration) linear infinite;
+  transform-origin: center;
+}
+
+.mw-theme--dark .mw-spinner {
+  --mw-spinner-indicator-color: #5859fc;
+}
+
+@keyframes mw-spinner-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mw-spinner__svg {
+    animation-duration: 1600ms;
+  }
+}

@@ -1,0 +1,62 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Spinner/Introduction" />
+
+# Spinner Component
+
+Marwes provides `Spinner` as a low-level loading atom for inline button states,
+centered empty states, and standalone async feedback.
+
+## Component Architecture
+
+```
+Spinner (Atom)
+ButtonSpinner (Purpose)
+EmptyStateSpinner (Purpose)
+```
+
+## Recommended Usage
+
+Use the raw `Spinner` atom when product code needs direct control over visual
+style, size, or accessibility behavior. Prefer `ButtonSpinner` and
+`EmptyStateSpinner` when the loading context already matches those purpose
+wrappers.
+
+Pick the `variant` that matches the synced Figma showcase, choose a token `size`
+for common cases, and keep the spinner `decorative` when nearby text already says
+what is loading.
+
+```vue
+<script setup lang="ts">
+import { Spinner } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Spinner variant="classic" size="xs" decorative />
+  <Spinner variant="dots-round" size="lg" ariaLabel="Loading account data" />
+</template>
+```
+
+## Usage Notes
+
+- `variant` maps to the seven synced Spinner styles from Figma
+- `size` supports token values (`xs`/`sm`/`md`/`lg`) and raw pixel numbers in code
+- `decorative` should stay enabled when visible text or surrounding UI already communicates loading
+- `ariaLabel` should be provided when the spinner must announce loading on its own
+- CSS custom properties such as `--mw-spinner-indicator-color` and `--mw-spinner-track-color` can be overridden for contextual treatments
+
+## Component Reference
+
+**`Spinner`** - Low-level loading indicator atom with synced style variants and size scale
+
+**`ButtonSpinner`** - Purpose wrapper for inline button loading treatments
+
+**`EmptyStateSpinner`** - Purpose wrapper for centered empty-state loading treatments
+
+## Story Coverage
+
+- All seven synced Spinner styles
+- Token and custom size examples
+- Decorative and accessible standalone usage
+- Button and empty-state composition patterns
+- Purpose wrappers: `ButtonSpinner` and `EmptyStateSpinner`

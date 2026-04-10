@@ -1,5 +1,6 @@
 import type * as React from "react"
 
+import { SpinnerVariants } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it, vi } from "vitest"
@@ -34,6 +35,7 @@ runButtonContract("react", {
   async renderPrimary(args = {}) {
     const buttonProps = {
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.loading !== undefined ? { loading: args.loading } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),
     }
 
@@ -69,6 +71,123 @@ describe("React adapter specifics: Button", () => {
     expect(eventArg).toBeDefined()
     expect(typeof eventArg.preventDefault).toBe("function")
     expect(eventArg.nativeEvent).toBeInstanceOf(MouseEvent)
+  })
+
+  it("renders a button loading spinner and hides icon affordances while loading", () => {
+    renderWithProvider(
+      <PrimaryButton loading iconLeft="plus" iconRight="checkCircle">
+        Saving
+      </PrimaryButton>,
+    )
+
+    const buttonElement = screen.getByRole("button", { name: /saving/i })
+    const spinnerElement = buttonElement.querySelector('[data-component="spinner"]')
+
+    expect(spinnerElement).not.toBeNull()
+    expect(spinnerElement?.getAttribute("data-purpose")).toBe("button-loading")
+    expect(spinnerElement?.getAttribute("data-variant")).toBe("classic")
+    expect(spinnerElement?.getAttribute("data-size")).toBe("xs")
+    expect(spinnerElement?.getAttribute("style")).toContain("--mw-spinner-indicator-color: #ffffff")
+    expect(buttonElement.querySelector(".mw-icon")).toBeNull()
+  })
+
+  it("uses the non-inverted button spinner treatment for secondary loading buttons", () => {
+    renderWithProvider(
+      <Button variant="secondary" loading>
+        Please wait
+      </Button>,
+    )
+
+    const buttonElement = screen.getByRole("button", { name: /please wait/i })
+    const spinnerElement = buttonElement.querySelector('[data-component="spinner"]')
+
+    expect(spinnerElement?.getAttribute("style")).toContain(
+      "--mw-spinner-indicator-color: currentColor",
+    )
+  })
+
+  it("supports object loading with label replacement and a custom spinner variant", () => {
+    renderWithProvider(
+      <PrimaryButton
+        loading={{
+          isLoading: true,
+          spinnerVariant: SpinnerVariants.dual,
+          loadingLabel: "Saving…",
+        }}
+        iconLeft="plus"
+        iconRight="checkCircle"
+      >
+        Create order
+      </PrimaryButton>,
+    )
+
+    const buttonElement = screen.getByRole("button", { name: /saving/i })
+    const spinnerElement = buttonElement.querySelector('[data-component="spinner"]')
+
+    expect(buttonElement).toHaveTextContent("Saving…")
+    expect(screen.queryByText("Create order")).toBeNull()
+    expect(spinnerElement?.getAttribute("data-variant")).toBe("dual")
+    expect(buttonElement.querySelector(".mw-icon")).toBeNull()
+  })
+
+  it("keeps button interaction enabled when disableWhileLoading is false", async () => {
+    const onClick = vi.fn()
+
+    renderWithProvider(
+      <Button
+        variant="secondary"
+        loading={{
+          isLoading: true,
+          disableWhileLoading: false,
+          loadingLabel: "Refreshing…",
+        }}
+        onClick={onClick}
+      >
+        Refresh
+      </Button>,
+    )
+
+    const buttonElement = screen.getByRole("button", { name: /refreshing/i })
+
+    expect(buttonElement).toHaveAttribute("aria-busy", "true")
+    expect(buttonElement).not.toHaveAttribute("aria-disabled")
+    expect(buttonElement).not.toBeDisabled()
+
+    await userEvent.setup().click(buttonElement)
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it("blocks loading anchors when loading disables interaction", async () => {
+    const onClick = vi.fn()
+
+    renderWithProvider(
+      <Button
+        as="a"
+        href="/docs"
+        loading={{
+          isLoading: true,
+          spinnerVariant: SpinnerVariants.ring,
+        }}
+        onClick={onClick}
+      >
+        View docs
+      </Button>,
+    )
+
+    const linkButton = screen.getByRole("button", { name: /view docs/i })
+    const spinnerElement = linkButton.querySelector('[data-component="spinner"]')
+
+    expect(linkButton.tagName).toBe("A")
+    expect(linkButton).not.toHaveAttribute("href")
+    expect(linkButton).toHaveAttribute("aria-busy", "true")
+    expect(linkButton).toHaveAttribute("aria-disabled", "true")
+    expect(linkButton).toHaveAttribute("tabindex", "-1")
+    expect(spinnerElement?.getAttribute("data-variant")).toBe("ring")
+
+    await userEvent.setup().click(linkButton)
+
+    expect(onClick).not.toHaveBeenCalled()
   })
 
   it("merges className with recipe output", () => {

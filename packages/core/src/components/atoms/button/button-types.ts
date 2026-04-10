@@ -1,5 +1,6 @@
 import type { CssVars } from "../../../shared/css-vars"
 import type { IconName } from "../icon/icon-types"
+import type { SpinnerVariant } from "../spinner/spinner-types"
 
 /**
  * Button size options.
@@ -83,6 +84,20 @@ export const ButtonAction = {
 } as const
 export type ButtonAction = (typeof ButtonAction)[keyof typeof ButtonAction]
 
+export interface ButtonLoadingOptions {
+  isLoading: boolean
+  disableWhileLoading?: boolean
+  spinnerVariant?: SpinnerVariant
+  loadingLabel?: string
+}
+
+export interface ResolvedButtonLoading {
+  isLoading: boolean
+  disableWhileLoading: boolean
+  spinnerVariant: SpinnerVariant
+  loadingLabel?: string
+}
+
 export type ButtonOptions = {
   as?: "button" | "a"
   href?: string
@@ -91,7 +106,7 @@ export type ButtonOptions = {
   variant?: ButtonVariant
 
   disabled?: boolean
-  loading?: boolean
+  loading?: boolean | ButtonLoadingOptions
   error?: boolean
 
   toggle?: boolean
@@ -141,6 +156,7 @@ export type ButtonRenderKit = {
   className: string
   vars: CssVars
   a11y: ButtonA11yProps
+  loading: ResolvedButtonLoading
   blockClick: boolean
   dataAttributes?: Record<string, string | boolean | undefined>
 }

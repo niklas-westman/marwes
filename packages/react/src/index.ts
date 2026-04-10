@@ -142,8 +142,12 @@ export { Divider } from "./components/divider"
 export type { DividerProps } from "./components/divider"
 
 /* Spinner */
-export { Spinner } from "./components/spinner"
-export type { SpinnerProps } from "./components/spinner"
+export { Spinner, ButtonSpinner, EmptyStateSpinner } from "./components/spinner"
+export type {
+  SpinnerProps,
+  ButtonSpinnerProps,
+  EmptyStateSpinnerProps,
+} from "./components/spinner"
 
 /* Spacing */
 export { Spacing } from "./components/spacing"
