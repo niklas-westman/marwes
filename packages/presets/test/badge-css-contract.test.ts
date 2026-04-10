@@ -30,9 +30,6 @@ describe("badge.css figma sync contract", () => {
       ".mw-badge--neutral {\n  --mw-badge-surface: #f3f4f6;\n  --mw-badge-border: #e5e7eb;\n  --mw-badge-label: #595959;\n}",
     )
     expect(css).toContain(
-      ".mw-badge--brand {\n  --mw-badge-surface: #eeeeff;\n  --mw-badge-border: #2f31fc;\n  --mw-badge-label: #2f31fc;\n}",
-    )
-    expect(css).toContain(
       ".mw-badge--info {\n  --mw-badge-surface: #eeeeff;\n  --mw-badge-border: #ababfd;\n  --mw-badge-label: #1b1d97;\n}",
     )
     expect(css).toContain(
@@ -49,9 +46,6 @@ describe("badge.css figma sync contract", () => {
   it("matches the validated dark-mode semantic badge colors", () => {
     expect(css).toContain(
       ".mw-theme--dark .mw-badge--neutral {\n  --mw-badge-surface: #000000;\n  --mw-badge-border: #474747;\n  --mw-badge-label: #a3a3a3;\n}",
-    )
-    expect(css).toContain(
-      ".mw-theme--dark .mw-badge--brand {\n  --mw-badge-surface: #090a32;\n  --mw-badge-border: #5859fc;\n  --mw-badge-label: #8182fc;\n}",
     )
     expect(css).toContain(
       ".mw-theme--dark .mw-badge--info {\n  --mw-badge-surface: #040519;\n  --mw-badge-border: #8182fc;\n  --mw-badge-label: #8182fc;\n}",

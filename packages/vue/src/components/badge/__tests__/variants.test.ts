@@ -70,10 +70,14 @@ describe("Vue NotificationBadge (Context)", () => {
   })
 
   it("renders as a Badge atom with expected variant class", () => {
-    renderWithProvider(NotificationBadge, { variant: BadgeVariant.brand, children: "New" })
+    renderWithProvider(NotificationBadge, {
+      variant: BadgeVariant.error,
+      ariaLabel: "99+ alerts",
+      children: "99+",
+    })
 
-    const badge = screen.getByText("New")
-    expect(badge.className).toContain("mw-badge--brand")
+    const badge = screen.getByText("99+")
+    expect(badge.className).toContain("mw-badge--error")
   })
 
   it("passes ariaLabel for accessibility", () => {

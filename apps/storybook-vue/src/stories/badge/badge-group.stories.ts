@@ -51,13 +51,10 @@ export const AllVariants: Story = {
 export const WithCustomClass: Story = {
   render: () => ({
     components: { BadgeGroup, Badge },
-    setup() {
-      return { BadgeVariant }
-    },
     template: `
       <BadgeGroup label="Custom Styled" className="custom-badge-group">
-        <Badge :variant="BadgeVariant.brand">Alpha</Badge>
-        <Badge :variant="BadgeVariant.brand">Beta</Badge>
+        <Badge>Alpha</Badge>
+        <Badge>Beta</Badge>
       </BadgeGroup>
     `,
   }),

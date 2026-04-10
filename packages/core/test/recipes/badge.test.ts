@@ -9,11 +9,6 @@ describe("createBadgeRecipe", () => {
     expect(kit.tag).toBe("span")
   })
 
-  it("variant brand: adds mw-badge--brand", () => {
-    const kit = createBadgeRecipe({ variant: BadgeVariant.brand })
-    expect(kit.className).toBe("mw-badge mw-badge--brand")
-  })
-
   it("variant info: adds mw-badge--info", () => {
     const kit = createBadgeRecipe({ variant: BadgeVariant.info })
     expect(kit.className).toBe("mw-badge mw-badge--info")

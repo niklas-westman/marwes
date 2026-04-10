@@ -9,7 +9,6 @@
  */
 export const BadgeVariant = {
   neutral: "neutral",
-  brand: "brand",
   info: "info",
   success: "success",
   warning: "warning",

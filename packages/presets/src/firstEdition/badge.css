@@ -7,7 +7,7 @@
  * - .figma/marwes/pages/-badge/component-container_1369-6125.json
  *
  * The live sync uses exact semantic badge tones rather than generic color-mix()
- * derivations, especially for the brand/info split and dark-mode surfaces.
+ * derivations, especially for the remaining semantic tones and dark-mode surfaces.
  */
 
 .mw-badge {
@@ -42,12 +42,6 @@
   --mw-badge-label: #595959;
 }
 
-.mw-badge--brand {
-  --mw-badge-surface: #eeeeff;
-  --mw-badge-border: #2f31fc;
-  --mw-badge-label: #2f31fc;
-}
-
 .mw-badge--info {
   --mw-badge-surface: #eeeeff;
   --mw-badge-border: #ababfd;
@@ -80,12 +74,6 @@
   --mw-badge-surface: #000000;
   --mw-badge-border: #474747;
   --mw-badge-label: #a3a3a3;
-}
-
-.mw-theme--dark .mw-badge--brand {
-  --mw-badge-surface: #090a32;
-  --mw-badge-border: #5859fc;
-  --mw-badge-label: #8182fc;
 }
 
 .mw-theme--dark .mw-badge--info {

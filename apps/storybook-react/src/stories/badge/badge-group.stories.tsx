@@ -54,8 +54,8 @@ export const WithCustomClass: Story = {
     className: "custom-badge-group",
     children: (
       <>
-        <Badge variant={BadgeVariant.brand}>Alpha</Badge>
-        <Badge variant={BadgeVariant.brand}>Beta</Badge>
+        <Badge>Alpha</Badge>
+        <Badge>Beta</Badge>
       </>
     ),
   },

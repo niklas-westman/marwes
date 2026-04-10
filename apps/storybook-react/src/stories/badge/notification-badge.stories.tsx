@@ -32,7 +32,6 @@ export const AllNotifications: Story = {
       <NotificationBadge variant={BadgeVariant.info} ariaLabel="3 new messages">
         3
       </NotificationBadge>
-      <NotificationBadge variant={BadgeVariant.brand}>New</NotificationBadge>
       <NotificationBadge variant={BadgeVariant.error} ariaLabel="99+ alerts">
         99+
       </NotificationBadge>

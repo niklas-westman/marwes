@@ -62,10 +62,14 @@ describe("NotificationBadge (Purpose)", () => {
   })
 
   it("renders as a Badge atom with expected variant class", () => {
-    renderWithProvider(<NotificationBadge variant={BadgeVariant.brand}>New</NotificationBadge>)
+    renderWithProvider(
+      <NotificationBadge variant={BadgeVariant.error} ariaLabel="99+ alerts">
+        99+
+      </NotificationBadge>,
+    )
 
-    const badge = screen.getByText("New")
-    expect(badge.className).toContain("mw-badge--brand")
+    const badge = screen.getByText("99+")
+    expect(badge.className).toContain("mw-badge--error")
   })
 
   it("passes ariaLabel for accessibility", () => {
