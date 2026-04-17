@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "components": [
+    {
+      "name": "Button",
+      "family": "button",
+      "component": "button",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-action", "data-variant", "data-size"],
+      "semanticAttributes": ["data-component", "data-variant", "data-action", "data-size"],
+      "purposeWrappers": [
+        "cancel",
+        "close",
+        "confirm",
+        "copy",
+        "create",
+        "destructive",
+        "download",
+        "dropdown",
+        "edit",
+        "filter",
+        "navigation",
+        "refresh",
+        "save",
+        "search",
+        "sort",
+        "submit",
+        "success",
+        "upload",
+        "verify"
+      ],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/button",
+        "react": "packages/react/src/components/button",
+        "vue": "packages/vue/src/components/button",
+        "presetCss": "packages/presets/src/firstEdition/button.css"
+      }
+    },
+    {
+      "name": "Badge",
+      "family": "badge",
+      "component": "badge",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-variant"],
+      "semanticAttributes": ["data-component", "data-variant"],
+      "purposeWrappers": ["notification", "priority", "status"],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/badge",
+        "react": "packages/react/src/components/badge",
+        "vue": "packages/vue/src/components/badge",
+        "presetCss": "packages/presets/src/firstEdition/badge.css"
+      }
+    },
+    {
+      "name": "Avatar",
+      "family": "avatar",
+      "component": "avatar",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-size"],
+      "semanticAttributes": ["data-component", "data-size"],
+      "purposeWrappers": ["presence", "profile", "team"],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/avatar",
+        "react": "packages/react/src/components/avatar",
+        "vue": "packages/vue/src/components/avatar",
+        "presetCss": "packages/presets/src/firstEdition/avatar.css"
+      }
+    },
+    {
+      "name": "Toast",
+      "family": "toast",
+      "component": "toast",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-variant", "data-intent"],
+      "semanticAttributes": ["data-component", "data-variant", "data-intent"],
+      "purposeWrappers": ["error-toast", "info-toast", "success-toast", "warning-toast"],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/toast",
+        "react": "packages/react/src/components/toast",
+        "vue": "packages/vue/src/components/toast",
+        "presetCss": null
+      }
+    },
+    {
+      "name": "Dialog",
+      "family": "dialog",
+      "component": "dialog",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-size", "data-intent"],
+      "semanticAttributes": ["data-component", "data-intent", "data-size"],
+      "purposeWrappers": ["confirm-dialog", "destructive-dialog", "info-dialog"],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/dialog",
+        "react": "packages/react/src/components/dialog",
+        "vue": "packages/vue/src/components/dialog",
+        "presetCss": null
+      }
+    }
+  ]
+}

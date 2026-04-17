@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "family": "button",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "badge",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "avatar",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "toast",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "dialog",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    }
+  ]
+}

@@ -1,0 +1,327 @@
+{
+  "version": 1,
+  "purposes": [
+    {
+      "name": "cancel",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "cancel",
+        "data-action": "cancel"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "close",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "close",
+        "data-action": "cancel"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "confirm",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "confirm",
+        "data-action": "button",
+        "data-outcome": "positive"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "confirm-dialog",
+      "family": "dialog",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "confirm-dialog",
+        "data-intent": "confirm"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "copy",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "copy",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "create",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "create",
+        "data-action": "create"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "destructive",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "destructive",
+        "data-action": "delete",
+        "data-destructive": "true",
+        "data-confirmation-required": "true"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "destructive-dialog",
+      "family": "dialog",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "destructive-dialog",
+        "data-intent": "destructive",
+        "data-destructive": "true",
+        "data-confirmation-required": "true"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "download",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "download",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "dropdown",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "dropdown",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "edit",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "edit",
+        "data-action": "edit"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "error-toast",
+      "family": "toast",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "error-toast",
+        "data-intent": "error"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "filter",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "filter",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "info-dialog",
+      "family": "dialog",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "info-dialog",
+        "data-intent": "info"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "info-toast",
+      "family": "toast",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "info-toast",
+        "data-intent": "info"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "navigation",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "navigation",
+        "data-action": "navigate"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "notification",
+      "family": "badge",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "notification"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "presence",
+      "family": "avatar",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "presence"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "priority",
+      "family": "badge",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "priority"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "profile",
+      "family": "avatar",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "profile"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "refresh",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "refresh",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "save",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "save",
+        "data-action": "submit"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "search",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "search",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "sort",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "sort",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "status",
+      "family": "badge",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "status"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "submit",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "submit",
+        "data-action": "submit",
+        "data-context": "form-submit"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "success",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "success",
+        "data-action": "button",
+        "data-outcome": "positive"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "success-toast",
+      "family": "toast",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "success-toast",
+        "data-intent": "success"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "team",
+      "family": "avatar",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "team"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "upload",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "upload",
+        "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "verify",
+      "family": "button",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "verify",
+        "data-action": "button",
+        "data-outcome": "positive"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "warning-toast",
+      "family": "toast",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "warning-toast",
+        "data-intent": "warning"
+      },
+      "frameworks": ["react", "vue"]
+    }
+  ]
+}
