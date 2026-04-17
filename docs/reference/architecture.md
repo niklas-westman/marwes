@@ -41,12 +41,15 @@ It contains:
 - accessibility mapping
 - state and variant logic
 - theme contracts and CSS variable generation
+- pure font and theme derivation helpers
+- semantic registry definitions and semantic helper builders
 - recipes that return `RenderKit` data
 
 It must never contain:
 - React code
 - Vue code
 - direct DOM access
+- browser runtime side effects
 - preset-specific CSS
 
 ### 2. `@marwes-ui/presets`
@@ -68,6 +71,7 @@ They:
 - call the core recipe
 - spread typed a11y output onto native elements
 - merge user props with `RenderKit` output
+- apply provider-side runtime effects such as theme variable DOM sync and browser font loading
 - expose framework-idiomatic component APIs
 
 They must not:
@@ -217,6 +221,7 @@ Follow [Adding Components](../guides/adding-components.md).
 - consume `@marwes-ui/core`
 - keep wrappers thin
 - no duplicated a11y logic
+- emit registry-defined semantic attributes for covered families
 
 ### apps
 - may import from packages
@@ -239,6 +244,8 @@ For focused work, run the relevant package or app commands instead.
 
 - [Documentation index](../README.md)
 - [Specification](./spec.md)
+- [AI Metadata Protocol](./ai-metadata.md)
+- [Governance](./governance.md)
 - [Testing](./testing.md)
 - [Adding Components](../guides/adding-components.md)
 - [Figma to Marwes](../guides/figma-to-marwes.md)

@@ -1,4 +1,9 @@
-import { ButtonAction, ButtonVariant, IconName } from "@marwes-ui/core"
+import {
+  ButtonAction,
+  ButtonVariant,
+  IconName,
+  createPurposeSemanticAttributes,
+} from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
 import { omitAttrs } from "../../internal/render-utils"
 import { Button, type ButtonProps } from "./button"
@@ -140,6 +145,18 @@ function filterForwardedAttrs(
   return omitAttrs(attrs, omittedKeys)
 }
 
+function createPurposeButtonDataAttributes(
+  purpose: Parameters<typeof createPurposeSemanticAttributes>[0],
+  existingDataAttributes: ButtonProps["dataAttributes"],
+  localDataAttributes: ButtonProps["dataAttributes"] = {},
+): Record<string, string | boolean | undefined> {
+  return {
+    ...existingDataAttributes,
+    ...createPurposeSemanticAttributes(purpose),
+    ...localDataAttributes,
+  }
+}
+
 // DESTRUCTIVE BUTTON - Destructive Actions
 
 export type DestructiveButtonProps = Omit<ButtonProps, "variant" | "action" | "as" | "href"> & {
@@ -171,12 +188,9 @@ export const DestructiveButton = defineComponent({
           action: ButtonAction.delete,
           error: true,
           confirmation: props.confirmation ?? true,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "destructive",
-            "data-destructive": "true",
+          dataAttributes: createPurposeButtonDataAttributes("destructive", props.dataAttributes, {
             "data-confirmation-required": props.confirmation === false ? "false" : "true",
-          },
+          }),
         },
         slots,
       )
@@ -204,11 +218,9 @@ export const CreateButton = defineComponent({
           ...props,
           action: ButtonAction.create,
           variant: ButtonVariant.primary,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "create",
+          dataAttributes: createPurposeButtonDataAttributes("create", props.dataAttributes, {
             "data-creative": "true",
-          },
+          }),
         },
         slots,
       )
@@ -237,11 +249,7 @@ export const SubmitButton = defineComponent({
           as: "button",
           action: ButtonAction.submit,
           variant: ButtonVariant.primary,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "submit",
-            "data-context": "form-submit",
-          },
+          dataAttributes: createPurposeButtonDataAttributes("submit", props.dataAttributes),
         },
         slots,
       )
@@ -269,11 +277,9 @@ export const CancelButton = defineComponent({
           ...props,
           action: ButtonAction.cancel,
           variant: ButtonVariant.neutral,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "cancel",
+          dataAttributes: createPurposeButtonDataAttributes("cancel", props.dataAttributes, {
             "data-cancel": "true",
-          },
+          }),
         },
         slots,
       )
@@ -304,11 +310,9 @@ export const LinkButton = defineComponent({
           as: "a",
           action: ButtonAction.navigate,
           variant: ButtonVariant.text,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "navigation",
+          dataAttributes: createPurposeButtonDataAttributes("navigation", props.dataAttributes, {
             "data-navigation": "true",
-          },
+          }),
         },
         slots,
       )
@@ -336,11 +340,9 @@ export const SaveButton = defineComponent({
           ...props,
           action: ButtonAction.submit,
           variant: ButtonVariant.primary,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "save",
+          dataAttributes: createPurposeButtonDataAttributes("save", props.dataAttributes, {
             "data-persist": "true",
-          },
+          }),
         },
         slots,
       )
@@ -369,11 +371,7 @@ export const ConfirmButton = defineComponent({
           variant: ButtonVariant.success,
           as: "button",
           action: ButtonAction.button,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "confirm",
-            "data-outcome": "positive",
-          },
+          dataAttributes: createPurposeButtonDataAttributes("confirm", props.dataAttributes),
         },
         slots,
       )
@@ -403,12 +401,9 @@ export const VerifyButton = defineComponent({
           as: "button",
           action: ButtonAction.button,
           iconRight: props.iconRight ?? IconName.CheckCircle,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "verify",
-            "data-outcome": "positive",
+          dataAttributes: createPurposeButtonDataAttributes("verify", props.dataAttributes, {
             "data-verification": "true",
-          },
+          }),
         },
         slots,
       )
@@ -437,11 +432,9 @@ export const EditButton = defineComponent({
           action: ButtonAction.edit,
           variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.Edit,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "edit",
+          dataAttributes: createPurposeButtonDataAttributes("edit", props.dataAttributes, {
             "data-edit": "true",
-          },
+          }),
         },
         slots,
       )
@@ -469,11 +462,9 @@ export const CloseButton = defineComponent({
           ...props,
           action: ButtonAction.cancel,
           variant: ButtonVariant.neutral,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "close",
+          dataAttributes: createPurposeButtonDataAttributes("close", props.dataAttributes, {
             "data-close": "true",
-          },
+          }),
         },
         slots,
       )
@@ -502,11 +493,9 @@ export const RefreshButton = defineComponent({
           action: ButtonAction.button,
           variant: ButtonVariant.neutral,
           iconRight: props.iconRight ?? IconName.RefreshCw,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "refresh",
+          dataAttributes: createPurposeButtonDataAttributes("refresh", props.dataAttributes, {
             "data-refresh": "true",
-          },
+          }),
         },
         slots,
       )
@@ -535,11 +524,9 @@ export const UploadButton = defineComponent({
           action: ButtonAction.button,
           variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.Upload,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "upload",
+          dataAttributes: createPurposeButtonDataAttributes("upload", props.dataAttributes, {
             "data-transfer": "upload",
-          },
+          }),
         },
         slots,
       )
@@ -568,11 +555,9 @@ export const DownloadButton = defineComponent({
           action: ButtonAction.button,
           variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.Download,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "download",
+          dataAttributes: createPurposeButtonDataAttributes("download", props.dataAttributes, {
             "data-transfer": "download",
-          },
+          }),
         },
         slots,
       )
@@ -600,11 +585,9 @@ export const CopyButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.neutral,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "copy",
+          dataAttributes: createPurposeButtonDataAttributes("copy", props.dataAttributes, {
             "data-copy": "true",
-          },
+          }),
         },
         slots,
       )
@@ -633,11 +616,9 @@ export const SearchButton = defineComponent({
           action: ButtonAction.button,
           variant: ButtonVariant.primary,
           iconRight: props.iconRight ?? IconName.Search,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "search",
+          dataAttributes: createPurposeButtonDataAttributes("search", props.dataAttributes, {
             "data-search": "true",
-          },
+          }),
         },
         slots,
       )
@@ -665,11 +646,9 @@ export const FilterButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.neutral,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "filter",
+          dataAttributes: createPurposeButtonDataAttributes("filter", props.dataAttributes, {
             "data-filter": "true",
-          },
+          }),
         },
         slots,
       )
@@ -697,11 +676,9 @@ export const SortButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.neutral,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "sort",
+          dataAttributes: createPurposeButtonDataAttributes("sort", props.dataAttributes, {
             "data-sort": "true",
-          },
+          }),
         },
         slots,
       )
@@ -730,11 +707,9 @@ export const DropdownButton = defineComponent({
           action: ButtonAction.button,
           variant: ButtonVariant.secondary,
           iconRight: props.iconRight ?? IconName.ChevronDown,
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "dropdown",
+          dataAttributes: createPurposeButtonDataAttributes("dropdown", props.dataAttributes, {
             "data-dropdown": "true",
-          },
+          }),
         },
         slots,
       )
@@ -800,11 +775,7 @@ export const SuccessButton = defineComponent({
           ...props,
           variant: "success",
           as: "button",
-          dataAttributes: {
-            ...props.dataAttributes,
-            "data-purpose": "success",
-            "data-outcome": "positive",
-          },
+          dataAttributes: createPurposeButtonDataAttributes("success", props.dataAttributes),
         },
         slots,
       )

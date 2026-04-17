@@ -34,6 +34,7 @@ export const Badge = defineComponent(
         "span",
         {
           ...passthroughAttrs,
+          ...renderKit.dataAttributes,
           ...(props.dataAttributes ?? {}),
           id: props.id,
           class: className,

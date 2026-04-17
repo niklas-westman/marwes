@@ -6,6 +6,7 @@
  * visual `variant` prop for presentation only.
  */
 
+import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { Badge, type BadgeProps } from "./badge"
 
@@ -36,7 +37,7 @@ export function StatusBadge(props: StatusBadgeProps): React.ReactElement {
       {...props}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "status",
+        ...createPurposeSemanticAttributes("status"),
       }}
     />
   )
@@ -69,7 +70,7 @@ export function PriorityBadge(props: PriorityBadgeProps): React.ReactElement {
       {...props}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "priority",
+        ...createPurposeSemanticAttributes("priority"),
       }}
     />
   )
@@ -102,7 +103,7 @@ export function NotificationBadge(props: NotificationBadgeProps): React.ReactEle
       {...props}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "notification",
+        ...createPurposeSemanticAttributes("notification"),
       }}
     />
   )

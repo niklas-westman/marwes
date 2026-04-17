@@ -32,7 +32,7 @@ export interface AvatarA11yProps {
   ariaLabel?: string
 }
 
-export interface AvatarDataAttributes {
+export interface AvatarDataAttributes extends Record<string, string> {
   "data-component": "avatar"
   "data-size": AvatarSize
   "data-type": AvatarType

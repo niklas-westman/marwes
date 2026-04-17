@@ -1,9 +1,9 @@
 import type { ResolvedTheme } from "@marwes-ui/core"
-import { resetFontLoaderState } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import * as React from "react"
 import { afterEach, describe, expect, it } from "vitest"
 import { MarwesProvider } from "../marwes-provider"
+import { resetThemeRuntimeState } from "../runtime-theme"
 import { useTheme } from "../use-theme"
 
 function ThemeConsumer({ onTheme }: { onTheme: (t: ResolvedTheme) => void }) {
@@ -115,7 +115,7 @@ describe("MarwesProvider — Google Fonts loading", () => {
   }
 
   afterEach(() => {
-    resetFontLoaderState()
+    resetThemeRuntimeState()
     for (const link of findFontLinks()) link.remove()
     for (const link of document.head.querySelectorAll('link[rel="preconnect"]')) {
       if ((link as HTMLLinkElement).href.includes("fonts.g")) link.remove()

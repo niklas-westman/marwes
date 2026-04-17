@@ -26,4 +26,5 @@ export interface ToastRenderKit {
   className: string
   vars: Record<string, string>
   a11y: ToastA11yProps
+  dataAttributes: Record<string, string>
 }

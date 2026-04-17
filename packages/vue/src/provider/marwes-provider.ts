@@ -1,7 +1,8 @@
 import type { ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
-import { applyTheme, resolveThemeInput } from "@marwes-ui/core"
+import { resolveThemeInput } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, provide, ref, watch } from "vue"
 import { marwesContextKey } from "./marwes-context"
+import { applyThemeToElement, loadThemeFonts } from "./runtime-theme"
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
@@ -18,14 +19,16 @@ export const MarwesProvider = defineComponent({
 
     const rootRef = ref<HTMLElement | null>(null)
 
-    function applyVars() {
+    function syncThemeToRuntime() {
       if (rootRef.value) {
-        applyTheme(rootRef.value, resolved.value)
+        applyThemeToElement(rootRef.value, resolved.value)
       }
+
+      loadThemeFonts(resolved.value)
     }
 
-    onMounted(applyVars)
-    watch(resolved, applyVars)
+    onMounted(syncThemeToRuntime)
+    watch(resolved, syncThemeToRuntime)
 
     provide(marwesContextKey, {
       theme: resolved,

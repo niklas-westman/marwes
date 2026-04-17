@@ -10,7 +10,9 @@ If you are new to Marwes, start here.
 2. [Specification](./reference/spec.md)
 3. [Adding Components](./guides/adding-components.md)
 4. [Figma to Marwes](./guides/figma-to-marwes.md)
-5. [Testing](./reference/testing.md)
+5. [AI Metadata Protocol](./reference/ai-metadata.md)
+6. [Governance](./reference/governance.md)
+7. [Testing](./reference/testing.md)
 
 ## Documentation map
 
@@ -24,6 +26,8 @@ graph TD
 
   Reference --> Architecture[architecture.md]
   Reference --> Spec[spec.md]
+  Reference --> AIMetadata[ai-metadata.md]
+  Reference --> Governance[governance.md]
   Reference --> Testing[testing.md]
 
   Guides --> Adding[adding-components.md]
@@ -42,6 +46,8 @@ Long-lived, canonical project docs.
 
 - [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
 - [Specification](./reference/spec.md) — formal requirements and decisions
+- [AI Metadata Protocol](./reference/ai-metadata.md) — canonical semantic vocabulary and ownership model
+- [Governance](./reference/governance.md) — local and CI trust gates, artifacts, and release discipline
 - [Testing](./reference/testing.md) — test layers, commands, and expectations
 
 ### Guides
@@ -60,6 +66,14 @@ Active or historical planning documents.
 Docs for optional tooling and workflows.
 
 - [Allure](./tooling/allure.md) — optional HTML reporting for package tests
+
+## Generated artifacts
+
+Track D machine-readable outputs live at the repo root:
+- `../artifacts/component-manifest.json`
+- `../artifacts/purpose-registry.json`
+- `../artifacts/framework-parity.json`
+- `../artifacts/design-provenance.json`
 
 ## How the repo fits together
 

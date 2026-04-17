@@ -1,12 +1,31 @@
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
+import { runToastContract } from "../../../../../../tests/contracts/toast.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { ErrorToast, InfoToast, SuccessToast, WarningToast } from "../variants"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
+
+runToastContract("react", {
+  renderSuccess() {
+    renderWithProvider(<SuccessToast>Saved successfully.</SuccessToast>)
+  },
+  renderError() {
+    renderWithProvider(<ErrorToast>Publishing failed.</ErrorToast>)
+  },
+  renderWarning() {
+    renderWithProvider(<WarningToast>Storage is almost full.</WarningToast>)
+  },
+  renderInfo() {
+    renderWithProvider(<InfoToast>New release notes are available.</InfoToast>)
+  },
+  getByRole(role) {
+    return screen.getByRole(role)
+  },
+})
 
 describe("SuccessToast", () => {
   it("adds success metadata and defaults to the outline emphasis", () => {

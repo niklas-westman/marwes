@@ -2,6 +2,7 @@ import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
+import { runBadgeContract } from "../../../../../../tests/contracts/badge.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { NotificationBadge, PriorityBadge, StatusBadge } from "../variants"
 
@@ -22,6 +23,21 @@ function renderWithProvider(component: unknown, props: Record<string, unknown>) 
     }),
   )
 }
+
+runBadgeContract("vue", {
+  renderStatus() {
+    renderWithProvider(StatusBadge, { variant: BadgeVariant.success, children: "Active" })
+  },
+  renderPriority() {
+    renderWithProvider(PriorityBadge, { variant: BadgeVariant.error, children: "Critical" })
+  },
+  renderNotification() {
+    renderWithProvider(NotificationBadge, { variant: BadgeVariant.info, children: "5" })
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+})
 
 describe("Vue StatusBadge (Context)", () => {
   it("renders with data-purpose=status", () => {

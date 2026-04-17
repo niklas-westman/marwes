@@ -2,6 +2,7 @@ import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
+import { runBadgeContract } from "../../../../../../tests/contracts/badge.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Badge } from "../badge"
 import { NotificationBadge, PriorityBadge, StatusBadge } from "../variants"
@@ -9,6 +10,21 @@ import { NotificationBadge, PriorityBadge, StatusBadge } from "../variants"
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
+
+runBadgeContract("react", {
+  renderStatus() {
+    renderWithProvider(<StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>)
+  },
+  renderPriority() {
+    renderWithProvider(<PriorityBadge variant={BadgeVariant.error}>Critical</PriorityBadge>)
+  },
+  renderNotification() {
+    renderWithProvider(<NotificationBadge variant={BadgeVariant.info}>5</NotificationBadge>)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+})
 
 describe("StatusBadge (Purpose)", () => {
   it("renders with data-purpose=status", () => {

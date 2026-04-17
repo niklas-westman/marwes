@@ -11,7 +11,7 @@ export type {
 export { lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
 export { resolveThemeInput } from "./theme/theme-normalize"
 export type { ResolvedTheme } from "./theme/theme-css"
-export { themeToCSSVars, applyTheme } from "./theme/theme-css"
+export { themeToCSSVars } from "./theme/theme-css"
 
 // /* Button */
 // export { createButtonRecipe } from "./components/atoms/button";
@@ -53,12 +53,13 @@ export { resolveTone } from "./theme/tone"
 export type { DensityScale } from "./theme/density"
 export { DENSITY_SCALES, densityToCSSVars } from "./theme/density"
 export {
-  loadGoogleFont,
+  buildGoogleFontsUrl,
   extractFontFamilyName,
   isSystemFont,
   extractUsedWeights,
-  resetFontLoaderState,
 } from "./theme/font-loader"
+
+export * from "./semantics"
 
 export type { CssVars } from "./shared/css-vars"
 export type { CurrencyCode } from "./shared/field-helpers"

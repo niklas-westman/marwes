@@ -4,6 +4,7 @@
  * - stable classnames, variant modifier classes
  */
 
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveBadgeA11y } from "./badge-a11y"
 import type { BadgeOptions, BadgeRenderKit } from "./badge-types"
 
@@ -18,5 +19,8 @@ export function createBadgeRecipe(opts: BadgeOptions): BadgeRenderKit {
     className: cx("mw-badge", `mw-badge--${variant}`),
     vars: {},
     a11y: resolveBadgeA11y(opts),
+    dataAttributes: createFamilySemanticAttributes("badge", {
+      "data-variant": variant,
+    }),
   }
 }

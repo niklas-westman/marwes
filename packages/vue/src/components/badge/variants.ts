@@ -1,3 +1,4 @@
+import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
 import { Badge, type BadgeProps } from "./badge"
 
@@ -24,7 +25,7 @@ export const StatusBadge = defineComponent({
           ...props,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": "status",
+            ...createPurposeSemanticAttributes("status"),
           },
         },
         slots,
@@ -53,7 +54,7 @@ export const PriorityBadge = defineComponent({
           ...props,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": "priority",
+            ...createPurposeSemanticAttributes("priority"),
           },
         },
         slots,
@@ -82,7 +83,7 @@ export const NotificationBadge = defineComponent({
           ...props,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": "notification",
+            ...createPurposeSemanticAttributes("notification"),
           },
         },
         slots,

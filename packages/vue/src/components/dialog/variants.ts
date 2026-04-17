@@ -1,3 +1,4 @@
+import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { defineComponent, h } from "vue"
 import { CancelButton, ConfirmButton, DestructiveButton } from "../button"
@@ -50,8 +51,7 @@ export const ConfirmDialog = defineComponent({
           ...dialogModalProps,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": "confirm-dialog",
-            "data-intent": "confirm",
+            ...createPurposeSemanticAttributes("confirm-dialog"),
           },
           footer: ({ close }: { close: () => void }) => [
             h(
@@ -129,8 +129,7 @@ export const DestructiveDialog = defineComponent({
           ...dialogModalProps,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": "destructive-dialog",
-            "data-intent": "destructive",
+            ...createPurposeSemanticAttributes("destructive-dialog"),
           },
           footer: ({ close }: { close: () => void }) => [
             h(
@@ -204,8 +203,7 @@ export const InfoDialog = defineComponent({
           ...dialogModalProps,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": "info-dialog",
-            "data-intent": "info",
+            ...createPurposeSemanticAttributes("info-dialog"),
           },
           footer: ({ close }: { close: () => void }) =>
             h(

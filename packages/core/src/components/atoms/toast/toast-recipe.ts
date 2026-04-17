@@ -4,6 +4,7 @@
  * - stable classnames, variant modifier classes, aria-live wiring
  */
 
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveToastA11y } from "./toast-a11y"
 import type { ToastOptions, ToastRenderKit } from "./toast-types"
 
@@ -18,5 +19,8 @@ export function createToastRecipe(opts: ToastOptions): ToastRenderKit {
     className: cx("mw-toast", `mw-toast--${variant}`),
     vars: {},
     a11y: resolveToastA11y(opts),
+    dataAttributes: createFamilySemanticAttributes("toast", {
+      "data-variant": variant,
+    }),
   }
 }

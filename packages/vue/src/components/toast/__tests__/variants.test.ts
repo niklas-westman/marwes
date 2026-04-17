@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
+import { runToastContract } from "../../../../../../tests/contracts/toast.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { ErrorToast, InfoToast, SuccessToast, WarningToast } from "../variants"
 
@@ -19,6 +20,24 @@ function renderWithProvider(component: string, children: string) {
     }),
   )
 }
+
+runToastContract("vue", {
+  renderSuccess() {
+    renderWithProvider(SuccessToast as unknown as string, "Saved successfully.")
+  },
+  renderError() {
+    renderWithProvider(ErrorToast as unknown as string, "Publishing failed.")
+  },
+  renderWarning() {
+    renderWithProvider(WarningToast as unknown as string, "Storage is almost full.")
+  },
+  renderInfo() {
+    renderWithProvider(InfoToast as unknown as string, "New release notes are available.")
+  },
+  getByRole(role) {
+    return screen.getByRole(role)
+  },
+})
 
 describe("Vue SuccessToast", () => {
   it("adds success metadata", () => {

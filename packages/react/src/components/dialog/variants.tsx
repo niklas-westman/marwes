@@ -1,3 +1,4 @@
+import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { CancelButton, ConfirmButton, DestructiveButton } from "../button"
 import { DialogModal, type DialogModalProps } from "./dialog-modal"
@@ -24,8 +25,7 @@ export function ConfirmDialog(props: ConfirmDialogProps): React.ReactElement {
       {...dialogProps}
       dataAttributes={{
         ...dataAttributes,
-        "data-purpose": "confirm-dialog",
-        "data-intent": "confirm",
+        ...createPurposeSemanticAttributes("confirm-dialog"),
       }}
       footer={({ close }) => (
         <>
@@ -73,8 +73,7 @@ export function DestructiveDialog(props: DestructiveDialogProps): React.ReactEle
       {...dialogProps}
       dataAttributes={{
         ...dataAttributes,
-        "data-purpose": "destructive-dialog",
-        "data-intent": "destructive",
+        ...createPurposeSemanticAttributes("destructive-dialog"),
       }}
       footer={({ close }) => (
         <>
@@ -113,8 +112,7 @@ export function InfoDialog(props: InfoDialogProps): React.ReactElement {
       {...dialogProps}
       dataAttributes={{
         ...dataAttributes,
-        "data-purpose": "info-dialog",
-        "data-intent": "info",
+        ...createPurposeSemanticAttributes("info-dialog"),
       }}
       footer={({ close }) => (
         <ConfirmButton

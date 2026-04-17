@@ -130,11 +130,13 @@ flowchart LR
 - public props are exercised through rendered output
 - event flows are tested through user interaction
 - field wrappers verify labelling and described-by wiring
+- covered semantic families verify canonical metadata output
 
 ### Stories
 - atom, molecule, and purpose layers are represented where applicable
 - docs pages reflect the actual exported API
 - React and Vue stories stay aligned
+- semantic claims in docs should match the core semantic registry for covered families
 
 ## Accessibility verification
 
@@ -170,4 +172,6 @@ Use it when you want a richer HTML report for package test runs.
 - [Documentation index](../README.md)
 - [Architecture](./architecture.md)
 - [Specification](./spec.md)
+- [AI Metadata Protocol](./ai-metadata.md)
+- [Governance](./governance.md)
 - [Adding Components](../guides/adding-components.md)

@@ -37,7 +37,7 @@ No CSS-in-JS overhead. Static CSS with CSS variables. Ship less JavaScript, load
 
 ### 🎨 **Beautiful Defaults**
 
-Ships with firstEdition preset—modern typography, semantic colors, WCAG AA contrast ratios.
+Ships with the firstEdition theme and CSS preset—modern typography, semantic colors, WCAG AA contrast ratios.
 
 ### 🔧 **Simple Theme API**
 
@@ -60,18 +60,18 @@ pnpm add @marwes-ui/react @marwes-ui/presets
 ```
 
 ```tsx
-import { MarwesProvider, Button } from "@marwes-ui/react";
-import { firstEdition } from "@marwes-ui/presets";
-import "@marwes-ui/presets/firstEdition/styles.css";
+import { MarwesProvider, Button } from "@marwes-ui/react"
+import { firstEditionTheme } from "@marwes-ui/presets"
+import "@marwes-ui/presets/firstEdition/styles.css"
 
 function App() {
   return (
-    <MarwesProvider preset={firstEdition}>
+    <MarwesProvider theme={firstEditionTheme}>
       <Button variant="primary">
         Click me
       </Button>
     </MarwesProvider>
-  );
+  )
 }
 ```
 
@@ -126,9 +126,11 @@ What makes Marwes different? **Complete separation of concerns:**
 Override theme values with a simple, typed API:
 
 ```tsx
+import { firstEditionTheme } from "@marwes-ui/presets"
+
 <MarwesProvider
-  preset={firstEdition}
   theme={{
+    ...firstEditionTheme,
     color: {
       primary: "#5B8CFF",
       secondary: "#FF6B9D",

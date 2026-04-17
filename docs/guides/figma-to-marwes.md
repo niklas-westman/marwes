@@ -57,8 +57,8 @@ Colors flow through a derivation pipeline:
 ThemeInput (consumer API)
   → resolveThemeInput()
     → ResolvedTheme (ColorRole objects, not raw hex)
-      → themeToCSSVars() / applyTheme()
-        → CSS custom properties on provider element
+      → themeToCSSVars()
+        → adapter runtime helper applies CSS custom properties on provider element
 ```
 
 Derivable color roles (`primary`, `danger`, `success`, `warning`) accept a `ColorInput` — either a plain hex string or an override object. String input auto-derives interaction states (hover, pressed, disabled, label); object input can override derived fields such as `label` and `labelDisabled` for brand-specific filled surfaces. `secondary` and `info` are always derived from `primary` — never configured directly.

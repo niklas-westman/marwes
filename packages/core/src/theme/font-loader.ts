@@ -1,7 +1,6 @@
 /**
- * Google Fonts auto-loading service.
- * Injects <link> tags for Google Fonts at runtime.
- * SSR-safe — no-ops when document is unavailable.
+ * Pure font utilities shared by adapter runtime layers.
+ * Browser-side font injection lives in framework adapters.
  */
 
 // Fonts that should NOT trigger a Google Fonts load: CSS generics,
@@ -34,9 +33,6 @@ const KNOWN_FONTS = new Set([
   "courier new",
   "lucida console",
 ])
-
-const loadedFonts = new Set<string>()
-let preconnected = false
 
 /**
  * Builds a Google Fonts CSS2 API URL for a given font family and weights.
@@ -87,56 +83,4 @@ export function extractUsedWeights(typography: TypographyForWeightExtraction): n
   weights.add(typography.h2.fontWeight)
   weights.add(typography.h3.fontWeight)
   return [...weights].sort((a, b) => a - b)
-}
-
-function ensurePreconnect(): void {
-  if (preconnected || typeof document === "undefined") return
-  preconnected = true
-
-  for (const href of ["https://fonts.googleapis.com", "https://fonts.gstatic.com"]) {
-    const link = document.createElement("link")
-    link.rel = "preconnect"
-    link.href = href
-    if (href.includes("gstatic")) link.crossOrigin = "anonymous"
-    document.head.appendChild(link)
-  }
-}
-
-export interface GoogleFontLoadOptions {
-  family: string
-  weights?: number[]
-}
-
-/**
- * Injects a Google Fonts <link> into document.head.
- * Idempotent — calling with the same family+weights is a no-op.
- * Safe to call server-side (no-ops when document is unavailable).
- */
-export function loadGoogleFont(options: GoogleFontLoadOptions): void {
-  if (typeof document === "undefined") return
-
-  const { family, weights = [400, 500, 600, 700] } = options
-  const key = `${family}:${weights.join(",")}`
-
-  if (loadedFonts.has(key)) return
-  loadedFonts.add(key)
-
-  ensurePreconnect()
-
-  const url = buildGoogleFontsUrl(family, weights)
-  const link = document.createElement("link")
-  link.rel = "stylesheet"
-  link.href = url
-  link.dataset.marwesFont = family
-  document.head.appendChild(link)
-}
-
-/**
- * Resets internal font loading state.
- * Only intended for use in tests — clears the deduplication cache
- * so each test starts with a clean slate.
- */
-export function resetFontLoaderState(): void {
-  loadedFonts.clear()
-  preconnected = false
 }

@@ -31,4 +31,5 @@ export interface BadgeRenderKit {
   className: string
   vars: Record<string, string>
   a11y: BadgeA11yProps
+  dataAttributes: Record<string, string>
 }

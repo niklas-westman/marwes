@@ -1,3 +1,4 @@
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveDialogA11y } from "./dialog-a11y"
 import type { DialogOptions, DialogRenderKit } from "./dialog-types"
 
@@ -24,8 +25,9 @@ export function createDialogRecipe(opts: DialogOptions = {}): DialogRenderKit {
     showCloseButton,
     a11y: resolveDialogA11y(opts),
     dataAttributes: {
-      "data-component": "dialog",
-      "data-size": size,
+      ...createFamilySemanticAttributes("dialog", {
+        "data-size": size,
+      }),
       "data-footer": showFooter ? "true" : "false",
       "data-dismissible": showCloseButton ? "true" : "false",
       ...opts.dataAttributes,

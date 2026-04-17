@@ -1,4 +1,4 @@
-import { IconName } from "@marwes-ui/core"
+import { IconName, createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
 import { Icon } from "../icon"
 import { Toast, type ToastProps } from "./toast"
@@ -14,7 +14,7 @@ const toastPropKeys = [
 
 function createPurposeToast(args: {
   name: string
-  dataPurpose: string
+  dataPurpose: "success-toast" | "error-toast" | "warning-toast" | "info-toast"
   iconName: IconName
   defaultVariant: ToastProps["variant"]
   defaultAriaLive: NonNullable<ToastProps["ariaLive"]>
@@ -33,15 +33,7 @@ function createPurposeToast(args: {
           ariaLive: props.ariaLive ?? args.defaultAriaLive,
           dataAttributes: {
             ...props.dataAttributes,
-            "data-purpose": args.dataPurpose,
-            "data-intent":
-              args.dataPurpose === "success-toast"
-                ? "success"
-                : args.dataPurpose === "error-toast"
-                  ? "error"
-                  : args.dataPurpose === "warning-toast"
-                    ? "warning"
-                    : "info",
+            ...createPurposeSemanticAttributes(args.dataPurpose),
           },
         }
 

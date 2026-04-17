@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
+import { runDialogContract } from "../../../../../../tests/contracts/dialog.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { ConfirmDialog, DestructiveDialog, InfoDialog } from "../variants"
 
@@ -19,6 +20,48 @@ function renderWithProvider(component: unknown, props: Record<string, unknown>, 
     }),
   )
 }
+
+runDialogContract("vue", {
+  renderConfirm() {
+    renderWithProvider(
+      ConfirmDialog,
+      {
+        open: true,
+        portalTarget: null,
+        title: "Publish update",
+        description: "This notifies subscribers immediately.",
+      },
+      "Review the release notes before confirming.",
+    )
+  },
+  renderDestructive() {
+    renderWithProvider(
+      DestructiveDialog,
+      {
+        open: true,
+        portalTarget: null,
+        title: "Delete workspace",
+        description: "This cannot be undone.",
+      },
+      "All projects and members will be removed.",
+    )
+  },
+  renderInfo() {
+    renderWithProvider(
+      InfoDialog,
+      {
+        open: true,
+        portalTarget: null,
+        title: "Maintenance notice",
+        description: "The workspace will be read-only for 10 minutes.",
+      },
+      "Save your work before the maintenance window begins.",
+    )
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+})
 
 describe("Vue ConfirmDialog", () => {
   it("adds confirm metadata and default actions", () => {

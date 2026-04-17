@@ -1,3 +1,4 @@
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveAvatarA11y } from "./avatar-a11y"
 import { AvatarSize, AvatarType } from "./avatar-types"
 import type {
@@ -93,6 +94,9 @@ export function createAvatarRecipe(options: AvatarOptions = {}): AvatarRenderKit
   const size: AvatarSizeValue = options.size ?? AvatarSize.medium
   const normalizedInitials = normalizeAvatarInitials(options.initials)
   const resolvedType = resolveAvatarType(options, normalizedInitials)
+  const familySemanticAttributes = createFamilySemanticAttributes("avatar", {
+    "data-size": size,
+  })
 
   return {
     tag: "span",
@@ -100,8 +104,8 @@ export function createAvatarRecipe(options: AvatarOptions = {}): AvatarRenderKit
     vars: {},
     a11y: resolveAvatarA11y(options, resolvedType, normalizedInitials),
     dataAttributes: {
-      "data-component": "avatar",
-      "data-size": size,
+      "data-component": familySemanticAttributes["data-component"] as "avatar",
+      "data-size": familySemanticAttributes["data-size"] as AvatarSizeValue,
       "data-type": resolvedType,
     },
     content: createAvatarRenderContent(options, resolvedType, normalizedInitials),

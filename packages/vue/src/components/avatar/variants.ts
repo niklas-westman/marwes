@@ -1,3 +1,4 @@
+import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
 import { Avatar, type AvatarProps } from "./avatar"
 import { AvatarBadge, type AvatarBadgeProps } from "./avatar-badge"
@@ -42,7 +43,7 @@ export const ProfileAvatar = defineComponent({
         ...props,
         dataAttributes: {
           ...props.dataAttributes,
-          "data-purpose": "profile",
+          ...createPurposeSemanticAttributes("profile"),
         },
       })
   },
@@ -63,7 +64,7 @@ export const PresenceAvatar = defineComponent({
         ...props,
         dataAttributes: {
           ...props.dataAttributes,
-          "data-purpose": "presence",
+          ...createPurposeSemanticAttributes("presence"),
         },
       })
   },
@@ -84,7 +85,7 @@ export const TeamAvatarGroup = defineComponent({
         ...props,
         dataAttributes: {
           ...props.dataAttributes,
-          "data-purpose": "team",
+          ...createPurposeSemanticAttributes("team"),
         },
       })
   },

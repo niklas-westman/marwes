@@ -32,6 +32,7 @@ export function Toast(props: ToastProps): React.ReactElement {
       role={a11y.role}
       aria-live={a11y.ariaLive}
       aria-atomic="true"
+      {...kit.dataAttributes}
       {...dataAttributes}
     >
       {icon && (

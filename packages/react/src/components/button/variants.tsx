@@ -1,4 +1,9 @@
-import { ButtonAction, ButtonVariant, IconName } from "@marwes-ui/core"
+import {
+  ButtonAction,
+  ButtonVariant,
+  IconName,
+  createPurposeSemanticAttributes,
+} from "@marwes-ui/core"
 import { Button, type ButtonProps } from "./button"
 
 type PurposeButtonForbiddenProp = "variant" | "action" | "as"
@@ -70,6 +75,18 @@ function omitButtonProps(
   return forwardedProps as ButtonProps
 }
 
+function createPurposeButtonDataAttributes(
+  purpose: Parameters<typeof createPurposeSemanticAttributes>[0],
+  existingDataAttributes: ButtonProps["dataAttributes"],
+  localDataAttributes: ButtonProps["dataAttributes"] = {},
+): Record<string, string | boolean | undefined> {
+  return {
+    ...existingDataAttributes,
+    ...createPurposeSemanticAttributes(purpose),
+    ...localDataAttributes,
+  }
+}
+
 /**
  * Purpose Components — Button
  *
@@ -105,12 +122,13 @@ export function DestructiveButton(props: DestructiveButtonProps) {
       action={ButtonAction.delete}
       error
       confirmation={confirmation}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "destructive",
-        "data-destructive": "true",
-        "data-confirmation-required": confirmation ? "true" : "false",
-      }}
+      dataAttributes={createPurposeButtonDataAttributes(
+        "destructive",
+        forwardedProps.dataAttributes,
+        {
+          "data-confirmation-required": confirmation ? "true" : "false",
+        },
+      )}
     />
   )
 }
@@ -133,11 +151,9 @@ export function CreateButton(props: CreateButtonProps) {
       {...forwardedProps}
       action={ButtonAction.create}
       variant={ButtonVariant.primary}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "create",
+      dataAttributes={createPurposeButtonDataAttributes("create", forwardedProps.dataAttributes, {
         "data-creative": "true",
-      }}
+      })}
     />
   )
 }
@@ -161,11 +177,7 @@ export function SubmitButton(props: SubmitButtonProps) {
       as="button"
       action={ButtonAction.submit}
       variant={ButtonVariant.primary}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "submit",
-        "data-context": "form-submit",
-      }}
+      dataAttributes={createPurposeButtonDataAttributes("submit", forwardedProps.dataAttributes)}
     />
   )
 }
@@ -188,11 +200,9 @@ export function CancelButton(props: CancelButtonProps) {
       {...forwardedProps}
       action={ButtonAction.cancel}
       variant={ButtonVariant.neutral}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "cancel",
+      dataAttributes={createPurposeButtonDataAttributes("cancel", forwardedProps.dataAttributes, {
         "data-cancel": "true",
-      }}
+      })}
     />
   )
 }
@@ -218,11 +228,13 @@ export function LinkButton(props: LinkButtonProps) {
       as="a"
       action={ButtonAction.navigate}
       variant={ButtonVariant.text}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "navigation",
-        "data-navigation": "true",
-      }}
+      dataAttributes={createPurposeButtonDataAttributes(
+        "navigation",
+        forwardedProps.dataAttributes,
+        {
+          "data-navigation": "true",
+        },
+      )}
     />
   )
 }
@@ -245,11 +257,9 @@ export function SaveButton(props: SaveButtonProps) {
       {...forwardedProps}
       action={ButtonAction.submit}
       variant={ButtonVariant.primary}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "save",
+      dataAttributes={createPurposeButtonDataAttributes("save", forwardedProps.dataAttributes, {
         "data-persist": "true",
-      }}
+      })}
     />
   )
 }
@@ -273,11 +283,7 @@ export function ConfirmButton(props: ConfirmButtonProps) {
       as="button"
       action={ButtonAction.button}
       variant={ButtonVariant.success}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "confirm",
-        "data-outcome": "positive",
-      }}
+      dataAttributes={createPurposeButtonDataAttributes("confirm", forwardedProps.dataAttributes)}
     />
   )
 }
@@ -302,12 +308,9 @@ export function VerifyButton(props: VerifyButtonProps) {
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
       iconRight={forwardedProps.iconRight ?? IconName.CheckCircle}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "verify",
-        "data-outcome": "positive",
+      dataAttributes={createPurposeButtonDataAttributes("verify", forwardedProps.dataAttributes, {
         "data-verification": "true",
-      }}
+      })}
     />
   )
 }
@@ -331,11 +334,9 @@ export function EditButton(props: EditButtonProps) {
       action={ButtonAction.edit}
       variant={ButtonVariant.secondary}
       iconRight={forwardedProps.iconRight ?? IconName.Edit}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "edit",
+      dataAttributes={createPurposeButtonDataAttributes("edit", forwardedProps.dataAttributes, {
         "data-edit": "true",
-      }}
+      })}
     />
   )
 }
@@ -358,11 +359,9 @@ export function CloseButton(props: CloseButtonProps) {
       {...forwardedProps}
       action={ButtonAction.cancel}
       variant={ButtonVariant.neutral}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "close",
+      dataAttributes={createPurposeButtonDataAttributes("close", forwardedProps.dataAttributes, {
         "data-close": "true",
-      }}
+      })}
     />
   )
 }
@@ -386,11 +385,9 @@ export function RefreshButton(props: RefreshButtonProps) {
       action={ButtonAction.button}
       variant={ButtonVariant.neutral}
       iconRight={forwardedProps.iconRight ?? IconName.RefreshCw}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "refresh",
+      dataAttributes={createPurposeButtonDataAttributes("refresh", forwardedProps.dataAttributes, {
         "data-refresh": "true",
-      }}
+      })}
     />
   )
 }
@@ -414,11 +411,9 @@ export function UploadButton(props: UploadButtonProps) {
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
       iconRight={forwardedProps.iconRight ?? IconName.Upload}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "upload",
+      dataAttributes={createPurposeButtonDataAttributes("upload", forwardedProps.dataAttributes, {
         "data-transfer": "upload",
-      }}
+      })}
     />
   )
 }
@@ -438,11 +433,9 @@ export function DownloadButton(props: DownloadButtonProps) {
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
       iconRight={forwardedProps.iconRight ?? IconName.Download}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "download",
+      dataAttributes={createPurposeButtonDataAttributes("download", forwardedProps.dataAttributes, {
         "data-transfer": "download",
-      }}
+      })}
     />
   )
 }
@@ -461,11 +454,9 @@ export function CopyButton(props: CopyButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.neutral}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "copy",
+      dataAttributes={createPurposeButtonDataAttributes("copy", forwardedProps.dataAttributes, {
         "data-copy": "true",
-      }}
+      })}
     />
   )
 }
@@ -485,11 +476,9 @@ export function SearchButton(props: SearchButtonProps) {
       action={ButtonAction.button}
       variant={ButtonVariant.primary}
       iconRight={forwardedProps.iconRight ?? IconName.Search}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "search",
+      dataAttributes={createPurposeButtonDataAttributes("search", forwardedProps.dataAttributes, {
         "data-search": "true",
-      }}
+      })}
     />
   )
 }
@@ -508,11 +497,9 @@ export function FilterButton(props: FilterButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.neutral}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "filter",
+      dataAttributes={createPurposeButtonDataAttributes("filter", forwardedProps.dataAttributes, {
         "data-filter": "true",
-      }}
+      })}
     />
   )
 }
@@ -531,11 +518,9 @@ export function SortButton(props: SortButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.neutral}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "sort",
+      dataAttributes={createPurposeButtonDataAttributes("sort", forwardedProps.dataAttributes, {
         "data-sort": "true",
-      }}
+      })}
     />
   )
 }
@@ -555,11 +540,9 @@ export function DropdownButton(props: DropdownButtonProps) {
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
       iconRight={forwardedProps.iconRight ?? IconName.ChevronDown}
-      dataAttributes={{
-        ...forwardedProps.dataAttributes,
-        "data-purpose": "dropdown",
+      dataAttributes={createPurposeButtonDataAttributes("dropdown", forwardedProps.dataAttributes, {
         "data-dropdown": "true",
-      }}
+      })}
     />
   )
 }
@@ -606,11 +589,7 @@ export function SuccessButton(props: SuccessButtonProps) {
       {...props}
       variant="success"
       as="button"
-      dataAttributes={{
-        ...props.dataAttributes,
-        "data-purpose": "success",
-        "data-outcome": "positive",
-      }}
+      dataAttributes={createPurposeButtonDataAttributes("success", props.dataAttributes)}
     />
   )
 }

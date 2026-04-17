@@ -12,12 +12,14 @@ Framework-agnostic Marwes core: theme system, typed component recipes, and a11y 
 - No React/Vue rendering.
 - No preset CSS authoring.
 - No runtime styling engine.
+- No browser DOM mutation or font injection.
 
 ## Public API
 Theme engine:
 - `lightThemeDefaults` / `darkThemeDefaults`
 - `resolveThemeInput`
-- `themeToCSSVars` / `applyTheme`
+- `themeToCSSVars`
+- Pure font helpers such as `buildGoogleFontsUrl`, `extractFontFamilyName`, `isSystemFont`, `extractUsedWeights`
 - Types: `Theme`, `ThemeMode`, `ThemeInput`, `ThemeInputColor`, `ResolvedTheme`, `ColorRole`, `SecondaryColorRole`, `ColorInput`, `CssVars`
 
 Atoms (recipes + types):

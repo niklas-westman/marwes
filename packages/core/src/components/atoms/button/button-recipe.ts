@@ -1,3 +1,4 @@
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveButtonA11y } from "./button-a11y"
 import { resolveButtonLoading } from "./button-loading"
 import type { ButtonOptions, ButtonRenderKit } from "./button-types"
@@ -32,10 +33,11 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
       .filter(Boolean)
       .join(" "),
     dataAttributes: {
-      "data-component": "button",
-      "data-action": action,
-      "data-variant": variant,
-      "data-size": size,
+      ...createFamilySemanticAttributes("button", {
+        "data-action": action,
+        "data-variant": variant,
+        "data-size": size,
+      }),
       "data-error": opts.error ? "true" : undefined,
       ...opts.dataAttributes,
     },

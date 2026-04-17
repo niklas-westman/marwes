@@ -15,7 +15,7 @@ Storybook is the primary environment for:
 
 ```bash
 # From monorepo root
-pnpm dev:storybook
+pnpm dev:storybook:react
 
 # Or from this directory
 pnpm storybook
@@ -57,8 +57,9 @@ Storybook is configured to resolve workspace packages as if installed:
 import { Button } from '../../../packages/react/src/components/button'
 
 // Use package names:
-import { Button } from '@marwes-ui/react'
-import { firstEdition } from '@marwes-ui/presets'
+import { Button, MarwesProvider } from '@marwes-ui/react'
+import { firstEditionTheme } from '@marwes-ui/presets'
+import '@marwes-ui/presets/firstEdition/styles.css'
 import { createButtonRecipe } from '@marwes-ui/core'
 ```
 
@@ -77,21 +78,30 @@ import { createButtonRecipe } from '@marwes-ui/core'
 ### Basic Story Example
 
 ```tsx
-// src/stories/button.stories.tsx
+// src/stories/button/button.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from '@marwes-ui/react'
+import { Button, MarwesProvider } from '@marwes-ui/react'
+import { firstEditionTheme } from '@marwes-ui/presets'
+import '@marwes-ui/presets/firstEdition/styles.css'
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Buttons/Atom/Button',
   component: Button,
+  decorators: [
+    (Story) => (
+      <MarwesProvider theme={firstEditionTheme}>
+        <Story />
+      </MarwesProvider>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
-    tone: {
+    variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'danger'],
+      options: ['primary', 'secondary', 'neutral', 'text', 'success'],
     },
   },
 } satisfies Meta<typeof Button>
@@ -102,7 +112,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     children: 'Primary Button',
-    tone: 'primary',
+    variant: 'primary',
   },
 }
 ```

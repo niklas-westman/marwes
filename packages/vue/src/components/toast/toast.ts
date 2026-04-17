@@ -58,6 +58,7 @@ export const Toast = defineComponent(
         "div",
         {
           ...passthroughAttrs,
+          ...renderKit.dataAttributes,
           ...(props.dataAttributes ?? {}),
           id: props.id,
           class: className,

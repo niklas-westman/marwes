@@ -28,9 +28,10 @@ Marwes is a component system that prioritizes:
 
 ## 3. Core Principles
 - Simple surface API, strong internal consistency
-- Core is framework agnostic (no React, no DOM runtime behavior)
+- Core is framework agnostic (no React, no Vue, no browser runtime behavior)
 - Presets are static CSS (`.mw-*` classes and `--mw-*` vars)
 - Accessibility behavior is authored in core
+- Semantic metadata is source-owned in core for covered families
 - Strict TypeScript (no `any`)
 
 ## 4. Architecture Contract
@@ -43,6 +44,7 @@ Marwes uses three layers:
    - Static CSS and preset defaults
 3. Framework adapters (`@marwes-ui/react`, `@marwes-ui/vue`)
    - Thin adapters that apply core RenderKit output
+   - Own browser runtime effects such as provider theme DOM sync and font loading
 
 ### RenderKit Contract
 Core recipes return:
@@ -65,6 +67,7 @@ Adapter requirements:
 - Apply `style={vars}`
 - Apply typed `a11y`
 - Respect `policy`
+- Emit registry-defined semantic attributes for covered families
 
 ## 5. Active Scope
 ### In Scope
@@ -154,6 +157,13 @@ Use this format when resolving an open decision:
 - Accessibility baseline: WCAG 2.1 AA
 - Core runtime dependencies: zero
 - Styling contract: static CSS + CSS variables
+
+## 11.1 Semantic protocol requirements
+- Canonical semantic vocabulary is defined in `@marwes-ui/core`
+- Covered families must not invent divergent React/Vue semantic values
+- `data-component` and purpose-level semantics are part of the public contract for covered families
+- Family-local data attributes may exist, but are not automatically canonical protocol fields
+- The canonical reference for semantic metadata is `docs/reference/ai-metadata.md`
 
 ## 12. Component Requirements
 

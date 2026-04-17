@@ -19,6 +19,7 @@ export function Badge(props: BadgeProps): React.ReactElement {
       id={id}
       className={[kit.className, className].filter(Boolean).join(" ")}
       aria-label={kit.a11y.ariaLabel}
+      {...kit.dataAttributes}
       {...dataAttributes}
     >
       {children}

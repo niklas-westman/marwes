@@ -1,9 +1,9 @@
 # @marwes-ui/presets
 
-Design presets for Marwes. Presets define theme defaults and static CSS for component classnames.
+Design presets for Marwes. This package provides preset theme objects and static CSS for component classnames.
 
 ## Responsibilities
-- Provide preset objects (currently `firstEdition`).
+- Provide preset theme objects (currently `firstEditionTheme`).
 - Provide static CSS for `.mw-*` classnames.
 - Map semantic theme values to visual styles with CSS variables.
 
@@ -14,17 +14,17 @@ Design presets for Marwes. Presets define theme defaults and static CSS for comp
 
 ## Install and Use
 ```tsx
-import { MarwesProvider } from "@marwes-ui/react";
-import { firstEdition } from "@marwes-ui/presets";
-import "@marwes-ui/presets/firstEdition/styles.css";
+import { MarwesProvider } from "@marwes-ui/react"
+import { firstEditionTheme } from "@marwes-ui/presets"
+import "@marwes-ui/presets/firstEdition/styles.css"
 
-<MarwesProvider preset={firstEdition}>
+<MarwesProvider theme={firstEditionTheme}>
   <App />
-</MarwesProvider>;
+</MarwesProvider>
 ```
 
-## firstEdition
-Preset definition:
+## firstEditionTheme
+Preset theme definition:
 - `src/firstEdition/index.ts`
 
 Main stylesheet:

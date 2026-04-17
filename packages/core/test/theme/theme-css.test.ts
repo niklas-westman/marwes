@@ -1,10 +1,10 @@
-import { describe, expect, it, vi } from "vitest"
+import { describe, expect, it } from "vitest"
 import {
   resolveColorRole,
   resolveInfoRole,
   resolveSecondaryRole,
 } from "../../src/theme/color-resolve"
-import { applyTheme, themeToCSSVars } from "../../src/theme/theme-css"
+import { themeToCSSVars } from "../../src/theme/theme-css"
 import type { ResolvedTheme } from "../../src/theme/theme-css"
 
 // ─── Fixture ──────────────────────────────────────────────────────────────────
@@ -303,55 +303,5 @@ describe("themeToCSSVars — total key count", () => {
 
   it("does not emit --mw-ui-variant", () => {
     expect("--mw-ui-variant" in themeToCSSVars(fixture)).toBe(false)
-  })
-})
-
-// ─── Ticket 2: applyTheme ─────────────────────────────────────────────────────
-
-describe("applyTheme", () => {
-  it("sets data-marwes-theme attribute on element", () => {
-    const setAttribute = vi.fn()
-    const setProperty = vi.fn()
-    const el = { setAttribute, style: { setProperty } } as unknown as HTMLElement
-
-    applyTheme(el, fixture)
-
-    expect(setAttribute).toHaveBeenCalledWith("data-marwes-theme", "true")
-  })
-
-  it("calls style.setProperty for --mw-color-primary-base", () => {
-    const setAttribute = vi.fn()
-    const setProperty = vi.fn()
-    const el = { setAttribute, style: { setProperty } } as unknown as HTMLElement
-
-    applyTheme(el, fixture)
-
-    expect(setProperty).toHaveBeenCalledWith("--mw-color-primary-base", primary.base)
-  })
-
-  it("calls style.setProperty exactly 86 times", () => {
-    const setAttribute = vi.fn()
-    const setProperty = vi.fn()
-    const el = { setAttribute, style: { setProperty } } as unknown as HTMLElement
-
-    applyTheme(el, fixture)
-
-    expect(setProperty).toHaveBeenCalledTimes(86)
-  })
-
-  it("sets backgroundColor to the resolved background color", () => {
-    const el = { setAttribute: vi.fn(), style: { setProperty: vi.fn() } } as unknown as HTMLElement
-
-    applyTheme(el, fixture)
-
-    expect((el.style as CSSStyleDeclaration).backgroundColor).toBe("#FFFFFF")
-  })
-
-  it("sets color to the resolved text color", () => {
-    const el = { setAttribute: vi.fn(), style: { setProperty: vi.fn() } } as unknown as HTMLElement
-
-    applyTheme(el, fixture)
-
-    expect((el.style as CSSStyleDeclaration).color).toBe("#141414")
   })
 })

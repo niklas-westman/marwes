@@ -1,14 +1,8 @@
 import type { ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
-import {
-  applyTheme,
-  extractFontFamilyName,
-  extractUsedWeights,
-  isSystemFont,
-  loadGoogleFont,
-  resolveThemeInput,
-} from "@marwes-ui/core"
+import { resolveThemeInput } from "@marwes-ui/core"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
+import { applyThemeToElement, loadThemeFonts } from "./runtime-theme"
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
@@ -23,12 +17,12 @@ export function MarwesProvider({ theme, onModeChange, children }: MarwesProvider
 
   React.useEffect(() => {
     if (rootRef.current) {
-      applyTheme(rootRef.current, resolved)
+      applyThemeToElement(rootRef.current, resolved)
     }
   }, [resolved])
 
   React.useEffect(() => {
-    loadNonSystemFonts(resolved)
+    loadThemeFonts(resolved)
   }, [resolved])
 
   return (
@@ -38,16 +32,4 @@ export function MarwesProvider({ theme, onModeChange, children }: MarwesProvider
       </div>
     </MarwesContext.Provider>
   )
-}
-
-function loadNonSystemFonts(resolved: ResolvedTheme): void {
-  const weights = extractUsedWeights(resolved.typography)
-  const fontStacks = [resolved.font.primary, resolved.font.secondary]
-
-  for (const stack of fontStacks) {
-    const familyName = extractFontFamilyName(stack)
-    if (familyName && !isSystemFont(familyName)) {
-      loadGoogleFont({ family: familyName, weights })
-    }
-  }
 }

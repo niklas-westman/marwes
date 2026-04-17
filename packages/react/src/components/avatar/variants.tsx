@@ -1,3 +1,4 @@
+import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { Avatar, type AvatarProps } from "./avatar"
 import { AvatarBadge, type AvatarBadgeProps } from "./avatar-badge"
@@ -11,7 +12,7 @@ export function ProfileAvatar(props: ProfileAvatarProps): React.ReactElement {
       {...props}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "profile",
+        ...createPurposeSemanticAttributes("profile"),
       }}
     />
   )
@@ -25,7 +26,7 @@ export function PresenceAvatar(props: PresenceAvatarProps): React.ReactElement {
       {...props}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "presence",
+        ...createPurposeSemanticAttributes("presence"),
       }}
     />
   )
@@ -39,7 +40,7 @@ export function TeamAvatarGroup(props: TeamAvatarGroupProps): React.ReactElement
       {...props}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "team",
+        ...createPurposeSemanticAttributes("team"),
       }}
     />
   )

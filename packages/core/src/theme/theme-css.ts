@@ -144,20 +144,3 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-typography-paragraph-lg-line-height": `${typography.paragraph.lg.lineHeight}`,
   }
 }
-
-// ─── applyTheme ───────────────────────────────────────────────────────────────
-
-/**
- * Stamps `data-marwes-theme="true"` on the element (D6 scope selector) and
- * sets all 86 CSS variables via style.setProperty. Called by MarwesProvider
- * on mount and whenever the resolved theme changes.
- */
-export function applyTheme(element: HTMLElement, theme: ResolvedTheme): void {
-  element.setAttribute("data-marwes-theme", "true")
-  const vars = themeToCSSVars(theme)
-  for (const [property, value] of Object.entries(vars)) {
-    element.style.setProperty(property, value)
-  }
-  element.style.backgroundColor = theme.color.background
-  element.style.color = theme.color.text
-}

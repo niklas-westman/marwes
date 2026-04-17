@@ -1,4 +1,4 @@
-import { IconName } from "@marwes-ui/core"
+import { IconName, createPurposeSemanticAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { Icon } from "../icon"
 import { Toast, type ToastProps } from "./toast"
@@ -18,8 +18,7 @@ export function SuccessToast(props: SuccessToastProps): React.ReactElement {
       icon={props.icon ?? getDefaultIcon(IconName.Check)}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "success-toast",
-        "data-intent": "success",
+        ...createPurposeSemanticAttributes("success-toast"),
       }}
     />
   )
@@ -36,8 +35,7 @@ export function ErrorToast(props: ErrorToastProps): React.ReactElement {
       icon={props.icon ?? getDefaultIcon(IconName.XCircle)}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "error-toast",
-        "data-intent": "error",
+        ...createPurposeSemanticAttributes("error-toast"),
       }}
     />
   )
@@ -54,8 +52,7 @@ export function WarningToast(props: WarningToastProps): React.ReactElement {
       icon={props.icon ?? getDefaultIcon(IconName.AlertTriangle)}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "warning-toast",
-        "data-intent": "warning",
+        ...createPurposeSemanticAttributes("warning-toast"),
       }}
     />
   )
@@ -72,8 +69,7 @@ export function InfoToast(props: InfoToastProps): React.ReactElement {
       icon={props.icon ?? getDefaultIcon(IconName.Info)}
       dataAttributes={{
         ...props.dataAttributes,
-        "data-purpose": "info-toast",
-        "data-intent": "info",
+        ...createPurposeSemanticAttributes("info-toast"),
       }}
     />
   )

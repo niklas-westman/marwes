@@ -22,7 +22,7 @@ import { MarwesProvider, Button, ButtonVariant, Input, Checkbox } from "@marwes-
 import { firstEditionTheme } from "@marwes-ui/presets";
 import "@marwes-ui/presets/firstEdition/styles.css";
 
-// Drop-in — full firstEdition look out of the box
+// Drop-in — load the firstEdition theme object and matching preset CSS
 export function App() {
   return (
     <MarwesProvider theme={firstEditionTheme}>
@@ -123,7 +123,7 @@ When enabled, `useRenderKitDebug` dispatches `marwes/renderkit/renderkit-update`
 If design changes originate in Figma, align token/state mapping with:
 - `../../docs/guides/figma-to-marwes.md`
 
-Most Figma changes should land in core theme/recipes and presets CSS first, then flow into React automatically.
+Most Figma changes should land in core theme/recipes and preset CSS first, then flow into React automatically.
 
 ## Scripts
 - `pnpm --filter @marwes-ui/react dev`
