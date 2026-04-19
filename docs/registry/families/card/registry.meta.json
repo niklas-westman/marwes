@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "card",
+  "displayName": "Card",
+  "status": "shipped",
+  "summary": "Family-local surface-container family with a raw Card atom and thin purpose-card wrappers for product, profile, and stat summaries.",
+  "philosophy": [
+    "Teach purpose cards first when the product meaning is known and keep the raw Card atom as the flexible surface primitive.",
+    "Keep the base card non-interactive and composition-friendly rather than letting card styling imply button or link semantics on its own.",
+    "Keep local card metadata honest: the atom emits stable data-component output from core, while purpose-card metadata lives in the adapters today.",
+    "Treat the current Figma page as the visual baseline for container states, while Storybook and product code own the meaning of the purpose wrappers."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a bordered content surface with optional title and flexible body composition.",
+      "The product flow clearly maps to ProductCard, ProfileCard, or StatCard and benefits from local purpose metadata.",
+      "The team wants React and Vue card rendering to stay aligned through one simple core recipe and shared Storybook teaching surfaces."
+    ],
+    "avoidWhen": [
+      "The surface is really an interactive tile, navigation link, or button-like control that should own explicit interactive semantics.",
+      "The layout needs richer substructure such as actions, dismiss behavior, notifications, or multi-region shells beyond the current card atom contract.",
+      "The team expects the exploratory notification-card design material to be part of the shipped Card family today."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core recipe tests for the stable card class, data-component marker, and custom data-attribute merging.",
+      "Local React and Vue atom tests for title/body rendering and outer-element passthrough behavior.",
+      "Storybook introduction and taxonomy tests in both apps for atom and purpose-story coverage."
+    ],
+    "manualReviewRequired": [
+      "Product-level judgment about when a card should stay passive versus becoming a real interactive control with button or link semantics.",
+      "Whether purpose-card wrappers stay honest summaries instead of absorbing richer behavior that belongs in a different family.",
+      "Any future expansion toward notification-card or richer shell patterns beyond the current simple surface container."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Card is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family has core, adapter, and Storybook coverage, but it does not yet have a shared tests/contracts card contract file."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/card/Introduction.mdx",
+        "apps/storybook-react/src/stories/card/card.stories.tsx",
+        "apps/storybook-react/src/stories/card/product-card.stories.tsx",
+        "apps/storybook-react/src/stories/card/profile-card.stories.tsx",
+        "apps/storybook-react/src/stories/card/stat-card.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/card/Introduction.mdx",
+        "apps/storybook-vue/src/stories/card/card.stories.ts",
+        "apps/storybook-vue/src/stories/card/product-card.stories.ts",
+        "apps/storybook-vue/src/stories/card/profile-card.stories.ts",
+        "apps/storybook-vue/src/stories/card/stat-card.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "default",
+      "hover",
+      "pressed",
+      "disabled",
+      "focus",
+      "body-only",
+      "product-card",
+      "profile-card",
+      "stat-card",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should Card eventually gain a shared tests/contracts card contract file, or is the current local test coverage enough for this low-risk family?",
+    "If teams need richer notification or alert surfaces, should that become a separate family instead of expanding the current passive Card contract?"
+  ]
+}

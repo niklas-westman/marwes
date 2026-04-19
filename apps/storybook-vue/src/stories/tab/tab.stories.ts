@@ -41,6 +41,13 @@ export const Disabled: Story = {
   }),
 }
 
+export const IconOnly: Story = {
+  render: () => ({
+    components: { Tab },
+    template: `<Tab ariaLabel="Settings" ariaControls="panel-settings"><span aria-hidden="true">⚙️</span></Tab>`,
+  }),
+}
+
 export const TabList: Story = {
   render: () => ({
     components: { Tab },

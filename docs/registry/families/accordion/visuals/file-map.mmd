@@ -1,0 +1,23 @@
+flowchart TD
+  Registry["docs/registry/families/accordion"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/accordion/"]
+  Core --> CoreFiles["accordion-a11y.ts accordion-recipe.ts accordion-types.ts"]
+  Helpers["packages/core/src/shared/field-helpers.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> AtomCss["accordion.css"]
+  Presets --> FieldCss["molecules/accordion-field.css"]
+
+  React["packages/react/src/components/accordion/"]
+  React --> ReactFiles["accordion.tsx accordion-field.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/accordion/"]
+  Vue --> VueFiles["accordion.ts accordion-field.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/accordion/"]
+  StoriesV["apps/storybook-vue/src/stories/accordion/"]
+  Contracts["tests/contracts/accordion.contract.ts"]

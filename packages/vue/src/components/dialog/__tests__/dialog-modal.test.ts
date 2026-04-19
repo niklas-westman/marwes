@@ -2,6 +2,7 @@ import userEvent from "@testing-library/user-event"
 import { render, screen, waitFor } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h, ref } from "vue"
+import { runDialogModalContract } from "../../../../../../tests/contracts/dialog-modal.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { DialogModal } from "../dialog-modal"
 
@@ -18,37 +19,53 @@ function renderWithProvider(child: () => unknown) {
   )
 }
 
-describe("Vue DialogModal", () => {
-  it("renders a labeled modal dialog with description and footer actions", () => {
-    renderWithProvider(() =>
+runDialogModalContract("vue", {
+  renderOpenDialogModal(args = {}) {
+    renderWithProvider(() => [
+      h(
+        "button",
+        {
+          type: "button",
+        },
+        "Outside",
+      ),
       h(
         DialogModal,
         {
           open: true,
           portalTarget: null,
-          title: "Archive project",
-          description: "Archiving hides the project from active views.",
-          footer: [
-            h("button", { type: "button" }, "Cancel"),
-            h("button", { type: "button" }, "Archive"),
-          ],
+          title: args.title,
+          description: args.description,
+          ariaLabel: args.ariaLabel,
+          dismissible: args.dismissible,
+          closeOnEscape: args.closeOnEscape,
+          closeOnScrimClick: args.closeOnScrimClick,
+          "onUpdate:open": args.onOpenChange,
+          footer:
+            args.showFooter === false
+              ? undefined
+              : [
+                  h("button", { type: "button" }, "Cancel"),
+                  h("button", { type: "button" }, "Confirm"),
+                ],
         },
         {
-          default: () => [h("p", null, "Project Phoenix will move to the archive.")],
+          default: () =>
+            args.includeInput
+              ? [h("input", { "aria-label": "Workspace name", value: "Acme" })]
+              : [h("p", null, "Dialog content")],
         },
       ),
-    )
-
-    const dialog = screen.getByRole("dialog", { name: /archive project/i })
-    expect(dialog.getAttribute("aria-describedby")).toContain("description")
-    expect(screen.getByText("Project Phoenix will move to the archive.")).toBeTruthy()
-    expect(screen.getByRole("button", { name: /close dialog/i })).toBeTruthy()
-    expect(dialog.querySelector(".mw-dialog__footer")).not.toBeNull()
-  })
-
-  it("supports backdrop dismissal and restores focus to the trigger", async () => {
-    const user = userEvent.setup()
-
+      h(
+        "button",
+        {
+          type: "button",
+        },
+        "After dialog",
+      ),
+    ])
+  },
+  renderTriggerDialogModal(args = {}) {
     const Example = defineComponent({
       setup() {
         const open = ref(false)
@@ -69,15 +86,17 @@ describe("Vue DialogModal", () => {
             {
               open: open.value,
               portalTarget: null,
+              title: args.title,
+              description: args.description,
+              restoreFocus: args.restoreFocus,
+              closeOnScrimClick: args.closeOnScrimClick,
+              footer: h("button", { type: "button" }, "Done"),
               "onUpdate:open": (nextOpen: boolean) => {
                 open.value = nextOpen
               },
-              title: "Invite teammate",
-              description: "Send an email invitation.",
-              footer: h("button", { type: "button" }, "Done"),
             },
             {
-              default: () => [h("p", null, "Choose a role before sending the invite.")],
+              default: () => [h("p", null, "Dialog content")],
             },
           ),
         ]
@@ -85,62 +104,95 @@ describe("Vue DialogModal", () => {
     })
 
     renderWithProvider(() => h(Example))
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  queryByRole(role, options) {
+    return screen.queryByRole(role, options)
+  },
+  getScrim() {
+    const scrim = document.querySelector(".mw-dialog-modal__scrim")
 
-    const trigger = screen.getByRole("button", { name: /open dialog/i })
-    trigger.focus()
+    if (!(scrim instanceof HTMLElement)) {
+      throw new Error("Expected dialog scrim to exist")
+    }
 
-    await user.click(trigger)
+    return scrim
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
+  async tab(options) {
+    await userEvent.setup().tab(options)
+  },
+  async keyboard(text) {
+    await userEvent.setup().keyboard(text)
+  },
+  waitFor(assertion) {
+    return waitFor(assertion)
+  },
+})
 
-    expect(screen.getByRole("dialog", { name: /invite teammate/i })).toBeTruthy()
+describe("Vue DialogModal specifics", () => {
+  it("does not request close on Escape when escape dismissal is disabled", async () => {
+    const emittedValues: boolean[] = []
+
+    renderWithProvider(() =>
+      h(
+        DialogModal,
+        {
+          open: true,
+          portalTarget: null,
+          title: "Rename workspace",
+          closeOnEscape: false,
+          footer: h("button", { type: "button" }, "Save"),
+          "onUpdate:open": (open: boolean) => {
+            emittedValues.push(open)
+          },
+        },
+        {
+          default: () => [h("input", { "aria-label": "Workspace name", value: "Acme" })],
+        },
+      ),
+    )
+
+    await userEvent.setup().keyboard("{Escape}")
+
+    expect(emittedValues).toEqual([])
+    expect(screen.getByRole("dialog", { name: /rename workspace/i })).toBeInTheDocument()
+  })
+
+  it("does not request close on scrim click when scrim dismissal is disabled", async () => {
+    const emittedValues: boolean[] = []
+
+    renderWithProvider(() =>
+      h(
+        DialogModal,
+        {
+          open: true,
+          portalTarget: null,
+          title: "Invite teammate",
+          closeOnScrimClick: false,
+          footer: h("button", { type: "button" }, "Done"),
+          "onUpdate:open": (open: boolean) => {
+            emittedValues.push(open)
+          },
+        },
+        {
+          default: () => [h("p", null, "Choose a role before sending the invite.")],
+        },
+      ),
+    )
 
     const scrim = document.querySelector(".mw-dialog-modal__scrim")
     if (!(scrim instanceof HTMLElement)) {
       throw new Error("Expected dialog scrim to exist")
     }
 
-    await user.click(scrim)
+    await userEvent.setup().click(scrim)
 
-    await waitFor(() => {
-      expect(screen.queryByRole("dialog", { name: /invite teammate/i })).toBeNull()
-      expect(document.activeElement).toBe(trigger)
-    })
-  })
-
-  it("supports escape dismissal", async () => {
-    const user = userEvent.setup()
-
-    const Example = defineComponent({
-      setup() {
-        const open = ref(true)
-
-        return () =>
-          h(
-            DialogModal,
-            {
-              open: open.value,
-              portalTarget: null,
-              "onUpdate:open": (nextOpen: boolean) => {
-                open.value = nextOpen
-              },
-              title: "Rename workspace",
-              description: "Update the workspace name for all collaborators.",
-              footer: h("button", { type: "button" }, "Save"),
-            },
-            {
-              default: () => [h("input", { "aria-label": "Workspace name", value: "Acme" })],
-            },
-          )
-      },
-    })
-
-    renderWithProvider(() => h(Example))
-
-    expect(screen.getByRole("dialog", { name: /rename workspace/i })).toBeTruthy()
-
-    await user.keyboard("{Escape}")
-
-    await waitFor(() => {
-      expect(screen.queryByRole("dialog", { name: /rename workspace/i })).toBeNull()
-    })
+    expect(emittedValues).toEqual([])
+    expect(screen.getByRole("dialog", { name: /invite teammate/i })).toBeInTheDocument()
   })
 })

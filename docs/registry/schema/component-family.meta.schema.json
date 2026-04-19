@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Component Family Registry Meta",
+  "type": "object",
+  "required": [
+    "family",
+    "displayName",
+    "status",
+    "summary",
+    "philosophy",
+    "usage",
+    "axe",
+    "visuals"
+  ],
+  "properties": {
+    "family": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["planned", "in-progress", "shipped", "deprecated"]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "philosophy": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "usage": {
+      "type": "object",
+      "required": ["useWhen", "avoidWhen"],
+      "properties": {
+        "useWhen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avoidWhen": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "axe": {
+      "type": "object",
+      "required": [
+        "riskTier",
+        "auditStatus",
+        "automationCovers",
+        "manualReviewRequired",
+        "roadmapAnchors"
+      ],
+      "properties": {
+        "riskTier": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "auditStatus": {
+          "type": "string",
+          "enum": ["not-started", "queued", "in-progress", "first-pass-complete", "complete"]
+        },
+        "automationCovers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manualReviewRequired": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roadmapAnchors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "visuals": {
+      "type": "object",
+      "required": ["canonicalStories", "preferredStates"],
+      "properties": {
+        "canonicalStories": {
+          "type": "object",
+          "properties": {
+            "react": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vue": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "preferredStates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

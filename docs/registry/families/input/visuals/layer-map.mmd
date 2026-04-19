@@ -1,0 +1,29 @@
+flowchart LR
+  Figma["Figma refs\ninput fields + input otp"]
+  Spec["Spec + testing + AXE audit"]
+  Core["@marwes-ui/core\ninput, textarea, select, otp, rich-text"]
+  Helpers["field helpers\na11y id wiring"]
+  Presets["preset CSS\ninput, textarea, select, rich-text, otp"]
+  React["@marwes-ui/react\nfields + variants"]
+  Vue["@marwes-ui/vue\nfields + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared contracts"]
+  Registry["docs/registry/families/input"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Helpers
+  Helpers --> React
+  Helpers --> Vue
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import type * as React from "react"
-import { describe, expect, it, vi } from "vitest"
+import { describe, expect, it } from "vitest"
+import { runTabContract } from "../../../../../../tests/contracts/tab.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { TabGroup } from "../tab-group"
 
@@ -9,75 +10,58 @@ function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
 
-const testTabs = [
-  { value: "overview", label: "Overview", panel: "Overview panel" },
-  { value: "analytics", label: "Analytics", panel: "Analytics panel", disabled: true },
-  { value: "settings", label: "Settings", panel: "Settings panel" },
-]
-
-describe("TabGroup", () => {
-  it("renders a labeled tablist with the selected panel", () => {
+runTabContract("react", {
+  async renderTabGroup(args = {}) {
     renderWithProvider(
-      <TabGroup label="Account sections" tabs={testTabs} defaultActiveTab="overview" />,
+      <TabGroup
+        label={args.label}
+        ariaLabel={args.ariaLabel}
+        tabs={
+          args.tabs ?? [
+            { value: "overview", label: "Overview", panel: "Overview panel" },
+            {
+              value: "analytics",
+              label: "Analytics",
+              panel: "Analytics panel",
+              disabled: true,
+            },
+            { value: "settings", label: "Settings", panel: "Settings panel" },
+          ]
+        }
+        defaultActiveTab={args.defaultActiveTab}
+        activeTab={args.activeTab}
+        onActiveTabChange={args.onActiveTabChange}
+      />,
     )
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
+  async keyboard(text) {
+    await userEvent.setup().keyboard(text)
+  },
+})
 
-    const tablist = screen.getByRole("tablist", { name: /account sections/i })
-    expect(tablist).toBeTruthy()
-
-    const overviewTab = screen.getByRole("tab", { name: /overview/i })
-    expect(overviewTab.getAttribute("aria-selected")).toBe("true")
-
-    const panel = screen.getByRole("tabpanel")
-    expect(panel.textContent).toContain("Overview panel")
-    expect(panel.querySelector(".mw-p")).not.toBeNull()
-    expect(screen.getByText("Settings panel").closest("[hidden]")).not.toBeNull()
-  })
-
-  it("uses keyboard navigation and skips disabled tabs", async () => {
-    const user = userEvent.setup()
-    renderWithProvider(<TabGroup label="Account sections" tabs={testTabs} />)
-
-    const overviewTab = screen.getByRole("tab", { name: /overview/i })
-    overviewTab.focus()
-
-    await user.keyboard("{ArrowRight}")
-
-    const settingsTab = screen.getByRole("tab", { name: /settings/i })
-    expect(settingsTab.getAttribute("aria-selected")).toBe("true")
-    expect(document.activeElement).toBe(settingsTab)
-    expect(screen.getByRole("tabpanel").textContent).toContain("Settings panel")
-  })
-
-  it("supports controlled activeTab state", async () => {
-    const user = userEvent.setup()
-    const handleActiveTabChange = vi.fn()
-
+describe("React TabGroup specifics", () => {
+  it("wraps string panel content in a Paragraph inside the selected panel", () => {
     renderWithProvider(
       <TabGroup
         label="Account sections"
-        tabs={testTabs}
-        activeTab="overview"
-        onActiveTabChange={handleActiveTabChange}
+        tabs={[
+          { value: "overview", label: "Overview", panel: "Overview panel" },
+          { value: "settings", label: "Settings", panel: "Settings panel" },
+        ]}
+        defaultActiveTab="overview"
       />,
     )
 
-    await user.click(screen.getByRole("tab", { name: /settings/i }))
+    const panel = screen.getByRole("tabpanel")
 
-    expect(handleActiveTabChange).toHaveBeenCalledWith("settings")
-    expect(screen.getByRole("tabpanel").textContent).toContain("Overview panel")
-  })
-
-  it("does not activate disabled tabs when clicked", async () => {
-    const user = userEvent.setup()
-    renderWithProvider(
-      <TabGroup label="Account sections" tabs={testTabs} defaultActiveTab="overview" />,
-    )
-
-    await user.click(screen.getByRole("tab", { name: /analytics/i }))
-
-    expect(screen.getByRole("tab", { name: /overview/i }).getAttribute("aria-selected")).toBe(
-      "true",
-    )
-    expect(screen.getByRole("tabpanel").textContent).toContain("Overview panel")
+    expect(panel.textContent).toContain("Overview panel")
+    expect(panel.querySelector(".mw-p")).not.toBeNull()
+    expect(screen.getByText("Settings panel").closest("[hidden]")).not.toBeNull()
   })
 })

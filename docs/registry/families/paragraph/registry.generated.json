@@ -1,0 +1,117 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "paragraph",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/paragraph/index.ts",
+      "packages/core/src/components/atoms/paragraph/paragraph-recipe.ts",
+      "packages/core/src/components/atoms/paragraph/paragraph-types.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/typography.css"],
+    "react": [
+      "packages/react/src/components/paragraph/__tests__/paragraph.test.tsx",
+      "packages/react/src/components/paragraph/index.ts",
+      "packages/react/src/components/paragraph/paragraph.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/paragraph/__tests__/paragraph.test.ts",
+      "packages/vue/src/components/paragraph/index.ts",
+      "packages/vue/src/components/paragraph/paragraph.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/paragraph/__tests__/paragraph-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/paragraph/Introduction.mdx",
+      "apps/storybook-react/src/stories/paragraph/paragraph.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/paragraph/__tests__/paragraph-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/paragraph/Introduction.mdx",
+      "apps/storybook-vue/src/stories/paragraph/paragraph.stories.ts"
+    ],
+    "contracts": ["tests/contracts/paragraph.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "none",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/paragraph/paragraph-recipe.ts",
+      "packages/core/src/theme/theme-defaults.ts",
+      "packages/react/src/components/paragraph/paragraph.tsx",
+      "packages/vue/src/components/paragraph/paragraph.ts",
+      "tests/contracts/paragraph.contract.ts"
+    ],
+    "notes": [
+      "Paragraph relies on native p semantics rather than the wave-1 central semantic registry.",
+      "The family does not emit data-component or purpose metadata today; semantic meaning comes from the rendered paragraph element, while sizing comes from theme typography and the shared typography preset."
+    ]
+  },
+  "design": {
+    "componentJsons": [],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/tokens/typography.json",
+      ".figma/marwes/pages/-typography/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-typography/typography_1368-5656.json",
+      ".figma/marwes/pages/-typography/typography_1368-5677.json",
+      ".figma/marwes/pages/-typography/typography_1368-5698.json",
+      ".figma/marwes/pages/-typography/typography_1368-5717.json"
+    ],
+    "nodeReferences": {
+      "typographyLightSection": "1368:5656",
+      "typographyDarkSection": "1368:5677",
+      "bodyLightSection": "1368:5669",
+      "bodyMediumLightRow": "1368:5671",
+      "bodyDefaultLightRow": "1368:5742",
+      "bodyDarkSection": "1368:5690",
+      "bodyMediumDarkRow": "1368:5692",
+      "bodyDefaultDarkRow": "1368:5746",
+      "instrumentSansLightSection": "1368:5698",
+      "instrumentSansDarkSection": "1368:5717"
+    },
+    "figmaTokens": ["Body/Medium", "Body/Default", "Body/16 Paragraph", "P - Paragraph"],
+    "figmaStates": {
+      "baseVariants": ["paragraph", "body-default", "body-medium"],
+      "interactionStates": ["sm", "md", "lg", "light", "dark", "typography-scale", "long-form"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": false,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Paragraph relies on native p semantics rather than the wave-1 central semantic registry.",
+    "The family does not emit data-component or purpose metadata today; semantic meaning comes from the rendered paragraph element, while sizing comes from theme typography and the shared typography preset.",
+    "Generated from docs/registry/families/paragraph/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "accordion",
+  "displayName": "Accordion",
+  "status": "shipped",
+  "summary": "Grouped disclosure family with a low-level accordion atom, a canonical AccordionField path, and thin purpose-accordion wrappers.",
+  "philosophy": [
+    "Teach AccordionField as the canonical grouped disclosure surface and keep raw Accordion as the low-level escape hatch.",
+    "Keep trigger-to-panel wiring in core and grouped label or error wiring in shared helpers so React and Vue stay aligned.",
+    "Treat grouped invalid-state behavior on AccordionField as an explicit family choice rather than an accidental adapter detail.",
+    "Keep purpose-accordion wrappers thin and semantic so they add meaning without becoming a second accordion implementation."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs collapsible sections with grouped labeling, optional description, and optional error support.",
+      "The product flow maps clearly to FAQAccordion, SettingsAccordion, or SectionsAccordion and benefits from self-documenting purpose metadata.",
+      "The team wants React and Vue accordion behavior to stay aligned through shared core helpers and one contract file."
+    ],
+    "avoidWhen": [
+      "A different pattern such as tabs, dialog, or simple always-visible content is the more honest interaction model.",
+      "The implementation only needs a standalone disclosure but cannot own parent state coordination or surrounding list semantics.",
+      "The team expects advanced focus orchestration, nested accordion policy, or lazy mounting behavior that this family does not currently define."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared accordion contract coverage across React and Vue for trigger and panel wiring, disabled behavior, grouped field semantics, invalid-state wiring, and single-open or multi-open behavior.",
+      "Local variant tests for FAQ, settings, and sections purpose metadata in both adapters.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for grouped reading flow, focus visibility, and open-state comprehension.",
+      "Future decisions about which accordion stories should join stricter automated accessibility gates.",
+      "Whether purpose metadata should eventually move from package-local tests into the shared accordion contract."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#p2--second-component-audit-queue",
+      "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
+    ],
+    "notes": [
+      "Accordion completed a first-pass audit and now has an explicit spec-backed family contract.",
+      "The family still sits outside the wave-1 central semantic registry even though purpose wrappers already emit useful metadata."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/accordion/Introduction.mdx",
+        "apps/storybook-react/src/stories/accordion/accordion-field.stories.tsx",
+        "apps/storybook-react/src/stories/accordion/accordion.stories.tsx",
+        "apps/storybook-react/src/stories/accordion/faq-accordion.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/accordion/Introduction.mdx",
+        "apps/storybook-vue/src/stories/accordion/accordion-field.stories.ts",
+        "apps/storybook-vue/src/stories/accordion/accordion.stories.ts",
+        "apps/storybook-vue/src/stories/accordion/faq-accordion.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "collapsed",
+      "expanded",
+      "default",
+      "hover",
+      "pressed",
+      "disabled",
+      "focus",
+      "single-open",
+      "multi-open"
+    ]
+  },
+  "openQuestions": [
+    "Which Accordion-family stories should later join automated accessibility gates?",
+    "Should purpose-metadata behavior eventually move into the shared accordion contract, or remain package-local coverage?"
+  ]
+}

@@ -1,0 +1,30 @@
+flowchart TD
+  Registry["docs/registry/families/badge"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Semantics["packages/core/src/semantics/"]
+  Semantics --> FamilySemantics["family-semantics.ts"]
+  Semantics --> PurposeSemantics["purpose-semantics.ts"]
+
+  Core["packages/core/src/components/atoms/badge/"]
+  Core --> CoreFiles["badge-a11y.ts badge-recipe.ts badge-types.ts"]
+  StoriesCopy["packages/core/src/storybook/docs-copy.ts"]
+  CoreTests["packages/core/test/recipes/badge.test.ts"]
+  Core --> CoreTests
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> BadgeCss["badge.css"]
+
+  React["packages/react/src/components/badge/"]
+  React --> ReactFiles["badge.tsx badge-group.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/badge/"]
+  Vue --> VueFiles["badge.ts badge-group.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/badge/"]
+  StoriesR --> StoriesCopy
+  StoriesV["apps/storybook-vue/src/stories/badge/"]
+  StoriesV --> StoriesCopy
+  Contracts["tests/contracts/badge.contract.ts"]

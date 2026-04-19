@@ -185,7 +185,13 @@ A component is done when:
 - stories exist for the relevant states and variants
 - tests cover the key behavior
 - exports are wired
+- docs are updated to match the shipped behavior before the task is considered complete
 - `pnpm typecheck`, `pnpm lint`, `pnpm test`, and `pnpm build` pass
+
+For accessibility-family follow-up work, also update the tracking docs when the pass is complete:
+- the family audit doc in `docs/audits/`
+- `docs/audits/README.md`
+- `AXE_ROADMAP.md` when roadmap status changed
 
 ## Validation commands
 

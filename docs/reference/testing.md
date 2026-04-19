@@ -150,6 +150,35 @@ Manual:
 - screen reader naming and descriptions
 - disabled and invalid state behavior
 
+### Manual-review-heavy components
+
+Some components need stronger manual review even when automated checks pass.
+
+Current high-attention example:
+- `RichText` / `RichTextField`
+
+Why:
+- they rely on `contentEditable`
+- formatting state depends on browser editing behavior
+- formatting actions currently use `document.execCommand()` where available
+- assistive technology behavior can vary across browser and screen reader combinations
+
+What automation currently proves for rich text:
+- accessible naming and description wiring
+- disabled and read-only semantics
+- toolbar button semantics such as labels and pressed state
+- basic value flow and formatting affordances in adapter tests
+
+What still needs manual review for rich text:
+- keyboard editing behavior in real browsers
+- screen reader announcement quality during editing
+- formatting behavior consistency across supported environments
+- caret and selection behavior around formatting boundaries
+
+Rule of thumb:
+- use automated tests to protect the component contract
+- use manual review to validate the real editing experience
+
 ## Visual verification
 
 Marwes relies on Storybook for visual inspection and Chromatic-style review workflows where available.

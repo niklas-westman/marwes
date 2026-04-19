@@ -1,0 +1,21 @@
+flowchart LR
+  RawSlider["Raw Slider"] --> NativeRange["native input type=range"]
+  NativeRange --> ValueFlow["core-normalized min max step\ncontrolled or uncontrolled value flow"]
+  NativeRange --> VisualOnly["tooltip + touch-area visuals\ndo not replace naming"]
+
+  SliderField["SliderField"] --> LabelWiring["visible label via aria-labelledby"]
+  SliderField --> DescribedBy["description + error ids\nmerge into aria-describedby"]
+  SliderField --> InvalidState["error text sets aria-invalid"]
+  SliderField --> EdgeValues["top or inline edge values\nfor visible range context"]
+
+  Purpose["VolumeSlider / BrightnessSlider / RadiusSlider"] --> Semantics["family-local data-purpose metadata"]
+  Purpose --> SliderField
+
+  ValueFlow --> ReactDom["React DOM"]
+  ValueFlow --> VueDom["Vue DOM"]
+  LabelWiring --> ReactDom
+  LabelWiring --> VueDom
+  DescribedBy --> ReactDom
+  DescribedBy --> VueDom
+  Semantics --> ReactDom
+  Semantics --> VueDom

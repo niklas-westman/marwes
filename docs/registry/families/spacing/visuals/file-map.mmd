@@ -1,0 +1,23 @@
+flowchart TD
+  Registry["docs/registry/families/spacing"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/spacing/"]
+  Core --> CoreFiles["spacing.recipe.ts spacing.types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> SpacingCss["spacing.css"]
+  Presets --> TokensCss["tokens.css"]
+
+  React["packages/react/src/components/spacing/"]
+  React --> ReactFiles["spacing.tsx index.ts"]
+
+  Vue["packages/vue/src/components/spacing/"]
+  Vue --> VueFiles["spacing.ts index.ts"]
+
+  StoriesCore["packages/core/src/storybook/storybook-fixtures.ts"]
+  StoriesR["apps/storybook-react/src/stories/spacing/"]
+  StoriesV["apps/storybook-vue/src/stories/spacing/"]
+  AuditIndex["docs/audits/README.md"]

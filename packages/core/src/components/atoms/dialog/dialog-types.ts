@@ -9,6 +9,7 @@ export interface DialogOptions {
   size?: DialogSize
   showFooter?: boolean
   dismissible?: boolean
+  modal?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
@@ -17,7 +18,7 @@ export interface DialogOptions {
 
 export interface DialogA11yProps {
   role: "dialog"
-  ariaModal: true
+  ariaModal?: true
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string

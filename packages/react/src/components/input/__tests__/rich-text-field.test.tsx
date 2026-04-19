@@ -15,7 +15,7 @@ runRichTextFieldContract("react", {
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
-      editor: { ariaLabel: args.label },
+      editor: {},
     }
 
     renderWithProvider(<RichTextField {...fieldProps} />)

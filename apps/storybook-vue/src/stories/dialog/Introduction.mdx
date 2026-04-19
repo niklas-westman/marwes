@@ -12,6 +12,9 @@ Marwes provides dialogs at three layers: **purpose components** for common modal
 workflows, **DialogModal** for stateful overlay composition, and the raw
 **Dialog** atom for custom shells.
 
+`DialogModal` and the purpose wrappers are the canonical accessible modal paths.
+The raw `Dialog` atom is a non-modal shell by default.
+
 ## Recommended: Purpose Components
 
 Use purpose-built components when the dialog intent is already known:
@@ -92,12 +95,14 @@ import {
 - **Teleport + scrim** - renders above the app surface with an internal backdrop
 - **Controlled or uncontrolled state** - use `open` or `defaultOpen`
 - **Dismiss behavior** - supports close button, Escape, and scrim click rules
+- **Initial focus policy** - moves focus to the first focusable element, or to the dialog surface when no focusable child exists
 - **Focus restoration** - returns focus to the prior trigger when the modal closes
 
 ## Low-level: Dialog (Atom)
 
-Use the raw `Dialog` atom when parent code already owns the overlay and state
-management, or when you need a custom shell composition.
+Use the raw `Dialog` atom when parent code already owns the shell composition,
+or when you need a custom dialog layout without the built-in modal lifecycle.
+`Dialog` does not claim modal behavior by default.
 
 ```vue
 <script setup lang="ts">
@@ -111,6 +116,9 @@ import { CancelButton, ConfirmButton, Dialog, Paragraph } from "@marwes-ui/vue"
     <ConfirmButton>Confirm</ConfirmButton>
   </template>
 </Dialog>
+
+If parent code already provides the full modal boundary, pass `modal` intentionally
+and make sure that parent layer also owns focus management and background isolation.
 ```
 
 ## Component Reference
@@ -125,11 +133,11 @@ import { CancelButton, ConfirmButton, Dialog, Paragraph } from "@marwes-ui/vue"
 
 ### Base Molecule
 
-**`DialogModal`** - Modal overlay with portal, scrim, dismissal, and focus handling
+**`DialogModal`** - Modal overlay with portal, scrim, `aria-modal`, dismissal, and focus handling
 
 ### Atom
 
-**`Dialog`** - Low-level shell with header, content, and optional footer
+**`Dialog`** - Low-level shell with header, content, and optional footer. Non-modal by default.
 
 - `Dialog (Atom)`
 - `DialogModal`

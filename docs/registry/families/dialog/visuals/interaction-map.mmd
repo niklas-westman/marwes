@@ -1,0 +1,21 @@
+flowchart LR
+  DialogShell["Dialog shell"] --> Named["named role=dialog shell"]
+  Named --> NonModal["non-modal by default"]
+  DialogShell --> ModalOptIn["modal=true only for parent-managed overlays"]
+
+  DialogModal["DialogModal"] --> AriaModal["aria-modal=true"]
+  DialogModal --> InitialFocus["first focusable or dialog surface"]
+  DialogModal --> FocusTrap["trap Tab focus"]
+  DialogModal --> Escape["Escape close request"]
+  DialogModal --> Scrim["scrim dismissal when allowed"]
+  DialogModal --> Restore["restore focus to trigger"]
+
+  Purpose["ConfirmDialog / DestructiveDialog / InfoDialog"] --> Semantics["data-purpose + data-intent"]
+  Purpose --> DialogModal
+
+  NonModal --> ReactDom["React DOM"]
+  NonModal --> VueDom["Vue DOM"]
+  AriaModal --> ReactDom
+  AriaModal --> VueDom
+  Semantics --> ReactDom
+  Semantics --> VueDom

@@ -25,6 +25,21 @@ const testItems = [
 ]
 
 describe("Vue AccordionField", () => {
+  it("renders VNode item content through the canonical content property", () => {
+    renderAccordionField({
+      label: "Order info",
+      items: [
+        {
+          value: "shipping",
+          title: "Shipping",
+          content: h("strong", "Shipping details"),
+        },
+      ],
+    })
+
+    expect(screen.getByText("Shipping details").tagName).toBe("STRONG")
+  })
+
   it("renders a labeled group with all accordion items", () => {
     renderAccordionField({ label: "Order info", items: testItems })
 

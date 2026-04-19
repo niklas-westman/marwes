@@ -1,0 +1,23 @@
+flowchart TD
+  Registry["docs/registry/families/switch"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/switch/"]
+  Core --> CoreFiles["switch-a11y.ts switch-recipe.ts switch-types.ts"]
+  Helpers["packages/core/src/shared/field-helpers.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> AtomCss["switch.css"]
+  Presets --> FieldCss["molecules/switch-field.css"]
+
+  React["packages/react/src/components/switch/"]
+  React --> ReactFiles["switch.tsx switch-field.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/switch/"]
+  Vue --> VueFiles["switch.ts switch-field.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/switch/"]
+  StoriesV["apps/storybook-vue/src/stories/switch/"]
+  Contracts["tests/contracts/switch.contract.ts"]

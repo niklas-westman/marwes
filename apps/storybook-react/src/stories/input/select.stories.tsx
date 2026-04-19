@@ -38,7 +38,7 @@ const meta: Meta<typeof Select> = {
     layout: "centered",
     docs: {
       description: {
-        component: `Compact select atom. Use native={false} for the Marwes visual treatment from Figma node ${FIGMA_SELECT_NODE}, or native={true} for platform chrome.`,
+        component: `Compact select atom. Native browser select behavior is the default. Use native={false} for the Marwes visual treatment from Figma node ${FIGMA_SELECT_NODE} when you intentionally need the custom presentation.`,
       },
     },
   },
@@ -46,11 +46,11 @@ const meta: Meta<typeof Select> = {
   argTypes: {
     native: {
       control: "boolean",
-      description: `Use native={false} for the compact Marwes select atom (${FIGMA_SELECT_NODE}) or native={true} for browser chrome.`,
+      description: `Native browser select behavior is the default. Use native={false} for the compact Marwes select atom (${FIGMA_SELECT_NODE}) only when you intentionally want the custom presentation.`,
     },
   },
   args: {
-    native: false,
+    native: true,
     placeholder: "Choose a plan",
     options,
   },

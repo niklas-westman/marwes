@@ -41,6 +41,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
   const dialogOptions: DialogOptions = {
     showFooter: hasFooter,
     dismissible,
+    modal: props.modal,
   }
 
   if (props.dataAttributes) {
@@ -74,7 +75,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
       id={id}
       className={cx(kit.className, props.className)}
       role={kit.a11y.role}
-      aria-modal="true"
+      {...(kit.a11y.ariaModal ? { "aria-modal": "true" } : {})}
       {...(kit.a11y.ariaLabel ? { "aria-label": kit.a11y.ariaLabel } : {})}
       {...(kit.a11y.ariaLabelledBy ? { "aria-labelledby": kit.a11y.ariaLabelledBy } : {})}
       {...(kit.a11y.ariaDescribedBy ? { "aria-describedby": kit.a11y.ariaDescribedBy } : {})}

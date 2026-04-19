@@ -1,0 +1,21 @@
+flowchart TD
+  Registry["docs/registry/families/tooltip"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/tooltip/"]
+  Core --> CoreFiles["tooltip-a11y.ts tooltip-recipe.ts tooltip-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> TooltipCss["tooltip.css"]
+
+  React["packages/react/src/components/tooltip/"]
+  React --> ReactFiles["tooltip.tsx tooltip-group.tsx tests"]
+
+  Vue["packages/vue/src/components/tooltip/"]
+  Vue --> VueFiles["tooltip.ts tooltip-group.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/tooltip/"]
+  StoriesV["apps/storybook-vue/src/stories/tooltip/"]
+  Contracts["tests/contracts/tooltip.contract.ts"]

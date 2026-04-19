@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import type * as React from "react"
 import { describe, expect, it, vi } from "vitest"
+import { runSelectComboboxContract } from "../../../../../../tests/contracts/select-combobox.contract"
 import { runSelectFieldContract } from "../../../../../../tests/contracts/select-field.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { SelectField } from "../select-field"
@@ -18,7 +19,6 @@ runSelectFieldContract("react", {
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
       select: {
-        ariaLabel: args.label,
         options: [
           { value: "se", label: "Sweden" },
           { value: "us", label: "United States" },
@@ -44,12 +44,42 @@ runSelectFieldContract("react", {
   },
 })
 
+runSelectComboboxContract("react", {
+  async renderCustomSelectField(args = {}) {
+    const fieldProps = {
+      label: args.label ?? "Country",
+      select: {
+        native: false,
+        options: args.options ?? [
+          { value: "se", label: "Sweden" },
+          { value: "us", label: "United States" },
+          { value: "no", label: "Norway" },
+        ],
+        placeholder: "Choose an option",
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      },
+    }
+
+    renderWithProvider(<SelectField {...fieldProps} />)
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  queryByRole(role, options) {
+    return screen.queryByRole(role, options)
+  },
+  async keyboard(text) {
+    await userEvent.setup().keyboard(text)
+  },
+})
+
 describe("React SelectField specifics", () => {
   it("renders compact trigger and selected-state icons for the Marwes dropdown", async () => {
     renderWithProvider(
       <SelectField
         label="Country"
         select={{
+          native: false,
           placeholder: "Choose a country",
           options: [
             { value: "se", label: "Sweden" },
@@ -77,13 +107,14 @@ describe("React SelectField specifics", () => {
     expect(selectedIcon).toHaveAttribute("height", "16")
   })
 
-  it("uses the custom Marwes combobox by default and updates the value on selection", async () => {
+  it("uses the custom Marwes combobox when native is false and updates the value on selection", async () => {
     const onValueChange = vi.fn()
 
     renderWithProvider(
       <SelectField
         label="Country"
         select={{
+          native: false,
           placeholder: "Choose a country",
           options: [
             { value: "se", label: "Sweden" },
@@ -104,12 +135,11 @@ describe("React SelectField specifics", () => {
     expect(screen.getByRole("combobox", { name: /country/i })).toHaveTextContent("United States")
   })
 
-  it("falls back to the native select when native is true", () => {
+  it("defaults to the native select", () => {
     renderWithProvider(
       <SelectField
         label="Plan"
         select={{
-          native: true,
           options: [
             { value: "starter", label: "Starter" },
             { value: "growth", label: "Growth" },

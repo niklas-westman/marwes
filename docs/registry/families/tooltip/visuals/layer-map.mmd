@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ntooltip + tooltip-group"]
+  Spec["Spec + audit + testing"]
+  Core["@marwes-ui/core\ntooltip atom semantics"]
+  Presets["preset CSS\ntooltip + trigger"]
+  React["@marwes-ui/react\ntooltip + tooltip-group"]
+  Vue["@marwes-ui/vue\ntooltip + tooltip-group"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared tooltip contract"]
+  Registry["docs/registry/families/tooltip"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

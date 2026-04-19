@@ -1,0 +1,22 @@
+flowchart LR
+  RawTab["Raw Tab"] --> Atom["native button role=tab"]
+  Atom --> Bespoke["consumer owns tablist coordination"]
+
+  TabGroup["TabGroup"] --> Named["named tablist via label / ariaLabel"]
+  TabGroup --> Wiring["aria-controls <-> aria-labelledby"]
+  TabGroup --> AutoActivation["ArrowLeft ArrowRight Home End\nmove focus + selection"]
+  TabGroup --> Fallback["first enabled fallback\nfor missing or disabled requested tabs"]
+  AutoActivation --> SkipDisabled["disabled tabs skipped"]
+  TabGroup --> Panels["active panel exposed with tabindex=0"]
+
+  Purpose["NavigationTabs / ContentTabs / SettingsTabs"] --> Semantics["family-local data-purpose metadata"]
+  Purpose --> TabGroup
+
+  Bespoke --> ReactDom["React DOM"]
+  Bespoke --> VueDom["Vue DOM"]
+  Wiring --> ReactDom
+  Wiring --> VueDom
+  SkipDisabled --> ReactDom
+  SkipDisabled --> VueDom
+  Semantics --> ReactDom
+  Semantics --> VueDom

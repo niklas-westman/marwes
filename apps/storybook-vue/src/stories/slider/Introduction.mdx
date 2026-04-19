@@ -110,9 +110,11 @@ import { Slider } from "@marwes-ui/vue"
 ## Accessibility Notes
 
 - `Slider` renders a native `type="range"` control
+- prefer `SliderField` when the slider needs a visible label, helper text, or error text
 - provide `ariaLabel` when there is no visible label nearby
 - use `ariaLabelledBy` and `ariaDescribedBy` when the slider is connected to external text
 - use `ariaValueText` when the raw numeric value needs a more descriptive spoken label
+- `showTooltip` is visual only and does not replace visible labeling or `ariaValueText`
 
 ## Current Scope
 

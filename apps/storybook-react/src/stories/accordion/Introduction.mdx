@@ -21,32 +21,29 @@ import { FAQAccordion, SettingsAccordion, SectionsAccordion } from "@marwes-ui/r
 
 // Single-open FAQ — auto-sets data-purpose="faq"
 <FAQAccordion
-  name="product-faq"
   label="Product FAQ"
   items={[
-    { id: "shipping", title: "Shipping details", content: "Orders ship within 2-3 business days." },
-    { id: "returns", title: "Return policy", content: "Returns accepted within 30 days." },
+    { value: "shipping", title: "Shipping details", content: "Orders ship within 2-3 business days." },
+    { value: "returns", title: "Return policy", content: "Returns accepted within 30 days." },
   ]}
 />
 
 // Multi-open settings — auto-sets data-purpose="settings"
 <SettingsAccordion
-  name="preferences"
   label="Preferences"
   items={[
-    { id: "notifications", title: "Notifications", content: "Configure your notification preferences." },
-    { id: "privacy", title: "Privacy", content: "Manage your privacy settings." },
+    { value: "notifications", title: "Notifications", content: "Configure your notification preferences." },
+    { value: "privacy", title: "Privacy", content: "Manage your privacy settings." },
   ]}
   defaultOpenItems={["notifications"]}
 />
 
 // Flexible sections — auto-sets data-purpose="sections"
 <SectionsAccordion
-  name="docs"
   label="Documentation"
   items={[
-    { id: "getting-started", title: "Getting Started", content: "Welcome to the docs." },
-    { id: "api", title: "API Reference", content: "Full API documentation." },
+    { value: "getting-started", title: "Getting Started", content: "Welcome to the docs." },
+    { value: "api", title: "API Reference", content: "Full API documentation." },
   ]}
 />
 ```
@@ -80,12 +77,11 @@ import { AccordionField } from "@marwes-ui/react"
 
 // Uncontrolled with defaultOpenItems
 <AccordionField
-  name="details"
   label="Order Details"
   description="Expand sections to view details."
   items={[
-    { id: "shipping", title: "Shipping", children: "Orders ship within 2-3 business days." },
-    { id: "billing", title: "Billing", children: "View your billing information." },
+    { value: "shipping", title: "Shipping", content: "Orders ship within 2-3 business days." },
+    { value: "billing", title: "Billing", content: "View your billing information." },
   ]}
   defaultOpenItems={["shipping"]}
 />
@@ -94,11 +90,10 @@ import { AccordionField } from "@marwes-ui/react"
 const [openItems, setOpenItems] = React.useState(["shipping"])
 
 <AccordionField
-  name="details"
   label="Order Details"
   items={[
-    { id: "shipping", title: "Shipping", children: "Shipping info." },
-    { id: "billing", title: "Billing", children: "Billing info." },
+    { value: "shipping", title: "Shipping", content: "Shipping info." },
+    { value: "billing", title: "Billing", content: "Billing info." },
   ]}
   openItems={openItems}
   onOpenItemsChange={setOpenItems}
@@ -106,12 +101,11 @@ const [openItems, setOpenItems] = React.useState(["shipping"])
 
 // With error state
 <AccordionField
-  name="required-sections"
   label="Required Sections"
   error="Please review all sections before submitting."
   items={[
-    { id: "terms", title: "Terms", children: "Read the terms of service." },
-    { id: "privacy", title: "Privacy", children: "Review the privacy policy." },
+    { value: "terms", title: "Terms", content: "Read the terms of service." },
+    { value: "privacy", title: "Privacy", content: "Review the privacy policy." },
   ]}
 />
 ```
@@ -124,6 +118,7 @@ const [openItems, setOpenItems] = React.useState(["shipping"])
 - **Single or multi-open** — `multiple={false}` for single-open, `multiple={true}` (default) for multi-open
 - **Disabled** — disables all items in the group
 - **Per-item disabled** — disable individual items via `disabled` property on items
+- **Canonical item body prop** — use `content` for item panel content; React keeps `children` as a temporary compatibility alias
 
 ## Low-level: Accordion (Atom)
 

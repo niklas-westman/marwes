@@ -20,8 +20,8 @@
  * <AccordionField
  *   label="FAQ"
  *   items={[
- *     { value: "q1", title: "What is Marwes?", children: <p>A design system.</p> },
- *     { value: "q2", title: "Is it free?", children: <p>Yes.</p> },
+ *     { value: "q1", title: "What is Marwes?", content: <p>A design system.</p> },
+ *     { value: "q2", title: "Is it free?", content: <p>Yes.</p> },
  *   ]}
  *   defaultOpenItems={["q1"]}
  * />
@@ -49,7 +49,9 @@ import { Accordion } from "./accordion"
 export interface AccordionFieldItem {
   value: string
   title: React.ReactNode
-  children: React.ReactNode
+  content?: React.ReactNode
+  /** @deprecated Use `content` instead for cross-framework parity. */
+  children?: React.ReactNode
   disabled?: boolean
 }
 
@@ -99,6 +101,10 @@ function hasContent(value: React.ReactNode | undefined): boolean {
 
 function cx(...parts: Array<string | false | undefined>): string {
   return parts.filter(Boolean).join(" ")
+}
+
+function resolveAccordionItemContent(item: AccordionFieldItem): React.ReactNode {
+  return item.content ?? item.children
 }
 
 export function AccordionField(props: AccordionFieldProps): React.ReactElement {
@@ -174,7 +180,7 @@ export function AccordionField(props: AccordionFieldProps): React.ReactElement {
               disabled={isDisabled}
               onToggle={() => handleToggle(item.value)}
             >
-              {item.children}
+              {resolveAccordionItemContent(item)}
             </Accordion>
           )
         })}

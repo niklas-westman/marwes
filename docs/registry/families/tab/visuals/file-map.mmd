@@ -1,0 +1,22 @@
+flowchart TD
+  Registry["docs/registry/families/tab"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/tab/"]
+  Core --> CoreFiles["tab-a11y.ts tab-recipe.ts tab-group-a11y.ts tab-group-types.ts tab-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> AtomCss["tab.css"]
+  Presets --> GroupCss["molecules/tab-group.css"]
+
+  React["packages/react/src/components/tab/"]
+  React --> ReactFiles["tab.tsx tab-group.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/tab/"]
+  Vue --> VueFiles["tab.ts tab-group.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/tab/"]
+  StoriesV["apps/storybook-vue/src/stories/tab/"]
+  Contracts["tests/contracts/tab.contract.ts"]

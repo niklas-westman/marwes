@@ -1,10 +1,10 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { CancelButton, ConfirmButton, Dialog, Paragraph } from "@marwes-ui/react"
+import { CancelButton, ConfirmButton, DialogModal, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
-const meta: Meta<typeof Dialog> = {
+const meta: Meta<typeof DialogModal> = {
   title: "Dialog/Molecule",
-  component: Dialog,
+  component: DialogModal,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
   argTypes: {
@@ -14,43 +14,49 @@ const meta: Meta<typeof Dialog> = {
 
 export default meta
 
-type Story = StoryObj<typeof Dialog>
+type Story = StoryObj<typeof DialogModal>
 
 export const Default: Story = {
   args: {
+    open: true,
     title: "Invite teammates",
     description: "Select a role and invite collaborators to the workspace.",
     size: "medium",
   },
   render: (args) => (
-    <Dialog
+    <DialogModal
       {...args}
-      footer={
+      portalTarget={null}
+      footer={({ close }) => (
         <>
-          <CancelButton>Cancel</CancelButton>
-          <ConfirmButton>Continue</ConfirmButton>
+          <CancelButton onClick={close}>Cancel</CancelButton>
+          <ConfirmButton onClick={close}>Continue</ConfirmButton>
         </>
-      }
+      )}
     >
       <Paragraph>
-        DialogModal owns the scrim, portal rendering, close affordances, and focus restoration.
+        DialogModal owns the scrim, portal rendering, modal semantics, close affordances, and focus
+        restoration.
       </Paragraph>
-    </Dialog>
+    </DialogModal>
   ),
 }
 
 export const LockedDismissal: Story = {
   args: {
+    open: true,
     title: "Migration in progress",
     description: "Keep this dialog open until the migration finishes.",
     dismissible: false,
+    closeOnEscape: false,
+    closeOnScrimClick: false,
     size: "small",
   },
   render: (args) => (
-    <Dialog {...args} footer={<ConfirmButton>Continue</ConfirmButton>}>
+    <DialogModal {...args} portalTarget={null} footer={<ConfirmButton>Continue</ConfirmButton>}>
       <Paragraph>
         The migration runs in the background and will notify you when it is safe to continue.
       </Paragraph>
-    </Dialog>
+    </DialogModal>
   ),
 }

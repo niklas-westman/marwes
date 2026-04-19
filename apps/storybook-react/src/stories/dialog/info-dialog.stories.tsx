@@ -1,30 +1,27 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { ConfirmButton, Dialog, Paragraph } from "@marwes-ui/react"
+import { InfoDialog, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
-const meta: Meta<typeof Dialog> = {
+const meta: Meta<typeof InfoDialog> = {
   title: "Dialog/Purpose/InfoDialog",
-  component: Dialog,
+  component: InfoDialog,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
 }
 
 export default meta
 
-type Story = StoryObj<typeof Dialog>
+type Story = StoryObj<typeof InfoDialog>
 
 export const Default: Story = {
   args: {
+    open: true,
     title: "Scheduled maintenance",
     description: "The workspace will be read-only for ten minutes.",
   },
   render: (args) => (
-    <Dialog
-      {...args}
-      dataAttributes={{ "data-purpose": "info-dialog", "data-intent": "info" }}
-      footer={<ConfirmButton>Okay</ConfirmButton>}
-    >
+    <InfoDialog {...args} portalTarget={null}>
       <Paragraph>Save your drafts before the maintenance window begins.</Paragraph>
-    </Dialog>
+    </InfoDialog>
   ),
 }

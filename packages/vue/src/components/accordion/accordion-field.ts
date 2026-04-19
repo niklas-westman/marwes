@@ -1,5 +1,5 @@
 import { buildAccordionFieldA11yIds } from "@marwes-ui/core"
-import { computed, defineComponent, h, ref } from "vue"
+import { type VNodeChild, computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Paragraph } from "../paragraph"
@@ -7,8 +7,8 @@ import { Accordion } from "./accordion"
 
 export interface AccordionFieldItem {
   value: string
-  title: string
-  content: string
+  title: VNodeChild
+  content: VNodeChild
   disabled?: boolean
 }
 
@@ -46,6 +46,18 @@ const accordionFieldPropKeys = [
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0
+}
+
+function toChildren(value: VNodeChild | undefined): VNodeChild[] {
+  if (Array.isArray(value)) {
+    return value
+  }
+
+  if (value === undefined || value === null || value === false) {
+    return []
+  }
+
+  return [value]
 }
 
 export const AccordionField = defineComponent(
@@ -136,8 +148,8 @@ export const AccordionField = defineComponent(
                   onToggle: () => handleToggle(item.value),
                 },
                 {
-                  title: () => item.title,
-                  default: () => item.content,
+                  title: () => toChildren(item.title),
+                  default: () => toChildren(item.content),
                 },
               )
             }),

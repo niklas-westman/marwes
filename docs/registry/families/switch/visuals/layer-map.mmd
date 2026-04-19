@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\nswitch + size baselines"]
+  Spec["Spec + audit + testing"]
+  Core["@marwes-ui/core\nswitch recipe + field helpers"]
+  Presets["preset CSS\nswitch + switch-field"]
+  React["@marwes-ui/react\nswitch + field + variants"]
+  Vue["@marwes-ui/vue\nswitch + field + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared switch contract"]
+  Registry["docs/registry/families/switch"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

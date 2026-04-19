@@ -1,0 +1,84 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "spacing",
+  "displayName": "Spacing",
+  "status": "shipped",
+  "summary": "Family-local layout-spacing family with one decorative Spacing atom backed by a token scale, a scale multiplier escape hatch, and shared React/Vue adapter parity.",
+  "philosophy": [
+    "Teach Spacing as a decorative layout primitive and keep content structure, grouping, and section meaning outside the component.",
+    "Keep the token scale explicit through Spacings so teams avoid ad hoc magic-number margins where a shared spacer is the honest tool.",
+    "Treat scale as a deliberate escape hatch for uncommon layout tuning rather than the default way of inventing new spacing sizes.",
+    "Keep the family-local metadata honest: Spacing emits stable data-component and data-size values from core, but it is not part of the wave-1 central semantic registry and currently has no dedicated Figma family source."
+  ],
+  "usage": {
+    "useWhen": [
+      "The layout needs an explicit decorative vertical gap between elements and the team wants that gap to come from the shared spacing token scale.",
+      "The product wants React and Vue spacing behavior to stay aligned through one core recipe and one shared token vocabulary.",
+      "The surrounding composition benefits from a visible spacer primitive instead of many one-off margins spread across sibling elements."
+    ],
+    "avoidWhen": [
+      "The layout should be expressed more honestly through parent gap, stack, grid, or section structure rather than a standalone spacer element.",
+      "The visual gap would be carrying semantic meaning that should instead come from headings, dividers, lists, or field grouping.",
+      "The team expects a dedicated Figma component family or central semantic-registry entry that the current Spacing family does not ship."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Storybook introduction and taxonomy tests in both apps for the atom teaching surface and token-scale documentation.",
+      "Repo-wide typecheck and build paths exercise the exported Spacing atom and Spacings constant in both adapters.",
+      "Registry generation and link checks keep the structural docs surface aligned with the shipped file tree."
+    ],
+    "manualReviewRequired": [
+      "Product-level judgment about whether Spacing is the honest layout tool, versus parent-owned gap, section structure, or semantic separators.",
+      "Visual review that larger spacer sizes are not being used to imply hidden hierarchy or compensate for weak layout structure.",
+      "A future decision on whether this tiny family needs direct runtime contract tests, or whether its current docs-led coverage is sufficient."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Spacing is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family currently has no dedicated core, adapter, or shared-contract test file; the strongest focused automation today is in Storybook docs and taxonomy coverage."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/spacing/Introduction.mdx",
+        "apps/storybook-react/src/stories/spacing/spacing.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/spacing/Introduction.mdx",
+        "apps/storybook-vue/src/stories/spacing/spacing.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "xxxs",
+      "xxs",
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "xxl",
+      "xxxl",
+      "4xl",
+      "5xl",
+      "6xl",
+      "7xl",
+      "8xl",
+      "9xl",
+      "10xl",
+      "11xl",
+      "scale-multiplier",
+      "in-context"
+    ]
+  },
+  "openQuestions": [
+    "Should Spacing gain a dedicated runtime contract or adapter test file, or is docs-led coverage sufficient for a decorative family this small?",
+    "Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 17-size spacing scale, or is the current code-owned token source sufficient?"
+  ]
+}

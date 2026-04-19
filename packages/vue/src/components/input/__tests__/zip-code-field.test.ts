@@ -22,7 +22,7 @@ runZipCodeFieldContract("vue", {
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
-      input: { ariaLabel: args.label },
+      input: {},
     } as ZipCodeFieldProps
 
     renderWithProvider(props)

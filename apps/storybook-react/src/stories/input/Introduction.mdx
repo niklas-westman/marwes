@@ -134,6 +134,11 @@ import { RichText } from "@marwes-ui/react"
   ))}
 </ul>
 
+> **Manual review note**
+> `RichText` is a manual-review-heavy component.
+> Automated tests currently protect naming, description wiring, disabled/read-only semantics, and basic formatting affordances.
+> Real editing behavior should still be verified in supported browser and assistive technology combinations because the editor relies on `contentEditable` and browser editing behavior.
+
 ## Recommended: Purpose Input Components
 
 Use purpose-built input components that automatically set the correct `type`, `inputMode`, `autoComplete`, and other semantic attributes:
@@ -492,6 +497,10 @@ import { TextareaField } from "@marwes-ui/react";
 
 Use `RichTextField` when the editor needs the same label, helper text, and error treatment as other Marwes field wrappers:
 
+> **Manual review note**
+> `RichTextField` inherits the same manual-review boundary as `RichText`.
+> Treat automated tests as contract protection, not a full guarantee of editor accessibility in every browser and assistive technology pairing.
+
 ```tsx
 import { RichTextField } from "@marwes-ui/react";
 
@@ -530,9 +539,9 @@ type BaseFieldProps = {
 };
 ```
 
-`SelectField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards select control props under `select`. Use `select.native={false}` (default) for the custom Marwes dropdown state from Figma node `1364:7701`, or `select.native={true}` for platform chrome. `TextareaField` does the same for multiline control props under `textarea`.
+`SelectField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards select control props under `select`. Native browser select behavior is the default. Use `select.native={false}` to opt into the custom Marwes dropdown state from Figma node `1364:7701`. `TextareaField` does the same for multiline control props under `textarea`.
 
-`DropdownField` reuses the `SelectField` API, defaults `select.native` to `false`, and opts into the browser dropdown only when `select.native={true}` is passed.
+`DropdownField` reuses the `SelectField` API, defaults `select.native` to `false`, and acts as the purpose-level wrapper for the custom Marwes dropdown presentation. Pass `select.native={true}` only when you intentionally want browser chrome instead.
 
 ## Controlled vs Uncontrolled
 

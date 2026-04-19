@@ -1,0 +1,28 @@
+flowchart LR
+  RawRadio["Raw Radio"] --> NativeInput["native input type=radio"]
+  NativeInput --> ManualGroup["shared name + surrounding radiogroup\nconsumer owns manual grouping when using the atom directly"]
+  NativeInput --> DirectNaming["label htmlFor or aria-label\nplus aria-describedby"]
+  NativeInput --> CheckedModel["checked or defaultChecked\none selected option at a time"]
+
+  RadioGroup["RadioGroupField"] --> GroupNaming["role=radiogroup + aria-labelledby"]
+  RadioGroup --> GroupDescriptions["description + error ids merge into aria-describedby"]
+  RadioGroup --> InvalidState["error marks the group invalid\nand propagates invalid state to child radios"]
+  RadioGroup --> GroupState["controlled or uncontrolled selected value"]
+
+  Purpose["YesNo / Rating / Option"] --> PurposeMetadata["family-local data-purpose metadata"]
+  Purpose --> RadioGroup
+
+  ManualGroup --> ReactDom["React DOM"]
+  ManualGroup --> VueDom["Vue DOM"]
+  DirectNaming --> ReactDom
+  DirectNaming --> VueDom
+  GroupNaming --> ReactDom
+  GroupNaming --> VueDom
+  GroupDescriptions --> ReactDom
+  GroupDescriptions --> VueDom
+  InvalidState --> ReactDom
+  InvalidState --> VueDom
+  GroupState --> ReactDom
+  GroupState --> VueDom
+  PurposeMetadata --> ReactDom
+  PurposeMetadata --> VueDom

@@ -1,0 +1,157 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "slider",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/slider-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#p2--second-component-audit-queue",
+      "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/slider/index.ts",
+      "packages/core/src/components/atoms/slider/slider-a11y.ts",
+      "packages/core/src/components/atoms/slider/slider-recipe.ts",
+      "packages/core/src/components/atoms/slider/slider-types.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/slider.css",
+      "packages/presets/src/firstEdition/molecules/slider-field.css"
+    ],
+    "react": [
+      "packages/react/src/components/slider/__tests__/slider-field.test.tsx",
+      "packages/react/src/components/slider/__tests__/slider.test.tsx",
+      "packages/react/src/components/slider/__tests__/variants.test.tsx",
+      "packages/react/src/components/slider/index.ts",
+      "packages/react/src/components/slider/slider-field.tsx",
+      "packages/react/src/components/slider/slider.tsx",
+      "packages/react/src/components/slider/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/slider/__tests__/slider-field.test.ts",
+      "packages/vue/src/components/slider/__tests__/slider.test.ts",
+      "packages/vue/src/components/slider/__tests__/variants.test.ts",
+      "packages/vue/src/components/slider/index.ts",
+      "packages/vue/src/components/slider/slider-field.ts",
+      "packages/vue/src/components/slider/slider.ts",
+      "packages/vue/src/components/slider/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/slider/__tests__/slider-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/slider/brightness-slider.stories.tsx",
+      "apps/storybook-react/src/stories/slider/Introduction.mdx",
+      "apps/storybook-react/src/stories/slider/radius-slider.stories.tsx",
+      "apps/storybook-react/src/stories/slider/slider-field.stories.tsx",
+      "apps/storybook-react/src/stories/slider/slider.stories.tsx",
+      "apps/storybook-react/src/stories/slider/volume-slider.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/slider/__tests__/slider-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/slider/brightness-slider.stories.ts",
+      "apps/storybook-vue/src/stories/slider/Introduction.mdx",
+      "apps/storybook-vue/src/stories/slider/radius-slider.stories.ts",
+      "apps/storybook-vue/src/stories/slider/slider-field.stories.ts",
+      "apps/storybook-vue/src/stories/slider/slider.stories.ts",
+      "apps/storybook-vue/src/stories/slider/volume-slider.stories.ts"
+    ],
+    "contracts": ["tests/contracts/slider.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": "slider",
+    "canonicalAttributes": [],
+    "allowedPurposes": ["volume", "brightness", "radius"],
+    "purposeAttributes": {
+      "volume": {
+        "data-purpose": "volume"
+      },
+      "brightness": {
+        "data-purpose": "brightness"
+      },
+      "radius": {
+        "data-purpose": "radius"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/slider/slider-recipe.ts",
+      "packages/core/src/shared/field-helpers.ts",
+      "packages/react/src/components/slider/variants.tsx",
+      "packages/vue/src/components/slider/variants.ts"
+    ],
+    "notes": [
+      "Slider is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "The atom emits data-component=slider from core, while purpose-slider metadata currently lives in the React and Vue wrappers."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/slider.json",
+      ".figma/marwes/components/slider-field.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-v2-slider/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-v2-slider/slider_1926-3827.json",
+      ".figma/marwes/pages/-v2-slider/slider-field_1926-3720.json",
+      ".figma/marwes/pages/-v2-slider/-slider_1921-33210.json",
+      ".figma/marwes/pages/-v2-slider/-slider-dark_2010-12058.json",
+      ".figma/marwes/pages/-v2-slider/component-container_1574-26984.json",
+      ".figma/marwes/pages/-v2-slider/range-field_2010-12026.json"
+    ],
+    "nodeReferences": {
+      "sliderComponentSet": "1926:3827",
+      "sliderFieldComponentSet": "1926:3720",
+      "sliderLightFrame": "1921:33210",
+      "sliderDarkFrame": "2010:12058",
+      "sliderComponentContainer": "1574:26984",
+      "sliderRangeField": "2010:12026"
+    },
+    "figmaTokens": [],
+    "figmaStates": {
+      "baseVariants": ["slider", "slider-field", "volume", "brightness", "radius"],
+      "interactionStates": [
+        "default",
+        "hover-track",
+        "hover-thumb",
+        "pressed",
+        "disabled",
+        "focus",
+        "tooltip",
+        "touch-area",
+        "top-labels",
+        "inline-labels"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Slider is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "The atom emits data-component=slider from core, while purpose-slider metadata currently lives in the React and Vue wrappers.",
+    "Generated from docs/registry/families/slider/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

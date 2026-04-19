@@ -10,9 +10,9 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 const testItems = [
-  { value: "a", title: "Alpha", children: <p>Alpha content</p> },
-  { value: "b", title: "Beta", children: <p>Beta content</p> },
-  { value: "c", title: "Gamma", children: <p>Gamma content</p> },
+  { value: "a", title: "Alpha", content: <p>Alpha content</p> },
+  { value: "b", title: "Beta", content: <p>Beta content</p> },
+  { value: "c", title: "Gamma", content: <p>Gamma content</p> },
 ]
 
 describe("FAQAccordion", () => {

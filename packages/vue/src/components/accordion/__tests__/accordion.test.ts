@@ -2,8 +2,10 @@ import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h, ref } from "vue"
+import { runAccordionContract } from "../../../../../../tests/contracts/accordion.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Accordion, type AccordionProps } from "../accordion"
+import { AccordionField } from "../accordion-field"
 
 function renderAccordion(
   props: AccordionProps & Record<string, unknown>,
@@ -24,6 +26,81 @@ function renderAccordion(
     }),
   )
 }
+
+runAccordionContract("vue", {
+  async renderAccordion(args = {}) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(
+                  Accordion,
+                  {
+                    ...(args.open !== undefined ? { open: args.open } : {}),
+                    ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+                    ...(args.onToggle !== undefined ? { onToggle: args.onToggle } : {}),
+                  },
+                  {
+                    title: () => args.title ?? "Shipping details",
+                    default: () => "Panel content",
+                  },
+                ),
+            })
+        },
+      }),
+    )
+  },
+  async renderAccordionField(args) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(AccordionField, {
+                  label: args.label,
+                  ...(args.description !== undefined ? { description: args.description } : {}),
+                  ...(args.error !== undefined ? { error: args.error } : {}),
+                  ...(args.ariaDescribedBy !== undefined
+                    ? { ariaDescribedBy: args.ariaDescribedBy }
+                    : {}),
+                  items:
+                    args.items?.map((item) => ({
+                      value: item.value,
+                      title: item.title,
+                      content: item.content,
+                      disabled: item.disabled,
+                    })) ?? [],
+                  ...(args.multiple !== undefined ? { multiple: args.multiple } : {}),
+                  ...(args.defaultOpenItems !== undefined
+                    ? { defaultOpenItems: args.defaultOpenItems }
+                    : {}),
+                  ...(args.openItems !== undefined ? { openItems: args.openItems } : {}),
+                  ...(args.onOpenItemsChange !== undefined
+                    ? { onOpenItemsChange: args.onOpenItemsChange }
+                    : {}),
+                  ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+                }),
+            })
+        },
+      }),
+    )
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  getAllByRole(role) {
+    return screen.getAllByRole(role)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
+})
 
 describe("Vue Accordion atom", () => {
   it("renders trigger button and panel", () => {

@@ -1,0 +1,23 @@
+flowchart TD
+  Registry["docs/registry/families/divider"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/divider/"]
+  Core --> CoreFiles["divider-recipe.ts divider-types.ts"]
+  CoreTests["packages/core/test/recipes/divider.test.ts"]
+  Core --> CoreTests
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> DividerCss["divider.css"]
+
+  React["packages/react/src/components/divider/"]
+  React --> ReactFiles["divider.tsx tests"]
+
+  Vue["packages/vue/src/components/divider/"]
+  Vue --> VueFiles["divider.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/divider/"]
+  StoriesV["apps/storybook-vue/src/stories/divider/"]
+  Contracts["tests/contracts/divider.contract.ts"]

@@ -45,7 +45,7 @@ runSelectContract("vue", {
 })
 
 describe("Select", () => {
-  it("defaults to the Marwes appearance and marks placeholder state", () => {
+  it("defaults to the native appearance and marks placeholder state", () => {
     renderWithProvider(Select, {
       ariaLabel: "Country",
       placeholder: "Choose a country",
@@ -57,13 +57,14 @@ describe("Select", () => {
 
     const select = screen.getByRole("combobox", { name: /country/i })
 
-    expect(select).toHaveClass("mw-select--marwes")
+    expect(select).toHaveClass("mw-select--native")
     expect(select).toHaveAttribute("data-placeholder-selected", "true")
   })
 
-  it("renders the provided arrow svg in Marwes mode", () => {
+  it("renders the provided arrow svg in Marwes mode when native is false", () => {
     const { container } = renderWithProvider(Select, {
       ariaLabel: "Country",
+      native: false,
       options: [
         { value: "se", label: "Sweden" },
         { value: "us", label: "United States" },

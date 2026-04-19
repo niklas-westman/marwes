@@ -1,0 +1,79 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "switch",
+  "displayName": "Switch",
+  "status": "shipped",
+  "summary": "Binary toggle family with a button-backed switch atom, a canonical SwitchField path, and thin purpose-switch wrappers.",
+  "philosophy": [
+    "Teach SwitchField as the canonical labeled toggle surface and keep raw Switch as the low-level escape hatch.",
+    "Keep checked-state semantics in core and field wiring in shared helpers so React and Vue stay aligned.",
+    "Treat the button-backed role=switch model as an explicit family choice rather than an incidental implementation detail.",
+    "Keep purpose-switch wrappers thin and semantic so they add meaning without becoming a second switch implementation."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a binary on/off control with visible labeling and optional description or error support.",
+      "The product flow maps clearly to FeatureToggle, PreferenceSwitch, or PermissionSwitch and benefits from self-documenting purpose metadata.",
+      "The team wants React and Vue switch behavior to stay aligned through shared core helpers and one contract file."
+    ],
+    "avoidWhen": [
+      "A different control such as checkbox, radio, or tabs is the more honest interaction model.",
+      "The implementation only needs visual styling and cannot own naming or described-by wiring for a raw custom layout.",
+      "The team expects switch error handling to behave like text-input invalid semantics rather than described-by support."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared switch contract coverage across React and Vue for checked state, disabled behavior, visible-label wiring, description wiring, and error wiring.",
+      "Local atom tests for direct raw-switch naming and size-class behavior in both adapters.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for checked-state announcements, focus visibility, and toggle feel.",
+      "Future decisions about which switch stories should join stricter automated accessibility gates.",
+      "Direct raw aria-labelledby usage if the family wants dedicated local proof beyond the current shared-contract surface."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#p1--first-component-audit-queue",
+      "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
+    ],
+    "notes": [
+      "Switch completed a first-pass audit and now has an explicit spec-backed family contract.",
+      "The family still sits outside the wave-1 central semantic registry even though purpose wrappers already emit useful metadata."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/switch/Introduction.mdx",
+        "apps/storybook-react/src/stories/switch/switch-field.stories.tsx",
+        "apps/storybook-react/src/stories/switch/switch.stories.tsx",
+        "apps/storybook-react/src/stories/switch/feature-toggle.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/switch/Introduction.mdx",
+        "apps/storybook-vue/src/stories/switch/switch-field.stories.ts",
+        "apps/storybook-vue/src/stories/switch/switch.stories.ts",
+        "apps/storybook-vue/src/stories/switch/feature-toggle.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "off",
+      "on",
+      "default",
+      "hover",
+      "pressed",
+      "disabled",
+      "focus",
+      "compact",
+      "wide",
+      "rich"
+    ]
+  },
+  "openQuestions": [
+    "Which Switch-family stories should later join automated accessibility gates?",
+    "Should direct raw aria-labelledby usage be added to package-level tests, or remain documented without dedicated local assertions?"
+  ]
+}

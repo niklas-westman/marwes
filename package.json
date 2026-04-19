@@ -22,6 +22,8 @@
     "docs:api": "node ./scripts/check-doc-api-drift.mjs",
     "artifacts:generate": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-trust-artifacts.ts",
     "artifacts:check": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-trust-artifacts.ts --check",
+    "registry:generate": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-component-registry.ts",
+    "registry:check": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-component-registry.ts --check",
     "storybook:consistency": "node ./scripts/storybook-consistency.mjs",
     "semantics:check": "pnpm --filter @marwes-ui/core exec vitest run test/semantics/semantic-registry.test.ts",
     "lint": "biome lint .",

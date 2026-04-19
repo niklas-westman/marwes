@@ -1,0 +1,21 @@
+flowchart LR
+  Props["Button props\nvariant action loading as href iconOnly"] --> CoreA11y["resolveButtonA11y()"]
+  Props --> Loading["resolve loading state"]
+  Props --> Semantics["purpose wrapper metadata"]
+
+  CoreA11y --> Native["button tag\ntype submit/reset/button\ndisabled when applicable"]
+  CoreA11y --> Anchor["a tag\nrole=button\nhref when enabled"]
+
+  Loading --> Busy["aria-busy=true"]
+  Loading --> Disabled["disableWhileLoading -> aria-disabled / disabled"]
+
+  Props --> IconOnly["iconOnly or no visible text"]
+  IconOnly --> Warning["dev warning:\nariaLabel or loadingLabel required"]
+
+  Semantics --> Data["data-component\ndata-action\ndata-purpose\ndata-variant\ndata-size"]
+
+  Native --> DOM["React/Vue DOM output"]
+  Anchor --> DOM
+  Busy --> DOM
+  Disabled --> DOM
+  Data --> DOM

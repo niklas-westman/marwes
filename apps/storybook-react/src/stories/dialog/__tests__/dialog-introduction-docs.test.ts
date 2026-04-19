@@ -15,6 +15,10 @@ describe("React dialog introduction docs", () => {
       "InfoDialog",
       "dialogWhyPurposeComponents",
       "dialogPurposeComponentReference",
+      "non-modal shell",
+      "pass `modal` intentionally",
+      "aria-modal",
+      "Initial focus policy",
     ]
 
     for (const componentName of componentNames) {

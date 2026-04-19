@@ -1,0 +1,26 @@
+flowchart TD
+  Registry["docs/registry/families/card"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/card/"]
+  Core --> CoreFiles["card-recipe.ts card-types.ts"]
+  CoreTests["packages/core/test/recipes/card.test.ts"]
+  Core --> CoreTests
+  StoriesCopy["packages/core/src/storybook/docs-copy.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> CardCss["card.css"]
+
+  React["packages/react/src/components/card/"]
+  React --> ReactFiles["card.tsx variants.tsx tests"]
+  StoriesR["apps/storybook-react/src/stories/card/"]
+  StoriesR --> StoriesCopy
+
+  Vue["packages/vue/src/components/card/"]
+  Vue --> VueFiles["card.ts variants.ts tests"]
+  StoriesV["apps/storybook-vue/src/stories/card/"]
+  StoriesV --> StoriesCopy
+
+  SharedContracts["tests/contracts/\nno dedicated card contract yet"]

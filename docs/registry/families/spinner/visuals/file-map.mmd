@@ -1,0 +1,29 @@
+flowchart TD
+  Registry["docs/registry/families/spinner"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/spinner/"]
+  Core --> CoreFiles["spinner-a11y.ts spinner-recipe.ts spinner-svg.ts spinner-types.ts"]
+  CoreTests["packages/core/test/recipes/spinner.test.ts"]
+  Core --> CoreTests
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> SpinnerCss["spinner.css"]
+  PresetTests["packages/presets/test/spinner-css-contract.test.ts"]
+  Presets --> PresetTests
+
+  React["packages/react/src/components/spinner/"]
+  React --> ReactFiles["spinner.tsx variants.tsx tests"]
+  ReactButton["packages/react/src/components/button/button.tsx"]
+  ReactButton --> React
+
+  Vue["packages/vue/src/components/spinner/"]
+  Vue --> VueFiles["spinner.ts variants.ts tests"]
+  VueButton["packages/vue/src/components/button/button.ts"]
+  VueButton --> Vue
+
+  StoriesR["apps/storybook-react/src/stories/spinner/"]
+  StoriesV["apps/storybook-vue/src/stories/spinner/"]
+  Contracts["tests/contracts/spinner.contract.ts"]

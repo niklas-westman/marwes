@@ -13,10 +13,42 @@ trigger that reveals the bubble on hover and focus.
 Use `Tooltip` when surrounding layout already owns placement or visibility.
 This maps directly to the standalone tooltip bubble in the synced Figma files.
 
+```vue
+<script setup lang="ts">
+import { Tooltip } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Tooltip>Tooltip text</Tooltip>
+</template>
+```
+
 ## Recommended: TooltipGroup (Molecule)
 
 Use `TooltipGroup` for the default contextual-help pattern from Figma.
 It renders a small icon trigger and shows the tooltip bubble on hover and focus.
+
+```vue
+<script setup lang="ts">
+import { IconName, TooltipGroup } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <TooltipGroup content="Tooltip text" triggerLabel="Show help" />
+  <TooltipGroup :icon="IconName.Info" content="Tooltip text" triggerLabel="Show info" />
+</template>
+```
+
+## Accessibility scope
+
+`Tooltip` and `TooltipGroup` are for **non-interactive** contextual help only.
+Keep tooltip content short and informational.
+
+- Always provide a meaningful `triggerLabel` for the icon trigger.
+- `TooltipGroup` opens on hover and focus.
+- `TooltipGroup` dismisses on pointer leave, focus leave, and `Escape`.
+- If you need links, buttons, forms, or any other focusable content, use a
+  popover or dialog pattern instead of a tooltip.
 
 ## Component Reference
 

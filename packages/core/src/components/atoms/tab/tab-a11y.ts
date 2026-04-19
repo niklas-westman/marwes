@@ -4,7 +4,8 @@ export function resolveTabA11y(opts: TabOptions): TabA11yProps {
   const a11y: TabA11yProps = {
     role: "tab",
     ariaSelected: opts.selected ?? false,
-    // Disabled tabs are not interactive but remain in the tab sequence as -1
+    // Only the selected enabled tab participates in roving focus.
+    // Disabled tabs are rendered as disabled controls and skipped by TabGroup navigation.
     tabIndex: opts.selected && !opts.disabled ? 0 : -1,
   }
 

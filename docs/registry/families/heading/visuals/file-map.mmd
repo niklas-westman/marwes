@@ -1,0 +1,25 @@
+flowchart TD
+  Registry["docs/registry/families/heading"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/heading/"]
+  Core --> CoreFiles["heading-a11y.ts heading-recipe.ts heading-types.ts"]
+  CoreTests["packages/core/test/recipes/heading.test.ts"]
+  Core --> CoreTests
+  Theme["packages/core/src/theme/"]
+  Theme --> ThemeDefaults["theme-defaults.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> TypographyCss["typography.css"]
+
+  React["packages/react/src/components/heading/"]
+  React --> ReactFiles["h1.tsx h2.tsx h3.tsx tests"]
+
+  Vue["packages/vue/src/components/heading/"]
+  Vue --> VueFiles["create-heading.ts heading-variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/heading/"]
+  StoriesV["apps/storybook-vue/src/stories/heading/"]
+  Contracts["tests/contracts/heading.contract.ts"]

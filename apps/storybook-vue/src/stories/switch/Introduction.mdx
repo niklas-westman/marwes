@@ -116,6 +116,11 @@ const enabled = ref(false)
 </template>
 ```
 
+> **Note:** When using `Switch` directly, you are responsible for:
+> - Providing an accessible name via visible content, `ariaLabel`, or `aria-labelledby`
+> - Wiring any supporting text through `aria-describedby`
+> - Managing checked state in the parent
+
 ## Size API
 
 `Switch` supports three Figma-matched sizes. `compact` remains the default.

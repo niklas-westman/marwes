@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import { createDialogRecipe } from "../../src/components/atoms/dialog/dialog-recipe"
 
 describe("createDialogRecipe", () => {
-  it("defaults to a medium dismissible dialog with footer", () => {
+  it("defaults to a medium dismissible dialog with footer and non-modal semantics", () => {
     const kit = createDialogRecipe({})
 
     expect(kit.tag).toBe("section")
@@ -13,7 +13,7 @@ describe("createDialogRecipe", () => {
     expect(kit.showFooter).toBe(true)
     expect(kit.showCloseButton).toBe(true)
     expect(kit.a11y.role).toBe("dialog")
-    expect(kit.a11y.ariaModal).toBe(true)
+    expect(kit.a11y.ariaModal).toBeUndefined()
     expect(kit.dataAttributes).toEqual({
       "data-component": "dialog",
       "data-size": "medium",
@@ -46,5 +46,10 @@ describe("createDialogRecipe", () => {
 
     expect(kit.a11y.ariaLabelledBy).toBe("dialog-title")
     expect(kit.a11y.ariaDescribedBy).toBe("dialog-description")
+  })
+
+  it("only applies aria-modal when the dialog is marked as modal", () => {
+    expect(createDialogRecipe({ modal: true }).a11y.ariaModal).toBe(true)
+    expect(createDialogRecipe({ modal: false }).a11y.ariaModal).toBeUndefined()
   })
 })

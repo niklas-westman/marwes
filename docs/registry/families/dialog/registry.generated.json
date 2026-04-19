@@ -1,0 +1,162 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "dialog",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/dialog-family-accessibility.md"],
+    "roadmap": ["AXE_ROADMAP.md#dialog-family", "AXE_ROADMAP.md#4a--dialog-modal-hardening"],
+    "core": [
+      "packages/core/src/components/atoms/dialog/dialog-a11y.ts",
+      "packages/core/src/components/atoms/dialog/dialog-recipe.ts",
+      "packages/core/src/components/atoms/dialog/dialog-types.ts",
+      "packages/core/src/components/atoms/dialog/index.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/dialog.css",
+      "packages/presets/src/firstEdition/molecules/dialog-modal.css"
+    ],
+    "react": [
+      "packages/react/src/components/dialog/__tests__/dialog-modal.test.tsx",
+      "packages/react/src/components/dialog/__tests__/dialog.test.tsx",
+      "packages/react/src/components/dialog/__tests__/variants.test.tsx",
+      "packages/react/src/components/dialog/dialog-modal.tsx",
+      "packages/react/src/components/dialog/dialog.tsx",
+      "packages/react/src/components/dialog/index.ts",
+      "packages/react/src/components/dialog/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/dialog/__tests__/dialog-modal.test.ts",
+      "packages/vue/src/components/dialog/__tests__/dialog.test.ts",
+      "packages/vue/src/components/dialog/__tests__/variants.test.ts",
+      "packages/vue/src/components/dialog/dialog-modal.ts",
+      "packages/vue/src/components/dialog/dialog.ts",
+      "packages/vue/src/components/dialog/index.ts",
+      "packages/vue/src/components/dialog/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/dialog/confirm-dialog.stories.tsx",
+      "apps/storybook-react/src/stories/dialog/destructive-dialog.stories.tsx",
+      "apps/storybook-react/src/stories/dialog/dialog-modal.stories.tsx",
+      "apps/storybook-react/src/stories/dialog/dialog.stories.tsx",
+      "apps/storybook-react/src/stories/dialog/info-dialog.stories.tsx",
+      "apps/storybook-react/src/stories/dialog/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/dialog/confirm-dialog.stories.ts",
+      "apps/storybook-vue/src/stories/dialog/destructive-dialog.stories.ts",
+      "apps/storybook-vue/src/stories/dialog/dialog-modal.stories.ts",
+      "apps/storybook-vue/src/stories/dialog/dialog.stories.ts",
+      "apps/storybook-vue/src/stories/dialog/info-dialog.stories.ts",
+      "apps/storybook-vue/src/stories/dialog/Introduction.mdx"
+    ],
+    "contracts": ["tests/contracts/dialog.contract.ts", "tests/contracts/dialog-modal.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "dialog",
+    "canonicalAttributes": ["data-component", "data-size", "data-intent"],
+    "allowedPurposes": ["confirm-dialog", "destructive-dialog", "info-dialog"],
+    "purposeAttributes": {
+      "confirm-dialog": {
+        "data-purpose": "confirm-dialog",
+        "data-intent": "confirm"
+      },
+      "destructive-dialog": {
+        "data-purpose": "destructive-dialog",
+        "data-intent": "destructive",
+        "data-destructive": "true",
+        "data-confirmation-required": "true"
+      },
+      "info-dialog": {
+        "data-purpose": "info-dialog",
+        "data-intent": "info"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": ["Dialog already has a strong purpose mapping and workflow semantics in adapters."]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/dialog.json",
+      ".figma/marwes/components/scrim.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-dialog/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-dialog/dialog_1609-15459.json",
+      ".figma/marwes/pages/-dialog/-dialog_1609-15527.json",
+      ".figma/marwes/pages/-dialog/-dialog-dark_1615-17130.json",
+      ".figma/marwes/pages/-dialog/dialog_1935-14085.json",
+      ".figma/marwes/pages/-dialog/frame-1_1935-14109.json",
+      ".figma/marwes/pages/-dialog/icons-interface-x_1595-13879.json"
+    ],
+    "nodeReferences": {
+      "dialogComponent": "1609:15459",
+      "dialogLightFrame": "1609:15527",
+      "dialogDarkFrame": "1615:17130",
+      "closeIcon": "1595:13879"
+    },
+    "figmaTokens": [
+      "card/surface",
+      "card/border",
+      "card/title",
+      "card/body",
+      "text/primary",
+      "text/secondary",
+      "border/default",
+      "surface/secondary",
+      "focus/ring"
+    ],
+    "figmaStates": {
+      "baseVariants": [
+        "dialog-shell",
+        "dialog-modal",
+        "confirm-dialog",
+        "destructive-dialog",
+        "info-dialog"
+      ],
+      "interactionStates": [
+        "open",
+        "dismissible",
+        "locked-dismissal",
+        "focus-trap",
+        "no-focusable-fallback"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Dialog already has a strong purpose mapping and workflow semantics in adapters.",
+    "Generated from docs/registry/families/dialog/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

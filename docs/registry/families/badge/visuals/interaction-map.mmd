@@ -1,0 +1,22 @@
+flowchart LR
+  RawBadge["Raw Badge"] --> VariantTone["variant -> neutral info success warning error"]
+  RawBadge --> CanonicalData["data-component=badge\ndata-variant"]
+  RawBadge --> OptionalName["ariaLabel for numeric-only\nor ambiguous content"]
+
+  Purpose["StatusBadge / PriorityBadge / NotificationBadge"] --> PurposeSemantics["canonical data-purpose metadata"]
+  Purpose --> RawBadge
+  Notification["NotificationBadge"] --> CountNaming["numeric content should carry\na truthful ariaLabel"]
+  CountNaming --> OptionalName
+
+  BadgeGroup["BadgeGroup"] --> GroupLabel["fieldset + legend\naria-labelledby visible label"]
+  BadgeGroup --> GroupItems["related badges share one named group"]
+  GroupItems --> RawBadge
+
+  CanonicalData --> ReactDom["React DOM"]
+  CanonicalData --> VueDom["Vue DOM"]
+  OptionalName --> ReactDom
+  OptionalName --> VueDom
+  PurposeSemantics --> ReactDom
+  PurposeSemantics --> VueDom
+  GroupLabel --> ReactDom
+  GroupLabel --> VueDom

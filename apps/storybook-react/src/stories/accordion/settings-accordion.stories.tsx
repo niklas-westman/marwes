@@ -3,13 +3,13 @@ import { SettingsAccordion } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const settingsItems = [
-  { value: "profile", title: "Profile", children: "Edit your display name, avatar, and bio." },
+  { value: "profile", title: "Profile", content: "Edit your display name, avatar, and bio." },
   {
     value: "notifications",
     title: "Notifications",
-    children: "Configure email and push notification preferences.",
+    content: "Configure email and push notification preferences.",
   },
-  { value: "privacy", title: "Privacy", children: "Manage data sharing and visibility settings." },
+  { value: "privacy", title: "Privacy", content: "Manage data sharing and visibility settings." },
 ]
 
 const meta: Meta<typeof SettingsAccordion> = {

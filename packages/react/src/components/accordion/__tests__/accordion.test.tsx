@@ -2,8 +2,10 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import * as React from "react"
 import { describe, expect, it, vi } from "vitest"
+import { runAccordionContract } from "../../../../../../tests/contracts/accordion.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Accordion, type AccordionProps } from "../accordion"
+import { AccordionField } from "../accordion-field"
 
 function renderAccordion(props: Partial<AccordionProps> = {}) {
   return render(
@@ -14,6 +16,60 @@ function renderAccordion(props: Partial<AccordionProps> = {}) {
     </MarwesProvider>,
   )
 }
+
+runAccordionContract("react", {
+  async renderAccordion(args = {}) {
+    render(
+      <MarwesProvider>
+        <Accordion
+          title={args.title ?? "Shipping details"}
+          open={args.open}
+          disabled={args.disabled}
+          onToggle={args.onToggle}
+        >
+          Panel content
+        </Accordion>
+      </MarwesProvider>,
+    )
+  },
+  async renderAccordionField(args) {
+    render(
+      <MarwesProvider>
+        <AccordionField
+          label={args.label}
+          description={args.description}
+          error={args.error}
+          ariaDescribedBy={args.ariaDescribedBy}
+          items={
+            args.items?.map((item) => ({
+              value: item.value,
+              title: item.title,
+              content: item.content,
+              disabled: item.disabled,
+            })) ?? []
+          }
+          multiple={args.multiple}
+          defaultOpenItems={args.defaultOpenItems}
+          openItems={args.openItems}
+          onOpenItemsChange={args.onOpenItemsChange}
+          disabled={args.disabled}
+        />
+      </MarwesProvider>,
+    )
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  getAllByRole(role) {
+    return screen.getAllByRole(role)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
+})
 
 describe("React Accordion atom", () => {
   it("renders trigger button and panel", () => {

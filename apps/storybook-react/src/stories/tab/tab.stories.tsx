@@ -32,6 +32,14 @@ export const Disabled: Story = {
   args: { children: "Settings", disabled: true },
 }
 
+export const IconOnly: Story = {
+  args: {
+    children: <span aria-hidden="true">⚙️</span>,
+    ariaLabel: "Settings",
+    ariaControls: "panel-settings",
+  },
+}
+
 export const TabList: Story = {
   render: () => {
     const [active, setActive] = React.useState(0)

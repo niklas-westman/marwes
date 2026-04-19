@@ -1,0 +1,25 @@
+flowchart TD
+  Registry["docs/registry/families/radio"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/radio/"]
+  Core --> CoreFiles["radio-a11y.ts radio-recipe.ts radio-types.ts"]
+  CoreTests["packages/core/test/recipes/radio.test.ts"]
+  Core --> CoreTests
+  Helpers["packages/core/src/shared/field-helpers.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> RadioCss["radio.css"]
+  Presets --> GroupCss["molecules/radio-group-field.css"]
+
+  React["packages/react/src/components/radio/"]
+  React --> ReactFiles["radio.tsx radio-group-field.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/radio/"]
+  Vue --> VueFiles["radio.ts radio-group-field.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/radio/"]
+  StoriesV["apps/storybook-vue/src/stories/radio/"]
+  Contracts["tests/contracts/radio.contract.ts"]

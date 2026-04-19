@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ncard page + card component"]
+  Spec["Spec gap + AI metadata gap + audit queue"]
+  Core["@marwes-ui/core\ncard recipe + local data-component"]
+  Presets["preset CSS\ncard surface and state previews"]
+  React["@marwes-ui/react\ncard + purpose wrappers"]
+  Vue["@marwes-ui/vue\ncard + purpose wrappers"]
+  Stories["Storybook React + Vue"]
+  Tests["core + adapter + Storybook tests"]
+  Registry["docs/registry/families/card"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Tests
+  Vue --> Tests
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Tests --> Registry

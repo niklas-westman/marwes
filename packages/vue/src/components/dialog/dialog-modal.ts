@@ -149,6 +149,7 @@ export const DialogModal = defineComponent(
     const handleKeydown = (event: KeyboardEvent): void => {
       if (event.key === "Escape" && closeOnEscape.value) {
         event.preventDefault()
+        event.stopPropagation()
         close()
         return
       }
@@ -212,6 +213,7 @@ export const DialogModal = defineComponent(
               {
                 ...props,
                 footer: footerContent.value,
+                modal: true,
                 onClose: close,
               },
               slots.default ? { default: slots.default } : undefined,

@@ -1,0 +1,80 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "toast",
+  "displayName": "Toast",
+  "status": "shipped",
+  "summary": "Canonical transient-feedback family with a raw Toast atom, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent.",
+  "philosophy": [
+    "Teach purpose toasts first when the message intent is known and keep raw Toast as the deliberate primitive and escape hatch.",
+    "Keep canonical toast semantics in core so React and Vue emit the same data-component, data-purpose, and data-intent contract.",
+    "Treat ToastContainer, ToastProvider, and useToast as adapter-owned delivery layers rather than pretending the atom owns queue behavior.",
+    "Keep neutral and brand primitives explicit but secondary so they do not blur the canonical purpose-toast vocabulary."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs transient, non-blocking feedback with a clear semantic intent such as success, error, warning, or info.",
+      "The product flow benefits from ToastContainer or ToastProvider for stacked placement and queue management.",
+      "The team wants React and Vue toast semantics to stay aligned through the central semantic registry and one shared contract file."
+    ],
+    "avoidWhen": [
+      "The message is blocking, requires user decision-making, or should really be a dialog rather than a toast.",
+      "The implementation cannot provide appropriate live-region urgency or sane dismissal timing for the message severity.",
+      "The team expects a richer notification center or persistent inbox pattern that goes beyond the current toast family scope."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Shared purpose-toast contract coverage across React and Vue for canonical semantics and urgency defaults.",
+      "Local container and provider tests in both adapters for stacking, dismiss routing, primitive intent forwarding, and imperative API behavior.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for repeated toast announcement timing and urgency feel.",
+      "Product-level guidance around auto-dismiss duration, inline action wording, and whether users have enough time to perceive the message.",
+      "Any future expansion beyond the current transient feedback and simple queue model."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Toast is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family already has strong shared-contract and adapter-level coverage despite the missing dedicated audit write-up."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/toast/Introduction.mdx",
+        "apps/storybook-react/src/stories/toast/toast-matrix.stories.tsx",
+        "apps/storybook-react/src/stories/toast/toast-container.stories.tsx",
+        "apps/storybook-react/src/stories/toast/error-toast.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/toast/Introduction.mdx",
+        "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
+        "apps/storybook-vue/src/stories/toast/toast-container.stories.ts",
+        "apps/storybook-vue/src/stories/toast/error-toast.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "subtle",
+      "outline",
+      "rich",
+      "neutral",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "brand",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should Toast get stronger guidance or defaults around auto-dismiss duration for accessibility-sensitive flows?",
+    "Should neutral and brand raw-toast primitives remain escape hatches only, or eventually gain a more explicit documented governance boundary?"
+  ]
+}

@@ -32,8 +32,8 @@ export type FAQAccordionProps = Omit<AccordionFieldProps, "multiple">
  *     <FAQAccordion
  *       label="Frequently Asked Questions"
  *       items={[
- *         { value: "q1", title: "What is Marwes?", children: <p>A design system.</p> },
- *         { value: "q2", title: "Is it free?", children: <p>Yes.</p> },
+ *         { value: "q1", title: "What is Marwes?", content: <p>A design system.</p> },
+ *         { value: "q2", title: "Is it free?", content: <p>Yes.</p> },
  *       ]}
  *       defaultOpenItems={["q1"]}
  *     />
@@ -77,9 +77,9 @@ export type SettingsAccordionProps = Omit<AccordionFieldProps, "multiple">
  *     <SettingsAccordion
  *       label="Account Settings"
  *       items={[
- *         { value: "profile", title: "Profile", children: <ProfileForm /> },
- *         { value: "notifications", title: "Notifications", children: <NotificationsForm /> },
- *         { value: "privacy", title: "Privacy", children: <PrivacyForm /> },
+ *         { value: "profile", title: "Profile", content: <ProfileForm /> },
+ *         { value: "notifications", title: "Notifications", content: <NotificationsForm /> },
+ *         { value: "privacy", title: "Privacy", content: <PrivacyForm /> },
  *       ]}
  *     />
  *   );
@@ -123,9 +123,9 @@ export type SectionsAccordionProps = AccordionFieldProps
  *     <SectionsAccordion
  *       label="Product Details"
  *       items={[
- *         { value: "desc", title: "Description", children: <p>Full description.</p> },
- *         { value: "specs", title: "Specifications", children: <SpecsTable /> },
- *         { value: "reviews", title: "Reviews", children: <ReviewsList /> },
+ *         { value: "desc", title: "Description", content: <p>Full description.</p> },
+ *         { value: "specs", title: "Specifications", content: <SpecsTable /> },
+ *         { value: "reviews", title: "Reviews", content: <ReviewsList /> },
  *       ]}
  *     />
  *   );

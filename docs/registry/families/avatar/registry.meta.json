@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "avatar",
+  "displayName": "Avatar",
+  "status": "shipped",
+  "summary": "Canonical identity family with a base Avatar atom, two scoped molecules, and thin semantic wrappers for profile, presence, and team contexts.",
+  "philosophy": [
+    "Teach purpose wrappers first when the identity context is known and keep the raw Avatar surfaces as explicit escape hatches.",
+    "Keep canonical family and purpose semantics in core so React and Vue emit the same metadata contract.",
+    "Treat accessible naming as content-type dependent: images rely on alt text, while non-image avatars rely on ariaLabel or normalized initials.",
+    "Keep molecule scope narrow to the shipped online badge and stacked avatar-group patterns rather than expanding into interactive identity controls."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a person or member identity surface with stable size, content-type, and semantic behavior.",
+      "The product flow maps clearly to ProfileAvatar, PresenceAvatar, or TeamAvatarGroup and benefits from canonical purpose metadata.",
+      "The team wants React and Vue avatar behavior to stay aligned through shared contracts and the central semantic registry."
+    ],
+    "avoidWhen": [
+      "The surface really needs an interactive profile menu, upload flow, or editable identity control rather than a static avatar family member.",
+      "The implementation cannot provide truthful alt text or aria labeling for a non-decorative identity surface.",
+      "The team expects avatar-group layouts beyond the current stacked medium pattern and overflow counter defined by the shipped family."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Shared avatar, avatar-badge, and avatar-group contracts across React and Vue.",
+      "Local adapter tests for exports and purpose-wrapper metadata in both frameworks.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Product-level quality of alt text, aria labels, status labels, and overflow wording.",
+      "Whether likely unlabeled non-decorative image avatars should trigger a dev-time warning in core.",
+      "Any future expansion beyond the current non-interactive avatar, badge, and group scope."
+    ],
+    "roadmapAnchors": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
+    "notes": [
+      "Avatar is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family already has strong shared-contract coverage despite the missing dedicated audit write-up."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/avatar/Introduction.mdx",
+        "apps/storybook-react/src/stories/avatar/avatar.stories.tsx",
+        "apps/storybook-react/src/stories/avatar/avatar-group.stories.tsx",
+        "apps/storybook-react/src/stories/avatar/team-avatar-group.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/avatar/Introduction.mdx",
+        "apps/storybook-vue/src/stories/avatar/avatar.stories.ts",
+        "apps/storybook-vue/src/stories/avatar/avatar-group.stories.ts",
+        "apps/storybook-vue/src/stories/avatar/team-avatar-group.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "small",
+      "medium",
+      "large",
+      "initials",
+      "icon",
+      "image",
+      "online",
+      "stacked",
+      "overflow",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should likely unlabeled non-decorative image avatars eventually trigger a dev-time warning in core?",
+    "When Avatar gets a dedicated audit pass, should AvatarGroup keep the current count-only overflow model or grow richer participant-summary guidance?"
+  ]
+}

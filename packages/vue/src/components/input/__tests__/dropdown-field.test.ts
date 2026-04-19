@@ -23,7 +23,6 @@ runDropdownFieldContract("vue", {
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
       select: {
-        ariaLabel: args.label,
         options: [
           { value: "se", label: "Sweden" },
           { value: "us", label: "United States" },

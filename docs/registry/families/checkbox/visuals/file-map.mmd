@@ -1,0 +1,26 @@
+flowchart TD
+  Registry["docs/registry/families/checkbox"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/checkbox/"]
+  Core --> CoreFiles["checkbox-a11y.ts checkbox-recipe.ts checkbox-types.ts"]
+  CoreTests["packages/core/test/recipes/checkbox.test.ts"]
+  Core --> CoreTests
+  Helpers["packages/core/src/shared/field-helpers.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> CheckboxCss["checkbox.css"]
+  Presets --> FieldCss["molecules/checkbox-field.css"]
+  Presets --> GroupCss["molecules/checkbox-group-field.css"]
+
+  React["packages/react/src/components/checkbox/"]
+  React --> ReactFiles["checkbox.tsx checkbox-field.tsx checkbox-group-field.tsx tests"]
+
+  Vue["packages/vue/src/components/checkbox/"]
+  Vue --> VueFiles["checkbox.ts checkbox-field.ts checkbox-group-field.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/checkbox/"]
+  StoriesV["apps/storybook-vue/src/stories/checkbox/"]
+  Contracts["tests/contracts/checkbox.contract.ts + checkbox-group-field.contract.ts"]

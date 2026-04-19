@@ -10,12 +10,29 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 const testItems = [
-  { value: "shipping", title: "Shipping", children: <p>Shipping details</p> },
-  { value: "billing", title: "Billing", children: <p>Billing details</p> },
-  { value: "returns", title: "Returns", children: <p>Returns policy</p> },
+  { value: "shipping", title: "Shipping", content: <p>Shipping details</p> },
+  { value: "billing", title: "Billing", content: <p>Billing details</p> },
+  { value: "returns", title: "Returns", content: <p>Returns policy</p> },
 ]
 
 describe("AccordionField", () => {
+  it("renders item content from the canonical content property", () => {
+    renderWithProvider(<AccordionField label="Order info" items={testItems} />)
+
+    expect(screen.getByText("Shipping details")).toBeInTheDocument()
+  })
+
+  it("keeps the legacy children item alias working for compatibility", () => {
+    renderWithProvider(
+      <AccordionField
+        label="Order info"
+        items={[{ value: "shipping", title: "Shipping", children: <p>Shipping details</p> }]}
+      />,
+    )
+
+    expect(screen.getByText("Shipping details")).toBeInTheDocument()
+  })
+
   it("renders a labeled group with all accordion items", () => {
     renderWithProvider(<AccordionField label="Order info" items={testItems} />)
 
@@ -141,9 +158,9 @@ describe("AccordionField", () => {
   it("per-item disabled prevents only that item from toggling", async () => {
     const user = userEvent.setup()
     const mixedItems = [
-      { value: "shipping", title: "Shipping", children: <p>Shipping</p> },
-      { value: "billing", title: "Billing", children: <p>Billing</p>, disabled: true },
-      { value: "returns", title: "Returns", children: <p>Returns</p> },
+      { value: "shipping", title: "Shipping", content: <p>Shipping</p> },
+      { value: "billing", title: "Billing", content: <p>Billing</p>, disabled: true },
+      { value: "returns", title: "Returns", content: <p>Returns</p> },
     ]
 
     renderWithProvider(<AccordionField label="Order info" items={mixedItems} />)

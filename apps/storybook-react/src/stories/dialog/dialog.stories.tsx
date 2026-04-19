@@ -11,6 +11,7 @@ const meta: Meta<typeof Dialog> = {
     size: { control: "select", options: ["small", "medium", "large"] },
     showFooter: { control: "boolean" },
     dismissible: { control: "boolean" },
+    modal: { control: "boolean" },
   },
 }
 
@@ -26,6 +27,7 @@ export const Default: Story = {
     size: "medium",
     showFooter: true,
     dismissible: true,
+    modal: false,
   },
   render: (args) => (
     <Dialog
@@ -38,7 +40,8 @@ export const Default: Story = {
       }
     >
       <Paragraph>
-        Use the raw dialog surface when you need custom modal wiring or bespoke footer content.
+        Use the raw dialog surface when parent code owns the surrounding shell. `Dialog` does not
+        claim modal behavior by default.
       </Paragraph>
     </Dialog>
   ),
@@ -53,7 +56,8 @@ export const ContentOnly: Story = {
   render: (args) => (
     <Dialog {...args}>
       <Paragraph>
-        This layout is useful when parent code owns the surrounding chrome and actions.
+        This layout is useful when parent code owns the surrounding chrome, actions, and any modal
+        boundary behavior.
       </Paragraph>
     </Dialog>
   ),

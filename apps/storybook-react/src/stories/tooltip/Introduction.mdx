@@ -31,6 +31,17 @@ import { IconName, TooltipGroup } from "@marwes-ui/react"
 <TooltipGroup content="Tooltip text" icon={IconName.Info} triggerLabel="Show info" />
 ```
 
+## Accessibility scope
+
+`Tooltip` and `TooltipGroup` are for **non-interactive** contextual help only.
+Keep tooltip content short and informational.
+
+- Always provide a meaningful `triggerLabel` for the icon trigger.
+- `TooltipGroup` opens on hover and focus.
+- `TooltipGroup` dismisses on pointer leave, focus leave, and `Escape`.
+- If you need links, buttons, forms, or any other focusable content, use a
+  popover or dialog pattern instead of a tooltip.
+
 ## Component Reference
 
 - `Tooltip` — visible tooltip bubble using the inverse surface token

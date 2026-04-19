@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ntab + tab group"]
+  Spec["Spec + audit + testing"]
+  Core["@marwes-ui/core\ntab recipe + group helpers"]
+  Presets["preset CSS\ntab + tab-group"]
+  React["@marwes-ui/react\ntab + tab-group + variants"]
+  Vue["@marwes-ui/vue\ntab + tab-group + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared tab contract"]
+  Registry["docs/registry/families/tab"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

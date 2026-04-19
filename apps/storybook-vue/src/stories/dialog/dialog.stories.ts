@@ -22,7 +22,10 @@ export const Default: Story = {
         title="Dialog title"
         description="Describe the dialog purpose. Provide enough context for the user to understand the action or information being presented."
       >
-        <Paragraph>Use the raw dialog surface when you need custom modal wiring or bespoke footer content.</Paragraph>
+        <Paragraph>
+          Use the raw dialog surface when parent code owns the surrounding shell. <code>Dialog</code>
+          does not claim modal behavior by default.
+        </Paragraph>
         <template #footer>
           <CancelButton>Cancel</CancelButton>
           <ConfirmButton>Confirm</ConfirmButton>
@@ -37,7 +40,9 @@ export const ContentOnly: Story = {
     components: { Dialog, Paragraph },
     template: `
       <Dialog title="Content-only dialog" :dismissible="false" :showFooter="false">
-        <Paragraph>This layout is useful when parent code owns the surrounding chrome and actions.</Paragraph>
+        <Paragraph>
+          This layout is useful when parent code owns the surrounding chrome, actions, and any modal boundary behavior.
+        </Paragraph>
       </Dialog>
     `,
   }),

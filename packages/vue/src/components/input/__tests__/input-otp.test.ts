@@ -2,6 +2,7 @@ import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
+import { runInputOtpContract } from "../../../../../../tests/contracts/input-otp.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { InputOtp, type InputOtpProps } from "../input-otp"
 
@@ -14,6 +15,40 @@ function renderWithProvider(props: InputOtpProps) {
     }),
   )
 }
+
+runInputOtpContract("vue", {
+  async renderInputOtp(args = {}) {
+    const props = {
+      label: args.label ?? "Verification code",
+      ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
+      ...(args.error !== undefined ? { error: args.error } : {}),
+      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
+      ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
+    } as InputOtpProps
+
+    renderWithProvider(props)
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options) as HTMLInputElement
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  queryHelperRegion() {
+    return document.querySelector(".mw-input-otp__helper")
+  },
+  queryErrorRegion() {
+    return document.querySelector(".mw-input-otp__error")
+  },
+  queryOtpCells() {
+    return Array.from(document.querySelectorAll(".mw-input-otp__cell")) as HTMLElement[]
+  },
+  async type(element, text) {
+    await userEvent.setup().type(element, text)
+  },
+})
 
 describe("Vue InputOtp", () => {
   it("renders six OTP cells with label and helper text", () => {

@@ -1,0 +1,25 @@
+flowchart TD
+  Registry["docs/registry/families/avatar"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Semantics["packages/core/src/semantics/"]
+  Semantics --> FamilySemantics["family-semantics.ts"]
+  Semantics --> PurposeSemantics["purpose-semantics.ts"]
+
+  Core["packages/core/src/components/atoms/avatar/"]
+  Core --> CoreFiles["avatar-a11y.ts avatar-recipe.ts avatar-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> AvatarCss["avatar.css"]
+
+  React["packages/react/src/components/avatar/"]
+  React --> ReactFiles["avatar.tsx avatar-badge.tsx avatar-group.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/avatar/"]
+  Vue --> VueFiles["avatar.ts avatar-badge.ts avatar-group.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/avatar/"]
+  StoriesV["apps/storybook-vue/src/stories/avatar/"]
+  Contracts["tests/contracts/avatar*.contract.ts"]

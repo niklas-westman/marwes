@@ -18,10 +18,18 @@ export function runRichTextFieldContract(
   h: RichTextFieldContractHarness,
 ): void {
   describe(`RichTextField contract: ${adapterName}`, () => {
-    it("wires the label to the editor via the accessible name", async () => {
+    it("wires the label to the editor via aria-labelledby and the accessible name", async () => {
       await h.renderRichTextField({ label: "Project description" })
       const editor = h.getByRole("textbox", { name: /project description/i })
+      const labelTextNode = h.getByText("Project description")
+      const labelElement = labelTextNode.closest(".mw-input-field__label")
+      const labelledBy = editor.getAttribute("aria-labelledby") ?? ""
+
       expect(editor.tagName).toBe("DIV")
+      expect(labelElement).not.toBeNull()
+      expect(labelElement?.id).toBeTruthy()
+      expect(labelledBy.split(/\s+/)).toContain(labelElement?.id ?? "")
+      expect(editor).not.toHaveAttribute("aria-label", "Project description")
     })
 
     it("connects helper text via aria-describedby", async () => {

@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import * as React from "react"
 import { describe, expect, it } from "vitest"
+import { runDialogModalContract } from "../../../../../../tests/contracts/dialog-modal.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { DialogModal } from "../dialog-modal"
 
@@ -9,34 +10,41 @@ function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
 
-describe("DialogModal", () => {
-  it("renders a labeled modal dialog with description and footer actions", () => {
+runDialogModalContract("react", {
+  renderOpenDialogModal(args = {}) {
     renderWithProvider(
-      <DialogModal
-        open
-        title="Archive project"
-        description="Archiving hides the project from active views."
-        footer={
-          <>
-            <button type="button">Cancel</button>
-            <button type="button">Archive</button>
-          </>
-        }
-      >
-        <p>Project Phoenix will move to the archive.</p>
-      </DialogModal>,
+      <>
+        <button type="button">Outside</button>
+        <DialogModal
+          open
+          portalTarget={null}
+          title={args.title}
+          description={args.description}
+          ariaLabel={args.ariaLabel}
+          dismissible={args.dismissible}
+          closeOnEscape={args.closeOnEscape}
+          closeOnScrimClick={args.closeOnScrimClick}
+          onOpenChange={args.onOpenChange}
+          footer={
+            args.showFooter === false ? undefined : (
+              <>
+                <button type="button">Cancel</button>
+                <button type="button">Confirm</button>
+              </>
+            )
+          }
+        >
+          {args.includeInput ? (
+            <input aria-label="Workspace name" defaultValue="Acme" />
+          ) : (
+            <p>Dialog content</p>
+          )}
+        </DialogModal>
+        <button type="button">After dialog</button>
+      </>,
     )
-
-    const dialog = screen.getByRole("dialog", { name: /archive project/i })
-    expect(dialog.getAttribute("aria-describedby")).toContain("description")
-    expect(screen.getByText("Project Phoenix will move to the archive.")).toBeTruthy()
-    expect(screen.getByRole("button", { name: /close dialog/i })).toBeTruthy()
-    expect(dialog.querySelector(".mw-dialog__footer")).not.toBeNull()
-  })
-
-  it("supports backdrop dismissal and restores focus to the trigger", async () => {
-    const user = userEvent.setup()
-
+  },
+  renderTriggerDialogModal(args = {}) {
     function Example(): React.ReactElement {
       const [open, setOpen] = React.useState(false)
 
@@ -48,65 +56,101 @@ describe("DialogModal", () => {
           <DialogModal
             open={open}
             onOpenChange={setOpen}
-            title="Invite teammate"
-            description="Send an email invitation."
+            portalTarget={null}
+            title={args.title}
+            description={args.description}
+            restoreFocus={args.restoreFocus}
+            closeOnScrimClick={args.closeOnScrimClick}
             footer={<button type="button">Done</button>}
           >
-            <p>Choose a role before sending the invite.</p>
+            <p>Dialog content</p>
           </DialogModal>
         </>
       )
     }
 
     renderWithProvider(<Example />)
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  queryByRole(role, options) {
+    return screen.queryByRole(role, options)
+  },
+  getScrim() {
+    const scrim = document.querySelector(".mw-dialog-modal__scrim")
 
-    const trigger = screen.getByRole("button", { name: /open dialog/i })
-    trigger.focus()
+    if (!(scrim instanceof HTMLElement)) {
+      throw new Error("Expected dialog scrim to exist")
+    }
 
-    await user.click(trigger)
+    return scrim
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
+  async tab(options) {
+    await userEvent.setup().tab(options)
+  },
+  async keyboard(text) {
+    await userEvent.setup().keyboard(text)
+  },
+  waitFor(assertion) {
+    return waitFor(assertion)
+  },
+})
 
-    expect(screen.getByRole("dialog", { name: /invite teammate/i })).toBeTruthy()
+describe("DialogModal specifics", () => {
+  it("does not request close on Escape when escape dismissal is disabled", async () => {
+    const emittedValues: boolean[] = []
+
+    renderWithProvider(
+      <DialogModal
+        open
+        portalTarget={null}
+        title="Rename workspace"
+        closeOnEscape={false}
+        onOpenChange={(open) => {
+          emittedValues.push(open)
+        }}
+        footer={<button type="button">Save</button>}
+      >
+        <input aria-label="Workspace name" defaultValue="Acme" />
+      </DialogModal>,
+    )
+
+    await userEvent.setup().keyboard("{Escape}")
+
+    expect(emittedValues).toEqual([])
+    expect(screen.getByRole("dialog", { name: /rename workspace/i })).toBeInTheDocument()
+  })
+
+  it("does not request close on scrim click when scrim dismissal is disabled", async () => {
+    const emittedValues: boolean[] = []
+
+    renderWithProvider(
+      <DialogModal
+        open
+        portalTarget={null}
+        title="Invite teammate"
+        closeOnScrimClick={false}
+        onOpenChange={(open) => {
+          emittedValues.push(open)
+        }}
+        footer={<button type="button">Done</button>}
+      >
+        <p>Choose a role before sending the invite.</p>
+      </DialogModal>,
+    )
 
     const scrim = document.querySelector(".mw-dialog-modal__scrim")
     if (!(scrim instanceof HTMLElement)) {
       throw new Error("Expected dialog scrim to exist")
     }
 
-    await user.click(scrim)
+    await userEvent.setup().click(scrim)
 
-    await waitFor(() => {
-      expect(screen.queryByRole("dialog", { name: /invite teammate/i })).toBeNull()
-      expect(document.activeElement).toBe(trigger)
-    })
-  })
-
-  it("supports escape dismissal", async () => {
-    const user = userEvent.setup()
-
-    function Example(): React.ReactElement {
-      const [open, setOpen] = React.useState(true)
-
-      return (
-        <DialogModal
-          open={open}
-          onOpenChange={setOpen}
-          title="Rename workspace"
-          description="Update the workspace name for all collaborators."
-          footer={<button type="button">Save</button>}
-        >
-          <input aria-label="Workspace name" defaultValue="Acme" />
-        </DialogModal>
-      )
-    }
-
-    renderWithProvider(<Example />)
-
-    expect(screen.getByRole("dialog", { name: /rename workspace/i })).toBeTruthy()
-
-    await user.keyboard("{Escape}")
-
-    await waitFor(() => {
-      expect(screen.queryByRole("dialog", { name: /rename workspace/i })).toBeNull()
-    })
+    expect(emittedValues).toEqual([])
+    expect(screen.getByRole("dialog", { name: /invite teammate/i })).toBeInTheDocument()
   })
 })

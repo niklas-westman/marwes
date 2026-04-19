@@ -1,0 +1,68 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "tab",
+  "displayName": "Tab",
+  "status": "shipped",
+  "summary": "Coordinated tabs family with a low-level tab atom, a canonical TabGroup path, and thin purpose-tab wrappers.",
+  "philosophy": [
+    "Teach TabGroup as the canonical coordinated widget surface and keep raw Tab as the low-level escape hatch.",
+    "Keep id generation, fallback resolution, and keyboard movement logic in core so React and Vue stay aligned.",
+    "Treat automatic activation and disabled-tab skipping as intentional family decisions rather than incidental implementation details.",
+    "Keep purpose-tab wrappers thin and semantic so they add meaning without becoming a second tabs implementation."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a named tablist with built-in keyboard movement and tab-to-panel wiring.",
+      "The product flow maps clearly to NavigationTabs, ContentTabs, or SettingsTabs and benefits from self-documenting purpose metadata.",
+      "The team wants React and Vue tabs behavior to stay aligned through shared core helpers and one contract file."
+    ],
+    "avoidWhen": [
+      "A different navigation or disclosure pattern such as accordion, switch, or plain links is the more honest interaction model.",
+      "The implementation cannot own the tabpanel relationship and only needs a visual segmented control treatment.",
+      "The team expects advanced features such as vertical orientation, lazy panel mounting, or overflow management that this family does not currently define."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared tab contract coverage across React and Vue for tablist naming, panel wiring, keyboard movement, disabled-tab skipping, and controlled/uncontrolled behavior.",
+      "Local atom tests for icon-only naming and disabled-tab semantics in both adapters.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for keyboard feel, focus visibility, and tabpanel reading flow.",
+      "Policy clarification for the no-enabled-tabs edge case if the family should define it explicitly later.",
+      "Any future expansion beyond the current horizontal automatic-activation tabs model."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#p1--first-component-audit-queue",
+      "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
+    ],
+    "notes": [
+      "Tabs completed a first-pass audit and now have an explicit spec-backed family contract.",
+      "The family still sits outside the wave-1 central semantic registry even though purpose wrappers already emit useful metadata."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/tab/Introduction.mdx",
+        "apps/storybook-react/src/stories/tab/tab-group.stories.tsx",
+        "apps/storybook-react/src/stories/tab/tab.stories.tsx",
+        "apps/storybook-react/src/stories/tab/navigation-tabs.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/tab/Introduction.mdx",
+        "apps/storybook-vue/src/stories/tab/tab-group.stories.ts",
+        "apps/storybook-vue/src/stories/tab/tab.stories.ts",
+        "apps/storybook-vue/src/stories/tab/navigation-tabs.stories.ts"
+      ]
+    },
+    "preferredStates": ["default", "selected", "hover", "pressed", "disabled", "focus"]
+  },
+  "openQuestions": [
+    "Should purpose-tab metadata eventually move into the central semantic registry if tabs become a covered semantic family?",
+    "Should the no-enabled-tabs edge case be explicitly specified and covered by the shared contract, or remain outside the supported family contract?"
+  ]
+}

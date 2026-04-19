@@ -21,7 +21,7 @@ runTextareaFieldContract("vue", {
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
-      textarea: { ariaLabel: args.label },
+      textarea: {},
     }
     renderWithProvider(props)
   },

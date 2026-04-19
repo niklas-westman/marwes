@@ -8,6 +8,12 @@ const meta = {
   component: RichTextField as unknown as object,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Field-wrapped rich text editor. This inherits the same manual-review-heavy boundary as RichText: automated tests protect the wrapper contract, but editor accessibility should still be validated in supported browser and assistive technology combinations.",
+      },
+    },
   },
   tags: ["autodocs"],
   args: {

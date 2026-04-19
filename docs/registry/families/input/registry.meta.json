@@ -1,0 +1,73 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "input",
+  "displayName": "Input",
+  "status": "shipped",
+  "summary": "Broad text-entry family spanning native-first inputs, select fields, OTP entry, and manual-review-heavy rich text.",
+  "philosophy": [
+    "Keep plain text entry, multiline entry, select, OTP, and rich text in one input-domain family so shared field wiring stays coherent.",
+    "Prefer native browser semantics first, especially for base Input, Textarea, and Select surfaces.",
+    "Keep custom presentation explicit through purpose wrappers such as DropdownField instead of teaching custom behavior as the default.",
+    "Document rich text honestly as manual-review-heavy rather than pretending automated checks fully prove the editing experience."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs text-like data entry with shared label, helper, error, and validation patterns.",
+      "The product flow should benefit from purpose-level field wrappers such as SearchField, PasswordField, or DropdownField.",
+      "The implementation should stay aligned across React and Vue through shared field helpers and contracts."
+    ],
+    "avoidWhen": [
+      "A different family such as checkbox, radio, or switch is the more honest control type.",
+      "A custom dropdown visual is being chosen without a deliberate reason to move away from the native-first select path.",
+      "The team is not prepared to manually review rich-text editing behavior in real browser and assistive-technology combinations."
+    ]
+  },
+  "axe": {
+    "riskTier": "high",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared contracts for input, input fields, select, select combobox, textarea, dropdown, OTP, and rich text.",
+      "Storybook introduction and taxonomy tests in both apps.",
+      "Documented native-first select guidance and explicit rich-text manual-review boundary."
+    ],
+    "manualReviewRequired": [
+      "RichText editing behavior in supported browser and assistive-technology combinations.",
+      "Edge-case custom dropdown interaction if the explicit custom path remains shipped.",
+      "Future design alignment when a dedicated RichText Figma node becomes available."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#p1--first-component-audit-queue",
+      "AXE_ROADMAP.md#4c--rich-text-risk-handling",
+      "AXE_ROADMAP.md#4b--custom-select-hardening"
+    ],
+    "notes": [
+      "Input was the first detailed family audit because it concentrates both native-control and custom-widget accessibility risk.",
+      "The family already completed a first pass and now acts as a reference for how family-level AXE work should be recorded."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/input/Introduction.mdx",
+        "apps/storybook-react/src/stories/input/input.stories.tsx",
+        "apps/storybook-react/src/stories/input/select-field.stories.tsx",
+        "apps/storybook-react/src/stories/input/dropdown-field.stories.tsx",
+        "apps/storybook-react/src/stories/input/input-otp.stories.tsx",
+        "apps/storybook-react/src/stories/input/rich-text.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/input/Introduction.mdx",
+        "apps/storybook-vue/src/stories/input/input.stories.ts",
+        "apps/storybook-vue/src/stories/input/select-field.stories.ts",
+        "apps/storybook-vue/src/stories/input/dropdown-field.stories.ts",
+        "apps/storybook-vue/src/stories/input/input-otp.stories.ts",
+        "apps/storybook-vue/src/stories/input/rich-text.stories.ts"
+      ]
+    },
+    "preferredStates": ["default", "hover", "active", "disabled", "focus", "error"]
+  },
+  "openQuestions": [
+    "Should the input-family purpose metadata eventually move into the central semantic registry in @marwes-ui/core?",
+    "When a dedicated RichText Figma component exists, should the registry split rich-text provenance out more explicitly inside the family page?"
+  ]
+}

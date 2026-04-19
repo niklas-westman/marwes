@@ -47,6 +47,7 @@ const dialogPropKeys = [
   "size",
   "showFooter",
   "dismissible",
+  "modal",
   "ariaLabel",
   "ariaLabelledBy",
   "ariaDescribedBy",
@@ -77,6 +78,7 @@ export const Dialog = defineComponent(
       const dialogOptions: DialogOptions = {
         showFooter: hasFooter.value,
         dismissible: dismissible.value,
+        modal: props.modal,
       }
 
       if (props.dataAttributes) {
@@ -115,7 +117,7 @@ export const Dialog = defineComponent(
           id: id.value,
           class: mergeClassNames(kit.value.className, props.className, attrs.class),
           role: kit.value.a11y.role,
-          "aria-modal": "true",
+          "aria-modal": kit.value.a11y.ariaModal ? "true" : undefined,
           "aria-label": kit.value.a11y.ariaLabel,
           "aria-labelledby": kit.value.a11y.ariaLabelledBy,
           "aria-describedby": kit.value.a11y.ariaDescribedBy,

@@ -1,0 +1,85 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "badge",
+  "displayName": "Badge",
+  "status": "shipped",
+  "summary": "Canonical compact-status family with a raw Badge atom, a BadgeGroup molecule, and thin purpose-badge wrappers for status, priority, and notification contexts.",
+  "philosophy": [
+    "Teach purpose badges first when the meaning is known and keep raw Badge as the deliberate primitive and escape hatch.",
+    "Keep canonical badge semantics in core so React and Vue emit the same data-component, data-purpose, and data-variant contract.",
+    "Keep BadgeGroup structural and labeled rather than turning it into an interactive filter-chip or token-input system.",
+    "Keep the shipped variant set honest to code and docs even though the current Figma page still shows an extra brand row that Marwes does not ship."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a compact, non-interactive status label, priority marker, or notification count with stable semantics.",
+      "The product flow maps clearly to StatusBadge, PriorityBadge, or NotificationBadge and benefits from canonical purpose metadata.",
+      "The team wants grouped badge presentation to stay aligned across React and Vue through BadgeGroup and one shared contract file."
+    ],
+    "avoidWhen": [
+      "The surface is really an interactive chip, filter token, dismissible tag, or pill button rather than a passive badge.",
+      "The implementation cannot provide truthful surrounding context or an ariaLabel for numeric-only badge content.",
+      "The team expects a richer color-intent matrix such as the Figma-only brand row that is not currently part of the shipped API."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core recipe tests for default neutral behavior, variant classes, and ariaLabel passthrough.",
+      "Shared badge contract coverage across React and Vue for canonical purpose semantics.",
+      "Local adapter and Storybook taxonomy tests for Badge, BadgeGroup, and the purpose wrappers in both frameworks."
+    ],
+    "manualReviewRequired": [
+      "Product-level wording quality for numeric-only notification badges and short status labels.",
+      "Whether grouped badges always have enough visible labeling or surrounding context in real layouts.",
+      "Any future attempt to grow the family into interactive chips or to ship the current Figma-only brand tone."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Badge is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family already has strong shared-contract and adapter-level coverage despite the missing dedicated audit write-up."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/badge/Introduction.mdx",
+        "apps/storybook-react/src/stories/badge/badge.stories.tsx",
+        "apps/storybook-react/src/stories/badge/badge-group.stories.tsx",
+        "apps/storybook-react/src/stories/badge/status-badge.stories.tsx",
+        "apps/storybook-react/src/stories/badge/priority-badge.stories.tsx",
+        "apps/storybook-react/src/stories/badge/notification-badge.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/badge/Introduction.mdx",
+        "apps/storybook-vue/src/stories/badge/badge.stories.ts",
+        "apps/storybook-vue/src/stories/badge/badge-group.stories.ts",
+        "apps/storybook-vue/src/stories/badge/status-badge.stories.ts",
+        "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
+        "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "neutral",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "status",
+      "priority",
+      "notification",
+      "grouped",
+      "numeric",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should the Figma-only brand badge row eventually become a shipped Badge variant, or should the registry keep treating it as design-only?",
+    "If product teams ask for clickable filters, dismissible tags, or chips, should that remain a separate family instead of expanding the current passive badge contract?"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "icon",
+  "displayName": "Icon",
+  "status": "shipped",
+  "summary": "Named SVG icon family with one raw Icon atom, a generated runtime inventory, gallery-driven Storybook discovery, and shared React/Vue contract coverage for decorative versus labelled behavior.",
+  "philosophy": [
+    "Teach Icon as a low-level visual adjunct and keep the semantic meaning on the surrounding control, label, or nearby text whenever possible.",
+    "Default unlabeled icons to decorative so assistive technology is not burdened with meaningless duplicate announcements.",
+    "Treat the Storybook gallery as the main discovery surface for choosing names, sizes, and stroke weights across the shipped runtime inventory.",
+    "Keep the icon inventory source-owned in the generated core registry, while being honest that the current adapter path does not fully use the adjacent core recipe and preset CSS layers."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a named decorative or labelled icon alongside text, controls, or status copy.",
+      "The product wants React and Vue icon behavior to stay aligned through the shared icon registry, size scale, stroke-width scale, and contract coverage.",
+      "Teams need a searchable gallery for the shipped icon inventory before placing icons into larger families like buttons, tabs, inputs, or tooltips."
+    ],
+    "avoidWhen": [
+      "The icon would be carrying the only accessible meaning of an interaction without a parent control label or its own explicit aria-label.",
+      "A richer component such as Button, IconButton, TooltipGroup, Avatar, or Toast is the more honest family surface for the job.",
+      "The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current Icon family does not ship."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core recipe tests for decorative defaults, size resolution, stroke-width resolution, and labelled icon output.",
+      "Shared icon contract coverage across React and Vue for decorative-versus-labelled semantics and token-based size and stroke-width behavior.",
+      "Storybook introduction and taxonomy tests in both apps for the atom teaching surface and icon-gallery discovery path."
+    ],
+    "manualReviewRequired": [
+      "Product-level review that icon-only buttons, tabs, tooltip triggers, and other parent controls always get an accessible name from the parent surface or an explicit label.",
+      "Visual review that the current runtime stroke-based icon rendering still feels aligned with the locally synced Figma inventory and category galleries.",
+      "Architectural review of whether the adapters should eventually converge on createIconRecipe and icon.css, or whether the unused recipe-layer affordances should be trimmed."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#dev-time-warnings"
+    ],
+    "notes": [
+      "Icon is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The atom itself is small and low-risk, but icon misuse often appears indirectly in icon-only parent controls and decorative-versus-labelled policy gaps."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/icon/Introduction.mdx",
+        "apps/storybook-react/src/stories/icon/icon.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/icon/Introduction.mdx",
+        "apps/storybook-vue/src/stories/icon/icon.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "decorative",
+      "labelled",
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "thin-stroke",
+      "heavy-stroke",
+      "light",
+      "dark",
+      "gallery-filtering"
+    ]
+  },
+  "openQuestions": [
+    "Should the React and Vue Icon adapters converge on createIconRecipe and icon.css, or should the unused recipe and preset affordances be trimmed so the family has one obvious runtime path?",
+    "Should the local Figma sync gain a fuller icon inventory or clearer category mapping that matches the 227 shipped code icon names, or should the runtime inventory be narrowed closer to the current design baseline?"
+  ]
+}

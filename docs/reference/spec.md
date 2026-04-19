@@ -123,8 +123,8 @@ Keep this mapping in PR description (or add temporarily to this file for major w
 
 ## 9. Open Decisions
 - DEC-001: Should Select stay native only by default?
-  - Status: Open
-  - Lean: Yes
+  - Status: Resolved (see Decision Log)
+  - Lean: Native-first by default
 - DEC-002: Should value controls standardize on `onValueChange` at core boundaries?
   - Status: Open
   - Lean: Yes
@@ -488,6 +488,98 @@ Use this format when resolving an open decision:
   - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
   - Docs/changelog: `docs/reference/spec.md`, `.changeset/*`
 
+### REQ-TAB-001: Tab Family Accessibility Contract
+- **Problem**: Marwes already ships `Tab`, `TabGroup`, `TabPanel`, and purpose-tab wrappers, but the accessibility contract for keyboard activation, disabled-tab behavior, and panel wiring has lived mostly in implementation and Storybook docs rather than the canonical spec.
+- **Scope**:
+  - Treat `TabGroup` as the canonical coordinated tabs primitive in React and Vue
+  - Keep raw `Tab` as the low-level atom for bespoke tablists
+  - Standardize automatic activation for `TabGroup` keyboard navigation
+  - Standardize disabled-tab skipping and first-enabled fallback resolution
+  - Standardize tablist naming and tab-to-panel wiring expectations
+  - Add shared React/Vue contract coverage for the family
+- **Non-goals**:
+  - Adding vertical tab orientation or remapping arrow-key behavior in this pass
+  - Adding lazy panel mounting, closable tabs, drag-reorder, or overflow menus
+  - Turning the raw `Tab` atom into a fully managed tabs solution on its own
+- **Acceptance criteria**:
+  - [x] `TabGroup` exposes a named `tablist` via visible label text when `label` is present, or via `ariaLabel` when no visible label is present
+  - [x] Each tab wires `aria-controls` to its matching `tabpanel`, and each panel wires `aria-labelledby` back to its controlling tab
+  - [x] `TabGroup` uses automatic activation: `ArrowLeft`, `ArrowRight`, `Home`, and `End` move focus and selection immediately among enabled tabs
+  - [x] Disabled tabs are not activatable and are skipped during roving-focus movement and fallback resolution
+  - [x] When `defaultActiveTab` or controlled `activeTab` points to a disabled or missing tab, `TabGroup` resolves to the first enabled tab
+  - [x] Raw icon-only `Tab` usage requires an explicit `ariaLabel`
+  - [x] React and Vue run the same shared `tests/contracts/tab.contract.ts` coverage for the family
+- **Validation**:
+  - Unit: `tests/contracts/tab.contract.ts` via the React and Vue `TabGroup` tests
+  - Integration/manual: Verify Tab, TabGroup, and purpose-tab stories in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/tab.contract.ts`
+  - `packages/react/src/components/tab/__tests__/*`
+  - `packages/vue/src/components/tab/__tests__/*`
+  - `docs/audits/tab-family-accessibility.md`
+
+### REQ-SWITCH-001: Switch Family Accessibility Contract
+- **Problem**: Marwes already ships `Switch`, `SwitchField`, and purpose switch wrappers, but the accessibility contract for checked state, disabled behavior, and field wiring has not been recorded explicitly in the canonical spec or shared across React and Vue through one contract file.
+- **Scope**:
+  - Treat `Switch` as the low-level button-backed `role="switch"` primitive
+  - Treat `SwitchField` as the canonical labeled switch composition
+  - Standardize visible-label, description, and error wiring for `SwitchField`
+  - Standardize disabled-switch behavior and checked-state emission expectations
+  - Add shared React/Vue contract coverage for the family
+- **Non-goals**:
+  - Replacing the button-backed switch with a hidden checkbox pattern in this pass
+  - Adding grouped switch-list semantics or form serialization behavior beyond the current component surface
+  - Adding tri-state switch behavior
+- **Acceptance criteria**:
+  - [x] `Switch` renders as a button-backed control with `role="switch"` and `aria-checked` reflecting the supplied checked state
+  - [x] Disabled switches are not interactive and do not emit checked-change callbacks
+  - [x] `SwitchField` wires the visible label through `aria-labelledby`
+  - [x] `SwitchField` merges description and error ids into `aria-describedby` when present
+  - [x] Empty description and error strings are treated as absent
+  - [x] Purpose wrappers preserve the base field contract and attach stable `data-purpose` metadata
+  - [x] React and Vue run the same shared `tests/contracts/switch.contract.ts` coverage for atom and field behavior
+- **Validation**:
+  - Unit: `tests/contracts/switch.contract.ts` via the React and Vue switch tests
+  - Integration/manual: Verify Switch, SwitchField, and purpose-switch stories in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/switch.contract.ts`
+  - `packages/react/src/components/switch/__tests__/*`
+  - `packages/vue/src/components/switch/__tests__/*`
+  - `docs/audits/switch-family-accessibility.md`
+
+### REQ-ACCORDION-001: Accordion Family Accessibility Contract
+- **Problem**: Marwes already ships `Accordion`, `AccordionField`, and purpose accordion wrappers, but the accessibility contract for trigger-panel wiring, grouped field semantics, and controlled open-state behavior has not been recorded explicitly in the canonical spec or shared across React and Vue through one contract file.
+- **Scope**:
+  - Treat `Accordion` as the low-level disclosure primitive for one trigger and one controlled panel
+  - Treat `AccordionField` as the canonical labeled accordion-group composition
+  - Standardize trigger/panel id wiring and disabled behavior
+  - Standardize description, error, and invalid-state wiring on the grouped field wrapper
+  - Standardize single-open and multi-open behavior expectations
+  - Add shared React/Vue contract coverage for the family
+- **Non-goals**:
+  - Adding roving-focus keyboard navigation between accordion headers in this pass
+  - Adding nested accordion orchestration, lazy mounting, or animation policy
+  - Refactoring the current React and Vue item-content APIs to full surface parity in this pass
+- **Acceptance criteria**:
+  - [x] `Accordion` exposes a trigger button with `aria-expanded`, `aria-controls`, and a matching named controlled region wired via `aria-labelledby`
+  - [x] Disabled accordions are not interactive and do not emit toggle callbacks
+  - [x] `AccordionField` exposes a labeled group with description and error ids merged into `aria-describedby`
+  - [x] `AccordionField` sets `aria-invalid` when error text is present
+  - [x] `AccordionField` supports both single-open and multi-open behavior intentionally
+  - [x] Controlled `openItems` remain source-of-truth while change callbacks receive the next open state
+  - [x] React and Vue run the same shared `tests/contracts/accordion.contract.ts` coverage for atom and field behavior
+- **Validation**:
+  - Unit: `tests/contracts/accordion.contract.ts` via the React and Vue accordion tests
+  - Integration/manual: Verify Accordion, AccordionField, and purpose-accordion stories in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/accordion.contract.ts`
+  - `packages/react/src/components/accordion/__tests__/*`
+  - `packages/vue/src/components/accordion/__tests__/*`
+  - `docs/audits/accordion-family-accessibility.md`
+
 ### REQ-TOOLTIP-001: Tooltip Family
 - **Figma reference**:
   - `.figma/marwes/components/tooltip.json`
@@ -523,6 +615,117 @@ Use this format when resolving an open decision:
   - Vue: `packages/vue/src/components/tooltip/*`, `packages/vue/src/index.ts`
   - Storybook: `apps/storybook-react/src/stories/tooltip/*`, `apps/storybook-vue/src/stories/tooltip/*`
   - Docs/changelog: `docs/reference/spec.md`, `docs/planning/component-backlog.md`, `.changeset/*`
+
+### REQ-TOOLTIP-002: Tooltip Family Accessibility Contract
+- **Problem**: Marwes already ships `Tooltip` and `TooltipGroup`, but the accessibility contract for trigger naming, `aria-describedby` wiring, dismissal behavior, and tooltip scope has not been recorded explicitly in the canonical spec or shared across React and Vue through one contract file.
+- **Scope**:
+  - Treat `Tooltip` as the low-level visible tooltip bubble primitive
+  - Treat `TooltipGroup` as the canonical icon-trigger contextual-help composition
+  - Standardize trigger naming through `triggerLabel`
+  - Standardize hover/focus reveal and mouse-leave, blur, and `Escape` dismissal behavior
+  - Standardize `aria-describedby` wiring between the trigger and tooltip bubble
+  - Document tooltip content as non-interactive, with richer overlays directed to popover or dialog patterns
+  - Add shared React/Vue contract coverage for the family
+- **Non-goals**:
+  - Turning `TooltipGroup` into a general-purpose popover system
+  - Supporting interactive tooltip content such as links, buttons, forms, or focusable widgets
+  - Adding collision detection, delay tuning, or arbitrary trigger composition in this pass
+- **Acceptance criteria**:
+  - [x] `Tooltip` renders with `role="tooltip"` and preserves an explicit `id` when one is provided
+  - [x] `TooltipGroup` names its icon-only trigger from `triggerLabel`, with a stable default label when one is omitted
+  - [x] `TooltipGroup` opens on hover and focus and dismisses on pointer leave, focus leaving the group, and `Escape`
+  - [x] When open, `TooltipGroup` wires `aria-describedby` from the trigger to the tooltip id and removes that wiring when closed
+  - [x] Controlled `open` remains the source of truth while change callbacks receive the next open state
+  - [x] React and Vue run the same shared `tests/contracts/tooltip.contract.ts` coverage for atom and molecule behavior
+  - [x] Storybook docs in both apps teach tooltip content as non-interactive and direct richer overlays toward popover or dialog patterns
+- **Validation**:
+  - Unit: `tests/contracts/tooltip.contract.ts` via the React and Vue tooltip tests
+  - Integration/manual: Verify Tooltip and TooltipGroup stories plus intro docs in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/tooltip.contract.ts`
+  - `packages/react/src/components/tooltip/__tests__/*`
+  - `packages/vue/src/components/tooltip/__tests__/*`
+  - `apps/storybook-react/src/stories/tooltip/*`
+  - `apps/storybook-vue/src/stories/tooltip/*`
+  - `docs/audits/tooltip-family-accessibility.md`
+
+### REQ-SLIDER-001: Slider Family Accessibility Contract
+- **Problem**: Marwes already ships `Slider`, `SliderField`, and purpose slider wrappers, but the accessibility contract for native range semantics, label/description wiring, disabled behavior, and value updates has not been recorded explicitly in the canonical spec or shared across React and Vue through one contract file.
+- **Scope**:
+  - Treat `Slider` as the low-level native `input[type="range"]` primitive
+  - Treat `SliderField` as the canonical labeled slider composition
+  - Standardize visible-label, description, and error wiring for `SliderField`
+  - Standardize disabled behavior and numeric value-change expectations for the native slider path
+  - Keep tooltip and touch-area affordances as visual-only enhancements on top of the native control
+  - Add shared React/Vue contract coverage for the family
+- **Non-goals**:
+  - Replacing the native range input with a custom slider widget in this pass
+  - Adding multi-thumb ranges, vertical orientation, or custom keyboard behavior beyond the native control
+  - Treating the visual tooltip as an accessibility naming or value-description substitute
+- **Acceptance criteria**:
+  - [x] `Slider` renders a native `type="range"` control with normalized `min`, `max`, and `step` metadata
+  - [x] Uncontrolled `Slider` updates its numeric value and emits `onValueChange(value)` with the next number
+  - [x] Controlled `Slider` keeps the supplied value as source of truth while still emitting the next value
+  - [x] Disabled sliders preserve native disabled semantics
+  - [x] `SliderField` wires the visible label through `aria-labelledby`
+  - [x] `SliderField` merges description, error, and external described-by ids into `aria-describedby`
+  - [x] `SliderField` sets `aria-invalid` when error text is present
+  - [x] `showTooltip` remains a visual-only affordance and does not replace `ariaValueText` or labeling paths
+  - [x] React and Vue run the same shared `tests/contracts/slider.contract.ts` coverage for atom and field behavior
+- **Validation**:
+  - Unit: `tests/contracts/slider.contract.ts` via the React and Vue slider tests
+  - Integration/manual: Verify Slider, SliderField, and purpose-slider stories plus intro docs in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/slider.contract.ts`
+  - `packages/react/src/components/slider/__tests__/*`
+  - `packages/vue/src/components/slider/__tests__/*`
+  - `apps/storybook-react/src/stories/slider/*`
+  - `apps/storybook-vue/src/stories/slider/*`
+  - `docs/audits/slider-family-accessibility.md`
+
+### REQ-DIALOG-001: Dialog Family Accessibility Contract
+- **Problem**: Marwes already ships `Dialog`, `DialogModal`, and purpose dialog wrappers, but the accessibility contract for modal semantics, focus lifecycle, dismissal behavior, and the boundary between the raw shell and the modal wrapper has not been recorded explicitly in the canonical spec or shared across React and Vue through a dedicated modal contract.
+- **Scope**:
+  - Treat `Dialog` as the low-level named dialog shell
+  - Treat `DialogModal` as the canonical modal overlay composition
+  - Standardize accessible-name and description wiring for the raw shell
+  - Standardize that modal semantics (`aria-modal`) belong to `DialogModal` unless parent code opts the raw shell into a fully managed modal boundary intentionally
+  - Standardize initial focus, no-focusable fallback, focus trapping, Escape dismissal, scrim dismissal, and focus restoration for `DialogModal`
+  - Keep purpose wrappers on top of the shared modal contract
+  - Add shared React/Vue contract coverage for modal behavior
+- **Non-goals**:
+  - Adding nested-dialog orchestration in this pass
+  - Treating background isolation via `inert` or sibling management as solved in this pass
+  - Claiming that automated tests replace real assistive-technology review for modal behavior
+- **Acceptance criteria**:
+  - [x] `Dialog` renders a named `role="dialog"` shell from visible title text when present, or from `ariaLabel` when no visible title is provided
+  - [x] `Dialog` wires description text through `aria-describedby`
+  - [x] `Dialog` does not claim modal behavior by default
+  - [x] `Dialog` supports an explicit `modal` opt-in for parent-managed modal shells
+  - [x] `DialogModal` applies `aria-modal="true"` and keeps the raw shell inside the modal overlay
+  - [x] `DialogModal` moves focus to the first focusable element on open, or to the dialog surface when no focusable child exists
+  - [x] `DialogModal` traps `Tab` focus within the modal surface
+  - [x] `DialogModal` supports configurable Escape and scrim dismissal and restores focus to the trigger when the modal closes
+  - [x] Controlled `DialogModal` keeps `open` as the source of truth while still emitting one close request
+  - [x] Purpose wrappers preserve the modal contract and continue to expose stable dialog purpose metadata
+  - [x] React and Vue run the shared `tests/contracts/dialog-modal.contract.ts` coverage for modal behavior alongside the existing purpose-dialog contract
+- **Validation**:
+  - Unit: `tests/contracts/dialog-modal.contract.ts` plus React/Vue dialog tests
+  - Integration/manual: Verify Dialog introduction docs and dialog stories in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/dialog-modal.contract.ts`
+  - `tests/contracts/dialog.contract.ts`
+  - `packages/core/src/components/atoms/dialog/*`
+  - `packages/core/test/recipes/dialog.test.ts`
+  - `packages/presets/src/firstEdition/dialog.css`
+  - `packages/react/src/components/dialog/__tests__/*`
+  - `packages/vue/src/components/dialog/__tests__/*`
+  - `apps/storybook-react/src/stories/dialog/*`
+  - `apps/storybook-vue/src/stories/dialog/*`
+  - `docs/audits/dialog-family-accessibility.md`
 
 ### DEC-004 - Vue adapter event API supports parity callbacks and Vue emits
 - Date: 2026-02-23
@@ -562,3 +765,99 @@ Use this format when resolving an open decision:
   - `packages/vue/src/components/input/*`
   - `apps/storybook-react/src/stories/input/*`
   - `apps/storybook-vue/src/stories/input/*`
+
+### DEC-001 - Select is native-first by default
+- Date: 2026-04-17
+- Decision:
+  - `Select` and `SelectField` default to native browser select behavior.
+  - The custom Marwes dropdown remains supported as an explicit opt-in via `native={false}` or `appearance="marwes"`.
+  - `DropdownField` remains the purpose-level wrapper for the custom Figma-aligned dropdown presentation.
+- Rationale:
+  - Native select behavior is the accessibility-supported baseline across browsers, assistive technologies, and mobile environments.
+  - Keeping the custom dropdown as an opt-in preserves the design-aligned path without teaching the higher-risk behavior as the default.
+  - This keeps the base Input family honest: generic select controls default to platform semantics, while purpose wrappers can intentionally opt into custom presentation.
+- Impacted docs/files:
+  - `docs/reference/spec.md`
+  - `packages/core/src/components/atoms/input/select-types.ts`
+  - `packages/react/src/components/input/*`
+  - `packages/vue/src/components/input/*`
+  - `apps/storybook-react/src/stories/input/*`
+  - `apps/storybook-vue/src/stories/input/*`
+
+### DEC-007 - Tabs use automatic activation and skip disabled tabs
+- Date: 2026-04-17
+- Decision:
+  - `TabGroup` uses automatic activation rather than manual activation.
+  - `ArrowLeft`, `ArrowRight`, `Home`, and `End` move both focus and selection immediately among enabled tabs.
+  - Disabled tabs are never activatable and are skipped during roving-focus movement and fallback resolution.
+  - When a requested `activeTab` or `defaultActiveTab` is missing or disabled, `TabGroup` resolves to the first enabled tab.
+- Rationale:
+  - This matches the current shipped Marwes behavior across React and Vue.
+  - It keeps the coordinated widget contract simple: focus movement and active-panel state stay in sync.
+  - Skipping disabled tabs avoids teaching a keyboard path that lands on controls users cannot activate.
+- Impacted docs/files:
+  - `docs/reference/spec.md`
+  - `tests/contracts/tab.contract.ts`
+  - `packages/react/src/components/tab/*`
+  - `packages/vue/src/components/tab/*`
+  - `apps/storybook-react/src/stories/tab/*`
+  - `apps/storybook-vue/src/stories/tab/*`
+
+### DEC-008 - Accordion item content uses `content` as the canonical cross-framework prop
+- Date: 2026-04-17
+- Decision:
+  - `AccordionField` item objects use `content` as the canonical public prop for panel body content.
+  - React keeps `children` as a temporary compatibility alias for existing item objects.
+  - Vue widens `content` to renderable node content instead of string-only content.
+- Rationale:
+  - `content` is the clearer framework-agnostic item key for a data-driven accordion item shape.
+  - Using one canonical item prop improves React/Vue parity and keeps Storybook/docs aligned across adapters.
+  - Keeping the React `children` alias avoids an abrupt break while the docs and examples teach the canonical API.
+- Impacted docs/files:
+  - `docs/reference/spec.md`
+  - `docs/audits/accordion-family-accessibility.md`
+  - `packages/react/src/components/accordion/*`
+  - `packages/vue/src/components/accordion/*`
+  - `apps/storybook-react/src/stories/accordion/*`
+  - `apps/storybook-vue/src/stories/accordion/*`
+
+### DEC-009 - Tooltip content stays non-interactive contextual help
+- Date: 2026-04-17
+- Decision:
+  - `Tooltip` and `TooltipGroup` stay limited to non-interactive contextual help content.
+  - `TooltipGroup` opens on hover and focus and dismisses on pointer leave, focus leaving the group, and `Escape`.
+  - Interactive overlays with links, buttons, forms, or other focusable content should use popover or dialog patterns instead.
+- Rationale:
+  - This matches the current Marwes tooltip implementation across React and Vue.
+  - It keeps the tooltip family aligned with the expected accessibility model for `role="tooltip"` content.
+  - It gives Storybook and future audits a clear misuse boundary instead of implying tooltip is a generic floating-surface primitive.
+- Impacted docs/files:
+  - `docs/reference/spec.md`
+  - `docs/audits/tooltip-family-accessibility.md`
+  - `tests/contracts/tooltip.contract.ts`
+  - `packages/react/src/components/tooltip/__tests__/*`
+  - `packages/vue/src/components/tooltip/__tests__/*`
+  - `apps/storybook-react/src/stories/tooltip/*`
+  - `apps/storybook-vue/src/stories/tooltip/*`
+
+### DEC-010 - DialogModal owns modal semantics while Dialog stays non-modal by default
+- Date: 2026-04-18
+- Decision:
+  - `Dialog` stays the low-level named dialog shell and does not emit `aria-modal` by default.
+  - `DialogModal` is the canonical modal layer and always applies `aria-modal="true"`.
+  - Parent-managed modal shells may opt the raw `Dialog` shell into modal semantics explicitly via `modal`.
+  - `DialogModal` uses a deterministic initial-focus policy: focus the first focusable element in the surface, or the dialog surface itself when no focusable child exists.
+- Rationale:
+  - The raw shell does not own scrim, focus trap, or background isolation behavior, so it should not overclaim modal semantics by default.
+  - Keeping modal semantics in `DialogModal` aligns the accessibility contract with the layer that actually owns modal lifecycle behavior.
+  - The explicit `modal` escape hatch preserves advanced custom overlay compositions without teaching the raw shell as a standalone modal solution.
+  - Recording the initial-focus policy makes React and Vue parity easier to test and document.
+- Impacted docs/files:
+  - `docs/reference/spec.md`
+  - `docs/audits/dialog-family-accessibility.md`
+  - `tests/contracts/dialog-modal.contract.ts`
+  - `packages/core/src/components/atoms/dialog/*`
+  - `packages/react/src/components/dialog/*`
+  - `packages/vue/src/components/dialog/*`
+  - `apps/storybook-react/src/stories/dialog/*`
+  - `apps/storybook-vue/src/stories/dialog/*`

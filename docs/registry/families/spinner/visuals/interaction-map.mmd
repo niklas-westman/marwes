@@ -1,0 +1,23 @@
+flowchart LR
+  RawSpinner["Raw Spinner"] --> VariantGeometry["variant -> one of seven synced SVG shapes"]
+  RawSpinner --> SizeData["size -> xs sm md lg\nor custom pixel size"]
+  RawSpinner --> DefaultA11y["decorative by default\naria-hidden=true"]
+  RawSpinner --> StatusMode["ariaLabel -> role=status\naria-live=polite"]
+  RawSpinner --> LocalData["data-component=spinner\ndata-variant + data-size"]
+
+  ButtonSpinner["ButtonSpinner"] --> ButtonDefaults["classic + xs defaults\nbutton-loading metadata"]
+  EmptyStateSpinner["EmptyStateSpinner"] --> EmptyStateDefaults["dots-round + lg defaults\nempty-state metadata"]
+
+  ButtonLoading["Button loading prop"] --> ButtonSpinner
+  ButtonDefaults --> LocalData
+  EmptyStateDefaults --> LocalData
+
+  CssMotion["spinner.css"] --> Rotation["single rotation animation\nreduced-motion slows duration"]
+  Rotation --> ReactDom["React DOM"]
+  Rotation --> VueDom["Vue DOM"]
+  LocalData --> ReactDom
+  LocalData --> VueDom
+  DefaultA11y --> ReactDom
+  DefaultA11y --> VueDom
+  StatusMode --> ReactDom
+  StatusMode --> VueDom

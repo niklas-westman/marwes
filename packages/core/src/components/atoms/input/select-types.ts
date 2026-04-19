@@ -57,5 +57,5 @@ export function resolveSelectMode(args: Pick<SelectOptions, "native" | "appearan
     return "marwes"
   }
 
-  return args.appearance ?? "marwes"
+  return args.appearance ?? "native"
 }

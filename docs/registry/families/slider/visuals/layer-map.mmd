@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\nslider + slider-field"]
+  Spec["Spec + audit + testing"]
+  Core["@marwes-ui/core\nslider recipe + field helpers"]
+  Presets["preset CSS\nslider + slider-field"]
+  React["@marwes-ui/react\nslider + field + variants"]
+  Vue["@marwes-ui/vue\nslider + field + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared slider contract"]
+  Registry["docs/registry/families/slider"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

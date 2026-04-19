@@ -1,0 +1,28 @@
+flowchart LR
+  Figma["Figma refs\nspinner styles + TinoSpinner exploration"]
+  Spec["Spec + audit queue"]
+  Core["@marwes-ui/core\nspinner recipe + svg definitions"]
+  Presets["preset CSS\nspinner animation shell"]
+  React["@marwes-ui/react\nspinner + context wrappers"]
+  Vue["@marwes-ui/vue\nspinner + context wrappers"]
+  ButtonIntegration["button loading integration\nin both adapters"]
+  Stories["Storybook React + Vue"]
+  Contracts["spinner shared contract"]
+  Registry["docs/registry/families/spinner"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> ButtonIntegration
+  Vue --> ButtonIntegration
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

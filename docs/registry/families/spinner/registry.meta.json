@@ -1,0 +1,84 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "spinner",
+  "displayName": "Spinner",
+  "status": "shipped",
+  "summary": "Family-local loading-indicator family with a core Spinner atom, adapter-owned context wrappers, and button-loading integration built on the same atom contract.",
+  "philosophy": [
+    "Keep Spinner as a small loading atom that stays decorative by default and only becomes an announced status surface when product code opts in with ariaLabel.",
+    "Keep the seven synced visual styles and size scale source-owned in core so React and Vue render the same spinner geometry and metadata.",
+    "Keep ButtonSpinner and EmptyStateSpinner thin adapter-owned context wrappers rather than turning the core atom into a matrix of loading situations.",
+    "Keep spinner semantics family-local and honest: the atom emits stable local metadata today, but Spinner is not part of the wave-1 central semantic registry."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs an indeterminate loading indicator for inline button loading, centered empty states, or standalone async feedback.",
+      "The product flow already matches ButtonSpinner or EmptyStateSpinner and benefits from the wrapper defaults for size, visual treatment, and local metadata.",
+      "The team wants React and Vue spinner behavior to stay aligned through one core SVG recipe, one preset CSS contract, and one shared adapter contract file."
+    ],
+    "avoidWhen": [
+      "The experience needs determinate progress, percentage tracking, or skeleton structure rather than an indeterminate spinner.",
+      "The implementation cannot provide nearby loading text or a truthful ariaLabel when the spinner must announce status on its own.",
+      "The team expects the exploratory TinoSpinner animation assets or broader semantic brand/loading taxonomies from Figma to be part of the shipped API today."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core recipe tests for default decorative behavior, seven synced variants, size mapping, and standalone status mode.",
+      "Preset CSS contract tests for light and dark indicator colors plus rotation animation wiring.",
+      "Shared spinner contract coverage across React and Vue, local context-wrapper tests, and Storybook introduction/taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Product-level decisions about when loading is decorative versus when a spinner should expose a standalone accessible status name.",
+      "Real browser and assistive-technology validation for longer loading sequences, repeated status announcements, and button-loading feel.",
+      "Reduced-motion quality and whether spinner-only loading states provide enough surrounding context in real product layouts."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Spinner is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family already has strong core, preset, adapter, contract, and Storybook coverage despite the missing dedicated audit write-up."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/spinner/Introduction.mdx",
+        "apps/storybook-react/src/stories/spinner/spinner.stories.tsx",
+        "apps/storybook-react/src/stories/spinner/button-spinner.stories.tsx",
+        "apps/storybook-react/src/stories/spinner/empty-state-spinner.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/spinner/Introduction.mdx",
+        "apps/storybook-vue/src/stories/spinner/spinner.stories.ts",
+        "apps/storybook-vue/src/stories/spinner/button-spinner.stories.ts",
+        "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "classic",
+      "ring",
+      "dual",
+      "dots-round",
+      "dots-square",
+      "lines",
+      "cross",
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "button-loading",
+      "empty-state",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should Spinner eventually gain a clearer documented policy for when product teams should pair it with surrounding loading text versus using ariaLabel directly?",
+    "Should the exploratory TinoSpinner size and animation assets remain design-only references, or should any of that surface become a future shipped spinner API?"
+  ]
+}

@@ -8,6 +8,12 @@ const meta = {
   component: RichText as unknown as object,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Rich text editor for the Input family. This is a manual-review-heavy component: automated tests protect naming, readonly/disabled semantics, and basic formatting affordances, but real editing behavior should still be checked in supported browser and assistive technology combinations.",
+      },
+    },
   },
   tags: ["autodocs"],
   args: {

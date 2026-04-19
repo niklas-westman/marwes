@@ -1,34 +1,31 @@
 import { storybookLayout } from "@marwes-ui/core"
-import type { DialogProps } from "@marwes-ui/vue"
-import { CancelButton, ConfirmButton, Dialog, Paragraph } from "@marwes-ui/vue"
+import type { ConfirmDialogProps } from "@marwes-ui/vue"
+import { ConfirmDialog, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
   title: "Dialog/Purpose/ConfirmDialog",
-  component: Dialog as unknown as object,
+  component: ConfirmDialog as unknown as object,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
-} satisfies Meta<DialogProps>
+} satisfies Meta<ConfirmDialogProps>
 
 export default meta
 
-type Story = StoryObj<DialogProps>
+type Story = StoryObj<ConfirmDialogProps>
 
 export const Default: Story = {
   render: () => ({
-    components: { CancelButton, ConfirmButton, Dialog, Paragraph },
+    components: { ConfirmDialog, Paragraph },
     template: `
-      <Dialog
+      <ConfirmDialog
+        :open="true"
+        :portalTarget="null"
         title="Publish update"
         description="This sends the release to subscribers immediately."
-        :dataAttributes="{ 'data-purpose': 'confirm-dialog', 'data-intent': 'confirm' }"
       >
         <Paragraph>Review the release summary before confirming.</Paragraph>
-        <template #footer>
-          <CancelButton>Cancel</CancelButton>
-          <ConfirmButton>Confirm</ConfirmButton>
-        </template>
-      </Dialog>
+      </ConfirmDialog>
     `,
   }),
 }

@@ -1,0 +1,260 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "button",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md"],
+    "roadmap": ["AXE_ROADMAP.md#button-semantics-cleanup"],
+    "core": [
+      "packages/core/src/components/atoms/button/button-a11y.ts",
+      "packages/core/src/components/atoms/button/button-loading.ts",
+      "packages/core/src/components/atoms/button/button-recipe.ts",
+      "packages/core/src/components/atoms/button/button-types.ts",
+      "packages/core/src/components/atoms/button/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/button.css"],
+    "react": [
+      "packages/react/src/components/button/__tests__/button.test.tsx",
+      "packages/react/src/components/button/__tests__/index-exports.test.tsx",
+      "packages/react/src/components/button/__tests__/purpose-button-locking.test.tsx",
+      "packages/react/src/components/button/button.tsx",
+      "packages/react/src/components/button/index.ts",
+      "packages/react/src/components/button/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/button/__tests__/button.test.ts",
+      "packages/vue/src/components/button/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/button/__tests__/purpose-button-locking.test.ts",
+      "packages/vue/src/components/button/button.ts",
+      "packages/vue/src/components/button/index.ts",
+      "packages/vue/src/components/button/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/button/__tests__/button-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/button/__tests__/button-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/button/button.stories.tsx",
+      "apps/storybook-react/src/stories/button/cancel-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/close-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/confirm-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/copy-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/create-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/destructive-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/download-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/dropdown-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/edit-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/filter-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/Introduction.mdx",
+      "apps/storybook-react/src/stories/button/link-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/primary-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/refresh-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/save-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/search-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/secondary-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/sort-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/submit-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/text-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/upload-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/verify-button.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/button/__tests__/button-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/button/__tests__/button-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/button/button.stories.ts",
+      "apps/storybook-vue/src/stories/button/cancel-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/close-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/confirm-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/create-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/destructive-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/edit-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/Introduction.mdx",
+      "apps/storybook-vue/src/stories/button/link-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/primary-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/refresh-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/save-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/secondary-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/submit-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/text-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/verify-button.stories.ts"
+    ],
+    "contracts": ["tests/contracts/button.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "button",
+    "canonicalAttributes": ["data-component", "data-action", "data-variant", "data-size"],
+    "allowedPurposes": [
+      "destructive",
+      "create",
+      "submit",
+      "cancel",
+      "navigation",
+      "save",
+      "confirm",
+      "verify",
+      "edit",
+      "close",
+      "refresh",
+      "upload",
+      "download",
+      "copy",
+      "search",
+      "filter",
+      "sort",
+      "dropdown",
+      "success"
+    ],
+    "purposeAttributes": {
+      "cancel": {
+        "data-purpose": "cancel",
+        "data-action": "cancel"
+      },
+      "close": {
+        "data-purpose": "close",
+        "data-action": "cancel"
+      },
+      "confirm": {
+        "data-purpose": "confirm",
+        "data-action": "button",
+        "data-outcome": "positive"
+      },
+      "copy": {
+        "data-purpose": "copy",
+        "data-action": "button"
+      },
+      "create": {
+        "data-purpose": "create",
+        "data-action": "create"
+      },
+      "destructive": {
+        "data-purpose": "destructive",
+        "data-action": "delete",
+        "data-destructive": "true",
+        "data-confirmation-required": "true"
+      },
+      "download": {
+        "data-purpose": "download",
+        "data-action": "button"
+      },
+      "dropdown": {
+        "data-purpose": "dropdown",
+        "data-action": "button"
+      },
+      "edit": {
+        "data-purpose": "edit",
+        "data-action": "edit"
+      },
+      "filter": {
+        "data-purpose": "filter",
+        "data-action": "button"
+      },
+      "navigation": {
+        "data-purpose": "navigation",
+        "data-action": "navigate"
+      },
+      "refresh": {
+        "data-purpose": "refresh",
+        "data-action": "button"
+      },
+      "save": {
+        "data-purpose": "save",
+        "data-action": "submit"
+      },
+      "search": {
+        "data-purpose": "search",
+        "data-action": "button"
+      },
+      "sort": {
+        "data-purpose": "sort",
+        "data-action": "button"
+      },
+      "submit": {
+        "data-purpose": "submit",
+        "data-action": "submit",
+        "data-context": "form-submit"
+      },
+      "success": {
+        "data-purpose": "success",
+        "data-action": "button",
+        "data-outcome": "positive"
+      },
+      "upload": {
+        "data-purpose": "upload",
+        "data-action": "button"
+      },
+      "verify": {
+        "data-purpose": "verify",
+        "data-action": "button",
+        "data-outcome": "positive"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": ["Button already has the strongest base semantic surface in core."]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/button.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/cover/buttons_1825-30427.json",
+      ".figma/marwes/pages/cover/buttons_1825-30431.json",
+      ".figma/marwes/pages/cover/buttons_1825-30435.json",
+      ".figma/marwes/pages/-button/component-container_1364-11870.json",
+      ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json"
+    ],
+    "nodeReferences": {
+      "baseLightFrame": "1371:11172",
+      "baseDarkFrame": "1371:11537",
+      "purposeLightFrame": "1371:8933",
+      "purposeDarkFrame": "1371:9188"
+    },
+    "figmaTokens": [
+      "Primary/Surface",
+      "Primary/Label",
+      "Secondary/Label",
+      "Secondary/Outline",
+      "Text/Label",
+      "action/primary/default",
+      "action/primary/label",
+      "action/secondary/default",
+      "action/secondary/label",
+      "action/destructive/default",
+      "action/destructive/label",
+      "action/success/default",
+      "action/success/label"
+    ],
+    "figmaStates": {
+      "baseVariants": ["primary", "secondary", "neutral", "text"],
+      "interactionStates": ["default", "hover", "pressed", "disabled", "focus", "loading"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": false,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Button already has the strongest base semantic surface in core.",
+    "Generated from docs/registry/families/button/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

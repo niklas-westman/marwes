@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ndivider page + component"]
+  Spec["Spec + audit queue"]
+  Core["@marwes-ui/core\ndivider recipe + local metadata"]
+  Presets["preset CSS\ndivider spacing shell"]
+  React["@marwes-ui/react\ndivider adapter"]
+  Vue["@marwes-ui/vue\ndivider adapter"]
+  Stories["Storybook React + Vue"]
+  Contracts["divider shared contract"]
+  Registry["docs/registry/families/divider"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

@@ -1,0 +1,26 @@
+flowchart LR
+  AvatarAtom["Avatar"] --> TypeResolution["initials vs icon vs image\nresolved in core recipe"]
+  TypeResolution --> Naming["image uses alt\nnon-image uses role=img + ariaLabel or initials"]
+  TypeResolution --> Decorative["decorative hides shell from AT"]
+  TypeResolution --> CanonicalData["data-component=avatar\ndata-size + data-type"]
+
+  AvatarBadge["AvatarBadge"] --> BadgeLabel["avatar label + statusLabel\ncombine into one img name"]
+  AvatarBadge --> BadgeVisual["green-dot indicator\naria-hidden visual layer"]
+
+  AvatarGroup["AvatarGroup"] --> GroupLabel["fieldset group with aria-label"]
+  AvatarGroup --> StackedItems["stacked medium avatars"]
+  AvatarGroup --> Overflow["optional overflow counter\nrole=img label for +N"]
+
+  Purpose["ProfileAvatar / PresenceAvatar / TeamAvatarGroup"] --> PurposeSemantics["canonical data-purpose metadata"]
+  Purpose --> AvatarAtom
+  Purpose --> AvatarBadge
+  Purpose --> AvatarGroup
+
+  CanonicalData --> ReactDom["React DOM"]
+  CanonicalData --> VueDom["Vue DOM"]
+  BadgeLabel --> ReactDom
+  BadgeLabel --> VueDom
+  GroupLabel --> ReactDom
+  GroupLabel --> VueDom
+  PurposeSemantics --> ReactDom
+  PurposeSemantics --> VueDom

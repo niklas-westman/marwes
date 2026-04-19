@@ -6,10 +6,10 @@ const faqItems = [
   {
     value: "what",
     title: "What is Marwes?",
-    children: "A design system for scalable, accessible UI.",
+    content: "A design system for scalable, accessible UI.",
   },
-  { value: "free", title: "Is it free?", children: "Yes, Marwes is open source." },
-  { value: "frameworks", title: "Which frameworks?", children: "React and Vue are supported." },
+  { value: "free", title: "Is it free?", content: "Yes, Marwes is open source." },
+  { value: "frameworks", title: "Which frameworks?", content: "React and Vue are supported." },
 ]
 
 const meta: Meta<typeof FAQAccordion> = {

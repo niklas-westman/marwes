@@ -1,0 +1,311 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "input",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/input-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#p1--first-component-audit-queue",
+      "AXE_ROADMAP.md#4c--rich-text-risk-handling",
+      "AXE_ROADMAP.md#4b--custom-select-hardening"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/input/index.ts",
+      "packages/core/src/components/atoms/input/input-a11y.ts",
+      "packages/core/src/components/atoms/input/input-otp-a11y.ts",
+      "packages/core/src/components/atoms/input/input-otp-recipe.ts",
+      "packages/core/src/components/atoms/input/input-otp-types.ts",
+      "packages/core/src/components/atoms/input/input-recipe.ts",
+      "packages/core/src/components/atoms/input/input-types.ts",
+      "packages/core/src/components/atoms/input/rich-text-a11y.ts",
+      "packages/core/src/components/atoms/input/rich-text-html.ts",
+      "packages/core/src/components/atoms/input/rich-text-recipe.ts",
+      "packages/core/src/components/atoms/input/rich-text-styles.ts",
+      "packages/core/src/components/atoms/input/rich-text-types.ts",
+      "packages/core/src/components/atoms/input/select-a11y.ts",
+      "packages/core/src/components/atoms/input/select-recipe.ts",
+      "packages/core/src/components/atoms/input/select-types.ts",
+      "packages/core/src/components/atoms/input/textarea-a11y.ts",
+      "packages/core/src/components/atoms/input/textarea-recipe.ts",
+      "packages/core/src/components/atoms/input/textarea-types.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/input.css",
+      "packages/presets/src/firstEdition/textarea.css",
+      "packages/presets/src/firstEdition/select.css",
+      "packages/presets/src/firstEdition/rich-text.css",
+      "packages/presets/src/firstEdition/input-otp.css",
+      "packages/presets/src/firstEdition/molecules/input-field.css"
+    ],
+    "react": [
+      "packages/react/src/components/input/__tests__/currency-field.test.tsx",
+      "packages/react/src/components/input/__tests__/date-of-birth-field.test.tsx",
+      "packages/react/src/components/input/__tests__/dropdown-field.test.tsx",
+      "packages/react/src/components/input/__tests__/index-exports.test.ts",
+      "packages/react/src/components/input/__tests__/input-field.test.tsx",
+      "packages/react/src/components/input/__tests__/input-otp.test.tsx",
+      "packages/react/src/components/input/__tests__/input.test.tsx",
+      "packages/react/src/components/input/__tests__/rich-text-field.test.tsx",
+      "packages/react/src/components/input/__tests__/rich-text.test.tsx",
+      "packages/react/src/components/input/__tests__/select-field.test.tsx",
+      "packages/react/src/components/input/__tests__/select.test.tsx",
+      "packages/react/src/components/input/__tests__/textarea-field.test.tsx",
+      "packages/react/src/components/input/__tests__/textarea.test.tsx",
+      "packages/react/src/components/input/__tests__/zip-code-field.test.tsx",
+      "packages/react/src/components/input/field-variants.tsx",
+      "packages/react/src/components/input/index.ts",
+      "packages/react/src/components/input/input-field.tsx",
+      "packages/react/src/components/input/input-otp.tsx",
+      "packages/react/src/components/input/input.tsx",
+      "packages/react/src/components/input/rich-text-field.tsx",
+      "packages/react/src/components/input/rich-text.tsx",
+      "packages/react/src/components/input/select-arrow-icon.tsx",
+      "packages/react/src/components/input/select-field.tsx",
+      "packages/react/src/components/input/select.tsx",
+      "packages/react/src/components/input/textarea-field.tsx",
+      "packages/react/src/components/input/textarea.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/input/__tests__/currency-field.test.ts",
+      "packages/vue/src/components/input/__tests__/date-of-birth-field.test.ts",
+      "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",
+      "packages/vue/src/components/input/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/input/__tests__/input-field.test.ts",
+      "packages/vue/src/components/input/__tests__/input-otp.test.ts",
+      "packages/vue/src/components/input/__tests__/input.test.ts",
+      "packages/vue/src/components/input/__tests__/rich-text-field.test.ts",
+      "packages/vue/src/components/input/__tests__/rich-text.test.ts",
+      "packages/vue/src/components/input/__tests__/select-field.test.ts",
+      "packages/vue/src/components/input/__tests__/select.test.ts",
+      "packages/vue/src/components/input/__tests__/textarea-field.test.ts",
+      "packages/vue/src/components/input/__tests__/textarea.test.ts",
+      "packages/vue/src/components/input/__tests__/zip-code-field.test.ts",
+      "packages/vue/src/components/input/field-variants.ts",
+      "packages/vue/src/components/input/index.ts",
+      "packages/vue/src/components/input/input-field.ts",
+      "packages/vue/src/components/input/input-otp.ts",
+      "packages/vue/src/components/input/input.ts",
+      "packages/vue/src/components/input/rich-text-field.ts",
+      "packages/vue/src/components/input/rich-text.ts",
+      "packages/vue/src/components/input/select-arrow-icon.ts",
+      "packages/vue/src/components/input/select-field.ts",
+      "packages/vue/src/components/input/select.ts",
+      "packages/vue/src/components/input/textarea-field.ts",
+      "packages/vue/src/components/input/textarea.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/input/__tests__/input-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/input/__tests__/input-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/input/currency-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/date-of-birth-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/dropdown-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/email-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/input-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/input-otp.stories.tsx",
+      "apps/storybook-react/src/stories/input/input.stories.tsx",
+      "apps/storybook-react/src/stories/input/Introduction.mdx",
+      "apps/storybook-react/src/stories/input/password-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/phone-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/rich-text-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/rich-text.stories.tsx",
+      "apps/storybook-react/src/stories/input/search-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/select-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/select.stories.tsx",
+      "apps/storybook-react/src/stories/input/textarea-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/textarea.stories.tsx",
+      "apps/storybook-react/src/stories/input/url-field.stories.tsx",
+      "apps/storybook-react/src/stories/input/zip-code-field.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/input/__tests__/input-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/input/__tests__/input-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/input/currency-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/date-of-birth-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/dropdown-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/email-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/input-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/input-otp.stories.ts",
+      "apps/storybook-vue/src/stories/input/input.stories.ts",
+      "apps/storybook-vue/src/stories/input/Introduction.mdx",
+      "apps/storybook-vue/src/stories/input/password-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/phone-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/rich-text-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/rich-text.stories.ts",
+      "apps/storybook-vue/src/stories/input/search-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/select-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/select.stories.ts",
+      "apps/storybook-vue/src/stories/input/textarea-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/textarea.stories.ts",
+      "apps/storybook-vue/src/stories/input/url-field.stories.ts",
+      "apps/storybook-vue/src/stories/input/zip-code-field.stories.ts"
+    ],
+    "contracts": [
+      "tests/contracts/input.contract.ts",
+      "tests/contracts/input-field.contract.ts",
+      "tests/contracts/select.contract.ts",
+      "tests/contracts/select-field.contract.ts",
+      "tests/contracts/select-combobox.contract.ts",
+      "tests/contracts/dropdown-field.contract.ts",
+      "tests/contracts/textarea.contract.ts",
+      "tests/contracts/textarea-field.contract.ts",
+      "tests/contracts/input-otp.contract.ts",
+      "tests/contracts/rich-text.contract.ts",
+      "tests/contracts/rich-text-field.contract.ts",
+      "tests/contracts/date-of-birth-field.contract.ts",
+      "tests/contracts/zip-code-field.contract.ts"
+    ]
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": [
+      "dropdown",
+      "search",
+      "password",
+      "email",
+      "date-of-birth",
+      "zip-code",
+      "phone",
+      "url",
+      "currency"
+    ],
+    "purposeAttributes": {
+      "dropdown": {
+        "data-purpose": "dropdown"
+      },
+      "search": {
+        "data-purpose": "search"
+      },
+      "password": {
+        "data-purpose": "password"
+      },
+      "email": {
+        "data-purpose": "email"
+      },
+      "date-of-birth": {
+        "data-purpose": "date-of-birth"
+      },
+      "zip-code": {
+        "data-purpose": "zip-code"
+      },
+      "phone": {
+        "data-purpose": "phone"
+      },
+      "url": {
+        "data-purpose": "url"
+      },
+      "currency": {
+        "data-purpose": "currency",
+        "data-currency": "<runtime>"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/react/src/components/input/field-variants.tsx",
+      "packages/vue/src/components/input/field-variants.ts",
+      "packages/react/src/components/input/input-otp.tsx",
+      "packages/vue/src/components/input/input-otp.ts",
+      "packages/core/src/components/atoms/input/rich-text-styles.ts"
+    ],
+    "notes": [
+      "Input is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "Family-level purpose metadata currently lives in adapter field-variant wrappers rather than the central semantic registry."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/text-field.json",
+      ".figma/marwes/components/text-area.json",
+      ".figma/marwes/components/select.json",
+      ".figma/marwes/components/dropdown.json",
+      ".figma/marwes/components/input-otp.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-input-fields/README.md",
+      ".figma/marwes/pages/-input-otp/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-input-fields/-input-fields_1364-11372.json",
+      ".figma/marwes/pages/-input-fields/-input-fields-dark_1368-5944.json",
+      ".figma/marwes/pages/-input-fields/-input-types-overview_1364-11817.json",
+      ".figma/marwes/pages/-input-fields/-input-types-overview-dark_1368-6014.json",
+      ".figma/marwes/pages/-input-fields/dropdown_1384-13225.json",
+      ".figma/marwes/pages/-input-otp/-input-otp_1803-15024.json",
+      ".figma/marwes/pages/-input-otp/-input-otp-dark_1803-15155.json"
+    ],
+    "nodeReferences": {
+      "inputFieldsLightFrame": "1364:11372",
+      "inputFieldsDarkFrame": "1368:5944",
+      "inputTypesLightFrame": "1364:11817",
+      "inputTypesDarkFrame": "1368:6014",
+      "textField": "1364:7662",
+      "textarea": "1364:7696",
+      "searchField": "1364:7667",
+      "passwordField": "1364:7673",
+      "dateOfBirthField": "1364:7679",
+      "phoneField": "1364:7685",
+      "zipCodeField": "1364:7691",
+      "dropdownField": "1364:7701",
+      "selectAtom": "1364:7707",
+      "inputOtpLightFrame": "1803:15024",
+      "inputOtpDarkFrame": "1803:15155"
+    },
+    "figmaTokens": [
+      "input/surface",
+      "input/border",
+      "input/label",
+      "input/value",
+      "input/placeholder",
+      "input/hint",
+      "dropdown/item-surface",
+      "dropdown/list-surface",
+      "dropdown/list-border",
+      "dropdown/item-label",
+      "dropdown/item-check"
+    ],
+    "figmaStates": {
+      "baseVariants": [
+        "input",
+        "textarea",
+        "search",
+        "password",
+        "date-of-birth",
+        "phone",
+        "zip-code",
+        "dropdown",
+        "select",
+        "input-otp",
+        "rich-text-baseline"
+      ],
+      "interactionStates": ["default", "hover", "active", "disabled", "focus", "error"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Input is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "Family-level purpose metadata currently lives in adapter field-variant wrappers rather than the central semantic registry.",
+    "Generated from docs/registry/families/input/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

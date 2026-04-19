@@ -135,6 +135,7 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "Escape" && closeOnEscape) {
         event.preventDefault()
+        event.stopPropagation()
         close()
         return
       }
@@ -201,7 +202,7 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     >
       <div className="mw-dialog-modal__scrim" aria-hidden="true" />
       <div ref={surfaceRef} className="mw-dialog-modal__surface">
-        <Dialog {...dialogProps} footer={renderedFooter} onClose={close} />
+        <Dialog {...dialogProps} modal footer={renderedFooter} onClose={close} />
       </div>
     </div>
   )

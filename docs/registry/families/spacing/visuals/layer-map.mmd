@@ -1,0 +1,24 @@
+flowchart LR
+  Figma["Figma gap\nno dedicated spacing family in local sync"]
+  Spec["Spec gap + testing docs + audit queue"]
+  Core["@marwes-ui/core\nspacing recipe + spacing types"]
+  Tokens["preset tokens\nfirstEdition tokens.css"]
+  Presets["preset CSS\nspacing.css"]
+  React["@marwes-ui/react\nSpacing adapter"]
+  Vue["@marwes-ui/vue\nSpacing adapter"]
+  Stories["Storybook React + Vue"]
+  Registry["docs/registry/families/spacing"]
+
+  Figma --> Registry
+  Spec --> Core
+  Tokens --> Core
+  Core --> Presets
+  Tokens --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  Spec --> Registry
+  Core --> Registry
+  Tokens --> Registry
+  Stories --> Registry

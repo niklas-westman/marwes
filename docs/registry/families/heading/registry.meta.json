@@ -1,0 +1,75 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "heading",
+  "displayName": "Heading",
+  "status": "shipped",
+  "summary": "Native-semantic typography family with three raw heading atoms backed by one core recipe, one shared typography preset, and a shared React/Vue contract.",
+  "philosophy": [
+    "Choose semantic level by document structure first and keep H1, H2, and H3 grounded in real native heading elements.",
+    "Keep native semantics as the contract instead of adding Marwes metadata where plain h1/h2/h3 already express the meaning honestly.",
+    "Treat size as a deliberate visual escape hatch, not as a shortcut for skipping outline decisions.",
+    "Keep heading styling source-owned in theme typography and shared typography.css so Heading and Paragraph stay aligned."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a real page, section, or subsection heading and document outline should stay explicit.",
+      "The product wants React and Vue heading behavior to stay aligned through one core recipe and one shared contract.",
+      "Semantic level and visual size may need to diverge intentionally while still keeping the native heading tag."
+    ],
+    "avoidWhen": [
+      "The layout only needs visually larger text and does not benefit from real heading semantics.",
+      "The surface is really a richer hero, banner, or section-header composition rather than a plain heading atom.",
+      "The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current heading family does not ship."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core recipe tests for semantic tag selection, default size mapping, and explicit size override behavior.",
+      "Shared heading contract coverage across React and Vue for native heading semantics, id, and aria-label passthrough.",
+      "Storybook introduction and taxonomy tests in both apps for the atom teaching surface."
+    ],
+    "manualReviewRequired": [
+      "Product-level judgment about choosing the correct heading level for the real document outline.",
+      "Whether size overrides are used sparingly and do not flatten the content hierarchy.",
+      "Whether heading ids and anchor-link patterns stay useful and consistent in real documentation or product flows."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Heading is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family relies on native HTML semantics instead of Marwes semantic-registry metadata, which keeps the surface small but still worth documenting explicitly."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/heading/Introduction.mdx",
+        "apps/storybook-react/src/stories/heading/heading.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/heading/Introduction.mdx",
+        "apps/storybook-vue/src/stories/heading/heading.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "h1",
+      "h2",
+      "h3",
+      "all-levels",
+      "size-override",
+      "with-id",
+      "long-text",
+      "content-hierarchy",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "If Marwes later needs H4+, should that extend the current Heading family or arrive as part of a broader typography contract update?",
+    "Should the local Figma sync eventually gain a dedicated heading component/page that maps directly to the shipped H1 / H2 / H3 API, or is the typography-page baseline sufficient?"
+  ]
+}

@@ -4,17 +4,36 @@ import process from "node:process"
 
 const repositoryRoot = process.cwd()
 
+const sharedForbiddenPatterns = [
+  {
+    pattern: /import\s*\{\s*firstEdition\s*\}\s*from\s*"@marwes-ui\/presets"/,
+    description: "stale import `firstEdition` from `@marwes-ui/presets`",
+  },
+  {
+    pattern: /<MarwesProvider[^>]*\spreset=/,
+    description: "stale provider prop `preset={...}`",
+  },
+  {
+    pattern: /\bpreset=\{firstEdition\}/,
+    description: "stale example `preset={firstEdition}`",
+  },
+]
+
 const documentationFiles = [
   {
     path: "README.md",
     requiredPatterns: [
       {
         pattern: /import\s*\{\s*firstEditionTheme\s*\}\s*from\s*"@marwes-ui\/presets"/,
-        description: "root README should import `firstEditionTheme` from `@marwes-ui/presets`",
+        description: "import `firstEditionTheme` from `@marwes-ui/presets`",
+      },
+      {
+        pattern: /import\s*"@marwes-ui\/presets\/firstEdition\/styles\.css"/,
+        description: "import `@marwes-ui/presets/firstEdition/styles.css`",
       },
       {
         pattern: /<MarwesProvider\s+theme=\{firstEditionTheme\}>/,
-        description: "root README should show `<MarwesProvider theme={firstEditionTheme}>`",
+        description: "show `<MarwesProvider theme={firstEditionTheme}>`",
       },
     ],
   },
@@ -23,11 +42,15 @@ const documentationFiles = [
     requiredPatterns: [
       {
         pattern: /import\s*\{\s*firstEditionTheme\s*\}\s*from\s*"@marwes-ui\/presets"/,
-        description: "presets README should import `firstEditionTheme` from `@marwes-ui/presets`",
+        description: "import `firstEditionTheme` from `@marwes-ui/presets`",
+      },
+      {
+        pattern: /import\s*"@marwes-ui\/presets\/firstEdition\/styles\.css"/,
+        description: "import `@marwes-ui/presets/firstEdition/styles.css`",
       },
       {
         pattern: /<MarwesProvider\s+theme=\{firstEditionTheme\}>/,
-        description: "presets README should show `<MarwesProvider theme={firstEditionTheme}>`",
+        description: "show `<MarwesProvider theme={firstEditionTheme}>`",
       },
     ],
   },
@@ -36,28 +59,68 @@ const documentationFiles = [
     requiredPatterns: [
       {
         pattern: /import\s*\{\s*firstEditionTheme\s*\}\s*from\s*"@marwes-ui\/presets"/,
-        description: "react README should import `firstEditionTheme` from `@marwes-ui/presets`",
+        description: "import `firstEditionTheme` from `@marwes-ui/presets`",
+      },
+      {
+        pattern: /import\s*"@marwes-ui\/presets\/firstEdition\/styles\.css"/,
+        description: "import `@marwes-ui/presets/firstEdition/styles.css`",
       },
       {
         pattern: /<MarwesProvider\s+theme=\{firstEditionTheme\}>/,
-        description: "react README should show `<MarwesProvider theme={firstEditionTheme}>`",
+        description: "show `<MarwesProvider theme={firstEditionTheme}>`",
       },
     ],
   },
-]
-
-const forbiddenPatterns = [
   {
-    pattern: /import\s*\{\s*firstEdition\s*\}\s*from\s*"@marwes-ui\/presets"/,
-    description: "stale import `firstEdition` from `@marwes-ui/presets`",
+    path: "apps/playground-react/README.md",
+    requiredPatterns: [
+      {
+        pattern: /import\s*\{\s*firstEditionTheme\s*\}\s*from\s*"@marwes-ui\/presets"/,
+        description: "import `firstEditionTheme` from `@marwes-ui/presets`",
+      },
+      {
+        pattern: /import\s*"@marwes-ui\/presets\/firstEdition\/styles\.css"/,
+        description: "import `@marwes-ui/presets/firstEdition/styles.css`",
+      },
+      {
+        pattern: /<MarwesProvider\s+theme=\{firstEditionTheme\}>/,
+        description: "show `<MarwesProvider theme={firstEditionTheme}>`",
+      },
+    ],
   },
   {
-    pattern: /<MarwesProvider\s+preset=\{/,
-    description: "stale provider prop `preset={...}`",
+    path: "apps/storybook-react/README.md",
+    requiredPatterns: [
+      {
+        pattern: /import\s*\{\s*firstEditionTheme\s*\}\s*from\s*"@marwes-ui\/presets"/,
+        description: "import `firstEditionTheme` from `@marwes-ui/presets`",
+      },
+      {
+        pattern: /import\s*"@marwes-ui\/presets\/firstEdition\/styles\.css"/,
+        description: "import `@marwes-ui/presets/firstEdition/styles.css`",
+      },
+      {
+        pattern: /<MarwesProvider\s+theme=\{firstEditionTheme\}>/,
+        description: "show `<MarwesProvider theme={firstEditionTheme}>`",
+      },
+    ],
   },
   {
-    pattern: /\bpreset=\{firstEdition\}/,
-    description: "stale example `preset={firstEdition}`",
+    path: "packages/vue/README.md",
+    requiredPatterns: [
+      {
+        pattern: /import\s*\{\s*firstEditionTheme\s*\}\s*from\s*"@marwes-ui\/presets"/,
+        description: "import `firstEditionTheme` from `@marwes-ui/presets`",
+      },
+      {
+        pattern: /import\s*"@marwes-ui\/presets\/firstEdition\/styles\.css"/,
+        description: "import `@marwes-ui/presets/firstEdition/styles.css`",
+      },
+      {
+        pattern: /<MarwesProvider\s+:theme="firstEditionTheme">/,
+        description: "show `<MarwesProvider :theme=\"firstEditionTheme\">`",
+      },
+    ],
   },
 ]
 
@@ -91,7 +154,7 @@ async function main() {
       }
     }
 
-    for (const forbiddenPattern of forbiddenPatterns) {
+    for (const forbiddenPattern of sharedForbiddenPatterns) {
       if (forbiddenPattern.pattern.test(fileContent)) {
         failures.push(`- ${documentationFile.path}: found ${forbiddenPattern.description}`)
       }

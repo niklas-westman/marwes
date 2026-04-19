@@ -6,14 +6,14 @@ const sectionItems = [
   {
     value: "desc",
     title: "Description",
-    children: "A comprehensive product description with all relevant details.",
+    content: "A comprehensive product description with all relevant details.",
   },
   {
     value: "specs",
     title: "Specifications",
-    children: "Weight: 250g, Dimensions: 15x10x5cm, Material: Aluminium.",
+    content: "Weight: 250g, Dimensions: 15x10x5cm, Material: Aluminium.",
   },
-  { value: "reviews", title: "Reviews", children: "4.5/5 stars based on 128 customer reviews." },
+  { value: "reviews", title: "Reviews", content: "4.5/5 stars based on 128 customer reviews." },
 ]
 
 const meta: Meta<typeof SectionsAccordion> = {

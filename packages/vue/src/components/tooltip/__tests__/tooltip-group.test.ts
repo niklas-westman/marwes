@@ -1,8 +1,10 @@
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
-import { describe, expect, it, vi } from "vitest"
-import { defineComponent, h, ref } from "vue"
+import { describe, expect, it } from "vitest"
+import { defineComponent, h } from "vue"
+import { runTooltipContract } from "../../../../../../tests/contracts/tooltip.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Tooltip } from "../tooltip"
 import { TooltipGroup } from "../tooltip-group"
 
 function renderWithProvider(child: () => unknown) {
@@ -18,74 +20,77 @@ function renderWithProvider(child: () => unknown) {
   )
 }
 
-describe("Vue TooltipGroup (Molecule)", () => {
-  it("shows the tooltip bubble on hover and wires aria-describedby", async () => {
-    const user = userEvent.setup()
-
+runTooltipContract("vue", {
+  async renderTooltip(args = {}) {
     renderWithProvider(() =>
-      h(TooltipGroup, {
-        content: "Helpful context",
-        triggerLabel: "Show help",
-      }),
+      h(
+        Tooltip,
+        { id: args.id },
+        {
+          default: () => args.children ?? "Helpful billing context",
+        },
+      ),
     )
+  },
+  async renderTooltipGroup(args = {}) {
+    renderWithProvider(() => [
+      h(TooltipGroup, {
+        content: args.content ?? "Helpful billing context",
+        ...(args.triggerLabel !== undefined ? { triggerLabel: args.triggerLabel } : {}),
+        ...(args.open !== undefined ? { open: args.open } : {}),
+        ...(args.defaultOpen !== undefined ? { defaultOpen: args.defaultOpen } : {}),
+        ...(args.onOpenChange !== undefined ? { onOpenChange: args.onOpenChange } : {}),
+        ...(args.tooltipId !== undefined ? { tooltipId: args.tooltipId } : {}),
+      }),
+      h(
+        "button",
+        {
+          type: "button",
+        },
+        "Outside",
+      ),
+    ])
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  queryByRole(role, options) {
+    return screen.queryByRole(role, options)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  async hover(element) {
+    await userEvent.setup().hover(element)
+  },
+  async unhover(element) {
+    await userEvent.setup().unhover(element)
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
+  async tab() {
+    await userEvent.setup().tab()
+  },
+  async keyboard(text) {
+    await userEvent.setup().keyboard(text)
+  },
+})
 
-    const trigger = screen.getByRole("button", { name: /show help/i })
-    expect(screen.queryByRole("tooltip")).toBeNull()
-
-    await user.hover(trigger)
-
-    const tooltip = screen.getByRole("tooltip")
-    expect(tooltip).toHaveTextContent("Helpful context")
-    expect(trigger).toHaveAttribute("aria-describedby", tooltip.id)
-  })
-
-  it("hides the tooltip bubble after Escape", async () => {
-    const user = userEvent.setup()
-
+describe("Vue TooltipGroup specifics", () => {
+  it("supports renderable node content inside the tooltip bubble", () => {
     renderWithProvider(() =>
       h(TooltipGroup, {
-        content: "Helpful context",
-        triggerLabel: "Show help",
+        content: h("strong", null, "Helpful billing context"),
+        triggerLabel: "Show billing help",
         defaultOpen: true,
       }),
     )
 
-    const trigger = screen.getByRole("button", { name: /show help/i })
-    expect(screen.getByRole("tooltip")).toBeTruthy()
+    const tooltip = screen.getByRole("tooltip")
+    const emphasizedText = screen.getByText("Helpful billing context")
 
-    await user.click(trigger)
-    await user.keyboard("{Escape}")
-
-    expect(screen.queryByRole("tooltip")).toBeNull()
-    expect(trigger).not.toHaveAttribute("aria-describedby")
-  })
-
-  it("supports controlled open state changes", async () => {
-    const user = userEvent.setup()
-    const handleOpenChange = vi.fn()
-
-    const Example = defineComponent({
-      setup() {
-        const open = ref(true)
-
-        return () =>
-          h(TooltipGroup, {
-            content: "Helpful context",
-            triggerLabel: "Show help",
-            open: open.value,
-            onOpenChange: handleOpenChange,
-          })
-      },
-    })
-
-    renderWithProvider(() => h(Example))
-
-    const trigger = screen.getByRole("button", { name: /show help/i })
-    expect(screen.getByRole("tooltip")).toBeTruthy()
-
-    await user.hover(trigger)
-    await user.unhover(trigger)
-
-    expect(handleOpenChange).toHaveBeenCalledWith(false)
+    expect(tooltip).toContainElement(emphasizedText)
+    expect(emphasizedText.tagName).toBe("STRONG")
   })
 })

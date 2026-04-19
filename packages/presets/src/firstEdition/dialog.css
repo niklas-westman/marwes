@@ -17,6 +17,11 @@
   background: var(--mw-dialog-surface);
 }
 
+.mw-dialog:focus-visible {
+  outline: 2px solid #2f31fc;
+  outline-offset: 2px;
+}
+
 .mw-dialog--small {
   --mw-dialog-width: 480px;
 }
@@ -114,6 +119,10 @@
   --mw-dialog-divider: #ffffff33;
   --mw-dialog-title: #f9fafb;
   --mw-dialog-description: #a3a3a3;
+}
+
+.mw-theme--dark .mw-dialog:focus-visible {
+  outline-color: #5859fc;
 }
 
 .mw-theme--dark .mw-dialog__close:focus-visible {

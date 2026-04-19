@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "checkbox",
+  "displayName": "Checkbox",
+  "status": "shipped",
+  "summary": "Native checkbox family with one raw Checkbox atom, two field-level molecules, and shared React/Vue contracts for atom and grouped multi-select behavior.",
+  "philosophy": [
+    "Teach CheckboxField and CheckboxGroupField as the canonical labeled paths, and keep raw Checkbox as the low-level escape hatch.",
+    "Keep native input and fieldset semantics as the real contract instead of inventing Marwes metadata where standard HTML already expresses the meaning honestly.",
+    "Treat indeterminate as an explicit controlled-state affordance for select-all flows, not as a separate durable selection state.",
+    "Keep single-field and grouped-field accessibility wiring source-owned in shared field helpers so React and Vue stay aligned."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs one or more native checkbox controls with optional description or error support.",
+      "The product wants the canonical labeled path for a single checkbox or a multi-select checkbox group without rebuilding the field wiring manually.",
+      "The team wants React and Vue checkbox behavior to stay aligned through one core recipe, shared field helpers, and shared contract files."
+    ],
+    "avoidWhen": [
+      "A switch, radio group, or always-on content toggle would be the more honest interaction model.",
+      "The layout only needs a decorative checkmark treatment and does not represent a real form control.",
+      "The team expects a purpose-wrapper or semantic-metadata layer that the current Checkbox family does not ship."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core recipe tests for controlled versus uncontrolled state output on the raw checkbox atom.",
+      "Shared checkbox and checkbox-group-field contracts across React and Vue for checked state, disabled behavior, group labeling, description wiring, error wiring, and indeterminate support.",
+      "Local CheckboxField adapter tests plus Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Product-level judgment about when a select-all checkbox should become indeterminate and whether that behavior stays truthful in real flows.",
+      "Real browser review for focus visibility and appearance consistency because the family resets native checkbox appearance heavily in CSS.",
+      "Whether label, helper text, and error wording stay clear when groups get long or validation messages become more complex."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Checkbox is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
+      "The family has shared contracts for the raw atom and the grouped molecule, but CheckboxField still relies on local adapter tests rather than a dedicated shared contract file."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/checkbox/Introduction.mdx",
+        "apps/storybook-react/src/stories/checkbox/checkbox-field.stories.tsx",
+        "apps/storybook-react/src/stories/checkbox/checkbox-group-field.stories.tsx",
+        "apps/storybook-react/src/stories/checkbox/checkbox.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/checkbox/Introduction.mdx",
+        "apps/storybook-vue/src/stories/checkbox/checkbox-field.stories.ts",
+        "apps/storybook-vue/src/stories/checkbox/checkbox-group-field.stories.ts",
+        "apps/storybook-vue/src/stories/checkbox/checkbox.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "unchecked",
+      "checked",
+      "indeterminate",
+      "default",
+      "hover",
+      "pressed",
+      "disabled",
+      "focus",
+      "error",
+      "single-field",
+      "group-field",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should CheckboxField eventually gain a dedicated shared tests/contracts file instead of relying on local adapter tests only?",
+    "Should the local Figma sync gain clearer molecule-level CheckboxField and CheckboxGroupField refs that mirror the shipped helper-text and error behavior more directly?"
+  ]
+}

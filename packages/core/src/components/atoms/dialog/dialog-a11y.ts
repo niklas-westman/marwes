@@ -3,7 +3,10 @@ import type { DialogA11yProps, DialogOptions } from "./dialog-types"
 export function resolveDialogA11y(opts: DialogOptions): DialogA11yProps {
   const a11y: DialogA11yProps = {
     role: "dialog",
-    ariaModal: true,
+  }
+
+  if (opts.modal) {
+    a11y.ariaModal = true
   }
 
   if (opts.ariaLabel) {

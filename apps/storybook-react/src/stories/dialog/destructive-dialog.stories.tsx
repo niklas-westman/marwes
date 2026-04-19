@@ -1,35 +1,27 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { CancelButton, DestructiveButton, Dialog, Paragraph } from "@marwes-ui/react"
+import { DestructiveDialog, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
-const meta: Meta<typeof Dialog> = {
+const meta: Meta<typeof DestructiveDialog> = {
   title: "Dialog/Purpose/DestructiveDialog",
-  component: Dialog,
+  component: DestructiveDialog,
   parameters: storybookLayout.centered,
   tags: ["autodocs"],
 }
 
 export default meta
 
-type Story = StoryObj<typeof Dialog>
+type Story = StoryObj<typeof DestructiveDialog>
 
 export const Default: Story = {
   args: {
+    open: true,
     title: "Delete workspace",
     description: "This action permanently removes all projects, members, and history.",
   },
   render: (args) => (
-    <Dialog
-      {...args}
-      dataAttributes={{ "data-purpose": "destructive-dialog", "data-intent": "destructive" }}
-      footer={
-        <>
-          <CancelButton>Cancel</CancelButton>
-          <DestructiveButton>Delete</DestructiveButton>
-        </>
-      }
-    >
+    <DestructiveDialog {...args} portalTarget={null}>
       <Paragraph>Make sure you exported anything you need before continuing.</Paragraph>
-    </Dialog>
+    </DestructiveDialog>
   ),
 }

@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\nradio atom + group baselines"]
+  Spec["Spec gap + testing docs + audit queue"]
+  Core["@marwes-ui/core\nradio recipe + group a11y ids"]
+  Presets["preset CSS\nradio + radio-group-field"]
+  React["@marwes-ui/react\nradio + group + variants"]
+  Vue["@marwes-ui/vue\nradio + group + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["radio shared contract\n+ local group tests"]
+  Registry["docs/registry/families/radio"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry
