@@ -12,13 +12,13 @@ If you only read one document before changing code, read this one.
 
 ```mermaid
 graph TD
-  Design[Figma design + local .figma cache]
-  Core[@marwes-ui/core]
-  Presets[@marwes-ui/presets]
-  React[@marwes-ui/react]
-  Vue[@marwes-ui/vue]
-  Storybook[Storybook apps]
-  Playground[apps/playground-react]
+  Design["Figma design + local .figma cache"]
+  Core["@marwes-ui/core"]
+  Presets["@marwes-ui/presets"]
+  React["@marwes-ui/react"]
+  Vue["@marwes-ui/vue"]
+  Storybook["Storybook apps"]
+  Playground["apps/playground-react"]
 
   Design --> Core
   Core --> Presets
@@ -85,20 +85,20 @@ A component recipe returns a `RenderKit` that adapters apply to the DOM.
 
 ```mermaid
 flowchart LR
-  Props[Component props] --> Recipe[Core recipe]
-  Recipe --> Tag[tag]
-  Recipe --> Classes[className]
-  Recipe --> Vars[vars]
-  Recipe --> A11y[a11y]
-  Recipe --> Data[dataAttributes]
+  Props["Component props"] --> Recipe["Core recipe"]
+  Recipe --> Tag["tag"]
+  Recipe --> Classes["className"]
+  Recipe --> Vars["vars"]
+  Recipe --> A11y["a11y"]
+  Recipe --> Data["dataAttributes"]
 
-  Tag --> Adapter[React / Vue adapter]
+  Tag --> Adapter["React / Vue adapter"]
   Classes --> Adapter
   Vars --> Adapter
   A11y --> Adapter
   Data --> Adapter
 
-  Adapter --> DOM[Native HTML element]
+  Adapter --> DOM["Native HTML element"]
 ```
 
 Typical `RenderKit` shape:
@@ -119,20 +119,20 @@ The exact shape varies slightly by component, but the responsibilities stay the 
 
 ```mermaid
 graph TD
-  Root[marwes/]
-  Root --> Packages[packages/]
-  Root --> Apps[apps/]
-  Root --> Docs[docs/]
-  Root --> Figma[.figma/]
+  Root["marwes/"]
+  Root --> Packages["packages/"]
+  Root --> Apps["apps/"]
+  Root --> Docs["docs/"]
+  Root --> Figma[".figma/"]
 
-  Packages --> Core[core/]
-  Packages --> Presets[presets/]
-  Packages --> React[react/]
-  Packages --> Vue[vue/]
+  Packages --> Core["core/"]
+  Packages --> Presets["presets/"]
+  Packages --> React["react/"]
+  Packages --> Vue["vue/"]
 
-  Apps --> StorybookReact[storybook-react/]
-  Apps --> StorybookVue[storybook-vue/]
-  Apps --> PlaygroundReact[playground-react/]
+  Apps --> StorybookReact["storybook-react/"]
+  Apps --> StorybookVue["storybook-vue/"]
+  Apps --> PlaygroundReact["playground-react/"]
 ```
 
 ## Key paths
@@ -155,15 +155,15 @@ Every component should follow the same sequence.
 
 ```mermaid
 flowchart TD
-  A[Figma reference] --> B[Core types]
-  B --> C[Core a11y]
-  C --> D[Core styles and recipe]
-  D --> E[Preset CSS]
-  E --> F[React adapter]
-  F --> G[React stories and tests]
-  G --> H[Vue adapter]
-  H --> I[Vue stories and tests]
-  I --> J[Exports + changeset + verification]
+  A["Figma reference"] --> B["Core types"]
+  B --> C["Core a11y"]
+  C --> D["Core styles and recipe"]
+  D --> E["Preset CSS"]
+  E --> F["React adapter"]
+  F --> G["React stories and tests"]
+  G --> H["Vue adapter"]
+  H --> I["Vue stories and tests"]
+  I --> J["Exports + changeset + verification"]
 ```
 
 Detailed file placement lives in [Adding Components](../guides/adding-components.md).
@@ -174,12 +174,12 @@ Use Figma as input, not as implementation.
 
 ```mermaid
 flowchart LR
-  Figma[Figma nodes and tokens] --> Mapping[Token and state mapping]
-  Mapping --> Theme[Theme contract in core]
-  Theme --> Recipe[Recipe output]
-  Recipe --> CSS[Preset CSS]
-  CSS --> Adapters[React / Vue adapters]
-  Adapters --> Stories[Storybook verification]
+  Figma["Figma nodes and tokens"] --> Mapping["Token and state mapping"]
+  Mapping --> Theme["Theme contract in core"]
+  Theme --> Recipe["Recipe output"]
+  Recipe --> CSS["Preset CSS"]
+  CSS --> Adapters["React / Vue adapters"]
+  Adapters --> Stories["Storybook verification"]
 ```
 
 See:
