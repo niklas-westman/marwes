@@ -124,8 +124,8 @@ graph LR
 ## Related entry points outside `docs/`
 
 - [Repository README](../README.md)
-- [Figma source index](../.figma/INDEX.md)
-- [Curated Figma node reference](../.figma/NODE_REFERENCE.md)
+- Local Figma source index: `.figma/INDEX.md`
+- Local curated Figma node reference: `.figma/NODE_REFERENCE.md`
 - [Changelog](../CHANGELOG.md)
 
 ## Documentation rules

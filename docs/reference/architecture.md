@@ -184,8 +184,8 @@ flowchart LR
 
 See:
 - [Figma to Marwes](../guides/figma-to-marwes.md)
-- [Figma source index](../../.figma/INDEX.md)
-- [Curated node reference](../../.figma/NODE_REFERENCE.md)
+- Local Figma source index: `.figma/INDEX.md`
+- Local curated node reference: `.figma/NODE_REFERENCE.md`
 
 ## How to work safely in this repo
 

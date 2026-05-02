@@ -11,8 +11,8 @@ This guide defines how design data from Figma should map into Marwes so implemen
 
 When the Figma MCP server is unavailable, the following local files provide everything needed to work with the V3 component library:
 
-- [`.figma/NODE_REFERENCE.md`](../../.figma/NODE_REFERENCE.md) — human-readable reference: all 13 V3 components, frame IDs, states/variants, CSS tokens, variable definitions (light + dark), MCP usage guide
-- [`.figma/nodes.json`](../../.figma/nodes.json) — machine-readable structured data: meta, verified variable defs (2026-03-18), all component node IDs
+- `.figma/NODE_REFERENCE.md` — local human-readable reference: all 13 V3 components, frame IDs, states/variants, CSS tokens, variable definitions (light + dark), MCP usage guide
+- `.figma/nodes.json` — local machine-readable structured data: meta, verified variable defs (2026-03-18), all component node IDs
 
 Both files are MCP-verified as of 2026-03-18.
 
