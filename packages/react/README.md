@@ -270,6 +270,38 @@ export function App() {
 
 The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
 
+## Light And Dark Mode
+
+Marwes resolves light and dark defaults from `theme.mode`. Keep the active mode in app state and pass it to `MarwesProvider`; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+
+```tsx
+import { useState } from "react"
+import { Button, MarwesProvider, type ThemeInput } from "@marwes-ui/react"
+
+export function App() {
+  const [mode, setMode] = useState<NonNullable<ThemeInput["mode"]>>("light")
+
+  const theme = {
+    mode,
+  } satisfies ThemeInput
+
+  return (
+    <MarwesProvider theme={theme}>
+      <Button
+        variant="secondary"
+        onClick={() => setMode((current) => (current === "dark" ? "light" : "dark"))}
+      >
+        Use {mode === "dark" ? "light" : "dark"} mode
+      </Button>
+
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+If you also pass brand colors, only override the values you want to own. Mode-specific defaults fill the rest, so `theme={{ mode: "dark" }}` is enough for the first edition dark baseline.
+
 ## Custom Styling Tokens
 
 `MarwesProvider` resolves `ThemeInput` into `--mw-*` CSS variables. Marwes components and preset CSS consume those variables automatically. The custom styling token helpers let app-owned styles use the same provider-scoped values instead of hard-coding colors, spacing, radius, typography, or duplicated `var(...)` strings.

@@ -263,6 +263,36 @@ const brandTheme = {
 
 The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
 
+## Light And Dark Mode
+
+Marwes resolves light and dark defaults from `theme.mode`. Keep the active mode in app state and pass it to `MarwesProvider`; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+
+```vue
+<script setup lang="ts">
+import { computed, ref } from "vue"
+import { Button, MarwesProvider, type ThemeInput } from "@marwes-ui/vue"
+
+const mode = ref<NonNullable<ThemeInput["mode"]>>("light")
+const theme = computed<ThemeInput>(() => ({ mode: mode.value }))
+
+function toggleMode() {
+  mode.value = mode.value === "dark" ? "light" : "dark"
+}
+</script>
+
+<template>
+  <MarwesProvider :theme="theme">
+    <Button variant="secondary" @click="toggleMode">
+      Use {{ mode === "dark" ? "light" : "dark" }} mode
+    </Button>
+
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+If you also pass brand colors, only override the values you want to own. Mode-specific defaults fill the rest, so `:theme="{ mode: 'dark' }"` is enough for the first edition dark baseline.
+
 ## Custom Styling Tokens
 
 `MarwesProvider` resolves `ThemeInput` into `--mw-*` CSS variables. Marwes components and preset CSS consume those variables automatically. The custom styling token helpers let app-owned Vue styles, script-driven style objects, and build-time config use the same provider-scoped values instead of hard-coding colors, spacing, radius, typography, or duplicated `var(...)` strings.
