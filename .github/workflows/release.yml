@@ -47,6 +47,22 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      # Fail with clear setup guidance before npm or Changesets produce indirect auth errors
+      - name: Validate release secrets
+        env:
+          CHANGESETS_PR_TOKEN: ${{ secrets.CHANGESETS_PR_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$CHANGESETS_PR_TOKEN" ]; then
+            echo "::error::CHANGESETS_PR_TOKEN is required so generated release PRs trigger CI."
+            exit 1
+          fi
+
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "::error::NPM_TOKEN is required to publish packages."
+            exit 1
+          fi
+
       # Configure npm authentication manually
       - name: Configure npm auth
         run: |
@@ -74,6 +90,8 @@ jobs:
           version: pnpm version-packages
           publish: pnpm release
         env:
+          # Use the dedicated token for release PR pushes; GITHUB_TOKEN pushes do not trigger CI.
           GITHUB_TOKEN: ${{ secrets.CHANGESETS_PR_TOKEN }}
+          # Release PR pushes happen after CI already passed in this workflow.
           LEFTHOOK: 0
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
