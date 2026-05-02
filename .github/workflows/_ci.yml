@@ -62,6 +62,10 @@ jobs:
       - name: Trust artifacts
         run: pnpm artifacts:check
 
+      # Verify committed component registry artifacts remain deterministic
+      - name: Component registry
+        run: pnpm registry:check
+
       # Ensure React/Vue story, export, and family coverage parity remains healthy
       - name: Storybook consistency
         run: pnpm storybook:consistency

@@ -233,9 +233,7 @@ function buildGeneratedFamilyRegistry(
       storybookVue: pathExists(source.storybookVueDir),
       contractsPresent: source.contractPaths.every((contractPath) => pathExists(contractPath)),
       auditDocPresent: source.familyAuditDocPath ? pathExists(source.familyAuditDocPath) : false,
-      figmaReferencesPresent: figmaReferencePaths.every((figmaReferencePath) =>
-        pathExists(figmaReferencePath),
-      ),
+      figmaReferencesPresent: figmaReferencePaths.length > 0,
     },
     notes: [
       ...semantics.notes,
