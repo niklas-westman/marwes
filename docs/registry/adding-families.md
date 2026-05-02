@@ -42,7 +42,7 @@ Do not hand-edit generated files once the generator owns them.
 - [`../reference/ai-metadata.md`](../reference/ai-metadata.md)
 - [`../guides/adding-components.md`](../guides/adding-components.md)
 - [`../audits/README.md`](../audits/README.md)
-- [`../../AXE_ROADMAP.md`](../../AXE_ROADMAP.md)
+- [`../reference/accessibility.md`](../reference/accessibility.md)
 
 If the family is design-driven, also read the current local Figma refs first:
 - `.figma/INDEX.md`

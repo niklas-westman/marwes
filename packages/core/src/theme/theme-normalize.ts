@@ -26,6 +26,7 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
   const warning = normalizeColorInput(input.color?.warning ?? colorBase.warning)
 
   return {
+    mode,
     color: {
       primary,
       secondary: resolveSecondaryRole(primary),

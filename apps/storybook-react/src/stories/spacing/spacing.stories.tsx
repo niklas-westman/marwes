@@ -21,7 +21,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: storybookSpacingArgTypes,
   args: {
-    size: "md",
+    size: "sp-24",
   },
   render: (args: SpacingProps) => (
     <div style={spacerWrapStyle}>
@@ -36,46 +36,47 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {}
 
 export const ExtraSmall: Story = {
-  args: { size: "xs" },
+  args: { size: "sp-8" },
 }
 
 export const Small: Story = {
-  args: { size: "sm" },
+  args: { size: "sp-16" },
 }
 
 export const Large: Story = {
-  args: { size: "lg" },
+  args: { size: "sp-32" },
 }
 
 export const ExtraLarge: Story = {
-  args: { size: "xl" },
+  args: { size: "sp-40" },
 }
 
 /**
- * All 9 size variants from smallest (xxxs=2px) to largest (xxxl=56px).
+ * Full spacing scale from sp-0 to sp-120.
  */
 export const AllSizes: Story = {
   render: () => (
     <div style={{ width: "600px" }}>
       {(
         [
-          ["xxxs", "2px"],
-          ["xxs", "4px"],
-          ["xs", "8px"],
-          ["sm", "16px"],
-          ["md", "24px"],
-          ["lg", "32px"],
-          ["xl", "40px"],
-          ["xxl", "48px"],
-          ["xxxl", "56px"],
-          ["4xl", "64px"],
-          ["5xl", "72px"],
-          ["6xl", "80px"],
-          ["7xl", "88px"],
-          ["8xl", "96px"],
-          ["9xl", "104px"],
-          ["10xl", "112px"],
-          ["11xl", "120px"],
+          ["sp-0", "0px"],
+          ["sp-2", "2px"],
+          ["sp-4", "4px"],
+          ["sp-8", "8px"],
+          ["sp-16", "16px"],
+          ["sp-24", "24px"],
+          ["sp-32", "32px"],
+          ["sp-40", "40px"],
+          ["sp-48", "48px"],
+          ["sp-56", "56px"],
+          ["sp-64", "64px"],
+          ["sp-72", "72px"],
+          ["sp-80", "80px"],
+          ["sp-88", "88px"],
+          ["sp-96", "96px"],
+          ["sp-104", "104px"],
+          ["sp-112", "112px"],
+          ["sp-120", "120px"],
         ] as const
       ).map(([size, pixels]) => (
         <div key={size}>
@@ -99,7 +100,7 @@ export const InContext: Story = {
     <div style={{ maxWidth: "600px" }}>
       <H1>This is a title</H1>
       <div style={spacerWrapStyle}>
-        <Spacing size={Spacings.md} />
+        <Spacing size={Spacings["sp-24"]} />
       </div>
       <Paragraph>This is paragraph</Paragraph>
     </div>

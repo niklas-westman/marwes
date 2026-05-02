@@ -5,15 +5,25 @@ import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-u
 
 export type SpacingProps = SpacingOptions & {
   size?: SpacingSize
+  spacing?: SpacingSize
   className?: string
 }
 
-const spacingPropKeys = ["size", "className"] as const
+export type SpacerProps = SpacingProps
+
+const spacingPropKeys = ["size", "spacing", "scale", "className"] as const
 
 export const Spacing = defineComponent(
   (props: SpacingProps) => {
     const attrs = useAttrs()
-    const kit = computed(() => createSpacingRecipe(props))
+    const kit = computed(() => {
+      const resolvedSize = props.spacing ?? props.size
+
+      return createSpacingRecipe({
+        ...(resolvedSize !== undefined ? { size: resolvedSize } : {}),
+        ...(props.scale !== undefined ? { scale: props.scale } : {}),
+      })
+    })
 
     return () => {
       const renderKit = kit.value
@@ -36,3 +46,5 @@ export const Spacing = defineComponent(
     props: [...spacingPropKeys],
   },
 )
+
+export const Spacer = Spacing

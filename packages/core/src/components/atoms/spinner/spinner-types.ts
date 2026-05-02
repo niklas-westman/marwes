@@ -41,8 +41,8 @@ export interface SpinnerOptions {
   variant?: SpinnerVariant
 
   /**
-   * Token size (`xs`/`sm`/`md`/`lg`) or a custom pixel size.
-   * Token mapping: xs=16, sm=24, md=32, lg=40.
+   * Spinner scale token (`xs`/`sm`/`md`/`lg`) or an explicit pixel size.
+   * Scale mapping: xs=16, sm=24, md=32, lg=40.
    */
   size?: SpinnerSize | number
 

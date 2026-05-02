@@ -7,5 +7,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ["vue"],
+  external: ["vue", "@marwes-ui/presets/firstEdition/styles.css"],
 })

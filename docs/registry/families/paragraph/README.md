@@ -16,7 +16,7 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete — dedicated family audit doc now exists |
 | Semantic coverage | None — Paragraph relies on native `<p>` semantics; it is not part of the wave-1 central semantic registry and does not emit family-local `data-*` metadata |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | typography light section `1368:5656`, typography dark section `1368:5677`, body light section `1368:5669`, body medium light row `1368:5671`, body default light row `1368:5742`, body dark section `1368:5690`, body medium dark row `1368:5692`, body default dark row `1368:5746` |
@@ -240,10 +240,10 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Low | paragraph is a native semantic element, but misuse still matters when teams replace headings, labels, or other richer structure with plain body text |
-| Audit status | Queued | `docs/audits/README.md` lists Paragraph in Wave 3; no dedicated family audit doc exists yet |
+| Audit status | First pass complete | `docs/audits/paragraph-family-accessibility.md` captures the completed first-pass audit and follow-up boundaries |
 | Automated contract | Strong | core recipe tests, shared React/Vue contract coverage, and Storybook docs/taxonomy tests cover the shipped family behavior |
 | Manual review boundary | Narrow | the main human judgment is whether Paragraph is being used for real body copy and whether long-form layouts stay readable |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the dedicated family audit is complete; broader support-model work remains non-blocking |
 
 ### What automation already covers
 
@@ -295,7 +295,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | there is no dedicated paragraph-specific section yet, so code, Storybook, tests, and typography refs carry most of the current contract weight |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Paragraph is absent here today, which reinforces that the family relies on native semantics rather than registry metadata |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Paragraph is currently queued in Wave 3 and has no dedicated family audit doc yet |
+| Audit queue | `docs/audits/README.md` | Paragraph is first-pass complete in Wave 3 and now has a dedicated family audit doc |
 | Core | `packages/core/src/components/atoms/paragraph/paragraph-types.ts` | public paragraph contract for size and minimal metadata |
 | Core | `packages/core/src/components/atoms/paragraph/paragraph-recipe.ts` | paragraph RenderKit assembly, size mapping, and CSS variable output |
 | Core test | `packages/core/test/recipes/paragraph.test.ts` | recipe-level baseline for default sizing and explicit size or id behavior |
@@ -339,7 +339,7 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the paragraph registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/paragraph-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
+- the dedicated `docs/audits/paragraph-family-accessibility.md` file now captures the finished first-pass audit, while support-model work remains a separate non-blocking track
 - there is no dedicated `paragraph.css`; the family shares `packages/presets/src/firstEdition/typography.css` with Heading
 - there is no dedicated `paragraph.json` component file in the current local Figma sync, so the real design baseline comes from typography tokens and page sections instead
 - the current local Figma sync teaches the 16px body styles more directly than the full shipped `sm` / `md` / `lg` Paragraph API

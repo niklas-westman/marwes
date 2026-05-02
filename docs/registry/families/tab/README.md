@@ -116,7 +116,7 @@ Related synced page refs:
 
 > Important family distinction: the synced Figma page teaches the tab bar surface and state styling, but the shipped `TabGroup` contract also includes tablist naming, automatic activation, disabled-tab skipping, and tabpanel wiring.
 >
-> In other words: Figma is the visual baseline for the row and indicator, while Storybook and the shared contract are the better references for the coordinated widget behavior.
+> In other words: Figma is the visual baseline for the tab bar and indicator, while Storybook and the shared contract are the better references for the coordinated widget behavior.
 
 ## Visual model
 
@@ -213,7 +213,7 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 ## Philosophy
 
 - **Teach `TabGroup` first.** It is the canonical coordinated widget surface for named tablists, keyboard movement, and panel wiring.
-- **Keep raw `Tab` deliberately small.** The atom should stay useful for bespoke tab rows without pretending it manages the whole widget contract on its own.
+- **Keep raw `Tab` deliberately small.** The atom should stay useful for bespoke tab bars without pretending it manages the whole widget contract on its own.
 - **Treat automatic activation as intentional.** Arrow keys and Home/End move both focus and selection immediately among enabled tabs.
 - **Skip disabled tabs consistently.** Disabled tabs are rendered as disabled controls and are excluded from roving-focus movement and fallback resolution.
 - **Keep purpose wrappers thin and honest.** They add family-local `data-purpose` metadata without becoming a second tabs implementation or pretending to be central semantic-registry entries.
@@ -238,7 +238,7 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 
 ### What still needs manual review or policy clarity
 
-- real browser and assistive-technology confirmation that the tab row and focused panel feel correct in common workflows
+- real browser and assistive-technology confirmation that the tab bar and focused panel feel correct in common workflows
 - the no-enabled-tabs edge case is still a documented gap from the first-pass audit rather than a hardened shared contract guarantee
 - future work such as vertical orientation, overflow handling, or lazy panel mounting remains explicitly out of scope for the current family contract
 
@@ -285,7 +285,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Core | `packages/core/src/components/atoms/tab/tab-types.ts` | public tab atom contract including `ariaLabel` and `ariaControls` |
 | Core | `packages/core/src/components/atoms/tab/tab-group-types.ts` | shared item and id contracts for coordinated tabs |
 | Presets | `packages/presets/src/firstEdition/tab.css` | tab atom visuals for selected, hover, pressed, disabled, and focus states |
-| Presets | `packages/presets/src/firstEdition/molecules/tab-group.css` | tab row border and panel spacing |
+| Presets | `packages/presets/src/firstEdition/molecules/tab-group.css` | tab bar border and panel spacing |
 | React | `packages/react/src/components/tab/tab.tsx` | raw tab atom adapter |
 | React | `packages/react/src/components/tab/tab-group.tsx` | canonical React coordinated tabs surface |
 | React | `packages/react/src/components/tab/variants.tsx` | family-local purpose-tab metadata in React |
@@ -325,7 +325,7 @@ Current limitations of the PoC:
 - the tab registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
 - purpose-tab semantics are family-local today and do not yet come from the central semantic registry
-- the synced Figma refs teach the tab row and indicator well, but they do not show the full shipped panel and keyboard contract
+- the synced Figma refs teach the tab bar and indicator well, but they do not show the full shipped panel and keyboard contract
 
 ## Open questions
 

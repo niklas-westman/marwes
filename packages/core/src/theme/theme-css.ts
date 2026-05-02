@@ -1,12 +1,13 @@
 import type { ColorRole, SecondaryColorRole } from "./color-resolve"
 import { densityToCSSVars } from "./density"
-import type { Density } from "./theme-types"
+import type { Density, ThemeMode } from "./theme-types"
 
 // ─── ResolvedTheme ────────────────────────────────────────────────────────────
 // Post-derivation theme shape: color fields hold resolved ColorRole objects,
 // not raw hex strings. Moved to theme-types.ts in Case 4.
 
 export interface ResolvedTheme {
+  mode: ThemeMode
   color: {
     primary: ColorRole
     secondary: SecondaryColorRole

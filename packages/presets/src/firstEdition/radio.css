@@ -5,15 +5,15 @@
  * Tokens (from Figma nodes.json):
  *   radio/surface (light): #f9fafb    (dark): #141414
  *   radio/border  (light): #e5e7eb    (dark): #374151
- *   radio/dot     (light): #2f31fc    (dark): #2f31fc  (fixed Figma blue)
+ *   radio/dot     (light): #2f31fc    (dark): #2f31fc  (= primary-base)
  *   radio/label   (light): #141414    (dark): #f9fafb  (= text)
  *   Dimensions: 18×18px circle, 10px inner dot (from Figma)
  */
 
 .mw-radio {
-  --mw-radio-surface: #f9fafb;
-  --mw-radio-border: #e5e7eb;
-  --mw-radio-dot: #2f31fc;
+  --mw-radio-surface: var(--mw-color-surface);
+  --mw-radio-border: var(--mw-color-border-subtle);
+  --mw-radio-dot: var(--mw-color-primary-base, #2f31fc);
 
   /* Reset native appearance */
   appearance: none;
@@ -107,12 +107,12 @@
    ============================================ */
 
 .mw-theme--dark .mw-radio {
-  --mw-radio-surface: #141414;
-  --mw-radio-border: #374151;
+  --mw-radio-surface: var(--mw-color-surface);
+  --mw-radio-border: var(--mw-color-border-subtle);
 }
 
 .mw-theme--dark .mw-radio:hover:not(:disabled) {
-  border-color: color-mix(in srgb, #ffffff 40%, var(--mw-radio-dot));
+  border-color: color-mix(in srgb, var(--mw-color-text) 40%, var(--mw-radio-dot));
 }
 
 .mw-theme--dark .mw-radio:disabled,

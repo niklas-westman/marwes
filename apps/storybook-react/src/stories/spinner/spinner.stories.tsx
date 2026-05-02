@@ -1,4 +1,4 @@
-import { storybookLayout, storybookSpinnerArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookSpinnerArgTypes } from "@marwes-ui/core"
 import type { SpinnerProps } from "@marwes-ui/react"
 import { Button, Paragraph, Spinner } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
@@ -64,7 +64,10 @@ function SpinnerPreview(args: SpinnerProps) {
 const meta = {
   title: "Spinner/Atom",
   component: Spinner,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookSpinnerArgTypes,
   args: {

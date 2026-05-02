@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h, ref } from "vue"
-import { Slider } from ".."
+import { Slider, type SliderProps } from ".."
 import { runSliderContract } from "../../../../../../tests/contracts/slider.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
-import { SliderField } from "../slider-field"
+import { SliderField, type SliderFieldProps } from "../slider-field"
 
 function renderWithProvider(child: () => unknown) {
   return render(
@@ -22,6 +22,7 @@ function renderWithProvider(child: () => unknown) {
 runSliderContract("vue", {
   async renderSlider(args = {}) {
     if (args.value !== undefined) {
+      const controlledValue = args.value
       const ControlledSliderHarness = defineComponent({
         setup() {
           const renderTick = ref(0)
@@ -29,19 +30,19 @@ runSliderContract("vue", {
           return () =>
             h(Slider, {
               key: renderTick.value,
-              ariaLabel: args.ariaLabel,
-              min: args.min,
-              max: args.max,
-              step: args.step,
-              modelValue: args.value,
-              disabled: args.disabled,
-              showTooltip: args.showTooltip,
-              ariaValueText: args.ariaValueText,
+              ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+              ...(args.min !== undefined ? { min: args.min } : {}),
+              ...(args.max !== undefined ? { max: args.max } : {}),
+              ...(args.step !== undefined ? { step: args.step } : {}),
+              modelValue: controlledValue,
+              ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+              ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
+              ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
               onValueChange: (value: number) => {
                 args.onValueChange?.(value)
                 renderTick.value += 1
               },
-            })
+            } satisfies SliderProps & { key: number })
         },
       })
 
@@ -51,37 +52,37 @@ runSliderContract("vue", {
 
     renderWithProvider(() =>
       h(Slider, {
-        ariaLabel: args.ariaLabel,
-        min: args.min,
-        max: args.max,
-        step: args.step,
-        defaultValue: args.defaultValue,
-        disabled: args.disabled,
-        showTooltip: args.showTooltip,
-        ariaValueText: args.ariaValueText,
-        onValueChange: args.onValueChange,
-      }),
+        ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+        ...(args.min !== undefined ? { min: args.min } : {}),
+        ...(args.max !== undefined ? { max: args.max } : {}),
+        ...(args.step !== undefined ? { step: args.step } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
+        ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
+        ...(args.onValueChange !== undefined ? { onValueChange: args.onValueChange } : {}),
+      } satisfies SliderProps),
     )
   },
   async renderSliderField(args) {
     renderWithProvider(() =>
       h(SliderField, {
         label: args.label,
-        description: args.description,
-        error: args.error,
-        ariaDescribedBy: args.ariaDescribedBy,
+        ...(args.description !== undefined ? { description: args.description } : {}),
+        ...(args.error !== undefined ? { error: args.error } : {}),
+        ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
         slider: {
-          min: args.min,
-          max: args.max,
-          step: args.step,
-          value: args.value,
-          defaultValue: args.defaultValue,
-          disabled: args.disabled,
-          showTooltip: args.showTooltip,
-          ariaValueText: args.ariaValueText,
-          onValueChange: args.onValueChange,
+          ...(args.min !== undefined ? { min: args.min } : {}),
+          ...(args.max !== undefined ? { max: args.max } : {}),
+          ...(args.step !== undefined ? { step: args.step } : {}),
+          ...(args.value !== undefined ? { value: args.value } : {}),
+          ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+          ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+          ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
+          ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
+          ...(args.onValueChange !== undefined ? { onValueChange: args.onValueChange } : {}),
         },
-      }),
+      } satisfies SliderFieldProps),
     )
   },
   getByRole(role, options) {

@@ -8,6 +8,7 @@ export interface AvatarContractHarness {
     initials?: string
     src?: string
     alt?: string
+    ariaLabel?: string
     decorative?: boolean
   }): Promise<void> | void
   getByRole(role: "img", options: { name: RegExp }): HTMLElement
@@ -30,12 +31,12 @@ export function runAvatarContract(adapterName: string, harness: AvatarContractHa
     })
 
     it("supports initials content with size variants", async () => {
-      await harness.renderAvatar({ initials: " nw ", size: "large" })
+      await harness.renderAvatar({ initials: " am ", size: "large" })
 
-      const avatarElement = harness.getByRole("img", { name: /nw/i })
+      const avatarElement = harness.getByRole("img", { name: /am/i })
       const avatarShell = harness.queryAvatarShell()
 
-      expect(avatarElement.textContent).toContain("NW")
+      expect(avatarElement.textContent).toContain("AM")
       expect(avatarShell?.className).toContain("mw-avatar--large")
       expect(avatarShell).toHaveAttribute("data-type", "initials")
       expect(avatarShell).toHaveAttribute("data-size", "large")
@@ -44,10 +45,10 @@ export function runAvatarContract(adapterName: string, harness: AvatarContractHa
     it("renders image avatars with the provided alt text", async () => {
       await harness.renderAvatar({
         src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E",
-        alt: "Niklas Westman",
+        alt: "Alex Morgan",
       })
 
-      const imageElement = harness.getByRole("img", { name: /niklas westman/i })
+      const imageElement = harness.getByRole("img", { name: /alex morgan/i })
       const avatarShell = harness.queryAvatarShell()
 
       expect(imageElement.tagName).toBe("IMG")
@@ -59,6 +60,14 @@ export function runAvatarContract(adapterName: string, harness: AvatarContractHa
 
       const avatarShell = harness.queryAvatarShell()
       expect(avatarShell).toHaveAttribute("aria-hidden", "true")
+    })
+
+    it("uses an explicit ariaLabel to name a non-image avatar when provided", async () => {
+      await harness.renderAvatar({ ariaLabel: "Alex Morgan" })
+
+      const avatarElement = harness.getByRole("img", { name: /alex morgan/i })
+      expect(avatarElement).toBeInTheDocument()
+      expect(avatarElement).toHaveAttribute("aria-label", "Alex Morgan")
     })
   })
 }

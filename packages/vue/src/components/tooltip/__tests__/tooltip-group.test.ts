@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
 import { runTooltipContract } from "../../../../../../tests/contracts/tooltip.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
-import { Tooltip } from "../tooltip"
+import { Tooltip, type TooltipProps } from "../tooltip"
 import { TooltipGroup } from "../tooltip-group"
 
 function renderWithProvider(child: () => unknown) {
@@ -25,7 +25,9 @@ runTooltipContract("vue", {
     renderWithProvider(() =>
       h(
         Tooltip,
-        { id: args.id },
+        {
+          ...(args.id !== undefined ? ({ id: args.id } satisfies TooltipProps) : {}),
+        },
         {
           default: () => args.children ?? "Helpful billing context",
         },

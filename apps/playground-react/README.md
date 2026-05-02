@@ -31,21 +31,17 @@ Default URL: `http://localhost:5173`
 The public API story for React should always start the same way:
 
 1. import components from `@marwes-ui/react`
-2. import `firstEditionTheme` from `@marwes-ui/presets`
-3. import `@marwes-ui/presets/firstEdition/styles.css`
-4. pass the theme through `<MarwesProvider theme={firstEditionTheme}>`
+2. wrap the app with `<MarwesProvider>`
 
 ```tsx
 import { useState } from "react"
 import { Button, Input, MarwesProvider } from "@marwes-ui/react"
-import { firstEditionTheme } from "@marwes-ui/presets"
-import "@marwes-ui/presets/firstEdition/styles.css"
 
 export function PlaygroundExample() {
   const [email, setEmail] = useState("")
 
   return (
-    <MarwesProvider theme={firstEditionTheme}>
+    <MarwesProvider>
       <Input
         value={email}
         onValueChange={setEmail}
@@ -61,7 +57,7 @@ export function PlaygroundExample() {
 For live experiments, the real playground can swap the provider theme at runtime:
 
 ```tsx
-const [theme, setTheme] = useState<ThemeInput>(firstEditionTheme)
+const [theme, setTheme] = useState<ThemeInput>({})
 
 <MarwesProvider theme={theme}>...</MarwesProvider>
 ```

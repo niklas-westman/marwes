@@ -94,7 +94,7 @@
   height: auto;
   padding: 0.25rem 0.5rem;
   line-height: 1;
-  border-radius: 4px;
+  border-radius: var(--mw-ui-radius);
 }
 
 .mw-btn--text:hover:not(:disabled) {
@@ -103,6 +103,12 @@
 
 .mw-btn--text:active:not(:disabled) {
   background: color-mix(in srgb, var(--mw-color-text) 12%, transparent);
+}
+
+.mw-btn.mw-btn--text[data-action="navigate"] {
+  padding: 0.125rem 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* SIZES */
@@ -167,7 +173,7 @@
 /* SUCCESS - Positive confirmation actions */
 .mw-btn--success {
   background: var(--mw-color-success-base);
-  color: #ffffff;
+  color: var(--mw-color-success-label);
   border-color: var(--mw-color-success-base);
 }
 

@@ -7,20 +7,22 @@
  */
 
 .mw-tab {
-  --mw-tab-surface: #ffffff;
-  --mw-tab-surface-hover: #f3f4f6;
-  --mw-tab-surface-pressed: #e5e7eb;
-  --mw-tab-label: #595959;
+  --mw-tab-surface: var(--mw-color-surface-elevated);
+  --mw-tab-surface-hover: var(--mw-color-surface-subtle);
+  --mw-tab-surface-pressed: var(--mw-color-border-subtle);
+  --mw-tab-label: var(--mw-color-text-muted);
   --mw-tab-label-active: var(--mw-color-text, #141414);
-  --mw-tab-label-disabled: #737373;
+  --mw-tab-label-disabled: var(--mw-color-text-disabled);
   --mw-tab-indicator: var(--mw-color-primary-base, #2f31fc);
-  --mw-tab-indicator-disabled: #e5e7eb;
+  --mw-tab-indicator-disabled: var(--mw-color-border-disabled);
 
   appearance: none;
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--mw-spacing-xs, 8px) var(--mw-spacing-sm, 16px);
+  box-sizing: border-box;
+  padding: var(--mw-spacing-sp-8, 8px) var(--mw-spacing-sp-16, 16px);
   background: var(--mw-tab-surface);
   color: var(--mw-tab-label);
   font-family: var(--mw-font-primary, inherit);
@@ -62,17 +64,18 @@
 }
 
 .mw-tab:focus-visible {
-  outline: 2px solid var(--mw-color-focus, #2684ff);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2684ff);
+  z-index: 1;
 }
 
 .mw-theme--dark .mw-tab {
-  --mw-tab-surface: #2e2e2e;
-  --mw-tab-surface-hover: #595959;
-  --mw-tab-surface-pressed: #737373;
-  --mw-tab-label: #a3a3a3;
-  --mw-tab-label-active: #f9fafb;
-  --mw-tab-label-disabled: #595959;
-  --mw-tab-indicator: #5859fc;
-  --mw-tab-indicator-disabled: #474747;
+  --mw-tab-surface: var(--mw-color-surface-elevated);
+  --mw-tab-surface-hover: var(--mw-color-surface-subtle);
+  --mw-tab-surface-pressed: var(--mw-color-border);
+  --mw-tab-label: var(--mw-color-text-muted);
+  --mw-tab-label-active: var(--mw-color-text);
+  --mw-tab-label-disabled: var(--mw-color-text-disabled);
+  --mw-tab-indicator: var(--mw-color-primary-base, #5859fc);
+  --mw-tab-indicator-disabled: var(--mw-color-border-disabled);
 }

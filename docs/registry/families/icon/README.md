@@ -16,7 +16,7 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete — dedicated family audit doc now exists |
 | Semantic coverage | None — Icon relies on native SVG semantics and parent control context; it is not part of the wave-1 central semantic registry and does not emit family-local `data-*` metadata |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | icon light frame `1384:10135`, icon dark frame `1384:10579`, interface container `1384:11023`, arrows container `1384:11076`, users container `1384:11137`, editor container `2015:6777`, medias container `2015:7449`, size legend text `1455:8865` |
@@ -55,7 +55,7 @@ This makes Icon a strong nineteenth registry family because it ties together:
 | Core scale layer | `icon-scales.ts` | maps `xs` / `sm` / `md` / `lg` into 16 / 24 / 32 / 40 size values and 1 / 2 / 3 / 4 stroke-width values |
 | Canonical discovery path | Storybook `Icon/Atom` gallery | recommended way to choose a name, inspect size and stroke weight, and verify the shipped inventory |
 | Architecture boundary | shipped adapter path vs adjacent recipe/preset path | makes it explicit that React and Vue currently render icons directly rather than consuming the full `createIconRecipe` + `icon.css` class path |
-| Escape hatch | raw numbers for `size` and `strokeWidth`, custom `className`, explicit `aria-label` | supported when consumers intentionally need non-token scaling or a standalone labelled icon |
+| Escape hatch | explicit numeric `size` and `strokeWidth`, custom `className`, explicit `aria-label` | supported when consumers intentionally need non-token scaling or a standalone labelled icon |
 
 ## Canonical visual understanding
 
@@ -262,10 +262,10 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Low | icon is a small atom, but misuse still matters when icon-only parent controls lack an accessible name or decorative icons are exposed unnecessarily |
-| Audit status | Queued | `docs/audits/README.md` lists Icon in Wave 3; no dedicated family audit doc exists yet |
+| Audit status | First pass complete | `docs/audits/icon-family-accessibility.md` captures the completed first-pass audit and follow-up boundaries |
 | Automated contract | Strong on the shipped adapter surface | shared React/Vue contract coverage, core recipe tests, and Storybook docs/taxonomy tests cover the current atom behavior |
 | Manual review boundary | Narrow but real | the main human judgment is whether icon-only parent controls are named correctly and whether the visual inventory stays design-aligned |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the dedicated family audit is complete; broader support-model work remains non-blocking |
 
 ### What automation already covers
 
@@ -318,7 +318,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | there is no dedicated icon-family section yet, so code, Storybook, tests, and Figma refs carry most of the current contract weight |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Icon is absent here today, which reinforces that the family relies on SVG semantics rather than registry metadata |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Icon is currently queued in Wave 3 and has no dedicated family audit doc yet |
+| Audit queue | `docs/audits/README.md` | Icon is first-pass complete in Wave 3 and now has a dedicated family audit doc |
 | Core | `packages/core/src/components/atoms/icon/icon-types.ts` | public icon atom contract for names, size, stroke width, and accessibility inputs |
 | Core | `packages/core/src/components/atoms/icon/icon-scales.ts` | canonical size and stroke-width token mapping |
 | Core | `packages/core/src/components/atoms/icon/icon-registry.ts` | generated SVG node inventory for the shipped icon set |
@@ -369,7 +369,7 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the icon registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/icon-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
+- the dedicated `docs/audits/icon-family-accessibility.md` file now captures the finished first-pass audit, while support-model work remains a separate non-blocking track
 - the synced Figma page currently presents a 98-icon main showcase plus separate editor and medias containers, while the shipped runtime inventory exposes 227 generated icon names
 - `createIconRecipe` and `icon.css` exist, but the shipped React and Vue adapters currently render SVGs directly from `iconRegistry` and the scale helpers instead of using that full recipe and preset path
 - the representative per-icon Figma component JSONs flatten icons into vector unions, so they do not directly teach the runtime `strokeWidth` API

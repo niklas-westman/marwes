@@ -277,7 +277,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Shared avatar, avatar-badge, and avatar-group contracts across React and Vue.",
             "Local adapter tests for exports and purpose-wrapper metadata in both frameworks.",
@@ -285,7 +285,7 @@
           ],
           "manualReviewRequired": [
             "Product-level quality of alt text, aria labels, status labels, and overflow wording.",
-            "Whether likely unlabeled non-decorative image avatars should trigger a dev-time warning in core.",
+            "Dev-time warning for image avatars without alt or ariaLabel is now implemented in avatar-a11y.ts.",
             "Any future expansion beyond the current non-interactive avatar, badge, and group scope."
           ],
           "roadmapAnchors": [
@@ -293,8 +293,8 @@
             "AXE_ROADMAP.md#avatar"
           ],
           "notes": [
-            "Avatar is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family already has strong shared-contract coverage despite the missing dedicated audit write-up."
+            "Avatar completed a first-pass accessibility audit focused on image-naming quality, group labeling, and dev-warning coverage.",
+            "The family now has a dev warning for unlabeled image avatars and expanded shared contract coverage for ariaLabel override and group default label."
           ]
         },
         "visuals": {
@@ -343,7 +343,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/avatar-family-accessibility.md"],
           "roadmap": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
           "core": [
             "packages/core/src/components/atoms/avatar/avatar-a11y.ts",
@@ -490,7 +490,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -535,7 +535,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for default neutral behavior, variant classes, and ariaLabel passthrough.",
             "Shared badge contract coverage across React and Vue for canonical purpose semantics.",
@@ -551,8 +551,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Badge is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family already has strong shared-contract and adapter-level coverage despite the missing dedicated audit write-up."
+            "Badge completed a first-pass accessibility audit focused on ariaLabel DOM delivery, BadgeGroup cross-adapter contract, and numeric badge guidance.",
+            "The family now has a shared BadgeGroup contract and expanded badge contract plus a documented parity gap in the BadgeGroup label prop type."
           ]
         },
         "visuals": {
@@ -606,7 +606,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/badge-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -728,7 +728,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -773,21 +773,22 @@
         },
         "axe": {
           "riskTier": "medium",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Shared React and Vue contract coverage through tests/contracts/button.contract.ts.",
             "Loading-state semantics such as aria-busy and disabled behavior.",
+            "Native link semantics for active LinkButton paths and disabled/loading anchor fallback behavior.",
             "Dev-time warning for icon-only buttons without an accessible name path.",
             "Storybook introduction and taxonomy tests in both apps."
           ],
           "manualReviewRequired": [
             "Product-level choice between navigation links and action buttons.",
-            "Final semantics policy for anchor-backed button variants such as LinkButton."
+            "Cases where a plain inline text link is the more honest UI than a button-family surface."
           ],
           "roadmapAnchors": ["AXE_ROADMAP.md#button-semantics-cleanup"],
           "notes": [
-            "Button is queued as a P3 family in the accessibility audit queue.",
-            "The open AXE follow-up is narrower than the high-risk widget families but still important for policy clarity."
+            "Button completed a first-pass accessibility audit focused on the action-vs-navigation semantics boundary.",
+            "The original open AXE follow-up is now resolved at the family-policy level, while broader gating and support-model work remains cross-cutting."
           ]
         },
         "visuals": {
@@ -806,7 +807,7 @@
           "preferredStates": ["default", "hover", "pressed", "disabled", "focus", "loading"]
         },
         "openQuestions": [
-          "Should LinkButton preserve native link semantics instead of anchor-plus-role-button semantics?"
+          "Which Button-family stories should join the first automated accessibility smoke set?"
         ]
       },
       "generated": {
@@ -821,7 +822,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/button-family-accessibility.md"],
           "roadmap": ["AXE_ROADMAP.md#button-semantics-cleanup"],
           "core": [
             "packages/core/src/components/atoms/button/button-a11y.ts",
@@ -1060,7 +1061,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -1105,7 +1106,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for the stable card class, data-component marker, and custom data-attribute merging.",
             "Local React and Vue atom tests for title/body rendering and outer-element passthrough behavior.",
@@ -1121,8 +1122,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Card is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family has core, adapter, and Storybook coverage, but it does not yet have a shared tests/contracts card contract file."
+            "Card completed a first-pass accessibility audit focused on shared contract maturity, passive-surface guidance, and honest title semantics.",
+            "The family now has a shared card contract and explicit docs about the title-as-span constraint plus the interactive-card anti-pattern."
           ]
         },
         "visuals": {
@@ -1173,7 +1174,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/card-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -1287,7 +1288,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -1333,11 +1334,12 @@
         },
         "axe": {
           "riskTier": "medium",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for controlled versus uncontrolled state output on the raw checkbox atom.",
-            "Shared checkbox and checkbox-group-field contracts across React and Vue for checked state, disabled behavior, group labeling, description wiring, error wiring, and indeterminate support.",
-            "Local CheckboxField adapter tests plus Storybook introduction and taxonomy tests in both apps."
+            "Shared checkbox and checkbox-field contracts across React and Vue for checked state, single-field naming, description/error wiring, invalid state, and disabled forwarding.",
+            "Shared checkbox-group-field contracts across React and Vue for group labeling, description wiring, error wiring, invalid propagation, and indeterminate support.",
+            "Storybook introduction and taxonomy tests in both apps."
           ],
           "manualReviewRequired": [
             "Product-level judgment about when a select-all checkbox should become indeterminate and whether that behavior stays truthful in real flows.",
@@ -1349,8 +1351,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Checkbox is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family has shared contracts for the raw atom and the grouped molecule, but CheckboxField still relies on local adapter tests rather than a dedicated shared contract file."
+            "Checkbox completed a first-pass accessibility audit focused on single-field contract maturity and native-first field wiring.",
+            "The family now has shared contracts for the raw atom, single-field molecule, and grouped molecule across React and Vue."
           ]
         },
         "visuals": {
@@ -1385,7 +1387,7 @@
           ]
         },
         "openQuestions": [
-          "Should CheckboxField eventually gain a dedicated shared tests/contracts file instead of relying on local adapter tests only?",
+          "Which Checkbox-family stories should join the first automated accessibility smoke set?",
           "Should the local Figma sync gain clearer molecule-level CheckboxField and CheckboxGroupField refs that mirror the shipped helper-text and error behavior more directly?"
         ]
       },
@@ -1401,7 +1403,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/checkbox-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -1542,7 +1544,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -1837,7 +1839,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for the horizontal default, size mapping, orientation metadata, and optional id handling.",
             "Shared divider contract coverage across React and Vue for semantic separator behavior.",
@@ -1853,8 +1855,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Divider is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family already has strong core, shared-contract, adapter, and Storybook coverage despite the missing dedicated audit write-up."
+            "Divider completed a first-pass accessibility audit focused on semantic-separator honesty, spacing-vs-structure guidance, and vertical-layout caveats.",
+            "The family now has expanded shared-contract coverage for local metadata plus explicit accessibility notes in both Storybook apps."
           ]
         },
         "visuals": {
@@ -1899,7 +1901,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/divider-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -1991,7 +1993,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -2037,7 +2039,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for semantic tag selection, default size mapping, and explicit size override behavior.",
             "Shared heading contract coverage across React and Vue for native heading semantics, id, and aria-label passthrough.",
@@ -2053,8 +2055,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Heading is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family relies on native HTML semantics instead of Marwes semantic-registry metadata, which keeps the surface small but still worth documenting explicitly."
+            "Heading completed a first-pass accessibility audit focused on outline-first usage, size override honesty, and native-semantic documentation.",
+            "The family now has expanded shared-contract coverage for H1 and the absence of family-local metadata plus explicit accessibility notes in both Storybook apps."
           ]
         },
         "visuals": {
@@ -2098,7 +2100,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/heading-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -2203,7 +2205,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -2249,7 +2251,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for decorative defaults, size resolution, stroke-width resolution, and labelled icon output.",
             "Shared icon contract coverage across React and Vue for decorative-versus-labelled semantics and token-based size and stroke-width behavior.",
@@ -2265,8 +2267,8 @@
             "AXE_ROADMAP.md#dev-time-warnings"
           ],
           "notes": [
-            "Icon is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The atom itself is small and low-risk, but icon misuse often appears indirectly in icon-only parent controls and decorative-versus-labelled policy gaps."
+            "Icon completed a first-pass accessibility audit focused on decorative defaults, icon-only parent control guidance, and dev-time warnings for non-decorative misuse.",
+            "The family now has a shared icon a11y helper, expanded contract coverage, and explicit Storybook guidance for decorative-versus-labelled behavior."
           ]
         },
         "visuals": {
@@ -2311,12 +2313,13 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/icon-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#dev-time-warnings"
           ],
           "core": [
+            "packages/core/src/components/atoms/icon/icon-a11y.ts",
             "packages/core/src/components/atoms/icon/icon-names.ts",
             "packages/core/src/components/atoms/icon/icon-preset.ts",
             "packages/core/src/components/atoms/icon/icon-recipe.ts",
@@ -2432,7 +2435,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -2457,11 +2460,11 @@
         "family": "input",
         "displayName": "Input",
         "status": "shipped",
-        "summary": "Broad text-entry family spanning native-first inputs, select fields, OTP entry, and manual-review-heavy rich text.",
+        "summary": "Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.",
         "philosophy": [
           "Keep plain text entry, multiline entry, select, OTP, and rich text in one input-domain family so shared field wiring stays coherent.",
-          "Prefer native browser semantics first, especially for base Input, Textarea, and Select surfaces.",
-          "Keep custom presentation explicit through purpose wrappers such as DropdownField instead of teaching custom behavior as the default.",
+          "Preserve native browser semantics for base Input, Textarea, and the Select atom while allowing Marwes chrome to be the default visual mode.",
+          "Keep native browser select chrome explicit through native=true or appearance=native instead of treating it as the default visual path.",
           "Document rich text honestly as manual-review-heavy rather than pretending automated checks fully prove the editing experience."
         ],
         "usage": {
@@ -2472,7 +2475,7 @@
           ],
           "avoidWhen": [
             "A different family such as checkbox, radio, or switch is the more honest control type.",
-            "A custom dropdown visual is being chosen without a deliberate reason to move away from the native-first select path.",
+            "A custom dropdown visual is being chosen without testing the Marwes-default interaction path and native fallback behavior.",
             "The team is not prepared to manually review rich-text editing behavior in real browser and assistive-technology combinations."
           ]
         },
@@ -2482,7 +2485,7 @@
           "automationCovers": [
             "Shared contracts for input, input fields, select, select combobox, textarea, dropdown, OTP, and rich text.",
             "Storybook introduction and taxonomy tests in both apps.",
-            "Documented native-first select guidance and explicit rich-text manual-review boundary."
+            "Documented Marwes-default select guidance, native fallback behavior, and explicit rich-text manual-review boundary."
           ],
           "manualReviewRequired": [
             "RichText editing behavior in supported browser and assistive-technology combinations.",
@@ -2872,7 +2875,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for default paragraph sizing and id passthrough behavior.",
             "Shared paragraph contract coverage across React and Vue for native p rendering, size classes, and id metadata.",
@@ -2888,8 +2891,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Paragraph is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family relies on native paragraph semantics instead of Marwes semantic-registry metadata, which keeps the surface small but still worth documenting explicitly."
+            "Paragraph completed a first-pass accessibility audit focused on body-copy semantics, size override honesty, and native-semantic documentation.",
+            "The family now has expanded shared-contract coverage for the absence of family-local metadata plus explicit accessibility notes in both Storybook apps."
           ]
         },
         "visuals": {
@@ -2933,7 +2936,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/paragraph-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -3036,7 +3039,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -3082,10 +3085,10 @@
         },
         "axe": {
           "riskTier": "medium",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests plus the shared raw-radio contract across React and Vue for checked state, disabled behavior, and callback flow.",
-            "Local React and Vue tests for RadioGroupField labeling, description wiring, error wiring, invalid propagation, and controlled versus uncontrolled selection.",
+            "Shared React and Vue radio-group-field contract coverage for group labeling, description wiring, error wiring, invalid propagation, required state, disabled handling, and controlled versus uncontrolled selection.",
             "Local React and Vue tests for the purpose-radio wrappers plus Storybook introduction and taxonomy tests in both apps."
           ],
           "manualReviewRequired": [
@@ -3098,8 +3101,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Radio is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family has a shared contract for the raw atom, but RadioGroupField and the purpose wrappers still rely on local adapter tests rather than a dedicated shared contract file."
+            "Radio completed a first-pass accessibility audit focused on grouped single-selection contract maturity and native-first field wiring.",
+            "The family now has shared contracts for the raw atom and RadioGroupField across React and Vue, while purpose-wrapper metadata remains covered by local adapter tests."
           ]
         },
         "visuals": {
@@ -3139,7 +3142,7 @@
           ]
         },
         "openQuestions": [
-          "Should RadioGroupField eventually gain a dedicated shared tests/contracts file instead of relying on local adapter tests only?",
+          "Which Radio-family stories should join the first automated accessibility smoke set?",
           "Should the family-local purpose vocabulary (binary-choice, rating, selection) stay adapter-local, or move into the central semantic registry if Radio becomes a governed semantic family?"
         ]
       },
@@ -3155,7 +3158,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/radio-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -3296,7 +3299,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -3588,7 +3591,7 @@
         },
         "axe": {
           "riskTier": "low",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Storybook introduction and taxonomy tests in both apps for the atom teaching surface and token-scale documentation.",
             "Repo-wide typecheck and build paths exercise the exported Spacing atom and Spacings constant in both adapters.",
@@ -3604,8 +3607,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Spacing is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family currently has no dedicated core, adapter, or shared-contract test file; the strongest focused automation today is in Storybook docs and taxonomy coverage."
+            "Spacing completed a first-pass accessibility audit focused on decorative-only usage, layout-honesty guidance, and direct runtime contract coverage.",
+            "The family now has core recipe tests, a shared spacing contract, dedicated React/Vue adapter tests, and a documented Vue scale-prop parity fix."
           ]
         },
         "visuals": {
@@ -3620,30 +3623,30 @@
             ]
           },
           "preferredStates": [
-            "xxxs",
-            "xxs",
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-            "xxl",
-            "xxxl",
-            "4xl",
-            "5xl",
-            "6xl",
-            "7xl",
-            "8xl",
-            "9xl",
-            "10xl",
-            "11xl",
+            "sp-0",
+            "sp-2",
+            "sp-4",
+            "sp-8",
+            "sp-16",
+            "sp-24",
+            "sp-32",
+            "sp-40",
+            "sp-48",
+            "sp-56",
+            "sp-64",
+            "sp-72",
+            "sp-80",
+            "sp-88",
+            "sp-96",
+            "sp-104",
+            "sp-120",
             "scale-multiplier",
             "in-context"
           ]
         },
         "openQuestions": [
           "Should Spacing gain a dedicated runtime contract or adapter test file, or is docs-led coverage sufficient for a decorative family this small?",
-          "Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 17-size spacing scale, or is the current code-owned token source sufficient?"
+          "Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 18-size spacing scale, or is the current code-owned token source sufficient?"
         ]
       },
       "generated": {
@@ -3658,7 +3661,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/spacing-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -3673,10 +3676,12 @@
             "packages/presets/src/firstEdition/tokens.css"
           ],
           "react": [
+            "packages/react/src/components/spacing/__tests__/spacing.test.tsx",
             "packages/react/src/components/spacing/index.ts",
             "packages/react/src/components/spacing/spacing.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/spacing/__tests__/spacing.test.ts",
             "packages/vue/src/components/spacing/index.ts",
             "packages/vue/src/components/spacing/spacing.ts"
           ],
@@ -3692,7 +3697,7 @@
             "apps/storybook-vue/src/stories/spacing/Introduction.mdx",
             "apps/storybook-vue/src/stories/spacing/spacing.stories.ts"
           ],
-          "contracts": []
+          "contracts": ["tests/contracts/spacing.contract.ts"]
         },
         "semantics": {
           "coverageLevel": "family-local",
@@ -3734,7 +3739,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -3780,24 +3785,25 @@
         },
         "axe": {
           "riskTier": "medium",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
             "Core recipe tests for default decorative behavior, seven synced variants, size mapping, and standalone status mode.",
-            "Preset CSS contract tests for light and dark indicator colors plus rotation animation wiring.",
-            "Shared spinner contract coverage across React and Vue, local context-wrapper tests, and Storybook introduction/taxonomy tests in both apps."
+            "Preset CSS contract tests for light and dark indicator colors, rotation animation wiring, stationary Cross color-shift motion, and the slow-not-stop reduced-motion policy (1600ms).",
+            "Expanded shared spinner contract across React and Vue for decorative default, status mode, inner SVG isolation, token size data-size attributes, and explicit decorative=true.",
+            "Local context-wrapper tests and Storybook introduction/taxonomy tests in both apps."
           ],
           "manualReviewRequired": [
             "Product-level decisions about when loading is decorative versus when a spinner should expose a standalone accessible status name.",
             "Real browser and assistive-technology validation for longer loading sequences, repeated status announcements, and button-loading feel.",
-            "Reduced-motion quality and whether spinner-only loading states provide enough surrounding context in real product layouts."
+            "Whether the slow-not-stop reduced-motion policy (1600ms) is sufficient for users who need full motion off in real product flows."
           ],
           "roadmapAnchors": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Spinner is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family already has strong core, preset, adapter, contract, and Storybook coverage despite the missing dedicated audit write-up."
+            "Spinner completed a first-pass accessibility audit focused on decorative-vs-status policy, reduced-motion expectations, and contract maturity.",
+            "The family now has expanded shared contract coverage, preset CSS contract tests for reduced-motion slowdown and Cross color-shift behavior, and a dev warning for the decorative={false} without ariaLabel misuse case."
           ]
         },
         "visuals": {
@@ -3834,6 +3840,7 @@
           ]
         },
         "openQuestions": [
+          "Which Spinner-family stories should join the first automated accessibility smoke set?",
           "Should Spinner eventually gain a clearer documented policy for when product teams should pair it with surrounding loading text versus using ariaLabel directly?",
           "Should the exploratory TinoSpinner size and animation assets remain design-only references, or should any of that surface become a future shipped spinner API?"
         ]
@@ -3850,7 +3857,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/spinner-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -3998,7 +4005,7 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
@@ -4505,6 +4512,7 @@
           "Teach purpose toasts first when the message intent is known and keep raw Toast as the deliberate primitive and escape hatch.",
           "Keep canonical toast semantics in core so React and Vue emit the same data-component, data-purpose, and data-intent contract.",
           "Treat ToastContainer, ToastProvider, and useToast as adapter-owned delivery layers rather than pretending the atom owns queue behavior.",
+          "Keep toast-local actions as lightweight underlined text actions, with real buttons or links when the action is interactive.",
           "Keep neutral and brand primitives explicit but secondary so they do not blur the canonical purpose-toast vocabulary."
         ],
         "usage": {
@@ -4521,15 +4529,15 @@
         },
         "axe": {
           "riskTier": "medium",
-          "auditStatus": "queued",
+          "auditStatus": "first-pass-complete",
           "automationCovers": [
-            "Shared purpose-toast contract coverage across React and Vue for canonical semantics and urgency defaults.",
-            "Local container and provider tests in both adapters for stacking, dismiss routing, primitive intent forwarding, and imperative API behavior.",
-            "Storybook introduction and taxonomy tests in both apps."
+            "Shared React and Vue toast contract coverage for raw toast semantics, purpose-toast defaults, max-visible trimming, primitive intent forwarding, dismiss forwarding, and provider-managed delivery timing.",
+            "Local container and provider tests in both adapters for placement, imperative queue flow, and adapter-specific wiring details.",
+            "Storybook introduction and taxonomy tests in both apps with explicit timing and inline-action guidance."
           ],
           "manualReviewRequired": [
-            "Real browser and assistive-technology validation for repeated toast announcement timing and urgency feel.",
-            "Product-level guidance around auto-dismiss duration, inline action wording, and whether users have enough time to perceive the message.",
+            "Real browser and assistive-technology validation for repeated toast announcement timing, interruption feel, and urgency calibration.",
+            "Product-level judgment about when the default 4000ms duration is sufficient versus when critical or actionable toasts should stay visible with duration null or a longer explicit timeout.",
             "Any future expansion beyond the current transient feedback and simple queue model."
           ],
           "roadmapAnchors": [
@@ -4537,8 +4545,8 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "notes": [
-            "Toast is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-            "The family already has strong shared-contract and adapter-level coverage despite the missing dedicated audit write-up."
+            "Toast completed a first-pass accessibility audit focused on live-region defaults, delivery timing, dismissal behavior, and contract maturity.",
+            "The family now has shared contract coverage for the raw atom, purpose wrappers, and delivery-layer timing behavior across React and Vue."
           ]
         },
         "visuals": {
@@ -4571,7 +4579,8 @@
           ]
         },
         "openQuestions": [
-          "Should Toast get stronger guidance or defaults around auto-dismiss duration for accessibility-sensitive flows?",
+          "Which Toast-family stories should join the first automated accessibility smoke set?",
+          "Should the provider default stay at 4000ms long term, or move toward a longer or intent-aware timeout policy once the canonical accessibility support model exists?",
           "Should neutral and brand raw-toast primitives remain escape hatches only, or eventually gain a more explicit documented governance boundary?"
         ]
       },
@@ -4587,7 +4596,7 @@
             "docs/reference/governance.md"
           ],
           "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-          "audits": ["docs/audits/README.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/toast-family-accessibility.md"],
           "roadmap": [
             "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -4677,7 +4686,7 @@
             "packages/core/src/semantics/purpose-semantics.ts"
           ],
           "notes": [
-            "Toast needs base family identity normalized in core before protocol hardening is complete."
+            "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned."
           ]
         },
         "design": {
@@ -4737,11 +4746,11 @@
           "storybookReact": true,
           "storybookVue": true,
           "contractsPresent": true,
-          "auditDocPresent": false,
+          "auditDocPresent": true,
           "figmaReferencesPresent": true
         },
         "notes": [
-          "Toast needs base family identity normalized in core before protocol hardening is complete.",
+          "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned.",
           "Generated from docs/registry/families/toast/registry.meta.json and scripts/generate-component-registry.ts."
         ]
       }

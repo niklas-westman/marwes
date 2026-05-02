@@ -2,6 +2,7 @@ import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
+import { runBadgeGroupContract } from "../../../../../../tests/contracts/badge-group.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Badge } from "../badge"
 import { BadgeGroup } from "../badge-group"
@@ -9,6 +10,23 @@ import { BadgeGroup } from "../badge-group"
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
+
+runBadgeGroupContract("react", {
+  renderBadgeGroup(args = {}) {
+    const label = args.label ?? "Tags"
+    render(
+      <MarwesProvider>
+        <BadgeGroup label={label}>
+          <Badge>A</Badge>
+          <Badge>B</Badge>
+        </BadgeGroup>
+      </MarwesProvider>,
+    )
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+})
 
 describe("BadgeGroup (Molecule)", () => {
   it("renders a labeled group container with badge children", () => {

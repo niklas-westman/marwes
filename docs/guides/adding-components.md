@@ -210,4 +210,4 @@ For focused work, run package-specific commands first.
 - [Specification](../reference/spec.md)
 - [Testing](../reference/testing.md)
 - [Figma to Marwes](./figma-to-marwes.md)
-- [Component backlog](../planning/component-backlog.md)
+- [Component registry](../registry/README.md)

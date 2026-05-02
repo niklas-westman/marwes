@@ -15,6 +15,7 @@ const success = resolveColorRole("#006633")
 const warning = resolveColorRole("#FFB703")
 
 const fixture: ResolvedTheme = {
+  mode: "light",
   color: {
     primary,
     secondary: resolveSecondaryRole(primary),

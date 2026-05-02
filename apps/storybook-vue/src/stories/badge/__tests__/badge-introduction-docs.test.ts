@@ -18,5 +18,11 @@ describe("Vue badge introduction docs", () => {
     for (const componentName of componentNames) {
       expect(introDoc).toContain(componentName)
     }
+
+    expect(introDoc).toContain("Accessibility notes")
+    expect(introDoc).toContain("Numeric-only badges always need")
+    expect(introDoc).toContain("ariaLabel")
+    expect(introDoc).toContain("label quality matters")
+    expect(introDoc).toContain("passive span")
   })
 })

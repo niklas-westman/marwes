@@ -34,20 +34,23 @@ runDialogModalContract("vue", {
         {
           open: true,
           portalTarget: null,
-          title: args.title,
-          description: args.description,
-          ariaLabel: args.ariaLabel,
-          dismissible: args.dismissible,
-          closeOnEscape: args.closeOnEscape,
-          closeOnScrimClick: args.closeOnScrimClick,
-          "onUpdate:open": args.onOpenChange,
-          footer:
-            args.showFooter === false
-              ? undefined
-              : [
+          ...(args.title !== undefined ? { title: args.title } : {}),
+          ...(args.description !== undefined ? { description: args.description } : {}),
+          ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+          ...(args.dismissible !== undefined ? { dismissible: args.dismissible } : {}),
+          ...(args.closeOnEscape !== undefined ? { closeOnEscape: args.closeOnEscape } : {}),
+          ...(args.closeOnScrimClick !== undefined
+            ? { closeOnScrimClick: args.closeOnScrimClick }
+            : {}),
+          ...(args.onOpenChange !== undefined ? { "onUpdate:open": args.onOpenChange } : {}),
+          ...(args.showFooter === false
+            ? {}
+            : {
+                footer: [
                   h("button", { type: "button" }, "Cancel"),
                   h("button", { type: "button" }, "Confirm"),
                 ],
+              }),
         },
         {
           default: () =>
@@ -86,10 +89,12 @@ runDialogModalContract("vue", {
             {
               open: open.value,
               portalTarget: null,
-              title: args.title,
-              description: args.description,
-              restoreFocus: args.restoreFocus,
-              closeOnScrimClick: args.closeOnScrimClick,
+              ...(args.title !== undefined ? { title: args.title } : {}),
+              ...(args.description !== undefined ? { description: args.description } : {}),
+              ...(args.restoreFocus !== undefined ? { restoreFocus: args.restoreFocus } : {}),
+              ...(args.closeOnScrimClick !== undefined
+                ? { closeOnScrimClick: args.closeOnScrimClick }
+                : {}),
               footer: h("button", { type: "button" }, "Done"),
               "onUpdate:open": (nextOpen: boolean) => {
                 open.value = nextOpen

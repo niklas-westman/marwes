@@ -9,8 +9,8 @@ export const lightThemeDefaults: Theme = {
   mode: "light",
 
   color: {
-    // Primary (from Figma: Colours/Primary/Rich Black)
-    primary: "#141414",
+    // Primary (firstEdition brand blue)
+    primary: "#2F31FC",
 
     // Background & Surface (from Figma: Neutrals)
     background: "#FFFFFF",
@@ -38,7 +38,7 @@ export const lightThemeDefaults: Theme = {
 
     // Semantic colors
     danger: "#D90429",
-    success: "#006633",
+    success: "#00875A",
     warning: "#FFB703",
   },
   font: {
@@ -95,8 +95,8 @@ export const darkThemeDefaults: Theme = {
   mode: "dark",
 
   color: {
-    // Primary — white for dark mode
-    primary: "#FFFFFF",
+    // Primary — firstEdition brand blue in dark mode as well
+    primary: "#2F31FC",
 
     // Background & Surface - Inverted
     background: "#141414",
@@ -124,7 +124,7 @@ export const darkThemeDefaults: Theme = {
 
     // Semantic colors
     danger: "#D90429",
-    success: "#006633",
+    success: "#00875A",
     warning: "#FFB703",
   },
 

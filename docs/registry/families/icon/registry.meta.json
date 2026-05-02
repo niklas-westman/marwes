@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for decorative defaults, size resolution, stroke-width resolution, and labelled icon output.",
       "Shared icon contract coverage across React and Vue for decorative-versus-labelled semantics and token-based size and stroke-width behavior.",
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#dev-time-warnings"
     ],
     "notes": [
-      "Icon is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The atom itself is small and low-risk, but icon misuse often appears indirectly in icon-only parent controls and decorative-versus-labelled policy gaps."
+      "Icon completed a first-pass accessibility audit focused on decorative defaults, icon-only parent control guidance, and dev-time warnings for non-decorative misuse.",
+      "The family now has a shared icon a11y helper, expanded contract coverage, and explicit Storybook guidance for decorative-versus-labelled behavior."
     ]
   },
   "visuals": {

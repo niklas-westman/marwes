@@ -24,4 +24,13 @@ describe("firstEdition button css contract", () => {
     expect(css).not.toContain("--mw-color-text-surface")
     expect(css).not.toContain("--mw-color-text-surface-pressed")
   })
+
+  it("renders navigation text buttons as compact underlined links", () => {
+    const css = readFileSync(buttonCssPath, "utf8")
+
+    expect(css).toContain('.mw-btn.mw-btn--text[data-action="navigate"]')
+    expect(css).toContain("padding: 0.125rem 0;")
+    expect(css).toContain("text-decoration: underline;")
+    expect(css).toContain("text-underline-offset: 2px;")
+  })
 })

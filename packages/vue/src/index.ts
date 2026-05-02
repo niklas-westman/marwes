@@ -1,8 +1,38 @@
+import "@marwes-ui/presets/firstEdition/styles.css"
+
 export { MarwesProvider } from "./provider/marwes-provider"
 export type { MarwesProviderProps } from "./provider/marwes-provider"
 export { useTheme } from "./provider/use-theme"
+export {
+  createFontStack,
+  mwAvailableFonts,
+  mwFontFallbacks,
+  mwGoogleFontFamilies,
+  mwStyledTheme,
+  mwThemeVarNames,
+  mwThemeVars,
+  mwVar,
+} from "@marwes-ui/core"
 
-export type { Theme, ThemeMode, ResolvedTheme, ThemeInput } from "@marwes-ui/core"
+export type {
+  Density,
+  FontLoadingConfig,
+  FontLoadingMode,
+  FontLoadingOptions,
+  MwAvailableFont,
+  MwFontFallback,
+  MwGoogleFontFamily,
+  MwStyledTheme,
+  MwThemeVarName,
+  MwThemeVarNames,
+  MwThemeVarReference,
+  MwThemeVars,
+  ResolvedTheme,
+  Theme,
+  ThemeInput,
+  ThemeMode,
+} from "@marwes-ui/core"
+export type { ToneName } from "@marwes-ui/core"
 
 /* Button */
 export {
@@ -126,9 +156,6 @@ export type {
 } from "./components/avatar"
 export { AvatarSize, AvatarType } from "@marwes-ui/core"
 
-/* Hooks */
-export { useRenderKitDebug } from "./hooks/use-renderkit-debug"
-
 /* Checkbox */
 export { Checkbox, CheckboxField, CheckboxGroupField } from "./components/checkbox"
 export type {
@@ -151,8 +178,8 @@ export type {
 } from "./components/spinner"
 
 /* Spacing */
-export { Spacing } from "./components/spacing"
-export type { SpacingProps } from "./components/spacing"
+export { Spacer, Spacing } from "./components/spacing"
+export type { SpacerProps, SpacingProps } from "./components/spacing"
 export { Spacings } from "@marwes-ui/core"
 export type { SpacingSize } from "@marwes-ui/core"
 

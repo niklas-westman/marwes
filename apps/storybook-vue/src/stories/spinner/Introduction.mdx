@@ -40,10 +40,28 @@ import { Spinner } from "@marwes-ui/vue"
 ## Usage Notes
 
 - `variant` maps to the seven synced Spinner styles from Figma
-- `size` supports token values (`xs`/`sm`/`md`/`lg`) and raw pixel numbers in code
+- `size` supports spinner scale tokens (`xs`/`sm`/`md`/`lg`) and explicit pixel numbers in code
 - `decorative` should stay enabled when visible text or surrounding UI already communicates loading
 - `ariaLabel` should be provided when the spinner must announce loading on its own
 - CSS custom properties such as `--mw-spinner-indicator-color` and `--mw-spinner-track-color` can be overridden for contextual treatments
+
+## Accessibility notes
+
+**Decorative fallback:** A spinner with `decorative={false}` (`:decorative="false"`) but no
+`ariaLabel` still hides from assistive technology — there is no fallback announced text without
+a label. Always provide `ariaLabel` alongside `decorative={false}` when the spinner must
+announce loading status on its own. Marwes emits a development warning when this combination
+is detected.
+
+**Reduced-motion:** The spinner animation slows from 800ms to 1600ms under
+`prefers-reduced-motion: reduce` rather than stopping entirely. This is an intentional
+design choice that keeps visible loading feedback present. Product teams should pair
+spinners in reduced-motion contexts with sufficient visible loading text when waits
+may be longer than a few seconds.
+
+**Button loading:** The `Button` loading prop integrates through `ButtonSpinner` in both
+adapters. The button stays `aria-busy` and disabled while loading; the spinner itself
+stays decorative because the button label already communicates what is loading.
 
 ## Component Reference
 

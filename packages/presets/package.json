@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": ["*.css", "**/*.css"],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -21,7 +21,7 @@
     },
     "./firstEdition/styles.css": "./src/firstEdition/styles.css"
   },
-  "files": ["dist", "src/firstEdition/styles.css"],
+  "files": ["dist", "src/firstEdition"],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
@@ -33,13 +33,13 @@
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@fontsource/instrument-sans": "^5.2.8",
+    "@fontsource/instrument-sans": "5.2.8",
     "@marwes-ui/core": "workspace:*"
   },
   "devDependencies": {
-    "rimraf": "^6.0.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.4.0",
-    "vitest": "^4.0.18"
+    "rimraf": "6.1.2",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
   }
 }

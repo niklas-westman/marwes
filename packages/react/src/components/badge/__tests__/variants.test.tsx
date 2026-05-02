@@ -21,6 +21,13 @@ runBadgeContract("react", {
   renderNotification() {
     renderWithProvider(<NotificationBadge variant={BadgeVariant.info}>5</NotificationBadge>)
   },
+  renderBadgeWithAriaLabel() {
+    renderWithProvider(
+      <NotificationBadge variant={BadgeVariant.info} ariaLabel="5 unread messages">
+        5
+      </NotificationBadge>,
+    )
+  },
   getByText(text) {
     return screen.getByText(text)
   },

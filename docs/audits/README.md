@@ -2,7 +2,7 @@
 
 This folder contains component-family accessibility audits.
 
-Use these docs as the tactical layer beneath `AXE_ROADMAP.md`.
+Use these docs as the tactical layer beneath the accessibility support model.
 
 The roadmap answers:
 - what to prioritize
@@ -41,29 +41,29 @@ That means accessibility review should walk the same tree as implementation.
 | Tooltip | P2 | First pass complete | [tooltip-family-accessibility.md](./tooltip-family-accessibility.md) |
 | Slider | P2 | First pass complete | [slider-family-accessibility.md](./slider-family-accessibility.md) |
 | Dialog | P2 | First pass complete | [dialog-family-accessibility.md](./dialog-family-accessibility.md) |
-| Button | P3 | Queued | Not started |
+| Button | P3 | First pass complete | [button-family-accessibility.md](./button-family-accessibility.md) |
 
 ### Wave 2 — Medium-risk families
 
-| Family | Priority | Status |
-| --- | --- | --- |
-| Checkbox | Later | Queued |
-| Radio | Later | Queued |
-| Toast | Later | Queued |
-| Avatar | Later | Queued |
-| Badge | Later | Queued |
-| Spinner | Later | Queued |
-| Card | Later | Queued |
+| Family | Priority | Status | Audit doc |
+| --- | --- | --- | --- |
+| Checkbox | Later | First pass complete | [checkbox-family-accessibility.md](./checkbox-family-accessibility.md) |
+| Radio | Later | First pass complete | [radio-family-accessibility.md](./radio-family-accessibility.md) |
+| Toast | Later | First pass complete | [toast-family-accessibility.md](./toast-family-accessibility.md) |
+| Avatar | Later | First pass complete | [avatar-family-accessibility.md](./avatar-family-accessibility.md) |
+| Badge | Later | First pass complete | [badge-family-accessibility.md](./badge-family-accessibility.md) |
+| Spinner | Later | First pass complete | [spinner-family-accessibility.md](./spinner-family-accessibility.md) |
+| Card | Later | First pass complete | [card-family-accessibility.md](./card-family-accessibility.md) |
 
 ### Wave 3 — Lower-risk baseline families
 
-| Family | Priority | Status |
-| --- | --- | --- |
-| Divider | Later | Queued |
-| Heading | Later | Queued |
-| Paragraph | Later | Queued |
-| Icon | Later | Queued |
-| Spacing | Later | Queued |
+| Family | Priority | Status | Audit doc |
+| --- | --- | --- | --- |
+| Divider | Later | First pass complete | [divider-family-accessibility.md](./divider-family-accessibility.md) |
+| Heading | Later | First pass complete | [heading-family-accessibility.md](./heading-family-accessibility.md) |
+| Paragraph | Later | First pass complete | [paragraph-family-accessibility.md](./paragraph-family-accessibility.md) |
+| Icon | Later | First pass complete | [icon-family-accessibility.md](./icon-family-accessibility.md) |
+| Spacing | Later | First pass complete | [spacing-family-accessibility.md](./spacing-family-accessibility.md) |
 
 ## How to use these audits
 
@@ -77,12 +77,12 @@ That means accessibility review should walk the same tree as implementation.
 Status docs to update when relevant:
 - the active family audit doc
 - this `docs/audits/README.md` file
-- `AXE_ROADMAP.md`
+- `docs/reference/accessibility.md`
 - Storybook introductions and spec text when public guidance changed
 
 ## Related docs
 
-- [AXE roadmap](../../AXE_ROADMAP.md)
+- [Accessibility Support Model](../reference/accessibility.md)
 - [Methodology](./METHODOLOGY.md)
 - [Adding Components](../guides/adding-components.md)
 - [Architecture](../reference/architecture.md)

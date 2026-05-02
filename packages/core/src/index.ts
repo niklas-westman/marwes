@@ -12,6 +12,14 @@ export { lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
 export { resolveThemeInput } from "./theme/theme-normalize"
 export type { ResolvedTheme } from "./theme/theme-css"
 export { themeToCSSVars } from "./theme/theme-css"
+export type {
+  MwStyledTheme,
+  MwThemeVarName,
+  MwThemeVarNames,
+  MwThemeVarReference,
+  MwThemeVars,
+} from "./theme/theme-vars"
+export { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "./theme/theme-vars"
 
 // /* Button */
 // export { createButtonRecipe } from "./components/atoms/button";
@@ -54,9 +62,22 @@ export type { DensityScale } from "./theme/density"
 export { DENSITY_SCALES, densityToCSSVars } from "./theme/density"
 export {
   buildGoogleFontsUrl,
+  createFontStack,
   extractFontFamilyName,
   isSystemFont,
   extractUsedWeights,
+  mwAvailableFonts,
+  mwFontFallbacks,
+  mwGoogleFontFamilies,
+  shouldLoadGoogleFont,
+} from "./theme/font-loader"
+export type {
+  FontLoadingConfig,
+  FontLoadingMode,
+  FontLoadingOptions,
+  MwAvailableFont,
+  MwFontFallback,
+  MwGoogleFontFamily,
 } from "./theme/font-loader"
 
 export * from "./semantics"

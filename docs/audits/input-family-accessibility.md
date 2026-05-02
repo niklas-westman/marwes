@@ -147,7 +147,7 @@ This audit covers:
 - [ ] review `select-types.ts`
 - [ ] review `select-a11y.ts`
 - [ ] review `select-recipe.ts`
-- [ ] confirm whether default mode remains custom or becomes native-first
+- [x] confirm whether default mode remains custom or becomes native-first: custom Marwes mode remains the 1.0.0 default
 - [ ] verify the core contract clearly distinguishes native select from custom combobox behavior
 
 #### 1C. InputOtp
@@ -260,7 +260,7 @@ This audit covers:
 ### 8. Expected decisions from this audit
 This first family audit should ideally end with clear answers to these questions:
 
-- [ ] Should `Select` be native-first by default?
+- [x] Should `Select` be native-first by default? Decision: no for 1.0.0; Marwes visual mode is the default, with native browser chrome as explicit opt-in.
 - [ ] If custom select remains shipped, what keyboard matrix is mandatory?
 - [ ] What does Marwes guarantee automatically for `RichText`, and what requires manual review?
 - [ ] Which Input-family stories should be part of future automated accessibility gates?
@@ -282,7 +282,7 @@ Run after finishing the family audit and any resulting fixes:
 - strong existing contract base for most of the family
 
 ### Risks to resolve or document
-- custom select as the default if `DEC-001` lands in favor of native-first
+- custom select as the default is accepted for 1.0.0, with native browser chrome kept as an explicit fallback path
 - incomplete keyboard matrix coverage for custom combobox behavior
 - rich text reliance on `contentEditable` + `execCommand`
 - any drift between React and Vue documentation or test coverage
@@ -326,16 +326,16 @@ Good signals:
 - Storybook coverage is broad in both frameworks
 - helper/error/invalid flows appear intentionally mirrored
 
-#### 3. Base Select stays native at the atom level
+#### 3. Base Select keeps native element semantics at the atom level
 Confirmed in:
 - `packages/react/src/components/input/select.tsx`
 - `packages/vue/src/components/input/select.ts`
 - `tests/contracts/select.contract.ts`
 
 Important nuance:
-- the base `Select` atom is still a real native `<select>`
+- the base `Select` atom is still a real native `<select>` even when styled with Marwes chrome
 - the higher-risk custom combobox behavior lives in `SelectField` / `DropdownField`
-- this is better than making the base select atom fully custom
+- this keeps platform form semantics available in the atom while matching the Marwes visual default
 
 #### 4. Story and contract coverage is already broad
 Confirmed in:
@@ -356,7 +356,7 @@ The gap is more about depth in the riskiest subcomponents than breadth.
 
 ### Confirmed risks and gaps
 
-#### Risk 1. The docs and implementation currently teach custom select as the default
+#### Risk 1. The docs and implementation teach custom select as the default
 Confirmed in:
 - `packages/core/src/components/atoms/input/select-types.ts`
 - `apps/storybook-react/src/stories/input/Introduction.mdx`
@@ -364,12 +364,13 @@ Confirmed in:
 
 Current state:
 - `resolveSelectMode()` defaults to `"marwes"`
-- Storybook docs explicitly say `select.native={false}` is the default
+- Storybook docs explicitly say Marwes mode is the default
 - `DropdownField` docs also assume custom-first behavior
 
 Why this matters:
-- it conflicts with the likely accessibility direction implied by `DEC-001` in `docs/reference/spec.md`
-- the highest-risk behavior in the family is being taught as the default path
+- this is now the intentional 1.0.0 product decision recorded in `DEC-001`
+- native browser chrome remains available through `native={true}` / `appearance="native"` for conservative contexts
+- the custom field path needs stronger keyboard and assistive-technology verification than the low-level native atom
 
 #### Risk 2. The custom combobox path does not yet have enough keyboard-contract coverage
 Confirmed in:
@@ -459,12 +460,12 @@ Current state:
 
 ### Likely decisions coming out of this audit
 
-#### Decision A — Select should move to native-first
+#### Decision A — Select stays Marwes-first for 1.0.0
 Reasoning from the first pass:
-- the base select atom is already native-friendly
-- the custom combobox lives at the field layer, where risk is higher
-- documentation currently normalizes the riskier path as the default
-- this is the strongest mismatch between accessibility intent and shipped teaching
+- the base select atom is still native-friendly because it renders a real `<select>` with Marwes chrome
+- the custom combobox lives at the field layer, where risk is higher and now has dedicated shared keyboard coverage
+- documentation now normalizes the intended 1.0.0 Marwes-first behavior and points native browser chrome to explicit opt-in
+- this preserves design-system visual consistency while keeping a conservative fallback available
 
 #### Decision B — If custom select remains shipped, it needs its own stronger contract
 Minimum contract surface should cover:

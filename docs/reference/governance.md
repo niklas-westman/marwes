@@ -12,6 +12,7 @@ The goal is simple:
 - semantic claims should come from source-owned registries
 - generated artifacts should stay fresh
 - release automation should enforce those rules, not just describe them
+- accessibility claims should stay calibrated to what Marwes can actually prove
 
 ## Trust model
 
@@ -36,24 +37,39 @@ flowchart LR
 Primary local command:
 
 ```bash
-pnpm check
+pnpm validate:release
 ```
 
-Current `pnpm check` enforcement:
-- `pnpm docs:links`
-- `pnpm docs:api`
-- `pnpm semantics:check`
-- `pnpm artifacts:check`
-- `biome check .`
-- `pnpm storybook:consistency`
+Current `pnpm validate:release` enforcement:
+- `pnpm validate:security`
+- `pnpm validate:packages`
+- `pnpm validate:docs`
+- `pnpm exec biome check .`
+- `pnpm test:storybook:a11y`
 
 These gates protect:
+- dependency audit health across full and production graphs
+- package typecheck, build, and test health
 - broken markdown links
 - docs/API drift in package-facing docs
 - semantic registry coherence
 - stale generated trust artifacts
+- stale generated component registry artifacts
 - formatting and lint integrity
 - React/Vue story and export parity expectations
+- the first Storybook accessibility smoke set across React and Vue
+
+For a narrower family pass, use:
+
+```bash
+pnpm validate:family <family>
+```
+
+For family story and accessibility-sensitive changes, use:
+
+```bash
+pnpm validate:family <family> --storybook
+```
 
 ### CI trust gates
 
@@ -67,15 +83,10 @@ Release entrypoint:
 - `.github/workflows/release.yml`
 
 The reusable CI workflow now enforces:
-- `pnpm biome check .`
-- `pnpm docs:links`
-- `pnpm docs:api`
-- `pnpm semantics:check`
-- `pnpm artifacts:check`
-- `pnpm storybook:consistency`
+- `pnpm check` (which includes docs, semantic, artifact, Storybook consistency, and Storybook a11y smoke gates)
 - `pnpm -r typecheck`
 - `pnpm test:typecheck:contracts`
-- `pnpm test:packages:allure`
+- `pnpm test:packages`
 - `pnpm -r build`
 
 ## Governance map
@@ -91,15 +102,17 @@ graph TD
   F --> G[pnpm artifacts:check]
 
   H[packages/react + packages/vue + Storybook] --> I[pnpm storybook:consistency]
+  H --> I2[pnpm test:storybook:a11y]
   H --> J[tests/contracts/*]
   J --> K[pnpm test:typecheck:contracts]
-  J --> L[pnpm test:packages:allure]
+  J --> L[pnpm test:packages]
 
   B --> M[CI trust result]
   C --> M
   E --> M
   G --> M
   I --> M
+  I2 --> M
   K --> M
   L --> M
 ```
@@ -160,6 +173,7 @@ Key files:
 
 Validation:
 - `pnpm storybook:consistency`
+- `pnpm test:storybook:a11y`
 - `pnpm test:typecheck:contracts`
 - targeted adapter and contract tests
 
@@ -205,9 +219,25 @@ Run:
 
 ```bash
 pnpm storybook:consistency
+pnpm test:storybook:a11y
 pnpm test:typecheck:contracts
 pnpm test:packages
 ```
+
+## Accessibility governance status
+
+Use [`docs/reference/accessibility.md`](./accessibility.md) as the canonical support-model document.
+It explains:
+- supported browser and assistive-technology assumptions
+- current automation boundaries
+- manual-review-heavy families and paths
+- release expectations by risk tier
+
+Current honest governance posture:
+- shared contracts and family audits now make many shipped accessibility guarantees much clearer
+- Storybook accessibility checks now have a first smoke-set gate via `pnpm test:storybook:a11y`, and that smoke set is part of `pnpm check`
+- the repo is still not fully hard-gated across every story because only the promoted smoke set runs in this gate today
+- manual review remains part of the trust model for higher-risk families and paths
 
 ## What this governance does not guarantee
 
@@ -241,6 +271,7 @@ pnpm semantics:check
 pnpm artifacts:generate
 pnpm artifacts:check
 pnpm storybook:consistency
+pnpm test:storybook:a11y
 pnpm test:typecheck:contracts
 pnpm test:packages
 ```
@@ -248,6 +279,7 @@ pnpm test:packages
 ## Related docs
 
 - [Documentation index](../README.md)
+- [Accessibility support model](./accessibility.md)
 - [Architecture](./architecture.md)
 - [Testing](./testing.md)
 - [AI Metadata Protocol](./ai-metadata.md)

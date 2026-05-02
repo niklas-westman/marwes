@@ -68,29 +68,77 @@ const ToastViewportItem = defineComponent({
     }
 
     let timeoutHandle: ReturnType<typeof setTimeout> | undefined
+    let timerStartedAt: number | null = null
+    let remainingDuration: number | null = null
+    let pointerInside = false
+    let focusInside = false
 
     function clearTimer() {
       if (timeoutHandle !== undefined) {
         clearTimeout(timeoutHandle)
         timeoutHandle = undefined
       }
+
+      timerStartedAt = null
     }
 
-    function syncTimer() {
-      clearTimer()
-
+    function scheduleTimer(delay: number) {
       if (
         !props.onDismiss ||
-        props.toast.duration === undefined ||
-        props.toast.duration === null ||
-        props.toast.duration <= 0
+        delay <= 0 ||
+        pointerInside ||
+        focusInside ||
+        timeoutHandle !== undefined
       ) {
         return
       }
 
+      timerStartedAt = Date.now()
       timeoutHandle = setTimeout(() => {
+        timeoutHandle = undefined
+        timerStartedAt = null
+        remainingDuration = 0
         props.onDismiss?.(props.toast.id)
-      }, props.toast.duration)
+      }, delay)
+    }
+
+    function pauseTimer() {
+      if (timeoutHandle === undefined || timerStartedAt === null) {
+        return
+      }
+
+      const elapsed = Date.now() - timerStartedAt
+      const nextRemainingDuration = remainingDuration ?? 0
+
+      remainingDuration = Math.max(nextRemainingDuration - elapsed, 0)
+      clearTimer()
+    }
+
+    function resumeTimer() {
+      if (pointerInside || focusInside || remainingDuration === null || remainingDuration <= 0) {
+        return
+      }
+
+      scheduleTimer(remainingDuration)
+    }
+
+    function syncTimer() {
+      clearTimer()
+      pointerInside = false
+      focusInside = false
+
+      if (!props.onDismiss || props.toast.duration === undefined || props.toast.duration === null) {
+        remainingDuration = null
+        return
+      }
+
+      if (props.toast.duration <= 0) {
+        remainingDuration = 0
+        return
+      }
+
+      remainingDuration = props.toast.duration
+      scheduleTimer(props.toast.duration)
     }
 
     onMounted(syncTimer)
@@ -98,9 +146,38 @@ const ToastViewportItem = defineComponent({
     onBeforeUnmount(clearTimer)
 
     return () =>
-      h("div", { class: "mw-toast-container__item" }, [
-        renderToastByIntent(props.toast, props.onDismiss),
-      ])
+      h(
+        "div",
+        {
+          class: "mw-toast-container__item",
+          onMouseenter: () => {
+            pointerInside = true
+            pauseTimer()
+          },
+          onMouseleave: () => {
+            pointerInside = false
+            resumeTimer()
+          },
+          onFocusin: () => {
+            focusInside = true
+            pauseTimer()
+          },
+          onFocusout: (event: FocusEvent) => {
+            const nextTarget = event.relatedTarget as Node | null
+
+            if (
+              event.currentTarget instanceof HTMLElement &&
+              event.currentTarget.contains(nextTarget)
+            ) {
+              return
+            }
+
+            focusInside = false
+            resumeTimer()
+          },
+        },
+        [renderToastByIntent(props.toast, props.onDismiss)],
+      )
   },
 })
 

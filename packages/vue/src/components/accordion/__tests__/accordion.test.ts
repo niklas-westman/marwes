@@ -71,7 +71,7 @@ runAccordionContract("vue", {
                       value: item.value,
                       title: item.title,
                       content: item.content,
-                      disabled: item.disabled,
+                      ...(item.disabled !== undefined ? { disabled: item.disabled } : {}),
                     })) ?? [],
                   ...(args.multiple !== undefined ? { multiple: args.multiple } : {}),
                   ...(args.defaultOpenItems !== undefined

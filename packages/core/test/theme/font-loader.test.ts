@@ -1,9 +1,14 @@
 import { describe, expect, it } from "vitest"
 import {
   buildGoogleFontsUrl,
+  createFontStack,
   extractFontFamilyName,
   extractUsedWeights,
   isSystemFont,
+  mwAvailableFonts,
+  mwFontFallbacks,
+  mwGoogleFontFamilies,
+  shouldLoadGoogleFont,
 } from "../../src/theme/font-loader"
 import { lightThemeDefaults } from "../../src/theme/theme-defaults"
 
@@ -56,6 +61,40 @@ describe("extractFontFamilyName", () => {
 
   it("trims whitespace", () => {
     expect(extractFontFamilyName("  Nunito , sans-serif")).toBe("Nunito")
+  })
+})
+
+describe("mwAvailableFonts", () => {
+  it("exposes typed font stacks for common theme choices", () => {
+    expect(mwAvailableFonts.Inter).toBe(
+      'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    )
+    expect(mwAvailableFonts.PlayfairDisplay).toBe(
+      'Playfair Display, Georgia, "Times New Roman", serif',
+    )
+    expect(mwAvailableFonts.FiraCode).toBe(
+      "Fira Code, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    )
+  })
+
+  it("provides brand placeholders for self-hosted custom fonts", () => {
+    expect(mwAvailableFonts.BrandSans).toBe(
+      'Brand Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    )
+    expect(mwAvailableFonts.BrandSerif).toBe('Brand Serif, Georgia, "Times New Roman", serif')
+    expect(mwAvailableFonts.BrandMono).toBe(
+      "Brand Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    )
+  })
+
+  it("builds custom font stacks from standard fallback groups", () => {
+    expect(createFontStack("Acme Sans")).toBe(`Acme Sans, ${mwFontFallbacks.sans}`)
+    expect(createFontStack("Acme Serif", "serif")).toBe(`Acme Serif, ${mwFontFallbacks.serif}`)
+  })
+
+  it("documents the registry-backed Google font families", () => {
+    expect(mwGoogleFontFamilies).toContain("Poppins")
+    expect(mwGoogleFontFamilies).toContain("Lora")
   })
 })
 
@@ -118,8 +157,43 @@ describe("isSystemFont", () => {
     expect(isSystemFont("Instrument Sans")).toBe(true)
   })
 
+  it("brand placeholders are treated as self-hosted fonts", () => {
+    expect(isSystemFont("Brand Sans")).toBe(true)
+    expect(isSystemFont("Brand Serif")).toBe(true)
+    expect(isSystemFont("Brand Mono")).toBe(true)
+  })
+
   it("case insensitive — helvetica matches", () => {
     expect(isSystemFont("helvetica")).toBe(true)
+  })
+})
+
+describe("shouldLoadGoogleFont", () => {
+  it("loads registered Google fonts by default", () => {
+    expect(shouldLoadGoogleFont("Nunito")).toBe(true)
+  })
+
+  it("does not load custom font stacks by default", () => {
+    expect(shouldLoadGoogleFont("Acme Sans")).toBe(false)
+  })
+
+  it("does not load when font loading is disabled", () => {
+    expect(shouldLoadGoogleFont("Brand Sans", "none")).toBe(false)
+  })
+
+  it("does not load skipped custom families", () => {
+    expect(shouldLoadGoogleFont("Brand Sans", { skipFamilies: ["Brand Sans"] })).toBe(false)
+  })
+
+  it("does not load Marwes brand placeholder fonts from Google", () => {
+    expect(shouldLoadGoogleFont("Brand Sans")).toBe(false)
+  })
+
+  it("loads only allowed Google families when an allowlist is provided", () => {
+    const config = { googleFamilies: ["Lora"] }
+
+    expect(shouldLoadGoogleFont("Lora", config)).toBe(true)
+    expect(shouldLoadGoogleFont("Brand Sans", config)).toBe(false)
   })
 })
 

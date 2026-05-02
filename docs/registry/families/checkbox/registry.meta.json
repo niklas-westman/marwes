@@ -24,11 +24,12 @@
   },
   "axe": {
     "riskTier": "medium",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for controlled versus uncontrolled state output on the raw checkbox atom.",
-      "Shared checkbox and checkbox-group-field contracts across React and Vue for checked state, disabled behavior, group labeling, description wiring, error wiring, and indeterminate support.",
-      "Local CheckboxField adapter tests plus Storybook introduction and taxonomy tests in both apps."
+      "Shared checkbox and checkbox-field contracts across React and Vue for checked state, single-field naming, description/error wiring, invalid state, and disabled forwarding.",
+      "Shared checkbox-group-field contracts across React and Vue for group labeling, description wiring, error wiring, invalid propagation, and indeterminate support.",
+      "Storybook introduction and taxonomy tests in both apps."
     ],
     "manualReviewRequired": [
       "Product-level judgment about when a select-all checkbox should become indeterminate and whether that behavior stays truthful in real flows.",
@@ -40,8 +41,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Checkbox is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family has shared contracts for the raw atom and the grouped molecule, but CheckboxField still relies on local adapter tests rather than a dedicated shared contract file."
+      "Checkbox completed a first-pass accessibility audit focused on single-field contract maturity and native-first field wiring.",
+      "The family now has shared contracts for the raw atom, single-field molecule, and grouped molecule across React and Vue."
     ]
   },
   "visuals": {
@@ -76,7 +77,7 @@
     ]
   },
   "openQuestions": [
-    "Should CheckboxField eventually gain a dedicated shared tests/contracts file instead of relying on local adapter tests only?",
+    "Which Checkbox-family stories should join the first automated accessibility smoke set?",
     "Should the local Figma sync gain clearer molecule-level CheckboxField and CheckboxGroupField refs that mirror the shipped helper-text and error behavior more directly?"
   ]
 }

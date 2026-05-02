@@ -1,6 +1,6 @@
 flowchart LR
   AuthorChoice["Author chooses Spacing"] --> DecorativeDiv["decorative div\naria-hidden=true"]
-  AuthorChoice --> SizeChoice["size token\nSpacings.xxxs ... Spacings.11xl"]
+  AuthorChoice --> SizeChoice["size token\nSpacings['sp-0'] ... Spacings['sp-120']"]
   AuthorChoice --> ScaleChoice["optional scale multiplier"]
 
   SizeChoice --> TokenRef["var(--mw-spacing-{size})"]

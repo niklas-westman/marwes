@@ -36,11 +36,13 @@ export function createSliderRecipe(opts: SliderOptions = {}): SliderRenderKit {
   const fillPercentage = resolveSliderFillPercentage(currentValue, a11y.min, a11y.max)
   const showTooltip = opts.showTooltip === true
   const showTouchArea = opts.showTouchArea === true
+  const orientation = opts.orientation ?? "horizontal"
 
   return {
     tag: "div",
     className: cx(
       "mw-slider",
+      `mw-slider--${orientation}`,
       opts.disabled && "mw-slider--disabled",
       showTooltip && "mw-slider--with-tooltip",
       showTouchArea && "mw-slider--with-touch-area",
@@ -52,11 +54,13 @@ export function createSliderRecipe(opts: SliderOptions = {}): SliderRenderKit {
     a11y,
     dataAttributes: {
       "data-component": "slider",
+      "data-orientation": orientation,
       ...(showTooltip ? { "data-show-tooltip": "true" } : {}),
       ...(showTouchArea ? { "data-show-touch-area": "true" } : {}),
     },
     value: currentValue,
     showTooltip,
     showTouchArea,
+    orientation,
   }
 }

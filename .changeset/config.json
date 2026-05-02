@@ -7,7 +7,7 @@
     }
   ],
   "commit": false,
-  "fixed": [["@marwes-ui/core", "@marwes-ui/react", "@marwes-ui/presets"]],
+  "fixed": [["@marwes-ui/core", "@marwes-ui/react", "@marwes-ui/presets", "@marwes-ui/vue"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",

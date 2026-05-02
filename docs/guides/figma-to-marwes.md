@@ -125,9 +125,22 @@ Surface/text colors swap automatically based on mode defaults. Color roles re-de
 |---|---|---|
 | `radius.base` | `ui.radius` | `--mw-ui-radius` |
 | `density` | `ui.density` | layout/component modifier behavior |
-| `variant.default` | `ui.variant` | component modifier behavior |
 
-Icon size and stroke width are handled by the icon recipe directly, not via theme tokens.
+Component variants are component props, not theme tokens. Icon size and stroke width are handled by the icon recipe directly, not via theme tokens.
+
+### Theme Coverage
+
+The provider emits the full resolved theme as CSS custom properties. Core field controls should consume the semantic variables directly:
+
+| Token area | Expected usage |
+|---|---|
+| `color.primary`, `danger`, `success`, `warning`, `info`, `secondary` | interactive fills, borders, labels, focus-adjacent semantic states |
+| `color.background`, `surface*`, `text*`, `border*`, `focus` | container surfaces, text, field borders, focus rings |
+| `ui.radius` | reusable component corner radius through `--mw-ui-radius` |
+| `ui.density` | shared control height, padding, gap, and field sizing |
+| `font` and `typography` | type families and Heading/Paragraph scales |
+
+Some display components intentionally keep preset-local CSS variables for Figma-specific tone ramps, for example Badge and Toast intent palettes. Those local variables should still be seeded from semantic theme variables where the component is meant to follow brand color, focus color, text color, border color, or global radius.
 
 ## Component Mapping
 
@@ -168,7 +181,7 @@ Required Figma variants/states to support:
 
 Required Figma variants and sizes to support:
 - visual styles: `classic`, `ring`, `dual`, `dots-round`, `dots-square`, `lines`, `cross`.
-- size scale: `16`, `24`, `32`, `40` via the `xs`/`sm`/`md`/`lg` API.
+- spinner scale: `16`, `24`, `32`, `40` via the `xs`/`sm`/`md`/`lg` API.
 - contexts shown in Figma: button loading treatment and centered empty-state treatment.
 
 Accessibility mapping:
@@ -190,6 +203,37 @@ Required Figma tokens:
 - Keep CSS variable names on `--mw-*`.
 - Keep classnames stable (`.mw-*`) for preset compatibility.
 - Components consume CSS variables only — never theme objects directly.
+- Do not seed component-scoped `--mw-*` preset variables directly from fixed hex/rgb values.
+- Base text, surface, border, focus, radius, density, and font styling must come from semantic theme variables.
+- Intent-specific component ramps may use `color-mix()` with semantic role vars such as `--mw-color-success-base` or `--mw-color-danger-base`.
+- Fixed CSS values are acceptable only for non-theme effects, for example overlay opacity, shadow opacity, physical dimensions, or SVG mask data.
+
+## AI Theme Generation Contract
+
+When an AI agent receives graphical design data, it should generate `ThemeInput` first:
+
+```ts
+const theme = {
+  mode: "light",
+  color: {
+    primary: "#5B8CFF",
+    background: "#FFFFFF",
+    surface: "#F9FAFB",
+    text: "#141414",
+    border: "rgba(0,0,0,0.4)",
+    focus: "#2684FF",
+  },
+  font: {
+    primary: "Inter, system-ui, sans-serif",
+  },
+  ui: {
+    radius: 8,
+    density: "comfortable",
+  },
+}
+```
+
+Do not generate React/Vue adapter-local CSS for theme behavior. React and Vue should receive the same object through `MarwesProvider`.
 
 ## Update Workflow
 1. Confirm Figma tokens and component variants/states are final.

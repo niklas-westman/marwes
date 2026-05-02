@@ -18,7 +18,7 @@ export const Default: Story = {
     components: { ProfileCard },
     template: `
       <ProfileCard>
-        <template #title>Niklas Westman</template>
+        <template #title>Alex Morgan</template>
         Design systems engineer with ownership of component primitives.
       </ProfileCard>
     `,

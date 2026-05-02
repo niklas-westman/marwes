@@ -4,6 +4,7 @@ export interface BadgeContractHarness {
   renderStatus(): Promise<void> | void
   renderPriority(): Promise<void> | void
   renderNotification(): Promise<void> | void
+  renderBadgeWithAriaLabel(): Promise<void> | void
   getByText(text: string): HTMLElement
 }
 
@@ -31,6 +32,13 @@ export function runBadgeContract(adapterName: string, harness: BadgeContractHarn
       const badge = harness.getByText("5")
       expect(badge).toHaveAttribute("data-component", "badge")
       expect(badge).toHaveAttribute("data-purpose", "notification")
+    })
+
+    it("ariaLabel flows to aria-label in the DOM for numeric badge content", async () => {
+      await harness.renderBadgeWithAriaLabel()
+
+      const badge = harness.getByText("5")
+      expect(badge).toHaveAttribute("aria-label", "5 unread messages")
     })
   })
 }

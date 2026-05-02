@@ -1,24 +1,34 @@
-import type { ResolvedTheme } from "@marwes-ui/core"
+import type { FontLoadingConfig, ResolvedTheme } from "@marwes-ui/core"
 import {
   buildGoogleFontsUrl,
   extractFontFamilyName,
   extractUsedWeights,
-  isSystemFont,
+  shouldLoadGoogleFont,
   themeToCSSVars,
 } from "@marwes-ui/core"
 
 const loadedFonts = new Set<string>()
 let preconnected = false
 
+export function themeToRootStyle(theme: ResolvedTheme): Record<string, string> {
+  return {
+    ...themeToCSSVars(theme),
+    backgroundColor: theme.color.background,
+    color: theme.color.text,
+  }
+}
+
 export function applyThemeToElement(element: HTMLElement, theme: ResolvedTheme): void {
   element.setAttribute("data-marwes-theme", "true")
 
-  for (const [property, value] of Object.entries(themeToCSSVars(theme))) {
+  for (const [property, value] of Object.entries(themeToRootStyle(theme))) {
+    if (property === "backgroundColor") {
+      element.style.backgroundColor = value
+      continue
+    }
+
     element.style.setProperty(property, value)
   }
-
-  element.style.backgroundColor = theme.color.background
-  element.style.color = theme.color.text
 }
 
 function ensureFontPreconnect(): void {
@@ -55,14 +65,14 @@ function loadGoogleFontToDocument(family: string, weights: number[]): void {
   document.head.appendChild(linkElement)
 }
 
-export function loadThemeFonts(theme: ResolvedTheme): void {
+export function loadThemeFonts(theme: ResolvedTheme, config: FontLoadingConfig = "auto"): void {
   const weights = extractUsedWeights(theme.typography)
   const fontStacks = [theme.font.primary, theme.font.secondary]
 
   for (const fontStack of fontStacks) {
     const familyName = extractFontFamilyName(fontStack)
 
-    if (familyName && !isSystemFont(familyName)) {
+    if (familyName && shouldLoadGoogleFont(familyName, config)) {
       loadGoogleFontToDocument(familyName, weights)
     }
   }

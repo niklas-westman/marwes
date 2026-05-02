@@ -21,9 +21,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const LinkExample: Story = {
-  args: {
-    iconRight: "arrowRight",
-  },
+  args: {},
   render: (args) => ({
     components: { LinkButton },
     setup() {

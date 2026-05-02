@@ -77,8 +77,14 @@ Use the playground for:
 ### Repo-wide
 
 ```bash
+pnpm validate:release
+pnpm validate:packages
+pnpm validate:docs
+pnpm validate:security
+pnpm check
 pnpm typecheck
 pnpm lint
+pnpm format:all
 pnpm test
 pnpm build
 ```
@@ -86,6 +92,8 @@ pnpm build
 ### Focused package tests
 
 ```bash
+pnpm validate:family button
+pnpm validate:family button --storybook
 pnpm test:core
 pnpm test:presets
 pnpm test:react
@@ -106,6 +114,7 @@ pnpm test:typecheck:packages
 pnpm dev:storybook:react
 pnpm dev:storybook:vue
 pnpm dev:playground
+pnpm test:storybook:a11y
 ```
 
 ## Recommended workflow
@@ -140,15 +149,27 @@ flowchart LR
 
 ## Accessibility verification
 
+Use [`docs/reference/accessibility.md`](./accessibility.md) as the canonical cross-family support model.
+This file explains the test layers. The accessibility support doc explains what those layers can and cannot prove.
+
 Automated:
-- story-level accessibility checks
+- story-level accessibility checks for the first Storybook smoke set via `pnpm test:storybook:a11y`
 - adapter tests using semantic queries
+- shared React/Vue contracts for covered families
+- registry-backed family posture references
 
 Manual:
 - keyboard navigation
 - focus visibility
 - screen reader naming and descriptions
 - disabled and invalid state behavior
+- live-region timing and interruption feel where relevant
+
+Current honest repo-level boundary:
+- Storybook accessibility tooling now has a first enforced smoke set, and that smoke set is part of `pnpm check`
+- current smoke-set families are Button, Checkbox, Radio, Toast, and Spinner across React and Vue Storybook apps
+- the repo is still not fully hard-gated across every story because only promoted smoke-set stories run in this gate today
+- higher-risk families still need manual review even when automated checks pass
 
 ### Manual-review-heavy components
 
@@ -179,6 +200,22 @@ Rule of thumb:
 - use automated tests to protect the component contract
 - use manual review to validate the real editing experience
 
+## Family validation
+
+Use [`docs/reference/family-validation.md`](./family-validation.md) as the canonical workflow for validating one component family across core, presets, React, Vue, Storybook, registry, and docs.
+
+Default family gate:
+
+```bash
+pnpm validate:family <family>
+```
+
+Browser-backed Storybook/a11y family gate:
+
+```bash
+pnpm validate:family <family> --storybook
+```
+
 ## Visual verification
 
 Marwes relies on Storybook for visual inspection and Chromatic-style review workflows where available.
@@ -189,16 +226,11 @@ When design changes originate in Figma:
 3. verify the story output matches the intended design
 4. update docs if the public contract changed
 
-## Allure reporting
-
-Allure is optional and documented separately:
-- [Allure reporting](../tooling/allure.md)
-
-Use it when you want a richer HTML report for package test runs.
-
 ## Related docs
 
 - [Documentation index](../README.md)
+- [Accessibility support model](./accessibility.md)
+- [Family validation](./family-validation.md)
 - [Architecture](./architecture.md)
 - [Specification](./spec.md)
 - [AI Metadata Protocol](./ai-metadata.md)

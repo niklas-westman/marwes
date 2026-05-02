@@ -2,6 +2,7 @@ import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
+import { runBadgeGroupContract } from "../../../../../../tests/contracts/badge-group.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Badge } from "../badge"
 import { BadgeGroup } from "../badge-group"
@@ -24,6 +25,35 @@ function renderBadgeGroup(props: Record<string, unknown>) {
     }),
   )
 }
+
+runBadgeGroupContract("vue", {
+  renderBadgeGroup(args = {}) {
+    const label = args.label ?? "Tags"
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(
+                  BadgeGroup as unknown as string,
+                  { label },
+                  {
+                    default: () => [
+                      h(Badge as unknown as string, null, { default: () => "A" }),
+                      h(Badge as unknown as string, null, { default: () => "B" }),
+                    ],
+                  },
+                ),
+            })
+        },
+      }),
+    )
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+})
 
 describe("Vue BadgeGroup (Molecule)", () => {
   it("renders a labeled group container with badge children", () => {

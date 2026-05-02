@@ -1,4 +1,4 @@
-import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { CheckboxFieldProps } from "@marwes-ui/vue"
 import { CheckboxField, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,7 +7,10 @@ import { computed, ref } from "vue"
 const meta: Meta<CheckboxFieldProps> = {
   title: "Checkbox/Molecule/CheckboxField",
   component: CheckboxField as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
     label: "Checkbox Field Label",

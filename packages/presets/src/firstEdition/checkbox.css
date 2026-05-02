@@ -175,7 +175,7 @@
 
 /* Dark mode: Hover state with subtle opacity */
 .mw-theme--dark .mw-checkbox:hover:not(:disabled) {
-  border-color: color-mix(in srgb, #ffffff 40%, var(--mw-color-primary-base));
+  border-color: color-mix(in srgb, var(--mw-color-text) 40%, var(--mw-color-primary-base));
 }
 
 .mw-theme--dark .mw-checkbox:checked:hover:not(:disabled) {

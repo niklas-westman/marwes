@@ -25,3 +25,19 @@ export const Default: Story = {
     )
   },
 }
+
+export const Vertical: Story = {
+  render: () => {
+    const [value, setValue] = React.useState(45)
+
+    return (
+      <div style={{ height: 280, display: "flex", alignItems: "center" }}>
+        <VolumeSlider
+          orientation="vertical"
+          description="Adjust the current output level for media playback."
+          slider={{ value, onValueChange: setValue }}
+        />
+      </div>
+    )
+  },
+}

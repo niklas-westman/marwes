@@ -16,7 +16,7 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete — dedicated family audit doc now exists |
 | Semantic coverage | None — Heading relies on native `<h1>`, `<h2>`, and `<h3>` semantics; it is not part of the wave-1 central semantic registry and does not emit family-local `data-*` metadata |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | typography light section `1368:5656`, typography dark section `1368:5677`, H1 row `1368:5665`, H2 row `1368:5666`, H3 row `1368:5667`, heading-named scaffold component `1918:15754` |
@@ -240,10 +240,10 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Low | heading is a native semantic element, but document-outline mistakes still affect accessibility meaningfully |
-| Audit status | Queued | `docs/audits/README.md` lists Heading in Wave 3; no dedicated family audit doc exists yet |
+| Audit status | First pass complete | `docs/audits/heading-family-accessibility.md` captures the completed first-pass audit and follow-up boundaries |
 | Automated contract | Strong | core recipe tests, shared React/Vue contract coverage, and Storybook docs/taxonomy tests cover the shipped family behavior |
 | Manual review boundary | Narrow | the main human judgment is whether product teams choose the right heading level and use `size` overrides sparingly |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the dedicated family audit is complete; broader support-model work remains non-blocking |
 
 ### What automation already covers
 
@@ -295,7 +295,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | there is no dedicated heading-specific section yet, so code, Storybook, tests, and typography refs carry most of the current contract weight |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Heading is absent here today, which reinforces that the family relies on native semantics rather than registry metadata |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Heading is currently queued in Wave 3 and has no dedicated family audit doc yet |
+| Audit queue | `docs/audits/README.md` | Heading is first-pass complete in Wave 3 and now has a dedicated family audit doc |
 | Core | `packages/core/src/components/atoms/heading/heading-types.ts` | public heading contract for semantic level, optional visual size, and minimal accessibility props |
 | Core | `packages/core/src/components/atoms/heading/heading-a11y.ts` | minimal id and `ariaLabel` mapping for the native heading surface |
 | Core | `packages/core/src/components/atoms/heading/heading-recipe.ts` | heading RenderKit assembly, native tag selection, and typography CSS variable output |
@@ -344,7 +344,7 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the heading registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/heading-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
+- the dedicated `docs/audits/heading-family-accessibility.md` file now captures the finished first-pass audit, while support-model work remains a separate non-blocking track
 - there is no dedicated `heading.css`; the family shares `packages/presets/src/firstEdition/typography.css` with Paragraph
 - there is no dedicated `heading.json` component file in the current local Figma sync, so the real design baseline comes from typography tokens and page sections instead
 - the literal `component-heading` sync files were inspected, but they are intentionally not treated as the shipped Heading family surface because they describe documentation scaffolds

@@ -12,6 +12,10 @@ describe("React divider introduction docs", () => {
       "Divider (Atom)",
       "size",
       "orientation",
+      "Accessibility notes",
+      "Do not use Divider as a spacing helper",
+      "Vertical dividers depend on container layout",
+      "Divider is unlabeled",
       "Component Reference",
     ]
 

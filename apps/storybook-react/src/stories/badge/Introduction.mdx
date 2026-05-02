@@ -91,6 +91,29 @@ import { Badge } from "@marwes-ui/react"
 
 ---
 
+## Accessibility notes
+
+**Numeric-only badges always need `ariaLabel`.** A badge that renders only a number such as `5`
+or `99+` has no readable context for a screen reader. Always provide `ariaLabel` on any
+`NotificationBadge` or raw `Badge` whose visible text alone does not explain its meaning.
+
+```tsx
+// ❌ Screen reader sees only "5" with no context
+<NotificationBadge variant={BadgeVariant.info}>5</NotificationBadge>
+
+// ✅ Screen reader announces "5 unread messages"
+<NotificationBadge variant={BadgeVariant.info} ariaLabel="5 unread messages">5</NotificationBadge>
+```
+
+**`BadgeGroup` label quality matters.** `BadgeGroup` uses a `<fieldset>` with `aria-labelledby`
+wiring from the `label` prop. The label is exposed as the accessible name of the group.
+Choose labels that describe the group in context — for example `"Sprint status"` rather than
+just `"Status"`.
+
+**Badge is a passive span.** The raw `Badge` does not emit `role`, `button`, or any interactive
+semantics. If a badge must be interactive, use a different component rather than layering
+click handlers on a `Badge` surface.
+
 ## Component Reference
 
 ### Purpose Components (AI-Friendly)

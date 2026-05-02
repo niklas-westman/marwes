@@ -78,7 +78,7 @@ export const Dialog = defineComponent(
       const dialogOptions: DialogOptions = {
         showFooter: hasFooter.value,
         dismissible: dismissible.value,
-        modal: props.modal,
+        ...(props.modal !== undefined ? { modal: props.modal } : {}),
       }
 
       if (props.dataAttributes) {

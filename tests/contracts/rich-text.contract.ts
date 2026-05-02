@@ -22,6 +22,25 @@ export function runRichTextContract(adapterName: string, h: RichTextContractHarn
       expect(editor).toHaveAttribute("aria-multiline", "true")
     })
 
+    it("normalizes unsafe default HTML to the supported rich-text subset", async () => {
+      await h.renderRichText({
+        ariaLabel: "Secure details",
+        defaultValue:
+          '<p onclick="alert(1)"><strong onmouseover="alert(1)">Safe</strong><img src=x onerror="alert(1)"><script>alert(1)</script><a href="javascript:alert(1)">link</a><svg onload="alert(1)"></svg></p>',
+      })
+
+      const editor = h.getByRole("textbox", { name: /secure details/i })
+
+      expect(editor.innerHTML).toBe("<p><strong>Safe</strong>alert(1)link</p>")
+      expect(editor.querySelector("img")).toBeNull()
+      expect(editor.querySelector("script")).toBeNull()
+      expect(editor.querySelector("svg")).toBeNull()
+      expect(editor.querySelector("a")).toBeNull()
+      expect(editor.innerHTML).not.toContain("onerror")
+      expect(editor.innerHTML).not.toContain("onclick")
+      expect(editor.innerHTML).not.toContain("javascript:")
+    })
+
     it("calls onValueChange when typing", async () => {
       const values: string[] = []
 

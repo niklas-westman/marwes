@@ -48,7 +48,7 @@ const meta = {
     layout: "centered",
     docs: {
       description: {
-        component: `Field-wrapped select. Native browser select behavior is the default. Use native={false} to opt into the custom Marwes dropdown presentation from node ${FIGMA_DROPDOWN_NODE}.`,
+        component: `Field-wrapped select. The custom Marwes dropdown presentation from node ${FIGMA_DROPDOWN_NODE} is the default. Use native={true} to opt into browser select chrome.`,
       },
     },
   },
@@ -56,7 +56,7 @@ const meta = {
   argTypes: {
     native: {
       control: "boolean",
-      description: `Native browser select behavior is the default. Use native={false} for the Marwes dropdown field (${FIGMA_DROPDOWN_NODE}) only when you intentionally want the custom presentation.`,
+      description: `The Marwes dropdown field (${FIGMA_DROPDOWN_NODE}) is the default. Use native={true} only when you intentionally want browser select chrome.`,
     },
     label: {
       control: false,
@@ -66,7 +66,7 @@ const meta = {
     },
   },
   args: {
-    native: true,
+    native: false,
     select: {
       placeholder: "Option",
       options,

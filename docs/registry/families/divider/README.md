@@ -16,7 +16,7 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete — dedicated family audit doc now exists |
 | Semantic coverage | Family-local — the atom emits local `data-component`, `data-size`, and `data-orientation` metadata from core, but Divider is not part of the wave-1 central semantic registry |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | divider component `1574:21053`, component container `1574:24629`, light frame `1574:24658`, dark frame `1574:24738` |
@@ -215,10 +215,10 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Low | divider is a simple semantic separator, but misuse still matters when teams add it where structure or spacing would be clearer |
-| Audit status | Queued | `docs/audits/README.md` lists Divider in Wave 3; no dedicated family audit doc exists yet |
+| Audit status | First pass complete | `docs/audits/divider-family-accessibility.md` captures the completed first-pass audit and follow-up boundaries |
 | Automated contract | Strong | core recipe tests, shared React/Vue contract coverage, and Storybook docs/taxonomy tests cover the main shipped behavior |
 | Manual review boundary | Narrow | the main human judgment is whether Divider improves real document structure and whether vertical use fits the layout |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the dedicated family audit is complete; broader support-model work remains non-blocking |
 
 ### What automation already covers
 
@@ -270,7 +270,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | explicit divider requirements for semantic `<hr>`, size mapping, and horizontal/vertical orientation |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Divider is absent here today, which reinforces that divider metadata is still local rather than centrally governed |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Divider is currently queued in Wave 3 and has no dedicated family audit doc yet |
+| Audit queue | `docs/audits/README.md` | Divider is first-pass complete in Wave 3 and now has a dedicated family audit doc |
 | Core | `packages/core/src/components/atoms/divider/divider-types.ts` | public divider atom contract |
 | Core | `packages/core/src/components/atoms/divider/divider-recipe.ts` | divider RenderKit assembly, size mapping, and local metadata |
 | Core test | `packages/core/test/recipes/divider.test.ts` | recipe-level baseline for size and orientation behavior |
@@ -314,7 +314,7 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the divider registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/divider-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
+- the dedicated `docs/audits/divider-family-accessibility.md` file now captures the finished first-pass audit, while support-model work remains a separate non-blocking track
 - the synced Figma page teaches the horizontal divider baseline very clearly, but it does not directly teach the shipped vertical orientation
 - `docs/reference/spec.md`, `.figma/NODE_REFERENCE.md`, and `.figma/nodes.json` still include older divider node references in places even though the current page JSON files use the newer `1574:*` ids
 - the synced page includes an `Overall status` instance that is intentionally not treated as part of the shipped Divider family surface in this registry entry

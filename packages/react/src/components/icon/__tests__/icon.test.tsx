@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
+import { describe, expect, it, vi } from "vitest"
 import { Icon } from ".."
 import { runIconContract } from "../../../../../../tests/contracts/icon.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
@@ -21,6 +22,7 @@ runIconContract("react", {
     const iconProps = {
       name: "search" as const,
       ...(args.ariaLabel !== undefined ? { "aria-label": args.ariaLabel } : {}),
+      ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
       ...(args.size !== undefined ? { size: args.size } : {}),
       ...(args.strokeWidth !== undefined ? { strokeWidth: args.strokeWidth } : {}),
     }
@@ -37,4 +39,19 @@ runIconContract("react", {
   querySvg() {
     return document.querySelector<SVGElement>("svg")
   },
+})
+
+describe("Icon (React)", () => {
+  it("warns in development when decorative=false is passed without aria-label", () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+    renderWithProvider(<Icon name="search" decorative={false} />)
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      "[marwes] Icon: decorative={false} was passed without ariaLabel. " +
+        "The icon stays hidden from assistive technology unless ariaLabel is also provided.",
+    )
+
+    warnSpy.mockRestore()
+  })
 })

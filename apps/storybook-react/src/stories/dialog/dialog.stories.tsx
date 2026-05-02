@@ -6,7 +6,6 @@ const meta: Meta<typeof Dialog> = {
   title: "Dialog/Atom",
   component: Dialog,
   parameters: storybookLayout.centered,
-  tags: ["autodocs"],
   argTypes: {
     size: { control: "select", options: ["small", "medium", "large"] },
     showFooter: { control: "boolean" },

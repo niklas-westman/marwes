@@ -14,8 +14,8 @@
 
 .mw-spinner {
   --mw-spinner-size: 24px;
-  --mw-spinner-track-color: #a3a3a3;
-  --mw-spinner-indicator-color: #2f31fc;
+  --mw-spinner-track-color: var(--mw-color-text-muted, #a3a3a3);
+  --mw-spinner-indicator-color: var(--mw-color-primary-base, #2f31fc);
   --mw-spinner-rotation-duration: 800ms;
 
   display: inline-flex;
@@ -34,8 +34,24 @@
   transform-origin: center;
 }
 
-.mw-theme--dark .mw-spinner {
-  --mw-spinner-indicator-color: #5859fc;
+.mw-spinner--cross .mw-spinner__svg {
+  animation: none;
+}
+
+.mw-spinner--cross .mw-spinner__svg rect {
+  animation: mw-spinner-cross-shift var(--mw-spinner-rotation-duration) steps(4, end) infinite;
+}
+
+.mw-spinner--cross .mw-spinner__svg rect:nth-child(2) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.75);
+}
+
+.mw-spinner--cross .mw-spinner__svg rect:nth-child(3) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.5);
+}
+
+.mw-spinner--cross .mw-spinner__svg rect:nth-child(4) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.25);
 }
 
 @keyframes mw-spinner-rotate {
@@ -48,8 +64,31 @@
   }
 }
 
+@keyframes mw-spinner-cross-shift {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  75% {
+    opacity: 0.2;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mw-spinner__svg {
+    animation-duration: 1600ms;
+  }
+
+  .mw-spinner--cross .mw-spinner__svg rect {
     animation-duration: 1600ms;
   }
 }

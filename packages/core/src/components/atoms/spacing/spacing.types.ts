@@ -1,19 +1,23 @@
 /**
  * Core types for Spacing component.
  * - Pure layout primitive that inserts vertical space between elements.
- * - 17 sizes mapped to the --mw-spacing-* token scale.
+ * - 18 sizes mapped to the --mw-spacing-* token scale.
  * - Renders as an aria-hidden div.
  */
 
 import type { CssVars } from "../../../shared/css-vars"
 
 /**
- * Spacing size accessor and type — same import, two uses.
+ * Spacing token accessor and type — same import, two uses.
  *
- * Value access (dot notation for word sizes, bracket for numeric):
+ * Preferred value access:
  * ```ts
- * Spacings.md          // "md"
- * Spacings["4xl"]      // "4xl"
+ * Spacings.sp24    // "sp-24"
+ * ```
+ *
+ * Legacy key access also works:
+ * ```ts
+ * Spacings["sp-24"] // "sp-24"
  * ```
  *
  * Type use:
@@ -22,27 +26,47 @@ import type { CssVars } from "../../../shared/css-vars"
  * ```
  *
  * Pixel scale:
- * xxxs→2 | xxs→4 | xs→8 | sm→16 | md→24 | lg→32 | xl→40 | xxl→48 | xxxl→56
- * 4xl→64  | 5xl→72  | 6xl→80  | 7xl→88  | 8xl→96  | 9xl→104 | 10xl→112 | 11xl→120
+ * sp-0→0 | sp-2→2 | sp-4→4 | sp-8→8 | sp-16→16 | sp-24→24 | sp-32→32
+ * sp-40→40 | sp-48→48 | sp-56→56 | sp-64→64 | sp-72→72 | sp-80→80
+ * sp-88→88 | sp-96→96 | sp-104→104 | sp-112→112 | sp-120→120
  */
 export const Spacings = {
-  xxxs: "xxxs",
-  xxs: "xxs",
-  xs: "xs",
-  sm: "sm",
-  md: "md",
-  lg: "lg",
-  xl: "xl",
-  xxl: "xxl",
-  xxxl: "xxxl",
-  "4xl": "4xl",
-  "5xl": "5xl",
-  "6xl": "6xl",
-  "7xl": "7xl",
-  "8xl": "8xl",
-  "9xl": "9xl",
-  "10xl": "10xl",
-  "11xl": "11xl",
+  sp0: "sp-0",
+  sp2: "sp-2",
+  sp4: "sp-4",
+  sp8: "sp-8",
+  sp16: "sp-16",
+  sp24: "sp-24",
+  sp32: "sp-32",
+  sp40: "sp-40",
+  sp48: "sp-48",
+  sp56: "sp-56",
+  sp64: "sp-64",
+  sp72: "sp-72",
+  sp80: "sp-80",
+  sp88: "sp-88",
+  sp96: "sp-96",
+  sp104: "sp-104",
+  sp112: "sp-112",
+  sp120: "sp-120",
+  "sp-0": "sp-0",
+  "sp-2": "sp-2",
+  "sp-4": "sp-4",
+  "sp-8": "sp-8",
+  "sp-16": "sp-16",
+  "sp-24": "sp-24",
+  "sp-32": "sp-32",
+  "sp-40": "sp-40",
+  "sp-48": "sp-48",
+  "sp-56": "sp-56",
+  "sp-64": "sp-64",
+  "sp-72": "sp-72",
+  "sp-80": "sp-80",
+  "sp-88": "sp-88",
+  "sp-96": "sp-96",
+  "sp-104": "sp-104",
+  "sp-112": "sp-112",
+  "sp-120": "sp-120",
 } as const
 
 export type Spacings = (typeof Spacings)[keyof typeof Spacings]
@@ -56,14 +80,14 @@ export type SpacingSize = Spacings
 /** Public props the adapter can pass into core. */
 export type SpacingOptions = {
   /**
-   * Size variant for the spacing.
-   * Use `Spacings.md` (or any key) for type-safe access.
+   * Token size for the spacing.
+   * Prefer `Spacings.sp24` for type-safe dot access.
    *
    * ```ts
    * import { Spacings } from "@marwes-ui/react"
-   * <Spacing size={Spacings.md} />
+   * <Spacing size={Spacings.sp24} />
    * ```
-   * @default "md" (24px)
+   * @default "sp-24" (24px)
    */
   size?: Spacings
 

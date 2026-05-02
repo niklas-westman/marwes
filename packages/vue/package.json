@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -35,11 +35,11 @@
     "vue": ">=3.4"
   },
   "devDependencies": {
-    "@testing-library/vue": "^8.1.0",
-    "rimraf": "^6.0.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.4.0",
-    "vitest": "^4.0.18",
-    "vue": "^3.5.0"
+    "@testing-library/vue": "8.1.0",
+    "rimraf": "6.1.2",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18",
+    "vue": "3.5.28"
   }
 }

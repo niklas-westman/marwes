@@ -2,12 +2,14 @@ import type { RichTextFormat } from "./rich-text-types"
 
 const blockTagPattern = /<(?:div|section|article|header|footer|main)(?:\s[^>]*)?>/gi
 const closingBlockTagPattern = /<\/(?:div|section|article|header|footer|main)>/gi
-const disallowedTagPattern = /<\/?(?!p\b|br\b|strong\b|em\b|u\b)[^>]+>/gi
+const disallowedTagPattern =
+  /<\/(?!(?:p|br|strong|em|u)\b)[^>]+>|<(?!\/)(?!(?:p|br|strong|em|u)\b)[^>]+>/gi
 const openingParagraphPattern = /<p(?:\s[^>]*)?>/gi
 const openingStrongPattern = /<strong(?:\s[^>]*)?>/gi
 const openingEmphasisPattern = /<em(?:\s[^>]*)?>/gi
 const openingUnderlinePattern = /<u(?:\s[^>]*)?>/gi
 const lineBreakPattern = /<br\s*\/?>/gi
+const unsupportedAnglePattern = /<(?!\/?(?:p|br|strong|em|u)\b)/gi
 
 export const richTextCommandByFormat: Record<RichTextFormat, string> = {
   bold: "bold",
@@ -52,6 +54,7 @@ export function normalizeRichTextHtml(rawHtml: string | undefined): string {
     .replace(openingUnderlinePattern, "<u>")
     .replace(lineBreakPattern, "<br>")
     .replace(disallowedTagPattern, "")
+    .replace(unsupportedAnglePattern, "&lt;")
     .replace(/\s+/g, " ")
     .trim()
 

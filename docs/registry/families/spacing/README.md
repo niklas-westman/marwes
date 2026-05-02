@@ -16,7 +16,7 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete — dedicated family audit doc now exists |
 | Semantic coverage | Family-local — the atom emits local `data-component` and `data-size` metadata from core, but Spacing is not part of the wave-1 central semantic registry |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | none — no dedicated spacing component, page, or token section currently exists in the local synced `.figma/` sources |
@@ -34,8 +34,8 @@
 
 The Spacing family is Marwes' decorative vertical-gap family.
 It consists of:
-- one raw `Spacing` atom
-- one `Spacings` constant that exposes the 17 shipped token sizes
+- one raw `Spacing` atom plus the layout-oriented `Spacer` alias
+- one `Spacings` constant that exposes the 18 shipped token sizes through dot notation and legacy bracket keys
 - one core `createSpacingRecipe` that maps `size` and `scale` into CSS variables plus local metadata
 - one preset `spacing.css` file that turns the computed spacing variable into real block height
 - thin React and Vue adapters that render an `aria-hidden` spacer div
@@ -50,8 +50,8 @@ This makes Spacing a strong twentieth registry family because it ties together:
 
 | Surface level | Main members | Why it matters |
 | --- | --- | --- |
-| Atom | `Spacing` | low-level decorative spacer for explicit vertical gaps between elements |
-| Token surface | `Spacings` | shared, type-safe access to the 17 shipped spacing size names |
+| Atom | `Spacing` / `Spacer` | low-level decorative spacer for explicit vertical gaps between elements |
+| Token surface | `Spacings` | shared, type-safe access to the 18 shipped spacing size names |
 | Core primitive | `createSpacingRecipe` | source of truth for `size`, `scale`, `aria-hidden`, and local `data-*` metadata |
 | Canonical product path | raw `Spacing` atom | the recommended direct usage path because this family is intentionally tiny and layout-only |
 | Architecture boundary | token size vs `scale` escape hatch | keeps the main API tied to shared token names while still allowing deliberate multiplication for edge cases |
@@ -69,7 +69,7 @@ Read this section in this order:
 | Source | Path | Why it matters |
 | --- | --- | --- |
 | React Storybook | `apps/storybook-react/src/stories/spacing/Introduction.mdx` | canonical React teaching surface for the atom-only family and the full spacing token scale |
-| React Storybook | `apps/storybook-react/src/stories/spacing/spacing.stories.tsx` | runtime baseline for the full 17-size scale, token usage through `Spacings`, and in-context examples |
+| React Storybook | `apps/storybook-react/src/stories/spacing/spacing.stories.tsx` | runtime baseline for the full 18-size scale, token usage through `Spacings`, and in-context examples |
 | Vue Storybook | `apps/storybook-vue/src/stories/spacing/Introduction.mdx` | canonical Vue teaching surface for the same atom-only family |
 | Vue Storybook | `apps/storybook-vue/src/stories/spacing/spacing.stories.ts` | runtime baseline for the same full scale and in-context examples in Vue |
 | Local design status | `.figma/INDEX.md`, `.figma/marwes/README.md`, `.figma/marwes/manifest.json`, `.figma/marwes/components/_index.json` | inspected to confirm that the current local Figma sync has no dedicated spacing family page or component baseline |
@@ -108,8 +108,8 @@ Spacing-specific result from that inspection:
 | Surface | Variants | States | Notable tokens |
 | --- | --- | --- | --- |
 | Local synced Figma family refs | none | none | no dedicated spacing family is present in the current local sync |
-| Shipped runtime token scale | 17 named spacing sizes from `xxxs` to `11xl` | default `md` plus optional `scale` multiplier | the real shipped token values live in `packages/presets/src/firstEdition/tokens.css` |
-| Storybook visual teaching surface | one decorative spacer atom shown across the full size scale and in context | `xxxs` → `11xl`, token-constant usage, and in-context composition | Storybook is the clearest visual source because there is no Figma family page to mirror |
+| Shipped runtime token scale | 18 public spacing sizes from `sp-0` to `sp-120` | default `sp-24` plus optional `scale` multiplier | the real shipped token values live in `packages/presets/src/firstEdition/tokens.css` |
+| Storybook visual teaching surface | one decorative spacer atom shown across the full size scale and in context | `sp-0` → `sp-120`, token-constant usage, and in-context composition | Storybook is the clearest visual source because there is no Figma family page to mirror |
 
 > Important family distinction: unlike Heading, Paragraph, Divider, or Icon, Spacing does not
 > currently have a dedicated local Figma family baseline.
@@ -187,8 +187,8 @@ Source copy: [`visuals/file-map.mmd`](./visuals/file-map.mmd)
 
 ```mermaid
 flowchart LR
-  AuthorChoice["Author chooses Spacing"] --> DecorativeDiv["decorative div\naria-hidden=true"]
-  AuthorChoice --> SizeChoice["size token\nSpacings.xxxs ... Spacings.11xl"]
+  AuthorChoice["Author chooses Spacer"] --> DecorativeDiv["decorative div\naria-hidden=true"]
+  AuthorChoice --> SizeChoice["spacing token\nSpacings.sp0 ... Spacings.sp120"]
   AuthorChoice --> ScaleChoice["optional scale multiplier"]
 
   SizeChoice --> TokenRef["var(--mw-spacing-{size})"]
@@ -221,10 +221,10 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Low | spacing is decorative and `aria-hidden`, but misuse still matters when teams rely on gaps to imply hidden structure |
-| Audit status | Queued | `docs/audits/README.md` lists Spacing in Wave 3; no dedicated family audit doc exists yet |
+| Audit status | First pass complete | `docs/audits/spacing-family-accessibility.md` captures the completed first-pass audit and follow-up boundaries |
 | Automated contract | Light | Storybook docs and taxonomy tests exist, but there is no dedicated core, adapter, or shared-contract test file today |
 | Manual review boundary | Narrow | the main human judgment is whether Spacing is the honest layout tool and whether large gaps are compensating for weak structure |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the dedicated family audit is complete; broader support-model work remains non-blocking |
 
 ### What automation already covers
 
@@ -250,7 +250,7 @@ That distinction matters because:
 ### Current implementation hotspots
 
 - `packages/core/src/components/atoms/spacing/spacing.recipe.ts` is the main source of truth for `size`, `scale`, and local metadata.
-- `packages/core/src/components/atoms/spacing/spacing.types.ts` defines the 17-size `Spacings` vocabulary that consumers use directly.
+- `packages/core/src/components/atoms/spacing/spacing.types.ts` defines the 18-size `Spacings` vocabulary that consumers use directly.
 - `packages/presets/src/firstEdition/tokens.css` and `spacing.css` are the practical visual source of truth because there is no dedicated local Figma family baseline.
 
 ## Semantics snapshot
@@ -275,10 +275,10 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | there is no dedicated spacing-family section yet, so code, Storybook, and token files carry most of the current contract weight |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Spacing is absent here today, which reinforces that spacing metadata is still local rather than centrally governed |
 | Testing docs | `docs/reference/testing.md` | shared expectations and manual-review framing, even though Spacing has no dedicated runtime test file yet |
-| Audit queue | `docs/audits/README.md` | Spacing is currently queued in Wave 3 and has no dedicated family audit doc yet |
+| Audit queue | `docs/audits/README.md` | Spacing is first-pass complete in Wave 3 and now has a dedicated family audit doc |
 | Core | `packages/core/src/components/atoms/spacing/spacing.types.ts` | public spacing atom contract and the exported `Spacings` vocabulary |
 | Core | `packages/core/src/components/atoms/spacing/spacing.recipe.ts` | spacing RenderKit assembly, local metadata, and scale handling |
-| Presets | `packages/presets/src/firstEdition/tokens.css` | actual shipped spacing token values from `xxxs` to `11xl` |
+| Presets | `packages/presets/src/firstEdition/tokens.css` | actual shipped spacing token values from `sp-0` to `sp-120` |
 | Presets | `packages/presets/src/firstEdition/spacing.css` | spacer height rendering from `--mw-spacing-value` |
 | React | `packages/react/src/components/spacing/spacing.tsx` | raw spacing adapter in React |
 | Vue | `packages/vue/src/components/spacing/spacing.ts` | raw spacing adapter in Vue |
@@ -317,12 +317,12 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the spacing registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/spacing-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
-- there is no dedicated shared contract file and no dedicated core or adapter runtime test file for Spacing yet
+- the dedicated `docs/audits/spacing-family-accessibility.md` file now captures the finished first-pass audit, while support-model work remains a separate non-blocking track
+- the family now has a dedicated shared contract file plus core and adapter runtime tests for the shipped spacing surface
 - there is no dedicated local Figma family page or component JSON for Spacing in the current sync
 - the practical shipped design baseline therefore lives in `tokens.css`, `spacing.css`, and Storybook rather than in a mirrored Figma family inventory
 
 ## Open questions
 
 - Should Spacing gain a dedicated runtime contract or adapter test file, or is docs-led coverage sufficient for a decorative family this small?
-- Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 17-size spacing scale, or is the current code-owned token source sufficient?
+- Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 18-size spacing scale, or is the current code-owned token source sufficient?

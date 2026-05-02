@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for the horizontal default, size mapping, orientation metadata, and optional id handling.",
       "Shared divider contract coverage across React and Vue for semantic separator behavior.",
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Divider is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family already has strong core, shared-contract, adapter, and Storybook coverage despite the missing dedicated audit write-up."
+      "Divider completed a first-pass accessibility audit focused on semantic-separator honesty, spacing-vs-structure guidance, and vertical-layout caveats.",
+      "The family now has expanded shared-contract coverage for local metadata plus explicit accessibility notes in both Storybook apps."
     ]
   },
   "visuals": {

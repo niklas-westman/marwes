@@ -15,11 +15,17 @@ export type SpacingProps = SpacingOptions &
   Omit<React.HTMLAttributes<HTMLDivElement>, "children"> & {
     /**
      * Size variant for the spacing.
-     * Maps to token values: xxxs=2px, xxs=4px, xs=8px, sm=16px, md=24px,
-     * lg=32px, xl=40px, xxl=48px, xxxl=56px
-     * @default "md"
+     * Maps to token values: sp-0=0px, sp-2=2px, sp-4=4px, sp-8=8px,
+     * sp-16=16px, sp-24=24px, sp-32=32px, up to sp-120=120px.
+     * @default "sp-24"
      */
     size?: SpacingSize
+
+    /**
+     * Ergonomic alias for `size`.
+     * Prefer this on `Spacer` for readable layout code.
+     */
+    spacing?: SpacingSize
 
     /**
      * Additional CSS class names.
@@ -31,6 +37,8 @@ export type SpacingProps = SpacingOptions &
      */
     style?: React.CSSProperties
   }
+
+export type SpacerProps = SpacingProps
 
 /**
  * Spacing
@@ -46,21 +54,25 @@ export type SpacingProps = SpacingOptions &
  * @example Semantic size
  * ```tsx
  * <H1>Hello</H1>
- * <Spacing size={Spacings.md} />
+ * <Spacing size={Spacings.sp24} />
  * <Paragraph>World</Paragraph>
  * ```
  *
  * @example All sizes
  * ```tsx
- * <Spacing size="xxxs" /> // 2px
- * <Spacing size="xs" />   // 8px
- * <Spacing size="lg" />   // 32px
+ * <Spacing size="sp-2" />  // 2px
+ * <Spacing size="sp-8" />  // 8px
+ * <Spacing size="sp-32" /> // 32px
  * ```
  */
 export const Spacing = React.forwardRef<HTMLDivElement, SpacingProps>((props, ref) => {
-  const { className: customClassName, style: customStyle, ...opts } = props
+  const { className: customClassName, scale, size, spacing, style: customStyle } = props
+  const resolvedSize = spacing ?? size
 
-  const kit = createSpacingRecipe(opts)
+  const kit = createSpacingRecipe({
+    ...(resolvedSize !== undefined ? { size: resolvedSize } : {}),
+    ...(scale !== undefined ? { scale } : {}),
+  })
 
   const style = { ...(kit.vars as StyleWithVars), ...customStyle }
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
@@ -69,3 +81,15 @@ export const Spacing = React.forwardRef<HTMLDivElement, SpacingProps>((props, re
 })
 
 Spacing.displayName = "Spacing"
+
+/**
+ * Spacer
+ *
+ * Alias for `Spacing` with a layout-oriented prop name.
+ *
+ * @example
+ * ```tsx
+ * <Spacer spacing={Spacings.sp24} />
+ * ```
+ */
+export const Spacer = Spacing

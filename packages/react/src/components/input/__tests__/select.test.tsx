@@ -39,8 +39,8 @@ runSelectContract("react", {
 })
 
 describe("Select", () => {
-  it("defaults to the native appearance and marks placeholder state", () => {
-    renderWithProvider(
+  it("defaults to Marwes appearance and marks placeholder state", () => {
+    const { container } = renderWithProvider(
       <Select
         ariaLabel="Country"
         placeholder="Choose a country"
@@ -53,8 +53,10 @@ describe("Select", () => {
 
     const select = screen.getByRole("combobox", { name: /country/i })
 
-    expect(select).toHaveClass("mw-select--native")
+    expect(select.tagName).toBe("SELECT")
+    expect(select).toHaveClass("mw-select--marwes")
     expect(select).toHaveAttribute("data-placeholder-selected", "true")
+    expect(container.querySelector(".mw-select__control-icon")).not.toBeNull()
   })
 
   it("renders the provided arrow svg in Marwes mode when native is false", () => {

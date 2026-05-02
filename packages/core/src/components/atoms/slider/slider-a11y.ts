@@ -48,6 +48,7 @@ export function resolveSliderA11y(opts: SliderOptions): SliderA11yProps {
   if (opts.ariaLabelledBy) a11y.ariaLabelledBy = opts.ariaLabelledBy
   if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
   if (opts.ariaValueText) a11y.ariaValueText = opts.ariaValueText
+  if (opts.orientation === "vertical") a11y.ariaOrientation = "vertical"
 
   return a11y
 }

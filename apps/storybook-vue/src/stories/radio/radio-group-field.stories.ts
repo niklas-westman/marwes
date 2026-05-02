@@ -1,8 +1,8 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { RadioGroupFieldProps } from "@marwes-ui/vue"
 import { RadioGroupField } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
-import { ref } from "vue"
+import { h, ref } from "vue"
 
 const colorOptions = [
   { value: "red", label: "Red" },
@@ -13,7 +13,10 @@ const colorOptions = [
 const meta = {
   title: "Radio/Molecule",
   component: RadioGroupField as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<RadioGroupFieldProps>
 
@@ -31,22 +34,23 @@ export const Playground: Story = {
 
 export const Controlled: Story = {
   render: () => ({
-    components: { RadioGroupField },
     setup() {
       const value = ref("blue")
-      return { value, colorOptions }
+
+      return () =>
+        h("div", { style: { display: "grid", gap: "12px" } }, [
+          h(RadioGroupField, {
+            name: "color",
+            label: "Favorite color",
+            options: colorOptions,
+            modelValue: value.value,
+            "onUpdate:modelValue": (nextValue: string) => {
+              value.value = nextValue
+            },
+          }),
+          h("p", { style: { fontSize: "14px", color: "#6b7280" } }, `Selected: ${value.value}`),
+        ])
     },
-    template: `
-      <div style="display: grid; gap: 12px;">
-        <RadioGroupField
-          name="color"
-          label="Favorite color"
-          :options="colorOptions"
-          v-model="value"
-        />
-        <p style="font-size: 14px; color: #6b7280;">Selected: {{ value }}</p>
-      </div>
-    `,
   }),
 }
 

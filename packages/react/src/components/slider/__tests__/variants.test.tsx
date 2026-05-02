@@ -20,6 +20,17 @@ describe("VolumeSlider", () => {
     expect(screen.getByText("100")).toBeTruthy()
     expect(screen.getByText("45")).toBeTruthy()
   })
+
+  it("supports vertical orientation directly on the purpose component", () => {
+    renderWithProvider(<VolumeSlider orientation="vertical" slider={{ defaultValue: 45 }} />)
+
+    const slider = screen.getByRole("slider", { name: "Volume" })
+    const wrapper = slider.closest('[data-component="slider"]')
+
+    expect(slider).toHaveAttribute("aria-orientation", "vertical")
+    expect(wrapper).toHaveAttribute("data-orientation", "vertical")
+    expect(wrapper).toHaveClass("mw-slider--vertical")
+  })
 })
 
 describe("BrightnessSlider", () => {

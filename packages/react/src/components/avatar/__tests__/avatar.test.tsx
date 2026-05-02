@@ -15,6 +15,7 @@ runAvatarContract("react", {
       ...(args.initials !== undefined ? { initials: args.initials } : {}),
       ...(args.src !== undefined ? { src: args.src } : {}),
       ...(args.alt !== undefined ? { alt: args.alt } : {}),
+      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
       ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
     }
 

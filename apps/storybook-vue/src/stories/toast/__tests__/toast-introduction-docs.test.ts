@@ -18,9 +18,12 @@ describe("Vue toast introduction docs", () => {
       "InfoToast",
       "toastWhyPurposeComponents",
       "toastPurposeComponentReference",
-      "<template #action>Close</template>",
+      "mw-toast__action-button",
       "adapter escape hatch",
       "Button` or `CancelButton",
+      "pauses auto-dismiss while the toast is hovered or focused",
+      "duration: null",
+      "A literal string like `<template #action>Close</template>` is visual inline text only.",
     ]
 
     for (const componentName of componentNames) {

@@ -34,6 +34,13 @@ runBadgeContract("vue", {
   renderNotification() {
     renderWithProvider(NotificationBadge, { variant: BadgeVariant.info, children: "5" })
   },
+  renderBadgeWithAriaLabel() {
+    renderWithProvider(NotificationBadge, {
+      variant: BadgeVariant.info,
+      ariaLabel: "5 unread messages",
+      children: "5",
+    })
+  },
   getByText(text) {
     return screen.getByText(text)
   },

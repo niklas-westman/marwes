@@ -48,7 +48,7 @@ export const IconOnly: Story = {
   }),
 }
 
-export const TabList: Story = {
+export const TabBar: Story = {
   render: () => ({
     components: { Tab },
     setup() {
@@ -90,7 +90,7 @@ export const AllStates: Story = {
           <Tab :disabled="true">Settings</Tab>
         </div>
         <div>
-          <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Tab row</p>
+          <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Tab bar</p>
           <div role="tablist" style="display: flex; border-bottom: 1px solid #e5e7eb;">
             <Tab :selected="true" ariaControls="panel-0">Overview</Tab>
             <Tab ariaControls="panel-1">Activity</Tab>

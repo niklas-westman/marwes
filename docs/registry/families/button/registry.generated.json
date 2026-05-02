@@ -11,7 +11,7 @@
       "docs/reference/governance.md"
     ],
     "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-    "audits": ["docs/audits/README.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/button-family-accessibility.md"],
     "roadmap": ["AXE_ROADMAP.md#button-semantics-cleanup"],
     "core": [
       "packages/core/src/components/atoms/button/button-a11y.ts",
@@ -250,7 +250,7 @@
     "storybookReact": true,
     "storybookVue": true,
     "contractsPresent": true,
-    "auditDocPresent": false,
+    "auditDocPresent": true,
     "figmaReferencesPresent": true
   },
   "notes": [

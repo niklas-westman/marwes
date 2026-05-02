@@ -16,12 +16,12 @@
 
 .mw-switch-field__description {
   opacity: 0.75;
-  margin-left: calc(var(--mw-spacing-md) + var(--mw-density-gap));
+  margin-left: calc(var(--mw-spacing-sp-24) + var(--mw-density-gap));
   font-size: var(--mw-density-font-size-sm);
 }
 
 .mw-switch-field__error {
-  margin-left: calc(var(--mw-spacing-md) + var(--mw-density-gap));
+  margin-left: calc(var(--mw-spacing-sp-24) + var(--mw-density-gap));
   font-size: var(--mw-density-font-size-sm);
   color: var(--mw-color-danger-base, #dc2626);
 }

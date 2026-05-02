@@ -35,6 +35,32 @@ import { H1, H2, H3 } from "@marwes-ui/react"
 - Use `size` when semantic level and visual scale need to differ
 - Add `id` when headings should support anchor links or table-of-contents jumps
 
+## Accessibility notes
+
+**Choose the heading level by document outline first.** `H1`, `H2`, and `H3` render real
+native heading elements. Screen readers use those levels to navigate the page structure.
+Pick the level that matches the content hierarchy, not the font size you want.
+
+**`size` changes the visual scale, not the semantic level.** An `H3` with `size="h1"`
+is still an `<h3>` for assistive technology. Use this escape hatch sparingly when visual
+hierarchy and document outline genuinely need to diverge.
+
+```tsx
+// ❌ Visual styling used instead of honest outline
+<H3 size="h1">Billing</H3>
+
+// ✅ Semantic level stays honest; visual override only when truly needed
+<H2 size="h1">Billing</H2>
+```
+
+**Do not use headings for decorative emphasis only.** If text needs to look larger or bolder
+but does not introduce a real section, use another typography surface rather than inserting a
+fake heading into the document outline.
+
+**`ariaLabel` is rare for headings.** In most cases the visible heading text should be the
+accessible name. Only add `ariaLabel` when product code has a real naming reason beyond the
+visible text.
+
 ## Component Reference
 
 **`H1`** - Top-level heading atom for page titles and primary content entry

@@ -3,11 +3,11 @@
   "family": "input",
   "displayName": "Input",
   "status": "shipped",
-  "summary": "Broad text-entry family spanning native-first inputs, select fields, OTP entry, and manual-review-heavy rich text.",
+  "summary": "Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.",
   "philosophy": [
     "Keep plain text entry, multiline entry, select, OTP, and rich text in one input-domain family so shared field wiring stays coherent.",
-    "Prefer native browser semantics first, especially for base Input, Textarea, and Select surfaces.",
-    "Keep custom presentation explicit through purpose wrappers such as DropdownField instead of teaching custom behavior as the default.",
+    "Preserve native browser semantics for base Input, Textarea, and the Select atom while allowing Marwes chrome to be the default visual mode.",
+    "Keep native browser select chrome explicit through native=true or appearance=native instead of treating it as the default visual path.",
     "Document rich text honestly as manual-review-heavy rather than pretending automated checks fully prove the editing experience."
   ],
   "usage": {
@@ -18,7 +18,7 @@
     ],
     "avoidWhen": [
       "A different family such as checkbox, radio, or switch is the more honest control type.",
-      "A custom dropdown visual is being chosen without a deliberate reason to move away from the native-first select path.",
+      "A custom dropdown visual is being chosen without testing the Marwes-default interaction path and native fallback behavior.",
       "The team is not prepared to manually review rich-text editing behavior in real browser and assistive-technology combinations."
     ]
   },
@@ -28,7 +28,7 @@
     "automationCovers": [
       "Shared contracts for input, input fields, select, select combobox, textarea, dropdown, OTP, and rich text.",
       "Storybook introduction and taxonomy tests in both apps.",
-      "Documented native-first select guidance and explicit rich-text manual-review boundary."
+      "Documented Marwes-default select guidance, native fallback behavior, and explicit rich-text manual-review boundary."
     ],
     "manualReviewRequired": [
       "RichText editing behavior in supported browser and assistive-technology combinations.",

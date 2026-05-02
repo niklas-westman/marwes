@@ -32,6 +32,37 @@ import { Icon } from "@marwes-ui/react"
 - `size` controls the rendered icon dimensions
 - `strokeWidth` adjusts the visual weight to match nearby text or UI chrome
 
+## Accessibility notes
+
+**Icons are decorative by default.** If no accessible label is provided, `Icon` stays hidden from
+assistive technology with `aria-hidden="true"`. This is the right default for icons that only
+support nearby text or a parent control label.
+
+**Standalone icons need an accessible label.** If the icon itself must be announced, provide an
+accessible label so it renders with `role="img"`.
+
+```tsx
+// ❌ Decorative by default — not announced
+<Icon name="search" />
+
+// ✅ Explicitly labelled standalone icon
+<Icon name="search" aria-label="Search" />
+```
+
+**Icon-only controls should usually be labelled on the parent control.** In a button, tab,
+or tooltip trigger, keep the meaning on the parent surface instead of the nested icon.
+
+```tsx
+// ✅ Parent button owns the accessible name
+<button aria-label="Search">
+  <Icon name="search" />
+</button>
+```
+
+**`decorative={false}` is not enough on its own.** Without an accessible label, the icon still
+stays hidden from assistive technology. Provide `aria-label` whenever a non-decorative icon must
+be announced.
+
 ## Component Reference
 
 **`Icon`** - Named icon atom for inline UI affordances, navigation, and status

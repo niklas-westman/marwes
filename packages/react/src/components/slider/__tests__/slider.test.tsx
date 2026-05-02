@@ -13,65 +13,66 @@ function renderWithProvider(ui: React.ReactElement) {
 runSliderContract("react", {
   async renderSlider(args = {}) {
     if (args.value !== undefined) {
+      const controlledValue = args.value
+
       function ControlledSliderHarness(): React.ReactElement {
         const [_renderTick, setRenderTick] = React.useState(0)
+        const sliderProps = {
+          ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+          ...(args.min !== undefined ? { min: args.min } : {}),
+          ...(args.max !== undefined ? { max: args.max } : {}),
+          ...(args.step !== undefined ? { step: args.step } : {}),
+          value: controlledValue,
+          ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+          ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
+          ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
+          onValueChange: (value: number) => {
+            args.onValueChange?.(value)
+            setRenderTick((currentTick) => currentTick + 1)
+          },
+        }
 
-        return (
-          <Slider
-            ariaLabel={args.ariaLabel}
-            min={args.min}
-            max={args.max}
-            step={args.step}
-            value={args.value}
-            disabled={args.disabled}
-            showTooltip={args.showTooltip}
-            ariaValueText={args.ariaValueText}
-            onValueChange={(value) => {
-              args.onValueChange?.(value)
-              setRenderTick((currentTick) => currentTick + 1)
-            }}
-          />
-        )
+        return <Slider {...sliderProps} />
       }
 
       renderWithProvider(<ControlledSliderHarness />)
       return
     }
 
-    renderWithProvider(
-      <Slider
-        ariaLabel={args.ariaLabel}
-        min={args.min}
-        max={args.max}
-        step={args.step}
-        defaultValue={args.defaultValue}
-        disabled={args.disabled}
-        showTooltip={args.showTooltip}
-        ariaValueText={args.ariaValueText}
-        onValueChange={args.onValueChange}
-      />,
-    )
+    const sliderProps = {
+      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.min !== undefined ? { min: args.min } : {}),
+      ...(args.max !== undefined ? { max: args.max } : {}),
+      ...(args.step !== undefined ? { step: args.step } : {}),
+      ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
+      ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
+      ...(args.onValueChange !== undefined ? { onValueChange: args.onValueChange } : {}),
+    }
+
+    renderWithProvider(<Slider {...sliderProps} />)
   },
   async renderSliderField(args) {
-    renderWithProvider(
-      <SliderField
-        label={args.label}
-        description={args.description}
-        error={args.error}
-        ariaDescribedBy={args.ariaDescribedBy}
-        slider={{
-          min: args.min,
-          max: args.max,
-          step: args.step,
-          value: args.value,
-          defaultValue: args.defaultValue,
-          disabled: args.disabled,
-          showTooltip: args.showTooltip,
-          ariaValueText: args.ariaValueText,
-          onValueChange: args.onValueChange,
-        }}
-      />,
-    )
+    const sliderFieldProps = {
+      label: args.label,
+      ...(args.description !== undefined ? { description: args.description } : {}),
+      ...(args.error !== undefined ? { error: args.error } : {}),
+      ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
+      slider: {
+        ...(args.min !== undefined ? { min: args.min } : {}),
+        ...(args.max !== undefined ? { max: args.max } : {}),
+        ...(args.step !== undefined ? { step: args.step } : {}),
+        ...(args.value !== undefined ? { value: args.value } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
+        ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
+        ...(args.onValueChange !== undefined ? { onValueChange: args.onValueChange } : {}),
+      },
+    }
+
+    renderWithProvider(<SliderField {...sliderFieldProps} />)
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)

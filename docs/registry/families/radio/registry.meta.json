@@ -24,10 +24,10 @@
   },
   "axe": {
     "riskTier": "medium",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests plus the shared raw-radio contract across React and Vue for checked state, disabled behavior, and callback flow.",
-      "Local React and Vue tests for RadioGroupField labeling, description wiring, error wiring, invalid propagation, and controlled versus uncontrolled selection.",
+      "Shared React and Vue radio-group-field contract coverage for group labeling, description wiring, error wiring, invalid propagation, required state, disabled handling, and controlled versus uncontrolled selection.",
       "Local React and Vue tests for the purpose-radio wrappers plus Storybook introduction and taxonomy tests in both apps."
     ],
     "manualReviewRequired": [
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Radio is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family has a shared contract for the raw atom, but RadioGroupField and the purpose wrappers still rely on local adapter tests rather than a dedicated shared contract file."
+      "Radio completed a first-pass accessibility audit focused on grouped single-selection contract maturity and native-first field wiring.",
+      "The family now has shared contracts for the raw atom and RadioGroupField across React and Vue, while purpose-wrapper metadata remains covered by local adapter tests."
     ]
   },
   "visuals": {
@@ -81,7 +81,7 @@
     ]
   },
   "openQuestions": [
-    "Should RadioGroupField eventually gain a dedicated shared tests/contracts file instead of relying on local adapter tests only?",
+    "Which Radio-family stories should join the first automated accessibility smoke set?",
     "Should the family-local purpose vocabulary (binary-choice, rating, selection) stay adapter-local, or move into the central semantic registry if Radio becomes a governed semantic family?"
   ]
 }

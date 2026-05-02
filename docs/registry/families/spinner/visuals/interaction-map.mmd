@@ -12,7 +12,7 @@ flowchart LR
   ButtonDefaults --> LocalData
   EmptyStateDefaults --> LocalData
 
-  CssMotion["spinner.css"] --> Rotation["single rotation animation\nreduced-motion slows duration"]
+  CssMotion["spinner.css"] --> Rotation["standard variants rotate\nCross shifts segment color"]
   Rotation --> ReactDom["React DOM"]
   Rotation --> VueDom["Vue DOM"]
   LocalData --> ReactDom

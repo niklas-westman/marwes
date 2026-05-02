@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Shared avatar, avatar-badge, and avatar-group contracts across React and Vue.",
       "Local adapter tests for exports and purpose-wrapper metadata in both frameworks.",
@@ -32,13 +32,13 @@
     ],
     "manualReviewRequired": [
       "Product-level quality of alt text, aria labels, status labels, and overflow wording.",
-      "Whether likely unlabeled non-decorative image avatars should trigger a dev-time warning in core.",
+      "Dev-time warning for image avatars without alt or ariaLabel is now implemented in avatar-a11y.ts.",
       "Any future expansion beyond the current non-interactive avatar, badge, and group scope."
     ],
     "roadmapAnchors": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
     "notes": [
-      "Avatar is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family already has strong shared-contract coverage despite the missing dedicated audit write-up."
+      "Avatar completed a first-pass accessibility audit focused on image-naming quality, group labeling, and dev-warning coverage.",
+      "The family now has a dev warning for unlabeled image avatars and expanded shared contract coverage for ariaLabel override and group default label."
     ]
   },
   "visuals": {

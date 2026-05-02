@@ -1,14 +1,14 @@
 /**
  * Spacing recipe: options → render kit.
  * - Delegates size to the --mw-spacing-* token scale via a single CSS variable.
- * - Default size: "md" (24px).
+ * - Default size: "sp-24" (24px).
  */
 
 import type { CssVars } from "../../../shared/css-vars"
 import type { SpacingOptions, SpacingRenderKit, Spacings } from "./spacing.types"
 
 export function createSpacingRecipe(opts: SpacingOptions = {}): SpacingRenderKit {
-  const size: Spacings = opts.size ?? "md"
+  const size: Spacings = opts.size ?? "sp-24"
   const scale = opts.scale ?? 1
 
   const className = "mw-spacing"

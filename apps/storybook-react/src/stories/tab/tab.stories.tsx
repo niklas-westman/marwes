@@ -40,7 +40,7 @@ export const IconOnly: Story = {
   },
 }
 
-export const TabList: Story = {
+export const TabBar: Story = {
   render: () => {
     const [active, setActive] = React.useState(0)
     const tabs = ["Overview", "Activity", "Settings"]
@@ -82,7 +82,7 @@ export const AllStates: Story = {
         <Tab disabled>Settings</Tab>
       </div>
       <div>
-        <p style={{ marginBottom: 8, fontSize: 12, color: "#6b7280" }}>Tab row</p>
+        <p style={{ marginBottom: 8, fontSize: 12, color: "#6b7280" }}>Tab bar</p>
         <div role="tablist" style={{ display: "flex", borderBottom: "1px solid #e5e7eb" }}>
           <Tab selected ariaControls="panel-0">
             Overview

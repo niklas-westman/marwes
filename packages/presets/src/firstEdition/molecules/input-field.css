@@ -41,13 +41,13 @@
   &:has(.mw-input-field__toggle-password) .mw-input,
   &:has(.mw-input-field__search-icon) .mw-input,
   &:has(.mw-input-field__clear-search) .mw-input {
-    padding-right: var(--mw-spacing-xl);
+    padding-right: var(--mw-spacing-sp-40);
   }
 }
 
 .mw-input-field__toggle-password {
   position: absolute;
-  right: var(--mw-spacing-xs);
+  right: var(--mw-spacing-sp-8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +57,7 @@
   cursor: pointer;
   color: var(--mw-color-text-muted, #6b7280);
   transition: color 0.2s ease;
-  border-radius: 4px;
+  border-radius: var(--mw-ui-radius, 4px);
 
   &:hover {
     color: var(--mw-color-text, #111827);
@@ -76,7 +76,7 @@
 
 .mw-input-field__search-icon {
   position: absolute;
-  right: var(--mw-spacing-xs);
+  right: var(--mw-spacing-sp-8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +87,7 @@
 
 .mw-input-field__clear-search {
   position: absolute;
-  right: var(--mw-spacing-xs);
+  right: var(--mw-spacing-sp-8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +97,7 @@
   cursor: pointer;
   color: var(--mw-color-text-muted, #6b7280);
   transition: color 0.2s ease;
-  border-radius: 4px;
+  border-radius: var(--mw-ui-radius, 4px);
 
   &:hover {
     color: var(--mw-color-text, #111827);
@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: var(--mw-spacing-sm);
+  padding-left: var(--mw-spacing-sp-16);
   white-space: nowrap;
   color: var(--mw-color-text-muted, #6b7280);
   pointer-events: none;
@@ -142,7 +142,7 @@
 .mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol) .mw-input {
   width: 100%;
   min-width: 0;
-  padding-left: var(--mw-spacing-xs);
+  padding-left: var(--mw-spacing-sp-8);
   border: none;
   border-radius: 0;
   background: transparent;

@@ -18,9 +18,12 @@ describe("React toast introduction docs", () => {
       "InfoToast",
       "toastWhyPurposeComponents",
       "toastPurposeComponentReference",
-      'action="Close"',
+      "mw-toast__action-button",
       "adapter escape hatch",
       "Button` or `CancelButton",
+      "pauses auto-dismiss while the toast is hovered or focused",
+      "duration: null",
+      'A literal string like `action="Close"` is visual inline text only.',
     ]
 
     for (const componentName of componentNames) {

@@ -10,7 +10,13 @@ const withMarwes: Decorator = (Story, context) => {
 
   return (
     <MarwesProvider theme={{ ...firstEditionTheme, mode }}>
-      <div style={{ padding: 24 }}>
+      <div
+        style={{
+          minHeight: "100vh",
+          padding: 24,
+          background: mode === "dark" ? "#000000" : "#ffffff",
+        }}
+      >
         <Story />
       </div>
     </MarwesProvider>
@@ -26,7 +32,9 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    a11y: { test: "todo" },
+    // Default to off until a story or family is explicitly promoted into the
+    // automated smoke set with `a11y.test = "error"`.
+    a11y: { test: "off" },
   },
   globalTypes: {
     theme: {

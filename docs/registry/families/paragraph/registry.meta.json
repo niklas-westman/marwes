@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for default paragraph sizing and id passthrough behavior.",
       "Shared paragraph contract coverage across React and Vue for native p rendering, size classes, and id metadata.",
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Paragraph is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family relies on native paragraph semantics instead of Marwes semantic-registry metadata, which keeps the surface small but still worth documenting explicitly."
+      "Paragraph completed a first-pass accessibility audit focused on body-copy semantics, size override honesty, and native-semantic documentation.",
+      "The family now has expanded shared-contract coverage for the absence of family-local metadata plus explicit accessibility notes in both Storybook apps."
     ]
   },
   "visuals": {

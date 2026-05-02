@@ -15,11 +15,11 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — `P3`, not started |
+| Audit status | First pass complete |
 | Semantic coverage | Canonical — part of the wave-1 central semantic registry |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | base light `1371:11172`, base dark `1371:11537`, purpose light `1371:8933`, purpose dark `1371:9188` |
-| Main AXE watch item | anchor-backed button semantics vs native link semantics |
+| Main AXE watch item | keeping navigation links honest, preserving the action-vs-navigation distinction, and avoiding fake-button semantics on anchors |
 
 ## Registry ownership
 
@@ -42,7 +42,7 @@ This family is also a good first registry proof of concept because it ties toget
 - core a11y logic and semantic metadata
 - thin React and Vue adapters
 - shared cross-adapter contract coverage
-- an open AXE follow-up around link semantics
+- a resolved first-pass semantics cleanup for anchor-backed navigation paths
 
 ## Family surface map
 
@@ -185,7 +185,7 @@ flowchart LR
   Props --> Semantics["purpose wrapper metadata"]
 
   CoreA11y --> Native["button tag\ntype submit/reset/button\ndisabled when applicable"]
-  CoreA11y --> Anchor["a tag\nrole=button\nhref when enabled"]
+  CoreA11y --> Anchor["a tag\nnative link semantics when enabled\nrole=link when href is inactive"]
 
   Loading --> Busy["aria-busy=true"]
   Loading --> Disabled["disableWhileLoading -> aria-disabled / disabled"]
@@ -210,30 +210,31 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 - **Core owns semantics and accessibility.** `resolveButtonA11y()` decides whether the family renders a native button or anchor-backed control and emits the a11y contract from core.
 - **Adapters stay thin.** React and Vue should apply the same RenderKit and semantic metadata without re-implementing the rules.
 - **Purpose wrappers should teach intent.** `SubmitButton`, `CancelButton`, `DestructiveButton`, and friends are meant to make product code self-documenting.
-- **AXE posture still matters.** This family is not a high-risk custom widget, but it still has an open semantics decision around anchor-backed navigation controls.
+- **AXE posture still matters.** This family is not a high-risk custom widget, but it still needs disciplined guidance about when a product should use navigation links vs action buttons.
 
 ## AXE / accessibility posture
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Risk tier | Medium | Lower risk than custom widgets, but not fully settled because of link semantics |
-| Audit status | Queued | `docs/audits/README.md` lists Button as `P3` and `Not started` |
-| Automated contract | Present | `tests/contracts/button.contract.ts` runs in both adapters |
+| Risk tier | Medium | lower risk than custom widgets, but still important because Button teaches the action-vs-navigation boundary used throughout product code |
+| Audit status | First pass complete | `docs/audits/button-family-accessibility.md` |
+| Automated contract | Strong | `tests/contracts/button.contract.ts` plus local React/Vue button tests cover native button behavior, loading behavior, and anchor-backed navigation semantics |
 | Dev-time warning | Present | icon-only button path warns when no accessible name exists |
-| Manual review boundary | Present | navigation intent vs action-button semantics still needs explicit product guidance |
-| AXE follow-up | Open | `AXE_ROADMAP.md` tracks button semantics cleanup |
+| Manual review boundary | Present | product teams still need to choose honestly between action buttons, navigation links, and plain inline links |
+| AXE follow-up | Resolved for first pass | the anchor-backed semantics cleanup is complete; broader accessibility-gate and support-model work still applies |
 
 ### What automation already covers
 
 - primary button renders a native button and calls `onClick`
 - loading button is busy and disabled
-- LinkButton contract is consistent across React and Vue
+- enabled `LinkButton` preserves native link semantics in both adapters
+- disabled/loading anchor-backed paths remove `href`, set `aria-disabled`, and stay unfocusable in both adapters
 - Storybook introduction and taxonomy docs are present in both apps
 
 ### What still needs manual review or policy clarity
 
-- whether anchor-backed navigation controls should preserve native link semantics instead of `role="button"`
 - where product teams should prefer navigation links over action buttons visually styled as links
+- when a plain inline text link is the more honest UI than a button-family surface
 
 ### Why the semantics are intentionally called canonical
 
@@ -269,7 +270,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 
 | Layer | Path | Why it matters |
 | --- | --- | --- |
-| Spec | `docs/reference/spec.md` | button requirements and open semantics direction |
+| Spec | `docs/reference/spec.md` | button requirements plus the resolved anchor-backed navigation semantics policy |
 | Testing docs | `docs/reference/testing.md` | contract expectations and manual review framing |
 | Semantics | `packages/core/src/semantics/family-semantics.ts` | canonical family-level semantic attributes and allowed purposes |
 | Semantics | `packages/core/src/semantics/purpose-semantics.ts` | canonical purpose metadata for wrappers such as submit, cancel, and destructive |
@@ -285,8 +286,9 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Stories | `apps/storybook-react/src/stories/button/Introduction.mdx` | canonical React teaching surface |
 | Stories | `apps/storybook-vue/src/stories/button/Introduction.mdx` | canonical Vue teaching surface |
 | Shared contract | `tests/contracts/button.contract.ts` | cross-adapter behavior proof |
-| AXE status | `AXE_ROADMAP.md` | open semantics cleanup work |
-| Audit queue | `docs/audits/README.md` | button family status is queued |
+| AXE status | `AXE_ROADMAP.md` | records the semantics cleanup as completed first-pass button work |
+| Audit | `docs/audits/button-family-accessibility.md` | dedicated execution record for the button family |
+| Audit queue | `docs/audits/README.md` | button family status is first-pass complete |
 | Figma | `.figma/marwes/components/button.json` | synced base component structure |
 | Figma | `.figma/NODE_REFERENCE.md` | canonical node refs and token summary |
 
@@ -320,5 +322,5 @@ Current limitations of the PoC:
 
 ## Open questions
 
-- Should `LinkButton` preserve native link semantics instead of using an anchor with `role="button"`?
+- Which Button-family stories should join the first automated accessibility smoke set?
 - Should the registry generator later harvest canonical Storybook story IDs automatically?

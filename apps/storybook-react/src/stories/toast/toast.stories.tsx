@@ -1,13 +1,25 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Toast } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
+import type * as React from "react"
 
 const VARIANTS = ["subtle", "outline", "rich"] as const
+
+function ToastAction({ children }: { children: React.ReactNode }) {
+  return (
+    <button type="button" className="mw-toast__action-button">
+      {children}
+    </button>
+  )
+}
 
 const meta: Meta<typeof Toast> = {
   title: "Toast/Atom",
   component: Toast,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     variant: { control: "select", options: VARIANTS },
@@ -19,7 +31,10 @@ export default meta
 type Story = StoryObj<typeof Toast>
 
 export const Default: Story = {
-  args: { children: "Your changes have been saved.", action: "Close" },
+  args: {
+    children: "Your changes have been saved.",
+    action: <ToastAction>Close</ToastAction>,
+  },
 }
 
 export const DismissIconEscapeHatch: Story = {
@@ -29,7 +44,7 @@ export const DismissIconEscapeHatch: Story = {
 export const WithCustomAction: Story = {
   args: {
     children: "File uploaded successfully.",
-    action: "View file",
+    action: <ToastAction>View file</ToastAction>,
   },
 }
 
@@ -37,7 +52,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       {VARIANTS.map((v) => (
-        <Toast key={v} variant={v} action="Close">
+        <Toast key={v} variant={v} action={<ToastAction>Close</ToastAction>}>
           {v.charAt(0).toUpperCase() + v.slice(1)} — Your changes have been saved.
         </Toast>
       ))}
@@ -54,12 +69,12 @@ export const DarkVariants: Story = {
         flexDirection: "column",
         gap: 12,
         padding: 20,
-        background: "#111827",
+        background: "#000000",
         borderRadius: 8,
       }}
     >
       {VARIANTS.map((v) => (
-        <Toast key={v} variant={v} action="Close">
+        <Toast key={v} variant={v} action={<ToastAction>Close</ToastAction>}>
           {v.charAt(0).toUpperCase() + v.slice(1)} — Dark mode toast.
         </Toast>
       ))}
@@ -72,6 +87,6 @@ export const Urgent: Story = {
     children: "Session expired. Please log in again.",
     variant: "rich",
     ariaLive: "assertive",
-    action: "Close",
+    action: <ToastAction>Close</ToastAction>,
   },
 }

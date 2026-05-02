@@ -2,6 +2,7 @@ import {
   type IconSize,
   type IconStrokeWidth,
   iconRegistry,
+  resolveIconA11y,
   resolveIconSize,
   resolveIconStrokeWidth,
 } from "@marwes-ui/core"
@@ -38,7 +39,10 @@ export const Icon = defineComponent(
       const ariaLabelFromAttrs =
         typeof attrs["aria-label"] === "string" ? (attrs["aria-label"] as string) : undefined
       const ariaLabel = props.ariaLabel ?? ariaLabelFromAttrs
-      const isDecorative = props.decorative || !ariaLabel
+      const a11y = resolveIconA11y({
+        ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+        ...(props.decorative !== undefined ? { decorative: props.decorative } : {}),
+      })
 
       return h(
         "svg",
@@ -53,9 +57,9 @@ export const Icon = defineComponent(
           "stroke-linecap": "round",
           "stroke-linejoin": "round",
           class: [props.className, attrs.class],
-          "aria-hidden": isDecorative ? "true" : undefined,
-          "aria-label": ariaLabel,
-          role: isDecorative ? undefined : "img",
+          "aria-hidden": a11y.ariaHidden ? "true" : undefined,
+          "aria-label": a11y.ariaLabel,
+          role: a11y.role,
           focusable: "false",
         },
         iconDefinition.nodes.map((iconNode) => h(iconNode.tag, iconNode.attrs)),

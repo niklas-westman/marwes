@@ -15,5 +15,11 @@ describe("React badge introduction docs", () => {
     for (const variantName of variants) {
       expect(introDoc).toContain(variantName)
     }
+
+    expect(introDoc).toContain("Accessibility notes")
+    expect(introDoc).toContain("Numeric-only badges always need")
+    expect(introDoc).toContain("ariaLabel")
+    expect(introDoc).toContain("label quality matters")
+    expect(introDoc).toContain("passive span")
   })
 })

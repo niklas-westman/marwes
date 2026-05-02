@@ -1,4 +1,9 @@
-import { SpinnerVariants, storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
+import {
+  SpinnerVariants,
+  storybookA11yPolicy,
+  storybookButtonGeneralArgTypes,
+  storybookLayout,
+} from "@marwes-ui/core"
 import type { ButtonProps } from "@marwes-ui/vue"
 import { Button } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +11,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Buttons/Atom/Button",
   component: Button as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     ...storybookButtonGeneralArgTypes,
@@ -34,7 +42,7 @@ export const AsLink: Story = {
   args: {
     href: "https://example.com",
     action: "navigate",
-    variant: "secondary",
+    variant: "text",
   },
   render: (args) => ({
     components: { Button },

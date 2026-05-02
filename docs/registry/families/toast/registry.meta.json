@@ -8,6 +8,7 @@
     "Teach purpose toasts first when the message intent is known and keep raw Toast as the deliberate primitive and escape hatch.",
     "Keep canonical toast semantics in core so React and Vue emit the same data-component, data-purpose, and data-intent contract.",
     "Treat ToastContainer, ToastProvider, and useToast as adapter-owned delivery layers rather than pretending the atom owns queue behavior.",
+    "Keep toast-local actions as lightweight underlined text actions, with real buttons or links when the action is interactive.",
     "Keep neutral and brand primitives explicit but secondary so they do not blur the canonical purpose-toast vocabulary."
   ],
   "usage": {
@@ -24,15 +25,15 @@
   },
   "axe": {
     "riskTier": "medium",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
-      "Shared purpose-toast contract coverage across React and Vue for canonical semantics and urgency defaults.",
-      "Local container and provider tests in both adapters for stacking, dismiss routing, primitive intent forwarding, and imperative API behavior.",
-      "Storybook introduction and taxonomy tests in both apps."
+      "Shared React and Vue toast contract coverage for raw toast semantics, purpose-toast defaults, max-visible trimming, primitive intent forwarding, dismiss forwarding, and provider-managed delivery timing.",
+      "Local container and provider tests in both adapters for placement, imperative queue flow, and adapter-specific wiring details.",
+      "Storybook introduction and taxonomy tests in both apps with explicit timing and inline-action guidance."
     ],
     "manualReviewRequired": [
-      "Real browser and assistive-technology validation for repeated toast announcement timing and urgency feel.",
-      "Product-level guidance around auto-dismiss duration, inline action wording, and whether users have enough time to perceive the message.",
+      "Real browser and assistive-technology validation for repeated toast announcement timing, interruption feel, and urgency calibration.",
+      "Product-level judgment about when the default 4000ms duration is sufficient versus when critical or actionable toasts should stay visible with duration null or a longer explicit timeout.",
       "Any future expansion beyond the current transient feedback and simple queue model."
     ],
     "roadmapAnchors": [
@@ -40,8 +41,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Toast is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family already has strong shared-contract and adapter-level coverage despite the missing dedicated audit write-up."
+      "Toast completed a first-pass accessibility audit focused on live-region defaults, delivery timing, dismissal behavior, and contract maturity.",
+      "The family now has shared contract coverage for the raw atom, purpose wrappers, and delivery-layer timing behavior across React and Vue."
     ]
   },
   "visuals": {
@@ -74,7 +75,8 @@
     ]
   },
   "openQuestions": [
-    "Should Toast get stronger guidance or defaults around auto-dismiss duration for accessibility-sensitive flows?",
+    "Which Toast-family stories should join the first automated accessibility smoke set?",
+    "Should the provider default stay at 4000ms long term, or move toward a longer or intent-aware timeout policy once the canonical accessibility support model exists?",
     "Should neutral and brand raw-toast primitives remain escape hatches only, or eventually gain a more explicit documented governance boundary?"
   ]
 }

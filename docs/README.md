@@ -11,9 +11,11 @@ If you are new to Marwes, start here.
 3. [Adding Components](./guides/adding-components.md)
 4. [Figma to Marwes](./guides/figma-to-marwes.md)
 5. [AI Metadata Protocol](./reference/ai-metadata.md)
-6. [Component Registry](./registry/README.md)
-7. [Governance](./reference/governance.md)
-8. [Testing](./reference/testing.md)
+6. [Accessibility support model](./reference/accessibility.md)
+7. [Component Registry](./registry/README.md)
+8. [Governance](./reference/governance.md)
+9. [Testing](./reference/testing.md)
+10. [Family Validation](./reference/family-validation.md)
 
 ## Documentation map
 
@@ -30,8 +32,10 @@ graph TD
   Reference --> Architecture[architecture.md]
   Reference --> Spec[spec.md]
   Reference --> AIMetadata[ai-metadata.md]
+  Reference --> Accessibility[accessibility.md]
   Reference --> Governance[governance.md]
   Reference --> Testing[testing.md]
+  Reference --> FamilyValidation[family-validation.md]
 
   Guides --> Adding[adding-components.md]
   Guides --> Figma[figma-to-marwes.md]
@@ -39,10 +43,8 @@ graph TD
   Registry --> RegistryIndex[README.md]
   Registry --> ButtonRegistry[families/button/README.md]
 
-  Planning --> Backlog[component-backlog.md]
-  Planning --> Migration[upgrade-migration.md]
+  Planning --> ReleasePlan[release-1-0-0-hardening-plan.md]
 
-  Tooling --> Allure[allure.md]
   Audits --> AuditIndex[README.md]
 ```
 
@@ -54,8 +56,10 @@ Long-lived, canonical project docs.
 - [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
 - [Specification](./reference/spec.md) — formal requirements and decisions
 - [AI Metadata Protocol](./reference/ai-metadata.md) — canonical semantic vocabulary and ownership model
+- [Accessibility support model](./reference/accessibility.md) — what Marwes automates, what still needs manual review, and how family risk tiers affect release confidence
 - [Governance](./reference/governance.md) — local and CI trust gates, artifacts, and release discipline
 - [Testing](./reference/testing.md) — test layers, commands, and expectations
+- [Family Validation](./reference/family-validation.md) — focused per-family workflow and master validation commands
 
 ### Guides
 Practical how-to documents.
@@ -64,10 +68,9 @@ Practical how-to documents.
 - [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
 
 ### Planning
-Active or historical planning documents.
+Active planning documents. Completed migration notes should be removed once their decisions are reflected in reference docs, registry docs, tests, or release notes.
 
-- [Component Backlog](./planning/component-backlog.md) — remaining component-level gaps against the design system
-- [Upgrade Migration](./planning/upgrade-migration.md) — completed migration work and historical implementation notes
+- [Release 1.0.0 hardening plan](./planning/release-1-0-0-hardening-plan.md) — release readiness checks, security posture, and validation log
 
 ### Registry
 Family-level component knowledge base.
@@ -76,13 +79,8 @@ Family-level component knowledge base.
 - [Adding registry families](./registry/adding-families.md) — workflow and checklist for new registry entries
 - [Registry family rollout checklist](./registry/family-rollout-checklist.md) — cross-session checklist and recommended family queue
 - [Button registry](./registry/families/button/README.md) — semantic-first action family registry
-- [Input registry](./registry/families/input/README.md) — native-first plus high-risk input-domain family registry
+- [Input registry](./registry/families/input/README.md) — Marwes-default select plus high-risk input-domain family registry
 - [Dialog registry](./registry/families/dialog/README.md) — shell-vs-modal family registry with canonical dialog semantics
-
-### Tooling
-Docs for optional tooling and workflows.
-
-- [Allure](./tooling/allure.md) — optional HTML reporting for package tests
 
 ### Audits
 Step-by-step component-family audit plans.
@@ -137,5 +135,5 @@ When updating the repo:
 - Prefer one canonical doc per topic
 - Fix links when files move
 - Update docs when behavior or public API changes
-- Put backlog and migration notes in `docs/planning/`, not in reference docs
+- Keep `docs/planning/` for active release or implementation plans only
 - Prefer short diagrams when they explain structure faster than prose

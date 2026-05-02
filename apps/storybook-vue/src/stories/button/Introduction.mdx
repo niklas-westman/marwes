@@ -50,6 +50,7 @@ Purpose Wrappers
 
 Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`).
 It is also the explicit escape hatch when you want purpose semantics with a non-canonical visual treatment.
+When the anchor path is used with `href`, Marwes preserves native link semantics instead of forcing `role="button"`.
 
 ```vue
 <script setup lang="ts">
@@ -389,7 +390,8 @@ Locks: `variant="secondary"`, default chevron-down icon
 Locks: `action="delete"`, `variant="primary"`, error styling, `as="button"`
 
 **`LinkButton`** — Navigation links  
-Locks: `action="navigate"`, `variant="text"`, `as="a"`
+Locks: `action="navigate"`, `variant="text"`, `as="a"`  
+Enabled links keep native link semantics. Disabled or loading anchor paths remove `href`, set `aria-disabled`, and stay unfocusable.
 
 **`CloseButton`** — Close and dismiss affordances  
 Locks: `action="cancel"`, `variant="neutral"`

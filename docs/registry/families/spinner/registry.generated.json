@@ -11,7 +11,7 @@
       "docs/reference/governance.md"
     ],
     "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-    "audits": ["docs/audits/README.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/spinner-family-accessibility.md"],
     "roadmap": [
       "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -159,7 +159,7 @@
     "storybookReact": true,
     "storybookVue": true,
     "contractsPresent": true,
-    "auditDocPresent": false,
+    "auditDocPresent": true,
     "figmaReferencesPresent": true
   },
   "notes": [

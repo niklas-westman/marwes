@@ -6,7 +6,6 @@ const meta: Meta<typeof InfoDialog> = {
   title: "Dialog/Purpose/InfoDialog",
   component: InfoDialog,
   parameters: storybookLayout.centered,
-  tags: ["autodocs"],
 }
 
 export default meta

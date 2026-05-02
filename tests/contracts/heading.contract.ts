@@ -22,6 +22,19 @@ export type HeadingContractHarness = {
 
 export function runHeadingContract(adapterName: string, harness: HeadingContractHarness): void {
   describe(`Heading contract: ${adapterName}`, () => {
+    it("renders native H1 semantics without family-local metadata", async () => {
+      await harness.renderHeading({ level: 1, text: "Account overview" })
+
+      const headingElement = harness.getByRole("heading", {
+        name: /account overview/i,
+        level: 1,
+      })
+
+      expect(headingElement.tagName).toBe("H1")
+      expect(headingElement.className).toContain("mw-heading--h1")
+      expect(headingElement).not.toHaveAttribute("data-component")
+    })
+
     it("renders semantic heading levels", async () => {
       await harness.renderHeading({ level: 2, text: "Profile settings" })
 
@@ -32,6 +45,7 @@ export function runHeadingContract(adapterName: string, harness: HeadingContract
 
       expect(headingElement.tagName).toBe("H2")
       expect(headingElement.className).toContain("mw-heading--h2")
+      expect(headingElement).not.toHaveAttribute("data-component")
     })
 
     it("supports visual size override and heading metadata", async () => {

@@ -4,10 +4,15 @@ import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { runSwitchContract } from "../../../../../../tests/contracts/switch.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
-import { Switch } from "../switch"
-import { SwitchField } from "../switch-field"
+import { Switch, type SwitchProps } from "../switch"
+import { SwitchField, type SwitchFieldProps } from "../switch-field"
 
-function renderSwitchWithProvider(props: Record<string, unknown>) {
+type SwitchTestProps = SwitchProps & {
+  "onUpdate:modelValue"?: (checked: boolean) => void
+  class?: string
+}
+
+function renderSwitchWithProvider(props: SwitchTestProps) {
   return render(
     defineComponent({
       setup() {
@@ -20,7 +25,7 @@ function renderSwitchWithProvider(props: Record<string, unknown>) {
   )
 }
 
-function renderSwitchFieldWithProvider(props: Record<string, unknown>) {
+function renderSwitchFieldWithProvider(props: SwitchFieldProps) {
   return render(
     defineComponent({
       setup() {

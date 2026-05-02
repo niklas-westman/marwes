@@ -19,7 +19,7 @@
 | Semantic coverage | Family-local — not yet part of the wave-1 central semantic registry |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | input fields light `1364:11372`, input fields dark `1368:5944`, input types overview `1364:11817`, OTP light `1803:15024` |
-| Main AXE watch item | native-first select boundary + rich text manual-review-heavy editing behavior |
+| Main AXE watch item | Marwes-default select boundary + rich text manual-review-heavy editing behavior |
 
 ## Registry ownership
 
@@ -34,7 +34,7 @@
 The Input family is the broadest text-entry family in Marwes.
 It combines:
 - low-risk native controls such as `Input` and `Textarea`
-- native-first `Select` behavior
+- Marwes-default `Select` behavior with native browser chrome as an opt-in fallback
 - an explicit custom presentation path through `DropdownField`
 - segmented entry through `InputOtp`
 - a higher-risk rich editing surface through `RichText`
@@ -44,7 +44,7 @@ This makes Input a strong second registry family because it ties together:
 - a large core file tree with field helpers and multiple atom contracts
 - React and Vue parity across many wrappers and variants
 - the first completed AXE family audit in the repo
-- a clear split between native-first behavior and manual-review-heavy behavior
+- a clear split between platform-native element semantics, custom presentation, and manual-review-heavy behavior
 
 ## Family surface map
 
@@ -53,8 +53,8 @@ This makes Input a strong second registry family because it ties together:
 | Atoms | `Input`, `Textarea`, `Select`, `InputOtp`, `RichText` | the lowest-level family surfaces with the least wrapper UX |
 | Fields | `InputField`, `TextareaField`, `SelectField`, `RichTextField` | own visible label, helper text, error text, and described-by wiring |
 | Purpose variants | `DropdownField`, `SearchField`, `PasswordField`, `EmailField`, `DateOfBirthField`, `ZipCodeField`, `PhoneField`, `URLField`, `CurrencyField` | encode intent-specific defaults and family-local purpose metadata |
-| Native-first boundary | `Input`, `Textarea`, default `Select` | preferred browser-semantics baseline |
-| Higher-risk boundary | custom combobox path, `RichText` | where AXE hardening and manual review matter most |
+| Native-element boundary | `Input`, `Textarea`, `Select` atom | preferred browser-semantics baseline |
+| Higher-risk boundary | `SelectField` custom combobox path, `DropdownField`, `RichText` | where AXE hardening and manual review matter most |
 
 ## Canonical visual understanding
 
@@ -69,13 +69,13 @@ Read this section in this order:
 | --- | --- | --- |
 | React Storybook | `apps/storybook-react/src/stories/input/Introduction.mdx` | canonical React teaching surface for the whole family |
 | React Storybook | `apps/storybook-react/src/stories/input/input.stories.tsx` | base text-input atom |
-| React Storybook | `apps/storybook-react/src/stories/input/select-field.stories.tsx` | native-first select field surface |
+| React Storybook | `apps/storybook-react/src/stories/input/select-field.stories.tsx` | Marwes-default select field surface |
 | React Storybook | `apps/storybook-react/src/stories/input/dropdown-field.stories.tsx` | explicit custom dropdown path |
 | React Storybook | `apps/storybook-react/src/stories/input/rich-text.stories.tsx` | manual-review-heavy rich-text atom |
 | React Storybook | `apps/storybook-react/src/stories/input/input-otp.stories.tsx` | segmented one-time-code path |
 | Vue Storybook | `apps/storybook-vue/src/stories/input/Introduction.mdx` | canonical Vue teaching surface for the whole family |
 | Vue Storybook | `apps/storybook-vue/src/stories/input/input.stories.ts` | base text-input atom |
-| Vue Storybook | `apps/storybook-vue/src/stories/input/select-field.stories.ts` | native-first select field surface |
+| Vue Storybook | `apps/storybook-vue/src/stories/input/select-field.stories.ts` | Marwes-default select field surface |
 | Vue Storybook | `apps/storybook-vue/src/stories/input/dropdown-field.stories.ts` | explicit custom dropdown path |
 | Vue Storybook | `apps/storybook-vue/src/stories/input/rich-text.stories.ts` | manual-review-heavy rich-text atom in Vue |
 | Vue Storybook | `apps/storybook-vue/src/stories/input/input-otp.stories.ts` | segmented one-time-code path in Vue |
@@ -131,7 +131,7 @@ Related synced page refs:
 | Input Types Overview | `text`, `textarea`, `search`, `password`, `date-of-birth`, `phone`, `zip-code`, `dropdown`, `select` | type-level overview rather than state rows | `dropdown/item-surface`, `dropdown/list-surface`, `dropdown/list-border`, `dropdown/item-label`, `dropdown/item-check` |
 | Input OTP showcase | OTP cells and grouped code entry | light and dark showcase frames | segmented one-time-code layout |
 
-> Important family distinction: `select` is the native-first atom baseline, while `dropdown` is the explicit custom presentation path. The registry should keep those two surfaces distinct even though they live in the same family.
+> Important family distinction: the `Select` atom keeps native `<select>` semantics while defaulting to Marwes chrome, while `SelectField` and `DropdownField` own the custom combobox presentation path. The registry should keep those surfaces distinct even though they live in the same family.
 >
 > Note: the synced Figma refs do not currently include a dedicated RichText component node. Per the spec, `RichText` uses the current `Text field` and `Text area` refs as the temporary visual baselines until a dedicated rich-text node exists.
 
@@ -253,7 +253,7 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 ### What automation already covers
 
 - base input and textarea naming, description, and invalid-state wiring
-- select native-first behavior plus explicit custom combobox coverage
+- Marwes-default select behavior plus native opt-in and explicit custom combobox coverage
 - field-helper id wiring across wrappers such as `InputField`, `SelectField`, and `TextareaField`
 - InputOtp shared contract coverage beyond only local adapter tests
 - Storybook docs that teach `RichText` as manual-review-heavy and `DropdownField` as the explicit custom path
@@ -261,7 +261,7 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 ### What still needs manual review or policy clarity
 
 - real `RichText` editing behavior across supported browser and assistive-technology combinations
-- long-term scope of the custom dropdown path if the family continues to harden around native-first defaults
+- long-term scope of the custom dropdown path now that 1.0.0 defaults to Marwes presentation
 - whether family-local input purpose metadata should eventually graduate into the central semantic registry
 
 ### Why the semantics are intentionally called family-local
@@ -275,7 +275,7 @@ That distinction matters because:
 
 ### Current implementation hotspots
 
-- `packages/core/src/components/atoms/input/select-types.ts` owns the native-first select default.
+- `packages/core/src/components/atoms/input/select-types.ts` owns the Marwes-default select mode and native opt-in boundary.
 - `packages/core/src/shared/field-helpers.ts` is the key field-level a11y wiring surface.
 - `packages/core/src/components/atoms/input/rich-text-a11y.ts` and `rich-text-html.ts` define the most manual-review-heavy part of the family.
 
@@ -298,10 +298,10 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 
 | Layer | Path | Why it matters |
 | --- | --- | --- |
-| Spec | `docs/reference/spec.md` | native-first select decision and rich-text scope |
+| Spec | `docs/reference/spec.md` | Marwes-default select decision and rich-text scope |
 | Testing docs | `docs/reference/testing.md` | rich-text manual-review boundary and contract expectations |
 | Audit | `docs/audits/input-family-accessibility.md` | detailed AXE execution record for this family |
-| Core | `packages/core/src/components/atoms/input/select-types.ts` | native-first select default and explicit custom-mode boundary |
+| Core | `packages/core/src/components/atoms/input/select-types.ts` | Marwes-default select mode and explicit native-mode boundary |
 | Core | `packages/core/src/components/atoms/input/rich-text-a11y.ts` | rich-text naming and a11y contract surface |
 | Core | `packages/core/src/components/atoms/input/` | input, textarea, select, input-otp, and rich-text contracts |
 | Core | `packages/core/src/shared/field-helpers.ts` | field-level label, helper, and error id wiring |

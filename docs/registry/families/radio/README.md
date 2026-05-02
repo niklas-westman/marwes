@@ -16,11 +16,11 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — Wave 2 medium-risk family, no dedicated family audit doc yet |
+| Audit status | First pass complete |
 | Semantic coverage | Family-local — purpose-radio metadata lives in adapter wrappers, not the wave-1 central semantic registry |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | radio button component set `1368:6733`, radio group component `1368:6450`, light frame `1368:6734`, dark frame `2276:51787`, combined component container `1371:13445`, state container `1571:19716`, group container `1571:19757`, cover frame `1825:30421` |
-| Main AXE watch item | group label, description, and error wiring across adapters, plus keeping raw-radio usage honest when consumers bypass `RadioGroupField` |
+| Main AXE watch item | keeping grouped single-selection wiring aligned across adapters, plus keeping raw-radio usage honest when consumers bypass `RadioGroupField` |
 
 ## Registry ownership
 
@@ -37,7 +37,7 @@ It combines:
 - a raw `Radio` atom rendered as a native `input[type="radio"]`
 - `RadioGroupField` as the canonical labeled single-selection field path
 - purpose wrappers for `YesNoRadioGroup`, `RatingRadioGroup`, and `OptionRadioGroup`
-- shared React/Vue contract coverage for the raw atom, plus local adapter and Storybook tests for grouped field behavior and purpose metadata
+- shared React/Vue contract coverage for the raw atom and grouped field, plus local tests for purpose metadata
 
 This makes Radio a strong seventeenth registry family because it ties together:
 - a close sibling to Checkbox that stays native rather than becoming a custom single-select widget
@@ -158,7 +158,7 @@ flowchart LR
   React["@marwes-ui/react\nradio + group + variants"]
   Vue["@marwes-ui/vue\nradio + group + variants"]
   Stories["Storybook React + Vue"]
-  Contracts["radio shared contract\n+ local group tests"]
+  Contracts["radio shared contracts\nraw atom + grouped field"]
   Registry["docs/registry/families/radio"]
 
   Figma --> Core
@@ -206,7 +206,7 @@ flowchart TD
 
   StoriesR["apps/storybook-react/src/stories/radio/"]
   StoriesV["apps/storybook-vue/src/stories/radio/"]
-  Contracts["tests/contracts/radio.contract.ts"]
+  Contracts["tests/contracts/radio.contract.ts + radio-group-field.contract.ts"]
 ```
 
 Source copy: [`visuals/file-map.mmd`](./visuals/file-map.mmd)
@@ -259,16 +259,16 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Medium | radio is native, but grouped single-selection semantics, required/error wiring, and wrapper guidance still affect accessibility meaningfully |
-| Audit status | Queued | `docs/audits/README.md` lists Radio in Wave 2; no dedicated family audit doc exists yet |
-| Automated contract | Partial | the raw atom has a shared contract, but RadioGroupField and the purpose wrappers still rely on local adapter tests rather than a dedicated shared group contract |
+| Audit status | First pass complete | `docs/audits/radio-family-accessibility.md` |
+| Automated contract | Strong | the raw atom and `RadioGroupField` now both have shared React/Vue contract coverage, while purpose-wrapper metadata remains covered by local adapter tests |
 | Manual review boundary | Medium | raw-atom usage, focus visibility, and real grouped-form wording still deserve human review |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the family first pass is complete; broader support-model and accessibility-gate work still applies |
 
 ### What automation already covers
 
 - raw radio default-checked state, click callback flow, and disabled behavior through the shared React/Vue radio contract
 - core recipe coverage for checked vs defaultChecked output plus disabled and invalid class policy
-- `RadioGroupField` label association, description wiring, error live region behavior, invalid propagation, disabled handling, and controlled vs uncontrolled selection through local React and Vue adapter tests
+- `RadioGroupField` group labeling, description wiring, error live region behavior, invalid propagation, disabled handling, required state, controlled vs uncontrolled selection, and per-option disabled behavior through the shared `radio-group-field` contract
 - purpose-wrapper option generation and `data-purpose` metadata through local React and Vue variant tests
 - Storybook introduction and taxonomy coverage in both apps
 
@@ -312,10 +312,11 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 
 | Layer | Path | Why it matters |
 | --- | --- | --- |
-| Spec | `docs/reference/spec.md` | there is no dedicated radio-specific section yet, so code, Storybook, tests, and Figma refs carry most of the current contract weight |
+| Spec | `docs/reference/spec.md` | dedicated Radio-family accessibility contract plus native-semantics framing |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Radio is absent here today, which reinforces that purpose-radio metadata is still family-local rather than centrally governed |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Radio is currently queued in Wave 2 and has no dedicated family audit doc yet |
+| Audit | `docs/audits/radio-family-accessibility.md` | dedicated execution record for the Radio family |
+| Audit queue | `docs/audits/README.md` | Radio is first-pass complete in Wave 2 |
 | Core | `packages/core/src/components/atoms/radio/radio-types.ts` | public raw radio contract for checked state, names, values, and minimal accessibility inputs |
 | Core | `packages/core/src/components/atoms/radio/radio-a11y.ts` | native radio a11y mapping including invalid state passthrough |
 | Core | `packages/core/src/components/atoms/radio/radio-recipe.ts` | radio RenderKit assembly and checked vs defaultChecked output |
@@ -336,6 +337,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Stories | `apps/storybook-vue/src/stories/radio/radio-group-field.stories.ts` | clearest grouped radio baseline in Vue |
 | Stories | `apps/storybook-vue/src/stories/radio/option-radio-group.stories.ts` | clearest general-purpose purpose-wrapper baseline in Vue |
 | Contracts | `tests/contracts/radio.contract.ts` | shared raw-radio behavior coverage across React and Vue |
+| Contracts | `tests/contracts/radio-group-field.contract.ts` | shared grouped single-selection semantics and error-wiring coverage |
 | Figma | `.figma/marwes/pages/-radio-button/README.md` | synced radio page inventory |
 | Figma | `.figma/marwes/components/radio-button.json` | raw radio component-set structure |
 | Figma | `.figma/marwes/components/radio-group.json` | grouped radio shell baseline |
@@ -368,12 +370,12 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the radio registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/radio-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
-- there is no dedicated shared `tests/contracts/radio-group-field.contract.ts` file yet, so grouped field behavior is currently proved through local adapter tests instead of one shared contract
+- the dedicated Radio family audit doc now exists and records the first-pass grouped-field contract hardening work
+- the dedicated shared `tests/contracts/radio-group-field.contract.ts` file now complements the existing raw-radio contract
 - the current local sync mixes the newer dark-page node `2276:51787` with older curated radio dark references such as `1368:6900`
 - older duplicate radio refs under `pages/-v3-components/` and `pages/-feedback-moved-to-notion/`, plus the unrelated `components/radio-1.json` asset, are intentionally excluded from the active family baseline
 
 ## Open questions
 
-- Should `RadioGroupField` eventually gain a dedicated shared `tests/contracts/radio-group-field.contract.ts` file instead of relying on local adapter tests only?
+- Which Radio-family stories should join the first automated accessibility smoke set?
 - Should the family-local purpose vocabulary (`binary-choice`, `rating`, `selection`) stay adapter-local, or move into the central semantic registry if Radio becomes a governed semantic family?

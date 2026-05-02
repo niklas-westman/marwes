@@ -1,11 +1,19 @@
-import { SpinnerVariants, storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
+import {
+  SpinnerVariants,
+  storybookA11yPolicy,
+  storybookButtonGeneralArgTypes,
+  storybookLayout,
+} from "@marwes-ui/core"
 import { Button } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
   title: "Buttons/Atom/Button",
   component: Button,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     ...storybookButtonGeneralArgTypes,

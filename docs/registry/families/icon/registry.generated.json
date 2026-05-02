@@ -11,12 +11,13 @@
       "docs/reference/governance.md"
     ],
     "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-    "audits": ["docs/audits/README.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/icon-family-accessibility.md"],
     "roadmap": [
       "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
       "AXE_ROADMAP.md#dev-time-warnings"
     ],
     "core": [
+      "packages/core/src/components/atoms/icon/icon-a11y.ts",
       "packages/core/src/components/atoms/icon/icon-names.ts",
       "packages/core/src/components/atoms/icon/icon-preset.ts",
       "packages/core/src/components/atoms/icon/icon-recipe.ts",
@@ -132,7 +133,7 @@
     "storybookReact": true,
     "storybookVue": true,
     "contractsPresent": true,
-    "auditDocPresent": false,
+    "auditDocPresent": true,
     "figmaReferencesPresent": true
   },
   "notes": [

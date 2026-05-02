@@ -11,7 +11,7 @@
       "docs/reference/governance.md"
     ],
     "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-    "audits": ["docs/audits/README.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/spacing-family-accessibility.md"],
     "roadmap": [
       "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -26,10 +26,12 @@
       "packages/presets/src/firstEdition/tokens.css"
     ],
     "react": [
+      "packages/react/src/components/spacing/__tests__/spacing.test.tsx",
       "packages/react/src/components/spacing/index.ts",
       "packages/react/src/components/spacing/spacing.tsx"
     ],
     "vue": [
+      "packages/vue/src/components/spacing/__tests__/spacing.test.ts",
       "packages/vue/src/components/spacing/index.ts",
       "packages/vue/src/components/spacing/spacing.ts"
     ],
@@ -45,7 +47,7 @@
       "apps/storybook-vue/src/stories/spacing/Introduction.mdx",
       "apps/storybook-vue/src/stories/spacing/spacing.stories.ts"
     ],
-    "contracts": []
+    "contracts": ["tests/contracts/spacing.contract.ts"]
   },
   "semantics": {
     "coverageLevel": "family-local",
@@ -87,7 +89,7 @@
     "storybookReact": true,
     "storybookVue": true,
     "contractsPresent": true,
-    "auditDocPresent": false,
+    "auditDocPresent": true,
     "figmaReferencesPresent": true
   },
   "notes": [

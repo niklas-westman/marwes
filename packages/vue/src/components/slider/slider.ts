@@ -28,6 +28,7 @@ const sliderPropKeys = [
   "required",
   "showTooltip",
   "showTouchArea",
+  "orientation",
   "ariaLabel",
   "ariaLabelledBy",
   "ariaDescribedBy",
@@ -51,6 +52,7 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.required !== undefined) sliderOptions.required = options.required
   if (options.showTooltip !== undefined) sliderOptions.showTooltip = options.showTooltip
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
+  if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
   if (options.ariaLabel !== undefined) sliderOptions.ariaLabel = options.ariaLabel
   if (options.ariaLabelledBy !== undefined) sliderOptions.ariaLabelledBy = options.ariaLabelledBy
   if (options.ariaDescribedBy !== undefined) sliderOptions.ariaDescribedBy = options.ariaDescribedBy
@@ -118,6 +120,7 @@ export const Slider = defineComponent(
           required: props.required,
           showTooltip: props.showTooltip,
           showTouchArea: props.showTouchArea,
+          orientation: props.orientation,
           ariaLabel: props.ariaLabel,
           ariaLabelledBy: props.ariaLabelledBy,
           ariaDescribedBy: props.ariaDescribedBy,
@@ -142,16 +145,6 @@ export const Slider = defineComponent(
           ...renderKit.dataAttributes,
         },
         [
-          renderKit.showTooltip
-            ? h(
-                "span",
-                {
-                  class: "mw-slider__tooltip",
-                  "aria-hidden": "true",
-                },
-                String(currentValue.value),
-              )
-            : null,
           h("div", { class: "mw-slider__control" }, [
             h("input", {
               ...passthroughAttrs,
@@ -168,6 +161,7 @@ export const Slider = defineComponent(
               "aria-labelledby": renderKit.a11y.ariaLabelledBy,
               "aria-describedby": renderKit.a11y.ariaDescribedBy,
               "aria-valuetext": renderKit.a11y.ariaValueText,
+              "aria-orientation": renderKit.a11y.ariaOrientation,
               value: currentValue.value,
               onInput: (event: Event) => {
                 const target = event.target as HTMLInputElement
@@ -192,6 +186,16 @@ export const Slider = defineComponent(
               h("span", { class: "mw-slider__touch-area" }),
               h("span", { class: "mw-slider__thumb" }),
             ]),
+            renderKit.showTooltip
+              ? h(
+                  "span",
+                  {
+                    class: "mw-slider__tooltip",
+                    "aria-hidden": "true",
+                  },
+                  String(currentValue.value),
+                )
+              : null,
           ]),
         ],
       )

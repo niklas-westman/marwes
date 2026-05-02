@@ -135,7 +135,7 @@ describe("React SelectField specifics", () => {
     expect(screen.getByRole("combobox", { name: /country/i })).toHaveTextContent("United States")
   })
 
-  it("defaults to the native select", () => {
+  it("defaults to the custom Marwes combobox", () => {
     renderWithProvider(
       <SelectField
         label="Plan"
@@ -150,7 +150,7 @@ describe("React SelectField specifics", () => {
 
     const control = screen.getByRole("combobox", { name: /plan/i })
 
-    expect(control.tagName).toBe("SELECT")
-    expect(control).toHaveClass("mw-select--native")
+    expect(control.tagName).toBe("BUTTON")
+    expect(control).toHaveClass("mw-select-field__trigger")
   })
 })

@@ -6,7 +6,6 @@ const meta: Meta<typeof DialogModal> = {
   title: "Dialog/Molecule",
   component: DialogModal,
   parameters: storybookLayout.centered,
-  tags: ["autodocs"],
   argTypes: {
     size: { control: "select", options: ["small", "medium", "large"] },
   },

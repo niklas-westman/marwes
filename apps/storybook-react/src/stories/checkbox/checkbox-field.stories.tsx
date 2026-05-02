@@ -1,4 +1,4 @@
-import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import { CheckboxField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -6,7 +6,10 @@ import { useState } from "react"
 const meta: Meta<typeof CheckboxField> = {
   title: "Checkbox/Molecule/CheckboxField",
   component: CheckboxField,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
     label: "Checkbox Field Label",

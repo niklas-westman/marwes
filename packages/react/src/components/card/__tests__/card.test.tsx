@@ -1,12 +1,39 @@
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
+import { runCardContract } from "../../../../../../tests/contracts/card.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Card } from "../card"
+import { ProductCard, ProfileCard, StatCard } from "../variants"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
+
+runCardContract("react", {
+  renderCard(args = {}) {
+    renderWithProvider(
+      <Card {...(args.title !== undefined ? { title: args.title } : {})}>
+        {args.body ?? "Card body."}
+      </Card>,
+    )
+  },
+  renderProductCard(args = {}) {
+    renderWithProvider(<ProductCard>{args.body ?? "Product body."}</ProductCard>)
+  },
+  renderProfileCard(args = {}) {
+    renderWithProvider(<ProfileCard>{args.body ?? "Profile body."}</ProfileCard>)
+  },
+  renderStatCard(args = {}) {
+    renderWithProvider(<StatCard>{args.body ?? "Stat body."}</StatCard>)
+  },
+  getCardElement() {
+    return document.querySelector(".mw-card")
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+})
 
 describe("Card (Atom)", () => {
   it("renders the card shell with title and body content", () => {

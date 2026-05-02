@@ -130,7 +130,7 @@ Related synced page refs:
 | --- | --- | --- | --- |
 | Spinner showcase light/dark frames | seven spinner styles plus usage rows | `ring`, `classic`, `dual`, `dots-round`, `dots-square`, `lines`, `cross` across `16`, `24`, `32`, `40`, button-loading, and empty-state rows | the synced page clearly shows track and indicator colors, but `.figma/NODE_REFERENCE.md` does not currently expose a dedicated spinner token inventory |
 | Individual spinner component JSON files | one component per shipped style | structural 24px baseline for each style | these files map very directly to the shipped `variant` API and are the clearest design-to-code bridge for the raw atom |
-| `NewSpinner` + `.Spinner-animation` + `TinoSpinner` section | size exploration plus four animation-step components | `16`, `24`, `32`, `56`, `100` and animation-frame exploration | useful for understanding the design exploration, but the shipped API narrows back to the core four token sizes plus optional custom pixel sizes |
+| `NewSpinner` + `.Spinner-animation` + `TinoSpinner` section | size exploration plus four animation-step components | `16`, `24`, `32`, `56`, `100` and animation-frame exploration | useful for understanding the design exploration, but the shipped API narrows back to the four spinner scale tokens plus optional explicit pixel sizes |
 
 > Important family distinction: the synced spinner page teaches the seven visual styles, size scale, and the button-loading and empty-state treatments, but the shipped Marwes family also includes concrete adapter behavior such as decorative default mode, standalone `role="status"` mode, and real button integration.
 >
@@ -218,7 +218,7 @@ Source copy: [`visuals/file-map.mmd`](./visuals/file-map.mmd)
 ```mermaid
 flowchart LR
   RawSpinner["Raw Spinner"] --> VariantGeometry["variant -> one of seven synced SVG shapes"]
-  RawSpinner --> SizeData["size -> xs sm md lg\nor custom pixel size"]
+  RawSpinner --> SizeData["size -> xs sm md lg\nor explicit pixel size"]
   RawSpinner --> DefaultA11y["decorative by default\naria-hidden=true"]
   RawSpinner --> StatusMode["ariaLabel -> role=status\naria-live=polite"]
   RawSpinner --> LocalData["data-component=spinner\ndata-variant + data-size"]
@@ -256,25 +256,26 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Medium | spinner is non-interactive, but loading announcements, motion, and context quality still affect accessibility meaningfully |
-| Audit status | Queued | `docs/audits/README.md` lists Spinner in Wave 2; no dedicated family audit doc exists yet |
-| Automated contract | Strong | core recipe tests, preset CSS contract tests, shared React/Vue contract coverage, local wrapper tests, and Storybook docs/taxonomy tests cover the main family behavior |
-| Manual review boundary | Medium | product-level loading copy, long-running async states, and reduced-motion feel still need human review |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader accessibility support-model work |
+| Audit status | First pass complete | `docs/audits/spinner-family-accessibility.md` |
+| Automated contract | Strong | expanded shared contract now covers decorative default, status mode, inner SVG isolation, token size data-size attributes, and explicit decorative=true; plus core recipe tests, preset CSS contract tests with reduced-motion policy proof, local wrapper tests, and Storybook docs/taxonomy tests |
+| Dev-time warning | Present | `spinner-a11y.ts` warns in development when `decorative={false}` is passed without `ariaLabel` |
+| Manual review boundary | Medium | product loading copy, long-running async waits, and whether the slow-not-stop reduced-motion policy is enough for real product flows still need human review |
+| AXE follow-up | Active discipline | the family first pass is complete; broader support-model and smoke-set decisions still apply |
 
 ### What automation already covers
 
-- default decorative spinner behavior and explicit standalone status mode through the shared React/Vue spinner contract
+- default decorative behavior, explicit status mode, inner SVG isolation, token size data-size, and explicit decorative=true through the expanded shared React/Vue spinner contract
 - all seven synced spinner variants plus token and custom size handling in core recipe tests
-- light and dark spinner indicator defaults plus rotation animation shell in preset CSS contract tests
+- light and dark spinner indicator defaults, rotation animation shell, stationary Cross color-shift behavior, and slow-not-stop reduced-motion policy (1600ms) in preset CSS contract tests
 - `ButtonSpinner` and `EmptyStateSpinner` default metadata, size, and variant behavior in both adapters
-- Storybook introduction and taxonomy coverage in both apps
+- Storybook introduction and taxonomy coverage in both apps with reduced-motion policy and decorative fallback guidance
 - button loading integration through the real button component tests in both adapters
 
 ### What still needs manual review or policy clarity
 
 - whether product teams consistently provide enough nearby loading context before relying on the decorative default
 - whether standalone `ariaLabel` wording stays truthful and useful during longer async waits
-- how spinner-heavy states feel under reduced-motion settings and whether product teams pair spinners with enough visible progress context
+- whether the slow-not-stop reduced-motion approach (800ms → 1600ms) is sufficient for users who need full motion off in real product flows
 
 ### Why the semantics are intentionally called family-local
 
@@ -287,8 +288,9 @@ That distinction matters because:
 
 ### Current implementation hotspots
 
+- `packages/core/src/components/atoms/spinner/spinner-a11y.ts` is the main policy point for decorative-vs-status resolution and now emits a dev warning for `decorative={false}` without `ariaLabel`.
 - `packages/core/src/components/atoms/spinner/spinner-recipe.ts` is the main policy point for variant, size, and local metadata emission.
-- `packages/core/src/components/atoms/spinner/spinner-a11y.ts` is the key decorative-vs-status decision point.
+- both adapters correctly isolate the inner SVG with `aria-hidden="true"` and `focusable="false"` so AT ignores the geometry.
 - `packages/react/src/components/button/button.tsx` and `packages/vue/src/components/button/button.ts` are the most important family-integration surfaces because they route real button loading through `ButtonSpinner`.
 
 ## Semantics snapshot
@@ -313,14 +315,15 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | explicit spinner atom and context-wrapper requirements plus button-loading integration scope |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Spinner is absent here today, which reinforces that the family is still outside the wave-1 canonical semantic registry |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Spinner is currently queued in Wave 2 and has no dedicated family audit doc yet |
+| Audit | `docs/audits/spinner-family-accessibility.md` | dedicated execution record for the Spinner family |
+| Audit queue | `docs/audits/README.md` | Spinner is first-pass complete in Wave 2 |
 | Core | `packages/core/src/components/atoms/spinner/spinner-types.ts` | public spinner atom contract for variant, size, decorative mode, and accessible naming |
 | Core | `packages/core/src/components/atoms/spinner/spinner-a11y.ts` | decorative-vs-status policy |
 | Core | `packages/core/src/components/atoms/spinner/spinner-recipe.ts` | spinner RenderKit assembly, size normalization, and local atom metadata |
 | Core | `packages/core/src/components/atoms/spinner/spinner-svg.ts` | source-owned SVG geometry for the seven shipped visual styles |
 | Core test | `packages/core/test/recipes/spinner.test.ts` | recipe-level baseline for variants, size mapping, and status mode |
-| Presets | `packages/presets/src/firstEdition/spinner.css` | light/dark defaults, animation shell, and reduced-motion behavior |
-| Preset test | `packages/presets/test/spinner-css-contract.test.ts` | CSS-level regression coverage for indicator colors and rotation animation |
+| Presets | `packages/presets/src/firstEdition/spinner.css` | light/dark defaults, standard rotation, Cross color-shift animation, and reduced-motion behavior |
+| Preset test | `packages/presets/test/spinner-css-contract.test.ts` | CSS-level regression coverage for indicator colors, standard rotation, Cross color-shift behavior, and reduced motion |
 | React | `packages/react/src/components/spinner/spinner.tsx` | raw spinner atom adapter |
 | React | `packages/react/src/components/spinner/variants.tsx` | `ButtonSpinner` and `EmptyStateSpinner` context wrappers in React |
 | React integration | `packages/react/src/components/button/button.tsx` | real button-loading integration via `ButtonSpinner` |
@@ -344,6 +347,7 @@ Focused commands for this family:
 ```bash
 pnpm --filter @marwes-ui/core exec vitest run test/recipes/spinner.test.ts
 pnpm --filter @marwes-ui/presets exec vitest run test/spinner-css-contract.test.ts
+# (reduced-motion policy and CSS contract now part of the preset test file)
 pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/spinner/__tests__/spinner.test.tsx src/components/spinner/__tests__/variants.test.tsx src/components/spinner/__tests__/index-exports.test.tsx src/components/button/__tests__/button.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/spinner/__tests__/spinner.test.ts src/components/spinner/__tests__/variants.test.ts src/components/spinner/__tests__/index-exports.test.ts src/components/button/__tests__/button.test.ts
@@ -365,12 +369,13 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the spinner registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/spinner-family-accessibility.md` file yet, so AXE posture currently points at the queue and shared support-model work rather than a finished family audit doc
+- the dedicated `docs/audits/spinner-family-accessibility.md` file now records the first-pass decorative/status, reduced-motion, and dev-warning work
 - `.figma/NODE_REFERENCE.md` does not currently include a dedicated Spinner section, so the synced page and component JSON files are the better direct design references for this family
 - the synced spinner page includes exploratory `TinoSpinner`, `NewSpinner`, and `.Spinner-animation` material that the shipped API intentionally narrows back from
 - the current local semantics are useful, but they still live outside the central wave-1 semantic registry
 
 ## Open questions
 
+- Which Spinner-family stories should join the first automated accessibility smoke set?
 - Should Spinner eventually gain a clearer documented policy for when product teams should pair it with surrounding loading text versus using `ariaLabel` directly?
 - Should the exploratory TinoSpinner size and animation assets remain design-only references, or should any of that surface become a future shipped spinner API?

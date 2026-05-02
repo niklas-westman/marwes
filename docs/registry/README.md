@@ -75,7 +75,8 @@ artifacts/
 
 - Architecture truth still lives in [`../reference/architecture.md`](../reference/architecture.md)
 - Semantic truth still lives in `@marwes-ui/core` and [`../reference/ai-metadata.md`](../reference/ai-metadata.md)
-- AXE strategy still lives in [`../../AXE_ROADMAP.md`](../../AXE_ROADMAP.md)
+- Cross-family accessibility support assumptions now live in [`../reference/accessibility.md`](../reference/accessibility.md)
+- Accessibility strategy and support assumptions live in [`../reference/accessibility.md`](../reference/accessibility.md)
 - Family accessibility execution still lives in [`../audits/README.md`](../audits/README.md)
 
 The registry sits above those sources and links them together per family.
@@ -121,9 +122,10 @@ When preview assets are needed:
 
 - [Adding registry families](./adding-families.md)
 - [Registry family rollout checklist](./family-rollout-checklist.md)
+- [Family validation workflow](../reference/family-validation.md)
 
 ## Next likely steps
 
 1. Continue with the next family queue from `family-rollout-checklist.md`
-2. Decide when `registry:check` should join the main trust model
-3. Keep tightening cross-family consistency as new families are added
+2. Use `pnpm validate:family <family>` as the default focused family gate
+3. Use `pnpm validate:release` before publish-level decisions

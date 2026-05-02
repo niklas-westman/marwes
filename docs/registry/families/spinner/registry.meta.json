@@ -24,24 +24,25 @@
   },
   "axe": {
     "riskTier": "medium",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for default decorative behavior, seven synced variants, size mapping, and standalone status mode.",
-      "Preset CSS contract tests for light and dark indicator colors plus rotation animation wiring.",
-      "Shared spinner contract coverage across React and Vue, local context-wrapper tests, and Storybook introduction/taxonomy tests in both apps."
+      "Preset CSS contract tests for light and dark indicator colors, rotation animation wiring, stationary Cross color-shift motion, and the slow-not-stop reduced-motion policy (1600ms).",
+      "Expanded shared spinner contract across React and Vue for decorative default, status mode, inner SVG isolation, token size data-size attributes, and explicit decorative=true.",
+      "Local context-wrapper tests and Storybook introduction/taxonomy tests in both apps."
     ],
     "manualReviewRequired": [
       "Product-level decisions about when loading is decorative versus when a spinner should expose a standalone accessible status name.",
       "Real browser and assistive-technology validation for longer loading sequences, repeated status announcements, and button-loading feel.",
-      "Reduced-motion quality and whether spinner-only loading states provide enough surrounding context in real product layouts."
+      "Whether the slow-not-stop reduced-motion policy (1600ms) is sufficient for users who need full motion off in real product flows."
     ],
     "roadmapAnchors": [
       "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Spinner is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family already has strong core, preset, adapter, contract, and Storybook coverage despite the missing dedicated audit write-up."
+      "Spinner completed a first-pass accessibility audit focused on decorative-vs-status policy, reduced-motion expectations, and contract maturity.",
+      "The family now has expanded shared contract coverage, preset CSS contract tests for reduced-motion slowdown and Cross color-shift behavior, and a dev warning for the decorative={false} without ariaLabel misuse case."
     ]
   },
   "visuals": {
@@ -78,6 +79,7 @@
     ]
   },
   "openQuestions": [
+    "Which Spinner-family stories should join the first automated accessibility smoke set?",
     "Should Spinner eventually gain a clearer documented policy for when product teams should pair it with surrounding loading text versus using ariaLabel directly?",
     "Should the exploratory TinoSpinner size and animation assets remain design-only references, or should any of that surface become a future shipped spinner API?"
   ]

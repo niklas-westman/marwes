@@ -27,9 +27,9 @@ export const ButtonSpinner = defineComponent({
       const spinnerStyle = mergeStyles(
         {
           "--mw-spinner-track-color": props.inverted
-            ? "rgba(255, 255, 255, 0.8)"
+            ? "color-mix(in srgb, currentColor 80%, transparent)"
             : "color-mix(in srgb, currentColor 35%, transparent)",
-          "--mw-spinner-indicator-color": props.inverted ? "#ffffff" : "currentColor",
+          "--mw-spinner-indicator-color": "currentColor",
         } as CssVars,
         attrs.style,
       )

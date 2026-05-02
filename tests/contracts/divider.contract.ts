@@ -20,7 +20,11 @@ export function runDividerContract(adapterName: string, harness: DividerContract
       const separatorElement = harness.getByRole("separator")
       expect(separatorElement.tagName).toBe("HR")
       expect(separatorElement).toHaveAttribute("aria-orientation", "horizontal")
+      expect(separatorElement).toHaveAttribute("data-component", "divider")
+      expect(separatorElement).toHaveAttribute("data-orientation", "horizontal")
+      expect(separatorElement).toHaveAttribute("data-size", "md")
       expect(separatorElement.className).toContain("mw-divider--horizontal")
+      expect(separatorElement.className).toContain("mw-divider--md")
     })
 
     it("supports vertical orientation, size variant, and optional id", async () => {
@@ -29,6 +33,9 @@ export function runDividerContract(adapterName: string, harness: DividerContract
       const separatorElement = harness.getByRole("separator")
       expect(separatorElement).toHaveAttribute("id", "section-divider")
       expect(separatorElement).toHaveAttribute("aria-orientation", "vertical")
+      expect(separatorElement).toHaveAttribute("data-component", "divider")
+      expect(separatorElement).toHaveAttribute("data-orientation", "vertical")
+      expect(separatorElement).toHaveAttribute("data-size", "xl")
       expect(separatorElement.className).toContain("mw-divider--vertical")
       expect(separatorElement.className).toContain("mw-divider--xl")
     })

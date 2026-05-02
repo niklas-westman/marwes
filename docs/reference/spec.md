@@ -24,7 +24,7 @@ Marwes is a component system that prioritizes:
 - Repository shape: pnpm monorepo with `core`, `presets`, `react`, `vue`, Storybook apps, and a React playground
 - Adapter support: React and Vue are both first-class packages
 - Current focus: keep docs, Storybook coverage, and implementation aligned with the V3 Figma component set
-- Remaining backlog is component-level, not architecture-level, and is tracked in `docs/planning/component-backlog.md`
+- Component family status is tracked through the registry docs and generated registry artifacts.
 
 ## 3. Core Principles
 - Simple surface API, strong internal consistency
@@ -283,7 +283,7 @@ Use this format when resolving an open decision:
   - Vue: `packages/vue/src/components/input/rich-text.ts`, `packages/vue/src/components/input/rich-text-field.ts`, adapter tests, package exports, and adapter dependencies
   - Storybook: React/Vue input stories, `Introduction.mdx`, taxonomy tests, intro-docs tests
   - Shared tests: `tests/contracts/rich-text.contract.ts`, `tests/contracts/rich-text-field.contract.ts`
-  - Docs/backlog: `docs/planning/component-backlog.md`
+  - Docs/registry: `docs/registry/README.md`, `docs/registry/families/input/README.md`
 
 ### REQ-DIV-001: Divider Component
 - **Figma reference**: node-id=1-932
@@ -343,7 +343,7 @@ Use this format when resolving an open decision:
 - **Scope**:
   - Add a base `Spinner` atom to core, presets, React, Vue, and Storybook
   - Support the seven synced Spinner visual styles: `classic`, `ring`, `dual`, `dots-round`, `dots-square`, `lines`, and `cross`
-  - Support the synced token sizes `16`, `24`, `32`, and `40` via the `xs`/`sm`/`md`/`lg` API
+  - Support the synced spinner scale `16`, `24`, `32`, and `40` via the `xs`/`sm`/`md`/`lg` API
   - Support custom pixel sizing for larger empty-state or dashboard loading treatments
   - Keep the atom decorative by default, but support standalone accessible status usage through `ariaLabel`
   - Keep future semantic/contextual spinner wrappers out of scope for this change
@@ -354,7 +354,7 @@ Use this format when resolving an open decision:
 - **Acceptance criteria**:
   - [x] `Spinner` ships as a standalone atom with stable `variant` and `size` contracts in core, React, and Vue
   - [x] The atom covers the seven synced Spinner visual styles from the Figma showcase
-  - [x] The size API covers the synced 16/24/32/40px scale and also accepts custom pixel sizes
+  - [x] The spinner size API covers the synced 16/24/32/40px scale and also accepts explicit pixel sizes
   - [x] Preset CSS provides the loading animation shell plus light and dark indicator defaults aligned with the synced designs
   - [x] The atom is decorative by default and exposes an accessible standalone status mode when `ariaLabel` is provided
   - [x] React and Vue Storybook document the atom and cover style, size, and composition examples
@@ -367,7 +367,7 @@ Use this format when resolving an open decision:
   - React: `packages/react/src/components/spinner/*`, `packages/react/src/index.ts`
   - Vue: `packages/vue/src/components/spinner/*`, `packages/vue/src/index.ts`
   - Storybook: `apps/storybook-react/src/stories/spinner/*`, `apps/storybook-vue/src/stories/spinner/*`
-  - Shared tests/docs: `tests/contracts/spinner.contract.ts`, `docs/reference/spec.md`, `docs/planning/component-backlog.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
+  - Shared tests/docs: `tests/contracts/spinner.contract.ts`, `docs/reference/spec.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
 
 ### REQ-SPINNER-002: Spinner Context Variants + Button Loading Integration
 - **Figma reference**:
@@ -431,7 +431,7 @@ Use this format when resolving an open decision:
   - Vue: `packages/vue/src/components/avatar/*`, `packages/vue/src/index.ts`
   - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
   - Shared tests: `tests/contracts/avatar.contract.ts`
-  - Docs/changelog: `docs/planning/component-backlog.md`, `.changeset/*`
+  - Docs/changelog: `docs/registry/families/avatar/README.md`, `.changeset/*`
 
 ### REQ-AVATAR-002: Avatar Molecules
 - **Figma reference**:
@@ -580,6 +580,75 @@ Use this format when resolving an open decision:
   - `packages/vue/src/components/accordion/__tests__/*`
   - `docs/audits/accordion-family-accessibility.md`
 
+### REQ-CHECKBOX-001: Checkbox Family Accessibility Contract
+- **Problem**: Marwes already ships `Checkbox`, `CheckboxField`, and `CheckboxGroupField`, but the accessibility contract for single-field wiring, grouped field semantics, and indeterminate/select-all behavior has not been recorded explicitly in the canonical spec or shared fully across React and Vue through one field-level contract set.
+- **Scope**:
+  - Treat `Checkbox` as the low-level native checkbox atom
+  - Treat `CheckboxField` as the canonical labeled single-checkbox composition
+  - Treat `CheckboxGroupField` as the canonical labeled multi-select `fieldset` composition
+  - Standardize label, description, error, invalid, and disabled wiring for `CheckboxField`
+  - Standardize grouped legend, description, error live-region, invalid propagation, and ordered value-array behavior for `CheckboxGroupField`
+  - Keep indeterminate as an explicit parent-owned affordance for truthful select-all flows
+  - Add shared React/Vue contract coverage for the single-field path in addition to the raw atom and grouped-field contracts
+- **Non-goals**:
+  - Inventing a Marwes-specific semantic metadata layer for a family that already has honest native HTML semantics
+  - Turning indeterminate into a durable third selection state with unclear product meaning
+  - Replacing the native checkbox atom with a custom widget
+- **Acceptance criteria**:
+  - [x] `Checkbox` stays a native `input[type="checkbox"]` atom with checked, disabled, and indeterminate behavior covered by a shared contract
+  - [x] `CheckboxField` uses the visible label as the checkbox accessible name and merges description, error, and external described-by ids into `aria-describedby`
+  - [x] `CheckboxField` marks the checkbox invalid when error text is present and exposes error text through a polite live region
+  - [x] Empty description and error values are treated as absent
+  - [x] `CheckboxGroupField` exposes a labeled group through native `fieldset` and `legend` semantics, with description and error wiring on the group
+  - [x] `CheckboxGroupField` marks child checkboxes invalid when the group error state is present
+  - [x] React and Vue run shared `tests/contracts/checkbox.contract.ts`, `tests/contracts/checkbox-field.contract.ts`, and `tests/contracts/checkbox-group-field.contract.ts`
+- **Validation**:
+  - Unit: shared checkbox contract files plus React/Vue checkbox tests
+  - Integration/manual: Verify Checkbox, CheckboxField, and CheckboxGroupField stories plus introduction docs in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/checkbox.contract.ts`
+  - `tests/contracts/checkbox-field.contract.ts`
+  - `tests/contracts/checkbox-group-field.contract.ts`
+  - `packages/react/src/components/checkbox/__tests__/*`
+  - `packages/vue/src/components/checkbox/__tests__/*`
+  - `apps/storybook-react/src/stories/checkbox/*`
+  - `apps/storybook-vue/src/stories/checkbox/*`
+  - `docs/audits/checkbox-family-accessibility.md`
+
+### REQ-RADIO-001: Radio Family Accessibility Contract
+- **Problem**: Marwes already ships `Radio`, `RadioGroupField`, and thin purpose-radio wrappers, but the accessibility contract for grouped single-selection wiring was not recorded explicitly in the canonical spec or shared across React and Vue through a dedicated grouped-field contract.
+- **Scope**:
+  - Treat `Radio` as the low-level native radio atom
+  - Treat `RadioGroupField` as the canonical labeled grouped single-selection path
+  - Keep purpose-radio wrappers thin and build them on top of `RadioGroupField`
+  - Standardize group labeling, description wiring, error wiring, invalid propagation, required state, disabled behavior, and per-option disabled behavior
+  - Add shared React/Vue contract coverage for `RadioGroupField` in addition to the existing raw-radio contract
+- **Non-goals**:
+  - Inventing a central semantic-registry layer for a family that still relies mainly on native radio and radiogroup semantics
+  - Replacing the native radio atom with a custom widget
+  - Teaching raw `Radio` as self-sufficient without consumer-owned radiogroup naming and shared `name` ownership
+- **Acceptance criteria**:
+  - [x] `Radio` stays a native `input[type="radio"]` atom with checked state, disabled behavior, and callback flow covered by a shared contract
+  - [x] `RadioGroupField` exposes a labeled `radiogroup` with shared `name` ownership across all child radios
+  - [x] `RadioGroupField` merges description, error, and external described-by ids into the group `aria-describedby`
+  - [x] `RadioGroupField` marks the group invalid when error text is present and propagates invalid state to child radios
+  - [x] `RadioGroupField` supports controlled and uncontrolled selection behavior intentionally
+  - [x] `RadioGroupField` supports required state, disabled-group behavior, and per-option disabled behavior intentionally
+  - [x] React and Vue run shared `tests/contracts/radio.contract.ts` and `tests/contracts/radio-group-field.contract.ts`
+- **Validation**:
+  - Unit: shared radio contract files plus React/Vue radio tests
+  - Integration/manual: Verify Radio, RadioGroupField, and purpose-radio stories plus introduction docs in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/radio.contract.ts`
+  - `tests/contracts/radio-group-field.contract.ts`
+  - `packages/react/src/components/radio/__tests__/*`
+  - `packages/vue/src/components/radio/__tests__/*`
+  - `apps/storybook-react/src/stories/radio/*`
+  - `apps/storybook-vue/src/stories/radio/*`
+  - `docs/audits/radio-family-accessibility.md`
+
 ### REQ-TOOLTIP-001: Tooltip Family
 - **Figma reference**:
   - `.figma/marwes/components/tooltip.json`
@@ -614,7 +683,7 @@ Use this format when resolving an open decision:
   - React: `packages/react/src/components/tooltip/*`, `packages/react/src/index.ts`
   - Vue: `packages/vue/src/components/tooltip/*`, `packages/vue/src/index.ts`
   - Storybook: `apps/storybook-react/src/stories/tooltip/*`, `apps/storybook-vue/src/stories/tooltip/*`
-  - Docs/changelog: `docs/reference/spec.md`, `docs/planning/component-backlog.md`, `.changeset/*`
+  - Docs/changelog: `docs/reference/spec.md`, `docs/registry/families/tooltip/README.md`, `.changeset/*`
 
 ### REQ-TOOLTIP-002: Tooltip Family Accessibility Contract
 - **Problem**: Marwes already ships `Tooltip` and `TooltipGroup`, but the accessibility contract for trigger naming, `aria-describedby` wiring, dismissal behavior, and tooltip scope has not been recorded explicitly in the canonical spec or shared across React and Vue through one contract file.
@@ -727,6 +796,73 @@ Use this format when resolving an open decision:
   - `apps/storybook-vue/src/stories/dialog/*`
   - `docs/audits/dialog-family-accessibility.md`
 
+### REQ-TOAST-001: Toast family accessibility contract and delivery timing
+- **Problem**: Marwes already ships `Toast`, `ToastContainer`, `ToastProvider`, `useToast`, and purpose-toast wrappers, but the accessibility contract for live-region defaults, delivery timing, dismissal behavior, and adapter-owned queue semantics had not been recorded explicitly in the canonical spec or proved broadly through one shared contract file.
+- **Scope**:
+  - Treat raw `Toast` as the low-level live-region surface for transient feedback
+  - Treat `SuccessToast`, `ErrorToast`, `WarningToast`, and `InfoToast` as the canonical semantic-first product path when intent is known
+  - Treat `ToastContainer` and `ToastProvider` as the adapter-owned delivery layer for stacking, timing, and imperative queue behavior
+  - Standardize `aria-live` and `role` defaults so ordinary toasts stay polite/status and urgent error toasts stay assertive/alert
+  - Standardize that provider-managed toasts default to a short auto-dismiss window, but actionable or critical flows can opt into `duration: null` or a longer explicit duration
+  - Standardize that auto-dismiss pauses while the user is hovering or focusing within a toast and resumes after interaction leaves the toast
+  - Document that literal inline action text is visual-only unless product code passes a real interactive element
+  - Expand shared React/Vue contract coverage beyond purpose-wrapper metadata to include raw toast semantics and delivery-layer timing behavior
+- **Non-goals**:
+  - Turning Toast into a blocking confirmation pattern or replacing dialog-level interactions
+  - Claiming that automated tests replace real browser and assistive-technology review for repeated live-region announcements
+  - Expanding the family into a full notification center, inbox, or persistence model
+- **Acceptance criteria**:
+  - [x] Raw `Toast` defaults to `role="status"`, `aria-live="polite"`, and `aria-atomic="true"`, while assertive toasts resolve to `role="alert"`
+  - [x] Purpose-toast wrappers preserve canonical `data-purpose` and `data-intent` semantics with intentional urgency defaults
+  - [x] `ToastContainer` supports placement, max-visible trimming, primitive neutral/brand forwarding, and dismiss forwarding intentionally
+  - [x] Provider-managed toasts default to a 4000ms auto-dismiss, while `duration: null` keeps them visible until dismissed by product code
+  - [x] Auto-dismiss pauses while pointer or focus is inside the toast and resumes with the remaining time after interaction leaves
+  - [x] Storybook docs teach timing and inline-action boundaries more explicitly
+  - [x] React and Vue run the same expanded `tests/contracts/toast.contract.ts` coverage for atom, purpose, and delivery behavior
+- **Validation**:
+  - Unit: `packages/core/test/recipes/toast.test.ts`, `tests/contracts/toast.contract.ts`, and React/Vue toast adapter tests
+  - Integration/manual: Verify toast stories/docs in React and Vue Storybook, especially purpose toasts, container delivery, and provider timing expectations
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/toast.contract.ts`
+  - `packages/core/src/components/atoms/toast/*`
+  - `packages/react/src/components/toast/*`
+  - `packages/vue/src/components/toast/*`
+  - `apps/storybook-react/src/stories/toast/*`
+  - `apps/storybook-vue/src/stories/toast/*`
+  - `docs/audits/toast-family-accessibility.md`
+  - `docs/registry/families/toast/*`
+  - `AXE_ROADMAP.md`
+
+### REQ-BUTTON-001: Button navigation semantics stay honest for anchor-backed paths
+- **Problem**: Marwes already ships `Button` and `LinkButton`, but anchor-backed navigation paths previously overrode native link semantics with `role="button"`, which blurred the action-vs-navigation contract.
+- **Scope**:
+  - Keep native button semantics for real button paths
+  - Keep native link semantics for anchor-backed navigation when `href` is present
+  - Standardize disabled and loading anchor-backed behavior so link intent remains readable without pretending the element is still an active link target
+  - Align shared React/Vue button contracts and Storybook guidance with the final semantics policy
+- **Non-goals**:
+  - Replacing the current Button family architecture or purpose-wrapper model
+  - Turning disabled anchors into fully native disabled links, which HTML does not support
+  - Reframing ordinary text links as the same thing as purpose-level action buttons
+- **Acceptance criteria**:
+  - [x] `LinkButton` and anchor-backed `Button` paths with `href` preserve native link semantics instead of forcing `role="button"`
+  - [x] Disabled or loading anchor-backed paths remove `href`, set `aria-disabled`, and are not keyboard-focusable
+  - [x] Shared React/Vue contract coverage asserts the final link semantics policy
+  - [x] Storybook and audit docs distinguish navigation links from action buttons more clearly
+- **Validation**:
+  - Unit: `tests/contracts/button.contract.ts` plus React/Vue button tests
+  - Integration/manual: Verify LinkButton and loading-anchor stories/docs in React and Vue Storybook
+- **Files expected to change**:
+  - `docs/reference/spec.md`
+  - `tests/contracts/button.contract.ts`
+  - `packages/core/src/components/atoms/button/*`
+  - `packages/react/src/components/button/*`
+  - `packages/vue/src/components/button/*`
+  - `apps/storybook-react/src/stories/button/*`
+  - `apps/storybook-vue/src/stories/button/*`
+  - `docs/audits/button-family-accessibility.md`
+
 ### DEC-004 - Vue adapter event API supports parity callbacks and Vue emits
 - Date: 2026-02-23
 - Decision:
@@ -758,7 +894,7 @@ Use this format when resolving an open decision:
   - A native `<textarea>` is a plain-text control and cannot provide true inline formatting for selected ranges. Splitting the concepts keeps the API honest, preserves the existing plain-text surface, and aligns the feature with the Marwes Atom → Molecule → Storybook taxonomy.
 - Impacted docs/files:
   - `docs/reference/spec.md`
-  - `docs/planning/component-backlog.md`
+  - `docs/registry/families/input/README.md`
   - `packages/core/src/components/atoms/input/*`
   - `packages/presets/src/firstEdition/*`
   - `packages/react/src/components/input/*`
@@ -766,16 +902,16 @@ Use this format when resolving an open decision:
   - `apps/storybook-react/src/stories/input/*`
   - `apps/storybook-vue/src/stories/input/*`
 
-### DEC-001 - Select is native-first by default
+### DEC-001 - Select defaults to Marwes mode
 - Date: 2026-04-17
 - Decision:
-  - `Select` and `SelectField` default to native browser select behavior.
-  - The custom Marwes dropdown remains supported as an explicit opt-in via `native={false}` or `appearance="marwes"`.
+  - `Select` and `SelectField` default to Marwes visual behavior.
+  - Native browser select behavior remains supported as an explicit opt-in via `native={true}` or `appearance="native"`.
   - `DropdownField` remains the purpose-level wrapper for the custom Figma-aligned dropdown presentation.
 - Rationale:
-  - Native select behavior is the accessibility-supported baseline across browsers, assistive technologies, and mobile environments.
-  - Keeping the custom dropdown as an opt-in preserves the design-aligned path without teaching the higher-risk behavior as the default.
-  - This keeps the base Input family honest: generic select controls default to platform semantics, while purpose wrappers can intentionally opt into custom presentation.
+  - Marwes 1.0.0 prioritizes the Figma-aligned select presentation as the default design-system behavior.
+  - The low-level `Select` atom still renders a native `<select>` element in Marwes mode, preserving platform form semantics while applying Marwes chrome.
+  - Keeping native browser chrome as an explicit opt-in gives product teams a conservative fallback for contexts where platform styling is preferred.
 - Impacted docs/files:
   - `docs/reference/spec.md`
   - `packages/core/src/components/atoms/input/select-types.ts`
@@ -861,3 +997,26 @@ Use this format when resolving an open decision:
   - `packages/vue/src/components/dialog/*`
   - `apps/storybook-react/src/stories/dialog/*`
   - `apps/storybook-vue/src/stories/dialog/*`
+
+### DEC-011 - Anchor-backed button navigation preserves link semantics
+- Date: 2026-04-19
+- Decision:
+  - Anchor-backed `Button` paths preserve native link semantics when `href` is present.
+  - Marwes no longer forces `role="button"` onto navigational anchors.
+  - Disabled or loading anchor-backed paths remove `href`, set `aria-disabled`, and become unfocusable with `tabIndex=-1`.
+  - When the anchor path has no active `href`, Marwes keeps the intent readable with `role="link"` rather than changing the interaction model into a fake button.
+- Rationale:
+  - Navigation should stay navigation. An anchor with a real destination is more honest and better aligned with platform and assistive-technology expectations when it keeps link semantics.
+  - HTML does not support a native disabled link state, so the disabled/loading anchor path must be expressed through removed navigation target, `aria-disabled`, and focus suppression.
+  - Keeping the disabled fallback as link intent avoids collapsing the navigation/action distinction that the Button family is trying to teach.
+- Impacted docs/files:
+  - `docs/reference/spec.md`
+  - `docs/audits/button-family-accessibility.md`
+  - `tests/contracts/button.contract.ts`
+  - `packages/core/src/components/atoms/button/*`
+  - `packages/react/src/components/button/*`
+  - `packages/vue/src/components/button/*`
+  - `apps/storybook-react/src/stories/button/*`
+  - `apps/storybook-vue/src/stories/button/*`
+  - `docs/registry/families/button/README.md`
+  - `AXE_ROADMAP.md`

@@ -8,6 +8,7 @@ type SliderFieldPurposeProps = Omit<
 > & {
   label?: React.ReactNode
   slider?: SliderProps
+  orientation?: SliderProps["orientation"]
   minValueLabel?: React.ReactNode
   maxValueLabel?: React.ReactNode
 }
@@ -15,9 +16,11 @@ type SliderFieldPurposeProps = Omit<
 export type VolumeSliderProps = SliderFieldPurposeProps
 
 export function VolumeSlider(props: VolumeSliderProps): React.ReactElement {
+  const { orientation, slider, ...fieldProps } = props
+
   return (
     <SliderField
-      {...props}
+      {...fieldProps}
       label={props.label ?? "Volume"}
       minValueLabel={props.minValueLabel ?? "0"}
       maxValueLabel={props.maxValueLabel ?? "100"}
@@ -26,7 +29,8 @@ export function VolumeSlider(props: VolumeSliderProps): React.ReactElement {
         max: 100,
         step: 1,
         showTooltip: true,
-        ...props.slider,
+        ...(orientation !== undefined ? { orientation } : {}),
+        ...slider,
       }}
       dataAttributes={{
         ...props.dataAttributes,
@@ -39,9 +43,11 @@ export function VolumeSlider(props: VolumeSliderProps): React.ReactElement {
 export type BrightnessSliderProps = SliderFieldPurposeProps
 
 export function BrightnessSlider(props: BrightnessSliderProps): React.ReactElement {
+  const { orientation, slider, ...fieldProps } = props
+
   return (
     <SliderField
-      {...props}
+      {...fieldProps}
       label={props.label ?? "Brightness"}
       minValueLabel={props.minValueLabel ?? "0"}
       maxValueLabel={props.maxValueLabel ?? "100"}
@@ -50,7 +56,8 @@ export function BrightnessSlider(props: BrightnessSliderProps): React.ReactEleme
         max: 100,
         step: 1,
         showTooltip: true,
-        ...props.slider,
+        ...(orientation !== undefined ? { orientation } : {}),
+        ...slider,
       }}
       dataAttributes={{
         ...props.dataAttributes,
@@ -63,9 +70,11 @@ export function BrightnessSlider(props: BrightnessSliderProps): React.ReactEleme
 export type RadiusSliderProps = SliderFieldPurposeProps
 
 export function RadiusSlider(props: RadiusSliderProps): React.ReactElement {
+  const { orientation, slider, ...fieldProps } = props
+
   return (
     <SliderField
-      {...props}
+      {...fieldProps}
       label={props.label ?? "Radius"}
       minValueLabel={props.minValueLabel ?? "0px"}
       maxValueLabel={props.maxValueLabel ?? "48px"}
@@ -74,7 +83,8 @@ export function RadiusSlider(props: RadiusSliderProps): React.ReactElement {
         max: 48,
         step: 2,
         showTooltip: true,
-        ...props.slider,
+        ...(orientation !== undefined ? { orientation } : {}),
+        ...slider,
       }}
       dataAttributes={{
         ...props.dataAttributes,

@@ -1,11 +1,7 @@
+import { resolveIconA11y } from "./icon-a11y"
 import { iconRegistry } from "./icon-registry"
 import { resolveIconSize, resolveIconStrokeWidth } from "./icon-scales"
 import type { IconOptions, IconRenderKit } from "./icon-types"
-
-function resolveIconA11y(opts: IconOptions): IconRenderKit["a11y"] {
-  if (!opts.ariaLabel) return { ariaHidden: true }
-  return { role: "img", ariaLabel: opts.ariaLabel }
-}
 
 export function createIconRecipe(opts: IconOptions): IconRenderKit {
   const def = iconRegistry[opts.name]

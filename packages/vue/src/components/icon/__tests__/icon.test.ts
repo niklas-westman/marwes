@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/vue"
+import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { Icon } from ".."
 import { runIconContract } from "../../../../../../tests/contracts/icon.contract"
@@ -22,6 +23,7 @@ runIconContract("vue", {
     const iconProps = {
       name: "search",
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
       ...(args.size !== undefined ? { size: args.size } : {}),
       ...(args.strokeWidth !== undefined ? { strokeWidth: args.strokeWidth } : {}),
     }
@@ -37,4 +39,19 @@ runIconContract("vue", {
   querySvg() {
     return document.querySelector("svg")
   },
+})
+
+describe("Icon (Vue)", () => {
+  it("warns in development when decorative=false is passed without ariaLabel", () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+    renderWithProvider(Icon, { name: "search", decorative: false })
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      "[marwes] Icon: decorative={false} was passed without ariaLabel. " +
+        "The icon stays hidden from assistive technology unless ariaLabel is also provided.",
+    )
+
+    warnSpy.mockRestore()
+  })
 })

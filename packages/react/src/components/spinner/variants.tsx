@@ -13,9 +13,9 @@ export function ButtonSpinner(props: ButtonSpinnerProps): React.ReactElement {
 
   const spinnerStyle: StyleWithVars = {
     "--mw-spinner-track-color": inverted
-      ? "rgba(255, 255, 255, 0.8)"
+      ? "color-mix(in srgb, currentColor 80%, transparent)"
       : "color-mix(in srgb, currentColor 35%, transparent)",
-    "--mw-spinner-indicator-color": inverted ? "#ffffff" : "currentColor",
+    "--mw-spinner-indicator-color": "currentColor",
     ...(style as StyleWithVars | undefined),
   }
 

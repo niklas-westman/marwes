@@ -16,11 +16,11 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete |
 | Semantic coverage | None — Checkbox relies on native `input[type="checkbox"]` and `fieldset` semantics; it is not part of the wave-1 central semantic registry and does not emit family-local `data-*` metadata |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | checkbox component set `1369:4628`, checkbox-field component set `1364:5566`, checkbox-group component `1369:4673`, light frame `1369:4700`, dark frame `1369:4905`, component containers `1369:4657` and `1369:6165` |
-| Main AXE watch item | label, description, and error wiring across single and grouped checkbox fields, plus keeping indeterminate “select all” behavior truthful in real product flows |
+| Main AXE watch item | keeping single-field and grouped field wiring aligned across adapters, plus keeping indeterminate “select all” behavior truthful in real product flows |
 
 ## Registry ownership
 
@@ -44,6 +44,7 @@ This makes Checkbox a strong sixteenth registry family because it ties together:
 - clear field-helper-backed accessibility wiring for single and grouped checkbox usage
 - shared React/Vue contract coverage for the raw atom and the grouped field path
 - a useful design-to-runtime distinction where Figma teaches the atom and group visually, while the shipped field molecules also own helper text, error live regions, and runtime wiring that Figma does not prove by itself
+- a now-complete shared contract baseline for the atom, single-field, and grouped-field surfaces across React and Vue
 
 ## Family surface map
 
@@ -203,7 +204,7 @@ flowchart TD
 
   StoriesR["apps/storybook-react/src/stories/checkbox/"]
   StoriesV["apps/storybook-vue/src/stories/checkbox/"]
-  Contracts["tests/contracts/checkbox.contract.ts + checkbox-group-field.contract.ts"]
+  Contracts["tests/contracts/checkbox.contract.ts + checkbox-field.contract.ts + checkbox-group-field.contract.ts"]
 ```
 
 Source copy: [`visuals/file-map.mmd`](./visuals/file-map.mmd)
@@ -256,16 +257,16 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Medium | checkbox is native, but grouped field semantics, indeterminate behavior, and validation wiring still affect accessibility meaningfully |
-| Audit status | Queued | `docs/audits/README.md` lists Checkbox in Wave 2; no dedicated family audit doc exists yet |
-| Automated contract | Partial | the raw atom and grouped molecule have shared contracts, but `CheckboxField` still relies on local adapter tests rather than a dedicated shared contract file |
+| Audit status | First pass complete | `docs/audits/checkbox-family-accessibility.md` |
+| Automated contract | Strong | shared checkbox, checkbox-field, and checkbox-group-field contracts now cover the atom, single-field, and grouped-field surfaces across React and Vue |
 | Manual review boundary | Medium | select-all truthfulness, focus visibility, and longer helper/error content still deserve human review |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader support-model work |
+| AXE follow-up | Active discipline | the family first pass is complete; broader support-model and accessibility-gate work still applies |
 
 ### What automation already covers
 
 - raw checkbox checked-state, disabled behavior, callback flow, and indeterminate DOM support through the shared React/Vue checkbox contract
+- `CheckboxField` visible-label naming, description/error wiring, external described-by merging, invalid state, and disabled forwarding through the shared `checkbox-field` contract
 - grouped checkbox labeling, description wiring, error live region behavior, invalid propagation, disabled-group behavior, and indeterminate option support through the shared `checkbox-group-field` contract
-- `CheckboxField` label, description, and polite error-region wiring through local React and Vue adapter tests
 - Storybook introduction and taxonomy coverage in both apps
 - core recipe coverage for controlled vs uncontrolled state output
 
@@ -309,10 +310,11 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 
 | Layer | Path | Why it matters |
 | --- | --- | --- |
-| Spec | `docs/reference/spec.md` | there is no dedicated checkbox-specific section yet, so code, Storybook, tests, and Figma refs carry most of the current contract weight |
+| Spec | `docs/reference/spec.md` | dedicated Checkbox-family accessibility contract plus native-semantics framing |
 | AI metadata | `docs/reference/ai-metadata.md` | useful because Checkbox is absent here today, which reinforces that the family relies on native semantics rather than registry metadata |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Checkbox is currently queued in Wave 2 and has no dedicated family audit doc yet |
+| Audit | `docs/audits/checkbox-family-accessibility.md` | dedicated execution record for the Checkbox family |
+| Audit queue | `docs/audits/README.md` | Checkbox is first-pass complete in Wave 2 |
 | Core | `packages/core/src/components/atoms/checkbox/checkbox-types.ts` | public raw checkbox contract for size, checked state, indeterminate state, and naming inputs |
 | Core | `packages/core/src/components/atoms/checkbox/checkbox-a11y.ts` | native checkbox a11y mapping, including `aria-checked="mixed"` when indeterminate |
 | Core | `packages/core/src/components/atoms/checkbox/checkbox-recipe.ts` | checkbox RenderKit assembly and controlled/uncontrolled output |
@@ -332,6 +334,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Stories | `apps/storybook-vue/src/stories/checkbox/Introduction.mdx` | canonical Vue teaching surface |
 | Stories | `apps/storybook-vue/src/stories/checkbox/checkbox-group-field.stories.ts` | clearest grouped checkbox and indeterminate-parent reference in Vue |
 | Contracts | `tests/contracts/checkbox.contract.ts` | shared raw checkbox behavior coverage |
+| Contracts | `tests/contracts/checkbox-field.contract.ts` | shared single-checkbox field wiring and invalid-state coverage |
 | Contracts | `tests/contracts/checkbox-group-field.contract.ts` | shared grouped checkbox semantics and error-wiring coverage |
 | Figma | `.figma/marwes/pages/-checkbox/README.md` | synced checkbox page inventory |
 | Figma | `.figma/marwes/components/checkbox.json` | raw checkbox component-set structure |
@@ -366,12 +369,12 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the checkbox registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/checkbox-family-accessibility.md` file yet, so AXE posture currently points at the queue and support-model work rather than a finished family audit doc
-- there is no dedicated shared `tests/contracts/checkbox-field.contract.ts` file yet, so single-field behavior is currently proved through local adapter tests instead of one shared contract
+- the dedicated Checkbox family audit doc now exists and records the first-pass contract hardening work
+- the dedicated shared `tests/contracts/checkbox-field.contract.ts` file now complements the existing atom and group contracts
 - the synced checkbox page teaches the raw atom and grouped baseline more directly than the shipped field-molecule semantics
 - the current local sync still contains older duplicate checkbox refs under `pages/-v3-components/` and `pages/-feedback-moved-to-notion/`, which this registry entry intentionally excludes from the active family baseline
 
 ## Open questions
 
-- Should `CheckboxField` eventually gain a dedicated shared `tests/contracts/checkbox-field.contract.ts` file instead of relying on local adapter tests only?
+- Which Checkbox-family stories should join the first automated accessibility smoke set?
 - Should the local Figma sync gain clearer molecule-level `CheckboxField` and `CheckboxGroupField` refs that mirror the shipped helper-text and error behavior more directly?

@@ -6,7 +6,14 @@ dist/
 build/
 coverage/
 storybook-static/
+playwright-report/
+test-results/
+blob-report/
+.nyc_output/
+.next/
+out/
 *.tsbuildinfo
+*.tgz
 
 # TypeScript build artifacts in source directories
 packages/*/src/**/*.js
@@ -33,18 +40,32 @@ pnpm-debug.log*
 .env
 .env.*
 !.env.example
+.npmrc
+!.npmrc.example
 
 # OS / editor files
 .DS_Store
 .idea/
 .vscode/
+.cursor/
+.windsurf/
 
 # Local tool/state directories
 .figma/
-.allure/
+.claude/
+CLAUDE.md
+.codex/
+.pi/reports/
+.vercel/
+.netlify/
+.wrangler/
 
 # Temporary files
 *.tmp
 *.temp
 tmp/
 .cache/
+.vite/
+.vitest/
+.turbo/
+.eslintcache

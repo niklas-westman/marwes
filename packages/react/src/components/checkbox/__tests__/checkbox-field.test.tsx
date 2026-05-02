@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import type * as React from "react"
-import { describe, expect, it } from "vitest"
+import { runCheckboxFieldContract } from "../../../../../../tests/contracts/checkbox-field.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { CheckboxField } from "../checkbox-field"
 
@@ -8,32 +9,37 @@ function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
 
-describe("React adapter specifics: CheckboxField", () => {
-  it("wires label and description to the checkbox", () => {
-    renderWithProvider(
-      <CheckboxField label="Accept terms" description="Required to continue" checkbox={{}} />,
-    )
+runCheckboxFieldContract("react", {
+  async renderCheckboxField(args) {
+    const fieldProps = {
+      label: args.label,
+      ...(args.description !== undefined ? { description: args.description } : {}),
+      ...(args.error !== undefined ? { error: args.error } : {}),
+      ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
+      checkbox: {
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.checked !== undefined ? { checked: args.checked } : {}),
+        ...(args.defaultChecked !== undefined ? { defaultChecked: args.defaultChecked } : {}),
+      },
+    }
 
-    const checkbox = screen.getByRole("checkbox", { name: /accept terms/i })
-    const descriptionText = screen.getByText("Required to continue")
-    const description = descriptionText.closest(
-      ".mw-checkbox-field__description",
+    renderWithProvider(<CheckboxField {...fieldProps} />)
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  queryDescriptionRegion() {
+    return document.querySelector(".mw-checkbox-field__description") as HTMLElement | null
+  },
+  queryErrorRegion() {
+    return document.querySelector(
+      '.mw-checkbox-field__error[aria-live="polite"]',
     ) as HTMLElement | null
-    const describedBy = checkbox.getAttribute("aria-describedby") ?? ""
-
-    expect(descriptionText).toBeInTheDocument()
-    expect(description).not.toBeNull()
-    expect(description?.id).toBeTruthy()
-    expect(describedBy.split(/\s+/)).toContain(description?.id ?? "")
-  })
-
-  it("shows error as polite live region", () => {
-    renderWithProvider(
-      <CheckboxField label="Accept terms" error="You must accept the terms" checkbox={{}} />,
-    )
-
-    expect(
-      screen.getByText("You must accept the terms").closest('[aria-live="polite"]'),
-    ).not.toBeNull()
-  })
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
+  },
 })

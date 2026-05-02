@@ -35,5 +35,12 @@ export function runAvatarGroupContract(
       expect(overflowCounter.textContent).toContain("+3")
       expect(avatarGroupElement).toHaveAttribute("data-component", "avatar-group")
     })
+
+    it("falls back to Avatar group as the group label when no ariaLabel is provided", async () => {
+      await harness.renderAvatarGroup()
+
+      const group = harness.getByRole("group", { name: /avatar group/i })
+      expect(group).toBeInTheDocument()
+    })
   })
 }

@@ -41,7 +41,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
   const dialogOptions: DialogOptions = {
     showFooter: hasFooter,
     dismissible,
-    modal: props.modal,
+    ...(props.modal !== undefined ? { modal: props.modal } : {}),
   }
 
   if (props.dataAttributes) {

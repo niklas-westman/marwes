@@ -12,28 +12,34 @@ function renderWithProvider(ui: React.ReactElement) {
 
 runDialogModalContract("react", {
   renderOpenDialogModal(args = {}) {
-    renderWithProvider(
-      <>
-        <button type="button">Outside</button>
-        <DialogModal
-          open
-          portalTarget={null}
-          title={args.title}
-          description={args.description}
-          ariaLabel={args.ariaLabel}
-          dismissible={args.dismissible}
-          closeOnEscape={args.closeOnEscape}
-          closeOnScrimClick={args.closeOnScrimClick}
-          onOpenChange={args.onOpenChange}
-          footer={
-            args.showFooter === false ? undefined : (
+    const dialogProps = {
+      open: true,
+      portalTarget: null,
+      ...(args.title !== undefined ? { title: args.title } : {}),
+      ...(args.description !== undefined ? { description: args.description } : {}),
+      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.dismissible !== undefined ? { dismissible: args.dismissible } : {}),
+      ...(args.closeOnEscape !== undefined ? { closeOnEscape: args.closeOnEscape } : {}),
+      ...(args.closeOnScrimClick !== undefined
+        ? { closeOnScrimClick: args.closeOnScrimClick }
+        : {}),
+      ...(args.onOpenChange !== undefined ? { onOpenChange: args.onOpenChange } : {}),
+      ...(args.showFooter === false
+        ? {}
+        : {
+            footer: (
               <>
                 <button type="button">Cancel</button>
                 <button type="button">Confirm</button>
               </>
-            )
-          }
-        >
+            ),
+          }),
+    }
+
+    renderWithProvider(
+      <>
+        <button type="button">Outside</button>
+        <DialogModal {...dialogProps}>
           {args.includeInput ? (
             <input aria-label="Workspace name" defaultValue="Acme" />
           ) : (
@@ -47,22 +53,25 @@ runDialogModalContract("react", {
   renderTriggerDialogModal(args = {}) {
     function Example(): React.ReactElement {
       const [open, setOpen] = React.useState(false)
+      const dialogProps = {
+        open,
+        onOpenChange: setOpen,
+        portalTarget: null,
+        ...(args.title !== undefined ? { title: args.title } : {}),
+        ...(args.description !== undefined ? { description: args.description } : {}),
+        ...(args.restoreFocus !== undefined ? { restoreFocus: args.restoreFocus } : {}),
+        ...(args.closeOnScrimClick !== undefined
+          ? { closeOnScrimClick: args.closeOnScrimClick }
+          : {}),
+        footer: <button type="button">Done</button>,
+      }
 
       return (
         <>
           <button type="button" onClick={() => setOpen(true)}>
             Open dialog
           </button>
-          <DialogModal
-            open={open}
-            onOpenChange={setOpen}
-            portalTarget={null}
-            title={args.title}
-            description={args.description}
-            restoreFocus={args.restoreFocus}
-            closeOnScrimClick={args.closeOnScrimClick}
-            footer={<button type="button">Done</button>}
-          >
+          <DialogModal {...dialogProps}>
             <p>Dialog content</p>
           </DialogModal>
         </>

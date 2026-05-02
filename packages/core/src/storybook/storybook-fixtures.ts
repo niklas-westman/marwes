@@ -6,6 +6,15 @@ export const storybookLayout = {
   fullscreen: { layout: "fullscreen" },
 } as const
 
+export const storybookA11yPolicy = {
+  off: {
+    a11y: { test: "off" as const },
+  },
+  smoke: {
+    a11y: { test: "error" as const },
+  },
+} as const
+
 export const storybookIconNames = [...iconNames]
 export const storybookOptionalIconNames = [undefined, ...storybookIconNames]
 
@@ -64,7 +73,7 @@ export const storybookSpinnerArgTypes = {
   size: {
     control: "select",
     options: ["xs", "sm", "md", "lg"],
-    description: "Token size (xs=16px, sm=24px, md=32px, lg=40px)",
+    description: "Spinner scale token (xs=16px, sm=24px, md=32px, lg=40px)",
   },
   decorative: {
     control: "boolean",
@@ -81,25 +90,26 @@ export const storybookSpacingArgTypes = {
   size: {
     control: "select",
     options: [
-      "xxxs",
-      "xxs",
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "xxl",
-      "xxxl",
-      "4xl",
-      "5xl",
-      "6xl",
-      "7xl",
-      "8xl",
-      "9xl",
-      "10xl",
-      "11xl",
+      "sp-0",
+      "sp-2",
+      "sp-4",
+      "sp-8",
+      "sp-16",
+      "sp-24",
+      "sp-32",
+      "sp-40",
+      "sp-48",
+      "sp-56",
+      "sp-64",
+      "sp-72",
+      "sp-80",
+      "sp-88",
+      "sp-96",
+      "sp-104",
+      "sp-112",
+      "sp-120",
     ],
-    description: "Size variant (xxxs=2 … md=24 … 6xl=80 … 11xl=120px)",
+    description: "Size variant (sp-0=0 … sp-24=24 … sp-80=80 … sp-120=120px)",
   },
   scale: {
     control: { type: "number", min: 1, max: 8, step: 0.5 },

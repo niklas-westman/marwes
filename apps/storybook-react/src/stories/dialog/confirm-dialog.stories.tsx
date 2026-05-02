@@ -6,7 +6,6 @@ const meta: Meta<typeof ConfirmDialog> = {
   title: "Dialog/Purpose/ConfirmDialog",
   component: ConfirmDialog,
   parameters: storybookLayout.centered,
-  tags: ["autodocs"],
 }
 
 export default meta

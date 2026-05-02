@@ -27,17 +27,17 @@
  */
 
 .mw-accordion {
-  --mw-accordion-title: #141414;
-  --mw-accordion-icon: #595959;
-  --mw-accordion-content: #595959;
-  --mw-accordion-surface: #ffffff;
-  --mw-accordion-surface-hover: #f3f4f6;
-  --mw-accordion-surface-pressed: #e5e7eb;
-  --mw-accordion-border: #e5e7eb;
-  --mw-accordion-focus-border: #2f31fc;
-  --mw-accordion-title-disabled: #737373;
-  --mw-accordion-icon-disabled: #737373;
-  --mw-accordion-content-disabled: #737373;
+  --mw-accordion-title: var(--mw-color-text);
+  --mw-accordion-icon: var(--mw-color-text-muted);
+  --mw-accordion-content: var(--mw-color-text-muted);
+  --mw-accordion-surface: var(--mw-color-surface-elevated);
+  --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
+  --mw-accordion-surface-pressed: var(--mw-color-border-subtle);
+  --mw-accordion-border: var(--mw-color-border-subtle);
+  --mw-accordion-focus-border: var(--mw-color-focus, #2f31fc);
+  --mw-accordion-title-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-icon-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-content-disabled: var(--mw-color-text-disabled);
 
   width: 100%;
   background: var(--mw-accordion-surface);
@@ -126,15 +126,15 @@
 }
 
 .mw-theme--dark .mw-accordion {
-  --mw-accordion-title: #f9fafb;
-  --mw-accordion-icon: #a3a3a3;
-  --mw-accordion-content: #a3a3a3;
-  --mw-accordion-surface: #2e2e2e;
-  --mw-accordion-surface-hover: #595959;
-  --mw-accordion-surface-pressed: #737373;
-  --mw-accordion-border: #474747;
-  --mw-accordion-focus-border: #5859fc;
-  --mw-accordion-title-disabled: #595959;
-  --mw-accordion-icon-disabled: #595959;
-  --mw-accordion-content-disabled: #595959;
+  --mw-accordion-title: var(--mw-color-text);
+  --mw-accordion-icon: var(--mw-color-text-muted);
+  --mw-accordion-content: var(--mw-color-text-muted);
+  --mw-accordion-surface: var(--mw-color-surface-elevated);
+  --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
+  --mw-accordion-surface-pressed: var(--mw-color-border);
+  --mw-accordion-border: var(--mw-color-border-subtle);
+  --mw-accordion-focus-border: var(--mw-color-focus, #5859fc);
+  --mw-accordion-title-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-icon-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-content-disabled: var(--mw-color-text-disabled);
 }

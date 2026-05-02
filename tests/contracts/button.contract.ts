@@ -47,18 +47,19 @@ export function runButtonContract(adapterName: string, h: ButtonContractHarness)
       expect(button).toBeDisabled()
     })
 
-    it("LinkButton renders a navigation button element backed by an anchor href", async () => {
+    it("LinkButton renders a navigation link element backed by an anchor href", async () => {
       await h.renderLink({
         text: "Dashboard",
         href: "/dashboard",
       })
 
-      const linkButton = h.getByRole("button", { name: /dashboard/i })
+      const linkButton = h.getByRole("link", { name: /dashboard/i })
       expect(linkButton.tagName).toBe("A")
       expect(linkButton).toHaveAttribute("href", "/dashboard")
+      expect(linkButton).not.toHaveAttribute("role")
     })
 
-    it("disabled LinkButton is aria-disabled and blocks click handler", async () => {
+    it("disabled LinkButton keeps link intent through aria-disabled and blocks click handler", async () => {
       let clicks = 0
 
       await h.renderLink({
@@ -70,8 +71,11 @@ export function runButtonContract(adapterName: string, h: ButtonContractHarness)
         },
       })
 
-      const linkButton = h.getByRole("button", { name: /disabled link/i })
+      const linkButton = h.getByRole("link", { name: /disabled link/i })
       expect(linkButton).toHaveAttribute("aria-disabled", "true")
+      expect(linkButton).toHaveAttribute("role", "link")
+      expect(linkButton).toHaveAttribute("tabindex", "-1")
+      expect(linkButton).not.toHaveAttribute("href")
 
       await h.click(linkButton)
       expect(clicks).toBe(0)

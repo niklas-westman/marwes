@@ -10,6 +10,7 @@ const options = [
 
 const FIGMA_DROPDOWN_NODE = "1364:7701"
 const DEMO_WIDTH = "320px"
+const DEMO_MIN_HEIGHT = "188px"
 
 type DropdownFieldStoryArgs = {
   native: boolean
@@ -59,7 +60,7 @@ const meta = {
       return { fieldArgs }
     },
     template: `
-      <div style="width: ${DEMO_WIDTH};">
+      <div style="width: ${DEMO_WIDTH}; min-height: ${DEMO_MIN_HEIGHT};">
         <DropdownField v-bind="fieldArgs" />
       </div>
     `,
@@ -113,7 +114,7 @@ export const Controlled: Story = {
       return { fieldArgs, value }
     },
     template: `
-      <div style="width: ${DEMO_WIDTH};">
+      <div style="width: ${DEMO_WIDTH}; min-height: ${DEMO_MIN_HEIGHT};">
         <DropdownField v-bind="fieldArgs" v-model="value" />
         <Paragraph style="margin-top: 16px; font-size: 14px; color: #666;">
           Current value: {{ value || "(empty)" }}

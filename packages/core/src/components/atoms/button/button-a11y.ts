@@ -72,11 +72,14 @@ export function resolveButtonA11y(
 
   const a11y: ButtonA11yProps = {
     ...common,
-    role: "button",
-    tabIndex: isDisabled ? -1 : 0,
   }
 
-  if (!isDisabled && opts.href) a11y.href = opts.href
+  if (!isDisabled && opts.href) {
+    a11y.href = opts.href
+  } else {
+    a11y.role = "link"
+    a11y.tabIndex = isDisabled ? -1 : 0
+  }
 
   return { tag: "a", a11y, blockClick: isDisabled }
 }

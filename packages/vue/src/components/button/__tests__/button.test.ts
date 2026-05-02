@@ -86,7 +86,9 @@ describe("Vue adapter specifics: Button", () => {
     expect(spinnerElement?.getAttribute("data-purpose")).toBe("button-loading")
     expect(spinnerElement?.getAttribute("data-variant")).toBe("classic")
     expect(spinnerElement?.getAttribute("data-size")).toBe("xs")
-    expect(spinnerElement?.getAttribute("style")).toContain("--mw-spinner-indicator-color: #ffffff")
+    expect(spinnerElement?.getAttribute("style")).toContain(
+      "--mw-spinner-indicator-color: currentColor",
+    )
     expect(buttonElement.querySelector(".mw-icon")).toBeNull()
   })
 
@@ -170,11 +172,12 @@ describe("Vue adapter specifics: Button", () => {
       "View docs",
     )
 
-    const linkButton = screen.getByRole("button", { name: /view docs/i })
+    const linkButton = screen.getByRole("link", { name: /view docs/i })
     const spinnerElement = linkButton.querySelector('[data-component="spinner"]')
 
     expect(linkButton.tagName).toBe("A")
     expect(linkButton).not.toHaveAttribute("href")
+    expect(linkButton).toHaveAttribute("role", "link")
     expect(linkButton).toHaveAttribute("aria-busy", "true")
     expect(linkButton).toHaveAttribute("aria-disabled", "true")
     expect(linkButton).toHaveAttribute("tabindex", "-1")
@@ -231,6 +234,16 @@ describe("Vue adapter specifics: Button", () => {
     expect(verifyButton).toHaveAttribute("data-verification", "true")
     expect(verifyButton).toHaveClass("mw-btn--secondary")
     expect(verifyButton.querySelector("svg")).not.toBeNull()
+  })
+
+  it("renders LinkButton as a text navigation link without default icons", () => {
+    renderWithProvider(LinkButton, { href: "/dashboard" }, "Dashboard")
+
+    const linkButton = screen.getByRole("link", { name: /dashboard/i })
+    expect(linkButton).toHaveAttribute("data-action", "navigate")
+    expect(linkButton).toHaveAttribute("data-purpose", "navigation")
+    expect(linkButton).toHaveClass("mw-btn--text")
+    expect(linkButton.querySelector("svg")).toBeNull()
   })
 
   it("applies Figma-aligned defaults for cancel, edit, close, refresh, and danger", () => {

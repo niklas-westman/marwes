@@ -24,21 +24,22 @@
   },
   "axe": {
     "riskTier": "medium",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Shared React and Vue contract coverage through tests/contracts/button.contract.ts.",
       "Loading-state semantics such as aria-busy and disabled behavior.",
+      "Native link semantics for active LinkButton paths and disabled/loading anchor fallback behavior.",
       "Dev-time warning for icon-only buttons without an accessible name path.",
       "Storybook introduction and taxonomy tests in both apps."
     ],
     "manualReviewRequired": [
       "Product-level choice between navigation links and action buttons.",
-      "Final semantics policy for anchor-backed button variants such as LinkButton."
+      "Cases where a plain inline text link is the more honest UI than a button-family surface."
     ],
     "roadmapAnchors": ["AXE_ROADMAP.md#button-semantics-cleanup"],
     "notes": [
-      "Button is queued as a P3 family in the accessibility audit queue.",
-      "The open AXE follow-up is narrower than the high-risk widget families but still important for policy clarity."
+      "Button completed a first-pass accessibility audit focused on the action-vs-navigation semantics boundary.",
+      "The original open AXE follow-up is now resolved at the family-policy level, while broader gating and support-model work remains cross-cutting."
     ]
   },
   "visuals": {
@@ -57,6 +58,6 @@
     "preferredStates": ["default", "hover", "pressed", "disabled", "focus", "loading"]
   },
   "openQuestions": [
-    "Should LinkButton preserve native link semantics instead of anchor-plus-role-button semantics?"
+    "Which Button-family stories should join the first automated accessibility smoke set?"
   ]
 }

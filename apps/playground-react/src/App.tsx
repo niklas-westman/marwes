@@ -2,8 +2,6 @@ import type { ThemeInput } from "@marwes-ui/react"
 import { MarwesProvider } from "@marwes-ui/react"
 import { useState } from "react"
 
-import "@marwes-ui/presets/firstEdition/styles.css"
-
 import { GlobalStyle } from "./global-style"
 import { PlaygroundLayout } from "./layout/playground-layout"
 import { PreviewArea, PreviewHeader, PreviewSubtitle, PreviewTitle } from "./layout/preview"

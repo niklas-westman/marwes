@@ -36,6 +36,7 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.required !== undefined) sliderOptions.required = options.required
   if (options.showTooltip !== undefined) sliderOptions.showTooltip = options.showTooltip
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
+  if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
   if (options.ariaLabel !== undefined) sliderOptions.ariaLabel = options.ariaLabel
   if (options.ariaLabelledBy !== undefined) sliderOptions.ariaLabelledBy = options.ariaLabelledBy
   if (options.ariaDescribedBy !== undefined) sliderOptions.ariaDescribedBy = options.ariaDescribedBy
@@ -61,6 +62,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     required,
     showTooltip,
     showTouchArea,
+    orientation,
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
@@ -99,6 +101,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
       required,
       showTooltip,
       showTouchArea,
+      orientation,
       ariaLabel,
       ariaLabelledBy,
       ariaDescribedBy,
@@ -124,12 +127,6 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
 
   return (
     <div className={className} style={style} {...kit.dataAttributes}>
-      {kit.showTooltip ? (
-        <span className="mw-slider__tooltip" aria-hidden="true">
-          {currentValue}
-        </span>
-      ) : null}
-
       <div className="mw-slider__control">
         <input
           {...inputProps}
@@ -146,6 +143,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
           aria-labelledby={kit.a11y.ariaLabelledBy}
           aria-describedby={kit.a11y.ariaDescribedBy}
           aria-valuetext={kit.a11y.ariaValueText}
+          aria-orientation={kit.a11y.ariaOrientation}
           className={kit.inputClassName}
           value={currentValue}
           onChange={handleChange}
@@ -157,6 +155,12 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
           <span className="mw-slider__touch-area" />
           <span className="mw-slider__thumb" />
         </div>
+
+        {kit.showTooltip ? (
+          <span className="mw-slider__tooltip" aria-hidden="true">
+            {currentValue}
+          </span>
+        ) : null}
       </div>
     </div>
   )

@@ -10,7 +10,11 @@ function readStoryFile(fileName: string): string {
 
 describe("Vue toast story taxonomy", () => {
   it("keeps atom story under Toast/Atom", () => {
-    expect(readStoryFile("toast.stories.ts")).toContain('title: "Toast/Atom"')
+    const story = readStoryFile("toast.stories.ts")
+
+    expect(story).toContain('title: "Toast/Atom"')
+    expect(story).toContain("mw-toast__action-button")
+    expect(story).toContain("background: #000000")
   })
 
   it("uses Molecule title for ToastContainer", () => {

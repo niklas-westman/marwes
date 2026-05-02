@@ -7,27 +7,29 @@
 :root,
 [data-marwes-theme] {
   /* ── Spacing scale ──────────────────────────────────────────────────────────
-     Named with t-shirt sizing. Use these instead of hardcoded px values.
-     xxxs → 2px  |  xxs → 4px  |  xs → 8px  |  sm → 16px  |  md → 24px
-     lg → 32px   |  xl → 40px  |  xxl → 48px | xxxl → 56px
-     4xl → 64px  |  5xl → 72px |  6xl → 80px  | 7xl → 88px
-     8xl → 96px  |  9xl → 104px | 10xl → 112px | 11xl → 120px
+     Named after the actual pixel values to stay aligned with Figma.
+     sp-0 → 0px | sp-2 → 2px | sp-4 → 4px | sp-8 → 8px | sp-16 → 16px
+     sp-24 → 24px | sp-32 → 32px | sp-40 → 40px | sp-48 → 48px
+     sp-56 → 56px | sp-64 → 64px | sp-72 → 72px | sp-80 → 80px
+     sp-88 → 88px | sp-96 → 96px | sp-104 → 104px | sp-112 → 112px
+     sp-120 → 120px
   */
-  --mw-spacing-xxxs: 2px;
-  --mw-spacing-xxs: 4px;
-  --mw-spacing-xs: 8px;
-  --mw-spacing-sm: 16px;
-  --mw-spacing-md: 24px;
-  --mw-spacing-lg: 32px;
-  --mw-spacing-xl: 40px;
-  --mw-spacing-xxl: 48px;
-  --mw-spacing-xxxl: 56px;
-  --mw-spacing-4xl: 64px;
-  --mw-spacing-5xl: 72px;
-  --mw-spacing-6xl: 80px;
-  --mw-spacing-7xl: 88px;
-  --mw-spacing-8xl: 96px;
-  --mw-spacing-9xl: 104px;
-  --mw-spacing-10xl: 112px;
-  --mw-spacing-11xl: 120px;
+  --mw-spacing-sp-0: 0px;
+  --mw-spacing-sp-2: 2px;
+  --mw-spacing-sp-4: 4px;
+  --mw-spacing-sp-8: 8px;
+  --mw-spacing-sp-16: 16px;
+  --mw-spacing-sp-24: 24px;
+  --mw-spacing-sp-32: 32px;
+  --mw-spacing-sp-40: 40px;
+  --mw-spacing-sp-48: 48px;
+  --mw-spacing-sp-56: 56px;
+  --mw-spacing-sp-64: 64px;
+  --mw-spacing-sp-72: 72px;
+  --mw-spacing-sp-80: 80px;
+  --mw-spacing-sp-88: 88px;
+  --mw-spacing-sp-96: 96px;
+  --mw-spacing-sp-104: 104px;
+  --mw-spacing-sp-112: 112px;
+  --mw-spacing-sp-120: 120px;
 }

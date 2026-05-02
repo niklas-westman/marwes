@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
+import { runCardContract } from "../../../../../../tests/contracts/card.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Card } from "../card"
+import { ProductCard, ProfileCard, StatCard } from "../variants"
 
 function renderWithProvider(
   component: unknown,
@@ -20,6 +22,34 @@ function renderWithProvider(
     }),
   )
 }
+
+runCardContract("vue", {
+  renderCard(args = {}) {
+    renderWithProvider(
+      Card,
+      {},
+      {
+        ...(args.title !== undefined ? { title: () => args.title } : {}),
+        default: () => args.body ?? "Card body.",
+      },
+    )
+  },
+  renderProductCard(args = {}) {
+    renderWithProvider(ProductCard, {}, { default: () => args.body ?? "Product body." })
+  },
+  renderProfileCard(args = {}) {
+    renderWithProvider(ProfileCard, {}, { default: () => args.body ?? "Profile body." })
+  },
+  renderStatCard(args = {}) {
+    renderWithProvider(StatCard, {}, { default: () => args.body ?? "Stat body." })
+  },
+  getCardElement() {
+    return document.querySelector(".mw-card")
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+})
 
 describe("Vue Card (Atom)", () => {
   it("renders the card shell with title and body content", () => {

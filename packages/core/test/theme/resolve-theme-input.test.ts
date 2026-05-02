@@ -2,12 +2,24 @@ import { describe, expect, it } from "vitest"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"
 
 describe("resolveThemeInput — defaults", () => {
-  it("light mode default: primary base is #141414", () => {
-    expect(resolveThemeInput({}).color.primary.base).toBe("#141414")
+  it("resolves default mode as light", () => {
+    expect(resolveThemeInput({}).mode).toBe("light")
   })
 
-  it("dark mode default: primary base is #FFFFFF", () => {
-    expect(resolveThemeInput({ mode: "dark" }).color.primary.base).toBe("#FFFFFF")
+  it("resolves dark mode", () => {
+    expect(resolveThemeInput({ mode: "dark" }).mode).toBe("dark")
+  })
+
+  it("light mode default: primary base is firstEdition brand blue", () => {
+    expect(resolveThemeInput({}).color.primary.base).toBe("#2F31FC")
+  })
+
+  it("dark mode default: primary base is firstEdition brand blue", () => {
+    expect(resolveThemeInput({ mode: "dark" }).color.primary.base).toBe("#2F31FC")
+  })
+
+  it("default primary label keeps firstEdition filled controls readable", () => {
+    expect(resolveThemeInput({}).color.primary.label).toBe("#FFFFFF")
   })
 
   it("default background is #FFFFFF (light)", () => {
@@ -24,6 +36,10 @@ describe("resolveThemeInput — defaults", () => {
 
   it("default font.primary contains Instrument Sans", () => {
     expect(resolveThemeInput({}).font.primary).toContain("Instrument Sans")
+  })
+
+  it("default success base is firstEdition green", () => {
+    expect(resolveThemeInput({}).color.success.base).toBe("#00875A")
   })
 
   it("default typography.h1.fontSize is 32", () => {

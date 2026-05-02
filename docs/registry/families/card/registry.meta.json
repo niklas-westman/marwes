@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for the stable card class, data-component marker, and custom data-attribute merging.",
       "Local React and Vue atom tests for title/body rendering and outer-element passthrough behavior.",
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Card is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family has core, adapter, and Storybook coverage, but it does not yet have a shared tests/contracts card contract file."
+      "Card completed a first-pass accessibility audit focused on shared contract maturity, passive-surface guidance, and honest title semantics.",
+      "The family now has a shared card contract and explicit docs about the title-as-span constraint plus the interactive-card anti-pattern."
     ]
   },
   "visuals": {

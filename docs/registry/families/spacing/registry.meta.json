@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Storybook introduction and taxonomy tests in both apps for the atom teaching surface and token-scale documentation.",
       "Repo-wide typecheck and build paths exercise the exported Spacing atom and Spacings constant in both adapters.",
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Spacing is still queued in Wave 3 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family currently has no dedicated core, adapter, or shared-contract test file; the strongest focused automation today is in Storybook docs and taxonomy coverage."
+      "Spacing completed a first-pass accessibility audit focused on decorative-only usage, layout-honesty guidance, and direct runtime contract coverage.",
+      "The family now has core recipe tests, a shared spacing contract, dedicated React/Vue adapter tests, and a documented Vue scale-prop parity fix."
     ]
   },
   "visuals": {
@@ -56,29 +56,29 @@
       ]
     },
     "preferredStates": [
-      "xxxs",
-      "xxs",
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "xxl",
-      "xxxl",
-      "4xl",
-      "5xl",
-      "6xl",
-      "7xl",
-      "8xl",
-      "9xl",
-      "10xl",
-      "11xl",
+      "sp-0",
+      "sp-2",
+      "sp-4",
+      "sp-8",
+      "sp-16",
+      "sp-24",
+      "sp-32",
+      "sp-40",
+      "sp-48",
+      "sp-56",
+      "sp-64",
+      "sp-72",
+      "sp-80",
+      "sp-88",
+      "sp-96",
+      "sp-104",
+      "sp-120",
       "scale-multiplier",
       "in-context"
     ]
   },
   "openQuestions": [
     "Should Spacing gain a dedicated runtime contract or adapter test file, or is docs-led coverage sufficient for a decorative family this small?",
-    "Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 17-size spacing scale, or is the current code-owned token source sufficient?"
+    "Should the local Figma sync eventually gain a dedicated spacing family or token page that maps directly to the shipped 18-size spacing scale, or is the current code-owned token source sufficient?"
   ]
 }

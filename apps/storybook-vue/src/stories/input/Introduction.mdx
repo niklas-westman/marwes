@@ -634,7 +634,7 @@ type BaseFieldProps = {
 }
 ```
 
-`SelectField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards select control props under `select`. Native browser select behavior is the default. Use `select.native={false}` to opt into the custom Marwes dropdown state from Figma node `1364:7701`. `TextareaField` does the same for multiline control props under `textarea`.
+`SelectField` uses the same outer props (`label`, `helperText`, `error`, `id`, `ariaDescribedBy`) but forwards select control props under `select`. The custom Marwes dropdown state from Figma node `1364:7701` is the default. Use `select.native={true}` to opt into browser select chrome. `TextareaField` does the same for multiline control props under `textarea`.
 
 `DropdownField` reuses the `SelectField` API, defaults `select.native` to `false`, and acts as the purpose-level wrapper for the custom Marwes dropdown presentation. Pass `select.native={true}` only when you intentionally want browser chrome instead.
 

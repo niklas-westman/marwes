@@ -22,21 +22,27 @@ describe("firstEdition select css contract", () => {
     expect(css).toContain("--mw-dropdown-list-surface")
     expect(css).toContain("--mw-dropdown-list-border")
     expect(css).toContain("--mw-dropdown-item-surface")
+    expect(css).toContain("--mw-dropdown-item-surface-hover")
+    expect(css).toContain("--mw-dropdown-item-surface-pressed")
     expect(css).toContain("--mw-dropdown-item-label")
     expect(css).toContain("--mw-dropdown-item-check")
   })
 
-  it("keeps selected dropdown options neutral while using compact menu spacing", () => {
+  it("keeps dropdown options compact while matching hover and pressed states", () => {
     const css = readFileSync(selectCssPath, "utf8")
 
-    expect(css).toContain("padding: var(--mw-spacing-xxs) 0;")
-    expect(css).toContain("padding: var(--mw-spacing-xs) var(--mw-spacing-sm);")
+    expect(css).toContain("padding: var(--mw-spacing-sp-4) 0;")
+    expect(css).toContain("padding: var(--mw-spacing-sp-8) var(--mw-spacing-sp-16);")
     expect(css).toContain("font-family: var(--mw-font-primary, inherit);")
     expect(css).toContain("font-size: 14px;")
     expect(css).toContain("line-height: 16px;")
     expect(css).toContain(
-      ".mw-select-field__option--active:not(.mw-select-field__option--selected)",
+      ".mw-select-field__option--active:not(.mw-select-field__option--disabled)",
     )
-    expect(css).toContain(".mw-select-field__option:hover:not(.mw-select-field__option--selected)")
+    expect(css).toContain(".mw-select-field__option:hover:not(.mw-select-field__option--disabled)")
+    expect(css).toContain("background-color: var(--mw-dropdown-item-surface-hover);")
+    expect(css).toContain(".mw-select-field__option:active:not(.mw-select-field__option--disabled)")
+    expect(css).toContain("background-color: var(--mw-dropdown-item-surface-pressed);")
+    expect(css).toContain("padding: 12px;")
   })
 })

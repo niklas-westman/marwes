@@ -35,7 +35,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--mw-spacing-xxs);
+  gap: var(--mw-spacing-sp-4);
 }
 
 .mw-tooltip-group__trigger {
@@ -47,7 +47,7 @@
   padding: 0;
   border: none;
   background: transparent;
-  color: #595959;
+  color: var(--mw-color-text-muted);
   cursor: help;
   transition: color 120ms ease, transform 120ms ease;
 }
@@ -108,5 +108,5 @@
 }
 
 .mw-theme--dark .mw-tooltip-group__trigger {
-  color: #a3a3a3;
+  color: var(--mw-color-text-muted);
 }

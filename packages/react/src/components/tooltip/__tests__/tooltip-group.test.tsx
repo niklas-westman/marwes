@@ -13,19 +13,27 @@ function renderWithProvider(ui: React.ReactElement) {
 
 runTooltipContract("react", {
   async renderTooltip(args = {}) {
-    renderWithProvider(<Tooltip id={args.id}>{args.children ?? "Helpful billing context"}</Tooltip>)
+    const tooltipProps = {
+      ...(args.id !== undefined ? { id: args.id } : {}),
+    }
+
+    renderWithProvider(
+      <Tooltip {...tooltipProps}>{args.children ?? "Helpful billing context"}</Tooltip>,
+    )
   },
   async renderTooltipGroup(args = {}) {
+    const tooltipGroupProps = {
+      content: args.content ?? "Helpful billing context",
+      ...(args.triggerLabel !== undefined ? { triggerLabel: args.triggerLabel } : {}),
+      ...(args.open !== undefined ? { open: args.open } : {}),
+      ...(args.defaultOpen !== undefined ? { defaultOpen: args.defaultOpen } : {}),
+      ...(args.onOpenChange !== undefined ? { onOpenChange: args.onOpenChange } : {}),
+      ...(args.tooltipId !== undefined ? { tooltipId: args.tooltipId } : {}),
+    }
+
     renderWithProvider(
       <>
-        <TooltipGroup
-          content={args.content ?? "Helpful billing context"}
-          triggerLabel={args.triggerLabel}
-          open={args.open}
-          defaultOpen={args.defaultOpen}
-          onOpenChange={args.onOpenChange}
-          tooltipId={args.tooltipId}
-        />
+        <TooltipGroup {...tooltipGroupProps} />
         <button type="button">Outside</button>
       </>,
     )

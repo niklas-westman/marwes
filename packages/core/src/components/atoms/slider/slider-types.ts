@@ -1,5 +1,7 @@
 import type { CssVars } from "../../../shared/css-vars"
 
+export type SliderOrientation = "horizontal" | "vertical"
+
 export interface SliderOptions {
   id?: string
   name?: string
@@ -12,6 +14,7 @@ export interface SliderOptions {
   required?: boolean
   showTooltip?: boolean
   showTouchArea?: boolean
+  orientation?: SliderOrientation
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
@@ -31,10 +34,12 @@ export interface SliderA11yProps {
   ariaLabelledBy?: string
   ariaDescribedBy?: string
   ariaValueText?: string
+  ariaOrientation?: SliderOrientation
 }
 
 export interface SliderDataAttributes {
   "data-component": "slider"
+  "data-orientation": SliderOrientation
   "data-show-tooltip"?: "true"
   "data-show-touch-area"?: "true"
 }
@@ -49,4 +54,5 @@ export interface SliderRenderKit {
   value: number
   showTooltip: boolean
   showTouchArea: boolean
+  orientation: SliderOrientation
 }

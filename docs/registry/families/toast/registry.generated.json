@@ -11,7 +11,7 @@
       "docs/reference/governance.md"
     ],
     "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
-    "audits": ["docs/audits/README.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/toast-family-accessibility.md"],
     "roadmap": [
       "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
@@ -101,7 +101,7 @@
       "packages/core/src/semantics/purpose-semantics.ts"
     ],
     "notes": [
-      "Toast needs base family identity normalized in core before protocol hardening is complete."
+      "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned."
     ]
   },
   "design": {
@@ -161,11 +161,11 @@
     "storybookReact": true,
     "storybookVue": true,
     "contractsPresent": true,
-    "auditDocPresent": false,
+    "auditDocPresent": true,
     "figmaReferencesPresent": true
   },
   "notes": [
-    "Toast needs base family identity normalized in core before protocol hardening is complete.",
+    "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned.",
     "Generated from docs/registry/families/toast/registry.meta.json and scripts/generate-component-registry.ts."
   ]
 }

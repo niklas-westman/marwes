@@ -33,15 +33,13 @@ React stories should teach the same baseline setup used in the package docs:
 ```tsx
 import type { Meta, StoryObj } from "@storybook/react"
 import { Button, MarwesProvider } from "@marwes-ui/react"
-import { firstEditionTheme } from "@marwes-ui/presets"
-import "@marwes-ui/presets/firstEdition/styles.css"
 
 const meta = {
   title: "Button/Button",
   component: Button,
   decorators: [
     (Story) => (
-      <MarwesProvider theme={firstEditionTheme}>
+      <MarwesProvider>
         <Story />
       </MarwesProvider>
     ),
@@ -63,9 +61,9 @@ export const Primary: Story = {
 
 The important contract is:
 
-- `firstEditionTheme` comes from `@marwes-ui/presets`
-- preset CSS comes from `@marwes-ui/presets/firstEdition/styles.css`
-- the provider uses `theme`, not `preset`
+- first edition preset CSS is loaded by `@marwes-ui/react`
+- `MarwesProvider` defaults to the first edition theme
+- the provider uses `theme` only for custom overrides, not for selecting a preset
 
 ## Story Structure
 

@@ -16,6 +16,11 @@ describe("React spinner introduction docs", () => {
       "ButtonSpinner",
       "EmptyStateSpinner",
       "Component Reference",
+      "Accessibility notes",
+      "decorative={false}",
+      "prefers-reduced-motion",
+      "slows from 800ms to 1600ms",
+      "Button loading",
     ]
 
     for (const value of expectedContent) {

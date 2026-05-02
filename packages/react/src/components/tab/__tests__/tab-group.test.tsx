@@ -12,27 +12,27 @@ function renderWithProvider(ui: React.ReactElement) {
 
 runTabContract("react", {
   async renderTabGroup(args = {}) {
-    renderWithProvider(
-      <TabGroup
-        label={args.label}
-        ariaLabel={args.ariaLabel}
-        tabs={
-          args.tabs ?? [
-            { value: "overview", label: "Overview", panel: "Overview panel" },
-            {
-              value: "analytics",
-              label: "Analytics",
-              panel: "Analytics panel",
-              disabled: true,
-            },
-            { value: "settings", label: "Settings", panel: "Settings panel" },
-          ]
-        }
-        defaultActiveTab={args.defaultActiveTab}
-        activeTab={args.activeTab}
-        onActiveTabChange={args.onActiveTabChange}
-      />,
-    )
+    const tabGroupProps = {
+      ...(args.label !== undefined ? { label: args.label } : {}),
+      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      tabs: args.tabs ?? [
+        { value: "overview", label: "Overview", panel: "Overview panel" },
+        {
+          value: "analytics",
+          label: "Analytics",
+          panel: "Analytics panel",
+          disabled: true,
+        },
+        { value: "settings", label: "Settings", panel: "Settings panel" },
+      ],
+      ...(args.defaultActiveTab !== undefined ? { defaultActiveTab: args.defaultActiveTab } : {}),
+      ...(args.activeTab !== undefined ? { activeTab: args.activeTab } : {}),
+      ...(args.onActiveTabChange !== undefined
+        ? { onActiveTabChange: args.onActiveTabChange }
+        : {}),
+    }
+
+    renderWithProvider(<TabGroup {...tabGroupProps} />)
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)

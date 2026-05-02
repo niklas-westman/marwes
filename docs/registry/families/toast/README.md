@@ -16,11 +16,11 @@
 | Field | Value |
 | --- | --- |
 | Family status | Shipped |
-| Audit status | Queued — later wave, no dedicated family audit doc yet |
+| Audit status | First pass complete |
 | Semantic coverage | Canonical — part of the wave-1 central semantic registry |
 | Generated structural truth | `registry.generated.json` + `artifacts/component-registry.json` |
 | Primary Figma nodes | toast component set `1365:11937`, light frame `1365:12526`, dark frame `2276:56938`, component container `1574:20451` |
-| Main AXE watch item | live-region urgency, auto-dismiss timing, and keeping neutral/brand primitives distinct from canonical purpose toasts |
+| Main AXE watch item | live-region urgency, timeout policy, and keeping neutral/brand primitives distinct from canonical purpose toasts |
 
 ## Registry ownership
 
@@ -44,7 +44,7 @@ This makes Toast a strong tenth registry family because it ties together:
 - one of the clearest canonical semantic families in the central registry
 - synced Figma refs that show the full light/dark toast matrix across semantic and primitive cases
 - adapter-owned delivery logic for stacking, placement, and auto-dismiss
-- shared React/Vue contract coverage for canonical purpose semantics
+- shared React/Vue contract coverage for raw toast semantics, purpose semantics, and delivery timing
 - Storybook guidance that clearly separates purpose toasts, raw primitives, and provider/container delivery
 
 ## Family surface map
@@ -52,7 +52,7 @@ This makes Toast a strong tenth registry family because it ties together:
 | Surface level | Main members | Why it matters |
 | --- | --- | --- |
 | Atom | `Toast` | low-level live-region surface with `variant`, `ariaLive`, and raw intent primitive support |
-| Molecule | `ToastContainer` | canonical stacked viewport with placement, max-visible trimming, and dismiss forwarding |
+| Molecule | `ToastContainer` | canonical stacked viewport with placement, max-visible trimming, dismiss forwarding, and pause-on-interaction auto-dismiss behavior |
 | Delivery layer | `ToastProvider`, `useToast` | adapter-owned imperative queue API for product workflows |
 | Purpose variants | `SuccessToast`, `ErrorToast`, `WarningToast`, `InfoToast` | thin semantic wrappers that attach canonical `data-purpose` and `data-intent` metadata |
 | Canonical product path | purpose wrappers plus `ToastContainer` or `ToastProvider` | recommended semantic-first and delivery-aware surface for product code |
@@ -225,31 +225,31 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 - **Keep delivery logic in the adapters.** `ToastContainer`, `ToastProvider`, and `useToast` are runtime orchestration layers that React and Vue own directly.
 - **Keep canonical semantics in core.** The base `data-component="toast"` contract and purpose vocabulary belong in the central semantic registry.
 - **Keep primitive intents explicit but secondary.** Neutral and brand primitives are useful raw-toast cases, but they should not be described as canonical purpose toasts.
+- **Keep inline actions legible and focusable.** The toast-local action treatment is underlined, lightweight text; use a real button or link with `mw-toast__action-button` when the action is interactive.
 
 ## AXE / accessibility posture
 
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | Medium | toast is less risky than modal widgets, but live-region urgency, timing, and dismissal behavior still affect accessibility quality |
-| Audit status | Queued | `docs/audits/README.md` lists Toast in Wave 2; no dedicated family audit doc exists yet |
-| Automated contract | Strong | shared purpose-toast contract plus local container/provider tests cover the main shipped behavior |
-| Manual review boundary | Medium | announcement timing, auto-dismiss expectations, and product-level action wording still need human judgment |
-| AXE follow-up | Active discipline | the family is still queued for a dedicated audit pass and broader accessibility support-model decisions |
+| Audit status | First pass complete | `docs/audits/toast-family-accessibility.md` |
+| Automated contract | Strong | the shared toast contract now covers raw semantics, purpose semantics, max-visible trimming, dismiss forwarding, provider timing, and pause-on-interaction behavior across React and Vue |
+| Manual review boundary | Medium | announcement timing, timeout choice, and product-level action wording still need human judgment |
+| AXE follow-up | Active discipline | the family first pass is complete; broader accessibility support-model and smoke-set decisions still apply |
 
 ### What automation already covers
 
+- raw `Toast` default `status`/`polite`/`aria-atomic` semantics plus assertive `alert` mapping through the shared React/Vue contract
 - canonical purpose-toast semantics for success, error, warning, and info
-- alert vs status role defaults through shared React/Vue contract coverage
-- stacked toast placement and dismiss forwarding in both adapters
-- provider-driven imperative toast delivery in both adapters
-- neutral and brand primitive intent forwarding through the container
-- Storybook introduction and taxonomy coverage in both apps
+- stacked toast max-visible trimming, primitive intent forwarding, and dismiss forwarding through shared contract coverage and local adapter tests
+- provider-driven imperative delivery, default 4000ms timing, `duration: null` persistence, and pause-on-hover/focus behavior in both adapters
+- Storybook introduction and taxonomy coverage in both apps with explicit timing and action-boundary guidance
 
 ### What still needs manual review or policy clarity
 
-- real browser and assistive-technology confirmation that `aria-live` timing and repeated toast delivery feel predictable
-- whether auto-dismiss durations need stronger accessibility guidance for product teams
-- whether raw action wording such as `Close` vs richer inline actions should have clearer policy guidance beyond current docs
+- real browser and assistive-technology confirmation that `aria-live` timing, interruption feel, and repeated toast delivery behave predictably
+- whether the default 4000ms duration is sufficient for real message length, localization length, and action complexity
+- whether product teams choose honest toast actions instead of turning toast into a mini-dialog or notification center
 
 ### Why the semantics are intentionally called canonical
 
@@ -263,8 +263,8 @@ That matters because:
 ### Current implementation hotspots
 
 - `packages/core/src/components/atoms/toast/toast-a11y.ts` is the main policy point for live-region role selection.
-- `packages/react/src/components/toast/toast-container.tsx` and `packages/vue/src/components/toast/toast-container.ts` are the key stacking, routing, and auto-dismiss surfaces.
-- `packages/react/src/components/toast/toast-provider.tsx` and `packages/vue/src/components/toast/toast-provider.ts` are the main imperative delivery boundaries.
+- `packages/react/src/components/toast/toast-container.tsx` and `packages/vue/src/components/toast/toast-container.ts` are the key stacking, routing, auto-dismiss, and pause-on-interaction surfaces.
+- `packages/react/src/components/toast/toast-provider.tsx` and `packages/vue/src/components/toast/toast-provider.ts` are the main imperative delivery boundaries and the source of the default 4000ms timing baseline.
 
 ## Semantics snapshot
 
@@ -288,7 +288,8 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Spec | `docs/reference/spec.md` | explicit toast atom, purpose-wrapper, and delivery-layer requirements |
 | AI metadata | `docs/reference/ai-metadata.md` | canonical toast family and purpose vocabulary |
 | Testing docs | `docs/reference/testing.md` | shared-contract expectations and manual-review framing |
-| Audit queue | `docs/audits/README.md` | Toast is currently queued in Wave 2 and has no dedicated family audit doc yet |
+| Audit | `docs/audits/toast-family-accessibility.md` | dedicated execution record for the Toast family |
+| Audit queue | `docs/audits/README.md` | Toast is first-pass complete in Wave 2 |
 | Core semantics | `packages/core/src/semantics/family-semantics.ts` | canonical family-level toast attributes |
 | Core semantics | `packages/core/src/semantics/purpose-semantics.ts` | success, error, warning, and info purpose metadata |
 | Core | `packages/core/src/components/atoms/toast/toast-types.ts` | public raw toast contract for variant and live-region options |
@@ -311,7 +312,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 | Stories | `apps/storybook-react/src/stories/toast/toast-matrix.stories.tsx` | runtime visual matrix aligned with Figma |
 | Stories | `apps/storybook-vue/src/stories/toast/Introduction.mdx` | canonical Vue teaching surface |
 | Stories | `apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts` | runtime visual matrix aligned with Figma in Vue |
-| Contracts | `tests/contracts/toast.contract.ts` | shared canonical purpose-toast semantics |
+| Contracts | `tests/contracts/toast.contract.ts` | shared raw-toast, purpose-toast, and delivery-behavior coverage |
 | Figma | `.figma/marwes/pages/-toast/README.md` | synced design page inventory |
 | Figma | `.figma/marwes/components/toast.json` | toast component-set structure |
 | Figma | `.figma/NODE_REFERENCE.md` | canonical toast node ids and token group summary |
@@ -321,6 +322,7 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 Focused commands for this family:
 
 ```bash
+pnpm --filter @marwes-ui/core exec vitest run test/recipes/toast.test.ts
 pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/toast/__tests__/toast-container.test.tsx src/components/toast/__tests__/variants.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/toast/__tests__/toast-container.test.ts src/components/toast/__tests__/variants.test.ts
@@ -342,11 +344,12 @@ pnpm storybook:consistency
 Current limitations of the PoC:
 - the toast registry is generator-backed, but the family source map is still maintained manually in `scripts/component-registry-sources.ts`
 - the family uses Storybook references and Mermaid diagrams for visual orientation rather than committed preview assets
-- there is no dedicated `docs/audits/toast-family-accessibility.md` file yet, so AXE posture currently points at the queue and shared support-model work rather than a finished family audit doc
+- the dedicated `docs/audits/toast-family-accessibility.md` file now records the first-pass timing and contract hardening work, but the canonical repo-level accessibility support model still does not exist yet
 - the synced Figma page teaches the single-toast surface very well, but it does not represent provider-driven stacking or auto-dismiss behavior directly
 - the current semantic registry intentionally covers canonical purpose toasts, while raw neutral and brand primitives remain atom-level escape hatches rather than purpose wrappers
 
 ## Open questions
 
-- Should Toast get stronger guidance or defaults around auto-dismiss duration for accessibility-sensitive flows?
+- Which Toast-family stories should join the first automated accessibility smoke set?
+- Should the provider default stay at 4000ms long term, or move toward a longer or intent-aware timeout policy once the canonical accessibility support model exists?
 - Should neutral and brand raw-toast primitives remain escape hatches only, or eventually gain a more explicit documented governance boundary?

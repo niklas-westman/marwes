@@ -10,6 +10,7 @@ const options = [
 
 const FIGMA_DROPDOWN_NODE = "1364:7701"
 const DEMO_WIDTH = "320px"
+const DEMO_MIN_HEIGHT = "188px"
 
 type DropdownFieldStoryArgs = React.ComponentProps<typeof DropdownField> & {
   native: boolean
@@ -19,7 +20,7 @@ function renderDropdownField(args: DropdownFieldStoryArgs) {
   const { native, select, ...fieldProps } = args
 
   return (
-    <div style={{ width: DEMO_WIDTH }}>
+    <div style={{ width: DEMO_WIDTH, minHeight: DEMO_MIN_HEIGHT }}>
       <DropdownField {...fieldProps} select={{ ...select, native }} />
     </div>
   )
@@ -88,7 +89,7 @@ export const Controlled: Story = {
     const { native, select, ...fieldProps } = args
 
     return (
-      <div style={{ width: DEMO_WIDTH }}>
+      <div style={{ width: DEMO_WIDTH, minHeight: DEMO_MIN_HEIGHT }}>
         <DropdownField
           {...fieldProps}
           select={{

@@ -106,8 +106,8 @@ Every family snapshot should try to include:
 | Card | Done | Family-local | Queued | clear passive-surface baseline with local purpose wrappers and strong visual-state teaching coverage |
 | Divider | Done | Family-local | Queued | strong semantic-separator baseline with shared contract coverage and clear horizontal-vs-vertical guidance |
 | Heading | Done | None | Queued | strong native-heading baseline with shared contract coverage, shared typography preset usage, and an explicit Figma typography-vs-scaffold clarification |
-| Checkbox | Done | None | Queued | strong native-checkbox baseline with atom and grouped shared contract coverage, field-helper-backed molecules, and explicit Figma atom-vs-field distinction |
-| Radio | Done | Family-local | Queued | strong native single-selection baseline with grouped field-helper wiring, thin purpose wrappers, and shared raw-atom contract coverage |
+| Checkbox | Done | None | First pass complete | strong native-checkbox baseline with atom, single-field, and grouped shared contract coverage, field-helper-backed molecules, and explicit Figma atom-vs-field distinction |
+| Radio | Done | Family-local | First pass complete | strong native single-selection baseline with grouped field-helper wiring, thin purpose wrappers, and shared raw-atom plus grouped-field contract coverage |
 | Paragraph | Done | None | Queued | strong native body-copy baseline with shared typography preset usage, shared contract coverage, and an explicit Figma typography-vs-runtime-size clarification |
 | Icon | Done | None | Queued | strong named-SVG baseline with shared decorative-vs-labelled contract coverage, gallery-led discovery, and an explicit Figma-vs-runtime inventory clarification |
 | Spacing | Done | Family-local | Queued | strong decorative layout-baseline family with explicit token vocabulary, local metadata, and an honest no-Figma-family clarification |
@@ -192,6 +192,8 @@ A registry family is in good shape when:
 - [ ] open questions are real and specific
 - [ ] `pnpm registry:check` passes
 - [ ] `pnpm docs:links` passes
+- [ ] `pnpm validate:family <family>` passes
+- [ ] `pnpm validate:family <family> --storybook` passes when the change affects stories, interactions, visual states, or accessibility-sensitive behavior
 
 ## Session handoff template
 
@@ -232,6 +234,11 @@ Use this at the end of a session so the next session can continue without redisc
 ## Quick commands
 
 ```bash
+pnpm validate:family <family>
+pnpm validate:family <family> --storybook
+pnpm validate:packages
+pnpm validate:docs
+pnpm validate:release
 pnpm registry:generate
 pnpm registry:check
 pnpm docs:links

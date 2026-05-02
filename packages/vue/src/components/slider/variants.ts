@@ -8,6 +8,7 @@ type SliderFieldPurposeProps = Omit<
 > & {
   label?: string
   slider?: SliderProps
+  orientation?: SliderProps["orientation"]
   minValueLabel?: string
   maxValueLabel?: string
 }
@@ -21,6 +22,7 @@ const sliderFieldPropKeys = [
   "ariaDescribedBy",
   "minValueLabel",
   "maxValueLabel",
+  "orientation",
   "showEdgeValues",
   "dataAttributes",
   "modelValue",
@@ -49,6 +51,7 @@ export const VolumeSlider = defineComponent({
             max: 100,
             step: 1,
             showTooltip: true,
+            ...(props.orientation !== undefined ? { orientation: props.orientation } : {}),
             ...props.slider,
           },
           dataAttributes: {
@@ -84,6 +87,7 @@ export const BrightnessSlider = defineComponent({
             max: 100,
             step: 1,
             showTooltip: true,
+            ...(props.orientation !== undefined ? { orientation: props.orientation } : {}),
             ...props.slider,
           },
           dataAttributes: {
@@ -119,6 +123,7 @@ export const RadiusSlider = defineComponent({
             max: 48,
             step: 2,
             showTooltip: true,
+            ...(props.orientation !== undefined ? { orientation: props.orientation } : {}),
             ...props.slider,
           },
           dataAttributes: {

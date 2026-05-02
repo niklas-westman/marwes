@@ -3,28 +3,28 @@
   z-index: 1000;
   display: grid;
   gap: 12px; /* off-scale — no token */
-  width: min(420px, calc(100vw - var(--mw-spacing-lg)));
+  width: min(420px, calc(100vw - var(--mw-spacing-sp-32)));
   pointer-events: none;
 }
 
 .mw-toast-container--top-right {
-  top: var(--mw-spacing-sm);
-  right: var(--mw-spacing-sm);
+  top: var(--mw-spacing-sp-16);
+  right: var(--mw-spacing-sp-16);
 }
 
 .mw-toast-container--top-left {
-  top: var(--mw-spacing-sm);
-  left: var(--mw-spacing-sm);
+  top: var(--mw-spacing-sp-16);
+  left: var(--mw-spacing-sp-16);
 }
 
 .mw-toast-container--bottom-right {
-  right: var(--mw-spacing-sm);
-  bottom: var(--mw-spacing-sm);
+  right: var(--mw-spacing-sp-16);
+  bottom: var(--mw-spacing-sp-16);
 }
 
 .mw-toast-container--bottom-left {
-  bottom: var(--mw-spacing-sm);
-  left: var(--mw-spacing-sm);
+  bottom: var(--mw-spacing-sp-16);
+  left: var(--mw-spacing-sp-16);
 }
 
 .mw-toast-container__item {

@@ -52,5 +52,36 @@ export function runSpinnerContract(adapterName: string, harness: SpinnerContract
       expect(spinnerElement).toHaveAttribute("data-size", "custom")
       expect(spinnerElement).toHaveStyle({ "--mw-spinner-size": "56px" })
     })
+
+    it("inner SVG is always aria-hidden and non-focusable so AT ignores the geometry", async () => {
+      await harness.renderSpinner({ ariaLabel: "Loading account data" })
+
+      const statusSpinner = harness.getByRole("status")
+      const innerSvg = statusSpinner.querySelector("svg")
+
+      expect(innerSvg).not.toBeNull()
+      expect(innerSvg).toHaveAttribute("aria-hidden", "true")
+      expect(innerSvg).toHaveAttribute("focusable", "false")
+    })
+
+    it("token size xs renders with correct data-size attribute", async () => {
+      await harness.renderSpinner({ size: "xs" })
+
+      expect(harness.getSpinnerElement()).toHaveAttribute("data-size", "xs")
+    })
+
+    it("token size lg renders with correct data-size attribute", async () => {
+      await harness.renderSpinner({ size: "lg" })
+
+      expect(harness.getSpinnerElement()).toHaveAttribute("data-size", "lg")
+    })
+
+    it("explicit decorative true keeps the spinner hidden from assistive technology", async () => {
+      await harness.renderSpinner({ decorative: true })
+
+      const spinner = harness.getSpinnerElement()
+      expect(spinner).toHaveAttribute("aria-hidden", "true")
+      expect(spinner).not.toHaveAttribute("role")
+    })
   })
 }

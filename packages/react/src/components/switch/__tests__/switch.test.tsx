@@ -13,28 +13,28 @@ function renderWithProvider(ui: React.ReactElement) {
 
 runSwitchContract("react", {
   async renderSwitch(args = {}) {
-    renderWithProvider(
-      <Switch
-        ariaLabel={args.ariaLabel}
-        checked={args.checked}
-        disabled={args.disabled}
-        onCheckedChange={args.onCheckedChange}
-      />,
-    )
+    const switchProps = {
+      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.checked !== undefined ? { checked: args.checked } : {}),
+      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.onCheckedChange !== undefined ? { onCheckedChange: args.onCheckedChange } : {}),
+    }
+
+    renderWithProvider(<Switch {...switchProps} />)
   },
   async renderSwitchField(args) {
-    renderWithProvider(
-      <SwitchField
-        label={args.label}
-        description={args.description}
-        error={args.error}
-        ariaDescribedBy={args.ariaDescribedBy}
-        switch={{
-          ...(args.checked !== undefined ? { checked: args.checked } : {}),
-          ...(args.onCheckedChange !== undefined ? { onCheckedChange: args.onCheckedChange } : {}),
-        }}
-      />,
-    )
+    const fieldProps = {
+      label: args.label,
+      ...(args.description !== undefined ? { description: args.description } : {}),
+      ...(args.error !== undefined ? { error: args.error } : {}),
+      ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
+      switch: {
+        ...(args.checked !== undefined ? { checked: args.checked } : {}),
+        ...(args.onCheckedChange !== undefined ? { onCheckedChange: args.onCheckedChange } : {}),
+      },
+    }
+
+    renderWithProvider(<SwitchField {...fieldProps} />)
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)

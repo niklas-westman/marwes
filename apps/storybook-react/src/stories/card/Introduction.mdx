@@ -30,7 +30,7 @@ import { ProductCard, ProfileCard, StatCard } from "@marwes-ui/react"
   Unlimited projects, advanced analytics, and priority support.
 </ProductCard>
 
-<ProfileCard title="Niklas Westman">
+<ProfileCard title="Alex Morgan">
   Design systems engineer with ownership of component primitives.
 </ProfileCard>
 
@@ -79,6 +79,36 @@ import { Card } from "@marwes-ui/react"
 - **Optional title header** - renders consistent header spacing when `title` is provided
 - **Composition-friendly body** - accepts any React content as children
 - **Purpose-ready wrapper** - supports `dataAttributes` so semantic variants can layer metadata
+
+## Accessibility notes
+
+**Card is a passive `<div>`.** The card shell has no implicit role, heading, or interactive
+semantics. Screen readers see it as a generic container. Meaning comes entirely from the
+content placed inside.
+
+**Card title is a styled `<span>`, not a heading.** Passing a string as `title` renders
+`<span class="mw-card__title">`. It does not update the document heading outline. If a
+card surface needs to be findable by heading navigation, provide a real heading element
+in the card body rather than relying on the `title` prop.
+
+**Interactive card pattern.** If a card must be clickable, wrap its content in an `<a>` or
+`<button>` rather than adding `onClick` directly to the `Card` surface. A plain `<div>`
+with a click handler is unreachable by keyboard users and invisible to assistive technology
+as an interactive control.
+
+```tsx
+// ❌ Click handler on a passive div — keyboard inaccessible
+<Card onClick={handleClick}>Project status</Card>
+
+// ✅ Anchor wraps the card content — keyboard and AT accessible
+<a href="/projects/123">
+  <Card>Project status</Card>
+</a>
+```
+
+**`aria-*` and native div props pass through.** You can apply `aria-label`, `aria-labelledby`,
+`role`, or other semantics directly to `Card` when product code needs to express richer meaning
+for a specific composition.
 
 ## Component Reference
 

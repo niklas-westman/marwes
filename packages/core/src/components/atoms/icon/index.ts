@@ -4,6 +4,7 @@ export type { IconName as IconNameType } from "./icon-names"
 
 export * from "./icon-scales"
 export * from "./icon-types"
+export * from "./icon-a11y"
 
 export type { IconPreset } from "./icon-preset"
 

@@ -1,18 +1,21 @@
-import { render, screen } from "@testing-library/vue"
-import { describe, expect, it } from "vitest"
-import { defineComponent, h } from "vue"
+import { fireEvent, render, screen } from "@testing-library/vue"
+import { describe, expect, it, vi } from "vitest"
+import { defineComponent, h, nextTick, onMounted } from "vue"
 import { runToastContract } from "../../../../../../tests/contracts/toast.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Toast } from "../toast"
+import { ToastContainer } from "../toast-container"
+import { ToastProvider, useToast } from "../toast-provider"
 import { ErrorToast, InfoToast, SuccessToast, WarningToast } from "../variants"
 
-function renderWithProvider(component: string, children: string) {
+function renderVariantWithProvider(component: unknown, children: string) {
   return render(
     defineComponent({
       setup() {
         return () =>
           h(MarwesProvider, null, {
             default: () =>
-              h(component, null, {
+              h(component as never, null, {
                 default: () => children,
               }),
           })
@@ -22,26 +25,151 @@ function renderWithProvider(component: string, children: string) {
 }
 
 runToastContract("vue", {
-  renderSuccess() {
-    renderWithProvider(SuccessToast as unknown as string, "Saved successfully.")
+  async renderRawToast(args) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(
+                  Toast as never,
+                  {
+                    ...(args?.ariaLive ? { ariaLive: args.ariaLive } : {}),
+                    ...(args?.dismissible ? { onDismiss: () => {} } : {}),
+                  },
+                  {
+                    default: () => args?.children ?? "Project saved.",
+                  },
+                ),
+            })
+        },
+      }),
+    )
+
+    await nextTick()
   },
-  renderError() {
-    renderWithProvider(ErrorToast as unknown as string, "Publishing failed.")
+  async renderSuccess() {
+    renderVariantWithProvider(SuccessToast, "Saved successfully.")
+    await nextTick()
   },
-  renderWarning() {
-    renderWithProvider(WarningToast as unknown as string, "Storage is almost full.")
+  async renderError() {
+    renderVariantWithProvider(ErrorToast, "Publishing failed.")
+    await nextTick()
   },
-  renderInfo() {
-    renderWithProvider(InfoToast as unknown as string, "New release notes are available.")
+  async renderWarning() {
+    renderVariantWithProvider(WarningToast, "Storage is almost full.")
+    await nextTick()
   },
-  getByRole(role) {
-    return screen.getByRole(role)
+  async renderInfo() {
+    renderVariantWithProvider(InfoToast, "New release notes are available.")
+    await nextTick()
+  },
+  async renderContainer(args) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(ToastContainer as never, {
+                  toasts: args.toasts.map((toast) => ({
+                    ...toast,
+                  })),
+                  ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
+                  ...(args.onDismiss ? { onDismiss: args.onDismiss } : {}),
+                }),
+            })
+        },
+      }),
+    )
+
+    await nextTick()
+  },
+  async renderProvider(args) {
+    const AutoShowToast = defineComponent({
+      setup() {
+        const toast = useToast()
+
+        onMounted(() => {
+          toast.show({
+            children: args.toast.children,
+            ...(args.toast.intent ? { intent: args.toast.intent } : {}),
+            ...(args.toast.duration !== undefined ? { duration: args.toast.duration } : {}),
+          })
+        })
+
+        return () => h("div", "Toast test harness")
+      },
+    })
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(
+                  ToastProvider as never,
+                  {
+                    ...(args.defaultDuration !== undefined
+                      ? { defaultDuration: args.defaultDuration }
+                      : {}),
+                  },
+                  {
+                    default: () => h(AutoShowToast),
+                  },
+                ),
+            })
+        },
+      }),
+    )
+
+    await nextTick()
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  queryByText(text) {
+    return screen.queryByText(text)
+  },
+  getContainerItemByText(text) {
+    const item = screen.getByText(text).closest(".mw-toast-container__item")
+
+    if (!item) {
+      throw new Error(`Toast container item not found for text: ${text}`)
+    }
+
+    return item as HTMLElement
+  },
+  click(element) {
+    return fireEvent.click(element)
+  },
+  hover(element) {
+    return fireEvent.mouseEnter(element)
+  },
+  unhover(element) {
+    return fireEvent.mouseLeave(element)
+  },
+  focus(element) {
+    return fireEvent.focusIn(element)
+  },
+  blur(element) {
+    return fireEvent.focusOut(element)
+  },
+  async advanceTime(ms) {
+    vi.advanceTimersByTime(ms)
+    await nextTick()
   },
 })
 
 describe("Vue SuccessToast", () => {
-  it("adds success metadata", () => {
-    renderWithProvider(SuccessToast as unknown as string, "Saved successfully.")
+  it("adds success metadata", async () => {
+    renderVariantWithProvider(SuccessToast, "Saved successfully.")
+    await nextTick()
 
     const toast = screen.getByRole("status")
     expect(toast.getAttribute("data-purpose")).toBe("success-toast")
@@ -51,8 +179,9 @@ describe("Vue SuccessToast", () => {
 })
 
 describe("Vue ErrorToast", () => {
-  it("uses alert semantics", () => {
-    renderWithProvider(ErrorToast as unknown as string, "Publishing failed.")
+  it("uses alert semantics", async () => {
+    renderVariantWithProvider(ErrorToast, "Publishing failed.")
+    await nextTick()
 
     const toast = screen.getByRole("alert")
     expect(toast.getAttribute("data-purpose")).toBe("error-toast")
@@ -62,8 +191,9 @@ describe("Vue ErrorToast", () => {
 })
 
 describe("Vue WarningToast", () => {
-  it("adds warning metadata", () => {
-    renderWithProvider(WarningToast as unknown as string, "Storage is almost full.")
+  it("adds warning metadata", async () => {
+    renderVariantWithProvider(WarningToast, "Storage is almost full.")
+    await nextTick()
 
     const toast = screen.getByRole("status")
     expect(toast.getAttribute("data-purpose")).toBe("warning-toast")
@@ -73,8 +203,9 @@ describe("Vue WarningToast", () => {
 })
 
 describe("Vue InfoToast", () => {
-  it("adds info metadata", () => {
-    renderWithProvider(InfoToast as unknown as string, "New release notes are available.")
+  it("adds info metadata", async () => {
+    renderVariantWithProvider(InfoToast, "New release notes are available.")
+    await nextTick()
 
     const toast = screen.getByRole("status")
     expect(toast.getAttribute("data-purpose")).toBe("info-toast")

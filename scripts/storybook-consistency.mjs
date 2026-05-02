@@ -565,11 +565,19 @@ function getHealthLabel(score) {
 async function main() {
   const repoRoot = process.cwd()
   const config = await loadStorybookCompanionConfig()
-  const families = getAvailableFamilies(repoRoot, config)
+  const familyArgIndex = process.argv.findIndex((arg) => arg === "--family")
+  const requestedFamily = familyArgIndex >= 0 ? process.argv[familyArgIndex + 1] : undefined
+  const families = requestedFamily ? [requestedFamily] : getAvailableFamilies(repoRoot, config)
 
   const results = []
 
   for (const family of families) {
+    if (isExcludedFamily(config, family)) {
+      console.error(`Family "${family}" is excluded from Storybook consistency checks`)
+      process.exitCode = 1
+      return
+    }
+
     const map = await buildFamilyMap(family, repoRoot)
     const warnings = collectCoverageWarnings(config, map)
     const summary = warnings.reduce(
@@ -599,6 +607,9 @@ async function main() {
   )
 
   console.log("Storybook consistency audit")
+  if (requestedFamily) {
+    console.log(`Family: ${requestedFamily}`)
+  }
   console.log(`Families scanned: ${results.length}`)
   console.log(`Healthy families: ${results.length - familiesWithFindings.length}`)
   console.log(`Families with findings: ${familiesWithFindings.length}`)

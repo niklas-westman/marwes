@@ -1015,7 +1015,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
   }),
   spacing: createRegistryFamilySource({
     family: "spacing",
-    contractPaths: [],
+    contractPaths: ["tests/contracts/spacing.contract.ts"],
     pathOverrides: {
       presetPaths: [
         "packages/presets/src/firstEdition/spacing.css",

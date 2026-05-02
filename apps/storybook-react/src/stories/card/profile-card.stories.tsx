@@ -14,7 +14,7 @@ type Story = StoryObj<typeof ProfileCard>
 
 export const Default: Story = {
   args: {
-    title: "Niklas Westman",
+    title: "Alex Morgan",
     children: "Design systems engineer with ownership of component primitives.",
   },
 }

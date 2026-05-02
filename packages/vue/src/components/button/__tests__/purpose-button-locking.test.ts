@@ -119,12 +119,13 @@ describe("Vue purpose button locking", () => {
     expect(submitButton).toHaveAttribute("data-action", "submit")
     expect(submitButton).toHaveAttribute("data-variant", "primary")
 
-    const linkButton = screen.getByRole("button", { name: /go to dashboard/i })
+    const linkButton = screen.getByRole("link", { name: /go to dashboard/i })
     expect(linkButton.tagName).toBe("A")
     expect(linkButton).not.toHaveAttribute("as")
     expect(linkButton).not.toHaveAttribute("variant")
     expect(linkButton).not.toHaveAttribute("action")
     expect(linkButton).toHaveAttribute("href", "/dashboard")
+    expect(linkButton).not.toHaveAttribute("role")
     expect(linkButton).toHaveAttribute("data-action", "navigate")
     expect(linkButton).toHaveAttribute("data-variant", "text")
 

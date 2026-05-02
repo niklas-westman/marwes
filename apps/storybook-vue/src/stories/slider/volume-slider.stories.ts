@@ -29,3 +29,22 @@ export const Default: Story = {
     `,
   }),
 }
+
+export const Vertical: Story = {
+  render: () => ({
+    components: { VolumeSlider },
+    setup() {
+      const value = ref(45)
+      return { value }
+    },
+    template: `
+      <div style="height: 280px; display: flex; align-items: center;">
+        <VolumeSlider
+          orientation="vertical"
+          description="Adjust the current output level for media playback."
+          :slider="{ value, onValueChange: (nextValue) => (value = nextValue) }"
+        />
+      </div>
+    `,
+  }),
+}

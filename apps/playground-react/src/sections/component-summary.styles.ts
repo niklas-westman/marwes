@@ -1,10 +1,11 @@
+import { mwThemeVars } from "@marwes-ui/react"
 import styled from "styled-components"
 
 const PreviewGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 48px;
+  gap: ${mwThemeVars.spacing.sp16};
+  margin-bottom: ${mwThemeVars.spacing.sp48};
 `
 
 interface PreviewCellProps {
@@ -13,10 +14,10 @@ interface PreviewCellProps {
 }
 
 const PreviewCell = styled.div<PreviewCellProps>`
-  background: var(--mw-color-surface, #fff);
+  background: ${mwThemeVars.color.surface};
   border: 1px solid color-mix(in srgb, var(--mw-color-text, #111) 12%, transparent);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: calc(${mwThemeVars.ui.radius} * 3);
+  padding: ${mwThemeVars.spacing.sp16};
   grid-column: ${({ $col }) => $col ?? "auto"};
   grid-row: ${({ $row }) => $row ?? "auto"};
   min-width: 0;
@@ -27,7 +28,7 @@ const PreviewCellLabel = styled.p`
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--mw-color-text);
+  color: ${mwThemeVars.color.text};
   opacity: 0.4;
   margin: 0 0 12px;
 `

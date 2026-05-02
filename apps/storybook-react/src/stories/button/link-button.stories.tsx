@@ -1,5 +1,4 @@
 import {
-  IconName,
   storybookButtonPurposeArgTypes,
   storybookDocsDescription,
   storybookLayout,
@@ -23,7 +22,6 @@ export default meta
 export const LinkExample: StoryObj<typeof LinkButton> = {
   args: {
     children: "Go here",
-    iconRight: IconName.ArrowRight,
   },
   parameters: {
     docs: {

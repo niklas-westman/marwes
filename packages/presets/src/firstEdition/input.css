@@ -63,19 +63,6 @@
   color: var(--mw-color-text-disabled);
 }
 
-/* Dark mode disabled state */
-/* @media (prefers-color-scheme: dark) {
-  .mw-input:disabled {
-    background: #3E3E3E;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .mw-input:disabled {
-    opacity: 0.4;
-  }
-} */
-
 /* ============================================
    DARK MODE OVERRIDES
    ============================================ */

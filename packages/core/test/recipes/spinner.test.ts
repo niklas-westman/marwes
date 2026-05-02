@@ -32,7 +32,20 @@ describe("createSpinnerRecipe", () => {
     expect(crossSpinner.svg.nodes).toHaveLength(4)
   })
 
-  it("supports token and custom pixel sizes", () => {
+  it("insets cross segments so the boxes have internal spacing", () => {
+    const crossSpinner = createSpinnerRecipe({ variant: "cross" })
+
+    expect(crossSpinner.svg.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ attrs: expect.objectContaining({ x: "10.25", y: "1.5" }) }),
+        expect.objectContaining({ attrs: expect.objectContaining({ x: "15.5", y: "10.25" }) }),
+        expect.objectContaining({ attrs: expect.objectContaining({ x: "10.25", y: "15.5" }) }),
+        expect.objectContaining({ attrs: expect.objectContaining({ x: "1.5", y: "10.25" }) }),
+      ]),
+    )
+  })
+
+  it("supports spinner scale tokens and explicit pixel sizes", () => {
     expect(createSpinnerRecipe({ size: "xs" }).vars["--mw-spinner-size"]).toBe("16px")
     expect(createSpinnerRecipe({ size: "md" }).vars["--mw-spinner-size"]).toBe("32px")
     expect(createSpinnerRecipe({ size: "lg" }).vars["--mw-spinner-size"]).toBe("40px")

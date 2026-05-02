@@ -6,7 +6,7 @@ describe("createSliderRecipe", () => {
     const kit = createSliderRecipe()
 
     expect(kit.tag).toBe("div")
-    expect(kit.className).toBe("mw-slider")
+    expect(kit.className).toBe("mw-slider mw-slider--horizontal")
     expect(kit.inputClassName).toBe("mw-slider__native")
     expect(kit.a11y.type).toBe("range")
     expect(kit.a11y.min).toBe(0)
@@ -14,6 +14,8 @@ describe("createSliderRecipe", () => {
     expect(kit.a11y.step).toBe(1)
     expect(kit.value).toBe(50)
     expect(kit.dataAttributes["data-component"]).toBe("slider")
+    expect(kit.dataAttributes["data-orientation"]).toBe("horizontal")
+    expect(kit.orientation).toBe("horizontal")
     expect(kit.vars["--mw-slider-fill-percentage"]).toBe("50%")
   })
 
@@ -45,7 +47,9 @@ describe("createSliderRecipe", () => {
   it("supports tooltip and touch area display flags", () => {
     const kit = createSliderRecipe({ showTooltip: true, showTouchArea: true })
 
-    expect(kit.className).toBe("mw-slider mw-slider--with-tooltip mw-slider--with-touch-area")
+    expect(kit.className).toBe(
+      "mw-slider mw-slider--horizontal mw-slider--with-tooltip mw-slider--with-touch-area",
+    )
     expect(kit.showTooltip).toBe(true)
     expect(kit.showTouchArea).toBe(true)
     expect(kit.dataAttributes["data-show-tooltip"]).toBe("true")
@@ -64,7 +68,7 @@ describe("createSliderRecipe", () => {
       ariaValueText: "60 percent",
     })
 
-    expect(kit.className).toBe("mw-slider mw-slider--disabled")
+    expect(kit.className).toBe("mw-slider mw-slider--horizontal mw-slider--disabled")
     expect(kit.a11y.id).toBe("slider-volume")
     expect(kit.a11y.name).toBe("volume")
     expect(kit.a11y.disabled).toBe(true)
@@ -73,5 +77,14 @@ describe("createSliderRecipe", () => {
     expect(kit.a11y.ariaLabelledBy).toBe("volume-label")
     expect(kit.a11y.ariaDescribedBy).toBe("volume-help")
     expect(kit.a11y.ariaValueText).toBe("60 percent")
+  })
+
+  it("supports vertical orientation metadata", () => {
+    const kit = createSliderRecipe({ orientation: "vertical" })
+
+    expect(kit.className).toBe("mw-slider mw-slider--vertical")
+    expect(kit.a11y.ariaOrientation).toBe("vertical")
+    expect(kit.dataAttributes["data-orientation"]).toBe("vertical")
+    expect(kit.orientation).toBe("vertical")
   })
 })

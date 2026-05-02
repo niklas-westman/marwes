@@ -19,41 +19,45 @@ function renderAccordion(props: Partial<AccordionProps> = {}) {
 
 runAccordionContract("react", {
   async renderAccordion(args = {}) {
+    const accordionProps: AccordionProps = {
+      title: args.title ?? "Shipping details",
+      children: "Panel content",
+      ...(args.open !== undefined ? { open: args.open } : {}),
+      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.onToggle !== undefined ? { onToggle: args.onToggle } : {}),
+    }
+
     render(
       <MarwesProvider>
-        <Accordion
-          title={args.title ?? "Shipping details"}
-          open={args.open}
-          disabled={args.disabled}
-          onToggle={args.onToggle}
-        >
-          Panel content
-        </Accordion>
+        <Accordion {...accordionProps} />
       </MarwesProvider>,
     )
   },
   async renderAccordionField(args) {
+    const accordionFieldProps = {
+      label: args.label,
+      ...(args.description !== undefined ? { description: args.description } : {}),
+      ...(args.error !== undefined ? { error: args.error } : {}),
+      ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
+      items:
+        args.items?.map((item) => ({
+          value: item.value,
+          title: item.title,
+          content: item.content,
+          ...(item.disabled !== undefined ? { disabled: item.disabled } : {}),
+        })) ?? [],
+      ...(args.multiple !== undefined ? { multiple: args.multiple } : {}),
+      ...(args.defaultOpenItems !== undefined ? { defaultOpenItems: args.defaultOpenItems } : {}),
+      ...(args.openItems !== undefined ? { openItems: args.openItems } : {}),
+      ...(args.onOpenItemsChange !== undefined
+        ? { onOpenItemsChange: args.onOpenItemsChange }
+        : {}),
+      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+    }
+
     render(
       <MarwesProvider>
-        <AccordionField
-          label={args.label}
-          description={args.description}
-          error={args.error}
-          ariaDescribedBy={args.ariaDescribedBy}
-          items={
-            args.items?.map((item) => ({
-              value: item.value,
-              title: item.title,
-              content: item.content,
-              disabled: item.disabled,
-            })) ?? []
-          }
-          multiple={args.multiple}
-          defaultOpenItems={args.defaultOpenItems}
-          openItems={args.openItems}
-          onOpenItemsChange={args.onOpenItemsChange}
-          disabled={args.disabled}
-        />
+        <AccordionField {...accordionFieldProps} />
       </MarwesProvider>,
     )
   },

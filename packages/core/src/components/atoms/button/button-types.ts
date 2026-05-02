@@ -55,7 +55,7 @@ export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
  * @property submit - Form submissions. Automatically sets `type="submit"`. Recommended icon: `IconName.Check`
  * @property reset - Form resets. Recommended icon: `IconName.RotateLeft`
  * @property button - Generic button action (default for `<button>` elements)
- * @property navigate - Navigation/routing actions. Used with `<a>` elements. Recommended icon: `IconName.ArrowRight`
+ * @property navigate - Navigation/routing actions. Used with `<a>` elements and native link semantics. Recommended icon: `IconName.ArrowRight`
  * @property delete - Destructive operations (delete, remove). Should trigger confirmation. Recommended icon: `IconName.Trash` or `IconName.Minus`
  * @property create - Creation actions (add, new). Recommended icon: `IconName.Plus`
  * @property edit - Edit/modify actions. Recommended icon: `IconName.Edit`
@@ -147,7 +147,7 @@ export type ButtonA11yProps = {
 
   // <a>
   href?: string
-  role?: "button"
+  role?: "link"
   tabIndex?: 0 | -1
 }
 

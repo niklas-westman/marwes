@@ -71,9 +71,31 @@ import { Avatar, AvatarBadge, AvatarGroup } from "@marwes-ui/react"
 - `PresenceAvatar` sets `data-purpose="presence"`
 - `TeamAvatarGroup` sets `data-purpose="team"`
 - `initials` are normalized to two uppercase characters
-- `alt` labels image avatars, while non-image avatars use `ariaLabel`
+- `alt` labels image avatars; `ariaLabel` also works as an alt-text fallback for image avatars
+- non-image avatars use `ariaLabel`, or normalized initials, or fall back to `"Avatar"`
+- `AvatarGroup` defaults the group label to `"Avatar group"` when no `ariaLabel` is provided
 - `decorative` hides Avatar and AvatarBadge from assistive technology when nearby text
   already identifies the person
+
+## Accessibility notes
+
+**Image avatars need a name.** An image avatar rendered without `alt` and without `ariaLabel`
+produces `<img alt="">`, which silently hides the person from assistive technology. Always
+provide `alt` (preferred) or `ariaLabel` when the image communicates a person's identity.
+Marwes emits a development warning when an image avatar has neither.
+
+**Group label.** `AvatarGroup` uses a `<fieldset>` as its semantic group wrapper. Always
+provide `ariaLabel` that describes the group in context, such as `"Project members"` or
+`"Online teammates"`. The default `"Avatar group"` label is a safe fallback but rarely
+context-rich enough for real product layouts.
+
+**Overflow counter.** The overflow counter exposes a `role="img"` element with a label
+such as `"3 more people"`. Provide a custom `overflowLabel` when the default wording does
+not fit the product context.
+
+**Decorative usage.** Use `decorative` only when nearby text already identifies the person
+and the avatar is purely visual reinforcement. Do not use `decorative` on an identity surface
+that carries information the user would not otherwise have.
 
 ## Component Reference
 

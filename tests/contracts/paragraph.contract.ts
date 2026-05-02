@@ -13,13 +13,14 @@ export type ParagraphContractHarness = {
 
 export function runParagraphContract(adapterName: string, harness: ParagraphContractHarness): void {
   describe(`Paragraph contract: ${adapterName}`, () => {
-    it("renders a paragraph with default styling", async () => {
+    it("renders a native paragraph with default styling and no family-local metadata", async () => {
       await harness.renderParagraph({ text: "Paragraph content" })
 
       const paragraphElement = harness.getByText("Paragraph content")
       expect(paragraphElement.tagName).toBe("P")
       expect(paragraphElement.className).toContain("mw-p")
       expect(paragraphElement.className).toContain("mw-p--md")
+      expect(paragraphElement).not.toHaveAttribute("data-component")
     })
 
     it("supports size variants and id metadata", async () => {

@@ -1,9 +1,11 @@
 import type { ResolvedTheme } from "@marwes-ui/core"
+import { resolveThemeInput } from "@marwes-ui/core"
 import { render } from "@testing-library/vue"
 import { afterEach, describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
 import { MarwesProvider } from "../marwes-provider"
 import { resetThemeRuntimeState } from "../runtime-theme"
+import { themeToRootStyle } from "../runtime-theme"
 import { useTheme } from "../use-theme"
 
 function ThemeConsumer({ onTheme }: { onTheme: (theme: ResolvedTheme) => void }) {
@@ -38,6 +40,22 @@ describe("MarwesProvider — root element", () => {
 
     const rootElement = container.firstElementChild as HTMLElement
     expect(rootElement.style.getPropertyValue("--mw-color-primary-base")).not.toBe("")
+  })
+
+  it("builds root styles for first render theme CSS vars", () => {
+    const style = themeToRootStyle(
+      resolveThemeInput({
+        color: { primary: "#AA33FF", background: "#101418", text: "#F4F7FA" },
+        font: { primary: "Test Primary, system-ui, sans-serif" },
+        ui: { radius: 12 },
+      }),
+    )
+
+    expect(style["--mw-color-primary-base"]).toBe("#AA33FF")
+    expect(style["--mw-font-primary"]).toBe("Test Primary, system-ui, sans-serif")
+    expect(style["--mw-ui-radius"]).toBe("12px")
+    expect(style.backgroundColor).toBe("#101418")
+    expect(style.color).toBe("#F4F7FA")
   })
 
   it("applies mw-theme--light class by default", () => {
@@ -88,8 +106,38 @@ describe("MarwesProvider — context", () => {
     )
 
     expect(capturedThemes.length).toBeGreaterThan(0)
-    expect(capturedThemes[0]?.color.primary.base).toBeDefined()
-    expect(capturedThemes[0]?.color.primary.label).toBeDefined()
+    expect(capturedThemes[0]?.mode).toBe("light")
+    expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
+    expect(capturedThemes[0]?.color.primary.label).toBe("#FFFFFF")
+  })
+
+  it("provides dark mode ResolvedTheme when mode is dark", () => {
+    const capturedThemes: ResolvedTheme[] = []
+
+    const ConsumerComponent = ThemeConsumer({
+      onTheme(theme) {
+        capturedThemes.push(theme)
+      },
+    })
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { theme: { mode: "dark" } },
+              {
+                default: () => h(ConsumerComponent),
+              },
+            )
+        },
+      }),
+    )
+
+    expect(capturedThemes.length).toBeGreaterThan(0)
+    expect(capturedThemes[0]?.mode).toBe("dark")
+    expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
   })
 })
 
@@ -135,5 +183,39 @@ describe("MarwesProvider — Google Fonts loading", () => {
     })
 
     expect(findFontLinks()).toHaveLength(0)
+  })
+
+  it("does not inject Google Fonts links for brand placeholders", () => {
+    render(MarwesProvider, {
+      props: {
+        theme: { font: { primary: "Brand Sans, system-ui, sans-serif" } },
+      },
+      slots: {
+        default: () => h("div"),
+      },
+    })
+
+    expect(findFontLinks()).toHaveLength(0)
+  })
+
+  it("supports an allowlist when custom and Google fonts are mixed", () => {
+    render(MarwesProvider, {
+      props: {
+        fontLoading: { googleFamilies: ["Lora"] },
+        theme: {
+          font: {
+            primary: "Brand Sans, system-ui, sans-serif",
+            secondary: "Lora, Georgia, serif",
+          },
+        },
+      },
+      slots: {
+        default: () => h("div"),
+      },
+    })
+
+    const hrefs = findFontLinks().map((linkElement) => linkElement.href)
+    expect(hrefs).toHaveLength(1)
+    expect(hrefs[0]).toContain("Lora")
   })
 })

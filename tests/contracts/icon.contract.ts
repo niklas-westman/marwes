@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 
 export type IconSize = "xs" | "sm" | "md" | "lg" | number
 export type IconStrokeWidth = "xs" | "sm" | "md" | "lg" | number
@@ -6,6 +6,7 @@ export type IconStrokeWidth = "xs" | "sm" | "md" | "lg" | number
 export type IconContractHarness = {
   renderIcon(args?: {
     ariaLabel?: string
+    decorative?: boolean
     size?: IconSize
     strokeWidth?: IconStrokeWidth
   }): Promise<void> | void
@@ -22,7 +23,21 @@ export function runIconContract(adapterName: string, harness: IconContractHarnes
       const iconElement = harness.querySvg()
       expect(iconElement).not.toBeNull()
       expect(iconElement).toHaveAttribute("aria-hidden", "true")
+      expect(iconElement).not.toHaveAttribute("data-component")
       expect(harness.queryByRole("img")).toBeNull()
+    })
+
+    it("keeps decorative fallback when decorative=false is passed without a label", async () => {
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+      await harness.renderIcon({ decorative: false })
+
+      const iconElement = harness.querySvg()
+      expect(iconElement).not.toBeNull()
+      expect(iconElement).toHaveAttribute("aria-hidden", "true")
+      expect(harness.queryByRole("img")).toBeNull()
+
+      warnSpy.mockRestore()
     })
 
     it("exposes non-decorative icon semantics and size tokens", async () => {

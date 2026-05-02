@@ -3,7 +3,7 @@
  * - Renders semantic <hr> using the core divider recipe.
  * - Supports 7 size variants: xxs/xs/sm/md/lg/xl/xxl.
  * - Supports horizontal and vertical orientation.
- * - Figma reference: node-id=1-932
+ * - Figma reference: component 1574:21053
  */
 
 import { createDividerRecipe } from "@marwes-ui/core"

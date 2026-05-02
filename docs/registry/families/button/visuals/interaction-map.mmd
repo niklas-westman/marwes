@@ -4,7 +4,7 @@ flowchart LR
   Props --> Semantics["purpose wrapper metadata"]
 
   CoreA11y --> Native["button tag\ntype submit/reset/button\ndisabled when applicable"]
-  CoreA11y --> Anchor["a tag\nrole=button\nhref when enabled"]
+  CoreA11y --> Anchor["a tag\nnative link semantics when enabled\nrole=link when href is inactive"]
 
   Loading --> Busy["aria-busy=true"]
   Loading --> Disabled["disableWhileLoading -> aria-disabled / disabled"]

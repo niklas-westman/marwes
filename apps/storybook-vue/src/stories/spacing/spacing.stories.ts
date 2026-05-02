@@ -20,7 +20,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: storybookSpacingArgTypes,
   args: {
-    size: "md",
+    size: "sp-24",
   },
   render: (args: SpacingProps) => ({
     components: { Spacing },
@@ -41,46 +41,47 @@ type Story = StoryObj<SpacingProps>
 export const Default: Story = {}
 
 export const ExtraSmall: Story = {
-  args: { size: "xs" },
+  args: { size: "sp-8" },
 }
 
 export const Small: Story = {
-  args: { size: "sm" },
+  args: { size: "sp-16" },
 }
 
 export const Large: Story = {
-  args: { size: "lg" },
+  args: { size: "sp-32" },
 }
 
 export const ExtraLarge: Story = {
-  args: { size: "xl" },
+  args: { size: "sp-40" },
 }
 
 /**
- * All 9 size variants from smallest (xxxs=2px) to largest (xxxl=56px).
+ * Full spacing scale from sp-0 to sp-120.
  */
 export const AllSizes: Story = {
   render: () => ({
     components: { Spacing, Paragraph },
     setup() {
       const sizes = [
-        { size: "xxxs", pixels: "2px" },
-        { size: "xxs", pixels: "4px" },
-        { size: "xs", pixels: "8px" },
-        { size: "sm", pixels: "16px" },
-        { size: "md", pixels: "24px" },
-        { size: "lg", pixels: "32px" },
-        { size: "xl", pixels: "40px" },
-        { size: "xxl", pixels: "48px" },
-        { size: "xxxl", pixels: "56px" },
-        { size: "4xl", pixels: "64px" },
-        { size: "5xl", pixels: "72px" },
-        { size: "6xl", pixels: "80px" },
-        { size: "7xl", pixels: "88px" },
-        { size: "8xl", pixels: "96px" },
-        { size: "9xl", pixels: "104px" },
-        { size: "10xl", pixels: "112px" },
-        { size: "11xl", pixels: "120px" },
+        { size: "sp-0", pixels: "0px" },
+        { size: "sp-2", pixels: "2px" },
+        { size: "sp-4", pixels: "4px" },
+        { size: "sp-8", pixels: "8px" },
+        { size: "sp-16", pixels: "16px" },
+        { size: "sp-24", pixels: "24px" },
+        { size: "sp-32", pixels: "32px" },
+        { size: "sp-40", pixels: "40px" },
+        { size: "sp-48", pixels: "48px" },
+        { size: "sp-56", pixels: "56px" },
+        { size: "sp-64", pixels: "64px" },
+        { size: "sp-72", pixels: "72px" },
+        { size: "sp-80", pixels: "80px" },
+        { size: "sp-88", pixels: "88px" },
+        { size: "sp-96", pixels: "96px" },
+        { size: "sp-104", pixels: "104px" },
+        { size: "sp-112", pixels: "112px" },
+        { size: "sp-120", pixels: "120px" },
       ]
       return { sizes, spacerWrapStyle }
     },
@@ -109,7 +110,7 @@ export const InContext: Story = {
     template: `
       <div style="max-width: 600px;">
         <H1>This is a title</H1>
-        <Spacing :size="Spacings.md" />
+        <Spacing :size="Spacings['sp-24']" />
         <Paragraph>This is a paragraph</Paragraph>
       </div>
     `,

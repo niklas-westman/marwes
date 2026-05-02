@@ -60,7 +60,7 @@ export const familySemanticsRegistry = {
     canonicalAttributes: ["data-component", "data-variant", "data-intent"],
     allowedPurposes: ["success-toast", "error-toast", "warning-toast", "info-toast"],
     notes:
-      "Toast needs base family identity normalized in core before protocol hardening is complete.",
+      "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned.",
   },
   dialog: {
     family: "dialog",

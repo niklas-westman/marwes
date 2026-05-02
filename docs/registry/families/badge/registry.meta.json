@@ -24,7 +24,7 @@
   },
   "axe": {
     "riskTier": "low",
-    "auditStatus": "queued",
+    "auditStatus": "first-pass-complete",
     "automationCovers": [
       "Core recipe tests for default neutral behavior, variant classes, and ariaLabel passthrough.",
       "Shared badge contract coverage across React and Vue for canonical purpose semantics.",
@@ -40,8 +40,8 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "notes": [
-      "Badge is still queued in Wave 2 of the audit plan and does not yet have a dedicated family audit doc.",
-      "The family already has strong shared-contract and adapter-level coverage despite the missing dedicated audit write-up."
+      "Badge completed a first-pass accessibility audit focused on ariaLabel DOM delivery, BadgeGroup cross-adapter contract, and numeric badge guidance.",
+      "The family now has a shared BadgeGroup contract and expanded badge contract plus a documented parity gap in the BadgeGroup label prop type."
     ]
   },
   "visuals": {

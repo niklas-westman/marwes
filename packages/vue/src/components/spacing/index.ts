@@ -1,2 +1,2 @@
-export { Spacing } from "./spacing"
-export type { SpacingProps } from "./spacing"
+export { Spacing, Spacer } from "./spacing"
+export type { SpacerProps, SpacingProps } from "./spacing"
