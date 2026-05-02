@@ -1,12 +1,13 @@
 import type { ResolvedTheme } from "@marwes-ui/core"
 import { resolveThemeInput } from "@marwes-ui/core"
-import { render } from "@testing-library/vue"
-import { afterEach, describe, expect, it } from "vitest"
+import { fireEvent, render, screen } from "@testing-library/vue"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { MarwesProvider } from "../marwes-provider"
 import { resetThemeRuntimeState } from "../runtime-theme"
 import { themeToRootStyle } from "../runtime-theme"
 import { useTheme } from "../use-theme"
+import { useThemeMode } from "../use-theme-mode"
 
 function ThemeConsumer({ onTheme }: { onTheme: (theme: ResolvedTheme) => void }) {
   return defineComponent({
@@ -18,6 +19,22 @@ function ThemeConsumer({ onTheme }: { onTheme: (theme: ResolvedTheme) => void })
     },
   })
 }
+
+const ThemeModeConsumer = defineComponent({
+  name: "ThemeModeConsumer",
+  setup() {
+    const { mode, toggleMode, isDark, isLight } = useThemeMode()
+
+    return () =>
+      h(
+        "button",
+        { type: "button", onClick: toggleMode },
+        `${mode.value}:${isDark.value ? "dark" : "not-dark"}:${
+          isLight.value ? "light" : "not-light"
+        }`,
+      )
+  },
+})
 
 describe("MarwesProvider — root element", () => {
   it("sets data-marwes-theme on root element", () => {
@@ -72,6 +89,51 @@ describe("MarwesProvider — root element", () => {
   it("applies mw-theme--dark class when mode is dark", () => {
     const { container } = render(MarwesProvider, {
       props: {
+        theme: { mode: "dark" },
+      },
+      slots: {
+        default: () => h("div"),
+      },
+    })
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.className).toContain("mw-theme--dark")
+  })
+
+  it("applies mw-theme--dark class when defaultMode is dark", () => {
+    const { container } = render(MarwesProvider, {
+      props: {
+        defaultMode: "dark",
+      },
+      slots: {
+        default: () => h("div"),
+      },
+    })
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.className).toContain("mw-theme--dark")
+    expect(rootElement.style.backgroundColor).toBe("rgb(20, 20, 20)")
+  })
+
+  it("lets controlled mode win over defaultMode", () => {
+    const { container } = render(MarwesProvider, {
+      props: {
+        defaultMode: "dark",
+        mode: "light",
+      },
+      slots: {
+        default: () => h("div"),
+      },
+    })
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.className).toContain("mw-theme--light")
+  })
+
+  it("keeps theme.mode working over defaultMode", () => {
+    const { container } = render(MarwesProvider, {
+      props: {
+        defaultMode: "light",
         theme: { mode: "dark" },
       },
       slots: {
@@ -138,6 +200,81 @@ describe("MarwesProvider — context", () => {
     expect(capturedThemes.length).toBeGreaterThan(0)
     expect(capturedThemes[0]?.mode).toBe("dark")
     expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
+  })
+
+  it("keeps useTheme returning a ResolvedTheme", () => {
+    const capturedThemes: ResolvedTheme[] = []
+
+    const ConsumerComponent = ThemeConsumer({
+      onTheme(theme) {
+        capturedThemes.push(theme)
+      },
+    })
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { defaultMode: "dark" },
+              {
+                default: () => h(ConsumerComponent),
+              },
+            )
+        },
+      }),
+    )
+
+    expect(capturedThemes[0]?.mode).toBe("dark")
+    expect(capturedThemes[0]?.color.background).toBe("#141414")
+  })
+
+  it("switches provider-owned mode through useThemeMode().toggleMode()", async () => {
+    const { container } = render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () => h(ThemeModeConsumer),
+            })
+        },
+      }),
+    )
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.className).toContain("mw-theme--light")
+    expect(screen.getByRole("button")).toHaveTextContent("light:not-dark:light")
+
+    await fireEvent.click(screen.getByRole("button"))
+    expect(rootElement.className).toContain("mw-theme--dark")
+    expect(screen.getByRole("button")).toHaveTextContent("dark:dark:not-light")
+
+    await fireEvent.click(screen.getByRole("button"))
+    expect(rootElement.className).toContain("mw-theme--light")
+    expect(screen.getByRole("button")).toHaveTextContent("light:not-dark:light")
+  })
+
+  it("calls onModeChange when provider-owned mode changes", async () => {
+    const onModeChange = vi.fn()
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { onModeChange },
+              {
+                default: () => h(ThemeModeConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    await fireEvent.click(screen.getByRole("button"))
+    expect(onModeChange).toHaveBeenCalledWith("dark")
   })
 })
 

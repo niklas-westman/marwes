@@ -6,19 +6,42 @@ import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
+  defaultMode?: ThemeMode
+  mode?: ThemeMode
   fontLoading?: FontLoadingConfig
   onModeChange?: (mode: ThemeMode) => void
 }
 
 export const MarwesProvider = defineComponent({
   name: "MarwesProvider",
-  props: ["theme", "fontLoading", "onModeChange"],
+  props: ["theme", "defaultMode", "mode", "fontLoading", "onModeChange"],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps
 
-    const resolved = computed<ResolvedTheme>(() => resolveThemeInput(props.theme ?? {}))
+    const internalMode = ref<ThemeMode>(props.defaultMode ?? "light")
+    const activeMode = computed<ThemeMode>(
+      () => props.mode ?? props.theme?.mode ?? internalMode.value,
+    )
+    const isModeControlled = computed(
+      () => props.mode !== undefined || props.theme?.mode !== undefined,
+    )
+    const resolved = computed<ResolvedTheme>(() =>
+      resolveThemeInput({ ...(props.theme ?? {}), mode: activeMode.value }),
+    )
 
     const rootRef = ref<HTMLElement | null>(null)
+
+    function setMode(nextMode: ThemeMode) {
+      if (!isModeControlled.value) {
+        internalMode.value = nextMode
+      }
+
+      props.onModeChange?.(nextMode)
+    }
+
+    function toggleMode() {
+      setMode(activeMode.value === "dark" ? "light" : "dark")
+    }
 
     function syncThemeToRuntime() {
       if (rootRef.value) {
@@ -33,7 +56,9 @@ export const MarwesProvider = defineComponent({
 
     provide(marwesContextKey, {
       theme: resolved,
-      onModeChange: props.onModeChange,
+      mode: activeMode,
+      setMode,
+      toggleMode,
     })
 
     return () =>

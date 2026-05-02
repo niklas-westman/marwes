@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -53,6 +53,7 @@ No preset CSS import is needed. `@marwes-ui/react` depends on `@marwes-ui/preset
 ```tsx
 import {
   Button,
+  ButtonVariant,
   Checkbox,
   Input,
   MarwesProvider,
@@ -64,7 +65,7 @@ export function App() {
     <MarwesProvider>
       <Input placeholder="Email" ariaLabel="Email" />
       <Checkbox ariaLabel="Subscribe" />
-      <Button variant="secondary">Preview</Button>
+      <Button variant={ButtonVariant.secondary}>Preview</Button>
       <SubmitButton>Save</SubmitButton>
     </MarwesProvider>
   )
@@ -76,7 +77,7 @@ export function App() {
 Marwes components pick up provider tokens automatically. Your own React styling can use the same tokens by importing `mwThemeVars`. This example uses styled-components, but the same values work in Emotion, vanilla-extract, inline style objects, CSS Modules, and plain CSS.
 
 ```tsx
-import { Button, MarwesProvider, mwThemeVars } from "@marwes-ui/react"
+import { Button, ButtonVariant, MarwesProvider, mwThemeVars } from "@marwes-ui/react"
 import styled from "styled-components"
 
 const AppShell = styled.main`
@@ -104,7 +105,7 @@ export function App() {
       <AppShell>
         <PrimaryCallout>Launch workspace</PrimaryCallout>
         <FeaturePanel>
-          <Button variant="primary">Save</Button>
+          <Button variant={ButtonVariant.primary}>Save</Button>
         </FeaturePanel>
       </AppShell>
     </MarwesProvider>
@@ -142,7 +143,9 @@ import {
   StatusBadge,
   SubmitButton,
   type ButtonProps,
+  type H1Props,
   type InputFieldProps,
+  type ParagraphProps,
 } from "@marwes-ui/react"
 
 const primaryAction: ButtonProps = {
@@ -160,13 +163,21 @@ const emailField: InputFieldProps = {
   },
 }
 
+const titleProps: H1Props = {
+  size: "h2",
+}
+
+const descriptionProps: ParagraphProps = {
+  size: "md",
+}
+
 export function ProjectPanel() {
   return (
     <Card title="Project setup">
       <StatusBadge variant={BadgeVariant.success}>Ready</StatusBadge>
       <Spacer spacing={Spacings.sp16} />
-      <H1 size="h2">Launch workspace</H1>
-      <Paragraph size="md">
+      <H1 {...titleProps}>Launch workspace</H1>
+      <Paragraph {...descriptionProps}>
         Components share theme tokens, typed variants, spacing, and semantic metadata.
       </Paragraph>
       <InputField {...emailField} />
@@ -233,7 +244,7 @@ Typed tokens and helpers:
 The default Marwes theme is already active. Pass `theme` only when a brand or design file needs to change the baseline.
 
 ```tsx
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/react"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
 
 const brandTheme = {
   color: {
@@ -257,7 +268,7 @@ const brandTheme = {
     radius: 10,
     density: "comfortable",
   },
-}
+} satisfies ThemeInput
 
 export function App() {
   return (
@@ -270,37 +281,96 @@ export function App() {
 
 The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
 
+Marwes is designed to look great from the beginning. Start with the default preset, then override only the colors, fonts, radius, or density that belong to your product. Unspecified values keep the polished Marwes defaults.
+
 ## Light And Dark Mode
 
-Marwes resolves light and dark defaults from `theme.mode`. Keep the active mode in app state and pass it to `MarwesProvider`; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+MarwesProvider can own the active mode for the app. Use `useThemeMode()` anywhere under the provider to read or change it; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
 
 ```tsx
-import { useState } from "react"
-import { Button, MarwesProvider, type ThemeInput } from "@marwes-ui/react"
+import { Button, ButtonVariant, MarwesProvider, useThemeMode } from "@marwes-ui/react"
 
-export function App() {
-  const [mode, setMode] = useState<NonNullable<ThemeInput["mode"]>>("light")
-
-  const theme = {
-    mode,
-  } satisfies ThemeInput
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
 
   return (
-    <MarwesProvider theme={theme}>
-      <Button
-        variant="secondary"
-        onClick={() => setMode((current) => (current === "dark" ? "light" : "dark"))}
-      >
-        Use {mode === "dark" ? "light" : "dark"} mode
-      </Button>
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === "dark" ? "light" : "dark"} mode
+    </Button>
+  )
+}
 
+export function App() {
+  return (
+    <MarwesProvider defaultMode="light">
+      <ThemeToggle />
       <AppShell />
     </MarwesProvider>
   )
 }
 ```
 
-If you also pass brand colors, only override the values you want to own. Mode-specific defaults fill the rest, so `theme={{ mode: "dark" }}` is enough for the default dark baseline.
+`defaultMode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
+
+```tsx
+import { useState } from "react"
+import {
+  Button,
+  ButtonVariant,
+  MarwesProvider,
+  type ThemeInput,
+  type ThemeMode,
+  useThemeMode,
+} from "@marwes-ui/react"
+
+const themeByMode = {
+  light: {
+    color: {
+      primary: "#2457FF",
+      background: "#F8FAFC",
+      surface: "#FFFFFF",
+      text: "#111827",
+      border: "#D1D5DB",
+      focus: "#2457FF",
+    },
+  },
+  dark: {
+    color: {
+      primary: "#8BA2FF",
+      background: "#0B1020",
+      surface: "#111827",
+      text: "#F8FAFC",
+      border: "#334155",
+      focus: "#93C5FD",
+    },
+  },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === "dark" ? "light" : "dark"} mode
+    </Button>
+  )
+}
+
+export function App() {
+  const [mode, setMode] = useState<ThemeMode>("light")
+
+  return (
+    <MarwesProvider mode={mode} theme={themeByMode[mode]} onModeChange={setMode}>
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+Mode-specific defaults fill every omitted token, so each override can stay small. `theme={{ mode: "dark" }}` is still enough for the default dark baseline.
 
 ## Custom Styling Tokens
 
@@ -363,15 +433,17 @@ Keep the APIs separate:
 Most Google Font use cases only need `mwAvailableFonts`; no `fontLoading` prop is needed.
 
 ```tsx
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/react"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
+
+const fontTheme = {
+  font: {
+    primary: mwAvailableFonts.Poppins,
+    secondary: mwAvailableFonts.Lora,
+  },
+} satisfies ThemeInput
 
 <MarwesProvider
-  theme={{
-    font: {
-      primary: mwAvailableFonts.Poppins,
-      secondary: mwAvailableFonts.Lora,
-    },
-  }}
+  theme={fontTheme}
 >
   <App />
 </MarwesProvider>
@@ -440,14 +512,16 @@ Marwes React components are accessible because the adapter renders a shared core
 Example:
 
 ```tsx
-import { InputField } from "@marwes-ui/react"
+import { InputField, type InputFieldProps } from "@marwes-ui/react"
 
-<InputField
-  label="Email"
-  helperText="Used for receipts."
-  error="Enter a valid email."
-  input={{ type: "email", placeholder: "you@example.com" }}
-/>
+const receiptEmailField = {
+  label: "Email",
+  helperText: "Used for receipts.",
+  error: "Enter a valid email.",
+  input: { type: "email", placeholder: "you@example.com" },
+} satisfies InputFieldProps
+
+<InputField {...receiptEmailField} />
 ```
 
 That contract resolves to DOM wiring like:

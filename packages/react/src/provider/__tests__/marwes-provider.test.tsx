@@ -1,16 +1,27 @@
 import type { ResolvedTheme } from "@marwes-ui/core"
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import * as React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
-import { afterEach, describe, expect, it } from "vitest"
+import { afterEach, describe, expect, it, vi } from "vitest"
 import { MarwesProvider } from "../marwes-provider"
 import { resetThemeRuntimeState } from "../runtime-theme"
 import { useTheme } from "../use-theme"
+import { useThemeMode } from "../use-theme-mode"
 
 function ThemeConsumer({ onTheme }: { onTheme: (t: ResolvedTheme) => void }) {
   const theme = useTheme()
   onTheme(theme)
   return null
+}
+
+function ThemeModeConsumer() {
+  const { mode, toggleMode, isDark, isLight } = useThemeMode()
+
+  return (
+    <button type="button" onClick={toggleMode}>
+      {mode}:{isDark ? "dark" : "not-dark"}:{isLight ? "light" : "not-light"}
+    </button>
+  )
 }
 
 describe("MarwesProvider — root element", () => {
@@ -75,6 +86,37 @@ describe("MarwesProvider — root element", () => {
     expect(root.className).toContain("mw-theme--dark")
   })
 
+  it("applies mw-theme--dark class when defaultMode is dark", () => {
+    const { container } = render(
+      <MarwesProvider defaultMode="dark">
+        <div />
+      </MarwesProvider>,
+    )
+    const root = container.firstElementChild as HTMLElement
+    expect(root.className).toContain("mw-theme--dark")
+    expect(root.style.backgroundColor).toBe("rgb(20, 20, 20)")
+  })
+
+  it("lets controlled mode win over defaultMode", () => {
+    const { container } = render(
+      <MarwesProvider defaultMode="dark" mode="light">
+        <div />
+      </MarwesProvider>,
+    )
+    const root = container.firstElementChild as HTMLElement
+    expect(root.className).toContain("mw-theme--light")
+  })
+
+  it("keeps theme.mode working over defaultMode", () => {
+    const { container } = render(
+      <MarwesProvider defaultMode="light" theme={{ mode: "dark" }}>
+        <div />
+      </MarwesProvider>,
+    )
+    const root = container.firstElementChild as HTMLElement
+    expect(root.className).toContain("mw-theme--dark")
+  })
+
   it("sets dark background color when mode is dark", () => {
     const { container } = render(
       <MarwesProvider theme={{ mode: "dark" }}>
@@ -130,6 +172,56 @@ describe("MarwesProvider — context", () => {
     const captured = themes[0] as ResolvedTheme
     expect(captured.mode).toBe("dark")
     expect(captured.color.primary.base).toBe("#2F31FC")
+  })
+
+  it("keeps useTheme returning a ResolvedTheme", () => {
+    const themes: ResolvedTheme[] = []
+
+    render(
+      <MarwesProvider defaultMode="dark">
+        <ThemeConsumer
+          onTheme={(t) => {
+            themes.push(t)
+          }}
+        />
+      </MarwesProvider>,
+    )
+
+    expect(themes[0]?.mode).toBe("dark")
+    expect(themes[0]?.color.background).toBe("#141414")
+  })
+
+  it("switches provider-owned mode through useThemeMode().toggleMode()", () => {
+    const { container } = render(
+      <MarwesProvider>
+        <ThemeModeConsumer />
+      </MarwesProvider>,
+    )
+
+    const root = container.firstElementChild as HTMLElement
+    expect(root.className).toContain("mw-theme--light")
+    expect(screen.getByRole("button")).toHaveTextContent("light:not-dark:light")
+
+    fireEvent.click(screen.getByRole("button"))
+    expect(root.className).toContain("mw-theme--dark")
+    expect(screen.getByRole("button")).toHaveTextContent("dark:dark:not-light")
+
+    fireEvent.click(screen.getByRole("button"))
+    expect(root.className).toContain("mw-theme--light")
+    expect(screen.getByRole("button")).toHaveTextContent("light:not-dark:light")
+  })
+
+  it("calls onModeChange when provider-owned mode changes", () => {
+    const onModeChange = vi.fn()
+
+    render(
+      <MarwesProvider onModeChange={onModeChange}>
+        <ThemeModeConsumer />
+      </MarwesProvider>,
+    )
+
+    fireEvent.click(screen.getByRole("button"))
+    expect(onModeChange).toHaveBeenCalledWith("dark")
   })
 })
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -53,12 +53,12 @@ pnpm add @marwes-ui/presets
 React and Vue apps normally import only the adapter:
 
 ```tsx
-import { Button, MarwesProvider } from "@marwes-ui/react"
+import { Button, ButtonVariant, MarwesProvider } from "@marwes-ui/react"
 
 export function App() {
   return (
     <MarwesProvider>
-      <Button variant="primary">Save</Button>
+      <Button variant={ButtonVariant.primary}>Save</Button>
     </MarwesProvider>
   )
 }
@@ -98,10 +98,10 @@ The default preset styles these Marwes families today:
 
 ## Custom Theme With Preset CSS
 
-Preset CSS consumes provider-generated `--mw-*` variables. Map a graphical profile into `ThemeInput`, pass it to `MarwesProvider`, and the preset follows it.
+Preset CSS consumes provider-generated `--mw-*` variables. Marwes is designed to look great from the beginning: map a graphical profile into a partial `ThemeInput`, override only the tokens your product owns, pass it to `MarwesProvider`, and the preset follows it.
 
 ```tsx
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/react"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
 
 const brandTheme = {
   color: {
@@ -125,11 +125,80 @@ const brandTheme = {
     radius: 10,
     density: "comfortable",
   },
-}
+} satisfies ThemeInput
 
 <MarwesProvider theme={brandTheme}>
   <App />
 </MarwesProvider>
+```
+
+## Light And Dark Mode
+
+The preset CSS already contains the light and dark visual rules. In React and Vue apps, let `MarwesProvider` own the active mode and toggle it with the adapter hook:
+
+```tsx
+import { Button, ButtonVariant, MarwesProvider, useThemeMode } from "@marwes-ui/react"
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === "dark" ? "light" : "dark"} mode
+    </Button>
+  )
+}
+
+export function App() {
+  return (
+    <MarwesProvider defaultMode="light">
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+When the mode changes, the provider updates the preset's `--mw-*` variables and root class. Preset selectors such as `.mw-theme--dark .mw-btn` then pick up the correct dark-mode component states without any extra CSS in the app.
+
+If your product needs different light and dark brand overrides, keep the override objects small and switch by mode:
+
+```tsx
+import { useState } from "react"
+import {
+  Button,
+  ButtonVariant,
+  MarwesProvider,
+  type ThemeInput,
+  type ThemeMode,
+  useThemeMode,
+} from "@marwes-ui/react"
+
+const themeByMode = {
+  light: { color: { primary: "#2457FF", background: "#F8FAFC", text: "#111827" } },
+  dark: { color: { primary: "#8BA2FF", background: "#0B1020", text: "#F8FAFC" } },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === "dark" ? "light" : "dark"} mode
+    </Button>
+  )
+}
+
+export function App() {
+  const [mode, setMode] = useState<ThemeMode>("light")
+
+  return (
+    <MarwesProvider mode={mode} theme={themeByMode[mode]} onModeChange={setMode}>
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
 ```
 
 ## firstEditionTheme

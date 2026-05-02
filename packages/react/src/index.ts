@@ -3,6 +3,8 @@ import "@marwes-ui/presets/firstEdition/styles.css"
 export { MarwesProvider } from "./provider/marwes-provider"
 export type { MarwesProviderProps } from "./provider/marwes-provider"
 export { useTheme } from "./provider/use-theme"
+export { useThemeMode } from "./provider/use-theme-mode"
+export type { ThemeModeContextValue } from "./provider/use-theme-mode"
 export {
   createFontStack,
   mwAvailableFonts,

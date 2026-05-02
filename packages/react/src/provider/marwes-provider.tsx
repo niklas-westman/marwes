@@ -6,6 +6,8 @@ import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
+  defaultMode?: ThemeMode
+  mode?: ThemeMode
   fontLoading?: FontLoadingConfig
   onModeChange?: (mode: ThemeMode) => void
   children: React.ReactNode
@@ -13,13 +15,36 @@ export type MarwesProviderProps = {
 
 export function MarwesProvider({
   theme,
+  defaultMode = "light",
+  mode: controlledMode,
   fontLoading = "auto",
   onModeChange,
   children,
 }: MarwesProviderProps) {
   const rootRef = React.useRef<HTMLDivElement>(null)
+  const [internalMode, setInternalMode] = React.useState<ThemeMode>(defaultMode)
+  const activeMode = controlledMode ?? theme?.mode ?? internalMode
+  const isModeControlled = controlledMode !== undefined || theme?.mode !== undefined
 
-  const resolved: ResolvedTheme = React.useMemo(() => resolveThemeInput(theme ?? {}), [theme])
+  const setMode = React.useCallback(
+    (nextMode: ThemeMode) => {
+      if (!isModeControlled) {
+        setInternalMode(nextMode)
+      }
+
+      onModeChange?.(nextMode)
+    },
+    [isModeControlled, onModeChange],
+  )
+
+  const toggleMode = React.useCallback(() => {
+    setMode(activeMode === "dark" ? "light" : "dark")
+  }, [activeMode, setMode])
+
+  const resolved: ResolvedTheme = React.useMemo(
+    () => resolveThemeInput({ ...(theme ?? {}), mode: activeMode }),
+    [activeMode, theme],
+  )
   const rootStyle = React.useMemo(
     () => themeToRootStyle(resolved) as React.CSSProperties,
     [resolved],
@@ -36,7 +61,7 @@ export function MarwesProvider({
   }, [resolved, fontLoading])
 
   return (
-    <MarwesContext.Provider value={{ theme: resolved, onModeChange }}>
+    <MarwesContext.Provider value={{ theme: resolved, mode: activeMode, setMode, toggleMode }}>
       <div
         ref={rootRef}
         className={`mw-theme--${resolved.mode}`}

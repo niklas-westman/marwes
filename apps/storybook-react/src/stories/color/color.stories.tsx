@@ -1,5 +1,5 @@
 import { storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
-import { H2, H3, Paragraph, useTheme } from "@marwes-ui/react"
+import { Button, H2, H3, MarwesProvider, Paragraph, useTheme, useThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { ColorSwatch } from "./ColorSwatch"
 
@@ -331,6 +331,48 @@ function ColorPalette() {
   )
 }
 
+function ProviderModeSample() {
+  const theme = useTheme()
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+        <H2 style={{ margin: 0 }}>Provider Mode: {mode}</H2>
+        <Button variant="secondary" onClick={toggleMode}>
+          Use {mode === "dark" ? "light" : "dark"} mode
+        </Button>
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+          gap: "16px",
+        }}
+      >
+        <ColorSwatch
+          name="Background"
+          hex={theme.color.background}
+          cssVar="--mw-color-background"
+          description="Provider-scoped background"
+        />
+        <ColorSwatch
+          name="Surface"
+          hex={theme.color.surface}
+          cssVar="--mw-color-surface"
+          description="Provider-scoped surface"
+        />
+        <ColorSwatch
+          name="Text"
+          hex={theme.color.text}
+          cssVar="--mw-color-text"
+          description="Provider-scoped text"
+        />
+      </div>
+    </div>
+  )
+}
+
 export const AllColors: Story = {
   render: () => <ColorPalette />,
 }
@@ -412,4 +454,20 @@ export const SemanticOnly: Story = {
       </div>
     )
   },
+}
+
+export const ProviderModeLight: Story = {
+  render: () => (
+    <MarwesProvider defaultMode="light">
+      <ProviderModeSample />
+    </MarwesProvider>
+  ),
+}
+
+export const ProviderModeDark: Story = {
+  render: () => (
+    <MarwesProvider defaultMode="dark">
+      <ProviderModeSample />
+    </MarwesProvider>
+  ),
 }

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -53,7 +53,7 @@ No preset CSS import is needed. `@marwes-ui/vue` depends on `@marwes-ui/presets`
 ```vue
 <script setup lang="ts">
 import { ref } from "vue"
-import { Button, Checkbox, Input, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
+import { Button, ButtonVariant, Checkbox, Input, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
 
 const email = ref("")
 const subscribed = ref(false)
@@ -63,7 +63,7 @@ const subscribed = ref(false)
   <MarwesProvider>
     <Input v-model="email" placeholder="Email" ariaLabel="Email" />
     <Checkbox v-model="subscribed" ariaLabel="Subscribe" />
-    <Button variant="secondary">Preview</Button>
+    <Button :variant="ButtonVariant.secondary">Preview</Button>
     <SubmitButton>Save</SubmitButton>
   </MarwesProvider>
 </template>
@@ -75,7 +75,7 @@ Marwes components pick up provider tokens automatically. Your own Vue styling ca
 
 ```vue
 <script setup lang="ts">
-import { Button, MarwesProvider, mwThemeVars } from "@marwes-ui/vue"
+import { Button, ButtonVariant, MarwesProvider, mwThemeVars } from "@marwes-ui/vue"
 
 const panelStyle = {
   padding: mwThemeVars.spacing.sp24,
@@ -90,7 +90,7 @@ const panelStyle = {
     <main class="app-shell">
       <aside class="primary-callout">Launch workspace</aside>
       <section class="feature-panel" :style="panelStyle">
-        <Button variant="primary">Save</Button>
+        <Button :variant="ButtonVariant.primary">Save</Button>
       </section>
     </main>
   </MarwesProvider>
@@ -136,7 +136,9 @@ import {
   StatusBadge,
   SubmitButton,
   type ButtonProps,
+  type HeadingProps,
   type InputFieldProps,
+  type ParagraphProps,
 } from "@marwes-ui/vue"
 
 const primaryAction: ButtonProps = {
@@ -152,6 +154,14 @@ const emailField: InputFieldProps = {
     placeholder: "you@example.com",
   },
 }
+
+const titleProps: HeadingProps = {
+  size: "h2",
+}
+
+const descriptionProps: ParagraphProps = {
+  size: "md",
+}
 </script>
 
 <template>
@@ -159,8 +169,8 @@ const emailField: InputFieldProps = {
     <template #title>Project setup</template>
     <StatusBadge :variant="BadgeVariant.success">Ready</StatusBadge>
     <Spacer :spacing="Spacings.sp16" />
-    <H1 size="h2">Launch workspace</H1>
-    <Paragraph size="md">
+    <H1 v-bind="titleProps">Launch workspace</H1>
+    <Paragraph v-bind="descriptionProps">
       Components share theme tokens, typed variants, spacing, and semantic metadata.
     </Paragraph>
     <InputField v-bind="emailField" />
@@ -227,7 +237,7 @@ The default Marwes theme is already active. Pass `theme` only when a brand or de
 
 ```vue
 <script setup lang="ts">
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/vue"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/vue"
 
 const brandTheme = {
   color: {
@@ -251,7 +261,7 @@ const brandTheme = {
     radius: 10,
     density: "comfortable",
   },
-}
+} satisfies ThemeInput
 </script>
 
 <template>
@@ -263,35 +273,89 @@ const brandTheme = {
 
 The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
 
+Marwes is designed to look great from the beginning. Start with the default preset, then override only the colors, fonts, radius, or density that belong to your product. Unspecified values keep the polished Marwes defaults.
+
 ## Light And Dark Mode
 
-Marwes resolves light and dark defaults from `theme.mode`. Keep the active mode in app state and pass it to `MarwesProvider`; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+MarwesProvider can own the active mode for the app. Use `useThemeMode()` anywhere under the provider to read or change it; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
 
 ```vue
 <script setup lang="ts">
-import { computed, ref } from "vue"
-import { Button, MarwesProvider, type ThemeInput } from "@marwes-ui/vue"
+import { Button, ButtonVariant, useThemeMode } from "@marwes-ui/vue"
 
-const mode = ref<NonNullable<ThemeInput["mode"]>>("light")
-const theme = computed<ThemeInput>(() => ({ mode: mode.value }))
-
-function toggleMode() {
-  mode.value = mode.value === "dark" ? "light" : "dark"
-}
+const { mode, toggleMode } = useThemeMode()
 </script>
 
 <template>
-  <MarwesProvider :theme="theme">
-    <Button variant="secondary" @click="toggleMode">
-      Use {{ mode === "dark" ? "light" : "dark" }} mode
-    </Button>
+  <Button :variant="ButtonVariant.secondary" @click="toggleMode">
+    Use {{ mode === "dark" ? "light" : "dark" }} mode
+  </Button>
+</template>
+```
 
+```vue
+<script setup lang="ts">
+import { MarwesProvider } from "@marwes-ui/vue"
+import ThemeToggle from "./theme-toggle.vue"
+</script>
+
+<template>
+  <MarwesProvider default-mode="light">
+    <ThemeToggle />
     <AppShell />
   </MarwesProvider>
 </template>
 ```
 
-If you also pass brand colors, only override the values you want to own. Mode-specific defaults fill the rest, so `:theme="{ mode: 'dark' }"` is enough for the default dark baseline.
+`default-mode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { MarwesProvider, type ThemeInput, type ThemeMode } from "@marwes-ui/vue"
+import ThemeToggle from "./theme-toggle.vue"
+
+const mode = ref<ThemeMode>("light")
+
+const themeByMode = {
+  light: {
+    color: {
+      primary: "#2457FF",
+      background: "#F8FAFC",
+      surface: "#FFFFFF",
+      text: "#111827",
+      border: "#D1D5DB",
+      focus: "#2457FF",
+    },
+  },
+  dark: {
+    color: {
+      primary: "#8BA2FF",
+      background: "#0B1020",
+      surface: "#111827",
+      text: "#F8FAFC",
+      border: "#334155",
+      focus: "#93C5FD",
+    },
+  },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function setMode(nextMode: ThemeMode) {
+  mode.value = nextMode
+}
+</script>
+
+<template>
+  <MarwesProvider :mode="mode" :theme="themeByMode[mode]" :on-mode-change="setMode">
+    <ThemeToggle />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+Mode-specific defaults fill every omitted token, so each override can stay small. `:theme="{ mode: 'dark' }"` is still enough for the default dark baseline.
 
 ## Custom Styling Tokens
 
@@ -361,14 +425,14 @@ Most Google Font use cases only need `mwAvailableFonts`; no `fontLoading` prop i
 
 ```vue
 <script setup lang="ts">
-import { mwAvailableFonts } from "@marwes-ui/vue"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/vue"
 
 const theme = {
   font: {
     primary: mwAvailableFonts.Poppins,
     secondary: mwAvailableFonts.Lora,
   },
-}
+} satisfies ThemeInput
 </script>
 
 <template>
@@ -432,16 +496,18 @@ Example:
 
 ```vue
 <script setup lang="ts">
-import { InputField } from "@marwes-ui/vue"
+import { InputField, type InputFieldProps } from "@marwes-ui/vue"
+
+const receiptEmailField = {
+  label: "Email",
+  helperText: "Used for receipts.",
+  error: "Enter a valid email.",
+  input: { type: "email", placeholder: "you@example.com" },
+} satisfies InputFieldProps
 </script>
 
 <template>
-  <InputField
-    label="Email"
-    helperText="Used for receipts."
-    error="Enter a valid email."
-    :input="{ type: 'email', placeholder: 'you@example.com' }"
-  />
+  <InputField v-bind="receiptEmailField" />
 </template>
 ```
 

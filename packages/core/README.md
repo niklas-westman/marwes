@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -78,6 +78,49 @@ const cssVars = themeToCSSVars(theme)
 ```
 
 React and Vue providers apply these variables to the provider root. Preset CSS consumes them across buttons, inputs, typography, cards, toasts, overlays, and layout primitives.
+
+Marwes is designed to look great from the beginning. `ThemeInput` is intentionally partial: start from the polished defaults and override only the product decisions you own.
+
+```ts
+import { resolveThemeInput, type ThemeInput, type ThemeMode } from "@marwes-ui/core"
+
+const themeByMode = {
+  light: { color: { primary: "#2457FF" } },
+  dark: { color: { primary: "#8BA2FF", background: "#0B1020", text: "#F8FAFC" } },
+} satisfies Record<ThemeMode, ThemeInput>
+
+const darkBrandTheme = resolveThemeInput({
+  mode: "dark",
+  ...themeByMode.dark,
+})
+```
+
+Every omitted token is filled from the selected light or dark default, so adapters can expose simple light/dark toggles without requiring a full theme object.
+
+### Light And Dark Mode Contract
+
+Core owns the `ThemeMode` contract that the React and Vue providers use for `useThemeMode()`. A mode change resolves a normal theme, swaps the provider-scoped `--mw-*` variables, and keeps the active class aligned as `mw-theme--light` or `mw-theme--dark`.
+
+```ts
+import { resolveThemeInput, themeToCSSVars, type ThemeMode } from "@marwes-ui/core"
+
+function resolveMode(mode: ThemeMode) {
+  const theme = resolveThemeInput({ mode })
+
+  return {
+    className: `mw-theme--${theme.mode}`,
+    cssVars: themeToCSSVars(theme),
+  }
+}
+
+resolveMode("dark")
+// {
+//   className: "mw-theme--dark",
+//   cssVars: { "--mw-color-background": "#141414", ... }
+// }
+```
+
+Most apps should use `useThemeMode()` from `@marwes-ui/react` or `@marwes-ui/vue`. Core is the framework-agnostic piece that makes the resolved variables and mode classes consistent across adapters.
 
 ## Theme Variables
 
