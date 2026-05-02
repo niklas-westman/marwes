@@ -20,24 +20,19 @@ jobs:
     name: changeset-check
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: changeset-reminder (non-blocking)
-        run: |
-          if [ "${{ github.event.pull_request.user.login }}" = "github-actions[bot]" ]; then
-            echo "Skipping changeset check for bot PRs"
-            exit 0
-          fi
-          
-          if [ -n "$(git diff --name-only origin/${{ github.base_ref }}..HEAD .changeset)" ]; then
-            echo "✅ Changeset found"
-            exit 0
-          else
-            echo "⚠️ No changeset found. If this PR affects publishable packages, run: pnpm changeset"
-            exit 0
-          fi
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Require changeset for package changes
+        env:
+          CHANGESET_BASE_REF: origin/${{ github.base_ref }}
+        run: node ./scripts/check-pr-changeset.mjs

@@ -50,6 +50,7 @@
     "test:typecheck:packages": "pnpm test:typecheck:contracts && pnpm test:typecheck:core && pnpm test:typecheck:presets && pnpm test:typecheck:react && pnpm test:typecheck:vue",
     "clean": "pnpm -r clean || true",
     "changeset": "changeset",
+    "changeset:check": "node ./scripts/check-pr-changeset.mjs",
     "version-packages": "changeset version && pnpm format:release-artifacts",
     "format:release-artifacts": "biome format --write .changeset/config.json apps/*/package.json apps/*/CHANGELOG.md packages/*/package.json packages/*/CHANGELOG.md",
     "release": "changeset publish"
