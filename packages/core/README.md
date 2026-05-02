@@ -40,7 +40,7 @@ Core is the contract layer, not the normal app entry point.
 | `@marwes-ui/react` | You are building a React app. |
 | `@marwes-ui/vue` | You are building a Vue app. |
 | `@marwes-ui/core` | You need framework-agnostic recipes, theme utilities, accessibility contracts, or adapter/tooling APIs. |
-| `@marwes-ui/presets` | You need standalone first edition CSS or preset theme exports. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
 This package is useful for humans and AI agents that need stable contracts without framework rendering: component recipes, theme variable names, semantic attributes, and accessibility mapping all live here.
 
@@ -216,7 +216,7 @@ Types and tokens:
 ## Package Boundaries
 
 - Core has no React, Vue, DOM, or CSS runtime dependency.
-- Presets own static CSS and first edition visuals.
+- Presets own static CSS and the default visual layer.
 - React and Vue own rendering, provider lifecycle, and framework APIs.
 
 ## Scripts

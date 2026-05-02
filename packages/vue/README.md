@@ -7,7 +7,7 @@
 
 # Marwes Design System - Vue
 
-**Vue 3 components with first edition styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
+**Vue 3 components with default Marwes styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
 
 Vue 3.4+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
@@ -21,7 +21,7 @@ Vue 3.4+ • TypeScript-first • Default CSS included • ThemeInput • Google
 
 Marwes gives Vue apps a ready design-system base without requiring custom CSS setup or local component forks.
 
-- **One package for Vue apps**: components, provider, default first edition CSS, theme helpers, and typed props.
+- **One package for Vue apps**: components, provider, default preset CSS, theme helpers, and typed props.
 - **Vue-native binding**: common controls support `v-model` while preserving Marwes semantic contracts.
 - **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
 - **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
@@ -36,7 +36,7 @@ For a Vue app, install this package first. It includes the Vue adapter, loads th
 | `@marwes-ui/vue` | You are building a Vue app. |
 | `@marwes-ui/react` | You are building a React app instead. |
 | `@marwes-ui/core` | You are building adapters, tests, tooling, or framework-agnostic integrations. |
-| `@marwes-ui/presets` | You need standalone first edition CSS or preset theme exports. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
 This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
 
@@ -46,7 +46,7 @@ This split keeps installation simple for app teams while giving humans and AI ag
 pnpm add @marwes-ui/vue vue
 ```
 
-No preset CSS import is needed. `@marwes-ui/vue` depends on `@marwes-ui/presets` and loads the first edition CSS automatically.
+No preset CSS import is needed. `@marwes-ui/vue` depends on `@marwes-ui/presets` and loads the default Marwes CSS automatically.
 
 ## Quick Start
 
@@ -223,7 +223,7 @@ Typed tokens and helpers:
 
 ## Theme In Seconds
 
-First edition is the default. Pass `theme` only when a brand or design file needs to change the baseline.
+The default Marwes theme is already active. Pass `theme` only when a brand or design file needs to change the baseline.
 
 ```vue
 <script setup lang="ts">
@@ -291,7 +291,7 @@ function toggleMode() {
 </template>
 ```
 
-If you also pass brand colors, only override the values you want to own. Mode-specific defaults fill the rest, so `:theme="{ mode: 'dark' }"` is enough for the first edition dark baseline.
+If you also pass brand colors, only override the values you want to own. Mode-specific defaults fill the rest, so `:theme="{ mode: 'dark' }"` is enough for the default dark baseline.
 
 ## Custom Styling Tokens
 
@@ -464,7 +464,7 @@ The important part is that the same label, helper, error, and invalid contract i
 ## Package Boundaries
 
 - `@marwes-ui/core` owns recipes, theme resolution, a11y mapping, and semantic metadata.
-- `@marwes-ui/presets` owns first edition CSS.
+- `@marwes-ui/presets` owns default preset CSS.
 - `@marwes-ui/vue` owns Vue rendering and provider behavior.
 
 ## Scripts
