@@ -1,0 +1,17 @@
+{
+  "defaultTarget": "marwes",
+  "targets": {
+    "marwes": {
+      "label": "Marwes",
+      "figmaFile": "https://www.figma.com/design/VTv3dNTvt7R5EytQF47XbB/Marwes",
+      "projectSlug": "marwes",
+      "liveDir": ".figma/marwes",
+      "archiveDir": ".figma/archive/generated-syncs/marwes",
+      "docsFile": ".figma/INDEX.md",
+      "complete": true,
+      "tokenEnvVar": "FIGMA_API_TOKEN",
+      "envFiles": [".env.local"],
+      "manualReferenceFiles": [".figma/nodes.json", ".figma/NODE_REFERENCE.md"]
+    }
+  }
+}

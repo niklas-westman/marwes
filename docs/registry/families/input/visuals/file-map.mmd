@@ -1,0 +1,25 @@
+flowchart TD
+  Registry["docs/registry/families/input"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/input/"]
+  Core --> InputFiles["input, textarea, select, input-otp, rich-text"]
+  Helpers["packages/core/src/shared/field-helpers.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> InputCss["input.css + textarea.css + select.css"]
+  Presets --> RichTextCss["rich-text.css"]
+  Presets --> OtpCss["input-otp.css"]
+  Presets --> FieldCss["molecules/input-field.css"]
+
+  React["packages/react/src/components/input/"]
+  React --> ReactFields["atoms + fields + field-variants + tests"]
+
+  Vue["packages/vue/src/components/input/"]
+  Vue --> VueFields["atoms + fields + field-variants + tests"]
+
+  StoriesR["apps/storybook-react/src/stories/input/"]
+  StoriesV["apps/storybook-vue/src/stories/input/"]
+  Contracts["tests/contracts/input*.ts + select*.ts + rich-text*.ts + otp*.ts"]

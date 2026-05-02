@@ -1,0 +1,139 @@
+/*
+ * Badge Component Styles
+ * Validated against:
+ * - .figma/marwes/components/checkboxbadge.json
+ * - .figma/marwes/pages/-badge/-badge_1364-11603.json
+ * - .figma/marwes/pages/-badge/-badge-dark_2276-56582.json
+ * - .figma/marwes/pages/-badge/component-container_1369-6125.json
+ *
+ * The live sync uses exact semantic badge tones rather than generic color-mix()
+ * derivations, especially for the remaining semantic tones and dark-mode surfaces.
+ */
+
+.mw-badge {
+  --mw-badge-surface: transparent;
+  --mw-badge-border: transparent;
+  --mw-badge-label: inherit;
+  --mw-badge-radius: var(--mw-ui-radius, 4px);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mw-spacing-sp-4);
+  padding: var(--mw-spacing-sp-2) var(--mw-spacing-sp-8);
+  border: none;
+  border-radius: var(--mw-badge-radius);
+  box-shadow: inset 0 0 0 1px var(--mw-badge-border);
+  background: var(--mw-badge-surface);
+  color: var(--mw-badge-label);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* ============================================
+   LIGHT VARIANTS
+   ============================================ */
+
+.mw-badge--neutral {
+  --mw-badge-surface: var(--mw-color-surface-subtle);
+  --mw-badge-border: var(--mw-color-border-subtle);
+  --mw-badge-label: var(--mw-color-text-muted);
+}
+
+.mw-badge--info {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 12%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-info-base) 45%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-info-base);
+}
+
+.mw-badge--success {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 12%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-success-base) 45%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-success-base);
+}
+
+.mw-badge--warning {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-warning-base) 50%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-warning-base);
+}
+
+.mw-badge--error {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-danger-base) 45%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-danger-base);
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-badge--neutral {
+  --mw-badge-surface: var(--mw-color-surface-subtle);
+  --mw-badge-border: var(--mw-color-border-subtle);
+  --mw-badge-label: var(--mw-color-text-muted);
+}
+
+.mw-theme--dark .mw-badge--info {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 18%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-info-base) 55%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-info-base);
+}
+
+.mw-theme--dark .mw-badge--success {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 18%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-success-base) 55%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-success-base);
+}
+
+.mw-theme--dark .mw-badge--warning {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 20%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-warning-base) 60%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-warning-base);
+}
+
+.mw-theme--dark .mw-badge--error {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 18%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-danger-base) 55%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-danger-base);
+}
+
+.mw-badge-group__items {
+  display: inline-flex;
+  gap: var(--mw-spacing-sp-4);
+}

@@ -1,12 +1,13 @@
 .mw-checkbox-field {
   display: grid;
-  gap: 8px;
+  gap: var(--mw-density-gap);
 }
 
 .mw-checkbox-field__row {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--mw-density-gap);
+  border-radius: max(2px, calc(var(--mw-ui-radius, 4px) * 0.4));
 }
 
 .mw-checkbox-field__label {
@@ -16,14 +17,33 @@
 
 .mw-checkbox-field__description {
   opacity: 0.75;
-  margin-left: 28px;
-  font-size: 0.875em;
+  margin-left: calc(
+    var(--mw-density-checkbox-size) +
+    var(--mw-spacing-sp-8) +
+    var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
+  );
+  font-size: var(--mw-density-font-size-sm);
+}
+
+@supports selector(:has(*)) {
+  .mw-checkbox-field__row:has(.mw-checkbox:focus-visible) {
+    outline: 2px solid var(--mw-color-focus);
+    outline-offset: 2px;
+  }
+
+  .mw-checkbox-field__row:has(.mw-checkbox:focus-visible) .mw-checkbox {
+    outline: none;
+  }
 }
 
 .mw-checkbox-field__error {
-  margin-left: 28px;
-  font-size: 0.875em;
-  color: var(--mw-danger, #dc2626);
+  margin-left: calc(
+    var(--mw-density-checkbox-size) +
+    var(--mw-spacing-sp-8) +
+    var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
+  );
+  font-size: var(--mw-density-font-size-sm);
+  color: var(--mw-color-danger-base, #dc2626);
 }
 
 /* Optional state hooks */

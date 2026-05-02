@@ -1,0 +1,137 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  tabPurposeComponentReference,
+  tabWhyPurposeComponents,
+} from "@marwes-ui/core"
+
+<Meta title="Tab/Introduction" />
+
+# Tab Components
+
+Marwes provides tabs at three layers: **purpose components** for common tab sets,
+**TabGroup** for accessible tablist and panel coordination, and the raw **Tab**
+atom for custom layouts.
+
+## Recommended: Purpose Components
+
+Use purpose-built components when the tab set has a clear product meaning:
+
+```tsx
+import { ContentTabs, NavigationTabs, SettingsTabs } from "@marwes-ui/react"
+
+<NavigationTabs
+  label="Primary navigation"
+  tabs={[
+    { value: "overview", label: "Overview", panel: "Key product summary." },
+    { value: "roadmap", label: "Roadmap", panel: "Upcoming milestones." },
+  ]}
+/>
+
+<ContentTabs
+  label="Case study sections"
+  tabs={[
+    { value: "summary", label: "Summary", panel: "Project overview." },
+    { value: "results", label: "Results", panel: "Performance gains." },
+  ]}
+/>
+
+<SettingsTabs
+  label="Workspace settings"
+  tabs={[
+    { value: "general", label: "General", panel: "Defaults and workspace info." },
+    { value: "security", label: "Security", panel: "Access policies and SSO." },
+  ]}
+/>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {tabWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {tabPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: TabGroup (Molecule)
+
+Use `TabGroup` when you need custom tab labels or panels, but still want the
+library to manage keyboard navigation and panel wiring.
+
+```tsx
+import { TabGroup } from "@marwes-ui/react"
+
+<TabGroup
+  label="Profile sections"
+  tabs={[
+    { value: "overview", label: "Overview", panel: "Profile summary." },
+    { value: "activity", label: "Activity", panel: "Recent actions." },
+    { value: "security", label: "Security", panel: "Access and sessions." },
+  ]}
+/>
+```
+
+### TabGroup Features
+
+- **Keyboard navigation built in** - Left/Right arrows plus Home/End move between enabled tabs
+- **Controlled or uncontrolled state** - use `activeTab` for external state or `defaultActiveTab` for internal state
+- **Accessible panel wiring** - each tab automatically connects to its `tabpanel`
+- **Purpose-ready wrapper** - accepts `dataAttributes` so context variants can layer metadata
+
+## Low-level: Tab (Atom)
+
+Use the raw `Tab` atom when you need a bespoke tablist layout and will manage the
+selection state yourself.
+
+```tsx
+import { Tab } from "@marwes-ui/react"
+
+<div role="tablist" aria-label="Profile sections">
+  <Tab selected ariaControls="panel-overview">Overview</Tab>
+  <Tab ariaControls="panel-activity">Activity</Tab>
+</div>
+```
+
+> **Note:** When using `Tab` directly, you are responsible for:
+> - Coordinating roving tab focus in the tablist
+> - Wiring `aria-controls` and matching `tabpanel` ids
+> - Managing selected state between tabs and panels
+> - Passing `ariaLabel` for icon-only tabs with no visible text
+
+## Component Reference
+
+### Purpose Components
+
+**`NavigationTabs`** - Peer-view navigation and section switching
+
+**`ContentTabs`** - Segmented content surfaces and reading flows
+
+**`SettingsTabs`** - Configuration areas and admin groupings
+
+### Base Molecule
+
+**`TabGroup`** - Accessible tablist plus panel coordination
+
+**`TabPanel`** - `tabpanel` wrapper used by `TabGroup`
+
+### Atom
+
+**`Tab`** - Low-level `<button role="tab">`
+
+- `Tab (Atom)`
+- `TabGroup`
+- `TabPanel`
+- `NavigationTabs`
+- `ContentTabs`
+- `SettingsTabs`

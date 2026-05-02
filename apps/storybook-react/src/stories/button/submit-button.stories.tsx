@@ -1,43 +1,31 @@
-import { iconRegistry } from "@marwes-ui/core"
-import { type Button, SubmitButton } from "@marwes-ui/react"
+import {
+  storybookButtonPurposeArgTypes,
+  storybookDocsDescription,
+  storybookLayout,
+} from "@marwes-ui/core"
+import { SubmitButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
-
-const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>
 
 const meta = {
   title: "Buttons/Purpose/SubmitButton",
   component: SubmitButton,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: storybookLayout.centered,
   tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "text"],
-    },
-    iconLeft: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    iconRight: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    disabled: {
-      control: "boolean",
-    },
-  },
-} satisfies Meta<typeof Button>
+  argTypes: storybookButtonPurposeArgTypes,
+} satisfies Meta<typeof SubmitButton>
 
 export default meta
 
-export const SubmitExample: StoryObj<typeof SubmitButton> = {
-  render: () => <SubmitButton>Submit Form</SubmitButton>,
+type Story = StoryObj<typeof meta>
+
+export const SubmitExample: Story = {
+  args: {
+    children: "Submit Form",
+  },
   parameters: {
     docs: {
       description: {
-        story: "SubmitButton automatically sets type='submit' and form-related metadata.",
+        story: storybookDocsDescription.submitButton,
       },
     },
   },

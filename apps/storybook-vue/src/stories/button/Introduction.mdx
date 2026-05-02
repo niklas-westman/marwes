@@ -1,0 +1,402 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  buttonActionSemanticPurposes,
+  buttonVariantVisualStyles,
+  buttonWhySemanticComponents,
+} from "@marwes-ui/core"
+
+<Meta title="Buttons/Introduction" />
+
+# Button Components
+
+Marwes provides two complementary button layers:
+**purpose buttons** for canonical semantic flows and the base **Button** for deliberate exceptions.
+
+Buttons are organized as Atom -> Variant wrappers -> Purpose wrappers to make Storybook navigation obvious.
+
+## Button Architecture
+
+```
+Button (Atom)
+     ↓
+Variant Wrappers
+  ├─ PrimaryButton
+  ├─ SecondaryButton
+  ├─ TextButton
+  └─ SuccessButton
+     ↓
+Purpose Wrappers
+  ├─ SubmitButton
+  ├─ SaveButton
+  ├─ CancelButton
+  ├─ ConfirmButton
+  ├─ VerifyButton
+  ├─ CreateButton
+  ├─ EditButton
+  ├─ UploadButton
+  ├─ DownloadButton
+  ├─ CopyButton
+  ├─ SearchButton
+  ├─ FilterButton
+  ├─ SortButton
+  ├─ DropdownButton
+  ├─ DestructiveButton
+  ├─ LinkButton
+  ├─ CloseButton
+  └─ RefreshButton
+```
+
+## Atom: Button
+
+Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`).
+It is also the explicit escape hatch when you want purpose semantics with a non-canonical visual treatment.
+When the anchor path is used with `href`, Marwes preserves native link semantics instead of forcing `role="button"`.
+
+```vue
+<script setup lang="ts">
+import { Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Button variant="primary" action="button">Base Button</Button>
+  <Button variant="secondary" action="navigate" href="/dashboard">
+    Go to dashboard
+  </Button>
+  <Button action="cancel" variant="success">Cancel</Button>
+</template>
+```
+
+## Recommended: Purpose Buttons
+
+Use purpose-built components when the semantic intent is known ahead of time.
+Purpose buttons lock their semantic intent and canonical visual treatment.
+
+```vue
+<script setup lang="ts">
+import {
+  CancelButton,
+  SubmitButton,
+  SaveButton,
+  ConfirmButton,
+  VerifyButton,
+  CreateButton,
+  EditButton,
+  UploadButton,
+  DownloadButton,
+  CopyButton,
+  SearchButton,
+  FilterButton,
+  SortButton,
+  DropdownButton,
+  DestructiveButton,
+  LinkButton,
+  CloseButton,
+  RefreshButton,
+} from "@marwes-ui/vue"
+</script>
+
+<template>
+  <CancelButton @click="handleCancel">Cancel</CancelButton>
+  <SubmitButton>Save Changes</SubmitButton>
+  <SaveButton @click="handleSave">Save Draft</SaveButton>
+  <ConfirmButton @click="handleConfirm">Confirm</ConfirmButton>
+  <VerifyButton @click="handleVerify">Verify Account</VerifyButton>
+  <CreateButton @click="handleCreate">New Project</CreateButton>
+  <EditButton @click="handleEdit">Edit Profile</EditButton>
+
+  <UploadButton @click="handleUpload">Upload File</UploadButton>
+  <DownloadButton @click="handleDownload">Download CSV</DownloadButton>
+  <CopyButton @click="handleCopy">Copy Link</CopyButton>
+  <SearchButton @click="handleSearch">Search</SearchButton>
+  <FilterButton @click="openFilters">Filter</FilterButton>
+  <SortButton @click="toggleSort">Sort</SortButton>
+  <DropdownButton ariaExpanded="isMenuOpen" ariaControls="action-menu">
+    More Actions
+  </DropdownButton>
+
+  <DestructiveButton @click="handleDelete">Delete</DestructiveButton>
+  <LinkButton href="/dashboard">Go to Dashboard</LinkButton>
+  <CloseButton @click="handleClose">Close</CloseButton>
+  <RefreshButton @click="handleRefresh">Refresh</RefreshButton>
+</template>
+```
+
+If you intentionally need a different visual treatment, drop down to `Button`.
+
+```vue
+<template>
+  <Button action="cancel" variant="success">Cancel</Button>
+</template>
+```
+
+> **Skipped in the current docs surface:** `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, and `SettingsButton` remain intentionally omitted until that final purpose-button wave ships.
+
+### Why Semantic Components?
+
+<ol>
+  {buttonWhySemanticComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+## Variant Wrappers
+
+Use visual wrappers when you want a stable visual pattern without purpose semantics.
+These are visual-only wrappers, not semantic purpose buttons.
+
+```vue
+<script setup lang="ts">
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
+  SuccessButton,
+} from "@marwes-ui/vue"
+</script>
+
+<template>
+  <PrimaryButton>Continue</PrimaryButton>
+  <SecondaryButton>Back</SecondaryButton>
+  <TextButton>Learn more</TextButton>
+  <SuccessButton>Approved</SuccessButton>
+</template>
+```
+
+## Advanced: Raw Props
+
+For dynamic or custom scenarios, use the base `Button` with explicit props.
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { Button, ButtonVariant, ButtonAction, ButtonSize } from "@marwes-ui/vue"
+
+const isEditing = ref(false)
+</script>
+
+<template>
+  <Button
+    :variant="ButtonVariant.primary"
+    :size="ButtonSize.md"
+    :action="isEditing ? ButtonAction.edit : ButtonAction.create"
+  >
+    {{ isEditing ? "Update" : "Create" }}
+  </Button>
+
+  <Button :variant="ButtonVariant.secondary" :action="ButtonAction.reset">
+    Reset Form
+  </Button>
+</template>
+```
+
+## Loading States
+
+`Button` supports both a boolean shorthand and a structured loading object.
+
+### Boolean shorthand
+
+Use the boolean form for the default loading treatment:
+
+```vue
+<script setup lang="ts">
+import { Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Button loading>Save</Button>
+</template>
+```
+
+This keeps the existing button label visible, shows the classic button spinner, and disables interaction while loading.
+
+### Object loading API
+
+Use the object form when you need explicit control over loading behavior:
+
+```vue
+<script setup lang="ts">
+import { SpinnerVariants } from "@marwes-ui/core"
+import { Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Button
+    :loading="{
+      isLoading: true,
+      loadingLabel: 'Saving…',
+      spinnerVariant: SpinnerVariants.dual,
+    }"
+  >
+    Save
+  </Button>
+</template>
+```
+
+The structured loading object supports:
+
+- `isLoading` — explicit loading state
+- `disableWhileLoading` — defaults to `true`
+- `spinnerVariant` — defaults to `SpinnerVariants.classic`
+- `loadingLabel` — replaces the visible label while loading
+
+### Non-blocking loading
+
+For refresh-style actions, keep the button interactive while still showing loading feedback:
+
+```vue
+<template>
+  <Button
+    :loading="{
+      isLoading: true,
+      disableWhileLoading: false,
+      loadingLabel: 'Refreshing…',
+    }"
+    variant="secondary"
+  >
+    Refresh
+  </Button>
+</template>
+```
+
+If the button is icon-only while loading, provide either `ariaLabel` or `loadingLabel` so it still has an accessible name.
+
+### Type-Safe Enums
+
+All button enums are exported for IDE autocomplete:
+
+```ts
+import { ButtonVariant, ButtonSize, ButtonAction } from "@marwes-ui/vue"
+
+ButtonVariant.primary
+ButtonVariant.secondary
+ButtonVariant.neutral
+ButtonVariant.text
+ButtonVariant.success
+
+ButtonSize.xs
+ButtonSize.sm
+ButtonSize.md
+ButtonSize.lg
+
+ButtonAction.submit
+ButtonAction.cancel
+ButtonAction.create
+ButtonAction.delete
+ButtonAction.navigate
+ButtonAction.edit
+ButtonAction.reset
+ButtonAction.button
+```
+
+## Variant vs Action
+
+### `variant` — Visual Style
+
+Controls how the button **looks**. Choose based on visual hierarchy:
+
+<ul>
+  {buttonVariantVisualStyles.map((item) => (
+    <li key={item.label}>
+      <strong>
+        <code>{item.label}</code>
+      </strong>{" "}
+      - {item.text}
+    </li>
+  ))}
+</ul>
+
+### `action` — Semantic Purpose
+
+Controls what the button **does** as machine-readable metadata:
+
+<ul>
+  {buttonActionSemanticPurposes.map((item) => (
+    <li key={item.label}>
+      <strong>
+        <code>{item.label}</code>
+      </strong>{" "}
+      - {item.text}
+    </li>
+  ))}
+</ul>
+
+> **Note:** On the base `Button`, `variant` and `action` are independent. On purpose buttons, both are intentionally locked to the canonical pattern.
+
+---
+
+## Component Reference
+
+### Variant Buttons
+
+**`PrimaryButton`** — Common primary style wrapper  
+Locks: `variant="primary"`
+
+**`SecondaryButton`** — Common secondary style wrapper  
+Locks: `variant="secondary"`
+
+**`TextButton`** — Common low-emphasis style wrapper  
+Locks: `variant="text"`
+
+**`SuccessButton`** — Common positive visual wrapper  
+Locks: `variant="success"`
+
+### Purpose Buttons (Canonical Semantic + Visual Pattern)
+
+**`SubmitButton`** — Form submissions  
+Locks: `action="submit"`, `variant="primary"`, `as="button"`
+
+**`SaveButton`** — Save and persist actions  
+Locks: `action="submit"`, `variant="primary"`
+
+**`CancelButton`** — Cancel and dismiss actions  
+Locks: `action="cancel"`, `variant="neutral"`
+
+**`ConfirmButton`** — Affirmative confirmation actions  
+Locks: `variant="success"`, `as="button"`
+
+**`VerifyButton`** — Verification and approval actions  
+Locks: `variant="secondary"`, `as="button"`, default check-circle icon
+
+**`CreateButton`** — Creating new items  
+Locks: `action="create"`, `variant="primary"`
+
+**`EditButton`** — Edit and modify actions  
+Locks: `action="edit"`, `variant="secondary"`, default edit icon
+
+**`UploadButton`** — Upload and import actions  
+Locks: `variant="secondary"`, default upload icon
+
+**`DownloadButton`** — Download and export actions  
+Locks: `variant="secondary"`, default download icon
+
+**`CopyButton`** — Copy and duplicate actions  
+Locks: `variant="neutral"`
+
+**`SearchButton`** — Explicit search triggers  
+Locks: `variant="primary"`, default search icon
+
+**`FilterButton`** — Filter and refine controls  
+Locks: `variant="neutral"`
+
+**`SortButton`** — Sort and ordering controls  
+Locks: `variant="neutral"`
+
+**`DropdownButton`** — Disclosure or action-menu triggers  
+Locks: `variant="secondary"`, default chevron-down icon
+
+**`DestructiveButton`** — Destructive actions  
+Locks: `action="delete"`, `variant="primary"`, error styling, `as="button"`
+
+**`LinkButton`** — Navigation links  
+Locks: `action="navigate"`, `variant="text"`, `as="a"`  
+Enabled links keep native link semantics. Disabled or loading anchor paths remove `href`, set `aria-disabled`, and stay unfocusable.
+
+**`CloseButton`** — Close and dismiss affordances  
+Locks: `action="cancel"`, `variant="neutral"`
+
+**`RefreshButton`** — Refresh and reload actions  
+Locks: `variant="neutral"`, default refresh icon
+
+**Skipped until implemented** — `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, `SettingsButton`

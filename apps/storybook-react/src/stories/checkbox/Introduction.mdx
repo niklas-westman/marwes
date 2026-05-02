@@ -1,0 +1,61 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Checkbox/Introduction" />
+
+# Checkbox Components
+
+Checkbox stories are organized with a simple two-layer structure to keep discovery fast.
+
+## Checkbox Architecture
+
+```
+Checkbox (Atom)
+     ↓        ↓
+CheckboxField (Molecule)
+CheckboxGroupField (Molecule)
+```
+
+## Atom: Checkbox
+
+Use `Checkbox` for low-level control when you manage label/layout yourself.
+
+```tsx
+import { Checkbox } from "@marwes-ui/react"
+
+<label>
+  <Checkbox ariaLabel="Accept terms" />
+  Accept terms
+</label>
+```
+
+## Molecule: CheckboxField
+
+Use `CheckboxField` when you want built-in field semantics and accessibility wiring.
+
+```tsx
+import { CheckboxField } from "@marwes-ui/react"
+
+<CheckboxField
+  label="Subscribe to updates"
+  description="We'll only send important product updates."
+  checkbox={{ size: "md" }}
+/>
+```
+
+## Molecule: CheckboxGroupField
+
+Use `CheckboxGroupField` when you need a labeled multi-select checkbox list with shared helper/error text.
+
+```tsx
+import { CheckboxGroupField } from "@marwes-ui/react"
+
+<CheckboxGroupField
+  label="Notification preferences"
+  description="Choose every channel you want us to use."
+  options={[
+    { value: "email", label: "Email updates" },
+    { value: "sms", label: "SMS alerts" },
+    { value: "push", label: "Push notifications" },
+  ]}
+/>
+```

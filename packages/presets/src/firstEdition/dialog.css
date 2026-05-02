@@ -1,0 +1,149 @@
+.mw-dialog {
+  --mw-dialog-surface: var(--mw-color-surface-elevated, #ffffff);
+  --mw-dialog-border: var(--mw-color-border-subtle, #e5e7eb);
+  --mw-dialog-divider: var(--mw-color-border-subtle, #00000033);
+  --mw-dialog-title: var(--mw-color-text, #141414);
+  --mw-dialog-description: color-mix(
+    in srgb,
+    var(--mw-color-text, #141414) 65%,
+    var(--mw-color-background, #ffffff)
+  );
+  --mw-dialog-radius: calc(var(--mw-ui-radius, 4px) * 3);
+  --mw-dialog-close-radius: calc(var(--mw-ui-radius, 4px) * 2);
+  --mw-dialog-width: 560px;
+
+  width: min(calc(100vw - var(--mw-spacing-sp-32)), var(--mw-dialog-width));
+  max-height: calc(100vh - var(--mw-spacing-sp-48));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  box-sizing: border-box;
+  border: 1px solid var(--mw-dialog-border);
+  border-radius: var(--mw-dialog-radius);
+  background: var(--mw-dialog-surface);
+}
+
+.mw-dialog:focus-visible {
+  outline: 2px solid var(--mw-color-focus, #2f31fc);
+  outline-offset: 2px;
+}
+
+.mw-dialog--small {
+  --mw-dialog-width: 480px;
+}
+
+.mw-dialog--medium {
+  --mw-dialog-width: 560px;
+}
+
+.mw-dialog--large {
+  --mw-dialog-width: 720px;
+}
+
+.mw-dialog__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 16px 16px 24px;
+}
+
+.mw-dialog__heading-group,
+.mw-dialog__spacer {
+  flex: 1;
+  min-width: 0;
+}
+
+.mw-dialog__title {
+  margin: 0;
+  color: var(--mw-dialog-title);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0;
+}
+
+.mw-dialog__close {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--mw-dialog-close-radius);
+  background: transparent;
+  color: var(--mw-dialog-description);
+  cursor: pointer;
+}
+
+.mw-dialog__close:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.mw-dialog__close:focus-visible {
+  outline: 2px solid var(--mw-color-focus, #2f31fc);
+  outline-offset: 2px;
+}
+
+.mw-dialog__header-divider,
+.mw-dialog__footer-divider {
+  height: 1px;
+  background: var(--mw-dialog-divider);
+}
+
+.mw-dialog__content {
+  padding: 24px;
+}
+
+.mw-dialog__description,
+.mw-dialog__content .mw-p {
+  margin: 0;
+  color: var(--mw-dialog-description);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.mw-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px 24px;
+  flex-wrap: wrap;
+}
+
+.mw-theme--dark .mw-dialog {
+  --mw-dialog-surface: var(--mw-color-surface-elevated, #474747);
+  --mw-dialog-border: var(--mw-color-border-subtle, #474747);
+  --mw-dialog-divider: var(--mw-color-border-subtle, #ffffff33);
+  --mw-dialog-title: var(--mw-color-text, #f9fafb);
+  --mw-dialog-description: color-mix(
+    in srgb,
+    var(--mw-color-text, #f9fafb) 65%,
+    var(--mw-color-background, #141414)
+  );
+}
+
+@media (max-width: 640px) {
+  .mw-dialog {
+    width: min(calc(100vw - var(--mw-spacing-sp-24)), var(--mw-dialog-width));
+    max-height: calc(100vh - var(--mw-spacing-sp-24));
+  }
+
+  .mw-dialog__content {
+    padding: 20px; /* off-scale — no token */
+  }
+
+  .mw-dialog__footer {
+    padding: 16px 20px 20px; /* off-scale — no token */
+    justify-content: stretch;
+  }
+
+  .mw-dialog__footer > * {
+    flex: 1 1 auto;
+  }
+}

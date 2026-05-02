@@ -6,3 +6,48 @@ export type {
 } from "./input-types"
 
 export { createInputRecipe } from "./input-recipe"
+
+export type {
+  InputOtpOptions,
+  InputOtpRenderKit,
+  InputOtpA11yProps,
+} from "./input-otp-types"
+
+export { createInputOtpRecipe, sanitizeInputOtpValue } from "./input-otp-recipe"
+
+export type {
+  SelectAppearance,
+  SelectMode,
+  SelectOptions,
+  SelectRenderKit,
+  SelectA11yProps,
+  SelectOption,
+} from "./select-types"
+
+export { createSelectRecipe } from "./select-recipe"
+export { resolveSelectMode } from "./select-types"
+
+export type {
+  TextareaOptions,
+  TextareaRenderKit,
+  TextareaA11yProps,
+  TextareaResize,
+} from "./textarea-types"
+
+export { createTextareaRecipe } from "./textarea-recipe"
+
+export type {
+  RichTextOptions,
+  RichTextRenderKit,
+  RichTextA11yProps,
+  RichTextFormat,
+} from "./rich-text-types"
+
+export { createRichTextRecipe } from "./rich-text-recipe"
+export {
+  normalizeRichTextHtml,
+  isRichTextHtmlEmpty,
+  escapeRichTextHtml,
+  richTextCommandByFormat,
+} from "./rich-text-html"
+export { resolveRichTextAllowedFormats } from "./rich-text-styles"

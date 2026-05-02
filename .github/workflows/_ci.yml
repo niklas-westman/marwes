@@ -24,6 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Validate GitHub Actions workflow files (syntax + common config issues)
+      - name: actionlint
+        uses: devops-actions/actionlint@v0.1.10
+
       # Install pnpm package manager (reads version from packageManager field in package.json)
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -43,13 +47,36 @@ jobs:
       - name: Biome
         run: pnpm biome check .
 
+      # Keep markdown and package docs aligned with the public API surface
+      - name: Docs links
+        run: pnpm docs:links
+
+      - name: Docs API drift
+        run: pnpm docs:api
+
+      # Validate the canonical semantic registry remains internally coherent
+      - name: Semantic registry
+        run: pnpm semantics:check
+
+      # Verify committed trust artifacts still match source-owned truth
+      - name: Trust artifacts
+        run: pnpm artifacts:check
+
+      # Ensure React/Vue story, export, and family coverage parity remains healthy
+      - name: Storybook consistency
+        run: pnpm storybook:consistency
+
       # Run TypeScript type checking across all workspace packages
       - name: Typecheck
         run: pnpm -r typecheck
 
-      # Run unit tests across all workspace packages
+      # Validate shared adapter contracts compile against current public APIs
+      - name: Contract typecheck
+        run: pnpm test:typecheck:contracts
+
+      # Run package tests across core, presets, React, and Vue
       - name: Test
-        run: pnpm -r test
+        run: pnpm test:packages
 
       # Build all workspace packages for production
       - name: Build

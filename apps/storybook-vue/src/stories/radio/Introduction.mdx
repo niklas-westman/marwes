@@ -1,0 +1,127 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { radioPurposeComponentReference, radioWhyPurposeComponents } from "@marwes-ui/core"
+
+<Meta title="Radio/Introduction" />
+
+# Radio Components
+
+Marwes provides a radio system with three layers:
+**purpose components** for common patterns, **RadioGroupField** for custom option lists,
+and the raw **Radio** atom for advanced control.
+
+## Recommended: Purpose Components
+
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```vue
+<script setup lang="ts">
+import { OptionRadioGroup, RatingRadioGroup, YesNoRadioGroup } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <YesNoRadioGroup
+    name="accept-terms"
+    label="Do you accept the terms?"
+    defaultValue="no"
+  />
+
+  <RatingRadioGroup
+    name="satisfaction"
+    label="How satisfied are you?"
+    defaultValue="3"
+  />
+
+  <OptionRadioGroup
+    name="theme"
+    label="Select theme"
+    :options="[
+      { value: 'light', label: 'Light' },
+      { value: 'dark', label: 'Dark' },
+      { value: 'system', label: 'System' },
+    ]"
+    defaultValue="system"
+  />
+</template>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {radioWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {radioPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: RadioGroupField
+
+For custom option lists that do not fit a purpose component, use `RadioGroupField` directly:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { RadioGroupField } from "@marwes-ui/vue"
+
+const method = ref("standard")
+</script>
+
+<template>
+  <RadioGroupField
+    name="shipping"
+    label="Shipping method"
+    description="Choose how you'd like your order delivered."
+    :options="[
+      { value: 'standard', label: 'Standard (5-7 days)' },
+      { value: 'express', label: 'Express (2-3 days)' },
+      { value: 'overnight', label: 'Overnight' },
+    ]"
+    v-model="method"
+  />
+</template>
+```
+
+## Low-level: Radio Atom
+
+Use the raw `Radio` atom when you need fully custom layout:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { Radio } from "@marwes-ui/vue"
+
+const selected = ref("a")
+const options = [
+  { value: "a", label: "Option A" },
+  { value: "b", label: "Option B" },
+]
+</script>
+
+<template>
+  <div role="radiogroup" aria-label="Preference">
+    <label
+      v-for="option in options"
+      :key="option.value"
+      style="display: flex; gap: 8px;"
+    >
+      <Radio
+        name="preference"
+        :value="option.value"
+        :checked="selected === option.value"
+        @checked-change="(checked) => checked && (selected = option.value)"
+      />
+      {{ option.label }}
+    </label>
+  </div>
+</template>
+```

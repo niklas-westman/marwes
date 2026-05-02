@@ -1,0 +1,156 @@
+/*
+ * Switch Component Styles
+ * Figma: 1364:11442 (light) / 1369:4001 (dark)
+ *
+ * Tokens (from Figma nodes.json):
+ *   switch/track-off  (light): #e5e7eb    (dark): #374151
+ *   switch/track-on   (light): #2f31fc    (dark): #2f31fc  (= primary-base)
+ *   switch/thumb-off  (light): #f9fafb    (dark): #141414
+ *   switch/thumb-on   (light): #ffffff    (dark): #ffffff
+ *   switch/label      (light): #141414    (dark): #f9fafb
+ *   Sizes: Compact 24×16 / 12px, Wide 30×16 / 12px, Rich 30×20 / 16px
+ */
+
+.mw-switch {
+  --mw-switch-track-off: var(--mw-color-border-subtle);
+  --mw-switch-track-off-hover: color-mix(in srgb, var(--mw-color-border) 60%, var(--mw-color-text));
+  --mw-switch-track-off-active: var(--mw-color-border);
+  --mw-switch-track-off-disabled: var(--mw-color-border-disabled);
+  --mw-switch-track-on: var(--mw-color-primary-base, #2f31fc);
+  --mw-switch-track-on-hover: var(--mw-color-primary-hover, #2527ca);
+  --mw-switch-track-on-active: var(--mw-color-primary-pressed, #1b1d97);
+  --mw-switch-track-on-disabled: var(--mw-color-primary-disabled, #8182fc);
+  --mw-switch-thumb-off: var(--mw-color-surface);
+  --mw-switch-thumb-off-disabled: var(--mw-color-surface-disabled);
+  --mw-switch-thumb-on: var(--mw-color-primary-label);
+  --mw-switch-thumb-on-disabled: var(--mw-color-primary-label-disabled);
+  --mw-switch-label: var(--mw-color-text);
+  --mw-switch-label-disabled: var(--mw-color-text-disabled);
+  --mw-switch-focus-ring: var(--mw-color-focus, #2f31fc);
+  --mw-switch-track-width: 24px;
+  --mw-switch-track-height: 16px;
+  --mw-switch-thumb-size: 12px;
+  --mw-switch-thumb-offset: 2px;
+  --mw-switch-thumb-translate: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mw-spacing-sp-8, 8px);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--mw-switch-label);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.mw-switch__track {
+  position: relative;
+  width: var(--mw-switch-track-width);
+  height: var(--mw-switch-track-height);
+  border-radius: 9999px;
+  background: var(--mw-switch-track-off);
+  flex-shrink: 0;
+  transition: background 150ms ease;
+}
+
+.mw-switch__thumb {
+  position: absolute;
+  top: var(--mw-switch-thumb-offset);
+  left: var(--mw-switch-thumb-offset);
+  width: var(--mw-switch-thumb-size);
+  height: var(--mw-switch-thumb-size);
+  border-radius: 50%;
+  background: var(--mw-switch-thumb-off);
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.mw-switch--wide {
+  --mw-switch-track-width: 30px;
+  --mw-switch-thumb-translate: 14px;
+}
+
+.mw-switch--rich {
+  --mw-switch-track-width: 30px;
+  --mw-switch-track-height: 20px;
+  --mw-switch-thumb-size: 16px;
+  --mw-switch-thumb-translate: 10px;
+}
+
+.mw-switch--checked .mw-switch__track {
+  background: var(--mw-switch-track-on);
+}
+
+.mw-switch--checked .mw-switch__thumb {
+  transform: translateX(var(--mw-switch-thumb-translate));
+  background: var(--mw-switch-thumb-on);
+}
+
+.mw-switch:not(.mw-switch--disabled):hover .mw-switch__track {
+  background: var(--mw-switch-track-off-hover);
+}
+
+.mw-switch:not(.mw-switch--disabled).mw-switch--checked:hover .mw-switch__track {
+  background: var(--mw-switch-track-on-hover);
+}
+
+.mw-switch:not(.mw-switch--disabled):active .mw-switch__track {
+  background: var(--mw-switch-track-off-active);
+}
+
+.mw-switch:not(.mw-switch--disabled).mw-switch--checked:active .mw-switch__track {
+  background: var(--mw-switch-track-on-active);
+}
+
+.mw-switch--disabled {
+  cursor: not-allowed;
+  color: var(--mw-switch-label-disabled);
+  pointer-events: none;
+}
+
+.mw-switch--disabled .mw-switch__track {
+  background: var(--mw-switch-track-off-disabled);
+}
+
+.mw-switch--disabled .mw-switch__thumb {
+  background: var(--mw-switch-thumb-off-disabled);
+}
+
+.mw-switch--disabled.mw-switch--checked .mw-switch__track {
+  background: var(--mw-switch-track-on-disabled);
+}
+
+.mw-switch--disabled.mw-switch--checked .mw-switch__thumb {
+  background: var(--mw-switch-thumb-on-disabled);
+}
+
+.mw-switch:focus-visible {
+  outline: none;
+}
+
+.mw-switch:focus-visible .mw-switch__track {
+  outline: 2px solid var(--mw-switch-focus-ring);
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+.mw-theme--dark .mw-switch {
+  --mw-switch-track-off: var(--mw-color-border-subtle);
+  --mw-switch-track-off-hover: color-mix(in srgb, var(--mw-color-border) 60%, var(--mw-color-text));
+  --mw-switch-track-off-active: var(--mw-color-border);
+  --mw-switch-track-off-disabled: var(--mw-color-border-disabled);
+  --mw-switch-track-on: var(--mw-color-primary-base, #2f31fc);
+  --mw-switch-track-on-hover: var(--mw-color-primary-hover, #5859fc);
+  --mw-switch-track-on-active: var(--mw-color-primary-pressed, #8182fc);
+  --mw-switch-track-on-disabled: var(--mw-color-primary-disabled, #121365);
+  --mw-switch-thumb-off: var(--mw-color-surface);
+  --mw-switch-thumb-off-disabled: var(--mw-color-surface-disabled);
+  --mw-switch-thumb-on: var(--mw-color-primary-label);
+  --mw-switch-thumb-on-disabled: var(--mw-color-primary-label-disabled);
+  --mw-switch-label: var(--mw-color-text);
+  --mw-switch-label-disabled: var(--mw-color-text-disabled);
+  --mw-switch-focus-ring: var(--mw-color-focus, #5859fc);
+}

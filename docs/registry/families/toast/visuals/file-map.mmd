@@ -1,0 +1,28 @@
+flowchart TD
+  Registry["docs/registry/families/toast"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Semantics["packages/core/src/semantics/"]
+  Semantics --> FamilySemantics["family-semantics.ts"]
+  Semantics --> PurposeSemantics["purpose-semantics.ts"]
+
+  Core["packages/core/src/components/atoms/toast/"]
+  Core --> CoreFiles["toast-a11y.ts toast-recipe.ts toast-types.ts toast-container-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> ToastCss["toast.css"]
+  Presets --> ContainerCss["molecules/toast-container.css"]
+
+  React["packages/react/src/components/toast/"]
+  React --> ReactFiles["toast.tsx toast-container.tsx toast-provider.tsx variants.tsx tests"]
+  React --> ReactTypes["toast-manager-types.ts"]
+
+  Vue["packages/vue/src/components/toast/"]
+  Vue --> VueFiles["toast.ts toast-container.ts toast-provider.ts variants.ts tests"]
+  Vue --> VueTypes["toast-manager-types.ts"]
+
+  StoriesR["apps/storybook-react/src/stories/toast/"]
+  StoriesV["apps/storybook-vue/src/stories/toast/"]
+  Contracts["tests/contracts/toast.contract.ts"]

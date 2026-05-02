@@ -1,0 +1,25 @@
+flowchart LR
+  RawToast["Raw Toast"] --> LiveRegion["ariaLive -> role=status or alert\naria-atomic=true"]
+  RawToast --> CanonicalData["data-component=toast\ndata-variant"]
+  RawToast --> PrimitiveIntent["raw data-intent escape hatch\nfor neutral or brand"]
+
+  Purpose["Success / Error / Warning / Info Toast"] --> PurposeSemantics["canonical data-purpose + data-intent"]
+  Purpose --> Defaults["default icon + live-region urgency"]
+  Purpose --> RawToast
+
+  Container["ToastContainer"] --> Placement["top or bottom + left or right placement"]
+  Container --> Stack["stacking + maxVisible trimming"]
+  Container --> Dismiss["dismiss forwarding + auto-dismiss item wrapper"]
+  Container --> RouteIntent["intent routes through matching purpose toast"]
+
+  Provider["ToastProvider / useToast"] --> Queue["imperative show dismiss clear"]
+  Queue --> Container
+
+  CanonicalData --> ReactDom["React DOM"]
+  CanonicalData --> VueDom["Vue DOM"]
+  PurposeSemantics --> ReactDom
+  PurposeSemantics --> VueDom
+  Placement --> ReactDom
+  Placement --> VueDom
+  Queue --> ReactDom
+  Queue --> VueDom

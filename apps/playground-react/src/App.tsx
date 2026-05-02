@@ -1,35 +1,92 @@
-import { firstEdition } from "@marwes-ui/presets"
-import { Button, MarwesProvider } from "@marwes-ui/react"
+import type { ThemeInput } from "@marwes-ui/react"
+import { MarwesProvider } from "@marwes-ui/react"
+import { useState } from "react"
 
-import "@marwes-ui/presets/firstEdition/styles.css"
+import { GlobalStyle } from "./global-style"
+import { PlaygroundLayout } from "./layout/playground-layout"
+import { PreviewArea, PreviewHeader, PreviewSubtitle, PreviewTitle } from "./layout/preview"
+import { Sidebar } from "./layout/sidebar"
+import { AccordionsSection } from "./sections/accordions"
+import { BadgesSection } from "./sections/badges"
+import { ButtonsSection } from "./sections/buttons"
+import { CardsSection } from "./sections/cards"
+import { CheckboxesSection } from "./sections/checkboxes"
+import { ColorPaletteSection } from "./sections/color-palette"
+import { ComponentSummary } from "./sections/component-summary"
+import { DividersSection } from "./sections/dividers"
+import { IconsSection } from "./sections/icons"
+import { InputFieldsSection } from "./sections/input-fields"
+import { RadiosSection } from "./sections/radios"
+import { SectionDivider } from "./sections/section.styles"
+import { SwitchesSection } from "./sections/switches"
+import { TabsSection } from "./sections/tabs"
+import { ToastsSection } from "./sections/toasts"
+import { TypographySection } from "./sections/typography"
 
-function App() {
+const DEFAULT_THEME: ThemeInput = {
+  mode: "light",
+  tone: "default",
+  color: {
+    primary: "#5B8CFF",
+    danger: "#D90429",
+    success: "#006633",
+    warning: "#FFB703",
+  },
+  ui: { radius: 4, density: "comfortable" },
+}
+
+function App(): JSX.Element {
+  const [theme, setTheme] = useState<ThemeInput>(DEFAULT_THEME)
+
   return (
-    <div style={{ padding: 24, display: "grid", gap: 12 }}>
-      <h1 style={{ margin: 0 }}>Marwes Playground</h1>
+    <>
+      <GlobalStyle />
+      <PlaygroundLayout>
+        <Sidebar onThemeChange={setTheme} />
+        <MarwesProvider theme={theme}>
+          <PreviewArea>
+            <PreviewHeader>
+              <PreviewTitle>Component Preview</PreviewTitle>
+              <PreviewSubtitle>
+                Live preview of the Marwes design system. Adjust theme controls to see every
+                component respond in real time.
+              </PreviewSubtitle>
+            </PreviewHeader>
 
-      <MarwesProvider
-        preset={firstEdition}
-        theme={{
-          color: { primary: "#5B8CFF", secondary: "#111111" },
-          ui: { radius: 12 },
-        }}
-      >
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <Button>Primary</Button>
-
-          <Button variant="secondary">Secondary</Button>
-          <Button as="a" href="https://example.com" variant="text">
-            Link Button
-          </Button>
-          <Button disabled>Disabled</Button>
-          <Button loading ariaLabel="Loading button" hasVisibleText>
-            Loading
-          </Button>
-        </div>
-      </MarwesProvider>
-    </div>
+            <ComponentSummary />
+            <SectionDivider />
+            <TypographySection />
+            <SectionDivider />
+            <ButtonsSection />
+            <SectionDivider />
+            <TabsSection />
+            <SectionDivider />
+            <AccordionsSection />
+            <SectionDivider />
+            <CardsSection />
+            <SectionDivider />
+            <ToastsSection />
+            <SectionDivider />
+            <BadgesSection />
+            <SectionDivider />
+            <SwitchesSection />
+            <SectionDivider />
+            <RadiosSection />
+            <SectionDivider />
+            <InputFieldsSection />
+            <SectionDivider />
+            <CheckboxesSection />
+            <SectionDivider />
+            <DividersSection />
+            <SectionDivider />
+            <IconsSection />
+            <SectionDivider />
+            <ColorPaletteSection />
+          </PreviewArea>
+        </MarwesProvider>
+      </PlaygroundLayout>
+    </>
   )
 }
 
-export default App
+export { App }

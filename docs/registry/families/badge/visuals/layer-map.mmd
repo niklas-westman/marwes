@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\nbadge page + checkboxbadge component"]
+  Spec["AI metadata + audit queue + Storybook docs copy"]
+  Core["@marwes-ui/core\nbadge recipe + canonical semantics"]
+  Presets["preset CSS\nbadge + badge-group layout"]
+  React["@marwes-ui/react\nbadge + group + variants"]
+  Vue["@marwes-ui/vue\nbadge + group + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["badge shared contract"]
+  Registry["docs/registry/families/badge"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

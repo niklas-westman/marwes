@@ -1,22 +1,19 @@
-import type { Preset } from "@marwes-ui/core"
+import type { ThemeInput } from "@marwes-ui/core"
 import "@fontsource/instrument-sans/400.css"
 import "@fontsource/instrument-sans/500.css"
 import "@fontsource/instrument-sans/600.css"
 
-export const firstEdition: Preset = {
-  name: "firstEdition",
-  theme: {
-    ui: {
-      radius: 4,
-      density: "comfortable",
-      variant: "solid",
+// Explicit ThemeInput for consumers that still want to import the preset object.
+// MarwesProvider uses the same first edition baseline when no theme is provided.
+export const firstEditionTheme: ThemeInput = {
+  color: {
+    primary: {
+      base: "#2F31FC",
+      label: "#FFFFFF",
+      labelDisabled: "rgba(255,255,255,0.5)",
     },
-    font: {
-      primary: "Instrument Sans, system-ui, -apple-system, sans-serif",
-    },
-    icon: {
-      size: "sm",
-      strokeWidth: "sm",
-    },
+    success: "#00875A",
   },
+  font: { primary: "'Instrument Sans', Inter, system-ui, sans-serif" },
+  ui: { radius: 4, density: "comfortable" },
 }

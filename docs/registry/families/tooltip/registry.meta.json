@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "tooltip",
+  "displayName": "Tooltip",
+  "status": "shipped",
+  "summary": "Contextual-help family with a standalone tooltip atom, a canonical TooltipGroup path, and an explicit non-interactive scope boundary.",
+  "philosophy": [
+    "Teach TooltipGroup as the canonical contextual-help surface and keep raw Tooltip as the low-level visible bubble primitive.",
+    "Keep tooltip content non-interactive so the family does not drift into popover or dialog territory.",
+    "Treat trigger naming, reveal, and dismissal behavior as release-sensitive contract surface rather than incidental adapter details.",
+    "Stay honest about semantic maturity: the family emits useful local metadata today, but it is not part of the wave-1 central semantic registry."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs short, non-interactive contextual help tied to an icon trigger or a placement-owned tooltip bubble.",
+      "The product flow benefits from TooltipGroup's built-in trigger naming and hover or focus reveal behavior.",
+      "The team wants React and Vue tooltip behavior to stay aligned through one shared contract file."
+    ],
+    "avoidWhen": [
+      "The content needs links, buttons, forms, or any other focusable interactive elements.",
+      "The UI really needs a popover, dialog, or other richer overlay rather than short contextual help.",
+      "The team expects collision detection, delay tuning, or a general-purpose overlay API that this family does not define."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared tooltip contract coverage across React and Vue for trigger naming, hover or focus reveal, dismissal, described-by wiring, and controlled open-state behavior.",
+      "Local tooltip atom and index-export tests in both adapters.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for tooltip announcement timing and keyboard feel.",
+      "Future decisions about which tooltip stories should join stricter automated accessibility gates.",
+      "Whether clearly interactive tooltip content should eventually trigger dev-time warnings."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#p2--second-component-audit-queue",
+      "AXE_ROADMAP.md#4d--tooltip-scope-discipline"
+    ],
+    "notes": [
+      "Tooltip completed a first-pass audit and now has an explicit spec-backed family contract.",
+      "The family still sits outside the wave-1 central semantic registry even though the atom and group already emit stable local metadata."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/tooltip/Introduction.mdx",
+        "apps/storybook-react/src/stories/tooltip/tooltip-group.stories.tsx",
+        "apps/storybook-react/src/stories/tooltip/tooltip.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/tooltip/Introduction.mdx",
+        "apps/storybook-vue/src/stories/tooltip/tooltip-group.stories.ts",
+        "apps/storybook-vue/src/stories/tooltip/tooltip.stories.ts"
+      ]
+    },
+    "preferredStates": ["open", "closed", "hover", "focus", "escape-dismiss", "light", "dark"]
+  },
+  "openQuestions": [
+    "Which Tooltip-family stories should later join automated accessibility gates?",
+    "Should clearly interactive tooltip content eventually trigger dev-time warnings, or remain a docs-and-review boundary?"
+  ]
+}

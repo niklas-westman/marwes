@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\nicon galleries + representative components"]
+  Spec["Spec gap + testing docs + audit queue"]
+  Core["@marwes-ui/core\nicon registry + generated names + scales"]
+  Presets["preset CSS\nicon.css"]
+  React["@marwes-ui/react\nIcon adapter"]
+  Vue["@marwes-ui/vue\nIcon adapter"]
+  Stories["Storybook React + Vue\nicon gallery"]
+  Contracts["icon shared contract"]
+  Registry["docs/registry/families/icon"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

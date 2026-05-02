@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ntypography scale + heading-named scaffold files"]
+  Spec["Spec gap + testing docs + audit queue"]
+  Core["@marwes-ui/core\nheading recipe + native tag selection"]
+  Presets["preset CSS\nshared typography.css"]
+  React["@marwes-ui/react\nH1 H2 H3 adapters"]
+  Vue["@marwes-ui/vue\nH1 H2 H3 adapters"]
+  Stories["Storybook React + Vue"]
+  Contracts["heading shared contract"]
+  Registry["docs/registry/families/heading"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

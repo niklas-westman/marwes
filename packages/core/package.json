@@ -4,6 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "license": "MIT",
   "private": false,
   "type": "module",
   "sideEffects": false,
@@ -20,16 +21,18 @@
     "dev": "tsup --watch",
     "build": "tsup",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"No tests in @marwes-ui/core\"",
+    "test:typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "vitest run",
     "clean": "rimraf dist",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "generate:icons": "tsx scripts/generate-icon-names.ts"
   },
   "devDependencies": {
-    "rimraf": "^6.0.0",
-    "tsup": "^8.0.0",
-    "tsx": "^4.7.0",
-    "typescript": "^5.4.0"
+    "rimraf": "6.1.2",
+    "tsup": "8.5.1",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
   }
 }

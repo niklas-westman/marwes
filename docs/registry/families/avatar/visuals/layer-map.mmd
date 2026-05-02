@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\navatar + badge + group"]
+  Spec["Spec + AI metadata + audit queue"]
+  Core["@marwes-ui/core\navatar recipe + canonical semantics"]
+  Presets["preset CSS\navatar + badge + group"]
+  React["@marwes-ui/react\navatar + molecules + variants"]
+  Vue["@marwes-ui/vue\navatar + molecules + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["avatar shared contracts"]
+  Registry["docs/registry/families/avatar"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

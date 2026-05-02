@@ -1,0 +1,44 @@
+{
+  "$schema": "../schema/component-family.meta.schema.json",
+  "family": "<family>",
+  "displayName": "<Display Name>",
+  "status": "shipped",
+  "summary": "Short summary of the family and why it is a meaningful registry entry.",
+  "philosophy": [
+    "Teach the canonical family surface first and keep the escape hatch explicit.",
+    "Keep semantics and accessibility rules in core so React and Vue stay aligned.",
+    "Use the family API to make product intent self-documenting where possible."
+  ],
+  "usage": {
+    "useWhen": [
+      "When this family is the canonical choice for the interaction or content pattern.",
+      "When the family contract should stay aligned across React and Vue through shared core logic."
+    ],
+    "avoidWhen": [
+      "When a simpler native element or another family is the more honest semantic choice.",
+      "When the team cannot explain the family intent clearly enough to choose a stable API path."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Shared contracts or adapter tests that prove the core behavior.",
+      "Storybook docs or taxonomy tests that protect the teaching surface."
+    ],
+    "manualReviewRequired": [
+      "The remaining edge cases that automation cannot fully prove.",
+      "Any policy decision that still needs a documented accessibility stance."
+    ],
+    "roadmapAnchors": ["AXE_ROADMAP.md#..."],
+    "notes": ["Keep roadmap anchors for AXE-specific follow-up here, not audit index links."]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": ["apps/storybook-react/src/stories/<family>/..."],
+      "vue": ["apps/storybook-vue/src/stories/<family>/..."]
+    },
+    "preferredStates": ["default", "hover", "pressed", "disabled", "focus"]
+  },
+  "openQuestions": ["Only keep live family-level questions here."]
+}

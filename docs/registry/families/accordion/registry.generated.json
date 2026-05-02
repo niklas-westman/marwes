@@ -1,0 +1,151 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "accordion",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/accordion-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#p2--second-component-audit-queue",
+      "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/accordion/accordion-a11y.ts",
+      "packages/core/src/components/atoms/accordion/accordion-recipe.ts",
+      "packages/core/src/components/atoms/accordion/accordion-types.ts",
+      "packages/core/src/components/atoms/accordion/index.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/accordion.css",
+      "packages/presets/src/firstEdition/molecules/accordion-field.css"
+    ],
+    "react": [
+      "packages/react/src/components/accordion/__tests__/accordion-field.test.tsx",
+      "packages/react/src/components/accordion/__tests__/accordion.test.tsx",
+      "packages/react/src/components/accordion/__tests__/variants.test.tsx",
+      "packages/react/src/components/accordion/accordion-field.tsx",
+      "packages/react/src/components/accordion/accordion.tsx",
+      "packages/react/src/components/accordion/index.ts",
+      "packages/react/src/components/accordion/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/accordion/__tests__/accordion-field.test.ts",
+      "packages/vue/src/components/accordion/__tests__/accordion.test.ts",
+      "packages/vue/src/components/accordion/__tests__/variants.test.ts",
+      "packages/vue/src/components/accordion/accordion-field.ts",
+      "packages/vue/src/components/accordion/accordion.ts",
+      "packages/vue/src/components/accordion/index.ts",
+      "packages/vue/src/components/accordion/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/accordion/__tests__/accordion-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/accordion/__tests__/accordion-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/accordion/accordion-field.stories.tsx",
+      "apps/storybook-react/src/stories/accordion/accordion.stories.tsx",
+      "apps/storybook-react/src/stories/accordion/faq-accordion.stories.tsx",
+      "apps/storybook-react/src/stories/accordion/Introduction.mdx",
+      "apps/storybook-react/src/stories/accordion/sections-accordion.stories.tsx",
+      "apps/storybook-react/src/stories/accordion/settings-accordion.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/accordion/__tests__/accordion-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/accordion/__tests__/accordion-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/accordion/accordion-field.stories.ts",
+      "apps/storybook-vue/src/stories/accordion/accordion.stories.ts",
+      "apps/storybook-vue/src/stories/accordion/faq-accordion.stories.ts",
+      "apps/storybook-vue/src/stories/accordion/Introduction.mdx",
+      "apps/storybook-vue/src/stories/accordion/sections-accordion.stories.ts",
+      "apps/storybook-vue/src/stories/accordion/settings-accordion.stories.ts"
+    ],
+    "contracts": ["tests/contracts/accordion.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": ["faq", "settings", "sections"],
+    "purposeAttributes": {
+      "faq": {
+        "data-purpose": "faq"
+      },
+      "settings": {
+        "data-purpose": "settings"
+      },
+      "sections": {
+        "data-purpose": "sections"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/react/src/components/accordion/variants.tsx",
+      "packages/vue/src/components/accordion/variants.ts"
+    ],
+    "notes": [
+      "Accordion is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "Purpose metadata currently lives in the React and Vue purpose-accordion wrappers rather than the central semantic registry."
+    ]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/accordion.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-accordion/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-accordion/-accordion_1364-11755.json",
+      ".figma/marwes/pages/-accordion/-accordion-dark_2276-47132.json",
+      ".figma/marwes/pages/-accordion/component-container_1369-6219.json"
+    ],
+    "nodeReferences": {
+      "accordionComponentSet": "1369:6218",
+      "accordionLightFrame": "1364:11755",
+      "accordionDarkFrame": "2276:47132",
+      "accordionComponentContainer": "1369:6219"
+    },
+    "figmaTokens": [
+      "accordion/surface",
+      "accordion/border",
+      "accordion/title",
+      "accordion/content"
+    ],
+    "figmaStates": {
+      "baseVariants": ["accordion", "accordion-field", "faq", "settings", "sections"],
+      "interactionStates": [
+        "collapsed",
+        "expanded",
+        "default",
+        "hover",
+        "pressed",
+        "disabled",
+        "focus",
+        "single-open",
+        "multi-open"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Accordion is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "Purpose metadata currently lives in the React and Vue purpose-accordion wrappers rather than the central semantic registry.",
+    "Generated from docs/registry/families/accordion/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

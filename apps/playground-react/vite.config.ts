@@ -4,8 +4,10 @@ import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: process.env.VITE_BASE_PATH ?? "/playground-react/latest/",
   plugins: [react()],
   resolve: {
+    dedupe: ["react", "react-dom", "styled-components"],
     alias: [
       // CSS imports - must come before other @marwes-ui/presets aliases
       {

@@ -1,0 +1,72 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Paragraph/Introduction" />
+
+# Paragraph Component
+
+Marwes provides `Paragraph` as the atom-level text primitive for body copy,
+supporting content, and long-form reading layouts. Default to `md` for standard
+body text, use `sm` for secondary copy, and use `lg` for lead paragraphs or
+introductory emphasis.
+
+## Component Architecture
+
+```
+Paragraph (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Paragraph` atom directly and control spacing from the surrounding
+layout rather than relying on built-in margins.
+
+```tsx
+import { Paragraph } from "@marwes-ui/react"
+
+<Paragraph size="md">Body text content.</Paragraph>
+<Paragraph size="lg">Lead text content.</Paragraph>
+```
+
+## Usage Notes
+
+- `size="md"` is the default for standard body copy
+- Use `sm` for secondary notes and de-emphasized supporting text
+- Apply layout spacing externally with wrapper styles or sibling layout
+  primitives
+
+## Accessibility notes
+
+**Paragraph is real body-copy markup.** `Paragraph` renders a native `<p>` element.
+Use it for actual body text, supporting copy, and reading content — not just because text needs
+to look a certain way.
+
+**`size` changes visual emphasis, not semantics.** `sm`, `md`, and `lg` adjust the reading scale,
+but the element remains a paragraph. If the content is really a heading, label, caption, or list,
+use the more honest semantic element instead of resizing a paragraph.
+
+```tsx
+// ❌ Looks like a heading, but stays a paragraph semantically
+<Paragraph size="lg">Billing</Paragraph>
+
+// ✅ Real heading for section structure
+<H2>Billing</H2>
+```
+
+**Keep spacing and readable layout outside the component.** Paragraph does not own margins.
+Long-form readability still depends on surrounding layout decisions such as width, rhythm,
+and paragraph spacing.
+
+**Do not use Paragraph as a generic text escape hatch.** If product code needs inline text,
+labels, captions, or list structure, choose the matching semantic element instead of defaulting
+to `<p>`.
+
+## Component Reference
+
+**`Paragraph`** - Body text atom for reading content, explanatory copy, and
+supporting text blocks
+
+## Story Coverage
+
+- Size variants (`sm`, `md`, `lg`)
+- Long-form text, article layouts, and multiple paragraph compositions
+- Custom class usage and external spacing control

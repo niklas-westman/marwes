@@ -3,17 +3,17 @@
    - States: enabled, hover, disabled, error
    - Selections: checked, unchecked
    - Styles expect: <input type="checkbox" class="mw-checkbox ...">
-   - Theme tokens map to vars like --mw-primary, --mw-radius, etc.
+   - Theme tokens map to vars like --mw-color-primary-base, --mw-ui-radius, etc.
 */
 
 .mw-checkbox {
   /* Component-level CSS variables (overridden by modifiers) */
-  --mw-checkbox-size: 18px;
-  --mw-checkbox-radius: var(--mw-radius);
-  --mw-checkbox-border: var(--mw-border);
-  --mw-checkbox-bg: var(--mw-surface);
-  --mw-checkbox-checked-bg: var(--mw-primary);
-  --mw-checkbox-check: var(--mw-on-primary);
+  --mw-checkbox-size: var(--mw-density-checkbox-size);
+  --mw-checkbox-radius: var(--mw-ui-radius);
+  --mw-checkbox-border: var(--mw-color-border);
+  --mw-checkbox-bg: var(--mw-color-surface);
+  --mw-checkbox-checked-bg: var(--mw-color-primary-base);
+  --mw-checkbox-check: var(--mw-color-primary-label);
 
   /* Size and layout */
   inline-size: var(--mw-checkbox-size);
@@ -36,6 +36,9 @@
   cursor: pointer;
   vertical-align: middle;
   transition: all 150ms ease;
+
+  /* Space Protection */
+  margin: var(--mw-density-field-gap);
 
   /* Typography */
   font-family: var(--mw-font-primary, inherit);
@@ -62,7 +65,7 @@
    ============================================ */
 
 .mw-checkbox:focus-visible {
-  outline: 2px solid var(--mw-focus);
+  outline: 2px solid var(--mw-color-focus);
   outline-offset: 2px;
 }
 
@@ -71,7 +74,7 @@
    ============================================ */
 
 .mw-checkbox:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--mw-border) 60%, var(--mw-primary));
+  border-color: color-mix(in srgb, var(--mw-color-border) 60%, var(--mw-color-primary-base));
 }
 
 .mw-checkbox:checked:hover:not(:disabled) {
@@ -125,9 +128,10 @@
 
 /* mixed icon */
 .mw-checkbox:indeterminate::before {
+  margin-top: 0;
   transform: scale(1);
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6 12h12'/%3E%3C/svg%3E");
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M6 12h12'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline fill='none' stroke='black' stroke-width='2' stroke-linecap='round' x1='6' y1='12' x2='18' y2='12'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline fill='none' stroke='black' stroke-width='2' stroke-linecap='round' x1='6' y1='12' x2='18' y2='12'/%3E%3C/svg%3E");
 }
 
 /* ============================================
@@ -146,13 +150,13 @@
 
 .mw-checkbox--invalid,
 .mw-checkbox[aria-invalid="true"] {
-  border-color: var(--mw-danger);
+  border-color: var(--mw-color-danger-base);
 }
 
 .mw-checkbox:checked.mw-checkbox--invalid,
 .mw-checkbox:checked[aria-invalid="true"] {
-  background: var(--mw-danger);
-  border-color: var(--mw-danger);
+  background: var(--mw-color-danger-base);
+  border-color: var(--mw-color-danger-base);
 }
 
 /* ============================================
@@ -171,7 +175,7 @@
 
 /* Dark mode: Hover state with subtle opacity */
 .mw-theme--dark .mw-checkbox:hover:not(:disabled) {
-  border-color: color-mix(in srgb, #ffffff 40%, var(--mw-primary));
+  border-color: color-mix(in srgb, var(--mw-color-text) 40%, var(--mw-color-primary-base));
 }
 
 .mw-theme--dark .mw-checkbox:checked:hover:not(:disabled) {
@@ -187,13 +191,13 @@
 /* Dark mode: Error state maintains visibility on dark backgrounds */
 .mw-theme--dark .mw-checkbox--invalid,
 .mw-theme--dark .mw-checkbox[aria-invalid="true"] {
-  border-color: var(--mw-danger);
+  border-color: var(--mw-color-danger-base);
 }
 
 .mw-theme--dark .mw-checkbox:checked.mw-checkbox--invalid,
 .mw-theme--dark .mw-checkbox:checked[aria-invalid="true"] {
-  background: var(--mw-danger);
-  border-color: var(--mw-danger);
+  background: var(--mw-color-danger-base);
+  border-color: var(--mw-color-danger-base);
 }
 
 /* ============================================

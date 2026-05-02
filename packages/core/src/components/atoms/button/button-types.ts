@@ -1,5 +1,6 @@
 import type { CssVars } from "../../../shared/css-vars"
 import type { IconName } from "../icon/icon-types"
+import type { SpinnerVariant } from "../spinner/spinner-types"
 
 /**
  * Button size options.
@@ -19,10 +20,10 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize]
  *
  * @property primary - High-emphasis buttons for primary actions (e.g., "Save", "Submit", "Create").
  *                    Use sparingly - typically one primary action per view.
- * @property secondary - Medium-emphasis buttons for secondary actions (e.g., "Cancel", "Back").
- *                      Good for actions that complement the primary action.
- * @property text - Low-emphasis buttons for tertiary actions or inline text-like buttons.
- *                 Minimal visual weight, ideal for less important actions.
+ * @property secondary - Medium-emphasis outlined buttons for secondary actions.
+ * @property neutral - Low-chroma outlined buttons for neutral utility actions.
+ * @property text - Minimal text-like buttons for tertiary or inline actions.
+ * @property success - Positive emphasis buttons for confirm-style actions.
  *
  * @example
  * ```tsx
@@ -35,7 +36,9 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize]
 export const ButtonVariant = {
   primary: "primary",
   secondary: "secondary",
+  neutral: "neutral",
   text: "text",
+  success: "success",
 } as const
 export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
 
@@ -52,7 +55,7 @@ export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
  * @property submit - Form submissions. Automatically sets `type="submit"`. Recommended icon: `IconName.Check`
  * @property reset - Form resets. Recommended icon: `IconName.RotateLeft`
  * @property button - Generic button action (default for `<button>` elements)
- * @property navigate - Navigation/routing actions. Used with `<a>` elements. Recommended icon: `IconName.ArrowRight`
+ * @property navigate - Navigation/routing actions. Used with `<a>` elements and native link semantics. Recommended icon: `IconName.ArrowRight`
  * @property delete - Destructive operations (delete, remove). Should trigger confirmation. Recommended icon: `IconName.Trash` or `IconName.Minus`
  * @property create - Creation actions (add, new). Recommended icon: `IconName.Plus`
  * @property edit - Edit/modify actions. Recommended icon: `IconName.Edit`
@@ -66,7 +69,7 @@ export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
  * <Button action={ButtonAction.delete} iconRight={IconName.Trash}>Delete</Button>
  *
  * // Prefer semantic variants when possible:
- * <DangerButton>Delete Project</DangerButton>  // Sets action="delete" automatically
+ * <DestructiveButton>Delete Project</DestructiveButton>  // Sets action="delete" automatically
  * ```
  */
 export const ButtonAction = {
@@ -81,6 +84,20 @@ export const ButtonAction = {
 } as const
 export type ButtonAction = (typeof ButtonAction)[keyof typeof ButtonAction]
 
+export interface ButtonLoadingOptions {
+  isLoading: boolean
+  disableWhileLoading?: boolean
+  spinnerVariant?: SpinnerVariant
+  loadingLabel?: string
+}
+
+export interface ResolvedButtonLoading {
+  isLoading: boolean
+  disableWhileLoading: boolean
+  spinnerVariant: SpinnerVariant
+  loadingLabel?: string
+}
+
 export type ButtonOptions = {
   as?: "button" | "a"
   href?: string
@@ -89,7 +106,7 @@ export type ButtonOptions = {
   variant?: ButtonVariant
 
   disabled?: boolean
-  loading?: boolean
+  loading?: boolean | ButtonLoadingOptions
   error?: boolean
 
   toggle?: boolean
@@ -126,11 +143,11 @@ export type ButtonA11yProps = {
 
   // <button>
   disabled?: boolean
-  type?: "button"
+  type?: "button" | "submit" | "reset"
 
   // <a>
   href?: string
-  role?: "button"
+  role?: "link"
   tabIndex?: 0 | -1
 }
 
@@ -139,6 +156,7 @@ export type ButtonRenderKit = {
   className: string
   vars: CssVars
   a11y: ButtonA11yProps
+  loading: ResolvedButtonLoading
   blockClick: boolean
   dataAttributes?: Record<string, string | boolean | undefined>
 }

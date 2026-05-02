@@ -1,0 +1,204 @@
+/*
+ * Avatar component styles
+ * Figma refs:
+ * - .figma/marwes/components/avatar.json
+ * - .figma/marwes/pages/-avatar/-avatar_1574-27460.json
+ * - .figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json
+ *
+ * Current implementation covers:
+ * - Avatar atom: 3 sizes × 3 content types
+ * - AvatarBadge molecule: online status indicator
+ * - AvatarGroup molecule: stacked medium avatars with overflow counter
+ */
+
+.mw-avatar {
+  --mw-avatar-size: 40px;
+  --mw-avatar-font-size: 13px;
+  --mw-avatar-line-height: 17px;
+  --mw-avatar-letter-spacing: -0.39px;
+  --mw-avatar-icon-size: 18px;
+  --mw-avatar-surface: var(--mw-color-primary-base, #2f31fc);
+  --mw-avatar-border-width: 0px;
+  --mw-avatar-border-color: transparent;
+  --mw-avatar-label: var(--mw-color-primary-label, #ffffff);
+  --mw-avatar-image-fallback: var(--mw-color-primary-base, #2f31fc);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--mw-avatar-size);
+  height: var(--mw-avatar-size);
+  overflow: hidden;
+  box-sizing: border-box;
+  border: var(--mw-avatar-border-width) solid var(--mw-avatar-border-color);
+  border-radius: 9999px;
+  background: var(--mw-avatar-surface);
+  color: var(--mw-avatar-label);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-avatar-font-size);
+  font-weight: 500;
+  line-height: var(--mw-avatar-line-height);
+  letter-spacing: var(--mw-avatar-letter-spacing);
+}
+
+.mw-avatar--small {
+  --mw-avatar-size: 32px;
+  --mw-avatar-font-size: 12px;
+  --mw-avatar-line-height: 16px;
+  --mw-avatar-letter-spacing: -0.36px;
+  --mw-avatar-icon-size: 14px;
+}
+
+.mw-avatar--medium {
+  --mw-avatar-size: 40px;
+  --mw-avatar-font-size: 13px;
+  --mw-avatar-line-height: 17px;
+  --mw-avatar-letter-spacing: -0.39px;
+  --mw-avatar-icon-size: 18px;
+}
+
+.mw-avatar--large {
+  --mw-avatar-size: 48px;
+  --mw-avatar-font-size: 15px;
+  --mw-avatar-line-height: 19px;
+  --mw-avatar-letter-spacing: -0.45px;
+  --mw-avatar-icon-size: 22px;
+}
+
+.mw-avatar--icon {
+  --mw-avatar-surface: var(--mw-color-surface-elevated);
+  --mw-avatar-border-width: 1px;
+  --mw-avatar-border-color: var(--mw-color-border);
+  --mw-avatar-label: var(--mw-color-text-muted);
+}
+
+.mw-avatar--image {
+  --mw-avatar-surface: var(--mw-color-surface-elevated);
+  --mw-avatar-border-width: 0.5px;
+  --mw-avatar-border-color: var(--mw-color-border-subtle);
+}
+
+.mw-avatar__initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: inherit;
+  line-height: inherit;
+  text-transform: uppercase;
+}
+
+.mw-avatar__icon {
+  width: var(--mw-avatar-icon-size);
+  height: var(--mw-avatar-icon-size);
+  color: inherit;
+}
+
+.mw-avatar__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--mw-avatar-image-fallback);
+  object-fit: cover;
+}
+
+.mw-theme--dark .mw-avatar--icon {
+  --mw-avatar-surface: var(--mw-color-surface-elevated);
+  --mw-avatar-border-color: var(--mw-color-border);
+  --mw-avatar-label: var(--mw-color-text-muted);
+}
+
+.mw-theme--dark .mw-avatar--image {
+  --mw-avatar-surface: var(--mw-color-surface-elevated);
+  --mw-avatar-border-color: var(--mw-color-border-subtle);
+  --mw-avatar-image-fallback: var(--mw-color-primary-disabled);
+}
+
+.mw-avatar-badge {
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+}
+
+.mw-avatar-badge--small {
+  --mw-avatar-badge-indicator-size: 8px;
+}
+
+.mw-avatar-badge--medium {
+  --mw-avatar-badge-indicator-size: 10px;
+}
+
+.mw-avatar-badge--large {
+  --mw-avatar-badge-indicator-size: 12px;
+}
+
+.mw-avatar-badge__indicator {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: var(--mw-avatar-badge-indicator-size);
+  height: var(--mw-avatar-badge-indicator-size);
+  border: 2px solid var(--mw-color-surface, #f9fafb);
+  border-radius: 9999px;
+  background: var(--mw-color-success-base, #16a34a);
+  box-sizing: border-box;
+}
+
+.mw-theme--dark .mw-avatar-badge__indicator {
+  border-color: var(--mw-color-surface, #141414);
+}
+
+.mw-avatar-group {
+  --mw-avatar-group-overlap: 12px;
+  --mw-avatar-group-stroke: var(--mw-color-surface, #f9fafb);
+  --mw-avatar-group-stroke-width: 2.5px;
+  --mw-avatar-group-counter-surface: var(--mw-color-surface, #f9fafb);
+  --mw-avatar-group-counter-label: var(--mw-color-text-muted);
+
+  min-inline-size: 0;
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.mw-avatar-group__item,
+.mw-avatar-group__counter {
+  position: relative;
+  margin-left: calc(var(--mw-avatar-group-overlap) * -1);
+}
+
+.mw-avatar-group__item:first-child {
+  margin-left: 0;
+}
+
+.mw-avatar-group__item > .mw-avatar {
+  box-shadow: 0 0 0 var(--mw-avatar-group-stroke-width) var(--mw-avatar-group-stroke);
+}
+
+.mw-avatar-group__counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: var(--mw-avatar-group-counter-surface);
+  box-shadow: 0 0 0 var(--mw-avatar-group-stroke-width) var(--mw-avatar-group-counter-surface);
+  color: var(--mw-avatar-group-counter-label);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.36px;
+  box-sizing: border-box;
+}
+
+.mw-theme--dark .mw-avatar-group {
+  --mw-avatar-group-stroke: var(--mw-color-surface, #141414);
+  --mw-avatar-group-counter-surface: var(--mw-color-surface, #141414);
+  --mw-avatar-group-counter-label: var(--mw-color-text-muted);
+}

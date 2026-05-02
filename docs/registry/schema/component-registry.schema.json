@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Component Registry",
+  "type": "object",
+  "required": ["version", "families"],
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "family",
+          "readmePath",
+          "metaPath",
+          "generatedPath",
+          "visualPaths",
+          "previewPaths",
+          "meta",
+          "generated"
+        ],
+        "properties": {
+          "family": {
+            "type": "string"
+          },
+          "readmePath": {
+            "type": "string"
+          },
+          "metaPath": {
+            "type": "string"
+          },
+          "generatedPath": {
+            "type": "string"
+          },
+          "visualPaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "previewPaths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meta": {
+            "type": "object"
+          },
+          "generated": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

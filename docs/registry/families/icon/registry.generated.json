@@ -1,0 +1,144 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "icon",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/icon-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#dev-time-warnings"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/icon/icon-a11y.ts",
+      "packages/core/src/components/atoms/icon/icon-names.ts",
+      "packages/core/src/components/atoms/icon/icon-preset.ts",
+      "packages/core/src/components/atoms/icon/icon-recipe.ts",
+      "packages/core/src/components/atoms/icon/icon-registry.ts",
+      "packages/core/src/components/atoms/icon/icon-scales.ts",
+      "packages/core/src/components/atoms/icon/icon-types.ts",
+      "packages/core/src/components/atoms/icon/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/icon.css"],
+    "react": [
+      "packages/react/src/components/icon/__tests__/icon.test.tsx",
+      "packages/react/src/components/icon/icon.tsx",
+      "packages/react/src/components/icon/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/icon/__tests__/icon.test.ts",
+      "packages/vue/src/components/icon/icon.ts",
+      "packages/vue/src/components/icon/index.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/icon/__tests__/icon-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/icon/__tests__/icon-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/icon/icon.stories.tsx",
+      "apps/storybook-react/src/stories/icon/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/icon/__tests__/icon-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/icon/__tests__/icon-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/icon/icon.stories.ts",
+      "apps/storybook-vue/src/stories/icon/Introduction.mdx"
+    ],
+    "contracts": ["tests/contracts/icon.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "none",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/icon/icon-registry.ts",
+      "packages/core/src/components/atoms/icon/icon-scales.ts",
+      "packages/core/src/components/atoms/icon/icon-recipe.ts",
+      "packages/react/src/components/icon/icon.tsx",
+      "packages/vue/src/components/icon/icon.ts",
+      "tests/contracts/icon.contract.ts"
+    ],
+    "notes": [
+      "Icon relies on native SVG semantics and surrounding control context rather than the wave-1 central semantic registry.",
+      "The family does not emit data-component or purpose metadata today; the shipped adapters render SVGs directly from iconRegistry and shared size helpers, while createIconRecipe and icon.css remain adjacent but are not the current adapter path."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/icons-interface-search.json",
+      ".figma/marwes/components/icons-interface-help-circle.json",
+      ".figma/marwes/components/icons-interface-x.json",
+      ".figma/marwes/components/icons-arrows-arrow-right.json",
+      ".figma/marwes/components/icons-arrows-chevron-down.json",
+      ".figma/marwes/components/icons-users-user.json",
+      ".figma/marwes/components/bold-1.json",
+      ".figma/marwes/components/play-1.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-icons/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-icons/-icons_1384-10135.json",
+      ".figma/marwes/pages/-icons/-icons-dark_1384-10579.json",
+      ".figma/marwes/pages/-icons/component-container_1384-11023.json",
+      ".figma/marwes/pages/-icons/component-container_1384-11076.json",
+      ".figma/marwes/pages/-icons/component-container_1384-11137.json",
+      ".figma/marwes/pages/-icons/component-container_2015-6777.json",
+      ".figma/marwes/pages/-icons/component-container_2015-7449.json",
+      ".figma/marwes/pages/-icons/default-24px-xs-sm-md-lg_1455-8865.json"
+    ],
+    "nodeReferences": {
+      "iconLightFrame": "1384:10135",
+      "iconDarkFrame": "1384:10579",
+      "interfaceComponentContainer": "1384:11023",
+      "arrowsComponentContainer": "1384:11076",
+      "usersComponentContainer": "1384:11137",
+      "editorComponentContainer": "2015:6777",
+      "mediasComponentContainer": "2015:7449",
+      "sizeLegendText": "1455:8865",
+      "searchIconComponent": "1382:9204",
+      "chevronDownIconComponent": "1382:9262",
+      "userIconComponent": "1382:9330",
+      "boldIconComponent": "2015:7037",
+      "playIconComponent": "2015:7436"
+    },
+    "figmaTokens": ["icon/default"],
+    "figmaStates": {
+      "baseVariants": [
+        "interface-icons",
+        "arrows-icons",
+        "users-icons",
+        "editor-icons",
+        "medias-icons"
+      ],
+      "interactionStates": ["xs", "sm", "md", "lg", "light", "dark", "gallery"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Icon relies on native SVG semantics and surrounding control context rather than the wave-1 central semantic registry.",
+    "The family does not emit data-component or purpose metadata today; the shipped adapters render SVGs directly from iconRegistry and shared size helpers, while createIconRecipe and icon.css remain adjacent but are not the current adapter path.",
+    "Generated from docs/registry/families/icon/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

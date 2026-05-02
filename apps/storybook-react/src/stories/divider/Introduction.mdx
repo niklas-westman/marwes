@@ -1,0 +1,74 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Divider/Introduction" />
+
+# Divider Component
+
+Marwes provides Divider as a single atom for separating related content without
+introducing extra structure. Use it to create visual breaks between stacked
+sections or as a vertical separator in inline layouts.
+
+## Component Architecture
+
+```
+Divider (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Divider` atom directly. Choose horizontal dividers for stacked
+content and vertical dividers inside flex or inline layouts.
+
+```tsx
+import { Divider } from "@marwes-ui/react"
+
+<Divider size="sm" />
+<Divider orientation="vertical" size="xs" />
+```
+
+## Usage Notes
+
+- `size` controls both divider thickness and the built-in surrounding spacing
+- `orientation="horizontal"` is the default for content sections
+- `orientation="vertical"` works best in containers that define their own height
+
+## Accessibility notes
+
+**Divider is a real semantic separator.** `Divider` renders an `<hr>` with separator semantics.
+Use it when the UI benefits from an actual content boundary, not just a visual line.
+
+**Do not use Divider as a spacing helper.** If the layout only needs whitespace, use spacing
+or container layout instead of inserting a semantic separator that assistive technology will read.
+
+```tsx
+// ❌ Adds separator semantics when the layout only needs space
+<>
+  <Paragraph>Account name</Paragraph>
+  <Divider />
+  <Paragraph>Plan name</Paragraph>
+</>
+
+// ✅ Use layout spacing when there is no real section break
+<div style={{ display: "grid", gap: "1rem" }}>
+  <Paragraph>Account name</Paragraph>
+  <Paragraph>Plan name</Paragraph>
+</div>
+```
+
+**Vertical dividers depend on container layout.** The divider exposes
+`aria-orientation="vertical"`, but it still needs a parent layout that provides usable height and
+alignment. Without that, the rule may be technically correct but visually unhelpful.
+
+**Divider is unlabeled.** If the content needs a named section break such as `"Billing"` or `"Or"`,
+use headings or dedicated text content rather than expecting `Divider` to carry that meaning.
+
+## Component Reference
+
+**`Divider`** - Low-level separator atom for horizontal or vertical content
+boundaries
+
+## Story Coverage
+
+- Size scale (`xxs` to `xxl`)
+- Horizontal and vertical orientation
+- Real content separation and visual hierarchy examples

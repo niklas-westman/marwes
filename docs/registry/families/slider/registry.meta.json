@@ -1,0 +1,79 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "slider",
+  "displayName": "Slider",
+  "status": "shipped",
+  "summary": "Continuous-value input family with a native range slider atom, a canonical SliderField path, and thin purpose-slider wrappers.",
+  "philosophy": [
+    "Teach SliderField as the canonical labeled range-control surface and keep raw Slider as the low-level escape hatch.",
+    "Keep native range semantics, numeric normalization, and current-value clamping in core so React and Vue stay aligned.",
+    "Treat tooltip and touch-area affordances as visual layers that must not replace visible labeling or ariaValueText.",
+    "Keep purpose-slider wrappers thin and semantic so they add meaning without becoming a second slider implementation."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a continuous or stepped numeric control with visible labeling, optional description, and optional error support.",
+      "The product flow maps clearly to VolumeSlider, BrightnessSlider, or RadiusSlider and benefits from self-documenting purpose metadata.",
+      "The team wants React and Vue slider behavior to stay aligned through one native-first core recipe and one shared contract file."
+    ],
+    "avoidWhen": [
+      "A different control such as radio, segmented control, tabs, or direct numeric input is the more honest interaction model.",
+      "The implementation cannot own visible labeling or described-by wiring while using the raw Slider escape hatch.",
+      "The team expects dual-thumb ranges, non-native slider semantics, or richer value presentation that this family does not currently define."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared slider contract coverage across React and Vue for native range metadata, controlled and uncontrolled value behavior, disabled semantics, tooltip display, and SliderField wiring.",
+      "Local adapter tests for raw slider behavior and purpose-wrapper metadata in both frameworks.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for announcement quality, focus feel, and native range interaction expectations.",
+      "Future decisions about which slider stories should join stricter automated accessibility gates.",
+      "Whether future keyboard-proof coverage should go beyond the current native smoke-contract boundary."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#p2--second-component-audit-queue",
+      "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
+    ],
+    "notes": [
+      "Slider completed a first-pass audit and now has an explicit spec-backed family contract.",
+      "The family still sits outside the wave-1 central semantic registry even though the atom and purpose wrappers already emit useful local metadata."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/slider/Introduction.mdx",
+        "apps/storybook-react/src/stories/slider/slider-field.stories.tsx",
+        "apps/storybook-react/src/stories/slider/slider.stories.tsx",
+        "apps/storybook-react/src/stories/slider/volume-slider.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/slider/Introduction.mdx",
+        "apps/storybook-vue/src/stories/slider/slider-field.stories.ts",
+        "apps/storybook-vue/src/stories/slider/slider.stories.ts",
+        "apps/storybook-vue/src/stories/slider/volume-slider.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "default",
+      "hover-track",
+      "hover-thumb",
+      "pressed",
+      "disabled",
+      "focus",
+      "tooltip",
+      "touch-area",
+      "top-labels",
+      "inline-labels"
+    ]
+  },
+  "openQuestions": [
+    "Which Slider-family stories should later join automated accessibility gates?",
+    "Should future slider keyboard-matrix proof move beyond native smoke coverage, or is the native range baseline enough for the supported family contract?"
+  ]
+}

@@ -1,0 +1,75 @@
+import type { FamilySemanticDefinition } from "./semantic-types"
+
+export const familySemanticsRegistry = {
+  button: {
+    family: "button",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "button",
+    },
+    canonicalAttributes: ["data-component", "data-action", "data-variant", "data-size"],
+    allowedPurposes: [
+      "destructive",
+      "create",
+      "submit",
+      "cancel",
+      "navigation",
+      "save",
+      "confirm",
+      "verify",
+      "edit",
+      "close",
+      "refresh",
+      "upload",
+      "download",
+      "copy",
+      "search",
+      "filter",
+      "sort",
+      "dropdown",
+      "success",
+    ],
+    notes: "Button already has the strongest base semantic surface in core.",
+  },
+  badge: {
+    family: "badge",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "badge",
+    },
+    canonicalAttributes: ["data-component", "data-variant"],
+    allowedPurposes: ["status", "priority", "notification"],
+    notes: "Badge needs base family identity normalized before full parity governance.",
+  },
+  avatar: {
+    family: "avatar",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "avatar",
+    },
+    canonicalAttributes: ["data-component", "data-size"],
+    allowedPurposes: ["profile", "presence", "team"],
+    notes: "Avatar has simple purpose semantics but multiple rendered identities across molecules.",
+  },
+  toast: {
+    family: "toast",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "toast",
+    },
+    canonicalAttributes: ["data-component", "data-variant", "data-intent"],
+    allowedPurposes: ["success-toast", "error-toast", "warning-toast", "info-toast"],
+    notes:
+      "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned.",
+  },
+  dialog: {
+    family: "dialog",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "dialog",
+    },
+    canonicalAttributes: ["data-component", "data-size", "data-intent"],
+    allowedPurposes: ["confirm-dialog", "destructive-dialog", "info-dialog"],
+    notes: "Dialog already has a strong purpose mapping and workflow semantics in adapters.",
+  },
+} satisfies Record<string, FamilySemanticDefinition>

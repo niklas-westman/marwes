@@ -1,0 +1,156 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  toastPurposeComponentReference,
+  toastWhyPurposeComponents,
+} from "@marwes-ui/core"
+
+<Meta title="Toast/Introduction" />
+
+# Toast Components
+
+Marwes provides toast feedback at three layers: **purpose components** for common
+status messages, **ToastContainer** plus **ToastProvider/useToast** for stacked
+imperative delivery, and the raw **Toast** atom for custom layouts.
+
+## Recommended: Purpose Components
+
+Use purpose-built toasts when the message intent is already known:
+
+```tsx
+import {
+  ErrorToast,
+  InfoToast,
+  SuccessToast,
+  WarningToast,
+} from "@marwes-ui/react"
+
+<SuccessToast>Project saved successfully.</SuccessToast>
+<ErrorToast>Publishing failed. Please try again.</ErrorToast>
+<WarningToast>Storage is almost full.</WarningToast>
+<InfoToast>New release notes are available.</InfoToast>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {toastWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {toastPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: ToastContainer + useToast (Molecule)
+
+Use `ToastContainer` when you already own toast state. Use `ToastProvider` plus
+`useToast` when actions need to enqueue toasts imperatively.
+
+```tsx
+import { ToastProvider, useToast } from "@marwes-ui/react"
+
+function SaveButton() {
+  const toast = useToast()
+
+  return (
+    <button
+      type="button"
+      onClick={() => toast.show({ intent: "success", children: "Project saved." })}
+    >
+      Save project
+    </button>
+  )
+}
+
+<ToastProvider>
+  <SaveButton />
+</ToastProvider>
+```
+
+### ToastContainer Features
+
+- **Stacking and placement** - supports top/bottom plus left/right viewport placement
+- **Imperative workflow support** - `useToast()` exposes `show`, `dismiss`, and `clear`
+- **Auto-dismiss** - provider-managed toasts close automatically unless `duration` is `null`
+- **Accessible timing expectations** - ToastProvider defaults to 4000ms for short confirmations, pauses auto-dismiss while the toast is hovered or focused, and expects product teams to use `duration: null` or a longer explicit duration for critical or actionable messages
+- **Purpose-aware rendering** - `intent` routes through the matching purpose toast variant
+
+## Low-level: Toast (Atom)
+
+Use the raw `Toast` atom when you need a bespoke layout or custom delivery
+mechanism.
+
+```tsx
+import { Toast } from "@marwes-ui/react"
+
+<Toast
+  variant="rich"
+  ariaLive="polite"
+  action={
+    <button type="button" className="mw-toast__action-button">
+      Close
+    </button>
+  }
+>
+  Your changes have been saved.
+</Toast>
+```
+
+The referenced Toast Figma frames use an inline `"Close"` text action inside the
+toast surface. That action is not a standard `Button` or `CancelButton`; it is a
+toast-local text treatment.
+
+A literal string like `action="Close"` is visual inline text only.
+Pass a real interactive element when the toast needs a clickable inline action.
+Use `mw-toast__action-button` for the toast-local underlined action treatment
+and focus-visible ring.
+
+Use `dataAttributes={{ "data-intent": "neutral" }}` or
+`dataAttributes={{ "data-intent": "brand" }}` with the raw atom when you need
+the neutral or brand primitives from the Figma matrix.
+
+`onDismiss` is still supported when you explicitly want an icon-only dismiss
+control, but that `×` affordance is an adapter escape hatch rather than part of
+the referenced Toast Figma frames.
+
+## Component Reference
+
+### Purpose Components
+
+**`SuccessToast`** - Positive completion and confirmation feedback
+
+**`ErrorToast`** - Failed actions and urgent alerts
+
+**`WarningToast`** - Cautionary follow-up and risky state changes
+
+**`InfoToast`** - Neutral updates and contextual notices
+
+### Base Molecule
+
+**`ToastContainer`** - Positioned toast viewport with stacking and dismiss handling
+
+**`ToastProvider`** - Context provider that owns toast queue state
+
+**`useToast`** - Imperative toast controller hook
+
+### Atom
+
+**`Toast`** - Low-level transient feedback surface
+
+- `Toast (Atom)`
+- `ToastContainer`
+- `ToastProvider`
+- `useToast`
+- `SuccessToast`
+- `ErrorToast`
+- `WarningToast`
+- `InfoToast`

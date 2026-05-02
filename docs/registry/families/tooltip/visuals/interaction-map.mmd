@@ -1,0 +1,18 @@
+flowchart LR
+  RawTooltip["Raw Tooltip"] --> Bubble["visible span role=tooltip"]
+  Bubble --> Placement["surrounding layout owns placement + visibility"]
+
+  TooltipGroup["TooltipGroup"] --> TriggerName["icon trigger named by triggerLabel"]
+  TooltipGroup --> Reveal["opens on hover + focus"]
+  TooltipGroup --> Wiring["aria-describedby when open"]
+  TooltipGroup --> Dismiss["pointer leave, focus leave, Escape"]
+  TooltipGroup --> Scope["non-interactive contextual help only"]
+
+  Placement --> ReactDom["React DOM"]
+  Placement --> VueDom["Vue DOM"]
+  TriggerName --> ReactDom
+  TriggerName --> VueDom
+  Wiring --> ReactDom
+  Wiring --> VueDom
+  Scope --> ReactDom
+  Scope --> VueDom

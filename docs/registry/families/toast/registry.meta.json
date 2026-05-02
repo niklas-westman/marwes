@@ -1,0 +1,82 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "toast",
+  "displayName": "Toast",
+  "status": "shipped",
+  "summary": "Canonical transient-feedback family with a raw Toast atom, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent.",
+  "philosophy": [
+    "Teach purpose toasts first when the message intent is known and keep raw Toast as the deliberate primitive and escape hatch.",
+    "Keep canonical toast semantics in core so React and Vue emit the same data-component, data-purpose, and data-intent contract.",
+    "Treat ToastContainer, ToastProvider, and useToast as adapter-owned delivery layers rather than pretending the atom owns queue behavior.",
+    "Keep toast-local actions as lightweight underlined text actions, with real buttons or links when the action is interactive.",
+    "Keep neutral and brand primitives explicit but secondary so they do not blur the canonical purpose-toast vocabulary."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs transient, non-blocking feedback with a clear semantic intent such as success, error, warning, or info.",
+      "The product flow benefits from ToastContainer or ToastProvider for stacked placement and queue management.",
+      "The team wants React and Vue toast semantics to stay aligned through the central semantic registry and one shared contract file."
+    ],
+    "avoidWhen": [
+      "The message is blocking, requires user decision-making, or should really be a dialog rather than a toast.",
+      "The implementation cannot provide appropriate live-region urgency or sane dismissal timing for the message severity.",
+      "The team expects a richer notification center or persistent inbox pattern that goes beyond the current toast family scope."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared React and Vue toast contract coverage for raw toast semantics, purpose-toast defaults, max-visible trimming, primitive intent forwarding, dismiss forwarding, and provider-managed delivery timing.",
+      "Local container and provider tests in both adapters for placement, imperative queue flow, and adapter-specific wiring details.",
+      "Storybook introduction and taxonomy tests in both apps with explicit timing and inline-action guidance."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for repeated toast announcement timing, interruption feel, and urgency calibration.",
+      "Product-level judgment about when the default 4000ms duration is sufficient versus when critical or actionable toasts should stay visible with duration null or a longer explicit timeout.",
+      "Any future expansion beyond the current transient feedback and simple queue model."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Toast completed a first-pass accessibility audit focused on live-region defaults, delivery timing, dismissal behavior, and contract maturity.",
+      "The family now has shared contract coverage for the raw atom, purpose wrappers, and delivery-layer timing behavior across React and Vue."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/toast/Introduction.mdx",
+        "apps/storybook-react/src/stories/toast/toast-matrix.stories.tsx",
+        "apps/storybook-react/src/stories/toast/toast-container.stories.tsx",
+        "apps/storybook-react/src/stories/toast/error-toast.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/toast/Introduction.mdx",
+        "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
+        "apps/storybook-vue/src/stories/toast/toast-container.stories.ts",
+        "apps/storybook-vue/src/stories/toast/error-toast.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "subtle",
+      "outline",
+      "rich",
+      "neutral",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "brand",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Which Toast-family stories should join the first automated accessibility smoke set?",
+    "Should the provider default stay at 4000ms long term, or move toward a longer or intent-aware timeout policy once the canonical accessibility support model exists?",
+    "Should neutral and brand raw-toast primitives remain escape hatches only, or eventually gain a more explicit documented governance boundary?"
+  ]
+}

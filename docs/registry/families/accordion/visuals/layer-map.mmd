@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\naccordion + component set"]
+  Spec["Spec + audit + testing"]
+  Core["@marwes-ui/core\naccordion recipe + field helpers"]
+  Presets["preset CSS\naccordion + accordion-field"]
+  React["@marwes-ui/react\naccordion + field + variants"]
+  Vue["@marwes-ui/vue\naccordion + field + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared accordion contract"]
+  Registry["docs/registry/families/accordion"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

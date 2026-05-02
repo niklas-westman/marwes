@@ -1,0 +1,166 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { switchPurposeComponentReference, switchWhyPurposeComponents } from "@marwes-ui/core"
+
+<Meta title="Switch/Introduction" />
+
+# Switch Components
+
+Marwes provides a switch system with three layers:
+**purpose components** for common toggle use cases, **SwitchField** for standard
+field composition, and the raw **Switch** atom for custom layouts.
+
+## Recommended: Purpose Components
+
+Use purpose-built components when the toggle has a clear product meaning:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { FeatureToggle, PermissionSwitch, PreferenceSwitch } from "@marwes-ui/vue"
+
+const featureEnabled = ref(true)
+</script>
+
+<template>
+  <FeatureToggle
+    v-model="featureEnabled"
+    label="Enable beta dashboard"
+    description="Turn on early access to the redesigned analytics experience."
+  />
+
+  <PreferenceSwitch
+    label="Use compact layout"
+    description="Show denser spacing in lists and tables."
+    :switch="{ checked: false }"
+  />
+
+  <PermissionSwitch
+    label="Can manage billing"
+    description="Grant access to invoices and subscription changes."
+    :switch="{ checked: true }"
+  />
+</template>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {switchWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {switchPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: SwitchField (Molecule)
+
+For a single labeled switch with optional description and error text, use `SwitchField`:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { SwitchField } from "@marwes-ui/vue"
+
+const enabled = ref(false)
+</script>
+
+<template>
+  <SwitchField
+    v-model="enabled"
+    label="Enable notifications"
+    description="Receive important account and product updates."
+  />
+
+  <SwitchField
+    label="Require review before publishing"
+    error="Review mode must stay enabled for this workspace."
+    :switch="{ checked: false }"
+  />
+</template>
+```
+
+### SwitchField Features
+
+- **Accessible field wiring** - uses `aria-labelledby` for the visible label and merges description/error ids into `aria-describedby`
+- **Label + description + error** - standard field semantics without repeating layout boilerplate
+- **Controlled toggling** - supports `v-model` and forwards the resolved state to the nested switch atom
+- **Purpose-ready wrapper** - accepts metadata-friendly wrapper variants without changing the field API
+
+## Low-level: Switch (Atom)
+
+Use the raw `Switch` atom when you need a custom layout or non-standard composition:
+
+```vue
+<script setup lang="ts">
+  import { ref } from "vue"
+  import { Switch, SwitchSize } from "@marwes-ui/vue"
+
+const enabled = ref(false)
+</script>
+
+<template>
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <Switch v-model="enabled" :size="SwitchSize.wide" ariaLabel="Enable notifications" />
+    <span>Enable notifications</span>
+  </div>
+</template>
+```
+
+> **Note:** When using `Switch` directly, you are responsible for:
+> - Providing an accessible name via visible content, `ariaLabel`, or `aria-labelledby`
+> - Wiring any supporting text through `aria-describedby`
+> - Managing checked state in the parent
+
+## Size API
+
+`Switch` supports three Figma-matched sizes. `compact` remains the default.
+
+- `compact` - 24×16 track with 12px thumb
+- `wide` - 30×16 track with 12px thumb
+- `rich` - 30×20 track with 16px thumb
+
+```vue
+<script setup lang="ts">
+import { SwitchSize } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Switch :size="SwitchSize.compact" ariaLabel="Compact switch" />
+  <Switch :size="SwitchSize.wide" ariaLabel="Wide switch" />
+  <Switch :size="SwitchSize.rich" ariaLabel="Rich switch" />
+</template>
+```
+
+## Component Reference
+
+### Purpose Components
+
+**`FeatureToggle`** - Feature enablement and product rollout controls
+
+**`PreferenceSwitch`** - User or workspace setting preferences
+
+**`PermissionSwitch`** - Access and capability toggles
+
+### Base Molecule
+
+**`SwitchField`** - Accessible labeled switch with description and error wiring
+
+### Atom
+
+**`Switch`** - Low-level `<button role="switch">`
+
+- `Switch (Atom)`
+- `SwitchField (Molecule)`
+- `FeatureToggle`
+- `PreferenceSwitch`
+- `PermissionSwitch`

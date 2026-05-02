@@ -1,0 +1,22 @@
+flowchart LR
+  RawAccordion["Raw Accordion"] --> TriggerPanel["button trigger + controlled region"]
+  TriggerPanel --> ParentState["parent owns standalone open state"]
+
+  AccordionField["AccordionField"] --> GroupSemantics["fieldset group with aria-labelledby"]
+  AccordionField --> DescribedBy["description + error ids merge into aria-describedby"]
+  AccordionField --> InvalidState["error presence sets aria-invalid"]
+  AccordionField --> OpenModes["single-open or multi-open coordination"]
+
+  Purpose["FAQAccordion / SettingsAccordion / SectionsAccordion"] --> Semantics["family-local data-purpose metadata"]
+  Purpose --> AccordionField
+
+  ParentState --> ReactDom["React DOM"]
+  ParentState --> VueDom["Vue DOM"]
+  GroupSemantics --> ReactDom
+  GroupSemantics --> VueDom
+  DescribedBy --> ReactDom
+  DescribedBy --> VueDom
+  InvalidState --> ReactDom
+  InvalidState --> VueDom
+  Semantics --> ReactDom
+  Semantics --> VueDom

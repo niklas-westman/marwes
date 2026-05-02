@@ -1,0 +1,127 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "heading",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/heading-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/heading/heading-a11y.ts",
+      "packages/core/src/components/atoms/heading/heading-recipe.ts",
+      "packages/core/src/components/atoms/heading/heading-types.ts",
+      "packages/core/src/components/atoms/heading/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/typography.css"],
+    "react": [
+      "packages/react/src/components/heading/__tests__/heading.test.tsx",
+      "packages/react/src/components/heading/h1.tsx",
+      "packages/react/src/components/heading/h2.tsx",
+      "packages/react/src/components/heading/h3.tsx",
+      "packages/react/src/components/heading/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/heading/__tests__/heading.test.ts",
+      "packages/vue/src/components/heading/create-heading.ts",
+      "packages/vue/src/components/heading/heading-variants.ts",
+      "packages/vue/src/components/heading/index.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/heading/__tests__/heading-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/heading/__tests__/heading-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/heading/heading.stories.tsx",
+      "apps/storybook-react/src/stories/heading/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/heading/__tests__/heading-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/heading/__tests__/heading-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/heading/heading.stories.ts",
+      "apps/storybook-vue/src/stories/heading/Introduction.mdx"
+    ],
+    "contracts": ["tests/contracts/heading.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "none",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/heading/heading-recipe.ts",
+      "packages/react/src/components/heading/h1.tsx",
+      "packages/react/src/components/heading/h2.tsx",
+      "packages/react/src/components/heading/h3.tsx",
+      "packages/vue/src/components/heading/create-heading.ts",
+      "tests/contracts/heading.contract.ts"
+    ],
+    "notes": [
+      "Heading relies on native h1/h2/h3 semantics rather than the wave-1 central semantic registry.",
+      "The family does not emit data-component or purpose metadata today; semantic meaning comes from the rendered heading tag and the surrounding document outline."
+    ]
+  },
+  "design": {
+    "componentJsons": [],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/tokens/typography.json",
+      ".figma/marwes/pages/-typography/README.md",
+      ".figma/marwes/components/component-heading.json",
+      ".figma/marwes/pages/-banner/component-heading_1932-7061.json",
+      ".figma/marwes/pages/-banner/component-heading_1935-7184.json",
+      ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15754.json",
+      ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15800.json",
+      ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15833.json"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-typography/typography_1368-5656.json",
+      ".figma/marwes/pages/-typography/typography_1368-5677.json",
+      ".figma/marwes/pages/-typography/typography_1368-5698.json",
+      ".figma/marwes/pages/-typography/typography_1368-5717.json"
+    ],
+    "nodeReferences": {
+      "typographyLightSection": "1368:5656",
+      "typographyDarkSection": "1368:5677",
+      "headingH1LightRow": "1368:5665",
+      "headingH2LightRow": "1368:5666",
+      "headingH3LightRow": "1368:5667",
+      "headingH1DarkRow": "1368:5686",
+      "headingH2DarkRow": "1368:5687",
+      "headingH3DarkRow": "1368:5688",
+      "instrumentSansLightSection": "1368:5698",
+      "instrumentSansDarkSection": "1368:5717",
+      "componentHeadingComponent": "1918:15754"
+    },
+    "figmaTokens": ["Heading/H1", "Heading/H2", "Heading/H3"],
+    "figmaStates": {
+      "baseVariants": ["h1", "h2", "h3"],
+      "interactionStates": ["light", "dark", "typography-scale", "documentation-scaffold"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Heading relies on native h1/h2/h3 semantics rather than the wave-1 central semantic registry.",
+    "The family does not emit data-component or purpose metadata today; semantic meaning comes from the rendered heading tag and the surrounding document outline.",
+    "Generated from docs/registry/families/heading/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

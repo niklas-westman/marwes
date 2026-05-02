@@ -1,3 +1,4 @@
+import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import { Checkbox, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -5,23 +6,12 @@ import * as React from "react"
 const meta: Meta<typeof Checkbox> = {
   title: "Checkbox/Atom",
   component: Checkbox,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: storybookLayout.centered,
   tags: ["autodocs"],
   args: {
     size: "md",
   },
-  argTypes: {
-    size: { control: "radio", options: ["sm", "md", "lg"] },
-    disabled: { control: "boolean" },
-    required: { control: "boolean" },
-    invalid: { control: "boolean" },
-    checked: { control: "boolean" },
-    defaultChecked: { control: "boolean" },
-    indeterminate: { control: "boolean" },
-    ariaLabel: { control: "text" },
-  },
+  argTypes: storybookCheckboxArgTypes,
 }
 
 export default meta

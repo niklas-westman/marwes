@@ -1,0 +1,45 @@
+.mw-toast-container {
+  position: fixed;
+  z-index: 1000;
+  display: grid;
+  gap: 12px; /* off-scale — no token */
+  width: min(420px, calc(100vw - var(--mw-spacing-sp-32)));
+  pointer-events: none;
+}
+
+.mw-toast-container--top-right {
+  top: var(--mw-spacing-sp-16);
+  right: var(--mw-spacing-sp-16);
+}
+
+.mw-toast-container--top-left {
+  top: var(--mw-spacing-sp-16);
+  left: var(--mw-spacing-sp-16);
+}
+
+.mw-toast-container--bottom-right {
+  right: var(--mw-spacing-sp-16);
+  bottom: var(--mw-spacing-sp-16);
+}
+
+.mw-toast-container--bottom-left {
+  bottom: var(--mw-spacing-sp-16);
+  left: var(--mw-spacing-sp-16);
+}
+
+.mw-toast-container__item {
+  pointer-events: auto;
+  animation: mw-toast-enter 180ms ease-out;
+}
+
+@keyframes mw-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

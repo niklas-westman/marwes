@@ -1,0 +1,28 @@
+flowchart LR
+  RawCheckbox["Raw Checkbox"] --> NativeInput["native input type=checkbox"]
+  NativeInput --> CheckedModel["checked or defaultChecked\ncontrolled/uncontrolled"]
+  NativeInput --> MixedState["indeterminate via DOM property\naria-checked=mixed only when needed"]
+  NativeInput --> DirectNaming["aria-label or aria-labelledby\nplus aria-describedby"]
+
+  CheckboxField["CheckboxField"] --> FieldLabel["label htmlFor + generated id"]
+  CheckboxField --> FieldDescriptions["description + error ids merge into aria-describedby"]
+  CheckboxField --> InvalidState["error presence sets invalid on the checkbox"]
+
+  CheckboxGroup["CheckboxGroupField"] --> GroupSemantics["fieldset + legend\naria-describedby on the group"]
+  CheckboxGroup --> OptionList["ordered value array\nper-option disabled + indeterminate support"]
+  CheckboxGroup --> GroupErrors["group error live region\nchild checkboxes marked invalid"]
+
+  DirectNaming --> ReactDom["React DOM"]
+  DirectNaming --> VueDom["Vue DOM"]
+  FieldLabel --> ReactDom
+  FieldLabel --> VueDom
+  FieldDescriptions --> ReactDom
+  FieldDescriptions --> VueDom
+  InvalidState --> ReactDom
+  InvalidState --> VueDom
+  GroupSemantics --> ReactDom
+  GroupSemantics --> VueDom
+  OptionList --> ReactDom
+  OptionList --> VueDom
+  GroupErrors --> ReactDom
+  GroupErrors --> VueDom

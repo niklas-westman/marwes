@@ -1,0 +1,161 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "avatar",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/avatar-family-accessibility.md"],
+    "roadmap": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
+    "core": [
+      "packages/core/src/components/atoms/avatar/avatar-a11y.ts",
+      "packages/core/src/components/atoms/avatar/avatar-recipe.ts",
+      "packages/core/src/components/atoms/avatar/avatar-types.ts",
+      "packages/core/src/components/atoms/avatar/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/avatar.css"],
+    "react": [
+      "packages/react/src/components/avatar/__tests__/avatar-badge.test.tsx",
+      "packages/react/src/components/avatar/__tests__/avatar-group.test.tsx",
+      "packages/react/src/components/avatar/__tests__/avatar.test.tsx",
+      "packages/react/src/components/avatar/__tests__/index-exports.test.tsx",
+      "packages/react/src/components/avatar/__tests__/variants.test.tsx",
+      "packages/react/src/components/avatar/avatar-badge.tsx",
+      "packages/react/src/components/avatar/avatar-group.tsx",
+      "packages/react/src/components/avatar/avatar.tsx",
+      "packages/react/src/components/avatar/index.ts",
+      "packages/react/src/components/avatar/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/avatar/__tests__/avatar-badge.test.ts",
+      "packages/vue/src/components/avatar/__tests__/avatar-group.test.ts",
+      "packages/vue/src/components/avatar/__tests__/avatar.test.ts",
+      "packages/vue/src/components/avatar/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/avatar/__tests__/variants.test.ts",
+      "packages/vue/src/components/avatar/avatar-badge.ts",
+      "packages/vue/src/components/avatar/avatar-group.ts",
+      "packages/vue/src/components/avatar/avatar.ts",
+      "packages/vue/src/components/avatar/index.ts",
+      "packages/vue/src/components/avatar/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/avatar/__tests__/avatar-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/avatar/__tests__/avatar-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/avatar/avatar-badge.stories.tsx",
+      "apps/storybook-react/src/stories/avatar/avatar-group.stories.tsx",
+      "apps/storybook-react/src/stories/avatar/avatar.stories.tsx",
+      "apps/storybook-react/src/stories/avatar/Introduction.mdx",
+      "apps/storybook-react/src/stories/avatar/presence-avatar.stories.tsx",
+      "apps/storybook-react/src/stories/avatar/profile-avatar.stories.tsx",
+      "apps/storybook-react/src/stories/avatar/team-avatar-group.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/avatar/__tests__/avatar-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/avatar/__tests__/avatar-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/avatar/avatar-badge.stories.ts",
+      "apps/storybook-vue/src/stories/avatar/avatar-group.stories.ts",
+      "apps/storybook-vue/src/stories/avatar/avatar.stories.ts",
+      "apps/storybook-vue/src/stories/avatar/Introduction.mdx",
+      "apps/storybook-vue/src/stories/avatar/presence-avatar.stories.ts",
+      "apps/storybook-vue/src/stories/avatar/profile-avatar.stories.ts",
+      "apps/storybook-vue/src/stories/avatar/team-avatar-group.stories.ts"
+    ],
+    "contracts": [
+      "tests/contracts/avatar.contract.ts",
+      "tests/contracts/avatar-badge.contract.ts",
+      "tests/contracts/avatar-group.contract.ts"
+    ]
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "avatar",
+    "canonicalAttributes": ["data-component", "data-size"],
+    "allowedPurposes": ["profile", "presence", "team"],
+    "purposeAttributes": {
+      "presence": {
+        "data-purpose": "presence"
+      },
+      "profile": {
+        "data-purpose": "profile"
+      },
+      "team": {
+        "data-purpose": "team"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": [
+      "Avatar has simple purpose semantics but multiple rendered identities across molecules."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/avatar.json",
+      ".figma/marwes/components/avatar-badge.json",
+      ".figma/marwes/components/avatar-group.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-avatar/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-avatar/component-container_1574-27051.json",
+      ".figma/marwes/pages/-avatar/component-container_1574-27408.json",
+      ".figma/marwes/pages/-avatar/-avatar_1574-27460.json",
+      ".figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json",
+      ".figma/marwes/pages/cover/avatar-group_1825-30447.json"
+    ],
+    "nodeReferences": {
+      "avatarComponentSet": "1574:27371",
+      "avatarBadgeComponentSet": "1574:27394",
+      "avatarGroupComponent": "1574:27395",
+      "avatarLightFrame": "1574:27460",
+      "avatarDarkFrame": "1574:27570",
+      "avatarComponentContainer": "1574:27408",
+      "avatarCoverGroupFrame": "1825:30447"
+    },
+    "figmaTokens": [],
+    "figmaStates": {
+      "baseVariants": ["avatar", "avatar-badge", "avatar-group", "profile", "presence", "team"],
+      "interactionStates": [
+        "small",
+        "medium",
+        "large",
+        "initials",
+        "icon",
+        "image",
+        "online",
+        "stacked",
+        "overflow",
+        "light",
+        "dark"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Avatar has simple purpose semantics but multiple rendered identities across molecules.",
+    "Generated from docs/registry/families/avatar/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

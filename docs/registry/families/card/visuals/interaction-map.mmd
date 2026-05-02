@@ -1,0 +1,18 @@
+flowchart LR
+  RawCard["Raw Card"] --> CardShell["optional title header\nbody content region"]
+  RawCard --> LocalData["data-component=card"]
+  RawCard --> PassiveSurface["passive surface by default\nnot a button or link"]
+
+  Purpose["ProductCard / ProfileCard / StatCard"] --> PurposeData["local data-purpose metadata"]
+  Purpose --> RawCard
+
+  StatePreviews["card.css state classes\nand aria-disabled styling"] --> VisualOnly["hover pressed focus disabled\npreview visual treatment only"]
+  VisualOnly --> PassiveSurface
+
+  ProductCode["custom product usage"] --> InteractiveDecision["if the card becomes actionable\nproduct code must own semantics"]
+  InteractiveDecision --> ReactDom["React DOM"]
+  InteractiveDecision --> VueDom["Vue DOM"]
+  LocalData --> ReactDom
+  LocalData --> VueDom
+  PurposeData --> ReactDom
+  PurposeData --> VueDom

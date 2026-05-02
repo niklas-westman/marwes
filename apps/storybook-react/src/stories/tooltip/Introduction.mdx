@@ -1,0 +1,50 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Tooltip/Introduction" />
+
+# Tooltip Components
+
+Marwes provides the Tooltip family at two layers: the standalone **Tooltip** atom
+for a visible bubble, and **TooltipGroup** for the Figma-matched help-icon
+trigger that reveals the bubble on hover and focus.
+
+## Base: Tooltip (Atom)
+
+Use `Tooltip` when surrounding layout already owns placement or visibility.
+This maps directly to the standalone tooltip bubble in the synced Figma files.
+
+```tsx
+import { Tooltip } from "@marwes-ui/react"
+
+<Tooltip>Tooltip text</Tooltip>
+```
+
+## Recommended: TooltipGroup (Molecule)
+
+Use `TooltipGroup` for the default contextual-help pattern from Figma.
+It renders a small icon trigger and shows the tooltip bubble on hover and focus.
+
+```tsx
+import { IconName, TooltipGroup } from "@marwes-ui/react"
+
+<TooltipGroup content="Tooltip text" triggerLabel="Show help" />
+<TooltipGroup content="Tooltip text" icon={IconName.Info} triggerLabel="Show info" />
+```
+
+## Accessibility scope
+
+`Tooltip` and `TooltipGroup` are for **non-interactive** contextual help only.
+Keep tooltip content short and informational.
+
+- Always provide a meaningful `triggerLabel` for the icon trigger.
+- `TooltipGroup` opens on hover and focus.
+- `TooltipGroup` dismisses on pointer leave, focus leave, and `Escape`.
+- If you need links, buttons, forms, or any other focusable content, use a
+  popover or dialog pattern instead of a tooltip.
+
+## Component Reference
+
+- `Tooltip` — visible tooltip bubble using the inverse surface token
+- `TooltipGroup` — help-icon trigger with hover and focus reveal behavior
+- `IconName.HelpCircle` — default trigger icon
+- `IconName.Info` — swapped trigger icon from the Figma tooltip group examples

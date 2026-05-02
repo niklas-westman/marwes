@@ -1,0 +1,75 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "paragraph",
+  "displayName": "Paragraph",
+  "status": "shipped",
+  "summary": "Native paragraph-text family with one raw Paragraph atom backed by a shared typography preset, theme defaults, and a shared React/Vue contract.",
+  "philosophy": [
+    "Teach raw Paragraph as the canonical body-copy atom and keep spacing outside the component so layout decisions stay explicit.",
+    "Keep native p semantics as the contract instead of inventing Marwes metadata where plain paragraph markup already expresses the meaning honestly.",
+    "Treat size as a visual reading-context choice, not as a substitute for heading, label, list, or other richer semantic structure.",
+    "Keep paragraph styling source-owned in theme typography and shared typography.css so Paragraph and Heading stay aligned."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs real body copy, supporting text, or longer reading content that should remain plain paragraph text.",
+      "The product wants React and Vue paragraph behavior to stay aligned through one core recipe, one shared typography preset, and one shared contract.",
+      "The layout needs explicit control over surrounding spacing while still reusing Marwes typography defaults."
+    ],
+    "avoidWhen": [
+      "The content should be a real heading, label, caption, list item, or other more specific semantic element.",
+      "The surface only needs visually styled text and cannot honestly be represented as a paragraph block.",
+      "The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current Paragraph family does not ship."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Core recipe tests for default paragraph sizing and id passthrough behavior.",
+      "Shared paragraph contract coverage across React and Vue for native p rendering, size classes, and id metadata.",
+      "Storybook introduction and taxonomy tests in both apps for the atom teaching surface."
+    ],
+    "manualReviewRequired": [
+      "Product-level judgment about whether Paragraph is being used for real body copy instead of replacing headings, labels, or other richer structure.",
+      "Readability review for long-form content, especially line length, spacing, and visual hierarchy in real layouts.",
+      "Whether teams use size variants for reading emphasis rather than as a shortcut for semantic structure."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Paragraph completed a first-pass accessibility audit focused on body-copy semantics, size override honesty, and native-semantic documentation.",
+      "The family now has expanded shared-contract coverage for the absence of family-local metadata plus explicit accessibility notes in both Storybook apps."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/paragraph/Introduction.mdx",
+        "apps/storybook-react/src/stories/paragraph/paragraph.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/paragraph/Introduction.mdx",
+        "apps/storybook-vue/src/stories/paragraph/paragraph.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "sm",
+      "md",
+      "lg",
+      "all-sizes",
+      "long-text",
+      "multiple-paragraphs",
+      "article-layout",
+      "with-id",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should the Paragraph size API keep the current sm/md/lg scale if the Figma typography baseline remains centered on 16px body styles rather than a full paragraph-size matrix?",
+    "Should the local Figma sync eventually gain a dedicated paragraph component or clearer body-copy scale that maps directly to the shipped Paragraph API, or is the typography-page baseline sufficient?"
+  ]
+}

@@ -1,0 +1,81 @@
+/*
+ * Tab Component Styles
+ * Figma refs: 1364:11703 (light) / 1368:6067 (dark)
+ *
+ * The live sync uses tab-specific state colours that do not map 1:1 to the
+ * shared theme tokens yet, so the preset keeps them component-scoped here.
+ */
+
+.mw-tab {
+  --mw-tab-surface: var(--mw-color-surface-elevated);
+  --mw-tab-surface-hover: var(--mw-color-surface-subtle);
+  --mw-tab-surface-pressed: var(--mw-color-border-subtle);
+  --mw-tab-label: var(--mw-color-text-muted);
+  --mw-tab-label-active: var(--mw-color-text, #141414);
+  --mw-tab-label-disabled: var(--mw-color-text-disabled);
+  --mw-tab-indicator: var(--mw-color-primary-base, #2f31fc);
+  --mw-tab-indicator-disabled: var(--mw-color-border-disabled);
+
+  appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--mw-spacing-sp-8, 8px) var(--mw-spacing-sp-16, 16px);
+  background: var(--mw-tab-surface);
+  color: var(--mw-tab-label);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 16px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.mw-tab--selected {
+  border-bottom-color: var(--mw-tab-indicator);
+}
+
+.mw-tab:hover:not(:disabled):not(.mw-tab--disabled) {
+  background: var(--mw-tab-surface-hover);
+  color: var(--mw-tab-label-active);
+}
+
+.mw-tab:active:not(:disabled):not(.mw-tab--disabled) {
+  background: var(--mw-tab-surface-pressed);
+  color: var(--mw-tab-label-active);
+}
+
+.mw-tab--disabled,
+.mw-tab:disabled {
+  background: var(--mw-tab-surface);
+  color: var(--mw-tab-label-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mw-tab--selected.mw-tab--disabled,
+.mw-tab--selected:disabled {
+  border-bottom-color: var(--mw-tab-indicator-disabled);
+}
+
+.mw-tab:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2684ff);
+  z-index: 1;
+}
+
+.mw-theme--dark .mw-tab {
+  --mw-tab-surface: var(--mw-color-surface-elevated);
+  --mw-tab-surface-hover: var(--mw-color-surface-subtle);
+  --mw-tab-surface-pressed: var(--mw-color-border);
+  --mw-tab-label: var(--mw-color-text-muted);
+  --mw-tab-label-active: var(--mw-color-text);
+  --mw-tab-label-disabled: var(--mw-color-text-disabled);
+  --mw-tab-indicator: var(--mw-color-primary-base, #5859fc);
+  --mw-tab-indicator-disabled: var(--mw-color-border-disabled);
+}

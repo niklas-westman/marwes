@@ -7,8 +7,8 @@
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
-  width: var(--mw-icon-size);
-  height: var(--mw-icon-size);
+  width: var(--mw-icon-size, var(--mw-density-icon-size));
+  height: var(--mw-icon-size, var(--mw-density-icon-size));
   fill: none;
   stroke: currentColor;
   stroke-width: var(--mw-icon-stroke-width);
@@ -39,15 +39,15 @@
 }
 
 .mw-icon--primary {
-  stroke: var(--mw-icon-primary);
+  stroke: var(--mw-color-primary-base);
 }
 
 .mw-icon--secondary {
-  stroke: var(--mw-icon-secondary);
+  stroke: var(--mw-color-secondary-base);
 }
 
 .mw-icon--muted {
-  stroke: var(--mw-icon-muted);
+  stroke: var(--mw-color-text-muted);
 }
 
 /* CONTEXT-SPECIFIC: Icon in Button */

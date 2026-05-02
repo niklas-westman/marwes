@@ -1,0 +1,171 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "toast",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/toast-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/toast/index.ts",
+      "packages/core/src/components/atoms/toast/toast-a11y.ts",
+      "packages/core/src/components/atoms/toast/toast-container-types.ts",
+      "packages/core/src/components/atoms/toast/toast-recipe.ts",
+      "packages/core/src/components/atoms/toast/toast-types.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/toast.css",
+      "packages/presets/src/firstEdition/molecules/toast-container.css"
+    ],
+    "react": [
+      "packages/react/src/components/toast/__tests__/toast-container.test.tsx",
+      "packages/react/src/components/toast/__tests__/variants.test.tsx",
+      "packages/react/src/components/toast/index.ts",
+      "packages/react/src/components/toast/toast-container.tsx",
+      "packages/react/src/components/toast/toast-manager-types.ts",
+      "packages/react/src/components/toast/toast-provider.tsx",
+      "packages/react/src/components/toast/toast.tsx",
+      "packages/react/src/components/toast/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/toast/__tests__/toast-container.test.ts",
+      "packages/vue/src/components/toast/__tests__/variants.test.ts",
+      "packages/vue/src/components/toast/index.ts",
+      "packages/vue/src/components/toast/toast-container.ts",
+      "packages/vue/src/components/toast/toast-manager-types.ts",
+      "packages/vue/src/components/toast/toast-provider.ts",
+      "packages/vue/src/components/toast/toast.ts",
+      "packages/vue/src/components/toast/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/toast/__tests__/toast-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/toast/__tests__/toast-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/toast/error-toast.stories.tsx",
+      "apps/storybook-react/src/stories/toast/info-toast.stories.tsx",
+      "apps/storybook-react/src/stories/toast/Introduction.mdx",
+      "apps/storybook-react/src/stories/toast/success-toast.stories.tsx",
+      "apps/storybook-react/src/stories/toast/toast-container.stories.tsx",
+      "apps/storybook-react/src/stories/toast/toast-matrix.stories.tsx",
+      "apps/storybook-react/src/stories/toast/toast.stories.tsx",
+      "apps/storybook-react/src/stories/toast/warning-toast.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/toast/__tests__/toast-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/toast/__tests__/toast-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/toast/error-toast.stories.ts",
+      "apps/storybook-vue/src/stories/toast/info-toast.stories.ts",
+      "apps/storybook-vue/src/stories/toast/Introduction.mdx",
+      "apps/storybook-vue/src/stories/toast/success-toast.stories.ts",
+      "apps/storybook-vue/src/stories/toast/toast-container.stories.ts",
+      "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
+      "apps/storybook-vue/src/stories/toast/toast.stories.ts",
+      "apps/storybook-vue/src/stories/toast/warning-toast.stories.ts"
+    ],
+    "contracts": ["tests/contracts/toast.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "toast",
+    "canonicalAttributes": ["data-component", "data-variant", "data-intent"],
+    "allowedPurposes": ["success-toast", "error-toast", "warning-toast", "info-toast"],
+    "purposeAttributes": {
+      "error-toast": {
+        "data-purpose": "error-toast",
+        "data-intent": "error"
+      },
+      "info-toast": {
+        "data-purpose": "info-toast",
+        "data-intent": "info"
+      },
+      "success-toast": {
+        "data-purpose": "success-toast",
+        "data-intent": "success"
+      },
+      "warning-toast": {
+        "data-purpose": "warning-toast",
+        "data-intent": "warning"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": [
+      "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned."
+    ]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/toast.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-toast/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-toast/-toast-light_1365-12526.json",
+      ".figma/marwes/pages/-toast/-toast-dark_2276-56938.json",
+      ".figma/marwes/pages/-toast/component-container_1574-20451.json"
+    ],
+    "nodeReferences": {
+      "toastComponentSet": "1365:11937",
+      "toastLightFrame": "1365:12526",
+      "toastDarkFrame": "2276:56938",
+      "toastComponentContainer": "1574:20451"
+    },
+    "figmaTokens": [
+      "toast/subtle/surface",
+      "toast/subtle/border",
+      "toast/subtle/text",
+      "toast/subtle/action",
+      "toast/outline/surface",
+      "toast/outline/border",
+      "toast/outline/text",
+      "toast/outline/action",
+      "toast/rich/surface",
+      "toast/rich/border",
+      "toast/rich/text",
+      "toast/rich/action"
+    ],
+    "figmaStates": {
+      "baseVariants": [
+        "subtle",
+        "outline",
+        "rich",
+        "neutral",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "brand"
+      ],
+      "interactionStates": ["light", "dark", "semantic", "primitives"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Toast keeps canonical family identity in core while delivery timing and queue orchestration stay adapter-owned.",
+    "Generated from docs/registry/families/toast/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

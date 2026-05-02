@@ -1,0 +1,63 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "button",
+  "displayName": "Button",
+  "status": "shipped",
+  "summary": "Semantic-first action family with a base Button atom, visual wrappers, and purpose wrappers for canonical workflows.",
+  "philosophy": [
+    "Teach purpose wrappers first and keep the base Button as the deliberate escape hatch.",
+    "Keep semantics and accessibility rules in core so React and Vue emit the same contract.",
+    "Use button names and wrappers to make intent self-documenting in product code.",
+    "Treat AXE follow-up work as governance hardening, not as a reason to replace the Button architecture."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a canonical action trigger with clear semantic intent.",
+      "A product flow matches one of the purpose wrappers such as submit, cancel, save, or destructive.",
+      "The implementation should stay aligned across React and Vue through the shared core contract."
+    ],
+    "avoidWhen": [
+      "A plain navigational link with native link semantics is the better fit than an action button.",
+      "The design is only trying to mimic a button visually without needing button semantics.",
+      "The product team cannot explain the action intent clearly enough to choose a stable purpose or action."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared React and Vue contract coverage through tests/contracts/button.contract.ts.",
+      "Loading-state semantics such as aria-busy and disabled behavior.",
+      "Native link semantics for active LinkButton paths and disabled/loading anchor fallback behavior.",
+      "Dev-time warning for icon-only buttons without an accessible name path.",
+      "Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Product-level choice between navigation links and action buttons.",
+      "Cases where a plain inline text link is the more honest UI than a button-family surface."
+    ],
+    "roadmapAnchors": ["AXE_ROADMAP.md#button-semantics-cleanup"],
+    "notes": [
+      "Button completed a first-pass accessibility audit focused on the action-vs-navigation semantics boundary.",
+      "The original open AXE follow-up is now resolved at the family-policy level, while broader gating and support-model work remains cross-cutting."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/button/button.stories.tsx",
+        "apps/storybook-react/src/stories/button/submit-button.stories.tsx",
+        "apps/storybook-react/src/stories/button/link-button.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/button/button.stories.ts",
+        "apps/storybook-vue/src/stories/button/submit-button.stories.ts",
+        "apps/storybook-vue/src/stories/button/link-button.stories.ts"
+      ]
+    },
+    "preferredStates": ["default", "hover", "pressed", "disabled", "focus", "loading"]
+  },
+  "openQuestions": [
+    "Which Button-family stories should join the first automated accessibility smoke set?"
+  ]
+}

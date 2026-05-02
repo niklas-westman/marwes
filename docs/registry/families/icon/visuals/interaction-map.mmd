@@ -1,0 +1,22 @@
+flowchart LR
+  NameChoice["choose icon name"] --> Inventory["iconRegistry + IconName\nshipped runtime inventory"]
+  NameChoice --> ParentMeaning["surrounding control or text usually owns meaning"]
+
+  LabelChoice["aria-label present?"] -->|no| Decorative["decorative icon\naria-hidden=true"]
+  LabelChoice -->|yes| Labelled["labelled icon\nrole=img + aria-label"]
+
+  ScaleChoice["size + strokeWidth"] --> SizeScale["xs sm md lg\n16 24 32 40"]
+  ScaleChoice --> StrokeScale["xs sm md lg\n1 2 3 4"]
+
+  Inventory --> ReactDom["React SVG"]
+  Inventory --> VueDom["Vue SVG"]
+  Decorative --> ReactDom
+  Decorative --> VueDom
+  Labelled --> ReactDom
+  Labelled --> VueDom
+  SizeScale --> ReactDom
+  SizeScale --> VueDom
+  StrokeScale --> ReactDom
+  StrokeScale --> VueDom
+  ParentMeaning --> ReactDom
+  ParentMeaning --> VueDom

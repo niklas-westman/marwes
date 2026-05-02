@@ -1,0 +1,18 @@
+flowchart LR
+  RawDivider["Raw Divider"] --> HrSemantic["semantic hr element\nrole=separator"]
+  RawDivider --> Orientation["horizontal default\nor vertical escape hatch"]
+  RawDivider --> SizeScale["xxs xs sm md lg xl xxl\nmap to built-in spacing"]
+  RawDivider --> LocalData["data-component=divider\ndata-size + data-orientation"]
+
+  FigmaModel["Figma horizontal line + padding model"] --> HorizontalBaseline["1px line\nspacing changes around it"]
+  HorizontalBaseline --> SizeScale
+
+  VerticalUsage["Vertical divider"] --> LayoutNeed["container must provide\nusable height and alignment"]
+  Orientation --> LayoutNeed
+
+  LocalData --> ReactDom["React DOM"]
+  LocalData --> VueDom["Vue DOM"]
+  HrSemantic --> ReactDom
+  HrSemantic --> VueDom
+  LayoutNeed --> ReactDom
+  LayoutNeed --> VueDom

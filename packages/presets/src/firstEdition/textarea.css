@@ -1,0 +1,63 @@
+/*
+ * Textarea Component Styles
+ * Multiline companion to the Input atom.
+ */
+
+.mw-textarea {
+  min-height: calc(var(--mw-density-height) * 3);
+  padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
+  border-radius: var(--mw-ui-radius);
+  border: 1px solid var(--mw-color-border);
+  background: var(--mw-color-surface);
+  color: var(--mw-color-text);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size);
+  width: 260px;
+  line-height: 1.5;
+  resize: var(--mw-textarea-resize, vertical);
+  transition: border-color 150ms ease, outline 150ms ease;
+}
+
+.mw-textarea::placeholder {
+  color: var(--mw-color-text-muted);
+}
+
+.mw-textarea:hover:not(:disabled):not(:focus) {
+  border-color: color-mix(in srgb, var(--mw-color-border) 70%, var(--mw-color-text));
+}
+
+.mw-textarea:focus-visible {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: 2px;
+}
+
+.mw-textarea.is-invalid,
+.mw-textarea--danger {
+  border-color: var(--mw-color-danger-base);
+}
+
+.mw-textarea.is-invalid:focus-visible,
+.mw-textarea--danger:focus-visible {
+  outline-color: var(--mw-color-danger-base);
+}
+
+.mw-textarea--success {
+  border-color: var(--mw-color-success-base);
+}
+
+.mw-textarea--success:focus-visible {
+  outline-color: var(--mw-color-success-base);
+}
+
+.mw-textarea:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--mw-color-border-disabled);
+  background: var(--mw-color-surface-disabled);
+  color: var(--mw-color-text-disabled);
+}
+
+.mw-theme--dark .mw-textarea {
+  background: var(--mw-color-surface);
+}

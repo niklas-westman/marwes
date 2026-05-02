@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ncheckbox atom + field/group baselines"]
+  Spec["Spec gap + testing docs + audit queue"]
+  Core["@marwes-ui/core\ncheckbox recipe + field helpers"]
+  Presets["preset CSS\ncheckbox + molecule styling"]
+  React["@marwes-ui/react\ncheckbox + field molecules"]
+  Vue["@marwes-ui/vue\ncheckbox + field molecules"]
+  Stories["Storybook React + Vue"]
+  Contracts["checkbox shared contracts"]
+  Registry["docs/registry/families/checkbox"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

@@ -1,0 +1,20 @@
+flowchart LR
+  RawSwitch["Raw Switch"] --> ButtonSwitch["native button role=switch"]
+  ButtonSwitch --> ParentState["parent owns checked state"]
+  ButtonSwitch --> DirectNaming["visible content / ariaLabel / aria-labelledby"]
+
+  SwitchField["SwitchField"] --> LabelWiring["visible label via aria-labelledby"]
+  SwitchField --> DescribedBy["description + error ids merge into aria-describedby"]
+  SwitchField --> ErrorPolicy["error text supports description\nwithout aria-invalid"]
+
+  Purpose["FeatureToggle / PreferenceSwitch / PermissionSwitch"] --> Semantics["family-local data-purpose metadata"]
+  Purpose --> SwitchField
+
+  ParentState --> ReactDom["React DOM"]
+  ParentState --> VueDom["Vue DOM"]
+  LabelWiring --> ReactDom
+  LabelWiring --> VueDom
+  DescribedBy --> ReactDom
+  DescribedBy --> VueDom
+  Semantics --> ReactDom
+  Semantics --> VueDom

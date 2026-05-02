@@ -1,0 +1,114 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "divider",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/divider-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/divider/divider-recipe.ts",
+      "packages/core/src/components/atoms/divider/divider-types.ts",
+      "packages/core/src/components/atoms/divider/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/divider.css"],
+    "react": [
+      "packages/react/src/components/divider/__tests__/divider.test.tsx",
+      "packages/react/src/components/divider/divider.tsx",
+      "packages/react/src/components/divider/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/divider/__tests__/divider.test.ts",
+      "packages/vue/src/components/divider/divider.ts",
+      "packages/vue/src/components/divider/index.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/divider/__tests__/divider-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/divider/__tests__/divider-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/divider/divider.stories.tsx",
+      "apps/storybook-react/src/stories/divider/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/divider/__tests__/divider-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/divider/__tests__/divider-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/divider/divider.stories.ts",
+      "apps/storybook-vue/src/stories/divider/Introduction.mdx"
+    ],
+    "contracts": ["tests/contracts/divider.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": "divider",
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": ["packages/core/src/components/atoms/divider/divider-recipe.ts"],
+    "notes": [
+      "Divider is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "The atom emits data-component=divider plus local size and orientation metadata directly from core."
+    ]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/divider.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-divider/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-divider/component-container_1574-24629.json",
+      ".figma/marwes/pages/-divider/-divider_1574-24658.json",
+      ".figma/marwes/pages/-divider/-divider-dark_1574-24738.json"
+    ],
+    "nodeReferences": {
+      "dividerComponent": "1574:21053",
+      "dividerComponentContainer": "1574:24629",
+      "dividerLightFrame": "1574:24658",
+      "dividerDarkFrame": "1574:24738"
+    },
+    "figmaTokens": ["divider/default"],
+    "figmaStates": {
+      "baseVariants": ["horizontal-divider"],
+      "interactionStates": [
+        "sp-80",
+        "sp-64",
+        "sp-48",
+        "sp-32",
+        "sp-16",
+        "sp-8",
+        "sp-1",
+        "light",
+        "dark",
+        "vertical"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Divider is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "The atom emits data-component=divider plus local size and orientation metadata directly from core.",
+    "Generated from docs/registry/families/divider/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

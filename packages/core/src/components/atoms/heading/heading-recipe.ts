@@ -6,11 +6,12 @@
  */
 
 import type { CssVars } from "../../../shared/css-vars"
-import type { HeadingSize, Theme } from "../../../theme/theme-types"
+import type { ResolvedTheme } from "../../../theme/theme-css"
+import type { HeadingSize } from "../../../theme/theme-types"
 import { buildHeadingA11y } from "./heading-a11y"
 import type { HeadingOptions, HeadingRenderKit } from "./heading-types"
 
-export function headingRecipe(opts: HeadingOptions, theme: Theme): HeadingRenderKit {
+export function headingRecipe(opts: HeadingOptions, theme: ResolvedTheme): HeadingRenderKit {
   const { level } = opts
 
   // Default size to match level (h1 → "h1", h2 → "h2", h3 → "h3").
@@ -27,12 +28,10 @@ export function headingRecipe(opts: HeadingOptions, theme: Theme): HeadingRender
 
   // CSS variables.
   const vars: CssVars = {
-    "--mw-heading-font": theme.font.primary,
     "--mw-heading-size": `${typo.fontSize}px`,
     "--mw-heading-line-height": `${typo.lineHeight}`,
     "--mw-heading-weight": `${typo.fontWeight}`,
     "--mw-heading-letter-spacing": `${typo.letterSpacing}px`,
-    "--mw-heading-color": theme.color.text,
   }
 
   // Build a11y props.

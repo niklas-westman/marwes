@@ -5,10 +5,11 @@
  */
 
 import type { CssVars } from "../../../shared/css-vars"
-import type { ParagraphSize, Theme } from "../../../theme/theme-types"
+import type { ResolvedTheme } from "../../../theme/theme-css"
+import type { ParagraphSize } from "../../../theme/theme-types"
 import type { ParagraphOptions, ParagraphRenderKit } from "./paragraph-types"
 
-export function paragraphRecipe(opts: ParagraphOptions, theme: Theme): ParagraphRenderKit {
+export function paragraphRecipe(opts: ParagraphOptions, theme: ResolvedTheme): ParagraphRenderKit {
   // Default size to "md".
   const size: ParagraphSize = opts.size ?? "md"
 
@@ -20,10 +21,8 @@ export function paragraphRecipe(opts: ParagraphOptions, theme: Theme): Paragraph
 
   // CSS variables.
   const vars: CssVars = {
-    "--mw-p-font": theme.font.primary,
     "--mw-p-size": `${typo.fontSize}px`,
     "--mw-p-line-height": `${typo.lineHeight}`,
-    "--mw-p-color": theme.color.text,
   }
 
   // Build a11y props (minimal).

@@ -2,11 +2,11 @@ import {
   type IconSize,
   type IconStrokeWidth,
   iconRegistry,
+  resolveIconA11y,
   resolveIconSize,
   resolveIconStrokeWidth,
 } from "@marwes-ui/core"
 import type * as React from "react"
-import { useTheme } from "../../provider/use-theme"
 
 type IconName = keyof typeof iconRegistry
 
@@ -14,13 +14,13 @@ export type IconProps = {
   name: IconName
 
   /**
-   * Token ("xs"|"sm"|"md"|"lg") or a raw px number.
+   * Icon scale token ("xs"|"sm"|"md"|"lg") or an explicit pixel size.
    * Defaults to system.theme.icon.size
    */
   size?: IconSize | number
 
   /**
-   * Token ("xs"|"sm"|"md"|"lg") or a raw number.
+   * Stroke-width token ("xs"|"sm"|"md"|"lg") or an explicit numeric stroke width.
    * Defaults to system.theme.icon.strokeWidth
    */
   strokeWidth?: IconStrokeWidth | number
@@ -41,16 +41,14 @@ export function Icon({
   "aria-label": ariaLabel,
   decorative,
 }: IconProps) {
-  const theme = useTheme()
-  const themeIcon = theme.icon
-
-  const px = resolveIconSize(size ?? themeIcon.size)
-  const sw = resolveIconStrokeWidth(strokeWidth ?? themeIcon.strokeWidth)
+  const px = resolveIconSize(size ?? "sm")
+  const sw = resolveIconStrokeWidth(strokeWidth ?? "md")
 
   const def = iconRegistry[name]
-
-  // If no aria-label => decorative
-  const isDecorative = decorative || !ariaLabel
+  const a11y = resolveIconA11y({
+    ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+    ...(decorative !== undefined ? { decorative } : {}),
+  })
 
   return (
     <svg
@@ -63,9 +61,9 @@ export function Icon({
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
-      aria-hidden={isDecorative ? "true" : undefined}
-      aria-label={ariaLabel}
-      role={isDecorative ? undefined : "img"}
+      aria-hidden={a11y.ariaHidden ? "true" : undefined}
+      aria-label={a11y.ariaLabel}
+      role={a11y.role}
       focusable="false"
     >
       {def.nodes.map((iconNode, nodeIndex) => {

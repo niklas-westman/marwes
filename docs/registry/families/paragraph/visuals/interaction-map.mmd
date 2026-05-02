@@ -1,0 +1,17 @@
+flowchart LR
+  AuthorChoice["Author chooses Paragraph"] --> NativeP["native p element\nreal paragraph semantics"]
+  AuthorChoice --> SizeChoice["optional size prop\nsm md lg"]
+  AuthorChoice --> ExternalSpacing["layout owns margins and rhythm"]
+
+  TypographyScale["Figma typography scale\nBody/Default + Body/Medium"] --> ThemeScale["theme.typography.paragraph\nsm md lg"]
+  ThemeScale --> CssVars["--mw-p-size\n--mw-p-line-height"]
+
+  SizeChoice --> CssVars
+  NativeP --> OptionalId["optional id\nno data-component metadata"]
+
+  CssVars --> ReactDom["React DOM"]
+  CssVars --> VueDom["Vue DOM"]
+  OptionalId --> ReactDom
+  OptionalId --> VueDom
+  ExternalSpacing --> ReactDom
+  ExternalSpacing --> VueDom

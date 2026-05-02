@@ -1,0 +1,163 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "checkbox",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/checkbox-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/checkbox/checkbox-a11y.ts",
+      "packages/core/src/components/atoms/checkbox/checkbox-recipe.ts",
+      "packages/core/src/components/atoms/checkbox/checkbox-types.ts",
+      "packages/core/src/components/atoms/checkbox/index.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/checkbox.css",
+      "packages/presets/src/firstEdition/molecules/checkbox-field.css",
+      "packages/presets/src/firstEdition/molecules/checkbox-group-field.css"
+    ],
+    "react": [
+      "packages/react/src/components/checkbox/__tests__/checkbox-field.test.tsx",
+      "packages/react/src/components/checkbox/__tests__/checkbox-group-field.test.tsx",
+      "packages/react/src/components/checkbox/__tests__/checkbox.test.tsx",
+      "packages/react/src/components/checkbox/checkbox-field.tsx",
+      "packages/react/src/components/checkbox/checkbox-group-field.tsx",
+      "packages/react/src/components/checkbox/checkbox.tsx",
+      "packages/react/src/components/checkbox/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
+      "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
+      "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
+      "packages/vue/src/components/checkbox/checkbox-field.ts",
+      "packages/vue/src/components/checkbox/checkbox-group-field.ts",
+      "packages/vue/src/components/checkbox/checkbox.ts",
+      "packages/vue/src/components/checkbox/index.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/checkbox/checkbox-field.stories.tsx",
+      "apps/storybook-react/src/stories/checkbox/checkbox-group-field.stories.tsx",
+      "apps/storybook-react/src/stories/checkbox/checkbox.stories.tsx",
+      "apps/storybook-react/src/stories/checkbox/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/checkbox/checkbox-field.stories.ts",
+      "apps/storybook-vue/src/stories/checkbox/checkbox-group-field.stories.ts",
+      "apps/storybook-vue/src/stories/checkbox/checkbox.stories.ts",
+      "apps/storybook-vue/src/stories/checkbox/Introduction.mdx"
+    ],
+    "contracts": [
+      "tests/contracts/checkbox.contract.ts",
+      "tests/contracts/checkbox-group-field.contract.ts"
+    ]
+  },
+  "semantics": {
+    "coverageLevel": "none",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/checkbox/checkbox-a11y.ts",
+      "packages/core/src/components/atoms/checkbox/checkbox-recipe.ts",
+      "packages/core/src/shared/field-helpers.ts",
+      "packages/react/src/components/checkbox/checkbox-field.tsx",
+      "packages/react/src/components/checkbox/checkbox-group-field.tsx",
+      "packages/vue/src/components/checkbox/checkbox-field.ts",
+      "packages/vue/src/components/checkbox/checkbox-group-field.ts",
+      "tests/contracts/checkbox.contract.ts",
+      "tests/contracts/checkbox-group-field.contract.ts"
+    ],
+    "notes": [
+      "Checkbox relies on native input[type=checkbox] and fieldset semantics rather than the wave-1 central semantic registry.",
+      "The family does not emit data-component or purpose metadata today; semantic meaning comes from the native checkbox control plus field-helper wiring in CheckboxField and CheckboxGroupField."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/checkbox.json",
+      ".figma/marwes/components/checkbox-field.json",
+      ".figma/marwes/components/checkbox-group.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-checkbox/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-checkbox/component-container_1369-4657.json",
+      ".figma/marwes/pages/-checkbox/component-container_1369-6165.json",
+      ".figma/marwes/pages/-checkbox/-checkbox_1369-4700.json",
+      ".figma/marwes/pages/-checkbox/-checkbox-dark_1369-4905.json",
+      ".figma/marwes/pages/-checkbox/checkbox_1893-32830.json",
+      ".figma/marwes/pages/-checkbox/checkbox_1893-32839.json",
+      ".figma/marwes/pages/cover/checkbox-group_1825-30425.json"
+    ],
+    "nodeReferences": {
+      "checkboxComponentSet": "1369:4628",
+      "checkboxFieldComponentSet": "1364:5566",
+      "checkboxGroupComponent": "1369:4673",
+      "checkboxLightFrame": "1369:4700",
+      "checkboxDarkFrame": "1369:4905",
+      "checkboxComponentContainer": "1369:4657",
+      "checkboxGroupComponentContainer": "1369:6165",
+      "checkboxGroupCoverFrame": "1825:30425"
+    },
+    "figmaTokens": [
+      "Checkbox/Surface",
+      "Checkbox/Border",
+      "Checkbox/Surface-checked",
+      "Checkbox/Icon",
+      "Checkbox/Text"
+    ],
+    "figmaStates": {
+      "baseVariants": ["checkbox", "checkbox-field", "checkbox-group"],
+      "interactionStates": [
+        "unchecked",
+        "checked",
+        "indeterminate",
+        "default",
+        "hover",
+        "pressed",
+        "disabled",
+        "focus",
+        "error",
+        "light",
+        "dark"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Checkbox relies on native input[type=checkbox] and fieldset semantics rather than the wave-1 central semantic registry.",
+    "The family does not emit data-component or purpose metadata today; semantic meaning comes from the native checkbox control plus field-helper wiring in CheckboxField and CheckboxGroupField.",
+    "Generated from docs/registry/families/checkbox/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

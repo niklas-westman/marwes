@@ -1,30 +1,24 @@
-import { iconRegistry } from "@marwes-ui/core"
-import { type Button, PrimaryButton } from "@marwes-ui/react"
+import { SpinnerVariants, storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
+import { PrimaryButton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
-const iconNames = Object.keys(iconRegistry) as Array<keyof typeof iconRegistry>
-
 const meta = {
-  title: "Buttons/General/Primary",
+  title: "Buttons/Variant/PrimaryButton",
   component: PrimaryButton,
-  parameters: {
-    layout: "centered",
-  },
+  parameters: storybookLayout.centered,
   tags: ["autodocs"],
   argTypes: {
-    iconLeft: {
-      control: "select",
-      options: [undefined, ...iconNames],
+    ...storybookButtonGeneralArgTypes,
+    children: {
+      control: "text",
     },
-    iconRight: {
-      control: "select",
-      options: [undefined, ...iconNames],
-    },
-    disabled: {
-      control: "boolean",
+    loading: {
+      control: "object",
+      description:
+        "Boolean shorthand or loading config object with isLoading, disableWhileLoading, spinnerVariant, and loadingLabel.",
     },
   },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof PrimaryButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -32,5 +26,33 @@ type Story = StoryObj<typeof meta>
 export const PrimaryExample: Story = {
   args: {
     children: "Primary Button",
+  },
+}
+
+export const LoadingFullConfig: Story = {
+  args: {
+    children: "Save",
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: false,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
+  },
+}
+
+export const LoadingFullConfigBlocking: Story = {
+  args: {
+    children: "Save",
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: true,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
   },
 }

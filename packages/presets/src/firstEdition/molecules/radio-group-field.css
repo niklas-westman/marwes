@@ -1,0 +1,59 @@
+/**
+ * RadioGroupField (Molecule)
+ *
+ * Layout for group label + radio options + description/error text.
+ * Each option renders a Radio atom beside its label text.
+ *
+ * Figma reference: Radio Group node 1368:6450
+ * Option row: 91 Fill × 32 Hug (fills width, 32px row height)
+ */
+
+.mw-radio-group-field {
+  display: grid;
+  gap: var(--mw-density-gap);
+}
+
+.mw-radio-group-field__label {
+  cursor: default;
+  user-select: none;
+}
+
+.mw-radio-group-field__options {
+  display: grid;
+  gap: 0;
+}
+
+.mw-radio-group-field__option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mw-density-gap);
+  height: 32px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Tighten line-height so the <p> aligns with the 16px radio circle */
+.mw-radio-group-field__option .mw-p {
+  line-height: 1;
+}
+
+.mw-radio-group-field__description {
+  opacity: 0.75;
+  font-size: var(--mw-density-font-size-sm);
+}
+
+.mw-radio-group-field__error {
+  font-size: var(--mw-density-font-size-sm);
+  color: var(--mw-color-danger-base, #dc2626);
+}
+
+/* State modifiers */
+.mw-radio-group-field--disabled .mw-radio-group-field__option {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.mw-radio-group-field--invalid .mw-radio-group-field__label .mw-p,
+.mw-radio-group-field--invalid .mw-radio-group-field__error .mw-p {
+  color: var(--mw-color-danger-base, #dc2626);
+}

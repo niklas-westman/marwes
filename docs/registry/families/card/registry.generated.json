@@ -1,0 +1,136 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "card",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/card-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/card/card-recipe.ts",
+      "packages/core/src/components/atoms/card/card-types.ts",
+      "packages/core/src/components/atoms/card/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/card.css"],
+    "react": [
+      "packages/react/src/components/card/__tests__/card.test.tsx",
+      "packages/react/src/components/card/card.tsx",
+      "packages/react/src/components/card/index.ts",
+      "packages/react/src/components/card/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/card/__tests__/card.test.ts",
+      "packages/vue/src/components/card/card.ts",
+      "packages/vue/src/components/card/index.ts",
+      "packages/vue/src/components/card/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/card/__tests__/card-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/card/__tests__/card-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/card/card.stories.tsx",
+      "apps/storybook-react/src/stories/card/Introduction.mdx",
+      "apps/storybook-react/src/stories/card/product-card.stories.tsx",
+      "apps/storybook-react/src/stories/card/profile-card.stories.tsx",
+      "apps/storybook-react/src/stories/card/stat-card.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/card/__tests__/card-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/card/__tests__/card-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/card/card.stories.ts",
+      "apps/storybook-vue/src/stories/card/Introduction.mdx",
+      "apps/storybook-vue/src/stories/card/product-card.stories.ts",
+      "apps/storybook-vue/src/stories/card/profile-card.stories.ts",
+      "apps/storybook-vue/src/stories/card/stat-card.stories.ts"
+    ],
+    "contracts": []
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": "card",
+    "canonicalAttributes": [],
+    "allowedPurposes": ["product-card", "profile-card", "stat-card"],
+    "purposeAttributes": {
+      "product-card": {
+        "data-purpose": "product-card"
+      },
+      "profile-card": {
+        "data-purpose": "profile-card"
+      },
+      "stat-card": {
+        "data-purpose": "stat-card"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/card/card-recipe.ts",
+      "packages/react/src/components/card/variants.tsx",
+      "packages/vue/src/components/card/variants.ts"
+    ],
+    "notes": [
+      "Card is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "The atom emits data-component=card from core, while purpose-card metadata currently lives in the React and Vue wrappers."
+    ]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/card.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-card/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-card/-card_1364-11556.json",
+      ".figma/marwes/pages/-card/component-container_1371-13326.json",
+      ".figma/marwes/pages/-card/-card-dark_1368-5891.json",
+      ".figma/marwes/pages/cover/card_1825-30426.json"
+    ],
+    "nodeReferences": {
+      "cardComponent": "1364:7718",
+      "cardLightFrame": "1364:11556",
+      "cardDarkFrame": "1368:5891",
+      "cardComponentContainer": "1371:13326",
+      "cardCoverFrame": "1825:30426"
+    },
+    "figmaTokens": ["card/surface", "card/border", "card/title", "card/body"],
+    "figmaStates": {
+      "baseVariants": ["card", "product-card", "profile-card", "stat-card"],
+      "interactionStates": [
+        "default",
+        "hover",
+        "pressed",
+        "disabled",
+        "focus",
+        "light",
+        "dark",
+        "body-only"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Card is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "The atom emits data-component=card from core, while purpose-card metadata currently lives in the React and Vue wrappers.",
+    "Generated from docs/registry/families/card/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

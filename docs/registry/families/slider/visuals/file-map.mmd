@@ -1,0 +1,23 @@
+flowchart TD
+  Registry["docs/registry/families/slider"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/slider/"]
+  Core --> CoreFiles["slider-a11y.ts slider-recipe.ts slider-types.ts"]
+  Helpers["packages/core/src/shared/field-helpers.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> AtomCss["slider.css"]
+  Presets --> FieldCss["molecules/slider-field.css"]
+
+  React["packages/react/src/components/slider/"]
+  React --> ReactFiles["slider.tsx slider-field.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/slider/"]
+  Vue --> VueFiles["slider.ts slider-field.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/slider/"]
+  StoriesV["apps/storybook-vue/src/stories/slider/"]
+  Contracts["tests/contracts/slider.contract.ts"]

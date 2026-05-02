@@ -1,0 +1,26 @@
+flowchart TD
+  Registry["docs/registry/families/icon"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/icon/"]
+  Core --> RegistryFiles["icon-registry.ts icon-names.ts icon-recipe.ts icon-scales.ts icon-types.ts"]
+  CoreScript["packages/core/scripts/generate-icon-names.ts"]
+  Core --> CoreScript
+  CoreTests["packages/core/test/recipes/icon.test.ts"]
+  Core --> CoreTests
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> IconCss["icon.css"]
+
+  React["packages/react/src/components/icon/"]
+  React --> ReactFiles["icon.tsx tests"]
+
+  Vue["packages/vue/src/components/icon/"]
+  Vue --> VueFiles["icon.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/icon/"]
+  StoriesV["apps/storybook-vue/src/stories/icon/"]
+  Contracts["tests/contracts/icon.contract.ts"]
+  FigmaLookup[".figma/marwes/components/_index.json"]

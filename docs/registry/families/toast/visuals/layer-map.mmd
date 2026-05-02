@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ntoast matrix + component container"]
+  Spec["Spec + AI metadata + audit queue"]
+  Core["@marwes-ui/core\ntoast recipe + canonical semantics"]
+  Presets["preset CSS\ntoast + toast-container"]
+  React["@marwes-ui/react\ntoast + container + provider + variants"]
+  Vue["@marwes-ui/vue\ntoast + container + provider + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["shared toast contract"]
+  Registry["docs/registry/families/toast"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

@@ -1,0 +1,110 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Spacing/Introduction" />
+
+# Spacing Component
+
+Marwes provides `Spacing` as a pure layout primitive for inserting a fixed vertical
+gap between elements. Replace ad-hoc margin and padding hacks with a semantic,
+token-driven spacer.
+
+## Component Architecture
+
+```
+Spacing / Spacer (Atom)
+```
+
+## Recommended Usage
+
+Use the `Spacings` const to avoid magic strings. Prefer `Spacer` with the `spacing`
+prop for layout readability. `Spacing size={...}` remains supported.
+
+```tsx
+import { Spacer, Spacings } from "@marwes-ui/react"
+
+<H1>Hello</H1>
+<Spacer spacing={Spacings.sp24} />
+<Paragraph>World</Paragraph>
+```
+
+```vue
+<script setup>
+import { Spacer, Spacings } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <H1>Hello</H1>
+  <Spacer :spacing="Spacings.sp24" />
+  <Paragraph>World</Paragraph>
+</template>
+```
+
+## Token Scale
+
+| Size  | Pixels |
+|-------|--------|
+| sp-0   | 0px    |
+| sp-2   | 2px    |
+| sp-4   | 4px    |
+| sp-8   | 8px    |
+| sp-16  | 16px   |
+| sp-24  | 24px (default) |
+| sp-32  | 32px   |
+| sp-40  | 40px   |
+| sp-48  | 48px   |
+| sp-56  | 56px   |
+| sp-64  | 64px   |
+| sp-72  | 72px   |
+| sp-80  | 80px   |
+| sp-88  | 88px   |
+| sp-96  | 96px   |
+| sp-104 | 104px  |
+| sp-112 | 112px  |
+| sp-120 | 120px  |
+
+## Usage Notes
+
+- `Spacing` and `Spacer` render an `aria-hidden` div — they carry no semantic meaning
+- Use `Spacings.sp24` (or any dot-notation token) instead of raw strings for type safety
+- `Spacings["sp-24"]` remains available for backward compatibility
+- `flex-shrink: 0` is applied so the spacer holds its size inside flex containers
+
+## Accessibility notes
+
+**Spacing is decorative only.** `Spacing` renders an `aria-hidden` div and should never carry
+meaning about section boundaries, grouping, or reading order.
+
+**Prefer parent-owned layout when it tells the story more honestly.** If a stack, grid, or section
+wrapper can express the layout with `gap` or clearer structure, use that instead of inserting a
+standalone spacer element.
+
+```tsx
+// ❌ Large gap used to imply hidden structure
+<Paragraph>Profile</Paragraph>
+<Spacer spacing={Spacings.sp96} />
+<Paragraph>Billing</Paragraph>
+
+// ✅ Real section structure with parent-owned spacing
+<section style={{ display: "grid", gap: "var(--mw-spacing-sp-96)" }}>
+  <Paragraph>Profile</Paragraph>
+  <Paragraph>Billing</Paragraph>
+</section>
+```
+
+**`scale` is an escape hatch, not the default design language.** Prefer the named spacing token
+scale first. Use `scale` deliberately when the shared token vocabulary is close but not quite
+right for a layout edge case.
+
+**Large gaps should not imply hidden semantics.** If the UI needs a real separator, heading, list,
+or field grouping, add the honest structure instead of relying on whitespace alone.
+
+## Component Reference
+
+**`Spacer`** — Layout-oriented alias for inserting token-driven vertical space with `spacing={...}`.
+
+**`Spacing`** — Backward-compatible atom using `size={...}`.
+
+## Story Coverage
+
+- Full size scale (sp-0 → sp-120)
+- In-context usage with `H1` and `Paragraph`

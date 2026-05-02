@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "divider",
+  "displayName": "Divider",
+  "status": "shipped",
+  "summary": "Family-local baseline separator family with a single Divider atom for horizontal and vertical content separation.",
+  "philosophy": [
+    "Keep Divider as a single-purpose atom and avoid turning it into a family of decorated or text-embedded separators by default.",
+    "Keep the semantic <hr> baseline and source-owned size mapping in core so React and Vue stay aligned.",
+    "Treat the current Figma page as a horizontal spacing reference, while the shipped vertical orientation remains a deliberate code-level extension.",
+    "Keep local divider metadata honest: the atom emits stable data-component, data-size, and data-orientation values from core, but Divider is not part of the wave-1 central semantic registry."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a semantic separator between related sections or inline groups of content.",
+      "The product wants one small separator primitive with a clear size scale and horizontal or vertical orientation.",
+      "The team wants React and Vue divider behavior to stay aligned through one shared contract and one core recipe."
+    ],
+    "avoidWhen": [
+      "The layout only needs whitespace and does not benefit from an actual semantic separator.",
+      "The design really calls for a richer pattern such as an \"or\" divider, labeled separator, or section heading rather than a plain rule.",
+      "The product expects Figma-backed vertical-divider variants even though the current synced design page only teaches the horizontal baseline."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Core recipe tests for the horizontal default, size mapping, orientation metadata, and optional id handling.",
+      "Shared divider contract coverage across React and Vue for semantic separator behavior.",
+      "Storybook introduction and taxonomy tests in both apps for the atom guidance and story placement."
+    ],
+    "manualReviewRequired": [
+      "Product-level judgment about when a divider adds meaningful section separation versus when spacing or headings would be the more honest structure.",
+      "Real layout review for vertical dividers because container height and surrounding alignment still matter visually.",
+      "Any future move toward text-embedded or richer divider patterns that would expand beyond the current single-atom scope."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Divider completed a first-pass accessibility audit focused on semantic-separator honesty, spacing-vs-structure guidance, and vertical-layout caveats.",
+      "The family now has expanded shared-contract coverage for local metadata plus explicit accessibility notes in both Storybook apps."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/divider/Introduction.mdx",
+        "apps/storybook-react/src/stories/divider/divider.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/divider/Introduction.mdx",
+        "apps/storybook-vue/src/stories/divider/divider.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "xxs",
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "xxl",
+      "horizontal",
+      "vertical",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "If labeled or \"or\" dividers eventually ship, should they become a separate family or remain an extension of the current Divider atom?",
+    "Should the curated Figma node references for Divider be refreshed so NODE_REFERENCE.md and nodes.json point at the newer 1574:* divider page instead of the older 1364:* section?"
+  ]
+}

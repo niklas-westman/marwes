@@ -1,0 +1,171 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  accordionWhyPurposeComponents,
+  accordionPurposeComponentReference,
+} from "@marwes-ui/core"
+
+<Meta title="Accordion/Introduction" />
+
+# Accordion Components
+
+Marwes provides an accordion system with three layers:
+**purpose components** for common patterns, **AccordionField** for custom item lists,
+and the raw **Accordion** atom for advanced control.
+
+## Recommended: Purpose Components
+
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```tsx
+import { FAQAccordion, SettingsAccordion, SectionsAccordion } from "@marwes-ui/react"
+
+// Single-open FAQ — auto-sets data-purpose="faq"
+<FAQAccordion
+  label="Product FAQ"
+  items={[
+    { value: "shipping", title: "Shipping details", content: "Orders ship within 2-3 business days." },
+    { value: "returns", title: "Return policy", content: "Returns accepted within 30 days." },
+  ]}
+/>
+
+// Multi-open settings — auto-sets data-purpose="settings"
+<SettingsAccordion
+  label="Preferences"
+  items={[
+    { value: "notifications", title: "Notifications", content: "Configure your notification preferences." },
+    { value: "privacy", title: "Privacy", content: "Manage your privacy settings." },
+  ]}
+  defaultOpenItems={["notifications"]}
+/>
+
+// Flexible sections — auto-sets data-purpose="sections"
+<SectionsAccordion
+  label="Documentation"
+  items={[
+    { value: "getting-started", title: "Getting Started", content: "Welcome to the docs." },
+    { value: "api", title: "API Reference", content: "Full API documentation." },
+  ]}
+/>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {accordionWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {accordionPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: AccordionField (Molecule)
+
+For custom accordion layouts that don't fit a purpose component, use `AccordionField` directly:
+
+```tsx
+import { AccordionField } from "@marwes-ui/react"
+
+// Uncontrolled with defaultOpenItems
+<AccordionField
+  label="Order Details"
+  description="Expand sections to view details."
+  items={[
+    { value: "shipping", title: "Shipping", content: "Orders ship within 2-3 business days." },
+    { value: "billing", title: "Billing", content: "View your billing information." },
+  ]}
+  defaultOpenItems={["shipping"]}
+/>
+
+// Controlled with openItems + onOpenItemsChange
+const [openItems, setOpenItems] = React.useState(["shipping"])
+
+<AccordionField
+  label="Order Details"
+  items={[
+    { value: "shipping", title: "Shipping", content: "Shipping info." },
+    { value: "billing", title: "Billing", content: "Billing info." },
+  ]}
+  openItems={openItems}
+  onOpenItemsChange={setOpenItems}
+/>
+
+// With error state
+<AccordionField
+  label="Required Sections"
+  error="Please review all sections before submitting."
+  items={[
+    { value: "terms", title: "Terms", content: "Read the terms of service." },
+    { value: "privacy", title: "Privacy", content: "Review the privacy policy." },
+  ]}
+/>
+```
+
+### AccordionField Features
+
+- **Accessible group** — `<fieldset>` with `aria-labelledby` and `aria-describedby`
+- **Label + description + error** — field semantics with automatic a11y wiring
+- **Controlled & uncontrolled** — `openItems`/`onOpenItemsChange` or `defaultOpenItems`
+- **Single or multi-open** — `multiple={false}` for single-open, `multiple={true}` (default) for multi-open
+- **Disabled** — disables all items in the group
+- **Per-item disabled** — disable individual items via `disabled` property on items
+- **Canonical item body prop** — use `content` for item panel content; React keeps `children` as a temporary compatibility alias
+
+## Low-level: Accordion (Atom)
+
+Use the raw `Accordion` atom only when you need fully custom layout or standalone disclosure:
+
+```tsx
+import { Accordion } from "@marwes-ui/react"
+
+<Accordion id="shipping-faq" title="Shipping details">
+  Orders ship within 2-3 business days.
+</Accordion>
+```
+
+> **Note:** When using `Accordion` directly, you are responsible for:
+> - Managing open/closed state
+> - Coordinating single-open behavior across multiple items
+> - Providing accessible group semantics if used in a list
+
+---
+
+## Component Reference
+
+### Purpose Components (AI-Friendly)
+
+**`FAQAccordion`** — Question-and-answer sections
+Sets: `data-purpose="faq"`, single-open by default
+
+**`SettingsAccordion`** — Configuration panels
+Sets: `data-purpose="settings"`, multi-open by default
+
+**`SectionsAccordion`** — Generic collapsible sections
+Sets: `data-purpose="sections"`, flexible open mode
+
+### Base Molecule
+
+**`AccordionField`** — Accessible accordion group with field semantics
+Provides: `<fieldset>`, label, description, error, state management
+
+### Atom
+
+**`Accordion`** — Low-level disclosure panel with trigger + content
+Use when you need fully custom layout or standalone disclosure
+
+## Story Coverage
+
+- **Atom**: `Default`, `Open`, `Disabled`, `Interactive`, `AccordionList`
+- **Molecule**: `Default`, `WithDescription`, `WithError`, `SingleOpen`, `Disabled`, `Controlled`
+- **Purpose/FAQ**: `Default`, `WithDefaultOpen`
+- **Purpose/Settings**: `Default`, `WithDefaultOpen`
+- **Purpose/Sections**: `Default`, `WithDefaultOpen`

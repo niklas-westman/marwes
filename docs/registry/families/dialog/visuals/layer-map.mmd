@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ndialog + scrim"]
+  Spec["Spec + AI metadata + AXE audit"]
+  Core["@marwes-ui/core\ndialog shell semantics"]
+  Presets["preset CSS\ndialog shell + modal overlay"]
+  React["@marwes-ui/react\ndialog + dialog-modal + variants"]
+  Vue["@marwes-ui/vue\ndialog + dialog-modal + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["dialog + dialog-modal shared contracts"]
+  Registry["docs/registry/families/dialog"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

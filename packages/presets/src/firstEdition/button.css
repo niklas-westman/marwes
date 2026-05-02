@@ -20,13 +20,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: var(--mw-radius);
+  gap: 6px; /* off-scale — icon-to-label spacing */
+  height: var(--mw-density-height);
+  padding: 0 var(--mw-density-padding-x);
+  border-radius: var(--mw-ui-radius);
   border: 1px solid transparent;
   font-family: var(--mw-font-primary, inherit);
-  font-size: 14px;
+  font-size: var(--mw-density-font-size);
   font-weight: 500;
   line-height: 0;
   cursor: pointer;
@@ -36,15 +36,15 @@
 
 /* FOCUS STATE - Figma spec: 2px white space + 2px Accessible blue outline */
 .mw-btn:focus-visible {
-  outline: 2px solid var(--mw-focus);
+  outline: 2px solid var(--mw-color-focus);
   outline-offset: 2px;
 }
 
 /* PRIMARY - Solid filled button */
 .mw-btn--primary {
-  background: var(--mw-primary);
-  color: var(--mw-on-primary);
-  border-color: var(--mw-primary);
+  background: var(--mw-color-primary-base);
+  color: var(--mw-color-primary-label);
+  border-color: var(--mw-color-primary-base);
 }
 
 .mw-btn--primary:hover:not(:disabled) {
@@ -58,61 +58,82 @@
 /* SECONDARY - Outlined button */
 .mw-btn--secondary {
   background: transparent;
-  color: var(--mw-primary);
-  border-color: var(--mw-primary);
+  color: var(--mw-color-primary-base);
+  border-color: var(--mw-color-primary-base);
 }
 
 .mw-btn--secondary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-primary) 8%, transparent);
+  background: color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent);
 }
 
 .mw-btn--secondary:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent);
 }
 
-/* TEXT - Minimal text-only button */
-.mw-btn--text {
+/* NEUTRAL - Quiet outlined button for cancel/close/filter-style actions */
+.mw-btn--neutral {
   background: transparent;
-  color: var(--mw-primary);
+  color: var(--mw-color-text);
+  border-color: color-mix(in srgb, var(--mw-color-text) 10%, transparent);
+}
+
+.mw-btn--neutral:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--mw-color-text) 4%, transparent);
+}
+
+.mw-btn--neutral:active:not(:disabled) {
+  background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
+}
+
+/* TEXT - Minimal text-only button, content-hugging (no fixed height).
+   Uses the same 6px icon-to-label spacing as every other button. */
+.mw-btn.mw-btn--text {
+  background: transparent;
+  color: var(--mw-color-text);
   border-color: transparent;
-  padding: 0 8px;
+  height: auto;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  border-radius: var(--mw-ui-radius);
 }
 
 .mw-btn--text:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-primary) 8%, transparent);
+  background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
 }
 
 .mw-btn--text:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--mw-color-text) 12%, transparent);
+}
+
+.mw-btn.mw-btn--text[data-action="navigate"] {
+  padding: 0.125rem 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* SIZES */
 .mw-btn--xs {
   height: 30px;
-  padding: 0 10px;
+  padding: 0 10px; /* off-scale — no token */
   font-size: 12px;
-  gap: 4px;
 }
 
-button.mw-btn--sm {
+.mw-btn--sm {
   height: 34px;
-  padding: 0 12px;
+  padding: 0 12px; /* off-scale — no token */
   font-size: 13px;
-  gap: 4px;
 }
 
-button.mw-btn--md {
+.mw-btn--md {
   height: 40px;
-  padding: 12px 16px;
+  padding: 12px 16px; /* off-scale — no token */
   font-size: 14px;
-  gap: 4px;
 }
 
-button.mw-btn--lg {
+.mw-btn--lg {
   height: 46px;
   padding: 0 16px;
   font-size: 15px;
-  gap: 10px;
 }
 
 /* DISABLED STATE - Figma spec: opacity 20% (#000000 20% for light mode) */
@@ -129,24 +150,39 @@ button.mw-btn--lg {
 /* ERROR STATE - Figma node: 1:1072 includes error state */
 .mw-btn[data-error="true"],
 .mw-btn--error {
-  border-color: var(--mw-danger);
+  border-color: var(--mw-color-danger-base);
 }
 
 .mw-btn--primary[data-error="true"],
 .mw-btn--primary.mw-btn--error {
-  background: var(--mw-danger);
-  border-color: var(--mw-danger);
+  background: var(--mw-color-danger-base);
+  border-color: var(--mw-color-danger-base);
 }
 
 .mw-btn--secondary[data-error="true"],
 .mw-btn--secondary.mw-btn--error {
-  color: var(--mw-danger);
-  border-color: var(--mw-danger);
+  color: var(--mw-color-danger-base);
+  border-color: var(--mw-color-danger-base);
 }
 
 .mw-btn--text[data-error="true"],
 .mw-btn--text.mw-btn--error {
-  color: var(--mw-danger);
+  color: var(--mw-color-danger-base);
+}
+
+/* SUCCESS - Positive confirmation actions */
+.mw-btn--success {
+  background: var(--mw-color-success-base);
+  color: var(--mw-color-success-label);
+  border-color: var(--mw-color-success-base);
+}
+
+.mw-btn--success:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.mw-btn--success:active:not(:disabled) {
+  opacity: 0.95;
 }
 
 /* ============================================
@@ -162,17 +198,22 @@ button.mw-btn--lg {
   opacity: 0.9;
 }
 
+/* Dark mode: Neutral button uses the softer ghost border from Figma */
+.mw-theme--dark .mw-btn--neutral {
+  border-color: color-mix(in srgb, var(--mw-color-text) 18%, transparent);
+}
+
 /* Dark mode: Error state for Secondary button (red outline on dark background) */
 .mw-theme--dark .mw-btn--secondary[data-error="true"],
 .mw-theme--dark .mw-btn--secondary.mw-btn--error {
-  border-color: var(--mw-danger);
-  color: var(--mw-danger);
+  border-color: var(--mw-color-danger-base);
+  color: var(--mw-color-danger-base);
 }
 
 /* Dark mode: Error state for Primary button */
 .mw-theme--dark .mw-btn--primary[data-error="true"],
 .mw-theme--dark .mw-btn--primary.mw-btn--error {
-  background: var(--mw-danger);
-  border-color: var(--mw-danger);
-  color: var(--mw-on-danger);
+  background: var(--mw-color-danger-base);
+  border-color: var(--mw-color-danger-base);
+  color: var(--mw-color-danger-label);
 }

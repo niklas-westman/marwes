@@ -8,7 +8,6 @@
 import { checkboxRecipe } from "@marwes-ui/core"
 import type { CheckboxProps as CoreCheckboxProps } from "@marwes-ui/core"
 import * as React from "react"
-import { useTheme } from "../../provider/use-theme"
 
 export type CheckboxProps = CoreCheckboxProps & {
   /**
@@ -90,9 +89,7 @@ export type CheckboxProps = CoreCheckboxProps & {
 export function Checkbox(props: CheckboxProps): React.ReactElement {
   const { onCheckedChange, onChange, ...coreProps } = props
 
-  const theme = useTheme()
-
-  const kit = checkboxRecipe({ ...coreProps, theme })
+  const kit = checkboxRecipe({ ...coreProps })
 
   const inputRef = React.useRef<HTMLInputElement | null>(null)
 

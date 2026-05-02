@@ -1,0 +1,318 @@
+/*
+ * Toast Component Styles
+ * Figma: 1365:12526 (light) / 2276:56938 (dark)
+ *
+ * Toast supports three emphasis levels:
+ *   subtle  — quiet, low-contrast surface
+ *   outline — default emphasis
+ *   rich    — high-emphasis, use sparingly
+ *
+ * Supported intent mappings:
+ *   neutral, info, success, warning, error, brand
+ *
+ * Purpose toasts map semantic intents automatically in the React/Vue adapters.
+ * Raw <Toast> can opt into the neutral/brand primitives with data-intent.
+ */
+
+.mw-toast {
+  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-border: var(--mw-color-border);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text);
+
+  display: flex;
+  align-items: center;
+  gap: var(--mw-spacing-sp-8);
+  min-width: 288px;
+  max-width: 480px;
+  padding: var(--mw-spacing-sp-16);
+  border: 1px solid var(--mw-toast-border);
+  border-radius: var(--mw-ui-radius, 8px);
+  background: var(--mw-toast-surface);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mw-toast__icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  align-items: center;
+  color: var(--mw-toast-icon);
+}
+
+.mw-toast__icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.5;
+}
+
+.mw-toast__body {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: var(--mw-spacing-sp-8);
+}
+
+.mw-toast__text {
+  min-width: 0;
+  flex: 1;
+  color: var(--mw-toast-text);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.mw-toast__action {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--mw-toast-action);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.mw-toast__action-button {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: inherit;
+}
+
+.mw-toast__action-button:focus-visible,
+.mw-toast__action :where(a, button):focus-visible {
+  outline: 2px solid var(--mw-color-focus, #2684ff);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.mw-toast__dismiss {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--mw-toast-icon);
+  cursor: pointer;
+}
+
+.mw-toast__dismiss:focus-visible {
+  outline: 2px solid var(--mw-color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.mw-toast__dismiss::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline x1='18' y1='6' x2='6' y2='18' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='6' y1='6' x2='18' y2='18' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline x1='18' y1='6' x2='6' y2='18' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='6' y1='6' x2='18' y2='18' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* --------------------------------------------
+   Light mode
+   -------------------------------------------- */
+
+.mw-toast--subtle {
+  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-border: var(--mw-color-border);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text);
+}
+
+.mw-toast--subtle[data-intent="error"],
+.mw-toast--subtle[data-intent="brand"] {
+  --mw-toast-icon: var(--mw-color-text);
+}
+
+.mw-toast--outline {
+  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-toast--outline[data-intent="neutral"] {
+  --mw-toast-border: var(--mw-color-border);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text);
+}
+
+.mw-toast--outline[data-intent="success"] {
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-toast--outline[data-intent="warning"] {
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base);
+  --mw-toast-action: var(--mw-color-warning-base);
+}
+
+.mw-toast--outline[data-intent="error"] {
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}
+
+.mw-toast--rich {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-primary-base) 12%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-toast--rich[data-intent="neutral"] {
+  --mw-toast-surface: var(--mw-color-surface-subtle);
+  --mw-toast-border: var(--mw-color-border-subtle);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text-muted);
+}
+
+.mw-toast--rich[data-intent="success"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-success-base) 12%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-toast--rich[data-intent="warning"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base);
+  --mw-toast-action: var(--mw-color-warning-base);
+}
+
+.mw-toast--rich[data-intent="error"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}
+
+/* --------------------------------------------
+   Dark mode
+   -------------------------------------------- */
+
+.mw-theme--dark .mw-toast--subtle {
+  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-border: var(--mw-color-border);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text);
+}
+
+.mw-theme--dark .mw-toast--outline {
+  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="neutral"] {
+  --mw-toast-border: var(--mw-color-border);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="success"] {
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="warning"] {
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base);
+  --mw-toast-action: var(--mw-color-warning-base);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="error"] {
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}
+
+.mw-theme--dark .mw-toast--rich {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-primary-base) 18%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="neutral"] {
+  --mw-toast-surface: var(--mw-color-surface-subtle);
+  --mw-toast-border: var(--mw-color-border-subtle);
+  --mw-toast-icon: var(--mw-color-text-muted);
+  --mw-toast-text: var(--mw-color-text);
+  --mw-toast-action: var(--mw-color-text-muted);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="success"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-success-base) 18%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="warning"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-warning-base) 20%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base);
+  --mw-toast-action: var(--mw-color-warning-base);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="error"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-danger-base) 18%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}

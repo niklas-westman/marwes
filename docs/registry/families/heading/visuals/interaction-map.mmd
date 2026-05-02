@@ -1,0 +1,16 @@
+flowchart LR
+  OutlineChoice["Author chooses H1 H2 or H3"] --> NativeLevel["native h1 h2 h3 element\nreal heading semantics"]
+  OutlineChoice --> DefaultScale["default visual scale\nmatches the level"]
+  OutlineChoice --> SizeOverride["optional size override\nsemantic level stays unchanged"]
+
+  FigmaScale["Figma typography scale\nHeading/H1 H2 H3"] --> ThemeScale["theme.typography.h1 h2 h3"]
+  ThemeScale --> CssVars["--mw-heading-size\n--mw-heading-line-height\n--mw-heading-weight\n--mw-heading-letter-spacing"]
+
+  DefaultScale --> CssVars
+  SizeOverride --> CssVars
+  NativeLevel --> OptionalA11y["optional id + aria-label\nno data-component metadata"]
+
+  CssVars --> ReactDom["React DOM"]
+  CssVars --> VueDom["Vue DOM"]
+  OptionalA11y --> ReactDom
+  OptionalA11y --> VueDom

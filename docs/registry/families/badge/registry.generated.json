@@ -1,0 +1,143 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "badge",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/badge-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/badge/badge-a11y.ts",
+      "packages/core/src/components/atoms/badge/badge-recipe.ts",
+      "packages/core/src/components/atoms/badge/badge-types.ts",
+      "packages/core/src/components/atoms/badge/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/badge.css"],
+    "react": [
+      "packages/react/src/components/badge/__tests__/badge-group.test.tsx",
+      "packages/react/src/components/badge/__tests__/badge.test.tsx",
+      "packages/react/src/components/badge/__tests__/index-exports.test.tsx",
+      "packages/react/src/components/badge/__tests__/variants.test.tsx",
+      "packages/react/src/components/badge/badge-group.tsx",
+      "packages/react/src/components/badge/badge.tsx",
+      "packages/react/src/components/badge/index.ts",
+      "packages/react/src/components/badge/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/badge/__tests__/badge-group.test.ts",
+      "packages/vue/src/components/badge/__tests__/badge.test.ts",
+      "packages/vue/src/components/badge/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/badge/__tests__/variants.test.ts",
+      "packages/vue/src/components/badge/badge-group.ts",
+      "packages/vue/src/components/badge/badge.ts",
+      "packages/vue/src/components/badge/index.ts",
+      "packages/vue/src/components/badge/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/badge/__tests__/badge-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/badge/__tests__/badge-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/badge/badge-group.stories.tsx",
+      "apps/storybook-react/src/stories/badge/badge.stories.tsx",
+      "apps/storybook-react/src/stories/badge/Introduction.mdx",
+      "apps/storybook-react/src/stories/badge/notification-badge.stories.tsx",
+      "apps/storybook-react/src/stories/badge/priority-badge.stories.tsx",
+      "apps/storybook-react/src/stories/badge/status-badge.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/badge/__tests__/badge-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/badge/__tests__/badge-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/badge/badge-group.stories.ts",
+      "apps/storybook-vue/src/stories/badge/badge.stories.ts",
+      "apps/storybook-vue/src/stories/badge/Introduction.mdx",
+      "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts",
+      "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
+      "apps/storybook-vue/src/stories/badge/status-badge.stories.ts"
+    ],
+    "contracts": ["tests/contracts/badge.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "badge",
+    "canonicalAttributes": ["data-component", "data-variant"],
+    "allowedPurposes": ["status", "priority", "notification"],
+    "purposeAttributes": {
+      "notification": {
+        "data-purpose": "notification"
+      },
+      "priority": {
+        "data-purpose": "priority"
+      },
+      "status": {
+        "data-purpose": "status"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": ["Badge needs base family identity normalized before full parity governance."]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/checkboxbadge.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-badge/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-badge/-badge_1364-11603.json",
+      ".figma/marwes/pages/-badge/-badge-dark_2276-56582.json",
+      ".figma/marwes/pages/-badge/component-container_1369-6125.json",
+      ".figma/marwes/pages/cover/badges_1825-30440.json"
+    ],
+    "nodeReferences": {
+      "badgeLightFrame": "1364:11603",
+      "badgeDarkFrame": "2276:56582",
+      "badgeComponentContainer": "1369:6125",
+      "checkboxBadgeComponent": "1364:7721",
+      "badgeCoverFrame": "1825:30440"
+    },
+    "figmaTokens": ["badge/surface", "badge/border", "badge/label"],
+    "figmaStates": {
+      "baseVariants": [
+        "neutral",
+        "brand",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "status",
+        "priority",
+        "notification"
+      ],
+      "interactionStates": ["light", "dark", "standalone", "grouped", "numeric", "labeled"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Badge needs base family identity normalized before full parity governance.",
+    "Generated from docs/registry/families/badge/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "spinner",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/spinner-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/spinner/index.ts",
+      "packages/core/src/components/atoms/spinner/spinner-a11y.ts",
+      "packages/core/src/components/atoms/spinner/spinner-recipe.ts",
+      "packages/core/src/components/atoms/spinner/spinner-svg.ts",
+      "packages/core/src/components/atoms/spinner/spinner-types.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/spinner.css"],
+    "react": [
+      "packages/react/src/components/spinner/__tests__/index-exports.test.tsx",
+      "packages/react/src/components/spinner/__tests__/spinner.test.tsx",
+      "packages/react/src/components/spinner/__tests__/variants.test.tsx",
+      "packages/react/src/components/spinner/index.ts",
+      "packages/react/src/components/spinner/spinner.tsx",
+      "packages/react/src/components/spinner/variants.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/spinner/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/spinner/__tests__/spinner.test.ts",
+      "packages/vue/src/components/spinner/__tests__/variants.test.ts",
+      "packages/vue/src/components/spinner/index.ts",
+      "packages/vue/src/components/spinner/spinner.ts",
+      "packages/vue/src/components/spinner/variants.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/spinner/button-spinner.stories.tsx",
+      "apps/storybook-react/src/stories/spinner/empty-state-spinner.stories.tsx",
+      "apps/storybook-react/src/stories/spinner/Introduction.mdx",
+      "apps/storybook-react/src/stories/spinner/spinner.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/spinner/button-spinner.stories.ts",
+      "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts",
+      "apps/storybook-vue/src/stories/spinner/Introduction.mdx",
+      "apps/storybook-vue/src/stories/spinner/spinner.stories.ts"
+    ],
+    "contracts": ["tests/contracts/spinner.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": "spinner",
+    "canonicalAttributes": [],
+    "allowedPurposes": ["button-loading", "empty-state"],
+    "purposeAttributes": {
+      "button-loading": {
+        "data-purpose": "button-loading",
+        "data-context": "button-loading"
+      },
+      "empty-state": {
+        "data-purpose": "empty-state",
+        "data-context": "empty-state"
+      }
+    },
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/spinner/spinner-recipe.ts",
+      "packages/react/src/components/spinner/variants.tsx",
+      "packages/vue/src/components/spinner/variants.ts"
+    ],
+    "notes": [
+      "Spinner is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "The atom emits data-component=spinner from core, while context-spinner metadata currently lives in the React and Vue wrappers."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/spinnerring.json",
+      ".figma/marwes/components/spinnerclassic.json",
+      ".figma/marwes/components/spinnerdual.json",
+      ".figma/marwes/components/spinnerdots-round.json",
+      ".figma/marwes/components/spinnerdots-square.json",
+      ".figma/marwes/components/spinnerlines.json",
+      ".figma/marwes/components/spinnercross.json",
+      ".figma/marwes/components/newspinner.json",
+      ".figma/marwes/components/spinner-animation.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-spinner/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-spinner/component-container_1737-10631.json",
+      ".figma/marwes/pages/-spinner/-spinner_1737-10635.json",
+      ".figma/marwes/pages/-spinner/-spinner-dark_1780-1543.json",
+      ".figma/marwes/pages/-spinner/tinospinner_1766-153.json",
+      ".figma/marwes/pages/cover/spinnerdots-round_1825-30933.json"
+    ],
+    "nodeReferences": {
+      "spinnerComponentContainer": "1737:10631",
+      "spinnerLightFrame": "1737:10635",
+      "spinnerDarkFrame": "1780:1543",
+      "spinnerRingComponent": "1737:10523",
+      "spinnerClassicComponent": "1737:10526",
+      "spinnerDualComponent": "1737:10538",
+      "spinnerDotsRoundComponent": "1737:10529",
+      "spinnerDotsSquareComponent": "1780:1345",
+      "spinnerLinesComponent": "1780:1343",
+      "spinnerCrossComponent": "1780:1342",
+      "newSpinnerComponentSet": "1766:127",
+      "spinnerAnimationSet": "1767:153",
+      "tinoSpinnerSection": "1766:153",
+      "spinnerCoverDotsRoundFrame": "1825:30933"
+    },
+    "figmaTokens": [],
+    "figmaStates": {
+      "baseVariants": [
+        "classic",
+        "ring",
+        "dual",
+        "dots-round",
+        "dots-square",
+        "lines",
+        "cross",
+        "button-loading",
+        "empty-state"
+      ],
+      "interactionStates": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "custom",
+        "light",
+        "dark",
+        "decorative",
+        "status"
+      ]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Spinner is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "The atom emits data-component=spinner from core, while context-spinner metadata currently lives in the React and Vue wrappers.",
+    "Generated from docs/registry/families/spinner/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

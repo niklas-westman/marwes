@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "family": "button",
+      "figma": [".figma/marwes/components/button.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/button",
+        "react": "packages/react/src/components/button",
+        "vue": "packages/vue/src/components/button"
+      },
+      "presetCss": "packages/presets/src/firstEdition/button.css",
+      "stories": {
+        "react": "apps/storybook-react/src/stories/button",
+        "vue": "apps/storybook-vue/src/stories/button"
+      },
+      "contracts": ["tests/contracts/button.contract.ts"]
+    },
+    {
+      "family": "badge",
+      "figma": [".figma/marwes/components/badge.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/badge",
+        "react": "packages/react/src/components/badge",
+        "vue": "packages/vue/src/components/badge"
+      },
+      "presetCss": "packages/presets/src/firstEdition/badge.css",
+      "stories": {
+        "react": "apps/storybook-react/src/stories/badge",
+        "vue": "apps/storybook-vue/src/stories/badge"
+      },
+      "contracts": ["tests/contracts/badge.contract.ts"]
+    },
+    {
+      "family": "avatar",
+      "figma": [".figma/marwes/components/avatar.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/avatar",
+        "react": "packages/react/src/components/avatar",
+        "vue": "packages/vue/src/components/avatar"
+      },
+      "presetCss": "packages/presets/src/firstEdition/avatar.css",
+      "stories": {
+        "react": "apps/storybook-react/src/stories/avatar",
+        "vue": "apps/storybook-vue/src/stories/avatar"
+      },
+      "contracts": [
+        "tests/contracts/avatar.contract.ts",
+        "tests/contracts/avatar-badge.contract.ts",
+        "tests/contracts/avatar-group.contract.ts"
+      ]
+    },
+    {
+      "family": "toast",
+      "figma": [".figma/marwes/components/toast.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/toast",
+        "react": "packages/react/src/components/toast",
+        "vue": "packages/vue/src/components/toast"
+      },
+      "presetCss": null,
+      "stories": {
+        "react": "apps/storybook-react/src/stories/toast",
+        "vue": "apps/storybook-vue/src/stories/toast"
+      },
+      "contracts": ["tests/contracts/toast.contract.ts"]
+    },
+    {
+      "family": "dialog",
+      "figma": [".figma/marwes/components/dialog.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/dialog",
+        "react": "packages/react/src/components/dialog",
+        "vue": "packages/vue/src/components/dialog"
+      },
+      "presetCss": null,
+      "stories": {
+        "react": "apps/storybook-react/src/stories/dialog",
+        "vue": "apps/storybook-vue/src/stories/dialog"
+      },
+      "contracts": ["tests/contracts/dialog.contract.ts"]
+    }
+  ]
+}

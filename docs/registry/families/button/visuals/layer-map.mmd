@@ -1,0 +1,26 @@
+flowchart LR
+  Figma["Figma refs\nbutton overview + purpose buttons"]
+  Spec["Architecture + spec + AI metadata + AXE roadmap"]
+  Core["@marwes-ui/core\nbutton types + a11y + recipe"]
+  Preset["@marwes-ui/presets\nbutton.css"]
+  React["@marwes-ui/react\nbutton + variants"]
+  Vue["@marwes-ui/vue\nbutton + variants"]
+  Stories["Storybook React + Vue"]
+  Contracts["tests/contracts/button.contract.ts"]
+  Registry["docs/registry/families/button"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Preset
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Preset --> Registry
+  Stories --> Registry
+  Contracts --> Registry

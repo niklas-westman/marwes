@@ -1,0 +1,22 @@
+flowchart TD
+  Registry["docs/registry/families/dialog"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/dialog/"]
+  Core --> CoreFiles["dialog-a11y.ts dialog-recipe.ts dialog-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> ShellCss["dialog.css"]
+  Presets --> ModalCss["molecules/dialog-modal.css"]
+
+  React["packages/react/src/components/dialog/"]
+  React --> ReactFiles["dialog.tsx dialog-modal.tsx variants.tsx tests"]
+
+  Vue["packages/vue/src/components/dialog/"]
+  Vue --> VueFiles["dialog.ts dialog-modal.ts variants.ts tests"]
+
+  StoriesR["apps/storybook-react/src/stories/dialog/"]
+  StoriesV["apps/storybook-vue/src/stories/dialog/"]
+  Contracts["tests/contracts/dialog.contract.ts + dialog-modal.contract.ts"]

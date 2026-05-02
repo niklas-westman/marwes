@@ -1,5 +1,5 @@
 // packages/core/src/components/button/button-a11y.ts
-import type { ButtonA11yProps, ButtonOptions } from "./button-types"
+import type { ButtonA11yProps, ButtonOptions, ResolvedButtonLoading } from "./button-types"
 
 function isDev(): boolean {
   // Works in Node + bundlers without requiring @types/node
@@ -25,19 +25,27 @@ function isDev(): boolean {
 
 const __DEV__ = isDev()
 
-export function resolveButtonA11y(opts: ButtonOptions): {
+export function resolveButtonA11y(
+  opts: ButtonOptions,
+  resolvedLoading: ResolvedButtonLoading,
+): {
   tag: "button" | "a"
   a11y: ButtonA11yProps
   blockClick: boolean
 } {
   const tag: "button" | "a" = opts.as === "a" || !!opts.href ? "a" : "button"
-  const isDisabled = !!opts.disabled || !!opts.loading
+  const isDisabled =
+    !!opts.disabled || (resolvedLoading.isLoading && resolvedLoading.disableWhileLoading)
 
   if (__DEV__) {
-    const iconOnly = opts.hasVisibleText === false
-    if (iconOnly && !opts.ariaLabel) {
+    const iconOnly = opts.iconOnly || opts.hasVisibleText === false
+    const loadingAccessibleLabel = resolvedLoading.isLoading
+      ? resolvedLoading.loadingLabel
+      : undefined
+
+    if (iconOnly && !opts.ariaLabel && !loadingAccessibleLabel) {
       // Development warning for accessibility
-      console.warn("[marwes] Icon-only Button requires ariaLabel.")
+      console.warn("[marwes] Icon-only Button requires ariaLabel, or loadingLabel while loading.")
     }
   }
 
@@ -45,7 +53,7 @@ export function resolveButtonA11y(opts: ButtonOptions): {
   const common: ButtonA11yProps = {}
 
   if (opts.ariaLabel) common.ariaLabel = opts.ariaLabel
-  if (opts.loading) common.ariaBusy = true
+  if (resolvedLoading.isLoading) common.ariaBusy = true
   if (isDisabled) common.ariaDisabled = true
 
   if (opts.toggle) common.ariaPressed = !!opts.pressed
@@ -53,7 +61,10 @@ export function resolveButtonA11y(opts: ButtonOptions): {
   if (opts.ariaControls) common.ariaControls = opts.ariaControls
 
   if (tag === "button") {
-    const a11y: ButtonA11yProps = { ...common, type: "button" }
+    const nativeButtonType =
+      opts.action === "submit" ? "submit" : opts.action === "reset" ? "reset" : "button"
+
+    const a11y: ButtonA11yProps = { ...common, type: nativeButtonType }
     if (isDisabled) a11y.disabled = true
 
     return { tag, a11y, blockClick: false }
@@ -61,11 +72,14 @@ export function resolveButtonA11y(opts: ButtonOptions): {
 
   const a11y: ButtonA11yProps = {
     ...common,
-    role: "button",
-    tabIndex: isDisabled ? -1 : 0,
   }
 
-  if (!isDisabled && opts.href) a11y.href = opts.href
+  if (!isDisabled && opts.href) {
+    a11y.href = opts.href
+  } else {
+    a11y.role = "link"
+    a11y.tabIndex = isDisabled ? -1 : 0
+  }
 
   return { tag: "a", a11y, blockClick: isDisabled }
 }

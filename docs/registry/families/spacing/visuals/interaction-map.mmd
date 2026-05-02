@@ -1,0 +1,18 @@
+flowchart LR
+  AuthorChoice["Author chooses Spacing"] --> DecorativeDiv["decorative div\naria-hidden=true"]
+  AuthorChoice --> SizeChoice["size token\nSpacings['sp-0'] ... Spacings['sp-120']"]
+  AuthorChoice --> ScaleChoice["optional scale multiplier"]
+
+  SizeChoice --> TokenRef["var(--mw-spacing-{size})"]
+  ScaleChoice --> SpacingValue["--mw-spacing-value\nplain var or calc(var * scale)"]
+  TokenRef --> SpacingValue
+
+  Recipe["createSpacingRecipe"] --> LocalData["data-component=spacing\ndata-size"]
+  Recipe --> DecorativeDiv
+  Recipe --> SpacingValue
+
+  SpacingValue --> CssHeight["spacing.css\nheight: var(--mw-spacing-value)"]
+  CssHeight --> ReactDom["React DOM"]
+  CssHeight --> VueDom["Vue DOM"]
+  LocalData --> ReactDom
+  LocalData --> VueDom

@@ -1,0 +1,87 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "radio",
+  "displayName": "Radio",
+  "status": "shipped",
+  "summary": "Native single-selection family with a raw Radio atom, a canonical RadioGroupField path, and thin purpose-radio wrappers for common one-of-many choices.",
+  "philosophy": [
+    "Teach RadioGroupField and the purpose-radio wrappers as the canonical labeled single-selection path, and keep raw Radio as the low-level escape hatch.",
+    "Keep native input[type=radio] and radiogroup semantics as the real contract instead of inventing central metadata where standard HTML already expresses the meaning honestly.",
+    "Keep description, error, and required wiring source-owned in shared field helpers so React and Vue stay aligned.",
+    "Keep purpose-radio wrappers thin and semantic so they add stable intent metadata without becoming a second radio implementation."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs one mutually exclusive choice from a small peer set, with optional description or error support.",
+      "The product flow maps clearly to YesNoRadioGroup, RatingRadioGroup, or OptionRadioGroup and benefits from self-documenting purpose metadata.",
+      "The team wants React and Vue radio behavior to stay aligned through one core recipe, shared field helpers, and the existing raw-radio contract."
+    ],
+    "avoidWhen": [
+      "Multiple selections are allowed and Checkbox or CheckboxGroupField is the more honest interaction model.",
+      "A binary on/off toggle is being modeled and Switch is the clearer product contract.",
+      "The layout cannot supply honest group labeling, shared names, and single-selection behavior for raw Radio usage outside RadioGroupField."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Core recipe tests plus the shared raw-radio contract across React and Vue for checked state, disabled behavior, and callback flow.",
+      "Shared React and Vue radio-group-field contract coverage for group labeling, description wiring, error wiring, invalid propagation, required state, disabled handling, and controlled versus uncontrolled selection.",
+      "Local React and Vue tests for the purpose-radio wrappers plus Storybook introduction and taxonomy tests in both apps."
+    ],
+    "manualReviewRequired": [
+      "Real browser review for focus visibility and pressed or hover affordances because the family heavily restyles a native radio with appearance: none.",
+      "Product-level judgment about whether required messaging, helper text, and error text remain clear for real grouped choice flows.",
+      "Raw Radio usage outside RadioGroupField still depends on consumer-owned radiogroup naming and state management, so bespoke layouts deserve spot checks."
+    ],
+    "roadmapAnchors": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "notes": [
+      "Radio completed a first-pass accessibility audit focused on grouped single-selection contract maturity and native-first field wiring.",
+      "The family now has shared contracts for the raw atom and RadioGroupField across React and Vue, while purpose-wrapper metadata remains covered by local adapter tests."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/radio/Introduction.mdx",
+        "apps/storybook-react/src/stories/radio/radio-group-field.stories.tsx",
+        "apps/storybook-react/src/stories/radio/option-radio-group.stories.tsx",
+        "apps/storybook-react/src/stories/radio/yes-no-radio-group.stories.tsx",
+        "apps/storybook-react/src/stories/radio/rating-radio-group.stories.tsx",
+        "apps/storybook-react/src/stories/radio/radio.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/radio/Introduction.mdx",
+        "apps/storybook-vue/src/stories/radio/radio-group-field.stories.ts",
+        "apps/storybook-vue/src/stories/radio/option-radio-group.stories.ts",
+        "apps/storybook-vue/src/stories/radio/yes-no-radio-group.stories.ts",
+        "apps/storybook-vue/src/stories/radio/rating-radio-group.stories.ts",
+        "apps/storybook-vue/src/stories/radio/radio.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "selected",
+      "unselected",
+      "default",
+      "hover",
+      "pressed",
+      "disabled",
+      "focus",
+      "error",
+      "group",
+      "yes-no",
+      "rating",
+      "option",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Which Radio-family stories should join the first automated accessibility smoke set?",
+    "Should the family-local purpose vocabulary (binary-choice, rating, selection) stay adapter-local, or move into the central semantic registry if Radio becomes a governed semantic family?"
+  ]
+}

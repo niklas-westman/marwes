@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "dialog",
+  "displayName": "Dialog",
+  "status": "shipped",
+  "summary": "High-risk modal family with a non-modal shell, canonical modal overlay layer, and stable purpose-dialog wrappers.",
+  "philosophy": [
+    "Keep the raw Dialog shell separate from the canonical modal overlay layer.",
+    "Let DialogModal own aria-modal, initial focus, focus trap, dismissal, and focus restoration.",
+    "Keep purpose wrappers thin so semantic intent is additive rather than a second modal implementation.",
+    "Document remaining hardening work such as background isolation explicitly instead of overclaiming completeness."
+  ],
+  "usage": {
+    "useWhen": [
+      "A workflow needs a named dialog shell or a canonical modal overlay with consistent focus and dismissal behavior.",
+      "The product flow maps clearly to confirm, destructive, or informational dialog intent.",
+      "The team wants React and Vue modal behavior to stay aligned through shared contracts."
+    ],
+    "avoidWhen": [
+      "A lower-weight surface such as a tooltip or other non-modal help pattern is the more honest interaction model.",
+      "Parent code cannot own a raw-shell modal boundary intentionally when using the Dialog modal escape hatch.",
+      "The team needs background-isolation guarantees that go beyond the currently shipped modal hardening level."
+    ]
+  },
+  "axe": {
+    "riskTier": "high",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared dialog and dialog-modal contracts across React and Vue.",
+      "Storybook introduction and taxonomy tests in both apps.",
+      "Documented shell-vs-modal boundary and deterministic initial-focus policy."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for modal flows.",
+      "Future background-isolation hardening such as inert or equivalent sibling management.",
+      "Advanced parent-managed modal-shell compositions that use the Dialog modal escape hatch intentionally."
+    ],
+    "roadmapAnchors": ["AXE_ROADMAP.md#dialog-family", "AXE_ROADMAP.md#4a--dialog-modal-hardening"],
+    "notes": [
+      "Dialog completed a first-pass family audit and now has an explicit shell-vs-modal contract.",
+      "Background isolation remains future hardening work rather than a completed guarantee."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/dialog/Introduction.mdx",
+        "apps/storybook-react/src/stories/dialog/dialog-modal.stories.tsx",
+        "apps/storybook-react/src/stories/dialog/destructive-dialog.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/dialog/Introduction.mdx",
+        "apps/storybook-vue/src/stories/dialog/dialog-modal.stories.ts",
+        "apps/storybook-vue/src/stories/dialog/destructive-dialog.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "open",
+      "dismissible",
+      "locked-dismissal",
+      "focus-trap",
+      "no-focusable-fallback"
+    ]
+  },
+  "openQuestions": [
+    "Should dialog-family stories eventually join stricter automated accessibility gates once the broader AXE verification command lands?",
+    "When background isolation is hardened further, should the registry split current behavior vs future target behavior more explicitly?"
+  ]
+}

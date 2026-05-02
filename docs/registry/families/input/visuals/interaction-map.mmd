@@ -1,0 +1,20 @@
+flowchart LR
+  Field["Field wrappers\nInputField SelectField TextareaField"] --> Helpers["build*FieldA11yIds()"]
+  Helpers --> NativeWiring["aria-labelledby aria-describedby aria-invalid"]
+
+  Select["Select / SelectField"] --> NativeFirst["default mode = native"]
+  Dropdown["DropdownField"] --> CustomPath["explicit custom dropdown presentation"]
+
+  Otp["InputOtp"] --> Segmented["segmented code entry\nshared contract coverage"]
+  RichText["RichText / RichTextField"] --> Editable["contentEditable editor"]
+  Editable --> ManualReview["manual-review-heavy\nreal browser + AT behavior"]
+
+  NativeWiring --> ReactDom["React DOM"]
+  NativeWiring --> VueDom["Vue DOM"]
+  NativeFirst --> ReactDom
+  NativeFirst --> VueDom
+  CustomPath --> ReactDom
+  CustomPath --> VueDom
+  Segmented --> ReactDom
+  Segmented --> VueDom
+  ManualReview --> Stories["Storybook docs + testing guidance"]

@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated Component Family Registry",
+  "type": "object",
+  "required": ["family", "links", "semantics", "design", "coverage"],
+  "properties": {
+    "family": {
+      "type": "string"
+    },
+    "generationStatus": {
+      "type": "string",
+      "enum": ["manual-poc", "generated"]
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "referenceDocs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guides": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "audits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "roadmap": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "core": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "presets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "react": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storybookReact": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storybookVue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contracts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "semantics": {
+      "type": "object",
+      "properties": {
+        "coverageLevel": {
+          "type": "string",
+          "enum": ["canonical", "family-local", "none"]
+        },
+        "dataComponent": {
+          "type": ["string", "null"]
+        },
+        "canonicalAttributes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedPurposes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "purposeAttributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "sourceOfTruthPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "design": {
+      "type": "object",
+      "properties": {
+        "componentJsons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "curatedReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pageReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nodeReferences": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "figmaTokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "figmaStates": {
+          "type": "object",
+          "properties": {
+            "baseVariants": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "interactionStates": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "react": {
+          "type": "boolean"
+        },
+        "vue": {
+          "type": "boolean"
+        },
+        "storybookReact": {
+          "type": "boolean"
+        },
+        "storybookVue": {
+          "type": "boolean"
+        },
+        "contractsPresent": {
+          "type": "boolean"
+        },
+        "auditDocPresent": {
+          "type": "boolean"
+        },
+        "figmaReferencesPresent": {
+          "type": "boolean"
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,9 +1,11 @@
-import type { Theme } from "../../../theme/theme-types"
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveButtonA11y } from "./button-a11y"
+import { resolveButtonLoading } from "./button-loading"
 import type { ButtonOptions, ButtonRenderKit } from "./button-types"
 
-export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRenderKit {
-  const { tag, a11y, blockClick } = resolveButtonA11y(opts)
+export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
+  const resolvedLoading = resolveButtonLoading(opts.loading)
+  const { tag, a11y, blockClick } = resolveButtonA11y(opts, resolvedLoading)
 
   const size = opts.size ?? "md"
   const variant = opts.variant ?? "primary"
@@ -12,9 +14,15 @@ export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRen
   return {
     tag,
     blockClick,
+    loading: resolvedLoading,
     a11y: {
       ...a11y,
-      title: opts.tooltip || (opts.iconOnly ? a11y.ariaLabel : undefined),
+      title:
+        opts.tooltip ||
+        (opts.iconOnly
+          ? (a11y.ariaLabel ??
+            (resolvedLoading.isLoading ? resolvedLoading.loadingLabel : undefined))
+          : undefined),
     },
     className: [
       "mw-btn",
@@ -25,22 +33,14 @@ export function createButtonRecipe(theme: Theme, opts: ButtonOptions): ButtonRen
       .filter(Boolean)
       .join(" "),
     dataAttributes: {
-      "data-component": "button",
-      "data-action": action,
-      "data-variant": variant,
-      "data-size": size,
+      ...createFamilySemanticAttributes("button", {
+        "data-action": action,
+        "data-variant": variant,
+        "data-size": size,
+      }),
       "data-error": opts.error ? "true" : undefined,
       ...opts.dataAttributes,
     },
-    vars: {
-      "--mw-primary": theme.color.primary,
-      "--mw-secondary": theme.color.secondary,
-      "--mw-on-primary": theme.color.onPrimary,
-      "--mw-danger": theme.color.danger,
-      "--mw-on-danger": theme.color.onDanger,
-      "--mw-focus": theme.color.focus,
-      "--mw-radius": `${theme.ui.radius}px`,
-      "--mw-font-primary": theme.font.primary,
-    },
+    vars: {},
   }
 }

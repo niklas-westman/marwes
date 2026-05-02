@@ -1,0 +1,26 @@
+flowchart TD
+  Registry["docs/registry/families/button"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/button/"]
+  Core --> CoreA11y["button-a11y.ts"]
+  Core --> CoreLoading["button-loading.ts"]
+  Core --> CoreRecipe["button-recipe.ts"]
+  Core --> CoreTypes["button-types.ts"]
+
+  React["packages/react/src/components/button/"]
+  React --> ReactButton["button.tsx"]
+  React --> ReactVariants["variants.tsx"]
+  React --> ReactTests["__tests__/*"]
+
+  Vue["packages/vue/src/components/button/"]
+  Vue --> VueButton["button.ts"]
+  Vue --> VueVariants["variants.ts"]
+  Vue --> VueTests["__tests__/*"]
+
+  Preset["packages/presets/src/firstEdition/button.css"]
+  StoriesR["apps/storybook-react/src/stories/button/"]
+  StoriesV["apps/storybook-vue/src/stories/button/"]
+  Contract["tests/contracts/button.contract.ts"]

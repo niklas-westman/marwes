@@ -1,0 +1,136 @@
+/*
+ * Card component styles
+ * Figma frames:
+ * - light states: 1364:11556
+ * - dark states: 1368:5891
+ *
+ * Live Figma values from the synced state matrix:
+ * - container: 8px radius, 24px padding, 8px gap
+ * - title: 16/18, weight 500
+ * - body: 14/18, weight 400
+ *
+ * Light mode:
+ * - default border: #e5e7eb
+ * - hover/pressed border: #a3a3a3
+ * - focus border: #2f31fc
+ * - disabled surface: #f3f4f6
+ * - disabled text: #737373
+ *
+ * Dark mode:
+ * - default surface/border: #474747
+ * - pressed surface: #2e2e2e
+ * - focus border: #5859fc
+ * - disabled surface: #000000
+ * - disabled text: #595959
+ */
+
+.mw-card {
+  --mw-card-surface: var(--mw-color-surface-elevated, #ffffff);
+  --mw-card-border: var(--mw-color-border-subtle, #e5e7eb);
+  --mw-card-title: var(--mw-color-text, #141414);
+  --mw-card-body: color-mix(
+    in srgb,
+    var(--mw-color-text, #141414) 65%,
+    var(--mw-color-background, #ffffff)
+  );
+  --mw-card-radius: calc(var(--mw-ui-radius, 4px) * 2);
+
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--mw-card-surface);
+  border: 1px solid var(--mw-card-border);
+  border-radius: var(--mw-card-radius);
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.mw-card__header {
+  min-width: 0;
+}
+
+.mw-card__title {
+  display: block;
+  margin: 0;
+  color: var(--mw-card-title);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.mw-card__body {
+  min-width: 0;
+  margin: 0;
+  color: var(--mw-card-body);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.mw-card:hover,
+.mw-card--state-hover {
+  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #141414) 70%, transparent);
+}
+
+.mw-card:active,
+.mw-card--state-pressed {
+  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #141414) 70%, transparent);
+}
+
+.mw-card:focus-visible,
+.mw-card--state-focus {
+  --mw-card-border: var(--mw-color-focus, #2f31fc);
+  outline: none;
+}
+
+.mw-card--disabled,
+.mw-card[data-disabled="true"],
+.mw-card[aria-disabled="true"] {
+  --mw-card-surface: var(--mw-color-surface-disabled, #f3f4f6);
+  --mw-card-border: var(--mw-color-border-disabled, #e5e7eb);
+  --mw-card-title: var(--mw-color-text-disabled, #737373);
+  --mw-card-body: var(--mw-color-text-disabled, #737373);
+
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mw-theme--dark .mw-card {
+  --mw-card-surface: var(--mw-color-surface-elevated, #474747);
+  --mw-card-border: var(--mw-color-border-subtle, #474747);
+  --mw-card-title: var(--mw-color-text, #f9fafb);
+  --mw-card-body: color-mix(
+    in srgb,
+    var(--mw-color-text, #f9fafb) 65%,
+    var(--mw-color-background, #141414)
+  );
+}
+
+.mw-theme--dark .mw-card:hover,
+.mw-theme--dark .mw-card--state-hover {
+  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #f9fafb) 70%, transparent);
+}
+
+.mw-theme--dark .mw-card:active,
+.mw-theme--dark .mw-card--state-pressed {
+  --mw-card-surface: var(--mw-color-surface-subtle, #2e2e2e);
+  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #f9fafb) 70%, transparent);
+}
+
+.mw-theme--dark .mw-card:focus-visible,
+.mw-theme--dark .mw-card--state-focus {
+  --mw-card-border: var(--mw-color-focus, #5859fc);
+}
+
+.mw-theme--dark .mw-card--disabled,
+.mw-theme--dark .mw-card[data-disabled="true"],
+.mw-theme--dark .mw-card[aria-disabled="true"] {
+  --mw-card-surface: var(--mw-color-surface-disabled, #000000);
+  --mw-card-border: var(--mw-color-border-disabled, #474747);
+  --mw-card-title: var(--mw-color-text-disabled, #595959);
+  --mw-card-body: var(--mw-color-text-disabled, #595959);
+}

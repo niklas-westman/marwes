@@ -1,0 +1,140 @@
+/*
+ * Accordion Component Styles
+ * Validated against the latest live Figma sync:
+ * - .figma/marwes/components/accordion.json
+ * - .figma/marwes/pages/-accordion/-accordion_1364-11755.json
+ * - .figma/marwes/pages/-accordion/-accordion-dark_2276-47132.json
+ *
+ * Light state colors:
+ *   default surface  #ffffff
+ *   hover surface    #f3f4f6
+ *   pressed surface  #e5e7eb
+ *   border           #e5e7eb
+ *   focus border     #2f31fc
+ *   title            #141414
+ *   icon/content     #595959
+ *   disabled text    #737373
+ *
+ * Dark state colors:
+ *   default surface  #2e2e2e
+ *   hover surface    #595959
+ *   pressed surface  #737373
+ *   border           #474747
+ *   focus border     #5859fc
+ *   title            #f9fafb
+ *   icon/content     #a3a3a3
+ *   disabled text    #595959
+ */
+
+.mw-accordion {
+  --mw-accordion-title: var(--mw-color-text);
+  --mw-accordion-icon: var(--mw-color-text-muted);
+  --mw-accordion-content: var(--mw-color-text-muted);
+  --mw-accordion-surface: var(--mw-color-surface-elevated);
+  --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
+  --mw-accordion-surface-pressed: var(--mw-color-border-subtle);
+  --mw-accordion-border: var(--mw-color-border-subtle);
+  --mw-accordion-focus-border: var(--mw-color-focus, #2f31fc);
+  --mw-accordion-title-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-icon-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-content-disabled: var(--mw-color-text-disabled);
+
+  width: 100%;
+  background: var(--mw-accordion-surface);
+  border: 1px solid var(--mw-accordion-border);
+  border-radius: var(--mw-ui-radius, 6px);
+  overflow: hidden;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.mw-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  gap: 8px;
+}
+
+.mw-accordion__title {
+  flex: 1;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--mw-accordion-title);
+}
+
+.mw-accordion__icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--mw-accordion-icon);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolyline fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  transition: transform 200ms ease;
+}
+
+.mw-accordion--open .mw-accordion__icon {
+  transform: rotate(180deg);
+}
+
+.mw-accordion:not(.mw-accordion--disabled):hover {
+  background: var(--mw-accordion-surface-hover);
+}
+
+.mw-accordion:not(.mw-accordion--disabled) .mw-accordion__trigger:active,
+.mw-accordion:not(.mw-accordion--disabled) .mw-accordion__trigger:active + .mw-accordion__panel {
+  background: var(--mw-accordion-surface-pressed);
+}
+
+.mw-accordion:focus-within {
+  border-color: var(--mw-accordion-focus-border);
+}
+
+.mw-accordion__trigger:focus-visible {
+  outline: none;
+}
+
+.mw-accordion__content {
+  padding: 0 16px 16px;
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  line-height: 20px;
+  color: var(--mw-accordion-content);
+}
+
+.mw-accordion--disabled {
+  --mw-accordion-title: var(--mw-accordion-title-disabled);
+  --mw-accordion-icon: var(--mw-accordion-icon-disabled);
+  --mw-accordion-content: var(--mw-accordion-content-disabled);
+}
+
+.mw-accordion--disabled .mw-accordion__trigger {
+  cursor: not-allowed;
+}
+
+.mw-theme--dark .mw-accordion {
+  --mw-accordion-title: var(--mw-color-text);
+  --mw-accordion-icon: var(--mw-color-text-muted);
+  --mw-accordion-content: var(--mw-color-text-muted);
+  --mw-accordion-surface: var(--mw-color-surface-elevated);
+  --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
+  --mw-accordion-surface-pressed: var(--mw-color-border);
+  --mw-accordion-border: var(--mw-color-border-subtle);
+  --mw-accordion-focus-border: var(--mw-color-focus, #5859fc);
+  --mw-accordion-title-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-icon-disabled: var(--mw-color-text-disabled);
+  --mw-accordion-content-disabled: var(--mw-color-text-disabled);
+}

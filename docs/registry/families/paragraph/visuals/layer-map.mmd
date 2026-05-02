@@ -1,0 +1,25 @@
+flowchart LR
+  Figma["Figma refs\ntypography scale + body tokens"]
+  Spec["Spec gap + testing docs + audit queue"]
+  Core["@marwes-ui/core\nparagraph recipe + theme defaults"]
+  Presets["preset CSS\nshared typography.css"]
+  React["@marwes-ui/react\nParagraph adapter"]
+  Vue["@marwes-ui/vue\nParagraph adapter"]
+  Stories["Storybook React + Vue"]
+  Contracts["paragraph shared contract"]
+  Registry["docs/registry/families/paragraph"]
+
+  Figma --> Core
+  Spec --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  React --> Stories
+  Vue --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Figma --> Registry
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry
