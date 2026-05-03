@@ -23,7 +23,7 @@ import { TabsSection } from "./sections/tabs"
 import { ToastsSection } from "./sections/toasts"
 import { TypographySection } from "./sections/typography"
 
-const DEFAULT_THEME: ThemeInput = {
+const DEFAULT_THEME = {
   mode: "light",
   tone: "default",
   color: {
@@ -33,7 +33,7 @@ const DEFAULT_THEME: ThemeInput = {
     warning: "#FFB703",
   },
   ui: { radius: 4, density: "comfortable" },
-}
+} satisfies ThemeInput
 
 function App(): JSX.Element {
   const [theme, setTheme] = useState<ThemeInput>(DEFAULT_THEME)
@@ -41,9 +41,9 @@ function App(): JSX.Element {
   return (
     <>
       <GlobalStyle />
-      <PlaygroundLayout>
-        <Sidebar onThemeChange={setTheme} />
-        <MarwesProvider theme={theme}>
+      <MarwesProvider theme={theme}>
+        <PlaygroundLayout>
+          <Sidebar onThemeChange={setTheme} />
           <PreviewArea>
             <PreviewHeader>
               <PreviewTitle>Component Preview</PreviewTitle>
@@ -83,8 +83,8 @@ function App(): JSX.Element {
             <SectionDivider />
             <ColorPaletteSection />
           </PreviewArea>
-        </MarwesProvider>
-      </PlaygroundLayout>
+        </PlaygroundLayout>
+      </MarwesProvider>
     </>
   )
 }

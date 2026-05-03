@@ -1,5 +1,5 @@
 import { AvatarSize, AvatarType, storybookLayout } from "@marwes-ui/core"
-import { Avatar, type AvatarProps } from "@marwes-ui/react"
+import { Avatar, type AvatarProps, MarwesProvider } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
@@ -172,26 +172,27 @@ export const AllVariants: Story = {
 
 export const DarkVariants: Story = {
   render: () => (
-    <div
-      className="mw-theme--dark"
-      style={{
-        display: "grid",
-        gap: 16,
-        gridTemplateColumns: "repeat(3, minmax(120px, 1fr))",
-        padding: 24,
-        background: "#2e2e2e",
-        borderRadius: 12,
-      }}
-    >
-      {avatarPreviews.map((preview) => (
-        <div
-          key={`dark-${preview.label}`}
-          style={{ display: "flex", flexDirection: "column", gap: 8 }}
-        >
-          <span style={{ fontSize: 12, color: "#d4d4d4" }}>{preview.label}</span>
-          <Avatar {...preview.props} />
-        </div>
-      ))}
-    </div>
+    <MarwesProvider theme={{ mode: "dark" }}>
+      <div
+        style={{
+          display: "grid",
+          gap: 16,
+          gridTemplateColumns: "repeat(3, minmax(120px, 1fr))",
+          padding: 24,
+          background: "#2e2e2e",
+          borderRadius: 12,
+        }}
+      >
+        {avatarPreviews.map((preview) => (
+          <div
+            key={`dark-${preview.label}`}
+            style={{ display: "flex", flexDirection: "column", gap: 8 }}
+          >
+            <span style={{ fontSize: 12, color: "#d4d4d4" }}>{preview.label}</span>
+            <Avatar {...preview.props} />
+          </div>
+        ))}
+      </div>
+    </MarwesProvider>
   ),
 }

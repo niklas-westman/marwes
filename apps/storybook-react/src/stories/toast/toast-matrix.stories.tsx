@@ -3,6 +3,7 @@ import {
   ErrorToast,
   Icon,
   InfoToast,
+  MarwesProvider,
   SuccessToast,
   Toast,
   type ToastProps,
@@ -128,80 +129,84 @@ function ToastMatrixFrame(props: {
   const isDark = props.dark ?? false
 
   return (
-    <div
-      className={isDark ? "mw-theme--dark" : undefined}
-      style={{
-        background: isDark ? "#2e2e2e" : "#ffffff",
-        color: isDark ? "#f9fafb" : "#141414",
-        minHeight: "100vh",
-        padding: 48,
-      }}
-    >
-      <style>{`
-        .${matrixToastClassName} {
-          width: 100%;
-          min-width: 0;
-          max-width: none;
-        }
-      `}</style>
-      <div style={{ maxWidth: 1144 }}>
-        <h1
-          style={{
-            margin: 0,
-            fontSize: 32,
-            fontWeight: 700,
-            lineHeight: "38px",
-            letterSpacing: "-0.03em",
-          }}
-        >
-          {props.title}
-        </h1>
-        <p
-          style={{
-            margin: "4px 0 0",
-            color: isDark ? "#a3a3a3" : "#595959",
-            fontSize: 12,
-            lineHeight: "16px",
-            letterSpacing: "-0.03em",
-          }}
-        >
-          {props.caption}
-        </p>
+    <MarwesProvider theme={{ mode: isDark ? "dark" : "light" }}>
+      <div
+        style={{
+          background: isDark ? "#2e2e2e" : "#ffffff",
+          color: isDark ? "#f9fafb" : "#141414",
+          minHeight: "100vh",
+          padding: 48,
+        }}
+      >
+        <style>{`
+          .${matrixToastClassName} {
+            width: 100%;
+            min-width: 0;
+            max-width: none;
+          }
+        `}</style>
+        <div style={{ maxWidth: 1144 }}>
+          <h1
+            style={{
+              margin: 0,
+              fontSize: 32,
+              fontWeight: 700,
+              lineHeight: "38px",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            {props.title}
+          </h1>
+          <p
+            style={{
+              margin: "4px 0 0",
+              color: isDark ? "#a3a3a3" : "#595959",
+              fontSize: 12,
+              lineHeight: "16px",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            {props.caption}
+          </p>
 
-        <div style={{ height: 32 }} />
+          <div style={{ height: 32 }} />
 
-        {TOAST_VARIANTS.map((row, rowIndex) => (
-          <div key={row.variant}>
-            {rowIndex > 0 && (
-              <>
-                <SectionDivider dark={isDark} />
-                <div style={{ height: 24 }} />
-              </>
-            )}
-            <div
-              style={{
-                marginBottom: 16,
-                color: isDark ? "#a3a3a3" : "#595959",
-                fontSize: 11,
-                fontWeight: 500,
-                lineHeight: "16px",
-                letterSpacing: "0.08em",
-              }}
-            >
-              {row.label}
+          {TOAST_VARIANTS.map((row, rowIndex) => (
+            <div key={row.variant}>
+              {rowIndex > 0 && (
+                <>
+                  <SectionDivider dark={isDark} />
+                  <div style={{ height: 24 }} />
+                </>
+              )}
+              <div
+                style={{
+                  marginBottom: 16,
+                  color: isDark ? "#a3a3a3" : "#595959",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  lineHeight: "16px",
+                  letterSpacing: "0.08em",
+                }}
+              >
+                {row.label}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+                {MATRIX_ENTRIES.map((entry) => (
+                  <div
+                    key={`${row.variant}-${entry.key}`}
+                    style={{ flex: "0 0 360px", width: 360 }}
+                  >
+                    {entry.render({ className: matrixToastClassName, variant: row.variant })}
+                  </div>
+                ))}
+              </div>
+              {rowIndex < TOAST_VARIANTS.length - 1 && <div style={{ height: 24 }} />}
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-              {MATRIX_ENTRIES.map((entry) => (
-                <div key={`${row.variant}-${entry.key}`} style={{ flex: "0 0 360px", width: 360 }}>
-                  {entry.render({ className: matrixToastClassName, variant: row.variant })}
-                </div>
-              ))}
-            </div>
-            {rowIndex < TOAST_VARIANTS.length - 1 && <div style={{ height: 24 }} />}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </MarwesProvider>
   )
 }
 

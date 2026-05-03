@@ -1,6 +1,6 @@
 import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
 import type { BadgeProps } from "@marwes-ui/vue"
-import { Badge } from "@marwes-ui/vue"
+import { Badge, MarwesProvider } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const VARIANTS = Object.values(BadgeVariant)
@@ -25,7 +25,7 @@ type Story = StoryObj<BadgeProps>
 export const Default: Story = {
   args: { variant: BadgeVariant.neutral },
   render: (args) => ({
-    components: { Badge },
+    components: { Badge, MarwesProvider },
     setup() {
       return { args }
     },
@@ -66,11 +66,13 @@ export const DarkVariants: Story = {
       return { args, variants: VARIANTS }
     },
     template: `
-      <div class="mw-theme--dark" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 16px; background: #111827; border-radius: 8px;">
-        <Badge v-for="variant in variants" :key="variant" v-bind="args" :variant="variant">
-          {{ variant.charAt(0).toUpperCase() + variant.slice(1) }}
-        </Badge>
-      </div>
+      <MarwesProvider :theme="{ mode: 'dark' }">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 16px; background: #111827; border-radius: 8px;">
+          <Badge v-for="variant in variants" :key="variant" v-bind="args" :variant="variant">
+            {{ variant.charAt(0).toUpperCase() + variant.slice(1) }}
+          </Badge>
+        </div>
+      </MarwesProvider>
     `,
   }),
 }

@@ -1,6 +1,6 @@
 import { storybookLayout } from "@marwes-ui/core"
 import type { CardProps } from "@marwes-ui/vue"
-import { Card } from "@marwes-ui/vue"
+import { Card, MarwesProvider } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const cardStatePreviews: Array<{
@@ -48,7 +48,7 @@ type Story = StoryObj<CardProps>
 
 export const Default: Story = {
   render: () => ({
-    components: { Card },
+    components: { Card, MarwesProvider },
     template: `
       <Card>
         <template #title>Card title</template>
@@ -98,15 +98,17 @@ export const StateMatrix: Story = {
           </div>
         </div>
 
-        <div class="mw-theme--dark" style="display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(320px, 1fr)); padding: 24px; background: #2e2e2e; border-radius: 12px;">
-          <div v-for="preview in cardStatePreviews" :key="'dark-' + preview.label" style="display: flex; flex-direction: column; gap: 8px;">
-            <span style="font-size: 12px; color: #d4d4d4;">{{ preview.label }}</span>
-            <Card :class="preview.className" :aria-disabled="preview.ariaDisabled">
-              <template #title>Card title</template>
-              {{ preview.body }}
-            </Card>
+        <MarwesProvider :theme="{ mode: 'dark' }">
+          <div style="display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(320px, 1fr)); padding: 24px; background: #2e2e2e; border-radius: 12px;">
+            <div v-for="preview in cardStatePreviews" :key="'dark-' + preview.label" style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 12px; color: #d4d4d4;">{{ preview.label }}</span>
+              <Card :class="preview.className" :aria-disabled="preview.ariaDisabled">
+                <template #title>Card title</template>
+                {{ preview.body }}
+              </Card>
+            </div>
           </div>
-        </div>
+        </MarwesProvider>
       </div>
     `,
   }),

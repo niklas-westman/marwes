@@ -1,15 +1,13 @@
 import type { ThemeMode } from "@marwes-ui/core"
-import { firstEditionTheme } from "@marwes-ui/presets"
 import { MarwesProvider } from "@marwes-ui/react"
 import type { Decorator, Preview } from "@storybook/react"
-import "@marwes-ui/presets/firstEdition/styles.css"
 
 const withMarwes: Decorator = (Story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
   const mode: ThemeMode = storybookTheme === "dark" ? "dark" : "light"
 
   return (
-    <MarwesProvider theme={{ ...firstEditionTheme, mode }}>
+    <MarwesProvider theme={{ mode }}>
       <div
         style={{
           minHeight: "100vh",

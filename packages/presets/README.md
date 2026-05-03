@@ -161,7 +161,9 @@ export function App() {
 
 When the mode changes, the provider updates the preset's `--mw-*` variables and root class. Preset selectors such as `.mw-theme--dark .mw-btn` then pick up the correct dark-mode component states without any extra CSS in the app.
 
-If your product needs different light and dark brand overrides, keep the override objects small and switch by mode:
+You do not need a `themeByMode` map for the normal toggle. With no `theme` prop, Marwes uses its default light and dark palettes. With shared brand overrides, pass the same partial `theme` object and the provider still swaps every omitted token by mode.
+
+Use a `themeByMode` map only when your product wants different brand overrides in light and dark mode, such as a different primary color or surface color per mode:
 
 ```tsx
 import { useState } from "react"

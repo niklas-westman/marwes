@@ -1,9 +1,7 @@
 import type { ThemeMode } from "@marwes-ui/core"
-import { firstEditionTheme } from "@marwes-ui/presets"
 import { MarwesProvider } from "@marwes-ui/vue"
 import type { Decorator, Preview } from "@storybook/vue3-vite"
 import { h, isVNode } from "vue"
-import "@marwes-ui/presets/firstEdition/styles.css"
 
 const withMarwes: Decorator = (story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
@@ -19,7 +17,7 @@ const withMarwes: Decorator = (story, context) => {
 
       return h(
         MarwesProvider,
-        { theme: { ...firstEditionTheme, mode } },
+        { theme: { mode } },
         {
           default: () => [
             h(

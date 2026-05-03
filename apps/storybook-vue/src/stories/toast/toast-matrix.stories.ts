@@ -1,6 +1,14 @@
 import { IconName, storybookLayout } from "@marwes-ui/core"
 import type { ToastProps } from "@marwes-ui/vue"
-import { ErrorToast, Icon, InfoToast, SuccessToast, Toast, WarningToast } from "@marwes-ui/vue"
+import {
+  ErrorToast,
+  Icon,
+  InfoToast,
+  MarwesProvider,
+  SuccessToast,
+  Toast,
+  WarningToast,
+} from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 type ToastVariant = NonNullable<ToastProps["variant"]>
@@ -71,7 +79,7 @@ type Story = StoryObj<ToastProps>
 
 function renderMatrix(args: { dark?: boolean; title: string; caption: string }) {
   return {
-    components: { ErrorToast, Icon, InfoToast, SuccessToast, Toast, WarningToast },
+    components: { ErrorToast, Icon, InfoToast, MarwesProvider, SuccessToast, Toast, WarningToast },
     setup() {
       function entryProps(entry: MatrixEntry, variant: ToastVariant) {
         return {
@@ -92,75 +100,77 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
       }
     },
     template: `
-      <div :class="dark ? 'mw-theme--dark' : undefined" :style="{
-        background: dark ? '#2e2e2e' : '#ffffff',
-        color: dark ? '#f9fafb' : '#141414',
-        minHeight: '100vh',
-        padding: '48px',
-      }">
-        <style>
-          .${matrixToastClassName} {
-            width: 100%;
-            min-width: 0;
-            max-width: none;
-          }
-        </style>
-        <div style="max-width: 1144px;">
-          <h1 style="margin: 0; font-size: 32px; font-weight: 700; line-height: 38px; letter-spacing: -0.03em;">
-            {{ title }}
-          </h1>
-          <p :style="{
-            margin: '4px 0 0',
-            color: dark ? '#a3a3a3' : '#595959',
-            fontSize: '12px',
-            lineHeight: '16px',
-            letterSpacing: '-0.03em',
-          }">
-            {{ caption }}
-          </p>
-          <div style="height: 32px;" />
-
-          <template v-for="(row, rowIndex) in toastVariants" :key="row.variant">
-            <template v-if="rowIndex > 0">
-              <div :style="{
-                width: '100%',
-                height: '1px',
-                background: dark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
-              }" />
-              <div style="height: 24px;" />
-            </template>
-
-            <div :style="{
-              fontSize: '11px',
-              fontWeight: '500',
-              lineHeight: '16px',
-              letterSpacing: '0.08em',
+      <MarwesProvider :theme="{ mode: dark ? 'dark' : 'light' }">
+        <div :style="{
+          background: dark ? '#2e2e2e' : '#ffffff',
+          color: dark ? '#f9fafb' : '#141414',
+          minHeight: '100vh',
+          padding: '48px',
+        }">
+          <style>
+            .${matrixToastClassName} {
+              width: 100%;
+              min-width: 0;
+              max-width: none;
+            }
+          </style>
+          <div style="max-width: 1144px;">
+            <h1 style="margin: 0; font-size: 32px; font-weight: 700; line-height: 38px; letter-spacing: -0.03em;">
+              {{ title }}
+            </h1>
+            <p :style="{
+              margin: '4px 0 0',
               color: dark ? '#a3a3a3' : '#595959',
-              marginBottom: '16px',
+              fontSize: '12px',
+              lineHeight: '16px',
+              letterSpacing: '-0.03em',
             }">
-              {{ row.label }}
-            </div>
+              {{ caption }}
+            </p>
+            <div style="height: 32px;" />
 
-            <div style="display: flex; flex-wrap: wrap; gap: 16px;">
-              <div
-                v-for="entry in matrixEntries"
-                :key="row.variant + '-' + entry.key"
-                style="flex: 0 0 360px; width: 360px;"
-              >
-                <component :is="entry.component" v-bind="entryProps(entry, row.variant)">
-                  {{ entry.message }}
-                  <template v-if="entry.iconName" #icon>
-                    <Icon :name="entry.iconName" decorative />
-                  </template>
-                  <template #action>Close</template>
-                </component>
+            <template v-for="(row, rowIndex) in toastVariants" :key="row.variant">
+              <template v-if="rowIndex > 0">
+                <div :style="{
+                  width: '100%',
+                  height: '1px',
+                  background: dark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+                }" />
+                <div style="height: 24px;" />
+              </template>
+
+              <div :style="{
+                fontSize: '11px',
+                fontWeight: '500',
+                lineHeight: '16px',
+                letterSpacing: '0.08em',
+                color: dark ? '#a3a3a3' : '#595959',
+                marginBottom: '16px',
+              }">
+                {{ row.label }}
               </div>
-            </div>
 
-            <div v-if="rowIndex < toastVariants.length - 1" style="height: 24px;" />
-          </template>
+              <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+                <div
+                  v-for="entry in matrixEntries"
+                  :key="row.variant + '-' + entry.key"
+                  style="flex: 0 0 360px; width: 360px;"
+                >
+                  <component :is="entry.component" v-bind="entryProps(entry, row.variant)">
+                    {{ entry.message }}
+                    <template v-if="entry.iconName" #icon>
+                      <Icon :name="entry.iconName" decorative />
+                    </template>
+                    <template #action>Close</template>
+                  </component>
+                </div>
+              </div>
+
+              <div v-if="rowIndex < toastVariants.length - 1" style="height: 24px;" />
+            </template>
+          </div>
         </div>
-      </div>
+      </MarwesProvider>
     `,
   }
 }

@@ -1,5 +1,5 @@
 import { IconName, storybookLayout } from "@marwes-ui/core"
-import { TooltipGroup } from "@marwes-ui/react"
+import { MarwesProvider, TooltipGroup } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof TooltipGroup> = {
@@ -45,9 +45,11 @@ export const Interactive: Story = {
 
 export const Dark: Story = {
   render: (args) => (
-    <div className="mw-theme--dark" style={{ padding: 24, background: "#2e2e2e", borderRadius: 8 }}>
-      <TooltipGroup {...args} />
-    </div>
+    <MarwesProvider theme={{ mode: "dark" }}>
+      <div style={{ padding: 24, background: "#2e2e2e", borderRadius: 8 }}>
+        <TooltipGroup {...args} />
+      </div>
+    </MarwesProvider>
   ),
   args: {
     content: "Tooltip text",

@@ -1,5 +1,5 @@
 import { AvatarSize, storybookLayout } from "@marwes-ui/core"
-import { AvatarBadge } from "@marwes-ui/vue"
+import { AvatarBadge, MarwesProvider } from "@marwes-ui/vue"
 import type { AvatarBadgeProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
@@ -50,7 +50,7 @@ const avatarBadgePreviews: Array<{
 
 export const AllSizes: Story = {
   render: () => ({
-    components: { AvatarBadge },
+    components: { AvatarBadge, MarwesProvider },
     setup() {
       return { avatarBadgePreviews }
     },
@@ -72,12 +72,14 @@ export const DarkSizes: Story = {
       return { avatarBadgePreviews }
     },
     template: `
-      <div class="mw-theme--dark" style="display: flex; align-items: center; gap: 24px; padding: 24px; background: #2e2e2e; border-radius: 12px;">
-        <div v-for="preview in avatarBadgePreviews" :key="'dark-' + preview.label" style="display: flex; flex-direction: column; gap: 8px;">
-          <span style="font-size: 12px; color: #d4d4d4;">{{ preview.label }}</span>
-          <AvatarBadge v-bind="preview.props" />
+      <MarwesProvider :theme="{ mode: 'dark' }">
+        <div style="display: flex; align-items: center; gap: 24px; padding: 24px; background: #2e2e2e; border-radius: 12px;">
+          <div v-for="preview in avatarBadgePreviews" :key="'dark-' + preview.label" style="display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; color: #d4d4d4;">{{ preview.label }}</span>
+            <AvatarBadge v-bind="preview.props" />
+          </div>
         </div>
-      </div>
+      </MarwesProvider>
     `,
   }),
 }

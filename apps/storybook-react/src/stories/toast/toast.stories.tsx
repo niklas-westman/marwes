@@ -1,5 +1,5 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Toast } from "@marwes-ui/react"
+import { MarwesProvider, Toast } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import type * as React from "react"
 
@@ -62,23 +62,24 @@ export const AllVariants: Story = {
 
 export const DarkVariants: Story = {
   render: () => (
-    <div
-      className="mw-theme--dark"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-        padding: 20,
-        background: "#000000",
-        borderRadius: 8,
-      }}
-    >
-      {VARIANTS.map((v) => (
-        <Toast key={v} variant={v} action={<ToastAction>Close</ToastAction>}>
-          {v.charAt(0).toUpperCase() + v.slice(1)} — Dark mode toast.
-        </Toast>
-      ))}
-    </div>
+    <MarwesProvider theme={{ mode: "dark" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+          padding: 20,
+          background: "#000000",
+          borderRadius: 8,
+        }}
+      >
+        {VARIANTS.map((v) => (
+          <Toast key={v} variant={v} action={<ToastAction>Close</ToastAction>}>
+            {v.charAt(0).toUpperCase() + v.slice(1)} — Dark mode toast.
+          </Toast>
+        ))}
+      </div>
+    </MarwesProvider>
   ),
 }
 

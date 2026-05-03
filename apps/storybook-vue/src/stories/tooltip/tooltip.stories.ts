@@ -1,6 +1,6 @@
 import { storybookLayout } from "@marwes-ui/core"
 import type { TooltipProps } from "@marwes-ui/vue"
-import { Tooltip } from "@marwes-ui/vue"
+import { MarwesProvider, Tooltip } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
@@ -23,11 +23,13 @@ export const Default: Story = {
 
 export const Dark: Story = {
   render: () => ({
-    components: { Tooltip },
+    components: { MarwesProvider, Tooltip },
     template: `
-      <div class="mw-theme--dark" style="padding: 24px; background: #2e2e2e; border-radius: 8px;">
-        <Tooltip>Tooltip text</Tooltip>
-      </div>
+      <MarwesProvider :theme="{ mode: 'dark' }">
+        <div style="padding: 24px; background: #2e2e2e; border-radius: 8px;">
+          <Tooltip>Tooltip text</Tooltip>
+        </div>
+      </MarwesProvider>
     `,
   }),
 }

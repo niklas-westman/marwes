@@ -1,5 +1,5 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { Card, type CardProps } from "@marwes-ui/react"
+import { Card, type CardProps, MarwesProvider } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
@@ -96,27 +96,28 @@ export const StateMatrix: Story = {
         ))}
       </div>
 
-      <div
-        className="mw-theme--dark"
-        style={{
-          display: "grid",
-          gap: 16,
-          gridTemplateColumns: "repeat(2, minmax(320px, 1fr))",
-          padding: 24,
-          background: "#2e2e2e",
-          borderRadius: 12,
-        }}
-      >
-        {cardStatePreviews.map((preview) => (
-          <div
-            key={`dark-${preview.label}`}
-            style={{ display: "flex", flexDirection: "column", gap: 8 }}
-          >
-            <span style={{ fontSize: 12, color: "#d4d4d4" }}>{preview.label}</span>
-            <Card {...preview.props} />
-          </div>
-        ))}
-      </div>
+      <MarwesProvider theme={{ mode: "dark" }}>
+        <div
+          style={{
+            display: "grid",
+            gap: 16,
+            gridTemplateColumns: "repeat(2, minmax(320px, 1fr))",
+            padding: 24,
+            background: "#2e2e2e",
+            borderRadius: 12,
+          }}
+        >
+          {cardStatePreviews.map((preview) => (
+            <div
+              key={`dark-${preview.label}`}
+              style={{ display: "flex", flexDirection: "column", gap: 8 }}
+            >
+              <span style={{ fontSize: 12, color: "#d4d4d4" }}>{preview.label}</span>
+              <Card {...preview.props} />
+            </div>
+          ))}
+        </div>
+      </MarwesProvider>
     </div>
   ),
 }

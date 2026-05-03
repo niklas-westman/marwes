@@ -1,5 +1,5 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { Tooltip } from "@marwes-ui/react"
+import { MarwesProvider, Tooltip } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof Tooltip> = {
@@ -21,9 +21,11 @@ export const Default: Story = {
 
 export const Dark: Story = {
   render: (args) => (
-    <div className="mw-theme--dark" style={{ padding: 24, background: "#2e2e2e", borderRadius: 8 }}>
-      <Tooltip {...args} />
-    </div>
+    <MarwesProvider theme={{ mode: "dark" }}>
+      <div style={{ padding: 24, background: "#2e2e2e", borderRadius: 8 }}>
+        <Tooltip {...args} />
+      </div>
+    </MarwesProvider>
   ),
   args: {
     children: "Tooltip text",
