@@ -1,5 +1,15 @@
 # @marwes-ui/vue
 
+## 1.0.4
+
+### Patch Changes
+
+- [#25](https://github.com/niklas-westman/marwes/pull/25) [`e6eed2a`](https://github.com/niklas-westman/marwes/commit/e6eed2a392e33dd171d3b082df25d056564c00cf) Thanks [@niklas-westman](https://github.com/niklas-westman)! - updated tailwind docs support
+
+- Updated dependencies [[`e6eed2a`](https://github.com/niklas-westman/marwes/commit/e6eed2a392e33dd171d3b082df25d056564c00cf)]:
+  - @marwes-ui/presets@1.0.4
+  - @marwes-ui/core@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes
