@@ -1,5 +1,11 @@
 # @marwes-ui/core
 
+## 1.0.2
+
+### Patch Changes
+
+- [#21](https://github.com/niklas-westman/marwes/pull/21) [`63b33bc`](https://github.com/niklas-westman/marwes/commit/63b33bc8ffd47854869153df46cab24334ff954f) Thanks [@niklas-westman](https://github.com/niklas-westman)! - adding system theme support
+
 ## 1.0.1
 
 ### Patch Changes
