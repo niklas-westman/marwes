@@ -342,14 +342,20 @@ function ColorPalette() {
 
 function ProviderModeSample() {
   const theme = useTheme()
-  const { mode, toggleMode } = useThemeMode()
+  const { mode, preference, systemMode, setPreference, toggleMode } = useThemeMode()
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
         <H2 style={{ margin: 0 }}>Provider Mode: {mode}</H2>
+        <Paragraph style={{ margin: 0 }}>
+          Preference: {preference}; system: {systemMode}
+        </Paragraph>
         <Button variant="secondary" onClick={toggleMode}>
           Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
+        </Button>
+        <Button variant="secondary" onClick={() => setPreference("system")}>
+          Use system preference
         </Button>
       </div>
       <div
@@ -467,7 +473,7 @@ export const SemanticOnly: Story = {
 
 export const ProviderModeLight: Story = {
   render: () => (
-    <MarwesProvider defaultMode={ThemeMode.light}>
+    <MarwesProvider defaultPreference={ThemeMode.light}>
       <ProviderModeSample />
     </MarwesProvider>
   ),
@@ -475,7 +481,7 @@ export const ProviderModeLight: Story = {
 
 export const ProviderModeDark: Story = {
   render: () => (
-    <MarwesProvider defaultMode={ThemeMode.dark}>
+    <MarwesProvider defaultPreference={ThemeMode.dark}>
       <ProviderModeSample />
     </MarwesProvider>
   ),

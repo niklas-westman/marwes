@@ -185,16 +185,20 @@ const ProviderModeSample = defineComponent({
   components: { Button, ColorSwatch, H2 },
   setup() {
     const theme = useTheme()
-    const { mode, toggleMode } = useThemeMode()
+    const { mode, preference, systemMode, setPreference, toggleMode } = useThemeMode()
 
-    return { mode, theme, ThemeMode, toggleMode }
+    return { mode, preference, setPreference, systemMode, theme, ThemeMode, toggleMode }
   },
   template: `
     <div style="display: flex; flex-direction: column; gap: 24px;">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
         <H2 style="margin: 0;">Provider Mode: {{ mode }}</H2>
+        <p style="margin: 0;">Preference: {{ preference }}; system: {{ systemMode }}</p>
         <Button variant="secondary" @click="toggleMode">
           Use {{ mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark }} mode
+        </Button>
+        <Button variant="secondary" @click="setPreference('system')">
+          Use system preference
         </Button>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;">
@@ -268,7 +272,7 @@ export const ProviderModeLight: Story = {
       return { ThemeMode }
     },
     template: `
-      <MarwesProvider :default-mode="ThemeMode.light">
+      <MarwesProvider :default-preference="ThemeMode.light">
         <ProviderModeSample />
       </MarwesProvider>
     `,
@@ -282,7 +286,7 @@ export const ProviderModeDark: Story = {
       return { ThemeMode }
     },
     template: `
-      <MarwesProvider :default-mode="ThemeMode.dark">
+      <MarwesProvider :default-preference="ThemeMode.dark">
         <ProviderModeSample />
       </MarwesProvider>
     `,

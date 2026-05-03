@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src=".github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src=".github/assets/banner.png" width="100%">
 
 <br>
 <br>
