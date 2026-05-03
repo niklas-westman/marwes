@@ -469,6 +469,8 @@ pnpm changeset add --empty
 
 CI enforces this only for `packages/**`. Changes to Storybook, playgrounds, docs, workflows, or root tooling do not require a changeset unless they also touch publishable packages.
 
+The published Marwes packages are versioned as a fixed group. If a changeset includes any of `@marwes-ui/core`, `@marwes-ui/react`, `@marwes-ui/presets`, or `@marwes-ui/vue`, include all four in that same changeset.
+
 **Repo structure:**
 
 - `packages/core` — Framework-agnostic TypeScript logic
