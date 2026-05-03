@@ -378,6 +378,23 @@ By default Marwes keeps theme state scoped to the provider element. If your app 
 
 Use one global-target provider per app shell. If multiple providers target `html` or `body`, deciding which provider owns that global element is app-owned behavior.
 
+### Tailwind And shadcn Compatibility
+
+Marwes is compatible with Tailwind and shadcn-style dark variants through `target="html" attribute="class"`. App-owned Tailwind tokens can also reference Marwes `--mw-*` variables when rendered inside the provider subtree.
+
+```tsx
+<MarwesProvider
+  defaultPreference="system"
+  storageKey="marwes-theme"
+  target="html"
+  attribute="class"
+>
+  <AppShell />
+</MarwesProvider>
+```
+
+Read the [Tailwind and shadcn integration guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/tailwind-shadcn-integration.md) for Tailwind v3/v4 examples, token mapping, provider-scoped variable limits, and the SSR no-flash boundary.
+
 For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
 
 ```tsx

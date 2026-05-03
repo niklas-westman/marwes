@@ -10,12 +10,13 @@ If you are new to Marwes, start here.
 2. [Specification](./reference/spec.md)
 3. [Adding Components](./guides/adding-components.md)
 4. [Figma to Marwes](./guides/figma-to-marwes.md)
-5. [AI Metadata Protocol](./reference/ai-metadata.md)
-6. [Accessibility support model](./reference/accessibility.md)
-7. [Component Registry](./registry/README.md)
-8. [Governance](./reference/governance.md)
-9. [Testing](./reference/testing.md)
-10. [Family Validation](./reference/family-validation.md)
+5. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
+6. [AI Metadata Protocol](./reference/ai-metadata.md)
+7. [Accessibility support model](./reference/accessibility.md)
+8. [Component Registry](./registry/README.md)
+9. [Governance](./reference/governance.md)
+10. [Testing](./reference/testing.md)
+11. [Family Validation](./reference/family-validation.md)
 
 ## Documentation map
 
@@ -39,6 +40,7 @@ graph TD
 
   Guides --> Adding[adding-components.md]
   Guides --> Figma[figma-to-marwes.md]
+  Guides --> Tailwind[tailwind-shadcn-integration.md]
 
   Registry --> RegistryIndex[README.md]
   Registry --> ButtonRegistry[families/button/README.md]
@@ -66,6 +68,7 @@ Practical how-to documents.
 
 - [Adding Components](./guides/adding-components.md) — step-by-step workflow for introducing a new component
 - [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
+- [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md) — root dark variants and app-owned Tailwind tokens using Marwes variables
 
 ### Planning
 Active planning documents. Completed migration notes should be removed once their decisions are reflected in reference docs, registry docs, tests, or release notes.
