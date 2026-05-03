@@ -376,7 +376,7 @@ Use one global-target provider per app shell. If multiple providers target `html
 
 ### Tailwind And shadcn Compatibility
 
-Tailwind and shadcn dark variants usually look for a `dark` class on the root element. Use `target="html" attribute="class"` when you want Marwes to keep that root class aligned with the resolved Marwes mode:
+Marwes is compatible with Tailwind and shadcn-style dark variants through `target="html" attribute="class"`. App-owned Tailwind tokens can also reference Marwes `--mw-*` variables when rendered inside the provider subtree.
 
 ```vue
 <template>
@@ -391,64 +391,7 @@ Tailwind and shadcn dark variants usually look for a `dark` class on the root el
 </template>
 ```
 
-For Tailwind v3, configure class-based dark mode:
-
-```ts
-import type { Config } from "tailwindcss"
-
-export default {
-  darkMode: "class",
-  content: ["./index.html", "./src/**/*.{vue,ts}"],
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--mw-color-background)",
-        foreground: "var(--mw-color-text)",
-        card: "var(--mw-color-surface)",
-        border: "var(--mw-color-border)",
-        ring: "var(--mw-color-focus)",
-        primary: {
-          DEFAULT: "var(--mw-color-primary-base)",
-          foreground: "var(--mw-color-primary-label)",
-        },
-      },
-      borderRadius: {
-        md: "var(--mw-ui-radius)",
-      },
-      spacing: {
-        "mw-24": "var(--mw-spacing-sp-24)",
-      },
-    },
-  },
-} satisfies Config
-```
-
-For Tailwind v4, define the root-class dark variant and app-owned tokens in CSS:
-
-```css
-@import "tailwindcss";
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --color-background: var(--mw-color-background);
-  --color-foreground: var(--mw-color-text);
-  --color-card: var(--mw-color-surface);
-  --color-border: var(--mw-color-border);
-  --color-ring: var(--mw-color-focus);
-  --color-primary: var(--mw-color-primary-base);
-  --color-primary-foreground: var(--mw-color-primary-label);
-  --radius-md: var(--mw-ui-radius);
-  --spacing-mw-24: var(--mw-spacing-sp-24);
-}
-```
-
-These examples do two different jobs:
-
-- `target="html" attribute="class"` controls Tailwind and shadcn `dark:` variants by syncing `html.light` / `html.dark`.
-- Tailwind theme tokens that reference `var(--mw-*)` let app-owned Tailwind utilities read the Marwes provider variables.
-
-Marwes variables are still provider-scoped. Tailwind utilities that reference `--mw-*` must render inside the `MarwesProvider` subtree, or inside another element where the app has deliberately exposed equivalent variables. Syncing `html.dark` does not move Marwes variables to `:root`, does not update provider inline variables before hydration, and does not provide SSR no-flash behavior by itself. Full no-flash SSR support remains a separate phase.
+Read the [Tailwind and shadcn integration guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/tailwind-shadcn-integration.md) for Tailwind v3/v4 examples, token mapping, provider-scoped variable limits, and the SSR no-flash boundary.
 
 For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
 
