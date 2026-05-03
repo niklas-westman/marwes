@@ -1,5 +1,14 @@
 # @marwes-ui/presets
 
+## 1.0.1
+
+### Patch Changes
+
+- [#19](https://github.com/niklas-westman/marwes/pull/19) [`0920746`](https://github.com/niklas-westman/marwes/commit/09207469a0502f72784cbde1c9e3cba9799fac95) Thanks [@niklas-westman](https://github.com/niklas-westman)! - clarify theme toggle and update readme
+
+- Updated dependencies [[`0920746`](https://github.com/niklas-westman/marwes/commit/09207469a0502f72784cbde1c9e3cba9799fac95)]:
+  - @marwes-ui/core@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
