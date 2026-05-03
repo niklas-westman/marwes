@@ -1,6 +1,5 @@
 export type {
   Theme,
-  ThemeMode,
   ThemeInput,
   ThemeInputColor,
   ColorInput,
@@ -8,6 +7,7 @@ export type {
   SecondaryColorRole,
   Density,
 } from "./theme/theme-types"
+export { ThemeMode } from "./theme/theme-types"
 export { lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
 export { resolveThemeInput } from "./theme/theme-normalize"
 export type { ResolvedTheme } from "./theme/theme-css"

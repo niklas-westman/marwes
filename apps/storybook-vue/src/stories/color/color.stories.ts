@@ -1,5 +1,5 @@
-import { storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
-import { H2, H3, Paragraph, useTheme } from "@marwes-ui/vue"
+import { ThemeMode, storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
+import { Button, H2, H3, MarwesProvider, Paragraph, useTheme, useThemeMode } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent } from "vue"
 import { ColorSwatch } from "./ColorSwatch"
@@ -180,6 +180,32 @@ const ColorPalette = defineComponent({
   `,
 })
 
+const ProviderModeSample = defineComponent({
+  name: "ProviderModeSample",
+  components: { Button, ColorSwatch, H2 },
+  setup() {
+    const theme = useTheme()
+    const { mode, toggleMode } = useThemeMode()
+
+    return { mode, theme, ThemeMode, toggleMode }
+  },
+  template: `
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <H2 style="margin: 0;">Provider Mode: {{ mode }}</H2>
+        <Button variant="secondary" @click="toggleMode">
+          Use {{ mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark }} mode
+        </Button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;">
+        <ColorSwatch name="Background" :hex="theme.color.background" cssVar="--mw-color-background" description="Provider-scoped background" />
+        <ColorSwatch name="Surface" :hex="theme.color.surface" cssVar="--mw-color-surface" description="Provider-scoped surface" />
+        <ColorSwatch name="Text" :hex="theme.color.text" cssVar="--mw-color-text" description="Provider-scoped text" />
+      </div>
+    </div>
+  `,
+})
+
 export const AllColors: Story = {
   render: () => ({
     components: { ColorPalette },
@@ -231,6 +257,34 @@ export const SemanticOnly: Story = {
         <ColorSwatch name="Warning" :hex="theme.color.warning.base" cssVar="--mw-color-warning-base" description="Amber Yellow - Warning states" />
         <ColorSwatch name="Warning Label" :hex="theme.color.warning.label" cssVar="--mw-color-warning-label" />
       </div>
+    `,
+  }),
+}
+
+export const ProviderModeLight: Story = {
+  render: () => ({
+    components: { MarwesProvider, ProviderModeSample },
+    setup() {
+      return { ThemeMode }
+    },
+    template: `
+      <MarwesProvider :default-mode="ThemeMode.light">
+        <ProviderModeSample />
+      </MarwesProvider>
+    `,
+  }),
+}
+
+export const ProviderModeDark: Story = {
+  render: () => ({
+    components: { MarwesProvider, ProviderModeSample },
+    setup() {
+      return { ThemeMode }
+    },
+    template: `
+      <MarwesProvider :default-mode="ThemeMode.dark">
+        <ProviderModeSample />
+      </MarwesProvider>
     `,
   }),
 }

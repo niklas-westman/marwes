@@ -1,13 +1,11 @@
-import type { ThemeMode } from "@marwes-ui/core"
-import { firstEditionTheme } from "@marwes-ui/presets"
+import { ThemeMode } from "@marwes-ui/core"
 import { MarwesProvider } from "@marwes-ui/vue"
 import type { Decorator, Preview } from "@storybook/vue3-vite"
 import { h, isVNode } from "vue"
-import "@marwes-ui/presets/firstEdition/styles.css"
 
 const withMarwes: Decorator = (story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
-  const mode: ThemeMode = storybookTheme === "dark" ? "dark" : "light"
+  const mode: ThemeMode = storybookTheme === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
 
   return {
     setup() {
@@ -19,7 +17,7 @@ const withMarwes: Decorator = (story, context) => {
 
       return h(
         MarwesProvider,
-        { theme: { ...firstEditionTheme, mode } },
+        { theme: { mode } },
         {
           default: () => [
             h(
@@ -28,7 +26,7 @@ const withMarwes: Decorator = (story, context) => {
                 style: {
                   minHeight: "100vh",
                   padding: "24px",
-                  background: mode === "dark" ? "#000000" : "#ffffff",
+                  background: mode === ThemeMode.dark ? "#000000" : "#ffffff",
                 },
               },
               [storyNode],
@@ -56,13 +54,13 @@ const preview: Preview = {
   globalTypes: {
     theme: {
       description: "Theme mode (light or dark)",
-      defaultValue: "light",
+      defaultValue: ThemeMode.light,
       toolbar: {
         title: "Theme",
         icon: "circlehollow",
         items: [
-          { value: "light", icon: "circlehollow", title: "Light" },
-          { value: "dark", icon: "circle", title: "Dark" },
+          { value: ThemeMode.light, icon: "circlehollow", title: "Light" },
+          { value: ThemeMode.dark, icon: "circle", title: "Dark" },
         ],
         dynamicTitle: true,
       },

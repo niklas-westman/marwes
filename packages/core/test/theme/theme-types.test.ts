@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { lightThemeDefaults } from "../../src/theme/theme-defaults"
+import { ThemeMode } from "../../src/theme/theme-types"
 import type {
   ColorInput,
   ColorRole,
@@ -151,8 +152,8 @@ describe("ThemeInput", () => {
   })
 
   it("accepts mode override", () => {
-    const input: ThemeInput = { mode: "dark" }
-    expect(input.mode).toBe("dark")
+    const input: ThemeInput = { mode: ThemeMode.dark }
+    expect(input.mode).toBe(ThemeMode.dark)
   })
 
   it("accepts empty object (all fields optional)", () => {

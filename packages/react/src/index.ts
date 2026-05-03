@@ -3,6 +3,8 @@ import "@marwes-ui/presets/firstEdition/styles.css"
 export { MarwesProvider } from "./provider/marwes-provider"
 export type { MarwesProviderProps } from "./provider/marwes-provider"
 export { useTheme } from "./provider/use-theme"
+export { useThemeMode } from "./provider/use-theme-mode"
+export type { ThemeModeContextValue } from "./provider/use-theme-mode"
 export {
   createFontStack,
   mwAvailableFonts,
@@ -12,6 +14,7 @@ export {
   mwThemeVarNames,
   mwThemeVars,
   mwVar,
+  ThemeMode,
 } from "@marwes-ui/core"
 
 // Re-export core types for good DX
@@ -31,7 +34,6 @@ export type {
   ResolvedTheme,
   Theme,
   ThemeInput,
-  ThemeMode,
 } from "@marwes-ui/core"
 export type { ToneName } from "@marwes-ui/core"
 

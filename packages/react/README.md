@@ -1,13 +1,13 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
 
 # Marwes Design System - React
 
-**React components with first edition styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
+**React components with default Marwes styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
 
 React 18+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
@@ -21,7 +21,7 @@ React 18+ • TypeScript-first • Default CSS included • ThemeInput • Googl
 
 Marwes is built for teams and AI-assisted workflows that need a component system that is easy to install, easy to theme, and hard to misuse.
 
-- **One package for React apps**: components, provider, default first edition CSS, theme helpers, and typed props.
+- **One package for React apps**: components, provider, default preset CSS, theme helpers, and typed props.
 - **Beautiful defaults**: install the adapter, wrap your app, and start building without a separate CSS setup.
 - **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
 - **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
@@ -36,7 +36,7 @@ For a React app, install this package first. It includes the React adapter, load
 | `@marwes-ui/react` | You are building a React app. |
 | `@marwes-ui/vue` | You are building a Vue app instead. |
 | `@marwes-ui/core` | You are building adapters, tests, tooling, or framework-agnostic integrations. |
-| `@marwes-ui/presets` | You need standalone first edition CSS or preset theme exports. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
 This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
 
@@ -46,13 +46,14 @@ This split keeps installation simple for app teams while giving humans and AI ag
 pnpm add @marwes-ui/react react react-dom
 ```
 
-No preset CSS import is needed. `@marwes-ui/react` depends on `@marwes-ui/presets` and loads the first edition CSS automatically.
+No preset CSS import is needed. `@marwes-ui/react` depends on `@marwes-ui/presets` and loads the default Marwes CSS automatically.
 
 ## Quick Start
 
 ```tsx
 import {
   Button,
+  ButtonVariant,
   Checkbox,
   Input,
   MarwesProvider,
@@ -64,7 +65,7 @@ export function App() {
     <MarwesProvider>
       <Input placeholder="Email" ariaLabel="Email" />
       <Checkbox ariaLabel="Subscribe" />
-      <Button variant="secondary">Preview</Button>
+      <Button variant={ButtonVariant.secondary}>Preview</Button>
       <SubmitButton>Save</SubmitButton>
     </MarwesProvider>
   )
@@ -76,7 +77,7 @@ export function App() {
 Marwes components pick up provider tokens automatically. Your own React styling can use the same tokens by importing `mwThemeVars`. This example uses styled-components, but the same values work in Emotion, vanilla-extract, inline style objects, CSS Modules, and plain CSS.
 
 ```tsx
-import { Button, MarwesProvider, mwThemeVars } from "@marwes-ui/react"
+import { Button, ButtonVariant, MarwesProvider, mwThemeVars } from "@marwes-ui/react"
 import styled from "styled-components"
 
 const AppShell = styled.main`
@@ -104,7 +105,7 @@ export function App() {
       <AppShell>
         <PrimaryCallout>Launch workspace</PrimaryCallout>
         <FeaturePanel>
-          <Button variant="primary">Save</Button>
+          <Button variant={ButtonVariant.primary}>Save</Button>
         </FeaturePanel>
       </AppShell>
     </MarwesProvider>
@@ -142,7 +143,9 @@ import {
   StatusBadge,
   SubmitButton,
   type ButtonProps,
+  type H1Props,
   type InputFieldProps,
+  type ParagraphProps,
 } from "@marwes-ui/react"
 
 const primaryAction: ButtonProps = {
@@ -160,13 +163,21 @@ const emailField: InputFieldProps = {
   },
 }
 
+const titleProps: H1Props = {
+  size: "h2",
+}
+
+const descriptionProps: ParagraphProps = {
+  size: "md",
+}
+
 export function ProjectPanel() {
   return (
     <Card title="Project setup">
       <StatusBadge variant={BadgeVariant.success}>Ready</StatusBadge>
       <Spacer spacing={Spacings.sp16} />
-      <H1 size="h2">Launch workspace</H1>
-      <Paragraph size="md">
+      <H1 {...titleProps}>Launch workspace</H1>
+      <Paragraph {...descriptionProps}>
         Components share theme tokens, typed variants, spacing, and semantic metadata.
       </Paragraph>
       <InputField {...emailField} />
@@ -230,10 +241,10 @@ Typed tokens and helpers:
 
 ## Theme In Seconds
 
-First edition is the default. Pass `theme` only when a brand or design file needs to change the baseline.
+The default Marwes theme is already active. If you already have a good-looking design library or brand system, pass a small typed `ThemeInput` override instead of rebuilding component CSS.
 
 ```tsx
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/react"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
 
 const brandTheme = {
   color: {
@@ -257,7 +268,7 @@ const brandTheme = {
     radius: 10,
     density: "comfortable",
   },
-}
+} satisfies ThemeInput
 
 export function App() {
   return (
@@ -269,6 +280,97 @@ export function App() {
 ```
 
 The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
+
+Marwes is designed to look great from the beginning. Start with the default preset, then override only the colors, fonts, radius, or density that belong to your product. Unspecified values keep the polished Marwes defaults.
+
+## Light And Dark Mode
+
+MarwesProvider can own the active mode for the app. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals, then read or change the active mode with `useThemeMode()` anywhere under the provider. Every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+
+```tsx
+import { Button, ButtonVariant, MarwesProvider, ThemeMode, useThemeMode } from "@marwes-ui/react"
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
+    </Button>
+  )
+}
+
+export function App() {
+  return (
+    <MarwesProvider defaultMode={ThemeMode.light}>
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+`defaultMode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
+
+```tsx
+import { useState } from "react"
+import {
+  Button,
+  ButtonVariant,
+  MarwesProvider,
+  ThemeMode,
+  type ThemeInput,
+  useThemeMode,
+} from "@marwes-ui/react"
+
+const themeByMode = {
+  [ThemeMode.light]: {
+    color: {
+      primary: "#2457FF",
+      background: "#F8FAFC",
+      surface: "#FFFFFF",
+      text: "#111827",
+      border: "#D1D5DB",
+      focus: "#2457FF",
+    },
+  },
+  [ThemeMode.dark]: {
+    color: {
+      primary: "#8BA2FF",
+      background: "#0B1020",
+      surface: "#111827",
+      text: "#F8FAFC",
+      border: "#334155",
+      focus: "#93C5FD",
+    },
+  },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
+    </Button>
+  )
+}
+
+export function App() {
+  const [mode, setMode] = useState<ThemeMode>(ThemeMode.light)
+
+  return (
+    <MarwesProvider mode={mode} theme={themeByMode[mode]} onModeChange={setMode}>
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+Mode-specific defaults fill every omitted token, so each override can stay small. `theme={{ mode: ThemeMode.dark }}` is still enough for the default dark baseline.
 
 ## Custom Styling Tokens
 
@@ -331,15 +433,17 @@ Keep the APIs separate:
 Most Google Font use cases only need `mwAvailableFonts`; no `fontLoading` prop is needed.
 
 ```tsx
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/react"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
+
+const fontTheme = {
+  font: {
+    primary: mwAvailableFonts.Poppins,
+    secondary: mwAvailableFonts.Lora,
+  },
+} satisfies ThemeInput
 
 <MarwesProvider
-  theme={{
-    font: {
-      primary: mwAvailableFonts.Poppins,
-      secondary: mwAvailableFonts.Lora,
-    },
-  }}
+  theme={fontTheme}
 >
   <App />
 </MarwesProvider>
@@ -408,14 +512,16 @@ Marwes React components are accessible because the adapter renders a shared core
 Example:
 
 ```tsx
-import { InputField } from "@marwes-ui/react"
+import { InputField, type InputFieldProps } from "@marwes-ui/react"
 
-<InputField
-  label="Email"
-  helperText="Used for receipts."
-  error="Enter a valid email."
-  input={{ type: "email", placeholder: "you@example.com" }}
-/>
+const receiptEmailField = {
+  label: "Email",
+  helperText: "Used for receipts.",
+  error: "Enter a valid email.",
+  input: { type: "email", placeholder: "you@example.com" },
+} satisfies InputFieldProps
+
+<InputField {...receiptEmailField} />
 ```
 
 That contract resolves to DOM wiring like:
@@ -437,7 +543,7 @@ The important part is that the same label, helper, error, and invalid contract i
 ## Package Boundaries
 
 - `@marwes-ui/core` owns recipes, theme resolution, a11y mapping, and semantic metadata.
-- `@marwes-ui/presets` owns first edition CSS.
+- `@marwes-ui/presets` owns default preset CSS.
 - `@marwes-ui/react` owns React rendering and provider behavior.
 
 ## Scripts

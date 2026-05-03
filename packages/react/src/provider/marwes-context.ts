@@ -3,7 +3,9 @@ import * as React from "react"
 
 export type MarwesContextValue = {
   theme: ResolvedTheme
-  onModeChange: ((mode: ThemeMode) => void) | undefined
+  mode: ThemeMode
+  setMode: (mode: ThemeMode) => void
+  toggleMode: () => void
 }
 
 export const MarwesContext = React.createContext<MarwesContextValue | null>(null)

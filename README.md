@@ -445,6 +445,30 @@ pnpm build
 pnpm docs:links
 ```
 
+## Release Notes For Package Changes
+
+Pull requests that change publishable packages under `packages/**` must include a Changesets entry.
+
+Run:
+
+```bash
+pnpm changeset
+```
+
+Choose the release type:
+
+- `patch` for bug fixes, internal behavior fixes, or package API docs
+- `minor` for new public APIs, new components, or backwards-compatible features
+- `major` for breaking public APIs or behavior
+
+Commit the generated `.changeset/*.md` file with the PR. If a package change should not produce a release, add an empty changeset:
+
+```bash
+pnpm changeset add --empty
+```
+
+CI enforces this only for `packages/**`. Changes to Storybook, playgrounds, docs, workflows, or root tooling do not require a changeset unless they also touch publishable packages.
+
 **Repo structure:**
 
 - `packages/core` — Framework-agnostic TypeScript logic

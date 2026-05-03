@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -40,7 +40,7 @@ Core is the contract layer, not the normal app entry point.
 | `@marwes-ui/react` | You are building a React app. |
 | `@marwes-ui/vue` | You are building a Vue app. |
 | `@marwes-ui/core` | You need framework-agnostic recipes, theme utilities, accessibility contracts, or adapter/tooling APIs. |
-| `@marwes-ui/presets` | You need standalone first edition CSS or preset theme exports. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
 This package is useful for humans and AI agents that need stable contracts without framework rendering: component recipes, theme variable names, semantic attributes, and accessibility mapping all live here.
 
@@ -78,6 +78,49 @@ const cssVars = themeToCSSVars(theme)
 ```
 
 React and Vue providers apply these variables to the provider root. Preset CSS consumes them across buttons, inputs, typography, cards, toasts, overlays, and layout primitives.
+
+Marwes is designed to look great from the beginning. `ThemeInput` is intentionally partial: start from the polished defaults, map an existing design library into the tokens you own, and override only those product decisions.
+
+```ts
+import { resolveThemeInput, ThemeMode, type ThemeInput } from "@marwes-ui/core"
+
+const themeByMode = {
+  [ThemeMode.light]: { color: { primary: "#2457FF" } },
+  [ThemeMode.dark]: { color: { primary: "#8BA2FF", background: "#0B1020", text: "#F8FAFC" } },
+} satisfies Record<ThemeMode, ThemeInput>
+
+const darkBrandTheme = resolveThemeInput({
+  mode: ThemeMode.dark,
+  ...themeByMode[ThemeMode.dark],
+})
+```
+
+Every omitted token is filled from the selected light or dark default, so adapters can expose simple light/dark toggles without requiring a full theme object.
+
+### Light And Dark Mode Contract
+
+Core owns the runtime `ThemeMode` contract that the React and Vue providers use for `useThemeMode()`. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals. A mode change resolves a normal theme, swaps the provider-scoped `--mw-*` variables, and keeps the active class aligned as `mw-theme--light` or `mw-theme--dark`.
+
+```ts
+import { resolveThemeInput, themeToCSSVars, ThemeMode } from "@marwes-ui/core"
+
+function resolveMode(mode: ThemeMode) {
+  const theme = resolveThemeInput({ mode })
+
+  return {
+    className: `mw-theme--${theme.mode}`,
+    cssVars: themeToCSSVars(theme),
+  }
+}
+
+resolveMode(ThemeMode.dark)
+// {
+//   className: "mw-theme--dark",
+//   cssVars: { "--mw-color-background": "#141414", ... }
+// }
+```
+
+Most apps should use `useThemeMode()` from `@marwes-ui/react` or `@marwes-ui/vue`. Core is the framework-agnostic piece that makes the resolved variables and mode classes consistent across adapters.
 
 ## Theme Variables
 
@@ -216,7 +259,7 @@ Types and tokens:
 ## Package Boundaries
 
 - Core has no React, Vue, DOM, or CSS runtime dependency.
-- Presets own static CSS and first edition visuals.
+- Presets own static CSS and the default visual layer.
 - React and Vue own rendering, provider lifecycle, and framework APIs.
 
 ## Scripts

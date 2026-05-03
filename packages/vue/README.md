@@ -1,13 +1,13 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
 
 # Marwes Design System - Vue
 
-**Vue 3 components with first edition styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
+**Vue 3 components with default Marwes styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
 
 Vue 3.4+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
@@ -21,7 +21,7 @@ Vue 3.4+ • TypeScript-first • Default CSS included • ThemeInput • Google
 
 Marwes gives Vue apps a ready design-system base without requiring custom CSS setup or local component forks.
 
-- **One package for Vue apps**: components, provider, default first edition CSS, theme helpers, and typed props.
+- **One package for Vue apps**: components, provider, default preset CSS, theme helpers, and typed props.
 - **Vue-native binding**: common controls support `v-model` while preserving Marwes semantic contracts.
 - **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
 - **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
@@ -36,7 +36,7 @@ For a Vue app, install this package first. It includes the Vue adapter, loads th
 | `@marwes-ui/vue` | You are building a Vue app. |
 | `@marwes-ui/react` | You are building a React app instead. |
 | `@marwes-ui/core` | You are building adapters, tests, tooling, or framework-agnostic integrations. |
-| `@marwes-ui/presets` | You need standalone first edition CSS or preset theme exports. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
 This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
 
@@ -46,14 +46,14 @@ This split keeps installation simple for app teams while giving humans and AI ag
 pnpm add @marwes-ui/vue vue
 ```
 
-No preset CSS import is needed. `@marwes-ui/vue` depends on `@marwes-ui/presets` and loads the first edition CSS automatically.
+No preset CSS import is needed. `@marwes-ui/vue` depends on `@marwes-ui/presets` and loads the default Marwes CSS automatically.
 
 ## Quick Start
 
 ```vue
 <script setup lang="ts">
 import { ref } from "vue"
-import { Button, Checkbox, Input, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
+import { Button, ButtonVariant, Checkbox, Input, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
 
 const email = ref("")
 const subscribed = ref(false)
@@ -63,7 +63,7 @@ const subscribed = ref(false)
   <MarwesProvider>
     <Input v-model="email" placeholder="Email" ariaLabel="Email" />
     <Checkbox v-model="subscribed" ariaLabel="Subscribe" />
-    <Button variant="secondary">Preview</Button>
+    <Button :variant="ButtonVariant.secondary">Preview</Button>
     <SubmitButton>Save</SubmitButton>
   </MarwesProvider>
 </template>
@@ -75,7 +75,7 @@ Marwes components pick up provider tokens automatically. Your own Vue styling ca
 
 ```vue
 <script setup lang="ts">
-import { Button, MarwesProvider, mwThemeVars } from "@marwes-ui/vue"
+import { Button, ButtonVariant, MarwesProvider, mwThemeVars } from "@marwes-ui/vue"
 
 const panelStyle = {
   padding: mwThemeVars.spacing.sp24,
@@ -90,7 +90,7 @@ const panelStyle = {
     <main class="app-shell">
       <aside class="primary-callout">Launch workspace</aside>
       <section class="feature-panel" :style="panelStyle">
-        <Button variant="primary">Save</Button>
+        <Button :variant="ButtonVariant.primary">Save</Button>
       </section>
     </main>
   </MarwesProvider>
@@ -136,7 +136,9 @@ import {
   StatusBadge,
   SubmitButton,
   type ButtonProps,
+  type HeadingProps,
   type InputFieldProps,
+  type ParagraphProps,
 } from "@marwes-ui/vue"
 
 const primaryAction: ButtonProps = {
@@ -152,6 +154,14 @@ const emailField: InputFieldProps = {
     placeholder: "you@example.com",
   },
 }
+
+const titleProps: HeadingProps = {
+  size: "h2",
+}
+
+const descriptionProps: ParagraphProps = {
+  size: "md",
+}
 </script>
 
 <template>
@@ -159,8 +169,8 @@ const emailField: InputFieldProps = {
     <template #title>Project setup</template>
     <StatusBadge :variant="BadgeVariant.success">Ready</StatusBadge>
     <Spacer :spacing="Spacings.sp16" />
-    <H1 size="h2">Launch workspace</H1>
-    <Paragraph size="md">
+    <H1 v-bind="titleProps">Launch workspace</H1>
+    <Paragraph v-bind="descriptionProps">
       Components share theme tokens, typed variants, spacing, and semantic metadata.
     </Paragraph>
     <InputField v-bind="emailField" />
@@ -223,11 +233,11 @@ Typed tokens and helpers:
 
 ## Theme In Seconds
 
-First edition is the default. Pass `theme` only when a brand or design file needs to change the baseline.
+The default Marwes theme is already active. If you already have a good-looking design library or brand system, pass a small typed `ThemeInput` override instead of rebuilding component CSS.
 
 ```vue
 <script setup lang="ts">
-import { MarwesProvider, mwAvailableFonts } from "@marwes-ui/vue"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/vue"
 
 const brandTheme = {
   color: {
@@ -251,7 +261,7 @@ const brandTheme = {
     radius: 10,
     density: "comfortable",
   },
-}
+} satisfies ThemeInput
 </script>
 
 <template>
@@ -262,6 +272,90 @@ const brandTheme = {
 ```
 
 The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
+
+Marwes is designed to look great from the beginning. Start with the default preset, then override only the colors, fonts, radius, or density that belong to your product. Unspecified values keep the polished Marwes defaults.
+
+## Light And Dark Mode
+
+MarwesProvider can own the active mode for the app. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals, then read or change the active mode with `useThemeMode()` anywhere under the provider. Every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+
+```vue
+<script setup lang="ts">
+import { Button, ButtonVariant, ThemeMode, useThemeMode } from "@marwes-ui/vue"
+
+const { mode, toggleMode } = useThemeMode()
+</script>
+
+<template>
+  <Button :variant="ButtonVariant.secondary" @click="toggleMode">
+    Use {{ mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark }} mode
+  </Button>
+</template>
+```
+
+```vue
+<script setup lang="ts">
+import { MarwesProvider, ThemeMode } from "@marwes-ui/vue"
+import ThemeToggle from "./theme-toggle.vue"
+</script>
+
+<template>
+  <MarwesProvider :default-mode="ThemeMode.light">
+    <ThemeToggle />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+`default-mode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { MarwesProvider, ThemeMode, type ThemeInput } from "@marwes-ui/vue"
+import ThemeToggle from "./theme-toggle.vue"
+
+const mode = ref<ThemeMode>(ThemeMode.light)
+
+const themeByMode = {
+  [ThemeMode.light]: {
+    color: {
+      primary: "#2457FF",
+      background: "#F8FAFC",
+      surface: "#FFFFFF",
+      text: "#111827",
+      border: "#D1D5DB",
+      focus: "#2457FF",
+    },
+  },
+  [ThemeMode.dark]: {
+    color: {
+      primary: "#8BA2FF",
+      background: "#0B1020",
+      surface: "#111827",
+      text: "#F8FAFC",
+      border: "#334155",
+      focus: "#93C5FD",
+    },
+  },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function setMode(nextMode: ThemeMode) {
+  mode.value = nextMode
+}
+</script>
+
+<template>
+  <MarwesProvider :mode="mode" :theme="themeByMode[mode]" :on-mode-change="setMode">
+    <ThemeToggle />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+Mode-specific defaults fill every omitted token, so each override can stay small. `:theme="{ mode: ThemeMode.dark }"` is still enough for the default dark baseline.
 
 ## Custom Styling Tokens
 
@@ -331,14 +425,14 @@ Most Google Font use cases only need `mwAvailableFonts`; no `fontLoading` prop i
 
 ```vue
 <script setup lang="ts">
-import { mwAvailableFonts } from "@marwes-ui/vue"
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/vue"
 
 const theme = {
   font: {
     primary: mwAvailableFonts.Poppins,
     secondary: mwAvailableFonts.Lora,
   },
-}
+} satisfies ThemeInput
 </script>
 
 <template>
@@ -402,16 +496,18 @@ Example:
 
 ```vue
 <script setup lang="ts">
-import { InputField } from "@marwes-ui/vue"
+import { InputField, type InputFieldProps } from "@marwes-ui/vue"
+
+const receiptEmailField = {
+  label: "Email",
+  helperText: "Used for receipts.",
+  error: "Enter a valid email.",
+  input: { type: "email", placeholder: "you@example.com" },
+} satisfies InputFieldProps
 </script>
 
 <template>
-  <InputField
-    label="Email"
-    helperText="Used for receipts."
-    error="Enter a valid email."
-    :input="{ type: 'email', placeholder: 'you@example.com' }"
-  />
+  <InputField v-bind="receiptEmailField" />
 </template>
 ```
 
@@ -434,7 +530,7 @@ The important part is that the same label, helper, error, and invalid contract i
 ## Package Boundaries
 
 - `@marwes-ui/core` owns recipes, theme resolution, a11y mapping, and semantic metadata.
-- `@marwes-ui/presets` owns first edition CSS.
+- `@marwes-ui/presets` owns default preset CSS.
 - `@marwes-ui/vue` owns Vue rendering and provider behavior.
 
 ## Scripts

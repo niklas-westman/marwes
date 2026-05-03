@@ -1,5 +1,6 @@
 import { resolveTone } from "@marwes-ui/core"
-import type { Density, ThemeInput, ThemeMode, ToneName } from "@marwes-ui/react"
+import type { Density, ThemeInput, ThemeMode as ThemeModeValue, ToneName } from "@marwes-ui/react"
+import { ThemeMode } from "@marwes-ui/react"
 import { useState } from "react"
 
 import {
@@ -31,7 +32,7 @@ interface SidebarProps {
 }
 
 function Sidebar({ onThemeChange }: SidebarProps): JSX.Element {
-  const [mode, setMode] = useState<ThemeMode>("light")
+  const [mode, setMode] = useState<ThemeModeValue>(ThemeMode.light)
   const [primary, setPrimary] = useState("#5B8CFF")
   const [danger, setDanger] = useState("#D90429")
   const [success, setSuccess] = useState("#006633")
@@ -42,7 +43,7 @@ function Sidebar({ onThemeChange }: SidebarProps): JSX.Element {
   const [fontOverride, setFontOverride] = useState("")
 
   function buildTheme(overrides: {
-    mode?: ThemeMode
+    mode?: ThemeModeValue
     primary?: string
     danger?: string
     success?: string
@@ -92,20 +93,20 @@ function Sidebar({ onThemeChange }: SidebarProps): JSX.Element {
         <ModeToggle>
           <ModeButton
             type="button"
-            $active={mode === "light"}
+            $active={mode === ThemeMode.light}
             onClick={() => {
-              setMode("light")
-              onThemeChange(buildTheme({ mode: "light" }))
+              setMode(ThemeMode.light)
+              onThemeChange(buildTheme({ mode: ThemeMode.light }))
             }}
           >
             Light
           </ModeButton>
           <ModeButton
             type="button"
-            $active={mode === "dark"}
+            $active={mode === ThemeMode.dark}
             onClick={() => {
-              setMode("dark")
-              onThemeChange(buildTheme({ mode: "dark" }))
+              setMode(ThemeMode.dark)
+              onThemeChange(buildTheme({ mode: ThemeMode.dark }))
             }}
           >
             Dark

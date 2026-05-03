@@ -1,5 +1,5 @@
 import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
-import { Badge } from "@marwes-ui/react"
+import { Badge, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
@@ -60,24 +60,25 @@ export const DarkVariants: Story = {
     const { children: _children, id: _id, variant: _variant, ...sharedBadgeProps } = args
 
     return (
-      <div
-        className="mw-theme--dark"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 8,
-          alignItems: "center",
-          padding: 16,
-          background: "#111827",
-          borderRadius: 8,
-        }}
-      >
-        {VARIANTS.map((variant) => (
-          <Badge key={variant} {...sharedBadgeProps} variant={variant}>
-            {variant.charAt(0).toUpperCase() + variant.slice(1)}
-          </Badge>
-        ))}
-      </div>
+      <MarwesProvider theme={{ mode: ThemeMode.dark }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 8,
+            alignItems: "center",
+            padding: 16,
+            background: "#111827",
+            borderRadius: 8,
+          }}
+        >
+          {VARIANTS.map((variant) => (
+            <Badge key={variant} {...sharedBadgeProps} variant={variant}>
+              {variant.charAt(0).toUpperCase() + variant.slice(1)}
+            </Badge>
+          ))}
+        </div>
+      </MarwesProvider>
     )
   },
 }

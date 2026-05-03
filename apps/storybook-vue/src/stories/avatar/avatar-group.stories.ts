@@ -1,5 +1,5 @@
-import { storybookLayout } from "@marwes-ui/core"
-import { AvatarGroup } from "@marwes-ui/vue"
+import { ThemeMode, storybookLayout } from "@marwes-ui/core"
+import { AvatarGroup, MarwesProvider } from "@marwes-ui/vue"
 import type { AvatarGroupProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
@@ -38,14 +38,16 @@ export const WithoutOverflow: Story = {
 
 export const DarkPreview: Story = {
   render: () => ({
-    components: { AvatarGroup },
+    components: { AvatarGroup, MarwesProvider },
     setup() {
-      return { sampleItems }
+      return { sampleItems, ThemeMode }
     },
     template: `
-      <div class="mw-theme--dark" style="padding: 24px; background: #2e2e2e; border-radius: 12px;">
-        <AvatarGroup ariaLabel="Project members" :items="sampleItems" :overflowCount="3" />
-      </div>
+      <MarwesProvider :theme="{ mode: ThemeMode.dark }">
+        <div style="padding: 24px; background: #2e2e2e; border-radius: 12px;">
+          <AvatarGroup ariaLabel="Project members" :items="sampleItems" :overflowCount="3" />
+        </div>
+      </MarwesProvider>
     `,
   }),
 }

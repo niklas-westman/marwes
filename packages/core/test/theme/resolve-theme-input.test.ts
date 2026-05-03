@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"
+import { ThemeMode } from "../../src/theme/theme-types"
 
 describe("resolveThemeInput — defaults", () => {
   it("resolves default mode as light", () => {
-    expect(resolveThemeInput({}).mode).toBe("light")
+    expect(resolveThemeInput({}).mode).toBe(ThemeMode.light)
   })
 
   it("resolves dark mode", () => {
-    expect(resolveThemeInput({ mode: "dark" }).mode).toBe("dark")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).mode).toBe(ThemeMode.dark)
   })
 
   it("light mode default: primary base is firstEdition brand blue", () => {
@@ -15,7 +16,7 @@ describe("resolveThemeInput — defaults", () => {
   })
 
   it("dark mode default: primary base is firstEdition brand blue", () => {
-    expect(resolveThemeInput({ mode: "dark" }).color.primary.base).toBe("#2F31FC")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.primary.base).toBe("#2F31FC")
   })
 
   it("default primary label keeps firstEdition filled controls readable", () => {
@@ -27,7 +28,7 @@ describe("resolveThemeInput — defaults", () => {
   })
 
   it("dark mode default background is #141414", () => {
-    expect(resolveThemeInput({ mode: "dark" }).color.background).toBe("#141414")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.background).toBe("#141414")
   })
 
   it("default ui.radius is 4", () => {

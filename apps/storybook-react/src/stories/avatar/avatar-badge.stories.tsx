@@ -1,5 +1,5 @@
 import { AvatarSize, storybookLayout } from "@marwes-ui/core"
-import { AvatarBadge } from "@marwes-ui/react"
+import { AvatarBadge, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { AvatarBadgeProps } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -64,26 +64,27 @@ export const AllSizes: Story = {
 
 export const DarkSizes: Story = {
   render: () => (
-    <div
-      className="mw-theme--dark"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 24,
-        padding: 24,
-        background: "#2e2e2e",
-        borderRadius: 12,
-      }}
-    >
-      {avatarBadgePreviews.map((preview) => (
-        <div
-          key={`dark-${preview.label}`}
-          style={{ display: "flex", flexDirection: "column", gap: 8 }}
-        >
-          <span style={{ fontSize: 12, color: "#d4d4d4" }}>{preview.label}</span>
-          <AvatarBadge {...preview.props} />
-        </div>
-      ))}
-    </div>
+    <MarwesProvider theme={{ mode: ThemeMode.dark }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 24,
+          padding: 24,
+          background: "#2e2e2e",
+          borderRadius: 12,
+        }}
+      >
+        {avatarBadgePreviews.map((preview) => (
+          <div
+            key={`dark-${preview.label}`}
+            style={{ display: "flex", flexDirection: "column", gap: 8 }}
+          >
+            <span style={{ fontSize: 12, color: "#d4d4d4" }}>{preview.label}</span>
+            <AvatarBadge {...preview.props} />
+          </div>
+        ))}
+      </div>
+    </MarwesProvider>
   ),
 }

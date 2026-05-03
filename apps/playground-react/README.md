@@ -35,7 +35,7 @@ The public API story for React should always start the same way:
 
 ```tsx
 import { useState } from "react"
-import { Button, Input, MarwesProvider } from "@marwes-ui/react"
+import { Button, ButtonVariant, Input, MarwesProvider } from "@marwes-ui/react"
 
 export function PlaygroundExample() {
   const [email, setEmail] = useState("")
@@ -48,7 +48,7 @@ export function PlaygroundExample() {
         placeholder="Email"
         ariaLabel="Email"
       />
-      <Button variant="primary">Save</Button>
+      <Button variant={ButtonVariant.primary}>Save</Button>
     </MarwesProvider>
   )
 }
