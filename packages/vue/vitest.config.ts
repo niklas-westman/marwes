@@ -14,6 +14,7 @@ export default defineConfig({
       ),
       "@marwes-ui/presets/firstEdition": resolve(__dirname, "../presets/src/firstEdition/index.ts"),
       "@marwes-ui/presets": resolve(__dirname, "../presets/src/index.ts"),
+      "@marwes-ui/vue/ssr": resolve(__dirname, "./src/ssr.ts"),
       "@marwes-ui/vue": resolve(__dirname, "./src/index.ts"),
     },
   },

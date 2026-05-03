@@ -1,13 +1,14 @@
 import type { ColorRole, SecondaryColorRole } from "./color-resolve"
 import { densityToCSSVars } from "./density"
-import type { Density, ThemeMode } from "./theme-types"
+import { ThemeMode } from "./theme-types"
+import type { Density, ThemeMode as ThemeModeValue } from "./theme-types"
 
 // ─── ResolvedTheme ────────────────────────────────────────────────────────────
 // Post-derivation theme shape: color fields hold resolved ColorRole objects,
 // not raw hex strings. Moved to theme-types.ts in Case 4.
 
 export interface ResolvedTheme {
-  mode: ThemeMode
+  mode: ThemeModeValue
   color: {
     primary: ColorRole
     secondary: SecondaryColorRole
@@ -144,4 +145,66 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-typography-paragraph-lg-font-size": `${typography.paragraph.lg.fontSize}px`,
     "--mw-typography-paragraph-lg-line-height": `${typography.paragraph.lg.lineHeight}`,
   }
+}
+
+export type ThemeModeAttribute = "class" | "data-theme" | "data-mode"
+export type ThemeModeRootTarget = "html" | "body"
+
+export type ThemeModeCSSRulesOptions = {
+  light: ResolvedTheme
+  dark: ResolvedTheme
+  selector?: string
+  rootTarget?: ThemeModeRootTarget
+  rootAttribute?: ThemeModeAttribute
+}
+
+const defaultThemeSelector = "[data-marwes-theme]"
+
+export function themeToCSSRule(selector: string, theme: ResolvedTheme): string {
+  const declarations = Object.entries(themeToCSSVars(theme))
+    .map(([property, value]) => `  ${property}: ${serializeCSSDeclarationValue(value)};`)
+    .join("\n")
+
+  return `${selector} {\n${declarations}\n  background-color: var(--mw-color-background);\n  color: var(--mw-color-text);\n}`
+}
+
+export function themeModesToCSSRules({
+  light,
+  dark,
+  selector = defaultThemeSelector,
+  rootTarget,
+  rootAttribute = "class",
+}: ThemeModeCSSRulesOptions): string {
+  return [
+    themeToCSSRule(buildModeSelector(selector, ThemeMode.light, rootTarget, rootAttribute), light),
+    themeToCSSRule(buildModeSelector(selector, ThemeMode.dark, rootTarget, rootAttribute), dark),
+  ].join("\n\n")
+}
+
+function buildModeSelector(
+  selector: string,
+  mode: ThemeModeValue,
+  rootTarget: ThemeModeRootTarget | undefined,
+  rootAttribute: ThemeModeAttribute,
+): string {
+  const providerSelector = `${selector}[data-marwes-mode="${mode}"]`
+  const rootSelector =
+    rootTarget === undefined
+      ? undefined
+      : `${buildRootModeSelector(rootTarget, rootAttribute, mode)} ${selector}`
+
+  return rootSelector === undefined ? providerSelector : `${providerSelector},\n${rootSelector}`
+}
+
+function buildRootModeSelector(
+  target: ThemeModeRootTarget,
+  attribute: ThemeModeAttribute,
+  mode: ThemeModeValue,
+): string {
+  if (attribute === "class") return `${target}.${mode}`
+  return `${target}[${attribute}="${mode}"]`
+}
+
+function serializeCSSDeclarationValue(value: string): string {
+  return value.replace(/[\n\r\t]+/g, " ").replace(/[;{}]/g, "")
 }

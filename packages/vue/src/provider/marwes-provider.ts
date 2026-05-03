@@ -4,6 +4,7 @@ import type {
   ThemeInput,
   ThemeMode,
   ThemePreference,
+  ThemeVariableStrategy,
 } from "@marwes-ui/core"
 import {
   ThemeMode as MwThemeMode,
@@ -38,6 +39,7 @@ export type MarwesProviderProps = {
   target?: ThemeTarget
   attribute?: ThemeAttribute
   disableTransitionOnChange?: boolean
+  variableStrategy?: ThemeVariableStrategy
 }
 
 export const MarwesProvider = defineComponent({
@@ -56,6 +58,7 @@ export const MarwesProvider = defineComponent({
     "target",
     "attribute",
     "disableTransitionOnChange",
+    "variableStrategy",
   ],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps
@@ -71,6 +74,9 @@ export const MarwesProvider = defineComponent({
     const target = computed<ThemeTarget>(() => props.target ?? "provider")
     const attribute = computed<ThemeAttribute>(() => props.attribute ?? "class")
     const disableTransitionOnChange = computed(() => props.disableTransitionOnChange === true)
+    const variableStrategy = computed<ThemeVariableStrategy>(
+      () => props.variableStrategy ?? "inline",
+    )
     const isPreferenceControlled = computed(
       () =>
         props.preference !== undefined ||
@@ -108,7 +114,7 @@ export const MarwesProvider = defineComponent({
     }
 
     function syncThemeToRuntime() {
-      if (rootRef.value) {
+      if (rootRef.value && variableStrategy.value === "inline") {
         applyThemeToElement(rootRef.value, resolved.value)
       }
 
@@ -168,7 +174,7 @@ export const MarwesProvider = defineComponent({
     onUnmounted(() => {
       unsubscribeSystemThemeMode?.()
     })
-    watch(resolved, syncThemeToRuntime)
+    watch([resolved, variableStrategy], syncThemeToRuntime)
     watch([activeMode, target, attribute, disableTransitionOnChange], syncTargetModeAttribute)
     watch([activePreference, enableSystem], syncSystemThemeSubscription)
 
@@ -189,7 +195,8 @@ export const MarwesProvider = defineComponent({
           ref: rootRef,
           class: `mw-theme--${resolved.value.mode}`,
           "data-marwes-theme": "true",
-          style: themeToRootStyle(resolved.value),
+          "data-marwes-mode": resolved.value.mode,
+          style: variableStrategy.value === "inline" ? themeToRootStyle(resolved.value) : undefined,
         },
         slots.default?.(),
       )

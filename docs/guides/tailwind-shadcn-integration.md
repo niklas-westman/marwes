@@ -143,4 +143,4 @@ Root class integration is not SSR no-flash support by itself.
 
 Syncing `html.dark` does not update provider inline variables before hydration. A server-rendered page can still show fallback Marwes variables until React or Vue hydrates and applies the resolved provider mode.
 
-Full no-flash SSR support requires separate SSR helpers that can deliver matching light/dark variables before hydration.
+Full no-flash SSR support requires separate SSR helpers that can deliver matching light/dark variables before hydration. See the [theme SSR no-flash guide](./theme-ssr-no-flash.md).

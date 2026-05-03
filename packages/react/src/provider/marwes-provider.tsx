@@ -4,6 +4,7 @@ import type {
   ThemeInput,
   ThemeMode,
   ThemePreference,
+  ThemeVariableStrategy,
 } from "@marwes-ui/core"
 import {
   ThemeMode as MwThemeMode,
@@ -38,6 +39,7 @@ export type MarwesProviderProps = {
   target?: ThemeTarget
   attribute?: ThemeAttribute
   disableTransitionOnChange?: boolean
+  variableStrategy?: ThemeVariableStrategy
   children: React.ReactNode
 }
 
@@ -55,6 +57,7 @@ export function MarwesProvider({
   target = "provider",
   attribute = "class",
   disableTransitionOnChange = false,
+  variableStrategy = "inline",
   children,
 }: MarwesProviderProps) {
   const rootRef = React.useRef<HTMLDivElement>(null)
@@ -121,16 +124,17 @@ export function MarwesProvider({
     () => resolveThemeInput({ ...(theme ?? {}), mode: activeMode }),
     [activeMode, theme],
   )
-  const rootStyle = React.useMemo(
-    () => themeToRootStyle(resolved) as React.CSSProperties,
-    [resolved],
-  )
+  const rootStyle = React.useMemo(() => {
+    if (variableStrategy === "style-tag") return undefined
+    return themeToRootStyle(resolved) as React.CSSProperties
+  }, [resolved, variableStrategy])
 
   React.useEffect(() => {
+    if (variableStrategy === "style-tag") return
     if (rootRef.current) {
       applyThemeToElement(rootRef.current, resolved)
     }
-  }, [resolved])
+  }, [resolved, variableStrategy])
 
   React.useEffect(() => {
     if (target === "provider") return
@@ -175,6 +179,7 @@ export function MarwesProvider({
         ref={rootRef}
         className={`mw-theme--${resolved.mode}`}
         data-marwes-theme="true"
+        data-marwes-mode={resolved.mode}
         style={rootStyle}
       >
         {children}

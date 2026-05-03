@@ -141,6 +141,7 @@ describe("MarwesProvider — root element", () => {
     )
     const root = container.firstElementChild as HTMLElement
     expect(root.dataset.marwesTheme).toBe("true")
+    expect(root.dataset.marwesMode).toBe(ThemeMode.light)
   })
 
   it("applies --mw-color-primary-base CSS var on root element", () => {
@@ -167,11 +168,35 @@ describe("MarwesProvider — root element", () => {
     )
 
     expect(markup).toContain('data-marwes-theme="true"')
+    expect(markup).toContain('data-marwes-mode="light"')
     expect(markup).toContain("--mw-color-primary-base:#AA33FF")
     expect(markup).toContain("--mw-font-primary:Test Primary, system-ui, sans-serif")
     expect(markup).toContain("--mw-ui-radius:12px")
     expect(markup).toContain("background-color:#101418")
     expect(markup).toContain("color:#F4F7FA")
+  })
+
+  it("omits inline variables when using the style-tag variable strategy", () => {
+    const markup = renderToStaticMarkup(
+      <MarwesProvider variableStrategy="style-tag">
+        <div />
+      </MarwesProvider>,
+    )
+
+    expect(markup).toContain('data-marwes-mode="light"')
+    expect(markup).not.toContain("--mw-color-primary-base")
+  })
+
+  it("does not add inline variables after mount with the style-tag variable strategy", () => {
+    const { container } = render(
+      <MarwesProvider variableStrategy="style-tag">
+        <div />
+      </MarwesProvider>,
+    )
+    const root = container.firstElementChild as HTMLElement
+
+    expect(root.style.getPropertyValue("--mw-color-primary-base")).toBe("")
+    expect(root.dataset.marwesMode).toBe(ThemeMode.light)
   })
 
   it("applies mw-theme--light class by default", () => {

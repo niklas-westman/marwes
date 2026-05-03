@@ -154,6 +154,7 @@ describe("MarwesProvider — root element", () => {
 
     const rootElement = container.firstElementChild as HTMLElement
     expect(rootElement.dataset.marwesTheme).toBe("true")
+    expect(rootElement.dataset.marwesMode).toBe(ThemeMode.light)
   })
 
   it("applies --mw-color-primary-base CSS var on root element", () => {
@@ -181,6 +182,21 @@ describe("MarwesProvider — root element", () => {
     expect(style["--mw-ui-radius"]).toBe("12px")
     expect(style.backgroundColor).toBe("#101418")
     expect(style.color).toBe("#F4F7FA")
+  })
+
+  it("omits inline variables when using the style-tag variable strategy", () => {
+    const { container } = render(MarwesProvider, {
+      props: {
+        variableStrategy: "style-tag",
+      },
+      slots: {
+        default: () => h("div"),
+      },
+    })
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.dataset.marwesMode).toBe(ThemeMode.light)
+    expect(rootElement.style.getPropertyValue("--mw-color-primary-base")).toBe("")
   })
 
   it("applies mw-theme--light class by default", () => {
