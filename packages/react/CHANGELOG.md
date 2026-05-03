@@ -1,5 +1,15 @@
 # @marwes-ui/react
 
+## 1.0.5
+
+### Patch Changes
+
+- [#27](https://github.com/niklas-westman/marwes/pull/27) [`a7798a1`](https://github.com/niklas-westman/marwes/commit/a7798a13f315275a6ef1de65caa0dfe148cd53fa) Thanks [@niklas-westman](https://github.com/niklas-westman)! - enabled the possibility of SSR
+
+- Updated dependencies [[`a7798a1`](https://github.com/niklas-westman/marwes/commit/a7798a13f315275a6ef1de65caa0dfe148cd53fa)]:
+  - @marwes-ui/core@1.0.5
+  - @marwes-ui/presets@1.0.5
+
 ## 1.0.4
 
 ### Patch Changes
