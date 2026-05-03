@@ -1,5 +1,15 @@
 # @marwes-ui/vue
 
+## 1.0.3
+
+### Patch Changes
+
+- [#23](https://github.com/niklas-westman/marwes/pull/23) [`6a76863`](https://github.com/niklas-westman/marwes/commit/6a7686369b018c8e8738581b29526d52210996cc) Thanks [@niklas-westman](https://github.com/niklas-westman)! - adds optional global theme-mode synchronization
+
+- Updated dependencies [[`6a76863`](https://github.com/niklas-westman/marwes/commit/6a7686369b018c8e8738581b29526d52210996cc)]:
+  - @marwes-ui/presets@1.0.3
+  - @marwes-ui/core@1.0.3
+
 ## 1.0.2
 
 ### Patch Changes
