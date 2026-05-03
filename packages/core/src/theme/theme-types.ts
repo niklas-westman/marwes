@@ -25,6 +25,7 @@ export const ThemeMode = {
   dark: "dark",
 } as const
 export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode]
+export type ThemePreference = ThemeMode | "system"
 
 export type Theme = {
   /**

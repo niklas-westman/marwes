@@ -1,6 +1,6 @@
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner-light.png" width="100%" style="border-radius: 40px;">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -308,6 +308,49 @@ import ThemeToggle from "./theme-toggle.vue"
 ```
 
 `default-mode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+### System And Persisted Preference
+
+`mode` is always the rendered visual mode: `ThemeMode.light` or `ThemeMode.dark`. `preference` is the app or user choice: `ThemeMode.light`, `ThemeMode.dark`, or `"system"`. Use `preference` and `default-preference` when your UI needs a system option; keep using `mode`, `default-mode`, and `on-mode-change` when you only need concrete light/dark compatibility.
+
+```vue
+<script setup lang="ts">
+import { Button, ButtonVariant, ThemeMode, useThemeMode } from "@marwes-ui/vue"
+
+const { mode, preference, systemMode, isSystem, setPreference, setMode } = useThemeMode()
+</script>
+
+<template>
+  <p>Rendering {{ mode }}; preference is {{ preference }}; system is {{ systemMode }}.</p>
+  <Button :variant="ButtonVariant.secondary" @click="setPreference('system')">
+    Use system
+  </Button>
+  <Button :variant="ButtonVariant.secondary" @click="setMode(ThemeMode.dark)">
+    Use dark
+  </Button>
+  <span v-if="isSystem">Following system</span>
+</template>
+```
+
+```vue
+<script setup lang="ts">
+import { MarwesProvider } from "@marwes-ui/vue"
+import ThemeMenu from "./theme-menu.vue"
+</script>
+
+<template>
+  <MarwesProvider default-preference="system" storage-key="marwes-theme" enable-system>
+    <ThemeMenu />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+`useThemeMode().mode` never returns `"system"`; it is always the concrete mode Marwes rendered. `useThemeMode().preference` returns the active app/user preference, and `setPreference("system")` is the system-capable setter. `setMode(mode)` remains a concrete light/dark convenience.
+
+`storage-key` is opt-in and defaults to `false`. Storage reads and writes are failure-safe, so private browsing or unavailable storage will fall back to normal provider state. `enable-system` defaults to `true`; set it to `false` to avoid `matchMedia` detection and resolve `"system"` through the light fallback.
+
+This layer does not provide SSR no-flash behavior. Server output can still render the fallback mode before the client applies a stored or system preference. Use it for client-side preference and persistence, not for a no-flash SSR guarantee.
 
 For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
 

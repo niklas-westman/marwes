@@ -1,44 +1,111 @@
-import type { FontLoadingConfig, ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
-import { ThemeMode as MwThemeMode, resolveThemeInput } from "@marwes-ui/core"
+import type {
+  FontLoadingConfig,
+  ResolvedTheme,
+  ThemeInput,
+  ThemeMode,
+  ThemePreference,
+} from "@marwes-ui/core"
+import {
+  ThemeMode as MwThemeMode,
+  nextThemeMode,
+  resolveThemeInput,
+  resolveThemePreference,
+} from "@marwes-ui/core"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
+import {
+  getSystemThemeMode,
+  readStoredThemePreference,
+  subscribeToSystemThemeMode,
+  writeStoredThemePreference,
+} from "./theme-mode-runtime"
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
+  defaultPreference?: ThemePreference
+  preference?: ThemePreference
   defaultMode?: ThemeMode
   mode?: ThemeMode
   fontLoading?: FontLoadingConfig
+  onPreferenceChange?: (preference: ThemePreference) => void
   onModeChange?: (mode: ThemeMode) => void
+  storageKey?: string | false
+  enableSystem?: boolean
   children: React.ReactNode
 }
 
 export function MarwesProvider({
   theme,
-  defaultMode = MwThemeMode.light,
+  defaultPreference,
+  preference: controlledPreference,
+  defaultMode,
   mode: controlledMode,
   fontLoading = "auto",
+  onPreferenceChange,
   onModeChange,
+  storageKey = false,
+  enableSystem = true,
   children,
 }: MarwesProviderProps) {
   const rootRef = React.useRef<HTMLDivElement>(null)
-  const [internalMode, setInternalMode] = React.useState<ThemeMode>(defaultMode)
-  const activeMode = controlledMode ?? theme?.mode ?? internalMode
-  const isModeControlled = controlledMode !== undefined || theme?.mode !== undefined
+  const [internalPreference, setInternalPreference] = React.useState<ThemePreference>(
+    defaultPreference ?? defaultMode ?? MwThemeMode.light,
+  )
+  const [systemMode, setSystemMode] = React.useState<ThemeMode>(() =>
+    enableSystem ? getSystemThemeMode() : MwThemeMode.light,
+  )
+
+  const activePreference =
+    controlledPreference ?? controlledMode ?? theme?.mode ?? internalPreference
+  const activeMode = resolveThemePreference(activePreference, systemMode)
+  const isPreferenceControlled =
+    controlledPreference !== undefined || controlledMode !== undefined || theme?.mode !== undefined
+
+  React.useEffect(() => {
+    const storedPreference = readStoredThemePreference(storageKey)
+    if (storedPreference !== undefined && !isPreferenceControlled) {
+      setInternalPreference(storedPreference)
+    }
+  }, [isPreferenceControlled, storageKey])
+
+  React.useEffect(() => {
+    if (!enableSystem) {
+      setSystemMode(MwThemeMode.light)
+      return
+    }
+
+    setSystemMode(getSystemThemeMode())
+
+    if (activePreference !== "system") {
+      return
+    }
+
+    return subscribeToSystemThemeMode(setSystemMode)
+  }, [activePreference, enableSystem])
+
+  const setPreference = React.useCallback(
+    (nextPreference: ThemePreference) => {
+      if (!isPreferenceControlled) {
+        setInternalPreference(nextPreference)
+      }
+
+      writeStoredThemePreference(storageKey, nextPreference)
+      onPreferenceChange?.(nextPreference)
+    },
+    [isPreferenceControlled, onPreferenceChange, storageKey],
+  )
 
   const setMode = React.useCallback(
     (nextMode: ThemeMode) => {
-      if (!isModeControlled) {
-        setInternalMode(nextMode)
-      }
-
+      setPreference(nextMode)
       onModeChange?.(nextMode)
     },
-    [isModeControlled, onModeChange],
+    [onModeChange, setPreference],
   )
 
   const toggleMode = React.useCallback(() => {
-    setMode(activeMode === MwThemeMode.dark ? MwThemeMode.light : MwThemeMode.dark)
+    setMode(nextThemeMode(activeMode))
   }, [activeMode, setMode])
 
   const resolved: ResolvedTheme = React.useMemo(
@@ -60,8 +127,21 @@ export function MarwesProvider({
     loadThemeFonts(resolved, fontLoading)
   }, [resolved, fontLoading])
 
+  const contextValue = React.useMemo(
+    () => ({
+      theme: resolved,
+      mode: activeMode,
+      preference: activePreference,
+      systemMode,
+      setMode,
+      setPreference,
+      toggleMode,
+    }),
+    [activeMode, activePreference, resolved, setMode, setPreference, systemMode, toggleMode],
+  )
+
   return (
-    <MarwesContext.Provider value={{ theme: resolved, mode: activeMode, setMode, toggleMode }}>
+    <MarwesContext.Provider value={contextValue}>
       <div
         ref={rootRef}
         className={`mw-theme--${resolved.mode}`}

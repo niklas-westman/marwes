@@ -2,12 +2,20 @@ export type {
   Theme,
   ThemeInput,
   ThemeInputColor,
+  ThemePreference,
   ColorInput,
   ColorRole,
   SecondaryColorRole,
   Density,
 } from "./theme/theme-types"
 export { ThemeMode } from "./theme/theme-types"
+export type { SystemThemeMode } from "./theme/theme-mode"
+export {
+  isThemeMode,
+  isThemePreference,
+  nextThemeMode,
+  resolveThemePreference,
+} from "./theme/theme-mode"
 export { lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
 export { resolveThemeInput } from "./theme/theme-normalize"
 export type { ResolvedTheme } from "./theme/theme-css"

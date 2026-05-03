@@ -1,8 +1,8 @@
 import type { ResolvedTheme } from "@marwes-ui/core"
 import { ThemeMode, resolveThemeInput } from "@marwes-ui/core"
-import { fireEvent, render, screen } from "@testing-library/vue"
+import { fireEvent, render, screen, waitFor } from "@testing-library/vue"
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { defineComponent, h } from "vue"
+import { defineComponent, h, nextTick } from "vue"
 import { MarwesProvider } from "../marwes-provider"
 import { resetThemeRuntimeState } from "../runtime-theme"
 import { themeToRootStyle } from "../runtime-theme"
@@ -34,6 +34,105 @@ const ThemeModeConsumer = defineComponent({
         }`,
       )
   },
+})
+
+const ThemePreferenceConsumer = defineComponent({
+  name: "ThemePreferenceConsumer",
+  setup() {
+    const { mode, preference, systemMode, isSystem, setPreference, setMode, toggleMode } =
+      useThemeMode()
+
+    return () =>
+      h("div", [
+        h(
+          "output",
+          `${mode.value}:${preference.value}:${systemMode.value}:${
+            isSystem.value ? "system" : "concrete"
+          }`,
+        ),
+        h("button", { type: "button", onClick: () => setPreference("system") }, "system"),
+        h(
+          "button",
+          { type: "button", onClick: () => setPreference(ThemeMode.dark) },
+          "dark preference",
+        ),
+        h("button", { type: "button", onClick: () => setMode(ThemeMode.dark) }, "dark mode"),
+        h("button", { type: "button", onClick: toggleMode }, "toggle"),
+      ])
+  },
+})
+
+const originalMatchMedia = window.matchMedia
+const originalLocalStorage = window.localStorage
+
+function mockSystemMode(initialMode: ThemeMode) {
+  let matches = initialMode === ThemeMode.dark
+  const listeners = new Set<(event: MediaQueryListEvent) => void>()
+
+  window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+    matches,
+    media: query,
+    onchange: null,
+    addEventListener: (_event: "change", listener: (event: MediaQueryListEvent) => void) => {
+      listeners.add(listener)
+    },
+    removeEventListener: (_event: "change", listener: (event: MediaQueryListEvent) => void) => {
+      listeners.delete(listener)
+    },
+    addListener: (listener: (event: MediaQueryListEvent) => void) => {
+      listeners.add(listener)
+    },
+    removeListener: (listener: (event: MediaQueryListEvent) => void) => {
+      listeners.delete(listener)
+    },
+    dispatchEvent: () => true,
+  }))
+
+  return {
+    setMode(nextMode: ThemeMode) {
+      matches = nextMode === ThemeMode.dark
+      const event = { matches } as MediaQueryListEvent
+      for (const listener of listeners) {
+        listener(event)
+      }
+    },
+  }
+}
+
+function mockLocalStorage(initialValues: Record<string, string> = {}) {
+  const values = new Map(Object.entries(initialValues))
+  const storage = {
+    get length() {
+      return values.size
+    },
+    clear: vi.fn(() => {
+      values.clear()
+    }),
+    getItem: vi.fn((key: string) => values.get(key) ?? null),
+    key: vi.fn((index: number) => Array.from(values.keys())[index] ?? null),
+    removeItem: vi.fn((key: string) => {
+      values.delete(key)
+    }),
+    setItem: vi.fn((key: string, value: string) => {
+      values.set(key, value)
+    }),
+  } satisfies Storage
+
+  Object.defineProperty(window, "localStorage", {
+    value: storage,
+    configurable: true,
+  })
+
+  return storage
+}
+
+afterEach(() => {
+  window.matchMedia = originalMatchMedia
+  Object.defineProperty(window, "localStorage", {
+    value: originalLocalStorage,
+    configurable: true,
+  })
+  vi.restoreAllMocks()
 })
 
 describe("MarwesProvider — root element", () => {
@@ -275,6 +374,223 @@ describe("MarwesProvider — context", () => {
 
     await fireEvent.click(screen.getByRole("button"))
     expect(onModeChange).toHaveBeenCalledWith(ThemeMode.dark)
+  })
+})
+
+describe("MarwesProvider — theme preference", () => {
+  it("resolves defaultPreference system from matchMedia", () => {
+    mockSystemMode(ThemeMode.dark)
+
+    const { container } = render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { defaultPreference: "system" },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.className).toContain("mw-theme--dark")
+    expect(screen.getByText("dark:system:dark:system")).toBeInTheDocument()
+  })
+
+  it("lets controlled preference win over concrete mode and theme.mode", () => {
+    mockSystemMode(ThemeMode.dark)
+
+    const { container } = render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              {
+                preference: "system",
+                mode: ThemeMode.light,
+                theme: { mode: ThemeMode.light },
+              },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(rootElement.className).toContain("mw-theme--dark")
+    expect(screen.getByText("dark:system:dark:system")).toBeInTheDocument()
+  })
+
+  it("sets system preference without returning system as mode", async () => {
+    mockSystemMode(ThemeMode.dark)
+
+    const { container } = render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { defaultMode: ThemeMode.light },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    const rootElement = container.firstElementChild as HTMLElement
+    expect(screen.getByText("light:light:dark:concrete")).toBeInTheDocument()
+
+    await fireEvent.click(screen.getByRole("button", { name: "system" }))
+
+    expect(rootElement.className).toContain("mw-theme--dark")
+    expect(screen.getByText("dark:system:dark:system")).toBeInTheDocument()
+    expect(screen.queryByText(/^system:/)).not.toBeInTheDocument()
+  })
+
+  it("reads stored preference after mount when storageKey is enabled", async () => {
+    mockLocalStorage({ "marwes-theme": "dark" })
+
+    const { container } = render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { storageKey: "marwes-theme", defaultMode: ThemeMode.light },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    const rootElement = container.firstElementChild as HTMLElement
+    await waitFor(() => expect(rootElement.className).toContain("mw-theme--dark"))
+    expect(screen.getByText("dark:dark:light:concrete")).toBeInTheDocument()
+  })
+
+  it("writes stored preference when setPreference is called", async () => {
+    const storage = mockLocalStorage()
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { storageKey: "marwes-theme" },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    await fireEvent.click(screen.getByRole("button", { name: "system" }))
+    expect(storage.getItem("marwes-theme")).toBe("system")
+  })
+
+  it("ignores storage read and write failures", async () => {
+    Object.defineProperty(window, "localStorage", {
+      value: {
+        getItem() {
+          throw new Error("storage unavailable")
+        },
+        setItem() {
+          throw new Error("storage unavailable")
+        },
+      },
+      configurable: true,
+    })
+
+    expect(() => {
+      render(
+        defineComponent({
+          setup() {
+            return () =>
+              h(
+                MarwesProvider,
+                { storageKey: "marwes-theme" },
+                {
+                  default: () => h(ThemePreferenceConsumer),
+                },
+              )
+          },
+        }),
+      )
+    }).not.toThrow()
+
+    await expect(
+      fireEvent.click(screen.getByRole("button", { name: "system" })),
+    ).resolves.not.toThrow()
+  })
+
+  it("updates resolved mode on system changes only while preference is system", async () => {
+    const system = mockSystemMode(ThemeMode.light)
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { defaultPreference: "system" },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    expect(screen.getByText("light:system:light:system")).toBeInTheDocument()
+
+    system.setMode(ThemeMode.dark)
+    await nextTick()
+    expect(screen.getByText("dark:system:dark:system")).toBeInTheDocument()
+
+    await fireEvent.click(screen.getByRole("button", { name: "dark preference" }))
+    expect(screen.getByText("dark:dark:dark:concrete")).toBeInTheDocument()
+
+    system.setMode(ThemeMode.light)
+    await nextTick()
+    expect(screen.getByText("dark:dark:dark:concrete")).toBeInTheDocument()
+  })
+
+  it("keeps setMode as a concrete light and dark convenience", async () => {
+    const onModeChange = vi.fn()
+    const onPreferenceChange = vi.fn()
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { onModeChange, onPreferenceChange },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    await fireEvent.click(screen.getByRole("button", { name: "dark mode" }))
+    expect(onModeChange).toHaveBeenCalledWith(ThemeMode.dark)
+    expect(onPreferenceChange).toHaveBeenCalledWith(ThemeMode.dark)
+    expect(screen.getByText("dark:dark:light:concrete")).toBeInTheDocument()
   })
 })
 

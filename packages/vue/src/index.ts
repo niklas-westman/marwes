@@ -33,6 +33,7 @@ export type {
   ResolvedTheme,
   Theme,
   ThemeInput,
+  ThemePreference,
 } from "@marwes-ui/core"
 export type { ToneName } from "@marwes-ui/core"
 
