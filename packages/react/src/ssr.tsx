@@ -3,7 +3,6 @@ import {
   createMarwesThemeScript as createCoreMarwesThemeScript,
   createMarwesThemeStyle as createCoreMarwesThemeStyle,
 } from "@marwes-ui/core"
-import * as React from "react"
 
 export type { MarwesThemeScriptOptions, MarwesThemeStyleOptions }
 
