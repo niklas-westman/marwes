@@ -1,5 +1,5 @@
 import type { ThemeInput } from "@marwes-ui/react"
-import { MarwesProvider } from "@marwes-ui/react"
+import { MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import { useState } from "react"
 
 import { GlobalStyle } from "./global-style"
@@ -24,7 +24,7 @@ import { ToastsSection } from "./sections/toasts"
 import { TypographySection } from "./sections/typography"
 
 const DEFAULT_THEME = {
-  mode: "light",
+  mode: ThemeMode.light,
   tone: "default",
   color: {
     primary: "#5B8CFF",

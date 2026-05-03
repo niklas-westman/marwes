@@ -13,7 +13,7 @@ const FAQ = [
   },
   {
     title: "Does it support dark mode?",
-    body: 'Yes. Set mode: "dark" in ThemeInput or use useThemeMode under MarwesProvider. The provider applies the dark theme class and variables.',
+    body: "Yes. Set mode to ThemeMode.dark in ThemeInput or use useThemeMode under MarwesProvider. The provider applies the dark theme class and variables.",
   },
 ] as const
 

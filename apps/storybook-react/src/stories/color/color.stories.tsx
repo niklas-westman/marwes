@@ -1,5 +1,14 @@
 import { storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
-import { Button, H2, H3, MarwesProvider, Paragraph, useTheme, useThemeMode } from "@marwes-ui/react"
+import {
+  Button,
+  H2,
+  H3,
+  MarwesProvider,
+  Paragraph,
+  ThemeMode,
+  useTheme,
+  useThemeMode,
+} from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { ColorSwatch } from "./ColorSwatch"
 
@@ -340,7 +349,7 @@ function ProviderModeSample() {
       <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
         <H2 style={{ margin: 0 }}>Provider Mode: {mode}</H2>
         <Button variant="secondary" onClick={toggleMode}>
-          Use {mode === "dark" ? "light" : "dark"} mode
+          Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
         </Button>
       </div>
       <div
@@ -458,7 +467,7 @@ export const SemanticOnly: Story = {
 
 export const ProviderModeLight: Story = {
   render: () => (
-    <MarwesProvider defaultMode="light">
+    <MarwesProvider defaultMode={ThemeMode.light}>
       <ProviderModeSample />
     </MarwesProvider>
   ),
@@ -466,7 +475,7 @@ export const ProviderModeLight: Story = {
 
 export const ProviderModeDark: Story = {
   render: () => (
-    <MarwesProvider defaultMode="dark">
+    <MarwesProvider defaultMode={ThemeMode.dark}>
       <ProviderModeSample />
     </MarwesProvider>
   ),

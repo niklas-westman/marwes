@@ -6,6 +6,7 @@ import {
 } from "../../src/theme/color-resolve"
 import { themeToCSSVars } from "../../src/theme/theme-css"
 import type { ResolvedTheme } from "../../src/theme/theme-css"
+import { ThemeMode } from "../../src/theme/theme-types"
 
 // ─── Fixture ──────────────────────────────────────────────────────────────────
 
@@ -15,7 +16,7 @@ const success = resolveColorRole("#006633")
 const warning = resolveColorRole("#FFB703")
 
 const fixture: ResolvedTheme = {
-  mode: "light",
+  mode: ThemeMode.light,
   color: {
     primary,
     secondary: resolveSecondaryRole(primary),

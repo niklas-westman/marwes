@@ -241,7 +241,7 @@ Typed tokens and helpers:
 
 ## Theme In Seconds
 
-The default Marwes theme is already active. Pass `theme` only when a brand or design file needs to change the baseline.
+The default Marwes theme is already active. If you already have a good-looking design library or brand system, pass a small typed `ThemeInput` override instead of rebuilding component CSS.
 
 ```tsx
 import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
@@ -285,24 +285,24 @@ Marwes is designed to look great from the beginning. Start with the default pres
 
 ## Light And Dark Mode
 
-MarwesProvider can own the active mode for the app. Use `useThemeMode()` anywhere under the provider to read or change it; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+MarwesProvider can own the active mode for the app. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals, then read or change the active mode with `useThemeMode()` anywhere under the provider. Every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
 
 ```tsx
-import { Button, ButtonVariant, MarwesProvider, useThemeMode } from "@marwes-ui/react"
+import { Button, ButtonVariant, MarwesProvider, ThemeMode, useThemeMode } from "@marwes-ui/react"
 
 function ThemeToggle() {
   const { mode, toggleMode } = useThemeMode()
 
   return (
     <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
-      Use {mode === "dark" ? "light" : "dark"} mode
+      Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
     </Button>
   )
 }
 
 export function App() {
   return (
-    <MarwesProvider defaultMode="light">
+    <MarwesProvider defaultMode={ThemeMode.light}>
       <ThemeToggle />
       <AppShell />
     </MarwesProvider>
@@ -320,13 +320,13 @@ import {
   Button,
   ButtonVariant,
   MarwesProvider,
+  ThemeMode,
   type ThemeInput,
-  type ThemeMode,
   useThemeMode,
 } from "@marwes-ui/react"
 
 const themeByMode = {
-  light: {
+  [ThemeMode.light]: {
     color: {
       primary: "#2457FF",
       background: "#F8FAFC",
@@ -336,7 +336,7 @@ const themeByMode = {
       focus: "#2457FF",
     },
   },
-  dark: {
+  [ThemeMode.dark]: {
     color: {
       primary: "#8BA2FF",
       background: "#0B1020",
@@ -353,13 +353,13 @@ function ThemeToggle() {
 
   return (
     <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
-      Use {mode === "dark" ? "light" : "dark"} mode
+      Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
     </Button>
   )
 }
 
 export function App() {
-  const [mode, setMode] = useState<ThemeMode>("light")
+  const [mode, setMode] = useState<ThemeMode>(ThemeMode.light)
 
   return (
     <MarwesProvider mode={mode} theme={themeByMode[mode]} onModeChange={setMode}>
@@ -370,7 +370,7 @@ export function App() {
 }
 ```
 
-Mode-specific defaults fill every omitted token, so each override can stay small. `theme={{ mode: "dark" }}` is still enough for the default dark baseline.
+Mode-specific defaults fill every omitted token, so each override can stay small. `theme={{ mode: ThemeMode.dark }}` is still enough for the default dark baseline.
 
 ## Custom Styling Tokens
 

@@ -233,7 +233,7 @@ Typed tokens and helpers:
 
 ## Theme In Seconds
 
-The default Marwes theme is already active. Pass `theme` only when a brand or design file needs to change the baseline.
+The default Marwes theme is already active. If you already have a good-looking design library or brand system, pass a small typed `ThemeInput` override instead of rebuilding component CSS.
 
 ```vue
 <script setup lang="ts">
@@ -277,30 +277,30 @@ Marwes is designed to look great from the beginning. Start with the default pres
 
 ## Light And Dark Mode
 
-MarwesProvider can own the active mode for the app. Use `useThemeMode()` anywhere under the provider to read or change it; every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+MarwesProvider can own the active mode for the app. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals, then read or change the active mode with `useThemeMode()` anywhere under the provider. Every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
 
 ```vue
 <script setup lang="ts">
-import { Button, ButtonVariant, useThemeMode } from "@marwes-ui/vue"
+import { Button, ButtonVariant, ThemeMode, useThemeMode } from "@marwes-ui/vue"
 
 const { mode, toggleMode } = useThemeMode()
 </script>
 
 <template>
   <Button :variant="ButtonVariant.secondary" @click="toggleMode">
-    Use {{ mode === "dark" ? "light" : "dark" }} mode
+    Use {{ mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark }} mode
   </Button>
 </template>
 ```
 
 ```vue
 <script setup lang="ts">
-import { MarwesProvider } from "@marwes-ui/vue"
+import { MarwesProvider, ThemeMode } from "@marwes-ui/vue"
 import ThemeToggle from "./theme-toggle.vue"
 </script>
 
 <template>
-  <MarwesProvider default-mode="light">
+  <MarwesProvider :default-mode="ThemeMode.light">
     <ThemeToggle />
     <AppShell />
   </MarwesProvider>
@@ -314,13 +314,13 @@ For a simple brand pass, override shared values once and let Marwes fill the res
 ```vue
 <script setup lang="ts">
 import { ref } from "vue"
-import { MarwesProvider, type ThemeInput, type ThemeMode } from "@marwes-ui/vue"
+import { MarwesProvider, ThemeMode, type ThemeInput } from "@marwes-ui/vue"
 import ThemeToggle from "./theme-toggle.vue"
 
-const mode = ref<ThemeMode>("light")
+const mode = ref<ThemeMode>(ThemeMode.light)
 
 const themeByMode = {
-  light: {
+  [ThemeMode.light]: {
     color: {
       primary: "#2457FF",
       background: "#F8FAFC",
@@ -330,7 +330,7 @@ const themeByMode = {
       focus: "#2457FF",
     },
   },
-  dark: {
+  [ThemeMode.dark]: {
     color: {
       primary: "#8BA2FF",
       background: "#0B1020",
@@ -355,7 +355,7 @@ function setMode(nextMode: ThemeMode) {
 </template>
 ```
 
-Mode-specific defaults fill every omitted token, so each override can stay small. `:theme="{ mode: 'dark' }"` is still enough for the default dark baseline.
+Mode-specific defaults fill every omitted token, so each override can stay small. `:theme="{ mode: ThemeMode.dark }"` is still enough for the default dark baseline.
 
 ## Custom Styling Tokens
 

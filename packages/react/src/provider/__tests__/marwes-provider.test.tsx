@@ -1,4 +1,4 @@
-import type { ResolvedTheme } from "@marwes-ui/core"
+import { type ResolvedTheme, ThemeMode } from "@marwes-ui/core"
 import { fireEvent, render, screen } from "@testing-library/react"
 import * as React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
@@ -78,7 +78,7 @@ describe("MarwesProvider — root element", () => {
 
   it("applies mw-theme--dark class when mode is dark", () => {
     const { container } = render(
-      <MarwesProvider theme={{ mode: "dark" }}>
+      <MarwesProvider theme={{ mode: ThemeMode.dark }}>
         <div />
       </MarwesProvider>,
     )
@@ -88,7 +88,7 @@ describe("MarwesProvider — root element", () => {
 
   it("applies mw-theme--dark class when defaultMode is dark", () => {
     const { container } = render(
-      <MarwesProvider defaultMode="dark">
+      <MarwesProvider defaultMode={ThemeMode.dark}>
         <div />
       </MarwesProvider>,
     )
@@ -99,7 +99,7 @@ describe("MarwesProvider — root element", () => {
 
   it("lets controlled mode win over defaultMode", () => {
     const { container } = render(
-      <MarwesProvider defaultMode="dark" mode="light">
+      <MarwesProvider defaultMode={ThemeMode.dark} mode={ThemeMode.light}>
         <div />
       </MarwesProvider>,
     )
@@ -109,7 +109,7 @@ describe("MarwesProvider — root element", () => {
 
   it("keeps theme.mode working over defaultMode", () => {
     const { container } = render(
-      <MarwesProvider defaultMode="light" theme={{ mode: "dark" }}>
+      <MarwesProvider defaultMode={ThemeMode.light} theme={{ mode: ThemeMode.dark }}>
         <div />
       </MarwesProvider>,
     )
@@ -119,7 +119,7 @@ describe("MarwesProvider — root element", () => {
 
   it("sets dark background color when mode is dark", () => {
     const { container } = render(
-      <MarwesProvider theme={{ mode: "dark" }}>
+      <MarwesProvider theme={{ mode: ThemeMode.dark }}>
         <div />
       </MarwesProvider>,
     )
@@ -152,7 +152,7 @@ describe("MarwesProvider — context", () => {
     )
     expect(themes.length).toBeGreaterThan(0)
     const captured = themes[0] as ResolvedTheme
-    expect(captured.mode).toBe("light")
+    expect(captured.mode).toBe(ThemeMode.light)
     expect(captured.color.primary.base).toBe("#2F31FC")
     expect(captured.color.primary.label).toBe("#FFFFFF")
   })
@@ -160,7 +160,7 @@ describe("MarwesProvider — context", () => {
   it("provides dark mode ResolvedTheme when mode is dark", () => {
     const themes: ResolvedTheme[] = []
     render(
-      <MarwesProvider theme={{ mode: "dark" }}>
+      <MarwesProvider theme={{ mode: ThemeMode.dark }}>
         <ThemeConsumer
           onTheme={(t) => {
             themes.push(t)
@@ -170,7 +170,7 @@ describe("MarwesProvider — context", () => {
     )
     expect(themes.length).toBeGreaterThan(0)
     const captured = themes[0] as ResolvedTheme
-    expect(captured.mode).toBe("dark")
+    expect(captured.mode).toBe(ThemeMode.dark)
     expect(captured.color.primary.base).toBe("#2F31FC")
   })
 
@@ -178,7 +178,7 @@ describe("MarwesProvider — context", () => {
     const themes: ResolvedTheme[] = []
 
     render(
-      <MarwesProvider defaultMode="dark">
+      <MarwesProvider defaultMode={ThemeMode.dark}>
         <ThemeConsumer
           onTheme={(t) => {
             themes.push(t)
@@ -187,7 +187,7 @@ describe("MarwesProvider — context", () => {
       </MarwesProvider>,
     )
 
-    expect(themes[0]?.mode).toBe("dark")
+    expect(themes[0]?.mode).toBe(ThemeMode.dark)
     expect(themes[0]?.color.background).toBe("#141414")
   })
 
@@ -221,7 +221,7 @@ describe("MarwesProvider — context", () => {
     )
 
     fireEvent.click(screen.getByRole("button"))
-    expect(onModeChange).toHaveBeenCalledWith("dark")
+    expect(onModeChange).toHaveBeenCalledWith(ThemeMode.dark)
   })
 })
 

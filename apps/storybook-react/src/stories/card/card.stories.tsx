@@ -1,5 +1,5 @@
 import { storybookLayout } from "@marwes-ui/core"
-import { Card, type CardProps, MarwesProvider } from "@marwes-ui/react"
+import { Card, type CardProps, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
@@ -96,7 +96,7 @@ export const StateMatrix: Story = {
         ))}
       </div>
 
-      <MarwesProvider theme={{ mode: "dark" }}>
+      <MarwesProvider theme={{ mode: ThemeMode.dark }}>
         <div
           style={{
             display: "grid",

@@ -1,4 +1,4 @@
-import { IconName, storybookLayout } from "@marwes-ui/core"
+import { IconName, ThemeMode, storybookLayout } from "@marwes-ui/core"
 import type { TooltipGroupProps } from "@marwes-ui/vue"
 import { MarwesProvider, TooltipGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -47,8 +47,11 @@ export const Interactive: Story = {
 export const Dark: Story = {
   render: () => ({
     components: { MarwesProvider, TooltipGroup },
+    setup() {
+      return { ThemeMode }
+    },
     template: `
-      <MarwesProvider :theme="{ mode: 'dark' }">
+      <MarwesProvider :theme="{ mode: ThemeMode.dark }">
         <div style="padding: 24px; background: #2e2e2e; border-radius: 8px;">
           <TooltipGroup content="Tooltip text" triggerLabel="Show help" :defaultOpen="true" />
         </div>

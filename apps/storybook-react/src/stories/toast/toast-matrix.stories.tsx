@@ -5,6 +5,7 @@ import {
   InfoToast,
   MarwesProvider,
   SuccessToast,
+  ThemeMode,
   Toast,
   type ToastProps,
   WarningToast,
@@ -129,7 +130,7 @@ function ToastMatrixFrame(props: {
   const isDark = props.dark ?? false
 
   return (
-    <MarwesProvider theme={{ mode: isDark ? "dark" : "light" }}>
+    <MarwesProvider theme={{ mode: isDark ? ThemeMode.dark : ThemeMode.light }}>
       <div
         style={{
           background: isDark ? "#2e2e2e" : "#ffffff",

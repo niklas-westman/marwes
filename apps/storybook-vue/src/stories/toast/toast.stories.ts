@@ -1,4 +1,4 @@
-import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
+import { ThemeMode, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { ToastProps } from "@marwes-ui/vue"
 import { MarwesProvider, Toast } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -60,7 +60,7 @@ export const AllVariants: Story = {
   render: () => ({
     components: { Toast },
     setup() {
-      return { variants: VARIANTS }
+      return { ThemeMode, variants: VARIANTS }
     },
     template: `
       <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -77,10 +77,10 @@ export const DarkVariants: Story = {
   render: () => ({
     components: { MarwesProvider, Toast },
     setup() {
-      return { variants: VARIANTS }
+      return { ThemeMode, variants: VARIANTS }
     },
     template: `
-      <MarwesProvider :theme="{ mode: 'dark' }">
+      <MarwesProvider :theme="{ mode: ThemeMode.dark }">
         <div style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: #000000; border-radius: 8px;">
           <Toast v-for="v in variants" :key="v" :variant="v">
             {{ v.charAt(0).toUpperCase() + v.slice(1) }} — Dark mode toast.

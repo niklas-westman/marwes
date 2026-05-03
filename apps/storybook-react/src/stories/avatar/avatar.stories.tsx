@@ -1,5 +1,5 @@
 import { AvatarSize, AvatarType, storybookLayout } from "@marwes-ui/core"
-import { Avatar, type AvatarProps, MarwesProvider } from "@marwes-ui/react"
+import { Avatar, type AvatarProps, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
@@ -172,7 +172,7 @@ export const AllVariants: Story = {
 
 export const DarkVariants: Story = {
   render: () => (
-    <MarwesProvider theme={{ mode: "dark" }}>
+    <MarwesProvider theme={{ mode: ThemeMode.dark }}>
       <div
         style={{
           display: "grid",

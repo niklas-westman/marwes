@@ -1,4 +1,4 @@
-import { storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
+import { ThemeMode, storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
 import { Button, H2, H3, MarwesProvider, Paragraph, useTheme, useThemeMode } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent } from "vue"
@@ -187,14 +187,14 @@ const ProviderModeSample = defineComponent({
     const theme = useTheme()
     const { mode, toggleMode } = useThemeMode()
 
-    return { mode, theme, toggleMode }
+    return { mode, theme, ThemeMode, toggleMode }
   },
   template: `
     <div style="display: flex; flex-direction: column; gap: 24px;">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
         <H2 style="margin: 0;">Provider Mode: {{ mode }}</H2>
         <Button variant="secondary" @click="toggleMode">
-          Use {{ mode === "dark" ? "light" : "dark" }} mode
+          Use {{ mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark }} mode
         </Button>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;">
@@ -264,8 +264,11 @@ export const SemanticOnly: Story = {
 export const ProviderModeLight: Story = {
   render: () => ({
     components: { MarwesProvider, ProviderModeSample },
+    setup() {
+      return { ThemeMode }
+    },
     template: `
-      <MarwesProvider default-mode="light">
+      <MarwesProvider :default-mode="ThemeMode.light">
         <ProviderModeSample />
       </MarwesProvider>
     `,
@@ -275,8 +278,11 @@ export const ProviderModeLight: Story = {
 export const ProviderModeDark: Story = {
   render: () => ({
     components: { MarwesProvider, ProviderModeSample },
+    setup() {
+      return { ThemeMode }
+    },
     template: `
-      <MarwesProvider default-mode="dark">
+      <MarwesProvider :default-mode="ThemeMode.dark">
         <ProviderModeSample />
       </MarwesProvider>
     `,

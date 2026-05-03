@@ -14,6 +14,7 @@ export {
   mwThemeVarNames,
   mwThemeVars,
   mwVar,
+  ThemeMode,
 } from "@marwes-ui/core"
 
 // Re-export core types for good DX
@@ -33,7 +34,6 @@ export type {
   ResolvedTheme,
   Theme,
   ThemeInput,
-  ThemeMode,
 } from "@marwes-ui/core"
 export type { ToneName } from "@marwes-ui/core"
 

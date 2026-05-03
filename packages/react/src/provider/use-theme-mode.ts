@@ -1,4 +1,4 @@
-import type { ThemeMode } from "@marwes-ui/core"
+import { ThemeMode } from "@marwes-ui/core"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 
@@ -21,7 +21,7 @@ export function useThemeMode(): ThemeModeContextValue {
     mode: ctx.mode,
     setMode: ctx.setMode,
     toggleMode: ctx.toggleMode,
-    isDark: ctx.mode === "dark",
-    isLight: ctx.mode === "light",
+    isDark: ctx.mode === ThemeMode.dark,
+    isLight: ctx.mode === ThemeMode.light,
   }
 }

@@ -20,7 +20,11 @@ export type ParagraphSize = "sm" | "md" | "lg"
  * - 'light': Uses light mode color defaults (dark text on light backgrounds)
  * - 'dark': Uses dark mode color defaults (light text on dark backgrounds)
  */
-export type ThemeMode = "light" | "dark"
+export const ThemeMode = {
+  light: "light",
+  dark: "dark",
+} as const
+export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode]
 
 export type Theme = {
   /**

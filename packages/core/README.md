@@ -79,19 +79,19 @@ const cssVars = themeToCSSVars(theme)
 
 React and Vue providers apply these variables to the provider root. Preset CSS consumes them across buttons, inputs, typography, cards, toasts, overlays, and layout primitives.
 
-Marwes is designed to look great from the beginning. `ThemeInput` is intentionally partial: start from the polished defaults and override only the product decisions you own.
+Marwes is designed to look great from the beginning. `ThemeInput` is intentionally partial: start from the polished defaults, map an existing design library into the tokens you own, and override only those product decisions.
 
 ```ts
-import { resolveThemeInput, type ThemeInput, type ThemeMode } from "@marwes-ui/core"
+import { resolveThemeInput, ThemeMode, type ThemeInput } from "@marwes-ui/core"
 
 const themeByMode = {
-  light: { color: { primary: "#2457FF" } },
-  dark: { color: { primary: "#8BA2FF", background: "#0B1020", text: "#F8FAFC" } },
+  [ThemeMode.light]: { color: { primary: "#2457FF" } },
+  [ThemeMode.dark]: { color: { primary: "#8BA2FF", background: "#0B1020", text: "#F8FAFC" } },
 } satisfies Record<ThemeMode, ThemeInput>
 
 const darkBrandTheme = resolveThemeInput({
-  mode: "dark",
-  ...themeByMode.dark,
+  mode: ThemeMode.dark,
+  ...themeByMode[ThemeMode.dark],
 })
 ```
 
@@ -99,10 +99,10 @@ Every omitted token is filled from the selected light or dark default, so adapte
 
 ### Light And Dark Mode Contract
 
-Core owns the `ThemeMode` contract that the React and Vue providers use for `useThemeMode()`. A mode change resolves a normal theme, swaps the provider-scoped `--mw-*` variables, and keeps the active class aligned as `mw-theme--light` or `mw-theme--dark`.
+Core owns the runtime `ThemeMode` contract that the React and Vue providers use for `useThemeMode()`. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals. A mode change resolves a normal theme, swaps the provider-scoped `--mw-*` variables, and keeps the active class aligned as `mw-theme--light` or `mw-theme--dark`.
 
 ```ts
-import { resolveThemeInput, themeToCSSVars, type ThemeMode } from "@marwes-ui/core"
+import { resolveThemeInput, themeToCSSVars, ThemeMode } from "@marwes-ui/core"
 
 function resolveMode(mode: ThemeMode) {
   const theme = resolveThemeInput({ mode })
@@ -113,7 +113,7 @@ function resolveMode(mode: ThemeMode) {
   }
 }
 
-resolveMode("dark")
+resolveMode(ThemeMode.dark)
 // {
 //   className: "mw-theme--dark",
 //   cssVars: { "--mw-color-background": "#141414", ... }

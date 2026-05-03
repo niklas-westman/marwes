@@ -1,4 +1,4 @@
-import { IconName, storybookLayout } from "@marwes-ui/core"
+import { IconName, ThemeMode, storybookLayout } from "@marwes-ui/core"
 import type { ToastProps } from "@marwes-ui/vue"
 import {
   ErrorToast,
@@ -96,11 +96,12 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
         matrixEntries: MATRIX_ENTRIES,
         matrixToastClassName,
         title: args.title,
+        ThemeMode,
         toastVariants: TOAST_VARIANTS,
       }
     },
     template: `
-      <MarwesProvider :theme="{ mode: dark ? 'dark' : 'light' }">
+      <MarwesProvider :theme="{ mode: dark ? ThemeMode.dark : ThemeMode.light }">
         <div :style="{
           background: dark ? '#2e2e2e' : '#ffffff',
           color: dark ? '#f9fafb' : '#141414',

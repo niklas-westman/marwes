@@ -1,5 +1,5 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { MarwesProvider, Toast } from "@marwes-ui/react"
+import { MarwesProvider, ThemeMode, Toast } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import type * as React from "react"
 
@@ -62,7 +62,7 @@ export const AllVariants: Story = {
 
 export const DarkVariants: Story = {
   render: () => (
-    <MarwesProvider theme={{ mode: "dark" }}>
+    <MarwesProvider theme={{ mode: ThemeMode.dark }}>
       <div
         style={{
           display: "flex",

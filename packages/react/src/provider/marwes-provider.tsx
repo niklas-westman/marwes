@@ -1,5 +1,5 @@
 import type { FontLoadingConfig, ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
-import { resolveThemeInput } from "@marwes-ui/core"
+import { ThemeMode as MwThemeMode, resolveThemeInput } from "@marwes-ui/core"
 import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
@@ -15,7 +15,7 @@ export type MarwesProviderProps = {
 
 export function MarwesProvider({
   theme,
-  defaultMode = "light",
+  defaultMode = MwThemeMode.light,
   mode: controlledMode,
   fontLoading = "auto",
   onModeChange,
@@ -38,7 +38,7 @@ export function MarwesProvider({
   )
 
   const toggleMode = React.useCallback(() => {
-    setMode(activeMode === "dark" ? "light" : "dark")
+    setMode(activeMode === MwThemeMode.dark ? MwThemeMode.light : MwThemeMode.dark)
   }, [activeMode, setMode])
 
   const resolved: ResolvedTheme = React.useMemo(

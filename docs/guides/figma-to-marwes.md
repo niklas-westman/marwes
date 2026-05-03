@@ -102,8 +102,8 @@ Each role produces 6 CSS variables. Labels are auto-derived via WCAG contrast by
 
 ### Dark Mode
 Dark mode is built in via `ThemeInput.mode`:
-- `mode: "light"` (default) — dark text on light backgrounds
-- `mode: "dark"` — light text on dark backgrounds
+- `mode: ThemeMode.light` (default) — dark text on light backgrounds
+- `mode: ThemeMode.dark` — light text on dark backgrounds
 
 Surface/text colors swap automatically based on mode defaults. Color roles re-derive with mode-appropriate lightness shifts.
 
@@ -213,8 +213,10 @@ Required Figma tokens:
 When an AI agent receives graphical design data, it should generate `ThemeInput` first:
 
 ```ts
+import { ThemeMode } from "@marwes-ui/core"
+
 const theme = {
-  mode: "light",
+  mode: ThemeMode.light,
   color: {
     primary: "#5B8CFF",
     background: "#FFFFFF",

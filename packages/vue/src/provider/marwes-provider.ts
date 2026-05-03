@@ -1,5 +1,5 @@
 import type { FontLoadingConfig, ResolvedTheme, ThemeInput, ThemeMode } from "@marwes-ui/core"
-import { resolveThemeInput } from "@marwes-ui/core"
+import { ThemeMode as MwThemeMode, resolveThemeInput } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, provide, ref, watch } from "vue"
 import { marwesContextKey } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
@@ -18,7 +18,7 @@ export const MarwesProvider = defineComponent({
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps
 
-    const internalMode = ref<ThemeMode>(props.defaultMode ?? "light")
+    const internalMode = ref<ThemeMode>(props.defaultMode ?? MwThemeMode.light)
     const activeMode = computed<ThemeMode>(
       () => props.mode ?? props.theme?.mode ?? internalMode.value,
     )
@@ -40,7 +40,7 @@ export const MarwesProvider = defineComponent({
     }
 
     function toggleMode() {
-      setMode(activeMode.value === "dark" ? "light" : "dark")
+      setMode(activeMode.value === MwThemeMode.dark ? MwThemeMode.light : MwThemeMode.dark)
     }
 
     function syncThemeToRuntime() {

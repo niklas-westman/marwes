@@ -1,7 +1,7 @@
 import { normalizeColorInput, resolveInfoRole, resolveSecondaryRole } from "./color-resolve"
 import type { ResolvedTheme } from "./theme-css"
 import { darkThemeDefaults, lightThemeDefaults } from "./theme-defaults"
-import type { ThemeInput } from "./theme-types"
+import { type ThemeInput, ThemeMode } from "./theme-types"
 import { resolveTone } from "./tone"
 
 /**
@@ -14,8 +14,8 @@ import { resolveTone } from "./tone"
  * This ensures user-supplied values always win over tone defaults.
  */
 export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
-  const mode = input.mode ?? "light"
-  const colorBase = mode === "dark" ? darkThemeDefaults.color : lightThemeDefaults.color
+  const mode = input.mode ?? ThemeMode.light
+  const colorBase = mode === ThemeMode.dark ? darkThemeDefaults.color : lightThemeDefaults.color
   const base = lightThemeDefaults
 
   const tone = resolveTone(input.tone ?? "default")

@@ -1,5 +1,5 @@
 import type { ResolvedTheme } from "@marwes-ui/core"
-import { resolveThemeInput } from "@marwes-ui/core"
+import { ThemeMode, resolveThemeInput } from "@marwes-ui/core"
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
@@ -89,7 +89,7 @@ describe("MarwesProvider — root element", () => {
   it("applies mw-theme--dark class when mode is dark", () => {
     const { container } = render(MarwesProvider, {
       props: {
-        theme: { mode: "dark" },
+        theme: { mode: ThemeMode.dark },
       },
       slots: {
         default: () => h("div"),
@@ -103,7 +103,7 @@ describe("MarwesProvider — root element", () => {
   it("applies mw-theme--dark class when defaultMode is dark", () => {
     const { container } = render(MarwesProvider, {
       props: {
-        defaultMode: "dark",
+        defaultMode: ThemeMode.dark,
       },
       slots: {
         default: () => h("div"),
@@ -118,8 +118,8 @@ describe("MarwesProvider — root element", () => {
   it("lets controlled mode win over defaultMode", () => {
     const { container } = render(MarwesProvider, {
       props: {
-        defaultMode: "dark",
-        mode: "light",
+        defaultMode: ThemeMode.dark,
+        mode: ThemeMode.light,
       },
       slots: {
         default: () => h("div"),
@@ -133,8 +133,8 @@ describe("MarwesProvider — root element", () => {
   it("keeps theme.mode working over defaultMode", () => {
     const { container } = render(MarwesProvider, {
       props: {
-        defaultMode: "light",
-        theme: { mode: "dark" },
+        defaultMode: ThemeMode.light,
+        theme: { mode: ThemeMode.dark },
       },
       slots: {
         default: () => h("div"),
@@ -168,7 +168,7 @@ describe("MarwesProvider — context", () => {
     )
 
     expect(capturedThemes.length).toBeGreaterThan(0)
-    expect(capturedThemes[0]?.mode).toBe("light")
+    expect(capturedThemes[0]?.mode).toBe(ThemeMode.light)
     expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
     expect(capturedThemes[0]?.color.primary.label).toBe("#FFFFFF")
   })
@@ -188,7 +188,7 @@ describe("MarwesProvider — context", () => {
           return () =>
             h(
               MarwesProvider,
-              { theme: { mode: "dark" } },
+              { theme: { mode: ThemeMode.dark } },
               {
                 default: () => h(ConsumerComponent),
               },
@@ -198,7 +198,7 @@ describe("MarwesProvider — context", () => {
     )
 
     expect(capturedThemes.length).toBeGreaterThan(0)
-    expect(capturedThemes[0]?.mode).toBe("dark")
+    expect(capturedThemes[0]?.mode).toBe(ThemeMode.dark)
     expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
   })
 
@@ -217,7 +217,7 @@ describe("MarwesProvider — context", () => {
           return () =>
             h(
               MarwesProvider,
-              { defaultMode: "dark" },
+              { defaultMode: ThemeMode.dark },
               {
                 default: () => h(ConsumerComponent),
               },
@@ -226,7 +226,7 @@ describe("MarwesProvider — context", () => {
       }),
     )
 
-    expect(capturedThemes[0]?.mode).toBe("dark")
+    expect(capturedThemes[0]?.mode).toBe(ThemeMode.dark)
     expect(capturedThemes[0]?.color.background).toBe("#141414")
   })
 
@@ -274,7 +274,7 @@ describe("MarwesProvider — context", () => {
     )
 
     await fireEvent.click(screen.getByRole("button"))
-    expect(onModeChange).toHaveBeenCalledWith("dark")
+    expect(onModeChange).toHaveBeenCalledWith(ThemeMode.dark)
   })
 })
 

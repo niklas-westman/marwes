@@ -1,5 +1,5 @@
 import { AvatarSize, storybookLayout } from "@marwes-ui/core"
-import { AvatarBadge, MarwesProvider } from "@marwes-ui/react"
+import { AvatarBadge, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { AvatarBadgeProps } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -64,7 +64,7 @@ export const AllSizes: Story = {
 
 export const DarkSizes: Story = {
   render: () => (
-    <MarwesProvider theme={{ mode: "dark" }}>
+    <MarwesProvider theme={{ mode: ThemeMode.dark }}>
       <div
         style={{
           display: "flex",

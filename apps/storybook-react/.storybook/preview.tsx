@@ -1,10 +1,10 @@
-import type { ThemeMode } from "@marwes-ui/core"
+import { ThemeMode } from "@marwes-ui/core"
 import { MarwesProvider } from "@marwes-ui/react"
 import type { Decorator, Preview } from "@storybook/react"
 
 const withMarwes: Decorator = (Story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
-  const mode: ThemeMode = storybookTheme === "dark" ? "dark" : "light"
+  const mode: ThemeMode = storybookTheme === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
 
   return (
     <MarwesProvider theme={{ mode }}>
@@ -12,7 +12,7 @@ const withMarwes: Decorator = (Story, context) => {
         style={{
           minHeight: "100vh",
           padding: 24,
-          background: mode === "dark" ? "#000000" : "#ffffff",
+          background: mode === ThemeMode.dark ? "#000000" : "#ffffff",
         }}
       >
         <Story />
@@ -37,13 +37,13 @@ const preview: Preview = {
   globalTypes: {
     theme: {
       description: "Theme mode (light or dark)",
-      defaultValue: "light",
+      defaultValue: ThemeMode.light,
       toolbar: {
         title: "Theme",
         icon: "circlehollow",
         items: [
-          { value: "light", icon: "circlehollow", title: "Light" },
-          { value: "dark", icon: "circle", title: "Dark" },
+          { value: ThemeMode.light, icon: "circlehollow", title: "Light" },
+          { value: ThemeMode.dark, icon: "circle", title: "Dark" },
         ],
         dynamicTitle: true,
       },

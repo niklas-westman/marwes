@@ -1,4 +1,4 @@
-import { AvatarSize, AvatarType, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, AvatarType, ThemeMode, storybookLayout } from "@marwes-ui/core"
 import { Avatar, MarwesProvider } from "@marwes-ui/vue"
 import type { AvatarProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -162,7 +162,7 @@ export const AllVariants: Story = {
   render: () => ({
     components: { Avatar },
     setup() {
-      return { avatarPreviews }
+      return { avatarPreviews, ThemeMode }
     },
     template: `
       <div style="display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(120px, 1fr));">
@@ -177,12 +177,12 @@ export const AllVariants: Story = {
 
 export const DarkVariants: Story = {
   render: () => ({
-    components: { Avatar },
+    components: { Avatar, MarwesProvider },
     setup() {
-      return { avatarPreviews }
+      return { avatarPreviews, ThemeMode }
     },
     template: `
-      <MarwesProvider :theme="{ mode: 'dark' }">
+      <MarwesProvider :theme="{ mode: ThemeMode.dark }">
         <div style="display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(120px, 1fr)); padding: 24px; background: #2e2e2e; border-radius: 12px;">
           <div v-for="preview in avatarPreviews" :key="'dark-' + preview.label" style="display: flex; flex-direction: column; gap: 8px;">
             <span style="font-size: 12px; color: #d4d4d4;">{{ preview.label }}</span>

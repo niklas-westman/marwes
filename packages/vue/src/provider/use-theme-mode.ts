@@ -1,4 +1,4 @@
-import type { ThemeMode } from "@marwes-ui/core"
+import { ThemeMode } from "@marwes-ui/core"
 import type { ComputedRef } from "vue"
 import { computed, inject } from "vue"
 import { marwesContextKey } from "./marwes-context"
@@ -22,7 +22,7 @@ export function useThemeMode(): ThemeModeContextValue {
     mode: context.mode,
     setMode: context.setMode,
     toggleMode: context.toggleMode,
-    isDark: computed(() => context.mode.value === "dark"),
-    isLight: computed(() => context.mode.value === "light"),
+    isDark: computed(() => context.mode.value === ThemeMode.dark),
+    isLight: computed(() => context.mode.value === ThemeMode.light),
   }
 }

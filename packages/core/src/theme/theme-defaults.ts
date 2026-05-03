@@ -1,4 +1,4 @@
-import type { Theme } from "./theme-types"
+import { type Theme, ThemeMode } from "./theme-types"
 
 /**
  * Light theme defaults (default mode).
@@ -6,7 +6,7 @@ import type { Theme } from "./theme-types"
  * Colors mapped from Figma design tokens (node 1:120).
  */
 export const lightThemeDefaults: Theme = {
-  mode: "light",
+  mode: ThemeMode.light,
 
   color: {
     // Primary (firstEdition brand blue)
@@ -92,7 +92,7 @@ export const lightThemeDefaults: Theme = {
  * Colors are inverted from light theme for optimal dark mode experience.
  */
 export const darkThemeDefaults: Theme = {
-  mode: "dark",
+  mode: ThemeMode.dark,
 
   color: {
     // Primary — firstEdition brand blue in dark mode as well

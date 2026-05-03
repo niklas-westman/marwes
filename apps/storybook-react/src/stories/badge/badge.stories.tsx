@@ -1,5 +1,5 @@
 import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
-import { Badge, MarwesProvider } from "@marwes-ui/react"
+import { Badge, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
 
@@ -60,7 +60,7 @@ export const DarkVariants: Story = {
     const { children: _children, id: _id, variant: _variant, ...sharedBadgeProps } = args
 
     return (
-      <MarwesProvider theme={{ mode: "dark" }}>
+      <MarwesProvider theme={{ mode: ThemeMode.dark }}>
         <div
           style={{
             display: "flex",
