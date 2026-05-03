@@ -358,6 +358,26 @@ export function App() {
 
 This layer does not provide SSR no-flash behavior. Server output can still render the fallback mode before the client applies a stored or system preference. Use it for client-side preference and persistence, not for a no-flash SSR guarantee.
 
+### Root Target Sync
+
+By default Marwes keeps theme state scoped to the provider element. If your app shell also needs the resolved mode on `html` or `body`, set `target` and `attribute`:
+
+```tsx
+<MarwesProvider
+  defaultPreference="system"
+  storageKey="marwes-theme"
+  target="html"
+  attribute="class"
+  disableTransitionOnChange
+>
+  <AppShell />
+</MarwesProvider>
+```
+
+`target` can be `"provider"`, `"html"`, or `"body"`. `attribute` can be `"class"`, `"data-theme"`, or `"data-mode"`. Class mode only adds the active `light` / `dark` class and removes the opposite one; unrelated classes are preserved. The provider root still keeps `mw-theme--light` / `mw-theme--dark` and provider-scoped `--mw-*` variables in every target mode.
+
+Use one global-target provider per app shell. If multiple providers target `html` or `body`, deciding which provider owns that global element is app-owned behavior.
+
 For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
 
 ```tsx

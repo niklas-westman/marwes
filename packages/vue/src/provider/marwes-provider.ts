@@ -15,11 +15,14 @@ import { computed, defineComponent, h, onMounted, onUnmounted, provide, ref, wat
 import { marwesContextKey } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
 import {
+  applyModeAttribute,
   getSystemThemeMode,
   readStoredThemePreference,
   subscribeToSystemThemeMode,
+  withoutModeTransitions,
   writeStoredThemePreference,
 } from "./theme-mode-runtime"
+import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime"
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
@@ -32,6 +35,9 @@ export type MarwesProviderProps = {
   onModeChange?: (mode: ThemeMode) => void
   storageKey?: string | false
   enableSystem?: boolean
+  target?: ThemeTarget
+  attribute?: ThemeAttribute
+  disableTransitionOnChange?: boolean
 }
 
 export const MarwesProvider = defineComponent({
@@ -47,6 +53,9 @@ export const MarwesProvider = defineComponent({
     "onModeChange",
     "storageKey",
     "enableSystem",
+    "target",
+    "attribute",
+    "disableTransitionOnChange",
   ],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps
@@ -59,6 +68,9 @@ export const MarwesProvider = defineComponent({
     )
     const enableSystem = computed(() => props.enableSystem !== false)
     const storageKey = computed(() => props.storageKey ?? false)
+    const target = computed<ThemeTarget>(() => props.target ?? "provider")
+    const attribute = computed<ThemeAttribute>(() => props.attribute ?? "class")
+    const disableTransitionOnChange = computed(() => props.disableTransitionOnChange === true)
     const isPreferenceControlled = computed(
       () =>
         props.preference !== undefined ||
@@ -103,6 +115,26 @@ export const MarwesProvider = defineComponent({
       loadThemeFonts(resolved.value, props.fontLoading ?? "auto")
     }
 
+    function syncTargetModeAttribute() {
+      if (target.value === "provider") return
+
+      const apply = () => {
+        applyModeAttribute({
+          target: target.value,
+          providerElement: rootRef.value,
+          mode: activeMode.value,
+          attribute: attribute.value,
+        })
+      }
+
+      if (disableTransitionOnChange.value) {
+        withoutModeTransitions(apply)
+        return
+      }
+
+      apply()
+    }
+
     let unsubscribeSystemThemeMode: (() => void) | undefined
 
     function syncSystemThemeSubscription() {
@@ -131,11 +163,13 @@ export const MarwesProvider = defineComponent({
 
       syncSystemThemeSubscription()
       syncThemeToRuntime()
+      syncTargetModeAttribute()
     })
     onUnmounted(() => {
       unsubscribeSystemThemeMode?.()
     })
     watch(resolved, syncThemeToRuntime)
+    watch([activeMode, target, attribute, disableTransitionOnChange], syncTargetModeAttribute)
     watch([activePreference, enableSystem], syncSystemThemeSubscription)
 
     provide(marwesContextKey, {
