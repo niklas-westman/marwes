@@ -120,6 +120,15 @@ afterEach(() => {
     value: originalLocalStorage,
     configurable: true,
   })
+  document.documentElement.className = ""
+  document.body.className = ""
+  document.documentElement.removeAttribute("data-theme")
+  document.documentElement.removeAttribute("data-mode")
+  document.body.removeAttribute("data-theme")
+  document.body.removeAttribute("data-mode")
+  for (const style of document.head.querySelectorAll("[data-marwes-disable-transitions]")) {
+    style.remove()
+  }
   vi.restoreAllMocks()
 })
 
@@ -234,6 +243,86 @@ describe("MarwesProvider — root element", () => {
     )
     const root = container.firstElementChild as HTMLElement
     expect(root.style.backgroundColor).toBe("rgb(255, 255, 255)")
+  })
+
+  it("keeps default provider target scoped to the provider root", () => {
+    const { container } = render(
+      <MarwesProvider defaultMode={ThemeMode.dark}>
+        <div />
+      </MarwesProvider>,
+    )
+
+    const root = container.firstElementChild as HTMLElement
+    expect(root.className).toContain("mw-theme--dark")
+    expect(document.documentElement.classList.contains("dark")).toBe(false)
+    expect(document.body.classList.contains("dark")).toBe(false)
+  })
+
+  it("syncs html class target and preserves unrelated classes", () => {
+    document.documentElement.className = "app-shell dark"
+
+    const { container } = render(
+      <MarwesProvider target="html" defaultMode={ThemeMode.light}>
+        <ThemeModeConsumer />
+      </MarwesProvider>,
+    )
+
+    const root = container.firstElementChild as HTMLElement
+    expect(root.className).toContain("mw-theme--light")
+    expect(document.documentElement.classList.contains("app-shell")).toBe(true)
+    expect(document.documentElement.classList.contains("light")).toBe(true)
+    expect(document.documentElement.classList.contains("dark")).toBe(false)
+
+    fireEvent.click(screen.getByRole("button"))
+    expect(root.className).toContain("mw-theme--dark")
+    expect(document.documentElement.classList.contains("app-shell")).toBe(true)
+    expect(document.documentElement.classList.contains("dark")).toBe(true)
+    expect(document.documentElement.classList.contains("light")).toBe(false)
+  })
+
+  it("syncs body data attribute target on mode changes", () => {
+    document.body.className = "app-body"
+
+    render(
+      <MarwesProvider target="body" attribute="data-mode" defaultMode={ThemeMode.dark}>
+        <ThemeModeConsumer />
+      </MarwesProvider>,
+    )
+
+    expect(document.body.classList.contains("app-body")).toBe(true)
+    expect(document.body.getAttribute("data-mode")).toBe("dark")
+
+    fireEvent.click(screen.getByRole("button"))
+    expect(document.body.classList.contains("app-body")).toBe(true)
+    expect(document.body.getAttribute("data-mode")).toBe("light")
+  })
+
+  it("supports data-theme attribute target", () => {
+    render(
+      <MarwesProvider target="html" attribute="data-theme" defaultMode={ThemeMode.dark}>
+        <div />
+      </MarwesProvider>,
+    )
+
+    expect(document.documentElement.getAttribute("data-theme")).toBe("dark")
+  })
+
+  it("inserts and removes transition suppression style when requested", () => {
+    const callbacks: FrameRequestCallback[] = []
+    vi.spyOn(window, "requestAnimationFrame").mockImplementation((callback) => {
+      callbacks.push(callback)
+      return callbacks.length
+    })
+
+    render(
+      <MarwesProvider target="html" disableTransitionOnChange>
+        <div />
+      </MarwesProvider>,
+    )
+
+    expect(document.head.querySelector("[data-marwes-disable-transitions]")).not.toBeNull()
+    callbacks.shift()?.(0)
+    expect(document.head.querySelector("[data-marwes-disable-transitions]")).toBeNull()
   })
 })
 

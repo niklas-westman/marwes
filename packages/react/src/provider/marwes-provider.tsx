@@ -15,11 +15,14 @@ import * as React from "react"
 import { MarwesContext } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
 import {
+  applyModeAttribute,
   getSystemThemeMode,
   readStoredThemePreference,
   subscribeToSystemThemeMode,
+  withoutModeTransitions,
   writeStoredThemePreference,
 } from "./theme-mode-runtime"
+import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime"
 
 export type MarwesProviderProps = {
   theme?: ThemeInput
@@ -32,6 +35,9 @@ export type MarwesProviderProps = {
   onModeChange?: (mode: ThemeMode) => void
   storageKey?: string | false
   enableSystem?: boolean
+  target?: ThemeTarget
+  attribute?: ThemeAttribute
+  disableTransitionOnChange?: boolean
   children: React.ReactNode
 }
 
@@ -46,6 +52,9 @@ export function MarwesProvider({
   onModeChange,
   storageKey = false,
   enableSystem = true,
+  target = "provider",
+  attribute = "class",
+  disableTransitionOnChange = false,
   children,
 }: MarwesProviderProps) {
   const rootRef = React.useRef<HTMLDivElement>(null)
@@ -122,6 +131,26 @@ export function MarwesProvider({
       applyThemeToElement(rootRef.current, resolved)
     }
   }, [resolved])
+
+  React.useEffect(() => {
+    if (target === "provider") return
+
+    const apply = () => {
+      applyModeAttribute({
+        target,
+        providerElement: rootRef.current,
+        mode: activeMode,
+        attribute,
+      })
+    }
+
+    if (disableTransitionOnChange) {
+      withoutModeTransitions(apply)
+      return
+    }
+
+    apply()
+  }, [activeMode, attribute, disableTransitionOnChange, target])
 
   React.useEffect(() => {
     loadThemeFonts(resolved, fontLoading)
