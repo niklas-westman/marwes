@@ -122,6 +122,23 @@ resolveMode(ThemeMode.dark)
 
 Most apps should use `useThemeMode()` from `@marwes-ui/react` or `@marwes-ui/vue`. Core is the framework-agnostic piece that makes the resolved variables and mode classes consistent across adapters.
 
+### SSR Theme Rules
+
+SSR adapters can use the same core theme engine to emit light and dark CSS variable rules before hydration. These helpers are pure string utilities; React and Vue expose framework-specific SSR helpers on top.
+
+```ts
+import { ThemeMode, resolveThemeInput, themeModesToCSSRules } from "@marwes-ui/core"
+
+const css = themeModesToCSSRules({
+  light: resolveThemeInput({ mode: ThemeMode.light }),
+  dark: resolveThemeInput({ mode: ThemeMode.dark }),
+  rootTarget: "html",
+  rootAttribute: "class",
+})
+```
+
+The generated rules target `[data-marwes-theme][data-marwes-mode="light"]` and `[data-marwes-theme][data-marwes-mode="dark"]`. When `rootTarget` is provided, matching `html.light` / `html.dark` or data-attribute selectors are included so a pre-hydration script can switch the resolved mode before provider roots hydrate.
+
 ## Theme Variables
 
 Marwes components are styled by CSS custom properties on the `MarwesProvider` root. The theme variable helpers expose that same token surface to application code, adapters, and tooling without creating a second runtime theme system.
@@ -234,6 +251,10 @@ This is intentionally practical. A destructive action can carry `data-destructiv
 Theme:
 - `resolveThemeInput`
 - `themeToCSSVars`
+- `themeToCSSRule`
+- `themeModesToCSSRules`
+- `createMarwesThemeScript`
+- `createMarwesThemeStyle`
 - `mwThemeVars`
 - `mwThemeVarNames`
 - `mwStyledTheme`

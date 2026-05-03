@@ -20,6 +20,7 @@ export function themeToRootStyle(theme: ResolvedTheme): Record<string, string> {
 
 export function applyThemeToElement(element: HTMLElement, theme: ResolvedTheme): void {
   element.setAttribute("data-marwes-theme", "true")
+  element.setAttribute("data-marwes-mode", theme.mode)
 
   for (const [property, value] of Object.entries(themeToRootStyle(theme))) {
     if (property === "backgroundColor") {

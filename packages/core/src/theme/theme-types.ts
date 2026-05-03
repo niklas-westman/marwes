@@ -26,6 +26,7 @@ export const ThemeMode = {
 } as const
 export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode]
 export type ThemePreference = ThemeMode | "system"
+export type ThemeVariableStrategy = "inline" | "style-tag"
 
 export type Theme = {
   /**

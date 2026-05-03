@@ -393,6 +393,12 @@ Marwes is compatible with Tailwind and shadcn-style dark variants through `targe
 
 Read the [Tailwind and shadcn integration guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/tailwind-shadcn-integration.md) for Tailwind v3/v4 examples, token mapping, provider-scoped variable limits, and the SSR no-flash boundary.
 
+### Nuxt SSR
+
+Use `createMarwesThemeStyle()`, `createMarwesThemeScript()`, and `variable-strategy="style-tag"` when a server-rendered app needs the correct light or dark variables before hydration. This is opt-in; normal Vue apps keep inline provider variables by default.
+
+Read the [theme SSR no-flash guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/theme-ssr-no-flash.md) for Nuxt setup, CSP nonces, hydration warning guidance, custom light/dark themes, and stored/system preference behavior.
+
 For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
 
 ```vue

@@ -3,6 +3,7 @@ export type {
   ThemeInput,
   ThemeInputColor,
   ThemePreference,
+  ThemeVariableStrategy,
   ColorInput,
   ColorRole,
   SecondaryColorRole,
@@ -16,10 +17,21 @@ export {
   nextThemeMode,
   resolveThemePreference,
 } from "./theme/theme-mode"
+export type { MarwesThemeScriptOptions, MarwesThemeStyleOptions } from "./theme/theme-ssr"
+export {
+  createMarwesThemeScript,
+  createMarwesThemeStyle,
+  resolveServerThemeMode,
+} from "./theme/theme-ssr"
 export { lightThemeDefaults, darkThemeDefaults } from "./theme/theme-defaults"
 export { resolveThemeInput } from "./theme/theme-normalize"
-export type { ResolvedTheme } from "./theme/theme-css"
-export { themeToCSSVars } from "./theme/theme-css"
+export type {
+  ResolvedTheme,
+  ThemeModeAttribute,
+  ThemeModeCSSRulesOptions,
+  ThemeModeRootTarget,
+} from "./theme/theme-css"
+export { themeModesToCSSRules, themeToCSSRule, themeToCSSVars } from "./theme/theme-css"
 export type {
   MwStyledTheme,
   MwThemeVarName,

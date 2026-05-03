@@ -6,6 +6,18 @@ export { useTheme } from "./provider/use-theme"
 export { useThemeMode } from "./provider/use-theme-mode"
 export type { ThemeModeContextValue } from "./provider/use-theme-mode"
 export {
+  MarwesThemeScript,
+  MarwesThemeStyle,
+  createMarwesThemeScript,
+  createMarwesThemeStyle,
+} from "./ssr"
+export type {
+  MarwesThemeScriptOptions,
+  MarwesThemeScriptProps,
+  MarwesThemeStyleOptions,
+  MarwesThemeStyleProps,
+} from "./ssr"
+export {
   createFontStack,
   mwAvailableFonts,
   mwFontFallbacks,
@@ -34,7 +46,10 @@ export type {
   ResolvedTheme,
   Theme,
   ThemeInput,
+  ThemeModeAttribute,
+  ThemeModeRootTarget,
   ThemePreference,
+  ThemeVariableStrategy,
 } from "@marwes-ui/core"
 export type { ToneName } from "@marwes-ui/core"
 
