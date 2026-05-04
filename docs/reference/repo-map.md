@@ -53,6 +53,7 @@ graph TD
 
 ## Primary validation commands
 
+- `pnpm help:repo`
 - `pnpm check:changed`
 - `pnpm check:adapter-boundaries`
 - `pnpm validate:family <family>`
@@ -60,6 +61,7 @@ graph TD
 - `pnpm validate:packages`
 - `pnpm validate:release`
 - `pnpm registry:check`
+- `pnpm parity:summary:check`
 - `pnpm docs:links`
 
 ## Authority order

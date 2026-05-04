@@ -229,9 +229,9 @@ Priority: **P0 before merge**
 
 ### P2 — Later polish
 
-- [ ] Consider `pnpm help:repo` to print the same route model as `start-here.md`.
-- [ ] Split or slim `docs/reference/spec.md` only if contributors keep getting lost there.
-- [ ] Generate a parity summary from exports/stories/registry data.
+- [x] Consider `pnpm help:repo` to print the same route model as `start-here.md`.
+- [x] Split or slim `docs/reference/spec.md` only if contributors keep getting lost there.
+- [x] Generate a parity summary from exports/stories/registry data.
 
 ## Suggested target architecture for docs
 
@@ -278,3 +278,13 @@ Completed in the P1 simplification pass:
 - added `scripts/check-repo-map-coverage.mjs` and `pnpm check:repo-map`
 - `pnpm validate:docs` now includes repo-map coverage
 - registry family template now captures family-specific adapter parity expectations without duplicating generic rules
+
+## P2 implementation note
+
+Completed in the P2 polish pass:
+
+- added `pnpm help:repo` as a terminal version of the singular route model
+- added generated `docs/reference/framework-parity-summary.md` from `artifacts/framework-parity.json`
+- added `pnpm parity:summary` and `pnpm parity:summary:check`
+- `pnpm validate:docs` now checks the generated parity summary
+- `docs/reference/spec.md` now explicitly points newcomers back to `docs/start-here.md` instead of acting as the onboarding route

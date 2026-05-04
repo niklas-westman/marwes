@@ -79,6 +79,7 @@ Use the playground for:
 Use the smallest gate that matches the risk of the change, then move upward when the branch gets closer to review.
 
 ```bash
+pnpm help:repo                     # print the singular repo route model
 pnpm check:changed                 # quick changed-scope gate against origin/main
 pnpm check:changed -- --base main  # same gate against a different base
 pnpm validate:family button        # full family path for one component family
@@ -98,6 +99,8 @@ pnpm format:all
 pnpm test
 pnpm build
 pnpm check:adapter-boundaries
+pnpm check:repo-map
+pnpm parity:summary:check
 ```
 
 ### Focused package tests

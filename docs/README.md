@@ -54,6 +54,7 @@ graph TD
   Reference --> Governance[governance.md]
   Reference --> Testing[testing.md]
   Reference --> FamilyValidation[family-validation.md]
+  Reference --> FrameworkParity[framework-parity-summary.md]
 
   Guides --> Vite[vite.md]
   Guides --> Next[next.md]
@@ -87,6 +88,7 @@ Long-lived, canonical project docs.
 - [Governance](./reference/governance.md) — local and CI trust gates, artifacts, and release discipline
 - [Testing](./reference/testing.md) — test layers, commands, and expectations
 - [Family Validation](./reference/family-validation.md) — focused per-family workflow and master validation commands
+- [Framework Parity Summary](./reference/framework-parity-summary.md) — generated compact view of the current framework parity artifact
 
 ### Guides
 Practical how-to documents.

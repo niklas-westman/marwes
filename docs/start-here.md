@@ -150,6 +150,12 @@ pnpm check:changed
 
 It detects changed docs/source/families, runs the relevant focused checks, and finishes with `git diff --check`.
 
+If you want this routing model in the terminal, run:
+
+```bash
+pnpm help:repo
+```
+
 ## Where to zoom out
 
 - [Architecture](./reference/architecture.md) — the core principle

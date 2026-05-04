@@ -18,6 +18,7 @@ const requiredPaths = [
 ]
 
 const requiredCommands = [
+  "help:repo",
   "check:changed",
   "check:adapter-boundaries",
   "validate:family",
@@ -25,6 +26,7 @@ const requiredCommands = [
   "validate:packages",
   "validate:release",
   "registry:check",
+  "parity:summary:check",
   "docs:links",
 ]
 
