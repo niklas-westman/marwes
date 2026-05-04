@@ -11,13 +11,6 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 
 ## Read order
 
-### Building an app
-
-1. [Vite setup](./guides/vite.md)
-2. [Next.js setup](./guides/next.md)
-3. [Your First Marwes Screen](./guides/your-first-screen.md)
-4. [Blocks](./blocks/README.md)
-
 ### Changing Marwes itself
 
 1. [Want to contribute?](./want-to-contribute.md)
@@ -47,7 +40,6 @@ graph TD
   Docs --> Tooling[tooling/]
   Docs --> Audits[audits/]
   Docs --> Registry[registry/]
-  Docs --> Blocks[blocks/]
 
   Reference --> Architecture[architecture.md]
   Reference --> RepoMap[repo-map.md]
@@ -59,15 +51,9 @@ graph TD
   Reference --> FamilyValidation[family-validation.md]
   Reference --> FrameworkParity[framework-parity-summary.md]
 
-  Guides --> Vite[vite.md]
-  Guides --> Next[next.md]
-  Guides --> FirstScreen[your-first-screen.md]
   Guides --> Adding[adding-components.md]
   Guides --> Figma[figma-to-marwes.md]
   Guides --> Tailwind[tailwind-shadcn-integration.md]
-
-  Blocks --> BlocksIndex[README.md]
-  Blocks --> ReactBlocks[react/]
 
   Registry --> RegistryIndex[README.md]
   Registry --> ButtonRegistry[families/button/README.md]
@@ -100,28 +86,14 @@ Long-lived, canonical project docs.
 ### Guides
 Practical how-to documents.
 
-- [Vite setup](./guides/vite.md) — install Marwes in a Vite React app and build a first shell
-- [Next.js setup](./guides/next.md) — install Marwes in an App Router project, including SSR no-flash theme setup
-- [Your First Marwes Screen](./guides/your-first-screen.md) — product-shaped first screen using Marwes components and theme variables
 - [Adding Components](./guides/adding-components.md) — step-by-step workflow for introducing a new component
 - [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
 - [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md) — root dark variants and app-owned Tailwind tokens using Marwes variables
-
-### Blocks
-Copyable product patterns. Blocks are adoption material, not new package APIs.
-
-- [Blocks index](./blocks/README.md) — block rules, package-boundary expectations, and available product patterns
-- [Dashboard Shell](./blocks/react/dashboard-shell.md) — dashboard page starter
-- [Login Panel](./blocks/react/login-panel.md) — centered auth form starter
-- [Settings Form](./blocks/react/settings-form.md) — product settings form starter
-- [Empty State](./blocks/react/empty-state.md) — first-run or no-results panel
-- [Stats Grid](./blocks/react/stats-grid.md) — responsive KPI card grid
 
 ### Planning
 Active planning documents. Completed migration notes should be removed once their decisions are reflected in reference docs, registry docs, tests, or release notes.
 
 - [Release 1.0.0 hardening plan](./planning/release-1-0-0-hardening-plan.md) — release readiness checks, security posture, and validation log
-- [Milibry dashboard feedback queue](./planning/milibry-dashboard-feedback.md) — component/block candidates surfaced by using Marwes in Milibry dashboard v2
 
 ### Registry
 Family-level component knowledge base.

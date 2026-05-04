@@ -13,7 +13,7 @@ If you only read three things before opening code, read:
 Marwes is built as:
 
 ```text
-core recipe → preset CSS → framework adapters → stories/docs/blocks
+core recipe → preset CSS → framework adapters → stories/docs
 ```
 
 That means most good changes keep these boundaries clear:
@@ -23,7 +23,6 @@ That means most good changes keep these boundaries clear:
 - `packages/react` and `packages/vue` adapt the shared recipe into framework APIs.
 - `apps/storybook-*` prove examples, states, parity, and accessibility behavior.
 - `docs/registry/**`, `docs/reference/**`, and `artifacts/**` keep the repo explainable and auditable.
-- `docs/blocks/**` contains copyable product patterns, not new package APIs.
 
 ## Before you change code
 
@@ -39,7 +38,6 @@ Then pick the smallest matching path:
 |---|---|---|
 | Change a component family | [Architecture](./reference/architecture.md), [Family Validation](./reference/family-validation.md), the family registry doc | `pnpm validate:family <family>` |
 | Add or improve docs | [Repo Map](./reference/repo-map.md), relevant reference/guide page | `pnpm check:compass` or `pnpm check:repo-map` |
-| Add or improve a block | [Blocks](./blocks/README.md), [Your First Marwes Screen](./guides/your-first-screen.md) | `pnpm check:repo-map` |
 | Change generated truth | [Component Registry](./registry/README.md), [AI Metadata Protocol](./reference/ai-metadata.md) | `pnpm check:repo-map` |
 | Prepare something release-sensitive | [Governance](./reference/governance.md), [Testing](./reference/testing.md) | `pnpm validate:release` |
 
@@ -68,7 +66,6 @@ If you are not sure whether something belongs in core, presets, or an adapter, d
 - Prefer one coherent change over several partially-related edits.
 - Keep React and Vue parity visible.
 - Do not add package APIs just because one example wants a shortcut.
-- Keep blocks copyable and app-owned until a pattern repeats enough to deserve package surface.
 - Update docs in the same change when behavior or public API changes.
 - Run the smallest meaningful validation first, then a larger gate before review.
 - Stop and ask when a change would weaken accessibility, generated-truth confidence, or adapter/core boundaries.
@@ -93,7 +90,6 @@ Before a PR or handoff, at minimum run the command recommended by [Repo Map](./r
 
 - Do not put core logic in React or Vue adapters.
 - Do not let preset CSS depend on app-specific assumptions.
-- Do not treat `docs/blocks/**` as exported package API.
 - Do not leave generated artifacts stale.
 - Do not keep temporary planning docs around after a decision has moved into reference docs, registry docs, tests, or release notes.
 

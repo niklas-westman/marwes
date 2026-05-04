@@ -147,25 +147,24 @@ Recommendation:
 
 Priority: **P2**
 
-### 6. Blocks vs package API boundary
+### 6. Adoption examples vs package API boundary
 
-Status: **Keep + automate lightly**
+Status: **Split to follow-up**
 
 What works:
 
-- Blocks now explicitly say they are copyable app-owned patterns, not `@marwes-ui/*` exports.
-- `repo-map.md` repeats the promotion rule.
+- Adoption examples can be useful when they are reviewed as product examples rather than package API.
 
 Friction:
 
 - Docs examples can accidentally reference unpublished component props.
-- Block ideas can leak into package code before the API has repeated evidence.
+- Product-shaped examples can leak into repo-governance work before the API has repeated evidence.
 
 Recommendation:
 
-- Keep boundary text.
+- Keep product-shaped adoption examples on a separate branch until reviewed as examples.
 - Add docs/API drift patterns when a stale or unpublished API appears repeatedly.
-- Keep prototype package work on separate branches or explicitly mark it as prototype, not P0 adoption.
+- Keep prototype package work on separate branches or explicitly mark it as prototype.
 
 Priority: **P0**
 
@@ -240,7 +239,6 @@ README.md
   → docs/start-here.md          # human entry
       → docs/reference/repo-map.md   # spiderweb view
       → docs/reference/testing.md    # validation depth
-      → docs/blocks/README.md        # adoption blocks
       → docs/audits/status.md        # compact accessibility state
       → docs/registry/README.md      # family knowledge
 ```

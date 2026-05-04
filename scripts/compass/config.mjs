@@ -23,11 +23,6 @@ export const compassConfig = {
       command: "pnpm check:changed",
     },
     {
-      intent: "Build an app",
-      docs: "docs/start-here.md → docs/guides/vite.md or docs/guides/next.md → docs/blocks/README.md",
-      command: "pnpm check:repo-map",
-    },
-    {
       intent: "Change a component",
       docs: "docs/start-here.md → docs/reference/repo-map.md → docs/reference/family-validation.md",
       command: "pnpm validate:family <family>",
@@ -58,7 +53,6 @@ export const compassConfig = {
       "docs/reference/accessibility.md",
       "docs/audits/status.md",
       "docs/registry/README.md",
-      "docs/blocks/README.md",
       "artifacts/component-registry.json",
     ],
     requiredCommands: [
@@ -78,9 +72,8 @@ export const compassConfig = {
       "Reference docs",
       "Registry family docs",
       "Audit docs",
-      "Guides and blocks",
+      "Guides",
       "Planning docs",
-      "Blocks are not package APIs",
       "Planning docs lifecycle",
     ],
   },

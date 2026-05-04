@@ -24,7 +24,6 @@ graph TD
   Artifacts[artifacts/*.json]
   Reference[docs/reference]
   Guides[docs/guides]
-  Blocks[docs/blocks]
 
   Core --> Presets
   Core --> React
@@ -41,7 +40,6 @@ graph TD
   Audits --> Registry
   Reference --> Guides
   Reference --> Registry
-  Guides --> Blocks
 ```
 
 ## Key supporting paths
@@ -54,7 +52,6 @@ graph TD
 - `docs/reference/accessibility.md`
 - `docs/audits/status.md`
 - `docs/registry/README.md`
-- `docs/blocks/README.md`
 - `artifacts/component-registry.json`
 
 ## Primary validation commands
@@ -78,7 +75,7 @@ When two sources disagree, resolve the conflict in this order:
 2. **Reference docs** — canonical architecture, testing, accessibility, governance, and spec surfaces.
 3. **Registry family docs** — family-specific semantic, accessibility, Figma, and file topology knowledge.
 4. **Audit docs** — evidence/history from a review pass. Valuable, but not the preferred current-status surface.
-5. **Guides and blocks** — adoption and usage material. They should reflect package APIs, not create hidden APIs.
+5. **Guides** — adoption and usage material. They should reflect package APIs, not create hidden APIs.
 6. **Planning docs** — active work queues only. Promote decisions elsewhere when they become durable.
 
 ## Change matrix
@@ -94,7 +91,6 @@ When two sources disagree, resolve the conflict in this order:
 | Audit findings | `docs/audits/status.md`, registry family status, reference accessibility docs if policy changed | `pnpm check:compass` |
 | Public package API | README/package docs, guides, examples, changeset, typecheck, tests | `pnpm validate:packages` |
 | Adoption guide | Compass links and docs/API drift rules | `pnpm check:repo-map` |
-| Copyable block | block README, guide links, examples against current public API | `pnpm check:repo-map` |
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
 | Package-wide implementation | contributor guide, package docs, typecheck, builds, tests | `pnpm validate:packages` |
 | Long-lived branch smoke check | changed files, family scope, docs routing, package boundaries | `pnpm check:changed` locally, `pnpm check:changed -- --branch` before review |
@@ -112,12 +108,6 @@ Internally, that command runs `pnpm check:compass` plus the generated-truth chec
 
 The check verifies that the most important paths, commands, and routing phrases in this map still exist. It is intentionally lightweight; deeper architecture judgement still belongs in review.
 
-## Blocks are not package APIs
-
-`docs/blocks/**` contains copyable product patterns. A block may combine exported Marwes components, layout CSS, and app-owned markup, but it does not create a new Marwes API.
-
-Promote a block idea into `packages/**` only after it repeats across real surfaces and has a clear package-level contract.
-
 ## Planning docs lifecycle
 
 `docs/planning/**` should answer "what is actively being worked on?" It should not become the long-term truth source.
@@ -130,7 +120,6 @@ When planning work completes:
 
 ## Recommended routing
 
-- New app builder: start with [Vite setup](../guides/vite.md), [Next.js setup](../guides/next.md), [Your First Marwes Screen](../guides/your-first-screen.md), then [Blocks](../blocks/README.md).
 - Contributor: start with [Want to contribute?](../want-to-contribute.md), then [Architecture](./architecture.md), this repo map, and the relevant validation guide.
 - Component contributor: start with [Want to contribute?](../want-to-contribute.md), [Architecture](./architecture.md), this repo map, [Adding Components](../guides/adding-components.md), then [Family Validation](./family-validation.md).
 - Accessibility reviewer: start with [Accessibility support model](./accessibility.md), [Audit status](../audits/status.md), then the relevant family audit and [Component Registry](../registry/README.md) entry.

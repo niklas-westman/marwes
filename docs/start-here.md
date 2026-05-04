@@ -11,9 +11,7 @@ Marwes = core recipe → preset CSS → framework adapter
 
 START HERE
   ├─ contribute to Marwes
-  ├─ build an app
   ├─ change a component
-  ├─ add a block
   ├─ update docs or registry
   ├─ review accessibility
   └─ prepare release confidence
@@ -37,28 +35,9 @@ Move to `pnpm validate:family <family>`, `pnpm check:repo-map`, or `pnpm validat
 
 Stop if:
 
-- you are unsure whether logic belongs in core, presets, adapters, blocks, or app code
+- you are unsure whether logic belongs in core, presets, adapters, stories, or app code
 - React and Vue parity might drift
-- the change would create a package API from a one-off block/example need
-
-## I want to build an app with Marwes
-
-Go here:
-
-1. [Vite setup](./guides/vite.md) or [Next.js setup](./guides/next.md)
-2. [Your First Marwes Screen](./guides/your-first-screen.md)
-3. [Blocks](./blocks/README.md)
-
-Run before sharing docs/examples:
-
-```bash
-pnpm check:repo-map
-```
-
-Stop if:
-
-- an example needs a package API that does not exist yet
-- a block starts to look like reusable package surface instead of app-owned starter code
+- the change would create a package API from a one-off example need
 
 ## I want to change a component
 
@@ -85,25 +64,6 @@ Stop if:
 - React and Vue behavior drift apart
 - adapter code starts owning logic that belongs in core
 - visual language moves into adapters instead of preset CSS
-
-## I want to add or improve a block
-
-Go here:
-
-1. [Blocks](./blocks/README.md)
-2. [Your First Marwes Screen](./guides/your-first-screen.md)
-3. Existing block examples under `docs/blocks/react/`
-
-Run:
-
-```bash
-pnpm check:repo-map
-```
-
-Stop if:
-
-- the block depends on unpublished APIs
-- the block hides product-specific behavior behind a generic abstraction too early
 
 ## I want to update docs, registry, or generated truth
 
