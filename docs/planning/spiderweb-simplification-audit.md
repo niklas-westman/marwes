@@ -216,10 +216,10 @@ Priority: **P0 before merge**
 
 ### P0 — Do next
 
-- [ ] Make root `README.md` point clearly to `docs/start-here.md`.
-- [ ] Reframe `docs/README.md` as full index, not first entry.
-- [ ] Keep `start-here.md` limited to the four-command mental model.
-- [ ] Decide before merge whether temporary planning docs stay, are removed, or are promoted.
+- [x] Make root `README.md` point clearly to `docs/start-here.md`.
+- [x] Reframe `docs/README.md` as full index, not first entry.
+- [x] Keep `start-here.md` limited to the four-command mental model.
+- [x] Decide before merge whether temporary planning docs stay, are removed, or are promoted.
 
 ### P1 — Good next simplification
 
@@ -255,6 +255,15 @@ Do not add much more documentation yet. The next best improvement is **routing p
 
 1. root README routes to `docs/start-here.md`
 2. docs README becomes a pure index
-3. planning docs are either removed or promoted before merge
+3. temporary planning roadmap removed before merge; this simplification audit remains while P1/P2 work is active
 
 That gives Marwes the cleanest mental model without weakening the useful validation and evidence system.
+
+## P0 implementation note
+
+Completed in the P0 cleanup pass:
+
+- root `README.md` now points directly to `docs/start-here.md`
+- `docs/README.md` is framed as the full documentation index, not the primary entry point
+- `docs/start-here.md` remains a short four-command routing surface
+- removed `docs/planning/repo-stabilization-roadmap-temp.md` after promoting its durable outcomes into `start-here.md`, `repo-map.md`, `testing.md`, and this audit
