@@ -74,19 +74,30 @@ Use the playground for:
 
 ## Commands
 
-### Repo-wide
+### Validation presets
+
+Use the smallest gate that matches the risk of the change, then move upward when the branch gets closer to review.
 
 ```bash
-pnpm validate:release
-pnpm validate:packages
-pnpm validate:docs
+pnpm check:changed                 # quick changed-scope gate against origin/main
+pnpm check:changed -- --base main  # same gate against a different base
+pnpm validate:family button        # full family path for one component family
+pnpm validate:docs                 # docs, generated truth, registry, story taxonomy, adapter boundary guardrail
+pnpm validate:packages             # typecheck, package builds, package tests
+pnpm validate:release              # security, packages, docs, full biome check, Storybook a11y smoke
+pnpm check                         # docs + full biome check + Storybook a11y smoke
+```
+
+### Repo-wide supporting commands
+
+```bash
 pnpm validate:security
-pnpm check
 pnpm typecheck
 pnpm lint
 pnpm format:all
 pnpm test
 pnpm build
+pnpm check:adapter-boundaries
 ```
 
 ### Focused package tests
@@ -121,11 +132,14 @@ pnpm test:storybook:a11y
 
 ```mermaid
 flowchart LR
-  Change[Code change] --> Local[Run focused tests]
-  Local --> Stories[Verify in Storybook]
-  Stories --> Typecheck[Run pnpm typecheck]
-  Typecheck --> Repo[Run broader pnpm test or pnpm test:packages]
-  Repo --> Build[Run pnpm build for release-level confidence]
+  Change[Code change] --> Changed[Run pnpm check:changed]
+  Changed --> Family{Component family changed?}
+  Family -->|yes| FamilyGate[Run pnpm validate:family family]
+  Family -->|no| DocsGate[Run docs or package gate]
+  FamilyGate --> Stories[Verify in Storybook when visual behavior changed]
+  DocsGate --> Broader[Run broader package/docs gate]
+  Stories --> Broader
+  Broader --> Release[Run release-level gate before publishing]
 ```
 
 ## What good test coverage looks like
@@ -199,6 +213,30 @@ What still needs manual review for rich text:
 Rule of thumb:
 - use automated tests to protect the component contract
 - use manual review to validate the real editing experience
+
+## Changed-scope validation
+
+Use `pnpm check:changed` before opening a branch for review. It compares changed files against `origin/main`, runs the adapter/core boundary guardrail, formats/lints changed files with Biome, runs docs checks when docs changed, runs `validate:family` for detected component families, and finishes with `git diff --check`.
+
+Use a different base when needed:
+
+```bash
+pnpm check:changed -- --base main
+```
+
+This gate is intentionally pragmatic. It is not a release substitute; it is the fastest local confidence pass for branch work.
+
+## Adapter/core boundary guardrail
+
+Use `pnpm check:adapter-boundaries` when component adapter work touches architecture boundaries. The script currently checks strong constraints:
+
+- no browser/DOM globals in `packages/core/src`
+- no React imports in Vue component adapters
+- no Vue imports in React component adapters
+- no preset imports inside framework component adapters
+- no hardcoded color tokens inside framework component adapters
+
+Keep deeper judgement in [Architecture](./architecture.md) and [Repo Map](./repo-map.md).
 
 ## Family validation
 

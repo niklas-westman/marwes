@@ -53,27 +53,49 @@ export const ProfileCard = defineComponent({
   },
 })
 
-export type StatCardProps = CardProps
+export interface StatCardProps extends CardProps {
+  /** Primary metric value rendered with metric-tile semantics. */
+  value?: string | number
+  /** Supporting label or explanatory note for the metric. */
+  note?: string
+  /** Optional trend, status, or comparison content. */
+  meta?: string
+}
 
 export const StatCard = defineComponent({
   name: "MarwesStatCard",
   inheritAttrs: false,
-  props: [...cardPropKeys],
+  props: [...cardPropKeys, "value", "note", "meta"],
   setup(rawProps, { attrs, slots }) {
     const props = rawProps as unknown as StatCardProps
+    const { value, note, meta, ...cardProps } = props
 
-    return () =>
-      h(
+    return () => {
+      const hasMetricTileContent = value !== undefined || note !== undefined || meta !== undefined
+
+      return h(
         Card,
         {
           ...attrs,
-          ...props,
+          ...cardProps,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "stat-card",
           },
         },
-        slots,
+        hasMetricTileContent
+          ? {
+              default: () =>
+                h("div", { class: "mw-stat-card__metric", "data-slot": "metric-tile" }, [
+                  value !== undefined
+                    ? h("strong", { class: "mw-stat-card__value" }, String(value))
+                    : null,
+                  note !== undefined ? h("span", { class: "mw-stat-card__note" }, note) : null,
+                  meta !== undefined ? h("span", { class: "mw-stat-card__meta" }, meta) : null,
+                ]),
+            }
+          : slots,
       )
+    }
   },
 })

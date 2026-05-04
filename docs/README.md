@@ -16,16 +16,17 @@ If you are new to Marwes, start here.
 ### Changing Marwes itself
 
 1. [Architecture](./reference/architecture.md)
-2. [Specification](./reference/spec.md)
-3. [Adding Components](./guides/adding-components.md)
-4. [Figma to Marwes](./guides/figma-to-marwes.md)
-5. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
-6. [AI Metadata Protocol](./reference/ai-metadata.md)
-7. [Accessibility support model](./reference/accessibility.md)
-8. [Component Registry](./registry/README.md)
-9. [Governance](./reference/governance.md)
-10. [Testing](./reference/testing.md)
-11. [Family Validation](./reference/family-validation.md)
+2. [Repo Map](./reference/repo-map.md)
+3. [Specification](./reference/spec.md)
+4. [Adding Components](./guides/adding-components.md)
+5. [Figma to Marwes](./guides/figma-to-marwes.md)
+6. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
+7. [AI Metadata Protocol](./reference/ai-metadata.md)
+8. [Accessibility support model](./reference/accessibility.md)
+9. [Component Registry](./registry/README.md)
+10. [Governance](./reference/governance.md)
+11. [Testing](./reference/testing.md)
+12. [Family Validation](./reference/family-validation.md)
 
 ## Documentation map
 
@@ -41,6 +42,7 @@ graph TD
   Docs --> Blocks[blocks/]
 
   Reference --> Architecture[architecture.md]
+  Reference --> RepoMap[repo-map.md]
   Reference --> Spec[spec.md]
   Reference --> AIMetadata[ai-metadata.md]
   Reference --> Accessibility[accessibility.md]
@@ -64,6 +66,7 @@ graph TD
   Planning --> ReleasePlan[release-1-0-0-hardening-plan.md]
 
   Audits --> AuditIndex[README.md]
+  Audits --> AuditStatus[status.md]
 ```
 
 ## What lives where
@@ -72,6 +75,7 @@ graph TD
 Long-lived, canonical project docs.
 
 - [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
+- [Repo Map](./reference/repo-map.md) — thread model, authority order, and change matrix
 - [Specification](./reference/spec.md) — formal requirements and decisions
 - [AI Metadata Protocol](./reference/ai-metadata.md) — canonical semantic vocabulary and ownership model
 - [Accessibility support model](./reference/accessibility.md) — what Marwes automates, what still needs manual review, and how family risk tiers affect release confidence
@@ -90,9 +94,9 @@ Practical how-to documents.
 - [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md) — root dark variants and app-owned Tailwind tokens using Marwes variables
 
 ### Blocks
-Copyable product patterns.
+Copyable product patterns. Blocks are adoption material, not new package APIs.
 
-- [Blocks index](./blocks/README.md) — block rules and available product patterns
+- [Blocks index](./blocks/README.md) — block rules, package-boundary expectations, and available product patterns
 - [Dashboard Shell](./blocks/react/dashboard-shell.md) — dashboard page starter
 - [Login Panel](./blocks/react/login-panel.md) — centered auth form starter
 - [Settings Form](./blocks/react/settings-form.md) — product settings form starter
@@ -103,6 +107,7 @@ Copyable product patterns.
 Active planning documents. Completed migration notes should be removed once their decisions are reflected in reference docs, registry docs, tests, or release notes.
 
 - [Release 1.0.0 hardening plan](./planning/release-1-0-0-hardening-plan.md) — release readiness checks, security posture, and validation log
+- [Milibry dashboard feedback queue](./planning/milibry-dashboard-feedback.md) — component/block candidates surfaced by using Marwes in Milibry dashboard v2
 
 ### Registry
 Family-level component knowledge base.
@@ -118,6 +123,7 @@ Family-level component knowledge base.
 Step-by-step component-family audit plans.
 
 - [Accessibility audits index](./audits/README.md) — execution queue and family audit status
+- [Accessibility audit status](./audits/status.md) — compact blocker/manual-review matrix across families
 - [Accessibility audit methodology](./audits/METHODOLOGY.md) — execution model for this initiative
 - [Input family accessibility audit](./audits/input-family-accessibility.md) — first detailed family audit
 

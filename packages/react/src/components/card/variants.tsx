@@ -29,16 +29,36 @@ export function ProfileCard(props: ProfileCardProps): React.ReactElement {
   )
 }
 
-export type StatCardProps = CardProps
+export interface StatCardProps extends CardProps {
+  /** Primary metric value rendered with metric-tile semantics. */
+  value?: React.ReactNode
+  /** Supporting label or explanatory note for the metric. */
+  note?: React.ReactNode
+  /** Optional trend, status, or comparison content. */
+  meta?: React.ReactNode
+}
 
 export function StatCard(props: StatCardProps): React.ReactElement {
+  const { value, note, meta, children, ...cardProps } = props
+  const hasMetricTileContent = value !== undefined || note !== undefined || meta !== undefined
+
   return (
     <Card
-      {...props}
+      {...cardProps}
       dataAttributes={{
         ...props.dataAttributes,
         "data-purpose": "stat-card",
       }}
-    />
+    >
+      {hasMetricTileContent ? (
+        <div className="mw-stat-card__metric" data-slot="metric-tile">
+          {value !== undefined ? <strong className="mw-stat-card__value">{value}</strong> : null}
+          {note !== undefined ? <span className="mw-stat-card__note">{note}</span> : null}
+          {meta !== undefined ? <span className="mw-stat-card__meta">{meta}</span> : null}
+        </div>
+      ) : (
+        children
+      )}
+    </Card>
   )
 }

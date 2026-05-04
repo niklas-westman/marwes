@@ -2,7 +2,7 @@
 
 Blocks are copyable product patterns built from Marwes components and Marwes theme variables.
 
-They are not new package APIs. They are starting points for real screens: copy a block into your app, rename it for your domain, and keep the styling aligned through `--mw-*` variables.
+They are not new package APIs and they are not exported from `@marwes-ui/*`. They are starting points for real screens: copy a block into your app, rename it for your domain, and keep the styling aligned through `--mw-*` variables.
 
 ## React Blocks
 
@@ -19,6 +19,7 @@ They are not new package APIs. They are starting points for real screens: copy a
 - Use `--mw-*` variables or `mwThemeVars` for app-owned layout styling.
 - Prefer semantic/purpose components when intent matters.
 - Extract reusable local components only after a pattern appears in more than one product surface.
+- Promote a block idea into `packages/**` only after it has repeated product evidence, a clear public contract, React/Vue parity expectations, and validation coverage.
 
 ## When to use blocks vs components
 

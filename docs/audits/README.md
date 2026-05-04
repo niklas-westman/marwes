@@ -2,7 +2,7 @@
 
 This folder contains component-family accessibility audits.
 
-Use these docs as the tactical layer beneath the accessibility support model.
+Use these docs as the tactical evidence layer beneath the accessibility support model. For compact current status, start with [Audit Status](./status.md).
 
 The roadmap answers:
 - what to prioritize
@@ -76,6 +76,7 @@ That means accessibility review should walk the same tree as implementation.
 
 Status docs to update when relevant:
 - the active family audit doc
+- [Audit Status](./status.md)
 - this `docs/audits/README.md` file
 - `docs/reference/accessibility.md`
 - Storybook introductions and spec text when public guidance changed
@@ -83,6 +84,7 @@ Status docs to update when relevant:
 ## Related docs
 
 - [Accessibility Support Model](../reference/accessibility.md)
+- [Audit Status](./status.md)
 - [Methodology](./METHODOLOGY.md)
 - [Adding Components](../guides/adding-components.md)
 - [Architecture](../reference/architecture.md)

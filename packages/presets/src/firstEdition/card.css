@@ -134,3 +134,35 @@
   --mw-card-title: var(--mw-color-text-disabled, #595959);
   --mw-card-body: var(--mw-color-text-disabled, #595959);
 }
+
+.mw-stat-card__metric {
+  display: grid;
+  gap: var(--mw-spacing-sp-8, 8px);
+}
+
+.mw-stat-card__value {
+  display: block;
+  color: var(--mw-card-title);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: clamp(2.25rem, 4vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: -0.08em;
+  line-height: 0.9;
+}
+
+.mw-stat-card__note,
+.mw-stat-card__meta {
+  display: block;
+  color: var(--mw-card-body);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.mw-stat-card__meta {
+  color: color-mix(in srgb, var(--mw-card-title) 52%, var(--mw-card-body));
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

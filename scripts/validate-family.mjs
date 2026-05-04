@@ -46,6 +46,10 @@ function run(command, args) {
 
     const child = spawn(command, args, {
       cwd: repoRoot,
+      env: {
+        ...process.env,
+        NODE_ENV: "test",
+      },
       stdio: "inherit",
     })
 

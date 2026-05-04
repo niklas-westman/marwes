@@ -18,3 +18,12 @@ export const Default: Story = {
     children: "$128,400",
   },
 }
+
+export const MetricTile: Story = {
+  args: {
+    title: "Context reduction",
+    value: "42%",
+    note: "Estimated context-token reduction while preserving authority.",
+    meta: "generation-6 candidate",
+  },
+}
