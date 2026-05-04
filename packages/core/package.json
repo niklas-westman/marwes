@@ -22,7 +22,7 @@
     "build": "tsup",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:typecheck": "tsc -p tsconfig.test.json --noEmit",
-    "test": "vitest run",
+    "test": "NODE_ENV=test vitest run",
     "clean": "rimraf dist",
     "lint": "biome lint .",
     "format": "biome format --write .",

@@ -283,11 +283,10 @@ Completed in the P1 simplification pass:
 
 Completed after P2 as a naming and validation cleanup pass:
 
-- `pnpm compass` is now the primary route-finder command
-- `pnpm compass` remains as a compatibility alias
+- `pnpm compass` is the route-finder command
+- obsolete aliases (`help:repo`, `compass:check`, `validate:docs`, `docs:links`, `docs:api`) were removed after their behavior moved into Compass/Repo Map
 - `scripts/compass/check.mjs` centralizes Compass routing/docs-system checks
-- `check:compass` and `check:compass` are compatibility wrappers over focused Compass rules
-- `pnpm check:compass` is the primary Compass rule runner
+- `pnpm check:compass` is the Compass rule runner
 - `pnpm check:repo-map` is the full docs/repo-map/generated-truth integrity gate
 - Repo Map remains the connection contract, validated by Compass rules
 - implementation plan captured in `docs/planning/compass-repo-map-implementation.md`

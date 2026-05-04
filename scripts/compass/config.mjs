@@ -18,6 +18,11 @@ export const compassConfig = {
   ]),
   routeModel: [
     {
+      intent: "Contribute to Marwes",
+      docs: "docs/start-here.md → docs/want-to-contribute.md → docs/reference/repo-map.md",
+      command: "pnpm check:changed",
+    },
+    {
       intent: "Build an app",
       docs: "docs/start-here.md → docs/guides/vite.md or docs/guides/next.md → docs/blocks/README.md",
       command: "pnpm check:repo-map",
@@ -46,6 +51,7 @@ export const compassConfig = {
   repoMap: {
     requiredPaths: [
       "docs/start-here.md",
+      "docs/want-to-contribute.md",
       "docs/reference/repo-map.md",
       "docs/reference/testing.md",
       "docs/reference/architecture.md",
