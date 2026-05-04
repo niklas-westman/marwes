@@ -1,8 +1,8 @@
-# Marwes Documentation
+# Marwes Documentation Index
 
-This folder is the canonical documentation hub for the repository.
+This folder is the full documentation index for the repository.
 
-If you are new to Marwes, start with [Start Here](./start-here.md).
+If you are choosing what to do next, start with [Start Here](./start-here.md). If you already know the area you need, use this index.
 
 ## Single starting point
 

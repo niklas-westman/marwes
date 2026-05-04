@@ -73,6 +73,7 @@ This document is temporary implementation scaffolding. Keep it in `docs/planning
 - [x] Run required validation.
 - [x] Fix branch-local issues discovered by validation.
 - [x] Review `git diff --stat` and changed files.
+- [x] Add a spiderweb simplification audit for the next improvement pass.
 - [ ] Report outcome, validation evidence, and subjective assessment of whether the repo feels simpler.
 
 **Completion rule:** check items only after all validation commands have been run or a blocker is explicitly recorded.
@@ -89,6 +90,10 @@ Validation completed locally:
 Branch-local issue fixed during validation:
 
 - `pnpm validate:family card` initially failed under the container's inherited production `NODE_ENV`, causing React test `act(...) is not supported in production builds` failures. `scripts/validate-family.mjs` and `scripts/check-changed.mjs` now force `NODE_ENV=test` for spawned validation commands.
+
+## Follow-up audit
+
+- [Spiderweb simplification audit](./spiderweb-simplification-audit.md) captures the first keep/simplify/automate/merge/remove pass after adding `docs/start-here.md` and `docs/reference/repo-map.md`.
 
 ## Notes for final report
 

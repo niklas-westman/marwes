@@ -11,7 +11,7 @@
 
 Framework-agnostic • Static CSS • Type-safe • A11y-first • Agent-readable
 
-[Documentation](docs/README.md) • [Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
+[Start Here](docs/start-here.md) • [Documentation](docs/README.md) • [Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
