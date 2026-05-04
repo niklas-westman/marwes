@@ -242,7 +242,7 @@ Use a different base when needed:
 pnpm check:changed -- --base main
 ```
 
-The gate prints the selected scope, formats/lints changed files with Biome, runs docs checks when docs changed, protects adapter/core boundaries for source/tooling changes, runs family validation for focused family changes, and falls back to `pnpm check:repo-map` for large family scopes. It always finishes with `git diff --check`.
+The gate prints the selected scope, formats/lints changed files with Biome, runs docs checks when docs changed, checks Changesets when package files changed, protects adapter/core boundaries for source/tooling changes, runs family validation for focused family changes, and falls back to `pnpm check:repo-map` for large family scopes. It finishes by checking committed branch whitespace plus staged/unstaged local whitespace when applicable.
 
 This gate is intentionally pragmatic. It is not a release substitute; it is the fastest local confidence pass for branch work and a useful PR signal.
 

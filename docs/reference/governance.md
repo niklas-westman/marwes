@@ -200,7 +200,7 @@ Run:
 
 ```bash
 pnpm check:compass
-pnpm check:compass
+pnpm check:repo-map
 ```
 
 ### When you change semantic families or purposes
@@ -268,7 +268,7 @@ Examples:
 ```bash
 pnpm check
 pnpm check:compass
-pnpm check:compass
+pnpm check:repo-map
 pnpm semantics:check
 pnpm artifacts:generate
 pnpm artifacts:check

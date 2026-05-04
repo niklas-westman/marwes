@@ -133,6 +133,27 @@ function familyFromPath(path) {
   return null
 }
 
+function implementationFamilyFromPath(path) {
+  const patterns = [
+    /^packages\/core\/src\/components\/atoms\/([^/]+)/,
+    /^packages\/core\/test\/recipes\/([^/.]+)/,
+    /^packages\/presets\/src\/firstEdition\/([^/.]+)\.css$/,
+    /^packages\/presets\/test\/([^/.]+)-css-contract\.test\.ts$/,
+    /^packages\/react\/src\/components\/([^/]+)/,
+    /^packages\/vue\/src\/components\/([^/]+)/,
+    /^apps\/storybook-react\/src\/stories\/([^/]+)/,
+    /^apps\/storybook-vue\/src\/stories\/([^/]+)/,
+    /^tests\/contracts\/([^/.]+)\.contract\.ts$/,
+  ]
+
+  for (const pattern of patterns) {
+    const match = path.match(pattern)
+    if (match) return match[1]
+  }
+
+  return null
+}
+
 function existingBiomeTargets(files) {
   return files.filter(
     (file) => existsSync(file) && /\.(cjs|css|cts|js|json|jsonc|jsx|mjs|mts|ts|tsx)$/.test(file),
@@ -153,22 +174,33 @@ function isSourceFile(file) {
   return /^(packages|apps|scripts|tests)\//.test(file) || file === "package.json"
 }
 
+function needsChangesetCheck(files) {
+  return (
+    files.some((file) => file.startsWith("packages/")) ||
+    files.some((file) => /^\.changeset\/[^/]+\.md$/.test(file))
+  )
+}
+
 const { files, scope, range } = changedFiles()
 const families = uniqueSorted(files.map(familyFromPath).filter(Boolean))
+const implementationFamilies = uniqueSorted(files.map(implementationFamilyFromPath).filter(Boolean))
 const docsChanged = files.some((file) => file.endsWith(".md") || file.startsWith("docs/"))
 const docsOnly = files.length > 0 && files.every(isDocsOnlyFile)
 const sourceChanged = files.some(isSourceFile)
-const largeFamilyScope = families.length > familyThreshold
+const largeFamilyScope = implementationFamilies.length > familyThreshold
 
 console.log("Changed-scope validation")
 console.log(`Scope: ${scope}`)
 console.log(`Range: ${range}`)
 console.log(`Files: ${files.length}`)
 if (families.length > 0) console.log(`Families: ${families.join(", ")}`)
+if (implementationFamilies.length > 0) {
+  console.log(`Implementation families: ${implementationFamilies.join(", ")}`)
+}
 if (docsOnly) console.log("Fast path: docs-only")
 if (largeFamilyScope) {
   console.log(
-    `Large family scope: ${families.length} families exceeds threshold ${familyThreshold}.`,
+    `Large implementation family scope: ${implementationFamilies.length} families exceeds threshold ${familyThreshold}.`,
   )
 }
 
@@ -196,6 +228,15 @@ if (docsChanged) {
   )
 }
 
+if (needsChangesetCheck(files)) {
+  run(
+    "Changeset check",
+    "node",
+    ["./scripts/check-pr-changeset.mjs", "--base", base],
+    "package or changeset files changed, so release notes must be present and coherent",
+  )
+}
+
 if (!docsOnly) {
   run(
     "Adapter/core boundary check",
@@ -205,20 +246,20 @@ if (!docsOnly) {
   )
 }
 
-if (families.length > 0) {
+if (implementationFamilies.length > 0) {
   if (largeFamilyScope && !allFamilies) {
     run(
       "Repo map integrity",
       "pnpm",
       ["check:repo-map"],
-      "large family scope detected; run shared integrity once instead of many family gates",
+      "large implementation family scope detected; run shared integrity once instead of many family gates",
     )
     console.log("")
     console.log(
-      `Skipped ${families.length} per-family gates. Re-run with --all-families to validate every family explicitly.`,
+      `Skipped ${implementationFamilies.length} per-family gates. Re-run with --all-families to validate every implementation family explicitly.`,
     )
   } else {
-    for (const family of families) {
+    for (const family of implementationFamilies) {
       run(
         `Family validation: ${family}`,
         "pnpm",
@@ -236,11 +277,27 @@ if (families.length > 0) {
   )
 }
 
+if (branchMode) {
+  run(
+    "Committed branch whitespace diff check",
+    "git",
+    ["diff", "--check", `${base}...HEAD`],
+    "committed branch diff should not contain whitespace errors",
+  )
+}
+
 run(
-  "Whitespace diff check",
+  "Unstaged whitespace diff check",
   "git",
   ["diff", "--check"],
-  "diff should not contain whitespace errors",
+  "unstaged diff should not contain whitespace errors",
+)
+
+run(
+  "Staged whitespace diff check",
+  "git",
+  ["diff", "--cached", "--check"],
+  "staged diff should not contain whitespace errors",
 )
 
 console.log("")

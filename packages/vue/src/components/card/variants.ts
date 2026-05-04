@@ -68,16 +68,17 @@ export const StatCard = defineComponent({
   props: [...cardPropKeys, "value", "note", "meta"],
   setup(rawProps, { attrs, slots }) {
     const props = rawProps as unknown as StatCardProps
-    const { value, note, meta, ...cardProps } = props
 
     return () => {
-      const hasMetricTileContent = value !== undefined || note !== undefined || meta !== undefined
+      const hasMetricTileContent =
+        props.value !== undefined || props.note !== undefined || props.meta !== undefined
 
       return h(
         Card,
         {
           ...attrs,
-          ...cardProps,
+          className: props.className,
+          id: props.id,
           dataAttributes: {
             ...props.dataAttributes,
             "data-purpose": "stat-card",
@@ -87,11 +88,15 @@ export const StatCard = defineComponent({
           ? {
               default: () =>
                 h("div", { class: "mw-stat-card__metric", "data-slot": "metric-tile" }, [
-                  value !== undefined
-                    ? h("strong", { class: "mw-stat-card__value" }, String(value))
+                  props.value !== undefined
+                    ? h("strong", { class: "mw-stat-card__value" }, String(props.value))
                     : null,
-                  note !== undefined ? h("span", { class: "mw-stat-card__note" }, note) : null,
-                  meta !== undefined ? h("span", { class: "mw-stat-card__meta" }, meta) : null,
+                  props.note !== undefined
+                    ? h("span", { class: "mw-stat-card__note" }, props.note)
+                    : null,
+                  props.meta !== undefined
+                    ? h("span", { class: "mw-stat-card__meta" }, props.meta)
+                    : null,
                 ]),
             }
           : slots,

@@ -1,16 +1,23 @@
 import { execFileSync } from "node:child_process"
-import { appendFileSync, readFileSync } from "node:fs"
+import { appendFileSync, existsSync, readFileSync } from "node:fs"
 
 const args = new Map()
 for (let index = 2; index < process.argv.length; index += 1) {
   const arg = process.argv[index]
   if (arg === "--") continue
   if (!arg.startsWith("--")) continue
-  args.set(arg, process.argv[index + 1])
-  index += 1
+  const next = process.argv[index + 1]
+  if (next && !next.startsWith("--")) {
+    args.set(arg, next)
+    index += 1
+  } else {
+    args.set(arg, "true")
+  }
 }
 
 const base = args.get("--base") ?? process.env.CHANGESET_BASE_REF ?? "origin/main"
+const committedOnly = args.has("--committed-only")
+const includeLocal = args.has("--include-local") || (!process.env.GITHUB_ACTIONS && !committedOnly)
 const headRef = process.env.GITHUB_HEAD_REF ?? ""
 const actor = process.env.GITHUB_ACTOR ?? ""
 
@@ -23,22 +30,54 @@ const fixedMarwesPackages = [
   "@marwes-ui/vue",
 ]
 
-function changedFiles() {
-  try {
-    const output = execFileSync(
-      "git",
-      ["diff", "--name-only", "--diff-filter=ACMRTD", `${base}...HEAD`],
-      { encoding: "utf8" },
-    )
+function git(args) {
+  return execFileSync("git", args, { encoding: "utf8" }).trim()
+}
 
-    return output
-      .split("\n")
-      .map((file) => file.trim())
-      .filter(Boolean)
+function splitFiles(output) {
+  return output
+    .split("\n")
+    .map((file) => file.trim())
+    .filter(Boolean)
+}
+
+function uniqueSorted(files) {
+  return [...new Set(files)].sort((left, right) => left.localeCompare(right))
+}
+
+function branchChangedFiles() {
+  try {
+    return splitFiles(git(["diff", "--name-only", "--diff-filter=ACMRTD", `${base}...HEAD`]))
   } catch (error) {
     console.error(`Failed to compare this branch against ${base}.`)
     console.error(error instanceof Error ? error.message : String(error))
     process.exit(1)
+  }
+}
+
+function localChangedFiles() {
+  const unstaged = splitFiles(git(["diff", "--name-only", "--diff-filter=ACMRTD"]))
+  const staged = splitFiles(git(["diff", "--cached", "--name-only", "--diff-filter=ACMRTD"]))
+  const untracked = splitFiles(git(["ls-files", "--others", "--exclude-standard"]))
+
+  return uniqueSorted([...unstaged, ...staged, ...untracked])
+}
+
+function changedFiles() {
+  const branchFiles = branchChangedFiles()
+
+  if (!includeLocal) {
+    return {
+      files: uniqueSorted(branchFiles),
+      scope: `committed branch against ${base}`,
+      range: `${base}...HEAD`,
+    }
+  }
+
+  return {
+    files: uniqueSorted([...branchFiles, ...localChangedFiles()]),
+    scope: `branch against ${base} plus local changes`,
+    range: `${base}...HEAD plus staged, unstaged, and untracked files`,
   }
 }
 
@@ -81,9 +120,16 @@ function validateFixedPackageChangesets(changesetFiles) {
   return failures
 }
 
-const files = changedFiles()
+const { files, scope, range } = changedFiles()
 const packageChanges = files.filter((file) => file.startsWith("packages/"))
-const changesetFiles = files.filter((file) => /^\.changeset\/[^/]+\.md$/.test(file))
+const changesetFiles = files.filter(
+  (file) => /^\.changeset\/[^/]+\.md$/.test(file) && existsSync(file),
+)
+
+console.log("Changeset validation")
+console.log(`Scope: ${scope}`)
+console.log(`Range: ${range}`)
+console.log(`Files: ${files.length}`)
 
 if (releasePrBranch || botActor) {
   const reason = releasePrBranch ? `release PR branch \`${headRef}\`` : `bot actor \`${actor}\``
