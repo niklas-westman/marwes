@@ -13,6 +13,32 @@ permissions:
   contents: read
 
 jobs:
+  changed-scope:
+    name: changed-scope
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Changed-scope validation
+        run: pnpm check:changed -- --base origin/${{ github.base_ref }}
+
   ci:
     uses: ./.github/workflows/_ci.yml
 

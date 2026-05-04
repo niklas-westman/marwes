@@ -134,7 +134,9 @@ function familyFromPath(path) {
 }
 
 function existingBiomeTargets(files) {
-  return files.filter((file) => existsSync(file))
+  return files.filter(
+    (file) => existsSync(file) && /\.(cjs|css|cts|js|json|jsonc|jsx|mjs|mts|ts|tsx)$/.test(file),
+  )
 }
 
 function isDocsOnlyFile(file) {

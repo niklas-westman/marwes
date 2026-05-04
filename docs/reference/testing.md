@@ -228,7 +228,13 @@ Rule of thumb:
 
 ## Changed-scope validation
 
-Use `pnpm check:changed` before opening a branch for review. It compares changed files against `origin/main`, runs the adapter/core boundary guardrail, formats/lints changed files with Biome, runs docs checks when docs changed, runs `validate:family` for detected component families, and finishes with `git diff --check`.
+Use `pnpm check:changed` during daily branch work. It validates local worktree changes, or the latest commit when the worktree is clean.
+
+Before PR review, use the branch form:
+
+```bash
+pnpm check:changed -- --branch
+```
 
 Use a different base when needed:
 
@@ -236,7 +242,9 @@ Use a different base when needed:
 pnpm check:changed -- --base main
 ```
 
-This gate is intentionally pragmatic. It is not a release substitute; it is the fastest local confidence pass for branch work.
+The gate prints the selected scope, formats/lints changed files with Biome, runs docs checks when docs changed, protects adapter/core boundaries for source/tooling changes, runs family validation for focused family changes, and falls back to `pnpm check:repo-map` for large family scopes. It always finishes with `git diff --check`.
+
+This gate is intentionally pragmatic. It is not a release substitute; it is the fastest local confidence pass for branch work and a useful PR signal.
 
 ## Adapter/core boundary guardrail
 
