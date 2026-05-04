@@ -5,4 +5,4 @@
 "@marwes-ui/vue": minor
 ---
 
-Add metric-tile props and preset styling for StatCard across React and Vue.
+Add Vue StatCard metric props and make package test scripts run with `NODE_ENV=test`.
