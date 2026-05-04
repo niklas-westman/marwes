@@ -47,6 +47,7 @@ graph TD
 ## Key supporting paths
 
 - `docs/start-here.md`
+- `docs/want-to-contribute.md`
 - `docs/reference/repo-map.md`
 - `docs/reference/testing.md`
 - `docs/reference/architecture.md`
@@ -95,7 +96,7 @@ When two sources disagree, resolve the conflict in this order:
 | Adoption guide | Compass links and docs/API drift rules | `pnpm check:repo-map` |
 | Copyable block | block README, guide links, examples against current public API | `pnpm check:repo-map` |
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
-| Package-wide implementation | package docs, typecheck, builds, tests | `pnpm validate:packages` |
+| Package-wide implementation | contributor guide, package docs, typecheck, builds, tests | `pnpm validate:packages` |
 | Architecture guardrail | component adapter boundaries, core purity, preset ownership | `pnpm check:adapter-boundaries` |
 
 ## Repo map coverage
@@ -129,6 +130,7 @@ When planning work completes:
 ## Recommended routing
 
 - New app builder: start with [Vite setup](../guides/vite.md), [Next.js setup](../guides/next.md), [Your First Marwes Screen](../guides/your-first-screen.md), then [Blocks](../blocks/README.md).
-- Component contributor: start with [Architecture](./architecture.md), this repo map, [Adding Components](../guides/adding-components.md), then [Family Validation](./family-validation.md).
+- Contributor: start with [Want to contribute?](../want-to-contribute.md), then [Architecture](./architecture.md), this repo map, and the relevant validation guide.
+- Component contributor: start with [Want to contribute?](../want-to-contribute.md), [Architecture](./architecture.md), this repo map, [Adding Components](../guides/adding-components.md), then [Family Validation](./family-validation.md).
 - Accessibility reviewer: start with [Accessibility support model](./accessibility.md), [Audit status](../audits/status.md), then the relevant family audit and [Component Registry](../registry/README.md) entry.
 - Release reviewer: start with [Governance](./governance.md), [Testing](./testing.md), `artifacts/component-registry.json`, and generated artifact checks.

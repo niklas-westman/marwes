@@ -2,7 +2,7 @@
 
 This is the single starting point for Marwes.
 
-Pick what you are trying to do, follow one short path, and run one matching validation command. If you want the same route model in the terminal, run `pnpm compass`. If you need the full connection contract, open [Repo Map](./reference/repo-map.md).
+Pick what you are trying to do, follow one short path, and run one matching validation command. If you want a contributor-friendly build guide, open [Want to contribute?](./want-to-contribute.md). If you want the same route model in the terminal, run `pnpm compass`. If you need the full connection contract, open [Repo Map](./reference/repo-map.md).
 
 ## The one-minute model
 
@@ -10,6 +10,7 @@ Pick what you are trying to do, follow one short path, and run one matching vali
 Marwes = core recipe → preset CSS → framework adapter
 
 START HERE
+  ├─ contribute to Marwes
   ├─ build an app
   ├─ change a component
   ├─ add a block
@@ -17,6 +18,28 @@ START HERE
   ├─ review accessibility
   └─ prepare release confidence
 ```
+
+## I want to contribute to Marwes
+
+Go here:
+
+1. [Want to contribute?](./want-to-contribute.md)
+2. [Architecture](./reference/architecture.md)
+3. [Repo Map](./reference/repo-map.md)
+
+Run before handing off:
+
+```bash
+pnpm check:changed
+```
+
+Move to `pnpm validate:family <family>`, `pnpm check:repo-map`, or `pnpm validate:release` when the change touches a component family, generated truth, or release-sensitive behavior.
+
+Stop if:
+
+- you are unsure whether logic belongs in core, presets, adapters, blocks, or app code
+- React and Vue parity might drift
+- the change would create a package API from a one-off block/example need
 
 ## I want to build an app with Marwes
 
@@ -158,6 +181,7 @@ pnpm compass
 
 ## Where to zoom out
 
+- [Want to contribute?](./want-to-contribute.md) — contributor-friendly build guide
 - [Architecture](./reference/architecture.md) — the core principle
 - [Repo Map](./reference/repo-map.md) — how all threads connect
 - [Testing](./reference/testing.md) — which validation gate to choose

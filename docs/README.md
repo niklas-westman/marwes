@@ -7,6 +7,7 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 ## Single starting point
 
 - [Start Here](./start-here.md) — choose your task, follow one short route, and run the matching validation command
+- [Want to contribute?](./want-to-contribute.md) — contributor-friendly guide for building Marwes changes
 
 ## Read order
 
@@ -19,18 +20,19 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 
 ### Changing Marwes itself
 
-1. [Architecture](./reference/architecture.md)
-2. [Repo Map](./reference/repo-map.md)
-3. [Specification](./reference/spec.md)
-4. [Adding Components](./guides/adding-components.md)
-5. [Figma to Marwes](./guides/figma-to-marwes.md)
-6. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
-7. [AI Metadata Protocol](./reference/ai-metadata.md)
-8. [Accessibility support model](./reference/accessibility.md)
-9. [Component Registry](./registry/README.md)
-10. [Governance](./reference/governance.md)
-11. [Testing](./reference/testing.md)
-12. [Family Validation](./reference/family-validation.md)
+1. [Want to contribute?](./want-to-contribute.md)
+2. [Architecture](./reference/architecture.md)
+3. [Repo Map](./reference/repo-map.md)
+4. [Specification](./reference/spec.md)
+5. [Adding Components](./guides/adding-components.md)
+6. [Figma to Marwes](./guides/figma-to-marwes.md)
+7. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
+8. [AI Metadata Protocol](./reference/ai-metadata.md)
+9. [Accessibility support model](./reference/accessibility.md)
+10. [Component Registry](./registry/README.md)
+11. [Governance](./reference/governance.md)
+12. [Testing](./reference/testing.md)
+13. [Family Validation](./reference/family-validation.md)
 
 ## Documentation map
 
@@ -38,6 +40,7 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 graph TD
   Docs[docs/]
   Docs --> StartHere[start-here.md]
+  Docs --> Contribute[want-to-contribute.md]
   Docs --> Reference[reference/]
   Docs --> Guides[guides/]
   Docs --> Planning[planning/]
@@ -76,6 +79,10 @@ graph TD
 ```
 
 ## What lives where
+
+### Contributing
+
+- [Want to contribute?](./want-to-contribute.md) — practical repo boundaries, component workflow, validation ladder, and what not to do
 
 ### Reference
 Long-lived, canonical project docs.
