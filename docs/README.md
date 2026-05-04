@@ -2,7 +2,11 @@
 
 This folder is the canonical documentation hub for the repository.
 
-If you are new to Marwes, start here.
+If you are new to Marwes, start with [Start Here](./start-here.md).
+
+## Single starting point
+
+- [Start Here](./start-here.md) — choose your task, follow one short route, and run the matching validation command
 
 ## Read order
 
@@ -33,6 +37,7 @@ If you are new to Marwes, start here.
 ```mermaid
 graph TD
   Docs[docs/]
+  Docs --> StartHere[start-here.md]
   Docs --> Reference[reference/]
   Docs --> Guides[guides/]
   Docs --> Planning[planning/]
