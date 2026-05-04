@@ -11,7 +11,7 @@ The goal is fewer public scripts, less scattered validation logic, and clearer n
 
 ## Run permit
 
-- Goal: replace scattered docs/navigation checks with one central Compass engine while preserving existing command compatibility.
+- Goal: replace scattered docs/navigation checks with one central Compass engine and remove obsolete public aliases.
 - Definition of value: contributors use `pnpm compass` to navigate, `pnpm check:compass` to verify routing rules, and `pnpm check:repo-map` to verify the full docs/repo-map/generated-truth contract.
 - Allowed paths: `scripts/**`, `docs/**`, `package.json`.
 - Forbidden paths: package runtime APIs, release workflows, package versions, changelogs.
@@ -26,13 +26,12 @@ Public commands:
 - `pnpm check:compass` — validate Compass routing rules, links, docs/API drift, repo-map coverage, authority, status ownership, and planning lifecycle.
 - `pnpm check:repo-map` — run `check:compass` plus generated-truth checks: semantics, trust artifacts, registry, parity summary, Storybook consistency, and adapter boundaries.
 
-Compatibility commands:
+Removed obsolete aliases/wrappers:
 
-- `pnpm help:repo` aliases `pnpm compass` behavior.
-- `pnpm compass:check` remains a legacy alias for `pnpm check:compass`.
-- `pnpm validate:docs` remains a legacy alias for `pnpm check:repo-map`.
-- `pnpm docs:links` runs the focused Compass links rule.
-- `pnpm docs:api` runs the focused Compass API-drift rule.
+- `pnpm help:repo` was folded into `pnpm compass`.
+- `pnpm compass:check` was folded into `pnpm check:compass`.
+- `pnpm validate:docs` was folded into `pnpm check:repo-map`.
+- `pnpm docs:links` and `pnpm docs:api` were folded into `pnpm check:compass`.
 
 Internal shape:
 
@@ -48,7 +47,7 @@ scripts/compass/
 ### Segment 1 — Compass engine
 
 - [x] Create `scripts/compass/config.mjs` for shared paths, commands, and route model.
-- [x] Create `scripts/compass/cli.mjs` for `pnpm compass` / `pnpm help:repo`.
+- [x] Create `scripts/compass/cli.mjs` for `pnpm compass`.
 - [x] Create `scripts/compass/check.mjs` with rule selection.
 
 ### Segment 2 — Consolidate existing checks
@@ -56,7 +55,7 @@ scripts/compass/
 - [x] Move markdown link validation into Compass rule `links`.
 - [x] Move docs/API drift validation into Compass rule `api`.
 - [x] Move repo-map coverage validation into Compass rule `repo-map`.
-- [x] Keep wrapper scripts as compatibility shims.
+- [x] Remove wrapper scripts after folding their checks into Compass.
 
 ### Segment 3 — Smarter repo-map authority rules
 
@@ -67,8 +66,7 @@ scripts/compass/
 ### Segment 4 — Script wiring
 
 - [x] Add `pnpm compass`.
-- [x] Keep `pnpm help:repo` as alias.
-- [x] Make `docs:links` and `docs:api` call focused Compass rules.
+- [x] Remove obsolete compatibility aliases.
 - [x] Make `check:compass` the central Compass rule runner.
 - [x] Make `check:repo-map` the full docs/repo-map/generated-truth integrity gate.
 

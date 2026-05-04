@@ -353,7 +353,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/icon/__tests__/ico
 pnpm --filter @marwes-ui/vue exec vitest run src/components/icon/__tests__/icon.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/icon/__tests__/icon-introduction-docs.test.ts src/stories/icon/__tests__/icon-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/icon/__tests__/icon-introduction-docs.test.ts src/stories/icon/__tests__/icon-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

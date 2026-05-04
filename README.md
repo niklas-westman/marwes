@@ -442,7 +442,7 @@ pnpm test
 pnpm build
 
 # Check internal markdown links
-pnpm docs:links
+pnpm check:compass
 ```
 
 ## Release Notes For Package Changes

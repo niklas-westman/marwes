@@ -131,8 +131,8 @@ Key files:
 - `docs/reference/*`
 
 Validation:
-- `scripts/check-doc-links.mjs`
-- `scripts/check-doc-api-drift.mjs`
+- `scripts/compass/check.mjs --rule=links`
+- `scripts/compass/check.mjs --rule=api`
 
 ### Semantic truth
 Owns the canonical vocabulary and family-purpose registry.

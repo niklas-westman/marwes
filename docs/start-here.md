@@ -156,8 +156,6 @@ If you want this routing model in the terminal, run:
 pnpm compass
 ```
 
-`pnpm help:repo` remains as a compatibility alias.
-
 ## Where to zoom out
 
 - [Architecture](./reference/architecture.md) — the core principle

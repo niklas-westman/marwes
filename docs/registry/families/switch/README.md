@@ -302,7 +302,7 @@ pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/switch/__tests__/switch.test.tsx src/components/switch/__tests__/variants.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/switch/__tests__/switch.test.ts src/components/switch/__tests__/variants.test.ts
 pnpm storybook:consistency
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

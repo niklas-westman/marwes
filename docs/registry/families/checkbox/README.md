@@ -353,7 +353,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/checkbox/__tests__
 pnpm --filter @marwes-ui/vue exec vitest run src/components/checkbox/__tests__/checkbox.test.ts src/components/checkbox/__tests__/checkbox-field.test.ts src/components/checkbox/__tests__/checkbox-group-field.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

@@ -74,7 +74,7 @@ Recommendation:
 
 - Keep the human matrix.
 - Add a Compass repo-map rule that verifies key links/commands/paths mentioned by the map exist.
-- Eventually use the same source data to power `pnpm help:repo`.
+- Eventually use the same source data to power `pnpm compass`.
 
 Priority: **P1**
 
@@ -98,7 +98,7 @@ Recommendation:
 - Keep all existing commands for now.
 - Document only four primary commands in `start-here.md`: `check:changed`, `validate:family`, `check:repo-map`, `validate:release`.
 - Treat all others as supporting commands in `testing.md`.
-- Later consider a `pnpm help:repo` command that prints the four-command model.
+- Later consider a `pnpm compass` command that prints the four-command model.
 
 Priority: **P0 for docs framing, P2 for CLI helper**
 
@@ -229,7 +229,7 @@ Priority: **P0 before merge**
 
 ### P2 — Later polish
 
-- [x] Consider `pnpm help:repo` to print the same route model as `start-here.md`.
+- [x] Consider `pnpm compass` to print the same route model as `start-here.md`.
 - [x] Split or slim `docs/reference/spec.md` only if contributors keep getting lost there.
 - [x] Generate a parity summary from exports/stories/registry data.
 
@@ -284,9 +284,9 @@ Completed in the P1 simplification pass:
 Completed after P2 as a naming and validation cleanup pass:
 
 - `pnpm compass` is now the primary route-finder command
-- `pnpm help:repo` remains as a compatibility alias
+- `pnpm compass` remains as a compatibility alias
 - `scripts/compass/check.mjs` centralizes Compass routing/docs-system checks
-- `docs:links` and `docs:api` are compatibility wrappers over focused Compass rules
+- `check:compass` and `check:compass` are compatibility wrappers over focused Compass rules
 - `pnpm check:compass` is the primary Compass rule runner
 - `pnpm check:repo-map` is the full docs/repo-map/generated-truth integrity gate
 - Repo Map remains the connection contract, validated by Compass rules
@@ -296,7 +296,7 @@ Completed after P2 as a naming and validation cleanup pass:
 
 Completed in the P2 polish pass:
 
-- added `pnpm help:repo` as a terminal version of the singular route model
+- added `pnpm compass` as a terminal version of the singular route model
 - added generated `docs/reference/framework-parity-summary.md` from `artifacts/framework-parity.json`
 - added `pnpm parity:summary` and `pnpm parity:summary:check`
 - `pnpm check:repo-map` now checks the generated parity summary

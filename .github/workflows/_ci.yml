@@ -47,12 +47,9 @@ jobs:
       - name: Biome
         run: pnpm biome check .
 
-      # Keep markdown and package docs aligned with the public API surface
-      - name: Docs links
-        run: pnpm docs:links
-
-      - name: Docs API drift
-        run: pnpm docs:api
+      # Keep Compass docs/routing rules aligned with the public API surface
+      - name: Compass docs/routing
+        run: pnpm check:compass
 
       # Validate the canonical semantic registry remains internally coherent
       - name: Semantic registry

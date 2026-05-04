@@ -234,9 +234,9 @@ const steps = [
     args: ["registry:check"],
   },
   {
-    name: "Docs links",
+    name: "Compass docs/routing checks",
     command: "pnpm",
-    args: ["docs:links"],
+    args: ["check:compass"],
   },
 ]
 

@@ -486,8 +486,8 @@ pnpm --filter @marwes-ui/vue test
 pnpm --filter @marwes-ui/core build
 pnpm --filter @marwes-ui/react build
 pnpm --filter @marwes-ui/vue build
-pnpm docs:api
-pnpm docs:links
+pnpm check:compass
+pnpm check:compass
 ```
 
 If package READMEs change, also run:

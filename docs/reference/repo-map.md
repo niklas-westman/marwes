@@ -59,7 +59,6 @@ graph TD
 ## Primary validation commands
 
 - `pnpm compass`
-- `pnpm help:repo`
 - `pnpm check:compass`
 - `pnpm check:repo-map`
 - `pnpm check:changed`
@@ -89,11 +88,11 @@ When two sources disagree, resolve the conflict in this order:
 | Preset CSS for a family | React/Vue stories, visual states, preset CSS tests, registry notes | `pnpm validate:family <family>` |
 | React adapter | Vue adapter parity, shared contracts, Storybook React/Vue coverage | `pnpm validate:family <family>` |
 | Vue adapter | React adapter parity, shared contracts, Storybook React/Vue coverage | `pnpm validate:family <family>` |
-| Purpose variant or semantic metadata | semantic registry, generated artifacts, registry family docs, docs/API drift check | `pnpm check:repo-map` |
+| Purpose variant or semantic metadata | semantic registry, generated artifacts, registry family docs, Compass docs/API drift rule | `pnpm check:repo-map` |
 | Registry family docs | generated registry artifact and links | `pnpm check:repo-map` |
 | Audit findings | `docs/audits/status.md`, registry family status, reference accessibility docs if policy changed | `pnpm check:compass` |
 | Public package API | README/package docs, guides, examples, changeset, typecheck, tests | `pnpm validate:packages` |
-| Adoption guide | docs links and docs/API drift rules | `pnpm check:repo-map` |
+| Adoption guide | Compass links and docs/API drift rules | `pnpm check:repo-map` |
 | Copyable block | block README, guide links, examples against current public API | `pnpm check:repo-map` |
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
 | Package-wide implementation | package docs, typecheck, builds, tests | `pnpm validate:packages` |

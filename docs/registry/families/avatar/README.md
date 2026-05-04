@@ -330,7 +330,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/avatar/__tests__/a
 pnpm --filter @marwes-ui/vue exec vitest run src/components/avatar/__tests__/avatar.test.ts src/components/avatar/__tests__/avatar-badge.test.ts src/components/avatar/__tests__/avatar-group.test.ts src/components/avatar/__tests__/variants.test.ts src/components/avatar/__tests__/index-exports.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/avatar/__tests__/avatar-introduction-docs.test.ts src/stories/avatar/__tests__/avatar-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/avatar/__tests__/avatar-introduction-docs.test.ts src/stories/avatar/__tests__/avatar-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

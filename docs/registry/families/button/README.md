@@ -301,7 +301,7 @@ pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/button/__tests__/button.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/button/__tests__/button.test.ts
 pnpm storybook:consistency
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

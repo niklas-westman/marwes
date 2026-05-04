@@ -57,7 +57,6 @@ export const compassConfig = {
     ],
     requiredCommands: [
       "compass",
-      "help:repo",
       "check:compass",
       "check:changed",
       "check:adapter-boundaries",

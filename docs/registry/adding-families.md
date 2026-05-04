@@ -159,7 +159,7 @@ Run:
 
 ```bash
 pnpm registry:check
-pnpm docs:links
+pnpm check:compass
 ```
 
 For broader confidence, also run:
@@ -189,7 +189,7 @@ Use this when adding a family:
 - [ ] family source config added to `scripts/component-registry-sources.ts`
 - [ ] `pnpm registry:generate` run
 - [ ] `pnpm registry:check` passes
-- [ ] `pnpm docs:links` passes
+- [ ] `pnpm check:compass` passes
 
 ## Quality bar
 
