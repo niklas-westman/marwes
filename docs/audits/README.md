@@ -28,7 +28,11 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 
 That means accessibility review should walk the same tree as implementation.
 
-## Audit status
+## Audit queue
+
+This section describes the historical/prioritized audit queue. It is not the canonical compact current-status table.
+
+For current blocker/manual-review status across all families, use [Audit Status](./status.md).
 
 ### Wave 1 — Highest-risk families
 
@@ -75,10 +79,10 @@ That means accessibility review should walk the same tree as implementation.
 6. Run verification commands before moving to the next family
 
 Status docs to update when relevant:
-- the active family audit doc
-- [Audit Status](./status.md)
-- this `docs/audits/README.md` file
-- `docs/reference/accessibility.md`
+- [Audit Status](./status.md) for compact current family status
+- the active family audit doc for evidence/history
+- this `docs/audits/README.md` file only when queue/process changes
+- `docs/reference/accessibility.md` when cross-family support policy changes
 - Storybook introductions and spec text when public guidance changed
 
 ## Related docs

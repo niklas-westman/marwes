@@ -223,9 +223,9 @@ Priority: **P0 before merge**
 
 ### P1 — Good next simplification
 
-- [ ] Tighten audit/status ownership so `audits/status.md` is the only compact family status table.
-- [ ] Add a lightweight repo-map coverage check for important links/paths/commands.
-- [ ] Expand adapter parity automation only where real drift repeats.
+- [x] Tighten audit/status ownership so `audits/status.md` is the only compact family status table.
+- [x] Add a lightweight repo-map coverage check for important links/paths/commands.
+- [x] Expand adapter parity automation only where real drift repeats.
 
 ### P2 — Later polish
 
@@ -267,3 +267,14 @@ Completed in the P0 cleanup pass:
 - `docs/README.md` is framed as the full documentation index, not the primary entry point
 - `docs/start-here.md` remains a short four-command routing surface
 - removed `docs/planning/repo-stabilization-roadmap-temp.md` after promoting its durable outcomes into `start-here.md`, `repo-map.md`, `testing.md`, and this audit
+
+## P1 implementation note
+
+Completed in the P1 simplification pass:
+
+- `docs/audits/status.md` is now documented as the compact current family status surface
+- `docs/audits/README.md` is reframed as queue/process rather than status ownership
+- registry docs/template now point family status changes back to `docs/audits/status.md`
+- added `scripts/check-repo-map-coverage.mjs` and `pnpm check:repo-map`
+- `pnpm validate:docs` now includes repo-map coverage
+- registry family template now captures family-specific adapter parity expectations without duplicating generic rules

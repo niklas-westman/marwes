@@ -2,7 +2,7 @@
 
 Marwes has several useful but easy-to-mix-up threads. This map explains how they connect and what to update when one thread changes.
 
-Use this as the first routing document after [Architecture](./architecture.md).
+Use this as the spiderweb view after [Start Here](../start-here.md) and [Architecture](./architecture.md).
 
 ## Thread model
 
@@ -39,6 +39,29 @@ graph TD
   Guides --> Blocks
 ```
 
+## Key supporting paths
+
+- `docs/start-here.md`
+- `docs/reference/repo-map.md`
+- `docs/reference/testing.md`
+- `docs/reference/architecture.md`
+- `docs/reference/accessibility.md`
+- `docs/audits/status.md`
+- `docs/registry/README.md`
+- `docs/blocks/README.md`
+- `artifacts/component-registry.json`
+
+## Primary validation commands
+
+- `pnpm check:changed`
+- `pnpm check:adapter-boundaries`
+- `pnpm validate:family <family>`
+- `pnpm validate:docs`
+- `pnpm validate:packages`
+- `pnpm validate:release`
+- `pnpm registry:check`
+- `pnpm docs:links`
+
 ## Authority order
 
 When two sources disagree, resolve the conflict in this order:
@@ -65,6 +88,18 @@ When two sources disagree, resolve the conflict in this order:
 | Adoption guide | docs links and docs/API drift rules | `pnpm validate:docs` |
 | Copyable block | block README, guide links, examples against current public API | `pnpm validate:docs` |
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
+| Package-wide implementation | package docs, typecheck, builds, tests | `pnpm validate:packages` |
+| Architecture guardrail | component adapter boundaries, core purity, preset ownership | `pnpm check:adapter-boundaries` |
+
+## Repo map coverage
+
+This file is guarded by:
+
+```bash
+pnpm check:repo-map
+```
+
+The check verifies that the most important paths, commands, and routing phrases in this map still exist. It is intentionally lightweight; deeper architecture judgement still belongs in review.
 
 ## Blocks are not package APIs
 
@@ -86,5 +121,5 @@ When planning work completes:
 
 - New app builder: start with [Vite setup](../guides/vite.md), [Next.js setup](../guides/next.md), [Your First Marwes Screen](../guides/your-first-screen.md), then [Blocks](../blocks/README.md).
 - Component contributor: start with [Architecture](./architecture.md), this repo map, [Adding Components](../guides/adding-components.md), then [Family Validation](./family-validation.md).
-- Accessibility reviewer: start with [Accessibility support model](./accessibility.md), [Audit status](../audits/status.md), then the relevant family audit and registry entry.
-- Release reviewer: start with [Governance](./governance.md), [Testing](./testing.md), and generated artifact checks.
+- Accessibility reviewer: start with [Accessibility support model](./accessibility.md), [Audit status](../audits/status.md), then the relevant family audit and [Component Registry](../registry/README.md) entry.
+- Release reviewer: start with [Governance](./governance.md), [Testing](./testing.md), `artifacts/component-registry.json`, and generated artifact checks.
