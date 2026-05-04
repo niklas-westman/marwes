@@ -74,19 +74,42 @@ Use the playground for:
 
 ## Commands
 
-### Repo-wide
+### Validation presets
+
+Use the smallest gate that matches the risk of the change, then move upward when the branch gets closer to review.
 
 ```bash
-pnpm validate:release
-pnpm validate:packages
-pnpm validate:docs
+pnpm compass                       # print the singular repo route model
+pnpm check:changed                 # smart local gate: local worktree, or latest commit when clean
+pnpm check:changed -- --branch      # whole branch against origin/main plus local changes
+pnpm check:changed -- --base main   # whole branch against an explicit base
+pnpm check:changed -- --all-families # force every detected family gate when scope is large
+pnpm validate:family button        # full family path for one component family
+pnpm check:repo-map                 # full docs/repo-map/generated-truth integrity gate
+pnpm validate:packages             # typecheck, package builds, package tests
+pnpm validate:release              # security, packages, repo-map, full biome check, Storybook a11y smoke
+pnpm check                         # docs + full biome check + Storybook a11y smoke
+```
+
+### Changed-scope behavior
+
+`pnpm check:changed` is optimized for daily work on long-lived branches. By default it validates the local worktree; when the worktree is clean, it validates the latest commit. Use `--branch` or `--base <ref>` when you intentionally want the full branch range.
+
+For docs-only changes it uses a fast path: changed-file Biome, `pnpm check:compass`, and `git diff --check`. For large family scopes, it runs shared integrity once through `pnpm check:repo-map` instead of many per-family gates unless `--all-families` is passed.
+
+### Repo-wide supporting commands
+
+```bash
 pnpm validate:security
-pnpm check
 pnpm typecheck
 pnpm lint
 pnpm format:all
 pnpm test
 pnpm build
+pnpm check:adapter-boundaries
+pnpm check:compass
+pnpm check:repo-map
+pnpm parity:summary:check
 ```
 
 ### Focused package tests
@@ -121,11 +144,14 @@ pnpm test:storybook:a11y
 
 ```mermaid
 flowchart LR
-  Change[Code change] --> Local[Run focused tests]
-  Local --> Stories[Verify in Storybook]
-  Stories --> Typecheck[Run pnpm typecheck]
-  Typecheck --> Repo[Run broader pnpm test or pnpm test:packages]
-  Repo --> Build[Run pnpm build for release-level confidence]
+  Change[Code change] --> Changed[Run pnpm check:changed]
+  Changed --> Family{Component family changed?}
+  Family -->|yes| FamilyGate[Run pnpm validate:family family]
+  Family -->|no| DocsGate[Run docs or package gate]
+  FamilyGate --> Stories[Verify in Storybook when visual behavior changed]
+  DocsGate --> Broader[Run broader package/docs gate]
+  Stories --> Broader
+  Broader --> Release[Run release-level gate before publishing]
 ```
 
 ## What good test coverage looks like
@@ -199,6 +225,38 @@ What still needs manual review for rich text:
 Rule of thumb:
 - use automated tests to protect the component contract
 - use manual review to validate the real editing experience
+
+## Changed-scope validation
+
+Use `pnpm check:changed` during daily branch work. It validates local worktree changes, or the latest commit when the worktree is clean.
+
+Before PR review, use the branch form:
+
+```bash
+pnpm check:changed -- --branch
+```
+
+Use a different base when needed:
+
+```bash
+pnpm check:changed -- --base main
+```
+
+The gate prints the selected scope, formats/lints changed files with Biome, runs docs checks when docs changed, checks Changesets when package files changed, protects adapter/core boundaries for source/tooling changes, runs family validation for focused family changes, and falls back to `pnpm check:repo-map` for large family scopes. It finishes by checking committed branch whitespace plus staged/unstaged local whitespace when applicable.
+
+This gate is intentionally pragmatic. It is not a release substitute; it is the fastest local confidence pass for branch work and a useful PR signal.
+
+## Adapter/core boundary guardrail
+
+Use `pnpm check:adapter-boundaries` when component adapter work touches architecture boundaries. The script currently checks strong constraints:
+
+- no browser/DOM globals in `packages/core/src`
+- no React imports in Vue component adapters
+- no Vue imports in React component adapters
+- no preset imports inside framework component adapters
+- no hardcoded color tokens inside framework component adapters
+
+Keep deeper judgement in [Architecture](./architecture.md) and [Repo Map](./repo-map.md).
 
 ## Family validation
 

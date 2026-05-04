@@ -47,28 +47,9 @@ jobs:
       - name: Biome
         run: pnpm biome check .
 
-      # Keep markdown and package docs aligned with the public API surface
-      - name: Docs links
-        run: pnpm docs:links
-
-      - name: Docs API drift
-        run: pnpm docs:api
-
-      # Validate the canonical semantic registry remains internally coherent
-      - name: Semantic registry
-        run: pnpm semantics:check
-
-      # Verify committed trust artifacts still match source-owned truth
-      - name: Trust artifacts
-        run: pnpm artifacts:check
-
-      # Verify committed component registry artifacts remain deterministic
-      - name: Component registry
-        run: pnpm registry:check
-
-      # Ensure React/Vue story, export, and family coverage parity remains healthy
-      - name: Storybook consistency
-        run: pnpm storybook:consistency
+      # Keep docs, generated truth, parity, Storybook consistency, and adapter boundaries aligned
+      - name: Repo Map integrity
+        run: pnpm check:repo-map
 
       # Run TypeScript type checking across all workspace packages
       - name: Typecheck

@@ -305,7 +305,7 @@ pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/accordion/__tests__/accordion.test.tsx src/components/accordion/__tests__/accordion-field.test.tsx src/components/accordion/__tests__/variants.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/accordion/__tests__/accordion.test.ts src/components/accordion/__tests__/accordion-field.test.ts src/components/accordion/__tests__/variants.test.ts
 pnpm storybook:consistency
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

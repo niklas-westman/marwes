@@ -330,7 +330,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/badge/__tests__/ba
 pnpm --filter @marwes-ui/vue exec vitest run src/components/badge/__tests__/badge.test.ts src/components/badge/__tests__/badge-group.test.ts src/components/badge/__tests__/variants.test.ts src/components/badge/__tests__/index-exports.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/badge/__tests__/badge-introduction-docs.test.ts src/stories/badge/__tests__/badge-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/badge/__tests__/badge-introduction-docs.test.ts src/stories/badge/__tests__/badge-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

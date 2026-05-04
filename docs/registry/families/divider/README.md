@@ -298,7 +298,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/divider/__tests__/
 pnpm --filter @marwes-ui/vue exec vitest run src/components/divider/__tests__/divider.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/divider/__tests__/divider-introduction-docs.test.ts src/stories/divider/__tests__/divider-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/divider/__tests__/divider-introduction-docs.test.ts src/stories/divider/__tests__/divider-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

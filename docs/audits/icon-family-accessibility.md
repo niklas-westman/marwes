@@ -189,7 +189,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/icon/__tests__/icon.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/icon/__tests__/icon-introduction-docs.test.ts src/stories/icon/__tests__/icon-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/icon/__tests__/icon-introduction-docs.test.ts src/stories/icon/__tests__/icon-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 - [x] `pnpm registry:generate && pnpm registry:check`
 
 ## Deliverables from this audit

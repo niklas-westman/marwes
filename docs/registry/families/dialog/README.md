@@ -308,7 +308,7 @@ pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/dialog/__tests__/dialog.test.tsx src/components/dialog/__tests__/dialog-modal.test.tsx src/components/dialog/__tests__/variants.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/dialog/__tests__/dialog.test.ts src/components/dialog/__tests__/dialog-modal.test.ts src/components/dialog/__tests__/variants.test.ts
 pnpm storybook:consistency
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

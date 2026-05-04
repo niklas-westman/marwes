@@ -41,8 +41,8 @@ Prepare `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`, and `@marwe
 - `pnpm test:packages` passed.
 - `pnpm test:typecheck:packages` passed.
 - `pnpm artifacts:check` passed.
-- `pnpm docs:api` passed.
-- `pnpm docs:links` passed after replacing stale `AXE_ROADMAP.md` markdown links with existing accessibility/registry docs.
+- `pnpm check:compass` passed.
+- `pnpm check:compass` passed after replacing stale `AXE_ROADMAP.md` markdown links with existing accessibility/registry docs.
 - `pnpm semantics:check` passed.
 - `pnpm exec biome check .` passed after formatting touched React contract harness files.
 - `pnpm storybook:consistency` passed.
@@ -67,7 +67,7 @@ Prepare `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`, and `@marwe
 - `pnpm test:typecheck:packages` passed after pinning.
 - `pnpm build:packages` passed after pinning.
 - `pnpm test:packages` passed after pinning.
-- `pnpm docs:links` passed after pinning.
+- `pnpm check:compass` passed after pinning.
 - `pnpm storybook:consistency` passed after pinning.
 - Removed all dependency overrides temporarily to test whether exact package pins made them unnecessary; `pnpm audit` still reported vulnerable `minimatch@9.0.1`, and `pnpm audit --prod` still reported vulnerable `postcss@8.4.49`.
 - Reduced root `pnpm.overrides` from the broad security sweep to only `minimatch@>=9.0.0 <9.0.7` and `postcss@<8.5.10`.
@@ -87,12 +87,12 @@ Prepare `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`, and `@marwe
 - `pnpm pack --pack-destination /tmp` passed for `packages/core`, `packages/presets`, `packages/react`, and `packages/vue`.
 - Packed React/Vue package manifests now contain only `@marwes-ui/core` as runtime dependency, plus framework peers.
 - Packed presets tarball still includes `package/src/firstEdition/styles.css` and all imported sibling CSS files.
-- Added `validate:security`, `validate:packages`, `validate:docs`, `validate:family`, and `validate:release` root scripts.
+- Added `validate:security`, `validate:packages`, `check:repo-map`, `validate:family`, and `validate:release` root scripts.
 - Added `scripts/validate-family.mjs` for focused family validation across core, presets, React, Vue, Storybook docs, Storybook consistency, registry, and docs links.
 - Added `--family` support to `scripts/storybook-consistency.mjs`.
 - Added `docs/reference/family-validation.md` and linked it from testing, governance, docs index, and registry docs.
 - `pnpm validate:family button` passed end-to-end when rerun with local `tsx` IPC permissions; the sandboxed first run failed only at `registry:check` with `listen EPERM`.
-- `pnpm validate:docs` passed with local `tsx` IPC permissions.
+- `pnpm check:repo-map` passed with local `tsx` IPC permissions.
 - `pnpm validate:packages` passed.
 - `pnpm validate:security` passed with npm registry network access; the sandboxed first run failed with `ENOTFOUND registry.npmjs.org`.
 - `pnpm exec biome check package.json scripts/validate-family.mjs scripts/storybook-consistency.mjs docs/README.md docs/reference/family-validation.md docs/reference/testing.md docs/reference/governance.md docs/registry/README.md docs/registry/family-rollout-checklist.md` passed.
@@ -101,7 +101,7 @@ Prepare `@marwes-ui/core`, `@marwes-ui/presets`, `@marwes-ui/react`, and `@marwe
 - Replaced adapter-local spinner loading colors with `currentColor` so button loading visuals inherit the themed button text color.
 - Added preset theme-token coverage plus React/Vue adapter source integrity tests to prevent fixed design colors from leaking back into runtime adapter source or component-scoped preset variables.
 - `pnpm validate:packages` passed after graphical theme hardening.
-- `pnpm validate:docs` passed after rerun with local `tsx` IPC permissions; the sandboxed first run failed only at `artifacts:check` with `listen EPERM`.
+- `pnpm check:repo-map` passed after rerun with local `tsx` IPC permissions; the sandboxed first run failed only at `artifacts:check` with `listen EPERM`.
 - `pnpm validate:family button` passed after rerun with local `tsx` IPC permissions; the sandboxed first run failed only at `registry:check` with `listen EPERM`.
 - `pnpm validate:security` passed with npm registry network access; the sandboxed first run failed with `ENOTFOUND registry.npmjs.org`.
 - `pnpm exec biome check .` passed after graphical theme hardening.

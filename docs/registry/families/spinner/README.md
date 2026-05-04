@@ -353,7 +353,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/spinner/__tests__/
 pnpm --filter @marwes-ui/vue exec vitest run src/components/spinner/__tests__/spinner.test.ts src/components/spinner/__tests__/variants.test.ts src/components/spinner/__tests__/index-exports.test.ts src/components/button/__tests__/button.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/spinner/__tests__/spinner-introduction-docs.test.ts src/stories/spinner/__tests__/spinner-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/spinner/__tests__/spinner-introduction-docs.test.ts src/stories/spinner/__tests__/spinner-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

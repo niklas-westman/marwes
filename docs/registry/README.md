@@ -78,8 +78,9 @@ artifacts/
 - Cross-family accessibility support assumptions now live in [`../reference/accessibility.md`](../reference/accessibility.md)
 - Accessibility strategy and support assumptions live in [`../reference/accessibility.md`](../reference/accessibility.md)
 - Family accessibility execution still lives in [`../audits/README.md`](../audits/README.md)
+- Compact current family blocker/manual-review status lives in [`../audits/status.md`](../audits/status.md)
 
-The registry sits above those sources and links them together per family.
+The registry sits above those sources and links them together per family. Registry pages should describe family contracts and link evidence, but should not become the compact cross-family audit status table.
 
 ## Visual policy
 
@@ -129,3 +130,6 @@ When preview assets are needed:
 1. Continue with the next family queue from `family-rollout-checklist.md`
 2. Use `pnpm validate:family <family>` as the default focused family gate
 3. Use `pnpm validate:release` before publish-level decisions
+
+
+Status ownership note: compact cross-family status is owned by `docs/audits/status.md`.

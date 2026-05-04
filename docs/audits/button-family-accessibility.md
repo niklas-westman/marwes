@@ -212,7 +212,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/button/__tests__/button.test.ts src/components/button/__tests__/purpose-button-locking.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/button/__tests__/button-introduction-docs.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/button/__tests__/button-introduction-docs.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 
 Broader follow-up verification when convenient:
 - [ ] `pnpm typecheck`
