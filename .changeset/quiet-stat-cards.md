@@ -5,4 +5,4 @@
 "@marwes-ui/vue": minor
 ---
 
-Add Vue StatCard metric props and make package test scripts run with `NODE_ENV=test`.
+Run package test scripts with `NODE_ENV=test` for stable local and changed-scope validation.

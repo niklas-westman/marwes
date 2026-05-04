@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
-import { defineComponent, h, nextTick, reactive } from "vue"
+import { defineComponent, h } from "vue"
 import { runCardContract } from "../../../../../../tests/contracts/card.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Card } from "../card"
@@ -11,7 +11,7 @@ function renderWithProvider(
   props: Record<string, unknown>,
   slots?: Record<string, () => unknown>,
 ) {
-  return render(
+  render(
     defineComponent({
       setup() {
         return () =>
@@ -99,47 +99,5 @@ describe("Vue Card (Atom)", () => {
     expect(card?.id).toBe("team-card")
     expect(card?.className).toContain("mw-card")
     expect(card?.className).toContain("custom-card")
-  })
-
-  it("renders StatCard metric tile slots when value props are provided", () => {
-    renderWithProvider(StatCard, {
-      title: "Context reduction",
-      value: "42%",
-      note: "Estimated context-token reduction while preserving authority.",
-      meta: "generation-6 candidate",
-    })
-
-    const value = screen.getByText("42%")
-    const note = screen.getByText("Estimated context-token reduction while preserving authority.")
-    const meta = screen.getByText("generation-6 candidate")
-    const metric = value.closest(".mw-stat-card__metric")
-
-    expect(metric).not.toBeNull()
-    expect(metric).toHaveAttribute("data-slot", "metric-tile")
-    expect(value.className).toContain("mw-stat-card__value")
-    expect(note.className).toContain("mw-stat-card__note")
-    expect(meta.className).toContain("mw-stat-card__meta")
-  })
-
-  it("updates StatCard metric tile slots when value props change", async () => {
-    const metricProps = reactive({
-      value: "42%",
-      note: "Initial estimate",
-      meta: "generation-6 candidate",
-    })
-
-    renderWithProvider(StatCard, metricProps)
-
-    expect(screen.getByText("42%")).toBeTruthy()
-
-    metricProps.value = "58%"
-    metricProps.note = "Updated estimate"
-    metricProps.meta = "generation-7 candidate"
-    await nextTick()
-
-    expect(screen.queryByText("42%")).toBeNull()
-    expect(screen.getByText("58%")).toBeTruthy()
-    expect(screen.getByText("Updated estimate")).toBeTruthy()
-    expect(screen.getByText("generation-7 candidate")).toBeTruthy()
   })
 })
