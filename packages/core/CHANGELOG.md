@@ -1,5 +1,11 @@
 # @marwes-ui/core
 
+## 1.1.0
+
+### Minor Changes
+
+- [#29](https://github.com/niklas-westman/marwes/pull/29) [`ac9f0c0`](https://github.com/niklas-westman/marwes/commit/ac9f0c0b3807169cd89d268d043895186438a591) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Run package test scripts with `NODE_ENV=test` for stable local and changed-scope validation.
+
 ## 1.0.5
 
 ### Patch Changes
