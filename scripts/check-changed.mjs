@@ -114,8 +114,7 @@ if (biomeTargets.length > 0) {
 }
 
 if (docsChanged) {
-  run("Docs links", "pnpm", ["docs:links"])
-  run("Docs/API drift", "pnpm", ["docs:api"])
+  run("Compass docs-system check", "pnpm", ["check:compass"])
 }
 
 if (families.length > 0) {

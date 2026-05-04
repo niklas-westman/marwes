@@ -95,3 +95,6 @@ Status docs to update when relevant:
 - [Specification](../reference/spec.md)
 - [Testing](../reference/testing.md)
 - [Governance](../reference/governance.md)
+
+
+Status ownership note: compact cross-family status is owned by `docs/audits/status.md`.

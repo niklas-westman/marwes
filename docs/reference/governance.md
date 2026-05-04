@@ -43,13 +43,14 @@ pnpm validate:release
 Current `pnpm validate:release` enforcement:
 - `pnpm validate:security`
 - `pnpm validate:packages`
-- `pnpm validate:docs`
+- `pnpm check:repo-map`
 - `pnpm exec biome check .`
 - `pnpm test:storybook:a11y`
 
 These gates protect:
 - dependency audit health across full and production graphs
 - package typecheck, build, and test health
+- Compass docs-system integrity
 - broken markdown links
 - docs/API drift in package-facing docs
 - semantic registry coherence
@@ -93,8 +94,8 @@ The reusable CI workflow now enforces:
 
 ```mermaid
 graph TD
-  A[Docs and README files] --> B[pnpm docs:links]
-  A --> C[pnpm docs:api]
+  A[Docs and README files] --> B[pnpm check:compass]
+  A --> C[pnpm check:compass]
 
   D[packages/core/src/semantics/*] --> E[pnpm semantics:check]
   D --> F[scripts/generate-trust-artifacts.ts]
@@ -197,8 +198,8 @@ This means publication depends on the same trust gates used for normal CI, plus 
 Run:
 
 ```bash
-pnpm docs:links
-pnpm docs:api
+pnpm check:compass
+pnpm check:compass
 ```
 
 ### When you change semantic families or purposes
@@ -265,8 +266,8 @@ Examples:
 
 ```bash
 pnpm check
-pnpm docs:links
-pnpm docs:api
+pnpm check:compass
+pnpm check:compass
 pnpm semantics:check
 pnpm artifacts:generate
 pnpm artifacts:check

@@ -79,11 +79,12 @@ Use the playground for:
 Use the smallest gate that matches the risk of the change, then move upward when the branch gets closer to review.
 
 ```bash
-pnpm help:repo                     # print the singular repo route model
+pnpm compass                       # print the singular repo route model
+pnpm help:repo                     # compatibility alias for pnpm compass
 pnpm check:changed                 # quick changed-scope gate against origin/main
 pnpm check:changed -- --base main  # same gate against a different base
 pnpm validate:family button        # full family path for one component family
-pnpm validate:docs                 # docs, generated truth, registry, story taxonomy, adapter boundary guardrail
+pnpm check:repo-map                 # full docs/repo-map/generated-truth integrity gate
 pnpm validate:packages             # typecheck, package builds, package tests
 pnpm validate:release              # security, packages, docs, full biome check, Storybook a11y smoke
 pnpm check                         # docs + full biome check + Storybook a11y smoke
@@ -99,6 +100,7 @@ pnpm format:all
 pnpm test
 pnpm build
 pnpm check:adapter-boundaries
+pnpm check:compass
 pnpm check:repo-map
 pnpm parity:summary:check
 ```

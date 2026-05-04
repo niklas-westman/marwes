@@ -2,7 +2,7 @@
 
 This is the single starting point for Marwes.
 
-Pick what you are trying to do, follow one short path, and run one matching validation command. If you need the full spiderweb, open [Repo Map](./reference/repo-map.md).
+Pick what you are trying to do, follow one short path, and run one matching validation command. If you want the same route model in the terminal, run `pnpm compass`. If you need the full connection contract, open [Repo Map](./reference/repo-map.md).
 
 ## The one-minute model
 
@@ -29,7 +29,7 @@ Go here:
 Run before sharing docs/examples:
 
 ```bash
-pnpm validate:docs
+pnpm check:repo-map
 ```
 
 Stop if:
@@ -74,7 +74,7 @@ Go here:
 Run:
 
 ```bash
-pnpm validate:docs
+pnpm check:repo-map
 ```
 
 Stop if:
@@ -93,7 +93,7 @@ Go here:
 Run:
 
 ```bash
-pnpm validate:docs
+pnpm check:repo-map
 ```
 
 Stop if:
@@ -153,8 +153,10 @@ It detects changed docs/source/families, runs the relevant focused checks, and f
 If you want this routing model in the terminal, run:
 
 ```bash
-pnpm help:repo
+pnpm compass
 ```
+
+`pnpm help:repo` remains as a compatibility alias.
 
 ## Where to zoom out
 

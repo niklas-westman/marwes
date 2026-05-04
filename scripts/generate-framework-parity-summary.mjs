@@ -37,7 +37,7 @@ lines.push(
   "",
   "```bash",
   "pnpm parity:summary:check",
-  "pnpm validate:docs",
+  "pnpm check:repo-map",
   "```",
   "",
 )

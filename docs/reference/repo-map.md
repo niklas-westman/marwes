@@ -2,7 +2,12 @@
 
 Marwes has several useful but easy-to-mix-up threads. This map explains how they connect and what to update when one thread changes.
 
-Use this as the spiderweb view after [Start Here](../start-here.md) and [Architecture](./architecture.md).
+Naming model:
+
+- **Compass** is the route finder: `pnpm compass` and [Start Here](../start-here.md).
+- **Repo Map** is the connection contract: this file and `pnpm check:repo-map`.
+
+Use this as the connection-contract view after [Start Here](../start-here.md) and [Architecture](./architecture.md).
 
 ## Thread model
 
@@ -53,16 +58,17 @@ graph TD
 
 ## Primary validation commands
 
+- `pnpm compass`
 - `pnpm help:repo`
+- `pnpm check:compass`
+- `pnpm check:repo-map`
 - `pnpm check:changed`
 - `pnpm check:adapter-boundaries`
 - `pnpm validate:family <family>`
-- `pnpm validate:docs`
 - `pnpm validate:packages`
 - `pnpm validate:release`
 - `pnpm registry:check`
 - `pnpm parity:summary:check`
-- `pnpm docs:links`
 
 ## Authority order
 
@@ -83,12 +89,12 @@ When two sources disagree, resolve the conflict in this order:
 | Preset CSS for a family | React/Vue stories, visual states, preset CSS tests, registry notes | `pnpm validate:family <family>` |
 | React adapter | Vue adapter parity, shared contracts, Storybook React/Vue coverage | `pnpm validate:family <family>` |
 | Vue adapter | React adapter parity, shared contracts, Storybook React/Vue coverage | `pnpm validate:family <family>` |
-| Purpose variant or semantic metadata | semantic registry, generated artifacts, registry family docs, docs/API drift check | `pnpm validate:docs` |
-| Registry family docs | generated registry artifact and links | `pnpm registry:check && pnpm docs:links` |
-| Audit findings | `docs/audits/status.md`, registry family status, reference accessibility docs if policy changed | `pnpm docs:links` |
+| Purpose variant or semantic metadata | semantic registry, generated artifacts, registry family docs, docs/API drift check | `pnpm check:repo-map` |
+| Registry family docs | generated registry artifact and links | `pnpm check:repo-map` |
+| Audit findings | `docs/audits/status.md`, registry family status, reference accessibility docs if policy changed | `pnpm check:compass` |
 | Public package API | README/package docs, guides, examples, changeset, typecheck, tests | `pnpm validate:packages` |
-| Adoption guide | docs links and docs/API drift rules | `pnpm validate:docs` |
-| Copyable block | block README, guide links, examples against current public API | `pnpm validate:docs` |
+| Adoption guide | docs links and docs/API drift rules | `pnpm check:repo-map` |
+| Copyable block | block README, guide links, examples against current public API | `pnpm check:repo-map` |
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
 | Package-wide implementation | package docs, typecheck, builds, tests | `pnpm validate:packages` |
 | Architecture guardrail | component adapter boundaries, core purity, preset ownership | `pnpm check:adapter-boundaries` |
@@ -100,6 +106,8 @@ This file is guarded by:
 ```bash
 pnpm check:repo-map
 ```
+
+Internally, that command runs `pnpm check:compass` plus the generated-truth checks for semantics, trust artifacts, registry, parity summary, Storybook consistency, and adapter boundaries. Use `pnpm check:compass` when you want only the Compass/routing rules, including links and docs/API drift.
 
 The check verifies that the most important paths, commands, and routing phrases in this map still exist. It is intentionally lightweight; deeper architecture judgement still belongs in review.
 

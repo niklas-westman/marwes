@@ -1,8 +1,8 @@
-# Spiderweb Simplification Audit
+# Compass + Repo Map Simplification Audit
 
 ## Purpose
 
-Use the new [Start Here](../start-here.md) and [Repo Map](../reference/repo-map.md) docs as diagnostic tools for simplifying Marwes' internal system.
+Use [Start Here](../start-here.md), `pnpm compass`, and [Repo Map](../reference/repo-map.md) as diagnostic tools for simplifying Marwes' internal system.
 
 The goal is not to remove useful rigor. The goal is to make the rigor easier to enter, easier to route through, and easier to automate.
 
@@ -12,7 +12,7 @@ Marwes now has a good top-level shape:
 
 ```text
 start-here.md = singular human entry point
-repo-map.md   = thread/spiderweb view
+repo-map.md   = connection-contract view
 testing.md    = validation depth
 registry      = family-level knowledge
 audits        = accessibility evidence/history
@@ -73,7 +73,7 @@ Friction:
 Recommendation:
 
 - Keep the human matrix.
-- Add a small `scripts/check-repo-map-coverage.mjs` later that verifies key links/commands/paths mentioned by the map exist.
+- Add a Compass repo-map rule that verifies key links/commands/paths mentioned by the map exist.
 - Eventually use the same source data to power `pnpm help:repo`.
 
 Priority: **P1**
@@ -86,17 +86,17 @@ What works:
 
 - `pnpm check:changed` is a strong simplification: one local confidence command.
 - `validate:family <family>` is the right component-family gate.
-- `validate:docs` is the right generated-truth/docs gate.
+- `check:repo-map` is the right generated-truth/docs gate.
 
 Friction:
 
-- There are still many commands in `package.json`, and several names overlap mentally: `check`, `check:changed`, `validate:docs`, `validate:release`.
-- `validate:docs` does a lot. For pure block docs, this is honest but maybe heavier than necessary.
+- There are still many commands in `package.json`, and several names overlap mentally: `check`, `check:changed`, `check:repo-map`, `validate:release`.
+- `check:repo-map` does a lot. For pure block docs, this is honest but maybe heavier than necessary.
 
 Recommendation:
 
 - Keep all existing commands for now.
-- Document only four primary commands in `start-here.md`: `check:changed`, `validate:family`, `validate:docs`, `validate:release`.
+- Document only four primary commands in `start-here.md`: `check:changed`, `validate:family`, `check:repo-map`, `validate:release`.
 - Treat all others as supporting commands in `testing.md`.
 - Later consider a `pnpm help:repo` command that prints the four-command model.
 
@@ -115,7 +115,7 @@ What works:
 Friction:
 
 - `docs/audits/README.md`, `docs/audits/status.md`, registry family docs, and `docs/reference/accessibility.md` can all contain status-like claims.
-- This is the highest drift risk in the docs spiderweb.
+- This is the highest drift risk in the docs/repo-map system.
 
 Recommendation:
 
@@ -275,9 +275,22 @@ Completed in the P1 simplification pass:
 - `docs/audits/status.md` is now documented as the compact current family status surface
 - `docs/audits/README.md` is reframed as queue/process rather than status ownership
 - registry docs/template now point family status changes back to `docs/audits/status.md`
-- added `scripts/check-repo-map-coverage.mjs` and `pnpm check:repo-map`
-- `pnpm validate:docs` now includes repo-map coverage
+- added Compass repo-map coverage rules and `pnpm check:repo-map`
+- `pnpm check:repo-map` now includes repo-map coverage
 - registry family template now captures family-specific adapter parity expectations without duplicating generic rules
+
+## Compass + Repo Map consolidation note
+
+Completed after P2 as a naming and validation cleanup pass:
+
+- `pnpm compass` is now the primary route-finder command
+- `pnpm help:repo` remains as a compatibility alias
+- `scripts/compass/check.mjs` centralizes Compass routing/docs-system checks
+- `docs:links` and `docs:api` are compatibility wrappers over focused Compass rules
+- `pnpm check:compass` is the primary Compass rule runner
+- `pnpm check:repo-map` is the full docs/repo-map/generated-truth integrity gate
+- Repo Map remains the connection contract, validated by Compass rules
+- implementation plan captured in `docs/planning/compass-repo-map-implementation.md`
 
 ## P2 implementation note
 
@@ -286,5 +299,5 @@ Completed in the P2 polish pass:
 - added `pnpm help:repo` as a terminal version of the singular route model
 - added generated `docs/reference/framework-parity-summary.md` from `artifacts/framework-parity.json`
 - added `pnpm parity:summary` and `pnpm parity:summary:check`
-- `pnpm validate:docs` now checks the generated parity summary
+- `pnpm check:repo-map` now checks the generated parity summary
 - `docs/reference/spec.md` now explicitly points newcomers back to `docs/start-here.md` instead of acting as the onboarding route

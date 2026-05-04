@@ -54,10 +54,10 @@ pnpm validate:packages
 Runs package typechecks, package builds, and package tests.
 
 ```bash
-pnpm validate:docs
+pnpm check:repo-map
 ```
 
-Runs docs links, docs/API drift, semantic registry, trust artifacts, component registry, and Storybook consistency.
+Runs Compass docs-system checks, semantic registry, trust artifacts, component registry, framework parity summary, Storybook consistency, and adapter boundary checks.
 
 ```bash
 pnpm validate:security

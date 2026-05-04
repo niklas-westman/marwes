@@ -16,5 +16,5 @@ It is a compact human view of the current generated parity artifact. Do not edit
 
 ```bash
 pnpm parity:summary:check
-pnpm validate:docs
+pnpm check:repo-map
 ```
