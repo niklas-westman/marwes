@@ -287,7 +287,7 @@ Completed after P2 as a naming and validation cleanup pass:
 - `pnpm check:compass` is the Compass rule runner
 - `pnpm check:repo-map` is the full docs/repo-map/generated-truth integrity gate
 - Repo Map remains the connection contract, validated by Compass rules
-- implementation plan captured in `docs/planning/compass-repo-map-implementation.md`
+- temporary implementation notes were removed after their durable outcomes were captured here and in the reference docs
 
 ## P2 implementation note
 
