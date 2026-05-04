@@ -6,6 +6,7 @@ const meta: Meta<typeof DestructiveDialog> = {
   title: "Dialog/Purpose/DestructiveDialog",
   component: DestructiveDialog,
   parameters: storybookLayout.centered,
+  tags: ["autodocs"],
 }
 
 export default meta

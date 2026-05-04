@@ -1,0 +1,145 @@
+/*
+ * Segmented Control Styles
+ * Figma refs: segmented-control 1571:19333, segmented-item 1791:866
+ */
+
+.mw-segmented-control-field {
+  display: inline-grid;
+  gap: var(--mw-spacing-sp-8, 8px);
+}
+
+.mw-segmented-control__label {
+  color: var(--mw-color-text, #141414);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.mw-segmented-control {
+  --mw-segmented-control-track: var(--mw-color-surface-subtle, #f3f4f6);
+  --mw-segmented-control-border: var(--mw-color-border-subtle, #e5e7eb);
+  --mw-segmented-control-item-selected: var(--mw-color-surface, #f9fafb);
+  --mw-segmented-control-item-selected-contrast: var(--mw-color-text, #141414);
+  --mw-segmented-control-label: var(--mw-color-text-muted, #595959);
+  --mw-segmented-control-label-selected: var(--mw-color-text, #141414);
+  --mw-segmented-control-label-contrast-selected: var(--mw-color-text-inverted, #ffffff);
+  --mw-segmented-control-label-disabled: var(--mw-color-text-disabled, #a3a3a3);
+
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  gap: var(--mw-spacing-sp-2, 2px);
+  min-height: 40px;
+  padding: var(--mw-spacing-sp-4, 4px);
+  width: fit-content;
+  max-width: 100%;
+  background: var(--mw-segmented-control-track);
+  border: 1px solid var(--mw-segmented-control-border);
+  border-radius: var(--mw-ui-radius, 8px);
+}
+
+.mw-segmented-control--disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.mw-segmented-control__item {
+  appearance: none;
+  position: relative;
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 32px;
+  gap: var(--mw-spacing-sp-8, 8px);
+  padding: var(--mw-spacing-sp-8, 8px)
+    calc(var(--mw-spacing-sp-8, 8px) + var(--mw-spacing-sp-4, 4px));
+  background: transparent;
+  color: var(--mw-segmented-control-label);
+  border: none;
+  border-radius: calc(var(--mw-ui-radius, 8px) - 2px);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-density-font-size, 14px);
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.mw-segmented-control__item--selected {
+  background: var(--mw-segmented-control-item-selected);
+  color: var(--mw-segmented-control-label-selected);
+}
+
+.mw-segmented-control__item--selected.mw-segmented-control__item--contrast {
+  background: var(--mw-segmented-control-item-selected-contrast);
+  color: var(--mw-segmented-control-label-contrast-selected);
+}
+
+.mw-segmented-control__item:hover:not(:disabled):not(.mw-segmented-control__item--disabled) {
+  color: var(--mw-segmented-control-label-selected);
+  background: color-mix(in srgb, var(--mw-segmented-control-item-selected) 70%, transparent);
+}
+
+.mw-segmented-control__item--selected:hover:not(:disabled):not(
+    .mw-segmented-control__item--disabled
+  ) {
+  background: var(--mw-segmented-control-item-selected);
+}
+
+.mw-segmented-control__item--selected.mw-segmented-control__item--contrast:hover:not(:disabled):not(
+    .mw-segmented-control__item--disabled
+  ) {
+  background: var(--mw-segmented-control-item-selected-contrast);
+  color: var(--mw-segmented-control-label-contrast-selected);
+}
+
+.mw-segmented-control__item:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2684ff);
+  z-index: 1;
+}
+
+.mw-segmented-control__item--disabled,
+.mw-segmented-control__item:disabled {
+  color: var(--mw-segmented-control-label-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mw-segmented-control__item-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  color: currentColor;
+}
+
+.mw-segmented-control__item-icon > svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+
+.mw-segmented-control__item-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mw-theme--dark .mw-segmented-control {
+  --mw-segmented-control-track: var(--mw-color-surface-subtle);
+  --mw-segmented-control-border: var(--mw-color-border);
+  --mw-segmented-control-item-selected: var(--mw-color-surface-elevated);
+  --mw-segmented-control-item-selected-contrast: var(--mw-color-text);
+  --mw-segmented-control-label: var(--mw-color-text-muted);
+  --mw-segmented-control-label-selected: var(--mw-color-text);
+  --mw-segmented-control-label-contrast-selected: var(--mw-color-background);
+  --mw-segmented-control-label-disabled: var(--mw-color-text-disabled);
+}

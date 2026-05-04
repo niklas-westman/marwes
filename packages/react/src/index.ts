@@ -330,6 +330,13 @@ export type {
   RadiusSliderProps,
 } from "./components/slider"
 
+/* Segmented Control */
+export { SegmentedControl } from "./components/segmented-control"
+export type {
+  SegmentedControlOption,
+  SegmentedControlProps,
+} from "./components/segmented-control"
+
 /* Tab */
 export {
   Tab,

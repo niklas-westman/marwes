@@ -22,6 +22,9 @@ const config: StorybookConfig = {
 
   async viteFinal(cfg) {
     cfg.resolve ??= {}
+    cfg.build ??= {}
+    cfg.build.chunkSizeWarningLimit = 1600
+
     const existing = Array.isArray(cfg.resolve.alias) ? cfg.resolve.alias : []
 
     cfg.resolve.alias = [

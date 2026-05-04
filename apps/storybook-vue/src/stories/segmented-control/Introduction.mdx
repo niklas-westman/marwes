@@ -1,0 +1,79 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="SegmentedControl/Introduction" />
+
+# Segmented Control
+
+Segmented control lets people choose one value from a small set of sibling options without leaving the current surface. It is best for view modes, density choices, and lightweight filters where every option has the same weight.
+
+The Marwes implementation follows the component workflow from `docs/guides/adding-components.md`: core owns the single-selection and accessibility contract, the `firstEdition` preset owns the Figma-matched track/item styling, and React/Vue adapters stay thin.
+
+## Figma reference
+
+Use the current synced local Figma sources:
+
+- `.figma/marwes/components/segmented-control.json` — component set for 2, 3, and 4 segment variants, icon/no-icon, and contrast selected item treatment
+- `.figma/marwes/components/segmented-item.json` — active/inactive item states and contrast states
+- `.figma/marwes/pages/-segmented-control/README.md` — generated page overview
+
+The core visual treatment is a 40px track with 4px padding, 2px item gap, 32px item height, 6px item radius, and optional 12px icons.
+
+## Usage
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { SegmentedControl } from "@marwes-ui/vue"
+
+const viewMode = ref("list")
+
+const options = [
+  { value: "list", label: "List" },
+  { value: "grid", label: "Grid" },
+  { value: "cards", label: "Cards" },
+]
+</script>
+
+<template>
+  <SegmentedControl label="View mode" :options="options" v-model="viewMode" />
+</template>
+```
+
+## Variants
+
+`variant="surface"` is the default selected segment treatment. It uses a raised surface selected item in both themes.
+
+`variant="contrast"` is the high-contrast selector. In light theme the selected segment follows the dark text token, and in dark theme it flips to the light text token. Use this for the black/white toggle selector shown in Figma.
+
+```vue
+<SegmentedControl variant="surface" label="View mode" :options="options" />
+<SegmentedControl variant="contrast" label="Theme mode" :options="options" />
+```
+
+## Accessibility contract
+
+`SegmentedControl` renders a named `radiogroup` and each segment renders as a button with `role="radio"` and `aria-checked`. Arrow keys, Home, and End move selection through enabled options. Disabled options are skipped by keyboard movement and cannot be clicked.
+
+Prefer a visible `label`. If the control is visually labelled elsewhere, use `ariaLabel` or `ariaDescribedBy` to keep the group understandable for assistive technology.
+
+## When to use
+
+Use segmented control for:
+
+- Switching between list/grid/card views
+- Choosing layout density
+- Selecting a small display preference such as theme mode
+- Lightweight filters where only one value can be active
+
+Do not use it for:
+
+- Navigation with associated panels — use `TabGroup`
+- Long option lists — use `Select` or radio groups
+- Multi-select filtering — use checkbox patterns
+
+## Component reference
+
+**`SegmentedControl`** - Single-selection control with optional visible label, icons, disabled options, `surface`/`contrast` variants, controlled/uncontrolled value flow, and React/Vue parity.
+
+- `SegmentedControl/Introduction`
+- `SegmentedControl/Atom`

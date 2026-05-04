@@ -288,7 +288,7 @@ What makes Marwes different? **Complete separation of concerns:**
 - Input family: `Input`, `Select`, `Textarea`, `RichText`, and field wrappers
 - Checkbox family: `Checkbox`, `CheckboxField`, `CheckboxGroupField`
 - Radio family: `Radio`, `RadioGroupField`, purpose radio groups
-- `Switch`, `Accordion`, `Badge`, `Card`, `Toast`, `Slider`, `Spacing`
+- `Switch`, `SegmentedControl`, `Accordion`, `Badge`, `Card`, `Toast`, `Slider`, `Spacing`
 - Typography: `H1`, `H2`, `H3`, `Paragraph`
 - Utilities and primitives: `Icon`, `Divider`
 

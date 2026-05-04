@@ -5,14 +5,16 @@ import type { Decorator, Preview } from "@storybook/react"
 const withMarwes: Decorator = (Story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
   const mode: ThemeMode = storybookTheme === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
+  const isDocsView = context.viewMode === "docs"
 
   return (
     <MarwesProvider theme={{ mode }}>
       <div
         style={{
-          minHeight: "100vh",
-          padding: 24,
+          minHeight: isDocsView ? "auto" : "100vh",
+          padding: isDocsView ? 0 : 24,
           background: mode === ThemeMode.dark ? "#000000" : "#ffffff",
+          boxSizing: "border-box",
         }}
       >
         <Story />

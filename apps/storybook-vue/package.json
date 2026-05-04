@@ -7,6 +7,7 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:a11y:smoke": "vitest run --config vite.config.ts --project storybook src/stories/button/button.stories.ts src/stories/checkbox/checkbox-field.stories.ts src/stories/radio/radio-group-field.stories.ts src/stories/toast/toast.stories.ts src/stories/spinner/spinner.stories.ts",
+    "test:docs-layout": "node ../../scripts/check-storybook-docs-layout.mjs --app=. --label=Vue --port=6107 --entries=buttons-atom-button--docs:Buttons/Atom/Button,checkbox-molecule-checkboxfield--docs:Checkbox/Molecule/CheckboxField,dialog-atom--docs:Dialog/Atom,icon-atom--docs:Icon/Atom,toast-atom--docs:Toast/Atom",
     "build": "tsc -b --noEmit && storybook build",
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build"

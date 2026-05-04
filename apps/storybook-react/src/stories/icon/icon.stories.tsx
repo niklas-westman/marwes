@@ -18,6 +18,7 @@ type Args = {
 const meta: Meta<Args> = {
   title: "Icon/Atom",
   parameters: storybookLayout.fullscreen,
+  tags: ["autodocs"],
   args: storybookIconGalleryDefaults,
   argTypes: storybookIconGalleryArgTypes,
 }

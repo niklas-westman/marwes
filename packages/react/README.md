@@ -214,6 +214,7 @@ Forms and inputs:
 - `Radio`, `RadioGroupField`, `YesNoRadioGroup`, `RatingRadioGroup`, `OptionRadioGroup`
 - `Switch`, `SwitchField`, `FeatureToggle`, `PreferenceSwitch`, `PermissionSwitch`
 - `Slider`, `SliderField`, `VolumeSlider`, `BrightnessSlider`, `RadiusSlider`
+- `SegmentedControl`
 
 Content and layout:
 - `Card`, `ProductCard`, `ProfileCard`, `StatCard`

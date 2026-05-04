@@ -22,6 +22,15 @@ export type { BadgeOptions, BadgeRenderKit } from "./badge"
 export * from "./button"
 export * from "./radio"
 export type { RadioOptions, RadioRenderKit } from "./radio"
+export * from "./segmented-control"
+export type {
+  SegmentedControlItemOptions,
+  SegmentedControlItemRenderKit,
+  SegmentedControlItemState,
+  SegmentedControlOptions,
+  SegmentedControlRenderKit,
+  SegmentedControlVariantName,
+} from "./segmented-control"
 export * from "./switch"
 export type { SwitchOptions, SwitchRenderKit } from "./switch"
 export * from "./slider"

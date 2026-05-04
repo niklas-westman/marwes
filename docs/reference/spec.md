@@ -488,6 +488,38 @@ Use this format when resolving an open decision:
   - Storybook: `apps/storybook-react/src/stories/avatar/*`, `apps/storybook-vue/src/stories/avatar/*`
   - Docs/changelog: `docs/reference/spec.md`, `.changeset/*`
 
+### REQ-SEGMENTED-001: Segmented Control
+- **Figma reference**:
+  - `.figma/marwes/components/segmented-control.json`
+  - `.figma/marwes/components/segmented-item.json`
+  - `.figma/marwes/pages/-segmented-control/README.md`
+- **Problem**: The synced V3 Figma library includes a Segmented control family for small single-choice view/display preferences, but Marwes has no shipped React/Vue component for it yet.
+- **Scope**:
+  - Add `SegmentedControl` to core, presets, React, Vue, and both Storybooks
+  - Support controlled and uncontrolled single-selection value flow
+  - Support visible labels, aria labels, disabled group state, disabled options, icons, and `surface` / `contrast` selected item variants
+  - Use radio-group semantics with keyboard movement across enabled options
+- **Non-goals**:
+  - Replacing `TabGroup` for navigation with associated panels
+  - Supporting multi-select segmented filters
+  - Adding vertical orientation or overflow behavior in this pass
+- **Acceptance criteria**:
+  - [x] Core exposes segmented-control recipes, a11y helpers, value resolution, and keyboard movement helpers
+  - [x] Preset CSS matches the synced 40px track / 32px item treatment with icon and `surface` / `contrast` variants
+  - [x] React and Vue expose matching `SegmentedControl` APIs with controlled/uncontrolled value flow
+  - [x] `SegmentedControl` renders a named `radiogroup` and item buttons with `role="radio"` and `aria-checked`
+  - [x] Arrow keys, Home, and End move selection through enabled options while skipping disabled options
+  - [x] Storybook introductions in React and Vue document Figma references, usage, accessibility, and when to choose tabs/select/radios instead
+- **Validation**:
+  - Unit: Core recipe tests and shared React/Vue segmented-control contract tests
+  - Integration/manual: Verify React and Vue Storybook stories against the synced Figma segmented-control references
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/segmented-control/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/test/recipes/segmented-control.test.ts`
+  - Presets: `packages/presets/src/firstEdition/segmented-control.css`, `packages/presets/src/firstEdition/styles.css`
+  - React: `packages/react/src/components/segmented-control/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/segmented-control/*`, `packages/vue/src/index.ts`
+  - Storybook/tests: `apps/storybook-react/src/stories/segmented-control/*`, `apps/storybook-vue/src/stories/segmented-control/*`, `tests/contracts/segmented-control.contract.ts`
+
 ### REQ-TAB-001: Tab Family Accessibility Contract
 - **Problem**: Marwes already ships `Tab`, `TabGroup`, `TabPanel`, and purpose-tab wrappers, but the accessibility contract for keyboard activation, disabled-tab behavior, and panel wiring has lived mostly in implementation and Storybook docs rather than the canonical spec.
 - **Scope**:
