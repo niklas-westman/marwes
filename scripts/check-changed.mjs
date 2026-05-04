@@ -15,14 +15,19 @@ for (let index = 2; index < process.argv.length; index += 1) {
   }
 }
 
-const base = args.get("--base") ?? process.env.CHANGE_BASE_REF ?? "origin/main"
+const explicitBase = args.get("--base")
+const base = explicitBase ?? process.env.CHANGE_BASE_REF ?? "origin/main"
+const branchMode = args.has("--branch") || Boolean(explicitBase)
+const allFamilies = args.has("--all-families")
+const familyThreshold = Number(args.get("--family-threshold") ?? 3)
 
 function git(args) {
   return execFileSync("git", args, { encoding: "utf8" }).trim()
 }
 
-function run(label, command, commandArgs) {
+function run(label, command, commandArgs, reason) {
   console.log("")
+  if (reason) console.log(`# ${reason}`)
   console.log(`$ ${[command, ...commandArgs].join(" ")}`)
   const result = spawnSync(command, commandArgs, {
     cwd: process.cwd(),
@@ -47,22 +52,61 @@ function splitFiles(output) {
     .filter(Boolean)
 }
 
-function changedFiles() {
+function uniqueSorted(files) {
+  return [...new Set(files)].sort((left, right) => left.localeCompare(right))
+}
+
+function localChangedFiles() {
+  const unstaged = splitFiles(git(["diff", "--name-only", "--diff-filter=ACMRTD"]))
+  const staged = splitFiles(git(["diff", "--cached", "--name-only", "--diff-filter=ACMRTD"]))
+  const untracked = splitFiles(git(["ls-files", "--others", "--exclude-standard"]))
+
+  return uniqueSorted([...unstaged, ...staged, ...untracked])
+}
+
+function latestCommitFiles() {
+  try {
+    return splitFiles(git(["diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD"]))
+  } catch {
+    return splitFiles(git(["diff", "--name-only", "--diff-filter=ACMRTD", "HEAD~1..HEAD"]))
+  }
+}
+
+function branchChangedFiles() {
   try {
     const committed = splitFiles(
       git(["diff", "--name-only", "--diff-filter=ACMRTD", `${base}...HEAD`]),
     )
-    const unstaged = splitFiles(git(["diff", "--name-only", "--diff-filter=ACMRTD"]))
-    const staged = splitFiles(git(["diff", "--cached", "--name-only", "--diff-filter=ACMRTD"]))
-    const untracked = splitFiles(git(["ls-files", "--others", "--exclude-standard"]))
-
-    return [...new Set([...committed, ...unstaged, ...staged, ...untracked])].sort((left, right) =>
-      left.localeCompare(right),
-    )
+    return uniqueSorted([...committed, ...localChangedFiles()])
   } catch (error) {
     console.error(`Failed to compare this branch against ${base}.`)
     console.error(error instanceof Error ? error.message : String(error))
     process.exit(1)
+  }
+}
+
+function changedFiles() {
+  if (branchMode) {
+    return {
+      files: branchChangedFiles(),
+      scope: explicitBase ? `branch against ${base}` : `branch against ${base}`,
+      range: `${base}...HEAD plus local changes`,
+    }
+  }
+
+  const localFiles = localChangedFiles()
+  if (localFiles.length > 0) {
+    return {
+      files: localFiles,
+      scope: "local worktree",
+      range: "staged, unstaged, and untracked files",
+    }
+  }
+
+  return {
+    files: uniqueSorted(latestCommitFiles()),
+    scope: "latest commit",
+    range: "HEAD",
   }
 }
 
@@ -93,39 +137,109 @@ function existingBiomeTargets(files) {
   return files.filter((file) => existsSync(file))
 }
 
-const files = changedFiles()
-const families = [...new Set(files.map(familyFromPath).filter(Boolean))].sort((a, b) =>
-  a.localeCompare(b),
-)
+function isDocsOnlyFile(file) {
+  return (
+    file.endsWith(".md") ||
+    file.startsWith("docs/") ||
+    file === "README.md" ||
+    file === "CSS_UPDATE.md" ||
+    file.startsWith(".github/")
+  )
+}
+
+function isSourceFile(file) {
+  return /^(packages|apps|scripts|tests)\//.test(file) || file === "package.json"
+}
+
+const { files, scope, range } = changedFiles()
+const families = uniqueSorted(files.map(familyFromPath).filter(Boolean))
 const docsChanged = files.some((file) => file.endsWith(".md") || file.startsWith("docs/"))
-const sourceChanged = files.some(
-  (file) => /^(packages|apps|scripts|tests)\//.test(file) || file === "package.json",
-)
+const docsOnly = files.length > 0 && files.every(isDocsOnlyFile)
+const sourceChanged = files.some(isSourceFile)
+const largeFamilyScope = families.length > familyThreshold
 
-console.log(`Changed-scope validation base: ${base}`)
-console.log(files.length === 0 ? "No changed files." : `Changed files: ${files.length}`)
-if (families.length > 0) console.log(`Changed families: ${families.join(", ")}`)
+console.log("Changed-scope validation")
+console.log(`Scope: ${scope}`)
+console.log(`Range: ${range}`)
+console.log(`Files: ${files.length}`)
+if (families.length > 0) console.log(`Families: ${families.join(", ")}`)
+if (docsOnly) console.log("Fast path: docs-only")
+if (largeFamilyScope) {
+  console.log(
+    `Large family scope: ${families.length} families exceeds threshold ${familyThreshold}.`,
+  )
+}
 
-run("Adapter/core boundary check", "pnpm", ["check:adapter-boundaries"])
+if (files.length === 0) {
+  console.log("No changed files.")
+  process.exit(0)
+}
 
 const biomeTargets = existingBiomeTargets(files)
 if (biomeTargets.length > 0) {
-  run("Biome changed files", "pnpm", ["exec", "biome", "check", ...biomeTargets])
+  run(
+    "Biome changed files",
+    "pnpm",
+    ["exec", "biome", "check", ...biomeTargets],
+    "changed files should stay formatted/linted",
+  )
 }
 
 if (docsChanged) {
-  run("Compass docs-system check", "pnpm", ["check:compass"])
+  run(
+    "Compass docs-system check",
+    "pnpm",
+    ["check:compass"],
+    "docs changed, so routing/link/API drift rules must pass",
+  )
+}
+
+if (!docsOnly) {
+  run(
+    "Adapter/core boundary check",
+    "pnpm",
+    ["check:adapter-boundaries"],
+    "source or tooling changed, so package boundaries must still hold",
+  )
 }
 
 if (families.length > 0) {
-  for (const family of families) {
-    run(`Family validation: ${family}`, "pnpm", ["validate:family", family])
+  if (largeFamilyScope && !allFamilies) {
+    run(
+      "Repo map integrity",
+      "pnpm",
+      ["check:repo-map"],
+      "large family scope detected; run shared integrity once instead of many family gates",
+    )
+    console.log("")
+    console.log(
+      `Skipped ${families.length} per-family gates. Re-run with --all-families to validate every family explicitly.`,
+    )
+  } else {
+    for (const family of families) {
+      run(
+        `Family validation: ${family}`,
+        "pnpm",
+        ["validate:family", family],
+        `family-specific files changed for ${family}`,
+      )
+    }
   }
 } else if (sourceChanged) {
-  run("Package typecheck", "pnpm", ["test:typecheck:packages"])
+  run(
+    "Package typecheck",
+    "pnpm",
+    ["test:typecheck:packages"],
+    "source/tooling changed without a specific family target",
+  )
 }
 
-run("Whitespace diff check", "git", ["diff", "--check"])
+run(
+  "Whitespace diff check",
+  "git",
+  ["diff", "--check"],
+  "diff should not contain whitespace errors",
+)
 
 console.log("")
 console.log("✓ Changed-scope validation passed")

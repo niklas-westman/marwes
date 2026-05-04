@@ -78,7 +78,8 @@ If you are not sure whether something belongs in core, presets, or an adapter, d
 Use the smallest useful command, then move upward as risk increases:
 
 ```bash
-pnpm check:changed
+pnpm check:changed                 # local worktree, or latest commit when clean
+pnpm check:changed -- --branch      # full branch before PR/review
 pnpm check:compass
 pnpm validate:family <family>
 pnpm check:repo-map

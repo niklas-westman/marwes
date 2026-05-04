@@ -80,14 +80,22 @@ Use the smallest gate that matches the risk of the change, then move upward when
 
 ```bash
 pnpm compass                       # print the singular repo route model
-pnpm check:changed                 # quick changed-scope gate against origin/main
-pnpm check:changed -- --base main  # same gate against a different base
+pnpm check:changed                 # smart local gate: local worktree, or latest commit when clean
+pnpm check:changed -- --branch      # whole branch against origin/main plus local changes
+pnpm check:changed -- --base main   # whole branch against an explicit base
+pnpm check:changed -- --all-families # force every detected family gate when scope is large
 pnpm validate:family button        # full family path for one component family
 pnpm check:repo-map                 # full docs/repo-map/generated-truth integrity gate
 pnpm validate:packages             # typecheck, package builds, package tests
 pnpm validate:release              # security, packages, repo-map, full biome check, Storybook a11y smoke
 pnpm check                         # docs + full biome check + Storybook a11y smoke
 ```
+
+### Changed-scope behavior
+
+`pnpm check:changed` is optimized for daily work on long-lived branches. By default it validates the local worktree; when the worktree is clean, it validates the latest commit. Use `--branch` or `--base <ref>` when you intentionally want the full branch range.
+
+For docs-only changes it uses a fast path: changed-file Biome, `pnpm check:compass`, and `git diff --check`. For large family scopes, it runs shared integrity once through `pnpm check:repo-map` instead of many per-family gates unless `--all-families` is passed.
 
 ### Repo-wide supporting commands
 

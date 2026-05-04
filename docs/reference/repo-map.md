@@ -97,6 +97,7 @@ When two sources disagree, resolve the conflict in this order:
 | Copyable block | block README, guide links, examples against current public API | `pnpm check:repo-map` |
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
 | Package-wide implementation | contributor guide, package docs, typecheck, builds, tests | `pnpm validate:packages` |
+| Long-lived branch smoke check | changed files, family scope, docs routing, package boundaries | `pnpm check:changed` locally, `pnpm check:changed -- --branch` before review |
 | Architecture guardrail | component adapter boundaries, core purity, preset ownership | `pnpm check:adapter-boundaries` |
 
 ## Repo map coverage
