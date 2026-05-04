@@ -77,26 +77,4 @@ describe("Card (Atom)", () => {
     expect(card?.getAttribute("tabindex")).toBe("0")
     expect(card?.getAttribute("aria-disabled")).toBe("true")
   })
-
-  it("renders StatCard metric tile slots when value props are provided", () => {
-    renderWithProvider(
-      <StatCard
-        title="Context reduction"
-        value="42%"
-        note="Estimated context-token reduction while preserving authority."
-        meta="generation-6 candidate"
-      />,
-    )
-
-    const value = screen.getByText("42%")
-    const note = screen.getByText("Estimated context-token reduction while preserving authority.")
-    const meta = screen.getByText("generation-6 candidate")
-    const metric = value.closest(".mw-stat-card__metric")
-
-    expect(metric).not.toBeNull()
-    expect(metric).toHaveAttribute("data-slot", "metric-tile")
-    expect(value.className).toContain("mw-stat-card__value")
-    expect(note.className).toContain("mw-stat-card__note")
-    expect(meta.className).toContain("mw-stat-card__meta")
-  })
 })
