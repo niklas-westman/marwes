@@ -211,6 +211,10 @@ export type { H1Props, H2Props, H3Props } from "./components/heading"
 export { Paragraph } from "./components/paragraph"
 export type { ParagraphProps } from "./components/paragraph"
 
+/* StatTile */
+export { StatTile } from "./components/stat-tile"
+export type { StatTileProps } from "./components/stat-tile"
+
 /* Card */
 export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"
 export type {

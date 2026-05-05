@@ -7,7 +7,7 @@
     "dev": "vite",
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
-    "test:a11y:smoke": "vitest run --config vite.config.ts --project storybook src/stories/button/button.stories.tsx src/stories/checkbox/checkbox-field.stories.tsx src/stories/radio/radio-group-field.stories.tsx src/stories/toast/toast.stories.tsx src/stories/spinner/spinner.stories.tsx src/stories/skeleton/skeleton.stories.tsx",
+    "test:a11y:smoke": "vitest run --config vite.config.ts --project storybook src/stories/button/button.stories.tsx src/stories/checkbox/checkbox-field.stories.tsx src/stories/radio/radio-group-field.stories.tsx src/stories/toast/toast.stories.tsx src/stories/spinner/spinner.stories.tsx src/stories/skeleton/skeleton.stories.tsx src/stories/stat-tile/stat-tile.stories.tsx",
     "build": "tsc -b --noEmit && storybook build",
     "lint": "eslint .",
     "preview": "vite preview",

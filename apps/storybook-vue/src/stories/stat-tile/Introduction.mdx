@@ -1,0 +1,26 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="StatTile/Introduction" />
+
+# Stat Tile
+
+Stat Tile is a compact metric surface synced from the V2 Figma `Stat tile` component.
+
+Use it when a dashboard or summary panel needs one small KPI with:
+
+- a short label
+- a prominent value
+- optional positive or negative trend
+- optional supporting subtitle
+- neutral, brand, success, warning, or danger tone treatment
+
+## Figma source
+
+- `.figma/marwes/components/stat-tile.json`
+- `.figma/marwes/components/partsstat-tiletrend.json`
+- `.figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json`
+- `.figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json`
+
+## Accessibility
+
+The tile renders as an `article` so the metric behaves as a standalone summary card. Trend icons are decorative and the trend part receives a generated label like “Increased by 12%” or “Decreased by 8%”.

@@ -120,6 +120,26 @@ export const storybookSkeletonArgTypes = {
   },
 } as const
 
+export const storybookStatTileArgTypes = {
+  tone: {
+    control: "select",
+    options: ["neutral", "brand", "success", "warning", "danger"],
+    description: "Color treatment from the synced Stat Tile Figma instances",
+  },
+  trendDirection: {
+    control: "select",
+    options: [undefined, "positive", "negative"],
+    description: "Trend direction for the compact trend pill",
+  },
+  trendValue: {
+    control: "text",
+    description: "Compact trend value, for example 12%",
+  },
+  label: { control: "text" },
+  value: { control: "text" },
+  subtitle: { control: "text" },
+} as const
+
 export const storybookSpacingArgTypes = {
   size: {
     control: "select",

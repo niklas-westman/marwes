@@ -30,6 +30,7 @@ export * from "./checkbox"
 export * from "./divider"
 export * from "./spinner"
 export * from "./skeleton"
+export * from "./stat-tile"
 export * from "./icon"
 export * from "./input"
 export * from "./heading"
@@ -64,6 +65,14 @@ export type {
   SkeletonA11yProps,
   SkeletonDataAttributes,
 } from "./skeleton"
+export type {
+  StatTileOptions,
+  StatTileRenderKit,
+  StatTileTone,
+  StatTileTrendDirection,
+  StatTileDataAttributes,
+  StatTileA11yProps,
+} from "./stat-tile"
 export type { IconOptions, IconRenderKit } from "./icon"
 export type {
   InputOptions,

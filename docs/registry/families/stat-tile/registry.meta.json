@@ -1,0 +1,59 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "stat-tile",
+  "displayName": "Stat Tile",
+  "status": "shipped",
+  "summary": "Compact KPI tile synced from the V2 Stat Tile Figma component, with tone treatments, optional trend metadata, and shared React/Vue adapter contracts.",
+  "philosophy": [
+    "Keep Stat Tile as a focused metric surface rather than a dashboard-grid or charting primitive.",
+    "Keep Figma-owned structure and tone mapping in core/preset contracts so React and Vue render the same tile anatomy.",
+    "Keep number formatting and product-specific metric meaning outside the component API.",
+    "Keep the nested trend part explicit and accessible while making the arrow icon decorative."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a compact KPI summary with label, value, optional trend, and optional subtitle.",
+      "The metric fits one of the synced neutral, brand, success, warning, or danger tone treatments.",
+      "React and Vue consumers should receive the same dashboard metric anatomy and metadata."
+    ],
+    "avoidWhen": [
+      "The experience needs charting, sparklines, expandable analytics, or locale-aware formatting inside the component.",
+      "The tile is only being used as a generic card without metric-specific label/value/trend structure.",
+      "The product needs responsive dashboard layout behavior that should be owned by a layout component."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Core recipe tests for baseline metadata, tone mapping, positive trend state, and negative trend labels.",
+      "Preset CSS contract tests for Figma baseline dimensions, tone colors, and trend classes.",
+      "Shared React/Vue adapter contract tests for article output, text content, tone metadata, and generated trend labels.",
+      "Storybook introduction/taxonomy tests and a11y smoke coverage in both React and Vue Storybook apps."
+    ],
+    "manualReviewRequired": [
+      "Visual review against the synced V2 Stat Tile page for tone and spacing fidelity.",
+      "Product-level review for metric wording, number formatting, and trend semantics in real dashboards."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "The current source is V2 and small; this ships the stable compact tile anatomy without inventing broader analytics patterns."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/stat-tile/Introduction.mdx",
+        "apps/storybook-react/src/stories/stat-tile/stat-tile.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/stat-tile/Introduction.mdx",
+        "apps/storybook-vue/src/stories/stat-tile/stat-tile.stories.ts"
+      ]
+    },
+    "preferredStates": ["neutral", "brand", "success", "warning", "danger", "positive", "negative"]
+  },
+  "openQuestions": [
+    "Should a future metrics family add larger dashboard tile compositions or chart/sparkline variants?"
+  ]
+}

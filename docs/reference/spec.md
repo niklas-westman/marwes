@@ -358,6 +358,37 @@ Use this format when resolving an open decision:
   - Storybook: `apps/storybook-react/src/stories/skeleton/*`, `apps/storybook-vue/src/stories/skeleton/*`
   - Shared tests/docs: `tests/contracts/skeleton.contract.ts`, `docs/reference/spec.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
 
+### REQ-STAT-TILE-001: Stat Tile Atom Foundation
+- **Figma source**:
+  - `.figma/marwes/components/stat-tile.json`
+  - `.figma/marwes/components/partsstat-tiletrend.json`
+  - `.figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json`
+  - `.figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json`
+- **Problem**: The synced V2 Stat Tile exists in Figma, but the repo had no first-class metric tile API across core, presets, React, Vue, and Storybook.
+- **In scope**:
+  - Add a base `StatTile` component to core, presets, React, Vue, and Storybook
+  - Support label, value, optional subtitle, optional trend value, positive/negative trend direction, and neutral/brand/success/warning/danger tones
+  - Preserve the Figma baseline geometry: 164px tile width, 20px padding, 8px vertical spacing, 12px radius, and compact 20px trend pill
+  - Generate stable `data-component=stat-tile`, `data-tone`, and trend metadata for auditable output
+- **Out of scope**:
+  - Charting, sparkline, loading, or responsive dashboard-grid behavior
+  - Locale-aware number/currency formatting inside the component
+  - Treating the V2 Stat Tile source as a broader metrics taxonomy beyond the shipped tile and trend states
+- **Acceptance criteria**:
+  - [x] `StatTile` ships as a standalone component with stable tone and trend contracts in core, React, and Vue
+  - [x] Preset CSS maps the synced neutral, brand, success, warning, and danger treatments
+  - [x] React and Vue Storybook each include `StatTile/Introduction` and `StatTile/Atom` stories
+  - [x] Shared contract tests verify DOM tag, metadata, content, tone, and accessible trend labels
+- **Validation**:
+  - Unit/contract: `packages/core/test/recipes/stat-tile.test.ts`, `packages/presets/test/stat-tile-css-contract.test.ts`, `tests/contracts/stat-tile.contract.ts`
+  - Integration/manual: Verify React Stat Tile Storybook tone matrix against the synced Figma Stat Tile page
+- **Affected surfaces**:
+  - Core: `packages/core/src/components/atoms/stat-tile/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/stat-tile.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/stat-tile-css-contract.test.ts`
+  - React: `packages/react/src/components/stat-tile/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/stat-tile/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/stat-tile/*`, `apps/storybook-vue/src/stories/stat-tile/*`
+
 ### REQ-SPINNER-001: Spinner Atom Foundation
 - **Figma reference**:
   - `.figma/marwes/components/spinnerclassic.json`

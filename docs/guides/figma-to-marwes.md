@@ -174,6 +174,13 @@ Required Figma variants/states to support:
 - `size`: `sm`, `md`, `lg`.
 - states: `unchecked`, `checked`, `mixed`, `focus-visible`, `disabled`, `invalid`.
 
+### Stat Tile
+- Contract: `packages/core/src/components/atoms/stat-tile/stat-tile-types.ts`.
+- Recipe: `packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts`.
+- CSS: `packages/presets/src/firstEdition/stat-tile.css`.
+- Figma source: `.figma/marwes/components/stat-tile.json`, `.figma/marwes/components/partsstat-tiletrend.json`, and `.figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json`.
+- Mapping note: the Figma component is a compact KPI tile with a nested trend part. Keep formatting and business meaning outside the component; Stat Tile owns structure, tone, and trend metadata only.
+
 ### Skeleton
 - Contract: `packages/core/src/components/atoms/skeleton/skeleton-types.ts`.
 - Recipe: `packages/core/src/components/atoms/skeleton/skeleton-recipe.ts`.
