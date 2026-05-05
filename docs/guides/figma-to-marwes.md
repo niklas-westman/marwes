@@ -174,6 +174,22 @@ Required Figma variants/states to support:
 - `size`: `sm`, `md`, `lg`.
 - states: `unchecked`, `checked`, `mixed`, `focus-visible`, `disabled`, `invalid`.
 
+### Skeleton
+- Contract: `packages/core/src/components/atoms/skeleton/skeleton-types.ts`.
+- Recipe: `packages/core/src/components/atoms/skeleton/skeleton-recipe.ts`.
+- CSS: `packages/presets/src/firstEdition/skeleton.css`.
+- Figma source: `.figma/marwes/pages/skeleton/skeleton_1921-34816.json` and `.figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json`.
+
+Required Figma variants to support:
+- `variant`: `text`, `circular`, `rectangular`.
+- baseline dimensions: text 120×12, circular 40×40, rectangular 120×120.
+- baseline radius: text/rectangular 4px, circular full radius.
+- baseline fill: current text color at 4% opacity, expressed through semantic CSS variables rather than adapter hardcoding.
+
+Accessibility mapping:
+- default atom usage should be decorative because surrounding loading copy or layout usually communicates loading.
+- standalone status usage should provide an `ariaLabel` so adapters expose an accessible loading state.
+
 ### Spinner
 - Contract: `packages/core/src/components/atoms/spinner/spinner-types.ts`.
 - Recipe: `packages/core/src/components/atoms/spinner/spinner-recipe.ts`.

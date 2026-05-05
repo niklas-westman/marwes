@@ -29,6 +29,7 @@ export type { SliderOptions, SliderRenderKit } from "./slider"
 export * from "./checkbox"
 export * from "./divider"
 export * from "./spinner"
+export * from "./skeleton"
 export * from "./icon"
 export * from "./input"
 export * from "./heading"
@@ -54,6 +55,15 @@ export type {
   SpinnerSvgNode,
   SpinnerSvgDefinition,
 } from "./spinner"
+export type {
+  SkeletonOptions,
+  SkeletonRenderKit,
+  SkeletonVariant,
+  SkeletonAnimation,
+  SkeletonDimension,
+  SkeletonA11yProps,
+  SkeletonDataAttributes,
+} from "./skeleton"
 export type { IconOptions, IconRenderKit } from "./icon"
 export type {
   InputOptions,

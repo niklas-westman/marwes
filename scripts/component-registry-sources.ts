@@ -1373,6 +1373,47 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  skeleton: createRegistryFamilySource({
+    family: "skeleton",
+    contractPaths: ["tests/contracts/skeleton.contract.ts"],
+    semantics: {
+      coverageLevel: "family-local",
+      dataComponent: "skeleton",
+      canonicalAttributes: [],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: ["packages/core/src/components/atoms/skeleton/skeleton-recipe.ts"],
+      notes: [
+        "Skeleton is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+        "The atom emits data-component=skeleton plus local variant and animation attributes from core.",
+      ],
+    },
+    figma: {
+      componentJsons: [],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/skeleton/skeleton_1921-34816.json",
+        ".figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json",
+        ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json",
+      ],
+      nodeReferences: {
+        skeletonBaselineFrame: "1921:34816",
+        skeletonChecklistItem: "1896:33145",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["text", "circular", "rectangular"],
+        interactionStates: ["pulse", "wave", "none", "decorative", "status", "custom-size"],
+      },
+    },
+  }),
   spinner: createRegistryFamilySource({
     family: "spinner",
     contractPaths: ["tests/contracts/spinner.contract.ts"],

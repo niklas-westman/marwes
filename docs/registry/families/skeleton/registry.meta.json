@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "skeleton",
+  "displayName": "Skeleton",
+  "status": "shipped",
+  "summary": "Loading-placeholder atom with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React/Vue adapter contract.",
+  "philosophy": [
+    "Keep Skeleton as a low-level loading placeholder atom rather than a layout-specific card or list skeleton family.",
+    "Keep the three synced baseline shapes source-owned in core so React and Vue render the same dimensions, radius rules, metadata, and accessibility behavior.",
+    "Keep visual treatment in preset CSS through stable mw-skeleton classes and theme-relative variables instead of adapter-owned styling.",
+    "Keep the atom decorative by default, with explicit ariaLabel opt-in for standalone status usage."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a lightweight placeholder for loading text, avatar/media circles, or rectangular content blocks.",
+      "The product already owns the surrounding loading context and the skeleton can stay decorative.",
+      "React and Vue consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
+    ],
+    "avoidWhen": [
+      "The experience needs determinate progress, percentage tracking, or an indeterminate activity indicator instead of structural placeholders.",
+      "The implementation cannot provide a truthful ariaLabel when a standalone skeleton region must announce loading status.",
+      "The product needs a layout-specific skeleton composition that should live as an adapter/story composition rather than core atom API."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Core recipe tests for decorative defaults, Figma baseline dimensions, custom dimensions, animation modes, and standalone status mode.",
+      "Preset CSS contract tests for the Figma 4% text overlay mapping plus pulse and wave animation hooks.",
+      "Shared React/Vue adapter contract tests for DOM metadata, accessibility output, dimensions, and animation classes.",
+      "Storybook introduction/taxonomy tests and a11y smoke coverage in both React and Vue Storybook apps."
+    ],
+    "manualReviewRequired": [
+      "Product-level decisions about when a skeleton is decorative versus when a loading region needs an announced status label.",
+      "Visual review against the synced Figma page after V3 Skeleton design-system sources become more complete."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "The current Figma source is V2/MUI-derived and only provides baseline shapes, so this family intentionally ships a small atom API first."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/skeleton/Introduction.mdx",
+        "apps/storybook-react/src/stories/skeleton/skeleton.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
+        "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "text",
+      "circular",
+      "rectangular",
+      "pulse",
+      "wave",
+      "none",
+      "decorative",
+      "status",
+      "custom-size"
+    ]
+  },
+  "openQuestions": [
+    "Should V3 introduce named layout skeleton compositions after the design source graduates from the V2/MUI-derived baseline page?"
+  ]
+}

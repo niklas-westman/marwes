@@ -325,6 +325,39 @@ Use this format when resolving an open decision:
 - Element: `<hr>` for semantic meaning and native accessibility
 - Orientation: Explicit prop for better API clarity and accessibility
 
+### REQ-SKELETON-001: Skeleton Atom Foundation
+- **Figma reference**:
+  - `.figma/marwes/pages/skeleton/skeleton_1921-34816.json`
+  - `.figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json`
+  - V3 checklist note: `.figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json`
+- **Problem**: The synced component backlog marks Skeleton as a must-have loading placeholder, but the repo has no base Skeleton atom across core, presets, adapters, and Storybook.
+- **Scope**:
+  - Add a base `Skeleton` atom to core, presets, React, Vue, and Storybook
+  - Support the three available synced shapes: `text`, `circular`, and `rectangular`
+  - Match the local Figma baseline dimensions: text 120×12, circular 40×40, rectangular 120×120
+  - Use the local Figma 4% black overlay as a semantic theme-relative preset color
+  - Support custom width, height, radius, and `pulse` / `wave` / `none` animation modes
+  - Keep skeletons decorative by default, but support standalone accessible status usage through `ariaLabel`
+- **Non-goals**:
+  - Shipping layout-specific skeleton wrappers in this change
+  - Creating new raster or icon assets
+  - Treating the V2/MUI-derived Skeleton page as a full V3 design-system component source beyond the baseline shape data
+- **Acceptance criteria**:
+  - [x] `Skeleton` ships as a standalone atom with stable variant, dimension, radius, and animation contracts in core, React, and Vue
+  - [x] Preset CSS renders text, circular, and rectangular placeholders with theme-relative fill and loading animation hooks
+  - [x] The atom is decorative by default and exposes accessible standalone status mode when `ariaLabel` is provided
+  - [x] React and Vue Storybook document the atom and cover Figma shapes, custom dimensions, animations, and composition examples
+- **Validation**:
+  - Unit: Core recipe tests plus React/Vue adapter contract tests pass
+  - Integration/manual: Verify React Skeleton stories against the synced Figma Skeleton page
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/skeleton/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/skeleton.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/skeleton-css-contract.test.ts`
+  - React: `packages/react/src/components/skeleton/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/skeleton/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/skeleton/*`, `apps/storybook-vue/src/stories/skeleton/*`
+  - Shared tests/docs: `tests/contracts/skeleton.contract.ts`, `docs/reference/spec.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
+
 ### REQ-SPINNER-001: Spinner Atom Foundation
 - **Figma reference**:
   - `.figma/marwes/components/spinnerclassic.json`

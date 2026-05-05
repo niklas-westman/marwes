@@ -86,6 +86,40 @@ export const storybookSpinnerArgTypes = {
   },
 } as const
 
+export const storybookSkeletonArgTypes = {
+  variant: {
+    control: "select",
+    options: ["text", "circular", "rectangular"],
+    description: "Skeleton shape from the synced Skeleton page",
+  },
+  animation: {
+    control: "select",
+    options: ["pulse", "wave", "none"],
+    description: "Visual loading animation",
+  },
+  width: {
+    control: "text",
+    description: "Width override; numbers in code are treated as pixels",
+  },
+  height: {
+    control: "text",
+    description: "Height override; numbers in code are treated as pixels",
+  },
+  radius: {
+    control: "text",
+    description: "Corner radius override; circular skeletons force a full radius",
+  },
+  decorative: {
+    control: "boolean",
+    description:
+      "Hide the skeleton from assistive technology when surrounding UI already communicates loading",
+  },
+  ariaLabel: {
+    control: "text",
+    description: "Accessible label for standalone loading placeholder groups",
+  },
+} as const
+
 export const storybookSpacingArgTypes = {
   size: {
     control: "select",

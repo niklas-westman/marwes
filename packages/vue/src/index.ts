@@ -185,6 +185,10 @@ export type {
   EmptyStateSpinnerProps,
 } from "./components/spinner"
 
+/* Skeleton */
+export { Skeleton } from "./components/skeleton"
+export type { SkeletonProps } from "./components/skeleton"
+
 /* Spacing */
 export { Spacer, Spacing } from "./components/spacing"
 export type { SpacerProps, SpacingProps } from "./components/spacing"

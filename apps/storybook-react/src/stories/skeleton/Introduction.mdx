@@ -1,0 +1,31 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Skeleton/Introduction" />
+
+# Skeleton Component
+
+Marwes provides `Skeleton` as a low-level placeholder atom for loading text, circular media, and rectangular content blocks.
+
+## Figma source
+
+The synced Skeleton page provides three baseline shapes:
+
+- Text: `120×12`, `4px` radius
+- Circular: `40×40`, full radius
+- Rectangular: `120×120`, `4px` radius
+
+The source is currently the V2/MUI-derived Skeleton page, so this implementation keeps the API small and maps the visuals into Marwes semantic CSS variables instead of hardcoded adapter styling.
+
+## Usage
+
+```tsx
+import { Skeleton } from "@marwes-ui/react"
+
+<Skeleton />
+<Skeleton variant="circular" />
+<Skeleton variant="rectangular" width={240} height={160} animation="wave" />
+```
+
+## Accessibility
+
+Skeletons are decorative by default because the loading state should usually be communicated by the surrounding section. Provide `ariaLabel` when a standalone skeleton group must announce loading status.
