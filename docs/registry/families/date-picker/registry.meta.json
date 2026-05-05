@@ -1,0 +1,58 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "date-picker",
+  "displayName": "Date Picker",
+  "status": "shipped",
+  "summary": "Calendar selection surface synced from the V2 Date Picker component, with device metadata, day-state contracts, and shared React/Vue adapters.",
+  "philosophy": [
+    "Keep Date Picker as a visual and semantic calendar surface rather than a date-math engine.",
+    "Keep day-state mapping in core so React and Vue render the same selected, range, disabled, and empty states.",
+    "Keep popover behavior, form composition, parsing, and locale formatting outside the base component.",
+    "Prefer native table semantics for the calendar grid while keeping each available date as a button."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a calendar panel for choosing a date or reviewing a date range.",
+      "The product already owns date math, month navigation state, and selected date state.",
+      "React and Vue consumers should receive the same day-state anatomy and data metadata."
+    ],
+    "avoidWhen": [
+      "The experience needs a complete form field/popover with parsing and validation baked in.",
+      "The component must own locale-aware calendar math or complex range-selection behavior.",
+      "The product needs time picking or multi-calendar comparison layouts."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Core recipe tests for baseline metadata, default calendar rows, mobile device metadata, and accessible day labels.",
+      "Preset CSS contract tests for calendar geometry and day-state classes.",
+      "React and Vue adapter tests for table labels, selected/disabled states, and day selection events.",
+      "Storybook introduction/taxonomy tests and a11y smoke coverage in both React and Vue Storybook apps."
+    ],
+    "manualReviewRequired": [
+      "Keyboard interaction model review when product-level month navigation and range selection are wired.",
+      "Visual review against the synced V2 Date Picker page for spacing and state fidelity.",
+      "Locale/date-format review before use in production forms."
+    ],
+    "roadmapAnchors": [],
+    "notes": ["The base component intentionally does not implement calendar math or popover state."]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/date-picker/Introduction.mdx",
+        "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/date-picker/Introduction.mdx",
+        "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts"
+      ]
+    },
+    "preferredStates": ["desktop", "mobile", "selected", "range", "disabled", "null"]
+  },
+  "openQuestions": [
+    "Should DatePickerField become a separate molecule that composes Input, popover state, and Date Picker?"
+  ]
+}

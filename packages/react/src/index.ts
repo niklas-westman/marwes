@@ -215,6 +215,10 @@ export type { ParagraphProps } from "./components/paragraph"
 export { StatTile } from "./components/stat-tile"
 export type { StatTileProps } from "./components/stat-tile"
 
+/* DatePicker */
+export { DatePicker } from "./components/date-picker"
+export type { DatePickerProps } from "./components/date-picker"
+
 /* Card */
 export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"
 export type {

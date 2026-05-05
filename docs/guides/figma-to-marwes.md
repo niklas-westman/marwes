@@ -174,6 +174,13 @@ Required Figma variants/states to support:
 - `size`: `sm`, `md`, `lg`.
 - states: `unchecked`, `checked`, `mixed`, `focus-visible`, `disabled`, `invalid`.
 
+### Date Picker
+- Contract: `packages/core/src/components/atoms/date-picker/date-picker-types.ts`.
+- Recipe: `packages/core/src/components/atoms/date-picker/date-picker-recipe.ts`.
+- CSS: `packages/presets/src/firstEdition/date-picker.css`.
+- Figma source: `.figma/marwes/components/date-picker.json`, `.figma/marwes/components/date-picker-item.json`, and `.figma/marwes/pages/-v2-date-picker/date-picker_1814-988.json`.
+- Mapping note: the shipped component owns the calendar shell and day-state rendering only. Keep date math, parsing, popover behavior, and form field composition outside this base component.
+
 ### Stat Tile
 - Contract: `packages/core/src/components/atoms/stat-tile/stat-tile-types.ts`.
 - Recipe: `packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts`.

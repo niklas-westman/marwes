@@ -140,6 +140,22 @@ export const storybookStatTileArgTypes = {
   subtitle: { control: "text" },
 } as const
 
+export const storybookDatePickerArgTypes = {
+  device: {
+    control: "select",
+    options: ["desktop", "mobile"],
+    description: "Device variant from the synced Date Picker Figma component set",
+  },
+  monthLabel: { control: "text" },
+  calendarLabel: { control: "text" },
+  previousYearLabel: { control: "text" },
+  previousMonthLabel: { control: "text" },
+  nextMonthLabel: { control: "text" },
+  nextYearLabel: { control: "text" },
+  cancelLabel: { control: "text" },
+  applyLabel: { control: "text" },
+} as const
+
 export const storybookSpacingArgTypes = {
   size: {
     control: "select",

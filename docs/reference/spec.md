@@ -358,6 +358,37 @@ Use this format when resolving an open decision:
   - Storybook: `apps/storybook-react/src/stories/skeleton/*`, `apps/storybook-vue/src/stories/skeleton/*`
   - Shared tests/docs: `tests/contracts/skeleton.contract.ts`, `docs/reference/spec.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
 
+### REQ-DATE-PICKER-001: Date Picker Component Foundation
+- **Figma source**:
+  - `.figma/marwes/components/date-picker.json`
+  - `.figma/marwes/components/date-picker-item.json`
+  - `.figma/marwes/components/date-picker-field.json`
+  - `.figma/marwes/pages/-v2-date-picker/date-picker_1814-988.json`
+- **Problem**: The synced V2 Date Picker and Date Picker Item components exist in Figma, but the repo had no shared calendar surface across core, presets, React, Vue, and Storybook.
+- **In scope**:
+  - Add a base `DatePicker` component to core, presets, React, Vue, and Storybook
+  - Support desktop/mobile device metadata, month labels, weekday labels, week rows, day states, navigation labels, and action labels
+  - Map day states from the synced `.Date Picker Item` variants: default, hover, selected, range, range-hover, disabled, and null
+  - Keep date parsing, popover state, and form orchestration outside the component
+- **Out of scope**:
+  - Calendar math, locale-aware formatting, date parsing, and controlled range-selection state management
+  - Date picker field/popover composition as a single form molecule
+  - Time picker or multi-calendar layout behavior
+- **Acceptance criteria**:
+  - [x] `DatePicker` ships as a standalone component with stable device and day-state contracts in core, React, and Vue
+  - [x] Preset CSS maps the synced calendar shell, 7-column day grid, selected/range/disabled/null day states, and action bar
+  - [x] React and Vue Storybook each include `DatePicker/Introduction` and `DatePicker/Atom` stories
+  - [x] Tests verify metadata, selected/disabled days, accessible labels, and adapter selection events
+- **Validation**:
+  - Unit/contract: `packages/core/test/recipes/date-picker.test.ts`, `packages/presets/test/date-picker-css-contract.test.ts`, `tests/contracts/date-picker.contract.ts`
+  - Integration/manual: Verify React Date Picker stories against the synced Figma Date Picker page
+- **Affected surfaces**:
+  - Core: `packages/core/src/components/atoms/date-picker/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/date-picker.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/date-picker-css-contract.test.ts`
+  - React: `packages/react/src/components/date-picker/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/date-picker/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/date-picker/*`, `apps/storybook-vue/src/stories/date-picker/*`
+
 ### REQ-STAT-TILE-001: Stat Tile Atom Foundation
 - **Figma source**:
   - `.figma/marwes/components/stat-tile.json`
