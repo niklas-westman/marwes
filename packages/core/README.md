@@ -1,6 +1,8 @@
+Framework-agnostic Marwes design system recipes, theme utilities, accessibility contracts, and typed RenderKit metadata.
+
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner.png" width="100%" style="border-radius: 40px;">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/cover-v3.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>

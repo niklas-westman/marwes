@@ -3610,12 +3610,14 @@
             "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
             "apps/storybook-react/src/stories/skeleton/Introduction.mdx",
+            "apps/storybook-react/src/stories/skeleton/skeleton-molecules.stories.tsx",
             "apps/storybook-react/src/stories/skeleton/skeleton.stories.tsx"
           ],
           "storybookVue": [
             "apps/storybook-vue/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
             "apps/storybook-vue/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
+            "apps/storybook-vue/src/stories/skeleton/skeleton-molecules.stories.ts",
             "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
           ],
           "contracts": ["tests/contracts/skeleton.contract.ts"]

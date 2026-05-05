@@ -9,6 +9,9 @@ describe("React stat tile introduction docs", () => {
     for (const value of [
       "Stat Tile",
       "Figma source",
+      "Anatomy",
+      "Loading State",
+      "StatTileSkeleton",
       "positive",
       "negative",
       "Accessibility",

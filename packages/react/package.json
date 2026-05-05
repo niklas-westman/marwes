@@ -1,6 +1,7 @@
 {
   "name": "@marwes-ui/react",
   "version": "1.0.5",
+  "description": "React components for the Marwes design system with default styling, typed theme tokens, and accessibility contracts.",
   "publishConfig": {
     "access": "public"
   },

@@ -10,4 +10,13 @@ describe("Vue skeleton story taxonomy", () => {
 
     expect(story).toContain('title: "Skeleton/Atom"')
   })
+
+  it("keeps replica stories under Skeleton/Molecule/SkeletonMolecules", () => {
+    const story = readFileSync(path.join(storiesDir, "skeleton-molecules.stories.ts"), "utf8")
+
+    expect(story).toContain('title: "Skeleton/Molecule/SkeletonMolecules"')
+    expect(story).toContain("CardReplica")
+    expect(story).toContain("StatTileReplica")
+    expect(story).toContain("InputFieldReplica")
+  })
 })

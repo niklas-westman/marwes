@@ -1,6 +1,7 @@
 {
   "name": "@marwes-ui/core",
   "version": "1.0.5",
+  "description": "Framework-agnostic Marwes design system recipes, theme utilities, accessibility contracts, and typed RenderKit metadata.",
   "publishConfig": {
     "access": "public"
   },

@@ -1,6 +1,8 @@
+React components for the Marwes design system with default styling, typed theme tokens, accessibility contracts, and AI-readable semantics.
+
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner.png" width="100%" style="border-radius: 40px;">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/cover-v3.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
