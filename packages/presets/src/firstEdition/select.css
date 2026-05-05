@@ -335,3 +335,42 @@
 .mw-theme--dark .mw-select-field__list {
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
 }
+
+.mw-input-field--select-date {
+  gap: 4px; /* Figma date field frame spacing */
+}
+
+.mw-input-field--select-date .mw-input-field__label {
+  opacity: 1;
+}
+
+.mw-input-field--select-date .mw-input-field__label p {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.mw-input-field--select-date .mw-input-field__helper p,
+.mw-input-field--select-date .mw-input-field__error p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.mw-input-field--select-date .mw-select-field__trigger {
+  min-height: 40px;
+  padding: 12px 16px;
+  border-color: var(--mw-color-border-subtle, #e5e7eb);
+  border-radius: var(--mw-ui-radius, 4px);
+  color: var(--mw-color-text-muted, #595959);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.42px;
+  line-height: 16px;
+}
+
+.mw-input-field--select-date .mw-select-field__trigger-icon {
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--mw-color-icon-muted, #a3a3a3);
+}

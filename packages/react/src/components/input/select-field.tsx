@@ -6,6 +6,8 @@ import { Select } from "./select"
 import type { SelectProps } from "./select"
 import { SelectArrowIcon } from "./select-arrow-icon"
 
+export type SelectFieldVariant = "default" | "date"
+
 export type SelectFieldProps = {
   id?: string
   label: string
@@ -13,6 +15,7 @@ export type SelectFieldProps = {
   error?: string
   select: SelectProps
   ariaDescribedBy?: string
+  variant?: SelectFieldVariant
 }
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -387,6 +390,7 @@ export function SelectField(props: SelectFieldProps): React.ReactElement {
     "mw-input-field",
     "mw-input-field--select",
     mode === "marwes" && "mw-input-field--select-marwes",
+    props.variant === "date" && "mw-input-field--select-date",
     disabled && "mw-input-field--disabled",
     invalid && "mw-input-field--invalid",
   )

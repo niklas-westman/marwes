@@ -7,6 +7,8 @@ import { Paragraph } from "../paragraph"
 import { Select, type SelectProps } from "./select"
 import { SelectArrowIcon } from "./select-arrow-icon"
 
+export type SelectFieldVariant = "default" | "date"
+
 export type SelectFieldProps = {
   id?: string
   label: string
@@ -15,6 +17,7 @@ export type SelectFieldProps = {
   select: SelectProps
   ariaDescribedBy?: string
   modelValue?: string
+  variant?: SelectFieldVariant
 }
 
 const selectFieldPropKeys = [
@@ -25,6 +28,7 @@ const selectFieldPropKeys = [
   "select",
   "ariaDescribedBy",
   "modelValue",
+  "variant",
 ] as const
 
 function hasTextContent(value: string | undefined): boolean {
@@ -161,6 +165,7 @@ export const SelectField = defineComponent(
         "mw-input-field",
         "mw-input-field--select",
         mode.value === "marwes" && "mw-input-field--select-marwes",
+        props.variant === "date" && "mw-input-field--select-date",
         disabled.value && "mw-input-field--disabled",
         invalid.value && "mw-input-field--invalid",
       ),
