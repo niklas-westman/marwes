@@ -1,8 +1,8 @@
-# CI Sharding Experiment Findings
+# CI Sharding Findings
 
 ## Goal
 
-Test whether normal GitHub runner CI with pnpm cache and parallel validation jobs improves Marwes PR feedback time compared to the current serial CI job.
+Test whether normal GitHub runner CI with pnpm cache and parallel validation jobs improves Marwes PR feedback time compared to the current serial required CI job.
 
 ## First PR Run
 
@@ -14,7 +14,7 @@ Current CI:
   changeset-check: 9s
   lint-typecheck-test-build: 3m
 
-CI Sharded Experiment:
+CI Sharded:
   changed-scope: 12s
   changeset-check: 8s
   workflow syntax: 7s
@@ -54,7 +54,7 @@ Current CI:
   changeset-check: 4s
   lint-typecheck-test-build: 3m
 
-CI Sharded Experiment:
+CI Sharded:
   changed-scope: 14s
   changeset-check: 9s
   workflow syntax: 6s
@@ -86,17 +86,54 @@ That was not a clean PR CI comparison. The current required PR CI does not run S
 
 Keep Storybook a11y out of this sharded PR benchmark for now. If Marwes later decides to make browser-backed a11y smoke tests required on PRs, add them as a separate dedicated workflow or shard with explicit Playwright setup.
 
-## Next Benchmark
+## Final PR Run
 
-Push a commit with the a11y shard removed again and compare the next PR run.
+Observed PR check times after removing the extra a11y shard:
 
-Why:
+```text
+Current CI:
+  changed-scope: 14s
+  changeset-check: 6s
+  lint-typecheck-test-build: 3m
 
-- The experiment should compare against the current required PR CI surface.
-- The earlier warm-cache result showed the slowest shard around 1 minute versus the current serial CI around 3 minutes.
-- Adding browser-backed a11y smoke tests changes the scope of the benchmark.
+CI Sharded:
+  changed-scope: 12s
+  changeset-check: 5s
+  workflow syntax: 6s
+  repo checks: 19s
+  typecheck: 50s
+  package tests: 1m
+  package build: 31s
+  app build: 57s
+```
 
-If the sharded workflow still completes around 1 minute without the extra a11y shard, it is a strong candidate to replace the serial reusable CI job.
+## Final Verdict
+
+For the current required PR CI surface, sharding is faster in wall-clock feedback time.
+
+```text
+Current required CI: 3m
+Sharded slowest shard: 1m
+```
+
+The tradeoff is that sharding uses more runner concurrency and repeats checkout/setup/install across jobs. That is acceptable if the goal is shorter PR feedback time.
+
+## Merge Readiness
+
+The workflow names were cleaned up before merge:
+
+```text
+CI Sharded / changed-scope
+CI Sharded / changeset-check
+CI Sharded / workflow syntax
+CI Sharded / validate / repo checks
+CI Sharded / validate / typecheck
+CI Sharded / validate / package tests
+CI Sharded / validate / package build
+CI Sharded / validate / app build
+```
+
+If this becomes the default CI path, replace the current serial reusable CI job instead of running both workflows permanently.
 
 If `app build` becomes slow again, split app-specific work further, for example:
 

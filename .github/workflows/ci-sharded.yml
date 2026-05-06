@@ -1,11 +1,11 @@
-name: CI Sharded Experiment
+name: CI Sharded
 
 on:
   workflow_dispatch:
   pull_request:
 
 concurrency:
-  group: ci-sharded-experiment-${{ github.workflow }}-${{ github.ref }}
+  group: ci-sharded-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   changed-scope:
-    name: sharded experiment / changed-scope
+    name: changed-scope
     runs-on: ubuntu-latest
     timeout-minutes: 10
     if: github.event_name == 'pull_request'
@@ -40,7 +40,7 @@ jobs:
         run: pnpm check:changed -- --base origin/${{ github.base_ref }}
 
   changeset-check:
-    name: sharded experiment / changeset-check
+    name: changeset-check
     runs-on: ubuntu-latest
     timeout-minutes: 5
     if: github.event_name == 'pull_request'
@@ -62,7 +62,7 @@ jobs:
         run: node ./scripts/check-pr-changeset.mjs
 
   workflow-syntax:
-    name: sharded experiment / workflow syntax
+    name: workflow syntax
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -74,7 +74,7 @@ jobs:
         uses: devops-actions/actionlint@v0.1.10
 
   validate:
-    name: sharded experiment / ${{ matrix.name }}
+    name: validate / ${{ matrix.name }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
