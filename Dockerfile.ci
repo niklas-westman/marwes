@@ -1,0 +1,26 @@
+# syntax=docker/dockerfile:1.7
+
+ARG NODE_IMAGE=node:20-bookworm-slim
+
+FROM ${NODE_IMAGE} AS ci
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="${PNPM_HOME}:${PATH}"
+ENV CI=true
+ENV LEFTHOOK=0
+
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
+WORKDIR /app
+
+# Fetch dependency tarballs from the lockfile before source code is copied.
+# This keeps Docker's dependency layer reusable when only source files change.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm fetch --frozen-lockfile
+
+COPY . .
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm install --offline --frozen-lockfile --ignore-scripts
+
+CMD ["pnpm", "test:packages"]
