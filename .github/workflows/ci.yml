@@ -115,25 +115,3 @@ jobs:
 
       - name: Run ${{ matrix.name }}
         run: sh -lc "$CHECK_COMMAND"
-
-  ci:
-    name: ci / lint-typecheck-test-build
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs:
-      - workflow-syntax
-      - validate
-    if: always()
-
-    steps:
-      - name: Require validation shards
-        env:
-          WORKFLOW_SYNTAX_RESULT: ${{ needs.workflow-syntax.result }}
-          VALIDATE_RESULT: ${{ needs.validate.result }}
-        run: |
-          if [ "$WORKFLOW_SYNTAX_RESULT" != "success" ] || [ "$VALIDATE_RESULT" != "success" ]; then
-            echo "One or more validation shards failed."
-            exit 1
-          fi
-
-          echo "All validation shards passed."
