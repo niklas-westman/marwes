@@ -78,33 +78,30 @@ The first run's `app build` result appears to have been cold-cache behavior. Wit
 
 This makes normal GitHub runner sharding the best current Marwes CI optimization candidate from these experiments.
 
-## Coverage Correction
+## A11y Shard Decision
 
-The original sharded workflow did not include the Storybook a11y smoke check from the existing local/pre-push validation path.
+The experiment briefly added `test:storybook:a11y` as a separate shard because it exists in the local/pre-push validation path.
 
-Add `test:storybook:a11y` as its own shard before considering this workflow as a replacement candidate.
+That was not a clean PR CI comparison. The current required PR CI does not run Storybook a11y smoke tests, and the command depends on Playwright browser binaries that are not installed by a normal `pnpm install`.
 
-That shard needs explicit Playwright browser setup. `pnpm install` installs the Playwright package, but it does not guarantee Chromium exists on a fresh GitHub runner. Cache `~/.cache/ms-playwright` and run `pnpm exec playwright install --with-deps chromium` only for the Storybook a11y shard.
+Keep Storybook a11y out of this sharded PR benchmark for now. If Marwes later decides to make browser-backed a11y smoke tests required on PRs, add them as a separate dedicated workflow or shard with explicit Playwright setup.
 
 ## Next Benchmark
 
-Push a commit with the a11y shard and Playwright setup included, then compare the third PR run.
+Push a commit with the a11y shard removed again and compare the next PR run.
 
 Why:
 
-- The sharded workflow should cover the same practical validation surface.
-- The extra a11y shard may become the new slowest shard.
-- The first a11y run may be slower while Chromium is downloaded; later runs should restore it from cache.
-- The workflow should still beat current CI after adding this coverage.
+- The experiment should compare against the current required PR CI surface.
+- The earlier warm-cache result showed the slowest shard around 1 minute versus the current serial CI around 3 minutes.
+- Adding browser-backed a11y smoke tests changes the scope of the benchmark.
 
-If the sharded workflow still completes around 1 minute after adding a11y smoke, it is a strong candidate to replace the serial reusable CI job.
+If the sharded workflow still completes around 1 minute without the extra a11y shard, it is a strong candidate to replace the serial reusable CI job.
 
-If `app build` or `storybook a11y smoke` becomes slow again, split app-specific work further, for example:
+If `app build` becomes slow again, split app-specific work further, for example:
 
 ```text
 playground build
 storybook react build
 storybook vue build
-storybook react a11y smoke
-storybook vue a11y smoke
 ```
