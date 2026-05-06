@@ -65,7 +65,7 @@
 
 .mw-tab:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2684ff);
+  box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2f31fc);
   z-index: 1;
 }
 

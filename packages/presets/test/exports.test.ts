@@ -39,6 +39,19 @@ describe("@marwes-ui/presets package exports", () => {
   it("firstEditionTheme is a valid ThemeInput with expected brand, font, and ui fields", () => {
     expect(firstEditionTheme.color?.primary).toEqual({
       base: "#2F31FC",
+      hover: "#2527CA",
+      pressed: "#1B1D97",
+      disabled: "#8182FC",
+      label: "#FFFFFF",
+      labelDisabled: "rgba(255,255,255,0.5)",
+    })
+    expect(firstEditionTheme.color?.success).toBe("#006633")
+    expect(firstEditionTheme.color?.warning).toBe("#B45309")
+    expect(firstEditionTheme.color?.danger).toEqual({
+      base: "#D90429",
+      hover: "#A8031F",
+      pressed: "#780215",
+      disabled: "#FF8A95",
       label: "#FFFFFF",
       labelDisabled: "rgba(255,255,255,0.5)",
     })
@@ -62,7 +75,9 @@ describe("@marwes-ui/presets package exports", () => {
     const resolvedPreset = resolveThemeInput(firstEditionTheme)
 
     expect(resolvedDefault.color.primary).toEqual(resolvedPreset.color.primary)
+    expect(resolvedDefault.color.danger).toEqual(resolvedPreset.color.danger)
     expect(resolvedDefault.color.success).toEqual(resolvedPreset.color.success)
+    expect(resolvedDefault.color.warning).toEqual(resolvedPreset.color.warning)
     expect(resolvedDefault.font.primary).toBe(resolvedPreset.font.primary)
     expect(resolvedDefault.ui).toEqual(resolvedPreset.ui)
   })

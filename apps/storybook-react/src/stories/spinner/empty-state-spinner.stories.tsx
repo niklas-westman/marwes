@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { EmptyStateSpinner, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type * as React from "react"
@@ -6,7 +6,11 @@ import type * as React from "react"
 const meta = {
   title: "Spinner/Molecule/EmptyStateSpinner",
   component: EmptyStateSpinner,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args) => (
     <div

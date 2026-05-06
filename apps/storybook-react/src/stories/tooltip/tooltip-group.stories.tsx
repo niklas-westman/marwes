@@ -1,11 +1,14 @@
-import { IconName, storybookLayout } from "@marwes-ui/core"
+import { IconName, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { MarwesProvider, ThemeMode, TooltipGroup } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof TooltipGroup> = {
   title: "Tooltip/Molecule/TooltipGroup",
   component: TooltipGroup,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     icon: {

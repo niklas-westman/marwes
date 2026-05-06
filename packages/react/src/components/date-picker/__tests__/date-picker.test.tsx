@@ -9,7 +9,7 @@ describe("DatePicker", () => {
     expect(screen.getByLabelText("Choose date")).toHaveAttribute("data-component", "date-picker")
     expect(screen.getByRole("table", { name: "March 2026" })).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "2026-03-04" })).toHaveAttribute(
-      "aria-selected",
+      "aria-pressed",
       "true",
     )
     expect(screen.getByRole("button", { name: "Today" })).toBeInTheDocument()

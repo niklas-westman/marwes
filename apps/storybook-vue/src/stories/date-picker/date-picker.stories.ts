@@ -1,11 +1,15 @@
-import { storybookDatePickerArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookDatePickerArgTypes, storybookLayout } from "@marwes-ui/core"
 import { DatePicker, type DatePickerProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
   title: "DatePicker/Atom",
   component: DatePicker as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookDatePickerArgTypes,
   args: {

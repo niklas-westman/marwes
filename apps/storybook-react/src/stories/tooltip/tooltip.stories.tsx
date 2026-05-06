@@ -1,11 +1,14 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { MarwesProvider, ThemeMode, Tooltip } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof Tooltip> = {
   title: "Tooltip/Atom",
   component: Tooltip,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

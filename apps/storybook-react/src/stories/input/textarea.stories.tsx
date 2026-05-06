@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { Paragraph, Textarea } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -6,10 +7,12 @@ const meta: Meta<typeof Textarea> = {
   title: "Input/Atom/Textarea",
   component: Textarea,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],
   args: {
+    ariaLabel: "Details",
     placeholder: "Add more detail...",
     rows: 4,
   },

@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import type { TextareaFieldProps } from "@marwes-ui/vue"
 import { Paragraph, TextareaField } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,6 +8,7 @@ const meta = {
   title: "Input/Molecule/TextareaField",
   component: TextareaField as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],

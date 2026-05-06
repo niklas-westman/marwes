@@ -147,7 +147,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
                       {...dayKit.dataAttributes}
                       className={dayKit.className}
                       aria-label={dayKit.ariaLabel}
-                      aria-selected={dayKit.selected}
+                      aria-pressed={dayKit.selected ? "true" : undefined}
                       disabled={dayKit.disabled}
                       onClick={() => onDaySelect?.(day)}
                     >

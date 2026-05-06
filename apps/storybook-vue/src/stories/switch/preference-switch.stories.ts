@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { PreferenceSwitchProps } from "@marwes-ui/vue"
 import { PreferenceSwitch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,7 +8,10 @@ import { createToggleableSwitchFieldRender } from "./story-helpers"
 const meta = {
   title: "Switch/Purpose/Preference",
   component: PreferenceSwitch as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<PreferenceSwitchProps>
 

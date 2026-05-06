@@ -1,11 +1,14 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { ConfirmDialog, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof ConfirmDialog> = {
   title: "Dialog/Purpose/ConfirmDialog",
   component: ConfirmDialog,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
 }
 
 export default meta

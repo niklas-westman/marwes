@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Card, Skeleton, type SkeletonProps, StatTile, Toast } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type * as React from "react"
@@ -49,6 +49,23 @@ const listRowStyle = {
   alignItems: "center",
 } satisfies React.CSSProperties
 
+const statusOutputStyle = {
+  display: "block",
+} satisfies React.CSSProperties
+
+const cardReplicaSource = `<CardSkeleton animation="pulse" />`
+const statTileReplicaSource = `<StatTileSkeleton animation="pulse" />`
+const inputFieldReplicaSource = `<InputFieldSkeleton animation="pulse" />`
+const toastReplicaSource = `<ToastSkeleton animation="pulse" />`
+const listCardReplicaSource = `<ListCardSkeleton animation="pulse" />`
+const replicaGallerySource = `<div>
+  <CardSkeleton animation="pulse" />
+  <StatTileSkeleton animation="pulse" />
+  <InputFieldSkeleton animation="pulse" />
+  <ToastSkeleton animation="pulse" />
+  <ListCardSkeleton animation="pulse" />
+</div>`
+
 function resolveAnimation(animation: SkeletonProps["animation"]): SkeletonAnimation {
   return animation ?? "pulse"
 }
@@ -59,19 +76,19 @@ function SkeletonLine(props: SkeletonReplicaProps & { width: SkeletonDimension }
 
 export function CardSkeleton(props: SkeletonReplicaProps): React.ReactElement {
   return (
-    <Card
-      aria-busy="true"
-      aria-label="Loading card"
-      dataAttributes={{ "data-skeleton-replica": "card" }}
-      title={<Skeleton animation={props.animation} width="56%" height={16} />}
-      style={{ width: "20rem" }}
-    >
-      <div style={stackStyle}>
-        <Skeleton animation={props.animation} variant="rectangular" width="100%" height={112} />
-        <SkeletonLine animation={props.animation} width="92%" />
-        <SkeletonLine animation={props.animation} width="74%" />
-      </div>
-    </Card>
+    <output aria-busy="true" aria-label="Loading card" style={statusOutputStyle}>
+      <Card
+        dataAttributes={{ "data-skeleton-replica": "card" }}
+        title={<Skeleton animation={props.animation} width="56%" height={16} />}
+        style={{ width: "20rem" }}
+      >
+        <div style={stackStyle}>
+          <Skeleton animation={props.animation} variant="rectangular" width="100%" height={112} />
+          <SkeletonLine animation={props.animation} width="92%" />
+          <SkeletonLine animation={props.animation} width="74%" />
+        </div>
+      </Card>
+    </output>
   )
 }
 
@@ -91,19 +108,15 @@ export function StatTileSkeleton(props: SkeletonReplicaProps): React.ReactElemen
 
 export function InputFieldSkeleton(props: SkeletonReplicaProps): React.ReactElement {
   return (
-    <div
-      className="mw-input-field"
-      style={fieldStyle}
-      aria-busy="true"
-      aria-label="Loading input field"
-      data-skeleton-replica="input-field"
-    >
-      <Skeleton animation={props.animation} width={96} height={14} />
-      <div className="mw-input-field__input-wrapper" style={inputShellStyle}>
-        <Skeleton animation={props.animation} width="58%" height={14} />
+    <output aria-busy="true" aria-label="Loading input field" style={statusOutputStyle}>
+      <div className="mw-input-field" style={fieldStyle} data-skeleton-replica="input-field">
+        <Skeleton animation={props.animation} width={96} height={14} />
+        <div className="mw-input-field__input-wrapper" style={inputShellStyle}>
+          <Skeleton animation={props.animation} width="58%" height={14} />
+        </div>
+        <Skeleton animation={props.animation} width={144} height={12} />
       </div>
-      <Skeleton animation={props.animation} width={144} height={12} />
-    </div>
+    </output>
   )
 }
 
@@ -123,33 +136,36 @@ export function ToastSkeleton(props: SkeletonReplicaProps): React.ReactElement {
 
 export function ListCardSkeleton(props: SkeletonReplicaProps): React.ReactElement {
   return (
-    <Card
-      aria-busy="true"
-      aria-label="Loading list card"
-      dataAttributes={{ "data-skeleton-replica": "list-card" }}
-      title={<Skeleton animation={props.animation} width={132} height={16} />}
-      style={{ width: "26rem" }}
-    >
-      <div style={listCardBodyStyle}>
-        {[0, 1, 2].map((row) => (
-          <div key={row} style={listRowStyle}>
-            <Skeleton animation={props.animation} variant="circular" width={40} height={40} />
-            <div style={stackStyle}>
-              <SkeletonLine animation={props.animation} width="82%" />
-              <SkeletonLine animation={props.animation} width="56%" />
+    <output aria-busy="true" aria-label="Loading list card" style={statusOutputStyle}>
+      <Card
+        dataAttributes={{ "data-skeleton-replica": "list-card" }}
+        title={<Skeleton animation={props.animation} width={132} height={16} />}
+        style={{ width: "26rem" }}
+      >
+        <div style={listCardBodyStyle}>
+          {[0, 1, 2].map((row) => (
+            <div key={row} style={listRowStyle}>
+              <Skeleton animation={props.animation} variant="circular" width={40} height={40} />
+              <div style={stackStyle}>
+                <SkeletonLine animation={props.animation} width="82%" />
+                <SkeletonLine animation={props.animation} width="56%" />
+              </div>
+              <Skeleton animation={props.animation} width={60} height={24} radius={999} />
             </div>
-            <Skeleton animation={props.animation} width={60} height={24} radius={999} />
-          </div>
-        ))}
-      </div>
-    </Card>
+          ))}
+        </div>
+      </Card>
+    </output>
   )
 }
 
 const meta = {
-  title: "Skeleton/Molecule/SkeletonMolecules",
+  title: "Skeleton/Molecule",
   component: Skeleton,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     animation: {
@@ -167,22 +183,62 @@ type Story = StoryObj<typeof meta>
 
 export const CardReplica: Story = {
   render: (args) => <CardSkeleton animation={resolveAnimation(args.animation)} />,
+  parameters: {
+    docs: {
+      source: {
+        code: cardReplicaSource,
+        language: "tsx",
+      },
+    },
+  },
 }
 
 export const StatTileReplica: Story = {
   render: (args) => <StatTileSkeleton animation={resolveAnimation(args.animation)} />,
+  parameters: {
+    docs: {
+      source: {
+        code: statTileReplicaSource,
+        language: "tsx",
+      },
+    },
+  },
 }
 
 export const InputFieldReplica: Story = {
   render: (args) => <InputFieldSkeleton animation={resolveAnimation(args.animation)} />,
+  parameters: {
+    docs: {
+      source: {
+        code: inputFieldReplicaSource,
+        language: "tsx",
+      },
+    },
+  },
 }
 
 export const ToastReplica: Story = {
   render: (args) => <ToastSkeleton animation={resolveAnimation(args.animation)} />,
+  parameters: {
+    docs: {
+      source: {
+        code: toastReplicaSource,
+        language: "tsx",
+      },
+    },
+  },
 }
 
 export const ListCardReplica: Story = {
   render: (args) => <ListCardSkeleton animation={resolveAnimation(args.animation)} />,
+  parameters: {
+    docs: {
+      source: {
+        code: listCardReplicaSource,
+        language: "tsx",
+      },
+    },
+  },
 }
 
 export const ReplicaGallery: Story = {
@@ -198,5 +254,13 @@ export const ReplicaGallery: Story = {
         <ListCardSkeleton animation={animation} />
       </div>
     )
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: replicaGallerySource,
+        language: "tsx",
+      },
+    },
   },
 }

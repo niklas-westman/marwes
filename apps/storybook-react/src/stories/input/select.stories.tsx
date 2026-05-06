@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { Paragraph, Select } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -35,6 +36,7 @@ const meta: Meta<typeof Select> = {
   title: "Input/Atom/Select",
   component: Select,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {
@@ -50,6 +52,7 @@ const meta: Meta<typeof Select> = {
     },
   },
   args: {
+    ariaLabel: "Plan",
     native: false,
     placeholder: "Choose a plan",
     options,

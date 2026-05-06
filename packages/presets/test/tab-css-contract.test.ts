@@ -31,7 +31,7 @@ describe("firstEdition tab css contract", () => {
 
     expect(css).toContain(".mw-tab:focus-visible")
     expect(css).toContain("outline: none;")
-    expect(css).toContain("box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2684ff);")
+    expect(css).toContain("box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2f31fc);")
     expect(css).toContain("z-index: 1;")
   })
 })

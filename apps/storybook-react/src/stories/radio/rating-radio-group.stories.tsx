@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { RatingRadioGroup } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -6,7 +6,10 @@ import * as React from "react"
 const meta: Meta<typeof RatingRadioGroup> = {
   title: "Radio/Purpose/Rating",
   component: RatingRadioGroup,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

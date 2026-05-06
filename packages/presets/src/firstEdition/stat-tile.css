@@ -8,22 +8,23 @@
 
 .mw-stat-tile {
   --mw-stat-tile-surface: var(--mw-color-surface-elevated, #ffffff);
-  --mw-stat-tile-border: var(--mw-color-border-subtle, #e5e7eb);
+  --mw-stat-tile-border: var(--mw-color-border-subtle, #d8d8d8);
   --mw-stat-tile-text: var(--mw-color-text, #141414);
-  --mw-stat-tile-muted: color-mix(in srgb, var(--mw-color-text, #141414) 42%, transparent);
+  --mw-stat-tile-muted: var(--mw-color-text-muted, #595959);
   --mw-stat-tile-trend: var(--mw-stat-tile-muted);
+  --mw-stat-tile-radius: 24px;
 
   display: flex;
-  width: 164px;
+  width: var(--mw-stat-tile-width, 280px);
   min-width: 0;
   box-sizing: border-box;
   flex-direction: column;
-  gap: 8px;
-  padding: 20px;
+  gap: var(--mw-spacing-sp-8, 8px);
+  padding: var(--mw-spacing-sp-24, 24px);
   color: var(--mw-stat-tile-text);
   background: var(--mw-stat-tile-surface);
   border: 1px solid var(--mw-stat-tile-border);
-  border-radius: 12px;
+  border-radius: var(--mw-stat-tile-radius);
   font-family: var(--mw-font-primary, inherit);
 }
 
@@ -64,7 +65,7 @@
   min-width: 0;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--mw-spacing-sp-8, 8px);
 }
 
 .mw-stat-tile__label {
@@ -83,12 +84,9 @@
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
-  gap: 0;
-  min-height: 20px;
+  gap: var(--mw-spacing-sp-4, 4px);
   box-sizing: border-box;
-  padding: 2px 6px;
   color: var(--mw-stat-tile-trend);
-  border-radius: 999px;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -125,9 +123,15 @@
   white-space: nowrap;
 }
 
-.mw-theme--dark .mw-stat-tile {
+.mw-theme--dark
+  .mw-stat-tile:not(
+    .mw-stat-tile--brand,
+    .mw-stat-tile--success,
+    .mw-stat-tile--warning,
+    .mw-stat-tile--danger
+  ) {
   --mw-stat-tile-surface: var(--mw-color-surface-elevated, #2e2e2e);
   --mw-stat-tile-border: var(--mw-color-border-subtle, #474747);
   --mw-stat-tile-text: var(--mw-color-text, #f9fafb);
-  --mw-stat-tile-muted: color-mix(in srgb, var(--mw-color-text, #f9fafb) 65%, transparent);
+  --mw-stat-tile-muted: var(--mw-color-text-muted, #a3a3a3);
 }

@@ -1,4 +1,4 @@
-import { SwitchSize, storybookLayout } from "@marwes-ui/core"
+import { SwitchSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Switch } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -7,7 +7,10 @@ import { ToggleableSwitchStory } from "./story-helpers"
 const meta: Meta<typeof Switch> = {
   title: "Switch/Atom",
   component: Switch,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     checked: { control: "boolean" },

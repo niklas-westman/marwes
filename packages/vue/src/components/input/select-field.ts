@@ -159,6 +159,12 @@ export const SelectField = defineComponent(
         ? (sourceSelect.value.placeholder ?? "")
         : (selectedOption.value?.label ?? ""),
     )
+    const accessibleName = computed(
+      () =>
+        sourceSelect.value.ariaLabel ??
+        (hasTextContent(props.label) ? props.label : undefined) ??
+        (hasTextContent(displayText.value) ? displayText.value : undefined),
+    )
 
     const wrapperClass = computed(() =>
       mergeClassNames(
@@ -397,6 +403,7 @@ export const SelectField = defineComponent(
                       "aria-controls": `${id.value}-listbox`,
                       "aria-expanded": open.value ? "true" : "false",
                       "aria-haspopup": "listbox",
+                      "aria-label": accessibleName.value,
                       "aria-describedby": a11yIds.value.describedBy,
                       "aria-invalid": invalid.value ? "true" : undefined,
                       "aria-required": sourceSelect.value.required ? "true" : undefined,

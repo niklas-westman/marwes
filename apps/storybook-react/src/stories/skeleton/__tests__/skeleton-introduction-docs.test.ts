@@ -10,7 +10,6 @@ describe("React skeleton introduction docs", () => {
     const expectedContent = [
       "Skeleton",
       "low-level placeholder atom",
-      "Figma source",
       "text",
       "circular",
       "rectangular",

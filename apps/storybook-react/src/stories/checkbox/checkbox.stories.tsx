@@ -1,4 +1,4 @@
-import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import { Checkbox, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -6,7 +6,10 @@ import * as React from "react"
 const meta: Meta<typeof Checkbox> = {
   title: "Checkbox/Atom",
   component: Checkbox,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
     size: "md",

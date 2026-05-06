@@ -1,4 +1,4 @@
-import { IconName, ThemeMode, storybookLayout } from "@marwes-ui/core"
+import { IconName, ThemeMode, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { TooltipGroupProps } from "@marwes-ui/vue"
 import { MarwesProvider, TooltipGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,9 +6,13 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Tooltip/Molecule/TooltipGroup",
   component: TooltipGroup as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
+    ...storybookA11yPolicy.smoke,
     icon: {
       control: "select",
       options: [IconName.HelpCircle, IconName.Info],

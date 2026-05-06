@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { OptionRadioGroupProps } from "@marwes-ui/vue"
 import { OptionRadioGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,7 +7,10 @@ import { ref } from "vue"
 const meta = {
   title: "Radio/Purpose/Option",
   component: OptionRadioGroup as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<OptionRadioGroupProps>
 

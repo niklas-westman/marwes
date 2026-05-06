@@ -166,7 +166,7 @@ export const DatePicker = defineComponent(
                             ...dayKit.dataAttributes,
                             class: dayKit.className,
                             "aria-label": dayKit.ariaLabel,
-                            "aria-selected": dayKit.selected,
+                            "aria-pressed": dayKit.selected ? "true" : undefined,
                             disabled: dayKit.disabled,
                             onClick: () => emit("daySelect", day),
                           },

@@ -69,9 +69,9 @@ export const SearchField = defineComponent({
   inheritAttrs: false,
   props: [...fieldPropKeys],
   emits: ["update:modelValue", "value-change"],
-  setup(_, { attrs, slots, emit }) {
+  setup(rawProps, { slots, emit }) {
     return () => {
-      const props = attrs as unknown as SearchFieldProps
+      const props = rawProps as unknown as SearchFieldProps
       return h("div", { "data-purpose": "search" }, [
         h(
           InputField,
@@ -104,9 +104,9 @@ export const PasswordField = defineComponent({
   inheritAttrs: false,
   props: [...passwordFieldPropKeys],
   emits: ["update:modelValue", "value-change"],
-  setup(_, { attrs, slots, emit }) {
+  setup(rawProps, { slots, emit }) {
     return () => {
-      const props = attrs as unknown as PasswordFieldProps
+      const props = rawProps as unknown as PasswordFieldProps
       const autoComplete = props.autoComplete ?? "current-password"
       return h("div", { "data-purpose": "password" }, [
         h(
@@ -137,9 +137,9 @@ export const EmailField = defineComponent({
   inheritAttrs: false,
   props: [...fieldPropKeys],
   emits: ["update:modelValue", "value-change"],
-  setup(_, { attrs, slots, emit }) {
+  setup(rawProps, { slots, emit }) {
     return () => {
-      const props = attrs as unknown as EmailFieldProps
+      const props = rawProps as unknown as EmailFieldProps
       return h("div", { "data-purpose": "email" }, [
         h(
           InputField,
@@ -235,9 +235,9 @@ export const PhoneField = defineComponent({
   inheritAttrs: false,
   props: [...fieldPropKeys],
   emits: ["update:modelValue", "value-change"],
-  setup(_, { attrs, slots, emit }) {
+  setup(rawProps, { slots, emit }) {
     return () => {
-      const props = attrs as unknown as PhoneFieldProps
+      const props = rawProps as unknown as PhoneFieldProps
       return h("div", { "data-purpose": "phone" }, [
         h(
           InputField,
@@ -268,9 +268,9 @@ export const URLField = defineComponent({
   inheritAttrs: false,
   props: [...fieldPropKeys],
   emits: ["update:modelValue", "value-change"],
-  setup(_, { attrs, slots, emit }) {
+  setup(rawProps, { slots, emit }) {
     return () => {
-      const props = attrs as unknown as URLFieldProps
+      const props = rawProps as unknown as URLFieldProps
       return h("div", { "data-purpose": "url" }, [
         h(
           InputField,

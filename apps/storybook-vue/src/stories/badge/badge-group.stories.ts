@@ -1,4 +1,4 @@
-import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { BadgeGroupProps } from "@marwes-ui/vue"
 import { Badge, BadgeGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,9 +8,17 @@ const VARIANTS = Object.values(BadgeVariant)
 const meta = {
   title: "Badge/Molecule",
   component: BadgeGroup as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
-  decorators: [() => ({ template: '<div style="width: 100%; max-width: 640px"><story /></div>' })],
+  decorators: [
+    () => ({
+      ...storybookA11yPolicy.smoke,
+      template: '<div style="width: 100%; max-width: 640px"><story /></div>',
+    }),
+  ],
 } satisfies Meta<BadgeGroupProps>
 
 export default meta

@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { ButtonSpinnerProps } from "@marwes-ui/vue"
 import { Button, ButtonSpinner } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -17,7 +17,11 @@ const stageStyle = `
 const meta = {
   title: "Spinner/Molecule/ButtonSpinner",
   component: ButtonSpinner as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args: ButtonSpinnerProps) => ({
     components: { Button, ButtonSpinner },

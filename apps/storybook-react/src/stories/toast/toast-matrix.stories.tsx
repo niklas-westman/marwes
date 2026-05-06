@@ -1,4 +1,4 @@
-import { IconName, storybookLayout } from "@marwes-ui/core"
+import { IconName, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import {
   ErrorToast,
   Icon,
@@ -101,7 +101,10 @@ const matrixToastClassName = "mw-toast--figma-matrix"
 const meta: Meta<typeof InfoToast> = {
   title: "Toast/Purpose/Matrix",
   component: InfoToast,
-  parameters: storybookLayout.fullscreen,
+  parameters: {
+    ...storybookLayout.fullscreen,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

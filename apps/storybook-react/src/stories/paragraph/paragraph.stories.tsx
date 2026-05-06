@@ -1,11 +1,14 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Divider, H1, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
   title: "Paragraph/Atom",
   component: Paragraph,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {

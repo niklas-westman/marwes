@@ -1,4 +1,4 @@
-import { AvatarSize, ThemeMode, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, ThemeMode, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { AvatarBadge, MarwesProvider } from "@marwes-ui/vue"
 import type { AvatarBadgeProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +6,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Avatar/Molecule/AvatarBadge",
   component: AvatarBadge as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<AvatarBadgeProps>
 

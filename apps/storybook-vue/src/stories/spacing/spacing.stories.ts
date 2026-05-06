@@ -1,4 +1,4 @@
-import { storybookLayout, storybookSpacingArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookSpacingArgTypes } from "@marwes-ui/core"
 import type { SpacingProps } from "@marwes-ui/vue"
 import { H1, Paragraph, Spacing, Spacings } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -16,7 +16,11 @@ const spacerWrapStyle = `
 const meta = {
   title: "Spacing/Atom",
   component: Spacing as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookSpacingArgTypes,
   args: {

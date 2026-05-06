@@ -24,23 +24,22 @@
 }
 
 .mw-accordion-field__description {
-  opacity: 0.6;
   font-size: 0.875em;
-  color: var(--mw-color-text-muted, #6b7280);
+  color: var(--mw-color-text-muted, #595959);
 }
 
 .mw-accordion-field__error {
   font-size: 0.875em;
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 /* State modifiers */
 .mw-accordion-field--disabled {
-  opacity: 0.7;
+  color: var(--mw-color-text-disabled, #595959);
   cursor: not-allowed;
 }
 
 .mw-accordion-field--invalid .mw-accordion-field__label .mw-p,
 .mw-accordion-field--invalid .mw-accordion-field__error .mw-p {
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }

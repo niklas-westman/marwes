@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { SliderField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import * as React from "react"
@@ -6,7 +6,11 @@ import * as React from "react"
 const meta = {
   title: "Slider/Molecule",
   component: SliderField,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof SliderField>
 

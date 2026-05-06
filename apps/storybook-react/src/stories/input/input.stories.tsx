@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { Input, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -6,10 +7,12 @@ const meta: Meta<typeof Input> = {
   title: "Input/Atom/Input",
   component: Input,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],
   args: {
+    ariaLabel: "Text input",
     placeholder: "Enter text...",
   },
 }

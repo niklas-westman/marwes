@@ -11,10 +11,10 @@ describe("React skeleton story taxonomy", () => {
     expect(story).toContain('title: "Skeleton/Atom"')
   })
 
-  it("keeps replica stories under Skeleton/Molecules", () => {
+  it("keeps replica stories under Skeleton/Molecule", () => {
     const story = readFileSync(path.join(storiesDir, "skeleton-molecules.stories.tsx"), "utf8")
 
-    expect(story).toContain('title: "Skeleton/Molecule/SkeletonMolecules"')
+    expect(story).toContain('title: "Skeleton/Molecule"')
     expect(story).toContain("CardSkeleton")
     expect(story).toContain("StatTileSkeleton")
     expect(story).toContain("InputFieldSkeleton")

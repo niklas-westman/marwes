@@ -1,11 +1,18 @@
-import { storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
+import {
+  storybookA11yPolicy,
+  storybookButtonGeneralArgTypes,
+  storybookLayout,
+} from "@marwes-ui/core"
 import { TextButton } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
   title: "Buttons/Variant/TextButton",
   component: TextButton,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookButtonGeneralArgTypes,
 } satisfies Meta<typeof TextButton>

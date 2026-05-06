@@ -1,4 +1,4 @@
-import { storybookLayout, storybookStatTileArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookStatTileArgTypes } from "@marwes-ui/core"
 import { StatTile, type StatTileProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
@@ -8,11 +8,15 @@ const gridStyle =
 const meta = {
   title: "StatTile/Atom",
   component: StatTile as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookStatTileArgTypes,
   args: {
-    label: "Monthly Revenue",
+    label: "Revenue",
     value: "$48,200",
     subtitle: "vs $42,900 last month",
     trendValue: "12%",
@@ -45,7 +49,7 @@ export const ToneMatrix: Story = {
     },
     template: `
       <div :style="gridStyle">
-        <StatTile label="Monthly Revenue" value="$48,200" subtitle="vs $42,900 last month" trendValue="12%" trendDirection="positive" />
+        <StatTile label="Revenue" value="$48,200" subtitle="vs $42,900 last month" trendValue="12%" trendDirection="positive" />
         <StatTile tone="brand" label="Active Accounts" value="1,284" subtitle="new business pipeline" trendValue="8%" trendDirection="positive" />
         <StatTile tone="success" label="Conversion" value="18.2%" subtitle="vs 16.4% last month" trendValue="11%" trendDirection="positive" />
         <StatTile tone="warning" label="Response Time" value="2.4h" subtitle="support median" trendValue="6%" trendDirection="negative" />

@@ -94,11 +94,12 @@ function getNextEnabledOptionIndex(
 
 type MarwesSelectFieldControlProps = {
   id: string
+  label?: string
   select: SelectProps
 }
 
 function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.ReactElement {
-  const { id, select } = props
+  const { id, label, select } = props
   const listboxId = `${id}-listbox`
   const isControlled = select.value !== undefined
   const [internalValue, setInternalValue] = React.useState(() => getInitialSelectValue(select))
@@ -115,6 +116,10 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
     (select.placeholder === undefined ? select.options[0] : undefined)
   const placeholderSelected = select.placeholder !== undefined && value === ""
   const displayText = placeholderSelected ? select.placeholder : (selectedOption?.label ?? "")
+  const accessibleName =
+    select.ariaLabel ??
+    (hasTextContent(label) ? label : undefined) ??
+    (hasTextContent(displayText) ? displayText : undefined)
 
   React.useEffect(() => {
     if (!open) {
@@ -274,6 +279,7 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
         aria-controls={listboxId}
         aria-expanded={open}
         aria-haspopup="listbox"
+        aria-label={accessibleName}
         aria-describedby={select.describedBy}
         aria-invalid={select.invalid ? "true" : undefined}
         aria-required={select.required ? "true" : undefined}
@@ -415,7 +421,7 @@ export function SelectField(props: SelectFieldProps): React.ReactElement {
         {mode === "native" ? (
           <Select {...selectProps} native />
         ) : (
-          <MarwesSelectFieldControl id={id} select={selectProps} />
+          <MarwesSelectFieldControl id={id} label={props.label} select={selectProps} />
         )}
       </div>
 

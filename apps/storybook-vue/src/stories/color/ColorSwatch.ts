@@ -32,12 +32,64 @@ export const ColorSwatch = defineComponent({
     }
 
     const textColor = computed(() => {
-      const rgb = Number.parseInt(props.hex.slice(1), 16)
-      const r = (rgb >> 16) & 0xff
-      const g = (rgb >> 8) & 0xff
-      const b = rgb & 0xff
-      const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
-      return luma > 165 ? "#000000" : "#FFFFFF"
+      const toLinear = (channel: number) => {
+        const value = channel / 255
+        return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
+      }
+      const luminance = ([r, g, b]: [number, number, number]) =>
+        0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b)
+      const contrast = (
+        foreground: [number, number, number],
+        background: [number, number, number],
+      ) => {
+        const lighter = Math.max(luminance(foreground), luminance(background))
+        const darker = Math.min(luminance(foreground), luminance(background))
+        return (lighter + 0.05) / (darker + 0.05)
+      }
+      const compositeOverWhite = ([r, g, b, a]: [number, number, number, number]) =>
+        [
+          Math.round(r * a + 255 * (1 - a)),
+          Math.round(g * a + 255 * (1 - a)),
+          Math.round(b * a + 255 * (1 - a)),
+        ] as [number, number, number]
+
+      const rgbaMatch = props.hex.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\)$/i)
+      const rgba = rgbaMatch
+        ? ([
+            Number(rgbaMatch[1]),
+            Number(rgbaMatch[2]),
+            Number(rgbaMatch[3]),
+            Number(rgbaMatch[4] ?? 1),
+          ] as [number, number, number, number])
+        : undefined
+
+      const value = props.hex.replace("#", "")
+      const normalized =
+        value.length === 3
+          ? value
+              .split("")
+              .map((part) => `${part}${part}`)
+              .join("")
+          : value
+      const hexRgba = /^[0-9a-f]{6}([0-9a-f]{2})?$/i.test(normalized)
+        ? ([
+            Number.parseInt(normalized.slice(0, 2), 16),
+            Number.parseInt(normalized.slice(2, 4), 16),
+            Number.parseInt(normalized.slice(4, 6), 16),
+            normalized.length === 8 ? Number.parseInt(normalized.slice(6, 8), 16) / 255 : 1,
+          ] as [number, number, number, number])
+        : undefined
+
+      const background = rgba ?? hexRgba
+      if (!background) return "#141414"
+
+      const renderedBackground = compositeOverWhite(background)
+      const black: [number, number, number] = [0, 0, 0]
+      const white: [number, number, number] = [255, 255, 255]
+
+      return contrast(black, renderedBackground) >= contrast(white, renderedBackground)
+        ? "#141414"
+        : "#FFFFFF"
     })
 
     return () =>

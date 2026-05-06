@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import type { SelectProps } from "@marwes-ui/vue"
 import { Paragraph, Select } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -36,6 +37,7 @@ const meta = {
   title: "Input/Atom/Select",
   component: Select as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {
@@ -51,6 +53,7 @@ const meta = {
     },
   },
   args: {
+    ariaLabel: "Plan",
     native: false,
     placeholder: "Choose a plan",
     options,

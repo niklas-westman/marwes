@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { AccordionFieldProps } from "@marwes-ui/vue"
 import { AccordionField } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -17,9 +17,17 @@ const faqItems = [
 const meta = {
   title: "Accordion/Molecule",
   component: AccordionField as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
-  decorators: [() => ({ template: '<div style="width: 100%; max-width: 640px"><story /></div>' })],
+  decorators: [
+    () => ({
+      ...storybookA11yPolicy.smoke,
+      template: '<div style="width: 66vw"><story /></div>',
+    }),
+  ],
 } satisfies Meta<AccordionFieldProps>
 
 export default meta

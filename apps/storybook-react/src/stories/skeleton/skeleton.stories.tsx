@@ -1,4 +1,4 @@
-import { storybookLayout, storybookSkeletonArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookSkeletonArgTypes } from "@marwes-ui/core"
 import type { SkeletonProps } from "@marwes-ui/react"
 import { H2, Paragraph, Skeleton } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
@@ -22,7 +22,10 @@ const cardStyle = {
 const meta = {
   title: "Skeleton/Atom",
   component: Skeleton,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookSkeletonArgTypes,
   args: {
@@ -73,7 +76,7 @@ export const FigmaShapes: Story = {
 
 export const LoadingCard: Story = {
   render: (args: SkeletonProps) => (
-    <div style={cardStyle} aria-label="Loading account summary">
+    <output style={cardStyle} aria-busy="true" aria-label="Loading account summary">
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
         <Skeleton {...args} variant="circular" width={48} height={48} />
         <div style={{ display: "grid", gap: "0.5rem", flex: 1 }}>
@@ -86,7 +89,7 @@ export const LoadingCard: Story = {
         <Skeleton {...args} width="92%" height={12} />
         <Skeleton {...args} width="78%" height={12} />
       </div>
-    </div>
+    </output>
   ),
 }
 

@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { SkeletonProps } from "@marwes-ui/vue"
 import { Card, Skeleton, Toast } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -16,11 +16,28 @@ const statHeaderStyle =
 const listCardBodyStyle = "display: grid; gap: 0.875rem;"
 const listRowStyle =
   "display: grid; grid-template-columns: 2.5rem 1fr 4.5rem; gap: 0.75rem; align-items: center;"
+const statusOutputStyle = "display: block;"
+
+const cardReplicaSource = `<CardSkeleton animation="pulse" />`
+const statTileReplicaSource = `<StatTileSkeleton animation="pulse" />`
+const inputFieldReplicaSource = `<InputFieldSkeleton animation="pulse" />`
+const toastReplicaSource = `<ToastSkeleton animation="pulse" />`
+const listCardReplicaSource = `<ListCardSkeleton animation="pulse" />`
+const replicaGallerySource = `<div>
+  <CardSkeleton animation="pulse" />
+  <StatTileSkeleton animation="pulse" />
+  <InputFieldSkeleton animation="pulse" />
+  <ToastSkeleton animation="pulse" />
+  <ListCardSkeleton animation="pulse" />
+</div>`
 
 const meta = {
-  title: "Skeleton/Molecule/SkeletonMolecules",
+  title: "Skeleton/Molecule",
   component: Skeleton as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     animation: {
@@ -40,21 +57,31 @@ export const CardReplica: Story = {
   render: (args: SkeletonProps) => ({
     components: { Card, Skeleton },
     setup() {
-      return { args, stackStyle }
+      return { args, stackStyle, statusOutputStyle }
     },
     template: `
-      <Card aria-busy="true" aria-label="Loading card" :dataAttributes="{ 'data-skeleton-replica': 'card' }" style="width: 20rem;">
-        <template #title>
-          <Skeleton :animation="args.animation" width="56%" :height="16" />
-        </template>
-        <div :style="stackStyle">
-          <Skeleton :animation="args.animation" variant="rectangular" width="100%" :height="112" />
-          <Skeleton :animation="args.animation" width="92%" :height="12" />
-          <Skeleton :animation="args.animation" width="74%" :height="12" />
-        </div>
-      </Card>
+      <output aria-busy="true" aria-label="Loading card" :style="statusOutputStyle">
+        <Card :dataAttributes="{ 'data-skeleton-replica': 'card' }" style="width: 20rem;">
+          <template #title>
+            <Skeleton :animation="args.animation" width="56%" :height="16" />
+          </template>
+          <div :style="stackStyle">
+            <Skeleton :animation="args.animation" variant="rectangular" width="100%" :height="112" />
+            <Skeleton :animation="args.animation" width="92%" :height="12" />
+            <Skeleton :animation="args.animation" width="74%" :height="12" />
+          </div>
+        </Card>
+      </output>
     `,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: cardReplicaSource,
+        language: "vue",
+      },
+    },
+  },
 }
 
 export const StatTileReplica: Story = {
@@ -74,24 +101,42 @@ export const StatTileReplica: Story = {
       </article>
     `,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: statTileReplicaSource,
+        language: "vue",
+      },
+    },
+  },
 }
 
 export const InputFieldReplica: Story = {
   render: (args: SkeletonProps) => ({
     components: { Skeleton },
     setup() {
-      return { args, fieldStyle, inputShellStyle }
+      return { args, fieldStyle, inputShellStyle, statusOutputStyle }
     },
     template: `
-      <div class="mw-input-field" :style="fieldStyle" aria-busy="true" aria-label="Loading input field" data-skeleton-replica="input-field">
-        <Skeleton :animation="args.animation" :width="96" :height="14" />
-        <div class="mw-input-field__input-wrapper" :style="inputShellStyle">
-          <Skeleton :animation="args.animation" width="58%" :height="14" />
+      <output aria-busy="true" aria-label="Loading input field" :style="statusOutputStyle">
+        <div class="mw-input-field" :style="fieldStyle" data-skeleton-replica="input-field">
+          <Skeleton :animation="args.animation" :width="96" :height="14" />
+          <div class="mw-input-field__input-wrapper" :style="inputShellStyle">
+            <Skeleton :animation="args.animation" width="58%" :height="14" />
+          </div>
+          <Skeleton :animation="args.animation" :width="144" :height="12" />
         </div>
-        <Skeleton :animation="args.animation" :width="144" :height="12" />
-      </div>
+      </output>
     `,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: inputFieldReplicaSource,
+        language: "vue",
+      },
+    },
+  },
 }
 
 export const ToastReplica: Story = {
@@ -109,32 +154,56 @@ export const ToastReplica: Story = {
       </Toast>
     `,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: toastReplicaSource,
+        language: "vue",
+      },
+    },
+  },
 }
 
 export const ListCardReplica: Story = {
   render: (args: SkeletonProps) => ({
     components: { Card, Skeleton },
     setup() {
-      return { args, listCardBodyStyle, listRowStyle, stackStyle }
+      return {
+        args,
+        listCardBodyStyle,
+        listRowStyle,
+        stackStyle,
+        statusOutputStyle,
+      }
     },
     template: `
-      <Card aria-busy="true" aria-label="Loading list card" :dataAttributes="{ 'data-skeleton-replica': 'list-card' }" style="width: 26rem;">
-        <template #title>
-          <Skeleton :animation="args.animation" :width="132" :height="16" />
-        </template>
-        <div :style="listCardBodyStyle">
-          <div v-for="row in [0, 1, 2]" :key="row" :style="listRowStyle">
-            <Skeleton :animation="args.animation" variant="circular" :width="40" :height="40" />
-            <div :style="stackStyle">
-              <Skeleton :animation="args.animation" width="82%" :height="12" />
-              <Skeleton :animation="args.animation" width="56%" :height="12" />
+      <output aria-busy="true" aria-label="Loading list card" :style="statusOutputStyle">
+        <Card :dataAttributes="{ 'data-skeleton-replica': 'list-card' }" style="width: 26rem;">
+          <template #title>
+            <Skeleton :animation="args.animation" :width="132" :height="16" />
+          </template>
+          <div :style="listCardBodyStyle">
+            <div v-for="row in [0, 1, 2]" :key="row" :style="listRowStyle">
+              <Skeleton :animation="args.animation" variant="circular" :width="40" :height="40" />
+              <div :style="stackStyle">
+                <Skeleton :animation="args.animation" width="82%" :height="12" />
+                <Skeleton :animation="args.animation" width="56%" :height="12" />
+              </div>
+              <Skeleton :animation="args.animation" :width="60" :height="24" :radius="999" />
             </div>
-            <Skeleton :animation="args.animation" :width="60" :height="24" :radius="999" />
           </div>
-        </div>
-      </Card>
+        </Card>
+      </output>
     `,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: listCardReplicaSource,
+        language: "vue",
+      },
+    },
+  },
 }
 
 export const ReplicaGallery: Story = {
@@ -151,20 +220,23 @@ export const ReplicaGallery: Story = {
         stackStyle,
         statHeaderStyle,
         statTileStyle,
+        statusOutputStyle,
       }
     },
     template: `
       <div :style="galleryStyle">
-        <Card aria-busy="true" aria-label="Loading card" :dataAttributes="{ 'data-skeleton-replica': 'card' }" style="width: 20rem;">
-          <template #title>
-            <Skeleton :animation="args.animation" width="56%" :height="16" />
-          </template>
-          <div :style="stackStyle">
-            <Skeleton :animation="args.animation" variant="rectangular" width="100%" :height="112" />
-            <Skeleton :animation="args.animation" width="92%" :height="12" />
-            <Skeleton :animation="args.animation" width="74%" :height="12" />
-          </div>
-        </Card>
+        <output aria-busy="true" aria-label="Loading card" :style="statusOutputStyle">
+          <Card :dataAttributes="{ 'data-skeleton-replica': 'card' }" style="width: 20rem;">
+            <template #title>
+              <Skeleton :animation="args.animation" width="56%" :height="16" />
+            </template>
+            <div :style="stackStyle">
+              <Skeleton :animation="args.animation" variant="rectangular" width="100%" :height="112" />
+              <Skeleton :animation="args.animation" width="92%" :height="12" />
+              <Skeleton :animation="args.animation" width="74%" :height="12" />
+            </div>
+          </Card>
+        </output>
         <article :style="statTileStyle" aria-busy="true" aria-label="Loading stat tile" data-skeleton-replica="stat-tile">
           <div :style="statHeaderStyle">
             <Skeleton :animation="args.animation" :width="84" :height="12" />
@@ -173,35 +245,47 @@ export const ReplicaGallery: Story = {
           <Skeleton :animation="args.animation" :width="104" :height="28" />
           <Skeleton :animation="args.animation" :width="112" :height="12" />
         </article>
-        <div class="mw-input-field" :style="fieldStyle" aria-busy="true" aria-label="Loading input field" data-skeleton-replica="input-field">
-          <Skeleton :animation="args.animation" :width="96" :height="14" />
-          <div class="mw-input-field__input-wrapper" :style="inputShellStyle">
-            <Skeleton :animation="args.animation" width="58%" :height="14" />
+        <output aria-busy="true" aria-label="Loading input field" :style="statusOutputStyle">
+          <div class="mw-input-field" :style="fieldStyle" data-skeleton-replica="input-field">
+            <Skeleton :animation="args.animation" :width="96" :height="14" />
+            <div class="mw-input-field__input-wrapper" :style="inputShellStyle">
+              <Skeleton :animation="args.animation" width="58%" :height="14" />
+            </div>
+            <Skeleton :animation="args.animation" :width="144" :height="12" />
           </div>
-          <Skeleton :animation="args.animation" :width="144" :height="12" />
-        </div>
+        </output>
         <Toast variant="subtle" aria-busy="true" aria-label="Loading toast" data-skeleton-replica="toast">
           <Skeleton :animation="args.animation" :width="188" :height="14" />
           <template #action>
             <Skeleton :animation="args.animation" :width="52" :height="20" />
           </template>
         </Toast>
-        <Card aria-busy="true" aria-label="Loading list card" :dataAttributes="{ 'data-skeleton-replica': 'list-card' }" style="width: 26rem;">
-          <template #title>
-            <Skeleton :animation="args.animation" :width="132" :height="16" />
-          </template>
-          <div :style="listCardBodyStyle">
-            <div v-for="row in [0, 1, 2]" :key="row" :style="listRowStyle">
-              <Skeleton :animation="args.animation" variant="circular" :width="40" :height="40" />
-              <div :style="stackStyle">
-                <Skeleton :animation="args.animation" width="82%" :height="12" />
-                <Skeleton :animation="args.animation" width="56%" :height="12" />
+        <output aria-busy="true" aria-label="Loading list card" :style="statusOutputStyle">
+          <Card :dataAttributes="{ 'data-skeleton-replica': 'list-card' }" style="width: 26rem;">
+            <template #title>
+              <Skeleton :animation="args.animation" :width="132" :height="16" />
+            </template>
+            <div :style="listCardBodyStyle">
+              <div v-for="row in [0, 1, 2]" :key="row" :style="listRowStyle">
+                <Skeleton :animation="args.animation" variant="circular" :width="40" :height="40" />
+                <div :style="stackStyle">
+                  <Skeleton :animation="args.animation" width="82%" :height="12" />
+                  <Skeleton :animation="args.animation" width="56%" :height="12" />
+                </div>
+                <Skeleton :animation="args.animation" :width="60" :height="24" :radius="999" />
               </div>
-              <Skeleton :animation="args.animation" :width="60" :height="24" :radius="999" />
             </div>
-          </div>
-        </Card>
+          </Card>
+        </output>
       </div>
     `,
   }),
+  parameters: {
+    docs: {
+      source: {
+        code: replicaGallerySource,
+        language: "vue",
+      },
+    },
+  },
 }

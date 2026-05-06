@@ -1,6 +1,6 @@
 .mw-dialog {
   --mw-dialog-surface: var(--mw-color-surface-elevated, #ffffff);
-  --mw-dialog-border: var(--mw-color-border-subtle, #e5e7eb);
+  --mw-dialog-border: var(--mw-color-border-subtle, #d8d8d8);
   --mw-dialog-divider: var(--mw-color-border-subtle, #00000033);
   --mw-dialog-title: var(--mw-color-text, #141414);
   --mw-dialog-description: color-mix(

@@ -1,4 +1,4 @@
-import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import { CheckboxGroupField, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -18,7 +18,10 @@ const selectAllChildOptions = [
 const meta: Meta<typeof CheckboxGroupField> = {
   title: "Checkbox/Molecule/CheckboxGroupField",
   component: CheckboxGroupField,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
     label: "Notification preferences",

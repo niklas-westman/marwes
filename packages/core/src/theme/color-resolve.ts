@@ -58,8 +58,11 @@ export function resolveColorRole(base: string, overrides?: Partial<ColorRole>): 
  * Secondary has a transparent base with alpha-tinted interaction states,
  * and extra border fields not present on a standard ColorRole.
  */
-export function resolveSecondaryRole(primary: ColorRole): SecondaryColorRole {
-  return {
+export function resolveSecondaryRole(
+  primary: ColorRole,
+  overrides?: Partial<SecondaryColorRole>,
+): SecondaryColorRole {
+  const derived: SecondaryColorRole = {
     base: "transparent",
     hover: setAlpha(primary.base, 0.08),
     pressed: setAlpha(primary.base, 0.15),
@@ -69,6 +72,8 @@ export function resolveSecondaryRole(primary: ColorRole): SecondaryColorRole {
     border: primary.base,
     borderDisabled: primary.disabled,
   }
+
+  return overrides ? { ...derived, ...overrides } : derived
 }
 
 // ─── resolveInfoRole ──────────────────────────────────────────────────────────

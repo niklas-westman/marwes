@@ -1,4 +1,4 @@
-import { AvatarSize, AvatarType, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, AvatarType, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Avatar, type AvatarProps, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -117,7 +117,10 @@ function buildAvatarArgs(args: AvatarProps): AvatarProps {
 const meta: Meta<typeof Avatar> = {
   title: "Avatar/Atom",
   component: Avatar,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {

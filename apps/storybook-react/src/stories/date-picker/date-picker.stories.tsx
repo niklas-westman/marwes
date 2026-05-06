@@ -1,4 +1,4 @@
-import { storybookDatePickerArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookDatePickerArgTypes, storybookLayout } from "@marwes-ui/core"
 import { DatePicker, SelectField } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type * as React from "react"
@@ -38,7 +38,11 @@ function FigmaRangeReference(args: DatePickerStoryProps) {
 const meta = {
   title: "DatePicker/Atom",
   component: DatePicker,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookDatePickerArgTypes,
   args: {

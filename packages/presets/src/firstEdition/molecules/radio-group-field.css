@@ -44,7 +44,7 @@
 
 .mw-radio-group-field__error {
   font-size: var(--mw-density-font-size-sm);
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 /* State modifiers */
@@ -55,5 +55,5 @@
 
 .mw-radio-group-field--invalid .mw-radio-group-field__label .mw-p,
 .mw-radio-group-field--invalid .mw-radio-group-field__error .mw-p {
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }

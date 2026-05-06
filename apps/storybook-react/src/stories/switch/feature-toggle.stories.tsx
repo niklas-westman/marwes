@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { FeatureToggle } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -7,7 +7,10 @@ import { createToggleableSwitchFieldRender } from "./story-helpers"
 const meta: Meta<typeof FeatureToggle> = {
   title: "Switch/Purpose/FeatureToggle",
   component: FeatureToggle,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

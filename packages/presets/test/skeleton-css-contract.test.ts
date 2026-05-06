@@ -15,6 +15,14 @@ describe("firstEdition skeleton css contract", () => {
     )
   })
 
+  it("lifts the skeleton fill against dark mode surfaces", () => {
+    const css = readFileSync(skeletonCssPath, "utf8")
+
+    expect(css).toContain(".mw-theme--dark .mw-skeleton")
+    expect(css).toContain("var(--mw-color-surface-elevated, #2b2b2b)")
+    expect(css).toContain("var(--mw-color-text, #f9fafb) 12%")
+  })
+
   it("supports pulse and wave animation hooks", () => {
     const css = readFileSync(skeletonCssPath, "utf8")
 

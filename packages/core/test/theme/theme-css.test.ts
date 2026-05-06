@@ -13,7 +13,7 @@ import { ThemeMode } from "../../src/theme/theme-types"
 const primary = resolveColorRole("#5B8CFF")
 const danger = resolveColorRole("#D90429")
 const success = resolveColorRole("#006633")
-const warning = resolveColorRole("#FFB703")
+const warning = resolveColorRole("#B45309")
 
 const fixture: ResolvedTheme = {
   mode: ThemeMode.light,
@@ -25,21 +25,21 @@ const fixture: ResolvedTheme = {
     warning,
     info: resolveInfoRole(primary),
     background: "#FFFFFF",
-    surface: "#F9FAFB",
-    surfaceSubtle: "#F3F4F6",
+    surface: "#F8F8F8",
+    surfaceSubtle: "#F5F5F5",
     surfaceElevated: "#FFFFFF",
-    surfaceDisabled: "#F3F4F6",
+    surfaceDisabled: "#F5F5F5",
     surfaceInverted: "#141414",
     text: "#141414",
-    textMuted: "#9CA3AF",
-    textSubtle: "#9CA3AF",
-    textDisabled: "rgba(20,20,20,0.4)",
-    textInverted: "#F9FAFB",
-    border: "rgba(0,0,0,0.4)",
-    borderSubtle: "#00000033",
-    borderStrong: "#141414",
-    borderDisabled: "rgba(20,20,20,0.16)",
-    focus: "#2684FF",
+    textMuted: "#595959",
+    textSubtle: "#595959",
+    textDisabled: "#737373",
+    textInverted: "#FFFFFF",
+    border: "#D8D8D8",
+    borderSubtle: "#D8D8D8",
+    borderStrong: "#A3A3A3",
+    borderDisabled: "#D8D8D8",
+    focus: "#2F31FC",
   },
   font: {
     primary: "'Instrument Sans', Inter, system-ui, sans-serif",
@@ -144,11 +144,11 @@ describe("themeToCSSVars — surface / semantic", () => {
   })
 
   it("surface equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-surface"]).toBe("#F9FAFB")
+    expect(themeToCSSVars(fixture)["--mw-color-surface"]).toBe("#F8F8F8")
   })
 
   it("surface-subtle equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-surface-subtle"]).toBe("#F3F4F6")
+    expect(themeToCSSVars(fixture)["--mw-color-surface-subtle"]).toBe("#F5F5F5")
   })
 
   it("surface-elevated equals fixture value", () => {
@@ -156,7 +156,7 @@ describe("themeToCSSVars — surface / semantic", () => {
   })
 
   it("surface-disabled equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-surface-disabled"]).toBe("#F3F4F6")
+    expect(themeToCSSVars(fixture)["--mw-color-surface-disabled"]).toBe("#F5F5F5")
   })
 
   it("surface-inverted equals fixture value", () => {
@@ -168,31 +168,31 @@ describe("themeToCSSVars — surface / semantic", () => {
   })
 
   it("text-muted equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-text-muted"]).toBe("#9CA3AF")
+    expect(themeToCSSVars(fixture)["--mw-color-text-muted"]).toBe("#595959")
   })
 
   it("text-subtle equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-text-subtle"]).toBe("#9CA3AF")
+    expect(themeToCSSVars(fixture)["--mw-color-text-subtle"]).toBe("#595959")
   })
 
   it("text-disabled equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-text-disabled"]).toBe("rgba(20,20,20,0.4)")
+    expect(themeToCSSVars(fixture)["--mw-color-text-disabled"]).toBe("#737373")
   })
 
   it("focus equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-focus"]).toBe("#2684FF")
+    expect(themeToCSSVars(fixture)["--mw-color-focus"]).toBe("#2F31FC")
   })
 
   it("border equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-border"]).toBe("rgba(0,0,0,0.4)")
+    expect(themeToCSSVars(fixture)["--mw-color-border"]).toBe("#D8D8D8")
   })
 
   it("border-strong equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-border-strong"]).toBe("#141414")
+    expect(themeToCSSVars(fixture)["--mw-color-border-strong"]).toBe("#A3A3A3")
   })
 
   it("border-disabled equals fixture value", () => {
-    expect(themeToCSSVars(fixture)["--mw-color-border-disabled"]).toBe("rgba(20,20,20,0.16)")
+    expect(themeToCSSVars(fixture)["--mw-color-border-disabled"]).toBe("#D8D8D8")
   })
 })
 

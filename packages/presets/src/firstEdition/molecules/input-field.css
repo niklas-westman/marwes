@@ -16,7 +16,6 @@
   border: none;
   cursor: pointer;
   user-select: none;
-  opacity: 0.6;
   transition: opacity 0.2s ease;
   text-align: left;
   font: inherit;
@@ -55,22 +54,22 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--mw-color-text-muted, #6b7280);
+  color: var(--mw-color-text-muted, #595959);
   transition: color 0.2s ease;
   border-radius: var(--mw-ui-radius, 4px);
 
   &:hover {
-    color: var(--mw-color-text, #111827);
-    background: var(--mw-color-surface, #f3f4f6);
+    color: var(--mw-color-text, #141414);
+    background: var(--mw-color-surface, #f5f5f5);
   }
 
   &:focus {
-    outline: 2px solid var(--mw-color-primary-base, #3b82f6);
+    outline: 2px solid var(--mw-color-primary-base, #2f31fc);
     outline-offset: 2px;
   }
 
   &:active {
-    background: var(--mw-color-border-subtle, #e5e7eb);
+    background: var(--mw-color-border-subtle, #d8d8d8);
   }
 }
 
@@ -81,7 +80,7 @@
   align-items: center;
   justify-content: center;
   padding: 6px; /* off-scale — no token */
-  color: var(--mw-color-text-muted, #6b7280);
+  color: var(--mw-color-text-muted, #595959);
   pointer-events: none;
 }
 
@@ -95,22 +94,22 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--mw-color-text-muted, #6b7280);
+  color: var(--mw-color-text-muted, #595959);
   transition: color 0.2s ease;
   border-radius: var(--mw-ui-radius, 4px);
 
   &:hover {
-    color: var(--mw-color-text, #111827);
-    background: var(--mw-color-surface, #f3f4f6);
+    color: var(--mw-color-text, #141414);
+    background: var(--mw-color-surface, #f5f5f5);
   }
 
   &:focus {
-    outline: 2px solid var(--mw-color-primary-base, #3b82f6);
+    outline: 2px solid var(--mw-color-primary-base, #2f31fc);
     outline-offset: 2px;
   }
 
   &:active {
-    background: var(--mw-color-border-subtle, #e5e7eb);
+    background: var(--mw-color-border-subtle, #d8d8d8);
   }
 }
 
@@ -120,7 +119,7 @@
   justify-content: center;
   padding-left: var(--mw-spacing-sp-16);
   white-space: nowrap;
-  color: var(--mw-color-text-muted, #6b7280);
+  color: var(--mw-color-text-muted, #595959);
   pointer-events: none;
   font-weight: 400;
   font-family: var(--mw-font-primary, inherit);
@@ -193,7 +192,6 @@
 
 /* Disabled — wrapper when symbol is present */
 .mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol):has(:disabled) {
-  opacity: 0.2;
   cursor: not-allowed;
   pointer-events: none;
   border-color: var(--mw-color-border-disabled);
@@ -227,26 +225,25 @@
 }
 
 .mw-input-field__helper {
-  opacity: 0.6;
   font-size: 0.875em;
-  color: var(--mw-color-text-muted, #6b7280);
+  color: var(--mw-color-text-muted, #595959);
 }
 
 .mw-input-field__error {
   font-size: 0.875em;
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 /* State modifiers */
 .mw-input-field--disabled .mw-input-field__label {
   cursor: not-allowed;
-  opacity: 0.6;
+  color: var(--mw-color-text-disabled, #595959);
 }
 
 /* Disabled state overwrite hover/focus states */
 .mw-input-field--disabled:hover .mw-input-field__label,
 .mw-input-field--disabled:focus-within .mw-input-field__label {
-  opacity: 0.6;
+  color: var(--mw-color-text-disabled, #595959);
 }
 
 .mw-input-field--readonly .mw-input-field__label {
@@ -256,5 +253,5 @@
 .mw-input-field--invalid .mw-input-field__label .mw-p,
 .mw-input-field--invalid .mw-input-field__error .mw-p {
   /* Label styling when field has error - could add red accent if needed  */
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }

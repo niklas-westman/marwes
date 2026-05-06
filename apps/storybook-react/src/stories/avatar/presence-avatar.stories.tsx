@@ -1,11 +1,14 @@
-import { AvatarSize, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { PresenceAvatar } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof PresenceAvatar> = {
   title: "Avatar/Purpose/PresenceAvatar",
   component: PresenceAvatar,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

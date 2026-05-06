@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { BrightnessSliderProps } from "@marwes-ui/vue"
 import { BrightnessSlider } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,7 +7,11 @@ import { ref } from "vue"
 const meta = {
   title: "Slider/Purpose/BrightnessSlider",
   component: BrightnessSlider as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<BrightnessSliderProps>
 

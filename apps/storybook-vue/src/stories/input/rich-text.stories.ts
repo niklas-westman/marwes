@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import type { RichTextProps } from "@marwes-ui/vue"
 import { Paragraph, RichText } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,6 +8,7 @@ const meta = {
   title: "Input/Atom/RichText",
   component: RichText as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {
@@ -17,6 +19,7 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
+    ariaLabel: "Formatted description",
     placeholder: "Write a formatted description...",
   },
 } satisfies Meta<RichTextProps>

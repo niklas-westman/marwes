@@ -1,4 +1,5 @@
 import {
+  storybookA11yPolicy,
   storybookIconGalleryArgTypes,
   storybookIconGalleryDefaults,
   storybookIconNames,
@@ -17,7 +18,10 @@ type Args = {
 
 const meta: Meta<Args> = {
   title: "Icon/Atom",
-  parameters: storybookLayout.fullscreen,
+  parameters: {
+    ...storybookLayout.fullscreen,
+    ...storybookA11yPolicy.smoke,
+  },
   args: storybookIconGalleryDefaults,
   argTypes: storybookIconGalleryArgTypes,
 }

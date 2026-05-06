@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { Paragraph, SelectField } from "@marwes-ui/react"
 import type { SelectFieldProps } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
@@ -11,7 +12,7 @@ const options = [
 
 const FIGMA_DROPDOWN_NODE = "1364:7701"
 const DEMO_WIDTH = "120px"
-const SELECT_FIELD_LABEL = ""
+const SELECT_FIELD_LABEL = "Option"
 const selectFieldStoryStyles = `
   .mw-select-field-story-preview {
     width: ${DEMO_WIDTH};
@@ -58,6 +59,7 @@ const meta: Meta<SelectFieldStoryArgs> = {
   title: "Input/Molecule/SelectField",
   component: SelectField,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {

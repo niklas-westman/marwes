@@ -1,4 +1,10 @@
-import { AvatarSize, AvatarType, ThemeMode, storybookLayout } from "@marwes-ui/core"
+import {
+  AvatarSize,
+  AvatarType,
+  ThemeMode,
+  storybookA11yPolicy,
+  storybookLayout,
+} from "@marwes-ui/core"
 import { Avatar, MarwesProvider } from "@marwes-ui/vue"
 import type { AvatarProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -117,9 +123,13 @@ function buildAvatarArgs(args: AvatarProps): AvatarProps {
 const meta = {
   title: "Avatar/Atom",
   component: Avatar as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
+    ...storybookA11yPolicy.smoke,
     size: {
       control: "select",
       options: Object.values(AvatarSize),

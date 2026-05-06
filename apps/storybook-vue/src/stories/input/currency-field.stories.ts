@@ -1,4 +1,4 @@
-import { currencyCodes } from "@marwes-ui/core"
+import { currencyCodes, storybookA11yPolicy } from "@marwes-ui/core"
 import type { CurrencyFieldProps } from "@marwes-ui/vue"
 import { CurrencyField, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,6 +8,7 @@ const meta = {
   title: "Input/Purpose/CurrencyField",
   component: CurrencyField as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   argTypes: {

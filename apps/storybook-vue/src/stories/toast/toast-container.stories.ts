@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { ToastContainerProps } from "@marwes-ui/vue"
 import { ToastContainer, ToastProvider, useToast } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,7 +7,10 @@ import { defineComponent, h } from "vue"
 const meta = {
   title: "Toast/Molecule",
   component: ToastContainer as unknown as object,
-  parameters: storybookLayout.fullscreen,
+  parameters: {
+    ...storybookLayout.fullscreen,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<ToastContainerProps>
 

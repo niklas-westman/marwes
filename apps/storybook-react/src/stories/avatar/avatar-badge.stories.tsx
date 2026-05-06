@@ -1,4 +1,4 @@
-import { AvatarSize, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { AvatarBadge, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { AvatarBadgeProps } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
@@ -7,7 +7,10 @@ import * as React from "react"
 const meta: Meta<typeof AvatarBadge> = {
   title: "Avatar/Molecule/AvatarBadge",
   component: AvatarBadge,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

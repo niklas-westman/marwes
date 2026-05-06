@@ -236,7 +236,7 @@ describe("MarwesProvider — root element", () => {
 
     const rootElement = container.firstElementChild as HTMLElement
     expect(rootElement.className).toContain("mw-theme--dark")
-    expect(rootElement.style.backgroundColor).toBe("rgb(20, 20, 20)")
+    expect(rootElement.style.backgroundColor).toBe("rgb(15, 15, 15)")
   })
 
   it("lets controlled mode win over defaultMode", () => {
@@ -433,7 +433,7 @@ describe("MarwesProvider — context", () => {
 
     expect(capturedThemes.length).toBeGreaterThan(0)
     expect(capturedThemes[0]?.mode).toBe(ThemeMode.dark)
-    expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
+    expect(capturedThemes[0]?.color.primary.base).toBe("#5859FC")
   })
 
   it("keeps useTheme returning a ResolvedTheme", () => {
@@ -461,7 +461,7 @@ describe("MarwesProvider — context", () => {
     )
 
     expect(capturedThemes[0]?.mode).toBe(ThemeMode.dark)
-    expect(capturedThemes[0]?.color.background).toBe("#141414")
+    expect(capturedThemes[0]?.color.background).toBe("#0F0F0F")
   })
 
   it("switches provider-owned mode through useThemeMode().toggleMode()", async () => {

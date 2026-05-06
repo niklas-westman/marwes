@@ -1,4 +1,4 @@
-import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { CheckboxProps } from "@marwes-ui/vue"
 import { Checkbox, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,9 +7,13 @@ import { ref } from "vue"
 const meta = {
   title: "Checkbox/Atom",
   component: Checkbox as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
+    ...storybookA11yPolicy.smoke,
     size: "md",
   },
   argTypes: storybookCheckboxArgTypes,

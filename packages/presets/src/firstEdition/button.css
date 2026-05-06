@@ -6,7 +6,7 @@
    - States: default, hover, active, disabled, error
    - Variants: primary, secondary, text
    - Icon positions: left, right, none
-   - Focus: 2px #2684FF outline + 2px offset
+   - Focus: 2px #2f31fc outline + 2px offset
    - Disabled: opacity 20% (light), 40% (dark)
    
    Figma Variants:
@@ -58,16 +58,16 @@
 /* SECONDARY - Outlined button */
 .mw-btn--secondary {
   background: transparent;
-  color: var(--mw-color-primary-base);
-  border-color: var(--mw-color-primary-base);
+  color: var(--mw-color-secondary-label);
+  border-color: var(--mw-color-secondary-border);
 }
 
 .mw-btn--secondary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent);
+  background: var(--mw-color-secondary-hover);
 }
 
 .mw-btn--secondary:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent);
+  background: var(--mw-color-secondary-pressed);
 }
 
 /* NEUTRAL - Quiet outlined button for cancel/close/filter-style actions */

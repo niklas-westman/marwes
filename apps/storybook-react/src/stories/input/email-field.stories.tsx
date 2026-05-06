@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { EmailField, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -6,6 +7,7 @@ const meta: Meta<typeof EmailField> = {
   title: "Input/Purpose/EmailField",
   component: EmailField,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],

@@ -43,7 +43,7 @@
     var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
   );
   font-size: var(--mw-density-font-size-sm);
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 /* Optional state hooks */

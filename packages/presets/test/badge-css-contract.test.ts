@@ -40,11 +40,15 @@ describe("badge.css figma sync contract", () => {
     expect(css).toContain(
       ".mw-badge--warning {\n  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));",
     )
-    expect(css).toContain("--mw-badge-label: var(--mw-color-warning-base);")
+    expect(css).toContain(
+      "--mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 80%, var(--mw-color-text));",
+    )
     expect(css).toContain(
       ".mw-badge--error {\n  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));",
     )
-    expect(css).toContain("--mw-badge-label: var(--mw-color-danger-base);")
+    expect(css).toContain(
+      "--mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));",
+    )
   })
 
   it("seeds dark-mode badge colors from semantic theme variables", () => {
@@ -62,6 +66,9 @@ describe("badge.css figma sync contract", () => {
     )
     expect(css).toContain(
       ".mw-theme--dark .mw-badge--error {\n  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 18%, var(--mw-color-surface));",
+    )
+    expect(css).toContain(
+      "--mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 70%, var(--mw-color-text));",
     )
   })
 })

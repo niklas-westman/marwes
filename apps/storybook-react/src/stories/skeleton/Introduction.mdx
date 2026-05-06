@@ -4,19 +4,9 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Skeleton Component
 
-Marwes provides `Skeleton` as a low-level placeholder atom for loading text, circular media, and rectangular content blocks. Use the atom for custom loading layouts, and use `Skeleton/Molecules` when you need a replica of an existing Marwes component.
+Marwes provides `Skeleton` as a low-level placeholder atom for loading text, circular media, and rectangular content blocks. Use the atom for custom loading layouts, and use `Skeleton/Molecule` when you need a replica of an existing Marwes component.
 
 Skeletons should preserve the final layout as closely as possible. The goal is to avoid layout shift while making it obvious that content is still loading.
-
-## Figma source
-
-The synced Skeleton page provides three baseline shapes:
-
-- Text: `120×12`, `4px` radius
-- Circular: `40×40`, full radius
-- Rectangular: `120×120`, `4px` radius
-
-The source is currently the V2/MUI-derived Skeleton page, so this implementation keeps the API small and maps the visuals into Marwes semantic CSS variables instead of hardcoded adapter styling.
 
 ## Atom Usage
 
@@ -32,7 +22,7 @@ Use `variant="text"` for one-line copy placeholders, `variant="circular"` for av
 
 ## Molecule Replicas
 
-`Skeleton/Molecules` contains ready-made loading replicas for common Marwes surfaces:
+`Skeleton/Molecule` contains ready-made loading replicas for common Marwes surfaces:
 
 - `CardSkeleton`
 - `StatTileSkeleton`

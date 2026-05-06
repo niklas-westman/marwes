@@ -1,4 +1,4 @@
-import { storybookLayout, storybookSkeletonArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookSkeletonArgTypes } from "@marwes-ui/core"
 import type { SkeletonProps } from "@marwes-ui/vue"
 import { H2, Paragraph, Skeleton } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -17,7 +17,10 @@ const cardStyle = `
 const meta = {
   title: "Skeleton/Atom",
   component: Skeleton as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookSkeletonArgTypes,
   args: {
@@ -75,7 +78,7 @@ export const LoadingCard: Story = {
       return { args, cardStyle }
     },
     template: `
-      <div :style="cardStyle" aria-label="Loading account summary">
+      <output :style="cardStyle" aria-busy="true" aria-label="Loading account summary">
         <div style="display: flex; align-items: center; gap: 0.75rem;">
           <Skeleton v-bind="args" variant="circular" :width="48" :height="48" />
           <div style="display: grid; gap: 0.5rem; flex: 1;">
@@ -88,7 +91,7 @@ export const LoadingCard: Story = {
           <Skeleton v-bind="args" width="92%" :height="12" />
           <Skeleton v-bind="args" width="78%" :height="12" />
         </div>
-      </div>
+      </output>
     `,
   }),
 }

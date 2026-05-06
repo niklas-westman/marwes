@@ -135,52 +135,57 @@ border-color: var(--mw-color-primary-base);
 
 ## Default color values
 
-These come from the core theme defaults and are then optionally overridden by presets.
+These come from `docs/marwes-colors.json` through the core theme defaults.
 
 ### Light defaults
 From `packages/core/src/theme/theme-defaults.ts`:
 
 - `text`: `#141414`
-- `textMuted`: `#9CA3AF`
-- `textSubtle`: `#9CA3AF`
-- `textDisabled`: `rgba(20,20,20,0.4)`
-- `surface`: `#F9FAFB`
-- `surfaceSubtle`: `#F3F4F6`
+- `textMuted`: `#595959`
+- `textSubtle`: `#595959`
+- `textDisabled`: `#737373`
+- `surface`: `#F8F8F8`
+- `surfaceSubtle`: `#F5F5F5`
 - `surfaceElevated`: `#FFFFFF`
-- `surfaceDisabled`: `#F3F4F6`
-- `border`: `rgba(0,0,0,0.4)`
-- `borderStrong`: `#141414`
-- `borderDisabled`: `rgba(20,20,20,0.16)`
-- `focus`: `#2684FF`
-- `primary`: `#141414`
+- `surfaceDisabled`: `#F5F5F5`
+- `border`: `#D8D8D8`
+- `borderStrong`: `#A3A3A3`
+- `borderDisabled`: `#D8D8D8`
+- `focus`: `#2F31FC`
+- `primary`: `#2F31FC`
 
 ### Dark defaults
 From `packages/core/src/theme/theme-defaults.ts`:
 
 - `text`: `#F9FAFB`
-- `textMuted`: `#9CA3AF`
-- `textSubtle`: `#6B7280`
-- `textDisabled`: `rgba(249,250,251,0.4)`
-- `surface`: `#141414`
-- `surfaceSubtle`: `#111827`
-- `surfaceElevated`: `#1F2937`
-- `surfaceDisabled`: `#3E3E3E`
-- `border`: `#d9d9d9`
-- `borderStrong`: `#F9FAFB`
-- `borderDisabled`: `rgba(255,255,255,0.16)`
-- `focus`: `#2684FF`
-- `primary`: `#FFFFFF`
+- `textMuted`: `#A3A3A3`
+- `textSubtle`: `#A3A3A3`
+- `textDisabled`: `#595959`
+- `surface`: `#1A1A1A`
+- `surfaceSubtle`: `#050505`
+- `surfaceElevated`: `#2B2B2B`
+- `surfaceDisabled`: `#1A1A1A`
+- `border`: `#474747`
+- `borderStrong`: `#A3A3A3`
+- `borderDisabled`: `#474747`
+- `focus`: `#5859FC`
+- `primary`: `#5859FC`
 
 ## firstEdition override
 
-`firstEdition` changes the meaning of `primary` from generic dark/light to brand accent:
+`firstEdition` uses the same source-token baseline as the core defaults:
 
 ```ts
 color: {
   primary: {
     base: "#2F31FC",
+    hover: "#2527CA",
+    pressed: "#1B1D97",
     label: "#FFFFFF",
   },
+  success: "#006633",
+  warning: "#B45309",
+  danger: "#D90429",
 }
 ```
 

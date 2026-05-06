@@ -1,4 +1,5 @@
 import {
+  storybookA11yPolicy,
   storybookButtonPurposeArgTypes,
   storybookDocsDescription,
   storybookLayout,
@@ -9,7 +10,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Buttons/Purpose/RefreshButton",
   component: RefreshButton,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookButtonPurposeArgTypes,
 } satisfies Meta<typeof RefreshButton>

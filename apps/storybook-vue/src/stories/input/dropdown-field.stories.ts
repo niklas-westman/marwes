@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { DropdownField, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { computed, ref } from "vue"
@@ -20,6 +21,7 @@ const meta = {
   title: "Input/Purpose/DropdownField",
   component: DropdownField,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {

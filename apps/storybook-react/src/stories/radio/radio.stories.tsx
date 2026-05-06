@@ -1,4 +1,4 @@
-import { storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
 import { Radio } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -6,7 +6,10 @@ import * as React from "react"
 const meta: Meta<typeof Radio> = {
   title: "Radio/Atom",
   component: Radio,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookRadioArgTypes,
 }

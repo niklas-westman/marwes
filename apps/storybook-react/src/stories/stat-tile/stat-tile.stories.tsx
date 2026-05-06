@@ -1,4 +1,4 @@
-import { storybookLayout, storybookStatTileArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookStatTileArgTypes } from "@marwes-ui/core"
 import { StatTile } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
@@ -12,11 +12,15 @@ const gridStyle = {
 const meta = {
   title: "StatTile/Atom",
   component: StatTile,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookStatTileArgTypes,
   args: {
-    label: "Monthly Revenue",
+    label: "Revenue",
     value: "$48,200",
     subtitle: "vs $42,900 last month",
     trendValue: "12%",
@@ -45,7 +49,7 @@ export const ToneMatrix: Story = {
   render: () => (
     <div style={gridStyle}>
       <StatTile
-        label="Monthly Revenue"
+        label="Revenue"
         value="$48,200"
         subtitle="vs $42,900 last month"
         trendValue="12%"

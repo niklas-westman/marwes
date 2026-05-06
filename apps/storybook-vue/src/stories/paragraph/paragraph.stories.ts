@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { ParagraphProps } from "@marwes-ui/vue"
 import { Divider, H1, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +6,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Paragraph/Atom",
   component: Paragraph as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     size: {

@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { Paragraph, RichText } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -6,6 +7,7 @@ const meta: Meta<typeof RichText> = {
   title: "Input/Atom/RichText",
   component: RichText,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {
@@ -16,6 +18,7 @@ const meta: Meta<typeof RichText> = {
   },
   tags: ["autodocs"],
   args: {
+    ariaLabel: "Formatted description",
     placeholder: "Write a formatted description...",
   },
 }

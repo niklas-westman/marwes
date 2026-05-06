@@ -1,4 +1,4 @@
-import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { StatusBadgeProps } from "@marwes-ui/vue"
 import { StatusBadge } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,9 +8,13 @@ const VARIANTS = Object.values(BadgeVariant)
 const meta = {
   title: "Badge/Purpose/Status",
   component: StatusBadge as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
+    ...storybookA11yPolicy.smoke,
     variant: {
       control: "select",
       options: VARIANTS,

@@ -179,6 +179,9 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
       exportParityExempt: true,
     },
     skeleton: {
+      titleByStem: {
+        "skeleton-molecules": "Skeleton/Molecule",
+      },
       canonicalComponentStems: ["skeleton", "skeleton-molecules"],
     },
     color: {
