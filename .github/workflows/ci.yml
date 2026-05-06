@@ -117,7 +117,7 @@ jobs:
         run: sh -lc "$CHECK_COMMAND"
 
   ci:
-    name: lint-typecheck-test-build
+    name: ci / lint-typecheck-test-build
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs:
