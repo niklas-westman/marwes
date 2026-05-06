@@ -43,13 +43,14 @@ pnpm validate:release
 Current `pnpm validate:release` enforcement:
 - `pnpm validate:security`
 - `pnpm validate:packages`
-- `pnpm validate:docs`
+- `pnpm check:repo-map`
 - `pnpm exec biome check .`
 - `pnpm test:storybook:a11y`
 
 These gates protect:
 - dependency audit health across full and production graphs
 - package typecheck, build, and test health
+- Compass docs-system integrity
 - broken markdown links
 - docs/API drift in package-facing docs
 - semantic registry coherence
@@ -82,37 +83,38 @@ PR entrypoint:
 Release entrypoint:
 - `.github/workflows/release.yml`
 
+The PR workflow enforces:
+- `pnpm check:changed -- --base origin/${{ github.base_ref }}` as a changed-scope branch signal
+- the reusable CI workflow below
+- a changeset check for package changes
+
 The reusable CI workflow now enforces:
-- `pnpm check` (which includes docs, semantic, artifact, Storybook consistency, and Storybook a11y smoke gates)
+- `pnpm exec biome check .`
+- `pnpm check:repo-map` for docs, generated truth, parity, Storybook consistency, and adapter boundaries
 - `pnpm -r typecheck`
 - `pnpm test:typecheck:contracts`
 - `pnpm test:packages`
 - `pnpm -r build`
 
+The release workflow runs the same reusable CI on `main` before publishing.
+
 ## Governance map
 
 ```mermaid
 graph TD
-  A[Docs and README files] --> B[pnpm docs:links]
-  A --> C[pnpm docs:api]
+  A[Changed PR files] --> Z[pnpm check:changed -- --base origin/base]
+  B[Docs and README files] --> C[pnpm check:compass]
+  D[Semantics and generated truth] --> E[pnpm check:repo-map]
+  F[React/Vue/Storybook parity] --> E
+  G[Adapter boundaries] --> E
+  H[TypeScript contracts] --> I[pnpm test:typecheck:contracts]
+  J[Packages] --> K[pnpm test:packages]
+  J --> L[pnpm -r build]
 
-  D[packages/core/src/semantics/*] --> E[pnpm semantics:check]
-  D --> F[scripts/generate-trust-artifacts.ts]
-
-  F --> G[pnpm artifacts:check]
-
-  H[packages/react + packages/vue + Storybook] --> I[pnpm storybook:consistency]
-  H --> I2[pnpm test:storybook:a11y]
-  H --> J[tests/contracts/*]
-  J --> K[pnpm test:typecheck:contracts]
-  J --> L[pnpm test:packages]
-
-  B --> M[CI trust result]
-  C --> M
+  Z --> M[CI trust result]
+  C --> E
   E --> M
-  G --> M
   I --> M
-  I2 --> M
   K --> M
   L --> M
 ```
@@ -130,8 +132,8 @@ Key files:
 - `docs/reference/*`
 
 Validation:
-- `scripts/check-doc-links.mjs`
-- `scripts/check-doc-api-drift.mjs`
+- `scripts/compass/check.mjs --rule=links`
+- `scripts/compass/check.mjs --rule=api`
 
 ### Semantic truth
 Owns the canonical vocabulary and family-purpose registry.
@@ -197,8 +199,8 @@ This means publication depends on the same trust gates used for normal CI, plus 
 Run:
 
 ```bash
-pnpm docs:links
-pnpm docs:api
+pnpm check:compass
+pnpm check:repo-map
 ```
 
 ### When you change semantic families or purposes
@@ -265,8 +267,8 @@ Examples:
 
 ```bash
 pnpm check
-pnpm docs:links
-pnpm docs:api
+pnpm check:compass
+pnpm check:repo-map
 pnpm semantics:check
 pnpm artifacts:generate
 pnpm artifacts:check

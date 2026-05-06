@@ -2,7 +2,7 @@
 
 This folder contains component-family accessibility audits.
 
-Use these docs as the tactical layer beneath the accessibility support model.
+Use these docs as the tactical evidence layer beneath the accessibility support model. For compact current status, start with [Audit Status](./status.md).
 
 The roadmap answers:
 - what to prioritize
@@ -28,7 +28,11 @@ spec/decision → core → preset CSS → React adapter → React stories/tests 
 
 That means accessibility review should walk the same tree as implementation.
 
-## Audit status
+## Audit queue
+
+This section describes the historical/prioritized audit queue. It is not the canonical compact current-status table.
+
+For current blocker/manual-review status across all families, use [Audit Status](./status.md).
 
 ### Wave 1 — Highest-risk families
 
@@ -75,17 +79,22 @@ That means accessibility review should walk the same tree as implementation.
 6. Run verification commands before moving to the next family
 
 Status docs to update when relevant:
-- the active family audit doc
-- this `docs/audits/README.md` file
-- `docs/reference/accessibility.md`
+- [Audit Status](./status.md) for compact current family status
+- the active family audit doc for evidence/history
+- this `docs/audits/README.md` file only when queue/process changes
+- `docs/reference/accessibility.md` when cross-family support policy changes
 - Storybook introductions and spec text when public guidance changed
 
 ## Related docs
 
 - [Accessibility Support Model](../reference/accessibility.md)
+- [Audit Status](./status.md)
 - [Methodology](./METHODOLOGY.md)
 - [Adding Components](../guides/adding-components.md)
 - [Architecture](../reference/architecture.md)
 - [Specification](../reference/spec.md)
 - [Testing](../reference/testing.md)
 - [Governance](../reference/governance.md)
+
+
+Status ownership note: compact cross-family status is owned by `docs/audits/status.md`.

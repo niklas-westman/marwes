@@ -127,12 +127,14 @@ Source copy: `visuals/interaction-map.mmd`
 
 ## AXE / accessibility posture
 
+Use this section for family-specific contract/evidence details. Keep compact cross-family blocker/manual-review status in `docs/audits/status.md`, and update that file whenever a family status changes.
+
 Use a status table, for example:
 
 | Area | Status | Notes |
 | --- | --- | --- |
 | Risk tier | `<low|medium|high>` | `<why>` |
-| Audit status | `<status>` | `<where tracked>` |
+| Audit status | `<status>` | compact current status tracked in `docs/audits/status.md`; evidence tracked in the family audit doc |
 | Automated contract | `<present|partial|missing>` | `<tests or contracts>` |
 | Manual review boundary | `<present|narrow|high>` | `<what still needs human review>` |
 | AXE follow-up | `<open|resolved>` | `<roadmap anchor>` |
@@ -178,6 +180,18 @@ Make sure to include, when relevant:
 - shared contracts
 - AXE docs and audit docs
 - Figma refs
+
+## Adapter parity expectations
+
+Document only family-specific parity expectations here. Do not duplicate generic React/Vue parity rules unless this family has special behavior.
+
+| Surface | Expectation | Validation |
+| --- | --- | --- |
+| React adapter | `<family-specific prop/event/semantic expectation or n/a>` | `pnpm validate:family <family>` |
+| Vue adapter | `<matching expectation or documented framework-specific difference>` | `pnpm validate:family <family>` |
+| Storybook | `<paired story/doc expectation>` | `pnpm storybook:consistency -- --family <family>` |
+
+If drift repeats, promote the repeated expectation into a focused test or generator check before adding more prose.
 
 ## Verification
 

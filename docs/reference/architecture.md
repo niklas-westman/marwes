@@ -6,7 +6,7 @@ Marwes is a framework-agnostic component library built around a strict three-lay
 core recipe → preset CSS → framework adapter
 ```
 
-If you only read one document before changing code, read this one.
+If you only read one document before changing code, read this one. Then use [Repo Map](./repo-map.md) to choose the right downstream docs, generated artifacts, and validation gates.
 
 ## System overview
 
@@ -221,7 +221,17 @@ Follow [Adding Components](../guides/adding-components.md).
 - consume `@marwes-ui/core`
 - keep wrappers thin
 - no duplicated a11y logic
+- no preset imports inside component adapters
+- no hardcoded visual tokens inside component adapters
 - emit registry-defined semantic attributes for covered families
+
+The lightweight architecture guardrail is:
+
+```bash
+pnpm check:adapter-boundaries
+```
+
+This script catches strong violations. It does not replace architecture review; it is a safety net for the most common boundary slips.
 
 ### apps
 - may import from packages
@@ -232,6 +242,7 @@ Follow [Adding Components](../guides/adding-components.md).
 Before considering architecture work complete:
 
 ```bash
+pnpm check:changed
 pnpm typecheck
 pnpm lint
 pnpm test
@@ -243,6 +254,7 @@ For focused work, run the relevant package or app commands instead.
 ## Related docs
 
 - [Documentation index](../README.md)
+- [Repo Map](./repo-map.md)
 - [Specification](./spec.md)
 - [AI Metadata Protocol](./ai-metadata.md)
 - [Governance](./governance.md)

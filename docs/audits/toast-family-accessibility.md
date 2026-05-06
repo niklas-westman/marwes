@@ -229,7 +229,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/toast/__tests__/toast-container.test.ts src/components/toast/__tests__/variants.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/toast/__tests__/toast-introduction-docs.test.ts src/stories/toast/__tests__/toast-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/toast/__tests__/toast-introduction-docs.test.ts src/stories/toast/__tests__/toast-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 - [x] `pnpm registry:generate && pnpm registry:check`
 
 Broader follow-up verification when convenient:

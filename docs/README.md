@@ -1,28 +1,39 @@
-# Marwes Documentation
+# Marwes Documentation Index
 
-This folder is the canonical documentation hub for the repository.
+This folder is the full documentation index for the repository.
 
-If you are new to Marwes, start here.
+If you are choosing what to do next, start with [Start Here](./start-here.md). If you already know the area you need, use this index.
+
+## Single starting point
+
+- [Start Here](./start-here.md) — choose your task, follow one short route, and run the matching validation command
+- [Want to contribute?](./want-to-contribute.md) — contributor-friendly guide for building Marwes changes
 
 ## Read order
 
-1. [Architecture](./reference/architecture.md)
-2. [Specification](./reference/spec.md)
-3. [Adding Components](./guides/adding-components.md)
-4. [Figma to Marwes](./guides/figma-to-marwes.md)
-5. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
-6. [AI Metadata Protocol](./reference/ai-metadata.md)
-7. [Accessibility support model](./reference/accessibility.md)
-8. [Component Registry](./registry/README.md)
-9. [Governance](./reference/governance.md)
-10. [Testing](./reference/testing.md)
-11. [Family Validation](./reference/family-validation.md)
+### Changing Marwes itself
+
+1. [Want to contribute?](./want-to-contribute.md)
+2. [Architecture](./reference/architecture.md)
+3. [Repo Map](./reference/repo-map.md)
+4. [Specification](./reference/spec.md)
+5. [Adding Components](./guides/adding-components.md)
+6. [Figma to Marwes](./guides/figma-to-marwes.md)
+7. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
+8. [AI Metadata Protocol](./reference/ai-metadata.md)
+9. [Accessibility support model](./reference/accessibility.md)
+10. [Component Registry](./registry/README.md)
+11. [Governance](./reference/governance.md)
+12. [Testing](./reference/testing.md)
+13. [Family Validation](./reference/family-validation.md)
 
 ## Documentation map
 
 ```mermaid
 graph TD
   Docs[docs/]
+  Docs --> StartHere[start-here.md]
+  Docs --> Contribute[want-to-contribute.md]
   Docs --> Reference[reference/]
   Docs --> Guides[guides/]
   Docs --> Planning[planning/]
@@ -31,12 +42,14 @@ graph TD
   Docs --> Registry[registry/]
 
   Reference --> Architecture[architecture.md]
+  Reference --> RepoMap[repo-map.md]
   Reference --> Spec[spec.md]
   Reference --> AIMetadata[ai-metadata.md]
   Reference --> Accessibility[accessibility.md]
   Reference --> Governance[governance.md]
   Reference --> Testing[testing.md]
   Reference --> FamilyValidation[family-validation.md]
+  Reference --> FrameworkParity[framework-parity-summary.md]
 
   Guides --> Adding[adding-components.md]
   Guides --> Figma[figma-to-marwes.md]
@@ -48,20 +61,27 @@ graph TD
   Planning --> ReleasePlan[release-1-0-0-hardening-plan.md]
 
   Audits --> AuditIndex[README.md]
+  Audits --> AuditStatus[status.md]
 ```
 
 ## What lives where
+
+### Contributing
+
+- [Want to contribute?](./want-to-contribute.md) — practical repo boundaries, component workflow, validation ladder, and what not to do
 
 ### Reference
 Long-lived, canonical project docs.
 
 - [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
+- [Repo Map](./reference/repo-map.md) — thread model, authority order, and change matrix
 - [Specification](./reference/spec.md) — formal requirements and decisions
 - [AI Metadata Protocol](./reference/ai-metadata.md) — canonical semantic vocabulary and ownership model
 - [Accessibility support model](./reference/accessibility.md) — what Marwes automates, what still needs manual review, and how family risk tiers affect release confidence
 - [Governance](./reference/governance.md) — local and CI trust gates, artifacts, and release discipline
 - [Testing](./reference/testing.md) — test layers, commands, and expectations
 - [Family Validation](./reference/family-validation.md) — focused per-family workflow and master validation commands
+- [Framework Parity Summary](./reference/framework-parity-summary.md) — generated compact view of the current framework parity artifact
 
 ### Guides
 Practical how-to documents.
@@ -89,6 +109,7 @@ Family-level component knowledge base.
 Step-by-step component-family audit plans.
 
 - [Accessibility audits index](./audits/README.md) — execution queue and family audit status
+- [Accessibility audit status](./audits/status.md) — compact blocker/manual-review matrix across families
 - [Accessibility audit methodology](./audits/METHODOLOGY.md) — execution model for this initiative
 - [Input family accessibility audit](./audits/input-family-accessibility.md) — first detailed family audit
 

@@ -101,7 +101,7 @@ Typical commands:
 ```bash
 pnpm typecheck
 pnpm test:typecheck:contracts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Then family-focused tests, for example:

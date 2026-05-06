@@ -180,7 +180,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/radio/__tests__/radio.test.ts src/components/radio/__tests__/radio-group-field.test.ts src/components/radio/__tests__/variants.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/radio/__tests__/radio-introduction-docs.test.ts src/stories/radio/__tests__/radio-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/radio/__tests__/radio-introduction-docs.test.ts src/stories/radio/__tests__/radio-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 
 Broader follow-up verification when convenient:
 - [ ] `pnpm typecheck`

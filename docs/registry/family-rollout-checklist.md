@@ -176,7 +176,7 @@ Use this sequence for every new registry family.
 
 ### 7. Validation
 - [ ] run `pnpm registry:check`
-- [ ] run `pnpm docs:links`
+- [ ] run `pnpm check:compass`
 - [ ] optionally run `pnpm storybook:consistency`
 
 ## Per-family definition of done
@@ -191,7 +191,7 @@ A registry family is in good shape when:
 - [ ] AXE posture is explicit about automation vs manual review
 - [ ] open questions are real and specific
 - [ ] `pnpm registry:check` passes
-- [ ] `pnpm docs:links` passes
+- [ ] `pnpm check:compass` passes
 - [ ] `pnpm validate:family <family>` passes
 - [ ] `pnpm validate:family <family> --storybook` passes when the change affects stories, interactions, visual states, or accessibility-sensitive behavior
 
@@ -223,7 +223,7 @@ Use this at the end of a session so the next session can continue without redisc
 ### Validation run
 - [ ] `pnpm registry:generate`
 - [ ] `pnpm registry:check`
-- [ ] `pnpm docs:links`
+- [ ] `pnpm check:compass`
 - [ ] other: `...`
 
 ### Open questions
@@ -237,11 +237,11 @@ Use this at the end of a session so the next session can continue without redisc
 pnpm validate:family <family>
 pnpm validate:family <family> --storybook
 pnpm validate:packages
-pnpm validate:docs
+pnpm check:repo-map
 pnpm validate:release
 pnpm registry:generate
 pnpm registry:check
-pnpm docs:links
+pnpm check:compass
 pnpm storybook:consistency
 ```
 

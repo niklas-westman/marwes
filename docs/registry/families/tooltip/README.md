@@ -300,7 +300,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/tooltip/__tests__/
 pnpm --filter @marwes-ui/vue exec vitest run src/components/tooltip/__tests__/tooltip.test.ts src/components/tooltip/__tests__/tooltip-group.test.ts src/components/tooltip/__tests__/index-exports.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/tooltip/__tests__/tooltip-introduction-docs.test.ts src/stories/tooltip/__tests__/tooltip-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/tooltip/__tests__/tooltip-introduction-docs.test.ts src/stories/tooltip/__tests__/tooltip-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

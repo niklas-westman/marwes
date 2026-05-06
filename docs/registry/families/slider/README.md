@@ -313,7 +313,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/slider/__tests__/s
 pnpm --filter @marwes-ui/vue exec vitest run src/components/slider/__tests__/slider.test.ts src/components/slider/__tests__/slider-field.test.ts src/components/slider/__tests__/variants.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/slider/__tests__/slider-introduction-docs.test.ts src/stories/slider/__tests__/slider-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/slider/__tests__/slider-introduction-docs.test.ts src/stories/slider/__tests__/slider-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

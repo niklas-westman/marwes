@@ -175,7 +175,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/heading/__tests__/heading.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/heading/__tests__/heading-introduction-docs.test.ts src/stories/heading/__tests__/heading-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/heading/__tests__/heading-introduction-docs.test.ts src/stories/heading/__tests__/heading-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 - [x] `pnpm registry:generate && pnpm registry:check`
 
 ## Deliverables from this audit

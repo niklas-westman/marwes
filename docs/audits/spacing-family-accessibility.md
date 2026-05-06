@@ -180,7 +180,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/spacing/__tests__/spacing.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/spacing/__tests__/spacing-introduction-docs.test.ts src/stories/spacing/__tests__/spacing-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/spacing/__tests__/spacing-introduction-docs.test.ts src/stories/spacing/__tests__/spacing-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 - [x] `pnpm registry:generate && pnpm registry:check`
 
 ## Deliverables from this audit

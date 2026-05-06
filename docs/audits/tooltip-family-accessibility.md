@@ -144,7 +144,7 @@ Targeted verification for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/tooltip/__tests__/tooltip.test.ts src/components/tooltip/__tests__/tooltip-group.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/tooltip/__tests__/tooltip-introduction-docs.test.ts src/stories/tooltip/__tests__/tooltip-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/tooltip/__tests__/tooltip-introduction-docs.test.ts src/stories/tooltip/__tests__/tooltip-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 
 Broader follow-up verification when the queue allows:
 - [ ] `pnpm typecheck`
