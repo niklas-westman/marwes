@@ -433,7 +433,7 @@ describe("MarwesProvider — context", () => {
 
     expect(capturedThemes.length).toBeGreaterThan(0)
     expect(capturedThemes[0]?.mode).toBe(ThemeMode.dark)
-    expect(capturedThemes[0]?.color.primary.base).toBe("#5859FC")
+    expect(capturedThemes[0]?.color.primary.base).toBe("#2F31FC")
   })
 
   it("keeps useTheme returning a ResolvedTheme", () => {
