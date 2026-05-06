@@ -3,6 +3,8 @@
 This file is the canonical specification for Marwes.
 If implementation, docs, or behavior diverge from this file, either the implementation is wrong or this spec must be updated explicitly.
 
+If you are choosing where to begin, start with [Start Here](../start-here.md) instead. This spec is a formal reference, not the first onboarding route.
+
 ```mermaid
 flowchart LR
   Requirement[Requirement in spec] --> Plan[Implementation plan]

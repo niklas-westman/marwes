@@ -46,6 +46,10 @@ function run(command, args) {
 
     const child = spawn(command, args, {
       cwd: repoRoot,
+      env: {
+        ...process.env,
+        NODE_ENV: "test",
+      },
       stdio: "inherit",
     })
 
@@ -230,9 +234,9 @@ const steps = [
     args: ["registry:check"],
   },
   {
-    name: "Docs links",
+    name: "Compass docs/routing checks",
     command: "pnpm",
-    args: ["docs:links"],
+    args: ["check:compass"],
   },
 ]
 

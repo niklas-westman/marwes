@@ -328,7 +328,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/heading/__tests__/
 pnpm --filter @marwes-ui/vue exec vitest run src/components/heading/__tests__/heading.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/heading/__tests__/heading-introduction-docs.test.ts src/stories/heading/__tests__/heading-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/heading/__tests__/heading-introduction-docs.test.ts src/stories/heading/__tests__/heading-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

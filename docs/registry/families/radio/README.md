@@ -354,7 +354,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/radio/__tests__/ra
 pnpm --filter @marwes-ui/vue exec vitest run src/components/radio/__tests__/radio.test.ts src/components/radio/__tests__/radio-group-field.test.ts src/components/radio/__tests__/variants.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/radio/__tests__/radio-introduction-docs.test.ts src/stories/radio/__tests__/radio-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/radio/__tests__/radio-introduction-docs.test.ts src/stories/radio/__tests__/radio-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

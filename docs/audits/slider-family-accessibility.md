@@ -177,7 +177,7 @@ Targeted verification for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/slider/__tests__/slider.test.ts src/components/slider/__tests__/slider-field.test.ts src/components/slider/__tests__/variants.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/slider/__tests__/slider-introduction-docs.test.ts src/stories/slider/__tests__/slider-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/slider/__tests__/slider-introduction-docs.test.ts src/stories/slider/__tests__/slider-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 
 Broader follow-up verification when the queue allows:
 - [ ] `pnpm typecheck`

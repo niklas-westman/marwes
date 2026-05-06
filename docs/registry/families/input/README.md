@@ -332,7 +332,7 @@ pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/input/__tests__
 pnpm --filter @marwes-ui/vue exec vitest run src/components/input/__tests__
 pnpm storybook:consistency
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

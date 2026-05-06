@@ -314,7 +314,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/card/__tests__/car
 pnpm --filter @marwes-ui/vue exec vitest run src/components/card/__tests__/card.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/card/__tests__/card-introduction-docs.test.ts src/stories/card/__tests__/card-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/card/__tests__/card-introduction-docs.test.ts src/stories/card/__tests__/card-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

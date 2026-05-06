@@ -309,7 +309,7 @@ pnpm test:typecheck:contracts
 pnpm --filter @marwes-ui/react exec vitest run src/components/tab/__tests__/tab.test.tsx src/components/tab/__tests__/tab-group.test.tsx src/components/tab/__tests__/variants.test.tsx
 pnpm --filter @marwes-ui/vue exec vitest run src/components/tab/__tests__/tab.test.ts src/components/tab/__tests__/tab-group.test.ts src/components/tab/__tests__/variants.test.ts
 pnpm storybook:consistency
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

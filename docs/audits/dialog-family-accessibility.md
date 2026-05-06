@@ -161,7 +161,7 @@ Targeted verification for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/dialog/__tests__/dialog.test.ts src/components/dialog/__tests__/dialog-modal.test.ts src/components/dialog/__tests__/variants.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/dialog/__tests__/dialog-introduction-docs.test.ts src/stories/dialog/__tests__/dialog-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/dialog/__tests__/dialog-introduction-docs.test.ts src/stories/dialog/__tests__/dialog-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 
 Broader follow-up verification when the queue allows:
 - [ ] `pnpm typecheck`

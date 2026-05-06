@@ -323,7 +323,7 @@ pnpm --filter @marwes-ui/react exec vitest run src/components/paragraph/__tests_
 pnpm --filter @marwes-ui/vue exec vitest run src/components/paragraph/__tests__/paragraph.test.ts
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/paragraph/__tests__/paragraph-introduction-docs.test.ts src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/paragraph/__tests__/paragraph-introduction-docs.test.ts src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

@@ -302,7 +302,7 @@ Focused commands for this family:
 ```bash
 pnpm --filter ./apps/storybook-react exec vitest run src/stories/spacing/__tests__/spacing-introduction-docs.test.ts src/stories/spacing/__tests__/spacing-taxonomy.test.ts
 pnpm --filter ./apps/storybook-vue exec vitest run src/stories/spacing/__tests__/spacing-introduction-docs.test.ts src/stories/spacing/__tests__/spacing-taxonomy.test.ts
-pnpm docs:links
+pnpm check:compass
 ```
 
 Broader confidence:

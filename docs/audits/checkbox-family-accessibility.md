@@ -177,7 +177,7 @@ Targeted verification run for this pass:
 - [x] `pnpm --filter @marwes-ui/vue exec vitest run src/components/checkbox/__tests__/checkbox.test.ts src/components/checkbox/__tests__/checkbox-field.test.ts src/components/checkbox/__tests__/checkbox-group-field.test.ts`
 - [x] `pnpm --filter ./apps/storybook-react exec vitest run src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts`
 - [x] `pnpm --filter ./apps/storybook-vue exec vitest run src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts`
-- [x] `pnpm docs:links`
+- [x] `pnpm check:compass`
 
 Broader follow-up verification when convenient:
 - [ ] `pnpm typecheck`
