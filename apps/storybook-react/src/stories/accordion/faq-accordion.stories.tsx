@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { FAQAccordion } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
@@ -15,7 +15,10 @@ const faqItems = [
 const meta: Meta<typeof FAQAccordion> = {
   title: "Accordion/Purpose/FAQ",
   component: FAQAccordion,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   decorators: [
     (Story) => (

@@ -77,14 +77,14 @@ describe("ThemeInputColor", () => {
     const color: Partial<ThemeInputColor> = {
       background: "#FFFFFF",
       surfaceElevated: "#FFFFFF",
-      textSubtle: "#9CA3AF",
-      borderStrong: "#141414",
-      focus: "#2684FF",
+      textSubtle: "#595959",
+      borderStrong: "#A3A3A3",
+      focus: "#2F31FC",
     }
     expect(color.background).toBe("#FFFFFF")
     expect(color.surfaceElevated).toBe("#FFFFFF")
-    expect(color.textSubtle).toBe("#9CA3AF")
-    expect(color.borderStrong).toBe("#141414")
+    expect(color.textSubtle).toBe("#595959")
+    expect(color.borderStrong).toBe("#A3A3A3")
   })
 })
 

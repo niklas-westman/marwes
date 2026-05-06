@@ -193,6 +193,10 @@ export type {
   EmptyStateSpinnerProps,
 } from "./components/spinner"
 
+/* Skeleton */
+export { Skeleton } from "./components/skeleton"
+export type { SkeletonProps } from "./components/skeleton"
+
 /* Spacing */
 export { Spacer, Spacing } from "./components/spacing"
 export type { SpacerProps, SpacingProps } from "./components/spacing"
@@ -206,6 +210,14 @@ export type { H1Props, H2Props, H3Props } from "./components/heading"
 /* Paragraph */
 export { Paragraph } from "./components/paragraph"
 export type { ParagraphProps } from "./components/paragraph"
+
+/* StatTile */
+export { StatTile } from "./components/stat-tile"
+export type { StatTileProps } from "./components/stat-tile"
+
+/* DatePicker */
+export { DatePicker } from "./components/date-picker"
+export type { DatePickerProps } from "./components/date-picker"
 
 /* Card */
 export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"

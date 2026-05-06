@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import { DateOfBirthField, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
@@ -6,6 +7,7 @@ const meta: Meta<typeof DateOfBirthField> = {
   title: "Input/Purpose/DateOfBirthField",
   component: DateOfBirthField,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],

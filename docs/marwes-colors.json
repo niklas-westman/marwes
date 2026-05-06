@@ -1,0 +1,245 @@
+{
+  "_meta": {
+    "description": "Marwes design system — color tokens export",
+    "date": "2026-05-06",
+    "version": "2",
+    "changelog": [
+      "New primitives: Neutral/25 (#F8F8F8), Neutral/50 (#FAFAFA), Neutral/150 (#D8D8D8)",
+      "surface/primary light: #FFFFFF (was #F9FAFB)",
+      "surface/secondary light: #F8F8F8 (was #FFFFFF)",
+      "surface/sunken light: #F5F5F5 (was #F3F4F6)",
+      "surface/primary dark: #0F0F0F (was #141414)",
+      "surface/secondary dark: #1A1A1A (was #2E2E2E)",
+      "surface/raised dark: #2B2B2B (was #474747)",
+      "surface/sunken dark: #050505 (was #000000)",
+      "surface/disabled: added explicit neutral disabled surface token",
+      "border/default light: #D8D8D8 (was #E5E7EB)",
+      "action/ghost/hover light: #F5F5F5 (was #F3F4F6)",
+      "action/ghost/active light: #E8E8E8 (was #E5E7EB)",
+      "Storybook: textMuted → text.secondary, textSubtle → text.disabled"
+    ]
+  },
+
+  "primitives": {
+    "gray": {
+      "0": "#FFFFFF",
+      "50": "#F9FAFB",
+      "100": "#F3F4F6",
+      "200": "#E5E7EB",
+      "300": "#D4D4D4",
+      "350": "#C2C2C2",
+      "400": "#A3A3A3",
+      "500": "#737373",
+      "600": "#595959",
+      "700": "#474747",
+      "800": "#2E2E2E",
+      "900": "#141414",
+      "950": "#000000"
+    },
+    "charcoal": {
+      "50": "#F5F5F5",
+      "100": "#E8E8E8",
+      "200": "#D0D0D0",
+      "300": "#B0B0B0",
+      "400": "#888888",
+      "500": "#555555",
+      "600": "#3D3D3D",
+      "700": "#2B2B2B",
+      "800": "#1A1A1A",
+      "900": "#0F0F0F",
+      "950": "#050505"
+    },
+    "neutral": {
+      "25": "#F8F8F8",
+      "50": "#FAFAFA",
+      "150": "#D8D8D8"
+    },
+    "blue": {
+      "50": "#EEEEFF",
+      "100": "#D4D5FE",
+      "200": "#ABABFD",
+      "300": "#8182FC",
+      "400": "#5859FC",
+      "500": "#2F31FC",
+      "600": "#2527CA",
+      "700": "#1B1D97",
+      "800": "#121365",
+      "900": "#090A32",
+      "950": "#040519"
+    },
+    "green": {
+      "50": "#E6F4ED",
+      "100": "#C2E3D1",
+      "200": "#90CAAD",
+      "300": "#5DB189",
+      "400": "#2E9970",
+      "500": "#00875A",
+      "600": "#006D48",
+      "700": "#006633",
+      "800": "#004D26",
+      "900": "#003318",
+      "950": "#001A0C"
+    },
+    "red": {
+      "50": "#FFE8EB",
+      "100": "#FFBDC4",
+      "200": "#FF8A95",
+      "300": "#FF5566",
+      "400": "#FF2847",
+      "500": "#FF002C",
+      "600": "#D90429",
+      "700": "#A8031F",
+      "800": "#780215",
+      "900": "#48010D",
+      "950": "#240006"
+    },
+    "amber": {
+      "50": "#FFF8E6",
+      "100": "#FEEFC3",
+      "200": "#FDE08A",
+      "300": "#FCC94A",
+      "400": "#F9B21A",
+      "500": "#F59E0B",
+      "550": "#E46F00",
+      "600": "#D97706",
+      "700": "#B45309",
+      "800": "#92400E",
+      "900": "#78350F",
+      "950": "#221004"
+    },
+    "crimson": {
+      "50": "#FFF0F3",
+      "100": "#FFD6DE",
+      "200": "#FFB3C1",
+      "300": "#FF7092",
+      "400": "#F93B6B",
+      "500": "#E31D52",
+      "600": "#BE1348",
+      "700": "#970D3C",
+      "800": "#6E0A2C",
+      "900": "#47071D",
+      "950": "#29030F"
+    }
+  },
+
+  "semantic": {
+    "surface": {
+      "primary": { "light": "#FFFFFF", "dark": "#0F0F0F" },
+      "secondary": { "light": "#F8F8F8", "dark": "#1A1A1A" },
+      "sunken": { "light": "#F5F5F5", "dark": "#050505" },
+      "raised": { "light": "#FFFFFF", "dark": "#2B2B2B" },
+      "disabled": { "light": "#F5F5F5", "dark": "#1A1A1A" },
+      "overlay": { "light": "#FFFFFF", "dark": "#474747" },
+      "inverse": { "light": "#141414", "dark": "#FFFFFF" },
+      "brand": { "light": "#EEEEFF", "dark": "#090A32" },
+      "staticWhite": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+    },
+    "text": {
+      "primary": { "light": "#141414", "dark": "#F9FAFB" },
+      "secondary": { "light": "#595959", "dark": "#A3A3A3" },
+      "disabled": { "light": "#737373", "dark": "#595959" },
+      "inverse": { "light": "#FFFFFF", "dark": "#FFFFFF" },
+      "onSurfaceDark": { "light": "#FFFFFF", "dark": "#141414" },
+      "brand": { "light": "#2F31FC", "dark": "#8182FC" },
+      "link": { "light": "#2527CA", "dark": "#8182FC" }
+    },
+    "border": {
+      "default": { "light": "#D8D8D8", "dark": "#474747" },
+      "medium": { "light": "#C2C2C2", "dark": "#595959" },
+      "strong": { "light": "#A3A3A3", "dark": "#A3A3A3" },
+      "full": { "light": "#000000", "dark": "#FFFFFF" },
+      "brand": { "light": "#2F31FC", "dark": "#5859FC" },
+      "error": { "light": "#D90429", "dark": "#FF2847" }
+    },
+    "icon": {
+      "default": { "light": "#595959", "dark": "#F9FAFB" },
+      "muted": { "light": "#A3A3A3", "dark": "#595959" },
+      "brand": { "light": "#2F31FC", "dark": "#8182FC" },
+      "inverse": { "light": "#FFFFFF", "dark": "#141414" },
+      "disabled": { "light": "#D4D4D4", "dark": "#474747" }
+    },
+    "focus": {
+      "ring": { "light": "#2F31FC", "dark": "#8182FC" },
+      "ringOffset": { "light": "#FFFFFF", "dark": "#141414" }
+    },
+    "action": {
+      "primary": {
+        "default": { "light": "#2F31FC", "dark": "#2F31FC" },
+        "hover": { "light": "#2527CA", "dark": "#5859FC" },
+        "active": { "light": "#1B1D97", "dark": "#8182FC" },
+        "disabled": { "light": "#8182FC", "dark": "#121365" },
+        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+      },
+      "secondary": {
+        "default": { "light": "#2F31FC", "dark": "#8182FC" },
+        "hover": { "light": "#EEEEFF", "dark": "#090A32" },
+        "active": { "light": "#D4D5FE", "dark": "#121365" },
+        "disabled": { "light": "#8182FC", "dark": "#121365" },
+        "label": { "light": "#2F31FC", "dark": "#8182FC" }
+      },
+      "ghost": {
+        "hover": { "light": "#F5F5F5", "dark": "#595959" },
+        "active": { "light": "#E8E8E8", "dark": "#737373" },
+        "label": { "light": "#141414", "dark": "#F9FAFB" }
+      },
+      "neutral": {
+        "surface": { "light": "#141414", "dark": "#FFFFFF" },
+        "label": { "light": "#FFFFFF", "dark": "#141414" },
+        "outline": { "light": "#141414", "dark": "#FFFFFF" }
+      },
+      "destructive": {
+        "default": { "light": "#D90429", "dark": "#FF002C" },
+        "hover": { "light": "#A8031F", "dark": "#FF2847" },
+        "active": { "light": "#780215", "dark": "#FF5566" },
+        "disabled": { "light": "#FF8A95", "dark": "#48010D" },
+        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+      },
+      "success": {
+        "default": { "light": "#006D48", "dark": "#006D48" },
+        "hover": { "light": "#006633", "dark": "#006633" },
+        "active": { "light": "#004D26", "dark": "#004D26" },
+        "disabled": { "light": "#90CAAD", "dark": "#90CAAD" },
+        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+      }
+    },
+    "status": {
+      "success": {
+        "background": { "light": "#E6F4ED", "dark": "#001A0C" },
+        "text": { "light": "#006633", "dark": "#90CAAD" },
+        "icon": { "light": "#006D48", "dark": "#5DB189" },
+        "border": { "light": "#90CAAD", "dark": "#5DB189" }
+      },
+      "error": {
+        "background": { "light": "#FFE8EB", "dark": "#240006" },
+        "text": { "light": "#A8031F", "dark": "#FF5566" },
+        "icon": { "light": "#D90429", "dark": "#FF2847" },
+        "border": { "light": "#FF8A95", "dark": "#FF2847" }
+      },
+      "warning": {
+        "background": { "light": "#FFF8E6", "dark": "#221004" },
+        "text": { "light": "#B45309", "dark": "#FCC94A" },
+        "icon": { "light": "#D97706", "dark": "#F9B21A" },
+        "border": { "light": "#FDE08A", "dark": "#E46F00" },
+        "borderAccessible": { "light": "#B45309", "dark": "#B45309" }
+      },
+      "info": {
+        "background": { "light": "#EEEEFF", "dark": "#040519" },
+        "text": { "light": "#1B1D97", "dark": "#ABABFD" },
+        "icon": { "light": "#2F31FC", "dark": "#8182FC" },
+        "border": { "light": "#ABABFD", "dark": "#8182FC" }
+      }
+    },
+    "overlay": {
+      "scrim": { "light": "rgba(20,20,20,0.6)", "dark": "rgba(0,0,0,0.8)" }
+    }
+  },
+
+  "storybook": {
+    "_note": "Map these Storybook theme keys to Marwes semantic tokens — do not hardcode hex values",
+    "textMuted": "text.secondary",
+    "textSubtle": "text.disabled",
+    "danger": "status.error.icon — fill/icon use only, not text",
+    "success": "status.success.icon — fill/icon use only, not text",
+    "warning": "status.warning.icon — fill/icon use only, not text"
+  }
+}

@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { AvatarGroup, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { AvatarGroupProps } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
@@ -14,7 +14,10 @@ const sampleItems: AvatarGroupProps["items"] = [
 const meta: Meta<typeof AvatarGroup> = {
   title: "Avatar/Molecule/AvatarGroup",
   component: AvatarGroup,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

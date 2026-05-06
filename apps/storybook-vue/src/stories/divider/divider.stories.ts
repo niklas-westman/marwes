@@ -1,4 +1,4 @@
-import { storybookDividerArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookDividerArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { DividerProps } from "@marwes-ui/vue"
 import { Divider, H1, H2, H3, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -20,13 +20,13 @@ const verticalStageStyle = `
   background: ${spacingHighlight};
   box-shadow: inset 0 0 0 1px ${panelBorder};
 `
-const contentBlockStyle = `
-  margin: 0;
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: inset 0 0 0 1px ${panelBorder};
-`
+const contentBlockStyle = {
+  margin: "0",
+  padding: "0.75rem 1rem",
+  borderRadius: "10px",
+  background: "rgba(255, 255, 255, 0.96)",
+  boxShadow: `inset 0 0 0 1px ${panelBorder}`,
+}
 
 function renderDividerPreview(args: DividerProps) {
   if (args.orientation === "vertical") {
@@ -61,7 +61,10 @@ function renderDividerPreview(args: DividerProps) {
 const meta = {
   title: "Divider/Atom",
   component: Divider as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookDividerArgTypes,
   args: {

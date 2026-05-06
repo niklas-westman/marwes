@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { SettingsTabsProps } from "@marwes-ui/vue"
 import { SettingsTabs } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,9 +6,13 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Tab/Purpose/SettingsTabs",
   component: SettingsTabs as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args: SettingsTabsProps) => ({
+    ...storybookA11yPolicy.smoke,
     components: { SettingsTabs },
     setup() {
       return { args }

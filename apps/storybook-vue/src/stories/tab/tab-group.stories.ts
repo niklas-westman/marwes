@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { TabGroupProps } from "@marwes-ui/vue"
 import { TabGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -25,9 +25,13 @@ const accountTabs = [
 const meta = {
   title: "Tab/Molecule",
   component: TabGroup as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args: TabGroupProps) => ({
+    ...storybookA11yPolicy.smoke,
     components: { TabGroup },
     setup() {
       return { args }

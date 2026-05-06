@@ -62,7 +62,7 @@ export type Theme = {
 
     /**
      * Focus color used for focus-visible outlines on interactive elements.
-     * Accessible blue (#2684FF) from Figma node 120:927.
+     * Defaults to the source focus ring token from docs/marwes-colors.json.
      */
     focus: string
 

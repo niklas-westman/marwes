@@ -1,11 +1,18 @@
-import { storybookButtonGeneralArgTypes, storybookLayout } from "@marwes-ui/core"
+import {
+  storybookA11yPolicy,
+  storybookButtonGeneralArgTypes,
+  storybookLayout,
+} from "@marwes-ui/core"
 import { PrimaryButton } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const meta = {
   title: "Buttons/Variant/PrimaryButton",
   component: PrimaryButton,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookButtonGeneralArgTypes,
 } satisfies Meta<typeof PrimaryButton>

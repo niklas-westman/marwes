@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { AccordionProps } from "@marwes-ui/vue"
 import { Accordion } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,9 +7,17 @@ import { ref } from "vue"
 const meta = {
   title: "Accordion/Atom",
   component: Accordion as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
-  decorators: [() => ({ template: '<div style="width: 100%; max-width: 640px"><story /></div>' })],
+  decorators: [
+    () => ({
+      ...storybookA11yPolicy.smoke,
+      template: '<div style="width: 66vw"><story /></div>',
+    }),
+  ],
   argTypes: {
     open: { control: "boolean" },
     disabled: { control: "boolean" },

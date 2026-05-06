@@ -327,6 +327,101 @@ Use this format when resolving an open decision:
 - Element: `<hr>` for semantic meaning and native accessibility
 - Orientation: Explicit prop for better API clarity and accessibility
 
+### REQ-SKELETON-001: Skeleton Atom Foundation
+- **Figma reference**:
+  - `.figma/marwes/pages/skeleton/skeleton_1921-34816.json`
+  - `.figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json`
+  - V3 checklist note: `.figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json`
+- **Problem**: The synced component backlog marks Skeleton as a must-have loading placeholder, but the repo has no base Skeleton atom across core, presets, adapters, and Storybook.
+- **Scope**:
+  - Add a base `Skeleton` atom to core, presets, React, Vue, and Storybook
+  - Support the three available synced shapes: `text`, `circular`, and `rectangular`
+  - Match the local Figma baseline dimensions: text 120×12, circular 40×40, rectangular 120×120
+  - Use the local Figma 4% black overlay as a semantic theme-relative preset color
+  - Support custom width, height, radius, and `pulse` / `wave` / `none` animation modes
+  - Keep skeletons decorative by default, but support standalone accessible status usage through `ariaLabel`
+- **Non-goals**:
+  - Shipping layout-specific skeleton wrappers in this change
+  - Creating new raster or icon assets
+  - Treating the V2/MUI-derived Skeleton page as a full V3 design-system component source beyond the baseline shape data
+- **Acceptance criteria**:
+  - [x] `Skeleton` ships as a standalone atom with stable variant, dimension, radius, and animation contracts in core, React, and Vue
+  - [x] Preset CSS renders text, circular, and rectangular placeholders with theme-relative fill and loading animation hooks
+  - [x] The atom is decorative by default and exposes accessible standalone status mode when `ariaLabel` is provided
+  - [x] React and Vue Storybook document the atom and cover Figma shapes, custom dimensions, animations, and composition examples
+- **Validation**:
+  - Unit: Core recipe tests plus React/Vue adapter contract tests pass
+  - Integration/manual: Verify React Skeleton stories against the synced Figma Skeleton page
+- **Files expected to change**:
+  - Core: `packages/core/src/components/atoms/skeleton/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/skeleton.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/skeleton-css-contract.test.ts`
+  - React: `packages/react/src/components/skeleton/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/skeleton/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/skeleton/*`, `apps/storybook-vue/src/stories/skeleton/*`
+  - Shared tests/docs: `tests/contracts/skeleton.contract.ts`, `docs/reference/spec.md`, `docs/guides/figma-to-marwes.md`, `.changeset/*`
+
+### REQ-DATE-PICKER-001: Date Picker Component Foundation
+- **Figma source**:
+  - `.figma/marwes/components/date-picker.json`
+  - `.figma/marwes/components/date-picker-item.json`
+  - `.figma/marwes/components/date-picker-field.json`
+  - `.figma/marwes/pages/-v2-date-picker/date-picker_1814-988.json`
+- **Problem**: The synced V2 Date Picker and Date Picker Item components exist in Figma, but the repo had no shared calendar surface across core, presets, React, Vue, and Storybook.
+- **In scope**:
+  - Add a base `DatePicker` component to core, presets, React, Vue, and Storybook
+  - Support desktop/mobile device metadata, month labels, weekday labels, week rows, day states, navigation labels, and action labels
+  - Map day states from the synced `.Date Picker Item` variants: default, hover, selected, range, range-hover, disabled, and null
+  - Keep date parsing, popover state, and form orchestration outside the component
+- **Out of scope**:
+  - Calendar math, locale-aware formatting, date parsing, and controlled range-selection state management
+  - Date picker field/popover composition as a single form molecule
+  - Time picker or multi-calendar layout behavior
+- **Acceptance criteria**:
+  - [x] `DatePicker` ships as a standalone component with stable device and day-state contracts in core, React, and Vue
+  - [x] Preset CSS maps the synced calendar shell, 7-column day grid, selected/range/disabled/null day states, and action bar
+  - [x] React and Vue Storybook each include `DatePicker/Introduction` and `DatePicker/Atom` stories
+  - [x] Tests verify metadata, selected/disabled days, accessible labels, and adapter selection events
+- **Validation**:
+  - Unit/contract: `packages/core/test/recipes/date-picker.test.ts`, `packages/presets/test/date-picker-css-contract.test.ts`, `tests/contracts/date-picker.contract.ts`
+  - Integration/manual: Verify React Date Picker stories against the synced Figma Date Picker page
+- **Affected surfaces**:
+  - Core: `packages/core/src/components/atoms/date-picker/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/date-picker.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/date-picker-css-contract.test.ts`
+  - React: `packages/react/src/components/date-picker/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/date-picker/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/date-picker/*`, `apps/storybook-vue/src/stories/date-picker/*`
+
+### REQ-STAT-TILE-001: Stat Tile Atom Foundation
+- **Figma source**:
+  - `.figma/marwes/components/stat-tile.json`
+  - `.figma/marwes/components/partsstat-tiletrend.json`
+  - `.figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json`
+  - `.figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json`
+- **Problem**: The synced V2 Stat Tile exists in Figma, but the repo had no first-class metric tile API across core, presets, React, Vue, and Storybook.
+- **In scope**:
+  - Add a base `StatTile` component to core, presets, React, Vue, and Storybook
+  - Support label, value, optional subtitle, optional trend value, positive/negative trend direction, and neutral/brand/success/warning/danger tones
+  - Preserve the Figma baseline geometry: 164px tile width, 20px padding, 8px vertical spacing, 12px radius, and compact 20px trend pill
+  - Generate stable `data-component=stat-tile`, `data-tone`, and trend metadata for auditable output
+- **Out of scope**:
+  - Charting, sparkline, loading, or responsive dashboard-grid behavior
+  - Locale-aware number/currency formatting inside the component
+  - Treating the V2 Stat Tile source as a broader metrics taxonomy beyond the shipped tile and trend states
+- **Acceptance criteria**:
+  - [x] `StatTile` ships as a standalone component with stable tone and trend contracts in core, React, and Vue
+  - [x] Preset CSS maps the synced neutral, brand, success, warning, and danger treatments
+  - [x] React and Vue Storybook each include `StatTile/Introduction` and `StatTile/Atom` stories
+  - [x] Shared contract tests verify DOM tag, metadata, content, tone, and accessible trend labels
+- **Validation**:
+  - Unit/contract: `packages/core/test/recipes/stat-tile.test.ts`, `packages/presets/test/stat-tile-css-contract.test.ts`, `tests/contracts/stat-tile.contract.ts`
+  - Integration/manual: Verify React Stat Tile Storybook tone matrix against the synced Figma Stat Tile page
+- **Affected surfaces**:
+  - Core: `packages/core/src/components/atoms/stat-tile/*`, `packages/core/src/components/atoms/index.ts`, `packages/core/src/index.ts`, `packages/core/src/storybook/storybook-fixtures.ts`
+  - Presets: `packages/presets/src/firstEdition/stat-tile.css`, `packages/presets/src/firstEdition/styles.css`, `packages/presets/test/stat-tile-css-contract.test.ts`
+  - React: `packages/react/src/components/stat-tile/*`, `packages/react/src/index.ts`
+  - Vue: `packages/vue/src/components/stat-tile/*`, `packages/vue/src/index.ts`
+  - Storybook: `apps/storybook-react/src/stories/stat-tile/*`, `apps/storybook-vue/src/stories/stat-tile/*`
+
 ### REQ-SPINNER-001: Spinner Atom Foundation
 - **Figma reference**:
   - `.figma/marwes/components/spinnerclassic.json`

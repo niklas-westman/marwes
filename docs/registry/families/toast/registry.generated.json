@@ -67,6 +67,7 @@
       "apps/storybook-vue/src/stories/toast/Introduction.mdx",
       "apps/storybook-vue/src/stories/toast/success-toast.stories.ts",
       "apps/storybook-vue/src/stories/toast/toast-container.stories.ts",
+      "apps/storybook-vue/src/stories/toast/toast-matrix.stories.css",
       "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
       "apps/storybook-vue/src/stories/toast/toast.stories.ts",
       "apps/storybook-vue/src/stories/toast/warning-toast.stories.ts"

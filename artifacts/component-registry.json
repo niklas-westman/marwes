@@ -1555,6 +1555,195 @@
       }
     },
     {
+      "family": "date-picker",
+      "readmePath": "docs/registry/families/date-picker/README.md",
+      "metaPath": "docs/registry/families/date-picker/registry.meta.json",
+      "generatedPath": "docs/registry/families/date-picker/registry.generated.json",
+      "visualPaths": [],
+      "previewPaths": [],
+      "meta": {
+        "family": "date-picker",
+        "displayName": "Date Picker",
+        "status": "shipped",
+        "summary": "Calendar selection surface synced from the V2 Date Picker component, with device metadata, day-state contracts, and shared React/Vue adapters.",
+        "philosophy": [
+          "Keep Date Picker as a visual and semantic calendar surface rather than a date-math engine.",
+          "Keep day-state mapping in core so React and Vue render the same selected, range, disabled, and empty states.",
+          "Keep popover behavior, form composition, parsing, and locale formatting outside the base component.",
+          "Prefer native table semantics for the calendar grid while keeping each available date as a button."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs a calendar panel for choosing a date or reviewing a date range.",
+            "The product already owns date math, month navigation state, and selected date state.",
+            "React and Vue consumers should receive the same day-state anatomy and data metadata."
+          ],
+          "avoidWhen": [
+            "The experience needs a complete form field/popover with parsing and validation baked in.",
+            "The component must own locale-aware calendar math or complex range-selection behavior.",
+            "The product needs time picking or multi-calendar comparison layouts."
+          ]
+        },
+        "axe": {
+          "riskTier": "medium",
+          "auditStatus": "first-pass-complete",
+          "automationCovers": [
+            "Core recipe tests for baseline metadata, default calendar rows, mobile device metadata, and accessible day labels.",
+            "Preset CSS contract tests for calendar geometry and day-state classes.",
+            "React and Vue adapter tests for table labels, selected/disabled states, and day selection events.",
+            "Storybook introduction/taxonomy tests and a11y smoke coverage in both React and Vue Storybook apps."
+          ],
+          "manualReviewRequired": [
+            "Keyboard interaction model review when product-level month navigation and range selection are wired.",
+            "Visual review against the synced V2 Date Picker page for spacing and state fidelity.",
+            "Locale/date-format review before use in production forms."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "The base component intentionally does not implement calendar math or popover state."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/date-picker/Introduction.mdx",
+              "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/date-picker/Introduction.mdx",
+              "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts"
+            ]
+          },
+          "preferredStates": ["desktop", "mobile", "selected", "range", "disabled", "null"]
+        },
+        "openQuestions": [
+          "Should DatePickerField become a separate molecule that composes Input, popover state, and Date Picker?"
+        ]
+      },
+      "generated": {
+        "family": "date-picker",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/date-picker/date-picker-a11y.ts",
+            "packages/core/src/components/atoms/date-picker/date-picker-recipe.ts",
+            "packages/core/src/components/atoms/date-picker/date-picker-types.ts",
+            "packages/core/src/components/atoms/date-picker/index.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/date-picker.css"],
+          "react": [
+            "packages/react/src/components/date-picker/__tests__/date-picker.test.tsx",
+            "packages/react/src/components/date-picker/__tests__/index-exports.test.tsx",
+            "packages/react/src/components/date-picker/date-picker.tsx",
+            "packages/react/src/components/date-picker/index.ts"
+          ],
+          "vue": [
+            "packages/vue/src/components/date-picker/__tests__/date-picker.test.ts",
+            "packages/vue/src/components/date-picker/__tests__/index-exports.test.ts",
+            "packages/vue/src/components/date-picker/date-picker.ts",
+            "packages/vue/src/components/date-picker/index.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx",
+            "apps/storybook-react/src/stories/date-picker/Introduction.mdx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts",
+            "apps/storybook-vue/src/stories/date-picker/Introduction.mdx"
+          ],
+          "contracts": ["tests/contracts/date-picker.contract.ts"]
+        },
+        "semantics": {
+          "coverageLevel": "family-local",
+          "dataComponent": "date-picker",
+          "canonicalAttributes": [],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [
+            "packages/core/src/components/atoms/date-picker/date-picker-recipe.ts"
+          ],
+          "notes": [
+            "Date Picker is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+            "The component emits data-component=date-picker plus local device and day-state metadata from core."
+          ]
+        },
+        "design": {
+          "componentJsons": [
+            ".figma/marwes/components/date-picker.json",
+            ".figma/marwes/components/date-picker-item.json",
+            ".figma/marwes/components/date-picker-field.json",
+            ".figma/marwes/components/icons-interface-calendar.json"
+          ],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md",
+            ".figma/marwes/pages/-v2-date-picker/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/-v2-date-picker/date-picker_1814-988.json",
+            ".figma/marwes/pages/-v2-date-picker/date-picker_1814-1203.json",
+            ".figma/marwes/pages/-v2-date-picker/date-picker_1814-1206.json",
+            ".figma/marwes/pages/-v2-date-picker/date-picker_1918-16141.json",
+            ".figma/marwes/pages/-v2-date-picker/-date-picker_1807-17542.json",
+            ".figma/marwes/pages/-v2-date-picker/-date-picker-dark_1807-17615.json",
+            ".figma/marwes/pages/-v2-date-picker/partsdate-picker-item_1807-16918.json"
+          ],
+          "nodeReferences": {
+            "datePickerComponentSet": "1814:988",
+            "datePickerDesktop": "1814:989",
+            "datePickerMobile": "1814:1123",
+            "datePickerItemComponentSet": "1814:1221",
+            "datePickerField": "1807:17191"
+          },
+          "figmaTokens": [],
+          "figmaStates": {
+            "baseVariants": ["desktop", "mobile"],
+            "interactionStates": [
+              "default",
+              "hover",
+              "selected",
+              "range",
+              "range-hover",
+              "disabled",
+              "null"
+            ]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Date Picker is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+          "The component emits data-component=date-picker plus local device and day-state metadata from core.",
+          "Generated from docs/registry/families/date-picker/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
       "family": "dialog",
       "readmePath": "docs/registry/families/dialog/README.md",
       "metaPath": "docs/registry/families/dialog/registry.meta.json",
@@ -2669,6 +2858,7 @@
             "apps/storybook-vue/src/stories/input/rich-text-field.stories.ts",
             "apps/storybook-vue/src/stories/input/rich-text.stories.ts",
             "apps/storybook-vue/src/stories/input/search-field.stories.ts",
+            "apps/storybook-vue/src/stories/input/select-field.stories.css",
             "apps/storybook-vue/src/stories/input/select-field.stories.ts",
             "apps/storybook-vue/src/stories/input/select.stories.ts",
             "apps/storybook-vue/src/stories/input/textarea-field.stories.ts",
@@ -3306,6 +3496,183 @@
           "Radio is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
           "Family-local purpose metadata currently lives in the React and Vue purpose-radio wrappers, while the raw atom and group field rely on native input[type=radio], role=radiogroup, and shared field-helper wiring.",
           "Generated from docs/registry/families/radio/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
+      "family": "skeleton",
+      "readmePath": "docs/registry/families/skeleton/README.md",
+      "metaPath": "docs/registry/families/skeleton/registry.meta.json",
+      "generatedPath": "docs/registry/families/skeleton/registry.generated.json",
+      "visualPaths": [],
+      "previewPaths": [],
+      "meta": {
+        "family": "skeleton",
+        "displayName": "Skeleton",
+        "status": "shipped",
+        "summary": "Loading-placeholder atom with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React/Vue adapter contract.",
+        "philosophy": [
+          "Keep Skeleton as a low-level loading placeholder atom rather than a layout-specific card or list skeleton family.",
+          "Keep the three synced baseline shapes source-owned in core so React and Vue render the same dimensions, radius rules, metadata, and accessibility behavior.",
+          "Keep visual treatment in preset CSS through stable mw-skeleton classes and theme-relative variables instead of adapter-owned styling.",
+          "Keep the atom decorative by default, with explicit ariaLabel opt-in for standalone status usage."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs a lightweight placeholder for loading text, avatar/media circles, or rectangular content blocks.",
+            "The product already owns the surrounding loading context and the skeleton can stay decorative.",
+            "React and Vue consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
+          ],
+          "avoidWhen": [
+            "The experience needs determinate progress, percentage tracking, or an indeterminate activity indicator instead of structural placeholders.",
+            "The implementation cannot provide a truthful ariaLabel when a standalone skeleton region must announce loading status.",
+            "The product needs a layout-specific skeleton composition that should live as an adapter/story composition rather than core atom API."
+          ]
+        },
+        "axe": {
+          "riskTier": "low",
+          "auditStatus": "first-pass-complete",
+          "automationCovers": [
+            "Core recipe tests for decorative defaults, Figma baseline dimensions, custom dimensions, animation modes, and standalone status mode.",
+            "Preset CSS contract tests for the Figma 4% text overlay mapping plus pulse and wave animation hooks.",
+            "Shared React/Vue adapter contract tests for DOM metadata, accessibility output, dimensions, and animation classes.",
+            "Storybook introduction/taxonomy tests and a11y smoke coverage in both React and Vue Storybook apps."
+          ],
+          "manualReviewRequired": [
+            "Product-level decisions about when a skeleton is decorative versus when a loading region needs an announced status label.",
+            "Visual review against the synced Figma page after V3 Skeleton design-system sources become more complete."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "The current Figma source is V2/MUI-derived and only provides baseline shapes, so this family intentionally ships a small atom API first."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/skeleton/Introduction.mdx",
+              "apps/storybook-react/src/stories/skeleton/skeleton.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
+              "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+            ]
+          },
+          "preferredStates": [
+            "text",
+            "circular",
+            "rectangular",
+            "pulse",
+            "wave",
+            "none",
+            "decorative",
+            "status",
+            "custom-size"
+          ]
+        },
+        "openQuestions": [
+          "Should V3 introduce named layout skeleton compositions after the design source graduates from the V2/MUI-derived baseline page?"
+        ]
+      },
+      "generated": {
+        "family": "skeleton",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/skeleton/index.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-a11y.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-recipe.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-types.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/skeleton.css"],
+          "react": [
+            "packages/react/src/components/skeleton/__tests__/index-exports.test.tsx",
+            "packages/react/src/components/skeleton/__tests__/skeleton.test.tsx",
+            "packages/react/src/components/skeleton/index.ts",
+            "packages/react/src/components/skeleton/skeleton.tsx"
+          ],
+          "vue": [
+            "packages/vue/src/components/skeleton/__tests__/index-exports.test.ts",
+            "packages/vue/src/components/skeleton/__tests__/skeleton.test.ts",
+            "packages/vue/src/components/skeleton/index.ts",
+            "packages/vue/src/components/skeleton/skeleton.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/skeleton/Introduction.mdx",
+            "apps/storybook-react/src/stories/skeleton/skeleton-molecules.stories.tsx",
+            "apps/storybook-react/src/stories/skeleton/skeleton.stories.tsx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
+            "apps/storybook-vue/src/stories/skeleton/skeleton-molecules.stories.ts",
+            "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+          ],
+          "contracts": ["tests/contracts/skeleton.contract.ts"]
+        },
+        "semantics": {
+          "coverageLevel": "family-local",
+          "dataComponent": "skeleton",
+          "canonicalAttributes": [],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": ["packages/core/src/components/atoms/skeleton/skeleton-recipe.ts"],
+          "notes": [
+            "Skeleton is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+            "The atom emits data-component=skeleton plus local variant and animation attributes from core."
+          ]
+        },
+        "design": {
+          "componentJsons": [],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/skeleton/skeleton_1921-34816.json",
+            ".figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json",
+            ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json"
+          ],
+          "nodeReferences": {
+            "skeletonBaselineFrame": "1921:34816",
+            "skeletonChecklistItem": "1896:33145"
+          },
+          "figmaTokens": [],
+          "figmaStates": {
+            "baseVariants": ["text", "circular", "rectangular"],
+            "interactionStates": ["pulse", "wave", "none", "decorative", "status", "custom-size"]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Skeleton is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+          "The atom emits data-component=skeleton plus local variant and animation attributes from core.",
+          "Generated from docs/registry/families/skeleton/registry.meta.json and scripts/generate-component-registry.ts."
         ]
       }
     },
@@ -4016,6 +4383,194 @@
       }
     },
     {
+      "family": "stat-tile",
+      "readmePath": "docs/registry/families/stat-tile/README.md",
+      "metaPath": "docs/registry/families/stat-tile/registry.meta.json",
+      "generatedPath": "docs/registry/families/stat-tile/registry.generated.json",
+      "visualPaths": [],
+      "previewPaths": [],
+      "meta": {
+        "family": "stat-tile",
+        "displayName": "Stat Tile",
+        "status": "shipped",
+        "summary": "Compact KPI tile synced from the V2 Stat Tile Figma component, with tone treatments, optional trend metadata, and shared React/Vue adapter contracts.",
+        "philosophy": [
+          "Keep Stat Tile as a focused metric surface rather than a dashboard-grid or charting primitive.",
+          "Keep Figma-owned structure and tone mapping in core/preset contracts so React and Vue render the same tile anatomy.",
+          "Keep number formatting and product-specific metric meaning outside the component API.",
+          "Keep the nested trend part explicit and accessible while making the arrow icon decorative."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs a compact KPI summary with label, value, optional trend, and optional subtitle.",
+            "The metric fits one of the synced neutral, brand, success, warning, or danger tone treatments.",
+            "React and Vue consumers should receive the same dashboard metric anatomy and metadata."
+          ],
+          "avoidWhen": [
+            "The experience needs charting, sparklines, expandable analytics, or locale-aware formatting inside the component.",
+            "The tile is only being used as a generic card without metric-specific label/value/trend structure.",
+            "The product needs responsive dashboard layout behavior that should be owned by a layout component."
+          ]
+        },
+        "axe": {
+          "riskTier": "low",
+          "auditStatus": "first-pass-complete",
+          "automationCovers": [
+            "Core recipe tests for baseline metadata, tone mapping, positive trend state, and negative trend labels.",
+            "Preset CSS contract tests for Figma baseline dimensions, tone colors, and trend classes.",
+            "Shared React/Vue adapter contract tests for article output, text content, tone metadata, and generated trend labels.",
+            "Storybook introduction/taxonomy tests and a11y smoke coverage in both React and Vue Storybook apps."
+          ],
+          "manualReviewRequired": [
+            "Visual review against the synced V2 Stat Tile page for tone and spacing fidelity.",
+            "Product-level review for metric wording, number formatting, and trend semantics in real dashboards."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "The current source is V2 and small; this ships the stable compact tile anatomy without inventing broader analytics patterns."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/stat-tile/Introduction.mdx",
+              "apps/storybook-react/src/stories/stat-tile/stat-tile.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/stat-tile/Introduction.mdx",
+              "apps/storybook-vue/src/stories/stat-tile/stat-tile.stories.ts"
+            ]
+          },
+          "preferredStates": [
+            "neutral",
+            "brand",
+            "success",
+            "warning",
+            "danger",
+            "positive",
+            "negative"
+          ]
+        },
+        "openQuestions": [
+          "Should a future metrics family add larger dashboard tile compositions or chart/sparkline variants?"
+        ]
+      },
+      "generated": {
+        "family": "stat-tile",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/stat-tile/index.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-a11y.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-types.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/stat-tile.css"],
+          "react": [
+            "packages/react/src/components/stat-tile/__tests__/index-exports.test.tsx",
+            "packages/react/src/components/stat-tile/__tests__/stat-tile.test.tsx",
+            "packages/react/src/components/stat-tile/index.ts",
+            "packages/react/src/components/stat-tile/stat-tile.tsx"
+          ],
+          "vue": [
+            "packages/vue/src/components/stat-tile/__tests__/index-exports.test.ts",
+            "packages/vue/src/components/stat-tile/__tests__/stat-tile.test.ts",
+            "packages/vue/src/components/stat-tile/index.ts",
+            "packages/vue/src/components/stat-tile/stat-tile.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/stat-tile/__tests__/stat-tile-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/stat-tile/Introduction.mdx",
+            "apps/storybook-react/src/stories/stat-tile/stat-tile.stories.tsx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/stat-tile/__tests__/stat-tile-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/stat-tile/Introduction.mdx",
+            "apps/storybook-vue/src/stories/stat-tile/stat-tile.stories.ts"
+          ],
+          "contracts": ["tests/contracts/stat-tile.contract.ts"]
+        },
+        "semantics": {
+          "coverageLevel": "family-local",
+          "dataComponent": "stat-tile",
+          "canonicalAttributes": [],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [
+            "packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts"
+          ],
+          "notes": [
+            "Stat Tile is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+            "The atom emits data-component=stat-tile plus local tone and trend attributes from core."
+          ]
+        },
+        "design": {
+          "componentJsons": [
+            ".figma/marwes/components/stat-tile.json",
+            ".figma/marwes/components/partsstat-tiletrend.json"
+          ],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md",
+            ".figma/marwes/pages/-v2-stat-tile/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json",
+            ".figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6920.json",
+            ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27384.json",
+            ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27391.json",
+            ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27405.json",
+            ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27412.json",
+            ".figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json"
+          ],
+          "nodeReferences": {
+            "statTileComponent": "1411:6857",
+            "statTileNeutralInstance": "1411:6920",
+            "statTileBrandInstance": "2512:27384",
+            "statTileSuccessInstance": "2512:27391",
+            "statTileWarningInstance": "2512:27405",
+            "statTileDangerInstance": "2512:27412",
+            "statTileTrendComponentSet": "2695:25437"
+          },
+          "figmaTokens": [],
+          "figmaStates": {
+            "baseVariants": ["neutral", "brand", "success", "warning", "danger"],
+            "interactionStates": ["positive", "negative", "label", "value", "subtitle", "trend"]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Stat Tile is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+          "The atom emits data-component=stat-tile plus local tone and trend attributes from core.",
+          "Generated from docs/registry/families/stat-tile/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
       "family": "switch",
       "readmePath": "docs/registry/families/switch/README.md",
       "metaPath": "docs/registry/families/switch/registry.meta.json",
@@ -4652,6 +5207,7 @@
             "apps/storybook-vue/src/stories/toast/Introduction.mdx",
             "apps/storybook-vue/src/stories/toast/success-toast.stories.ts",
             "apps/storybook-vue/src/stories/toast/toast-container.stories.ts",
+            "apps/storybook-vue/src/stories/toast/toast-matrix.stories.css",
             "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
             "apps/storybook-vue/src/stories/toast/toast.stories.ts",
             "apps/storybook-vue/src/stories/toast/warning-toast.stories.ts"

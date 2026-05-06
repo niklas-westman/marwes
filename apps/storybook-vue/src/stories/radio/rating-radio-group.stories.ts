@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { RatingRadioGroupProps } from "@marwes-ui/vue"
 import { RatingRadioGroup } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,7 +7,10 @@ import { ref } from "vue"
 const meta = {
   title: "Radio/Purpose/Rating",
   component: RatingRadioGroup as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<RatingRadioGroupProps>
 

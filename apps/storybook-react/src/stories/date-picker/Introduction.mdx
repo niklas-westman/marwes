@@ -1,0 +1,16 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="DatePicker/Introduction" />
+
+# Date Picker
+
+Date Picker is the calendar surface synced from the V2 Date Picker Figma component. It owns the calendar shell, weekday grid, day-state metadata, navigation controls, and action bar.
+
+Use it when a product needs a compact calendar selection surface. Keep date parsing, formatting, popover state, and form orchestration outside this component.
+
+## Contract
+
+- Core emits the shared `data-component="date-picker"` and `data-component="date-picker-day"` metadata.
+- React and Vue render the same month grid and state classes.
+- Day states map to the synced `.Date Picker Item` variants: default, hover, selected, range, range-hover, disabled, and null.
+- Empty and disabled days are disabled buttons; selected days expose `aria-selected`.

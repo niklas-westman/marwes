@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { DialogProps } from "@marwes-ui/vue"
 import { CancelButton, ConfirmButton, Dialog, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +6,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Dialog/Atom",
   component: Dialog as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<DialogProps>
 

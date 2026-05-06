@@ -142,7 +142,7 @@
   height: var(--mw-avatar-badge-indicator-size);
   border: 2px solid var(--mw-color-surface, #f9fafb);
   border-radius: 9999px;
-  background: var(--mw-color-success-base, #16a34a);
+  background: var(--mw-color-success-base, #006633);
   box-sizing: border-box;
 }
 

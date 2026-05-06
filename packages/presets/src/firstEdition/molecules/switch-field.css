@@ -23,7 +23,7 @@
 .mw-switch-field__error {
   margin-left: calc(var(--mw-spacing-sp-24) + var(--mw-density-gap));
   font-size: var(--mw-density-font-size-sm);
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 .mw-switch-field--disabled .mw-switch-field__label {
@@ -33,5 +33,5 @@
 
 .mw-switch-field--invalid .mw-switch-field__label .mw-p,
 .mw-switch-field--invalid .mw-switch-field__error .mw-p {
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }

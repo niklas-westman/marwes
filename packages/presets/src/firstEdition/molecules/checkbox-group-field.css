@@ -42,7 +42,7 @@
 
 .mw-checkbox-group-field__error {
   font-size: var(--mw-density-font-size-sm);
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 .mw-checkbox-group-field--disabled .mw-checkbox-group-field__option {
@@ -52,7 +52,7 @@
 
 .mw-checkbox-group-field--invalid .mw-checkbox-group-field__label .mw-p,
 .mw-checkbox-group-field--invalid .mw-checkbox-group-field__error .mw-p {
-  color: var(--mw-color-danger-base, #dc2626);
+  color: var(--mw-color-danger-base, #d90429);
 }
 
 @supports selector(:has(*)) {

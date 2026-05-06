@@ -3,7 +3,7 @@ import { type Theme, ThemeMode } from "./theme-types"
 /**
  * Light theme defaults (default mode).
  * Uses dark text on light backgrounds.
- * Colors mapped from Figma design tokens (node 1:120).
+ * Colors mapped from docs/marwes-colors.json.
  */
 export const lightThemeDefaults: Theme = {
   mode: ThemeMode.light,
@@ -12,34 +12,34 @@ export const lightThemeDefaults: Theme = {
     // Primary (firstEdition brand blue)
     primary: "#2F31FC",
 
-    // Background & Surface (from Figma: Neutrals)
+    // Background & Surface
     background: "#FFFFFF",
-    surface: "#F9FAFB",
-    surfaceSubtle: "#F3F4F6",
+    surface: "#F8F8F8",
+    surfaceSubtle: "#F5F5F5",
     surfaceElevated: "#FFFFFF",
-    surfaceDisabled: "#F3F4F6",
+    surfaceDisabled: "#F5F5F5",
     surfaceInverted: "#141414",
 
-    // Text (from Figma: Colours/Text)
+    // Text
     text: "#141414",
-    textMuted: "#9CA3AF",
-    textSubtle: "#9CA3AF",
-    textDisabled: "rgba(20,20,20,0.4)",
-    textInverted: "#F9FAFB",
+    textMuted: "#595959",
+    textSubtle: "#737373",
+    textDisabled: "#737373",
+    textInverted: "#FFFFFF",
 
-    // Borders (from Figma: Colours/Border and Neutrals)
-    border: "rgba(0,0,0,0.4)",
-    borderSubtle: "#00000033",
-    borderStrong: "#141414",
-    borderDisabled: "rgba(20,20,20,0.16)",
+    // Borders
+    border: "#D8D8D8",
+    borderSubtle: "#D8D8D8",
+    borderStrong: "#A3A3A3",
+    borderDisabled: "#D8D8D8",
 
-    // Focus color (from Figma: node 120:927 - Accessible blue)
-    focus: "#2684FF",
+    // Focus
+    focus: "#2F31FC",
 
     // Semantic colors
     danger: "#D90429",
-    success: "#00875A",
-    warning: "#FFB703",
+    success: "#006633",
+    warning: "#B45309",
   },
   font: {
     primary: "'Instrument Sans', Inter, system-ui, sans-serif",
@@ -89,43 +89,43 @@ export const lightThemeDefaults: Theme = {
 /**
  * Dark theme defaults.
  * Uses light text on dark backgrounds.
- * Colors are inverted from light theme for optimal dark mode experience.
+ * Colors mapped from docs/marwes-colors.json.
  */
 export const darkThemeDefaults: Theme = {
   mode: ThemeMode.dark,
 
   color: {
-    // Primary — firstEdition brand blue in dark mode as well
-    primary: "#2F31FC",
+    // Primary
+    primary: "#5859FC",
 
-    // Background & Surface - Inverted
-    background: "#141414",
-    surface: "#141414",
-    surfaceSubtle: "#111827",
-    surfaceElevated: "#1F2937",
-    surfaceDisabled: "#3E3E3E",
-    surfaceInverted: "#F9FAFB",
+    // Background & Surface
+    background: "#0F0F0F",
+    surface: "#1A1A1A",
+    surfaceSubtle: "#050505",
+    surfaceElevated: "#2B2B2B",
+    surfaceDisabled: "#1A1A1A",
+    surfaceInverted: "#FFFFFF",
 
-    // Text - Inverted
+    // Text
     text: "#F9FAFB",
-    textMuted: "#9CA3AF",
-    textSubtle: "#6B7280",
-    textDisabled: "rgba(249,250,251,0.4)",
+    textMuted: "#A3A3A3",
+    textSubtle: "#595959",
+    textDisabled: "#595959",
     textInverted: "#141414",
 
-    // Borders - Adjusted for dark mode
-    border: "#d9d9d9",
-    borderSubtle: "#d4d4d433",
-    borderStrong: "#F9FAFB",
-    borderDisabled: "rgba(255,255,255,0.16)",
+    // Borders
+    border: "#474747",
+    borderSubtle: "#474747",
+    borderStrong: "#A3A3A3",
+    borderDisabled: "#474747",
 
-    // Focus color - Same accessible blue works in both modes
-    focus: "#2684FF",
+    // Focus
+    focus: "#8182FC",
 
     // Semantic colors
-    danger: "#D90429",
-    success: "#00875A",
-    warning: "#FFB703",
+    danger: "#FF002C",
+    success: "#90CAAD",
+    warning: "#FCC94A",
   },
 
   font: {

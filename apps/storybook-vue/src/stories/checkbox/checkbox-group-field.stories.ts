@@ -1,4 +1,4 @@
-import { storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { CheckboxGroupFieldProps } from "@marwes-ui/vue"
 import { CheckboxGroupField, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -19,7 +19,10 @@ const selectAllChildOptions = [
 const meta: Meta<CheckboxGroupFieldProps> = {
   title: "Checkbox/Molecule/CheckboxGroupField",
   component: CheckboxGroupField as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
     label: "Notification preferences",

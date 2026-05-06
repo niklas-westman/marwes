@@ -1,7 +1,9 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import type { SelectFieldProps } from "@marwes-ui/vue"
 import { Paragraph, SelectField } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { computed, ref } from "vue"
+import "./select-field.stories.css"
 
 const options = [
   { value: "se", label: "Sweden" },
@@ -10,32 +12,7 @@ const options = [
 ]
 
 const FIGMA_DROPDOWN_NODE = "1364:7701"
-const DEMO_WIDTH = "89px"
 const SELECT_FIELD_LABEL = "Option"
-const selectFieldStoryStyles = `
-  .mw-select-field-story-preview {
-    width: ${DEMO_WIDTH};
-    min-width: ${DEMO_WIDTH};
-    max-width: ${DEMO_WIDTH};
-    inline-size: ${DEMO_WIDTH};
-    min-inline-size: ${DEMO_WIDTH};
-    max-inline-size: ${DEMO_WIDTH};
-  }
-
-  .mw-select-field-story-preview .mw-input-field,
-  .mw-select-field-story-preview .mw-input-field__input-wrapper,
-  .mw-select-field-story-preview .mw-select-field__control,
-  .mw-select-field-story-preview .mw-select-field__trigger,
-  .mw-select-field-story-preview .mw-select__control,
-  .mw-select-field-story-preview .mw-select {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    inline-size: 100%;
-    min-inline-size: 0;
-    max-inline-size: 100%;
-  }
-`
 
 type SelectFieldStoryArgs = SelectFieldProps & {
   native: boolean
@@ -45,6 +22,7 @@ const meta = {
   title: "Input/Molecule/SelectField",
   component: SelectField as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
     docs: {
       description: {
@@ -91,7 +69,6 @@ const meta = {
       return { fieldArgs }
     },
     template: `
-      <style>${selectFieldStoryStyles}</style>
       <div class="mw-select-field-story-preview">
         <SelectField v-bind="fieldArgs" />
       </div>
@@ -160,7 +137,6 @@ export const Controlled: Story = {
     },
     template: `
       <div style="display: grid; gap: 16px; justify-items: start;">
-        <style>${selectFieldStoryStyles}</style>
         <div class="mw-select-field-story-preview">
           <SelectField v-bind="fieldArgs" v-model="value" />
         </div>

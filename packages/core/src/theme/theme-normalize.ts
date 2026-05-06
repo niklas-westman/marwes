@@ -1,8 +1,89 @@
-import { normalizeColorInput, resolveInfoRole, resolveSecondaryRole } from "./color-resolve"
+import {
+  type ColorInput,
+  normalizeColorInput,
+  resolveInfoRole,
+  resolveSecondaryRole,
+} from "./color-resolve"
 import type { ResolvedTheme } from "./theme-css"
 import { darkThemeDefaults, lightThemeDefaults } from "./theme-defaults"
 import { type ThemeInput, ThemeMode } from "./theme-types"
 import { resolveTone } from "./tone"
+
+const lightDefaultColorRoles = {
+  primary: {
+    base: "#2F31FC",
+    hover: "#2527CA",
+    pressed: "#1B1D97",
+    disabled: "#8182FC",
+    label: "#FFFFFF",
+    labelDisabled: "rgba(255,255,255,0.5)",
+  },
+  secondary: {
+    hover: "#EEEEFF",
+    pressed: "#D4D5FE",
+    label: "#2F31FC",
+    labelDisabled: "rgba(47,49,252,0.5)",
+    border: "#2F31FC",
+    borderDisabled: "#8182FC",
+  },
+  danger: {
+    base: "#D90429",
+    hover: "#A8031F",
+    pressed: "#780215",
+    disabled: "#FF8A95",
+    label: "#FFFFFF",
+    labelDisabled: "rgba(255,255,255,0.5)",
+  },
+  success: {
+    base: "#006633",
+  },
+  warning: {
+    base: "#B45309",
+  },
+  info: {
+    base: "#2F31FC",
+  },
+} satisfies Record<"primary" | "danger" | "success" | "warning" | "info", ColorInput> & {
+  secondary: Partial<ReturnType<typeof resolveSecondaryRole>>
+}
+
+const darkDefaultColorRoles = {
+  primary: {
+    base: "#2F31FC",
+    hover: "#5859FC",
+    pressed: "#8182FC",
+    disabled: "#121365",
+    label: "#FFFFFF",
+    labelDisabled: "rgba(255,255,255,0.5)",
+  },
+  secondary: {
+    hover: "#090A32",
+    pressed: "#121365",
+    label: "#8182FC",
+    labelDisabled: "rgba(129,130,252,0.5)",
+    border: "#8182FC",
+    borderDisabled: "#121365",
+  },
+  danger: {
+    base: "#FF002C",
+    hover: "#FF2847",
+    pressed: "#FF5566",
+    disabled: "#48010D",
+    label: "#FFFFFF",
+    labelDisabled: "rgba(255,255,255,0.5)",
+  },
+  success: {
+    base: "#90CAAD",
+  },
+  warning: {
+    base: "#FCC94A",
+  },
+  info: {
+    base: "#8182FC",
+  },
+} satisfies Record<"primary" | "danger" | "success" | "warning" | "info", ColorInput> & {
+  secondary: Partial<ReturnType<typeof resolveSecondaryRole>>
+}
 
 /**
  * Converts a consumer ThemeInput into a fully-resolved ResolvedTheme.
@@ -16,24 +97,33 @@ import { resolveTone } from "./tone"
 export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
   const mode = input.mode ?? ThemeMode.light
   const colorBase = mode === ThemeMode.dark ? darkThemeDefaults.color : lightThemeDefaults.color
+  const defaultColorRoles = mode === ThemeMode.dark ? darkDefaultColorRoles : lightDefaultColorRoles
   const base = lightThemeDefaults
 
   const tone = resolveTone(input.tone ?? "default")
 
-  const primary = normalizeColorInput(input.color?.primary ?? colorBase.primary)
-  const danger = normalizeColorInput(input.color?.danger ?? colorBase.danger)
-  const success = normalizeColorInput(input.color?.success ?? colorBase.success)
-  const warning = normalizeColorInput(input.color?.warning ?? colorBase.warning)
+  const primary = normalizeColorInput(input.color?.primary ?? defaultColorRoles.primary)
+  const secondary =
+    input.color?.primary === undefined
+      ? resolveSecondaryRole(primary, defaultColorRoles.secondary)
+      : resolveSecondaryRole(primary)
+  const danger = normalizeColorInput(input.color?.danger ?? defaultColorRoles.danger)
+  const success = normalizeColorInput(input.color?.success ?? defaultColorRoles.success)
+  const warning = normalizeColorInput(input.color?.warning ?? defaultColorRoles.warning)
+  const info =
+    input.color?.primary === undefined
+      ? normalizeColorInput(defaultColorRoles.info)
+      : resolveInfoRole(primary)
 
   return {
     mode,
     color: {
       primary,
-      secondary: resolveSecondaryRole(primary),
+      secondary,
       danger,
       success,
       warning,
-      info: resolveInfoRole(primary),
+      info,
       background: input.color?.background ?? colorBase.background,
       surface: input.color?.surface ?? colorBase.surface,
       surfaceSubtle: input.color?.surfaceSubtle ?? colorBase.surfaceSubtle,

@@ -1,4 +1,4 @@
-import { AvatarSize, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { PresenceAvatar } from "@marwes-ui/vue"
 import type { PresenceAvatarProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +6,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Avatar/Purpose/PresenceAvatar",
   component: PresenceAvatar as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<PresenceAvatarProps>
 

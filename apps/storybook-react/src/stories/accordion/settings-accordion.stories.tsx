@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { SettingsAccordion } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
@@ -15,7 +15,10 @@ const settingsItems = [
 const meta: Meta<typeof SettingsAccordion> = {
   title: "Accordion/Purpose/Settings",
   component: SettingsAccordion,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   decorators: [
     (Story) => (

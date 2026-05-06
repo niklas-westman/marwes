@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { ToastContainer, type ToastContainerProps, ToastProvider, useToast } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import type * as React from "react"
@@ -6,7 +6,10 @@ import type * as React from "react"
 const meta: Meta<typeof ToastContainer> = {
   title: "Toast/Molecule",
   component: ToastContainer,
-  parameters: storybookLayout.fullscreen,
+  parameters: {
+    ...storybookLayout.fullscreen,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Button, ButtonSpinner } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
@@ -16,7 +16,11 @@ const stageStyle = {
 const meta = {
   title: "Spinner/Molecule/ButtonSpinner",
   component: ButtonSpinner,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args) => (
     <div style={stageStyle}>

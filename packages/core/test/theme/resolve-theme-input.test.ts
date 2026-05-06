@@ -15,7 +15,7 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).color.primary.base).toBe("#2F31FC")
   })
 
-  it("dark mode default: primary base is firstEdition brand blue", () => {
+  it("dark mode default: primary base follows the source action token", () => {
     expect(resolveThemeInput({ mode: ThemeMode.dark }).color.primary.base).toBe("#2F31FC")
   })
 
@@ -27,8 +27,8 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).color.background).toBe("#FFFFFF")
   })
 
-  it("dark mode default background is #141414", () => {
-    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.background).toBe("#141414")
+  it("dark mode default background follows the source surface token", () => {
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.background).toBe("#0F0F0F")
   })
 
   it("default ui.radius is 4", () => {
@@ -39,8 +39,16 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).font.primary).toContain("Instrument Sans")
   })
 
-  it("default success base is firstEdition green", () => {
-    expect(resolveThemeInput({}).color.success.base).toBe("#00875A")
+  it("default success base follows the source status text token", () => {
+    expect(resolveThemeInput({}).color.success.base).toBe("#006633")
+  })
+
+  it("default warning base follows the source status text token", () => {
+    expect(resolveThemeInput({}).color.warning.base).toBe("#B45309")
+  })
+
+  it("default muted text follows the source secondary text token", () => {
+    expect(resolveThemeInput({}).color.textMuted).toBe("#595959")
   })
 
   it("default typography.h1.fontSize is 32", () => {

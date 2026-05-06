@@ -70,7 +70,7 @@
     var(--mw-color-warning-base) 50%,
     var(--mw-color-border-subtle)
   );
-  --mw-badge-label: var(--mw-color-warning-base);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 80%, var(--mw-color-text));
 }
 
 .mw-badge--error {
@@ -80,7 +80,7 @@
     var(--mw-color-danger-base) 45%,
     var(--mw-color-border-subtle)
   );
-  --mw-badge-label: var(--mw-color-danger-base);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));
 }
 
 /* ============================================
@@ -100,7 +100,7 @@
     var(--mw-color-info-base) 55%,
     var(--mw-color-border-subtle)
   );
-  --mw-badge-label: var(--mw-color-info-base);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-info-base) 80%, var(--mw-color-text));
 }
 
 .mw-theme--dark .mw-badge--success {
@@ -130,7 +130,7 @@
     var(--mw-color-danger-base) 55%,
     var(--mw-color-border-subtle)
   );
-  --mw-badge-label: var(--mw-color-danger-base);
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 70%, var(--mw-color-text));
 }
 
 .mw-badge-group__items {

@@ -95,7 +95,7 @@
 
 .mw-toast__action-button:focus-visible,
 .mw-toast__action :where(a, button):focus-visible {
-  outline: 2px solid var(--mw-color-focus, #2684ff);
+  outline: 2px solid var(--mw-color-focus, #2f31fc);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -217,16 +217,16 @@
   --mw-toast-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));
   --mw-toast-border: var(--mw-color-warning-base);
   --mw-toast-icon: var(--mw-color-warning-base);
-  --mw-toast-text: var(--mw-color-warning-base);
-  --mw-toast-action: var(--mw-color-warning-base);
+  --mw-toast-text: color-mix(in srgb, var(--mw-color-warning-base) 80%, var(--mw-color-text));
+  --mw-toast-action: color-mix(in srgb, var(--mw-color-warning-base) 80%, var(--mw-color-text));
 }
 
 .mw-toast--rich[data-intent="error"] {
   --mw-toast-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));
   --mw-toast-border: var(--mw-color-danger-base);
   --mw-toast-icon: var(--mw-color-danger-base);
-  --mw-toast-text: var(--mw-color-danger-base);
-  --mw-toast-action: var(--mw-color-danger-base);
+  --mw-toast-text: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));
+  --mw-toast-action: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));
 }
 
 /* --------------------------------------------

@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import type { InputFieldProps } from "@marwes-ui/vue"
 import { InputField, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,6 +8,7 @@ const meta = {
   title: "Input/Molecule/InputField",
   component: InputField as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],

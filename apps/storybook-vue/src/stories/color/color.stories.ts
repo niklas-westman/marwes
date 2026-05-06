@@ -1,4 +1,9 @@
-import { ThemeMode, storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
+import {
+  ThemeMode,
+  storybookA11yPolicy,
+  storybookDocsDescription,
+  storybookLayout,
+} from "@marwes-ui/core"
 import { Button, H2, H3, MarwesProvider, Paragraph, useTheme, useThemeMode } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent } from "vue"
@@ -10,6 +15,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
     docs: {
       description: {
         component: storybookDocsDescription.colors,

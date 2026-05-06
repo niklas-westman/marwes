@@ -1,15 +1,58 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { TabProps } from "@marwes-ui/vue"
 import { Tab } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
-import { ref } from "vue"
+import { defineComponent, h, ref } from "vue"
+
+const AtomTabPreview = defineComponent({
+  name: "AtomTabPreview",
+  components: { Tab },
+  props: {
+    selected: Boolean,
+    disabled: Boolean,
+    ariaLabel: String,
+    ariaControls: String,
+  },
+  setup(props, { slots }) {
+    const generatedPanelId = `panel-atom-tab-${Math.random().toString(36).slice(2)}`
+
+    return () => {
+      const panelId = props.ariaControls ?? generatedPanelId
+
+      return h("div", [
+        h("div", { role: "tablist", "aria-label": "Example tab" }, [
+          h(
+            Tab,
+            {
+              selected: props.selected,
+              disabled: props.disabled,
+              ariaControls: panelId,
+              ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
+            },
+            slots,
+          ),
+        ]),
+        h("div", {
+          id: panelId,
+          role: "tabpanel",
+          "aria-label": "Example tab panel",
+          hidden: !props.selected,
+        }),
+      ])
+    }
+  },
+})
 
 const meta = {
   title: "Tab/Atom",
   component: Tab as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
+    ...storybookA11yPolicy.smoke,
     selected: { control: "boolean" },
     disabled: { control: "boolean" },
     ariaLabel: { control: "text" },
@@ -22,29 +65,29 @@ type Story = StoryObj<TabProps>
 
 export const Default: Story = {
   render: () => ({
-    components: { Tab },
-    template: "<Tab>Overview</Tab>",
+    components: { AtomTabPreview },
+    template: "<AtomTabPreview>Overview</AtomTabPreview>",
   }),
 }
 
 export const Selected: Story = {
   render: () => ({
-    components: { Tab },
-    template: `<Tab :selected="true">Overview</Tab>`,
+    components: { AtomTabPreview },
+    template: `<AtomTabPreview :selected="true">Overview</AtomTabPreview>`,
   }),
 }
 
 export const Disabled: Story = {
   render: () => ({
-    components: { Tab },
-    template: `<Tab :disabled="true">Settings</Tab>`,
+    components: { AtomTabPreview },
+    template: `<AtomTabPreview :disabled="true">Settings</AtomTabPreview>`,
   }),
 }
 
 export const IconOnly: Story = {
   render: () => ({
-    components: { Tab },
-    template: `<Tab ariaLabel="Settings" ariaControls="panel-settings"><span aria-hidden="true">⚙️</span></Tab>`,
+    components: { AtomTabPreview },
+    template: `<AtomTabPreview ariaLabel="Settings" ariaControls="panel-settings"><span aria-hidden="true">⚙️</span></AtomTabPreview>`,
   }),
 }
 
@@ -57,16 +100,27 @@ export const TabBar: Story = {
       return { active, tabs }
     },
     template: `
-      <div role="tablist" aria-label="Example tabs" style="display: flex; border-bottom: 1px solid #e5e7eb;">
-        <Tab
+      <div>
+        <div role="tablist" aria-label="Example tabs" style="display: flex; border-bottom: 1px solid #e5e7eb;">
+          <Tab
+            v-for="(label, i) in tabs"
+            :key="label"
+            :selected="active === i"
+            :ariaControls="'panel-' + i"
+            @click="active = i"
+          >
+            {{ label }}
+          </Tab>
+        </div>
+        <div
           v-for="(label, i) in tabs"
-          :key="label"
-          :selected="active === i"
-          :ariaControls="'panel-' + i"
-          @click="active = i"
+          :key="'panel-' + label"
+          :id="'panel-' + i"
+          role="tabpanel"
+          :hidden="active !== i"
         >
           {{ label }}
-        </Tab>
+        </div>
       </div>
     `,
   }),
@@ -74,20 +128,20 @@ export const TabBar: Story = {
 
 export const AllStates: Story = {
   render: () => ({
-    components: { Tab },
+    components: { AtomTabPreview, Tab },
     template: `
       <div style="display: flex; flex-direction: column; gap: 16px;">
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Default / Inactive</p>
-          <Tab>Overview</Tab>
+          <AtomTabPreview>Overview</AtomTabPreview>
         </div>
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Selected</p>
-          <Tab :selected="true">Overview</Tab>
+          <AtomTabPreview :selected="true">Overview</AtomTabPreview>
         </div>
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Disabled</p>
-          <Tab :disabled="true">Settings</Tab>
+          <AtomTabPreview :disabled="true">Settings</AtomTabPreview>
         </div>
         <div>
           <p style="margin-bottom: 8px; font-size: 12px; color: #6b7280;">Tab bar</p>
@@ -96,6 +150,9 @@ export const AllStates: Story = {
             <Tab ariaControls="panel-1">Activity</Tab>
             <Tab :disabled="true" ariaControls="panel-2">Settings</Tab>
           </div>
+          <div id="panel-0" role="tabpanel">Overview</div>
+          <div id="panel-1" role="tabpanel" hidden>Activity</div>
+          <div id="panel-2" role="tabpanel" hidden>Settings</div>
         </div>
       </div>
     `,

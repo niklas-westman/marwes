@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { NavigationTabsProps } from "@marwes-ui/vue"
 import { NavigationTabs } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,9 +6,13 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Tab/Purpose/NavigationTabs",
   component: NavigationTabs as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args: NavigationTabsProps) => ({
+    ...storybookA11yPolicy.smoke,
     components: { NavigationTabs },
     setup() {
       return { args }

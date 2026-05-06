@@ -6,6 +6,8 @@ import { Select } from "./select"
 import type { SelectProps } from "./select"
 import { SelectArrowIcon } from "./select-arrow-icon"
 
+export type SelectFieldVariant = "default" | "date"
+
 export type SelectFieldProps = {
   id?: string
   label: string
@@ -13,6 +15,7 @@ export type SelectFieldProps = {
   error?: string
   select: SelectProps
   ariaDescribedBy?: string
+  variant?: SelectFieldVariant
 }
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -91,11 +94,12 @@ function getNextEnabledOptionIndex(
 
 type MarwesSelectFieldControlProps = {
   id: string
+  label?: string
   select: SelectProps
 }
 
 function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.ReactElement {
-  const { id, select } = props
+  const { id, label, select } = props
   const listboxId = `${id}-listbox`
   const isControlled = select.value !== undefined
   const [internalValue, setInternalValue] = React.useState(() => getInitialSelectValue(select))
@@ -112,6 +116,10 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
     (select.placeholder === undefined ? select.options[0] : undefined)
   const placeholderSelected = select.placeholder !== undefined && value === ""
   const displayText = placeholderSelected ? select.placeholder : (selectedOption?.label ?? "")
+  const accessibleName =
+    select.ariaLabel ??
+    (hasTextContent(label) ? label : undefined) ??
+    (hasTextContent(displayText) ? displayText : undefined)
 
   React.useEffect(() => {
     if (!open) {
@@ -271,6 +279,7 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
         aria-controls={listboxId}
         aria-expanded={open}
         aria-haspopup="listbox"
+        aria-label={accessibleName}
         aria-describedby={select.describedBy}
         aria-invalid={select.invalid ? "true" : undefined}
         aria-required={select.required ? "true" : undefined}
@@ -387,6 +396,7 @@ export function SelectField(props: SelectFieldProps): React.ReactElement {
     "mw-input-field",
     "mw-input-field--select",
     mode === "marwes" && "mw-input-field--select-marwes",
+    props.variant === "date" && "mw-input-field--select-date",
     disabled && "mw-input-field--disabled",
     invalid && "mw-input-field--invalid",
   )
@@ -411,7 +421,7 @@ export function SelectField(props: SelectFieldProps): React.ReactElement {
         {mode === "native" ? (
           <Select {...selectProps} native />
         ) : (
-          <MarwesSelectFieldControl id={id} select={selectProps} />
+          <MarwesSelectFieldControl id={id} label={props.label} select={selectProps} />
         )}
       </div>
 

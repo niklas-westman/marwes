@@ -1,0 +1,95 @@
+/*
+ * Skeleton styles
+ * Figma reference:
+ * - page frame: .figma/marwes/pages/skeleton/skeleton_1921-34816.json
+ * - text: 120×12, radius 4, black 4% opacity
+ * - dark mode: lifted neutral fill against dark surfaces
+ * - circular: 40×40, radius 100
+ * - rectangular: 120×120, radius 4
+ */
+
+.mw-skeleton {
+  --mw-skeleton-base-color: color-mix(in srgb, var(--mw-color-text, #141414) 4%, transparent);
+  --mw-skeleton-highlight-color: color-mix(
+    in srgb,
+    var(--mw-color-text-inverted, #ffffff) 24%,
+    var(--mw-skeleton-base-color)
+  );
+
+  display: inline-block;
+  inline-size: var(--mw-skeleton-width, 120px);
+  block-size: var(--mw-skeleton-height, 12px);
+  min-inline-size: 1px;
+  min-block-size: 1px;
+  border-radius: var(--mw-skeleton-radius, 4px);
+  background: var(--mw-skeleton-base-color);
+  overflow: hidden;
+  vertical-align: middle;
+  flex: none;
+}
+
+.mw-theme--dark .mw-skeleton {
+  --mw-skeleton-base-color: color-mix(
+    in srgb,
+    var(--mw-color-text, #f9fafb) 12%,
+    var(--mw-color-surface-elevated, #2b2b2b)
+  );
+  --mw-skeleton-highlight-color: color-mix(
+    in srgb,
+    var(--mw-color-text, #f9fafb) 24%,
+    var(--mw-skeleton-base-color)
+  );
+}
+
+.mw-skeleton--text {
+  transform-origin: 0 55%;
+}
+
+.mw-skeleton--circular {
+  border-radius: 9999px;
+}
+
+.mw-skeleton--pulse {
+  animation: mw-skeleton-pulse 1400ms ease-in-out 500ms infinite;
+}
+
+.mw-skeleton--wave {
+  position: relative;
+}
+
+.mw-skeleton--wave::after {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--mw-skeleton-highlight-color), transparent);
+  animation: mw-skeleton-wave 1600ms linear 500ms infinite;
+  content: "";
+}
+
+@keyframes mw-skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.48;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes mw-skeleton-wave {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mw-skeleton--pulse {
+    animation-duration: 2400ms;
+  }
+
+  .mw-skeleton--wave::after {
+    animation-duration: 2600ms;
+  }
+}

@@ -136,7 +136,7 @@ export const DialogModal = defineComponent(
 
     const footerContent = computed<VNodeChild | undefined>(() => {
       if (slots.footer) {
-        return slots.footer()
+        return slots.footer({ close })
       }
 
       if (typeof props.footer === "function") {

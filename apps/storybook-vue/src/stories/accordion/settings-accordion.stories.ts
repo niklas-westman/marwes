@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { SettingsAccordionProps } from "@marwes-ui/vue"
 import { SettingsAccordion } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -16,9 +16,17 @@ const settingsItems = [
 const meta = {
   title: "Accordion/Purpose/Settings",
   component: SettingsAccordion as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
-  decorators: [() => ({ template: '<div style="width: 100%; max-width: 640px"><story /></div>' })],
+  decorators: [
+    () => ({
+      ...storybookA11yPolicy.smoke,
+      template: '<div style="width: 66vw"><story /></div>',
+    }),
+  ],
 } satisfies Meta<SettingsAccordionProps>
 
 export default meta

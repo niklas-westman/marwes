@@ -1,0 +1,137 @@
+/*
+ * Stat Tile component styles
+ * Figma refs:
+ * - stat tile component: 1411:6857
+ * - color/tone instances: 2512:27384, 2512:27391, 2512:27405, 2512:27412
+ * - trend part: 2695:25437
+ */
+
+.mw-stat-tile {
+  --mw-stat-tile-surface: var(--mw-color-surface-elevated, #ffffff);
+  --mw-stat-tile-border: var(--mw-color-border-subtle, #d8d8d8);
+  --mw-stat-tile-text: var(--mw-color-text, #141414);
+  --mw-stat-tile-muted: var(--mw-color-text-muted, #595959);
+  --mw-stat-tile-trend: var(--mw-stat-tile-muted);
+  --mw-stat-tile-radius: 24px;
+
+  display: flex;
+  width: var(--mw-stat-tile-width, 280px);
+  min-width: 0;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: var(--mw-spacing-sp-8, 8px);
+  padding: var(--mw-spacing-sp-24, 24px);
+  color: var(--mw-stat-tile-text);
+  background: var(--mw-stat-tile-surface);
+  border: 1px solid var(--mw-stat-tile-border);
+  border-radius: var(--mw-stat-tile-radius);
+  font-family: var(--mw-font-primary, inherit);
+}
+
+.mw-stat-tile--brand {
+  --mw-stat-tile-surface: var(--mw-stat-tile-tone-surface, #eeeeff);
+  --mw-stat-tile-border: var(--mw-stat-tile-tone-border, #ababfd);
+  --mw-stat-tile-text: var(--mw-stat-tile-tone-text, #1b1d97);
+  --mw-stat-tile-muted: var(--mw-stat-tile-tone-muted, #1b1d97);
+  --mw-stat-tile-trend: var(--mw-stat-tile-tone-trend, #2527ca);
+}
+
+.mw-stat-tile--success {
+  --mw-stat-tile-surface: var(--mw-stat-tile-tone-surface, #e6f4ed);
+  --mw-stat-tile-border: var(--mw-stat-tile-tone-border, #90caad);
+  --mw-stat-tile-text: var(--mw-stat-tile-tone-text, #006633);
+  --mw-stat-tile-muted: var(--mw-stat-tile-tone-muted, #006633);
+  --mw-stat-tile-trend: var(--mw-stat-tile-tone-trend, #006d48);
+}
+
+.mw-stat-tile--warning {
+  --mw-stat-tile-surface: var(--mw-stat-tile-tone-surface, #fff8e6);
+  --mw-stat-tile-border: var(--mw-stat-tile-tone-border, #fde08a);
+  --mw-stat-tile-text: var(--mw-stat-tile-tone-text, #b45309);
+  --mw-stat-tile-muted: var(--mw-stat-tile-tone-muted, #b45309);
+  --mw-stat-tile-trend: var(--mw-stat-tile-tone-trend, #b45309);
+}
+
+.mw-stat-tile--danger {
+  --mw-stat-tile-surface: var(--mw-stat-tile-tone-surface, #ffe8eb);
+  --mw-stat-tile-border: var(--mw-stat-tile-tone-border, #ff8a95);
+  --mw-stat-tile-text: var(--mw-stat-tile-tone-text, #a8031f);
+  --mw-stat-tile-muted: var(--mw-stat-tile-tone-muted, #a8031f);
+  --mw-stat-tile-trend: var(--mw-stat-tile-tone-trend, #a8031f);
+}
+
+.mw-stat-tile__header {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mw-spacing-sp-8, 8px);
+}
+
+.mw-stat-tile__label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--mw-stat-tile-muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mw-stat-tile__trend {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--mw-spacing-sp-4, 4px);
+  box-sizing: border-box;
+  color: var(--mw-stat-tile-trend);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.mw-stat-tile__trend-icon {
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.mw-stat-tile__value {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--mw-stat-tile-text);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 30px;
+}
+
+.mw-stat-tile__subtitle {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--mw-stat-tile-muted);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mw-theme--dark
+  .mw-stat-tile:not(
+    .mw-stat-tile--brand,
+    .mw-stat-tile--success,
+    .mw-stat-tile--warning,
+    .mw-stat-tile--danger
+  ) {
+  --mw-stat-tile-surface: var(--mw-color-surface-elevated, #2e2e2e);
+  --mw-stat-tile-border: var(--mw-color-border-subtle, #474747);
+  --mw-stat-tile-text: var(--mw-color-text, #f9fafb);
+  --mw-stat-tile-muted: var(--mw-color-text-muted, #a3a3a3);
+}

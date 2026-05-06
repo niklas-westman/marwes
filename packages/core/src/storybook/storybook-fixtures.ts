@@ -86,6 +86,76 @@ export const storybookSpinnerArgTypes = {
   },
 } as const
 
+export const storybookSkeletonArgTypes = {
+  variant: {
+    control: "select",
+    options: ["text", "circular", "rectangular"],
+    description: "Skeleton shape from the synced Skeleton page",
+  },
+  animation: {
+    control: "select",
+    options: ["pulse", "wave", "none"],
+    description: "Visual loading animation",
+  },
+  width: {
+    control: "text",
+    description: "Width override; numbers in code are treated as pixels",
+  },
+  height: {
+    control: "text",
+    description: "Height override; numbers in code are treated as pixels",
+  },
+  radius: {
+    control: "text",
+    description: "Corner radius override; circular skeletons force a full radius",
+  },
+  decorative: {
+    control: "boolean",
+    description:
+      "Hide the skeleton from assistive technology when surrounding UI already communicates loading",
+  },
+  ariaLabel: {
+    control: "text",
+    description: "Accessible label for standalone loading placeholder groups",
+  },
+} as const
+
+export const storybookStatTileArgTypes = {
+  tone: {
+    control: "select",
+    options: ["neutral", "brand", "success", "warning", "danger"],
+    description: "Color treatment from the synced Stat Tile Figma instances",
+  },
+  trendDirection: {
+    control: "select",
+    options: [undefined, "positive", "negative"],
+    description: "Trend direction for the compact trend pill",
+  },
+  trendValue: {
+    control: "text",
+    description: "Compact trend value, for example 12%",
+  },
+  label: { control: "text" },
+  value: { control: "text" },
+  subtitle: { control: "text" },
+} as const
+
+export const storybookDatePickerArgTypes = {
+  device: {
+    control: "select",
+    options: ["desktop", "mobile"],
+    description: "Device variant from the synced Date Picker Figma component set",
+  },
+  monthLabel: { control: "text" },
+  calendarLabel: { control: "text" },
+  previousYearLabel: { control: "text" },
+  previousMonthLabel: { control: "text" },
+  nextMonthLabel: { control: "text" },
+  nextYearLabel: { control: "text" },
+  cancelLabel: { control: "text" },
+  applyLabel: { control: "text" },
+} as const
+
 export const storybookSpacingArgTypes = {
   size: {
     control: "select",

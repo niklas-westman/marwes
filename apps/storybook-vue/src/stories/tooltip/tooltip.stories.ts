@@ -1,4 +1,4 @@
-import { ThemeMode, storybookLayout } from "@marwes-ui/core"
+import { ThemeMode, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { TooltipProps } from "@marwes-ui/vue"
 import { MarwesProvider, Tooltip } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +6,10 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Tooltip/Atom",
   component: Tooltip as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<TooltipProps>
 

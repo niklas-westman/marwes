@@ -7,6 +7,8 @@ import { Paragraph } from "../paragraph"
 import { Select, type SelectProps } from "./select"
 import { SelectArrowIcon } from "./select-arrow-icon"
 
+export type SelectFieldVariant = "default" | "date"
+
 export type SelectFieldProps = {
   id?: string
   label: string
@@ -15,6 +17,7 @@ export type SelectFieldProps = {
   select: SelectProps
   ariaDescribedBy?: string
   modelValue?: string
+  variant?: SelectFieldVariant
 }
 
 const selectFieldPropKeys = [
@@ -25,6 +28,7 @@ const selectFieldPropKeys = [
   "select",
   "ariaDescribedBy",
   "modelValue",
+  "variant",
 ] as const
 
 function hasTextContent(value: string | undefined): boolean {
@@ -155,12 +159,19 @@ export const SelectField = defineComponent(
         ? (sourceSelect.value.placeholder ?? "")
         : (selectedOption.value?.label ?? ""),
     )
+    const accessibleName = computed(
+      () =>
+        sourceSelect.value.ariaLabel ??
+        (hasTextContent(props.label) ? props.label : undefined) ??
+        (hasTextContent(displayText.value) ? displayText.value : undefined),
+    )
 
     const wrapperClass = computed(() =>
       mergeClassNames(
         "mw-input-field",
         "mw-input-field--select",
         mode.value === "marwes" && "mw-input-field--select-marwes",
+        props.variant === "date" && "mw-input-field--select-date",
         disabled.value && "mw-input-field--disabled",
         invalid.value && "mw-input-field--invalid",
       ),
@@ -392,6 +403,7 @@ export const SelectField = defineComponent(
                       "aria-controls": `${id.value}-listbox`,
                       "aria-expanded": open.value ? "true" : "false",
                       "aria-haspopup": "listbox",
+                      "aria-label": accessibleName.value,
                       "aria-describedby": a11yIds.value.describedBy,
                       "aria-invalid": invalid.value ? "true" : undefined,
                       "aria-required": sourceSelect.value.required ? "true" : undefined,

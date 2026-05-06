@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { FAQAccordionProps } from "@marwes-ui/vue"
 import { FAQAccordion } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -16,9 +16,17 @@ const faqItems = [
 const meta = {
   title: "Accordion/Purpose/FAQ",
   component: FAQAccordion as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
-  decorators: [() => ({ template: '<div style="width: 100%; max-width: 640px"><story /></div>' })],
+  decorators: [
+    () => ({
+      ...storybookA11yPolicy.smoke,
+      template: '<div style="width: 66vw"><story /></div>',
+    }),
+  ],
 } satisfies Meta<FAQAccordionProps>
 
 export default meta

@@ -1,11 +1,14 @@
-import { AvatarSize, AvatarType, storybookLayout } from "@marwes-ui/core"
+import { AvatarSize, AvatarType, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { ProfileAvatar } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof ProfileAvatar> = {
   title: "Avatar/Purpose/ProfileAvatar",
   component: ProfileAvatar,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 }
 

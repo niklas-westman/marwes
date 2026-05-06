@@ -1,4 +1,4 @@
-import { storybookLayout, storybookSliderArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookSliderArgTypes } from "@marwes-ui/core"
 import type { SliderProps } from "@marwes-ui/vue"
 import { Slider } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -64,7 +64,11 @@ function renderSliderPreview(args: SliderProps) {
 const meta = {
   title: "Slider/Atom",
   component: Slider as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookSliderArgTypes,
   args: {

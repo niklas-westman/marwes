@@ -1,0 +1,22 @@
+.mw-select-field-story-preview {
+  width: 89px;
+  min-width: 89px;
+  max-width: 89px;
+  inline-size: 89px;
+  min-inline-size: 89px;
+  max-inline-size: 89px;
+}
+
+.mw-select-field-story-preview .mw-input-field,
+.mw-select-field-story-preview .mw-input-field__input-wrapper,
+.mw-select-field-story-preview .mw-select-field__control,
+.mw-select-field-story-preview .mw-select-field__trigger,
+.mw-select-field-story-preview .mw-select__control,
+.mw-select-field-story-preview .mw-select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}

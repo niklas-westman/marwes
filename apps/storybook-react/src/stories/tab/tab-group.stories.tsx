@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { TabGroup } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -24,7 +24,10 @@ const accountTabs = [
 const meta: Meta<typeof TabGroup> = {
   title: "Tab/Molecule",
   component: TabGroup,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args) => (
     <div style={{ width: "min(66vw, 540px)" }}>

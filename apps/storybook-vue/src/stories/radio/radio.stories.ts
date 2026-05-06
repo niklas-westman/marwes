@@ -1,4 +1,4 @@
-import { storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
 import type { RadioProps } from "@marwes-ui/vue"
 import { Radio } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,7 +7,10 @@ import { ref } from "vue"
 const meta = {
   title: "Radio/Atom",
   component: Radio as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookRadioArgTypes,
 } satisfies Meta<RadioProps>

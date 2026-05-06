@@ -1,4 +1,4 @@
-import { SwitchSize, storybookLayout } from "@marwes-ui/core"
+import { SwitchSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { SwitchProps } from "@marwes-ui/vue"
 import { Switch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,9 +8,13 @@ import { createToggleableSwitchRender } from "./story-helpers"
 const meta = {
   title: "Switch/Atom",
   component: Switch as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
+    ...storybookA11yPolicy.smoke,
     checked: { control: "boolean" },
     disabled: { control: "boolean" },
     ariaLabel: { control: "text" },

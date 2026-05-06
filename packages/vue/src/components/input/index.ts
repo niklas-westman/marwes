@@ -17,7 +17,7 @@ export { InputOtp } from "./input-otp"
 export type { InputOtpProps } from "./input-otp"
 
 export { SelectField } from "./select-field"
-export type { SelectFieldProps } from "./select-field"
+export type { SelectFieldProps, SelectFieldVariant } from "./select-field"
 
 export { TextareaField } from "./textarea-field"
 export type { TextareaFieldProps } from "./textarea-field"

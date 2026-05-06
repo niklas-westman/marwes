@@ -1,4 +1,4 @@
-import { IconName, ThemeMode, storybookLayout } from "@marwes-ui/core"
+import { IconName, ThemeMode, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { ToastProps } from "@marwes-ui/vue"
 import {
   ErrorToast,
@@ -10,6 +10,7 @@ import {
   WarningToast,
 } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
+import "./toast-matrix.stories.css"
 
 type ToastVariant = NonNullable<ToastProps["variant"]>
 
@@ -69,7 +70,10 @@ const matrixToastClassName = "mw-toast--figma-matrix"
 const meta = {
   title: "Toast/Purpose/Matrix",
   component: InfoToast as unknown as object,
-  parameters: storybookLayout.fullscreen,
+  parameters: {
+    ...storybookLayout.fullscreen,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<ToastProps>
 
@@ -108,13 +112,6 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
           minHeight: '100vh',
           padding: '48px',
         }">
-          <style>
-            .${matrixToastClassName} {
-              width: 100%;
-              min-width: 0;
-              max-width: none;
-            }
-          </style>
           <div style="max-width: 1144px;">
             <h1 style="margin: 0; font-size: 32px; font-weight: 700; line-height: 38px; letter-spacing: -0.03em;">
               {{ title }}

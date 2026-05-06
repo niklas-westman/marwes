@@ -6,10 +6,11 @@ import { h, isVNode } from "vue"
 const withMarwes: Decorator = (story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
   const mode: ThemeMode = storybookTheme === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
+  const isDocs = context.viewMode === "docs"
 
   return {
     setup() {
-      return { mode }
+      return { isDocs, mode }
     },
     render() {
       const storyResult = story()
@@ -24,7 +25,7 @@ const withMarwes: Decorator = (story, context) => {
               "div",
               {
                 style: {
-                  minHeight: "100vh",
+                  minHeight: isDocs ? undefined : "100vh",
                   padding: "24px",
                   background: mode === ThemeMode.dark ? "#000000" : "#ffffff",
                 },
@@ -45,6 +46,12 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+    docs: {
+      codePanel: true,
+      source: {
+        excludeDecorators: true,
       },
     },
     // Default to off until a story or family is explicitly promoted into the

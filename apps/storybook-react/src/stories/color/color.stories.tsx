@@ -1,4 +1,4 @@
-import { storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookDocsDescription, storybookLayout } from "@marwes-ui/core"
 import {
   Button,
   H2,
@@ -17,6 +17,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
     docs: {
       description: {
         component: storybookDocsDescription.colors,

@@ -1,6 +1,8 @@
+React components for the Marwes design system with default styling, typed theme tokens, accessibility contracts, and AI-readable semantics.
+
 <div align="center">
 
-<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/banner.png" width="100%" style="border-radius: 40px;">
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/cover-v3.png" width="100%" style="border-radius: 40px;">
 
 <br>
 <br>
@@ -11,7 +13,7 @@
 
 React 18+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
-[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 

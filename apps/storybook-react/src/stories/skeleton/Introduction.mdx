@@ -1,0 +1,47 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Skeleton/Introduction" />
+
+# Skeleton Component
+
+Marwes provides `Skeleton` as a low-level placeholder atom for loading text, circular media, and rectangular content blocks. Use the atom for custom loading layouts, and use `Skeleton/Molecule` when you need a replica of an existing Marwes component.
+
+Skeletons should preserve the final layout as closely as possible. The goal is to avoid layout shift while making it obvious that content is still loading.
+
+## Atom Usage
+
+```tsx
+import { Skeleton } from "@marwes-ui/react"
+
+<Skeleton />
+<Skeleton variant="circular" />
+<Skeleton variant="rectangular" width={240} height={160} animation="wave" />
+```
+
+Use `variant="text"` for one-line copy placeholders, `variant="circular"` for avatars or icon media, and `variant="rectangular"` for cards, images, charts, and larger blocks.
+
+## Molecule Replicas
+
+`Skeleton/Molecule` contains ready-made loading replicas for common Marwes surfaces:
+
+- `CardSkeleton`
+- `StatTileSkeleton`
+- `InputFieldSkeleton`
+- `ToastSkeleton`
+- `ListCardSkeleton`
+- `ReplicaGallery`
+
+These replicas are intentionally built from existing Marwes shells where possible. For example, `CardSkeleton` uses the real `Card` wrapper and `StatTileSkeleton` uses the real `StatTile` wrapper, so spacing and tokens stay aligned with the live component.
+
+```tsx
+<CardSkeleton animation="pulse" />
+<StatTileSkeleton animation="wave" />
+```
+
+Create new replicas by matching the final component anatomy first, then replacing text, media, and actions with `Skeleton` atoms. Keep the outer shell stable when that shell controls layout, border, radius, or theme behavior.
+
+## Accessibility
+
+Skeletons are decorative by default because the loading state should usually be communicated by the surrounding section. Provide `ariaLabel` when a standalone skeleton group must announce loading status.
+
+For grouped loading UI, put `aria-busy="true"` and an accessible label on the surrounding region or component shell. Avoid announcing every individual placeholder; screen reader users need the loading state, not a list of placeholder shapes.

@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { EmptyStateSpinnerProps } from "@marwes-ui/vue"
 import { EmptyStateSpinner, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -6,7 +6,11 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Spinner/Molecule/EmptyStateSpinner",
   component: EmptyStateSpinner as unknown as object,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   render: (args: EmptyStateSpinnerProps) => ({
     components: { EmptyStateSpinner, Paragraph },

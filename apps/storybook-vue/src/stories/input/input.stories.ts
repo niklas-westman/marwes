@@ -1,3 +1,4 @@
+import { storybookA11yPolicy } from "@marwes-ui/core"
 import type { InputProps } from "@marwes-ui/vue"
 import { Input, Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -7,10 +8,12 @@ const meta = {
   title: "Input/Atom/Input",
   component: Input as unknown as object,
   parameters: {
+    ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],
   args: {
+    ariaLabel: "Text input",
     placeholder: "Enter text...",
   },
 } satisfies Meta<InputProps>

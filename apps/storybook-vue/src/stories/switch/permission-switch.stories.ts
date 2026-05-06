@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { PermissionSwitchProps } from "@marwes-ui/vue"
 import { PermissionSwitch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -8,7 +8,10 @@ import { createToggleableSwitchFieldRender } from "./story-helpers"
 const meta = {
   title: "Switch/Purpose/Permission",
   component: PermissionSwitch as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<PermissionSwitchProps>
 

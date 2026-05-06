@@ -1,4 +1,4 @@
-import { BadgeVariant, storybookLayout } from "@marwes-ui/core"
+import { BadgeVariant, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Badge, MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
@@ -8,7 +8,10 @@ const VARIANTS = Object.values(BadgeVariant)
 const meta: Meta<typeof Badge> = {
   title: "Badge/Atom",
   component: Badge,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: {
     variant: {

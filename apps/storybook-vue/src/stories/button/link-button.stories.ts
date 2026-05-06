@@ -1,4 +1,5 @@
 import {
+  storybookA11yPolicy,
   storybookButtonPurposeArgTypes,
   storybookDocsDescription,
   storybookLayout,
@@ -9,9 +10,13 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 const meta = {
   title: "Buttons/Purpose/LinkButton",
   component: LinkButton,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   args: {
+    ...storybookA11yPolicy.smoke,
     href: "#",
   },
   argTypes: storybookButtonPurposeArgTypes,

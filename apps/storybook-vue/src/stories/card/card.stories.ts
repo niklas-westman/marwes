@@ -1,4 +1,4 @@
-import { ThemeMode, storybookLayout } from "@marwes-ui/core"
+import { ThemeMode, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { CardProps } from "@marwes-ui/vue"
 import { Card, MarwesProvider } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
@@ -39,7 +39,10 @@ const cardStatePreviews: Array<{
 const meta = {
   title: "Card/Atom",
   component: Card as unknown as object,
-  parameters: storybookLayout.centered,
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<CardProps>
 

@@ -5,12 +5,13 @@ import type { Decorator, Preview } from "@storybook/react"
 const withMarwes: Decorator = (Story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
   const mode: ThemeMode = storybookTheme === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
+  const isDocs = context.viewMode === "docs"
 
   return (
     <MarwesProvider theme={{ mode }}>
       <div
         style={{
-          minHeight: "100vh",
+          minHeight: isDocs ? undefined : "100vh",
           padding: 24,
           background: mode === ThemeMode.dark ? "#000000" : "#ffffff",
         }}
@@ -28,6 +29,12 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+    docs: {
+      codePanel: true,
+      source: {
+        excludeDecorators: true,
       },
     },
     // Default to off until a story or family is explicitly promoted into the

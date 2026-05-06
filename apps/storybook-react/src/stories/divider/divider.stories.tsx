@@ -1,4 +1,4 @@
-import { storybookDividerArgTypes, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookDividerArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { DividerProps } from "@marwes-ui/react"
 import { Divider, H1, H2, H3, Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
@@ -52,7 +52,10 @@ function DividerPreview(args: DividerProps) {
 const meta = {
   title: "Divider/Atom",
   component: Divider,
-  parameters: storybookLayout.padded,
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
   argTypes: storybookDividerArgTypes,
   args: {
