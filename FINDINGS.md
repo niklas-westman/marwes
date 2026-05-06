@@ -129,6 +129,34 @@ Local validation showed the dependency image can run package tests with `0` pack
 
 This is the version that can show a PR-level benefit after the first dependency image exists, because source-only PRs should reuse the same GHCR image.
 
+## First GitHub Result
+
+On the first PR run for the dependency-image workflow, GitHub had to build and push the dependency image because it did not exist yet.
+
+Observed job times:
+
+```text
+Normal CI:
+  lint-typecheck-test-build: 3m07s
+
+Full Docker CI image:
+  build and push image: 38s
+  verify using image: 2m59s
+
+Dependency Image CI:
+  ensure dependency image: 41s
+  repo checks: 31s
+  typecheck: 55s
+  build: 1m23s
+  tests: 1m34s
+```
+
+First signal:
+
+- The dependency-image workflow already completed close to normal CI even while paying its first image build cost.
+- Its validation work is split, so wall-clock time is bounded by the slowest validation job instead of one long serial job.
+- The next source-only PR run is the important benchmark. It should reuse the existing dependency image and skip the `Build and push dependency image` step.
+
 ## Parallelization Option
 
 If we keep the full commit-specific image approach, the main optimization is to split verification into parallel jobs:
