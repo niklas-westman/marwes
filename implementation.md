@@ -66,7 +66,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
   Recommended:
 
   ```text
-  deps-node20-pnpm9-<hash>
+  deps-node24-pnpm9-<hash>
   ```
 
   Why: Dependency installs can differ across Node, pnpm, and base image versions. The key should change when those foundations change.

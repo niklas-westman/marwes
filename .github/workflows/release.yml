@@ -15,6 +15,9 @@ permissions:
   pull-requests: write
   id-token: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   # Run CI checks on the merged code and upload build artifacts
   ci:
@@ -44,7 +47,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
 
       # Fail with clear setup guidance before npm or Changesets produce indirect auth errors

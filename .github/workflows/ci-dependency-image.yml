@@ -12,6 +12,9 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   meta:
     name: dependency image metadata
@@ -47,15 +50,15 @@ jobs:
 
           dependency_key="$(
             {
-              echo "node=20"
+              echo "node=24"
               echo "pnpm=9.0.0"
               echo "$dependency_files" | sort | xargs sha256sum
             } | sha256sum | cut -d " " -f 1
           )"
 
-          image="ghcr.io/${repo}-ci-deps:deps-node20-pnpm9-${dependency_key}"
+          image="ghcr.io/${repo}-ci-deps:deps-node24-pnpm9-${dependency_key}"
 
-          echo "dependency_key=deps-node20-pnpm9-${dependency_key}" >> "$GITHUB_OUTPUT"
+          echo "dependency_key=deps-node24-pnpm9-${dependency_key}" >> "$GITHUB_OUTPUT"
           echo "image=${image}" >> "$GITHUB_OUTPUT"
 
           if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.event.pull_request.head.repo.full_name }}" != "${{ github.repository }}" ]]; then
@@ -97,7 +100,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Enable pnpm
         run: corepack enable && corepack prepare pnpm@9.0.0 --activate
