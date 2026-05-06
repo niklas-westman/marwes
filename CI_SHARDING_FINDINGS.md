@@ -84,14 +84,17 @@ The original sharded workflow did not include the Storybook a11y smoke check fro
 
 Add `test:storybook:a11y` as its own shard before considering this workflow as a replacement candidate.
 
+That shard needs explicit Playwright browser setup. `pnpm install` installs the Playwright package, but it does not guarantee Chromium exists on a fresh GitHub runner. Cache `~/.cache/ms-playwright` and run `pnpm exec playwright install --with-deps chromium` only for the Storybook a11y shard.
+
 ## Next Benchmark
 
-Push a commit with the a11y shard included and compare the third PR run.
+Push a commit with the a11y shard and Playwright setup included, then compare the third PR run.
 
 Why:
 
 - The sharded workflow should cover the same practical validation surface.
 - The extra a11y shard may become the new slowest shard.
+- The first a11y run may be slower while Chromium is downloaded; later runs should restore it from cache.
 - The workflow should still beat current CI after adding this coverage.
 
 If the sharded workflow still completes around 1 minute after adding a11y smoke, it is a strong candidate to replace the serial reusable CI job.
