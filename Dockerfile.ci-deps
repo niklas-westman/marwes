@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1.7
+
+ARG NODE_IMAGE=node:20-bookworm-slim
+
+FROM ${NODE_IMAGE} AS ci-deps
+
+ENV PNPM_HOME="/pnpm"
+ENV PNPM_STORE_PATH="/pnpm/store"
+ENV PATH="${PNPM_HOME}:${PATH}"
+ENV CI=true
+ENV LEFTHOOK=0
+
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
+WORKDIR /deps
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+# Persist the pnpm store in the image. Do not use a BuildKit cache mount here:
+# cache mounts speed the build, but they are not included in the final image.
+RUN pnpm config set store-dir "${PNPM_STORE_PATH}" \
+    && pnpm fetch --frozen-lockfile \
+    && chmod -R a+rX "${PNPM_STORE_PATH}"
+
+CMD ["pnpm", "--version"]

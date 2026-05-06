@@ -112,6 +112,23 @@ That image only needs to rebuild when dependency inputs change:
 
 This should avoid rebuilding a Docker image for source-only PRs.
 
+## Dependency Image Experiment
+
+The second implementation adds `Dockerfile.ci-deps` and a `Dependency Image CI` workflow.
+
+That workflow:
+
+- computes a dependency key from lockfile, workspace manifests, Node version, pnpm version, and the dependency Dockerfile
+- checks whether the matching dependency image already exists in GHCR
+- builds and pushes the image only when it is missing
+- checks out current PR source in each validation job
+- runs `pnpm install --offline --frozen-lockfile --ignore-scripts` inside the dependency image
+- splits validation into parallel repo checks, typecheck, tests, and build jobs
+
+Local validation showed the dependency image can run package tests with `0` packages downloaded during the PR-style install step.
+
+This is the version that can show a PR-level benefit after the first dependency image exists, because source-only PRs should reuse the same GHCR image.
+
 ## Parallelization Option
 
 If we keep the full commit-specific image approach, the main optimization is to split verification into parallel jobs:

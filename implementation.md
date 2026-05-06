@@ -35,7 +35,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
 ## Phase 2: Define Dependency Inputs
 
-- [ ] List every file that should invalidate the dependency image.
+- [x] List every file that should invalidate the dependency image.
 
   Suggested inputs:
 
@@ -51,7 +51,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: The dependency image should rebuild only when files that can change installed dependencies or package-manager behavior change.
 
-- [ ] Create a deterministic dependency key from those files.
+- [x] Create a deterministic dependency key from those files.
 
   Suggested key:
 
@@ -61,7 +61,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: A stable key lets many source-only PRs reuse the same dependency image.
 
-- [ ] Decide whether the dependency key should include OS/Node/pnpm versions.
+- [x] Decide whether the dependency key should include OS/Node/pnpm versions.
 
   Recommended:
 
@@ -73,7 +73,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
 ## Phase 3: Build The Dependency Image
 
-- [ ] Add `Dockerfile.ci-deps`.
+- [x] Add `Dockerfile.ci-deps`.
 
   It should include:
 
@@ -87,11 +87,11 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: This image should represent dependency state, not source state. Source should be checked out fresh in each validation job.
 
-- [ ] Use `pnpm fetch --frozen-lockfile` in the dependency image.
+- [x] Use `pnpm fetch --frozen-lockfile` in the dependency image.
 
   Why: `pnpm fetch` populates the pnpm store from the lockfile without needing the full source tree.
 
-- [ ] Avoid running project lifecycle scripts in the dependency image.
+- [x] Avoid running project lifecycle scripts in the dependency image.
 
   Suggested install/fetch behavior:
 
@@ -107,7 +107,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
 ## Phase 4: Ensure-Or-Build Workflow Job
 
-- [ ] Add an `ensure_deps_image` job.
+- [x] Add an `ensure_deps_image` job.
 
   It should:
 
@@ -120,15 +120,15 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: This is the core optimization. Source-only PRs should pull an existing dependency image instead of building one.
 
-- [ ] Use GHCR as the shared image store.
+- [x] Use GHCR as the shared image store.
 
   Why: Later jobs and later workflow runs need a shared place to find the dependency image.
 
-- [ ] Make the job safe for fork PRs.
+- [x] Make the job safe for fork PRs.
 
   Why: Fork PRs should not get write access to GHCR using repository credentials. For forks, either build locally without pushing or fall back to normal pnpm cache.
 
-- [ ] Add `merge_group` to workflow triggers.
+- [x] Add `merge_group` to workflow triggers.
 
   ```yaml
   on:
@@ -140,7 +140,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
 ## Phase 5: Validation Jobs Using The Dependency Image
 
-- [ ] Split validation into parallel jobs.
+- [x] Split validation into parallel jobs.
 
   Suggested jobs:
 
@@ -153,11 +153,11 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: Large CI pipelines scale by reducing wall-clock time, not only by reducing total work.
 
-- [ ] In each validation job, checkout current source.
+- [x] In each validation job, checkout current source.
 
   Why: The dependency image does not contain source code. Each job must validate the exact PR or merge queue checkout.
 
-- [ ] Run offline pnpm install/link in each validation job.
+- [x] Run offline pnpm install/link in each validation job.
 
   Suggested command:
 
@@ -167,7 +167,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: The dependency image provides the package store. The install step should only materialize workspace links and `node_modules` structure for the current checkout.
 
-- [ ] Run each check inside the dependency image.
+- [x] Run each check inside the dependency image.
 
   Example shape:
 
@@ -181,7 +181,7 @@ This avoids rebuilding a full source image for every PR commit while still remov
 
   Why: This validates current source while reusing the dependency environment from the image.
 
-- [ ] Keep lifecycle scripts disabled unless a check explicitly requires them.
+- [x] Keep lifecycle scripts disabled unless a check explicitly requires them.
 
   Why: The repo has a `prepare` script for Lefthook. CI validation should not need to install local Git hooks.
 
