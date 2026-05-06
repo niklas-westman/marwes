@@ -94,6 +94,8 @@ jobs:
             command: pnpm build:packages
           - name: app build
             command: pnpm build:apps
+          - name: storybook a11y smoke
+            command: pnpm test:storybook:a11y
 
     steps:
       - name: Checkout
