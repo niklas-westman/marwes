@@ -1,5 +1,22 @@
 # @marwes-ui/presets
 
+## 1.2.0
+
+### Minor Changes
+
+- [#35](https://github.com/niklas-westman/marwes/pull/35) [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Add Date Picker component across core recipes, firstEdition preset CSS, React adapter, Vue adapter, tests, and Storybook coverage.
+
+- [#35](https://github.com/niklas-westman/marwes/pull/35) [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Add Skeleton atom across core recipes, firstEdition preset CSS, React adapter, Vue adapter, tests, and Storybook coverage.
+
+- [#35](https://github.com/niklas-westman/marwes/pull/35) [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Add StatTile across core recipes, firstEdition preset CSS, React adapter, Vue adapter, tests, and Storybook coverage.
+
+### Patch Changes
+
+- [#35](https://github.com/niklas-westman/marwes/pull/35) [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Promote Storybook accessibility smoke coverage across React and Vue stories, and fix related contrast, labeling, date picker, select field, and dialog modal accessibility issues.
+
+- Updated dependencies [[`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b), [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b), [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b), [`a9e69b8`](https://github.com/niklas-westman/marwes/commit/a9e69b8040d97e2496eb0d718d6707dc86ceed3b)]:
+  - @marwes-ui/core@1.2.0
+
 ## 1.1.0
 
 ### Minor Changes
