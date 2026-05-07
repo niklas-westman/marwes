@@ -1,0 +1,28 @@
+import { storybookLayout } from "@marwes-ui/core"
+import { Card } from "@marwes-ui/svelte"
+import type { Meta, StoryObj } from "@storybook/svelte"
+
+const meta = {
+  title: "Layout/Atom/Card",
+  component: Card,
+  parameters: {
+    ...storybookLayout.centered,
+  },
+  tags: ["autodocs"],
+} satisfies Meta<typeof Card>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Basic: Story = {
+  args: {
+    title: "Getting started",
+    children: "Install via pnpm and wrap your app with MarwesProvider.",
+  },
+}
+
+export const BodyOnly: Story = {
+  args: {
+    children: "Body-only card — no title.",
+  },
+}

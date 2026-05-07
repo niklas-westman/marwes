@@ -31,7 +31,9 @@
       "@marwes-ui/react": ["./packages/react/src/index.ts"],
       "@marwes-ui/react/ssr": ["./packages/react/src/ssr.tsx"],
       "@marwes-ui/vue/ssr": ["./packages/vue/src/ssr.ts"],
-      "@marwes-ui/vue": ["./packages/vue/src/index.ts"]
+      "@marwes-ui/vue": ["./packages/vue/src/index.ts"],
+      "@marwes-ui/svelte": ["./packages/svelte/src/lib/index.ts"],
+      "@marwes-ui/svelte/ssr": ["./packages/svelte/src/lib/ssr.ts"]
     },
 
     "types": []

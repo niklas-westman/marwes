@@ -1,0 +1,11 @@
+import type { SliderOptions } from "@marwes-ui/core";
+export interface SliderProps extends Omit<SliderOptions, "ariaDescribedBy"> {
+    value?: number;
+    oninput?: (e: Event & {
+        currentTarget: HTMLInputElement;
+    }) => void;
+    onvaluechange?: (value: number) => void;
+    class?: string;
+    style?: string | undefined;
+    ariaDescribedBy?: string | undefined;
+}

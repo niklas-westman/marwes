@@ -2,9 +2,19 @@
   "version": 1,
   "families": [
     {
-      "family": "button",
+      "family": "accordion",
       "react": true,
       "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": false,
+      "storyCoverage": true
+    },
+    {
+      "family": "avatar",
+      "react": true,
+      "vue": true,
+      "svelte": false,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -13,32 +23,189 @@
       "family": "badge",
       "react": true,
       "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
     },
     {
-      "family": "avatar",
+      "family": "button",
       "react": true,
       "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
     },
     {
-      "family": "toast",
+      "family": "card",
       "react": true,
       "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": false,
+      "storyCoverage": true
+    },
+    {
+      "family": "checkbox",
+      "react": true,
+      "vue": true,
+      "svelte": false,
       "metadataParity": true,
       "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "date-picker",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": false,
       "storyCoverage": true
     },
     {
       "family": "dialog",
       "react": true,
       "vue": true,
+      "svelte": false,
       "metadataParity": true,
       "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "divider",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "heading",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "icon",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "input",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "paragraph",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "radio",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "skeleton",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "slider",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "spacing",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "spinner",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "stat-tile",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "switch",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "tab",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": false,
+      "storyCoverage": true
+    },
+    {
+      "family": "toast",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "tooltip",
+      "react": true,
+      "vue": true,
+      "svelte": false,
+      "metadataParity": true,
+      "contractCoverage": false,
       "storyCoverage": true
     }
   ]

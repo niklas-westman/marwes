@@ -8,10 +8,11 @@ const scannedRoots = [
   "packages/core/src/components",
   "packages/react/src/components",
   "packages/vue/src/components",
+  "packages/svelte/src/lib/components",
 ]
 
 const skippedDirectories = new Set(["node_modules", "dist", ".git"])
-const sourceExtensions = new Set([".ts", ".tsx", ".vue"])
+const sourceExtensions = new Set([".ts", ".tsx", ".vue", ".svelte"])
 
 const checks = [
   {
@@ -33,11 +34,36 @@ const checks = [
     pattern: /from\s+["'](?:@marwes-ui\/react|.*packages\/react|react)["']/,
   },
   {
+    id: "svelte-imports-react",
+    description: "Svelte adapter must not import React or Vue",
+    appliesTo: (path) => path.startsWith("packages/svelte/src/lib/components/"),
+    pattern: /from\s+["'](?:@marwes-ui\/react|@marwes-ui\/vue|.*packages\/react|.*packages\/vue|react|react-dom|vue)["']/,
+  },
+  {
+    id: "react-imports-svelte",
+    description: "React adapter must not import Svelte",
+    appliesTo: (path) => path.startsWith("packages/react/src/components/"),
+    pattern: /from\s+["'](?:@marwes-ui\/svelte|.*packages\/svelte|svelte)["']/,
+  },
+  {
+    id: "vue-imports-svelte",
+    description: "Vue adapter must not import Svelte",
+    appliesTo: (path) => path.startsWith("packages/vue/src/components/"),
+    pattern: /from\s+["'](?:@marwes-ui\/svelte|.*packages\/svelte|svelte)["']/,
+  },
+  {
+    id: "core-imports-svelte",
+    description: "Core must not import Svelte",
+    appliesTo: (path) => path.startsWith("packages/core/src/components/"),
+    pattern: /from\s+["'](?:@marwes-ui\/svelte|.*packages\/svelte|svelte)["']/,
+  },
+  {
     id: "adapter-imports-presets",
     description: "framework component adapters must not import preset CSS or preset runtime",
     appliesTo: (path) =>
       path.startsWith("packages/react/src/components/") ||
-      path.startsWith("packages/vue/src/components/"),
+      path.startsWith("packages/vue/src/components/") ||
+      path.startsWith("packages/svelte/src/lib/components/"),
     pattern: /from\s+["'](?:@marwes-ui\/presets|.*packages\/presets)/,
   },
   {
@@ -46,7 +72,8 @@ const checks = [
       "framework component adapters should not hardcode visual tokens; put visual language in presets",
     appliesTo: (path) =>
       path.startsWith("packages/react/src/components/") ||
-      path.startsWith("packages/vue/src/components/"),
+      path.startsWith("packages/vue/src/components/") ||
+      path.startsWith("packages/svelte/src/lib/components/"),
     pattern: /#[0-9a-fA-F]{3,8}\b/,
   },
 ]
