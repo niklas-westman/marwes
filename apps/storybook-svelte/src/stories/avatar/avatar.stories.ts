@@ -3,7 +3,7 @@ import { Avatar } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Data Display/Atom/Avatar",
+  title: "Avatar/Atom",
   component: Avatar,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

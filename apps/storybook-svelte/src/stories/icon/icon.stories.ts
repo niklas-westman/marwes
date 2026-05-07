@@ -1,22 +1,24 @@
-import { storybookLayout } from "@marwes-ui/core"
-import { Icon } from "@marwes-ui/svelte"
+import {
+  storybookA11yPolicy,
+  storybookIconGalleryArgTypes,
+  storybookIconGalleryDefaults,
+  storybookLayout,
+} from "@marwes-ui/core"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import IconGallery from "./IconGallery.svelte"
 
 const meta = {
-  title: "Data Display/Atom/Icon",
-  component: Icon,
+  title: "Icon/Atom",
+  component: IconGallery,
   parameters: {
-    ...storybookLayout.centered,
+    ...storybookLayout.fullscreen,
+    ...storybookA11yPolicy.smoke,
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof Icon>
+  args: storybookIconGalleryDefaults,
+  argTypes: storybookIconGalleryArgTypes,
+} satisfies Meta<typeof IconGallery>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Heart: Story = { args: { name: "heart", size: "md" } }
-export const Star: Story = { args: { name: "star", size: "md" } }
-export const Search: Story = { args: { name: "search", size: "md" } }
-export const Settings: Story = { args: { name: "settings", size: "md" } }
-export const Small: Story = { args: { name: "heart", size: "sm" } }
-export const Large: Story = { args: { name: "heart", size: "lg" } }
+export const Gallery: Story = {}

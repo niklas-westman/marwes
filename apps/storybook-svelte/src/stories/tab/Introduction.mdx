@@ -1,0 +1,54 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Tab/Introduction" />
+
+# Tab Components
+
+Marwes provides `TabGroup` as a molecule-level component for organizing content
+into switchable panels.
+
+## Component Architecture
+
+```
+TabGroup (Molecule)
+```
+
+## Recommended Usage
+
+Use the `TabGroup` molecule for tabbed content:
+
+```svelte
+<script>
+  import { TabGroup } from "@marwes-ui/svelte"
+</script>
+
+<TabGroup
+  tabs={[
+    { value: "tab1", label: "Overview", panel: "Overview content goes here." },
+    { value: "tab2", label: "Details", panel: "Detailed information here." },
+    { value: "tab3", label: "Settings", panel: "Settings panel." },
+  ]}
+  defaultActiveTab="tab1"
+/>
+```
+
+## Usage Notes
+
+- `tabs` defines the tab items with `value`, `label`, and `panel` content
+- `defaultActiveTab` sets the initially active tab
+- Individual tabs can be disabled via the `disabled` property
+
+## Accessibility notes
+
+**TabGroup uses WAI-ARIA tabs pattern.** Keyboard navigation with arrow keys
+cycles through tab triggers. `Tab` moves focus into the active panel.
+
+**Disabled tabs** remain visible but are excluded from keyboard navigation.
+
+## Component Reference
+
+**`TabGroup`** — Tabbed content molecule with accessible keyboard navigation
+
+## Story Coverage
+
+- **Molecule**: `Default`, `WithDisabledTab`

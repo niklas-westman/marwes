@@ -3,7 +3,7 @@ import { Switch } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Forms/Atom/Switch",
+  title: "Switch/Atom",
   component: Switch,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

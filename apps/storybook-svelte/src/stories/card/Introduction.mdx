@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Card/Introduction" />
+
+# Card Component
+
+Marwes provides `Card` as an atom-level container for grouping related content
+with optional title and body sections.
+
+## Component Architecture
+
+```
+Card (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Card` atom for content grouping:
+
+```svelte
+<script>
+  import { Card } from "@marwes-ui/svelte"
+</script>
+
+<Card title="Getting started">
+  Install via pnpm and wrap your app with MarwesProvider.
+</Card>
+
+<Card>
+  Body-only card — no title.
+</Card>
+```
+
+## Usage Notes
+
+- `title` renders an optional heading inside the card
+- Children are rendered as the card body
+- Card provides consistent padding, border radius, and elevation
+
+## Component Reference
+
+**`Card`** — Container atom for grouping related content with optional title
+
+## Story Coverage
+
+- **Atom**: `Basic`, `BodyOnly`
+- **Purpose/ProductCard**: `Default`
+- **Purpose/ProfileCard**: `Default`
+- **Purpose/StatCard**: `Default`

@@ -1,22 +1,32 @@
-import { storybookLayout } from "@marwes-ui/core"
-import { Divider } from "@marwes-ui/svelte"
+import { storybookA11yPolicy, storybookDividerArgTypes, storybookLayout } from "@marwes-ui/core"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import DividerPreview from "./DividerPreview.svelte"
 
 const meta = {
-  title: "Layout/Atom/Divider",
-  component: Divider,
+  title: "Divider/Atom",
+  component: DividerPreview,
   parameters: {
     ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Divider>
+  argTypes: storybookDividerArgTypes,
+  args: {
+    size: "md",
+    orientation: "horizontal",
+  },
+} satisfies Meta<typeof DividerPreview>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = { args: {} }
-export const ExtraSmall: Story = { args: { size: "xxs" } }
+export const Default: Story = {}
+
+export const Hairline: Story = { args: { size: "xxs" } }
 export const Small: Story = { args: { size: "sm" } }
-export const Medium: Story = { args: { size: "md" } }
 export const Large: Story = { args: { size: "lg" } }
-export const Vertical: Story = { args: { orientation: "vertical" } }
+export const ExtraLarge: Story = { args: { size: "xxl" } }
+
+export const Vertical: Story = {
+  args: { orientation: "vertical", size: "sm" },
+}

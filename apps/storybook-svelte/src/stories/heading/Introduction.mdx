@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Heading/Introduction" />
+
+# Heading Component
+
+Marwes provides `H1`, `H2`, and `H3` as atom-level typography primitives for
+semantic structure and visual hierarchy. Choose the heading level by document
+outline first, then use `size` only when the visual scale needs to differ from
+the semantic level.
+
+## Component Architecture
+
+```
+H1 / H2 / H3 (Atoms)
+```
+
+## Recommended Usage
+
+Use the raw heading atoms directly to express page, section, and subsection
+hierarchy:
+
+```svelte
+<script>
+  import { H1, H2, H3 } from "@marwes-ui/svelte"
+</script>
+
+<H1>Page Title</H1>
+<H2>Section Heading</H2>
+<H3>Subsection Heading</H3>
+```
+
+## Usage Notes
+
+- Prefer `H1` for the page-level title, then nest `H2` and `H3` by content structure
+- Use `size` when semantic level and visual scale need to differ
+- Add `id` when headings should support anchor links or table-of-contents jumps
+
+## Accessibility notes
+
+**Choose the heading level by document outline first.** Screen readers use heading
+levels to navigate the page structure. Pick the level that matches the content
+hierarchy, not the font size you want.
+
+**`size` changes the visual scale, not the semantic level.** An `H3` with `size="h1"`
+is still an `<h3>` for assistive technology.
+
+## Component Reference
+
+**`H1`** — Top-level heading atom for page titles
+
+**`H2`** — Section heading atom for major content groupings
+
+**`H3`** — Subsection heading atom for nested content
+
+## Story Coverage
+
+- **Atom**: `Default`, `WithSizeOverride`

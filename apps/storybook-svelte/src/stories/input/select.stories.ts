@@ -3,7 +3,7 @@ import { Select } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Inputs/Atom/Select",
+  title: "Input/Atom/Select",
   component: Select,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

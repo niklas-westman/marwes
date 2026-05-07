@@ -3,7 +3,7 @@ import { Badge } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Data Display/Atom/Badge",
+  title: "Badge/Atom",
   component: Badge,
   parameters: {
     ...storybookLayout.centered,

@@ -3,7 +3,7 @@ import { Paragraph } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Typography/Atom/Paragraph",
+  title: "Paragraph/Atom",
   component: Paragraph,
   parameters: { ...storybookLayout.padded },
   tags: ["autodocs"],

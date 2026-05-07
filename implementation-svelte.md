@@ -76,17 +76,17 @@ Execution rule: when implementing each component family, re-open the listed sour
 
 ## 2. Non-negotiable guardrails
 
-- [ ] Do not import Svelte from `packages/core`, `packages/react`, or `packages/vue`.
-- [ ] Do not import React or Vue from `packages/svelte`.
-- [ ] Do not build Web Components or custom elements in MVP.
-- [ ] Do not move behavior, variants, a11y rules, or theme normalization into Svelte.
-- [ ] Do not hardcode colors/tokens/variant class maps in Svelte components.
-- [ ] Do not import `@marwes-ui/presets` in `packages/svelte/src/lib/index.ts` for MVP.
-- [ ] Do not use SvelteKit-only imports such as `$app/*` in package code.
-- [ ] Use Svelte 5 runes: `$props`, `$props.id()`, `$state`, `$derived`, `$effect`, `$bindable`.
-- [ ] Avoid legacy `export let`, `$:`, `<slot>`, `on:click`, and `createEventDispatcher` for simple native event forwarding.
-- [ ] Use native elements first: `button`, `a`, `input`, `textarea`, `select`, `hr`, `h1`, `p`, `span`, etc.
-- [ ] For every family: core recipe output must own `className`, `vars`, `a11y`, and `dataAttributes`.
+- [x] Do not import Svelte from `packages/core`, `packages/react`, or `packages/vue`.
+- [x] Do not import React or Vue from `packages/svelte`.
+- [x] Do not build Web Components or custom elements in MVP.
+- [x] Do not move behavior, variants, a11y rules, or theme normalization into Svelte.
+- [x] Do not hardcode colors/tokens/variant class maps in Svelte components.
+- [x] Do not import `@marwes-ui/presets` in `packages/svelte/src/lib/index.ts` for MVP.
+- [x] Do not use SvelteKit-only imports such as `$app/*` in package code.
+- [x] Use Svelte 5 runes: `$props`, `$props.id()`, `$state`, `$derived`, `$effect`, `$bindable`.
+- [x] Avoid legacy `export let`, `$:`, `<slot>`, `on:click`, and `createEventDispatcher` for simple native event forwarding.
+- [x] Use native elements first: `button`, `a`, `input`, `textarea`, `select`, `hr`, `h1`, `p`, `span`, etc.
+- [x] For every family: core recipe output must own `className`, `vars`, `a11y`, and `dataAttributes`.
 
 ---
 
@@ -179,20 +179,20 @@ Paragraph
 
 ### 5.1 Files to create
 
-- [ ] `packages/svelte/package.json`
-- [ ] `packages/svelte/svelte.config.js`
-- [ ] `packages/svelte/tsconfig.json`
-- [ ] `packages/svelte/vitest.config.ts`
-- [ ] `packages/svelte/README.md`
-- [ ] `packages/svelte/CHANGELOG.md`
-- [ ] `packages/svelte/src/lib/index.ts`
-- [ ] `packages/svelte/src/lib/ssr.ts`
-- [ ] `packages/svelte/src/lib/internal/merge-class.ts`
-- [ ] `packages/svelte/src/lib/internal/css-vars.ts`
-- [ ] `packages/svelte/src/lib/internal/attrs.ts`
-- [ ] `packages/svelte/src/lib/provider/`
-- [ ] `packages/svelte/src/lib/components/`
-- [ ] `packages/svelte/src/tests/`
+- [x] `packages/svelte/package.json`
+- [x] `packages/svelte/svelte.config.js`
+- [x] `packages/svelte/tsconfig.json`
+- [x] `packages/svelte/vitest.config.ts`
+- [x] `packages/svelte/README.md`
+- [x] `packages/svelte/CHANGELOG.md`
+- [x] `packages/svelte/src/lib/index.ts`
+- [x] `packages/svelte/src/lib/ssr.ts`
+- [x] `packages/svelte/src/lib/internal/merge-class.ts`
+- [x] `packages/svelte/src/lib/internal/css-vars.ts`
+- [x] `packages/svelte/src/lib/internal/attrs.ts`
+- [x] `packages/svelte/src/lib/provider/`
+- [x] `packages/svelte/src/lib/components/`
+- [x] `packages/svelte/src/tests/`
 
 ### 5.2 `package.json` target
 
@@ -260,9 +260,9 @@ If install resolution prefers newer Svelte tooling, update lockfile normally wit
 
 Packaging import rule:
 
-- [ ] In public package source, use `.js` suffixes for relative TypeScript module imports that survive into published ESM, for example `import type { ButtonProps } from "./types.js"`.
-- [ ] This applies inside `.ts` files and inside `<script lang="ts">` blocks in `.svelte` files.
-- [ ] Svelte component imports keep their `.svelte` suffix, for example `import Icon from "../icon/Icon.svelte"`.
+- [x] In public package source, use `.js` suffixes for relative TypeScript module imports that survive into published ESM, for example `import type { ButtonProps } from "./types.js"`.
+- [x] This applies inside `.ts` files and inside `<script lang="ts">` blocks in `.svelte` files.
+- [x] Svelte component imports keep their `.svelte` suffix, for example `import Icon from "../icon/Icon.svelte"`.
 
 ### 5.3 `svelte.config.js`
 
@@ -337,10 +337,10 @@ Update:
 
 ### 5.8 Phase 0 validation
 
-- [ ] `pnpm install`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm build:packages`
+- [x] `pnpm install`
+- [x] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm build:packages`
 
 Do not continue until the empty package builds.
 
@@ -352,56 +352,56 @@ Do not continue until the empty package builds.
 
 Provider/theme sources:
 
-- [ ] `packages/react/src/provider/marwes-provider.tsx`
-- [ ] `packages/react/src/provider/marwes-context.ts`
-- [ ] `packages/react/src/provider/use-theme.ts`
-- [ ] `packages/react/src/provider/use-theme-mode.ts`
-- [ ] `packages/react/src/provider/runtime-theme.ts`
-- [ ] `packages/react/src/provider/theme-mode-runtime.ts`
-- [ ] `packages/react/src/ssr.tsx`
-- [ ] `packages/vue/src/provider/marwes-provider.ts`
-- [ ] `packages/vue/src/provider/marwes-context.ts`
-- [ ] `packages/vue/src/provider/use-theme.ts`
-- [ ] `packages/vue/src/provider/use-theme-mode.ts`
-- [ ] `packages/vue/src/provider/runtime-theme.ts`
-- [ ] `packages/vue/src/provider/theme-mode-runtime.ts`
-- [ ] `packages/vue/src/ssr.ts`
-- [ ] `packages/core/src/theme/*`
-- [ ] `packages/core/src/index.ts`
+- [x] `packages/react/src/provider/marwes-provider.tsx`
+- [x] `packages/react/src/provider/marwes-context.ts`
+- [x] `packages/react/src/provider/use-theme.ts`
+- [x] `packages/react/src/provider/use-theme-mode.ts`
+- [x] `packages/react/src/provider/runtime-theme.ts`
+- [x] `packages/react/src/provider/theme-mode-runtime.ts`
+- [x] `packages/react/src/ssr.tsx`
+- [x] `packages/vue/src/provider/marwes-provider.ts`
+- [x] `packages/vue/src/provider/marwes-context.ts`
+- [x] `packages/vue/src/provider/use-theme.ts`
+- [x] `packages/vue/src/provider/use-theme-mode.ts`
+- [x] `packages/vue/src/provider/runtime-theme.ts`
+- [x] `packages/vue/src/provider/theme-mode-runtime.ts`
+- [x] `packages/vue/src/ssr.ts`
+- [x] `packages/core/src/theme/*`
+- [x] `packages/core/src/index.ts`
 
 ### 6.2 Files to create
 
-- [ ] `packages/svelte/src/lib/provider/types.ts`
-- [ ] `packages/svelte/src/lib/provider/context.ts`
-- [ ] `packages/svelte/src/lib/provider/MarwesProvider.svelte`
-- [ ] `packages/svelte/src/lib/provider/use-theme.ts`
-- [ ] `packages/svelte/src/lib/provider/use-theme-mode.ts`
-- [ ] `packages/svelte/src/lib/provider/runtime-theme.ts`
-- [ ] `packages/svelte/src/lib/provider/theme-mode-runtime.ts`
-- [ ] `packages/svelte/src/lib/ssr.ts`
+- [x] `packages/svelte/src/lib/provider/types.ts`
+- [x] `packages/svelte/src/lib/provider/context.ts`
+- [x] `packages/svelte/src/lib/provider/MarwesProvider.svelte`
+- [x] `packages/svelte/src/lib/provider/use-theme.ts`
+- [x] `packages/svelte/src/lib/provider/use-theme-mode.ts`
+- [x] `packages/svelte/src/lib/provider/runtime-theme.ts`
+- [x] `packages/svelte/src/lib/provider/theme-mode-runtime.ts`
+- [x] `packages/svelte/src/lib/ssr.ts`
 
 ### 6.3 Provider behavior parity checklist
 
-- [ ] Supports `theme`.
-- [ ] Supports `defaultPreference` and `preference`.
-- [ ] Supports `defaultMode` and `mode` as compatibility aliases.
-- [ ] Supports `fontLoading`.
-- [ ] Supports `onPreferenceChange`.
-- [ ] Supports `onModeChange`.
-- [ ] Supports `storageKey`.
-- [ ] Supports `enableSystem`.
-- [ ] Supports `target` = `provider` / `html` / `body`.
-- [ ] Supports `attribute` = `class` / `data-theme` / `data-mode`.
-- [ ] Supports `disableTransitionOnChange`.
-- [ ] Supports `variableStrategy` minimally for `inline`; keep `style-tag` behavior compatible if core supports it.
-- [ ] Renders wrapper `div` with `data-marwes-theme="true"`.
-- [ ] Renders wrapper `div` with `data-marwes-mode={resolvedTheme.mode}`.
-- [ ] Renders wrapper `div` with `class="mw-theme--light|dark"`.
-- [ ] Applies same CSS variable output as React/Vue provider through core `themeToCSSVars`.
-- [ ] Does not access `window`, `document`, `localStorage`, or `matchMedia` at unsafe module top level.
-- [ ] Loads theme fonts only in browser-safe runtime.
-- [ ] System preference subscription cleans up when preference/enableSystem changes and on unmount.
-- [ ] Context consumers update when mode/theme changes; add a test for this before considering Provider done.
+- [x] Supports `theme`.
+- [x] Supports `defaultPreference` and `preference`.
+- [x] Supports `defaultMode` and `mode` as compatibility aliases.
+- [x] Supports `fontLoading`.
+- [x] Supports `onPreferenceChange`.
+- [x] Supports `onModeChange`.
+- [x] Supports `storageKey`.
+- [x] Supports `enableSystem`.
+- [x] Supports `target` = `provider` / `html` / `body`.
+- [x] Supports `attribute` = `class` / `data-theme` / `data-mode`.
+- [x] Supports `disableTransitionOnChange`.
+- [x] Supports `variableStrategy` minimally for `inline`; keep `style-tag` behavior compatible if core supports it.
+- [x] Renders wrapper `div` with `data-marwes-theme="true"`.
+- [x] Renders wrapper `div` with `data-marwes-mode={resolvedTheme.mode}`.
+- [x] Renders wrapper `div` with `class="mw-theme--light|dark"`.
+- [x] Applies same CSS variable output as React/Vue provider through core `themeToCSSVars`.
+- [x] Does not access `window`, `document`, `localStorage`, or `matchMedia` at unsafe module top level.
+- [x] Loads theme fonts only in browser-safe runtime.
+- [x] System preference subscription cleans up when preference/enableSystem changes and on unmount.
+- [x] Context consumers update when mode/theme changes; add a test for this before considering Provider done.
 
 ### 6.4 Recommended context model
 
@@ -441,10 +441,10 @@ This is safer than passing plain derived values as a one-time context snapshot.
 
 Public helper decision before coding:
 
-- [ ] `useTheme()` should return the Svelte context value or a small object with reactive getters, not a plain `ResolvedTheme` snapshot.
-- [ ] Components that need the resolved theme, such as `H1`/`Paragraph`, should read `themeContext.state.theme` or a getter inside `$derived(...)` so theme updates can flow through.
-- [ ] `useThemeMode()` should return reactive getters for `mode`, `preference`, `systemMode`, `isDark`, `isLight`, and `isSystem`, plus setters.
-- [ ] Document this Svelte-specific return shape in `packages/svelte/README.md`; it intentionally differs from the current React/Vue helper shape to avoid dead snapshots in Svelte.
+- [x] `useTheme()` should return the Svelte context value or a small object with reactive getters, not a plain `ResolvedTheme` snapshot.
+- [x] Components that need the resolved theme, such as `H1`/`Paragraph`, should read `themeContext.state.theme` or a getter inside `$derived(...)` so theme updates can flow through.
+- [x] `useThemeMode()` should return reactive getters for `mode`, `preference`, `systemMode`, `isDark`, `isLight`, and `isSystem`, plus setters.
+- [x] Document this Svelte-specific return shape in `packages/svelte/README.md`; it intentionally differs from the current React/Vue helper shape to avoid dead snapshots in Svelte.
 
 ### 6.5 `ssr.ts`
 
@@ -467,21 +467,21 @@ Create `packages/svelte/src/tests/provider.test.ts` and/or small fixture `.svelt
 
 Required tests:
 
-- [ ] Provider renders children.
-- [ ] Provider sets `data-marwes-theme="true"`.
-- [ ] Provider sets `data-marwes-mode`.
-- [ ] Provider emits inline `--mw-*` variables.
-- [ ] Custom `theme` changes at least one CSS variable.
-- [ ] `useTheme` throws outside provider.
-- [ ] `useThemeMode` works inside provider.
-- [ ] `toggleMode` causes a visible nested consumer update.
-- [ ] No SSR crash: import provider/SSR helpers in test without browser globals.
+- [x] Provider renders children.
+- [x] Provider sets `data-marwes-theme="true"`.
+- [x] Provider sets `data-marwes-mode`.
+- [x] Provider emits inline `--mw-*` variables.
+- [x] Custom `theme` changes at least one CSS variable.
+- [x] `useTheme` throws outside provider.
+- [x] `useThemeMode` works inside provider.
+- [x] `toggleMode` causes a visible nested consumer update.
+- [x] No SSR crash: import provider/SSR helpers in test without browser globals.
 
 ### 6.7 Phase 1 validation
 
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte test`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte test`
+- [x] `pnpm --filter @marwes-ui/svelte build`
 
 ---
 
@@ -552,123 +552,123 @@ export function cleanAttrs(attrs: DOMAttrs | undefined): DOMAttrs {
 
 Before coding Button, read:
 
-- [ ] `docs/registry/families/button/README.md`
-- [ ] `docs/registry/families/button/registry.generated.json`
-- [ ] `docs/audits/button-family-accessibility.md`
-- [ ] `packages/core/src/components/atoms/button/button-types.ts`
-- [ ] `packages/core/src/components/atoms/button/button-a11y.ts`
-- [ ] `packages/core/src/components/atoms/button/button-loading.ts`
-- [ ] `packages/core/src/components/atoms/button/button-recipe.ts`
-- [ ] `packages/react/src/components/button/button.tsx`
-- [ ] `packages/react/src/components/button/variants.tsx`
-- [ ] `packages/react/src/components/button/__tests__/button.test.tsx`
-- [ ] `packages/vue/src/components/button/button.ts`
-- [ ] `packages/vue/src/components/button/variants.ts`
-- [ ] `packages/vue/src/components/button/__tests__/button.test.ts`
-- [ ] `tests/contracts/button.contract.ts`
-- [ ] `packages/presets/src/firstEdition/button.css`
+- [x] `docs/registry/families/button/README.md`
+- [x] `docs/registry/families/button/registry.generated.json`
+- [x] `docs/audits/button-family-accessibility.md`
+- [x] `packages/core/src/components/atoms/button/button-types.ts`
+- [x] `packages/core/src/components/atoms/button/button-a11y.ts`
+- [x] `packages/core/src/components/atoms/button/button-loading.ts`
+- [x] `packages/core/src/components/atoms/button/button-recipe.ts`
+- [x] `packages/react/src/components/button/button.tsx`
+- [x] `packages/react/src/components/button/variants.tsx`
+- [x] `packages/react/src/components/button/__tests__/button.test.tsx`
+- [x] `packages/vue/src/components/button/button.ts`
+- [x] `packages/vue/src/components/button/variants.ts`
+- [x] `packages/vue/src/components/button/__tests__/button.test.ts`
+- [x] `tests/contracts/button.contract.ts`
+- [x] `packages/presets/src/firstEdition/button.css`
 
 ### 7.3 Button files
 
-- [ ] `packages/svelte/src/lib/components/button/types.ts`
-- [ ] `packages/svelte/src/lib/components/button/Button.svelte`
-- [ ] `packages/svelte/src/lib/components/button/index.ts`
-- [ ] Optional after base Button: purpose wrappers in `purpose-buttons.ts` or separate `.svelte` files.
+- [x] `packages/svelte/src/lib/components/button/types.ts`
+- [x] `packages/svelte/src/lib/components/button/Button.svelte`
+- [x] `packages/svelte/src/lib/components/button/index.ts`
+- [x] Optional after base Button: purpose wrappers in `purpose-buttons.ts` or separate `.svelte` files.
 
 Button requirements:
 
-- [ ] Calls `createButtonRecipe(props)`.
-- [ ] Supports native button path.
-- [ ] Supports anchor path when core recipe returns anchor.
-- [ ] Renders `children` snippet.
-- [ ] Renders `ButtonSpinner` while loading.
-- [ ] Renders `Icon` for `iconLeft` / `iconRight` when not loading.
-- [ ] Uses core `kit.loading` for loading label/spinner variant.
-- [ ] Uses core `kit.blockClick` to prevent anchor clicks when disabled/loading.
-- [ ] Supports `onclick` callback prop.
-- [ ] Merges `class` with `kit.className`.
-- [ ] Merges user `style` with `kit.vars`.
-- [ ] Spreads core `dataAttributes`.
-- [ ] Applies explicit a11y attrs from `kit.a11y`.
-- [ ] Does not duplicate variant class logic.
+- [x] Calls `createButtonRecipe(props)`.
+- [x] Supports native button path.
+- [x] Supports anchor path when core recipe returns anchor.
+- [x] Renders `children` snippet.
+- [x] Renders `ButtonSpinner` while loading.
+- [x] Renders `Icon` for `iconLeft` / `iconRight` when not loading.
+- [x] Uses core `kit.loading` for loading label/spinner variant.
+- [x] Uses core `kit.blockClick` to prevent anchor clicks when disabled/loading.
+- [x] Supports `onclick` callback prop.
+- [x] Merges `class` with `kit.className`.
+- [x] Merges user `style` with `kit.vars`.
+- [x] Spreads core `dataAttributes`.
+- [x] Applies explicit a11y attrs from `kit.a11y`.
+- [x] Does not duplicate variant class logic.
 
 Button test requirements:
 
-- [ ] renders visible children.
-- [ ] renders `button` by default.
-- [ ] includes `mw-btn` class.
-- [ ] merges user class.
-- [ ] respects `disabled`.
-- [ ] sets `aria-busy` while loading.
-- [ ] shows loading label when supplied.
-- [ ] blocks click when core says blockClick.
-- [ ] renders anchor path for link usage if current core supports it.
-- [ ] passes data attributes.
+- [x] renders visible children.
+- [x] renders `button` by default.
+- [x] includes `mw-btn` class.
+- [x] merges user class.
+- [x] respects `disabled`.
+- [x] sets `aria-busy` while loading.
+- [x] shows loading label when supplied.
+- [x] blocks click when core says blockClick.
+- [x] renders anchor path for link usage if current core supports it.
+- [x] passes data attributes.
 
 ### 7.4 Icon source map
 
 Read:
 
-- [ ] `docs/registry/families/icon/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/icon/icon-registry.ts`
-- [ ] `packages/core/src/components/atoms/icon/icon-scales.ts`
-- [ ] `packages/core/src/components/atoms/icon/icon-a11y.ts`
-- [ ] `packages/react/src/components/icon/icon.tsx`
-- [ ] `packages/vue/src/components/icon/icon.ts`
-- [ ] `tests/contracts/icon.contract.ts`
-- [ ] `packages/presets/src/firstEdition/icon.css`
+- [x] `docs/registry/families/icon/registry.generated.json`
+- [x] `packages/core/src/components/atoms/icon/icon-registry.ts`
+- [x] `packages/core/src/components/atoms/icon/icon-scales.ts`
+- [x] `packages/core/src/components/atoms/icon/icon-a11y.ts`
+- [x] `packages/react/src/components/icon/icon.tsx`
+- [x] `packages/vue/src/components/icon/icon.ts`
+- [x] `tests/contracts/icon.contract.ts`
+- [x] `packages/presets/src/firstEdition/icon.css`
 
 Icon files:
 
-- [ ] `packages/svelte/src/lib/components/icon/Icon.svelte`
-- [ ] `packages/svelte/src/lib/components/icon/types.ts`
-- [ ] `packages/svelte/src/lib/components/icon/index.ts`
+- [x] `packages/svelte/src/lib/components/icon/Icon.svelte`
+- [x] `packages/svelte/src/lib/components/icon/types.ts`
+- [x] `packages/svelte/src/lib/components/icon/index.ts`
 
 Icon requirements:
 
-- [ ] Uses `iconRegistry`, `resolveIconSize`, `resolveIconStrokeWidth`, and `resolveIconA11y` from core.
-- [ ] Renders SVG nodes from core registry.
-- [ ] Supports `decorative` and `aria-label`.
-- [ ] Supports `class`.
-- [ ] Does not hardcode SVG paths outside core registry.
+- [x] Uses `iconRegistry`, `resolveIconSize`, `resolveIconStrokeWidth`, and `resolveIconA11y` from core.
+- [x] Renders SVG nodes from core registry.
+- [x] Supports `decorative` and `aria-label`.
+- [x] Supports `class`.
+- [x] Does not hardcode SVG paths outside core registry.
 
 ### 7.5 Spinner source map
 
 Read:
 
-- [ ] `docs/registry/families/spinner/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/spinner/spinner-types.ts`
-- [ ] `packages/core/src/components/atoms/spinner/spinner-recipe.ts`
-- [ ] `packages/core/src/components/atoms/spinner/spinner-svg.ts`
-- [ ] `packages/react/src/components/spinner/spinner.tsx`
-- [ ] `packages/react/src/components/spinner/variants.tsx`
-- [ ] `packages/vue/src/components/spinner/spinner.ts`
-- [ ] `packages/vue/src/components/spinner/variants.ts`
-- [ ] `tests/contracts/spinner.contract.ts`
-- [ ] `packages/presets/src/firstEdition/spinner.css`
+- [x] `docs/registry/families/spinner/registry.generated.json`
+- [x] `packages/core/src/components/atoms/spinner/spinner-types.ts`
+- [x] `packages/core/src/components/atoms/spinner/spinner-recipe.ts`
+- [x] `packages/core/src/components/atoms/spinner/spinner-svg.ts`
+- [x] `packages/react/src/components/spinner/spinner.tsx`
+- [x] `packages/react/src/components/spinner/variants.tsx`
+- [x] `packages/vue/src/components/spinner/spinner.ts`
+- [x] `packages/vue/src/components/spinner/variants.ts`
+- [x] `tests/contracts/spinner.contract.ts`
+- [x] `packages/presets/src/firstEdition/spinner.css`
 
 Spinner files:
 
-- [ ] `packages/svelte/src/lib/components/spinner/Spinner.svelte`
-- [ ] `packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte`
-- [ ] `packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte` optional MVP+
-- [ ] `packages/svelte/src/lib/components/spinner/types.ts`
-- [ ] `packages/svelte/src/lib/components/spinner/index.ts`
+- [x] `packages/svelte/src/lib/components/spinner/Spinner.svelte`
+- [x] `packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte`
+- [x] `packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte` optional MVP+
+- [x] `packages/svelte/src/lib/components/spinner/types.ts`
+- [x] `packages/svelte/src/lib/components/spinner/index.ts`
 
 Spinner requirements:
 
-- [ ] Calls `createSpinnerRecipe`.
-- [ ] Renders `span` shell and inner `svg`.
-- [ ] Renders core SVG nodes.
-- [ ] Supports decorative default and status mode via `ariaLabel`.
-- [ ] Supports `ButtonSpinner` purpose wrapper for Button loading.
-- [ ] Merges class/style/data attributes.
+- [x] Calls `createSpinnerRecipe`.
+- [x] Renders `span` shell and inner `svg`.
+- [x] Renders core SVG nodes.
+- [x] Supports decorative default and status mode via `ariaLabel`.
+- [x] Supports `ButtonSpinner` purpose wrapper for Button loading.
+- [x] Merges class/style/data attributes.
 
 ### 7.6 Phase 2 validation
 
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte test`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte test`
+- [x] `pnpm --filter @marwes-ui/svelte build`
 
 ---
 
@@ -678,91 +678,91 @@ Spinner requirements:
 
 Read:
 
-- [ ] `docs/registry/families/input/README.md`
-- [ ] `docs/registry/families/input/registry.generated.json`
-- [ ] `docs/audits/input-family-accessibility.md`
-- [ ] `packages/core/src/components/atoms/input/input-types.ts`
-- [ ] `packages/core/src/components/atoms/input/input-a11y.ts`
-- [ ] `packages/core/src/components/atoms/input/input-recipe.ts`
-- [ ] `packages/core/src/shared/field-helpers.ts`
-- [ ] `packages/react/src/components/input/input.tsx`
-- [ ] `packages/react/src/components/input/input-field.tsx`
-- [ ] `packages/react/src/components/input/__tests__/input.test.tsx`
-- [ ] `packages/react/src/components/input/__tests__/input-field.test.tsx`
-- [ ] `packages/vue/src/components/input/input.ts`
-- [ ] `packages/vue/src/components/input/input-field.ts`
-- [ ] `packages/vue/src/components/input/__tests__/input.test.ts`
-- [ ] `packages/vue/src/components/input/__tests__/input-field.test.ts`
-- [ ] `tests/contracts/input.contract.ts`
-- [ ] `tests/contracts/input-field.contract.ts`
-- [ ] `packages/presets/src/firstEdition/input.css`
-- [ ] `packages/presets/src/firstEdition/molecules/input-field.css`
+- [x] `docs/registry/families/input/README.md`
+- [x] `docs/registry/families/input/registry.generated.json`
+- [x] `docs/audits/input-family-accessibility.md`
+- [x] `packages/core/src/components/atoms/input/input-types.ts`
+- [x] `packages/core/src/components/atoms/input/input-a11y.ts`
+- [x] `packages/core/src/components/atoms/input/input-recipe.ts`
+- [x] `packages/core/src/shared/field-helpers.ts`
+- [x] `packages/react/src/components/input/input.tsx`
+- [x] `packages/react/src/components/input/input-field.tsx`
+- [x] `packages/react/src/components/input/__tests__/input.test.tsx`
+- [x] `packages/react/src/components/input/__tests__/input-field.test.tsx`
+- [x] `packages/vue/src/components/input/input.ts`
+- [x] `packages/vue/src/components/input/input-field.ts`
+- [x] `packages/vue/src/components/input/__tests__/input.test.ts`
+- [x] `packages/vue/src/components/input/__tests__/input-field.test.ts`
+- [x] `tests/contracts/input.contract.ts`
+- [x] `tests/contracts/input-field.contract.ts`
+- [x] `packages/presets/src/firstEdition/input.css`
+- [x] `packages/presets/src/firstEdition/molecules/input-field.css`
 
 ### 8.2 Input files
 
-- [ ] `packages/svelte/src/lib/components/input/types.ts`
-- [ ] `packages/svelte/src/lib/components/input/Input.svelte`
-- [ ] `packages/svelte/src/lib/components/input/InputField.svelte`
-- [ ] `packages/svelte/src/lib/components/input/index.ts`
+- [x] `packages/svelte/src/lib/components/input/types.ts`
+- [x] `packages/svelte/src/lib/components/input/Input.svelte`
+- [x] `packages/svelte/src/lib/components/input/InputField.svelte`
+- [x] `packages/svelte/src/lib/components/input/index.ts`
 
 ### 8.3 Input requirements
 
-- [ ] Calls `createInputRecipe({ ...props, value })`.
-- [ ] Supports `bind:value` using `$bindable`.
-- [ ] Supports controlled value via normal prop usage.
-- [ ] Supports `oninput` callback prop.
-- [ ] Applies `id`, `name`, `type`, `inputMode`, `autoComplete`, `placeholder`, `disabled`, `readOnly`, `required` from core a11y.
-- [ ] Applies `aria-label`, `aria-invalid`, `aria-describedby` from core a11y.
-- [ ] Merges class/style.
-- [ ] Does not create separate Svelte input variant logic.
+- [x] Calls `createInputRecipe({ ...props, value })`.
+- [x] Supports `bind:value` using `$bindable`.
+- [x] Supports controlled value via normal prop usage.
+- [x] Supports `oninput` callback prop.
+- [x] Applies `id`, `name`, `type`, `inputMode`, `autoComplete`, `placeholder`, `disabled`, `readOnly`, `required` from core a11y.
+- [x] Applies `aria-label`, `aria-invalid`, `aria-describedby` from core a11y.
+- [x] Merges class/style.
+- [x] Does not create separate Svelte input variant logic.
 
 ### 8.4 InputField requirements
 
 Use `$props.id()` for SSR-safe generated ids.
 
-- [ ] Supports `id` prop and respects it when supplied.
-- [ ] Generates `mw-input-${$props.id()}` when `id` omitted.
-- [ ] Supports `label` required visible label.
-- [ ] Supports `helperText`.
-- [ ] Supports `error`.
-- [ ] Supports `input` object forwarded to Input atom.
-- [ ] Supports `ariaDescribedBy` merged with helper/error ids.
-- [ ] Supports `leadingSymbol`.
-- [ ] Supports `bind:value` at field level using `$bindable`.
-- [ ] Calls `buildInputFieldA11yIds` from core.
-- [ ] `label[for]` matches `input[id]`.
-- [ ] `aria-describedby` includes helper id when helper exists.
-- [ ] `aria-describedby` includes error id when error exists.
-- [ ] `aria-invalid` is true when error exists.
-- [ ] Error region uses `aria-live="polite"`.
-- [ ] Empty helper/error strings are treated as absent.
-- [ ] Search/password affordances can be ported from React/Vue after base field works; do not block base a11y on those enhancements.
+- [x] Supports `id` prop and respects it when supplied.
+- [x] Generates `mw-input-${$props.id()}` when `id` omitted.
+- [x] Supports `label` required visible label.
+- [x] Supports `helperText`.
+- [x] Supports `error`.
+- [x] Supports `input` object forwarded to Input atom.
+- [x] Supports `ariaDescribedBy` merged with helper/error ids.
+- [x] Supports `leadingSymbol`.
+- [x] Supports `bind:value` at field level using `$bindable`.
+- [x] Calls `buildInputFieldA11yIds` from core.
+- [x] `label[for]` matches `input[id]`.
+- [x] `aria-describedby` includes helper id when helper exists.
+- [x] `aria-describedby` includes error id when error exists.
+- [x] `aria-invalid` is true when error exists.
+- [x] Error region uses `aria-live="polite"`.
+- [x] Empty helper/error strings are treated as absent.
+- [x] Search/password affordances can be ported from React/Vue after base field works; do not block base a11y on those enhancements.
 
 ### 8.5 Input tests
 
-- [ ] Input renders textbox.
-- [ ] Input includes `mw-input` class.
-- [ ] Input merges user class.
-- [ ] Input `bind:value` updates parent fixture.
-- [ ] Input `oninput` receives native event.
+- [x] Input renders textbox.
+- [x] Input includes `mw-input` class.
+- [x] Input merges user class.
+- [x] Input `bind:value` updates parent fixture.
+- [x] Input `oninput` receives native event.
 
 ### 8.6 InputField tests
 
-- [ ] Label is associated with control.
-- [ ] Custom id is respected.
-- [ ] Generated id is stable enough for rendered field.
-- [ ] Helper id appears in `aria-describedby`.
-- [ ] Error id appears in `aria-describedby`.
-- [ ] Error sets `aria-invalid`.
-- [ ] Error region has `aria-live="polite"`.
-- [ ] External `ariaDescribedBy` is merged.
-- [ ] `bind:value` works through the field wrapper.
+- [x] Label is associated with control.
+- [x] Custom id is respected.
+- [x] Generated id is stable enough for rendered field.
+- [x] Helper id appears in `aria-describedby`.
+- [x] Error id appears in `aria-describedby`.
+- [x] Error sets `aria-invalid`.
+- [x] Error region has `aria-live="polite"`.
+- [x] External `ariaDescribedBy` is merged.
+- [x] `bind:value` works through the field wrapper.
 
 ### 8.7 Phase 3 validation
 
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte test`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte test`
+- [x] `pnpm --filter @marwes-ui/svelte build`
 
 ---
 
@@ -774,157 +774,157 @@ Implement passive primitives after Provider/Button/InputField prove the adapter 
 
 Source map:
 
-- [ ] `docs/registry/families/badge/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/badge/*`
-- [ ] `packages/react/src/components/badge/*`
-- [ ] `packages/vue/src/components/badge/*`
-- [ ] `tests/contracts/badge.contract.ts`
-- [ ] `packages/presets/src/firstEdition/badge.css`
+- [x] `docs/registry/families/badge/registry.generated.json`
+- [x] `packages/core/src/components/atoms/badge/*`
+- [x] `packages/react/src/components/badge/*`
+- [x] `packages/vue/src/components/badge/*`
+- [x] `tests/contracts/badge.contract.ts`
+- [x] `packages/presets/src/firstEdition/badge.css`
 
 Svelte target:
 
-- [ ] `components/badge/Badge.svelte`
-- [ ] `components/badge/BadgeGroup.svelte`
-- [ ] `components/badge/types.ts`
-- [ ] `components/badge/index.ts`
+- [x] `components/badge/Badge.svelte`
+- [x] `components/badge/BadgeGroup.svelte`
+- [x] `components/badge/types.ts`
+- [x] `components/badge/index.ts`
 
 Requirements:
 
-- [ ] `Badge` calls `createBadgeRecipe`.
-- [ ] Supports `children` snippet.
-- [ ] Supports `class`, `id`, optional `dataAttributes`.
-- [ ] Spreads core data attrs and purpose data attrs.
-- [ ] `BadgeGroup` mirrors React/Vue group class structure.
+- [x] `Badge` calls `createBadgeRecipe`.
+- [x] Supports `children` snippet.
+- [x] Supports `class`, `id`, optional `dataAttributes`.
+- [x] Spreads core data attrs and purpose data attrs.
+- [x] `BadgeGroup` mirrors React/Vue group class structure.
 
 ### 9.2 Card
 
 Source map:
 
-- [ ] `docs/registry/families/card/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/card/*`
-- [ ] `packages/react/src/components/card/*`
-- [ ] `packages/vue/src/components/card/*`
-- [ ] `packages/presets/src/firstEdition/card.css`
+- [x] `docs/registry/families/card/registry.generated.json`
+- [x] `packages/core/src/components/atoms/card/*`
+- [x] `packages/react/src/components/card/*`
+- [x] `packages/vue/src/components/card/*`
+- [x] `packages/presets/src/firstEdition/card.css`
 
 Svelte target:
 
-- [ ] `components/card/Card.svelte`
-- [ ] `components/card/types.ts`
-- [ ] `components/card/index.ts`
+- [x] `components/card/Card.svelte`
+- [x] `components/card/types.ts`
+- [x] `components/card/index.ts`
 
 Requirements:
 
-- [ ] `Card` calls `createCardRecipe`.
-- [ ] Supports `title` snippet or prop consistent with Svelte ergonomics.
-- [ ] Supports default `children` snippet.
-- [ ] Renders `mw-card__header`, `mw-card__title`, `mw-card__body` like React/Vue.
-- [ ] Merges class and native div attrs.
+- [x] `Card` calls `createCardRecipe`.
+- [x] Supports `title` snippet or prop consistent with Svelte ergonomics.
+- [x] Supports default `children` snippet.
+- [x] Renders `mw-card__header`, `mw-card__title`, `mw-card__body` like React/Vue.
+- [x] Merges class and native div attrs.
 
 ### 9.3 Divider
 
 Source map:
 
-- [ ] `docs/registry/families/divider/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/divider/*`
-- [ ] `packages/react/src/components/divider/divider.tsx`
-- [ ] `packages/vue/src/components/divider/divider.ts`
-- [ ] `tests/contracts/divider.contract.ts`
-- [ ] `packages/presets/src/firstEdition/divider.css`
+- [x] `docs/registry/families/divider/registry.generated.json`
+- [x] `packages/core/src/components/atoms/divider/*`
+- [x] `packages/react/src/components/divider/divider.tsx`
+- [x] `packages/vue/src/components/divider/divider.ts`
+- [x] `tests/contracts/divider.contract.ts`
+- [x] `packages/presets/src/firstEdition/divider.css`
 
 Svelte target:
 
-- [ ] `components/divider/Divider.svelte`
-- [ ] `components/divider/types.ts`
-- [ ] `components/divider/index.ts`
+- [x] `components/divider/Divider.svelte`
+- [x] `components/divider/types.ts`
+- [x] `components/divider/index.ts`
 
 Requirements:
 
-- [ ] Calls `createDividerRecipe`.
-- [ ] Renders semantic `hr` unless core currently indicates another tag.
-- [ ] Applies orientation/size a11y/data attrs from core.
-- [ ] Merges class/style.
+- [x] Calls `createDividerRecipe`.
+- [x] Renders semantic `hr` unless core currently indicates another tag.
+- [x] Applies orientation/size a11y/data attrs from core.
+- [x] Merges class/style.
 
 ### 9.4 Spacing / Spacer
 
 Source map:
 
-- [ ] `docs/registry/families/spacing/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/spacing/*`
-- [ ] `packages/react/src/components/spacing/spacing.tsx`
-- [ ] `packages/vue/src/components/spacing/spacing.ts`
-- [ ] `tests/contracts/spacing.contract.ts`
-- [ ] `packages/presets/src/firstEdition/spacing.css`
-- [ ] `packages/presets/src/firstEdition/tokens.css`
+- [x] `docs/registry/families/spacing/registry.generated.json`
+- [x] `packages/core/src/components/atoms/spacing/*`
+- [x] `packages/react/src/components/spacing/spacing.tsx`
+- [x] `packages/vue/src/components/spacing/spacing.ts`
+- [x] `tests/contracts/spacing.contract.ts`
+- [x] `packages/presets/src/firstEdition/spacing.css`
+- [x] `packages/presets/src/firstEdition/tokens.css`
 
 Svelte target:
 
-- [ ] `components/spacing/Spacing.svelte`
-- [ ] `components/spacing/Spacer.svelte` or alias export if Svelte packaging supports it cleanly.
-- [ ] `components/spacing/types.ts`
-- [ ] `components/spacing/index.ts`
+- [x] `components/spacing/Spacing.svelte`
+- [x] `components/spacing/Spacer.svelte` or alias export if Svelte packaging supports it cleanly.
+- [x] `components/spacing/types.ts`
+- [x] `components/spacing/index.ts`
 
 Requirements:
 
-- [ ] Calls `createSpacingRecipe`.
-- [ ] Supports `size` and `spacing` alias.
-- [ ] Renders decorative `div` with core a11y/data attrs.
-- [ ] Merges class/style.
+- [x] Calls `createSpacingRecipe`.
+- [x] Supports `size` and `spacing` alias.
+- [x] Renders decorative `div` with core a11y/data attrs.
+- [x] Merges class/style.
 
 ### 9.5 Heading
 
 Source map:
 
-- [ ] `docs/registry/families/heading/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/heading/*`
-- [ ] `packages/react/src/components/heading/*`
-- [ ] `packages/vue/src/components/heading/*`
-- [ ] `tests/contracts/heading.contract.ts`
-- [ ] `packages/presets/src/firstEdition/typography.css`
+- [x] `docs/registry/families/heading/registry.generated.json`
+- [x] `packages/core/src/components/atoms/heading/*`
+- [x] `packages/react/src/components/heading/*`
+- [x] `packages/vue/src/components/heading/*`
+- [x] `tests/contracts/heading.contract.ts`
+- [x] `packages/presets/src/firstEdition/typography.css`
 
 Svelte target:
 
-- [ ] `components/typography/H1.svelte`
-- [ ] `components/typography/H2.svelte`
-- [ ] `components/typography/H3.svelte`
-- [ ] `components/typography/types.ts`
-- [ ] `components/typography/index.ts`
+- [x] `components/typography/H1.svelte`
+- [x] `components/typography/H2.svelte`
+- [x] `components/typography/H3.svelte`
+- [x] `components/typography/types.ts`
+- [x] `components/typography/index.ts`
 
 Requirements:
 
-- [ ] Calls `headingRecipe` with level 1/2/3.
-- [ ] Uses `useTheme` or provider context as React does.
-- [ ] Renders semantic `h1`, `h2`, `h3`.
-- [ ] Supports visual size override.
-- [ ] Merges class/style.
+- [x] Calls `headingRecipe` with level 1/2/3.
+- [x] Uses `useTheme` or provider context as React does.
+- [x] Renders semantic `h1`, `h2`, `h3`.
+- [x] Supports visual size override.
+- [x] Merges class/style.
 
 ### 9.6 Paragraph
 
 Source map:
 
-- [ ] `docs/registry/families/paragraph/registry.generated.json`
-- [ ] `packages/core/src/components/atoms/paragraph/*`
-- [ ] `packages/react/src/components/paragraph/paragraph.tsx`
-- [ ] `packages/vue/src/components/paragraph/paragraph.ts`
-- [ ] `tests/contracts/paragraph.contract.ts`
-- [ ] `packages/presets/src/firstEdition/typography.css`
+- [x] `docs/registry/families/paragraph/registry.generated.json`
+- [x] `packages/core/src/components/atoms/paragraph/*`
+- [x] `packages/react/src/components/paragraph/paragraph.tsx`
+- [x] `packages/vue/src/components/paragraph/paragraph.ts`
+- [x] `tests/contracts/paragraph.contract.ts`
+- [x] `packages/presets/src/firstEdition/typography.css`
 
 Svelte target:
 
-- [ ] `components/typography/Paragraph.svelte`
+- [x] `components/typography/Paragraph.svelte`
 
 Requirements:
 
-- [ ] Calls `paragraphRecipe`.
-- [ ] Renders semantic `p`.
-- [ ] Supports `children` snippet.
-- [ ] Supports size/tone props from core.
-- [ ] Merges class/style.
+- [x] Calls `paragraphRecipe`.
+- [x] Renders semantic `p`.
+- [x] Supports `children` snippet.
+- [x] Supports size/tone props from core.
+- [x] Merges class/style.
 
 ### 9.7 Phase 4 validation
 
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte test`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte test`
+- [x] `pnpm --filter @marwes-ui/svelte build`
 
 ---
 
@@ -1061,8 +1061,8 @@ Use this map to know where to fetch implementation context. For each family, rea
 
 ### 12.1 Test locations
 
-- [ ] `packages/svelte/src/tests/provider.test.ts`
-- [ ] `packages/svelte/src/tests/button.test.ts`
+- [x] `packages/svelte/src/tests/provider.test.ts`
+- [x] `packages/svelte/src/tests/button.test.ts`
 - [ ] `packages/svelte/src/tests/input-field.test.ts`
 - [ ] `packages/svelte/src/tests/passive-primitives.test.ts` optional.
 - [ ] `packages/svelte/src/tests/type-fixtures/ButtonFixture.svelte`
@@ -1075,26 +1075,26 @@ Do not mock core recipes. Render real components and assert DOM output.
 
 MVP tests must prove:
 
-- [ ] Provider data attrs and CSS variables.
-- [ ] Button core class/data/a11y output.
+- [x] Provider data attrs and CSS variables.
+- [x] Button core class/data/a11y output.
 - [ ] Button native `onclick` behavior.
-- [ ] Button loading behavior.
-- [ ] Input `bind:value`.
+- [x] Button loading behavior.
+- [x] Input `bind:value`.
 - [ ] InputField label/helper/error wiring.
-- [ ] No CSS auto-import from Svelte root. This can be a static source test that reads `src/lib/index.ts` and asserts it does not contain `@marwes-ui/presets`.
+- [x] No CSS auto-import from Svelte root. This can be a static source test that reads `src/lib/index.ts` and asserts it does not contain `@marwes-ui/presets`.
 
 ### 12.3 README requirements
 
 `packages/svelte/README.md` must include:
 
-- [ ] Package positioning: native Svelte 5 adapter over Marwes core contracts.
-- [ ] Installation:
+- [x] Package positioning: native Svelte 5 adapter over Marwes core contracts.
+- [x] Installation:
 
 ```bash
 pnpm add @marwes-ui/svelte @marwes-ui/presets
 ```
 
-- [ ] CSS import:
+- [x] CSS import:
 
 ```svelte
 <script lang="ts">
@@ -1102,17 +1102,17 @@ pnpm add @marwes-ui/svelte @marwes-ui/presets
 </script>
 ```
 
-- [ ] Quick start with `MarwesProvider`, `Input bind:value`, and `Button`.
-- [ ] Theme example with `ThemeInput`.
-- [ ] SSR helper note for `@marwes-ui/svelte/ssr`.
-- [ ] Explicit non-goal: not Web Components.
-- [ ] Explicit dependency boundary: Svelte only affects `@marwes-ui/svelte` users.
+- [x] Quick start with `MarwesProvider`, `Input bind:value`, and `Button`.
+- [x] Theme example with `ThemeInput`.
+- [x] SSR helper note for `@marwes-ui/svelte/ssr`.
+- [x] Explicit non-goal: not Web Components.
+- [x] Explicit dependency boundary: Svelte only affects `@marwes-ui/svelte` users.
 
 ### 12.4 Phase 5 validation
 
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte test`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte test`
+- [x] `pnpm --filter @marwes-ui/svelte build`
 
 ---
 
@@ -1124,23 +1124,23 @@ Update `scripts/check-adapter-boundaries.mjs`.
 
 Checklist:
 
-- [ ] Add `packages/svelte/src/lib` or `packages/svelte/src/lib/components` to scanned roots.
-- [ ] Add `.svelte` to `sourceExtensions`.
-- [ ] Core must not import `svelte`, `@sveltejs/*`, or `packages/svelte`.
-- [ ] React must not import `svelte` or `packages/svelte`.
-- [ ] Vue must not import `svelte` or `packages/svelte`.
-- [ ] Svelte must not import `react`, `react-dom`, `vue`, `@marwes-ui/react`, or `@marwes-ui/vue`.
-- [ ] Framework component adapters must not import preset CSS/runtime. For MVP this includes Svelte components and Svelte root index.
-- [ ] Keep hardcoded color check active for Svelte components.
+- [x] Add `packages/svelte/src/lib` or `packages/svelte/src/lib/components` to scanned roots.
+- [x] Add `.svelte` to `sourceExtensions`.
+- [x] Core must not import `svelte`, `@sveltejs/*`, or `packages/svelte`.
+- [x] React must not import `svelte` or `packages/svelte`.
+- [x] Vue must not import `svelte` or `packages/svelte`.
+- [x] Svelte must not import `react`, `react-dom`, `vue`, `@marwes-ui/react`, or `@marwes-ui/vue`.
+- [x] Framework component adapters must not import preset CSS/runtime. For MVP this includes Svelte components and Svelte root index.
+- [x] Keep hardcoded color check active for Svelte components.
 
 ### 13.2 Root validation
 
 Run:
 
-- [ ] `pnpm test:typecheck:packages`
-- [ ] `pnpm build:packages`
-- [ ] `pnpm test:packages`
-- [ ] `pnpm check:adapter-boundaries`
+- [x] `pnpm test:typecheck:packages`
+- [x] `pnpm build:packages`
+- [x] `pnpm test:packages`
+- [x] `pnpm check:adapter-boundaries`
 - [ ] `pnpm validate:packages`
 
 If docs/registry/parity scripts fail because they do not know Svelte yet, either:
@@ -1168,11 +1168,11 @@ This can be a follow-up PR if MVP package is already large.
 
 ### 14.2 Registry/parity scripts
 
-- [ ] `scripts/component-registry-sources.ts` — add optional `svelteDir` / `storybookSvelteDir` support.
-- [ ] `scripts/generate-component-registry.ts` — include Svelte links when files exist.
-- [ ] `scripts/generate-framework-parity-summary.mjs` — add Svelte column.
-- [ ] `artifacts/framework-parity.json` — add Svelte values for families implemented in Svelte.
-- [ ] `docs/reference/framework-parity-summary.md` — regenerate, do not hand edit.
+- [x] `scripts/component-registry-sources.ts` — add optional `svelteDir` / `storybookSvelteDir` support.
+- [x] `scripts/generate-component-registry.ts` — include Svelte links when files exist.
+- [x] `scripts/generate-framework-parity-summary.mjs` — add Svelte column.
+- [x] `artifacts/framework-parity.json` — add Svelte values for families implemented in Svelte.
+- [x] `docs/reference/framework-parity-summary.md` — regenerate, do not hand edit.
 - [ ] `scripts/storybook-consistency.mjs` — add Svelte only after `apps/storybook-svelte` exists; otherwise explicitly ignore.
 
 ### 14.3 Svelte Storybook or playground
@@ -1181,10 +1181,10 @@ Prefer a small `apps/playground-svelte` before full Storybook if MVP validation 
 
 Future Storybook files:
 
-- [ ] `apps/storybook-svelte/src/stories/button/*`
-- [ ] `apps/storybook-svelte/src/stories/input/*`
-- [ ] `apps/storybook-svelte/src/preview.ts`
-- [ ] root script `dev:storybook:svelte`
+- [x] `apps/storybook-svelte/src/stories/button/*`
+- [x] `apps/storybook-svelte/src/stories/input/*`
+- [x] `apps/storybook-svelte/src/preview.ts`
+- [x] root script `dev:storybook:svelte`
 - [ ] later `test:storybook:a11y` includes Svelte smoke only after stories exist.
 
 ---
@@ -1195,37 +1195,37 @@ After the MVP is green, continue in this order:
 
 ### PR 2 — More forms
 
-- [ ] Textarea
-- [ ] TextareaField
-- [ ] Select
-- [ ] SelectField
-- [ ] Checkbox
-- [ ] CheckboxField
-- [ ] CheckboxGroupField
-- [ ] Radio
-- [ ] RadioGroupField
-- [ ] Switch
-- [ ] SwitchField
+- [x] Textarea
+- [x] TextareaField
+- [x] Select
+- [x] SelectField
+- [x] Checkbox
+- [x] CheckboxField
+- [x] CheckboxGroupField
+- [x] Radio
+- [x] RadioGroupField
+- [x] Switch
+- [x] SwitchField
 
 ### PR 3 — Additional passive/content families
 
-- [ ] Avatar
-- [ ] AvatarBadge
-- [ ] AvatarGroup
-- [ ] Skeleton
-- [ ] StatTile
-- [ ] Badge purpose wrappers
-- [ ] Card purpose wrappers
-- [ ] Spinner purpose wrappers
+- [x] Avatar
+- [x] AvatarBadge
+- [x] AvatarGroup
+- [x] Skeleton
+- [x] StatTile
+- [x] Badge purpose wrappers
+- [x] Card purpose wrappers
+- [x] Spinner purpose wrappers (ButtonSpinner, EmptyStateSpinner)
 
 ### PR 4 — Coordinated widgets
 
-- [ ] Accordion
-- [ ] AccordionField
-- [ ] Tab
-- [ ] TabGroup
-- [ ] Slider
-- [ ] SliderField
+- [x] Accordion
+- [x] AccordionField
+- [x] Tab
+- [x] TabGroup
+- [x] Slider
+- [x] SliderField
 
 ### PR 5 — High-risk interactive families
 
@@ -1244,22 +1244,22 @@ High-risk rule: these require extra a11y review and should not block the initial
 
 MVP is done only when all are checked:
 
-- [ ] `packages/svelte` exists and builds with `@sveltejs/package`.
-- [ ] `@marwes-ui/svelte` has `svelte` as peer dependency.
-- [ ] `@marwes-ui/svelte` has only `@marwes-ui/core` as runtime dependency.
-- [ ] `@marwes-ui/svelte` root does not import preset CSS.
-- [ ] README shows explicit CSS import from `@marwes-ui/presets/firstEdition/styles.css`.
-- [ ] `MarwesProvider` renders and applies theme variables.
-- [ ] `useTheme` / `useThemeMode` work and update reactively.
-- [ ] `Button` uses `createButtonRecipe` and passes behavior tests.
-- [ ] `Input` supports `bind:value`.
-- [ ] `InputField` has correct label/helper/error/aria wiring.
-- [ ] MVP passive primitives are exported and typecheck.
-- [ ] Root scripts include Svelte package tests/typecheck.
-- [ ] Adapter boundary check protects core/React/Vue from Svelte imports.
-- [ ] `pnpm --filter @marwes-ui/svelte build` passes.
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck` passes.
-- [ ] `pnpm --filter @marwes-ui/svelte test` passes.
+- [x] `packages/svelte` exists and builds with `@sveltejs/package`.
+- [x] `@marwes-ui/svelte` has `svelte` as peer dependency.
+- [x] `@marwes-ui/svelte` has only `@marwes-ui/core` as runtime dependency.
+- [x] `@marwes-ui/svelte` root does not import preset CSS.
+- [x] README shows explicit CSS import from `@marwes-ui/presets/firstEdition/styles.css`.
+- [x] `MarwesProvider` renders and applies theme variables.
+- [x] `useTheme` / `useThemeMode` work and update reactively.
+- [x] `Button` uses `createButtonRecipe` and passes behavior tests.
+- [x] `Input` supports `bind:value`.
+- [x] `InputField` has correct label/helper/error/aria wiring.
+- [x] MVP passive primitives are exported and typecheck.
+- [x] Root scripts include Svelte package tests/typecheck.
+- [x] Adapter boundary check protects core/React/Vue from Svelte imports.
+- [x] `pnpm --filter @marwes-ui/svelte build` passes.
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck` passes.
+- [x] `pnpm --filter @marwes-ui/svelte test` passes.
 - [ ] `pnpm validate:packages` passes or any non-Svelte existing failure is documented separately.
 - [ ] Changeset added for new public package/API if this is prepared for publish.
 
@@ -1337,28 +1337,94 @@ Tab: TabGroup
 Slider: Slider, SliderField
 SSR: createMarwesThemeScript, createMarwesThemeStyle
 
-### Known remaining work for a future session
+### Storybook Svelte progress (2026-05-07, session 2)
 
-1. **High-risk interactive widgets** (PR5 from original plan):
-   - Tooltip, Toast, Dialog, DatePicker, RichText, InputOtp
-   - These require extra a11y review, positioning logic, and portal/overlay patterns
-   - Recommend researching Svelte 5 portal patterns before implementing
+- **68 story files** across 19 component families (up from 22)
+- **19 Introduction.mdx** files with Svelte-specific docs
+- **3 wrapper .svelte** files for composed stories (BadgeGroupStory, DividerPreview, IconGallery)
+- Story titles follow React convention: `Family/Atom|Molecule|Variant|Purpose/ComponentName`
+- Files reorganized: `select/`, `textarea/` → `input/`; `typography/` → `heading/`, `paragraph/`
+- Molecule and Purpose stories added for all exported wrappers
+- Icon story replaced with full searchable gallery (matching React)
+- Divider vertical story fixed with height-providing wrapper
+- Select chevron icon fixed: was 24×24 viewBox with no dimensions, now uses React's 16×16 filled SVG
 
-2. **Storybook Svelte** (`apps/storybook-svelte`):
-   - Scaffolding and 22 story files are in place
-   - Blocked by upstream bug: `@storybook/svelte-vite` ships raw `.svelte` files in `static/` that Vite's `import-analysis` plugin rejects in pnpm monorepos
-   - Tracked: https://github.com/storybookjs/storybook/issues/29424
-   - Workaround: wait for Storybook fix, or use Histoire as alternative
-   - Stories will work immediately once the upstream fix ships
+### Known remaining work
 
-3. **Additional tests**:
-   - Current 17 tests cover Provider, Button, Input basics and boundary check
-   - Should add: InputField a11y wiring, Checkbox bind:checked, Switch toggle, TabGroup keyboard nav
-   - Consider contract tests mirroring `tests/contracts/*.contract.ts`
+#### 1. Low-risk purpose wrappers (trivial — same pattern as existing wrappers)
 
-4. **Minor missing field variants**:
-   - `DateOfBirthField`, `ZipCodeField` (same trivial pattern as EmailField/PhoneField)
-   - `DropdownField` (SelectField with specific appearance)
+**Input purpose fields** (3 components):
+- `DateOfBirthField` — wraps InputField with `type="date"`, `autoComplete="bday"`
+- `ZipCodeField` — wraps InputField with `type="text"`, `inputMode="numeric"`, `autoComplete="postal-code"`
+- `DropdownField` — wraps SelectField with dropdown appearance, `data-purpose="dropdown"`
+
+**Accordion purpose wrappers** (3 components):
+- `FAQAccordion` — AccordionField with `multiple={false}`, `data-purpose="faq"`
+- `SettingsAccordion` — AccordionField with `multiple={true}`, `data-purpose="settings"`
+- `SectionsAccordion` — AccordionField with `data-purpose="sections"`
+
+**Avatar purpose wrappers** (3 components):
+- `ProfileAvatar` — Avatar with `data-purpose="profile"`
+- `PresenceAvatar` — AvatarBadge with `data-purpose="presence"`
+- `TeamAvatarGroup` — AvatarGroup with `data-purpose="team"`
+
+**Switch purpose wrappers** (3 components):
+- `FeatureToggle` — SwitchField with `data-purpose="feature-toggle"`
+- `PermissionSwitch` — SwitchField with `data-purpose="permission"`
+- `PreferenceSwitch` — SwitchField with `data-purpose="preference"`
+
+**Radio purpose wrappers** (3 components):
+- `OptionRadioGroup` — RadioGroupField with `data-purpose="option"`
+- `RatingRadioGroup` — RadioGroupField with `data-purpose="rating"`
+- `YesNoRadioGroup` — RadioGroupField with `data-purpose="yes-no"`
+
+**Slider purpose wrappers** (3 components):
+- `BrightnessSlider` — SliderField with `data-purpose="brightness"`
+- `RadiusSlider` — SliderField with `data-purpose="radius"`
+- `VolumeSlider` — SliderField with `data-purpose="volume"`
+
+**Tab purpose wrappers + atoms** (5 components):
+- `Tab` — raw tab atom
+- `TabPanel` — raw tab panel atom
+- `ContentTabs` — TabGroup with `data-purpose="content"`
+- `NavigationTabs` — TabGroup with `data-purpose="navigation"`
+- `SettingsTabs` — TabGroup with `data-purpose="settings"`
+
+Total: **23 trivial components** — all follow the same wrapper pattern.
+
+#### 2. High-risk interactive widgets (need portal/overlay/positioning)
+
+**Dialog family** (5 components):
+- `Dialog`, `DialogModal`, `ConfirmDialog`, `DestructiveDialog`, `InfoDialog`
+- Needs: `<dialog>` element or portal pattern, focus trapping, scroll lock
+
+**Toast family** (8 components):
+- `Toast`, `ToastContainer`, `ToastProvider`, `useToast`
+- `ErrorToast`, `InfoToast`, `SuccessToast`, `WarningToast`
+- Needs: portal, auto-dismiss timer, stacking, animation
+
+**Tooltip family** (2 components):
+- `Tooltip`, `TooltipGroup`
+- Needs: positioning (Floating UI), portal, hover/focus management
+
+**Other** (4 components):
+- `DatePicker` — complex calendar widget
+- `RichText`, `RichTextField` — contenteditable integration
+- `InputOtp` — multi-digit input with focus management
+
+Total: **19 high-risk components** — recommend separate PR with a11y review.
+
+#### 3. Additional tests
+
+- Current 17 tests cover Provider, Button, Input basics and boundary check
+- Should add: InputField a11y wiring, Checkbox bind:checked, Switch toggle, TabGroup keyboard nav
+- Consider contract tests mirroring `tests/contracts/*.contract.ts`
+
+#### 4. Storybook upstream blocker
+
+- `@storybook/svelte-vite` ships raw `.svelte` files in `static/` that Vite's `import-analysis` plugin rejects in pnpm monorepos
+- Tracked: https://github.com/storybookjs/storybook/issues/29424
+- Stories render correctly once the upstream fix ships
 
 ### Technical notes for next session
 
@@ -1366,6 +1432,8 @@ SSR: createMarwesThemeScript, createMarwesThemeStyle
 - **SVG attributes**: Core generates camelCase attrs (strokeDasharray). Svelte needs kebab-case. Use `svgAttrsToKebab()` from `internal/svg-attrs.ts`.
 - **Provider warnings**: 7 benign Svelte warnings about `$state` initial values referencing other reactive values. These are intentional — the `$effect` below keeps them synced.
 - **Preset CSS class names**: Use `mw-p` not `mw-paragraph`. The preset only defines `.mw-p`.
+- **Select chevron icon**: Must use explicit `width="16" height="16"` with React's 16×16 filled SVG path, not the 24×24 stroked version.
+- **Composed Storybook stories**: Svelte Storybook cannot render component-children via args. Create `.svelte` wrapper components that accept data props and render compositions.
 - **Playground** runs on `pnpm dev:playground:svelte` (port 5173).
 - **Build** uses `@sveltejs/package` (svelte-package), not tsup.
 
@@ -1378,4 +1446,20 @@ pnpm --filter @marwes-ui/svelte test             # 17 pass
 pnpm check:adapter-boundaries                    # 505 files
 pnpm parity:summary:check                        # 23 families
 pnpm dev:playground:svelte                       # visual verification
+```
+
+### Recommended next execution order
+
+```txt
+PR next-1: Low-risk purpose wrappers (23 components)
+  → All trivial .svelte wrapper files + index.ts exports + stories
+  → Estimated: 1 focused session
+
+PR next-2: Additional tests
+  → InputField a11y, Checkbox bind:checked, Switch toggle, TabGroup keyboard
+  → Contract test parity with tests/contracts/
+
+PR next-3: High-risk interactive widgets
+  → Dialog → Toast → Tooltip → DatePicker → RichText → InputOtp
+  → Each family is its own sub-PR with a11y review
 ```

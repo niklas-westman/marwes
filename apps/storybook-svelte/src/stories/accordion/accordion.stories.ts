@@ -3,7 +3,7 @@ import { Accordion } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Layout/Atom/Accordion",
+  title: "Accordion/Atom",
   component: Accordion,
   parameters: { ...storybookLayout.padded },
   tags: ["autodocs"],

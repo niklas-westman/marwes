@@ -3,7 +3,7 @@ import { Spinner } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Feedback/Atom/Spinner",
+  title: "Spinner/Atom",
   component: Spinner,
   parameters: {
     ...storybookLayout.centered,

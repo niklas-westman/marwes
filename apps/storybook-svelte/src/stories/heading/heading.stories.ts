@@ -3,7 +3,7 @@ import { H1, H2, H3 } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const metaH1 = {
-  title: "Typography/Atom/H1",
+  title: "Heading/Atom",
   component: H1,
   parameters: { ...storybookLayout.padded },
   tags: ["autodocs"],

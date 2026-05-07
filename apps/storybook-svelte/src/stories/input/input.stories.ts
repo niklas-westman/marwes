@@ -3,7 +3,7 @@ import { Input } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Inputs/Atom/Input",
+  title: "Input/Atom/Input",
   component: Input,
   parameters: {
     ...storybookLayout.centered,

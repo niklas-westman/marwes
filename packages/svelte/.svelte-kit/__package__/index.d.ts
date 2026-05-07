@@ -1,5 +1,5 @@
 export { default as MarwesProvider } from "./provider/MarwesProvider.svelte";
-export type { MarwesProviderProps, MarwesContextState, MarwesContextValue } from "./provider/types.js";
+export type { MarwesProviderProps, MarwesContextState, MarwesContextValue, } from "./provider/types.js";
 export { useTheme } from "./provider/use-theme.js";
 export type { UseThemeReturn } from "./provider/use-theme.js";
 export { useThemeMode } from "./provider/use-theme-mode.js";

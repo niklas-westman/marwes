@@ -3,7 +3,7 @@ import { Checkbox } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Forms/Atom/Checkbox",
+  title: "Checkbox/Atom",
   component: Checkbox,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

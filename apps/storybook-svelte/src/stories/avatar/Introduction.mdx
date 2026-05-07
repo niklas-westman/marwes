@@ -1,0 +1,52 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Avatar/Introduction" />
+
+# Avatar Component
+
+Marwes provides `Avatar` as an atom-level identity primitive for displaying
+user representations via initials, icons, or images.
+
+## Component Architecture
+
+```
+Avatar (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Avatar` atom for standalone identity rendering:
+
+```svelte
+<script>
+  import { Avatar } from "@marwes-ui/svelte"
+</script>
+
+<Avatar type="icon" ariaLabel="User avatar" />
+<Avatar initials="NW" ariaLabel="Niklas Westman" />
+<Avatar src="https://i.pravatar.cc/80" alt="User photo" />
+```
+
+## Usage Notes
+
+- `Avatar` supports `small`, `medium` (default), and `large` sizes
+- `Avatar` supports `initials`, `icon`, and `image` content types
+- `initials` are normalized to two uppercase characters
+- `alt` labels image avatars; `ariaLabel` also works as a fallback
+
+## Accessibility notes
+
+**Image avatars need a name.** Always provide `alt` or `ariaLabel` when the
+image communicates a person's identity.
+
+**Non-image avatars** use `ariaLabel`, or normalized initials, or fall back to `"Avatar"`.
+
+## Component Reference
+
+**`Avatar`** — Base avatar atom for initials, icon fallback, and image content
+
+## Story Coverage
+
+- **Atom**: `Icon`, `Initials`, `Image`, `Small`, `Large`
+- **Molecule/AvatarBadge**: `Default`, `Small`, `Large`
+- **Molecule/AvatarGroup**: `Default`, `WithoutOverflow`

@@ -3,7 +3,7 @@ import { TabGroup } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Navigation/Molecule/TabGroup",
+  title: "Tab/Molecule",
   component: TabGroup,
   parameters: { ...storybookLayout.padded },
   tags: ["autodocs"],

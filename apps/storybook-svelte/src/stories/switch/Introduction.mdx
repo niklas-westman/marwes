@@ -1,0 +1,50 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Switch/Introduction" />
+
+# Switch Component
+
+Marwes provides `Switch` as an atom-level toggle control for binary on/off
+states.
+
+## Component Architecture
+
+```
+Switch (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Switch` atom for toggle controls:
+
+```svelte
+<script>
+  import { Switch } from "@marwes-ui/svelte"
+</script>
+
+<Switch checked={false} ariaLabel="Dark mode" />
+<Switch checked={true} ariaLabel="Dark mode" />
+```
+
+## Usage Notes
+
+- `checked` controls the on/off state
+- `disabled` prevents interaction
+- `ariaLabel` provides an accessible name
+
+## Accessibility notes
+
+**Always provide a label.** Use `ariaLabel` when the switch is not wrapped in a
+visible label element. The switch announces its on/off state to assistive technology.
+
+**Switch vs Checkbox.** Use `Switch` for immediate-effect toggles (e.g., dark mode).
+Use `Checkbox` for form submissions where changes are saved explicitly.
+
+## Component Reference
+
+**`Switch`** — Binary toggle atom for on/off states
+
+## Story Coverage
+
+- **Atom**: `Off`, `On`, `Disabled`
+- **Molecule**: `Default`, `WithError`, `Disabled`

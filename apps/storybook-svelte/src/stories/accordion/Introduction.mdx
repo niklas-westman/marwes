@@ -1,0 +1,55 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Accordion/Introduction" />
+
+# Accordion Component
+
+Marwes provides `Accordion` as an atom-level disclosure panel for toggling
+visibility of content sections.
+
+## Component Architecture
+
+```
+Accordion (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Accordion` atom for standalone disclosure panels:
+
+```svelte
+<script>
+  import { Accordion } from "@marwes-ui/svelte"
+</script>
+
+<Accordion title="Click to expand">
+  Panel content goes here.
+</Accordion>
+
+<Accordion title="Initially open" open>
+  This content is visible by default.
+</Accordion>
+```
+
+## Usage Notes
+
+- `title` sets the trigger label text
+- `open` controls whether the panel is expanded
+- `disabled` prevents the panel from being toggled
+
+## Accessibility notes
+
+**Accordion uses native disclosure semantics.** The trigger is keyboard-accessible
+and announces expanded/collapsed state to assistive technology.
+
+**Disabled accordion items remain visible but non-interactive.** They are excluded
+from the tab order.
+
+## Component Reference
+
+**`Accordion`** — Low-level disclosure panel with trigger + content
+
+## Story Coverage
+
+- **Atom**: `Closed`, `Open`, `Disabled`
+- **Molecule**: `Default`, `MultiOpen`, `SingleOpen`, `WithDescription`, `WithError`, `Disabled`

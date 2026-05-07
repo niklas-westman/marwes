@@ -3,7 +3,7 @@ import { Card } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Layout/Atom/Card",
+  title: "Card/Atom",
   component: Card,
   parameters: {
     ...storybookLayout.centered,

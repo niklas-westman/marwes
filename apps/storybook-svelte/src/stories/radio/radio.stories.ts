@@ -3,7 +3,7 @@ import { Radio } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Forms/Atom/Radio",
+  title: "Radio/Atom",
   component: Radio,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

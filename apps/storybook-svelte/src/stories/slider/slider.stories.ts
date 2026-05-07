@@ -3,7 +3,7 @@ import { Slider } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Forms/Atom/Slider",
+  title: "Slider/Atom",
   component: Slider,
   parameters: { ...storybookLayout.padded },
   tags: ["autodocs"],

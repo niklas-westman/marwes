@@ -1,0 +1,51 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Slider/Introduction" />
+
+# Slider Component
+
+Marwes provides `Slider` as an atom-level range input for selecting numeric
+values within a defined range.
+
+## Component Architecture
+
+```
+Slider (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Slider` atom for numeric range selection:
+
+```svelte
+<script>
+  import { Slider } from "@marwes-ui/svelte"
+</script>
+
+<Slider value={50} min={0} max={100} />
+<Slider value={25} min={0} max={100} step={25} />
+```
+
+## Usage Notes
+
+- `value` sets the current position
+- `min` and `max` define the range boundaries
+- `step` controls the increment granularity
+- `disabled` prevents interaction
+
+## Accessibility notes
+
+**Slider uses native range semantics.** The underlying `<input type="range">` provides
+keyboard accessibility (arrow keys) and screen reader announcements automatically.
+
+**Provide a label.** Ensure the slider is associated with a visible label or has
+`aria-label` for standalone usage.
+
+## Component Reference
+
+**`Slider`** — Numeric range input atom
+
+## Story Coverage
+
+- **Atom**: `Default`, `WithStep`, `Disabled`
+- **Molecule**: `Default`, `WithHelperText`, `WithError`, `Disabled`

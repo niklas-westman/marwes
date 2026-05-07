@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Buttons/Introduction" />
+
+# Button Component
+
+Marwes provides `Button` as the atom-level interactive element for actions,
+navigation, and form submissions.
+
+## Component Architecture
+
+```
+Button (Atom)
+```
+
+## Recommended Usage
+
+Use `Button` with explicit `variant` and `action` props:
+
+```svelte
+<script>
+  import { Button } from "@marwes-ui/svelte"
+</script>
+
+<Button variant="primary" action="button">Primary Action</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="text" action="navigate" href="/docs" as="a">Go to Docs</Button>
+```
+
+## Usage Notes
+
+- `variant` controls visual style: `primary`, `secondary`, `neutral`, `text`, `success`
+- `action` controls semantic purpose: `submit`, `cancel`, `create`, `delete`, `navigate`, `edit`, `reset`, `button`
+- `size` supports `xs`, `sm`, `md`, `lg`
+- `loading` shows a spinner and disables interaction
+- `disabled` prevents interaction
+- `as="a"` with `href` renders an anchor with link semantics
+- `iconLeft` / `iconRight` add icons to either side of the label
+
+## Accessibility notes
+
+**Button vs link semantics.** Use `as="a"` with `href` for navigation. Native link
+semantics are preserved, including right-click and cmd+click behavior.
+
+**Loading state.** When `loading` is active, the button becomes `aria-busy` and disabled
+to prevent duplicate submissions.
+
+## Component Reference
+
+**`Button`** — Base interactive atom for actions, submissions, and navigation
+
+## Story Coverage
+
+- **Atom**: `Basic`, `AsLink`, `Loading`, `Disabled`, `Secondary`, `Text`, `Success`, `Small`, `Large`
+- **Variant/PrimaryButton**: `PrimaryExample`
+- **Variant/SecondaryButton**: `SecondaryExample`
+- **Variant/TextButton**: `TextExample`
+- **Purpose**: SubmitButton, CancelButton, DestructiveButton, CreateButton, SaveButton, ConfirmButton, VerifyButton, EditButton, CloseButton, RefreshButton, UploadButton, DownloadButton, CopyButton, SearchButton, FilterButton, SortButton, DropdownButton, LinkButton

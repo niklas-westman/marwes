@@ -3,7 +3,7 @@ import { Textarea } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Inputs/Atom/Textarea",
+  title: "Input/Atom/Textarea",
   component: Textarea,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

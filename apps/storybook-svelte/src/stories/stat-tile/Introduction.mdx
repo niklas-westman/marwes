@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="StatTile/Introduction" />
+
+# StatTile Component
+
+Marwes provides `StatTile` as an atom-level data display for key metrics
+with optional trend indicators.
+
+## Component Architecture
+
+```
+StatTile (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `StatTile` atom for metric displays:
+
+```svelte
+<script>
+  import { StatTile } from "@marwes-ui/svelte"
+</script>
+
+<StatTile label="Revenue" value="$12,345" />
+<StatTile label="Users" value="1,234" trendValue="+12%" trendDirection="positive" />
+<StatTile label="Churn" value="3.2%" trendValue="-0.5%" trendDirection="negative" tone="danger" />
+```
+
+## Usage Notes
+
+- `label` describes the metric
+- `value` displays the primary figure
+- `trendValue` and `trendDirection` show change indicators
+- `tone` adjusts color semantics (e.g., `danger` for negative metrics)
+- `subtitle` provides additional context below the value
+
+## Component Reference
+
+**`StatTile`** — Metric display atom with label, value, trend, and tone
+
+## Story Coverage
+
+- **Atom**: `Default`, `WithTrend`, `Negative`, `WithSubtitle`

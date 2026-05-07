@@ -3,7 +3,7 @@ import { StatTile } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Data Display/Atom/StatTile",
+  title: "StatTile/Atom",
   component: StatTile,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

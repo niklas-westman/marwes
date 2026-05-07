@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Spacing/Introduction" />
+
+# Spacing Component
+
+Marwes provides `Spacing` as an atom-level layout primitive for creating
+consistent whitespace between content sections.
+
+## Component Architecture
+
+```
+Spacing (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Spacing` atom for vertical whitespace:
+
+```svelte
+<script>
+  import { Spacing } from "@marwes-ui/svelte"
+</script>
+
+<Spacing size="sp-8" />
+<Spacing size="sp-24" />
+<Spacing size="sp-48" />
+```
+
+## Usage Notes
+
+- `size` maps to spacing tokens: `sp-8`, `sp-16`, `sp-24`, `sp-32`, `sp-48`, `sp-64`, `sp-80`
+- Use `Spacing` instead of ad-hoc margins for consistent vertical rhythm
+
+## Component Reference
+
+**`Spacing`** — Vertical whitespace atom using spacing tokens
+
+## Story Coverage
+
+- **Atom**: `Default`, `Small`, `Medium`, `Large`, `ExtraLarge`

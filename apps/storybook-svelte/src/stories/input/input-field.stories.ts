@@ -3,7 +3,7 @@ import { InputField } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Inputs/Molecule/InputField",
+  title: "Input/Molecule/InputField",
   component: InputField,
   parameters: {
     ...storybookLayout.centered,

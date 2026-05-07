@@ -3,7 +3,7 @@ import { Spacing } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Layout/Atom/Spacing",
+  title: "Spacing/Atom",
   component: Spacing,
   parameters: {
     ...storybookLayout.padded,

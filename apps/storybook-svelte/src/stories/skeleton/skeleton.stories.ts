@@ -3,7 +3,7 @@ import { Skeleton } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
-  title: "Feedback/Atom/Skeleton",
+  title: "Skeleton/Atom",
   component: Skeleton,
   parameters: { ...storybookLayout.centered },
   tags: ["autodocs"],

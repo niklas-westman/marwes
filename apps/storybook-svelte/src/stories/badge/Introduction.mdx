@@ -1,0 +1,47 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Badge/Introduction" />
+
+# Badge Component
+
+Marwes provides `Badge` as an atom-level status indicator for labeling content
+with semantic color variants.
+
+## Component Architecture
+
+```
+Badge (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Badge` atom to communicate status, category, or priority:
+
+```svelte
+<script>
+  import { Badge } from "@marwes-ui/svelte"
+</script>
+
+<Badge variant="neutral">Neutral</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="error">Error</Badge>
+```
+
+## Usage Notes
+
+- `variant` controls semantic color: `neutral`, `info`, `success`, `warning`, `error`
+- Badge content is passed as children
+
+## Component Reference
+
+**`Badge`** — Inline status indicator atom with semantic color variants
+
+## Story Coverage
+
+- **Atom**: `Neutral`, `Info`, `Success`, `Warning`, `ErrorVariant`
+- **Molecule**: `Default`
+- **Purpose/Status**: `Default`
+- **Purpose/Priority**: `Default`
+- **Purpose/Notification**: `Default`

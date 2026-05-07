@@ -1,0 +1,92 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Input/Introduction" />
+
+# Input Components
+
+Marwes provides input-domain components organized in a clear Atom → Molecule
+progression for text-like data entry.
+
+## Input Architecture
+
+```
+Atoms
+  ├─ Input
+  ├─ Select
+  └─ Textarea
+
+Molecules
+  └─ InputField
+```
+
+## Recommended Usage
+
+Use molecules when you need label, helper text, and error semantics. Use atoms
+for custom compositions.
+
+```svelte
+<script>
+  import { Input, InputField, Select, Textarea } from "@marwes-ui/svelte"
+</script>
+
+<!-- Atom: raw input -->
+<Input placeholder="Enter text..." />
+
+<!-- Molecule: full field with label and validation -->
+<InputField label="Full name" input={{ placeholder: "Jane Doe" }} />
+
+<!-- Atom: select dropdown -->
+<Select options={[
+  { value: "react", label: "React" },
+  { value: "svelte", label: "Svelte" },
+]} placeholder="Select a framework" />
+
+<!-- Atom: multiline text -->
+<Textarea placeholder="Enter text..." rows={4} />
+```
+
+## Usage Notes
+
+- `Input` is the low-level text input atom
+- `InputField` wraps `Input` with label, helper text, error, and leading symbol
+- `Select` provides a native dropdown with typed options
+- `Textarea` provides multiline text entry
+- All atoms support `disabled` and `invalid` states
+
+## Accessibility notes
+
+**Use InputField for form contexts.** The molecule automatically wires
+`aria-labelledby`, `aria-describedby`, and `aria-invalid` so you don't have
+to manage those manually.
+
+**Raw atoms need manual labeling.** When using `Input`, `Select`, or `Textarea`
+directly, ensure they are associated with a visible label or have `aria-label`.
+
+## Component Reference
+
+### Atoms
+
+**`Input`** — Low-level text input atom
+
+**`Select`** — Native dropdown atom with typed options
+
+**`Textarea`** — Multiline text entry atom
+
+### Molecules
+
+**`InputField`** — Accessible input field with label, helper text, error, and leading symbol
+
+## Story Coverage
+
+- **Atom/Input**: `Basic`, `WithValue`, `Disabled`, `Invalid`, `Password`
+- **Atom/Select**: `Default`, `WithValue`, `Disabled`
+- **Atom/Textarea**: `Default`, `WithValue`, `Disabled`, `CustomRows`
+- **Molecule/InputField**: `Basic`, `WithHelperText`, `WithError`, `WithLeadingSymbol`, `Disabled`
+- **Molecule/SelectField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Molecule/TextareaField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Purpose/PasswordField**: `Default`, `WithError`
+- **Purpose/EmailField**: `Default`, `WithError`
+- **Purpose/SearchField**: `Default`
+- **Purpose/PhoneField**: `Default`
+- **Purpose/URLField**: `Default`
+- **Purpose/CurrencyField**: `Default`

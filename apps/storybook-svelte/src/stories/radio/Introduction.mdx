@@ -1,0 +1,53 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Radio/Introduction" />
+
+# Radio Component
+
+Marwes provides `Radio` as an atom-level option input for single-selection
+within a group of choices.
+
+## Component Architecture
+
+```
+Radio (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Radio` atom for individual radio options:
+
+```svelte
+<script>
+  import { Radio } from "@marwes-ui/svelte"
+</script>
+
+<Radio name="plan" value="free" ariaLabel="Free plan" />
+<Radio name="plan" value="pro" ariaLabel="Pro plan" />
+<Radio name="plan" value="enterprise" ariaLabel="Enterprise plan" />
+```
+
+## Usage Notes
+
+- `name` groups radios together for single selection
+- `value` identifies the selected option
+- `checked` controls the selected state
+- `disabled` prevents interaction
+- `ariaLabel` provides an accessible name when no visible label wraps the radio
+
+## Accessibility notes
+
+**Group radios with a shared `name`.** This enables native radio-group keyboard
+navigation (arrow keys cycle through options).
+
+**Always provide a label.** Use `ariaLabel` when the radio is not wrapped in a
+visible `<label>` element.
+
+## Component Reference
+
+**`Radio`** — Single-selection option atom
+
+## Story Coverage
+
+- **Atom**: `Default`, `Checked`, `Disabled`
+- **Molecule**: `Default`, `WithDescription`, `WithError`, `Disabled`

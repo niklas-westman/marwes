@@ -1,0 +1,41 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Paragraph/Introduction" />
+
+# Paragraph Component
+
+Marwes provides `Paragraph` as an atom-level typography primitive for body text
+with consistent sizing and spacing.
+
+## Component Architecture
+
+```
+Paragraph (Atom)
+```
+
+## Recommended Usage
+
+Use the raw `Paragraph` atom for body text:
+
+```svelte
+<script>
+  import { Paragraph } from "@marwes-ui/svelte"
+</script>
+
+<Paragraph>Default body text paragraph.</Paragraph>
+<Paragraph size="sm">Small text for captions.</Paragraph>
+<Paragraph size="lg">Large text for hero sections.</Paragraph>
+```
+
+## Usage Notes
+
+- `size` controls the text scale: `sm`, `md` (default), `lg`
+- Children are rendered as the paragraph content
+
+## Component Reference
+
+**`Paragraph`** — Body text atom with consistent typography scale
+
+## Story Coverage
+
+- **Atom**: `Default`, `Small`, `Large`
