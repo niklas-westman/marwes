@@ -12,12 +12,23 @@ type ModeValue = {
 
 type MarwesColorSource = {
   semantic: {
-    surface: Record<string, ModeValue>
-    text: Record<string, ModeValue>
-    border: Record<string, ModeValue>
-    focus: Record<string, ModeValue>
-    action: Record<string, Record<string, ModeValue>>
-    status: Record<string, Record<string, ModeValue>>
+    surface: Record<
+      "primary" | "secondary" | "sunken" | "raised" | "disabled" | "inverse",
+      ModeValue
+    >
+    text: Record<"primary" | "secondary" | "disabled" | "inverse" | "onSurfaceDark", ModeValue>
+    border: Record<"default" | "strong", ModeValue>
+    focus: Record<"ring", ModeValue>
+    action: {
+      primary: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
+      secondary: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
+      destructive: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
+    }
+    status: {
+      success: Record<"text", ModeValue>
+      warning: Record<"text", ModeValue>
+      info: Record<"icon", ModeValue>
+    }
   }
 }
 
