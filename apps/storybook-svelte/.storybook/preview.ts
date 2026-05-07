@@ -2,6 +2,7 @@ import "@marwes-ui/presets/firstEdition/styles.css"
 import { ThemeMode } from "@marwes-ui/core"
 import type { Preview } from "@storybook/svelte"
 import MarwesDecorator from "./MarwesDecorator.svelte"
+import SnippetRenderer from "./SnippetRenderer.svelte"
 
 const preview: Preview = {
   decorators: [
@@ -9,6 +10,19 @@ const preview: Preview = {
       Component: MarwesDecorator,
     }),
   ],
+  // Svelte 5 renders children via snippets ({@render children?.()}).
+  // Storybook passes `children` as a plain string from args.
+  // This global render wraps it in SnippetRenderer which converts the
+  // string into actual slot content that becomes a snippet.
+  render: (args, { component }) => {
+    if (args.children != null && typeof args.children === "string") {
+      return {
+        Component: SnippetRenderer,
+        props: { component, ...args },
+      }
+    }
+    return { Component: component, props: args }
+  },
   parameters: {
     controls: {
       matchers: {

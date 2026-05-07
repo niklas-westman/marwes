@@ -1,7 +1,6 @@
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import type { StorybookConfig } from "@storybook/svelte-vite"
-import { svelte } from "@sveltejs/vite-plugin-svelte"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -14,7 +13,15 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
     "@storybook/addon-themes",
   ],
-  framework: "@storybook/svelte-vite",
+  framework: {
+    name: "@storybook/svelte-vite",
+    options: {
+      // Disable Storybook's svelte-docgen plugin — it's incompatible with Vite 7.
+      // The docgen plugin runs before vite-plugin-svelte:compile in the transform
+      // pipeline and tries to this.parse() raw Svelte syntax as JavaScript.
+      docgen: false,
+    },
+  },
 
   async viteFinal(cfg) {
     cfg.resolve ??= {}
@@ -47,11 +54,7 @@ const config: StorybookConfig = {
       ...existing,
     ]
 
-    // Ensure Vite processes .svelte files from node_modules through the Svelte plugin
-    cfg.optimizeDeps ??= {}
-    cfg.optimizeDeps.exclude = [...(cfg.optimizeDeps.exclude ?? []), "@storybook/svelte"]
-
-    // Allow serving files from the pnpm store
+    // Allow serving files from the monorepo root and pnpm store
     cfg.server ??= {}
     cfg.server.fs ??= {}
     cfg.server.fs.allow = [
