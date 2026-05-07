@@ -45,6 +45,9 @@ export { default as SearchField } from "./components/input/SearchField.svelte";
 export { default as PhoneField } from "./components/input/PhoneField.svelte";
 export { default as URLField } from "./components/input/URLField.svelte";
 export { default as CurrencyField } from "./components/input/CurrencyField.svelte";
+export { default as DateOfBirthField } from "./components/input/DateOfBirthField.svelte";
+export { default as ZipCodeField } from "./components/input/ZipCodeField.svelte";
+export { default as DropdownField } from "./components/input/DropdownField.svelte";
 // Badge
 export { default as Badge } from "./components/badge/Badge.svelte";
 export { default as BadgeGroup } from "./components/badge/BadgeGroup.svelte";
@@ -79,13 +82,22 @@ export { default as CheckboxGroupField } from "./components/checkbox/CheckboxGro
 // Switch
 export { default as Switch } from "./components/switch/Switch.svelte";
 export { default as SwitchField } from "./components/switch/SwitchField.svelte";
+export { default as FeatureToggle } from "./components/switch/FeatureToggle.svelte";
+export { default as PreferenceSwitch } from "./components/switch/PreferenceSwitch.svelte";
+export { default as PermissionSwitch } from "./components/switch/PermissionSwitch.svelte";
 // Radio
 export { default as Radio } from "./components/radio/Radio.svelte";
 export { default as RadioGroupField } from "./components/radio/RadioGroupField.svelte";
+export { default as OptionRadioGroup } from "./components/radio/OptionRadioGroup.svelte";
+export { default as YesNoRadioGroup } from "./components/radio/YesNoRadioGroup.svelte";
+export { default as RatingRadioGroup } from "./components/radio/RatingRadioGroup.svelte";
 // Avatar
 export { default as Avatar } from "./components/avatar/Avatar.svelte";
 export { default as AvatarBadge } from "./components/avatar/AvatarBadge.svelte";
 export { default as AvatarGroup } from "./components/avatar/AvatarGroup.svelte";
+export { default as ProfileAvatar } from "./components/avatar/ProfileAvatar.svelte";
+export { default as PresenceAvatar } from "./components/avatar/PresenceAvatar.svelte";
+export { default as TeamAvatarGroup } from "./components/avatar/TeamAvatarGroup.svelte";
 // Skeleton
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte";
 // StatTile
@@ -93,10 +105,19 @@ export { default as StatTile } from "./components/stat-tile/StatTile.svelte";
 // Accordion
 export { default as Accordion } from "./components/accordion/Accordion.svelte";
 export { default as AccordionField } from "./components/accordion/AccordionField.svelte";
+export { default as FAQAccordion } from "./components/accordion/FAQAccordion.svelte";
+export { default as SettingsAccordion } from "./components/accordion/SettingsAccordion.svelte";
+export { default as SectionsAccordion } from "./components/accordion/SectionsAccordion.svelte";
 // TabGroup
 export { default as TabGroup } from "./components/tab/TabGroup.svelte";
+export { default as NavigationTabs } from "./components/tab/NavigationTabs.svelte";
+export { default as ContentTabs } from "./components/tab/ContentTabs.svelte";
+export { default as SettingsTabs } from "./components/tab/SettingsTabs.svelte";
 // Slider
 export { default as Slider } from "./components/slider/Slider.svelte";
 export { default as SliderField } from "./components/slider/SliderField.svelte";
+export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte";
+export { default as BrightnessSlider } from "./components/slider/BrightnessSlider.svelte";
+export { default as RadiusSlider } from "./components/slider/RadiusSlider.svelte";
 // Core re-exports
 export { BadgeVariant, ButtonAction, ButtonSize, ButtonVariant, createFontStack, IconName, mwAvailableFonts, mwFontFallbacks, mwGoogleFontFamilies, mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar, Spacings, ThemeMode, } from "@marwes-ui/core";
