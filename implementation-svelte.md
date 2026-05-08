@@ -1063,11 +1063,11 @@ Use this map to know where to fetch implementation context. For each family, rea
 
 - [x] `packages/svelte/src/tests/provider.test.ts`
 - [x] `packages/svelte/src/tests/button.test.ts`
-- [ ] `packages/svelte/src/tests/input-field.test.ts`
+- [x] `packages/svelte/src/tests/input-field.test.ts`
 - [ ] `packages/svelte/src/tests/passive-primitives.test.ts` optional.
-- [ ] `packages/svelte/src/tests/type-fixtures/ButtonFixture.svelte`
-- [ ] `packages/svelte/src/tests/type-fixtures/InputFixture.svelte`
-- [ ] `packages/svelte/src/tests/type-fixtures/ProviderFixture.svelte`
+- [x] `packages/svelte/src/tests/type-fixtures/ButtonFixture.svelte`
+- [x] `packages/svelte/src/tests/type-fixtures/InputFixture.svelte`
+- [x] `packages/svelte/src/tests/type-fixtures/ProviderFixture.svelte`
 
 ### 12.2 Test strategy
 
@@ -1077,10 +1077,10 @@ MVP tests must prove:
 
 - [x] Provider data attrs and CSS variables.
 - [x] Button core class/data/a11y output.
-- [ ] Button native `onclick` behavior.
+- [x] Button native `onclick` behavior.
 - [x] Button loading behavior.
 - [x] Input `bind:value`.
-- [ ] InputField label/helper/error wiring.
+- [x] InputField label/helper/error wiring.
 - [x] No CSS auto-import from Svelte root. This can be a static source test that reads `src/lib/index.ts` and asserts it does not contain `@marwes-ui/presets`.
 
 ### 12.3 README requirements
@@ -1158,12 +1158,12 @@ This can be a follow-up PR if MVP package is already large.
 
 ### 14.1 Docs to update
 
-- [ ] `docs/reference/architecture.md` — include Svelte in adapter layer diagrams/tables.
-- [ ] `docs/reference/repo-map.md` — add Svelte edges and change matrix rows.
-- [ ] `docs/reference/spec.md` — add `REQ-SVELTE-001`.
-- [ ] `docs/reference/testing.md` — add Svelte package tests and future Storybook stance.
-- [ ] `docs/guides/adding-components.md` — update layer rule to `core recipe → preset CSS → React adapter → Vue adapter → Svelte adapter` or explain adapter parity without forcing order.
-- [ ] `docs/guides/figma-to-marwes.md` — include Svelte as a consumer adapter, not a design source.
+- [x] `docs/reference/architecture.md` — include Svelte in adapter layer diagrams/tables.
+- [x] `docs/reference/repo-map.md` — add Svelte edges and change matrix rows.
+- [x] `docs/reference/spec.md` — add `REQ-SVELTE-001`.
+- [x] `docs/reference/testing.md` — add Svelte package tests and future Storybook stance.
+- [x] `docs/guides/adding-components.md` — update layer rule to `core recipe → preset CSS → React adapter → Vue adapter → Svelte adapter` or explain adapter parity without forcing order.
+- [x] `docs/guides/figma-to-marwes.md` — include Svelte as a consumer adapter, not a design source.
 - [ ] New `docs/guides/svelte-adapter.md` or `docs/adapters/svelte.md` if docs structure prefers it.
 
 ### 14.2 Registry/parity scripts
