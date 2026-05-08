@@ -49,6 +49,8 @@ export { default as DateOfBirthField } from "./components/input/DateOfBirthField
 export { default as ZipCodeField } from "./components/input/ZipCodeField.svelte";
 export { default as DropdownField } from "./components/input/DropdownField.svelte";
 export { default as InputOtp } from "./components/input/InputOtp.svelte";
+export { default as RichText } from "./components/input/RichText.svelte";
+export { default as RichTextField } from "./components/input/RichTextField.svelte";
 // Badge
 export { default as Badge } from "./components/badge/Badge.svelte";
 export { default as BadgeGroup } from "./components/badge/BadgeGroup.svelte";
@@ -99,6 +101,8 @@ export { default as AvatarGroup } from "./components/avatar/AvatarGroup.svelte";
 export { default as ProfileAvatar } from "./components/avatar/ProfileAvatar.svelte";
 export { default as PresenceAvatar } from "./components/avatar/PresenceAvatar.svelte";
 export { default as TeamAvatarGroup } from "./components/avatar/TeamAvatarGroup.svelte";
+// DatePicker
+export { default as DatePicker } from "./components/date-picker/DatePicker.svelte";
 // Skeleton
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte";
 // StatTile
