@@ -28,6 +28,35 @@ export const Default: Story = {
   },
 }
 
+export const Basic: Story = {
+  args: {
+    label: "Framework",
+    select: { options, placeholder: "Select a framework" },
+  },
+}
+
+export const Controlled: Story = {
+  args: {
+    label: "Framework",
+    select: { options, value: "svelte" },
+  },
+}
+
+export const Native: Story = {
+  args: {
+    label: "Framework",
+    select: { options, native: true, placeholder: "Select a framework" },
+  },
+}
+
+export const Required: Story = {
+  args: {
+    label: "Framework *",
+    helperText: "This field is required.",
+    select: { options, required: true, placeholder: "Select a framework" },
+  },
+}
+
 export const WithHelperText: Story = {
   args: {
     label: "Framework",

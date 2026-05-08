@@ -3,15 +3,7 @@
   import type { RichTextOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import RichText from "./RichText.svelte";
-
-  interface RichTextFieldProps {
-    id?: string;
-    label: string;
-    helperText?: string;
-    error?: string;
-    editor: RichTextOptions & { onvaluechange?: (value: string) => void; class?: string };
-    ariaDescribedBy?: string;
-  }
+  import type { RichTextFieldProps } from "./types.js";
 
   let {
     id: userProvidedId,

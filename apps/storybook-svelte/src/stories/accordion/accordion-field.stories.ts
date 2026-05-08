@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { AccordionField } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import AccordionFieldControlled from "./AccordionFieldControlled.svelte"
 
 const faqItems = [
   {
@@ -35,6 +36,21 @@ export const Default: Story = {
     items: faqItems,
     defaultOpenItems: ["what"],
   },
+}
+
+export const Playground: Story = {
+  args: {
+    label: "Frequently Asked Questions",
+    items: faqItems,
+    defaultOpenItems: ["what"],
+  },
+}
+
+export const Controlled: Story = {
+  render: () => ({
+    Component: AccordionFieldControlled,
+    props: {},
+  }),
 }
 
 export const MultiOpen: Story = {

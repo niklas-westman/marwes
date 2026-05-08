@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/addon-docs/blocks"
 import {
+  BadgeVariant,
   badgeWhyPurposeComponents,
   badgePurposeComponentReference,
 } from "@marwes-ui/core"
@@ -8,34 +9,28 @@ import {
 
 # Badge Components
 
-Marwes provides badges at three layers: **purpose components** for common
-status contexts, **BadgeGroup** for grouped layouts, and the raw **Badge**
-atom for custom composition.
-
-## Component Architecture
-
-```
-Badge (Atom)
-     ↓
-BadgeGroup (Molecule)
-     ↓
-Purpose Wrappers
-  ├─ StatusBadge
-  ├─ PriorityBadge
-  └─ NotificationBadge
-```
+Marwes provides a badge system with three layers:
+**purpose components** for common patterns, **BadgeGroup** for grouping related badges,
+and the raw **Badge** atom for standalone use.
 
 ## Recommended: Purpose Components
 
-Use purpose-built badges when the badge has a clear semantic meaning:
+Use purpose-built components that automatically set AI-friendly metadata:
 
 ```svelte
 <script>
   import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/svelte"
 </script>
 
+<!-- Operational status — auto-sets data-purpose="status" -->
 <StatusBadge variant="success">Active</StatusBadge>
+<StatusBadge variant="error">Offline</StatusBadge>
+
+<!-- Priority levels — auto-sets data-purpose="priority" -->
+<PriorityBadge variant="error">Critical</PriorityBadge>
 <PriorityBadge variant="warning">High</PriorityBadge>
+
+<!-- Notification counts — auto-sets data-purpose="notification" -->
 <NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>
 ```
 
@@ -61,7 +56,7 @@ Use purpose-built badges when the badge has a clear semantic meaning:
 
 ## Base: BadgeGroup (Molecule)
 
-For grouped badge layouts:
+For grouping related badges with accessible label association, use `BadgeGroup`:
 
 ```svelte
 <script>
@@ -75,50 +70,83 @@ For grouped badge layouts:
 </BadgeGroup>
 ```
 
-## Atom: Badge
+### BadgeGroup Features
 
-Use the raw `Badge` atom for standalone status indicators:
+- **Accessible group** — `<fieldset>` with `aria-labelledby` wiring
+- **Visible label** — rendered as a `<legend>` with Paragraph typography
+- **Data attributes** — supports `dataAttributes` for AI-friendly metadata
+- **Composable** — accepts any Badge children including purpose components
+
+## Low-level: Badge (Atom)
+
+Use the raw `Badge` atom for standalone badges or when building custom compositions:
 
 ```svelte
 <script>
   import { Badge } from "@marwes-ui/svelte"
 </script>
 
-<Badge variant="neutral">Neutral</Badge>
-<Badge variant="info">Info</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="error">Error</Badge>
+<Badge variant="success">Active</Badge>
+<Badge variant="error" ariaLabel="critical status">!</Badge>
 ```
 
-## Usage Notes
+> **Note:** When using `Badge` directly, you are responsible for:
+> - Providing appropriate context through surrounding markup
+> - Setting `ariaLabel` for non-text or ambiguous content
+> - Grouping related badges in a `BadgeGroup` when needed
 
-- `variant` controls semantic color: `neutral`, `info`, `success`, `warning`, `error`
-- Badge content is passed as children
-- `ariaLabel` provides an accessible name for icon-only or abbreviated badges
+---
+
+## Accessibility notes
+
+**Numeric-only badges always need `ariaLabel`.** A badge that renders only a number such as `5`
+or `99+` has no readable context for a screen reader. Always provide `ariaLabel` on any
+`NotificationBadge` or raw `Badge` whose visible text alone does not explain its meaning.
+
+```svelte
+<!-- ❌ Screen reader sees only "5" with no context -->
+<NotificationBadge variant="info">5</NotificationBadge>
+
+<!-- ✅ Screen reader announces "5 unread messages" -->
+<NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>
+```
+
+**`BadgeGroup` label quality matters.** `BadgeGroup` uses a `<fieldset>` with `aria-labelledby`
+wiring from the `label` prop. The label is exposed as the accessible name of the group.
+Choose labels that describe the group in context — for example `"Sprint status"` rather than
+just `"Status"`.
+
+**Badge is a passive span.** The raw `Badge` does not emit `role`, `button`, or any interactive
+semantics. If a badge must be interactive, use a different component rather than layering
+click handlers on a `Badge` surface.
 
 ## Component Reference
 
-### Purpose Components
+### Purpose Components (AI-Friendly)
 
-**`StatusBadge`** — Operational status indicators (`data-purpose="status"`)
+**`StatusBadge`** — Operational or lifecycle status
+Sets: `data-purpose="status"`
 
-**`PriorityBadge`** — Task or issue priority labels (`data-purpose="priority"`)
+**`PriorityBadge`** — Urgency or importance levels
+Sets: `data-purpose="priority"`
 
-**`NotificationBadge`** — Unread counts and alerts (`data-purpose="notification"`)
+**`NotificationBadge`** — Notification counts and alerts
+Sets: `data-purpose="notification"`
 
-### Molecule
+### Base Molecule
 
-**`BadgeGroup`** — Grouped badge layout with accessible fieldset
+**`BadgeGroup`** — Accessible badge group with label association
+Provides: `<fieldset>`, `aria-labelledby`, visible label
 
 ### Atom
 
-**`Badge`** — Inline status indicator with semantic color variants
+**`Badge`** — Low-level status indicator with variant styling
+Use when you need standalone badges or custom compositions
 
 ## Story Coverage
 
-- **Atom**: `Neutral`, `Info`, `Success`, `Warning`, `ErrorVariant`
-- **Molecule**: `Default`, `AllVariants`
-- **Purpose/Status**: `Default`
-- **Purpose/Priority**: `Default`
-- **Purpose/Notification**: `Default`
+- **Atom**: `Default`, `AllVariants`, `DarkVariants`
+- **Molecule**: `Default`, `AllVariants`, `WithCustomClass`
+- **Purpose/Status**: `Default`, `AllStatuses`
+- **Purpose/Priority**: `Default`, `AllPriorities`
+- **Purpose/Notification**: `Default`, `AllNotifications`

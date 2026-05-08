@@ -1,4 +1,5 @@
 import {
+  SpinnerVariants,
   storybookA11yPolicy,
   storybookButtonGeneralArgTypes,
   storybookLayout,
@@ -16,6 +17,14 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     ...storybookButtonGeneralArgTypes,
+    children: {
+      control: "text",
+    },
+    loading: {
+      control: "object",
+      description:
+        "Boolean shorthand or loading config object with isLoading, disableWhileLoading, spinnerVariant, and loadingLabel.",
+    },
   },
 } satisfies Meta<typeof Button>
 
@@ -46,6 +55,76 @@ export const Loading: Story = {
     loading: true,
     variant: "primary",
     action: "submit",
+  },
+}
+
+export const LoadingWithLabel: Story = {
+  args: {
+    children: "Save",
+    loading: {
+      isLoading: true,
+      loadingLabel: "Saving…",
+    },
+    variant: "primary",
+    action: "submit",
+  },
+}
+
+export const LoadingInteractive: Story = {
+  args: {
+    children: "Refresh",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: false,
+      loadingLabel: "Refreshing…",
+    },
+    variant: "secondary",
+    action: "button",
+  },
+}
+
+export const LoadingWithCustomSpinner: Story = {
+  args: {
+    children: "Refresh",
+    loading: {
+      isLoading: true,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Refreshing…",
+    },
+    variant: "secondary",
+    action: "button",
+  },
+}
+
+export const LoadingFullConfig: Story = {
+  args: {
+    children: "Save",
+    variant: "primary",
+    action: "submit",
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: false,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
+  },
+}
+
+export const LoadingFullConfigBlocking: Story = {
+  args: {
+    children: "Save",
+    variant: "primary",
+    action: "submit",
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: true,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
   },
 }
 

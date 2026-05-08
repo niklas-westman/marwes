@@ -20,8 +20,18 @@ export const HeadingOne: Story = {
   args: { children: "This is a Heading 1" },
 }
 
-export const WithSizeOverride: Story = {
-  args: { children: "H1 with h3 size", size: "h3" },
+export const HeadingTwo: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "heading-two" },
+  }),
+}
+
+export const HeadingThree: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "heading-three" },
+  }),
 }
 
 export const AllLevels: Story = {
@@ -31,9 +41,37 @@ export const AllLevels: Story = {
   }),
 }
 
-export const SizeOverrides: Story = {
+export const SizeOverride: Story = {
   render: () => ({
     Component: HeadingShowcase,
     props: { story: "size-override" },
+  }),
+}
+
+export const WithCustomClass: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "with-custom-class" },
+  }),
+}
+
+export const WithID: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "with-id" },
+  }),
+}
+
+export const LongText: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "long-text" },
+  }),
+}
+
+export const ContentHierarchy: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "content-hierarchy" },
   }),
 }

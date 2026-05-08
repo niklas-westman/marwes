@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { AvatarGroup } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import AvatarGroupDark from "./AvatarGroupDark.svelte"
 
 const sampleItems = [
   { id: "mw", initials: "MW" },
@@ -35,4 +36,11 @@ export const WithoutOverflow: Story = {
     ariaLabel: "Design reviewers",
     items: sampleItems,
   },
+}
+
+export const DarkPreview: Story = {
+  render: () => ({
+    Component: AvatarGroupDark,
+    props: {},
+  }),
 }

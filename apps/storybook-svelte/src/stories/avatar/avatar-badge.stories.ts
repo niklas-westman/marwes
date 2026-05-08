@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { AvatarBadge } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import AvatarBadgeGallery from "./AvatarBadgeGallery.svelte"
 
 const meta = {
   title: "Avatar/Molecule/AvatarBadge",
@@ -25,4 +26,18 @@ export const Small: Story = {
 
 export const Large: Story = {
   args: { initials: "MW", size: "large" },
+}
+
+export const AllSizes: Story = {
+  render: () => ({
+    Component: AvatarBadgeGallery,
+    props: {},
+  }),
+}
+
+export const DarkSizes: Story = {
+  render: () => ({
+    Component: AvatarBadgeGallery,
+    props: {},
+  }),
 }

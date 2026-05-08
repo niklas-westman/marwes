@@ -23,6 +23,38 @@ export const Default: Story = {
   },
 }
 
+export const Playground: Story = {
+  args: {
+    label: "Workspace sections",
+    tabs: [
+      {
+        value: "overview",
+        label: "Overview",
+        panel: "Workspace summary, recent activity, and linked resources.",
+      },
+      {
+        value: "activity",
+        label: "Activity",
+        panel: "Recent edits, approvals, and delivery milestones.",
+      },
+      { value: "members", label: "Members", panel: "Roles, permissions, and collaborator access." },
+    ],
+    defaultActiveTab: "overview",
+  },
+}
+
+export const Controlled: Story = {
+  args: {
+    label: "Account management",
+    tabs: [
+      { value: "overview", label: "Overview", panel: "Workspace summary." },
+      { value: "activity", label: "Activity", panel: "Recent edits." },
+      { value: "members", label: "Members", panel: "Roles and permissions." },
+    ],
+    activeTab: "activity",
+  },
+}
+
 export const WithDisabledTab: Story = {
   args: {
     tabs: [

@@ -34,6 +34,14 @@ export const Default: Story = {
   args: { options, placeholder: "Select a framework" },
 }
 
+export const Basic: Story = {
+  args: { options, placeholder: "Select a framework" },
+}
+
+export const Controlled: Story = {
+  args: { options, value: "svelte" },
+}
+
 export const WithValue: Story = {
   args: { options, value: "svelte" },
 }

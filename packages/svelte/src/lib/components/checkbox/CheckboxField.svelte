@@ -2,18 +2,7 @@
   import { buildCheckboxFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Checkbox from "./Checkbox.svelte";
-  import type { CheckboxProps } from "./types.js";
-
-  interface CheckboxFieldProps {
-    id?: string;
-    label: string;
-    description?: string;
-    error?: string;
-    checkbox?: CheckboxProps;
-    ariaDescribedBy?: string;
-    checked?: boolean;
-    class?: string;
-  }
+  import type { CheckboxFieldProps, CheckboxProps } from "./types.js";
 
   let {
     id: userProvidedId,

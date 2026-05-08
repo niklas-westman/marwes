@@ -2,18 +2,7 @@
   import { buildInputFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Slider from "./Slider.svelte";
-  import type { SliderProps } from "./types.js";
-
-  interface SliderFieldProps {
-    id?: string;
-    label: string;
-    helperText?: string;
-    error?: string;
-    slider?: Omit<SliderProps, "value">;
-    ariaDescribedBy?: string;
-    value?: number;
-    class?: string;
-  }
+  import type { SliderFieldProps, SliderProps } from "./types.js";
 
   let {
     id: userProvidedId,

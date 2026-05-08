@@ -32,3 +32,11 @@ export const Default: Story = {
     defaultOpenItems: ["notifications"],
   },
 }
+
+export const AllOpen: Story = {
+  args: {
+    label: "Account Settings",
+    items: settingsItems,
+    defaultOpenItems: ["notifications", "privacy", "profile"],
+  },
+}

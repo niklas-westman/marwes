@@ -68,7 +68,13 @@ export { default as DropdownField } from "./components/input/DropdownField.svelt
 export { default as InputOtp } from "./components/input/InputOtp.svelte"
 export { default as RichText } from "./components/input/RichText.svelte"
 export { default as RichTextField } from "./components/input/RichTextField.svelte"
-export type { InputProps, InputFieldProps } from "./components/input/types.js"
+export type {
+  InputProps,
+  InputFieldProps,
+  InputOtpProps,
+  RichTextProps,
+  RichTextFieldProps,
+} from "./components/input/types.js"
 
 // Badge
 export { default as Badge } from "./components/badge/Badge.svelte"
@@ -94,28 +100,35 @@ export { default as Spacing } from "./components/spacing/Spacing.svelte"
 export { default as Spacer } from "./components/spacing/Spacer.svelte"
 export type { SpacingProps, SpacerProps } from "./components/spacing/types.js"
 
-// Typography
-export { default as H1 } from "./components/typography/H1.svelte"
-export { default as H2 } from "./components/typography/H2.svelte"
-export { default as H3 } from "./components/typography/H3.svelte"
-export { default as Paragraph } from "./components/typography/Paragraph.svelte"
-export type { H1Props, H2Props, H3Props, ParagraphProps } from "./components/typography/types.js"
+// Heading
+export { default as H1 } from "./components/heading/H1.svelte"
+export { default as H2 } from "./components/heading/H2.svelte"
+export { default as H3 } from "./components/heading/H3.svelte"
+export type { H1Props, H2Props, H3Props } from "./components/heading/types.js"
+
+// Paragraph
+export { default as Paragraph } from "./components/paragraph/Paragraph.svelte"
+export type { ParagraphProps } from "./components/paragraph/types.js"
 
 // Textarea
-export { default as Textarea } from "./components/textarea/Textarea.svelte"
-export { default as TextareaField } from "./components/textarea/TextareaField.svelte"
-export type { TextareaProps } from "./components/textarea/types.js"
+export { default as Textarea } from "./components/input/Textarea.svelte"
+export { default as TextareaField } from "./components/input/TextareaField.svelte"
+export type { TextareaProps, TextareaFieldProps } from "./components/input/types.js"
 
 // Select
-export { default as Select } from "./components/select/Select.svelte"
-export { default as SelectField } from "./components/select/SelectField.svelte"
-export type { SelectProps } from "./components/select/types.js"
+export { default as Select } from "./components/input/Select.svelte"
+export { default as SelectField } from "./components/input/SelectField.svelte"
+export type { SelectProps, SelectFieldProps } from "./components/input/types.js"
 
 // Checkbox
 export { default as Checkbox } from "./components/checkbox/Checkbox.svelte"
 export { default as CheckboxField } from "./components/checkbox/CheckboxField.svelte"
 export { default as CheckboxGroupField } from "./components/checkbox/CheckboxGroupField.svelte"
-export type { CheckboxProps } from "./components/checkbox/types.js"
+export type {
+  CheckboxProps,
+  CheckboxFieldProps,
+  CheckboxGroupFieldProps,
+} from "./components/checkbox/types.js"
 
 // Switch
 export { default as Switch } from "./components/switch/Switch.svelte"
@@ -123,7 +136,7 @@ export { default as SwitchField } from "./components/switch/SwitchField.svelte"
 export { default as FeatureToggle } from "./components/switch/FeatureToggle.svelte"
 export { default as PreferenceSwitch } from "./components/switch/PreferenceSwitch.svelte"
 export { default as PermissionSwitch } from "./components/switch/PermissionSwitch.svelte"
-export type { SwitchProps } from "./components/switch/types.js"
+export type { SwitchProps, SwitchFieldProps } from "./components/switch/types.js"
 
 // Radio
 export { default as Radio } from "./components/radio/Radio.svelte"
@@ -131,7 +144,7 @@ export { default as RadioGroupField } from "./components/radio/RadioGroupField.s
 export { default as OptionRadioGroup } from "./components/radio/OptionRadioGroup.svelte"
 export { default as YesNoRadioGroup } from "./components/radio/YesNoRadioGroup.svelte"
 export { default as RatingRadioGroup } from "./components/radio/RatingRadioGroup.svelte"
-export type { RadioProps } from "./components/radio/types.js"
+export type { RadioProps, RadioGroupFieldProps } from "./components/radio/types.js"
 
 // Avatar
 export { default as Avatar } from "./components/avatar/Avatar.svelte"
@@ -144,6 +157,7 @@ export type { AvatarProps } from "./components/avatar/types.js"
 
 // DatePicker
 export { default as DatePicker } from "./components/date-picker/DatePicker.svelte"
+export type { DatePickerProps } from "./components/date-picker/types.js"
 
 // Skeleton
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte"
@@ -196,14 +210,25 @@ export { default as AccordionField } from "./components/accordion/AccordionField
 export { default as FAQAccordion } from "./components/accordion/FAQAccordion.svelte"
 export { default as SettingsAccordion } from "./components/accordion/SettingsAccordion.svelte"
 export { default as SectionsAccordion } from "./components/accordion/SectionsAccordion.svelte"
-export type { AccordionProps } from "./components/accordion/types.js"
+export type {
+  AccordionProps,
+  AccordionFieldItem,
+  AccordionFieldProps,
+} from "./components/accordion/types.js"
 
-// TabGroup
+// Tab
+export { default as Tab } from "./components/tab/Tab.svelte"
+export { default as TabPanel } from "./components/tab/TabPanel.svelte"
 export { default as TabGroup } from "./components/tab/TabGroup.svelte"
 export { default as NavigationTabs } from "./components/tab/NavigationTabs.svelte"
 export { default as ContentTabs } from "./components/tab/ContentTabs.svelte"
 export { default as SettingsTabs } from "./components/tab/SettingsTabs.svelte"
-export type { TabGroupProps, TabGroupItem } from "./components/tab/types.js"
+export type {
+  TabProps,
+  TabPanelProps,
+  TabGroupProps,
+  TabGroupItem,
+} from "./components/tab/types.js"
 
 // Slider
 export { default as Slider } from "./components/slider/Slider.svelte"
@@ -211,10 +236,12 @@ export { default as SliderField } from "./components/slider/SliderField.svelte"
 export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte"
 export { default as BrightnessSlider } from "./components/slider/BrightnessSlider.svelte"
 export { default as RadiusSlider } from "./components/slider/RadiusSlider.svelte"
-export type { SliderProps } from "./components/slider/types.js"
+export type { SliderProps, SliderFieldProps } from "./components/slider/types.js"
 
 // Core re-exports
 export {
+  AvatarSize,
+  AvatarType,
   BadgeVariant,
   ButtonAction,
   ButtonSize,
@@ -229,6 +256,7 @@ export {
   mwThemeVars,
   mwVar,
   Spacings,
+  SwitchSize,
   ThemeMode,
 } from "@marwes-ui/core"
 

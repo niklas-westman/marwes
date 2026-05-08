@@ -1,17 +1,7 @@
 <script lang="ts">
   import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
-  import type { Snippet } from "svelte";
-
-  interface CheckboxGroupFieldProps {
-    id?: string;
-    label: string;
-    description?: string;
-    error?: string;
-    ariaDescribedBy?: string;
-    children?: Snippet;
-    class?: string;
-  }
+  import type { CheckboxGroupFieldProps } from "./types.js";
 
   let {
     id: userProvidedId,

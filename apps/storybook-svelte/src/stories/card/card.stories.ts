@@ -1,6 +1,8 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Card } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import CardRichContent from "./CardRichContent.svelte"
+import CardStateMatrix from "./CardStateMatrix.svelte"
 
 const meta = {
   title: "Card/Atom",
@@ -15,15 +17,29 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
+export const Default: Story = {
   args: {
-    title: "Getting started",
-    children: "Install via pnpm and wrap your app with MarwesProvider.",
+    title: "Card title",
+    children: "This is the card body. Use it to display any content.",
   },
 }
 
 export const BodyOnly: Story = {
   args: {
-    children: "Body-only card — no title.",
+    children: "A card without a title keeps the same 24px outer padding from Figma.",
   },
+}
+
+export const RichContent: Story = {
+  render: () => ({
+    Component: CardRichContent,
+    props: {},
+  }),
+}
+
+export const StateMatrix: Story = {
+  render: () => ({
+    Component: CardStateMatrix,
+    props: {},
+  }),
 }

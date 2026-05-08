@@ -31,3 +31,19 @@ export const CustomLabels: Story = {
     noLabel: "No thanks",
   },
 }
+
+export const Controlled: Story = {
+  args: {
+    name: "controlled-yn",
+    label: "Enable feature?",
+    value: "yes",
+  },
+}
+
+export const WithError: Story = {
+  args: {
+    name: "required-yn",
+    label: "Do you accept?",
+    error: "You must select an option.",
+  },
+}

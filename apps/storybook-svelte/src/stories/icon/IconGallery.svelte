@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { IconName } from "@marwes-ui/core"
   import { storybookIconNames } from "@marwes-ui/core"
-  import { Icon } from "@marwes-ui/svelte"
+  import { Icon, Paragraph } from "@marwes-ui/svelte"
 
   interface Props {
     size?: "xs" | "sm" | "md" | "lg"
@@ -24,9 +24,9 @@
 </script>
 
 <div style="padding: 16px; font-family: Instrument Sans, system-ui, -apple-system, sans-serif;">
-  <div style="margin-bottom: 12px; font-size: 12px; opacity: 0.7;">
+  <Paragraph size="sm" style="margin-bottom: 12px; opacity: 0.7;">
     Showing {filteredNames.length} of {allNames.length}
-  </div>
+  </Paragraph>
 
   <div
     style="display: grid; grid-template-columns: repeat({columns}, minmax(0, 1fr)); gap: 12px;"
@@ -37,9 +37,9 @@
         title={String(name)}
       >
         <Icon {name} {size} {strokeWidth} />
-        <div style="font-size: 11px; line-height: 1.2; opacity: 0.85; word-break: break-word;">
+        <Paragraph size="sm" style="line-height: 1.2; opacity: 0.85; word-break: break-word;">
           {String(name)}
-        </div>
+        </Paragraph>
       </div>
     {/each}
   </div>

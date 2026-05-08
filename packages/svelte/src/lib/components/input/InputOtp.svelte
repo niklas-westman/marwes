@@ -7,26 +7,7 @@
   import type { InputOtpOptions } from "@marwes-ui/core";
   import { cssVarsToStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
-
-  interface InputOtpProps {
-    id?: string;
-    name?: string;
-    label: string;
-    helperText?: string;
-    error?: string;
-    ariaDescribedBy?: string;
-    value?: string;
-    defaultValue?: string;
-    length?: number;
-    placeholderCharacter?: string;
-    disabled?: boolean;
-    readOnly?: boolean;
-    required?: boolean;
-    invalid?: boolean;
-    ariaLabel?: string;
-    onvaluechange?: (value: string) => void;
-    class?: string;
-  }
+  import type { InputOtpProps } from "./types.js";
 
   let {
     id: userProvidedId,

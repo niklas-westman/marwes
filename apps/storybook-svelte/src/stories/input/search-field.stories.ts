@@ -45,3 +45,17 @@ export const Disabled: Story = {
     input: { placeholder: "Search...", disabled: true },
   },
 }
+
+export const ReadOnly: Story = {
+  args: {
+    label: "Search",
+    input: { placeholder: "Search...", readOnly: true, value: "Current search" },
+  },
+}
+
+export const SearchExample: Story = {
+  args: {
+    label: "Search products",
+    input: { placeholder: "Type to search..." },
+  },
+}

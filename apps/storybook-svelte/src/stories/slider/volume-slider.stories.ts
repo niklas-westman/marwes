@@ -18,3 +18,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: { value: 45 },
 }
+
+export const Vertical: Story = {
+  args: { value: 45, orientation: "vertical" },
+}

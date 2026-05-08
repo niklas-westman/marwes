@@ -1,6 +1,7 @@
 import { BadgeVariant, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { NotificationBadge } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import AllNotificationsGallery from "./AllNotifications.svelte"
 
 const meta = {
   title: "Badge/Purpose/Notification",
@@ -23,4 +24,11 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: { children: "5", variant: BadgeVariant.info, ariaLabel: "5 unread messages" },
+}
+
+export const AllNotifications: Story = {
+  render: () => ({
+    Component: AllNotificationsGallery,
+    props: {},
+  }),
 }

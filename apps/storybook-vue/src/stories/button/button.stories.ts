@@ -123,3 +123,47 @@ export const LoadingWithCustomSpinner: Story = {
     template: `<Button v-bind="args">Refresh</Button>`,
   }),
 }
+
+export const LoadingFullConfig: Story = {
+  args: {
+    variant: "primary",
+    action: "submit",
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: false,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind="args">Save</Button>`,
+  }),
+}
+
+export const LoadingFullConfigBlocking: Story = {
+  args: {
+    variant: "primary",
+    action: "submit",
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: true,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args }
+    },
+    template: `<Button v-bind="args">Save</Button>`,
+  }),
+}

@@ -49,3 +49,28 @@ export const Disabled: Story = {
     value: 24,
   },
 }
+
+export const Controlled: Story = {
+  args: {
+    label: "Brightness",
+    slider: { min: 0, max: 100 },
+    value: 75,
+  },
+}
+
+export const InlineLabels: Story = {
+  args: {
+    label: "Font size",
+    slider: { min: 12, max: 32, step: 1 },
+    value: 16,
+    inlineLabels: true,
+  },
+}
+
+export const Playground: Story = {
+  args: {
+    label: "Playground slider",
+    slider: { min: 0, max: 100, step: 5 },
+    value: 50,
+  },
+}

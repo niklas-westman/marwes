@@ -1,6 +1,6 @@
 <script lang="ts">
-  import SelectField from "../select/SelectField.svelte";
-  import type { SelectProps } from "../select/types.js";
+  import SelectField from "./SelectField.svelte";
+  import type { SelectProps } from "./types.js";
 
   interface DropdownFieldProps {
     id?: string;

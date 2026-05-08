@@ -67,3 +67,33 @@ export const Disabled: Story = {
     disabled: true,
   },
 }
+
+export const Controlled: Story = {
+  args: {
+    name: "controlled",
+    label: "Controlled radio",
+    options: colorOptions,
+    value: "blue",
+  },
+}
+
+export const Playground: Story = {
+  args: {
+    name: "playground",
+    label: "Playground",
+    options: colorOptions,
+    defaultValue: "red",
+  },
+}
+
+export const Required: Story = {
+  args: {
+    name: "required",
+    label: "Select a plan *",
+    options: [
+      { value: "free", label: "Free" },
+      { value: "pro", label: "Pro" },
+    ],
+    required: true,
+  },
+}

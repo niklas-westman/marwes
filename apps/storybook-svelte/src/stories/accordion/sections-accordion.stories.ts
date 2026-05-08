@@ -28,3 +28,12 @@ export const Default: Story = {
     defaultOpenItems: ["desc"],
   },
 }
+
+export const SingleOpen: Story = {
+  args: {
+    label: "Product Details (single-open)",
+    items: sectionItems,
+    multiple: false,
+    defaultOpenItems: ["desc"],
+  },
+}

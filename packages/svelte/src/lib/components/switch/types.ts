@@ -10,3 +10,13 @@ export interface SwitchProps extends Omit<SwitchOptions, "ariaDescribedBy" | "ar
   ariaDescribedBy?: string | undefined
   ariaLabel?: string | undefined
 }
+
+export interface SwitchFieldProps {
+  id?: string
+  label: string
+  description?: string
+  error?: string
+  switch?: Omit<SwitchProps, "children">
+  ariaDescribedBy?: string
+  class?: string
+}

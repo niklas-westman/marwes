@@ -2,17 +2,8 @@
   import { buildSwitchFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Switch from "./Switch.svelte";
-  import type { SwitchProps } from "./types.js";
+  import type { SwitchFieldProps, SwitchProps } from "./types.js";
 
-  interface SwitchFieldProps {
-    id?: string;
-    label: string;
-    description?: string;
-    error?: string;
-    switch?: Omit<SwitchProps, "children">;
-    ariaDescribedBy?: string;
-    class?: string;
-  }
 
   let {
     id: userProvidedId,

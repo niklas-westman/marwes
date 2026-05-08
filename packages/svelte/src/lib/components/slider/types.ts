@@ -8,3 +8,14 @@ export interface SliderProps extends Omit<SliderOptions, "ariaDescribedBy"> {
   style?: string | undefined
   ariaDescribedBy?: string | undefined
 }
+
+export interface SliderFieldProps {
+  id?: string
+  label: string
+  helperText?: string
+  error?: string
+  slider?: Omit<SliderProps, "value">
+  ariaDescribedBy?: string
+  value?: number
+  class?: string
+}

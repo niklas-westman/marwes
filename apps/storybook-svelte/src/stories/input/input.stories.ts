@@ -21,6 +21,12 @@ export const Basic: Story = {
   },
 }
 
+export const Controlled: Story = {
+  args: {
+    value: "Controlled value",
+  },
+}
+
 export const WithValue: Story = {
   args: {
     value: "Hello world",

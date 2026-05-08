@@ -1,4 +1,5 @@
-import type { InputOptions } from "@marwes-ui/core";
+import type { InputOptions, RichTextOptions, SelectOptions, TextareaOptions } from "@marwes-ui/core";
+export type { SelectOption } from "@marwes-ui/core";
 export interface InputProps extends Omit<InputOptions, "describedBy"> {
     value?: string;
     oninput?: (e: Event & {
@@ -25,6 +26,78 @@ export interface InputFieldProps {
     /** Optional leading text symbol displayed inside the input on the left (e.g. "$", "€", "kr"). */
     leadingSymbol?: string;
     /** The input value — supports bind:value. */
+    value?: string;
+    class?: string;
+}
+export interface InputOtpProps {
+    id?: string;
+    name?: string;
+    label: string;
+    helperText?: string;
+    error?: string;
+    ariaDescribedBy?: string;
+    value?: string;
+    defaultValue?: string;
+    length?: number;
+    placeholderCharacter?: string;
+    disabled?: boolean;
+    readOnly?: boolean;
+    required?: boolean;
+    invalid?: boolean;
+    ariaLabel?: string;
+    onvaluechange?: (value: string) => void;
+    class?: string;
+}
+export interface RichTextProps extends RichTextOptions {
+    onvaluechange?: (value: string) => void;
+    class?: string;
+}
+export interface RichTextFieldProps {
+    id?: string;
+    label: string;
+    helperText?: string;
+    error?: string;
+    editor: RichTextOptions & {
+        onvaluechange?: (value: string) => void;
+        class?: string;
+    };
+    ariaDescribedBy?: string;
+}
+export interface SelectProps extends Omit<SelectOptions, "describedBy"> {
+    value?: string;
+    onchange?: (e: Event & {
+        currentTarget: HTMLSelectElement;
+    }) => void;
+    class?: string;
+    style?: string | undefined;
+    describedBy?: string | undefined;
+}
+export interface SelectFieldProps {
+    id?: string;
+    label: string;
+    helperText?: string;
+    error?: string;
+    select?: Omit<SelectProps, "value">;
+    ariaDescribedBy?: string;
+    value?: string;
+    class?: string;
+}
+export interface TextareaProps extends Omit<TextareaOptions, "describedBy"> {
+    value?: string;
+    oninput?: (e: Event & {
+        currentTarget: HTMLTextAreaElement;
+    }) => void;
+    class?: string;
+    style?: string | undefined;
+    describedBy?: string | undefined;
+}
+export interface TextareaFieldProps {
+    id?: string;
+    label: string;
+    helperText?: string;
+    error?: string;
+    textarea?: Omit<TextareaProps, "value">;
+    ariaDescribedBy?: string;
     value?: string;
     class?: string;
 }

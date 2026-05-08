@@ -10,11 +10,7 @@
   import { cssVarsToStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
-
-  interface RichTextProps extends RichTextOptions {
-    onvaluechange?: (value: string) => void;
-    class?: string;
-  }
+  import type { RichTextProps } from "./types.js";
 
   let {
     value: controlledValue,

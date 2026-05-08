@@ -1,17 +1,7 @@
 <script lang="ts">
   import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
-  import type { Snippet } from "svelte";
-
-  interface RadioGroupFieldProps {
-    id?: string;
-    label: string;
-    description?: string;
-    error?: string;
-    ariaDescribedBy?: string;
-    children?: Snippet;
-    class?: string;
-  }
+  import type { RadioGroupFieldProps } from "./types.js";
 
   let {
     id: userProvidedId,

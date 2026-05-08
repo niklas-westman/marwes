@@ -1,6 +1,7 @@
 import { BadgeVariant, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { StatusBadge } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import AllStatusesGallery from "./AllStatuses.svelte"
 
 const meta = {
   title: "Badge/Purpose/Status",
@@ -23,4 +24,11 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: { children: "Active", variant: BadgeVariant.success },
+}
+
+export const AllStatuses: Story = {
+  render: () => ({
+    Component: AllStatusesGallery,
+    props: {},
+  }),
 }

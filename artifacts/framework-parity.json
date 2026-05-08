@@ -5,7 +5,7 @@
       "family": "accordion",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": false,
       "storyCoverage": true
@@ -14,7 +14,7 @@
       "family": "avatar",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -50,7 +50,7 @@
       "family": "checkbox",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -59,7 +59,7 @@
       "family": "date-picker",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": false,
       "storyCoverage": true
@@ -68,7 +68,7 @@
       "family": "dialog",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -122,7 +122,7 @@
       "family": "radio",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -131,7 +131,7 @@
       "family": "skeleton",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -140,7 +140,7 @@
       "family": "slider",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -167,7 +167,7 @@
       "family": "stat-tile",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -176,7 +176,7 @@
       "family": "switch",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -185,7 +185,7 @@
       "family": "tab",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": false,
       "storyCoverage": true
@@ -194,7 +194,7 @@
       "family": "toast",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -203,7 +203,7 @@
       "family": "tooltip",
       "react": true,
       "vue": true,
-      "svelte": false,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": false,
       "storyCoverage": true

@@ -1,0 +1,133 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  toastPurposeComponentReference,
+  toastWhyPurposeComponents,
+} from "@marwes-ui/core"
+
+<Meta title="Toast/Introduction" />
+
+# Toast Components
+
+Marwes provides toast feedback at three layers: **purpose components** for common
+status messages, **ToastContainer** plus **ToastProvider/useToast** for stacked
+imperative delivery, and the raw **Toast** atom for custom layouts.
+
+## Recommended: Purpose Components
+
+Use purpose-built toasts when the message intent is already known:
+
+```svelte
+<script>
+  import { ErrorToast, InfoToast, SuccessToast, WarningToast } from "@marwes-ui/svelte"
+</script>
+
+<SuccessToast>Project saved successfully.</SuccessToast>
+<ErrorToast>Publishing failed. Please try again.</ErrorToast>
+<WarningToast>Storage is almost full.</WarningToast>
+<InfoToast>New release notes are available.</InfoToast>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {toastWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {toastPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: ToastContainer + useToast (Molecule)
+
+Use `ToastProvider` plus `useToast` when actions need to enqueue toasts imperatively.
+
+```svelte
+<script>
+  import { ToastProvider } from "@marwes-ui/svelte"
+</script>
+
+<ToastProvider placement="top-right">
+  <!-- Children can call useToast() to show toasts -->
+  <slot />
+</ToastProvider>
+```
+
+Inside a child component:
+
+```svelte
+<script>
+  import { useToast } from "@marwes-ui/svelte"
+
+  const toast = useToast()
+
+  function handleSave() {
+    toast.show({ message: "Project saved.", intent: "success" })
+  }
+</script>
+
+<button type="button" onclick={handleSave}>Save project</button>
+```
+
+### ToastContainer Features
+
+- **Stacking and placement** — supports top/bottom plus left/right viewport placement
+- **Imperative workflow support** — `useToast()` exposes `show`, `dismiss`, and `clear`
+- **Auto-dismiss** — provider-managed toasts close automatically unless `duration` is `null`
+- **Purpose-aware rendering** — `intent` routes through the matching purpose toast variant
+
+## Low-level: Toast (Atom)
+
+Use the raw `Toast` atom when you need a bespoke layout or custom delivery mechanism.
+
+```svelte
+<script>
+  import { Toast } from "@marwes-ui/svelte"
+</script>
+
+<Toast variant="rich" ariaLive="polite">
+  Your changes have been saved.
+</Toast>
+```
+
+## Component Reference
+
+### Purpose Components
+
+**`SuccessToast`** — Positive completion and confirmation feedback
+
+**`ErrorToast`** — Failed actions and urgent alerts
+
+**`WarningToast`** — Cautionary follow-up and risky state changes
+
+**`InfoToast`** — Neutral updates and contextual notices
+
+### Base Molecule
+
+**`ToastContainer`** — Positioned toast viewport with stacking and dismiss handling
+
+**`ToastProvider`** — Context provider that owns toast queue state
+
+**`useToast`** — Imperative toast controller
+
+### Atom
+
+**`Toast`** — Low-level transient feedback surface
+
+## Story Coverage
+
+- **Atom**: `Default`, `Dismissible`
+- **Molecule**: `Default`
+- **Purpose/ErrorToast**: `Default`
+- **Purpose/InfoToast**: `Default`
+- **Purpose/SuccessToast**: `Default`
+- **Purpose/WarningToast**: `Default`

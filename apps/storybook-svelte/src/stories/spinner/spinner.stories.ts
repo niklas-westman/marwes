@@ -2,6 +2,7 @@ import { storybookA11yPolicy, storybookLayout, storybookSpinnerArgTypes } from "
 import { Spinner } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 import SpinnerGallery from "./SpinnerGallery.svelte"
+import SpinnerTreatments from "./SpinnerTreatments.svelte"
 
 const meta = {
   title: "Spinner/Atom",
@@ -48,5 +49,19 @@ export const AllSizes: Story = {
   render: () => ({
     Component: SpinnerGallery,
     props: { showcase: "sizes" },
+  }),
+}
+
+export const ButtonLoadingTreatment: Story = {
+  render: () => ({
+    Component: SpinnerTreatments,
+    props: { showcase: "button-loading" },
+  }),
+}
+
+export const EmptyStateTreatment: Story = {
+  render: () => ({
+    Component: SpinnerTreatments,
+    props: { showcase: "empty-state" },
   }),
 }

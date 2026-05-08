@@ -67,17 +67,18 @@ export { default as Divider } from "./components/divider/Divider.svelte";
 // Spacing
 export { default as Spacing } from "./components/spacing/Spacing.svelte";
 export { default as Spacer } from "./components/spacing/Spacer.svelte";
-// Typography
-export { default as H1 } from "./components/typography/H1.svelte";
-export { default as H2 } from "./components/typography/H2.svelte";
-export { default as H3 } from "./components/typography/H3.svelte";
-export { default as Paragraph } from "./components/typography/Paragraph.svelte";
+// Heading
+export { default as H1 } from "./components/heading/H1.svelte";
+export { default as H2 } from "./components/heading/H2.svelte";
+export { default as H3 } from "./components/heading/H3.svelte";
+// Paragraph
+export { default as Paragraph } from "./components/paragraph/Paragraph.svelte";
 // Textarea
-export { default as Textarea } from "./components/textarea/Textarea.svelte";
-export { default as TextareaField } from "./components/textarea/TextareaField.svelte";
+export { default as Textarea } from "./components/input/Textarea.svelte";
+export { default as TextareaField } from "./components/input/TextareaField.svelte";
 // Select
-export { default as Select } from "./components/select/Select.svelte";
-export { default as SelectField } from "./components/select/SelectField.svelte";
+export { default as Select } from "./components/input/Select.svelte";
+export { default as SelectField } from "./components/input/SelectField.svelte";
 // Checkbox
 export { default as Checkbox } from "./components/checkbox/Checkbox.svelte";
 export { default as CheckboxField } from "./components/checkbox/CheckboxField.svelte";
@@ -131,7 +132,9 @@ export { default as AccordionField } from "./components/accordion/AccordionField
 export { default as FAQAccordion } from "./components/accordion/FAQAccordion.svelte";
 export { default as SettingsAccordion } from "./components/accordion/SettingsAccordion.svelte";
 export { default as SectionsAccordion } from "./components/accordion/SectionsAccordion.svelte";
-// TabGroup
+// Tab
+export { default as Tab } from "./components/tab/Tab.svelte";
+export { default as TabPanel } from "./components/tab/TabPanel.svelte";
 export { default as TabGroup } from "./components/tab/TabGroup.svelte";
 export { default as NavigationTabs } from "./components/tab/NavigationTabs.svelte";
 export { default as ContentTabs } from "./components/tab/ContentTabs.svelte";
@@ -143,4 +146,4 @@ export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte
 export { default as BrightnessSlider } from "./components/slider/BrightnessSlider.svelte";
 export { default as RadiusSlider } from "./components/slider/RadiusSlider.svelte";
 // Core re-exports
-export { BadgeVariant, ButtonAction, ButtonSize, ButtonVariant, createFontStack, IconName, mwAvailableFonts, mwFontFallbacks, mwGoogleFontFamilies, mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar, Spacings, ThemeMode, } from "@marwes-ui/core";
+export { AvatarSize, AvatarType, BadgeVariant, ButtonAction, ButtonSize, ButtonVariant, createFontStack, IconName, mwAvailableFonts, mwFontFallbacks, mwGoogleFontFamilies, mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar, Spacings, SwitchSize, ThemeMode, } from "@marwes-ui/core";

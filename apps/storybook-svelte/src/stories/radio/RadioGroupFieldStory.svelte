@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Radio, RadioGroupField } from "@marwes-ui/svelte"
+  import { Paragraph, Radio, RadioGroupField } from "@marwes-ui/svelte"
 
   interface Props {
     name: string
@@ -29,7 +29,7 @@
         disabled={disabled || opt.disabled || false}
         onchange={() => handleChange(opt.value)}
       />
-      <span class="mw-p mw-p--md">{opt.label}</span>
+      <Paragraph size="md">{opt.label}</Paragraph>
     </label>
   {/each}
 </RadioGroupField>

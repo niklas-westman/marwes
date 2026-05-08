@@ -51,6 +51,18 @@ export const Open: Story = {
   }),
 }
 
+export const Disabled: Story = {
+  render: () => ({
+    components: { Accordion },
+    template: `
+      <Accordion id="story-3" :disabled="true">
+        <template #title>Disabled accordion</template>
+        This content is not accessible.
+      </Accordion>
+    `,
+  }),
+}
+
 export const Interactive: Story = {
   render: () => ({
     components: { Accordion },

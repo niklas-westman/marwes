@@ -32,3 +32,21 @@ export const CustomRange: Story = {
     defaultValue: "2",
   },
 }
+
+export const Controlled: Story = {
+  args: {
+    name: "controlled-rating",
+    label: "Rating",
+    value: "4",
+  },
+}
+
+export const CustomLabels: Story = {
+  args: {
+    name: "custom-labels",
+    label: "Experience rating",
+    lowLabel: "Poor",
+    highLabel: "Excellent",
+    defaultValue: "3",
+  },
+}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Spinner } from "@marwes-ui/svelte"
+  import { Paragraph, Spinner } from "@marwes-ui/svelte"
 
   interface Props {
     showcase?: "variants" | "sizes"
@@ -23,7 +23,7 @@
         <div style="display: inline-flex; align-items: center; justify-content: center; min-width: 120px; min-height: 120px; padding: 1.5rem; border-radius: 16px; background: rgba(248, 250, 252, 0.88); box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);">
           <Spinner {variant} size="sm" decorative />
         </div>
-        <span style="font-size: 13px; margin: 0;">{variant}</span>
+        <Paragraph size="sm">{variant}</Paragraph>
       </div>
     {/each}
   </div>
@@ -34,7 +34,7 @@
         <div style="display: inline-flex; align-items: center; justify-content: center; min-width: 120px; min-height: 120px; padding: 1.5rem; border-radius: 16px; background: rgba(248, 250, 252, 0.88); box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);">
           <Spinner size={token} decorative />
         </div>
-        <span style="font-size: 13px; margin: 0;">{token} — {label}</span>
+        <Paragraph size="sm">{token} — {label}</Paragraph>
       </div>
     {/each}
   </div>

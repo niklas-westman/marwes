@@ -36,3 +36,18 @@ export const Disabled: Story = {
     switch: { checked: true, disabled: true },
   },
 }
+
+export const Controlled: Story = {
+  args: {
+    label: "Dark mode",
+    description: "Toggle dark theme.",
+    switch: { checked: true },
+  },
+}
+
+export const Playground: Story = {
+  args: {
+    label: "Playground toggle",
+    description: "Experiment with the switch field.",
+  },
+}

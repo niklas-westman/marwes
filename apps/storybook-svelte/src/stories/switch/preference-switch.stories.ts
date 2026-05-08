@@ -22,3 +22,10 @@ export const Default: Story = {
     switch: { checked: false },
   },
 }
+
+export const Controlled: Story = {
+  args: {
+    ...Default.args,
+    switch: { checked: true },
+  },
+}

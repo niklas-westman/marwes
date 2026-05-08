@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Avatar } from "@marwes-ui/svelte"
+  import { Avatar, Paragraph } from "@marwes-ui/svelte"
 
   const sampleAvatarSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none"><rect width="96" height="96" rx="48" fill="#8182FC"/><circle cx="48" cy="38" r="18" fill="#F9FAFB" fill-opacity="0.94"/><path d="M22 84C25.5 67.5 36 58 48 58C60 58 70.5 67.5 74 84" fill="#F9FAFB" fill-opacity="0.94"/></svg>`
   const sampleImageUrl = `data:image/svg+xml;utf8,${encodeURIComponent(sampleAvatarSvg)}`
@@ -20,7 +20,7 @@
 <div style="display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(120px, 1fr));">
   {#each previews as preview (preview.label)}
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      <span style="font-size: 12px; color: #666666;">{preview.label}</span>
+      <Paragraph size="sm">{preview.label}</Paragraph>
       <Avatar {...preview.props} />
     </div>
   {/each}

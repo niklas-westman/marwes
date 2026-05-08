@@ -35,3 +35,14 @@ export const AllVariants: Story = {
     })),
   },
 }
+
+export const WithCustomClass: Story = {
+  args: {
+    label: "Custom Styled",
+    className: "custom-badge-group",
+    badges: [
+      { variant: BadgeVariant.neutral, children: "Alpha" },
+      { variant: BadgeVariant.neutral, children: "Beta" },
+    ],
+  },
+}

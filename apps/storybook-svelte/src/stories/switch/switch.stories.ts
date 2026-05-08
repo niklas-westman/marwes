@@ -12,6 +12,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Off: Story = { args: { checked: false, ariaLabel: "Dark mode" } }
-export const On: Story = { args: { checked: true, ariaLabel: "Dark mode" } }
-export const Disabled: Story = { args: { checked: false, disabled: true, ariaLabel: "Disabled" } }
+export const Default: Story = { args: { ariaLabel: "Toggle" } }
+export const Off: Story = { args: { ariaLabel: "Off", checked: false } }
+export const On: Story = { args: { ariaLabel: "On", checked: true } }
+export const Checked: Story = { args: { ariaLabel: "Checked", checked: true } }
+export const Disabled: Story = { args: { ariaLabel: "Disabled", disabled: true } }
+export const CheckedDisabled: Story = {
+  args: { ariaLabel: "Checked disabled", checked: true, disabled: true },
+}
+export const AllStates: Story = { args: { ariaLabel: "Default state" } }
+export const SizeComparison: Story = { args: { ariaLabel: "Size comparison", size: "sm" } }

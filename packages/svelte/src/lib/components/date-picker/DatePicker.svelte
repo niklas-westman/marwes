@@ -1,30 +1,8 @@
 <script lang="ts">
   import { createDatePickerRecipe } from "@marwes-ui/core";
-  import type { DatePickerDay, DatePickerDevice, DatePickerOptions } from "@marwes-ui/core";
+  import type { DatePickerOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
-
-  interface DatePickerProps {
-    monthLabel?: string;
-    weekdayLabels?: string[];
-    weeks?: DatePickerDay[][];
-    device?: DatePickerDevice;
-    previousYearLabel?: string;
-    previousMonthLabel?: string;
-    nextMonthLabel?: string;
-    nextYearLabel?: string;
-    cancelLabel?: string;
-    applyLabel?: string;
-    calendarLabel?: string;
-    dataAttributes?: Record<string, string>;
-    onpreviousyear?: () => void;
-    onpreviousmonth?: () => void;
-    onnextmonth?: () => void;
-    onnextyear?: () => void;
-    ondayselect?: (day: DatePickerDay) => void;
-    oncancel?: () => void;
-    onapply?: () => void;
-    class?: string;
-  }
+  import type { DatePickerProps } from "./types.js";
 
   let {
     monthLabel,

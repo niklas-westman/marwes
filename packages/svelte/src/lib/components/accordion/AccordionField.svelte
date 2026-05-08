@@ -2,27 +2,7 @@
   import { buildAccordionFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Accordion from "./Accordion.svelte";
-
-  interface AccordionFieldItem {
-    value: string;
-    title: string;
-    content: string;
-    disabled?: boolean;
-  }
-
-  interface AccordionFieldProps {
-    id?: string;
-    label: string;
-    description?: string;
-    error?: string;
-    items: AccordionFieldItem[];
-    openItems?: string[];
-    defaultOpenItems?: string[];
-    onopenitemschange?: (items: string[]) => void;
-    multiple?: boolean;
-    ariaDescribedBy?: string;
-    class?: string;
-  }
+  import type { AccordionFieldItem, AccordionFieldProps } from "./types.js";
 
   let {
     id: userProvidedId,

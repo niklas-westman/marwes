@@ -22,6 +22,13 @@ export const Basic: Story = {
   },
 }
 
+export const Controlled: Story = {
+  args: {
+    label: "Full name",
+    input: { value: "Jane Doe" },
+  },
+}
+
 export const WithHelperText: Story = {
   args: {
     label: "Username",

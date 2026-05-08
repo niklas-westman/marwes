@@ -22,6 +22,27 @@ export const Default: Story = {
   },
 }
 
+export const Basic: Story = {
+  args: {
+    label: "Message",
+    textarea: { placeholder: "Enter your message..." },
+  },
+}
+
+export const Controlled: Story = {
+  args: {
+    label: "Notes",
+    textarea: { value: "Some existing content" },
+  },
+}
+
+export const ReadOnly: Story = {
+  args: {
+    label: "Terms",
+    textarea: { value: "Read-only content here.", readOnly: true },
+  },
+}
+
 export const WithHelperText: Story = {
   args: {
     label: "Bio",

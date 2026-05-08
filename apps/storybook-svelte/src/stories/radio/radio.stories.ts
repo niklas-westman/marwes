@@ -12,10 +12,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = { args: { name: "option", value: "a", ariaLabel: "Option A" } }
-export const Checked: Story = {
-  args: { name: "option", value: "a", checked: true, ariaLabel: "Option A" },
-}
-export const Disabled: Story = {
-  args: { name: "option", value: "a", disabled: true, ariaLabel: "Disabled" },
+export const Default: Story = { args: { ariaLabel: "Option", value: "opt1" } }
+export const Checked: Story = { args: { ariaLabel: "Checked", value: "opt1", checked: true } }
+export const Disabled: Story = { args: { ariaLabel: "Disabled", value: "opt1", disabled: true } }
+export const Invalid: Story = { args: { ariaLabel: "Invalid", value: "opt1", invalid: true } }
+export const AllStates: Story = { args: { ariaLabel: "Default state", value: "opt1" } }
+export const RadioGroup: Story = {
+  args: { ariaLabel: "In a group", value: "opt1", name: "group1" },
 }

@@ -6,8 +6,9 @@ import SnippetRenderer from "./SnippetRenderer.svelte"
 
 const preview: Preview = {
   decorators: [
-    () => ({
+    (_story, context) => ({
       Component: MarwesDecorator,
+      props: { isDocs: context.viewMode === "docs" },
     }),
   ],
   // Svelte 5 renders children via snippets ({@render children?.()}).

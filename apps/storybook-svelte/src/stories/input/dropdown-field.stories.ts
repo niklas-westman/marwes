@@ -27,3 +27,47 @@ export const Default: Story = {
     select: { options, placeholder: "Choose a country" },
   },
 }
+
+export const Basic: Story = {
+  args: {
+    label: "Country",
+    select: { options, placeholder: "Choose a country" },
+  },
+}
+
+export const WithHelperText: Story = {
+  args: {
+    label: "Country",
+    helperText: "Where are you located?",
+    select: { options, placeholder: "Choose a country" },
+  },
+}
+
+export const WithError: Story = {
+  args: {
+    label: "Country",
+    error: "Please select a country.",
+    select: { options },
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    label: "Country",
+    select: { options, disabled: true, placeholder: "Choose a country" },
+  },
+}
+
+export const Controlled: Story = {
+  args: {
+    label: "Country",
+    select: { options, value: "se", placeholder: "Choose a country" },
+  },
+}
+
+export const Native: Story = {
+  args: {
+    label: "Country",
+    select: { options, native: true, placeholder: "Choose a country" },
+  },
+}

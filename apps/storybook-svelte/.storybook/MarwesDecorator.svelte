@@ -4,13 +4,14 @@
 
   interface Props {
     children?: Snippet;
+    isDocs?: boolean;
   }
 
-  const { children }: Props = $props();
+  const { children, isDocs = false }: Props = $props();
 </script>
 
 <MarwesProvider theme={{ mode: ThemeMode.light }}>
-  <div style="min-height: 100vh; padding: 24px;">
+  <div style:min-height={isDocs ? undefined : '100vh'} style:padding="24px">
     {@render children?.()}
   </div>
 </MarwesProvider>

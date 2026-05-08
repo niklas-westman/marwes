@@ -91,3 +91,15 @@ export const DarkVariants: Story = {
     `,
   }),
 }
+
+export const Urgent: Story = {
+  render: () => ({
+    components: { Toast },
+    template: `
+      <Toast variant="rich" ariaLive="assertive">
+        Session expired. Please log in again.
+        <template #action><button type="button" class="mw-toast__action-button">Close</button></template>
+      </Toast>
+    `,
+  }),
+}

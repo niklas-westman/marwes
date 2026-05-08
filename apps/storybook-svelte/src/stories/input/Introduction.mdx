@@ -13,11 +13,14 @@ progression for text-based data entry.
 ```
 Atoms
   ├─ Input
+  ├─ RichText
   ├─ Select
   └─ Textarea
 
 Molecules
   ├─ InputField
+  ├─ InputOtp
+  ├─ RichTextField
   ├─ SelectField
   └─ TextareaField
 
@@ -157,6 +160,10 @@ Select defaults to the Marwes visual treatment (custom chevron icon). Use `nativ
 
 **`InputField`** — Accessible text input with label, helper, error, password toggle, search affordances
 
+**`InputOtp`** — One-time password input with individual digit cells
+
+**`RichTextField`** — Field-wrapped rich text editor with label, helper, error
+
 **`SelectField`** — Accessible select with label, helper, error
 
 **`TextareaField`** — Accessible textarea with label, helper, error
@@ -164,6 +171,8 @@ Select defaults to the Marwes visual treatment (custom chevron icon). Use `nativ
 ### Atoms
 
 **`Input`** — Low-level `<input>` with recipe styling
+
+**`RichText`** — Rich text editor with bold, italic, underline formatting
 
 **`Select`** — Native or custom-styled `<select>`
 
@@ -173,9 +182,12 @@ Select defaults to the Marwes visual treatment (custom chevron icon). Use `nativ
 
 - **Atom/Input**: `Basic`, `WithValue`, `Disabled`, `Invalid`, `Password`
 - **Atom/Select**: `Default`, `WithValue`, `Disabled`, `Native`, `Invalid`
+- **Atom/RichText**: `Default`, `WithPlaceholder`, `Disabled`
 - **Atom/Textarea**: `Default`, `WithValue`, `Disabled`, `CustomRows`
 - **Molecule/InputField**: `Basic`, `WithHelperText`, `WithError`, `WithLeadingSymbol`, `Disabled`, `ReadOnly`, `Required`
 - **Molecule/SelectField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Molecule/InputOtp**: `Default`, `WithError`, `CustomLength`
+- **Molecule/RichTextField**: `Default`, `WithError`
 - **Molecule/TextareaField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
 - **Purpose/PasswordField**: `Default`, `WithError`
 - **Purpose/EmailField**: `Default`, `WithError`

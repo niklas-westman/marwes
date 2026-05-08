@@ -5,12 +5,13 @@
   interface Props {
     label?: string
     badges?: Array<{ variant: BadgeVariant; children: string }>
+    className?: string
   }
 
-  let { label = "Tags", badges = [] }: Props = $props()
+  let { label = "Tags", badges = [], className }: Props = $props()
 </script>
 
-<BadgeGroup {label}>
+<BadgeGroup {label} {className}>
   {#each badges as badge}
     <Badge variant={badge.variant}>{badge.children}</Badge>
   {/each}
