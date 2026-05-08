@@ -1,21 +1,83 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  badgeWhyPurposeComponents,
+  badgePurposeComponentReference,
+} from "@marwes-ui/core"
 
 <Meta title="Badge/Introduction" />
 
-# Badge Component
+# Badge Components
 
-Marwes provides `Badge` as an atom-level status indicator for labeling content
-with semantic color variants.
+Marwes provides badges at three layers: **purpose components** for common
+status contexts, **BadgeGroup** for grouped layouts, and the raw **Badge**
+atom for custom composition.
 
 ## Component Architecture
 
 ```
 Badge (Atom)
+     ↓
+BadgeGroup (Molecule)
+     ↓
+Purpose Wrappers
+  ├─ StatusBadge
+  ├─ PriorityBadge
+  └─ NotificationBadge
 ```
 
-## Recommended Usage
+## Recommended: Purpose Components
 
-Use the raw `Badge` atom to communicate status, category, or priority:
+Use purpose-built badges when the badge has a clear semantic meaning:
+
+```svelte
+<script>
+  import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/svelte"
+</script>
+
+<StatusBadge variant="success">Active</StatusBadge>
+<PriorityBadge variant="warning">High</PriorityBadge>
+<NotificationBadge variant="info" ariaLabel="5 unread messages">5</NotificationBadge>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {badgeWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {badgePurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: BadgeGroup (Molecule)
+
+For grouped badge layouts:
+
+```svelte
+<script>
+  import { Badge, BadgeGroup } from "@marwes-ui/svelte"
+</script>
+
+<BadgeGroup label="Tags">
+  <Badge variant="info">Frontend</Badge>
+  <Badge variant="success">Approved</Badge>
+  <Badge variant="warning">Review</Badge>
+</BadgeGroup>
+```
+
+## Atom: Badge
+
+Use the raw `Badge` atom for standalone status indicators:
 
 ```svelte
 <script>
@@ -33,15 +95,30 @@ Use the raw `Badge` atom to communicate status, category, or priority:
 
 - `variant` controls semantic color: `neutral`, `info`, `success`, `warning`, `error`
 - Badge content is passed as children
+- `ariaLabel` provides an accessible name for icon-only or abbreviated badges
 
 ## Component Reference
 
-**`Badge`** — Inline status indicator atom with semantic color variants
+### Purpose Components
+
+**`StatusBadge`** — Operational status indicators (`data-purpose="status"`)
+
+**`PriorityBadge`** — Task or issue priority labels (`data-purpose="priority"`)
+
+**`NotificationBadge`** — Unread counts and alerts (`data-purpose="notification"`)
+
+### Molecule
+
+**`BadgeGroup`** — Grouped badge layout with accessible fieldset
+
+### Atom
+
+**`Badge`** — Inline status indicator with semantic color variants
 
 ## Story Coverage
 
 - **Atom**: `Neutral`, `Info`, `Success`, `Warning`, `ErrorVariant`
-- **Molecule**: `Default`
+- **Molecule**: `Default`, `AllVariants`
 - **Purpose/Status**: `Default`
 - **Purpose/Priority**: `Default`
 - **Purpose/Notification**: `Default`

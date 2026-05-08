@@ -1,50 +1,134 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  switchWhyPurposeComponents,
+  switchPurposeComponentReference,
+} from "@marwes-ui/core"
 
 <Meta title="Switch/Introduction" />
 
-# Switch Component
+# Switch Components
 
-Marwes provides `Switch` as an atom-level toggle control for binary on/off
-states.
+Marwes provides a switch system with three layers:
+**purpose components** for common toggle use cases, **SwitchField** for standard
+field composition, and the raw **Switch** atom for custom layouts.
 
-## Component Architecture
+## Recommended: Purpose Components
 
+Use purpose-built components when the toggle has a clear product meaning:
+
+```svelte
+<script>
+  import { FeatureToggle, PermissionSwitch, PreferenceSwitch } from "@marwes-ui/svelte"
+</script>
+
+<FeatureToggle
+  label="Enable beta dashboard"
+  description="Turn on early access to the redesigned analytics experience."
+  switch={{ checked: true }}
+/>
+
+<PreferenceSwitch
+  label="Use compact layout"
+  description="Show denser spacing in lists and tables."
+  switch={{ checked: false }}
+/>
+
+<PermissionSwitch
+  label="Can manage billing"
+  description="Grant access to invoices and subscription changes."
+  switch={{ checked: true }}
+/>
 ```
-Switch (Atom)
+
+### Why Purpose Components?
+
+<ol>
+  {switchWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {switchPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: SwitchField (Molecule)
+
+For a single labeled switch with optional description and error text:
+
+```svelte
+<script>
+  import { SwitchField } from "@marwes-ui/svelte"
+</script>
+
+<SwitchField
+  label="Enable notifications"
+  description="Receive important account and product updates."
+  switch={{ checked: false }}
+/>
+
+<SwitchField
+  label="Require review before publishing"
+  error="Review mode must stay enabled for this workspace."
+  switch={{ checked: false }}
+/>
 ```
 
-## Recommended Usage
+### SwitchField Features
 
-Use the raw `Switch` atom for toggle controls:
+- **Accessible field wiring** — `aria-labelledby` for the visible label, description/error in `aria-describedby`
+- **Label + description + error** — standard field semantics
+- **Controlled toggling** — forward `checked` and `oncheckedchange` through the nested `switch` prop
+
+## Low-level: Switch (Atom)
+
+Use the raw `Switch` atom when you need a custom layout:
 
 ```svelte
 <script>
   import { Switch } from "@marwes-ui/svelte"
+  let enabled = $state(false)
 </script>
 
-<Switch checked={false} ariaLabel="Dark mode" />
-<Switch checked={true} ariaLabel="Dark mode" />
+<div style="display: flex; align-items: center; gap: 12px;">
+  <Switch checked={enabled} oncheckedchange={(v) => enabled = v} ariaLabel="Enable notifications" />
+  <span>Enable notifications</span>
+</div>
 ```
 
-## Usage Notes
-
-- `checked` controls the on/off state
-- `disabled` prevents interaction
-- `ariaLabel` provides an accessible name
-
-## Accessibility notes
-
-**Always provide a label.** Use `ariaLabel` when the switch is not wrapped in a
-visible label element. The switch announces its on/off state to assistive technology.
-
-**Switch vs Checkbox.** Use `Switch` for immediate-effect toggles (e.g., dark mode).
-Use `Checkbox` for form submissions where changes are saved explicitly.
+> **Note:** When using `Switch` directly, you are responsible for providing an accessible name
+> and managing checked state.
 
 ## Component Reference
 
-**`Switch`** — Binary toggle atom for on/off states
+### Purpose Components
+
+**`FeatureToggle`** — Feature enablement and product rollout controls
+
+**`PreferenceSwitch`** — User or workspace setting preferences
+
+**`PermissionSwitch`** — Access and capability toggles
+
+### Base Molecule
+
+**`SwitchField`** — Accessible labeled switch with description and error wiring
+
+### Atom
+
+**`Switch`** — Low-level `<button role="switch">`
 
 ## Story Coverage
 
 - **Atom**: `Off`, `On`, `Disabled`
 - **Molecule**: `Default`, `WithError`, `Disabled`
+- **Purpose/FeatureToggle**: `Default`
+- **Purpose/Preference**: `Default`
+- **Purpose/Permission**: `Default`

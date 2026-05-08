@@ -5,7 +5,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 # Icon Component
 
 Marwes provides `Icon` as an atom-level primitive for rendering system icons
-at consistent sizes.
+from the Marwes icon registry at consistent sizes.
 
 ## Component Architecture
 
@@ -14,8 +14,6 @@ Icon (Atom)
 ```
 
 ## Recommended Usage
-
-Use the raw `Icon` atom with a named icon:
 
 ```svelte
 <script>
@@ -27,22 +25,32 @@ Use the raw `Icon` atom with a named icon:
 <Icon name="settings" size="lg" />
 ```
 
+## Props
+
+- `name` — Selects the icon from the Marwes icon set (type-safe enum)
+- `size` — `xs`, `sm`, `md`, `lg`
+- `strokeWidth` — `xs`, `sm`, `md`, `lg`
+- `decorative` — Hides from assistive technology (default: `true`)
+- `ariaLabel` — Accessible name for standalone meaningful icons
+
 ## Usage Notes
 
-- `name` selects the icon from the Marwes icon set
-- `size` supports `sm`, `md`, `lg`
-- Icons are decorative by default; add `ariaLabel` when the icon carries standalone meaning
+- Icons are decorative by default — hidden from screen readers
+- Add `ariaLabel` only when the icon carries standalone meaning (e.g., icon-only button)
+- The icon gallery below shows all available icons with search and filtering
+- `strokeWidth` can be adjusted independently from `size`
 
-## Accessibility notes
+## Accessibility Notes
 
-**Decorative icons are hidden from assistive technology.** When an icon accompanies
-visible text, leave it unlabeled. Only add `ariaLabel` when the icon is the sole
-communicator of meaning (e.g., an icon-only button).
+**Decorative icons are hidden.** When an icon accompanies visible text, leave it unlabeled.
+
+**Standalone icons need a label.** Only add `ariaLabel` when the icon is the sole communicator
+of meaning (e.g., an icon-only close button).
 
 ## Component Reference
 
-**`Icon`** — Inline icon atom from the Marwes icon set
+**`Icon`** — Inline SVG icon atom from the Marwes icon registry
 
 ## Story Coverage
 
-- **Atom**: `Heart`, `Star`, `Search`, `Settings`, `Small`, `Large`
+- **Atom/Gallery**: Full searchable icon gallery with size, strokeWidth, and column controls

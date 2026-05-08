@@ -4,18 +4,18 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Spacing Component
 
-Marwes provides `Spacing` as an atom-level layout primitive for creating
-consistent whitespace between content sections.
+Marwes provides `Spacing` (aliased as `Spacer`) as an atom-level layout primitive
+for creating consistent vertical whitespace between content sections using design tokens.
 
 ## Component Architecture
 
 ```
-Spacing (Atom)
+Spacing / Spacer (Atom)
 ```
 
 ## Recommended Usage
 
-Use the raw `Spacing` atom for vertical whitespace:
+Use `Spacing` for consistent vertical rhythm between content:
 
 ```svelte
 <script>
@@ -23,18 +23,45 @@ Use the raw `Spacing` atom for vertical whitespace:
 </script>
 
 <Spacing size="sp-8" />
+<Spacing size="sp-16" />
 <Spacing size="sp-24" />
+<Spacing size="sp-32" />
 <Spacing size="sp-48" />
+<Spacing size="sp-64" />
+<Spacing size="sp-80" />
 ```
+
+## Token Scale
+
+| Token | Value |
+|-------|-------|
+| `sp-8` | 8px |
+| `sp-16` | 16px |
+| `sp-24` | 24px |
+| `sp-32` | 32px |
+| `sp-48` | 48px |
+| `sp-64` | 64px |
+| `sp-80` | 80px |
 
 ## Usage Notes
 
-- `size` maps to spacing tokens: `sp-8`, `sp-16`, `sp-24`, `sp-32`, `sp-48`, `sp-64`, `sp-80`
+- `size` maps to spacing tokens from the design system
 - Use `Spacing` instead of ad-hoc margins for consistent vertical rhythm
+- `Spacer` is an alias for `Spacing` (same component, alternative name)
+- The element is decorative (`aria-hidden="true"`)
+
+## When NOT to Use
+
+Do not use `Spacing` when:
+- Layout gap (CSS `gap`) handles the spacing
+- The space is between items in a flex/grid container
+- You need horizontal spacing (use container layout instead)
 
 ## Component Reference
 
 **`Spacing`** — Vertical whitespace atom using spacing tokens
+
+**`Spacer`** — Alias for Spacing
 
 ## Story Coverage
 

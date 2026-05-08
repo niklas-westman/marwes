@@ -2,52 +2,83 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 <Meta title="Spinner/Introduction" />
 
-# Spinner Component
+# Spinner Components
 
-Marwes provides `Spinner` as an atom-level loading indicator with multiple
-visual variants synced from Figma.
+Marwes provides `Spinner` as a loading indicator atom with seven visual variants,
+plus **ButtonSpinner** and **EmptyStateSpinner** purpose molecules.
 
 ## Component Architecture
 
 ```
 Spinner (Atom)
+     ↓
+ButtonSpinner (Molecule — inline button loading)
+EmptyStateSpinner (Molecule — centered empty state)
 ```
 
 ## Recommended Usage
 
-Use the raw `Spinner` atom for inline or standalone loading feedback:
+Use the raw `Spinner` atom when you need direct control. Use purpose molecules
+when the loading context matches their pattern.
 
 ```svelte
 <script>
-  import { Spinner } from "@marwes-ui/svelte"
+  import { Spinner, ButtonSpinner, EmptyStateSpinner } from "@marwes-ui/svelte"
 </script>
 
-<Spinner variant="classic" size="md" />
-<Spinner variant="dots-round" size="lg" />
-<Spinner variant="ring" size="sm" />
+<!-- Standalone spinner -->
+<Spinner variant="classic" size="md" decorative />
+<Spinner variant="dots-round" size="lg" ariaLabel="Loading account data" />
+
+<!-- Inside a button -->
+<ButtonSpinner />
+
+<!-- Centered empty state -->
+<EmptyStateSpinner />
 ```
 
-## Usage Notes
+## Variants
 
-- `variant` maps to seven synced Spinner styles: `classic`, `ring`, `dual`, `dots-round`, `dots-square`, `lines`, `cross`
-- `size` supports `sm`, `md`, `lg`
-- Keep the spinner decorative when nearby text already communicates loading
-- Add `ariaLabel` when the spinner must announce loading on its own
+Seven visual variants synced from Figma:
 
-## Accessibility notes
+- `classic` — Single rotating arc
+- `ring` — Full ring with indicator
+- `dual` — Double arc rotation
+- `dots-round` — Circular dot animation
+- `dots-square` — Square dot animation
+- `lines` — Radiating line animation
+- `cross` — Cross-shaped rotation
+
+## Sizes
+
+Spinner supports token sizes and custom pixel values:
+
+- `xs` — 16px
+- `sm` — 24px
+- `md` — 32px
+- `lg` — 40px
+- Custom number (e.g. `56` for 56px)
+
+## Accessibility Notes
 
 **Decorative by default.** When visible text nearby already says what is loading,
-the spinner should remain hidden from assistive technology.
+keep the spinner decorative (hidden from assistive technology).
 
-**Reduced-motion.** The spinner animation slows under `prefers-reduced-motion: reduce`
-rather than stopping entirely, keeping visible loading feedback present.
+**Add `ariaLabel` for standalone spinners.** When the spinner must announce loading on its own,
+provide `ariaLabel` and set `decorative={false}`.
+
+**Reduced-motion.** Animation slows under `prefers-reduced-motion: reduce` rather than stopping.
 
 ## Component Reference
 
-**`Spinner`** — Low-level loading indicator atom with synced style variants
+**`Spinner`** — Low-level loading indicator atom with 7 variants and size scale
+
+**`ButtonSpinner`** — Purpose molecule for inline button loading
+
+**`EmptyStateSpinner`** — Purpose molecule for centered empty-state loading
 
 ## Story Coverage
 
-- **Atom**: `Classic`, `Ring`, `Dual`, `DotsRound`, `DotsSquare`, `Lines`, `Cross`, `Small`, `Large`
+- **Atom**: `Default`, `Classic`, `Ring`, `Dual`, `DotsRound`, `DotsSquare`, `Lines`, `Cross`, `Small`, `Large`, `AccessibleStatus`
 - **Molecule/ButtonSpinner**: `Default`, `Inverted`
 - **Molecule/EmptyStateSpinner**: `Default`

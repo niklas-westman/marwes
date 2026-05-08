@@ -2,12 +2,10 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 <Meta title="Heading/Introduction" />
 
-# Heading Component
+# Heading Components
 
 Marwes provides `H1`, `H2`, and `H3` as atom-level typography primitives for
-semantic structure and visual hierarchy. Choose the heading level by document
-outline first, then use `size` only when the visual scale needs to differ from
-the semantic level.
+semantic structure and visual hierarchy.
 
 ## Component Architecture
 
@@ -17,8 +15,8 @@ H1 / H2 / H3 (Atoms)
 
 ## Recommended Usage
 
-Use the raw heading atoms directly to express page, section, and subsection
-hierarchy:
+Choose the heading level by document outline first, then use `size` only when the
+visual scale needs to differ from the semantic level:
 
 ```svelte
 <script>
@@ -28,6 +26,9 @@ hierarchy:
 <H1>Page Title</H1>
 <H2>Section Heading</H2>
 <H3>Subsection Heading</H3>
+
+<!-- Visual override: semantic h1, visual h2 -->
+<H1 size="h2">Visually smaller but semantically h1</H1>
 ```
 
 ## Usage Notes
@@ -36,14 +37,16 @@ hierarchy:
 - Use `size` when semantic level and visual scale need to differ
 - Add `id` when headings should support anchor links or table-of-contents jumps
 
-## Accessibility notes
+## Accessibility Notes
 
-**Choose the heading level by document outline first.** Screen readers use heading
-levels to navigate the page structure. Pick the level that matches the content
-hierarchy, not the font size you want.
+**Choose the heading level by document outline first.** Screen readers use heading levels
+to navigate page structure. Pick the level that matches content hierarchy, not font size.
 
 **`size` changes the visual scale, not the semantic level.** An `H3` with `size="h1"`
 is still an `<h3>` for assistive technology.
+
+**Do not use headings for decorative emphasis.** If text needs to look larger but doesn't
+introduce a real section, use another typography surface.
 
 ## Component Reference
 
@@ -55,4 +58,4 @@ is still an `<h3>` for assistive technology.
 
 ## Story Coverage
 
-- **Atom**: `Default`, `WithSizeOverride`
+- **Atom**: `HeadingOne`, `WithSizeOverride`, `AllLevels`, `SizeOverrides`

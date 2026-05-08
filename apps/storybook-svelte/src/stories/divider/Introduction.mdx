@@ -4,9 +4,9 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Divider Component
 
-Marwes provides `Divider` as a single atom for separating related content without
-introducing extra structure. Use it to create visual breaks between stacked
-sections or as a vertical separator in inline layouts.
+Marwes provides `Divider` as a single atom for separating related content.
+Use it for visual breaks between stacked sections or as a vertical separator
+in inline layouts.
 
 ## Component Architecture
 
@@ -16,30 +16,46 @@ Divider (Atom)
 
 ## Recommended Usage
 
-Use the raw `Divider` atom directly:
-
 ```svelte
 <script>
   import { Divider } from "@marwes-ui/svelte"
 </script>
 
+<!-- Horizontal (default) -->
 <Divider size="sm" />
+
+<!-- Vertical (needs parent with defined height) -->
 <Divider orientation="vertical" size="xs" />
 ```
+
+## Size Scale
+
+| Size | Thickness |
+|------|-----------|
+| `xxs` | 1px (hairline) |
+| `xs` | 8px |
+| `sm` | 16px |
+| `md` | 32px |
+| `lg` | 48px |
+| `xl` | 64px |
+| `xxl` | 80px |
 
 ## Usage Notes
 
 - `size` controls both divider thickness and surrounding spacing
 - `orientation="horizontal"` is the default for content sections
-- `orientation="vertical"` works best in containers that define their own height
+- `orientation="vertical"` works in flex containers with defined height
+- Renders semantic `<hr>` with separator role
 
-## Accessibility notes
+## Accessibility Notes
 
-**Divider is a real semantic separator.** It renders an `<hr>` with separator semantics.
+**Divider is a real semantic separator.** It renders `<hr>` with separator semantics.
 Use it when the UI benefits from an actual content boundary, not just a visual line.
 
-**Do not use Divider as a spacing helper.** If the layout only needs whitespace, use
-the `Spacing` component instead.
+**Do not use Divider as a spacing helper.** Use `Spacing` when you only need whitespace.
+
+**Vertical dividers depend on container layout.** The divider exposes
+`aria-orientation="vertical"`, but needs a parent layout that provides height.
 
 ## Component Reference
 
@@ -47,4 +63,4 @@ the `Spacing` component instead.
 
 ## Story Coverage
 
-- **Atom**: `Default`, `ExtraSmall`, `Small`, `Medium`, `Large`, `Vertical`
+- **Atom**: `Default`, `Hairline`, `Small`, `Large`, `ExtraLarge`, `Vertical`

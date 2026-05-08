@@ -1,21 +1,71 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  tabWhyPurposeComponents,
+  tabPurposeComponentReference,
+} from "@marwes-ui/core"
 
 <Meta title="Tab/Introduction" />
 
 # Tab Components
 
-Marwes provides `TabGroup` as a molecule-level component for organizing content
-into switchable panels.
+Marwes provides tabs at three layers: **purpose components** for common tab sets,
+**TabGroup** for accessible tablist and panel coordination, and purpose wrappers
+for semantic context.
 
-## Component Architecture
+## Recommended: Purpose Components
 
+Use purpose-built components when the tab set has a clear product meaning:
+
+```svelte
+<script>
+  import { NavigationTabs, ContentTabs, SettingsTabs } from "@marwes-ui/svelte"
+</script>
+
+<NavigationTabs
+  tabs={[
+    { value: "overview", label: "Overview", panel: "Key product summary." },
+    { value: "roadmap", label: "Roadmap", panel: "Upcoming milestones." },
+  ]}
+/>
+
+<ContentTabs
+  tabs={[
+    { value: "summary", label: "Summary", panel: "Project overview." },
+    { value: "results", label: "Results", panel: "Performance gains." },
+  ]}
+/>
+
+<SettingsTabs
+  tabs={[
+    { value: "general", label: "General", panel: "Defaults and workspace info." },
+    { value: "security", label: "Security", panel: "Access policies and SSO." },
+  ]}
+/>
 ```
-TabGroup (Molecule)
-```
 
-## Recommended Usage
+### Why Purpose Components?
 
-Use the `TabGroup` molecule for tabbed content:
+<ol>
+  {tabWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {tabPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: TabGroup (Molecule)
+
+Use `TabGroup` when you need custom tab labels or panels:
 
 ```svelte
 <script>
@@ -23,32 +73,40 @@ Use the `TabGroup` molecule for tabbed content:
 </script>
 
 <TabGroup
+  ariaLabel="Profile sections"
   tabs={[
-    { value: "tab1", label: "Overview", panel: "Overview content goes here." },
-    { value: "tab2", label: "Details", panel: "Detailed information here." },
-    { value: "tab3", label: "Settings", panel: "Settings panel." },
+    { value: "overview", label: "Overview", panel: "Profile summary." },
+    { value: "activity", label: "Activity", panel: "Recent actions." },
+    { value: "security", label: "Security", panel: "Access and sessions." },
   ]}
-  defaultActiveTab="tab1"
+  defaultActiveTab="overview"
 />
 ```
 
-## Usage Notes
+### TabGroup Features
 
-- `tabs` defines the tab items with `value`, `label`, and `panel` content
-- `defaultActiveTab` sets the initially active tab
-- Individual tabs can be disabled via the `disabled` property
-
-## Accessibility notes
-
-**TabGroup uses WAI-ARIA tabs pattern.** Keyboard navigation with arrow keys
-cycles through tab triggers. `Tab` moves focus into the active panel.
-
-**Disabled tabs** remain visible but are excluded from keyboard navigation.
+- **Keyboard navigation built in** — Left/Right arrows plus Home/End move between enabled tabs
+- **Controlled or uncontrolled state** — use `activeTab` for external state or `defaultActiveTab` for internal state
+- **Accessible panel wiring** — each tab connects to its `tabpanel` automatically
+- **Disabled tabs** — individual tabs can be disabled via the `disabled` property
 
 ## Component Reference
 
-**`TabGroup`** — Tabbed content molecule with accessible keyboard navigation
+### Purpose Components
+
+**`NavigationTabs`** — Peer-view navigation and section switching (`data-purpose="navigation-tabs"`)
+
+**`ContentTabs`** — Segmented content surfaces and reading flows (`data-purpose="content-tabs"`)
+
+**`SettingsTabs`** — Configuration areas and admin groupings (`data-purpose="settings-tabs"`)
+
+### Base Molecule
+
+**`TabGroup`** — Accessible tablist plus panel coordination
 
 ## Story Coverage
 
 - **Molecule**: `Default`, `WithDisabledTab`
+- **Purpose/ContentTabs**: `Default`
+- **Purpose/NavigationTabs**: `Default`
+- **Purpose/SettingsTabs**: `Default`

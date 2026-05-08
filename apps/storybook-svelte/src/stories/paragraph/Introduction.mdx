@@ -15,21 +15,20 @@ Paragraph (Atom)
 
 ## Recommended Usage
 
-Use the raw `Paragraph` atom for body text:
-
 ```svelte
 <script>
   import { Paragraph } from "@marwes-ui/svelte"
 </script>
 
 <Paragraph>Default body text paragraph.</Paragraph>
-<Paragraph size="sm">Small text for captions.</Paragraph>
-<Paragraph size="lg">Large text for hero sections.</Paragraph>
+<Paragraph size="sm">Small text for captions and helper text.</Paragraph>
+<Paragraph size="lg">Large text for hero sections and introductions.</Paragraph>
 ```
 
 ## Usage Notes
 
 - `size` controls the text scale: `sm`, `md` (default), `lg`
+- Renders semantic `<p>` element with `mw-p` class
 - Children are rendered as the paragraph content
 
 ## Component Reference

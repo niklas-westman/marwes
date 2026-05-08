@@ -1,58 +1,174 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  buttonActionSemanticPurposes,
+  buttonVariantVisualStyles,
+  buttonWhySemanticComponents,
+} from "@marwes-ui/core"
 
 <Meta title="Buttons/Introduction" />
 
-# Button Component
+# Button Components
 
-Marwes provides `Button` as the atom-level interactive element for actions,
-navigation, and form submissions.
+Marwes provides two complementary button layers:
+**purpose buttons** for canonical semantic flows and the base **Button** for deliberate exceptions.
 
-## Component Architecture
+Buttons are organized as Atom → Variant wrappers → Purpose wrappers.
+
+## Button Architecture
 
 ```
 Button (Atom)
+     ↓
+Variant Wrappers
+  ├─ PrimaryButton
+  ├─ SecondaryButton
+  ├─ TextButton
+  └─ SuccessButton
+     ↓
+Purpose Wrappers
+  ├─ SubmitButton
+  ├─ SaveButton
+  ├─ CancelButton
+  ├─ ConfirmButton
+  ├─ VerifyButton
+  ├─ CreateButton
+  ├─ EditButton
+  ├─ UploadButton
+  ├─ DownloadButton
+  ├─ CopyButton
+  ├─ SearchButton
+  ├─ FilterButton
+  ├─ SortButton
+  ├─ DropdownButton
+  ├─ DestructiveButton
+  ├─ LinkButton
+  ├─ CloseButton
+  └─ RefreshButton
 ```
 
-## Recommended Usage
+## Atom: Button
 
-Use `Button` with explicit `variant` and `action` props:
+Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode.
 
 ```svelte
 <script>
   import { Button } from "@marwes-ui/svelte"
 </script>
 
-<Button variant="primary" action="button">Primary Action</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="text" action="navigate" href="/docs" as="a">Go to Docs</Button>
+<Button variant="primary" action="button">Base Button</Button>
+<Button variant="secondary" action="navigate" href="/dashboard" as="a">
+  Go to dashboard
+</Button>
 ```
 
-## Usage Notes
+## Recommended: Purpose Buttons
 
-- `variant` controls visual style: `primary`, `secondary`, `neutral`, `text`, `success`
-- `action` controls semantic purpose: `submit`, `cancel`, `create`, `delete`, `navigate`, `edit`, `reset`, `button`
-- `size` supports `xs`, `sm`, `md`, `lg`
-- `loading` shows a spinner and disables interaction
-- `disabled` prevents interaction
-- `as="a"` with `href` renders an anchor with link semantics
-- `iconLeft` / `iconRight` add icons to either side of the label
+Use purpose-built components when the semantic intent is known ahead of time.
 
-## Accessibility notes
+```svelte
+<script>
+  import { SubmitButton, CancelButton, DestructiveButton, LinkButton } from "@marwes-ui/svelte"
+</script>
 
-**Button vs link semantics.** Use `as="a"` with `href` for navigation. Native link
-semantics are preserved, including right-click and cmd+click behavior.
+<SubmitButton>Save Changes</SubmitButton>
+<CancelButton>Cancel</CancelButton>
+<DestructiveButton>Delete</DestructiveButton>
+<LinkButton href="/dashboard">Go to Dashboard</LinkButton>
+```
 
-**Loading state.** When `loading` is active, the button becomes `aria-busy` and disabled
-to prevent duplicate submissions.
+### Why Semantic Components?
+
+<ol>
+  {buttonWhySemanticComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+## Variant Wrappers
+
+Use visual wrappers when you want a stable visual pattern without purpose semantics:
+
+```svelte
+<script>
+  import { PrimaryButton, SecondaryButton, TextButton, SuccessButton } from "@marwes-ui/svelte"
+</script>
+
+<PrimaryButton>Continue</PrimaryButton>
+<SecondaryButton>Back</SecondaryButton>
+<TextButton>Learn more</TextButton>
+<SuccessButton>Approved</SuccessButton>
+```
+
+## Loading States
+
+`Button` supports both a boolean shorthand and a structured loading object:
+
+```svelte
+<Button loading>Save</Button>
+
+<Button loading={{ isLoading: true, loadingLabel: "Saving…" }}>Save</Button>
+```
+
+## Variant vs Action
+
+### `variant` — Visual Style
+
+<ul>
+  {buttonVariantVisualStyles.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+### `action` — Semantic Purpose
+
+<ul>
+  {buttonActionSemanticPurposes.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
 
 ## Component Reference
 
-**`Button`** — Base interactive atom for actions, submissions, and navigation
+### Variant Buttons
 
-## Story Coverage
+**`PrimaryButton`** — `variant="primary"`
 
-- **Atom**: `Basic`, `AsLink`, `Loading`, `Disabled`, `Secondary`, `Text`, `Success`, `Small`, `Large`
-- **Variant/PrimaryButton**: `PrimaryExample`
-- **Variant/SecondaryButton**: `SecondaryExample`
-- **Variant/TextButton**: `TextExample`
-- **Purpose**: SubmitButton, CancelButton, DestructiveButton, CreateButton, SaveButton, ConfirmButton, VerifyButton, EditButton, CloseButton, RefreshButton, UploadButton, DownloadButton, CopyButton, SearchButton, FilterButton, SortButton, DropdownButton, LinkButton
+**`SecondaryButton`** — `variant="secondary"`
+
+**`TextButton`** — `variant="text"`
+
+**`SuccessButton`** — `variant="success"`
+
+### Purpose Buttons
+
+**`SubmitButton`** — Form submissions (`action="submit"`, `variant="primary"`)
+
+**`SaveButton`** — Save and persist actions
+
+**`CancelButton`** — Cancel and dismiss (`action="cancel"`, `variant="neutral"`)
+
+**`ConfirmButton`** — Affirmative confirmation (`variant="success"`)
+
+**`VerifyButton`** — Verification and approval
+
+**`CreateButton`** — Creating new items (`action="create"`)
+
+**`EditButton`** — Edit and modify actions (`action="edit"`)
+
+**`UploadButton`** / **`DownloadButton`** / **`CopyButton`** — Utility actions
+
+**`SearchButton`** / **`FilterButton`** / **`SortButton`** — Data operations
+
+**`DropdownButton`** — Menu triggers
+
+**`DestructiveButton`** — Destructive actions (`action="delete"`)
+
+**`LinkButton`** — Navigation links (`action="navigate"`, `as="a"`)
+
+**`CloseButton`** / **`RefreshButton`** — Neutral utility actions

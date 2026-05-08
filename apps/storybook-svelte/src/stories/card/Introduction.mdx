@@ -1,21 +1,72 @@
 import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  cardWhyPurposeComponents,
+  cardPurposeComponentReference,
+} from "@marwes-ui/core"
 
 <Meta title="Card/Introduction" />
 
-# Card Component
+# Card Components
 
-Marwes provides `Card` as an atom-level container for grouping related content
-with optional title and body sections.
+Marwes provides cards at two layers: **purpose components** for common card
+patterns and the base **Card** atom for custom composition.
 
 ## Component Architecture
 
 ```
 Card (Atom)
+     ↓
+Purpose Wrappers
+  ├─ ProductCard
+  ├─ ProfileCard
+  └─ StatCard
 ```
 
-## Recommended Usage
+## Recommended: Purpose Components
 
-Use the raw `Card` atom for content grouping:
+Use purpose-built cards when the card has a clear product meaning:
+
+```svelte
+<script>
+  import { ProductCard, ProfileCard, StatCard } from "@marwes-ui/svelte"
+</script>
+
+<ProductCard title="Pro plan">
+  Unlimited projects, advanced analytics, and priority support.
+</ProductCard>
+
+<ProfileCard title="Alex Morgan">
+  Design systems engineer with ownership of component primitives.
+</ProfileCard>
+
+<StatCard title="Monthly recurring revenue">
+  $128,400
+</StatCard>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {cardWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {cardPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Atom: Card
+
+Use the raw `Card` atom for any content grouping:
 
 ```svelte
 <script>
@@ -36,10 +87,21 @@ Use the raw `Card` atom for content grouping:
 - `title` renders an optional heading inside the card
 - Children are rendered as the card body
 - Card provides consistent padding, border radius, and elevation
+- Structure: `mw-card` → `mw-card__header` + `mw-card__title` → `mw-card__body`
 
 ## Component Reference
 
-**`Card`** — Container atom for grouping related content with optional title
+### Purpose Components
+
+**`ProductCard`** — Product pricing and feature cards (`data-purpose="product-card"`)
+
+**`ProfileCard`** — User or team member profiles (`data-purpose="profile-card"`)
+
+**`StatCard`** — Key metrics and KPI cards (`data-purpose="stat-card"`)
+
+### Atom
+
+**`Card`** — Container atom for grouping related content
 
 ## Story Coverage
 
