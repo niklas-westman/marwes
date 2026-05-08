@@ -305,10 +305,10 @@ Audited: All 20 component families in `packages/svelte/src/lib/components/`
 
 ## Priority order for fixes
 
-1. **Slider visual structure** — most visible, affects usability
-2. **Switch missing CSS vars** — affects visual appearance
-3. **Data attribute spread** (6 components) — low risk, high correctness
-4. **Avatar/Skeleton dataAttributes prop** — enables proper purpose wrappers
-5. **InputField password/search affordances** — feature gap
-6. **StatTile element/condition fixes** — minor correctness
-7. **Purpose wrapper cleanup** (remove wrapper divs) — depends on #4
+1. ~~**Slider visual structure** — most visible, affects usability~~ ✅ FIXED
+2. ~~**Switch missing CSS vars** — affects visual appearance~~ ✅ FIXED
+3. ~~**Data attribute spread** (6 components) — low risk, high correctness~~ ✅ FIXED
+4. ~~**Avatar/Skeleton dataAttributes prop** — enables proper purpose wrappers~~ ✅ FIXED
+5. ~~**InputField password/search affordances** — feature gap~~ ✅ FIXED
+6. ~~**StatTile element/condition fixes** — minor correctness~~ ✅ FIXED
+7. ~~**Purpose wrapper cleanup** (remove wrapper divs) — depends on #4~~ ✅ FIXED (Avatar family)
