@@ -1,16 +1,39 @@
-import { storybookLayout } from "@marwes-ui/core"
-import { H1, H2, H3 } from "@marwes-ui/svelte"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
+import { H1 } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import HeadingShowcase from "./HeadingShowcase.svelte"
 
-const metaH1 = {
+const meta = {
   title: "Heading/Atom",
   component: H1,
-  parameters: { ...storybookLayout.padded },
+  parameters: {
+    ...storybookLayout.padded,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof H1>
 
-export default metaH1
-type Story = StoryObj<typeof metaH1>
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = { args: { children: "Heading Level 1" } }
-export const WithSizeOverride: Story = { args: { children: "H1 with h3 size", size: "h3" } }
+export const HeadingOne: Story = {
+  args: { children: "This is a Heading 1" },
+}
+
+export const WithSizeOverride: Story = {
+  args: { children: "H1 with h3 size", size: "h3" },
+}
+
+export const AllLevels: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "all-levels" },
+  }),
+}
+
+export const SizeOverrides: Story = {
+  render: () => ({
+    Component: HeadingShowcase,
+    props: { story: "size-override" },
+  }),
+}

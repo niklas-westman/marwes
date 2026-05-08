@@ -1,11 +1,11 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Skeleton } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
   title: "Skeleton/Atom",
   component: Skeleton,
-  parameters: { ...storybookLayout.centered },
+  parameters: { ...storybookLayout.centered, ...storybookA11yPolicy.smoke },
   tags: ["autodocs"],
 } satisfies Meta<typeof Skeleton>
 

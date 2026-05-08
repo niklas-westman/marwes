@@ -1,11 +1,11 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Textarea } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
   title: "Input/Atom/Textarea",
   component: Textarea,
-  parameters: { ...storybookLayout.centered },
+  parameters: { ...storybookLayout.centered, ...storybookA11yPolicy.smoke },
   tags: ["autodocs"],
 } satisfies Meta<typeof Textarea>
 

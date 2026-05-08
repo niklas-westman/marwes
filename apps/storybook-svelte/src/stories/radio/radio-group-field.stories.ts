@@ -1,6 +1,6 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { RadioGroupField } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import RadioGroupFieldStory from "./RadioGroupFieldStory.svelte"
 
 const colorOptions = [
   { value: "red", label: "Red" },
@@ -10,13 +10,13 @@ const colorOptions = [
 
 const meta = {
   title: "Radio/Molecule",
-  component: RadioGroupField,
+  component: RadioGroupFieldStory,
   parameters: {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof RadioGroupField>
+} satisfies Meta<typeof RadioGroupFieldStory>
 
 export default meta
 type Story = StoryObj<typeof meta>

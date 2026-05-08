@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { InputField } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
@@ -7,6 +7,7 @@ const meta = {
   component: InputField,
   parameters: {
     ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof InputField>
@@ -49,5 +50,20 @@ export const Disabled: Story = {
   args: {
     label: "Account ID",
     input: { value: "ACC-12345", disabled: true },
+  },
+}
+
+export const ReadOnly: Story = {
+  args: {
+    label: "Account created",
+    input: { value: "January 15, 2026", readOnly: true },
+  },
+}
+
+export const Required: Story = {
+  args: {
+    label: "Email *",
+    helperText: "This field is required.",
+    input: { required: true, placeholder: "you@example.com" },
   },
 }

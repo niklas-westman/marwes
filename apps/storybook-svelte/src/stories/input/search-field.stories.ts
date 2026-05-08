@@ -21,3 +21,27 @@ export const Default: Story = {
     input: { placeholder: "Search..." },
   },
 }
+
+export const WithHelperText: Story = {
+  args: {
+    label: "Search products",
+    helperText: "Type to filter products, click X to clear.",
+    input: { placeholder: "Enter product name..." },
+  },
+}
+
+export const WithError: Story = {
+  args: {
+    label: "Search",
+    error: "Minimum 3 characters required.",
+    input: { placeholder: "Search..." },
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    label: "Search",
+    helperText: "Search is temporarily disabled.",
+    input: { placeholder: "Search...", disabled: true },
+  },
+}

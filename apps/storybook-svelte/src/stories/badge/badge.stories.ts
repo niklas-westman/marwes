@@ -1,4 +1,4 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Badge } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
@@ -7,6 +7,7 @@ const meta = {
   component: Badge,
   parameters: {
     ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Badge>

@@ -1,11 +1,11 @@
-import { storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { TabGroup } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 
 const meta = {
   title: "Tab/Molecule",
   component: TabGroup,
-  parameters: { ...storybookLayout.padded },
+  parameters: { ...storybookLayout.padded, ...storybookA11yPolicy.smoke },
   tags: ["autodocs"],
 } satisfies Meta<typeof TabGroup>
 
