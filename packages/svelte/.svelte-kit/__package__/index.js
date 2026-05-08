@@ -102,6 +102,9 @@ export { default as TeamAvatarGroup } from "./components/avatar/TeamAvatarGroup.
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte";
 // StatTile
 export { default as StatTile } from "./components/stat-tile/StatTile.svelte";
+// Tooltip
+export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
+export { default as TooltipGroup } from "./components/tooltip/TooltipGroup.svelte";
 // Toast
 export { default as Toast } from "./components/toast/Toast.svelte";
 export { default as ToastContainer } from "./components/toast/ToastContainer.svelte";

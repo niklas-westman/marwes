@@ -147,6 +147,11 @@ export type { SkeletonProps } from "./components/skeleton/types.js"
 export { default as StatTile } from "./components/stat-tile/StatTile.svelte"
 export type { StatTileProps } from "./components/stat-tile/types.js"
 
+// Tooltip
+export { default as Tooltip } from "./components/tooltip/Tooltip.svelte"
+export { default as TooltipGroup } from "./components/tooltip/TooltipGroup.svelte"
+export type { TooltipProps, TooltipGroupProps } from "./components/tooltip/types.js"
+
 // Toast
 export { default as Toast } from "./components/toast/Toast.svelte"
 export { default as ToastContainer } from "./components/toast/ToastContainer.svelte"
