@@ -184,10 +184,10 @@ React includes `storybookA11yPolicy.smoke` on all stories. Svelte omits it from 
 
 ## Priority Fix Order
 
-1. **Add 21 missing purpose story files** — all components exist, stories don't
-2. **Fix broken RadioGroupField story** — currently passes invalid props
-3. **Add `storybookA11yPolicy.smoke`** to all story metas
-4. **Add missing argTypes** (Select native, Spinner, Slider)
-5. **Enrich existing stories** with more variants (ReadOnly, Required, Controlled, Invalid, etc.)
-6. **Expand Introduction.mdx** to document molecules and purpose wrappers with Svelte examples
-7. **Add gallery/matrix stories** for Avatar, Spinner (matching React's showcase style)
+1. ~~**Add 21 missing purpose story files**~~ ✅ FIXED
+2. ~~**Fix broken RadioGroupField story**~~ ✅ FIXED
+3. ~~**Add `storybookA11yPolicy.smoke`** to all story metas~~ ✅ FIXED
+4. ~~**Add missing argTypes** (Select native, Spinner, Slider)~~ ✅ FIXED
+5. ~~**Enrich existing stories** with more variants (ReadOnly, Required, etc.)~~ ✅ FIXED
+6. ~~**Expand Introduction.mdx** to document molecules and purpose wrappers~~ ✅ FIXED
+7. **Add gallery/matrix stories** for Avatar, Spinner (matching React's showcase style) — deferred
