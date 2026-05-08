@@ -102,6 +102,12 @@ export { default as TeamAvatarGroup } from "./components/avatar/TeamAvatarGroup.
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte";
 // StatTile
 export { default as StatTile } from "./components/stat-tile/StatTile.svelte";
+// Dialog
+export { default as Dialog } from "./components/dialog/Dialog.svelte";
+export { default as DialogModal } from "./components/dialog/DialogModal.svelte";
+export { default as ConfirmDialog } from "./components/dialog/ConfirmDialog.svelte";
+export { default as DestructiveDialog } from "./components/dialog/DestructiveDialog.svelte";
+export { default as InfoDialog } from "./components/dialog/InfoDialog.svelte";
 // Accordion
 export { default as Accordion } from "./components/accordion/Accordion.svelte";
 export { default as AccordionField } from "./components/accordion/AccordionField.svelte";

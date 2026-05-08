@@ -147,6 +147,20 @@ export type { SkeletonProps } from "./components/skeleton/types.js"
 export { default as StatTile } from "./components/stat-tile/StatTile.svelte"
 export type { StatTileProps } from "./components/stat-tile/types.js"
 
+// Dialog
+export { default as Dialog } from "./components/dialog/Dialog.svelte"
+export { default as DialogModal } from "./components/dialog/DialogModal.svelte"
+export { default as ConfirmDialog } from "./components/dialog/ConfirmDialog.svelte"
+export { default as DestructiveDialog } from "./components/dialog/DestructiveDialog.svelte"
+export { default as InfoDialog } from "./components/dialog/InfoDialog.svelte"
+export type {
+  DialogProps,
+  DialogModalProps,
+  ConfirmDialogProps,
+  DestructiveDialogProps,
+  InfoDialogProps,
+} from "./components/dialog/types.js"
+
 // Accordion
 export { default as Accordion } from "./components/accordion/Accordion.svelte"
 export { default as AccordionField } from "./components/accordion/AccordionField.svelte"
