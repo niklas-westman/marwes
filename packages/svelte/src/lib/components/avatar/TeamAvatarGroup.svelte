@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createPurposeSemanticAttributes } from "@marwes-ui/core";
   import AvatarGroup from "./AvatarGroup.svelte";
   import type { AvatarProps } from "./types.js";
 
@@ -11,11 +12,10 @@
     overflowCount?: number;
     overflowLabel?: string;
     ariaLabel?: string;
+    dataAttributes?: Record<string, string>;
     class?: string;
   }
 
-  let props: TeamAvatarGroupProps = $props();
+  let { dataAttributes, ...props }: TeamAvatarGroupProps = $props();
 </script>
-<div data-purpose="team">
-  <AvatarGroup {...props} />
-</div>
+<AvatarGroup {...props} dataAttributes={{ ...dataAttributes, ...createPurposeSemanticAttributes("team") }} />

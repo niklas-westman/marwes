@@ -7,6 +7,7 @@
   let {
     class: className,
     style,
+    dataAttributes,
     ...options
   }: SkeletonProps = $props();
 
@@ -23,7 +24,6 @@
   aria-hidden={kit.a11y.ariaHidden ? "true" : undefined}
   aria-label={kit.a11y.ariaLabel}
   aria-live={kit.a11y.ariaLive}
-  data-component={kit.dataAttributes["data-component"]}
-  data-variant={kit.dataAttributes["data-variant"]}
-  data-animation={kit.dataAttributes["data-animation"]}
+  {...kit.dataAttributes}
+  {...dataAttributes}
 ></span>

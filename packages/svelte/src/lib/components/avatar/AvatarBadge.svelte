@@ -12,6 +12,7 @@
     class: className,
     statusLabel = "Online",
     decorative,
+    dataAttributes,
     ...avatarProps
   }: AvatarBadgeProps = $props();
 
@@ -39,6 +40,7 @@
   role={decorative ? undefined : "img"}
   aria-hidden={decorative ? "true" : undefined}
   aria-label={decorative ? undefined : accessibleLabel}
+  {...dataAttributes}
 >
   <Avatar {...avatarProps} decorative />
   <span aria-hidden="true" class="mw-avatar-badge__indicator"></span>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createSwitchRecipe } from "@marwes-ui/core";
+  import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { SwitchProps } from "./types.js";
 
@@ -20,6 +21,7 @@
     ...(ariaLabel ? { ariaLabel } : {}),
   }));
   const mergedClass = $derived(mergeClass(kit.className, className));
+  const mergedStyle = $derived(cssVarsToStyle(kit.vars));
   const isDisabled = $derived(kit.a11y.ariaDisabled === true);
 
   function handleClick(e: MouseEvent): void {
@@ -40,6 +42,7 @@
   aria-labelledby={kit.a11y.ariaLabelledby}
   aria-describedby={kit.a11y.ariaDescribedBy}
   class={mergedClass}
+  style={mergedStyle}
   onclick={handleClick}
 >
   <span class="mw-switch__track">

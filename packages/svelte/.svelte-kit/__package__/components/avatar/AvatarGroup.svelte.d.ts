@@ -7,6 +7,7 @@ interface AvatarGroupProps {
     overflowCount?: number;
     overflowLabel?: string;
     ariaLabel?: string;
+    dataAttributes?: Record<string, string>;
     class?: string;
 }
 declare const AvatarGroup: import("svelte").Component<AvatarGroupProps, {}, "">;

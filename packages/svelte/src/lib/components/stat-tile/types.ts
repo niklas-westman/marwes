@@ -10,5 +10,7 @@ export interface StatTileProps extends StatTileOptions {
   subtitle?: string
   /** Optional trend value (e.g. "+12%") */
   trendValue?: string
+  /** Data attributes for AI-friendly metadata */
+  dataAttributes?: Record<string, string>
   class?: string
 }

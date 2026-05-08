@@ -19,6 +19,5 @@
   class={mergedClass}
   style={mergedStyle}
   aria-hidden={kit.a11y["aria-hidden"]}
-  data-component={kit.dataAttributes["data-component"]}
-  data-size={kit.dataAttributes["data-size"]}
+  {...kit.dataAttributes}
 ></div>

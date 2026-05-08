@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createPurposeSemanticAttributes } from "@marwes-ui/core";
   import AvatarBadge from "./AvatarBadge.svelte";
   import type { AvatarProps } from "./types.js";
 
@@ -6,8 +7,6 @@
     statusLabel?: string;
   }
 
-  let props: PresenceAvatarProps = $props();
+  let { dataAttributes, ...props }: PresenceAvatarProps = $props();
 </script>
-<div data-purpose="presence">
-  <AvatarBadge {...props} />
-</div>
+<AvatarBadge {...props} dataAttributes={{ ...dataAttributes, ...createPurposeSemanticAttributes("presence") }} />

@@ -7,6 +7,7 @@
   let {
     class: className,
     style,
+    dataAttributes,
     ...options
   }: AvatarProps = $props();
 
@@ -22,9 +23,8 @@
   role={kit.a11y.role}
   aria-hidden={isDecorative ? "true" : undefined}
   aria-label={kit.a11y.ariaLabel}
-  data-component={kit.dataAttributes["data-component"]}
-  data-size={kit.dataAttributes["data-size"]}
-  data-type={kit.dataAttributes["data-type"]}
+  {...kit.dataAttributes}
+  {...dataAttributes}
 >
   {#if kit.content.type === "image"}
     <img

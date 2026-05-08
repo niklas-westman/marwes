@@ -37,9 +37,7 @@
   aria-hidden={kit.a11y.ariaHidden ? "true" : undefined}
   aria-label={kit.a11y.ariaLabel}
   aria-live={kit.a11y.ariaLive}
-  data-component={kit.dataAttributes["data-component"]}
-  data-variant={kit.dataAttributes["data-variant"]}
-  data-size={kit.dataAttributes["data-size"]}
+  {...kit.dataAttributes}
 >
   <svg
     class="mw-spinner__svg"

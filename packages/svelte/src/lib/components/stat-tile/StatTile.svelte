@@ -8,6 +8,7 @@
     value,
     subtitle,
     trendValue,
+    dataAttributes,
     class: className,
     ...options
   }: StatTileProps = $props();
@@ -15,6 +16,7 @@
   const kit = $derived(createStatTileRecipe({
     ...options,
     ...(trendValue ? { trendValue } : {}),
+    ...(dataAttributes ? { dataAttributes } : {}),
   }));
   const mergedClass = $derived(mergeClass(kit.className, className));
 </script>
@@ -22,19 +24,21 @@
 <article class={mergedClass} {...kit.dataAttributes}>
   <div class={kit.slots.headerClassName}>
     <span class={kit.slots.labelClassName}>{label}</span>
-    {#if kit.trendIcon && trendValue}
+    {#if trendValue}
       <span
         class={kit.slots.trendClassName}
         aria-label={kit.a11y.trendAriaLabel}
         {...kit.trendDataAttributes}
       >
-        <span class={kit.slots.trendIconClassName} aria-hidden="true">{kit.trendIcon}</span>
+        {#if kit.trendIcon}
+          <span class={kit.slots.trendIconClassName} aria-hidden="true">{kit.trendIcon}</span>
+        {/if}
         <span class={kit.slots.trendValueClassName}>{trendValue}</span>
       </span>
     {/if}
   </div>
-  <span class={kit.slots.valueClassName}>{value}</span>
+  <div class={kit.slots.valueClassName}>{value}</div>
   {#if subtitle}
-    <span class={kit.slots.subtitleClassName}>{subtitle}</span>
+    <div class={kit.slots.subtitleClassName}>{subtitle}</div>
   {/if}
 </article>

@@ -21,7 +21,5 @@
   id={kit.a11y.id}
   role={kit.a11y.role}
   aria-orientation={kit.a11y["aria-orientation"]}
-  data-component={kit.dataAttributes["data-component"]}
-  data-orientation={kit.dataAttributes["data-orientation"]}
-  data-size={kit.dataAttributes["data-size"]}
+  {...kit.dataAttributes}
 />

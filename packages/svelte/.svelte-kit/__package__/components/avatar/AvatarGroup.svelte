@@ -12,6 +12,7 @@
     overflowCount?: number;
     overflowLabel?: string;
     ariaLabel?: string;
+    dataAttributes?: Record<string, string>;
     class?: string;
   }
 
@@ -20,6 +21,7 @@
     overflowCount,
     overflowLabel,
     ariaLabel = "Avatar group",
+    dataAttributes,
     class: className,
   }: AvatarGroupProps = $props();
 
@@ -32,6 +34,7 @@
   class={mergedClass}
   data-component="avatar-group"
   aria-label={ariaLabel}
+  {...dataAttributes}
 >
   {#each items as item, i}
     <span class="mw-avatar-group__item">

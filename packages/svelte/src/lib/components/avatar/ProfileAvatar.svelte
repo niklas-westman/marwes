@@ -1,8 +1,7 @@
 <script lang="ts">
+  import { createPurposeSemanticAttributes } from "@marwes-ui/core";
   import Avatar from "./Avatar.svelte";
   import type { AvatarProps } from "./types.js";
-  let props: AvatarProps = $props();
+  let { dataAttributes, ...props }: AvatarProps = $props();
 </script>
-<div data-purpose="profile">
-  <Avatar {...props} />
-</div>
+<Avatar {...props} dataAttributes={{ ...dataAttributes, ...createPurposeSemanticAttributes("profile") }} />
