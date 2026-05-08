@@ -1,5 +1,5 @@
-import { render } from "@testing-library/svelte"
-import { describe, expect, it } from "vitest"
+import { fireEvent, render } from "@testing-library/svelte"
+import { describe, expect, it, vi } from "vitest"
 import Button from "../lib/components/button/Button.svelte"
 
 describe("Button", () => {
@@ -51,5 +51,23 @@ describe("Button", () => {
     const anchor = container.querySelector("a")
     expect(anchor).not.toBeNull()
     expect(anchor?.getAttribute("href")).toBe("https://example.com")
+  })
+
+  it("fires onclick callback", async () => {
+    const handler = vi.fn()
+    const { container } = render(Button, {
+      props: { onclick: handler },
+    })
+    const btn = container.querySelector("button") as HTMLButtonElement
+    await fireEvent.click(btn)
+    expect(handler).toHaveBeenCalledOnce()
+  })
+
+  it("sets disabled attribute when disabled", () => {
+    const { container } = render(Button, {
+      props: { disabled: true },
+    })
+    const btn = container.querySelector("button") as HTMLButtonElement
+    expect(btn.disabled).toBe(true)
   })
 })

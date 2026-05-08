@@ -5,7 +5,7 @@ This guide is the practical implementation workflow for new Marwes components.
 The non-negotiable rule is:
 
 ```text
-core recipe → preset CSS → React adapter → Vue adapter
+core recipe → preset CSS → React adapter → Vue adapter → Svelte adapter
 ```
 
 Do not skip layers, and do not move framework logic into `@marwes-ui/core`.
@@ -20,7 +20,9 @@ flowchart TD
   React --> ReactStories[Add React stories and tests]
   ReactStories --> Vue[Add Vue adapter]
   Vue --> VueStories[Add Vue stories and tests]
-  VueStories --> Exports[Update exports and changeset]
+  VueStories --> Svelte[Add Svelte adapter]
+  Svelte --> SvelteStories[Add Svelte stories and tests]
+  SvelteStories --> Exports[Update exports and changeset]
   Exports --> Verify[Typecheck, lint, test, build]
 ```
 
@@ -174,6 +176,8 @@ Update exports in the affected packages:
 - [ ] React stories and tests added
 - [ ] Vue adapter added
 - [ ] Vue stories and tests added
+- [ ] Svelte adapter added
+- [ ] Svelte stories and tests added
 - [ ] exports updated
 - [ ] changeset added when shipping user-facing API
 - [ ] docs updated if public behavior changed

@@ -16,6 +16,7 @@ graph TD
   Presets[Preset verification] --> Confidence
   React[React adapter tests] --> Confidence
   Vue[Vue adapter tests] --> Confidence
+  Svelte[Svelte adapter tests] --> Confidence
   Storybook[Storybook docs and visual checks] --> Confidence
   Playground[Manual playground checks] --> Confidence
 ```
@@ -44,10 +45,11 @@ Test:
 - key visual states are represented in stories
 - preset imports and distribution work
 
-### React and Vue adapters
+### React, Vue, and Svelte adapters
 Location:
 - `packages/react/src/**/__tests__/`
 - `packages/vue/src/**/__tests__/`
+- `packages/svelte/src/tests/`
 
 Test:
 - adapters call the real core recipe
@@ -64,7 +66,7 @@ Use Storybook to verify:
 - visual state coverage
 - interaction behavior
 - accessibility checks
-- taxonomy consistency across React and Vue story sets
+- taxonomy consistency across React, Vue, and Svelte story sets
 
 ### Playground
 Use the playground for:
@@ -121,6 +123,7 @@ pnpm test:core
 pnpm test:presets
 pnpm test:react
 pnpm test:vue
+pnpm test:svelte
 pnpm test:packages
 ```
 
@@ -136,6 +139,7 @@ pnpm test:typecheck:packages
 ```bash
 pnpm dev:storybook:react
 pnpm dev:storybook:vue
+pnpm dev:storybook:svelte
 pnpm dev:playground
 pnpm test:storybook:a11y
 ```
