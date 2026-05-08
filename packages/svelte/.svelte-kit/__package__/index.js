@@ -48,6 +48,7 @@ export { default as CurrencyField } from "./components/input/CurrencyField.svelt
 export { default as DateOfBirthField } from "./components/input/DateOfBirthField.svelte";
 export { default as ZipCodeField } from "./components/input/ZipCodeField.svelte";
 export { default as DropdownField } from "./components/input/DropdownField.svelte";
+export { default as InputOtp } from "./components/input/InputOtp.svelte";
 // Badge
 export { default as Badge } from "./components/badge/Badge.svelte";
 export { default as BadgeGroup } from "./components/badge/BadgeGroup.svelte";
