@@ -1229,12 +1229,12 @@ After the MVP is green, continue in this order:
 
 ### PR 5 — High-risk interactive families
 
-- [ ] Tooltip
-- [ ] Toast
-- [ ] Dialog
-- [ ] DatePicker
-- [ ] RichText
-- [ ] InputOtp
+- [x] Tooltip
+- [x] Toast
+- [x] Dialog
+- [x] DatePicker
+- [x] RichText
+- [x] InputOtp
 
 High-risk rule: these require extra a11y review and should not block the initial Svelte adapter MVP.
 

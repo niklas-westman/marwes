@@ -22,11 +22,11 @@ patterns, focus management, and extra a11y review.
 ## Commit 1: Dialog (5 components)
 
 ### Components
-- [ ] `Dialog` — base dialog atom using `<dialog>` element
-- [ ] `DialogModal` — modal molecule with backdrop, focus trap, scroll lock
-- [ ] `ConfirmDialog` — purpose wrapper (`data-purpose="confirm"`)
-- [ ] `DestructiveDialog` — purpose wrapper (`data-purpose="destructive"`)
-- [ ] `InfoDialog` — purpose wrapper (`data-purpose="info"`)
+- [x] `Dialog` — base dialog atom using `<dialog>` element
+- [x] `DialogModal` — modal molecule with backdrop, focus trap, scroll lock
+- [x] `ConfirmDialog` — purpose wrapper (`data-purpose="confirm"`)
+- [x] `DestructiveDialog` — purpose wrapper (`data-purpose="destructive"`)
+- [x] `InfoDialog` — purpose wrapper (`data-purpose="info"`)
 
 ### Implementation notes
 - Use native `<dialog>` element with `.showModal()` for modal behavior
@@ -45,23 +45,23 @@ patterns, focus management, and extra a11y review.
 - `packages/presets/src/firstEdition/molecules/dialog-modal.css`
 
 ### Validation
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
-- [ ] `pnpm check:adapter-boundaries`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm check:adapter-boundaries`
 
 ---
 
 ## Commit 2: Toast (8 components)
 
 ### Components
-- [ ] `Toast` — base toast atom
-- [ ] `ToastContainer` — stacking container molecule
-- [ ] `ToastProvider` — context provider with auto-dismiss
-- [ ] `useToast` — imperative toast trigger hook
-- [ ] `ErrorToast` — purpose wrapper
-- [ ] `InfoToast` — purpose wrapper
-- [ ] `SuccessToast` — purpose wrapper
-- [ ] `WarningToast` — purpose wrapper
+- [x] `Toast` — base toast atom
+- [x] `ToastContainer` — stacking container molecule
+- [x] `ToastProvider` — context provider with auto-dismiss
+- [x] `useToast` — imperative toast trigger hook
+- [x] `ErrorToast` — purpose wrapper
+- [x] `InfoToast` — purpose wrapper
+- [x] `SuccessToast` — purpose wrapper
+- [x] `WarningToast` — purpose wrapper
 
 ### Implementation notes
 - `ToastProvider` uses Svelte context + `$state` array for toast queue
@@ -79,17 +79,17 @@ patterns, focus management, and extra a11y review.
 - `packages/presets/src/firstEdition/molecules/toast-container.css`
 
 ### Validation
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
-- [ ] `pnpm check:adapter-boundaries`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm check:adapter-boundaries`
 
 ---
 
 ## Commit 3: Tooltip (2 components)
 
 ### Components
-- [ ] `Tooltip` — tooltip atom with positioning
-- [ ] `TooltipGroup` — grouped tooltips molecule
+- [x] `Tooltip` — tooltip atom with positioning
+- [x] `TooltipGroup` — grouped tooltips molecule
 
 ### Implementation notes
 - Position calculation using CSS anchor positioning or manual offset
@@ -106,16 +106,16 @@ patterns, focus management, and extra a11y review.
 - `packages/presets/src/firstEdition/tooltip.css`
 
 ### Validation
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
-- [ ] `pnpm check:adapter-boundaries`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm check:adapter-boundaries`
 
 ---
 
 ## Commit 4: InputOtp (1 component)
 
 ### Components
-- [ ] `InputOtp` — multi-digit OTP input with focus management
+- [x] `InputOtp` — multi-digit OTP input with focus management
 
 ### Implementation notes
 - Renders N individual `<input>` elements (one per digit)
@@ -132,18 +132,18 @@ patterns, focus management, and extra a11y review.
 - `packages/presets/src/firstEdition/input-otp.css`
 
 ### Validation
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
-- [ ] `pnpm check:adapter-boundaries`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm check:adapter-boundaries`
 
 ---
 
 ## Commit 5: DatePicker + RichText (3 components)
 
 ### Components
-- [ ] `DatePicker` — calendar date selection widget
-- [ ] `RichText` — contenteditable rich text atom
-- [ ] `RichTextField` — molecule with label/helper/error wiring
+- [x] `DatePicker` — calendar date selection widget
+- [x] `RichText` — contenteditable rich text atom
+- [x] `RichTextField` — molecule with label/helper/error wiring
 
 ### Implementation notes
 
@@ -168,16 +168,16 @@ patterns, focus management, and extra a11y review.
 - `packages/presets/src/firstEdition/rich-text.css`
 
 ### Validation
-- [ ] `pnpm --filter @marwes-ui/svelte test:typecheck`
-- [ ] `pnpm --filter @marwes-ui/svelte build`
-- [ ] `pnpm check:adapter-boundaries`
+- [x] `pnpm --filter @marwes-ui/svelte test:typecheck`
+- [x] `pnpm --filter @marwes-ui/svelte build`
+- [x] `pnpm check:adapter-boundaries`
 
 ---
 
 ## Post-completion
 
 After all 5 commits:
-- [ ] Update `implementation-svelte.md` checkboxes
-- [ ] Add storybook stories for all new components
-- [ ] Run full validation suite
-- [ ] Update parity artifact
+- [x] Update `implementation-svelte.md` checkboxes
+- [x] Add storybook stories for all new components
+- [x] Run full validation suite
+- [x] Update parity artifact
