@@ -190,4 +190,4 @@ React includes `storybookA11yPolicy.smoke` on all stories. Svelte omits it from 
 4. ~~**Add missing argTypes** (Select native, Spinner, Slider)~~ ✅ FIXED
 5. ~~**Enrich existing stories** with more variants (ReadOnly, Required, etc.)~~ ✅ FIXED
 6. ~~**Expand Introduction.mdx** to document molecules and purpose wrappers~~ ✅ FIXED
-7. **Add gallery/matrix stories** for Avatar, Spinner (matching React's showcase style) — deferred
+7. ~~**Add gallery/matrix stories** for Avatar, Spinner (matching React's showcase style)~~ ✅ FIXED
