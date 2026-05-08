@@ -16,9 +16,15 @@ const frameworkConfigs = {
     sourceRoot: "packages/vue/src/components",
     storyRoot: "apps/storybook-vue/src/stories",
   },
+  svelte: {
+    name: "svelte",
+    label: "Svelte",
+    sourceRoot: "packages/svelte/src/lib/components",
+    storyRoot: "apps/storybook-svelte/src/stories",
+  },
 }
 
-const frameworksInOrder = ["react", "vue"]
+const frameworksInOrder = ["react", "vue", "svelte"]
 
 function normalizePathForMatch(path) {
   return path.replace(/\\/g, "/")
@@ -141,9 +147,9 @@ function isStoryFile(path) {
   return /\.stories\.(ts|tsx|js|jsx|mdx)$/.test(normalizePathForMatch(path))
 }
 
-function isTypeScriptFile(path) {
+function isSourceFile(path) {
   const extension = extname(path)
-  return extension === ".ts" || extension === ".tsx"
+  return extension === ".ts" || extension === ".tsx" || extension === ".svelte"
 }
 
 function getStemWithoutExtension(path) {
@@ -262,7 +268,7 @@ async function buildFrameworkFamilyMap(family, repoRoot, framework) {
   const sourceDirExists = await pathExists(sourceDir)
   const storyDirExists = await pathExists(storyDir)
 
-  const sourceFiles = (await readDirectFiles(sourceDir)).filter((path) => isTypeScriptFile(path))
+  const sourceFiles = (await readDirectFiles(sourceDir)).filter((path) => isSourceFile(path))
   const componentFiles = sourceFiles.filter((path) => basename(path) !== "index.ts")
   const sourceIndexFile = sourceFiles.find((path) => basename(path) === "index.ts")
   const exportSummary = await extractFrameworkExportSummary(sourceIndexFile)

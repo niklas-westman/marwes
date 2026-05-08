@@ -1141,7 +1141,7 @@ Run:
 - [x] `pnpm build:packages`
 - [x] `pnpm test:packages`
 - [x] `pnpm check:adapter-boundaries`
-- [ ] `pnpm validate:packages`
+- [ ] `pnpm validate:packages` — blocked by pre-existing core OOM (`ERR_WORKER_OUT_OF_MEMORY` in tsup), not Svelte-related
 
 If docs/registry/parity scripts fail because they do not know Svelte yet, either:
 
@@ -1164,7 +1164,7 @@ This can be a follow-up PR if MVP package is already large.
 - [x] `docs/reference/testing.md` — add Svelte package tests and future Storybook stance.
 - [x] `docs/guides/adding-components.md` — update layer rule to `core recipe → preset CSS → React adapter → Vue adapter → Svelte adapter` or explain adapter parity without forcing order.
 - [x] `docs/guides/figma-to-marwes.md` — include Svelte as a consumer adapter, not a design source.
-- [ ] New `docs/guides/svelte-adapter.md` or `docs/adapters/svelte.md` if docs structure prefers it.
+- [x] New `docs/guides/svelte-adapter.md` or `docs/adapters/svelte.md` if docs structure prefers it.
 
 ### 14.2 Registry/parity scripts
 
@@ -1173,7 +1173,7 @@ This can be a follow-up PR if MVP package is already large.
 - [x] `scripts/generate-framework-parity-summary.mjs` — add Svelte column.
 - [x] `artifacts/framework-parity.json` — add Svelte values for families implemented in Svelte.
 - [x] `docs/reference/framework-parity-summary.md` — regenerate, do not hand edit.
-- [ ] `scripts/storybook-consistency.mjs` — add Svelte only after `apps/storybook-svelte` exists; otherwise explicitly ignore.
+- [x] `scripts/storybook-consistency.mjs` — add Svelte only after `apps/storybook-svelte` exists; otherwise explicitly ignore.
 
 ### 14.3 Svelte Storybook or playground
 
