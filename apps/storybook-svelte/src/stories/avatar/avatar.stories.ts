@@ -1,12 +1,22 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import { Avatar } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import AvatarGallery from "./AvatarGallery.svelte"
 
 const meta = {
   title: "Avatar/Atom",
   component: Avatar,
-  parameters: { ...storybookLayout.centered, ...storybookA11yPolicy.smoke },
+  parameters: {
+    ...storybookLayout.centered,
+    ...storybookA11yPolicy.smoke,
+  },
   tags: ["autodocs"],
+  argTypes: {
+    size: { control: "select", options: ["small", "medium", "large"] },
+    type: { control: "select", options: ["icon", "initials", "image"] },
+    initials: { control: "text" },
+    ariaLabel: { control: "text" },
+  },
 } satisfies Meta<typeof Avatar>
 
 export default meta
@@ -17,3 +27,10 @@ export const Initials: Story = { args: { initials: "NW", ariaLabel: "Niklas West
 export const Image: Story = { args: { src: "https://i.pravatar.cc/80", alt: "User photo" } }
 export const Small: Story = { args: { initials: "SM", size: "small", ariaLabel: "Small" } }
 export const Large: Story = { args: { initials: "LG", size: "large", ariaLabel: "Large" } }
+
+export const AllVariants: Story = {
+  render: () => ({
+    Component: AvatarGallery,
+    props: {},
+  }),
+}

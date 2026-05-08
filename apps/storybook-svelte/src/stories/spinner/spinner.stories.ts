@@ -1,12 +1,13 @@
 import { storybookA11yPolicy, storybookLayout, storybookSpinnerArgTypes } from "@marwes-ui/core"
 import { Spinner } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import SpinnerGallery from "./SpinnerGallery.svelte"
 
 const meta = {
   title: "Spinner/Atom",
   component: Spinner,
   parameters: {
-    ...storybookLayout.centered,
+    ...storybookLayout.padded,
     ...storybookA11yPolicy.smoke,
   },
   tags: ["autodocs"],
@@ -34,4 +35,18 @@ export const Large: Story = { args: { variant: "classic", size: "lg" } }
 
 export const AccessibleStatus: Story = {
   args: { decorative: false, ariaLabel: "Loading account data" },
+}
+
+export const AllVariants: Story = {
+  render: () => ({
+    Component: SpinnerGallery,
+    props: { showcase: "variants" },
+  }),
+}
+
+export const AllSizes: Story = {
+  render: () => ({
+    Component: SpinnerGallery,
+    props: { showcase: "sizes" },
+  }),
 }
