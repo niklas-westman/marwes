@@ -129,7 +129,7 @@
   --mw-accordion-title: var(--mw-color-text);
   --mw-accordion-icon: var(--mw-color-text-muted);
   --mw-accordion-content: var(--mw-color-text-muted);
-  --mw-accordion-surface: #0f0f0f;
+  --mw-accordion-surface: var(--mw-color-background, #0f0f0f);
   --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
   --mw-accordion-surface-pressed: var(--mw-color-border);
   --mw-accordion-border: var(--mw-color-border-subtle);

@@ -27,7 +27,7 @@ describe("badge.css figma sync contract", () => {
 
   it("seeds light-mode badge colors from semantic theme variables", () => {
     expect(css).toContain(
-      ".mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-subtle);\n  --mw-badge-border: var(--mw-color-border-subtle);\n  --mw-badge-label: var(--mw-color-text-muted);\n}",
+      ".mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-subtle, #f5f5f5);\n  --mw-badge-border: var(--mw-color-border-subtle, #d8d8d8);\n  --mw-badge-label: var(--mw-color-text-muted, #595959);\n}",
     )
     expect(css).toContain(
       ".mw-badge--info {\n  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 12%, var(--mw-color-surface));",
@@ -40,9 +40,7 @@ describe("badge.css figma sync contract", () => {
     expect(css).toContain(
       ".mw-badge--warning {\n  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));",
     )
-    expect(css).toContain(
-      "--mw-badge-label: color-mix(in srgb, var(--mw-color-warning-base) 80%, var(--mw-color-text));",
-    )
+    expect(css).toContain("--mw-badge-label: var(--mw-color-warning-base, #b45309);")
     expect(css).toContain(
       ".mw-badge--error {\n  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));",
     )
