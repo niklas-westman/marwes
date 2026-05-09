@@ -32,6 +32,8 @@
     "registry:generate": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-component-registry.ts",
     "registry:check": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-component-registry.ts --check",
     "storybook:consistency": "node ./scripts/storybook-consistency.mjs",
+    "docs:generate": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-storybook-docs.ts",
+    "docs:check": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-storybook-docs.ts --check",
     "test:storybook:a11y": "pnpm --filter ./apps/storybook-react test:a11y:smoke && pnpm --filter ./apps/storybook-vue test:a11y:smoke",
     "semantics:check": "pnpm --filter @marwes-ui/core exec vitest run test/semantics/semantic-registry.test.ts",
     "lint": "biome lint .",
