@@ -24,6 +24,9 @@ const withMarwes: Decorator = (Story, context) => {
 
 const preview: Preview = {
   decorators: [withMarwes],
+  initialGlobals: {
+    theme: ThemeMode.light,
+  },
   parameters: {
     controls: {
       matchers: {

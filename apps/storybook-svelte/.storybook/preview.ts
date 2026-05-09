@@ -46,6 +46,9 @@ const preview: Preview = {
     },
     a11y: { test: "off" },
   },
+  initialGlobals: {
+    theme: ThemeMode.light,
+  },
   globalTypes: {
     theme: {
       description: "Theme mode (light or dark)",

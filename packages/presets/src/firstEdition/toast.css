@@ -234,7 +234,7 @@
    -------------------------------------------- */
 
 .mw-theme--dark .mw-toast--subtle {
-  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-surface: #0f0f0f;
   --mw-toast-border: var(--mw-color-border);
   --mw-toast-icon: var(--mw-color-text-muted, #a3a3a3);
   --mw-toast-text: var(--mw-color-text);
@@ -242,7 +242,7 @@
 }
 
 .mw-theme--dark .mw-toast--outline {
-  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-surface: #0f0f0f;
   --mw-toast-border: var(--mw-color-primary-base);
   --mw-toast-icon: var(--mw-color-primary-base);
   --mw-toast-text: var(--mw-color-primary-base);
