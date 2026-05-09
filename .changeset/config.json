@@ -7,10 +7,24 @@
     }
   ],
   "commit": false,
-  "fixed": [["@marwes-ui/core", "@marwes-ui/react", "@marwes-ui/presets", "@marwes-ui/vue"]],
+  "fixed": [
+    [
+      "@marwes-ui/core",
+      "@marwes-ui/react",
+      "@marwes-ui/presets",
+      "@marwes-ui/vue",
+      "@marwes-ui/svelte"
+    ]
+  ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["playground-react", "storybook-react", "storybook-vue"]
+  "ignore": [
+    "playground-react",
+    "playground-svelte",
+    "storybook-react",
+    "storybook-svelte",
+    "storybook-vue"
+  ]
 }
