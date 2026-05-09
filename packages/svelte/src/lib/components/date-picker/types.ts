@@ -1,18 +1,8 @@
-import type { DatePickerDay, DatePickerDevice } from "@marwes-ui/core"
+import type { DatePickerDay, DatePickerOptions } from "@marwes-ui/core"
 
-export interface DatePickerProps {
-  monthLabel?: string
-  weekdayLabels?: string[]
+export interface DatePickerProps extends DatePickerOptions {
   weeks?: DatePickerDay[][]
-  device?: DatePickerDevice
-  previousYearLabel?: string
-  previousMonthLabel?: string
-  nextMonthLabel?: string
-  nextYearLabel?: string
-  cancelLabel?: string
-  applyLabel?: string
-  calendarLabel?: string
-  dataAttributes?: Record<string, string>
+  weekdayLabels?: string[]
   onpreviousyear?: () => void
   onpreviousmonth?: () => void
   onnextmonth?: () => void

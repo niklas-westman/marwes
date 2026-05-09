@@ -1,9 +1,7 @@
+import type { AccordionOptions } from "@marwes-ui/core"
 import type { Snippet } from "svelte"
 
-export interface AccordionProps {
-  id?: string
-  open?: boolean
-  disabled?: boolean
+export interface AccordionProps extends Partial<AccordionOptions> {
   title: string
   children?: Snippet
   class?: string
@@ -29,4 +27,5 @@ export interface AccordionFieldProps {
   multiple?: boolean
   ariaDescribedBy?: string
   class?: string
+  disabled?: boolean
 }

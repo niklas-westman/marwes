@@ -36,6 +36,22 @@
   }
 </script>
 
+{#snippet buttonContent()}
+  {#if kit.loading.isLoading}
+    <ButtonSpinner variant={kit.loading.spinnerVariant} inverted={isFilledVariant} />
+  {:else if options.iconLeft}
+    <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
+  {/if}
+  {#if visibleLabel}
+    {visibleLabel}
+  {:else}
+    {@render children?.()}
+  {/if}
+  {#if !kit.loading.isLoading && options.iconRight}
+    <Icon name={options.iconRight} size="xs" strokeWidth="sm" decorative />
+  {/if}
+{/snippet}
+
 {#if kit.tag === "button"}
   <button
     type={kit.a11y.type}
@@ -52,19 +68,7 @@
     onclick={handleClick}
     {...kit.dataAttributes}
   >
-    {#if kit.loading.isLoading}
-      <ButtonSpinner variant={kit.loading.spinnerVariant} inverted={isFilledVariant} />
-    {:else if options.iconLeft}
-      <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
-    {/if}
-    {#if visibleLabel}
-      {visibleLabel}
-    {:else}
-      {@render children?.()}
-    {/if}
-    {#if !kit.loading.isLoading && options.iconRight}
-      <Icon name={options.iconRight} size="xs" strokeWidth="sm" decorative />
-    {/if}
+    {@render buttonContent()}
   </button>
 {:else}
   <a
@@ -83,18 +87,6 @@
     onclick={handleClick}
     {...kit.dataAttributes}
   >
-    {#if kit.loading.isLoading}
-      <ButtonSpinner variant={kit.loading.spinnerVariant} inverted={isFilledVariant} />
-    {:else if options.iconLeft}
-      <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
-    {/if}
-    {#if visibleLabel}
-      {visibleLabel}
-    {:else}
-      {@render children?.()}
-    {/if}
-    {#if !kit.loading.isLoading && options.iconRight}
-      <Icon name={options.iconRight} size="xs" strokeWidth="sm" decorative />
-    {/if}
+    {@render buttonContent()}
   </a>
 {/if}
