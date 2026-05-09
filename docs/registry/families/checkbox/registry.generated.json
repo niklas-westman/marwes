@@ -17,9 +17,13 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "core": [
+      "packages/core/src/components/atoms/checkbox/checkbox-a11y.d.ts",
       "packages/core/src/components/atoms/checkbox/checkbox-a11y.ts",
+      "packages/core/src/components/atoms/checkbox/checkbox-recipe.d.ts",
       "packages/core/src/components/atoms/checkbox/checkbox-recipe.ts",
+      "packages/core/src/components/atoms/checkbox/checkbox-types.d.ts",
       "packages/core/src/components/atoms/checkbox/checkbox-types.ts",
+      "packages/core/src/components/atoms/checkbox/index.d.ts",
       "packages/core/src/components/atoms/checkbox/index.ts"
     ],
     "presets": [

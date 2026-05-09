@@ -17,9 +17,13 @@
       "AXE_ROADMAP.md#4d--tooltip-scope-discipline"
     ],
     "core": [
+      "packages/core/src/components/atoms/tooltip/index.d.ts",
       "packages/core/src/components/atoms/tooltip/index.ts",
+      "packages/core/src/components/atoms/tooltip/tooltip-a11y.d.ts",
       "packages/core/src/components/atoms/tooltip/tooltip-a11y.ts",
+      "packages/core/src/components/atoms/tooltip/tooltip-recipe.d.ts",
       "packages/core/src/components/atoms/tooltip/tooltip-recipe.ts",
+      "packages/core/src/components/atoms/tooltip/tooltip-types.d.ts",
       "packages/core/src/components/atoms/tooltip/tooltip-types.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/tooltip.css"],

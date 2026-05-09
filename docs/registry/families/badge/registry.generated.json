@@ -17,9 +17,13 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "core": [
+      "packages/core/src/components/atoms/badge/badge-a11y.d.ts",
       "packages/core/src/components/atoms/badge/badge-a11y.ts",
+      "packages/core/src/components/atoms/badge/badge-recipe.d.ts",
       "packages/core/src/components/atoms/badge/badge-recipe.ts",
+      "packages/core/src/components/atoms/badge/badge-types.d.ts",
       "packages/core/src/components/atoms/badge/badge-types.ts",
+      "packages/core/src/components/atoms/badge/index.d.ts",
       "packages/core/src/components/atoms/badge/index.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/badge.css"],

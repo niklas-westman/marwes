@@ -108,9 +108,13 @@
             "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
           ],
           "core": [
+            "packages/core/src/components/atoms/accordion/accordion-a11y.d.ts",
             "packages/core/src/components/atoms/accordion/accordion-a11y.ts",
+            "packages/core/src/components/atoms/accordion/accordion-recipe.d.ts",
             "packages/core/src/components/atoms/accordion/accordion-recipe.ts",
+            "packages/core/src/components/atoms/accordion/accordion-types.d.ts",
             "packages/core/src/components/atoms/accordion/accordion-types.ts",
+            "packages/core/src/components/atoms/accordion/index.d.ts",
             "packages/core/src/components/atoms/accordion/index.ts"
           ],
           "presets": [
@@ -346,9 +350,13 @@
           "audits": ["docs/audits/README.md", "docs/audits/avatar-family-accessibility.md"],
           "roadmap": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
           "core": [
+            "packages/core/src/components/atoms/avatar/avatar-a11y.d.ts",
             "packages/core/src/components/atoms/avatar/avatar-a11y.ts",
+            "packages/core/src/components/atoms/avatar/avatar-recipe.d.ts",
             "packages/core/src/components/atoms/avatar/avatar-recipe.ts",
+            "packages/core/src/components/atoms/avatar/avatar-types.d.ts",
             "packages/core/src/components/atoms/avatar/avatar-types.ts",
+            "packages/core/src/components/atoms/avatar/index.d.ts",
             "packages/core/src/components/atoms/avatar/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/avatar.css"],
@@ -382,6 +390,7 @@
             "apps/storybook-react/src/stories/avatar/avatar-badge.stories.tsx",
             "apps/storybook-react/src/stories/avatar/avatar-group.stories.tsx",
             "apps/storybook-react/src/stories/avatar/avatar.stories.tsx",
+            "apps/storybook-react/src/stories/avatar/AvatarGallery.tsx",
             "apps/storybook-react/src/stories/avatar/Introduction.mdx",
             "apps/storybook-react/src/stories/avatar/presence-avatar.stories.tsx",
             "apps/storybook-react/src/stories/avatar/profile-avatar.stories.tsx",
@@ -393,6 +402,7 @@
             "apps/storybook-vue/src/stories/avatar/avatar-badge.stories.ts",
             "apps/storybook-vue/src/stories/avatar/avatar-group.stories.ts",
             "apps/storybook-vue/src/stories/avatar/avatar.stories.ts",
+            "apps/storybook-vue/src/stories/avatar/AvatarGallery.vue",
             "apps/storybook-vue/src/stories/avatar/Introduction.mdx",
             "apps/storybook-vue/src/stories/avatar/presence-avatar.stories.ts",
             "apps/storybook-vue/src/stories/avatar/profile-avatar.stories.ts",
@@ -612,9 +622,13 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/badge/badge-a11y.d.ts",
             "packages/core/src/components/atoms/badge/badge-a11y.ts",
+            "packages/core/src/components/atoms/badge/badge-recipe.d.ts",
             "packages/core/src/components/atoms/badge/badge-recipe.ts",
+            "packages/core/src/components/atoms/badge/badge-types.d.ts",
             "packages/core/src/components/atoms/badge/badge-types.ts",
+            "packages/core/src/components/atoms/badge/index.d.ts",
             "packages/core/src/components/atoms/badge/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/badge.css"],
@@ -825,10 +839,15 @@
           "audits": ["docs/audits/README.md", "docs/audits/button-family-accessibility.md"],
           "roadmap": ["AXE_ROADMAP.md#button-semantics-cleanup"],
           "core": [
+            "packages/core/src/components/atoms/button/button-a11y.d.ts",
             "packages/core/src/components/atoms/button/button-a11y.ts",
+            "packages/core/src/components/atoms/button/button-loading.d.ts",
             "packages/core/src/components/atoms/button/button-loading.ts",
+            "packages/core/src/components/atoms/button/button-recipe.d.ts",
             "packages/core/src/components/atoms/button/button-recipe.ts",
+            "packages/core/src/components/atoms/button/button-types.d.ts",
             "packages/core/src/components/atoms/button/button-types.ts",
+            "packages/core/src/components/atoms/button/index.d.ts",
             "packages/core/src/components/atoms/button/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/button.css"],
@@ -882,17 +901,24 @@
             "apps/storybook-vue/src/stories/button/cancel-button.stories.ts",
             "apps/storybook-vue/src/stories/button/close-button.stories.ts",
             "apps/storybook-vue/src/stories/button/confirm-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/copy-button.stories.ts",
             "apps/storybook-vue/src/stories/button/create-button.stories.ts",
             "apps/storybook-vue/src/stories/button/destructive-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/download-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/dropdown-button.stories.ts",
             "apps/storybook-vue/src/stories/button/edit-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/filter-button.stories.ts",
             "apps/storybook-vue/src/stories/button/Introduction.mdx",
             "apps/storybook-vue/src/stories/button/link-button.stories.ts",
             "apps/storybook-vue/src/stories/button/primary-button.stories.ts",
             "apps/storybook-vue/src/stories/button/refresh-button.stories.ts",
             "apps/storybook-vue/src/stories/button/save-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/search-button.stories.ts",
             "apps/storybook-vue/src/stories/button/secondary-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/sort-button.stories.ts",
             "apps/storybook-vue/src/stories/button/submit-button.stories.ts",
             "apps/storybook-vue/src/stories/button/text-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/upload-button.stories.ts",
             "apps/storybook-vue/src/stories/button/verify-button.stories.ts"
           ],
           "contracts": ["tests/contracts/button.contract.ts"]
@@ -1180,8 +1206,11 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/card/card-recipe.d.ts",
             "packages/core/src/components/atoms/card/card-recipe.ts",
+            "packages/core/src/components/atoms/card/card-types.d.ts",
             "packages/core/src/components/atoms/card/card-types.ts",
+            "packages/core/src/components/atoms/card/index.d.ts",
             "packages/core/src/components/atoms/card/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/card.css"],
@@ -1409,9 +1438,13 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/checkbox/checkbox-a11y.d.ts",
             "packages/core/src/components/atoms/checkbox/checkbox-a11y.ts",
+            "packages/core/src/components/atoms/checkbox/checkbox-recipe.d.ts",
             "packages/core/src/components/atoms/checkbox/checkbox-recipe.ts",
+            "packages/core/src/components/atoms/checkbox/checkbox-types.d.ts",
             "packages/core/src/components/atoms/checkbox/checkbox-types.ts",
+            "packages/core/src/components/atoms/checkbox/index.d.ts",
             "packages/core/src/components/atoms/checkbox/index.ts"
           ],
           "presets": [
@@ -1635,9 +1668,13 @@
           "audits": ["docs/audits/README.md"],
           "roadmap": [],
           "core": [
+            "packages/core/src/components/atoms/date-picker/date-picker-a11y.d.ts",
             "packages/core/src/components/atoms/date-picker/date-picker-a11y.ts",
+            "packages/core/src/components/atoms/date-picker/date-picker-recipe.d.ts",
             "packages/core/src/components/atoms/date-picker/date-picker-recipe.ts",
+            "packages/core/src/components/atoms/date-picker/date-picker-types.d.ts",
             "packages/core/src/components/atoms/date-picker/date-picker-types.ts",
+            "packages/core/src/components/atoms/date-picker/index.d.ts",
             "packages/core/src/components/atoms/date-picker/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/date-picker.css"],
@@ -1840,9 +1877,13 @@
           "audits": ["docs/audits/README.md", "docs/audits/dialog-family-accessibility.md"],
           "roadmap": ["AXE_ROADMAP.md#dialog-family", "AXE_ROADMAP.md#4a--dialog-modal-hardening"],
           "core": [
+            "packages/core/src/components/atoms/dialog/dialog-a11y.d.ts",
             "packages/core/src/components/atoms/dialog/dialog-a11y.ts",
+            "packages/core/src/components/atoms/dialog/dialog-recipe.d.ts",
             "packages/core/src/components/atoms/dialog/dialog-recipe.ts",
+            "packages/core/src/components/atoms/dialog/dialog-types.d.ts",
             "packages/core/src/components/atoms/dialog/dialog-types.ts",
+            "packages/core/src/components/atoms/dialog/index.d.ts",
             "packages/core/src/components/atoms/dialog/index.ts"
           ],
           "presets": [
@@ -2096,8 +2137,11 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/divider/divider-recipe.d.ts",
             "packages/core/src/components/atoms/divider/divider-recipe.ts",
+            "packages/core/src/components/atoms/divider/divider-types.d.ts",
             "packages/core/src/components/atoms/divider/divider-types.ts",
+            "packages/core/src/components/atoms/divider/index.d.ts",
             "packages/core/src/components/atoms/divider/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/divider.css"],
@@ -2295,9 +2339,13 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/heading/heading-a11y.d.ts",
             "packages/core/src/components/atoms/heading/heading-a11y.ts",
+            "packages/core/src/components/atoms/heading/heading-recipe.d.ts",
             "packages/core/src/components/atoms/heading/heading-recipe.ts",
+            "packages/core/src/components/atoms/heading/heading-types.d.ts",
             "packages/core/src/components/atoms/heading/heading-types.ts",
+            "packages/core/src/components/atoms/heading/index.d.ts",
             "packages/core/src/components/atoms/heading/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/typography.css"],
@@ -2508,13 +2556,21 @@
             "AXE_ROADMAP.md#dev-time-warnings"
           ],
           "core": [
+            "packages/core/src/components/atoms/icon/icon-a11y.d.ts",
             "packages/core/src/components/atoms/icon/icon-a11y.ts",
+            "packages/core/src/components/atoms/icon/icon-names.d.ts",
             "packages/core/src/components/atoms/icon/icon-names.ts",
+            "packages/core/src/components/atoms/icon/icon-preset.d.ts",
             "packages/core/src/components/atoms/icon/icon-preset.ts",
+            "packages/core/src/components/atoms/icon/icon-recipe.d.ts",
             "packages/core/src/components/atoms/icon/icon-recipe.ts",
+            "packages/core/src/components/atoms/icon/icon-registry.d.ts",
             "packages/core/src/components/atoms/icon/icon-registry.ts",
+            "packages/core/src/components/atoms/icon/icon-scales.d.ts",
             "packages/core/src/components/atoms/icon/icon-scales.ts",
+            "packages/core/src/components/atoms/icon/icon-types.d.ts",
             "packages/core/src/components/atoms/icon/icon-types.ts",
+            "packages/core/src/components/atoms/icon/index.d.ts",
             "packages/core/src/components/atoms/icon/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/icon.css"],
@@ -2736,23 +2792,41 @@
             "AXE_ROADMAP.md#4b--custom-select-hardening"
           ],
           "core": [
+            "packages/core/src/components/atoms/input/index.d.ts",
             "packages/core/src/components/atoms/input/index.ts",
+            "packages/core/src/components/atoms/input/input-a11y.d.ts",
             "packages/core/src/components/atoms/input/input-a11y.ts",
+            "packages/core/src/components/atoms/input/input-otp-a11y.d.ts",
             "packages/core/src/components/atoms/input/input-otp-a11y.ts",
+            "packages/core/src/components/atoms/input/input-otp-recipe.d.ts",
             "packages/core/src/components/atoms/input/input-otp-recipe.ts",
+            "packages/core/src/components/atoms/input/input-otp-types.d.ts",
             "packages/core/src/components/atoms/input/input-otp-types.ts",
+            "packages/core/src/components/atoms/input/input-recipe.d.ts",
             "packages/core/src/components/atoms/input/input-recipe.ts",
+            "packages/core/src/components/atoms/input/input-types.d.ts",
             "packages/core/src/components/atoms/input/input-types.ts",
+            "packages/core/src/components/atoms/input/rich-text-a11y.d.ts",
             "packages/core/src/components/atoms/input/rich-text-a11y.ts",
+            "packages/core/src/components/atoms/input/rich-text-html.d.ts",
             "packages/core/src/components/atoms/input/rich-text-html.ts",
+            "packages/core/src/components/atoms/input/rich-text-recipe.d.ts",
             "packages/core/src/components/atoms/input/rich-text-recipe.ts",
+            "packages/core/src/components/atoms/input/rich-text-styles.d.ts",
             "packages/core/src/components/atoms/input/rich-text-styles.ts",
+            "packages/core/src/components/atoms/input/rich-text-types.d.ts",
             "packages/core/src/components/atoms/input/rich-text-types.ts",
+            "packages/core/src/components/atoms/input/select-a11y.d.ts",
             "packages/core/src/components/atoms/input/select-a11y.ts",
+            "packages/core/src/components/atoms/input/select-recipe.d.ts",
             "packages/core/src/components/atoms/input/select-recipe.ts",
+            "packages/core/src/components/atoms/input/select-types.d.ts",
             "packages/core/src/components/atoms/input/select-types.ts",
+            "packages/core/src/components/atoms/input/textarea-a11y.d.ts",
             "packages/core/src/components/atoms/input/textarea-a11y.ts",
+            "packages/core/src/components/atoms/input/textarea-recipe.d.ts",
             "packages/core/src/components/atoms/input/textarea-recipe.ts",
+            "packages/core/src/components/atoms/input/textarea-types.d.ts",
             "packages/core/src/components/atoms/input/textarea-types.ts"
           ],
           "presets": [
@@ -3132,8 +3206,11 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/paragraph/index.d.ts",
             "packages/core/src/components/atoms/paragraph/index.ts",
+            "packages/core/src/components/atoms/paragraph/paragraph-recipe.d.ts",
             "packages/core/src/components/atoms/paragraph/paragraph-recipe.ts",
+            "packages/core/src/components/atoms/paragraph/paragraph-types.d.ts",
             "packages/core/src/components/atoms/paragraph/paragraph-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/typography.css"],
@@ -3354,9 +3431,13 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/radio/index.d.ts",
             "packages/core/src/components/atoms/radio/index.ts",
+            "packages/core/src/components/atoms/radio/radio-a11y.d.ts",
             "packages/core/src/components/atoms/radio/radio-a11y.ts",
+            "packages/core/src/components/atoms/radio/radio-recipe.d.ts",
             "packages/core/src/components/atoms/radio/radio-recipe.ts",
+            "packages/core/src/components/atoms/radio/radio-types.d.ts",
             "packages/core/src/components/atoms/radio/radio-types.ts"
           ],
           "presets": [
@@ -3589,9 +3670,13 @@
           "audits": ["docs/audits/README.md"],
           "roadmap": [],
           "core": [
+            "packages/core/src/components/atoms/skeleton/index.d.ts",
             "packages/core/src/components/atoms/skeleton/index.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-a11y.d.ts",
             "packages/core/src/components/atoms/skeleton/skeleton-a11y.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-recipe.d.ts",
             "packages/core/src/components/atoms/skeleton/skeleton-recipe.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-types.d.ts",
             "packages/core/src/components/atoms/skeleton/skeleton-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/skeleton.css"],
@@ -3783,9 +3868,13 @@
             "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
           ],
           "core": [
+            "packages/core/src/components/atoms/slider/index.d.ts",
             "packages/core/src/components/atoms/slider/index.ts",
+            "packages/core/src/components/atoms/slider/slider-a11y.d.ts",
             "packages/core/src/components/atoms/slider/slider-a11y.ts",
+            "packages/core/src/components/atoms/slider/slider-recipe.d.ts",
             "packages/core/src/components/atoms/slider/slider-recipe.ts",
+            "packages/core/src/components/atoms/slider/slider-types.d.ts",
             "packages/core/src/components/atoms/slider/slider-types.ts"
           ],
           "presets": [
@@ -4034,8 +4123,11 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/spacing/index.d.ts",
             "packages/core/src/components/atoms/spacing/index.ts",
+            "packages/core/src/components/atoms/spacing/spacing.recipe.d.ts",
             "packages/core/src/components/atoms/spacing/spacing.recipe.ts",
+            "packages/core/src/components/atoms/spacing/spacing.types.d.ts",
             "packages/core/src/components/atoms/spacing/spacing.types.ts"
           ],
           "presets": [
@@ -4230,10 +4322,15 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/spinner/index.d.ts",
             "packages/core/src/components/atoms/spinner/index.ts",
+            "packages/core/src/components/atoms/spinner/spinner-a11y.d.ts",
             "packages/core/src/components/atoms/spinner/spinner-a11y.ts",
+            "packages/core/src/components/atoms/spinner/spinner-recipe.d.ts",
             "packages/core/src/components/atoms/spinner/spinner-recipe.ts",
+            "packages/core/src/components/atoms/spinner/spinner-svg.d.ts",
             "packages/core/src/components/atoms/spinner/spinner-svg.ts",
+            "packages/core/src/components/atoms/spinner/spinner-types.d.ts",
             "packages/core/src/components/atoms/spinner/spinner-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/spinner.css"],
@@ -4470,9 +4567,13 @@
           "audits": ["docs/audits/README.md"],
           "roadmap": [],
           "core": [
+            "packages/core/src/components/atoms/stat-tile/index.d.ts",
             "packages/core/src/components/atoms/stat-tile/index.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-a11y.d.ts",
             "packages/core/src/components/atoms/stat-tile/stat-tile-a11y.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-recipe.d.ts",
             "packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-types.d.ts",
             "packages/core/src/components/atoms/stat-tile/stat-tile-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/stat-tile.css"],
@@ -4677,9 +4778,13 @@
             "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
           ],
           "core": [
+            "packages/core/src/components/atoms/switch/index.d.ts",
             "packages/core/src/components/atoms/switch/index.ts",
+            "packages/core/src/components/atoms/switch/switch-a11y.d.ts",
             "packages/core/src/components/atoms/switch/switch-a11y.ts",
+            "packages/core/src/components/atoms/switch/switch-recipe.d.ts",
             "packages/core/src/components/atoms/switch/switch-recipe.ts",
+            "packages/core/src/components/atoms/switch/switch-types.d.ts",
             "packages/core/src/components/atoms/switch/switch-types.ts"
           ],
           "presets": [
@@ -4914,11 +5019,17 @@
             "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
           ],
           "core": [
+            "packages/core/src/components/atoms/tab/index.d.ts",
             "packages/core/src/components/atoms/tab/index.ts",
+            "packages/core/src/components/atoms/tab/tab-a11y.d.ts",
             "packages/core/src/components/atoms/tab/tab-a11y.ts",
+            "packages/core/src/components/atoms/tab/tab-group-a11y.d.ts",
             "packages/core/src/components/atoms/tab/tab-group-a11y.ts",
+            "packages/core/src/components/atoms/tab/tab-group-types.d.ts",
             "packages/core/src/components/atoms/tab/tab-group-types.ts",
+            "packages/core/src/components/atoms/tab/tab-recipe.d.ts",
             "packages/core/src/components/atoms/tab/tab-recipe.ts",
+            "packages/core/src/components/atoms/tab/tab-types.d.ts",
             "packages/core/src/components/atoms/tab/tab-types.ts"
           ],
           "presets": [
@@ -5157,10 +5268,15 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/toast/index.d.ts",
             "packages/core/src/components/atoms/toast/index.ts",
+            "packages/core/src/components/atoms/toast/toast-a11y.d.ts",
             "packages/core/src/components/atoms/toast/toast-a11y.ts",
+            "packages/core/src/components/atoms/toast/toast-container-types.d.ts",
             "packages/core/src/components/atoms/toast/toast-container-types.ts",
+            "packages/core/src/components/atoms/toast/toast-recipe.d.ts",
             "packages/core/src/components/atoms/toast/toast-recipe.ts",
+            "packages/core/src/components/atoms/toast/toast-types.d.ts",
             "packages/core/src/components/atoms/toast/toast-types.ts"
           ],
           "presets": [
@@ -5405,9 +5521,13 @@
             "AXE_ROADMAP.md#4d--tooltip-scope-discipline"
           ],
           "core": [
+            "packages/core/src/components/atoms/tooltip/index.d.ts",
             "packages/core/src/components/atoms/tooltip/index.ts",
+            "packages/core/src/components/atoms/tooltip/tooltip-a11y.d.ts",
             "packages/core/src/components/atoms/tooltip/tooltip-a11y.ts",
+            "packages/core/src/components/atoms/tooltip/tooltip-recipe.d.ts",
             "packages/core/src/components/atoms/tooltip/tooltip-recipe.ts",
+            "packages/core/src/components/atoms/tooltip/tooltip-types.d.ts",
             "packages/core/src/components/atoms/tooltip/tooltip-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/tooltip.css"],

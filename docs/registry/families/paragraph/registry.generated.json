@@ -17,8 +17,11 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "core": [
+      "packages/core/src/components/atoms/paragraph/index.d.ts",
       "packages/core/src/components/atoms/paragraph/index.ts",
+      "packages/core/src/components/atoms/paragraph/paragraph-recipe.d.ts",
       "packages/core/src/components/atoms/paragraph/paragraph-recipe.ts",
+      "packages/core/src/components/atoms/paragraph/paragraph-types.d.ts",
       "packages/core/src/components/atoms/paragraph/paragraph-types.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/typography.css"],

@@ -6,29 +6,11 @@ It is a compact human view of the current generated parity artifact. Do not edit
 
 | Family | React | Vue | Svelte | Metadata parity | Contract coverage | Story coverage |
 |---|---|---|---|---|---|---|
-| accordion | yes | yes | yes | yes | no | yes |
-| avatar | yes | yes | yes | yes | yes | yes |
-| badge | yes | yes | yes | yes | yes | yes |
-| button | yes | yes | yes | yes | yes | yes |
-| card | yes | yes | yes | yes | no | yes |
-| checkbox | yes | yes | yes | yes | yes | yes |
-| date-picker | yes | yes | yes | yes | no | yes |
-| dialog | yes | yes | yes | yes | yes | yes |
-| divider | yes | yes | yes | yes | yes | yes |
-| heading | yes | yes | yes | yes | yes | yes |
-| icon | yes | yes | yes | yes | yes | yes |
-| input | yes | yes | yes | yes | yes | yes |
-| paragraph | yes | yes | yes | yes | yes | yes |
-| radio | yes | yes | yes | yes | yes | yes |
-| skeleton | yes | yes | yes | yes | yes | yes |
-| slider | yes | yes | yes | yes | yes | yes |
-| spacing | yes | yes | yes | yes | yes | yes |
-| spinner | yes | yes | yes | yes | yes | yes |
-| stat-tile | yes | yes | yes | yes | yes | yes |
-| switch | yes | yes | yes | yes | yes | yes |
-| tab | yes | yes | yes | yes | no | yes |
-| toast | yes | yes | yes | yes | yes | yes |
-| tooltip | yes | yes | yes | yes | no | yes |
+| avatar | yes | yes | no | yes | yes | yes |
+| badge | yes | yes | no | yes | yes | yes |
+| button | yes | yes | no | yes | yes | yes |
+| dialog | yes | yes | no | yes | yes | yes |
+| toast | yes | yes | no | yes | yes | yes |
 
 ## Validation
 
