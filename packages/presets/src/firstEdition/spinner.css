@@ -34,9 +34,16 @@
   transform-origin: center;
 }
 
-.mw-spinner--cross .mw-spinner__svg {
+/* ── Segment-shift variants (no SVG rotation, individual opacity cycling) ── */
+
+.mw-spinner--cross .mw-spinner__svg,
+.mw-spinner--dots-round .mw-spinner__svg,
+.mw-spinner--dots-square .mw-spinner__svg,
+.mw-spinner--lines .mw-spinner__svg {
   animation: none;
 }
+
+/* Cross — 4 segments */
 
 .mw-spinner--cross .mw-spinner__svg rect {
   animation: mw-spinner-cross-shift var(--mw-spinner-rotation-duration) steps(4, end) infinite;
@@ -52,6 +59,108 @@
 
 .mw-spinner--cross .mw-spinner__svg rect:nth-child(4) {
   animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.25);
+}
+
+/* Dots-round — 8 circle segments */
+
+.mw-spinner--dots-round .mw-spinner__svg circle {
+  animation: mw-spinner-segment-shift-8 var(--mw-spinner-rotation-duration) steps(8, end) infinite;
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(2) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.875);
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(3) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.75);
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(4) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.625);
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(5) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.5);
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(6) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.375);
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(7) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.25);
+}
+
+.mw-spinner--dots-round .mw-spinner__svg circle:nth-child(8) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.125);
+}
+
+/* Dots-square — 8 rect segments */
+
+.mw-spinner--dots-square .mw-spinner__svg rect {
+  animation: mw-spinner-segment-shift-8 var(--mw-spinner-rotation-duration) steps(8, end) infinite;
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(2) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.875);
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(3) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.75);
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(4) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.625);
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(5) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.5);
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(6) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.375);
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(7) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.25);
+}
+
+.mw-spinner--dots-square .mw-spinner__svg rect:nth-child(8) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.125);
+}
+
+/* Lines — 8 rect segments */
+
+.mw-spinner--lines .mw-spinner__svg rect {
+  animation: mw-spinner-segment-shift-8 var(--mw-spinner-rotation-duration) steps(8, end) infinite;
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(2) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.875);
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(3) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.75);
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(4) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.625);
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(5) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.5);
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(6) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.375);
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(7) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.25);
+}
+
+.mw-spinner--lines .mw-spinner__svg rect:nth-child(8) {
+  animation-delay: calc(var(--mw-spinner-rotation-duration) * -0.125);
 }
 
 @keyframes mw-spinner-rotate {
@@ -83,12 +192,50 @@
   }
 }
 
+@keyframes mw-spinner-segment-shift-8 {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  12.5% {
+    opacity: 0.875;
+  }
+
+  25% {
+    opacity: 0.75;
+  }
+
+  37.5% {
+    opacity: 0.625;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  62.5% {
+    opacity: 0.375;
+  }
+
+  75% {
+    opacity: 0.25;
+  }
+
+  87.5% {
+    opacity: 0.125;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mw-spinner__svg {
     animation-duration: 1600ms;
   }
 
-  .mw-spinner--cross .mw-spinner__svg rect {
+  .mw-spinner--cross .mw-spinner__svg rect,
+  .mw-spinner--dots-round .mw-spinner__svg circle,
+  .mw-spinner--dots-square .mw-spinner__svg rect,
+  .mw-spinner--lines .mw-spinner__svg rect {
     animation-duration: 1600ms;
   }
 }

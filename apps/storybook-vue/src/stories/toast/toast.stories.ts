@@ -4,6 +4,11 @@ import { MarwesProvider, Toast } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 
 const VARIANTS = ["subtle", "outline", "rich"] as const
+const INTENTS = ["neutral", "info", "success", "warning", "error"] as const
+
+function capitalize(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
 const meta = {
   title: "Toast/Atom",
@@ -24,7 +29,7 @@ type Story = StoryObj<ToastProps>
 
 export const Default: Story = {
   render: () => ({
-    components: { MarwesProvider, Toast },
+    components: { Toast },
     template: `
       <Toast>
         Your changes have been saved.
@@ -60,14 +65,24 @@ export const AllVariants: Story = {
   render: () => ({
     components: { Toast },
     setup() {
-      return { ThemeMode, variants: VARIANTS }
+      return { variants: VARIANTS, intents: INTENTS, capitalize }
     },
     template: `
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <Toast v-for="v in variants" :key="v" :variant="v">
-          {{ v.charAt(0).toUpperCase() + v.slice(1) }} — Your changes have been saved.
-          <template #action><button type="button" class="mw-toast__action-button">Close</button></template>
-        </Toast>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div v-for="variant in variants" :key="variant">
+          <p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; color: #6b7280;">{{ capitalize(variant) }}</p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <Toast
+              v-for="intent in intents"
+              :key="variant + '-' + intent"
+              :variant="variant"
+              :dataAttributes="{ 'data-intent': intent }"
+            >
+              {{ capitalize(intent) }} — {{ capitalize(variant) }} toast message.
+              <template #action><button type="button" class="mw-toast__action-button">Close</button></template>
+            </Toast>
+          </div>
+        </div>
       </div>
     `,
   }),
@@ -77,15 +92,25 @@ export const DarkVariants: Story = {
   render: () => ({
     components: { MarwesProvider, Toast },
     setup() {
-      return { ThemeMode, variants: VARIANTS }
+      return { ThemeMode, variants: VARIANTS, intents: INTENTS, capitalize }
     },
     template: `
       <MarwesProvider :theme="{ mode: ThemeMode.dark }">
-        <div style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: #000000; border-radius: 8px;">
-          <Toast v-for="v in variants" :key="v" :variant="v">
-            {{ v.charAt(0).toUpperCase() + v.slice(1) }} — Dark mode toast.
-            <template #action><button type="button" class="mw-toast__action-button">Close</button></template>
-          </Toast>
+        <div style="display: flex; flex-direction: column; gap: 24px; padding: 20px; background: #0F0F0F; border-radius: 8px;">
+          <div v-for="variant in variants" :key="variant">
+            <p style="margin: 0 0 8px; font-size: 12px; font-weight: 600; color: #9ca3af;">{{ capitalize(variant) }}</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <Toast
+                v-for="intent in intents"
+                :key="variant + '-' + intent"
+                :variant="variant"
+                :dataAttributes="{ 'data-intent': intent }"
+              >
+                {{ capitalize(intent) }} — {{ capitalize(variant) }} dark toast.
+                <template #action><button type="button" class="mw-toast__action-button">Close</button></template>
+              </Toast>
+            </div>
+          </div>
         </div>
       </MarwesProvider>
     `,
