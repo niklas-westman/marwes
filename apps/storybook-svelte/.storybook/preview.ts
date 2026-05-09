@@ -6,10 +6,17 @@ import SnippetRenderer from "./SnippetRenderer.svelte"
 
 const preview: Preview = {
   decorators: [
-    (_story, context) => ({
-      Component: MarwesDecorator,
-      props: { isDocs: context.viewMode === "docs" },
-    }),
+    (_story, context) => {
+      const storybookTheme = context.globals.theme as string | undefined
+      const mode = storybookTheme === "dark" ? "dark" : "light"
+      return {
+        Component: MarwesDecorator,
+        props: {
+          isDocs: context.viewMode === "docs",
+          mode,
+        },
+      }
+    },
   ],
   // Svelte 5 renders children via snippets ({@render children?.()}).
   // Storybook passes `children` as a plain string from args.

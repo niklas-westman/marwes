@@ -27,7 +27,7 @@ const withMarwes: Decorator = (story, context) => {
                 style: {
                   minHeight: isDocs ? undefined : "100vh",
                   padding: "24px",
-                  background: mode === ThemeMode.dark ? "#000000" : "#ffffff",
+                  background: mode === ThemeMode.dark ? "#0F0F0F" : "#ffffff",
                 },
               },
               [storyNode],
