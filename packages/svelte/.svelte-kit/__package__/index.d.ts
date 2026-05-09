@@ -50,7 +50,7 @@ export { default as DropdownField } from "./components/input/DropdownField.svelt
 export { default as InputOtp } from "./components/input/InputOtp.svelte";
 export { default as RichText } from "./components/input/RichText.svelte";
 export { default as RichTextField } from "./components/input/RichTextField.svelte";
-export type { InputProps, InputFieldProps, InputOtpProps, RichTextProps, RichTextFieldProps } from "./components/input/types.js";
+export type { InputProps, InputFieldProps, InputOtpProps, RichTextProps, RichTextFieldProps, } from "./components/input/types.js";
 export { default as Badge } from "./components/badge/Badge.svelte";
 export { default as BadgeGroup } from "./components/badge/BadgeGroup.svelte";
 export { default as StatusBadge } from "./components/badge/StatusBadge.svelte";
@@ -82,7 +82,7 @@ export type { SelectProps, SelectFieldProps } from "./components/input/types.js"
 export { default as Checkbox } from "./components/checkbox/Checkbox.svelte";
 export { default as CheckboxField } from "./components/checkbox/CheckboxField.svelte";
 export { default as CheckboxGroupField } from "./components/checkbox/CheckboxGroupField.svelte";
-export type { CheckboxProps, CheckboxFieldProps, CheckboxGroupFieldProps } from "./components/checkbox/types.js";
+export type { CheckboxProps, CheckboxFieldProps, CheckboxGroupFieldProps, } from "./components/checkbox/types.js";
 export { default as Switch } from "./components/switch/Switch.svelte";
 export { default as SwitchField } from "./components/switch/SwitchField.svelte";
 export { default as FeatureToggle } from "./components/switch/FeatureToggle.svelte";
@@ -131,14 +131,14 @@ export { default as AccordionField } from "./components/accordion/AccordionField
 export { default as FAQAccordion } from "./components/accordion/FAQAccordion.svelte";
 export { default as SettingsAccordion } from "./components/accordion/SettingsAccordion.svelte";
 export { default as SectionsAccordion } from "./components/accordion/SectionsAccordion.svelte";
-export type { AccordionProps, AccordionFieldItem, AccordionFieldProps } from "./components/accordion/types.js";
+export type { AccordionProps, AccordionFieldItem, AccordionFieldProps, } from "./components/accordion/types.js";
 export { default as Tab } from "./components/tab/Tab.svelte";
 export { default as TabPanel } from "./components/tab/TabPanel.svelte";
 export { default as TabGroup } from "./components/tab/TabGroup.svelte";
 export { default as NavigationTabs } from "./components/tab/NavigationTabs.svelte";
 export { default as ContentTabs } from "./components/tab/ContentTabs.svelte";
 export { default as SettingsTabs } from "./components/tab/SettingsTabs.svelte";
-export type { TabProps, TabPanelProps, TabGroupProps, TabGroupItem } from "./components/tab/types.js";
+export type { TabProps, TabPanelProps, TabGroupProps, TabGroupItem, } from "./components/tab/types.js";
 export { default as Slider } from "./components/slider/Slider.svelte";
 export { default as SliderField } from "./components/slider/SliderField.svelte";
 export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte";

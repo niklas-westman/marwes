@@ -4,4 +4,4 @@
   type Props = Omit<ButtonProps, "variant" | "action">;
   let props: Props = $props();
 </script>
-<Button {...props} variant="neutral" action="button" />
+<Button {...props} variant="neutral" action="button" iconRight={props.iconRight ?? "refreshCw"} />

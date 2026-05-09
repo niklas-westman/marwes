@@ -17,7 +17,6 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     ...storybookButtonGeneralArgTypes,
-    children: { control: "text" },
     loading: {
       control: "object",
       description:
