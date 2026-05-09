@@ -37,7 +37,8 @@ const checks = [
     id: "svelte-imports-react",
     description: "Svelte adapter must not import React or Vue",
     appliesTo: (path) => path.startsWith("packages/svelte/src/lib/components/"),
-    pattern: /from\s+["'](?:@marwes-ui\/react|@marwes-ui\/vue|.*packages\/react|.*packages\/vue|react|react-dom|vue)["']/,
+    pattern:
+      /from\s+["'](?:@marwes-ui\/react|@marwes-ui\/vue|.*packages\/react|.*packages\/vue|react|react-dom|vue)["']/,
   },
   {
     id: "react-imports-svelte",

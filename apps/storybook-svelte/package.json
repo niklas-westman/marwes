@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "typecheck": "svelte-check --tsconfig ./tsconfig.json",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.check.json",
     "test": "echo \"No tests in storybook-svelte yet\"",
     "build": "storybook build",
     "storybook": "storybook dev -p 6008",
