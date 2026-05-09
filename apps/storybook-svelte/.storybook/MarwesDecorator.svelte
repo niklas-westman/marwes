@@ -12,6 +12,10 @@
 
   const themeMode = $derived(mode === "dark" ? ThemeMode.dark : ThemeMode.light);
   const background = $derived(mode === "dark" ? "#0F0F0F" : "#ffffff");
+
+  $effect(() => {
+    document.body.style.background = background;
+  });
 </script>
 
 <MarwesProvider theme={{ mode: themeMode }}>

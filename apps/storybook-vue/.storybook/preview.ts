@@ -7,10 +7,13 @@ const withMarwes: Decorator = (story, context) => {
   const storybookTheme = context.globals.theme as ThemeMode | undefined
   const mode: ThemeMode = storybookTheme === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light
   const isDocs = context.viewMode === "docs"
+  const bg = mode === ThemeMode.dark ? "#0F0F0F" : "#ffffff"
+
+  document.body.style.background = bg
 
   return {
     setup() {
-      return { isDocs, mode }
+      return { isDocs, mode, bg }
     },
     render() {
       const storyResult = story()
@@ -27,7 +30,7 @@ const withMarwes: Decorator = (story, context) => {
                 style: {
                   minHeight: isDocs ? undefined : "100vh",
                   padding: "24px",
-                  background: mode === ThemeMode.dark ? "#0F0F0F" : "#ffffff",
+                  background: bg,
                 },
               },
               [storyNode],
