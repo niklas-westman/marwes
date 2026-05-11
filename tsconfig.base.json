@@ -33,7 +33,8 @@
       "@marwes-ui/vue/ssr": ["./packages/vue/src/ssr.ts"],
       "@marwes-ui/vue": ["./packages/vue/src/index.ts"],
       "@marwes-ui/svelte": ["./packages/svelte/src/lib/index.ts"],
-      "@marwes-ui/svelte/ssr": ["./packages/svelte/src/lib/ssr.ts"]
+      "@marwes-ui/svelte/ssr": ["./packages/svelte/src/lib/ssr.ts"],
+      "@marwes-ui/react-native": ["./packages/react-native/src/index.ts"]
     },
 
     "types": []

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "preset": "firstEdition",
+  "family": "badge",
+  "sourceCss": "packages/presets/src/firstEdition/badge.css",
+  "slots": {
+    "root": {
+      "type": "view",
+      "selectors": [".mw-badge"]
+    },
+    "label": {
+      "type": "text",
+      "selectors": [".mw-badge"]
+    }
+  },
+  "variants": {
+    "neutral": [".mw-badge--neutral"],
+    "info": [".mw-badge--info"],
+    "success": [".mw-badge--success"],
+    "warning": [".mw-badge--warning"],
+    "error": [".mw-badge--error"]
+  },
+  "ignoredDeclarations": {
+    "white-space": "RN Text handles wrapping via numberOfLines.",
+    "line-height": "RN Text uses default line height from fontSize.",
+    "vertical-align": "Not a RN style prop."
+  }
+}

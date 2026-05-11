@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "preset": "firstEdition",
+  "family": "button",
+  "sourceCss": "packages/presets/src/firstEdition/button.css",
+  "slots": {
+    "root": {
+      "type": "view",
+      "selectors": [".mw-btn"]
+    },
+    "label": {
+      "type": "text",
+      "selectors": [".mw-btn"]
+    }
+  },
+  "variants": {
+    "primary": [".mw-btn--primary"],
+    "secondary": [".mw-btn--secondary"],
+    "neutral": [".mw-btn--neutral"],
+    "text": [".mw-btn.mw-btn--text"],
+    "success": [".mw-btn--success"]
+  },
+  "sizes": {
+    "xs": [".mw-btn--xs"],
+    "sm": [".mw-btn--sm"],
+    "md": [".mw-btn--md"],
+    "lg": [".mw-btn--lg"]
+  },
+  "states": {
+    "pressed": {
+      "selectors": [":active"],
+      "sourceState": "pressed"
+    },
+    "focused": {
+      "selectors": [":focus-visible"],
+      "sourceState": "focused"
+    },
+    "disabled": {
+      "selectors": [":disabled"],
+      "sourceState": "disabled"
+    },
+    "hovered": {
+      "selectors": [":hover"],
+      "sourceState": "hovered"
+    }
+  },
+  "ignoredDeclarations": {
+    "cursor": "RN Pressable owns touch behavior.",
+    "user-select": "Not a native style prop.",
+    "transition": "Animation requires an explicit native animation strategy.",
+    "outline": "Focus ring handled through component state, not CSS outline.",
+    "outline-offset": "Focus ring handled through component state, not CSS outline.",
+    "text-decoration": "Handled via textDecorationLine on text slots.",
+    "text-underline-offset": "Not a RN style prop.",
+    "line-height": "Button uses fixed height; line-height: 0 is a browser hack."
+  }
+}

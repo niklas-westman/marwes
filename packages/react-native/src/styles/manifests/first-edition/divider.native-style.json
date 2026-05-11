@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "preset": "firstEdition",
+  "family": "divider",
+  "sourceCss": "packages/presets/src/firstEdition/divider.css",
+  "slots": {
+    "root": {
+      "type": "view",
+      "selectors": [".mw-divider"]
+    }
+  },
+  "variants": {
+    "horizontal": [".mw-divider--horizontal"],
+    "vertical": [".mw-divider--vertical"]
+  },
+  "ignoredDeclarations": {
+    "vertical-align": "Not a RN style prop.",
+    "background-clip": "Not a RN style prop.",
+    "box-sizing": "RN always uses border-box."
+  }
+}
