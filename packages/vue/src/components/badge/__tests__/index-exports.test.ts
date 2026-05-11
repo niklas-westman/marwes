@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Verifies that the Badge barrel re-exports all public symbols
+ * from both the component directory and the package root.
+ */
 import { BadgeVariant } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 import * as badgeComponents from ".."

@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Badge Group component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"

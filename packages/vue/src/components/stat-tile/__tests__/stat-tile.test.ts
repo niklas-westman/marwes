@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Stat Tile component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { cleanup, render, screen } from "@testing-library/vue"
 import { afterEach } from "vitest"
 import { runStatTileContract } from "../../../../../../tests/contracts/stat-tile.contract"

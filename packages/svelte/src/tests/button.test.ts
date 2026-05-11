@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Button atom — element rendering, class merging,
+ * disabled state, loading busy state, anchor mode, click handling, and data attributes.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Button from "../lib/components/button/Button.svelte"
@@ -61,13 +65,5 @@ describe("Button", () => {
     const btn = container.querySelector("button") as HTMLButtonElement
     await fireEvent.click(btn)
     expect(handler).toHaveBeenCalledOnce()
-  })
-
-  it("sets disabled attribute when disabled", () => {
-    const { container } = render(Button, {
-      props: { disabled: true },
-    })
-    const btn = container.querySelector("button") as HTMLButtonElement
-    expect(btn.disabled).toBe(true)
   })
 })

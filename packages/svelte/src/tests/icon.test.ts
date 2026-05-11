@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Icon atom — SVG rendering, base class,
+ * aria-hidden decorative default, and labelled mode with aria-label.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Icon from "../lib/components/icon/Icon.svelte"

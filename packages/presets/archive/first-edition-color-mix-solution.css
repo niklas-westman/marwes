@@ -1,0 +1,217 @@
+/*
+ * Archive: firstEdition color-mix status treatment.
+ *
+ * Original file locations:
+ * - packages/presets/src/firstEdition/badge.css
+ * - packages/presets/src/firstEdition/toast.css
+ *
+ * This was the previous color-mix based implementation before Badge and Toast
+ * moved to explicit readable status tokens for release accessibility validation.
+ * Keep this file unimported. It is reference material only.
+ */
+
+/* Original location: packages/presets/src/firstEdition/badge.css */
+
+.mw-badge--info {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 12%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-info-base) 45%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-info-base);
+}
+
+.mw-badge--success {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 12%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-success-base) 45%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-success-base);
+}
+
+.mw-badge--warning {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-warning-base) 50%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-warning-base, #b45309);
+}
+
+.mw-badge--error {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-danger-base) 45%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));
+}
+
+.mw-theme--dark .mw-badge--info {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-info-base) 18%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-info-base) 55%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-info-base) 80%, var(--mw-color-text));
+}
+
+.mw-theme--dark .mw-badge--success {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-success-base) 18%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-success-base) 55%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-success-base);
+}
+
+.mw-theme--dark .mw-badge--warning {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-warning-base) 20%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-warning-base) 60%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: var(--mw-color-warning-base);
+}
+
+.mw-theme--dark .mw-badge--error {
+  --mw-badge-surface: color-mix(in srgb, var(--mw-color-danger-base) 18%, var(--mw-color-surface));
+  --mw-badge-border: color-mix(
+    in srgb,
+    var(--mw-color-danger-base) 55%,
+    var(--mw-color-border-subtle)
+  );
+  --mw-badge-label: color-mix(in srgb, var(--mw-color-danger-base) 70%, var(--mw-color-text));
+}
+
+/* Original location: packages/presets/src/firstEdition/toast.css */
+
+.mw-toast--outline {
+  --mw-toast-surface: var(--mw-color-surface-elevated);
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-toast--outline[data-intent="success"] {
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-toast--outline[data-intent="warning"] {
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base, #b45309);
+  --mw-toast-action: var(--mw-color-warning-base, #b45309);
+}
+
+.mw-toast--outline[data-intent="error"] {
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}
+
+.mw-toast--rich {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-primary-base) 12%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-toast--rich[data-intent="success"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-success-base) 12%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-toast--rich[data-intent="warning"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-warning-base) 16%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base, #b45309);
+  --mw-toast-action: var(--mw-color-warning-base, #b45309);
+}
+
+.mw-toast--rich[data-intent="error"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-danger-base) 12%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));
+  --mw-toast-action: color-mix(in srgb, var(--mw-color-danger-base) 80%, var(--mw-color-text));
+}
+
+.mw-theme--dark .mw-toast--outline {
+  --mw-toast-surface: var(--mw-color-background, #0f0f0f);
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="success"] {
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="warning"] {
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base);
+  --mw-toast-action: var(--mw-color-warning-base);
+}
+
+.mw-theme--dark .mw-toast--outline[data-intent="error"] {
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}
+
+.mw-theme--dark .mw-toast--rich {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-primary-base) 18%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-primary-base);
+  --mw-toast-icon: var(--mw-color-primary-base);
+  --mw-toast-text: var(--mw-color-primary-base);
+  --mw-toast-action: var(--mw-color-primary-base);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="success"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-success-base) 18%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-success-base);
+  --mw-toast-icon: var(--mw-color-success-base);
+  --mw-toast-text: var(--mw-color-success-base);
+  --mw-toast-action: var(--mw-color-success-base);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="warning"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-warning-base) 20%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-warning-base);
+  --mw-toast-icon: var(--mw-color-warning-base);
+  --mw-toast-text: var(--mw-color-warning-base);
+  --mw-toast-action: var(--mw-color-warning-base);
+}
+
+.mw-theme--dark .mw-toast--rich[data-intent="error"] {
+  --mw-toast-surface: color-mix(in srgb, var(--mw-color-danger-base) 18%, var(--mw-color-surface));
+  --mw-toast-border: var(--mw-color-danger-base);
+  --mw-toast-icon: var(--mw-color-danger-base);
+  --mw-toast-text: var(--mw-color-danger-base);
+  --mw-toast-action: var(--mw-color-danger-base);
+}

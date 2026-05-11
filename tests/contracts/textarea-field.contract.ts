@@ -1,3 +1,7 @@
+/**
+ * Shared contract for TextareaField molecule — label-to-textarea
+ * wiring, helper text via aria-describedby, and invalid/error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type TextareaFieldContractHarness = {

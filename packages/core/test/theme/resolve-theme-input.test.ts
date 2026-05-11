@@ -1,3 +1,9 @@
+/**
+ * Tests resolveThemeInput — the central normalization function that merges
+ * user overrides onto defaults. Covers color role derivation, secondary/info
+ * aliases, surface/font/ui/typography overrides, tone presets (digital/playful/
+ * editorial), and the rule that user overrides always beat tone defaults.
+ */
 import { describe, expect, it } from "vitest"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"
 import { ThemeMode } from "../../src/theme/theme-types"

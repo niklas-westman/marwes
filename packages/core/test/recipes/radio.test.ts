@@ -1,3 +1,7 @@
+/**
+ * Tests the radio recipe's pure output — controlled vs uncontrolled state,
+ * disabled/invalid modifier classes, and a11y attribute passthrough.
+ */
 import { describe, expect, it } from "vitest"
 import { radioRecipe } from "../../src/components/atoms/radio/radio-recipe"
 

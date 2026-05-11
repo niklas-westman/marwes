@@ -1,3 +1,9 @@
+/**
+ * Tests shared field helper utilities — ID merging for aria-describedby,
+ * a11y ID generation for input/checkbox/radio/accordion field compounds,
+ * currency helper text formatting, currency symbol lookup, and currency
+ * input sanitization.
+ */
 import { describe, expect, it } from "vitest"
 import {
   buildAccordionFieldA11yIds,

@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Switch atom — role=switch, class, aria-checked,
+ * toggle callback, and disabled state.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Switch from "../lib/components/switch/Switch.svelte"

@@ -1,3 +1,8 @@
+/**
+ * Shared contract for Tab/TabGroup — tablist naming from visible label,
+ * aria-label fallback, selected tab/panel wiring, and automatic Arrow activation
+ * with disabled tab skipping.
+ */
 import { describe, expect, it } from "vitest"
 
 export type TabContractItem = {

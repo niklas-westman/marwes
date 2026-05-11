@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests passive display primitives — Badge, Card,
+ * Divider, Spacing, and Skeleton basic rendering and class application.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Badge from "../lib/components/badge/Badge.svelte"

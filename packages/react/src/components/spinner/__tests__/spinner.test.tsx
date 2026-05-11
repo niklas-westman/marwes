@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Spinner component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { runSpinnerContract } from "../../../../../../tests/contracts/spinner.contract"

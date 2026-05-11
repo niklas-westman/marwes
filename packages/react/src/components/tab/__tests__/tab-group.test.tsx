@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the TabGroup component — tab/panel wiring, keyboard navigation,
+ * and automatic activation.
+ */
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import type * as React from "react"

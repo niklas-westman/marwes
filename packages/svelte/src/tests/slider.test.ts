@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Slider atom — range input rendering,
+ * class, value binding, min/max, and disabled state.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Slider from "../lib/components/slider/Slider.svelte"

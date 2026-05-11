@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests purpose button locking — verifies that forbidden prop overrides
+ * (variant, action, as) are silently stripped and trigger dev warnings.
+ */
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"

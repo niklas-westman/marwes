@@ -1,3 +1,7 @@
+/**
+ * Tests the spacing recipe's pure output — default sp-24 token, scale
+ * multiplier via calc(), and backward-compatible bracket-key tokens.
+ */
 import { describe, expect, it } from "vitest"
 import { createSpacingRecipe } from "../../src/components/atoms/spacing/spacing.recipe"
 import { Spacings } from "../../src/components/atoms/spacing/spacing.types"

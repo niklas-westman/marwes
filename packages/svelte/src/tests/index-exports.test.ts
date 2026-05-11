@@ -1,3 +1,8 @@
+/**
+ * Svelte adapter: Verifies the complete public API surface —
+ * all component exports, function/hook exports, and core re-exports
+ * are available from the package root.
+ */
 import { describe, expect, it } from "vitest"
 import * as publicApi from "../lib/index.js"
 

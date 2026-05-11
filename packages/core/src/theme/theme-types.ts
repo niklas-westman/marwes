@@ -15,6 +15,13 @@ export type IconSize = "xs" | "sm" | "md" | "lg"
 export type HeadingSize = "h1" | "h2" | "h3"
 export type ParagraphSize = "sm" | "md" | "lg"
 
+export type StatusColorTokens = {
+  background: string
+  text: string
+  icon: string
+  border: string
+}
+
 /**
  * Theme mode determines which default color palette is used.
  * - 'light': Uses light mode color defaults (dark text on light backgrounds)
@@ -53,12 +60,14 @@ export type Theme = {
     textSubtle: string
     textDisabled: string
     textInverted: string
+    textBrand: string
 
     // Borders
     border: string
     borderSubtle: string
     borderStrong: string
     borderDisabled: string
+    borderBrand: string
 
     /**
      * Focus color used for focus-visible outlines on interactive elements.
@@ -70,6 +79,12 @@ export type Theme = {
     danger: string
     success: string
     warning: string
+    status: {
+      success: StatusColorTokens
+      warning: StatusColorTokens
+      error: StatusColorTokens
+      info: StatusColorTokens
+    }
   }
   font: {
     primary: string

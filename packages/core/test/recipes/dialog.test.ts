@@ -1,3 +1,7 @@
+/**
+ * Tests the dialog recipe's pure output — size modifiers, footer/dismiss
+ * controls, labelling attributes, and modal vs non-modal semantics.
+ */
 import { describe, expect, it } from "vitest"
 import { createDialogRecipe } from "../../src/components/atoms/dialog/dialog-recipe"
 

@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests typography components — H1/H2/H3 heading
+ * elements and Paragraph with size variants.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import TypographyFixture from "./type-fixtures/TypographyFixture.svelte"

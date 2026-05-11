@@ -1,3 +1,7 @@
+/**
+ * Shared contract for CheckboxGroupField — labeled group
+ * with checkboxes, uncontrolled/controlled value arrays, description wiring, and error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type CheckboxGroupFieldOptionContract = {

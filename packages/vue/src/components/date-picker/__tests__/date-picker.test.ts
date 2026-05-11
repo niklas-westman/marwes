@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Date Picker component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { cleanup, fireEvent, render, screen } from "@testing-library/vue"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { DatePicker } from "../date-picker"

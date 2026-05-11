@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Switch atom — aria-checked reflection,
+ * onCheckedChange callback, disabled suppression, and label wiring via aria-labelledby.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SwitchContractHarness = {

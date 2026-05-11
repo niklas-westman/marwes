@@ -1,3 +1,7 @@
+/**
+ * Tests the accordion recipe's pure output — open/disabled modifier classes,
+ * aria expansion state, and trigger/panel ID derivation from the base ID.
+ */
 import { describe, expect, it } from "vitest"
 import { createAccordionRecipe } from "../../src/components/atoms/accordion/accordion-recipe"
 

@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Checkbox atom — checkbox type, class,
+ * checked/indeterminate state, change callback, disabled, and aria-label.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Checkbox from "../lib/components/checkbox/Checkbox.svelte"

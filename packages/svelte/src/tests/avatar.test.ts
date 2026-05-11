@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests Avatar, AvatarBadge, and AvatarGroup components —
+ * base class, size prop, image rendering, and group overflow.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Avatar from "../lib/components/avatar/Avatar.svelte"

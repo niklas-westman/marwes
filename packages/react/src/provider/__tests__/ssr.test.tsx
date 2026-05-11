@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests server-side rendering compatibility — verifies that the provider
+ * and theme system render without errors in a non-browser environment.
+ */
 import { ThemeMode } from "@marwes-ui/core"
 import {
   MarwesThemeScript,

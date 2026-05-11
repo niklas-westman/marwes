@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests Toast purpose/variant components — verifies that each
+ * purpose wrapper renders with the correct semantic defaults and metadata.
+ */
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h, nextTick, onMounted } from "vue"

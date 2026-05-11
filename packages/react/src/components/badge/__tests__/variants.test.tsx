@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests Badge purpose/variant components — verifies that each
+ * purpose wrapper renders with the correct semantic defaults and metadata.
+ */
 import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"

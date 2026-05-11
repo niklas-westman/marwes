@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests server-side rendering compatibility — verifies
+ * that components render without errors in a non-browser environment.
+ */
 import { describe, expect, it } from "vitest"
 import { createMarwesThemeScript, createMarwesThemeStyle } from "../lib/ssr.js"
 

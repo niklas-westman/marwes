@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the MarwesProvider — theme context injection
+ * and provider rendering.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import MarwesProvider from "../lib/provider/MarwesProvider.svelte"

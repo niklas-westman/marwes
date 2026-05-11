@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the CheckboxField molecule — label as
+ * accessible name, description and error text via aria-describedby, and invalid marking.
+ */
 import { describe, expect, it } from "vitest"
 
 export type CheckboxFieldContractHarness = {

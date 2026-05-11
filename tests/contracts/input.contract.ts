@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Input atom — defaultValue rendering,
+ * onValueChange callback, disabled/readonly semantics, and invalid state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type InputContractHarness = {

@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Accordion Field molecule — wires the shared contract for label,
+ * helper text, error state, and aria-describedby connections.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen, within } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"

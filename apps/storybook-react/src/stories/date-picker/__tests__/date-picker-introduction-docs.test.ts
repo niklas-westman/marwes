@@ -1,3 +1,7 @@
+/**
+ * React Date Picker introduction docs guard — verifies that the
+ * Introduction.mdx file documents all expected sections and component references.
+ */
 import { describe, expect, it } from "vitest"
 import introduction from "../Introduction.mdx?raw"
 

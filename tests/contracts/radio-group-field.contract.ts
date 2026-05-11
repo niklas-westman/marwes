@@ -1,3 +1,7 @@
+/**
+ * Shared contract for RadioGroupField — labeled radiogroup,
+ * uncontrolled/controlled value switching, shared group name, description, and error wiring.
+ */
 import { describe, expect, it } from "vitest"
 
 export type RadioGroupFieldOptionContract = {

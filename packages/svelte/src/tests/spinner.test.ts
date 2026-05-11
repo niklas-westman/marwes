@@ -1,3 +1,8 @@
+/**
+ * Svelte adapter: Tests Spinner, ButtonSpinner, and EmptyStateSpinner —
+ * base class, data-component, SVG rendering, aria-label, aria-hidden,
+ * and decorative defaults.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import ButtonSpinner from "../lib/components/spinner/ButtonSpinner.svelte"

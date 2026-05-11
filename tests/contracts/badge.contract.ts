@@ -1,3 +1,7 @@
+/**
+ * Shared contract for Badge purpose components — StatusBadge, PriorityBadge,
+ * and NotificationBadge canonical semantics, plus ariaLabel passthrough.
+ */
 import { describe, expect, it } from "vitest"
 
 export interface BadgeContractHarness {

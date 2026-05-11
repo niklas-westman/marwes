@@ -1,3 +1,8 @@
+/**
+ * Tests the tone preset system — each tone (default/digital/playful/editorial)
+ * returns partial theme overrides for font, ui.radius, and typography.
+ * The "default" tone returns an empty object (no overrides).
+ */
 import { describe, expect, it } from "vitest"
 import { resolveTone } from "../../src/theme/tone"
 

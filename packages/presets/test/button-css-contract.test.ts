@@ -1,3 +1,7 @@
+/**
+ * CSS contract: verifies the firstEdition button stylesheet contains
+ * the expected CSS custom properties, selectors, and design tokens.
+ */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"

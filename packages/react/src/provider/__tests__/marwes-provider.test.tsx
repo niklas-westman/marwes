@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the MarwesProvider component — theme context injection,
+ * mode toggling, dark/light detection, and provider nesting behavior.
+ */
 import { type ResolvedTheme, ThemeMode } from "@marwes-ui/core"
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import * as React from "react"

@@ -1,3 +1,7 @@
+/**
+ * React Toast story taxonomy guard — verifies that story files
+ * use the correct Storybook title hierarchy and that all expected stories exist.
+ */
 import { readFileSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"
@@ -14,7 +18,7 @@ describe("React toast story taxonomy", () => {
 
     expect(story).toContain('title: "Toast/Atom"')
     expect(story).toContain("mw-toast__action-button")
-    expect(story).toContain('background: "#000000"')
+    expect(story).toContain('background: "#0F0F0F"')
   })
 
   it("uses Molecule title for ToastContainer", () => {

@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Badge component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { BadgeVariant } from "@marwes-ui/core"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"

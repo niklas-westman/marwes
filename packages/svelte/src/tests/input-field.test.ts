@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the InputField molecule — label rendering,
+ * input element presence, and helper/error text wiring.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import InputField from "../lib/components/input/InputField.svelte"

@@ -1,3 +1,7 @@
+/**
+ * Tests the slider recipe's pure output — value clamping, fill percentage
+ * calculation, orientation metadata, tooltip/touch-area flags, and a11y passthrough.
+ */
 import { describe, expect, it } from "vitest"
 import { createSliderRecipe } from "../../src/components/atoms/slider/slider-recipe"
 

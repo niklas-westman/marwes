@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Dialog and DialogModal components — base class,
+ * aria role, size variants, and modal overlay rendering.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Dialog from "../lib/components/dialog/Dialog.svelte"

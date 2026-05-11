@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the DatePicker component — basic rendering
+ * and class application.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import DatePicker from "../lib/components/date-picker/DatePicker.svelte"

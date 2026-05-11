@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests server-side rendering compatibility — verifies that the provider
+ * and theme system render without errors in a non-browser environment.
+ */
 import { createMarwesThemeScript, createMarwesThemeStyle } from "@marwes-ui/vue/ssr"
 import { describe, expect, it } from "vitest"
 

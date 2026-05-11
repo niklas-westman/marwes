@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Icon atom — decorative default (aria-hidden),
+ * decorative fallback without label, and labelled mode with size tokens.
+ */
 import { describe, expect, it, vi } from "vitest"
 
 export type IconSize = "xs" | "sm" | "md" | "lg" | number

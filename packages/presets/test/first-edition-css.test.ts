@@ -1,3 +1,7 @@
+/**
+ * Verifies that the firstEdition styles.css aggregates all component
+ * CSS files via @import — acts as a guardrail against missing imports.
+ */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"

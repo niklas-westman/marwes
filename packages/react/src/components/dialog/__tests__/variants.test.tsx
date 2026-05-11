@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests Dialog purpose/variant components — verifies that each
+ * purpose wrapper renders with the correct semantic defaults and metadata.
+ */
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"

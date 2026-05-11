@@ -1,3 +1,8 @@
+/**
+ * Tests theme mode helpers — mode validation, preference resolution
+ * (light/dark/system), mode toggling, and the compile-time constraint
+ * that ThemeInput.mode cannot be "system".
+ */
 import { describe, expect, it } from "vitest"
 import {
   ThemeMode,

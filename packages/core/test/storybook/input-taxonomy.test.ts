@@ -1,3 +1,8 @@
+/**
+ * Tests the Storybook input taxonomy — ensures all React and Vue input stories
+ * use the Input/* title hierarchy, verifies the legacy stories/field directory
+ * was removed, and checks that introduction docs cover domain and naming.
+ */
 import { access, readFile, readdir } from "node:fs/promises"
 import { resolve } from "node:path"
 import { describe, expect, it } from "vitest"

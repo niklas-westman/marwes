@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Radio atom — defaultChecked state,
+ * onCheckedChange callback, and disabled suppression.
+ */
 import { describe, expect, it } from "vitest"
 
 export type RadioContractHarness = {

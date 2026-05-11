@@ -1,3 +1,7 @@
+/**
+ * Tests the paragraph recipe's pure output — default md size class
+ * and explicit size variant override.
+ */
 import { describe, expect, it } from "vitest"
 import { paragraphRecipe } from "../../src/components/atoms/paragraph/paragraph-recipe"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"

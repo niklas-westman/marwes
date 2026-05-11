@@ -1,3 +1,7 @@
+/**
+ * Tests the divider recipe's pure output — orientation, spacing token mapping
+ * to Figma values, and line thickness defaults.
+ */
 import { describe, expect, it } from "vitest"
 import { createDividerRecipe } from "../../src/components/atoms/divider/divider-recipe"
 

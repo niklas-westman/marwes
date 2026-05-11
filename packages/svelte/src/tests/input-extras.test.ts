@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests additional input components — Select, Textarea,
+ * InputField, InputOtp, RichText, and purpose field wrappers.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import InputOtp from "../lib/components/input/InputOtp.svelte"

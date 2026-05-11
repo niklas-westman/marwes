@@ -1,3 +1,7 @@
+/**
+ * Shared contract for ZipCodeField — label-to-input wiring with
+ * postal autocomplete semantics, helper text via aria-describedby, and invalid/error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type ZipCodeFieldContractHarness = {

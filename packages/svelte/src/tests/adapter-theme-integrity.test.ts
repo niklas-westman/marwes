@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Static analysis guard — scans component source
+ * files for hardcoded color literals to ensure all colors flow through theme variables.
+ */
 import { readFileSync, readdirSync } from "node:fs"
 import { relative, resolve } from "node:path"
 import { describe, expect, it } from "vitest"

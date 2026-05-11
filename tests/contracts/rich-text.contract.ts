@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the RichText atom — multiline textbox with
+ * defaultValue, HTML sanitization, onValueChange callback, and disabled semantics.
+ */
 import { describe, expect, it } from "vitest"
 
 export type RichTextContractHarness = {

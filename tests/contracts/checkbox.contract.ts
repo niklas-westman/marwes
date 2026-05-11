@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Checkbox atom — defaultChecked state,
+ * onCheckedChange callback, indeterminate DOM state, and disabled suppression.
+ */
 import { describe, expect, it } from "vitest"
 
 export type CheckboxContractHarness = {

@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Rich Text Field molecule — wires the shared contract for label,
+ * helper text, error state, and aria-describedby connections.
+ */
 import { render, screen } from "@testing-library/vue"
 import { defineComponent, h } from "vue"
 import { runRichTextFieldContract } from "../../../../../../tests/contracts/rich-text-field.contract"

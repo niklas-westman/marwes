@@ -1,3 +1,8 @@
+/**
+ * Svelte adapter: Tests purpose variant components — BadgeGroup,
+ * PrimaryButton, SecondaryButton, DestructiveButton, ConfirmButton,
+ * and CancelButton class and attribute defaults.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import BadgeGroup from "../lib/components/badge/BadgeGroup.svelte"

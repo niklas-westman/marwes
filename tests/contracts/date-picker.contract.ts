@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the DatePicker atom — placeholder for
+ * future calendar grid interaction tests.
+ */
 import { expect } from "vitest"
 
 export interface DatePickerContractHarness {

@@ -1,3 +1,7 @@
+/**
+ * Tests the toast recipe's pure output — outline/rich variant classes
+ * and live-region role selection (polite → status, assertive → alert).
+ */
 import { describe, expect, it } from "vitest"
 import { createToastRecipe } from "../../src/components/atoms/toast/toast-recipe"
 

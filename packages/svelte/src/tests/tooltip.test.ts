@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests Tooltip and TooltipGroup — base class,
+ * role=tooltip, trigger rendering, and group wrapper.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Tooltip from "../lib/components/tooltip/Tooltip.svelte"

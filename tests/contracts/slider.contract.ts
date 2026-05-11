@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Slider atom — native range slider metadata,
+ * uncontrolled value updates, controlled value source of truth, and disabled semantics.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SliderContractHarness = {

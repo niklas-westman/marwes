@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests field compound molecules — CheckboxField,
+ * CheckboxGroupField, RadioGroupField, and SwitchField label, description, and error wiring.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import CheckboxField from "../lib/components/checkbox/CheckboxField.svelte"

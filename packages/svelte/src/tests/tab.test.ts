@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests TabGroup and Tab components — tablist role,
+ * tab selection, aria-selected, and panel rendering.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import TabGroup from "../lib/components/tab/TabGroup.svelte"

@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Radio atom — radio input type, class,
+ * checked state, name/value passthrough, disabled, and change callback.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Radio from "../lib/components/radio/Radio.svelte"

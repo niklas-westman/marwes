@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests Accordion components — render, class, open state,
+ * disabled state, and AccordionField label/error wiring.
+ */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Accordion from "../lib/components/accordion/Accordion.svelte"

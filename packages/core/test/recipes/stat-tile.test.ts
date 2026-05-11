@@ -1,3 +1,7 @@
+/**
+ * Tests the stat-tile recipe's pure output — tone modifier classes,
+ * trend direction metadata, trend icon resolution, and accessible trend labels.
+ */
 import { describe, expect, it } from "vitest"
 import {
   createStatTileRecipe,

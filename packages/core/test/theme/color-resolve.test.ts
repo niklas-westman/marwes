@@ -1,3 +1,9 @@
+/**
+ * Tests the color role derivation pipeline — resolveColorRole auto-derives
+ * hover/pressed/disabled/label from a base hex using OKLCH + WCAG contrast,
+ * resolveSecondaryRole builds transparent outline states, and
+ * normalizeColorInput accepts both string and object color inputs.
+ */
 import { describe, expect, it } from "vitest"
 import {
   normalizeColorInput,

@@ -1,3 +1,8 @@
+/**
+ * Tests CSS rule generation from resolved themes — single-mode rules,
+ * dual-mode (light + dark) rule sheets, and root attribute selectors
+ * for pre-hydration mode scripts.
+ */
 import { describe, expect, it } from "vitest"
 import {
   ThemeMode,

@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the StatTile atom — Figma baseline rendering
+ * and tone/trend metadata.
+ */
 import { describe, expect, it } from "vitest"
 
 export type StatTileContractHarness = {

@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the BadgeGroup molecule — group role with
+ * visible label and fieldset/legend aria-labelledby wiring.
+ */
 import { describe, expect, it } from "vitest"
 
 export interface BadgeGroupContractHarness {

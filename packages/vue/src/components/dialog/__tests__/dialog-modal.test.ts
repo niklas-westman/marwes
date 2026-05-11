@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the DialogModal component — wires the shared dialog-modal contract
+ * for modal overlay behavior, focus management, and escape dismissal.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen, waitFor } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"

@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Verifies that the Tooltip barrel re-exports all public symbols
+ * from both the component directory and the package root.
+ */
 import { describe, expect, it } from "vitest"
 import * as tooltipComponents from ".."
 import * as publicApi from "../../../index"

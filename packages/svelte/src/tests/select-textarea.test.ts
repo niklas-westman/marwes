@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests Select and Textarea atoms — element type,
+ * class, options rendering, and textarea rows/placeholder.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Select from "../lib/components/input/Select.svelte"

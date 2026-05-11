@@ -1,3 +1,7 @@
+/**
+ * Shared contract for Dialog purpose components — ConfirmDialog,
+ * DestructiveDialog, and InfoDialog canonical semantic attributes.
+ */
 import { describe, expect, it } from "vitest"
 
 export interface DialogContractHarness {

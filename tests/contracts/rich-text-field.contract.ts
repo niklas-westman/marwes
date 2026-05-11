@@ -1,3 +1,7 @@
+/**
+ * Shared contract for RichTextField molecule — label wiring
+ * via aria-labelledby, helper text via aria-describedby, and invalid/error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type RichTextFieldContractHarness = {

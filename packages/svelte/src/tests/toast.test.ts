@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests Toast and ToastContainer — base class,
+ * role=status, variant application, dismiss button, and container rendering.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import ErrorToast from "../lib/components/toast/ErrorToast.svelte"

@@ -1,3 +1,7 @@
+/**
+ * Svelte adapter: Tests the Input atom — element rendering, class,
+ * class merging, placeholder, and disabled state.
+ */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Input from "../lib/components/input/Input.svelte"

@@ -1,7 +1,12 @@
+/**
+ * Tests the select recipe's pure output — Marwes vs native appearance modes,
+ * validation state, and the native boolean shorthand alias.
+ */
 import { describe, expect, it } from "vitest"
 import { createSelectRecipe } from "../../src/components/atoms/input/select-recipe"
 
 describe("createSelectRecipe", () => {
+  // Default select uses the custom Marwes appearance, not native browser chrome
   it("returns the select contract with Marwes classes by default", () => {
     const kit = createSelectRecipe({
       ariaLabel: "Country",

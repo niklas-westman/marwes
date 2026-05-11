@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests Accordion purpose/variant components — verifies that each
+ * purpose wrapper renders with the correct semantic defaults and metadata.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"

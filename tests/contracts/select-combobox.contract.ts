@@ -1,3 +1,8 @@
+/**
+ * Shared contract for Select combobox keyboard interactions —
+ * ArrowDown open, disabled option skipping, Home/End navigation, Enter selection,
+ * Escape close, and type-ahead character matching.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SelectComboboxContractOption = {
