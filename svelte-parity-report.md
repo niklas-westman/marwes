@@ -1,6 +1,6 @@
 # Svelte Adapter — Deep Parity Investigation Report
 
-**Date**: 2026-05-08  
+**Date**: 2026-05-08
 **Compared against**: React (`@marwes-ui/react`) and Vue (`@marwes-ui/vue`)
 
 ---

@@ -1,7 +1,7 @@
 # Svelte Adapter — Remaining Work
 
-Date: 2026-05-07  
-Package: `packages/svelte` / `@marwes-ui/svelte`  
+Date: 2026-05-07
+Package: `packages/svelte` / `@marwes-ui/svelte`
 Branch: `add/svelte` (60 commits)
 
 ---
