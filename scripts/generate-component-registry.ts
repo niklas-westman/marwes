@@ -44,6 +44,12 @@ function relativePath(path: string): string {
   return path.replace(`${repoRoot}/`, "")
 }
 
+function isGeneratedSourceArtifact(relativeRepoPath: string): boolean {
+  if (!/^packages\/[^/]+\/src\//.test(relativeRepoPath)) return false
+
+  return /\.(?:d\.ts|js|js\.map|d\.ts\.map)$/.test(relativeRepoPath)
+}
+
 function listFilesRecursively(relativeDirPath: string): string[] {
   if (!pathExists(relativeDirPath)) return []
 
@@ -60,7 +66,11 @@ function listFilesRecursively(relativeDirPath: string): string[] {
       }
 
       if (entry.isFile()) {
-        discoveredPaths.push(relativePath(absoluteEntryPath))
+        const discoveredPath = relativePath(absoluteEntryPath)
+
+        if (!isGeneratedSourceArtifact(discoveredPath)) {
+          discoveredPaths.push(discoveredPath)
+        }
       }
     }
   }

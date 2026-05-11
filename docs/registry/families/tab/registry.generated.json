@@ -17,17 +17,11 @@
       "AXE_ROADMAP.md#pr-4--new-shared-contracts-for-tabs-switch-accordion-tooltip-slider"
     ],
     "core": [
-      "packages/core/src/components/atoms/tab/index.d.ts",
       "packages/core/src/components/atoms/tab/index.ts",
-      "packages/core/src/components/atoms/tab/tab-a11y.d.ts",
       "packages/core/src/components/atoms/tab/tab-a11y.ts",
-      "packages/core/src/components/atoms/tab/tab-group-a11y.d.ts",
       "packages/core/src/components/atoms/tab/tab-group-a11y.ts",
-      "packages/core/src/components/atoms/tab/tab-group-types.d.ts",
       "packages/core/src/components/atoms/tab/tab-group-types.ts",
-      "packages/core/src/components/atoms/tab/tab-recipe.d.ts",
       "packages/core/src/components/atoms/tab/tab-recipe.ts",
-      "packages/core/src/components/atoms/tab/tab-types.d.ts",
       "packages/core/src/components/atoms/tab/tab-types.ts"
     ],
     "presets": [

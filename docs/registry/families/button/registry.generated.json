@@ -14,15 +14,10 @@
     "audits": ["docs/audits/README.md", "docs/audits/button-family-accessibility.md"],
     "roadmap": ["AXE_ROADMAP.md#button-semantics-cleanup"],
     "core": [
-      "packages/core/src/components/atoms/button/button-a11y.d.ts",
       "packages/core/src/components/atoms/button/button-a11y.ts",
-      "packages/core/src/components/atoms/button/button-loading.d.ts",
       "packages/core/src/components/atoms/button/button-loading.ts",
-      "packages/core/src/components/atoms/button/button-recipe.d.ts",
       "packages/core/src/components/atoms/button/button-recipe.ts",
-      "packages/core/src/components/atoms/button/button-types.d.ts",
       "packages/core/src/components/atoms/button/button-types.ts",
-      "packages/core/src/components/atoms/button/index.d.ts",
       "packages/core/src/components/atoms/button/index.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/button.css"],
