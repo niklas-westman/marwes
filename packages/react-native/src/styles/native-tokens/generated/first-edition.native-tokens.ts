@@ -1,69 +1,14 @@
 import type { BadgeVariant, ResolvedTheme } from "@marwes-ui/core"
 import type {
-  BadgeNativeTokens,
   CheckboxNativeSize,
-  CheckboxNativeTokens,
   ResolvedBadgeNativeTokens,
   ResolvedCheckboxNativeTokens,
 } from "../native-token-types"
 import { resolveNativeNumber, resolveNativeString } from "../resolve-native-token"
-
-export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
-  base: {
-    radius: { kind: "theme", path: "ui.radius", fallback: 4 },
-    paddingX: { kind: "static", value: 8 },
-    paddingY: { kind: "static", value: 2 },
-    gap: { kind: "static", value: 4 },
-    fontFamily: { kind: "theme", path: "font.primary", fallback: "System" },
-    fontSize: { kind: "static", value: 12 },
-    fontWeight: { kind: "static", value: "500" },
-    lineHeight: { kind: "static", value: 16 },
-  },
-  tones: {
-    neutral: {
-      surface: { kind: "theme", path: "color.surfaceSubtle", fallback: "#f5f5f5" },
-      border: { kind: "theme", path: "color.borderSubtle", fallback: "#d8d8d8" },
-      label: { kind: "theme", path: "color.textMuted", fallback: "#595959" },
-    },
-    info: {
-      surface: { kind: "theme", path: "color.status.info.background", fallback: "#eeeeff" },
-      border: { kind: "theme", path: "color.status.info.border", fallback: "#ababfd" },
-      label: { kind: "theme", path: "color.status.info.text", fallback: "#1b1d97" },
-    },
-    success: {
-      surface: { kind: "theme", path: "color.status.success.background", fallback: "#e6f4ed" },
-      border: { kind: "theme", path: "color.status.success.border", fallback: "#90caad" },
-      label: { kind: "theme", path: "color.status.success.text", fallback: "#006633" },
-    },
-    warning: {
-      surface: { kind: "theme", path: "color.status.warning.background", fallback: "#fff8e6" },
-      border: { kind: "theme", path: "color.status.warning.border", fallback: "#fde08a" },
-      label: { kind: "theme", path: "color.status.warning.text", fallback: "#b45309" },
-    },
-    error: {
-      surface: { kind: "theme", path: "color.status.error.background", fallback: "#ffe8eb" },
-      border: { kind: "theme", path: "color.status.error.border", fallback: "#ff8a95" },
-      label: { kind: "theme", path: "color.status.error.text", fallback: "#a8031f" },
-    },
-  },
-}
-
-export const firstEditionCheckboxNativeTokens: CheckboxNativeTokens = {
-  sizes: {
-    sm: { size: { kind: "static", value: 16 } },
-    md: { size: { kind: "static", value: 18 } },
-    lg: { size: { kind: "static", value: 22 } },
-  },
-  box: {
-    radiusMultiplier: { kind: "static", value: 0.4 },
-    border: { kind: "theme", path: "color.border", fallback: "#b8b8b8" },
-    background: { kind: "theme", path: "color.surface", fallback: "#ffffff" },
-    checkedBackground: { kind: "theme", path: "color.primary", fallback: "#111111" },
-    check: { kind: "theme", path: "color.textInverted", fallback: "#ffffff" },
-    disabledOpacity: { kind: "static", value: 0.3 },
-    invalidBorder: { kind: "theme", path: "color.danger", fallback: "#b00020" },
-  },
-}
+import {
+  firstEditionBadgeNativeTokens,
+  firstEditionCheckboxNativeTokens,
+} from "./first-edition.native-token-data"
 
 function resolveBadgeTone(
   variant: BadgeVariant,
@@ -123,6 +68,7 @@ export function resolveCheckboxNativeTokens(theme: ResolvedTheme): ResolvedCheck
       lg: resolveCheckboxSize("lg", theme),
     },
     box: {
+      radius: resolveNativeNumber(box.radius, theme),
       radiusMultiplier: resolveNativeNumber(box.radiusMultiplier, theme),
       border: resolveNativeString(box.border, theme),
       background: resolveNativeString(box.background, theme),

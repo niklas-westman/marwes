@@ -18,6 +18,8 @@
     "dev:playground:native": "pnpm --filter \"./apps/playground-react-native\" dev",
     "native-styles:generate": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-react-native-styles.ts",
     "native-styles:check": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-react-native-styles.ts --check",
+    "native-tokens:generate": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-react-native-tokens.ts",
+    "native-tokens:check": "pnpm --filter @marwes-ui/core exec tsx ../../scripts/generate-react-native-tokens.ts --check",
     "dev": "pnpm dev:packages & pnpm dev:playground",
     "build:packages": "pnpm -r --filter \"./packages/*\" build",
     "build:apps": "pnpm -r --filter \"./apps/*\" build",

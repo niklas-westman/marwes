@@ -21,10 +21,14 @@ describe("badge.css figma sync contract", () => {
   })
 
   it("matches the validated badge layout metrics", () => {
-    expect(css).toContain("font-family: var(--mw-font-primary, inherit);")
-    expect(css).toContain("gap: var(--mw-spacing-sp-4);")
+    expect(css).toContain("--mw-badge-gap: 4px;")
+    expect(css).toContain("--mw-badge-padding-x: 8px;")
+    expect(css).toContain("--mw-badge-padding-y: 2px;")
+    expect(css).toContain("--mw-badge-font-family: var(--mw-font-primary, inherit);")
+    expect(css).toContain("font-family: var(--mw-badge-font-family);")
+    expect(css).toContain("gap: var(--mw-badge-gap);")
     expect(css).toContain("box-shadow: inset 0 0 0 1px var(--mw-badge-border);")
-    expect(css).toContain("line-height: 16px;")
+    expect(css).toContain("line-height: var(--mw-badge-line-height);")
     expect(css).toContain("letter-spacing: 0;")
   })
 

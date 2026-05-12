@@ -144,28 +144,28 @@ const badgeRules: readonly StyleRule[] = [
         prop: "alignItems",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-4",
+        kind: "static",
+        value: 4,
         prop: "gap",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-2",
+        kind: "static",
+        value: 2,
         prop: "paddingTop",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-8",
+        kind: "static",
+        value: 8,
         prop: "paddingRight",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-2",
+        kind: "static",
+        value: 2,
         prop: "paddingBottom",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-8",
+        kind: "static",
+        value: 8,
         prop: "paddingLeft",
       },
       {

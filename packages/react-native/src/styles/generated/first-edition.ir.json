@@ -29,28 +29,28 @@
               "prop": "alignItems"
             },
             {
-              "kind": "token",
-              "token": "--mw-spacing-sp-4",
+              "kind": "static",
+              "value": 4,
               "prop": "gap"
             },
             {
-              "kind": "token",
-              "token": "--mw-spacing-sp-2",
+              "kind": "static",
+              "value": 2,
               "prop": "paddingTop"
             },
             {
-              "kind": "token",
-              "token": "--mw-spacing-sp-8",
+              "kind": "static",
+              "value": 8,
               "prop": "paddingRight"
             },
             {
-              "kind": "token",
-              "token": "--mw-spacing-sp-2",
+              "kind": "static",
+              "value": 2,
               "prop": "paddingBottom"
             },
             {
-              "kind": "token",
-              "token": "--mw-spacing-sp-8",
+              "kind": "static",
+              "value": 8,
               "prop": "paddingLeft"
             },
             {
@@ -603,7 +603,7 @@
           "severity": "info",
           "message": "Ignored line-height: RN Text uses default line height from fontSize.",
           "selector": ".mw-badge",
-          "declaration": "line-height: 16px"
+          "declaration": "line-height: var(--mw-badge-line-height)"
         },
         {
           "code": "RN_IGNORED",

@@ -19,6 +19,9 @@ describe("firstEdition checkbox css contract", () => {
     const css = readFileSync(checkboxCssPath, "utf8")
 
     expect(css).toContain("--mw-checkbox-check: var(--mw-color-primary-label);")
+    expect(css).toContain("--mw-checkbox-radius-multiplier: 0.4;")
+    expect(css).toContain("--mw-checkbox-disabled-opacity: 0.3;")
+    expect(css).toContain("--mw-checkbox-invalid-border: var(--mw-color-danger-base);")
   })
 
   it("keeps keyboard focus visible for checkbox field rows", () => {

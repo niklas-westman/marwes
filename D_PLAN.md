@@ -300,11 +300,11 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### D. Optional Token Generator
 
-- [ ] Add `scripts/generate-react-native-tokens.ts` only if authored token output proves useful.
-- [ ] Generator may read CSS variables, but not layout declarations.
-- [ ] Generator must fail on unsupported token references.
-- [ ] Generator output must be deterministic.
-- [ ] Add a check command if generator exists.
+- [x] Add `scripts/generate-react-native-tokens.ts` only if authored token output proves useful.
+- [x] Generator may read CSS variables, but not layout declarations.
+- [x] Generator must fail on unsupported token references.
+- [x] Generator output must be deterministic.
+- [x] Add a check command if generator exists.
 
 ### E. Badge Component
 
@@ -439,11 +439,13 @@ Third slice:
 
 ## 15. My Readiness Assessment
 
-First and second implementation slices are complete for Badge and Checkbox.
+First and second implementation slices are complete for Badge and Checkbox. The first extractor slice
+is also complete: Badge and Checkbox token data now comes from explicit variables in
+`packages/presets/src/firstEdition`.
 
-The authored token output still looks elegant enough to justify the third slice. Checkbox rendered
-checked, indeterminate, invalid, and disabled states natively from the same small token model, so Path
-D currently stays ahead of A + G as the primary architecture candidate.
+The preset-sourced token output still looks elegant enough to justify the third slice. Checkbox
+rendered checked, indeterminate, invalid, and disabled states natively from the same small token
+model, so Path D currently stays ahead of A + G as the primary architecture candidate.
 
 The next readiness gate is Spinner: if Spinner can render motion natively without CSS keyframe
 compiler support, D has proved both hard cases that A + G would otherwise split into special paths.

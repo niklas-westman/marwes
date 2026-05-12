@@ -40,7 +40,7 @@ export function Checkbox({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    borderRadius: Math.max(2, theme.ui.radius * tokens.box.radiusMultiplier),
+    borderRadius: Math.max(2, tokens.box.radius * tokens.box.radiusMultiplier),
     borderColor: invalid ? tokens.box.invalidBorder : active ? checkedSurface : tokens.box.border,
     backgroundColor: active ? checkedSurface : tokens.box.background,
     opacity: disabled ? tokens.box.disabledOpacity : 1,

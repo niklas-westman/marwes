@@ -31,6 +31,7 @@ export type CheckboxNativeSize = NonNullable<CheckboxProps["size"]>
 export type CheckboxNativeTokens = {
   sizes: Record<CheckboxNativeSize, { size: NativeTokenRef }>
   box: {
+    radius: NativeTokenRef
     radiusMultiplier: NativeTokenRef
     border: NativeTokenRef
     background: NativeTokenRef
@@ -65,6 +66,7 @@ export type ResolvedBadgeNativeTokens = {
 export type ResolvedCheckboxNativeTokens = {
   sizes: Record<CheckboxNativeSize, { size: number }>
   box: {
+    radius: number
     radiusMultiplier: number
     border: string
     background: string
