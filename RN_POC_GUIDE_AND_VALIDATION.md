@@ -10,6 +10,7 @@ All React Native POC branches were created from the shared implementation baseli
 - POC start commit: `16a5621`
 - Baseline worktree: `/Users/niklaswestman/Documents/extras-projects/marwes-project-folder/marwes`
 - Full readiness report: `RN_ARCHITECTURE_READINESS_VALIDATION.md`
+- D implementation plan: `D_PLAN.md`
 
 | Path | Branch | Worktree | Purpose | Current status |
 |---|---|---|---|---|
