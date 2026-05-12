@@ -10,7 +10,7 @@ import {
   type ViewStyle,
 } from "react-native"
 import { useMarwesTheme } from "../../provider/marwes-native-context"
-import { resolveBadgeStyles } from "../../styles/generated/first-edition"
+import { resolveBadgeNativeTokens } from "../../styles/native-tokens/generated/first-edition.native-tokens"
 
 export type NativeBadgeProps = BadgeOptions & {
   children?: TextProps["children"]
@@ -26,31 +26,44 @@ export function Badge({
   testID,
   ...options
 }: NativeBadgeProps) {
-  const { theme, mode } = useMarwesTheme()
+  const { theme } = useMarwesTheme()
   const kit = createBadgeRecipe(options)
 
   const resolvedVariant = options.variant ?? "neutral"
 
-  const styles = useMemo(
-    () =>
-      resolveBadgeStyles(
-        {
-          variant: resolvedVariant,
-          mode,
-        },
-        theme,
-      ),
-    [resolvedVariant, mode, theme],
-  )
+  const tokens = useMemo(() => resolveBadgeNativeTokens(theme), [theme])
+  const base = tokens.base
+  const tone = tokens.tones[resolvedVariant]
+
+  const rootStyle: ViewStyle = {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: base.gap,
+    paddingHorizontal: base.paddingX,
+    paddingVertical: base.paddingY,
+    borderWidth: 1,
+    borderColor: tone.border,
+    borderRadius: base.radius,
+    backgroundColor: tone.surface,
+  }
+
+  const textStyle: TextStyle = {
+    color: tone.label,
+    fontFamily: base.fontFamily,
+    fontSize: base.fontSize,
+    fontWeight: base.fontWeight as TextStyle["fontWeight"],
+    lineHeight: base.lineHeight,
+    letterSpacing: 0,
+  }
 
   return (
     <View
       accessibilityRole="text"
       accessibilityLabel={kit.a11y.ariaLabel}
       testID={testID}
-      style={[styles.root, userStyle]}
+      style={[rootStyle, userStyle]}
     >
-      <Text style={[styles.label, userLabelStyle]}>{children}</Text>
+      <Text style={[textStyle, userLabelStyle]}>{children}</Text>
     </View>
   )
 }

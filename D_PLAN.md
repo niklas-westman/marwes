@@ -273,30 +273,30 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### A. Prep
 
-- [ ] Switch to `/Users/niklaswestman/Documents/extras-projects/marwes-project-folder/marwes-rn-d-token`.
-- [ ] Confirm branch is `rn-poc/d-token-compiler`.
-- [ ] Copy or cherry-pick `D_PLAN.md` into the D worktree.
-- [ ] Fill `RN_POC_EVIDENCE.md` branch identity fields.
-- [ ] Run baseline validation:
-  - [ ] `pnpm --filter @marwes-ui/react-native typecheck`
-  - [ ] `pnpm native-styles:check`
+- [x] Switch to `/Users/niklaswestman/Documents/extras-projects/marwes-project-folder/marwes-rn-d-token`.
+- [x] Confirm branch is `rn-poc/d-token-compiler`.
+- [x] Copy or cherry-pick `D_PLAN.md` into the D worktree.
+- [x] Fill `RN_POC_EVIDENCE.md` branch identity fields.
+- [x] Run baseline validation:
+  - [x] `pnpm --filter @marwes-ui/react-native typecheck`
+  - [x] `pnpm native-styles:check`
 
 ### B. Token Schema
 
-- [ ] Add `native-token-types.ts`.
-- [ ] Add `resolve-native-token.ts`.
+- [x] Add `native-token-types.ts`.
+- [x] Add `resolve-native-token.ts`.
 - [ ] Define family-scoped token types for Badge, Checkbox, Spinner.
-- [ ] Keep token value model limited to static values and theme refs.
-- [ ] Add type-level protection against arbitrary style props.
+- [x] Keep token value model limited to static values and theme refs.
+- [x] Add type-level protection against arbitrary style props.
 
 ### C. Generated/Authored Token Output
 
-- [ ] Add `first-edition.native-tokens.ts`.
-- [ ] Encode Badge base tokens and tones.
+- [x] Add `first-edition.native-tokens.ts`.
+- [x] Encode Badge base tokens and tones.
 - [ ] Encode Checkbox sizes and state colors.
 - [ ] Encode Spinner size, color, and motion tokens.
-- [ ] Keep output readable by a human.
-- [ ] Record generated/authored token line count in `RN_POC_EVIDENCE.md`.
+- [x] Keep output readable by a human.
+- [x] Record generated/authored token line count in `RN_POC_EVIDENCE.md`.
 
 ### D. Optional Token Generator
 
@@ -308,12 +308,12 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### E. Badge Component
 
-- [ ] Refactor RN Badge to consume resolved badge tokens instead of `resolveBadgeStyles()`.
-- [ ] Preserve `createBadgeRecipe()`.
-- [ ] Preserve `MarwesNativeProvider` and `useMarwesTheme()`.
-- [ ] Support `neutral`, `info`, `success`, `warning`, `error`.
-- [ ] Support light/dark through `ResolvedTheme`.
-- [ ] Keep component readable without inspecting generated CSS resolver output.
+- [x] Refactor RN Badge to consume resolved badge tokens instead of `resolveBadgeStyles()`.
+- [x] Preserve `createBadgeRecipe()`.
+- [x] Preserve `MarwesNativeProvider` and `useMarwesTheme()`.
+- [x] Support `neutral`, `info`, `success`, `warning`, `error`.
+- [x] Support light/dark through `ResolvedTheme`.
+- [x] Keep component readable without inspecting generated CSS resolver output.
 
 ### F. Checkbox Component
 
@@ -347,22 +347,22 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### I. Validation
 
-- [ ] `pnpm --filter @marwes-ui/react-native typecheck`
-- [ ] `pnpm native-styles:check`
+- [x] `pnpm --filter @marwes-ui/react-native typecheck`
+- [x] `pnpm native-styles:check`
 - [ ] `pnpm exec biome check apps/playground-react-native packages/react-native scripts/generate-react-native-tokens.ts`
 - [ ] Expo playground manual inspection.
-- [ ] Fill all validation rows in `RN_POC_EVIDENCE.md`.
+- [x] Fill all validation rows in `RN_POC_EVIDENCE.md`.
 
 ### J. Evidence
 
-- [ ] Count authored source lines.
-- [ ] Count generated/authored token lines.
-- [ ] Count schema/config files.
-- [ ] Count new abstractions.
-- [ ] Record dependency delta.
-- [ ] Record next-component cost.
-- [ ] Compare D against A + G in plain language.
-- [ ] Mark recommendation: keep, reject, or continue.
+- [x] Count authored source lines.
+- [x] Count generated/authored token lines.
+- [x] Count schema/config files.
+- [x] Count new abstractions.
+- [x] Record dependency delta.
+- [x] Record next-component cost.
+- [x] Compare D against A + G in plain language.
+- [x] Mark recommendation: keep, reject, or continue.
 
 ## 10. Success Criteria
 
@@ -439,7 +439,8 @@ Third slice:
 
 ## 15. My Readiness Assessment
 
-This plan is ready for POC D implementation once it is copied into the D worktree.
+First implementation slice is complete for Badge.
 
-The plan deliberately starts with authored token output before building a generator. That is important:
-we need to prove the token contract is elegant before we automate token extraction.
+The authored token output looks elegant enough to justify the second slice. The next readiness gate is
+Checkbox: if Checkbox can render checked, indeterminate, invalid, and disabled states natively from
+the same small token model, Path D should stay ahead of A + G as the primary architecture candidate.
