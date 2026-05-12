@@ -1,4 +1,4 @@
-import type { BadgeVariant } from "@marwes-ui/core"
+import type { BadgeVariant, CheckboxProps } from "@marwes-ui/core"
 
 export type NativeTokenValue = string | number
 
@@ -26,6 +26,21 @@ export type BadgeNativeTokens = {
   tones: Record<BadgeVariant, BadgeNativeToneTokens>
 }
 
+export type CheckboxNativeSize = NonNullable<CheckboxProps["size"]>
+
+export type CheckboxNativeTokens = {
+  sizes: Record<CheckboxNativeSize, { size: NativeTokenRef }>
+  box: {
+    radiusMultiplier: NativeTokenRef
+    border: NativeTokenRef
+    background: NativeTokenRef
+    checkedBackground: NativeTokenRef
+    check: NativeTokenRef
+    disabledOpacity: NativeTokenRef
+    invalidBorder: NativeTokenRef
+  }
+}
+
 export type ResolvedBadgeNativeTokens = {
   base: {
     radius: number
@@ -45,4 +60,17 @@ export type ResolvedBadgeNativeTokens = {
       label: string
     }
   >
+}
+
+export type ResolvedCheckboxNativeTokens = {
+  sizes: Record<CheckboxNativeSize, { size: number }>
+  box: {
+    radiusMultiplier: number
+    border: string
+    background: string
+    checkedBackground: string
+    check: string
+    disabledOpacity: number
+    invalidBorder: string
+  }
 }

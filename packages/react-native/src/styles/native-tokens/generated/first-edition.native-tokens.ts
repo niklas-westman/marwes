@@ -1,5 +1,11 @@
 import type { BadgeVariant, ResolvedTheme } from "@marwes-ui/core"
-import type { BadgeNativeTokens, ResolvedBadgeNativeTokens } from "../native-token-types"
+import type {
+  BadgeNativeTokens,
+  CheckboxNativeSize,
+  CheckboxNativeTokens,
+  ResolvedBadgeNativeTokens,
+  ResolvedCheckboxNativeTokens,
+} from "../native-token-types"
 import { resolveNativeNumber, resolveNativeString } from "../resolve-native-token"
 
 export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
@@ -42,6 +48,23 @@ export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
   },
 }
 
+export const firstEditionCheckboxNativeTokens: CheckboxNativeTokens = {
+  sizes: {
+    sm: { size: { kind: "static", value: 16 } },
+    md: { size: { kind: "static", value: 18 } },
+    lg: { size: { kind: "static", value: 22 } },
+  },
+  box: {
+    radiusMultiplier: { kind: "static", value: 0.4 },
+    border: { kind: "theme", path: "color.border", fallback: "#b8b8b8" },
+    background: { kind: "theme", path: "color.surface", fallback: "#ffffff" },
+    checkedBackground: { kind: "theme", path: "color.primary", fallback: "#111111" },
+    check: { kind: "theme", path: "color.textInverted", fallback: "#ffffff" },
+    disabledOpacity: { kind: "static", value: 0.3 },
+    invalidBorder: { kind: "theme", path: "color.danger", fallback: "#b00020" },
+  },
+}
+
 function resolveBadgeTone(
   variant: BadgeVariant,
   theme: ResolvedTheme,
@@ -75,6 +98,38 @@ export function resolveBadgeNativeTokens(theme: ResolvedTheme): ResolvedBadgeNat
       success: resolveBadgeTone("success", theme),
       warning: resolveBadgeTone("warning", theme),
       error: resolveBadgeTone("error", theme),
+    },
+  }
+}
+
+function resolveCheckboxSize(
+  size: CheckboxNativeSize,
+  theme: ResolvedTheme,
+): ResolvedCheckboxNativeTokens["sizes"][CheckboxNativeSize] {
+  const token = firstEditionCheckboxNativeTokens.sizes[size]
+
+  return {
+    size: resolveNativeNumber(token.size, theme),
+  }
+}
+
+export function resolveCheckboxNativeTokens(theme: ResolvedTheme): ResolvedCheckboxNativeTokens {
+  const { box } = firstEditionCheckboxNativeTokens
+
+  return {
+    sizes: {
+      sm: resolveCheckboxSize("sm", theme),
+      md: resolveCheckboxSize("md", theme),
+      lg: resolveCheckboxSize("lg", theme),
+    },
+    box: {
+      radiusMultiplier: resolveNativeNumber(box.radiusMultiplier, theme),
+      border: resolveNativeString(box.border, theme),
+      background: resolveNativeString(box.background, theme),
+      checkedBackground: resolveNativeString(box.checkedBackground, theme),
+      check: resolveNativeString(box.check, theme),
+      disabledOpacity: resolveNativeNumber(box.disabledOpacity, theme),
+      invalidBorder: resolveNativeString(box.invalidBorder, theme),
     },
   }
 }

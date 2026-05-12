@@ -293,7 +293,7 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 - [x] Add `first-edition.native-tokens.ts`.
 - [x] Encode Badge base tokens and tones.
-- [ ] Encode Checkbox sizes and state colors.
+- [x] Encode Checkbox sizes and state colors.
 - [ ] Encode Spinner size, color, and motion tokens.
 - [x] Keep output readable by a human.
 - [x] Record generated/authored token line count in `RN_POC_EVIDENCE.md`.
@@ -317,15 +317,15 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### F. Checkbox Component
 
-- [ ] Add RN Checkbox component.
-- [ ] Use core `checkboxRecipe()` or current exported checkbox recipe API.
-- [ ] Resolve size and state visuals from Checkbox native tokens.
-- [ ] Render checked mark natively.
-- [ ] Render indeterminate mark natively.
-- [ ] Support disabled state.
-- [ ] Support invalid state.
-- [ ] Map native accessibility props deliberately.
-- [ ] Do not use pseudo-element or CSS-mask concepts in RN.
+- [x] Add RN Checkbox component.
+- [x] Use core `checkboxRecipe()` or current exported checkbox recipe API.
+- [x] Resolve size and state visuals from Checkbox native tokens.
+- [x] Render checked mark natively.
+- [x] Render indeterminate mark natively.
+- [x] Support disabled state.
+- [x] Support invalid state.
+- [x] Map native accessibility props deliberately.
+- [x] Do not use pseudo-element or CSS-mask concepts in RN.
 
 ### G. Spinner Component
 
@@ -339,17 +339,17 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### H. Playground
 
-- [ ] Add a D POC section in `apps/playground-react-native/App.tsx`.
+- [x] Add a D POC section in `apps/playground-react-native/App.tsx`.
 - [ ] Render Badge variants.
-- [ ] Render Checkbox unchecked, checked, mixed, disabled, invalid.
+- [x] Render Checkbox unchecked, checked, mixed, disabled, invalid.
 - [ ] Render Spinner at least two variants.
-- [ ] Render light and dark theme states.
+- [x] Render light and dark theme states.
 
 ### I. Validation
 
 - [x] `pnpm --filter @marwes-ui/react-native typecheck`
 - [x] `pnpm native-styles:check`
-- [ ] `pnpm exec biome check apps/playground-react-native packages/react-native scripts/generate-react-native-tokens.ts`
+- [x] Scoped Biome check for touched RN, token, and playground files.
 - [ ] Expo playground manual inspection.
 - [x] Fill all validation rows in `RN_POC_EVIDENCE.md`.
 
@@ -369,12 +369,12 @@ Stop if extraction starts becoming a CSS layout compiler.
 D is successful if:
 
 - [ ] Badge is simpler to reason about than the generated style resolver path.
-- [ ] Checkbox does not require compiler support for pseudo-elements.
+- [x] Checkbox does not require compiler support for pseudo-elements.
 - [ ] Spinner does not require compiler support for CSS animation/keyframes.
 - [ ] Token schema stays family-scoped and understandable.
 - [ ] Generated/authored token output is much smaller than current full style resolver output.
 - [ ] Components remain native and readable.
-- [ ] Typecheck passes.
+- [x] Typecheck passes.
 - [ ] Evidence clearly explains next-component cost.
 
 ## 11. Failure Criteria
@@ -439,8 +439,11 @@ Third slice:
 
 ## 15. My Readiness Assessment
 
-First implementation slice is complete for Badge.
+First and second implementation slices are complete for Badge and Checkbox.
 
-The authored token output looks elegant enough to justify the second slice. The next readiness gate is
-Checkbox: if Checkbox can render checked, indeterminate, invalid, and disabled states natively from
-the same small token model, Path D should stay ahead of A + G as the primary architecture candidate.
+The authored token output still looks elegant enough to justify the third slice. Checkbox rendered
+checked, indeterminate, invalid, and disabled states natively from the same small token model, so Path
+D currently stays ahead of A + G as the primary architecture candidate.
+
+The next readiness gate is Spinner: if Spinner can render motion natively without CSS keyframe
+compiler support, D has proved both hard cases that A + G would otherwise split into special paths.

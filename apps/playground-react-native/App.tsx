@@ -1,6 +1,7 @@
 import {
   Badge,
   Button,
+  Checkbox,
   Divider,
   MarwesNativeProvider,
   useMarwesTheme,
@@ -105,6 +106,40 @@ function ComponentDemo() {
 
         <Divider size="md" />
 
+        {/* ── Checkbox D POC ── */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.color.text }]}>
+            Checkbox — Native Token POC
+          </Text>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Unchecked" />
+            <Text style={[styles.label, { color: theme.color.text }]}>Unchecked</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Checked" defaultChecked />
+            <Text style={[styles.label, { color: theme.color.text }]}>Checked</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Mixed" indeterminate />
+            <Text style={[styles.label, { color: theme.color.text }]}>Mixed</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Invalid" invalid defaultChecked />
+            <Text style={[styles.label, { color: theme.color.text }]}>Invalid</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Disabled" disabled defaultChecked />
+            <Text style={[styles.label, { color: theme.color.textMuted }]}>Disabled</Text>
+          </View>
+          <View style={styles.row}>
+            <Checkbox ariaLabel="Small checkbox" size="sm" defaultChecked />
+            <Checkbox ariaLabel="Medium checkbox" size="md" defaultChecked />
+            <Checkbox ariaLabel="Large checkbox" size="lg" defaultChecked />
+          </View>
+        </View>
+
+        <Divider size="md" />
+
         {/* ── Divider ── */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.color.text }]}>Divider — Sizes</Text>
@@ -183,6 +218,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
+  },
+  checkboxRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
   },
   verticalDividerRow: {
     flexDirection: "row",

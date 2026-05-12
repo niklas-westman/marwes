@@ -11,6 +11,9 @@ export type { NativeButtonProps } from "./components/button"
 export { Badge } from "./components/badge"
 export type { NativeBadgeProps } from "./components/badge"
 
+export { Checkbox } from "./components/checkbox"
+export type { NativeCheckboxProps } from "./components/checkbox"
+
 export { Divider } from "./components/divider"
 export type { NativeDividerProps } from "./components/divider"
 
