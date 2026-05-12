@@ -4,11 +4,12 @@ Created: 2026-05-11
 
 ## 1. Where The POCs Live
 
-All React Native POC branches start from the shared baseline commit:
+All React Native POC branches were created from the shared implementation baseline commit:
 
 - Baseline branch: `rn-poc/baseline`
-- Baseline commit: `16a5621`
+- POC start commit: `16a5621`
 - Baseline worktree: `/Users/niklaswestman/Documents/extras-projects/marwes-project-folder/marwes`
+- Full readiness report: `RN_ARCHITECTURE_READINESS_VALIDATION.md`
 
 | Path | Branch | Worktree | Purpose | Current status |
 |---|---|---|---|---|
