@@ -22,6 +22,9 @@
   --mw-avatar-border-color: transparent;
   --mw-avatar-label: var(--mw-color-primary-label, #ffffff);
   --mw-avatar-image-fallback: var(--mw-color-primary-base, #2f31fc);
+  --mw-avatar-font-family: var(--mw-font-primary, inherit);
+  --mw-avatar-font-weight: 500;
+  --mw-avatar-radius: 9999px;
 
   position: relative;
   display: inline-flex;
@@ -33,12 +36,12 @@
   overflow: hidden;
   box-sizing: border-box;
   border: var(--mw-avatar-border-width) solid var(--mw-avatar-border-color);
-  border-radius: 9999px;
+  border-radius: var(--mw-avatar-radius);
   background: var(--mw-avatar-surface);
   color: var(--mw-avatar-label);
-  font-family: var(--mw-font-primary, inherit);
+  font-family: var(--mw-avatar-font-family);
   font-size: var(--mw-avatar-font-size);
-  font-weight: 500;
+  font-weight: var(--mw-avatar-font-weight);
   line-height: var(--mw-avatar-line-height);
   letter-spacing: var(--mw-avatar-letter-spacing);
 }

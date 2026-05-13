@@ -10,6 +10,8 @@
 
 .mw-divider {
   --mw-divider-color: color-mix(in srgb, var(--mw-color-text, #141414) 20%, transparent);
+  --mw-divider-native-color: var(--mw-color-border-subtle);
+  --mw-divider-line-thickness: 1px;
 
   border: 0;
   margin: 0;
@@ -34,4 +36,32 @@
   block-size: 100%;
   padding-inline: calc((var(--mw-divider-spacing, 1px) - var(--mw-divider-line-thickness, 1px)) / 2);
   vertical-align: middle;
+}
+
+.mw-divider--xxs {
+  --mw-divider-spacing: 1px;
+}
+
+.mw-divider--xs {
+  --mw-divider-spacing: 8px;
+}
+
+.mw-divider--sm {
+  --mw-divider-spacing: 16px;
+}
+
+.mw-divider--md {
+  --mw-divider-spacing: 32px;
+}
+
+.mw-divider--lg {
+  --mw-divider-spacing: 48px;
+}
+
+.mw-divider--xl {
+  --mw-divider-spacing: 64px;
+}
+
+.mw-divider--xxl {
+  --mw-divider-spacing: 80px;
 }

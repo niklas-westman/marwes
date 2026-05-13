@@ -17,17 +17,24 @@
 
 /* BASE */
 .mw-btn {
+  --mw-btn-gap: 6px;
+  --mw-btn-radius: var(--mw-ui-radius);
+  --mw-btn-font-family: var(--mw-font-primary, inherit);
+  --mw-btn-font-weight: 500;
+  --mw-btn-disabled-opacity-light: 0.2;
+  --mw-btn-disabled-opacity-dark: 0.4;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px; /* off-scale — icon-to-label spacing */
+  gap: var(--mw-btn-gap); /* off-scale — icon-to-label spacing */
   height: var(--mw-density-height);
   padding: 0 var(--mw-density-padding-x);
-  border-radius: var(--mw-ui-radius);
+  border-radius: var(--mw-btn-radius);
   border: 1px solid transparent;
-  font-family: var(--mw-font-primary, inherit);
+  font-family: var(--mw-btn-font-family);
   font-size: var(--mw-density-font-size);
-  font-weight: 500;
+  font-weight: var(--mw-btn-font-weight);
   line-height: 0;
   cursor: pointer;
   user-select: none;
@@ -42,9 +49,14 @@
 
 /* PRIMARY - Solid filled button */
 .mw-btn--primary {
-  background: var(--mw-color-primary-base);
+  --mw-btn-surface: var(--mw-color-primary-base);
+  --mw-btn-label: var(--mw-color-primary-label);
+  --mw-btn-border: var(--mw-color-primary-base);
+  --mw-btn-pressed-opacity: 0.95;
+
+  background: var(--mw-btn-surface);
   color: var(--mw-color-primary-label);
-  border-color: var(--mw-color-primary-base);
+  border-color: var(--mw-btn-border);
 }
 
 .mw-btn--primary:hover:not(:disabled) {
@@ -57,9 +69,14 @@
 
 /* SECONDARY - Outlined button */
 .mw-btn--secondary {
-  background: transparent;
-  color: var(--mw-color-secondary-label);
-  border-color: var(--mw-color-secondary-border);
+  --mw-btn-surface: transparent;
+  --mw-btn-label: var(--mw-color-secondary-label);
+  --mw-btn-border: var(--mw-color-secondary-border);
+  --mw-btn-pressed-surface: var(--mw-color-secondary-pressed);
+
+  background: var(--mw-btn-surface);
+  color: var(--mw-btn-label);
+  border-color: var(--mw-btn-border);
 }
 
 .mw-btn--secondary:hover:not(:disabled) {
@@ -72,7 +89,12 @@
 
 /* NEUTRAL - Quiet outlined button for cancel/close/filter-style actions */
 .mw-btn--neutral {
-  background: transparent;
+  --mw-btn-surface: transparent;
+  --mw-btn-label: var(--mw-color-text);
+  --mw-btn-border: var(--mw-color-border-subtle);
+  --mw-btn-pressed-surface: var(--mw-color-surface-subtle);
+
+  background: var(--mw-btn-surface);
   color: var(--mw-color-text);
   border-color: color-mix(in srgb, var(--mw-color-text) 10%, transparent);
 }
@@ -88,9 +110,14 @@
 /* TEXT - Minimal text-only button, content-hugging (no fixed height).
    Uses the same 6px icon-to-label spacing as every other button. */
 .mw-btn.mw-btn--text {
-  background: transparent;
+  --mw-btn-surface: transparent;
+  --mw-btn-label: var(--mw-color-text);
+  --mw-btn-border: transparent;
+  --mw-btn-pressed-surface: var(--mw-color-surface-subtle);
+
+  background: var(--mw-btn-surface);
   color: var(--mw-color-text);
-  border-color: transparent;
+  border-color: var(--mw-btn-border);
   height: auto;
   padding: 0.25rem 0.5rem;
   line-height: 1;
@@ -113,24 +140,44 @@
 
 /* SIZES */
 .mw-btn--xs {
+  --mw-btn-height: 30px;
+  --mw-btn-padding-x: 10px;
+  --mw-btn-padding-y: 0px;
+  --mw-btn-font-size: 12px;
+
   height: 30px;
   padding: 0 10px; /* off-scale — no token */
   font-size: 12px;
 }
 
 .mw-btn--sm {
+  --mw-btn-height: 34px;
+  --mw-btn-padding-x: 12px;
+  --mw-btn-padding-y: 0px;
+  --mw-btn-font-size: 13px;
+
   height: 34px;
   padding: 0 12px; /* off-scale — no token */
   font-size: 13px;
 }
 
 .mw-btn--md {
+  --mw-btn-height: 40px;
+  --mw-btn-padding-x: 16px;
+  --mw-btn-padding-y: 12px;
+  --mw-btn-font-size: 14px;
+
   height: 40px;
   padding: 12px 16px; /* off-scale — no token */
   font-size: 14px;
 }
 
 .mw-btn--lg {
+  --mw-btn-height: 46px;
+  --mw-btn-padding-x: 16px;
+  --mw-btn-padding-y: 0px;
+  --mw-btn-font-size: 15px;
+
   height: 46px;
   padding: 0 16px;
   font-size: 15px;
@@ -138,13 +185,13 @@
 
 /* DISABLED STATE - Figma spec: opacity 20% (#000000 20% for light mode) */
 .mw-btn:disabled {
-  opacity: 0.2;
+  opacity: var(--mw-btn-disabled-opacity-light);
   cursor: not-allowed;
 }
 
 /* Dark mode disabled state: #FFFFFF 40% (middle of 20-60% range from Figma) */
 .mw-theme--dark .mw-btn:disabled {
-  opacity: 0.4;
+  opacity: var(--mw-btn-disabled-opacity-dark);
 }
 
 /* ERROR STATE - Figma node: 1:1072 includes error state */
@@ -172,9 +219,14 @@
 
 /* SUCCESS - Positive confirmation actions */
 .mw-btn--success {
-  background: var(--mw-color-success-base);
-  color: var(--mw-color-success-label);
-  border-color: var(--mw-color-success-base);
+  --mw-btn-surface: var(--mw-color-success-base);
+  --mw-btn-label: var(--mw-color-success-label);
+  --mw-btn-border: var(--mw-color-success-base);
+  --mw-btn-pressed-opacity: 0.95;
+
+  background: var(--mw-btn-surface);
+  color: var(--mw-btn-label);
+  border-color: var(--mw-btn-border);
 }
 
 .mw-btn--success:hover:not(:disabled) {

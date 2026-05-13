@@ -51,6 +51,10 @@ jobs:
       - name: Repo Map integrity
         run: pnpm check:repo-map
 
+      # Ensure generated React Native token data stays committed and current
+      - name: Native token generation
+        run: pnpm native-tokens:check
+
       # Run TypeScript type checking across all workspace packages
       - name: Typecheck
         run: pnpm -r typecheck

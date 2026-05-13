@@ -144,28 +144,28 @@ const badgeRules: readonly StyleRule[] = [
         prop: "alignItems",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-4",
+        kind: "static",
+        value: 4,
         prop: "gap",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-2",
+        kind: "static",
+        value: 2,
         prop: "paddingTop",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-8",
+        kind: "static",
+        value: 8,
         prop: "paddingRight",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-2",
+        kind: "static",
+        value: 2,
         prop: "paddingBottom",
       },
       {
-        kind: "token",
-        token: "--mw-spacing-sp-8",
+        kind: "static",
+        value: 8,
         prop: "paddingLeft",
       },
       {
@@ -791,8 +791,8 @@ const buttonRules: readonly StyleRule[] = [
         prop: "justifyContent",
       },
       {
-        kind: "static",
-        value: 6,
+        kind: "token",
+        token: "--mw-btn-gap",
         prop: "gap",
       },
       {
@@ -822,7 +822,7 @@ const buttonRules: readonly StyleRule[] = [
       },
       {
         kind: "token",
-        token: "--mw-ui-radius",
+        token: "--mw-btn-radius",
         prop: "borderRadius",
       },
       {
@@ -852,7 +852,7 @@ const buttonRules: readonly StyleRule[] = [
     declarations: [
       {
         kind: "token",
-        token: "--mw-font-primary",
+        token: "--mw-btn-font-family",
         prop: "fontFamily",
       },
       {
@@ -861,8 +861,8 @@ const buttonRules: readonly StyleRule[] = [
         prop: "fontSize",
       },
       {
-        kind: "static",
-        value: 500,
+        kind: "token",
+        token: "--mw-btn-font-weight",
         prop: "fontWeight",
       },
     ],
@@ -878,12 +878,12 @@ const buttonRules: readonly StyleRule[] = [
     declarations: [
       {
         kind: "token",
-        token: "--mw-color-primary-base",
+        token: "--mw-btn-surface",
         prop: "backgroundColor",
       },
       {
         kind: "token",
-        token: "--mw-color-primary-base",
+        token: "--mw-btn-border",
         prop: "borderColor",
       },
     ],
@@ -948,13 +948,13 @@ const buttonRules: readonly StyleRule[] = [
     variant: "secondary",
     declarations: [
       {
-        kind: "static",
-        value: "transparent",
+        kind: "token",
+        token: "--mw-btn-surface",
         prop: "backgroundColor",
       },
       {
         kind: "token",
-        token: "--mw-color-secondary-border",
+        token: "--mw-btn-border",
         prop: "borderColor",
       },
     ],
@@ -970,7 +970,7 @@ const buttonRules: readonly StyleRule[] = [
     declarations: [
       {
         kind: "token",
-        token: "--mw-color-secondary-label",
+        token: "--mw-btn-label",
         prop: "color",
       },
     ],
@@ -1019,8 +1019,8 @@ const buttonRules: readonly StyleRule[] = [
     variant: "neutral",
     declarations: [
       {
-        kind: "static",
-        value: "transparent",
+        kind: "token",
+        token: "--mw-btn-surface",
         prop: "backgroundColor",
       },
       {
@@ -1093,13 +1093,13 @@ const buttonRules: readonly StyleRule[] = [
     variant: "text",
     declarations: [
       {
-        kind: "static",
-        value: "transparent",
+        kind: "token",
+        token: "--mw-btn-surface",
         prop: "backgroundColor",
       },
       {
-        kind: "static",
-        value: "transparent",
+        kind: "token",
+        token: "--mw-btn-border",
         prop: "borderColor",
       },
       {
@@ -1402,8 +1402,8 @@ const buttonRules: readonly StyleRule[] = [
     state: "disabled",
     declarations: [
       {
-        kind: "static",
-        value: 0.2,
+        kind: "token",
+        token: "--mw-btn-disabled-opacity-light",
         prop: "opacity",
       },
     ],
@@ -1419,8 +1419,8 @@ const buttonRules: readonly StyleRule[] = [
     state: "disabled",
     declarations: [
       {
-        kind: "static",
-        value: 0.4,
+        kind: "token",
+        token: "--mw-btn-disabled-opacity-dark",
         prop: "opacity",
       },
     ],
@@ -1607,12 +1607,12 @@ const buttonRules: readonly StyleRule[] = [
     declarations: [
       {
         kind: "token",
-        token: "--mw-color-success-base",
+        token: "--mw-btn-surface",
         prop: "backgroundColor",
       },
       {
         kind: "token",
-        token: "--mw-color-success-base",
+        token: "--mw-btn-border",
         prop: "borderColor",
       },
     ],
@@ -1628,7 +1628,7 @@ const buttonRules: readonly StyleRule[] = [
     declarations: [
       {
         kind: "token",
-        token: "--mw-color-success-label",
+        token: "--mw-btn-label",
         prop: "color",
       },
     ],

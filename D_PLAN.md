@@ -273,108 +273,108 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### A. Prep
 
-- [ ] Switch to `/Users/niklaswestman/Documents/extras-projects/marwes-project-folder/marwes-rn-d-token`.
-- [ ] Confirm branch is `rn-poc/d-token-compiler`.
-- [ ] Copy or cherry-pick `D_PLAN.md` into the D worktree.
-- [ ] Fill `RN_POC_EVIDENCE.md` branch identity fields.
-- [ ] Run baseline validation:
-  - [ ] `pnpm --filter @marwes-ui/react-native typecheck`
-  - [ ] `pnpm native-styles:check`
+- [x] Switch to `/Users/niklaswestman/Documents/extras-projects/marwes-project-folder/marwes-rn-d-token`.
+- [x] Confirm branch is `rn-poc/d-token-compiler`.
+- [x] Copy or cherry-pick `D_PLAN.md` into the D worktree.
+- [x] Fill `RN_POC_EVIDENCE.md` branch identity fields.
+- [x] Run baseline validation:
+  - [x] `pnpm --filter @marwes-ui/react-native typecheck`
+  - [x] `pnpm native-styles:check`
 
 ### B. Token Schema
 
-- [ ] Add `native-token-types.ts`.
-- [ ] Add `resolve-native-token.ts`.
-- [ ] Define family-scoped token types for Badge, Checkbox, Spinner.
-- [ ] Keep token value model limited to static values and theme refs.
-- [ ] Add type-level protection against arbitrary style props.
+- [x] Add `native-token-types.ts`.
+- [x] Add `resolve-native-token.ts`.
+- [x] Define family-scoped token types for Badge, Checkbox, Spinner.
+- [x] Keep token value model limited to static values and theme refs.
+- [x] Add type-level protection against arbitrary style props.
 
 ### C. Generated/Authored Token Output
 
-- [ ] Add `first-edition.native-tokens.ts`.
-- [ ] Encode Badge base tokens and tones.
-- [ ] Encode Checkbox sizes and state colors.
-- [ ] Encode Spinner size, color, and motion tokens.
-- [ ] Keep output readable by a human.
-- [ ] Record generated/authored token line count in `RN_POC_EVIDENCE.md`.
+- [x] Add `first-edition.native-tokens.ts`.
+- [x] Encode Badge base tokens and tones.
+- [x] Encode Checkbox sizes and state colors.
+- [x] Encode Spinner size, color, and motion tokens.
+- [x] Keep output readable by a human.
+- [x] Record generated/authored token line count in `RN_POC_EVIDENCE.md`.
 
 ### D. Optional Token Generator
 
-- [ ] Add `scripts/generate-react-native-tokens.ts` only if authored token output proves useful.
-- [ ] Generator may read CSS variables, but not layout declarations.
-- [ ] Generator must fail on unsupported token references.
-- [ ] Generator output must be deterministic.
-- [ ] Add a check command if generator exists.
+- [x] Add `scripts/generate-react-native-tokens.ts` only if authored token output proves useful.
+- [x] Generator may read CSS variables, but not layout declarations.
+- [x] Generator must fail on unsupported token references.
+- [x] Generator output must be deterministic.
+- [x] Add a check command if generator exists.
 
 ### E. Badge Component
 
-- [ ] Refactor RN Badge to consume resolved badge tokens instead of `resolveBadgeStyles()`.
-- [ ] Preserve `createBadgeRecipe()`.
-- [ ] Preserve `MarwesNativeProvider` and `useMarwesTheme()`.
-- [ ] Support `neutral`, `info`, `success`, `warning`, `error`.
-- [ ] Support light/dark through `ResolvedTheme`.
-- [ ] Keep component readable without inspecting generated CSS resolver output.
+- [x] Refactor RN Badge to consume resolved badge tokens instead of `resolveBadgeStyles()`.
+- [x] Preserve `createBadgeRecipe()`.
+- [x] Preserve `MarwesNativeProvider` and `useMarwesTheme()`.
+- [x] Support `neutral`, `info`, `success`, `warning`, `error`.
+- [x] Support light/dark through `ResolvedTheme`.
+- [x] Keep component readable without inspecting generated CSS resolver output.
 
 ### F. Checkbox Component
 
-- [ ] Add RN Checkbox component.
-- [ ] Use core `checkboxRecipe()` or current exported checkbox recipe API.
-- [ ] Resolve size and state visuals from Checkbox native tokens.
-- [ ] Render checked mark natively.
-- [ ] Render indeterminate mark natively.
-- [ ] Support disabled state.
-- [ ] Support invalid state.
-- [ ] Map native accessibility props deliberately.
-- [ ] Do not use pseudo-element or CSS-mask concepts in RN.
+- [x] Add RN Checkbox component.
+- [x] Use core `checkboxRecipe()` or current exported checkbox recipe API.
+- [x] Resolve size and state visuals from Checkbox native tokens.
+- [x] Render checked mark natively.
+- [x] Render indeterminate mark natively.
+- [x] Support disabled state.
+- [x] Support invalid state.
+- [x] Map native accessibility props deliberately.
+- [x] Do not use pseudo-element or CSS-mask concepts in RN.
 
 ### G. Spinner Component
 
-- [ ] Add RN Spinner component.
-- [ ] Use `createSpinnerRecipe()`.
-- [ ] Resolve size, track color, indicator color, duration, and segment opacity tokens.
-- [ ] Render SVG or RN-native primitives deliberately.
-- [ ] Use RN animation primitives for rotation/segment opacity.
+- [x] Add RN Spinner component.
+- [x] Use `createSpinnerRecipe()`.
+- [x] Resolve size, track color, indicator color, and duration tokens.
+- [x] Render SVG or RN-native primitives deliberately.
+- [x] Use RN animation primitives for rotation/segment opacity.
 - [ ] Support reduced-motion strategy or document why it is deferred.
-- [ ] Do not compile CSS keyframes.
+- [x] Do not compile CSS keyframes.
 
 ### H. Playground
 
-- [ ] Add a D POC section in `apps/playground-react-native/App.tsx`.
+- [x] Add a D POC section in `apps/playground-react-native/App.tsx`.
 - [ ] Render Badge variants.
-- [ ] Render Checkbox unchecked, checked, mixed, disabled, invalid.
-- [ ] Render Spinner at least two variants.
-- [ ] Render light and dark theme states.
+- [x] Render Checkbox unchecked, checked, mixed, disabled, invalid.
+- [x] Render Spinner at least two variants.
+- [x] Render light and dark theme states.
 
 ### I. Validation
 
-- [ ] `pnpm --filter @marwes-ui/react-native typecheck`
-- [ ] `pnpm native-styles:check`
-- [ ] `pnpm exec biome check apps/playground-react-native packages/react-native scripts/generate-react-native-tokens.ts`
+- [x] `pnpm --filter @marwes-ui/react-native typecheck`
+- [x] `pnpm native-styles:check`
+- [x] Scoped Biome check for touched RN, token, and playground files.
 - [ ] Expo playground manual inspection.
-- [ ] Fill all validation rows in `RN_POC_EVIDENCE.md`.
+- [x] Fill all validation rows in `RN_POC_EVIDENCE.md`.
 
 ### J. Evidence
 
-- [ ] Count authored source lines.
-- [ ] Count generated/authored token lines.
-- [ ] Count schema/config files.
-- [ ] Count new abstractions.
-- [ ] Record dependency delta.
-- [ ] Record next-component cost.
-- [ ] Compare D against A + G in plain language.
-- [ ] Mark recommendation: keep, reject, or continue.
+- [x] Count authored source lines.
+- [x] Count generated/authored token lines.
+- [x] Count schema/config files.
+- [x] Count new abstractions.
+- [x] Record dependency delta.
+- [x] Record next-component cost.
+- [x] Compare D against A + G in plain language.
+- [x] Mark recommendation: keep, reject, or continue.
 
 ## 10. Success Criteria
 
 D is successful if:
 
 - [ ] Badge is simpler to reason about than the generated style resolver path.
-- [ ] Checkbox does not require compiler support for pseudo-elements.
-- [ ] Spinner does not require compiler support for CSS animation/keyframes.
+- [x] Checkbox does not require compiler support for pseudo-elements.
+- [x] Spinner does not require compiler support for CSS animation/keyframes.
 - [ ] Token schema stays family-scoped and understandable.
 - [ ] Generated/authored token output is much smaller than current full style resolver output.
 - [ ] Components remain native and readable.
-- [ ] Typecheck passes.
+- [x] Typecheck passes.
 - [ ] Evidence clearly explains next-component cost.
 
 ## 11. Failure Criteria
@@ -439,7 +439,14 @@ Third slice:
 
 ## 15. My Readiness Assessment
 
-This plan is ready for POC D implementation once it is copied into the D worktree.
+First, second, and third implementation slices are complete for Badge, Checkbox, and Spinner. The
+first extractor slice is also complete: Badge, Checkbox, and Spinner token data now comes from
+explicit variables in `packages/presets/src/firstEdition`.
 
-The plan deliberately starts with authored token output before building a generator. That is important:
-we need to prove the token contract is elegant before we automate token extraction.
+The preset-sourced token output still looks elegant enough to justify the third slice. Checkbox
+rendered checked, indeterminate, invalid, and disabled states natively from the same small token
+model, so Path D currently stays ahead of A + G as the primary architecture candidate.
+
+Spinner renders motion natively without CSS keyframe compiler support, so D has now proved both hard
+cases that A + G would otherwise split into special paths. The next gate should be visual validation
+across Expo/light/dark/custom theme rather than expanding the extractor.

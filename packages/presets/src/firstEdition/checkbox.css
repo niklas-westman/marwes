@@ -14,6 +14,9 @@
   --mw-checkbox-bg: var(--mw-color-surface);
   --mw-checkbox-checked-bg: var(--mw-color-primary-base);
   --mw-checkbox-check: var(--mw-color-primary-label);
+  --mw-checkbox-radius-multiplier: 0.4;
+  --mw-checkbox-disabled-opacity: 0.3;
+  --mw-checkbox-invalid-border: var(--mw-color-danger-base);
 
   /* Size and layout */
   inline-size: var(--mw-checkbox-size);
@@ -28,7 +31,7 @@
   place-content: center;
 
   /* Visual styling - aligned with Figma design */
-  border-radius: max(2px, calc(var(--mw-checkbox-radius) * 0.4));
+  border-radius: max(2px, calc(var(--mw-checkbox-radius) * var(--mw-checkbox-radius-multiplier)));
   border: 1px solid var(--mw-checkbox-border);
   background: var(--mw-checkbox-bg);
 
@@ -141,7 +144,7 @@
 .mw-checkbox:disabled,
 .mw-checkbox--disabled {
   cursor: not-allowed;
-  opacity: 0.2;
+  opacity: var(--mw-checkbox-disabled-opacity);
 }
 
 /* ============================================
@@ -150,13 +153,13 @@
 
 .mw-checkbox--invalid,
 .mw-checkbox[aria-invalid="true"] {
-  border-color: var(--mw-color-danger-base);
+  border-color: var(--mw-checkbox-invalid-border);
 }
 
 .mw-checkbox:checked.mw-checkbox--invalid,
 .mw-checkbox:checked[aria-invalid="true"] {
-  background: var(--mw-color-danger-base);
-  border-color: var(--mw-color-danger-base);
+  background: var(--mw-checkbox-invalid-border);
+  border-color: var(--mw-checkbox-invalid-border);
 }
 
 /* ============================================
@@ -185,19 +188,19 @@
 /* Dark mode: Disabled state (40% opacity, middle of 20-60% range) */
 .mw-theme--dark .mw-checkbox:disabled,
 .mw-theme--dark .mw-checkbox--disabled {
-  opacity: 0.4;
+  --mw-checkbox-disabled-opacity: 0.4;
 }
 
 /* Dark mode: Error state maintains visibility on dark backgrounds */
 .mw-theme--dark .mw-checkbox--invalid,
 .mw-theme--dark .mw-checkbox[aria-invalid="true"] {
-  border-color: var(--mw-color-danger-base);
+  border-color: var(--mw-checkbox-invalid-border);
 }
 
 .mw-theme--dark .mw-checkbox:checked.mw-checkbox--invalid,
 .mw-theme--dark .mw-checkbox:checked[aria-invalid="true"] {
-  background: var(--mw-color-danger-base);
-  border-color: var(--mw-color-danger-base);
+  background: var(--mw-checkbox-invalid-border);
+  border-color: var(--mw-checkbox-invalid-border);
 }
 
 /* ============================================

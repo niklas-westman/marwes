@@ -1,8 +1,13 @@
 import {
+  Avatar,
   Badge,
   Button,
+  Checkbox,
   Divider,
+  Icon,
   MarwesNativeProvider,
+  Skeleton,
+  Spinner,
   useMarwesTheme,
 } from "@marwes-ui/react-native"
 import { StatusBar } from "expo-status-bar"
@@ -18,7 +23,7 @@ function ComponentDemo() {
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={[styles.title, { color: theme.color.text }]}>Marwes React Native POC</Text>
         <Text style={[styles.subtitle, { color: theme.color.textMuted }]}>
-          Mode: {mode} • Compiled CSS → RN styles
+          Mode: {mode} • Preset tokens → native components
         </Text>
 
         {/* Mode toggle */}
@@ -105,6 +110,82 @@ function ComponentDemo() {
 
         <Divider size="md" />
 
+        {/* Native foundation */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.color.text }]}>Native Foundation</Text>
+          <View style={styles.row}>
+            <Avatar initials="NW" ariaLabel="Niklas Westman" size="small" />
+            <Avatar initials="MW" ariaLabel="Marwes" size="medium" />
+            <Avatar type="icon" ariaLabel="User avatar" size="large" />
+          </View>
+          <View style={styles.row}>
+            <Icon name="check" color="primary" size="xs" ariaLabel="Check" />
+            <Icon name="plus" color="secondary" size="sm" ariaLabel="Add" />
+            <Icon name="x" color="muted" size="md" ariaLabel="Close" />
+          </View>
+          <View style={styles.skeletonStack}>
+            <Skeleton variant="text" />
+            <Skeleton variant="rectangular" width={160} height={72} animation="wave" />
+            <Skeleton variant="circular" />
+          </View>
+        </View>
+
+        <Divider size="md" />
+
+        {/* ── Checkbox D POC ── */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.color.text }]}>
+            Checkbox — Native Token POC
+          </Text>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Unchecked" />
+            <Text style={[styles.label, { color: theme.color.text }]}>Unchecked</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Checked" defaultChecked />
+            <Text style={[styles.label, { color: theme.color.text }]}>Checked</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Mixed" indeterminate />
+            <Text style={[styles.label, { color: theme.color.text }]}>Mixed</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Invalid" invalid defaultChecked />
+            <Text style={[styles.label, { color: theme.color.text }]}>Invalid</Text>
+          </View>
+          <View style={styles.checkboxRow}>
+            <Checkbox ariaLabel="Disabled" disabled defaultChecked />
+            <Text style={[styles.label, { color: theme.color.textMuted }]}>Disabled</Text>
+          </View>
+          <View style={styles.row}>
+            <Checkbox ariaLabel="Small checkbox" size="sm" defaultChecked />
+            <Checkbox ariaLabel="Medium checkbox" size="md" defaultChecked />
+            <Checkbox ariaLabel="Large checkbox" size="lg" defaultChecked />
+          </View>
+        </View>
+
+        <Divider size="md" />
+
+        {/* ── Spinner D POC ── */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.color.text }]}>
+            Spinner — Native Animation POC
+          </Text>
+          <View style={styles.spinnerRow}>
+            <Spinner ariaLabel="Classic loading" decorative={false} variant="classic" size="sm" />
+            <Spinner ariaLabel="Ring loading" decorative={false} variant="ring" size="md" />
+            <Spinner ariaLabel="Dual loading" decorative={false} variant="dual" size="lg" />
+          </View>
+          <View style={styles.spinnerRow}>
+            <Spinner variant="dots-round" size="sm" />
+            <Spinner variant="dots-square" size="sm" />
+            <Spinner variant="lines" size="md" />
+            <Spinner variant="cross" size="md" />
+          </View>
+        </View>
+
+        <Divider size="md" />
+
         {/* ── Divider ── */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.color.text }]}>Divider — Sizes</Text>
@@ -183,6 +264,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 8,
+  },
+  checkboxRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  spinnerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 18,
+  },
+  skeletonStack: {
+    gap: 10,
   },
   verticalDividerRow: {
     flexDirection: "row",
