@@ -42,6 +42,19 @@ export type CheckboxNativeTokens = {
   }
 }
 
+export type SpinnerNativeTokens = {
+  base: {
+    size: NativeTokenRef
+  }
+  colors: {
+    track: NativeTokenRef
+    indicator: NativeTokenRef
+  }
+  motion: {
+    rotationDurationMs: NativeTokenRef
+  }
+}
+
 export type ResolvedBadgeNativeTokens = {
   base: {
     radius: number
@@ -74,5 +87,18 @@ export type ResolvedCheckboxNativeTokens = {
     check: string
     disabledOpacity: number
     invalidBorder: string
+  }
+}
+
+export type ResolvedSpinnerNativeTokens = {
+  base: {
+    size: number
+  }
+  colors: {
+    track: string
+    indicator: string
+  }
+  motion: {
+    rotationDurationMs: number
   }
 }

@@ -4,6 +4,7 @@ import {
   Checkbox,
   Divider,
   MarwesNativeProvider,
+  Spinner,
   useMarwesTheme,
 } from "@marwes-ui/react-native"
 import { StatusBar } from "expo-status-bar"
@@ -140,6 +141,26 @@ function ComponentDemo() {
 
         <Divider size="md" />
 
+        {/* ── Spinner D POC ── */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.color.text }]}>
+            Spinner — Native Animation POC
+          </Text>
+          <View style={styles.spinnerRow}>
+            <Spinner ariaLabel="Classic loading" decorative={false} variant="classic" size="sm" />
+            <Spinner ariaLabel="Ring loading" decorative={false} variant="ring" size="md" />
+            <Spinner ariaLabel="Dual loading" decorative={false} variant="dual" size="lg" />
+          </View>
+          <View style={styles.spinnerRow}>
+            <Spinner variant="dots-round" size="sm" />
+            <Spinner variant="dots-square" size="sm" />
+            <Spinner variant="lines" size="md" />
+            <Spinner variant="cross" size="md" />
+          </View>
+        </View>
+
+        <Divider size="md" />
+
         {/* ── Divider ── */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: theme.color.text }]}>Divider — Sizes</Text>
@@ -223,6 +244,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+  },
+  spinnerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 18,
   },
   verticalDividerRow: {
     flexDirection: "row",

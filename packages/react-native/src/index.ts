@@ -17,6 +17,9 @@ export type { NativeCheckboxProps } from "./components/checkbox"
 export { Divider } from "./components/divider"
 export type { NativeDividerProps } from "./components/divider"
 
+export { Spinner } from "./components/spinner"
+export type { NativeSpinnerProps } from "./components/spinner"
+
 // Re-export useful core types
 export type { ThemeInput, ThemeMode, ThemePreference } from "@marwes-ui/core"
 export { ThemeMode as ThemeModes } from "@marwes-ui/core"

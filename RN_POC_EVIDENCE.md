@@ -11,7 +11,8 @@
 
 ## Implementation Summary
 
-Badge, Checkbox, and the first preset-sourced native token extractor slice are complete for Path D.
+Badge, Checkbox, Spinner, and the first preset-sourced native token extractor slice are complete for
+Path D.
 
 The first slice moved RN `Badge` away from the generated CSS-to-RN style resolver and into a
 native-friendly semantic token layer. The second slice adds RN `Checkbox` with native rendering for
@@ -25,13 +26,18 @@ The key extractor result: Badge and Checkbox token data now comes from explicit 
 `@marwes-ui/presets`, not from a handwritten RN token map. The extractor is whitelist-based and does
 not translate layout declarations, pseudo-elements, masks, or keyframes.
 
+The key Spinner result: D can render motion with React Native `Animated` primitives from preset
+tokens. Spinner uses core for variant/size/a11y, preset variables for colors/duration, and RN-owned
+animation instead of CSS keyframe translation.
+
 ## Component Scope
 
 | Family | Status | Style source | Notes |
 |---|---|---|---|
 | Badge | Implemented first slice | `styles/native-tokens/generated/first-edition.native-tokens.ts` | Uses semantic native tokens instead of `resolveBadgeStyles()`. |
 | Checkbox | Implemented second slice | `styles/native-tokens/generated/first-edition.native-tokens.ts` | Native `Pressable`, native check/mixed mark, no pseudo-element or CSS mask model. |
-| Spinner/Skeleton | Deferred | Planned native tokens | Should follow Checkbox because it proves the keyframe/animation case. |
+| Spinner | Implemented third slice | Generated native token data from preset CSS | Native `Animated` rotation; no CSS keyframe compiler support. |
+| Skeleton | Deferred | Planned native tokens | Similar extraction model, but shimmer strategy still needs a native decision. |
 
 ## Changed Files
 
@@ -39,14 +45,15 @@ not translate layout declarations, pseudo-elements, masks, or keyframes.
 |---|---|---|
 | Components | `packages/react-native/src/components/badge/badge.tsx` | Badge now resolves semantic tokens and builds RN `ViewStyle`/`TextStyle` directly. |
 | Components | `packages/react-native/src/components/checkbox/*` | Checkbox renders native box, checked mark, and mixed mark. |
-| Components | `packages/react-native/src/index.ts` | Exports RN Checkbox. |
+| Components | `packages/react-native/src/components/spinner/*` | Spinner renders native rings/segments with `Animated` rotation. |
+| Components | `packages/react-native/src/index.ts` | Exports RN Checkbox and Spinner. |
 | Styles/tokens/compiler | `packages/react-native/src/styles/native-tokens/native-token-types.ts` | Family-scoped native token type model for Badge and Checkbox. |
 | Styles/tokens/compiler | `packages/react-native/src/styles/native-tokens/resolve-native-token.ts` | Small resolver for theme refs and static values. |
 | Styles/tokens/compiler | `scripts/generate-react-native-tokens.ts` | Strict preset-variable extractor. |
 | Styles/tokens/compiler | `packages/react-native/src/styles/native-tokens/generated/first-edition.native-token-data.ts` | Generated Badge and Checkbox token data from preset CSS. |
 | Styles/tokens/compiler | `packages/react-native/src/styles/native-tokens/generated/first-edition.native-tokens.ts` | Runtime token resolver over generated token data. |
 | Presets | `packages/presets/src/firstEdition/badge.css`, `packages/presets/src/firstEdition/checkbox.css` | Adds explicit component variables for native extraction. |
-| Playground | `apps/playground-react-native/App.tsx` | Adds D Checkbox examples for unchecked, checked, mixed, invalid, disabled, and sizes. |
+| Playground | `apps/playground-react-native/App.tsx` | Adds D Checkbox and Spinner examples. |
 | Config/dependencies | `package.json` | Adds `native-tokens:generate` and `native-tokens:check`; no dependencies added. |
 | Docs/evidence | `INNOVATION_IDEA.md`, `RN_POC_EVIDENCE.md`, `D_PLAN.md` | Evidence and innovation path updated. |
 
@@ -54,15 +61,16 @@ not translate layout declarations, pseudo-elements, masks, or keyframes.
 
 | Metric | Value | How measured |
 |---|---:|---|
-| Authored source lines | 661 | `wc -l` over Badge, Checkbox, token types/resolver, and token extractor script. |
-| Playground/export lines touched | 255 | `wc -l` over playground app plus RN package index. |
+| Authored source lines | 988 | `wc -l` over Badge, Checkbox, Spinner, token types/resolver, and token extractor script. |
+| Playground/export lines touched | 284 | `wc -l` over playground app plus RN package index. |
 | Badge component delta | +28 / -15 | `git diff --numstat -- packages/react-native/src/components/badge/badge.tsx`. |
 | Checkbox component lines | 136 | `wc -l packages/react-native/src/components/checkbox/*`. |
-| Generated token data lines | 187 | `wc -l packages/react-native/src/styles/native-tokens/generated/first-edition.native-token-data.ts`. |
+| Spinner component lines | 255 | `wc -l packages/react-native/src/components/spinner/*`. |
+| Generated token data lines | 218 | `wc -l packages/react-native/src/styles/native-tokens/generated/first-edition.native-token-data.ts`. |
 | Existing full style resolver size | 2118 | `wc -l packages/react-native/src/styles/generated/first-edition.ts`. |
-| Native token resolver size | 81 | `wc -l packages/react-native/src/styles/native-tokens/generated/first-edition.native-tokens.ts`. |
+| Native token resolver size | 100 | `wc -l packages/react-native/src/styles/native-tokens/generated/first-edition.native-tokens.ts`. |
 | Manifest/config/schema files | 4 | Token types, resolver, generated data file, package scripts. |
-| New abstractions | 4 | `NativeTokenRef` model, native token resolver, preset-variable extractor, Checkbox native mark helper. |
+| New abstractions | 5 | `NativeTokenRef` model, native token resolver, preset-variable extractor, Checkbox mark helper, Spinner segment renderer. |
 | Runtime dependencies added | 0 | `package.json` only adds scripts; no dependency fields changed. |
 
 ## Measurement Checklist
@@ -126,33 +134,31 @@ Line-count guidance:
 
 ## Next Component Cost
 
-Spinner is the right next test. Estimated cost is moderate and should stay contained:
+Skeleton is the next likely token extraction test, but it is less decisive than Spinner was.
 
-- Add spinner token type and extend the preset-token extractor manifest.
-- Resolve size, track/indicator colors, duration, and segment opacity/motion tokens from generated
-  preset-sourced token data.
-- Render rotation/segment animation with RN primitives.
-- Reuse the core spinner recipe for platform-neutral semantics.
+- Extract skeleton base/highlight/radius/dimension tokens.
+- Decide whether shimmer should use native animation, static fallback, or a reduced-motion strategy.
+- Keep gradient/shimmer implementation RN-owned rather than compiling CSS gradients/keyframes.
 
-The important point: Spinner should not need CSS keyframe compiler support. Checkbox already proved
-that pseudo-element/mask support is not needed for the hard mark-rendering case.
+The important point: Spinner did not need CSS keyframe compiler support. Checkbox already proved that
+pseudo-element/mask support is not needed for the hard mark-rendering case.
 
 ## Risks
 
 - Token maps could become duplicated CSS if extractor manifests grow beyond semantic variables.
 - The schema could slowly become a second styling DSL if it starts accepting arbitrary style props.
 - Visual parity still needs screenshot validation before D can be considered production-ready.
-- Authored tokens are elegant for Badge and workable for Checkbox, but Spinner still needs to prove
-  the animation case.
+- Spinner visual parity is approximate until device/screenshot validation confirms the native
+  segment geometry.
 
 ## Recommendation
 
-Continue Path D into Spinner.
+Continue Path D as the primary architecture candidate.
 
 Badge is meaningfully easier to explain than the generated CSS resolver path, and Checkbox is the
 stronger signal: the hard pseudo-element/CSS-mask case became a straightforward native component.
 The newest improvement is that native token data is now generated from preset variables, so D no
-longer depends on hand-copied RN token values for Badge and Checkbox.
+longer depends on hand-copied RN token values for Badge, Checkbox, or Spinner.
 
 Current judgement: D is still the most promising architecture. The extractor should remain strict and
-manifest-driven. Prove Spinner next before expanding extraction rules.
+manifest-driven. The next decision should be visual validation, not broader compiler scope.

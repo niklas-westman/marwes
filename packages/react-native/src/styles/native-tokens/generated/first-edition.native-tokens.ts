@@ -3,11 +3,13 @@ import type {
   CheckboxNativeSize,
   ResolvedBadgeNativeTokens,
   ResolvedCheckboxNativeTokens,
+  ResolvedSpinnerNativeTokens,
 } from "../native-token-types"
 import { resolveNativeNumber, resolveNativeString } from "../resolve-native-token"
 import {
   firstEditionBadgeNativeTokens,
   firstEditionCheckboxNativeTokens,
+  firstEditionSpinnerNativeTokens,
 } from "./first-edition.native-token-data"
 
 function resolveBadgeTone(
@@ -76,6 +78,23 @@ export function resolveCheckboxNativeTokens(theme: ResolvedTheme): ResolvedCheck
       check: resolveNativeString(box.check, theme),
       disabledOpacity: resolveNativeNumber(box.disabledOpacity, theme),
       invalidBorder: resolveNativeString(box.invalidBorder, theme),
+    },
+  }
+}
+
+export function resolveSpinnerNativeTokens(theme: ResolvedTheme): ResolvedSpinnerNativeTokens {
+  const { base, colors, motion } = firstEditionSpinnerNativeTokens
+
+  return {
+    base: {
+      size: resolveNativeNumber(base.size, theme),
+    },
+    colors: {
+      track: resolveNativeString(colors.track, theme),
+      indicator: resolveNativeString(colors.indicator, theme),
+    },
+    motion: {
+      rotationDurationMs: resolveNativeNumber(motion.rotationDurationMs, theme),
     },
   }
 }

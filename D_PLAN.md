@@ -285,7 +285,7 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 - [x] Add `native-token-types.ts`.
 - [x] Add `resolve-native-token.ts`.
-- [ ] Define family-scoped token types for Badge, Checkbox, Spinner.
+- [x] Define family-scoped token types for Badge, Checkbox, Spinner.
 - [x] Keep token value model limited to static values and theme refs.
 - [x] Add type-level protection against arbitrary style props.
 
@@ -294,7 +294,7 @@ Stop if extraction starts becoming a CSS layout compiler.
 - [x] Add `first-edition.native-tokens.ts`.
 - [x] Encode Badge base tokens and tones.
 - [x] Encode Checkbox sizes and state colors.
-- [ ] Encode Spinner size, color, and motion tokens.
+- [x] Encode Spinner size, color, and motion tokens.
 - [x] Keep output readable by a human.
 - [x] Record generated/authored token line count in `RN_POC_EVIDENCE.md`.
 
@@ -329,20 +329,20 @@ Stop if extraction starts becoming a CSS layout compiler.
 
 ### G. Spinner Component
 
-- [ ] Add RN Spinner component.
-- [ ] Use `createSpinnerRecipe()`.
-- [ ] Resolve size, track color, indicator color, duration, and segment opacity tokens.
-- [ ] Render SVG or RN-native primitives deliberately.
-- [ ] Use RN animation primitives for rotation/segment opacity.
+- [x] Add RN Spinner component.
+- [x] Use `createSpinnerRecipe()`.
+- [x] Resolve size, track color, indicator color, and duration tokens.
+- [x] Render SVG or RN-native primitives deliberately.
+- [x] Use RN animation primitives for rotation/segment opacity.
 - [ ] Support reduced-motion strategy or document why it is deferred.
-- [ ] Do not compile CSS keyframes.
+- [x] Do not compile CSS keyframes.
 
 ### H. Playground
 
 - [x] Add a D POC section in `apps/playground-react-native/App.tsx`.
 - [ ] Render Badge variants.
 - [x] Render Checkbox unchecked, checked, mixed, disabled, invalid.
-- [ ] Render Spinner at least two variants.
+- [x] Render Spinner at least two variants.
 - [x] Render light and dark theme states.
 
 ### I. Validation
@@ -370,7 +370,7 @@ D is successful if:
 
 - [ ] Badge is simpler to reason about than the generated style resolver path.
 - [x] Checkbox does not require compiler support for pseudo-elements.
-- [ ] Spinner does not require compiler support for CSS animation/keyframes.
+- [x] Spinner does not require compiler support for CSS animation/keyframes.
 - [ ] Token schema stays family-scoped and understandable.
 - [ ] Generated/authored token output is much smaller than current full style resolver output.
 - [ ] Components remain native and readable.
@@ -439,13 +439,14 @@ Third slice:
 
 ## 15. My Readiness Assessment
 
-First and second implementation slices are complete for Badge and Checkbox. The first extractor slice
-is also complete: Badge and Checkbox token data now comes from explicit variables in
-`packages/presets/src/firstEdition`.
+First, second, and third implementation slices are complete for Badge, Checkbox, and Spinner. The
+first extractor slice is also complete: Badge, Checkbox, and Spinner token data now comes from
+explicit variables in `packages/presets/src/firstEdition`.
 
 The preset-sourced token output still looks elegant enough to justify the third slice. Checkbox
 rendered checked, indeterminate, invalid, and disabled states natively from the same small token
 model, so Path D currently stays ahead of A + G as the primary architecture candidate.
 
-The next readiness gate is Spinner: if Spinner can render motion natively without CSS keyframe
-compiler support, D has proved both hard cases that A + G would otherwise split into special paths.
+Spinner renders motion natively without CSS keyframe compiler support, so D has now proved both hard
+cases that A + G would otherwise split into special paths. The next gate should be visual validation
+across Expo/light/dark/custom theme rather than expanding the extractor.
