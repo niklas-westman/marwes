@@ -4,6 +4,9 @@
 
 /* BASE */
 .mw-icon {
+  --mw-icon-stroke-width: 2;
+  --mw-icon-color: currentColor;
+
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
@@ -35,18 +38,26 @@
 
 /* COLORS */
 .mw-icon--currentColor {
+  --mw-icon-color: currentColor;
+
   stroke: currentColor;
 }
 
 .mw-icon--primary {
+  --mw-icon-color: var(--mw-color-primary-base);
+
   stroke: var(--mw-color-primary-base);
 }
 
 .mw-icon--secondary {
+  --mw-icon-color: var(--mw-color-secondary-base);
+
   stroke: var(--mw-color-secondary-base);
 }
 
 .mw-icon--muted {
+  --mw-icon-color: var(--mw-color-text-muted);
+
   stroke: var(--mw-color-text-muted);
 }
 

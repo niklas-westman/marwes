@@ -10,7 +10,7 @@ import {
   type ViewStyle,
 } from "react-native"
 import { useMarwesTheme } from "../../provider/marwes-native-context"
-import { resolveButtonStyles } from "../../styles/generated/first-edition"
+import { resolveButtonNativeTokens } from "../../styles/native-tokens/generated/first-edition.native-tokens"
 
 export type NativeButtonProps = Omit<
   ButtonOptions,
@@ -52,27 +52,56 @@ export function Button({
 
   const [pressed, setPressed] = useState(false)
 
-  const styles = useMemo(
-    () =>
-      resolveButtonStyles(
-        {
-          variant: resolvedVariant,
-          size: resolvedSize,
-          mode,
-          state: {
-            pressed,
-            disabled: isDisabled,
-            focused: false,
-            hovered: false,
-          },
-          dataAttributes: {
-            error: options.error ? "true" : undefined,
-          },
-        },
-        theme,
-      ),
-    [resolvedVariant, resolvedSize, mode, pressed, isDisabled, options.error, theme],
-  )
+  const tokens = useMemo(() => resolveButtonNativeTokens(theme), [theme])
+  const base = tokens.base
+  const size = tokens.sizes[resolvedSize]
+  const variant = tokens.variants[resolvedVariant]
+  const isText = resolvedVariant === "text"
+  const isDanger = options.error === true
+  const surface = isDanger
+    ? resolvedVariant === "primary"
+      ? theme.color.danger.base
+      : variant.surface
+    : pressed && variant.pressedSurface
+      ? variant.pressedSurface
+      : variant.surface
+  const label = isDanger
+    ? resolvedVariant === "primary"
+      ? theme.color.danger.label
+      : theme.color.danger.base
+    : variant.label
+  const border = isDanger ? theme.color.danger.base : variant.border
+  const opacity = isDisabled
+    ? mode === "dark"
+      ? base.disabledOpacityDark
+      : base.disabledOpacityLight
+    : pressed && variant.pressedOpacity
+      ? variant.pressedOpacity
+      : 1
+
+  const rootStyle: ViewStyle = {
+    minHeight: isText ? undefined : size.height,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: base.gap,
+    paddingHorizontal: size.paddingX,
+    paddingVertical: isText ? Math.max(4, size.paddingY) : size.paddingY,
+    borderRadius: base.radius,
+    borderWidth: isText ? 0 : 1,
+    borderColor: border,
+    backgroundColor: surface,
+    opacity,
+  }
+
+  const textStyle: TextStyle = {
+    color: label,
+    fontFamily: base.fontFamily,
+    fontSize: size.fontSize,
+    fontWeight: base.fontWeight as TextStyle["fontWeight"],
+    lineHeight: isText ? Math.round(size.fontSize * 1.2) : size.fontSize,
+    letterSpacing: 0,
+  }
 
   return (
     <Pressable
@@ -87,9 +116,11 @@ export function Button({
         busy: kit.a11y.ariaBusy,
       }}
       testID={testID}
-      style={[styles.root, userStyle]}
+      style={[rootStyle, userStyle]}
     >
-      <Text style={[styles.label, userLabelStyle]}>{children}</Text>
+      <Text style={[textStyle, userLabelStyle]}>
+        {kit.loading.isLoading ? (kit.loading.loadingLabel ?? children) : children}
+      </Text>
     </Pressable>
   )
 }

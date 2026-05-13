@@ -2,19 +2,7 @@ import type { DividerOptions } from "@marwes-ui/core"
 import { useMemo } from "react"
 import { type StyleProp, View, type ViewStyle } from "react-native"
 import { useMarwesTheme } from "../../provider/marwes-native-context"
-import { resolveDividerStyles } from "../../styles/generated/first-edition"
-
-const LINE_THICKNESS = 1
-
-const SPACING_BY_SIZE: Record<string, number> = {
-  xxs: 1,
-  xs: 8,
-  sm: 16,
-  md: 32,
-  lg: 48,
-  xl: 64,
-  xxl: 80,
-}
+import { resolveDividerNativeTokens } from "../../styles/native-tokens/generated/first-edition.native-tokens"
 
 export type NativeDividerProps = DividerOptions & {
   style?: StyleProp<ViewStyle>
@@ -35,36 +23,23 @@ export function Divider({
   style: userStyle,
   testID,
 }: NativeDividerProps) {
-  const { theme, mode } = useMarwesTheme()
+  const { theme } = useMarwesTheme()
+  const tokens = useMemo(() => resolveDividerNativeTokens(theme), [theme])
 
-  const baseStyles = useMemo(
-    () =>
-      resolveDividerStyles(
-        {
-          variant: orientation,
-          mode,
-        },
-        theme,
-      ),
-    [orientation, mode, theme],
-  )
-
-  const spacing = SPACING_BY_SIZE[size] ?? 32
-  const marginAmount = (spacing - LINE_THICKNESS) / 2
-
-  // Extract backgroundColor from generated styles for the line
-  const lineColor = (baseStyles.root as ViewStyle)?.backgroundColor ?? theme.color.border
+  const lineThickness = tokens.base.lineThickness
+  const spacing = tokens.sizes[size].spacing
+  const marginAmount = (spacing - lineThickness) / 2
 
   const isVertical = orientation === "vertical"
 
   const wrapperStyle: ViewStyle = isVertical
     ? {
-        width: LINE_THICKNESS,
+        width: lineThickness,
         alignSelf: "stretch",
         marginHorizontal: marginAmount,
       }
     : {
-        height: LINE_THICKNESS,
+        height: lineThickness,
         width: "100%",
         marginVertical: marginAmount,
       }
@@ -73,7 +48,7 @@ export function Divider({
     <View
       accessibilityRole="none"
       testID={testID}
-      style={[wrapperStyle, { backgroundColor: lineColor as string }, userStyle]}
+      style={[wrapperStyle, { backgroundColor: tokens.base.color }, userStyle]}
     />
   )
 }

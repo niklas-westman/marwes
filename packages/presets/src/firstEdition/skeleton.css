@@ -10,6 +10,17 @@
 
 .mw-skeleton {
   --mw-skeleton-base-color: color-mix(in srgb, var(--mw-color-text, #141414) 4%, transparent);
+  --mw-skeleton-native-base-color: var(--mw-color-border-subtle);
+  --mw-skeleton-native-highlight-color: var(--mw-color-surface-elevated);
+  --mw-skeleton-text-width: 120px;
+  --mw-skeleton-text-height: 12px;
+  --mw-skeleton-circular-size: 40px;
+  --mw-skeleton-rectangular-size: 120px;
+  --mw-skeleton-radius-default: 4px;
+  --mw-skeleton-radius-circular: 9999px;
+  --mw-skeleton-pulse-duration: 1400ms;
+  --mw-skeleton-wave-duration: 1600ms;
+  --mw-skeleton-pulse-min-opacity: 0.48;
   --mw-skeleton-highlight-color: color-mix(
     in srgb,
     var(--mw-color-text-inverted, #ffffff) 24%,

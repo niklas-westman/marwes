@@ -1,9 +1,12 @@
 import {
+  Avatar,
   Badge,
   Button,
   Checkbox,
   Divider,
+  Icon,
   MarwesNativeProvider,
+  Skeleton,
   Spinner,
   useMarwesTheme,
 } from "@marwes-ui/react-native"
@@ -20,7 +23,7 @@ function ComponentDemo() {
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={[styles.title, { color: theme.color.text }]}>Marwes React Native POC</Text>
         <Text style={[styles.subtitle, { color: theme.color.textMuted }]}>
-          Mode: {mode} • Compiled CSS → RN styles
+          Mode: {mode} • Preset tokens → native components
         </Text>
 
         {/* Mode toggle */}
@@ -102,6 +105,28 @@ function ComponentDemo() {
             <Badge variant="success">Success</Badge>
             <Badge variant="warning">Warning</Badge>
             <Badge variant="error">Error</Badge>
+          </View>
+        </View>
+
+        <Divider size="md" />
+
+        {/* Native foundation */}
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: theme.color.text }]}>Native Foundation</Text>
+          <View style={styles.row}>
+            <Avatar initials="NW" ariaLabel="Niklas Westman" size="small" />
+            <Avatar initials="MW" ariaLabel="Marwes" size="medium" />
+            <Avatar type="icon" ariaLabel="User avatar" size="large" />
+          </View>
+          <View style={styles.row}>
+            <Icon name="check" color="primary" size="xs" ariaLabel="Check" />
+            <Icon name="plus" color="secondary" size="sm" ariaLabel="Add" />
+            <Icon name="x" color="muted" size="md" ariaLabel="Close" />
+          </View>
+          <View style={styles.skeletonStack}>
+            <Skeleton variant="text" />
+            <Skeleton variant="rectangular" width={160} height={72} animation="wave" />
+            <Skeleton variant="circular" />
           </View>
         </View>
 
@@ -249,6 +274,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 18,
+  },
+  skeletonStack: {
+    gap: 10,
   },
   verticalDividerRow: {
     flexDirection: "row",
