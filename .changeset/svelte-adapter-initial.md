@@ -17,6 +17,7 @@ useToast, and SSR helpers.
 - Badge: neutral label uses text/secondary (#595959), warning label uses direct Amber/700 (#B45309)
 - Tab: transparent background, text/primary label, opacity-based hover (5% text color)
 - Toast: subtle icon fallbacks (#595959 light / #A3A3A3 dark), warning text aligned with badge/stat-tile, dark mode intent colors show through in text/action
+- Toast/StatTile: small action and trend text now use readable status text tokens so Storybook a11y smoke passes color contrast in light and dark mode
 - Spinner: dots-round, dots-square, lines use per-segment opacity cycling (no SVG rotation)
 - Accordion/Toast: dark mode surface set to #0F0F0F
 
