@@ -17,7 +17,8 @@ graph TD
   Presets[preset CSS]
   React[React adapter]
   Vue[Vue adapter]
-  Stories[React and Vue Storybook]
+  Svelte[Svelte adapter]
+  Stories[React, Vue, and Svelte Storybook]
   Contracts[shared contract tests]
   Registry[docs/registry/families]
   Audits[docs/audits]
@@ -28,10 +29,13 @@ graph TD
   Core --> Presets
   Core --> React
   Core --> Vue
+  Core --> Svelte
   Presets --> React
   Presets --> Vue
+  Presets --> Svelte
   React --> Stories
   Vue --> Stories
+  Svelte --> Stories
   React --> Contracts
   Vue --> Contracts
   Core --> Artifacts
@@ -82,10 +86,11 @@ When two sources disagree, resolve the conflict in this order:
 
 | If you change... | Also inspect/update... | Minimum local gate |
 |---|---|---|
-| Core recipe, types, or a11y mapping | React adapter, Vue adapter, contracts, registry family, generated artifacts | `pnpm validate:family <family>` |
-| Preset CSS for a family | React/Vue stories, visual states, preset CSS tests, registry notes | `pnpm validate:family <family>` |
-| React adapter | Vue adapter parity, shared contracts, Storybook React/Vue coverage | `pnpm validate:family <family>` |
-| Vue adapter | React adapter parity, shared contracts, Storybook React/Vue coverage | `pnpm validate:family <family>` |
+| Core recipe, types, or a11y mapping | React adapter, Vue adapter, Svelte adapter, contracts, registry family, generated artifacts | `pnpm validate:family <family>` |
+| Preset CSS for a family | React/Vue/Svelte stories, visual states, preset CSS tests, registry notes | `pnpm validate:family <family>` |
+| React adapter | Vue/Svelte adapter parity, shared contracts, Storybook coverage | `pnpm validate:family <family>` |
+| Vue adapter | React/Svelte adapter parity, shared contracts, Storybook coverage | `pnpm validate:family <family>` |
+| Svelte adapter | React/Vue adapter parity, shared contracts, Storybook Svelte coverage | `pnpm validate:family <family>` |
 | Purpose variant or semantic metadata | semantic registry, generated artifacts, registry family docs, Compass docs/API drift rule | `pnpm check:repo-map` |
 | Registry family docs | generated registry artifact and links | `pnpm check:repo-map` |
 | Audit findings | `docs/audits/status.md`, registry family status, reference accessibility docs if policy changed | `pnpm check:compass` |

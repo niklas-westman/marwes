@@ -36,7 +36,6 @@ graph TD
   Docs --> Contribute[want-to-contribute.md]
   Docs --> Reference[reference/]
   Docs --> Guides[guides/]
-  Docs --> Planning[planning/]
   Docs --> Tooling[tooling/]
   Docs --> Audits[audits/]
   Docs --> Registry[registry/]
@@ -57,8 +56,6 @@ graph TD
 
   Registry --> RegistryIndex[README.md]
   Registry --> ButtonRegistry[families/button/README.md]
-
-  Planning --> ReleasePlan[release-1-0-0-hardening-plan.md]
 
   Audits --> AuditIndex[README.md]
   Audits --> AuditStatus[status.md]
@@ -89,11 +86,6 @@ Practical how-to documents.
 - [Adding Components](./guides/adding-components.md) — step-by-step workflow for introducing a new component
 - [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
 - [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md) — root dark variants and app-owned Tailwind tokens using Marwes variables
-
-### Planning
-Active planning documents. Completed migration notes should be removed once their decisions are reflected in reference docs, registry docs, tests, or release notes.
-
-- [Release 1.0.0 hardening plan](./planning/release-1-0-0-hardening-plan.md) — release readiness checks, security posture, and validation log
 
 ### Registry
 Family-level component knowledge base.

@@ -1,0 +1,66 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="StatTile/Introduction" />
+
+# Stat Tile
+
+Stat Tile is a compact metric surface for one dashboard KPI. It is synced from the V2 Figma `Stat tile` component and keeps the same framework contract in core, React, Vue, Storybook, and the preset CSS.
+
+Use it when a dashboard or summary panel needs one small, scan-friendly metric with:
+
+- a short label
+- a prominent value
+- optional positive or negative trend
+- optional supporting subtitle
+- neutral, brand, success, warning, or danger tone treatment
+
+Do not use Stat Tile for long descriptions, mixed charts, tables, or multi-action cards. Use `Card` when the content needs flexible layout, and keep Stat Tile reserved for quick comparison.
+
+## Anatomy
+
+- `label`: short metric name, normally one line.
+- `value`: primary number or compact value.
+- `subtitle`: supporting comparison or context.
+- `trendValue`: compact change value such as `12%`.
+- `trendDirection`: `positive` or `negative`; this controls the icon and generated trend label.
+- `tone`: semantic visual emphasis. Use `neutral` by default, then `brand`, `success`, `warning`, or `danger` only when the metric status needs that emphasis.
+
+```svelte
+<StatTile
+  label="Monthly Revenue"
+  value="$48,200"
+  subtitle="vs $42,900 last month"
+  trendValue="12%"
+  trendDirection="positive"
+/>
+```
+
+## Loading State
+
+Use the Storybook `Skeleton/Molecule` `StatTileReplica` when the tile is loading. The replica uses the real Stat Tile shell so dimensions, spacing, border radius, and token behavior stay aligned with the live component.
+
+```svelte
+<!-- Copy StatTileSkeleton from Skeleton/Molecule into the local loading state. -->
+<StatTileSkeleton animation="pulse" />
+```
+
+## Figma source
+
+- `.figma/marwes/components/stat-tile.json`
+- `.figma/marwes/components/partsstat-tiletrend.json`
+- `.figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json`
+- `.figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json`
+
+## Accessibility
+
+The tile renders as an `article` so the metric behaves as a standalone summary card. Trend icons are decorative, and the trend part receives a generated label like "Increased by 12%" or "Decreased by 8%".
+
+Keep the visible label specific enough to identify the metric without relying on surrounding layout. If a page groups many Stat Tiles under a heading, the heading should describe the metric set while each tile label describes the individual KPI.
+
+## Component Reference
+
+**`StatTile`** — Metric display atom with label, value, trend, and tone
+
+## Story Coverage
+
+- **Atom**: `Default`, `NegativeTrend`, `ToneMatrix`

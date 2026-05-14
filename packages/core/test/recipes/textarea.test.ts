@@ -1,3 +1,7 @@
+/**
+ * Tests the textarea recipe's pure output — invalid state, a11y, rows, and
+ * CSS resize variable.
+ */
 import { describe, expect, it } from "vitest"
 import { createTextareaRecipe } from "../../src/components/atoms/input/textarea-recipe"
 

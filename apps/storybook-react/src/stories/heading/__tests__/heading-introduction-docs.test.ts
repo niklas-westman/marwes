@@ -1,3 +1,7 @@
+/**
+ * React Heading introduction docs guard — verifies that the
+ * Introduction.mdx file documents all expected sections and component references.
+ */
 import { readFileSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"

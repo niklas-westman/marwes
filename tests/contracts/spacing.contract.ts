@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Spacing atom — decorative div with default
+ * metadata and size token/scale multiplier support.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SpacingSize =

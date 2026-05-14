@@ -1,3 +1,7 @@
+/**
+ * Tests the card recipe's pure output — base class, component marker,
+ * and custom data attribute merging.
+ */
 import { describe, expect, it } from "vitest"
 import { createCardRecipe } from "../../src/components/atoms/card/card-recipe"
 

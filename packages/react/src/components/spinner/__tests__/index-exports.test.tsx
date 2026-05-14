@@ -1,3 +1,7 @@
+/**
+ * React adapter: Verifies that the Spinner barrel re-exports all public symbols
+ * from both the component directory and the package root.
+ */
 import { describe, expect, it } from "vitest"
 import * as spinnerComponents from ".."
 import * as publicApi from "../../../index"

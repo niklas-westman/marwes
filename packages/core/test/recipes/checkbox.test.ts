@@ -1,3 +1,8 @@
+/**
+ * Tests the checkbox recipe's controlled vs uncontrolled state selection.
+ * When `checked` is provided the checkbox is controlled; otherwise `defaultChecked`
+ * is used for uncontrolled initial state.
+ */
 import { describe, expect, it } from "vitest"
 import { checkboxRecipe } from "../../src/components/atoms/checkbox/checkbox-recipe"
 

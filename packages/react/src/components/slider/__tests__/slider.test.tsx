@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Slider component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { fireEvent, render, screen } from "@testing-library/react"
 import * as React from "react"
 import { describe, expect, it } from "vitest"

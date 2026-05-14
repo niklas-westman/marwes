@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Avatar component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { render, screen } from "@testing-library/vue"
 import { defineComponent, h } from "vue"
 import { runAvatarContract } from "../../../../../../tests/contracts/avatar.contract"

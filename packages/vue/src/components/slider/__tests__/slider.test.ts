@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Slider component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h, ref } from "vue"

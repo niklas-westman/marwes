@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Input Field component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"

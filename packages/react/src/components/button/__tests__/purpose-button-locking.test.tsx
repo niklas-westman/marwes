@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests purpose button locking — verifies that forbidden prop overrides
+ * (variant, action, as) are silently stripped and trigger dev warnings.
+ */
 import type * as React from "react"
 
 import { render, screen } from "@testing-library/react"

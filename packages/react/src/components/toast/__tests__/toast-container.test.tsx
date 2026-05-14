@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the ToastContainer component — toast stacking, automatic
+ * dismissal, and container positioning.
+ */
 import { act, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import type * as React from "react"

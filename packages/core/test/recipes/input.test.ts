@@ -1,7 +1,12 @@
+/**
+ * Tests the input recipe's pure output — invalid state className and a11y wiring.
+ * The input recipe is a thin contract; most behavior is in the adapter layer.
+ */
 import { describe, expect, it } from "vitest"
 import { createInputRecipe } from "../../src/components/atoms/input/input-recipe"
 
 describe("createInputRecipe", () => {
+  // Verifies that invalid state produces both visual (className) and semantic (aria) signals
   it("creates invalid state class and a11y wiring", () => {
     const kit = createInputRecipe({
       ariaLabel: "Email",

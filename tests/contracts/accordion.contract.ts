@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Accordion atom — trigger/panel wiring,
+ * disabled toggle suppression, labeled groups, and description text connection.
+ */
 import { describe, expect, it } from "vitest"
 
 export type AccordionContractItem = {

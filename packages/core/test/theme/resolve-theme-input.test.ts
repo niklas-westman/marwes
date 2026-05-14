@@ -1,3 +1,9 @@
+/**
+ * Tests resolveThemeInput — the central normalization function that merges
+ * user overrides onto defaults. Covers color role derivation, secondary/info
+ * aliases, surface/font/ui/typography overrides, tone presets (digital/playful/
+ * editorial), and the rule that user overrides always beat tone defaults.
+ */
 import { describe, expect, it } from "vitest"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"
 import { ThemeMode } from "../../src/theme/theme-types"
@@ -49,6 +55,13 @@ describe("resolveThemeInput — defaults", () => {
 
   it("default muted text follows the source secondary text token", () => {
     expect(resolveThemeInput({}).color.textMuted).toBe("#595959")
+  })
+
+  it("default status borderStrong follows the latest border data", () => {
+    expect(resolveThemeInput({}).color.status.info.borderStrong).toBe("#5859FC")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.status.info.borderStrong).toBe(
+      "#252599",
+    )
   })
 
   it("default typography.h1.fontSize is 32", () => {

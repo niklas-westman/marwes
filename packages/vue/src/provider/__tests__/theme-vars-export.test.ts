@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Verifies that core theme variable helpers (mwThemeVars, mwVar, etc.)
+ * are re-exported from the adapter package root.
+ */
 import { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 import * as publicApi from "../../index"

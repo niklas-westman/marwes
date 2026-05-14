@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the AvatarBadge molecule — online status
+ * default, initials with custom status labels, and decorative mode.
+ */
 import { describe, expect, it } from "vitest"
 
 export type AvatarBadgeSize = "small" | "medium" | "large"

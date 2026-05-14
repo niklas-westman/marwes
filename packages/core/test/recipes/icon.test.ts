@@ -1,3 +1,7 @@
+/**
+ * Tests the icon recipe's pure output — decorative (aria-hidden) vs labelled
+ * (role=img) modes, size classes, and stroke width CSS variable.
+ */
 import { describe, expect, it } from "vitest"
 import { IconName } from "../../src/components/atoms/icon"
 import { createIconRecipe } from "../../src/components/atoms/icon/icon-recipe"

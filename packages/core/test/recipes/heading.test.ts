@@ -1,3 +1,8 @@
+/**
+ * Tests the heading recipe's pure output — semantic tag derived from level,
+ * visual size override ("render as h3, look like h1"), and typography
+ * CSS variables resolved from the theme.
+ */
 import { describe, expect, it } from "vitest"
 import { headingRecipe } from "../../src/components/atoms/heading/heading-recipe"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"

@@ -1,3 +1,8 @@
+/**
+ * Tests SSR theme helpers — the inline script generator (no-eval, XSS-safe),
+ * server-side mode resolution, and dual-mode CSS style sheet generation.
+ * These are used by framework integrations to avoid flash-of-wrong-theme.
+ */
 import { describe, expect, it } from "vitest"
 import {
   ThemeMode,

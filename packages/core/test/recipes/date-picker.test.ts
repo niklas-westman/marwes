@@ -1,3 +1,8 @@
+/**
+ * Tests the date-picker recipe's pure output — month/weekday labels,
+ * 6-week grid structure, day state mapping (selected/range/empty),
+ * device mode, and accessible day label resolution.
+ */
 import { describe, expect, it } from "vitest"
 import { createDatePickerRecipe, resolveDatePickerDayLabel } from "../../src"
 

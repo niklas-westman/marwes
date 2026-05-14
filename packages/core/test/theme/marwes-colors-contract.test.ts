@@ -1,3 +1,8 @@
+/**
+ * Contract test: verifies that the theme engine's CSS variables match the
+ * canonical color values in docs/marwes-colors.json. This keeps the code
+ * and the Figma design documentation in sync across light and dark modes.
+ */
 import { readFileSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"
@@ -10,14 +15,22 @@ type ModeValue = {
   dark: string
 }
 
+type TokenModeValue = {
+  light: { $value: string }
+  dark: { $value: string }
+}
+
 type MarwesColorSource = {
   semantic: {
     surface: Record<
       "primary" | "secondary" | "sunken" | "raised" | "disabled" | "inverse",
       ModeValue
     >
-    text: Record<"primary" | "secondary" | "disabled" | "inverse" | "onSurfaceDark", ModeValue>
-    border: Record<"default" | "strong", ModeValue>
+    text: Record<
+      "primary" | "secondary" | "disabled" | "inverse" | "onSurfaceDark" | "brand",
+      ModeValue
+    >
+    border: Record<"default" | "strong" | "brand", ModeValue>
     focus: Record<"ring", ModeValue>
     action: {
       primary: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
@@ -25,15 +38,32 @@ type MarwesColorSource = {
       destructive: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
     }
     status: {
-      success: Record<"text", ModeValue>
-      warning: Record<"text", ModeValue>
-      info: Record<"icon", ModeValue>
+      success: Record<"background" | "text" | "icon" | "border", ModeValue>
+      warning: Record<"background" | "text" | "icon" | "border", ModeValue>
+      error: Record<"background" | "text" | "icon" | "border", ModeValue>
+      info: Record<"background" | "text" | "icon" | "border", ModeValue>
     }
+  }
+}
+
+type BorderStrongColorSource = {
+  status: {
+    info: { "border-strong": TokenModeValue }
+    success: { "border-strong": TokenModeValue }
+    warning: { "border-strong": TokenModeValue }
+    error: { "border-strong": TokenModeValue }
   }
 }
 
 const colorSourcePath = path.resolve(__dirname, "../../../../docs/marwes-colors.json")
 const colorSource = JSON.parse(readFileSync(colorSourcePath, "utf8")) as MarwesColorSource
+const borderStrongSourcePath = path.resolve(
+  __dirname,
+  "../../../../docs/marwes-border-strong-tokens.json",
+)
+const borderStrongSource = JSON.parse(
+  readFileSync(borderStrongSourcePath, "utf8"),
+) as BorderStrongColorSource
 
 const lightVars = themeToCSSVars(resolveThemeInput({ mode: ThemeMode.light }))
 const darkVars = themeToCSSVars(resolveThemeInput({ mode: ThemeMode.dark }))
@@ -48,6 +78,13 @@ function expectModeVar(
 ) {
   expect(modeVars.light[cssVar]).toBe(expected.light)
   expect(modeVars.dark[cssVar]).toBe(expected.dark)
+}
+
+function tokenModeValue(token: TokenModeValue): ModeValue {
+  return {
+    light: token.light.$value,
+    dark: token.dark.$value,
+  }
 }
 
 describe("Marwes color source contract", () => {
@@ -67,6 +104,7 @@ describe("Marwes color source contract", () => {
       light: colorSource.semantic.text.inverse.light,
       dark: colorSource.semantic.text.onSurfaceDark.dark,
     })
+    expectModeVar("--mw-color-text-brand", colorSource.semantic.text.brand)
   })
 
   it("maps border and focus CSS vars to docs/marwes-colors.json", () => {
@@ -74,6 +112,7 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-border-subtle", colorSource.semantic.border.default)
     expectModeVar("--mw-color-border-strong", colorSource.semantic.border.strong)
     expectModeVar("--mw-color-border-disabled", colorSource.semantic.border.default)
+    expectModeVar("--mw-color-border-brand", colorSource.semantic.border.brand)
     expectModeVar("--mw-color-focus", colorSource.semantic.focus.ring)
   })
 
@@ -100,9 +139,54 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-danger-label", colorSource.semantic.action.destructive.label)
   })
 
-  it("maps status role base CSS vars to docs/marwes-colors.json", () => {
+  it("maps status role CSS vars to docs/marwes-colors.json", () => {
     expectModeVar("--mw-color-success-base", colorSource.semantic.status.success.text)
     expectModeVar("--mw-color-warning-base", colorSource.semantic.status.warning.text)
     expectModeVar("--mw-color-info-base", colorSource.semantic.status.info.icon)
+
+    expectModeVar(
+      "--mw-color-status-success-background",
+      colorSource.semantic.status.success.background,
+    )
+    expectModeVar("--mw-color-status-success-text", colorSource.semantic.status.success.text)
+    expectModeVar("--mw-color-status-success-icon", colorSource.semantic.status.success.icon)
+    expectModeVar("--mw-color-status-success-border", colorSource.semantic.status.success.border)
+    expectModeVar(
+      "--mw-color-status-success-border-strong",
+      tokenModeValue(borderStrongSource.status.success["border-strong"]),
+    )
+
+    expectModeVar(
+      "--mw-color-status-warning-background",
+      colorSource.semantic.status.warning.background,
+    )
+    expectModeVar("--mw-color-status-warning-text", colorSource.semantic.status.warning.text)
+    expectModeVar("--mw-color-status-warning-icon", colorSource.semantic.status.warning.icon)
+    expectModeVar("--mw-color-status-warning-border", colorSource.semantic.status.warning.border)
+    expectModeVar(
+      "--mw-color-status-warning-border-strong",
+      tokenModeValue(borderStrongSource.status.warning["border-strong"]),
+    )
+
+    expectModeVar(
+      "--mw-color-status-error-background",
+      colorSource.semantic.status.error.background,
+    )
+    expectModeVar("--mw-color-status-error-text", colorSource.semantic.status.error.text)
+    expectModeVar("--mw-color-status-error-icon", colorSource.semantic.status.error.icon)
+    expectModeVar("--mw-color-status-error-border", colorSource.semantic.status.error.border)
+    expectModeVar(
+      "--mw-color-status-error-border-strong",
+      tokenModeValue(borderStrongSource.status.error["border-strong"]),
+    )
+
+    expectModeVar("--mw-color-status-info-background", colorSource.semantic.status.info.background)
+    expectModeVar("--mw-color-status-info-text", colorSource.semantic.status.info.text)
+    expectModeVar("--mw-color-status-info-icon", colorSource.semantic.status.info.icon)
+    expectModeVar("--mw-color-status-info-border", colorSource.semantic.status.info.border)
+    expectModeVar(
+      "--mw-color-status-info-border-strong",
+      tokenModeValue(borderStrongSource.status.info["border-strong"]),
+    )
   })
 })

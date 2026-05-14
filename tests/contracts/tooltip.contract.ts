@@ -1,3 +1,8 @@
+/**
+ * Shared contract for the Tooltip atom — role=tooltip with id,
+ * trigger label naming, default trigger label fallback, hover-open with
+ * aria-describedby wiring, and keyboard Escape dismissal.
+ */
 import { describe, expect, it } from "vitest"
 
 export type TooltipContractHarness = {

@@ -1,0 +1,92 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Spinner/Introduction" />
+
+# Spinner Components
+
+Marwes provides `Spinner` as a loading indicator atom with seven visual variants,
+plus **ButtonSpinner** and **EmptyStateSpinner** purpose molecules.
+
+## Component Architecture
+
+```
+Spinner (Atom)
+     ↓
+ButtonSpinner (Molecule — inline button loading)
+EmptyStateSpinner (Molecule — centered empty state)
+```
+
+## Recommended Usage
+
+Use the raw `Spinner` atom when you need direct control. Use purpose molecules
+when the loading context matches their pattern.
+
+```svelte
+<script>
+  import { Button, Spinner, ButtonSpinner, EmptyStateSpinner } from "@marwes-ui/svelte"
+</script>
+
+<!-- Standalone spinner -->
+<Spinner variant="classic" size="md" decorative />
+<Spinner variant="dots-round" size="lg" ariaLabel="Loading account data" />
+
+<!-- Inside a button -->
+<Button variant="secondary" disabled>
+  <ButtonSpinner />
+  Please wait
+</Button>
+
+<!-- Centered empty state -->
+<EmptyStateSpinner />
+```
+
+## Variants
+
+Seven visual variants synced from Figma:
+
+- `classic` — Single rotating arc
+- `ring` — Full ring with indicator
+- `dual` — Double arc rotation
+- `dots-round` — Circular dot animation
+- `dots-square` — Square dot animation
+- `lines` — Radiating line animation
+- `cross` — Cross-shaped rotation
+
+## Sizes
+
+Spinner supports token sizes and custom pixel values:
+
+- `xs` — 16px
+- `sm` — 24px
+- `md` — 32px
+- `lg` — 40px
+- Custom number (e.g. `56` for 56px)
+
+## Accessibility Notes
+
+**Decorative by default.** When visible text nearby already says what is loading,
+keep the spinner decorative (hidden from assistive technology).
+
+**Add `ariaLabel` for standalone spinners.** When the spinner must announce loading on its own,
+provide `ariaLabel` and set `decorative={false}`.
+
+**Reduced-motion.** Animation slows under `prefers-reduced-motion: reduce` rather than stopping.
+
+## Button loading
+
+Use `ButtonSpinner` inside a disabled `Button` when documenting the purpose wrapper directly.
+For product flows, prefer the `Button` loading prop so button semantics, busy state, and click blocking stay together.
+
+## Component Reference
+
+**`Spinner`** — Low-level loading indicator atom with 7 variants and size scale
+
+**`ButtonSpinner`** — Purpose molecule for inline button loading treatments; render it inside `Button` or use the `Button` loading prop.
+
+**`EmptyStateSpinner`** — Purpose molecule for centered empty-state loading
+
+## Story Coverage
+
+- **Atom**: `Default`, `Classic`, `Ring`, `Dual`, `DotsRound`, `DotsSquare`, `Lines`, `Cross`, `Small`, `Large`, `AccessibleStatus`
+- **Molecule/ButtonSpinner**: `Default`, `Inverted`
+- **Molecule/EmptyStateSpinner**: `Default`

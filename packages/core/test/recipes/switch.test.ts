@@ -1,3 +1,7 @@
+/**
+ * Tests the switch recipe's pure output — compact/wide/rich size variants,
+ * checked/disabled modifier classes, and aria attribute passthrough.
+ */
 import { describe, expect, it } from "vitest"
 import { createSwitchRecipe } from "../../src/components/atoms/switch/switch-recipe"
 import { SwitchSize } from "../../src/components/atoms/switch/switch-types"

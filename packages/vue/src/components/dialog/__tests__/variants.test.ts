@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests Dialog purpose/variant components — verifies that each
+ * purpose wrapper renders with the correct semantic defaults and metadata.
+ */
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"

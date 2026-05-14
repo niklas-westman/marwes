@@ -1,3 +1,6 @@
+/**
+ * CSS contract: verifies the firstEdition tab stylesheet.
+ */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"

@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Currency Field molecule — wires the shared contract for label,
+ * helper text, error state, and aria-describedby connections.
+ */
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"

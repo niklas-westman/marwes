@@ -1,3 +1,7 @@
+/**
+ * Shared contract for InputOtp — label and one-time-code autocomplete
+ * wiring, digit-only sanitization with visible cells, and invalid/error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type InputOtpContractHarness = {

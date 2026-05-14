@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the ToastContainer component — toast stacking, automatic
+ * dismissal, and container positioning.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"

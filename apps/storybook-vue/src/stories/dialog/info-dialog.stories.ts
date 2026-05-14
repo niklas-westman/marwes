@@ -10,7 +10,6 @@ const meta = {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
-  tags: ["autodocs"],
 } satisfies Meta<InfoDialogProps>
 
 export default meta

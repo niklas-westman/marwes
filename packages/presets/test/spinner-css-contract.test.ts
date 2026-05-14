@@ -1,3 +1,8 @@
+/**
+ * CSS contract: verifies the firstEdition spinner stylesheet
+ * seeds theme colors, rotation animation, cross variant behavior,
+ * and reduced-motion slow-not-stop policy.
+ */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"

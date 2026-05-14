@@ -1,0 +1,136 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Avatar/Introduction" />
+
+# Avatar Components
+
+Marwes provides avatars at three layers: **purpose components** for common
+identity contexts, **molecules** for presence and grouped layouts, and the raw
+**Avatar** atom for custom composition.
+
+## Component Architecture
+
+```
+Avatar (Atom)
+     ↓
+AvatarBadge / AvatarGroup (Molecules)
+     ↓
+Purpose Wrappers
+  ├─ ProfileAvatar
+  ├─ PresenceAvatar
+  └─ TeamAvatarGroup
+```
+
+## Recommended: Purpose Components
+
+Use semantic wrappers when the avatar has a clear product meaning:
+
+```svelte
+<script>
+  import { ProfileAvatar, PresenceAvatar, TeamAvatarGroup } from "@marwes-ui/svelte"
+</script>
+
+<ProfileAvatar initials="MW" />
+<PresenceAvatar initials="MW" statusLabel="Online" />
+<TeamAvatarGroup
+  ariaLabel="Project members"
+  items={[
+    { id: "mw", initials: "MW" },
+    { id: "nk", initials: "NK" },
+    { id: "guest", type: "icon", ariaLabel: "Guest member" },
+  ]}
+  overflowCount={3}
+/>
+```
+
+## Molecules
+
+### AvatarBadge
+
+Avatar with the online presence green-dot indicator:
+
+```svelte
+<script>
+  import { AvatarBadge } from "@marwes-ui/svelte"
+</script>
+
+<AvatarBadge initials="MW" size="medium" />
+```
+
+### AvatarGroup
+
+Stacked avatar layout with optional overflow counter:
+
+```svelte
+<script>
+  import { AvatarGroup } from "@marwes-ui/svelte"
+</script>
+
+<AvatarGroup
+  ariaLabel="Project members"
+  items={[
+    { id: "mw", initials: "MW" },
+    { id: "nk", initials: "NK" },
+  ]}
+  overflowCount={3}
+/>
+```
+
+## Atom: Avatar
+
+Use the raw `Avatar` atom for standalone identity rendering:
+
+```svelte
+<script>
+  import { Avatar } from "@marwes-ui/svelte"
+</script>
+
+<Avatar type="icon" ariaLabel="User avatar" />
+<Avatar initials="NW" ariaLabel="Niklas Westman" />
+<Avatar src="https://i.pravatar.cc/80" alt="User photo" />
+```
+
+## Usage Notes
+
+- Supports `small`, `medium`, and `large` sizes
+- Supports `initials`, `icon`, and `image` content types
+- `initials` are normalized to two uppercase characters
+- `alt` labels image avatars; `ariaLabel` also works as a fallback
+- `decorative` hides the avatar from assistive technology
+
+## Accessibility Notes
+
+**Image avatars need a name.** Always provide `alt` or `ariaLabel` when the image communicates identity.
+
+**Group label.** `AvatarGroup` uses a `<fieldset>` wrapper. Provide `ariaLabel` that describes the group in context.
+
+**Overflow counter.** Exposed as `role="img"` with label like "3 more people".
+
+## Component Reference
+
+### Purpose Components
+
+**`ProfileAvatar`** — Identity avatar for user profiles (`data-purpose="profile"`)
+
+**`PresenceAvatar`** — Presence-aware avatar with online status (`data-purpose="presence"`)
+
+**`TeamAvatarGroup`** — Grouped avatars for teams (`data-purpose="team"`)
+
+### Molecules
+
+**`AvatarBadge`** — Avatar with online presence indicator
+
+**`AvatarGroup`** — Stacked avatar layout with overflow counter
+
+### Atom
+
+**`Avatar`** — Base avatar for initials, icon fallback, and image content
+
+## Story Coverage
+
+- **Atom**: `Icon`, `Initials`, `Image`, `Small`, `Large`
+- **Molecule/AvatarBadge**: `Default`, `Small`, `Large`
+- **Molecule/AvatarGroup**: `Default`, `WithoutOverflow`
+- **Purpose/ProfileAvatar**: `Default`
+- **Purpose/PresenceAvatar**: `Default`
+- **Purpose/TeamAvatarGroup**: `Default`

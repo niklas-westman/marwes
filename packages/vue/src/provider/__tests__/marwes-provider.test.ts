@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the MarwesProvider component — theme context injection,
+ * mode toggling, dark/light detection, and provider nesting behavior.
+ */
 import type { ResolvedTheme } from "@marwes-ui/core"
 import { ThemeMode, resolveThemeInput } from "@marwes-ui/core"
 import { fireEvent, render, screen, waitFor } from "@testing-library/vue"

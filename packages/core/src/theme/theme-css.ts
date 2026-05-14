@@ -1,6 +1,6 @@
 import type { ColorRole, SecondaryColorRole } from "./color-resolve"
 import { densityToCSSVars } from "./density"
-import { ThemeMode } from "./theme-types"
+import { type StatusColorTokens, ThemeMode } from "./theme-types"
 import type { Density, ThemeMode as ThemeModeValue } from "./theme-types"
 
 // ─── ResolvedTheme ────────────────────────────────────────────────────────────
@@ -27,11 +27,19 @@ export interface ResolvedTheme {
     textSubtle: string
     textDisabled: string
     textInverted: string
+    textBrand: string
     border: string
     borderSubtle: string
     borderStrong: string
     borderDisabled: string
+    borderBrand: string
     focus: string
+    status: {
+      success: StatusColorTokens
+      warning: StatusColorTokens
+      error: StatusColorTokens
+      info: StatusColorTokens
+    }
   }
   font: {
     primary: string
@@ -67,11 +75,21 @@ function colorRoleVars(role: string, cr: ColorRole): Record<string, string> {
   }
 }
 
+function statusColorVars(role: string, tokens: StatusColorTokens): Record<string, string> {
+  return {
+    [`--mw-color-status-${role}-background`]: tokens.background,
+    [`--mw-color-status-${role}-text`]: tokens.text,
+    [`--mw-color-status-${role}-icon`]: tokens.icon,
+    [`--mw-color-status-${role}-border`]: tokens.border,
+    [`--mw-color-status-${role}-border-strong`]: tokens.borderStrong,
+  }
+}
+
 // ─── themeToCSSVars ───────────────────────────────────────────────────────────
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 86 entries total. `variant` is excluded — it is deprecated.
+ * Returns 108 entries total. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -104,11 +122,19 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-text-subtle": color.textSubtle,
     "--mw-color-text-disabled": color.textDisabled,
     "--mw-color-text-inverted": color.textInverted,
+    "--mw-color-text-brand": color.textBrand,
     "--mw-color-border": color.border,
     "--mw-color-border-subtle": color.borderSubtle,
     "--mw-color-border-strong": color.borderStrong,
     "--mw-color-border-disabled": color.borderDisabled,
+    "--mw-color-border-brand": color.borderBrand,
     "--mw-color-focus": color.focus,
+
+    // Status role tokens (4 × 5 = 20)
+    ...statusColorVars("success", color.status.success),
+    ...statusColorVars("warning", color.status.warning),
+    ...statusColorVars("error", color.status.error),
+    ...statusColorVars("info", color.status.info),
 
     // Font (3)
     "--mw-font-primary": font.primary,

@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests Toast purpose/variant components — verifies that each
+ * purpose wrapper renders with the correct semantic defaults and metadata.
+ */
 import { act, fireEvent, render, screen } from "@testing-library/react"
 import * as React from "react"
 import { describe, expect, it, vi } from "vitest"

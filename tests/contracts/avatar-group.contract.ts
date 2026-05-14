@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the AvatarGroup molecule — grouped avatar
+ * stack, overflow counter, and default group label fallback.
+ */
 import { describe, expect, it } from "vitest"
 
 export interface AvatarGroupContractHarness {

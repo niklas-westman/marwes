@@ -1,3 +1,9 @@
+/**
+ * Compile-time type validation tests for theme types. If this file compiles
+ * and passes, ColorInput, ColorRole, SecondaryColorRole, ThemeInput, and
+ * ThemeInputColor are correctly shaped. Also verifies that deprecated v3
+ * fields (on* prefixes, secondary color) are typed as never.
+ */
 import { describe, expect, it } from "vitest"
 import { lightThemeDefaults } from "../../src/theme/theme-defaults"
 import { ThemeMode } from "../../src/theme/theme-types"

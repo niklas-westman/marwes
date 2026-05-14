@@ -1,0 +1,93 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Checkbox/Introduction" />
+
+# Checkbox Components
+
+Marwes provides checkboxes at two layers: **CheckboxField** and **CheckboxGroupField**
+for standard form usage, and the raw **Checkbox** atom for custom layouts.
+
+## Component Architecture
+
+```
+Checkbox (Atom)
+     ↓
+CheckboxField (Molecule — single)
+CheckboxGroupField (Molecule — multi)
+```
+
+## Recommended: CheckboxField
+
+Use `CheckboxField` for single checkbox controls in forms:
+
+```svelte
+<script>
+  import { CheckboxField } from "@marwes-ui/svelte"
+</script>
+
+<CheckboxField label="Subscribe to updates" />
+<CheckboxField label="Accept terms" description="Required to create an account." />
+<CheckboxField label="Accept terms" error="You must accept the terms." />
+```
+
+## Recommended: CheckboxGroupField
+
+Use `CheckboxGroupField` for multi-select groups:
+
+```svelte
+<script>
+  import { CheckboxGroupField } from "@marwes-ui/svelte"
+</script>
+
+<CheckboxGroupField
+  label="Select your interests"
+  options={[
+    { value: "design", label: "Design" },
+    { value: "engineering", label: "Engineering" },
+    { value: "product", label: "Product" },
+  ]}
+/>
+```
+
+## Low-level: Checkbox (Atom)
+
+Use directly when you need a custom layout:
+
+```svelte
+<script>
+  import { Checkbox } from "@marwes-ui/svelte"
+  let accepted = $state(false)
+</script>
+
+<label>
+  <Checkbox bind:checked={accepted} />
+  Accept terms
+</label>
+```
+
+## Usage Notes
+
+- `bind:checked` for two-way binding
+- `indeterminate` shows a mixed-state indicator
+- `oncheckedchange` fires with the next boolean value
+- `disabled` prevents interaction
+
+## Accessibility Notes
+
+**Always provide a label.** Use `CheckboxField` for automatic labeling, or wrap in `<label>` when using the atom directly.
+
+**Indeterminate state** is set via DOM property (not HTML attribute) and announced by screen readers as "mixed".
+
+## Component Reference
+
+**`CheckboxField`** — Single checkbox with label, description, and error wiring
+
+**`CheckboxGroupField`** — Multi-select group with accessible fieldset
+
+**`Checkbox`** — Low-level native `<input type="checkbox">`
+
+## Story Coverage
+
+- **Atom**: `Default`, `Checked`, `Disabled`, `Indeterminate`
+- **Molecule/CheckboxField**: `Default`, `WithDescription`, `WithError`, `Disabled`
+- **Molecule/CheckboxGroupField**: `Default`, `WithError`, `Disabled`

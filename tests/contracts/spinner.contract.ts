@@ -1,3 +1,10 @@
+/**
+ * Shared contract for the Spinner atom's cross-adapter behavior.
+ *
+ * Tests decorative mode (aria-hidden), accessible status mode (role=status),
+ * variant class names, size tokens, custom pixel sizes, inner SVG hiding,
+ * and explicit decorative flag handling.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SpinnerVariant =

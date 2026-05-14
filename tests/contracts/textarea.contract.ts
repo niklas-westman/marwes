@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Textarea atom — defaultValue rendering,
+ * onValueChange callback, disabled blocking, readonly semantics, and invalid state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type TextareaContractHarness = {

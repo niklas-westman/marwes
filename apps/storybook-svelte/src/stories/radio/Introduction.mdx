@@ -1,0 +1,144 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  radioWhyPurposeComponents,
+  radioPurposeComponentReference,
+} from "@marwes-ui/core"
+
+<Meta title="Radio/Introduction" />
+
+# Radio Components
+
+Marwes provides a radio system with three layers:
+**purpose components** for common patterns, **RadioGroupField** for custom option lists,
+and the raw **Radio** atom for advanced control.
+
+## Recommended: Purpose Components
+
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```svelte
+<script>
+  import { YesNoRadioGroup, RatingRadioGroup, OptionRadioGroup } from "@marwes-ui/svelte"
+</script>
+
+<!-- Binary yes/no — sets data-purpose="binary-choice" -->
+<YesNoRadioGroup
+  name="accept-terms"
+  label="Do you accept the terms?"
+  defaultValue="no"
+/>
+
+<!-- Numeric rating scale — sets data-purpose="rating" -->
+<RatingRadioGroup
+  name="satisfaction"
+  label="How satisfied are you?"
+  defaultValue="3"
+/>
+
+<!-- General labeled options — sets data-purpose="selection" -->
+<OptionRadioGroup
+  name="theme"
+  label="Select theme"
+  options={[
+    { value: "light", label: "Light" },
+    { value: "dark", label: "Dark" },
+    { value: "system", label: "System" },
+  ]}
+  defaultValue="system"
+/>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {radioWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {radioPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: RadioGroupField (Molecule)
+
+For custom option lists that don't fit a purpose component:
+
+```svelte
+<script>
+  import { Radio, RadioGroupField } from "@marwes-ui/svelte"
+</script>
+
+<RadioGroupField label="Shipping method" description="Choose how you'd like your order delivered.">
+  <label class="mw-radio-group-field__option">
+    <Radio name="shipping" value="standard" checked />
+    <span class="mw-p mw-p--md">Standard (5-7 days)</span>
+  </label>
+  <label class="mw-radio-group-field__option">
+    <Radio name="shipping" value="express" />
+    <span class="mw-p mw-p--md">Express (2-3 days)</span>
+  </label>
+</RadioGroupField>
+```
+
+### RadioGroupField Features
+
+- **Accessible group** — `role="radiogroup"` with `aria-labelledby` and `aria-describedby`
+- **Label + description + error** — field semantics with automatic a11y wiring
+- **Children snippet** — compose your own radio options inside
+
+## Low-level: Radio (Atom)
+
+Use the raw `Radio` atom for fully custom layouts:
+
+```svelte
+<script>
+  import { Radio } from "@marwes-ui/svelte"
+  let selected = $state("a")
+</script>
+
+<div role="radiogroup" aria-label="Preference">
+  <label>
+    <Radio name="pref" value="a" checked={selected === "a"} onchange={() => selected = "a"} />
+    Option A
+  </label>
+  <label>
+    <Radio name="pref" value="b" checked={selected === "b"} onchange={() => selected = "b"} />
+    Option B
+  </label>
+</div>
+```
+
+## Component Reference
+
+### Purpose Components
+
+**`YesNoRadioGroup`** — Binary yes/no choices (`data-purpose="binary-choice"`)
+
+**`RatingRadioGroup`** — Numeric scale selection (`data-purpose="rating"`)
+
+**`OptionRadioGroup`** — General labeled options (`data-purpose="selection"`)
+
+### Base Molecule
+
+**`RadioGroupField`** — Accessible radio group with field semantics
+
+### Atom
+
+**`Radio`** — Low-level native `<input type="radio">`
+
+## Story Coverage
+
+- **Atom**: `Default`, `Checked`, `Disabled`
+- **Molecule**: `Default`, `WithDescription`, `WithError`, `Disabled`
+- **Purpose/Option**: `Default`
+- **Purpose/Rating**: `Default`, `CustomRange`
+- **Purpose/YesNo**: `Default`, `CustomLabels`

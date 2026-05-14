@@ -1,3 +1,8 @@
+/**
+ * Tests the button recipe's pure output — className, a11y attributes, loading
+ * state normalization, and anchor-mode interaction blocking.
+ * No DOM or framework involved; adapter tests verify the rendered result.
+ */
 import { describe, expect, it } from "vitest"
 import { SpinnerVariants, createButtonRecipe } from "../../src/components/atoms"
 
@@ -21,6 +26,7 @@ describe("createButtonRecipe", () => {
   })
 
   it("normalizes object loading without forcing disabled state when opted out", () => {
+    // Consumer explicitly opts out of disableWhileLoading
     const kit = createButtonRecipe({
       as: "button",
       loading: {
@@ -37,6 +43,8 @@ describe("createButtonRecipe", () => {
       spinnerVariant: SpinnerVariants.dual,
       loadingLabel: "Saving…",
     })
+
+    // Button stays interactive — no disabled/aria-disabled attributes
     expect(kit.a11y.ariaBusy).toBe(true)
     expect(kit.a11y.ariaDisabled).toBeUndefined()
     expect(kit.a11y.disabled).toBeUndefined()
@@ -44,6 +52,7 @@ describe("createButtonRecipe", () => {
   })
 
   it("builds anchor render kit and blocks navigation when loading disables interaction", () => {
+    // Anchor button with default disableWhileLoading=true
     const kit = createButtonRecipe({
       as: "a",
       href: "/docs",
@@ -53,10 +62,16 @@ describe("createButtonRecipe", () => {
     })
 
     expect(kit.tag).toBe("a")
+
+    // href removed so the browser won't navigate
     expect(kit.a11y.href).toBeUndefined()
+
+    // Assistive tech sees the busy + disabled state
     expect(kit.a11y.ariaBusy).toBe(true)
     expect(kit.a11y.ariaDisabled).toBe(true)
     expect(kit.a11y.tabIndex).toBe(-1)
+
+    // Adapter should block the click handler
     expect(kit.blockClick).toBe(true)
     expect(kit.dataAttributes?.["data-action"]).toBe("navigate")
   })

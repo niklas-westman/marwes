@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Slider atom — native range slider metadata,
+ * uncontrolled value updates, controlled value source of truth, and disabled semantics.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SliderContractHarness = {
@@ -138,6 +142,18 @@ export function runSliderContract(adapterName: string, harness: SliderContractHa
       expect(description).not.toBeNull()
       expect(description?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(description?.id ?? "")
+    })
+
+    it("renders edge value labels from the slider bounds", async () => {
+      await harness.renderSliderField({
+        label: "Radius",
+        min: 0,
+        max: 48,
+        defaultValue: 24,
+      })
+
+      expect(harness.getByText("0").closest(".mw-slider-field__edge-value")).not.toBeNull()
+      expect(harness.getByText("48").closest(".mw-slider-field__edge-value")).not.toBeNull()
     })
 
     it("merges external describedBy with error text and marks the slider invalid", async () => {

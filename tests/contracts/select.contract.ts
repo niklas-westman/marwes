@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Select atom — defaultValue rendering,
+ * placeholder option, onValueChange callback, disabled blocking, and native appearance mode.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SelectContractOption = {

@@ -1,3 +1,7 @@
+/**
+ * Tests the badge recipe's pure output — variant modifier classes
+ * (neutral, info, success, warning, error) and a11y label passthrough.
+ */
 import { describe, expect, it } from "vitest"
 import { BadgeVariant } from "../../src/components/atoms/badge"
 import { createBadgeRecipe } from "../../src/components/atoms/badge/badge-recipe"

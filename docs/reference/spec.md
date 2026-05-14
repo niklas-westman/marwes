@@ -1117,3 +1117,24 @@ Use this format when resolving an open decision:
   - `apps/storybook-vue/src/stories/button/*`
   - `docs/registry/families/button/README.md`
   - `AXE_ROADMAP.md`
+
+### REQ-SVELTE-001: Native Svelte 5 adapter
+
+- Status: implemented
+- Decision:
+  - Build `@marwes-ui/svelte` as a native Svelte 5 adapter using runes (`$props`, `$state`, `$derived`, `$effect`, `$bindable`).
+  - The adapter is a thin wrapper over `@marwes-ui/core` recipes, matching the React and Vue adapter pattern.
+  - `@marwes-ui/core` is the only runtime dependency. `svelte ^5.20.0` is a peer dependency.
+  - CSS is not auto-imported. Users import from `@marwes-ui/presets/firstEdition/styles.css` explicitly.
+  - Form controls use `$bindable` for two-way binding (`value`, `checked`).
+  - Generated field IDs use `$props.id()` for SSR safety.
+  - Children are rendered via Svelte 5 snippets (`{@render children?.()}`).
+  - Legacy Svelte patterns (`export let`, `$:`, `<slot>`, `on:click`, `createEventDispatcher`) are not used.
+- Rationale:
+  - Native Svelte components provide idiomatic DX with proper type inference, snippet support, and rune-based reactivity.
+  - Keeping the adapter thin ensures behavior parity with React and Vue without duplicating core logic.
+- Impacted docs/files:
+  - `packages/svelte/`
+  - `apps/storybook-svelte/`
+  - `apps/playground-svelte/`
+  - `implementation-svelte.md`

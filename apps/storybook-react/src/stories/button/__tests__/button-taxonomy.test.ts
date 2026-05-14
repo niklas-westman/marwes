@@ -1,3 +1,7 @@
+/**
+ * React Button story taxonomy guard — verifies that story files
+ * use the correct Storybook title hierarchy and that all expected stories exist.
+ */
 import { readFileSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"
@@ -15,6 +19,14 @@ describe("React button story taxonomy", () => {
     expect(buttonStory).toContain('title: "Buttons/Atom/Button"')
     expect(buttonStory).toContain("component: Button")
     expect(buttonStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
+  it("keeps boolean and object loading stories visually aligned", () => {
+    const buttonStory = readStoryFile("button.stories.tsx")
+
+    expect(buttonStory).toContain('children: "Saving…"')
+    expect(buttonStory).toContain('loadingLabel: "Saving…"')
+    expect(buttonStory).not.toContain("Saving...")
   })
 
   it("uses Variant titles for visual wrapper buttons", () => {
@@ -45,6 +57,7 @@ describe("React button story taxonomy", () => {
       "search-button.stories.tsx",
       "sort-button.stories.tsx",
       "submit-button.stories.tsx",
+      "success-button.stories.tsx",
       "upload-button.stories.tsx",
       "verify-button.stories.tsx",
     ]
@@ -77,6 +90,7 @@ describe("React button story taxonomy", () => {
       "search-button.stories.tsx",
       "sort-button.stories.tsx",
       "submit-button.stories.tsx",
+      "success-button.stories.tsx",
       "upload-button.stories.tsx",
       "verify-button.stories.tsx",
     ]

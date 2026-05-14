@@ -1,0 +1,55 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Design System/Introduction" />
+
+# Color System
+
+Color tokens define brand, semantic, text, and surface behavior across all components.
+
+## Token Architecture
+
+```
+Design Tokens
+  -> Brand (primary/secondary)
+  -> Semantic (success/danger/warning)
+  -> Text and Surface
+  -> Border
+```
+
+## Recommended Usage
+
+Use theme tokens and CSS variables rather than hardcoded color values. String color inputs keep
+automatic label contrast, while object-form color inputs let a preset or app override
+`label`/`labelDisabled` for brand fills that should force white.
+
+```css
+.button {
+  background: var(--mw-color-primary-base);
+  color: var(--mw-color-primary-label);
+  border: 1px solid var(--mw-color-border);
+}
+```
+
+```svelte
+<script>
+  import { MarwesProvider } from "@marwes-ui/svelte"
+</script>
+
+<MarwesProvider
+  theme={{
+    color: {
+      primary: {
+        base: "#5B8CFF",
+        label: "#FFFFFF",
+        labelDisabled: "rgba(255,255,255,0.5)",
+      },
+    },
+  }}
+>
+  <slot />
+</MarwesProvider>
+```
+
+## Story Coverage
+
+- `AllColors` for full token inventory

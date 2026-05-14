@@ -1,3 +1,8 @@
+/**
+ * Shared contract for Toast components — polite/assertive live region
+ * semantics, dismiss button accessibility, and purpose toast variants
+ * (Success, Error, Warning, Info) with canonical semantic attributes.
+ */
 import { describe, expect, it, vi } from "vitest"
 
 export interface ToastDeliverySpec {

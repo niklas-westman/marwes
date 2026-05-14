@@ -1,3 +1,8 @@
+/**
+ * Tests the skeleton recipe's pure output — text/circular/rectangular variant
+ * defaults from Figma, custom dimensions, animation modes (pulse/wave/none),
+ * and decorative-vs-status a11y.
+ */
 import { describe, expect, it } from "vitest"
 import { createSkeletonRecipe } from "../../src/components/atoms/skeleton/skeleton-recipe"
 

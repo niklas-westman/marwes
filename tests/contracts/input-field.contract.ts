@@ -1,3 +1,7 @@
+/**
+ * Shared contract for InputField molecule — label-to-input wiring,
+ * helper text via aria-describedby, and invalid/error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type InputFieldContractHarness = {

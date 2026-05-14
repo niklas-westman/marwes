@@ -1,3 +1,8 @@
+/**
+ * Tests the rich-text HTML sanitizer — strips unsafe tags and event handlers,
+ * preserves allowed formatting tags, and escapes plain text to prevent XSS
+ * when content is rendered via innerHTML.
+ */
 import { describe, expect, it } from "vitest"
 import { normalizeRichTextHtml } from "../../src/components/atoms/input/index"
 

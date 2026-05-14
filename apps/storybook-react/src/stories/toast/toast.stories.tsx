@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import type * as React from "react"
 
 const VARIANTS = ["subtle", "outline", "rich"] as const
+const INTENTS = ["neutral", "info", "success", "warning", "error"] as const
 
 function ToastAction({ children }: { children: React.ReactNode }) {
   return (
@@ -11,6 +12,10 @@ function ToastAction({ children }: { children: React.ReactNode }) {
       {children}
     </button>
   )
+}
+
+function capitalize(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 const meta: Meta<typeof Toast> = {
@@ -50,11 +55,25 @@ export const WithCustomAction: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      {VARIANTS.map((v) => (
-        <Toast key={v} variant={v} action={<ToastAction>Close</ToastAction>}>
-          {v.charAt(0).toUpperCase() + v.slice(1)} — Your changes have been saved.
-        </Toast>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      {VARIANTS.map((variant) => (
+        <div key={variant}>
+          <p style={{ margin: "0 0 8px", fontSize: 12, fontWeight: 600, color: "#6b7280" }}>
+            {capitalize(variant)}
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {INTENTS.map((intent) => (
+              <Toast
+                key={`${variant}-${intent}`}
+                variant={variant}
+                dataAttributes={{ "data-intent": intent }}
+                action={<ToastAction>Close</ToastAction>}
+              >
+                {capitalize(intent)} — {capitalize(variant)} toast message.
+              </Toast>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   ),
@@ -67,16 +86,30 @@ export const DarkVariants: Story = {
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: 12,
+          gap: 24,
           padding: 20,
-          background: "#000000",
+          background: "#0F0F0F",
           borderRadius: 8,
         }}
       >
-        {VARIANTS.map((v) => (
-          <Toast key={v} variant={v} action={<ToastAction>Close</ToastAction>}>
-            {v.charAt(0).toUpperCase() + v.slice(1)} — Dark mode toast.
-          </Toast>
+        {VARIANTS.map((variant) => (
+          <div key={variant}>
+            <p style={{ margin: "0 0 8px", fontSize: 12, fontWeight: 600, color: "#9ca3af" }}>
+              {capitalize(variant)}
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {INTENTS.map((intent) => (
+                <Toast
+                  key={`${variant}-${intent}`}
+                  variant={variant}
+                  dataAttributes={{ "data-intent": intent }}
+                  action={<ToastAction>Close</ToastAction>}
+                >
+                  {capitalize(intent)} — {capitalize(variant)} dark toast.
+                </Toast>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </MarwesProvider>

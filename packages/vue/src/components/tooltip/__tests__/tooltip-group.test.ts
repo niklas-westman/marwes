@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the TooltipGroup component — shared delay behavior across
+ * multiple tooltips within a group.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"

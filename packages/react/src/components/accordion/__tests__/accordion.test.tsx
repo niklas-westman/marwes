@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Accordion component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import * as React from "react"

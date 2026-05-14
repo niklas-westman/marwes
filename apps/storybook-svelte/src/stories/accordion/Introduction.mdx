@@ -1,0 +1,139 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  accordionWhyPurposeComponents,
+  accordionPurposeComponentReference,
+} from "@marwes-ui/core"
+
+<Meta title="Accordion/Introduction" />
+
+# Accordion Components
+
+Marwes provides an accordion system with three layers:
+**purpose components** for common patterns, **AccordionField** for custom item lists,
+and the raw **Accordion** atom for advanced control.
+
+## Recommended: Purpose Components
+
+Use purpose-built components that automatically set AI-friendly metadata:
+
+```svelte
+<script>
+  import { FAQAccordion, SettingsAccordion, SectionsAccordion } from "@marwes-ui/svelte"
+</script>
+
+<!-- Single-open FAQ — sets data-purpose="faq" -->
+<FAQAccordion
+  label="Product FAQ"
+  items={[
+    { value: "shipping", title: "Shipping details", content: "Orders ship within 2-3 business days." },
+    { value: "returns", title: "Return policy", content: "Returns accepted within 30 days." },
+  ]}
+/>
+
+<!-- Multi-open settings — sets data-purpose="settings" -->
+<SettingsAccordion
+  label="Preferences"
+  items={[
+    { value: "notifications", title: "Notifications", content: "Configure notification preferences." },
+    { value: "privacy", title: "Privacy", content: "Manage privacy settings." },
+  ]}
+  defaultOpenItems={["notifications"]}
+/>
+
+<!-- Flexible sections — sets data-purpose="sections" -->
+<SectionsAccordion
+  label="Documentation"
+  items={[
+    { value: "getting-started", title: "Getting Started", content: "Welcome to the docs." },
+    { value: "api", title: "API Reference", content: "Full API documentation." },
+  ]}
+/>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {accordionWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {accordionPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: AccordionField (Molecule)
+
+For custom accordion layouts that don't fit a purpose component:
+
+```svelte
+<script>
+  import { AccordionField } from "@marwes-ui/svelte"
+</script>
+
+<AccordionField
+  label="Order Details"
+  description="Expand sections to view details."
+  items={[
+    { value: "shipping", title: "Shipping", content: "Orders ship within 2-3 business days." },
+    { value: "billing", title: "Billing", content: "View your billing information." },
+  ]}
+  defaultOpenItems={["shipping"]}
+/>
+```
+
+### AccordionField Features
+
+- **Accessible group** — `<fieldset>` with `aria-labelledby` and `aria-describedby`
+- **Label + description + error** — field semantics with automatic a11y wiring
+- **Controlled & uncontrolled** — `openItems`/`onopenitemschange` or `defaultOpenItems`
+- **Single or multi-open** — `multiple={false}` for single-open, `multiple={true}` (default) for multi-open
+- **Disabled** — disables all items in the group
+
+## Low-level: Accordion (Atom)
+
+Use the raw `Accordion` atom for standalone disclosure panels:
+
+```svelte
+<script>
+  import { Accordion } from "@marwes-ui/svelte"
+</script>
+
+<Accordion title="Shipping details">
+  Orders ship within 2-3 business days.
+</Accordion>
+```
+
+## Component Reference
+
+### Purpose Components
+
+**`FAQAccordion`** — Question-and-answer sections (`data-purpose="faq"`, single-open)
+
+**`SettingsAccordion`** — Configuration panels (`data-purpose="settings"`, multi-open)
+
+**`SectionsAccordion`** — Generic collapsible sections (`data-purpose="sections"`)
+
+### Base Molecule
+
+**`AccordionField`** — Accessible accordion group with field semantics
+
+### Atom
+
+**`Accordion`** — Low-level disclosure panel with trigger + content
+
+## Story Coverage
+
+- **Atom**: `Closed`, `Open`, `Disabled`
+- **Molecule**: `Default`, `MultiOpen`, `SingleOpen`, `WithDescription`, `WithError`, `Disabled`
+- **Purpose/FAQ**: `Default`, `WithError`
+- **Purpose/Settings**: `Default`
+- **Purpose/Sections**: `Default`

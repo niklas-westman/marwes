@@ -23,14 +23,15 @@ const meta = {
         minHeight: "220px",
         padding: "2rem",
         borderRadius: "16px",
-        background: "#141414",
+        background: "rgba(248, 250, 252, 0.88)",
+        boxShadow: "inset 0 0 0 1px rgba(148, 163, 184, 0.35)",
       }}
     >
       <EmptyStateSpinner
         {...args}
         style={{ "--mw-spinner-indicator-color": "#5859fc" } as React.CSSProperties}
       />
-      <Paragraph size="sm" style={{ margin: 0, color: "#f9fafb" }}>
+      <Paragraph size="sm" style={{ margin: 0, color: "#111827" }}>
         Loading your data
       </Paragraph>
     </div>

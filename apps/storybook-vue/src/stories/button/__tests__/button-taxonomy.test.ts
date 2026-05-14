@@ -1,3 +1,7 @@
+/**
+ * Vue Button story taxonomy guard — verifies that story files
+ * use the correct Storybook title hierarchy and that all expected stories exist.
+ */
 import { readFileSync } from "node:fs"
 import path from "node:path"
 import { describe, expect, it } from "vitest"
@@ -15,6 +19,14 @@ describe("Vue button story taxonomy", () => {
     expect(buttonStory).toContain('title: "Buttons/Atom/Button"')
     expect(buttonStory).toContain("component: Button")
     expect(buttonStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
+  it("keeps boolean and object loading stories visually aligned", () => {
+    const buttonStory = readStoryFile("button.stories.ts")
+
+    expect(buttonStory).toContain('template: `<Button v-bind="args">Saving…</Button>`')
+    expect(buttonStory).toContain('loadingLabel: "Saving…",')
+    expect(buttonStory).not.toContain("Saving...")
   })
 
   it("uses Variant titles for visual wrapper buttons", () => {
@@ -39,6 +51,7 @@ describe("Vue button story taxonomy", () => {
       "refresh-button.stories.ts",
       "save-button.stories.ts",
       "submit-button.stories.ts",
+      "success-button.stories.ts",
       "verify-button.stories.ts",
     ]
 
@@ -64,6 +77,7 @@ describe("Vue button story taxonomy", () => {
       "refresh-button.stories.ts",
       "save-button.stories.ts",
       "submit-button.stories.ts",
+      "success-button.stories.ts",
       "verify-button.stories.ts",
     ]
 

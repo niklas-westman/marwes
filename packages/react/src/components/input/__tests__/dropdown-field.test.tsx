@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Dropdown Field molecule — wires the shared contract for label,
+ * helper text, error state, and aria-describedby connections.
+ */
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { runDropdownFieldContract } from "../../../../../../tests/contracts/dropdown-field.contract"

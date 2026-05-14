@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Paragraph atom — native paragraph rendering
+ * with default styling, size variants, and id metadata.
+ */
 import { describe, expect, it } from "vitest"
 
 export type ParagraphSize = "sm" | "md" | "lg"

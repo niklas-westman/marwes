@@ -1,3 +1,8 @@
+/**
+ * Tests themeToCSSVars — verifies that every resolved theme field maps to
+ * the correct CSS custom property name, value format (px suffix, unitless),
+ * and total variable count. Uses the light theme fixture for deterministic checks.
+ */
 import { describe, expect, it } from "vitest"
 import {
   resolveColorRole,
@@ -35,11 +40,43 @@ const fixture: ResolvedTheme = {
     textSubtle: "#595959",
     textDisabled: "#737373",
     textInverted: "#FFFFFF",
+    textBrand: "#2F31FC",
     border: "#D8D8D8",
     borderSubtle: "#D8D8D8",
     borderStrong: "#A3A3A3",
     borderDisabled: "#D8D8D8",
+    borderBrand: "#2F31FC",
     focus: "#2F31FC",
+    status: {
+      success: {
+        background: "#E6F4ED",
+        text: "#006633",
+        icon: "#006D48",
+        border: "#90CAAD",
+        borderStrong: "#2E9970",
+      },
+      warning: {
+        background: "#FFF8E6",
+        text: "#B45309",
+        icon: "#D97706",
+        border: "#FDE08A",
+        borderStrong: "#E46F00",
+      },
+      error: {
+        background: "#FFE8EB",
+        text: "#A8031F",
+        icon: "#D90429",
+        border: "#FF8A95",
+        borderStrong: "#FF2847",
+      },
+      info: {
+        background: "#EEEEFF",
+        text: "#1B1D97",
+        icon: "#2F31FC",
+        border: "#ABABFD",
+        borderStrong: "#5859FC",
+      },
+    },
   },
   font: {
     primary: "'Instrument Sans', Inter, system-ui, sans-serif",
@@ -194,6 +231,21 @@ describe("themeToCSSVars — surface / semantic", () => {
   it("border-disabled equals fixture value", () => {
     expect(themeToCSSVars(fixture)["--mw-color-border-disabled"]).toBe("#D8D8D8")
   })
+
+  it("brand text and border equal fixture values", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-text-brand"]).toBe("#2F31FC")
+    expect(themeToCSSVars(fixture)["--mw-color-border-brand"]).toBe("#2F31FC")
+  })
+})
+
+describe("themeToCSSVars — status tokens", () => {
+  it("emits status role surfaces and readable text tokens", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-status-warning-background"]).toBe("#FFF8E6")
+    expect(themeToCSSVars(fixture)["--mw-color-status-warning-text"]).toBe("#B45309")
+    expect(themeToCSSVars(fixture)["--mw-color-status-error-text"]).toBe("#A8031F")
+    expect(themeToCSSVars(fixture)["--mw-color-status-info-border"]).toBe("#ABABFD")
+    expect(themeToCSSVars(fixture)["--mw-color-status-info-border-strong"]).toBe("#5859FC")
+  })
 })
 
 describe("themeToCSSVars — font / ui", () => {
@@ -295,8 +347,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 86 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(86)
+  it("emits exactly 108 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(108)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

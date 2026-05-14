@@ -1,3 +1,8 @@
+/**
+ * Shared contract for the Skeleton atom — decorative text default,
+ * circular/rectangular Figma variants, accessible status mode with custom dimensions,
+ * and static (no animation) skeletons.
+ */
 import { describe, expect, it } from "vitest"
 
 export type SkeletonVariant = "text" | "circular" | "rectangular"

@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Divider atom — horizontal separator default,
+ * vertical orientation, size variant, and optional id.
+ */
 import { describe, expect, it } from "vitest"
 
 export type DividerSize = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"

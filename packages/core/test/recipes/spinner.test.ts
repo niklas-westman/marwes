@@ -1,3 +1,8 @@
+/**
+ * Tests the spinner recipe's pure output — SVG node generation per variant,
+ * size token resolution, and decorative-vs-status a11y modes.
+ * No DOM; adapter tests verify the rendered SVG in React/Vue/Svelte.
+ */
 import { describe, expect, it } from "vitest"
 import { createSpinnerRecipe } from "../../src/components/atoms/spinner/spinner-recipe"
 
@@ -17,6 +22,7 @@ describe("createSpinnerRecipe", () => {
   })
 
   it("supports all synced spinner variants", () => {
+    // Each variant produces a different number of SVG child nodes
     const ringSpinner = createSpinnerRecipe({ variant: "ring" })
     const dualSpinner = createSpinnerRecipe({ variant: "dual" })
     const roundDotsSpinner = createSpinnerRecipe({ variant: "dots-round" })
@@ -30,6 +36,16 @@ describe("createSpinnerRecipe", () => {
     expect(squareDotsSpinner.svg.nodes).toHaveLength(8)
     expect(linesSpinner.svg.nodes).toHaveLength(8)
     expect(crossSpinner.svg.nodes).toHaveLength(4)
+  })
+
+  it("rounds dots-square segments to match the Figma component", () => {
+    const squareDotsSpinner = createSpinnerRecipe({ variant: "dots-square" })
+
+    expect(squareDotsSpinner.svg.nodes).toHaveLength(8)
+    for (const node of squareDotsSpinner.svg.nodes) {
+      expect(node.tag).toBe("rect")
+      expect(node.attrs.rx).toBe("999")
+    }
   })
 
   it("insets cross segments so the boxes have internal spacing", () => {
@@ -54,6 +70,7 @@ describe("createSpinnerRecipe", () => {
   })
 
   it("becomes a status element when an aria label is provided", () => {
+    // Non-decorative spinners get role=status so screen readers announce them
     const kit = createSpinnerRecipe({ ariaLabel: "Loading account data", id: "loading-spinner" })
 
     expect(kit.a11y.role).toBe("status")

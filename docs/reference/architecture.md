@@ -17,6 +17,7 @@ graph TD
   Presets["@marwes-ui/presets"]
   React["@marwes-ui/react"]
   Vue["@marwes-ui/vue"]
+  Svelte["@marwes-ui/svelte"]
   Storybook["Storybook apps"]
   Playground["apps/playground-react"]
 
@@ -24,10 +25,13 @@ graph TD
   Core --> Presets
   Core --> React
   Core --> Vue
+  Core --> Svelte
   Presets --> React
   Presets --> Vue
+  Presets --> Svelte
   React --> Storybook
   Vue --> Storybook
+  Svelte --> Storybook
   React --> Playground
 ```
 
@@ -65,7 +69,7 @@ It must never contain:
 - framework rendering logic
 
 ### 3. Framework adapters
-`@marwes-ui/react` and `@marwes-ui/vue` are thin wrappers around core recipes.
+`@marwes-ui/react`, `@marwes-ui/vue`, and `@marwes-ui/svelte` are thin wrappers around core recipes.
 
 They:
 - call the core recipe
@@ -92,7 +96,7 @@ flowchart LR
   Recipe --> A11y["a11y"]
   Recipe --> Data["dataAttributes"]
 
-  Tag --> Adapter["React / Vue adapter"]
+  Tag --> Adapter["React / Vue / Svelte adapter"]
   Classes --> Adapter
   Vars --> Adapter
   A11y --> Adapter
@@ -129,9 +133,11 @@ graph TD
   Packages --> Presets["presets/"]
   Packages --> React["react/"]
   Packages --> Vue["vue/"]
+  Packages --> Svelte["svelte/"]
 
   Apps --> StorybookReact["storybook-react/"]
   Apps --> StorybookVue["storybook-vue/"]
+  Apps --> StorybookSvelte["storybook-svelte/"]
   Apps --> PlaygroundReact["playground-react/"]
 ```
 
@@ -144,8 +150,10 @@ graph TD
 | Preset CSS | `packages/presets/src/firstEdition/` |
 | React components | `packages/react/src/components/` |
 | Vue components | `packages/vue/src/components/` |
+| Svelte components | `packages/svelte/src/lib/components/` |
 | React stories | `apps/storybook-react/src/stories/` |
 | Vue stories | `apps/storybook-vue/src/stories/` |
+| Svelte stories | `apps/storybook-svelte/src/stories/` |
 | Design cache | `.figma/` |
 | Canonical docs | `docs/` |
 
@@ -163,7 +171,9 @@ flowchart TD
   F --> G["React stories and tests"]
   G --> H["Vue adapter"]
   H --> I["Vue stories and tests"]
-  I --> J["Exports + changeset + verification"]
+  I --> J["Svelte adapter"]
+  J --> K["Svelte stories and tests"]
+  K --> L["Exports + changeset + verification"]
 ```
 
 Detailed file placement lives in [Adding Components](../guides/adding-components.md).
@@ -178,7 +188,7 @@ flowchart LR
   Mapping --> Theme["Theme contract in core"]
   Theme --> Recipe["Recipe output"]
   Recipe --> CSS["Preset CSS"]
-  CSS --> Adapters["React / Vue adapters"]
+  CSS --> Adapters["React / Vue / Svelte adapters"]
   Adapters --> Stories["Storybook verification"]
 ```
 

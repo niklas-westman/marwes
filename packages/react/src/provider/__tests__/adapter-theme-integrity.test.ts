@@ -1,8 +1,12 @@
+/**
+ * React adapter: Static analysis guard: scans adapter source files for hardcoded color
+ * literals (#hex, rgba) to ensure all colors flow through theme variables.
+ */
 import { readFileSync, readdirSync } from "node:fs"
 import { relative, resolve } from "node:path"
 import { describe, expect, it } from "vitest"
 
-const srcDir = resolve(process.cwd(), "src")
+const srcDir = resolve(import.meta.dirname, "../..")
 const fixedColorLiteral = /#[0-9a-f]{3,8}|rgba?\(/i
 
 function listSourceFiles(dir: string): string[] {

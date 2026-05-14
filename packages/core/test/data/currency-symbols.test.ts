@@ -1,3 +1,8 @@
+/**
+ * Tests the currency symbols data module — validates the symbol map contains
+ * 170+ entries, maps well-known fiat/crypto/commodity codes correctly,
+ * supports case-insensitive lookup, and ensures every code has a non-empty symbol.
+ */
 import { describe, expect, it } from "vitest"
 import type { CurrencyCode } from "../../src/data/currency-symbols"
 import {

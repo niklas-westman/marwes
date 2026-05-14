@@ -12,7 +12,9 @@
       "**/.turbo/**",
       "**/.storybook/**/storybook-static/**",
       "**/node_modules/**",
-      "**/tsconfig*.json"
+      "**/tsconfig*.json",
+      "**/*.svelte",
+      "**/*.vue"
     ]
   },
   "formatter": {

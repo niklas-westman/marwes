@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Date Picker component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { fireEvent, render, screen } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
 import { DatePicker } from "../date-picker"

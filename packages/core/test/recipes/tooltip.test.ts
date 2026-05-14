@@ -1,3 +1,6 @@
+/**
+ * Tests the tooltip recipe's pure output — semantic tag, role, and ID passthrough.
+ */
 import { describe, expect, it } from "vitest"
 import { createTooltipRecipe } from "../../src/components/atoms/tooltip/tooltip-recipe"
 

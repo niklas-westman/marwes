@@ -1,3 +1,8 @@
+/**
+ * Tests the font loading layer — Google Fonts URL construction, font family
+ * name extraction from CSS stacks, system font detection, Google font
+ * allow/skip filtering, and typography weight extraction.
+ */
 import { describe, expect, it } from "vitest"
 import {
   buildGoogleFontsUrl,

@@ -1,3 +1,10 @@
+/**
+ * Shared contract for the Button atom's cross-adapter behavior.
+ *
+ * Tests the fundamental button interactions that must work identically in
+ * React, Vue, and Svelte: click handling, loading/busy/disabled state,
+ * anchor link rendering, and disabled link click suppression.
+ */
 import { describe, expect, it } from "vitest"
 
 export type ButtonContractHarness = {

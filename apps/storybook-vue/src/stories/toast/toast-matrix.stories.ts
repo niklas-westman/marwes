@@ -148,11 +148,11 @@ function renderMatrix(args: { dark?: boolean; title: string; caption: string }) 
                 {{ row.label }}
               </div>
 
-              <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 32px;">
                 <div
                   v-for="entry in matrixEntries"
                   :key="row.variant + '-' + entry.key"
-                  style="flex: 0 0 360px; width: 360px;"
+                  style="flex: 0 0 360px; width: 360px; min-width: 0;"
                 >
                   <component :is="entry.component" v-bind="entryProps(entry, row.variant)">
                     {{ entry.message }}

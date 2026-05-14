@@ -1,3 +1,8 @@
+/**
+ * Tests the semantic attribute registry — validates the Wave 1 registry,
+ * family-level data-component attributes, purpose-level metadata, and
+ * the canonical attribute schema used for documentation generation.
+ */
 import { describe, expect, it } from "vitest"
 import {
   canonicalSemanticAttributes,

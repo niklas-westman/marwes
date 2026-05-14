@@ -37,6 +37,13 @@ export const Checked: Story = {
   render: createToggleableSwitchRender("Enable notifications"),
 }
 
+export const CheckedDisabled: Story = {
+  render: () => ({
+    components: { Switch },
+    template: `<Switch :checked="true" :disabled="true">Locked setting</Switch>`,
+  }),
+}
+
 export const Disabled: Story = {
   render: () => ({
     components: { Switch },

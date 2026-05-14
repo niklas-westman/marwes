@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the Input component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { type Component, defineComponent, h } from "vue"

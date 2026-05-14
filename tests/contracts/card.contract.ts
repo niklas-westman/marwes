@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Card atom — data-component marker, title/body
+ * rendering, headerless mode, and purpose card variants (Product, Profile, Stat).
+ */
 import { describe, expect, it } from "vitest"
 
 export interface CardContractHarness {

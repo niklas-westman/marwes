@@ -1,0 +1,123 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  sliderWhyPurposeComponents,
+  sliderPurposeComponentReference,
+} from "@marwes-ui/core"
+
+<Meta title="Slider/Introduction" />
+
+# Slider Component
+
+Marwes provides a slider system with two layers:
+**SliderField** for labeled form usage with edge values, description, and error text,
+and the raw **Slider** atom for custom layouts.
+
+## Component Architecture
+
+```text
+SliderField (Molecule)
+Slider (Atom)
+```
+
+## Recommended: Purpose Components
+
+Use purpose-built sliders when the control has a clear product meaning:
+
+```svelte
+<script>
+  import { VolumeSlider, BrightnessSlider, RadiusSlider } from "@marwes-ui/svelte"
+</script>
+
+<VolumeSlider description="Adjust the current output level for media playback." />
+<BrightnessSlider description="Tune the display intensity for the current workspace." />
+<RadiusSlider description="Control the corner rounding used across the component set." />
+```
+
+### Why Purpose Components?
+
+<ol>
+  {sliderWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {sliderPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: SliderField (Molecule)
+
+Use `SliderField` for forms and settings panels where the control needs a visible label,
+supporting text, and edge values.
+
+```svelte
+<script>
+  import { SliderField } from "@marwes-ui/svelte"
+  let radius = $state(24)
+</script>
+
+  <SliderField
+    label="Radius"
+    description="Controls the corner rounding used by the UI."
+    slider={{ min: 0, max: 48, step: 2, showTooltip: true }}
+    bind:value={radius}
+  />
+```
+
+## Low-level Usage
+
+Use `Slider` directly when you need a custom composition or when surrounding labels are already handled elsewhere.
+
+```svelte
+<script>
+  import { Slider } from "@marwes-ui/svelte"
+  let volume = $state(50)
+</script>
+
+<Slider min={0} max={100} bind:value={volume} ariaLabel="Volume" showTouchArea />
+```
+
+## Supported Atom Features
+
+- `min`, `max`, and `step` define the numeric range
+- `bind:value` for two-way binding
+- `onvaluechange` callback for value updates
+- `showTooltip` displays the current numeric value above the thumb
+- `showTouchArea` enables the larger touch halo treatment from the PDF spec
+- `disabled` preserves native disabled semantics
+- Custom visual track with fill, thumb, and touch-area elements
+
+## Accessibility Notes
+
+- Renders a native `<input type="range">` for keyboard support
+- Provide `ariaLabel` when there is no visible label
+- Use SliderField when the slider needs visible label, helper text, or error
+- Use `ariaValueText` when the raw numeric value needs a more descriptive spoken label
+
+## Component Reference
+
+**`VolumeSlider`** — Audio and media output levels (`data-purpose="volume"`)
+
+**`BrightnessSlider`** — Visual intensity adjustments (`data-purpose="brightness"`)
+
+**`RadiusSlider`** — Corner rounding controls (`data-purpose="radius"`)
+
+**`SliderField`** — Field wrapper with label, helper/error, and min/max values
+
+**`Slider`** — Low-level range input atom with visual track
+
+## Story Coverage
+
+- **Atom**: `Default`, `WithStep`, `ShowTooltip`, `WithTouchArea`, `Disabled`
+- **Molecule**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Purpose/VolumeSlider**: `Default`
+- **Purpose/BrightnessSlider**: `Default`
+- **Purpose/RadiusSlider**: `Default`

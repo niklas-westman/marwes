@@ -34,7 +34,7 @@ flowchart LR
   Figma[Figma file or local .figma cache] --> Mapping[Token and state mapping]
   Mapping --> Core[Core theme contracts and recipes]
   Core --> Presets[Preset CSS]
-  Core --> Adapters[React and Vue adapters]
+  Core --> Adapters[React, Vue, and Svelte adapters]
   Presets --> Adapters
   Adapters --> Verification[Storybook and playground verification]
 ```
@@ -227,7 +227,7 @@ Required Figma tokens:
 - Paragraph scale: sm, md, lg (font size, line height).
 
 ## Implementation Rules
-- Do not hardcode Figma hex values in adapters (`@marwes-ui/react`, `@marwes-ui/vue`).
+- Do not hardcode Figma hex values in adapters (`@marwes-ui/react`, `@marwes-ui/vue`, `@marwes-ui/svelte`).
 - Put logic and mapping in core recipes and theme contracts.
 - Put visual styling in preset CSS only.
 - Keep CSS variable names on `--mw-*`.
@@ -265,7 +265,7 @@ const theme = {
 }
 ```
 
-Do not generate React/Vue adapter-local CSS for theme behavior. React and Vue should receive the same object through `MarwesProvider`.
+Do not generate React/Vue/Svelte adapter-local CSS for theme behavior. All adapters should receive the same object through `MarwesProvider`.
 
 ## Update Workflow
 1. Confirm Figma tokens and component variants/states are final.

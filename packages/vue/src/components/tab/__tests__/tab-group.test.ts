@@ -1,3 +1,7 @@
+/**
+ * Vue adapter: Tests the TabGroup component — tab/panel wiring, keyboard navigation,
+ * and automatic activation.
+ */
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"

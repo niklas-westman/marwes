@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Spacing component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { Spacings } from "@marwes-ui/core"
 import { render } from "@testing-library/react"
 import type * as React from "react"

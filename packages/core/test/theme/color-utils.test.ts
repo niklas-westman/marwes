@@ -1,3 +1,8 @@
+/**
+ * Tests color utility functions: hex parsing, RGB↔OKLCH conversion,
+ * perceptual lightness adjustment, alpha blending, WCAG luminance/contrast,
+ * and the automatic contrast-color picker used for button labels.
+ */
 import { describe, expect, it } from "vitest"
 import {
   adjustLightness,

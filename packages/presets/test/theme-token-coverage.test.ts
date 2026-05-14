@@ -1,3 +1,8 @@
+/**
+ * Static analysis guard: scans all firstEdition CSS files to ensure
+ * component-scoped --mw variables and base visual properties (color, background,
+ * border-color) are never set from hardcoded color literals.
+ */
 import { readFileSync, readdirSync } from "node:fs"
 import { relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"

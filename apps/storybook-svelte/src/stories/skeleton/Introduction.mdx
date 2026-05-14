@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Skeleton/Introduction" />
+
+# Skeleton Component
+
+Marwes provides `Skeleton` as an atom-level placeholder indicator for content
+that is loading or not yet available.
+
+## Component Architecture
+
+```
+Skeleton (Atom)
+```
+
+## Recommended Usage
+
+```svelte
+<script>
+  import { Skeleton } from "@marwes-ui/svelte"
+</script>
+
+<Skeleton variant="text" />
+<Skeleton variant="circular" />
+<Skeleton variant="rectangular" width={200} height={100} />
+<Skeleton variant="text" animation="wave" />
+```
+
+## Props
+
+- `variant` — Shape: `text`, `circular`, `rectangular`
+- `animation` — Loading animation: `pulse` (default), `wave`, `none`
+- `width` — Custom width (number in px or CSS string)
+- `height` — Custom height (number in px or CSS string)
+- `radius` — Border radius override
+
+## Usage Notes
+
+- `text` variant matches a single line of text height
+- `circular` is sized by `width`/`height` (defaults to square)
+- `rectangular` is used for images, cards, and block placeholders
+- `animation="none"` is useful when reduced motion is preferred by design
+
+## Accessibility Notes
+
+**Skeletons are decorative.** They are hidden from assistive technology.
+Ensure loading state is communicated via `aria-busy` on the containing region
+or through a live region announcement.
+
+## Component Reference
+
+**`Skeleton`** — Placeholder loading indicator atom with shape and animation variants
+
+## Story Coverage
+
+- **Atom**: `Text`, `Circular`, `Rectangular`, `Wave`, `NoAnimation`, `CustomSize`

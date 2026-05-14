@@ -1,0 +1,200 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import { fieldWhyPurposeComponents } from "@marwes-ui/core"
+
+<Meta title="Input/Introduction" />
+
+# Input Components
+
+Marwes provides input-domain components organized in a clear Atom → Molecule → Purpose
+progression for text-based data entry.
+
+## Input Architecture
+
+```
+Atoms
+  ├─ Input
+  ├─ RichText
+  ├─ Select
+  └─ Textarea
+
+Molecules
+  ├─ InputField
+  ├─ InputOtp
+  ├─ RichTextField
+  ├─ SelectField
+  └─ TextareaField
+
+Purpose Fields (Input-based)
+  ├─ PasswordField
+  ├─ EmailField
+  ├─ SearchField
+  ├─ PhoneField
+  ├─ URLField
+  ├─ CurrencyField
+  ├─ DateOfBirthField
+  ├─ ZipCodeField
+  └─ DropdownField
+```
+
+## Recommended: Purpose Fields
+
+Use purpose-built components for common input patterns:
+
+```svelte
+<script>
+  import { PasswordField, EmailField, SearchField, CurrencyField } from "@marwes-ui/svelte"
+</script>
+
+<PasswordField label="Password" input={{ placeholder: "Enter password" }} />
+<EmailField label="Email" input={{ placeholder: "you@example.com" }} />
+<SearchField label="Search" input={{ placeholder: "Search..." }} />
+<CurrencyField label="Amount" input={{ placeholder: "0.00" }} />
+```
+
+### Why Purpose Components?
+
+<ol>
+  {fieldWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+## Base: InputField (Molecule)
+
+The recommended molecule for most form inputs:
+
+```svelte
+<script>
+  import { InputField } from "@marwes-ui/svelte"
+  let name = $state("")
+</script>
+
+<InputField label="Full name" input={{ placeholder: "Jane Doe" }} bind:value={name} />
+<InputField label="Username" helperText="3-20 characters." input={{ placeholder: "johnsmith" }} />
+<InputField label="Password" error="Must be 8+ characters." input={{ type: "password" }} />
+<InputField label="Amount" leadingSymbol="$" input={{ placeholder: "0.00" }} />
+```
+
+### InputField Features
+
+- **Visible label** wired via `for`/`id`
+- **Helper text** and **error regions** with `aria-describedby` wiring
+- **Leading symbol** for currency/prefix display
+- **Password toggle** — eye icon shows/hides password text
+- **Search affordances** — search icon when empty, clear button when filled
+- **`bind:value`** for two-way data binding
+
+## Base: SelectField (Molecule)
+
+```svelte
+<script>
+  import { SelectField } from "@marwes-ui/svelte"
+</script>
+
+<SelectField
+  label="Country"
+  select={{ options: [
+    { value: "se", label: "Sweden" },
+    { value: "us", label: "United States" },
+  ], placeholder: "Choose a country" }}
+/>
+```
+
+## Base: TextareaField (Molecule)
+
+```svelte
+<script>
+  import { TextareaField } from "@marwes-ui/svelte"
+</script>
+
+<TextareaField label="Message" textarea={{ placeholder: "Enter your message...", rows: 4 }} />
+```
+
+## Low-level: Atoms
+
+Use atoms when you need full control:
+
+```svelte
+<script>
+  import { Input, Select, Textarea } from "@marwes-ui/svelte"
+</script>
+
+<Input placeholder="Raw input" />
+<Select options={[{ value: "a", label: "A" }]} />
+<Textarea placeholder="Raw textarea" />
+```
+
+### Select Native vs Custom
+
+Select defaults to the Marwes visual treatment (custom chevron icon). Use `native={true}` for browser dropdown chrome:
+
+```svelte
+<Select options={options} native />
+```
+
+## Component Reference
+
+### Purpose Fields
+
+**`PasswordField`** — Password input with visibility toggle (`type="password"`)
+
+**`EmailField`** — Email input with email keyboard (`type="email"`)
+
+**`SearchField`** — Search input with icon and clear button (`type="search"`)
+
+**`PhoneField`** — Phone input with tel keyboard (`type="tel"`)
+
+**`URLField`** — URL input (`type="url"`)
+
+**`CurrencyField`** — Currency input with leading symbol and decimal keyboard
+
+**`DateOfBirthField`** — Date input with native picker (`type="date"`, `autoComplete="bday"`)
+
+**`ZipCodeField`** — Postal code with numeric keyboard (`inputMode="numeric"`)
+
+**`DropdownField`** — SelectField with dropdown presentation (`data-purpose="dropdown"`)
+
+### Molecules
+
+**`InputField`** — Accessible text input with label, helper, error, password toggle, search affordances
+
+**`InputOtp`** — One-time password input with individual digit cells
+
+**`RichTextField`** — Field-wrapped rich text editor with label, helper, error
+
+**`SelectField`** — Accessible select with label, helper, error
+
+**`TextareaField`** — Accessible textarea with label, helper, error
+
+### Atoms
+
+**`Input`** — Low-level `<input>` with recipe styling
+
+**`RichText`** — Rich text editor with bold, italic, underline formatting
+
+**`Select`** — Native or custom-styled `<select>`
+
+**`Textarea`** — Low-level `<textarea>` with recipe styling
+
+## Story Coverage
+
+- **Atom/Input**: `Basic`, `WithValue`, `Disabled`, `Invalid`, `Password`
+- **Atom/Select**: `Default`, `WithValue`, `Disabled`, `Native`, `Invalid`
+- **Atom/RichText**: `Default`, `WithPlaceholder`, `Disabled`
+- **Atom/Textarea**: `Default`, `WithValue`, `Disabled`, `CustomRows`
+- **Molecule/InputField**: `Basic`, `WithHelperText`, `WithError`, `WithLeadingSymbol`, `Disabled`, `ReadOnly`, `Required`
+- **Molecule/SelectField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Molecule/InputOtp**: `Default`, `WithError`, `CustomLength`
+- **Molecule/RichTextField**: `Default`, `WithError`
+- **Molecule/TextareaField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Purpose/PasswordField**: `Default`, `WithError`
+- **Purpose/EmailField**: `Default`, `WithError`
+- **Purpose/SearchField**: `Default`, `WithHelperText`, `WithError`, `Disabled`
+- **Purpose/PhoneField**: `Default`
+- **Purpose/URLField**: `Default`
+- **Purpose/CurrencyField**: `Default`
+- **Purpose/DateOfBirthField**: `Default`
+- **Purpose/ZipCodeField**: `Default`
+- **Purpose/DropdownField**: `Default`

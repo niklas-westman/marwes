@@ -1,3 +1,7 @@
+/**
+ * Shared contract for DropdownField — label-to-combobox wiring,
+ * helper text via aria-describedby, and invalid/error state.
+ */
 import { describe, expect, it } from "vitest"
 
 export type DropdownFieldContractHarness = {

@@ -1,0 +1,157 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import {
+  switchWhyPurposeComponents,
+  switchPurposeComponentReference,
+} from "@marwes-ui/core"
+
+<Meta title="Switch/Introduction" />
+
+# Switch Components
+
+Marwes provides a switch system with three layers:
+**purpose components** for common toggle use cases, **SwitchField** for standard
+field composition, and the raw **Switch** atom for custom layouts.
+
+## Recommended: Purpose Components
+
+Use purpose-built components when the toggle has a clear product meaning:
+
+```svelte
+<script>
+  import { FeatureToggle, PermissionSwitch, PreferenceSwitch } from "@marwes-ui/svelte"
+</script>
+
+<FeatureToggle
+  label="Enable beta dashboard"
+  description="Turn on early access to the redesigned analytics experience."
+  switch={{ checked: true }}
+/>
+
+<PreferenceSwitch
+  label="Use compact layout"
+  description="Show denser spacing in lists and tables."
+  switch={{ checked: false }}
+/>
+
+<PermissionSwitch
+  label="Can manage billing"
+  description="Grant access to invoices and subscription changes."
+  switch={{ checked: true }}
+/>
+```
+
+### Why Purpose Components?
+
+<ol>
+  {switchWhyPurposeComponents.map((item) => (
+    <li key={item.label}>
+      <strong>{item.label}</strong> - {item.text}
+    </li>
+  ))}
+</ol>
+
+### Purpose Component Reference
+
+<ul>
+  {switchPurposeComponentReference.map((item) => (
+    <li key={item.label}>
+      <strong><code>{item.label}</code></strong> - {item.text}
+    </li>
+  ))}
+</ul>
+
+## Base: SwitchField (Molecule)
+
+For a single labeled switch with optional description and error text:
+
+```svelte
+<script>
+  import { SwitchField } from "@marwes-ui/svelte"
+</script>
+
+<SwitchField
+  label="Enable notifications"
+  description="Receive important account and product updates."
+  switch={{ checked: false }}
+/>
+
+<SwitchField
+  label="Require review before publishing"
+  error="Review mode must stay enabled for this workspace."
+  switch={{ checked: false }}
+/>
+```
+
+### SwitchField Features
+
+- **Accessible field wiring** — `aria-labelledby` for the visible label, description/error in `aria-describedby`
+- **Label + description + error** — standard field semantics
+- **Controlled toggling** — forward `checked` and `oncheckedchange` through the nested `switch` prop
+
+## Low-level: Switch (Atom)
+
+Use the raw `Switch` atom when you need a custom layout:
+
+```svelte
+<script>
+  import { Switch } from "@marwes-ui/svelte"
+  let enabled = $state(false)
+</script>
+
+<div style="display: flex; align-items: center; gap: 12px;">
+  <Switch
+    checked={enabled}
+    oncheckedchange={(v) => enabled = v}
+    size="wide"
+    ariaLabel="Enable notifications"
+  />
+  <span>Enable notifications</span>
+</div>
+```
+
+> **Note:** When using `Switch` directly, you are responsible for providing an accessible name
+> and managing checked state.
+
+## Size API
+
+`Switch` supports three Figma-matched sizes. `compact` remains the default.
+
+- `compact` - 24×16 track with 12px thumb
+- `wide` - 30×16 track with 12px thumb
+- `rich` - 30×20 track with 16px thumb
+
+```svelte
+<script>
+  import { Switch } from "@marwes-ui/svelte"
+</script>
+
+<Switch size="compact" ariaLabel="Compact switch" />
+<Switch size="wide" ariaLabel="Wide switch" />
+<Switch size="rich" ariaLabel="Rich switch" />
+```
+
+## Component Reference
+
+### Purpose Components
+
+**`FeatureToggle`** — Feature enablement and product rollout controls
+
+**`PreferenceSwitch`** — User or workspace setting preferences
+
+**`PermissionSwitch`** — Access and capability toggles
+
+### Base Molecule
+
+**`SwitchField`** — Accessible labeled switch with description and error wiring
+
+### Atom
+
+**`Switch`** — Low-level `<button role="switch">`
+
+## Story Coverage
+
+- **Atom**: `Off`, `On`, `Disabled`, `AllStates`, `SizeComparison`
+- **Molecule**: `Default`, `WithError`, `Disabled`
+- **Purpose/FeatureToggle**: `Default`
+- **Purpose/Preference**: `Default`
+- **Purpose/Permission**: `Default`

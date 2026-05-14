@@ -382,6 +382,7 @@
             "apps/storybook-react/src/stories/avatar/avatar-badge.stories.tsx",
             "apps/storybook-react/src/stories/avatar/avatar-group.stories.tsx",
             "apps/storybook-react/src/stories/avatar/avatar.stories.tsx",
+            "apps/storybook-react/src/stories/avatar/AvatarGallery.tsx",
             "apps/storybook-react/src/stories/avatar/Introduction.mdx",
             "apps/storybook-react/src/stories/avatar/presence-avatar.stories.tsx",
             "apps/storybook-react/src/stories/avatar/profile-avatar.stories.tsx",
@@ -393,6 +394,7 @@
             "apps/storybook-vue/src/stories/avatar/avatar-badge.stories.ts",
             "apps/storybook-vue/src/stories/avatar/avatar-group.stories.ts",
             "apps/storybook-vue/src/stories/avatar/avatar.stories.ts",
+            "apps/storybook-vue/src/stories/avatar/AvatarGallery.vue",
             "apps/storybook-vue/src/stories/avatar/Introduction.mdx",
             "apps/storybook-vue/src/stories/avatar/presence-avatar.stories.ts",
             "apps/storybook-vue/src/stories/avatar/profile-avatar.stories.ts",
@@ -871,6 +873,7 @@
             "apps/storybook-react/src/stories/button/secondary-button.stories.tsx",
             "apps/storybook-react/src/stories/button/sort-button.stories.tsx",
             "apps/storybook-react/src/stories/button/submit-button.stories.tsx",
+            "apps/storybook-react/src/stories/button/success-button.stories.tsx",
             "apps/storybook-react/src/stories/button/text-button.stories.tsx",
             "apps/storybook-react/src/stories/button/upload-button.stories.tsx",
             "apps/storybook-react/src/stories/button/verify-button.stories.tsx"
@@ -882,17 +885,25 @@
             "apps/storybook-vue/src/stories/button/cancel-button.stories.ts",
             "apps/storybook-vue/src/stories/button/close-button.stories.ts",
             "apps/storybook-vue/src/stories/button/confirm-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/copy-button.stories.ts",
             "apps/storybook-vue/src/stories/button/create-button.stories.ts",
             "apps/storybook-vue/src/stories/button/destructive-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/download-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/dropdown-button.stories.ts",
             "apps/storybook-vue/src/stories/button/edit-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/filter-button.stories.ts",
             "apps/storybook-vue/src/stories/button/Introduction.mdx",
             "apps/storybook-vue/src/stories/button/link-button.stories.ts",
             "apps/storybook-vue/src/stories/button/primary-button.stories.ts",
             "apps/storybook-vue/src/stories/button/refresh-button.stories.ts",
             "apps/storybook-vue/src/stories/button/save-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/search-button.stories.ts",
             "apps/storybook-vue/src/stories/button/secondary-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/sort-button.stories.ts",
             "apps/storybook-vue/src/stories/button/submit-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/success-button.stories.ts",
             "apps/storybook-vue/src/stories/button/text-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/upload-button.stories.ts",
             "apps/storybook-vue/src/stories/button/verify-button.stories.ts"
           ],
           "contracts": ["tests/contracts/button.contract.ts"]
@@ -1654,16 +1665,16 @@
             "packages/vue/src/components/date-picker/index.ts"
           ],
           "storybookReact": [
-            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts",
-            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts",
-            "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx",
-            "apps/storybook-react/src/stories/date-picker/Introduction.mdx"
+            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
+            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
+            "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx.disabled",
+            "apps/storybook-react/src/stories/date-picker/Introduction.mdx.disabled"
           ],
           "storybookVue": [
-            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts",
-            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts",
-            "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts",
-            "apps/storybook-vue/src/stories/date-picker/Introduction.mdx"
+            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
+            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
+            "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts.disabled",
+            "apps/storybook-vue/src/stories/date-picker/Introduction.mdx.disabled"
           ],
           "contracts": ["tests/contracts/date-picker.contract.ts"]
         },

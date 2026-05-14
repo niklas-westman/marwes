@@ -1,3 +1,7 @@
+/**
+ * Tests the tab recipe's pure output — selected/disabled modifier classes,
+ * tabIndex management, and the rule that disabled wins over selected for focus.
+ */
 import { describe, expect, it } from "vitest"
 import { createTabRecipe } from "../../src/components/atoms/tab/tab-recipe"
 

@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Icon/Introduction" />
+
+# Icon Component
+
+Marwes provides `Icon` as an atom-level primitive for rendering system icons
+from the Marwes icon registry at consistent sizes.
+
+## Component Architecture
+
+```
+Icon (Atom)
+```
+
+## Recommended Usage
+
+```svelte
+<script>
+  import { Icon } from "@marwes-ui/svelte"
+</script>
+
+<Icon name="heart" size="md" />
+<Icon name="search" size="sm" />
+<Icon name="settings" size="lg" />
+```
+
+## Props
+
+- `name` — Selects the icon from the Marwes icon set (type-safe enum)
+- `size` — `xs`, `sm`, `md`, `lg`
+- `strokeWidth` — `xs`, `sm`, `md`, `lg`
+- `decorative` — Hides from assistive technology (default: `true`)
+- `ariaLabel` — Accessible name for standalone meaningful icons
+
+## Usage Notes
+
+- Icons are decorative by default — hidden from screen readers
+- Add `ariaLabel` only when the icon carries standalone meaning (e.g., icon-only button)
+- The icon gallery below shows all available icons with search and filtering
+- `strokeWidth` can be adjusted independently from `size`
+
+## Accessibility Notes
+
+**Decorative icons are hidden.** When an icon accompanies visible text, leave it unlabeled.
+
+**Standalone icons need a label.** Only add `ariaLabel` when the icon is the sole communicator
+of meaning (e.g., an icon-only close button).
+
+## Component Reference
+
+**`Icon`** — Inline SVG icon atom from the Marwes icon registry
+
+## Story Coverage
+
+- **Atom/Gallery**: Full searchable icon gallery with size, strokeWidth, and column controls

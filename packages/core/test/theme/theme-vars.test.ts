@@ -1,3 +1,8 @@
+/**
+ * Tests the theme variable helper layer — mwThemeVars/mwThemeVarNames expose
+ * typed CSS custom property references, mwVar wraps property names in var(),
+ * and the helpers cover every variable the theme engine + spacing system emits.
+ */
 import { describe, expect, it } from "vitest"
 import { Spacings } from "../../src/components/atoms/spacing"
 import * as publicApi from "../../src/index"

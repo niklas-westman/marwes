@@ -1,3 +1,7 @@
+/**
+ * Verifies that the presets package exports its public API surface
+ * (CSS files, theme tokens, and preset configurations).
+ */
 import { existsSync, readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"

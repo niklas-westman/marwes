@@ -1,3 +1,8 @@
+/**
+ * Tests the density scale system — structural invariants (compact < comfortable
+ * < spacious), CSS variable emission with correct units, and the baseline
+ * spacingMultiplier of 1 for comfortable density.
+ */
 import { describe, expect, it } from "vitest"
 import { DENSITY_SCALES, densityToCSSVars } from "../../src/theme/density"
 

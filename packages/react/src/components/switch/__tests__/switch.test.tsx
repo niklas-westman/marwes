@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Switch component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import type * as React from "react"
 
 import { render, screen } from "@testing-library/react"

@@ -1,3 +1,6 @@
+/**
+ * CSS contract: verifies the firstEdition toast stylesheet.
+ */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -32,5 +35,36 @@ describe("firstEdition toast css contract", () => {
     expect(css).toContain("appearance: none;")
     expect(css).toContain(".mw-toast__action-button:focus-visible")
     expect(css).toContain(".mw-toast__action :where(a, button):focus-visible")
+  })
+
+  it("uses readable status tokens for semantic toast intents", () => {
+    const css = readFileSync(toastCssPath, "utf8")
+
+    expect(css).toContain("--mw-toast-text: var(--mw-color-status-warning-text, #b45309);")
+    expect(css).toContain("--mw-toast-surface: var(--mw-color-status-warning-background, #fff8e6);")
+    expect(css).not.toContain('.mw-toast--subtle[data-intent="brand"]')
+    expect(css).not.toContain('.mw-toast--subtle[data-intent="error"]')
+    expect(css).toContain('.mw-toast--outline[data-intent="info"]')
+    expect(css).toContain('.mw-toast--rich[data-intent="info"]')
+    expect(css).toContain('.mw-toast--outline[data-intent="brand"]')
+    expect(css).toContain('.mw-toast--rich[data-intent="brand"]')
+    expect(css).toContain("--mw-toast-border: var(--mw-color-status-info-border-strong, #5859fc);")
+    expect(css).toContain("--mw-toast-icon: var(--mw-color-info-hover, #2527ca);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-info-hover, #2527ca);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-status-success-icon, #006d48);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-status-warning-text, #b45309);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-status-error-text, #a8031f);")
+    expect(css).toContain(
+      ".mw-theme--dark .mw-toast--outline {\n  --mw-toast-surface: var(--mw-color-background, #0f0f0f);\n  --mw-toast-border: var(--mw-color-border-brand, #5859fc);\n  --mw-toast-icon: var(--mw-color-text-brand, #8182fc);",
+    )
+    expect(css).toContain(
+      '.mw-theme--dark .mw-toast--outline[data-intent="info"] {\n  --mw-toast-border: var(--mw-color-toast-info-border, #2527ca);\n  --mw-toast-icon: var(--mw-color-border-brand, #5859fc);\n  --mw-toast-text: var(--mw-color-text-brand, #8182fc);',
+    )
+    expect(css).toContain('.mw-theme--dark .mw-toast--rich[data-intent="brand"]')
+    expect(css).toContain("--mw-toast-action: var(--mw-color-text-brand, #8182fc);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-status-success-icon, #5db189);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-status-warning-icon, #f9b21a);")
+    expect(css).toContain("--mw-toast-action: var(--mw-color-status-error-icon, #ff2847);")
+    expect(css).toContain("--mw-toast-text: var(--mw-color-status-error-text, #ff5566);")
   })
 })

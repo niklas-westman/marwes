@@ -39,6 +39,13 @@ export const Disabled: Story = {
   }),
 }
 
+export const Invalid: Story = {
+  render: () => ({
+    components: { Radio },
+    template: `<Radio ariaLabel="Option A" name="demo" :invalid="true" />`,
+  }),
+}
+
 export const RadioGroup: Story = {
   render: () => ({
     components: { Radio },

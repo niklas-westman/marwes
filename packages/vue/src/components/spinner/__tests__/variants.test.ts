@@ -1,6 +1,10 @@
+/**
+ * Vue spinner purpose variants — wires the shared spinner-variants contract.
+ * Adapter-specific rendering concerns (if any) would be tested below the contract call.
+ */
 import { render, screen } from "@testing-library/vue"
-import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
+import { runSpinnerVariantsContract } from "../../../../../../tests/contracts/spinner-variants.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { ButtonSpinner, EmptyStateSpinner } from "../variants"
 
@@ -17,24 +21,14 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
   )
 }
 
-describe("Vue spinner purpose components", () => {
-  it("ButtonSpinner adds button-loading metadata and classic loading defaults", () => {
+runSpinnerVariantsContract("vue", {
+  renderButtonSpinner() {
     renderWithProvider(ButtonSpinner, { ariaLabel: "Loading action", decorative: false })
-
-    const spinnerElement = screen.getByRole("status", { name: /loading action/i })
-    expect(spinnerElement.getAttribute("data-purpose")).toBe("button-loading")
-    expect(spinnerElement.getAttribute("data-context")).toBe("button-loading")
-    expect(spinnerElement.getAttribute("data-variant")).toBe("classic")
-    expect(spinnerElement.getAttribute("data-size")).toBe("xs")
-  })
-
-  it("EmptyStateSpinner adds empty-state metadata and dots-round large defaults", () => {
+  },
+  renderEmptyStateSpinner() {
     renderWithProvider(EmptyStateSpinner, { ariaLabel: "Loading dashboard", decorative: false })
-
-    const spinnerElement = screen.getByRole("status", { name: /loading dashboard/i })
-    expect(spinnerElement.getAttribute("data-purpose")).toBe("empty-state")
-    expect(spinnerElement.getAttribute("data-context")).toBe("empty-state")
-    expect(spinnerElement.getAttribute("data-variant")).toBe("dots-round")
-    expect(spinnerElement.getAttribute("data-size")).toBe("lg")
-  })
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
 })

@@ -1,3 +1,7 @@
+/**
+ * React adapter: Tests the Avatar Badge component — wires the shared cross-adapter contract
+ * and verifies adapter-specific rendering concerns.
+ */
 import { render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { runAvatarBadgeContract } from "../../../../../../tests/contracts/avatar-badge.contract"

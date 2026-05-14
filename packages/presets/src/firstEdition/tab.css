@@ -7,10 +7,10 @@
  */
 
 .mw-tab {
-  --mw-tab-surface: var(--mw-color-surface-elevated);
-  --mw-tab-surface-hover: var(--mw-color-surface-subtle);
-  --mw-tab-surface-pressed: var(--mw-color-border-subtle);
-  --mw-tab-label: var(--mw-color-text-muted);
+  --mw-tab-surface: transparent;
+  --mw-tab-surface-hover: color-mix(in srgb, var(--mw-color-text, #000000) 5%, transparent);
+  --mw-tab-surface-pressed: color-mix(in srgb, var(--mw-color-text, #000000) 10%, transparent);
+  --mw-tab-label: var(--mw-color-text, #141414);
   --mw-tab-label-active: var(--mw-color-text, #141414);
   --mw-tab-label-disabled: var(--mw-color-text-disabled);
   --mw-tab-indicator: var(--mw-color-primary-base, #2f31fc);
@@ -70,10 +70,10 @@
 }
 
 .mw-theme--dark .mw-tab {
-  --mw-tab-surface: var(--mw-color-surface-elevated);
-  --mw-tab-surface-hover: var(--mw-color-surface-subtle);
-  --mw-tab-surface-pressed: var(--mw-color-border);
-  --mw-tab-label: var(--mw-color-text-muted);
+  --mw-tab-surface: transparent;
+  --mw-tab-surface-hover: color-mix(in srgb, var(--mw-color-text, #ffffff) 5%, transparent);
+  --mw-tab-surface-pressed: color-mix(in srgb, var(--mw-color-text, #ffffff) 10%, transparent);
+  --mw-tab-label: var(--mw-color-text);
   --mw-tab-label-active: var(--mw-color-text);
   --mw-tab-label-disabled: var(--mw-color-text-disabled);
   --mw-tab-indicator: var(--mw-color-primary-base, #5859fc);

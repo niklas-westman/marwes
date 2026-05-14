@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process"
 import { existsSync, readdirSync } from "node:fs"
-import { join } from "node:path"
+import { basename, join } from "node:path"
 import process from "node:process"
 
 const repoRoot = process.cwd()
@@ -106,8 +106,10 @@ function collectFamilyBiomePaths() {
     `packages/presets/test/${family}-css-contract.test.ts`,
     `packages/react/src/components/${family}`,
     `packages/vue/src/components/${family}`,
+    `packages/svelte/src/lib/components/${family}`,
     `apps/storybook-react/src/stories/${family}`,
     `apps/storybook-vue/src/stories/${family}`,
+    `apps/storybook-svelte/src/stories/${family}`,
     `tests/contracts/${family}.contract.ts`,
     `docs/audits/${family}-family-accessibility.md`,
     `docs/registry/families/${family}`,
@@ -116,6 +118,48 @@ function collectFamilyBiomePaths() {
 
 function collectStoryDocsTests(storyRoot) {
   return listFiles(`${storyRoot}/${family}/__tests__`, (path) => path.endsWith(".test.ts"))
+}
+
+function collectSvelteFamilyTests() {
+  const familyTests = listFiles("packages/svelte/src/tests", (path) => {
+    const fileName = basename(path)
+    return fileName === `${family}.test.ts` || fileName.startsWith(`${family}-`)
+  })
+  const sharedContractFamilies = new Set([
+    "accordion",
+    "avatar",
+    "badge",
+    "button",
+    "card",
+    "checkbox",
+    "dialog",
+    "divider",
+    "heading",
+    "icon",
+    "input",
+    "paragraph",
+    "radio",
+    "rich-text",
+    "select",
+    "skeleton",
+    "slider",
+    "spinner",
+    "switch",
+    "tab",
+    "textarea",
+    "toast",
+    "tooltip",
+    "zip-code-field",
+  ])
+
+  if (
+    sharedContractFamilies.has(family) &&
+    pathExists("packages/svelte/src/tests/shared-contracts.test.ts")
+  ) {
+    familyTests.push("packages/svelte/src/tests/shared-contracts.test.ts")
+  }
+
+  return [...new Set(familyTests)].sort((left, right) => left.localeCompare(right))
 }
 
 function toPackageRelativePath(packageRoot, path) {
@@ -144,6 +188,7 @@ if (!family) {
 const hasFamily =
   pathExists(`packages/react/src/components/${family}`) ||
   pathExists(`packages/vue/src/components/${family}`) ||
+  pathExists(`packages/svelte/src/lib/components/${family}`) ||
   pathExists(`docs/registry/families/${family}`)
 
 if (!hasFamily) {
@@ -196,6 +241,18 @@ const steps = [
     skip: !pathExists(`packages/vue/src/components/${family}/__tests__`),
   },
   {
+    name: "Svelte family tests",
+    command: "pnpm",
+    args: [
+      "--filter",
+      "@marwes-ui/svelte",
+      "test",
+      "--",
+      ...collectSvelteFamilyTests().map((path) => toPackageRelativePath("packages/svelte", path)),
+    ],
+    skip: collectSvelteFamilyTests().length === 0,
+  },
+  {
     name: "React Storybook docs tests",
     command: "pnpm",
     args: [
@@ -222,6 +279,20 @@ const steps = [
       ),
     ],
     skip: collectStoryDocsTests("apps/storybook-vue/src/stories").length === 0,
+  },
+  {
+    name: "Svelte Storybook docs tests",
+    command: "pnpm",
+    args: [
+      "--filter",
+      "./apps/storybook-svelte",
+      "test",
+      "--",
+      ...collectStoryDocsTests("apps/storybook-svelte/src/stories").map((path) =>
+        toPackageRelativePath("apps/storybook-svelte", path),
+      ),
+    ],
+    skip: collectStoryDocsTests("apps/storybook-svelte/src/stories").length === 0,
   },
   {
     name: "Storybook consistency",

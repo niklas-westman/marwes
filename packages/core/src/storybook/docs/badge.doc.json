@@ -1,0 +1,109 @@
+{
+  "family": "badge",
+  "title": "Badge Components",
+  "storybookTitle": "Badge/Introduction",
+  "imports": ["BadgeVariant", "badgeWhyPurposeComponents", "badgePurposeComponentReference"],
+  "intro": "Marwes provides a badge system with three layers:\n**purpose components** for common patterns, **BadgeGroup** for grouping related badges,\nand the raw **Badge** atom for standalone use.",
+  "sections": [
+    {
+      "heading": "Recommended: Purpose Components",
+      "body": "Use purpose-built components that automatically set AI-friendly metadata:",
+      "exampleKey": "purposeComponents",
+      "subsections": [
+        {
+          "heading": "Why Purpose Components?",
+          "dynamicList": {
+            "tag": "ol",
+            "source": "badgeWhyPurposeComponents"
+          }
+        },
+        {
+          "heading": "Purpose Component Reference",
+          "dynamicList": {
+            "tag": "ul",
+            "source": "badgePurposeComponentReference"
+          }
+        }
+      ]
+    },
+    {
+      "heading": "Base: BadgeGroup (Molecule)",
+      "body": "For grouping related badges with accessible label association, use `BadgeGroup`:",
+      "exampleKey": "badgeGroup",
+      "subsections": [
+        {
+          "heading": "BadgeGroup Features",
+          "bullets": [
+            "**Accessible group** — `<fieldset>` with `aria-labelledby` wiring",
+            "**Visible label** — rendered as a `<legend>` with Paragraph typography",
+            "**Data attributes** — supports `dataAttributes` for AI-friendly metadata",
+            "**Composable** — accepts any Badge children including purpose components"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Low-level: Badge (Atom)",
+      "body": "Use the raw `Badge` atom for standalone badges or when building custom compositions:",
+      "exampleKey": "atom",
+      "note": "**Note:** When using `Badge` directly, you are responsible for:\n- Providing appropriate context through surrounding markup\n- Setting `ariaLabel` for non-text or ambiguous content\n- Grouping related badges in a `BadgeGroup` when needed"
+    }
+  ],
+  "accessibilityNotes": [
+    "**Numeric-only badges always need `ariaLabel`.** A badge that renders only a number such as `5`\nor `99+` has no readable context for a screen reader. Always provide `ariaLabel` on any\n`NotificationBadge` or raw `Badge` whose visible text alone does not explain its meaning.",
+    {
+      "exampleKey": "a11yNumericBadge"
+    },
+    "**`BadgeGroup` label quality matters.** `BadgeGroup` uses a `<fieldset>` with `aria-labelledby`\nwiring from the `label` prop. The label is exposed as the accessible name of the group.\nChoose labels that describe the group in context — for example `\"Sprint status\"` rather than\njust `\"Status\"`.",
+    "**Badge is a passive span.** The raw `Badge` does not emit `role`, `button`, or any interactive\nsemantics. If a badge must be interactive, use a different component rather than layering\nclick handlers on a `Badge` surface."
+  ],
+  "componentReference": [
+    {
+      "group": "Purpose Components (AI-Friendly)",
+      "components": [
+        {
+          "name": "StatusBadge",
+          "description": "Operational or lifecycle status",
+          "meta": "Sets: `data-purpose=\"status\"`"
+        },
+        {
+          "name": "PriorityBadge",
+          "description": "Urgency or importance levels",
+          "meta": "Sets: `data-purpose=\"priority\"`"
+        },
+        {
+          "name": "NotificationBadge",
+          "description": "Notification counts and alerts",
+          "meta": "Sets: `data-purpose=\"notification\"`"
+        }
+      ]
+    },
+    {
+      "group": "Base Molecule",
+      "components": [
+        {
+          "name": "BadgeGroup",
+          "description": "Accessible badge group with label association",
+          "meta": "Provides: `<fieldset>`, `aria-labelledby`, visible label"
+        }
+      ]
+    },
+    {
+      "group": "Atom",
+      "components": [
+        {
+          "name": "Badge",
+          "description": "Low-level status indicator with variant styling",
+          "meta": "Use when you need standalone badges or custom compositions"
+        }
+      ]
+    }
+  ],
+  "storyCoverage": [
+    "**Atom**: `Default`, `AllVariants`, `DarkVariants`",
+    "**Molecule**: `Default`, `AllVariants`, `WithCustomClass`",
+    "**Purpose/Status**: `Default`, `AllStatuses`",
+    "**Purpose/Priority**: `Default`, `AllPriorities`",
+    "**Purpose/Notification**: `Default`, `AllNotifications`"
+  ]
+}

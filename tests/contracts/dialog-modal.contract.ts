@@ -1,3 +1,7 @@
+/**
+ * Shared contract for DialogModal — named modal with description
+ * wiring, aria-label fallback, initial focus management, and focus surface fallback.
+ */
 import { describe, expect, it } from "vitest"
 
 export type DialogModalContractHarness = {

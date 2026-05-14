@@ -1,4 +1,5 @@
 import {
+  SpinnerVariants,
   storybookA11yPolicy,
   storybookButtonGeneralArgTypes,
   storybookLayout,
@@ -14,7 +15,14 @@ const meta = {
     ...storybookA11yPolicy.smoke,
   },
   tags: ["autodocs"],
-  argTypes: storybookButtonGeneralArgTypes,
+  argTypes: {
+    ...storybookButtonGeneralArgTypes,
+    loading: {
+      control: "object",
+      description:
+        "Boolean shorthand or loading config object with isLoading, disableWhileLoading, spinnerVariant, and loadingLabel.",
+    },
+  },
 } satisfies Meta<typeof TextButton>
 
 export default meta
@@ -28,5 +36,45 @@ export const TextExample: Story = {
       return { args }
     },
     template: `<TextButton v-bind="args">Text Button</TextButton>`,
+  }),
+}
+
+export const LoadingFullConfig: Story = {
+  args: {
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: false,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
+  },
+  render: (args) => ({
+    components: { TextButton },
+    setup() {
+      return { args }
+    },
+    template: `<TextButton v-bind="args">Save</TextButton>`,
+  }),
+}
+
+export const LoadingFullConfigBlocking: Story = {
+  args: {
+    iconLeft: "plus",
+    iconRight: "checkCircle",
+    loading: {
+      isLoading: true,
+      disableWhileLoading: true,
+      spinnerVariant: SpinnerVariants.dual,
+      loadingLabel: "Saving…",
+    },
+  },
+  render: (args) => ({
+    components: { TextButton },
+    setup() {
+      return { args }
+    },
+    template: `<TextButton v-bind="args">Save</TextButton>`,
   }),
 }

@@ -1,3 +1,7 @@
+/**
+ * Shared contract for the Avatar atom — icon fallback, initials with
+ * size variants, image rendering with alt text, and decorative mode.
+ */
 import { describe, expect, it } from "vitest"
 
 export type AvatarSize = "small" | "medium" | "large"

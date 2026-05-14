@@ -1,3 +1,7 @@
+/**
+ * Shared contract for Heading components — native H1 semantics,
+ * semantic heading levels, and visual size override with metadata.
+ */
 import { describe, expect, it } from "vitest"
 
 export type HeadingLevel = 1 | 2 | 3
