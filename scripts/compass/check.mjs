@@ -231,7 +231,10 @@ async function checkStatusOwnership() {
 }
 
 async function checkPlanningLifecycle() {
-  const planningFiles = await collectMarkdownFiles(resolve(repositoryRoot, "docs/planning"))
+  const planningDirectory = resolve(repositoryRoot, "docs/planning")
+  const planningFiles = (await pathExists(planningDirectory))
+    ? await collectMarkdownFiles(planningDirectory)
+    : []
   const temporaryFiles = planningFiles
     .map((file) => normalizePath(file.replace(`${repositoryRoot}/`, "")))
     .filter((file) => /temp|temporary/i.test(file))
