@@ -873,6 +873,7 @@
             "apps/storybook-react/src/stories/button/secondary-button.stories.tsx",
             "apps/storybook-react/src/stories/button/sort-button.stories.tsx",
             "apps/storybook-react/src/stories/button/submit-button.stories.tsx",
+            "apps/storybook-react/src/stories/button/success-button.stories.tsx",
             "apps/storybook-react/src/stories/button/text-button.stories.tsx",
             "apps/storybook-react/src/stories/button/upload-button.stories.tsx",
             "apps/storybook-react/src/stories/button/verify-button.stories.tsx"
@@ -900,6 +901,7 @@
             "apps/storybook-vue/src/stories/button/secondary-button.stories.ts",
             "apps/storybook-vue/src/stories/button/sort-button.stories.ts",
             "apps/storybook-vue/src/stories/button/submit-button.stories.ts",
+            "apps/storybook-vue/src/stories/button/success-button.stories.ts",
             "apps/storybook-vue/src/stories/button/text-button.stories.ts",
             "apps/storybook-vue/src/stories/button/upload-button.stories.ts",
             "apps/storybook-vue/src/stories/button/verify-button.stories.ts"
@@ -1663,16 +1665,16 @@
             "packages/vue/src/components/date-picker/index.ts"
           ],
           "storybookReact": [
-            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts",
-            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts",
-            "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx",
-            "apps/storybook-react/src/stories/date-picker/Introduction.mdx"
+            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
+            "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
+            "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx.disabled",
+            "apps/storybook-react/src/stories/date-picker/Introduction.mdx.disabled"
           ],
           "storybookVue": [
-            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts",
-            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts",
-            "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts",
-            "apps/storybook-vue/src/stories/date-picker/Introduction.mdx"
+            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
+            "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
+            "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts.disabled",
+            "apps/storybook-vue/src/stories/date-picker/Introduction.mdx.disabled"
           ],
           "contracts": ["tests/contracts/date-picker.contract.ts"]
         },

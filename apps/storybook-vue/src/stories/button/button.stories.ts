@@ -64,7 +64,7 @@ export const Loading: Story = {
     setup() {
       return { args }
     },
-    template: `<Button v-bind="args">Saving...</Button>`,
+    template: `<Button v-bind="args">Saving…</Button>`,
   }),
 }
 

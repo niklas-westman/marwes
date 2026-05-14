@@ -11,12 +11,8 @@
     description = "This sends the release to subscribers immediately.",
   }: Props = $props()
 
-  let open = $state(false)
+  let open = $state(true)
 </script>
-
-<button type="button" class="mw-btn mw-btn--primary mw-btn--md" onclick={() => (open = true)}>
-  Open confirm dialog
-</button>
 
 <ConfirmDialog bind:open {title} {description}>
   <Paragraph>Review the release summary before confirming.</Paragraph>

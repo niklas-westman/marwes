@@ -30,4 +30,4 @@ export const Focus: Story = { args: { value: 50, className: "mw-slider--state-fo
 export const Hover: Story = { args: { value: 50, className: "mw-slider--state-hover" } }
 export const Pressed: Story = { args: { value: 50, className: "mw-slider--state-pressed" } }
 export const FullWidth: Story = { args: { value: 50, style: "width: 100%;" } }
-export const WithTouchArea: Story = { args: { value: 50 } }
+export const WithTouchArea: Story = { args: { value: 50, showTouchArea: true } }

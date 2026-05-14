@@ -1,19 +1,31 @@
 <script lang="ts">
   import SliderField from "./SliderField.svelte";
-  import type { SliderProps } from "./types.js";
+  import type { SliderFieldProps, SliderProps } from "./types.js";
 
-  interface RadiusSliderProps {
-    id?: string;
+  interface RadiusSliderProps extends Omit<SliderFieldProps, "label" | "slider" | "minValueLabel" | "maxValueLabel"> {
     label?: string;
-    helperText?: string;
-    error?: string;
     slider?: Omit<SliderProps, "value">;
-    value?: number;
-    class?: string;
+    orientation?: SliderProps["orientation"];
+    minValueLabel?: string;
+    maxValueLabel?: string;
   }
 
-  let { label = "Radius", slider, ...rest }: RadiusSliderProps = $props();
+  let {
+    label = "Radius",
+    slider,
+    orientation,
+    minValueLabel = "0px",
+    maxValueLabel = "48px",
+    dataAttributes,
+    ...rest
+  }: RadiusSliderProps = $props();
 </script>
-<div data-purpose="radius">
-  <SliderField {...rest} {label} slider={{ min: 0, max: 48, step: 2, ...slider }} />
-</div>
+
+<SliderField
+  {...rest}
+  {label}
+  {minValueLabel}
+  {maxValueLabel}
+  slider={{ min: 0, max: 48, step: 2, showTooltip: true, ...(orientation !== undefined ? { orientation } : {}), ...slider }}
+  dataAttributes={{ ...dataAttributes, "data-purpose": "radius" }}
+/>

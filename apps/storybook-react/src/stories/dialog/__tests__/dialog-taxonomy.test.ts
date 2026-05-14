@@ -12,6 +12,14 @@ function readStoryFile(fileName: string): string {
   return readFileSync(path.join(storiesDir, fileName), "utf8")
 }
 
+const dialogStoryFiles = [
+  "dialog.stories.tsx",
+  "dialog-modal.stories.tsx",
+  "confirm-dialog.stories.tsx",
+  "destructive-dialog.stories.tsx",
+  "info-dialog.stories.tsx",
+] as const
+
 describe("React dialog story taxonomy", () => {
   it("keeps atom and molecule stories in the correct tiers", () => {
     expect(readStoryFile("dialog.stories.tsx")).toContain('title: "Dialog/Atom"')
@@ -26,5 +34,11 @@ describe("React dialog story taxonomy", () => {
       'title: "Dialog/Purpose/DestructiveDialog"',
     )
     expect(readStoryFile("info-dialog.stories.tsx")).toContain('title: "Dialog/Purpose/InfoDialog"')
+  })
+
+  it("keeps generated autodocs disabled for all dialog stories", () => {
+    for (const fileName of dialogStoryFiles) {
+      expect(readStoryFile(fileName)).not.toContain("autodocs")
+    }
   })
 })

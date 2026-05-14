@@ -11,6 +11,7 @@
     class: className,
     style,
     ariaDescribedBy,
+    ariaInvalid,
     ...options
   }: SliderProps = $props();
 
@@ -47,6 +48,7 @@
       aria-describedby={kit.a11y.ariaDescribedBy}
       aria-valuetext={kit.a11y.ariaValueText}
       aria-orientation={kit.a11y.ariaOrientation}
+      aria-invalid={ariaInvalid ? true : undefined}
       value={kit.value}
       oninput={handleInput}
     />

@@ -9,8 +9,8 @@ import {
 # Tab Components
 
 Marwes provides tabs at three layers: **purpose components** for common tab sets,
-**TabGroup** for accessible tablist and panel coordination, and purpose wrappers
-for semantic context.
+**TabGroup** for accessible tablist and panel coordination, and the raw
+**Tab** and **TabPanel** atoms for custom compositions.
 
 ## Recommended: Purpose Components
 
@@ -90,6 +90,27 @@ Use `TabGroup` when you need custom tab labels or panels:
 - **Accessible panel wiring** — each tab connects to its `tabpanel` automatically
 - **Disabled tabs** — individual tabs can be disabled via the `disabled` property
 
+## Low-level: Tab and TabPanel
+
+Use `Tab` and `TabPanel` directly only when you need custom tablist composition:
+
+```svelte
+<script>
+  import { Tab, TabPanel } from "@marwes-ui/svelte"
+</script>
+
+<div role="tablist" aria-label="Example tabs">
+  <Tab selected ariaControls="panel-overview">Overview</Tab>
+  <Tab ariaControls="panel-activity">Activity</Tab>
+  <Tab disabled ariaControls="panel-settings">Settings</Tab>
+</div>
+
+<TabPanel id="panel-overview" tabId="tab-overview">Overview panel</TabPanel>
+```
+
+> **Note:** When using `Tab` directly, keep `role="tablist"`, `aria-controls`,
+> and matching `tabpanel` ids wired together.
+
 ## Component Reference
 
 ### Purpose Components
@@ -104,8 +125,15 @@ Use `TabGroup` when you need custom tab labels or panels:
 
 **`TabGroup`** — Accessible tablist plus panel coordination
 
+### Atom
+
+**`Tab`** — Low-level `<button role="tab">`
+
+**`TabPanel`** — Low-level panel region paired with a tab
+
 ## Story Coverage
 
+- **Atom**: `Default`, `Selected`, `Disabled`, `IconOnly`, `WithAriaLabel`, `TabBar`, `AllStates`
 - **Molecule**: `Default`, `WithDisabledTab`
 - **Purpose/ContentTabs**: `Default`
 - **Purpose/NavigationTabs**: `Default`

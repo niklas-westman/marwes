@@ -76,6 +76,7 @@ export interface RichTextFieldProps {
 
 export interface SelectProps extends Omit<SelectOptions, "describedBy"> {
   value?: string
+  onvaluechange?: (value: string) => void
   onchange?: (e: Event & { currentTarget: HTMLSelectElement }) => void
   class?: string
   style?: string | undefined
@@ -87,7 +88,7 @@ export interface SelectFieldProps {
   label: string
   helperText?: string
   error?: string
-  select?: Omit<SelectProps, "value">
+  select?: SelectProps
   ariaDescribedBy?: string
   value?: string
   class?: string

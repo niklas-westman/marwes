@@ -9,7 +9,6 @@ const meta = {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof DestructiveDialogStory>
 
 export default meta
@@ -18,6 +17,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     title: "Delete workspace",
-    description: "This action cannot be undone.",
+    description: "This action permanently removes all projects, members, and history.",
   },
 }

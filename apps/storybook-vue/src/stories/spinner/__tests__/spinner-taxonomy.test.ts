@@ -28,4 +28,16 @@ describe("Vue spinner story taxonomy", () => {
     expect(buttonSpinnerStory).toContain('title: "Spinner/Molecule/ButtonSpinner"')
     expect(emptyStateSpinnerStory).toContain('title: "Spinner/Molecule/EmptyStateSpinner"')
   })
+
+  it("keeps EmptyStateSpinner default story on a light surface", () => {
+    const emptyStateSpinnerStory = readFileSync(
+      path.join(storiesDir, "empty-state-spinner.stories.ts"),
+      "utf8",
+    )
+
+    expect(emptyStateSpinnerStory).toContain("rgba(248, 250, 252, 0.88)")
+    expect(emptyStateSpinnerStory).toContain("#111827")
+    expect(emptyStateSpinnerStory).not.toContain("background: #141414")
+    expect(emptyStateSpinnerStory).not.toContain("color: #f9fafb")
+  })
 })

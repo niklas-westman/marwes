@@ -19,12 +19,8 @@
     closeOnScrimClick,
   }: Props = $props()
 
-  let open = $state(false)
+  let open = $state(true)
 </script>
-
-<button type="button" class="mw-btn mw-btn--primary mw-btn--md" onclick={() => (open = true)}>
-  Open dialog
-</button>
 
 <DialogModal
   bind:open
@@ -35,11 +31,20 @@
   {...(closeOnEscape !== undefined ? { closeOnEscape } : {})}
   {...(closeOnScrimClick !== undefined ? { closeOnScrimClick } : {})}
 >
-  {#snippet footer({ close })}
-    <CancelButton onclick={close}>Cancel</CancelButton>
-    <ConfirmButton onclick={close}>Continue</ConfirmButton>
-  {/snippet}
-  <Paragraph>
-    DialogModal owns the scrim, modal semantics, close affordances, and focus restoration.
-  </Paragraph>
+  {#if dismissible === false}
+    {#snippet footer()}
+      <ConfirmButton>Continue</ConfirmButton>
+    {/snippet}
+    <Paragraph>
+      The migration runs in the background and will notify you when it is safe to continue.
+    </Paragraph>
+  {:else}
+    {#snippet footer({ close })}
+      <CancelButton onclick={close}>Cancel</CancelButton>
+      <ConfirmButton onclick={close}>Continue</ConfirmButton>
+    {/snippet}
+    <Paragraph>
+      DialogModal owns the scrim, modal semantics, close affordances, and focus restoration.
+    </Paragraph>
+  {/if}
 </DialogModal>

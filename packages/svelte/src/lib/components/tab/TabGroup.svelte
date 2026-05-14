@@ -41,7 +41,9 @@
     }
   });
 
-  const activeValue = $derived(controlledActive ?? internalActive);
+  const activeValue = $derived(
+    controlledActive !== undefined ? resolveTabValue(itemStates, controlledActive) : internalActive
+  );
 
   function selectTab(value: string): void {
     if (controlledActive === undefined) {
@@ -114,6 +116,7 @@
       role="tabpanel"
       aria-labelledby={a11yIds.tabIds[tab.value]}
       class="mw-tab-group__panel"
+      tabindex={isActive ? 0 : undefined}
       hidden={!isActive}
     >
       {#if isActive}

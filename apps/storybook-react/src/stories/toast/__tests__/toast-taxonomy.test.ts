@@ -36,4 +36,12 @@ describe("React toast story taxonomy", () => {
     expect(readStoryFile("info-toast.stories.tsx")).toContain('title: "Toast/Purpose/InfoToast"')
     expect(readStoryFile("toast-matrix.stories.tsx")).toContain('title: "Toast/Purpose/Matrix"')
   })
+
+  it("keeps the matrix layout spaced enough for full-width toast surfaces", () => {
+    const matrix = readStoryFile("toast-matrix.stories.tsx")
+
+    expect(matrix).toContain("box-sizing: border-box")
+    expect(matrix).toContain("gap: 32")
+    expect(matrix).toContain("minWidth: 0")
+  })
 })

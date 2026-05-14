@@ -14,6 +14,9 @@ export interface RadioGroupFieldProps {
   description?: string
   error?: string
   ariaDescribedBy?: string
+  required?: boolean
+  disabled?: boolean
+  dataAttributes?: Record<string, string>
   children?: Snippet
   class?: string
 }

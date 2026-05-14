@@ -31,10 +31,12 @@
   type MatrixEntry = { key: string; label: string; intent: string }
 
   const entries: MatrixEntry[] = [
+    { key: "neutral", label: "Neutral", intent: "neutral" },
     { key: "info", label: "Information", intent: "info" },
     { key: "success", label: "Success", intent: "success" },
     { key: "warning", label: "Warning", intent: "warning" },
     { key: "error", label: "Error", intent: "error" },
+    { key: "brand", label: "Brand", intent: "brand" },
   ]
 
   const bgColor = $derived(dark ? "#2e2e2e" : "#ffffff")
@@ -65,25 +67,65 @@
           {row.label}
         </Paragraph>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 32px;">
           {#each entries as entry (entry.key)}
-            <div style="flex: 0 0 360px; width: 360px;">
-              {#if entry.intent === "info"}
+            <div style="flex: 0 0 360px; width: 360px; min-width: 0;">
+              {#if entry.intent === "neutral"}
+                <Toast
+                  variant={row.variant}
+                  dataAttributes={{ "data-intent": "neutral" }}
+                  class="mw-toast--figma-matrix"
+                >
+                  {#snippet icon()}
+                    <Icon name={IconName.XCircle} decorative />
+                  {/snippet}
+                  {#snippet action()}
+                    <button type="button" class="mw-toast__action-button">Close</button>
+                  {/snippet}
+                  Neutral message
+                </Toast>
+              {:else if entry.intent === "info"}
                 <InfoToast variant={row.variant} class="mw-toast--figma-matrix">
+                  {#snippet action()}
+                    <button type="button" class="mw-toast__action-button">Close</button>
+                  {/snippet}
                   Meeting starts in 10 min
                 </InfoToast>
               {:else if entry.intent === "success"}
                 <SuccessToast variant={row.variant} class="mw-toast--figma-matrix">
+                  {#snippet action()}
+                    <button type="button" class="mw-toast__action-button">Close</button>
+                  {/snippet}
                   Your email is verified
                 </SuccessToast>
               {:else if entry.intent === "warning"}
                 <WarningToast variant={row.variant} class="mw-toast--figma-matrix">
+                  {#snippet action()}
+                    <button type="button" class="mw-toast__action-button">Close</button>
+                  {/snippet}
                   Connection unstable
                 </WarningToast>
               {:else if entry.intent === "error"}
                 <ErrorToast variant={row.variant} class="mw-toast--figma-matrix">
+                  {#snippet action()}
+                    <button type="button" class="mw-toast__action-button">Close</button>
+                  {/snippet}
                   Something went wrong
                 </ErrorToast>
+              {:else if entry.intent === "brand"}
+                <Toast
+                  variant={row.variant}
+                  dataAttributes={{ "data-intent": "brand" }}
+                  class="mw-toast--figma-matrix"
+                >
+                  {#snippet icon()}
+                    <Icon name={IconName.XCircle} decorative />
+                  {/snippet}
+                  {#snippet action()}
+                    <button type="button" class="mw-toast__action-button">Close</button>
+                  {/snippet}
+                  Brand
+                </Toast>
               {/if}
             </div>
           {/each}
@@ -99,6 +141,7 @@
 
 <style>
   :global(.mw-toast--figma-matrix) {
+    box-sizing: border-box;
     width: 100%;
     min-width: 0;
     max-width: none;

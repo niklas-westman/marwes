@@ -4,7 +4,7 @@
   import type { CheckboxProps } from "./types.js";
 
   let {
-    checked = $bindable(false),
+    checked = $bindable(),
     onchange,
     oncheckedchange,
     class: className,
@@ -14,7 +14,7 @@
 
   const kit = $derived(checkboxRecipe({
     ...coreProps,
-    checked,
+    ...(checked !== undefined ? { checked } : {}),
     ...(ariaDescribedBy ? { ariaDescribedBy } : {}),
   }));
   const mergedClass = $derived(mergeClass(kit.className, className));
@@ -48,6 +48,7 @@
   aria-describedby={kit.a11y.ariaDescribedBy}
   aria-checked={kit.a11y.ariaChecked}
   aria-invalid={kit.a11y.ariaInvalid === true ? true : undefined}
-  {checked}
+  checked={kit.checked}
+  defaultChecked={kit.defaultChecked}
   onchange={handleChange}
 />

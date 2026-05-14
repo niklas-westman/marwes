@@ -9,7 +9,6 @@ const meta = {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof InfoDialogStory>
 
 export default meta
@@ -18,6 +17,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     title: "Scheduled maintenance",
-    description: "The system will be briefly unavailable.",
+    description: "The workspace will be read-only for ten minutes.",
   },
 }

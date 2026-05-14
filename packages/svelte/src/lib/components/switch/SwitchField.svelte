@@ -50,9 +50,9 @@
       {...switchProps}
       id={fieldId}
       ariaDescribedBy={a11yIds.describedBy}
-      ariaLabel={label}
+      ariaLabelledby={a11yIds.labelId}
     />
-    <label class="mw-switch-field__label" for={fieldId}>
+    <label class="mw-switch-field__label" id={a11yIds.labelId} for={fieldId}>
       <p class="mw-p mw-p--md">{label}</p>
     </label>
   </div>

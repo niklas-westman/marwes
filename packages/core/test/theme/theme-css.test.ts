@@ -53,24 +53,28 @@ const fixture: ResolvedTheme = {
         text: "#006633",
         icon: "#006D48",
         border: "#90CAAD",
+        borderStrong: "#2E9970",
       },
       warning: {
         background: "#FFF8E6",
         text: "#B45309",
         icon: "#D97706",
         border: "#FDE08A",
+        borderStrong: "#E46F00",
       },
       error: {
         background: "#FFE8EB",
         text: "#A8031F",
         icon: "#D90429",
         border: "#FF8A95",
+        borderStrong: "#FF2847",
       },
       info: {
         background: "#EEEEFF",
         text: "#1B1D97",
         icon: "#2F31FC",
         border: "#ABABFD",
+        borderStrong: "#5859FC",
       },
     },
   },
@@ -240,6 +244,7 @@ describe("themeToCSSVars — status tokens", () => {
     expect(themeToCSSVars(fixture)["--mw-color-status-warning-text"]).toBe("#B45309")
     expect(themeToCSSVars(fixture)["--mw-color-status-error-text"]).toBe("#A8031F")
     expect(themeToCSSVars(fixture)["--mw-color-status-info-border"]).toBe("#ABABFD")
+    expect(themeToCSSVars(fixture)["--mw-color-status-info-border-strong"]).toBe("#5859FC")
   })
 })
 
@@ -342,8 +347,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 104 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(104)
+  it("emits exactly 108 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(108)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

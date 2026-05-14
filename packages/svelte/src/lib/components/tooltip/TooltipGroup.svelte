@@ -63,8 +63,8 @@
   {...dataAttributes}
   onmouseenter={() => updateOpen(true)}
   onmouseleave={() => updateOpen(false)}
-  onfocus={() => updateOpen(true)}
-  onblur={(e) => {
+  onfocusin={() => updateOpen(true)}
+  onfocusout={(e) => {
     const related = e.relatedTarget;
     if (related instanceof Node && e.currentTarget.contains(related)) return;
     updateOpen(false);

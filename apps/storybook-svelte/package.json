@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "svelte-check --tsconfig ./tsconfig.check.json",
-    "test": "echo \"No tests in storybook-svelte yet\"",
+    "test": "vitest run",
     "build": "storybook build",
     "storybook": "storybook dev -p 6008",
     "build-storybook": "storybook build"

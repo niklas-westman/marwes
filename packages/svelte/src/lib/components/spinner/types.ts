@@ -3,6 +3,7 @@ import type { SpinnerOptions, SpinnerSize, SpinnerVariant } from "@marwes-ui/cor
 export interface SpinnerProps extends SpinnerOptions {
   class?: string
   style?: string | undefined
+  dataAttributes?: Record<string, string>
 }
 
 export interface ButtonSpinnerProps extends SpinnerProps {

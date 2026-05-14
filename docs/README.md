@@ -58,7 +58,7 @@ graph TD
   Registry --> RegistryIndex[README.md]
   Registry --> ButtonRegistry[families/button/README.md]
 
-  Planning --> ReleasePlan[release-1-0-0-hardening-plan.md]
+  Planning --> NotionFeedback[notion-design-feedback-fix-guide.md]
 
   Audits --> AuditIndex[README.md]
   Audits --> AuditStatus[status.md]
@@ -93,7 +93,7 @@ Practical how-to documents.
 ### Planning
 Active planning documents. Completed migration notes should be removed once their decisions are reflected in reference docs, registry docs, tests, or release notes.
 
-- [Release 1.0.0 hardening plan](./planning/release-1-0-0-hardening-plan.md) — release readiness checks, security posture, and validation log
+- [Notion design feedback fix guide](./planning/notion-design-feedback-fix-guide.md) — active release-readiness queue for Notion design feedback fixes and validation logs
 
 ### Registry
 Family-level component knowledge base.

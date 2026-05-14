@@ -31,13 +31,13 @@ export const Large: Story = {
 export const AllSizes: Story = {
   render: () => ({
     Component: AvatarBadgeGallery,
-    props: {},
+    props: { mode: "light" },
   }),
 }
 
 export const DarkSizes: Story = {
   render: () => ({
     Component: AvatarBadgeGallery,
-    props: {},
+    props: { mode: "dark" },
   }),
 }

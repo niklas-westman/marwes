@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+import coverImage from "./assets/cover-v3.png"
+
+<Meta title="Welcome/Introduction" />
+
+<img
+  src={coverImage}
+  alt="Marwes interface system cover"
+  style={{
+    width: "100%",
+    height: "clamp(420px, 46vw, 580px)",
+    objectFit: "cover",
+    borderRadius: "8px",
+    display: "block",
+    marginBottom: "32px",
+  }}
+/>
+
+# Marwes Svelte Storybook
+
+This Storybook presents the Svelte adapter for Marwes UI. Use it to inspect component behavior, visual states, accessibility wiring, and the intended component taxonomy.
+
+## Start Here
+
+1. Open a component family's **Introduction** page to understand its role and recommended usage.
+2. Review the **Atom** story for the smallest reusable component.
+3. Move to **Molecule** and **Purpose** stories when you need composed fields, semantic wrappers, or task-specific patterns.
+4. Toggle the theme toolbar between light and dark mode before signing off visual changes.
+
+## Navigation Model
+
+- **Atom** stories show base primitives such as `Button`, `Input`, `Radio`, and `Toast`.
+- **Molecule** stories show composed components such as fields, groups, containers, and modals.
+- **Purpose** stories show named product patterns with locked semantics, such as save buttons, rating groups, and status toasts.
+- **Introduction** pages document family intent, boundaries, examples, and accessibility notes.
+
+## Using Components
+
+Install or import from the Svelte package:
+
+```svelte
+<script>
+  import { Button, MarwesProvider } from "@marwes-ui/svelte"
+</script>
+
+<MarwesProvider>
+  <Button variant="primary">Continue</Button>
+</MarwesProvider>
+```

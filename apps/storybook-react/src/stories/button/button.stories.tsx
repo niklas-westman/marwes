@@ -50,7 +50,7 @@ export const AsLink: Story = {
 
 export const Loading: Story = {
   args: {
-    children: "Saving...",
+    children: "Saving…",
     loading: true,
     variant: "primary",
     action: "submit",

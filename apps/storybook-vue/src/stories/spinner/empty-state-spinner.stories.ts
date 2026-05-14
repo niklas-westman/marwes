@@ -24,10 +24,10 @@ const meta = {
     },
     template: `
       <div
-        style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; min-width: 320px; min-height: 220px; padding: 2rem; border-radius: 16px; background: #141414;"
+        style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; min-width: 320px; min-height: 220px; padding: 2rem; border-radius: 16px; background: rgba(248, 250, 252, 0.88); box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);"
       >
         <EmptyStateSpinner v-bind="args" :style="spinnerVars" />
-        <Paragraph size="sm" style="margin: 0; color: #f9fafb;">Loading your data</Paragraph>
+        <Paragraph size="sm" style="margin: 0; color: #111827;">Loading your data</Paragraph>
       </div>
     `,
   }),

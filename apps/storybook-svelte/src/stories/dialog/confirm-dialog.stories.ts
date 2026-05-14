@@ -9,7 +9,6 @@ const meta = {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof ConfirmDialogStory>
 
 export default meta
@@ -18,6 +17,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     title: "Publish update",
-    description: "This will make changes visible to users.",
+    description: "This sends the release to subscribers immediately.",
   },
 }

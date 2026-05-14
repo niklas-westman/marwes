@@ -21,6 +21,14 @@ describe("React button story taxonomy", () => {
     expect(buttonStory).toMatch(/export const\s+Basic\s*:/)
   })
 
+  it("keeps boolean and object loading stories visually aligned", () => {
+    const buttonStory = readStoryFile("button.stories.tsx")
+
+    expect(buttonStory).toContain('children: "Saving…"')
+    expect(buttonStory).toContain('loadingLabel: "Saving…"')
+    expect(buttonStory).not.toContain("Saving...")
+  })
+
   it("uses Variant titles for visual wrapper buttons", () => {
     const primary = readStoryFile("primary-button.stories.tsx")
     const secondary = readStoryFile("secondary-button.stories.tsx")
@@ -49,6 +57,7 @@ describe("React button story taxonomy", () => {
       "search-button.stories.tsx",
       "sort-button.stories.tsx",
       "submit-button.stories.tsx",
+      "success-button.stories.tsx",
       "upload-button.stories.tsx",
       "verify-button.stories.tsx",
     ]
@@ -81,6 +90,7 @@ describe("React button story taxonomy", () => {
       "search-button.stories.tsx",
       "sort-button.stories.tsx",
       "submit-button.stories.tsx",
+      "success-button.stories.tsx",
       "upload-button.stories.tsx",
       "verify-button.stories.tsx",
     ]

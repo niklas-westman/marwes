@@ -4,6 +4,7 @@
  */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
+import "@testing-library/jest-dom/vitest"
 import CheckboxField from "../lib/components/checkbox/CheckboxField.svelte"
 import CheckboxGroupField from "../lib/components/checkbox/CheckboxGroupField.svelte"
 import RadioGroupField from "../lib/components/radio/RadioGroupField.svelte"
@@ -59,12 +60,15 @@ describe("CheckboxGroupField", () => {
 })
 
 describe("RadioGroupField", () => {
-  it("renders with a legend label", () => {
+  it("renders with a labeled radiogroup", () => {
     const { container } = render(RadioGroupField, {
       props: { label: "Choice" },
     })
-    const legend = container.querySelector("legend")
-    expect(legend?.textContent).toContain("Choice")
+    const group = container.querySelector('[role="radiogroup"]')
+    const label = container.querySelector(".mw-radio-group-field__label .mw-p")
+
+    expect(group).toHaveAccessibleName("Choice")
+    expect(label).toHaveClass("mw-p--sm")
   })
 
   it("shows error when provided", () => {

@@ -18,7 +18,7 @@ describe("Vue toast story taxonomy", () => {
 
     expect(story).toContain('title: "Toast/Atom"')
     expect(story).toContain("mw-toast__action-button")
-    expect(story).toContain("background: #000000")
+    expect(story).toContain("background: #0F0F0F")
   })
 
   it("uses Molecule title for ToastContainer", () => {
@@ -35,5 +35,14 @@ describe("Vue toast story taxonomy", () => {
     )
     expect(readStoryFile("info-toast.stories.ts")).toContain('title: "Toast/Purpose/InfoToast"')
     expect(readStoryFile("toast-matrix.stories.ts")).toContain('title: "Toast/Purpose/Matrix"')
+  })
+
+  it("keeps the matrix layout spaced enough for full-width toast surfaces", () => {
+    const matrix = readStoryFile("toast-matrix.stories.ts")
+    const matrixCss = readStoryFile("toast-matrix.stories.css")
+
+    expect(matrix).toContain("gap: 32px")
+    expect(matrix).toContain("min-width: 0")
+    expect(matrixCss).toContain("box-sizing: border-box")
   })
 })

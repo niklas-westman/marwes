@@ -44,6 +44,11 @@ const preview: Preview = {
         excludeDecorators: true,
       },
     },
+    options: {
+      storySort: {
+        order: ["Welcome", "*"],
+      },
+    },
     a11y: { test: "off" },
   },
   initialGlobals: {

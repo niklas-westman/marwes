@@ -4,7 +4,7 @@
   import type { SpinnerProps } from "./types.js";
 
   type Props = SpinnerProps;
-  let props: Props = $props();
+  let { dataAttributes, ...props }: Props = $props();
 </script>
 
 <Spinner
@@ -12,4 +12,9 @@
   variant={props.variant ?? "dots-round"}
   size={props.size ?? "lg"}
   decorative={props.decorative ?? true}
+  dataAttributes={{
+    ...dataAttributes,
+    "data-purpose": "empty-state",
+    "data-context": "empty-state",
+  }}
 />

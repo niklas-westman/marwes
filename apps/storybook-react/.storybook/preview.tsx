@@ -43,6 +43,11 @@ const preview: Preview = {
         excludeDecorators: true,
       },
     },
+    options: {
+      storySort: {
+        order: ["Welcome", "*"],
+      },
+    },
     // Default to off until a story or family is explicitly promoted into the
     // automated smoke set with `a11y.test = "error"`.
     a11y: { test: "off" },

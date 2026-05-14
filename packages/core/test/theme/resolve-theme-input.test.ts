@@ -57,6 +57,13 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).color.textMuted).toBe("#595959")
   })
 
+  it("default status borderStrong follows the latest border data", () => {
+    expect(resolveThemeInput({}).color.status.info.borderStrong).toBe("#5859FC")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.status.info.borderStrong).toBe(
+      "#252599",
+    )
+  })
+
   it("default typography.h1.fontSize is 32", () => {
     expect(resolveThemeInput({}).typography.h1.fontSize).toBe(32)
   })

@@ -38,6 +38,16 @@ describe("createSpinnerRecipe", () => {
     expect(crossSpinner.svg.nodes).toHaveLength(4)
   })
 
+  it("rounds dots-square segments to match the Figma component", () => {
+    const squareDotsSpinner = createSpinnerRecipe({ variant: "dots-square" })
+
+    expect(squareDotsSpinner.svg.nodes).toHaveLength(8)
+    for (const node of squareDotsSpinner.svg.nodes) {
+      expect(node.tag).toBe("rect")
+      expect(node.attrs.rx).toBe("999")
+    }
+  })
+
   it("insets cross segments so the boxes have internal spacing", () => {
     const crossSpinner = createSpinnerRecipe({ variant: "cross" })
 

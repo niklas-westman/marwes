@@ -9,6 +9,7 @@
     size = "xs",
     decorative = true,
     style,
+    dataAttributes,
     ...rest
   }: ButtonSpinnerProps = $props();
 
@@ -26,4 +27,9 @@
   {size}
   {decorative}
   style={spinnerStyle}
+  dataAttributes={{
+    ...dataAttributes,
+    "data-purpose": "button-loading",
+    "data-context": "button-loading",
+  }}
 />

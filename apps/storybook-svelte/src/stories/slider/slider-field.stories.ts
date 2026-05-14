@@ -26,7 +26,7 @@ export const Default: Story = {
 export const WithHelperText: Story = {
   args: {
     label: "Radius",
-    helperText: "Controls the corner rounding used by the UI.",
+    description: "Controls the corner rounding used by the UI.",
     slider: { min: 0, max: 48, step: 2 },
     value: 24,
   },
@@ -44,7 +44,7 @@ export const WithError: Story = {
 export const Disabled: Story = {
   args: {
     label: "Radius",
-    helperText: "This value is managed by your theme preset.",
+    description: "This value is managed by your theme preset.",
     slider: { min: 0, max: 48, disabled: true },
     value: 24,
   },
@@ -63,7 +63,7 @@ export const InlineLabels: Story = {
     label: "Font size",
     slider: { min: 12, max: 32, step: 1 },
     value: 16,
-    inlineLabels: true,
+    labelPosition: "inline",
   },
 }
 

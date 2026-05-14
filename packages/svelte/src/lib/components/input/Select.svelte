@@ -6,6 +6,7 @@
   let {
     value = $bindable(""),
     onchange,
+    onvaluechange,
     class: className,
     style,
     describedBy,
@@ -31,6 +32,7 @@
   function handleChange(e: Event & { currentTarget: HTMLSelectElement }): void {
     value = e.currentTarget.value;
     onchange?.(e);
+    onvaluechange?.(value);
   }
 </script>
 

@@ -106,7 +106,7 @@ export const RadioGroupField = defineComponent(
         },
         [
           h("div", { class: "mw-radio-group-field__label", id: a11yIds.value.labelId }, [
-            h(Paragraph, { size: "md" }, { default: labelContent }),
+            h(Paragraph, { size: "sm" }, { default: labelContent }),
           ]),
 
           hasDescription.value

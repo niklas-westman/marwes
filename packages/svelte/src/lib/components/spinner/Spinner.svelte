@@ -13,6 +13,7 @@
     id,
     class: className,
     style,
+    dataAttributes,
   }: SpinnerProps = $props();
 
   const kit = $derived(
@@ -38,6 +39,7 @@
   aria-label={kit.a11y.ariaLabel}
   aria-live={kit.a11y.ariaLive}
   {...kit.dataAttributes}
+  {...dataAttributes}
 >
   <svg
     class="mw-spinner__svg"

@@ -27,6 +27,14 @@ describe("Checkbox", () => {
     expect(input.checked).toBe(true)
   })
 
+  it("applies uncontrolled default checked state", () => {
+    const { container } = render(Checkbox, {
+      props: { defaultChecked: true, ariaLabel: "Accept terms" },
+    })
+    const input = container.querySelector("input") as HTMLInputElement
+    expect(input.checked).toBe(true)
+  })
+
   it("applies indeterminate state", () => {
     const { container } = render(Checkbox, {
       props: { indeterminate: true, ariaLabel: "Select all" },

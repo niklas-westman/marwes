@@ -9,7 +9,6 @@ const meta = {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
-  tags: ["autodocs"],
   argTypes: {
     size: { control: "select", options: ["small", "medium", "large"] },
   },

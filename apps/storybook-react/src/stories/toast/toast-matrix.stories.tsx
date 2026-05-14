@@ -144,6 +144,7 @@ function ToastMatrixFrame(props: {
       >
         <style>{`
           .${matrixToastClassName} {
+            box-sizing: border-box;
             width: 100%;
             min-width: 0;
             max-width: none;
@@ -195,11 +196,11 @@ function ToastMatrixFrame(props: {
               >
                 {row.label}
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 32 }}>
                 {MATRIX_ENTRIES.map((entry) => (
                   <div
                     key={`${row.variant}-${entry.key}`}
-                    style={{ flex: "0 0 360px", width: 360 }}
+                    style={{ flex: "0 0 360px", width: 360, minWidth: 0 }}
                   >
                     {entry.render({ className: matrixToastClassName, variant: row.variant })}
                   </div>

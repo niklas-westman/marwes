@@ -81,6 +81,7 @@ function statusColorVars(role: string, tokens: StatusColorTokens): Record<string
     [`--mw-color-status-${role}-text`]: tokens.text,
     [`--mw-color-status-${role}-icon`]: tokens.icon,
     [`--mw-color-status-${role}-border`]: tokens.border,
+    [`--mw-color-status-${role}-border-strong`]: tokens.borderStrong,
   }
 }
 
@@ -88,7 +89,7 @@ function statusColorVars(role: string, tokens: StatusColorTokens): Record<string
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 104 entries total. `variant` is excluded — it is deprecated.
+ * Returns 108 entries total. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -129,7 +130,7 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-border-brand": color.borderBrand,
     "--mw-color-focus": color.focus,
 
-    // Status role tokens (4 × 4 = 16)
+    // Status role tokens (4 × 5 = 20)
     ...statusColorVars("success", color.status.success),
     ...statusColorVars("warning", color.status.warning),
     ...statusColorVars("error", color.status.error),

@@ -15,6 +15,11 @@ type ModeValue = {
   dark: string
 }
 
+type TokenModeValue = {
+  light: { $value: string }
+  dark: { $value: string }
+}
+
 type MarwesColorSource = {
   semantic: {
     surface: Record<
@@ -41,8 +46,24 @@ type MarwesColorSource = {
   }
 }
 
+type BorderStrongColorSource = {
+  status: {
+    info: { "border-strong": TokenModeValue }
+    success: { "border-strong": TokenModeValue }
+    warning: { "border-strong": TokenModeValue }
+    error: { "border-strong": TokenModeValue }
+  }
+}
+
 const colorSourcePath = path.resolve(__dirname, "../../../../docs/marwes-colors.json")
 const colorSource = JSON.parse(readFileSync(colorSourcePath, "utf8")) as MarwesColorSource
+const borderStrongSourcePath = path.resolve(
+  __dirname,
+  "../../../../docs/marwes-border-strong-tokens.json",
+)
+const borderStrongSource = JSON.parse(
+  readFileSync(borderStrongSourcePath, "utf8"),
+) as BorderStrongColorSource
 
 const lightVars = themeToCSSVars(resolveThemeInput({ mode: ThemeMode.light }))
 const darkVars = themeToCSSVars(resolveThemeInput({ mode: ThemeMode.dark }))
@@ -57,6 +78,13 @@ function expectModeVar(
 ) {
   expect(modeVars.light[cssVar]).toBe(expected.light)
   expect(modeVars.dark[cssVar]).toBe(expected.dark)
+}
+
+function tokenModeValue(token: TokenModeValue): ModeValue {
+  return {
+    light: token.light.$value,
+    dark: token.dark.$value,
+  }
 }
 
 describe("Marwes color source contract", () => {
@@ -123,6 +151,10 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-status-success-text", colorSource.semantic.status.success.text)
     expectModeVar("--mw-color-status-success-icon", colorSource.semantic.status.success.icon)
     expectModeVar("--mw-color-status-success-border", colorSource.semantic.status.success.border)
+    expectModeVar(
+      "--mw-color-status-success-border-strong",
+      tokenModeValue(borderStrongSource.status.success["border-strong"]),
+    )
 
     expectModeVar(
       "--mw-color-status-warning-background",
@@ -131,6 +163,10 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-status-warning-text", colorSource.semantic.status.warning.text)
     expectModeVar("--mw-color-status-warning-icon", colorSource.semantic.status.warning.icon)
     expectModeVar("--mw-color-status-warning-border", colorSource.semantic.status.warning.border)
+    expectModeVar(
+      "--mw-color-status-warning-border-strong",
+      tokenModeValue(borderStrongSource.status.warning["border-strong"]),
+    )
 
     expectModeVar(
       "--mw-color-status-error-background",
@@ -139,10 +175,18 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-status-error-text", colorSource.semantic.status.error.text)
     expectModeVar("--mw-color-status-error-icon", colorSource.semantic.status.error.icon)
     expectModeVar("--mw-color-status-error-border", colorSource.semantic.status.error.border)
+    expectModeVar(
+      "--mw-color-status-error-border-strong",
+      tokenModeValue(borderStrongSource.status.error["border-strong"]),
+    )
 
     expectModeVar("--mw-color-status-info-background", colorSource.semantic.status.info.background)
     expectModeVar("--mw-color-status-info-text", colorSource.semantic.status.info.text)
     expectModeVar("--mw-color-status-info-icon", colorSource.semantic.status.info.icon)
     expectModeVar("--mw-color-status-info-border", colorSource.semantic.status.info.border)
+    expectModeVar(
+      "--mw-color-status-info-border-strong",
+      tokenModeValue(borderStrongSource.status.info["border-strong"]),
+    )
   })
 })

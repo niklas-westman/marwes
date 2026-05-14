@@ -9,6 +9,9 @@
     description,
     error,
     ariaDescribedBy,
+    required,
+    disabled,
+    dataAttributes,
     children,
     class: className,
   }: RadioGroupFieldProps = $props();
@@ -33,34 +36,40 @@
   );
 
   const wrapperClass = $derived(
-    mergeClass("mw-radio-group-field", className)
+    mergeClass(
+      "mw-radio-group-field",
+      disabled && "mw-radio-group-field--disabled",
+      hasError && "mw-radio-group-field--invalid",
+      className
+    )
   );
 </script>
 
-<fieldset
-  class={wrapperClass}
-  role="radiogroup"
-  aria-labelledby={a11yIds.labelId}
-  aria-describedby={a11yIds.describedBy}
-  aria-invalid={hasError ? true : undefined}
->
-  <legend class="mw-radio-group-field__label" id={a11yIds.labelId}>
-    <p class="mw-p mw-p--md">{label}</p>
-  </legend>
-
-  <div class="mw-radio-group-field__options">
-    {@render children?.()}
+<div class={wrapperClass} {...dataAttributes}>
+  <div class="mw-radio-group-field__label" id={a11yIds.labelId}>
+    <p class="mw-p mw-p--sm">{label}</p>
   </div>
 
-  {#if hasDescription && !hasError}
+  {#if hasDescription}
     <div class="mw-radio-group-field__description" id={a11yIds.descriptionId}>
       <p class="mw-p mw-p--sm">{description}</p>
     </div>
   {/if}
+
+  <div
+    role="radiogroup"
+    aria-labelledby={a11yIds.labelId}
+    aria-describedby={a11yIds.describedBy}
+    aria-invalid={hasError ? true : undefined}
+    aria-required={required ? true : undefined}
+    class="mw-radio-group-field__options"
+  >
+    {@render children?.()}
+  </div>
 
   {#if hasError}
     <div class="mw-radio-group-field__error" id={a11yIds.errorId} aria-live="polite">
       <p class="mw-p mw-p--sm">{error}</p>
     </div>
   {/if}
-</fieldset>
+</div>
