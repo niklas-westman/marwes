@@ -17,6 +17,7 @@
     activeTab: controlledActive,
     defaultActiveTab,
     onactivetabchange,
+    dataAttributes,
     class: className,
   }: TabGroupProps = $props();
 
@@ -73,7 +74,7 @@
   const mergedClass = $derived(mergeClass("mw-tab-group", className));
 </script>
 
-<div class={mergedClass}>
+<div class={mergedClass} {...dataAttributes}>
   {#if label}
     <div class="mw-tab-group__label" id={a11yIds.labelId}>
       <p class="mw-p mw-p--sm">{label}</p>

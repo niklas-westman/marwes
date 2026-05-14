@@ -48,3 +48,8 @@ export interface ToastController {
   dismiss: (id: string) => void
   clear: () => void
 }
+
+export type SuccessToastProps = ToastProps
+export type ErrorToastProps = ToastProps
+export type WarningToastProps = ToastProps
+export type InfoToastProps = ToastProps

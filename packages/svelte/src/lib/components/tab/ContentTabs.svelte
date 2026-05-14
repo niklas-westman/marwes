@@ -1,8 +1,11 @@
 <script lang="ts">
   import TabGroup from "./TabGroup.svelte";
-  import type { TabGroupProps } from "./types.js";
-  let { ariaLabel = "Content tabs", ...props }: TabGroupProps = $props();
+  import type { ContentTabsProps } from "./types.js";
+  let { ariaLabel = "Content tabs", dataAttributes, ...props }: ContentTabsProps = $props();
 </script>
-<div data-purpose="content-tabs">
-  <TabGroup {...props} {ariaLabel} />
-</div>
+
+<TabGroup
+  {...props}
+  {ariaLabel}
+  dataAttributes={{ ...dataAttributes, "data-purpose": "content-tabs" }}
+/>

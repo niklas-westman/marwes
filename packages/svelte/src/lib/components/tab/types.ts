@@ -32,5 +32,10 @@ export interface TabGroupProps {
   activeTab?: string
   defaultActiveTab?: string
   onactivetabchange?: (value: string) => void
+  dataAttributes?: Record<string, string>
   class?: string
 }
+
+export type NavigationTabsProps = TabGroupProps
+export type ContentTabsProps = TabGroupProps
+export type SettingsTabsProps = TabGroupProps

@@ -4,6 +4,9 @@
  */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
+import ContentTabs from "../lib/components/tab/ContentTabs.svelte"
+import NavigationTabs from "../lib/components/tab/NavigationTabs.svelte"
+import SettingsTabs from "../lib/components/tab/SettingsTabs.svelte"
 import TabGroup from "../lib/components/tab/TabGroup.svelte"
 
 describe("TabGroup", () => {
@@ -59,5 +62,19 @@ describe("TabGroup", () => {
     const tabs = container.querySelectorAll('[role="tab"]')
     expect(tabs[0]?.textContent).toContain("Tab A")
     expect(tabs[1]?.textContent).toContain("Tab B")
+  })
+
+  it.each([
+    [NavigationTabs, "navigation-tabs"],
+    [ContentTabs, "content-tabs"],
+    [SettingsTabs, "settings-tabs"],
+  ])("places purpose metadata on the tab group root", (Component, purpose) => {
+    const { container } = render(Component, {
+      props: { label: "Test tabs", tabs: defaultTabs },
+    })
+
+    const group = container.querySelector(".mw-tab-group")
+    expect(group?.getAttribute("data-purpose")).toBe(purpose)
+    expect(group?.parentElement?.getAttribute("data-purpose")).toBeNull()
   })
 })

@@ -188,6 +188,10 @@ export type {
   ToastController,
   ManagedToast,
   ShowToastOptions,
+  SuccessToastProps,
+  ErrorToastProps,
+  WarningToastProps,
+  InfoToastProps,
 } from "./components/toast/types.js"
 
 // Dialog
@@ -228,6 +232,9 @@ export type {
   TabPanelProps,
   TabGroupProps,
   TabGroupItem,
+  NavigationTabsProps,
+  ContentTabsProps,
+  SettingsTabsProps,
 } from "./components/tab/types.js"
 
 // Slider
