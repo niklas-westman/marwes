@@ -33,6 +33,8 @@ describe("stat tile preset css contract", () => {
     expect(css).toContain(
       "--mw-stat-tile-border: var(--mw-color-status-error-border-strong, #ff2847);",
     )
+    expect(css).toContain("--mw-stat-tile-trend: var(--mw-color-status-warning-text, #b45309);")
+    expect(css).toContain("--mw-stat-tile-trend: var(--mw-color-status-error-text, #a8031f);")
     expect(css).toContain(".mw-stat-tile__trend")
     expect(css).toContain(".mw-stat-tile__trend-icon")
   })

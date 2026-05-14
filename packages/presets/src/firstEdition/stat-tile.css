@@ -50,7 +50,7 @@
   --mw-stat-tile-border: var(--mw-color-status-warning-border-strong, #e46f00);
   --mw-stat-tile-text: var(--mw-color-status-warning-text, #b45309);
   --mw-stat-tile-muted: var(--mw-color-status-warning-text, #b45309);
-  --mw-stat-tile-trend: var(--mw-color-status-warning-icon, #d97706);
+  --mw-stat-tile-trend: var(--mw-color-status-warning-text, #b45309);
 }
 
 .mw-stat-tile--danger {
@@ -58,7 +58,7 @@
   --mw-stat-tile-border: var(--mw-color-status-error-border-strong, #ff2847);
   --mw-stat-tile-text: var(--mw-color-status-error-text, #a8031f);
   --mw-stat-tile-muted: var(--mw-color-status-error-text, #a8031f);
-  --mw-stat-tile-trend: var(--mw-color-status-error-icon, #d90429);
+  --mw-stat-tile-trend: var(--mw-color-status-error-text, #a8031f);
 }
 
 .mw-stat-tile__header {
