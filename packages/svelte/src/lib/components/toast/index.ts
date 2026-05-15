@@ -13,4 +13,8 @@ export type {
   ToastController,
   ToastProps,
   ToastProviderProps,
+  SuccessToastProps,
+  ErrorToastProps,
+  WarningToastProps,
+  InfoToastProps,
 } from "./types.js"

@@ -41,11 +41,6 @@
 
     toasts = [...toasts, { ...options, id, duration }];
 
-    // Auto-dismiss timer
-    if (duration !== null && duration !== undefined && duration > 0) {
-      setTimeout(() => dismiss(id), duration);
-    }
-
     return id;
   }
 

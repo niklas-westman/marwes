@@ -120,15 +120,16 @@ export const firstEditionAvatarNativeTokens: AvatarNativeTokens = {
     icon: {
       surface: {
         kind: "theme",
-        path: "color.surfaceElevated",
+        path: "color.surface",
+        fallback: "#f8f8f8",
       },
       borderWidth: {
         kind: "static",
-        value: 1,
+        value: 0,
       },
       borderColor: {
-        kind: "theme",
-        path: "color.border",
+        kind: "static",
+        value: "transparent",
       },
       label: {
         kind: "theme",
@@ -220,8 +221,8 @@ export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
       },
       border: {
         kind: "theme",
-        path: "color.status.info.border",
-        fallback: "#ababfd",
+        path: "color.status.info.borderStrong",
+        fallback: "#5859fc",
       },
       label: {
         kind: "theme",
@@ -237,8 +238,8 @@ export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
       },
       border: {
         kind: "theme",
-        path: "color.status.success.border",
-        fallback: "#90caad",
+        path: "color.status.success.borderStrong",
+        fallback: "#2e9970",
       },
       label: {
         kind: "theme",
@@ -254,8 +255,8 @@ export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
       },
       border: {
         kind: "theme",
-        path: "color.status.warning.border",
-        fallback: "#fde08a",
+        path: "color.status.warning.borderStrong",
+        fallback: "#e46f00",
       },
       label: {
         kind: "theme",
@@ -271,8 +272,8 @@ export const firstEditionBadgeNativeTokens: BadgeNativeTokens = {
       },
       border: {
         kind: "theme",
-        path: "color.status.error.border",
-        fallback: "#ff8a95",
+        path: "color.status.error.borderStrong",
+        fallback: "#ff2847",
       },
       label: {
         kind: "theme",

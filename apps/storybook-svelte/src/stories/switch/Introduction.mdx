@@ -99,13 +99,36 @@ Use the raw `Switch` atom when you need a custom layout:
 </script>
 
 <div style="display: flex; align-items: center; gap: 12px;">
-  <Switch checked={enabled} oncheckedchange={(v) => enabled = v} ariaLabel="Enable notifications" />
+  <Switch
+    checked={enabled}
+    oncheckedchange={(v) => enabled = v}
+    size="wide"
+    ariaLabel="Enable notifications"
+  />
   <span>Enable notifications</span>
 </div>
 ```
 
 > **Note:** When using `Switch` directly, you are responsible for providing an accessible name
 > and managing checked state.
+
+## Size API
+
+`Switch` supports three Figma-matched sizes. `compact` remains the default.
+
+- `compact` - 24×16 track with 12px thumb
+- `wide` - 30×16 track with 12px thumb
+- `rich` - 30×20 track with 16px thumb
+
+```svelte
+<script>
+  import { Switch } from "@marwes-ui/svelte"
+</script>
+
+<Switch size="compact" ariaLabel="Compact switch" />
+<Switch size="wide" ariaLabel="Wide switch" />
+<Switch size="rich" ariaLabel="Rich switch" />
+```
 
 ## Component Reference
 
@@ -127,7 +150,7 @@ Use the raw `Switch` atom when you need a custom layout:
 
 ## Story Coverage
 
-- **Atom**: `Off`, `On`, `Disabled`
+- **Atom**: `Off`, `On`, `Disabled`, `AllStates`, `SizeComparison`
 - **Molecule**: `Default`, `WithError`, `Disabled`
 - **Purpose/FeatureToggle**: `Default`
 - **Purpose/Preference**: `Default`

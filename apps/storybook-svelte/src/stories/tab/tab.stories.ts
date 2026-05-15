@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { Meta, StoryObj } from "@storybook/svelte"
 import TabAtomPreview from "./TabAtomPreview.svelte"
+import TabShowcase from "./TabShowcase.svelte"
 
 const meta = {
   title: "Tab/Atom",
@@ -14,6 +15,7 @@ const meta = {
     selected: { control: "boolean" },
     disabled: { control: "boolean" },
     ariaLabel: { control: "text" },
+    ariaControls: { control: "text" },
   },
 } satisfies Meta<typeof TabAtomPreview>
 
@@ -56,13 +58,15 @@ export const WithAriaLabel: Story = {
 }
 
 export const TabBar: Story = {
-  args: {
-    selected: true,
-  },
+  render: () => ({
+    Component: TabShowcase,
+    props: { showcase: "bar" },
+  }),
 }
 
 export const AllStates: Story = {
-  args: {
-    selected: false,
-  },
+  render: () => ({
+    Component: TabShowcase,
+    props: { showcase: "states" },
+  }),
 }

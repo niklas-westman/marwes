@@ -44,7 +44,7 @@
           disabled={disabled || false}
           onchange={() => handleChange(opt.value)}
         />
-        <span class="mw-p mw-p--md">{opt.label}</span>
+        <span class="mw-p mw-p--sm">{opt.label}</span>
       </label>
     {/each}
   </RadioGroupField>

@@ -2,6 +2,7 @@ interface StorybookCompanionFamilyConfig {
   titleByStem?: Record<string, string>
   canonicalComponentStems?: string[]
   exportParityExempt?: boolean
+  renderModeParityByStem?: Record<string, string[]>
   storyOnly?: boolean
   excluded?: boolean
 }
@@ -55,6 +56,7 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
           "search-button",
           "sort-button",
           "submit-button",
+          "success-button",
           "upload-button",
           "verify-button",
         ]),
@@ -111,6 +113,9 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
         "rating-radio-group": "Radio/Purpose/Rating",
         "option-radio-group": "Radio/Purpose/Option",
       },
+      renderModeParityByStem: {
+        radio: ["RadioGroup", "AllStates"],
+      },
     },
     slider: {
       titleByStem: {
@@ -142,6 +147,13 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
       },
     },
     tab: {
+      canonicalComponentStems: [
+        "tab",
+        "tab-group",
+        "navigation-tabs",
+        "content-tabs",
+        "settings-tabs",
+      ],
       titleByStem: {
         tab: "Tab/Atom",
         "tab-group": "Tab/Molecule",
@@ -189,6 +201,13 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
         color: "Design System/Colors",
       },
       storyOnly: true,
+    },
+    spacing: {
+      canonicalComponentStems: ["spacing"],
+    },
+    // Temporarily hidden from all Storybooks until Datepicker is ready for review.
+    "date-picker": {
+      excluded: true,
     },
     typography: {
       excluded: true,

@@ -7,14 +7,23 @@
     label: string;
     helperText?: string;
     error?: string;
-    select?: Omit<SelectProps, "value">;
+    select?: SelectProps;
     ariaDescribedBy?: string;
     value?: string;
     class?: string;
   }
 
-  let props: DropdownFieldProps = $props();
+  let {
+    select = { options: [] },
+    value = $bindable(""),
+    ...fieldProps
+  }: DropdownFieldProps = $props();
+
+  const dropdownSelect = $derived({
+    ...select,
+    native: select.native ?? false,
+  });
 </script>
 <div data-purpose="dropdown">
-  <SelectField {...props} />
+  <SelectField {...fieldProps} select={dropdownSelect} bind:value />
 </div>

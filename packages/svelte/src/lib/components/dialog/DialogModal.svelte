@@ -22,8 +22,10 @@
 
   function close(): void {
     if (!open) return;
-    open = false;
     onopenchange?.(false);
+    if (!onopenchange) {
+      open = false;
+    }
   }
 
   function getFocusableElements(container: HTMLElement | null): HTMLElement[] {

@@ -7,11 +7,11 @@
 
 # Marwes Design System
 
-**An AI-adapted component system with beautiful defaults, zero runtime CSS, and accessibility baked in.**
+**An AI-adapted component system for React, Vue, and Svelte with beautiful defaults, zero runtime CSS, and accessibility baked in.**
 
-Framework-agnostic • Static CSS • Type-safe • A11y-first • Agent-readable
+React • Vue • Svelte • Framework-agnostic core • Static CSS • Type-safe • A11y-first • Agent-readable
 
-[Start Here](docs/start-here.md) • [Documentation](docs/README.md) • [Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
+[Start Here](docs/start-here.md) • [Documentation](docs/README.md) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -27,7 +27,7 @@ Framework-agnostic • Static CSS • Type-safe • A11y-first • Agent-readabl
 
 ### 🎯 **Framework-Agnostic Core**
 
-Pure TypeScript logic. No React dependencies in the core. Add Vue/Svelte adapters in minutes.
+Pure TypeScript logic with thin React, Vue, and Svelte adapters built from the same contracts.
 
 ### 🤖 **AI-Adapted by Design**
 

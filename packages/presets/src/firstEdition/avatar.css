@@ -2,6 +2,8 @@
  * Avatar component styles
  * Figma refs:
  * - .figma/marwes/components/avatar.json
+ * - .figma/marwes/components/avatar-badge.json
+ * - .figma/marwes/components/avatar-group.json
  * - .figma/marwes/pages/-avatar/-avatar_1574-27460.json
  * - .figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json
  *
@@ -71,9 +73,9 @@
 }
 
 .mw-avatar--icon {
-  --mw-avatar-surface: var(--mw-color-surface-elevated);
-  --mw-avatar-border-width: 1px;
-  --mw-avatar-border-color: var(--mw-color-border);
+  --mw-avatar-surface: var(--mw-color-surface, #f8f8f8);
+  --mw-avatar-border-width: 0px;
+  --mw-avatar-border-color: transparent;
   --mw-avatar-label: var(--mw-color-text-muted);
 }
 
@@ -108,8 +110,8 @@
 }
 
 .mw-theme--dark .mw-avatar--icon {
-  --mw-avatar-surface: var(--mw-color-surface-elevated);
-  --mw-avatar-border-color: var(--mw-color-border);
+  --mw-avatar-surface: var(--mw-color-surface, #1a1a1a);
+  --mw-avatar-border-color: transparent;
   --mw-avatar-label: var(--mw-color-text-muted);
 }
 
@@ -155,10 +157,11 @@
 
 .mw-avatar-group {
   --mw-avatar-group-overlap: 12px;
-  --mw-avatar-group-stroke: var(--mw-color-surface, #f9fafb);
-  --mw-avatar-group-stroke-width: 2.5px;
-  --mw-avatar-group-counter-surface: var(--mw-color-surface, #f9fafb);
-  --mw-avatar-group-counter-label: var(--mw-color-text-muted);
+  --mw-avatar-group-stroke: var(--mw-color-surface-elevated, #ffffff);
+  --mw-avatar-group-stroke-width: 2px;
+  --mw-avatar-group-counter-surface: var(--mw-color-surface-inverted, #141414);
+  --mw-avatar-group-counter-stroke: var(--mw-avatar-group-stroke);
+  --mw-avatar-group-counter-label: var(--mw-color-text-inverted, #ffffff);
 
   min-inline-size: 0;
   display: inline-flex;
@@ -190,18 +193,19 @@
   height: 40px;
   border-radius: 9999px;
   background: var(--mw-avatar-group-counter-surface);
-  box-shadow: 0 0 0 var(--mw-avatar-group-stroke-width) var(--mw-avatar-group-counter-surface);
+  box-shadow: 0 0 0 var(--mw-avatar-group-stroke-width) var(--mw-avatar-group-counter-stroke);
   color: var(--mw-avatar-group-counter-label);
   font-family: var(--mw-font-primary, inherit);
   font-size: 12px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 12px;
   letter-spacing: -0.36px;
   box-sizing: border-box;
 }
 
 .mw-theme--dark .mw-avatar-group {
-  --mw-avatar-group-stroke: var(--mw-color-surface, #141414);
-  --mw-avatar-group-counter-surface: var(--mw-color-surface, #141414);
-  --mw-avatar-group-counter-label: var(--mw-color-text-muted);
+  --mw-avatar-group-stroke: var(--mw-avatar-group-dark-stroke, #000000);
+  --mw-avatar-group-counter-surface: var(--mw-color-surface-inverted, #ffffff);
+  --mw-avatar-group-counter-stroke: var(--mw-avatar-group-stroke);
+  --mw-avatar-group-counter-label: var(--mw-color-text-inverted, #141414);
 }

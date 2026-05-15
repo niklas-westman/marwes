@@ -20,6 +20,7 @@ export type StatusColorTokens = {
   text: string
   icon: string
   border: string
+  borderStrong: string
 }
 
 /**

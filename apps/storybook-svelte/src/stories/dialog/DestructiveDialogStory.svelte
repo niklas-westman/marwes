@@ -11,12 +11,8 @@
     description = "This action permanently removes all projects, members, and history.",
   }: Props = $props()
 
-  let open = $state(false)
+  let open = $state(true)
 </script>
-
-<button type="button" class="mw-btn mw-btn--primary mw-btn--md" onclick={() => (open = true)}>
-  Open destructive dialog
-</button>
 
 <DestructiveDialog bind:open {title} {description}>
   <Paragraph>Make sure you exported anything you need before continuing.</Paragraph>

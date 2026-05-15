@@ -163,7 +163,7 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
   return (
     <div className={wrapperClass} {...props.dataAttributes}>
       <div className="mw-radio-group-field__label" id={labelId}>
-        <Paragraph size="md">{props.label}</Paragraph>
+        <Paragraph size="sm">{props.label}</Paragraph>
       </div>
 
       {hasDescription && (

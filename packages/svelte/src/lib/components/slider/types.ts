@@ -7,15 +7,22 @@ export interface SliderProps extends Omit<SliderOptions, "ariaDescribedBy"> {
   class?: string
   style?: string | undefined
   ariaDescribedBy?: string | undefined
+  ariaInvalid?: boolean
 }
 
 export interface SliderFieldProps {
   id?: string
   label: string
+  description?: string
   helperText?: string
   error?: string
   slider?: Omit<SliderProps, "value">
   ariaDescribedBy?: string
+  minValueLabel?: string
+  maxValueLabel?: string
+  labelPosition?: "top" | "inline"
+  showEdgeValues?: boolean
+  dataAttributes?: Record<string, string>
   value?: number
   class?: string
 }

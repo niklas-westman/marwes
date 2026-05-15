@@ -29,4 +29,15 @@ describe("React dialog introduction docs", () => {
       expect(introDoc).toContain(componentName)
     }
   })
+
+  it("keeps markdown code fences balanced", () => {
+    const introPath = path.resolve(__dirname, "../Introduction.mdx")
+    const introDoc = readFileSync(introPath, "utf8")
+    const codeFenceCount = introDoc.match(/```/g)?.length ?? 0
+
+    expect(codeFenceCount % 2).toBe(0)
+    expect(introDoc).toContain(
+      "</Dialog>\n```\n\nIf parent code already provides the full modal boundary",
+    )
+  })
 })

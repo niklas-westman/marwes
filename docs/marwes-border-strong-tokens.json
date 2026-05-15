@@ -1,0 +1,70 @@
+{
+  "status": {
+    "info": {
+      "border-strong": {
+        "$type": "color",
+        "$description": "Info border for Outline and Rich emphasis. Lightest stop passing 3:1 on white and Blue/50.",
+        "light": { "$value": "#5859FC", "primitive": "Blue/400" },
+        "dark": { "$value": "#252599", "primitive": "Blue/600" }
+      }
+    },
+    "success": {
+      "border-strong": {
+        "$type": "color",
+        "$description": "Success border for Outline and Rich emphasis. Lightest stop passing 3:1 on white and Green/50.",
+        "light": { "$value": "#2E9970", "primitive": "Green/400" },
+        "dark": { "$value": "#006D48", "primitive": "Green/600" }
+      }
+    },
+    "warning": {
+      "border-strong": {
+        "$type": "color",
+        "$description": "Warning border for Outline and Rich emphasis. Lightest stop passing 3:1 on white and Amber/50.",
+        "light": { "$value": "#E46F00", "primitive": "Amber/550" },
+        "dark": { "$value": "#B45308", "primitive": "Amber/700" }
+      }
+    },
+    "error": {
+      "border-strong": {
+        "$type": "color",
+        "$description": "Error border for Outline and Rich emphasis. Lightest stop passing 3:1 on white and Red/50.",
+        "light": { "$value": "#FF2847", "primitive": "Red/400" },
+        "dark": { "$value": "#FF2847", "primitive": "Red/400" }
+      }
+    }
+  },
+  "stat": {
+    "border": {
+      "$type": "color",
+      "$description": "Stat tile border. Neutral: border/default. Status modes match Badge and Toast Rich — border-strong tokens on /50 tinted background.",
+      "neutral": { "$value": "border/default", "primitive": "Neutral/150 · Gray/700" },
+      "info": { "$ref": "status/info/border-strong" },
+      "success": { "$ref": "status/success/border-strong" },
+      "warning": { "$ref": "status/warning/border-strong" },
+      "error": { "$ref": "status/error/border-strong" }
+    },
+    "trend": {
+      "$type": "color",
+      "$description": "Stat tile trend icon and value colour. Fixed: Warning now uses status/warning/icon, Error uses status/error/icon (previously had incorrect border/text token bindings).",
+      "neutral": { "$value": "text/secondary", "primitive": "Gray/600 · Gray/400" },
+      "info": { "$value": "status/info/icon", "primitive": "Blue/600 · Blue/400" },
+      "success": { "$value": "status/success/icon", "primitive": "Green/600 · Green/300" },
+      "warning": { "$value": "status/warning/icon", "primitive": "Amber/600 · Amber/400" },
+      "error": { "$value": "status/error/icon", "primitive": "Red/600 · Red/400" }
+    }
+  },
+  "border": {
+    "opacity-subtle": {
+      "$type": "color",
+      "$description": "Opacity-based border for use on any surface. Works across all brand colours.",
+      "light": { "$value": "rgba(0, 0, 0, 0.10)", "primitive": "Black/Alpha/10" },
+      "dark": { "$value": "rgba(255, 255, 255, 0.10)", "primitive": "White/Alpha/10" }
+    },
+    "opacity-medium": {
+      "$type": "color",
+      "$description": "Opacity-based border, stronger. Works across all brand colours.",
+      "light": { "$value": "rgba(0, 0, 0, 0.20)", "primitive": "Black/Alpha/20" },
+      "dark": { "$value": "rgba(255, 255, 255, 0.20)", "primitive": "White/Alpha/20" }
+    }
+  }
+}

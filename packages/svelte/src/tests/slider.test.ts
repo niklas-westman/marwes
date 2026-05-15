@@ -4,8 +4,11 @@
  */
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
+import BrightnessSlider from "../lib/components/slider/BrightnessSlider.svelte"
+import RadiusSlider from "../lib/components/slider/RadiusSlider.svelte"
 import Slider from "../lib/components/slider/Slider.svelte"
 import SliderField from "../lib/components/slider/SliderField.svelte"
+import VolumeSlider from "../lib/components/slider/VolumeSlider.svelte"
 
 describe("Slider", () => {
   it("renders an input with type range", () => {
@@ -49,7 +52,7 @@ describe("SliderField", () => {
     const { container } = render(SliderField, {
       props: { label: "Volume" },
     })
-    const label = container.querySelector("label")
+    const label = container.querySelector(".mw-slider-field__label")
     expect(label?.textContent).toContain("Volume")
   })
 
@@ -68,10 +71,80 @@ describe("SliderField", () => {
     expect(container.textContent).toContain("Drag to adjust")
   })
 
+  it("renders edge value labels from the slider bounds", () => {
+    const { container } = render(SliderField, {
+      props: { label: "Radius", slider: { min: 0, max: 48 }, value: 24 },
+    })
+
+    expect(container.querySelector(".mw-slider-field__edge-value--min")?.textContent).toContain("0")
+    expect(container.querySelector(".mw-slider-field__edge-value--max")?.textContent).toContain(
+      "48",
+    )
+  })
+
+  it("supports custom edge labels and inline label position", () => {
+    const { container } = render(SliderField, {
+      props: {
+        label: "Temperature",
+        minValueLabel: "Cold",
+        maxValueLabel: "Hot",
+        labelPosition: "inline",
+      },
+    })
+
+    const wrapper = container.querySelector('[data-label-position="inline"]')
+
+    expect(wrapper?.className).toContain("mw-slider-field--label-inline")
+    expect(container.textContent).toContain("Cold")
+    expect(container.textContent).toContain("Hot")
+  })
+
   it("shows error text", () => {
     const { container } = render(SliderField, {
       props: { label: "Volume", error: "Too loud" },
     })
     expect(container.textContent).toContain("Too loud")
+  })
+})
+
+describe("Purpose sliders", () => {
+  it("BrightnessSlider renders brightness semantics, top values, and the current tooltip", () => {
+    const { container } = render(BrightnessSlider, { props: { value: 80 } })
+    const slider = container.querySelector('input[type="range"]') as HTMLInputElement
+
+    expect(container.querySelector('[data-purpose="brightness"]')).not.toBeNull()
+    expect(container.querySelector(".mw-slider-field__edge-value--min")?.textContent).toContain("0")
+    expect(container.querySelector(".mw-slider-field__edge-value--max")?.textContent).toContain(
+      "100",
+    )
+    expect(container.querySelector(".mw-slider__tooltip")?.textContent).toBe("80")
+    expect(slider.getAttribute("aria-labelledby")).toBeTruthy()
+  })
+
+  it("VolumeSlider supports vertical orientation directly", () => {
+    const { container } = render(VolumeSlider, {
+      props: { value: 45, orientation: "vertical" },
+    })
+    const slider = container.querySelector('input[type="range"]') as HTMLInputElement
+    const shell = container.querySelector('[data-component="slider"]')
+
+    expect(slider.getAttribute("aria-orientation")).toBe("vertical")
+    expect(shell?.getAttribute("data-orientation")).toBe("vertical")
+    expect(shell?.className).toContain("mw-slider--vertical")
+  })
+
+  it("RadiusSlider uses radius-specific bounds and labels", () => {
+    const { container } = render(RadiusSlider, { props: { value: 24 } })
+    const slider = container.querySelector('input[type="range"]') as HTMLInputElement
+
+    expect(container.querySelector('[data-purpose="radius"]')).not.toBeNull()
+    expect(container.querySelector(".mw-slider-field__edge-value--min")?.textContent).toContain(
+      "0px",
+    )
+    expect(container.querySelector(".mw-slider-field__edge-value--max")?.textContent).toContain(
+      "48px",
+    )
+    expect(slider.getAttribute("max")).toBe("48")
+    expect(slider.getAttribute("step")).toBe("2")
   })
 })

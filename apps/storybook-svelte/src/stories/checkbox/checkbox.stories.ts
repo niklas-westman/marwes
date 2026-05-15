@@ -1,4 +1,4 @@
-import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
+import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
 import { Checkbox } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
 import CheckboxShowcase from "./CheckboxShowcase.svelte"
@@ -8,23 +8,35 @@ const meta = {
   component: Checkbox,
   parameters: { ...storybookLayout.centered, ...storybookA11yPolicy.smoke },
   tags: ["autodocs"],
+  args: { size: "md" },
+  argTypes: storybookCheckboxArgTypes,
 } satisfies Meta<typeof Checkbox>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = { args: { ariaLabel: "Accept terms" } }
-export const Checked: Story = { args: { ariaLabel: "Checked", checked: true } }
-export const Disabled: Story = { args: { ariaLabel: "Disabled", disabled: true } }
-export const Indeterminate: Story = { args: { ariaLabel: "Indeterminate", indeterminate: true } }
-export const Invalid: Story = { args: { ariaLabel: "Invalid", invalid: true } }
+export const Playground: Story = {
+  args: { ariaLabel: "Accept terms" },
+}
+
+export const UncontrolledDefaultChecked: Story = {
+  render: () => ({ Component: CheckboxShowcase, props: { showcase: "uncontrolled" } }),
+}
 
 export const Controlled: Story = {
   render: () => ({ Component: CheckboxShowcase, props: { showcase: "controlled" } }),
 }
 
-export const Playground: Story = {
-  render: () => ({ Component: CheckboxShowcase, props: { showcase: "playground" } }),
+export const Indeterminate: Story = {
+  render: () => ({ Component: CheckboxShowcase, props: { showcase: "indeterminate" } }),
+}
+
+export const Disabled: Story = {
+  render: () => ({ Component: CheckboxShowcase, props: { showcase: "disabled" } }),
+}
+
+export const Invalid: Story = {
+  render: () => ({ Component: CheckboxShowcase, props: { showcase: "invalid" } }),
 }
 
 export const Sizes: Story = {
@@ -33,8 +45,4 @@ export const Sizes: Story = {
 
 export const AllStates: Story = {
   render: () => ({ Component: CheckboxShowcase, props: { showcase: "all-states" } }),
-}
-
-export const UncontrolledDefaultChecked: Story = {
-  render: () => ({ Component: CheckboxShowcase, props: { showcase: "uncontrolled" } }),
 }

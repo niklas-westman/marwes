@@ -11,12 +11,8 @@
     description = "The workspace will be read-only for ten minutes.",
   }: Props = $props()
 
-  let open = $state(false)
+  let open = $state(true)
 </script>
-
-<button type="button" class="mw-btn mw-btn--primary mw-btn--md" onclick={() => (open = true)}>
-  Open info dialog
-</button>
 
 <InfoDialog bind:open {title} {description}>
   <Paragraph>Save your drafts before the maintenance window begins.</Paragraph>

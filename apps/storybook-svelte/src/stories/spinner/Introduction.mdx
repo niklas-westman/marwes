@@ -23,7 +23,7 @@ when the loading context matches their pattern.
 
 ```svelte
 <script>
-  import { Spinner, ButtonSpinner, EmptyStateSpinner } from "@marwes-ui/svelte"
+  import { Button, Spinner, ButtonSpinner, EmptyStateSpinner } from "@marwes-ui/svelte"
 </script>
 
 <!-- Standalone spinner -->
@@ -31,7 +31,10 @@ when the loading context matches their pattern.
 <Spinner variant="dots-round" size="lg" ariaLabel="Loading account data" />
 
 <!-- Inside a button -->
-<ButtonSpinner />
+<Button variant="secondary" disabled>
+  <ButtonSpinner />
+  Please wait
+</Button>
 
 <!-- Centered empty state -->
 <EmptyStateSpinner />
@@ -69,11 +72,16 @@ provide `ariaLabel` and set `decorative={false}`.
 
 **Reduced-motion.** Animation slows under `prefers-reduced-motion: reduce` rather than stopping.
 
+## Button loading
+
+Use `ButtonSpinner` inside a disabled `Button` when documenting the purpose wrapper directly.
+For product flows, prefer the `Button` loading prop so button semantics, busy state, and click blocking stay together.
+
 ## Component Reference
 
 **`Spinner`** — Low-level loading indicator atom with 7 variants and size scale
 
-**`ButtonSpinner`** — Purpose molecule for inline button loading
+**`ButtonSpinner`** — Purpose molecule for inline button loading treatments; render it inside `Button` or use the `Button` loading prop.
 
 **`EmptyStateSpinner`** — Purpose molecule for centered empty-state loading
 

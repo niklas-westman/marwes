@@ -17,6 +17,7 @@
     activeTab: controlledActive,
     defaultActiveTab,
     onactivetabchange,
+    dataAttributes,
     class: className,
   }: TabGroupProps = $props();
 
@@ -41,7 +42,9 @@
     }
   });
 
-  const activeValue = $derived(controlledActive ?? internalActive);
+  const activeValue = $derived(
+    controlledActive !== undefined ? resolveTabValue(itemStates, controlledActive) : internalActive
+  );
 
   function selectTab(value: string): void {
     if (controlledActive === undefined) {
@@ -71,7 +74,7 @@
   const mergedClass = $derived(mergeClass("mw-tab-group", className));
 </script>
 
-<div class={mergedClass}>
+<div class={mergedClass} {...dataAttributes}>
   {#if label}
     <div class="mw-tab-group__label" id={a11yIds.labelId}>
       <p class="mw-p mw-p--sm">{label}</p>
@@ -114,6 +117,7 @@
       role="tabpanel"
       aria-labelledby={a11yIds.tabIds[tab.value]}
       class="mw-tab-group__panel"
+      tabindex={isActive ? 0 : undefined}
       hidden={!isActive}
     >
       {#if isActive}

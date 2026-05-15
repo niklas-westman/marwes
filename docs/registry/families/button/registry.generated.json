@@ -60,6 +60,7 @@
       "apps/storybook-react/src/stories/button/secondary-button.stories.tsx",
       "apps/storybook-react/src/stories/button/sort-button.stories.tsx",
       "apps/storybook-react/src/stories/button/submit-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/success-button.stories.tsx",
       "apps/storybook-react/src/stories/button/text-button.stories.tsx",
       "apps/storybook-react/src/stories/button/upload-button.stories.tsx",
       "apps/storybook-react/src/stories/button/verify-button.stories.tsx"
@@ -87,6 +88,7 @@
       "apps/storybook-vue/src/stories/button/secondary-button.stories.ts",
       "apps/storybook-vue/src/stories/button/sort-button.stories.ts",
       "apps/storybook-vue/src/stories/button/submit-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/success-button.stories.ts",
       "apps/storybook-vue/src/stories/button/text-button.stories.ts",
       "apps/storybook-vue/src/stories/button/upload-button.stories.ts",
       "apps/storybook-vue/src/stories/button/verify-button.stories.ts"

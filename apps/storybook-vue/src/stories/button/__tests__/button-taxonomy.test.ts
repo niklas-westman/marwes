@@ -21,6 +21,14 @@ describe("Vue button story taxonomy", () => {
     expect(buttonStory).toMatch(/export const\s+Basic\s*:/)
   })
 
+  it("keeps boolean and object loading stories visually aligned", () => {
+    const buttonStory = readStoryFile("button.stories.ts")
+
+    expect(buttonStory).toContain('template: `<Button v-bind="args">Saving…</Button>`')
+    expect(buttonStory).toContain('loadingLabel: "Saving…",')
+    expect(buttonStory).not.toContain("Saving...")
+  })
+
   it("uses Variant titles for visual wrapper buttons", () => {
     const primary = readStoryFile("primary-button.stories.ts")
     const secondary = readStoryFile("secondary-button.stories.ts")
@@ -43,6 +51,7 @@ describe("Vue button story taxonomy", () => {
       "refresh-button.stories.ts",
       "save-button.stories.ts",
       "submit-button.stories.ts",
+      "success-button.stories.ts",
       "verify-button.stories.ts",
     ]
 
@@ -68,6 +77,7 @@ describe("Vue button story taxonomy", () => {
       "refresh-button.stories.ts",
       "save-button.stories.ts",
       "submit-button.stories.ts",
+      "success-button.stories.ts",
       "verify-button.stories.ts",
     ]
 

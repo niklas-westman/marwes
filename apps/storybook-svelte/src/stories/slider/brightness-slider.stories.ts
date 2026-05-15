@@ -16,5 +16,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { value: 75 },
+  args: {
+    value: 80,
+    description: "Tune the display intensity for the current workspace.",
+  },
 }

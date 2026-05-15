@@ -144,28 +144,28 @@ const badgeRules: readonly StyleRule[] = [
         prop: "alignItems",
       },
       {
-        kind: "static",
-        value: 4,
+        kind: "token",
+        token: "--mw-spacing-sp-4",
         prop: "gap",
       },
       {
-        kind: "static",
-        value: 2,
+        kind: "token",
+        token: "--mw-spacing-sp-2",
         prop: "paddingTop",
       },
       {
-        kind: "static",
-        value: 8,
+        kind: "token",
+        token: "--mw-spacing-sp-8",
         prop: "paddingRight",
       },
       {
-        kind: "static",
-        value: 2,
+        kind: "token",
+        token: "--mw-spacing-sp-2",
         prop: "paddingBottom",
       },
       {
-        kind: "static",
-        value: 8,
+        kind: "token",
+        token: "--mw-spacing-sp-8",
         prop: "paddingLeft",
       },
       {
@@ -312,8 +312,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-info-border",
-        fallback: "#ababfd",
+        token: "--mw-color-status-info-border-strong",
+        fallback: "#5859fc",
         prop: "borderColor",
       },
       {
@@ -357,8 +357,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-success-border",
-        fallback: "#90caad",
+        token: "--mw-color-status-success-border-strong",
+        fallback: "#2e9970",
         prop: "borderColor",
       },
       {
@@ -402,8 +402,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-warning-border",
-        fallback: "#fde08a",
+        token: "--mw-color-status-warning-border-strong",
+        fallback: "#e46f00",
         prop: "borderColor",
       },
       {
@@ -447,8 +447,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-error-border",
-        fallback: "#ff8a95",
+        token: "--mw-color-status-error-border-strong",
+        fallback: "#ff2847",
         prop: "borderColor",
       },
       {
@@ -537,8 +537,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-info-border",
-        fallback: "#8182fc",
+        token: "--mw-color-status-info-border-strong",
+        fallback: "#252599",
         prop: "borderColor",
       },
       {
@@ -584,8 +584,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-success-border",
-        fallback: "#5db189",
+        token: "--mw-color-status-success-border-strong",
+        fallback: "#006d48",
         prop: "borderColor",
       },
       {
@@ -631,8 +631,8 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-warning-border",
-        fallback: "#e46f00",
+        token: "--mw-color-status-warning-border-strong",
+        fallback: "#b45308",
         prop: "borderColor",
       },
       {
@@ -678,7 +678,7 @@ const badgeRules: readonly StyleRule[] = [
       },
       {
         kind: "tokenWithFallback",
-        token: "--mw-color-status-error-border",
+        token: "--mw-color-status-error-border-strong",
         fallback: "#ff2847",
         prop: "borderColor",
       },

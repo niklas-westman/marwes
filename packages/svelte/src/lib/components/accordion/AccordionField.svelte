@@ -13,7 +13,7 @@
     openItems: controlledOpen,
     defaultOpenItems,
     onopenitemschange,
-    multiple = false,
+    multiple = true,
     ariaDescribedBy,
     class: className,
   }: AccordionFieldProps = $props();

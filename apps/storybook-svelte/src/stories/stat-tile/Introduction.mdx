@@ -2,64 +2,60 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 <Meta title="StatTile/Introduction" />
 
-# StatTile Component
+# Stat Tile
 
-Marwes provides `StatTile` as an atom-level data display for key metrics
-with optional trend indicators and semantic tone.
+Stat Tile is a compact metric surface for one dashboard KPI. It is synced from the V2 Figma `Stat tile` component and keeps the same framework contract in core, React, Vue, Storybook, and the preset CSS.
 
-## Component Architecture
+Use it when a dashboard or summary panel needs one small, scan-friendly metric with:
 
-```
-StatTile (Atom)
-```
+- a short label
+- a prominent value
+- optional positive or negative trend
+- optional supporting subtitle
+- neutral, brand, success, warning, or danger tone treatment
 
-## Recommended Usage
+Do not use Stat Tile for long descriptions, mixed charts, tables, or multi-action cards. Use `Card` when the content needs flexible layout, and keep Stat Tile reserved for quick comparison.
+
+## Anatomy
+
+- `label`: short metric name, normally one line.
+- `value`: primary number or compact value.
+- `subtitle`: supporting comparison or context.
+- `trendValue`: compact change value such as `12%`.
+- `trendDirection`: `positive` or `negative`; this controls the icon and generated trend label.
+- `tone`: semantic visual emphasis. Use `neutral` by default, then `brand`, `success`, `warning`, or `danger` only when the metric status needs that emphasis.
 
 ```svelte
-<script>
-  import { StatTile } from "@marwes-ui/svelte"
-</script>
-
-<StatTile label="Revenue" value="$12,345" />
-
 <StatTile
-  label="Users"
-  value="1,234"
-  trendValue="+12%"
+  label="Monthly Revenue"
+  value="$48,200"
+  subtitle="vs $42,900 last month"
+  trendValue="12%"
   trendDirection="positive"
 />
-
-<StatTile
-  label="Churn"
-  value="3.2%"
-  trendValue="-0.5%"
-  trendDirection="negative"
-  tone="danger"
-/>
-
-<StatTile label="Revenue" value="$12,345" subtitle="Last 30 days" />
 ```
 
-## Props
+## Loading State
 
-- `label` — Describes the metric (required)
-- `value` — Primary figure display (required)
-- `trendValue` — Change indicator text (e.g. "+12%", "-0.5%")
-- `trendDirection` — `"positive"` or `"negative"` — controls icon and color
-- `tone` — Semantic color: `"danger"` for negative metrics
-- `subtitle` — Additional context below the value
+Use the Storybook `Skeleton/Molecule` `StatTileReplica` when the tile is loading. The replica uses the real Stat Tile shell so dimensions, spacing, border radius, and token behavior stay aligned with the live component.
 
-## Usage Notes
+```svelte
+<!-- Copy StatTileSkeleton from Skeleton/Molecule into the local loading state. -->
+<StatTileSkeleton animation="pulse" />
+```
 
-- Renders as `<article>` for semantic grouping
-- Trend icon appears automatically based on `trendDirection`
-- Use `tone="danger"` for metrics where negative values are bad
-- `subtitle` provides secondary context (time period, comparison)
+## Figma source
 
-## Accessibility Notes
+- `.figma/marwes/components/stat-tile.json`
+- `.figma/marwes/components/partsstat-tiletrend.json`
+- `.figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json`
+- `.figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json`
 
-- The trend region has `aria-label` describing the change direction and value
-- Trend icons are decorative (`aria-hidden="true"`)
+## Accessibility
+
+The tile renders as an `article` so the metric behaves as a standalone summary card. Trend icons are decorative, and the trend part receives a generated label like "Increased by 12%" or "Decreased by 8%".
+
+Keep the visible label specific enough to identify the metric without relying on surrounding layout. If a page groups many Stat Tiles under a heading, the heading should describe the metric set while each tile label describes the individual KPI.
 
 ## Component Reference
 
@@ -67,4 +63,4 @@ StatTile (Atom)
 
 ## Story Coverage
 
-- **Atom**: `Default`, `WithTrend`, `Negative`, `WithSubtitle`
+- **Atom**: `Default`, `NegativeTrend`, `ToneMatrix`

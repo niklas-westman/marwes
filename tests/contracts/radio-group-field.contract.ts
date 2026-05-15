@@ -57,6 +57,30 @@ export function runRadioGroupFieldContract(
       expect(harness.getAllByRole("radio")).toHaveLength(3)
     })
 
+    it("renders option labels with the canonical radio option typography", async () => {
+      await harness.renderRadioGroup({
+        label: "Pick one",
+        options: defaultOptions,
+      })
+
+      const optionLabelText = harness.getByText("Alpha")
+
+      expect(optionLabelText).toHaveClass("mw-p")
+      expect(optionLabelText).toHaveClass("mw-p--sm")
+    })
+
+    it("renders the group label with the canonical radio label typography", async () => {
+      await harness.renderRadioGroup({
+        label: "Pick one",
+        options: defaultOptions,
+      })
+
+      const groupLabelText = harness.getByText("Pick one")
+
+      expect(groupLabelText).toHaveClass("mw-p")
+      expect(groupLabelText).toHaveClass("mw-p--sm")
+    })
+
     it("uncontrolled: applies defaultValue and switches selection", async () => {
       await harness.renderRadioGroup({
         label: "Pick one",
