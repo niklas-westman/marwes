@@ -19,7 +19,7 @@ This guide MUST be updated during implementation:
 - [ ] Update test coverage map as tests are written
 
 **Last updated:** 2026-05-21
-**Current phase:** 3
+**Current phase:** 4
 
 ---
 
@@ -182,13 +182,13 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 - [x] Core tests pass.
 - [x] Core typecheck passes.
 - [x] Guide status updated.
-- [ ] Commit created.
+- [x] Commit created.
 
 ### Phase 3: Preset CSS And Theme Variables
 
 **Goal:** Add firstEdition Drawer styling tied to theme variables.
 **Depends on:** Phase 2
-**Status:** In progress
+**Status:** Complete
 
 #### Outputs
 
@@ -198,11 +198,11 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Tasks
 
-- [ ] Style drawer shell, scrim, panel, header, close button, content, dividers, footer.
-- [ ] Map panel surface/text/border/focus/radius/font to existing theme CSS vars.
-- [ ] Use component variables for sizes: `--mw-drawer-width-small`, `--mw-drawer-width-medium`, `--mw-drawer-width-large`.
-- [ ] Add dark mode styling without fixed adapter values.
-- [ ] Add CSS contract tests for classes, data hooks, size variables, and theme var usage.
+- [x] Style drawer shell, scrim, panel, header, close button, content, dividers, footer.
+- [x] Map panel surface/text/border/focus/radius/font to existing theme CSS vars.
+- [x] Use component variables for sizes: `--mw-drawer-width-small`, `--mw-drawer-width-medium`, `--mw-drawer-width-large`.
+- [x] Add dark mode styling without fixed adapter values.
+- [x] Add CSS contract tests for classes, data hooks, size variables, and theme var usage.
 
 #### Tests For This Phase
 
@@ -213,16 +213,16 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] Preset tests pass.
-- [ ] Preset typecheck passes.
-- [ ] `drawer.css` imported from `styles.css`.
+- [x] Preset tests pass.
+- [x] Preset typecheck passes.
+- [x] `drawer.css` imported from `styles.css`.
 - [ ] Commit created.
 
 ### Phase 4: React Adapter And Stories
 
 **Goal:** Expose Drawer through `@marwes-ui/react` and React Storybook.
 **Depends on:** Phase 3
-**Status:** Not started
+**Status:** In progress
 
 #### Outputs
 
@@ -413,8 +413,8 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 | Unit | Status | Tests | Validation | Notes |
 |---|---|---|---|---|
 | Core | Complete | pass | pass | Source of truth |
-| Preset | In progress | pending | pending | Theme variable contract |
-| React | Not started | pending | pending | Needed before dashboard replacement |
+| Preset | Complete | pass | pass | Theme variable contract |
+| React | In progress | pending | pending | Needed before dashboard replacement |
 | Vue | Not started | pending | pending | Parity adapter |
 | Svelte | Not started | pending | pending | Parity adapter |
 | Dashboard teaser | Not started | pending | pending | Replace local usage |
@@ -479,8 +479,8 @@ pnpm check:repo-map
 |---|---|---|---|---|---|
 | 1 | Guide And Spec | Complete | pass | pass | 2026-05-21 |
 | 2 | Core Drawer Contract | Complete | pass | pass | 2026-05-21 |
-| 3 | Preset CSS And Theme Variables | In progress | pending | pending | - |
-| 4 | React Adapter And Stories | Not started | pending | pending | - |
+| 3 | Preset CSS And Theme Variables | Complete | pass | pass | 2026-05-21 |
+| 4 | React Adapter And Stories | In progress | pending | pending | - |
 | 5 | Vue Adapter And Stories | Not started | pending | pending | - |
 | 6 | Svelte Adapter And Stories | Not started | pending | pending | - |
 | 7 | Dashboard Teaser Replacement | Not started | pending | pending | - |
