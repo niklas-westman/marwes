@@ -45,4 +45,27 @@ describe("firstEdition drawer css contract", () => {
     expect(css).toContain(".mw-drawer__content")
     expect(css).toContain(".mw-drawer__footer")
   })
+
+  it("adds side-aware entrance motion with reduced-motion support", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain("@keyframes mw-drawer-slide-in-right")
+    expect(css).toContain("transform: translateX(100%);")
+    expect(css).toContain("@keyframes mw-drawer-slide-in-left")
+    expect(css).toContain("transform: translateX(-100%);")
+    expect(css).toContain("@keyframes mw-drawer-scrim-in")
+    expect(css).toContain("@media (prefers-reduced-motion: reduce)")
+  })
+
+  it("keeps mobile drawers full screen with a sticky top-right close area", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain("@media (max-width: 640px)")
+    expect(css).toContain("width: 100vw;")
+    expect(css).toContain("height: 100dvh;")
+    expect(css).toContain("border-radius: 0;")
+    expect(css).toContain("position: sticky;")
+    expect(css).toContain("top: 0;")
+    expect(css).toContain("justify-content: center;")
+  })
 })
