@@ -357,7 +357,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 - [x] No local drawer component remains in dashboard-teaser.
 - [x] Dashboard typecheck/build pass.
-- [x] Browser check completed or explicitly documented as not run. Blocked: Playwright MCP could not launch because configured Chrome path is missing.
+- [x] Browser check completed with the local Storybook React Playwright package and cached Chromium.
 - [ ] Commit created.
 
 ### Phase 8: Registry, Docs, And Full Validation
@@ -417,7 +417,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 | React | Complete | pass | blocked | Package typecheck blocked by pre-existing banner test typing issue |
 | Vue | Complete | pass | pass | Parity adapter |
 | Svelte | Complete | pass | pass | Parity adapter |
-| Dashboard teaser | Complete | pass | pass | Browser MCP blocked by missing Chrome install |
+| Dashboard teaser | Complete | pass | pass | Local Playwright smoke passed |
 
 ---
 
@@ -517,6 +517,7 @@ Passed:
 - `pnpm --filter ./apps/storybook-svelte test -- drawer`
 - `pnpm --filter dashboard-teaser typecheck`
 - `pnpm --filter dashboard-teaser build`
+- `apps/storybook-react/node_modules/.bin/playwright test apps/storybook-react/src/__tmp-dashboard-drawer.spec.ts --browser=chromium --reporter=list` passed against `http://127.0.0.1:5173/dashboard-teaser/latest/` using cached Chromium. The temporary spec was removed after validation.
 - `pnpm check:adapter-boundaries`
 - `pnpm registry:check`
 
@@ -524,4 +525,3 @@ Blocked or pre-existing:
 
 - `pnpm --filter @marwes-ui/react test:typecheck` is blocked by pre-existing `packages/react/src/components/banner/__tests__/contract.test.tsx` `vi.fn()` typing.
 - `pnpm storybook:consistency` now reports no drawer findings, but still fails on pre-existing `banner` and `segmented-control` findings.
-- Browser verification was attempted against `http://127.0.0.1:5173/dashboard-teaser/latest/`, but Playwright MCP could not launch because configured Chrome is missing at `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
