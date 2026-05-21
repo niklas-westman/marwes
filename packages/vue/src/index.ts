@@ -211,6 +211,10 @@ export type { StatTileProps } from "./components/stat-tile"
 export { DatePicker } from "./components/date-picker"
 export type { DatePickerProps } from "./components/date-picker"
 
+/* Drawer */
+export { Drawer } from "./components/drawer"
+export type { DrawerProps } from "./components/drawer"
+
 /* Card */
 export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"
 export type {

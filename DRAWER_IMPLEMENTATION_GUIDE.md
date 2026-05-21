@@ -19,7 +19,7 @@ This guide MUST be updated during implementation:
 - [ ] Update test coverage map as tests are written
 
 **Last updated:** 2026-05-21
-**Current phase:** 4
+**Current phase:** 6
 
 ---
 
@@ -216,7 +216,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 - [x] Preset tests pass.
 - [x] Preset typecheck passes.
 - [x] `drawer.css` imported from `styles.css`.
-- [ ] Commit created.
+- [x] Commit created.
 
 ### Phase 4: React Adapter And Stories
 
@@ -259,7 +259,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 **Goal:** Expose Drawer through `@marwes-ui/vue` and Vue Storybook.
 **Depends on:** Phase 4
-**Status:** Not started
+**Status:** Complete
 
 #### Outputs
 
@@ -271,11 +271,11 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Tasks
 
-- [ ] Mirror the React Drawer API where practical.
-- [ ] Emit close events and support `onClose` parity callback.
-- [ ] Apply core RenderKit explicitly.
-- [ ] Add Vue tests and Vue Storybook stories matching React coverage.
-- [ ] Update Vue exports.
+- [x] Mirror the React Drawer API where practical.
+- [x] Emit close events and support `onClose` parity callback.
+- [x] Apply core RenderKit explicitly.
+- [x] Add Vue tests and Vue Storybook stories matching React coverage.
+- [x] Update Vue exports.
 
 #### Tests For This Phase
 
@@ -287,16 +287,16 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] Vue tests pass.
-- [ ] Vue typecheck passes.
-- [ ] Vue Storybook tests pass.
+- [x] Vue tests pass.
+- [x] Vue typecheck passes.
+- [x] Vue Storybook tests pass.
 - [ ] Commit created.
 
 ### Phase 6: Svelte Adapter And Stories
 
 **Goal:** Expose Drawer through `@marwes-ui/svelte` and Svelte Storybook.
 **Depends on:** Phase 5
-**Status:** Not started
+**Status:** In progress
 
 #### Outputs
 
@@ -414,9 +414,9 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 |---|---|---|---|---|
 | Core | Complete | pass | pass | Source of truth |
 | Preset | Complete | pass | pass | Theme variable contract |
-| React | In progress | pending | pending | Needed before dashboard replacement |
-| Vue | Not started | pending | pending | Parity adapter |
-| Svelte | Not started | pending | pending | Parity adapter |
+| React | Complete | pass | blocked | Package typecheck blocked by pre-existing banner test typing issue |
+| Vue | Complete | pass | pass | Parity adapter |
+| Svelte | In progress | pending | pending | Parity adapter |
 | Dashboard teaser | Not started | pending | pending | Replace local usage |
 
 ---
@@ -480,9 +480,9 @@ pnpm check:repo-map
 | 1 | Guide And Spec | Complete | pass | pass | 2026-05-21 |
 | 2 | Core Drawer Contract | Complete | pass | pass | 2026-05-21 |
 | 3 | Preset CSS And Theme Variables | Complete | pass | pass | 2026-05-21 |
-| 4 | React Adapter And Stories | In progress | pending | pending | - |
-| 5 | Vue Adapter And Stories | Not started | pending | pending | - |
-| 6 | Svelte Adapter And Stories | Not started | pending | pending | - |
+| 4 | React Adapter And Stories | Complete | pass | blocked | 2026-05-21 |
+| 5 | Vue Adapter And Stories | Complete | pass | pass | 2026-05-21 |
+| 6 | Svelte Adapter And Stories | In progress | pending | pending | - |
 | 7 | Dashboard Teaser Replacement | Not started | pending | pending | - |
 | 8 | Registry, Docs, And Full Validation | Not started | pending | pending | - |
 
