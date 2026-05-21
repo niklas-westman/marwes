@@ -47,6 +47,22 @@ export const LeftPlacement: Story = {
   render: (args) => ({ Component: DrawerAtomStory, props: args }),
 }
 
+export const Sizes: Story = {
+  render: () => ({
+    Component: DrawerAtomStory,
+    props: {
+      title: "Large drawer",
+      description: "Small is 320px, medium is 400px, and large is 560px.",
+      size: "large",
+      placement: "right",
+      showFooter: false,
+      showScrim: false,
+      dismissible: false,
+      modal: true,
+    },
+  }),
+}
+
 export const WithoutFooter: Story = {
   args: {
     title: "Navigation drawer",

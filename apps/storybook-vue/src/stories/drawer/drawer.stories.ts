@@ -59,6 +59,28 @@ export const LeftPlacement: Story = {
   }),
 }
 
+export const Sizes: Story = {
+  render: () => ({
+    components: { Drawer, Paragraph },
+    template: `
+      <div style="display: grid; gap: 24px;">
+        <div v-for="size in ['small', 'medium', 'large']" :key="size" style="position: relative; height: 360px; overflow: hidden;">
+          <Drawer
+            :title="size + ' drawer'"
+            :description="size + ' maps to the Figma drawer width token.'"
+            :size="size"
+            :modal="true"
+            :showScrim="false"
+            :showFooter="false"
+          >
+            <Paragraph>Small is 320px, medium is 400px, and large is 560px.</Paragraph>
+          </Drawer>
+        </div>
+      </div>
+    `,
+  }),
+}
+
 export const WithoutFooter: Story = {
   render: () => ({
     components: { Drawer, Paragraph },
