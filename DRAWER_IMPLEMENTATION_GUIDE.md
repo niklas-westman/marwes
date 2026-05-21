@@ -19,7 +19,7 @@ This guide MUST be updated during implementation:
 - [ ] Update test coverage map as tests are written
 
 **Last updated:** 2026-05-21
-**Current phase:** 7
+**Current phase:** 8
 
 ---
 
@@ -290,7 +290,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 - [x] Vue tests pass.
 - [x] Vue typecheck passes.
 - [x] Vue Storybook tests pass.
-- [ ] Commit created.
+- [x] Commit created.
 
 ### Phase 6: Svelte Adapter And Stories
 
@@ -331,7 +331,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 **Goal:** Remove app-local drawer implementation/usage and consume the real React Drawer.
 **Depends on:** Phase 4
-**Status:** In progress
+**Status:** Complete
 
 #### Outputs
 
@@ -340,10 +340,10 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Tasks
 
-- [ ] Find dashboard-teaser drawer implementation and usage.
-- [ ] Replace local drawer markup with React `Drawer`.
-- [ ] Keep dashboard behavior and visual intent intact.
-- [ ] Run dashboard typecheck/build.
+- [x] Find dashboard-teaser drawer implementation and usage.
+- [x] Replace local drawer markup with React `Drawer`.
+- [x] Keep dashboard behavior and visual intent intact.
+- [x] Run dashboard typecheck/build.
 
 #### Tests For This Phase
 
@@ -355,16 +355,16 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] No local drawer component remains in dashboard-teaser.
-- [ ] Dashboard typecheck/build pass.
-- [ ] Browser check completed or explicitly documented as not run.
+- [x] No local drawer component remains in dashboard-teaser.
+- [x] Dashboard typecheck/build pass.
+- [x] Browser check completed or explicitly documented as not run. Blocked: Playwright MCP could not launch because configured Chrome path is missing.
 - [ ] Commit created.
 
 ### Phase 8: Registry, Docs, And Full Validation
 
 **Goal:** Connect Drawer into docs/registry tooling and run final validation.
 **Depends on:** Phases 2-7
-**Status:** Not started
+**Status:** In progress
 
 #### Outputs
 
@@ -417,7 +417,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 | React | Complete | pass | blocked | Package typecheck blocked by pre-existing banner test typing issue |
 | Vue | Complete | pass | pass | Parity adapter |
 | Svelte | Complete | pass | pass | Parity adapter |
-| Dashboard teaser | In progress | pending | pending | Replace local usage |
+| Dashboard teaser | Complete | pass | pass | Browser MCP blocked by missing Chrome install |
 
 ---
 
@@ -483,8 +483,8 @@ pnpm check:repo-map
 | 4 | React Adapter And Stories | Complete | pass | blocked | 2026-05-21 |
 | 5 | Vue Adapter And Stories | Complete | pass | pass | 2026-05-21 |
 | 6 | Svelte Adapter And Stories | Complete | pass | pass | 2026-05-21 |
-| 7 | Dashboard Teaser Replacement | In progress | pending | pending | - |
-| 8 | Registry, Docs, And Full Validation | Not started | pending | pending | - |
+| 7 | Dashboard Teaser Replacement | Complete | pass | pass | 2026-05-21 |
+| 8 | Registry, Docs, And Full Validation | In progress | pending | pending | - |
 
 ---
 
