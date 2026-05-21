@@ -37,7 +37,7 @@ describe("Vue Banner (Atom)", () => {
     renderWithProvider(Banner, { children: "Hello" })
 
     const message = screen.getByText("Hello")
-    const root = message.closest("[data-mw-component='banner']")
+    const root = message.closest("[data-component='banner']")
     expect(root).not.toBeNull()
     expect(root?.className).toContain("mw-banner--neutral")
   })
@@ -55,7 +55,7 @@ describe("Vue Banner (Atom)", () => {
         }),
       )
       const message = screen.getByText(variant)
-      const root = message.closest("[data-mw-component='banner']")
+      const root = message.closest("[data-component='banner']")
       expect(root?.className).toContain(`mw-banner--${variant}`)
       unmount()
     }
@@ -78,7 +78,7 @@ describe("Vue Banner (Atom)", () => {
   it("shows icon by default", () => {
     renderWithProvider(Banner, { children: "With icon" })
 
-    const root = screen.getByText("With icon").closest("[data-mw-component='banner']")
+    const root = screen.getByText("With icon").closest("[data-component='banner']")
     const icon = root?.querySelector(".mw-banner__icon")
     expect(icon).not.toBeNull()
   })
@@ -86,7 +86,7 @@ describe("Vue Banner (Atom)", () => {
   it("hides icon when showIcon is false", () => {
     renderWithProvider(Banner, { showIcon: false, children: "No icon" })
 
-    const root = screen.getByText("No icon").closest("[data-mw-component='banner']")
+    const root = screen.getByText("No icon").closest("[data-component='banner']")
     const icon = root?.querySelector(".mw-banner__icon")
     expect(icon).toBeNull()
   })
@@ -129,7 +129,7 @@ describe("Vue Banner (Atom)", () => {
   it("merges custom className", () => {
     renderWithProvider(Banner, { className: "custom", children: "Msg" })
 
-    const root = screen.getByText("Msg").closest("[data-mw-component='banner']")
+    const root = screen.getByText("Msg").closest("[data-component='banner']")
     expect(root?.className).toContain("mw-banner")
     expect(root?.className).toContain("custom")
   })

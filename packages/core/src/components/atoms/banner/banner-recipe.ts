@@ -7,6 +7,7 @@
  * - .figma/marwes/pages/-banner/-banner_1593-5094.json
  */
 
+import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveBannerA11y } from "./banner-a11y"
 import type { BannerOptions, BannerRenderKit } from "./banner-types"
 
@@ -24,10 +25,9 @@ export function createBannerRecipe(opts: BannerOptions): BannerRenderKit {
     root: {
       className: cx("mw-banner", `mw-banner--${variant}`),
       a11y: resolveBannerA11y(opts),
-      dataAttributes: {
-        "data-mw-component": "banner",
+      dataAttributes: createFamilySemanticAttributes("banner", {
         "data-variant": variant,
-      },
+      }),
     },
     content: {
       className: "mw-banner__content",

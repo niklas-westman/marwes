@@ -41,6 +41,17 @@ export const familySemanticsRegistry = {
     allowedPurposes: ["status", "priority", "notification"],
     notes: "Badge needs base family identity normalized before full parity governance.",
   },
+  banner: {
+    family: "banner",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "banner",
+    },
+    canonicalAttributes: ["data-component", "data-variant"],
+    allowedPurposes: [],
+    notes:
+      "Banner is a single-atom family with no purpose variants. Variant controls color intent only.",
+  },
   avatar: {
     family: "avatar",
     defaultLayer: "atom",

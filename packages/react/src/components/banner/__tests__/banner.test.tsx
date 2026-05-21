@@ -18,7 +18,7 @@ describe("Banner (Atom)", () => {
     renderWithProvider(<Banner>Hello</Banner>)
 
     const message = screen.getByText("Hello")
-    const root = message.closest("[data-mw-component='banner']")
+    const root = message.closest("[data-component='banner']")
     expect(root).not.toBeNull()
     expect(root?.className).toContain("mw-banner--neutral")
   })
@@ -27,7 +27,7 @@ describe("Banner (Atom)", () => {
     for (const variant of Object.values(BannerVariant)) {
       const { unmount } = renderWithProvider(<Banner variant={variant}>{variant}</Banner>)
       const message = screen.getByText(variant)
-      const root = message.closest("[data-mw-component='banner']")
+      const root = message.closest("[data-component='banner']")
       expect(root?.className).toContain(`mw-banner--${variant}`)
       unmount()
     }
@@ -50,7 +50,7 @@ describe("Banner (Atom)", () => {
   it("shows icon by default", () => {
     renderWithProvider(<Banner>With icon</Banner>)
 
-    const root = screen.getByText("With icon").closest("[data-mw-component='banner']")
+    const root = screen.getByText("With icon").closest("[data-component='banner']")
     const icon = root?.querySelector(".mw-banner__icon")
     expect(icon).not.toBeNull()
   })
@@ -58,7 +58,7 @@ describe("Banner (Atom)", () => {
   it("hides icon when showIcon is false", () => {
     renderWithProvider(<Banner showIcon={false}>No icon</Banner>)
 
-    const root = screen.getByText("No icon").closest("[data-mw-component='banner']")
+    const root = screen.getByText("No icon").closest("[data-component='banner']")
     const icon = root?.querySelector(".mw-banner__icon")
     expect(icon).toBeNull()
   })
@@ -95,7 +95,7 @@ describe("Banner (Atom)", () => {
   it("hides action slot when no action is provided", () => {
     renderWithProvider(<Banner>No CTA</Banner>)
 
-    const root = screen.getByText("No CTA").closest("[data-mw-component='banner']")
+    const root = screen.getByText("No CTA").closest("[data-component='banner']")
     const action = root?.querySelector(".mw-banner__action")
     expect(action).toBeNull()
   })
@@ -103,7 +103,7 @@ describe("Banner (Atom)", () => {
   it("merges custom className", () => {
     renderWithProvider(<Banner className="custom">Msg</Banner>)
 
-    const root = screen.getByText("Msg").closest("[data-mw-component='banner']")
+    const root = screen.getByText("Msg").closest("[data-component='banner']")
     expect(root?.className).toContain("mw-banner")
     expect(root?.className).toContain("custom")
   })
@@ -111,14 +111,14 @@ describe("Banner (Atom)", () => {
   it("passes id to the root element", () => {
     renderWithProvider(<Banner id="my-banner">Msg</Banner>)
 
-    const root = screen.getByText("Msg").closest("[data-mw-component='banner']")
+    const root = screen.getByText("Msg").closest("[data-component='banner']")
     expect(root?.id).toBe("my-banner")
   })
 
   it("sets aria-label when provided", () => {
     renderWithProvider(<Banner ariaLabel="Important notice">Msg</Banner>)
 
-    const root = screen.getByText("Msg").closest("[data-mw-component='banner']")
+    const root = screen.getByText("Msg").closest("[data-component='banner']")
     expect(root?.getAttribute("aria-label")).toBe("Important notice")
   })
 })
