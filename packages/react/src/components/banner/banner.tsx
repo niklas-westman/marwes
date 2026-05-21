@@ -1,6 +1,7 @@
-import { createBannerRecipe } from "@marwes-ui/core"
+import { IconName, createBannerRecipe } from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { Icon } from "../icon"
 
 export type BannerProps = BannerOptions & {
   /** Banner message content. */
@@ -34,7 +35,7 @@ export function Banner(props: BannerProps): React.ReactElement {
       <div className={kit.content.className}>
         {kit.icon.visible && (
           <span className={kit.icon.className}>
-            {icon ?? <DefaultBannerIcon variant={props.variant} />}
+            {icon ?? <Icon name={IconName.Info} decorative />}
           </span>
         )}
         <span className={kit.message.className}>{children}</span>
@@ -49,23 +50,5 @@ export function Banner(props: BannerProps): React.ReactElement {
         />
       )}
     </div>
-  )
-}
-
-/** Default info-circle icon for the banner. Adapts color via CSS. */
-function DefaultBannerIcon({
-  variant: _variant,
-}: { variant?: string | undefined }): React.ReactElement {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="12"
-      height="12"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-    </svg>
   )
 }

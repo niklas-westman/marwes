@@ -12,6 +12,7 @@
     "dev:packages": "pnpm -r --parallel --filter \"./packages/*\" dev",
     "dev:playground": "pnpm --filter \"./apps/playground-react\" dev",
     "dev:playground:svelte": "pnpm --filter \"./apps/playground-svelte\" dev",
+    "dev:dashboard-teaser": "pnpm --filter \"./apps/dashboard-teaser\" dev",
     "dev:storybook:react": "pnpm --filter \"./apps/storybook-react\" storybook",
     "dev:storybook:vue": "pnpm --filter \"./apps/storybook-vue\" storybook",
     "dev:storybook:svelte": "pnpm --filter \"./apps/storybook-svelte\" storybook",

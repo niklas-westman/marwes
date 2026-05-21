@@ -1,0 +1,13 @@
+flowchart LR
+  Track["SegmentedControl\nrole=radiogroup"] --> Items["Item buttons\nrole=radio"]
+  Items --> Selected["aria-checked=true\ntabIndex=0"]
+  Items --> Unselected["aria-checked=false\ntabIndex=-1"]
+  Items --> DisabledItem["aria-disabled=true\nskipped by nav"]
+
+  Track --> KeyNav["Keyboard navigation"]
+  KeyNav --> ArrowLR["ArrowLeft / ArrowRight\ncycle through enabled items"]
+  KeyNav --> HomeEnd["Home / End\njump to first / last"]
+
+  Track --> ValueChange["onValueChange callback"]
+  ValueChange --> Controlled["External state management"]
+  ValueChange --> Uncontrolled["Internal state via defaultValue"]

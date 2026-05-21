@@ -1,0 +1,129 @@
+import {
+  AccordionField,
+  CurrencyField,
+  EmailField,
+  PhoneField,
+  SelectField,
+} from "@marwes-ui/react"
+import { useState } from "react"
+import styled from "styled-components"
+
+import { FlexCard } from "./shared"
+
+const RowContainer = styled.div`
+  display: flex;
+  gap: 24px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+  }
+`
+
+const AccordionCard = styled(FlexCard)``
+
+const InputCard = styled(FlexCard)`
+  max-width: 344px;
+`
+
+const SectionLabel = styled.h4`
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mw-color-text-muted, #595959);
+`
+
+const DemoArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+type FieldType = "currency" | "email" | "phone"
+
+function RowAccordionInput(): JSX.Element {
+  const [openItems, setOpenItems] = useState<string[]>(["1"])
+  const [selectedField, setSelectedField] = useState<FieldType>("currency")
+  const [currencyValue, setCurrencyValue] = useState("")
+  const [emailValue, setEmailValue] = useState("")
+  const [phoneValue, setPhoneValue] = useState("")
+
+  return (
+    <RowContainer>
+      <AccordionCard>
+        <SectionLabel>Accordion</SectionLabel>
+        <AccordionField
+          label=""
+          items={[
+            {
+              value: "1",
+              title: "Accordion title",
+              content:
+                "Accordion content goes here. This is the expandable section that provides more detail.",
+            },
+            { value: "2", title: "Accordion title", content: "More content for this section." },
+            { value: "3", title: "Accordion title", content: "Additional expandable content." },
+          ]}
+          openItems={openItems}
+          onOpenItemsChange={setOpenItems}
+        />
+      </AccordionCard>
+      <InputCard>
+        <SectionLabel>Input fields</SectionLabel>
+        <DemoArea>
+          <SelectField
+            label="Purpose"
+            select={{
+              options: [
+                { value: "currency", label: "Currency field" },
+                { value: "email", label: "Email field" },
+                { value: "phone", label: "Phone field" },
+              ],
+              value: selectedField,
+              onValueChange: (v) => setSelectedField(v as FieldType),
+            }}
+          />
+          {selectedField === "currency" && (
+            <CurrencyField
+              label="Amount"
+              helperText="Amount in USD"
+              currency="USD"
+              input={{
+                placeholder: "0.00",
+                value: currencyValue,
+                onValueChange: setCurrencyValue,
+              }}
+            />
+          )}
+          {selectedField === "email" && (
+            <EmailField
+              label="Email"
+              helperText="Enter your email address"
+              input={{
+                placeholder: "you@example.com",
+                value: emailValue,
+                onValueChange: setEmailValue,
+              }}
+            />
+          )}
+          {selectedField === "phone" && (
+            <PhoneField
+              label="Phone"
+              helperText="Enter your phone number"
+              input={{
+                placeholder: "+1 (555) 000-0000",
+                value: phoneValue,
+                onValueChange: setPhoneValue,
+              }}
+            />
+          )}
+        </DemoArea>
+      </InputCard>
+    </RowContainer>
+  )
+}
+
+export { RowAccordionInput }

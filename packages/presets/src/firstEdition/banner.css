@@ -18,9 +18,9 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--mw-spacing-sp-8) var(--mw-spacing-sp-12) var(--mw-spacing-sp-8)
-    var(--mw-spacing-sp-20, 20px);
-  border: 1px solid var(--mw-banner-border);
+  padding: var(--mw-spacing-sp-8, 8px) 12px var(--mw-spacing-sp-8, 8px) 20px;
+  border: 0;
+  border-bottom: 1px solid var(--mw-banner-border);
   border-radius: 0;
   background: var(--mw-banner-surface);
 }

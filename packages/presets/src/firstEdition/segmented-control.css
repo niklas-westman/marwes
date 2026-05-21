@@ -1,0 +1,122 @@
+/*
+ * Segmented Control Styles
+ * Figma refs: 1571:19333 (component set)
+ *
+ * Variant=default: subtle track, elevated active pill
+ * Variant=inverse: surface track with strong border, inverted active pill
+ * Variant=pill: fully rounded track (used for compact icon toggles)
+ */
+
+.mw-segmented-control {
+  --mw-sc-track: var(--mw-color-surface-subtle, #f5f5f5);
+  --mw-sc-track-border: var(--mw-color-border, #d8d8d8);
+  --mw-sc-item-active-bg: var(--mw-color-surface-elevated, #ffffff);
+  --mw-sc-item-active-text: var(--mw-color-text, #141414);
+  --mw-sc-item-inactive-text: var(--mw-color-text-muted, #595959);
+  --mw-sc-item-hover-text: var(--mw-color-text, #141414);
+  --mw-sc-item-disabled-text: var(--mw-color-text-disabled, #737373);
+  --mw-sc-radius: 8px;
+  --mw-sc-item-radius: 6px;
+  --mw-sc-height: 32px;
+  --mw-sc-padding: 4px;
+  --mw-sc-gap: 2px;
+  --mw-sc-font-size: var(--mw-density-font-size, 14px);
+
+  display: inline-flex;
+  gap: var(--mw-sc-gap);
+  padding: var(--mw-sc-padding);
+  background: var(--mw-sc-track);
+  border: 1px solid var(--mw-sc-track-border);
+  border-radius: var(--mw-sc-radius);
+  align-items: center;
+}
+
+/* Size: sm */
+.mw-segmented-control--sm {
+  --mw-sc-height: 28px;
+  --mw-sc-padding: 3px;
+  --mw-sc-radius: 6px;
+  --mw-sc-font-size: 12px;
+}
+
+/* Variant: inverse */
+.mw-segmented-control--inverse {
+  --mw-sc-track: var(--mw-color-surface, #f8f8f8);
+  --mw-sc-track-border: var(--mw-color-border, #d8d8d8);
+  --mw-sc-item-active-bg: var(--mw-color-surface-inverted, #141414);
+  --mw-sc-item-active-text: var(--mw-color-text-inverted, #ffffff);
+  --mw-sc-item-inactive-text: var(--mw-color-text-muted, #595959);
+}
+
+/* Variant: pill */
+.mw-segmented-control--pill {
+  --mw-sc-radius: 18px;
+  --mw-sc-item-radius: 14px;
+}
+
+/* Disabled state */
+.mw-segmented-control--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ─── Item ─────────────────────────────────────────────────── */
+
+.mw-segmented-control__item {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  height: var(--mw-sc-height);
+  padding: 0 16px;
+  background: transparent;
+  color: var(--mw-sc-item-inactive-text);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-sc-font-size);
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.42px;
+  white-space: nowrap;
+  border: none;
+  border-radius: var(--mw-sc-item-radius);
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.mw-segmented-control__item--icon-only {
+  flex: 0 0 var(--mw-sc-height);
+  width: var(--mw-sc-height);
+  padding: 0;
+}
+
+.mw-segmented-control__item--selected {
+  background: var(--mw-sc-item-active-bg);
+  color: var(--mw-sc-item-active-text);
+}
+
+.mw-segmented-control__item:hover:not(:disabled):not(.mw-segmented-control__item--disabled):not(
+    .mw-segmented-control__item--selected
+  ) {
+  background: color-mix(in srgb, var(--mw-color-text, #000000) 5%, transparent);
+  color: var(--mw-sc-item-hover-text);
+}
+
+.mw-segmented-control__item--disabled,
+.mw-segmented-control__item:disabled {
+  color: var(--mw-sc-item-disabled-text);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mw-segmented-control__item:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--mw-color-focus, #2f31fc);
+  z-index: 1;
+}
+
+/* Item content should not capture pointer events; the button owns the full hit area. */
+.mw-segmented-control__item * {
+  pointer-events: none;
+}

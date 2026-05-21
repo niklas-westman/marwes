@@ -1,0 +1,59 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "segmented-control",
+  "displayName": "Segmented Control",
+  "status": "shipped",
+  "summary": "Single-select segmented toggle family with radiogroup semantics, keyboard navigation, and three visual variants (default, inverse, pill).",
+  "philosophy": [
+    "Teach SegmentedControl as the single canonical surface — no raw atom escape hatch needed since the component is already minimal.",
+    "Use radiogroup semantics for single-select behavior without associated panels, distinguishing this family from tabs.",
+    "Keep keyboard navigation (Arrow keys, Home, End) and value resolution in core so all adapters stay aligned.",
+    "Token-based styling through CSS custom properties means dark mode and theming work automatically without adapter-level logic."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a compact single-select toggle between 2–4 options with no associated panel content.",
+      "Theme switching, view density controls, framework selectors, or similar compact option sets.",
+      "The team wants React, Vue, and Svelte segmented behavior to stay aligned through shared core recipes."
+    ],
+    "avoidWhen": [
+      "The selection controls associated panel content — use TabGroup instead.",
+      "There are more than 4 options — consider a dropdown or radio group.",
+      "A binary on/off toggle is more appropriate — use Switch instead.",
+      "The options need rich content or descriptions — use a radio group field."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "initial-implementation",
+    "automationCovers": [
+      "Core recipe generates correct role=radiogroup and role=radio attributes.",
+      "Keyboard navigation (ArrowLeft, ArrowRight, Home, End) cycles through enabled items.",
+      "Disabled items are skipped during keyboard navigation.",
+      "aria-checked reflects selected state correctly.",
+      "Storybook taxonomy tests across React, Vue, and Svelte."
+    ],
+    "manualReviewRequired": [
+      "Real browser and assistive-technology validation for radio-group announcement patterns.",
+      "Focus visibility and roving tabindex feel across screen readers.",
+      "High-contrast mode appearance of the active pill indicator."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "Initial implementation ships with radiogroup semantics rather than tablist because no panel content is associated.",
+      "Future audit should confirm that screen readers announce the group label and checked state transitions cleanly."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": ["apps/storybook-react/src/stories/segmented-control/segmented-control.stories.tsx"],
+      "vue": ["apps/storybook-vue/src/stories/segmented-control/segmented-control.stories.ts"],
+      "svelte": ["apps/storybook-svelte/src/stories/segmented-control/segmented-control.stories.ts"]
+    },
+    "preferredStates": ["default", "selected", "disabled", "hover", "focus"]
+  },
+  "openQuestions": [
+    "Should purpose variants (e.g. ThemeToggle, ViewDensityToggle) be added as thin wrappers?",
+    "Should the family support an animated sliding indicator for the active pill?"
+  ]
+}

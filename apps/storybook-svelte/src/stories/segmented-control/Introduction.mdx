@@ -1,0 +1,74 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Segmented Control/Introduction" />
+
+# Segmented Control
+
+Marwes provides a single `SegmentedControl` component for compact single-select
+toggles between 2–4 options.
+
+## When to use
+
+- Theme mode toggles (light/dark)
+- View density controls (compact/comfortable)
+- Framework selectors (React/Vue/Svelte)
+- Any compact 2–4 option set without associated panel content
+
+## When to use something else
+
+- **Tabs** — when the selection controls visible panel content
+- **Switch** — for binary on/off toggles
+- **Radio Group** — for more than 4 options or when options need descriptions
+
+## Variants
+
+| Variant | Use case |
+| --- | --- |
+| `default` | Standard elevated pill on subtle track |
+| `inverse` | High-contrast inverted active state |
+| `pill` | Fully rounded for compact icon-only toggles |
+
+## Sizes
+
+| Size | Height | Use case |
+| --- | --- | --- |
+| `md` (default) | 32px | Standard usage |
+| `sm` | 28px | Compact spaces, toolbars |
+
+## Usage
+
+```tsx
+import { SegmentedControl } from "@marwes-ui/react"
+
+<SegmentedControl
+  items={[
+    { value: "light", icon: <SunIcon />, ariaLabel: "Light mode" },
+    { value: "dark", icon: <MoonIcon />, ariaLabel: "Dark mode" },
+  ]}
+  value={theme}
+  onValueChange={setTheme}
+  variant="pill"
+  ariaLabel="Theme mode"
+/>
+```
+
+## Accessibility
+
+- Uses `role="radiogroup"` on the track and `role="radio"` on each item
+- Full keyboard navigation: Arrow keys cycle, Home/End jump to boundaries
+- `aria-checked` reflects selected state
+- Disabled items are skipped during keyboard navigation
+- Pass `ariaLabel` to each icon-only item for screen reader support
+
+## Component Reference
+
+**`SegmentedControl`** — The single component for all segmented toggle patterns.
+
+Props:
+- `items` — Array of `{ value, label?, icon?, disabled?, ariaLabel? }`
+- `value` / `defaultValue` — Controlled or uncontrolled selection
+- `onValueChange` — Callback when selection changes
+- `variant` — `"default"` | `"inverse"` | `"pill"`
+- `size` — `"sm"` | `"md"`
+- `disabled` — Disables the entire control
+- `ariaLabel` — Accessible label for the radiogroup
