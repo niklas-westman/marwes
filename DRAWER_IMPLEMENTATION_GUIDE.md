@@ -19,7 +19,7 @@ This guide MUST be updated during implementation:
 - [ ] Update test coverage map as tests are written
 
 **Last updated:** 2026-05-21
-**Current phase:** 2
+**Current phase:** 3
 
 ---
 
@@ -121,7 +121,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 **Goal:** Capture the implementation contract before code changes.
 **Depends on:** None
-**Status:** In progress
+**Status:** Complete
 
 #### Outputs
 
@@ -132,7 +132,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 - [x] Create a drawer-specific root implementation guide.
 - [x] Add `REQ-DRAWER-001` to the canonical spec.
-- [ ] Commit the guide/spec milestone.
+- [x] Commit the guide/spec milestone.
 
 #### Tests For This Phase
 
@@ -143,15 +143,15 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] Guide exists at repo root.
+- [x] Guide exists at repo root.
 - [x] Spec has testable Drawer acceptance criteria.
-- [ ] First commit created.
+- [x] First commit created.
 
 ### Phase 2: Core Drawer Contract
 
 **Goal:** Add framework-agnostic Drawer recipes, types, and a11y.
 **Depends on:** Phase 1
-**Status:** Not started
+**Status:** Complete
 
 #### Outputs
 
@@ -164,11 +164,11 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Tasks
 
-- [ ] Add `DrawerSize`, `DrawerPlacement`, `DrawerOptions`, `DrawerRenderKit`.
-- [ ] Generate root, panel, and optional scrim data attributes from core.
-- [ ] Resolve `role="dialog"`, `aria-modal`, `aria-labelledby`, `aria-describedby`, and label fallback.
-- [ ] Add tests for size, placement, footer, scrim, dismissible, modal, and a11y.
-- [ ] Update core exports.
+- [x] Add `DrawerSize`, `DrawerPlacement`, `DrawerOptions`, `DrawerRenderKit`.
+- [x] Generate root, panel, and optional scrim data attributes from core.
+- [x] Resolve `role="dialog"`, `aria-modal`, `aria-labelledby`, `aria-describedby`, and label fallback.
+- [x] Add tests for size, placement, footer, scrim, dismissible, modal, and a11y.
+- [x] Update core exports.
 
 #### Tests For This Phase
 
@@ -179,16 +179,16 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] Core tests pass.
-- [ ] Core typecheck passes.
-- [ ] Guide status updated.
+- [x] Core tests pass.
+- [x] Core typecheck passes.
+- [x] Guide status updated.
 - [ ] Commit created.
 
 ### Phase 3: Preset CSS And Theme Variables
 
 **Goal:** Add firstEdition Drawer styling tied to theme variables.
 **Depends on:** Phase 2
-**Status:** Not started
+**Status:** In progress
 
 #### Outputs
 
@@ -412,8 +412,8 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 | Unit | Status | Tests | Validation | Notes |
 |---|---|---|---|---|
-| Core | In progress | pending | pending | Source of truth |
-| Preset | Not started | pending | pending | Theme variable contract |
+| Core | Complete | pass | pass | Source of truth |
+| Preset | In progress | pending | pending | Theme variable contract |
 | React | Not started | pending | pending | Needed before dashboard replacement |
 | Vue | Not started | pending | pending | Parity adapter |
 | Svelte | Not started | pending | pending | Parity adapter |
@@ -477,9 +477,9 @@ pnpm check:repo-map
 
 | Phase | Title | Status | Tests | Validation | Completed |
 |---|---|---|---|---|---|
-| 1 | Guide And Spec | In progress | pending | pending | - |
-| 2 | Core Drawer Contract | In progress | pending | pending | - |
-| 3 | Preset CSS And Theme Variables | Not started | pending | pending | - |
+| 1 | Guide And Spec | Complete | pass | pass | 2026-05-21 |
+| 2 | Core Drawer Contract | Complete | pass | pass | 2026-05-21 |
+| 3 | Preset CSS And Theme Variables | In progress | pending | pending | - |
 | 4 | React Adapter And Stories | Not started | pending | pending | - |
 | 5 | Vue Adapter And Stories | Not started | pending | pending | - |
 | 6 | Svelte Adapter And Stories | Not started | pending | pending | - |

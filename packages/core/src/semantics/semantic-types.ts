@@ -19,7 +19,15 @@ export type SemanticAttributeName = (typeof canonicalSemanticAttributeNames)[num
 export const semanticLayers = ["atom", "molecule", "purpose"] as const
 export type SemanticLayer = (typeof semanticLayers)[number]
 
-export const semanticFamilies = ["button", "badge", "banner", "avatar", "toast", "dialog"] as const
+export const semanticFamilies = [
+  "button",
+  "badge",
+  "banner",
+  "avatar",
+  "toast",
+  "dialog",
+  "drawer",
+] as const
 export type SemanticFamily = (typeof semanticFamilies)[number]
 
 export const semanticIntents = [

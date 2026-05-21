@@ -83,4 +83,15 @@ export const familySemanticsRegistry = {
     allowedPurposes: ["confirm-dialog", "destructive-dialog", "info-dialog"],
     notes: "Dialog already has a strong purpose mapping and workflow semantics in adapters.",
   },
+  drawer: {
+    family: "drawer",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "drawer",
+    },
+    canonicalAttributes: ["data-component", "data-size"],
+    allowedPurposes: [],
+    notes:
+      "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level.",
+  },
 } satisfies Record<string, FamilySemanticDefinition>

@@ -26,6 +26,11 @@ describe("semantic registry", () => {
       "data-component": "toast",
       "data-variant": "outline",
     })
+
+    expect(createFamilySemanticAttributes("drawer", { "data-size": "medium" })).toEqual({
+      "data-component": "drawer",
+      "data-size": "medium",
+    })
   })
 
   it("creates purpose semantic attributes for Wave 1 purpose wrappers", () => {
