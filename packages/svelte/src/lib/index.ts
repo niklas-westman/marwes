@@ -84,6 +84,10 @@ export { default as PriorityBadge } from "./components/badge/PriorityBadge.svelt
 export { default as NotificationBadge } from "./components/badge/NotificationBadge.svelte"
 export type { BadgeProps, BadgeGroupProps } from "./components/badge/types.js"
 
+// Banner
+export { default as Banner } from "./components/banner/Banner.svelte"
+export type { BannerProps } from "./components/banner/types.js"
+
 // Card
 export { default as Card } from "./components/card/Card.svelte"
 export { default as ProductCard } from "./components/card/ProductCard.svelte"
@@ -236,6 +240,13 @@ export type {
   ContentTabsProps,
   SettingsTabsProps,
 } from "./components/tab/types.js"
+
+// Segmented Control
+export { default as SegmentedControl } from "./components/segmented-control/SegmentedControl.svelte"
+export type {
+  SegmentedControlProps,
+  SegmentedControlItem,
+} from "./components/segmented-control/types.js"
 
 // Slider
 export { default as Slider } from "./components/slider/Slider.svelte"
