@@ -171,6 +171,41 @@ Use this format when resolving an open decision:
 
 > Requirement entries are kept as a traceable record of why work was started. Some entries describe an original problem statement for work that is now complete. Use the acceptance checkboxes and decision log to understand current status.
 
+### REQ-DRAWER-001: Drawer Component
+- **Figma reference**: use `.figma/marwes/components/drawer.json` plus `.figma/marwes/pages/-drawer/-drawer_1609-15651.json` and `.figma/marwes/pages/-drawer/-drawer-dark_1610-15934.json`.
+- **Problem**: Drawer behavior is needed by product compositions such as `apps/dashboard-teaser`, but it must be provided as a real Marwes component instead of an app-local fork.
+- **Scope**:
+  - Add a framework-agnostic core Drawer recipe and a11y contract.
+  - Add firstEdition preset CSS for the drawer panel, scrim, header, content, dividers, footer, and close affordance.
+  - Expose Drawer through React, Vue, and Svelte adapters.
+  - Add React, Vue, and Svelte Storybook coverage.
+  - Replace dashboard-teaser local drawer usage with the React Drawer export.
+  - Support drawer sizes `small`, `medium`, and `large` mapped to the Figma widths `320px`, `400px`, and `560px`.
+  - Support left/right placement, optional scrim, optional footer, and dismissible close behavior.
+- **Non-goals**:
+  - Adding focus trapping or portal management in core.
+  - Moving framework lifecycle behavior into `@marwes-ui/core`.
+  - Hardcoding visual tokens in adapters.
+- **Acceptance criteria**:
+  - [ ] Core Drawer recipe returns stable `.mw-drawer*` classes, semantic data attributes, size/placement state, and dialog a11y metadata.
+  - [ ] Preset CSS uses `--mw-*` variables seeded from theme CSS variables for surface, text, border, focus, radius, and font behavior.
+  - [ ] React, Vue, and Svelte adapters render the core recipe output without duplicating core a11y logic.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with size, footer, scrim, placement, and dark-mode-relevant states.
+  - [ ] Dashboard teaser consumes the React Drawer export and no longer owns a local drawer implementation.
+- **Validation**:
+  - Unit: core recipe tests; preset CSS contract tests; React/Vue/Svelte adapter tests where supported.
+  - Integration/manual: Storybook visual checks and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/drawer/*`
+  - `packages/presets/src/firstEdition/drawer.css`
+  - `packages/react/src/components/drawer/*`
+  - `packages/vue/src/components/drawer/*`
+  - `packages/svelte/src/lib/components/drawer/*`
+  - `apps/storybook-react/src/stories/drawer/*`
+  - `apps/storybook-vue/src/stories/drawer/*`
+  - `apps/storybook-svelte/src/stories/drawer/*`
+  - `apps/dashboard-teaser/*`
+
 ### REQ-VUE-001: Vue Adapter Package (`@marwes-ui/vue`)
 - **Problem**: Marwes core and presets are framework-agnostic, but only a React adapter exists, which blocks Vue users from consuming the same components and behaviors.
 - **Scope**:
