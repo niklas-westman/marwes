@@ -1138,3 +1138,43 @@ Use this format when resolving an open decision:
   - `apps/storybook-svelte/`
   - `apps/playground-svelte/`
   - `implementation-svelte.md`
+
+### REQ-BANNER-001: Banner component
+
+- **Status**: implemented
+- **Problem**: Marwes needed a Banner atom for inline, page-level status messaging that supports multiple semantic intents with optional icon, CTA action, and dismissal.
+- **Scope**:
+  - Single token-driven component with five variants: neutral, info, success, warning, error
+  - Horizontal layout with optional leading icon, message text, CTA action slot, and dismiss button
+  - Accessibility: `role="status"` + `aria-live="polite"` for neutral/info/success; `role="alert"` + `aria-live="assertive"` for warning/error
+  - Full light and dark mode support using existing status color tokens
+  - Core recipe exposes `BannerRenderKit` with structured slots (root, content, icon, message, action, dismiss)
+- **Non-goals**:
+  - Multi-line or stacked banner layouts (use Toast or Dialog for complex flows)
+  - Built-in auto-dismiss timer (Banners are persistent; use Toast for transient messages)
+  - Animated entry/exit transitions at the core layer
+- **Acceptance criteria**:
+  - [x] Core recipe returns structured `BannerRenderKit` with correct a11y props per variant
+  - [x] Preset CSS matches Figma tokens for all five variants in light and dark mode
+  - [x] React adapter renders correct structure with `onDismiss`, `action`, `icon` props
+  - [x] Vue adapter emits `dismiss` event and uses named slots (`#action`, `#icon`)
+  - [x] Svelte adapter uses snippet slots and `ondismiss` callback
+  - [x] All adapters share the same visual and behavioral contract
+  - [x] Tests cover variant rendering, a11y roles, slot visibility, dismiss interaction
+  - [x] Stories demonstrate all variants, dark mode, with/without icon and CTA
+- **Validation**:
+  - Unit: `packages/react/src/components/banner/__tests__/`, `packages/vue/src/components/banner/__tests__/`
+  - Visual: Storybook stories in React, Vue, and Svelte apps
+- **Figma references**:
+  - `.figma/marwes/components/banner.json`
+  - `.figma/marwes/pages/-banner/-banner_1593-5094.json` (light)
+  - `.figma/marwes/pages/-banner/-banner-dark_2444-2179.json` (dark)
+- **Files**:
+  - `packages/core/src/components/atoms/banner/`
+  - `packages/presets/src/firstEdition/banner.css`
+  - `packages/react/src/components/banner/`
+  - `packages/vue/src/components/banner/`
+  - `packages/svelte/src/lib/components/banner/`
+  - `apps/storybook-react/src/stories/banner/`
+  - `apps/storybook-vue/src/stories/banner/`
+  - `apps/storybook-svelte/src/stories/banner/`
