@@ -49,6 +49,7 @@ describe("firstEdition drawer css contract", () => {
   it("adds side-aware entrance motion with reduced-motion support", () => {
     const css = readFileSync(drawerCssPath, "utf8")
 
+    expect(css).toContain("--mw-drawer-motion-easing: cubic-bezier(0.22, 0.72, 0.2, 1);")
     expect(css).toContain("@keyframes mw-drawer-slide-in-right")
     expect(css).toContain("transform: translateX(100%);")
     expect(css).toContain("@keyframes mw-drawer-slide-in-left")

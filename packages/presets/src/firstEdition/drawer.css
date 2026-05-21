@@ -14,7 +14,7 @@
   --mw-drawer-shadow: 0 24px 60px color-mix(in srgb, var(--mw-color-text) 18%, transparent);
   --mw-drawer-scrim: color-mix(in srgb, var(--mw-color-text) 42%, transparent);
   --mw-drawer-motion-duration: 180ms;
-  --mw-drawer-motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --mw-drawer-motion-easing: cubic-bezier(0.22, 0.72, 0.2, 1);
 
   position: fixed;
   inset: 0;
