@@ -65,6 +65,10 @@ describe("firstEdition drawer css contract", () => {
     expect(css).toContain("height: 100dvh;")
     expect(css).toContain("border: none;")
     expect(css).toContain("border-radius: 0;")
+    expect(css).toContain("box-shadow: none;")
+    expect(css).toContain(
+      ".mw-drawer--left .mw-drawer__panel,\n  .mw-drawer--right .mw-drawer__panel",
+    )
     expect(css).toContain("position: sticky;")
     expect(css).toContain("top: 0;")
     expect(css).toContain("justify-content: center;")

@@ -187,6 +187,14 @@
     height: 100dvh;
     border: none;
     border-radius: 0;
+    box-shadow: none;
+  }
+
+  .mw-drawer--left .mw-drawer__panel,
+  .mw-drawer--right .mw-drawer__panel {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .mw-drawer__header {
