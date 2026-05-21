@@ -8,7 +8,17 @@ import {
   createPaginationPageRecipe,
   createPaginationRecipe,
 } from "@marwes-ui/core"
-import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  useAttrs,
+  watch,
+} from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -18,6 +28,8 @@ export interface PaginationPropsVue {
   defaultPage?: number
   siblingCount?: number
   boundaryCount?: number
+  maxVisibleItems?: number
+  adaptive?: boolean
   showPrevNext?: boolean
   disabled?: boolean
   previousLabel?: string
@@ -33,6 +45,8 @@ const propKeys = [
   "defaultPage",
   "siblingCount",
   "boundaryCount",
+  "maxVisibleItems",
+  "adaptive",
   "showPrevNext",
   "disabled",
   "previousLabel",
@@ -42,10 +56,17 @@ const propKeys = [
   "id",
 ] as const
 
+function parsePxValue(value: string, fallback: number): number {
+  const parsed = Number.parseFloat(value)
+  return Number.isFinite(parsed) ? parsed : fallback
+}
+
 export const Pagination = defineComponent(
   (props: PaginationPropsVue, { emit }) => {
     const attrs = useAttrs()
     const isControlled = computed(() => props.modelValue !== undefined)
+    const rootElement = ref<HTMLElement>()
+    const adaptiveMaxVisibleItems = ref<number | undefined>(undefined)
     const internalPage = ref(clampPaginationPage(props.defaultPage, props.pageCount))
     const resolvedPage = computed(() =>
       clampPaginationPage(
@@ -74,6 +95,75 @@ export const Pagination = defineComponent(
       emit("page-change", resolved)
     }
 
+    function measureMaxVisibleItems(): void {
+      const root = rootElement.value
+      const parent = root?.parentElement
+      if (!root || !parent || props.adaptive === false || typeof window === "undefined") {
+        adaptiveMaxVisibleItems.value = undefined
+        return
+      }
+
+      const rootStyles = window.getComputedStyle(root)
+      const parentStyles = window.getComputedStyle(parent)
+      const itemSize = parsePxValue(rootStyles.getPropertyValue("--mw-pagination-size"), 32)
+      const itemGap = parsePxValue(rootStyles.getPropertyValue("--mw-pagination-gap"), 2)
+      const sectionGap = parsePxValue(
+        rootStyles.getPropertyValue("--mw-pagination-section-gap"),
+        12,
+      )
+      const parentWidth =
+        parent.getBoundingClientRect().width -
+        parsePxValue(parentStyles.paddingLeft, 0) -
+        parsePxValue(parentStyles.paddingRight, 0)
+
+      if (parentWidth <= 0) {
+        adaptiveMaxVisibleItems.value = undefined
+        return
+      }
+
+      const controls = Array.from(root.querySelectorAll<HTMLElement>(".mw-pagination__control"))
+      const controlWidth = controls.reduce(
+        (total, control) => total + control.getBoundingClientRect().width,
+        0,
+      )
+      const controlGaps = controls.length > 0 ? sectionGap * controls.length : 0
+      const availableItemWidth = Math.max(0, parentWidth - controlWidth - controlGaps)
+      adaptiveMaxVisibleItems.value = Math.max(
+        1,
+        Math.floor((availableItemWidth + itemGap) / (itemSize + itemGap)),
+      )
+    }
+
+    let resizeObserver: ResizeObserver | undefined
+    let frame = 0
+    const requestMeasure = () => {
+      if (typeof window === "undefined") return
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(measureMaxVisibleItems)
+    }
+
+    onMounted(() => {
+      nextTick(requestMeasure)
+      const root = rootElement.value
+      const parent = root?.parentElement
+      if (typeof window !== "undefined" && window.ResizeObserver && root && parent) {
+        resizeObserver = new window.ResizeObserver(requestMeasure)
+        resizeObserver.observe(parent)
+        resizeObserver.observe(root)
+      }
+      if (typeof window !== "undefined") window.addEventListener("resize", requestMeasure)
+    })
+
+    onBeforeUnmount(() => {
+      if (typeof window !== "undefined") {
+        window.cancelAnimationFrame(frame)
+        window.removeEventListener("resize", requestMeasure)
+      }
+      resizeObserver?.disconnect()
+    })
+
+    watch(() => props.adaptive, requestMeasure)
+
     return () => {
       const previousLabel = props.previousLabel ?? "Previous"
       const nextLabel = props.nextLabel ?? "Next"
@@ -82,6 +172,7 @@ export const Pagination = defineComponent(
         pageCount: props.pageCount,
         siblingCount: props.siblingCount,
         boundaryCount: props.boundaryCount,
+        maxVisibleItems: props.maxVisibleItems ?? adaptiveMaxVisibleItems.value,
         showPrevNext: props.showPrevNext,
         disabled: props.disabled,
         ariaLabel: props.ariaLabel,
@@ -111,6 +202,7 @@ export const Pagination = defineComponent(
         {
           ...passthroughAttrs,
           id: props.id,
+          ref: rootElement,
           class: className,
           "aria-label": rootKit.a11y.ariaLabel,
           "data-component": "pagination",

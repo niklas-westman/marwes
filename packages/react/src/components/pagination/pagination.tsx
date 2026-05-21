@@ -19,6 +19,8 @@ export interface PaginationProps
   onPageChange?: (page: number) => void
   siblingCount?: number
   boundaryCount?: number
+  maxVisibleItems?: number
+  adaptive?: boolean
   showPrevNext?: boolean
   disabled?: boolean
   previousLabel?: string
@@ -34,6 +36,8 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     onPageChange,
     siblingCount,
     boundaryCount,
+    maxVisibleItems,
+    adaptive = true,
     showPrevNext,
     disabled,
     previousLabel = "Previous",
@@ -45,6 +49,8 @@ export function Pagination(props: PaginationProps): React.ReactElement {
   } = props
 
   const isControlled = controlledPage !== undefined
+  const rootRef = React.useRef<HTMLElement>(null)
+  const adaptiveMaxVisibleItems = useAdaptiveMaxVisibleItems(rootRef, adaptive)
   const [internalPage, setInternalPage] = React.useState(() =>
     clampPaginationPage(defaultPage, pageCount),
   )
@@ -54,6 +60,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     pageCount,
     siblingCount,
     boundaryCount,
+    maxVisibleItems: maxVisibleItems ?? adaptiveMaxVisibleItems,
     showPrevNext,
     disabled,
     ariaLabel,
@@ -94,6 +101,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
   return (
     <nav
       {...rest}
+      ref={rootRef}
       id={id}
       className={rootClassName}
       aria-label={rootKit.a11y.ariaLabel}
@@ -174,4 +182,81 @@ export function Pagination(props: PaginationProps): React.ReactElement {
       )}
     </nav>
   )
+}
+
+function parsePxValue(value: string, fallback: number): number {
+  const parsed = Number.parseFloat(value)
+  return Number.isFinite(parsed) ? parsed : fallback
+}
+
+function useAdaptiveMaxVisibleItems(
+  rootRef: React.RefObject<HTMLElement | null>,
+  adaptive: boolean,
+): number | undefined {
+  const [maxVisibleItems, setMaxVisibleItems] = React.useState<number | undefined>(undefined)
+
+  React.useLayoutEffect(() => {
+    const root = rootRef.current
+    if (!adaptive || !root || typeof window === "undefined") {
+      setMaxVisibleItems(undefined)
+      return
+    }
+
+    const parent = root.parentElement
+    if (!parent) return
+
+    let frame = 0
+    const measure = () => {
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => {
+        const rootStyles = window.getComputedStyle(root)
+        const parentStyles = window.getComputedStyle(parent)
+        const itemSize = parsePxValue(rootStyles.getPropertyValue("--mw-pagination-size"), 32)
+        const itemGap = parsePxValue(rootStyles.getPropertyValue("--mw-pagination-gap"), 2)
+        const sectionGap = parsePxValue(
+          rootStyles.getPropertyValue("--mw-pagination-section-gap"),
+          12,
+        )
+        const parentWidth =
+          parent.getBoundingClientRect().width -
+          parsePxValue(parentStyles.paddingLeft, 0) -
+          parsePxValue(parentStyles.paddingRight, 0)
+        if (parentWidth <= 0) {
+          setMaxVisibleItems(undefined)
+          return
+        }
+        const controls = Array.from(root.querySelectorAll<HTMLElement>(".mw-pagination__control"))
+        const controlWidth = controls.reduce(
+          (total, control) => total + control.getBoundingClientRect().width,
+          0,
+        )
+        const controlGaps = controls.length > 0 ? sectionGap * controls.length : 0
+        const availableItemWidth = Math.max(0, parentWidth - controlWidth - controlGaps)
+        const nextMaxVisibleItems = Math.max(
+          1,
+          Math.floor((availableItemWidth + itemGap) / (itemSize + itemGap)),
+        )
+
+        setMaxVisibleItems((previous) =>
+          previous === nextMaxVisibleItems ? previous : nextMaxVisibleItems,
+        )
+      })
+    }
+
+    measure()
+
+    const Observer = window.ResizeObserver
+    const resizeObserver = Observer ? new Observer(measure) : undefined
+    resizeObserver?.observe(parent)
+    resizeObserver?.observe(root)
+    window.addEventListener("resize", measure)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      resizeObserver?.disconnect()
+      window.removeEventListener("resize", measure)
+    }
+  }, [adaptive, rootRef])
+
+  return maxVisibleItems
 }

@@ -9,6 +9,7 @@
     createPaginationPageRecipe,
     createPaginationRecipe,
   } from "@marwes-ui/core";
+  import { onMount } from "svelte";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
   import type { PaginationProps } from "./types.js";
@@ -19,6 +20,8 @@
     defaultPage,
     siblingCount,
     boundaryCount,
+    maxVisibleItems,
+    adaptive = true,
     showPrevNext,
     disabled,
     previousLabel = "Previous",
@@ -30,6 +33,8 @@
   }: PaginationProps = $props();
 
   let internalPage = $state<number | undefined>(undefined);
+  let rootElement = $state<HTMLElement | undefined>(undefined);
+  let adaptiveMaxVisibleItems = $state<number | undefined>(undefined);
 
   const resolvedPage = $derived(
     clampPaginationPage(page !== undefined ? page : internalPage, pageCount)
@@ -55,12 +60,85 @@
     onpagechange?.(resolved);
   }
 
+  function parsePxValue(value: string, fallback: number): number {
+    const parsed = Number.parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  }
+
+  function measureMaxVisibleItems(): void {
+    const parent = rootElement?.parentElement;
+    if (!rootElement || !parent || adaptive === false || typeof window === "undefined") {
+      adaptiveMaxVisibleItems = undefined;
+      return;
+    }
+
+    const rootStyles = window.getComputedStyle(rootElement);
+    const parentStyles = window.getComputedStyle(parent);
+    const itemSize = parsePxValue(rootStyles.getPropertyValue("--mw-pagination-size"), 32);
+    const itemGap = parsePxValue(rootStyles.getPropertyValue("--mw-pagination-gap"), 2);
+    const sectionGap = parsePxValue(
+      rootStyles.getPropertyValue("--mw-pagination-section-gap"),
+      12
+    );
+    const parentWidth =
+      parent.getBoundingClientRect().width -
+      parsePxValue(parentStyles.paddingLeft, 0) -
+      parsePxValue(parentStyles.paddingRight, 0);
+
+    if (parentWidth <= 0) {
+      adaptiveMaxVisibleItems = undefined;
+      return;
+    }
+
+    const controls = Array.from(rootElement.querySelectorAll<HTMLElement>(".mw-pagination__control"));
+    const controlWidth = controls.reduce(
+      (total, control) => total + control.getBoundingClientRect().width,
+      0
+    );
+    const controlGaps = controls.length > 0 ? sectionGap * controls.length : 0;
+    const availableItemWidth = Math.max(0, parentWidth - controlWidth - controlGaps);
+    adaptiveMaxVisibleItems = Math.max(
+      1,
+      Math.floor((availableItemWidth + itemGap) / (itemSize + itemGap))
+    );
+  }
+
+  function requestMeasure(): void {
+    if (typeof window === "undefined") return;
+    window.requestAnimationFrame(measureMaxVisibleItems);
+  }
+
+  onMount(() => {
+    requestMeasure();
+
+    const parent = rootElement?.parentElement;
+    const resizeObserver =
+      typeof window !== "undefined" && window.ResizeObserver && rootElement && parent
+        ? new window.ResizeObserver(requestMeasure)
+        : undefined;
+
+    if (rootElement) resizeObserver?.observe(rootElement);
+    if (parent) resizeObserver?.observe(parent);
+    window.addEventListener("resize", requestMeasure);
+
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", requestMeasure);
+    };
+  });
+
+  $effect(() => {
+    adaptive;
+    requestMeasure();
+  });
+
   const rootKit = $derived(
     createPaginationRecipe({
       page: resolvedPage,
       pageCount,
       siblingCount,
       boundaryCount,
+      maxVisibleItems: maxVisibleItems ?? adaptiveMaxVisibleItems,
       showPrevNext,
       disabled,
       ariaLabel,
@@ -91,6 +169,7 @@
 
 <nav
   {id}
+  bind:this={rootElement}
   class={mergedClass}
   aria-label={rootKit.a11y.ariaLabel}
   data-component="pagination"

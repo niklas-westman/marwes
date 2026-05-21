@@ -31,6 +31,40 @@ describe("pagination recipe", () => {
     ])
   })
 
+  it("reduces sibling pages to stay within a max visible item count", () => {
+    expect(
+      createPaginationItems({ page: 7, pageCount: 10, siblingCount: 2, maxVisibleItems: 5 }),
+    ).toEqual([
+      { type: "page", page: 1, key: "page-1", selected: false },
+      { type: "ellipsis", key: "ellipsis-start" },
+      { type: "page", page: 7, key: "page-7", selected: true },
+      { type: "ellipsis", key: "ellipsis-end" },
+      { type: "page", page: 10, key: "page-10", selected: false },
+    ])
+  })
+
+  it("keeps the requested range when it already fits max visible items", () => {
+    expect(
+      createPaginationItems({ page: 1, pageCount: 10, siblingCount: 2, maxVisibleItems: 5 }),
+    ).toEqual([
+      { type: "page", page: 1, key: "page-1", selected: true },
+      { type: "page", page: 2, key: "page-2", selected: false },
+      { type: "page", page: 3, key: "page-3", selected: false },
+      { type: "ellipsis", key: "ellipsis-end" },
+      { type: "page", page: 10, key: "page-10", selected: false },
+    ])
+  })
+
+  it("can compact below the ellipsis-rich range for very narrow containers", () => {
+    expect(
+      createPaginationItems({ page: 7, pageCount: 10, siblingCount: 2, maxVisibleItems: 3 }),
+    ).toEqual([
+      { type: "page", page: 1, key: "page-1", selected: false },
+      { type: "page", page: 7, key: "page-7", selected: true },
+      { type: "page", page: 10, key: "page-10", selected: false },
+    ])
+  })
+
   it("does not render ellipses for small page counts", () => {
     expect(createPaginationItems({ page: 2, pageCount: 4 }).map((item) => item.key)).toEqual([
       "page-1",

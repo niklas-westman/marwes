@@ -4,6 +4,8 @@ export interface PaginationProps {
   defaultPage?: number
   siblingCount?: number
   boundaryCount?: number
+  maxVisibleItems?: number
+  adaptive?: boolean
   showPrevNext?: boolean
   disabled?: boolean
   previousLabel?: string

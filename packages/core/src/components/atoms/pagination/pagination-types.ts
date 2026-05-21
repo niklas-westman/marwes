@@ -15,6 +15,7 @@ export interface PaginationOptions {
   pageCount: number
   siblingCount?: number
   boundaryCount?: number
+  maxVisibleItems?: number
   showPrevNext?: boolean
   disabled?: boolean
   ariaLabel?: string
