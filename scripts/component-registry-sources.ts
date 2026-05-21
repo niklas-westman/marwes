@@ -216,6 +216,44 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  banner: createRegistryFamilySource({
+    family: "banner",
+    contractPaths: [],
+    figma: {
+      componentJsons: [".figma/marwes/components/banner.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-banner/-banner_1593-5094.json",
+        ".figma/marwes/pages/-banner/-banner-dark_2444-2179.json",
+        ".figma/marwes/pages/-banner/overall-status_1730-4164.json",
+        ".figma/marwes/pages/-banner/examples_1593-7192.json",
+      ],
+      nodeReferences: {
+        bannerComponent: "1593:5080",
+        bannerLightFrame: "1593:5094",
+        bannerDarkFrame: "2444:2179",
+      },
+      figmaTokens: ["banner/surface", "banner/border", "banner/icon"],
+      figmaStates: {
+        baseVariants: ["neutral", "info", "success", "warning", "error"],
+        interactionStates: [
+          "light",
+          "dark",
+          "with-icon",
+          "without-icon",
+          "with-cta",
+          "dismissible",
+        ],
+      },
+    },
+  }),
   button: createRegistryFamilySource({
     family: "button",
     contractPaths: ["tests/contracts/button.contract.ts"],
@@ -1742,6 +1780,46 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       figmaStates: {
         baseVariants: ["tooltip", "tooltip-group"],
         interactionStates: ["open", "closed", "hover", "focus", "escape-dismiss", "light", "dark"],
+      },
+    },
+  }),
+  "segmented-control": createRegistryFamilySource({
+    family: "segmented-control",
+    contractPaths: [],
+    figma: {
+      componentJsons: [".figma/marwes/components/segmented-control.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-segmented-control/-segmented-control_1571-19406.json",
+        ".figma/marwes/pages/-segmented-control/segmented-control_1571-19333.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29116.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29118.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29119.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29120.json",
+      ],
+      nodeReferences: {
+        segmentedControlComponentSet: "1571:19333",
+        segmentedControlShowcaseFrame: "1571:19406",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: [
+          "2-segments",
+          "3-segments",
+          "4-segments",
+          "icon",
+          "no-icon",
+          "inverse",
+          "default",
+        ],
+        interactionStates: ["active", "inactive", "disabled", "hover", "focus"],
       },
     },
   }),
