@@ -1,0 +1,68 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Banner/Introduction" />
+
+# Banner
+
+A persistent, page-level status message component for inline announcements,
+system updates, or required actions.
+
+## Usage
+
+```tsx
+import { Banner } from "@marwes-ui/react"
+
+// Basic info banner
+<Banner variant="info">
+  Your account has been updated successfully.
+</Banner>
+
+// With CTA action
+<Banner variant="warning" action={<Button size="sm">Review</Button>}>
+  Your subscription expires in 3 days.
+</Banner>
+
+// Dismissible with callback
+<Banner variant="success" onDismiss={() => setVisible(false)}>
+  Changes saved.
+</Banner>
+
+// Without icon
+<Banner variant="neutral" showIcon={false}>
+  Maintenance scheduled for tonight.
+</Banner>
+```
+
+## Variants
+
+| Variant | Use for | a11y role |
+| --- | --- | --- |
+| `neutral` | General announcements | `status` (polite) |
+| `info` | Informational messages | `status` (polite) |
+| `success` | Positive confirmations | `status` (polite) |
+| `warning` | Caution, upcoming deadlines | `alert` (assertive) |
+| `error` | Errors, critical issues | `alert` (assertive) |
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `BannerVariant` | `"neutral"` | Visual intent |
+| `showIcon` | `boolean` | `true` | Show leading icon |
+| `dismissible` | `boolean` | `true` | Show close button |
+| `action` | `ReactNode` | — | CTA slot content |
+| `icon` | `ReactNode` | — | Custom icon (defaults to info circle) |
+| `onDismiss` | `() => void` | — | Close button callback |
+| `ariaLabel` | `string` | — | Accessible label for the banner region |
+
+## When to use
+
+- **Banner**: Persistent page-level messages that stay until dismissed
+- **Toast**: Transient feedback that auto-dismisses
+- **Dialog**: Blocking confirmations that require user action
+
+## Figma
+
+Single token-driven component. Color → Banner states · Toggle Show icon / Show CTA / Show Close.
+
+Reference: `.figma/marwes/components/banner.json`
