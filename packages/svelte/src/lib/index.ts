@@ -167,6 +167,10 @@ export type { AvatarProps } from "./components/avatar/types.js"
 export { default as DatePicker } from "./components/date-picker/DatePicker.svelte"
 export type { DatePickerProps } from "./components/date-picker/types.js"
 
+// Drawer
+export { default as Drawer } from "./components/drawer/Drawer.svelte"
+export type { DrawerPlacement, DrawerProps, DrawerSize } from "./components/drawer/types.js"
+
 // Skeleton
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte"
 export type { SkeletonProps } from "./components/skeleton/types.js"

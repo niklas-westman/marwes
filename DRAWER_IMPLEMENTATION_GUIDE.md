@@ -19,7 +19,7 @@ This guide MUST be updated during implementation:
 - [ ] Update test coverage map as tests are written
 
 **Last updated:** 2026-05-21
-**Current phase:** 6
+**Current phase:** 7
 
 ---
 
@@ -253,7 +253,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 - [x] React tests pass.
 - [ ] React typecheck passes. Blocked by pre-existing `packages/react/src/components/banner/__tests__/contract.test.tsx` `vi.fn()` type mismatch.
 - [x] React Storybook tests pass.
-- [ ] Commit created.
+- [x] Commit created.
 
 ### Phase 5: Vue Adapter And Stories
 
@@ -296,7 +296,7 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 **Goal:** Expose Drawer through `@marwes-ui/svelte` and Svelte Storybook.
 **Depends on:** Phase 5
-**Status:** In progress
+**Status:** Complete
 
 #### Outputs
 
@@ -308,10 +308,10 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Tasks
 
-- [ ] Implement Svelte Drawer against the core recipe.
-- [ ] Add close event support.
-- [ ] Add Svelte stories for the same states as React/Vue.
-- [ ] Update Svelte exports.
+- [x] Implement Svelte Drawer against the core recipe.
+- [x] Add close event support.
+- [x] Add Svelte stories for the same states as React/Vue.
+- [x] Update Svelte exports.
 
 #### Tests For This Phase
 
@@ -323,15 +323,15 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] Svelte tests/typecheck pass.
-- [ ] Svelte Storybook tests pass.
+- [x] Svelte tests/typecheck pass.
+- [x] Svelte Storybook tests pass.
 - [ ] Commit created.
 
 ### Phase 7: Dashboard Teaser Replacement
 
 **Goal:** Remove app-local drawer implementation/usage and consume the real React Drawer.
 **Depends on:** Phase 4
-**Status:** Not started
+**Status:** In progress
 
 #### Outputs
 
@@ -416,8 +416,8 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 | Preset | Complete | pass | pass | Theme variable contract |
 | React | Complete | pass | blocked | Package typecheck blocked by pre-existing banner test typing issue |
 | Vue | Complete | pass | pass | Parity adapter |
-| Svelte | In progress | pending | pending | Parity adapter |
-| Dashboard teaser | Not started | pending | pending | Replace local usage |
+| Svelte | Complete | pass | pass | Parity adapter |
+| Dashboard teaser | In progress | pending | pending | Replace local usage |
 
 ---
 
@@ -482,8 +482,8 @@ pnpm check:repo-map
 | 3 | Preset CSS And Theme Variables | Complete | pass | pass | 2026-05-21 |
 | 4 | React Adapter And Stories | Complete | pass | blocked | 2026-05-21 |
 | 5 | Vue Adapter And Stories | Complete | pass | pass | 2026-05-21 |
-| 6 | Svelte Adapter And Stories | In progress | pending | pending | - |
-| 7 | Dashboard Teaser Replacement | Not started | pending | pending | - |
+| 6 | Svelte Adapter And Stories | Complete | pass | pass | 2026-05-21 |
+| 7 | Dashboard Teaser Replacement | In progress | pending | pending | - |
 | 8 | Registry, Docs, And Full Validation | Not started | pending | pending | - |
 
 ---

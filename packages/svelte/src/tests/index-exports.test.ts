@@ -61,6 +61,7 @@ describe("Public API exports", () => {
       "ConfirmDialog",
       "DestructiveDialog",
       "InfoDialog",
+      "Drawer",
       "Divider",
       "H1",
       "H2",
