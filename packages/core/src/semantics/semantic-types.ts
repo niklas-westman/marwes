@@ -71,6 +71,13 @@ export const toastPurposes = [
   "info-toast",
 ] as const
 
+export const bannerPurposes = [
+  "info-banner",
+  "success-banner",
+  "warning-banner",
+  "error-banner",
+] as const
+
 export const dialogPurposes = ["confirm-dialog", "destructive-dialog", "info-dialog"] as const
 
 export const semanticPurposes = [
@@ -78,6 +85,7 @@ export const semanticPurposes = [
   ...badgePurposes,
   ...avatarPurposes,
   ...toastPurposes,
+  ...bannerPurposes,
   ...dialogPurposes,
 ] as const
 export type SemanticPurpose = (typeof semanticPurposes)[number]

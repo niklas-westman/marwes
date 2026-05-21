@@ -7,6 +7,7 @@ export { familySemanticsRegistry } from "./family-semantics"
 export {
   avatarPurposeSemantics,
   badgePurposeSemantics,
+  bannerPurposeSemantics,
   buttonPurposeSemantics,
   dialogPurposeSemantics,
   purposeSemanticsRegistry,
@@ -22,6 +23,7 @@ export { validateSemanticRegistry } from "./semantic-validators"
 export {
   avatarPurposes,
   badgePurposes,
+  bannerPurposes,
   buttonPurposes,
   canonicalSemanticAttributeNames,
   dialogPurposes,

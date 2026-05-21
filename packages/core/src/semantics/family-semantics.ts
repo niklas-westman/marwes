@@ -48,9 +48,9 @@ export const familySemanticsRegistry = {
       "data-component": "banner",
     },
     canonicalAttributes: ["data-component", "data-variant"],
-    allowedPurposes: [],
+    allowedPurposes: ["info-banner", "success-banner", "warning-banner", "error-banner"],
     notes:
-      "Banner is a single-atom family with no purpose variants. Variant controls color intent only.",
+      "Banner is a single-atom family with thin purpose variants that preset the variant prop and emit canonical data-purpose metadata.",
   },
   avatar: {
     family: "avatar",

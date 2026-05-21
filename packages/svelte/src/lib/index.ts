@@ -86,6 +86,10 @@ export type { BadgeProps, BadgeGroupProps } from "./components/badge/types.js"
 
 // Banner
 export { default as Banner } from "./components/banner/Banner.svelte"
+export { default as InfoBanner } from "./components/banner/InfoBanner.svelte"
+export { default as SuccessBanner } from "./components/banner/SuccessBanner.svelte"
+export { default as WarningBanner } from "./components/banner/WarningBanner.svelte"
+export { default as ErrorBanner } from "./components/banner/ErrorBanner.svelte"
 export type { BannerProps } from "./components/banner/types.js"
 
 // Card

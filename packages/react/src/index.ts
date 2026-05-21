@@ -310,8 +310,14 @@ export type {
 } from "./components/badge"
 
 /* Banner */
-export { Banner } from "./components/banner"
-export type { BannerProps } from "./components/banner"
+export { Banner, InfoBanner, SuccessBanner, WarningBanner, ErrorBanner } from "./components/banner"
+export type {
+  BannerProps,
+  InfoBannerProps,
+  SuccessBannerProps,
+  WarningBannerProps,
+  ErrorBannerProps,
+} from "./components/banner"
 export { BannerVariant } from "@marwes-ui/core"
 
 /* Switch */

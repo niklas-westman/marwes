@@ -304,6 +304,49 @@ export const toastPurposeSemantics = {
   },
 } satisfies Record<string, PurposeSemanticDefinition>
 
+export const bannerPurposeSemantics = {
+  infoBanner: {
+    purpose: "info-banner",
+    family: "banner",
+    layer: "purpose",
+    attributes: {
+      "data-purpose": "info-banner",
+      "data-intent": "info",
+    },
+    supportedFrameworks: frameworks,
+  },
+  successBanner: {
+    purpose: "success-banner",
+    family: "banner",
+    layer: "purpose",
+    attributes: {
+      "data-purpose": "success-banner",
+      "data-intent": "success",
+    },
+    supportedFrameworks: frameworks,
+  },
+  warningBanner: {
+    purpose: "warning-banner",
+    family: "banner",
+    layer: "purpose",
+    attributes: {
+      "data-purpose": "warning-banner",
+      "data-intent": "warning",
+    },
+    supportedFrameworks: frameworks,
+  },
+  errorBanner: {
+    purpose: "error-banner",
+    family: "banner",
+    layer: "purpose",
+    attributes: {
+      "data-purpose": "error-banner",
+      "data-intent": "error",
+    },
+    supportedFrameworks: frameworks,
+  },
+} satisfies Record<string, PurposeSemanticDefinition>
+
 export const dialogPurposeSemantics = {
   confirmDialog: {
     purpose: "confirm-dialog",
@@ -344,5 +387,6 @@ export const purposeSemanticsRegistry = {
   ...badgePurposeSemantics,
   ...avatarPurposeSemantics,
   ...toastPurposeSemantics,
+  ...bannerPurposeSemantics,
   ...dialogPurposeSemantics,
 } satisfies Record<string, PurposeSemanticDefinition>
