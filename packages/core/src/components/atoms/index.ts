@@ -19,6 +19,8 @@ export * from "./tooltip"
 export type { TooltipOptions, TooltipRenderKit } from "./tooltip"
 export * from "./badge"
 export type { BadgeOptions, BadgeRenderKit } from "./badge"
+export * from "./banner"
+export type { BannerOptions, BannerRenderKit, BannerA11yProps } from "./banner"
 export * from "./button"
 export * from "./radio"
 export type { RadioOptions, RadioRenderKit } from "./radio"
@@ -104,3 +106,13 @@ export type {
 } from "./paragraph"
 export type { TabOptions, TabRenderKit, TabGroupA11yIds, TabGroupItemState } from "./tab"
 export type { SpacingOptions, SpacingRenderKit, SpacingSize } from "./spacing"
+export * from "./segmented-control"
+export type {
+  SegmentedControlOptions,
+  SegmentedControlItemOptions,
+  SegmentedControlItemState,
+  SegmentedControlRenderKit,
+  SegmentedControlItemRenderKit,
+  SegmentedControlVariant,
+  SegmentedControlSize,
+} from "./segmented-control"

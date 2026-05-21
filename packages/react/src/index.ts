@@ -309,6 +309,11 @@ export type {
   NotificationBadgeProps,
 } from "./components/badge"
 
+/* Banner */
+export { Banner } from "./components/banner"
+export type { BannerProps } from "./components/banner"
+export { BannerVariant } from "@marwes-ui/core"
+
 /* Switch */
 export {
   Switch,
@@ -360,6 +365,10 @@ export type {
   ContentTabsProps,
   SettingsTabsProps,
 } from "./components/tab"
+
+/* Segmented Control */
+export { SegmentedControl } from "./components/segmented-control"
+export type { SegmentedControlProps, SegmentedControlItem } from "./components/segmented-control"
 
 /* Dialog */
 export {
