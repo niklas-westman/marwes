@@ -29,9 +29,22 @@
   font-size: var(--mw-density-font-size);
   font-weight: 500;
   line-height: 0;
+  min-inline-size: 0;
   cursor: pointer;
   user-select: none;
   transition: all 150ms ease;
+}
+
+.mw-btn__label {
+  display: block;
+  line-height: 1;
+  min-inline-size: 0;
+}
+
+.mw-btn[data-has-affordance="true"] .mw-btn__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* FOCUS STATE - Figma spec: 2px white space + 2px Accessible blue outline */

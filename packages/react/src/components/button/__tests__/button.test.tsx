@@ -141,6 +141,8 @@ describe("React adapter specifics: Button", () => {
     expect(spinnerElement?.getAttribute("style")).toContain(
       "--mw-spinner-indicator-color: currentColor",
     )
+    expect(buttonElement).toHaveAttribute("data-has-affordance", "true")
+    expect(buttonElement.querySelector(".mw-btn__label")).toHaveTextContent("Saving")
     expect(buttonElement.querySelector(".mw-icon")).toBeNull()
   })
 

@@ -23,6 +23,8 @@
   --mw-sc-font-size: var(--mw-density-font-size, 14px);
 
   display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
   gap: var(--mw-sc-gap);
   padding: var(--mw-sc-padding);
   background: var(--mw-sc-track);

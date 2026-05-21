@@ -14,6 +14,10 @@ function isFilledButtonVariant(variant: ButtonVariant): boolean {
   return variant === "primary" || variant === "success"
 }
 
+function hasSlotChildren(slotChildren: ReturnType<typeof getDefaultSlotChildren>): boolean {
+  return slotChildren !== undefined && slotChildren.length > 0
+}
+
 export type ButtonProps = ButtonOptions & {
   onClick?: (event: MouseEvent) => void
   className?: string
@@ -75,9 +79,9 @@ export const Button = defineComponent(
       }
 
       if (resolvedLoading.isLoading && resolvedLoading.loadingLabel !== undefined) {
-        content.push(resolvedLoading.loadingLabel)
-      } else if (slotChildren) {
-        content.push(...slotChildren)
+        content.push(h("span", { class: "mw-btn__label" }, resolvedLoading.loadingLabel))
+      } else if (hasSlotChildren(slotChildren)) {
+        content.push(h("span", { class: "mw-btn__label" }, slotChildren))
       }
 
       if (!resolvedLoading.isLoading && props.iconRight) {

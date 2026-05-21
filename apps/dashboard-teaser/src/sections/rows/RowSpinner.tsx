@@ -1,4 +1,4 @@
-import { Spinner } from "@marwes-ui/react"
+import { Button, Spinner } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -65,22 +65,8 @@ const ButtonRow = styled.div`
   gap: 16px;
 `
 
-const SpinnerButton = styled.button<{ $loading?: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 8px;
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-  border: 1px solid var(--mw-color-border, #e5e5e5);
-  background: var(--mw-color-surface, #ffffff);
-  color: var(--mw-color-text, #141414);
-  opacity: ${(p) => (p.$loading ? 0.7 : 1)};
+const SpinnerButtonPreview = styled(Button)`
+  cursor: default;
 `
 
 type SpinnerVariantKey =
@@ -104,22 +90,34 @@ const VARIANTS: { key: SpinnerVariantKey; label: string }[] = [
 
 function RowSpinner(): JSX.Element {
   const [activeVariant, setActiveVariant] = useState<SpinnerVariantKey>("ring")
-  const [loadingA, setLoadingA] = useState(true)
-  const [loadingB, setLoadingB] = useState(true)
 
   return (
     <RowContainer>
       <LeftCard>
         <SectionLabel>Spinner</SectionLabel>
         <ButtonRow>
-          <SpinnerButton type="button" $loading={loadingA} onClick={() => setLoadingA((v) => !v)}>
-            {loadingA && <Spinner variant={activeVariant} size="sm" />}
-            {loadingA ? "Loading…" : "Done!"}
-          </SpinnerButton>
-          <SpinnerButton type="button" $loading={loadingB} onClick={() => setLoadingB((v) => !v)}>
-            {loadingB && <Spinner variant={activeVariant} size="sm" />}
-            {loadingB ? "Please wait" : "Complete"}
-          </SpinnerButton>
+          <SpinnerButtonPreview
+            variant="secondary"
+            loading={{
+              isLoading: true,
+              disableWhileLoading: false,
+              spinnerVariant: activeVariant,
+              loadingLabel: "Loading…",
+            }}
+          >
+            Done!
+          </SpinnerButtonPreview>
+          <SpinnerButtonPreview
+            variant="secondary"
+            loading={{
+              isLoading: true,
+              disableWhileLoading: false,
+              spinnerVariant: activeVariant,
+              loadingLabel: "Please wait",
+            }}
+          >
+            Complete
+          </SpinnerButtonPreview>
         </ButtonRow>
       </LeftCard>
       <RightCard>

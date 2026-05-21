@@ -37,4 +37,17 @@ describe("firstEdition button css contract", () => {
     expect(css).toContain("text-decoration: underline;")
     expect(css).toContain("text-underline-offset: 2px;")
   })
+
+  it("truncates the label slot when an icon or spinner affordance is present", () => {
+    const css = readFileSync(buttonCssPath, "utf8")
+
+    expect(css).toContain(".mw-btn__label")
+    expect(css).toContain('.mw-btn[data-has-affordance="true"] .mw-btn__label')
+    expect(css).toContain("display: block;")
+    expect(css).toContain("line-height: 1;")
+    expect(css).toContain("min-inline-size: 0;")
+    expect(css).toContain("overflow: hidden;")
+    expect(css).toContain("text-overflow: ellipsis;")
+    expect(css).toContain("white-space: nowrap;")
+  })
 })

@@ -10,6 +10,12 @@ function isFilledButtonVariant(variant: ButtonVariant): boolean {
   return variant === "primary" || variant === "success"
 }
 
+function hasRenderableLabel(label: React.ReactNode): boolean {
+  if (label === undefined || label === null || label === false) return false
+  if (typeof label === "string") return label.length > 0
+  return true
+}
+
 export type ButtonProps = ButtonOptions & {
   children?: React.ReactNode
   onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void
@@ -39,7 +45,9 @@ export function Button(props: ButtonProps) {
       ) : props.iconLeft ? (
         <Icon name={props.iconLeft} size="xs" strokeWidth="sm" decorative />
       ) : null}
-      {visibleLabel}
+      {hasRenderableLabel(visibleLabel) ? (
+        <span className="mw-btn__label">{visibleLabel}</span>
+      ) : null}
       {!resolvedLoading.isLoading && props.iconRight ? (
         <Icon name={props.iconRight} size="xs" strokeWidth="sm" decorative />
       ) : null}

@@ -7,6 +7,15 @@ const pkgDir = resolve(fileURLToPath(new URL("..", import.meta.url)))
 const segmentedControlCssPath = resolve(pkgDir, "src/firstEdition/segmented-control.css")
 
 describe("firstEdition segmented-control css contract", () => {
+  it("keeps the track sized to its content in stretching parent layouts", () => {
+    const css = readFileSync(segmentedControlCssPath, "utf8")
+    const rootBlock = css.match(/\.mw-segmented-control\s*\{[^}]+\}/)?.[0]
+
+    expect(rootBlock).toContain("display: inline-flex;")
+    expect(rootBlock).toContain("inline-size: fit-content;")
+    expect(rootBlock).toContain("max-inline-size: 100%;")
+  })
+
   it("keeps nested item content from stealing the button hit target", () => {
     const css = readFileSync(segmentedControlCssPath, "utf8")
 
@@ -35,7 +44,7 @@ describe("firstEdition segmented-control css contract", () => {
   it("uses theme text for hover instead of selected text", () => {
     const css = readFileSync(segmentedControlCssPath, "utf8")
     const hoverBlock = css.match(
-      /\.mw-segmented-control__item:hover:not\(:disabled\):not\(\.mw-segmented-control__item--disabled\):not\(\.mw-segmented-control__item--selected\)\s*\{[^}]+\}/,
+      /\.mw-segmented-control__item:hover:not\(:disabled\):not\(\.mw-segmented-control__item--disabled\):not\(\s*\.mw-segmented-control__item--selected\s*\)\s*\{[^}]+\}/,
     )?.[0]
 
     expect(css).toContain("--mw-sc-item-hover-text: var(--mw-color-text, #141414);")

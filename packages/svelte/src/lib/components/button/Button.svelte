@@ -43,9 +43,11 @@
     <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
   {/if}
   {#if visibleLabel}
-    {visibleLabel}
-  {:else}
-    {@render children?.()}
+    <span class="mw-btn__label">{visibleLabel}</span>
+  {:else if children}
+    <span class="mw-btn__label">
+      {@render children()}
+    </span>
   {/if}
   {#if !kit.loading.isLoading && options.iconRight}
     <Icon name={options.iconRight} size="xs" strokeWidth="sm" decorative />

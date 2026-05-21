@@ -22,8 +22,9 @@ flowchart TD
   Vue --> VueStories[Add Vue stories and tests]
   VueStories --> Svelte[Add Svelte adapter]
   Svelte --> SvelteStories[Add Svelte stories and tests]
-  SvelteStories --> Exports[Update exports and changeset]
-  Exports --> Verify[Typecheck, lint, test, build]
+  SvelteStories --> Metadata[Update registry, trust artifacts, docs metadata]
+  Metadata --> Exports[Update exports and changeset]
+  Exports --> Verify[Run repo validation]
 ```
 
 ## Before you start
@@ -162,7 +163,59 @@ Update exports in the affected packages:
 - `packages/core/src/index.ts`
 - `packages/react/src/index.ts`
 - `packages/vue/src/index.ts`
+- `packages/svelte/src/lib/index.ts`
 - package-local `index.ts` files
+
+## Generated metadata and docs gates
+
+New components must be wired into the repo metadata that pre-push checks enforce. Do this while adding the component, not after the hook fails.
+
+Update the relevant sources before running generators:
+
+- trust artifacts: `scripts/generate-trust-artifacts.ts`
+- component registry sources: `scripts/component-registry-sources.ts`
+- Storybook companion configuration when the family needs canonical story title overrides: `.pi/storybook-companion.config.ts`
+- framework parity inputs when a new adapter or story coverage changes framework support
+
+Then regenerate and check:
+
+```bash
+pnpm artifacts:generate
+pnpm registry:generate
+pnpm parity:summary
+pnpm artifacts:check
+pnpm registry:check
+pnpm parity:summary:check
+pnpm storybook:consistency
+```
+
+If generated JSON or Markdown changes, format it with Biome before committing:
+
+```bash
+pnpm exec biome check --write docs/registry/families/<family>/registry.generated.json artifacts/component-registry.json docs/reference/framework-parity-summary.md
+```
+
+Adjust the paths to match the files that changed.
+
+## Storybook coverage requirements
+
+Every new component family needs consistent Storybook coverage across React, Vue, and Svelte unless the component is intentionally framework-specific.
+
+For each framework storybook, include:
+
+- `Introduction.mdx`
+- the canonical atom story, usually titled `Component/Atom`
+- molecule or purpose stories when the component has those layers
+- taxonomy tests that assert the story titles and hierarchy
+- introduction docs tests that assert the expected docs content exists
+- matching named story exports across frameworks for shared states
+
+Avoid stories that create accessibility false positives:
+
+- give repeated navigation landmarks unique `aria-label` values inside comparison stories
+- avoid duplicate `header`, `footer`, `main`, and `nav` landmarks in multi-example stories
+- make dialog panels use a valid dialog host element, such as `div role="dialog"`
+- keep disabled, selected, active, expanded, and loading states visible in stories and covered by tests
 
 ## New component checklist
 
@@ -179,18 +232,26 @@ Update exports in the affected packages:
 - [ ] Svelte adapter added
 - [ ] Svelte stories and tests added
 - [ ] exports updated
+- [ ] trust artifact sources updated when the component is public
+- [ ] component registry sources updated
+- [ ] framework parity summary regenerated when support changes
+- [ ] Storybook taxonomy and introduction docs tests added for each framework
+- [ ] comparison stories use unique landmark names
+- [ ] generated registry and artifact files regenerated
 - [ ] changeset added when shipping user-facing API
 - [ ] docs updated if public behavior changed
 
 ## Definition of done
 
 A component is done when:
-- core, presets, React, and Vue layers are complete
+- core, presets, React, Vue, and Svelte layers are complete
 - stories exist for the relevant states and variants
 - tests cover the key behavior
 - exports are wired
+- generated trust artifacts, component registry files, and parity summary are current
+- Storybook consistency and a11y smoke tests pass
 - docs are updated to match the shipped behavior before the task is considered complete
-- `pnpm typecheck`, `pnpm lint`, `pnpm test`, and `pnpm build` pass
+- `pnpm check` passes
 
 For accessibility-family follow-up work, also update the tracking docs when the pass is complete:
 - the family audit doc in `docs/audits/`
@@ -199,14 +260,23 @@ For accessibility-family follow-up work, also update the tracking docs when the 
 
 ## Validation commands
 
+Run focused package tests first while building, then run the same aggregate check that pre-push uses.
+
 ```bash
-pnpm typecheck
-pnpm lint
-pnpm test
-pnpm build
+pnpm check:repo-map
+pnpm exec biome check .
+pnpm test:storybook:a11y
+pnpm check
 ```
 
-For focused work, run package-specific commands first.
+For focused work, run package-specific commands first, for example:
+
+```bash
+pnpm --filter @marwes-ui/core test -- test/recipes/<name>.test.ts
+pnpm --filter @marwes-ui/react test -- src/components/<name>/__tests__
+pnpm --filter @marwes-ui/vue test -- src/components/<name>/__tests__
+pnpm --filter @marwes-ui/svelte test -- src/tests/<name>.test.ts
+```
 
 ## Related docs
 
