@@ -740,6 +740,198 @@
       }
     },
     {
+      "family": "banner",
+      "readmePath": "docs/registry/families/banner/README.md",
+      "metaPath": "docs/registry/families/banner/registry.meta.json",
+      "generatedPath": "docs/registry/families/banner/registry.generated.json",
+      "visualPaths": [],
+      "previewPaths": [],
+      "meta": {
+        "family": "banner",
+        "displayName": "Banner",
+        "status": "shipped",
+        "summary": "Inline page-level status messaging component with five semantic intents, optional icon, CTA action slot, and dismiss button.",
+        "philosophy": [
+          "Banner is for persistent, page-level status messages. Use Toast for transient feedback.",
+          "Keep the component token-driven — variant controls surface, border, and icon color through CSS custom properties.",
+          "Keep a11y roles honest: warning/error get assertive alert role, info/success/neutral get polite status role.",
+          "Keep the API surface small — icon, message, action, dismiss — matching the Figma component properties directly."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs a persistent, page-level message about system state, feature announcements, or required actions.",
+            "The intent maps to one of the five semantic variants: neutral, info, success, warning, error.",
+            "The message needs an optional CTA and/or dismiss action."
+          ],
+          "avoidWhen": [
+            "The message is transient and should auto-dismiss (use Toast instead).",
+            "The message requires user confirmation or a blocking flow (use Dialog instead).",
+            "The message applies to a specific form field rather than the page (use field-level validation instead)."
+          ]
+        },
+        "axe": {
+          "riskTier": "low",
+          "auditStatus": "queued",
+          "automationCovers": [
+            "Variant-specific role and aria-live assignment in core recipe.",
+            "Dismiss button aria-label in all adapters.",
+            "React and Vue adapter tests for a11y attributes, slot visibility, and dismiss interaction."
+          ],
+          "manualReviewRequired": [
+            "Whether banner messages are concise enough for screen reader announcement.",
+            "Whether error/warning banners actually warrant assertive live-region behavior in context."
+          ],
+          "roadmapAnchors": [],
+          "notes": []
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": ["apps/storybook-react/src/stories/banner/banner.stories.tsx"],
+            "vue": ["apps/storybook-vue/src/stories/banner/banner.stories.ts"],
+            "svelte": ["apps/storybook-svelte/src/stories/banner/banner.stories.ts"]
+          },
+          "preferredStates": [
+            "neutral",
+            "info",
+            "success",
+            "warning",
+            "error",
+            "with-icon",
+            "with-action",
+            "dismissible",
+            "light",
+            "dark"
+          ]
+        },
+        "openQuestions": []
+      },
+      "generated": {
+        "family": "banner",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/banner/banner-a11y.ts",
+            "packages/core/src/components/atoms/banner/banner-recipe.ts",
+            "packages/core/src/components/atoms/banner/banner-types.ts",
+            "packages/core/src/components/atoms/banner/index.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/banner.css"],
+          "react": [
+            "packages/react/src/components/banner/__tests__/banner.test.tsx",
+            "packages/react/src/components/banner/__tests__/contract.test.tsx",
+            "packages/react/src/components/banner/__tests__/index-exports.test.tsx",
+            "packages/react/src/components/banner/banner.tsx",
+            "packages/react/src/components/banner/index.ts",
+            "packages/react/src/components/banner/variants.tsx"
+          ],
+          "vue": [
+            "packages/vue/src/components/banner/__tests__/banner.test.ts",
+            "packages/vue/src/components/banner/__tests__/contract.test.ts",
+            "packages/vue/src/components/banner/banner.ts",
+            "packages/vue/src/components/banner/index.ts",
+            "packages/vue/src/components/banner/variants.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/banner/banner.stories.tsx",
+            "apps/storybook-react/src/stories/banner/Introduction.mdx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/banner/banner.stories.ts",
+            "apps/storybook-vue/src/stories/banner/Introduction.mdx"
+          ],
+          "contracts": []
+        },
+        "semantics": {
+          "coverageLevel": "canonical",
+          "dataComponent": "banner",
+          "canonicalAttributes": ["data-component", "data-variant"],
+          "allowedPurposes": ["info-banner", "success-banner", "warning-banner", "error-banner"],
+          "purposeAttributes": {
+            "error-banner": {
+              "data-purpose": "error-banner",
+              "data-intent": "error"
+            },
+            "info-banner": {
+              "data-purpose": "info-banner",
+              "data-intent": "info"
+            },
+            "success-banner": {
+              "data-purpose": "success-banner",
+              "data-intent": "success"
+            },
+            "warning-banner": {
+              "data-purpose": "warning-banner",
+              "data-intent": "warning"
+            }
+          },
+          "sourceOfTruthPaths": [
+            "packages/core/src/semantics/family-semantics.ts",
+            "packages/core/src/semantics/purpose-semantics.ts"
+          ],
+          "notes": [
+            "Banner is a single-atom family with thin purpose variants that preset the variant prop and emit canonical data-purpose metadata."
+          ]
+        },
+        "design": {
+          "componentJsons": [".figma/marwes/components/banner.json"],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/-banner/-banner_1593-5094.json",
+            ".figma/marwes/pages/-banner/-banner-dark_2444-2179.json",
+            ".figma/marwes/pages/-banner/overall-status_1730-4164.json",
+            ".figma/marwes/pages/-banner/examples_1593-7192.json"
+          ],
+          "nodeReferences": {
+            "bannerComponent": "1593:5080",
+            "bannerLightFrame": "1593:5094",
+            "bannerDarkFrame": "2444:2179"
+          },
+          "figmaTokens": ["banner/surface", "banner/border", "banner/icon"],
+          "figmaStates": {
+            "baseVariants": ["neutral", "info", "success", "warning", "error"],
+            "interactionStates": [
+              "light",
+              "dark",
+              "with-icon",
+              "without-icon",
+              "with-cta",
+              "dismissible"
+            ]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Banner is a single-atom family with thin purpose variants that preset the variant prop and emit canonical data-purpose metadata.",
+          "Generated from docs/registry/families/banner/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
       "family": "button",
       "readmePath": "docs/registry/families/button/README.md",
       "metaPath": "docs/registry/families/button/registry.meta.json",
@@ -3507,6 +3699,182 @@
           "Radio is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
           "Family-local purpose metadata currently lives in the React and Vue purpose-radio wrappers, while the raw atom and group field rely on native input[type=radio], role=radiogroup, and shared field-helper wiring.",
           "Generated from docs/registry/families/radio/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
+      "family": "segmented-control",
+      "readmePath": "docs/registry/families/segmented-control/README.md",
+      "metaPath": "docs/registry/families/segmented-control/registry.meta.json",
+      "generatedPath": "docs/registry/families/segmented-control/registry.generated.json",
+      "visualPaths": [
+        "docs/registry/families/segmented-control/visuals/file-map.mmd",
+        "docs/registry/families/segmented-control/visuals/interaction-map.mmd",
+        "docs/registry/families/segmented-control/visuals/layer-map.mmd"
+      ],
+      "previewPaths": [],
+      "meta": {
+        "family": "segmented-control",
+        "displayName": "Segmented Control",
+        "status": "shipped",
+        "summary": "Single-select segmented toggle family with radiogroup semantics, keyboard navigation, and three visual variants (default, inverse, pill).",
+        "philosophy": [
+          "Teach SegmentedControl as the single canonical surface — no raw atom escape hatch needed since the component is already minimal.",
+          "Use radiogroup semantics for single-select behavior without associated panels, distinguishing this family from tabs.",
+          "Keep keyboard navigation (Arrow keys, Home, End) and value resolution in core so all adapters stay aligned.",
+          "Token-based styling through CSS custom properties means dark mode and theming work automatically without adapter-level logic."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs a compact single-select toggle between 2–4 options with no associated panel content.",
+            "Theme switching, view density controls, framework selectors, or similar compact option sets.",
+            "The team wants React, Vue, and Svelte segmented behavior to stay aligned through shared core recipes."
+          ],
+          "avoidWhen": [
+            "The selection controls associated panel content — use TabGroup instead.",
+            "There are more than 4 options — consider a dropdown or radio group.",
+            "A binary on/off toggle is more appropriate — use Switch instead.",
+            "The options need rich content or descriptions — use a radio group field."
+          ]
+        },
+        "axe": {
+          "riskTier": "medium",
+          "auditStatus": "initial-implementation",
+          "automationCovers": [
+            "Core recipe generates correct role=radiogroup and role=radio attributes.",
+            "Keyboard navigation (ArrowLeft, ArrowRight, Home, End) cycles through enabled items.",
+            "Disabled items are skipped during keyboard navigation.",
+            "aria-checked reflects selected state correctly.",
+            "Storybook taxonomy tests across React, Vue, and Svelte."
+          ],
+          "manualReviewRequired": [
+            "Real browser and assistive-technology validation for radio-group announcement patterns.",
+            "Focus visibility and roving tabindex feel across screen readers.",
+            "High-contrast mode appearance of the active pill indicator."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "Initial implementation ships with radiogroup semantics rather than tablist because no panel content is associated.",
+            "Future audit should confirm that screen readers announce the group label and checked state transitions cleanly."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/segmented-control/segmented-control.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/segmented-control/segmented-control.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/segmented-control/segmented-control.stories.ts"
+            ]
+          },
+          "preferredStates": ["default", "selected", "disabled", "hover", "focus"]
+        },
+        "openQuestions": [
+          "Should purpose variants (e.g. ThemeToggle, ViewDensityToggle) be added as thin wrappers?",
+          "Should the family support an animated sliding indicator for the active pill?"
+        ]
+      },
+      "generated": {
+        "family": "segmented-control",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/segmented-control/index.ts",
+            "packages/core/src/components/atoms/segmented-control/segmented-control-a11y.ts",
+            "packages/core/src/components/atoms/segmented-control/segmented-control-recipe.ts",
+            "packages/core/src/components/atoms/segmented-control/segmented-control-types.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/segmented-control.css"],
+          "react": [
+            "packages/react/src/components/segmented-control/index.ts",
+            "packages/react/src/components/segmented-control/segmented-control.tsx"
+          ],
+          "vue": [
+            "packages/vue/src/components/segmented-control/index.ts",
+            "packages/vue/src/components/segmented-control/segmented-control.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/segmented-control/Introduction.mdx",
+            "apps/storybook-react/src/stories/segmented-control/segmented-control.stories.tsx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/segmented-control/Introduction.mdx",
+            "apps/storybook-vue/src/stories/segmented-control/segmented-control.stories.ts"
+          ],
+          "contracts": []
+        },
+        "semantics": {
+          "coverageLevel": "none",
+          "dataComponent": null,
+          "canonicalAttributes": [],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [],
+          "notes": ["No semantic registry source has been configured for this family yet."]
+        },
+        "design": {
+          "componentJsons": [".figma/marwes/components/segmented-control.json"],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/-segmented-control/-segmented-control_1571-19406.json",
+            ".figma/marwes/pages/-segmented-control/segmented-control_1571-19333.json",
+            ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29116.json",
+            ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29118.json",
+            ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29119.json",
+            ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29120.json"
+          ],
+          "nodeReferences": {
+            "segmentedControlComponentSet": "1571:19333",
+            "segmentedControlShowcaseFrame": "1571:19406"
+          },
+          "figmaTokens": [],
+          "figmaStates": {
+            "baseVariants": [
+              "2-segments",
+              "3-segments",
+              "4-segments",
+              "icon",
+              "no-icon",
+              "inverse",
+              "default"
+            ],
+            "interactionStates": ["active", "inactive", "disabled", "hover", "focus"]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "No semantic registry source has been configured for this family yet.",
+          "Generated from docs/registry/families/segmented-control/registry.meta.json and scripts/generate-component-registry.ts."
         ]
       }
     },
