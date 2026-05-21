@@ -234,11 +234,11 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Tasks
 
-- [ ] Create `Drawer` with title, description, footer, children, scrim, `onClose`, className, and data attributes.
-- [ ] Apply core RenderKit explicitly.
-- [ ] Add adapter tests for labels, close button, footer, scrim, and sizes.
-- [ ] Add React stories for small/medium/large, no footer, right/left placement, and composed scrim.
-- [ ] Update React exports.
+- [x] Create `Drawer` with title, description, footer, children, scrim, `onClose`, className, and data attributes.
+- [x] Apply core RenderKit explicitly.
+- [x] Add adapter tests for labels, close button, footer, scrim, and sizes.
+- [x] Add React stories for small/medium/large, no footer, right/left placement, and composed scrim.
+- [x] Update React exports.
 
 #### Tests For This Phase
 
@@ -250,9 +250,9 @@ Implement Drawer in the same family as Dialog: core owns size, placement, footer
 
 #### Exit Criteria
 
-- [ ] React tests pass.
-- [ ] React typecheck passes.
-- [ ] React Storybook tests pass.
+- [x] React tests pass.
+- [ ] React typecheck passes. Blocked by pre-existing `packages/react/src/components/banner/__tests__/contract.test.tsx` `vi.fn()` type mismatch.
+- [x] React Storybook tests pass.
 - [ ] Commit created.
 
 ### Phase 5: Vue Adapter And Stories
