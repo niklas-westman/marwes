@@ -93,11 +93,36 @@ export const AllStates: Story = {
     setup() {
       return () =>
         h("div", { style: "display:flex;flex-direction:column;gap:24px" }, [
-          h(Pagination, { modelValue: 1, pageCount: 10, siblingCount: 2 }),
-          h(Pagination, { modelValue: 5, pageCount: 10, siblingCount: 1 }),
-          h(Pagination, { modelValue: 10, pageCount: 10, siblingCount: 2 }),
-          h(Pagination, { modelValue: 3, pageCount: 10, showPrevNext: false }),
-          h(Pagination, { modelValue: 3, pageCount: 10, disabled: true }),
+          h(Pagination, {
+            modelValue: 1,
+            pageCount: 10,
+            siblingCount: 2,
+            ariaLabel: "First page pagination",
+          }),
+          h(Pagination, {
+            modelValue: 5,
+            pageCount: 10,
+            siblingCount: 1,
+            ariaLabel: "Middle page pagination",
+          }),
+          h(Pagination, {
+            modelValue: 10,
+            pageCount: 10,
+            siblingCount: 2,
+            ariaLabel: "Last page pagination",
+          }),
+          h(Pagination, {
+            modelValue: 3,
+            pageCount: 10,
+            showPrevNext: false,
+            ariaLabel: "Compact pagination",
+          }),
+          h(Pagination, {
+            modelValue: 3,
+            pageCount: 10,
+            disabled: true,
+            ariaLabel: "Disabled pagination",
+          }),
         ])
     },
   }),

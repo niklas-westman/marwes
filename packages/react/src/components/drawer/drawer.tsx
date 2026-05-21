@@ -88,7 +88,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
         />
       )}
 
-      <aside
+      <div
         id={id}
         className={cx(kit.panel.className, props.panelClassName)}
         style={kit.panel.vars}
@@ -106,7 +106,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
       >
         {(hasTitle || kit.showCloseButton) && (
           <>
-            <header className="mw-drawer__header">
+            <div className="mw-drawer__header">
               {hasTitle ? (
                 <div className="mw-drawer__heading-group">
                   <h2 className="mw-drawer__title" id={titleId}>
@@ -127,7 +127,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
                   <Icon name={IconName.X} decorative />
                 </button>
               )}
-            </header>
+            </div>
             <div className="mw-drawer__header-divider" aria-hidden="true" />
           </>
         )}
@@ -144,10 +144,10 @@ export function Drawer(props: DrawerProps): React.ReactElement {
         {hasFooter && (
           <>
             <div className="mw-drawer__footer-divider" aria-hidden="true" />
-            <footer className="mw-drawer__footer">{props.footer}</footer>
+            <div className="mw-drawer__footer">{props.footer}</div>
           </>
         )}
-      </aside>
+      </div>
     </div>
   )
 }

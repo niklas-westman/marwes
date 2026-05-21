@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent, h, ref } from "vue"
 
 const meta = {
-  title: "Segmented Control/SegmentedControl",
+  title: "SegmentedControl/Atom",
   component: SegmentedControl as unknown as object,
   parameters: {
     ...storybookLayout.centered,
@@ -44,6 +44,12 @@ const threeSegmentItems: SegmentedControlItem[] = [
 const iconItems: SegmentedControlItem[] = [
   { value: "light", label: "☀️", ariaLabel: "Light mode" },
   { value: "dark", label: "🌙", ariaLabel: "Dark mode" },
+]
+
+const iconLabelItems: SegmentedControlItem[] = [
+  { value: "star", label: "★ Favorites" },
+  { value: "settings", label: "⚙ Settings" },
+  { value: "search", label: "⌕ Search" },
 ]
 
 export const Default: Story = {
@@ -120,6 +126,43 @@ export const Pill: Story = {
   }),
 }
 
+export const IconOnly: Story = {
+  render: () => ({
+    components: { SegmentedControl },
+    setup() {
+      const value = ref("light")
+      return () =>
+        h(SegmentedControl, {
+          items: iconItems,
+          modelValue: value.value,
+          variant: "pill",
+          ariaLabel: "Theme mode",
+          "onUpdate:modelValue": (v: string) => {
+            value.value = v
+          },
+        })
+    },
+  }),
+}
+
+export const IconWithLabel: Story = {
+  render: () => ({
+    components: { SegmentedControl },
+    setup() {
+      const value = ref("star")
+      return () =>
+        h(SegmentedControl, {
+          items: iconLabelItems,
+          modelValue: value.value,
+          ariaLabel: "Navigation",
+          "onUpdate:modelValue": (v: string) => {
+            value.value = v
+          },
+        })
+    },
+  }),
+}
+
 export const Small: Story = {
   render: () => ({
     components: { SegmentedControl },
@@ -149,6 +192,46 @@ export const Disabled: Story = {
           modelValue: "compact",
           disabled: true,
           ariaLabel: "View density",
+        })
+    },
+  }),
+}
+
+export const DisabledItem: Story = {
+  render: () => ({
+    components: { SegmentedControl },
+    setup() {
+      const value = ref("a")
+      return () =>
+        h(SegmentedControl, {
+          items: [
+            { value: "a", label: "Enabled" },
+            { value: "b", label: "Disabled", disabled: true },
+            { value: "c", label: "Enabled" },
+          ],
+          modelValue: value.value,
+          ariaLabel: "Options",
+          "onUpdate:modelValue": (v: string) => {
+            value.value = v
+          },
+        })
+    },
+  }),
+}
+
+export const Controlled: Story = {
+  render: () => ({
+    components: { SegmentedControl },
+    setup() {
+      const value = ref("compact")
+      return () =>
+        h(SegmentedControl, {
+          items: twoSegmentItems,
+          modelValue: value.value,
+          ariaLabel: "View density",
+          "onUpdate:modelValue": (v: string) => {
+            value.value = v
+          },
         })
     },
   }),

@@ -18,7 +18,7 @@ describe("createDrawerRecipe", () => {
     expect(kit.showFooter).toBe(true)
     expect(kit.showCloseButton).toBe(true)
     expect(kit.showScrim).toBe(true)
-    expect(kit.panel.tag).toBe("aside")
+    expect(kit.panel.tag).toBe("div")
     expect(kit.panel.a11y.role).toBe("dialog")
     expect(kit.dataAttributes).toEqual({
       "data-component": "drawer",

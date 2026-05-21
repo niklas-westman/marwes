@@ -4,7 +4,7 @@ import SegmentedControlPreview from "./SegmentedControlPreview.svelte"
 import SegmentedControlShowcase from "./SegmentedControlShowcase.svelte"
 
 const meta = {
-  title: "Segmented Control/SegmentedControl",
+  title: "SegmentedControl/Atom",
   component: SegmentedControlPreview,
   parameters: {
     ...storybookLayout.centered,
@@ -67,6 +67,30 @@ export const Pill: Story = {
   },
 }
 
+export const IconOnly: Story = {
+  args: {
+    items: [
+      { value: "light", label: "☀️", ariaLabel: "Light mode" },
+      { value: "dark", label: "🌙", ariaLabel: "Dark mode" },
+    ],
+    value: "light",
+    variant: "pill",
+    ariaLabel: "Theme mode",
+  },
+}
+
+export const IconWithLabel: Story = {
+  args: {
+    items: [
+      { value: "star", label: "★ Favorites" },
+      { value: "settings", label: "⚙ Settings" },
+      { value: "search", label: "⌕ Search" },
+    ],
+    value: "star",
+    ariaLabel: "Navigation",
+  },
+}
+
 export const Small: Story = {
   args: {
     value: "compact",
@@ -79,6 +103,25 @@ export const Disabled: Story = {
   args: {
     value: "compact",
     disabled: true,
+    ariaLabel: "View density",
+  },
+}
+
+export const DisabledItem: Story = {
+  args: {
+    items: [
+      { value: "a", label: "Enabled" },
+      { value: "b", label: "Disabled", disabled: true },
+      { value: "c", label: "Enabled" },
+    ],
+    value: "a",
+    ariaLabel: "Options",
+  },
+}
+
+export const Controlled: Story = {
+  args: {
+    value: "compact",
     ariaLabel: "View density",
   },
 }

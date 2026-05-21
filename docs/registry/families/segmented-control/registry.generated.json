@@ -29,11 +29,13 @@
       "packages/vue/src/components/segmented-control/segmented-control.ts"
     ],
     "storybookReact": [
+      "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
       "apps/storybook-react/src/stories/segmented-control/Introduction.mdx",
       "apps/storybook-react/src/stories/segmented-control/segmented-control.stories.tsx"
     ],
     "storybookVue": [
+      "apps/storybook-vue/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
       "apps/storybook-vue/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/segmented-control/Introduction.mdx",
       "apps/storybook-vue/src/stories/segmented-control/segmented-control.stories.ts"

@@ -54,6 +54,22 @@
       }
     },
     {
+      "name": "Banner",
+      "family": "banner",
+      "component": "banner",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-variant"],
+      "semanticAttributes": ["data-component", "data-variant"],
+      "purposeWrappers": ["error-banner", "info-banner", "success-banner", "warning-banner"],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/banner",
+        "react": "packages/react/src/components/banner",
+        "vue": "packages/vue/src/components/banner",
+        "presetCss": "packages/presets/src/firstEdition/banner.css"
+      }
+    },
+    {
       "name": "Avatar",
       "family": "avatar",
       "component": "avatar",
@@ -99,6 +115,22 @@
         "react": "packages/react/src/components/dialog",
         "vue": "packages/vue/src/components/dialog",
         "presetCss": null
+      }
+    },
+    {
+      "name": "Drawer",
+      "family": "drawer",
+      "component": "drawer",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-size"],
+      "semanticAttributes": ["data-component", "data-size"],
+      "purposeWrappers": [],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/drawer",
+        "react": "packages/react/src/components/drawer",
+        "vue": "packages/vue/src/components/drawer",
+        "presetCss": "packages/presets/src/firstEdition/drawer.css"
       }
     }
   ]

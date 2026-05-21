@@ -41,7 +41,7 @@ export function createDrawerRecipe(opts: DrawerOptions = {}): DrawerRenderKit {
     showScrim,
     dataAttributes: rootDataAttributes,
     panel: {
-      tag: "aside",
+      tag: "div",
       className: "mw-drawer__panel",
       vars: {},
       a11y: resolveDrawerA11y(opts),

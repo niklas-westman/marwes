@@ -36,11 +36,38 @@ export const Default: Story = {
   },
 }
 
+export const WithAction: Story = {
+  args: {
+    children: "Banner message — describe the event, update, or action needed here.",
+    variant: "info",
+    showIcon: true,
+    dismissible: true,
+  },
+}
+
 export const AllVariants: Story = {
   render: () => ({
     Component: BannerGallery,
     props: {},
   }),
+}
+
+export const WithoutIcon: Story = {
+  args: {
+    children: "Banner message without an icon.",
+    variant: "neutral",
+    showIcon: false,
+    dismissible: true,
+  },
+}
+
+export const NonDismissible: Story = {
+  args: {
+    children: "This banner cannot be dismissed.",
+    variant: "warning",
+    showIcon: true,
+    dismissible: false,
+  },
 }
 
 export const DarkVariants: Story = {

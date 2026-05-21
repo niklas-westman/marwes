@@ -6,11 +6,11 @@ import { describe, expect, it, vi } from "vitest"
 import Drawer from "../lib/components/drawer/Drawer.svelte"
 
 describe("Drawer", () => {
-  it("renders an aside with role dialog", () => {
+  it("renders a panel with role dialog", () => {
     const { container } = render(Drawer, {
       props: { title: "Test drawer" },
     })
-    const drawer = container.querySelector('aside[role="dialog"]')
+    const drawer = container.querySelector('.mw-drawer__panel[role="dialog"]')
     expect(drawer).not.toBeNull()
   })
 

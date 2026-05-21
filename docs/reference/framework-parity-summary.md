@@ -8,8 +8,10 @@ It is a compact human view of the current generated parity artifact. Do not edit
 |---|---|---|---|---|---|---|
 | avatar | yes | yes | no | yes | yes | yes |
 | badge | yes | yes | no | yes | yes | yes |
+| banner | yes | yes | no | yes | yes | yes |
 | button | yes | yes | no | yes | yes | yes |
 | dialog | yes | yes | no | yes | yes | yes |
+| drawer | yes | yes | no | yes | yes | yes |
 | toast | yes | yes | no | yes | yes | yes |
 
 ## Validation

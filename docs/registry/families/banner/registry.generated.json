@@ -36,10 +36,14 @@
       "packages/vue/src/components/banner/variants.ts"
     ],
     "storybookReact": [
+      "apps/storybook-react/src/stories/banner/__tests__/banner-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/banner/__tests__/banner-taxonomy.test.ts",
       "apps/storybook-react/src/stories/banner/banner.stories.tsx",
       "apps/storybook-react/src/stories/banner/Introduction.mdx"
     ],
     "storybookVue": [
+      "apps/storybook-vue/src/stories/banner/__tests__/banner-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/banner/__tests__/banner-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/banner/banner.stories.ts",
       "apps/storybook-vue/src/stories/banner/Introduction.mdx"
     ],

@@ -53,6 +53,17 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     contractPaths: ["tests/contracts/badge.contract.ts"],
     figmaReferences: [".figma/marwes/components/badge.json"],
   },
+  banner: {
+    displayName: "Banner",
+    familyDir: "packages/core/src/components/atoms/banner",
+    reactComponentDir: "packages/react/src/components/banner",
+    vueComponentDir: "packages/vue/src/components/banner",
+    presetCssPath: "packages/presets/src/firstEdition/banner.css",
+    reactStoryDir: "apps/storybook-react/src/stories/banner",
+    vueStoryDir: "apps/storybook-vue/src/stories/banner",
+    contractPaths: ["tests/contracts/banner.contract.ts"],
+    figmaReferences: [".figma/marwes/components/banner.json"],
+  },
   avatar: {
     displayName: "Avatar",
     familyDir: "packages/core/src/components/atoms/avatar",
@@ -89,6 +100,17 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     vueStoryDir: "apps/storybook-vue/src/stories/dialog",
     contractPaths: ["tests/contracts/dialog.contract.ts"],
     figmaReferences: [".figma/marwes/components/dialog.json"],
+  },
+  drawer: {
+    displayName: "Drawer",
+    familyDir: "packages/core/src/components/atoms/drawer",
+    reactComponentDir: "packages/react/src/components/drawer",
+    vueComponentDir: "packages/vue/src/components/drawer",
+    presetCssPath: "packages/presets/src/firstEdition/drawer.css",
+    reactStoryDir: "apps/storybook-react/src/stories/drawer",
+    vueStoryDir: "apps/storybook-vue/src/stories/drawer",
+    contractPaths: [],
+    figmaReferences: [".figma/marwes/components/drawer.json"],
   },
 }
 

@@ -73,11 +73,11 @@ export const Disabled: Story = {
 export const AllStates: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <Pagination page={1} pageCount={10} siblingCount={2} />
-      <Pagination page={5} pageCount={10} siblingCount={1} />
-      <Pagination page={10} pageCount={10} siblingCount={2} />
-      <Pagination page={3} pageCount={10} showPrevNext={false} />
-      <Pagination page={3} pageCount={10} disabled />
+      <Pagination page={1} pageCount={10} siblingCount={2} ariaLabel="First page pagination" />
+      <Pagination page={5} pageCount={10} siblingCount={1} ariaLabel="Middle page pagination" />
+      <Pagination page={10} pageCount={10} siblingCount={2} ariaLabel="Last page pagination" />
+      <Pagination page={3} pageCount={10} showPrevNext={false} ariaLabel="Compact pagination" />
+      <Pagination page={3} pageCount={10} disabled ariaLabel="Disabled pagination" />
     </div>
   ),
 }

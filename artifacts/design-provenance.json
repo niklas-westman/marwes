@@ -32,6 +32,21 @@
       "contracts": ["tests/contracts/badge.contract.ts"]
     },
     {
+      "family": "banner",
+      "figma": [".figma/marwes/components/banner.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/banner",
+        "react": "packages/react/src/components/banner",
+        "vue": "packages/vue/src/components/banner"
+      },
+      "presetCss": "packages/presets/src/firstEdition/banner.css",
+      "stories": {
+        "react": "apps/storybook-react/src/stories/banner",
+        "vue": "apps/storybook-vue/src/stories/banner"
+      },
+      "contracts": ["tests/contracts/banner.contract.ts"]
+    },
+    {
       "family": "avatar",
       "figma": [".figma/marwes/components/avatar.json"],
       "source": {
@@ -79,6 +94,21 @@
         "vue": "apps/storybook-vue/src/stories/dialog"
       },
       "contracts": ["tests/contracts/dialog.contract.ts"]
+    },
+    {
+      "family": "drawer",
+      "figma": [".figma/marwes/components/drawer.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/drawer",
+        "react": "packages/react/src/components/drawer",
+        "vue": "packages/vue/src/components/drawer"
+      },
+      "presetCss": "packages/presets/src/firstEdition/drawer.css",
+      "stories": {
+        "react": "apps/storybook-react/src/stories/drawer",
+        "vue": "apps/storybook-vue/src/stories/drawer"
+      },
+      "contracts": []
     }
   ]
 }

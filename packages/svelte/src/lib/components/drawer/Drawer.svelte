@@ -80,7 +80,7 @@
   {/if}
 
   <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-  <aside
+  <div
     id={drawerId}
     class={mergedPanelClass}
     role={kit.panel.a11y.role}
@@ -92,7 +92,7 @@
     {...kit.panel.dataAttributes}
   >
     {#if hasTitle || kit.showCloseButton}
-      <header class="mw-drawer__header">
+      <div class="mw-drawer__header">
         {#if hasTitle}
           <div class="mw-drawer__heading-group">
             <h2 class="mw-drawer__title" id={titleId}>{title}</h2>
@@ -111,7 +111,7 @@
             <Icon name={IconName.X} decorative />
           </button>
         {/if}
-      </header>
+      </div>
       <div class="mw-drawer__header-divider" aria-hidden="true"></div>
     {/if}
 
@@ -124,9 +124,9 @@
 
     {#if hasFooter}
       <div class="mw-drawer__footer-divider" aria-hidden="true"></div>
-      <footer class="mw-drawer__footer">
+      <div class="mw-drawer__footer">
         {@render footer?.({ close: handleClose })}
-      </footer>
+      </div>
     {/if}
-  </aside>
+  </div>
 </div>

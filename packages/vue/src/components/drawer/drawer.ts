@@ -139,7 +139,7 @@ export const Drawer = defineComponent(
               })
             : null,
           h(
-            "aside",
+            "div",
             {
               ...kit.value.panel.dataAttributes,
               id: id.value,
@@ -155,7 +155,7 @@ export const Drawer = defineComponent(
             [
               hasTitle.value || kit.value.showCloseButton
                 ? [
-                    h("header", { class: "mw-drawer__header" }, [
+                    h("div", { class: "mw-drawer__header" }, [
                       hasTitle.value
                         ? h("div", { class: "mw-drawer__heading-group" }, [
                             h(
@@ -194,7 +194,7 @@ export const Drawer = defineComponent(
               hasFooter.value
                 ? [
                     h("div", { class: "mw-drawer__footer-divider", "aria-hidden": "true" }),
-                    h("footer", { class: "mw-drawer__footer" }, toChildren(footerContent.value)),
+                    h("div", { class: "mw-drawer__footer" }, toChildren(footerContent.value)),
                   ]
                 : null,
             ],

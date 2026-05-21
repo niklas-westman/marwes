@@ -18,6 +18,14 @@
       "storyCoverage": true
     },
     {
+      "family": "banner",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
       "family": "avatar",
       "react": true,
       "vue": true,
@@ -35,6 +43,14 @@
     },
     {
       "family": "dialog",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "drawer",
       "react": true,
       "vue": true,
       "metadataParity": true,

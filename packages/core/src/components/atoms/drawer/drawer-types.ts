@@ -28,7 +28,7 @@ export interface DrawerA11yProps {
 }
 
 export interface DrawerPanelRenderKit {
-  tag: "aside"
+  tag: "div"
   className: string
   vars: Record<string, string>
   a11y: DrawerA11yProps

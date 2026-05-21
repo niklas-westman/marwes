@@ -13,9 +13,9 @@ function readStoryFile(fileName: string): string {
 }
 
 describe("Vue segmented-control story taxonomy", () => {
-  it("keeps component story under Segmented Control/SegmentedControl", () => {
+  it("keeps component story under SegmentedControl/Atom", () => {
     expect(readStoryFile("segmented-control.stories.ts")).toContain(
-      'title: "Segmented Control/SegmentedControl"',
+      'title: "SegmentedControl/Atom"',
     )
   })
 
