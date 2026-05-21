@@ -1,0 +1,64 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "pagination",
+  "displayName": "Pagination",
+  "status": "shipped",
+  "summary": "Finite page navigation with shared item-window generation, ellipsis rendering, current-page semantics, and React/Vue/Svelte adapters.",
+  "philosophy": [
+    "Keep page-window generation in core so every adapter renders the same pages and ellipses.",
+    "Use a labelled nav with list semantics so pagination is discoverable as page navigation.",
+    "Keep visual dimensions in firstEdition CSS to preserve Figma fidelity without adapter-specific styles.",
+    "Expose a compact controlled API in every framework while supporting uncontrolled starting state where idiomatic."
+  ],
+  "usage": {
+    "useWhen": [
+      "A finite collection is split across known pages.",
+      "Users need direct page jumps in addition to previous and next controls.",
+      "The interface should show a compact page range with ellipses."
+    ],
+    "avoidWhen": [
+      "Content loads continuously — use infinite scroll or load more.",
+      "Pages represent steps in a task flow — use a step navigator.",
+      "The selection controls visible panel content — use tabs."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "initial-implementation",
+    "automationCovers": [
+      "Core recipe marks the current page with aria-current.",
+      "Adapters disable previous and next controls at page boundaries.",
+      "React, Vue, and Svelte render labelled navigation and page buttons.",
+      "Storybook taxonomy tests across React, Vue, and Svelte."
+    ],
+    "manualReviewRequired": [
+      "Assistive-technology announcement of page changes in consuming product contexts.",
+      "Keyboard focus order with surrounding data table controls.",
+      "High-contrast appearance of selected and focused page items."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "Initial implementation uses explicit page buttons and hidden ellipsis text for assistive technology.",
+      "Page-change announcements can be added by consuming views when content updates asynchronously."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": ["apps/storybook-react/src/stories/pagination/pagination.stories.tsx"],
+      "vue": ["apps/storybook-vue/src/stories/pagination/pagination.stories.ts"],
+      "svelte": ["apps/storybook-svelte/src/stories/pagination/pagination.stories.ts"]
+    },
+    "preferredStates": [
+      "default",
+      "current",
+      "first-page",
+      "last-page",
+      "disabled",
+      "without-prev-next"
+    ]
+  },
+  "openQuestions": [
+    "Should a compact icon-only previous/next variant be added later?",
+    "Should async page loading expose a busy/loading state on the root?"
+  ]
+}

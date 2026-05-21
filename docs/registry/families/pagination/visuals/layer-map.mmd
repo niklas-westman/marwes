@@ -1,0 +1,8 @@
+flowchart LR
+  Core["Core: range + a11y + render kits"] --> Preset["Preset: .mw-pagination CSS"]
+  Preset --> React["React adapter"]
+  Preset --> Vue["Vue adapter"]
+  Preset --> Svelte["Svelte adapter"]
+  React --> Consumers["Apps and docs"]
+  Vue --> Consumers
+  Svelte --> Consumers

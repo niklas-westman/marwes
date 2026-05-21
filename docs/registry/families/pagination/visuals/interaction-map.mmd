@@ -1,0 +1,8 @@
+sequenceDiagram
+  participant User
+  participant Adapter
+  participant Core
+  User->>Adapter: Click page / previous / next
+  Adapter->>Core: clampPaginationPage(nextPage, pageCount)
+  Core-->>Adapter: valid page
+  Adapter-->>User: update selected page and emit page change

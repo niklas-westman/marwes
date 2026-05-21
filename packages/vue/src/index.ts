@@ -369,6 +369,10 @@ export type {
 export { SegmentedControl } from "./components/segmented-control"
 export type { SegmentedControlProps, SegmentedControlItem } from "./components/segmented-control"
 
+/* Pagination */
+export { Pagination } from "./components/pagination"
+export type { PaginationProps } from "./components/pagination"
+
 /* Dialog */
 export {
   Dialog,

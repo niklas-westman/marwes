@@ -1,4 +1,4 @@
-import { Button, SliderField } from "@marwes-ui/react"
+import { Button, Pagination, SliderField } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -35,67 +35,9 @@ const ButtonRow = styled.div`
   flex-wrap: wrap;
 `
 
-/* Pagination */
-const PaginationWrapper = styled.nav`
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 13px;
-  flex-wrap: wrap;
-`
-
-const PaginationNav = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  border: none;
-  background: none;
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 13px;
-  color: var(--mw-color-text, #141414);
-  cursor: pointer;
-  padding: 4px 8px;
-
-  &:hover {
-    opacity: 0.7;
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-`
-
-const PageButton = styled.button<{ $active?: boolean }>`
-  min-width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 6px;
-  background: ${(p) => (p.$active ? "#2f31fc" : "transparent")};
-  color: ${(p) => (p.$active ? "#ffffff" : "var(--mw-color-text, #141414)")};
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 13px;
-  cursor: pointer;
-
-  &:hover:not([disabled]) {
-    background: ${(p) => (p.$active ? "#2f31fc" : "var(--mw-color-surface-subtle, #f5f5f5)")};
-  }
-`
-
-const Ellipsis = styled.span`
-  padding: 0 4px;
-  color: var(--mw-color-text-muted, #595959);
-`
-
 function RowButtonPaginationProgress(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1)
   const [progress, setProgress] = useState(60)
-
-  const pages = [1, 2, 3, "ellipsis", 10] as const
 
   return (
     <RowContainer>
@@ -109,36 +51,12 @@ function RowButtonPaginationProgress(): JSX.Element {
       </ItemCard>
       <ItemCard>
         <SectionLabel>Pagination</SectionLabel>
-        <PaginationWrapper>
-          <PaginationNav
-            type="button"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-          >
-            ‹ Previous
-          </PaginationNav>
-          {pages.map((page) =>
-            page === "ellipsis" ? (
-              <Ellipsis key="ellipsis">…</Ellipsis>
-            ) : (
-              <PageButton
-                key={page}
-                $active={currentPage === page}
-                type="button"
-                onClick={() => setCurrentPage(page)}
-              >
-                {page}
-              </PageButton>
-            ),
-          )}
-          <PaginationNav
-            type="button"
-            disabled={currentPage === 10}
-            onClick={() => setCurrentPage((p) => Math.min(10, p + 1))}
-          >
-            Next ›
-          </PaginationNav>
-        </PaginationWrapper>
+        <Pagination
+          page={currentPage}
+          pageCount={10}
+          siblingCount={2}
+          onPageChange={setCurrentPage}
+        />
       </ItemCard>
       <ItemCard>
         <SectionLabel>Progress bar</SectionLabel>

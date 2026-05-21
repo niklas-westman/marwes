@@ -256,6 +256,10 @@ export type {
   SegmentedControlItem,
 } from "./components/segmented-control/types.js"
 
+// Pagination
+export { default as Pagination } from "./components/pagination/Pagination.svelte"
+export type { PaginationProps } from "./components/pagination/types.js"
+
 // Slider
 export { default as Slider } from "./components/slider/Slider.svelte"
 export { default as SliderField } from "./components/slider/SliderField.svelte"

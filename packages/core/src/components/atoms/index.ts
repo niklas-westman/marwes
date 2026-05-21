@@ -123,3 +123,14 @@ export type {
   SegmentedControlVariant,
   SegmentedControlSize,
 } from "./segmented-control"
+export * from "./pagination"
+export type {
+  PaginationOptions,
+  PaginationItem,
+  PaginationRenderKit,
+  PaginationListRenderKit,
+  PaginationListItemRenderKit,
+  PaginationControlRenderKit,
+  PaginationPageRenderKit,
+  PaginationEllipsisRenderKit,
+} from "./pagination"

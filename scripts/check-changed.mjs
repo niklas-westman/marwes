@@ -112,9 +112,9 @@ function changedFiles() {
 
 function familyFromPath(path) {
   const patterns = [
-    /^packages\/core\/src\/components\/atoms\/([^/]+)/,
+    /^packages\/core\/src\/components\/atoms\/([^/]+)\//,
     /^packages\/core\/test\/recipes\/([^/.]+)/,
-    /^packages\/presets\/src\/firstEdition\/([^/.]+)\.css$/,
+    /^packages\/presets\/src\/firstEdition\/(?!styles\.css$)([^/.]+)\.css$/,
     /^packages\/presets\/test\/([^/.]+)-css-contract\.test\.ts$/,
     /^packages\/react\/src\/components\/([^/]+)/,
     /^packages\/vue\/src\/components\/([^/]+)/,
@@ -135,9 +135,9 @@ function familyFromPath(path) {
 
 function implementationFamilyFromPath(path) {
   const patterns = [
-    /^packages\/core\/src\/components\/atoms\/([^/]+)/,
+    /^packages\/core\/src\/components\/atoms\/([^/]+)\//,
     /^packages\/core\/test\/recipes\/([^/.]+)/,
-    /^packages\/presets\/src\/firstEdition\/([^/.]+)\.css$/,
+    /^packages\/presets\/src\/firstEdition\/(?!styles\.css$)([^/.]+)\.css$/,
     /^packages\/presets\/test\/([^/.]+)-css-contract\.test\.ts$/,
     /^packages\/react\/src\/components\/([^/]+)/,
     /^packages\/vue\/src\/components\/([^/]+)/,

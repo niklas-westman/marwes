@@ -1823,4 +1823,45 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  pagination: createRegistryFamilySource({
+    family: "pagination",
+    contractPaths: [],
+    figma: {
+      componentJsons: [
+        ".figma/marwes/components/pagination.json",
+        ".figma/marwes/components/partspaginationpage-item.json",
+        ".figma/marwes/components/partspaginationactive-page-item.json",
+        ".figma/marwes/components/partspaginationellipsis.json",
+      ],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-pagination/overall-status_1730-4200.json",
+        ".figma/marwes/pages/-pagination/-pagination_1727-4104.json",
+        ".figma/marwes/pages/-pagination/-pagination-dark_1727-4253.json",
+        ".figma/marwes/pages/-pagination/component-container_1729-4143.json",
+        ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1384-12675.json",
+        ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json",
+      ],
+      nodeReferences: {
+        paginationComponent: "1727:3905",
+        paginationPageItem: "1727:3897",
+        paginationActivePageItem: "1727:3899",
+        paginationEllipsis: "1727:3903",
+        paginationLightFrame: "1727:4104",
+        paginationDarkFrame: "1727:4253",
+      },
+      figmaTokens: ["pagination/active", "pagination/text", "pagination/focus"],
+      figmaStates: {
+        baseVariants: ["with-prev-next", "without-prev-next", "page", "active-page", "ellipsis"],
+        interactionStates: ["current", "disabled", "hover", "focus", "light", "dark"],
+      },
+    },
+  }),
 }
