@@ -123,6 +123,9 @@
     gap: 8px;
     color: #141414;
   }
+  .color-swatch__info :global(.mw-p) {
+    color: #141414;
+  }
   .color-swatch__values {
     display: flex;
     flex-direction: column;

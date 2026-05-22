@@ -23,12 +23,14 @@ export const Basic: Story = {
 
 export const Controlled: Story = {
   args: {
+    ariaLabel: "Controlled input",
     value: "Controlled value",
   },
 }
 
 export const WithValue: Story = {
   args: {
+    ariaLabel: "Input with value",
     value: "Hello world",
   },
 }

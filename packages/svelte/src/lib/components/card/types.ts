@@ -8,4 +8,5 @@ export interface CardProps extends CardOptions {
   children?: Snippet
   class?: string
   id?: string
+  ariaDisabled?: boolean | "true" | "false"
 }

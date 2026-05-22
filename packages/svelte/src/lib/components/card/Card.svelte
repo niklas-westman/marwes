@@ -8,6 +8,7 @@
     children,
     class: className,
     id,
+    ariaDisabled,
     dataAttributes,
   }: CardProps = $props();
 
@@ -15,7 +16,7 @@
   const mergedClass = $derived(mergeClass(kit.className, className));
 </script>
 
-<div {id} class={mergedClass} {...kit.dataAttributes}>
+<div {id} class={mergedClass} aria-disabled={ariaDisabled} {...kit.dataAttributes}>
   {#if title}
     <div class="mw-card__header">
       <span class="mw-card__title">

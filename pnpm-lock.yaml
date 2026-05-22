@@ -315,6 +315,9 @@ importers:
       '@storybook/addon-themes':
         specifier: 10.3.6
         version: 10.3.6(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      '@storybook/addon-vitest':
+        specifier: 10.2.6
+        version: 10.2.6(@vitest/browser-playwright@4.0.18(playwright@1.58.1)(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18))(@vitest/browser@4.0.18(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0)))(@vitest/runner@4.0.18)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vitest@4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0))
       '@storybook/svelte':
         specifier: 10.3.6
         version: 10.3.6(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(svelte@5.55.5(@typescript-eslint/types@8.54.0))
@@ -327,6 +330,12 @@ importers:
       '@types/node':
         specifier: 24.10.10
         version: 24.10.10
+      '@vitest/browser-playwright':
+        specifier: 4.0.18
+        version: 4.0.18(playwright@1.58.1)(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18)
+      playwright:
+        specifier: 1.58.1
+        version: 1.58.1
       storybook:
         specifier: 10.3.6
         version: 10.3.6(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -342,6 +351,9 @@ importers:
       vite:
         specifier: 7.3.2
         version: 7.3.2(@types/node@24.10.10)(tsx@4.21.0)
+      vitest:
+        specifier: 4.0.18
+        version: 4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0)
 
   apps/storybook-vue:
     dependencies:
@@ -5105,6 +5117,20 @@ snapshots:
       '@storybook/global': 5.0.0
       '@storybook/icons': 2.0.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       storybook: 10.2.10(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    optionalDependencies:
+      '@vitest/browser': 4.0.18(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0))
+      '@vitest/browser-playwright': 4.0.18(playwright@1.58.1)(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18)
+      '@vitest/runner': 4.0.18
+      vitest: 4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@storybook/addon-vitest@10.2.6(@vitest/browser-playwright@4.0.18(playwright@1.58.1)(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18))(@vitest/browser@4.0.18(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0)))(@vitest/runner@4.0.18)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vitest@4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0))':
+    dependencies:
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 2.0.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      storybook: 10.3.6(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     optionalDependencies:
       '@vitest/browser': 4.0.18(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18(@types/node@24.10.10)(@vitest/browser-playwright@4.0.18)(jsdom@26.1.0)(tsx@4.21.0))
       '@vitest/browser-playwright': 4.0.18(playwright@1.58.1)(vite@7.3.2(@types/node@24.10.10)(tsx@4.21.0))(vitest@4.0.18)

@@ -12,6 +12,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: storybookSliderArgTypes,
   args: {
+    ariaLabel: "Value",
     value: 50,
     min: 0,
     max: 100,

@@ -24,6 +24,7 @@
       label: "Disabled",
       title: "Card title",
       className: "mw-card--disabled",
+      ariaDisabled: true,
       children: "Disabled state mutes the surface and typography.",
     },
     {
@@ -40,7 +41,7 @@
     {#each cardStatePreviews as preview}
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <Paragraph size="sm">{preview.label}</Paragraph>
-        <Card title={preview.title} class={preview.className}>{preview.children}</Card>
+        <Card title={preview.title} class={preview.className} ariaDisabled={preview.ariaDisabled}>{preview.children}</Card>
       </div>
     {/each}
   </div>
@@ -50,7 +51,7 @@
       {#each cardStatePreviews as preview}
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <Paragraph size="sm">{preview.label}</Paragraph>
-          <Card title={preview.title} class={preview.className}>{preview.children}</Card>
+          <Card title={preview.title} class={preview.className} ariaDisabled={preview.ariaDisabled}>{preview.children}</Card>
         </div>
       {/each}
     </div>

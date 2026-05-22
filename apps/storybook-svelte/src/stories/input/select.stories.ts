@@ -31,29 +31,34 @@ const options = [
 ]
 
 export const Default: Story = {
-  args: { options, placeholder: "Select a framework" },
+  args: { options, placeholder: "Select a framework", ariaLabel: "Framework" },
 }
 
 export const Basic: Story = {
-  args: { options, placeholder: "Select a framework" },
+  args: { options, placeholder: "Select a framework", ariaLabel: "Framework" },
 }
 
 export const Controlled: Story = {
-  args: { options, value: "svelte" },
+  args: { options, value: "svelte", ariaLabel: "Controlled framework" },
 }
 
 export const WithValue: Story = {
-  args: { options, value: "svelte" },
+  args: { options, value: "svelte", ariaLabel: "Selected framework" },
 }
 
 export const Disabled: Story = {
-  args: { options, disabled: true, placeholder: "Disabled" },
+  args: { options, disabled: true, placeholder: "Disabled", ariaLabel: "Disabled framework" },
 }
 
 export const Native: Story = {
-  args: { options, native: true, placeholder: "Native browser select" },
+  args: {
+    options,
+    native: true,
+    placeholder: "Native browser select",
+    ariaLabel: "Native framework",
+  },
 }
 
 export const Invalid: Story = {
-  args: { options, invalid: true, value: "react" },
+  args: { options, invalid: true, value: "react", ariaLabel: "Invalid framework" },
 }
