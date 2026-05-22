@@ -94,6 +94,17 @@ export const familySemanticsRegistry = {
     notes:
       "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level.",
   },
+  "context-menu": {
+    family: "context-menu",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "context-menu",
+    },
+    canonicalAttributes: ["data-component", "data-destructive"],
+    allowedPurposes: [],
+    notes:
+      "ContextMenu exposes a menu surface and button-backed menu items while popover/open-state orchestration stays adapter-owned.",
+  },
   breadcrumb: {
     family: "breadcrumb",
     defaultLayer: "atom",
@@ -103,6 +114,6 @@ export const familySemanticsRegistry = {
     canonicalAttributes: ["data-component"],
     allowedPurposes: [],
     notes:
-      "Breadcrumb exposes the canonical navigation trail family identity while item state and separators stay family-local.",
+      "Breadcrumb exposes navigation hierarchy while routing, link resolution, and page ownership stay consumer-owned.",
   },
 } satisfies Record<string, FamilySemanticDefinition>

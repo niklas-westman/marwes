@@ -103,12 +103,17 @@ export type { CardProps } from "./components/card/types.js"
 export { default as Divider } from "./components/divider/Divider.svelte"
 export type { DividerProps } from "./components/divider/types.js"
 
+// ContextMenu
+export { default as ContextMenu } from "./components/context-menu/ContextMenu.svelte"
+export type {
+  ContextMenuActionItem,
+  ContextMenuEntry,
+  ContextMenuProps,
+} from "./components/context-menu/types.js"
+
 // Breadcrumb
 export { default as Breadcrumb } from "./components/breadcrumb/Breadcrumb.svelte"
-export type {
-  BreadcrumbItem,
-  BreadcrumbProps,
-} from "./components/breadcrumb/types.js"
+export type { BreadcrumbItem, BreadcrumbProps } from "./components/breadcrumb/types.js"
 
 // Spacing
 export { default as Spacing } from "./components/spacing/Spacing.svelte"

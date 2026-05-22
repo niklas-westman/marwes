@@ -177,6 +177,15 @@ export type {
 export { Divider } from "./components/divider"
 export type { DividerProps } from "./components/divider"
 
+/* ContextMenu */
+export { ContextMenu } from "./components/context-menu"
+export type { ContextMenuProps } from "./components/context-menu"
+export type {
+  ContextMenuActionItem,
+  ContextMenuDividerItem,
+  ContextMenuEntry,
+} from "@marwes-ui/core"
+
 /* Breadcrumb */
 export { Breadcrumb } from "./components/breadcrumb"
 export type { BreadcrumbProps } from "./components/breadcrumb"

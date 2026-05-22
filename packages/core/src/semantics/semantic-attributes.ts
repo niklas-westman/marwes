@@ -72,7 +72,7 @@ export const canonicalSemanticAttributes: Record<string, SemanticAttributeDefini
     name: "data-destructive",
     description: "Boolean marker for destructive actions or flows.",
     allowedValues: ["true", "false"],
-    applicableFamilies: ["button", "dialog"],
+    applicableFamilies: ["button", "dialog", "context-menu"],
     applicableLayers: semanticLayers,
   },
   "data-confirmation-required": {

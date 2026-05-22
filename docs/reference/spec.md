@@ -206,28 +206,61 @@ Use this format when resolving an open decision:
   - `apps/storybook-svelte/src/stories/drawer/*`
   - `apps/dashboard-teaser/*`
 
-### REQ-BREADCRUMB-001: Breadcrumb Component
-- **Figma reference**: use `.figma/marwes/components/breadcrumb.json` plus the generated `-breadcrumb` light, dark, status, and component-container page references.
-- **Problem**: Breadcrumb is needed by product compositions such as `apps/dashboard-teaser`, but it must be provided as a real Marwes component instead of an app-local mock.
+### REQ-CONTEXT-MENU-001: Context Menu Component
+- **Figma reference**: use `.figma/marwes/components/context-menu.json`, `.figma/marwes/components/partscontext-menucontext-menu-item.json`, `.figma/marwes/pages/-context-menu/-context-menu_1574-24029.json`, and `.figma/marwes/pages/-context-menu/-context-menu-dark_1574-24160.json`.
+- **Problem**: Context menu visuals are currently mocked in `apps/dashboard-teaser`, but they need to ship as a reusable Marwes component with consistent semantics, CSS, and framework parity.
 - **Scope**:
-  - Add a framework-agnostic core Breadcrumb recipe and a11y contract.
-  - Add firstEdition preset CSS for the root, ordered list, home affordance, links, separators, and current page state.
+  - Add a framework-agnostic core ContextMenu recipe with item and divider render kits.
+  - Add firstEdition preset CSS for the menu shell, items, icons, dividers, focus, hover, disabled, and destructive states.
+  - Expose ContextMenu through React, Vue, and Svelte adapters.
+  - Add React, Vue, and Svelte Storybook coverage.
+  - Replace dashboard-teaser local context menu markup with the React ContextMenu export.
+- **Non-goals**:
+  - Popover positioning, portal management, or open-state management.
+  - Moving keyboard or lifecycle behavior into `@marwes-ui/core`.
+  - Hardcoding visual tokens in adapters.
+- **Acceptance criteria**:
+  - [ ] Core ContextMenu recipe returns stable `.mw-context-menu*` classes, semantic data attributes, menu/menuitem a11y metadata, and divider render kits.
+  - [ ] Preset CSS maps the Figma menu dimensions, spacing, border, radius, typography, icon sizing, divider treatment, and light/dark surfaces to `--mw-*` variables.
+  - [ ] React, Vue, and Svelte adapters render button-backed menu items and disabled items cannot trigger selection.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with default, destructive, disabled, and compact grouped examples.
+  - [ ] Dashboard teaser consumes the React ContextMenu export and no longer owns local context menu styling.
+- **Validation**:
+  - Unit: core recipe tests; React/Vue adapter tests; Svelte type/build coverage.
+  - Integration/manual: Storybook visual check and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/context-menu/*`
+  - `packages/presets/src/firstEdition/context-menu.css`
+  - `packages/react/src/components/context-menu/*`
+  - `packages/vue/src/components/context-menu/*`
+  - `packages/svelte/src/lib/components/context-menu/*`
+  - `apps/storybook-react/src/stories/context-menu/*`
+  - `apps/storybook-vue/src/stories/context-menu/*`
+  - `apps/storybook-svelte/src/stories/context-menu/*`
+  - `apps/dashboard-teaser/*`
+
+### REQ-BREADCRUMB-001: Breadcrumb Component
+- **Figma reference**: use `.figma/marwes/components/breadcrumb.json`, `.figma/marwes/components/partsbreadcrumbbreadcrumb-item.json`, `.figma/marwes/components/partsbreadcrumbbreadcrumb-separator.json`, `.figma/marwes/pages/-breadcrumb/-breadcrumb_1574-27193.json`, and `.figma/marwes/pages/-breadcrumb/-breadcrumb-dark_1574-27268.json`.
+- **Problem**: Breadcrumb visuals are currently mocked in `apps/dashboard-teaser`, but they need to ship as a reusable Marwes component with consistent hierarchy semantics, CSS, and framework parity.
+- **Scope**:
+  - Add a framework-agnostic core Breadcrumb recipe with root, list, item, separator, home, link, and current-page render metadata.
+  - Add firstEdition preset CSS for Figma typography, icon sizing, chevron separator spacing, light/dark token mapping, hover, and focus states.
   - Expose Breadcrumb through React, Vue, and Svelte adapters.
   - Add React, Vue, and Svelte Storybook coverage.
   - Replace dashboard-teaser local breadcrumb markup with the React Breadcrumb export.
 - **Non-goals**:
-  - Adding routing integration to core or adapters.
+  - Owning routing, URL generation, or router integration.
   - Moving framework click handling into `@marwes-ui/core`.
   - Hardcoding visual tokens in adapters.
 - **Acceptance criteria**:
-  - [ ] Core Breadcrumb recipe returns stable `.mw-breadcrumb*` classes, semantic data attributes, item state, and navigation a11y metadata.
-  - [ ] Preset CSS uses `--mw-*` variables seeded from theme CSS variables for text, links, separators, focus, radius, and font behavior.
-  - [ ] React, Vue, and Svelte adapters render the core recipe output without duplicating core a11y logic.
-  - [ ] Storybook coverage exists for React, Vue, and Svelte with home, linked, current-page, and compact states.
-  - [ ] Dashboard teaser consumes the React Breadcrumb export and no longer owns a local breadcrumb implementation.
+  - [ ] Core Breadcrumb recipe returns stable `.mw-breadcrumb*` classes, semantic data attributes, list semantics, link/current item a11y metadata, and separator metadata.
+  - [ ] Preset CSS maps Figma's 14px home icon, 12px chevrons, 24px separator slots, 12px label typography, link/current/muted colors, and focus treatment to `--mw-*` variables.
+  - [ ] React, Vue, and Svelte adapters render the core recipe output without duplicating core hierarchy logic.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with default, no-home, button-backed, and state-comparison examples where supported.
+  - [ ] Dashboard teaser consumes the React Breadcrumb export and no longer owns local breadcrumb styling.
 - **Validation**:
-  - Unit: core recipe tests; preset CSS contract tests; React/Vue/Svelte adapter tests where supported.
-  - Integration/manual: Storybook visual checks and dashboard-teaser browser check.
+  - Unit: core recipe tests; preset CSS contract tests; React/Vue adapter tests.
+  - Integration/manual: Storybook visual check and dashboard-teaser browser check.
 - **Files expected to change**:
   - `packages/core/src/components/atoms/breadcrumb/*`
   - `packages/presets/src/firstEdition/breadcrumb.css`

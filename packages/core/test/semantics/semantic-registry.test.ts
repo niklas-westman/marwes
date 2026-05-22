@@ -31,6 +31,10 @@ describe("semantic registry", () => {
       "data-component": "drawer",
       "data-size": "medium",
     })
+
+    expect(createFamilySemanticAttributes("context-menu")).toEqual({
+      "data-component": "context-menu",
+    })
   })
 
   it("creates purpose semantic attributes for Wave 1 purpose wrappers", () => {

@@ -177,6 +177,15 @@ Update the relevant sources before running generators:
 - Storybook companion configuration when the family needs canonical story title overrides: `.pi/storybook-companion.config.ts`
 - framework parity inputs when a new adapter or story coverage changes framework support
 
+The generated outputs are not all driven by the same source:
+
+- `artifacts/component-manifest.json`, `artifacts/design-provenance.json`, `artifacts/framework-parity.json`, and `artifacts/purpose-registry.json` come from the trust artifact generator.
+- `docs/reference/framework-parity-summary.md` is derived from `artifacts/framework-parity.json`; regenerate it any time framework support changes.
+- `artifacts/component-registry.json` and `docs/registry/families/<family>/registry.generated.json` are driven by
+  `docs/registry/families/<family>/registry.meta.json` plus `scripts/component-registry-sources.ts`.
+- Adding only `scripts/component-registry-sources.ts` is useful future wiring, but `registry:generate` will not
+  create a new family registry entry until `docs/registry/families/<family>/registry.meta.json` exists.
+
 Then regenerate and check:
 
 ```bash
@@ -196,6 +205,10 @@ pnpm exec biome check --write docs/registry/families/<family>/registry.generated
 ```
 
 Adjust the paths to match the files that changed.
+
+Avoid committing broad generated-file churn. If a generator reformats unrelated families or global registry files
+without semantic changes, revert that noise and rerun the matching `*:check` command. The required output is the
+smallest generated diff that makes the checks pass.
 
 ## Storybook coverage requirements
 

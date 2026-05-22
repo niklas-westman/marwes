@@ -134,6 +134,22 @@
       }
     },
     {
+      "name": "ContextMenu",
+      "family": "context-menu",
+      "component": "context-menu",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-destructive"],
+      "semanticAttributes": ["data-component", "data-destructive"],
+      "purposeWrappers": [],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/context-menu",
+        "react": "packages/react/src/components/context-menu",
+        "vue": "packages/vue/src/components/context-menu",
+        "presetCss": "packages/presets/src/firstEdition/context-menu.css"
+      }
+    },
+    {
       "name": "Breadcrumb",
       "family": "breadcrumb",
       "component": "breadcrumb",

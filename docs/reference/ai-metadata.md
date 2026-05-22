@@ -74,6 +74,7 @@ Track C currently defines canonical semantics for these families:
 - `avatar`
 - `toast`
 - `dialog`
+- `context-menu`
 
 ## Wave 1 purpose vocabulary
 

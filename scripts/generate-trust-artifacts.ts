@@ -112,6 +112,20 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     contractPaths: [],
     figmaReferences: [".figma/marwes/components/drawer.json"],
   },
+  "context-menu": {
+    displayName: "ContextMenu",
+    familyDir: "packages/core/src/components/atoms/context-menu",
+    reactComponentDir: "packages/react/src/components/context-menu",
+    vueComponentDir: "packages/vue/src/components/context-menu",
+    presetCssPath: "packages/presets/src/firstEdition/context-menu.css",
+    reactStoryDir: "apps/storybook-react/src/stories/context-menu",
+    vueStoryDir: "apps/storybook-vue/src/stories/context-menu",
+    contractPaths: [],
+    figmaReferences: [
+      ".figma/marwes/components/context-menu.json",
+      ".figma/marwes/components/partscontext-menucontext-menu-item.json",
+    ],
+  },
   breadcrumb: {
     displayName: "Breadcrumb",
     familyDir: "packages/core/src/components/atoms/breadcrumb",
@@ -120,13 +134,12 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     presetCssPath: "packages/presets/src/firstEdition/breadcrumb.css",
     reactStoryDir: "apps/storybook-react/src/stories/breadcrumb",
     vueStoryDir: "apps/storybook-vue/src/stories/breadcrumb",
-    contractPaths: [
-      "packages/core/test/recipes/breadcrumb.test.ts",
-      "packages/presets/test/breadcrumb-css-contract.test.ts",
-      "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
-      "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
+    contractPaths: [],
+    figmaReferences: [
+      ".figma/marwes/components/breadcrumb.json",
+      ".figma/marwes/components/partsbreadcrumbbreadcrumb-item.json",
+      ".figma/marwes/components/partsbreadcrumbbreadcrumb-separator.json",
     ],
-    figmaReferences: [".figma/marwes/components/breadcrumb.json"],
   },
 }
 

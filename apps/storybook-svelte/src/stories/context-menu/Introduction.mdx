@@ -1,0 +1,16 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="ContextMenu/Introduction" />
+
+# ContextMenu Component
+
+Marwes provides ContextMenu as an atom for compact action lists. Parent code owns
+opening, closing, focus return, and positioning.
+
+Items render as button-backed `role="menuitem"` controls, dividers render
+separator semantics, disabled items cannot trigger selection, and destructive
+items expose `data-destructive`.
+
+```ts
+import { ContextMenu } from "@marwes-ui/svelte"
+```

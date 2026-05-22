@@ -1,0 +1,60 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "context-menu",
+  "displayName": "ContextMenu",
+  "status": "shipped",
+  "summary": "Compact action-list atom with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling.",
+  "philosophy": [
+    "Keep ContextMenu focused on the menu surface and items while parent code owns opening, closing, focus return, and positioning.",
+    "Keep items button-backed so actions remain natively focusable and disabled items cannot dispatch selection.",
+    "Use the synced Figma context-menu component as the visual baseline for dimensions, spacing, typography, borders, and grouped dividers."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a compact grouped list of secondary actions.",
+      "Actions benefit from leading icons and a small menu surface.",
+      "The product already owns the trigger, popover positioning, and menu visibility state."
+    ],
+    "avoidWhen": [
+      "The UI needs a full popover primitive with collision-aware positioning.",
+      "The choices are form values rather than commands; use a select or dropdown field instead.",
+      "The menu would contain complex forms or long-form content rather than short actions."
+    ]
+  },
+  "axe": {
+    "riskTier": "medium",
+    "auditStatus": "initial-implementation",
+    "automationCovers": [
+      "Core recipe tests for menu semantics, item/divider render kits, disabled state, and destructive metadata.",
+      "React and Vue adapter tests for menuitem rendering and disabled click behavior.",
+      "Storybook introduction and taxonomy tests in React, Vue, and Svelte apps."
+    ],
+    "manualReviewRequired": [
+      "End-to-end product composition where a trigger opens the menu and returns focus after close.",
+      "Keyboard behavior for any future managed popover/menu-button composition.",
+      "Visual review against the light and dark Figma context-menu frames."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "This component intentionally does not provide popover positioning or open-state management.",
+      "The atom exposes menu/menuitem semantics; richer menu-button behavior should be added as a separate managed composition if needed."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/context-menu/Introduction.mdx",
+        "apps/storybook-react/src/stories/context-menu/context-menu.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/context-menu/Introduction.mdx",
+        "apps/storybook-vue/src/stories/context-menu/context-menu.stories.ts"
+      ]
+    },
+    "preferredStates": ["default", "grouped", "divider", "disabled", "destructive", "light", "dark"]
+  },
+  "openQuestions": [
+    "Should a future ContextMenuButton molecule own trigger state, positioning, roving focus, and focus return?",
+    "Should destructive context-menu items eventually map into shared button action semantics or stay family-local?"
+  ]
+}
