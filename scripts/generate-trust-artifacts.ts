@@ -112,6 +112,22 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     contractPaths: [],
     figmaReferences: [".figma/marwes/components/drawer.json"],
   },
+  breadcrumb: {
+    displayName: "Breadcrumb",
+    familyDir: "packages/core/src/components/atoms/breadcrumb",
+    reactComponentDir: "packages/react/src/components/breadcrumb",
+    vueComponentDir: "packages/vue/src/components/breadcrumb",
+    presetCssPath: "packages/presets/src/firstEdition/breadcrumb.css",
+    reactStoryDir: "apps/storybook-react/src/stories/breadcrumb",
+    vueStoryDir: "apps/storybook-vue/src/stories/breadcrumb",
+    contractPaths: [
+      "packages/core/test/recipes/breadcrumb.test.ts",
+      "packages/presets/test/breadcrumb-css-contract.test.ts",
+      "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
+      "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
+    ],
+    figmaReferences: [".figma/marwes/components/breadcrumb.json"],
+  },
 }
 
 function relativePath(path: string): string {

@@ -177,6 +177,11 @@ export type {
 export { Divider } from "./components/divider"
 export type { DividerProps } from "./components/divider"
 
+/* Breadcrumb */
+export { Breadcrumb } from "./components/breadcrumb"
+export type { BreadcrumbProps } from "./components/breadcrumb"
+export type { BreadcrumbItem } from "@marwes-ui/core"
+
 /* Spinner */
 export { Spinner, ButtonSpinner, EmptyStateSpinner } from "./components/spinner"
 export type {

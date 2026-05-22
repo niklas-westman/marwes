@@ -13,6 +13,20 @@ export type {
   DrawerRenderKit,
   DrawerSize,
 } from "./drawer"
+export * from "./breadcrumb"
+export type {
+  BreadcrumbA11yProps,
+  BreadcrumbEntryRenderKit,
+  BreadcrumbHomeA11yProps,
+  BreadcrumbHomeRenderKit,
+  BreadcrumbItem,
+  BreadcrumbItemA11yProps,
+  BreadcrumbItemRenderKit,
+  BreadcrumbListA11yProps,
+  BreadcrumbOptions,
+  BreadcrumbRenderKit,
+  BreadcrumbSeparatorA11yProps,
+} from "./breadcrumb"
 export * from "./toast"
 export type {
   ToastOptions,

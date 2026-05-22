@@ -132,6 +132,22 @@
         "vue": "packages/vue/src/components/drawer",
         "presetCss": "packages/presets/src/firstEdition/drawer.css"
       }
+    },
+    {
+      "name": "Breadcrumb",
+      "family": "breadcrumb",
+      "component": "breadcrumb",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component"],
+      "semanticAttributes": ["data-component"],
+      "purposeWrappers": [],
+      "frameworks": ["react", "vue"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/breadcrumb",
+        "react": "packages/react/src/components/breadcrumb",
+        "vue": "packages/vue/src/components/breadcrumb",
+        "presetCss": "packages/presets/src/firstEdition/breadcrumb.css"
+      }
     }
   ]
 }

@@ -1,0 +1,118 @@
+/*
+ * Breadcrumb Styles
+ * Figma refs: 1574:26965, 1574:26960, 1574:26962
+ */
+
+.mw-breadcrumb {
+  --mw-breadcrumb-link: var(--mw-color-text-link, var(--mw-color-primary-base, #2527ca));
+  --mw-breadcrumb-link-hover: var(--mw-color-primary-hover, #1b1d97);
+  --mw-breadcrumb-current: var(--mw-color-text, #141414);
+  --mw-breadcrumb-muted: var(--mw-color-text-muted, #595959);
+  --mw-breadcrumb-focus: var(--mw-color-focus, #2f31fc);
+  --mw-breadcrumb-font: var(--mw-font-primary, "Instrument Sans", sans-serif);
+  --mw-breadcrumb-font-size: 12px;
+  --mw-breadcrumb-line-height: 12px;
+  --mw-breadcrumb-letter-spacing: -0.36px;
+  --mw-breadcrumb-font-weight: 500;
+  --mw-breadcrumb-home-size: 14px;
+  --mw-breadcrumb-separator-size: 12px;
+  --mw-breadcrumb-separator-padding: 6px;
+
+  display: inline-flex;
+  max-width: 100%;
+  color: var(--mw-breadcrumb-current);
+  font-family: var(--mw-breadcrumb-font);
+  font-size: var(--mw-breadcrumb-font-size);
+  font-weight: var(--mw-breadcrumb-font-weight);
+  line-height: var(--mw-breadcrumb-line-height);
+  letter-spacing: var(--mw-breadcrumb-letter-spacing);
+}
+
+.mw-breadcrumb__list {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mw-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.mw-breadcrumb__action {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--mw-breadcrumb-link);
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mw-breadcrumb__action:hover {
+  color: var(--mw-breadcrumb-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mw-breadcrumb__action:focus-visible {
+  outline: 2px solid var(--mw-breadcrumb-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.mw-breadcrumb__home {
+  width: var(--mw-breadcrumb-home-size);
+  height: var(--mw-breadcrumb-home-size);
+  justify-content: center;
+  color: var(--mw-breadcrumb-muted);
+  line-height: 0;
+}
+
+.mw-breadcrumb__home:hover {
+  color: var(--mw-breadcrumb-link);
+}
+
+.mw-breadcrumb__home svg {
+  width: var(--mw-breadcrumb-home-size);
+  height: var(--mw-breadcrumb-home-size);
+}
+
+.mw-breadcrumb__current {
+  color: var(--mw-breadcrumb-current);
+  cursor: default;
+}
+
+.mw-breadcrumb__current:hover {
+  color: var(--mw-breadcrumb-current);
+  text-decoration: none;
+}
+
+.mw-breadcrumb__separator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--mw-breadcrumb-separator-size) + (var(--mw-breadcrumb-separator-padding) * 2));
+  height: var(--mw-breadcrumb-separator-size);
+  padding-inline: var(--mw-breadcrumb-separator-padding);
+  color: var(--mw-breadcrumb-muted);
+  line-height: 0;
+  flex: 0 0 auto;
+}
+
+.mw-breadcrumb__separator svg {
+  width: var(--mw-breadcrumb-separator-size);
+  height: var(--mw-breadcrumb-separator-size);
+}

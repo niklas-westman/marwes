@@ -94,4 +94,15 @@ export const familySemanticsRegistry = {
     notes:
       "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level.",
   },
+  breadcrumb: {
+    family: "breadcrumb",
+    defaultLayer: "atom",
+    baseAttributes: {
+      "data-component": "breadcrumb",
+    },
+    canonicalAttributes: ["data-component"],
+    allowedPurposes: [],
+    notes:
+      "Breadcrumb exposes the canonical navigation trail family identity while item state and separators stay family-local.",
+  },
 } satisfies Record<string, FamilySemanticDefinition>

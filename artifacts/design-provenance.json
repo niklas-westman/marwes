@@ -109,6 +109,26 @@
         "vue": "apps/storybook-vue/src/stories/drawer"
       },
       "contracts": []
+    },
+    {
+      "family": "breadcrumb",
+      "figma": [".figma/marwes/components/breadcrumb.json"],
+      "source": {
+        "core": "packages/core/src/components/atoms/breadcrumb",
+        "react": "packages/react/src/components/breadcrumb",
+        "vue": "packages/vue/src/components/breadcrumb"
+      },
+      "presetCss": "packages/presets/src/firstEdition/breadcrumb.css",
+      "stories": {
+        "react": "apps/storybook-react/src/stories/breadcrumb",
+        "vue": "apps/storybook-vue/src/stories/breadcrumb"
+      },
+      "contracts": [
+        "packages/core/test/recipes/breadcrumb.test.ts",
+        "packages/presets/test/breadcrumb-css-contract.test.ts",
+        "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
+        "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts"
+      ]
     }
   ]
 }

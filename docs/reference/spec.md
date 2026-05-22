@@ -206,6 +206,39 @@ Use this format when resolving an open decision:
   - `apps/storybook-svelte/src/stories/drawer/*`
   - `apps/dashboard-teaser/*`
 
+### REQ-BREADCRUMB-001: Breadcrumb Component
+- **Figma reference**: use `.figma/marwes/components/breadcrumb.json` plus the generated `-breadcrumb` light, dark, status, and component-container page references.
+- **Problem**: Breadcrumb is needed by product compositions such as `apps/dashboard-teaser`, but it must be provided as a real Marwes component instead of an app-local mock.
+- **Scope**:
+  - Add a framework-agnostic core Breadcrumb recipe and a11y contract.
+  - Add firstEdition preset CSS for the root, ordered list, home affordance, links, separators, and current page state.
+  - Expose Breadcrumb through React, Vue, and Svelte adapters.
+  - Add React, Vue, and Svelte Storybook coverage.
+  - Replace dashboard-teaser local breadcrumb markup with the React Breadcrumb export.
+- **Non-goals**:
+  - Adding routing integration to core or adapters.
+  - Moving framework click handling into `@marwes-ui/core`.
+  - Hardcoding visual tokens in adapters.
+- **Acceptance criteria**:
+  - [ ] Core Breadcrumb recipe returns stable `.mw-breadcrumb*` classes, semantic data attributes, item state, and navigation a11y metadata.
+  - [ ] Preset CSS uses `--mw-*` variables seeded from theme CSS variables for text, links, separators, focus, radius, and font behavior.
+  - [ ] React, Vue, and Svelte adapters render the core recipe output without duplicating core a11y logic.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with home, linked, current-page, and compact states.
+  - [ ] Dashboard teaser consumes the React Breadcrumb export and no longer owns a local breadcrumb implementation.
+- **Validation**:
+  - Unit: core recipe tests; preset CSS contract tests; React/Vue/Svelte adapter tests where supported.
+  - Integration/manual: Storybook visual checks and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/breadcrumb/*`
+  - `packages/presets/src/firstEdition/breadcrumb.css`
+  - `packages/react/src/components/breadcrumb/*`
+  - `packages/vue/src/components/breadcrumb/*`
+  - `packages/svelte/src/lib/components/breadcrumb/*`
+  - `apps/storybook-react/src/stories/breadcrumb/*`
+  - `apps/storybook-vue/src/stories/breadcrumb/*`
+  - `apps/storybook-svelte/src/stories/breadcrumb/*`
+  - `apps/dashboard-teaser/*`
+
 ### REQ-VUE-001: Vue Adapter Package (`@marwes-ui/vue`)
 - **Problem**: Marwes core and presets are framework-agnostic, but only a React adapter exists, which blocks Vue users from consuming the same components and behaviors.
 - **Scope**:

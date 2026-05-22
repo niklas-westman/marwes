@@ -56,6 +56,14 @@
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
+    },
+    {
+      "family": "breadcrumb",
+      "react": true,
+      "vue": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
     }
   ]
 }

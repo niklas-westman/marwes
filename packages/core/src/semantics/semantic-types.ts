@@ -27,6 +27,7 @@ export const semanticFamilies = [
   "toast",
   "dialog",
   "drawer",
+  "breadcrumb",
 ] as const
 export type SemanticFamily = (typeof semanticFamilies)[number]
 

@@ -1,6 +1,7 @@
 import {
   Avatar,
   AvatarGroup,
+  Breadcrumb,
   ErrorToast,
   Icon,
   IconName,
@@ -10,7 +11,7 @@ import {
   Toast,
   WarningToast,
 } from "@marwes-ui/react"
-import type { SegmentedControlItem } from "@marwes-ui/react"
+import type { BreadcrumbItem, SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 type ToastVariant = "subtle" | "outline" | "rich"
 import styled from "styled-components"
@@ -57,6 +58,12 @@ const toastVariantItems: SegmentedControlItem[] = [
   { value: "subtle", label: "Label" },
   { value: "outline", label: "Outline" },
   { value: "rich", label: "Rich" },
+]
+
+const breadcrumbItems: BreadcrumbItem[] = [
+  { label: "Label", href: "#" },
+  { label: "Label", href: "#" },
+  { label: "Current page", current: true },
 ]
 
 const ContextMenuWrapper = styled.div`
@@ -111,40 +118,6 @@ const AvatarRow = styled.div`
   gap: 16px;
   align-items: center;
   flex-wrap: wrap;
-`
-
-const BreadcrumbWrapper = styled.nav`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 12px;
-`
-
-const BreadcrumbItem = styled.a`
-  color: #5859fc;
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-const BreadcrumbSeparator = styled.span`
-  color: var(--mw-color-text-muted, #595959);
-  font-size: 10px;
-`
-
-const BreadcrumbCurrent = styled.span`
-  color: var(--mw-color-text, #141414);
-  font-weight: 500;
-`
-
-const BreadcrumbHome = styled.span`
-  display: flex;
-  align-items: center;
-  color: var(--mw-color-text-muted, #595959);
 `
 
 function RowToastMenuAvatar(): JSX.Element {
@@ -253,17 +226,7 @@ function RowToastMenuAvatar(): JSX.Element {
         </SubSection>
         <SubSection>
           <CardTitle>Breadcrumb</CardTitle>
-          <BreadcrumbWrapper>
-            <BreadcrumbHome>
-              <Icon name={IconName.Home} decorative size={12} />
-            </BreadcrumbHome>
-            <BreadcrumbSeparator>›</BreadcrumbSeparator>
-            <BreadcrumbItem href="#">Label</BreadcrumbItem>
-            <BreadcrumbSeparator>›</BreadcrumbSeparator>
-            <BreadcrumbItem href="#">Label</BreadcrumbItem>
-            <BreadcrumbSeparator>›</BreadcrumbSeparator>
-            <BreadcrumbCurrent>Current page</BreadcrumbCurrent>
-          </BreadcrumbWrapper>
+          <Breadcrumb homeHref="#" items={breadcrumbItems} />
         </SubSection>
       </RightColumn>
     </RowContainer>

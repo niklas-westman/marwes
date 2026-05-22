@@ -1667,6 +1667,60 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  breadcrumb: createRegistryFamilySource({
+    family: "breadcrumb",
+    contractPaths: [
+      "packages/core/test/recipes/breadcrumb.test.ts",
+      "packages/presets/test/breadcrumb-css-contract.test.ts",
+      "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
+      "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
+    ],
+    semantics: {
+      coverageLevel: "canonical",
+      dataComponent: "breadcrumb",
+      canonicalAttributes: ["data-component"],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: [
+        "packages/core/src/components/atoms/breadcrumb/breadcrumb-recipe.ts",
+        "packages/core/src/semantics/family-semantics.ts",
+      ],
+      notes: [
+        "Breadcrumb exposes canonical navigation-trail identity in core.",
+        "Current-page state and separators are adapter-rendered from the core recipe contract.",
+      ],
+    },
+    figma: {
+      componentJsons: [".figma/marwes/components/breadcrumb.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-breadcrumb/overall-status_1730-4167.json",
+        ".figma/marwes/pages/-breadcrumb/overall-status_2394-57737.json",
+        ".figma/marwes/pages/-breadcrumb/component-container_1592-2744.json",
+        ".figma/marwes/pages/-breadcrumb/-breadcrumb_1574-27193.json",
+        ".figma/marwes/pages/-breadcrumb/-breadcrumb-dark_1574-27268.json",
+        ".figma/marwes/pages/-breadcrumb/component-heading_2962-5123.json",
+      ],
+      nodeReferences: {
+        breadcrumbComponent: "1574:27193",
+        breadcrumbDarkFrame: "1574:27268",
+        breadcrumbComponentContainer: "1592:2744",
+        breadcrumbStatusFrame: "1730:4167",
+      },
+      figmaTokens: ["breadcrumb/link", "breadcrumb/current", "breadcrumb/separator"],
+      figmaStates: {
+        baseVariants: ["light", "dark"],
+        interactionStates: ["home", "link", "separator", "current"],
+      },
+    },
+  }),
   toast: createRegistryFamilySource({
     family: "toast",
     contractPaths: ["tests/contracts/toast.contract.ts"],
