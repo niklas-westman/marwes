@@ -1,4 +1,4 @@
-import { Button, Pagination, SliderField } from "@marwes-ui/react"
+import { Button, Pagination, ProgressBar } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -37,7 +37,6 @@ const ButtonRow = styled.div`
 
 function RowButtonPaginationProgress(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1)
-  const [progress, setProgress] = useState(60)
 
   return (
     <RowContainer>
@@ -60,17 +59,7 @@ function RowButtonPaginationProgress(): JSX.Element {
       </ItemCard>
       <ItemCard>
         <SectionLabel>Progress bar</SectionLabel>
-        <SliderField
-          label="Progress"
-          maxValueLabel={`${progress}%`}
-          slider={{
-            min: 0,
-            max: 100,
-            step: 1,
-            value: progress,
-            onValueChange: setProgress,
-          }}
-        />
+        <ProgressBar label="Progress" value={60} size="small" />
       </ItemCard>
     </RowContainer>
   )

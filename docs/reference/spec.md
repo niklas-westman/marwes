@@ -919,6 +919,39 @@ Use this format when resolving an open decision:
   - `apps/storybook-vue/src/stories/slider/*`
   - `docs/audits/slider-family-accessibility.md`
 
+### REQ-PROGRESS-BAR-001: ProgressBar Component
+- **Figma reference**: use `.figma/marwes/components/progress-bar.json`, `.figma/marwes/pages/-progress-bar/-progress-bar_1727-3932.json`, `.figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json`, and the dashboard item instance `.figma/marwes/pages/-dashboard/item_2705-11253.json`.
+- **Problem**: Product examples need determinate progress display, but `SliderField` is an adjustable input and should not be used as a fake progress bar.
+- **Scope**:
+  - Add a framework-agnostic core ProgressBar recipe and progressbar a11y contract.
+  - Add firstEdition preset CSS for the label row, percentage text, small/default tracks, fill, disabled, and visual state treatments.
+  - Expose ProgressBar through React, Vue, and Svelte adapters.
+  - Add Storybook coverage and contract tests across supported adapters.
+  - Replace dashboard-teaser SliderField usage with the React ProgressBar export.
+- **Non-goals**:
+  - Adding animated loading behavior or indeterminate progress.
+  - Making ProgressBar adjustable or keyboard interactive.
+  - Moving visual styling into framework adapters.
+- **Acceptance criteria**:
+  - [x] Core ProgressBar normalizes `min`, `max`, and `value`, clamps out-of-range values, and exposes a percentage CSS variable.
+  - [x] ProgressBar renders `role="progressbar"` with value metadata and a truthful accessible name.
+  - [x] Preset CSS maps the synced Figma small/default track sizes and state colors through theme variables.
+  - [x] React, Vue, and Svelte adapters render the core recipe output without owning progress logic.
+  - [x] Dashboard teaser uses ProgressBar instead of SliderField for determinate progress display.
+- **Validation**:
+  - Unit: shared ProgressBar contract through React and Vue adapter tests; Svelte adapter tests.
+  - Integration/manual: ProgressBar Storybook visual checks and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/progress-bar/*`
+  - `packages/presets/src/firstEdition/progress-bar.css`
+  - `packages/react/src/components/progress-bar/*`
+  - `packages/vue/src/components/progress-bar/*`
+  - `packages/svelte/src/lib/components/progress-bar/*`
+  - `apps/storybook-react/src/stories/progress-bar/*`
+  - `apps/storybook-vue/src/stories/progress-bar/*`
+  - `apps/storybook-svelte/src/stories/progress-bar/*`
+  - `apps/dashboard-teaser/src/sections/rows/RowButtonPaginationProgress.tsx`
+
 ### REQ-DIALOG-001: Dialog Family Accessibility Contract
 - **Problem**: Marwes already ships `Dialog`, `DialogModal`, and purpose dialog wrappers, but the accessibility contract for modal semantics, focus lifecycle, dismissal behavior, and the boundary between the raw shell and the modal wrapper has not been recorded explicitly in the canonical spec or shared across React and Vue through a dedicated modal contract.
 - **Scope**:

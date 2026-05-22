@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "progress-bar",
+  "displayName": "ProgressBar",
+  "status": "shipped",
+  "summary": "Determinate progress atom with optional label and percentage text, small/default Figma track sizes, and shared progressbar semantics across adapters.",
+  "philosophy": [
+    "Keep ProgressBar as read-only status display, separate from Slider and SliderField input semantics.",
+    "Keep value normalization and accessibility metadata in the core recipe so adapters only render the shared contract.",
+    "Keep visual treatment in preset CSS through stable mw-progress-bar classes and theme-relative variables."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs to communicate determinate completion, upload, import, or setup progress.",
+      "A visible label and percentage should be displayed together with a compact track.",
+      "React, Vue, and Svelte consumers need the same read-only progress semantics."
+    ],
+    "avoidWhen": [
+      "The user should adjust the value; use Slider or SliderField instead.",
+      "The state is indeterminate; use Spinner or a loading-specific composition instead.",
+      "The surrounding UI cannot provide a truthful accessible name when the visible label is hidden."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "first-pass-complete",
+    "automationCovers": [
+      "Shared React/Vue adapter contract tests for progressbar value metadata, clamping, label and percentage visibility, and disabled state metadata.",
+      "Svelte adapter tests for progressbar rendering and small hidden-label usage.",
+      "Storybook introduction/taxonomy tests and a11y smoke coverage in React, Vue, and Svelte Storybook apps."
+    ],
+    "manualReviewRequired": [
+      "Visual review against the synced light and dark Figma progress-bar frames.",
+      "Product-level review when hiding the visible label so the accessible name remains truthful."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "The dashboard teaser uses ProgressBar to avoid presenting a read-only completion value as an adjustable SliderField."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/progress-bar/Introduction.mdx",
+        "apps/storybook-react/src/stories/progress-bar/progress-bar.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/progress-bar/Introduction.mdx",
+        "apps/storybook-vue/src/stories/progress-bar/progress-bar.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/progress-bar/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/progress-bar/progress-bar.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "default",
+      "hover",
+      "pressed",
+      "disabled",
+      "focus",
+      "small",
+      "default-size",
+      "without-label",
+      "without-percentage"
+    ]
+  },
+  "openQuestions": [
+    "Should future design sources expose semantic progress intent colors beyond brand progress?"
+  ]
+}

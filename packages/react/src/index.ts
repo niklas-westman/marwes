@@ -202,6 +202,10 @@ export type {
 export { Skeleton } from "./components/skeleton"
 export type { SkeletonProps } from "./components/skeleton"
 
+/* ProgressBar */
+export { ProgressBar } from "./components/progress-bar"
+export type { ProgressBarProps } from "./components/progress-bar"
+
 /* Spacing */
 export { Spacer, Spacing } from "./components/spacing"
 export type { SpacerProps, SpacingProps } from "./components/spacing"

@@ -120,6 +120,28 @@ export const storybookSkeletonArgTypes = {
   },
 } as const
 
+export const storybookProgressBarArgTypes = {
+  label: { control: "text" },
+  value: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  min: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  max: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  size: {
+    control: "inline-radio",
+    options: ["small", "default"],
+    description: "Figma track size: small is 4px, default is 8px",
+  },
+  state: {
+    control: "select",
+    options: ["default", "hover", "pressed", "focus"],
+    description: "Visual state for documentation and visual QA",
+  },
+  disabled: { control: "boolean" },
+  showLabel: { control: "boolean" },
+  showPercentage: { control: "boolean" },
+  valueLabel: { control: "text" },
+  ariaLabel: { control: "text" },
+} as const
+
 export const storybookStatTileArgTypes = {
   tone: {
     control: "select",

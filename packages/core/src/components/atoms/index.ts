@@ -53,6 +53,7 @@ export * from "./checkbox"
 export * from "./divider"
 export * from "./spinner"
 export * from "./skeleton"
+export * from "./progress-bar"
 export * from "./stat-tile"
 export * from "./date-picker"
 export * from "./icon"
@@ -89,6 +90,14 @@ export type {
   SkeletonA11yProps,
   SkeletonDataAttributes,
 } from "./skeleton"
+export type {
+  ProgressBarA11yProps,
+  ProgressBarDataAttributes,
+  ProgressBarOptions,
+  ProgressBarRenderKit,
+  ProgressBarSize,
+  ProgressBarState,
+} from "./progress-bar"
 export type {
   StatTileOptions,
   StatTileRenderKit,

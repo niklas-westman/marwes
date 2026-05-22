@@ -91,6 +91,7 @@ describe("Public API exports", () => {
       "OptionRadioGroup",
       "YesNoRadioGroup",
       "RatingRadioGroup",
+      "ProgressBar",
       "Skeleton",
       "Slider",
       "SliderField",

@@ -1452,6 +1452,59 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  "progress-bar": createRegistryFamilySource({
+    family: "progress-bar",
+    contractPaths: ["tests/contracts/progress-bar.contract.ts"],
+    semantics: {
+      coverageLevel: "family-local",
+      dataComponent: "progress-bar",
+      canonicalAttributes: [],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: [
+        "packages/core/src/components/atoms/progress-bar/progress-bar-recipe.ts",
+      ],
+      notes: [
+        "ProgressBar is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+        "The atom emits data-component=progress-bar plus local size, state, and disabled attributes from core.",
+      ],
+    },
+    figma: {
+      componentJsons: [".figma/marwes/components/progress-bar.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-progress-bar/-progress-bar_1727-3932.json",
+        ".figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json",
+        ".figma/marwes/pages/-dashboard/item_2705-11253.json",
+      ],
+      nodeReferences: {
+        progressBarComponent: "1727:3852",
+        progressBarLightFrame: "1727:3932",
+        progressBarDarkFrame: "1727:4018",
+        progressBarDashboardItem: "2705:11253",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["progress-bar", "small", "default"],
+        interactionStates: [
+          "default",
+          "hover",
+          "pressed",
+          "disabled",
+          "focus",
+          "label",
+          "percentage",
+        ],
+      },
+    },
+  }),
   spinner: createRegistryFamilySource({
     family: "spinner",
     contractPaths: ["tests/contracts/spinner.contract.ts"],

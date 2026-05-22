@@ -182,6 +182,10 @@ export type { DrawerPlacement, DrawerProps, DrawerSize } from "./components/draw
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte"
 export type { SkeletonProps } from "./components/skeleton/types.js"
 
+// ProgressBar
+export { default as ProgressBar } from "./components/progress-bar/ProgressBar.svelte"
+export type { ProgressBarProps } from "./components/progress-bar/types.js"
+
 // StatTile
 export { default as StatTile } from "./components/stat-tile/StatTile.svelte"
 export type { StatTileProps } from "./components/stat-tile/types.js"
