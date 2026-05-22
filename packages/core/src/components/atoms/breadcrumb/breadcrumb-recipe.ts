@@ -18,7 +18,7 @@ function cx(...parts: Array<string | false | undefined>): string {
 }
 
 function createItemKey(item: BreadcrumbItem, index: number): string {
-  return item.id ?? item.value ?? item.href ?? `${index}-${item.label}`
+  return item.id ?? item.value ?? `${index}-${item.href ?? item.label}`
 }
 
 function resolveCurrentIndex(items: readonly BreadcrumbItem[]): number {

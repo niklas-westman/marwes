@@ -10,66 +10,7 @@ import {
 import { useState } from "react"
 import styled from "styled-components"
 
-import { CardTitle, FlexCard } from "./shared"
-
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
-
-const LeftColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 384px;
-  flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`
-
-const RightColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  flex: 1;
-`
-
-const TopRow = styled.div`
-  display: flex;
-  gap: 24px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
-
-const BottomRow = styled.div`
-  display: flex;
-  gap: 24px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
-
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
-`
+import { CardTitle, ShowcaseCard, ShowcaseGrid, ShowcaseSectionLabel } from "./shared"
 
 const DemoArea = styled.div`
   display: flex;
@@ -90,6 +31,16 @@ const BadgeRow = styled.div`
   align-items: center;
 `
 
+const OtpCard = styled(ShowcaseCard)`
+  .mw-input-otp {
+    max-width: 100%;
+  }
+
+  .mw-input-otp__cells {
+    width: min(100%, max-content);
+  }
+`
+
 function RowSwitchCard(): JSX.Element {
   const [switchA, setSwitchA] = useState(true)
   const [switchB, setSwitchB] = useState(false)
@@ -104,103 +55,92 @@ function RowSwitchCard(): JSX.Element {
   }
 
   return (
-    <RowContainer>
-      {/* Left column: Switch + Card (384px) */}
-      <LeftColumn>
-        <FlexCard>
-          <SectionLabel>Switch</SectionLabel>
-          <DemoArea>
-            <SwitchField label="Label" switch={{ checked: switchA, onCheckedChange: setSwitchA }} />
-            <SwitchField label="Label" switch={{ checked: switchB, onCheckedChange: setSwitchB }} />
-          </DemoArea>
-        </FlexCard>
-        <FlexCard>
-          <SectionLabel>Card</SectionLabel>
-          <MwCard title="Card title">
-            Card description text goes here. This provides more context about the card content.
-          </MwCard>
-        </FlexCard>
-      </LeftColumn>
-
-      {/* Right column: (Checkbox | Radio) over (OTP | Badge) */}
-      <RightColumn>
-        <TopRow>
-          <FlexCard>
-            <SectionLabel>Checkbox</SectionLabel>
-            <CardTitle>Size</CardTitle>
-            <InlineCheckboxes>
-              <CheckboxField
-                label="Label"
-                checkbox={{ checked: inlineChecks[0], onCheckedChange: () => toggleInlineCheck(0) }}
-              />
-              <CheckboxField
-                label="Label"
-                checkbox={{ checked: inlineChecks[1], onCheckedChange: () => toggleInlineCheck(1) }}
-              />
-              <CheckboxField
-                label="Label"
-                checkbox={{ checked: inlineChecks[2], onCheckedChange: () => toggleInlineCheck(2) }}
-              />
-            </InlineCheckboxes>
-            <CheckboxGroupField
-              label="Group label"
-              description="Select all that apply"
-              options={[
-                { value: "1", label: "Label" },
-                { value: "2", label: "Label" },
-                { value: "3", label: "Label" },
-              ]}
-              value={groupValues}
-              onChange={setGroupValues}
-            />
-          </FlexCard>
-          <FlexCard>
-            <SectionLabel>Radio</SectionLabel>
-            <RadioGroupField
-              name="demo-radio-single"
-              label="Label"
-              options={[{ value: "1", label: "Label" }]}
-              value={radioValue}
-              onChange={setRadioValue}
-            />
-            <RadioGroupField
-              name="demo-radio-group"
-              label="Group label"
-              description="Select one option"
-              options={[
-                { value: "1", label: "Label" },
-                { value: "2", label: "Label" },
-                { value: "3", label: "Label" },
-              ]}
-              value={radioGroupValue}
-              onChange={setRadioGroupValue}
-            />
-          </FlexCard>
-        </TopRow>
-        <BottomRow>
-          <FlexCard>
-            <SectionLabel>One-Time Password</SectionLabel>
-            <InputOtp
-              label="Verification code"
-              length={6}
-              helperText="Enter the 6-digit code sent to your email"
-              value={otpValue}
-              onValueChange={setOtpValue}
-            />
-          </FlexCard>
-          <FlexCard>
-            <SectionLabel>Badge</SectionLabel>
-            <BadgeRow>
-              <Badge>Badge</Badge>
-              <Badge variant="info">Badge</Badge>
-              <Badge variant="success">Badge</Badge>
-              <Badge variant="warning">Badge</Badge>
-              <Badge variant="error">Badge</Badge>
-            </BadgeRow>
-          </FlexCard>
-        </BottomRow>
-      </RightColumn>
-    </RowContainer>
+    <ShowcaseGrid>
+      <ShowcaseCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Switch</ShowcaseSectionLabel>
+        <DemoArea>
+          <SwitchField label="Label" switch={{ checked: switchA, onCheckedChange: setSwitchA }} />
+          <SwitchField label="Label" switch={{ checked: switchB, onCheckedChange: setSwitchB }} />
+        </DemoArea>
+      </ShowcaseCard>
+      <ShowcaseCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Card</ShowcaseSectionLabel>
+        <MwCard title="Card title">
+          Card description text goes here. This provides more context about the card content.
+        </MwCard>
+      </ShowcaseCard>
+      <ShowcaseCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Checkbox</ShowcaseSectionLabel>
+        <CardTitle>Size</CardTitle>
+        <InlineCheckboxes>
+          <CheckboxField
+            label="Label"
+            checkbox={{ checked: inlineChecks[0], onCheckedChange: () => toggleInlineCheck(0) }}
+          />
+          <CheckboxField
+            label="Label"
+            checkbox={{ checked: inlineChecks[1], onCheckedChange: () => toggleInlineCheck(1) }}
+          />
+          <CheckboxField
+            label="Label"
+            checkbox={{ checked: inlineChecks[2], onCheckedChange: () => toggleInlineCheck(2) }}
+          />
+        </InlineCheckboxes>
+        <CheckboxGroupField
+          label="Group label"
+          description="Select all that apply"
+          options={[
+            { value: "1", label: "Label" },
+            { value: "2", label: "Label" },
+            { value: "3", label: "Label" },
+          ]}
+          value={groupValues}
+          onChange={setGroupValues}
+        />
+      </ShowcaseCard>
+      <ShowcaseCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Radio</ShowcaseSectionLabel>
+        <RadioGroupField
+          name="demo-radio-single"
+          label="Label"
+          options={[{ value: "1", label: "Label" }]}
+          value={radioValue}
+          onChange={setRadioValue}
+        />
+        <RadioGroupField
+          name="demo-radio-group"
+          label="Group label"
+          description="Select one option"
+          options={[
+            { value: "1", label: "Label" },
+            { value: "2", label: "Label" },
+            { value: "3", label: "Label" },
+          ]}
+          value={radioGroupValue}
+          onChange={setRadioGroupValue}
+        />
+      </ShowcaseCard>
+      <OtpCard $desktopSpan={6}>
+        <ShowcaseSectionLabel>One-Time Password</ShowcaseSectionLabel>
+        <InputOtp
+          label="Verification code"
+          length={6}
+          helperText="Enter the 6-digit code sent to your email"
+          value={otpValue}
+          onValueChange={setOtpValue}
+        />
+      </OtpCard>
+      <ShowcaseCard $desktopSpan={6}>
+        <ShowcaseSectionLabel>Badge</ShowcaseSectionLabel>
+        <BadgeRow>
+          <Badge>Badge</Badge>
+          <Badge variant="info">Badge</Badge>
+          <Badge variant="success">Badge</Badge>
+          <Badge variant="warning">Badge</Badge>
+          <Badge variant="error">Badge</Badge>
+        </BadgeRow>
+      </ShowcaseCard>
+    </ShowcaseGrid>
   )
 }
 

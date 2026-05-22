@@ -23,6 +23,23 @@ export default meta
 
 type Story = StoryObj<typeof Drawer>
 
+const renderDrawer: NonNullable<Story["render"]> = (args) => (
+  <Drawer
+    {...args}
+    onClose={() => undefined}
+    footer={
+      <>
+        <CancelButton>Cancel</CancelButton>
+        <ConfirmButton>Apply</ConfirmButton>
+      </>
+    }
+  >
+    <Paragraph>
+      Keep workflow-specific state in the parent and use Drawer for the side panel shell.
+    </Paragraph>
+  </Drawer>
+)
+
 export const Default: Story = {
   args: {
     title: "Drawer title",
@@ -35,22 +52,7 @@ export const Default: Story = {
     dismissible: true,
     modal: true,
   },
-  render: (args) => (
-    <Drawer
-      {...args}
-      onClose={() => undefined}
-      footer={
-        <>
-          <CancelButton>Cancel</CancelButton>
-          <ConfirmButton>Apply</ConfirmButton>
-        </>
-      }
-    >
-      <Paragraph>
-        Keep workflow-specific state in the parent and use Drawer for the side panel shell.
-      </Paragraph>
-    </Drawer>
-  ),
+  render: renderDrawer,
 }
 
 export const Sizes: Story = {
@@ -80,7 +82,7 @@ export const LeftPlacement: Story = {
     placement: "left",
     title: "Left drawer",
   },
-  render: Default.render,
+  render: renderDrawer,
 }
 
 export const WithoutFooter: Story = {

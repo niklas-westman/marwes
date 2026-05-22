@@ -167,15 +167,18 @@ export const Pagination = defineComponent(
     return () => {
       const previousLabel = props.previousLabel ?? "Previous"
       const nextLabel = props.nextLabel ?? "Next"
+      const resolvedMaxVisibleItems = props.maxVisibleItems ?? adaptiveMaxVisibleItems.value
       const rootKit = createPaginationRecipe({
         page: resolvedPage.value,
         pageCount: props.pageCount,
-        siblingCount: props.siblingCount,
-        boundaryCount: props.boundaryCount,
-        maxVisibleItems: props.maxVisibleItems ?? adaptiveMaxVisibleItems.value,
-        showPrevNext: props.showPrevNext,
-        disabled: props.disabled,
-        ariaLabel: props.ariaLabel,
+        ...(props.siblingCount !== undefined ? { siblingCount: props.siblingCount } : {}),
+        ...(props.boundaryCount !== undefined ? { boundaryCount: props.boundaryCount } : {}),
+        ...(resolvedMaxVisibleItems !== undefined
+          ? { maxVisibleItems: resolvedMaxVisibleItems }
+          : {}),
+        ...(props.showPrevNext !== undefined ? { showPrevNext: props.showPrevNext } : {}),
+        ...(props.disabled !== undefined ? { disabled: props.disabled } : {}),
+        ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
         previousLabel,
         nextLabel,
       })
@@ -251,7 +254,7 @@ export const Pagination = defineComponent(
               const pageKit = createPaginationPageRecipe({
                 page: item.page,
                 selected: item.selected,
-                disabled: props.disabled,
+                ...(props.disabled !== undefined ? { disabled: props.disabled } : {}),
               })
 
               return h("li", { key: item.key, class: listItemKit.className }, [

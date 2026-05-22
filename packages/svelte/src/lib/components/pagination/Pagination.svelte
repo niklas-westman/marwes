@@ -132,16 +132,17 @@
     requestMeasure();
   });
 
+  const resolvedMaxVisibleItems = $derived(maxVisibleItems ?? adaptiveMaxVisibleItems);
   const rootKit = $derived(
     createPaginationRecipe({
       page: resolvedPage,
       pageCount,
-      siblingCount,
-      boundaryCount,
-      maxVisibleItems: maxVisibleItems ?? adaptiveMaxVisibleItems,
-      showPrevNext,
-      disabled,
-      ariaLabel,
+      ...(siblingCount !== undefined ? { siblingCount } : {}),
+      ...(boundaryCount !== undefined ? { boundaryCount } : {}),
+      ...(resolvedMaxVisibleItems !== undefined ? { maxVisibleItems: resolvedMaxVisibleItems } : {}),
+      ...(showPrevNext !== undefined ? { showPrevNext } : {}),
+      ...(disabled !== undefined ? { disabled } : {}),
+      ...(ariaLabel !== undefined ? { ariaLabel } : {}),
       previousLabel,
       nextLabel,
     })
@@ -202,7 +203,7 @@
           {@const pageKit = createPaginationPageRecipe({
             page: item.page,
             selected: item.selected,
-            disabled,
+            ...(disabled !== undefined ? { disabled } : {}),
           })}
           <button
             type="button"

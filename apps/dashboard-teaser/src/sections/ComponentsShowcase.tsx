@@ -11,15 +11,7 @@ import { RowToastMenuAvatar } from "./rows/RowToastMenuAvatar"
 
 const ShowcaseContainer = styled.section`
   width: 100%;
-  padding: 0 72px;
-
-  @media (max-width: 1024px) {
-    padding: 0 40px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
+  padding: 0 clamp(16px, 4vw, 72px);
 `
 
 const ContentGrid = styled.div`
@@ -28,15 +20,13 @@ const ContentGrid = styled.div`
   margin: 0 auto;
   background: var(--mw-color-surface-subtle, #f8f8f8);
   border-radius: 16px;
-  padding: 32px;
+  padding: clamp(16px, 3vw, 32px);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(16px, 2vw, 24px);
 
   @media (max-width: 768px) {
-    padding: 16px;
     border-radius: 12px;
-    gap: 16px;
   }
 `
 

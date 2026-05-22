@@ -11,7 +11,7 @@ const PanelContainer = styled.div`
   gap: 24px;
   border-radius: 12px;
   border: 1px solid var(--mw-color-border, #e5e5e5);
-  background: var(--mw-color-surface, #ffffff);
+  background: var(--mw-color-background);
 
   @media (max-width: 1024px) {
     width: 100%;

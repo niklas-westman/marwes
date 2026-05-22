@@ -2,8 +2,8 @@ import {
   Avatar,
   AvatarGroup,
   Breadcrumb,
+  ContextMenu,
   ErrorToast,
-  Icon,
   IconName,
   InfoToast,
   SegmentedControl,
@@ -11,41 +11,35 @@ import {
   Toast,
   WarningToast,
 } from "@marwes-ui/react"
-import type { BreadcrumbItem, SegmentedControlItem } from "@marwes-ui/react"
+import type { BreadcrumbItem, ContextMenuEntry, SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 type ToastVariant = "subtle" | "outline" | "rich"
 import styled from "styled-components"
 
-import { CardTitle, FlexCard } from "./shared"
+import { ShowcaseCard, ShowcaseGrid, ShowcaseSectionLabel } from "./shared"
 
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
+const ToastCard = styled(ShowcaseCard)`
+  .mw-segmented-control,
+  .mw-toast {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 `
 
-const ToastCard = styled(FlexCard)`
-  max-width: 352px;
+const MenuCard = styled(ShowcaseCard)`
+  .mw-context-menu {
+    width: min(100%, var(--mw-context-menu-width, 212px));
+    max-width: 100%;
+  }
 `
 
-const MenuCard = styled(FlexCard)`
-  max-width: 276px;
-`
+const AvatarCard = styled(ShowcaseCard)``
 
-const RightColumn = styled(FlexCard)``
-
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
+const BreadcrumbCard = styled(ShowcaseCard)`
+  .mw-breadcrumb {
+    max-width: 100%;
+  }
 `
 
 const ToastList = styled.div`
@@ -60,58 +54,22 @@ const toastVariantItems: SegmentedControlItem[] = [
   { value: "rich", label: "Rich" },
 ]
 
+const contextMenuItems: ContextMenuEntry[] = [
+  { value: "edit", label: "Edit", icon: IconName.Edit },
+  { value: "preview", label: "Preview", icon: IconName.Eye },
+  { value: "download", label: "Download", icon: IconName.Download },
+  { kind: "divider" },
+  { value: "bookmark", label: "Bookmark", icon: IconName.Bookmark },
+  { value: "report", label: "Report", icon: IconName.Flag },
+  { kind: "divider" },
+  { value: "delete", label: "Delete", icon: IconName.Trash, destructive: true },
+]
+
 const breadcrumbItems: BreadcrumbItem[] = [
   { label: "Label", href: "#" },
   { label: "Label", href: "#" },
-  { label: "Current page", current: true },
+  { label: "Current page" },
 ]
-
-const ContextMenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--mw-color-border, #e5e5e5);
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 4px;
-`
-
-const MenuItem = styled.div<{ $destructive?: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 12px;
-  color: ${(p) => (p.$destructive ? "#d90429" : "var(--mw-color-text, #141414)")};
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--mw-color-surface-subtle, #f5f5f5);
-  }
-`
-
-const MenuDivider = styled.div`
-  height: 1px;
-  background: var(--mw-color-border, #e5e5e5);
-  margin: 4px 0;
-`
-
-const MenuIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 12px;
-  height: 12px;
-  opacity: 0.6;
-`
-
-const SubSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`
 
 const AvatarRow = styled.div`
   display: flex;
@@ -141,9 +99,9 @@ function RowToastMenuAvatar(): JSX.Element {
   ].filter((t) => !dismissedToasts.has(t.id))
 
   return (
-    <RowContainer>
-      <ToastCard>
-        <SectionLabel>Toast</SectionLabel>
+    <ShowcaseGrid>
+      <ToastCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Toast</ShowcaseSectionLabel>
         <SegmentedControl
           items={toastVariantItems}
           value={toastVariant}
@@ -167,69 +125,28 @@ function RowToastMenuAvatar(): JSX.Element {
           )}
         </ToastList>
       </ToastCard>
-      <MenuCard>
-        <SectionLabel>Context menu</SectionLabel>
-        <ContextMenuWrapper>
-          <MenuItem>
-            <MenuIcon>
-              <Icon name={IconName.Edit} decorative />
-            </MenuIcon>
-            Edit
-          </MenuItem>
-          <MenuItem>
-            <MenuIcon>
-              <Icon name={IconName.Eye} decorative />
-            </MenuIcon>
-            Preview
-          </MenuItem>
-          <MenuItem>
-            <MenuIcon>
-              <Icon name={IconName.Download} decorative />
-            </MenuIcon>
-            Download
-          </MenuItem>
-          <MenuDivider />
-          <MenuItem>
-            <MenuIcon>
-              <Icon name={IconName.Bookmark} decorative />
-            </MenuIcon>
-            Bookmark
-          </MenuItem>
-          <MenuItem>
-            <MenuIcon>
-              <Icon name={IconName.Flag} decorative />
-            </MenuIcon>
-            Report
-          </MenuItem>
-          <MenuDivider />
-          <MenuItem $destructive>
-            <MenuIcon>
-              <Icon name={IconName.Trash} decorative />
-            </MenuIcon>
-            Delete
-          </MenuItem>
-        </ContextMenuWrapper>
+      <MenuCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Context menu</ShowcaseSectionLabel>
+        <ContextMenu ariaLabel="File actions" items={contextMenuItems} />
       </MenuCard>
-      <RightColumn>
-        <SubSection>
-          <CardTitle>Avatar</CardTitle>
-          <AvatarRow>
-            <AvatarGroup
-              items={[{ initials: "MO" }, { initials: "MO" }, { initials: "MO" }]}
-              overflowCount={3}
-            />
-            <Avatar initials="MO" />
-            <Avatar initials="MO" />
-            <Avatar initials="MO" size="small" />
-            <Avatar size="small" />
-          </AvatarRow>
-        </SubSection>
-        <SubSection>
-          <CardTitle>Breadcrumb</CardTitle>
-          <Breadcrumb homeHref="#" items={breadcrumbItems} />
-        </SubSection>
-      </RightColumn>
-    </RowContainer>
+      <AvatarCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>
+        <AvatarRow>
+          <AvatarGroup
+            items={[{ initials: "MO" }, { initials: "MO" }, { initials: "MO" }]}
+            overflowCount={3}
+          />
+          <Avatar initials="MO" />
+          <Avatar initials="MO" />
+          <Avatar initials="MO" size="small" />
+          <Avatar size="small" />
+        </AvatarRow>
+      </AvatarCard>
+      <BreadcrumbCard $desktopSpan={3}>
+        <ShowcaseSectionLabel>Breadcrumb</ShowcaseSectionLabel>
+        <Breadcrumb homeHref="#" items={breadcrumbItems} />
+      </BreadcrumbCard>
+    </ShowcaseGrid>
   )
 }
 

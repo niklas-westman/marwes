@@ -55,15 +55,16 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     clampPaginationPage(defaultPage, pageCount),
   )
   const resolvedPage = clampPaginationPage(isControlled ? controlledPage : internalPage, pageCount)
+  const resolvedMaxVisibleItems = maxVisibleItems ?? adaptiveMaxVisibleItems
   const rootKit = createPaginationRecipe({
     page: resolvedPage,
     pageCount,
-    siblingCount,
-    boundaryCount,
-    maxVisibleItems: maxVisibleItems ?? adaptiveMaxVisibleItems,
-    showPrevNext,
-    disabled,
-    ariaLabel,
+    ...(siblingCount !== undefined ? { siblingCount } : {}),
+    ...(boundaryCount !== undefined ? { boundaryCount } : {}),
+    ...(resolvedMaxVisibleItems !== undefined ? { maxVisibleItems: resolvedMaxVisibleItems } : {}),
+    ...(showPrevNext !== undefined ? { showPrevNext } : {}),
+    ...(disabled !== undefined ? { disabled } : {}),
+    ...(ariaLabel !== undefined ? { ariaLabel } : {}),
     previousLabel,
     nextLabel,
   })
@@ -141,7 +142,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
                   const pageKit = createPaginationPageRecipe({
                     page: item.page,
                     selected: item.selected,
-                    disabled,
+                    ...(disabled !== undefined ? { disabled } : {}),
                   })
                   return (
                     <button
