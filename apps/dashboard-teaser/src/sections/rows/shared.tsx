@@ -2,9 +2,10 @@ import styled from "styled-components"
 
 type ShowcaseCardSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 type ShowcaseTabletSpan = 1 | 2
+type ShowcaseCardStart = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 const Card = styled.div<{ $width?: string; $height?: string }>`
-  background: var(--mw-color-background);
+  background: var(--mw-color-surface-elevated, #ffffff);
   border-radius: 12px;
   padding: 24px;
   display: flex;
@@ -54,10 +55,14 @@ const ShowcaseGrid = styled.div`
 
 const ShowcaseCard = styled(Card)<{
   $desktopSpan?: ShowcaseCardSpan
+  $desktopStart?: ShowcaseCardStart
   $tabletSpan?: ShowcaseTabletSpan
 }>`
   width: auto;
-  grid-column: span ${(p) => p.$desktopSpan ?? 4};
+  grid-column: ${(p) =>
+    p.$desktopStart
+      ? `${p.$desktopStart} / span ${p.$desktopSpan ?? 4}`
+      : `span ${p.$desktopSpan ?? 4}`};
   flex-shrink: 1;
 
   @media (max-width: 1199px) {

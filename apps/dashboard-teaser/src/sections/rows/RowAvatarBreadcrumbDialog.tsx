@@ -1,4 +1,4 @@
-import { Button, DialogModal, Drawer, Card as MwCard } from "@marwes-ui/react"
+import { Button, ButtonVariant, DialogModal, Drawer, Card as MwCard } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -51,10 +51,10 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
       <RightCard>
         <SectionLabel>Dialog &amp; Drawer</SectionLabel>
         <ButtonStack>
-          <Button variant="primary" onClick={() => setDialogOpen(true)}>
+          <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>
             Open dialog →
           </Button>
-          <Button variant="secondary" onClick={() => setDrawerOpen(true)}>
+          <Button variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(true)}>
             Open drawer →
           </Button>
         </ButtonStack>
@@ -67,7 +67,7 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
         description="This is a dialog component from the Marwes design system."
         portalTarget={null}
         footer={
-          <Button variant="primary" onClick={() => setDialogOpen(false)}>
+          <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(false)}>
             Close
           </Button>
         }
@@ -84,7 +84,7 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
           placement="right"
           onClose={() => setDrawerOpen(false)}
           footer={
-            <Button variant="secondary" onClick={() => setDrawerOpen(false)}>
+            <Button variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(false)}>
               Close drawer
             </Button>
           }

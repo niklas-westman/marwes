@@ -1,4 +1,4 @@
-import { Button, Pagination, ProgressBar } from "@marwes-ui/react"
+import { Button, ButtonVariant, Pagination, ProgressBar } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -44,8 +44,8 @@ function RowButtonPaginationProgress(): JSX.Element {
         <SectionLabel>Button</SectionLabel>
         <ButtonRow>
           <Button>Label →</Button>
-          <Button variant="secondary">Label →</Button>
-          <Button variant="text">Label →</Button>
+          <Button variant={ButtonVariant.secondary}>Label →</Button>
+          <Button variant={ButtonVariant.text}>Label →</Button>
         </ButtonRow>
       </ItemCard>
       <ItemCard>

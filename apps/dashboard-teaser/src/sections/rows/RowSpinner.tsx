@@ -1,4 +1,4 @@
-import { Button, Spinner } from "@marwes-ui/react"
+import { Button, ButtonVariant, Spinner } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -97,7 +97,7 @@ function RowSpinner(): JSX.Element {
         <SectionLabel>Spinner</SectionLabel>
         <ButtonRow>
           <SpinnerButtonPreview
-            variant="secondary"
+            variant={ButtonVariant.primary}
             loading={{
               isLoading: true,
               disableWhileLoading: false,
@@ -108,7 +108,7 @@ function RowSpinner(): JSX.Element {
             Done!
           </SpinnerButtonPreview>
           <SpinnerButtonPreview
-            variant="secondary"
+            variant={ButtonVariant.secondary}
             loading={{
               isLoading: true,
               disableWhileLoading: false,
@@ -125,7 +125,7 @@ function RowSpinner(): JSX.Element {
         <SpinnerRow>
           {VARIANTS.map(({ key, label }) => (
             <SpinnerItem key={key} type="button" onClick={() => setActiveVariant(key)}>
-              <Spinner variant={key} size={activeVariant === key ? "md" : undefined} />
+              <Spinner variant={key} />
               <SpinnerLabel>{label}</SpinnerLabel>
             </SpinnerItem>
           ))}

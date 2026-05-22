@@ -19,18 +19,30 @@ import styled from "styled-components"
 import { ShowcaseCard, ShowcaseGrid, ShowcaseSectionLabel } from "./shared"
 
 const ToastCard = styled(ShowcaseCard)`
+  grid-row: span 2;
+
   .mw-segmented-control,
   .mw-toast {
     width: 100%;
     min-width: 0;
     max-width: 100%;
   }
+
+  @media (max-width: 1199px) {
+    grid-row: auto;
+  }
 `
 
 const MenuCard = styled(ShowcaseCard)`
+  grid-row: span 2;
+
   .mw-context-menu {
     width: min(100%, var(--mw-context-menu-width, 212px));
     max-width: 100%;
+  }
+
+  @media (max-width: 1199px) {
+    grid-row: auto;
   }
 `
 
@@ -70,6 +82,8 @@ const breadcrumbItems: BreadcrumbItem[] = [
   { label: "Label", href: "#" },
   { label: "Current page" },
 ]
+
+const robotAvatarSrc = `${import.meta.env.BASE_URL}assets/avatar-robot.png`
 
 const AvatarRow = styled.div`
   display: flex;
@@ -129,7 +143,7 @@ function RowToastMenuAvatar(): JSX.Element {
         <ShowcaseSectionLabel>Context menu</ShowcaseSectionLabel>
         <ContextMenu ariaLabel="File actions" items={contextMenuItems} />
       </MenuCard>
-      <AvatarCard $desktopSpan={3}>
+      <AvatarCard $desktopSpan={6} $tabletSpan={2}>
         <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>
         <AvatarRow>
           <AvatarGroup
@@ -137,12 +151,12 @@ function RowToastMenuAvatar(): JSX.Element {
             overflowCount={3}
           />
           <Avatar initials="MO" />
-          <Avatar initials="MO" />
+          <Avatar src={robotAvatarSrc} alt="Marwes robot" />
           <Avatar initials="MO" size="small" />
           <Avatar size="small" />
         </AvatarRow>
       </AvatarCard>
-      <BreadcrumbCard $desktopSpan={3}>
+      <BreadcrumbCard $desktopSpan={6} $desktopStart={7} $tabletSpan={2}>
         <ShowcaseSectionLabel>Breadcrumb</ShowcaseSectionLabel>
         <Breadcrumb homeHref="#" items={breadcrumbItems} />
       </BreadcrumbCard>
