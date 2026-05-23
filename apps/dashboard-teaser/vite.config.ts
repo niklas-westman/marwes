@@ -2,9 +2,25 @@ import path from "node:path"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
+import { renderDashboardSeoHead, resolveDashboardSeo } from "./src/seo/dashboard-seo"
+
+const dashboardBasePath = process.env.VITE_BASE_PATH ?? "/dashboard-teaser/latest/"
+const dashboardSeo = resolveDashboardSeo({
+  basePath: dashboardBasePath,
+  siteOrigin: process.env.VITE_PUBLIC_SITE_ORIGIN,
+})
+
 export default defineConfig({
-  base: process.env.VITE_BASE_PATH ?? "/dashboard-teaser/latest/",
-  plugins: [react()],
+  base: dashboardBasePath,
+  plugins: [
+    {
+      name: "dashboard-teaser-seo",
+      transformIndexHtml(html) {
+        return html.replace("<!--dashboard-seo-head-->", renderDashboardSeoHead(dashboardSeo))
+      },
+    },
+    react(),
+  ],
   resolve: {
     dedupe: ["react", "react-dom", "styled-components"],
     alias: [

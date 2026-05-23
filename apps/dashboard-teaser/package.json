@@ -7,7 +7,8 @@
     "dev": "vite",
     "typecheck": "tsc -b --noEmit",
     "check:button-variants": "node ../../scripts/check-dashboard-button-variants.mjs",
-    "test": "pnpm check:button-variants",
+    "test:seo": "vitest run --config vitest.config.ts",
+    "test": "pnpm check:button-variants && pnpm test:seo",
     "build": "pnpm check:button-variants && tsc -b --noEmit && vite build",
     "preview": "vite preview"
   },
