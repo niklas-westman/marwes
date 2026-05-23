@@ -10,6 +10,8 @@ storybook-static/
 playwright-report/
 test-results/
 blob-report/
+.playwright-mcp/
+dashboard-*.png
 .nyc_output/
 .next/
 out/
