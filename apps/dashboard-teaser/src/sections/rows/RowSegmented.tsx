@@ -7,6 +7,11 @@ import { FlexCard, ShowcaseRow, ShowcaseSectionLabel, ShowcaseStack } from "./sh
 
 const ItemCard = styled(FlexCard)``
 
+const FullWidthSegmentedControl = styled(SegmentedControl)`
+  width: 100%;
+  inline-size: 100%;
+`
+
 const inverseTwo: SegmentedControlItem[] = [
   { value: "compact", label: "Compact" },
   { value: "wide", label: "Wide" },
@@ -20,14 +25,14 @@ const inverseThree: SegmentedControlItem[] = [
 
 const inverseIcon: SegmentedControlItem[] = [
   {
-    value: "a",
-    icon: <Icon name={IconName.Settings} decorative size={12} />,
-    ariaLabel: "Option A",
+    value: "light",
+    icon: <Icon name={IconName.Sun} decorative size={12} />,
+    ariaLabel: "Light mode",
   },
   {
-    value: "b",
-    icon: <Icon name={IconName.Settings} decorative size={12} />,
-    ariaLabel: "Option B",
+    value: "dark",
+    icon: <Icon name={IconName.Moon} decorative size={12} />,
+    ariaLabel: "Dark mode",
   },
 ]
 
@@ -44,14 +49,14 @@ const defaultThree: SegmentedControlItem[] = [
 
 const defaultIcon: SegmentedControlItem[] = [
   {
-    value: "a",
-    icon: <Icon name={IconName.Settings} decorative size={12} />,
-    ariaLabel: "Option A",
+    value: "light",
+    icon: <Icon name={IconName.Sun} decorative size={12} />,
+    ariaLabel: "Light mode",
   },
   {
-    value: "b",
-    icon: <Icon name={IconName.Settings} decorative size={12} />,
-    ariaLabel: "Option B",
+    value: "dark",
+    icon: <Icon name={IconName.Moon} decorative size={12} />,
+    ariaLabel: "Dark mode",
   },
 ]
 
@@ -59,10 +64,10 @@ function RowSegmented(): JSX.Element {
   const [state, setState] = useState({
     inverseTwo: "compact",
     inverseThree: "compact",
-    inverseIcon: "a",
+    inverseIcon: "light",
     defaultTwo: "compact",
     defaultThree: "compact",
-    defaultIcon: "a",
+    defaultIcon: "light",
   })
 
   const set = (key: string, value: string): void => {
@@ -74,14 +79,14 @@ function RowSegmented(): JSX.Element {
       <ItemCard>
         <ShowcaseSectionLabel>Segmented button – Inverse</ShowcaseSectionLabel>
         <ShowcaseStack>
-          <SegmentedControl
+          <FullWidthSegmentedControl
             items={inverseTwo}
             value={state.inverseTwo}
             onValueChange={(v) => set("inverseTwo", v)}
             variant="inverse"
             ariaLabel="View density inverse"
           />
-          <SegmentedControl
+          <FullWidthSegmentedControl
             items={inverseThree}
             value={state.inverseThree}
             onValueChange={(v) => set("inverseThree", v)}
@@ -101,13 +106,13 @@ function RowSegmented(): JSX.Element {
       <ItemCard>
         <ShowcaseSectionLabel>Segmented button – Default</ShowcaseSectionLabel>
         <ShowcaseStack>
-          <SegmentedControl
+          <FullWidthSegmentedControl
             items={defaultTwo}
             value={state.defaultTwo}
             onValueChange={(v) => set("defaultTwo", v)}
             ariaLabel="View density"
           />
-          <SegmentedControl
+          <FullWidthSegmentedControl
             items={defaultThree}
             value={state.defaultThree}
             onValueChange={(v) => set("defaultThree", v)}

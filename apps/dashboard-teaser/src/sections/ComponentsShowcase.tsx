@@ -25,7 +25,7 @@ const ContentGrid = styled.div`
   max-width: ${({ theme }) =>
     `calc(${theme.breakpoint.wideDesktop}px - (${theme.spacing.sp72} * 2))`};
   margin: 0 auto;
-  background: ${({ theme }) => theme.color.surfaceSubtle};
+  background: ${({ theme }) => theme.color.surface};
   border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
   padding: ${({ theme }) => `clamp(${theme.spacing.sp16}, 3vw, ${theme.spacing.sp32})`};
   display: flex;
