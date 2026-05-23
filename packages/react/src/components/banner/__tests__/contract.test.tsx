@@ -3,12 +3,11 @@
  */
 import { fireEvent, render, screen } from "@testing-library/react"
 import type * as React from "react"
-import { vi } from "vitest"
 import { runBannerContract } from "../../../../../../tests/contracts/banner.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Banner } from "../banner"
 
-let dismissHandler: ReturnType<typeof vi.fn>
+let dismissCalled = false
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
@@ -16,7 +15,10 @@ function renderWithProvider(ui: React.ReactElement) {
 
 runBannerContract("react", {
   renderDefault() {
-    dismissHandler = vi.fn()
+    dismissCalled = false
+    const dismissHandler = () => {
+      dismissCalled = true
+    }
     renderWithProvider(<Banner onDismiss={dismissHandler}>Default message</Banner>)
   },
   renderInfo() {
@@ -59,6 +61,6 @@ runBannerContract("react", {
     return screen.getByRole("status") ?? screen.getByRole("alert")
   },
   getDismissHandler() {
-    return { called: dismissHandler.mock.calls.length > 0 }
+    return { called: dismissCalled }
   },
 })

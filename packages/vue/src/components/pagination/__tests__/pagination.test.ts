@@ -3,8 +3,13 @@ import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Pagination } from "../pagination"
+import type { PaginationPropsVue } from "../pagination"
 
-function renderWithProvider(props: Record<string, unknown>) {
+type PaginationTestProps = PaginationPropsVue & {
+  "onUpdate:modelValue"?: (value: number) => void
+}
+
+function renderWithProvider(props: PaginationTestProps) {
   return render(
     defineComponent({
       setup() {
