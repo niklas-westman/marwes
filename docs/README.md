@@ -20,12 +20,13 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 5. [Adding Components](./guides/adding-components.md)
 6. [Figma to Marwes](./guides/figma-to-marwes.md)
 7. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
-8. [AI Metadata Protocol](./reference/ai-metadata.md)
-9. [Accessibility support model](./reference/accessibility.md)
-10. [Component Registry](./registry/README.md)
-11. [Governance](./reference/governance.md)
-12. [Testing](./reference/testing.md)
-13. [Family Validation](./reference/family-validation.md)
+8. [MwTheme CSS Provider Integration](./guides/mw-theme-css-provider.md)
+9. [AI Metadata Protocol](./reference/ai-metadata.md)
+10. [Accessibility support model](./reference/accessibility.md)
+11. [Component Registry](./registry/README.md)
+12. [Governance](./reference/governance.md)
+13. [Testing](./reference/testing.md)
+14. [Family Validation](./reference/family-validation.md)
 
 ## Documentation map
 
@@ -53,6 +54,7 @@ graph TD
   Guides --> Adding[adding-components.md]
   Guides --> Figma[figma-to-marwes.md]
   Guides --> Tailwind[tailwind-shadcn-integration.md]
+  Guides --> MwTheme[mw-theme-css-provider.md]
 
   Registry --> RegistryIndex[README.md]
   Registry --> ButtonRegistry[families/button/README.md]
@@ -86,6 +88,7 @@ Practical how-to documents.
 - [Adding Components](./guides/adding-components.md) — step-by-step workflow for introducing a new component
 - [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
 - [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md) — root dark variants and app-owned Tailwind tokens using Marwes variables
+- [MwTheme CSS Provider Integration](./guides/mw-theme-css-provider.md) — CSS-provider theme object exports, styled-components wiring, and path/value reference table
 
 ### Registry
 Family-level component knowledge base.

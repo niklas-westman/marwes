@@ -2,7 +2,7 @@
  * Vue adapter: Tests the MarwesProvider component — theme context injection,
  * mode toggling, dark/light detection, and provider nesting behavior.
  */
-import type { ResolvedTheme } from "@marwes-ui/core"
+import type { MwTheme, ResolvedTheme } from "@marwes-ui/core"
 import { ThemeMode, resolveThemeInput } from "@marwes-ui/core"
 import { fireEvent, render, screen, waitFor } from "@testing-library/vue"
 import { afterEach, describe, expect, it, vi } from "vitest"
@@ -466,6 +466,37 @@ describe("MarwesProvider — context", () => {
 
     expect(capturedThemes[0]?.mode).toBe(ThemeMode.dark)
     expect(capturedThemes[0]?.color.background).toBe("#0F0F0F")
+  })
+
+  it("passes CSS-provider mwTheme to the default scoped slot", () => {
+    const capturedThemes: MwTheme[] = []
+
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { theme: { breakpoint: { tablet: 1024 } } },
+              {
+                default: ({ mwTheme }: { mwTheme: MwTheme }) => {
+                  capturedThemes.push(mwTheme)
+                  return h("output", mwTheme.spacing.sp16)
+                },
+              },
+            )
+        },
+      }),
+    )
+
+    expect(screen.getByText("var(--mw-spacing-sp-16)")).toBeInTheDocument()
+    expect(capturedThemes[0]?.color.textMuted).toBe("var(--mw-color-text-muted)")
+    expect(capturedThemes[0]?.typography.paragraph.sm.fontSize).toBe(
+      "var(--mw-typography-paragraph-sm-font-size)",
+    )
+    expect(capturedThemes[0]?.breakpoint.tablet).toBe(1024)
+    expect(capturedThemes[0]?.media.tabletAndAbove).toBe("@media (min-width: 1024px)")
+    expect(capturedThemes[0]?.media.tabletAndBelow).toBe("@media (max-width: 1023.98px)")
   })
 
   it("switches provider-owned mode through useThemeMode().toggleMode()", async () => {

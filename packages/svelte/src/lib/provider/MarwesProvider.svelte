@@ -1,11 +1,12 @@
 <script lang="ts">
   import {
     ThemeMode as MwThemeMode,
+    createMwTheme,
     nextThemeMode,
     resolveThemeInput,
     resolveThemePreference,
   } from "@marwes-ui/core";
-  import type { ResolvedTheme, ThemeMode, ThemePreference } from "@marwes-ui/core";
+  import type { MwTheme, ResolvedTheme, ThemeMode, ThemePreference } from "@marwes-ui/core";
   import { setMarwesContext } from "./context.js";
   import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme.js";
   import {
@@ -59,6 +60,8 @@
   const resolved: ResolvedTheme = $derived(
     resolveThemeInput({ ...(theme ?? {}), mode: activeMode })
   );
+
+  const mwTheme: MwTheme = $derived(createMwTheme(resolved));
 
   const rootStyle = $derived(
     variableStrategy === "style-tag" ? undefined : themeToRootStyle(resolved)
@@ -182,5 +185,5 @@
   data-marwes-mode={resolved.mode}
   style={rootStyleString}
 >
-  {@render children?.()}
+  {@render children?.({ mwTheme })}
 </div>

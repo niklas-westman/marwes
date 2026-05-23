@@ -5,6 +5,7 @@
 export { default as MarwesProvider } from "./provider/MarwesProvider.svelte"
 export type {
   MarwesProviderProps,
+  MarwesProviderSnippetProps,
   MarwesContextState,
   MarwesContextValue,
 } from "./provider/types.js"
@@ -298,9 +299,12 @@ export {
   mwFontFallbacks,
   mwGoogleFontFamilies,
   mwStyledTheme,
+  mwTheme,
   mwThemeVarNames,
   mwThemeVars,
   mwVar,
+  createMwTheme,
+  createMwThemeMedia,
   Spacings,
   SwitchSize,
   ThemeMode,
@@ -315,6 +319,8 @@ export type {
   MwFontFallback,
   MwGoogleFontFamily,
   MwStyledTheme,
+  MwTheme,
+  MwThemeMedia,
   MwThemeVarName,
   MwThemeVarNames,
   MwThemeVarReference,
@@ -322,6 +328,8 @@ export type {
   ResolvedTheme,
   SpacingSize,
   Theme,
+  ThemeBreakpointName,
+  ThemeBreakpoints,
   ThemeInput,
   ThemeModeAttribute,
   ThemeModeRootTarget,

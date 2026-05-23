@@ -4,6 +4,7 @@
  * are available from the package root.
  */
 import { describe, expect, it } from "vitest"
+import type { MwTheme } from "../lib/index.js"
 import * as publicApi from "../lib/index.js"
 
 describe("Public API exports", () => {
@@ -181,8 +182,21 @@ describe("Public API exports", () => {
       expect(publicApi.createFontStack).toBeDefined()
     })
 
+    it("exports mwTheme", () => {
+      const exportedTheme: MwTheme = publicApi.mwTheme
+
+      expect(publicApi.mwTheme).toBeDefined()
+      expect(exportedTheme.spacing.sp16).toBe("var(--mw-spacing-sp-16)")
+      expect(publicApi.mwTheme.media.desktopAndAbove).toBe("@media (min-width: 1200px)")
+    })
+
     it("exports mwThemeVars", () => {
       expect(publicApi.mwThemeVars).toBeDefined()
+    })
+
+    it("exports createMwTheme helpers", () => {
+      expect(publicApi.createMwTheme).toBeDefined()
+      expect(publicApi.createMwThemeMedia).toBeDefined()
     })
 
     it("exports mwVar", () => {

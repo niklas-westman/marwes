@@ -1,5 +1,6 @@
 import type {
   FontLoadingConfig,
+  MwTheme,
   ResolvedTheme,
   ThemeInput,
   ThemeMode,
@@ -8,6 +9,7 @@ import type {
 } from "@marwes-ui/core"
 import {
   ThemeMode as MwThemeMode,
+  createMwTheme,
   nextThemeMode,
   resolveThemeInput,
   resolveThemePreference,
@@ -25,6 +27,8 @@ import {
 } from "./theme-mode-runtime"
 import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime"
 
+export type MarwesProviderChildren = React.ReactNode | ((mwTheme: MwTheme) => React.ReactNode)
+
 export type MarwesProviderProps = {
   theme?: ThemeInput
   defaultPreference?: ThemePreference
@@ -40,7 +44,7 @@ export type MarwesProviderProps = {
   attribute?: ThemeAttribute
   disableTransitionOnChange?: boolean
   variableStrategy?: ThemeVariableStrategy
-  children: React.ReactNode
+  children: MarwesProviderChildren
 }
 
 export function MarwesProvider({
@@ -124,6 +128,8 @@ export function MarwesProvider({
     () => resolveThemeInput({ ...(theme ?? {}), mode: activeMode }),
     [activeMode, theme],
   )
+  const mwTheme = React.useMemo(() => createMwTheme(resolved), [resolved])
+  const renderedChildren = typeof children === "function" ? children(mwTheme) : children
   const rootStyle = React.useMemo(() => {
     if (variableStrategy === "style-tag") return undefined
     return themeToRootStyle(resolved) as React.CSSProperties
@@ -182,7 +188,7 @@ export function MarwesProvider({
         data-marwes-mode={resolved.mode}
         style={rootStyle}
       >
-        {children}
+        {renderedChildren}
       </div>
     </MarwesContext.Provider>
   )

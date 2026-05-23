@@ -1,7 +1,7 @@
 import "@marwes-ui/presets/firstEdition/styles.css"
 
 export { MarwesProvider } from "./provider/marwes-provider"
-export type { MarwesProviderProps } from "./provider/marwes-provider"
+export type { MarwesProviderChildren, MarwesProviderProps } from "./provider/marwes-provider"
 export { useTheme } from "./provider/use-theme"
 export { useThemeMode } from "./provider/use-theme-mode"
 export type { ThemeModeContextValue } from "./provider/use-theme-mode"
@@ -23,9 +23,12 @@ export {
   mwFontFallbacks,
   mwGoogleFontFamilies,
   mwStyledTheme,
+  mwTheme,
   mwThemeVarNames,
   mwThemeVars,
   mwVar,
+  createMwTheme,
+  createMwThemeMedia,
   ThemeMode,
 } from "@marwes-ui/core"
 
@@ -39,12 +42,16 @@ export type {
   MwFontFallback,
   MwGoogleFontFamily,
   MwStyledTheme,
+  MwTheme,
+  MwThemeMedia,
   MwThemeVarName,
   MwThemeVarNames,
   MwThemeVarReference,
   MwThemeVars,
   ResolvedTheme,
   Theme,
+  ThemeBreakpointName,
+  ThemeBreakpoints,
   ThemeInput,
   ThemeModeAttribute,
   ThemeModeRootTarget,
