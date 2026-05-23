@@ -8,38 +8,12 @@ import {
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard } from "./shared"
-
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
+import { FlexCard, ShowcaseRow, ShowcaseSectionLabel, ShowcaseStack } from "./shared"
 
 const AccordionCard = styled(FlexCard)``
 
 const InputCard = styled(FlexCard)`
-  max-width: 344px;
-`
-
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
-`
-
-const DemoArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  max-width: 21.5rem;
 `
 
 type FieldType = "currency" | "email" | "phone"
@@ -52,9 +26,9 @@ function RowAccordionInput(): JSX.Element {
   const [phoneValue, setPhoneValue] = useState("")
 
   return (
-    <RowContainer>
+    <ShowcaseRow>
       <AccordionCard>
-        <SectionLabel>Accordion</SectionLabel>
+        <ShowcaseSectionLabel>Accordion</ShowcaseSectionLabel>
         <AccordionField
           label=""
           items={[
@@ -72,8 +46,8 @@ function RowAccordionInput(): JSX.Element {
         />
       </AccordionCard>
       <InputCard>
-        <SectionLabel>Input fields</SectionLabel>
-        <DemoArea>
+        <ShowcaseSectionLabel>Input fields</ShowcaseSectionLabel>
+        <ShowcaseStack>
           <SelectField
             label="Purpose"
             select={{
@@ -120,9 +94,9 @@ function RowAccordionInput(): JSX.Element {
               }}
             />
           )}
-        </DemoArea>
+        </ShowcaseStack>
       </InputCard>
-    </RowContainer>
+    </ShowcaseRow>
   )
 }
 

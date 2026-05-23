@@ -2,17 +2,20 @@ import { Icon, IconName, SegmentedControl } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import styled from "styled-components"
 
+import { dashboardRadius } from "../styles/theme-utils"
+
 const HeaderContainer = styled.header`
   width: 100%;
-  height: 68px;
+  height: ${({ theme }) => `calc(${theme.spacing.sp64} + ${theme.spacing.sp4})`};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 80px;
-  border-radius: 16px;
+  padding: ${({ theme }) => theme.spacing.sp16} ${({ theme }) => theme.spacing.sp80};
+  border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
 
-  @media (max-width: 768px) {
-    padding: 16px 20px;
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    padding: ${({ theme }) => theme.spacing.sp16}
+      ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
     border-radius: 0;
   }
 `
@@ -20,11 +23,15 @@ const HeaderContainer = styled.header`
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.sp16};
 `
 
 const ThemeControlWrapper = styled.div`
   display: flex;
+`
+
+const MarwesLogoSvg = styled.svg`
+  color: ${({ theme }) => theme.color.text};
 `
 
 type ThemeValue = "light" | "dark"
@@ -77,7 +84,7 @@ function Header({ isDark, onToggleTheme }: HeaderProps): JSX.Element {
 
 function MarwesLogo(): JSX.Element {
   return (
-    <svg
+    <MarwesLogoSvg
       width="98"
       height="20"
       viewBox="0 0 98 20"
@@ -85,7 +92,6 @@ function MarwesLogo(): JSX.Element {
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="Marwes"
-      style={{ color: "var(--mw-color-text, #141414)" }}
     >
       <path
         d="M91.0645 20.0001C89.0187 20.0001 87.3931 19.5891 86.1875 18.7672C84.982 17.9453 84.3244 16.8128 84.2148 15.3699H87.8862C87.9776 15.9909 88.2881 16.4658 88.8178 16.7946C89.3658 17.1051 90.1147 17.2603 91.0645 17.2603C91.923 17.2603 92.544 17.1416 92.9276 16.9042C93.3294 16.6485 93.5303 16.2923 93.5303 15.8357C93.5303 15.4886 93.4116 15.2238 93.1741 15.0411C92.955 14.8402 92.544 14.6759 91.9412 14.548L89.6945 14.0822C88.0324 13.7352 86.8086 13.2147 86.0231 12.5206C85.2377 11.8083 84.845 10.895 84.845 9.78088C84.845 8.42928 85.3656 7.37905 86.4067 6.6302C87.4479 5.86307 88.9 5.47951 90.7631 5.47951C92.6079 5.47951 94.0783 5.85394 95.1742 6.6028C96.2702 7.33339 96.873 8.35622 96.9825 9.67129H93.3111C93.2381 9.1964 92.9824 8.84024 92.544 8.6028C92.1056 8.34709 91.4846 8.21924 90.6809 8.21924C89.9503 8.21924 89.4023 8.32882 89.037 8.548C88.6899 8.74892 88.5164 9.04115 88.5164 9.42471C88.5164 9.75348 88.6625 10.0183 88.9548 10.2192C89.247 10.4019 89.7311 10.5663 90.4069 10.7124L92.9276 11.2329C94.334 11.5252 95.3934 12.0731 96.1058 12.8768C96.8364 13.6622 97.2017 14.5937 97.2017 15.6713C97.2017 17.0411 96.6629 18.1096 95.5852 18.8768C94.5258 19.6256 93.0189 20.0001 91.0645 20.0001Z"
@@ -111,7 +117,7 @@ function MarwesLogo(): JSX.Element {
         d="M0 19.726V0H6.57564L12.0553 19.0137H9.67167L15.1514 0H21.7544V19.726H17.5898V1.17808H18.3022L12.9595 19.726H8.60313L3.31522 1.34247H4.00018V19.726H0Z"
         fill="currentColor"
       />
-    </svg>
+    </MarwesLogoSvg>
   )
 }
 

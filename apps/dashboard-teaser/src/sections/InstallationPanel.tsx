@@ -3,86 +3,83 @@ import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
+import { cardShellStyles, dashboardRadius, sectionLabelStyles } from "../styles/theme-utils"
+
 const PanelContainer = styled.div`
-  width: 400px;
-  padding: 48px;
+  width: 25rem;
+  padding: ${({ theme }) => theme.spacing.sp48};
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  border-radius: 12px;
-  border: 1px solid var(--mw-color-border, #e5e5e5);
-  background: var(--mw-color-background);
+  gap: ${({ theme }) => theme.spacing.sp24};
+  ${cardShellStyles}
+  background: ${({ theme }) => theme.color.background};
 
-  @media (max-width: 1024px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     width: 100%;
   }
 
-  @media (max-width: 768px) {
-    padding: 24px;
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    padding: ${({ theme }) => theme.spacing.sp24};
   }
 `
 
 const PanelTitle = styled.h2`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text, #141414);
+  ${sectionLabelStyles}
+  color: ${({ theme }) => theme.color.text};
 `
 
 const InputSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sp8};
+`
+
+const FrameworkSelector = styled(SegmentedControl)`
+  width: 100%;
 `
 
 const InputLabel = styled.span`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text, #141414);
+  ${sectionLabelStyles}
+  color: ${({ theme }) => theme.color.text};
 `
 
-const FieldRow = styled.div`
+const FieldRow = styled.div<{ $align?: "center" | "flex-start" }>`
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items: ${(p) => p.$align ?? "center"};
+  gap: ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
 `
 
 const TextField = styled.div`
   flex: 1;
-  height: 40px;
+  height: ${({ theme }) => theme.spacing.sp40};
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  border-radius: 8px;
-  border: 1px solid var(--mw-color-border, #e5e5e5);
-  font-family: "Instrument Sans", monospace;
-  font-size: 13px;
-  color: var(--mw-color-text, #141414);
+  padding: 0 ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
+  border-radius: ${({ theme }) => dashboardRadius(theme, 2)};
+  border: 0.0625rem solid ${({ theme }) => theme.color.border};
+  font-family: ${({ theme }) => theme.font.mono};
+  font-size: 0.8125rem;
+  color: ${({ theme }) => theme.color.text};
 `
 
 const TextAreaField = styled.div`
   flex: 1;
-  min-height: 104px;
+  min-height: ${({ theme }) => `calc(${theme.spacing.sp80} + ${theme.spacing.sp24})`};
   display: flex;
   align-items: flex-start;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid var(--mw-color-border, #e5e5e5);
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--mw-color-text, #141414);
+  padding: ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
+  border-radius: ${({ theme }) => dashboardRadius(theme, 2)};
+  border: 0.0625rem solid ${({ theme }) => theme.color.border};
+  font-family: ${({ theme }) => theme.font.primary};
+  font-size: 0.8125rem;
+  line-height: ${({ theme }) => theme.typography.paragraph.sm.lineHeight};
+  color: ${({ theme }) => theme.color.text};
   white-space: pre-wrap;
 `
 
-const CopyButton = styled.button`
-  width: 20px;
-  height: 20px;
+const CopyButton = styled.button<{ $offset?: boolean }>`
+  width: ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
+  height: ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
   flex-shrink: 0;
   border: none;
   background: none;
@@ -90,12 +87,13 @@ const CopyButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--mw-color-text-muted, #595959);
+  color: ${({ theme }) => theme.color.textMuted};
   padding: 0;
+  margin-top: ${(p) => (p.$offset ? `calc(${p.theme.spacing.sp8} + ${p.theme.spacing.sp4})` : "0")};
   transition: color 0.15s;
 
   &:hover {
-    color: var(--mw-color-text, #141414);
+    color: ${({ theme }) => theme.color.text};
   }
 `
 
@@ -196,7 +194,7 @@ function InstallationPanel(): JSX.Element {
     <PanelContainer>
       <InputSection>
         <PanelTitle>Installation</PanelTitle>
-        <SegmentedControl
+        <FrameworkSelector
           items={frameworkItems}
           value={activeTab}
           onValueChange={(v) => setActiveTab(v as Framework)}
@@ -218,9 +216,9 @@ function InstallationPanel(): JSX.Element {
 
       <InputSection>
         <InputLabel>Install with AI</InputLabel>
-        <FieldRow style={{ alignItems: "flex-start" }}>
+        <FieldRow $align="flex-start">
           <TextAreaField>{AI_PROMPTS[activeTab]}</TextAreaField>
-          <CopyButton type="button" title="Copy to clipboard" style={{ marginTop: 12 }}>
+          <CopyButton type="button" title="Copy to clipboard" $offset>
             <CopyIcon />
           </CopyButton>
         </FieldRow>

@@ -13,19 +13,17 @@ import styled from "styled-components"
 import { CardTitle, ShowcaseCard, ShowcaseSectionLabel } from "./shared"
 
 const FirstSectionGrid = styled.div`
-  --showcase-gap: clamp(16px, 2vw, 24px);
-
   display: grid;
   width: 100%;
   min-width: 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--showcase-gap);
+  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
 
-  @media (max-width: 1199px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  @media (max-width: 899px) {
+  ${({ theme }) => theme.media.tabletAndBelow} {
     grid-template-columns: minmax(0, 1fr);
   }
 `
@@ -34,9 +32,9 @@ const FirstSectionColumn = styled.div`
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: var(--showcase-gap);
+  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
 
-  @media (max-width: 1199px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     display: contents;
   }
 `
@@ -45,11 +43,11 @@ const FirstSectionCard = styled(ShowcaseCard)<{
   $desktopMinHeight?: string
   $responsiveOrder: number
 }>`
-  @media (min-width: 1200px) {
+  ${({ theme }) => theme.media.desktopAndAbove} {
     min-height: ${(p) => p.$desktopMinHeight ?? "auto"};
   }
 
-  @media (max-width: 1199px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     order: ${(p) => p.$responsiveOrder};
   }
 `
@@ -57,20 +55,20 @@ const FirstSectionCard = styled(ShowcaseCard)<{
 const DemoArea = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: ${({ theme }) => theme.spacing.sp24};
   align-items: center;
 `
 
 const InlineCheckboxes = styled.div`
   display: flex;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.sp16};
   flex-wrap: wrap;
 `
 
 const BadgeRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: ${({ theme }) => `calc(${theme.spacing.sp4} + ${theme.spacing.sp2})`};
   align-items: center;
 `
 
@@ -100,14 +98,14 @@ function RowSwitchCard(): JSX.Element {
   return (
     <FirstSectionGrid>
       <FirstSectionColumn>
-        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="296px" $responsiveOrder={1}>
+        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="18.5rem" $responsiveOrder={1}>
           <ShowcaseSectionLabel>Switch</ShowcaseSectionLabel>
           <DemoArea>
             <SwitchField label="Label" switch={{ checked: switchA, onCheckedChange: setSwitchA }} />
             <SwitchField label="Label" switch={{ checked: switchB, onCheckedChange: setSwitchB }} />
           </DemoArea>
         </FirstSectionCard>
-        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="308px" $responsiveOrder={4}>
+        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="19.25rem" $responsiveOrder={4}>
           <ShowcaseSectionLabel>Card</ShowcaseSectionLabel>
           <MwCard title="Card title">
             Card description text goes here. This provides more context about the card content.
@@ -115,7 +113,7 @@ function RowSwitchCard(): JSX.Element {
         </FirstSectionCard>
       </FirstSectionColumn>
       <FirstSectionColumn>
-        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="378px" $responsiveOrder={2}>
+        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="23.625rem" $responsiveOrder={2}>
           <ShowcaseSectionLabel>Checkbox</ShowcaseSectionLabel>
           <CardTitle>Size</CardTitle>
           <InlineCheckboxes>
@@ -144,7 +142,7 @@ function RowSwitchCard(): JSX.Element {
             onChange={setGroupValues}
           />
         </FirstSectionCard>
-        <OtpCard $desktopSpan={4} $desktopMinHeight="226px" $responsiveOrder={5}>
+        <OtpCard $desktopSpan={4} $desktopMinHeight="14.125rem" $responsiveOrder={5}>
           <ShowcaseSectionLabel>One-Time Password</ShowcaseSectionLabel>
           <InputOtp
             label="Verification code"
@@ -156,7 +154,7 @@ function RowSwitchCard(): JSX.Element {
         </OtpCard>
       </FirstSectionColumn>
       <FirstSectionColumn>
-        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="378px" $responsiveOrder={3}>
+        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="23.625rem" $responsiveOrder={3}>
           <ShowcaseSectionLabel>Radio</ShowcaseSectionLabel>
           <RadioGroupField
             name="demo-radio-single"
@@ -178,7 +176,7 @@ function RowSwitchCard(): JSX.Element {
             onChange={setRadioGroupValue}
           />
         </FirstSectionCard>
-        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="226px" $responsiveOrder={6}>
+        <FirstSectionCard $desktopSpan={4} $desktopMinHeight="14.125rem" $responsiveOrder={6}>
           <ShowcaseSectionLabel>Badge</ShowcaseSectionLabel>
           <BadgeRow>
             <Badge>Badge</Badge>

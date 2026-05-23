@@ -3,35 +3,9 @@ import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard } from "./shared"
-
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
+import { FlexCard, ShowcaseRow, ShowcaseSectionLabel, ShowcaseStack } from "./shared"
 
 const ItemCard = styled(FlexCard)``
-
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
-`
-
-const DemoArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`
 
 const inverseTwo: SegmentedControlItem[] = [
   { value: "compact", label: "Compact" },
@@ -96,10 +70,10 @@ function RowSegmented(): JSX.Element {
   }
 
   return (
-    <RowContainer>
+    <ShowcaseRow>
       <ItemCard>
-        <SectionLabel>Segmented button – Inverse</SectionLabel>
-        <DemoArea>
+        <ShowcaseSectionLabel>Segmented button – Inverse</ShowcaseSectionLabel>
+        <ShowcaseStack>
           <SegmentedControl
             items={inverseTwo}
             value={state.inverseTwo}
@@ -122,11 +96,11 @@ function RowSegmented(): JSX.Element {
             size="sm"
             ariaLabel="Icon toggle inverse"
           />
-        </DemoArea>
+        </ShowcaseStack>
       </ItemCard>
       <ItemCard>
-        <SectionLabel>Segmented button – Default</SectionLabel>
-        <DemoArea>
+        <ShowcaseSectionLabel>Segmented button – Default</ShowcaseSectionLabel>
+        <ShowcaseStack>
           <SegmentedControl
             items={defaultTwo}
             value={state.defaultTwo}
@@ -146,9 +120,9 @@ function RowSegmented(): JSX.Element {
             size="sm"
             ariaLabel="Icon toggle"
           />
-        </DemoArea>
+        </ShowcaseStack>
       </ItemCard>
-    </RowContainer>
+    </ShowcaseRow>
   )
 }
 

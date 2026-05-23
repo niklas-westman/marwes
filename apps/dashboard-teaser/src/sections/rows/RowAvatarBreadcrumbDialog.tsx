@@ -2,38 +2,12 @@ import { Button, ButtonVariant, DialogModal, Drawer, Card as MwCard } from "@mar
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard } from "./shared"
-
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
+import { FlexCard, ShowcaseRow, ShowcaseSectionLabel, ShowcaseStack } from "./shared"
 
 const LeftCard = styled(FlexCard)``
 
 const RightCard = styled(FlexCard)`
-  max-width: 290px;
-`
-
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
-`
-
-const ButtonStack = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  max-width: 18.125rem;
 `
 
 function RowAvatarBreadcrumbDialog(): JSX.Element {
@@ -41,23 +15,23 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
-    <RowContainer>
+    <ShowcaseRow>
       <LeftCard>
-        <SectionLabel>Card</SectionLabel>
+        <ShowcaseSectionLabel>Card</ShowcaseSectionLabel>
         <MwCard title="Card title">
           Card description text goes here. This provides more context about the card content.
         </MwCard>
       </LeftCard>
       <RightCard>
-        <SectionLabel>Dialog &amp; Drawer</SectionLabel>
-        <ButtonStack>
+        <ShowcaseSectionLabel>Dialog &amp; Drawer</ShowcaseSectionLabel>
+        <ShowcaseStack>
           <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>
             Open dialog →
           </Button>
           <Button variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(true)}>
             Open drawer →
           </Button>
-        </ButtonStack>
+        </ShowcaseStack>
       </RightCard>
 
       <DialogModal
@@ -92,7 +66,7 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
           <p>Drawer content goes here. Use it for filters, detail panels, or secondary flows.</p>
         </Drawer>
       )}
-    </RowContainer>
+    </ShowcaseRow>
   )
 }
 

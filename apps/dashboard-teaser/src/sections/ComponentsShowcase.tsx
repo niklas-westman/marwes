@@ -1,5 +1,11 @@
 import styled from "styled-components"
 
+import {
+  dashboardRadius,
+  dashboardRowStyles,
+  responsiveShellPadding,
+  sectionLabelStyles,
+} from "../styles/theme-utils"
 import { RowAccordionInput } from "./rows/RowAccordionInput"
 import { RowAvatarBreadcrumbDialog } from "./rows/RowAvatarBreadcrumbDialog"
 import { RowBanner } from "./rows/RowBanner"
@@ -11,43 +17,33 @@ import { RowToastMenuAvatar } from "./rows/RowToastMenuAvatar"
 
 const ShowcaseContainer = styled.section`
   width: 100%;
-  padding: 0 clamp(16px, 4vw, 72px);
+  padding: 0 ${({ theme }) => responsiveShellPadding(theme)};
 `
 
 const ContentGrid = styled.div`
   width: 100%;
-  max-width: 1296px;
+  max-width: ${({ theme }) =>
+    `calc(${theme.breakpoint.wideDesktop}px - (${theme.spacing.sp72} * 2))`};
   margin: 0 auto;
-  background: var(--mw-color-surface-subtle, #f8f8f8);
-  border-radius: 16px;
-  padding: clamp(16px, 3vw, 32px);
+  background: ${({ theme }) => theme.color.surfaceSubtle};
+  border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
+  padding: ${({ theme }) => `clamp(${theme.spacing.sp16}, 3vw, ${theme.spacing.sp32})`};
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 2vw, 24px);
+  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
 
-  @media (max-width: 768px) {
-    border-radius: 12px;
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    border-radius: ${({ theme }) => dashboardRadius(theme, 3)};
   }
 `
 
 const SectionTitle = styled.h2`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text, #141414);
+  ${sectionLabelStyles}
+  color: ${({ theme }) => theme.color.text};
 `
 
 const Row = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
+  ${dashboardRowStyles}
 `
 
 function ComponentsShowcase(): JSX.Element {

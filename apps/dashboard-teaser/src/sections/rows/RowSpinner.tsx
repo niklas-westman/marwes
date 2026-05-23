@@ -2,67 +2,48 @@ import { Button, ButtonVariant, Spinner } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard } from "./shared"
-
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
+import { FlexCard, ShowcaseRow, ShowcaseSectionLabel } from "./shared"
 
 const LeftCard = styled(FlexCard)`
-  max-width: 321px;
+  max-width: 20.0625rem;
 `
 
 const RightCard = styled(FlexCard)``
 
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
-`
-
 const SpinnerRow = styled.div`
   display: flex;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.sp16};
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: center;
 `
 
 const SpinnerItem = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sp8};
   border: none;
   background: none;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 6px;
+  padding: ${({ theme }) => theme.spacing.sp4};
+  border-radius: ${({ theme }) => `calc(${theme.ui.radius} * 1.5)`};
   transition: background 0.15s;
 
   &:hover {
-    background: var(--mw-color-surface-subtle, #f5f5f5);
+    background: ${({ theme }) => theme.color.surfaceSubtle};
   }
 `
 
 const SpinnerLabel = styled.span`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  color: var(--mw-color-text-muted, #595959);
+  font-family: ${({ theme }) => theme.font.primary};
+  font-size: 0.6875rem;
+  color: ${({ theme }) => theme.color.textMuted};
 `
 
 const ButtonRow = styled.div`
   display: flex;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.sp16};
 `
 
 const SpinnerButtonPreview = styled(Button)`
@@ -92,9 +73,9 @@ function RowSpinner(): JSX.Element {
   const [activeVariant, setActiveVariant] = useState<SpinnerVariantKey>("ring")
 
   return (
-    <RowContainer>
+    <ShowcaseRow>
       <LeftCard>
-        <SectionLabel>Spinner</SectionLabel>
+        <ShowcaseSectionLabel>Spinner</ShowcaseSectionLabel>
         <ButtonRow>
           <SpinnerButtonPreview
             variant={ButtonVariant.primary}
@@ -121,7 +102,7 @@ function RowSpinner(): JSX.Element {
         </ButtonRow>
       </LeftCard>
       <RightCard>
-        <SectionLabel>Spinner</SectionLabel>
+        <ShowcaseSectionLabel>Spinner</ShowcaseSectionLabel>
         <SpinnerRow>
           {VARIANTS.map(({ key, label }) => (
             <SpinnerItem key={key} type="button" onClick={() => setActiveVariant(key)}>
@@ -131,7 +112,7 @@ function RowSpinner(): JSX.Element {
           ))}
         </SpinnerRow>
       </RightCard>
-    </RowContainer>
+    </ShowcaseRow>
   )
 }
 

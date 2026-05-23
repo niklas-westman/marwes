@@ -11,11 +11,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    font-family: ${({ theme }) => theme.font.primary};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: var(--mw-color-background, #ffffff);
-    color: var(--mw-color-text, #141414);
+    background: ${({ theme }) => theme.color.background};
+    color: ${({ theme }) => theme.color.text};
     transition: background 0.2s, color 0.2s;
   }
 

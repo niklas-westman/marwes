@@ -1,5 +1,6 @@
 import { MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import { useState } from "react"
+import { ThemeProvider as StyledThemeProvider } from "styled-components"
 
 import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
@@ -19,16 +20,22 @@ function App(): JSX.Element {
 
   return (
     <>
-      <GlobalStyle />
       <MarwesProvider theme={{ mode }}>
-        <PageWrapper>
-          <Header isDark={isDark} onToggleTheme={toggleTheme} />
-          <MainContent>
-            <HeroSection />
-            <ComponentsShowcase />
-          </MainContent>
-          <Footer />
-        </PageWrapper>
+        {(mwTheme) => (
+          <StyledThemeProvider theme={mwTheme}>
+            <>
+              <GlobalStyle />
+              <PageWrapper>
+                <Header isDark={isDark} onToggleTheme={toggleTheme} />
+                <MainContent>
+                  <HeroSection />
+                  <ComponentsShowcase />
+                </MainContent>
+                <Footer />
+              </PageWrapper>
+            </>
+          </StyledThemeProvider>
+        )}
       </MarwesProvider>
     </>
   )

@@ -28,7 +28,7 @@ const ToastCard = styled(ShowcaseCard)`
     max-width: 100%;
   }
 
-  @media (max-width: 1199px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     grid-row: auto;
   }
 `
@@ -37,11 +37,11 @@ const MenuCard = styled(ShowcaseCard)`
   grid-row: span 2;
 
   .mw-context-menu {
-    width: min(100%, var(--mw-context-menu-width, 212px));
+    width: min(100%, 13.25rem);
     max-width: 100%;
   }
 
-  @media (max-width: 1199px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     grid-row: auto;
   }
 `
@@ -57,7 +57,7 @@ const BreadcrumbCard = styled(ShowcaseCard)`
 const ToastList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sp8};
 `
 
 const toastVariantItems: SegmentedControlItem[] = [
@@ -87,7 +87,7 @@ const robotAvatarSrc = `${import.meta.env.BASE_URL}assets/avatar-robot.png`
 
 const AvatarRow = styled.div`
   display: flex;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.sp16};
   align-items: center;
   flex-wrap: wrap;
 `

@@ -2,35 +2,15 @@ import { Button, ButtonVariant, Pagination, ProgressBar } from "@marwes-ui/react
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard } from "./shared"
-
-const RowContainer = styled.div`
-  display: flex;
-  gap: 24px;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 16px;
-  }
-`
+import { FlexCard, ShowcaseRow, ShowcaseSectionLabel } from "./shared"
 
 const ItemCard = styled(FlexCard)`
   justify-content: center;
 `
 
-const SectionLabel = styled.h4`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--mw-color-text-muted, #595959);
-`
-
 const ButtonRow = styled.div`
   display: flex;
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.sp16};
   align-items: center;
   flex-wrap: wrap;
 `
@@ -39,9 +19,9 @@ function RowButtonPaginationProgress(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1)
 
   return (
-    <RowContainer>
+    <ShowcaseRow>
       <ItemCard>
-        <SectionLabel>Button</SectionLabel>
+        <ShowcaseSectionLabel>Button</ShowcaseSectionLabel>
         <ButtonRow>
           <Button>Label →</Button>
           <Button variant={ButtonVariant.secondary}>Label →</Button>
@@ -49,7 +29,7 @@ function RowButtonPaginationProgress(): JSX.Element {
         </ButtonRow>
       </ItemCard>
       <ItemCard>
-        <SectionLabel>Pagination</SectionLabel>
+        <ShowcaseSectionLabel>Pagination</ShowcaseSectionLabel>
         <Pagination
           page={currentPage}
           pageCount={10}
@@ -58,10 +38,10 @@ function RowButtonPaginationProgress(): JSX.Element {
         />
       </ItemCard>
       <ItemCard>
-        <SectionLabel>Progress bar</SectionLabel>
+        <ShowcaseSectionLabel>Progress bar</ShowcaseSectionLabel>
         <ProgressBar label="Progress" value={60} size="small" />
       </ItemCard>
-    </RowContainer>
+    </ShowcaseRow>
   )
 }
 

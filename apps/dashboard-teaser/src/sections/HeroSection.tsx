@@ -5,31 +5,36 @@ import { InstallationPanel } from "./InstallationPanel"
 
 const HeroContainer = styled.section`
   width: 100%;
-  padding: 80px 80px 48px 80px;
+  padding: ${({ theme }) => theme.spacing.sp80} ${({ theme }) => theme.spacing.sp80}
+    ${({ theme }) => theme.spacing.sp48};
   display: flex;
-  gap: 6px;
+  gap: ${({ theme }) => `calc(${theme.spacing.sp4} + ${theme.spacing.sp2})`};
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 
-  @media (max-width: 1024px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    align-items: flex-start;
     flex-direction: column;
-    gap: 40px;
-    padding: 60px 40px 40px 40px;
+    gap: ${({ theme }) => theme.spacing.sp40};
+    padding: ${({ theme }) => `calc(${theme.spacing.sp56} + ${theme.spacing.sp4})`}
+      ${({ theme }) => theme.spacing.sp40} ${({ theme }) => theme.spacing.sp40};
   }
 
-  @media (max-width: 768px) {
-    padding: 40px 20px 32px 20px;
-    gap: 32px;
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    padding: ${({ theme }) => theme.spacing.sp40}
+      ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`}
+      ${({ theme }) => theme.spacing.sp32};
+    gap: ${({ theme }) => theme.spacing.sp32};
   }
 `
 
 const TextColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 483px;
+  gap: ${({ theme }) => theme.spacing.sp24};
+  max-width: 30.1875rem;
 
-  @media (max-width: 1024px) {
+  ${({ theme }) => theme.media.desktopAndBelow} {
     max-width: 100%;
   }
 `
@@ -37,59 +42,59 @@ const TextColumn = styled.div`
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sp8};
 `
 
 const TopSection = styled.div`
   display: flex;
   flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sp8};
   align-items: flex-start;
-  gap: 8px;
 `
 
 const Headline = styled.h1`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 40px;
+  font-family: ${({ theme }) => theme.font.primary};
+  font-size: 2.5rem;
   font-weight: 600;
   line-height: 1.3;
-  color: var(--mw-color-text, #141414);
-  letter-spacing: -0.5px;
+  color: ${({ theme }) => theme.color.text};
+  letter-spacing: 0;
 
-  @media (max-width: 768px) {
-    font-size: 28px;
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    font-size: 1.75rem;
   }
 `
 
 const Subtitle = styled.p`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 16px;
+  font-family: ${({ theme }) => theme.font.primary};
+  font-size: ${({ theme }) => theme.typography.paragraph.md.fontSize};
   font-weight: 400;
-  line-height: 1.5;
-  color: var(--mw-color-text, #141414);
+  line-height: ${({ theme }) => theme.typography.paragraph.md.lineHeight};
+  color: ${({ theme }) => theme.color.text};
 `
 
 const BadgeRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sp8};
 `
 
 const LinkRow = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sp8};
   flex-wrap: wrap;
 `
 
 const LinkButton = styled.a`
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  height: 24px;
+  gap: ${({ theme }) => theme.spacing.sp4};
+  height: ${({ theme }) => theme.spacing.sp24};
   padding: 0;
   background: none;
-  color: var(--mw-color-text, #141414);
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 14px;
+  color: ${({ theme }) => theme.color.text};
+  font-family: ${({ theme }) => theme.font.primary};
+  font-size: ${({ theme }) => theme.typography.paragraph.sm.fontSize};
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
@@ -119,15 +124,23 @@ function HeroSection(): JSX.Element {
           <Badge>Agent-readable</Badge>
         </BadgeRow>
         <LinkRow>
-          <LinkButton href="#">
+          <LinkButton
+            href="https://github.com/niklas-westman/marwes/tree/main/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Documentation
             <Icon name={IconName.ArrowUpRight} decorative size={14} />
           </LinkButton>
-          <LinkButton href="#">
+          <LinkButton href="#" target="_blank" rel="noopener noreferrer">
             Storybook
             <Icon name={IconName.ArrowUpRight} decorative size={14} />
           </LinkButton>
-          <LinkButton href="#">
+          <LinkButton
+            href="https://github.com/niklas-westman/marwes"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
             <Icon name={IconName.ArrowUpRight} decorative size={14} />
           </LinkButton>

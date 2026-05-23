@@ -2,21 +2,21 @@ import styled from "styled-components"
 
 const FooterContainer = styled.footer`
   width: 100%;
-  height: 64px;
+  height: ${({ theme }) => theme.spacing.sp64};
   display: flex;
   align-items: center;
-  padding: 0 80px;
+  padding: 0 ${({ theme }) => theme.spacing.sp80};
 
-  @media (max-width: 768px) {
-    padding: 0 20px;
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    padding: 0 ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
   }
 `
 
 const FooterText = styled.span`
-  font-family: "Instrument Sans", sans-serif;
-  font-size: 14px;
+  font-family: ${({ theme }) => theme.font.primary};
+  font-size: ${({ theme }) => theme.typography.paragraph.sm.fontSize};
   font-weight: 400;
-  color: var(--mw-color-text, #141414);
+  color: ${({ theme }) => theme.color.text};
 `
 
 function Footer(): JSX.Element {
