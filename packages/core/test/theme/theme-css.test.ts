@@ -87,6 +87,12 @@ const fixture: ResolvedTheme = {
     radius: 4,
     density: "comfortable",
   },
+  breakpoint: {
+    mobile: 640,
+    tablet: 900,
+    desktop: 1200,
+    wideDesktop: 1440,
+  },
   typography: {
     h1: { fontSize: 44, lineHeight: 1.18, fontWeight: 700, letterSpacing: -1.32 },
     h2: { fontSize: 32, lineHeight: 1.25, fontWeight: 700, letterSpacing: -0.96 },

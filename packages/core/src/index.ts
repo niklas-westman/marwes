@@ -2,6 +2,8 @@ export type {
   Theme,
   ThemeInput,
   ThemeInputColor,
+  ThemeBreakpointName,
+  ThemeBreakpoints,
   ThemePreference,
   ThemeVariableStrategy,
   ColorInput,
@@ -10,6 +12,7 @@ export type {
   Density,
 } from "./theme/theme-types"
 export { ThemeMode } from "./theme/theme-types"
+export { defaultThemeBreakpoints } from "./theme/theme-types"
 export type { SystemThemeMode } from "./theme/theme-mode"
 export {
   isThemeMode,
@@ -34,12 +37,22 @@ export type {
 export { themeModesToCSSRules, themeToCSSRule, themeToCSSVars } from "./theme/theme-css"
 export type {
   MwStyledTheme,
+  MwTheme,
+  MwThemeMedia,
   MwThemeVarName,
   MwThemeVarNames,
   MwThemeVarReference,
   MwThemeVars,
 } from "./theme/theme-vars"
-export { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "./theme/theme-vars"
+export {
+  createMwTheme,
+  createMwThemeMedia,
+  mwStyledTheme,
+  mwTheme,
+  mwThemeVarNames,
+  mwThemeVars,
+  mwVar,
+} from "./theme/theme-vars"
 
 // /* Button */
 // export { createButtonRecipe } from "./components/atoms/button";

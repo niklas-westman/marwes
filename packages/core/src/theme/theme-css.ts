@@ -1,7 +1,7 @@
 import type { ColorRole, SecondaryColorRole } from "./color-resolve"
 import { densityToCSSVars } from "./density"
 import { type StatusColorTokens, ThemeMode } from "./theme-types"
-import type { Density, ThemeMode as ThemeModeValue } from "./theme-types"
+import type { Density, ThemeBreakpoints, ThemeMode as ThemeModeValue } from "./theme-types"
 
 // ─── ResolvedTheme ────────────────────────────────────────────────────────────
 // Post-derivation theme shape: color fields hold resolved ColorRole objects,
@@ -50,6 +50,7 @@ export interface ResolvedTheme {
     radius: number
     density: Density
   }
+  breakpoint: ThemeBreakpoints
   typography: {
     h1: { fontSize: number; lineHeight: number; fontWeight: number; letterSpacing: number }
     h2: { fontSize: number; lineHeight: number; fontWeight: number; letterSpacing: number }

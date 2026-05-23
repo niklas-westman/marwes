@@ -41,6 +41,15 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).ui.radius).toBe(4)
   })
 
+  it("resolves default breakpoints", () => {
+    expect(resolveThemeInput({}).breakpoint).toEqual({
+      mobile: 640,
+      tablet: 900,
+      desktop: 1200,
+      wideDesktop: 1440,
+    })
+  })
+
   it("default font.primary contains Instrument Sans", () => {
     expect(resolveThemeInput({}).font.primary).toContain("Instrument Sans")
   })
@@ -187,6 +196,15 @@ describe("resolveThemeInput — font / ui / typography overrides", () => {
 
   it("ui.radius override", () => {
     expect(resolveThemeInput({ ui: { radius: 8 } }).ui.radius).toBe(8)
+  })
+
+  it("breakpoint override merges with defaults", () => {
+    expect(resolveThemeInput({ breakpoint: { tablet: 1024 } }).breakpoint).toEqual({
+      mobile: 640,
+      tablet: 1024,
+      desktop: 1200,
+      wideDesktop: 1440,
+    })
   })
 
   it("typography.h1.fontSize override", () => {

@@ -6,7 +6,7 @@ import {
 } from "./color-resolve"
 import type { ResolvedTheme } from "./theme-css"
 import { darkThemeDefaults, lightThemeDefaults } from "./theme-defaults"
-import { type ThemeInput, ThemeMode } from "./theme-types"
+import { type ThemeInput, ThemeMode, defaultThemeBreakpoints } from "./theme-types"
 import { resolveTone } from "./tone"
 
 const lightDefaultColorRoles = {
@@ -146,6 +146,7 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
     },
     font: { ...base.font, ...tone.font, ...input.font },
     ui: { ...base.ui, ...tone.ui, ...input.ui },
+    breakpoint: { ...defaultThemeBreakpoints, ...input.breakpoint },
     typography: {
       h1: { ...base.typography.h1, ...tone.typography?.h1, ...input.typography?.h1 },
       h2: { ...base.typography.h2, ...tone.typography?.h2, ...input.typography?.h2 },

@@ -5,10 +5,18 @@
  */
 import { describe, expect, it } from "vitest"
 import { Spacings } from "../../src/components/atoms/spacing"
+import type { MwTheme } from "../../src/index"
 import * as publicApi from "../../src/index"
 import { themeToCSSVars } from "../../src/theme/theme-css"
 import { resolveThemeInput } from "../../src/theme/theme-normalize"
-import { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "../../src/theme/theme-vars"
+import {
+  createMwTheme,
+  mwStyledTheme,
+  mwTheme,
+  mwThemeVarNames,
+  mwThemeVars,
+  mwVar,
+} from "../../src/theme/theme-vars"
 
 function flattenStringValues(value: unknown): string[] {
   if (typeof value === "string") return [value]
@@ -19,11 +27,13 @@ function flattenStringValues(value: unknown): string[] {
 
 describe("theme variable helpers", () => {
   it("exposes spacing CSS variable references", () => {
+    expect(mwTheme.spacing.sp16).toBe("var(--mw-spacing-sp-16)")
     expect(mwThemeVars.spacing.sp24).toBe("var(--mw-spacing-sp-24)")
     expect(mwThemeVarNames.spacing.sp24).toBe("--mw-spacing-sp-24")
   })
 
   it("exposes color CSS variable references", () => {
+    expect(mwTheme.color.textMuted).toBe("var(--mw-color-text-muted)")
     expect(mwThemeVars.color.primary.base).toBe("var(--mw-color-primary-base)")
     expect(mwThemeVarNames.color.text).toBe("--mw-color-text")
   })
@@ -33,9 +43,41 @@ describe("theme variable helpers", () => {
     expect(mwThemeVars.ui.radius).toBe("var(--mw-ui-radius)")
     expect(mwThemeVars.density.height).toBe("var(--mw-density-height)")
     expect(mwThemeVars.typography.h1.fontSize).toBe("var(--mw-typography-h1-font-size)")
+    expect(mwTheme.typography.paragraph.sm.fontSize).toBe(
+      "var(--mw-typography-paragraph-sm-font-size)",
+    )
     expect(mwThemeVars.typography.paragraph.md.lineHeight).toBe(
       "var(--mw-typography-paragraph-md-line-height)",
     )
+  })
+
+  it("exposes default breakpoints and media helpers on the CSS-provider theme", () => {
+    expect(mwTheme.breakpoint).toEqual({
+      mobile: 640,
+      tablet: 900,
+      desktop: 1200,
+      wideDesktop: 1440,
+    })
+    expect(mwTheme.media).toEqual({
+      mobileAndAbove: "@media (min-width: 640px)",
+      tabletAndAbove: "@media (min-width: 900px)",
+      desktopAndAbove: "@media (min-width: 1200px)",
+      wideDesktopAndAbove: "@media (min-width: 1440px)",
+      mobileAndBelow: "@media (max-width: 639.98px)",
+      tabletAndBelow: "@media (max-width: 899.98px)",
+      desktopAndBelow: "@media (max-width: 1199.98px)",
+      wideDesktopAndBelow: "@media (max-width: 1439.98px)",
+    })
+  })
+
+  it("derives media helpers from resolved breakpoint overrides", () => {
+    const resolved = resolveThemeInput({ breakpoint: { tablet: 1024 } })
+    const theme = createMwTheme(resolved)
+
+    expect(theme.breakpoint.tablet).toBe(1024)
+    expect(theme.media.tabletAndAbove).toBe("@media (min-width: 1024px)")
+    expect(theme.media.tabletAndBelow).toBe("@media (max-width: 1023.98px)")
+    expect(theme.spacing.sp16).toBe(mwTheme.spacing.sp16)
   })
 
   it("wraps custom property names in var references", () => {
@@ -44,8 +86,9 @@ describe("theme variable helpers", () => {
   })
 
   it("uses the same references for the styled theme object", () => {
-    expect(mwStyledTheme).toBe(mwThemeVars)
+    expect(mwStyledTheme).toBe(mwTheme)
     expect(mwStyledTheme.spacing.sp24).toBe(mwThemeVars.spacing.sp24)
+    expect(mwStyledTheme.media.desktopAndAbove).toBe("@media (min-width: 1200px)")
   })
 
   it("covers the theme engine vars and static spacing tokens", () => {
@@ -59,9 +102,14 @@ describe("theme variable helpers", () => {
   })
 
   it("exports the helpers from the core package root", () => {
+    const exportedTheme: MwTheme = publicApi.mwTheme
+
+    expect(exportedTheme.media.desktopAndAbove).toBe("@media (min-width: 1200px)")
+    expect(publicApi.mwTheme).toBe(mwTheme)
     expect(publicApi.mwThemeVars).toBe(mwThemeVars)
     expect(publicApi.mwThemeVarNames).toBe(mwThemeVarNames)
     expect(publicApi.mwStyledTheme).toBe(mwStyledTheme)
+    expect(publicApi.createMwTheme(resolveThemeInput({}))).toEqual(mwTheme)
     expect(publicApi.mwVar("--mw-color-text")).toBe("var(--mw-color-text)")
   })
 })

@@ -1,5 +1,18 @@
+import type { ResolvedTheme } from "./theme-css"
+import { type ThemeBreakpoints, defaultThemeBreakpoints } from "./theme-types"
+
 export type MwThemeVarName = `--mw-${string}`
 export type MwThemeVarReference = `var(${MwThemeVarName})` | `var(${MwThemeVarName}, ${string})`
+export type MwThemeMedia = {
+  mobileAndAbove: string
+  tabletAndAbove: string
+  desktopAndAbove: string
+  wideDesktopAndAbove: string
+  mobileAndBelow: string
+  tabletAndBelow: string
+  desktopAndBelow: string
+  wideDesktopAndBelow: string
+}
 
 /**
  * Wraps a Marwes CSS custom property name in `var(...)`, with an optional fallback.
@@ -12,6 +25,23 @@ export function mwVar<const TName extends MwThemeVarName>(
 ): `var(${TName}, ${string})`
 export function mwVar(name: MwThemeVarName, fallback?: string): string {
   return fallback === undefined ? `var(${name})` : `var(${name}, ${fallback})`
+}
+
+export function createMwThemeMedia(breakpoint: ThemeBreakpoints): MwThemeMedia {
+  return {
+    mobileAndAbove: `@media (min-width: ${breakpoint.mobile}px)`,
+    tabletAndAbove: `@media (min-width: ${breakpoint.tablet}px)`,
+    desktopAndAbove: `@media (min-width: ${breakpoint.desktop}px)`,
+    wideDesktopAndAbove: `@media (min-width: ${breakpoint.wideDesktop}px)`,
+    mobileAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.mobile)}px)`,
+    tabletAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.tablet)}px)`,
+    desktopAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.desktop)}px)`,
+    wideDesktopAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.wideDesktop)}px)`,
+  }
+}
+
+function formatMaxBreakpoint(value: number): string {
+  return `${Number((value - 0.02).toFixed(2))}`
 }
 
 /**
@@ -377,11 +407,36 @@ export const mwThemeVars = {
 } as const
 
 /**
- * Plain ThemeProvider-friendly object for styled-components and Emotion.
- * It mirrors `mwThemeVars` without adding a dependency on any CSS-in-JS library.
+ * Creates a ThemeProvider-friendly object for styled-components, Emotion, and other CSS providers.
+ * Token values are CSS custom property references; media helpers are derived from the resolved theme.
  */
-export const mwStyledTheme = mwThemeVars
+export function createMwTheme(theme: ResolvedTheme): MwTheme {
+  return {
+    ...mwThemeVars,
+    breakpoint: theme.breakpoint,
+    media: createMwThemeMedia(theme.breakpoint),
+  }
+}
+
+/**
+ * Static CSS-provider theme using default Marwes breakpoint values.
+ * Use provider-rendered `mwTheme` when consumers need breakpoint overrides.
+ */
+export const mwTheme: MwTheme = {
+  ...mwThemeVars,
+  breakpoint: defaultThemeBreakpoints,
+  media: createMwThemeMedia(defaultThemeBreakpoints),
+}
+
+/**
+ * @deprecated Use `mwTheme`. This alias is kept for existing styled-provider consumers.
+ */
+export const mwStyledTheme = mwTheme
 
 export type MwThemeVarNames = typeof mwThemeVarNames
 export type MwThemeVars = typeof mwThemeVars
+export type MwTheme = MwThemeVars & {
+  breakpoint: ThemeBreakpoints
+  media: MwThemeMedia
+}
 export type MwStyledTheme = typeof mwStyledTheme

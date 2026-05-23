@@ -12,6 +12,7 @@ import type {
   ColorRole,
   SecondaryColorRole,
   Theme,
+  ThemeBreakpoints,
   ThemeInput,
   ThemeInputColor,
 } from "../../src/theme/theme-types"
@@ -165,5 +166,30 @@ describe("ThemeInput", () => {
   it("accepts empty object (all fields optional)", () => {
     const input: ThemeInput = {}
     expect(input.mode).toBeUndefined()
+  })
+
+  it("accepts partial breakpoint overrides", () => {
+    const input: ThemeInput = { breakpoint: { tablet: 1024 } }
+    expect(input.breakpoint?.tablet).toBe(1024)
+  })
+
+  it("rejects unknown breakpoint names", () => {
+    const input: ThemeInput = {
+      breakpoint: {
+        // @ts-expect-error — breakpoint names are mobile/tablet/desktop/wideDesktop only.
+        laptop: 1100,
+      },
+    }
+    expect(input.breakpoint).toBeDefined()
+  })
+
+  it("exposes the breakpoint contract", () => {
+    const breakpoints: ThemeBreakpoints = {
+      mobile: 640,
+      tablet: 900,
+      desktop: 1200,
+      wideDesktop: 1440,
+    }
+    expect(breakpoints.wideDesktop).toBe(1440)
   })
 })

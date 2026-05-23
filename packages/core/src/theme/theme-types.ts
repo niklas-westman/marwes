@@ -35,6 +35,15 @@ export const ThemeMode = {
 export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode]
 export type ThemePreference = ThemeMode | "system"
 export type ThemeVariableStrategy = "inline" | "style-tag"
+export type ThemeBreakpointName = "mobile" | "tablet" | "desktop" | "wideDesktop"
+export type ThemeBreakpoints = Record<ThemeBreakpointName, number>
+
+export const defaultThemeBreakpoints: ThemeBreakpoints = {
+  mobile: 640,
+  tablet: 900,
+  desktop: 1200,
+  wideDesktop: 1440,
+}
 
 export type Theme = {
   /**
@@ -96,6 +105,7 @@ export type Theme = {
     radius: number
     density: Density
   }
+  breakpoint: ThemeBreakpoints
   typography: {
     h1: {
       fontSize: number
@@ -184,6 +194,7 @@ export interface ThemeInput {
   color?: Partial<ThemeInputColor>
   font?: Partial<Theme["font"]>
   ui?: Partial<Theme["ui"]>
+  breakpoint?: Partial<ThemeBreakpoints>
   typography?: Partial<{
     h1?: Partial<Theme["typography"]["h1"]>
     h2?: Partial<Theme["typography"]["h2"]>

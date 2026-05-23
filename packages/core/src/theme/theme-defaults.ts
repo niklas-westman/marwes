@@ -1,4 +1,4 @@
-import { type Theme, ThemeMode } from "./theme-types"
+import { type Theme, ThemeMode, defaultThemeBreakpoints } from "./theme-types"
 
 /**
  * Light theme defaults (default mode).
@@ -82,6 +82,7 @@ export const lightThemeDefaults: Theme = {
     radius: 4,
     density: "comfortable",
   },
+  breakpoint: defaultThemeBreakpoints,
   typography: {
     h1: {
       fontSize: 32,
@@ -202,6 +203,8 @@ export const darkThemeDefaults: Theme = {
     radius: 4,
     density: "comfortable",
   },
+
+  breakpoint: defaultThemeBreakpoints,
 
   typography: {
     h1: {
