@@ -10,7 +10,7 @@
 
 .mw-radio-group-field {
   display: grid;
-  gap: var(--mw-density-gap);
+  gap: var(--mw-spacing-sp-4);
 }
 
 .mw-radio-group-field__label {
@@ -32,19 +32,40 @@
   user-select: none;
 }
 
-/* Tighten line-height so the <p> aligns with the 16px radio circle */
-.mw-radio-group-field__option .mw-p {
-  line-height: 1;
+.mw-radio-group-field__option-content {
+  display: grid;
+  gap: var(--mw-spacing-sp-1, 2px);
+  min-width: 0;
+}
+
+.mw-radio-group-field__option--with-description {
+  align-items: flex-start;
+  height: auto;
+  min-height: 32px;
+}
+
+.mw-radio-group-field__option-label {
+  color: var(--mw-color-text, #141414);
+}
+
+.mw-radio-group-field__option-description {
+  color: var(--mw-color-text-muted, #595959);
 }
 
 .mw-radio-group-field__description {
-  opacity: 0.75;
-  font-size: var(--mw-density-font-size-sm);
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-radio-group-field__description .mw-text {
+  color: inherit;
 }
 
 .mw-radio-group-field__error {
-  font-size: var(--mw-density-font-size-sm);
   color: var(--mw-color-danger-base, #d90429);
+}
+
+.mw-radio-group-field__error .mw-text {
+  color: inherit;
 }
 
 /* State modifiers */
@@ -53,7 +74,7 @@
   opacity: 0.7;
 }
 
-.mw-radio-group-field--invalid .mw-radio-group-field__label .mw-p,
-.mw-radio-group-field--invalid .mw-radio-group-field__error .mw-p {
+.mw-radio-group-field--invalid .mw-radio-group-field__label .mw-text,
+.mw-radio-group-field--invalid .mw-radio-group-field__error .mw-text {
   color: var(--mw-color-danger-base, #d90429);
 }

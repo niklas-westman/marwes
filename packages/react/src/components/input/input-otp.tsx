@@ -5,7 +5,7 @@ import {
 } from "@marwes-ui/core"
 import type { CssVars, InputOtpOptions } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -113,7 +113,7 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
       data-disabled={props.disabled ? "true" : undefined}
     >
       <label className="mw-input-otp__label" htmlFor={id}>
-        <Paragraph size="md">{props.label}</Paragraph>
+        <Text variant="label">{props.label}</Text>
       </label>
 
       <div className="mw-input-otp__cells">
@@ -149,11 +149,11 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
 
       {hasError ? (
         <div className="mw-input-otp__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       ) : hasHelperText ? (
         <div className="mw-input-otp__helper" id={helperTextId}>
-          <Paragraph size="sm">{props.helperText}</Paragraph>
+          <Text variant="caption">{props.helperText}</Text>
         </div>
       ) : null}
     </div>

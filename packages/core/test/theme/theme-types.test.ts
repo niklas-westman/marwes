@@ -6,7 +6,7 @@
  */
 import { describe, expect, it } from "vitest"
 import { lightThemeDefaults } from "../../src/theme/theme-defaults"
-import { ThemeMode } from "../../src/theme/theme-types"
+import { TextVariant, ThemeMode } from "../../src/theme/theme-types"
 import type {
   ColorInput,
   ColorRole,
@@ -83,14 +83,22 @@ describe("ThemeInputColor", () => {
   it("accepts plain string for surface fields", () => {
     const color: Partial<ThemeInputColor> = {
       background: "#FFFFFF",
+      surfacePrimary: "#FFFFFF",
+      surfaceBrand: "#EEEEFF",
       surfaceElevated: "#FFFFFF",
       textSubtle: "#595959",
+      textLink: "#2527CA",
+      iconMuted: "#A3A3A3",
       borderStrong: "#A3A3A3",
       focus: "#2F31FC",
     }
     expect(color.background).toBe("#FFFFFF")
+    expect(color.surfacePrimary).toBe("#FFFFFF")
+    expect(color.surfaceBrand).toBe("#EEEEFF")
     expect(color.surfaceElevated).toBe("#FFFFFF")
     expect(color.textSubtle).toBe("#595959")
+    expect(color.textLink).toBe("#2527CA")
+    expect(color.iconMuted).toBe("#A3A3A3")
     expect(color.borderStrong).toBe("#A3A3A3")
   })
 })
@@ -132,6 +140,17 @@ describe("ThemeInputColor — deprecated never fields", () => {
     // @ts-expect-error — secondary is typed never in v3
     const color: Partial<ThemeInputColor> = { secondary: "#fff" }
     expect(color).toBeDefined()
+  })
+})
+
+describe("TextVariant", () => {
+  it("exposes runtime text variant values", () => {
+    expect(TextVariant.display).toBe("display")
+    expect(TextVariant.label).toBe("label")
+    expect(TextVariant.labelSmall).toBe("label-small")
+    expect(TextVariant.caption).toBe("caption")
+    expect(TextVariant.overline).toBe("overline")
+    expect(TextVariant.micro).toBe("micro")
   })
 })
 

@@ -24,11 +24,13 @@ export function runZipCodeFieldContract(adapterName: string, h: ZipCodeFieldCont
       await h.renderZipCodeField({ label: "ZIP code" })
 
       const input = h.getByLabelText(/zip code/i)
+      const labelTextNode = h.getByText("ZIP code")
 
       expect(input.tagName).toBe("INPUT")
       expect(input).toHaveAttribute("type", "text")
       expect(input).toHaveAttribute("inputmode", "numeric")
       expect(input).toHaveAttribute("autocomplete", "postal-code")
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
     })
 
     it("connects helper text via aria-describedby", async () => {
@@ -46,6 +48,7 @@ export function runZipCodeFieldContract(adapterName: string, h: ZipCodeFieldCont
       expect(helper).not.toBeNull()
       expect(helper?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
+      expect(helperTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(input).not.toHaveAttribute("aria-invalid", "true")
     })
 
@@ -65,6 +68,7 @@ export function runZipCodeFieldContract(adapterName: string, h: ZipCodeFieldCont
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
     })
 
     it("treats empty helper and error strings as absent", async () => {

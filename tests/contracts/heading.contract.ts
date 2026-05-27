@@ -5,7 +5,7 @@
 import { describe, expect, it } from "vitest"
 
 export type HeadingLevel = 1 | 2 | 3
-export type HeadingSize = "h1" | "h2" | "h3"
+export type HeadingSize = "display" | "h1" | "h2" | "h3"
 
 export type HeadingContractHarness = {
   renderHeading(args: {
@@ -66,6 +66,18 @@ export function runHeadingContract(adapterName: string, harness: HeadingContract
       expect(headingElement).toHaveAttribute("id", "overview-heading")
       expect(headingElement).toHaveAttribute("aria-label", "Overview")
       expect(headingElement.className).toContain("mw-heading--h1")
+    })
+
+    it("supports the display visual size without changing heading semantics", async () => {
+      await harness.renderHeading({
+        level: 1,
+        text: "Hero title",
+        size: "display",
+      })
+
+      const headingElement = harness.getByRole("heading", { name: /hero title/i, level: 1 })
+      expect(headingElement.tagName).toBe("H1")
+      expect(headingElement.className).toContain("mw-heading--display")
     })
   })
 }

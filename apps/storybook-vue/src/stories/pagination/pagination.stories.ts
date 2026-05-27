@@ -1,4 +1,5 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
+import type { PaginationItemAriaLabelOptions } from "@marwes-ui/core"
 import { Pagination } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent, h, ref } from "vue"
@@ -16,7 +17,11 @@ const meta = {
     modelValue: { control: "number" },
     siblingCount: { control: "number" },
     boundaryCount: { control: "number" },
+    maxVisibleItems: { control: "number" },
+    controlDisplay: { control: "select", options: ["auto", "label", "icon"] },
+    adaptive: { control: "boolean" },
     showPrevNext: { control: "boolean" },
+    showFirstLast: { control: "boolean" },
     disabled: { control: "boolean" },
   },
 } satisfies Meta
@@ -61,6 +66,40 @@ export const WithoutPrevNext: Story = {
 export const CompactRange: Story = {
   render: () => ({
     setup: () => () => h(controlledPagination(5, { siblingCount: 1 })),
+  }),
+}
+
+export const FirstLastControls: Story = {
+  render: () => ({
+    setup: () => () => h(controlledPagination(5, { showFirstLast: true })),
+  }),
+}
+
+export const CustomAriaLabels: Story = {
+  render: () => ({
+    setup: () => () =>
+      h(
+        controlledPagination(4, {
+          showFirstLast: true,
+          getItemAriaLabel: (item: PaginationItemAriaLabelOptions) =>
+            item.type === "page" ? `Open result page ${item.page}` : `Open ${item.type} control`,
+        }),
+      ),
+  }),
+}
+
+export const NarrowContainer: Story = {
+  render: () => ({
+    setup: () => () =>
+      h("div", { style: "width:240px" }, [
+        h(controlledPagination(6, { pageCount: 100, siblingCount: 2, showFirstLast: true })),
+      ]),
+  }),
+}
+
+export const IconControls: Story = {
+  render: () => ({
+    setup: () => () => h(controlledPagination(5, { controlDisplay: "icon" })),
   }),
 }
 
@@ -110,6 +149,18 @@ export const AllStates: Story = {
             pageCount: 10,
             siblingCount: 2,
             ariaLabel: "Last page pagination",
+          }),
+          h(Pagination, {
+            modelValue: 5,
+            pageCount: 10,
+            showFirstLast: true,
+            ariaLabel: "First last pagination",
+          }),
+          h(Pagination, {
+            modelValue: 5,
+            pageCount: 10,
+            controlDisplay: "icon",
+            ariaLabel: "Icon pagination",
           }),
           h(Pagination, {
             modelValue: 3,

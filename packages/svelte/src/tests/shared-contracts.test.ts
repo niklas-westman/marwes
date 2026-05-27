@@ -48,7 +48,6 @@ import { runToastContract } from "../../../../tests/contracts/toast.contract"
 import { runTooltipContract } from "../../../../tests/contracts/tooltip.contract"
 import { runZipCodeFieldContract } from "../../../../tests/contracts/zip-code-field.contract"
 import Accordion from "../lib/components/accordion/Accordion.svelte"
-import AccordionField from "../lib/components/accordion/AccordionField.svelte"
 import Avatar from "../lib/components/avatar/Avatar.svelte"
 import AvatarBadge from "../lib/components/avatar/AvatarBadge.svelte"
 import AvatarGroup from "../lib/components/avatar/AvatarGroup.svelte"
@@ -88,17 +87,10 @@ import InfoDialog from "../lib/components/dialog/InfoDialog.svelte"
 import Divider from "../lib/components/divider/Divider.svelte"
 import Icon from "../lib/components/icon/Icon.svelte"
 import Input from "../lib/components/input/Input.svelte"
-import InputField from "../lib/components/input/InputField.svelte"
-import InputOtp from "../lib/components/input/InputOtp.svelte"
 import RichText from "../lib/components/input/RichText.svelte"
-import RichTextField from "../lib/components/input/RichTextField.svelte"
 import Select from "../lib/components/input/Select.svelte"
-import SelectField from "../lib/components/input/SelectField.svelte"
 import Textarea from "../lib/components/input/Textarea.svelte"
-import TextareaField from "../lib/components/input/TextareaField.svelte"
-import ZipCodeField from "../lib/components/input/ZipCodeField.svelte"
 import Radio from "../lib/components/radio/Radio.svelte"
-import RadioGroupField from "../lib/components/radio/RadioGroupField.svelte"
 import Skeleton from "../lib/components/skeleton/Skeleton.svelte"
 import Slider from "../lib/components/slider/Slider.svelte"
 import SliderField from "../lib/components/slider/SliderField.svelte"
@@ -106,7 +98,6 @@ import ButtonSpinner from "../lib/components/spinner/ButtonSpinner.svelte"
 import EmptyStateSpinner from "../lib/components/spinner/EmptyStateSpinner.svelte"
 import Spinner from "../lib/components/spinner/Spinner.svelte"
 import Switch from "../lib/components/switch/Switch.svelte"
-import SwitchField from "../lib/components/switch/SwitchField.svelte"
 import TabGroup from "../lib/components/tab/TabGroup.svelte"
 import ErrorToast from "../lib/components/toast/ErrorToast.svelte"
 import InfoToast from "../lib/components/toast/InfoToast.svelte"
@@ -116,10 +107,21 @@ import ToastContainer from "../lib/components/toast/ToastContainer.svelte"
 import WarningToast from "../lib/components/toast/WarningToast.svelte"
 import Tooltip from "../lib/components/tooltip/Tooltip.svelte"
 import TooltipGroup from "../lib/components/tooltip/TooltipGroup.svelte"
+import AccordionFieldContractFixture from "./type-fixtures/AccordionFieldContractFixture.svelte"
+import CheckboxFieldContractFixture from "./type-fixtures/CheckboxFieldContractFixture.svelte"
+import CheckboxGroupFieldContractFixture from "./type-fixtures/CheckboxGroupFieldContractFixture.svelte"
 import DialogModalContractOpenFixture from "./type-fixtures/DialogModalContractOpenFixture.svelte"
 import DialogModalContractTriggerFixture from "./type-fixtures/DialogModalContractTriggerFixture.svelte"
+import InputFieldContractFixture from "./type-fixtures/InputFieldContractFixture.svelte"
+import InputOtpContractFixture from "./type-fixtures/InputOtpContractFixture.svelte"
+import RadioGroupFieldContractFixture from "./type-fixtures/RadioGroupFieldContractFixture.svelte"
+import RichTextFieldContractFixture from "./type-fixtures/RichTextFieldContractFixture.svelte"
+import SelectFieldContractFixture from "./type-fixtures/SelectFieldContractFixture.svelte"
+import SwitchFieldContractFixture from "./type-fixtures/SwitchFieldContractFixture.svelte"
+import TextareaFieldContractFixture from "./type-fixtures/TextareaFieldContractFixture.svelte"
 import ToastProviderContractFixture from "./type-fixtures/ToastProviderContractFixture.svelte"
 import TypographyContractFixture from "./type-fixtures/TypographyContractFixture.svelte"
+import ZipCodeFieldContractFixture from "./type-fixtures/ZipCodeFieldContractFixture.svelte"
 
 type Props = Record<string, unknown>
 
@@ -139,7 +141,13 @@ function renderWithText(component: unknown, props: Props, text: string): void {
 }
 
 function optionCheckboxSnippet(args: {
-  options: Array<{ value: string; label: string; disabled?: boolean; indeterminate?: boolean }>
+  options: Array<{
+    value: string
+    label: string
+    description?: string
+    disabled?: boolean
+    indeterminate?: boolean
+  }>
   selected: string[]
   disabled?: boolean
   invalid?: boolean
@@ -150,7 +158,12 @@ function optionCheckboxSnippet(args: {
       `<span>${args.options
         .map((option) => {
           const disabled = args.disabled || option.disabled
-          return `<label class="mw-checkbox-group-field__option"><input type="checkbox" value="${option.value}" aria-label="${option.label}" ${args.selected.includes(option.value) ? "checked" : ""} ${disabled ? "disabled" : ""} ${args.invalid ? 'aria-invalid="true"' : ""} data-indeterminate="${option.indeterminate ? "true" : "false"}" /> <span class="mw-p mw-p--md">${option.label}</span></label>`
+          const labelId = `checkbox-option-${option.value}-label`
+          const descriptionId = `checkbox-option-${option.value}-description`
+          const descriptionMarkup = option.description
+            ? `<span class="mw-text mw-text--caption mw-checkbox-group-field__option-description" id="${descriptionId}">${option.description}</span>`
+            : ""
+          return `<label class="mw-checkbox-group-field__option${option.description ? " mw-checkbox-group-field__option--with-description" : ""}"><input type="checkbox" value="${option.value}" aria-labelledby="${labelId}" ${option.description ? `aria-describedby="${descriptionId}"` : ""} ${args.selected.includes(option.value) ? "checked" : ""} ${disabled ? "disabled" : ""} ${args.invalid ? 'aria-invalid="true"' : ""} data-indeterminate="${option.indeterminate ? "true" : "false"}" /> <span class="mw-checkbox-group-field__option-content"><span class="mw-text mw-text--label mw-checkbox-group-field__option-label" id="${labelId}">${option.label}</span>${descriptionMarkup}</span></label>`
         })
         .join("")}</span>`,
     setup: (element) => {
@@ -162,34 +175,6 @@ function optionCheckboxSnippet(args: {
             .filter((candidate) => candidate.checked)
             .map((candidate) => candidate.value)
           args.onChange?.(next)
-        })
-      }
-    },
-  }))
-}
-
-function optionRadioSnippet(args: {
-  name: string
-  options: Array<{ value: string; label: string; disabled?: boolean }>
-  selected?: string
-  disabled?: boolean
-  invalid?: boolean
-  onChange?: (value: string) => void
-}) {
-  return createRawSnippet(() => ({
-    render: () =>
-      `<span>${args.options
-        .map((option) => {
-          const disabled = args.disabled || option.disabled
-          return `<label class="mw-radio-group-field__option"><input type="radio" name="${args.name}" value="${option.value}" aria-label="${option.label}" ${args.selected === option.value ? "checked" : ""} ${disabled ? "disabled" : ""} ${args.invalid ? 'aria-invalid="true"' : ""} /> <span class="mw-p mw-p--sm">${option.label}</span></label>`
-        })
-        .join("")}</span>`,
-    setup: (element) => {
-      for (const input of Array.from(element.querySelectorAll<HTMLInputElement>("input"))) {
-        input.addEventListener("change", () => {
-          if (input.checked) {
-            args.onChange?.(input.value)
-          }
         })
       }
     },
@@ -240,13 +225,14 @@ runAccordionContract("svelte", {
     )
   },
   renderAccordionField(args) {
-    render(AccordionField, {
+    render(AccordionFieldContractFixture, {
       props: {
         label: args.label,
         items: (args.items ?? []).map((item) => ({
           ...item,
-          disabled: args.disabled || item.disabled,
+          disabled: item.disabled,
         })),
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
@@ -488,17 +474,15 @@ runCheckboxContract("svelte", {
 
 runCheckboxFieldContract("svelte", {
   renderCheckboxField(args) {
-    render(CheckboxField, {
+    render(CheckboxFieldContractFixture, {
       props: {
         label: args.label,
-        checkbox: {
-          ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
-          ...(args.defaultChecked !== undefined ? { defaultChecked: args.defaultChecked } : {}),
-        },
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
         ...(args.checked !== undefined ? { checked: args.checked } : {}),
+        ...(args.defaultChecked !== undefined ? { defaultChecked: args.defaultChecked } : {}),
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       },
     })
   },
@@ -528,7 +512,7 @@ runCheckboxGroupFieldContract("svelte", {
       { value: "push", label: "Push" },
     ]
 
-    render(CheckboxGroupField, {
+    render(CheckboxGroupFieldContractFixture, {
       props: {
         label: args.label ?? "Communication preferences",
         ...(args.description !== undefined ? { description: args.description } : {}),
@@ -548,6 +532,9 @@ runCheckboxGroupFieldContract("svelte", {
   },
   getAllByRole(role) {
     return screen.getAllByRole(role) as HTMLInputElement[]
+  },
+  getByText(text) {
+    return screen.getByText(text)
   },
   async click(element) {
     if (element instanceof HTMLInputElement && element.disabled) return
@@ -757,7 +744,7 @@ runInputContract("svelte", {
 
 runInputFieldContract("svelte", {
   renderInputField(args) {
-    render(InputField, {
+    render(InputFieldContractFixture, {
       props: {
         label: args.label,
         input: {},
@@ -783,7 +770,7 @@ runInputFieldContract("svelte", {
 
 runInputOtpContract("svelte", {
   renderInputOtp(args = {}) {
-    render(InputOtp, {
+    render(InputOtpContractFixture, {
       props: {
         label: args.label ?? "Verification code",
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
@@ -853,24 +840,19 @@ runRadioContract("svelte", {
 
 runRadioGroupFieldContract("svelte", {
   renderRadioGroup(args = {}) {
-    const selected = args.value ?? args.defaultValue
-    const options = args.options ?? []
-    render(RadioGroupField, {
+    render(RadioGroupFieldContractFixture, {
       props: {
+        name: args.name ?? "radio-contract",
         label: args.label ?? "Pick one",
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.value !== undefined ? { value: args.value } : {}),
+        ...(args.onValueChange !== undefined ? { onchange: args.onValueChange } : {}),
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.required !== undefined ? { required: args.required } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
-        children: optionRadioSnippet({
-          name: args.name ?? "radio-contract",
-          options,
-          selected,
-          disabled: args.disabled,
-          invalid: args.error !== undefined && args.error.trim().length > 0,
-          onChange: args.onValueChange,
-        }),
+        options: args.options ?? [],
       },
     })
   },
@@ -913,7 +895,7 @@ runRichTextContract("svelte", {
 
 runRichTextFieldContract("svelte", {
   renderRichTextField(args) {
-    render(RichTextField, {
+    render(RichTextFieldContractFixture, {
       props: {
         label: args.label,
         editor: {},
@@ -972,7 +954,7 @@ runSelectContract("svelte", {
 
 runSelectFieldContract("svelte", {
   renderSelectField(args) {
-    render(SelectField, {
+    render(SelectFieldContractFixture, {
       props: {
         label: args.label,
         select: {
@@ -1001,7 +983,7 @@ runSelectFieldContract("svelte", {
 
 runSelectComboboxContract("svelte", {
   renderCustomSelectField(args = {}) {
-    render(SelectField, {
+    render(SelectFieldContractFixture, {
       props: {
         label: args.label ?? "Country",
         select: {
@@ -1109,7 +1091,7 @@ runSwitchContract("svelte", {
     })
   },
   renderSwitchField(args) {
-    render(SwitchField, {
+    render(SwitchFieldContractFixture, {
       props: {
         label: args.label,
         switch: {
@@ -1197,7 +1179,7 @@ runTextareaContract("svelte", {
 
 runTextareaFieldContract("svelte", {
   renderTextareaField(args) {
-    render(TextareaField, {
+    render(TextareaFieldContractFixture, {
       props: {
         label: args.label,
         textarea: {},
@@ -1223,7 +1205,7 @@ runTextareaFieldContract("svelte", {
 
 runZipCodeFieldContract("svelte", {
   renderZipCodeField(args) {
-    render(ZipCodeField, {
+    render(ZipCodeFieldContractFixture, {
       props: {
         label: args.label,
         input: {},

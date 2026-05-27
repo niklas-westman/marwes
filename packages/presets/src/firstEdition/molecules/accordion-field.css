@@ -24,13 +24,17 @@
 }
 
 .mw-accordion-field__description {
-  font-size: 0.875em;
   color: var(--mw-color-text-muted, #595959);
 }
 
 .mw-accordion-field__error {
-  font-size: 0.875em;
   color: var(--mw-color-danger-base, #d90429);
+}
+
+.mw-accordion-field__label .mw-text,
+.mw-accordion-field__description .mw-text,
+.mw-accordion-field__error .mw-text {
+  color: inherit;
 }
 
 /* State modifiers */
@@ -39,7 +43,7 @@
   cursor: not-allowed;
 }
 
-.mw-accordion-field--invalid .mw-accordion-field__label .mw-p,
-.mw-accordion-field--invalid .mw-accordion-field__error .mw-p {
+.mw-accordion-field--invalid .mw-accordion-field__label .mw-text,
+.mw-accordion-field--invalid .mw-accordion-field__error .mw-text {
   color: var(--mw-color-danger-base, #d90429);
 }

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+import { Text } from "@marwes-ui/react"
 import {
   cardShellStyles,
   compactLabelStyles,
@@ -100,7 +101,7 @@ const CardSubtitle = styled.span`
   color: ${({ theme }) => theme.color.textMuted};
 `
 
-const ShowcaseSectionLabel = styled.h4`
+const ShowcaseSectionLabel = styled(Text)`
   ${sectionLabelStyles}
   color: ${({ theme }) => theme.color.textMuted};
 `

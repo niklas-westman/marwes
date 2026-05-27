@@ -1,4 +1,4 @@
-import { Banner, InfoBanner } from "@marwes-ui/react"
+import { Banner, InfoBanner, Text, TextVariant } from "@marwes-ui/react"
 import styled from "styled-components"
 
 import { FlexCard, ShowcaseRow, ShowcaseSectionLabel, ShowcaseStack } from "./shared"
@@ -10,6 +10,7 @@ function RowBanner(): JSX.Element {
     <ShowcaseRow>
       <BannerCard>
         <ShowcaseSectionLabel>Banner</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Banner</Text>
         <ShowcaseStack>
           <Banner showIcon={false}>
             Banner message — describe the event, update, or action needed here.

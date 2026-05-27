@@ -34,7 +34,10 @@ describe("theme variable helpers", () => {
 
   it("exposes color CSS variable references", () => {
     expect(mwTheme.color.textMuted).toBe("var(--mw-color-text-muted)")
+    expect(mwTheme.color.textLink).toBe("var(--mw-color-text-link)")
+    expect(mwTheme.color.iconMuted).toBe("var(--mw-color-icon-muted)")
     expect(mwThemeVars.color.primary.base).toBe("var(--mw-color-primary-base)")
+    expect(mwThemeVarNames.color.surfaceBrand).toBe("--mw-color-surface-brand")
     expect(mwThemeVarNames.color.text).toBe("--mw-color-text")
   })
 
@@ -42,7 +45,17 @@ describe("theme variable helpers", () => {
     expect(mwThemeVars.font.primary).toBe("var(--mw-font-primary)")
     expect(mwThemeVars.ui.radius).toBe("var(--mw-ui-radius)")
     expect(mwThemeVars.density.height).toBe("var(--mw-density-height)")
+    expect(mwThemeVars.typography.display.fontSize).toBe("var(--mw-typography-display-font-size)")
     expect(mwThemeVars.typography.h1.fontSize).toBe("var(--mw-typography-h1-font-size)")
+    expect(mwThemeVars.typography.text.label.fontSize).toBe(
+      "var(--mw-typography-text-label-font-size)",
+    )
+    expect(mwThemeVars.typography.text["label-small"].fontSize).toBe(
+      "var(--mw-typography-text-label-small-font-size)",
+    )
+    expect(mwThemeVars.typography.text.overline.textTransform).toBe(
+      "var(--mw-typography-text-overline-transform)",
+    )
     expect(mwTheme.typography.paragraph.sm.fontSize).toBe(
       "var(--mw-typography-paragraph-sm-font-size)",
     )

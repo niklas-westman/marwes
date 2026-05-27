@@ -5,14 +5,14 @@
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import "@testing-library/jest-dom/vitest"
-import CheckboxField from "../lib/components/checkbox/CheckboxField.svelte"
-import CheckboxGroupField from "../lib/components/checkbox/CheckboxGroupField.svelte"
-import RadioGroupField from "../lib/components/radio/RadioGroupField.svelte"
-import SwitchField from "../lib/components/switch/SwitchField.svelte"
+import CheckboxFieldContractFixture from "./type-fixtures/CheckboxFieldContractFixture.svelte"
+import CheckboxGroupFieldContractFixture from "./type-fixtures/CheckboxGroupFieldContractFixture.svelte"
+import RadioGroupFieldContractFixture from "./type-fixtures/RadioGroupFieldContractFixture.svelte"
+import SwitchFieldContractFixture from "./type-fixtures/SwitchFieldContractFixture.svelte"
 
 describe("CheckboxField", () => {
   it("renders with a label", () => {
-    const { container } = render(CheckboxField, {
+    const { container } = render(CheckboxFieldContractFixture, {
       props: { label: "Accept terms" },
     })
     const label = container.querySelector("label")
@@ -20,7 +20,7 @@ describe("CheckboxField", () => {
   })
 
   it("renders a checkbox input", () => {
-    const { container } = render(CheckboxField, {
+    const { container } = render(CheckboxFieldContractFixture, {
       props: { label: "Accept terms" },
     })
     const input = container.querySelector('input[type="checkbox"]')
@@ -28,14 +28,14 @@ describe("CheckboxField", () => {
   })
 
   it("shows description when provided", () => {
-    const { container } = render(CheckboxField, {
+    const { container } = render(CheckboxFieldContractFixture, {
       props: { label: "Accept terms", description: "Required" },
     })
     expect(container.textContent).toContain("Required")
   })
 
   it("shows error when provided", () => {
-    const { container } = render(CheckboxField, {
+    const { container } = render(CheckboxFieldContractFixture, {
       props: { label: "Accept terms", error: "Must accept" },
     })
     expect(container.textContent).toContain("Must accept")
@@ -44,7 +44,7 @@ describe("CheckboxField", () => {
 
 describe("CheckboxGroupField", () => {
   it("renders with a legend label", () => {
-    const { container } = render(CheckboxGroupField, {
+    const { container } = render(CheckboxGroupFieldContractFixture, {
       props: { label: "Options" },
     })
     const legend = container.querySelector("legend")
@@ -52,7 +52,7 @@ describe("CheckboxGroupField", () => {
   })
 
   it("shows error when provided", () => {
-    const { container } = render(CheckboxGroupField, {
+    const { container } = render(CheckboxGroupFieldContractFixture, {
       props: { label: "Options", error: "Select at least one" },
     })
     expect(container.textContent).toContain("Select at least one")
@@ -61,26 +61,31 @@ describe("CheckboxGroupField", () => {
 
 describe("RadioGroupField", () => {
   it("renders with a labeled radiogroup", () => {
-    const { container } = render(RadioGroupField, {
-      props: { label: "Choice" },
+    const { container } = render(RadioGroupFieldContractFixture, {
+      props: { name: "choice", label: "Choice", options: [] },
     })
     const group = container.querySelector('[role="radiogroup"]')
-    const label = container.querySelector(".mw-radio-group-field__label .mw-p")
+    const label = container.querySelector(".mw-radio-group-field__label .mw-text")
 
     expect(group).toHaveAccessibleName("Choice")
-    expect(label).toHaveClass("mw-p--sm")
+    expect(label).toHaveClass("mw-text--label")
   })
 
   it("shows error when provided", () => {
-    const { container } = render(RadioGroupField, {
-      props: { label: "Choice", error: "Pick one" },
+    const { container } = render(RadioGroupFieldContractFixture, {
+      props: { name: "choice", label: "Choice", error: "Pick one", options: [] },
     })
     expect(container.textContent).toContain("Pick one")
   })
 
   it("shows description when provided", () => {
-    const { container } = render(RadioGroupField, {
-      props: { label: "Choice", description: "Select your preference" },
+    const { container } = render(RadioGroupFieldContractFixture, {
+      props: {
+        name: "choice",
+        label: "Choice",
+        description: "Select your preference",
+        options: [],
+      },
     })
     expect(container.textContent).toContain("Select your preference")
   })
@@ -88,14 +93,14 @@ describe("RadioGroupField", () => {
 
 describe("SwitchField", () => {
   it("renders with a label", () => {
-    const { container } = render(SwitchField, {
+    const { container } = render(SwitchFieldContractFixture, {
       props: { label: "Notifications" },
     })
     expect(container.textContent).toContain("Notifications")
   })
 
   it("renders a switch button", () => {
-    const { container } = render(SwitchField, {
+    const { container } = render(SwitchFieldContractFixture, {
       props: { label: "Notifications" },
     })
     const btn = container.querySelector('[role="switch"]')
@@ -103,14 +108,14 @@ describe("SwitchField", () => {
   })
 
   it("shows description when provided", () => {
-    const { container } = render(SwitchField, {
+    const { container } = render(SwitchFieldContractFixture, {
       props: { label: "Notifications", description: "Get email alerts" },
     })
     expect(container.textContent).toContain("Get email alerts")
   })
 
   it("shows error when provided", () => {
-    const { container } = render(SwitchField, {
+    const { container } = render(SwitchFieldContractFixture, {
       props: { label: "Notifications", error: "Required" },
     })
     expect(container.textContent).toContain("Required")

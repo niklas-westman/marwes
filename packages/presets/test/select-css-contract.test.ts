@@ -48,4 +48,15 @@ describe("firstEdition select css contract", () => {
     expect(css).toContain("background-color: var(--mw-dropdown-item-surface-pressed);")
     expect(css).toContain("padding: 12px;")
   })
+
+  it("targets text typography classes for date select field copy", () => {
+    const css = readFileSync(selectCssPath, "utf8")
+
+    expect(css).toContain(".mw-input-field--select-date .mw-input-field__label .mw-text")
+    expect(css).toContain(".mw-input-field--select-date .mw-input-field__helper .mw-text")
+    expect(css).toContain(".mw-input-field--select-date .mw-input-field__error .mw-text")
+    expect(css).not.toContain(".mw-input-field--select-date .mw-input-field__label p")
+    expect(css).not.toContain(".mw-input-field--select-date .mw-input-field__helper p")
+    expect(css).not.toContain(".mw-input-field--select-date .mw-input-field__error p")
+  })
 })

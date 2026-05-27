@@ -1,3 +1,11 @@
+export type PaginationControlDirection = "first" | "previous" | "next" | "last"
+
+export type PaginationControlDisplay = "auto" | "label" | "icon"
+
+export type PaginationResolvedControlDisplay = Exclude<PaginationControlDisplay, "auto">
+
+export type PaginationItemType = "page" | "start-ellipsis" | "end-ellipsis"
+
 export type PaginationItem =
   | {
       type: "page"
@@ -6,9 +14,17 @@ export type PaginationItem =
       selected: boolean
     }
   | {
-      type: "ellipsis"
+      type: "start-ellipsis" | "end-ellipsis"
       key: string
     }
+
+export interface PaginationItemAriaLabelOptions {
+  type: PaginationItemType | PaginationControlDirection
+  page: number | null
+  selected: boolean
+}
+
+export type PaginationGetItemAriaLabel = (item: PaginationItemAriaLabelOptions) => string
 
 export interface PaginationOptions {
   page?: number
@@ -16,11 +32,49 @@ export interface PaginationOptions {
   siblingCount?: number
   boundaryCount?: number
   maxVisibleItems?: number
+  controlDisplay?: PaginationControlDisplay
   showPrevNext?: boolean
+  showFirstLast?: boolean
   disabled?: boolean
   ariaLabel?: string
+  firstLabel?: string
   previousLabel?: string
   nextLabel?: string
+  lastLabel?: string
+  getItemAriaLabel?: PaginationGetItemAriaLabel
+}
+
+export interface PaginationAdaptiveMaxVisibleItemsOptions {
+  containerWidth: number
+  controlWidth?: number
+  controlCount?: number
+  itemSize?: number
+  itemGap?: number
+  sectionGap?: number
+}
+
+export interface PaginationAdaptiveProfileOptions extends PaginationReservedItemCountOptions {
+  containerWidth: number
+  labelControlWidth?: number
+  iconControlWidth?: number
+  controlCount?: number
+  itemSize?: number
+  itemGap?: number
+  sectionGap?: number
+  controlDisplay?: PaginationControlDisplay
+}
+
+export interface PaginationAdaptiveProfile {
+  controlDisplay: PaginationResolvedControlDisplay
+  maxVisibleItems: number | undefined
+  reservedItemCount: number
+}
+
+export interface PaginationReservedItemCountOptions {
+  pageCount: number
+  siblingCount?: number
+  boundaryCount?: number
+  maxVisibleItems?: number
 }
 
 export interface PaginationA11yProps {
@@ -33,9 +87,10 @@ export interface PaginationListA11yProps {
 }
 
 export interface PaginationControlOptions {
-  direction: "previous" | "next"
+  direction: PaginationControlDirection
   disabled?: boolean
   label?: string
+  ariaLabel?: string
 }
 
 export interface PaginationControlA11yProps {
@@ -47,6 +102,7 @@ export interface PaginationPageOptions {
   page: number
   selected?: boolean
   disabled?: boolean
+  ariaLabel?: string
 }
 
 export interface PaginationPageA11yProps {
@@ -65,7 +121,10 @@ export interface PaginationRenderKit {
   vars: Record<string, string>
   a11y: PaginationA11yProps
   items: PaginationItem[]
+  reservedItemCount: number
+  controlDisplay: PaginationResolvedControlDisplay
   showPrevNext: boolean
+  showFirstLast: boolean
 }
 
 export interface PaginationListRenderKit {

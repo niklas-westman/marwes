@@ -19,6 +19,7 @@ export {
   mwVar,
   createMwTheme,
   createMwThemeMedia,
+  TextVariant,
   ThemeMode,
 } from "@marwes-ui/core"
 
@@ -227,6 +228,11 @@ export type { HeadingProps, HeadingLevel } from "./components/heading"
 /* Paragraph */
 export { Paragraph } from "./components/paragraph"
 export type { ParagraphProps } from "./components/paragraph"
+
+/* Text */
+export { Text, TypographyText } from "./components/text"
+export type { TextComponent, TextProps } from "./components/text"
+export type { TextAs } from "@marwes-ui/core"
 
 /* StatTile */
 export { StatTile } from "./components/stat-tile"

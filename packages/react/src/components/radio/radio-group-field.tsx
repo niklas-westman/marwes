@@ -67,12 +67,13 @@
 
 import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Radio } from "./radio"
 
 export interface RadioGroupFieldOption {
   value: string
   label: React.ReactNode
+  description?: React.ReactNode
   disabled?: boolean
 }
 
@@ -163,12 +164,12 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
   return (
     <div className={wrapperClass} {...props.dataAttributes}>
       <div className="mw-radio-group-field__label" id={labelId}>
-        <Paragraph size="sm">{props.label}</Paragraph>
+        <Text variant="label">{props.label}</Text>
       </div>
 
       {hasDescription && (
         <div className="mw-radio-group-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
+          <Text variant="caption">{props.description}</Text>
         </div>
       )}
 
@@ -180,16 +181,28 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
         aria-required={props.required ? true : undefined}
         className="mw-radio-group-field__options"
       >
-        {props.options.map(({ value, label, disabled: optionDisabled }) => {
+        {props.options.map(({ value, label, description, disabled: optionDisabled }) => {
           const optionId = `${id}-option-${value}`
+          const optionLabelId = `${optionId}-label`
+          const optionDescriptionId = `${optionId}-description`
+          const hasOptionDescription = hasContent(description)
           const isDisabled = props.disabled || optionDisabled || false
 
           return (
-            <label key={value} className="mw-radio-group-field__option" htmlFor={optionId}>
+            <label
+              key={value}
+              className={cx(
+                "mw-radio-group-field__option",
+                hasOptionDescription && "mw-radio-group-field__option--with-description",
+              )}
+              htmlFor={optionId}
+            >
               <Radio
                 id={optionId}
                 name={props.name}
                 value={value}
+                ariaLabelledBy={optionLabelId}
+                {...(hasOptionDescription ? { ariaDescribedBy: optionDescriptionId } : {})}
                 checked={selectedValue === value}
                 disabled={isDisabled}
                 invalid={isInvalid}
@@ -198,7 +211,24 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
                   if (checked) handleSelect(value)
                 }}
               />
-              <Paragraph size="sm">{label}</Paragraph>
+              <span className="mw-radio-group-field__option-content">
+                <Text
+                  id={optionLabelId}
+                  variant="label"
+                  className="mw-radio-group-field__option-label"
+                >
+                  {label}
+                </Text>
+                {hasOptionDescription && (
+                  <Text
+                    id={optionDescriptionId}
+                    variant="label-small"
+                    className="mw-radio-group-field__option-description"
+                  >
+                    {description}
+                  </Text>
+                )}
+              </span>
             </label>
           )
         })}
@@ -206,7 +236,7 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
 
       {hasError && (
         <div className="mw-radio-group-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </div>

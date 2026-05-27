@@ -131,6 +131,12 @@ export type { H1Props, H2Props, H3Props } from "./components/heading/types.js"
 export { default as Paragraph } from "./components/paragraph/Paragraph.svelte"
 export type { ParagraphProps } from "./components/paragraph/types.js"
 
+// Text
+export { default as Text } from "./components/text/Text.svelte"
+export { default as TypographyText } from "./components/text/Text.svelte"
+export type TextComponent = typeof import("./components/text/Text.svelte").default
+export type { TextProps } from "./components/text/types.js"
+
 // Textarea
 export { default as Textarea } from "./components/input/Textarea.svelte"
 export { default as TextareaField } from "./components/input/TextareaField.svelte"
@@ -165,7 +171,11 @@ export { default as RadioGroupField } from "./components/radio/RadioGroupField.s
 export { default as OptionRadioGroup } from "./components/radio/OptionRadioGroup.svelte"
 export { default as YesNoRadioGroup } from "./components/radio/YesNoRadioGroup.svelte"
 export { default as RatingRadioGroup } from "./components/radio/RatingRadioGroup.svelte"
-export type { RadioProps, RadioGroupFieldProps } from "./components/radio/types.js"
+export type {
+  RadioGroupFieldOption,
+  RadioGroupFieldProps,
+  RadioProps,
+} from "./components/radio/types.js"
 
 // Avatar
 export { default as Avatar } from "./components/avatar/Avatar.svelte"
@@ -307,6 +317,7 @@ export {
   createMwThemeMedia,
   Spacings,
   SwitchSize,
+  TextVariant,
   ThemeMode,
 } from "@marwes-ui/core"
 
@@ -334,6 +345,7 @@ export type {
   ThemeModeAttribute,
   ThemeModeRootTarget,
   ThemePreference,
+  TextAs,
   ThemeVariableStrategy,
   ToneName,
 } from "@marwes-ui/core"

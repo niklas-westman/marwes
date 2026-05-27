@@ -1,12 +1,12 @@
-import { Badge, Icon, IconName } from "@marwes-ui/react"
+import { Badge, IconName, LinkButton, Paragraph, Text, TextVariant } from "@marwes-ui/react"
 import styled from "styled-components"
 
 import { InstallationPanel } from "./InstallationPanel"
 
 const HeroContainer = styled.section`
   width: 100%;
-  padding: ${({ theme }) => theme.spacing.sp80} ${({ theme }) => theme.spacing.sp80}
-    ${({ theme }) => theme.spacing.sp48};
+  padding: ${({ theme }) => theme.spacing.sp80}
+    ${({ theme }) => theme.spacing.sp80} ${({ theme }) => theme.spacing.sp48};
   display: flex;
   gap: ${({ theme }) => `calc(${theme.spacing.sp4} + ${theme.spacing.sp2})`};
   justify-content: space-between;
@@ -52,27 +52,6 @@ const TopSection = styled.div`
   align-items: flex-start;
 `
 
-const Headline = styled.h1`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: 2.5rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: ${({ theme }) => theme.color.text};
-  letter-spacing: 0;
-
-  ${({ theme }) => theme.media.mobileAndBelow} {
-    font-size: 1.75rem;
-  }
-`
-
-const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: ${({ theme }) => theme.typography.paragraph.md.fontSize};
-  font-weight: 400;
-  line-height: ${({ theme }) => theme.typography.paragraph.md.lineHeight};
-  color: ${({ theme }) => theme.color.text};
-`
-
 const BadgeRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -85,26 +64,6 @@ const LinkRow = styled.div`
   flex-wrap: wrap;
 `
 
-const LinkButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sp4};
-  height: ${({ theme }) => theme.spacing.sp24};
-  padding: 0;
-  background: none;
-  color: ${({ theme }) => theme.color.text};
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: ${({ theme }) => theme.typography.paragraph.sm.fontSize};
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: opacity 0.2s;
-
-  &:hover {
-    opacity: 0.7;
-  }
-`
-
 function HeroSection(): JSX.Element {
   return (
     <HeroContainer>
@@ -112,9 +71,9 @@ function HeroSection(): JSX.Element {
         <TextBox>
           <TopSection>
             <Badge variant="warning">Work in progress</Badge>
-            <Headline>Design with intention</Headline>
+            <Text variant={TextVariant.display}>Design with intention</Text>
           </TopSection>
-          <Subtitle>Designed and developed with care. Built by craft. Open to all.</Subtitle>
+          <Paragraph>Designed and developed with care. Built by craft. Open to all.</Paragraph>
         </TextBox>
         <BadgeRow>
           <Badge>Framework-agnostic</Badge>
@@ -126,23 +85,18 @@ function HeroSection(): JSX.Element {
         <LinkRow>
           <LinkButton
             href="https://github.com/niklas-westman/marwes/tree/main/docs"
-            target="_blank"
-            rel="noopener noreferrer"
+            iconRight={IconName.ArrowUpRight}
           >
             Documentation
-            <Icon name={IconName.ArrowUpRight} decorative size={14} />
           </LinkButton>
-          <LinkButton href="#" target="_blank" rel="noopener noreferrer">
+          <LinkButton href="#" iconRight={IconName.ArrowUpRight}>
             Storybook
-            <Icon name={IconName.ArrowUpRight} decorative size={14} />
           </LinkButton>
           <LinkButton
             href="https://github.com/niklas-westman/marwes"
-            target="_blank"
-            rel="noopener noreferrer"
+            iconRight={IconName.ArrowUpRight}
           >
             GitHub
-            <Icon name={IconName.ArrowUpRight} decorative size={14} />
           </LinkButton>
         </LinkRow>
       </TextColumn>

@@ -37,6 +37,17 @@ export function runCheckboxFieldContract(
       expect(checkbox).not.toHaveAttribute("aria-label", "Accept terms")
     })
 
+    it("renders the field label with the canonical checkbox label typography", async () => {
+      await harness.renderCheckboxField({
+        label: "Accept terms",
+      })
+
+      const labelText = harness.getByText("Accept terms")
+
+      expect(labelText).toHaveClass("mw-text")
+      expect(labelText).toHaveClass("mw-text--label")
+    })
+
     it("connects description text through aria-describedby", async () => {
       await harness.renderCheckboxField({
         label: "Accept terms",
@@ -52,6 +63,8 @@ export function runCheckboxFieldContract(
       expect(description).not.toBeNull()
       expect(description?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(description?.id ?? "")
+      expect(descriptionTextNode).toHaveClass("mw-text")
+      expect(descriptionTextNode).toHaveClass("mw-text--caption")
     })
 
     it("connects error text through aria-describedby and marks the checkbox invalid", async () => {
@@ -71,6 +84,8 @@ export function runCheckboxFieldContract(
       expect(error).toHaveAttribute("aria-live", "polite")
       expect(checkbox).toHaveAttribute("aria-invalid", "true")
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")
+      expect(errorTextNode).toHaveClass("mw-text")
+      expect(errorTextNode).toHaveClass("mw-text--caption")
     })
 
     it("merges external describedBy with internal description and error ids", async () => {

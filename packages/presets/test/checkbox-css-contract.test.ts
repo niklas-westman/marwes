@@ -26,6 +26,9 @@ describe("firstEdition checkbox css contract", () => {
 
     expect(css).toContain(".mw-checkbox-field__row:has(.mw-checkbox:focus-visible)")
     expect(css).toContain("outline: 2px solid var(--mw-color-focus);")
+    expect(css).toContain(".mw-checkbox-field__description .mw-text")
+    expect(css).toContain(".mw-checkbox-field__error .mw-text")
+    expect(css).toContain(".mw-checkbox-field--invalid .mw-checkbox-field__label .mw-text")
   })
 
   it("keeps checkbox group legends aligned and group rows keyboard-focusable", () => {
@@ -34,6 +37,12 @@ describe("firstEdition checkbox css contract", () => {
     expect(css).toContain("min-inline-size: 0;")
     expect(css).toContain("padding: 0;")
     expect(css).toContain(".mw-checkbox-group-field__option:has(.mw-checkbox:focus-visible)")
-    expect(css).toContain(".mw-checkbox-group-field__option .mw-p")
+    expect(css).toContain(".mw-checkbox-group-field__option-content")
+    expect(css).toContain(".mw-checkbox-group-field__option-label")
+    expect(css).toContain(".mw-checkbox-group-field__option-description")
+    expect(css).toContain(
+      ".mw-checkbox-group-field--invalid .mw-checkbox-group-field__label .mw-text",
+    )
+    expect(css).not.toContain(".mw-checkbox-group-field__option .mw-p")
   })
 })

@@ -1,4 +1,12 @@
-import { Button, ButtonVariant, DialogModal, Drawer, Card as MwCard } from "@marwes-ui/react"
+import {
+  Button,
+  ButtonVariant,
+  DialogModal,
+  Drawer,
+  Card as MwCard,
+  Text,
+  TextVariant,
+} from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -17,13 +25,15 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
   return (
     <ShowcaseRow>
       <LeftCard>
-        <ShowcaseSectionLabel>Card</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Card</Text>
+
         <MwCard title="Card title">
           Card description text goes here. This provides more context about the card content.
         </MwCard>
       </LeftCard>
       <RightCard>
-        <ShowcaseSectionLabel>Dialog &amp; Drawer</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Dialog &amp; Drawer</Text>
+
         <ShowcaseStack>
           <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>
             Open dialog →

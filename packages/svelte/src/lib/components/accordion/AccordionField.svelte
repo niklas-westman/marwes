@@ -1,6 +1,7 @@
 <script lang="ts">
   import { buildAccordionFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import Accordion from "./Accordion.svelte";
   import type { AccordionFieldItem, AccordionFieldProps } from "./types.js";
 
@@ -15,6 +16,7 @@
     onopenitemschange,
     multiple = true,
     ariaDescribedBy,
+    disabled,
     class: className,
   }: AccordionFieldProps = $props();
 
@@ -48,7 +50,14 @@
     onopenitemschange?.(next);
   }
 
-  const wrapperClass = $derived(mergeClass("mw-accordion-field", className));
+  const wrapperClass = $derived(
+    mergeClass(
+      "mw-accordion-field",
+      disabled && "mw-accordion-field--disabled",
+      hasError && "mw-accordion-field--invalid",
+      className
+    )
+  );
 </script>
 
 <div
@@ -59,12 +68,12 @@
   aria-invalid={hasError ? true : undefined}
 >
   <div class="mw-accordion-field__label" id={a11yIds.labelId}>
-    <p class="mw-p mw-p--md">{label}</p>
+    <Text variant="label">{label}</Text>
   </div>
 
   {#if hasDescription && !hasError}
     <div class="mw-accordion-field__description" id={a11yIds.descriptionId}>
-      <p class="mw-p mw-p--sm">{description}</p>
+      <Text variant="caption">{description}</Text>
     </div>
   {/if}
 
@@ -74,7 +83,7 @@
         id={`${fieldId}-${item.value}`}
         title={item.title}
         open={activeOpen.includes(item.value)}
-        disabled={item.disabled ?? false}
+        disabled={disabled || item.disabled || false}
         ontoggle={() => toggleItem(item.value)}
       >
         {item.content}
@@ -84,7 +93,7 @@
 
   {#if hasError}
     <div class="mw-accordion-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

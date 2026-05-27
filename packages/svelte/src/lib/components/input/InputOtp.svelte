@@ -7,6 +7,7 @@
   import type { InputOtpOptions } from "@marwes-ui/core";
   import { cssVarsToStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import type { InputOtpProps } from "./types.js";
 
   let {
@@ -95,7 +96,7 @@
   data-disabled={disabled ? "true" : undefined}
 >
   <label class="mw-input-otp__label" for={fieldId}>
-    <p class="mw-p mw-p--md">{label}</p>
+    <Text variant="label">{label}</Text>
   </label>
 
   <div class="mw-input-otp__cells">
@@ -130,11 +131,11 @@
 
   {#if hasError}
     <div class="mw-input-otp__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {:else if hasHelperText}
     <div class="mw-input-otp__helper" id={a11yIds.helperTextId}>
-      <p class="mw-p mw-p--sm">{helperText}</p>
+      <Text variant="caption">{helperText}</Text>
     </div>
   {/if}
 </div>

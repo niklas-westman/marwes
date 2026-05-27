@@ -10,8 +10,12 @@ export type {
   ColorRole,
   SecondaryColorRole,
   Density,
+  TextTransform,
+  TypographyStyle,
+  TextTypographyStyle,
 } from "./theme/theme-types"
 export { ThemeMode } from "./theme/theme-types"
+export { TextVariant } from "./theme/text-variant"
 export { defaultThemeBreakpoints } from "./theme/theme-types"
 export type { SystemThemeMode } from "./theme/theme-mode"
 export {
@@ -205,6 +209,10 @@ export type {
   ParagraphOptions,
   ParagraphRenderKit,
   ParagraphSize,
+  TextA11y,
+  TextAs,
+  TextOptions,
+  TextRenderKit,
   PaginationOptions,
   PaginationItem,
   PaginationRenderKit,

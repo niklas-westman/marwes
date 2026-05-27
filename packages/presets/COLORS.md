@@ -55,7 +55,9 @@ It is the brand accent color.
 - `--mw-color-border-disabled`
   - disabled control boundaries
 - `--mw-color-surface`
-  - default component backgrounds
+  - secondary component backgrounds
+- `--mw-color-surface-primary`
+  - primary component backgrounds
 - `--mw-color-surface-subtle`
   - soft neutral fills and hover surfaces
 - `--mw-color-surface-elevated`
@@ -145,6 +147,7 @@ From `packages/core/src/theme/theme-defaults.ts`:
 - `textSubtle`: `#595959`
 - `textDisabled`: `#737373`
 - `surface`: `#F8F8F8`
+- `surfacePrimary`: `#FFFFFF`
 - `surfaceSubtle`: `#F5F5F5`
 - `surfaceElevated`: `#FFFFFF`
 - `surfaceDisabled`: `#F5F5F5`
@@ -162,6 +165,7 @@ From `packages/core/src/theme/theme-defaults.ts`:
 - `textSubtle`: `#A3A3A3`
 - `textDisabled`: `#595959`
 - `surface`: `#1A1A1A`
+- `surfacePrimary`: `#0F0F0F`
 - `surfaceSubtle`: `#050505`
 - `surfaceElevated`: `#2B2B2B`
 - `surfaceDisabled`: `#1A1A1A`

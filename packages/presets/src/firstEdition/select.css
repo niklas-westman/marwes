@@ -37,7 +37,7 @@
   padding: 8px 32px 8px 12px; /* off-scale — no token */
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
-  background-color: var(--mw-color-surface);
+  background-color: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: 14px;
@@ -129,7 +129,7 @@
   padding: 8px 12px; /* off-scale — no token */
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
-  background-color: var(--mw-color-surface);
+  background-color: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: 14px;
@@ -344,17 +344,10 @@
   opacity: 1;
 }
 
-.mw-input-field--select-date .mw-input-field__label p {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16px;
-}
-
-.mw-input-field--select-date .mw-input-field__helper p,
-.mw-input-field--select-date .mw-input-field__error p {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+.mw-input-field--select-date .mw-input-field__label .mw-text,
+.mw-input-field--select-date .mw-input-field__helper .mw-text,
+.mw-input-field--select-date .mw-input-field__error .mw-text {
+  color: inherit;
 }
 
 .mw-input-field--select-date .mw-select-field__trigger {

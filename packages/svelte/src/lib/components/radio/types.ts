@@ -8,6 +8,13 @@ export interface RadioProps extends RadioOptions {
   class?: string
 }
 
+export interface RadioGroupFieldOption {
+  value: string
+  label: string
+  description?: string
+  disabled?: boolean
+}
+
 export interface RadioGroupFieldProps {
   id?: string
   label: string

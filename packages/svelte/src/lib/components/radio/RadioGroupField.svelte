@@ -1,6 +1,7 @@
 <script lang="ts">
   import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import type { RadioGroupFieldProps } from "./types.js";
 
   let {
@@ -47,12 +48,12 @@
 
 <div class={wrapperClass} {...dataAttributes}>
   <div class="mw-radio-group-field__label" id={a11yIds.labelId}>
-    <p class="mw-p mw-p--sm">{label}</p>
+    <Text variant="label">{label}</Text>
   </div>
 
   {#if hasDescription}
     <div class="mw-radio-group-field__description" id={a11yIds.descriptionId}>
-      <p class="mw-p mw-p--sm">{description}</p>
+      <Text variant="caption">{description}</Text>
     </div>
   {/if}
 
@@ -69,7 +70,7 @@
 
   {#if hasError}
     <div class="mw-radio-group-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

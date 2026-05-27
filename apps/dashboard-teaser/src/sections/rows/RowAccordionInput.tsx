@@ -4,6 +4,8 @@ import {
   EmailField,
   PhoneField,
   SelectField,
+  Text,
+  TextVariant,
 } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
@@ -28,7 +30,7 @@ function RowAccordionInput(): JSX.Element {
   return (
     <ShowcaseRow>
       <AccordionCard>
-        <ShowcaseSectionLabel>Accordion</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Accordion</Text>
         <AccordionField
           label=""
           items={[
@@ -38,15 +40,23 @@ function RowAccordionInput(): JSX.Element {
               content:
                 "Accordion content goes here. This is the expandable section that provides more detail.",
             },
-            { value: "2", title: "Accordion title", content: "More content for this section." },
-            { value: "3", title: "Accordion title", content: "Additional expandable content." },
+            {
+              value: "2",
+              title: "Accordion title",
+              content: "More content for this section.",
+            },
+            {
+              value: "3",
+              title: "Accordion title",
+              content: "Additional expandable content.",
+            },
           ]}
           openItems={openItems}
           onOpenItemsChange={setOpenItems}
         />
       </AccordionCard>
       <InputCard>
-        <ShowcaseSectionLabel>Input fields</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Input fields</Text>
         <ShowcaseStack>
           <SelectField
             label="Purpose"

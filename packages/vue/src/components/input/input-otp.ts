@@ -7,7 +7,7 @@ import {
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 
 export type InputOtpProps = Omit<InputOtpOptions, "describedBy"> & {
   label: string
@@ -135,7 +135,7 @@ export const InputOtp = defineComponent(
         },
         [
           h("label", { class: "mw-input-otp__label", for: id.value }, [
-            h(Paragraph, { size: "md" }, { default: () => [props.label] }),
+            h(Text, { variant: "label" }, { default: () => [props.label] }),
           ]),
 
           h("div", { class: "mw-input-otp__cells" }, [
@@ -182,11 +182,11 @@ export const InputOtp = defineComponent(
                   id: a11yIds.value.errorId,
                   "aria-live": "polite",
                 },
-                [h(Paragraph, { size: "sm" }, { default: () => [props.error ?? ""] })],
+                [h(Text, { variant: "caption" }, { default: () => [props.error ?? ""] })],
               )
             : hasHelperText.value
               ? h("div", { class: "mw-input-otp__helper", id: a11yIds.value.helperTextId }, [
-                  h(Paragraph, { size: "sm" }, { default: () => [props.helperText ?? ""] }),
+                  h(Text, { variant: "caption" }, { default: () => [props.helperText ?? ""] }),
                 ])
               : null,
         ],

@@ -7,6 +7,16 @@ import {
   createPaginationListRecipe,
   createPaginationPageRecipe,
   createPaginationRecipe,
+  resolvePaginationAdaptiveProfile,
+  resolvePaginationItemAriaLabel,
+} from "@marwes-ui/core"
+import type {
+  IconName as IconNameType,
+  PaginationAdaptiveProfile,
+  PaginationControlDirection,
+  PaginationControlDisplay,
+  PaginationGetItemAriaLabel,
+  PaginationResolvedControlDisplay,
 } from "@marwes-ui/core"
 import {
   computed,
@@ -29,12 +39,17 @@ export interface PaginationPropsVue {
   siblingCount?: number
   boundaryCount?: number
   maxVisibleItems?: number
+  controlDisplay?: PaginationControlDisplay
   adaptive?: boolean
   showPrevNext?: boolean
+  showFirstLast?: boolean
   disabled?: boolean
+  firstLabel?: string
   previousLabel?: string
   nextLabel?: string
+  lastLabel?: string
   ariaLabel?: string
+  getItemAriaLabel?: PaginationGetItemAriaLabel
   className?: string
   id?: string
 }
@@ -46,12 +61,17 @@ const propKeys = [
   "siblingCount",
   "boundaryCount",
   "maxVisibleItems",
+  "controlDisplay",
   "adaptive",
   "showPrevNext",
+  "showFirstLast",
   "disabled",
+  "firstLabel",
   "previousLabel",
   "nextLabel",
+  "lastLabel",
   "ariaLabel",
+  "getItemAriaLabel",
   "className",
   "id",
 ] as const
@@ -61,12 +81,33 @@ function parsePxValue(value: string, fallback: number): number {
   return Number.isFinite(parsed) ? parsed : fallback
 }
 
+function resolveControlWidths(
+  controls: HTMLElement[],
+  itemSize: number,
+): { labelControlWidth: number; iconControlWidth: number } {
+  const labelControlWidth = controls.reduce((total, control) => {
+    const icon = control.querySelector<HTMLElement>(".mw-pagination__control-icon")
+    const label = control.querySelector<HTMLElement>(".mw-pagination__control-label")
+    const iconWidth = icon?.getBoundingClientRect().width ?? 0
+    const labelWidth = label?.scrollWidth ?? label?.getBoundingClientRect().width ?? 0
+    const labelGap = iconWidth > 0 && labelWidth > 0 ? 4 : 0
+    const measuredLabelWidth = iconWidth + labelGap + labelWidth
+
+    return total + Math.max(control.getBoundingClientRect().width, measuredLabelWidth)
+  }, 0)
+
+  return {
+    labelControlWidth,
+    iconControlWidth: controls.length * itemSize,
+  }
+}
+
 export const Pagination = defineComponent(
   (props: PaginationPropsVue, { emit }) => {
     const attrs = useAttrs()
     const isControlled = computed(() => props.modelValue !== undefined)
     const rootElement = ref<HTMLElement>()
-    const adaptiveMaxVisibleItems = ref<number | undefined>(undefined)
+    const adaptiveProfile = ref<PaginationAdaptiveProfile | undefined>(undefined)
     const internalPage = ref(clampPaginationPage(props.defaultPage, props.pageCount))
     const resolvedPage = computed(() =>
       clampPaginationPage(
@@ -95,11 +136,11 @@ export const Pagination = defineComponent(
       emit("page-change", resolved)
     }
 
-    function measureMaxVisibleItems(): void {
+    function measureAdaptiveProfile(): void {
       const root = rootElement.value
       const parent = root?.parentElement
       if (!root || !parent || props.adaptive === false || typeof window === "undefined") {
-        adaptiveMaxVisibleItems.value = undefined
+        adaptiveProfile.value = undefined
         return
       }
 
@@ -117,21 +158,26 @@ export const Pagination = defineComponent(
         parsePxValue(parentStyles.paddingRight, 0)
 
       if (parentWidth <= 0) {
-        adaptiveMaxVisibleItems.value = undefined
+        adaptiveProfile.value = undefined
         return
       }
 
       const controls = Array.from(root.querySelectorAll<HTMLElement>(".mw-pagination__control"))
-      const controlWidth = controls.reduce(
-        (total, control) => total + control.getBoundingClientRect().width,
-        0,
-      )
-      const controlGaps = controls.length > 0 ? sectionGap * controls.length : 0
-      const availableItemWidth = Math.max(0, parentWidth - controlWidth - controlGaps)
-      adaptiveMaxVisibleItems.value = Math.max(
-        1,
-        Math.floor((availableItemWidth + itemGap) / (itemSize + itemGap)),
-      )
+      const { labelControlWidth, iconControlWidth } = resolveControlWidths(controls, itemSize)
+      adaptiveProfile.value = resolvePaginationAdaptiveProfile({
+        containerWidth: parentWidth,
+        labelControlWidth,
+        iconControlWidth,
+        controlCount: controls.length,
+        itemSize,
+        itemGap,
+        sectionGap,
+        pageCount: props.pageCount,
+        ...(props.siblingCount !== undefined ? { siblingCount: props.siblingCount } : {}),
+        ...(props.boundaryCount !== undefined ? { boundaryCount: props.boundaryCount } : {}),
+        ...(props.maxVisibleItems !== undefined ? { maxVisibleItems: props.maxVisibleItems } : {}),
+        controlDisplay: props.controlDisplay ?? "auto",
+      })
     }
 
     let resizeObserver: ResizeObserver | undefined
@@ -139,7 +185,7 @@ export const Pagination = defineComponent(
     const requestMeasure = () => {
       if (typeof window === "undefined") return
       window.cancelAnimationFrame(frame)
-      frame = window.requestAnimationFrame(measureMaxVisibleItems)
+      frame = window.requestAnimationFrame(measureAdaptiveProfile)
     }
 
     onMounted(() => {
@@ -162,12 +208,33 @@ export const Pagination = defineComponent(
       resizeObserver?.disconnect()
     })
 
-    watch(() => props.adaptive, requestMeasure)
+    watch(
+      () => [
+        props.adaptive,
+        props.boundaryCount,
+        props.controlDisplay,
+        props.maxVisibleItems,
+        props.pageCount,
+        props.siblingCount,
+      ],
+      requestMeasure,
+    )
 
     return () => {
       const previousLabel = props.previousLabel ?? "Previous"
       const nextLabel = props.nextLabel ?? "Next"
-      const resolvedMaxVisibleItems = props.maxVisibleItems ?? adaptiveMaxVisibleItems.value
+      const firstLabel = props.firstLabel ?? "First"
+      const lastLabel = props.lastLabel ?? "Last"
+      const resolvedControlDisplay: PaginationResolvedControlDisplay =
+        props.adaptive !== false && adaptiveProfile.value
+          ? adaptiveProfile.value.controlDisplay
+          : props.controlDisplay === "icon"
+            ? "icon"
+            : "label"
+      const resolvedMaxVisibleItems =
+        props.adaptive !== false && adaptiveProfile.value
+          ? adaptiveProfile.value.maxVisibleItems
+          : props.maxVisibleItems
       const rootKit = createPaginationRecipe({
         page: resolvedPage.value,
         pageCount: props.pageCount,
@@ -176,29 +243,115 @@ export const Pagination = defineComponent(
         ...(resolvedMaxVisibleItems !== undefined
           ? { maxVisibleItems: resolvedMaxVisibleItems }
           : {}),
+        controlDisplay: resolvedControlDisplay,
         ...(props.showPrevNext !== undefined ? { showPrevNext: props.showPrevNext } : {}),
+        ...(props.showFirstLast !== undefined ? { showFirstLast: props.showFirstLast } : {}),
         ...(props.disabled !== undefined ? { disabled: props.disabled } : {}),
         ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
+        firstLabel,
         previousLabel,
         nextLabel,
+        lastLabel,
+        ...(props.getItemAriaLabel !== undefined
+          ? { getItemAriaLabel: props.getItemAriaLabel }
+          : {}),
       })
       const listKit = createPaginationListRecipe()
       const listItemKit = createPaginationListItemRecipe()
       const previousDisabled = props.disabled || resolvedPage.value <= 1
       const nextDisabled =
         props.disabled || resolvedPage.value <= 0 || resolvedPage.value >= props.pageCount
+      const firstDisabled = props.disabled || resolvedPage.value <= 1
+      const lastDisabled =
+        props.disabled || resolvedPage.value <= 0 || resolvedPage.value >= props.pageCount
+      const firstKit = createPaginationControlRecipe({
+        direction: "first",
+        disabled: firstDisabled,
+        label: firstLabel,
+        ...(props.getItemAriaLabel !== undefined
+          ? {
+              ariaLabel: resolvePaginationItemAriaLabel(props.getItemAriaLabel, {
+                type: "first",
+                page: 1,
+                selected: false,
+              }),
+            }
+          : {}),
+      })
       const previousKit = createPaginationControlRecipe({
         direction: "previous",
         disabled: previousDisabled,
         label: previousLabel,
+        ...(props.getItemAriaLabel !== undefined
+          ? {
+              ariaLabel: resolvePaginationItemAriaLabel(props.getItemAriaLabel, {
+                type: "previous",
+                page: resolvedPage.value - 1,
+                selected: false,
+              }),
+            }
+          : {}),
       })
       const nextKit = createPaginationControlRecipe({
         direction: "next",
         disabled: nextDisabled,
         label: nextLabel,
+        ...(props.getItemAriaLabel !== undefined
+          ? {
+              ariaLabel: resolvePaginationItemAriaLabel(props.getItemAriaLabel, {
+                type: "next",
+                page: resolvedPage.value + 1,
+                selected: false,
+              }),
+            }
+          : {}),
+      })
+      const lastKit = createPaginationControlRecipe({
+        direction: "last",
+        disabled: lastDisabled,
+        label: lastLabel,
+        ...(props.getItemAriaLabel !== undefined
+          ? {
+              ariaLabel: resolvePaginationItemAriaLabel(props.getItemAriaLabel, {
+                type: "last",
+                page: props.pageCount,
+                selected: false,
+              }),
+            }
+          : {}),
       })
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
       const className = mergeClassNames(rootKit.className, props.className, attrs.class)
+      const renderControl = (
+        direction: PaginationControlDirection,
+        kit: typeof firstKit | typeof previousKit | typeof nextKit | typeof lastKit,
+        controlDisabled: boolean,
+        targetPage: number,
+        label: string,
+        iconName: IconNameType,
+      ) => {
+        const isLeadingIcon = direction === "first" || direction === "previous"
+        const icon = h("span", { class: "mw-pagination__control-icon" }, [
+          h(Icon, { name: iconName, decorative: true, size: 12 }),
+        ])
+
+        return h(
+          "button",
+          {
+            type: "button",
+            class: kit.className,
+            "aria-label": kit.a11y.ariaLabel,
+            "aria-disabled": kit.a11y.ariaDisabled,
+            disabled: controlDisabled,
+            onClick: () => selectPage(targetPage),
+          },
+          [
+            isLeadingIcon ? icon : null,
+            h("span", { class: "mw-pagination__control-label" }, label),
+            isLeadingIcon ? null : icon,
+          ],
+        )
+      }
 
       return h(
         "nav",
@@ -207,27 +360,23 @@ export const Pagination = defineComponent(
           id: props.id,
           ref: rootElement,
           class: className,
+          style: [rootKit.vars, attrs.style],
           "aria-label": rootKit.a11y.ariaLabel,
           "data-component": "pagination",
+          "data-control-display": rootKit.controlDisplay,
         },
         [
+          rootKit.showFirstLast
+            ? renderControl("first", firstKit, firstDisabled, 1, firstLabel, IconName.ChevronsLeft)
+            : null,
           rootKit.showPrevNext
-            ? h(
-                "button",
-                {
-                  type: "button",
-                  class: previousKit.className,
-                  "aria-label": previousKit.a11y.ariaLabel,
-                  "aria-disabled": previousKit.a11y.ariaDisabled,
-                  disabled: previousDisabled,
-                  onClick: () => selectPage(resolvedPage.value - 1),
-                },
-                [
-                  h("span", { class: "mw-pagination__control-icon" }, [
-                    h(Icon, { name: IconName.ChevronLeft, decorative: true, size: 12 }),
-                  ]),
-                  previousLabel,
-                ],
+            ? renderControl(
+                "previous",
+                previousKit,
+                previousDisabled,
+                resolvedPage.value - 1,
+                previousLabel,
+                IconName.ChevronLeft,
               )
             : null,
           h(
@@ -237,7 +386,7 @@ export const Pagination = defineComponent(
               role: listKit.a11y.role,
             },
             rootKit.items.map((item) => {
-              if (item.type === "ellipsis") {
+              if (item.type !== "page") {
                 const ellipsisKit = createPaginationEllipsisRecipe()
                 return h("li", { key: item.key, class: listItemKit.className }, [
                   h(
@@ -255,6 +404,15 @@ export const Pagination = defineComponent(
                 page: item.page,
                 selected: item.selected,
                 ...(props.disabled !== undefined ? { disabled: props.disabled } : {}),
+                ...(props.getItemAriaLabel !== undefined
+                  ? {
+                      ariaLabel: resolvePaginationItemAriaLabel(props.getItemAriaLabel, {
+                        type: "page",
+                        page: item.page,
+                        selected: item.selected,
+                      }),
+                    }
+                  : {}),
               })
 
               return h("li", { key: item.key, class: listItemKit.className }, [
@@ -275,22 +433,23 @@ export const Pagination = defineComponent(
             }),
           ),
           rootKit.showPrevNext
-            ? h(
-                "button",
-                {
-                  type: "button",
-                  class: nextKit.className,
-                  "aria-label": nextKit.a11y.ariaLabel,
-                  "aria-disabled": nextKit.a11y.ariaDisabled,
-                  disabled: nextDisabled,
-                  onClick: () => selectPage(resolvedPage.value + 1),
-                },
-                [
-                  nextLabel,
-                  h("span", { class: "mw-pagination__control-icon" }, [
-                    h(Icon, { name: IconName.ChevronRight, decorative: true, size: 12 }),
-                  ]),
-                ],
+            ? renderControl(
+                "next",
+                nextKit,
+                nextDisabled,
+                resolvedPage.value + 1,
+                nextLabel,
+                IconName.ChevronRight,
+              )
+            : null,
+          rootKit.showFirstLast
+            ? renderControl(
+                "last",
+                lastKit,
+                lastDisabled,
+                props.pageCount,
+                lastLabel,
+                IconName.ChevronsRight,
               )
             : null,
         ],

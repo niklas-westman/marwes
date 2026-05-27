@@ -89,6 +89,7 @@ export function runSwitchContract(adapterName: string, harness: SwitchContractHa
       const labelElement = labelTextNode.closest(".mw-switch-field__label")
       const labelledBy = switchControl.getAttribute("aria-labelledby") ?? ""
 
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
       expect(labelElement).not.toBeNull()
       expect(labelElement?.id).toBeTruthy()
       expect(labelledBy.split(/\s+/)).toContain(labelElement?.id ?? "")
@@ -109,6 +110,7 @@ export function runSwitchContract(adapterName: string, harness: SwitchContractHa
       const describedBy = switchControl.getAttribute("aria-describedby") ?? ""
 
       expect(descriptionTextNode).toBeInTheDocument()
+      expect(descriptionTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(description).not.toBeNull()
       expect(description?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(description?.id ?? "")
@@ -126,6 +128,7 @@ export function runSwitchContract(adapterName: string, harness: SwitchContractHa
       const describedBy = switchControl.getAttribute("aria-describedby") ?? ""
 
       expect(errorTextNode).toBeInTheDocument()
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")

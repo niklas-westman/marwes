@@ -4,7 +4,7 @@
  */
 
 .mw-breadcrumb {
-  --mw-breadcrumb-link: var(--mw-color-text-link, var(--mw-color-primary-base, #2527ca));
+  --mw-breadcrumb-link: var(--mw-color-text-link, #2527ca);
   --mw-breadcrumb-link-hover: var(--mw-color-primary-hover, #1b1d97);
   --mw-breadcrumb-current: var(--mw-color-text, #141414);
   --mw-breadcrumb-muted: var(--mw-color-text-muted, #595959);

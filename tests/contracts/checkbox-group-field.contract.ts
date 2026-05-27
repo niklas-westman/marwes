@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest"
 export type CheckboxGroupFieldOptionContract = {
   value: string
   label: string
+  description?: string
   disabled?: boolean
   indeterminate?: boolean
 }
@@ -24,6 +25,7 @@ export type CheckboxGroupFieldContractHarness = {
   }): Promise<void> | void
   getByRole(role: "group" | "checkbox", options: { name: RegExp }): HTMLElement
   getAllByRole(role: "checkbox"): HTMLInputElement[]
+  getByText(text: string): HTMLElement
   click(element: HTMLElement): Promise<void>
 }
 
@@ -46,6 +48,30 @@ export function runCheckboxGroupFieldContract(
 
       expect(h.getByRole("group", { name: /communication preferences/i })).toBeTruthy()
       expect(h.getAllByRole("checkbox")).toHaveLength(3)
+    })
+
+    it("renders the group label with the canonical checkbox label typography", async () => {
+      await h.renderCheckboxGroup({
+        label: "Communication preferences",
+        options: defaultOptions,
+      })
+
+      const groupLabelText = h.getByText("Communication preferences")
+
+      expect(groupLabelText).toHaveClass("mw-text")
+      expect(groupLabelText).toHaveClass("mw-text--label")
+    })
+
+    it("renders option labels with the canonical checkbox option typography", async () => {
+      await h.renderCheckboxGroup({
+        label: "Communication preferences",
+        options: defaultOptions,
+      })
+
+      const optionLabelText = h.getByText("Email")
+
+      expect(optionLabelText).toHaveClass("mw-text")
+      expect(optionLabelText).toHaveClass("mw-text--label")
     })
 
     it("uncontrolled: applies defaultValue and toggles selections", async () => {
@@ -97,6 +123,25 @@ export function runCheckboxGroupFieldContract(
 
       expect(descriptionId).toBeTruthy()
       expect(description?.textContent).toContain("Choose every channel you want us to use.")
+      expect(h.getByText("Choose every channel you want us to use.")).toHaveClass(
+        "mw-text",
+        "mw-text--caption",
+      )
+    })
+
+    it("renders option descriptions with caption typography and exposes them as descriptions", async () => {
+      await h.renderCheckboxGroup({
+        label: "Communication preferences",
+        options: [{ value: "email", label: "Email", description: "Primary channel" }],
+      })
+
+      const optionDescriptionText = h.getByText("Primary channel")
+
+      expect(optionDescriptionText).toHaveClass("mw-text")
+      expect(optionDescriptionText).toHaveClass("mw-text--caption")
+      expect(h.getByRole("checkbox", { name: /email/i })).toHaveAccessibleDescription(
+        "Primary channel",
+      )
     })
 
     it("shows group errors as a live region and marks child checkboxes invalid", async () => {
@@ -118,6 +163,7 @@ export function runCheckboxGroupFieldContract(
         (node) => node.textContent?.includes("Pick at least one option."),
       )
       expect(liveRegion).toBeTruthy()
+      expect(h.getByText("Pick at least one option.")).toHaveClass("mw-text", "mw-text--caption")
     })
 
     it("disables all options when the group is disabled", async () => {

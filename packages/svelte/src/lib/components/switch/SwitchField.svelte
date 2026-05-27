@@ -1,6 +1,7 @@
 <script lang="ts">
   import { buildSwitchFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import Switch from "./Switch.svelte";
   import type { SwitchFieldProps, SwitchProps } from "./types.js";
 
@@ -39,6 +40,7 @@
     mergeClass(
       "mw-switch-field",
       disabled && "mw-switch-field--disabled",
+      hasError && "mw-switch-field--invalid",
       className
     )
   );
@@ -53,19 +55,19 @@
       ariaLabelledby={a11yIds.labelId}
     />
     <label class="mw-switch-field__label" id={a11yIds.labelId} for={fieldId}>
-      <p class="mw-p mw-p--md">{label}</p>
+      <Text variant="label">{label}</Text>
     </label>
   </div>
 
   {#if hasDescription}
     <div class="mw-switch-field__description" id={a11yIds.descriptionId}>
-      <p class="mw-p mw-p--sm">{description}</p>
+      <Text variant="caption">{description}</Text>
     </div>
   {/if}
 
   {#if hasError}
     <div class="mw-switch-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

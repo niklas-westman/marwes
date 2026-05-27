@@ -89,9 +89,11 @@ export function runAccordionContract(adapterName: string, harness: AccordionCont
       })
 
       const group = harness.getByRole("group", { name: /order info/i })
+      const labelTextNode = harness.getByText("Order info")
       const buttons = harness.getAllByRole("button")
 
       expect(group).toBeInTheDocument()
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
       expect(buttons).toHaveLength(3)
     })
 
@@ -109,6 +111,7 @@ export function runAccordionContract(adapterName: string, harness: AccordionCont
 
       expect(descriptionElement).not.toBeNull()
       expect(descriptionElement?.id).toBeTruthy()
+      expect(descriptionTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(describedBy.split(/\s+/)).toContain(descriptionElement?.id ?? "")
     })
 
@@ -125,6 +128,7 @@ export function runAccordionContract(adapterName: string, harness: AccordionCont
       const describedBy = group.getAttribute("aria-describedby") ?? ""
 
       expect(group).toHaveAttribute("aria-invalid", "true")
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(errorElement).not.toBeNull()
       expect(errorElement?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(errorElement?.id ?? "")

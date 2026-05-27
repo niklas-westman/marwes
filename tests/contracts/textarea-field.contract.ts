@@ -25,7 +25,10 @@ export function runTextareaFieldContract(
     it("wires the label to the textarea", async () => {
       await h.renderTextareaField({ label: "About your company" })
       const textarea = h.getByLabelText(/about your company/i)
+      const labelTextNode = h.getByText("About your company")
+
       expect(textarea.tagName).toBe("TEXTAREA")
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
     })
 
     it("connects helper text via aria-describedby", async () => {
@@ -43,6 +46,7 @@ export function runTextareaFieldContract(
       expect(helper).not.toBeNull()
       expect(helper?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
+      expect(helperTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(textarea).not.toHaveAttribute("aria-invalid", "true")
     })
 
@@ -62,6 +66,7 @@ export function runTextareaFieldContract(
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
     })
 
     it("treats empty helper/error strings as absent", async () => {

@@ -8,18 +8,43 @@ import {
   InfoToast,
   SegmentedControl,
   SuccessToast,
+  Text,
+  TextVariant,
   Toast,
   WarningToast,
 } from "@marwes-ui/react"
 import type { BreadcrumbItem, ContextMenuEntry, SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
-type ToastVariant = "subtle" | "outline" | "rich"
 import styled from "styled-components"
 
-import { ShowcaseCard, ShowcaseGrid, ShowcaseSectionLabel } from "./shared"
+import { Card } from "./shared"
 
-const ToastCard = styled(ShowcaseCard)`
+type ToastVariant = "subtle" | "outline" | "rich"
+
+const ToastMosaicGrid = styled.div`
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(20rem, 22rem) minmax(15.5rem, 17.25rem) minmax(0, 1fr);
+  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
+
+  > * {
+    min-width: 0;
+  }
+
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  ${({ theme }) => theme.media.tabletAndBelow} {
+    grid-template-columns: minmax(0, 1fr);
+  }
+`
+
+const ToastCard = styled(Card)`
+  grid-column: 1;
   grid-row: span 2;
+  flex-shrink: 1;
 
   .mw-segmented-control,
   .mw-toast {
@@ -29,12 +54,19 @@ const ToastCard = styled(ShowcaseCard)`
   }
 
   ${({ theme }) => theme.media.desktopAndBelow} {
+    grid-column: span 1;
     grid-row: auto;
+  }
+
+  ${({ theme }) => theme.media.tabletAndBelow} {
+    grid-column: 1 / -1;
   }
 `
 
-const MenuCard = styled(ShowcaseCard)`
+const MenuCard = styled(Card)`
+  grid-column: 2;
   grid-row: span 2;
+  flex-shrink: 1;
 
   .mw-context-menu {
     width: min(100%, 13.25rem);
@@ -42,15 +74,40 @@ const MenuCard = styled(ShowcaseCard)`
   }
 
   ${({ theme }) => theme.media.desktopAndBelow} {
+    grid-column: span 1;
+    grid-row: auto;
+  }
+
+  ${({ theme }) => theme.media.tabletAndBelow} {
+    grid-column: 1 / -1;
+  }
+`
+
+const AvatarCard = styled(Card)`
+  grid-column: 3;
+  grid-row: 1;
+  flex-shrink: 1;
+  min-height: 0;
+
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    grid-column: 1 / -1;
     grid-row: auto;
   }
 `
 
-const AvatarCard = styled(ShowcaseCard)``
+const BreadcrumbCard = styled(Card)`
+  grid-column: 3;
+  grid-row: 2;
+  flex-shrink: 1;
+  min-height: 0;
 
-const BreadcrumbCard = styled(ShowcaseCard)`
   .mw-breadcrumb {
     max-width: 100%;
+  }
+
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    grid-column: 1 / -1;
+    grid-row: auto;
   }
 `
 
@@ -107,15 +164,19 @@ function RowToastMenuAvatar(): JSX.Element {
   const visibleToasts = [
     { id: "neutral", Component: Toast, message: "Neutral message" },
     { id: "info", Component: InfoToast, message: "Meeting starts in 10 min" },
-    { id: "success", Component: SuccessToast, message: "Your email is verified" },
+    {
+      id: "success",
+      Component: SuccessToast,
+      message: "Your email is verified",
+    },
     { id: "warning", Component: WarningToast, message: "Connection unstable" },
     { id: "error", Component: ErrorToast, message: "Something went wrong" },
   ].filter((t) => !dismissedToasts.has(t.id))
 
   return (
-    <ShowcaseGrid>
-      <ToastCard $desktopSpan={3}>
-        <ShowcaseSectionLabel>Toast</ShowcaseSectionLabel>
+    <ToastMosaicGrid>
+      <ToastCard>
+        <Text variant={TextVariant.overline}>Toast</Text>
         <SegmentedControl
           items={toastVariantItems}
           value={toastVariant}
@@ -139,12 +200,12 @@ function RowToastMenuAvatar(): JSX.Element {
           )}
         </ToastList>
       </ToastCard>
-      <MenuCard $desktopSpan={3}>
-        <ShowcaseSectionLabel>Context menu</ShowcaseSectionLabel>
+      <MenuCard>
+        <Text variant={TextVariant.overline}>Context menu</Text>
         <ContextMenu ariaLabel="File actions" items={contextMenuItems} />
       </MenuCard>
-      <AvatarCard $desktopSpan={6} $tabletSpan={2}>
-        <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>
+      <AvatarCard>
+        <Text variant={TextVariant.overline}>Avatar</Text>
         <AvatarRow>
           <AvatarGroup
             items={[{ initials: "MO" }, { initials: "MO" }, { initials: "MO" }]}
@@ -156,11 +217,12 @@ function RowToastMenuAvatar(): JSX.Element {
           <Avatar size="small" />
         </AvatarRow>
       </AvatarCard>
-      <BreadcrumbCard $desktopSpan={6} $desktopStart={7} $tabletSpan={2}>
-        <ShowcaseSectionLabel>Breadcrumb</ShowcaseSectionLabel>
+      <BreadcrumbCard>
+        <Text variant={TextVariant.overline}>Breadcrumb</Text>
+
         <Breadcrumb homeHref="#" items={breadcrumbItems} />
       </BreadcrumbCard>
-    </ShowcaseGrid>
+    </ToastMosaicGrid>
   )
 }
 

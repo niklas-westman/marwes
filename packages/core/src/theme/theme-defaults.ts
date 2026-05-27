@@ -15,7 +15,9 @@ export const lightThemeDefaults: Theme = {
     // Background & Surface
     background: "#FFFFFF",
     surface: "#F8F8F8",
+    surfacePrimary: "#FFFFFF",
     surfaceSubtle: "#F5F5F5",
+    surfaceBrand: "#EEEEFF",
     surfaceElevated: "#FFFFFF",
     surfaceDisabled: "#F5F5F5",
     surfaceInverted: "#141414",
@@ -27,6 +29,8 @@ export const lightThemeDefaults: Theme = {
     textDisabled: "#737373",
     textInverted: "#FFFFFF",
     textBrand: "#2F31FC",
+    textLink: "#2527CA",
+    iconMuted: "#A3A3A3",
 
     // Borders
     border: "#D8D8D8",
@@ -84,6 +88,12 @@ export const lightThemeDefaults: Theme = {
   },
   breakpoint: defaultThemeBreakpoints,
   typography: {
+    display: {
+      fontSize: 44,
+      lineHeight: 1.1818181818,
+      fontWeight: 700,
+      letterSpacing: -1.32,
+    },
     h1: {
       fontSize: 32,
       lineHeight: 1.1875,
@@ -101,6 +111,45 @@ export const lightThemeDefaults: Theme = {
       lineHeight: 1.3,
       fontWeight: 500,
       letterSpacing: -0.6,
+    },
+    text: {
+      display: {
+        fontSize: 44,
+        lineHeight: 1.1818181818,
+        fontWeight: 700,
+        letterSpacing: -1.32,
+      },
+      label: {
+        fontSize: 14,
+        lineHeight: 1.1428571429,
+        fontWeight: 500,
+        letterSpacing: -0.42,
+      },
+      "label-small": {
+        fontSize: 12,
+        lineHeight: 1,
+        fontWeight: 500,
+        letterSpacing: -0.36,
+      },
+      caption: {
+        fontSize: 12,
+        lineHeight: 1.3333333333,
+        fontWeight: 500,
+        letterSpacing: 0,
+      },
+      overline: {
+        fontSize: 11,
+        lineHeight: 1.4545454545,
+        fontWeight: 500,
+        letterSpacing: 0.88,
+        textTransform: "uppercase",
+      },
+      micro: {
+        fontSize: 11,
+        lineHeight: 1.2727272727,
+        fontWeight: 400,
+        letterSpacing: -0.33,
+      },
     },
     paragraph: {
       sm: {
@@ -134,7 +183,9 @@ export const darkThemeDefaults: Theme = {
     // Background & Surface
     background: "#0F0F0F",
     surface: "#1A1A1A",
+    surfacePrimary: "#0F0F0F",
     surfaceSubtle: "#050505",
+    surfaceBrand: "#090A32",
     surfaceElevated: "#2B2B2B",
     surfaceDisabled: "#1A1A1A",
     surfaceInverted: "#FFFFFF",
@@ -146,6 +197,8 @@ export const darkThemeDefaults: Theme = {
     textDisabled: "#595959",
     textInverted: "#141414",
     textBrand: "#8182FC",
+    textLink: "#8182FC",
+    iconMuted: "#595959",
 
     // Borders
     border: "#474747",
@@ -207,6 +260,12 @@ export const darkThemeDefaults: Theme = {
   breakpoint: defaultThemeBreakpoints,
 
   typography: {
+    display: {
+      fontSize: 44,
+      lineHeight: 1.1818181818,
+      fontWeight: 700,
+      letterSpacing: -1.32,
+    },
     h1: {
       fontSize: 32,
       lineHeight: 1.1875,
@@ -224,6 +283,45 @@ export const darkThemeDefaults: Theme = {
       lineHeight: 1.3,
       fontWeight: 500,
       letterSpacing: -0.6,
+    },
+    text: {
+      display: {
+        fontSize: 44,
+        lineHeight: 1.1818181818,
+        fontWeight: 700,
+        letterSpacing: -1.32,
+      },
+      label: {
+        fontSize: 14,
+        lineHeight: 1.1428571429,
+        fontWeight: 500,
+        letterSpacing: -0.42,
+      },
+      "label-small": {
+        fontSize: 12,
+        lineHeight: 1,
+        fontWeight: 500,
+        letterSpacing: -0.36,
+      },
+      caption: {
+        fontSize: 12,
+        lineHeight: 1.3333333333,
+        fontWeight: 500,
+        letterSpacing: 0,
+      },
+      overline: {
+        fontSize: 11,
+        lineHeight: 1.4545454545,
+        fontWeight: 500,
+        letterSpacing: 0.88,
+        textTransform: "uppercase",
+      },
+      micro: {
+        fontSize: 11,
+        lineHeight: 1.2727272727,
+        fontWeight: 400,
+        letterSpacing: -0.33,
+      },
     },
     paragraph: {
       sm: {

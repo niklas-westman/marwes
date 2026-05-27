@@ -6,11 +6,13 @@ import {
   Card as MwCard,
   RadioGroupField,
   SwitchField,
+  Text,
+  TextVariant,
 } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { CardTitle, ShowcaseCard, ShowcaseSectionLabel } from "./shared"
+import { CardTitle, ShowcaseCard } from "./shared"
 
 const FirstSectionGrid = styled.div`
   display: grid;
@@ -99,14 +101,14 @@ function RowSwitchCard(): JSX.Element {
     <FirstSectionGrid>
       <FirstSectionColumn>
         <FirstSectionCard $desktopSpan={4} $desktopMinHeight="16.5rem" $responsiveOrder={1}>
-          <ShowcaseSectionLabel>Switch</ShowcaseSectionLabel>
+          <Text variant={TextVariant.overline}>Switch</Text>
           <DemoArea>
             <SwitchField label="Label" switch={{ checked: switchA, onCheckedChange: setSwitchA }} />
             <SwitchField label="Label" switch={{ checked: switchB, onCheckedChange: setSwitchB }} />
           </DemoArea>
         </FirstSectionCard>
         <FirstSectionCard $desktopSpan={4} $desktopMinHeight="15rem" $responsiveOrder={4}>
-          <ShowcaseSectionLabel>Card</ShowcaseSectionLabel>
+          <Text variant={TextVariant.overline}>Card</Text>
           <MwCard title="Card title">
             Card description text goes here. This provides more context about the card content.
           </MwCard>
@@ -114,20 +116,29 @@ function RowSwitchCard(): JSX.Element {
       </FirstSectionColumn>
       <FirstSectionColumn>
         <FirstSectionCard $desktopSpan={4} $desktopMinHeight="20rem" $responsiveOrder={2}>
-          <ShowcaseSectionLabel>Checkbox</ShowcaseSectionLabel>
+          <Text variant={TextVariant.overline}>Checkbox</Text>
           <CardTitle>Size</CardTitle>
           <InlineCheckboxes>
             <CheckboxField
               label="Label"
-              checkbox={{ checked: inlineChecks[0], onCheckedChange: () => toggleInlineCheck(0) }}
+              checkbox={{
+                checked: inlineChecks[0],
+                onCheckedChange: () => toggleInlineCheck(0),
+              }}
             />
             <CheckboxField
               label="Label"
-              checkbox={{ checked: inlineChecks[1], onCheckedChange: () => toggleInlineCheck(1) }}
+              checkbox={{
+                checked: inlineChecks[1],
+                onCheckedChange: () => toggleInlineCheck(1),
+              }}
             />
             <CheckboxField
               label="Label"
-              checkbox={{ checked: inlineChecks[2], onCheckedChange: () => toggleInlineCheck(2) }}
+              checkbox={{
+                checked: inlineChecks[2],
+                onCheckedChange: () => toggleInlineCheck(2),
+              }}
             />
           </InlineCheckboxes>
           <CheckboxGroupField
@@ -143,7 +154,7 @@ function RowSwitchCard(): JSX.Element {
           />
         </FirstSectionCard>
         <OtpCard $desktopSpan={4} $desktopMinHeight="11.5rem" $responsiveOrder={5}>
-          <ShowcaseSectionLabel>One-Time Password</ShowcaseSectionLabel>
+          <Text variant={TextVariant.overline}>One-Time Password</Text>
           <InputOtp
             label="Verification code"
             length={6}
@@ -155,7 +166,7 @@ function RowSwitchCard(): JSX.Element {
       </FirstSectionColumn>
       <FirstSectionColumn>
         <FirstSectionCard $desktopSpan={4} $desktopMinHeight="20rem" $responsiveOrder={3}>
-          <ShowcaseSectionLabel>Radio</ShowcaseSectionLabel>
+          <Text variant={TextVariant.overline}>Radio</Text>
           <RadioGroupField
             name="demo-radio-single"
             label="Label"
@@ -177,7 +188,7 @@ function RowSwitchCard(): JSX.Element {
           />
         </FirstSectionCard>
         <FirstSectionCard $desktopSpan={4} $desktopMinHeight="11.5rem" $responsiveOrder={6}>
-          <ShowcaseSectionLabel>Badge</ShowcaseSectionLabel>
+          <Text variant={TextVariant.overline}>Badge</Text>
           <BadgeRow>
             <Badge>Badge</Badge>
             <Badge variant="info">Badge</Badge>

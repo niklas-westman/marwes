@@ -1,4 +1,4 @@
-import { Icon, IconName, SegmentedControl } from "@marwes-ui/react"
+import { Icon, IconName, SegmentedControl, Text, TextVariant } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
@@ -18,9 +18,21 @@ const inverseTwo: SegmentedControlItem[] = [
 ]
 
 const inverseThree: SegmentedControlItem[] = [
-  { value: "compact", icon: <Icon name={IconName.Star} decorative size={12} />, label: "Compact" },
-  { value: "wide", icon: <Icon name={IconName.Settings} decorative size={12} />, label: "Wide" },
-  { value: "rich", icon: <Icon name={IconName.Star} decorative size={12} />, label: "Rich" },
+  {
+    value: "compact",
+    icon: <Icon name={IconName.Star} decorative size={12} />,
+    label: "Compact",
+  },
+  {
+    value: "wide",
+    icon: <Icon name={IconName.Settings} decorative size={12} />,
+    label: "Wide",
+  },
+  {
+    value: "rich",
+    icon: <Icon name={IconName.Star} decorative size={12} />,
+    label: "Rich",
+  },
 ]
 
 const inverseIcon: SegmentedControlItem[] = [
@@ -42,9 +54,21 @@ const defaultTwo: SegmentedControlItem[] = [
 ]
 
 const defaultThree: SegmentedControlItem[] = [
-  { value: "compact", icon: <Icon name={IconName.Star} decorative size={12} />, label: "Compact" },
-  { value: "wide", icon: <Icon name={IconName.Settings} decorative size={12} />, label: "Wide" },
-  { value: "rich", icon: <Icon name={IconName.Star} decorative size={12} />, label: "Rich" },
+  {
+    value: "compact",
+    icon: <Icon name={IconName.Star} decorative size={12} />,
+    label: "Compact",
+  },
+  {
+    value: "wide",
+    icon: <Icon name={IconName.Settings} decorative size={12} />,
+    label: "Wide",
+  },
+  {
+    value: "rich",
+    icon: <Icon name={IconName.Star} decorative size={12} />,
+    label: "Rich",
+  },
 ]
 
 const defaultIcon: SegmentedControlItem[] = [
@@ -77,7 +101,7 @@ function RowSegmented(): JSX.Element {
   return (
     <ShowcaseRow>
       <ItemCard>
-        <ShowcaseSectionLabel>Segmented button – Inverse</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Segmented button – Inverse</Text>
         <ShowcaseStack>
           <FullWidthSegmentedControl
             items={inverseTwo}
@@ -104,7 +128,7 @@ function RowSegmented(): JSX.Element {
         </ShowcaseStack>
       </ItemCard>
       <ItemCard>
-        <ShowcaseSectionLabel>Segmented button – Default</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Segmented button – Default</Text>
         <ShowcaseStack>
           <FullWidthSegmentedControl
             items={defaultTwo}

@@ -66,11 +66,27 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).color.textMuted).toBe("#595959")
   })
 
+  it("default link and muted icon tokens follow the source semantic tokens", () => {
+    expect(resolveThemeInput({}).color.textLink).toBe("#2527CA")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.textLink).toBe("#8182FC")
+    expect(resolveThemeInput({}).color.iconMuted).toBe("#A3A3A3")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.iconMuted).toBe("#595959")
+  })
+
+  it("default surfaceBrand follows the source brand surface token", () => {
+    expect(resolveThemeInput({}).color.surfaceBrand).toBe("#EEEEFF")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.surfaceBrand).toBe("#090A32")
+  })
+
   it("default status borderStrong follows the latest border data", () => {
     expect(resolveThemeInput({}).color.status.info.borderStrong).toBe("#5859FC")
     expect(resolveThemeInput({ mode: ThemeMode.dark }).color.status.info.borderStrong).toBe(
       "#252599",
     )
+  })
+
+  it("default typography.display.fontSize is 44", () => {
+    expect(resolveThemeInput({}).typography.display.fontSize).toBe(44)
   })
 
   it("default typography.h1.fontSize is 32", () => {
@@ -173,6 +189,12 @@ describe("resolveThemeInput — surface overrides", () => {
     )
   })
 
+  it("surfacePrimary override", () => {
+    expect(resolveThemeInput({ color: { surfacePrimary: "#FAFAFA" } }).color.surfacePrimary).toBe(
+      "#FAFAFA",
+    )
+  })
+
   it("textSubtle override", () => {
     expect(resolveThemeInput({ color: { textSubtle: "#777777" } }).color.textSubtle).toBe("#777777")
   })
@@ -217,6 +239,29 @@ describe("resolveThemeInput — font / ui / typography overrides", () => {
     expect(
       resolveThemeInput({ typography: { h1: { fontSize: 48 } } }).typography.h1.lineHeight,
     ).toBe(1.1875)
+  })
+
+  it("typography.text.micro.fontSize override", () => {
+    expect(
+      resolveThemeInput({ typography: { text: { micro: { fontSize: 10 } } } }).typography.text.micro
+        .fontSize,
+    ).toBe(10)
+  })
+
+  it("typography.text label overrides", () => {
+    const result = resolveThemeInput({
+      typography: {
+        text: {
+          label: { fontSize: 15 },
+          "label-small": { lineHeight: 1.1 },
+        },
+      },
+    })
+
+    expect(result.typography.text.label.fontSize).toBe(15)
+    expect(result.typography.text.label.fontWeight).toBe(500)
+    expect(result.typography.text["label-small"].fontSize).toBe(12)
+    expect(result.typography.text["label-small"].lineHeight).toBe(1.1)
   })
 
   it("typography.paragraph.sm.fontSize override", () => {

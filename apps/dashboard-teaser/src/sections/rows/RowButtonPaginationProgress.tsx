@@ -1,8 +1,8 @@
-import { Button, ButtonVariant, Pagination, ProgressBar } from "@marwes-ui/react"
+import { Button, ButtonVariant, Pagination, ProgressBar, Text, TextVariant } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow, ShowcaseSectionLabel } from "./shared"
+import { FlexCard, ShowcaseRow } from "./shared"
 
 const ItemCard = styled(FlexCard)`
   justify-content: center;
@@ -21,7 +21,7 @@ function RowButtonPaginationProgress(): JSX.Element {
   return (
     <ShowcaseRow>
       <ItemCard>
-        <ShowcaseSectionLabel>Button</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Button</Text>
         <ButtonRow>
           <Button>Label →</Button>
           <Button variant={ButtonVariant.secondary}>Label →</Button>
@@ -29,7 +29,7 @@ function RowButtonPaginationProgress(): JSX.Element {
         </ButtonRow>
       </ItemCard>
       <ItemCard>
-        <ShowcaseSectionLabel>Pagination</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Pagination</Text>
         <Pagination
           page={currentPage}
           pageCount={10}
@@ -38,7 +38,7 @@ function RowButtonPaginationProgress(): JSX.Element {
         />
       </ItemCard>
       <ItemCard>
-        <ShowcaseSectionLabel>Progress bar</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Progress bar</Text>
         <ProgressBar label="Progress" value={60} size="small" />
       </ItemCard>
     </ShowcaseRow>

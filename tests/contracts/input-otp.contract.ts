@@ -31,11 +31,15 @@ export function runInputOtpContract(adapterName: string, harness: InputOtpContra
       })
 
       const input = harness.getByRole("textbox", { name: /verification code/i })
+      const labelTextNode = harness.getByText("Verification code")
+      const helperTextNode = harness.getByText("Enter the 6-digit code sent to your email")
       const helper = harness.queryHelperRegion()
       const describedBy = input.getAttribute("aria-describedby") ?? ""
 
       expect(input).toHaveAttribute("autocomplete", "one-time-code")
       expect(input).toHaveAttribute("inputmode", "numeric")
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
+      expect(helperTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(helper).not.toBeNull()
       expect(helper?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
@@ -77,6 +81,7 @@ export function runInputOtpContract(adapterName: string, harness: InputOtpContra
       const describedBy = input.getAttribute("aria-describedby") ?? ""
 
       expect(errorTextNode).toBeInTheDocument()
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(input).toHaveAttribute("aria-invalid", "true")

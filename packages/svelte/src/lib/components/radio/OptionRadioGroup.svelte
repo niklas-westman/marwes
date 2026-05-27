@@ -1,6 +1,8 @@
 <script lang="ts">
+  import Text from "../text/Text.svelte";
   import Radio from "./Radio.svelte";
   import RadioGroupField from "./RadioGroupField.svelte";
+  import type { RadioGroupFieldOption } from "./types.js";
 
   interface OptionRadioGroupProps {
     name: string;
@@ -8,7 +10,7 @@
     description?: string;
     error?: string;
     ariaDescribedBy?: string;
-    options: Array<{ value: string; label: string; disabled?: boolean }>;
+    options: RadioGroupFieldOption[];
     value?: string;
     defaultValue?: string;
     onchange?: (value: string) => void;
@@ -21,6 +23,10 @@
 
   let selected = $state(value ?? defaultValue ?? "");
   const isInvalid = $derived(error !== undefined && error.trim().length > 0);
+
+  function hasTextContent(text: string | undefined): boolean {
+    return text !== undefined && text.trim().length > 0;
+  }
 
   function handleChange(optValue: string) {
     selected = optValue;
@@ -36,17 +42,37 @@
   dataAttributes={{ "data-purpose": "selection" }}
 >
   {#each options as opt (opt.value)}
-    <label class="mw-radio-group-field__option">
+    {@const optionLabelId = `${name}-${opt.value}-label`}
+    {@const optionDescriptionId = `${name}-${opt.value}-description`}
+    {@const hasOptionDescription = hasTextContent(opt.description)}
+    <label
+      class={`mw-radio-group-field__option${hasOptionDescription ? " mw-radio-group-field__option--with-description" : ""}`}
+    >
       <Radio
         {name}
         value={opt.value}
+        ariaLabelledBy={optionLabelId}
+        {...(hasOptionDescription ? { ariaDescribedBy: optionDescriptionId } : {})}
         checked={selected === opt.value}
         disabled={disabled || opt.disabled || false}
         invalid={isInvalid}
         required={required === true}
         onchange={() => handleChange(opt.value)}
       />
-      <span class="mw-p mw-p--sm">{opt.label}</span>
+      <span class="mw-radio-group-field__option-content">
+        <Text id={optionLabelId} variant="label" class="mw-radio-group-field__option-label">
+          {opt.label}
+        </Text>
+        {#if hasOptionDescription}
+          <Text
+            id={optionDescriptionId}
+            variant="label-small"
+            class="mw-radio-group-field__option-description"
+          >
+            {opt.description}
+          </Text>
+        {/if}
+      </span>
     </label>
   {/each}
 </RadioGroupField>

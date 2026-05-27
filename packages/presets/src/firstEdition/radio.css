@@ -11,7 +11,7 @@
  */
 
 .mw-radio {
-  --mw-radio-surface: var(--mw-color-surface);
+  --mw-radio-surface: var(--mw-color-surface-primary);
   --mw-radio-border: var(--mw-color-border-subtle);
   --mw-radio-dot: var(--mw-color-primary-base, #2f31fc);
 
@@ -107,7 +107,7 @@
    ============================================ */
 
 .mw-theme--dark .mw-radio {
-  --mw-radio-surface: var(--mw-color-surface);
+  --mw-radio-surface: var(--mw-color-surface-primary);
   --mw-radio-border: var(--mw-color-border-subtle);
 }
 

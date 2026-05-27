@@ -68,6 +68,8 @@ describe("Public API exports", () => {
       "H2",
       "H3",
       "Paragraph",
+      "Text",
+      "TypographyText",
       "Icon",
       "Input",
       "InputField",
@@ -171,6 +173,7 @@ describe("Public API exports", () => {
       "IconName",
       "Spacings",
       "SwitchSize",
+      "TextVariant",
       "ThemeMode",
     ]
 

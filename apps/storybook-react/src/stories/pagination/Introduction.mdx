@@ -38,4 +38,8 @@ import { Pagination } from "@marwes-ui/react"
 - Uses list semantics for page items
 - Marks the active page with `aria-current="page"`
 - Disables previous/next at the collection boundaries
+- Supports optional first/last controls for large page ranges
+- Supports custom item aria labels with `getItemAriaLabel`
+- Adapts control labels and visible page items to narrow containers by default
+- Supports `controlDisplay="auto" | "label" | "icon"` for responsive or explicit previous/next controls
 - Supports hiding previous/next controls when the surrounding UI provides them

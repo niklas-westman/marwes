@@ -5,11 +5,11 @@ import "@testing-library/jest-dom/vitest"
 import { fireEvent, render, screen } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import { runDropdownFieldContract } from "../../../../tests/contracts/dropdown-field.contract"
-import DropdownField from "../lib/components/input/DropdownField.svelte"
+import DropdownFieldContractFixture from "./type-fixtures/DropdownFieldContractFixture.svelte"
 
 runDropdownFieldContract("svelte", {
   renderDropdownField(args) {
-    render(DropdownField, {
+    render(DropdownFieldContractFixture, {
       props: {
         label: args.label,
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
@@ -45,7 +45,7 @@ runDropdownFieldContract("svelte", {
 
 describe("DropdownField interactions: svelte", () => {
   it("opens the Marwes listbox and selects an option", async () => {
-    render(DropdownField, {
+    render(DropdownFieldContractFixture, {
       props: {
         label: "Country",
         select: {

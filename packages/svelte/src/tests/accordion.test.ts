@@ -5,7 +5,7 @@
 import { fireEvent, render } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Accordion from "../lib/components/accordion/Accordion.svelte"
-import AccordionField from "../lib/components/accordion/AccordionField.svelte"
+import AccordionFieldContractFixture from "./type-fixtures/AccordionFieldContractFixture.svelte"
 
 describe("Accordion", () => {
   it("renders a button trigger with the title", () => {
@@ -57,7 +57,7 @@ describe("AccordionField", () => {
   ]
 
   it("renders with a label", () => {
-    const { container } = render(AccordionField, {
+    const { container } = render(AccordionFieldContractFixture, {
       props: { label: "FAQ", items: defaultItems },
     })
     // AccordionField may use legend or a label element
@@ -65,7 +65,7 @@ describe("AccordionField", () => {
   })
 
   it("renders accordion items", () => {
-    const { container } = render(AccordionField, {
+    const { container } = render(AccordionFieldContractFixture, {
       props: { label: "FAQ", items: defaultItems },
     })
     const buttons = container.querySelectorAll("button")
@@ -73,14 +73,14 @@ describe("AccordionField", () => {
   })
 
   it("shows error text when error prop is set", () => {
-    const { container } = render(AccordionField, {
+    const { container } = render(AccordionFieldContractFixture, {
       props: { label: "FAQ", items: defaultItems, error: "Required" },
     })
     expect(container.textContent).toContain("Required")
   })
 
   it("shows description when provided", () => {
-    const { container } = render(AccordionField, {
+    const { container } = render(AccordionFieldContractFixture, {
       props: { label: "FAQ", items: defaultItems, description: "Select one" },
     })
     expect(container.textContent).toContain("Select one")

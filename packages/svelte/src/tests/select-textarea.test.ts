@@ -5,9 +5,9 @@
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import Select from "../lib/components/input/Select.svelte"
-import SelectField from "../lib/components/input/SelectField.svelte"
 import Textarea from "../lib/components/input/Textarea.svelte"
-import TextareaField from "../lib/components/input/TextareaField.svelte"
+import SelectFieldContractFixture from "./type-fixtures/SelectFieldContractFixture.svelte"
+import TextareaFieldContractFixture from "./type-fixtures/TextareaFieldContractFixture.svelte"
 
 const selectOptions = [
   { value: "a", label: "Option A" },
@@ -44,7 +44,7 @@ describe("Select", () => {
 
 describe("SelectField", () => {
   it("renders with a label", () => {
-    const { container } = render(SelectField, {
+    const { container } = render(SelectFieldContractFixture, {
       props: { label: "Country", select: { options: selectOptions } },
     })
     const label = container.querySelector("label")
@@ -52,14 +52,14 @@ describe("SelectField", () => {
   })
 
   it("shows error text", () => {
-    const { container } = render(SelectField, {
+    const { container } = render(SelectFieldContractFixture, {
       props: { label: "Country", error: "Required", select: { options: selectOptions } },
     })
     expect(container.textContent).toContain("Required")
   })
 
   it("shows helper text", () => {
-    const { container } = render(SelectField, {
+    const { container } = render(SelectFieldContractFixture, {
       props: { label: "Country", helperText: "Pick one", select: { options: selectOptions } },
     })
     expect(container.textContent).toContain("Pick one")
@@ -94,7 +94,7 @@ describe("Textarea", () => {
 
 describe("TextareaField", () => {
   it("renders with a label", () => {
-    const { container } = render(TextareaField, {
+    const { container } = render(TextareaFieldContractFixture, {
       props: { label: "Message" },
     })
     const label = container.querySelector("label")
@@ -102,14 +102,14 @@ describe("TextareaField", () => {
   })
 
   it("shows error text", () => {
-    const { container } = render(TextareaField, {
+    const { container } = render(TextareaFieldContractFixture, {
       props: { label: "Message", error: "Required" },
     })
     expect(container.textContent).toContain("Required")
   })
 
   it("shows helper text", () => {
-    const { container } = render(TextareaField, {
+    const { container } = render(TextareaFieldContractFixture, {
       props: { label: "Message", helperText: "Max 500 chars" },
     })
     expect(container.textContent).toContain("Max 500 chars")

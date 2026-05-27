@@ -63,6 +63,7 @@ export * from "./icon"
 export * from "./input"
 export * from "./heading"
 export * from "./paragraph"
+export * from "./text"
 export * from "./tab"
 export * from "./spacing"
 
@@ -137,6 +138,7 @@ export type {
   ParagraphRenderKit,
   ParagraphSize,
 } from "./paragraph"
+export type { TextA11y, TextAs, TextOptions, TextRenderKit } from "./text"
 export type { TabOptions, TabRenderKit, TabGroupA11yIds, TabGroupItemState } from "./tab"
 export type { SpacingOptions, SpacingRenderKit, SpacingSize } from "./spacing"
 export * from "./segmented-control"

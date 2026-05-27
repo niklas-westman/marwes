@@ -14,9 +14,30 @@
 }
 
 /* Heading sizes are controlled via CSS variables set by the recipe */
+/* .mw-heading--display uses 44/52, weight 700, letter-spacing -1.32px */
 /* .mw-heading--h1 uses 32/38, weight 700, letter-spacing -0.96px */
 /* .mw-heading--h2 uses 24/30, weight 500, letter-spacing -0.72px */
 /* .mw-heading--h3 uses 20/26, weight 500, letter-spacing -0.6px */
+
+/* BASE TEXT */
+.mw-text {
+  font-family: var(--mw-font-primary, inherit);
+  font-size: var(--mw-text-size);
+  line-height: var(--mw-text-line-height);
+  font-weight: var(--mw-text-weight);
+  letter-spacing: var(--mw-text-letter-spacing);
+  text-transform: var(--mw-text-transform, none);
+  color: var(--mw-color-text);
+  margin: 0;
+}
+
+/* Text variants are controlled via CSS variables set by the recipe */
+/* .mw-text--display uses 44/52, weight 700, letter-spacing -1.32px */
+/* .mw-text--label uses 14/16, weight 500, letter-spacing -0.42px */
+/* .mw-text--label-small uses 12/12, weight 500, letter-spacing -0.36px */
+/* .mw-text--caption uses 12/16, weight 500, letter-spacing 0 */
+/* .mw-text--overline uses 11/16, weight 500, letter-spacing 0.88px, uppercase */
+/* .mw-text--micro uses 11/14, weight 400, letter-spacing -0.33px */
 
 /* BASE PARAGRAPH */
 .mw-p {

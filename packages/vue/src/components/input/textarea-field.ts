@@ -2,7 +2,7 @@ import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Textarea, type TextareaProps } from "./textarea"
 
 export type TextareaFieldProps = {
@@ -97,7 +97,7 @@ export const TextareaField = defineComponent(
     return () =>
       h("div", { class: wrapperClass.value }, [
         h("label", { class: "mw-input-field__label", for: id.value }, [
-          h(Paragraph, { size: "md" }, { default: labelContent }),
+          h(Text, { variant: "label" }, { default: labelContent }),
         ]),
 
         h("div", { class: "mw-input-field__input-wrapper" }, [
@@ -106,7 +106,7 @@ export const TextareaField = defineComponent(
 
         hasHelperText.value && !hasError.value
           ? h("div", { class: "mw-input-field__helper", id: a11yIds.value.helperTextId }, [
-              h(Paragraph, { size: "sm" }, { default: helperContent }),
+              h(Text, { variant: "caption" }, { default: helperContent }),
             ])
           : null,
 
@@ -118,7 +118,7 @@ export const TextareaField = defineComponent(
                 id: a11yIds.value.errorId,
                 "aria-live": "polite",
               },
-              [h(Paragraph, { size: "sm" }, { default: errorContent })],
+              [h(Text, { variant: "caption" }, { default: errorContent })],
             )
           : null,
       ])

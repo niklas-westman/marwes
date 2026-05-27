@@ -1,3 +1,3 @@
 export { default as Radio } from "./Radio.svelte"
 export { default as RadioGroupField } from "./RadioGroupField.svelte"
-export type { RadioProps, RadioGroupFieldProps } from "./types.js"
+export type { RadioGroupFieldOption, RadioGroupFieldProps, RadioProps } from "./types.js"

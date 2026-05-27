@@ -27,6 +27,7 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 12. [Governance](./reference/governance.md)
 13. [Testing](./reference/testing.md)
 14. [Family Validation](./reference/family-validation.md)
+15. [Figma Validator](./figma-validator/README.md)
 
 ## Documentation map
 
@@ -81,6 +82,7 @@ Long-lived, canonical project docs.
 - [Testing](./reference/testing.md) — test layers, commands, and expectations
 - [Family Validation](./reference/family-validation.md) — focused per-family workflow and master validation commands
 - [Framework Parity Summary](./reference/framework-parity-summary.md) — generated compact view of the current framework parity artifact
+- [Figma Validator](./figma-validator/README.md) — local-only Figma parity validator, commands, report shape, and sync handoff
 
 ### Guides
 Practical how-to documents.

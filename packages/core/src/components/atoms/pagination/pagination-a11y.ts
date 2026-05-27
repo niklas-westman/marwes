@@ -3,6 +3,8 @@ import type {
   PaginationControlA11yProps,
   PaginationControlOptions,
   PaginationEllipsisA11yProps,
+  PaginationGetItemAriaLabel,
+  PaginationItemAriaLabelOptions,
   PaginationListA11yProps,
   PaginationOptions,
   PaginationPageA11yProps,
@@ -25,9 +27,14 @@ export function resolvePaginationListA11y(): PaginationListA11yProps {
 export function resolvePaginationControlA11y(
   opts: PaginationControlOptions,
 ): PaginationControlA11yProps {
-  const fallback = opts.direction === "previous" ? "Previous page" : "Next page"
+  const fallbackByDirection = {
+    first: "First page",
+    previous: "Previous page",
+    next: "Next page",
+    last: "Last page",
+  } satisfies Record<PaginationControlOptions["direction"], string>
   const a11y: PaginationControlA11yProps = {
-    ariaLabel: opts.label ?? fallback,
+    ariaLabel: opts.ariaLabel ?? opts.label ?? fallbackByDirection[opts.direction],
   }
 
   if (opts.disabled) a11y.ariaDisabled = true
@@ -36,7 +43,9 @@ export function resolvePaginationControlA11y(
 
 export function resolvePaginationPageA11y(opts: PaginationPageOptions): PaginationPageA11yProps {
   const a11y: PaginationPageA11yProps = {
-    ariaLabel: opts.selected ? `Page ${opts.page}, current page` : `Go to page ${opts.page}`,
+    ariaLabel:
+      opts.ariaLabel ??
+      (opts.selected ? `Page ${opts.page}, current page` : `Go to page ${opts.page}`),
   }
 
   if (opts.selected) a11y.ariaCurrent = "page"
@@ -46,4 +55,19 @@ export function resolvePaginationPageA11y(opts: PaginationPageOptions): Paginati
 
 export function resolvePaginationEllipsisA11y(): PaginationEllipsisA11yProps {
   return { ariaHidden: true }
+}
+
+export function resolvePaginationItemAriaLabel(
+  getItemAriaLabel: PaginationGetItemAriaLabel,
+  item: PaginationItemAriaLabelOptions,
+): string
+export function resolvePaginationItemAriaLabel(
+  getItemAriaLabel: undefined,
+  item: PaginationItemAriaLabelOptions,
+): undefined
+export function resolvePaginationItemAriaLabel(
+  getItemAriaLabel: PaginationGetItemAriaLabel | undefined,
+  item: PaginationItemAriaLabelOptions,
+): string | undefined {
+  return getItemAriaLabel?.(item)
 }

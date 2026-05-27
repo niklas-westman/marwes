@@ -2,7 +2,7 @@ import { buildCheckboxFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
 import { Checkbox } from "."
 import type { CheckboxProps } from "."
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 
 export type CheckboxFieldProps = {
   /** Optional: if omitted, we generate one via useId(). */
@@ -170,19 +170,19 @@ export function CheckboxField(props: CheckboxFieldProps): React.ReactElement {
         <Checkbox {...checkboxProps} />
 
         <label className="mw-checkbox-field__label" htmlFor={id}>
-          <Paragraph size="md">{props.label}</Paragraph>
+          <Text variant="label">{props.label}</Text>
         </label>
       </div>
 
       {hasDescription && (
         <div className="mw-checkbox-field__description" id={descId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
+          <Text variant="caption">{props.description}</Text>
         </div>
       )}
 
       {hasError && (
         <div className="mw-checkbox-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 /**
  * Svelte adapter: Tests typography components — H1/H2/H3 heading
- * elements and Paragraph with size variants.
+ * elements, Paragraph with size variants, and Text variants.
  */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
@@ -39,6 +39,18 @@ describe("H3", () => {
   it("includes mw-heading class", () => {
     const { container } = render(TypographyFixture, { props: { component: "h3" } })
     expect(container.querySelector("h3")?.className).toContain("mw-heading")
+  })
+})
+
+describe("Text", () => {
+  it("renders a span element", () => {
+    const { container } = render(TypographyFixture, { props: { component: "text" } })
+    expect(container.querySelector("span")).not.toBeNull()
+  })
+
+  it("includes text variant class", () => {
+    const { container } = render(TypographyFixture, { props: { component: "text" } })
+    expect(container.querySelector("span")?.className).toContain("mw-text--overline")
   })
 })
 

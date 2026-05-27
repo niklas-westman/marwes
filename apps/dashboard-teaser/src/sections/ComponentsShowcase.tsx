@@ -1,11 +1,7 @@
 import styled from "styled-components"
 
-import {
-  dashboardRadius,
-  dashboardRowStyles,
-  responsiveShellPadding,
-  sectionLabelStyles,
-} from "../styles/theme-utils"
+import { Text, TextVariant } from "@marwes-ui/react"
+import { dashboardRadius, dashboardRowStyles, responsiveShellPadding } from "../styles/theme-utils"
 import { RowAccordionInput } from "./rows/RowAccordionInput"
 import { RowAvatarBreadcrumbDialog } from "./rows/RowAvatarBreadcrumbDialog"
 import { RowBanner } from "./rows/RowBanner"
@@ -37,11 +33,6 @@ const ContentGrid = styled.div`
   }
 `
 
-const SectionTitle = styled.h2`
-  ${sectionLabelStyles}
-  color: ${({ theme }) => theme.color.text};
-`
-
 const Row = styled.div`
   ${dashboardRowStyles}
 `
@@ -50,7 +41,7 @@ function ComponentsShowcase(): JSX.Element {
   return (
     <ShowcaseContainer>
       <ContentGrid>
-        <SectionTitle>Components</SectionTitle>
+        <Text variant={TextVariant.overline}>Components</Text>
         <Row>
           <RowSwitchCard />
         </Row>

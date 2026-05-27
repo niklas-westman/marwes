@@ -7,7 +7,7 @@
   --mw-input-otp-label-color: var(--mw-color-text);
   --mw-input-otp-helper-color: var(--mw-color-text-muted);
   --mw-input-otp-cell-border: var(--mw-color-border);
-  --mw-input-otp-cell-surface: var(--mw-color-surface);
+  --mw-input-otp-cell-surface: var(--mw-color-surface-primary);
   --mw-input-otp-cell-text: var(--mw-color-text-muted);
   --mw-input-otp-cell-filled-text: var(--mw-color-text);
 
@@ -20,7 +20,7 @@
   color: var(--mw-input-otp-label-color);
 }
 
-.mw-input-otp__label .mw-p {
+.mw-input-otp__label .mw-text {
   color: var(--mw-input-otp-label-color);
 }
 
@@ -79,8 +79,8 @@
   color: var(--mw-input-otp-helper-color);
 }
 
-.mw-input-otp__helper .mw-p,
-.mw-input-otp__error .mw-p {
+.mw-input-otp__helper .mw-text,
+.mw-input-otp__error .mw-text {
   color: var(--mw-input-otp-helper-color);
 }
 

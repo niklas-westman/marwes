@@ -17,7 +17,11 @@ const meta: Meta<typeof Pagination> = {
     page: { control: "number" },
     siblingCount: { control: "number" },
     boundaryCount: { control: "number" },
+    maxVisibleItems: { control: "number" },
+    controlDisplay: { control: "select", options: ["auto", "label", "icon"] },
+    adaptive: { control: "boolean" },
     showPrevNext: { control: "boolean" },
+    showFirstLast: { control: "boolean" },
     disabled: { control: "boolean" },
   },
 }
@@ -44,6 +48,34 @@ export const WithoutPrevNext: Story = {
 
 export const CompactRange: Story = {
   render: () => <ControlledExample page={5} siblingCount={1} />,
+}
+
+export const FirstLastControls: Story = {
+  render: () => <ControlledExample page={5} showFirstLast />,
+}
+
+export const CustomAriaLabels: Story = {
+  render: () => (
+    <ControlledExample
+      page={4}
+      showFirstLast
+      getItemAriaLabel={(item) =>
+        item.type === "page" ? `Open result page ${item.page}` : `Open ${item.type} control`
+      }
+    />
+  ),
+}
+
+export const NarrowContainer: Story = {
+  render: () => (
+    <div style={{ width: 240 }}>
+      <ControlledExample page={6} pageCount={100} siblingCount={2} showFirstLast />
+    </div>
+  ),
+}
+
+export const IconControls: Story = {
+  render: () => <ControlledExample page={5} controlDisplay="icon" />,
 }
 
 export const FirstPage: Story = {
@@ -76,6 +108,8 @@ export const AllStates: Story = {
       <Pagination page={1} pageCount={10} siblingCount={2} ariaLabel="First page pagination" />
       <Pagination page={5} pageCount={10} siblingCount={1} ariaLabel="Middle page pagination" />
       <Pagination page={10} pageCount={10} siblingCount={2} ariaLabel="Last page pagination" />
+      <Pagination page={5} pageCount={10} showFirstLast ariaLabel="First last pagination" />
+      <Pagination page={5} pageCount={10} controlDisplay="icon" ariaLabel="Icon pagination" />
       <Pagination page={3} pageCount={10} showPrevNext={false} ariaLabel="Compact pagination" />
       <Pagination page={3} pageCount={10} disabled ariaLabel="Disabled pagination" />
     </div>

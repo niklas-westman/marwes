@@ -11,7 +11,7 @@
   --mw-checkbox-size: var(--mw-density-checkbox-size);
   --mw-checkbox-radius: var(--mw-ui-radius);
   --mw-checkbox-border: var(--mw-color-border);
-  --mw-checkbox-bg: var(--mw-color-surface);
+  --mw-checkbox-bg: var(--mw-color-surface-primary);
   --mw-checkbox-checked-bg: var(--mw-color-primary-base);
   --mw-checkbox-check: var(--mw-color-primary-label);
 

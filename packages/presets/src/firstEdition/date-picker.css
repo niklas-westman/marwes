@@ -1,19 +1,16 @@
 .mw-date-picker {
-  --mw-date-picker-surface: var(--mw-color-surface, #f8f8f8);
-  --mw-date-picker-page-surface: var(--mw-color-page, #f5f5f5);
+  --mw-date-picker-surface: var(--mw-color-surface-primary, #ffffff);
+  --mw-date-picker-page-surface: var(--mw-color-surface-subtle, #f5f5f5);
   --mw-date-picker-text: var(--mw-color-text, #141414);
   --mw-date-picker-muted: var(--mw-color-text-muted, #595959);
   --mw-date-picker-placeholder: var(--mw-color-text-subtle, #595959);
   --mw-date-picker-icon-muted: var(--mw-color-icon-muted, #a3a3a3);
   --mw-date-picker-border: var(--mw-color-border-subtle, #d8d8d8);
   --mw-date-picker-divider: var(--mw-color-border, #d8d8d8);
-  --mw-date-picker-hover: var(--mw-color-surface-muted, #f5f5f5);
-  --mw-date-picker-accent: var(--mw-color-primary-base, var(--mw-color-accent, #2f31fc));
-  --mw-date-picker-accent-text: var(--mw-color-on-primary, #ffffff);
-  --mw-date-picker-range: var(
-    --mw-color-primary-subtle,
-    color-mix(in srgb, var(--mw-date-picker-accent) 7%, #ffffff)
-  );
+  --mw-date-picker-hover: var(--mw-color-surface-subtle, #f5f5f5);
+  --mw-date-picker-accent: var(--mw-color-primary-base, #2f31fc);
+  --mw-date-picker-accent-text: var(--mw-color-primary-label, #ffffff);
+  --mw-date-picker-range: var(--mw-color-surface-brand, #eeeeff);
   --mw-date-picker-radius: var(--mw-radius-lg, 0.875rem);
   --mw-date-picker-day-radius: var(--mw-radius-sm, 0.375rem);
 

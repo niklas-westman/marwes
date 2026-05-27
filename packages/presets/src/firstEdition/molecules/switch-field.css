@@ -17,13 +17,17 @@
 .mw-switch-field__description {
   opacity: 0.75;
   margin-left: calc(var(--mw-spacing-sp-24) + var(--mw-density-gap));
-  font-size: var(--mw-density-font-size-sm);
 }
 
 .mw-switch-field__error {
   margin-left: calc(var(--mw-spacing-sp-24) + var(--mw-density-gap));
-  font-size: var(--mw-density-font-size-sm);
   color: var(--mw-color-danger-base, #d90429);
+}
+
+.mw-switch-field__label .mw-text,
+.mw-switch-field__description .mw-text,
+.mw-switch-field__error .mw-text {
+  color: inherit;
 }
 
 .mw-switch-field--disabled .mw-switch-field__label {
@@ -31,7 +35,7 @@
   opacity: 0.7;
 }
 
-.mw-switch-field--invalid .mw-switch-field__label .mw-p,
-.mw-switch-field--invalid .mw-switch-field__error .mw-p {
+.mw-switch-field--invalid .mw-switch-field__label .mw-text,
+.mw-switch-field--invalid .mw-switch-field__error .mw-text {
   color: var(--mw-color-danger-base, #d90429);
 }

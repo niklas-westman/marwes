@@ -23,13 +23,14 @@ type TokenModeValue = {
 type MarwesColorSource = {
   semantic: {
     surface: Record<
-      "primary" | "secondary" | "sunken" | "raised" | "disabled" | "inverse",
+      "primary" | "secondary" | "sunken" | "raised" | "disabled" | "inverse" | "brand",
       ModeValue
     >
     text: Record<
-      "primary" | "secondary" | "disabled" | "inverse" | "onSurfaceDark" | "brand",
+      "primary" | "secondary" | "disabled" | "inverse" | "onSurfaceDark" | "brand" | "link",
       ModeValue
     >
+    icon: Record<"muted", ModeValue>
     border: Record<"default" | "strong" | "brand", ModeValue>
     focus: Record<"ring", ModeValue>
     action: {
@@ -91,7 +92,9 @@ describe("Marwes color source contract", () => {
   it("maps surface and text CSS vars to docs/marwes-colors.json", () => {
     expectModeVar("--mw-color-background", colorSource.semantic.surface.primary)
     expectModeVar("--mw-color-surface", colorSource.semantic.surface.secondary)
+    expectModeVar("--mw-color-surface-primary", colorSource.semantic.surface.primary)
     expectModeVar("--mw-color-surface-subtle", colorSource.semantic.surface.sunken)
+    expectModeVar("--mw-color-surface-brand", colorSource.semantic.surface.brand)
     expectModeVar("--mw-color-surface-elevated", colorSource.semantic.surface.raised)
     expectModeVar("--mw-color-surface-disabled", colorSource.semantic.surface.disabled)
     expectModeVar("--mw-color-surface-inverted", colorSource.semantic.surface.inverse)
@@ -105,6 +108,8 @@ describe("Marwes color source contract", () => {
       dark: colorSource.semantic.text.onSurfaceDark.dark,
     })
     expectModeVar("--mw-color-text-brand", colorSource.semantic.text.brand)
+    expectModeVar("--mw-color-text-link", colorSource.semantic.text.link)
+    expectModeVar("--mw-color-icon-muted", colorSource.semantic.icon.muted)
   })
 
   it("maps border and focus CSS vars to docs/marwes-colors.json", () => {

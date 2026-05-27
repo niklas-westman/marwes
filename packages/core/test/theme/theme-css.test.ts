@@ -31,7 +31,9 @@ const fixture: ResolvedTheme = {
     info: resolveInfoRole(primary),
     background: "#FFFFFF",
     surface: "#F8F8F8",
+    surfacePrimary: "#FFFFFF",
     surfaceSubtle: "#F5F5F5",
+    surfaceBrand: "#EEEEFF",
     surfaceElevated: "#FFFFFF",
     surfaceDisabled: "#F5F5F5",
     surfaceInverted: "#141414",
@@ -41,6 +43,8 @@ const fixture: ResolvedTheme = {
     textDisabled: "#737373",
     textInverted: "#FFFFFF",
     textBrand: "#2F31FC",
+    textLink: "#2527CA",
+    iconMuted: "#A3A3A3",
     border: "#D8D8D8",
     borderSubtle: "#D8D8D8",
     borderStrong: "#A3A3A3",
@@ -94,9 +98,24 @@ const fixture: ResolvedTheme = {
     wideDesktop: 1440,
   },
   typography: {
+    display: { fontSize: 56, lineHeight: 1.1, fontWeight: 700, letterSpacing: -1.68 },
     h1: { fontSize: 44, lineHeight: 1.18, fontWeight: 700, letterSpacing: -1.32 },
     h2: { fontSize: 32, lineHeight: 1.25, fontWeight: 700, letterSpacing: -0.96 },
     h3: { fontSize: 24, lineHeight: 1.3, fontWeight: 600, letterSpacing: -0.48 },
+    text: {
+      display: { fontSize: 56, lineHeight: 1.1, fontWeight: 700, letterSpacing: -1.68 },
+      label: { fontSize: 14, lineHeight: 1.14, fontWeight: 500, letterSpacing: -0.42 },
+      "label-small": { fontSize: 12, lineHeight: 1, fontWeight: 500, letterSpacing: -0.36 },
+      caption: { fontSize: 12, lineHeight: 1.33, fontWeight: 500, letterSpacing: 0 },
+      overline: {
+        fontSize: 11,
+        lineHeight: 1.45,
+        fontWeight: 500,
+        letterSpacing: 0.88,
+        textTransform: "uppercase",
+      },
+      micro: { fontSize: 11, lineHeight: 1.27, fontWeight: 400, letterSpacing: -0.33 },
+    },
     paragraph: {
       sm: { fontSize: 14, lineHeight: 1.5 },
       md: { fontSize: 16, lineHeight: 1.6 },
@@ -190,8 +209,16 @@ describe("themeToCSSVars — surface / semantic", () => {
     expect(themeToCSSVars(fixture)["--mw-color-surface"]).toBe("#F8F8F8")
   })
 
+  it("surface-primary equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-surface-primary"]).toBe("#FFFFFF")
+  })
+
   it("surface-subtle equals fixture value", () => {
     expect(themeToCSSVars(fixture)["--mw-color-surface-subtle"]).toBe("#F5F5F5")
+  })
+
+  it("surface-brand equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-surface-brand"]).toBe("#EEEEFF")
   })
 
   it("surface-elevated equals fixture value", () => {
@@ -242,6 +269,11 @@ describe("themeToCSSVars — surface / semantic", () => {
     expect(themeToCSSVars(fixture)["--mw-color-text-brand"]).toBe("#2F31FC")
     expect(themeToCSSVars(fixture)["--mw-color-border-brand"]).toBe("#2F31FC")
   })
+
+  it("text-link and icon-muted equal fixture values", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-text-link"]).toBe("#2527CA")
+    expect(themeToCSSVars(fixture)["--mw-color-icon-muted"]).toBe("#A3A3A3")
+  })
 })
 
 describe("themeToCSSVars — status tokens", () => {
@@ -273,6 +305,10 @@ describe("themeToCSSVars — font / ui", () => {
 })
 
 describe("themeToCSSVars — typography", () => {
+  it("display-font-size appends px", () => {
+    expect(themeToCSSVars(fixture)["--mw-typography-display-font-size"]).toBe("56px")
+  })
+
   it("h1-font-size appends px", () => {
     expect(themeToCSSVars(fixture)["--mw-typography-h1-font-size"]).toBe("44px")
   })
@@ -295,6 +331,28 @@ describe("themeToCSSVars — typography", () => {
 
   it("h3-font-size appends px", () => {
     expect(themeToCSSVars(fixture)["--mw-typography-h3-font-size"]).toBe("24px")
+  })
+
+  it("text-overline-transform is emitted", () => {
+    expect(themeToCSSVars(fixture)["--mw-typography-text-overline-transform"]).toBe("uppercase")
+  })
+
+  it("text-label vars are emitted", () => {
+    expect(themeToCSSVars(fixture)["--mw-typography-text-label-font-size"]).toBe("14px")
+    expect(themeToCSSVars(fixture)["--mw-typography-text-label-line-height"]).toBe("1.14")
+    expect(themeToCSSVars(fixture)["--mw-typography-text-label-letter-spacing"]).toBe("-0.42px")
+  })
+
+  it("text-label-small vars are emitted", () => {
+    expect(themeToCSSVars(fixture)["--mw-typography-text-label-small-font-size"]).toBe("12px")
+    expect(themeToCSSVars(fixture)["--mw-typography-text-label-small-line-height"]).toBe("1")
+    expect(themeToCSSVars(fixture)["--mw-typography-text-label-small-letter-spacing"]).toBe(
+      "-0.36px",
+    )
+  })
+
+  it("text-micro-letter-spacing appends px", () => {
+    expect(themeToCSSVars(fixture)["--mw-typography-text-micro-letter-spacing"]).toBe("-0.33px")
   })
 
   it("paragraph-sm-font-size appends px", () => {
@@ -353,8 +411,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 108 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(108)
+  it("emits exactly 146 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(146)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

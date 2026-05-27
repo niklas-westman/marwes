@@ -64,4 +64,64 @@ describe("Vue Pagination", () => {
     expect(screen.queryByRole("button", { name: "Previous" })).toBeNull()
     expect(screen.queryByRole("button", { name: "Next" })).toBeNull()
   })
+
+  it("can show first and last controls", async () => {
+    const onUpdate = vi.fn()
+    renderWithProvider({
+      modelValue: 5,
+      pageCount: 10,
+      showFirstLast: true,
+      "onUpdate:modelValue": onUpdate,
+    })
+
+    await fireEvent.click(screen.getByRole("button", { name: "First" }))
+    await fireEvent.click(screen.getByRole("button", { name: "Last" }))
+
+    expect(onUpdate).toHaveBeenNthCalledWith(1, 1)
+    expect(onUpdate).toHaveBeenNthCalledWith(2, 10)
+  })
+
+  it("uses custom item aria labels", () => {
+    renderWithProvider({
+      modelValue: 1,
+      pageCount: 10,
+      showFirstLast: true,
+      getItemAriaLabel: (item) =>
+        item.type === "page" ? `Open page ${item.page}` : `Open ${item.type}`,
+    })
+
+    expect(screen.getByRole("button", { name: "Open page 1" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    )
+    expect(screen.getByRole("button", { name: "Open next" })).not.toBeNull()
+    expect(screen.getByRole("button", { name: "Open last" })).not.toBeNull()
+  })
+
+  it("reserves page-list width from the visible item budget", () => {
+    renderWithProvider({ modelValue: 4, pageCount: 10, siblingCount: 2, maxVisibleItems: 6 })
+    const nav = screen.getByRole("navigation", { name: "Pagination" })
+
+    expect(nav.style.getPropertyValue("--mw-pagination-list-width")).toBe(
+      "calc(7 * var(--mw-pagination-size) + 6 * var(--mw-pagination-gap))",
+    )
+  })
+
+  it("can force icon-only controls while preserving accessible labels", () => {
+    renderWithProvider({ modelValue: 2, pageCount: 10, controlDisplay: "icon" })
+    const nav = screen.getByRole("navigation", { name: "Pagination" })
+
+    expect(nav).toHaveAttribute("data-control-display", "icon")
+    expect(screen.getByRole("button", { name: "Previous" })).not.toBeNull()
+    expect(screen.getByRole("button", { name: "Next" })).not.toBeNull()
+  })
+
+  it("can force label controls", () => {
+    renderWithProvider({ modelValue: 2, pageCount: 10, controlDisplay: "label" })
+
+    expect(screen.getByRole("navigation", { name: "Pagination" })).toHaveAttribute(
+      "data-control-display",
+      "label",
+    )
+  })
 })

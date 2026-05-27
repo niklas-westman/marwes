@@ -10,7 +10,7 @@
   padding: 0 var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
-  background: var(--mw-color-surface);
+  background: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
@@ -69,5 +69,5 @@
 
 /* Dark mode input styles */
 .mw-theme--dark .mw-input {
-  background: var(--mw-color-surface);
+  background: var(--mw-color-surface-primary);
 }

@@ -7,6 +7,16 @@ import {
   createPaginationListRecipe,
   createPaginationPageRecipe,
   createPaginationRecipe,
+  resolvePaginationAdaptiveProfile,
+  resolvePaginationItemAriaLabel,
+} from "@marwes-ui/core"
+import type {
+  IconName as IconNameType,
+  PaginationAdaptiveProfile,
+  PaginationControlDirection,
+  PaginationControlDisplay,
+  PaginationGetItemAriaLabel,
+  PaginationResolvedControlDisplay,
 } from "@marwes-ui/core"
 import * as React from "react"
 import { Icon } from "../icon"
@@ -20,12 +30,17 @@ export interface PaginationProps
   siblingCount?: number
   boundaryCount?: number
   maxVisibleItems?: number
+  controlDisplay?: PaginationControlDisplay
   adaptive?: boolean
   showPrevNext?: boolean
+  showFirstLast?: boolean
   disabled?: boolean
+  firstLabel?: string
   previousLabel?: string
   nextLabel?: string
+  lastLabel?: string
   ariaLabel?: string
+  getItemAriaLabel?: PaginationGetItemAriaLabel
 }
 
 export function Pagination(props: PaginationProps): React.ReactElement {
@@ -37,36 +52,61 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     siblingCount,
     boundaryCount,
     maxVisibleItems,
+    controlDisplay = "auto",
     adaptive = true,
     showPrevNext,
+    showFirstLast,
     disabled,
+    firstLabel = "First",
     previousLabel = "Previous",
     nextLabel = "Next",
+    lastLabel = "Last",
     ariaLabel,
+    getItemAriaLabel,
     className,
     id,
+    style,
     ...rest
   } = props
 
   const isControlled = controlledPage !== undefined
   const rootRef = React.useRef<HTMLElement>(null)
-  const adaptiveMaxVisibleItems = useAdaptiveMaxVisibleItems(rootRef, adaptive)
+  const adaptiveProfile = useAdaptivePaginationProfile(rootRef, {
+    adaptive,
+    pageCount,
+    ...(siblingCount !== undefined ? { siblingCount } : {}),
+    ...(boundaryCount !== undefined ? { boundaryCount } : {}),
+    ...(maxVisibleItems !== undefined ? { maxVisibleItems } : {}),
+    controlDisplay,
+  })
   const [internalPage, setInternalPage] = React.useState(() =>
     clampPaginationPage(defaultPage, pageCount),
   )
   const resolvedPage = clampPaginationPage(isControlled ? controlledPage : internalPage, pageCount)
-  const resolvedMaxVisibleItems = maxVisibleItems ?? adaptiveMaxVisibleItems
+  const resolvedControlDisplay: PaginationResolvedControlDisplay =
+    adaptive && adaptiveProfile
+      ? adaptiveProfile.controlDisplay
+      : controlDisplay === "icon"
+        ? "icon"
+        : "label"
+  const resolvedMaxVisibleItems =
+    adaptive && adaptiveProfile ? adaptiveProfile.maxVisibleItems : maxVisibleItems
   const rootKit = createPaginationRecipe({
     page: resolvedPage,
     pageCount,
     ...(siblingCount !== undefined ? { siblingCount } : {}),
     ...(boundaryCount !== undefined ? { boundaryCount } : {}),
     ...(resolvedMaxVisibleItems !== undefined ? { maxVisibleItems: resolvedMaxVisibleItems } : {}),
+    controlDisplay: resolvedControlDisplay,
     ...(showPrevNext !== undefined ? { showPrevNext } : {}),
+    ...(showFirstLast !== undefined ? { showFirstLast } : {}),
     ...(disabled !== undefined ? { disabled } : {}),
     ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+    firstLabel,
     previousLabel,
     nextLabel,
+    lastLabel,
+    ...(getItemAriaLabel !== undefined ? { getItemAriaLabel } : {}),
   })
   const listKit = createPaginationListRecipe()
   const listItemKit = createPaginationListItemRecipe()
@@ -87,17 +127,96 @@ export function Pagination(props: PaginationProps): React.ReactElement {
 
   const previousDisabled = disabled || resolvedPage <= 1
   const nextDisabled = disabled || resolvedPage <= 0 || resolvedPage >= pageCount
+  const firstDisabled = disabled || resolvedPage <= 1
+  const lastDisabled = disabled || resolvedPage <= 0 || resolvedPage >= pageCount
 
+  const firstKit = createPaginationControlRecipe({
+    direction: "first",
+    disabled: firstDisabled,
+    label: firstLabel,
+    ...(getItemAriaLabel !== undefined
+      ? {
+          ariaLabel: resolvePaginationItemAriaLabel(getItemAriaLabel, {
+            type: "first",
+            page: 1,
+            selected: false,
+          }),
+        }
+      : {}),
+  })
   const previousKit = createPaginationControlRecipe({
     direction: "previous",
     disabled: previousDisabled,
     label: previousLabel,
+    ...(getItemAriaLabel !== undefined
+      ? {
+          ariaLabel: resolvePaginationItemAriaLabel(getItemAriaLabel, {
+            type: "previous",
+            page: resolvedPage - 1,
+            selected: false,
+          }),
+        }
+      : {}),
   })
   const nextKit = createPaginationControlRecipe({
     direction: "next",
     disabled: nextDisabled,
     label: nextLabel,
+    ...(getItemAriaLabel !== undefined
+      ? {
+          ariaLabel: resolvePaginationItemAriaLabel(getItemAriaLabel, {
+            type: "next",
+            page: resolvedPage + 1,
+            selected: false,
+          }),
+        }
+      : {}),
   })
+  const lastKit = createPaginationControlRecipe({
+    direction: "last",
+    disabled: lastDisabled,
+    label: lastLabel,
+    ...(getItemAriaLabel !== undefined
+      ? {
+          ariaLabel: resolvePaginationItemAriaLabel(getItemAriaLabel, {
+            type: "last",
+            page: pageCount,
+            selected: false,
+          }),
+        }
+      : {}),
+  })
+
+  const renderControl = (
+    direction: PaginationControlDirection,
+    kit: typeof firstKit | typeof previousKit | typeof nextKit | typeof lastKit,
+    controlDisabled: boolean,
+    targetPage: number,
+    label: string,
+    iconName: IconNameType,
+  ) => {
+    const isLeadingIcon = direction === "first" || direction === "previous"
+    const icon = (
+      <span className="mw-pagination__control-icon">
+        <Icon name={iconName} decorative size={12} />
+      </span>
+    )
+
+    return (
+      <button
+        type="button"
+        className={kit.className}
+        aria-label={kit.a11y.ariaLabel}
+        aria-disabled={kit.a11y.ariaDisabled}
+        disabled={controlDisabled}
+        onClick={() => selectPage(targetPage)}
+      >
+        {isLeadingIcon && icon}
+        <span className="mw-pagination__control-label">{label}</span>
+        {!isLeadingIcon && icon}
+      </button>
+    )
+  }
 
   return (
     <nav
@@ -105,82 +224,79 @@ export function Pagination(props: PaginationProps): React.ReactElement {
       ref={rootRef}
       id={id}
       className={rootClassName}
+      style={{ ...rootKit.vars, ...style } as React.CSSProperties}
       aria-label={rootKit.a11y.ariaLabel}
       data-component="pagination"
+      data-control-display={rootKit.controlDisplay}
     >
-      {rootKit.showPrevNext && (
-        <button
-          type="button"
-          className={previousKit.className}
-          aria-label={previousKit.a11y.ariaLabel}
-          aria-disabled={previousKit.a11y.ariaDisabled}
-          disabled={previousDisabled}
-          onClick={() => selectPage(resolvedPage - 1)}
-        >
-          <span className="mw-pagination__control-icon">
-            <Icon name={IconName.ChevronLeft} decorative size={12} />
-          </span>
-          {previousLabel}
-        </button>
-      )}
+      {rootKit.showFirstLast &&
+        renderControl("first", firstKit, firstDisabled, 1, firstLabel, IconName.ChevronsLeft)}
+      {rootKit.showPrevNext &&
+        renderControl(
+          "previous",
+          previousKit,
+          previousDisabled,
+          resolvedPage - 1,
+          previousLabel,
+          IconName.ChevronLeft,
+        )}
       <ul className={listKit.className} role={listKit.a11y.role}>
         {rootKit.items.map((item) => {
-          const itemContent =
-            item.type === "ellipsis"
-              ? (() => {
-                  const ellipsisKit = createPaginationEllipsisRecipe()
-                  return (
-                    <span
-                      className={ellipsisKit.className}
-                      aria-hidden={ellipsisKit.a11y.ariaHidden}
-                    >
-                      ...
-                    </span>
-                  )
-                })()
-              : (() => {
-                  const pageKit = createPaginationPageRecipe({
+          if (item.type !== "page") {
+            const ellipsisKit = createPaginationEllipsisRecipe()
+
+            return (
+              <li key={item.key} className={listItemKit.className}>
+                <span className={ellipsisKit.className} aria-hidden={ellipsisKit.a11y.ariaHidden}>
+                  ...
+                </span>
+              </li>
+            )
+          }
+
+          const pageKit = createPaginationPageRecipe({
+            page: item.page,
+            selected: item.selected,
+            ...(disabled !== undefined ? { disabled } : {}),
+            ...(getItemAriaLabel !== undefined
+              ? {
+                  ariaLabel: resolvePaginationItemAriaLabel(getItemAriaLabel, {
+                    type: "page",
                     page: item.page,
                     selected: item.selected,
-                    ...(disabled !== undefined ? { disabled } : {}),
-                  })
-                  return (
-                    <button
-                      type="button"
-                      className={pageKit.className}
-                      aria-label={pageKit.a11y.ariaLabel}
-                      aria-current={pageKit.a11y.ariaCurrent}
-                      aria-disabled={pageKit.a11y.ariaDisabled}
-                      disabled={disabled}
-                      onClick={() => selectPage(item.page)}
-                    >
-                      {item.page}
-                    </button>
-                  )
-                })()
+                  }),
+                }
+              : {}),
+          })
 
           return (
             <li key={item.key} className={listItemKit.className}>
-              {itemContent}
+              <button
+                type="button"
+                className={pageKit.className}
+                aria-label={pageKit.a11y.ariaLabel}
+                aria-current={pageKit.a11y.ariaCurrent}
+                aria-disabled={pageKit.a11y.ariaDisabled}
+                disabled={disabled}
+                onClick={() => selectPage(item.page)}
+              >
+                {item.page}
+              </button>
             </li>
           )
         })}
       </ul>
-      {rootKit.showPrevNext && (
-        <button
-          type="button"
-          className={nextKit.className}
-          aria-label={nextKit.a11y.ariaLabel}
-          aria-disabled={nextKit.a11y.ariaDisabled}
-          disabled={nextDisabled}
-          onClick={() => selectPage(resolvedPage + 1)}
-        >
-          {nextLabel}
-          <span className="mw-pagination__control-icon">
-            <Icon name={IconName.ChevronRight} decorative size={12} />
-          </span>
-        </button>
-      )}
+      {rootKit.showPrevNext &&
+        renderControl(
+          "next",
+          nextKit,
+          nextDisabled,
+          resolvedPage + 1,
+          nextLabel,
+          IconName.ChevronRight,
+        )}
+      {rootKit.showFirstLast &&
+        renderControl("last", lastKit, lastDisabled, pageCount, lastLabel, IconName.ChevronsRight)}
     </nav>
   )
 }
@@ -190,16 +306,46 @@ function parsePxValue(value: string, fallback: number): number {
   return Number.isFinite(parsed) ? parsed : fallback
 }
 
-function useAdaptiveMaxVisibleItems(
+interface AdaptivePaginationProfileOptions {
+  adaptive: boolean
+  pageCount: number
+  siblingCount?: number
+  boundaryCount?: number
+  maxVisibleItems?: number
+  controlDisplay: PaginationControlDisplay
+}
+
+function resolveControlWidths(
+  controls: HTMLElement[],
+  itemSize: number,
+): { labelControlWidth: number; iconControlWidth: number } {
+  const labelControlWidth = controls.reduce((total, control) => {
+    const icon = control.querySelector<HTMLElement>(".mw-pagination__control-icon")
+    const label = control.querySelector<HTMLElement>(".mw-pagination__control-label")
+    const iconWidth = icon?.getBoundingClientRect().width ?? 0
+    const labelWidth = label?.scrollWidth ?? label?.getBoundingClientRect().width ?? 0
+    const labelGap = iconWidth > 0 && labelWidth > 0 ? 4 : 0
+    const measuredLabelWidth = iconWidth + labelGap + labelWidth
+
+    return total + Math.max(control.getBoundingClientRect().width, measuredLabelWidth)
+  }, 0)
+
+  return {
+    labelControlWidth,
+    iconControlWidth: controls.length * itemSize,
+  }
+}
+
+function useAdaptivePaginationProfile(
   rootRef: React.RefObject<HTMLElement | null>,
-  adaptive: boolean,
-): number | undefined {
-  const [maxVisibleItems, setMaxVisibleItems] = React.useState<number | undefined>(undefined)
+  opts: AdaptivePaginationProfileOptions,
+): PaginationAdaptiveProfile | undefined {
+  const [profile, setProfile] = React.useState<PaginationAdaptiveProfile | undefined>(undefined)
 
   React.useLayoutEffect(() => {
     const root = rootRef.current
-    if (!adaptive || !root || typeof window === "undefined") {
-      setMaxVisibleItems(undefined)
+    if (!opts.adaptive || !root || typeof window === "undefined") {
+      setProfile(undefined)
       return
     }
 
@@ -223,23 +369,32 @@ function useAdaptiveMaxVisibleItems(
           parsePxValue(parentStyles.paddingLeft, 0) -
           parsePxValue(parentStyles.paddingRight, 0)
         if (parentWidth <= 0) {
-          setMaxVisibleItems(undefined)
+          setProfile(undefined)
           return
         }
         const controls = Array.from(root.querySelectorAll<HTMLElement>(".mw-pagination__control"))
-        const controlWidth = controls.reduce(
-          (total, control) => total + control.getBoundingClientRect().width,
-          0,
-        )
-        const controlGaps = controls.length > 0 ? sectionGap * controls.length : 0
-        const availableItemWidth = Math.max(0, parentWidth - controlWidth - controlGaps)
-        const nextMaxVisibleItems = Math.max(
-          1,
-          Math.floor((availableItemWidth + itemGap) / (itemSize + itemGap)),
-        )
+        const { labelControlWidth, iconControlWidth } = resolveControlWidths(controls, itemSize)
+        const nextProfile = resolvePaginationAdaptiveProfile({
+          containerWidth: parentWidth,
+          labelControlWidth,
+          iconControlWidth,
+          controlCount: controls.length,
+          itemSize,
+          itemGap,
+          sectionGap,
+          pageCount: opts.pageCount,
+          ...(opts.siblingCount !== undefined ? { siblingCount: opts.siblingCount } : {}),
+          ...(opts.boundaryCount !== undefined ? { boundaryCount: opts.boundaryCount } : {}),
+          ...(opts.maxVisibleItems !== undefined ? { maxVisibleItems: opts.maxVisibleItems } : {}),
+          controlDisplay: opts.controlDisplay,
+        })
 
-        setMaxVisibleItems((previous) =>
-          previous === nextMaxVisibleItems ? previous : nextMaxVisibleItems,
+        setProfile((previous) =>
+          previous?.controlDisplay === nextProfile.controlDisplay &&
+          previous?.maxVisibleItems === nextProfile.maxVisibleItems &&
+          previous?.reservedItemCount === nextProfile.reservedItemCount
+            ? previous
+            : nextProfile,
         )
       })
     }
@@ -257,7 +412,15 @@ function useAdaptiveMaxVisibleItems(
       resizeObserver?.disconnect()
       window.removeEventListener("resize", measure)
     }
-  }, [adaptive, rootRef])
+  }, [
+    opts.adaptive,
+    opts.boundaryCount,
+    opts.controlDisplay,
+    opts.maxVisibleItems,
+    opts.pageCount,
+    opts.siblingCount,
+    rootRef,
+  ])
 
-  return maxVisibleItems
+  return profile
 }

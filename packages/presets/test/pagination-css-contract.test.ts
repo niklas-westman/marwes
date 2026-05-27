@@ -14,6 +14,8 @@ describe("firstEdition pagination css contract", () => {
     expect(css).toContain("--mw-pagination-radius: 8px;")
     expect(css).toContain("--mw-pagination-gap: 2px;")
     expect(css).toContain("--mw-pagination-section-gap: 12px;")
+    expect(css).toContain("--mw-pagination-list-width: 0px;")
+    expect(css).toContain("min-width: var(--mw-pagination-size);")
   })
 
   it("keeps active page on the primary token with white label fallback", () => {
@@ -31,5 +33,29 @@ describe("firstEdition pagination css contract", () => {
 
     expect(css).toContain(".mw-pagination__control *")
     expect(css).toContain("pointer-events: none;")
+  })
+
+  it("keeps pagination responsive without wrapping controls between rows", () => {
+    const css = readFileSync(paginationCssPath, "utf8")
+
+    expect(css).toContain("flex-wrap: nowrap;")
+    expect(css).toContain("min-width: var(--mw-pagination-list-width);")
+    expect(css).toContain("box-sizing: border-box;")
+    expect(css).toContain(".mw-pagination__control-label")
+    expect(css).toContain("letter-spacing: 0;")
+  })
+
+  it("supports icon-only controls for constrained layouts", () => {
+    const css = readFileSync(paginationCssPath, "utf8")
+
+    expect(css).toContain('.mw-pagination[data-control-display="icon"] .mw-pagination__control')
+    expect(css).toContain("width: var(--mw-pagination-size);")
+    expect(css).toContain("min-width: var(--mw-pagination-size);")
+    expect(css).toContain('.mw-pagination[data-control-display="icon"] .mw-pagination__list')
+    expect(css).toContain("min-width: 0;")
+    expect(css).toContain(
+      '.mw-pagination[data-control-display="icon"] .mw-pagination__control-label',
+    )
+    expect(css).toContain("max-width: 0;")
   })
 })

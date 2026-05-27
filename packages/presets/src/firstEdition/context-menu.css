@@ -19,7 +19,6 @@
   border: 0.5px solid var(--mw-context-menu-border);
   border-radius: var(--mw-context-menu-radius);
   background: var(--mw-context-menu-surface);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   color: var(--mw-context-menu-text);
   font-family: var(--mw-font-primary, inherit);
 }

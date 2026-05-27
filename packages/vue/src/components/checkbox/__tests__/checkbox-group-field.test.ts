@@ -45,6 +45,7 @@ runCheckboxGroupFieldContract("Vue", {
   },
   getByRole: (role, options) => screen.getByRole(role, options),
   getAllByRole: (role) => screen.getAllByRole(role) as HTMLInputElement[],
+  getByText: (text) => screen.getByText(text),
   click: async (element) => {
     const user = userEvent.setup()
     await user.click(element)
@@ -68,7 +69,7 @@ describe("Vue adapter specifics: CheckboxGroupField", () => {
     const options = document.querySelector(
       ".mw-checkbox-group-field__options",
     ) as HTMLElement | null
-    const optionLabel = screen.getByText("Email").closest("p") as HTMLElement | null
+    const optionLabel = screen.getByText("Email")
 
     expect(description).not.toBeNull()
     expect(options).not.toBeNull()
@@ -77,7 +78,7 @@ describe("Vue adapter specifics: CheckboxGroupField", () => {
         ? description.compareDocumentPosition(options) & Node.DOCUMENT_POSITION_FOLLOWING
         : 0,
     ).toBeTruthy()
-    expect(optionLabel).toHaveClass("mw-p--md")
+    expect(optionLabel).toHaveClass("mw-text", "mw-text--label")
   })
 
   it("disables only the flagged option when option.disabled is set", () => {

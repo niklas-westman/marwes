@@ -1,6 +1,6 @@
 import { buildSwitchFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Switch } from "./switch"
 import type { SwitchProps } from "./switch"
 
@@ -68,19 +68,19 @@ export function SwitchField(props: SwitchFieldProps): React.ReactElement {
         />
 
         <span className="mw-switch-field__label" id={labelId}>
-          <Paragraph size="md">{props.label}</Paragraph>
+          <Text variant="label">{props.label}</Text>
         </span>
       </div>
 
       {hasDescription && (
         <div className="mw-switch-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
+          <Text variant="caption">{props.description}</Text>
         </div>
       )}
 
       {hasError && (
         <div className="mw-switch-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </div>

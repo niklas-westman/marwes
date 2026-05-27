@@ -22,7 +22,10 @@ export function runInputFieldContract(adapterName: string, h: InputFieldContract
     it("wires the label to the input", async () => {
       await h.renderInputField({ label: "Email address" })
       const input = h.getByLabelText(/email address/i)
+      const labelTextNode = h.getByText("Email address")
+
       expect(input.tagName).toBe("INPUT")
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
     })
 
     it("connects helper text via aria-describedby", async () => {
@@ -37,6 +40,7 @@ export function runInputFieldContract(adapterName: string, h: InputFieldContract
       expect(helper).not.toBeNull()
       expect(helper?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
+      expect(helperTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(input).not.toHaveAttribute("aria-invalid", "true")
     })
 
@@ -53,6 +57,7 @@ export function runInputFieldContract(adapterName: string, h: InputFieldContract
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
     })
 
     it("treats empty helper/error strings as absent", async () => {

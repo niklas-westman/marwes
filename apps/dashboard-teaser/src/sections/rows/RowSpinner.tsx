@@ -1,4 +1,4 @@
-import { Button, ButtonVariant, Spinner } from "@marwes-ui/react"
+import { Button, ButtonVariant, Spinner, Text, TextVariant } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
@@ -75,7 +75,7 @@ function RowSpinner(): JSX.Element {
   return (
     <ShowcaseRow>
       <LeftCard>
-        <ShowcaseSectionLabel>Spinner</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Spinner</Text>
         <ButtonRow>
           <SpinnerButtonPreview
             variant={ButtonVariant.primary}
@@ -102,7 +102,7 @@ function RowSpinner(): JSX.Element {
         </ButtonRow>
       </LeftCard>
       <RightCard>
-        <ShowcaseSectionLabel>Spinner</ShowcaseSectionLabel>
+        <Text variant={TextVariant.overline}>Spinner</Text>
         <SpinnerRow>
           {VARIANTS.map(({ key, label }) => (
             <SpinnerItem key={key} type="button" onClick={() => setActiveVariant(key)}>
