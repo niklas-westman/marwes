@@ -1,1 +1,2 @@
-export { Text, TypographyText, type TextComponent, type TextProps } from "./text"
+export { Text, TypographyText } from "./text"
+export type { TextComponent, TextProps } from "./text"

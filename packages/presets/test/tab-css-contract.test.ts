@@ -29,6 +29,14 @@ describe("firstEdition tab css contract", () => {
     )
   })
 
+  it("keeps visible tab group labels on the shared text typography contract", () => {
+    const css = readFileSync(tabGroupCssPath, "utf8")
+
+    expect(css).toContain(".mw-tab-group__header .mw-text")
+    expect(css).not.toContain(".mw-tab-group__header .mw-p")
+    expect(css).not.toContain(".mw-tab-group__label .mw-p")
+  })
+
   it("renders focus across the full tab hit area", () => {
     const css = readFileSync(tabCssPath, "utf8")
 

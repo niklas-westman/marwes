@@ -52,7 +52,6 @@ import Avatar from "../lib/components/avatar/Avatar.svelte"
 import AvatarBadge from "../lib/components/avatar/AvatarBadge.svelte"
 import AvatarGroup from "../lib/components/avatar/AvatarGroup.svelte"
 import Badge from "../lib/components/badge/Badge.svelte"
-import BadgeGroup from "../lib/components/badge/BadgeGroup.svelte"
 import NotificationBadge from "../lib/components/badge/NotificationBadge.svelte"
 import PriorityBadge from "../lib/components/badge/PriorityBadge.svelte"
 import StatusBadge from "../lib/components/badge/StatusBadge.svelte"
@@ -93,12 +92,10 @@ import Textarea from "../lib/components/input/Textarea.svelte"
 import Radio from "../lib/components/radio/Radio.svelte"
 import Skeleton from "../lib/components/skeleton/Skeleton.svelte"
 import Slider from "../lib/components/slider/Slider.svelte"
-import SliderField from "../lib/components/slider/SliderField.svelte"
 import ButtonSpinner from "../lib/components/spinner/ButtonSpinner.svelte"
 import EmptyStateSpinner from "../lib/components/spinner/EmptyStateSpinner.svelte"
 import Spinner from "../lib/components/spinner/Spinner.svelte"
 import Switch from "../lib/components/switch/Switch.svelte"
-import TabGroup from "../lib/components/tab/TabGroup.svelte"
 import ErrorToast from "../lib/components/toast/ErrorToast.svelte"
 import InfoToast from "../lib/components/toast/InfoToast.svelte"
 import SuccessToast from "../lib/components/toast/SuccessToast.svelte"
@@ -108,6 +105,7 @@ import WarningToast from "../lib/components/toast/WarningToast.svelte"
 import Tooltip from "../lib/components/tooltip/Tooltip.svelte"
 import TooltipGroup from "../lib/components/tooltip/TooltipGroup.svelte"
 import AccordionFieldContractFixture from "./type-fixtures/AccordionFieldContractFixture.svelte"
+import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
 import CheckboxFieldContractFixture from "./type-fixtures/CheckboxFieldContractFixture.svelte"
 import CheckboxGroupFieldContractFixture from "./type-fixtures/CheckboxGroupFieldContractFixture.svelte"
 import DialogModalContractOpenFixture from "./type-fixtures/DialogModalContractOpenFixture.svelte"
@@ -117,7 +115,9 @@ import InputOtpContractFixture from "./type-fixtures/InputOtpContractFixture.sve
 import RadioGroupFieldContractFixture from "./type-fixtures/RadioGroupFieldContractFixture.svelte"
 import RichTextFieldContractFixture from "./type-fixtures/RichTextFieldContractFixture.svelte"
 import SelectFieldContractFixture from "./type-fixtures/SelectFieldContractFixture.svelte"
+import SliderFieldContractFixture from "./type-fixtures/SliderFieldContractFixture.svelte"
 import SwitchFieldContractFixture from "./type-fixtures/SwitchFieldContractFixture.svelte"
+import TabGroupContractFixture from "./type-fixtures/TabGroupContractFixture.svelte"
 import TextareaFieldContractFixture from "./type-fixtures/TextareaFieldContractFixture.svelte"
 import ToastProviderContractFixture from "./type-fixtures/ToastProviderContractFixture.svelte"
 import TypographyContractFixture from "./type-fixtures/TypographyContractFixture.svelte"
@@ -349,7 +349,7 @@ runBadgeContract("svelte", {
 
 runBadgeGroupContract("svelte", {
   renderBadgeGroup(args = {}) {
-    render(BadgeGroup, {
+    render(BadgeGroupContractFixture, {
       props: {
         label: args.label ?? "Tags",
         children: createRawSnippet(() => ({
@@ -1039,7 +1039,7 @@ runSliderContract("svelte", {
     })
   },
   renderSliderField(args) {
-    render(SliderField, {
+    render(SliderFieldContractFixture, {
       props: {
         label: args.label,
         slider: {
@@ -1124,7 +1124,7 @@ runSwitchContract("svelte", {
 
 runTabContract("svelte", {
   renderTabGroup(args = {}) {
-    render(TabGroup, {
+    render(TabGroupContractFixture, {
       props: {
         ...(args.label !== undefined ? { label: args.label } : {}),
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),

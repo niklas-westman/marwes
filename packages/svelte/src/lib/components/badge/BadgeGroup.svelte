@@ -1,5 +1,6 @@
 <script lang="ts">
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import type { BadgeGroupProps } from "./types.js";
 
   let {
@@ -17,7 +18,7 @@
 
 <fieldset class={mergedClass} aria-labelledby={labelId}>
   <legend class="mw-badge-group__label" id={labelId}>
-    <p class="mw-p mw-p--sm">{label}</p>
+    <Text variant="caption">{label}</Text>
   </legend>
   <div class="mw-badge-group__items">
     {@render children?.()}

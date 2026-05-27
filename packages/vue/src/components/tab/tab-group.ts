@@ -8,6 +8,7 @@ import { type VNodeChild, computed, defineComponent, h, ref, watch } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Tab } from "./tab"
 
 export type TabGroupItem = {
@@ -238,15 +239,15 @@ export const TabGroup = defineComponent(
         [
           hasLabel.value
             ? (() => {
-                const paragraphProps: Record<string, unknown> = { size: "md" }
+                const textProps: Record<string, unknown> = { variant: "label" }
                 const labelId = a11yIds.value.labelId ?? `${id.value}-label`
 
                 if (labelId) {
-                  paragraphProps.id = labelId
+                  textProps.id = labelId
                 }
 
                 return h("div", { class: "mw-tab-group__header" }, [
-                  h(Paragraph, paragraphProps, {
+                  h(Text, textProps, {
                     default: () => toChildren(props.label),
                   }),
                 ])

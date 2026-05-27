@@ -28,6 +28,11 @@ describe("badge.css figma sync contract", () => {
     expect(css).toContain("letter-spacing: 0;")
   })
 
+  it("keeps badge group labels on the shared text typography contract", () => {
+    expect(css).toContain(".mw-badge-group__label .mw-text")
+    expect(css).not.toContain(".mw-badge-group__label .mw-p")
+  })
+
   it("seeds light-mode badge colors from semantic theme variables", () => {
     expect(css).toContain(
       ".mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-subtle, #f5f5f5);\n  --mw-badge-border: var(--mw-color-border-subtle, #d8d8d8);\n  --mw-badge-label: var(--mw-color-text-muted, #595959);\n}",

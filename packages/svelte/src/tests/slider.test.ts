@@ -3,12 +3,10 @@
  * class, value binding, min/max, and disabled state.
  */
 import { fireEvent, render } from "@testing-library/svelte"
-import { describe, expect, it, vi } from "vitest"
-import BrightnessSlider from "../lib/components/slider/BrightnessSlider.svelte"
-import RadiusSlider from "../lib/components/slider/RadiusSlider.svelte"
+import { describe, expect, it } from "vitest"
 import Slider from "../lib/components/slider/Slider.svelte"
-import SliderField from "../lib/components/slider/SliderField.svelte"
-import VolumeSlider from "../lib/components/slider/VolumeSlider.svelte"
+import SliderFieldContractFixture from "./type-fixtures/SliderFieldContractFixture.svelte"
+import SliderPurposeFixture from "./type-fixtures/SliderPurposeFixture.svelte"
 
 describe("Slider", () => {
   it("renders an input with type range", () => {
@@ -49,7 +47,7 @@ describe("Slider", () => {
 
 describe("SliderField", () => {
   it("renders with a label", () => {
-    const { container } = render(SliderField, {
+    const { container } = render(SliderFieldContractFixture, {
       props: { label: "Volume" },
     })
     const label = container.querySelector(".mw-slider-field__label")
@@ -57,7 +55,7 @@ describe("SliderField", () => {
   })
 
   it("renders a range input", () => {
-    const { container } = render(SliderField, {
+    const { container } = render(SliderFieldContractFixture, {
       props: { label: "Volume" },
     })
     const input = container.querySelector('input[type="range"]')
@@ -65,14 +63,14 @@ describe("SliderField", () => {
   })
 
   it("shows helper text", () => {
-    const { container } = render(SliderField, {
+    const { container } = render(SliderFieldContractFixture, {
       props: { label: "Volume", helperText: "Drag to adjust" },
     })
     expect(container.textContent).toContain("Drag to adjust")
   })
 
   it("renders edge value labels from the slider bounds", () => {
-    const { container } = render(SliderField, {
+    const { container } = render(SliderFieldContractFixture, {
       props: { label: "Radius", slider: { min: 0, max: 48 }, value: 24 },
     })
 
@@ -83,7 +81,7 @@ describe("SliderField", () => {
   })
 
   it("supports custom edge labels and inline label position", () => {
-    const { container } = render(SliderField, {
+    const { container } = render(SliderFieldContractFixture, {
       props: {
         label: "Temperature",
         minValueLabel: "Cold",
@@ -100,7 +98,7 @@ describe("SliderField", () => {
   })
 
   it("shows error text", () => {
-    const { container } = render(SliderField, {
+    const { container } = render(SliderFieldContractFixture, {
       props: { label: "Volume", error: "Too loud" },
     })
     expect(container.textContent).toContain("Too loud")
@@ -109,7 +107,9 @@ describe("SliderField", () => {
 
 describe("Purpose sliders", () => {
   it("BrightnessSlider renders brightness semantics, top values, and the current tooltip", () => {
-    const { container } = render(BrightnessSlider, { props: { value: 80 } })
+    const { container } = render(SliderPurposeFixture, {
+      props: { kind: "brightness", value: 80 },
+    })
     const slider = container.querySelector('input[type="range"]') as HTMLInputElement
 
     expect(container.querySelector('[data-purpose="brightness"]')).not.toBeNull()
@@ -122,8 +122,8 @@ describe("Purpose sliders", () => {
   })
 
   it("VolumeSlider supports vertical orientation directly", () => {
-    const { container } = render(VolumeSlider, {
-      props: { value: 45, orientation: "vertical" },
+    const { container } = render(SliderPurposeFixture, {
+      props: { kind: "volume", value: 45, orientation: "vertical" },
     })
     const slider = container.querySelector('input[type="range"]') as HTMLInputElement
     const shell = container.querySelector('[data-component="slider"]')
@@ -134,7 +134,9 @@ describe("Purpose sliders", () => {
   })
 
   it("RadiusSlider uses radius-specific bounds and labels", () => {
-    const { container } = render(RadiusSlider, { props: { value: 24 } })
+    const { container } = render(SliderPurposeFixture, {
+      props: { kind: "radius", value: 24 },
+    })
     const slider = container.querySelector('input[type="range"]') as HTMLInputElement
 
     expect(container.querySelector('[data-purpose="radius"]')).not.toBeNull()

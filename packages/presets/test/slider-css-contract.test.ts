@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest"
 
 const pkgDir = resolve(fileURLToPath(new URL("..", import.meta.url)))
 const sliderCssPath = resolve(pkgDir, "src/firstEdition/slider.css")
+const sliderFieldCssPath = resolve(pkgDir, "src/firstEdition/molecules/slider-field.css")
 
 describe("firstEdition slider css contract", () => {
   it("keeps the tooltip absolutely aligned two pixels from the touch area", () => {
@@ -28,5 +29,18 @@ describe("firstEdition slider css contract", () => {
     expect(css).not.toContain(".mw-slider__native:focus-visible ~ .mw-slider__tooltip")
     expect(css).not.toContain(".mw-slider--state-hover .mw-slider__tooltip")
     expect(css).not.toContain(".mw-slider--state-focus .mw-slider__tooltip")
+  })
+
+  it("targets text typography classes for slider field labels, descriptions, edge values, and errors", () => {
+    const css = readFileSync(sliderFieldCssPath, "utf8")
+
+    expect(css).toContain(".mw-slider-field__label .mw-text")
+    expect(css).toContain(".mw-slider-field__description .mw-text")
+    expect(css).toContain(".mw-slider-field__edge-value .mw-text")
+    expect(css).toContain(".mw-slider-field__error .mw-text")
+    expect(css).toContain(".mw-slider-field--invalid .mw-slider-field__label .mw-text")
+    expect(css).toContain(".mw-slider-field--invalid .mw-slider-field__error .mw-text")
+    expect(css).not.toContain(".mw-slider-field--invalid .mw-slider-field__label .mw-p")
+    expect(css).not.toContain(".mw-slider-field--invalid .mw-slider-field__error .mw-p")
   })
 })

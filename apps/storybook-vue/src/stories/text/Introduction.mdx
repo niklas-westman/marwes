@@ -1,0 +1,53 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Text/Introduction" />
+
+# Text Component
+
+Marwes provides `Text` as the atom-level typography primitive for labels,
+captions, overlines, microcopy, and other non-paragraph text.
+
+## Component Architecture
+
+```
+Text (Atom)
+```
+
+## Recommended Usage
+
+```vue
+<script setup lang="ts">
+import { Text } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <Text variant="label" as="label">Field label</Text>
+  <Text variant="caption">Helper text</Text>
+</template>
+```
+
+## Usage Notes
+
+- `variant="caption"` is the default for compact supporting text.
+- Use `label` for field and option labels.
+- Use `label-small` for compact option descriptions when the design calls for it.
+- Use `as` to choose the semantic element without changing the visual variant.
+
+## Accessibility Notes
+
+**Text does not create document structure.** Use `Heading` for headings and `Paragraph`
+for body copy. `Text` is for label/caption-scale text where the surrounding component owns
+the semantic relationship.
+
+**Choose semantics separately from visual style.** A label can render as `label`, a caption
+can render as `small`, and inline metadata can stay as `span`.
+
+## Component Reference
+
+**`Text`** - Non-paragraph typography atom for display, label, label-small,
+caption, overline, and micro variants.
+
+## Story Coverage
+
+- Variant stories for `label`, `label-small`, `caption`, `overline`, and `micro`
+- All-variants comparison

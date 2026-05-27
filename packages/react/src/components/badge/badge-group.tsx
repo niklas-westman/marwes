@@ -20,7 +20,7 @@
  */
 
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 
 export interface BadgeGroupProps {
   /** Visible label for the badge group. */
@@ -53,7 +53,7 @@ export function BadgeGroup(props: BadgeGroupProps): React.ReactElement {
   return (
     <fieldset className={className} aria-labelledby={labelId} {...props.dataAttributes}>
       <legend className="mw-badge-group__label" id={labelId}>
-        <Paragraph size="sm">{props.label}</Paragraph>
+        <Text variant="caption">{props.label}</Text>
       </legend>
       <div className="mw-badge-group__items">{props.children}</div>
     </fieldset>

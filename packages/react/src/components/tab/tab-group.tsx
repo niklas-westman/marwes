@@ -6,6 +6,7 @@ import {
 } from "@marwes-ui/core"
 import * as React from "react"
 import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Tab } from "./tab"
 
 export interface TabGroupItem {
@@ -192,9 +193,9 @@ export function TabGroup(props: TabGroupProps): React.ReactElement {
     <section className={cx("mw-tab-group", props.className)} {...props.dataAttributes}>
       {hasLabel && (
         <div className="mw-tab-group__header">
-          <Paragraph size="md" id={a11yIds.labelId ?? `${id}-label`}>
+          <Text variant="label" id={a11yIds.labelId ?? `${id}-label`}>
             {props.label}
-          </Paragraph>
+          </Text>
         </div>
       )}
 

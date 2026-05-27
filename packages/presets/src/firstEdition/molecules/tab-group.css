@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+.mw-tab-group__header .mw-text {
+  color: inherit;
+}
+
 .mw-tab-group__list {
   display: inline-flex;
   align-items: stretch;

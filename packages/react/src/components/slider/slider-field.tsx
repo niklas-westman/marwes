@@ -1,6 +1,6 @@
 import { buildSliderFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Slider } from "./slider"
 import type { SliderProps } from "./slider"
 
@@ -80,7 +80,7 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
 
   const renderEdgeValue = (position: "min" | "max", value: React.ReactNode): React.ReactElement => (
     <span className={`mw-slider-field__edge-value mw-slider-field__edge-value--${position}`}>
-      <Paragraph size="sm">{value}</Paragraph>
+      <Text variant="caption">{value}</Text>
     </span>
   )
 
@@ -88,13 +88,13 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
     <div className={wrapperClass} data-label-position={labelPosition} {...props.dataAttributes}>
       <div className="mw-slider-field__header">
         <div className="mw-slider-field__label" id={labelId}>
-          <Paragraph size="md">{props.label}</Paragraph>
+          <Text variant="label">{props.label}</Text>
         </div>
       </div>
 
       {hasDescription && (
         <div className="mw-slider-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
+          <Text variant="caption">{props.description}</Text>
         </div>
       )}
 
@@ -128,7 +128,7 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
 
       {hasError && (
         <div className="mw-slider-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </div>

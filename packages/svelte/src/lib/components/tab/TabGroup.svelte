@@ -7,6 +7,7 @@
   } from "@marwes-ui/core";
   import type { TabGroupItemState } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import type { TabGroupProps } from "./types.js";
 
   let {
@@ -32,6 +33,7 @@
   const hasLabel = $derived(!!label);
 
   const a11yIds = $derived(buildTabGroupA11yIds({ id: groupId, itemValues, hasLabel }));
+  const labelId = $derived(a11yIds.labelId ?? `${groupId}-label`);
 
   let internalActive = $state<string | undefined>(undefined);
 
@@ -76,8 +78,8 @@
 
 <div class={mergedClass} {...dataAttributes}>
   {#if label}
-    <div class="mw-tab-group__label" id={a11yIds.labelId}>
-      <p class="mw-p mw-p--sm">{label}</p>
+    <div class="mw-tab-group__header">
+      <Text variant="label" id={labelId}>{label}</Text>
     </div>
   {/if}
 
@@ -85,7 +87,7 @@
     class="mw-tab-group__tablist"
     role="tablist"
     id={a11yIds.tabListId}
-    aria-labelledby={a11yIds.labelId}
+    aria-labelledby={label ? labelId : undefined}
     aria-label={!label ? ariaLabel : undefined}
     onkeydown={handleKeydown}
   >

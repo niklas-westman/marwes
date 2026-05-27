@@ -132,11 +132,14 @@ export function runSliderContract(adapterName: string, harness: SliderContractHa
       })
 
       const slider = harness.getByRole("slider", { name: /volume/i })
+      const labelTextNode = harness.getByText("Volume")
       const descriptionTextNode = harness.getByText("Adjust the output level.")
       const description = harness.queryDescriptionRegion()
       const describedBy = slider.getAttribute("aria-describedby") ?? ""
 
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
       expect(descriptionTextNode).toBeInTheDocument()
+      expect(descriptionTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(slider).toHaveAttribute("aria-labelledby")
       expect(slider).not.toHaveAttribute("aria-label", "Volume")
       expect(description).not.toBeNull()
@@ -152,8 +155,13 @@ export function runSliderContract(adapterName: string, harness: SliderContractHa
         defaultValue: 24,
       })
 
-      expect(harness.getByText("0").closest(".mw-slider-field__edge-value")).not.toBeNull()
-      expect(harness.getByText("48").closest(".mw-slider-field__edge-value")).not.toBeNull()
+      const minTextNode = harness.getByText("0")
+      const maxTextNode = harness.getByText("48")
+
+      expect(minTextNode).toHaveClass("mw-text", "mw-text--caption")
+      expect(maxTextNode).toHaveClass("mw-text", "mw-text--caption")
+      expect(minTextNode.closest(".mw-slider-field__edge-value")).not.toBeNull()
+      expect(maxTextNode.closest(".mw-slider-field__edge-value")).not.toBeNull()
     })
 
     it("merges external describedBy with error text and marks the slider invalid", async () => {
@@ -170,6 +178,7 @@ export function runSliderContract(adapterName: string, harness: SliderContractHa
       const describedBy = slider.getAttribute("aria-describedby") ?? ""
 
       expect(errorTextNode).toBeInTheDocument()
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(slider).toHaveAttribute("aria-invalid", "true")
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()

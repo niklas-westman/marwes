@@ -47,10 +47,13 @@ export function runTabContract(adapterName: string, harness: TabContractHarness)
       })
 
       const tablist = harness.getByRole("tablist", { name: /account sections/i })
+      const labelId = tablist.getAttribute("aria-labelledby")
+      const labelElement = labelId ? document.getElementById(labelId) : null
 
       expect(tablist).toBeInTheDocument()
       expect(tablist).toHaveAttribute("aria-labelledby")
       expect(tablist).not.toHaveAttribute("aria-label")
+      expect(labelElement).toHaveClass("mw-text", "mw-text--label")
     })
 
     it("falls back to aria-label when no visible label is provided", async () => {

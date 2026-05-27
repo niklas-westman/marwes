@@ -5,22 +5,22 @@
  */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
-import BadgeGroup from "../lib/components/badge/BadgeGroup.svelte"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import ConfirmButton from "../lib/components/button/ConfirmButton.svelte"
 import DestructiveButton from "../lib/components/button/DestructiveButton.svelte"
 import PrimaryButton from "../lib/components/button/PrimaryButton.svelte"
 import SecondaryButton from "../lib/components/button/SecondaryButton.svelte"
+import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
 
 describe("BadgeGroup", () => {
   it("includes mw-badge-group class", () => {
-    const { container } = render(BadgeGroup, { props: { label: "Tags" } })
+    const { container } = render(BadgeGroupContractFixture, { props: { label: "Tags" } })
     const el = container.querySelector(".mw-badge-group")
     expect(el).not.toBeNull()
   })
 
   it("renders a fieldset with legend", () => {
-    const { container } = render(BadgeGroup, { props: { label: "Tags" } })
+    const { container } = render(BadgeGroupContractFixture, { props: { label: "Tags" } })
     const legend = container.querySelector("legend")
     expect(legend?.textContent).toContain("Tags")
   })

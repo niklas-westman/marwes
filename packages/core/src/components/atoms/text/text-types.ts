@@ -1,6 +1,6 @@
 /**
  * Core types for non-heading text typography.
- * - Use Text for display/label/caption/overline/micro styles that should not create document outline.
+ * - Use Text for display/label/caption/overline/micro styles that should not create heading hierarchy.
  */
 
 import type { CssVars } from "../../../shared/css-vars"
