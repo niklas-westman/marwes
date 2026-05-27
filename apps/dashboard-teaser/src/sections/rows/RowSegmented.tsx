@@ -3,7 +3,7 @@ import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow, ShowcaseSectionLabel, ShowcaseStack } from "./shared"
+import { FlexCard, ShowcaseRow, ShowcaseStack } from "./shared"
 
 const ItemCard = styled(FlexCard)``
 

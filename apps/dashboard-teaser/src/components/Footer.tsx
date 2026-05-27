@@ -1,3 +1,4 @@
+import { Text, TextVariant } from "@marwes-ui/react"
 import styled from "styled-components"
 
 const FooterContainer = styled.footer`
@@ -12,10 +13,7 @@ const FooterContainer = styled.footer`
   }
 `
 
-const FooterText = styled.span`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: ${({ theme }) => theme.typography.paragraph.sm.fontSize};
-  font-weight: 400;
+const FooterText = styled(Text).attrs({ variant: TextVariant.caption })`
   color: ${({ theme }) => theme.color.text};
 `
 

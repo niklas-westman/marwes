@@ -1,9 +1,18 @@
-import { SegmentedControl } from "@marwes-ui/react"
+import {
+  Button,
+  ButtonVariant,
+  IconName,
+  Input,
+  SegmentedControl,
+  Text,
+  TextVariant,
+  Textarea,
+} from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { cardShellStyles, dashboardRadius, sectionLabelStyles } from "../styles/theme-utils"
+import { cardShellStyles } from "../styles/theme-utils"
 
 const PanelContainer = styled.div`
   width: 25rem;
@@ -23,8 +32,7 @@ const PanelContainer = styled.div`
   }
 `
 
-const PanelTitle = styled.h2`
-  ${sectionLabelStyles}
+const PanelTitle = styled(Text).attrs({ variant: TextVariant.overline })`
   color: ${({ theme }) => theme.color.text};
 `
 
@@ -38,8 +46,7 @@ const FrameworkSelector = styled(SegmentedControl)`
   width: 100%;
 `
 
-const InputLabel = styled.span`
-  ${sectionLabelStyles}
+const InputLabel = styled(Text).attrs({ variant: TextVariant.label })`
   color: ${({ theme }) => theme.color.text};
 `
 
@@ -49,72 +56,31 @@ const FieldRow = styled.div<{ $align?: "center" | "flex-start" }>`
   gap: ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
 `
 
-const TextField = styled.div`
+const CommandInput = styled(Input)`
   flex: 1;
-  height: ${({ theme }) => theme.spacing.sp40};
-  display: flex;
-  align-items: center;
-  padding: 0 ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
-  border-radius: ${({ theme }) => dashboardRadius(theme, 2)};
-  border: 0.0625rem solid ${({ theme }) => theme.color.border};
+  width: 100%;
+  min-width: 0;
   font-family: ${({ theme }) => theme.font.mono};
-  font-size: 0.8125rem;
-  color: ${({ theme }) => theme.color.text};
+  cursor: text;
 `
 
-const TextAreaField = styled.div`
+const PromptTextarea = styled(Textarea)`
   flex: 1;
+  width: 100%;
+  min-width: 0;
   min-height: ${({ theme }) => `calc(${theme.spacing.sp80} + ${theme.spacing.sp24})`};
-  display: flex;
-  align-items: flex-start;
-  padding: ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
-  border-radius: ${({ theme }) => dashboardRadius(theme, 2)};
-  border: 0.0625rem solid ${({ theme }) => theme.color.border};
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: 0.8125rem;
-  line-height: ${({ theme }) => theme.typography.paragraph.sm.lineHeight};
-  color: ${({ theme }) => theme.color.text};
-  white-space: pre-wrap;
+  cursor: text;
 `
 
-const CopyButton = styled.button<{ $offset?: boolean }>`
+const CopyButton = styled(Button)<{ $offset?: boolean }>`
+  && {
   width: ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
   height: ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
   flex-shrink: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.color.textMuted};
   padding: 0;
   margin-top: ${(p) => (p.$offset ? `calc(${p.theme.spacing.sp8} + ${p.theme.spacing.sp4})` : "0")};
-  transition: color 0.15s;
-
-  &:hover {
-    color: ${({ theme }) => theme.color.text};
   }
 `
-
-function CopyIcon(): JSX.Element {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-    </svg>
-  )
-}
 
 function ReactIcon(): JSX.Element {
   return (
@@ -207,20 +173,37 @@ function InstallationPanel(): JSX.Element {
       <InputSection>
         <InputLabel>Manually install</InputLabel>
         <FieldRow>
-          <TextField>{INSTALL_COMMANDS[activeTab]}</TextField>
-          <CopyButton type="button" title="Copy to clipboard">
-            <CopyIcon />
-          </CopyButton>
+          <CommandInput
+            value={INSTALL_COMMANDS[activeTab]}
+            readOnly
+            ariaLabel="Manual install command"
+          />
+          <CopyButton
+            variant={ButtonVariant.text}
+            iconOnly
+            iconRight={IconName.Copy}
+            ariaLabel="Copy manual install command"
+          />
         </FieldRow>
       </InputSection>
 
       <InputSection>
         <InputLabel>Install with AI</InputLabel>
         <FieldRow $align="flex-start">
-          <TextAreaField>{AI_PROMPTS[activeTab]}</TextAreaField>
-          <CopyButton type="button" title="Copy to clipboard" $offset>
-            <CopyIcon />
-          </CopyButton>
+          <PromptTextarea
+            value={AI_PROMPTS[activeTab]}
+            readOnly
+            resize="none"
+            rows={5}
+            ariaLabel="AI install prompt"
+          />
+          <CopyButton
+            variant={ButtonVariant.text}
+            iconOnly
+            iconRight={IconName.Copy}
+            ariaLabel="Copy AI install prompt"
+            $offset
+          />
         </FieldRow>
       </InputSection>
     </PanelContainer>

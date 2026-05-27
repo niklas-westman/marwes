@@ -2,7 +2,7 @@ import { Button, ButtonVariant, Spinner, Text, TextVariant } from "@marwes-ui/re
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow, ShowcaseSectionLabel } from "./shared"
+import { FlexCard, ShowcaseRow } from "./shared"
 
 const LeftCard = styled(FlexCard)`
   max-width: 20.0625rem;
@@ -35,9 +35,7 @@ const SpinnerItem = styled.button`
   }
 `
 
-const SpinnerLabel = styled.span`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: 0.6875rem;
+const SpinnerLabel = styled(Text).attrs({ variant: TextVariant.caption })`
   color: ${({ theme }) => theme.color.textMuted};
 `
 

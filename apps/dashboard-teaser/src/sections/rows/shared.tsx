@@ -1,12 +1,7 @@
 import styled from "styled-components"
 
-import { Text } from "@marwes-ui/react"
-import {
-  cardShellStyles,
-  compactLabelStyles,
-  dashboardRowStyles,
-  sectionLabelStyles,
-} from "../../styles/theme-utils"
+import { Text, TextVariant } from "@marwes-ui/react"
+import { cardShellStyles, dashboardRowStyles } from "../../styles/theme-utils"
 
 type ShowcaseCardSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 type ShowcaseTabletSpan = 1 | 2
@@ -88,34 +83,18 @@ const ShowcaseCard = styled(Card)<{
   }
 `
 
-const CardTitle = styled.h3`
-  ${sectionLabelStyles}
+const CardTitle = styled(Text).attrs({ variant: TextVariant.label })`
   font-weight: 600;
   color: ${({ theme }) => theme.color.textMuted};
 `
 
-const CardSubtitle = styled.span`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: 0.6875rem;
-  font-weight: 400;
-  color: ${({ theme }) => theme.color.textMuted};
-`
-
-const ShowcaseSectionLabel = styled(Text)`
-  ${sectionLabelStyles}
-  color: ${({ theme }) => theme.color.textMuted};
-`
-
-const ComponentLabel = styled.span`
-  ${compactLabelStyles}
+const ShowcaseSectionLabel = styled(Text).attrs({ variant: TextVariant.overline })`
   color: ${({ theme }) => theme.color.textMuted};
 `
 
 export {
   Card,
-  CardSubtitle,
   CardTitle,
-  ComponentLabel,
   FlexCard,
   ShowcaseCard,
   ShowcaseGrid,

@@ -9,20 +9,6 @@ function responsiveShellPadding(theme: DefaultTheme): string {
   return `clamp(${theme.spacing.sp16}, 4vw, ${theme.spacing.sp72})`
 }
 
-const sectionLabelStyles = css`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.03125rem;
-`
-
-const compactLabelStyles = css`
-  font-family: ${({ theme }) => theme.font.primary};
-  font-size: 0.75rem;
-  font-weight: 500;
-`
-
 const cardShellStyles = css`
   background: ${({ theme }) => theme.color.surfaceElevated};
   border: 0.0625rem solid ${({ theme }) => theme.color.border};
@@ -40,11 +26,4 @@ const dashboardRowStyles = css`
   }
 `
 
-export {
-  cardShellStyles,
-  compactLabelStyles,
-  dashboardRadius,
-  dashboardRowStyles,
-  responsiveShellPadding,
-  sectionLabelStyles,
-}
+export { cardShellStyles, dashboardRadius, dashboardRowStyles, responsiveShellPadding }
