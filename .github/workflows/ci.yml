@@ -92,6 +92,8 @@ jobs:
             command: pnpm -r typecheck && pnpm test:typecheck:contracts
           - name: package tests
             command: pnpm test:packages
+          - name: design contracts
+            command: pnpm registry:check && pnpm colors:check && pnpm --filter @marwes-ui/presets test
           - name: package build
             command: pnpm build:packages
           - name: app build
