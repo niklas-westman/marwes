@@ -10,8 +10,8 @@
  */
 
 .mw-banner {
-  --mw-banner-surface: var(--mw-color-surface, #ffffff);
-  --mw-banner-border: var(--mw-color-border, #000000);
+  --mw-banner-surface: var(--mw-color-surface-primary, #ffffff);
+  --mw-banner-border: var(--mw-color-border-low, #000000);
   --mw-banner-icon: var(--mw-color-text-muted, #595959);
   --mw-banner-text: var(--mw-color-text, #141414);
 
@@ -125,7 +125,7 @@
 .mw-banner--info {
   --mw-banner-surface: var(--mw-color-status-info-background, #eeeeff);
   --mw-banner-border: var(--mw-color-status-info-border, #ababfd);
-  --mw-banner-icon: var(--mw-color-info-hover, #2527ca);
+  --mw-banner-icon: var(--mw-color-status-info-icon, #2527ca);
   --mw-banner-text: var(--mw-color-text, #141414);
 }
 

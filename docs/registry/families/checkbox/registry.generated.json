@@ -107,20 +107,16 @@
       ".figma/marwes/pages/-checkbox/component-container_1369-4657.json",
       ".figma/marwes/pages/-checkbox/component-container_1369-6165.json",
       ".figma/marwes/pages/-checkbox/-checkbox_1369-4700.json",
-      ".figma/marwes/pages/-checkbox/-checkbox-dark_1369-4905.json",
-      ".figma/marwes/pages/-checkbox/checkbox_1893-32830.json",
-      ".figma/marwes/pages/-checkbox/checkbox_1893-32839.json",
-      ".figma/marwes/pages/cover/checkbox-group_1825-30425.json"
+      ".figma/marwes/pages/-checkbox/-checkbox-dark_2542-28177.json"
     ],
     "nodeReferences": {
       "checkboxComponentSet": "1369:4628",
       "checkboxFieldComponentSet": "1364:5566",
       "checkboxGroupComponent": "1369:4673",
       "checkboxLightFrame": "1369:4700",
-      "checkboxDarkFrame": "1369:4905",
+      "checkboxDarkFrame": "2542:28177",
       "checkboxComponentContainer": "1369:4657",
-      "checkboxGroupComponentContainer": "1369:6165",
-      "checkboxGroupCoverFrame": "1825:30425"
+      "checkboxGroupComponentContainer": "1369:6165"
     },
     "figmaTokens": [
       "Checkbox/Surface",

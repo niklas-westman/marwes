@@ -83,13 +83,7 @@
       "contextMenuDarkFrame": "1574:24160",
       "contextMenuContainer": "2967:6148"
     },
-    "figmaTokens": [
-      "context-menu/surface",
-      "context-menu/border",
-      "context-menu/divider",
-      "context-menu/text",
-      "context-menu/icon"
-    ],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["default", "grouped", "quick-actions"],
       "interactionStates": ["light", "dark", "disabled", "destructive", "divider"]

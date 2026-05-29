@@ -9,7 +9,7 @@
   height: var(--mw-density-height);
   padding: 0 var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
-  border: 1px solid var(--mw-color-border);
+  border: 1px solid var(--mw-color-border-low);
   background: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);

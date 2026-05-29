@@ -39,6 +39,7 @@ export interface ResolvedTheme {
     textBrand: string
     textLink: string
     iconMuted: string
+    borderLow: string
     border: string
     borderSubtle: string
     borderStrong: string
@@ -122,7 +123,7 @@ function textTypographyStyleVars(
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 146 entries total. `variant` is excluded — it is deprecated.
+ * Returns 147 entries total. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -143,7 +144,7 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-secondary-border": color.secondary.border,
     "--mw-color-secondary-border-disabled": color.secondary.borderDisabled,
 
-    // Surface / semantic neutrals (19)
+    // Surface / semantic neutrals (20)
     "--mw-color-background": color.background,
     "--mw-color-surface": color.surface,
     "--mw-color-surface-primary": color.surfacePrimary,
@@ -160,6 +161,7 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-text-brand": color.textBrand,
     "--mw-color-text-link": color.textLink,
     "--mw-color-icon-muted": color.iconMuted,
+    "--mw-color-border-low": color.borderLow,
     "--mw-color-border": color.border,
     "--mw-color-border-subtle": color.borderSubtle,
     "--mw-color-border-strong": color.borderStrong,

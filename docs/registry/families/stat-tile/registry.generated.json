@@ -70,24 +70,14 @@
       ".figma/marwes/components/_index.json",
       ".figma/marwes/manifest.json",
       ".figma/marwes/README.md",
-      ".figma/marwes/pages/-v2-stat-tile/README.md"
+      ".figma/marwes/pages/-stat-tile/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json",
-      ".figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6920.json",
-      ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27384.json",
-      ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27391.json",
-      ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27405.json",
-      ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27412.json",
-      ".figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json"
+      ".figma/marwes/pages/-stat-tile/-badge_3008-4750.json",
+      ".figma/marwes/pages/-stat-tile/-badge-dark_3008-4890.json"
     ],
     "nodeReferences": {
       "statTileComponent": "1411:6857",
-      "statTileNeutralInstance": "1411:6920",
-      "statTileBrandInstance": "2512:27384",
-      "statTileSuccessInstance": "2512:27391",
-      "statTileWarningInstance": "2512:27405",
-      "statTileDangerInstance": "2512:27412",
       "statTileTrendComponentSet": "2695:25437"
     },
     "figmaTokens": [],

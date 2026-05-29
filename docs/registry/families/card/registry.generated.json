@@ -94,15 +94,13 @@
     "pageReferences": [
       ".figma/marwes/pages/-card/-card_1364-11556.json",
       ".figma/marwes/pages/-card/component-container_1371-13326.json",
-      ".figma/marwes/pages/-card/-card-dark_1368-5891.json",
-      ".figma/marwes/pages/cover/card_1825-30426.json"
+      ".figma/marwes/pages/-card/-card-dark_1368-5891.json"
     ],
     "nodeReferences": {
       "cardComponent": "1364:7718",
       "cardLightFrame": "1364:11556",
       "cardDarkFrame": "1368:5891",
-      "cardComponentContainer": "1371:13326",
-      "cardCoverFrame": "1825:30426"
+      "cardComponentContainer": "1371:13326"
     },
     "figmaTokens": ["card/surface", "card/border", "card/title", "card/body"],
     "figmaStates": {

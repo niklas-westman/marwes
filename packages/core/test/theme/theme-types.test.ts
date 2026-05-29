@@ -89,6 +89,7 @@ describe("ThemeInputColor", () => {
       textSubtle: "#595959",
       textLink: "#2527CA",
       iconMuted: "#A3A3A3",
+      borderLow: "#00000026",
       borderStrong: "#A3A3A3",
       focus: "#2F31FC",
     }
@@ -99,6 +100,7 @@ describe("ThemeInputColor", () => {
     expect(color.textSubtle).toBe("#595959")
     expect(color.textLink).toBe("#2527CA")
     expect(color.iconMuted).toBe("#A3A3A3")
+    expect(color.borderLow).toBe("#00000026")
     expect(color.borderStrong).toBe("#A3A3A3")
   })
 })

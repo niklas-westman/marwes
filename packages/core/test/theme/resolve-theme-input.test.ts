@@ -73,6 +73,11 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({ mode: ThemeMode.dark }).color.iconMuted).toBe("#595959")
   })
 
+  it("default low border follows the source alpha border token", () => {
+    expect(resolveThemeInput({}).color.borderLow).toBe("#00000026")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.borderLow).toBe("#FFFFFF26")
+  })
+
   it("default surfaceBrand follows the source brand surface token", () => {
     expect(resolveThemeInput({}).color.surfaceBrand).toBe("#EEEEFF")
     expect(resolveThemeInput({ mode: ThemeMode.dark }).color.surfaceBrand).toBe("#090A32")
@@ -202,6 +207,12 @@ describe("resolveThemeInput — surface overrides", () => {
   it("borderStrong override", () => {
     expect(resolveThemeInput({ color: { borderStrong: "#101010" } }).color.borderStrong).toBe(
       "#101010",
+    )
+  })
+
+  it("borderLow override", () => {
+    expect(resolveThemeInput({ color: { borderLow: "#0000001A" } }).color.borderLow).toBe(
+      "#0000001A",
     )
   })
 })

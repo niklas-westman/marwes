@@ -33,7 +33,7 @@
   --mw-accordion-surface: var(--mw-color-surface-primary);
   --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
   --mw-accordion-surface-pressed: var(--mw-color-border-subtle);
-  --mw-accordion-border: var(--mw-color-border-subtle);
+  --mw-accordion-border: var(--mw-color-border-low);
   --mw-accordion-focus-border: var(--mw-color-focus, #2f31fc);
   --mw-accordion-title-disabled: var(--mw-color-text-disabled);
   --mw-accordion-icon-disabled: var(--mw-color-text-disabled);
@@ -125,6 +125,10 @@
   cursor: not-allowed;
 }
 
+.mw-accordion--error .mw-accordion__title {
+  color: var(--mw-color-status-error-text);
+}
+
 .mw-theme--dark .mw-accordion {
   --mw-accordion-title: var(--mw-color-text);
   --mw-accordion-icon: var(--mw-color-text-muted);
@@ -132,7 +136,7 @@
   --mw-accordion-surface: var(--mw-color-surface-primary, #0f0f0f);
   --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
   --mw-accordion-surface-pressed: var(--mw-color-border);
-  --mw-accordion-border: var(--mw-color-border-subtle);
+  --mw-accordion-border: var(--mw-color-border-low);
   --mw-accordion-focus-border: var(--mw-color-focus, #5859fc);
   --mw-accordion-title-disabled: var(--mw-color-text-disabled);
   --mw-accordion-icon-disabled: var(--mw-color-text-disabled);

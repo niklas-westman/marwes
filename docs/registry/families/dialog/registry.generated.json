@@ -105,30 +105,17 @@
       ".figma/marwes/pages/-dialog/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-dialog/dialog_1609-15459.json",
       ".figma/marwes/pages/-dialog/-dialog_1609-15527.json",
-      ".figma/marwes/pages/-dialog/-dialog-dark_1615-17130.json",
-      ".figma/marwes/pages/-dialog/dialog_1935-14085.json",
-      ".figma/marwes/pages/-dialog/frame-1_1935-14109.json",
+      ".figma/marwes/pages/-dialog/-dialog-dark_3017-37102.json",
       ".figma/marwes/pages/-dialog/icons-interface-x_1595-13879.json"
     ],
     "nodeReferences": {
       "dialogComponent": "1609:15459",
       "dialogLightFrame": "1609:15527",
-      "dialogDarkFrame": "1615:17130",
+      "dialogDarkFrame": "3017:37102",
       "closeIcon": "1595:13879"
     },
-    "figmaTokens": [
-      "card/surface",
-      "card/border",
-      "card/title",
-      "card/body",
-      "text/primary",
-      "text/secondary",
-      "border/default",
-      "surface/secondary",
-      "focus/ring"
-    ],
+    "figmaTokens": ["text/primary", "text/secondary"],
     "figmaStates": {
       "baseVariants": [
         "dialog-shell",

@@ -140,6 +140,7 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
       textBrand: colorBase.textBrand,
       textLink: input.color?.textLink ?? colorBase.textLink,
       iconMuted: input.color?.iconMuted ?? colorBase.iconMuted,
+      borderLow: input.color?.borderLow ?? colorBase.borderLow,
       border: input.color?.border ?? colorBase.border,
       borderSubtle: input.color?.borderSubtle ?? colorBase.borderSubtle,
       borderStrong: input.color?.borderStrong ?? colorBase.borderStrong,

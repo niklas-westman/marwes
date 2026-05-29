@@ -7,14 +7,14 @@
  */
 
 .mw-tab {
-  --mw-tab-surface: transparent;
+  --mw-tab-surface: var(--mw-color-surface, transparent);
   --mw-tab-surface-hover: color-mix(in srgb, var(--mw-color-text, #000000) 5%, transparent);
   --mw-tab-surface-pressed: color-mix(in srgb, var(--mw-color-text, #000000) 10%, transparent);
-  --mw-tab-label: var(--mw-color-text, #141414);
+  --mw-tab-label: var(--mw-color-text-muted, #595959);
   --mw-tab-label-active: var(--mw-color-text, #141414);
   --mw-tab-label-disabled: var(--mw-color-text-disabled);
-  --mw-tab-indicator: var(--mw-color-primary-base, #2f31fc);
-  --mw-tab-indicator-disabled: var(--mw-color-border-disabled);
+  --mw-tab-indicator: var(--mw-color-border-brand, #2f31fc);
+  --mw-tab-indicator-disabled: var(--mw-color-border-low);
 
   appearance: none;
   position: relative;

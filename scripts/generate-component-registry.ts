@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process"
 import {
   existsSync,
   mkdirSync,
@@ -335,5 +336,24 @@ if (mode === "check") {
   }
 } else {
   const familyLabel = discoveredFamilies.length === 1 ? "family" : "families"
+
+  // Format generated JSON with biome
+  const formatResult = spawnSync(
+    "pnpm",
+    [
+      "exec",
+      "biome",
+      "check",
+      "--write",
+      "--no-errors-on-unmatched",
+      "docs/registry/families/",
+      "artifacts/component-registry.json",
+    ],
+    { cwd: repoRoot, stdio: "pipe" },
+  )
+  if (formatResult.status !== 0) {
+    console.warn("⚠ biome format step failed (non-blocking)")
+  }
+
   console.log(`✓ Generated component registry for ${discoveredFamilies.length} ${familyLabel}`)
 }

@@ -150,6 +150,7 @@
 .mw-pagination__page:disabled {
   opacity: 0.35;
   cursor: not-allowed;
+  color: var(--mw-color-text-disabled);
 }
 
 .mw-pagination__control:focus-visible,

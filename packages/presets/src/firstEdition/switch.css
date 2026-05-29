@@ -12,16 +12,16 @@
  */
 
 .mw-switch {
-  --mw-switch-track-off: var(--mw-color-border-subtle);
-  --mw-switch-track-off-hover: color-mix(in srgb, var(--mw-color-border) 60%, var(--mw-color-text));
+  --mw-switch-track-off: var(--mw-color-border-low);
+  --mw-switch-track-off-hover: var(--mw-color-border-strong);
   --mw-switch-track-off-active: var(--mw-color-border);
   --mw-switch-track-off-disabled: var(--mw-color-border-disabled);
   --mw-switch-track-on: var(--mw-color-primary-base, #2f31fc);
   --mw-switch-track-on-hover: var(--mw-color-primary-hover, #2527ca);
   --mw-switch-track-on-active: var(--mw-color-primary-pressed, #1b1d97);
   --mw-switch-track-on-disabled: var(--mw-color-primary-disabled, #8182fc);
-  --mw-switch-thumb-off: var(--mw-color-surface);
-  --mw-switch-thumb-off-disabled: var(--mw-color-surface-disabled);
+  --mw-switch-thumb-off: var(--mw-color-surface-primary);
+  --mw-switch-thumb-off-disabled: var(--mw-color-surface-subtle);
   --mw-switch-thumb-on: var(--mw-color-primary-label);
   --mw-switch-thumb-on-disabled: var(--mw-color-primary-label-disabled);
   --mw-switch-label: var(--mw-color-text);

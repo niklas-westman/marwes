@@ -71,8 +71,7 @@
       ".figma/marwes/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/skeleton/skeleton_1921-34816.json",
-      ".figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json",
+      ".figma/marwes/pages/-skeleton/skeleton_1921-34816.json",
       ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json"
     ],
     "nodeReferences": {

@@ -80,7 +80,7 @@
       "dividerLightFrame": "1574:24658",
       "dividerDarkFrame": "1574:24738"
     },
-    "figmaTokens": ["divider/default"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["horizontal-divider"],
       "interactionStates": [

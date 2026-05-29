@@ -45,6 +45,7 @@ const fixture: ResolvedTheme = {
     textBrand: "#2F31FC",
     textLink: "#2527CA",
     iconMuted: "#A3A3A3",
+    borderLow: "#00000026",
     border: "#D8D8D8",
     borderSubtle: "#D8D8D8",
     borderStrong: "#A3A3A3",
@@ -273,6 +274,7 @@ describe("themeToCSSVars — surface / semantic", () => {
   it("text-link and icon-muted equal fixture values", () => {
     expect(themeToCSSVars(fixture)["--mw-color-text-link"]).toBe("#2527CA")
     expect(themeToCSSVars(fixture)["--mw-color-icon-muted"]).toBe("#A3A3A3")
+    expect(themeToCSSVars(fixture)["--mw-color-border-low"]).toBe("#00000026")
   })
 })
 
@@ -411,8 +413,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 146 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(146)
+  it("emits exactly 147 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(147)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

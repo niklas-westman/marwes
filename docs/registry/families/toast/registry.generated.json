@@ -118,28 +118,25 @@
     ],
     "pageReferences": [
       ".figma/marwes/pages/-toast/-toast-light_1365-12526.json",
-      ".figma/marwes/pages/-toast/-toast-dark_2276-56938.json",
-      ".figma/marwes/pages/-toast/component-container_1574-20451.json"
+      ".figma/marwes/pages/-toast/-toast-dark_2970-9564.json"
     ],
     "nodeReferences": {
       "toastComponentSet": "1365:11937",
       "toastLightFrame": "1365:12526",
-      "toastDarkFrame": "2276:56938",
-      "toastComponentContainer": "1574:20451"
+      "toastDarkFrame": "2970:9564"
     },
     "figmaTokens": [
-      "toast/subtle/surface",
-      "toast/subtle/border",
-      "toast/subtle/text",
-      "toast/subtle/action",
-      "toast/outline/surface",
-      "toast/outline/border",
-      "toast/outline/text",
-      "toast/outline/action",
-      "toast/rich/surface",
-      "toast/rich/border",
-      "toast/rich/text",
-      "toast/rich/action"
+      "status-display/subtle/surface",
+      "status-display/subtle/border",
+      "status-display/subtle/text",
+      "status-display/subtle/action",
+      "status-display/outline/surface",
+      "status-display/outline/border",
+      "status-display/outline/text",
+      "status-display/outline/action",
+      "status-display/rich/surface",
+      "status-display/rich/border",
+      "status-display/rich/text"
     ],
     "figmaStates": {
       "baseVariants": [

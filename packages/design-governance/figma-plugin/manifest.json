@@ -1,0 +1,40 @@
+{
+  "name": "Marwes Variables Bridge",
+  "id": "marwes-variables-bridge",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": [
+      "http://localhost",
+      "ws://localhost",
+      "ws://localhost:9223",
+      "ws://localhost:9224",
+      "ws://localhost:9225",
+      "ws://localhost:9226",
+      "ws://localhost:9227",
+      "ws://localhost:9228",
+      "ws://localhost:9229",
+      "ws://localhost:9230",
+      "ws://localhost:9231",
+      "ws://localhost:9232"
+    ],
+    "devAllowedDomains": [
+      "http://localhost",
+      "ws://localhost",
+      "ws://localhost:9223",
+      "ws://localhost:9224",
+      "ws://localhost:9225",
+      "ws://localhost:9226",
+      "ws://localhost:9227",
+      "ws://localhost:9228",
+      "ws://localhost:9229",
+      "ws://localhost:9230",
+      "ws://localhost:9231",
+      "ws://localhost:9232"
+    ],
+    "reasoning": "Connects to a local Marwes variable sync process over WebSocket."
+  }
+}

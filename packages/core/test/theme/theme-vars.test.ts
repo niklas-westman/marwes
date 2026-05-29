@@ -36,8 +36,10 @@ describe("theme variable helpers", () => {
     expect(mwTheme.color.textMuted).toBe("var(--mw-color-text-muted)")
     expect(mwTheme.color.textLink).toBe("var(--mw-color-text-link)")
     expect(mwTheme.color.iconMuted).toBe("var(--mw-color-icon-muted)")
+    expect(mwTheme.color.borderLow).toBe("var(--mw-color-border-low)")
     expect(mwThemeVars.color.primary.base).toBe("var(--mw-color-primary-base)")
     expect(mwThemeVarNames.color.surfaceBrand).toBe("--mw-color-surface-brand")
+    expect(mwThemeVarNames.color.borderLow).toBe("--mw-color-border-low")
     expect(mwThemeVarNames.color.text).toBe("--mw-color-text")
   })
 

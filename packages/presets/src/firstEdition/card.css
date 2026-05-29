@@ -25,14 +25,10 @@
  */
 
 .mw-card {
-  --mw-card-surface: var(--mw-color-surface-elevated, #ffffff);
-  --mw-card-border: var(--mw-color-border-subtle, #d8d8d8);
+  --mw-card-surface: var(--mw-color-surface, var(--mw-color-surface-elevated, #ffffff));
+  --mw-card-border: var(--mw-color-border-low, #d8d8d8);
   --mw-card-title: var(--mw-color-text, #141414);
-  --mw-card-body: color-mix(
-    in srgb,
-    var(--mw-color-text, #141414) 65%,
-    var(--mw-color-background, #ffffff)
-  );
+  --mw-card-body: var(--mw-color-text-muted, #595959);
   --mw-card-radius: calc(var(--mw-ui-radius, 4px) * 2);
 
   display: flex;
@@ -73,12 +69,12 @@
 
 .mw-card:hover,
 .mw-card--state-hover {
-  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #141414) 70%, transparent);
+  --mw-card-border: var(--mw-color-border-strong, #a3a3a3);
 }
 
 .mw-card:active,
 .mw-card--state-pressed {
-  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #141414) 70%, transparent);
+  --mw-card-border: var(--mw-color-border-strong, #a3a3a3);
 }
 
 .mw-card:focus-visible,
@@ -99,20 +95,23 @@
   pointer-events: none;
 }
 
+.mw-card--error,
+.mw-card[data-state="error"] {
+  --mw-card-surface: var(--mw-color-status-error-background, #ffe8eb);
+  --mw-card-border: var(--mw-color-status-error-border, #ff8a95);
+  --mw-card-title: var(--mw-color-status-error-text, #d90429);
+}
+
 .mw-theme--dark .mw-card {
-  --mw-card-surface: var(--mw-color-surface-elevated, #474747);
-  --mw-card-border: var(--mw-color-border-subtle, #474747);
+  --mw-card-surface: var(--mw-color-surface, #474747);
+  --mw-card-border: var(--mw-color-border-low, #474747);
   --mw-card-title: var(--mw-color-text, #f9fafb);
-  --mw-card-body: color-mix(
-    in srgb,
-    var(--mw-color-text, #f9fafb) 65%,
-    var(--mw-color-background, #141414)
-  );
+  --mw-card-body: var(--mw-color-text-muted, #a3a3a3);
 }
 
 .mw-theme--dark .mw-card:hover,
 .mw-theme--dark .mw-card--state-hover {
-  --mw-card-border: color-mix(in srgb, var(--mw-color-border, #f9fafb) 70%, transparent);
+  --mw-card-border: var(--mw-color-border-strong, #a3a3a3);
 }
 
 .mw-theme--dark .mw-card:active,

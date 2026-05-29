@@ -10,3 +10,5 @@ pre-push:
   jobs:
     - name: repo-check
       run: pnpm check
+    - name: design-check
+      run: pnpm design:check

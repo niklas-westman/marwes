@@ -31,7 +31,7 @@ type MarwesColorSource = {
       ModeValue
     >
     icon: Record<"muted", ModeValue>
-    border: Record<"default" | "strong" | "brand", ModeValue>
+    border: Record<"low" | "default" | "strong" | "brand", ModeValue>
     focus: Record<"ring", ModeValue>
     action: {
       primary: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
@@ -113,6 +113,7 @@ describe("Marwes color source contract", () => {
   })
 
   it("maps border and focus CSS vars to docs/marwes-colors.json", () => {
+    expectModeVar("--mw-color-border-low", colorSource.semantic.border.low)
     expectModeVar("--mw-color-border", colorSource.semantic.border.default)
     expectModeVar("--mw-color-border-subtle", colorSource.semantic.border.default)
     expectModeVar("--mw-color-border-strong", colorSource.semantic.border.strong)

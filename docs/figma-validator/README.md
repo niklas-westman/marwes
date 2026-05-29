@@ -1,5 +1,13 @@
 # Figma Validator
 
+> Superseded by `@marwes-ui/design-governance`.
+>
+> Active usage now lives in `packages/design-governance` and
+> [Design Governance](../design-governance.md). The old `pnpm figma:validate`
+> command remains as a compatibility alias, but new work should use
+> `pnpm design:validate` or
+> `pnpm --filter @marwes-ui/design-governance validate`.
+
 ## Purpose
 
 The Figma validator is the local design-parity gate for Marwes component families.
@@ -13,11 +21,12 @@ It validates code against the latest synced `.figma` folder. It does not call th
 .figma/marwes/*
         |
         v
-pnpm figma:validate
+pnpm design:validate
         |
         +-- fetch freshness
         +-- Figma references
         +-- Figma token parity
+        +-- runtime token parity
         +-- framework surfaces
 ```
 
@@ -45,19 +54,19 @@ Validator responsibility:
 Validate one family:
 
 ```bash
-pnpm figma:validate -- --family checkbox
+pnpm design:validate -- --family checkbox
 ```
 
 Validate every registry family:
 
 ```bash
-pnpm figma:validate -- --all
+pnpm design:check
 ```
 
 Emit JSON for tooling or CI:
 
 ```bash
-pnpm figma:validate -- --family checkbox --json
+pnpm design:validate -- --family checkbox --json
 ```
 
 Check Marwes color exposure and preset CSS variable usage:
@@ -95,13 +104,14 @@ Reads each selected family registry from `docs/registry/families/<family>/regist
 
 ### Figma Token Parity
 
-This layer is currently blocked until the fetcher writes:
+This layer reads:
 
 ```text
 .figma/marwes/tokens/variables.json
 ```
 
-The raw Figma dump already contains `VariableID:*` bindings. The missing artifact is the map from each variable ID to a stable Figma token name and mode values.
+The raw Figma dump contains `VariableID:*` bindings. The variable artifact maps
+each variable ID to a stable Figma token name and mode values.
 
 When that artifact exists, the validator is wired to:
 
@@ -111,6 +121,24 @@ When that artifact exists, the validator is wired to:
 4. Compare actual Figma token usage against registry `design.figmaTokens`.
 
 The current `.figma/marwes/tokens/colors.json` is not enough for this layer because it is grouped by resolved hex values. Hex-based parity is unsafe when different semantic tokens intentionally share the same value.
+
+### Runtime Token Parity
+
+Runtime token parity is owned by `@marwes-ui/design-governance`.
+
+It follows Figma token aliases from `.figma/marwes/tokens/variables.json` to the
+expected Marwes CSS custom properties, then checks the selected family preset CSS
+and theme token exposure. This catches cases where Figma and the registry agree
+but the runtime still uses the wrong CSS variable.
+
+Example:
+
+```text
+Figma token: status-display/border
+Alias: status/success/border
+Expected CSS var: --mw-color-status-success-border
+Found CSS var: --mw-color-status-success-border-strong
+```
 
 ### Framework Surfaces
 

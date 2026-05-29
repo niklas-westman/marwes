@@ -72,14 +72,12 @@
     ],
     "pageReferences": [
       ".figma/marwes/pages/-progress-bar/-progress-bar_1727-3932.json",
-      ".figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json",
-      ".figma/marwes/pages/-dashboard/item_2705-11253.json"
+      ".figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json"
     ],
     "nodeReferences": {
       "progressBarComponent": "1727:3852",
       "progressBarLightFrame": "1727:3932",
-      "progressBarDarkFrame": "1727:4018",
-      "progressBarDashboardItem": "2705:11253"
+      "progressBarDarkFrame": "1727:4018"
     },
     "figmaTokens": [],
     "figmaStates": {

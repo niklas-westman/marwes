@@ -33,6 +33,7 @@ export const lightThemeDefaults: Theme = {
     iconMuted: "#A3A3A3",
 
     // Borders
+    borderLow: "#00000026",
     border: "#D8D8D8",
     borderSubtle: "#D8D8D8",
     borderStrong: "#A3A3A3",
@@ -201,6 +202,7 @@ export const darkThemeDefaults: Theme = {
     iconMuted: "#595959",
 
     // Borders
+    borderLow: "#FFFFFF26",
     border: "#474747",
     borderSubtle: "#474747",
     borderStrong: "#A3A3A3",

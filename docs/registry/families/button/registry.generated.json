@@ -221,11 +221,12 @@
       ".figma/marwes/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/cover/buttons_1825-30427.json",
-      ".figma/marwes/pages/cover/buttons_1825-30431.json",
-      ".figma/marwes/pages/cover/buttons_1825-30435.json",
+      ".figma/marwes/pages/------playground---dashboard/buttons_2832-30431.json",
       ".figma/marwes/pages/-button/component-container_1364-11870.json",
-      ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json"
+      ".figma/marwes/pages/-button/-button_1371-11172.json",
+      ".figma/marwes/pages/-button/-button-dark_1371-11537.json",
+      ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json",
+      ".figma/marwes/pages/-button/-purpose-buttons-dark_1371-9188.json"
     ],
     "nodeReferences": {
       "baseLightFrame": "1371:11172",
@@ -234,11 +235,11 @@
       "purposeDarkFrame": "1371:9188"
     },
     "figmaTokens": [
-      "Primary/Surface",
-      "Primary/Label",
-      "Secondary/Label",
-      "Secondary/Outline",
-      "Text/Label",
+      "button/primary/surface",
+      "button/primary/label",
+      "button/secondary/label",
+      "button/secondary/outline",
+      "button/text/label",
       "action/primary/default",
       "action/primary/label",
       "action/secondary/default",

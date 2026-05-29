@@ -84,7 +84,13 @@
       "paginationLightFrame": "1727:4104",
       "paginationDarkFrame": "1727:4253"
     },
-    "figmaTokens": ["pagination/active", "pagination/text", "pagination/focus"],
+    "figmaTokens": [
+      "pagination/active-surface",
+      "pagination/active-text",
+      "pagination/item-border",
+      "pagination/item-surface",
+      "pagination/item-text"
+    ],
     "figmaStates": {
       "baseVariants": ["with-prev-next", "without-prev-next", "page", "active-page", "ellipsis"],
       "interactionStates": ["current", "disabled", "hover", "focus", "light", "dark"]

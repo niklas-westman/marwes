@@ -105,23 +105,17 @@
       ".figma/marwes/components/_index.json",
       ".figma/marwes/manifest.json",
       ".figma/marwes/README.md",
-      ".figma/marwes/pages/-v2-slider/README.md"
+      ".figma/marwes/pages/-slider/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-v2-slider/slider_1926-3827.json",
-      ".figma/marwes/pages/-v2-slider/slider-field_1926-3720.json",
-      ".figma/marwes/pages/-v2-slider/-slider_1921-33210.json",
-      ".figma/marwes/pages/-v2-slider/-slider-dark_2010-12058.json",
-      ".figma/marwes/pages/-v2-slider/component-container_1574-26984.json",
-      ".figma/marwes/pages/-v2-slider/range-field_2010-12026.json"
+      ".figma/marwes/pages/slider-archive/slider_1926-3827.json",
+      ".figma/marwes/pages/slider-archive/slider-field_1926-3720.json",
+      ".figma/marwes/pages/-slider/-slider_2462-11678.json",
+      ".figma/marwes/pages/-slider/-slider_2464-13677.json"
     ],
     "nodeReferences": {
       "sliderComponentSet": "1926:3827",
-      "sliderFieldComponentSet": "1926:3720",
-      "sliderLightFrame": "1921:33210",
-      "sliderDarkFrame": "2010:12058",
-      "sliderComponentContainer": "1574:26984",
-      "sliderRangeField": "2010:12026"
+      "sliderFieldComponentSet": "1926:3720"
     },
     "figmaTokens": [],
     "figmaStates": {

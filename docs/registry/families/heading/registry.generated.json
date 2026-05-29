@@ -80,8 +80,6 @@
       ".figma/marwes/pages/-typography/README.md",
       ".figma/marwes/components/component-heading.json",
       ".figma/marwes/pages/-banner/component-heading_1932-7061.json",
-      ".figma/marwes/pages/-banner/component-heading_1935-7184.json",
-      ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15754.json",
       ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15800.json",
       ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15833.json"
     ],
@@ -104,7 +102,7 @@
       "instrumentSansDarkSection": "1368:5717",
       "componentHeadingComponent": "1918:15754"
     },
-    "figmaTokens": ["Heading/H1", "Heading/H2", "Heading/H3"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["h1", "h2", "h3"],
       "interactionStates": ["light", "dark", "typography-scale", "documentation-scaffold"]

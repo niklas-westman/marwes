@@ -88,7 +88,7 @@
     "notes": ["Badge needs base family identity normalized before full parity governance."]
   },
   "design": {
-    "componentJsons": [".figma/marwes/components/checkboxbadge.json"],
+    "componentJsons": [".figma/marwes/components/badge.json"],
     "curatedReferences": [
       ".figma/INDEX.md",
       ".figma/NODE_REFERENCE.md",
@@ -102,16 +102,16 @@
       ".figma/marwes/pages/-badge/-badge_1364-11603.json",
       ".figma/marwes/pages/-badge/-badge-dark_2276-56582.json",
       ".figma/marwes/pages/-badge/component-container_1369-6125.json",
-      ".figma/marwes/pages/cover/badges_1825-30440.json"
+      ".figma/marwes/pages/------playground---dashboard/badges_2832-30424.json"
     ],
     "nodeReferences": {
       "badgeLightFrame": "1364:11603",
       "badgeDarkFrame": "2276:56582",
       "badgeComponentContainer": "1369:6125",
-      "checkboxBadgeComponent": "1364:7721",
-      "badgeCoverFrame": "1825:30440"
+      "badgeComponent": "1364:7721",
+      "badgeDashboardFrame": "2832:30424"
     },
-    "figmaTokens": ["badge/surface", "badge/border", "badge/label"],
+    "figmaTokens": ["status-display/surface", "status-display/border", "status-display/text"],
     "figmaStates": {
       "baseVariants": [
         "neutral",

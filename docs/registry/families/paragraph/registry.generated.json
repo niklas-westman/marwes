@@ -94,7 +94,7 @@
       "instrumentSansLightSection": "1368:5698",
       "instrumentSansDarkSection": "1368:5717"
     },
-    "figmaTokens": ["Body/Medium", "Body/Default", "Body/16 Paragraph", "P - Paragraph"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["paragraph", "body-default", "body-medium"],
       "interactionStates": ["sm", "md", "lg", "light", "dark", "typography-scale", "long-form"]

@@ -115,19 +115,15 @@
     ],
     "pageReferences": [
       ".figma/marwes/pages/-avatar/component-container_1574-27051.json",
-      ".figma/marwes/pages/-avatar/component-container_1574-27408.json",
       ".figma/marwes/pages/-avatar/-avatar_1574-27460.json",
-      ".figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json",
-      ".figma/marwes/pages/cover/avatar-group_1825-30447.json"
+      ".figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json"
     ],
     "nodeReferences": {
       "avatarComponentSet": "1574:27371",
       "avatarBadgeComponentSet": "1574:27394",
       "avatarGroupComponent": "1574:27395",
       "avatarLightFrame": "1574:27460",
-      "avatarDarkFrame": "1574:27570",
-      "avatarComponentContainer": "1574:27408",
-      "avatarCoverGroupFrame": "1825:30447"
+      "avatarDarkFrame": "1574:27570"
     },
     "figmaTokens": [],
     "figmaStates": {

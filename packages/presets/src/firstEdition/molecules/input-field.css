@@ -224,7 +224,7 @@
 }
 
 .mw-input-field__error {
-  color: var(--mw-color-danger-base, #d90429);
+  color: var(--mw-color-status-error-text, #d90429);
 }
 
 .mw-input-field__label .mw-text,
