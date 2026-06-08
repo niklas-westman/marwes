@@ -7,12 +7,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/button",
         "react": "packages/react/src/components/button",
-        "vue": "packages/vue/src/components/button"
+        "vue": "packages/vue/src/components/button",
+        "svelte": "packages/svelte/src/lib/components/button"
       },
       "presetCss": "packages/presets/src/firstEdition/button.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/button",
-        "vue": "apps/storybook-vue/src/stories/button"
+        "vue": "apps/storybook-vue/src/stories/button",
+        "svelte": "apps/storybook-svelte/src/stories/button"
       },
       "contracts": ["tests/contracts/button.contract.ts"]
     },
@@ -22,12 +24,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/badge",
         "react": "packages/react/src/components/badge",
-        "vue": "packages/vue/src/components/badge"
+        "vue": "packages/vue/src/components/badge",
+        "svelte": "packages/svelte/src/lib/components/badge"
       },
       "presetCss": "packages/presets/src/firstEdition/badge.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/badge",
-        "vue": "apps/storybook-vue/src/stories/badge"
+        "vue": "apps/storybook-vue/src/stories/badge",
+        "svelte": "apps/storybook-svelte/src/stories/badge"
       },
       "contracts": ["tests/contracts/badge.contract.ts"]
     },
@@ -37,12 +41,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/banner",
         "react": "packages/react/src/components/banner",
-        "vue": "packages/vue/src/components/banner"
+        "vue": "packages/vue/src/components/banner",
+        "svelte": "packages/svelte/src/lib/components/banner"
       },
       "presetCss": "packages/presets/src/firstEdition/banner.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/banner",
-        "vue": "apps/storybook-vue/src/stories/banner"
+        "vue": "apps/storybook-vue/src/stories/banner",
+        "svelte": "apps/storybook-svelte/src/stories/banner"
       },
       "contracts": ["tests/contracts/banner.contract.ts"]
     },
@@ -52,12 +58,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/avatar",
         "react": "packages/react/src/components/avatar",
-        "vue": "packages/vue/src/components/avatar"
+        "vue": "packages/vue/src/components/avatar",
+        "svelte": "packages/svelte/src/lib/components/avatar"
       },
       "presetCss": "packages/presets/src/firstEdition/avatar.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/avatar",
-        "vue": "apps/storybook-vue/src/stories/avatar"
+        "vue": "apps/storybook-vue/src/stories/avatar",
+        "svelte": "apps/storybook-svelte/src/stories/avatar"
       },
       "contracts": [
         "tests/contracts/avatar.contract.ts",
@@ -71,12 +79,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/toast",
         "react": "packages/react/src/components/toast",
-        "vue": "packages/vue/src/components/toast"
+        "vue": "packages/vue/src/components/toast",
+        "svelte": "packages/svelte/src/lib/components/toast"
       },
       "presetCss": null,
       "stories": {
         "react": "apps/storybook-react/src/stories/toast",
-        "vue": "apps/storybook-vue/src/stories/toast"
+        "vue": "apps/storybook-vue/src/stories/toast",
+        "svelte": "apps/storybook-svelte/src/stories/toast"
       },
       "contracts": ["tests/contracts/toast.contract.ts"]
     },
@@ -86,12 +96,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/dialog",
         "react": "packages/react/src/components/dialog",
-        "vue": "packages/vue/src/components/dialog"
+        "vue": "packages/vue/src/components/dialog",
+        "svelte": "packages/svelte/src/lib/components/dialog"
       },
       "presetCss": null,
       "stories": {
         "react": "apps/storybook-react/src/stories/dialog",
-        "vue": "apps/storybook-vue/src/stories/dialog"
+        "vue": "apps/storybook-vue/src/stories/dialog",
+        "svelte": "apps/storybook-svelte/src/stories/dialog"
       },
       "contracts": ["tests/contracts/dialog.contract.ts"]
     },
@@ -101,12 +113,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/drawer",
         "react": "packages/react/src/components/drawer",
-        "vue": "packages/vue/src/components/drawer"
+        "vue": "packages/vue/src/components/drawer",
+        "svelte": "packages/svelte/src/lib/components/drawer"
       },
       "presetCss": "packages/presets/src/firstEdition/drawer.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/drawer",
-        "vue": "apps/storybook-vue/src/stories/drawer"
+        "vue": "apps/storybook-vue/src/stories/drawer",
+        "svelte": "apps/storybook-svelte/src/stories/drawer"
       },
       "contracts": []
     },
@@ -119,12 +133,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/context-menu",
         "react": "packages/react/src/components/context-menu",
-        "vue": "packages/vue/src/components/context-menu"
+        "vue": "packages/vue/src/components/context-menu",
+        "svelte": "packages/svelte/src/lib/components/context-menu"
       },
       "presetCss": "packages/presets/src/firstEdition/context-menu.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/context-menu",
-        "vue": "apps/storybook-vue/src/stories/context-menu"
+        "vue": "apps/storybook-vue/src/stories/context-menu",
+        "svelte": "apps/storybook-svelte/src/stories/context-menu"
       },
       "contracts": []
     },
@@ -138,12 +154,14 @@
       "source": {
         "core": "packages/core/src/components/atoms/breadcrumb",
         "react": "packages/react/src/components/breadcrumb",
-        "vue": "packages/vue/src/components/breadcrumb"
+        "vue": "packages/vue/src/components/breadcrumb",
+        "svelte": "packages/svelte/src/lib/components/breadcrumb"
       },
       "presetCss": "packages/presets/src/firstEdition/breadcrumb.css",
       "stories": {
         "react": "apps/storybook-react/src/stories/breadcrumb",
-        "vue": "apps/storybook-vue/src/stories/breadcrumb"
+        "vue": "apps/storybook-vue/src/stories/breadcrumb",
+        "svelte": "apps/storybook-svelte/src/stories/breadcrumb"
       },
       "contracts": []
     }

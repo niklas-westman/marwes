@@ -98,26 +98,39 @@ When preview assets are needed:
 
 ## Current registry families
 
+Human-readable registry pages currently exist for:
+
 - [Button registry](./families/button/README.md)
-- [Input registry](./families/input/README.md)
-- [Dialog registry](./families/dialog/README.md)
-- [Tab registry](./families/tab/README.md)
-- [Switch registry](./families/switch/README.md)
-- [Accordion registry](./families/accordion/README.md)
-- [Tooltip registry](./families/tooltip/README.md)
-- [Slider registry](./families/slider/README.md)
-- [Avatar registry](./families/avatar/README.md)
-- [Toast registry](./families/toast/README.md)
 - [Badge registry](./families/badge/README.md)
-- [Spinner registry](./families/spinner/README.md)
+- [Banner registry](./families/banner/README.md)
+- [Avatar registry](./families/avatar/README.md)
 - [Card registry](./families/card/README.md)
+- [ContextMenu registry](./families/context-menu/README.md)
+- [DatePicker registry](./families/date-picker/README.md)
+- [Dialog registry](./families/dialog/README.md)
+- [Checkbox registry](./families/checkbox/README.md)
 - [Divider registry](./families/divider/README.md)
 - [Heading registry](./families/heading/README.md)
-- [Checkbox registry](./families/checkbox/README.md)
-- [Radio registry](./families/radio/README.md)
-- [Paragraph registry](./families/paragraph/README.md)
+- [Input registry](./families/input/README.md)
 - [Icon registry](./families/icon/README.md)
+- [Pagination registry](./families/pagination/README.md)
+- [Paragraph registry](./families/paragraph/README.md)
+- [Radio registry](./families/radio/README.md)
+- [SegmentedControl registry](./families/segmented-control/README.md)
+- [Skeleton registry](./families/skeleton/README.md)
+- [Slider registry](./families/slider/README.md)
 - [Spacing registry](./families/spacing/README.md)
+- [Spinner registry](./families/spinner/README.md)
+- [StatTile registry](./families/stat-tile/README.md)
+- [Switch registry](./families/switch/README.md)
+- [Tab registry](./families/tab/README.md)
+- [Toast registry](./families/toast/README.md)
+- [Tooltip registry](./families/tooltip/README.md)
+
+Known rollout gaps:
+- `progress-bar` has `registry.meta.json` and `registry.generated.json`, but still needs the human README and visual diagrams.
+- `breadcrumb`, `drawer`, and `text` are shipped across core, React, Vue, Svelte, and Storybook, but do not yet have registry family folders.
+- `banner`, `context-menu`, `date-picker`, `skeleton`, and `stat-tile` have human pages, but still need the standard visual diagrams.
 
 ## Working with the registry
 

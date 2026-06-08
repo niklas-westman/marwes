@@ -39,6 +39,13 @@
       "packages/vue/src/components/tooltip/tooltip-group.ts",
       "packages/vue/src/components/tooltip/tooltip.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/tooltip/index.ts",
+      "packages/svelte/src/lib/components/tooltip/README.md",
+      "packages/svelte/src/lib/components/tooltip/Tooltip.svelte",
+      "packages/svelte/src/lib/components/tooltip/TooltipGroup.svelte",
+      "packages/svelte/src/lib/components/tooltip/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/tooltip/__tests__/tooltip-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/tooltip/__tests__/tooltip-taxonomy.test.ts",
@@ -52,6 +59,14 @@
       "apps/storybook-vue/src/stories/tooltip/Introduction.mdx",
       "apps/storybook-vue/src/stories/tooltip/tooltip-group.stories.ts",
       "apps/storybook-vue/src/stories/tooltip/tooltip.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/tooltip/__tests__/tooltip-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/tooltip/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/tooltip/tooltip-group.stories.ts",
+      "apps/storybook-svelte/src/stories/tooltip/tooltip.stories.ts",
+      "apps/storybook-svelte/src/stories/tooltip/TooltipDark.svelte",
+      "apps/storybook-svelte/src/stories/tooltip/TooltipGroupDark.svelte"
     ],
     "contracts": ["tests/contracts/tooltip.contract.ts"]
   },
@@ -106,8 +121,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

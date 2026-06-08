@@ -49,6 +49,10 @@
       "vue": [
         "apps/storybook-vue/src/stories/context-menu/Introduction.mdx",
         "apps/storybook-vue/src/stories/context-menu/context-menu.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/context-menu/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/context-menu/context-menu.stories.ts"
       ]
     },
     "preferredStates": ["default", "grouped", "divider", "disabled", "destructive", "light", "dark"]

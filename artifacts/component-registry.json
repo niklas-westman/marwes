@@ -135,6 +135,16 @@
             "packages/vue/src/components/accordion/index.ts",
             "packages/vue/src/components/accordion/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/accordion/Accordion.svelte",
+            "packages/svelte/src/lib/components/accordion/AccordionField.svelte",
+            "packages/svelte/src/lib/components/accordion/FAQAccordion.svelte",
+            "packages/svelte/src/lib/components/accordion/index.ts",
+            "packages/svelte/src/lib/components/accordion/README.md",
+            "packages/svelte/src/lib/components/accordion/SectionsAccordion.svelte",
+            "packages/svelte/src/lib/components/accordion/SettingsAccordion.svelte",
+            "packages/svelte/src/lib/components/accordion/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/accordion/__tests__/accordion-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/accordion/__tests__/accordion-taxonomy.test.ts",
@@ -154,6 +164,17 @@
             "apps/storybook-vue/src/stories/accordion/Introduction.mdx",
             "apps/storybook-vue/src/stories/accordion/sections-accordion.stories.ts",
             "apps/storybook-vue/src/stories/accordion/settings-accordion.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/accordion/__tests__/accordion-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/accordion/accordion-field.stories.ts",
+            "apps/storybook-svelte/src/stories/accordion/accordion.stories.ts",
+            "apps/storybook-svelte/src/stories/accordion/AccordionFieldControlled.svelte",
+            "apps/storybook-svelte/src/stories/accordion/AccordionShowcase.svelte",
+            "apps/storybook-svelte/src/stories/accordion/faq-accordion.stories.ts",
+            "apps/storybook-svelte/src/stories/accordion/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/accordion/sections-accordion.stories.ts",
+            "apps/storybook-svelte/src/stories/accordion/settings-accordion.stories.ts"
           ],
           "contracts": ["tests/contracts/accordion.contract.ts"]
         },
@@ -228,8 +249,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -376,6 +399,17 @@
             "packages/vue/src/components/avatar/index.ts",
             "packages/vue/src/components/avatar/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/avatar/Avatar.svelte",
+            "packages/svelte/src/lib/components/avatar/AvatarBadge.svelte",
+            "packages/svelte/src/lib/components/avatar/AvatarGroup.svelte",
+            "packages/svelte/src/lib/components/avatar/index.ts",
+            "packages/svelte/src/lib/components/avatar/PresenceAvatar.svelte",
+            "packages/svelte/src/lib/components/avatar/ProfileAvatar.svelte",
+            "packages/svelte/src/lib/components/avatar/README.md",
+            "packages/svelte/src/lib/components/avatar/TeamAvatarGroup.svelte",
+            "packages/svelte/src/lib/components/avatar/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/avatar/__tests__/avatar-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/avatar/__tests__/avatar-taxonomy.test.ts",
@@ -399,6 +433,19 @@
             "apps/storybook-vue/src/stories/avatar/presence-avatar.stories.ts",
             "apps/storybook-vue/src/stories/avatar/profile-avatar.stories.ts",
             "apps/storybook-vue/src/stories/avatar/team-avatar-group.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/avatar/__tests__/avatar-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/avatar/avatar-badge.stories.ts",
+            "apps/storybook-svelte/src/stories/avatar/avatar-group.stories.ts",
+            "apps/storybook-svelte/src/stories/avatar/avatar.stories.ts",
+            "apps/storybook-svelte/src/stories/avatar/AvatarBadgeGallery.svelte",
+            "apps/storybook-svelte/src/stories/avatar/AvatarGallery.svelte",
+            "apps/storybook-svelte/src/stories/avatar/AvatarGroupDark.svelte",
+            "apps/storybook-svelte/src/stories/avatar/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/avatar/presence-avatar.stories.ts",
+            "apps/storybook-svelte/src/stories/avatar/profile-avatar.stories.ts",
+            "apps/storybook-svelte/src/stories/avatar/team-avatar-group.stories.ts"
           ],
           "contracts": [
             "tests/contracts/avatar.contract.ts",
@@ -485,8 +532,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -636,6 +685,16 @@
             "packages/vue/src/components/badge/index.ts",
             "packages/vue/src/components/badge/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/badge/Badge.svelte",
+            "packages/svelte/src/lib/components/badge/BadgeGroup.svelte",
+            "packages/svelte/src/lib/components/badge/index.ts",
+            "packages/svelte/src/lib/components/badge/NotificationBadge.svelte",
+            "packages/svelte/src/lib/components/badge/PriorityBadge.svelte",
+            "packages/svelte/src/lib/components/badge/README.md",
+            "packages/svelte/src/lib/components/badge/StatusBadge.svelte",
+            "packages/svelte/src/lib/components/badge/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/badge/__tests__/badge-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/badge/__tests__/badge-taxonomy.test.ts",
@@ -655,6 +714,21 @@
             "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts",
             "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
             "apps/storybook-vue/src/stories/badge/status-badge.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/badge/__tests__/badge-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/badge/AllNotifications.svelte",
+            "apps/storybook-svelte/src/stories/badge/AllPriorities.svelte",
+            "apps/storybook-svelte/src/stories/badge/AllStatuses.svelte",
+            "apps/storybook-svelte/src/stories/badge/badge-group.stories.ts",
+            "apps/storybook-svelte/src/stories/badge/badge.stories.ts",
+            "apps/storybook-svelte/src/stories/badge/BadgeDarkGallery.svelte",
+            "apps/storybook-svelte/src/stories/badge/BadgeGallery.svelte",
+            "apps/storybook-svelte/src/stories/badge/BadgeGroupStory.svelte",
+            "apps/storybook-svelte/src/stories/badge/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/badge/notification-badge.stories.ts",
+            "apps/storybook-svelte/src/stories/badge/priority-badge.stories.ts",
+            "apps/storybook-svelte/src/stories/badge/status-badge.stories.ts"
           ],
           "contracts": ["tests/contracts/badge.contract.ts"]
         },
@@ -723,8 +797,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -771,7 +847,7 @@
           "automationCovers": [
             "Variant-specific role and aria-live assignment in core recipe.",
             "Dismiss button aria-label in all adapters.",
-            "React and Vue adapter tests for a11y attributes, slot visibility, and dismiss interaction."
+            "React, Vue, and Svelte adapter tests for a11y attributes, slot visibility, and dismiss interaction."
           ],
           "manualReviewRequired": [
             "Whether banner messages are concise enough for screen reader announcement.",
@@ -837,6 +913,15 @@
             "packages/vue/src/components/banner/index.ts",
             "packages/vue/src/components/banner/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/banner/Banner.svelte",
+            "packages/svelte/src/lib/components/banner/ErrorBanner.svelte",
+            "packages/svelte/src/lib/components/banner/index.ts",
+            "packages/svelte/src/lib/components/banner/InfoBanner.svelte",
+            "packages/svelte/src/lib/components/banner/SuccessBanner.svelte",
+            "packages/svelte/src/lib/components/banner/types.ts",
+            "packages/svelte/src/lib/components/banner/WarningBanner.svelte"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/banner/__tests__/banner-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/banner/__tests__/banner-taxonomy.test.ts",
@@ -848,6 +933,14 @@
             "apps/storybook-vue/src/stories/banner/__tests__/banner-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/banner/banner.stories.ts",
             "apps/storybook-vue/src/stories/banner/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/banner/__tests__/banner-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/banner/__tests__/banner-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/banner/banner.stories.ts",
+            "apps/storybook-svelte/src/stories/banner/BannerDarkGallery.svelte",
+            "apps/storybook-svelte/src/stories/banner/BannerGallery.svelte",
+            "apps/storybook-svelte/src/stories/banner/Introduction.mdx"
           ],
           "contracts": []
         },
@@ -919,8 +1012,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -1042,6 +1137,34 @@
             "packages/vue/src/components/button/index.ts",
             "packages/vue/src/components/button/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/button/Button.svelte",
+            "packages/svelte/src/lib/components/button/CancelButton.svelte",
+            "packages/svelte/src/lib/components/button/CloseButton.svelte",
+            "packages/svelte/src/lib/components/button/ConfirmButton.svelte",
+            "packages/svelte/src/lib/components/button/CopyButton.svelte",
+            "packages/svelte/src/lib/components/button/CreateButton.svelte",
+            "packages/svelte/src/lib/components/button/DestructiveButton.svelte",
+            "packages/svelte/src/lib/components/button/DownloadButton.svelte",
+            "packages/svelte/src/lib/components/button/DropdownButton.svelte",
+            "packages/svelte/src/lib/components/button/EditButton.svelte",
+            "packages/svelte/src/lib/components/button/FilterButton.svelte",
+            "packages/svelte/src/lib/components/button/index.ts",
+            "packages/svelte/src/lib/components/button/LinkButton.svelte",
+            "packages/svelte/src/lib/components/button/PrimaryButton.svelte",
+            "packages/svelte/src/lib/components/button/README.md",
+            "packages/svelte/src/lib/components/button/RefreshButton.svelte",
+            "packages/svelte/src/lib/components/button/SaveButton.svelte",
+            "packages/svelte/src/lib/components/button/SearchButton.svelte",
+            "packages/svelte/src/lib/components/button/SecondaryButton.svelte",
+            "packages/svelte/src/lib/components/button/SortButton.svelte",
+            "packages/svelte/src/lib/components/button/SubmitButton.svelte",
+            "packages/svelte/src/lib/components/button/SuccessButton.svelte",
+            "packages/svelte/src/lib/components/button/TextButton.svelte",
+            "packages/svelte/src/lib/components/button/types.ts",
+            "packages/svelte/src/lib/components/button/UploadButton.svelte",
+            "packages/svelte/src/lib/components/button/VerifyButton.svelte"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/button/__tests__/button-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/button/__tests__/button-taxonomy.test.ts",
@@ -1097,6 +1220,34 @@
             "apps/storybook-vue/src/stories/button/text-button.stories.ts",
             "apps/storybook-vue/src/stories/button/upload-button.stories.ts",
             "apps/storybook-vue/src/stories/button/verify-button.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/button/__tests__/button-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/button/__tests__/button-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/button/button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/cancel-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/close-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/confirm-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/copy-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/create-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/destructive-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/download-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/dropdown-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/edit-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/filter-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/button/link-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/primary-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/refresh-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/save-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/search-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/secondary-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/sort-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/submit-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/success-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/text-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/upload-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/verify-button.stories.ts"
           ],
           "contracts": ["tests/contracts/button.contract.ts"]
         },
@@ -1262,8 +1413,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -1401,6 +1554,15 @@
             "packages/vue/src/components/card/index.ts",
             "packages/vue/src/components/card/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/card/Card.svelte",
+            "packages/svelte/src/lib/components/card/index.ts",
+            "packages/svelte/src/lib/components/card/ProductCard.svelte",
+            "packages/svelte/src/lib/components/card/ProfileCard.svelte",
+            "packages/svelte/src/lib/components/card/README.md",
+            "packages/svelte/src/lib/components/card/StatCard.svelte",
+            "packages/svelte/src/lib/components/card/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/card/__tests__/card-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/card/__tests__/card-taxonomy.test.ts",
@@ -1418,6 +1580,16 @@
             "apps/storybook-vue/src/stories/card/product-card.stories.ts",
             "apps/storybook-vue/src/stories/card/profile-card.stories.ts",
             "apps/storybook-vue/src/stories/card/stat-card.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/card/__tests__/card-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/card/card.stories.ts",
+            "apps/storybook-svelte/src/stories/card/CardRichContent.svelte",
+            "apps/storybook-svelte/src/stories/card/CardStateMatrix.svelte",
+            "apps/storybook-svelte/src/stories/card/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/card/product-card.stories.ts",
+            "apps/storybook-svelte/src/stories/card/profile-card.stories.ts",
+            "apps/storybook-svelte/src/stories/card/stat-card.stories.ts"
           ],
           "contracts": []
         },
@@ -1487,8 +1659,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -1639,6 +1813,14 @@
             "packages/vue/src/components/checkbox/checkbox.ts",
             "packages/vue/src/components/checkbox/index.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/checkbox/Checkbox.svelte",
+            "packages/svelte/src/lib/components/checkbox/CheckboxField.svelte",
+            "packages/svelte/src/lib/components/checkbox/CheckboxGroupField.svelte",
+            "packages/svelte/src/lib/components/checkbox/index.ts",
+            "packages/svelte/src/lib/components/checkbox/README.md",
+            "packages/svelte/src/lib/components/checkbox/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts",
@@ -1654,6 +1836,14 @@
             "apps/storybook-vue/src/stories/checkbox/checkbox-group-field.stories.ts",
             "apps/storybook-vue/src/stories/checkbox/checkbox.stories.ts",
             "apps/storybook-vue/src/stories/checkbox/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/checkbox/__tests__/checkbox-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/checkbox/checkbox-field.stories.ts",
+            "apps/storybook-svelte/src/stories/checkbox/checkbox-group-field.stories.ts",
+            "apps/storybook-svelte/src/stories/checkbox/checkbox.stories.ts",
+            "apps/storybook-svelte/src/stories/checkbox/CheckboxShowcase.svelte",
+            "apps/storybook-svelte/src/stories/checkbox/Introduction.mdx"
           ],
           "contracts": [
             "tests/contracts/checkbox.contract.ts",
@@ -1739,8 +1929,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -1809,6 +2001,10 @@
             "vue": [
               "apps/storybook-vue/src/stories/context-menu/Introduction.mdx",
               "apps/storybook-vue/src/stories/context-menu/context-menu.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/context-menu/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/context-menu/context-menu.stories.ts"
             ]
           },
           "preferredStates": [
@@ -1857,6 +2053,11 @@
             "packages/vue/src/components/context-menu/context-menu.ts",
             "packages/vue/src/components/context-menu/index.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/context-menu/ContextMenu.svelte",
+            "packages/svelte/src/lib/components/context-menu/index.ts",
+            "packages/svelte/src/lib/components/context-menu/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
@@ -1868,6 +2069,12 @@
             "apps/storybook-vue/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/context-menu/context-menu.stories.ts",
             "apps/storybook-vue/src/stories/context-menu/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/context-menu/context-menu.stories.ts",
+            "apps/storybook-svelte/src/stories/context-menu/Introduction.mdx"
           ],
           "contracts": []
         },
@@ -1919,8 +2126,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -2030,6 +2239,12 @@
             "packages/vue/src/components/date-picker/date-picker.ts",
             "packages/vue/src/components/date-picker/index.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/date-picker/DatePicker.svelte",
+            "packages/svelte/src/lib/components/date-picker/index.ts",
+            "packages/svelte/src/lib/components/date-picker/README.md",
+            "packages/svelte/src/lib/components/date-picker/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
             "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
@@ -2041,6 +2256,11 @@
             "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
             "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts.disabled",
             "apps/storybook-vue/src/stories/date-picker/Introduction.mdx.disabled"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/date-picker/date-picker.stories.ts.disabled",
+            "apps/storybook-svelte/src/stories/date-picker/DatePickerDemo.svelte",
+            "apps/storybook-svelte/src/stories/date-picker/Introduction.mdx.disabled"
           ],
           "contracts": ["tests/contracts/date-picker.contract.ts"]
         },
@@ -2101,8 +2321,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -2238,6 +2460,16 @@
             "packages/vue/src/components/dialog/index.ts",
             "packages/vue/src/components/dialog/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/dialog/ConfirmDialog.svelte",
+            "packages/svelte/src/lib/components/dialog/DestructiveDialog.svelte",
+            "packages/svelte/src/lib/components/dialog/Dialog.svelte",
+            "packages/svelte/src/lib/components/dialog/DialogModal.svelte",
+            "packages/svelte/src/lib/components/dialog/index.ts",
+            "packages/svelte/src/lib/components/dialog/InfoDialog.svelte",
+            "packages/svelte/src/lib/components/dialog/README.md",
+            "packages/svelte/src/lib/components/dialog/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
@@ -2257,6 +2489,21 @@
             "apps/storybook-vue/src/stories/dialog/dialog.stories.ts",
             "apps/storybook-vue/src/stories/dialog/info-dialog.stories.ts",
             "apps/storybook-vue/src/stories/dialog/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/dialog/confirm-dialog.stories.ts",
+            "apps/storybook-svelte/src/stories/dialog/ConfirmDialogStory.svelte",
+            "apps/storybook-svelte/src/stories/dialog/destructive-dialog.stories.ts",
+            "apps/storybook-svelte/src/stories/dialog/DestructiveDialogStory.svelte",
+            "apps/storybook-svelte/src/stories/dialog/dialog-modal.stories.ts",
+            "apps/storybook-svelte/src/stories/dialog/dialog.stories.ts",
+            "apps/storybook-svelte/src/stories/dialog/DialogAtomStory.svelte",
+            "apps/storybook-svelte/src/stories/dialog/DialogStory.svelte",
+            "apps/storybook-svelte/src/stories/dialog/info-dialog.stories.ts",
+            "apps/storybook-svelte/src/stories/dialog/InfoDialogStory.svelte",
+            "apps/storybook-svelte/src/stories/dialog/Introduction.mdx"
           ],
           "contracts": [
             "tests/contracts/dialog.contract.ts",
@@ -2338,8 +2585,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -2469,6 +2718,12 @@
             "packages/vue/src/components/divider/divider.ts",
             "packages/vue/src/components/divider/index.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/divider/Divider.svelte",
+            "packages/svelte/src/lib/components/divider/index.ts",
+            "packages/svelte/src/lib/components/divider/README.md",
+            "packages/svelte/src/lib/components/divider/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/divider/__tests__/divider-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/divider/__tests__/divider-taxonomy.test.ts",
@@ -2480,6 +2735,13 @@
             "apps/storybook-vue/src/stories/divider/__tests__/divider-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/divider/divider.stories.ts",
             "apps/storybook-vue/src/stories/divider/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/divider/__tests__/divider-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/divider/divider.stories.ts",
+            "apps/storybook-svelte/src/stories/divider/DividerPreview.svelte",
+            "apps/storybook-svelte/src/stories/divider/DividerShowcase.svelte",
+            "apps/storybook-svelte/src/stories/divider/Introduction.mdx"
           ],
           "contracts": ["tests/contracts/divider.contract.ts"]
         },
@@ -2537,8 +2799,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -2672,6 +2936,14 @@
             "packages/vue/src/components/heading/heading-variants.ts",
             "packages/vue/src/components/heading/index.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/heading/H1.svelte",
+            "packages/svelte/src/lib/components/heading/H2.svelte",
+            "packages/svelte/src/lib/components/heading/H3.svelte",
+            "packages/svelte/src/lib/components/heading/index.ts",
+            "packages/svelte/src/lib/components/heading/README.md",
+            "packages/svelte/src/lib/components/heading/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/heading/__tests__/heading-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/heading/__tests__/heading-taxonomy.test.ts",
@@ -2683,6 +2955,12 @@
             "apps/storybook-vue/src/stories/heading/__tests__/heading-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/heading/heading.stories.ts",
             "apps/storybook-vue/src/stories/heading/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/heading/__tests__/heading-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/heading/heading.stories.ts",
+            "apps/storybook-svelte/src/stories/heading/HeadingShowcase.svelte",
+            "apps/storybook-svelte/src/stories/heading/Introduction.mdx"
           ],
           "contracts": ["tests/contracts/heading.contract.ts"]
         },
@@ -2747,8 +3025,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -2884,6 +3164,12 @@
             "packages/vue/src/components/icon/icon.ts",
             "packages/vue/src/components/icon/index.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/icon/Icon.svelte",
+            "packages/svelte/src/lib/components/icon/index.ts",
+            "packages/svelte/src/lib/components/icon/README.md",
+            "packages/svelte/src/lib/components/icon/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/icon/__tests__/icon-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/icon/__tests__/icon-taxonomy.test.ts",
@@ -2895,6 +3181,12 @@
             "apps/storybook-vue/src/stories/icon/__tests__/icon-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/icon/icon.stories.ts",
             "apps/storybook-vue/src/stories/icon/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/icon/__tests__/icon-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/icon/icon.stories.ts",
+            "apps/storybook-svelte/src/stories/icon/IconGallery.svelte",
+            "apps/storybook-svelte/src/stories/icon/Introduction.mdx"
           ],
           "contracts": ["tests/contracts/icon.contract.ts"]
         },
@@ -2977,8 +3269,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -3175,6 +3469,29 @@
             "packages/vue/src/components/input/textarea-field.ts",
             "packages/vue/src/components/input/textarea.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/input/CurrencyField.svelte",
+            "packages/svelte/src/lib/components/input/DateOfBirthField.svelte",
+            "packages/svelte/src/lib/components/input/DropdownField.svelte",
+            "packages/svelte/src/lib/components/input/EmailField.svelte",
+            "packages/svelte/src/lib/components/input/index.ts",
+            "packages/svelte/src/lib/components/input/Input.svelte",
+            "packages/svelte/src/lib/components/input/InputField.svelte",
+            "packages/svelte/src/lib/components/input/InputOtp.svelte",
+            "packages/svelte/src/lib/components/input/PasswordField.svelte",
+            "packages/svelte/src/lib/components/input/PhoneField.svelte",
+            "packages/svelte/src/lib/components/input/README.md",
+            "packages/svelte/src/lib/components/input/RichText.svelte",
+            "packages/svelte/src/lib/components/input/RichTextField.svelte",
+            "packages/svelte/src/lib/components/input/SearchField.svelte",
+            "packages/svelte/src/lib/components/input/Select.svelte",
+            "packages/svelte/src/lib/components/input/SelectField.svelte",
+            "packages/svelte/src/lib/components/input/Textarea.svelte",
+            "packages/svelte/src/lib/components/input/TextareaField.svelte",
+            "packages/svelte/src/lib/components/input/types.ts",
+            "packages/svelte/src/lib/components/input/URLField.svelte",
+            "packages/svelte/src/lib/components/input/ZipCodeField.svelte"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/input/__tests__/input-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/input/__tests__/input-taxonomy.test.ts",
@@ -3221,6 +3538,28 @@
             "apps/storybook-vue/src/stories/input/textarea.stories.ts",
             "apps/storybook-vue/src/stories/input/url-field.stories.ts",
             "apps/storybook-vue/src/stories/input/zip-code-field.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/input/__tests__/input-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/input/currency-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/date-of-birth-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/dropdown-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/email-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/input-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/input-otp.stories.ts",
+            "apps/storybook-svelte/src/stories/input/input.stories.ts",
+            "apps/storybook-svelte/src/stories/input/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/input/password-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/phone-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/rich-text-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/rich-text.stories.ts",
+            "apps/storybook-svelte/src/stories/input/search-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/select-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/select.stories.ts",
+            "apps/storybook-svelte/src/stories/input/textarea-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/textarea.stories.ts",
+            "apps/storybook-svelte/src/stories/input/url-field.stories.ts",
+            "apps/storybook-svelte/src/stories/input/zip-code-field.stories.ts"
           ],
           "contracts": [
             "tests/contracts/input.contract.ts",
@@ -3366,8 +3705,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -3484,6 +3825,11 @@
             "packages/vue/src/components/pagination/index.ts",
             "packages/vue/src/components/pagination/pagination.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/pagination/index.ts",
+            "packages/svelte/src/lib/components/pagination/Pagination.svelte",
+            "packages/svelte/src/lib/components/pagination/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
@@ -3495,6 +3841,15 @@
             "apps/storybook-vue/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/pagination/Introduction.mdx",
             "apps/storybook-vue/src/stories/pagination/pagination.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/pagination/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/pagination/pagination.stories.ts",
+            "apps/storybook-svelte/src/stories/pagination/PaginationNarrowContainer.svelte",
+            "apps/storybook-svelte/src/stories/pagination/PaginationPreview.svelte",
+            "apps/storybook-svelte/src/stories/pagination/PaginationShowcase.svelte"
           ],
           "contracts": []
         },
@@ -3559,8 +3914,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -3689,6 +4046,12 @@
             "packages/vue/src/components/paragraph/index.ts",
             "packages/vue/src/components/paragraph/paragraph.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/paragraph/index.ts",
+            "packages/svelte/src/lib/components/paragraph/Paragraph.svelte",
+            "packages/svelte/src/lib/components/paragraph/README.md",
+            "packages/svelte/src/lib/components/paragraph/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/paragraph/__tests__/paragraph-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts",
@@ -3700,6 +4063,12 @@
             "apps/storybook-vue/src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/paragraph/Introduction.mdx",
             "apps/storybook-vue/src/stories/paragraph/paragraph.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/paragraph/__tests__/paragraph-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/paragraph/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/paragraph/paragraph.stories.ts",
+            "apps/storybook-svelte/src/stories/paragraph/ParagraphShowcase.svelte"
           ],
           "contracts": ["tests/contracts/paragraph.contract.ts"]
         },
@@ -3768,8 +4137,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -3891,6 +4262,11 @@
             "packages/vue/src/components/progress-bar/index.ts",
             "packages/vue/src/components/progress-bar/progress-bar.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/progress-bar/index.ts",
+            "packages/svelte/src/lib/components/progress-bar/ProgressBar.svelte",
+            "packages/svelte/src/lib/components/progress-bar/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/progress-bar/__tests__/progress-bar-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/progress-bar/__tests__/progress-bar-taxonomy.test.ts",
@@ -3902,6 +4278,12 @@
             "apps/storybook-vue/src/stories/progress-bar/__tests__/progress-bar-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/progress-bar/Introduction.mdx",
             "apps/storybook-vue/src/stories/progress-bar/progress-bar.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/progress-bar/__tests__/progress-bar-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/progress-bar/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/progress-bar/progress-bar.stories.ts",
+            "apps/storybook-svelte/src/stories/progress-bar/ProgressBarShowcase.svelte"
           ],
           "contracts": ["tests/contracts/progress-bar.contract.ts"]
         },
@@ -3955,8 +4337,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -4110,6 +4494,16 @@
             "packages/vue/src/components/radio/radio.ts",
             "packages/vue/src/components/radio/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/radio/index.ts",
+            "packages/svelte/src/lib/components/radio/OptionRadioGroup.svelte",
+            "packages/svelte/src/lib/components/radio/Radio.svelte",
+            "packages/svelte/src/lib/components/radio/RadioGroupField.svelte",
+            "packages/svelte/src/lib/components/radio/RatingRadioGroup.svelte",
+            "packages/svelte/src/lib/components/radio/README.md",
+            "packages/svelte/src/lib/components/radio/types.ts",
+            "packages/svelte/src/lib/components/radio/YesNoRadioGroup.svelte"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/radio/__tests__/radio-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/radio/__tests__/radio-taxonomy.test.ts",
@@ -4129,6 +4523,18 @@
             "apps/storybook-vue/src/stories/radio/radio.stories.ts",
             "apps/storybook-vue/src/stories/radio/rating-radio-group.stories.ts",
             "apps/storybook-vue/src/stories/radio/yes-no-radio-group.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/radio/__tests__/radio-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/radio/__tests__/radio-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/radio/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/radio/option-radio-group.stories.ts",
+            "apps/storybook-svelte/src/stories/radio/radio-group-field.stories.ts",
+            "apps/storybook-svelte/src/stories/radio/radio.stories.ts",
+            "apps/storybook-svelte/src/stories/radio/RadioGroupFieldStory.svelte",
+            "apps/storybook-svelte/src/stories/radio/RadioShowcase.svelte",
+            "apps/storybook-svelte/src/stories/radio/rating-radio-group.stories.ts",
+            "apps/storybook-svelte/src/stories/radio/yes-no-radio-group.stories.ts"
           ],
           "contracts": ["tests/contracts/radio.contract.ts"]
         },
@@ -4208,8 +4614,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -4325,6 +4733,11 @@
             "packages/vue/src/components/segmented-control/index.ts",
             "packages/vue/src/components/segmented-control/segmented-control.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/segmented-control/index.ts",
+            "packages/svelte/src/lib/components/segmented-control/SegmentedControl.svelte",
+            "packages/svelte/src/lib/components/segmented-control/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
@@ -4336,6 +4749,14 @@
             "apps/storybook-vue/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/segmented-control/Introduction.mdx",
             "apps/storybook-vue/src/stories/segmented-control/segmented-control.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/segmented-control/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/segmented-control/segmented-control.stories.ts",
+            "apps/storybook-svelte/src/stories/segmented-control/SegmentedControlPreview.svelte",
+            "apps/storybook-svelte/src/stories/segmented-control/SegmentedControlShowcase.svelte"
           ],
           "contracts": []
         },
@@ -4387,8 +4808,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -4507,6 +4930,12 @@
             "packages/vue/src/components/skeleton/index.ts",
             "packages/vue/src/components/skeleton/skeleton.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/skeleton/index.ts",
+            "packages/svelte/src/lib/components/skeleton/README.md",
+            "packages/svelte/src/lib/components/skeleton/Skeleton.svelte",
+            "packages/svelte/src/lib/components/skeleton/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
@@ -4520,6 +4949,14 @@
             "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
             "apps/storybook-vue/src/stories/skeleton/skeleton-molecules.stories.ts",
             "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/skeleton/__tests__/skeleton-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/skeleton/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/skeleton/skeleton-molecules.stories.ts",
+            "apps/storybook-svelte/src/stories/skeleton/skeleton.stories.ts",
+            "apps/storybook-svelte/src/stories/skeleton/SkeletonMolecules.svelte",
+            "apps/storybook-svelte/src/stories/skeleton/SkeletonShowcase.svelte"
           ],
           "contracts": ["tests/contracts/skeleton.contract.ts"]
         },
@@ -4562,8 +4999,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -4709,6 +5148,16 @@
             "packages/vue/src/components/slider/slider.ts",
             "packages/vue/src/components/slider/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/slider/BrightnessSlider.svelte",
+            "packages/svelte/src/lib/components/slider/index.ts",
+            "packages/svelte/src/lib/components/slider/RadiusSlider.svelte",
+            "packages/svelte/src/lib/components/slider/README.md",
+            "packages/svelte/src/lib/components/slider/Slider.svelte",
+            "packages/svelte/src/lib/components/slider/SliderField.svelte",
+            "packages/svelte/src/lib/components/slider/types.ts",
+            "packages/svelte/src/lib/components/slider/VolumeSlider.svelte"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/slider/__tests__/slider-taxonomy.test.ts",
@@ -4728,6 +5177,16 @@
             "apps/storybook-vue/src/stories/slider/slider-field.stories.ts",
             "apps/storybook-vue/src/stories/slider/slider.stories.ts",
             "apps/storybook-vue/src/stories/slider/volume-slider.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/slider/__tests__/slider-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/slider/brightness-slider.stories.ts",
+            "apps/storybook-svelte/src/stories/slider/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/slider/radius-slider.stories.ts",
+            "apps/storybook-svelte/src/stories/slider/slider-field.stories.ts",
+            "apps/storybook-svelte/src/stories/slider/slider.stories.ts",
+            "apps/storybook-svelte/src/stories/slider/volume-slider.stories.ts"
           ],
           "contracts": ["tests/contracts/slider.contract.ts"]
         },
@@ -4802,8 +5261,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -4945,6 +5406,13 @@
             "packages/vue/src/components/spacing/index.ts",
             "packages/vue/src/components/spacing/spacing.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/spacing/index.ts",
+            "packages/svelte/src/lib/components/spacing/README.md",
+            "packages/svelte/src/lib/components/spacing/Spacer.svelte",
+            "packages/svelte/src/lib/components/spacing/Spacing.svelte",
+            "packages/svelte/src/lib/components/spacing/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/spacing/__tests__/spacing-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/spacing/__tests__/spacing-taxonomy.test.ts",
@@ -4956,6 +5424,12 @@
             "apps/storybook-vue/src/stories/spacing/__tests__/spacing-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/spacing/Introduction.mdx",
             "apps/storybook-vue/src/stories/spacing/spacing.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/spacing/__tests__/spacing-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/spacing/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/spacing/spacing.stories.ts",
+            "apps/storybook-svelte/src/stories/spacing/SpacingShowcase.svelte"
           ],
           "contracts": ["tests/contracts/spacing.contract.ts"]
         },
@@ -4996,8 +5470,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -5146,6 +5622,14 @@
             "packages/vue/src/components/spinner/spinner.ts",
             "packages/vue/src/components/spinner/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte",
+            "packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte",
+            "packages/svelte/src/lib/components/spinner/index.ts",
+            "packages/svelte/src/lib/components/spinner/README.md",
+            "packages/svelte/src/lib/components/spinner/Spinner.svelte",
+            "packages/svelte/src/lib/components/spinner/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
@@ -5161,6 +5645,17 @@
             "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts",
             "apps/storybook-vue/src/stories/spinner/Introduction.mdx",
             "apps/storybook-vue/src/stories/spinner/spinner.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/spinner/button-spinner.stories.ts",
+            "apps/storybook-svelte/src/stories/spinner/ButtonSpinnerStory.svelte",
+            "apps/storybook-svelte/src/stories/spinner/empty-state-spinner.stories.ts",
+            "apps/storybook-svelte/src/stories/spinner/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/spinner/spinner.stories.ts",
+            "apps/storybook-svelte/src/stories/spinner/SpinnerGallery.svelte",
+            "apps/storybook-svelte/src/stories/spinner/SpinnerTreatments.svelte"
           ],
           "contracts": ["tests/contracts/spinner.contract.ts"]
         },
@@ -5260,8 +5755,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -5379,6 +5876,12 @@
             "packages/vue/src/components/stat-tile/index.ts",
             "packages/vue/src/components/stat-tile/stat-tile.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/stat-tile/index.ts",
+            "packages/svelte/src/lib/components/stat-tile/README.md",
+            "packages/svelte/src/lib/components/stat-tile/StatTile.svelte",
+            "packages/svelte/src/lib/components/stat-tile/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/stat-tile/__tests__/stat-tile-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
@@ -5390,6 +5893,13 @@
             "apps/storybook-vue/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
             "apps/storybook-vue/src/stories/stat-tile/Introduction.mdx",
             "apps/storybook-vue/src/stories/stat-tile/stat-tile.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/stat-tile/__tests__/stat-tile-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/stat-tile/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/stat-tile/stat-tile.stories.ts",
+            "apps/storybook-svelte/src/stories/stat-tile/StatTileToneMatrix.svelte"
           ],
           "contracts": ["tests/contracts/stat-tile.contract.ts"]
         },
@@ -5438,8 +5948,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": false,
           "figmaReferencesPresent": true
@@ -5583,6 +6095,16 @@
             "packages/vue/src/components/switch/switch.ts",
             "packages/vue/src/components/switch/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/switch/FeatureToggle.svelte",
+            "packages/svelte/src/lib/components/switch/index.ts",
+            "packages/svelte/src/lib/components/switch/PermissionSwitch.svelte",
+            "packages/svelte/src/lib/components/switch/PreferenceSwitch.svelte",
+            "packages/svelte/src/lib/components/switch/README.md",
+            "packages/svelte/src/lib/components/switch/Switch.svelte",
+            "packages/svelte/src/lib/components/switch/SwitchField.svelte",
+            "packages/svelte/src/lib/components/switch/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/switch/__tests__/switch-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/switch/__tests__/switch-taxonomy.test.ts",
@@ -5604,6 +6126,17 @@
             "apps/storybook-vue/src/stories/switch/story-helpers.ts",
             "apps/storybook-vue/src/stories/switch/switch-field.stories.ts",
             "apps/storybook-vue/src/stories/switch/switch.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/switch/__tests__/switch-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/switch/__tests__/switch-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/switch/feature-toggle.stories.ts",
+            "apps/storybook-svelte/src/stories/switch/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/switch/permission-switch.stories.ts",
+            "apps/storybook-svelte/src/stories/switch/preference-switch.stories.ts",
+            "apps/storybook-svelte/src/stories/switch/switch-field.stories.ts",
+            "apps/storybook-svelte/src/stories/switch/switch.stories.ts",
+            "apps/storybook-svelte/src/stories/switch/SwitchShowcase.svelte"
           ],
           "contracts": ["tests/contracts/switch.contract.ts"]
         },
@@ -5686,8 +6219,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -5824,6 +6359,17 @@
             "packages/vue/src/components/tab/tab.ts",
             "packages/vue/src/components/tab/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/tab/ContentTabs.svelte",
+            "packages/svelte/src/lib/components/tab/index.ts",
+            "packages/svelte/src/lib/components/tab/NavigationTabs.svelte",
+            "packages/svelte/src/lib/components/tab/README.md",
+            "packages/svelte/src/lib/components/tab/SettingsTabs.svelte",
+            "packages/svelte/src/lib/components/tab/Tab.svelte",
+            "packages/svelte/src/lib/components/tab/TabGroup.svelte",
+            "packages/svelte/src/lib/components/tab/TabPanel.svelte",
+            "packages/svelte/src/lib/components/tab/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/tab/__tests__/tab-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/tab/__tests__/tab-taxonomy.test.ts",
@@ -5843,6 +6389,18 @@
             "apps/storybook-vue/src/stories/tab/settings-tabs.stories.ts",
             "apps/storybook-vue/src/stories/tab/tab-group.stories.ts",
             "apps/storybook-vue/src/stories/tab/tab.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/tab/__tests__/tab-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/tab/__tests__/tab-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/tab/content-tabs.stories.ts",
+            "apps/storybook-svelte/src/stories/tab/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/tab/navigation-tabs.stories.ts",
+            "apps/storybook-svelte/src/stories/tab/settings-tabs.stories.ts",
+            "apps/storybook-svelte/src/stories/tab/tab-group.stories.ts",
+            "apps/storybook-svelte/src/stories/tab/tab.stories.ts",
+            "apps/storybook-svelte/src/stories/tab/TabAtomPreview.svelte",
+            "apps/storybook-svelte/src/stories/tab/TabShowcase.svelte"
           ],
           "contracts": ["tests/contracts/tab.contract.ts"]
         },
@@ -5913,8 +6471,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -6066,6 +6626,18 @@
             "packages/vue/src/components/toast/toast.ts",
             "packages/vue/src/components/toast/variants.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/toast/ErrorToast.svelte",
+            "packages/svelte/src/lib/components/toast/index.ts",
+            "packages/svelte/src/lib/components/toast/InfoToast.svelte",
+            "packages/svelte/src/lib/components/toast/README.md",
+            "packages/svelte/src/lib/components/toast/SuccessToast.svelte",
+            "packages/svelte/src/lib/components/toast/Toast.svelte",
+            "packages/svelte/src/lib/components/toast/ToastContainer.svelte",
+            "packages/svelte/src/lib/components/toast/ToastProvider.svelte",
+            "packages/svelte/src/lib/components/toast/types.ts",
+            "packages/svelte/src/lib/components/toast/WarningToast.svelte"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/toast/__tests__/toast-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/toast/__tests__/toast-taxonomy.test.ts",
@@ -6090,6 +6662,23 @@
             "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
             "apps/storybook-vue/src/stories/toast/toast.stories.ts",
             "apps/storybook-vue/src/stories/toast/warning-toast.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/toast/__tests__/toast-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/toast/__tests__/toast-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/toast/error-toast.stories.ts",
+            "apps/storybook-svelte/src/stories/toast/info-toast.stories.ts",
+            "apps/storybook-svelte/src/stories/toast/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/toast/success-toast.stories.ts",
+            "apps/storybook-svelte/src/stories/toast/toast-container.stories.ts",
+            "apps/storybook-svelte/src/stories/toast/toast-matrix.stories.ts",
+            "apps/storybook-svelte/src/stories/toast/toast.stories.ts",
+            "apps/storybook-svelte/src/stories/toast/ToastContainerStory.svelte",
+            "apps/storybook-svelte/src/stories/toast/ToastDemo.svelte",
+            "apps/storybook-svelte/src/stories/toast/ToastDemoButtons.svelte",
+            "apps/storybook-svelte/src/stories/toast/ToastMatrix.svelte",
+            "apps/storybook-svelte/src/stories/toast/ToastShowcase.svelte",
+            "apps/storybook-svelte/src/stories/toast/warning-toast.stories.ts"
           ],
           "contracts": ["tests/contracts/toast.contract.ts"]
         },
@@ -6175,8 +6764,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true
@@ -6303,6 +6894,13 @@
             "packages/vue/src/components/tooltip/tooltip-group.ts",
             "packages/vue/src/components/tooltip/tooltip.ts"
           ],
+          "svelte": [
+            "packages/svelte/src/lib/components/tooltip/index.ts",
+            "packages/svelte/src/lib/components/tooltip/README.md",
+            "packages/svelte/src/lib/components/tooltip/Tooltip.svelte",
+            "packages/svelte/src/lib/components/tooltip/TooltipGroup.svelte",
+            "packages/svelte/src/lib/components/tooltip/types.ts"
+          ],
           "storybookReact": [
             "apps/storybook-react/src/stories/tooltip/__tests__/tooltip-introduction-docs.test.ts",
             "apps/storybook-react/src/stories/tooltip/__tests__/tooltip-taxonomy.test.ts",
@@ -6316,6 +6914,14 @@
             "apps/storybook-vue/src/stories/tooltip/Introduction.mdx",
             "apps/storybook-vue/src/stories/tooltip/tooltip-group.stories.ts",
             "apps/storybook-vue/src/stories/tooltip/tooltip.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/tooltip/__tests__/tooltip-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/tooltip/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/tooltip/tooltip-group.stories.ts",
+            "apps/storybook-svelte/src/stories/tooltip/tooltip.stories.ts",
+            "apps/storybook-svelte/src/stories/tooltip/TooltipDark.svelte",
+            "apps/storybook-svelte/src/stories/tooltip/TooltipGroupDark.svelte"
           ],
           "contracts": ["tests/contracts/tooltip.contract.ts"]
         },
@@ -6378,8 +6984,10 @@
         "coverage": {
           "react": true,
           "vue": true,
+          "svelte": true,
           "storybookReact": true,
           "storybookVue": true,
+          "storybookSvelte": true,
           "contractsPresent": true,
           "auditDocPresent": true,
           "figmaReferencesPresent": true

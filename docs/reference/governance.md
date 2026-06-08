@@ -8,7 +8,7 @@ This document explains how local checks, CI gates, generated artifacts, and sema
 
 The goal is simple:
 - docs should match the shipped API
-- React and Vue should stay meaningfully aligned
+- React, Vue, and Svelte should stay meaningfully aligned
 - semantic claims should come from source-owned registries
 - generated artifacts should stay fresh
 - release automation should enforce those rules, not just describe them
@@ -57,8 +57,8 @@ These gates protect:
 - stale generated trust artifacts
 - stale generated component registry artifacts
 - formatting and lint integrity
-- React/Vue story and export parity expectations
-- the first Storybook accessibility smoke set across React and Vue
+- React/Vue/Svelte story and export parity expectations
+- the first Storybook accessibility smoke set across React, Vue, and Svelte
 
 For a narrower family pass, use:
 

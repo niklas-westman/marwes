@@ -44,6 +44,16 @@
       "packages/vue/src/components/slider/slider.ts",
       "packages/vue/src/components/slider/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/slider/BrightnessSlider.svelte",
+      "packages/svelte/src/lib/components/slider/index.ts",
+      "packages/svelte/src/lib/components/slider/RadiusSlider.svelte",
+      "packages/svelte/src/lib/components/slider/README.md",
+      "packages/svelte/src/lib/components/slider/Slider.svelte",
+      "packages/svelte/src/lib/components/slider/SliderField.svelte",
+      "packages/svelte/src/lib/components/slider/types.ts",
+      "packages/svelte/src/lib/components/slider/VolumeSlider.svelte"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/slider/__tests__/slider-taxonomy.test.ts",
@@ -63,6 +73,16 @@
       "apps/storybook-vue/src/stories/slider/slider-field.stories.ts",
       "apps/storybook-vue/src/stories/slider/slider.stories.ts",
       "apps/storybook-vue/src/stories/slider/volume-slider.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/slider/__tests__/slider-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/slider/brightness-slider.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/slider/radius-slider.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/slider-field.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/slider.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/volume-slider.stories.ts"
     ],
     "contracts": ["tests/contracts/slider.contract.ts"]
   },
@@ -137,8 +157,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

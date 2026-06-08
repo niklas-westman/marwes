@@ -43,6 +43,16 @@
       "packages/vue/src/components/badge/index.ts",
       "packages/vue/src/components/badge/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/badge/Badge.svelte",
+      "packages/svelte/src/lib/components/badge/BadgeGroup.svelte",
+      "packages/svelte/src/lib/components/badge/index.ts",
+      "packages/svelte/src/lib/components/badge/NotificationBadge.svelte",
+      "packages/svelte/src/lib/components/badge/PriorityBadge.svelte",
+      "packages/svelte/src/lib/components/badge/README.md",
+      "packages/svelte/src/lib/components/badge/StatusBadge.svelte",
+      "packages/svelte/src/lib/components/badge/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/badge/__tests__/badge-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/badge/__tests__/badge-taxonomy.test.ts",
@@ -62,6 +72,21 @@
       "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts",
       "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
       "apps/storybook-vue/src/stories/badge/status-badge.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/badge/__tests__/badge-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/badge/AllNotifications.svelte",
+      "apps/storybook-svelte/src/stories/badge/AllPriorities.svelte",
+      "apps/storybook-svelte/src/stories/badge/AllStatuses.svelte",
+      "apps/storybook-svelte/src/stories/badge/badge-group.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/badge.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/BadgeDarkGallery.svelte",
+      "apps/storybook-svelte/src/stories/badge/BadgeGallery.svelte",
+      "apps/storybook-svelte/src/stories/badge/BadgeGroupStory.svelte",
+      "apps/storybook-svelte/src/stories/badge/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/badge/notification-badge.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/priority-badge.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/status-badge.stories.ts"
     ],
     "contracts": ["tests/contracts/badge.contract.ts"]
   },
@@ -130,8 +155,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

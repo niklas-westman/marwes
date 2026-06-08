@@ -11,9 +11,9 @@ Framework-agnostic Marwes design system recipes, theme utilities, accessibility 
 
 **The framework-agnostic engine behind Marwes themes, recipes, accessibility, and semantic metadata.**
 
-Pure TypeScript • No React/Vue dependency • Typed RenderKit • Shared ThemeInput • AI-readable contracts
+Pure TypeScript • No framework dependency • Typed RenderKit • Shared ThemeInput • AI-readable contracts
 
-[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -21,7 +21,7 @@ Pure TypeScript • No React/Vue dependency • Typed RenderKit • Shared Theme
 
 ## Why Use It
 
-Most app teams should install `@marwes-ui/react` or `@marwes-ui/vue`. Install core directly when you are building an adapter, validating design-system contracts, or using Marwes theme and recipe utilities without a framework.
+Most app teams should install `@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte`. Install core directly when you are building an adapter, validating design-system contracts, or using Marwes theme and recipe utilities without a framework.
 
 Core gives every adapter the same:
 
@@ -41,6 +41,7 @@ Core is the contract layer, not the normal app entry point.
 | --- | --- |
 | `@marwes-ui/react` | You are building a React app. |
 | `@marwes-ui/vue` | You are building a Vue app. |
+| `@marwes-ui/svelte` | You are building a Svelte app. |
 | `@marwes-ui/core` | You need framework-agnostic recipes, theme utilities, accessibility contracts, or adapter/tooling APIs. |
 | `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
@@ -79,7 +80,7 @@ const theme = resolveThemeInput({
 const cssVars = themeToCSSVars(theme)
 ```
 
-React and Vue providers apply these variables to the provider root. Preset CSS consumes them across buttons, inputs, typography, cards, toasts, overlays, and layout primitives.
+Framework providers apply these variables to the provider root. Preset CSS consumes them across buttons, inputs, typography, cards, toasts, overlays, and layout primitives.
 
 Marwes is designed to look great from the beginning. `ThemeInput` is intentionally partial: start from the polished defaults, map an existing design library into the tokens you own, and override only those product decisions.
 
@@ -101,7 +102,7 @@ Every omitted token is filled from the selected light or dark default, so adapte
 
 ### Light And Dark Mode Contract
 
-Core owns the runtime `ThemeMode` contract that the React and Vue providers use for `useThemeMode()`. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals. A mode change resolves a normal theme, swaps the provider-scoped `--mw-*` variables, and keeps the active class aligned as `mw-theme--light` or `mw-theme--dark`.
+Core owns the runtime `ThemeMode` contract that framework providers use for theme-mode APIs. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals. A mode change resolves a normal theme, swaps the provider-scoped `--mw-*` variables, and keeps the active class aligned as `mw-theme--light` or `mw-theme--dark`.
 
 ```ts
 import { resolveThemeInput, themeToCSSVars, ThemeMode } from "@marwes-ui/core"
@@ -122,11 +123,11 @@ resolveMode(ThemeMode.dark)
 // }
 ```
 
-Most apps should use `useThemeMode()` from `@marwes-ui/react` or `@marwes-ui/vue`. Core is the framework-agnostic piece that makes the resolved variables and mode classes consistent across adapters.
+Most apps should use the theme-mode API from `@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte`. Core is the framework-agnostic piece that makes the resolved variables and mode classes consistent across adapters.
 
 ### SSR Theme Rules
 
-SSR adapters can use the same core theme engine to emit light and dark CSS variable rules before hydration. These helpers are pure string utilities; React and Vue expose framework-specific SSR helpers on top.
+SSR adapters can use the same core theme engine to emit light and dark CSS variable rules before hydration. These helpers are pure string utilities; framework adapters can expose SSR helpers on top.
 
 ```ts
 import { ThemeMode, resolveThemeInput, themeModesToCSSRules } from "@marwes-ui/core"
@@ -165,7 +166,7 @@ mwVar("--mw-color-text", "#141414") // "var(--mw-color-text, #141414)"
 mwStyledTheme.spacing.sp24 // "var(--mw-spacing-sp-24)"
 ```
 
-This enables one theme contract across plain CSS, CSS Modules, CSS-in-JS, vanilla-extract, Tailwind-style config files, inline style objects, React, Vue, and future adapters. Because the helpers only expose CSS variable references and names, they remain framework-agnostic and follow any `ThemeInput` resolved by the provider.
+This enables one theme contract across plain CSS, CSS Modules, CSS-in-JS, vanilla-extract, Tailwind-style config files, inline style objects, React, Vue, Svelte, and future adapters. Because the helpers only expose CSS variable references and names, they remain framework-agnostic and follow any `ThemeInput` resolved by the provider.
 
 Keep the APIs separate:
 - `Spacings.sp24` returns `"sp-24"` for Marwes component props.
@@ -176,7 +177,7 @@ Keep the APIs separate:
 
 ## Recipe Engine
 
-Core recipes return a typed RenderKit object instead of framework elements. Adapters map that object to React, Vue, or future renderers.
+Core recipes return a typed RenderKit object instead of framework elements. Adapters map that object to React, Vue, Svelte, or future renderers.
 
 RenderKit includes:
 - `tag`
@@ -197,7 +198,7 @@ Core currently powers these component families:
 - Badges and contextual badge variants
 - Toasts, tooltips, dialogs, tabs, accordions, and spinners
 
-React and Vue expose the public components. Core exposes the shared recipes, types, enum objects, semantic utilities, and theme helpers that keep those adapters consistent.
+React, Vue, and Svelte expose the public components. Core exposes the shared recipes, types, enum objects, semantic utilities, and theme helpers that keep those adapters consistent.
 
 ## Accessibility Contract
 
@@ -228,7 +229,7 @@ buildInputFieldA11yIds({
 // }
 ```
 
-React and Vue tests run the same shared contracts against their DOM output. Storybook a11y smoke checks then add an axe-powered browser-level signal for the promoted families.
+React, Vue, and Svelte tests run shared contracts against their DOM output. Storybook a11y smoke checks then add an axe-powered browser-level signal for the promoted families.
 
 ## Semantic Metadata
 
@@ -281,9 +282,9 @@ Types and tokens:
 
 ## Package Boundaries
 
-- Core has no React, Vue, DOM, or CSS runtime dependency.
+- Core has no React, Vue, Svelte, DOM, or CSS runtime dependency.
 - Presets own static CSS and the default visual layer.
-- React and Vue own rendering, provider lifecycle, and framework APIs.
+- React, Vue, and Svelte own rendering, provider lifecycle, and framework APIs.
 
 ## Scripts
 

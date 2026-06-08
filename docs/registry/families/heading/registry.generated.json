@@ -36,6 +36,14 @@
       "packages/vue/src/components/heading/heading-variants.ts",
       "packages/vue/src/components/heading/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/heading/H1.svelte",
+      "packages/svelte/src/lib/components/heading/H2.svelte",
+      "packages/svelte/src/lib/components/heading/H3.svelte",
+      "packages/svelte/src/lib/components/heading/index.ts",
+      "packages/svelte/src/lib/components/heading/README.md",
+      "packages/svelte/src/lib/components/heading/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/heading/__tests__/heading-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/heading/__tests__/heading-taxonomy.test.ts",
@@ -47,6 +55,12 @@
       "apps/storybook-vue/src/stories/heading/__tests__/heading-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/heading/heading.stories.ts",
       "apps/storybook-vue/src/stories/heading/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/heading/__tests__/heading-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/heading/heading.stories.ts",
+      "apps/storybook-svelte/src/stories/heading/HeadingShowcase.svelte",
+      "apps/storybook-svelte/src/stories/heading/Introduction.mdx"
     ],
     "contracts": ["tests/contracts/heading.contract.ts"]
   },
@@ -111,8 +125,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

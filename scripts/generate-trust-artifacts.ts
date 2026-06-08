@@ -23,9 +23,11 @@ interface FamilyArtifactSource {
   familyDir: string
   reactComponentDir: string
   vueComponentDir: string
+  svelteComponentDir: string
   presetCssPath: string | null
   reactStoryDir: string | null
   vueStoryDir: string | null
+  svelteStoryDir: string | null
   contractPaths: string[]
   figmaReferences: string[]
 }
@@ -36,9 +38,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/button",
     reactComponentDir: "packages/react/src/components/button",
     vueComponentDir: "packages/vue/src/components/button",
+    svelteComponentDir: "packages/svelte/src/lib/components/button",
     presetCssPath: "packages/presets/src/firstEdition/button.css",
     reactStoryDir: "apps/storybook-react/src/stories/button",
     vueStoryDir: "apps/storybook-vue/src/stories/button",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/button",
     contractPaths: ["tests/contracts/button.contract.ts"],
     figmaReferences: [".figma/marwes/components/button.json"],
   },
@@ -47,9 +51,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/badge",
     reactComponentDir: "packages/react/src/components/badge",
     vueComponentDir: "packages/vue/src/components/badge",
+    svelteComponentDir: "packages/svelte/src/lib/components/badge",
     presetCssPath: "packages/presets/src/firstEdition/badge.css",
     reactStoryDir: "apps/storybook-react/src/stories/badge",
     vueStoryDir: "apps/storybook-vue/src/stories/badge",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/badge",
     contractPaths: ["tests/contracts/badge.contract.ts"],
     figmaReferences: [".figma/marwes/components/badge.json"],
   },
@@ -58,9 +64,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/banner",
     reactComponentDir: "packages/react/src/components/banner",
     vueComponentDir: "packages/vue/src/components/banner",
+    svelteComponentDir: "packages/svelte/src/lib/components/banner",
     presetCssPath: "packages/presets/src/firstEdition/banner.css",
     reactStoryDir: "apps/storybook-react/src/stories/banner",
     vueStoryDir: "apps/storybook-vue/src/stories/banner",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/banner",
     contractPaths: ["tests/contracts/banner.contract.ts"],
     figmaReferences: [".figma/marwes/components/banner.json"],
   },
@@ -69,9 +77,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/avatar",
     reactComponentDir: "packages/react/src/components/avatar",
     vueComponentDir: "packages/vue/src/components/avatar",
+    svelteComponentDir: "packages/svelte/src/lib/components/avatar",
     presetCssPath: "packages/presets/src/firstEdition/avatar.css",
     reactStoryDir: "apps/storybook-react/src/stories/avatar",
     vueStoryDir: "apps/storybook-vue/src/stories/avatar",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/avatar",
     contractPaths: [
       "tests/contracts/avatar.contract.ts",
       "tests/contracts/avatar-badge.contract.ts",
@@ -84,9 +94,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/toast",
     reactComponentDir: "packages/react/src/components/toast",
     vueComponentDir: "packages/vue/src/components/toast",
+    svelteComponentDir: "packages/svelte/src/lib/components/toast",
     presetCssPath: null,
     reactStoryDir: "apps/storybook-react/src/stories/toast",
     vueStoryDir: "apps/storybook-vue/src/stories/toast",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/toast",
     contractPaths: ["tests/contracts/toast.contract.ts"],
     figmaReferences: [".figma/marwes/components/toast.json"],
   },
@@ -95,9 +107,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/dialog",
     reactComponentDir: "packages/react/src/components/dialog",
     vueComponentDir: "packages/vue/src/components/dialog",
+    svelteComponentDir: "packages/svelte/src/lib/components/dialog",
     presetCssPath: null,
     reactStoryDir: "apps/storybook-react/src/stories/dialog",
     vueStoryDir: "apps/storybook-vue/src/stories/dialog",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/dialog",
     contractPaths: ["tests/contracts/dialog.contract.ts"],
     figmaReferences: [".figma/marwes/components/dialog.json"],
   },
@@ -106,9 +120,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/drawer",
     reactComponentDir: "packages/react/src/components/drawer",
     vueComponentDir: "packages/vue/src/components/drawer",
+    svelteComponentDir: "packages/svelte/src/lib/components/drawer",
     presetCssPath: "packages/presets/src/firstEdition/drawer.css",
     reactStoryDir: "apps/storybook-react/src/stories/drawer",
     vueStoryDir: "apps/storybook-vue/src/stories/drawer",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/drawer",
     contractPaths: [],
     figmaReferences: [".figma/marwes/components/drawer.json"],
   },
@@ -117,9 +133,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/context-menu",
     reactComponentDir: "packages/react/src/components/context-menu",
     vueComponentDir: "packages/vue/src/components/context-menu",
+    svelteComponentDir: "packages/svelte/src/lib/components/context-menu",
     presetCssPath: "packages/presets/src/firstEdition/context-menu.css",
     reactStoryDir: "apps/storybook-react/src/stories/context-menu",
     vueStoryDir: "apps/storybook-vue/src/stories/context-menu",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/context-menu",
     contractPaths: [],
     figmaReferences: [
       ".figma/marwes/components/context-menu.json",
@@ -131,9 +149,11 @@ const familyArtifactSources: Record<string, FamilyArtifactSource> = {
     familyDir: "packages/core/src/components/atoms/breadcrumb",
     reactComponentDir: "packages/react/src/components/breadcrumb",
     vueComponentDir: "packages/vue/src/components/breadcrumb",
+    svelteComponentDir: "packages/svelte/src/lib/components/breadcrumb",
     presetCssPath: "packages/presets/src/firstEdition/breadcrumb.css",
     reactStoryDir: "apps/storybook-react/src/stories/breadcrumb",
     vueStoryDir: "apps/storybook-vue/src/stories/breadcrumb",
+    svelteStoryDir: "apps/storybook-svelte/src/stories/breadcrumb",
     contractPaths: [],
     figmaReferences: [
       ".figma/marwes/components/breadcrumb.json",
@@ -179,11 +199,12 @@ function buildComponentManifest(): unknown {
           )
           .map((attributeDefinition) => attributeDefinition.name),
         purposeWrappers: familyPurposes,
-        frameworks: ["react", "vue"],
+        frameworks: ["react", "vue", "svelte"],
         sourcePaths: {
           core: familySource.familyDir,
           react: familySource.reactComponentDir,
           vue: familySource.vueComponentDir,
+          svelte: familySource.svelteComponentDir,
           presetCss: familySource.presetCssPath,
         },
       }
@@ -213,18 +234,22 @@ function buildFrameworkParityMatrix(): unknown {
       const familySource = familyArtifactSources[familySemantics.family]
       const reactSupported = pathExists(familySource.reactComponentDir)
       const vueSupported = pathExists(familySource.vueComponentDir)
+      const svelteSupported = pathExists(familySource.svelteComponentDir)
       const contractCoverage = familySource.contractPaths.every((contractPath) =>
         pathExists(contractPath),
       )
       const storyCoverage = Boolean(
-        pathExists(familySource.reactStoryDir) && pathExists(familySource.vueStoryDir),
+        pathExists(familySource.reactStoryDir) &&
+          pathExists(familySource.vueStoryDir) &&
+          pathExists(familySource.svelteStoryDir),
       )
 
       return {
         family: familySemantics.family,
         react: reactSupported,
         vue: vueSupported,
-        metadataParity: reactSupported && vueSupported,
+        svelte: svelteSupported,
+        metadataParity: reactSupported && vueSupported && svelteSupported,
         contractCoverage,
         storyCoverage,
       }
@@ -245,11 +270,13 @@ function buildDesignProvenanceMap(): unknown {
           core: familySource.familyDir,
           react: familySource.reactComponentDir,
           vue: familySource.vueComponentDir,
+          svelte: familySource.svelteComponentDir,
         },
         presetCss: familySource.presetCssPath,
         stories: {
           react: familySource.reactStoryDir,
           vue: familySource.vueStoryDir,
+          svelte: familySource.svelteStoryDir,
         },
         contracts: familySource.contractPaths,
       }

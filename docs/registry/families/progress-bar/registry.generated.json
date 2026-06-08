@@ -32,6 +32,11 @@
       "packages/vue/src/components/progress-bar/index.ts",
       "packages/vue/src/components/progress-bar/progress-bar.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/progress-bar/index.ts",
+      "packages/svelte/src/lib/components/progress-bar/ProgressBar.svelte",
+      "packages/svelte/src/lib/components/progress-bar/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/progress-bar/__tests__/progress-bar-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/progress-bar/__tests__/progress-bar-taxonomy.test.ts",
@@ -43,6 +48,12 @@
       "apps/storybook-vue/src/stories/progress-bar/__tests__/progress-bar-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/progress-bar/Introduction.mdx",
       "apps/storybook-vue/src/stories/progress-bar/progress-bar.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/progress-bar/__tests__/progress-bar-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/progress-bar/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/progress-bar/progress-bar.stories.ts",
+      "apps/storybook-svelte/src/stories/progress-bar/ProgressBarShowcase.svelte"
     ],
     "contracts": ["tests/contracts/progress-bar.contract.ts"]
   },
@@ -96,8 +107,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

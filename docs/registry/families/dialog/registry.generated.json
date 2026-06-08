@@ -41,6 +41,16 @@
       "packages/vue/src/components/dialog/index.ts",
       "packages/vue/src/components/dialog/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/dialog/ConfirmDialog.svelte",
+      "packages/svelte/src/lib/components/dialog/DestructiveDialog.svelte",
+      "packages/svelte/src/lib/components/dialog/Dialog.svelte",
+      "packages/svelte/src/lib/components/dialog/DialogModal.svelte",
+      "packages/svelte/src/lib/components/dialog/index.ts",
+      "packages/svelte/src/lib/components/dialog/InfoDialog.svelte",
+      "packages/svelte/src/lib/components/dialog/README.md",
+      "packages/svelte/src/lib/components/dialog/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
@@ -60,6 +70,21 @@
       "apps/storybook-vue/src/stories/dialog/dialog.stories.ts",
       "apps/storybook-vue/src/stories/dialog/info-dialog.stories.ts",
       "apps/storybook-vue/src/stories/dialog/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/dialog/confirm-dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/ConfirmDialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/destructive-dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/DestructiveDialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/dialog-modal.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/DialogAtomStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/DialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/info-dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/InfoDialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/Introduction.mdx"
     ],
     "contracts": ["tests/contracts/dialog.contract.ts", "tests/contracts/dialog-modal.contract.ts"]
   },
@@ -136,8 +161,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

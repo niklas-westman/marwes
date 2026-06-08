@@ -40,6 +40,14 @@
       "packages/vue/src/components/spinner/spinner.ts",
       "packages/vue/src/components/spinner/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte",
+      "packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte",
+      "packages/svelte/src/lib/components/spinner/index.ts",
+      "packages/svelte/src/lib/components/spinner/README.md",
+      "packages/svelte/src/lib/components/spinner/Spinner.svelte",
+      "packages/svelte/src/lib/components/spinner/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
@@ -55,6 +63,17 @@
       "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts",
       "apps/storybook-vue/src/stories/spinner/Introduction.mdx",
       "apps/storybook-vue/src/stories/spinner/spinner.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/spinner/button-spinner.stories.ts",
+      "apps/storybook-svelte/src/stories/spinner/ButtonSpinnerStory.svelte",
+      "apps/storybook-svelte/src/stories/spinner/empty-state-spinner.stories.ts",
+      "apps/storybook-svelte/src/stories/spinner/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/spinner/spinner.stories.ts",
+      "apps/storybook-svelte/src/stories/spinner/SpinnerGallery.svelte",
+      "apps/storybook-svelte/src/stories/spinner/SpinnerTreatments.svelte"
     ],
     "contracts": ["tests/contracts/spinner.contract.ts"]
   },
@@ -154,8 +173,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

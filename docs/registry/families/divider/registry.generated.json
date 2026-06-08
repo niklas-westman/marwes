@@ -32,6 +32,12 @@
       "packages/vue/src/components/divider/divider.ts",
       "packages/vue/src/components/divider/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/divider/Divider.svelte",
+      "packages/svelte/src/lib/components/divider/index.ts",
+      "packages/svelte/src/lib/components/divider/README.md",
+      "packages/svelte/src/lib/components/divider/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/divider/__tests__/divider-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/divider/__tests__/divider-taxonomy.test.ts",
@@ -43,6 +49,13 @@
       "apps/storybook-vue/src/stories/divider/__tests__/divider-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/divider/divider.stories.ts",
       "apps/storybook-vue/src/stories/divider/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/divider/__tests__/divider-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/divider/divider.stories.ts",
+      "apps/storybook-svelte/src/stories/divider/DividerPreview.svelte",
+      "apps/storybook-svelte/src/stories/divider/DividerShowcase.svelte",
+      "apps/storybook-svelte/src/stories/divider/Introduction.mdx"
     ],
     "contracts": ["tests/contracts/divider.contract.ts"]
   },
@@ -100,8 +113,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

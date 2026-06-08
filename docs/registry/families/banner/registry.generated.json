@@ -35,6 +35,15 @@
       "packages/vue/src/components/banner/index.ts",
       "packages/vue/src/components/banner/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/banner/Banner.svelte",
+      "packages/svelte/src/lib/components/banner/ErrorBanner.svelte",
+      "packages/svelte/src/lib/components/banner/index.ts",
+      "packages/svelte/src/lib/components/banner/InfoBanner.svelte",
+      "packages/svelte/src/lib/components/banner/SuccessBanner.svelte",
+      "packages/svelte/src/lib/components/banner/types.ts",
+      "packages/svelte/src/lib/components/banner/WarningBanner.svelte"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/banner/__tests__/banner-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/banner/__tests__/banner-taxonomy.test.ts",
@@ -46,6 +55,14 @@
       "apps/storybook-vue/src/stories/banner/__tests__/banner-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/banner/banner.stories.ts",
       "apps/storybook-vue/src/stories/banner/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/banner/__tests__/banner-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/banner/__tests__/banner-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/banner/banner.stories.ts",
+      "apps/storybook-svelte/src/stories/banner/BannerDarkGallery.svelte",
+      "apps/storybook-svelte/src/stories/banner/BannerGallery.svelte",
+      "apps/storybook-svelte/src/stories/banner/Introduction.mdx"
     ],
     "contracts": []
   },
@@ -110,8 +127,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

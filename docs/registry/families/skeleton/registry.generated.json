@@ -32,6 +32,12 @@
       "packages/vue/src/components/skeleton/index.ts",
       "packages/vue/src/components/skeleton/skeleton.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/skeleton/index.ts",
+      "packages/svelte/src/lib/components/skeleton/README.md",
+      "packages/svelte/src/lib/components/skeleton/Skeleton.svelte",
+      "packages/svelte/src/lib/components/skeleton/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
@@ -45,6 +51,14 @@
       "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
       "apps/storybook-vue/src/stories/skeleton/skeleton-molecules.stories.ts",
       "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/skeleton/__tests__/skeleton-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/skeleton/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/skeleton/skeleton-molecules.stories.ts",
+      "apps/storybook-svelte/src/stories/skeleton/skeleton.stories.ts",
+      "apps/storybook-svelte/src/stories/skeleton/SkeletonMolecules.svelte",
+      "apps/storybook-svelte/src/stories/skeleton/SkeletonShowcase.svelte"
     ],
     "contracts": ["tests/contracts/skeleton.contract.ts"]
   },
@@ -87,8 +101,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

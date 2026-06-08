@@ -32,6 +32,12 @@
       "packages/vue/src/components/date-picker/date-picker.ts",
       "packages/vue/src/components/date-picker/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/date-picker/DatePicker.svelte",
+      "packages/svelte/src/lib/components/date-picker/index.ts",
+      "packages/svelte/src/lib/components/date-picker/README.md",
+      "packages/svelte/src/lib/components/date-picker/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
       "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
@@ -43,6 +49,11 @@
       "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
       "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts.disabled",
       "apps/storybook-vue/src/stories/date-picker/Introduction.mdx.disabled"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/date-picker/date-picker.stories.ts.disabled",
+      "apps/storybook-svelte/src/stories/date-picker/DatePickerDemo.svelte",
+      "apps/storybook-svelte/src/stories/date-picker/Introduction.mdx.disabled"
     ],
     "contracts": ["tests/contracts/date-picker.contract.ts"]
   },
@@ -101,8 +112,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

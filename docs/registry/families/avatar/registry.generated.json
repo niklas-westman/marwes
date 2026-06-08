@@ -44,6 +44,17 @@
       "packages/vue/src/components/avatar/index.ts",
       "packages/vue/src/components/avatar/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/avatar/Avatar.svelte",
+      "packages/svelte/src/lib/components/avatar/AvatarBadge.svelte",
+      "packages/svelte/src/lib/components/avatar/AvatarGroup.svelte",
+      "packages/svelte/src/lib/components/avatar/index.ts",
+      "packages/svelte/src/lib/components/avatar/PresenceAvatar.svelte",
+      "packages/svelte/src/lib/components/avatar/ProfileAvatar.svelte",
+      "packages/svelte/src/lib/components/avatar/README.md",
+      "packages/svelte/src/lib/components/avatar/TeamAvatarGroup.svelte",
+      "packages/svelte/src/lib/components/avatar/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/avatar/__tests__/avatar-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/avatar/__tests__/avatar-taxonomy.test.ts",
@@ -67,6 +78,19 @@
       "apps/storybook-vue/src/stories/avatar/presence-avatar.stories.ts",
       "apps/storybook-vue/src/stories/avatar/profile-avatar.stories.ts",
       "apps/storybook-vue/src/stories/avatar/team-avatar-group.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/avatar/__tests__/avatar-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/avatar/avatar-badge.stories.ts",
+      "apps/storybook-svelte/src/stories/avatar/avatar-group.stories.ts",
+      "apps/storybook-svelte/src/stories/avatar/avatar.stories.ts",
+      "apps/storybook-svelte/src/stories/avatar/AvatarBadgeGallery.svelte",
+      "apps/storybook-svelte/src/stories/avatar/AvatarGallery.svelte",
+      "apps/storybook-svelte/src/stories/avatar/AvatarGroupDark.svelte",
+      "apps/storybook-svelte/src/stories/avatar/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/avatar/presence-avatar.stories.ts",
+      "apps/storybook-svelte/src/stories/avatar/profile-avatar.stories.ts",
+      "apps/storybook-svelte/src/stories/avatar/team-avatar-group.stories.ts"
     ],
     "contracts": [
       "tests/contracts/avatar.contract.ts",
@@ -146,8 +170,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

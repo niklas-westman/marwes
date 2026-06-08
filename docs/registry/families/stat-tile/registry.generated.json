@@ -32,6 +32,12 @@
       "packages/vue/src/components/stat-tile/index.ts",
       "packages/vue/src/components/stat-tile/stat-tile.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/stat-tile/index.ts",
+      "packages/svelte/src/lib/components/stat-tile/README.md",
+      "packages/svelte/src/lib/components/stat-tile/StatTile.svelte",
+      "packages/svelte/src/lib/components/stat-tile/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/stat-tile/__tests__/stat-tile-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
@@ -43,6 +49,13 @@
       "apps/storybook-vue/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/stat-tile/Introduction.mdx",
       "apps/storybook-vue/src/stories/stat-tile/stat-tile.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/stat-tile/__tests__/stat-tile-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/stat-tile/__tests__/stat-tile-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/stat-tile/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/stat-tile/stat-tile.stories.ts",
+      "apps/storybook-svelte/src/stories/stat-tile/StatTileToneMatrix.svelte"
     ],
     "contracts": ["tests/contracts/stat-tile.contract.ts"]
   },
@@ -89,8 +102,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

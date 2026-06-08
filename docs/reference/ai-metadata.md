@@ -8,7 +8,7 @@ This document defines the canonical semantic protocol for covered component fami
 
 The semantic layer should be:
 - source-owned in `@marwes-ui/core`
-- emitted consistently by React and Vue adapters
+- emitted consistently by React, Vue, and Svelte adapters
 - testable through shared contracts
 - documented in one canonical place
 
@@ -71,10 +71,13 @@ These are useful, but they are not part of the first canonical cross-family prot
 Track C currently defines canonical semantics for these families:
 - `button`
 - `badge`
+- `banner`
 - `avatar`
 - `toast`
 - `dialog`
+- `drawer`
 - `context-menu`
+- `breadcrumb`
 
 ## Wave 1 purpose vocabulary
 
@@ -169,7 +172,7 @@ Current source registry lives in:
 
 ## Testing expectations
 
-For covered families, React and Vue should agree on:
+For covered families, React, Vue, and Svelte should agree on:
 - `data-component`
 - `data-purpose`
 - `data-action` where applicable

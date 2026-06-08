@@ -1,5 +1,5 @@
 /**
- * Tests the Storybook input taxonomy — ensures all React and Vue input stories
+ * Tests the Storybook input taxonomy — ensures all React, Vue, and Svelte input stories
  * use the Input/* title hierarchy, verifies the legacy stories/field directory
  * was removed, and checks that introduction docs cover domain and naming.
  */
@@ -10,6 +10,10 @@ import { describe, expect, it } from "vitest"
 const repositoryRoot = resolve(import.meta.dirname, "../../../..")
 const reactInputStoriesDirectory = resolve(repositoryRoot, "apps/storybook-react/src/stories/input")
 const vueInputStoriesDirectory = resolve(repositoryRoot, "apps/storybook-vue/src/stories/input")
+const svelteInputStoriesDirectory = resolve(
+  repositoryRoot,
+  "apps/storybook-svelte/src/stories/input",
+)
 const vueLegacyFieldStoriesDirectory = resolve(
   repositoryRoot,
   "apps/storybook-vue/src/stories/field",
@@ -76,11 +80,16 @@ async function readStoryTitles(directoryPath: string): Promise<Map<string, strin
 }
 
 describe("storybook input taxonomy", () => {
-  it("uses Input/* titles for all React and Vue input stories", async () => {
+  it("uses Input/* titles for all React, Vue, and Svelte input stories", async () => {
     const reactTitlesByFile = await readStoryTitles(reactInputStoriesDirectory)
     const vueTitlesByFile = await readStoryTitles(vueInputStoriesDirectory)
+    const svelteTitlesByFile = await readStoryTitles(svelteInputStoriesDirectory)
 
-    const allTitles = [...reactTitlesByFile.values(), ...vueTitlesByFile.values()].flat()
+    const allTitles = [
+      ...reactTitlesByFile.values(),
+      ...vueTitlesByFile.values(),
+      ...svelteTitlesByFile.values(),
+    ].flat()
     expect(allTitles.length).toBeGreaterThan(0)
 
     for (const title of allTitles) {
@@ -98,7 +107,7 @@ describe("storybook input taxonomy", () => {
     await expect(access(vueLegacyFieldStoriesDirectory)).rejects.toThrow()
   })
 
-  it("documents input domain and field naming in both intro pages", async () => {
+  it("documents input domain and field naming in all framework intro pages", async () => {
     const reactIntroduction = await readFile(
       resolve(reactInputStoriesDirectory, "Introduction.mdx"),
       "utf8",
@@ -107,8 +116,12 @@ describe("storybook input taxonomy", () => {
       resolve(vueInputStoriesDirectory, "Introduction.mdx"),
       "utf8",
     )
+    const svelteIntroduction = await readFile(
+      resolve(svelteInputStoriesDirectory, "Introduction.mdx"),
+      "utf8",
+    )
 
-    for (const introduction of [reactIntroduction, vueIntroduction]) {
+    for (const introduction of [reactIntroduction, vueIntroduction, svelteIntroduction]) {
       expect(introduction).toContain("Input domain")
       expect(introduction).toContain("Field naming")
     }

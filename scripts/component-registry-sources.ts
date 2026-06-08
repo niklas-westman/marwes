@@ -25,8 +25,10 @@ export interface RegistryFamilySource {
   presetPaths: string[]
   reactDir: string
   vueDir: string
+  svelteDir: string
   storybookReactDir: string
   storybookVueDir: string
+  storybookSvelteDir: string
   contractPaths: string[]
   auditIndexPath: string
   familyAuditDocPath: string | null
@@ -41,8 +43,10 @@ interface RegistryFamilyPathOverrides {
   presetPaths?: string[]
   reactDir?: string
   vueDir?: string
+  svelteDir?: string
   storybookReactDir?: string
   storybookVueDir?: string
+  storybookSvelteDir?: string
 }
 
 interface CreateRegistryFamilySourceOptions {
@@ -86,8 +90,10 @@ function buildDefaultFamilyPaths(
     presetPaths: [`packages/presets/src/firstEdition/${family}.css`],
     reactDir: `packages/react/src/components/${family}`,
     vueDir: `packages/vue/src/components/${family}`,
+    svelteDir: `packages/svelte/src/lib/components/${family}`,
     storybookReactDir: `apps/storybook-react/src/stories/${family}`,
     storybookVueDir: `apps/storybook-vue/src/stories/${family}`,
+    storybookSvelteDir: `apps/storybook-svelte/src/stories/${family}`,
   }
 }
 

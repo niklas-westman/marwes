@@ -34,6 +34,15 @@
       "packages/vue/src/components/card/index.ts",
       "packages/vue/src/components/card/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/card/Card.svelte",
+      "packages/svelte/src/lib/components/card/index.ts",
+      "packages/svelte/src/lib/components/card/ProductCard.svelte",
+      "packages/svelte/src/lib/components/card/ProfileCard.svelte",
+      "packages/svelte/src/lib/components/card/README.md",
+      "packages/svelte/src/lib/components/card/StatCard.svelte",
+      "packages/svelte/src/lib/components/card/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/card/__tests__/card-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/card/__tests__/card-taxonomy.test.ts",
@@ -51,6 +60,16 @@
       "apps/storybook-vue/src/stories/card/product-card.stories.ts",
       "apps/storybook-vue/src/stories/card/profile-card.stories.ts",
       "apps/storybook-vue/src/stories/card/stat-card.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/card/__tests__/card-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/card/card.stories.ts",
+      "apps/storybook-svelte/src/stories/card/CardRichContent.svelte",
+      "apps/storybook-svelte/src/stories/card/CardStateMatrix.svelte",
+      "apps/storybook-svelte/src/stories/card/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/card/product-card.stories.ts",
+      "apps/storybook-svelte/src/stories/card/profile-card.stories.ts",
+      "apps/storybook-svelte/src/stories/card/stat-card.stories.ts"
     ],
     "contracts": []
   },
@@ -120,8 +139,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

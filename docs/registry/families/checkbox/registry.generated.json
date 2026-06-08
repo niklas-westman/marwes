@@ -45,6 +45,14 @@
       "packages/vue/src/components/checkbox/checkbox.ts",
       "packages/vue/src/components/checkbox/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/checkbox/Checkbox.svelte",
+      "packages/svelte/src/lib/components/checkbox/CheckboxField.svelte",
+      "packages/svelte/src/lib/components/checkbox/CheckboxGroupField.svelte",
+      "packages/svelte/src/lib/components/checkbox/index.ts",
+      "packages/svelte/src/lib/components/checkbox/README.md",
+      "packages/svelte/src/lib/components/checkbox/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/checkbox/__tests__/checkbox-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/checkbox/__tests__/checkbox-taxonomy.test.ts",
@@ -60,6 +68,14 @@
       "apps/storybook-vue/src/stories/checkbox/checkbox-group-field.stories.ts",
       "apps/storybook-vue/src/stories/checkbox/checkbox.stories.ts",
       "apps/storybook-vue/src/stories/checkbox/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/checkbox/__tests__/checkbox-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/checkbox/checkbox-field.stories.ts",
+      "apps/storybook-svelte/src/stories/checkbox/checkbox-group-field.stories.ts",
+      "apps/storybook-svelte/src/stories/checkbox/checkbox.stories.ts",
+      "apps/storybook-svelte/src/stories/checkbox/CheckboxShowcase.svelte",
+      "apps/storybook-svelte/src/stories/checkbox/Introduction.mdx"
     ],
     "contracts": [
       "tests/contracts/checkbox.contract.ts",
@@ -145,8 +161,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

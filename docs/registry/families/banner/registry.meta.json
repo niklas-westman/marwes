@@ -28,7 +28,7 @@
     "automationCovers": [
       "Variant-specific role and aria-live assignment in core recipe.",
       "Dismiss button aria-label in all adapters.",
-      "React and Vue adapter tests for a11y attributes, slot visibility, and dismiss interaction."
+      "React, Vue, and Svelte adapter tests for a11y attributes, slot visibility, and dismiss interaction."
     ],
     "manualReviewRequired": [
       "Whether banner messages are concise enough for screen reader announcement.",

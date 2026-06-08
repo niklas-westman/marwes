@@ -174,7 +174,7 @@ flowchart LR
 ### Stories
 - atom, molecule, and purpose layers are represented where applicable
 - docs pages reflect the actual exported API
-- React and Vue stories stay aligned
+- React, Vue, and Svelte stories stay aligned
 - semantic claims in docs should match the core semantic registry for covered families
 
 ## Accessibility verification
@@ -185,7 +185,7 @@ This file explains the test layers. The accessibility support doc explains what 
 Automated:
 - story-level accessibility checks for the first Storybook smoke set via `pnpm test:storybook:a11y`
 - adapter tests using semantic queries
-- shared React/Vue contracts for covered families
+- shared React/Vue/Svelte contracts for covered families
 - registry-backed family posture references
 
 Manual:
@@ -197,7 +197,7 @@ Manual:
 
 Current honest repo-level boundary:
 - Storybook accessibility tooling now has a first enforced smoke set, and that smoke set is part of `pnpm check`
-- current smoke-set families are Button, Checkbox, Radio, Toast, and Spinner across React and Vue Storybook apps
+- current smoke-set families are Button, Checkbox, Radio, Toast, and Spinner across React, Vue, and Svelte Storybook apps
 - the repo is still not fully hard-gated across every story because only promoted smoke-set stories run in this gate today
 - higher-risk families still need manual review even when automated checks pass
 
@@ -264,7 +264,7 @@ Keep deeper judgement in [Architecture](./architecture.md) and [Repo Map](./repo
 
 ## Family validation
 
-Use [`docs/reference/family-validation.md`](./family-validation.md) as the canonical workflow for validating one component family across core, presets, React, Vue, Storybook, registry, and docs.
+Use [`docs/reference/family-validation.md`](./family-validation.md) as the canonical workflow for validating one component family across core, presets, React, Vue, Svelte, Storybook, registry, and docs.
 
 Default family gate:
 

@@ -30,6 +30,11 @@
       "packages/vue/src/components/context-menu/context-menu.ts",
       "packages/vue/src/components/context-menu/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/context-menu/ContextMenu.svelte",
+      "packages/svelte/src/lib/components/context-menu/index.ts",
+      "packages/svelte/src/lib/components/context-menu/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
@@ -41,6 +46,12 @@
       "apps/storybook-vue/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/context-menu/context-menu.stories.ts",
       "apps/storybook-vue/src/stories/context-menu/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/context-menu/context-menu.stories.ts",
+      "apps/storybook-svelte/src/stories/context-menu/Introduction.mdx"
     ],
     "contracts": []
   },
@@ -92,8 +103,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

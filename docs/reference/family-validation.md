@@ -10,8 +10,9 @@ Every family should be validated through the same architecture layers:
 2. Preset CSS hooks and shipped styling surface
 3. React adapter behavior
 4. Vue adapter behavior
-5. Storybook docs, taxonomy, and parity
-6. Registry and docs links
+5. Svelte adapter behavior
+6. Storybook docs, taxonomy, and parity
+7. Registry and docs links
 
 The goal is not to run every repo check after every small edit. The goal is to run the smallest family gate while working, then run the broader release gates before merging or publishing.
 
@@ -30,7 +31,8 @@ This runs the available checks for the requested family:
 - preset CSS/export tests relevant to the family
 - React family tests
 - Vue family tests
-- React/Vue Storybook docs tests for the family
+- Svelte family tests
+- React/Vue/Svelte Storybook docs tests for the family
 - Storybook consistency for that family only
 - registry generated artifact check
 - docs link check
@@ -102,9 +104,9 @@ pnpm validate:release
 A family is ready when:
 
 - core output is framework-agnostic and tested
-- React and Vue stay thin over core
+- React, Vue, and Svelte stay thin over core
 - CSS selectors match the `[data-component]` and `mw-*` contract
-- Storybook has aligned React/Vue coverage
+- Storybook has aligned React/Vue/Svelte coverage
 - docs explain usage without requiring source-code reading
 - registry generated files are current
 - accessibility posture is explicit about automated and manual coverage
