@@ -33,7 +33,8 @@ function RowButtonPaginationProgress(): JSX.Element {
         <Pagination
           page={currentPage}
           pageCount={10}
-          siblingCount={2}
+          controlDisplay="label"
+          maxVisibleItems={5}
           onPageChange={setCurrentPage}
         />
       </ItemCard>

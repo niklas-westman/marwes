@@ -51,6 +51,7 @@ const fixture: ResolvedTheme = {
     borderStrong: "#A3A3A3",
     borderDisabled: "#D8D8D8",
     borderBrand: "#2F31FC",
+    borderFull: "#000000",
     focus: "#2F31FC",
     status: {
       success: {
@@ -266,6 +267,10 @@ describe("themeToCSSVars — surface / semantic", () => {
     expect(themeToCSSVars(fixture)["--mw-color-border-disabled"]).toBe("#D8D8D8")
   })
 
+  it("border-full equals fixture value", () => {
+    expect(themeToCSSVars(fixture)["--mw-color-border-full"]).toBe("#000000")
+  })
+
   it("brand text and border equal fixture values", () => {
     expect(themeToCSSVars(fixture)["--mw-color-text-brand"]).toBe("#2F31FC")
     expect(themeToCSSVars(fixture)["--mw-color-border-brand"]).toBe("#2F31FC")
@@ -413,8 +418,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 147 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(147)
+  it("emits exactly 148 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(148)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

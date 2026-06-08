@@ -45,6 +45,7 @@ export interface ResolvedTheme {
     borderStrong: string
     borderDisabled: string
     borderBrand: string
+    borderFull: string
     focus: string
     status: {
       success: StatusColorTokens
@@ -123,7 +124,7 @@ function textTypographyStyleVars(
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 147 entries total. `variant` is excluded — it is deprecated.
+ * Returns 148 entries total. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -144,7 +145,7 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-secondary-border": color.secondary.border,
     "--mw-color-secondary-border-disabled": color.secondary.borderDisabled,
 
-    // Surface / semantic neutrals (20)
+    // Surface / semantic neutrals (24)
     "--mw-color-background": color.background,
     "--mw-color-surface": color.surface,
     "--mw-color-surface-primary": color.surfacePrimary,
@@ -167,6 +168,7 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-border-strong": color.borderStrong,
     "--mw-color-border-disabled": color.borderDisabled,
     "--mw-color-border-brand": color.borderBrand,
+    "--mw-color-border-full": color.borderFull,
     "--mw-color-focus": color.focus,
 
     // Status role tokens (4 × 5 = 20)

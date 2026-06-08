@@ -39,6 +39,7 @@ export const lightThemeDefaults: Theme = {
     borderStrong: "#A3A3A3",
     borderDisabled: "#D8D8D8",
     borderBrand: "#2F31FC",
+    borderFull: "#000000",
 
     // Focus
     focus: "#2F31FC",
@@ -208,6 +209,7 @@ export const darkThemeDefaults: Theme = {
     borderStrong: "#A3A3A3",
     borderDisabled: "#474747",
     borderBrand: "#5859FC",
+    borderFull: "#FFFFFF",
 
     // Focus
     focus: "#8182FC",

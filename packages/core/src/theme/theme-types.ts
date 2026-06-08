@@ -98,6 +98,7 @@ export type Theme = {
     borderStrong: string
     borderDisabled: string
     borderBrand: string
+    borderFull: string
 
     /**
      * Focus color used for focus-visible outlines on interactive elements.
@@ -187,6 +188,7 @@ export interface ThemeInputColor {
   borderSubtle: string
   borderStrong: string
   borderDisabled: string
+  borderFull: string
   focus: string
 
   // Removed in v3 — typed never so consumers get a descriptive TS error

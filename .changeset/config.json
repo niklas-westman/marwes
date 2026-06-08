@@ -21,6 +21,7 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
+    "dashboard-teaser",
     "playground-react",
     "playground-svelte",
     "storybook-react",

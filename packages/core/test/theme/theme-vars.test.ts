@@ -37,9 +37,11 @@ describe("theme variable helpers", () => {
     expect(mwTheme.color.textLink).toBe("var(--mw-color-text-link)")
     expect(mwTheme.color.iconMuted).toBe("var(--mw-color-icon-muted)")
     expect(mwTheme.color.borderLow).toBe("var(--mw-color-border-low)")
+    expect(mwTheme.color.borderFull).toBe("var(--mw-color-border-full)")
     expect(mwThemeVars.color.primary.base).toBe("var(--mw-color-primary-base)")
     expect(mwThemeVarNames.color.surfaceBrand).toBe("--mw-color-surface-brand")
     expect(mwThemeVarNames.color.borderLow).toBe("--mw-color-border-low")
+    expect(mwThemeVarNames.color.borderFull).toBe("--mw-color-border-full")
     expect(mwThemeVarNames.color.text).toBe("--mw-color-text")
   })
 

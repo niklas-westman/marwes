@@ -8,7 +8,7 @@ describe("React segmented-control introduction docs", () => {
   it("documents the Segmented Control introduction page", () => {
     const docs = readFileSync(path.join(storiesDir, "Introduction.mdx"), "utf8")
 
-    expect(docs).toContain('title="Segmented Control/Introduction"')
+    expect(docs).toContain('title="SegmentedControl/Introduction"')
     expect(docs).toContain("SegmentedControl")
   })
 })

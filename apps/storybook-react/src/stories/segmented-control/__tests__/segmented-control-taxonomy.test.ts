@@ -20,6 +20,6 @@ describe("React segmented-control story taxonomy", () => {
   })
 
   it("has an Introduction.mdx with correct title", () => {
-    expect(readStoryFile("Introduction.mdx")).toContain('title="Segmented Control/Introduction"')
+    expect(readStoryFile("Introduction.mdx")).toContain('title="SegmentedControl/Introduction"')
   })
 })

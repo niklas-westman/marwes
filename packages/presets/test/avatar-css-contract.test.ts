@@ -28,11 +28,19 @@ describe("avatar.css figma sync contract", () => {
     expect(css).toContain("border: 2px solid var(--mw-color-surface, #f9fafb);")
   })
 
-  it("keeps icon avatars borderless", () => {
+  it("matches standalone and grouped icon avatar surfaces", () => {
     expect(css).toContain(
-      ".mw-avatar--icon {\n  --mw-avatar-surface: var(--mw-color-surface, #f8f8f8);\n  --mw-avatar-border-width: 0px;\n  --mw-avatar-border-color: transparent;",
+      ".mw-avatar--icon {\n  --mw-avatar-surface: var(--mw-color-surface-primary, #ffffff);\n  --mw-avatar-border-width: 1px;\n  --mw-avatar-border-color: var(--mw-color-border-full, #000000);",
     )
-    expect(css).toContain("--mw-avatar-surface: var(--mw-color-surface, #1a1a1a);")
+    expect(css).toContain("--mw-avatar-surface: var(--mw-color-surface-elevated, #2b2b2b);")
+    expect(css).toContain("--mw-avatar-border-color: var(--mw-color-border-full, #ffffff);")
+    expect(css).toContain(
+      ".mw-avatar-group__item > .mw-avatar--icon {\n  --mw-avatar-surface: var(--mw-color-surface, #f8f8f8);\n  --mw-avatar-border-width: 0px;\n  --mw-avatar-border-color: transparent;",
+    )
+  })
+
+  it("keeps image avatars on the primary fallback in dark mode", () => {
+    expect(css).toContain("--mw-avatar-image-fallback: var(--mw-color-primary-base, #5859fc);")
   })
 
   it("matches AvatarGroup overlap, outside stroke, and counter metrics", () => {

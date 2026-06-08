@@ -84,7 +84,7 @@ Marwes is accessible because accessibility is part of the component contract, no
 - **React and Vue stay thin** so both adapters apply the same core contract to native DOM elements instead of inventing separate accessibility behavior per framework.
 - **Native controls come first** for buttons, inputs, selects, checkboxes, radios, textareas, and form fields, with ARIA added only where a pattern needs explicit wiring.
 - **Field components wire labels, helper text, and errors** into `for`, `id`, `aria-describedby`, `aria-invalid`, and polite error announcements.
-- **Storybook a11y smoke checks** run through the Storybook a11y addon for the current promoted families in both React and Vue.
+- **Storybook a11y smoke checks** run through the Storybook a11y addon for the current promoted families in React, Vue, and Svelte.
 
 Example: an invalid field is not just styled red. The component contract also wires the accessible name, description, and invalid state:
 
@@ -469,7 +469,7 @@ pnpm changeset add --empty
 
 CI enforces this only for `packages/**`. Changes to Storybook, playgrounds, docs, workflows, or root tooling do not require a changeset unless they also touch publishable packages.
 
-The published Marwes packages are versioned as a fixed group. If a changeset includes any of `@marwes-ui/core`, `@marwes-ui/react`, `@marwes-ui/presets`, or `@marwes-ui/vue`, include all four in that same changeset.
+The published Marwes packages are versioned as a fixed group. If a changeset includes any of `@marwes-ui/core`, `@marwes-ui/react`, `@marwes-ui/presets`, `@marwes-ui/vue`, or `@marwes-ui/svelte`, include all five in that same changeset.
 
 **Repo structure:**
 
@@ -477,8 +477,10 @@ The published Marwes packages are versioned as a fixed group. If a changeset inc
 - `packages/presets` — Design tokens and static CSS
 - `packages/react` — React adapter
 - `packages/vue` — Vue adapter
+- `packages/svelte` — Svelte adapter
 - `apps/storybook-react` — React component documentation
 - `apps/storybook-vue` — Vue component documentation
+- `apps/storybook-svelte` — Svelte component documentation
 - `apps/playground-react` — Integration testing and manual verification
 
 ---

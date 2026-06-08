@@ -1,5 +1,6 @@
 import {
   Avatar,
+  AvatarBadge,
   AvatarGroup,
   Breadcrumb,
   ContextMenu,
@@ -17,7 +18,7 @@ import type { BreadcrumbItem, ContextMenuEntry, SegmentedControlItem } from "@ma
 import { useState } from "react"
 import styled from "styled-components"
 
-import { Card } from "./shared"
+import { Card, ShowcaseSectionLabel } from "./shared"
 
 type ToastVariant = "subtle" | "outline" | "rich"
 
@@ -205,16 +206,21 @@ function RowToastMenuAvatar(): JSX.Element {
         <ContextMenu ariaLabel="File actions" items={contextMenuItems} />
       </MenuCard>
       <AvatarCard>
-        <Text variant={TextVariant.overline}>Avatar</Text>
+        <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>
         <AvatarRow>
           <AvatarGroup
-            items={[{ initials: "MO" }, { initials: "MO" }, { initials: "MO" }]}
+            items={[
+              { initials: "MO" },
+              { initials: "MO" },
+              { initials: "MO" },
+              { type: "icon", ariaLabel: "Guest member" },
+            ]}
             overflowCount={3}
           />
-          <Avatar initials="MO" />
+          <AvatarBadge initials="MO" statusLabel="Online" />
           <Avatar src={robotAvatarSrc} alt="Marwes robot" />
           <Avatar initials="MO" size="small" />
-          <Avatar size="small" />
+          <Avatar type="icon" ariaLabel="User icon fallback" />
         </AvatarRow>
       </AvatarCard>
       <BreadcrumbCard>

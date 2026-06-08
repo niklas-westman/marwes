@@ -122,6 +122,7 @@ export const mwThemeVarNames = {
     borderStrong: "--mw-color-border-strong",
     borderDisabled: "--mw-color-border-disabled",
     borderBrand: "--mw-color-border-brand",
+    borderFull: "--mw-color-border-full",
     focus: "--mw-color-focus",
     status: {
       success: {
@@ -358,6 +359,7 @@ export const mwThemeVars = {
     borderStrong: "var(--mw-color-border-strong)",
     borderDisabled: "var(--mw-color-border-disabled)",
     borderBrand: "var(--mw-color-border-brand)",
+    borderFull: "var(--mw-color-border-full)",
     focus: "var(--mw-color-focus)",
     status: {
       success: {

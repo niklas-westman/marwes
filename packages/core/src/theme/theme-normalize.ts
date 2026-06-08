@@ -146,6 +146,7 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
       borderStrong: input.color?.borderStrong ?? colorBase.borderStrong,
       borderDisabled: input.color?.borderDisabled ?? colorBase.borderDisabled,
       borderBrand: colorBase.borderBrand,
+      borderFull: input.color?.borderFull ?? colorBase.borderFull,
       focus: input.color?.focus ?? colorBase.focus,
       status: colorBase.status,
     },

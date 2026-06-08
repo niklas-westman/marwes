@@ -4,6 +4,7 @@ import {
   DialogModal,
   Drawer,
   Card as MwCard,
+  Paragraph,
   Text,
   TextVariant,
 } from "@marwes-ui/react"
@@ -56,7 +57,7 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
           </Button>
         }
       >
-        <p>Dialog content goes here. You can place any content inside.</p>
+        <Paragraph>Dialog content goes here. You can place any content inside.</Paragraph>
       </DialogModal>
 
       {drawerOpen && (
