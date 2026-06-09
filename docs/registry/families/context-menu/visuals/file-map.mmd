@@ -1,0 +1,21 @@
+flowchart TD
+  Registry["docs/registry/families/context-menu"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/context-menu/"]
+  Core --> CoreFiles["context-menu-a11y.ts\ncontext-menu-recipe.ts\ncontext-menu-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["context-menu.css"]
+
+  React["packages/react/src/components/context-menu/"]
+  Vue["packages/vue/src/components/context-menu/"]
+  Svelte["packages/svelte/src/lib/components/context-menu/"]
+
+  StoriesR["apps/storybook-react/src/stories/context-menu/"]
+  StoriesV["apps/storybook-vue/src/stories/context-menu/"]
+  StoriesS["apps/storybook-svelte/src/stories/context-menu/"]
+
+  Figma[".figma/marwes/components/context-menu.json\n.figma/marwes/components/partscontext-menucontext-menu-item.json"]

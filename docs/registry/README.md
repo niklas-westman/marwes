@@ -76,7 +76,6 @@ artifacts/
 - Architecture truth still lives in [`../reference/architecture.md`](../reference/architecture.md)
 - Semantic truth still lives in `@marwes-ui/core` and [`../reference/ai-metadata.md`](../reference/ai-metadata.md)
 - Cross-family accessibility support assumptions now live in [`../reference/accessibility.md`](../reference/accessibility.md)
-- Accessibility strategy and support assumptions live in [`../reference/accessibility.md`](../reference/accessibility.md)
 - Family accessibility execution still lives in [`../audits/README.md`](../audits/README.md)
 - Compact current family blocker/manual-review status lives in [`../audits/status.md`](../audits/status.md)
 
@@ -100,21 +99,25 @@ When preview assets are needed:
 
 Human-readable registry pages currently exist for:
 
-- [Button registry](./families/button/README.md)
+- [Accordion registry](./families/accordion/README.md)
+- [Avatar registry](./families/avatar/README.md)
 - [Badge registry](./families/badge/README.md)
 - [Banner registry](./families/banner/README.md)
-- [Avatar registry](./families/avatar/README.md)
+- [Breadcrumb registry](./families/breadcrumb/README.md)
+- [Button registry](./families/button/README.md)
 - [Card registry](./families/card/README.md)
+- [Checkbox registry](./families/checkbox/README.md)
 - [ContextMenu registry](./families/context-menu/README.md)
 - [DatePicker registry](./families/date-picker/README.md)
 - [Dialog registry](./families/dialog/README.md)
-- [Checkbox registry](./families/checkbox/README.md)
 - [Divider registry](./families/divider/README.md)
+- [Drawer registry](./families/drawer/README.md)
 - [Heading registry](./families/heading/README.md)
-- [Input registry](./families/input/README.md)
 - [Icon registry](./families/icon/README.md)
+- [Input registry](./families/input/README.md)
 - [Pagination registry](./families/pagination/README.md)
 - [Paragraph registry](./families/paragraph/README.md)
+- [ProgressBar registry](./families/progress-bar/README.md)
 - [Radio registry](./families/radio/README.md)
 - [SegmentedControl registry](./families/segmented-control/README.md)
 - [Skeleton registry](./families/skeleton/README.md)
@@ -124,13 +127,13 @@ Human-readable registry pages currently exist for:
 - [StatTile registry](./families/stat-tile/README.md)
 - [Switch registry](./families/switch/README.md)
 - [Tab registry](./families/tab/README.md)
+- [Text registry](./families/text/README.md)
 - [Toast registry](./families/toast/README.md)
 - [Tooltip registry](./families/tooltip/README.md)
 
 Known rollout gaps:
-- `progress-bar` has `registry.meta.json` and `registry.generated.json`, but still needs the human README and visual diagrams.
-- `breadcrumb`, `drawer`, and `text` are shipped across core, React, Vue, Svelte, and Storybook, but do not yet have registry family folders.
-- `banner`, `context-menu`, `date-picker`, `skeleton`, and `stat-tile` have human pages, but still need the standard visual diagrams.
+- No shipped family registry folders are currently missing.
+- Every shipped registry family has a human page, authored metadata, generated structural output, and the standard visual diagrams.
 
 ## Working with the registry
 
@@ -140,9 +143,9 @@ Known rollout gaps:
 
 ## Next likely steps
 
-1. Continue with the next family queue from `family-rollout-checklist.md`
-2. Use `pnpm validate:family <family>` as the default focused family gate
-3. Use `pnpm validate:release` before publish-level decisions
+1. Use `pnpm validate:family <family>` as the default focused family gate.
+2. Use `pnpm validate:release` before publish-level decisions.
+3. Promote repeated manual-review findings into contracts or generator checks before adding more prose.
 
 
 Status ownership note: compact cross-family status is owned by `docs/audits/status.md`.

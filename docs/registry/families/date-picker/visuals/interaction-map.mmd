@@ -1,0 +1,12 @@
+flowchart LR
+  Calendar["DatePicker model\nmonth + day entries"] --> Grid["calendar grid"]
+  Grid --> DayButton["day button"]
+  DayButton --> Selected["selected\naria-selected=true"]
+  DayButton --> Disabled["disabled\naria-disabled=true"]
+  DayButton --> Range["range start/end/in-range metadata"]
+  DayButton --> NullState["null / outside day state"]
+
+  Product["product-owned date math"] --> Calendar
+  Product --> MonthNav["month navigation"]
+  Product --> ValueState["selected date or range state"]
+  DayButton --> Change["onChange callback"]

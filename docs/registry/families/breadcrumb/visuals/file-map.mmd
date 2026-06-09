@@ -1,0 +1,21 @@
+flowchart TD
+  Registry["docs/registry/families/breadcrumb"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/breadcrumb/"]
+  Core --> CoreFiles["breadcrumb-a11y.ts\nbreadcrumb-recipe.ts\nbreadcrumb-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["breadcrumb.css"]
+
+  React["packages/react/src/components/breadcrumb/"]
+  Vue["packages/vue/src/components/breadcrumb/"]
+  Svelte["packages/svelte/src/lib/components/breadcrumb/"]
+
+  StoriesR["apps/storybook-react/src/stories/breadcrumb/"]
+  StoriesV["apps/storybook-vue/src/stories/breadcrumb/"]
+  StoriesS["apps/storybook-svelte/src/stories/breadcrumb/"]
+
+  Figma[".figma/marwes/components/breadcrumb.json\nparts breadcrumb item + separator"]

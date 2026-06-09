@@ -1,0 +1,25 @@
+flowchart TD
+  Registry["docs/registry/families/banner"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/banner/"]
+  Core --> CoreFiles["banner-a11y.ts\nbanner-recipe.ts\nbanner-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["banner.css"]
+
+  React["packages/react/src/components/banner/"]
+  React --> ReactFiles["banner.tsx\nvariants.tsx\ntests"]
+
+  Vue["packages/vue/src/components/banner/"]
+  Vue --> VueFiles["banner.ts\nvariants.ts\ntests"]
+
+  Svelte["packages/svelte/src/lib/components/banner/"]
+  Svelte --> SvelteFiles["Banner.svelte\nInfoBanner.svelte\nSuccessBanner.svelte\nWarningBanner.svelte\nErrorBanner.svelte"]
+
+  StoriesR["apps/storybook-react/src/stories/banner/"]
+  StoriesV["apps/storybook-vue/src/stories/banner/"]
+  StoriesS["apps/storybook-svelte/src/stories/banner/"]
+  Contracts["tests/contracts/banner.contract.ts"]

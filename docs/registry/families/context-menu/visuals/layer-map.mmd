@@ -1,0 +1,21 @@
+flowchart LR
+  Figma["Figma refs\ncontext-menu + item"]
+  Core["@marwes-ui/core\nrecipe + a11y + types"]
+  Presets["preset CSS\ncontext-menu.css"]
+  React["@marwes-ui/react\nContextMenu"]
+  Vue["@marwes-ui/vue\nContextMenu"]
+  Svelte["@marwes-ui/svelte\nContextMenu"]
+  Stories["Storybook React + Vue + Svelte"]
+  Registry["docs/registry/families/context-menu"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry

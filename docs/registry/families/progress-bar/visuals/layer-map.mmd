@@ -1,0 +1,26 @@
+flowchart LR
+  Figma["Figma refs\nprogress-bar sizes"]
+  Core["@marwes-ui/core\nrecipe + a11y + types"]
+  Presets["preset CSS\nprogress-bar.css"]
+  React["@marwes-ui/react\nProgressBar"]
+  Vue["@marwes-ui/vue\nProgressBar"]
+  Svelte["@marwes-ui/svelte\nProgressBar"]
+  Stories["Storybook React + Vue + Svelte"]
+  Contracts["progress-bar shared contract"]
+  Registry["docs/registry/families/progress-bar"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Svelte --> Contracts
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

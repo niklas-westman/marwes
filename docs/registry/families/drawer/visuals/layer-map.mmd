@@ -1,0 +1,21 @@
+flowchart LR
+  Figma["Figma refs\ndrawer variants"]
+  Core["@marwes-ui/core\nrecipe + dialog a11y"]
+  Presets["preset CSS\ndrawer.css"]
+  React["@marwes-ui/react\nDrawer"]
+  Vue["@marwes-ui/vue\nDrawer"]
+  Svelte["@marwes-ui/svelte\nDrawer"]
+  Stories["Storybook React + Vue + Svelte"]
+  Registry["docs/registry/families/drawer"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry

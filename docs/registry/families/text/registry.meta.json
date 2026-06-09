@@ -1,0 +1,72 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "text",
+  "displayName": "Text",
+  "status": "shipped",
+  "summary": "Non-heading typography atom for labels, captions, overline, microcopy, and supporting body text where consumers choose the native element.",
+  "philosophy": [
+    "Keep Text as the smallest typography primitive for labels and support copy, not a replacement for Heading or Paragraph.",
+    "Keep semantic element choice explicit through the as prop so product code owns inline versus block meaning.",
+    "Use the shared typography preset and theme text variants as the runtime source of truth."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs label, caption, overline, microcopy, or compact supporting text.",
+      "The caller needs to choose span, p, or div while reusing Marwes typography variants.",
+      "React, Vue, and Svelte consumers need the same typography class and native-element contract."
+    ],
+    "avoidWhen": [
+      "The text creates page or section hierarchy; use Heading.",
+      "The text is long-form body copy; use Paragraph.",
+      "The text is part of an input state that should use the field component's built-in label, helper, or error slots."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Shared Text contract tests for default tag, variant classes, as prop, and id passthrough.",
+      "Adapter tests and Storybook introduction/taxonomy tests across React, Vue, and Svelte."
+    ],
+    "manualReviewRequired": [
+      "Typography visual review against current dashboard and typography-adjacent Figma refs.",
+      "Product-level review that Text is not used to fake heading hierarchy or long-form paragraph structure."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "Text is intentionally family-local and native-first; it does not emit data-component metadata today."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/text/Introduction.mdx",
+        "apps/storybook-react/src/stories/text/text.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/text/Introduction.mdx",
+        "apps/storybook-vue/src/stories/text/text.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/text/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/text/text.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "label",
+      "caption",
+      "overline",
+      "micro",
+      "body",
+      "span",
+      "p",
+      "div",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should Text eventually emit family-local data attributes, or should it remain purely native typography?",
+    "Should the typography Figma source gain a dedicated Text component set to separate it from input-field text refs?"
+  ]
+}

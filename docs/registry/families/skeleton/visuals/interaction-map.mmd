@@ -1,0 +1,10 @@
+flowchart LR
+  Shape["variant\ntext circular rectangular"] --> Recipe["Skeleton render kit"]
+  Animation["animation\npulse wave none"] --> Recipe
+  Size["width height radius"] --> Recipe
+
+  Recipe --> Decorative["default decorative placeholder\naria-hidden=true"]
+  Recipe --> Status["optional status label\nrole=status"]
+  Product["product-owned loading context"] --> Decorative
+  Product --> Status
+  Product --> Replacement["real content replaces skeleton"]

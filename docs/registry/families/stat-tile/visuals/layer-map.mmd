@@ -1,0 +1,26 @@
+flowchart LR
+  Figma["Figma refs\nstat-tile + trend"]
+  Core["@marwes-ui/core\nrecipe + a11y + types"]
+  Presets["preset CSS\nstat-tile.css"]
+  React["@marwes-ui/react\nStatTile"]
+  Vue["@marwes-ui/vue\nStatTile"]
+  Svelte["@marwes-ui/svelte\nStatTile"]
+  Stories["Storybook React + Vue + Svelte"]
+  Contracts["stat-tile shared contract"]
+  Registry["docs/registry/families/stat-tile"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Svelte --> Contracts
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

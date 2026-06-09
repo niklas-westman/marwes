@@ -1732,6 +1732,87 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  drawer: createRegistryFamilySource({
+    family: "drawer",
+    contractPaths: [],
+    figma: {
+      componentJsons: [".figma/marwes/components/drawer.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+        ".figma/marwes/pages/-drawer/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-drawer/-drawer_1609-15651.json",
+        ".figma/marwes/pages/-drawer/-drawer-dark_3017-37492.json",
+        ".figma/marwes/pages/-drawer/component-container_2967-7341.json",
+      ],
+      nodeReferences: {
+        drawerComponentSet: "3017:37258",
+        drawerLightFrame: "1609:15651",
+        drawerDarkFrame: "3017:37492",
+        drawerContainer: "2967:7341",
+      },
+      figmaTokens: ["drawer/surface", "drawer/border", "drawer/scrim"],
+      figmaStates: {
+        baseVariants: ["default", "minimal", "small", "medium", "large", "left", "right"],
+        interactionStates: ["open", "closed", "modal", "scrim", "footer", "dismissible"],
+      },
+    },
+  }),
+  text: createRegistryFamilySource({
+    family: "text",
+    contractPaths: ["tests/contracts/text.contract.ts"],
+    pathOverrides: {
+      presetPaths: ["packages/presets/src/firstEdition/typography.css"],
+    },
+    semantics: {
+      coverageLevel: "family-local",
+      dataComponent: null,
+      canonicalAttributes: [],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: [
+        "packages/core/src/components/atoms/text/text-recipe.ts",
+        "packages/core/src/components/atoms/text/text-types.ts",
+        "packages/core/src/theme/text-variant.ts",
+      ],
+      notes: [
+        "Text is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+        "The atom emits typography classes and native inline/block text elements without adding Marwes data-component metadata.",
+      ],
+    },
+    figma: {
+      componentJsons: [],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/------playground---dashboard/text_2832-29644.json",
+        ".figma/marwes/pages/------playground---dashboard/row-1-typography-text-inputs_2832-29277.json",
+        ".figma/marwes/pages/-dashboard-teaser/text-box_3088-24118.json",
+      ],
+      nodeReferences: {
+        dashboardTextFrame: "2832:29644",
+        typographyInputsRow: "2832:29277",
+        dashboardTeaserTextBox: "3088:24118",
+      },
+      figmaTokens: ["typography/label", "typography/caption", "text/primary"],
+      figmaStates: {
+        baseVariants: ["label", "caption", "overline", "micro", "body"],
+        interactionStates: ["span", "p", "div", "light", "dark"],
+      },
+    },
+  }),
   toast: createRegistryFamilySource({
     family: "toast",
     contractPaths: ["tests/contracts/toast.contract.ts"],

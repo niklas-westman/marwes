@@ -1,0 +1,116 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "drawer",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md"],
+    "roadmap": [],
+    "core": [
+      "packages/core/src/components/atoms/drawer/drawer-a11y.ts",
+      "packages/core/src/components/atoms/drawer/drawer-recipe.ts",
+      "packages/core/src/components/atoms/drawer/drawer-types.ts",
+      "packages/core/src/components/atoms/drawer/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/drawer.css"],
+    "react": [
+      "packages/react/src/components/drawer/__tests__/drawer.test.tsx",
+      "packages/react/src/components/drawer/drawer.tsx",
+      "packages/react/src/components/drawer/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/drawer/__tests__/drawer.test.ts",
+      "packages/vue/src/components/drawer/drawer.ts",
+      "packages/vue/src/components/drawer/index.ts"
+    ],
+    "svelte": [
+      "packages/svelte/src/lib/components/drawer/Drawer.svelte",
+      "packages/svelte/src/lib/components/drawer/index.ts",
+      "packages/svelte/src/lib/components/drawer/types.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/drawer/__tests__/drawer-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/drawer/__tests__/drawer-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/drawer/drawer.stories.tsx",
+      "apps/storybook-react/src/stories/drawer/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/drawer/__tests__/drawer-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/drawer/__tests__/drawer-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/drawer/drawer.stories.ts",
+      "apps/storybook-vue/src/stories/drawer/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/drawer/__tests__/drawer-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/drawer/__tests__/drawer-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/drawer/drawer.stories.ts",
+      "apps/storybook-svelte/src/stories/drawer/DrawerAtomStory.svelte",
+      "apps/storybook-svelte/src/stories/drawer/Introduction.mdx"
+    ],
+    "contracts": []
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "drawer",
+    "canonicalAttributes": ["data-component", "data-size"],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": [
+      "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level."
+    ]
+  },
+  "design": {
+    "componentJsons": [".figma/marwes/components/drawer.json"],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md",
+      ".figma/marwes/pages/-drawer/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-drawer/-drawer_1609-15651.json",
+      ".figma/marwes/pages/-drawer/-drawer-dark_3017-37492.json",
+      ".figma/marwes/pages/-drawer/component-container_2967-7341.json"
+    ],
+    "nodeReferences": {
+      "drawerComponentSet": "3017:37258",
+      "drawerLightFrame": "1609:15651",
+      "drawerDarkFrame": "3017:37492",
+      "drawerContainer": "2967:7341"
+    },
+    "figmaTokens": ["drawer/surface", "drawer/border", "drawer/scrim"],
+    "figmaStates": {
+      "baseVariants": ["default", "minimal", "small", "medium", "large", "left", "right"],
+      "interactionStates": ["open", "closed", "modal", "scrim", "footer", "dismissible"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "svelte": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "storybookSvelte": true,
+    "contractsPresent": true,
+    "auditDocPresent": false,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level.",
+    "Generated from docs/registry/families/drawer/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

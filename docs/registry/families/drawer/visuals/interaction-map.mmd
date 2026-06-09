@@ -1,0 +1,13 @@
+flowchart LR
+  Open["open state\nconsumer-owned"] --> Shell["Drawer shell"]
+  Shell --> Panel["panel\nrole=dialog"]
+  Shell --> Scrim["optional scrim"]
+  Panel --> Title["aria-label or aria-labelledby"]
+  Panel --> Content["body content"]
+  Panel --> Footer["optional footer"]
+  Panel --> Close["optional close button"]
+
+  Modal["modal=true"] --> AriaModal["aria-modal=true"]
+  Close --> Callback["onClose callback"]
+  Scrim --> Dismiss["dismissible close behavior"]
+  Product["product owns focus trap and return"] --> Shell

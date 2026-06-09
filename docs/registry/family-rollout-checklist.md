@@ -96,49 +96,51 @@ Every family snapshot should try to include:
 | Accordion | Done | Family-local | First pass complete | grouped-disclosure baseline with shared contract coverage |
 | Avatar | Done | Canonical | Queued | identity baseline with atom, molecule, and purpose contract coverage |
 | Badge | Done | Canonical | Queued | compact-status baseline with atom, grouping, and purpose contract coverage |
-| Banner | Done | Canonical | Queued | single-atom status message family; visual diagrams still pending |
+| Banner | Done | Canonical | Queued | single-atom status message family with role/status mapping |
+| Breadcrumb | Done | Canonical | Queued | navigation hierarchy baseline with current-page semantics |
 | Button | Done | Canonical | Queued | good baseline simple family |
 | Card | Done | Family-local | Queued | passive-surface baseline with local purpose wrappers |
 | Checkbox | Done | None | First pass complete | native-checkbox baseline with atom, single-field, and grouped shared contract coverage |
-| ContextMenu | Done | Canonical | Queued | custom menu surface; visual diagrams still pending |
-| DatePicker | Done | Family-local | Queued | date-entry baseline; visual diagrams still pending |
+| ContextMenu | Done | Canonical | Queued | custom menu surface with product-owned trigger and positioning |
+| DatePicker | Done | Family-local | Queued | date-entry baseline with calendar/day-state metadata |
 | Dialog | Done | Canonical | First pass complete | best shell-vs-modal example |
 | Divider | Done | Family-local | Queued | semantic-separator baseline with horizontal-vs-vertical guidance |
+| Drawer | Done | Canonical | Queued | dialog-adjacent panel baseline with product-owned focus lifecycle |
 | Heading | Done | None | Queued | native-heading baseline with shared typography preset usage |
 | Icon | Done | None | Queued | named-SVG baseline with decorative-vs-labelled contract coverage |
 | Input | Done | Family-local | First pass complete | best complex family example |
 | Pagination | Done | Family-local | Queued | native navigation baseline from the current component wave |
 | Paragraph | Done | None | Queued | native body-copy baseline with shared typography preset usage |
+| ProgressBar | Done | Family-local | First pass complete | read-only determinate progress baseline with shared contract coverage |
 | Radio | Done | Family-local | First pass complete | native single-selection baseline with grouped field-helper wiring |
 | SegmentedControl | Done | Family-local | Queued | compact single-selection control from the current component wave |
-| Skeleton | Done | Family-local | Queued | passive loading-placeholder baseline; visual diagrams still pending |
+| Skeleton | Done | Family-local | Queued | passive loading-placeholder baseline |
 | Slider | Done | Family-local | First pass complete | native-range baseline with shared contract and field-wiring coverage |
 | Spacing | Done | Family-local | Queued | decorative layout-baseline family with explicit token vocabulary |
 | Spinner | Done | Family-local | Queued | indeterminate-loading baseline with atom, context-wrapper, and button integration |
-| StatTile | Done | Family-local | Queued | passive metric-tile baseline; visual diagrams still pending |
+| StatTile | Done | Family-local | Queued | passive metric-tile baseline |
 | Switch | Done | Family-local | First pass complete | field-wiring baseline with shared contract coverage |
 | Tab | Done | Family-local | First pass complete | coordinated-widget baseline with shared contract coverage |
+| Text | Done | Family-local | Queued | native typography baseline for label/caption/support copy |
 | Toast | Done | Canonical | Queued | live-region baseline with provider/container delivery coverage |
 | Tooltip | Done | Family-local | First pass complete | contextual-help baseline with shared contract coverage |
 
 ### Partial or missing registry coverage
 
-| Family | Registry state | Shipped surface | Next work |
-| --- | --- | --- | --- |
-| ProgressBar | Partial: meta/generated only | Core, presets, React, Vue, Svelte, and Storybook exist | Add README plus standard visuals |
-| Breadcrumb | Missing family folder | Core, presets, React, Vue, Svelte, and Storybook exist | Add full registry family folder |
-| Drawer | Missing family folder | Core, presets, React, Vue, Svelte, and Storybook exist | Add full registry family folder |
-| Text | Missing family folder | Core, presets, React, Vue, Svelte, and Storybook exist | Add full registry family folder |
-
-The registry should not be described as complete until these rows are resolved.
+None. Every shipped registry family currently has:
+- a human `README.md`
+- authored `registry.meta.json`
+- generated `registry.generated.json`
+- standard `visuals/layer-map.mmd`, `visuals/file-map.mmd`, and `visuals/interaction-map.mmd`
 
 ## Suggested next family queue
 
-1. `progress-bar` — finish the existing partial registry entry with a human README and visuals.
-2. `breadcrumb` — create the missing family folder from the existing source/story surfaces.
-3. `drawer` — create the missing family folder and document its dialog-adjacent behavior boundary.
-4. `text` — create the missing typography-adjacent registry entry and clarify `Text` vs `Paragraph`/`Heading`.
-5. Add the standard visual diagrams for `banner`, `context-menu`, `date-picker`, `skeleton`, and `stat-tile`.
+No shipped-family registry coverage gaps remain.
+
+The next useful queue is quality hardening:
+1. promote repeated adapter parity issues into shared contracts
+2. add dedicated family audit docs for queued families when they become accessibility priorities
+3. use `pnpm validate:family <family>` before touching runtime behavior
 
 ## Session start checklist
 

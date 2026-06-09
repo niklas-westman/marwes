@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "breadcrumb",
+  "displayName": "Breadcrumb",
+  "status": "shipped",
+  "summary": "Navigation hierarchy atom with optional home entry, current-page metadata, hidden separators, and shared nav/list semantics across adapters.",
+  "philosophy": [
+    "Keep Breadcrumb focused on representing page hierarchy while routing and link resolution stay product-owned.",
+    "Keep the current item explicit through aria-current so visual state and screen-reader state remain aligned.",
+    "Use the synced Figma breadcrumb component and item/separator parts as the compact visual baseline."
+  ],
+  "usage": {
+    "useWhen": [
+      "A page needs to show its location inside a broader hierarchy.",
+      "The current page should be announced as the current breadcrumb item.",
+      "React, Vue, and Svelte consumers need the same nav/list/separator semantics."
+    ],
+    "avoidWhen": [
+      "The UI needs primary site navigation rather than location context.",
+      "The hierarchy cannot identify a truthful current page.",
+      "Routing behavior, link resolution, or page ownership is still unclear."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core and adapter tests for nav/list structure, home entry, current item metadata, and separator hiding.",
+      "Storybook introduction and taxonomy tests in React, Vue, and Svelte apps."
+    ],
+    "manualReviewRequired": [
+      "Visual review against the synced light and dark Figma breadcrumb frames.",
+      "Product-level review that the current item, page title, and URL hierarchy match."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "Breadcrumb is covered by the canonical family semantic registry with data-component=breadcrumb."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/breadcrumb/Introduction.mdx",
+        "apps/storybook-react/src/stories/breadcrumb/breadcrumb.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/breadcrumb/Introduction.mdx",
+        "apps/storybook-vue/src/stories/breadcrumb/breadcrumb.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/breadcrumb/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/breadcrumb/breadcrumb.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "home",
+      "link-item",
+      "current-page",
+      "separator",
+      "hover",
+      "focus",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": [
+    "Should a future managed breadcrumb helper infer the current item from router state, or should routing remain fully product-owned?"
+  ]
+}

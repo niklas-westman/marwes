@@ -816,7 +816,11 @@
       "readmePath": "docs/registry/families/banner/README.md",
       "metaPath": "docs/registry/families/banner/registry.meta.json",
       "generatedPath": "docs/registry/families/banner/registry.generated.json",
-      "visualPaths": [],
+      "visualPaths": [
+        "docs/registry/families/banner/visuals/file-map.mmd",
+        "docs/registry/families/banner/visuals/interaction-map.mmd",
+        "docs/registry/families/banner/visuals/layer-map.mmd"
+      ],
       "previewPaths": [],
       "meta": {
         "family": "banner",
@@ -1023,6 +1027,208 @@
         "notes": [
           "Banner is a single-atom family with thin purpose variants that preset the variant prop and emit canonical data-purpose metadata.",
           "Generated from docs/registry/families/banner/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
+      "family": "breadcrumb",
+      "readmePath": "docs/registry/families/breadcrumb/README.md",
+      "metaPath": "docs/registry/families/breadcrumb/registry.meta.json",
+      "generatedPath": "docs/registry/families/breadcrumb/registry.generated.json",
+      "visualPaths": [
+        "docs/registry/families/breadcrumb/visuals/file-map.mmd",
+        "docs/registry/families/breadcrumb/visuals/interaction-map.mmd",
+        "docs/registry/families/breadcrumb/visuals/layer-map.mmd"
+      ],
+      "previewPaths": [],
+      "meta": {
+        "family": "breadcrumb",
+        "displayName": "Breadcrumb",
+        "status": "shipped",
+        "summary": "Navigation hierarchy atom with optional home entry, current-page metadata, hidden separators, and shared nav/list semantics across adapters.",
+        "philosophy": [
+          "Keep Breadcrumb focused on representing page hierarchy while routing and link resolution stay product-owned.",
+          "Keep the current item explicit through aria-current so visual state and screen-reader state remain aligned.",
+          "Use the synced Figma breadcrumb component and item/separator parts as the compact visual baseline."
+        ],
+        "usage": {
+          "useWhen": [
+            "A page needs to show its location inside a broader hierarchy.",
+            "The current page should be announced as the current breadcrumb item.",
+            "React, Vue, and Svelte consumers need the same nav/list/separator semantics."
+          ],
+          "avoidWhen": [
+            "The UI needs primary site navigation rather than location context.",
+            "The hierarchy cannot identify a truthful current page.",
+            "Routing behavior, link resolution, or page ownership is still unclear."
+          ]
+        },
+        "axe": {
+          "riskTier": "low",
+          "auditStatus": "queued",
+          "automationCovers": [
+            "Core and adapter tests for nav/list structure, home entry, current item metadata, and separator hiding.",
+            "Storybook introduction and taxonomy tests in React, Vue, and Svelte apps."
+          ],
+          "manualReviewRequired": [
+            "Visual review against the synced light and dark Figma breadcrumb frames.",
+            "Product-level review that the current item, page title, and URL hierarchy match."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "Breadcrumb is covered by the canonical family semantic registry with data-component=breadcrumb."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/breadcrumb/Introduction.mdx",
+              "apps/storybook-react/src/stories/breadcrumb/breadcrumb.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/breadcrumb/Introduction.mdx",
+              "apps/storybook-vue/src/stories/breadcrumb/breadcrumb.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/breadcrumb/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/breadcrumb/breadcrumb.stories.ts"
+            ]
+          },
+          "preferredStates": [
+            "home",
+            "link-item",
+            "current-page",
+            "separator",
+            "hover",
+            "focus",
+            "light",
+            "dark"
+          ]
+        },
+        "openQuestions": [
+          "Should a future managed breadcrumb helper infer the current item from router state, or should routing remain fully product-owned?"
+        ]
+      },
+      "generated": {
+        "family": "breadcrumb",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/breadcrumb/breadcrumb-a11y.ts",
+            "packages/core/src/components/atoms/breadcrumb/breadcrumb-recipe.ts",
+            "packages/core/src/components/atoms/breadcrumb/breadcrumb-types.ts",
+            "packages/core/src/components/atoms/breadcrumb/index.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/breadcrumb.css"],
+          "react": [
+            "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
+            "packages/react/src/components/breadcrumb/breadcrumb.tsx",
+            "packages/react/src/components/breadcrumb/index.ts"
+          ],
+          "vue": [
+            "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
+            "packages/vue/src/components/breadcrumb/breadcrumb.ts",
+            "packages/vue/src/components/breadcrumb/index.ts"
+          ],
+          "svelte": [
+            "packages/svelte/src/lib/components/breadcrumb/Breadcrumb.svelte",
+            "packages/svelte/src/lib/components/breadcrumb/index.ts",
+            "packages/svelte/src/lib/components/breadcrumb/types.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/breadcrumb/__tests__/breadcrumb-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/breadcrumb/__tests__/breadcrumb-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/breadcrumb/breadcrumb.stories.tsx",
+            "apps/storybook-react/src/stories/breadcrumb/Introduction.mdx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/breadcrumb/__tests__/breadcrumb-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/breadcrumb/__tests__/breadcrumb-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/breadcrumb/breadcrumb.stories.ts",
+            "apps/storybook-vue/src/stories/breadcrumb/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/breadcrumb/__tests__/breadcrumb-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/breadcrumb/__tests__/breadcrumb-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/breadcrumb/breadcrumb.stories.ts",
+            "apps/storybook-svelte/src/stories/breadcrumb/BreadcrumbButtonBacked.svelte",
+            "apps/storybook-svelte/src/stories/breadcrumb/BreadcrumbPreview.svelte",
+            "apps/storybook-svelte/src/stories/breadcrumb/BreadcrumbShowcase.svelte",
+            "apps/storybook-svelte/src/stories/breadcrumb/Introduction.mdx"
+          ],
+          "contracts": []
+        },
+        "semantics": {
+          "coverageLevel": "canonical",
+          "dataComponent": "breadcrumb",
+          "canonicalAttributes": ["data-component"],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [
+            "packages/core/src/semantics/family-semantics.ts",
+            "packages/core/src/semantics/purpose-semantics.ts"
+          ],
+          "notes": [
+            "Breadcrumb exposes navigation hierarchy while routing, link resolution, and page ownership stay consumer-owned."
+          ]
+        },
+        "design": {
+          "componentJsons": [
+            ".figma/marwes/components/breadcrumb.json",
+            ".figma/marwes/components/partsbreadcrumbbreadcrumb-item.json",
+            ".figma/marwes/components/partsbreadcrumbbreadcrumb-separator.json"
+          ],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/-breadcrumb/-breadcrumb_1574-27193.json",
+            ".figma/marwes/pages/-breadcrumb/-breadcrumb-dark_1574-27268.json",
+            ".figma/marwes/pages/-breadcrumb/component-container_1592-2744.json"
+          ],
+          "nodeReferences": {
+            "breadcrumbComponent": "1574:26965",
+            "breadcrumbItemComponent": "1574:26960",
+            "breadcrumbSeparatorComponent": "1574:26962",
+            "breadcrumbLightFrame": "1574:27193",
+            "breadcrumbDarkFrame": "1574:27268",
+            "breadcrumbContainer": "1592:2744"
+          },
+          "figmaTokens": ["breadcrumb/link", "breadcrumb/current", "breadcrumb/muted"],
+          "figmaStates": {
+            "baseVariants": ["home", "link-item", "separator", "current-page"],
+            "interactionStates": ["light", "dark", "hover", "focus", "current"]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "svelte": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "storybookSvelte": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Breadcrumb exposes navigation hierarchy while routing, link resolution, and page ownership stay consumer-owned.",
+          "Generated from docs/registry/families/breadcrumb/registry.meta.json and scripts/generate-component-registry.ts."
         ]
       }
     },
@@ -1949,7 +2155,11 @@
       "readmePath": "docs/registry/families/context-menu/README.md",
       "metaPath": "docs/registry/families/context-menu/registry.meta.json",
       "generatedPath": "docs/registry/families/context-menu/registry.generated.json",
-      "visualPaths": [],
+      "visualPaths": [
+        "docs/registry/families/context-menu/visuals/file-map.mmd",
+        "docs/registry/families/context-menu/visuals/interaction-map.mmd",
+        "docs/registry/families/context-menu/visuals/layer-map.mmd"
+      ],
       "previewPaths": [],
       "meta": {
         "family": "context-menu",
@@ -2145,7 +2355,11 @@
       "readmePath": "docs/registry/families/date-picker/README.md",
       "metaPath": "docs/registry/families/date-picker/registry.meta.json",
       "generatedPath": "docs/registry/families/date-picker/registry.generated.json",
-      "visualPaths": [],
+      "visualPaths": [
+        "docs/registry/families/date-picker/visuals/file-map.mmd",
+        "docs/registry/families/date-picker/visuals/interaction-map.mmd",
+        "docs/registry/families/date-picker/visuals/layer-map.mmd"
+      ],
       "previewPaths": [],
       "meta": {
         "family": "date-picker",
@@ -2811,6 +3025,206 @@
           "Divider is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
           "The atom emits data-component=divider plus local size and orientation metadata directly from core.",
           "Generated from docs/registry/families/divider/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
+      "family": "drawer",
+      "readmePath": "docs/registry/families/drawer/README.md",
+      "metaPath": "docs/registry/families/drawer/registry.meta.json",
+      "generatedPath": "docs/registry/families/drawer/registry.generated.json",
+      "visualPaths": [
+        "docs/registry/families/drawer/visuals/file-map.mmd",
+        "docs/registry/families/drawer/visuals/interaction-map.mmd",
+        "docs/registry/families/drawer/visuals/layer-map.mmd"
+      ],
+      "previewPaths": [],
+      "meta": {
+        "family": "drawer",
+        "displayName": "Drawer",
+        "status": "shipped",
+        "summary": "Dialog-adjacent panel atom with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters.",
+        "philosophy": [
+          "Keep Drawer as a panel composition primitive while open state and lifecycle stay product-owned.",
+          "Keep dialog semantics in core so panel labeling, modal state, and data-component identity stay aligned across adapters.",
+          "Document focus management as a product/composition boundary until Marwes ships a managed DrawerShell."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs a side panel for contextual details, navigation, filters, or secondary workflows.",
+            "The panel can provide a truthful aria-label or aria-labelledby reference.",
+            "The product owns open state, close behavior, and focus return around the drawer."
+          ],
+          "avoidWhen": [
+            "The interaction is a blocking confirmation; use Dialog instead.",
+            "The product cannot provide focus management for modal drawer usage.",
+            "The content is short inline help; use Tooltip or a simpler disclosure instead."
+          ]
+        },
+        "axe": {
+          "riskTier": "high",
+          "auditStatus": "queued",
+          "automationCovers": [
+            "Core and adapter tests for panel role, modal metadata, scrim rendering, dismissible behavior, size, and placement classes.",
+            "Storybook introduction and taxonomy tests in React, Vue, and Svelte apps."
+          ],
+          "manualReviewRequired": [
+            "Keyboard focus trap, Escape handling, and focus return in real product compositions.",
+            "Screen-reader announcement of drawer title/description in modal and non-modal contexts.",
+            "Visual review against the synced light and dark Figma drawer frames."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "Drawer is covered by the canonical family semantic registry with data-component=drawer.",
+            "The current atom does not claim to own the full modal lifecycle."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/drawer/Introduction.mdx",
+              "apps/storybook-react/src/stories/drawer/drawer.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/drawer/Introduction.mdx",
+              "apps/storybook-vue/src/stories/drawer/drawer.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/drawer/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/drawer/drawer.stories.ts"
+            ]
+          },
+          "preferredStates": [
+            "default",
+            "minimal",
+            "left",
+            "right",
+            "small",
+            "medium",
+            "large",
+            "scrim",
+            "footer",
+            "dismissible"
+          ]
+        },
+        "openQuestions": [
+          "Should Marwes add a managed DrawerShell that owns focus trap, Escape handling, and focus return?",
+          "Should Drawer expose purpose variants for filters, details, navigation, and checkout flows?"
+        ]
+      },
+      "generated": {
+        "family": "drawer",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/drawer/drawer-a11y.ts",
+            "packages/core/src/components/atoms/drawer/drawer-recipe.ts",
+            "packages/core/src/components/atoms/drawer/drawer-types.ts",
+            "packages/core/src/components/atoms/drawer/index.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/drawer.css"],
+          "react": [
+            "packages/react/src/components/drawer/__tests__/drawer.test.tsx",
+            "packages/react/src/components/drawer/drawer.tsx",
+            "packages/react/src/components/drawer/index.ts"
+          ],
+          "vue": [
+            "packages/vue/src/components/drawer/__tests__/drawer.test.ts",
+            "packages/vue/src/components/drawer/drawer.ts",
+            "packages/vue/src/components/drawer/index.ts"
+          ],
+          "svelte": [
+            "packages/svelte/src/lib/components/drawer/Drawer.svelte",
+            "packages/svelte/src/lib/components/drawer/index.ts",
+            "packages/svelte/src/lib/components/drawer/types.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/drawer/__tests__/drawer-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/drawer/__tests__/drawer-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/drawer/drawer.stories.tsx",
+            "apps/storybook-react/src/stories/drawer/Introduction.mdx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/drawer/__tests__/drawer-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/drawer/__tests__/drawer-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/drawer/drawer.stories.ts",
+            "apps/storybook-vue/src/stories/drawer/Introduction.mdx"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/drawer/__tests__/drawer-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/drawer/__tests__/drawer-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/drawer/drawer.stories.ts",
+            "apps/storybook-svelte/src/stories/drawer/DrawerAtomStory.svelte",
+            "apps/storybook-svelte/src/stories/drawer/Introduction.mdx"
+          ],
+          "contracts": []
+        },
+        "semantics": {
+          "coverageLevel": "canonical",
+          "dataComponent": "drawer",
+          "canonicalAttributes": ["data-component", "data-size"],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [
+            "packages/core/src/semantics/family-semantics.ts",
+            "packages/core/src/semantics/purpose-semantics.ts"
+          ],
+          "notes": [
+            "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level."
+          ]
+        },
+        "design": {
+          "componentJsons": [".figma/marwes/components/drawer.json"],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md",
+            ".figma/marwes/pages/-drawer/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/-drawer/-drawer_1609-15651.json",
+            ".figma/marwes/pages/-drawer/-drawer-dark_3017-37492.json",
+            ".figma/marwes/pages/-drawer/component-container_2967-7341.json"
+          ],
+          "nodeReferences": {
+            "drawerComponentSet": "3017:37258",
+            "drawerLightFrame": "1609:15651",
+            "drawerDarkFrame": "3017:37492",
+            "drawerContainer": "2967:7341"
+          },
+          "figmaTokens": ["drawer/surface", "drawer/border", "drawer/scrim"],
+          "figmaStates": {
+            "baseVariants": ["default", "minimal", "small", "medium", "large", "left", "right"],
+            "interactionStates": ["open", "closed", "modal", "scrim", "footer", "dismissible"]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "svelte": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "storybookSvelte": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Drawer shares dialog semantics while adding panel placement and scrim composition at the family level.",
+          "Generated from docs/registry/families/drawer/registry.meta.json and scripts/generate-component-registry.ts."
         ]
       }
     },
@@ -4157,7 +4571,11 @@
       "readmePath": "docs/registry/families/progress-bar/README.md",
       "metaPath": "docs/registry/families/progress-bar/registry.meta.json",
       "generatedPath": "docs/registry/families/progress-bar/registry.generated.json",
-      "visualPaths": [],
+      "visualPaths": [
+        "docs/registry/families/progress-bar/visuals/file-map.mmd",
+        "docs/registry/families/progress-bar/visuals/interaction-map.mmd",
+        "docs/registry/families/progress-bar/visuals/layer-map.mmd"
+      ],
       "previewPaths": [],
       "meta": {
         "family": "progress-bar",
@@ -4827,7 +5245,11 @@
       "readmePath": "docs/registry/families/skeleton/README.md",
       "metaPath": "docs/registry/families/skeleton/registry.meta.json",
       "generatedPath": "docs/registry/families/skeleton/registry.generated.json",
-      "visualPaths": [],
+      "visualPaths": [
+        "docs/registry/families/skeleton/visuals/file-map.mmd",
+        "docs/registry/families/skeleton/visuals/interaction-map.mmd",
+        "docs/registry/families/skeleton/visuals/layer-map.mmd"
+      ],
       "previewPaths": [],
       "meta": {
         "family": "skeleton",
@@ -5775,7 +6197,11 @@
       "readmePath": "docs/registry/families/stat-tile/README.md",
       "metaPath": "docs/registry/families/stat-tile/registry.meta.json",
       "generatedPath": "docs/registry/families/stat-tile/registry.generated.json",
-      "visualPaths": [],
+      "visualPaths": [
+        "docs/registry/families/stat-tile/visuals/file-map.mmd",
+        "docs/registry/families/stat-tile/visuals/interaction-map.mmd",
+        "docs/registry/families/stat-tile/visuals/layer-map.mmd"
+      ],
       "previewPaths": [],
       "meta": {
         "family": "stat-tile",
@@ -6483,6 +6909,203 @@
           "Tabs are not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
           "Purpose metadata currently lives in the React and Vue purpose-tab wrappers rather than the central semantic registry.",
           "Generated from docs/registry/families/tab/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
+      "family": "text",
+      "readmePath": "docs/registry/families/text/README.md",
+      "metaPath": "docs/registry/families/text/registry.meta.json",
+      "generatedPath": "docs/registry/families/text/registry.generated.json",
+      "visualPaths": [
+        "docs/registry/families/text/visuals/file-map.mmd",
+        "docs/registry/families/text/visuals/interaction-map.mmd",
+        "docs/registry/families/text/visuals/layer-map.mmd"
+      ],
+      "previewPaths": [],
+      "meta": {
+        "family": "text",
+        "displayName": "Text",
+        "status": "shipped",
+        "summary": "Non-heading typography atom for labels, captions, overline, microcopy, and supporting body text where consumers choose the native element.",
+        "philosophy": [
+          "Keep Text as the smallest typography primitive for labels and support copy, not a replacement for Heading or Paragraph.",
+          "Keep semantic element choice explicit through the as prop so product code owns inline versus block meaning.",
+          "Use the shared typography preset and theme text variants as the runtime source of truth."
+        ],
+        "usage": {
+          "useWhen": [
+            "The UI needs label, caption, overline, microcopy, or compact supporting text.",
+            "The caller needs to choose span, p, or div while reusing Marwes typography variants.",
+            "React, Vue, and Svelte consumers need the same typography class and native-element contract."
+          ],
+          "avoidWhen": [
+            "The text creates page or section hierarchy; use Heading.",
+            "The text is long-form body copy; use Paragraph.",
+            "The text is part of an input state that should use the field component's built-in label, helper, or error slots."
+          ]
+        },
+        "axe": {
+          "riskTier": "low",
+          "auditStatus": "queued",
+          "automationCovers": [
+            "Shared Text contract tests for default tag, variant classes, as prop, and id passthrough.",
+            "Adapter tests and Storybook introduction/taxonomy tests across React, Vue, and Svelte."
+          ],
+          "manualReviewRequired": [
+            "Typography visual review against current dashboard and typography-adjacent Figma refs.",
+            "Product-level review that Text is not used to fake heading hierarchy or long-form paragraph structure."
+          ],
+          "roadmapAnchors": [],
+          "notes": [
+            "Text is intentionally family-local and native-first; it does not emit data-component metadata today."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/text/Introduction.mdx",
+              "apps/storybook-react/src/stories/text/text.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/text/Introduction.mdx",
+              "apps/storybook-vue/src/stories/text/text.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/text/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/text/text.stories.ts"
+            ]
+          },
+          "preferredStates": [
+            "label",
+            "caption",
+            "overline",
+            "micro",
+            "body",
+            "span",
+            "p",
+            "div",
+            "light",
+            "dark"
+          ]
+        },
+        "openQuestions": [
+          "Should Text eventually emit family-local data attributes, or should it remain purely native typography?",
+          "Should the typography Figma source gain a dedicated Text component set to separate it from input-field text refs?"
+        ]
+      },
+      "generated": {
+        "family": "text",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md"],
+          "roadmap": [],
+          "core": [
+            "packages/core/src/components/atoms/text/index.ts",
+            "packages/core/src/components/atoms/text/text-recipe.ts",
+            "packages/core/src/components/atoms/text/text-types.ts"
+          ],
+          "presets": ["packages/presets/src/firstEdition/typography.css"],
+          "react": [
+            "packages/react/src/components/text/__tests__/text.test.tsx",
+            "packages/react/src/components/text/index.ts",
+            "packages/react/src/components/text/text.tsx"
+          ],
+          "vue": [
+            "packages/vue/src/components/text/__tests__/text.test.ts",
+            "packages/vue/src/components/text/index.ts",
+            "packages/vue/src/components/text/text.ts"
+          ],
+          "svelte": [
+            "packages/svelte/src/lib/components/text/index.ts",
+            "packages/svelte/src/lib/components/text/Text.svelte",
+            "packages/svelte/src/lib/components/text/types.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/text/__tests__/text-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/text/__tests__/text-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/text/Introduction.mdx",
+            "apps/storybook-react/src/stories/text/text.stories.tsx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/text/__tests__/text-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/text/__tests__/text-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/text/Introduction.mdx",
+            "apps/storybook-vue/src/stories/text/text.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/text/__tests__/text-taxonomy-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/text/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/text/text.stories.ts",
+            "apps/storybook-svelte/src/stories/text/TextShowcase.svelte"
+          ],
+          "contracts": ["tests/contracts/text.contract.ts"]
+        },
+        "semantics": {
+          "coverageLevel": "family-local",
+          "dataComponent": null,
+          "canonicalAttributes": [],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [
+            "packages/core/src/components/atoms/text/text-recipe.ts",
+            "packages/core/src/components/atoms/text/text-types.ts",
+            "packages/core/src/theme/text-variant.ts"
+          ],
+          "notes": [
+            "Text is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+            "The atom emits typography classes and native inline/block text elements without adding Marwes data-component metadata."
+          ]
+        },
+        "design": {
+          "componentJsons": [],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md"
+          ],
+          "pageReferences": [
+            ".figma/marwes/pages/------playground---dashboard/text_2832-29644.json",
+            ".figma/marwes/pages/------playground---dashboard/row-1-typography-text-inputs_2832-29277.json",
+            ".figma/marwes/pages/-dashboard-teaser/text-box_3088-24118.json"
+          ],
+          "nodeReferences": {
+            "dashboardTextFrame": "2832:29644",
+            "typographyInputsRow": "2832:29277",
+            "dashboardTeaserTextBox": "3088:24118"
+          },
+          "figmaTokens": ["typography/label", "typography/caption", "text/primary"],
+          "figmaStates": {
+            "baseVariants": ["label", "caption", "overline", "micro", "body"],
+            "interactionStates": ["span", "p", "div", "light", "dark"]
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "svelte": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "storybookSvelte": true,
+          "contractsPresent": true,
+          "auditDocPresent": false,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Text is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+          "The atom emits typography classes and native inline/block text elements without adding Marwes data-component metadata.",
+          "Generated from docs/registry/families/text/registry.meta.json and scripts/generate-component-registry.ts."
         ]
       }
     },
