@@ -90,7 +90,7 @@
       "typographyInputsRow": "2832:29277",
       "dashboardTeaserTextBox": "3088:24118"
     },
-    "figmaTokens": ["typography/label", "typography/caption", "text/primary"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["label", "caption", "overline", "micro", "body"],
       "interactionStates": ["span", "p", "div", "light", "dark"]

@@ -99,7 +99,7 @@
       "breadcrumbDarkFrame": "1574:27268",
       "breadcrumbContainer": "1592:2744"
     },
-    "figmaTokens": ["breadcrumb/link", "breadcrumb/current", "breadcrumb/muted"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["home", "link-item", "separator", "current-page"],
       "interactionStates": ["light", "dark", "hover", "focus", "current"]

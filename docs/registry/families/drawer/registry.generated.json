@@ -92,7 +92,7 @@
       "drawerDarkFrame": "3017:37492",
       "drawerContainer": "2967:7341"
     },
-    "figmaTokens": ["drawer/surface", "drawer/border", "drawer/scrim"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["default", "minimal", "small", "medium", "large", "left", "right"],
       "interactionStates": ["open", "closed", "modal", "scrim", "footer", "dismissible"]

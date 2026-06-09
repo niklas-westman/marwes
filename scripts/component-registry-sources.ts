@@ -1725,7 +1725,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         breadcrumbDarkFrame: "1574:27268",
         breadcrumbContainer: "1592:2744",
       },
-      figmaTokens: ["breadcrumb/link", "breadcrumb/current", "breadcrumb/muted"],
+      figmaTokens: [],
       figmaStates: {
         baseVariants: ["home", "link-item", "separator", "current-page"],
         interactionStates: ["light", "dark", "hover", "focus", "current"],
@@ -1757,7 +1757,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         drawerDarkFrame: "3017:37492",
         drawerContainer: "2967:7341",
       },
-      figmaTokens: ["drawer/surface", "drawer/border", "drawer/scrim"],
+      figmaTokens: [],
       figmaStates: {
         baseVariants: ["default", "minimal", "small", "medium", "large", "left", "right"],
         interactionStates: ["open", "closed", "modal", "scrim", "footer", "dismissible"],
@@ -1806,7 +1806,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         typographyInputsRow: "2832:29277",
         dashboardTeaserTextBox: "3088:24118",
       },
-      figmaTokens: ["typography/label", "typography/caption", "text/primary"],
+      figmaTokens: [],
       figmaStates: {
         baseVariants: ["label", "caption", "overline", "micro", "body"],
         interactionStates: ["span", "p", "div", "light", "dark"],
