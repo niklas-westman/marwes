@@ -39,13 +39,17 @@
 
   let rootElement: HTMLDivElement | undefined = $state(undefined);
 
-  let internalPreference = $state<ThemePreference>(
-    defaultPreference ?? defaultMode ?? MwThemeMode.light
-  );
+  function getInitialPreference(): ThemePreference {
+    return defaultPreference ?? defaultMode ?? MwThemeMode.light;
+  }
 
-  let systemMode = $state<ThemeMode>(
-    enableSystem ? getSystemThemeMode() : MwThemeMode.light
-  );
+  function getInitialSystemMode(): ThemeMode {
+    return enableSystem ? getSystemThemeMode() : MwThemeMode.light;
+  }
+
+  let internalPreference = $state<ThemePreference>(getInitialPreference());
+
+  let systemMode = $state<ThemeMode>(getInitialSystemMode());
 
   const activePreference = $derived(
     controlledPreference ?? controlledMode ?? theme?.mode ?? internalPreference
@@ -92,13 +96,17 @@
     setMode(nextThemeMode(activeMode));
   }
 
+  function getInitialContextState(): MarwesContextState {
+    return {
+      theme: resolved,
+      mode: activeMode,
+      preference: activePreference,
+      systemMode,
+    };
+  }
+
   // Context state — mutated reactively by effects below
-  const contextState: MarwesContextState = $state({
-    theme: resolved,
-    mode: activeMode,
-    preference: activePreference,
-    systemMode,
-  });
+  const contextState: MarwesContextState = $state(getInitialContextState());
 
   setMarwesContext({
     get state() { return contextState; },

@@ -21,7 +21,13 @@
 
   let { name, options, value, defaultValue, onchange, disabled, required, error, ...fieldProps }: OptionRadioGroupProps = $props();
 
-  let selected = $state(value ?? defaultValue ?? "");
+  function getInitialSelected(): string {
+    return defaultValue ?? "";
+  }
+
+  const isControlled = $derived(value !== undefined);
+  let internalSelected = $state(getInitialSelected());
+  const selected = $derived(isControlled ? (value ?? "") : internalSelected);
   const isInvalid = $derived(error !== undefined && error.trim().length > 0);
 
   function hasTextContent(text: string | undefined): boolean {
@@ -29,7 +35,9 @@
   }
 
   function handleChange(optValue: string) {
-    selected = optValue;
+    if (!isControlled) {
+      internalSelected = optValue;
+    }
     onchange?.(optValue);
   }
 </script>

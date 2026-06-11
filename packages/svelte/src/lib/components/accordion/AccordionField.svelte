@@ -34,7 +34,11 @@
     buildAccordionFieldA11yIds({ id: fieldId, hasDescription, hasError, externalDescribedBy: ariaDescribedBy })
   );
 
-  let internalOpen = $state<string[]>(defaultOpenItems ?? []);
+  function getInitialOpenItems(): string[] {
+    return defaultOpenItems ?? [];
+  }
+
+  let internalOpen = $state<string[]>(getInitialOpenItems());
   const activeOpen = $derived(controlledOpen ?? internalOpen);
 
   function toggleItem(value: string): void {
@@ -60,6 +64,7 @@
   );
 </script>
 
+<!-- svelte-ignore a11y_role_supports_aria_props -->
 <div
   class={wrapperClass}
   role="group"

@@ -19,7 +19,13 @@
 
   let { name, yesLabel = "Yes", noLabel = "No", value, defaultValue, onchange, disabled, ...fieldProps }: YesNoRadioGroupProps = $props();
 
-  let selected = $state(value ?? defaultValue ?? "");
+  function getInitialSelected(): string {
+    return defaultValue ?? "";
+  }
+
+  const isControlled = $derived(value !== undefined);
+  let internalSelected = $state(getInitialSelected());
+  const selected = $derived(isControlled ? (value ?? "") : internalSelected);
 
   const options = $derived([
     { value: "yes", label: yesLabel },
@@ -27,7 +33,9 @@
   ]);
 
   function handleChange(optValue: string) {
-    selected = optValue;
+    if (!isControlled) {
+      internalSelected = optValue;
+    }
     onchange?.(optValue);
   }
 </script>

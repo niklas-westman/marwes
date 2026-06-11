@@ -20,7 +20,13 @@
 
   let { name, min = 1, max = 5, labelFn = String, value, defaultValue, onchange, disabled, ...fieldProps }: RatingRadioGroupProps = $props();
 
-  let selected = $state(value ?? defaultValue ?? "");
+  function getInitialSelected(): string {
+    return defaultValue ?? "";
+  }
+
+  const isControlled = $derived(value !== undefined);
+  let internalSelected = $state(getInitialSelected());
+  const selected = $derived(isControlled ? (value ?? "") : internalSelected);
 
   const options = $derived(
     Array.from({ length: max - min + 1 }, (_, i) => {
@@ -30,7 +36,9 @@
   );
 
   function handleChange(optValue: string) {
-    selected = optValue;
+    if (!isControlled) {
+      internalSelected = optValue;
+    }
     onchange?.(optValue);
   }
 </script>

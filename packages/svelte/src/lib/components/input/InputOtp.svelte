@@ -43,7 +43,11 @@
   const isInvalid = $derived(hasError || invalidProp === true);
   const isControlled = $derived(controlledValue !== undefined);
 
-  let uncontrolledValue = $state(sanitizeInputOtpValue(defaultValue, lengthProp ?? 6));
+  function getInitialUncontrolledValue(): string {
+    return sanitizeInputOtpValue(defaultValue, lengthProp ?? 6);
+  }
+
+  let uncontrolledValue = $state(getInitialUncontrolledValue());
 
   const currentValue = $derived(
     sanitizeInputOtpValue(isControlled ? controlledValue : uncontrolledValue, otpLength)

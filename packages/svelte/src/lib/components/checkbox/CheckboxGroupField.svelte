@@ -36,6 +36,7 @@
   const wrapperClass = $derived(mergeClass("mw-checkbox-group-field", className));
 </script>
 
+<!-- svelte-ignore a11y_role_supports_aria_props_implicit -->
 <fieldset
   class={wrapperClass}
   aria-labelledby={a11yIds.labelId}
