@@ -20,6 +20,7 @@ export interface BadgeOptions {
   variant?: BadgeVariant
   /** For numeric/icon-only badges without visible text context */
   ariaLabel?: string
+  label?: string
 }
 
 export interface BadgeA11yProps {

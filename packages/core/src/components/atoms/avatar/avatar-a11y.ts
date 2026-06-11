@@ -37,10 +37,12 @@ export function resolveAvatarA11y(
     // Image avatars rely on the <img alt> attribute in the adapter.
     // Warn in development when neither alt nor ariaLabel is provided so the
     // image silently becomes decorative without the team intending it.
-    if (__DEV__ && !options.alt && !options.ariaLabel) {
+    const imageAccessibleLabel = options.ariaLabel ?? options.label
+
+    if (__DEV__ && !options.alt && !imageAccessibleLabel) {
       console.warn(
-        "[marwes] Avatar: an image avatar was rendered without alt text or ariaLabel. " +
-          "Provide alt to describe the person, or ariaLabel as a fallback, or use " +
+        "[marwes] Avatar: an image avatar was rendered without alt text, ariaLabel, or label. " +
+          "Provide alt to describe the person, ariaLabel/label as a fallback, or use " +
           "decorative={true} to explicitly mark it as presentational.",
       )
     }
@@ -48,7 +50,7 @@ export function resolveAvatarA11y(
     return {}
   }
 
-  const accessibleLabel = options.ariaLabel ?? normalizedInitials ?? "Avatar"
+  const accessibleLabel = options.ariaLabel ?? options.label ?? normalizedInitials ?? "Avatar"
 
   return {
     role: "img",

@@ -12,6 +12,7 @@ const spinnerPropKeys = [
   "size",
   "decorative",
   "ariaLabel",
+  "label",
   "id",
   "className",
   "dataAttributes",
@@ -38,9 +39,11 @@ export const Spinner = defineComponent(
         ...(props.id !== undefined ? { id: props.id } : {}),
         ...(props.ariaLabel !== undefined
           ? { ariaLabel: props.ariaLabel }
-          : ariaLabelFromAttrs !== undefined
-            ? { ariaLabel: ariaLabelFromAttrs }
-            : {}),
+          : props.label !== undefined
+            ? { label: props.label }
+            : ariaLabelFromAttrs !== undefined
+              ? { ariaLabel: ariaLabelFromAttrs }
+              : {}),
       }),
     )
 

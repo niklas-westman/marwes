@@ -27,6 +27,7 @@ const inputPropKeys = [
   "invalid",
   "describedBy",
   "ariaLabel",
+  "label",
   "onValueChange",
   "className",
 ] as const

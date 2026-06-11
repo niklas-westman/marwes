@@ -9,7 +9,8 @@ export function resolveSelectA11y(opts: SelectOptions): SelectA11yProps {
   if (opts.disabled) a11y.disabled = true
   if (opts.required) a11y.required = true
 
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.invalid) a11y.ariaInvalid = true
   if (opts.describedBy) a11y.ariaDescribedBy = opts.describedBy
 

@@ -62,6 +62,12 @@ describe("Button purpose variants", () => {
     expect(btn?.querySelector("svg")).not.toBeNull()
   })
 
+  it("IconButton accepts label as the accessible name", () => {
+    const { container } = render(IconButton, { props: { icon: "x", label: "Close" } })
+    const btn = container.querySelector("button")
+    expect(btn?.getAttribute("aria-label")).toBe("Close")
+  })
+
   it("ConfirmButton renders as a button", () => {
     const { container } = render(ConfirmButton)
     const btn = container.querySelector("button")

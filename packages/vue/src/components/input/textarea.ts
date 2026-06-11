@@ -29,6 +29,7 @@ const textareaPropKeys = [
   "invalid",
   "describedBy",
   "ariaLabel",
+  "label",
   "onValueChange",
   "className",
 ] as const

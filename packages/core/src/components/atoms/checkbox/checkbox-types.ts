@@ -39,6 +39,7 @@ export type CheckboxProps = {
 
   /** Connects to external label/description elements. */
   ariaLabel?: string
+  label?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
 }

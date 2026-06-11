@@ -28,7 +28,9 @@ export type SelectOptions = {
   invalid?: boolean
   describedBy?: string
 
+  /** Accessible name for standalone selects. SelectField should use visible `label`. */
   ariaLabel?: string
+  label?: string
 }
 
 export type SelectA11yProps = {

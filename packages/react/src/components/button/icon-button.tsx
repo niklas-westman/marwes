@@ -7,7 +7,7 @@ export type IconButtonProps = Omit<
   "children" | "hasVisibleText" | "iconLeft" | "iconOnly" | "iconRight"
 > & {
   icon: IconName
-  ariaLabel: string
+  ariaLabel?: string
 }
 
 export function IconButton(props: IconButtonProps) {

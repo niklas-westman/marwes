@@ -15,7 +15,8 @@ export function resolveSegmentedControlA11y(
     role: "radiogroup",
   }
 
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.disabled) a11y.ariaDisabled = true
 
   return a11y
@@ -31,7 +32,8 @@ export function resolveSegmentedControlItemA11y(
   }
 
   if (opts.disabled) a11y.ariaDisabled = true
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
 
   return a11y
 }

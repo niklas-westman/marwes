@@ -16,6 +16,7 @@ export interface SliderOptions {
   showTouchArea?: boolean
   orientation?: SliderOrientation
   ariaLabel?: string
+  label?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
   ariaValueText?: string

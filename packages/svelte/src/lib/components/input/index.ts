@@ -1,5 +1,17 @@
 export { default as Input } from "./Input.svelte"
 export { default as InputField } from "./InputField.svelte"
+export { default as InputOtp } from "./InputOtp.svelte"
+export { default as RichText } from "./RichText.svelte"
+export { default as RichTextField } from "./RichTextField.svelte"
+export { default as DropdownField } from "./DropdownField.svelte"
+export { default as SearchField } from "./SearchField.svelte"
+export { default as PasswordField } from "./PasswordField.svelte"
+export { default as EmailField } from "./EmailField.svelte"
+export { default as DateOfBirthField } from "./DateOfBirthField.svelte"
+export { default as ZipCodeField } from "./ZipCodeField.svelte"
+export { default as PhoneField } from "./PhoneField.svelte"
+export { default as URLField } from "./URLField.svelte"
+export { default as CurrencyField } from "./CurrencyField.svelte"
 export { default as Select } from "./Select.svelte"
 export { default as SelectField } from "./SelectField.svelte"
 export { default as Textarea } from "./Textarea.svelte"
@@ -10,9 +22,20 @@ export type {
   InputOtpProps,
   RichTextProps,
   RichTextFieldProps,
+  CurrencyFieldProps,
+  DateOfBirthFieldProps,
+  DropdownFieldProps,
+  EmailFieldProps,
+  PasswordFieldProps,
+  PhoneFieldProps,
+  SearchFieldProps,
+  SelectAppearance,
   SelectProps,
   SelectFieldProps,
+  SelectFieldVariant,
   SelectOption,
   TextareaProps,
   TextareaFieldProps,
+  URLFieldProps,
+  ZipCodeFieldProps,
 } from "./types.js"

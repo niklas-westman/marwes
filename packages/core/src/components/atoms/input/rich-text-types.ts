@@ -19,7 +19,9 @@ export type RichTextOptions = {
   invalid?: boolean
   describedBy?: string
   labelledBy?: string
+  /** Accessible name for standalone editors. RichTextField should use visible `label`. */
   ariaLabel?: string
+  label?: string
   allowedFormats?: RichTextFormat[]
 }
 

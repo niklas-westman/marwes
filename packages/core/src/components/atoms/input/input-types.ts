@@ -24,7 +24,9 @@ export type InputOptions = {
   invalid?: boolean
   describedBy?: string
 
+  /** Accessible name for standalone inputs. Field components should use visible `label`. */
   ariaLabel?: string
+  label?: string
 }
 
 export type InputA11yProps = {

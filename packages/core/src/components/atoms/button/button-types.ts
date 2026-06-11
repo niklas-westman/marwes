@@ -114,7 +114,9 @@ export type ButtonOptions = {
   toggle?: boolean
   pressed?: boolean
 
+  /** Accessible name. Use `label` as a consumer-friendly alias for standalone/icon-only buttons. */
   ariaLabel?: string
+  label?: string
   hasVisibleText?: boolean
 
   ariaExpanded?: boolean

@@ -56,6 +56,7 @@ export interface SpinnerOptions {
    * Accessible name when the spinner should announce loading state on its own.
    */
   ariaLabel?: string
+  label?: string
 
   id?: string
 }

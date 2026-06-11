@@ -39,20 +39,24 @@ export function resolveButtonA11y(
 
   if (__DEV__) {
     const iconOnly = opts.iconOnly || opts.hasVisibleText === false
+    const accessibleLabel = opts.ariaLabel ?? opts.label
     const loadingAccessibleLabel = resolvedLoading.isLoading
       ? resolvedLoading.loadingLabel
       : undefined
 
-    if (iconOnly && !opts.ariaLabel && !loadingAccessibleLabel) {
+    if (iconOnly && !accessibleLabel && !loadingAccessibleLabel) {
       // Development warning for accessibility
-      console.warn("[marwes] Icon-only Button requires ariaLabel, or loadingLabel while loading.")
+      console.warn(
+        "[marwes] Icon-only Button requires ariaLabel, label, or loadingLabel while loading.",
+      )
     }
   }
 
   // Build common props without assigning `undefined` (exactOptionalPropertyTypes-safe)
   const common: ButtonA11yProps = {}
 
-  if (opts.ariaLabel) common.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) common.ariaLabel = accessibleLabel
   if (resolvedLoading.isLoading) common.ariaBusy = true
   if (isDisabled) common.ariaDisabled = true
 

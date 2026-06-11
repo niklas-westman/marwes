@@ -5,6 +5,7 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import type * as React from "react"
+import { describe, expect, it } from "vitest"
 import { runInputContract } from "../../../../../../tests/contracts/input.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Input } from "../input"
@@ -31,4 +32,12 @@ runInputContract("react", {
   async type(element, text) {
     await userEvent.setup().type(element, text)
   },
+})
+
+describe("Input", () => {
+  it("lets standalone inputs use label as the accessible name", () => {
+    renderWithProvider(<Input label="Search" />)
+
+    expect(screen.getByRole("textbox", { name: /search/i })).toHaveAttribute("aria-label", "Search")
+  })
 })

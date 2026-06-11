@@ -21,6 +21,12 @@ describe("Select", () => {
     expect(select).not.toBeNull()
   })
 
+  it("accepts label as the accessible name", () => {
+    const { container } = render(Select, { props: { options: selectOptions, label: "Plan" } })
+    const select = container.querySelector("select")
+    expect(select?.getAttribute("aria-label")).toBe("Plan")
+  })
+
   it("includes mw-select class", () => {
     const { container } = render(Select, { props: { options: selectOptions } })
     const wrapper = container.querySelector(".mw-select")

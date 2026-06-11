@@ -25,7 +25,9 @@ export type TextareaOptions = {
   invalid?: boolean
   describedBy?: string
 
+  /** Accessible name for standalone textareas. TextareaField should use visible `label`. */
   ariaLabel?: string
+  label?: string
 }
 
 export type TextareaA11yProps = {

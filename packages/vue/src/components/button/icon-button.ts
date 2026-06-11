@@ -9,7 +9,7 @@ export type IconButtonProps = Omit<
   "iconLeft" | "iconRight" | "iconOnly" | "hasVisibleText"
 > & {
   icon: IconName
-  ariaLabel: string
+  ariaLabel?: string
 }
 
 const iconButtonPropKeys = [
@@ -23,6 +23,7 @@ const iconButtonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "label",
   "ariaExpanded",
   "ariaControls",
   "action",

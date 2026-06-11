@@ -34,6 +34,7 @@ const buttonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "label",
   "hasVisibleText",
   "ariaExpanded",
   "ariaControls",

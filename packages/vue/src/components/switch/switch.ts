@@ -17,6 +17,7 @@ const switchPropKeys = [
   "modelValue",
   "disabled",
   "ariaLabel",
+  "label",
   "ariaLabelledby",
   "ariaDescribedBy",
   "className",
@@ -36,6 +37,7 @@ export const Switch = defineComponent(
       if (checked !== undefined) opts.checked = checked
       if (props.disabled !== undefined) opts.disabled = props.disabled
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
+      if (props.label !== undefined) opts.label = props.label
       if (props.ariaLabelledby !== undefined) opts.ariaLabelledby = props.ariaLabelledby
       if (props.ariaDescribedBy !== undefined) opts.ariaDescribedBy = props.ariaDescribedBy
       return createSwitchRecipe(opts)

@@ -23,6 +23,7 @@ const checkboxPropKeys = [
   "name",
   "value",
   "ariaLabel",
+  "label",
   "ariaLabelledBy",
   "ariaDescribedBy",
   "onCheckedChange",

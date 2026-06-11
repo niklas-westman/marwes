@@ -72,6 +72,18 @@ describe("createButtonRecipe", () => {
     expect(kit.dataAttributes?.["data-icon-only"]).toBe("true")
   })
 
+  it("uses label as an accessible-name alias for icon-only buttons", () => {
+    const kit = createButtonRecipe({
+      as: "button",
+      label: "Close",
+      iconOnly: true,
+      iconLeft: "x",
+    })
+
+    expect(kit.a11y.ariaLabel).toBe("Close")
+    expect(kit.a11y.title).toBe("Close")
+  })
+
   it("builds anchor render kit and blocks navigation when loading disables interaction", () => {
     // Anchor button with default disableWhileLoading=true
     const kit = createButtonRecipe({

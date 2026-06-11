@@ -49,6 +49,18 @@ runSelectContract("vue", {
 })
 
 describe("Select", () => {
+  it("lets standalone selects use label as the accessible name", () => {
+    renderWithProvider(Select, {
+      label: "Plan",
+      options: [
+        { value: "starter", label: "Starter" },
+        { value: "growth", label: "Growth" },
+      ],
+    })
+
+    expect(screen.getByRole("combobox", { name: /plan/i })).toHaveAttribute("aria-label", "Plan")
+  })
+
   it("defaults to Marwes appearance and marks placeholder state", () => {
     const { container } = renderWithProvider(Select, {
       ariaLabel: "Country",

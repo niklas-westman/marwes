@@ -13,6 +13,7 @@ const avatarPropKeys = [
   "iconName",
   "decorative",
   "ariaLabel",
+  "label",
   "className",
   "dataAttributes",
 ] as const

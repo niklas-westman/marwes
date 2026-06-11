@@ -43,7 +43,32 @@ export { default as SearchButton } from "./components/button/SearchButton.svelte
 export { default as FilterButton } from "./components/button/FilterButton.svelte"
 export { default as SortButton } from "./components/button/SortButton.svelte"
 export { default as DropdownButton } from "./components/button/DropdownButton.svelte"
-export type { ButtonProps, IconButtonProps } from "./components/button/types.js"
+export type {
+  ButtonProps,
+  CancelButtonProps,
+  CloseButtonProps,
+  ConfirmButtonProps,
+  CopyButtonProps,
+  CreateButtonProps,
+  DestructiveButtonProps,
+  DownloadButtonProps,
+  DropdownButtonProps,
+  EditButtonProps,
+  FilterButtonProps,
+  IconButtonProps,
+  LinkButtonProps,
+  PrimaryButtonProps,
+  RefreshButtonProps,
+  SaveButtonProps,
+  SearchButtonProps,
+  SecondaryButtonProps,
+  SortButtonProps,
+  SubmitButtonProps,
+  SuccessButtonProps,
+  TextButtonProps,
+  UploadButtonProps,
+  VerifyButtonProps,
+} from "./components/button/types.js"
 
 // Icon
 export { default as Icon } from "./components/icon/Icon.svelte"
@@ -71,11 +96,20 @@ export { default as InputOtp } from "./components/input/InputOtp.svelte"
 export { default as RichText } from "./components/input/RichText.svelte"
 export { default as RichTextField } from "./components/input/RichTextField.svelte"
 export type {
+  CurrencyFieldProps,
+  DateOfBirthFieldProps,
+  DropdownFieldProps,
+  EmailFieldProps,
   InputProps,
   InputFieldProps,
   InputOtpProps,
+  PasswordFieldProps,
+  PhoneFieldProps,
   RichTextProps,
   RichTextFieldProps,
+  SearchFieldProps,
+  URLFieldProps,
+  ZipCodeFieldProps,
 } from "./components/input/types.js"
 
 // Badge
@@ -146,7 +180,13 @@ export type { TextareaProps, TextareaFieldProps } from "./components/input/types
 // Select
 export { default as Select } from "./components/input/Select.svelte"
 export { default as SelectField } from "./components/input/SelectField.svelte"
-export type { SelectProps, SelectFieldProps } from "./components/input/types.js"
+export type {
+  SelectAppearance,
+  SelectOption,
+  SelectProps,
+  SelectFieldProps,
+  SelectFieldVariant,
+} from "./components/input/types.js"
 
 // Checkbox
 export { default as Checkbox } from "./components/checkbox/Checkbox.svelte"
@@ -241,6 +281,7 @@ export { default as ConfirmDialog } from "./components/dialog/ConfirmDialog.svel
 export { default as DestructiveDialog } from "./components/dialog/DestructiveDialog.svelte"
 export { default as InfoDialog } from "./components/dialog/InfoDialog.svelte"
 export type {
+  DialogFooterControls,
   DialogProps,
   DialogModalProps,
   ConfirmDialogProps,

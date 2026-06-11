@@ -55,6 +55,7 @@ const selectPropKeys = [
   "invalid",
   "describedBy",
   "ariaLabel",
+  "label",
   "onValueChange",
   "className",
 ] as const

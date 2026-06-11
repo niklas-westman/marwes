@@ -12,6 +12,7 @@
     overflowCount?: number;
     overflowLabel?: string;
     ariaLabel?: string;
+    label?: string;
     dataAttributes?: Record<string, string>;
     class?: string;
   }
@@ -20,12 +21,14 @@
     items,
     overflowCount,
     overflowLabel,
-    ariaLabel = "Avatar group",
+    ariaLabel,
+    label,
     dataAttributes,
     class: className,
   }: AvatarGroupProps = $props();
 
   const mergedClass = $derived(mergeClass("mw-avatar-group", className));
+  const groupLabel = $derived(ariaLabel ?? label ?? "Avatar group");
   const shouldRenderOverflow = $derived(overflowCount !== undefined && overflowCount > 0);
   const resolvedOverflowLabel = $derived(overflowLabel ?? `${overflowCount} more people`);
 </script>
@@ -33,7 +36,7 @@
 <fieldset
   class={mergedClass}
   data-component="avatar-group"
-  aria-label={ariaLabel}
+  aria-label={groupLabel}
   {...dataAttributes}
 >
   {#each items as item, i}

@@ -3,7 +3,7 @@
   import Button from "./Button.svelte";
   import type { IconButtonProps } from "./types.js";
 
-  let { icon, ariaLabel, variant = ButtonVariants.neutral, ...props }: IconButtonProps = $props();
+  let { icon, variant = ButtonVariants.neutral, ...props }: IconButtonProps = $props();
 </script>
 
-<Button {...props} {variant} ariaLabel={ariaLabel} iconLeft={icon} iconOnly={true} hasVisibleText={false} />
+<Button {...props} {variant} iconLeft={icon} iconOnly={true} hasVisibleText={false} />

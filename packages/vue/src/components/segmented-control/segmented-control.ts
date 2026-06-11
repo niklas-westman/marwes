@@ -27,6 +27,7 @@ export interface SegmentedControlPropsVue {
   size?: SegmentedControlSize
   disabled?: boolean
   ariaLabel?: string
+  label?: string
   className?: string
   id?: string
 }
@@ -38,6 +39,7 @@ const propKeys = [
   "size",
   "disabled",
   "ariaLabel",
+  "label",
   "className",
   "id",
 ] as const
@@ -128,6 +130,7 @@ export const SegmentedControl = defineComponent(
         size: props.size,
         disabled: props.disabled,
         ariaLabel: props.ariaLabel,
+        label: props.label,
       })
 
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
@@ -142,6 +145,7 @@ export const SegmentedControl = defineComponent(
           selected: isSelected,
           disabled: isItemDisabled,
           ariaLabel: item.ariaLabel,
+          label: item.label,
           iconOnly: isIconOnly,
         })
 

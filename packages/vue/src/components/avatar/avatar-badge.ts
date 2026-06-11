@@ -16,6 +16,7 @@ const avatarBadgePropKeys = [
   "iconName",
   "decorative",
   "ariaLabel",
+  "label",
   "className",
   "dataAttributes",
   "statusLabel",
@@ -34,6 +35,9 @@ function buildAvatarOptions(props: AvatarBadgeProps, nativeAriaLabel?: string): 
   const resolvedAriaLabel = props.ariaLabel ?? nativeAriaLabel
   if (resolvedAriaLabel !== undefined) {
     avatarOptions.ariaLabel = resolvedAriaLabel
+  }
+  if (props.label !== undefined) {
+    avatarOptions.label = props.label
   }
 
   return avatarOptions
@@ -90,6 +94,9 @@ export const AvatarBadge = defineComponent(
       const resolvedInnerAriaLabel = props.ariaLabel ?? nativeAriaLabel
       if (resolvedInnerAriaLabel !== undefined) {
         innerAvatarProps.ariaLabel = resolvedInnerAriaLabel
+      }
+      if (props.label !== undefined) {
+        innerAvatarProps.label = props.label
       }
 
       return h(

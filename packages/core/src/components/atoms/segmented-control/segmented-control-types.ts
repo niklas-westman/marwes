@@ -15,6 +15,7 @@ export interface SegmentedControlOptions {
   disabled?: boolean | undefined
   /** Accessible label for the group */
   ariaLabel?: string | undefined
+  label?: string | undefined
   /** Visual variant */
   variant?: SegmentedControlVariant | undefined
   /** Size variant */
@@ -29,6 +30,7 @@ export interface SegmentedControlItemOptions {
   selected?: boolean
   disabled?: boolean | undefined
   ariaLabel?: string | undefined
+  label?: string | undefined
   iconOnly?: boolean | undefined
 }
 

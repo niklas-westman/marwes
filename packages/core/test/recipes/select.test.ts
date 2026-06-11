@@ -55,6 +55,15 @@ describe("createSelectRecipe", () => {
     expect(kit.className).toContain("mw-select--native")
   })
 
+  it("uses label as an accessible-name alias", () => {
+    const kit = createSelectRecipe({
+      label: "Plan",
+      options: [{ value: "starter", label: "Starter" }],
+    })
+
+    expect(kit.a11y.ariaLabel).toBe("Plan")
+  })
+
   it("lets native override a conflicting legacy appearance", () => {
     const kit = createSelectRecipe({
       ariaLabel: "Workspace",

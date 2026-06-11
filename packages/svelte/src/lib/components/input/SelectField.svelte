@@ -84,6 +84,7 @@
     select = { options: [] },
     ariaDescribedBy,
     value = $bindable(getInitialSelectValue(select)),
+    variant,
     class: className,
   }: SelectFieldProps = $props();
 
@@ -104,6 +105,7 @@
       "mw-input-field",
       "mw-input-field--select",
       mode === "marwes" && "mw-input-field--select-marwes",
+      variant === "date" && "mw-input-field--select-date",
       disabled && "mw-input-field--disabled",
       invalid && "mw-input-field--invalid",
       className

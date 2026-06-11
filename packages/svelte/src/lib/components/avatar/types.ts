@@ -19,6 +19,7 @@ export interface AvatarGroupProps {
   overflowCount?: number
   overflowLabel?: string
   ariaLabel?: string
+  label?: string
   dataAttributes?: Record<string, string>
   class?: string
 }
@@ -34,6 +35,7 @@ export interface TeamAvatarGroupProps {
   overflowCount?: number
   overflowLabel?: string
   ariaLabel?: string
+  label?: string
   dataAttributes?: Record<string, string>
   class?: string
 }

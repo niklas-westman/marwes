@@ -12,6 +12,10 @@ export interface DialogProps extends DialogOptions {
   dataAttributes?: Record<string, string>
 }
 
+export interface DialogFooterControls {
+  close: () => void
+}
+
 export interface DialogModalProps extends Omit<DialogProps, "footer" | "onclose"> {
   open?: boolean
   closeOnEscape?: boolean
@@ -20,7 +24,7 @@ export interface DialogModalProps extends Omit<DialogProps, "footer" | "onclose"
   surfaceWidth?: string | number
   tone?: "default" | "calm"
   divider?: "visible" | "hidden"
-  footer?: Snippet<[{ close: () => void }]>
+  footer?: Snippet<[DialogFooterControls]>
   onopenchange?: (open: boolean) => void
   class?: string
   overlayClass?: string

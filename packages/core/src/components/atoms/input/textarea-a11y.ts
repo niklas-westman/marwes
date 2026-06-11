@@ -16,7 +16,8 @@ export function resolveTextareaA11y(opts: TextareaOptions): TextareaA11yProps {
   if (opts.rows !== undefined) a11y.rows = opts.rows
   if (opts.cols !== undefined) a11y.cols = opts.cols
 
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.invalid) a11y.ariaInvalid = true
   if (opts.describedBy) a11y.ariaDescribedBy = opts.describedBy
 

@@ -30,6 +30,7 @@ const sliderPropKeys = [
   "showTouchArea",
   "orientation",
   "ariaLabel",
+  "label",
   "ariaLabelledBy",
   "ariaDescribedBy",
   "ariaValueText",
@@ -54,6 +55,7 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
   if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
   if (options.ariaLabel !== undefined) sliderOptions.ariaLabel = options.ariaLabel
+  if (options.label !== undefined) sliderOptions.label = options.label
   if (options.ariaLabelledBy !== undefined) sliderOptions.ariaLabelledBy = options.ariaLabelledBy
   if (options.ariaDescribedBy !== undefined) sliderOptions.ariaDescribedBy = options.ariaDescribedBy
   if (options.ariaValueText !== undefined) sliderOptions.ariaValueText = options.ariaValueText
@@ -122,6 +124,7 @@ export const Slider = defineComponent(
           showTouchArea: props.showTouchArea,
           orientation: props.orientation,
           ariaLabel: props.ariaLabel,
+          label: props.label,
           ariaLabelledBy: props.ariaLabelledBy,
           ariaDescribedBy: props.ariaDescribedBy,
           ariaValueText: props.ariaValueText,

@@ -200,6 +200,12 @@ describe("Vue adapter specifics: Button", () => {
     expect(buttonElement.querySelector(".mw-icon")).toBeNull()
   })
 
+  it("lets IconButton use label as the accessible name", () => {
+    renderWithProvider(IconButton, { icon: "x", label: "Close" })
+
+    expect(screen.getByRole("button", { name: /close/i })).toHaveAttribute("aria-label", "Close")
+  })
+
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {
     const onClick = vi.fn()
 
