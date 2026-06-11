@@ -48,7 +48,6 @@
       "packages/svelte/src/lib/components/dialog/DialogModal.svelte",
       "packages/svelte/src/lib/components/dialog/index.ts",
       "packages/svelte/src/lib/components/dialog/InfoDialog.svelte",
-      "packages/svelte/src/lib/components/dialog/README.md",
       "packages/svelte/src/lib/components/dialog/types.ts"
     ],
     "storybookReact": [

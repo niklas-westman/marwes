@@ -49,7 +49,6 @@
       "packages/svelte/src/lib/components/badge/index.ts",
       "packages/svelte/src/lib/components/badge/NotificationBadge.svelte",
       "packages/svelte/src/lib/components/badge/PriorityBadge.svelte",
-      "packages/svelte/src/lib/components/badge/README.md",
       "packages/svelte/src/lib/components/badge/StatusBadge.svelte",
       "packages/svelte/src/lib/components/badge/types.ts"
     ],

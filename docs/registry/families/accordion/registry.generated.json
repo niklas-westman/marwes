@@ -49,7 +49,6 @@
       "packages/svelte/src/lib/components/accordion/AccordionField.svelte",
       "packages/svelte/src/lib/components/accordion/FAQAccordion.svelte",
       "packages/svelte/src/lib/components/accordion/index.ts",
-      "packages/svelte/src/lib/components/accordion/README.md",
       "packages/svelte/src/lib/components/accordion/SectionsAccordion.svelte",
       "packages/svelte/src/lib/components/accordion/SettingsAccordion.svelte",
       "packages/svelte/src/lib/components/accordion/types.ts"

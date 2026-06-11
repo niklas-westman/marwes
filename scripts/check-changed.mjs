@@ -116,10 +116,12 @@ function familyFromPath(path) {
     /^packages\/core\/test\/recipes\/([^/.]+)/,
     /^packages\/presets\/src\/firstEdition\/(?!styles\.css$)([^/.]+)\.css$/,
     /^packages\/presets\/test\/([^/.]+)-css-contract\.test\.ts$/,
-    /^packages\/react\/src\/components\/([^/]+)/,
-    /^packages\/vue\/src\/components\/([^/]+)/,
-    /^apps\/storybook-react\/src\/stories\/([^/]+)/,
-    /^apps\/storybook-vue\/src\/stories\/([^/]+)/,
+    /^packages\/react\/src\/components\/([^/]+)\//,
+    /^packages\/vue\/src\/components\/([^/]+)\//,
+    /^packages\/svelte\/src\/lib\/components\/([^/]+)\//,
+    /^apps\/storybook-react\/src\/stories\/([^/]+)\//,
+    /^apps\/storybook-vue\/src\/stories\/([^/]+)\//,
+    /^apps\/storybook-svelte\/src\/stories\/([^/]+)\//,
     /^tests\/contracts\/([^/.]+)\.contract\.ts$/,
     /^docs\/registry\/families\/([^/]+)/,
     /^docs\/audits\/([^/]+)-family-accessibility\.md$/,
@@ -139,10 +141,12 @@ function implementationFamilyFromPath(path) {
     /^packages\/core\/test\/recipes\/([^/.]+)/,
     /^packages\/presets\/src\/firstEdition\/(?!styles\.css$)([^/.]+)\.css$/,
     /^packages\/presets\/test\/([^/.]+)-css-contract\.test\.ts$/,
-    /^packages\/react\/src\/components\/([^/]+)/,
-    /^packages\/vue\/src\/components\/([^/]+)/,
-    /^apps\/storybook-react\/src\/stories\/([^/]+)/,
-    /^apps\/storybook-vue\/src\/stories\/([^/]+)/,
+    /^packages\/react\/src\/components\/([^/]+)\//,
+    /^packages\/vue\/src\/components\/([^/]+)\//,
+    /^packages\/svelte\/src\/lib\/components\/([^/]+)\//,
+    /^apps\/storybook-react\/src\/stories\/([^/]+)\//,
+    /^apps\/storybook-vue\/src\/stories\/([^/]+)\//,
+    /^apps\/storybook-svelte\/src\/stories\/([^/]+)\//,
     /^tests\/contracts\/([^/.]+)\.contract\.ts$/,
   ]
 
@@ -187,6 +191,20 @@ const implementationFamilies = uniqueSorted(files.map(implementationFamilyFromPa
 const docsChanged = files.some((file) => file.endsWith(".md") || file.startsWith("docs/"))
 const docsOnly = files.length > 0 && files.every(isDocsOnlyFile)
 const sourceChanged = files.some(isSourceFile)
+const adapterArchitectureRelevant = files.some(
+  (file) =>
+    file.startsWith("docs/") ||
+    file.startsWith("packages/react/") ||
+    file.startsWith("packages/vue/") ||
+    file.startsWith("packages/svelte/") ||
+    file.startsWith("apps/storybook-react/") ||
+    file.startsWith("apps/storybook-vue/") ||
+    file.startsWith("apps/storybook-svelte/") ||
+    file.startsWith("tests/contracts/") ||
+    file === ".pi/storybook-companion.config.ts" ||
+    file === "package.json" ||
+    file === "scripts/check-adapter-architecture.mjs",
+)
 const largeFamilyScope = implementationFamilies.length > familyThreshold
 
 console.log("Changed-scope validation")
@@ -243,6 +261,15 @@ if (!docsOnly) {
     "pnpm",
     ["check:adapter-boundaries"],
     "source or tooling changed, so package boundaries must still hold",
+  )
+}
+
+if (adapterArchitectureRelevant) {
+  run(
+    "Adapter architecture check",
+    "pnpm",
+    ["check:adapter-architecture"],
+    "adapter, Storybook, contract, or authority-doc files changed, so cross-framework architecture must stay aligned",
   )
 }
 

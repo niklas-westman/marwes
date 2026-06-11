@@ -147,6 +147,7 @@ export type {
   InputFieldProps,
   InputOtpProps,
   SelectFieldProps,
+  SelectFieldVariant,
   TextareaFieldProps,
   RichTextFieldProps,
   DropdownFieldProps,
@@ -252,7 +253,7 @@ export type { DatePickerProps } from "./components/date-picker"
 
 /* Drawer */
 export { Drawer } from "./components/drawer"
-export type { DrawerProps } from "./components/drawer"
+export type { DrawerPlacement, DrawerProps, DrawerSize } from "./components/drawer"
 
 /* Card */
 export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"

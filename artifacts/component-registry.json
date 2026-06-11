@@ -140,7 +140,6 @@
             "packages/svelte/src/lib/components/accordion/AccordionField.svelte",
             "packages/svelte/src/lib/components/accordion/FAQAccordion.svelte",
             "packages/svelte/src/lib/components/accordion/index.ts",
-            "packages/svelte/src/lib/components/accordion/README.md",
             "packages/svelte/src/lib/components/accordion/SectionsAccordion.svelte",
             "packages/svelte/src/lib/components/accordion/SettingsAccordion.svelte",
             "packages/svelte/src/lib/components/accordion/types.ts"
@@ -406,7 +405,6 @@
             "packages/svelte/src/lib/components/avatar/index.ts",
             "packages/svelte/src/lib/components/avatar/PresenceAvatar.svelte",
             "packages/svelte/src/lib/components/avatar/ProfileAvatar.svelte",
-            "packages/svelte/src/lib/components/avatar/README.md",
             "packages/svelte/src/lib/components/avatar/TeamAvatarGroup.svelte",
             "packages/svelte/src/lib/components/avatar/types.ts"
           ],
@@ -691,7 +689,6 @@
             "packages/svelte/src/lib/components/badge/index.ts",
             "packages/svelte/src/lib/components/badge/NotificationBadge.svelte",
             "packages/svelte/src/lib/components/badge/PriorityBadge.svelte",
-            "packages/svelte/src/lib/components/badge/README.md",
             "packages/svelte/src/lib/components/badge/StatusBadge.svelte",
             "packages/svelte/src/lib/components/badge/types.ts"
           ],
@@ -1361,7 +1358,6 @@
             "packages/svelte/src/lib/components/button/index.ts",
             "packages/svelte/src/lib/components/button/LinkButton.svelte",
             "packages/svelte/src/lib/components/button/PrimaryButton.svelte",
-            "packages/svelte/src/lib/components/button/README.md",
             "packages/svelte/src/lib/components/button/RefreshButton.svelte",
             "packages/svelte/src/lib/components/button/SaveButton.svelte",
             "packages/svelte/src/lib/components/button/SearchButton.svelte",
@@ -1771,7 +1767,6 @@
             "packages/svelte/src/lib/components/card/index.ts",
             "packages/svelte/src/lib/components/card/ProductCard.svelte",
             "packages/svelte/src/lib/components/card/ProfileCard.svelte",
-            "packages/svelte/src/lib/components/card/README.md",
             "packages/svelte/src/lib/components/card/StatCard.svelte",
             "packages/svelte/src/lib/components/card/types.ts"
           ],
@@ -2030,7 +2025,6 @@
             "packages/svelte/src/lib/components/checkbox/CheckboxField.svelte",
             "packages/svelte/src/lib/components/checkbox/CheckboxGroupField.svelte",
             "packages/svelte/src/lib/components/checkbox/index.ts",
-            "packages/svelte/src/lib/components/checkbox/README.md",
             "packages/svelte/src/lib/components/checkbox/types.ts"
           ],
           "storybookReact": [
@@ -2462,7 +2456,6 @@
           "svelte": [
             "packages/svelte/src/lib/components/date-picker/DatePicker.svelte",
             "packages/svelte/src/lib/components/date-picker/index.ts",
-            "packages/svelte/src/lib/components/date-picker/README.md",
             "packages/svelte/src/lib/components/date-picker/types.ts"
           ],
           "storybookReact": [
@@ -2687,7 +2680,6 @@
             "packages/svelte/src/lib/components/dialog/DialogModal.svelte",
             "packages/svelte/src/lib/components/dialog/index.ts",
             "packages/svelte/src/lib/components/dialog/InfoDialog.svelte",
-            "packages/svelte/src/lib/components/dialog/README.md",
             "packages/svelte/src/lib/components/dialog/types.ts"
           ],
           "storybookReact": [
@@ -2941,7 +2933,6 @@
           "svelte": [
             "packages/svelte/src/lib/components/divider/Divider.svelte",
             "packages/svelte/src/lib/components/divider/index.ts",
-            "packages/svelte/src/lib/components/divider/README.md",
             "packages/svelte/src/lib/components/divider/types.ts"
           ],
           "storybookReact": [
@@ -3362,7 +3353,6 @@
             "packages/svelte/src/lib/components/heading/H2.svelte",
             "packages/svelte/src/lib/components/heading/H3.svelte",
             "packages/svelte/src/lib/components/heading/index.ts",
-            "packages/svelte/src/lib/components/heading/README.md",
             "packages/svelte/src/lib/components/heading/types.ts"
           ],
           "storybookReact": [
@@ -3588,7 +3578,6 @@
           "svelte": [
             "packages/svelte/src/lib/components/icon/Icon.svelte",
             "packages/svelte/src/lib/components/icon/index.ts",
-            "packages/svelte/src/lib/components/icon/README.md",
             "packages/svelte/src/lib/components/icon/types.ts"
           ],
           "storybookReact": [
@@ -3901,7 +3890,6 @@
             "packages/svelte/src/lib/components/input/InputOtp.svelte",
             "packages/svelte/src/lib/components/input/PasswordField.svelte",
             "packages/svelte/src/lib/components/input/PhoneField.svelte",
-            "packages/svelte/src/lib/components/input/README.md",
             "packages/svelte/src/lib/components/input/RichText.svelte",
             "packages/svelte/src/lib/components/input/RichTextField.svelte",
             "packages/svelte/src/lib/components/input/SearchField.svelte",
@@ -4470,7 +4458,6 @@
           "svelte": [
             "packages/svelte/src/lib/components/paragraph/index.ts",
             "packages/svelte/src/lib/components/paragraph/Paragraph.svelte",
-            "packages/svelte/src/lib/components/paragraph/README.md",
             "packages/svelte/src/lib/components/paragraph/types.ts"
           ],
           "storybookReact": [
@@ -4925,7 +4912,6 @@
             "packages/svelte/src/lib/components/radio/Radio.svelte",
             "packages/svelte/src/lib/components/radio/RadioGroupField.svelte",
             "packages/svelte/src/lib/components/radio/RatingRadioGroup.svelte",
-            "packages/svelte/src/lib/components/radio/README.md",
             "packages/svelte/src/lib/components/radio/types.ts",
             "packages/svelte/src/lib/components/radio/YesNoRadioGroup.svelte"
           ],
@@ -5361,7 +5347,6 @@
           ],
           "svelte": [
             "packages/svelte/src/lib/components/skeleton/index.ts",
-            "packages/svelte/src/lib/components/skeleton/README.md",
             "packages/svelte/src/lib/components/skeleton/Skeleton.svelte",
             "packages/svelte/src/lib/components/skeleton/types.ts"
           ],
@@ -5581,7 +5566,6 @@
             "packages/svelte/src/lib/components/slider/BrightnessSlider.svelte",
             "packages/svelte/src/lib/components/slider/index.ts",
             "packages/svelte/src/lib/components/slider/RadiusSlider.svelte",
-            "packages/svelte/src/lib/components/slider/README.md",
             "packages/svelte/src/lib/components/slider/Slider.svelte",
             "packages/svelte/src/lib/components/slider/SliderField.svelte",
             "packages/svelte/src/lib/components/slider/types.ts",
@@ -5837,7 +5821,6 @@
           ],
           "svelte": [
             "packages/svelte/src/lib/components/spacing/index.ts",
-            "packages/svelte/src/lib/components/spacing/README.md",
             "packages/svelte/src/lib/components/spacing/Spacer.svelte",
             "packages/svelte/src/lib/components/spacing/Spacing.svelte",
             "packages/svelte/src/lib/components/spacing/types.ts"
@@ -6055,7 +6038,6 @@
             "packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte",
             "packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte",
             "packages/svelte/src/lib/components/spinner/index.ts",
-            "packages/svelte/src/lib/components/spinner/README.md",
             "packages/svelte/src/lib/components/spinner/Spinner.svelte",
             "packages/svelte/src/lib/components/spinner/types.ts"
           ],
@@ -6311,7 +6293,6 @@
           ],
           "svelte": [
             "packages/svelte/src/lib/components/stat-tile/index.ts",
-            "packages/svelte/src/lib/components/stat-tile/README.md",
             "packages/svelte/src/lib/components/stat-tile/StatTile.svelte",
             "packages/svelte/src/lib/components/stat-tile/types.ts"
           ],
@@ -6533,7 +6514,6 @@
             "packages/svelte/src/lib/components/switch/index.ts",
             "packages/svelte/src/lib/components/switch/PermissionSwitch.svelte",
             "packages/svelte/src/lib/components/switch/PreferenceSwitch.svelte",
-            "packages/svelte/src/lib/components/switch/README.md",
             "packages/svelte/src/lib/components/switch/Switch.svelte",
             "packages/svelte/src/lib/components/switch/SwitchField.svelte",
             "packages/svelte/src/lib/components/switch/types.ts"
@@ -6796,7 +6776,6 @@
             "packages/svelte/src/lib/components/tab/ContentTabs.svelte",
             "packages/svelte/src/lib/components/tab/index.ts",
             "packages/svelte/src/lib/components/tab/NavigationTabs.svelte",
-            "packages/svelte/src/lib/components/tab/README.md",
             "packages/svelte/src/lib/components/tab/SettingsTabs.svelte",
             "packages/svelte/src/lib/components/tab/Tab.svelte",
             "packages/svelte/src/lib/components/tab/TabGroup.svelte",
@@ -7260,7 +7239,6 @@
             "packages/svelte/src/lib/components/toast/ErrorToast.svelte",
             "packages/svelte/src/lib/components/toast/index.ts",
             "packages/svelte/src/lib/components/toast/InfoToast.svelte",
-            "packages/svelte/src/lib/components/toast/README.md",
             "packages/svelte/src/lib/components/toast/SuccessToast.svelte",
             "packages/svelte/src/lib/components/toast/Toast.svelte",
             "packages/svelte/src/lib/components/toast/ToastContainer.svelte",
@@ -7526,7 +7504,6 @@
           ],
           "svelte": [
             "packages/svelte/src/lib/components/tooltip/index.ts",
-            "packages/svelte/src/lib/components/tooltip/README.md",
             "packages/svelte/src/lib/components/tooltip/Tooltip.svelte",
             "packages/svelte/src/lib/components/tooltip/TooltipGroup.svelte",
             "packages/svelte/src/lib/components/tooltip/types.ts"

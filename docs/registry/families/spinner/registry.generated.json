@@ -44,7 +44,6 @@
       "packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte",
       "packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte",
       "packages/svelte/src/lib/components/spinner/index.ts",
-      "packages/svelte/src/lib/components/spinner/README.md",
       "packages/svelte/src/lib/components/spinner/Spinner.svelte",
       "packages/svelte/src/lib/components/spinner/types.ts"
     ],

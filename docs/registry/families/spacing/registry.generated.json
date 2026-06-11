@@ -37,7 +37,6 @@
     ],
     "svelte": [
       "packages/svelte/src/lib/components/spacing/index.ts",
-      "packages/svelte/src/lib/components/spacing/README.md",
       "packages/svelte/src/lib/components/spacing/Spacer.svelte",
       "packages/svelte/src/lib/components/spacing/Spacing.svelte",
       "packages/svelte/src/lib/components/spacing/types.ts"

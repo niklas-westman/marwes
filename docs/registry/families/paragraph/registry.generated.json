@@ -35,7 +35,6 @@
     "svelte": [
       "packages/svelte/src/lib/components/paragraph/index.ts",
       "packages/svelte/src/lib/components/paragraph/Paragraph.svelte",
-      "packages/svelte/src/lib/components/paragraph/README.md",
       "packages/svelte/src/lib/components/paragraph/types.ts"
     ],
     "storybookReact": [

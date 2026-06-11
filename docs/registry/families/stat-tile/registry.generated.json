@@ -34,7 +34,6 @@
     ],
     "svelte": [
       "packages/svelte/src/lib/components/stat-tile/index.ts",
-      "packages/svelte/src/lib/components/stat-tile/README.md",
       "packages/svelte/src/lib/components/stat-tile/StatTile.svelte",
       "packages/svelte/src/lib/components/stat-tile/types.ts"
     ],

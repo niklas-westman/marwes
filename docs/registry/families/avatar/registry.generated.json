@@ -51,7 +51,6 @@
       "packages/svelte/src/lib/components/avatar/index.ts",
       "packages/svelte/src/lib/components/avatar/PresenceAvatar.svelte",
       "packages/svelte/src/lib/components/avatar/ProfileAvatar.svelte",
-      "packages/svelte/src/lib/components/avatar/README.md",
       "packages/svelte/src/lib/components/avatar/TeamAvatarGroup.svelte",
       "packages/svelte/src/lib/components/avatar/types.ts"
     ],

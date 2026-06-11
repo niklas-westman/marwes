@@ -50,7 +50,6 @@
       "packages/svelte/src/lib/components/radio/Radio.svelte",
       "packages/svelte/src/lib/components/radio/RadioGroupField.svelte",
       "packages/svelte/src/lib/components/radio/RatingRadioGroup.svelte",
-      "packages/svelte/src/lib/components/radio/README.md",
       "packages/svelte/src/lib/components/radio/types.ts",
       "packages/svelte/src/lib/components/radio/YesNoRadioGroup.svelte"
     ],

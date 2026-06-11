@@ -41,7 +41,6 @@
       "packages/svelte/src/lib/components/heading/H2.svelte",
       "packages/svelte/src/lib/components/heading/H3.svelte",
       "packages/svelte/src/lib/components/heading/index.ts",
-      "packages/svelte/src/lib/components/heading/README.md",
       "packages/svelte/src/lib/components/heading/types.ts"
     ],
     "storybookReact": [

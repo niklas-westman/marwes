@@ -41,7 +41,6 @@
     ],
     "svelte": [
       "packages/svelte/src/lib/components/tooltip/index.ts",
-      "packages/svelte/src/lib/components/tooltip/README.md",
       "packages/svelte/src/lib/components/tooltip/Tooltip.svelte",
       "packages/svelte/src/lib/components/tooltip/TooltipGroup.svelte",
       "packages/svelte/src/lib/components/tooltip/types.ts"

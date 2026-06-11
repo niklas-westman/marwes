@@ -1,16 +1,23 @@
-/**
- * Svelte adapter: Tests error boundary behavior and component resilience.
- */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import { describe, expect, it } from "vitest"
 
-describe("Package boundary: no preset CSS import", () => {
-  it("src/lib/index.ts does not import @marwes-ui/presets as a module", () => {
+describe("Package styling entry", () => {
+  it("loads the default preset CSS from the public Svelte entry", () => {
     const indexPath = resolve(__dirname, "../lib/index.ts")
     const content = readFileSync(indexPath, "utf-8")
-    // Check that there's no actual import/export from @marwes-ui/presets
-    const importRegex = /(?:import|export).*from\s+["']@marwes-ui\/presets/
-    expect(importRegex.test(content)).toBe(false)
+
+    expect(content).toContain('import "@marwes-ui/presets/firstEdition/styles.css"')
+  })
+
+  it("declares preset CSS as a preserved package side effect", () => {
+    const packageJsonPath = resolve(__dirname, "../../package.json")
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8")) as {
+      dependencies?: Record<string, string>
+      sideEffects?: boolean
+    }
+
+    expect(packageJson.dependencies?.["@marwes-ui/presets"]).toBe("workspace:*")
+    expect(packageJson.sideEffects).toBe(true)
   })
 })

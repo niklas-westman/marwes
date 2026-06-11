@@ -28,7 +28,7 @@ Marwes gives Svelte apps a ready design-system base without requiring custom CSS
 - **Runes-first**: built entirely on Svelte 5 runes (`$props`, `$state`, `$derived`, `$effect`, `$bindable`) — no legacy stores or lifecycle hooks.
 - **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
 - **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
-- **Shared core contracts**: every Svelte component is backed by the same framework-agnostic recipes, a11y mapping, and theme shape used by React and Vue.
+- **Shared core contracts**: every Svelte component is backed by the same framework-agnostic recipes, a11y mapping, and theme shape used across adapters.
 
 ## Package Map
 
@@ -463,7 +463,7 @@ Marwes Svelte components are accessible because the adapter renders a shared cor
 - Svelte components prefer native DOM controls first: `button`, `input`, `select`, `textarea`, `hr`, and standard form wiring.
 - Field components connect visible labels, helper text, and errors through `id`, `for`, `aria-describedby`, `aria-invalid`, and polite error announcements.
 - Coordinated widgets carry explicit contracts: tabs wire `tablist`/`tab`/`tabpanel`, dialogs own dialog semantics, toasts expose live-region behavior, and purpose buttons expose risk metadata.
-- Storybook accessibility smoke checks run through the Storybook a11y addon for the promoted Svelte families, and shared contract tests keep Svelte aligned with React and Vue.
+- Storybook accessibility smoke checks run through the Storybook a11y addon for the promoted Svelte families, and shared contract tests keep Svelte aligned across adapters.
 
 Example:
 

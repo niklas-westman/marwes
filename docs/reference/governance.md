@@ -90,7 +90,7 @@ The PR workflow enforces:
 
 The reusable CI workflow now enforces:
 - `pnpm exec biome check .`
-- `pnpm check:repo-map` for docs, generated truth, parity, Storybook consistency, and adapter boundaries
+- `pnpm check:repo-map` for docs, generated truth, parity, Storybook consistency, adapter architecture, and adapter boundaries
 - `pnpm -r typecheck`
 - `pnpm test:typecheck:contracts`
 - `pnpm test:packages`
@@ -105,8 +105,8 @@ graph TD
   A[Changed PR files] --> Z[pnpm check:changed -- --base origin/base]
   B[Docs and README files] --> C[pnpm check:compass]
   D[Semantics and generated truth] --> E[pnpm check:repo-map]
-  F[React/Vue/Storybook parity] --> E
-  G[Adapter boundaries] --> E
+  F[React/Vue/Svelte/Storybook parity] --> E
+  G[Adapter architecture and boundaries] --> E
   H[TypeScript contracts] --> I[pnpm test:typecheck:contracts]
   J[Packages] --> K[pnpm test:packages]
   J --> L[pnpm -r build]
@@ -167,14 +167,18 @@ Owns cross-framework alignment across public exports, family coverage, and story
 
 Key files:
 - `scripts/storybook-consistency.mjs`
+- `scripts/check-adapter-architecture.mjs`
 - `apps/storybook-react/src/stories/`
 - `apps/storybook-vue/src/stories/`
+- `apps/storybook-svelte/src/stories/`
 - `packages/react/src/components/`
 - `packages/vue/src/components/`
+- `packages/svelte/src/lib/components/`
 - `tests/contracts/*`
 
 Validation:
 - `pnpm storybook:consistency`
+- `pnpm check:adapter-architecture`
 - `pnpm test:storybook:a11y`
 - `pnpm test:typecheck:contracts`
 - targeted adapter and contract tests
@@ -216,10 +220,11 @@ Also update:
 - `docs/reference/ai-metadata.md`
 - relevant contract tests under `tests/contracts/`
 
-### When you add or rename React/Vue components or stories
+### When you add or rename adapter components or stories
 Run:
 
 ```bash
+pnpm check:adapter-architecture
 pnpm storybook:consistency
 pnpm test:storybook:a11y
 pnpm test:typecheck:contracts
@@ -259,7 +264,7 @@ If a change affects public trust, update both the source of truth and the guardr
 Examples:
 - new semantic purpose -> update core semantics, docs, artifacts, and tests
 - new export surface -> update package docs and parity coverage
-- new story family -> update both frameworks and rerun consistency audit
+- new story family -> update React, Vue, and Svelte Storybook and rerun consistency audit
 - changed artifact shape -> update generator, committed artifacts, and docs that reference them
 - manual-review-heavy widget behavior -> update automated contracts where possible and document the remaining manual-review boundary explicitly
 
@@ -272,6 +277,7 @@ pnpm check:repo-map
 pnpm semantics:check
 pnpm artifacts:generate
 pnpm artifacts:check
+pnpm check:adapter-architecture
 pnpm storybook:consistency
 pnpm test:storybook:a11y
 pnpm test:typecheck:contracts
@@ -283,6 +289,7 @@ pnpm test:packages
 - [Documentation index](../README.md)
 - [Accessibility support model](./accessibility.md)
 - [Architecture](./architecture.md)
+- [Adapter Architecture](./adapter-architecture.md)
 - [Testing](./testing.md)
 - [AI Metadata Protocol](./ai-metadata.md)
 - [Specification](./spec.md)

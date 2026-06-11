@@ -39,7 +39,6 @@
       "packages/svelte/src/lib/components/card/index.ts",
       "packages/svelte/src/lib/components/card/ProductCard.svelte",
       "packages/svelte/src/lib/components/card/ProfileCard.svelte",
-      "packages/svelte/src/lib/components/card/README.md",
       "packages/svelte/src/lib/components/card/StatCard.svelte",
       "packages/svelte/src/lib/components/card/types.ts"
     ],

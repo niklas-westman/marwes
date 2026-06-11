@@ -112,7 +112,6 @@
       "packages/svelte/src/lib/components/input/InputOtp.svelte",
       "packages/svelte/src/lib/components/input/PasswordField.svelte",
       "packages/svelte/src/lib/components/input/PhoneField.svelte",
-      "packages/svelte/src/lib/components/input/README.md",
       "packages/svelte/src/lib/components/input/RichText.svelte",
       "packages/svelte/src/lib/components/input/RichTextField.svelte",
       "packages/svelte/src/lib/components/input/SearchField.svelte",

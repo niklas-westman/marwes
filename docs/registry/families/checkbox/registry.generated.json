@@ -50,7 +50,6 @@
       "packages/svelte/src/lib/components/checkbox/CheckboxField.svelte",
       "packages/svelte/src/lib/components/checkbox/CheckboxGroupField.svelte",
       "packages/svelte/src/lib/components/checkbox/index.ts",
-      "packages/svelte/src/lib/components/checkbox/README.md",
       "packages/svelte/src/lib/components/checkbox/types.ts"
     ],
     "storybookReact": [

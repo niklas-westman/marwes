@@ -4,7 +4,7 @@ Marwes uses layered testing that mirrors the architecture:
 
 - `core` tests behavior and contracts
 - `presets` tests styling-related integration where needed
-- `react` and `vue` test adapters against the real core recipes
+- `react`, `vue`, and `svelte` test adapters against the real core recipes
 - Storybook covers documentation, interaction, and visual verification
 - the playground is used for manual integration checks
 
@@ -112,6 +112,7 @@ pnpm check:adapter-boundaries
 pnpm check:compass
 pnpm check:repo-map
 pnpm parity:summary:check
+pnpm check:adapter-architecture
 ```
 
 ### Focused package tests
@@ -246,7 +247,7 @@ Use a different base when needed:
 pnpm check:changed -- --base main
 ```
 
-The gate prints the selected scope, formats/lints changed files with Biome, runs docs checks when docs changed, checks Changesets when package files changed, protects adapter/core boundaries for source/tooling changes, runs family validation for focused family changes, and falls back to `pnpm check:repo-map` for large family scopes. It finishes by checking committed branch whitespace plus staged/unstaged local whitespace when applicable.
+The gate prints the selected scope, formats/lints changed files with Biome, runs docs checks when docs changed, checks Changesets when package files changed, protects adapter/core boundaries for source/tooling changes, runs adapter architecture validation for adapter/story/contract authority changes, runs family validation for focused family changes, and falls back to `pnpm check:repo-map` for large family scopes. It finishes by checking committed branch whitespace plus staged/unstaged local whitespace when applicable.
 
 This gate is intentionally pragmatic. It is not a release substitute; it is the fastest local confidence pass for branch work and a useful PR signal.
 
@@ -258,6 +259,10 @@ Use `pnpm check:adapter-boundaries` when component adapter work touches architec
 - no React imports in Vue component adapters
 - no Vue imports in React component adapters
 - no preset imports inside framework component adapters
+
+## Adapter architecture guardrail
+
+Use `pnpm check:adapter-architecture` when React, Vue, Svelte, Storybook, shared contracts, or authority docs change. The script checks role-identical adapter structure, package CSS policy, family barrels, root exports, Storybook introductions, and shared contract enrollment. See [Adapter Architecture](./adapter-architecture.md).
 - no hardcoded color tokens inside framework component adapters
 
 Keep deeper judgement in [Architecture](./architecture.md) and [Repo Map](./repo-map.md).

@@ -34,7 +34,6 @@
     ],
     "svelte": [
       "packages/svelte/src/lib/components/skeleton/index.ts",
-      "packages/svelte/src/lib/components/skeleton/README.md",
       "packages/svelte/src/lib/components/skeleton/Skeleton.svelte",
       "packages/svelte/src/lib/components/skeleton/types.ts"
     ],

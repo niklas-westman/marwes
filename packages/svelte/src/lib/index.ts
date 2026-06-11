@@ -1,5 +1,5 @@
 // @marwes-ui/svelte — main public API
-// CSS is NOT imported here. Users import from @marwes-ui/presets explicitly.
+import "@marwes-ui/presets/firstEdition/styles.css"
 
 // Provider
 export { default as MarwesProvider } from "./provider/MarwesProvider.svelte"
@@ -78,7 +78,11 @@ export type { IconProps } from "./components/icon/types.js"
 export { default as Spinner } from "./components/spinner/Spinner.svelte"
 export { default as ButtonSpinner } from "./components/spinner/ButtonSpinner.svelte"
 export { default as EmptyStateSpinner } from "./components/spinner/EmptyStateSpinner.svelte"
-export type { SpinnerProps, ButtonSpinnerProps } from "./components/spinner/types.js"
+export type {
+  SpinnerProps,
+  ButtonSpinnerProps,
+  EmptyStateSpinnerProps,
+} from "./components/spinner/types.js"
 
 // Input
 export { default as Input } from "./components/input/Input.svelte"
@@ -118,7 +122,13 @@ export { default as BadgeGroup } from "./components/badge/BadgeGroup.svelte"
 export { default as StatusBadge } from "./components/badge/StatusBadge.svelte"
 export { default as PriorityBadge } from "./components/badge/PriorityBadge.svelte"
 export { default as NotificationBadge } from "./components/badge/NotificationBadge.svelte"
-export type { BadgeProps, BadgeGroupProps } from "./components/badge/types.js"
+export type {
+  BadgeProps,
+  BadgeGroupProps,
+  StatusBadgeProps,
+  PriorityBadgeProps,
+  NotificationBadgeProps,
+} from "./components/badge/types.js"
 
 // Banner
 export { default as Banner } from "./components/banner/Banner.svelte"
@@ -126,14 +136,26 @@ export { default as InfoBanner } from "./components/banner/InfoBanner.svelte"
 export { default as SuccessBanner } from "./components/banner/SuccessBanner.svelte"
 export { default as WarningBanner } from "./components/banner/WarningBanner.svelte"
 export { default as ErrorBanner } from "./components/banner/ErrorBanner.svelte"
-export type { BannerProps } from "./components/banner/types.js"
+export { BannerVariant } from "@marwes-ui/core"
+export type {
+  BannerProps,
+  InfoBannerProps,
+  SuccessBannerProps,
+  WarningBannerProps,
+  ErrorBannerProps,
+} from "./components/banner/types.js"
 
 // Card
 export { default as Card } from "./components/card/Card.svelte"
 export { default as ProductCard } from "./components/card/ProductCard.svelte"
 export { default as ProfileCard } from "./components/card/ProfileCard.svelte"
 export { default as StatCard } from "./components/card/StatCard.svelte"
-export type { CardProps } from "./components/card/types.js"
+export type {
+  CardProps,
+  ProductCardProps,
+  ProfileCardProps,
+  StatCardProps,
+} from "./components/card/types.js"
 
 // Divider
 export { default as Divider } from "./components/divider/Divider.svelte"
@@ -196,6 +218,7 @@ export type {
   CheckboxProps,
   CheckboxFieldProps,
   CheckboxGroupFieldProps,
+  CheckboxGroupFieldOption,
 } from "./components/checkbox/types.js"
 
 // Switch
@@ -204,7 +227,13 @@ export { default as SwitchField } from "./components/switch/SwitchField.svelte"
 export { default as FeatureToggle } from "./components/switch/FeatureToggle.svelte"
 export { default as PreferenceSwitch } from "./components/switch/PreferenceSwitch.svelte"
 export { default as PermissionSwitch } from "./components/switch/PermissionSwitch.svelte"
-export type { SwitchProps, SwitchFieldProps } from "./components/switch/types.js"
+export type {
+  SwitchProps,
+  SwitchFieldProps,
+  FeatureToggleProps,
+  PreferenceSwitchProps,
+  PermissionSwitchProps,
+} from "./components/switch/types.js"
 
 // Radio
 export { default as Radio } from "./components/radio/Radio.svelte"
@@ -213,9 +242,12 @@ export { default as OptionRadioGroup } from "./components/radio/OptionRadioGroup
 export { default as YesNoRadioGroup } from "./components/radio/YesNoRadioGroup.svelte"
 export { default as RatingRadioGroup } from "./components/radio/RatingRadioGroup.svelte"
 export type {
+  OptionRadioGroupProps,
+  RatingRadioGroupProps,
   RadioGroupFieldOption,
   RadioGroupFieldProps,
   RadioProps,
+  YesNoRadioGroupProps,
 } from "./components/radio/types.js"
 
 // Avatar
@@ -225,7 +257,15 @@ export { default as AvatarGroup } from "./components/avatar/AvatarGroup.svelte"
 export { default as ProfileAvatar } from "./components/avatar/ProfileAvatar.svelte"
 export { default as PresenceAvatar } from "./components/avatar/PresenceAvatar.svelte"
 export { default as TeamAvatarGroup } from "./components/avatar/TeamAvatarGroup.svelte"
-export type { AvatarProps } from "./components/avatar/types.js"
+export type {
+  AvatarProps,
+  AvatarBadgeProps,
+  AvatarGroupItem,
+  AvatarGroupProps,
+  PresenceAvatarProps,
+  ProfileAvatarProps,
+  TeamAvatarGroupProps,
+} from "./components/avatar/types.js"
 
 // DatePicker
 export { default as DatePicker } from "./components/date-picker/DatePicker.svelte"
@@ -299,6 +339,9 @@ export type {
   AccordionProps,
   AccordionFieldItem,
   AccordionFieldProps,
+  FAQAccordionProps,
+  SectionsAccordionProps,
+  SettingsAccordionProps,
 } from "./components/accordion/types.js"
 
 // Tab
@@ -335,7 +378,13 @@ export { default as SliderField } from "./components/slider/SliderField.svelte"
 export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte"
 export { default as BrightnessSlider } from "./components/slider/BrightnessSlider.svelte"
 export { default as RadiusSlider } from "./components/slider/RadiusSlider.svelte"
-export type { SliderProps, SliderFieldProps } from "./components/slider/types.js"
+export type {
+  SliderProps,
+  SliderFieldProps,
+  VolumeSliderProps,
+  BrightnessSliderProps,
+  RadiusSliderProps,
+} from "./components/slider/types.js"
 
 // Core re-exports
 export {

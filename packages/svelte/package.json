@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": true,
   "main": "./dist/index.js",
   "files": ["dist", "README.md", "CHANGELOG.md"],
   "svelte": "./dist/index.js",
@@ -35,7 +35,8 @@
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@marwes-ui/core": "workspace:*"
+    "@marwes-ui/core": "workspace:*",
+    "@marwes-ui/presets": "workspace:*"
   },
   "peerDependencies": {
     "svelte": "^5.20.0"

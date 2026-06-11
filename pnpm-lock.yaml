@@ -523,6 +523,9 @@ importers:
       '@marwes-ui/core':
         specifier: workspace:*
         version: link:../core
+      '@marwes-ui/presets':
+        specifier: workspace:*
+        version: link:../presets
     devDependencies:
       '@sveltejs/package':
         specifier: ^2.0.0

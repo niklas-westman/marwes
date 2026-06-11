@@ -47,7 +47,6 @@
       "packages/svelte/src/lib/components/switch/index.ts",
       "packages/svelte/src/lib/components/switch/PermissionSwitch.svelte",
       "packages/svelte/src/lib/components/switch/PreferenceSwitch.svelte",
-      "packages/svelte/src/lib/components/switch/README.md",
       "packages/svelte/src/lib/components/switch/Switch.svelte",
       "packages/svelte/src/lib/components/switch/SwitchField.svelte",
       "packages/svelte/src/lib/components/switch/types.ts"

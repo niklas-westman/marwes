@@ -35,7 +35,6 @@
     "svelte": [
       "packages/svelte/src/lib/components/divider/Divider.svelte",
       "packages/svelte/src/lib/components/divider/index.ts",
-      "packages/svelte/src/lib/components/divider/README.md",
       "packages/svelte/src/lib/components/divider/types.ts"
     ],
     "storybookReact": [

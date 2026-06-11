@@ -5,10 +5,10 @@ This guide is the practical implementation workflow for new Marwes components.
 The non-negotiable rule is:
 
 ```text
-core recipe → preset CSS → React adapter → Vue adapter → Svelte adapter
+core recipe -> preset CSS -> all framework adapters -> Storybook/docs/contracts
 ```
 
-Do not skip layers, and do not move framework logic into `@marwes-ui/core`.
+Do not skip layers, do not treat any adapter as a later catch-up task, and do not move framework logic into `@marwes-ui/core`.
 
 ## Workflow overview
 
@@ -17,12 +17,14 @@ flowchart TD
   Spec[Confirm spec and Figma reference] --> Core[Build core types, a11y, recipe]
   Core --> Presets[Add preset CSS]
   Presets --> React[Add React adapter]
+  Presets --> Vue[Add Vue adapter]
+  Presets --> Svelte[Add Svelte adapter]
   React --> ReactStories[Add React stories and tests]
-  ReactStories --> Vue[Add Vue adapter]
   Vue --> VueStories[Add Vue stories and tests]
-  VueStories --> Svelte[Add Svelte adapter]
   Svelte --> SvelteStories[Add Svelte stories and tests]
-  SvelteStories --> Metadata[Update registry, trust artifacts, docs metadata]
+  ReactStories --> Metadata[Update registry, trust artifacts, docs metadata]
+  VueStories --> Metadata
+  SvelteStories --> Metadata
   Metadata --> Exports[Update exports and changeset]
   Exports --> Verify[Run repo validation]
 ```
@@ -98,14 +100,16 @@ Preset rules:
 - use `--mw-*` variables
 - keep framework-specific styling out of adapters
 
-### 3. React adapter
-Add files under:
+### 3. Framework adapters
+Add adapter files under:
 
 ```text
 packages/react/src/components/<name>/
+packages/vue/src/components/<name>/
+packages/svelte/src/lib/components/<name>/
 ```
 
-Typical files:
+The required architecture map lives in [Adapter Architecture](../reference/adapter-architecture.md). Typical file shapes:
 
 ```text
 packages/react/src/components/<name>/
@@ -116,23 +120,42 @@ packages/react/src/components/<name>/
 └── __tests__/
 ```
 
-React adapter rules:
+packages/vue/src/components/<name>/
+├── <name>.ts
+├── index.ts
+├── variants.ts           # optional
+├── <molecule-name>.ts    # optional
+└── __tests__/
+
+packages/svelte/src/lib/components/<name>/
+├── <Name>.svelte
+├── types.ts
+├── index.ts
+├── <MoleculeName>.svelte # optional
+└── __tests__/            # optional when package-local tests are needed
+```
+
+Adapter rules:
 - call the real core recipe
 - apply `RenderKit` fields explicitly
 - keep logic thin
 - avoid design-token hardcoding
+- expose role-identical public symbols across React, Vue, and Svelte
+- use framework-native syntax only where the adapter architecture map allows it
 
-### 4. React stories and docs
-Add files under:
+### 4. Stories and docs
+Add Storybook files under:
 
 ```text
 apps/storybook-react/src/stories/<name>/
+apps/storybook-vue/src/stories/<name>/
+apps/storybook-svelte/src/stories/<name>/
 ```
 
 Typical files:
 
 ```text
-apps/storybook-react/src/stories/<name>/
+apps/storybook-<framework>/src/stories/<name>/
 ├── Introduction.mdx
 ├── <name>.stories.tsx
 ├── <molecule-name>.stories.tsx
@@ -146,15 +169,7 @@ Storybook taxonomy should usually follow:
 - `Component/Molecule`
 - `Component/Purpose/<VariantName>`
 
-### 5. Vue adapter and stories
-Mirror the React structure in:
-
-```text
-packages/vue/src/components/<name>/
-apps/storybook-vue/src/stories/<name>/
-```
-
-Vue should preserve the same behavioral contract while using Vue-idiomatic event ergonomics.
+React, Vue, and Svelte should preserve the same behavioral contract while using framework-idiomatic event, slot/snippet, and binding ergonomics.
 
 ## Required exports
 
@@ -196,6 +211,7 @@ pnpm artifacts:check
 pnpm registry:check
 pnpm parity:summary:check
 pnpm storybook:consistency
+pnpm check:adapter-architecture
 ```
 
 If generated JSON or Markdown changes, format it with Biome before committing:
@@ -244,6 +260,8 @@ Avoid stories that create accessibility false positives:
 - [ ] Vue stories and tests added
 - [ ] Svelte adapter added
 - [ ] Svelte stories and tests added
+- [ ] shared contracts enrolled across React, Vue, and Svelte where applicable
+- [ ] `pnpm check:adapter-architecture` passes
 - [ ] exports updated
 - [ ] trust artifact sources updated when the component is public
 - [ ] component registry sources updated
@@ -258,6 +276,7 @@ Avoid stories that create accessibility false positives:
 
 A component is done when:
 - core, presets, React, Vue, and Svelte layers are complete
+- adapter family structure follows [Adapter Architecture](../reference/adapter-architecture.md)
 - stories exist for the relevant states and variants
 - tests cover the key behavior
 - exports are wired

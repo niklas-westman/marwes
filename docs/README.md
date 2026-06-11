@@ -15,19 +15,20 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 
 1. [Want to contribute?](./want-to-contribute.md)
 2. [Architecture](./reference/architecture.md)
-3. [Repo Map](./reference/repo-map.md)
-4. [Specification](./reference/spec.md)
-5. [Adding Components](./guides/adding-components.md)
-6. [Figma to Marwes](./guides/figma-to-marwes.md)
-7. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
-8. [MwTheme CSS Provider Integration](./guides/mw-theme-css-provider.md)
-9. [AI Metadata Protocol](./reference/ai-metadata.md)
-10. [Accessibility support model](./reference/accessibility.md)
-11. [Component Registry](./registry/README.md)
-12. [Governance](./reference/governance.md)
-13. [Testing](./reference/testing.md)
-14. [Family Validation](./reference/family-validation.md)
-15. [Figma Validator](./figma-validator/README.md)
+3. [Adapter Architecture](./reference/adapter-architecture.md)
+4. [Repo Map](./reference/repo-map.md)
+5. [Specification](./reference/spec.md)
+6. [Adding Components](./guides/adding-components.md)
+7. [Figma to Marwes](./guides/figma-to-marwes.md)
+8. [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md)
+9. [MwTheme CSS Provider Integration](./guides/mw-theme-css-provider.md)
+10. [AI Metadata Protocol](./reference/ai-metadata.md)
+11. [Accessibility support model](./reference/accessibility.md)
+12. [Component Registry](./registry/README.md)
+13. [Governance](./reference/governance.md)
+14. [Testing](./reference/testing.md)
+15. [Family Validation](./reference/family-validation.md)
+16. [Figma Validator](./figma-validator/README.md)
 
 ## Documentation map
 
@@ -43,6 +44,7 @@ graph TD
   Docs --> Registry[registry/]
 
   Reference --> Architecture[architecture.md]
+  Reference --> AdapterArchitecture[adapter-architecture.md]
   Reference --> RepoMap[repo-map.md]
   Reference --> Spec[spec.md]
   Reference --> AIMetadata[ai-metadata.md]
@@ -74,6 +76,7 @@ graph TD
 Long-lived, canonical project docs.
 
 - [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
+- [Adapter Architecture](./reference/adapter-architecture.md) — role-identical adapter map and cross-framework ruleset
 - [Repo Map](./reference/repo-map.md) — thread model, authority order, and change matrix
 - [Specification](./reference/spec.md) — formal requirements and decisions
 - [AI Metadata Protocol](./reference/ai-metadata.md) — canonical semantic vocabulary and ownership model
@@ -128,6 +131,7 @@ graph LR
   Presets[@marwes-ui/presets]
   React[@marwes-ui/react]
   Vue[@marwes-ui/vue]
+  Svelte[@marwes-ui/svelte]
   Storybook[Storybook apps]
   Playground[Playground app]
 
@@ -135,10 +139,13 @@ graph LR
   Core --> Presets
   Core --> React
   Core --> Vue
+  Core --> Svelte
   Presets --> React
   Presets --> Vue
+  Presets --> Svelte
   React --> Storybook
   Vue --> Storybook
+  Svelte --> Storybook
   React --> Playground
 ```
 

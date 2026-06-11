@@ -48,7 +48,6 @@
       "packages/svelte/src/lib/components/slider/BrightnessSlider.svelte",
       "packages/svelte/src/lib/components/slider/index.ts",
       "packages/svelte/src/lib/components/slider/RadiusSlider.svelte",
-      "packages/svelte/src/lib/components/slider/README.md",
       "packages/svelte/src/lib/components/slider/Slider.svelte",
       "packages/svelte/src/lib/components/slider/SliderField.svelte",
       "packages/svelte/src/lib/components/slider/types.ts",

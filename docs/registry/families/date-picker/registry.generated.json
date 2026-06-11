@@ -35,7 +35,6 @@
     "svelte": [
       "packages/svelte/src/lib/components/date-picker/DatePicker.svelte",
       "packages/svelte/src/lib/components/date-picker/index.ts",
-      "packages/svelte/src/lib/components/date-picker/README.md",
       "packages/svelte/src/lib/components/date-picker/types.ts"
     ],
     "storybookReact": [

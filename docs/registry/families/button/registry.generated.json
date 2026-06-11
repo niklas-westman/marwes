@@ -55,7 +55,6 @@
       "packages/svelte/src/lib/components/button/index.ts",
       "packages/svelte/src/lib/components/button/LinkButton.svelte",
       "packages/svelte/src/lib/components/button/PrimaryButton.svelte",
-      "packages/svelte/src/lib/components/button/README.md",
       "packages/svelte/src/lib/components/button/RefreshButton.svelte",
       "packages/svelte/src/lib/components/button/SaveButton.svelte",
       "packages/svelte/src/lib/components/button/SearchButton.svelte",

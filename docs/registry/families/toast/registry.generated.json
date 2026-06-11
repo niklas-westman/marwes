@@ -51,7 +51,6 @@
       "packages/svelte/src/lib/components/toast/ErrorToast.svelte",
       "packages/svelte/src/lib/components/toast/index.ts",
       "packages/svelte/src/lib/components/toast/InfoToast.svelte",
-      "packages/svelte/src/lib/components/toast/README.md",
       "packages/svelte/src/lib/components/toast/SuccessToast.svelte",
       "packages/svelte/src/lib/components/toast/Toast.svelte",
       "packages/svelte/src/lib/components/toast/ToastContainer.svelte",

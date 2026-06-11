@@ -14,12 +14,14 @@ import { runAvatarGroupContract } from "../../../../tests/contracts/avatar-group
 import { runAvatarContract } from "../../../../tests/contracts/avatar.contract"
 import { runBadgeGroupContract } from "../../../../tests/contracts/badge-group.contract"
 import { runBadgeContract } from "../../../../tests/contracts/badge.contract"
+import { runBannerContract } from "../../../../tests/contracts/banner.contract"
 import { runButtonSemanticsContract } from "../../../../tests/contracts/button-semantics.contract"
 import { runButtonContract } from "../../../../tests/contracts/button.contract"
 import { runCardContract } from "../../../../tests/contracts/card.contract"
 import { runCheckboxFieldContract } from "../../../../tests/contracts/checkbox-field.contract"
 import { runCheckboxGroupFieldContract } from "../../../../tests/contracts/checkbox-group-field.contract"
 import { runCheckboxContract } from "../../../../tests/contracts/checkbox.contract"
+import { runDateOfBirthFieldContract } from "../../../../tests/contracts/date-of-birth-field.contract"
 import { runDialogModalContract } from "../../../../tests/contracts/dialog-modal.contract"
 import { runDialogContract } from "../../../../tests/contracts/dialog.contract"
 import { runDividerContract } from "../../../../tests/contracts/divider.contract"
@@ -29,6 +31,7 @@ import { runInputFieldContract } from "../../../../tests/contracts/input-field.c
 import { runInputOtpContract } from "../../../../tests/contracts/input-otp.contract"
 import { runInputContract } from "../../../../tests/contracts/input.contract"
 import { runParagraphContract } from "../../../../tests/contracts/paragraph.contract"
+import { runProgressBarContract } from "../../../../tests/contracts/progress-bar.contract"
 import { runRadioGroupFieldContract } from "../../../../tests/contracts/radio-group-field.contract"
 import { runRadioContract } from "../../../../tests/contracts/radio.contract"
 import { runRichTextFieldContract } from "../../../../tests/contracts/rich-text-field.contract"
@@ -38,8 +41,10 @@ import { runSelectFieldContract } from "../../../../tests/contracts/select-field
 import { runSelectContract } from "../../../../tests/contracts/select.contract"
 import { runSkeletonContract } from "../../../../tests/contracts/skeleton.contract"
 import { runSliderContract } from "../../../../tests/contracts/slider.contract"
+import { runSpacingContract } from "../../../../tests/contracts/spacing.contract"
 import { runSpinnerVariantsContract } from "../../../../tests/contracts/spinner-variants.contract"
 import { runSpinnerContract } from "../../../../tests/contracts/spinner.contract"
+import { runStatTileContract } from "../../../../tests/contracts/stat-tile.contract"
 import { runSwitchContract } from "../../../../tests/contracts/switch.contract"
 import { runTabContract } from "../../../../tests/contracts/tab.contract"
 import { runTextareaFieldContract } from "../../../../tests/contracts/textarea-field.contract"
@@ -55,6 +60,7 @@ import Badge from "../lib/components/badge/Badge.svelte"
 import NotificationBadge from "../lib/components/badge/NotificationBadge.svelte"
 import PriorityBadge from "../lib/components/badge/PriorityBadge.svelte"
 import StatusBadge from "../lib/components/badge/StatusBadge.svelte"
+import Banner from "../lib/components/banner/Banner.svelte"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import CloseButton from "../lib/components/button/CloseButton.svelte"
 import ConfirmButton from "../lib/components/button/ConfirmButton.svelte"
@@ -89,12 +95,15 @@ import Input from "../lib/components/input/Input.svelte"
 import RichText from "../lib/components/input/RichText.svelte"
 import Select from "../lib/components/input/Select.svelte"
 import Textarea from "../lib/components/input/Textarea.svelte"
+import ProgressBar from "../lib/components/progress-bar/ProgressBar.svelte"
 import Radio from "../lib/components/radio/Radio.svelte"
 import Skeleton from "../lib/components/skeleton/Skeleton.svelte"
 import Slider from "../lib/components/slider/Slider.svelte"
+import Spacing from "../lib/components/spacing/Spacing.svelte"
 import ButtonSpinner from "../lib/components/spinner/ButtonSpinner.svelte"
 import EmptyStateSpinner from "../lib/components/spinner/EmptyStateSpinner.svelte"
 import Spinner from "../lib/components/spinner/Spinner.svelte"
+import StatTile from "../lib/components/stat-tile/StatTile.svelte"
 import Switch from "../lib/components/switch/Switch.svelte"
 import ErrorToast from "../lib/components/toast/ErrorToast.svelte"
 import InfoToast from "../lib/components/toast/InfoToast.svelte"
@@ -108,6 +117,7 @@ import AccordionFieldContractFixture from "./type-fixtures/AccordionFieldContrac
 import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
 import CheckboxFieldContractFixture from "./type-fixtures/CheckboxFieldContractFixture.svelte"
 import CheckboxGroupFieldContractFixture from "./type-fixtures/CheckboxGroupFieldContractFixture.svelte"
+import DateOfBirthFieldContractFixture from "./type-fixtures/DateOfBirthFieldContractFixture.svelte"
 import DialogModalContractOpenFixture from "./type-fixtures/DialogModalContractOpenFixture.svelte"
 import DialogModalContractTriggerFixture from "./type-fixtures/DialogModalContractTriggerFixture.svelte"
 import InputFieldContractFixture from "./type-fixtures/InputFieldContractFixture.svelte"
@@ -128,6 +138,12 @@ type Props = Record<string, unknown>
 function textSnippet(text: string) {
   return createRawSnippet(() => ({
     render: () => `<span>${text}</span>`,
+  }))
+}
+
+function actionSnippet(text: string) {
+  return createRawSnippet(() => ({
+    render: () => `<button type="button">${text}</button>`,
   }))
 }
 
@@ -423,6 +439,73 @@ runButtonSemanticsContract("svelte", {
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)
+  },
+})
+
+let bannerDismissHandler = { called: false }
+
+function renderBannerContract(args: Props = {}) {
+  bannerDismissHandler = { called: false }
+  renderWithText(
+    Banner,
+    {
+      ...args,
+      ondismiss: () => {
+        bannerDismissHandler.called = true
+      },
+    },
+    "Banner message",
+  )
+}
+
+runBannerContract("svelte", {
+  renderDefault() {
+    renderBannerContract()
+  },
+  renderInfo() {
+    renderBannerContract({ variant: "info" })
+  },
+  renderWarning() {
+    renderBannerContract({ variant: "warning" })
+  },
+  renderError() {
+    renderBannerContract({ variant: "error" })
+  },
+  renderWithoutIcon() {
+    renderBannerContract({ showIcon: false })
+  },
+  renderNonDismissible() {
+    renderBannerContract({ dismissible: false })
+  },
+  renderWithAction() {
+    renderBannerContract({ action: actionSnippet("Learn more") })
+  },
+  renderWithAriaLabel() {
+    renderBannerContract({ ariaLabel: "Important notice" })
+  },
+  async clickDismiss() {
+    await fireEvent.click(screen.getByRole("button", { name: /dismiss/i }))
+  },
+  getByRole(role, options) {
+    return screen.getByRole(role, options)
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  queryByRole(role, options) {
+    return screen.queryByRole(role, options)
+  },
+  getRoot() {
+    const root = document.querySelector("[data-component='banner']")
+
+    if (!(root instanceof HTMLElement)) {
+      throw new Error("Expected banner root to exist")
+    }
+
+    return root
+  },
+  getDismissHandler() {
+    return bannerDismissHandler
   },
 })
 
@@ -771,6 +854,34 @@ runInputFieldContract("svelte", {
   },
 })
 
+runDateOfBirthFieldContract("svelte", {
+  renderDateOfBirthField(args) {
+    render(DateOfBirthFieldContractFixture, {
+      props: {
+        label: args.label,
+        ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
+        ...(args.error !== undefined ? { error: args.error } : {}),
+        ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
+      },
+    })
+  },
+  getByLabelText(text) {
+    return screen.getByLabelText(text) as HTMLInputElement
+  },
+  getByText(text) {
+    return screen.getByText(text)
+  },
+  queryHelperRegion() {
+    return document.querySelector(".mw-input-field__helper")
+  },
+  queryErrorRegion() {
+    return document.querySelector(".mw-input-field__error")
+  },
+  queryPurposeRegion() {
+    return document.querySelector("[data-purpose='date-of-birth']")
+  },
+})
+
 runInputOtpContract("svelte", {
   renderInputOtp(args = {}) {
     render(InputOtpContractFixture, {
@@ -818,6 +929,21 @@ runParagraphContract("svelte", {
   },
   getByText(text) {
     return screen.getByText(text)
+  },
+})
+
+runProgressBarContract("svelte", {
+  renderProgressBar(args = {}) {
+    render(ProgressBar, { props: args })
+  },
+  getProgressBarElement() {
+    const progressBar = document.querySelector("[data-component='progress-bar']")
+
+    if (!(progressBar instanceof HTMLElement)) {
+      throw new Error("Expected progress bar element to exist")
+    }
+
+    return progressBar
   },
 })
 
@@ -1009,6 +1135,42 @@ runSelectComboboxContract("svelte", {
   },
   async keyboard(text) {
     await dispatchKeyboard(text)
+  },
+})
+
+runSpacingContract("svelte", {
+  renderSpacing(args = {}) {
+    render(Spacing, { props: args })
+  },
+  getSpacingElement() {
+    return document.querySelector("[data-component='spacing']")
+  },
+})
+
+runStatTileContract("svelte", {
+  renderStatTile(args = {}) {
+    render(StatTile, {
+      props: {
+        label: args.label ?? "Monthly Revenue",
+        value: args.value ?? "$48,200",
+        subtitle: args.subtitle ?? "vs $42,900 last month",
+        ...(args.tone !== undefined ? { tone: args.tone } : {}),
+        ...(args.trendValue !== undefined ? { trendValue: args.trendValue } : {}),
+        ...(args.trendDirection !== undefined ? { trendDirection: args.trendDirection } : {}),
+      },
+    })
+  },
+  getStatTileElement() {
+    const tile = document.querySelector("[data-component='stat-tile']")
+
+    if (!(tile instanceof HTMLElement)) {
+      throw new Error("Expected stat tile element to exist")
+    }
+
+    return tile
+  },
+  getByText(text) {
+    return screen.getByText(text)
   },
 })
 

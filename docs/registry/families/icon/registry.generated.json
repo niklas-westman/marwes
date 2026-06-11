@@ -40,7 +40,6 @@
     "svelte": [
       "packages/svelte/src/lib/components/icon/Icon.svelte",
       "packages/svelte/src/lib/components/icon/index.ts",
-      "packages/svelte/src/lib/components/icon/README.md",
       "packages/svelte/src/lib/components/icon/types.ts"
     ],
     "storybookReact": [

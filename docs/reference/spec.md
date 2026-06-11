@@ -10,7 +10,7 @@ flowchart LR
   Requirement[Requirement in spec] --> Plan[Implementation plan]
   Plan --> Core[Core changes]
   Core --> Presets[Preset CSS changes]
-  Presets --> Adapters[React and Vue adapter changes]
+  Presets --> Adapters[React, Vue, and Svelte adapter changes]
   Adapters --> Stories[Storybook and tests]
   Stories --> Docs[Docs and changelog updates]
 ```
@@ -22,15 +22,15 @@ Marwes is a component system that prioritizes:
 - Consistent accessibility behavior
 - Framework-agnostic core logic
 
-## 2. Current Status (2026-04-09)
-- Repository shape: pnpm monorepo with `core`, `presets`, `react`, `vue`, Storybook apps, and a React playground
-- Adapter support: React and Vue are both first-class packages
+## 2. Current Status (2026-06-11)
+- Repository shape: pnpm monorepo with `core`, `presets`, `react`, `vue`, `svelte`, Storybook apps, and a React playground
+- Adapter support: React, Vue, and Svelte are first-class packages
 - Current focus: keep docs, Storybook coverage, and implementation aligned with the V3 Figma component set
 - Component family status is tracked through the registry docs and generated registry artifacts.
 
 ## 3. Core Principles
 - Simple surface API, strong internal consistency
-- Core is framework agnostic (no React, no Vue, no browser runtime behavior)
+- Core is framework agnostic (no React, Vue, Svelte, or browser runtime behavior)
 - Presets are static CSS (`.mw-*` classes and `--mw-*` vars)
 - Accessibility behavior is authored in core
 - Semantic metadata is source-owned in core for covered families
@@ -44,7 +44,7 @@ Marwes uses three layers:
    - A11y mappings
 2. `@marwes-ui/presets`
    - Static CSS and preset defaults
-3. Framework adapters (`@marwes-ui/react`, `@marwes-ui/vue`)
+3. Framework adapters (`@marwes-ui/react`, `@marwes-ui/vue`, `@marwes-ui/svelte`)
    - Thin adapters that apply core RenderKit output
    - Own browser runtime effects such as provider theme DOM sync and font loading
 
@@ -74,7 +74,7 @@ Adapter requirements:
 ## 5. Active Scope
 ### In Scope
 - Core theme system and preset CSS
-- React and Vue adapter parity for shipped components
+- React, Vue, and Svelte adapter parity for shipped components
 - Storybook and playground validation
 - Continued alignment with the synced V3 Figma references
 
@@ -91,7 +91,7 @@ Every non-trivial change must follow this sequence:
 2. **Acceptance criteria**
    - Each requirement includes testable outcomes.
 3. **Implementation mapping**
-   - Identify impacted files across core, presets, React, and Vue.
+   - Identify impacted files across core, presets, React, Vue, and Svelte.
 4. **Validation**
    - Typecheck/build and targeted behavior checks.
 5. **Documentation + changelog**
@@ -162,7 +162,7 @@ Use this format when resolving an open decision:
 
 ## 11.1 Semantic protocol requirements
 - Canonical semantic vocabulary is defined in `@marwes-ui/core`
-- Covered families must not invent divergent React/Vue semantic values
+- Covered families must not invent divergent React, Vue, or Svelte semantic values
 - `data-component` and purpose-level semantics are part of the public contract for covered families
 - Family-local data attributes may exist, but are not automatically canonical protocol fields
 - The canonical reference for semantic metadata is `docs/reference/ai-metadata.md`

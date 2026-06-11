@@ -159,7 +159,7 @@ graph TD
 
 ## Component implementation flow
 
-Every component should follow the same sequence.
+Every component should follow the same layers. After core and preset CSS are ready, React, Vue, and Svelte adapter work should proceed as one parity surface rather than as a serial handoff.
 
 ```mermaid
 flowchart TD
@@ -168,15 +168,17 @@ flowchart TD
   C --> D["Core styles and recipe"]
   D --> E["Preset CSS"]
   E --> F["React adapter"]
+  E --> H["Vue adapter"]
+  E --> J["Svelte adapter"]
   F --> G["React stories and tests"]
-  G --> H["Vue adapter"]
   H --> I["Vue stories and tests"]
-  I --> J["Svelte adapter"]
   J --> K["Svelte stories and tests"]
-  K --> L["Exports + changeset + verification"]
+  G --> L["Exports + changeset + verification"]
+  I --> L
+  K --> L
 ```
 
-Detailed file placement lives in [Adding Components](../guides/adding-components.md).
+Detailed file placement lives in [Adding Components](../guides/adding-components.md). Adapter shape and parity rules live in [Adapter Architecture](./adapter-architecture.md).
 
 ## Design-to-code flow
 
@@ -227,21 +229,23 @@ Follow [Adding Components](../guides/adding-components.md).
 - CSS only
 - no runtime component logic
 
-### `react` and `vue`
+### `react`, `vue`, and `svelte`
 - consume `@marwes-ui/core`
 - keep wrappers thin
 - no duplicated a11y logic
-- no preset imports inside component adapters
+- package entries import firstEdition preset CSS
+- no preset imports inside component family adapters
 - no hardcoded visual tokens inside component adapters
 - emit registry-defined semantic attributes for covered families
 
-The lightweight architecture guardrail is:
+The lightweight architecture guardrails are:
 
 ```bash
+pnpm check:adapter-architecture
 pnpm check:adapter-boundaries
 ```
 
-This script catches strong violations. It does not replace architecture review; it is a safety net for the most common boundary slips.
+These scripts catch strong violations. They do not replace architecture review; they are safety nets for the most common parity and boundary slips.
 
 ### apps
 - may import from packages
@@ -265,6 +269,7 @@ For focused work, run the relevant package or app commands instead.
 
 - [Documentation index](../README.md)
 - [Repo Map](./repo-map.md)
+- [Adapter Architecture](./adapter-architecture.md)
 - [Specification](./spec.md)
 - [AI Metadata Protocol](./ai-metadata.md)
 - [Governance](./governance.md)

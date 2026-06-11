@@ -50,7 +50,6 @@
       "packages/svelte/src/lib/components/tab/ContentTabs.svelte",
       "packages/svelte/src/lib/components/tab/index.ts",
       "packages/svelte/src/lib/components/tab/NavigationTabs.svelte",
-      "packages/svelte/src/lib/components/tab/README.md",
       "packages/svelte/src/lib/components/tab/SettingsTabs.svelte",
       "packages/svelte/src/lib/components/tab/Tab.svelte",
       "packages/svelte/src/lib/components/tab/TabGroup.svelte",

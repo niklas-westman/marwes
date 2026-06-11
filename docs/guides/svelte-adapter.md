@@ -5,17 +5,17 @@
 ## Installation
 
 ```bash
-pnpm add @marwes-ui/svelte @marwes-ui/presets
+pnpm add @marwes-ui/svelte
 ```
 
 ## Setup
 
-Import preset CSS explicitly — the Svelte package does not auto-import styles:
+Import components from the Svelte adapter. The package entry imports the default
+firstEdition preset CSS, matching the shared adapter package policy:
 
 ```svelte
 <!-- +layout.svelte or app entry -->
 <script>
-  import "@marwes-ui/presets/firstEdition/styles.css"
   import { MarwesProvider } from "@marwes-ui/svelte"
 </script>
 
@@ -23,6 +23,9 @@ Import preset CSS explicitly — the Svelte package does not auto-import styles:
   <slot />
 </MarwesProvider>
 ```
+
+Install `@marwes-ui/presets` directly only when you need standalone preset CSS
+or preset exports outside the adapter package.
 
 ## Quick Start
 
@@ -36,7 +39,7 @@ Import preset CSS explicitly — the Svelte package does not auto-import styles:
 <Button variant="primary" onclick={() => alert(`Hello ${name}`)}>Greet</Button>
 ```
 
-## Key Differences from React/Vue
+## Svelte Syntax Notes
 
 ### Two-way binding
 
@@ -62,7 +65,7 @@ Svelte uses lowercase event names matching native DOM conventions:
 
 ### Children
 
-Svelte uses snippets instead of React children or Vue slots:
+Svelte uses snippets and content projection for component content:
 
 ```svelte
 <Button>Click me</Button>
@@ -116,14 +119,14 @@ import { createMarwesThemeScript, createMarwesThemeStyle } from "@marwes-ui/svel
 
 ## Architecture
 
-The adapter follows the same pattern as React and Vue:
+The adapter follows the same pattern as the other framework adapters:
 
 ```
 @marwes-ui/core (recipes, a11y, types)
        ↓
 @marwes-ui/presets (CSS)
        ↓
-@marwes-ui/svelte (thin Svelte 5 wrappers)
+@marwes-ui/react / @marwes-ui/vue / @marwes-ui/svelte
 ```
 
 Components call core recipes and spread the output onto native elements. No behavior logic is duplicated in the adapter.
@@ -132,4 +135,4 @@ Components call core recipes and spread the output onto native elements. No beha
 
 - **Web Components** — not a goal
 - **SvelteKit-only features** — no `$app/*` imports in package code
-- **CSS auto-import** — users import from `@marwes-ui/presets` explicitly
+- **Adapter-only behavior forks** — Svelte syntax can differ, but Marwes behavior and public roles stay aligned across framework adapters
