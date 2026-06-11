@@ -64,8 +64,8 @@ export type { ToneName } from "@marwes-ui/core"
 // ======= ATOMS =======
 
 /* Button */
-export { Button } from "./components/button"
-export type { ButtonProps } from "./components/button"
+export { Button, IconButton } from "./components/button"
+export type { ButtonProps, IconButtonProps } from "./components/button"
 export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 export {
   DestructiveButton,

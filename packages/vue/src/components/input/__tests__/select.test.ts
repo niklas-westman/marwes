@@ -97,7 +97,7 @@ describe("Select", () => {
 
     expect(select.tagName).toBe("SELECT")
     expect(select).toHaveClass("mw-select--native")
-    expect(container.querySelector(".mw-select__control-icon")).toBeNull()
+    expect(container.querySelector(".mw-select__control-icon")).not.toBeNull()
   })
 
   it("supports the native boolean alias", () => {

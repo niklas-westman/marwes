@@ -24,7 +24,6 @@ export const DestructiveExample: StoryObj<typeof DestructiveButton> = {
   args: {
     children: "Delete",
     iconRight: "trash",
-    error: true,
   },
   parameters: {
     docs: {

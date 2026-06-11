@@ -802,6 +802,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
           "sp-48",
           "sp-32",
           "sp-16",
+          "sp-12",
           "sp-8",
           "sp-1",
           "light",

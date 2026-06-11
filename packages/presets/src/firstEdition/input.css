@@ -6,6 +6,7 @@
  */
 
 .mw-input {
+  box-sizing: border-box;
   height: var(--mw-density-height);
   padding: 0 var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
@@ -14,7 +15,9 @@
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
-  width: 260px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   transition: border-color 150ms ease, outline 150ms ease;
 }
 

@@ -1,2 +1,3 @@
 export { default as Button } from "./Button.svelte"
-export type { ButtonProps } from "./types.js"
+export { default as IconButton } from "./IconButton.svelte"
+export type { ButtonProps, IconButtonProps } from "./types.js"

@@ -41,6 +41,7 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
       }),
       "data-error": opts.error ? "true" : undefined,
       "data-has-affordance": hasAffordance ? "true" : undefined,
+      "data-icon-only": opts.iconOnly ? "true" : undefined,
       ...opts.dataAttributes,
     },
     vars: {},

@@ -19,7 +19,9 @@
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 
   const resolvedVariant = $derived((options.variant ?? "primary") as ButtonVariant);
-  const isFilledVariant = $derived(resolvedVariant === "primary" || resolvedVariant === "success");
+  const isFilledVariant = $derived(
+    resolvedVariant === "primary" || resolvedVariant === "success" || resolvedVariant === "danger"
+  );
 
   const visibleLabel = $derived(
     kit.loading.isLoading && kit.loading.loadingLabel !== undefined

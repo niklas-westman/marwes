@@ -27,6 +27,7 @@ describe("Public API exports", () => {
       "PriorityBadge",
       "NotificationBadge",
       "Button",
+      "IconButton",
       "PrimaryButton",
       "SecondaryButton",
       "TextButton",

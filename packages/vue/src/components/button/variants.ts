@@ -184,9 +184,8 @@ export const DestructiveButton = defineComponent({
           ...filterForwardedAttrs(rawAttrs, ["variant", "action", "as", "href"]),
           ...props,
           as: "button",
-          variant: ButtonVariant.primary,
+          variant: ButtonVariant.danger,
           action: ButtonAction.delete,
-          error: true,
           confirmation: props.confirmation ?? true,
           dataAttributes: createPurposeButtonDataAttributes("destructive", props.dataAttributes, {
             "data-confirmation-required": props.confirmation === false ? "false" : "true",

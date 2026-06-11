@@ -40,6 +40,17 @@ describe("Select", () => {
     const select = container.querySelector("select") as HTMLSelectElement
     expect(select.disabled).toBe(true)
   })
+
+  it("keeps shared chevron chrome when native select mode is used", () => {
+    const { container } = render(Select, {
+      props: { options: selectOptions, native: true },
+    })
+
+    const select = container.querySelector("select") as HTMLSelectElement
+
+    expect(select.classList.contains("mw-select--native")).toBe(true)
+    expect(container.querySelector(".mw-select__control-icon")).not.toBeNull()
+  })
 })
 
 describe("SelectField", () => {

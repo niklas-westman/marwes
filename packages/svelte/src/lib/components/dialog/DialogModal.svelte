@@ -8,6 +8,9 @@
     closeOnEscape = true,
     closeOnScrimClick = true,
     restoreFocus = true,
+    surfaceWidth,
+    tone = "default",
+    divider = "visible",
     onopenchange,
     overlayClass,
     footer,
@@ -19,6 +22,11 @@
   let previouslyFocused: HTMLElement | null = $state(null);
 
   const mergedOverlayClass = $derived(mergeClass("mw-dialog-modal", overlayClass));
+  const surfaceWidthStyle = $derived(
+    surfaceWidth === undefined
+      ? undefined
+      : `--mw-dialog-surface-width: ${typeof surfaceWidth === "number" ? `${surfaceWidth}px` : surfaceWidth}`
+  );
 
   function close(): void {
     if (!open) return;
@@ -108,6 +116,10 @@
   <div
     bind:this={overlayElement}
     class={mergedOverlayClass}
+    style={surfaceWidthStyle}
+    data-surface-width={surfaceWidth === undefined ? undefined : "custom"}
+    data-tone={tone}
+    data-divider={divider}
     onclick={handleScrimClick}
     onkeydown={handleKeyDown}
     role="presentation"

@@ -53,6 +53,7 @@ export type { ToneName } from "@marwes-ui/core"
 /* Button */
 export {
   Button,
+  IconButton,
   DestructiveButton,
   CreateButton,
   SubmitButton,
@@ -78,6 +79,7 @@ export {
 } from "./components/button"
 export type {
   ButtonProps,
+  IconButtonProps,
   DestructiveButtonProps,
   CreateButtonProps,
   SubmitButtonProps,

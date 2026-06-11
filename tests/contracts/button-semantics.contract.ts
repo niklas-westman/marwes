@@ -90,12 +90,12 @@ export function runButtonSemanticsContract(
       expect(refreshButton).toHaveClass("mw-btn--neutral")
       expect(refreshButton.querySelector("svg")).not.toBeNull()
 
-      // DestructiveButton: primary + error tone, no icon
+      // DestructiveButton: first-class danger tone, no icon
       const destructiveButton = h.getByRole("button", { name: /delete/i })
       expect(destructiveButton).toHaveAttribute("data-action", "delete")
       expect(destructiveButton).toHaveAttribute("data-purpose", "destructive")
-      expect(destructiveButton).toHaveClass("mw-btn--primary")
-      expect(destructiveButton).toHaveClass("mw-btn--error")
+      expect(destructiveButton).toHaveClass("mw-btn--danger")
+      expect(destructiveButton).not.toHaveClass("mw-btn--error")
       expect(destructiveButton.querySelector("svg")).toBeNull()
     })
 

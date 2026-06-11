@@ -12,6 +12,7 @@ describe("React button introduction docs", () => {
     const introDoc = readFileSync(introPath, "utf8")
 
     expect(introDoc).toContain("Button (Atom)")
+    expect(introDoc).toContain("IconButton")
     expect(introDoc).toContain("Variant Wrappers")
     expect(introDoc).toContain("Purpose Wrappers")
 
@@ -19,6 +20,7 @@ describe("React button introduction docs", () => {
       "PrimaryButton",
       "SecondaryButton",
       "TextButton",
+      "IconButton",
       "SubmitButton",
       "SaveButton",
       "CancelButton",

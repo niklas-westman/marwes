@@ -12,6 +12,7 @@ describe("Vue spacing introduction docs", () => {
     const introDoc = readFileSync(introPath, "utf8")
 
     expect(introDoc).toContain("Spacing (Atom)")
+    expect(introDoc).toContain("Spacer (Atom)")
     expect(introDoc).toContain("Spacings")
     expect(introDoc).toContain("Token Scale")
     expect(introDoc).toContain("Accessibility notes")

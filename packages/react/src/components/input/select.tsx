@@ -4,7 +4,7 @@ import type {
   CssVars,
   SelectOptions,
 } from "@marwes-ui/core"
-import { createSelectRecipe, resolveSelectMode } from "@marwes-ui/core"
+import { createSelectRecipe } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { SelectArrowIcon } from "./select-arrow-icon"
@@ -37,7 +37,6 @@ function getInitialSelectValue(props: SelectProps): string {
 
 export function Select(props: SelectProps) {
   const kit = createSelectRecipe(props)
-  const mode = resolveSelectMode(props)
   const isControlled = props.value !== undefined
   const [uncontrolledValue, setUncontrolledValue] = React.useState(() =>
     getInitialSelectValue(props),
@@ -92,10 +91,6 @@ export function Select(props: SelectProps) {
       ))}
     </select>
   )
-
-  if (mode === "native") {
-    return selectElement
-  }
 
   return (
     <span className="mw-select__control">

@@ -4,7 +4,10 @@
  */
 
 .mw-rich-text {
-  width: 260px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
   background: var(--mw-color-surface-primary);

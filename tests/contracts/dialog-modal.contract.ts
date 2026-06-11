@@ -14,6 +14,9 @@ export type DialogModalContractHarness = {
     closeOnEscape?: boolean
     closeOnScrimClick?: boolean
     includeInput?: boolean
+    surfaceWidth?: string | number
+    tone?: "default" | "calm"
+    divider?: "visible" | "hidden"
     onOpenChange?: (open: boolean) => void
   }): Promise<void> | void
   renderTriggerDialogModal(args?: {
@@ -135,6 +138,26 @@ export function runDialogModalContract(
 
       expect(emittedValues).toEqual([false])
       expect(harness.getByRole("dialog", { name: /rename workspace/i })).toBeInTheDocument()
+    })
+
+    it("exposes modal surface sizing, tone, and divider hooks", async () => {
+      await harness.renderOpenDialogModal({
+        title: "Resize modal",
+        surfaceWidth: 640,
+        tone: "calm",
+        divider: "hidden",
+      })
+
+      const dialog = harness.getByRole("dialog", { name: /resize modal/i })
+      const modal = dialog.closest(".mw-dialog-modal")
+
+      expect(modal).toBeInstanceOf(HTMLElement)
+      expect(modal).toHaveAttribute("data-surface-width", "custom")
+      expect(modal).toHaveAttribute("data-tone", "calm")
+      expect(modal).toHaveAttribute("data-divider", "hidden")
+      expect((modal as HTMLElement).style.getPropertyValue("--mw-dialog-surface-width")).toBe(
+        "640px",
+      )
     })
 
     it("supports scrim dismissal and restores focus to the trigger", async () => {

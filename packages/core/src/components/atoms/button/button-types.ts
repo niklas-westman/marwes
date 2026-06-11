@@ -24,6 +24,7 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize]
  * @property neutral - Low-chroma outlined buttons for neutral utility actions.
  * @property text - Minimal text-like buttons for tertiary or inline actions.
  * @property success - Positive emphasis buttons for confirm-style actions.
+ * @property danger - Destructive emphasis buttons for irreversible actions.
  *
  * @example
  * ```tsx
@@ -39,6 +40,7 @@ export const ButtonVariant = {
   neutral: "neutral",
   text: "text",
   success: "success",
+  danger: "danger",
 } as const
 export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
 

@@ -23,6 +23,7 @@ import {
   DropdownButton,
   EditButton,
   FilterButton,
+  IconButton,
   LinkButton,
   PrimaryButton,
   RefreshButton,
@@ -256,5 +257,16 @@ describe("React adapter specifics: Button", () => {
     const button = screen.getByRole("button", { name: /styled/i })
     expect(button).toHaveClass("custom-class")
     expect(button.className).toContain("mw-btn")
+  })
+
+  it("renders IconButton as an accessible square icon-only control", () => {
+    renderWithProvider(<IconButton icon="x" ariaLabel="Close" />)
+
+    const button = screen.getByRole("button", { name: /close/i })
+
+    expect(button).toHaveClass("mw-btn--neutral")
+    expect(button).toHaveAttribute("data-icon-only", "true")
+    expect(button.querySelector(".mw-btn__label")).toBeNull()
+    expect(button.querySelector("svg")).not.toBeNull()
   })
 })

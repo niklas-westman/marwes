@@ -15,6 +15,7 @@ import { runButtonSemanticsContract } from "../../../../../../tests/contracts/bu
 import { runButtonContract } from "../../../../../../tests/contracts/button.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Button } from "../button"
+import { IconButton } from "../icon-button"
 import {
   CancelButton,
   CloseButton,
@@ -270,5 +271,16 @@ describe("Vue adapter specifics: Button", () => {
     const button = screen.getByRole("button", { name: /styled/i })
     expect(button).toHaveClass("custom-class")
     expect(button.className).toContain("mw-btn")
+  })
+
+  it("renders IconButton as an accessible square icon-only control", () => {
+    renderWithProvider(IconButton, { icon: "x", ariaLabel: "Close" })
+
+    const button = screen.getByRole("button", { name: /close/i })
+
+    expect(button).toHaveClass("mw-btn--neutral")
+    expect(button).toHaveAttribute("data-icon-only", "true")
+    expect(button.querySelector(".mw-btn__label")).toBeNull()
+    expect(button.querySelector("svg")).not.toBeNull()
   })
 })

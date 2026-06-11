@@ -17,6 +17,10 @@ describe("firstEdition select css contract", () => {
     expect(css).toContain("border: 1px solid var(--mw-color-border);")
     expect(css).toContain("color: var(--mw-color-text);")
     expect(css).toContain("var(--mw-color-text-muted)")
+    expect(css).not.toContain("-webkit-appearance: menulist;")
+    expect(css).not.toContain(
+      "padding: 12px; /* off-scale — native select keeps browser arrow padding */",
+    )
   })
 
   it("maps the custom dropdown state to named Marwes dropdown tokens", () => {
@@ -46,7 +50,7 @@ describe("firstEdition select css contract", () => {
     expect(css).toContain("background-color: var(--mw-dropdown-item-surface-hover);")
     expect(css).toContain(".mw-select-field__option:active:not(.mw-select-field__option--disabled)")
     expect(css).toContain("background-color: var(--mw-dropdown-item-surface-pressed);")
-    expect(css).toContain("padding: 12px;")
+    expect(css).toContain("height: var(--mw-density-height);")
   })
 
   it("targets text typography classes for date select field copy", () => {

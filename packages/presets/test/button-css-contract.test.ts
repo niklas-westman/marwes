@@ -17,6 +17,15 @@ describe("firstEdition button css contract", () => {
     expect(css).toContain("color: var(--mw-color-primary-label);")
   })
 
+  it("provides a first-class danger variant for destructive actions", () => {
+    const css = readFileSync(buttonCssPath, "utf8")
+
+    expect(css).toContain(".mw-btn--danger")
+    expect(css).toContain("background: var(--mw-color-danger-base);")
+    expect(css).toContain("color: var(--mw-color-danger-label);")
+    expect(css).toContain("border-color: var(--mw-color-danger-base);")
+  })
+
   it("uses emitted theme color vars for text buttons", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 
@@ -49,5 +58,14 @@ describe("firstEdition button css contract", () => {
     expect(css).toContain("overflow: hidden;")
     expect(css).toContain("text-overflow: ellipsis;")
     expect(css).toContain("white-space: nowrap;")
+  })
+
+  it("sizes icon-only buttons to the density control height", () => {
+    const css = readFileSync(buttonCssPath, "utf8")
+
+    expect(css).toContain('.mw-btn[data-icon-only="true"]')
+    expect(css).toContain("width: var(--mw-density-height);")
+    expect(css).toContain("min-width: var(--mw-density-height);")
+    expect(css).toContain("padding: 0;")
   })
 })

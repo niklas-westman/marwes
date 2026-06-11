@@ -46,6 +46,9 @@ runDialogModalContract("vue", {
           ...(args.closeOnScrimClick !== undefined
             ? { closeOnScrimClick: args.closeOnScrimClick }
             : {}),
+          ...(args.surfaceWidth !== undefined ? { surfaceWidth: args.surfaceWidth } : {}),
+          ...(args.tone !== undefined ? { tone: args.tone } : {}),
+          ...(args.divider !== undefined ? { divider: args.divider } : {}),
           ...(args.onOpenChange !== undefined ? { "onUpdate:open": args.onOpenChange } : {}),
           ...(args.showFooter === false
             ? {}

@@ -7,7 +7,7 @@ import { ButtonSpinner } from "../spinner"
 type StyleWithVars = React.CSSProperties & CssVars
 
 function isFilledButtonVariant(variant: ButtonVariant): boolean {
-  return variant === "primary" || variant === "success"
+  return variant === "primary" || variant === "success" || variant === "danger"
 }
 
 function hasRenderableLabel(label: React.ReactNode): boolean {

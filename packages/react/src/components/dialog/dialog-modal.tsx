@@ -43,6 +43,9 @@ export interface DialogFooterControls {
   close: () => void
 }
 
+export type DialogModalTone = "default" | "calm"
+export type DialogModalDivider = "visible" | "hidden"
+
 export interface DialogModalProps extends Omit<DialogProps, "footer" | "onClose"> {
   open?: boolean
   defaultOpen?: boolean
@@ -52,7 +55,18 @@ export interface DialogModalProps extends Omit<DialogProps, "footer" | "onClose"
   restoreFocus?: boolean
   portalTarget?: HTMLElement | null
   overlayClassName?: string
+  surfaceWidth?: string | number
+  tone?: DialogModalTone
+  divider?: DialogModalDivider
   footer?: React.ReactNode | ((controls: DialogFooterControls) => React.ReactNode)
+}
+
+type DialogModalStyle = React.CSSProperties & {
+  "--mw-dialog-surface-width"?: string
+}
+
+function toCSSDimension(value: string | number): string {
+  return typeof value === "number" ? `${value}px` : value
 }
 
 export function DialogModal(props: DialogModalProps): React.ReactElement | null {
@@ -65,6 +79,9 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     restoreFocus = true,
     portalTarget,
     overlayClassName,
+    surfaceWidth,
+    tone = "default",
+    divider = "visible",
     footer,
     ...dialogProps
   } = props
@@ -177,10 +194,19 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     return null
   }
 
+  const modalStyle: DialogModalStyle | undefined =
+    surfaceWidth === undefined
+      ? undefined
+      : { "--mw-dialog-surface-width": toCSSDimension(surfaceWidth) }
+
   const modalMarkup = (
     <div
       ref={overlayRef}
       className={cx("mw-dialog-modal", overlayClassName)}
+      style={modalStyle}
+      data-surface-width={surfaceWidth === undefined ? undefined : "custom"}
+      data-tone={tone}
+      data-divider={divider}
       onClick={(event) => {
         if (!closeOnScrimClick) {
           return

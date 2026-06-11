@@ -17,6 +17,9 @@ export interface DialogModalProps extends Omit<DialogProps, "footer" | "onclose"
   closeOnEscape?: boolean
   closeOnScrimClick?: boolean
   restoreFocus?: boolean
+  surfaceWidth?: string | number
+  tone?: "default" | "calm"
+  divider?: "visible" | "hidden"
   footer?: Snippet<[{ close: () => void }]>
   onopenchange?: (open: boolean) => void
   class?: string

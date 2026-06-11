@@ -10,6 +10,12 @@ const meta = {
     ...storybookLayout.centered,
     ...storybookA11yPolicy.smoke,
   },
+  argTypes: {
+    size: { control: "select", options: ["small", "medium", "large"] },
+    surfaceWidth: { control: "text" },
+    tone: { control: "select", options: ["default", "calm"] },
+    divider: { control: "select", options: ["visible", "hidden"] },
+  },
 } satisfies Meta<DialogModalProps>
 
 export default meta
@@ -58,6 +64,34 @@ export const LockedDismissal: Story = {
         </Paragraph>
         <template #footer>
           <ConfirmButton>Continue</ConfirmButton>
+        </template>
+      </DialogModal>
+    `,
+  }),
+}
+
+export const CalmSurface: Story = {
+  args: {
+    open: true,
+    title: "Review export",
+    description: "Confirm the file settings before the export starts.",
+    surfaceWidth: "640px",
+    tone: "calm",
+    divider: "hidden",
+    size: "medium",
+  },
+  render: (args) => ({
+    components: { ConfirmButton, DialogModal, Paragraph },
+    setup() {
+      return { args }
+    },
+    template: `
+      <DialogModal v-bind="args" :portalTarget="null">
+        <Paragraph>
+          The custom surface width, calmer scrim, and hidden dividers are controlled by DialogModal props.
+        </Paragraph>
+        <template #footer>
+          <ConfirmButton>Export</ConfirmButton>
         </template>
       </DialogModal>
     `,

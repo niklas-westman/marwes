@@ -39,6 +39,9 @@ export type DialogFooterControls = {
   close: () => void
 }
 
+export type DialogModalTone = "default" | "calm"
+export type DialogModalDivider = "visible" | "hidden"
+
 export type DialogModalProps = Omit<DialogProps, "footer" | "onClose"> & {
   open?: boolean
   defaultOpen?: boolean
@@ -47,7 +50,18 @@ export type DialogModalProps = Omit<DialogProps, "footer" | "onClose"> & {
   restoreFocus?: boolean
   portalTarget?: HTMLElement | string | null
   overlayClassName?: string
+  surfaceWidth?: string | number
+  tone?: DialogModalTone
+  divider?: DialogModalDivider
   footer?: VNodeChild | ((controls: DialogFooterControls) => VNodeChild)
+}
+
+function toCSSDimension(value: string | number | undefined): string | undefined {
+  if (value === undefined) {
+    return undefined
+  }
+
+  return typeof value === "number" ? `${value}px` : value
 }
 
 const dialogModalPropKeys = [
@@ -69,6 +83,9 @@ const dialogModalPropKeys = [
   "restoreFocus",
   "portalTarget",
   "overlayClassName",
+  "surfaceWidth",
+  "tone",
+  "divider",
   "footer",
 ] as const
 
@@ -190,6 +207,13 @@ export const DialogModal = defineComponent(
         {
           ref: overlayRef,
           class: ["mw-dialog-modal", props.overlayClassName].filter(Boolean).join(" "),
+          style:
+            props.surfaceWidth === undefined
+              ? undefined
+              : { "--mw-dialog-surface-width": toCSSDimension(props.surfaceWidth) },
+          "data-surface-width": props.surfaceWidth === undefined ? undefined : "custom",
+          "data-tone": props.tone ?? "default",
+          "data-divider": props.divider ?? "visible",
           onClick: (event: MouseEvent) => {
             if (event.target === event.currentTarget && closeOnScrimClick.value) {
               close()

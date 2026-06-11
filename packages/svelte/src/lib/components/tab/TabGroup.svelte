@@ -84,11 +84,12 @@
   {/if}
 
   <div
-    class="mw-tab-group__tablist"
+    class="mw-tab-group__list"
     role="tablist"
     id={a11yIds.tabListId}
     aria-labelledby={label ? labelId : undefined}
     aria-label={!label ? ariaLabel : undefined}
+    tabindex={-1}
     onkeydown={handleKeydown}
   >
     {#each tabs as tab}

@@ -27,6 +27,8 @@ function flattenStringValues(value: unknown): string[] {
 
 describe("theme variable helpers", () => {
   it("exposes spacing CSS variable references", () => {
+    expect(mwTheme.spacing.sp12).toBe("var(--mw-spacing-sp-12)")
+    expect(mwThemeVarNames.spacing.sp12).toBe("--mw-spacing-sp-12")
     expect(mwTheme.spacing.sp16).toBe("var(--mw-spacing-sp-16)")
     expect(mwThemeVars.spacing.sp24).toBe("var(--mw-spacing-sp-24)")
     expect(mwThemeVarNames.spacing.sp24).toBe("--mw-spacing-sp-24")

@@ -61,6 +61,17 @@ describe("createButtonRecipe", () => {
     expect(kit.dataAttributes?.["data-has-affordance"]).toBe("true")
   })
 
+  it("marks icon-only buttons for square control styling", () => {
+    const kit = createButtonRecipe({
+      as: "button",
+      ariaLabel: "Close",
+      iconOnly: true,
+      iconLeft: "x",
+    })
+
+    expect(kit.dataAttributes?.["data-icon-only"]).toBe("true")
+  })
+
   it("builds anchor render kit and blocks navigation when loading disables interaction", () => {
     // Anchor button with default disableWhileLoading=true
     const kit = createButtonRecipe({

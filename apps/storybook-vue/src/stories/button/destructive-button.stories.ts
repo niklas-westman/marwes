@@ -22,9 +22,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const DestructiveExample: Story = {
-  args: {
-    error: true,
-  },
+  args: {},
   render: (args) => ({
     components: { DestructiveButton },
     setup() {

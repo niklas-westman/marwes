@@ -91,8 +91,9 @@ describe("React purpose button locking", () => {
     const destructiveButton = screen.getByRole("button", { name: /delete/i })
     expect(destructiveButton.tagName).toBe("BUTTON")
     expect(destructiveButton).toHaveAttribute("data-action", "delete")
-    expect(destructiveButton).toHaveAttribute("data-variant", "primary")
-    expect(destructiveButton).toHaveClass("mw-btn--error")
+    expect(destructiveButton).toHaveAttribute("data-variant", "danger")
+    expect(destructiveButton).toHaveClass("mw-btn--danger")
+    expect(destructiveButton).not.toHaveClass("mw-btn--error")
 
     const submitButton = screen.getByRole("button", { name: /submit/i })
     expect(submitButton.tagName).toBe("BUTTON")

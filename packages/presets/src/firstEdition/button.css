@@ -47,6 +47,12 @@
   white-space: nowrap;
 }
 
+.mw-btn[data-icon-only="true"] {
+  width: var(--mw-density-height);
+  min-width: var(--mw-density-height);
+  padding: 0;
+}
+
 /* FOCUS STATE - Figma spec: 2px white space + 2px Accessible blue outline */
 .mw-btn:focus-visible {
   outline: 2px solid var(--mw-color-focus);
@@ -195,6 +201,21 @@
 }
 
 .mw-btn--success:active:not(:disabled) {
+  opacity: 0.95;
+}
+
+/* DANGER - Destructive confirmation actions */
+.mw-btn--danger {
+  background: var(--mw-color-danger-base);
+  color: var(--mw-color-danger-label);
+  border-color: var(--mw-color-danger-base);
+}
+
+.mw-btn--danger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.mw-btn--danger:active:not(:disabled) {
   opacity: 0.95;
 }
 

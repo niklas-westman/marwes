@@ -9,6 +9,7 @@ import * as publicApi from "../../../index"
 describe("button barrel exports", () => {
   it("exports the complete button domain surface", () => {
     expect(buttonComponents.Button).toBeDefined()
+    expect(buttonComponents.IconButton).toBeDefined()
     expect(buttonComponents.PrimaryButton).toBeDefined()
     expect(buttonComponents.SecondaryButton).toBeDefined()
     expect(buttonComponents.TextButton).toBeDefined()
@@ -35,6 +36,7 @@ describe("button barrel exports", () => {
 
   it("re-exports the same button symbols from package root", () => {
     expect(publicApi.Button).toBe(buttonComponents.Button)
+    expect(publicApi.IconButton).toBe(buttonComponents.IconButton)
     expect(publicApi.PrimaryButton).toBe(buttonComponents.PrimaryButton)
     expect(publicApi.SecondaryButton).toBe(buttonComponents.SecondaryButton)
     expect(publicApi.TextButton).toBe(buttonComponents.TextButton)

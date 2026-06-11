@@ -1,7 +1,7 @@
 /**
  * Core types for Spacing component.
  * - Pure layout primitive that inserts vertical space between elements.
- * - 18 sizes mapped to the --mw-spacing-* token scale.
+ * - 19 sizes mapped to the --mw-spacing-* token scale.
  * - Renders as an aria-hidden div.
  */
 
@@ -26,15 +26,17 @@ import type { CssVars } from "../../../shared/css-vars"
  * ```
  *
  * Pixel scale:
- * sp-0→0 | sp-2→2 | sp-4→4 | sp-8→8 | sp-16→16 | sp-24→24 | sp-32→32
- * sp-40→40 | sp-48→48 | sp-56→56 | sp-64→64 | sp-72→72 | sp-80→80
- * sp-88→88 | sp-96→96 | sp-104→104 | sp-112→112 | sp-120→120
+ * sp-0→0 | sp-2→2 | sp-4→4 | sp-8→8 | sp-12→12 | sp-16→16
+ * sp-24→24 | sp-32→32 | sp-40→40 | sp-48→48 | sp-56→56
+ * sp-64→64 | sp-72→72 | sp-80→80 | sp-88→88 | sp-96→96
+ * sp-104→104 | sp-112→112 | sp-120→120
  */
 export const Spacings = {
   sp0: "sp-0",
   sp2: "sp-2",
   sp4: "sp-4",
   sp8: "sp-8",
+  sp12: "sp-12",
   sp16: "sp-16",
   sp24: "sp-24",
   sp32: "sp-32",
@@ -53,6 +55,7 @@ export const Spacings = {
   "sp-2": "sp-2",
   "sp-4": "sp-4",
   "sp-8": "sp-8",
+  "sp-12": "sp-12",
   "sp-16": "sp-16",
   "sp-24": "sp-24",
   "sp-32": "sp-32",

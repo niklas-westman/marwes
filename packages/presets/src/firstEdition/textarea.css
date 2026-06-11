@@ -4,6 +4,7 @@
  */
 
 .mw-textarea {
+  box-sizing: border-box;
   min-height: calc(var(--mw-density-height) * 3);
   padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
@@ -12,7 +13,9 @@
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
-  width: 260px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   line-height: 1.5;
   resize: var(--mw-textarea-resize, vertical);
   transition: border-color 150ms ease, outline 150ms ease;

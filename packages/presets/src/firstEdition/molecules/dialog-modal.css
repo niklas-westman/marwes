@@ -26,6 +26,19 @@
   box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
 }
 
+.mw-dialog-modal[data-surface-width="custom"] .mw-dialog-modal__surface > .mw-dialog {
+  --mw-dialog-width: var(--mw-dialog-surface-width);
+}
+
+.mw-dialog-modal[data-tone="calm"] .mw-dialog-modal__scrim {
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.mw-dialog-modal[data-divider="hidden"] .mw-dialog__header-divider,
+.mw-dialog-modal[data-divider="hidden"] .mw-dialog__footer-divider {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .mw-dialog-modal {
     padding: 12px; /* off-scale — no token */

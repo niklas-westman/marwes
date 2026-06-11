@@ -24,6 +24,7 @@ export const buttonVariantVisualStyles: LabeledCopy[] = [
   { label: "neutral", text: "Outlined, low-chroma emphasis (cancel/close/filter actions)" },
   { label: "text", text: "Minimal, low emphasis (tertiary/inline actions)" },
   { label: "success", text: "Filled, positive emphasis (confirm actions)" },
+  { label: "danger", text: "Filled, destructive emphasis (delete/discard actions)" },
 ]
 
 export const buttonActionSemanticPurposes: LabeledCopy[] = [

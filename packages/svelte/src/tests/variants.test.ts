@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import ConfirmButton from "../lib/components/button/ConfirmButton.svelte"
 import DestructiveButton from "../lib/components/button/DestructiveButton.svelte"
+import IconButton from "../lib/components/button/IconButton.svelte"
 import PrimaryButton from "../lib/components/button/PrimaryButton.svelte"
 import SecondaryButton from "../lib/components/button/SecondaryButton.svelte"
 import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
@@ -45,10 +46,20 @@ describe("Button purpose variants", () => {
     expect(btn?.className).toContain("mw-btn--secondary")
   })
 
-  it("DestructiveButton renders with error attribute", () => {
+  it("DestructiveButton renders with danger variant", () => {
     const { container } = render(DestructiveButton)
     const btn = container.querySelector("button")
-    expect(btn?.getAttribute("data-error")).toBe("true")
+    expect(btn?.getAttribute("data-variant")).toBe("danger")
+    expect(btn?.className).toContain("mw-btn--danger")
+  })
+
+  it("IconButton renders as an accessible square icon-only control", () => {
+    const { container } = render(IconButton, { props: { icon: "x", ariaLabel: "Close" } })
+    const btn = container.querySelector("button")
+    expect(btn?.getAttribute("aria-label")).toBe("Close")
+    expect(btn?.getAttribute("data-icon-only")).toBe("true")
+    expect(btn?.querySelector(".mw-btn__label")).toBeNull()
+    expect(btn?.querySelector("svg")).not.toBeNull()
   })
 
   it("ConfirmButton renders as a button", () => {

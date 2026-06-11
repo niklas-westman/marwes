@@ -11,7 +11,7 @@ import { Icon } from "../icon"
 import { ButtonSpinner } from "../spinner"
 
 function isFilledButtonVariant(variant: ButtonVariant): boolean {
-  return variant === "primary" || variant === "success"
+  return variant === "primary" || variant === "success" || variant === "danger"
 }
 
 function hasSlotChildren(slotChildren: ReturnType<typeof getDefaultSlotChildren>): boolean {

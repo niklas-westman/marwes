@@ -20,6 +20,7 @@ export type { MarwesThemeScriptOptions, MarwesThemeStyleOptions } from "./ssr.js
 
 // Button
 export { default as Button } from "./components/button/Button.svelte"
+export { default as IconButton } from "./components/button/IconButton.svelte"
 export { default as PrimaryButton } from "./components/button/PrimaryButton.svelte"
 export { default as SecondaryButton } from "./components/button/SecondaryButton.svelte"
 export { default as TextButton } from "./components/button/TextButton.svelte"
@@ -42,7 +43,7 @@ export { default as SearchButton } from "./components/button/SearchButton.svelte
 export { default as FilterButton } from "./components/button/FilterButton.svelte"
 export { default as SortButton } from "./components/button/SortButton.svelte"
 export { default as DropdownButton } from "./components/button/DropdownButton.svelte"
-export type { ButtonProps } from "./components/button/types.js"
+export type { ButtonProps, IconButtonProps } from "./components/button/types.js"
 
 // Icon
 export { default as Icon } from "./components/icon/Icon.svelte"

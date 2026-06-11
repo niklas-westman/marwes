@@ -9,7 +9,13 @@ describe("Svelte button introduction docs", () => {
   it("documents button layers and success wrapper", () => {
     const introDoc = readFileSync(path.resolve(__dirname, "../Introduction.mdx"), "utf8")
 
-    for (const value of ["Button", "PrimaryButton", "SecondaryButton", "SuccessButton"]) {
+    for (const value of [
+      "Button",
+      "IconButton",
+      "PrimaryButton",
+      "SecondaryButton",
+      "SuccessButton",
+    ]) {
       expect(introDoc).toContain(value)
     }
   })
