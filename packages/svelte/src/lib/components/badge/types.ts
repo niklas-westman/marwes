@@ -15,3 +15,7 @@ export interface BadgeGroupProps {
   class?: string
   id?: string
 }
+
+export type StatusBadgeProps = BadgeProps
+export type PriorityBadgeProps = BadgeProps
+export type NotificationBadgeProps = BadgeProps

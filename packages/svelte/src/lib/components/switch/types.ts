@@ -20,3 +20,7 @@ export interface SwitchFieldProps {
   ariaDescribedBy?: string
   class?: string
 }
+
+export type FeatureToggleProps = SwitchFieldProps
+export type PreferenceSwitchProps = SwitchFieldProps
+export type PermissionSwitchProps = SwitchFieldProps

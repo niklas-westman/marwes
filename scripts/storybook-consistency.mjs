@@ -469,7 +469,7 @@ function buildCrossFrameworkExportWarnings(config, map) {
   const baselineFramework = "react"
   const baselineMap = getFamilyMapFramework(map, baselineFramework)
 
-  for (const framework of ["vue"]) {
+  for (const framework of frameworksInOrder.filter((name) => name !== baselineFramework)) {
     const frameworkMap = getFamilyMapFramework(map, framework)
 
     for (const baselineValueExport of baselineMap.exportSummary.valueExports) {
@@ -574,13 +574,11 @@ function buildCrossFrameworkWarnings(config, map) {
         }
       }
 
-      if (framework !== "svelte") {
-        for (const frameworkStem of frameworkStems) {
-          if (!baselineStems.has(frameworkStem)) {
-            warnings.push(
-              `${frameworkMap.label} component stem "${frameworkStem}" has no matching ${baselineMap.label} component file`,
-            )
-          }
+      for (const frameworkStem of frameworkStems) {
+        if (!baselineStems.has(frameworkStem)) {
+          warnings.push(
+            `${frameworkMap.label} component stem "${frameworkStem}" has no matching ${baselineMap.label} component file`,
+          )
         }
       }
     }

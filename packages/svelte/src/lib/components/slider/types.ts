@@ -26,3 +26,30 @@ export interface SliderFieldProps {
   value?: number
   class?: string
 }
+
+export interface VolumeSliderProps
+  extends Omit<SliderFieldProps, "label" | "slider" | "minValueLabel" | "maxValueLabel"> {
+  label?: string
+  slider?: Omit<SliderProps, "value">
+  orientation?: SliderProps["orientation"]
+  minValueLabel?: string
+  maxValueLabel?: string
+}
+
+export interface BrightnessSliderProps
+  extends Omit<SliderFieldProps, "label" | "slider" | "minValueLabel" | "maxValueLabel"> {
+  label?: string
+  slider?: Omit<SliderProps, "value">
+  orientation?: SliderProps["orientation"]
+  minValueLabel?: string
+  maxValueLabel?: string
+}
+
+export interface RadiusSliderProps
+  extends Omit<SliderFieldProps, "label" | "slider" | "minValueLabel" | "maxValueLabel"> {
+  label?: string
+  slider?: Omit<SliderProps, "value">
+  orientation?: SliderProps["orientation"]
+  minValueLabel?: string
+  maxValueLabel?: string
+}

@@ -332,14 +332,13 @@ function checkFigmaReferences(registry) {
 }
 
 function checkFrameworkSurfaces(registry) {
-  const familyName = registry.family
   const links = registry.links ?? {}
   const expected = {
     core: links.core ?? [],
     presets: links.presets ?? [],
     react: links.react ?? [],
     vue: links.vue ?? [],
-    svelte: [`packages/svelte/src/lib/components/${familyName}/index.ts`],
+    svelte: links.svelte ?? [],
   }
   const details = []
   let failed = false

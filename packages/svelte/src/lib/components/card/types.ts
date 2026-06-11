@@ -10,3 +10,7 @@ export interface CardProps extends CardOptions {
   id?: string
   ariaDisabled?: boolean | "true" | "false"
 }
+
+export type ProductCardProps = CardProps
+export type ProfileCardProps = CardProps
+export type StatCardProps = CardProps

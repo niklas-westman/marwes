@@ -314,6 +314,7 @@ const steps = [
 if (runStorybookStories) {
   const reactStories = listStoryFiles(`apps/storybook-react/src/stories/${family}`, "tsx")
   const vueStories = listStoryFiles(`apps/storybook-vue/src/stories/${family}`, "ts")
+  const svelteStories = listStoryFiles(`apps/storybook-svelte/src/stories/${family}`, "ts")
 
   steps.push(
     {
@@ -349,6 +350,23 @@ if (runStorybookStories) {
         ...vueStories.map((path) => toPackageRelativePath("apps/storybook-vue", path)),
       ],
       skip: vueStories.length === 0,
+    },
+    {
+      name: "Svelte Storybook story/a11y tests",
+      command: "pnpm",
+      args: [
+        "--filter",
+        "./apps/storybook-svelte",
+        "exec",
+        "vitest",
+        "run",
+        "--config",
+        "vite.config.ts",
+        "--project",
+        "storybook",
+        ...svelteStories.map((path) => toPackageRelativePath("apps/storybook-svelte", path)),
+      ],
+      skip: svelteStories.length === 0,
     },
   )
 }

@@ -9,3 +9,5 @@ export interface SpinnerProps extends SpinnerOptions {
 export interface ButtonSpinnerProps extends SpinnerProps {
   inverted?: boolean
 }
+
+export type EmptyStateSpinnerProps = SpinnerProps

@@ -27,3 +27,47 @@ export interface RadioGroupFieldProps {
   children?: Snippet
   class?: string
 }
+
+export interface YesNoRadioGroupProps {
+  name: string
+  label: string
+  description?: string
+  error?: string
+  yesLabel?: string
+  noLabel?: string
+  value?: string
+  defaultValue?: string
+  onchange?: (value: string) => void
+  disabled?: boolean
+  class?: string
+}
+
+export interface RatingRadioGroupProps {
+  name: string
+  label: string
+  description?: string
+  error?: string
+  min?: number
+  max?: number
+  labelFn?: (value: number) => string
+  value?: string
+  defaultValue?: string
+  onchange?: (value: string) => void
+  disabled?: boolean
+  class?: string
+}
+
+export interface OptionRadioGroupProps {
+  name: string
+  label: string
+  description?: string
+  error?: string
+  ariaDescribedBy?: string
+  options: RadioGroupFieldOption[]
+  value?: string
+  defaultValue?: string
+  onchange?: (value: string) => void
+  disabled?: boolean
+  required?: boolean
+  class?: string
+}
