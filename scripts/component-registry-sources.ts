@@ -261,7 +261,13 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
     contractPaths: ["tests/contracts/button.contract.ts"],
     familyAuditDocPath: "docs/audits/button-family-accessibility.md",
     figma: {
-      componentJsons: [".figma/marwes/components/button.json"],
+      componentJsons: [
+        ".figma/marwes/components/button.json",
+        ".figma/marwes/components/button-destructive.json",
+        ".figma/marwes/components/button-success.json",
+        ".figma/marwes/components/button-group.json",
+        ".figma/marwes/components/icon-button.json",
+      ],
       curatedReferences: [
         ".figma/INDEX.md",
         ".figma/NODE_REFERENCE.md",
@@ -290,6 +296,10 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         "button/secondary/label",
         "button/secondary/outline",
         "button/text/label",
+        "button/gap",
+        "button/paddingH",
+        "button/paddingV",
+        "button/radius",
         "action/primary/default",
         "action/primary/label",
         "action/secondary/default",

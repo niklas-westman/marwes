@@ -20,15 +20,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px; /* off-scale — icon-to-label spacing */
+  gap: var(--mw-spacing-sp-4);
   height: var(--mw-density-height);
-  padding: 0 var(--mw-density-padding-x);
+  padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
-  border: 1px solid transparent;
+  border: 0;
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
   font-weight: 500;
-  line-height: 0;
+  line-height: var(--mw-typography-text-label-line-height);
+  letter-spacing: var(--mw-typography-text-label-letter-spacing);
   min-inline-size: 0;
   cursor: pointer;
   user-select: none;
@@ -37,7 +38,8 @@
 
 .mw-btn__label {
   display: block;
-  line-height: 1;
+  line-height: inherit;
+  letter-spacing: inherit;
   min-inline-size: 0;
 }
 
@@ -79,6 +81,7 @@
   background: transparent;
   color: var(--mw-color-secondary-label);
   border-color: var(--mw-color-secondary-border);
+  box-shadow: inset 0 0 0 1px var(--mw-color-secondary-border);
 }
 
 .mw-btn--secondary:hover:not(:disabled) {
@@ -104,24 +107,23 @@
   background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
 }
 
-/* TEXT - Minimal text-only button, content-hugging (no fixed height).
-   Uses the same 6px icon-to-label spacing as every other button. */
+/* TEXT - Minimal text-only button, content-hugging (no fixed height). */
 .mw-btn.mw-btn--text {
   background: transparent;
-  color: var(--mw-color-text);
+  color: var(--mw-color-primary-base);
   border-color: transparent;
+  border-width: 0;
   height: auto;
-  padding: 0.25rem 0.5rem;
-  line-height: 1;
+  padding: 0;
   border-radius: var(--mw-ui-radius);
 }
 
 .mw-btn--text:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
+  background: color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent);
 }
 
 .mw-btn--text:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-text) 12%, transparent);
+  background: color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent);
 }
 
 .mw-btn.mw-btn--text[data-action="navigate"] {
@@ -182,6 +184,7 @@
 .mw-btn--secondary.mw-btn--error {
   color: var(--mw-color-danger-base);
   border-color: var(--mw-color-danger-base);
+  box-shadow: inset 0 0 0 1px var(--mw-color-danger-base);
 }
 
 .mw-btn--text[data-error="true"],
@@ -242,6 +245,7 @@
 .mw-theme--dark .mw-btn--secondary.mw-btn--error {
   border-color: var(--mw-color-danger-base);
   color: var(--mw-color-danger-base);
+  box-shadow: inset 0 0 0 1px var(--mw-color-danger-base);
 }
 
 /* Dark mode: Error state for Primary button */

@@ -9,9 +9,11 @@
 }
 
 .mw-dialog-modal__scrim {
+  --dialog-modal-scrim-background: rgba(0, 0, 0, 0.6);
+
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--dialog-modal-scrim-background);
 }
 
 .mw-dialog-modal__surface {
@@ -31,7 +33,7 @@
 }
 
 .mw-dialog-modal[data-tone="calm"] .mw-dialog-modal__scrim {
-  background: rgba(0, 0, 0, 0.42);
+  --dialog-modal-scrim-background: rgba(0, 0, 0, 0.42);
 }
 
 .mw-dialog-modal[data-divider="hidden"] .mw-dialog__header-divider,

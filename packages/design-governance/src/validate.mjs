@@ -195,6 +195,17 @@ function collectThemeColorVars() {
   return [...new Set(vars)].sort((left, right) => left.localeCompare(right))
 }
 
+function collectThemeVars() {
+  const sourcePaths = [themeCssPath, themeVarsPath].filter(pathExists)
+
+  const vars = sourcePaths.flatMap((sourcePath) => {
+    const source = readFileSync(absolute(sourcePath), "utf8")
+    return [...source.matchAll(/["'`]--mw-[\w-]+["'`]/g)].map(([match]) => match.slice(1, -1))
+  })
+
+  return [...new Set(vars)].sort((left, right) => left.localeCompare(right))
+}
+
 function collectPresetColorVarUsage() {
   const files = listFilesRecursive(cssRoot, (path) => path.endsWith(".css"))
   const usages = []
@@ -585,6 +596,21 @@ function cssVarForTokenName(tokenName) {
     }
   }
 
+  const buttonMap = new Map([
+    ["button/gap", "--mw-spacing-sp-4"],
+    ["button/paddingh", "--mw-density-padding-x"],
+    ["button/paddingv", "--mw-density-padding-y"],
+    ["button/radius", "--mw-ui-radius"],
+    ["button/primary/surface", "--mw-color-primary-base"],
+    ["button/primary/label", "--mw-color-primary-label"],
+    ["button/secondary/label", "--mw-color-secondary-label"],
+    ["button/secondary/outline", "--mw-color-secondary-border"],
+    ["button/text/label", "--mw-color-primary-base"],
+  ])
+
+  const buttonMapped = buttonMap.get(token)
+  if (buttonMapped) return buttonMapped
+
   const directMap = new Map([
     ["surface/primary", "--mw-color-surface-primary"],
     ["surface/secondary", "--mw-color-surface"],
@@ -609,11 +635,11 @@ function cssVarForTokenName(tokenName) {
   return directMap.get(token)
 }
 
-function collectFamilyPresetColorVars(registry) {
+function collectFamilyPresetVars(registry) {
   const presetPaths = registry.links?.presets ?? []
   const vars = new Set()
   const usages = []
-  const pattern = /--mw-color-[\w-]+/g
+  const pattern = /--mw-[\w-]+/g
 
   for (const file of presetPaths) {
     if (!pathExists(file) || !file.endsWith(".css")) continue
@@ -668,11 +694,11 @@ function checkRuntimeTokenParity(target, registry) {
   const actualVariablesByName = new Map(
     actualVariables.map((variable) => [variable.normalizedName, variable]),
   )
-  const themeVars = new Set(collectThemeColorVars())
-  const runtime = collectFamilyPresetColorVars(registry)
+  const themeVars = new Set(collectThemeVars())
+  const runtime = collectFamilyPresetVars(registry)
   const details = [
     `preset files: ${runtime.presetPaths.length}`,
-    `runtime color vars: ${runtime.vars.size}`,
+    `runtime vars: ${runtime.vars.size}`,
   ]
   const failures = []
   const checked = new Set()
@@ -682,24 +708,28 @@ function checkRuntimeTokenParity(target, registry) {
     const variable = actualVariablesByName.get(expectedToken)
     if (!variable) continue
 
+    let mappedAliases = 0
+    const unsupportedAliases = []
+
     for (const alias of collectAliasNames(variable)) {
       const expectedCssVar = cssVarForTokenName(alias)
       if (!expectedCssVar) {
-        unsupported.add(`${variable.name} -> ${alias}`)
+        unsupportedAliases.push(alias)
         continue
       }
 
+      mappedAliases += 1
       const checkKey = `${variable.normalizedName}:${alias}:${expectedCssVar}`
       if (checked.has(checkKey)) continue
       checked.add(checkKey)
 
-      if (!themeVars.has(expectedCssVar)) {
+      if (!themeVars.has(expectedCssVar) && !runtime.vars.has(expectedCssVar)) {
         failures.push(
           [
             `Figma token: ${variable.name}`,
             `Alias: ${alias}`,
             `Expected CSS var: ${expectedCssVar}`,
-            "Found CSS var: missing from theme token exposure",
+            "Found CSS var: missing from theme exposure and family preset CSS",
           ].join(" | "),
         )
         continue
@@ -716,6 +746,10 @@ function checkRuntimeTokenParity(target, registry) {
           ].join(" | "),
         )
       }
+    }
+
+    if (mappedAliases === 0 && unsupportedAliases.length > 0) {
+      unsupported.add(`${variable.name} -> ${unsupportedAliases.join(", ")}`)
     }
   }
 

@@ -9,6 +9,7 @@
     "variables-sync": "node src/cli.mjs variables-sync",
     "validate": "node src/cli.mjs validate",
     "validate-runtime": "node src/cli.mjs validate-runtime",
+    "cohesive-check": "node src/cli.mjs cohesive-check",
     "suggest-tokens": "node src/cli.mjs suggest-tokens",
     "colors": "node src/cli.mjs colors",
     "check": "node src/cli.mjs validate --all"

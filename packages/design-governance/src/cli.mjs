@@ -16,6 +16,7 @@ function usage() {
     "  pnpm --filter @marwes-ui/design-governance validate --family badge",
     "  pnpm --filter @marwes-ui/design-governance validate --all",
     "  pnpm --filter @marwes-ui/design-governance validate-runtime --family badge",
+    "  pnpm --filter @marwes-ui/design-governance cohesive-check --family button",
     "  pnpm --filter @marwes-ui/design-governance colors",
   ].join("\n")
 }
@@ -118,6 +119,11 @@ function main() {
 
   if (command === "validate-runtime") {
     runScript(resolve(packageRoot, "src/validate.mjs"), [...rest, "--runtime-only"])
+    return
+  }
+
+  if (command === "cohesive-check") {
+    runScript(resolve(packageRoot, "src/cohesive-check.mjs"), rest)
     return
   }
 

@@ -41,6 +41,32 @@ Figma, registry metadata, or runtime implementation is wrong, then fix that
 layer. Before finishing design-token or component-family work, run the focused
 family validation. Before pushing, `pnpm design:check` is the required gate.
 
+## Reflection validation
+
+Use Reflection as the UI evidence gate before claiming component visual work is
+complete.
+
+Run:
+
+```bash
+pnpm reflection:doctor
+pnpm reflection:visual
+pnpm reflection:review
+```
+
+Rules:
+
+- Treat blocking failures as task blockers.
+- Summarize review items with artifact paths for the human.
+- Use missing-baseline or visual-diff output as review evidence, not as proof
+  that the visual is approved.
+- Do not copy component baselines into
+  `packages/design-governance/reflection-families/` unless the human explicitly
+  approves that visual result.
+- Never update or promote baselines in CI.
+
+Full protocol: `docs/reference/testing.md`.
+
 ## Conditional Instruction Files
 
 - Planning, research, implementation phases, or Pi-style personas: read `instructions/workflow-routing.md` when present.

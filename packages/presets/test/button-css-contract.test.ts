@@ -29,9 +29,9 @@ describe("firstEdition button css contract", () => {
   it("uses emitted theme color vars for text buttons", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 
-    expect(css).toContain("color: var(--mw-color-text);")
-    expect(css).toContain("color-mix(in srgb, var(--mw-color-text) 8%, transparent)")
-    expect(css).toContain("color-mix(in srgb, var(--mw-color-text) 12%, transparent)")
+    expect(css).toContain("color: var(--mw-color-primary-base);")
+    expect(css).toContain("color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent)")
+    expect(css).toContain("color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent)")
 
     expect(css).not.toContain("--mw-color-text-label")
     expect(css).not.toContain("--mw-color-text-surface")
@@ -53,7 +53,8 @@ describe("firstEdition button css contract", () => {
     expect(css).toContain(".mw-btn__label")
     expect(css).toContain('.mw-btn[data-has-affordance="true"] .mw-btn__label')
     expect(css).toContain("display: block;")
-    expect(css).toContain("line-height: 1;")
+    expect(css).toContain("line-height: inherit;")
+    expect(css).toContain("letter-spacing: inherit;")
     expect(css).toContain("min-inline-size: 0;")
     expect(css).toContain("overflow: hidden;")
     expect(css).toContain("text-overflow: ellipsis;")

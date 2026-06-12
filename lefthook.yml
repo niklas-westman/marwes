@@ -12,3 +12,5 @@ pre-push:
       run: pnpm check
     - name: design-check
       run: pnpm design:check
+    - name: cohesive-check
+      run: pnpm cohesive:check:all

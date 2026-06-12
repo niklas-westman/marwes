@@ -27,12 +27,14 @@ describe("@marwes-ui/presets package exports", () => {
 
     const stylesPath = resolve(pkgDir, "src/firstEdition/styles.css")
     const stylesCss = readFileSync(stylesPath, "utf8")
-    const importedCssPaths = [...stylesCss.matchAll(/@import\s+"([^"]+)"/g)].map((match) =>
-      resolve(dirname(stylesPath), match[1] ?? ""),
-    )
+    const importedCssPaths = [...stylesCss.matchAll(/@import\s+"([^"]+)"/g)]
+      .map((match) => match[1] ?? "")
+      .filter((importPath) => importPath.startsWith("."))
+      .map((importPath) => resolve(dirname(stylesPath), importPath))
 
     expect(existsSync(stylesPath)).toBe(true)
     expect(existsSync(resolve(pkgDir, "src/firstEdition/index.ts"))).toBe(true)
+    expect(stylesCss).toContain('@import "@fontsource/instrument-sans/500.css";')
     expect(importedCssPaths.length).toBeGreaterThan(0)
 
     for (const importedCssPath of importedCssPaths) {
