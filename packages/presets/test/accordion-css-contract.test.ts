@@ -15,8 +15,9 @@ describe("firstEdition accordion css contract", () => {
     const css = readFileSync(accordionCssPath, "utf8")
 
     expect(css).toContain("--mw-accordion-icon: var(--mw-accordion-title)")
-    expect(css).toContain("--mw-accordion-content: rgb(0 0 0 / 60%)")
-    expect(css).toContain("--mw-accordion-content: rgb(255 255 255 / 60%)")
+    expect(css).toContain(
+      "--mw-accordion-content: color-mix(in srgb, var(--mw-color-text) 60%, transparent)",
+    )
     expect(css).toContain("box-sizing: border-box")
     expect(css).toContain("-webkit-font-smoothing: antialiased")
     expect(css).toContain("letter-spacing: var(--mw-typography-text-label-letter-spacing, -0.42px)")

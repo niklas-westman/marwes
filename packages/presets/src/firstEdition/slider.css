@@ -15,7 +15,7 @@
   --mw-slider-tooltip-gap: 2px;
   --mw-slider-track-background: color-mix(in srgb, var(--mw-color-text, #141414) 20%, transparent);
   --mw-slider-track-fill: var(--mw-color-primary-base, #2f31fc);
-  --mw-slider-thumb-background: #ffffff;
+  --mw-slider-thumb-background: var(--mw-color-surface-primary, #ffffff);
   --mw-slider-thumb-border: var(--mw-color-primary-base, #2f31fc);
   --mw-slider-touch-area-background: var(--mw-color-primary-base, #2f31fc);
   --mw-slider-tooltip-background: var(--mw-color-text, #141414);

@@ -31,7 +31,7 @@
 .mw-accordion {
   --mw-accordion-title: var(--mw-color-text);
   --mw-accordion-icon: var(--mw-accordion-title);
-  --mw-accordion-content: rgb(0 0 0 / 60%);
+  --mw-accordion-content: color-mix(in srgb, var(--mw-color-text) 60%, transparent);
   --mw-accordion-surface: var(--mw-color-surface-primary);
   --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
   --mw-accordion-surface-pressed: var(--mw-color-border-subtle);
@@ -141,7 +141,7 @@
 .mw-theme--dark .mw-accordion {
   --mw-accordion-title: var(--mw-color-text);
   --mw-accordion-icon: var(--mw-accordion-title);
-  --mw-accordion-content: rgb(255 255 255 / 60%);
+  --mw-accordion-content: color-mix(in srgb, var(--mw-color-text) 60%, transparent);
   --mw-accordion-surface: var(--mw-color-surface-primary, #0f0f0f);
   --mw-accordion-surface-hover: var(--mw-color-surface-subtle);
   --mw-accordion-surface-pressed: var(--mw-color-border);
