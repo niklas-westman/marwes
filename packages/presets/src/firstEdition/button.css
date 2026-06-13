@@ -163,6 +163,10 @@
   cursor: not-allowed;
 }
 
+.mw-btn.mw-btn--text:disabled {
+  color: var(--mw-color-text-disabled);
+}
+
 /* Dark mode disabled state: #FFFFFF 40% (middle of 20-60% range from Figma) */
 .mw-theme--dark .mw-btn:disabled {
   opacity: 0.4;
@@ -171,7 +175,7 @@
 /* ERROR STATE - Figma node: 1:1072 includes error state */
 .mw-btn[data-error="true"],
 .mw-btn--error {
-  border-color: var(--mw-color-danger-base);
+  border-color: var(--mw-color-status-error-border);
 }
 
 .mw-btn--primary[data-error="true"],
@@ -182,14 +186,14 @@
 
 .mw-btn--secondary[data-error="true"],
 .mw-btn--secondary.mw-btn--error {
-  color: var(--mw-color-danger-base);
-  border-color: var(--mw-color-danger-base);
-  box-shadow: inset 0 0 0 1px var(--mw-color-danger-base);
+  color: var(--mw-color-status-error-text);
+  border-color: var(--mw-color-status-error-border);
+  box-shadow: inset 0 0 0 1px var(--mw-color-status-error-border);
 }
 
 .mw-btn--text[data-error="true"],
 .mw-btn--text.mw-btn--error {
-  color: var(--mw-color-danger-base);
+  color: var(--mw-color-status-error-text);
 }
 
 /* SUCCESS - Positive confirmation actions */
@@ -243,9 +247,9 @@
 /* Dark mode: Error state for Secondary button (red outline on dark background) */
 .mw-theme--dark .mw-btn--secondary[data-error="true"],
 .mw-theme--dark .mw-btn--secondary.mw-btn--error {
-  border-color: var(--mw-color-danger-base);
-  color: var(--mw-color-danger-base);
-  box-shadow: inset 0 0 0 1px var(--mw-color-danger-base);
+  border-color: var(--mw-color-status-error-border);
+  color: var(--mw-color-status-error-text);
+  box-shadow: inset 0 0 0 1px var(--mw-color-status-error-border);
 }
 
 /* Dark mode: Error state for Primary button */

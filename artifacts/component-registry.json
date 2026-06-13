@@ -1612,16 +1612,7 @@
             "button/text/label",
             "button/gap",
             "button/paddingH",
-            "button/paddingV",
-            "button/radius",
-            "action/primary/default",
-            "action/primary/label",
-            "action/secondary/default",
-            "action/secondary/label",
-            "action/destructive/default",
-            "action/destructive/label",
-            "action/success/default",
-            "action/success/label"
+            "button/paddingV"
           ],
           "figmaStates": {
             "baseVariants": ["primary", "secondary", "neutral", "text"],
@@ -7355,11 +7346,9 @@
             "status-display/subtle/surface",
             "status-display/subtle/border",
             "status-display/subtle/text",
-            "status-display/subtle/action",
             "status-display/outline/surface",
             "status-display/outline/border",
             "status-display/outline/text",
-            "status-display/outline/action",
             "status-display/rich/surface",
             "status-display/rich/border",
             "status-display/rich/text"

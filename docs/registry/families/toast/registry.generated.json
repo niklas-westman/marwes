@@ -157,11 +157,9 @@
       "status-display/subtle/surface",
       "status-display/subtle/border",
       "status-display/subtle/text",
-      "status-display/subtle/action",
       "status-display/outline/surface",
       "status-display/outline/border",
       "status-display/outline/text",
-      "status-display/outline/action",
       "status-display/rich/surface",
       "status-display/rich/border",
       "status-display/rich/text"

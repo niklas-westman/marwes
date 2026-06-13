@@ -309,16 +309,7 @@
       "button/text/label",
       "button/gap",
       "button/paddingH",
-      "button/paddingV",
-      "button/radius",
-      "action/primary/default",
-      "action/primary/label",
-      "action/secondary/default",
-      "action/secondary/label",
-      "action/destructive/default",
-      "action/destructive/label",
-      "action/success/default",
-      "action/success/label"
+      "button/paddingV"
     ],
     "figmaStates": {
       "baseVariants": ["primary", "secondary", "neutral", "text"],

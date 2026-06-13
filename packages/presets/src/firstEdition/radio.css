@@ -53,7 +53,7 @@
    ============================================ */
 
 .mw-radio:checked {
-  border-color: var(--mw-radio-border);
+  border-color: var(--mw-color-border-brand);
   background: var(--mw-radio-surface);
 }
 
