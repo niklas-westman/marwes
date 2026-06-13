@@ -3,7 +3,7 @@
   "family": "button",
   "baselineRoot": "packages/design-governance/reflection-families/button/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "vPFR4oMnI9jONyoejrKp3a",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
   "cases": [
     {
       "caseId": "button.basic",
@@ -133,11 +133,12 @@
         },
         "requiredBoundTokens": [
           "button/text/label",
-          "button/text/surface",
+          "button/text/overlay",
           "font/family/Body",
           "font/line-height/lh-16",
           "font/size/fs-14",
           "font/weight/Medium",
+          "sp-0",
           "sp-4"
         ]
       },
@@ -172,22 +173,23 @@
       "source": {
         "componentJson": ".figma/marwes/components/button-destructive.json",
         "componentNodeId": "1364:11356",
-        "componentName": "Button / Destructive",
+        "componentName": "Icon direction=Right",
         "componentBounds": {
-          "width": 73,
-          "height": 40
+          "width": 91,
+          "height": 36
         },
         "requiredBoundTokens": [
-          "Red/600",
-          "action/destructive/label",
+          "button/destructive/icon",
+          "button/destructive/label",
+          "button/destructive/surface",
+          "button/primary/overlay",
           "button/radius",
           "font/family/Body",
           "font/line-height/lh-16",
           "font/size/fs-14",
           "font/weight/Medium",
-          "sp-12",
-          "sp-16",
-          "sp-4"
+          "icon/size",
+          "sp-16"
         ]
       },
       "comparison": {

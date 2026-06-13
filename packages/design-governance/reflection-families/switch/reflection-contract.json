@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "family": "switch",
+  "baselineRoot": "packages/design-governance/reflection-families/switch/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "switch.states-default",
+      "mode": "light",
+      "figmaNodeId": "5056:44368",
+      "figmaFrameName": "reflection/switch/states-default/light",
+      "exportScale": 1,
+      "viewport": "switch-states-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "states-default.chromium-linux.light.png",
+      "portalPath": "/reflection/switch/states-default/light",
+      "source": {
+        "componentNodeId": "1364:11446",
+        "componentNodeIds": ["1371:12724", "1371:12728"],
+        "componentName": "Row/Default",
+        "componentBounds": {
+          "width": 624,
+          "height": 100
+        },
+        "requiredBoundTokens": [
+          "button/primary/overlay",
+          "font/family/body",
+          "font/family/caption",
+          "font/line-height/lh-16",
+          "font/size/fs-12",
+          "font/size/fs-14",
+          "font/weight/medium",
+          "switch/label",
+          "switch/thumb-off",
+          "switch/thumb-on",
+          "switch/thumb-size",
+          "switch/track-height",
+          "switch/track-off",
+          "switch/track-on",
+          "switch/track-width"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 600,
+          "maxDiffPixelRatio": 0.007
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium switch track, thumb, label text, and border antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "switch.states-default",
+      "mode": "dark",
+      "figmaNodeId": "5056:44381",
+      "figmaFrameName": "reflection/switch/states-default/dark",
+      "exportScale": 1,
+      "viewport": "switch-states-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "states-default.chromium-linux.dark.png",
+      "portalPath": "/reflection/switch/states-default/dark",
+      "source": {
+        "componentNodeId": "1369:4005",
+        "componentNodeIds": ["1371:12788", "1371:12792"],
+        "componentName": "Row/Default",
+        "componentBounds": {
+          "width": 624,
+          "height": 100
+        },
+        "requiredBoundTokens": [
+          "button/primary/overlay",
+          "font/family/body",
+          "font/family/caption",
+          "font/line-height/lh-16",
+          "font/size/fs-12",
+          "font/size/fs-14",
+          "font/weight/medium",
+          "switch/label",
+          "switch/thumb-off",
+          "switch/thumb-on",
+          "switch/thumb-size",
+          "switch/track-height",
+          "switch/track-off",
+          "switch/track-on",
+          "switch/track-width",
+          "text/primary",
+          "text/secondary"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 600,
+          "maxDiffPixelRatio": 0.007
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium switch track, thumb, label text, and border antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    }
+  ]
+}

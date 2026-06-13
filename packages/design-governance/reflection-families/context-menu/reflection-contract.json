@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "family": "context-menu",
+  "baselineRoot": "packages/design-governance/reflection-families/context-menu/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "context-menu.full",
+      "mode": "light",
+      "figmaNodeId": "5049:43881",
+      "figmaFrameName": "reflection/context-menu/full/light",
+      "exportScale": 1,
+      "viewport": "context-menu-full",
+      "viewportSize": {
+        "width": 390,
+        "height": 320
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "full.chromium-linux.light.png",
+      "portalPath": "/reflection/context-menu/full/light",
+      "source": {
+        "componentNodeId": "1574:26876",
+        "componentName": "Context menu",
+        "componentBounds": {
+          "width": 212,
+          "height": 208
+        },
+        "requiredBoundTokens": [
+          "border/low",
+          "color",
+          "font/family/caption",
+          "font/line-height/lh-12/avatar",
+          "font/size/fs-12",
+          "font/weight/medium",
+          "icon/default",
+          "icon/size",
+          "size",
+          "surface/raised",
+          "text/primary"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 900,
+          "maxDiffPixelRatio": 0.0073
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium menu text, icon, divider, border, and shadow antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "context-menu.full",
+      "mode": "dark",
+      "figmaNodeId": "5049:43912",
+      "figmaFrameName": "reflection/context-menu/full/dark",
+      "exportScale": 1,
+      "viewport": "context-menu-full",
+      "viewportSize": {
+        "width": 390,
+        "height": 320
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "full.chromium-linux.dark.png",
+      "portalPath": "/reflection/context-menu/full/dark",
+      "source": {
+        "componentNodeId": "1574:26906",
+        "componentName": "Context menu",
+        "componentBounds": {
+          "width": 212,
+          "height": 208
+        },
+        "requiredBoundTokens": [
+          "border/low",
+          "color",
+          "font/family/caption",
+          "font/line-height/lh-12/avatar",
+          "font/size/fs-12",
+          "font/weight/medium",
+          "icon/default",
+          "icon/size",
+          "size",
+          "surface/raised",
+          "text/primary"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 900,
+          "maxDiffPixelRatio": 0.0073
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium menu text, icon, divider, border, and shadow antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    }
+  ]
+}

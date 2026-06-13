@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "family": "accordion",
+  "baselineRoot": "packages/design-governance/reflection-families/accordion/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "accordion.expanded",
+      "mode": "light",
+      "figmaNodeId": "3872:40079",
+      "figmaFrameName": "reflection/accordion/expanded/light",
+      "exportScale": 1,
+      "viewport": "accordion-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "expanded.chromium-linux.light.png",
+      "portalPath": "/reflection/accordion/expanded/light",
+      "source": {
+        "componentNodeId": "3872:40080",
+        "componentName": "Accordion",
+        "componentBounds": {
+          "width": 360,
+          "height": 114
+        },
+        "requiredBoundTokens": [
+          "accordion/border",
+          "accordion/content",
+          "accordion/icon",
+          "accordion/surface",
+          "accordion/title",
+          "font/family/body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/size/xl (h2)",
+          "font/weight/medium",
+          "font/weight/regular"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 600,
+          "maxDiffPixelRatio": 0.007
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text, border, and masked icon antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "accordion.expanded",
+      "mode": "dark",
+      "figmaNodeId": "3872:42151",
+      "figmaFrameName": "reflection/accordion/expanded/dark",
+      "exportScale": 1,
+      "viewport": "accordion-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "expanded.chromium-linux.dark.png",
+      "portalPath": "/reflection/accordion/expanded/dark",
+      "source": {
+        "componentNodeId": "3872:42152",
+        "componentName": "Accordion",
+        "componentBounds": {
+          "width": 360,
+          "height": 114
+        },
+        "requiredBoundTokens": [
+          "accordion/border",
+          "accordion/content",
+          "accordion/icon",
+          "accordion/surface",
+          "accordion/title",
+          "font/family/body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/size/xl (h2)",
+          "font/weight/medium",
+          "font/weight/regular"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 600,
+          "maxDiffPixelRatio": 0.007
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text, border, and masked icon antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    }
+  ]
+}

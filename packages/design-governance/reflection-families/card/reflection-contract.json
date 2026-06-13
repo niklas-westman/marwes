@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "family": "card",
+  "baselineRoot": "packages/design-governance/reflection-families/card/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "card.default",
+      "mode": "light",
+      "figmaNodeId": "5049:43819",
+      "figmaFrameName": "reflection/card/default/light",
+      "exportScale": 1,
+      "viewport": "card-default",
+      "viewportSize": {
+        "width": 520,
+        "height": 300
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.light.png",
+      "portalPath": "/reflection/card/default/light",
+      "source": {
+        "componentNodeId": "1364:11564",
+        "componentName": "Card",
+        "componentBounds": {
+          "width": 320,
+          "height": 146
+        },
+        "requiredBoundTokens": [
+          "card/body",
+          "card/border",
+          "card/surface",
+          "card/title",
+          "font/family/body",
+          "font/family/title",
+          "font/line-height/lh-18",
+          "font/size/fs-16",
+          "font/weight/regular",
+          "font/weight/semi bold",
+          "sp-24",
+          "sp-8"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 800,
+          "maxDiffPixelRatio": 0.0052
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text, border, and surface antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "card.default",
+      "mode": "dark",
+      "figmaNodeId": "5049:43824",
+      "figmaFrameName": "reflection/card/default/dark",
+      "exportScale": 1,
+      "viewport": "card-default",
+      "viewportSize": {
+        "width": 520,
+        "height": 300
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.dark.png",
+      "portalPath": "/reflection/card/default/dark",
+      "source": {
+        "componentNodeId": "1368:5899",
+        "componentName": "Card",
+        "componentBounds": {
+          "width": 320,
+          "height": 146
+        },
+        "requiredBoundTokens": [
+          "card/body",
+          "card/border",
+          "card/surface",
+          "card/title",
+          "font/family/body",
+          "font/family/title",
+          "font/line-height/lh-18",
+          "font/size/fs-16",
+          "font/weight/regular",
+          "font/weight/semi bold",
+          "sp-24",
+          "sp-8"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 800,
+          "maxDiffPixelRatio": 0.0052
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text, border, and surface antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    }
+  ]
+}

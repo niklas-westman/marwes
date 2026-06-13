@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync } from "node:fs"
+import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { type ReflectionConfigInput, defineReflection } from "reflection-check"
 
 type AdapterName = "react" | "vue" | "svelte"
@@ -73,8 +73,10 @@ const loadReflectionContracts = () =>
     .filter((entry) => entry.isDirectory())
     .map((entry) => {
       const contractUrl = new URL(`${entry.name}/reflection-contract.json`, reflectionFamiliesRoot)
+      if (!existsSync(contractUrl)) return undefined
       return JSON.parse(readFileSync(contractUrl, "utf8")) as FigmaReflectionContract
     })
+    .filter((contract): contract is FigmaReflectionContract => contract !== undefined)
 
 const reflectionContracts = loadReflectionContracts()
 
@@ -96,7 +98,7 @@ const portalPathForCase = (family: string, baselineCase: FigmaBaselineCase) => {
 const baselineCases = (adapter: AdapterName) =>
   reflectionContracts.flatMap((contract) =>
     contract.cases.map((baselineCase) => ({
-      id: `${adapter}.${baselineCase.caseId}`,
+      id: `${adapter}.${baselineCase.caseId}.${baselineCase.mode}`,
       path: portalPathForCase(contract.family, baselineCase),
       viewport: baselineCase.viewport,
       viewportSize: baselineCase.viewportSize,

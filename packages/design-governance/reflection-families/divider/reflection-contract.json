@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "family": "divider",
+  "baselineRoot": "packages/design-governance/reflection-families/divider/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "divider.sp-16",
+      "mode": "light",
+      "figmaNodeId": "5049:43995",
+      "figmaFrameName": "reflection/divider/sp-16/light",
+      "exportScale": 1,
+      "viewport": "divider-wide",
+      "viewportSize": {
+        "width": 640,
+        "height": 160
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "sp-16.chromium-linux.light.png",
+      "portalPath": "/reflection/divider/sp-16/light",
+      "source": {
+        "componentNodeId": "1574:25834",
+        "componentName": "Divider",
+        "componentBounds": {
+          "width": 480,
+          "height": 1
+        },
+        "requiredBoundTokens": ["color", "size"]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 50,
+          "maxDiffPixelRatio": 0.0005
+        },
+        "strict": true,
+        "toleranceReason": "Allows only minimal Figma-PNG versus Chromium one-pixel divider antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "divider.sp-16",
+      "mode": "dark",
+      "figmaNodeId": "5049:43999",
+      "figmaFrameName": "reflection/divider/sp-16/dark",
+      "exportScale": 1,
+      "viewport": "divider-wide",
+      "viewportSize": {
+        "width": 640,
+        "height": 160
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "sp-16.chromium-linux.dark.png",
+      "portalPath": "/reflection/divider/sp-16/dark",
+      "source": {
+        "componentNodeId": "1574:25868",
+        "componentName": "Divider",
+        "componentBounds": {
+          "width": 480,
+          "height": 1
+        },
+        "requiredBoundTokens": ["color", "size"]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 50,
+          "maxDiffPixelRatio": 0.0005
+        },
+        "strict": true,
+        "toleranceReason": "Allows only minimal Figma-PNG versus Chromium one-pixel divider antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "family": "slider",
+  "baselineRoot": "packages/design-governance/reflection-families/slider/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "slider.default",
+      "mode": "light",
+      "figmaNodeId": "5059:45128",
+      "figmaFrameName": "reflection/slider/default/light",
+      "exportScale": 1,
+      "viewport": "slider-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.light.png",
+      "portalPath": "/reflection/slider/default/light",
+      "source": {
+        "componentNodeId": "2462:12273",
+        "componentName": "Slider",
+        "componentBounds": {
+          "width": 260,
+          "height": 32
+        },
+        "requiredBoundTokens": [
+          "slider/thumb",
+          "slider/touch area",
+          "slider/track",
+          "slider/track-filled"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 1100,
+          "maxDiffPixelRatio": 0.013
+        },
+        "strict": true,
+        "toleranceReason": "Allows only localized Figma-PNG versus Chromium antialiasing drift across the 6px rounded slider track caps and 16px 1.5px stroked thumb after frame size, source-node bounds, mode background, value geometry, and bound tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "slider.default",
+      "mode": "dark",
+      "figmaNodeId": "5059:45184",
+      "figmaFrameName": "reflection/slider/default/dark",
+      "exportScale": 1,
+      "viewport": "slider-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.dark.png",
+      "portalPath": "/reflection/slider/default/dark",
+      "source": {
+        "componentNodeId": "2464:13689",
+        "componentName": "Slider",
+        "componentBounds": {
+          "width": 260,
+          "height": 32
+        },
+        "requiredBoundTokens": [
+          "slider/thumb",
+          "slider/touch area",
+          "slider/track",
+          "slider/track-filled"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 1100,
+          "maxDiffPixelRatio": 0.013
+        },
+        "strict": true,
+        "toleranceReason": "Allows only localized Figma-PNG versus Chromium antialiasing drift across the 6px rounded slider track caps and 16px 1.5px stroked thumb after frame size, source-node bounds, mode background, value geometry, and bound tokens have passed cohesive static checks."
+      }
+    }
+  ]
+}
