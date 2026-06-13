@@ -3,19 +3,71 @@
 This guide describes the durable Marwes Reflection contract flow for adding a component family to visual baseline validation.
 
 ```text
-Figma file
-  -> .pi sync target
-  -> .figma raw nodes + variables
-  -> design-governance reflection family contract
-  -> cohesive:check
-  -> Reflection portal visual run
+                 Figma source node
+                       |
+                       v
+Figma variables -> reflection contract -> Figma baseline PNG
+                       |
+                       v
+              Reflection portal visual run
 ```
 
 Figma remains the visual source of truth. Runtime screenshots are evidence, not baseline sources.
 
+## The Required Triangle
+
+Every Reflection family is validated through three sources in parallel:
+
+1. **Figma source node**: the real component/source instance in the local Figma
+   dump. This gives dimensions, layout, text styles, fills, strokes, effects,
+   and the bound-variable map.
+2. **Figma variables**: `.figma/marwes/tokens/variables.json` plus the source
+   node `boundVariables`. This proves that Figma is using the expected token
+   names and that Marwes maps those tokens to runtime CSS variables.
+3. **Figma baseline PNG and Reflection runtime output**: the exported
+   `reflection/<family>/<case>/<mode>` PNG compared against the portal render at
+   the same `viewportSize`.
+
+Do not treat the baseline PNG diff as the whole truth. A failed visual case must
+be investigated by checking all three sides first:
+
+- If the source node and variables agree but the runtime differs, fix Marwes CSS
+  or the adapter portal fixture.
+- If the source node uses the wrong or missing variable, fix Figma or update the
+  contract only after the design intent is clear.
+- If the baseline PNG does not match the source node or viewport contract,
+  re-export or recompile the Figma baseline.
+- If all three agree and only text rasterization differs, keep the narrowest
+  documented tolerance in `comparison.toleranceReason`.
+
+Command lookup:
+
+```text
+docs/reference/design-governance-command-lexicon.md
+```
+
+Full product-level walkthrough:
+
+```text
+REFLECTION_DESIGN_GOVERNANCE_FLOW.md
+```
+
 ## Layer 1: Figma Source
 
-Create top-level export frames on the Figma page named `Reflection Baselines`.
+Preferred path: generate top-level Reflection frames from existing catalog
+frames through the Marwes Figma Reflection Frame Prep plugin.
+
+Start by adding or confirming the catalog frame links in:
+
+```text
+packages/design-governance/reflection-families/source-frame-registry.json
+```
+
+Then create or update:
+
+```text
+packages/design-governance/reflection-families/<family>/frame-prep.json
+```
 
 Frame naming:
 
@@ -32,7 +84,25 @@ reflection/button/text/light
 reflection/button/destructive/light
 ```
 
-Each frame must:
+Run the Figma plugin from:
+
+```text
+packages/design-governance/figma-reflection-plugin/manifest.json
+```
+
+Dry-run:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family <family> --connect --dry-run --replace --accept-any-file
+```
+
+Write generated frames:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --accept-any-file
+```
+
+Each generated or manual frame must:
 
 - Be a top-level frame, not a raw component node or nested instance.
 - Have a fixed fill, initially `#ffffff` for light mode.
@@ -43,6 +113,10 @@ Each frame must:
 - Export as PNG at `scale: 1`.
 
 The frame size must match the contract `viewportSize` exactly.
+
+Manual `Reflection Baselines` page setup is still valid, but generated
+source-page frames are preferred when the source content already exists in the
+catalog.
 
 ## Layer 2: Local Figma Artifacts
 
@@ -66,6 +140,17 @@ The two key files for validation are:
 ```
 
 Do not run a remote sync casually. Use cached/local artifacts unless an explicit Figma refresh is intended.
+
+Do not run a full remote Figma sync after every generated baseline frame write.
+The frame-prep bridge is already connected to Figma, returns the generated frame
+ids, and stores plugin metadata. Refresh local raw Figma artifacts at the start
+of a batch; reserve post-generation remote fetches for intentional strict audit.
+
+Before changing runtime CSS for a Reflection failure, inspect the source node
+facts from the local raw dump or family component JSON. Capture the values that
+matter for the failed diff: bounds, text style, stroke behavior, fill/effect
+values, and any `boundVariables` entries. Those values should explain the CSS
+patch.
 
 ## Layer 3: Reflection Family Contract
 
@@ -113,6 +198,10 @@ This checks:
 - Each baseline PNG dimensions match `viewportSize`.
 - Each comparison threshold has an explicit reason.
 
+This check is the static triangle gate. It is not optional before interpreting a
+Reflection visual diff, because it proves the node, variables, and baseline
+contract still refer to the same design source.
+
 Current Button contracts still use TODO top-level baseline frame ids until the real `Reflection Baselines` frame node ids are copied from Figma. By default this is a warning so local development can proceed from the imported PNGs. For strict provenance, run:
 
 ```bash
@@ -121,7 +210,40 @@ pnpm cohesive:check -- --family button --require-figma-frames
 
 That mode fails until every `figmaNodeId` is a real top-level frame id whose bounds match `viewportSize`.
 
-## Layer 5: Figma Baseline Export
+## Layer 5: Figma Baseline PNG Compiler
+
+For generated source-page frames, export PNG baselines directly from generated
+frame ids:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --accept-any-file --export-baselines
+```
+
+For manual baseline ingestion, export PNGs from Figma into the normal light/dark
+export folders, then compile them locally into the Reflection family layout:
+
+```bash
+pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3
+pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write
+```
+
+The compiler reads:
+
+```text
+packages/design-governance/reflection-families/pending-figma-frame-renames.json
+```
+
+It maps duplicated Figma export names by their discovered grid order, verifies
+each PNG dimension against `viewportSize`, and writes files as:
+
+```text
+packages/design-governance/reflection-families/<family>/baselines/<case>.chromium-linux.<mode>.png
+```
+
+Use the default `--target incoming` while sorting a new batch. Use
+`--target active` only when the family contract and portal route are ready.
+
+## Layer 6: Strict Figma Baseline Export
 
 After the top-level Figma frames are in place and the contract has real frame node ids:
 
@@ -138,7 +260,10 @@ packages/design-governance/reflection-families/<family>/reflection-contract.json
 
 It writes PNGs to the family `baselines/` directory and refuses exports whose PNG dimensions do not match `viewportSize`.
 
-## Layer 6: Reflection Portal
+This strict path is provenance hardening. It is useful once Figma frame names and
+frame ids are clean, but it is not required for day-to-day local PNG ingestion.
+
+## Layer 7: Reflection Portal
 
 Reflection runtime cases are generated from the same family contracts in:
 
@@ -170,6 +295,22 @@ pnpm reflection:visual
 pnpm reflection:review
 ```
 
+When visual output fails, classify the failure with the triangle before patching:
+
+- **Geometry/stroke/layout**: source node dimensions or stroke behavior differs
+  from runtime. Example: Figma inside stroke versus CSS border changing browser
+  layout size.
+- **Token/color drift**: source node is bound to a variable but runtime uses a
+  different CSS variable or fallback.
+- **Typography drift**: source node text styles differ from runtime font size,
+  weight, line height, letter spacing, or smoothing behavior.
+- **Baseline/export drift**: PNG dimensions or frame contents do not match the
+  contract source.
+- **Adapter fixture drift**: React, Vue, or Svelte portal code is not rendering
+  the same component API shape.
+- **Font rendering noise**: source node, variables, and geometry agree, but
+  Chromium and Figma rasterize text differently.
+
 ## Threshold Policy
 
 Use exact static checks for:
@@ -194,10 +335,10 @@ Do not use tolerance to hide:
 
 ## Adding The Next Family
 
-1. Create the Figma frames on `Reflection Baselines`.
+1. Create or identify the Figma frames on `Reflection Baselines`.
 2. Export or sync the local Figma artifacts if needed.
 3. Add `packages/design-governance/reflection-families/<family>/reflection-contract.json`.
-4. Add the Figma-exported PNGs under that family `baselines/` directory.
+4. Compile the Figma-exported PNGs into that family `baselines/` directory.
 5. Add adapter portal cases for React, Vue, and Svelte.
 6. Run `pnpm cohesive:check -- --family <family>`.
 7. Run `pnpm cohesive:visual`.

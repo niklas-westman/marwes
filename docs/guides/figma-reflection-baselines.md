@@ -4,6 +4,68 @@ Figma is the visual source of truth for strict Reflection component checks. The 
 
 Do not create one wide universal frame. Use per-case frame dimensions declared in `packages/design-governance/reflection-families/<family>/reflection-contract.json`, then make Reflection capture the matching portal route at the exact same size.
 
+For the complete product-level flow, see `REFLECTION_DESIGN_GOVERNANCE_FLOW.md`
+at the repo root.
+
+## Two Frame Creation Paths
+
+Marwes supports two ways to create valid Reflection baseline frames.
+
+### Generated Source-Page Frames
+
+This is the preferred path for catalog frames that already exist in the Marwes
+Figma file.
+
+1. Register the light/dark catalog frame links in:
+
+```text
+packages/design-governance/reflection-families/source-frame-registry.json
+```
+
+2. Create or update:
+
+```text
+packages/design-governance/reflection-families/<family>/frame-prep.json
+```
+
+3. Run the Figma Reflection Frame Prep plugin from:
+
+```text
+packages/design-governance/figma-reflection-plugin/manifest.json
+```
+
+4. Dry-run:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family <family> --connect --dry-run --replace --accept-any-file
+```
+
+5. Write generated frames:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --accept-any-file
+```
+
+The generated frames are placed near the source catalog page, safely offset from
+existing content. They are still top-level frames named
+`reflection/<family>/<case>/<mode>`, with fixed dimensions and plugin metadata.
+
+Export generated frame PNGs:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --accept-any-file --export-baselines
+```
+
+This path does not require a full Figma REST fetch after writing frames. The
+bridge returns generated frame ids and the export step uses those ids directly.
+A full remote fetch is an optional strict audit step, not the normal authoring
+loop.
+
+### Manual Reflection Baselines Page
+
+Manual frame setup is still valid when a designer wants to build the isolated
+baseline frames directly.
+
 ## Figma Page Setup
 
 Create a page named `Reflection Baselines`.
@@ -83,7 +145,9 @@ Each case entry must include:
 - `comparison.threshold`: visual tolerance for Reflection, normally exact or very small.
 - `comparison.toleranceReason`: required explanation for every non-zero visual tolerance.
 
-To get the Figma node id, copy the frame URL in Figma and convert the `node-id` value from hyphen format to colon format:
+For generated source-page frames, the prep bridge returns the generated frame
+ids. For manual frames, copy the frame URL in Figma and convert the `node-id`
+value from hyphen format to colon format:
 
 ```text
 node-id=1234-5678 -> 1234:5678

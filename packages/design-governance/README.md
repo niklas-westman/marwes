@@ -8,13 +8,28 @@ tokens, preset CSS, framework surfaces, and Reflection visual baselines still
 agree.
 
 ```text
-Figma file
-  -> .pi sync target
-  -> .figma raw nodes + variables
-  -> registry + token contracts
-  -> design-governance reflection family contracts
-  -> Reflection portal visual checks
+                 Figma source node
+                       |
+                       v
+Figma variables -> reflection contract -> Figma baseline PNG
+                       |
+                       v
+              Reflection portal runtime
 ```
+
+The core value is the triangle, not any single artifact:
+
+- **Figma source node** proves the intended component structure, dimensions,
+  typography, fills, strokes, effects, and variable bindings.
+- **Figma variables** prove that the node is using the expected design tokens
+  and that Marwes exposes matching runtime CSS variables.
+- **Figma baseline PNG plus Reflection portal output** proves that React, Vue,
+  and Svelte render the same visual result at the contract `viewportSize`.
+
+When a visual check fails, do not fix from the PNG diff alone. First reconcile
+all three sides: inspect the source node facts, confirm bound variables, then
+use the expected/actual/diff images to decide whether the runtime CSS, adapter
+fixture, contract, or Figma export is wrong.
 
 ## What This Package Owns
 
@@ -30,6 +45,19 @@ This package should be the durable contract layer for design governance. Other
 packages can render components, but this package owns the question: "Does the
 implementation still match the design source of truth?"
 
+For command lookup, use:
+
+```text
+docs/reference/design-governance-command-lexicon.md
+```
+
+For the full source-node, variable, generated-frame, baseline PNG, and portal
+workflow, use:
+
+```text
+REFLECTION_DESIGN_GOVERNANCE_FLOW.md
+```
+
 ## Contract Layers
 
 ### 1. Figma Source
@@ -44,11 +72,22 @@ Required local Figma artifacts include:
 - `.figma/marwes/tokens/variables.json`
 - `.figma/marwes/components/<family>.json`
 
+The source node is the first diagnostic source when Reflection fails. Read its
+absolute bounds, layout, text styles, stroke alignment behavior, fills, effects,
+and `boundVariables` before changing CSS or thresholds.
+
 ### 2. Registry And Tokens
 
 The registry says which Figma nodes and variables belong to each component
 family. The validators check that registry references still exist, bound Figma
 variables still match, and runtime CSS variables expose the expected values.
+
+This layer is mandatory for Reflection fixes. A visual mismatch caused by a
+wrong color, radius, typography value, or surface should be traced through the
+Figma node's bound variable and the Marwes runtime variable before hard-coding a
+literal. Literal values are acceptable only for values that are genuinely not
+tokenized in Figma, and the reason should be clear in the family contract or CSS
+comment.
 
 ### 3. Reflection Families
 
@@ -98,6 +137,35 @@ Frame requirements:
 - no labels, docs text, guides, or showcase UI
 - integer pixel position and dimensions
 - PNG export at scale `1`
+
+For practical baseline ingestion, compile a normal Figma PNG export folder into
+the package-owned baseline layout:
+
+```bash
+pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3
+pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write
+```
+
+Generated source-page frames are now the preferred path when catalog source
+frames already exist. They are created by the local Figma Reflection Frame Prep
+plugin from each family `frame-prep.json`:
+
+```bash
+pnpm reflection:figma:prepare-frames -- --family badge --connect --dry-run --replace --accept-any-file
+pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file
+pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines
+```
+
+The bridge creates or replaces only plugin-managed frames, returns generated
+frame ids, and stores metadata on the generated frames. Do not force a full
+Figma REST fetch after every generated frame write. Refresh the local Figma raw
+source and variables at the start of a batch; use post-generation remote fetches
+only for strict audit/provenance checks.
+
+The older compiler path still reads `pending-figma-frame-renames.json`,
+validates PNG dimensions, and renames files locally before placing them. It is
+useful for manual export folders. Figma frame renames are still useful, but only
+as strict provenance hardening.
 
 When the real baseline frame ids are present, run the strict provenance check:
 
@@ -223,6 +291,18 @@ This static check validates the Figma sync target, local raw nodes,
 dimensions, and comparison threshold policy. Add `--require-figma-frames` when
 the top-level `Reflection Baselines` frame node ids should be mandatory.
 
+When investigating a failing Reflection case, use this order:
+
+1. Run `pnpm cohesive:check -- --family <family>` to prove the source node,
+   required variables, baseline PNG, and contract still connect.
+2. Inspect the source node in `.figma/marwes/_raw/<file-key>_full.json` or the
+   family component JSON to collect dimensions, text styles, fills, strokes,
+   effects, and bound variables.
+3. Compare Reflection `expected.png`, `actual.png`, and `diff.png` to identify
+   whether the runtime problem is geometry, token/color drift, typography,
+   framing, adapter fixture shape, or font antialiasing.
+4. Patch the owning runtime layer and rerun React, Vue, and Svelte visual checks.
+
 Run the full visual Reflection loop:
 
 ```bash
@@ -254,11 +334,27 @@ packages/design-governance/figma-plugin/manifest.json
 Run it in Figma Desktop with:
 
 ```text
-Plugins > Development > Marwes Variables Bridge
+Plugins > Development > Marwes Figma Bridge
 ```
 
 The plugin exports local variables plus document-bound variables that are not
-returned by Figma's local variable export.
+returned by Figma's local variable export. It also applies Reflection baseline
+frame renames from
+`packages/design-governance/reflection-families/pending-figma-frame-renames.json`
+through the local bridge command:
+
+```bash
+pnpm reflection:figma:rename-frames
+pnpm reflection:figma:rename-frames -- --write
+```
+
+The first command is a dry run. Use `--family accordion` to limit the operation
+while testing. After writing names, refresh `.figma/marwes` from the current
+Figma file and run:
+
+```bash
+pnpm cohesive:check:strict
+```
 
 ## Validation Layers
 
@@ -301,7 +397,7 @@ Short version:
 3. Add a family folder under `reflection-families/<family>/`.
 4. Add `reflection-contract.json` with Figma frame ids, source component node ids,
    viewport sizes, portal paths, required bound tokens, and comparison policy.
-5. Add baselines under `reflection-families/<family>/baselines/`.
+5. Compile exported PNGs into `reflection-families/<family>/baselines/`.
 6. Run `pnpm cohesive:check -- --family <family>`.
 7. Run `pnpm cohesive:check -- --family <family> --require-figma-frames` once
    the real top-level baseline frame ids are present.

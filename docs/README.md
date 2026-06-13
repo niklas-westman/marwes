@@ -28,7 +28,9 @@ If you are choosing what to do next, start with [Start Here](./start-here.md). I
 13. [Governance](./reference/governance.md)
 14. [Testing](./reference/testing.md)
 15. [Family Validation](./reference/family-validation.md)
-16. [Figma Validator](./figma-validator/README.md)
+16. [Design Governance Command Lexicon](./reference/design-governance-command-lexicon.md)
+17. [Reflection Design Governance Flow](../REFLECTION_DESIGN_GOVERNANCE_FLOW.md)
+18. [Figma Validator](./figma-validator/README.md)
 
 ## Documentation map
 
@@ -84,6 +86,8 @@ Long-lived, canonical project docs.
 - [Governance](./reference/governance.md) — local and CI trust gates, artifacts, and release discipline
 - [Testing](./reference/testing.md) — test layers, commands, and expectations
 - [Family Validation](./reference/family-validation.md) — focused per-family workflow and master validation commands
+- [Design Governance Command Lexicon](./reference/design-governance-command-lexicon.md) — lookup table for Figma sync, baseline compilation, cohesive checks, and Reflection visual commands
+- [Reflection Design Governance Flow](../REFLECTION_DESIGN_GOVERNANCE_FLOW.md) — product-level walkthrough of the Figma source node, variable map, generated baseline frame, exported PNG, and Reflection portal loop
 - [Framework Parity Summary](./reference/framework-parity-summary.md) — generated compact view of the current framework parity artifact
 - [Figma Validator](./figma-validator/README.md) — local-only Figma parity validator, commands, report shape, and sync handoff
 
@@ -152,6 +156,7 @@ graph LR
 ## Related entry points outside `docs/`
 
 - [Repository README](../README.md)
+- [Reflection Design Governance Flow](../REFLECTION_DESIGN_GOVERNANCE_FLOW.md)
 - Local Figma source index: `.figma/INDEX.md`
 - Local curated Figma node reference: `.figma/NODE_REFERENCE.md`
 - [Changelog](../CHANGELOG.md)
