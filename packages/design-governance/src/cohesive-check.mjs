@@ -258,7 +258,7 @@ function validateCase({ contract, caseEntry, rawSource, variableMap, requireFram
   const baselineRoot = contract.baselineRoot
   const viewportSize = caseEntry.viewportSize
 
-  const requiredFields = ["caseId", "mode", "viewport", "baseline", "portalPath"]
+  const requiredFields = ["caseId", "mode", "viewport", "baseline", "portalPath", "figmaFrameName"]
   const missingFields = requiredFields.filter((key) => typeof caseEntry[key] !== "string")
   if (
     !viewportSize ||
@@ -375,23 +375,41 @@ function validateCase({ contract, caseEntry, rawSource, variableMap, requireFram
   } else {
     const frameNode = findNodeById(rawSource, frameId)
     const bounds = readNodeBounds(frameNode)
-    const matches =
+    const dimensionsMatch =
       frameNode &&
       bounds &&
       viewportSize &&
       bounds.width === viewportSize.width &&
       bounds.height === viewportSize.height
-    checks.push(
-      createCheck(
-        `${caseLabel} baseline frame node`,
-        matches ? "pass" : "fail",
-        matches
-          ? [`${frameId}: ${bounds.width}x${bounds.height}`]
-          : [
-              `${frameId}: ${bounds?.width ?? "missing"}x${bounds?.height ?? "missing"}, expected ${viewportSize?.width}x${viewportSize?.height}`,
-            ],
-      ),
-    )
+    const nameMatches = frameNode && frameNode.name === caseEntry.figmaFrameName
+    const matches = dimensionsMatch && nameMatches
+    const status = matches
+      ? "pass"
+      : !frameNode && !requireFrames
+        ? "warn"
+        : !dimensionsMatch
+          ? "fail"
+          : requireFrames
+            ? "fail"
+            : "warn"
+    const details = []
+
+    if (!frameNode) {
+      details.push(`${frameId}: missing`)
+    } else {
+      details.push(
+        dimensionsMatch
+          ? `${frameId}: ${bounds.width}x${bounds.height}`
+          : `${frameId}: ${bounds?.width ?? "missing"}x${bounds?.height ?? "missing"}, expected ${viewportSize?.width}x${viewportSize?.height}`,
+      )
+      details.push(
+        nameMatches
+          ? `name: ${frameNode.name}`
+          : `name: ${frameNode.name ?? "missing"}, expected ${caseEntry.figmaFrameName}`,
+      )
+    }
+
+    checks.push(createCheck(`${caseLabel} baseline frame node`, status, details))
   }
 
   const threshold = caseEntry.comparison?.threshold
@@ -426,6 +444,17 @@ function hasWarnings(checks) {
   return checks.some((check) => check.status === "warn")
 }
 
+function collectChecksByStatus(report, status) {
+  return report.families.flatMap((familyReport) =>
+    familyReport.checks
+      .filter((check) => check.status === status)
+      .map((check) => ({
+        family: familyReport.family,
+        check,
+      })),
+  )
+}
+
 function printReport(report) {
   console.log(`cohesive:check ${report.selection}`)
   console.log("")
@@ -445,6 +474,26 @@ function printReport(report) {
     }
     console.log("")
   }
+
+  const warnings = collectChecksByStatus(report, "warn")
+  if (warnings.length > 0) {
+    console.log(`WARNING: cohesive:check passed with ${warnings.length} warning(s).`)
+    console.log("These warnings are non-blocking in authoring mode.")
+    console.log(
+      "Run with --require-figma-frames, or use pnpm cohesive:check:strict, to make them fail.",
+    )
+    console.log("")
+
+    for (const { family: familyName, check } of warnings) {
+      console.log(`[warn] ${familyName}: ${check.name}`)
+      for (const detail of check.details) {
+        console.log(`       ${detail}`)
+      }
+    }
+    console.log("")
+  }
+
+  console.log(`Status: ${report.status}`)
 }
 
 function main() {

@@ -2,11 +2,12 @@
 
 import { createHash } from "node:crypto"
 import { EventEmitter } from "node:events"
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import http from "node:http"
-import { dirname, resolve } from "node:path"
+import { resolve } from "node:path"
 
-const defaultConfigPath = ".pi/figma-sync.json"
+const defaultRenameMapPath =
+  "packages/design-governance/reflection-families/pending-figma-frame-renames.json"
 const defaultPortStart = 9223
 const defaultPortEnd = 9232
 const defaultHost = "localhost"
@@ -15,37 +16,33 @@ const websocketMagicGuid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
 function usage() {
   return [
     "Usage:",
-    "  pnpm --filter @marwes-ui/design-governance variables-sync",
-    "  pnpm --filter @marwes-ui/design-governance variables-sync -- --target marwes",
-    "  pnpm --filter @marwes-ui/design-governance variables-sync -- --file-key vPFR4oMnI9jONyoejrKp3a",
+    "  pnpm reflection:figma:rename-frames",
+    "  pnpm reflection:figma:rename-frames -- --write",
+    "  pnpm reflection:figma:rename-frames -- --family accordion --write",
     "",
     "Options:",
-    "  --target <name>       Target from .pi/figma-sync.json. Defaults to defaultTarget.",
-    "  --config <path>       Figma sync config path. Defaults to .pi/figma-sync.json.",
-    "  --output <path>       Output path. Defaults to <target.liveDir>/tokens/variables.json.",
-    "  --file-key <key>      Override the expected connected Figma file key.",
-    "  --accept-any-file     Use the first connected Figma file even if Figma does not report the expected key.",
+    `  --map <path>          Rename map. Defaults to ${defaultRenameMapPath}.`,
+    "  --family <name>       Rename one family only. Can be repeated.",
+    "  --write               Apply renames in Figma. Without this, performs a dry run.",
+    "  --force               Rename nodes that already have another reflection/* name.",
+    "  --accept-any-file     Use the first connected Figma file even if the file key differs.",
     "  --host <host>         WebSocket host. Defaults to localhost.",
     "  --port <port>         Use one exact bridge port instead of scanning 9223-9232.",
     "  --timeout <ms>        Wait timeout. Defaults to 120000.",
-    "  --no-refresh          Use cached plugin variables instead of requesting a refresh.",
-    "  --dry-run             Print summary without writing variables.json.",
     "  --json                Print machine-readable summary.",
   ].join("\n")
 }
 
 function parseArgs(argv) {
   const options = {
-    configPath: defaultConfigPath,
-    targetName: undefined,
-    outputPath: undefined,
-    fileKey: undefined,
+    mapPath: defaultRenameMapPath,
+    families: [],
+    write: false,
+    force: false,
     acceptAnyFile: false,
     host: defaultHost,
     port: undefined,
     timeoutMs: 120000,
-    refresh: true,
-    dryRun: false,
     json: false,
     help: false,
   }
@@ -55,24 +52,20 @@ function parseArgs(argv) {
 
     function readValue() {
       const value = argv[index + 1]
-      if (!value || value.startsWith("--")) {
-        throw new Error(`Missing value for ${arg}`)
-      }
+      if (!value || value.startsWith("--")) throw new Error(`Missing value for ${arg}`)
       index += 1
       return value
     }
 
     if (arg === "--help" || arg === "-h") options.help = true
-    else if (arg === "--target") options.targetName = readValue()
-    else if (arg === "--config") options.configPath = readValue()
-    else if (arg === "--output") options.outputPath = readValue()
-    else if (arg === "--file-key") options.fileKey = readValue()
+    else if (arg === "--map") options.mapPath = readValue()
+    else if (arg === "--family") options.families.push(readValue())
+    else if (arg === "--write") options.write = true
+    else if (arg === "--force") options.force = true
     else if (arg === "--accept-any-file") options.acceptAnyFile = true
     else if (arg === "--host") options.host = readValue()
     else if (arg === "--port") options.port = Number(readValue())
     else if (arg === "--timeout") options.timeoutMs = Number(readValue())
-    else if (arg === "--no-refresh") options.refresh = false
-    else if (arg === "--dry-run") options.dryRun = true
     else if (arg === "--json") options.json = true
     else throw new Error(`Unknown argument: ${arg}`)
   }
@@ -94,51 +87,6 @@ function log(options, message) {
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"))
-}
-
-function writeJson(path, value) {
-  mkdirSync(dirname(path), { recursive: true })
-  writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`)
-}
-
-function extractFileKey(figmaFile) {
-  if (!figmaFile) return undefined
-
-  try {
-    const url = new URL(figmaFile)
-    const match = url.pathname.match(/\/(?:design|file)\/([a-zA-Z0-9]+)/)
-    return match?.[1]
-  } catch {
-    return figmaFile
-  }
-}
-
-function readSyncTarget(repoRoot, options) {
-  const configPath = resolve(repoRoot, options.configPath)
-  if (!existsSync(configPath)) {
-    throw new Error(`Missing ${options.configPath}`)
-  }
-
-  const config = readJson(configPath)
-  const targetName = options.targetName ?? config.defaultTarget
-  const target = config.targets?.[targetName]
-  if (!target) {
-    throw new Error(`Unknown Figma sync target: ${targetName}`)
-  }
-
-  const expectedFileKey = options.fileKey ?? extractFileKey(target.figmaFile)
-  if (!expectedFileKey) {
-    throw new Error(`Could not resolve file key for target: ${targetName}`)
-  }
-
-  return {
-    name: targetName,
-    label: target.label ?? targetName,
-    figmaFile: target.figmaFile,
-    liveDir: target.liveDir,
-    outputPath: options.outputPath ?? `${target.liveDir}/tokens/variables.json`,
-    expectedFileKey,
-  }
 }
 
 function isAllowedOrigin(origin) {
@@ -267,9 +215,7 @@ class BridgeServer extends EventEmitter {
         return port
       } catch (error) {
         server.close()
-        if (error?.code !== "EADDRINUSE" || this.requestedPort) {
-          throw error
-        }
+        if (error?.code !== "EADDRINUSE" || this.requestedPort) throw error
       }
     }
 
@@ -320,8 +266,6 @@ class BridgeServer extends EventEmitter {
       socket,
       buffer: Buffer.alloc(0),
       fileInfo: undefined,
-      variablesData: undefined,
-      lastError: undefined,
       fragmentedOpcode: undefined,
       fragmentedPayloads: [],
       closed: false,
@@ -366,8 +310,7 @@ class BridgeServer extends EventEmitter {
         return
       }
 
-      const text = frame.payload.toString("utf8")
-      this.handleMessage(client, JSON.parse(text))
+      this.handleMessage(client, JSON.parse(frame.payload.toString("utf8")))
       return
     }
 
@@ -383,8 +326,7 @@ class BridgeServer extends EventEmitter {
       client.fragmentedPayloads = []
 
       if (opcode === 0x1) {
-        const text = payload.toString("utf8")
-        this.handleMessage(client, JSON.parse(text))
+        this.handleMessage(client, JSON.parse(payload.toString("utf8")))
       }
       return
     }
@@ -405,7 +347,7 @@ class BridgeServer extends EventEmitter {
       clearTimeout(pending.timeout)
       this.pendingRequests.delete(message.id)
 
-      if (message.error) pending.reject(new Error(message.error))
+      if (message.error && !message.result) pending.reject(new Error(message.error))
       else pending.resolve(message.result)
       return
     }
@@ -419,29 +361,9 @@ class BridgeServer extends EventEmitter {
       return
     }
 
-    if (message.type === "VARIABLES_DATA" && message.data) {
-      client.variablesData = message.data
-      const count = message.data.variables?.length ?? 0
-      this.recordEvent(`variables data received: ${count} variables`)
-      this.emit("client:update")
-      return
-    }
-
     if (message.type === "ERROR") {
       const error = message.error ?? message.data?.error ?? "unknown plugin error"
-      client.lastError = error
       this.recordEvent(`plugin error: ${error}`)
-      this.emit("client:update")
-      return
-    }
-
-    if (message.type === "CONSOLE_CAPTURE") {
-      const data = message.data ?? message
-      const level = data.level ?? "log"
-      const text = data.message ?? ""
-      if (level === "error" || level === "warn") {
-        this.recordEvent(`plugin console ${level}: ${text}`)
-      }
       this.emit("client:update")
       return
     }
@@ -489,12 +411,8 @@ class BridgeServer extends EventEmitter {
     return [...this.clients]
       .map((client, index) => {
         const fileName = client.fileInfo?.fileName ?? "unknown file"
-        const fileKey =
-          client.fileInfo?.fileKey ?? client.variablesData?.fileKey ?? "no file key reported"
-        const variableCount = client.variablesData?.variables?.length
-        const variables =
-          typeof variableCount === "number" ? `${variableCount} variables` : "no variables yet"
-        return `#${index + 1} ${fileName} (${fileKey}, ${variables})`
+        const fileKey = client.fileInfo?.fileKey ?? "no file key reported"
+        return `#${index + 1} ${fileName} (${fileKey})`
       })
       .join("; ")
   }
@@ -505,15 +423,10 @@ class BridgeServer extends EventEmitter {
   }
 
   findClient(fileKey, acceptAnyFile = false) {
-    if (acceptAnyFile) {
-      const clients = [...this.clients]
-      return clients.find((client) => client.variablesData) ?? clients[0]
-    }
+    if (acceptAnyFile) return [...this.clients][0]
 
     for (const client of this.clients) {
-      const infoKey = client.fileInfo?.fileKey
-      const variableKey = client.variablesData?.fileKey
-      if (infoKey === fileKey || variableKey === fileKey) return client
+      if (client.fileInfo?.fileKey === fileKey) return client
     }
     return undefined
   }
@@ -521,14 +434,6 @@ class BridgeServer extends EventEmitter {
   async waitForClient(fileKey, timeoutMs, acceptAnyFile = false) {
     const label = acceptAnyFile ? "any Figma file" : `Figma file ${fileKey}`
     return this.waitFor(() => this.findClient(fileKey, acceptAnyFile), timeoutMs, label)
-  }
-
-  async waitForVariables(fileKey, timeoutMs, acceptAnyFile = false) {
-    return this.waitFor(
-      () => this.findClient(fileKey, acceptAnyFile)?.variablesData,
-      timeoutMs,
-      "variables data",
-    )
   }
 
   async waitFor(check, timeoutMs, label) {
@@ -576,133 +481,63 @@ function listen(server, port, host) {
   })
 }
 
-function normalizeModes(collection) {
-  return (collection.modes ?? []).map((mode) => ({
-    id: mode.modeId ?? mode.id,
-    modeId: mode.modeId ?? mode.id,
-    name: mode.name,
-  }))
+function selectedFamilies(renameMap, options) {
+  const familyFilter = new Set(options.families)
+  const families = Object.entries(renameMap.families ?? {})
+  if (familyFilter.size === 0) return families
+  return families.filter(([family]) => familyFilter.has(family))
 }
 
-function rgbaToHex(value) {
-  if (
-    !value ||
-    typeof value.r !== "number" ||
-    typeof value.g !== "number" ||
-    typeof value.b !== "number"
-  ) {
-    return value
-  }
+function buildRenames(renameMap, options) {
+  const renames = []
+  const byNodeId = new Map()
 
-  const red = Math.round(value.r * 255)
-    .toString(16)
-    .padStart(2, "0")
-  const green = Math.round(value.g * 255)
-    .toString(16)
-    .padStart(2, "0")
-  const blue = Math.round(value.b * 255)
-    .toString(16)
-    .padStart(2, "0")
-  const alpha =
-    typeof value.a === "number" && value.a < 1
-      ? Math.round(value.a * 255)
-          .toString(16)
-          .padStart(2, "0")
-      : ""
+  for (const [family, cases] of selectedFamilies(renameMap, options)) {
+    for (const caseEntry of cases) {
+      for (const [mode, frame] of Object.entries(caseEntry.requiredFrameNames ?? {})) {
+        const nodeId = frame.figmaNodeId
+        const name = frame.requiredName
+        if (!nodeId || !name) {
+          throw new Error(`Invalid rename entry for ${family}:${caseEntry.caseId}:${mode}`)
+        }
 
-  return `#${red}${green}${blue}${alpha}`.toLowerCase()
-}
+        const entry = {
+          family,
+          caseId: caseEntry.caseId,
+          mode,
+          nodeId,
+          currentName: frame.currentName,
+          name,
+        }
 
-function normalizeValue(value, variableById) {
-  if (value?.type === "VARIABLE_ALIAS") {
-    return {
-      type: "VARIABLE_ALIAS",
-      id: value.id,
-      name: variableById.get(value.id)?.name ?? null,
+        const existing = byNodeId.get(nodeId)
+        if (existing && existing.name !== name) {
+          throw new Error(
+            `Conflicting rename target for node ${nodeId}: ${existing.name} vs ${name}`,
+          )
+        }
+
+        if (!existing) {
+          byNodeId.set(nodeId, entry)
+          renames.push(entry)
+        }
+      }
     }
   }
 
-  return rgbaToHex(value)
+  return renames
 }
 
-function buildArtifact({ target, variablesData }) {
-  const collections = variablesData.variableCollections ?? variablesData.collections ?? []
-  const variables = variablesData.variables ?? []
-  const collectionById = new Map(collections.map((collection) => [collection.id, collection]))
-  const variableById = new Map(variables.map((variable) => [variable.id, variable]))
-
+function summarizeResult(result) {
   return {
-    schemaVersion: 1,
-    source: "marwes/@marwes-ui/design-governance/figma-variables-sync",
-    bridge: "marwes-variables-bridge",
-    target: target.name,
-    figmaFile: target.figmaFile,
-    fileKey: variablesData.fileKey ?? target.expectedFileKey,
-    syncedAt: new Date().toISOString(),
-    diagnostics: {
-      localVariableCount: variablesData.localVariableCount ?? null,
-      boundVariableIds: variablesData.boundVariableIds ?? [],
-      unresolvedBoundVariableIds: variablesData.unresolvedBoundVariableIds ?? [],
-      resolutionErrors: variablesData.resolutionErrors ?? [],
-    },
-    collections: collections.map((collection) => ({
-      id: collection.id,
-      key: collection.key,
-      name: collection.name,
-      defaultModeId: collection.defaultModeId,
-      modes: normalizeModes(collection),
-      variableIds: collection.variableIds ?? [],
-    })),
-    variables: variables.map((variable) => {
-      const collection = collectionById.get(variable.variableCollectionId)
-      const modes = new Map(
-        normalizeModes(collection ?? {}).map((mode) => [mode.modeId, mode.name]),
-      )
-      const valuesByModeId = {}
-      const valuesByMode = {}
-
-      for (const [modeId, value] of Object.entries(variable.valuesByMode ?? {})) {
-        const normalizedValue = normalizeValue(value, variableById)
-        const modeName = modes.get(modeId) ?? modeId
-        valuesByModeId[modeId] = normalizedValue
-        valuesByMode[modeName] = normalizedValue
-      }
-
-      return {
-        id: variable.id,
-        key: variable.key,
-        name: variable.name,
-        path: variable.name,
-        tokenName: variable.name,
-        collectionId: variable.variableCollectionId,
-        variableCollectionId: variable.variableCollectionId,
-        collectionName: collection?.name ?? null,
-        resolvedType: variable.resolvedType,
-        scopes: variable.scopes ?? [],
-        description: variable.description ?? "",
-        hiddenFromPublishing: Boolean(variable.hiddenFromPublishing),
-        valuesByMode,
-        valuesByModeId,
-        rawValuesByMode: variable.valuesByMode ?? {},
-      }
-    }),
-  }
-}
-
-function buildSummary({ server, target, artifact, outputPath, dryRun }) {
-  return {
-    success: true,
-    target: target.name,
-    fileKey: artifact.fileKey,
-    port: server.port,
-    outputPath,
-    dryRun,
-    collections: artifact.collections.length,
-    variables: artifact.variables.length,
-    variablesByType: artifact.variables.reduce((counts, variable) => {
-      counts[variable.resolvedType] = (counts[variable.resolvedType] ?? 0) + 1
-      return counts
-    }, {}),
+    success: Boolean(result?.success),
+    dryRun: Boolean(result?.dryRun),
+    total: result?.total ?? 0,
+    renamed: result?.renamed?.length ?? 0,
+    alreadyNamed: result?.alreadyNamed?.length ?? 0,
+    missing: result?.missing?.length ?? 0,
+    conflicts: result?.conflicts?.length ?? 0,
+    errors: result?.errors?.length ?? 0,
   }
 }
 
@@ -714,26 +549,28 @@ async function main(argv) {
   }
 
   const repoRoot = process.cwd()
-  const target = readSyncTarget(repoRoot, options)
-  const outputPath = resolve(repoRoot, target.outputPath)
-  const server = new BridgeServer({
-    host: options.host,
-    port: options.port,
-  })
+  const renameMapPath = resolve(repoRoot, options.mapPath)
+  if (!existsSync(renameMapPath)) throw new Error(`Missing rename map: ${options.mapPath}`)
+
+  const renameMap = readJson(renameMapPath)
+  const renames = buildRenames(renameMap, options)
+  const server = new BridgeServer({ host: options.host, port: options.port })
+
+  if (renames.length === 0) throw new Error("No frame renames matched the provided filters.")
 
   try {
     const port = await server.start()
-    log(options, `Figma variables sync waiting on ws://${options.host}:${port}`)
-    log(options, "Open Figma Desktop, then run Plugins > Development > Marwes Figma Bridge.")
-    log(options, `Expected file key: ${target.expectedFileKey}`)
-    if (options.acceptAnyFile) {
-      log(options, "File-key guard: accepting the first connected Figma file.")
-    }
+    log(options, `Prepared ${renames.length} Reflection frame rename(s).`)
+    log(options, `Figma bridge waiting on ws://${options.host}:${port}`)
+    log(options, "Open Figma Desktop with the Marwes file, then run:")
+    log(options, "Plugins > Development > Marwes Figma Bridge")
+    log(options, `Expected file key: ${renameMap.figmaFileKey}`)
+    if (!options.write) log(options, "Mode: dry run. Re-run with --write to apply names.")
 
     let client
     try {
       client = await server.waitForClient(
-        target.expectedFileKey,
+        renameMap.figmaFileKey,
         options.timeoutMs,
         options.acceptAnyFile,
       )
@@ -745,75 +582,44 @@ async function main(argv) {
     }
 
     const connectedFileName = client.fileInfo?.fileName ?? "Figma file"
-    const connectedFileKey =
-      client.fileInfo?.fileKey ?? client.variablesData?.fileKey ?? "no file key reported"
+    const connectedFileKey = client.fileInfo?.fileKey ?? "no file key reported"
     log(options, `Connected to ${connectedFileName} (${connectedFileKey})`)
 
-    let variablesData
-    if (options.refresh) {
-      try {
-        const refreshResult = await server.sendCommand(
-          client,
-          "REFRESH_VARIABLES",
-          {},
-          options.timeoutMs,
-        )
-        variablesData = refreshResult?.data
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error)
-        log(options, `Refresh did not finish: ${message}`)
-        log(options, "Falling back to the variables payload cached by the Figma bridge.")
-      }
+    const result = await server.sendCommand(
+      client,
+      "RENAME_REFLECTION_FRAMES",
+      {
+        fileKey: options.acceptAnyFile ? undefined : renameMap.figmaFileKey,
+        dryRun: !options.write,
+        force: options.force,
+        renames: renames.map((entry) => ({
+          nodeId: entry.nodeId,
+          currentName: entry.currentName,
+          name: entry.name,
+        })),
+      },
+      options.timeoutMs,
+    )
+
+    const summary = summarizeResult(result)
+
+    if (options.json) {
+      console.log(JSON.stringify({ ...summary, details: result }, null, 2))
     } else {
-      try {
-        const cachedResult = await server.sendCommand(
-          client,
-          "GET_VARIABLES_DATA",
-          {},
-          Math.min(options.timeoutMs, 10000),
-        )
-        variablesData = cachedResult?.data ?? cachedResult
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error)
-        log(options, `Cached variable request did not finish: ${message}`)
-        log(options, "Waiting for the bridge to broadcast variables data.")
-      }
-    }
-
-    if (!variablesData) {
-      try {
-        variablesData = await server.waitForVariables(
-          target.expectedFileKey,
-          options.timeoutMs,
-          options.acceptAnyFile,
-        )
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error)
-        throw new Error(
-          `${message}. Observed bridge clients: ${server.describeClients()}. Recent bridge events: ${server.describeEvents()}`,
-        )
-      }
-    }
-
-    const artifact = buildArtifact({ target, variablesData })
-
-    if (!options.dryRun) {
-      writeJson(outputPath, artifact)
-    }
-
-    const summary = buildSummary({
-      server,
-      target,
-      artifact,
-      outputPath: target.outputPath,
-      dryRun: options.dryRun,
-    })
-
-    if (options.json) console.log(JSON.stringify(summary, null, 2))
-    else {
       log(options, "")
-      log(options, `Wrote ${summary.variables} variables from ${summary.collections} collections.`)
-      log(options, `Output: ${target.outputPath}`)
+      log(
+        options,
+        `${summary.dryRun ? "Previewed" : "Renamed"} ${summary.renamed} frame(s); ${summary.alreadyNamed} already correct.`,
+      )
+      log(
+        options,
+        `Missing: ${summary.missing}; conflicts: ${summary.conflicts}; errors: ${summary.errors}`,
+      )
+      if (summary.dryRun) log(options, "No Figma changes were made. Re-run with --write to apply.")
+    }
+
+    if (!summary.success) {
+      process.exitCode = 1
     }
   } finally {
     await server.close()

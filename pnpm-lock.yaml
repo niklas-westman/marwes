@@ -70,8 +70,8 @@ importers:
         specifier: 19.2.4
         version: 19.2.4(react@19.2.4)
       reflection-check:
-        specifier: 0.0.5
-        version: 0.0.5(@types/node@24.10.10)(esbuild@0.27.2)(tsx@4.21.0)
+        specifier: 0.0.6
+        version: 0.0.6(@types/node@24.10.10)(esbuild@0.27.2)(tsx@4.21.0)
       rimraf:
         specifier: 6.1.2
         version: 6.1.2
@@ -3819,8 +3819,8 @@ packages:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
     engines: {node: '>=8'}
 
-  reflection-check@0.0.5:
-    resolution: {integrity: sha512-/YQEnsDwLrCgb7LHoGUhqaKd6KHMYpQMSykANaVNMMwmf2bKRcxlvi/pKWCc5XhbsuMj8wxHAiEYF0ZrrCr9IA==}
+  reflection-check@0.0.6:
+    resolution: {integrity: sha512-lcxIP48xZXgEZdKK/9z4MORrno/46sV4umBENpT+1K399v3fHlRIE8D2o0HwJA30rZeEFqIzUNe8X/eW80Lm3Q==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -8018,7 +8018,7 @@ snapshots:
       indent-string: 4.0.0
       strip-indent: 3.0.0
 
-  reflection-check@0.0.5(@types/node@24.10.10)(esbuild@0.27.2)(tsx@4.21.0):
+  reflection-check@0.0.6(@types/node@24.10.10)(esbuild@0.27.2)(tsx@4.21.0):
     dependencies:
       commander: 14.0.3
       jiti: 2.7.0

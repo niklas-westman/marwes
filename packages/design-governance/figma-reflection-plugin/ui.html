@@ -37,16 +37,15 @@
     </style>
   </head>
   <body>
-    <strong>Marwes Figma Bridge</strong>
+    <strong>Marwes Reflection Frame Prep</strong>
     <p id="status">Starting...</p>
 
     <script>
-      var PORT_START = 9223
-      var PORT_END = 9232
+      var PORT_START = 9243
+      var PORT_END = 9252
       var connections = []
       var pendingRequests = {}
       var fileInfo = null
-      var variablesData = null
       var lastError = null
       var isScanning = false
 
@@ -84,7 +83,6 @@
 
       function sendCached(socket) {
         if (fileInfo) send(socket, { type: "FILE_INFO", data: fileInfo })
-        if (variablesData) send(socket, { type: "VARIABLES_DATA", data: variablesData })
         if (lastError) send(socket, { type: "ERROR", error: lastError })
       }
 
@@ -92,7 +90,7 @@
         var message
         try {
           message = JSON.parse(event.data)
-        } catch {
+        } catch (_error) {
           return
         }
 
@@ -106,25 +104,30 @@
           return
         }
 
-        if (message.method === "GET_VARIABLES_DATA") {
-          if (variablesData) {
-            send(socket, { id: message.id, result: variablesData })
-          } else {
-            send(socket, { id: message.id, error: lastError || "Variables data not ready" })
-          }
-          return
-        }
-
-        if (message.method === "REFRESH_VARIABLES") {
-          pendingRequests[message.id] = socket
-          postToPlugin({ type: "REFRESH_VARIABLES", requestId: message.id })
-          return
-        }
-
-        if (message.method === "RENAME_REFLECTION_FRAMES") {
+        if (message.method === "PREPARE_REFLECTION_FRAMES") {
           pendingRequests[message.id] = socket
           postToPlugin({
-            type: "RENAME_REFLECTION_FRAMES",
+            type: "PREPARE_REFLECTION_FRAMES",
+            requestId: message.id,
+            params: message.params || {},
+          })
+          return
+        }
+
+        if (message.method === "INSPECT_SOURCE_FRAME_REGISTRY") {
+          pendingRequests[message.id] = socket
+          postToPlugin({
+            type: "INSPECT_SOURCE_FRAME_REGISTRY",
+            requestId: message.id,
+            params: message.params || {},
+          })
+          return
+        }
+
+        if (message.method === "EXPORT_REFLECTION_FRAMES") {
+          pendingRequests[message.id] = socket
+          postToPlugin({
+            type: "EXPORT_REFLECTION_FRAMES",
             requestId: message.id,
             params: message.params || {},
           })
@@ -157,7 +160,7 @@
         socket.onclose = function () {
           clearTimeout(timeout)
           removeConnection(port)
-          if (connections.length === 0) setStatus("Waiting for sync command...")
+          if (connections.length === 0) setStatus("Waiting for prepare command...")
         }
 
         socket.onerror = function () {
@@ -188,45 +191,58 @@
           return
         }
 
-        if (message.type === "VARIABLES_DATA") {
-          variablesData = message.data
-          lastError = null
-          broadcast({ type: "VARIABLES_DATA", data: variablesData })
-          setStatus("Ready: " + variablesData.variables.length + " variables")
-          return
-        }
-
         if (message.type === "ERROR") {
-          lastError = message.error || "Unknown variable export error"
+          lastError = message.error || "Unknown Reflection frame prep error"
           broadcast({ type: "ERROR", error: lastError })
           setStatus("Error: " + lastError)
           return
         }
 
-        if (message.type === "REFRESH_VARIABLES_RESULT") {
+        if (message.type === "PREPARE_REFLECTION_FRAMES_RESULT") {
           var socket = pendingRequests[message.requestId]
           delete pendingRequests[message.requestId]
 
           if (!socket) return
           if (message.success) {
-            send(socket, { id: message.requestId, result: { success: true, data: message.data } })
+            send(socket, { id: message.requestId, result: message.data })
           } else {
-            send(socket, { id: message.requestId, error: message.error || "Refresh failed" })
+            send(socket, {
+              id: message.requestId,
+              error: message.error || "Reflection frame prep failed",
+              result: message.data,
+            })
           }
           return
         }
 
-        if (message.type === "RENAME_REFLECTION_FRAMES_RESULT") {
-          var renameSocket = pendingRequests[message.requestId]
+        if (message.type === "INSPECT_SOURCE_FRAME_REGISTRY_RESULT") {
+          var registrySocket = pendingRequests[message.requestId]
           delete pendingRequests[message.requestId]
 
-          if (!renameSocket) return
+          if (!registrySocket) return
           if (message.success) {
-            send(renameSocket, { id: message.requestId, result: message.data })
+            send(registrySocket, { id: message.requestId, result: message.data })
           } else {
-            send(renameSocket, {
+            send(registrySocket, {
               id: message.requestId,
-              error: message.error || "Reflection frame rename failed",
+              error: message.error || "Source frame registry inspection failed",
+              result: message.data,
+            })
+          }
+          return
+        }
+
+        if (message.type === "EXPORT_REFLECTION_FRAMES_RESULT") {
+          var exportSocket = pendingRequests[message.requestId]
+          delete pendingRequests[message.requestId]
+
+          if (!exportSocket) return
+          if (message.success) {
+            send(exportSocket, { id: message.requestId, result: message.data })
+          } else {
+            send(exportSocket, {
+              id: message.requestId,
+              error: message.error || "Reflection frame export failed",
               result: message.data,
             })
           }
@@ -235,10 +251,11 @@
 
         if (message.type === "STATUS") {
           setStatus(message.message)
+          broadcast({ type: "STATUS", message: message.message })
         }
       }
 
-      setStatus("Waiting for sync command...")
+      setStatus("Waiting for prepare command...")
       scan()
       setInterval(scan, 2000)
     </script>

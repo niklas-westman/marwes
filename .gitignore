@@ -57,6 +57,7 @@ pnpm-debug.log*
 
 # Local tool/state directories
 .figma/
+packages/design-governance/reflection-families/_incoming/
 .claude/
 CLAUDE.md
 .codex/

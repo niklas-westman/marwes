@@ -1,6 +1,6 @@
 figma.showUI(__html__, {
   width: 280,
-  height: 112,
+  height: 128,
   themeColors: true,
   visible: true,
 })
@@ -255,6 +255,151 @@ async function sendVariables(requestId) {
   }
 }
 
+async function resolveNodeById(nodeId) {
+  if (typeof figma.getNodeByIdAsync === "function") {
+    return await figma.getNodeByIdAsync(nodeId)
+  }
+
+  if (typeof figma.getNodeById === "function") {
+    return figma.getNodeById(nodeId)
+  }
+
+  return null
+}
+
+function readRenameEntries(params) {
+  if (!params || !Array.isArray(params.renames)) return []
+  return params.renames.filter((entry) => {
+    return entry && typeof entry.nodeId === "string" && typeof entry.name === "string"
+  })
+}
+
+async function renameReflectionFrames(params) {
+  const renames = readRenameEntries(params)
+  const dryRun = !params || params.dryRun !== false
+  // biome-ignore lint/complexity/useOptionalChain: Keep this compatible with Figma's plugin parser.
+  const force = Boolean(params && params.force)
+  // biome-ignore lint/complexity/useOptionalChain: Keep this compatible with Figma's plugin parser.
+  const expectedFileKey = params && params.fileKey ? params.fileKey : null
+
+  if (expectedFileKey && figma.fileKey && figma.fileKey !== expectedFileKey) {
+    throw new Error(`Connected file key ${figma.fileKey} does not match ${expectedFileKey}`)
+  }
+
+  if (typeof figma.loadAllPagesAsync === "function") {
+    await figma.loadAllPagesAsync()
+  }
+
+  const result = {
+    success: true,
+    dryRun: dryRun,
+    fileKey: figma.fileKey || null,
+    total: renames.length,
+    renamed: [],
+    alreadyNamed: [],
+    missing: [],
+    conflicts: [],
+    errors: [],
+  }
+
+  for (let index = 0; index < renames.length; index += 1) {
+    const entry = renames[index]
+
+    try {
+      const node = await resolveNodeById(entry.nodeId)
+      if (!node) {
+        result.missing.push({
+          nodeId: entry.nodeId,
+          requiredName: entry.name,
+        })
+        continue
+      }
+
+      const previousName = node.name
+      if (previousName === entry.name) {
+        result.alreadyNamed.push({
+          nodeId: entry.nodeId,
+          name: entry.name,
+        })
+        continue
+      }
+
+      if (
+        !force &&
+        entry.currentName &&
+        previousName.indexOf("reflection/") === 0 &&
+        previousName !== entry.name
+      ) {
+        result.conflicts.push({
+          nodeId: entry.nodeId,
+          currentName: previousName,
+          requiredName: entry.name,
+        })
+        continue
+      }
+
+      if (!dryRun) {
+        node.name = entry.name
+      }
+
+      result.renamed.push({
+        nodeId: entry.nodeId,
+        previousName: previousName,
+        name: entry.name,
+      })
+    } catch (error) {
+      result.errors.push({
+        nodeId: entry.nodeId,
+        requiredName: entry.name,
+        error: errorMessage(error),
+      })
+    }
+  }
+
+  if (result.missing.length > 0 || result.conflicts.length > 0 || result.errors.length > 0) {
+    result.success = false
+  }
+
+  return result
+}
+
+async function sendRenameReflectionFrames(requestId, params) {
+  try {
+    post({ type: "STATUS", message: "Renaming Reflection frames..." })
+    const result = await renameReflectionFrames(params || {})
+
+    post({
+      type: "RENAME_REFLECTION_FRAMES_RESULT",
+      requestId: requestId,
+      success: result.success,
+      data: result,
+    })
+
+    const changed = result.dryRun ? result.renamed.length : result.renamed.length
+    post({
+      type: "STATUS",
+      message: result.success
+        ? `${result.dryRun ? "Previewed" : "Renamed"} ${changed} Reflection frames`
+        : "Reflection frame rename needs attention",
+    })
+  } catch (error) {
+    const message = errorMessage(error)
+
+    post({
+      type: "RENAME_REFLECTION_FRAMES_RESULT",
+      requestId: requestId,
+      success: false,
+      error: message,
+    })
+
+    post({
+      type: "ERROR",
+      requestId: requestId,
+      error: message,
+    })
+  }
+}
+
 figma.ui.onmessage = (message) => {
   if (!message || !message.type) return
 
@@ -265,6 +410,11 @@ figma.ui.onmessage = (message) => {
 
   if (message.type === "REFRESH_VARIABLES") {
     sendVariables(message.requestId)
+    return
+  }
+
+  if (message.type === "RENAME_REFLECTION_FRAMES") {
+    sendRenameReflectionFrames(message.requestId, message.params)
   }
 }
 
