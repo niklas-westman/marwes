@@ -1,7 +1,7 @@
 .mw-context-menu {
   --mw-context-menu-width: 212px;
   --mw-context-menu-surface: var(--mw-color-surface-elevated, #ffffff);
-  --mw-context-menu-border: color-mix(in srgb, var(--mw-color-text) 20%, transparent);
+  --mw-context-menu-border: color-mix(in srgb, var(--mw-color-text) 15%, transparent);
   --mw-context-menu-divider: color-mix(in srgb, var(--mw-color-text) 20%, transparent);
   --mw-context-menu-text: var(--mw-color-text, #141414);
   --mw-context-menu-muted: var(--mw-color-text-muted, #595959);
@@ -16,9 +16,10 @@
   flex-direction: column;
   gap: 2px;
   padding: 6px;
-  border: 0.5px solid var(--mw-context-menu-border);
+  border: 0;
   border-radius: var(--mw-context-menu-radius);
   background: var(--mw-context-menu-surface);
+  box-shadow: inset 0 0 0 0.5px var(--mw-context-menu-border), 0 4px 16px rgb(0 0 0 / 8%);
   color: var(--mw-context-menu-text);
   font-family: var(--mw-font-primary, inherit);
 }
@@ -41,7 +42,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 12px;
-  letter-spacing: 0;
+  letter-spacing: -0.36px;
   text-align: left;
 }
 

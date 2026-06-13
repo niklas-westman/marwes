@@ -35,7 +35,7 @@ describe("badge.css figma sync contract", () => {
 
   it("seeds light-mode badge colors from semantic theme variables", () => {
     expect(css).toContain(
-      ".mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-subtle, #f5f5f5);\n  --mw-badge-border: var(--mw-color-border-low, #00000026);\n  --mw-badge-label: var(--mw-color-text-muted, #595959);\n}",
+      ".mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-primary, #ffffff);\n  --mw-badge-border: var(--mw-color-border-low, #00000026);\n  --mw-badge-label: var(--mw-color-text-muted, #595959);\n}",
     )
     expect(css).toContain(
       ".mw-badge--info {\n  --mw-badge-surface: var(--mw-color-status-info-background, #eeeeff);\n  --mw-badge-border: var(--mw-color-status-info-border, #ababfd);\n  --mw-badge-label: var(--mw-color-status-info-text, #1b1d97);\n}",
@@ -44,7 +44,7 @@ describe("badge.css figma sync contract", () => {
       ".mw-badge--success {\n  --mw-badge-surface: var(--mw-color-status-success-background, #e6f4ed);\n  --mw-badge-border: var(--mw-color-status-success-border, #90caad);\n  --mw-badge-label: var(--mw-color-status-success-text, #006633);\n}",
     )
     expect(css).toContain(
-      ".mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #fff8e6);\n  --mw-badge-border: var(--mw-color-status-warning-border, #fde08a);\n  --mw-badge-label: var(--mw-color-status-warning-text, #b45309);\n}",
+      ".mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #fff8e6);\n  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);\n  --mw-badge-label: var(--mw-color-status-warning-text, #b45309);\n}",
     )
     expect(css).toContain(
       ".mw-badge--error {\n  --mw-badge-surface: var(--mw-color-status-error-background, #ffe8eb);\n  --mw-badge-border: var(--mw-color-status-error-border, #ff8a95);\n  --mw-badge-label: var(--mw-color-status-error-text, #a8031f);\n}",
@@ -53,7 +53,7 @@ describe("badge.css figma sync contract", () => {
 
   it("seeds dark-mode badge colors from semantic theme variables", () => {
     expect(css).toContain(
-      ".mw-theme--dark .mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-subtle);\n  --mw-badge-border: var(--mw-color-border-low, #ffffff26);\n  --mw-badge-label: var(--mw-color-text-muted);\n}",
+      ".mw-theme--dark .mw-badge--neutral {\n  --mw-badge-surface: var(--mw-color-surface-primary);\n  --mw-badge-border: var(--mw-color-border-low, #ffffff26);\n  --mw-badge-label: var(--mw-color-text-muted);\n}",
     )
     expect(css).toContain(
       ".mw-theme--dark .mw-badge--info {\n  --mw-badge-surface: var(--mw-color-status-info-background, #040519);\n  --mw-badge-border: var(--mw-color-status-info-border, #8182fc);\n  --mw-badge-label: var(--mw-color-status-info-text, #ababfd);\n}",
@@ -62,7 +62,7 @@ describe("badge.css figma sync contract", () => {
       ".mw-theme--dark .mw-badge--success {\n  --mw-badge-surface: var(--mw-color-status-success-background, #001a0c);\n  --mw-badge-border: var(--mw-color-status-success-border, #5db189);\n  --mw-badge-label: var(--mw-color-status-success-text, #90caad);\n}",
     )
     expect(css).toContain(
-      ".mw-theme--dark .mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #221004);\n  --mw-badge-border: var(--mw-color-status-warning-border, #e46f00);\n  --mw-badge-label: var(--mw-color-status-warning-text, #fcc94a);\n}",
+      ".mw-theme--dark .mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #221004);\n  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);\n  --mw-badge-label: var(--mw-color-status-warning-text, #fcc94a);\n}",
     )
     expect(css).toContain(
       ".mw-theme--dark .mw-badge--error {\n  --mw-badge-surface: var(--mw-color-status-error-background, #240006);\n  --mw-badge-border: var(--mw-color-status-error-border, #ff2847);\n  --mw-badge-label: var(--mw-color-status-error-text, #ff5566);\n}",

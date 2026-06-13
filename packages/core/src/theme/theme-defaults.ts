@@ -60,7 +60,7 @@ export const lightThemeDefaults: Theme = {
         background: "#FFF8E6",
         text: "#B45309",
         icon: "#D97706",
-        border: "#FDE08A",
+        border: "#B45309",
         borderStrong: "#E46F00",
       },
       error: {
@@ -230,7 +230,7 @@ export const darkThemeDefaults: Theme = {
         background: "#221004",
         text: "#FCC94A",
         icon: "#F9B21A",
-        border: "#E46F00",
+        border: "#B45309",
         borderStrong: "#B45308",
       },
       error: {

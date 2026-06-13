@@ -82,10 +82,6 @@
    DISABLED STATE
    ============================================ */
 
-.mw-radio:checked {
-  border-color: var(--mw-color-border-brand);
-}
-
 .mw-radio:disabled,
 .mw-radio--disabled {
   cursor: not-allowed;

@@ -6,8 +6,8 @@
  *
  * Live Figma values from the synced state matrix:
  * - container: 8px radius, 24px padding, 8px gap
- * - title: 16/18, weight 500
- * - body: 14/18, weight 400
+ * - title: 16/18, weight 600, letter-spacing -0.48px
+ * - body: 16/24, weight 400, letter-spacing -0.48px
  *
  * Light mode:
  * - default border: #d8d8d8
@@ -38,9 +38,12 @@
   padding: 24px;
   box-sizing: border-box;
   background: var(--mw-card-surface);
-  border: 1px solid var(--mw-card-border);
+  border: 0;
   border-radius: var(--mw-card-radius);
-  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  box-shadow: inset 0 0 0 1px var(--mw-card-border);
+  transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
 }
 
 .mw-card__header {
@@ -53,8 +56,9 @@
   color: var(--mw-card-title);
   font-family: var(--mw-font-primary, inherit);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 18px;
+  letter-spacing: -0.48px;
 }
 
 .mw-card__body {
@@ -62,9 +66,10 @@
   margin: 0;
   color: var(--mw-card-body);
   font-family: var(--mw-font-primary, inherit);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 24px;
+  letter-spacing: -0.48px;
 }
 
 .mw-card:hover,
@@ -103,7 +108,7 @@
 }
 
 .mw-theme--dark .mw-card {
-  --mw-card-surface: var(--mw-color-surface, #474747);
+  --mw-card-surface: var(--mw-color-surface-elevated, #2b2b2b);
   --mw-card-border: var(--mw-color-border-low, #474747);
   --mw-card-title: var(--mw-color-text, #f9fafb);
   --mw-card-body: var(--mw-color-text-muted, #a3a3a3);

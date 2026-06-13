@@ -65,7 +65,7 @@ const fixture: ResolvedTheme = {
         background: "#FFF8E6",
         text: "#B45309",
         icon: "#D97706",
-        border: "#FDE08A",
+        border: "#B45309",
         borderStrong: "#E46F00",
       },
       error: {
@@ -287,6 +287,7 @@ describe("themeToCSSVars — status tokens", () => {
   it("emits status role surfaces and readable text tokens", () => {
     expect(themeToCSSVars(fixture)["--mw-color-status-warning-background"]).toBe("#FFF8E6")
     expect(themeToCSSVars(fixture)["--mw-color-status-warning-text"]).toBe("#B45309")
+    expect(themeToCSSVars(fixture)["--mw-color-status-warning-border"]).toBe("#B45309")
     expect(themeToCSSVars(fixture)["--mw-color-status-error-text"]).toBe("#A8031F")
     expect(themeToCSSVars(fixture)["--mw-color-status-info-border"]).toBe("#ABABFD")
     expect(themeToCSSVars(fixture)["--mw-color-status-info-border-strong"]).toBe("#5859FC")
