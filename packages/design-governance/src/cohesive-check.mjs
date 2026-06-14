@@ -502,8 +502,9 @@ function printReport(report) {
   if (warnings.length > 0) {
     console.log(`WARNING: cohesive:check passed with ${warnings.length} warning(s).`)
     console.log("These warnings are non-blocking in authoring mode.")
+    console.log("Run with --require-baseline-receipts to fail missing or stale baseline receipts.")
     console.log(
-      "Run with --require-baseline-receipts or --require-figma-frames to make matching warnings fail.",
+      "Run with --require-figma-frames to fail generated Figma frame provenance warnings.",
     )
     console.log("")
 
