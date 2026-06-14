@@ -33,15 +33,15 @@
 
 .mw-tooltip-group {
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   gap: var(--mw-spacing-sp-4);
 }
 
 .mw-tooltip-group__trigger {
   display: inline-flex;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -64,8 +64,8 @@
 }
 
 .mw-tooltip-group__trigger svg {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
 }
 
 @keyframes mw-tooltip-enter {

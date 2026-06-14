@@ -10,17 +10,21 @@
     DestructiveButton,
     Divider,
     InputField,
+    InputOtp,
     MarwesProvider,
     OptionRadioGroup,
     PrimaryButton,
     Radio,
     SecondaryButton,
+    Select,
     SegmentedControl,
     Slider,
     SwitchField,
     Text,
     TextButton,
+    TextareaField,
     ThemeMode,
+    TooltipGroup,
   } from "@marwes-ui/svelte";
   import { IconName } from "@marwes-ui/core";
   import type { ContextMenuEntry } from "@marwes-ui/core";
@@ -43,6 +47,7 @@
     { value: "two", label: "Label" },
     { value: "three", label: "Label" },
   ];
+  const selectOptions = [{ value: "option", label: "Option" }];
 
   const contextMenuItems: ContextMenuEntry[] = [
     { value: "edit", label: "Edit", icon: IconName.Edit },
@@ -131,6 +136,13 @@
         input={{ placeholder: "Enter text" }}
       />
     </div>
+  {:else if path === "/reflection/input-otp/default/light" || path === "/reflection/input-otp/default/dark"}
+    <InputOtp
+      id="reflection-input-otp"
+      label="Verification code"
+      helperText="Enter the 6-digit code sent to your email"
+      placeholderCharacter="·"
+    />
   {:else if path === "/reflection/radio/states-default/light" || path === "/reflection/radio/states-default/dark"}
     <div style="display: flex; align-items: center; gap: 24px">
       <label style="display: inline-flex; height: 32px; align-items: center; gap: 8px">
@@ -171,5 +183,19 @@
       <SwitchField label="Label" switch={{ checked: true }} />
       <SwitchField label="Label" switch={{}} />
     </div>
+  {:else if path === "/reflection/select/default/light" || path === "/reflection/select/default/dark"}
+    <Select ariaLabel="Option" value="option" options={selectOptions} native={false} />
+  {:else if path === "/reflection/textarea/default/light" || path === "/reflection/textarea/default/dark"}
+    <div style="width: 288px">
+      <TextareaField
+        id="reflection-textarea"
+        label="Label"
+        helperText="Hint text"
+        counterText="0/100"
+        textarea={{ placeholder: "Enter message..." }}
+      />
+    </div>
+  {:else if path === "/reflection/tooltip/with-help-icon/light" || path === "/reflection/tooltip/with-help-icon/dark"}
+    <TooltipGroup open={true} content="Tooltip text" triggerLabel="Show tooltip" />
   {/if}
 </MarwesProvider>

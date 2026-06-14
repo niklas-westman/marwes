@@ -23,6 +23,22 @@ describe("firstEdition select css contract", () => {
     )
   })
 
+  it("keeps the standalone atom on the compact 32px Figma frame", () => {
+    const css = readFileSync(selectCssPath, "utf8")
+
+    expect(css).toContain("height: 32px;")
+    expect(css).toContain("min-height: 32px;")
+    expect(css).toContain(
+      "padding: 0 calc(var(--mw-spacing-sp-12) + 16px + var(--mw-spacing-sp-4)) 0",
+    )
+    expect(css).toContain("right: var(--mw-spacing-sp-12);")
+    expect(css).toContain("width: 16px;")
+    expect(css).toContain("height: 16px;")
+    expect(css).not.toContain(
+      ".mw-theme--dark .mw-select {\n  background-color: var(--mw-color-surface-elevated);",
+    )
+  })
+
   it("maps the custom dropdown state to named Marwes dropdown tokens", () => {
     const css = readFileSync(selectCssPath, "utf8")
 

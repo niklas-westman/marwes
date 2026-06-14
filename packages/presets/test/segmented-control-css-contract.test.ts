@@ -24,6 +24,15 @@ describe("firstEdition segmented-control css contract", () => {
     expect(css).not.toContain(".mw-segmented-control__item > *")
   })
 
+  it("keeps item typography aligned with the Figma baseline rendering", () => {
+    const css = readFileSync(segmentedControlCssPath, "utf8")
+    const itemBlock = css.match(/\.mw-segmented-control__item\s*\{[^}]+\}/)?.[0]
+
+    expect(itemBlock).toContain("font-weight: 400;")
+    expect(itemBlock).toContain("letter-spacing: 0;")
+    expect(itemBlock).not.toContain("letter-spacing: -")
+  })
+
   it("keeps inverse track borders on the neutral border token", () => {
     const css = readFileSync(segmentedControlCssPath, "utf8")
     const inverseBlock = css.match(/\.mw-segmented-control--inverse\s*\{[^}]+\}/)?.[0]

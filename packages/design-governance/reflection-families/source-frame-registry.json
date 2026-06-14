@@ -123,6 +123,16 @@
         "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-5944"
       }
     },
+    "input-otp": {
+      "light": {
+        "sourceFrameId": "1803:15024",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15024"
+      },
+      "dark": {
+        "sourceFrameId": "1803:15155",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15155"
+      }
+    },
     "input-types-overview": {
       "light": {
         "sourceFrameId": "1364:11817",
@@ -163,6 +173,16 @@
         "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2702-10336"
       }
     },
+    "select": {
+      "light": {
+        "sourceFrameId": "1364:11817",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1364-11817"
+      },
+      "dark": {
+        "sourceFrameId": "1368:6014",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-6014"
+      }
+    },
     "slider": {
       "light": {
         "sourceFrameId": "2462:11678",
@@ -173,6 +193,16 @@
         "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2464-13677"
       }
     },
+    "textarea": {
+      "light": {
+        "sourceFrameId": "1364:11817",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1364-11817"
+      },
+      "dark": {
+        "sourceFrameId": "1368:6014",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-6014"
+      }
+    },
     "switch": {
       "light": {
         "sourceFrameId": "1364:11442",
@@ -181,6 +211,16 @@
       "dark": {
         "sourceFrameId": "1369:4001",
         "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1369-4001"
+      }
+    },
+    "tooltip": {
+      "light": {
+        "sourceFrameId": "1574:21179",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-21179"
+      },
+      "dark": {
+        "sourceFrameId": "1574:21235",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-21235"
       }
     }
   }

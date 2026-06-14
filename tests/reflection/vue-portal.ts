@@ -11,15 +11,19 @@ import {
   Dialog,
   Divider,
   InputField,
+  InputOtp,
   PrimaryButton,
   Radio,
   RadioGroupField,
   SecondaryButton,
   SegmentedControl,
+  Select,
   Slider,
   SwitchField,
   Text,
   TextButton,
+  TextareaField,
+  TooltipGroup,
 } from "@marwes-ui/vue"
 import { MarwesProvider, ThemeMode } from "@marwes-ui/vue"
 import type { ReflectionPortalMountInput } from "reflection-check"
@@ -45,6 +49,7 @@ const segmentedControlItems = [
   { value: "two", label: "Label" },
   { value: "three", label: "Label" },
 ]
+const selectOptions = [{ value: "option", label: "Option" }]
 
 const contextMenuItems: ContextMenuEntry[] = [
   { value: "edit", label: "Edit", icon: IconName.Edit },
@@ -136,6 +141,44 @@ function renderInputField(width: number) {
       input: { placeholder: "Enter text" },
     }),
   ])
+}
+
+function renderInputOtp() {
+  return h(InputOtp, {
+    id: "reflection-input-otp",
+    label: "Verification code",
+    helperText: "Enter the 6-digit code sent to your email",
+    placeholderCharacter: "·",
+  })
+}
+
+function renderSelect() {
+  return h(Select, {
+    ariaLabel: "Option",
+    defaultValue: "option",
+    options: selectOptions,
+    native: false,
+  })
+}
+
+function renderTextarea() {
+  return h("div", { style: { width: "288px" } }, [
+    h(TextareaField, {
+      id: "reflection-textarea",
+      label: "Label",
+      helperText: "Hint text",
+      counterText: "0/100",
+      textarea: { placeholder: "Enter message..." },
+    }),
+  ])
+}
+
+function renderTooltipGroup() {
+  return h(TooltipGroup, {
+    open: true,
+    content: "Tooltip text",
+    triggerLabel: "Show tooltip",
+  })
 }
 
 function renderSlider(value: number) {
@@ -279,6 +322,12 @@ const portalCases: Record<string, PortalCase> = {
   "/reflection/input-types-overview/text/dark": {
     render: () => renderInputField(288),
   },
+  "/reflection/input-otp/default/light": {
+    render: renderInputOtp,
+  },
+  "/reflection/input-otp/default/dark": {
+    render: renderInputOtp,
+  },
   "/reflection/radio/states-default/light": {
     render: renderRadioStates,
   },
@@ -309,6 +358,24 @@ const portalCases: Record<string, PortalCase> = {
   "/reflection/switch/states-default/dark": {
     render: renderSwitchStates,
   },
+  "/reflection/select/default/light": {
+    render: renderSelect,
+  },
+  "/reflection/select/default/dark": {
+    render: renderSelect,
+  },
+  "/reflection/textarea/default/light": {
+    render: renderTextarea,
+  },
+  "/reflection/textarea/default/dark": {
+    render: renderTextarea,
+  },
+  "/reflection/tooltip/with-help-icon/light": {
+    render: renderTooltipGroup,
+  },
+  "/reflection/tooltip/with-help-icon/dark": {
+    render: renderTooltipGroup,
+  },
 }
 
 const nextFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
@@ -319,7 +386,7 @@ async function waitForMarwesTheme(root: HTMLElement) {
 
     const themeRoot = root.querySelector("[data-marwes-theme]")
     const component = root.querySelector(
-      ".mw-btn, .mw-badge, .mw-accordion, .mw-card, .mw-checkbox-field, .mw-context-menu, .mw-dialog, .mw-divider, .mw-input-field, .mw-radio, .mw-radio-group-field, .mw-segmented-control, .mw-slider, .mw-switch-field",
+      ".mw-btn, .mw-badge, .mw-accordion, .mw-card, .mw-checkbox-field, .mw-context-menu, .mw-dialog, .mw-divider, .mw-input-field, .mw-input-otp, .mw-radio, .mw-radio-group-field, .mw-segmented-control, .mw-select, .mw-slider, .mw-switch-field, .mw-tooltip-group",
     )
     const primaryColor = themeRoot
       ? getComputedStyle(themeRoot).getPropertyValue("--mw-color-primary-base").trim()

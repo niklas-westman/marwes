@@ -14,6 +14,12 @@ const allFamilies = args.includes("--all")
 const family = readOption("--family")
 const requireFigmaFrames = args.includes("--require-figma-frames")
 const requireBaselineReceipts = args.includes("--require-baseline-receipts")
+const requireComplete = args.includes("--complete")
+const portalEntries = {
+  react: "tests/reflection/react-portal.tsx",
+  vue: "tests/reflection/vue-portal.ts",
+  svelte: "tests/reflection/svelte-portal-case.svelte",
+}
 
 function readOption(name) {
   const index = args.indexOf(name)
@@ -30,6 +36,7 @@ function usage() {
     "Options:",
     "  --require-baseline-receipts  Fail when baseline PNG receipt sidecars are missing or stale.",
     "  --require-figma-frames       Fail when Reflection Baselines frame node ids are missing.",
+    "  --complete                   Fail when registered/prepared families are not fully wired through React, Vue, and Svelte portals.",
     "  --json                       Print JSON.",
   ].join("\n")
 }
@@ -224,6 +231,57 @@ function listReflectionContracts() {
     })
     .filter(Boolean)
     .sort((left, right) => left.family.localeCompare(right.family))
+}
+
+function readSourceFrameRegistry() {
+  const path = `${reflectionFamiliesRoot}/source-frame-registry.json`
+  if (!pathExists(path)) return {}
+
+  return readJson(path).families ?? {}
+}
+
+function listFramePrepFamilies() {
+  if (!pathExists(reflectionFamiliesRoot)) return []
+
+  return readdirSync(absolute(reflectionFamiliesRoot), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => pathExists(`${reflectionFamiliesRoot}/${entry.name}/frame-prep.json`))
+    .map((entry) => entry.name)
+    .sort((left, right) => left.localeCompare(right))
+}
+
+function selectedFamilyNamesForCompleteness(contracts) {
+  if (family) return [family]
+
+  const registryFamilies = Object.keys(readSourceFrameRegistry())
+  const framePrepFamilies = listFramePrepFamilies()
+  const contractFamilies = contracts.map((entry) => entry.family)
+
+  return [...new Set([...registryFamilies, ...framePrepFamilies, ...contractFamilies])].sort(
+    (left, right) => left.localeCompare(right),
+  )
+}
+
+function loadPortalSources() {
+  return Object.fromEntries(
+    Object.entries(portalEntries).map(([adapter, path]) => [
+      adapter,
+      pathExists(path) ? readFileSync(absolute(path), "utf8") : "",
+    ]),
+  )
+}
+
+function findContractEntryForFamily(familyName, contractsByFamily, contracts) {
+  const exactMatch = contractsByFamily.get(familyName)
+  if (exactMatch) return exactMatch
+
+  return contracts.find((entry) =>
+    (entry.contract.cases ?? []).some(
+      (caseEntry) =>
+        caseEntry.caseId?.startsWith(`${familyName}.`) ||
+        caseEntry.portalPath?.startsWith(`/reflection/${familyName}/`),
+    ),
+  )
 }
 
 function selectContracts(contracts) {
@@ -459,6 +517,87 @@ function validateCase({
   return checks
 }
 
+function validateFamilyCompleteness({
+  familyName,
+  registryFamilies,
+  framePrepFamilies,
+  contractsByFamily,
+  portalSources,
+}) {
+  const checks = []
+  const hasRegistryEntry = Boolean(registryFamilies[familyName])
+  const hasFramePrep = framePrepFamilies.has(familyName)
+  const contractEntry = findContractEntryForFamily(familyName, contractsByFamily, [
+    ...contractsByFamily.values(),
+  ])
+  const hasPrepOrContract = hasFramePrep || Boolean(contractEntry)
+
+  checks.push(
+    createCheck(
+      `${familyName} complete source registry`,
+      hasRegistryEntry ? "pass" : "fail",
+      hasRegistryEntry
+        ? [`registered source modes: ${Object.keys(registryFamilies[familyName]).join(", ")}`]
+        : [`missing ${reflectionFamiliesRoot}/source-frame-registry.json entry`],
+    ),
+  )
+
+  checks.push(
+    createCheck(
+      `${familyName} complete frame prep`,
+      hasPrepOrContract ? "pass" : "fail",
+      hasFramePrep
+        ? [`${reflectionFamiliesRoot}/${familyName}/frame-prep.json`]
+        : contractEntry
+          ? ["already promoted to reflection contract"]
+          : [`missing ${reflectionFamiliesRoot}/${familyName}/frame-prep.json`],
+    ),
+  )
+
+  checks.push(
+    createCheck(
+      `${familyName} complete reflection contract`,
+      contractEntry ? "pass" : "fail",
+      contractEntry
+        ? [
+            contractEntry.family === familyName
+              ? `${reflectionFamiliesRoot}/${familyName}/reflection-contract.json`
+              : `covered by ${reflectionFamiliesRoot}/${contractEntry.family}/reflection-contract.json`,
+          ]
+        : [`missing ${reflectionFamiliesRoot}/${familyName}/reflection-contract.json`],
+    ),
+  )
+
+  if (!contractEntry) return checks
+
+  const missingPortalPaths = []
+  const relevantCases = (contractEntry.contract.cases ?? []).filter(
+    (caseEntry) =>
+      contractEntry.family === familyName ||
+      caseEntry.caseId?.startsWith(`${familyName}.`) ||
+      caseEntry.portalPath?.startsWith(`/reflection/${familyName}/`),
+  )
+  for (const caseEntry of relevantCases) {
+    for (const [adapter, source] of Object.entries(portalSources)) {
+      if (!source.includes(caseEntry.portalPath)) {
+        missingPortalPaths.push(`${adapter}: ${caseEntry.portalPath}`)
+      }
+    }
+  }
+
+  checks.push(
+    createCheck(
+      `${familyName} complete adapter portals`,
+      missingPortalPaths.length === 0 ? "pass" : "fail",
+      missingPortalPaths.length === 0
+        ? [`${relevantCases.length} case(s) wired in React, Vue, and Svelte`]
+        : missingPortalPaths.map((path) => `missing portal case: ${path}`),
+    ),
+  )
+
+  return checks
+}
+
 function hasFailures(checks) {
   return checks.some((check) => check.status === "fail")
 }
@@ -536,7 +675,7 @@ function main() {
   const { source: variableSource, map: variableMap } = loadVariableMap(variableMapPath)
   const selectedContracts = selectContracts(listReflectionContracts())
 
-  if (selectedContracts.length === 0) {
+  if (selectedContracts.length === 0 && !(requireComplete && family)) {
     throw new Error(
       family ? `Unknown reflection family: ${family}` : "No reflection families found",
     )
@@ -561,13 +700,43 @@ function main() {
             variableSource,
           },
           requireFrames: requireFigmaFrames,
-          requireReceipts: requireBaselineReceipts,
+          requireReceipts: requireBaselineReceipts || requireComplete,
         }),
       ),
     ]
 
     return { family: familyName, checks }
   })
+
+  if (requireComplete) {
+    const contractsByFamily = new Map(
+      listReflectionContracts().map((entry) => [entry.family, entry]),
+    )
+    const familyReportsByName = new Map(
+      families.map((familyReport) => [familyReport.family, familyReport]),
+    )
+    const registryFamilies = readSourceFrameRegistry()
+    const framePrepFamilies = new Set(listFramePrepFamilies())
+    const portalSources = loadPortalSources()
+
+    for (const familyName of selectedFamilyNamesForCompleteness(listReflectionContracts())) {
+      const completenessChecks = validateFamilyCompleteness({
+        familyName,
+        registryFamilies,
+        framePrepFamilies,
+        contractsByFamily,
+        portalSources,
+      })
+      const familyReport = familyReportsByName.get(familyName)
+      if (familyReport) {
+        familyReport.checks.push(...completenessChecks)
+      } else {
+        const newFamilyReport = { family: familyName, checks: completenessChecks }
+        families.push(newFamilyReport)
+        familyReportsByName.set(familyName, newFamilyReport)
+      }
+    }
+  }
 
   const checks = families.flatMap((item) => item.checks)
   const report = {

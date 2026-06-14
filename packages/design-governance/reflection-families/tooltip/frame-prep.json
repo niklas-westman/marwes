@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "family": "tooltip",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "outputPage": "Reflection Baselines",
+  "cases": [
+    {
+      "caseId": "tooltip.with-help-icon",
+      "viewport": "tooltip-with-help-icon",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "selector": {
+        "strategy": "rowChild",
+        "rowName": "Row/With help icon",
+        "rowOccurrence": 0,
+        "childName": "Tooltip group",
+        "childOccurrence": 0
+      },
+      "modes": {
+        "light": {
+          "sourceFrameId": "1574:21179",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-21179",
+          "outputFrameName": "reflection/tooltip/with-help-icon/light",
+          "framing": {
+            "background": "#ffffff",
+            "align": "center",
+            "padding": 0
+          }
+        },
+        "dark": {
+          "sourceFrameId": "1574:21235",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-21235",
+          "outputFrameName": "reflection/tooltip/with-help-icon/dark",
+          "framing": {
+            "background": "#0f0f0f",
+            "align": "center",
+            "padding": 0
+          }
+        }
+      }
+    }
+  ]
+}

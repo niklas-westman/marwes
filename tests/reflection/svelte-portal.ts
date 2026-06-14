@@ -31,6 +31,8 @@ const portalPaths = new Set([
   "/reflection/divider/sp-16/dark",
   "/reflection/input-fields/default/light",
   "/reflection/input-fields/default/dark",
+  "/reflection/input-otp/default/light",
+  "/reflection/input-otp/default/dark",
   "/reflection/input-types-overview/text/light",
   "/reflection/input-types-overview/text/dark",
   "/reflection/radio/states-default/light",
@@ -39,10 +41,16 @@ const portalPaths = new Set([
   "/reflection/radio-group/default/dark",
   "/reflection/segmented-control/three-segments/light",
   "/reflection/segmented-control/three-segments/dark",
+  "/reflection/select/default/light",
+  "/reflection/select/default/dark",
   "/reflection/slider/default/light",
   "/reflection/slider/default/dark",
   "/reflection/switch/states-default/light",
   "/reflection/switch/states-default/dark",
+  "/reflection/textarea/default/light",
+  "/reflection/textarea/default/dark",
+  "/reflection/tooltip/with-help-icon/light",
+  "/reflection/tooltip/with-help-icon/dark",
 ])
 
 const nextFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
@@ -53,7 +61,7 @@ async function waitForMarwesTheme(root: HTMLElement) {
 
     const themeRoot = root.querySelector("[data-marwes-theme]")
     const component = root.querySelector(
-      ".mw-btn, .mw-badge, .mw-accordion, .mw-card, .mw-checkbox-field, .mw-context-menu, .mw-dialog, .mw-divider, .mw-input-field, .mw-radio, .mw-radio-group-field, .mw-segmented-control, .mw-slider, .mw-switch-field",
+      ".mw-btn, .mw-badge, .mw-accordion, .mw-card, .mw-checkbox-field, .mw-context-menu, .mw-dialog, .mw-divider, .mw-input-field, .mw-input-otp, .mw-radio, .mw-radio-group-field, .mw-segmented-control, .mw-select, .mw-slider, .mw-switch-field, .mw-tooltip-group",
     )
     const primaryColor = themeRoot
       ? getComputedStyle(themeRoot).getPropertyValue("--mw-color-primary-base").trim()

@@ -247,6 +247,16 @@ committed. It intentionally does not require generated Figma frame ids. Use
 `pnpm cohesive:ci:strict` only for a provenance audit where every active case
 has stable top-level generated frame ids.
 
+When a Reflection batch should be considered fully promoted across adapters,
+run:
+
+```bash
+pnpm cohesive:check:complete
+```
+
+That gate fails if registered or prepared families are not yet promoted into
+contracts, baseline receipts, and React/Vue/Svelte portal render cases.
+
 ## Commands
 
 Sync the current configured Figma target:

@@ -8,6 +8,7 @@ export type TextareaFieldProps = {
   id?: string
   label: string
   helperText?: string
+  counterText?: string
   error?: string
   textarea: TextareaProps
   ariaDescribedBy?: string
@@ -26,6 +27,7 @@ export function TextareaField(props: TextareaFieldProps): React.ReactElement {
   const id = props.id ?? `mw-textarea-${reactId}`
 
   const hasHelperText = hasTextContent(props.helperText)
+  const hasCounterText = hasTextContent(props.counterText)
   const hasError = hasTextContent(props.error)
 
   const {
@@ -71,9 +73,21 @@ export function TextareaField(props: TextareaFieldProps): React.ReactElement {
         <Textarea {...textareaProps} />
       </div>
 
-      {hasHelperText && !hasError && (
-        <div className="mw-input-field__helper" id={helperTextId}>
-          <Text variant="caption">{props.helperText}</Text>
+      {(hasHelperText || hasCounterText) && !hasError && (
+        <div className="mw-input-field__meta">
+          {hasHelperText ? (
+            <div className="mw-input-field__helper" id={helperTextId}>
+              <Text variant="caption">{props.helperText}</Text>
+            </div>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+
+          {hasCounterText && (
+            <div className="mw-input-field__counter">
+              <Text variant="caption">{props.counterText}</Text>
+            </div>
+          )}
         </div>
       )}
 

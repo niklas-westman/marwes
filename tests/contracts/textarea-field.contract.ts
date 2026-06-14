@@ -8,6 +8,7 @@ export type TextareaFieldContractHarness = {
   renderTextareaField(args: {
     label: string
     helperText?: string
+    counterText?: string
     error?: string
     ariaDescribedBy?: string
   }): Promise<void> | void
@@ -48,6 +49,25 @@ export function runTextareaFieldContract(
       expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
       expect(helperTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(textarea).not.toHaveAttribute("aria-invalid", "true")
+    })
+
+    it("renders optional counter text outside the textarea description", async () => {
+      await h.renderTextareaField({
+        label: "Message",
+        helperText: "Keep it concise",
+        counterText: "0/100",
+      })
+
+      const textarea = h.getByLabelText(/message/i)
+      const helper = h.queryHelperRegion()
+      const describedBy = textarea.getAttribute("aria-describedby") ?? ""
+      const counterTextNode = h.getByText("0/100")
+
+      expect(counterTextNode).toBeInTheDocument()
+      expect(counterTextNode).toHaveClass("mw-text", "mw-text--caption")
+      expect(helper?.id).toBeTruthy()
+      expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
+      expect(describedBy).not.toContain("0/100")
     })
 
     it("marks invalid and links error text", async () => {

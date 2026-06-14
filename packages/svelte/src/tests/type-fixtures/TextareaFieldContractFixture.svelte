@@ -7,6 +7,7 @@
     id,
     label,
     helperText,
+    counterText,
     error,
     textarea,
     ariaDescribedBy,
@@ -20,6 +21,7 @@
     {id}
     {label}
     {helperText}
+    {counterText}
     {error}
     {textarea}
     {ariaDescribedBy}

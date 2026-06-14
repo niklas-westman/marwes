@@ -27,7 +27,7 @@
   height: 18px;
   border-radius: 50%;
   margin: 0;
-  border: 1.5px solid var(--mw-radio-border);
+  border: 1px solid var(--mw-radio-border);
   background: var(--mw-radio-surface);
 
   cursor: pointer;
@@ -53,7 +53,7 @@
    ============================================ */
 
 .mw-radio:checked {
-  border-color: var(--mw-color-border-brand);
+  border-color: var(--mw-radio-border);
   background: var(--mw-radio-surface);
 }
 
@@ -67,6 +67,10 @@
 
 .mw-radio:hover:not(:disabled) {
   border-color: var(--mw-color-border-strong);
+}
+
+.mw-radio:active:not(:disabled) {
+  border-color: var(--mw-color-border-brand);
 }
 
 /* ============================================

@@ -13,6 +13,7 @@ Reflection visual checks.
 | Validate runtime token mapping only | `pnpm design:validate:runtime -- --family badge` | Checks whether preset/theme CSS exposes the variables implied by Figma. |
 | Check Reflection/Figma static contract | `pnpm cohesive:check -- --family badge` | Checks contract shape, source node, bound tokens, baseline PNG dimensions, receipt sidecar, and comparison policy. |
 | Check all Reflection/Figma contracts | `pnpm cohesive:check:all` | Runs cohesive static checks for every reflection family. |
+| Check complete adapter promotion | `pnpm cohesive:check:complete` | Fails if registered/prepared Reflection families are not fully promoted into contracts, receipts, and React/Vue/Svelte portal cases. |
 | Prepare generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --connect --dry-run --replace --accept-any-file` | Validates source selectors and previews generated `reflection/*` frames in the open Figma file. |
 | Write generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file` | Creates or replaces plugin-managed baseline frames near their source catalog page. |
 | Export generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines` | Exports generated frame ids into package-owned PNG baselines and receipt sidecars. |
@@ -239,6 +240,17 @@ pnpm cohesive:check -- --all --require-baseline-receipts
 Same as `cohesive:check:all`, but receipt sidecars and Figma frame provenance
 warnings become failures. Use this only when every active contract has real
 top-level Figma frame ids and names.
+
+### `pnpm cohesive:check:complete`
+
+Use this as the promotion gate when a batch should be considered fully wired.
+It requires baseline receipts and also checks that registered or prepared
+families have reflection contracts and that every contract `portalPath` exists
+in the React, Vue, and Svelte Reflection portal implementations.
+
+This is stricter than authoring mode. It should fail while a family only has
+source registry or `frame-prep.json` data and has not yet been promoted into
+baselines, contracts, and adapter portal render cases.
 
 ### `pnpm reflection:doctor`
 

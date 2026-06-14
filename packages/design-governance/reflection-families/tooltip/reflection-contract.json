@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "family": "tooltip",
+  "baselineRoot": "packages/design-governance/reflection-families/tooltip/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "tooltip.with-help-icon",
+      "mode": "light",
+      "figmaNodeId": "5070:45371",
+      "figmaFrameName": "reflection/tooltip/with-help-icon/light",
+      "exportScale": 1,
+      "viewport": "tooltip-with-help-icon",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "with-help-icon.chromium-linux.light.png",
+      "portalPath": "/reflection/tooltip/with-help-icon/light",
+      "source": {
+        "sourceFrameId": "1574:21179",
+        "componentNodeId": "1574:21185",
+        "componentName": "Tooltip group",
+        "componentBounds": {
+          "width": 87,
+          "height": 48
+        },
+        "requiredBoundTokens": [
+          "Bottom",
+          "Left",
+          "Right",
+          "icon/default",
+          "icon/size",
+          "sp-12",
+          "sp-4",
+          "sp-8",
+          "tooltip/label",
+          "tooltip/surface"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 800,
+          "maxDiffPixelRatio": 0.0094
+        },
+        "strict": true,
+        "toleranceReason": "Initial Figma export contract for tooltip group. Allows small icon/text and tooltip-surface antialiasing drift after source node, variables, receipt, and frame dimensions pass."
+      }
+    },
+    {
+      "caseId": "tooltip.with-help-icon",
+      "mode": "dark",
+      "figmaNodeId": "5070:45382",
+      "figmaFrameName": "reflection/tooltip/with-help-icon/dark",
+      "exportScale": 1,
+      "viewport": "tooltip-with-help-icon",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "with-help-icon.chromium-linux.dark.png",
+      "portalPath": "/reflection/tooltip/with-help-icon/dark",
+      "source": {
+        "sourceFrameId": "1574:21235",
+        "componentNodeId": "1574:21245",
+        "componentName": "Tooltip group",
+        "componentBounds": {
+          "width": 87,
+          "height": 48
+        },
+        "requiredBoundTokens": [
+          "Bottom",
+          "Left",
+          "Right",
+          "icon/default",
+          "icon/size",
+          "sp-12",
+          "sp-4",
+          "sp-8",
+          "tooltip/label",
+          "tooltip/surface"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 800,
+          "maxDiffPixelRatio": 0.0094
+        },
+        "strict": true,
+        "toleranceReason": "Initial Figma export contract for tooltip group. Allows small icon/text and tooltip-surface antialiasing drift after source node, variables, receipt, and frame dimensions pass."
+      }
+    }
+  ]
+}

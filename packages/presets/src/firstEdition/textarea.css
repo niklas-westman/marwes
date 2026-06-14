@@ -5,7 +5,7 @@
 
 .mw-textarea {
   box-sizing: border-box;
-  min-height: calc(var(--mw-density-height) * 3);
+  min-height: 100px;
   padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
@@ -16,8 +16,8 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  line-height: 1.5;
-  resize: var(--mw-textarea-resize, vertical);
+  line-height: 16px;
+  resize: var(--mw-textarea-resize, none);
   transition: border-color 150ms ease, outline 150ms ease;
 }
 

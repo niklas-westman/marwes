@@ -80,9 +80,9 @@
   color: var(--mw-sc-item-inactive-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-sc-font-size);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 16px;
-  letter-spacing: -0.42px;
+  letter-spacing: 0;
   white-space: nowrap;
   border: none;
   border-radius: var(--mw-sc-item-radius);

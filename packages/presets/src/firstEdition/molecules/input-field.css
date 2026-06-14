@@ -223,12 +223,31 @@
   color: var(--mw-color-text-muted, #595959);
 }
 
+.mw-input-field__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mw-spacing-sp-8);
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-input-field__meta .mw-input-field__helper,
+.mw-input-field__meta .mw-input-field__counter {
+  min-width: 0;
+}
+
+.mw-input-field__counter {
+  flex-shrink: 0;
+  color: var(--mw-color-text-muted, #595959);
+}
+
 .mw-input-field__error {
   color: var(--mw-color-status-error-text, #d90429);
 }
 
 .mw-input-field__label .mw-text,
 .mw-input-field__helper .mw-text,
+.mw-input-field__counter .mw-text,
 .mw-input-field__error .mw-text {
   color: inherit;
 }

@@ -31,6 +31,17 @@ describe("firstEdition slider css contract", () => {
     expect(css).not.toContain(".mw-slider--state-focus .mw-slider__tooltip")
   })
 
+  it("maps the default track to the Figma slider/track token alias", () => {
+    const css = readFileSync(sliderCssPath, "utf8")
+    const rootBlock = css.match(/\.mw-slider\s*\{[^}]+\}/)?.[0]
+    const darkBlock = css.match(/\.mw-theme--dark \.mw-slider\s*\{[^}]+\}/)?.[0]
+
+    expect(rootBlock).toContain("--mw-slider-track-background: var(")
+    expect(rootBlock).toContain("--mw-color-border-subtle,")
+    expect(darkBlock).toContain("--mw-slider-track-background: var(")
+    expect(darkBlock).toContain("--mw-color-border-subtle,")
+  })
+
   it("targets text typography classes for slider field labels, descriptions, edge values, and errors", () => {
     const css = readFileSync(sliderFieldCssPath, "utf8")
 

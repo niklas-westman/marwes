@@ -45,6 +45,7 @@
     "design:check": "pnpm --filter @marwes-ui/design-governance check",
     "cohesive:check": "pnpm --filter @marwes-ui/design-governance cohesive-check",
     "cohesive:check:all": "pnpm --filter @marwes-ui/design-governance cohesive-check -- --all",
+    "cohesive:check:complete": "pnpm --filter @marwes-ui/design-governance cohesive-check -- --all --complete --require-baseline-receipts",
     "cohesive:check:strict": "pnpm --filter @marwes-ui/design-governance cohesive-check -- --all --require-baseline-receipts --require-figma-frames",
     "cohesive:ci": "node scripts/reflection/ci.mjs",
     "cohesive:ci:strict": "node scripts/reflection/ci.mjs --strict",

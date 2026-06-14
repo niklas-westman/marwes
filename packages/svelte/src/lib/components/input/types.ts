@@ -109,6 +109,7 @@ export interface TextareaFieldProps {
   id?: string
   label: string
   helperText?: string
+  counterText?: string
   error?: string
   textarea?: Omit<TextareaProps, "value">
   ariaDescribedBy?: string

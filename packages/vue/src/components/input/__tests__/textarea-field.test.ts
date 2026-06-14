@@ -23,6 +23,7 @@ runTextareaFieldContract("vue", {
     const props = {
       label: args.label,
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
+      ...(args.counterText !== undefined ? { counterText: args.counterText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
       textarea: {},

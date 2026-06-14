@@ -1,0 +1,36 @@
+{
+  "baseline": "default.chromium-linux.dark.png",
+  "caseFingerprint": "fab1882442dbaebf4a8c2e07848bf5b9d67af5ff23efae5b5f6b11ed03cb00b6",
+  "caseId": "textarea.default",
+  "createdAt": "2026-06-14T07:17:10.392Z",
+  "exportScale": 1,
+  "family": "textarea",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/textarea/default/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5070:45362",
+  "mode": "dark",
+  "origin": "figma-bridge-export",
+  "pngByteLength": 3773,
+  "pngDimensions": {
+    "height": 260,
+    "width": 390
+  },
+  "pngSha256": "c52b7c78dc9e89f96862b967f5219cf7771d212c4a59adae2962ea5da34b6de5",
+  "schemaVersion": 1,
+  "sourceFingerprint": "eb3f9a4665cc28565940f6deffb16a220c58590c2419667aefc04ee65a0aa6a0",
+  "sourceFrameId": "1368:6014",
+  "sourceNodeId": "1368:6020",
+  "sourceNodeIds": ["1368:6020"],
+  "variablesFingerprint": "50e45a530c577f52e41b785f6118d4e1e141aece74cc32204abd3147a9ca4587",
+  "viewport": "textarea-default",
+  "viewportSize": {
+    "height": 260,
+    "width": 390
+  }
+}
