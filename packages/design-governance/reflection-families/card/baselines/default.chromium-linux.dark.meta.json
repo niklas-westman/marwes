@@ -1,0 +1,36 @@
+{
+  "baseline": "default.chromium-linux.dark.png",
+  "caseFingerprint": "35b47c8372376a830293fe88af43a494826568abc294ca4f3d523fb3b04ce539",
+  "caseId": "card.default",
+  "createdAt": "2026-06-13T16:20:09.780Z",
+  "exportScale": 1,
+  "family": "card",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/card/default/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5049:43824",
+  "mode": "dark",
+  "origin": "receipt-backfill",
+  "pngByteLength": 8368,
+  "pngDimensions": {
+    "height": 300,
+    "width": 520
+  },
+  "pngSha256": "5c05ffaafe0aa425a6ebfe5a1f5a3892d8e2f0865a66174375d89f03ba859155",
+  "schemaVersion": 1,
+  "sourceFingerprint": "b93ece631f609845d598bcfd93d94652b63e23e79414d556e3abf56fa5ad0089",
+  "sourceFrameId": "1368:5891",
+  "sourceNodeId": "1368:5899",
+  "sourceNodeIds": ["1368:5899"],
+  "variablesFingerprint": "879e6b31b47824ec2288c61c44ee5c9989a7081b508e6bb3b685d9e0cbab294e",
+  "viewport": "card-default",
+  "viewportSize": {
+    "height": 300,
+    "width": 520
+  }
+}

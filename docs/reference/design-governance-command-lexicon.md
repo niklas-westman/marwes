@@ -11,13 +11,14 @@ Reflection visual checks.
 | Refresh local Figma artifacts | `pnpm design:sync -- --mode cache` | Rebuilds `.figma/marwes` from the local Figma cache. |
 | Validate one component family | `pnpm design:validate -- --family badge` | Checks Figma references, tokens, runtime token parity, and adapter surfaces. |
 | Validate runtime token mapping only | `pnpm design:validate:runtime -- --family badge` | Checks whether preset/theme CSS exposes the variables implied by Figma. |
-| Check Reflection/Figma static contract | `pnpm cohesive:check -- --family badge` | Checks contract shape, source node, bound tokens, baseline PNG dimensions, and comparison policy. |
+| Check Reflection/Figma static contract | `pnpm cohesive:check -- --family badge` | Checks contract shape, source node, bound tokens, baseline PNG dimensions, receipt sidecar, and comparison policy. |
 | Check all Reflection/Figma contracts | `pnpm cohesive:check:all` | Runs cohesive static checks for every reflection family. |
 | Prepare generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --connect --dry-run --replace --accept-any-file` | Validates source selectors and previews generated `reflection/*` frames in the open Figma file. |
 | Write generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file` | Creates or replaces plugin-managed baseline frames near their source catalog page. |
-| Export generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines` | Exports generated frame ids into package-owned PNG baselines. |
+| Export generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines` | Exports generated frame ids into package-owned PNG baselines and receipt sidecars. |
 | Compile exported PNGs locally | `pnpm reflection:figma:compile -- --source /path/to/export` | Maps Figma-exported PNGs into the Reflection baseline naming layout. Dry-run by default. |
-| Place PNGs into active baselines | `pnpm reflection:figma:compile -- --source /path/to/export --target active --family badge --write` | Copies compiled PNGs into `reflection-families/<family>/baselines/`. |
+| Place PNGs into active baselines | `pnpm reflection:figma:compile -- --source /path/to/export --target active --family badge --write` | Copies compiled PNGs into `reflection-families/<family>/baselines/` and writes receipt sidecars. |
+| Backfill/check baseline receipts | `pnpm reflection:figma:receipts -- --all --dry-run` | Verifies every committed baseline PNG has a current local provenance receipt. |
 | Run all portal visuals | `pnpm reflection:visual` | Compares React, Vue, and Svelte portal renders against Figma PNG baselines. |
 | Review latest visual output | `pnpm reflection:review` | Prints JSON status and artifact paths for the latest Reflection runs. |
 | Run the full visual loop | `pnpm cohesive:visual` | Runs `reflection:doctor`, `reflection:visual`, and `reflection:review`. |
@@ -85,6 +86,10 @@ Write frames and export baselines:
 pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines
 ```
 
+When `--export-baselines` writes PNGs, it also writes matching `.meta.json`
+receipts. Those receipts let the repo validate the Figma source node,
+variables, PNG hash, and viewport contract without a second Figma fetch.
+
 Inspect source-frame registry entries:
 
 ```bash
@@ -131,6 +136,11 @@ Overwrite existing active baselines:
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write --force
 ```
 
+When `--target active --write` is used, the compiler also writes receipt
+sidecars for the copied PNGs. The family must already have a matching
+`reflection-contract.json` case so the receipt can bind the PNG to the local
+source node and required variables.
+
 The compiler reads
 `packages/design-governance/reflection-families/pending-figma-frame-renames.json`.
 It maps duplicated Figma export filenames by the discovered grid order, verifies
@@ -138,6 +148,24 @@ PNG dimensions, and writes normalized filenames such as:
 
 ```text
 packages/design-governance/reflection-families/badge/baselines/warning.chromium-linux.dark.png
+```
+
+### `pnpm reflection:figma:receipts`
+
+Backfills or audits receipt sidecars for already committed baselines. It does
+not connect to Figma; it reads only local contracts, `.figma/marwes/_raw`, local
+variables, and PNG files.
+
+Dry-run all active families:
+
+```bash
+pnpm reflection:figma:receipts -- --all --dry-run
+```
+
+Write missing or stale receipts:
+
+```bash
+pnpm reflection:figma:receipts -- --all --write
 ```
 
 ### `pnpm reflection:figma:export`
@@ -196,14 +224,21 @@ It checks:
 - source component node bounds
 - required bound tokens
 - baseline PNG dimensions
+- baseline PNG receipt hash, source fingerprint, and variable fingerprint
 - comparison threshold and reason
 - top-level frame provenance, as a warning by default
 
+Use `--require-baseline-receipts` to make missing or stale receipts fail:
+
+```bash
+pnpm cohesive:check -- --all --require-baseline-receipts
+```
+
 ### `pnpm cohesive:check:strict`
 
-Same as `cohesive:check:all`, but Figma frame provenance warnings become
-failures. Use this once every active contract has real top-level Figma frame ids
-and names.
+Same as `cohesive:check:all`, but receipt sidecars and Figma frame provenance
+warnings become failures. Use this only when every active contract has real
+top-level Figma frame ids and names.
 
 ### `pnpm reflection:doctor`
 
@@ -233,7 +268,8 @@ images.
 ```bash
 pnpm reflection:figma:compile -- --source /path/to/export
 pnpm reflection:figma:compile -- --source /path/to/export --target active --family badge --write
-pnpm cohesive:check -- --family badge
+pnpm reflection:figma:receipts -- --family badge --dry-run
+pnpm cohesive:check -- --family badge --require-baseline-receipts
 pnpm reflection:visual
 pnpm reflection:review
 ```

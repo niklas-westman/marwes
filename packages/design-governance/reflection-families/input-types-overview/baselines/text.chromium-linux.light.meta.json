@@ -1,0 +1,36 @@
+{
+  "baseline": "text.chromium-linux.light.png",
+  "caseFingerprint": "e47f2edf041bf9b9277a9baaed23c78bfc6bfe5baff859eb8cd047b196d79f45",
+  "caseId": "input-types-overview.text",
+  "createdAt": "2026-06-13T16:20:10.829Z",
+  "exportScale": 1,
+  "family": "input-types-overview",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/input-types-overview/text/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5059:45095",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 2979,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "7273e49a93aa1cbf382bdd39aec1b78859a90871f58f5e2fe526659f2352aedc",
+  "schemaVersion": 1,
+  "sourceFingerprint": "66457ad39783aa6dde9e0486117c735289636bc087485fa9a84312e8b5ee8e07",
+  "sourceFrameId": "1364:11817",
+  "sourceNodeId": "1364:11822",
+  "sourceNodeIds": ["1364:11822"],
+  "variablesFingerprint": "8b18fc6a4681b29b670de86c305066f2713cb775aadeb2fbd4bae4d4be449ee0",
+  "viewport": "input-types-overview-text",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

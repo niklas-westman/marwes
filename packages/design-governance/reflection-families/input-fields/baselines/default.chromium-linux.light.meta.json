@@ -1,0 +1,36 @@
+{
+  "baseline": "default.chromium-linux.light.png",
+  "caseFingerprint": "ebd7dd37473ee0fa86fba525bc3ea3b9115fed0d9445e5a8031f4bad5728423e",
+  "caseId": "input-fields.default",
+  "createdAt": "2026-06-13T16:20:10.691Z",
+  "exportScale": 1,
+  "family": "input-fields",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/input-fields/default/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5059:45081",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 3201,
+  "pngDimensions": {
+    "height": 220,
+    "width": 560
+  },
+  "pngSha256": "045c6a2a1e7f8a69e2df7148c2e3af48224fc078f09f59ea7626fe079eba1fbd",
+  "schemaVersion": 1,
+  "sourceFingerprint": "4a14089057bcc21afc1cbd31180d63beb79fd16150ace17c5acf7394383118c5",
+  "sourceFrameId": "1364:11372",
+  "sourceNodeId": "1364:11382",
+  "sourceNodeIds": ["1364:11382"],
+  "variablesFingerprint": "8b18fc6a4681b29b670de86c305066f2713cb775aadeb2fbd4bae4d4be449ee0",
+  "viewport": "input-fields-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 560
+  }
+}

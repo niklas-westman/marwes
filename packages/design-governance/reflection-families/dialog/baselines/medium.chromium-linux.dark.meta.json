@@ -1,0 +1,36 @@
+{
+  "baseline": "medium.chromium-linux.dark.png",
+  "caseFingerprint": "286f040ae7729c90358bf11df4613accbfdf1c78b99ef1a41658ddf9d8a85257",
+  "caseId": "dialog.medium",
+  "createdAt": "2026-06-13T16:20:10.503Z",
+  "exportScale": 1,
+  "family": "dialog",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/dialog/medium/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5049:43969",
+  "mode": "dark",
+  "origin": "receipt-backfill",
+  "pngByteLength": 12613,
+  "pngDimensions": {
+    "height": 380,
+    "width": 720
+  },
+  "pngSha256": "8c44e4adc904f574f4fd4c32a1b10229a34d046fa02d701fe505090c57fca3db",
+  "schemaVersion": 1,
+  "sourceFingerprint": "c51fab761c0189509db540282df60583d4c58b8bcc668ccbe9d68164b1d70cd2",
+  "sourceFrameId": "3017:37102",
+  "sourceNodeId": "3017:37117",
+  "sourceNodeIds": ["3017:37117"],
+  "variablesFingerprint": "050430ff99f7155d762f52d8b1d09f68134a3839d468721f5be60bb17f366deb",
+  "viewport": "dialog-medium",
+  "viewportSize": {
+    "height": 380,
+    "width": 720
+  }
+}

@@ -144,6 +144,7 @@ the package-owned baseline layout:
 ```bash
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write
+pnpm reflection:figma:receipts -- --family badge --dry-run
 ```
 
 Generated source-page frames are now the preferred path when catalog source
@@ -164,8 +165,9 @@ only for strict audit/provenance checks.
 
 The older compiler path still reads `pending-figma-frame-renames.json`,
 validates PNG dimensions, and renames files locally before placing them. It is
-useful for manual export folders. Figma frame renames are still useful, but only
-as strict provenance hardening.
+useful for manual export folders. Active writes also create `.meta.json`
+receipts. Figma frame renames are still useful, but only as strict provenance
+hardening.
 
 When the real baseline frame ids are present, run the strict provenance check:
 
@@ -199,6 +201,8 @@ Current Button guarantees:
 - required bound variables exist on the source nodes
 - baseline PNGs exist under this package
 - baseline PNG dimensions match the contract viewport
+- baseline PNG receipt sidecars match the PNG hash, source node, variables, and
+  viewport contract
 - React, Vue, and Svelte render through the Reflection portal
 - Reflection review passes with documented narrow tolerances
 
@@ -219,6 +223,7 @@ Local pre-push runs:
 pnpm check
 pnpm design:check
 pnpm cohesive:check:all
+pnpm reflection:figma:receipts -- --all --dry-run
 ```
 
 That catches static governance drift before pushing without forcing every push to
@@ -236,10 +241,11 @@ Reflection family contract, installs the Chromium browser used by
 Figma-exported baseline PNGs, and uploads `artifacts/reflection/` when review
 evidence is needed.
 
-The current CI command intentionally does not pass `--require-figma-frames`
-because Button still needs the real top-level Figma baseline frame ids. After
-those ids replace the `TODO_REFLECTION_BUTTON_*_LIGHT_FRAME` values, switch the
-CI matrix command from `pnpm cohesive:ci` to `pnpm cohesive:ci:strict`.
+The current CI command requires baseline receipts, so it is fully local once
+`.figma/marwes`, `variables.json`, baseline PNGs, and `.meta.json` receipts are
+committed. It intentionally does not require generated Figma frame ids. Use
+`pnpm cohesive:ci:strict` only for a provenance audit where every active case
+has stable top-level generated frame ids.
 
 ## Commands
 
@@ -288,8 +294,10 @@ pnpm cohesive:check -- --family button
 
 This static check validates the Figma sync target, local raw nodes,
 `variables.json`, source component bounds, required bound variables, baseline PNG
-dimensions, and comparison threshold policy. Add `--require-figma-frames` when
-the top-level `Reflection Baselines` frame node ids should be mandatory.
+dimensions, receipt sidecars, and comparison threshold policy. Add
+`--require-baseline-receipts` when receipts should be mandatory. Add
+`--require-figma-frames` when top-level generated frame node ids should also be
+mandatory.
 
 When investigating a failing Reflection case, use this order:
 
@@ -392,16 +400,17 @@ docs/guides/add-new-reflection-component.md
 
 Short version:
 
-1. Create strict Figma baseline frames on the `Reflection Baselines` page.
-2. Export each frame as PNG at scale `1`.
+1. Create strict generated Figma baseline frames from `frame-prep.json`.
+2. Export each frame as PNG at scale `1` with a `.meta.json` receipt.
 3. Add a family folder under `reflection-families/<family>/`.
 4. Add `reflection-contract.json` with Figma frame ids, source component node ids,
    viewport sizes, portal paths, required bound tokens, and comparison policy.
-5. Compile exported PNGs into `reflection-families/<family>/baselines/`.
-6. Run `pnpm cohesive:check -- --family <family>`.
-7. Run `pnpm cohesive:check -- --family <family> --require-figma-frames` once
+5. Compile/export PNGs into `reflection-families/<family>/baselines/`.
+6. Run `pnpm reflection:figma:receipts -- --family <family> --dry-run`.
+7. Run `pnpm cohesive:check -- --family <family> --require-baseline-receipts`.
+8. Run `pnpm cohesive:check -- --family <family> --require-figma-frames` once
    the real top-level baseline frame ids are present.
-8. Run `pnpm cohesive:visual`.
+9. Run `pnpm cohesive:visual`.
 
 ## Suggest Tokens
 

@@ -24,9 +24,9 @@ Every Reflection family is validated through three sources in parallel:
 2. **Figma variables**: `.figma/marwes/tokens/variables.json` plus the source
    node `boundVariables`. This proves that Figma is using the expected token
    names and that Marwes maps those tokens to runtime CSS variables.
-3. **Figma baseline PNG and Reflection runtime output**: the exported
-   `reflection/<family>/<case>/<mode>` PNG compared against the portal render at
-   the same `viewportSize`.
+3. **Figma baseline PNG plus receipt and Reflection runtime output**: the
+   exported `reflection/<family>/<case>/<mode>` PNG, its `.meta.json` receipt,
+   and the portal render at the same `viewportSize`.
 
 Do not treat the baseline PNG diff as the whole truth. A failed visual case must
 be investigated by checking all three sides first:
@@ -36,7 +36,7 @@ be investigated by checking all three sides first:
 - If the source node uses the wrong or missing variable, fix Figma or update the
   contract only after the design intent is clear.
 - If the baseline PNG does not match the source node or viewport contract,
-  re-export or recompile the Figma baseline.
+  re-export or recompile the Figma baseline and update its receipt.
 - If all three agree and only text rasterization differs, keep the narrowest
   documented tolerance in `comparison.toleranceReason`.
 
@@ -161,6 +161,7 @@ packages/design-governance/reflection-families/<family>/
   reflection-contract.json
   baselines/
     <case>.chromium-linux.<mode>.png
+    <case>.chromium-linux.<mode>.meta.json
 ```
 
 The contract owns:
@@ -174,8 +175,13 @@ The contract owns:
 - Required Figma-bound variables.
 - Expected source-node component bounds.
 - The visual comparison threshold and its reason.
+- The receipt sidecar that binds PNG hash, source node, source frame, variables,
+  viewport, and framing into one local proof.
 
-The `figmaNodeId` field points to the top-level `Reflection Baselines` frame. The `source.componentNodeId` field points to the real component source node in the local Figma dump. These are intentionally separate.
+The `figmaNodeId` field points to the generated top-level Reflection baseline
+frame and is optional strict provenance. The `source.componentNodeId` field
+points to the real component source node in the local Figma dump. The receipt
+sidecar is the durable local proof used by normal CI.
 
 ## Layer 4: Cohesive Static Check
 
@@ -196,13 +202,23 @@ This checks:
 - Each component JSON file exists and contains the source node.
 - Each baseline PNG exists.
 - Each baseline PNG dimensions match `viewportSize`.
+- Each baseline PNG receipt exists and still matches the PNG hash, source node,
+  required variables, viewport, and framing.
 - Each comparison threshold has an explicit reason.
 
 This check is the static triangle gate. It is not optional before interpreting a
 Reflection visual diff, because it proves the node, variables, and baseline
 contract still refer to the same design source.
 
-Current Button contracts still use TODO top-level baseline frame ids until the real `Reflection Baselines` frame node ids are copied from Figma. By default this is a warning so local development can proceed from the imported PNGs. For strict provenance, run:
+Receipt warnings can be made blocking without requiring Figma:
+
+```bash
+pnpm cohesive:check -- --all --require-baseline-receipts
+```
+
+Generated frame ids can still be audited separately. By default missing or stale
+generated frame provenance is a warning so local development can proceed from
+the committed PNGs and receipts. For strict provenance, run:
 
 ```bash
 pnpm cohesive:check -- --family button --require-figma-frames
@@ -219,12 +235,15 @@ frame ids:
 pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --accept-any-file --export-baselines
 ```
 
+This writes both PNG baselines and `.meta.json` receipts.
+
 For manual baseline ingestion, export PNGs from Figma into the normal light/dark
 export folders, then compile them locally into the Reflection family layout:
 
 ```bash
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write
+pnpm reflection:figma:receipts -- --family badge --dry-run
 ```
 
 The compiler reads:
@@ -242,6 +261,13 @@ packages/design-governance/reflection-families/<family>/baselines/<case>.chromiu
 
 Use the default `--target incoming` while sorting a new batch. Use
 `--target active` only when the family contract and portal route are ready.
+Active writes also write receipt sidecars. To backfill or audit existing
+committed baselines without Figma, run:
+
+```bash
+pnpm reflection:figma:receipts -- --all --dry-run
+pnpm reflection:figma:receipts -- --all --write
+```
 
 ## Layer 6: Strict Figma Baseline Export
 
@@ -258,7 +284,8 @@ The export script reads:
 packages/design-governance/reflection-families/<family>/reflection-contract.json
 ```
 
-It writes PNGs to the family `baselines/` directory and refuses exports whose PNG dimensions do not match `viewportSize`.
+It writes PNGs and receipts to the family `baselines/` directory and refuses
+exports whose PNG dimensions do not match `viewportSize`.
 
 This strict path is provenance hardening. It is useful once Figma frame names and
 frame ids are clean, but it is not required for day-to-day local PNG ingestion.

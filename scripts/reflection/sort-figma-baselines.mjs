@@ -4,6 +4,12 @@ import { existsSync } from "node:fs"
 import { copyFile, mkdir, readFile, readdir, stat } from "node:fs/promises"
 import { basename, dirname, isAbsolute, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import {
+  findContractCase,
+  loadDesignSource,
+  loadReflectionContract,
+  writeBaselineReceipt,
+} from "../../packages/design-governance/src/baseline-receipts.mjs"
 
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const defaultRenameMap =
@@ -198,7 +204,14 @@ async function validateAndMaybeCopy(mapping, options) {
   const used = new Map(modes.map((mode) => [mode, new Set()]))
   const issues = []
   let copied = 0
+  let receiptsWritten = 0
   const allowUnused = options.allowUnused || Boolean(options.family || options.caseId)
+  let receiptContext
+
+  function getReceiptContext() {
+    receiptContext ??= loadDesignSource(repoRoot)
+    return receiptContext
+  }
 
   for (const item of mapping) {
     const sourceFolder = join(sourceRoot, `${item.mode}-marwes-reflection`)
@@ -239,6 +252,29 @@ async function validateAndMaybeCopy(mapping, options) {
       await mkdir(dirname(targetPath), { recursive: true })
       await copyFile(sourcePath, targetPath)
       copied += 1
+
+      if (options.target === "active") {
+        const contractEntry = loadReflectionContract(repoRoot, item.family)
+        const caseEntry = contractEntry
+          ? findContractCase(contractEntry.contract, item.caseId, item.mode)
+          : undefined
+
+        if (!contractEntry) {
+          issues.push(`[receipt] missing reflection contract for ${item.family}`)
+        } else if (!caseEntry) {
+          issues.push(`[receipt] missing contract case ${item.caseId} ${item.mode}`)
+        } else {
+          const receipt = await writeBaselineReceipt({
+            repoRoot,
+            contract: contractEntry.contract,
+            caseEntry,
+            context: getReceiptContext(),
+            pngPath: targetPath,
+            origin: "local-export-compile",
+          })
+          if (receipt.changed) receiptsWritten += 1
+        }
+      }
     }
   }
 
@@ -254,6 +290,7 @@ async function validateAndMaybeCopy(mapping, options) {
     outRoot,
     mapped: mapping.length,
     copied,
+    receiptsWritten,
     issues,
   }
 }
@@ -285,6 +322,9 @@ async function main() {
   console.log(`Output root: ${result.outRoot}`)
   console.log(`Mapped PNGs: ${result.mapped}`)
   if (options.write) console.log(`Copied PNGs: ${result.copied}`)
+  if (options.write && options.target === "active") {
+    console.log(`Receipts written: ${result.receiptsWritten}`)
+  }
   console.log(`Issues: ${result.issues.length}`)
 
   if (result.issues.length > 0) {

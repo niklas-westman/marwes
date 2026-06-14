@@ -1,6 +1,7 @@
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
-import { join, resolve } from "node:path"
+import { existsSync, readFileSync, readdirSync } from "node:fs"
+import { resolve } from "node:path"
 import process from "node:process"
+import { validateBaselineReceipt } from "./baseline-receipts.mjs"
 
 const repoRoot = process.cwd()
 const defaultTargetConfigPath = ".pi/figma-sync.json"
@@ -12,6 +13,7 @@ const jsonOutput = args.includes("--json")
 const allFamilies = args.includes("--all")
 const family = readOption("--family")
 const requireFigmaFrames = args.includes("--require-figma-frames")
+const requireBaselineReceipts = args.includes("--require-baseline-receipts")
 
 function readOption(name) {
   const index = args.indexOf(name)
@@ -26,8 +28,9 @@ function usage() {
     "  pnpm --filter @marwes-ui/design-governance cohesive-check -- --all",
     "",
     "Options:",
-    "  --require-figma-frames  Fail when Reflection Baselines frame node ids are missing.",
-    "  --json                  Print JSON.",
+    "  --require-baseline-receipts  Fail when baseline PNG receipt sidecars are missing or stale.",
+    "  --require-figma-frames       Fail when Reflection Baselines frame node ids are missing.",
+    "  --json                       Print JSON.",
   ].join("\n")
 }
 
@@ -251,7 +254,15 @@ function validateSync(target, contract, contractPath) {
   )
 }
 
-function validateCase({ contract, caseEntry, rawSource, variableMap, requireFrames }) {
+function validateCase({
+  contract,
+  caseEntry,
+  rawSource,
+  variableMap,
+  receiptContext,
+  requireFrames,
+  requireReceipts,
+}) {
   const checks = []
   const family = contract.family
   const caseLabel = `${family}:${caseEntry.caseId}`
@@ -294,6 +305,18 @@ function validateCase({ contract, caseEntry, rawSource, variableMap, requireFram
               `${baselinePath}: ${dimensions.width}x${dimensions.height}, expected ${viewportSize?.width}x${viewportSize?.height}`,
             ],
       ),
+    )
+
+    const receiptCheck = validateBaselineReceipt({
+      repoRoot,
+      contract,
+      caseEntry,
+      context: receiptContext,
+      pngPath: absolute(baselinePath),
+      requireReceipt: requireReceipts,
+    })
+    checks.push(
+      createCheck(`${caseLabel} baseline receipt`, receiptCheck.status, receiptCheck.details),
     )
   }
 
@@ -480,7 +503,7 @@ function printReport(report) {
     console.log(`WARNING: cohesive:check passed with ${warnings.length} warning(s).`)
     console.log("These warnings are non-blocking in authoring mode.")
     console.log(
-      "Run with --require-figma-frames, or use pnpm cohesive:check:strict, to make them fail.",
+      "Run with --require-baseline-receipts or --require-figma-frames to make matching warnings fail.",
     )
     console.log("")
 
@@ -532,7 +555,12 @@ function main() {
           caseEntry,
           rawSource,
           variableMap,
+          receiptContext: {
+            rawSource,
+            variableSource,
+          },
           requireFrames: requireFigmaFrames,
+          requireReceipts: requireBaselineReceipts,
         }),
       ),
     ]

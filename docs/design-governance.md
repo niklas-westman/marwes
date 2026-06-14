@@ -14,8 +14,9 @@ work must read all three sides together:
   effects, and bound-variable evidence
 - the Figma variable map, which proves the design token names and expected
   Marwes runtime CSS variables
-- the Figma-exported Reflection baseline PNG, which proves the exact frame and
-  screenshot target that React, Vue, and Svelte must match
+- the Figma-exported Reflection baseline PNG and receipt, which prove the exact
+  frame, source fingerprint, variable fingerprint, and screenshot target that
+  React, Vue, and Svelte must match
 
 The repo then proves that truth through registry contracts, design-governance
 family contracts, runtime token parity, and Reflection portal visual checks.
@@ -135,10 +136,13 @@ pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --ac
 pnpm reflection:figma:prepare-frames -- --family <family> --write --replace --accept-any-file --export-baselines
 ```
 
+This writes both PNGs and `.meta.json` receipt sidecars.
+
 7. Update `reflection-contract.json`, add portal routes, and validate with:
 
 ```bash
-pnpm cohesive:check -- --family <family>
+pnpm reflection:figma:receipts -- --family <family> --dry-run
+pnpm cohesive:check -- --family <family> --require-baseline-receipts
 pnpm reflection:doctor
 pnpm reflection:visual
 pnpm reflection:review
@@ -148,6 +152,10 @@ Do not require a full Figma REST fetch after every generated frame write. The
 bridge is already connected to the open Figma file, returns concrete generated
 frame ids, and stores plugin metadata on generated frames. Use a full remote
 fetch only as an intentional batch refresh or strict audit step.
+
+After `.figma/marwes`, `variables.json`, baseline PNGs, and receipts are
+committed, normal CI is fully local. It does not need to ask Figma whether the
+temporary generated frames still exist.
 
 ## Validation Layers
 

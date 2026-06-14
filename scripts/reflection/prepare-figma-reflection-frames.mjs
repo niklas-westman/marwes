@@ -7,6 +7,12 @@ import { mkdir, writeFile } from "node:fs/promises"
 import http from "node:http"
 import { dirname, join, relative, resolve, sep } from "node:path"
 import { fileURLToPath } from "node:url"
+import {
+  findContractCase,
+  loadDesignSource,
+  loadReflectionContract,
+  writeBaselineReceipt,
+} from "../../packages/design-governance/src/baseline-receipts.mjs"
 
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const defaultFamiliesRoot = "packages/design-governance/reflection-families"
@@ -531,6 +537,7 @@ function collectExportableFrameEntries(result, plan, options) {
       figmaFileKey: plan.figmaFileKey,
       figmaNodeId: entry.figmaNodeId,
       figmaFrameName: frame.outputFrameName,
+      sourceFrameId: frame.sourceFrameId,
       baseline: `${frame.family}/baselines/${caseSlug(frame.family, frame.caseId)}.chromium-linux.${frame.mode}.png`,
       viewport: frame.viewport,
       viewportSize: frame.viewportSize,
@@ -599,6 +606,7 @@ async function runBridgeBaselineExport(server, client, result, plan, options) {
 
   const baselineRoot = resolve(repoRoot, "packages/design-governance/reflection-families")
   const caseIndex = new Map(cases.map((entry) => [entry.baseline, entry]))
+  const receiptContext = loadDesignSource(repoRoot)
   const written = []
 
   for (const exported of exportResult.exported ?? []) {
@@ -619,11 +627,35 @@ async function runBridgeBaselineExport(server, client, result, plan, options) {
     const destination = resolveInside(baselineRoot, entry.baseline)
     await mkdir(dirname(destination), { recursive: true })
     await writeFile(destination, buffer)
+    const contractEntry = loadReflectionContract(repoRoot, entry.family)
+    const caseEntry = contractEntry
+      ? findContractCase(contractEntry.contract, entry.caseId, entry.mode)
+      : undefined
+
+    if (!contractEntry) {
+      throw new Error(`Could not find reflection contract for ${entry.family}`)
+    }
+
+    if (!caseEntry) {
+      throw new Error(`Could not find contract case ${entry.caseId} ${entry.mode}`)
+    }
+
+    const receipt = await writeBaselineReceipt({
+      repoRoot,
+      contract: contractEntry.contract,
+      caseEntry,
+      context: receiptContext,
+      pngPath: destination,
+      origin: "figma-bridge-export",
+      sourceFrameId: entry.sourceFrameId,
+    })
     written.push({
       caseId: entry.caseId,
       family: entry.family,
       mode: entry.mode,
       path: destination,
+      receiptPath: receipt.receiptPath,
+      receiptChanged: receipt.changed,
       dimensions,
       byteLength: buffer.length,
     })

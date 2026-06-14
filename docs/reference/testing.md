@@ -209,11 +209,10 @@ source nodes, component bounds, and variables. Do not use `reflection update`
 for these Figma truth baselines; the PNGs must be exported from Figma.
 
 Pre-push runs `pnpm cohesive:check:all` as a fast static gate. Pull request CI
-runs `pnpm cohesive:ci`, which also runs the portal screenshot comparison and
-uploads `artifacts/reflection/` for review evidence. Once every Reflection
-contract has real top-level Figma baseline frame ids, switch CI to
-`pnpm cohesive:ci:strict` so missing frame provenance becomes a blocking merge
-failure.
+runs `pnpm cohesive:ci`, which requires committed baseline receipts, runs the
+portal screenshot comparison, and uploads `artifacts/reflection/` for review
+evidence. `pnpm cohesive:ci:strict` additionally requires stable generated
+Figma frame ids and is only for strict provenance audits.
 
 ## Recommended workflow
 

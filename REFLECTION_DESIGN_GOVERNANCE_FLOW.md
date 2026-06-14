@@ -286,17 +286,20 @@ This uses the generated `reflection/*` frame ids and exports PNGs into:
 packages/design-governance/reflection-families/<family>/baselines/
 ```
 
-The exported PNG must match `viewportSize` exactly. A `390x220` contract must
-produce a `390x220` PNG.
+The export writes both the PNG and its `.meta.json` receipt. The exported PNG
+must match `viewportSize` exactly. A `390x220` contract must produce a
+`390x220` PNG.
 
 Older/manual local PNG ingestion still exists:
 
 ```bash
 pnpm reflection:figma:compile -- --source /path/to/figma-export --target active --family badge --write
+pnpm reflection:figma:receipts -- --family badge --dry-run
 ```
 
-The generated-frame export path is preferred when the Figma bridge has created
-the baseline frames and returned concrete node ids.
+Active compile writes receipts too. The generated-frame export path is preferred
+when the Figma bridge has created the baseline frames and returned concrete node
+ids.
 
 ### 7. Do Not Force A Full Figma Fetch After Every Frame Generation
 
@@ -535,7 +538,9 @@ pnpm cohesive:ci:strict
 ```
 
 CI should not promote baselines. It should only validate committed contracts,
-committed Figma-exported baselines, and runtime renders.
+committed Figma-exported baselines, receipt sidecars, and runtime renders.
+`pnpm cohesive:ci` requires receipts. `pnpm cohesive:ci:strict` adds generated
+Figma frame-id provenance on top.
 
 Never use non-dry Reflection baseline update commands for this workflow. Figma
 exports remain the source of visual truth.

@@ -1,0 +1,36 @@
+{
+  "baseline": "sp-16.chromium-linux.light.png",
+  "caseFingerprint": "e6aa5c465ce7742df1028797ca4d2ed10a2dfc6ca37e227635091c731a9c2a61",
+  "caseId": "divider.sp-16",
+  "createdAt": "2026-06-13T16:20:10.564Z",
+  "exportScale": 1,
+  "family": "divider",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/divider/sp-16/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5049:43995",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 916,
+  "pngDimensions": {
+    "height": 160,
+    "width": 640
+  },
+  "pngSha256": "f6ca6ca23b6488bbbd2641477635e4669cb690a35ae6242a41cba503f262e190",
+  "schemaVersion": 1,
+  "sourceFingerprint": "5dc0807ad8d79b33eb2cec462e8dd6b51032d366cc668fa1145d41960b273318",
+  "sourceFrameId": "1574:24658",
+  "sourceNodeId": "1574:25834",
+  "sourceNodeIds": ["1574:25834"],
+  "variablesFingerprint": "2c5bb25996b6d471c53c2bbb534248c4ac2c3e8e11a6d9173f74adaadd6b8174",
+  "viewport": "divider-wide",
+  "viewportSize": {
+    "height": 160,
+    "width": 640
+  }
+}

@@ -38,7 +38,13 @@ function run(label, commandArgs, options = {}) {
 }
 
 run(strict ? "Strict cohesive Reflection contract check" : "Cohesive Reflection contract check", [
-  strict ? "cohesive:check:strict" : "cohesive:check:all",
+  "--filter",
+  "@marwes-ui/design-governance",
+  "cohesive-check",
+  "--",
+  "--all",
+  "--require-baseline-receipts",
+  ...(strict ? ["--require-figma-frames"] : []),
 ])
 
 if (!skipBrowserInstall) {

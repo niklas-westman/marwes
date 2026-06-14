@@ -6,6 +6,11 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, stat } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { dirname, join, resolve, sep } from "node:path"
 import { fileURLToPath } from "node:url"
+import {
+  findContractCase,
+  loadDesignSource,
+  writeBaselineReceipt,
+} from "../../packages/design-governance/src/baseline-receipts.mjs"
 
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const defaultReflectionFamiliesRoot = "packages/design-governance/reflection-families"
@@ -350,6 +355,7 @@ async function main() {
 
   const toolkitDir = await findToolkit(options)
   const outDir = await mkdtemp(join(tmpdir(), "marwes-reflection-figma-"))
+  const receiptContext = loadDesignSource(repoRoot)
   try {
     await runFigmaExport({
       toolkitDir,
@@ -383,7 +389,20 @@ async function main() {
       const destination = resolveInside(baselineRoot, entry.baseline)
       await mkdir(dirname(destination), { recursive: true })
       await copyFile(exportedPath, destination)
+      const contractCase = findContractCase(manifest, entry.caseId, entry.mode)
+      if (!contractCase) {
+        throw new Error(`Could not find contract case ${entry.caseId} ${entry.mode}`)
+      }
+      const receipt = await writeBaselineReceipt({
+        repoRoot,
+        contract: manifest,
+        caseEntry: contractCase,
+        context: receiptContext,
+        pngPath: destination,
+        origin: "figma-bridge-export",
+      })
       console.log(`[written] ${entry.caseId} -> ${destination}`)
+      if (receipt.changed) console.log(`[receipt] ${entry.caseId} -> ${receipt.receiptPath}`)
     }
   } finally {
     await rm(outDir, { recursive: true, force: true })

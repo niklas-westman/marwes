@@ -1,0 +1,36 @@
+{
+  "baseline": "success.chromium-linux.light.png",
+  "caseFingerprint": "4b397b4d887421bada580ceaea374e1119aa25604b48c546a5b1448399581f4d",
+  "caseId": "badge.success",
+  "createdAt": "2026-06-13T16:20:09.000Z",
+  "exportScale": 1,
+  "family": "badge",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/badge/success/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "3872:41930",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 3405,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "e2efe7ff1246583af9d346d56f6577d734e29e58e2328a28b6965796bc914575",
+  "schemaVersion": 1,
+  "sourceFingerprint": "94073e42c20871e0fafc6d9037433a8d9ba797652ebeff0a9cb5519c46de9710",
+  "sourceFrameId": "1364:11603",
+  "sourceNodeId": "3872:41934",
+  "sourceNodeIds": ["3872:41934"],
+  "variablesFingerprint": "a7cf1539726f4ac6de4c71d7a943abdfbdb5c036ee2f5a2cd6521cd07e653baa",
+  "viewport": "badge-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "baseline": "full.chromium-linux.dark.png",
+  "caseFingerprint": "7f5a1e92774c8ac39687b992d1957a1745170119c42214733e9c32450474c575",
+  "caseId": "context-menu.full",
+  "createdAt": "2026-06-13T16:20:10.379Z",
+  "exportScale": 1,
+  "family": "context-menu",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/context-menu/full/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5049:43912",
+  "mode": "dark",
+  "origin": "receipt-backfill",
+  "pngByteLength": 10591,
+  "pngDimensions": {
+    "height": 320,
+    "width": 390
+  },
+  "pngSha256": "8d275a7d14caad797ba2c1edc44cc82fa211f6b9e9144ad9b5c96f600962464b",
+  "schemaVersion": 1,
+  "sourceFingerprint": "e82748ce2d0011cd23f4cce1ac4f72fbd4bfd199d59cb08e86cf726f9e547885",
+  "sourceFrameId": "1574:24160",
+  "sourceNodeId": "1574:26906",
+  "sourceNodeIds": ["1574:26906"],
+  "variablesFingerprint": "df66d88258719d20c80688d57dc77a40ef056536f32bbe1d03b5963166360126",
+  "viewport": "context-menu-full",
+  "viewportSize": {
+    "height": 320,
+    "width": 390
+  }
+}

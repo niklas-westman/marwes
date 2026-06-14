@@ -12,6 +12,7 @@ packages/design-governance/reflection-families/<family>/
   reflection-contract.json
   baselines/
     <case>.chromium-linux.<mode>.png
+    <case>.chromium-linux.<mode>.meta.json
 ```
 
 Normal Reflection run output still belongs under `.reflection/` locally or
@@ -40,9 +41,22 @@ The baseline PNG proves the exported Figma truth for a specific frame size. The
 portal render proves React, Vue, and Svelte still produce that truth in the
 browser.
 
+Every committed baseline PNG must have a sidecar receipt:
+
+```text
+<case>.chromium-linux.<mode>.meta.json
+```
+
+The receipt is the durable local bridge from Figma to the repo. It records the
+PNG hash and dimensions, the source catalog node, the source frame, the required
+variable fingerprint, the viewport/framing contract, and the generated frame id
+as informational evidence. Once `.figma/marwes`, `variables.json`, the PNG, and
+the receipt are committed, the normal validation loop does not need to call
+Figma.
+
 When updating or debugging a family, use all three sources together:
 
-- Read `source.componentNodeId`, `source.requiredBoundVariables`, and
+- Read `source.componentNodeId`, `source.requiredBoundTokens`, and
   `source.componentBounds` from `reflection-contract.json`.
 - Confirm the node exists in `.figma/marwes/_raw/<file-key>_full.json` and that
   its bound variables exist in `.figma/marwes/tokens/variables.json`.
@@ -66,6 +80,7 @@ Use it first as a local PNG compiler map:
 ```bash
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3
 pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write
+pnpm reflection:figma:receipts -- --family badge --dry-run
 ```
 
 The compiler is dry-run by default. `--target incoming` stages files under
@@ -119,11 +134,12 @@ a full Figma REST fetch after every generated frame write. Refresh the local raw
 Figma source and variable map at the start of a batch; use post-generation
 remote fetches only for intentional strict audit/provenance passes.
 
-Once generated PNGs and frame ids are in place, move the active cases into the
+Once generated PNGs and receipts are in place, move the active cases into the
 family `reflection-contract.json`. The contract should still keep source catalog
 node ids separate from generated baseline frame ids:
 
 ```text
-figmaNodeId = generated Reflection baseline frame
+figmaNodeId = generated Reflection baseline frame (optional strict provenance)
 source.componentNodeId = original catalog/source node
+baseline .meta.json = committed local proof for the PNG
 ```
