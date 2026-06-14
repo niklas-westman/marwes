@@ -52,6 +52,24 @@
         },
         "strict": true,
         "toleranceReason": "Allows only small Figma-PNG versus Chromium menu text, icon, divider, border, and shadow antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1574:24029",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-24029",
+        "outputFrameName": "reflection/context-menu/full/light",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Context menu",
+          "rowOccurrence": 0,
+          "childName": "Context menu",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
       }
     },
     {
@@ -101,6 +119,24 @@
         },
         "strict": true,
         "toleranceReason": "Allows only small Figma-PNG versus Chromium menu text, icon, divider, border, and shadow antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1574:24160",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-24160",
+        "outputFrameName": "reflection/context-menu/full/dark",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Context menu",
+          "rowOccurrence": 0,
+          "childName": "Context menu",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        }
       }
     }
   ]

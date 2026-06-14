@@ -35,6 +35,7 @@ export type StatusColorTokens = {
   text: string
   icon: string
   border: string
+  borderAccessible?: string
   borderStrong: string
 }
 

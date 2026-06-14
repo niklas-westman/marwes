@@ -137,6 +137,7 @@ export const mwThemeVarNames = {
         text: "--mw-color-status-warning-text",
         icon: "--mw-color-status-warning-icon",
         border: "--mw-color-status-warning-border",
+        borderAccessible: "--mw-color-status-warning-border-accessible",
         borderStrong: "--mw-color-status-warning-border-strong",
       },
       error: {
@@ -375,6 +376,7 @@ export const mwThemeVars = {
         text: "var(--mw-color-status-warning-text)",
         icon: "var(--mw-color-status-warning-icon)",
         border: "var(--mw-color-status-warning-border)",
+        borderAccessible: "var(--mw-color-status-warning-border-accessible)",
         borderStrong: "var(--mw-color-status-warning-border-strong)",
       },
       error: {

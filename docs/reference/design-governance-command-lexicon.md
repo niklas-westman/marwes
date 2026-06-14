@@ -1,29 +1,41 @@
 # Design Governance Command Lexicon
 
 Use this page when you know the task but not the command name. The normal path
-is: sync Figma artifacts, compile baseline PNGs, run cohesive static checks, run
-Reflection visual checks.
+uses `governance:*` commands. The older `design:*`, `figma:*`,
+`reflection:*`, and `cohesive:*` commands are still available as advanced
+building blocks.
 
 ## Most Common Commands
 
 | Need | Command | What It Does |
 | --- | --- | --- |
-| Refresh local Figma artifacts | `pnpm design:sync -- --mode cache` | Rebuilds `.figma/marwes` from the local Figma cache. |
-| Validate one component family | `pnpm design:validate -- --family badge` | Checks Figma references, tokens, runtime token parity, and adapter surfaces. |
-| Validate runtime token mapping only | `pnpm design:validate:runtime -- --family badge` | Checks whether preset/theme CSS exposes the variables implied by Figma. |
-| Check Reflection/Figma static contract | `pnpm cohesive:check -- --family badge` | Checks contract shape, source node, bound tokens, baseline PNG dimensions, receipt sidecar, and comparison policy. |
-| Check all Reflection/Figma contracts | `pnpm cohesive:check:all` | Runs cohesive static checks for every reflection family. |
-| Check complete adapter promotion | `pnpm cohesive:check:complete` | Fails if registered/prepared Reflection families are not fully promoted into contracts, receipts, and React/Vue/Svelte portal cases. |
-| Prepare generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --connect --dry-run --replace --accept-any-file` | Validates source selectors and previews generated `reflection/*` frames in the open Figma file. |
-| Write generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file` | Creates or replaces plugin-managed baseline frames near their source catalog page. |
-| Export generated Figma frames | `pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines` | Exports generated frame ids into package-owned PNG baselines and receipt sidecars. |
-| Compile exported PNGs locally | `pnpm reflection:figma:compile -- --source /path/to/export` | Maps Figma-exported PNGs into the Reflection baseline naming layout. Dry-run by default. |
-| Place PNGs into active baselines | `pnpm reflection:figma:compile -- --source /path/to/export --target active --family badge --write` | Copies compiled PNGs into `reflection-families/<family>/baselines/` and writes receipt sidecars. |
-| Backfill/check baseline receipts | `pnpm reflection:figma:receipts -- --all --dry-run` | Verifies every committed baseline PNG has a current local provenance receipt. |
-| Run all portal visuals | `pnpm reflection:visual` | Compares React, Vue, and Svelte portal renders against Figma PNG baselines. |
-| Review latest visual output | `pnpm reflection:review` | Prints JSON status and artifact paths for the latest Reflection runs. |
-| Run the full visual loop | `pnpm cohesive:visual` | Runs `reflection:doctor`, `reflection:visual`, and `reflection:review`. |
-| CI-style local gate | `pnpm cohesive:ci` | Runs the package-owned visual gate and writes CI-style artifacts. |
+| See current state | `pnpm governance:status` | Groups readiness, receipts, source nodes, generated-frame provenance, portal coverage, and latest visual reports. |
+| Refresh local Figma artifacts | `pnpm governance:sync -- --mode cache` | Rebuilds `.figma/marwes` from the local Figma cache and refreshes variables unless skipped. |
+| Prepare generated Figma frames | `pnpm governance:prepare -- --family badge --connect --dry-run --replace --accept-any-file` | Validates contract `prep` selectors and previews generated `reflection/*` frames in the open Figma file. |
+| Write and export generated frames | `pnpm governance:prepare -- --family badge --write --replace --accept-any-file --export-baselines` | Creates plugin-managed Figma frames, exports PNG baselines, writes receipt sidecars, and updates `generated-frames.json`. |
+| Ingest local exported PNGs | `pnpm governance:ingest -- --source /path/to/export --family badge --write` | Maps manual Figma PNG exports into active baselines and writes receipts. |
+| Backfill/check receipts | `pnpm governance:ingest -- --family badge --dry-run` | Verifies committed baseline PNG receipts without needing Figma. |
+| Check one family | `pnpm governance:check -- --family badge` | Checks the local source-node, variable, baseline, receipt, portal, and comparison contract. |
+| Run all portal visuals | `pnpm governance:visual` | Runs Reflection doctor, visual comparison, and review for React, Vue, and Svelte. |
+| CI-style local gate | `pnpm governance:ci -- --skip-browser-install` | Runs the package-owned local CI gate and writes CI-style artifacts. |
+| Strict provenance gate | `pnpm governance:ci:strict -- --skip-browser-install` | Adds required committed generated-frame provenance to the normal CI gate. |
+| Migrate legacy prep manifests | `pnpm governance:migrate-contracts -- --dry-run` | Moves `frame-prep.json` data into `reflection-contract.json` prep blocks. |
+
+## Major Design Change Happy Path
+
+```bash
+pnpm governance:status
+pnpm governance:sync -- --mode cache
+pnpm governance:prepare -- --family <family> --connect --dry-run
+pnpm governance:prepare -- --family <family> --write --replace --export-baselines --accept-any-file
+pnpm governance:ingest -- --family <family> --dry-run
+pnpm governance:check -- --family <family>
+pnpm governance:visual
+pnpm governance:ci -- --skip-browser-install
+```
+
+Use `governance:ci:strict` only when stable generated Figma frame provenance is
+part of the acceptance criteria.
 
 ## Figma Refresh Commands
 
@@ -64,10 +76,12 @@ Plugins > Development > Marwes Figma Bridge
 ### `pnpm reflection:figma:prepare-frames`
 
 This is the preferred path when the source catalog frames already exist in the
-Marwes Figma file. It reads each family `frame-prep.json`, connects to the local
-Figma Reflection Frame Prep plugin, clones the selected source content into
-clean fixed-size `reflection/<family>/<case>/<mode>` frames, and can export
-those generated frame ids as PNG baselines.
+Marwes Figma file. `pnpm governance:prepare` is the normal wrapper for this
+command. The low-level script reads each family contract's `prep` metadata,
+falls back to legacy `frame-prep.json` files during the migration window,
+connects to the local Figma Reflection Frame Prep plugin, clones the selected
+source content into clean fixed-size `reflection/<family>/<case>/<mode>` frames,
+and can export those generated frame ids as PNG baselines.
 
 Dry-run selector and placement validation:
 
@@ -237,9 +251,9 @@ pnpm cohesive:check -- --all --require-baseline-receipts
 
 ### `pnpm cohesive:check:strict`
 
-Same as `cohesive:check:all`, but receipt sidecars and Figma frame provenance
-warnings become failures. Use this only when every active contract has real
-top-level Figma frame ids and names.
+Same as `cohesive:check:all`, but receipt sidecars and generated-frame
+provenance warnings become failures. Use this only when every active contract
+has a matching committed `generated-frames.json` entry.
 
 ### `pnpm cohesive:check:complete`
 
@@ -249,7 +263,7 @@ families have reflection contracts and that every contract `portalPath` exists
 in the React, Vue, and Svelte Reflection portal implementations.
 
 This is stricter than authoring mode. It should fail while a family only has
-source registry or `frame-prep.json` data and has not yet been promoted into
+source registry or contract `prep` data and has not yet been promoted into
 baselines, contracts, and adapter portal render cases.
 
 ### `pnpm reflection:doctor`
@@ -321,7 +335,7 @@ pnpm design:check
 pnpm cohesive:check:all
 ```
 
-Run `pnpm cohesive:visual` when the change touched Reflection baselines, portal
+Run `pnpm governance:visual` when the change touched Reflection baselines, portal
 cases, component CSS, theme variables, or adapter rendering.
 
 ## File Map

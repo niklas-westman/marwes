@@ -53,6 +53,24 @@
         },
         "strict": true,
         "toleranceReason": "Figma export contract for OTP fields. Allows Figma-vs-Chromium glyph rasterization and 1px rounded cell-border antialiasing drift after source node, variables, receipt, and frame dimensions pass."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1803:15024",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15024",
+        "outputFrameName": "reflection/input-otp/default/light",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Input OTP",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
       }
     },
     {
@@ -103,6 +121,24 @@
         },
         "strict": true,
         "toleranceReason": "Figma export contract for OTP fields. Allows Figma-vs-Chromium glyph rasterization and 1px rounded cell-border antialiasing drift after source node, variables, receipt, and frame dimensions pass."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1803:15155",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15155",
+        "outputFrameName": "reflection/input-otp/default/dark",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Input OTP",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        }
       }
     }
   ]

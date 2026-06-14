@@ -15,6 +15,19 @@ type ComponentFraming = {
   padding?: number
 }
 
+type ComponentProbes = {
+  parts: Record<
+    string,
+    {
+      selector: string
+      bounds?: boolean
+      styles?: string[]
+      cssVariables?: string[]
+      text?: boolean
+    }
+  >
+}
+
 type FigmaBaselineCase = {
   caseId: string
   mode: string
@@ -95,6 +108,28 @@ const portalPathForCase = (family: string, baselineCase: FigmaBaselineCase) => {
   return `/reflection/${family}/${caseName}/${baselineCase.mode}`
 }
 
+const runtimeProbesForCase = (): ComponentProbes => ({
+  parts: {
+    frame: {
+      selector: "#reflection-root",
+      bounds: true,
+      styles: ["backgroundColor", "display", "padding"],
+    },
+    theme: {
+      selector: "#reflection-case-root [data-marwes-theme]",
+      bounds: true,
+      styles: ["color", "fontFamily", "fontSize", "fontWeight", "lineHeight"],
+      cssVariables: [
+        "--mw-color-primary-base",
+        "--mw-color-surface-primary",
+        "--mw-color-text-primary",
+        "--mw-radius-sm",
+        "--mw-space-2",
+      ],
+    },
+  },
+})
+
 const baselineCases = (adapter: AdapterName) =>
   reflectionContracts.flatMap((contract) =>
     contract.cases.map((baselineCase) => ({
@@ -117,6 +152,7 @@ const baselineCases = (adapter: AdapterName) =>
       },
       strict: baselineCase.comparison?.strict ?? true,
       blocking: baselineCase.comparison?.blocking,
+      probes: runtimeProbesForCase(),
       stateNote: [
         `${baselineCase.caseId} ${baselineCase.mode} must match the exported Figma frame ${baselineCase.figmaFrameName ?? baselineCase.figmaNodeId} through the Reflection portal.`,
         baselineCase.comparison?.toleranceReason,

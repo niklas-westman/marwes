@@ -2,11 +2,11 @@ import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { resolve } from "node:path"
 import process from "node:process"
 import { validateBaselineReceipt } from "./baseline-receipts.mjs"
+import { validateGeneratedFrameProvenance } from "./generated-frame-provenance.mjs"
 
 const repoRoot = process.cwd()
 const defaultTargetConfigPath = ".pi/figma-sync.json"
 const reflectionFamiliesRoot = "packages/design-governance/reflection-families"
-const figmaNodeIdPattern = /^\d+:\d+$/
 
 const args = process.argv.slice(2).filter((arg) => arg !== "--")
 const jsonOutput = args.includes("--json")
@@ -35,7 +35,7 @@ function usage() {
     "",
     "Options:",
     "  --require-baseline-receipts  Fail when baseline PNG receipt sidecars are missing or stale.",
-    "  --require-figma-frames       Fail when Reflection Baselines frame node ids are missing.",
+    "  --require-figma-frames       Fail when generated reflection/* frame provenance is missing or stale.",
     "  --complete                   Fail when registered/prepared families are not fully wired through React, Vue, and Svelte portals.",
     "  --json                       Print JSON.",
   ].join("\n")
@@ -284,10 +284,32 @@ function findContractEntryForFamily(familyName, contractsByFamily, contracts) {
   )
 }
 
+function caseBelongsToFamily(contract, caseEntry, familyName) {
+  return (
+    contract.family === familyName ||
+    caseEntry.caseId?.startsWith(`${familyName}.`) ||
+    caseEntry.portalPath?.startsWith(`/reflection/${familyName}/`)
+  )
+}
+
 function selectContracts(contracts) {
   if (allFamilies) return contracts
-  if (family) return contracts.filter((entry) => entry.family === family)
+  if (family)
+    return contracts.filter(
+      (entry) =>
+        entry.family === family ||
+        (entry.contract.cases ?? []).some((caseEntry) =>
+          caseBelongsToFamily(entry.contract, caseEntry, family),
+        ),
+    )
   return contracts
+}
+
+function selectCaseEntries(contract) {
+  if (!family || contract.family === family) return contract.cases ?? []
+  return (contract.cases ?? []).filter((caseEntry) =>
+    caseBelongsToFamily(contract, caseEntry, family),
+  )
 }
 
 function validateSync(target, contract, contractPath) {
@@ -446,52 +468,20 @@ function validateCase({
     ),
   )
 
-  const frameId = caseEntry.figmaNodeId
-  if (!figmaNodeIdPattern.test(frameId ?? "")) {
-    checks.push(
-      createCheck(`${caseLabel} baseline frame node`, requireFrames ? "fail" : "warn", [
-        `pending top-level Reflection Baselines frame id: ${frameId ?? "undefined"}`,
-      ]),
-    )
-  } else {
-    const frameNode = findNodeById(rawSource, frameId)
-    const bounds = readNodeBounds(frameNode)
-    const dimensionsMatch =
-      frameNode &&
-      bounds &&
-      viewportSize &&
-      bounds.width === viewportSize.width &&
-      bounds.height === viewportSize.height
-    const nameMatches = frameNode && frameNode.name === caseEntry.figmaFrameName
-    const matches = dimensionsMatch && nameMatches
-    const status = matches
-      ? "pass"
-      : !frameNode && !requireFrames
-        ? "warn"
-        : !dimensionsMatch
-          ? "fail"
-          : requireFrames
-            ? "fail"
-            : "warn"
-    const details = []
-
-    if (!frameNode) {
-      details.push(`${frameId}: missing`)
-    } else {
-      details.push(
-        dimensionsMatch
-          ? `${frameId}: ${bounds.width}x${bounds.height}`
-          : `${frameId}: ${bounds?.width ?? "missing"}x${bounds?.height ?? "missing"}, expected ${viewportSize?.width}x${viewportSize?.height}`,
-      )
-      details.push(
-        nameMatches
-          ? `name: ${frameNode.name}`
-          : `name: ${frameNode.name ?? "missing"}, expected ${caseEntry.figmaFrameName}`,
-      )
-    }
-
-    checks.push(createCheck(`${caseLabel} baseline frame node`, status, details))
-  }
+  const provenanceCheck = validateGeneratedFrameProvenance({
+    repoRoot,
+    contract,
+    caseEntry,
+    context: receiptContext,
+    requireProvenance: requireFrames,
+  })
+  checks.push(
+    createCheck(
+      `${caseLabel} generated frame provenance`,
+      provenanceCheck.status,
+      provenanceCheck.details,
+    ),
+  )
 
   const threshold = caseEntry.comparison?.threshold
   const toleranceReason = caseEntry.comparison?.toleranceReason
@@ -689,7 +679,7 @@ function main() {
         `variable map: ${variableMapPath}`,
         `variable file key: ${variableSource.fileKey ?? "unknown"}`,
       ]),
-      ...contract.cases.flatMap((caseEntry) =>
+      ...selectCaseEntries(contract).flatMap((caseEntry) =>
         validateCase({
           contract,
           caseEntry,

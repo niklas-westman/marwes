@@ -58,6 +58,33 @@ workflow, use:
 REFLECTION_DESIGN_GOVERNANCE_FLOW.md
 ```
 
+## Default Workflow
+
+Use the `governance:*` commands for normal design-change work. The older
+`figma:*`, `reflection:*`, and `cohesive:*` commands still exist, but they are
+now the advanced building blocks behind this smaller surface.
+
+```bash
+pnpm governance:status
+pnpm governance:sync -- --mode cache
+pnpm governance:prepare -- --family <family> --connect --dry-run
+pnpm governance:prepare -- --family <family> --write --replace --export-baselines --accept-any-file
+pnpm governance:ingest -- --family <family> --dry-run
+pnpm governance:check -- --family <family>
+pnpm governance:visual
+pnpm governance:ci -- --skip-browser-install
+```
+
+For strict provenance audits, where generated Figma frame ids are required:
+
+```bash
+pnpm governance:ci:strict -- --skip-browser-install
+```
+
+`governance:status` is the fastest orientation command. It groups the local
+state into baseline PNGs, receipts, source nodes, generated-frame provenance,
+adapter portal coverage, and latest Reflection visual reports.
+
 ## Contract Layers
 
 ### 1. Figma Source
@@ -110,6 +137,8 @@ The contract connects every visual case to:
 - the source component node in the local Figma dump
 - required bound variables
 - the comparison threshold and reason
+- optional `prep` metadata for generating and exporting strict Figma baseline
+  frames
 
 For Button, the current contract is:
 
@@ -149,34 +178,51 @@ pnpm reflection:figma:receipts -- --family badge --dry-run
 
 Generated source-page frames are now the preferred path when catalog source
 frames already exist. They are created by the local Figma Reflection Frame Prep
-plugin from each family `frame-prep.json`:
+plugin from each family contract's `prep` metadata:
 
 ```bash
-pnpm reflection:figma:prepare-frames -- --family badge --connect --dry-run --replace --accept-any-file
-pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file
-pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines
+pnpm governance:prepare -- --family badge --connect --dry-run --replace --accept-any-file
+pnpm governance:prepare -- --family badge --write --replace --accept-any-file
+pnpm governance:prepare -- --family badge --write --replace --accept-any-file --export-baselines
 ```
 
 The bridge creates or replaces only plugin-managed frames, returns generated
-frame ids, and stores metadata on the generated frames. Do not force a full
-Figma REST fetch after every generated frame write. Refresh the local Figma raw
-source and variables at the start of a batch; use post-generation remote fetches
-only for strict audit/provenance checks.
+frame ids, exports PNGs, and writes local generated-frame provenance into:
+
+```text
+packages/design-governance/reflection-families/<family>/generated-frames.json
+```
+
+Do not force a full Figma REST fetch after every generated frame write. Refresh
+the local Figma raw source and variables at the start of a batch. After frame
+generation/export, the local strict evidence is `generated-frames.json`, not a
+fresh raw Figma dump that happens to include the temporary frames.
 
 The older compiler path still reads `pending-figma-frame-renames.json`,
 validates PNG dimensions, and renames files locally before placing them. It is
 useful for manual export folders. Active writes also create `.meta.json`
-receipts. Figma frame renames are still useful, but only as strict provenance
-hardening.
+receipts. Figma frame renames are still useful, but the committed
+generated-frame provenance is the durable audit artifact.
 
-When the real baseline frame ids are present, run the strict provenance check:
+Legacy `frame-prep.json` files are still accepted for one migration window, but
+new families should put preparation metadata directly in
+`reflection-contract.json`. Use this when migrating old manifests:
 
 ```bash
-pnpm cohesive:check -- --family button --require-figma-frames
+pnpm governance:migrate-contracts -- --dry-run
+pnpm governance:migrate-contracts -- --write
 ```
 
-Without `--require-figma-frames`, missing baseline frame ids are warnings so a
-family can be introduced before the final Figma frame ids are wired in.
+When `generated-frames.json` is present for the family, run the strict
+provenance check:
+
+```bash
+pnpm governance:check -- --family button --require-figma-frames
+```
+
+Without `--require-figma-frames`, missing or stale generated-frame provenance is
+a warning so a family can be introduced before the final export evidence is
+captured.
 
 ### 5. Reflection Portal Runtime
 
@@ -212,7 +258,7 @@ Remaining Button provenance step:
   `reflection-families/button/reflection-contract.json` with the real top-level
   Figma frame ids for the `reflection/button/.../light` frames.
 
-After that, `pnpm cohesive:check -- --family button --require-figma-frames`
+After that, `pnpm governance:check -- --family button --strict`
 should pass without warnings.
 
 ## Pre-Push And CI
@@ -232,7 +278,7 @@ run browser screenshots.
 Pull request CI runs:
 
 ```bash
-pnpm cohesive:ci
+pnpm governance:ci
 ```
 
 That is the merge gate for package-owned visual contracts. It checks every
@@ -243,15 +289,18 @@ evidence is needed.
 
 The current CI command requires baseline receipts, so it is fully local once
 `.figma/marwes`, `variables.json`, baseline PNGs, and `.meta.json` receipts are
-committed. It intentionally does not require generated Figma frame ids. Use
-`pnpm cohesive:ci:strict` only for a provenance audit where every active case
-has stable top-level generated frame ids.
+committed. It intentionally does not require generated-frame provenance. Use
+`pnpm governance:ci:strict` only for a provenance audit where every active case
+has a matching committed `generated-frames.json` entry.
+
+The older `cohesive:ci` and `cohesive:ci:strict` scripts still work and are what
+the governance aliases wrap.
 
 When a Reflection batch should be considered fully promoted across adapters,
 run:
 
 ```bash
-pnpm cohesive:check:complete
+pnpm governance:check -- --complete
 ```
 
 That gate fails if registered or prepared families are not yet promoted into
@@ -299,7 +348,7 @@ pnpm design:check
 Validate the package-owned Reflection/Figma visual contract for one family:
 
 ```bash
-pnpm cohesive:check -- --family button
+pnpm governance:check -- --family button
 ```
 
 This static check validates the Figma sync target, local raw nodes,
@@ -311,7 +360,7 @@ mandatory.
 
 When investigating a failing Reflection case, use this order:
 
-1. Run `pnpm cohesive:check -- --family <family>` to prove the source node,
+1. Run `pnpm governance:check -- --family <family>` to prove the source node,
    required variables, baseline PNG, and contract still connect.
 2. Inspect the source node in `.figma/marwes/_raw/<file-key>_full.json` or the
    family component JSON to collect dimensions, text styles, fills, strokes,
@@ -324,7 +373,7 @@ When investigating a failing Reflection case, use this order:
 Run the full visual Reflection loop:
 
 ```bash
-pnpm cohesive:visual
+pnpm governance:visual
 ```
 
 That runs `reflection:doctor`, `reflection:visual`, and `reflection:review`.
@@ -332,13 +381,13 @@ That runs `reflection:doctor`, `reflection:visual`, and `reflection:review`.
 Run the CI visual gate locally:
 
 ```bash
-pnpm cohesive:ci
+pnpm governance:ci
 ```
 
 Once all contracts have real top-level Figma baseline frame ids, use:
 
 ```bash
-pnpm cohesive:ci:strict
+pnpm governance:ci:strict
 ```
 
 ## Figma Plugin
@@ -371,7 +420,7 @@ while testing. After writing names, refresh `.figma/marwes` from the current
 Figma file and run:
 
 ```bash
-pnpm cohesive:check:strict
+pnpm governance:check -- --all --strict
 ```
 
 ## Validation Layers
@@ -410,17 +459,18 @@ docs/guides/add-new-reflection-component.md
 
 Short version:
 
-1. Create strict generated Figma baseline frames from `frame-prep.json`.
-2. Export each frame as PNG at scale `1` with a `.meta.json` receipt.
-3. Add a family folder under `reflection-families/<family>/`.
-4. Add `reflection-contract.json` with Figma frame ids, source component node ids,
-   viewport sizes, portal paths, required bound tokens, and comparison policy.
+1. Add a family folder under `reflection-families/<family>/`.
+2. Add `reflection-contract.json` with source component node ids, viewport
+   sizes, portal paths, required bound tokens, comparison policy, and `prep`
+   metadata.
+3. Create strict generated Figma baseline frames with `pnpm governance:prepare`.
+4. Export each frame as PNG at scale `1` with a `.meta.json` receipt.
 5. Compile/export PNGs into `reflection-families/<family>/baselines/`.
-6. Run `pnpm reflection:figma:receipts -- --family <family> --dry-run`.
-7. Run `pnpm cohesive:check -- --family <family> --require-baseline-receipts`.
-8. Run `pnpm cohesive:check -- --family <family> --require-figma-frames` once
+6. Run `pnpm governance:ingest -- --family <family> --dry-run`.
+7. Run `pnpm governance:check -- --family <family>`.
+8. Run `pnpm governance:check -- --family <family> --strict` once
    the real top-level baseline frame ids are present.
-9. Run `pnpm cohesive:visual`.
+9. Run `pnpm governance:visual`.
 
 ## Suggest Tokens
 

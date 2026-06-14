@@ -45,6 +45,23 @@
         },
         "strict": true,
         "toleranceReason": "Allows only localized Figma-PNG versus Chromium antialiasing drift across the 6px rounded slider track caps and 16px 1.5px stroked thumb after frame size, source-node bounds, mode background, value geometry, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "2462:11678",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2462-11678",
+        "outputFrameName": "reflection/slider/default/light",
+        "selector": {
+          "strategy": "directNode",
+          "sourceNodeId": "2462:12273"
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        },
+        "sourceNodeId": "2462:12273",
+        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2462-12273"
       }
     },
     {
@@ -87,6 +104,23 @@
         },
         "strict": true,
         "toleranceReason": "Allows only localized Figma-PNG versus Chromium antialiasing drift across the 6px rounded slider track caps and 16px 1.5px stroked thumb after frame size, source-node bounds, mode background, value geometry, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "2464:13677",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2464-13677",
+        "outputFrameName": "reflection/slider/default/dark",
+        "selector": {
+          "strategy": "directNode",
+          "sourceNodeId": "2464:13689"
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        },
+        "sourceNodeId": "2464:13689",
+        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2464-13689"
       }
     }
   ]

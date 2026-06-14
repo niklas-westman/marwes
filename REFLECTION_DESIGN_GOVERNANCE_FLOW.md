@@ -9,7 +9,8 @@ The short version:
 ```text
 Figma catalog source node
   + Figma variables
-  + generated Reflection baseline frame and PNG
+  + exported baseline PNG receipt
+  + generated-frame provenance
   + Reflection portal runtime render
   = evidence that Marwes still matches design intent
 ```
@@ -97,9 +98,11 @@ Possible answers:
 | `.figma/marwes/_raw/<fileKey>_full.json` | Figma sync | Local snapshot of the Figma file used for node/source validation. |
 | `.figma/marwes/tokens/variables.json` | Figma variable bridge | Local variable map used for token parity. |
 | `packages/design-governance/reflection-families/source-frame-registry.json` | Design governance | Catalog frame link registry for future Reflection families. |
-| `packages/design-governance/reflection-families/<family>/frame-prep.json` | Design governance | Executable selector manifest for generating strict Reflection frames from catalog frames. |
-| `packages/design-governance/reflection-families/<family>/reflection-contract.json` | Design governance | The active visual contract for static checks and portal config generation. |
+| `packages/design-governance/reflection-families/<family>/reflection-contract.json` | Design governance | The active visual contract for static checks, portal config generation, and Figma frame prep metadata. |
+| `packages/design-governance/reflection-families/<family>/frame-prep.json` | Design governance | Legacy fallback selector manifest accepted during the contract-prep migration window. |
 | `packages/design-governance/reflection-families/<family>/baselines/*.png` | Figma export workflow | Figma-exported visual truth images. |
+| `packages/design-governance/reflection-families/<family>/baselines/*.meta.json` | Design governance | Receipt proving PNG hash, dimensions, source fingerprint, variable fingerprint, and case fingerprint. |
+| `packages/design-governance/reflection-families/<family>/generated-frames.json` | Design governance | Local provenance for the temporary generated `reflection/*` Figma frames used to export baselines. |
 | `reflection.shared.ts` | Repo Reflection config | Builds Reflection cases from family contracts. |
 | `tests/reflection/*-portal*` | Adapter packages | Mounts the right React, Vue, and Svelte component state for each portal route. |
 | `.reflection/<adapter>/runs/` | Reflection | Local expected/actual/diff/report artifacts. |
@@ -129,7 +132,7 @@ packages/design-governance/reflection-families/source-frame-registry.json
 ```
 
 This registry is not an active Reflection contract. It is the source map used to
-build executable frame-prep manifests.
+build contract `prep` metadata for generated Reflection frames.
 
 ### 2. Refresh Local Figma Source Once Per Batch
 
@@ -144,7 +147,7 @@ The active target is:
 Normal local-cache refresh:
 
 ```bash
-pnpm design:sync -- --mode cache --skip-variables
+pnpm governance:sync -- --mode cache --skip-variables
 ```
 
 Variable refresh through the Figma Desktop bridge:
@@ -162,21 +165,22 @@ Plugins > Development > Marwes Figma Bridge
 Use remote Figma REST sync only when a live file fetch is intentionally needed:
 
 ```bash
-pnpm design:sync -- --mode remote --skip-variables
+pnpm governance:sync -- --mode remote --skip-variables
 ```
 
 Remote sync is not the normal inner loop. It is slower, token-dependent, and not
-needed after every generated Reflection frame.
+needed after every generated Reflection frame. Once a baseline is exported, the
+local loop relies on the committed PNG receipt and `generated-frames.json`.
 
-### 3. Create Or Update `frame-prep.json`
+### 3. Create Or Update Contract `prep`
 
-Each family that will generate Reflection-ready frames gets:
+Each family that will generate Reflection-ready frames declares prep metadata in:
 
 ```text
-packages/design-governance/reflection-families/<family>/frame-prep.json
+packages/design-governance/reflection-families/<family>/reflection-contract.json
 ```
 
-This file declares:
+Each active case can include a `prep` object that declares:
 
 - family id
 - Figma file key
@@ -186,6 +190,14 @@ This file declares:
 - selector strategy
 - viewport size
 - framing background, alignment, and padding
+
+Legacy `frame-prep.json` files are still accepted for one migration window. Move
+old prep manifests into contracts with:
+
+```bash
+pnpm governance:migrate-contracts -- --dry-run
+pnpm governance:migrate-contracts -- --write
+```
 
 Example output frame names:
 
@@ -226,13 +238,13 @@ packages/design-governance/figma-reflection-plugin/manifest.json
 Run a connected dry-run:
 
 ```bash
-pnpm reflection:figma:prepare-frames -- --family radio --connect --dry-run --replace --accept-any-file
+pnpm governance:prepare -- --family radio --connect --dry-run --replace --accept-any-file
 ```
 
 Useful batch command:
 
 ```bash
-pnpm reflection:figma:prepare-frames -- --family radio --family radio-group --family switch --family segmented-control --connect --dry-run --replace --accept-any-file --json
+pnpm governance:prepare -- --family radio --family radio-group --family switch --family segmented-control --connect --dry-run --replace --accept-any-file --json
 ```
 
 The connected dry-run proves:
@@ -251,7 +263,7 @@ This dry-run does not write frames.
 When the dry-run looks correct:
 
 ```bash
-pnpm reflection:figma:prepare-frames -- --family radio --write --replace --accept-any-file
+pnpm governance:prepare -- --family radio --write --replace --accept-any-file
 ```
 
 The bridge creates or replaces only plugin-managed frames. It does not delete
@@ -277,7 +289,7 @@ When the generated frames look right in Figma, export directly from those frame
 ids:
 
 ```bash
-pnpm reflection:figma:prepare-frames -- --family radio --write --replace --accept-any-file --export-baselines
+pnpm governance:prepare -- --family radio --write --replace --accept-any-file --export-baselines
 ```
 
 This uses the generated `reflection/*` frame ids and exports PNGs into:
@@ -403,13 +415,13 @@ duplicate frame dimensions in adapter code.
 Run the family check:
 
 ```bash
-pnpm cohesive:check -- --family radio
+pnpm governance:check -- --family radio
 ```
 
 Run all active families:
 
 ```bash
-pnpm cohesive:check:all
+pnpm governance:check
 ```
 
 Static checks prove:
@@ -429,7 +441,7 @@ Static checks prove:
 Strict provenance mode:
 
 ```bash
-pnpm cohesive:check:strict
+pnpm governance:check -- --all --strict
 ```
 
 Use strict mode once generated frame ids and provenance are complete for all
@@ -458,7 +470,7 @@ pnpm reflection:review
 The combined local visual loop:
 
 ```bash
-pnpm cohesive:visual
+pnpm governance:visual
 ```
 
 Adapter-specific commands are available when debugging:
@@ -519,28 +531,26 @@ Before pushing design-governance or visual-contract work:
 
 ```bash
 pnpm check:changed
-pnpm cohesive:check:all
-pnpm reflection:doctor
-pnpm reflection:visual
-pnpm reflection:review
+pnpm governance:check
+pnpm governance:visual
 ```
 
 CI-style gate:
 
 ```bash
-pnpm cohesive:ci
+pnpm governance:ci
 ```
 
 Strict CI gate after provenance is complete:
 
 ```bash
-pnpm cohesive:ci:strict
+pnpm governance:ci:strict
 ```
 
 CI should not promote baselines. It should only validate committed contracts,
 committed Figma-exported baselines, receipt sidecars, and runtime renders.
-`pnpm cohesive:ci` requires receipts. `pnpm cohesive:ci:strict` adds generated
-Figma frame-id provenance on top.
+`pnpm governance:ci` requires receipts. `pnpm governance:ci:strict` adds
+generated Figma frame-id provenance on top.
 
 Never use non-dry Reflection baseline update commands for this workflow. Figma
 exports remain the source of visual truth.

@@ -62,6 +62,23 @@
         },
         "strict": true,
         "toleranceReason": "Allows only small Figma-PNG versus Chromium checkbox glyph, text, border, and focus antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1369:4700",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1369-4700",
+        "outputFrameName": "reflection/checkbox/states-default/light",
+        "selector": {
+          "strategy": "rowContent",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Checkbox Field"
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
       }
     },
     {
@@ -121,6 +138,23 @@
         },
         "strict": true,
         "toleranceReason": "Allows only small Figma-PNG versus Chromium checkbox glyph, text, border, and focus antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "2542:28177",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2542-28177",
+        "outputFrameName": "reflection/checkbox/states-default/dark",
+        "selector": {
+          "strategy": "rowContent",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Checkbox Field"
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        }
       }
     }
   ]

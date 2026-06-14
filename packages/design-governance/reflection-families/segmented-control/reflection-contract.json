@@ -60,6 +60,24 @@
         },
         "strict": true,
         "toleranceReason": "Allows only small Figma-PNG versus Chromium segmented-control label, border, and active-surface antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1571:19406",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1571-19406",
+        "outputFrameName": "reflection/segmented-control/three-segments/light",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/3 segments",
+          "rowOccurrence": 0,
+          "childName": "Segmented control",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
       }
     },
     {
@@ -117,6 +135,24 @@
         },
         "strict": true,
         "toleranceReason": "Allows only small Figma-PNG versus Chromium segmented-control label, border, and active-surface antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "2702:10336",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2702-10336",
+        "outputFrameName": "reflection/segmented-control/three-segments/dark",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/3 segments",
+          "rowOccurrence": 0,
+          "childName": "Segmented control",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        }
       }
     }
   ]

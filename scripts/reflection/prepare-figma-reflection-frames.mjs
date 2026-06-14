@@ -13,6 +13,7 @@ import {
   loadReflectionContract,
   writeBaselineReceipt,
 } from "../../packages/design-governance/src/baseline-receipts.mjs"
+import { writeGeneratedFrameProvenance } from "../../packages/design-governance/src/generated-frame-provenance.mjs"
 
 const repoRoot = fileURLToPath(new URL("../../", import.meta.url))
 const defaultFamiliesRoot = "packages/design-governance/reflection-families"
@@ -41,8 +42,8 @@ function usage() {
     "Options:",
     `  --root <path>          Reflection families root. Defaults to ${defaultFamiliesRoot}.`,
     `  --source-registry <path> Source frame registry. Defaults to ${defaultSourceRegistry}.`,
-    "  --manifest <path>      Use one explicit frame-prep manifest.",
-    "  --all                  Use all frame-prep manifests under the families root.",
+    "  --manifest <path>      Use one explicit legacy frame-prep manifest.",
+    "  --all                  Use all reflection-contract prep entries under the families root.",
     "  --family <name>        Include one family. Can be repeated.",
     "  --case <caseId>        Include one case id.",
     "  --inspect-source-registry Inspect registry source frames instead of preparing cases.",
@@ -187,7 +188,7 @@ function absolute(path) {
   return resolve(repoRoot, path)
 }
 
-function listManifestPaths(options) {
+function listLegacyManifestPaths(options) {
   const explicit = options.manifests.map((path) => absolute(path))
   if (explicit.length > 0) return explicit
 
@@ -200,6 +201,19 @@ function listManifestPaths(options) {
     .map((entry) => entry.name)
     .filter((family) => options.all || familyFilter.has(family))
     .map((family) => join(root, family, "frame-prep.json"))
+    .filter((path) => existsSync(path))
+    .sort((left, right) => left.localeCompare(right))
+}
+
+function listContractPaths(options) {
+  if (options.manifests.length > 0) return []
+
+  const root = absolute(options.root)
+  if (!existsSync(root)) throw new Error(`Missing families root: ${options.root}`)
+
+  return readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => join(root, entry.name, "reflection-contract.json"))
     .filter((path) => existsSync(path))
     .sort((left, right) => left.localeCompare(right))
 }
@@ -365,6 +379,16 @@ function mergeSelector(caseSelector, modeEntry) {
   return selector
 }
 
+function reflectionFamilyFromPath(value, fallback) {
+  const match = String(value ?? "").match(/^\/?reflection\/([^/]+)\//u)
+  return match?.[1] ?? fallback
+}
+
+function selectedPrepFamily(options, family) {
+  if (options.families.length === 0) return options.all
+  return options.families.includes(family)
+}
+
 function normalizeManifest(manifest, manifestPath, options) {
   if (manifest.schemaVersion !== 1) {
     throw new Error(`${manifestPath} schemaVersion must be 1`)
@@ -418,6 +442,7 @@ function normalizeManifest(manifest, manifestPath, options) {
 
       frames.push({
         family: manifest.family,
+        contractFamily: manifest.family,
         caseId: caseEntry.caseId,
         mode,
         viewport: caseEntry.viewport,
@@ -441,11 +466,130 @@ function normalizeManifest(manifest, manifestPath, options) {
   }
 }
 
-function buildPlan(options) {
-  const manifestPaths = listManifestPaths(options)
-  if (manifestPaths.length === 0) throw new Error("No frame-prep manifests matched the selection.")
+function normalizeContractPrep(contract, contractPath, options) {
+  if (contract.schemaVersion !== 1) {
+    throw new Error(`${contractPath} schemaVersion must be 1`)
+  }
 
-  const manifests = manifestPaths.map((path) => normalizeManifest(readJson(path), path, options))
+  if (!contract.family || typeof contract.family !== "string") {
+    throw new Error(`${contractPath} family must be a string`)
+  }
+
+  if (!contract.figmaFileKey || typeof contract.figmaFileKey !== "string") {
+    throw new Error(`${contractPath} figmaFileKey must be a string`)
+  }
+
+  if (!Array.isArray(contract.cases)) {
+    throw new Error(`${contractPath} cases must be an array`)
+  }
+
+  const frames = []
+
+  for (const caseEntry of contract.cases) {
+    if (options.caseId && caseEntry.caseId !== options.caseId) continue
+    if (!caseEntry.prep) continue
+
+    const mode = caseEntry.mode
+    const label = `${contract.family}:${caseEntry.caseId}:${mode}`
+    if (!defaultModes.includes(mode)) {
+      throw new Error(`${label} mode must be one of: ${defaultModes.join(", ")}`)
+    }
+
+    validateViewportSize(caseEntry, `${contract.family}:${caseEntry.caseId}`)
+
+    const outputFrameName = caseEntry.prep.outputFrameName ?? caseEntry.figmaFrameName
+    const prepFamily = reflectionFamilyFromPath(outputFrameName, contract.family)
+    if (!selectedPrepFamily(options, prepFamily)) continue
+
+    const modeEntry = {
+      sourceFrameId: caseEntry.prep.sourceFrameId,
+      sourceFrameUrl: caseEntry.prep.sourceFrameUrl,
+      sourceNodeId: caseEntry.prep.sourceNodeId,
+      sourceNodeUrl: caseEntry.prep.sourceNodeUrl,
+      outputFrameName,
+      selector: caseEntry.prep.selector,
+      framing: caseEntry.prep.framing,
+    }
+    const selector = mergeSelector(undefined, modeEntry)
+
+    validateSelector(selector, modeEntry, label)
+    validateFrameName(outputFrameName, prepFamily, mode, label)
+    validateFigmaNodeUrl(
+      modeEntry.sourceFrameUrl,
+      contract.figmaFileKey,
+      modeEntry.sourceFrameId,
+      label,
+      "prep.sourceFrameUrl",
+    )
+    validateFigmaNodeUrl(
+      modeEntry.sourceNodeUrl,
+      contract.figmaFileKey,
+      modeEntry.sourceNodeId,
+      label,
+      "prep.sourceNodeUrl",
+    )
+
+    frames.push({
+      family: prepFamily,
+      contractFamily: contract.family,
+      caseId: caseEntry.caseId,
+      mode,
+      viewport: caseEntry.viewport,
+      viewportSize: caseEntry.viewportSize,
+      sourceFrameId: modeEntry.sourceFrameId,
+      sourceFrameUrl: modeEntry.sourceFrameUrl,
+      sourceNodeId: modeEntry.sourceNodeId,
+      sourceNodeUrl: modeEntry.sourceNodeUrl,
+      outputFrameName,
+      framing: modeEntry.framing ?? caseEntry.framing ?? {},
+      selector,
+    })
+  }
+
+  return {
+    family: contract.family,
+    figmaFileKey: contract.figmaFileKey,
+    outputPage: "Reflection Baselines",
+    frames,
+    sourceType: "reflection-contract",
+    sourcePath: contractPath,
+  }
+}
+
+function buildPlan(options) {
+  const contractPaths = listContractPaths(options)
+  const contractManifests = contractPaths
+    .map((path) => normalizeContractPrep(readJson(path), path, options))
+    .filter((manifest) => manifest.frames.length > 0)
+  const contractFrameNames = new Set(
+    contractManifests.flatMap((manifest) => manifest.frames.map((frame) => frame.outputFrameName)),
+  )
+
+  const legacyManifestPaths = listLegacyManifestPaths(options)
+  const legacyManifests = legacyManifestPaths
+    .map((path) => {
+      const manifest = normalizeManifest(readJson(path), path, options)
+      return {
+        ...manifest,
+        sourceType: "legacy-frame-prep",
+        sourcePath: path,
+        frames: manifest.frames.filter((frame) => !contractFrameNames.has(frame.outputFrameName)),
+      }
+    })
+    .filter((manifest) => manifest.frames.length > 0)
+  const manifests = [...contractManifests, ...legacyManifests]
+  const warnings =
+    legacyManifests.length > 0
+      ? [
+          "Using legacy frame-prep.json fallback for at least one case. Run pnpm governance:migrate-contracts -- --write to move prep metadata into reflection-contract.json.",
+        ]
+      : []
+  const manifestPaths = manifests.map((manifest) => manifest.sourcePath ?? "unknown")
+
+  if (manifests.length === 0) {
+    throw new Error("No reflection contract prep entries or legacy frame-prep manifests matched.")
+  }
+
   const fileKeys = [...new Set(manifests.map((manifest) => manifest.figmaFileKey))]
   const outputPages = [...new Set(manifests.map((manifest) => manifest.outputPage))]
 
@@ -465,6 +609,7 @@ function buildPlan(options) {
     outputPage: options.outputPage ?? outputPages[0],
     destination: options.destination,
     manifestPaths,
+    warnings,
     frames,
   }
 }
@@ -474,6 +619,7 @@ function printOfflinePlan(plan, options) {
   log(options, `Figma file key: ${plan.figmaFileKey}`)
   log(options, `Destination: ${plan.destination}`)
   if (plan.destination === "named") log(options, `Output page: ${plan.outputPage}`)
+  for (const warning of plan.warnings ?? []) log(options, `Warning: ${warning}`)
   log(options, "")
 
   for (const frame of plan.frames) {
@@ -533,6 +679,7 @@ function collectExportableFrameEntries(result, plan, options) {
     entries.push({
       caseId: frame.caseId,
       family: frame.family,
+      contractFamily: frame.contractFamily ?? frame.family,
       mode: frame.mode,
       figmaFileKey: plan.figmaFileKey,
       figmaNodeId: entry.figmaNodeId,
@@ -543,6 +690,14 @@ function collectExportableFrameEntries(result, plan, options) {
       viewportSize: frame.viewportSize,
       framing: frame.framing,
       exportScale: 1,
+      requestHash: entry.requestHash,
+      sourceFingerprint: entry.sourceFingerprint,
+      destinationPageId: entry.destinationPageId,
+      destinationPageName: entry.destinationPageName,
+      position: entry.position,
+      placementAnchor: entry.placementAnchor,
+      status: entry.status,
+      reason: entry.reason,
     })
   }
 
@@ -608,6 +763,7 @@ async function runBridgeBaselineExport(server, client, result, plan, options) {
   const caseIndex = new Map(cases.map((entry) => [entry.baseline, entry]))
   const receiptContext = loadDesignSource(repoRoot)
   const written = []
+  const exportedByFamily = new Map()
 
   for (const exported of exportResult.exported ?? []) {
     const entry = caseIndex.get(exported.baseline)
@@ -627,13 +783,13 @@ async function runBridgeBaselineExport(server, client, result, plan, options) {
     const destination = resolveInside(baselineRoot, entry.baseline)
     await mkdir(dirname(destination), { recursive: true })
     await writeFile(destination, buffer)
-    const contractEntry = loadReflectionContract(repoRoot, entry.family)
+    const contractEntry = loadReflectionContract(repoRoot, entry.contractFamily)
     const caseEntry = contractEntry
       ? findContractCase(contractEntry.contract, entry.caseId, entry.mode)
       : undefined
 
     if (!contractEntry) {
-      throw new Error(`Could not find reflection contract for ${entry.family}`)
+      throw new Error(`Could not find reflection contract for ${entry.contractFamily}`)
     }
 
     if (!caseEntry) {
@@ -649,6 +805,8 @@ async function runBridgeBaselineExport(server, client, result, plan, options) {
       origin: "figma-bridge-export",
       sourceFrameId: entry.sourceFrameId,
     })
+    if (!exportedByFamily.has(entry.contractFamily)) exportedByFamily.set(entry.contractFamily, [])
+    exportedByFamily.get(entry.contractFamily).push(entry)
     written.push({
       caseId: entry.caseId,
       family: entry.family,
@@ -661,10 +819,23 @@ async function runBridgeBaselineExport(server, client, result, plan, options) {
     })
   }
 
+  const provenance = []
+  for (const [family, entries] of exportedByFamily.entries()) {
+    provenance.push(
+      await writeGeneratedFrameProvenance({
+        repoRoot,
+        family,
+        context: receiptContext,
+        entries,
+      }),
+    )
+  }
+
   return {
     dryRun: false,
     cases,
     written,
+    provenance,
     exported: exportResult.exported?.length ?? 0,
   }
 }
@@ -1209,7 +1380,13 @@ async function runConnected(plan, options) {
     }
 
     if (options.json) {
-      console.log(JSON.stringify({ ...summary, baselineExport, details: result }, null, 2))
+      console.log(
+        JSON.stringify(
+          { ...summary, warnings: plan.warnings, baselineExport, details: result },
+          null,
+          2,
+        ),
+      )
     } else {
       log(options, "")
       log(
@@ -1222,6 +1399,7 @@ async function runConnected(plan, options) {
         options,
         `Conflicts: ${summary.conflicts}; missing: ${summary.missing}; errors: ${summary.errors}`,
       )
+      for (const warning of plan.warnings ?? []) log(options, `Warning: ${warning}`)
       if (summary.dryRun) {
         log(options, "No Figma changes were made. Re-run with --write to create frames.")
       }
@@ -1301,6 +1479,7 @@ async function main(argv) {
             destination: plan.destination,
             total: plan.frames.length,
             manifests: plan.manifestPaths.map((path) => relative(repoRoot, path)),
+            warnings: plan.warnings,
             frames: plan.frames,
           },
           null,
