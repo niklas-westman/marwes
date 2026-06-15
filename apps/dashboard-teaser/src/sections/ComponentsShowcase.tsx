@@ -22,7 +22,7 @@ const ContentGrid = styled.div`
     `calc(${theme.breakpoint.wideDesktop}px - (${theme.spacing.sp72} * 2))`};
   margin: 0 auto;
   background: ${({ theme }) => theme.color.surface};
-  border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
+  border-radius: ${({ theme }) => dashboardRadius(theme, 8)};
   padding: ${({ theme }) => `clamp(${theme.spacing.sp16}, 3vw, ${theme.spacing.sp32})`};
   display: flex;
   flex-direction: column;
@@ -33,8 +33,12 @@ const ContentGrid = styled.div`
   }
 `
 
-const Row = styled.div`
+const Row = styled.div<{ $desktopHeight: string }>`
   ${dashboardRowStyles}
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    min-height: ${(p) => p.$desktopHeight};
+  }
 `
 
 function ComponentsShowcase(): JSX.Element {
@@ -42,28 +46,28 @@ function ComponentsShowcase(): JSX.Element {
     <ShowcaseContainer>
       <ContentGrid>
         <Text variant={TextVariant.overline}>Components</Text>
-        <Row>
+        <Row $desktopHeight="32.25rem">
           <RowSwitchCard />
         </Row>
-        <Row>
+        <Row $desktopHeight="19.375rem">
           <RowAccordionInput />
         </Row>
-        <Row>
+        <Row $desktopHeight="29.5rem">
           <RowToastMenuAvatar />
         </Row>
-        <Row>
+        <Row $desktopHeight="12.625rem">
           <RowAvatarBreadcrumbDialog />
         </Row>
-        <Row>
+        <Row $desktopHeight="13.5rem">
           <RowBanner />
         </Row>
-        <Row>
+        <Row $desktopHeight="9rem">
           <RowButtonPaginationProgress />
         </Row>
-        <Row>
+        <Row $desktopHeight="15.75rem">
           <RowSegmented />
         </Row>
-        <Row>
+        <Row $desktopHeight="10.25rem">
           <RowSpinner />
         </Row>
       </ContentGrid>

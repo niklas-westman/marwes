@@ -25,16 +25,23 @@ type ToastVariant = "subtle" | "outline" | "rich"
 const ToastMosaicGrid = styled.div`
   display: grid;
   width: 100%;
+  height: 100%;
   min-width: 0;
-  grid-template-columns: minmax(20rem, 22rem) minmax(15.5rem, 17.25rem) minmax(0, 1fr);
   gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    grid-template-columns: minmax(20rem, 22rem) minmax(15.5rem, 17.25rem) minmax(0, 1fr);
+    grid-template-rows: 9rem 21rem;
+  }
 
   > * {
     min-width: 0;
   }
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
+    height: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
   }
 
   ${({ theme }) => theme.media.tabletAndBelow} {
@@ -46,6 +53,7 @@ const ToastCard = styled(Card)`
   grid-column: 1;
   grid-row: span 2;
   flex-shrink: 1;
+  height: 100%;
 
   .mw-segmented-control,
   .mw-toast {
@@ -54,7 +62,7 @@ const ToastCard = styled(Card)`
     max-width: 100%;
   }
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
     grid-column: span 1;
     grid-row: auto;
   }
@@ -68,13 +76,14 @@ const MenuCard = styled(Card)`
   grid-column: 2;
   grid-row: span 2;
   flex-shrink: 1;
+  height: 100%;
 
   .mw-context-menu {
     width: min(100%, 13.25rem);
     max-width: 100%;
   }
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
     grid-column: span 1;
     grid-row: auto;
   }
@@ -88,9 +97,10 @@ const AvatarCard = styled(Card)`
   grid-column: 3;
   grid-row: 1;
   flex-shrink: 1;
+  height: 100%;
   min-height: 0;
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
     grid-column: 1 / -1;
     grid-row: auto;
   }
@@ -100,13 +110,14 @@ const BreadcrumbCard = styled(Card)`
   grid-column: 3;
   grid-row: 2;
   flex-shrink: 1;
+  height: 100%;
   min-height: 0;
 
   .mw-breadcrumb {
     max-width: 100%;
   }
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
     grid-column: 1 / -1;
     grid-row: auto;
   }
@@ -115,7 +126,7 @@ const BreadcrumbCard = styled(Card)`
 const ToastList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sp8};
+  gap: ${({ theme }) => theme.spacing.sp16};
 `
 
 const toastVariantItems: SegmentedControlItem[] = [

@@ -30,10 +30,11 @@ describe("avatar.css figma sync contract", () => {
 
   it("matches standalone and grouped icon avatar surfaces", () => {
     expect(css).toContain(
-      ".mw-avatar--icon {\n  --mw-avatar-surface: var(--mw-color-surface-primary, #ffffff);\n  --mw-avatar-border-width: 1px;\n  --mw-avatar-border-color: var(--mw-color-border-full, #000000);",
+      ".mw-avatar--icon {\n  --mw-avatar-surface: var(--mw-color-surface-primary, #ffffff);\n  --mw-avatar-border-width: 1px;\n  --mw-avatar-border-color: color-mix(",
     )
+    expect(css).toContain("var(--mw-color-border-full, #000000) 20%")
     expect(css).toContain("--mw-avatar-surface: var(--mw-color-surface-elevated, #2b2b2b);")
-    expect(css).toContain("--mw-avatar-border-color: var(--mw-color-border-full, #ffffff);")
+    expect(css).toContain("var(--mw-color-border-full, #ffffff) 30%")
     expect(css).toContain(
       ".mw-avatar-group__item > .mw-avatar--icon {\n  --mw-avatar-surface: var(--mw-color-surface, #f8f8f8);\n  --mw-avatar-border-width: 0px;\n  --mw-avatar-border-color: transparent;",
     )

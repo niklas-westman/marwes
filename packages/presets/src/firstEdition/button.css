@@ -109,27 +109,44 @@
 
 /* TEXT - Minimal text-only button, content-hugging (no fixed height). */
 .mw-btn.mw-btn--text {
+  position: relative;
+  isolation: isolate;
   background: transparent;
-  color: var(--mw-color-primary-base);
+  color: var(--mw-color-text);
   border-color: transparent;
   border-width: 0;
   height: auto;
   padding: 0;
   border-radius: var(--mw-ui-radius);
+  overflow: visible;
 }
 
-.mw-btn--text:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent);
+.mw-btn.mw-btn--text::before {
+  content: "";
+  position: absolute;
+  inset: -0.25rem -0.5rem;
+  z-index: -1;
+  border-radius: var(--mw-ui-radius);
+  background: transparent;
+  pointer-events: none;
 }
 
-.mw-btn--text:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent);
+.mw-btn--text:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-border-full) 10%, transparent);
+}
+
+.mw-btn--text:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-border-full) 20%, transparent);
 }
 
 .mw-btn.mw-btn--text[data-action="navigate"] {
   padding: 0.125rem 0;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.mw-btn.mw-btn--text[data-action="navigate"]::before {
+  content: none;
 }
 
 /* SIZES */

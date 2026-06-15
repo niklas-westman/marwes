@@ -28,6 +28,7 @@
       "@marwes-ui/core": ["./packages/core/src/index.ts"],
       "@marwes-ui/presets": ["./packages/presets/src/index.ts"],
       "@marwes-ui/presets/firstEdition": ["./packages/presets/src/firstEdition/index.ts"],
+      "@marwes-ui/cli": ["./packages/cli/src/index.ts"],
       "@marwes-ui/react": ["./packages/react/src/index.ts"],
       "@marwes-ui/react/ssr": ["./packages/react/src/ssr.tsx"],
       "@marwes-ui/vue/ssr": ["./packages/vue/src/ssr.ts"],

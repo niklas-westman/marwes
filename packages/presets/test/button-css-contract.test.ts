@@ -26,22 +26,31 @@ describe("firstEdition button css contract", () => {
     expect(css).toContain("border-color: var(--mw-color-danger-base);")
   })
 
-  it("uses emitted theme color vars for text buttons", () => {
+  it("keeps text button overlays aligned to the Figma state-layer geometry", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 
-    expect(css).toContain("color: var(--mw-color-primary-base);")
-    expect(css).toContain("color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent)")
-    expect(css).toContain("color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent)")
+    expect(css).toContain("color: var(--mw-color-text);")
+    expect(css).toContain(".mw-btn.mw-btn--text::before")
+    expect(css).toContain("inset: -0.25rem -0.5rem;")
+    expect(css).toContain(".mw-btn--text:hover:not(:disabled)::before")
+    expect(css).toContain(".mw-btn--text:active:not(:disabled)::before")
+    expect(css).toContain(
+      "background: color-mix(in srgb, var(--mw-color-border-full) 10%, transparent);",
+    )
+    expect(css).toContain(
+      "background: color-mix(in srgb, var(--mw-color-border-full) 20%, transparent);",
+    )
 
-    expect(css).not.toContain("--mw-color-text-label")
-    expect(css).not.toContain("--mw-color-text-surface")
-    expect(css).not.toContain("--mw-color-text-surface-pressed")
+    expect(css).not.toContain("color-mix(in srgb, var(--mw-color-primary-base) 8%, transparent)")
+    expect(css).not.toContain("color-mix(in srgb, var(--mw-color-primary-base) 12%, transparent)")
   })
 
   it("renders navigation text buttons as compact underlined links", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 
     expect(css).toContain('.mw-btn.mw-btn--text[data-action="navigate"]')
+    expect(css).toContain('.mw-btn.mw-btn--text[data-action="navigate"]::before')
+    expect(css).toContain("content: none;")
     expect(css).toContain("padding: 0.125rem 0;")
     expect(css).toContain("text-decoration: underline;")
     expect(css).toContain("text-underline-offset: 2px;")

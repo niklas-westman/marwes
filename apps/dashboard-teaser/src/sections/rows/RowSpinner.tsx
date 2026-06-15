@@ -5,7 +5,13 @@ import styled from "styled-components"
 import { FlexCard, ShowcaseRow } from "./shared"
 
 const LeftCard = styled(FlexCard)`
-  max-width: 20.0625rem;
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    flex: 0 0 20.0625rem;
+  }
+
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
+    max-width: 20.0625rem;
+  }
 `
 
 const RightCard = styled(FlexCard)``

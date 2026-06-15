@@ -3,7 +3,7 @@ import {
   CurrencyField,
   EmailField,
   PhoneField,
-  SelectField,
+  Select,
   Text,
   TextVariant,
 } from "@marwes-ui/react"
@@ -12,10 +12,35 @@ import styled from "styled-components"
 
 import { FlexCard, ShowcaseRow, ShowcaseStack } from "./shared"
 
-const AccordionCard = styled(FlexCard)``
+const AccordionCard = styled(FlexCard).attrs({
+  $desktopWidth: "54rem",
+})``
 
 const InputCard = styled(FlexCard)`
-  max-width: 21.5rem;
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    flex: 0 0 21.5rem;
+  }
+
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
+    max-width: 21.5rem;
+  }
+`
+
+const PurposeSelect = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sp8};
+  align-items: flex-start;
+
+  .mw-select__control {
+    width: 8.4375rem;
+  }
+
+  .mw-select {
+    width: 100%;
+    font-weight: 500;
+    letter-spacing: -0.02625rem;
+  }
 `
 
 type FieldType = "currency" | "email" | "phone"
@@ -58,18 +83,19 @@ function RowAccordionInput(): JSX.Element {
       <InputCard>
         <Text variant={TextVariant.overline}>Input fields</Text>
         <ShowcaseStack>
-          <SelectField
-            label="Purpose"
-            select={{
-              options: [
+          <PurposeSelect>
+            <Text variant={TextVariant.overline}>Purpose</Text>
+            <Select
+              label="Purpose"
+              options={[
                 { value: "currency", label: "Currency field" },
                 { value: "email", label: "Email field" },
                 { value: "phone", label: "Phone field" },
-              ],
-              value: selectedField,
-              onValueChange: (v) => setSelectedField(v as FieldType),
-            }}
-          />
+              ]}
+              value={selectedField}
+              onValueChange={(v) => setSelectedField(v as FieldType)}
+            />
+          </PurposeSelect>
           {selectedField === "currency" && (
             <CurrencyField
               label="Amount"

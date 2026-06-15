@@ -13,10 +13,18 @@ import styled from "styled-components"
 
 import { FlexCard, ShowcaseRow, ShowcaseStack } from "./shared"
 
-const LeftCard = styled(FlexCard)``
+const LeftCard = styled(FlexCard).attrs({
+  $desktopWidth: "57.375rem",
+})``
 
 const RightCard = styled(FlexCard)`
-  max-width: 18.125rem;
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    flex: 0 0 18.125rem;
+  }
+
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
+    max-width: 18.125rem;
+  }
 `
 
 function RowAvatarBreadcrumbDialog(): JSX.Element {

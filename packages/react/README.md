@@ -44,6 +44,20 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Install
 
+For an existing app, the recommended setup path is the Marwes CLI:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter react
+```
+
+For a new Vite app:
+
+```bash
+pnpm create marwes@latest my-app --template react-ts
+```
+
+Manual install:
+
 ```bash
 pnpm add @marwes-ui/react react react-dom
 ```

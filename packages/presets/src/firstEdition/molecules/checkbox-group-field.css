@@ -77,14 +77,3 @@
 .mw-checkbox-group-field--invalid .mw-checkbox-group-field__error .mw-text {
   color: var(--mw-color-danger-base, #d90429);
 }
-
-@supports selector(:has(*)) {
-  .mw-checkbox-group-field__option:has(.mw-checkbox:focus-visible) {
-    outline: 2px solid var(--mw-color-focus);
-    outline-offset: 2px;
-  }
-
-  .mw-checkbox-group-field__option:has(.mw-checkbox:focus-visible) .mw-checkbox {
-    outline: none;
-  }
-}

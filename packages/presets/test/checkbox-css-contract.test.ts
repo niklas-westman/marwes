@@ -21,22 +21,24 @@ describe("firstEdition checkbox css contract", () => {
     expect(css).toContain("--mw-checkbox-check: var(--mw-color-primary-label);")
   })
 
-  it("keeps keyboard focus visible for checkbox field rows", () => {
+  it("keeps keyboard focus visible on the checkbox control", () => {
+    const checkboxCss = readFileSync(checkboxCssPath, "utf8")
     const css = readFileSync(checkboxFieldCssPath, "utf8")
 
-    expect(css).toContain(".mw-checkbox-field__row:has(.mw-checkbox:focus-visible)")
-    expect(css).toContain("outline: 2px solid var(--mw-color-focus);")
+    expect(checkboxCss).toContain(".mw-checkbox:focus-visible")
+    expect(checkboxCss).toContain("outline: 2px solid var(--mw-color-focus);")
+    expect(css).not.toContain(".mw-checkbox-field__row:has(.mw-checkbox:focus-visible)")
     expect(css).toContain(".mw-checkbox-field__description .mw-text")
     expect(css).toContain(".mw-checkbox-field__error .mw-text")
     expect(css).toContain(".mw-checkbox-field--invalid .mw-checkbox-field__label .mw-text")
   })
 
-  it("keeps checkbox group legends aligned and group rows keyboard-focusable", () => {
+  it("keeps checkbox group legends aligned without stretching focus rings to full rows", () => {
     const css = readFileSync(checkboxGroupFieldCssPath, "utf8")
 
     expect(css).toContain("min-inline-size: 0;")
     expect(css).toContain("padding: 0;")
-    expect(css).toContain(".mw-checkbox-group-field__option:has(.mw-checkbox:focus-visible)")
+    expect(css).not.toContain(".mw-checkbox-group-field__option:has(.mw-checkbox:focus-visible)")
     expect(css).toContain(".mw-checkbox-group-field__option-content")
     expect(css).toContain(".mw-checkbox-group-field__option-label")
     expect(css).toContain(".mw-checkbox-group-field__option-description")

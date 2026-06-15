@@ -1,0 +1,37 @@
+{
+  "name": "create-marwes",
+  "version": "0.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
+  "bin": {
+    "create-marwes": "dist/cli.js"
+  },
+  "files": ["dist", "README.md", "CHANGELOG.md"],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "test": "NODE_ENV=test vitest run --config vitest.config.ts",
+    "clean": "rimraf dist",
+    "lint": "biome lint .",
+    "format": "biome format --write ."
+  },
+  "dependencies": {
+    "@marwes-ui/cli": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.10",
+    "rimraf": "6.1.2",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.8"
+  }
+}

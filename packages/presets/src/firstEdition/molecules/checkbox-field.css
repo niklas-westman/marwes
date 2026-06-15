@@ -28,17 +28,6 @@
   color: inherit;
 }
 
-@supports selector(:has(*)) {
-  .mw-checkbox-field__row:has(.mw-checkbox:focus-visible) {
-    outline: 2px solid var(--mw-color-focus);
-    outline-offset: 2px;
-  }
-
-  .mw-checkbox-field__row:has(.mw-checkbox:focus-visible) .mw-checkbox {
-    outline: none;
-  }
-}
-
 .mw-checkbox-field__error {
   margin-left: calc(
     var(--mw-density-checkbox-size) +

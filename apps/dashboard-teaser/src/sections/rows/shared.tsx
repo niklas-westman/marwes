@@ -7,8 +7,14 @@ type ShowcaseCardSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 type ShowcaseTabletSpan = 1 | 2
 type ShowcaseCardStart = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
-const Card = styled.div<{ $width?: string; $height?: string }>`
+const Card = styled.div<{
+  $width?: string
+  $height?: string
+  $desktopWidth?: string
+  $desktopHeight?: string
+}>`
   ${cardShellStyles}
+  box-sizing: border-box;
   padding: ${({ theme }) => theme.spacing.sp24};
   display: flex;
   flex-direction: column;
@@ -18,6 +24,17 @@ const Card = styled.div<{ $width?: string; $height?: string }>`
   min-height: ${(p) => p.$height ?? "auto"};
   flex-shrink: 0;
 
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    width: ${(p) => p.$desktopWidth ?? p.$width ?? "auto"};
+    min-height: ${(p) => p.$desktopHeight ?? p.$height ?? "auto"};
+    padding: ${({ theme }) => theme.spacing.sp32};
+    gap: ${({ theme }) => theme.spacing.sp24};
+  }
+
+  > span:first-child {
+    color: ${({ theme }) => theme.color.textMuted};
+  }
+
   ${({ theme }) => theme.media.mobileAndBelow} {
     padding: ${({ theme }) => theme.spacing.sp16};
   }
@@ -25,6 +42,10 @@ const Card = styled.div<{ $width?: string; $height?: string }>`
 
 const FlexCard = styled(Card)`
   flex: 1 1 0;
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    flex: ${(p) => (p.$desktopWidth ? `0 0 ${p.$desktopWidth}` : "1 1 0")};
+  }
 
   ${({ theme }) => theme.media.mobileAndBelow} {
     flex-shrink: 1;
@@ -43,7 +64,7 @@ const ShowcaseGrid = styled.div`
     min-width: 0;
   }
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -74,7 +95,7 @@ const ShowcaseCard = styled(Card)<{
       : `span ${p.$desktopSpan ?? 4}`};
   flex-shrink: 1;
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
+  ${({ theme }) => theme.media.wideDesktopAndBelow} {
     grid-column: span ${(p) => p.$tabletSpan ?? 1};
   }
 

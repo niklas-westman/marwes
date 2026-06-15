@@ -44,6 +44,20 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Install
 
+For an existing app, the recommended setup path is the Marwes CLI:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter vue
+```
+
+For a new Vite app:
+
+```bash
+pnpm create marwes@latest my-app --template vue-ts
+```
+
+Manual install:
+
 ```bash
 pnpm add @marwes-ui/vue vue
 ```

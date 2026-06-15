@@ -12,6 +12,10 @@ const HeroContainer = styled.section`
   justify-content: space-between;
   align-items: center;
 
+  ${({ theme }) => theme.media.desktopAndAbove} {
+    height: 33rem;
+  }
+
   ${({ theme }) => theme.media.desktopAndBelow} {
     align-items: flex-start;
     flex-direction: column;

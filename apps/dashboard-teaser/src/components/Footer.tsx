@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const FooterContainer = styled.footer`
   width: 100%;
-  height: ${({ theme }) => theme.spacing.sp64};
+  height: ${({ theme }) => theme.spacing.sp48};
   display: flex;
   align-items: center;
   padding: 0 ${({ theme }) => theme.spacing.sp80};
