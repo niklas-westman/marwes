@@ -79,18 +79,42 @@ export function templateFromAdapter(adapter: Adapter): MarwesTemplate {
   return getAdapterRecipe(adapter).viteTemplate
 }
 
+export function packageRunnerCommand(
+  packageManager: PackageManager,
+  packageName = "@marwes-ui/cli",
+): string {
+  if (packageManager === "pnpm") {
+    return `pnpm dlx ${packageName}`
+  }
+
+  if (packageManager === "npm") {
+    return `npx ${packageName}`
+  }
+
+  if (packageManager === "yarn") {
+    return `yarn dlx ${packageName}`
+  }
+
+  return `bunx ${packageName}`
+}
+
+export function createAgenticInitCommand(adapter: Adapter, packageManager: PackageManager): string {
+  return `${packageRunnerCommand(packageManager)} init --adapter ${adapter} --agentic`
+}
+
 export function createAiPrompt(adapter: Adapter, packageManager: PackageManager): string {
   const recipe = getAdapterRecipe(adapter)
-  const installCommand = `${packageManager} add ${recipe.installPackages.join(" ")}`
+  const installCommand = createAgenticInitCommand(adapter, packageManager)
 
   return [
     `Install and wire Marwes UI for a ${recipe.displayName} app using ${packageManager}.`,
     `Run: ${installCommand}.`,
-    `Wrap the app root with ${recipe.providerImport} from ${recipe.packageName}.`,
+    "Follow the CLI output exactly.",
+    `If automatic patching is skipped, wrap the app root with ${recipe.providerImport} from ${recipe.packageName}.`,
     `Import Marwes components, enums, hooks/helpers, and theme tokens only from ${recipe.packageName}.`,
     "Do not install @marwes-ui/core or @marwes-ui/presets directly.",
     `Do not add a separate Marwes stylesheet import; the ${recipe.displayName} adapter loads the default styles automatically.`,
-    "Add a small smoke render, for example a Marwes Button, and verify the app compiles.",
+    "Add a small smoke render, for example a Marwes Button, after the installer completes.",
   ].join("\n")
 }
 

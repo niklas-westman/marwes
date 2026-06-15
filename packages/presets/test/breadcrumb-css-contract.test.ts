@@ -17,16 +17,18 @@ describe("firstEdition breadcrumb css contract", () => {
     expect(css).toContain("--mw-breadcrumb-home-size: 14px;")
     expect(css).toContain("--mw-breadcrumb-separator-size: 12px;")
     expect(css).toContain("--mw-breadcrumb-separator-padding: 6px;")
+    expect(css).toContain("--mw-breadcrumb-row-gap: 4px;")
+    expect(css).toContain("row-gap: var(--mw-breadcrumb-row-gap);")
   })
 
   it("maps Figma colors to semantic theme variables", () => {
     const css = readFileSync(breadcrumbCssPath, "utf8")
 
-    expect(css).toContain(
-      "--mw-breadcrumb-link: var(--mw-color-text-link, var(--mw-color-primary-base, #2527ca));",
-    )
+    expect(css).toContain("--mw-breadcrumb-link: var(--mw-color-text-muted, #595959);")
+    expect(css).toContain("--mw-breadcrumb-link-hover: var(--mw-color-text, #141414);")
     expect(css).toContain("--mw-breadcrumb-current: var(--mw-color-text, #141414);")
-    expect(css).toContain("--mw-breadcrumb-muted: var(--mw-color-text-muted, #595959);")
+    expect(css).toContain("--mw-breadcrumb-icon: var(--mw-color-text, #141414);")
+    expect(css).toContain(".mw-breadcrumb__action:visited")
   })
 
   it("is imported by the firstEdition stylesheet", () => {

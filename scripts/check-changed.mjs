@@ -56,6 +56,24 @@ function uniqueSorted(files) {
   return [...new Set(files)].sort((left, right) => left.localeCompare(right))
 }
 
+function normalizeFamilyName(family) {
+  const aliases = {
+    "currency-field": "input",
+    "date-of-birth-field": "input",
+    "dropdown-field": "input",
+    "input-field": "input",
+    "input-otp": "input",
+    "rich-text": "input",
+    select: "input",
+    "select-field": "input",
+    textarea: "input",
+    "textarea-field": "input",
+    "zip-code-field": "input",
+  }
+
+  return aliases[family] ?? family
+}
+
 function localChangedFiles() {
   const unstaged = splitFiles(git(["diff", "--name-only", "--diff-filter=ACMRTD"]))
   const staged = splitFiles(git(["diff", "--cached", "--name-only", "--diff-filter=ACMRTD"]))
@@ -129,7 +147,7 @@ function familyFromPath(path) {
 
   for (const pattern of patterns) {
     const match = path.match(pattern)
-    if (match) return match[1]
+    if (match) return normalizeFamilyName(match[1])
   }
 
   return null
@@ -152,7 +170,7 @@ function implementationFamilyFromPath(path) {
 
   for (const pattern of patterns) {
     const match = path.match(pattern)
-    if (match) return match[1]
+    if (match) return normalizeFamilyName(match[1])
   }
 
   return null

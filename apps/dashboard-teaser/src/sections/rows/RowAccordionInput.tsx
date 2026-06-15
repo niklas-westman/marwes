@@ -10,19 +10,18 @@ import {
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow, ShowcaseStack } from "./shared"
+import type { ComponentDisplayOptions } from "../playground-settings"
+import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
-const AccordionCard = styled(FlexCard).attrs({
-  $desktopWidth: "54rem",
-})``
-
-const InputCard = styled(FlexCard)`
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    flex: 0 0 21.5rem;
+const AccordionCard = styled(FlexAreaCard)`
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
   }
+`
 
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    max-width: 21.5rem;
+const InputCard = styled(FlexAreaCard)`
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
   }
 `
 
@@ -45,7 +44,11 @@ const PurposeSelect = styled.div`
 
 type FieldType = "currency" | "email" | "phone"
 
-function RowAccordionInput(): JSX.Element {
+type RowAccordionInputProps = {
+  options: ComponentDisplayOptions
+}
+
+function RowAccordionInput({ options }: RowAccordionInputProps): JSX.Element {
   const [openItems, setOpenItems] = useState<string[]>(["1"])
   const [selectedField, setSelectedField] = useState<FieldType>("currency")
   const [currencyValue, setCurrencyValue] = useState("")
@@ -53,38 +56,39 @@ function RowAccordionInput(): JSX.Element {
   const [phoneValue, setPhoneValue] = useState("")
 
   return (
-    <ShowcaseRow>
-      <AccordionCard>
-        <Text variant={TextVariant.overline}>Accordion</Text>
+    <ShowcaseFlexRow>
+      <AccordionCard $basis="36rem" $minHeight="19.375rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Accordion</Text>}
         <AccordionField
           label=""
           items={[
             {
               value: "1",
               title: "Accordion title",
-              content:
-                "Accordion content goes here. This is the expandable section that provides more detail.",
+              content: options.showDescriptions
+                ? "Accordion content goes here. This is the expandable section that provides more detail."
+                : "",
             },
             {
               value: "2",
               title: "Accordion title",
-              content: "More content for this section.",
+              content: options.showDescriptions ? "More content for this section." : "",
             },
             {
               value: "3",
               title: "Accordion title",
-              content: "Additional expandable content.",
+              content: options.showDescriptions ? "Additional expandable content." : "",
             },
           ]}
           openItems={openItems}
           onOpenItemsChange={setOpenItems}
         />
       </AccordionCard>
-      <InputCard>
-        <Text variant={TextVariant.overline}>Input fields</Text>
+      <InputCard $basis="21.5rem" $grow={0} $minHeight="19.375rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Input fields</Text>}
         <ShowcaseStack>
           <PurposeSelect>
-            <Text variant={TextVariant.overline}>Purpose</Text>
+            {options.showLabels && <Text variant={TextVariant.overline}>Purpose</Text>}
             <Select
               label="Purpose"
               options={[
@@ -99,7 +103,7 @@ function RowAccordionInput(): JSX.Element {
           {selectedField === "currency" && (
             <CurrencyField
               label="Amount"
-              helperText="Amount in USD"
+              helperText={options.showHelperText ? "Amount in USD" : undefined}
               currency="USD"
               input={{
                 placeholder: "0.00",
@@ -111,7 +115,7 @@ function RowAccordionInput(): JSX.Element {
           {selectedField === "email" && (
             <EmailField
               label="Email"
-              helperText="Enter your email address"
+              helperText={options.showHelperText ? "Enter your email address" : undefined}
               input={{
                 placeholder: "you@example.com",
                 value: emailValue,
@@ -122,7 +126,7 @@ function RowAccordionInput(): JSX.Element {
           {selectedField === "phone" && (
             <PhoneField
               label="Phone"
-              helperText="Enter your phone number"
+              helperText={options.showHelperText ? "Enter your phone number" : undefined}
               input={{
                 placeholder: "+1 (555) 000-0000",
                 value: phoneValue,
@@ -132,7 +136,7 @@ function RowAccordionInput(): JSX.Element {
           )}
         </ShowcaseStack>
       </InputCard>
-    </ShowcaseRow>
+    </ShowcaseFlexRow>
   )
 }
 

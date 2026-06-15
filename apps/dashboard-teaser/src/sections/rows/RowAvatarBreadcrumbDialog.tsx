@@ -11,37 +11,42 @@ import {
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow, ShowcaseStack } from "./shared"
+import type { ComponentDisplayOptions } from "../playground-settings"
+import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
-const LeftCard = styled(FlexCard).attrs({
-  $desktopWidth: "57.375rem",
-})``
-
-const RightCard = styled(FlexCard)`
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    flex: 0 0 18.125rem;
-  }
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    max-width: 18.125rem;
+const LeftCard = styled(FlexAreaCard)`
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
   }
 `
 
-function RowAvatarBreadcrumbDialog(): JSX.Element {
+const RightCard = styled(FlexAreaCard)`
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
+  }
+`
+
+type RowAvatarBreadcrumbDialogProps = {
+  options: ComponentDisplayOptions
+}
+
+function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps): JSX.Element {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   return (
-    <ShowcaseRow>
-      <LeftCard>
-        <Text variant={TextVariant.overline}>Card</Text>
+    <ShowcaseFlexRow>
+      <LeftCard $basis="36rem" $minHeight="12.625rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Card</Text>}
 
         <MwCard title="Card title">
-          Card description text goes here. This provides more context about the card content.
+          {options.showDescriptions
+            ? "Card description text goes here. This provides more context about the card content."
+            : undefined}
         </MwCard>
       </LeftCard>
-      <RightCard>
-        <Text variant={TextVariant.overline}>Dialog &amp; Drawer</Text>
+      <RightCard $basis="18.125rem" $grow={0} $minHeight="12.625rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Dialog &amp; Drawer</Text>}
 
         <ShowcaseStack>
           <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>
@@ -57,7 +62,11 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         title="Dialog title"
-        description="This is a dialog component from the Marwes design system."
+        description={
+          options.showDescriptions
+            ? "This is a dialog component from the Marwes design system."
+            : undefined
+        }
         portalTarget={null}
         footer={
           <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(false)}>
@@ -72,7 +81,11 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
         <Drawer
           modal
           title="Drawer"
-          description="This is a drawer panel from the Marwes design system."
+          description={
+            options.showDescriptions
+              ? "This is a drawer panel from the Marwes design system."
+              : undefined
+          }
           size="medium"
           placement="right"
           onClose={() => setDrawerOpen(false)}
@@ -85,7 +98,7 @@ function RowAvatarBreadcrumbDialog(): JSX.Element {
           <p>Drawer content goes here. Use it for filters, detail panels, or secondary flows.</p>
         </Drawer>
       )}
-    </ShowcaseRow>
+    </ShowcaseFlexRow>
   )
 }
 

@@ -18,42 +18,15 @@ import type { BreadcrumbItem, ContextMenuEntry, SegmentedControlItem } from "@ma
 import { useState } from "react"
 import styled from "styled-components"
 
-import { Card, ShowcaseSectionLabel } from "./shared"
+import type { ComponentDisplayOptions } from "../playground-settings"
+import { Card, FlexAreaCard, ShowcaseFlexRow, ShowcaseSectionLabel } from "./shared"
 
 type ToastVariant = "subtle" | "outline" | "rich"
 
-const ToastMosaicGrid = styled.div`
-  display: grid;
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
+const ToastMosaicRow = styled(ShowcaseFlexRow)``
 
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    grid-template-columns: minmax(20rem, 22rem) minmax(15.5rem, 17.25rem) minmax(0, 1fr);
-    grid-template-rows: 9rem 21rem;
-  }
-
-  > * {
-    min-width: 0;
-  }
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    height: auto;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: none;
-  }
-
-  ${({ theme }) => theme.media.tabletAndBelow} {
-    grid-template-columns: minmax(0, 1fr);
-  }
-`
-
-const ToastCard = styled(Card)`
-  grid-column: 1;
-  grid-row: span 2;
-  flex-shrink: 1;
-  height: 100%;
+const ToastCard = styled(FlexAreaCard)`
+  order: 1;
 
   .mw-segmented-control,
   .mw-toast {
@@ -61,65 +34,45 @@ const ToastCard = styled(Card)`
     min-width: 0;
     max-width: 100%;
   }
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    grid-column: span 1;
-    grid-row: auto;
-  }
-
-  ${({ theme }) => theme.media.tabletAndBelow} {
-    grid-column: 1 / -1;
-  }
 `
 
-const MenuCard = styled(Card)`
-  grid-column: 2;
-  grid-row: span 2;
-  flex-shrink: 1;
-  height: 100%;
+const MenuCard = styled(FlexAreaCard)`
+  order: 2;
 
   .mw-context-menu {
     width: min(100%, 13.25rem);
     max-width: 100%;
   }
+`
 
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    grid-column: span 1;
-    grid-row: auto;
+const RightStack = styled.div`
+  display: flex;
+  flex: 1 1 15.625rem;
+  flex-direction: column;
+  gap: var(--showcase-row-gap);
+  min-width: 0;
+  order: 3;
+
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
   }
 
-  ${({ theme }) => theme.media.tabletAndBelow} {
-    grid-column: 1 / -1;
+  @container (max-width: 38rem) {
+    flex-basis: 100%;
   }
 `
 
 const AvatarCard = styled(Card)`
-  grid-column: 3;
-  grid-row: 1;
-  flex-shrink: 1;
-  height: 100%;
-  min-height: 0;
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    grid-column: 1 / -1;
-    grid-row: auto;
-  }
+  flex: 0 1 auto;
+  min-height: 9rem;
 `
 
 const BreadcrumbCard = styled(Card)`
-  grid-column: 3;
-  grid-row: 2;
-  flex-shrink: 1;
-  height: 100%;
-  min-height: 0;
+  flex: 1 1 18.75rem;
+  min-height: 18.75rem;
 
   .mw-breadcrumb {
     max-width: 100%;
-  }
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    grid-column: 1 / -1;
-    grid-row: auto;
   }
 `
 
@@ -161,9 +114,18 @@ const AvatarRow = styled.div`
   flex-wrap: wrap;
 `
 
-function RowToastMenuAvatar(): JSX.Element {
+type RowToastMenuAvatarProps = {
+  options: ComponentDisplayOptions
+}
+
+function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
   const [toastVariant, setToastVariant] = useState<ToastVariant>("subtle")
   const [dismissedToasts, setDismissedToasts] = useState<Set<string>>(new Set())
+  const resolvedContextMenuItems = options.showIcons
+    ? contextMenuItems
+    : contextMenuItems.map((item) =>
+        item.kind === "divider" ? item : { ...item, icon: undefined },
+      )
 
   const dismissToast = (id: string): void => {
     setDismissedToasts((prev) => new Set([...prev, id]))
@@ -186,9 +148,9 @@ function RowToastMenuAvatar(): JSX.Element {
   ].filter((t) => !dismissedToasts.has(t.id))
 
   return (
-    <ToastMosaicGrid>
-      <ToastCard>
-        <Text variant={TextVariant.overline}>Toast</Text>
+    <ToastMosaicRow>
+      <ToastCard $basis="22rem" $grow={0} $minHeight="29.5rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Toast</Text>}
         <SegmentedControl
           items={toastVariantItems}
           value={toastVariant}
@@ -212,34 +174,36 @@ function RowToastMenuAvatar(): JSX.Element {
           )}
         </ToastList>
       </ToastCard>
-      <MenuCard>
-        <Text variant={TextVariant.overline}>Context menu</Text>
-        <ContextMenu ariaLabel="File actions" items={contextMenuItems} />
+      <MenuCard $basis="17.25rem" $grow={0} $minHeight="29.5rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Context menu</Text>}
+        <ContextMenu ariaLabel="File actions" items={resolvedContextMenuItems} />
       </MenuCard>
-      <AvatarCard>
-        <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>
-        <AvatarRow>
-          <AvatarGroup
-            items={[
-              { initials: "MO" },
-              { initials: "MO" },
-              { initials: "MO" },
-              { type: "icon", ariaLabel: "Guest member" },
-            ]}
-            overflowCount={3}
-          />
-          <AvatarBadge initials="MO" statusLabel="Online" />
-          <Avatar src={robotAvatarSrc} alt="Marwes robot" />
-          <Avatar initials="MO" size="small" />
-          <Avatar type="icon" ariaLabel="User icon fallback" />
-        </AvatarRow>
-      </AvatarCard>
-      <BreadcrumbCard>
-        <Text variant={TextVariant.overline}>Breadcrumb</Text>
+      <RightStack>
+        <AvatarCard>
+          {options.showLabels && <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>}
+          <AvatarRow>
+            <AvatarGroup
+              items={[
+                { initials: "MO" },
+                { initials: "MO" },
+                { initials: "MO" },
+                { type: "icon", ariaLabel: "Guest member" },
+              ]}
+              overflowCount={3}
+            />
+            <AvatarBadge initials="MO" statusLabel="Online" />
+            <Avatar src={robotAvatarSrc} alt="Marwes robot" />
+            <Avatar initials="MO" size="small" />
+            <Avatar type="icon" ariaLabel="User icon fallback" />
+          </AvatarRow>
+        </AvatarCard>
+        <BreadcrumbCard>
+          {options.showLabels && <Text variant={TextVariant.overline}>Breadcrumb</Text>}
 
-        <Breadcrumb homeHref="#" items={breadcrumbItems} />
-      </BreadcrumbCard>
-    </ToastMosaicGrid>
+          <Breadcrumb homeHref="#" items={breadcrumbItems} />
+        </BreadcrumbCard>
+      </RightStack>
+    </ToastMosaicRow>
   )
 }
 

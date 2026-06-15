@@ -6,8 +6,28 @@ import process from "node:process"
 const repoRoot = process.cwd()
 
 const cliArgs = process.argv.slice(2)
-const family = cliArgs.find((arg) => !arg.startsWith("-"))
+const requestedFamily = cliArgs.find((arg) => !arg.startsWith("-"))
 const runStorybookStories = process.argv.includes("--storybook")
+
+function normalizeFamilyName(family) {
+  const aliases = {
+    "currency-field": "input",
+    "date-of-birth-field": "input",
+    "dropdown-field": "input",
+    "input-field": "input",
+    "input-otp": "input",
+    "rich-text": "input",
+    select: "input",
+    "select-field": "input",
+    textarea: "input",
+    "textarea-field": "input",
+    "zip-code-field": "input",
+  }
+
+  return aliases[family] ?? family
+}
+
+const family = requestedFamily ? normalizeFamilyName(requestedFamily) : undefined
 
 function usage() {
   console.error("Usage: pnpm validate:family <family> [--storybook]")
@@ -86,7 +106,11 @@ function collectPresetTests() {
   ]
   const familySpecificTests = {
     input: [
+      "test/input-field-css-contract.test.ts",
+      "test/input-otp-css-contract.test.ts",
+      "test/rich-text-css-contract.test.ts",
       "test/select-css-contract.test.ts",
+      "test/textarea-css-contract.test.ts",
       "test/theme-token-coverage.test.ts",
       "test/first-edition-css.test.ts",
       "test/exports.test.ts",

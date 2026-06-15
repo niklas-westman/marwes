@@ -20,4 +20,17 @@ describe("firstEdition input otp css contract", () => {
     expect(css).not.toContain(".mw-input-otp__helper .mw-p")
     expect(css).not.toContain(".mw-input-otp__error .mw-p")
   })
+
+  it("keeps cell gaps stable when the OTP row is width-constrained", () => {
+    const css = readFileSync(inputOtpCssPath, "utf8")
+
+    expect(css).toContain("--mw-input-otp-cell-gap: var(--mw-spacing-sp-8);")
+    expect(css).toContain(
+      "minmax(var(--mw-input-otp-cell-min-size), var(--mw-input-otp-cell-size))",
+    )
+    expect(css).toContain("width: 100%;")
+    expect(css).toContain("aspect-ratio: 1;")
+    expect(css).not.toContain("width: 40px;")
+    expect(css).not.toContain("height: 40px;")
+  })
 })

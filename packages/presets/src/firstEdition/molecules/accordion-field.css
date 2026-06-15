@@ -20,7 +20,7 @@
 
 .mw-accordion-field__items {
   display: grid;
-  gap: var(--mw-density-gap, 4px);
+  gap: var(--mw-density-gap, 8px);
 }
 
 .mw-accordion-field__description {

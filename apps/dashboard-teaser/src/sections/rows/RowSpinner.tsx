@@ -2,19 +2,20 @@ import { Button, ButtonVariant, Spinner, Text, TextVariant } from "@marwes-ui/re
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow } from "./shared"
+import type { ComponentDisplayOptions } from "../playground-settings"
+import { FlexAreaCard, ShowcaseFlexRow } from "./shared"
 
-const LeftCard = styled(FlexCard)`
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    flex: 0 0 20.0625rem;
-  }
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    max-width: 20.0625rem;
+const LeftCard = styled(FlexAreaCard)`
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
   }
 `
 
-const RightCard = styled(FlexCard)``
+const RightCard = styled(FlexAreaCard)`
+  @container (max-width: 54rem) {
+    flex-basis: 100%;
+  }
+`
 
 const SpinnerRow = styled.div`
   display: flex;
@@ -73,13 +74,17 @@ const VARIANTS: { key: SpinnerVariantKey; label: string }[] = [
   { key: "cross", label: "Cross" },
 ]
 
-function RowSpinner(): JSX.Element {
+type RowSpinnerProps = {
+  options: ComponentDisplayOptions
+}
+
+function RowSpinner({ options }: RowSpinnerProps): JSX.Element {
   const [activeVariant, setActiveVariant] = useState<SpinnerVariantKey>("ring")
 
   return (
-    <ShowcaseRow>
-      <LeftCard>
-        <Text variant={TextVariant.overline}>Spinner</Text>
+    <ShowcaseFlexRow>
+      <LeftCard $basis="20.0625rem" $grow={0} $minHeight="10.25rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Spinner</Text>}
         <ButtonRow>
           <SpinnerButtonPreview
             variant={ButtonVariant.primary}
@@ -105,18 +110,18 @@ function RowSpinner(): JSX.Element {
           </SpinnerButtonPreview>
         </ButtonRow>
       </LeftCard>
-      <RightCard>
-        <Text variant={TextVariant.overline}>Spinner</Text>
+      <RightCard $basis="30rem" $minHeight="10.25rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Spinner</Text>}
         <SpinnerRow>
           {VARIANTS.map(({ key, label }) => (
             <SpinnerItem key={key} type="button" onClick={() => setActiveVariant(key)}>
               <Spinner variant={key} />
-              <SpinnerLabel>{label}</SpinnerLabel>
+              {options.showLabels && <SpinnerLabel>{label}</SpinnerLabel>}
             </SpinnerItem>
           ))}
         </SpinnerRow>
       </RightCard>
-    </ShowcaseRow>
+    </ShowcaseFlexRow>
   )
 }
 

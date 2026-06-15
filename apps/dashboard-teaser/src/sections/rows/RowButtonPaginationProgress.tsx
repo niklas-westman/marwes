@@ -2,10 +2,17 @@ import { Button, ButtonVariant, Pagination, ProgressBar, Text, TextVariant } fro
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow } from "./shared"
+import type { ComponentDisplayOptions } from "../playground-settings"
+import { FlexAreaCard, ShowcaseFlexRow } from "./shared"
 
-const ItemCard = styled(FlexCard)`
+const ItemCard = styled(FlexAreaCard)`
   justify-content: center;
+`
+
+const ProgressCard = styled(ItemCard)`
+  .mw-progress-bar {
+    width: 100%;
+  }
 `
 
 const ButtonRow = styled.div`
@@ -15,21 +22,25 @@ const ButtonRow = styled.div`
   flex-wrap: wrap;
 `
 
-function RowButtonPaginationProgress(): JSX.Element {
+type RowButtonPaginationProgressProps = {
+  options: ComponentDisplayOptions
+}
+
+function RowButtonPaginationProgress({ options }: RowButtonPaginationProgressProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1)
 
   return (
-    <ShowcaseRow>
-      <ItemCard>
-        <Text variant={TextVariant.overline}>Button</Text>
+    <ShowcaseFlexRow>
+      <ItemCard $basis="15rem" $minHeight="9rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Button</Text>}
         <ButtonRow>
           <Button>Label →</Button>
           <Button variant={ButtonVariant.secondary}>Label →</Button>
           <Button variant={ButtonVariant.text}>Label →</Button>
         </ButtonRow>
       </ItemCard>
-      <ItemCard>
-        <Text variant={TextVariant.overline}>Pagination</Text>
+      <ItemCard $basis="15rem" $minHeight="9rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Pagination</Text>}
         <Pagination
           page={currentPage}
           pageCount={10}
@@ -38,11 +49,11 @@ function RowButtonPaginationProgress(): JSX.Element {
           onPageChange={setCurrentPage}
         />
       </ItemCard>
-      <ItemCard>
-        <Text variant={TextVariant.overline}>Progress bar</Text>
+      <ProgressCard $basis="15rem" $minHeight="9rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Progress bar</Text>}
         <ProgressBar label="Progress" value={60} size="small" />
-      </ItemCard>
-    </ShowcaseRow>
+      </ProgressCard>
+    </ShowcaseFlexRow>
   )
 }
 

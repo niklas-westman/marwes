@@ -12,7 +12,8 @@ function responsiveShellPadding(theme: DefaultTheme): string {
 const cardShellStyles = css`
   background: ${({ theme }) => theme.color.surfaceElevated};
   border: 0.0625rem solid ${({ theme }) => theme.color.border};
-  border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
+  // border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
+  border-radius: ${({ theme }) => theme.spacing.sp16};
 `
 
 const dashboardRowStyles = css`

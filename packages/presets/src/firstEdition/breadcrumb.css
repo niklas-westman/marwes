@@ -4,10 +4,10 @@
  */
 
 .mw-breadcrumb {
-  --mw-breadcrumb-link: var(--mw-color-text-link, var(--mw-color-primary-base, #2527ca));
-  --mw-breadcrumb-link-hover: var(--mw-color-primary-hover, #1b1d97);
+  --mw-breadcrumb-link: var(--mw-color-text-muted, #595959);
+  --mw-breadcrumb-link-hover: var(--mw-color-text, #141414);
   --mw-breadcrumb-current: var(--mw-color-text, #141414);
-  --mw-breadcrumb-muted: var(--mw-color-text-muted, #595959);
+  --mw-breadcrumb-icon: var(--mw-color-text, #141414);
   --mw-breadcrumb-focus: var(--mw-color-focus, #2f31fc);
   --mw-breadcrumb-font: var(--mw-font-primary, "Instrument Sans", sans-serif);
   --mw-breadcrumb-font-size: 12px;
@@ -17,6 +17,7 @@
   --mw-breadcrumb-home-size: 14px;
   --mw-breadcrumb-separator-size: 12px;
   --mw-breadcrumb-separator-padding: 6px;
+  --mw-breadcrumb-row-gap: 4px;
 
   display: inline-flex;
   max-width: 100%;
@@ -32,6 +33,7 @@
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
+  row-gap: var(--mw-breadcrumb-row-gap);
   max-width: 100%;
   margin: 0;
   padding: 0;
@@ -63,8 +65,11 @@
 
 .mw-breadcrumb__action:hover {
   color: var(--mw-breadcrumb-link-hover);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration: none;
+}
+
+.mw-breadcrumb__action:visited {
+  color: var(--mw-breadcrumb-link);
 }
 
 .mw-breadcrumb__action:focus-visible {
@@ -77,13 +82,14 @@
   width: var(--mw-breadcrumb-home-size);
   height: var(--mw-breadcrumb-home-size);
   justify-content: center;
-  color: var(--mw-breadcrumb-muted);
+  color: var(--mw-breadcrumb-icon);
   line-height: 0;
   margin-bottom: 1px;
 }
 
+.mw-breadcrumb__home:visited,
 .mw-breadcrumb__home:hover {
-  color: var(--mw-breadcrumb-link);
+  color: var(--mw-breadcrumb-icon);
 }
 
 .mw-breadcrumb__home svg {
@@ -108,7 +114,7 @@
   width: calc(var(--mw-breadcrumb-separator-size) + (var(--mw-breadcrumb-separator-padding) * 2));
   height: var(--mw-breadcrumb-separator-size);
   padding-inline: var(--mw-breadcrumb-separator-padding);
-  color: var(--mw-breadcrumb-muted);
+  color: var(--mw-breadcrumb-icon);
   line-height: 0;
   flex: 0 0 auto;
 }

@@ -7,20 +7,24 @@ import { Header } from "./components/Header"
 import { MainContent, PageWrapper } from "./components/PageLayout"
 import { ComponentsShowcase } from "./sections/ComponentsShowcase"
 import { HeroSection } from "./sections/HeroSection"
+import { defaultPlaygroundSettings } from "./sections/playground-settings"
 import { GlobalStyle } from "./styles/global-style"
 
 function App(): JSX.Element {
-  const [mode, setMode] = useState<ThemeMode>(ThemeMode.light)
+  const [playgroundSettings, setPlaygroundSettings] = useState(defaultPlaygroundSettings)
 
   const toggleTheme = (): void => {
-    setMode((prev) => (prev === ThemeMode.light ? ThemeMode.dark : ThemeMode.light))
+    setPlaygroundSettings((current) => ({
+      ...current,
+      mode: current.mode === ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+    }))
   }
 
-  const isDark = mode === ThemeMode.dark
+  const isDark = playgroundSettings.mode === ThemeMode.dark
 
   return (
     <>
-      <MarwesProvider theme={{ mode }}>
+      <MarwesProvider theme={{ mode: playgroundSettings.mode }}>
         {(mwTheme) => (
           <StyledThemeProvider theme={mwTheme}>
             <>
@@ -29,7 +33,10 @@ function App(): JSX.Element {
                 <Header isDark={isDark} onToggleTheme={toggleTheme} />
                 <MainContent>
                   <HeroSection />
-                  <ComponentsShowcase />
+                  <ComponentsShowcase
+                    settings={playgroundSettings}
+                    onSettingsChange={setPlaygroundSettings}
+                  />
                 </MainContent>
                 <Footer />
               </PageWrapper>

@@ -4,12 +4,23 @@ import { runCreateMarwesCli, runMarwesCli } from "../src/index"
 describe("CLI entrypoints", () => {
   it("prints adapter-specific AI prompts", async () => {
     const output: string[] = []
-    const exitCode = await runMarwesCli(["ai-prompt", "--adapter", "react"], {
+    const exitCode = await runMarwesCli(["ai-prompt", "--adapter", "react", "--pm", "npm"], {
       write: (message) => output.push(message),
     })
 
     expect(exitCode).toBe(0)
-    expect(output.join("\n")).toContain("pnpm add @marwes-ui/react react react-dom")
+    expect(output.join("\n")).toContain("npx @marwes-ui/cli init --adapter react --agentic")
+  })
+
+  it("dry-runs agentic init without running doctor", async () => {
+    const output: string[] = []
+    const exitCode = await runMarwesCli(["init", "--adapter", "react", "--agentic", "--dry-run"], {
+      write: (message) => output.push(message),
+    })
+
+    expect(exitCode).toBe(0)
+    expect(output.join("\n")).toContain("[dry-run] pnpm add @marwes-ui/react react react-dom")
+    expect(output.join("\n")).toContain("[dry-run] marwes doctor --adapter react")
   })
 
   it("validates create templates", async () => {

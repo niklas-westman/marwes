@@ -10,6 +10,9 @@
   --mw-input-otp-cell-surface: var(--mw-color-surface-primary);
   --mw-input-otp-cell-text: var(--mw-color-text-muted);
   --mw-input-otp-cell-filled-text: var(--mw-color-text);
+  --mw-input-otp-cell-size: 40px;
+  --mw-input-otp-cell-min-size: 32px;
+  --mw-input-otp-cell-gap: var(--mw-spacing-sp-8);
 
   display: grid;
   gap: var(--mw-spacing-sp-4);
@@ -27,16 +30,21 @@
 .mw-input-otp__cells {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(var(--mw-input-otp-cell-count, 6), minmax(0, 40px));
-  gap: var(--mw-spacing-sp-8);
+  grid-template-columns: repeat(
+      var(--mw-input-otp-cell-count, 6),
+      minmax(var(--mw-input-otp-cell-min-size), var(--mw-input-otp-cell-size))
+    );
+  gap: var(--mw-input-otp-cell-gap);
 }
 
 .mw-input-otp__cell {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  min-height: var(--mw-input-otp-cell-min-size);
+  aspect-ratio: 1;
+  box-sizing: border-box;
   border: 1px solid var(--mw-input-otp-cell-border);
   border-radius: var(--mw-ui-radius, 4px);
   background: var(--mw-input-otp-cell-surface);

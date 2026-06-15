@@ -13,13 +13,20 @@ import { useState } from "react"
 import styled from "styled-components"
 
 import { cardShellStyles } from "../styles/theme-utils"
+import {
+  type Framework,
+  type PackageManager,
+  createAgenticInstallPrompt,
+  createExistingAppInstallCommand,
+  packageManagers,
+} from "./installation-recipes"
 
 const PanelContainer = styled.div`
   width: 25rem;
-  padding: ${({ theme }) => theme.spacing.sp48};
+  padding: ${({ theme }) => theme.spacing.sp32};
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sp24};
+  gap: ${({ theme }) => theme.spacing.sp16};
   ${cardShellStyles}
   background: ${({ theme }) => theme.color.background};
 
@@ -68,7 +75,7 @@ const PromptTextarea = styled(Textarea)`
   flex: 1;
   width: 100%;
   min-width: 0;
-  min-height: ${({ theme }) => `calc(${theme.spacing.sp80} + ${theme.spacing.sp24})`};
+  min-height: ${({ theme }) => theme.spacing.sp80};
   cursor: text;
 `
 
@@ -131,30 +138,20 @@ function SvelteIcon(): JSX.Element {
   )
 }
 
-type Framework = "react" | "vue" | "svelte"
-
 const frameworkItems: SegmentedControlItem[] = [
   { value: "react", icon: <ReactIcon />, label: "React" },
   { value: "vue", icon: <VueIcon />, label: "Vue" },
   { value: "svelte", icon: <SvelteIcon />, label: "Svelte" },
 ]
 
-const INSTALL_COMMANDS: Record<Framework, string> = {
-  react: "pnpm add @marwes-ui/react",
-  vue: "pnpm add @marwes-ui/vue",
-  svelte: "pnpm add @marwes-ui/svelte",
-}
-
-const AI_PROMPTS: Record<Framework, string> = {
-  react:
-    "Install and set up @marwes-ui/react using pnpm.\nRun: pnpm add @marwes-ui/react. Import components from @marwes-ui/react and include the default stylesheet.",
-  vue: "Install and set up @marwes-ui/vue using pnpm.\nRun: pnpm add @marwes-ui/vue. Import components from @marwes-ui/vue and include the default stylesheet.",
-  svelte:
-    "Install and set up @marwes-ui/svelte using pnpm.\nRun: pnpm add @marwes-ui/svelte. Import components from @marwes-ui/svelte and include the default stylesheet.",
-}
+const packageManagerItems: SegmentedControlItem[] = packageManagers.map((packageManager) => ({
+  value: packageManager,
+  label: packageManager,
+}))
 
 function InstallationPanel(): JSX.Element {
   const [activeTab, setActiveTab] = useState<Framework>("react")
+  const [packageManager, setPackageManager] = useState<PackageManager>("pnpm")
 
   return (
     <PanelContainer>
@@ -171,18 +168,30 @@ function InstallationPanel(): JSX.Element {
       </InputSection>
 
       <InputSection>
-        <InputLabel>Manually install</InputLabel>
+        <InputLabel>Package manager</InputLabel>
+        <FrameworkSelector
+          items={packageManagerItems}
+          value={packageManager}
+          onValueChange={(v) => setPackageManager(v as PackageManager)}
+          variant="inverse"
+          size="sm"
+          ariaLabel="Package manager"
+        />
+      </InputSection>
+
+      <InputSection>
+        <InputLabel>Add to existing app</InputLabel>
         <FieldRow>
           <CommandInput
-            value={INSTALL_COMMANDS[activeTab]}
+            value={createExistingAppInstallCommand(activeTab, packageManager)}
             readOnly
-            ariaLabel="Manual install command"
+            ariaLabel="Existing app install command"
           />
           <CopyButton
             variant={ButtonVariant.text}
             iconOnly
             iconRight={IconName.Copy}
-            ariaLabel="Copy manual install command"
+            ariaLabel="Copy existing app install command"
           />
         </FieldRow>
       </InputSection>
@@ -191,10 +200,10 @@ function InstallationPanel(): JSX.Element {
         <InputLabel>Install with AI</InputLabel>
         <FieldRow $align="flex-start">
           <PromptTextarea
-            value={AI_PROMPTS[activeTab]}
+            value={createAgenticInstallPrompt(activeTab, packageManager)}
             readOnly
             resize="none"
-            rows={5}
+            rows={4}
             ariaLabel="AI install prompt"
           />
           <CopyButton

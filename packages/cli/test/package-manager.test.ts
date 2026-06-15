@@ -7,7 +7,8 @@ import { detectPackageManager, formatShellCommand, installCommand } from "../src
 const tempDirs: string[] = []
 
 async function makeTempDir(): Promise<string> {
-  const path = await mkdir(join(tmpdir(), `marwes-cli-${crypto.randomUUID()}`), { recursive: true })
+  const path = join(tmpdir(), `marwes-cli-${crypto.randomUUID()}`)
+  await mkdir(path, { recursive: true })
   tempDirs.push(path)
   return path
 }

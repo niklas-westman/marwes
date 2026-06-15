@@ -17,9 +17,11 @@ export { runDoctor, type DoctorItem, type DoctorOptions, type DoctorResult } fro
 export { runInit, type InitOptions, type InitResult } from "./init"
 export {
   adapters,
+  createAgenticInitCommand,
   createAiPrompt,
   getAdapterRecipe,
   marwesTemplates,
+  packageRunnerCommand,
   packageManagers,
   type Adapter,
   type AdapterRecipe,
@@ -36,13 +38,14 @@ function writeHelp(write: (message: string) => void): void {
   write(`Marwes CLI
 
 Commands:
-  marwes init --adapter <${supportedAdaptersLabel()}>
+  marwes init --adapter <${supportedAdaptersLabel()}> [--agentic]
   marwes doctor [--adapter <${supportedAdaptersLabel()}]
   marwes ai-prompt --adapter <${supportedAdaptersLabel()}>
   marwes create <name> --template <${supportedTemplatesLabel()}>
 
 Options:
   --pm <${supportedPackageManagersLabel()}>
+  --agentic
   --dry-run
   --no-install
   --no-patch
@@ -68,6 +71,7 @@ export async function runMarwesCli(argv: string[], options: CliOptions = {}): Pr
       options: {
         adapter: { type: "string" },
         pm: { type: "string" },
+        agentic: { type: "boolean" },
         "dry-run": { type: "boolean" },
         yes: { type: "boolean" },
         "no-install": { type: "boolean" },
@@ -85,6 +89,7 @@ export async function runMarwesCli(argv: string[], options: CliOptions = {}): Pr
     const packageManager = parsePackageManager(parsed.values.pm)
     const initOptions: InitOptions = {
       adapter,
+      agentic: parsed.values.agentic === true,
       dryRun: parsed.values["dry-run"] === true,
       yes: parsed.values.yes === true,
       noInstall: parsed.values["no-install"] === true,

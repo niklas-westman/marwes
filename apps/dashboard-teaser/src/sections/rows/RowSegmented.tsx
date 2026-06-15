@@ -3,9 +3,9 @@ import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { FlexCard, ShowcaseRow, ShowcaseStack } from "./shared"
+import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
-const ItemCard = styled(FlexCard)``
+const ItemCard = styled(FlexAreaCard)``
 
 const FullWidthSegmentedControl = styled(SegmentedControl)`
   width: 100%;
@@ -99,8 +99,8 @@ function RowSegmented(): JSX.Element {
   }
 
   return (
-    <ShowcaseRow>
-      <ItemCard>
+    <ShowcaseFlexRow>
+      <ItemCard $basis="24rem" $minHeight="15.75rem">
         <Text variant={TextVariant.overline}>Segmented button – Inverse</Text>
         <ShowcaseStack>
           <FullWidthSegmentedControl
@@ -127,7 +127,7 @@ function RowSegmented(): JSX.Element {
           />
         </ShowcaseStack>
       </ItemCard>
-      <ItemCard>
+      <ItemCard $basis="24rem" $minHeight="15.75rem">
         <Text variant={TextVariant.overline}>Segmented button – Default</Text>
         <ShowcaseStack>
           <FullWidthSegmentedControl
@@ -151,7 +151,7 @@ function RowSegmented(): JSX.Element {
           />
         </ShowcaseStack>
       </ItemCard>
-    </ShowcaseRow>
+    </ShowcaseFlexRow>
   )
 }
 

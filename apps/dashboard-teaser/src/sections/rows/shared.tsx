@@ -1,11 +1,7 @@
 import styled from "styled-components"
 
 import { Text, TextVariant } from "@marwes-ui/react"
-import { cardShellStyles, dashboardRowStyles } from "../../styles/theme-utils"
-
-type ShowcaseCardSpan = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-type ShowcaseTabletSpan = 1 | 2
-type ShowcaseCardStart = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+import { cardShellStyles } from "../../styles/theme-utils"
 
 const Card = styled.div<{
   $width?: string
@@ -22,7 +18,6 @@ const Card = styled.div<{
   width: ${(p) => p.$width ?? "auto"};
   min-width: 0;
   min-height: ${(p) => p.$height ?? "auto"};
-  flex-shrink: 0;
 
   ${({ theme }) => theme.media.wideDesktopAndAbove} {
     width: ${(p) => p.$desktopWidth ?? p.$width ?? "auto"};
@@ -40,67 +35,58 @@ const Card = styled.div<{
   }
 `
 
-const FlexCard = styled(Card)`
-  flex: 1 1 0;
+const ShowcaseFlexRow = styled.div`
+  --showcase-row-gap: ${({ theme }) => theme.spacing.sp24};
 
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    flex: ${(p) => (p.$desktopWidth ? `0 0 ${p.$desktopWidth}` : "1 1 0")};
-  }
-
-  ${({ theme }) => theme.media.mobileAndBelow} {
-    flex-shrink: 1;
-    max-width: none !important;
-  }
-`
-
-const ShowcaseGrid = styled.div`
-  display: grid;
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
   width: 100%;
   min-width: 0;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
+  gap: var(--showcase-row-gap);
 
   > * {
     min-width: 0;
   }
 
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  ${({ theme }) => theme.media.tabletAndBelow} {
-    grid-template-columns: minmax(0, 1fr);
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    --showcase-row-gap: ${({ theme }) => theme.spacing.sp16};
   }
 `
 
-const ShowcaseRow = styled.div`
-  ${dashboardRowStyles}
+const FlexAreaCard = styled(Card)<{
+  $basis?: string
+  $grow?: number
+  $maxWidth?: string
+  $minHeight?: string
+  $order?: number
+}>`
+  flex: ${(p) => `${p.$grow ?? 1} 1 ${p.$basis ?? "0"}`};
+  max-width: ${(p) => p.$maxWidth ?? "none"};
+  min-height: ${(p) => p.$minHeight ?? p.$height ?? "auto"};
+  order: ${(p) => p.$order ?? 0};
+  align-self: stretch;
+  width: auto;
+
+  @container (max-width: 54rem) {
+    flex-basis: calc((100% - var(--showcase-row-gap)) / 2);
+    max-width: none;
+  }
+
+  @container (max-width: 38rem) {
+    flex-basis: 100%;
+    min-height: auto;
+  }
 `
 
 const ShowcaseStack = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.sp16};
-`
 
-const ShowcaseCard = styled(Card)<{
-  $desktopSpan?: ShowcaseCardSpan
-  $desktopStart?: ShowcaseCardStart
-  $tabletSpan?: ShowcaseTabletSpan
-}>`
-  width: auto;
-  grid-column: ${(p) =>
-    p.$desktopStart
-      ? `${p.$desktopStart} / span ${p.$desktopSpan ?? 4}`
-      : `span ${p.$desktopSpan ?? 4}`};
-  flex-shrink: 1;
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    grid-column: span ${(p) => p.$tabletSpan ?? 1};
-  }
-
-  ${({ theme }) => theme.media.tabletAndBelow} {
-    grid-column: 1 / -1;
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    gap: ${({ theme }) => theme.spacing.sp24};
   }
 `
 
@@ -113,13 +99,4 @@ const ShowcaseSectionLabel = styled(Text).attrs({ variant: TextVariant.overline 
   color: ${({ theme }) => theme.color.textMuted};
 `
 
-export {
-  Card,
-  CardTitle,
-  FlexCard,
-  ShowcaseCard,
-  ShowcaseGrid,
-  ShowcaseRow,
-  ShowcaseSectionLabel,
-  ShowcaseStack,
-}
+export { Card, CardTitle, FlexAreaCard, ShowcaseFlexRow, ShowcaseSectionLabel, ShowcaseStack }
