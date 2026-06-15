@@ -44,7 +44,7 @@ describe("badge.css figma sync contract", () => {
       ".mw-badge--success {\n  --mw-badge-surface: var(--mw-color-status-success-background, #e6f4ed);\n  --mw-badge-border: var(--mw-color-status-success-border, #90caad);\n  --mw-badge-label: var(--mw-color-status-success-text, #006633);\n}",
     )
     expect(css).toContain(
-      ".mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #fff8e6);\n  --mw-badge-border: var(--mw-color-status-warning-border-accessible, #b45309);\n  --mw-badge-label: var(--mw-color-status-warning-text, #b45309);\n}",
+      ".mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #fff8e6);\n  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);\n  --mw-badge-label: var(--mw-color-status-warning-text, #b45309);\n}",
     )
     expect(css).toContain(
       ".mw-badge--error {\n  --mw-badge-surface: var(--mw-color-status-error-background, #ffe8eb);\n  --mw-badge-border: var(--mw-color-status-error-border, #ff8a95);\n  --mw-badge-label: var(--mw-color-status-error-text, #a8031f);\n}",
@@ -62,7 +62,7 @@ describe("badge.css figma sync contract", () => {
       ".mw-theme--dark .mw-badge--success {\n  --mw-badge-surface: var(--mw-color-status-success-background, #001a0c);\n  --mw-badge-border: var(--mw-color-status-success-border, #5db189);\n  --mw-badge-label: var(--mw-color-status-success-text, #90caad);\n}",
     )
     expect(css).toContain(
-      ".mw-theme--dark .mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #221004);\n  --mw-badge-border: var(--mw-color-status-warning-border-accessible, #b45309);\n  --mw-badge-label: var(--mw-color-status-warning-text, #fcc94a);\n}",
+      ".mw-theme--dark .mw-badge--warning {\n  --mw-badge-surface: var(--mw-color-status-warning-background, #221004);\n  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);\n  --mw-badge-label: var(--mw-color-status-warning-text, #fcc94a);\n}",
     )
     expect(css).toContain(
       ".mw-theme--dark .mw-badge--error {\n  --mw-badge-surface: var(--mw-color-status-error-background, #240006);\n  --mw-badge-border: var(--mw-color-status-error-border, #ff2847);\n  --mw-badge-label: var(--mw-color-status-error-text, #ff5566);\n}",

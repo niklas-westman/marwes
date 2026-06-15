@@ -56,7 +56,7 @@
 
 .mw-badge--warning {
   --mw-badge-surface: var(--mw-color-status-warning-background, #fff8e6);
-  --mw-badge-border: var(--mw-color-status-warning-border-accessible, #b45309);
+  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);
   --mw-badge-label: var(--mw-color-status-warning-text, #b45309);
 }
 
@@ -90,7 +90,7 @@
 
 .mw-theme--dark .mw-badge--warning {
   --mw-badge-surface: var(--mw-color-status-warning-background, #221004);
-  --mw-badge-border: var(--mw-color-status-warning-border-accessible, #b45309);
+  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);
   --mw-badge-label: var(--mw-color-status-warning-text, #fcc94a);
 }
 
