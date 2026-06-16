@@ -375,15 +375,15 @@ export type {
 export { SwitchSize } from "@marwes-ui/core"
 
 /* Slider */
+// The `Slider` atom is intentionally NOT exported from the public entry —
+// use `SliderField` (or a purpose variant) instead.
 export {
-  Slider,
   SliderField,
   VolumeSlider,
   BrightnessSlider,
   RadiusSlider,
 } from "./components/slider"
 export type {
-  SliderProps,
   SliderFieldProps,
   VolumeSliderProps,
   BrightnessSliderProps,

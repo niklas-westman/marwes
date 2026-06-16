@@ -1,8 +1,8 @@
 import { storybookA11yPolicy, storybookLayout, storybookSliderArgTypes } from "@marwes-ui/core"
-import type { SliderProps } from "@marwes-ui/vue"
-import { Slider } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Slider, type SliderProps } from "../../../../../packages/vue/src/components/slider/slider"
 
 const stageStyle = `
   width: fit-content;

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Slider } from "@marwes-ui/svelte";
+  // Atom is no longer publicly exported; deep-import for playground demo.
+  import Slider from "../../../../packages/svelte/src/lib/components/slider/Slider.svelte";
 
   let value1 = $state(50);
   let value2 = $state(25);

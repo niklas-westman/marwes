@@ -1,8 +1,11 @@
 import { storybookA11yPolicy, storybookLayout, storybookSliderArgTypes } from "@marwes-ui/core"
-import type { SliderProps } from "@marwes-ui/react"
-import { Slider } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import {
+  Slider,
+  type SliderProps,
+} from "../../../../../packages/react/src/components/slider/slider"
 
 const stageStyle: React.CSSProperties = {
   width: "fit-content",

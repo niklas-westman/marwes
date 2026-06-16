@@ -377,13 +377,13 @@ export { default as SkipLink } from "./components/skip-link/SkipLink.svelte"
 export type { SkipLinkProps } from "./components/skip-link/types.js"
 
 // Slider
-export { default as Slider } from "./components/slider/Slider.svelte"
+// The `Slider` atom is intentionally NOT exported from the public entry —
+// use `SliderField` (or a purpose variant) instead.
 export { default as SliderField } from "./components/slider/SliderField.svelte"
 export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte"
 export { default as BrightnessSlider } from "./components/slider/BrightnessSlider.svelte"
 export { default as RadiusSlider } from "./components/slider/RadiusSlider.svelte"
 export type {
-  SliderProps,
   SliderFieldProps,
   VolumeSliderProps,
   BrightnessSliderProps,
