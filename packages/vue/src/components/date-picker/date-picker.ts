@@ -19,6 +19,9 @@ export interface DatePickerProps
     | "nextYearLabel"
     | "cancelLabel"
     | "applyLabel"
+    | "ariaLabel"
+    | "ariaLabelledBy"
+    | "ariaDescribedBy"
     | "calendarLabel"
     | "dataAttributes"
   > {
@@ -38,6 +41,9 @@ const datePickerPropKeys = [
   "nextYearLabel",
   "cancelLabel",
   "applyLabel",
+  "ariaLabel",
+  "ariaLabelledBy",
+  "ariaDescribedBy",
   "calendarLabel",
   "dataAttributes",
 ] as const
@@ -61,6 +67,9 @@ export const DatePicker = defineComponent(
         ...(props.nextYearLabel !== undefined ? { nextYearLabel: props.nextYearLabel } : {}),
         ...(props.cancelLabel !== undefined ? { cancelLabel: props.cancelLabel } : {}),
         ...(props.applyLabel !== undefined ? { applyLabel: props.applyLabel } : {}),
+        ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
+        ...(props.ariaLabelledBy !== undefined ? { ariaLabelledBy: props.ariaLabelledBy } : {}),
+        ...(props.ariaDescribedBy !== undefined ? { ariaDescribedBy: props.ariaDescribedBy } : {}),
         ...(props.calendarLabel !== undefined ? { calendarLabel: props.calendarLabel } : {}),
         ...(props.dataAttributes !== undefined ? { dataAttributes: props.dataAttributes } : {}),
       }),
@@ -76,7 +85,9 @@ export const DatePicker = defineComponent(
           ...passthroughAttrs,
           ...kit.dataAttributes,
           class: mergeClassNames(kit.className, props.className, attrs.class),
-          "aria-label": kit.labels.calendar,
+          "aria-label": kit.a11y.ariaLabel,
+          "aria-labelledby": kit.a11y.ariaLabelledBy,
+          "aria-describedby": kit.a11y.ariaDescribedBy,
         },
         [
           h("header", { class: kit.slots.headerClassName }, [

@@ -266,7 +266,11 @@ export type {
 
 // DatePicker
 export { default as DatePicker } from "./components/date-picker/DatePicker.svelte"
-export type { DatePickerProps } from "./components/date-picker/types.js"
+export { default as DatePickerField } from "./components/date-picker/DatePickerField.svelte"
+export type {
+  DatePickerProps,
+  DatePickerFieldProps,
+} from "./components/date-picker/types.js"
 
 // Drawer
 export { default as Drawer } from "./components/drawer/Drawer.svelte"

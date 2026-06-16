@@ -1,2 +1,3 @@
 export { default as DatePicker } from "./DatePicker.svelte"
-export type { DatePickerProps } from "./types.js"
+export { default as DatePickerField } from "./DatePickerField.svelte"
+export type { DatePickerProps, DatePickerFieldProps } from "./types.js"

@@ -15,6 +15,9 @@
     nextYearLabel,
     cancelLabel,
     applyLabel,
+    ariaLabel,
+    ariaLabelledBy,
+    ariaDescribedBy,
     calendarLabel,
     dataAttributes,
     onpreviousyear,
@@ -39,6 +42,9 @@
     if (nextYearLabel !== undefined) opts.nextYearLabel = nextYearLabel;
     if (cancelLabel !== undefined) opts.cancelLabel = cancelLabel;
     if (applyLabel !== undefined) opts.applyLabel = applyLabel;
+    if (ariaLabel !== undefined) opts.ariaLabel = ariaLabel;
+    if (ariaLabelledBy !== undefined) opts.ariaLabelledBy = ariaLabelledBy;
+    if (ariaDescribedBy !== undefined) opts.ariaDescribedBy = ariaDescribedBy;
     if (calendarLabel !== undefined) opts.calendarLabel = calendarLabel;
     if (dataAttributes !== undefined) opts.dataAttributes = dataAttributes;
     return opts;
@@ -48,7 +54,13 @@
   const mergedClass = $derived(mergeClass(kit.className, className));
 </script>
 
-<section class={mergedClass} aria-label={kit.labels.calendar} {...kit.dataAttributes}>
+<section
+  class={mergedClass}
+  aria-label={kit.a11y.ariaLabel}
+  aria-labelledby={kit.a11y.ariaLabelledBy}
+  aria-describedby={kit.a11y.ariaDescribedBy}
+  {...kit.dataAttributes}
+>
   <header class={kit.slots.headerClassName}>
     <div class={kit.slots.navGroupClassName}>
       <button type="button" class={kit.slots.navButtonClassName} aria-label={kit.labels.previousYear} onclick={onpreviousyear}>«</button>
