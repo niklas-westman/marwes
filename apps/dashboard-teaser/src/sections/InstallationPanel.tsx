@@ -49,10 +49,6 @@ const InputSection = styled.div`
   gap: ${({ theme }) => theme.spacing.sp8};
 `
 
-const FrameworkSelector = styled(SegmentedControl)`
-  width: 100%;
-`
-
 const InputLabel = styled(Text).attrs({ variant: TextVariant.label })`
   color: ${({ theme }) => theme.color.text};
 `
@@ -157,25 +153,27 @@ function InstallationPanel(): JSX.Element {
     <PanelContainer>
       <InputSection>
         <PanelTitle>Installation</PanelTitle>
-        <FrameworkSelector
+        <SegmentedControl
           items={frameworkItems}
           value={activeTab}
           onValueChange={(v) => setActiveTab(v as Framework)}
           variant="inverse"
           size="md"
           ariaLabel="Framework"
+          fullWidth
         />
       </InputSection>
 
       <InputSection>
         <InputLabel>Package manager</InputLabel>
-        <FrameworkSelector
+        <SegmentedControl
           items={packageManagerItems}
           value={packageManager}
           onValueChange={(v) => setPackageManager(v as PackageManager)}
           variant="inverse"
           size="sm"
           ariaLabel="Package manager"
+          fullWidth
         />
       </InputSection>
 

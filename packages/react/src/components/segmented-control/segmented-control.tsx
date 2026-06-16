@@ -34,6 +34,8 @@ export interface SegmentedControlProps {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  /** Stretch the control to fill its container. Defaults to inline width. */
+  fullWidth?: boolean
   className?: string
   id?: string
   style?: React.CSSProperties
@@ -56,6 +58,7 @@ export function SegmentedControl(props: SegmentedControlProps): React.ReactEleme
     disabled,
     ariaLabel,
     ariaLabelledBy,
+    fullWidth,
     className,
     id,
     style,
@@ -128,6 +131,7 @@ export function SegmentedControl(props: SegmentedControlProps): React.ReactEleme
     disabled,
     ariaLabel,
     ariaLabelledBy,
+    fullWidth,
   })
   const trackClassName = [trackKit.className, className].filter(Boolean).join(" ")
 

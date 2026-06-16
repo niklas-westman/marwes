@@ -32,6 +32,7 @@ export function createSegmentedControlRecipe(
       variant !== "default" && `mw-segmented-control--${variant}`,
       size !== "md" && `mw-segmented-control--${size}`,
       opts.disabled && "mw-segmented-control--disabled",
+      opts.fullWidth && "mw-segmented-control--full-width",
     ),
     vars: {},
     a11y: resolveSegmentedControlA11y(opts),

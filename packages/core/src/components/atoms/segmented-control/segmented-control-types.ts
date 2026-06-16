@@ -22,6 +22,8 @@ export interface SegmentedControlOptions {
   variant?: SegmentedControlVariant | undefined
   /** Size variant */
   size?: SegmentedControlSize | undefined
+  /** Stretch the control to fill its container. Defaults to inline width. */
+  fullWidth?: boolean | undefined
 }
 
 export type SegmentedControlVariant = "default" | "inverse" | "pill"

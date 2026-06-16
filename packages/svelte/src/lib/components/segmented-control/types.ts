@@ -19,6 +19,7 @@ export interface SegmentedControlProps {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  fullWidth?: boolean
   label?: string
   class?: string
   id?: string

@@ -7,11 +7,6 @@ import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
 const ItemCard = styled(FlexAreaCard)``
 
-const FullWidthSegmentedControl = styled(SegmentedControl)`
-  width: 100%;
-  inline-size: 100%;
-`
-
 const inverseTwo: SegmentedControlItem[] = [
   { value: "compact", label: "Compact" },
   { value: "wide", label: "Wide" },
@@ -103,19 +98,21 @@ function RowSegmented(): JSX.Element {
       <ItemCard $basis="24rem" $minHeight="15.75rem">
         <Text variant={TextVariant.overline}>Segmented button – Inverse</Text>
         <ShowcaseStack>
-          <FullWidthSegmentedControl
+          <SegmentedControl
             items={inverseTwo}
             value={state.inverseTwo}
             onValueChange={(v) => set("inverseTwo", v)}
             variant="inverse"
             ariaLabel="View density inverse"
+            fullWidth
           />
-          <FullWidthSegmentedControl
+          <SegmentedControl
             items={inverseThree}
             value={state.inverseThree}
             onValueChange={(v) => set("inverseThree", v)}
             variant="inverse"
             ariaLabel="View mode inverse"
+            fullWidth
           />
           <SegmentedControl
             items={inverseIcon}
@@ -130,17 +127,19 @@ function RowSegmented(): JSX.Element {
       <ItemCard $basis="24rem" $minHeight="15.75rem">
         <Text variant={TextVariant.overline}>Segmented button – Default</Text>
         <ShowcaseStack>
-          <FullWidthSegmentedControl
+          <SegmentedControl
             items={defaultTwo}
             value={state.defaultTwo}
             onValueChange={(v) => set("defaultTwo", v)}
             ariaLabel="View density"
+            fullWidth
           />
-          <FullWidthSegmentedControl
+          <SegmentedControl
             items={defaultThree}
             value={state.defaultThree}
             onValueChange={(v) => set("defaultThree", v)}
             ariaLabel="View mode"
+            fullWidth
           />
           <SegmentedControl
             items={defaultIcon}

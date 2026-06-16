@@ -65,6 +65,12 @@
   pointer-events: none;
 }
 
+/* Full-width modifier: stretches the track to fill its container */
+.mw-segmented-control--full-width {
+  display: flex;
+  inline-size: 100%;
+}
+
 /* ─── Item ─────────────────────────────────────────────────── */
 
 .mw-segmented-control__item {
