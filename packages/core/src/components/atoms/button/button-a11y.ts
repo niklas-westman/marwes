@@ -55,8 +55,12 @@ export function resolveButtonA11y(
   // Build common props without assigning `undefined` (exactOptionalPropertyTypes-safe)
   const common: ButtonA11yProps = {}
 
-  const accessibleLabel = opts.ariaLabel ?? opts.label
-  if (accessibleLabel) common.ariaLabel = accessibleLabel
+  if (opts.ariaLabelledBy) {
+    common.ariaLabelledBy = opts.ariaLabelledBy
+  } else {
+    const accessibleLabel = opts.ariaLabel ?? opts.label
+    if (accessibleLabel) common.ariaLabel = accessibleLabel
+  }
   if (resolvedLoading.isLoading) common.ariaBusy = true
   if (isDisabled) common.ariaDisabled = true
 

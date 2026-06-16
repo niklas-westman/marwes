@@ -116,6 +116,8 @@ export type ButtonOptions = {
 
   /** Accessible name. Use `label` as a consumer-friendly alias for standalone/icon-only buttons. */
   ariaLabel?: string
+  /** ID of an element whose text labels the button. Wins over `ariaLabel`/`label` if set. */
+  ariaLabelledBy?: string
   label?: string
   hasVisibleText?: boolean
 
@@ -138,6 +140,7 @@ export type ButtonOptions = {
 
 export type ButtonA11yProps = {
   ariaLabel?: string
+  ariaLabelledBy?: string
   ariaBusy?: boolean
   ariaDisabled?: boolean
   ariaPressed?: boolean
