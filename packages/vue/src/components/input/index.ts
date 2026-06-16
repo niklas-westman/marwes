@@ -1,8 +1,10 @@
 export { Input } from "./input"
 export type { InputProps } from "./input"
 
-export { Select } from "./select"
-export type { SelectProps, SelectAppearance, SelectOption } from "./select"
+// `Select` (the atom) is intentionally NOT re-exported here.
+// Use `SelectField` (or `DropdownField`) instead. Internal consumers
+// can deep-import "./select" directly.
+export type { SelectAppearance, SelectOption } from "./select"
 
 // `Textarea` (the atom) is intentionally NOT re-exported here.
 // Use `TextareaField` instead. Internal consumers can deep-import

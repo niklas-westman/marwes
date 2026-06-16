@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Select } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import Select from "../../../../../packages/svelte/src/lib/components/input/Select.svelte"
 
 const meta = {
   title: "Input/Atom/Select",

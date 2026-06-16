@@ -14,7 +14,7 @@ export { default as ZipCodeField } from "./ZipCodeField.svelte"
 export { default as PhoneField } from "./PhoneField.svelte"
 export { default as URLField } from "./URLField.svelte"
 export { default as CurrencyField } from "./CurrencyField.svelte"
-export { default as Select } from "./Select.svelte"
+// `Select` atom intentionally NOT re-exported — use `SelectField` or `DropdownField`.
 export { default as SelectField } from "./SelectField.svelte"
 // `Textarea` atom intentionally NOT re-exported — use `TextareaField`.
 export { default as TextareaField } from "./TextareaField.svelte"
@@ -31,7 +31,6 @@ export type {
   PhoneFieldProps,
   SearchFieldProps,
   SelectAppearance,
-  SelectProps,
   SelectFieldProps,
   SelectFieldVariant,
   SelectOption,

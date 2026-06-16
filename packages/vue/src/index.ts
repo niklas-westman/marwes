@@ -106,11 +106,10 @@ export type {
 export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 
 /* Input */
-// `RichText` and `Textarea` atoms intentionally NOT exported —
-// use `RichTextField` / `TextareaField`.
+// `RichText`, `Textarea`, `Select` atoms intentionally NOT exported —
+// use `RichTextField` / `TextareaField` / `SelectField` (or `DropdownField`).
 export {
   Input,
-  Select,
   InputField,
   InputOtp,
   SelectField,
@@ -128,7 +127,6 @@ export {
 } from "./components/input"
 export type {
   InputProps,
-  SelectProps,
   SelectAppearance,
   SelectOption,
   InputFieldProps,

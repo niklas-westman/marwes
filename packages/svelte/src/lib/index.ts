@@ -199,12 +199,11 @@ export { default as TextareaField } from "./components/input/TextareaField.svelt
 export type { TextareaFieldProps } from "./components/input/types.js"
 
 // Select
-export { default as Select } from "./components/input/Select.svelte"
+// `Select` atom intentionally NOT exported — use `SelectField` or `DropdownField`.
 export { default as SelectField } from "./components/input/SelectField.svelte"
 export type {
   SelectAppearance,
   SelectOption,
-  SelectProps,
   SelectFieldProps,
   SelectFieldVariant,
 } from "./components/input/types.js"

@@ -3,12 +3,13 @@ import {
   CurrencyField,
   EmailField,
   PhoneField,
-  Select,
   Text,
   TextVariant,
 } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for PurposeSelect's custom layout.
+import { Select } from "../../../../../packages/react/src/components/input/select"
 
 import type { ComponentDisplayOptions } from "../playground-settings"
 import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
