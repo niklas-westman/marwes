@@ -77,7 +77,7 @@ export function DatePickerField(props: DatePickerFieldProps): React.ReactElement
       <DatePicker
         {...props.datePicker}
         ariaLabelledBy={labelId}
-        {...(mergedDescribedBy ? { "aria-describedby": mergedDescribedBy } : {})}
+        {...(mergedDescribedBy ? { ariaDescribedBy: mergedDescribedBy } : {})}
       />
 
       {hasHelperText && !hasError && (
