@@ -18,7 +18,9 @@ export interface SegmentedControlProps {
   size?: SegmentedControlSize
   disabled?: boolean
   ariaLabel?: string
+  ariaLabelledBy?: string
   label?: string
   class?: string
   id?: string
+  style?: string
 }

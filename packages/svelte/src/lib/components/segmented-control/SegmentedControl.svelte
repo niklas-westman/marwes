@@ -18,9 +18,11 @@
     size,
     disabled,
     ariaLabel,
+    ariaLabelledBy,
     label,
     class: className,
     id,
+    style,
   }: SegmentedControlProps = $props();
 
   const itemStates: SegmentedControlItemState[] = $derived(
@@ -71,7 +73,7 @@
   }
 
   const trackKit = $derived(
-    createSegmentedControlRecipe({ value: resolvedValue, variant, size, disabled, ariaLabel, label })
+    createSegmentedControlRecipe({ value: resolvedValue, variant, size, disabled, ariaLabel, ariaLabelledBy, label })
   );
   const mergedClass = $derived(mergeClass(trackKit.className, className));
 </script>
@@ -81,8 +83,10 @@
   class={mergedClass}
   role={trackKit.a11y.role}
   aria-label={trackKit.a11y.ariaLabel}
+  aria-labelledby={trackKit.a11y.ariaLabelledBy}
   aria-disabled={trackKit.a11y.ariaDisabled}
   onkeydown={handleKeydown}
+  style={style}
 >
   {#each items as item}
     {@const isSelected = item.value === resolvedValue}

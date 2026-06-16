@@ -9,7 +9,16 @@ import type {
   SegmentedControlSize,
   SegmentedControlVariant,
 } from "@marwes-ui/core"
-import { type VNodeChild, computed, defineComponent, h, ref, useAttrs, watch } from "vue"
+import {
+  type StyleValue,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h,
+  ref,
+  useAttrs,
+  watch,
+} from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface SegmentedControlItemVue {
@@ -27,9 +36,11 @@ export interface SegmentedControlPropsVue {
   size?: SegmentedControlSize
   disabled?: boolean
   ariaLabel?: string
+  ariaLabelledBy?: string
   label?: string
   className?: string
   id?: string
+  style?: StyleValue
 }
 
 const propKeys = [
@@ -39,9 +50,11 @@ const propKeys = [
   "size",
   "disabled",
   "ariaLabel",
+  "ariaLabelledBy",
   "label",
   "className",
   "id",
+  "style",
 ] as const
 
 function toItemState(item: SegmentedControlItemVue): SegmentedControlItemState {
@@ -130,6 +143,7 @@ export const SegmentedControl = defineComponent(
         size: props.size,
         disabled: props.disabled,
         ariaLabel: props.ariaLabel,
+        ariaLabelledBy: props.ariaLabelledBy,
         label: props.label,
       })
 
@@ -173,8 +187,10 @@ export const SegmentedControl = defineComponent(
           ...passthroughAttrs,
           id: props.id,
           class: className,
+          style: props.style,
           role: trackKit.a11y.role,
           "aria-label": trackKit.a11y.ariaLabel,
+          "aria-labelledby": trackKit.a11y.ariaLabelledBy,
           "aria-disabled": trackKit.a11y.ariaDisabled,
           onKeydown: handleKeyDown,
         },

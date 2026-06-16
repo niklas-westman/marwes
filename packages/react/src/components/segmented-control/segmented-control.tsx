@@ -33,8 +33,10 @@ export interface SegmentedControlProps {
   size?: SegmentedControlSize
   disabled?: boolean
   ariaLabel?: string
+  ariaLabelledBy?: string
   className?: string
   id?: string
+  style?: React.CSSProperties
 }
 
 function toItemState(item: SegmentedControlItem): SegmentedControlItemState {
@@ -53,8 +55,10 @@ export function SegmentedControl(props: SegmentedControlProps): React.ReactEleme
     size,
     disabled,
     ariaLabel,
+    ariaLabelledBy,
     className,
     id,
+    style,
   } = props
 
   const itemStates = React.useMemo<SegmentedControlItemState[]>(
@@ -123,6 +127,7 @@ export function SegmentedControl(props: SegmentedControlProps): React.ReactEleme
     size,
     disabled,
     ariaLabel,
+    ariaLabelledBy,
   })
   const trackClassName = [trackKit.className, className].filter(Boolean).join(" ")
 
@@ -132,8 +137,10 @@ export function SegmentedControl(props: SegmentedControlProps): React.ReactEleme
       className={trackClassName}
       role={trackKit.a11y.role}
       aria-label={trackKit.a11y.ariaLabel}
+      aria-labelledby={trackKit.a11y.ariaLabelledBy}
       aria-disabled={trackKit.a11y.ariaDisabled}
       onKeyDown={handleKeyDown}
+      style={style}
     >
       {items.map((item) => {
         const isSelected = item.value === resolvedValue
