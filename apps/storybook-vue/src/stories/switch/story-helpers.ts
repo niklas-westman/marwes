@@ -1,5 +1,7 @@
-import { Switch, type SwitchFieldProps, type SwitchProps } from "@marwes-ui/vue"
+import type { SwitchFieldProps } from "@marwes-ui/vue"
 import { ref, watch } from "vue"
+// Atom is no longer publicly exported; deep-import for story-helpers.
+import { Switch, type SwitchProps } from "../../../../../packages/vue/src/components/switch/switch"
 
 export function createToggleableSwitchRender(label: string): (args: SwitchProps) => object {
   return (args: SwitchProps) => ({

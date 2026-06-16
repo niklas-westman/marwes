@@ -222,13 +222,13 @@ export type {
 } from "./components/checkbox/types.js"
 
 // Switch
-export { default as Switch } from "./components/switch/Switch.svelte"
+// The `Switch` atom is intentionally NOT exported from the public entry —
+// use `SwitchField` (or a purpose variant) instead.
 export { default as SwitchField } from "./components/switch/SwitchField.svelte"
 export { default as FeatureToggle } from "./components/switch/FeatureToggle.svelte"
 export { default as PreferenceSwitch } from "./components/switch/PreferenceSwitch.svelte"
 export { default as PermissionSwitch } from "./components/switch/PermissionSwitch.svelte"
 export type {
-  SwitchProps,
   SwitchFieldProps,
   FeatureToggleProps,
   PreferenceSwitchProps,

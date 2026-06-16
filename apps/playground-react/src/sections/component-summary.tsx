@@ -13,12 +13,13 @@ import {
   PrimaryButton,
   Radio,
   SecondaryButton,
-  Switch,
   Tab,
   TextButton,
   Toast,
 } from "@marwes-ui/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for the playground summary.
+import { Switch } from "../../../../packages/react/src/components/switch/switch"
 
 import {
   PreviewCell,

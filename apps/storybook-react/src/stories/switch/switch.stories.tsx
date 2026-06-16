@@ -1,7 +1,8 @@
 import { SwitchSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Switch } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Switch } from "../../../../../packages/react/src/components/switch/switch"
 import { ToggleableSwitchStory } from "./story-helpers"
 
 const meta: Meta<typeof Switch> = {

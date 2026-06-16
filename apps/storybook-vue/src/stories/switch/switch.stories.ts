@@ -1,8 +1,8 @@
 import { SwitchSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import type { SwitchProps } from "@marwes-ui/vue"
-import { Switch } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Switch, type SwitchProps } from "../../../../../packages/vue/src/components/switch/switch"
 import { createToggleableSwitchRender } from "./story-helpers"
 
 const meta = {

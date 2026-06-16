@@ -357,15 +357,16 @@ export type {
 export { BannerVariant } from "@marwes-ui/core"
 
 /* Switch */
+// The `Switch` atom is intentionally NOT exported from the public entry —
+// use `SwitchField` (or a purpose variant) instead. Atom files remain
+// importable internally via deep paths under packages/react/src/components/switch/.
 export {
-  Switch,
   SwitchField,
   FeatureToggle,
   PreferenceSwitch,
   PermissionSwitch,
 } from "./components/switch"
 export type {
-  SwitchProps,
   SwitchFieldProps,
   FeatureToggleProps,
   PreferenceSwitchProps,

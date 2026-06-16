@@ -1,11 +1,15 @@
-import { SegmentedControl, Switch, Text, TextVariant } from "@marwes-ui/react"
+import { SegmentedControl, Text, TextVariant } from "@marwes-ui/react"
 import type { Density, SegmentedControlItem } from "@marwes-ui/react"
-import type { Dispatch, SetStateAction } from "react"
+import { type Dispatch, type SetStateAction, useId } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for ToggleControlRow's custom layout.
+import { Switch } from "../../../../packages/react/src/components/switch/switch"
 
 import {
   type ComponentDisplayOptions,
+  type PlaygroundAccessibilitySettings,
   type PlaygroundColorSettings,
+  type PlaygroundColorVision,
   type PlaygroundFont,
   type PlaygroundSettings,
   type PlaygroundStyle,
@@ -113,11 +117,40 @@ const styleItems: SegmentedControlItem[] = [
   { value: "mono", label: "Mono" },
 ]
 
+type ToggleControlRowProps = {
+  label: string
+  checked: boolean
+  onCheckedChange: (checked: boolean) => void
+}
+
+function ToggleControlRow({ label, checked, onCheckedChange }: ToggleControlRowProps): JSX.Element {
+  const labelId = useId()
+
+  return (
+    <ToggleRow>
+      <span id={labelId}>{label}</span>
+      <Switch checked={checked} ariaLabelledBy={labelId} onCheckedChange={onCheckedChange} />
+    </ToggleRow>
+  )
+}
+
 function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsProps): JSX.Element {
+  const styleLabelId = useId()
+
   const updateColor = (key: keyof PlaygroundColorSettings, value: string): void => {
     onSettingsChange((current) => ({
       ...current,
       colors: { ...current.colors, [key]: value },
+    }))
+  }
+
+  const updateAccessibility = (
+    key: keyof PlaygroundAccessibilitySettings,
+    value: PlaygroundAccessibilitySettings[typeof key],
+  ): void => {
+    onSettingsChange((current) => ({
+      ...current,
+      accessibility: { ...current.accessibility, [key]: value },
     }))
   }
 
@@ -131,7 +164,7 @@ function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsPr
   return (
     <ControlsPanel aria-label="Playground controls">
       <ControlSection>
-        <SectionLabel>Style</SectionLabel>
+        <SectionLabel id={styleLabelId}>Style</SectionLabel>
         <SegmentedControl
           items={styleItems}
           value={settings.style}
@@ -140,7 +173,8 @@ function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsPr
           }
           variant="inverse"
           size="sm"
-          ariaLabel="Style"
+          ariaLabelledBy={styleLabelId}
+          style={{ width: "100%" }}
         />
       </ControlSection>
 
@@ -203,16 +237,58 @@ function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsPr
       </ControlSection>
 
       <ControlSection>
+        <SectionLabel>Accessibility</SectionLabel>
+        <ToggleControlRow
+          label="High contrast"
+          checked={settings.accessibility.highContrast}
+          onCheckedChange={(checked) => updateAccessibility("highContrast", checked)}
+        />
+        <ToggleControlRow
+          label="Reduce motion"
+          checked={settings.accessibility.reduceMotion}
+          onCheckedChange={(checked) => updateAccessibility("reduceMotion", checked)}
+        />
+        <ToggleControlRow
+          label="Dyslexic font"
+          checked={settings.accessibility.dyslexicFont}
+          onCheckedChange={(checked) => updateAccessibility("dyslexicFont", checked)}
+        />
+        <ToggleControlRow
+          label="Loose spacing"
+          checked={settings.accessibility.looseSpacing}
+          onCheckedChange={(checked) => updateAccessibility("looseSpacing", checked)}
+        />
+        <FieldRow>
+          <FieldLabel>Color vision</FieldLabel>
+          <SelectControl
+            value={settings.accessibility.colorVision}
+            onChange={(event) =>
+              updateAccessibility("colorVision", event.target.value as PlaygroundColorVision)
+            }
+          >
+            <option value="normal">Normal</option>
+            <option value="protanopia">Protanopia</option>
+            <option value="deuteranopia">Deuteranopia</option>
+            <option value="tritanopia">Tritanopia</option>
+          </SelectControl>
+        </FieldRow>
+      </ControlSection>
+
+      <ControlSection>
         <SectionLabel>Radius (px)</SectionLabel>
         <RangeRow>
           <span>0</span>
           <RangeInput
             type="range"
+            aria-label="Radius"
             min={0}
             max={48}
             value={settings.radius}
             onChange={(event) =>
-              onSettingsChange((current) => ({ ...current, radius: Number(event.target.value) }))
+              onSettingsChange((current) => ({
+                ...current,
+                radius: Number(event.target.value),
+              }))
             }
           />
           <span>48</span>
@@ -237,38 +313,26 @@ function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsPr
             <option value="spacious">Spacious</option>
           </SelectControl>
         </FieldRow>
-        <ToggleRow>
-          <span>Show labels</span>
-          <Switch
-            checked={settings.componentOptions.showLabels}
-            ariaLabel="Show labels"
-            onCheckedChange={(checked) => updateOption("showLabels", checked)}
-          />
-        </ToggleRow>
-        <ToggleRow>
-          <span>Show descriptions</span>
-          <Switch
-            checked={settings.componentOptions.showDescriptions}
-            ariaLabel="Show descriptions"
-            onCheckedChange={(checked) => updateOption("showDescriptions", checked)}
-          />
-        </ToggleRow>
-        <ToggleRow>
-          <span>Show icons</span>
-          <Switch
-            checked={settings.componentOptions.showIcons}
-            ariaLabel="Show icons"
-            onCheckedChange={(checked) => updateOption("showIcons", checked)}
-          />
-        </ToggleRow>
-        <ToggleRow>
-          <span>Show helper text</span>
-          <Switch
-            checked={settings.componentOptions.showHelperText}
-            ariaLabel="Show helper text"
-            onCheckedChange={(checked) => updateOption("showHelperText", checked)}
-          />
-        </ToggleRow>
+        <ToggleControlRow
+          label="Show labels"
+          checked={settings.componentOptions.showLabels}
+          onCheckedChange={(checked) => updateOption("showLabels", checked)}
+        />
+        <ToggleControlRow
+          label="Show descriptions"
+          checked={settings.componentOptions.showDescriptions}
+          onCheckedChange={(checked) => updateOption("showDescriptions", checked)}
+        />
+        <ToggleControlRow
+          label="Show icons"
+          checked={settings.componentOptions.showIcons}
+          onCheckedChange={(checked) => updateOption("showIcons", checked)}
+        />
+        <ToggleControlRow
+          label="Show helper text"
+          checked={settings.componentOptions.showHelperText}
+          onCheckedChange={(checked) => updateOption("showHelperText", checked)}
+        />
       </ControlSection>
     </ControlsPanel>
   )
