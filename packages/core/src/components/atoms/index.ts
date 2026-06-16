@@ -162,3 +162,5 @@ export type {
   PaginationPageRenderKit,
   PaginationEllipsisRenderKit,
 } from "./pagination"
+export * from "./skip-link"
+export type { SkipLinkOptions, SkipLinkRenderKit } from "./skip-link"

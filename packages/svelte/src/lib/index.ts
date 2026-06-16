@@ -372,6 +372,10 @@ export type {
 export { default as Pagination } from "./components/pagination/Pagination.svelte"
 export type { PaginationProps } from "./components/pagination/types.js"
 
+// SkipLink
+export { default as SkipLink } from "./components/skip-link/SkipLink.svelte"
+export type { SkipLinkProps } from "./components/skip-link/types.js"
+
 // Slider
 export { default as Slider } from "./components/slider/Slider.svelte"
 export { default as SliderField } from "./components/slider/SliderField.svelte"

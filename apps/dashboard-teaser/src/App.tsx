@@ -1,4 +1,4 @@
-import { MarwesProvider, ThemeMode } from "@marwes-ui/react"
+import { MarwesProvider, SkipLink, ThemeMode } from "@marwes-ui/react"
 import { useState } from "react"
 import { ThemeProvider as StyledThemeProvider } from "styled-components"
 
@@ -7,7 +7,10 @@ import { Header } from "./components/Header"
 import { MainContent, PageWrapper } from "./components/PageLayout"
 import { ComponentsShowcase } from "./sections/ComponentsShowcase"
 import { HeroSection } from "./sections/HeroSection"
-import { defaultPlaygroundSettings } from "./sections/playground-settings"
+import {
+  createDashboardShellThemeInput,
+  defaultPlaygroundSettings,
+} from "./sections/playground-settings"
 import { GlobalStyle } from "./styles/global-style"
 
 function App(): JSX.Element {
@@ -21,17 +24,26 @@ function App(): JSX.Element {
   }
 
   const isDark = playgroundSettings.mode === ThemeMode.dark
+  const shellThemeInput = createDashboardShellThemeInput(playgroundSettings)
 
   return (
     <>
-      <MarwesProvider theme={{ mode: playgroundSettings.mode }}>
+      <MarwesProvider theme={shellThemeInput}>
         {(mwTheme) => (
           <StyledThemeProvider theme={mwTheme}>
             <>
               <GlobalStyle />
-              <PageWrapper>
+              <PageWrapper
+                data-dashboard-reduce-motion={
+                  playgroundSettings.accessibility.reduceMotion ? "true" : undefined
+                }
+                data-dashboard-loose-spacing={
+                  playgroundSettings.accessibility.looseSpacing ? "true" : undefined
+                }
+              >
+                <SkipLink href="#main">Skip to main content</SkipLink>
                 <Header isDark={isDark} onToggleTheme={toggleTheme} />
-                <MainContent>
+                <MainContent id="main">
                   <HeroSection />
                   <ComponentsShowcase
                     settings={playgroundSettings}

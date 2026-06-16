@@ -407,6 +407,10 @@ export type { SegmentedControlProps, SegmentedControlItem } from "./components/s
 export { Pagination } from "./components/pagination"
 export type { PaginationProps } from "./components/pagination"
 
+/* SkipLink */
+export { SkipLink } from "./components/skip-link"
+export type { SkipLinkProps } from "./components/skip-link"
+
 /* Dialog */
 export {
   Dialog,
