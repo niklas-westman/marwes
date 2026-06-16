@@ -37,6 +37,8 @@ export interface PaginationOptions {
   showFirstLast?: boolean
   disabled?: boolean
   ariaLabel?: string
+  /** ID of an element whose text labels the pagination nav. Wins over `ariaLabel` if both are set. */
+  ariaLabelledBy?: string
   firstLabel?: string
   previousLabel?: string
   nextLabel?: string
@@ -78,7 +80,8 @@ export interface PaginationReservedItemCountOptions {
 }
 
 export interface PaginationA11yProps {
-  ariaLabel: string
+  ariaLabel?: string
+  ariaLabelledBy?: string
   ariaDisabled?: true
 }
 

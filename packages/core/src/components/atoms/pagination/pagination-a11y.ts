@@ -12,8 +12,12 @@ import type {
 } from "./pagination-types"
 
 export function resolvePaginationA11y(opts: PaginationOptions): PaginationA11yProps {
-  const a11y: PaginationA11yProps = {
-    ariaLabel: opts.ariaLabel ?? "Pagination",
+  const a11y: PaginationA11yProps = {}
+
+  if (opts.ariaLabelledBy) {
+    a11y.ariaLabelledBy = opts.ariaLabelledBy
+  } else {
+    a11y.ariaLabel = opts.ariaLabel ?? "Pagination"
   }
 
   if (opts.disabled) a11y.ariaDisabled = true
