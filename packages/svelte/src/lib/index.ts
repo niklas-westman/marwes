@@ -265,12 +265,10 @@ export type {
 } from "./components/avatar/types.js"
 
 // DatePicker
-export { default as DatePicker } from "./components/date-picker/DatePicker.svelte"
+// The `DatePicker` atom is intentionally NOT exported from the public entry —
+// use `DatePickerField` instead.
 export { default as DatePickerField } from "./components/date-picker/DatePickerField.svelte"
-export type {
-  DatePickerProps,
-  DatePickerFieldProps,
-} from "./components/date-picker/types.js"
+export type { DatePickerFieldProps } from "./components/date-picker/types.js"
 
 // Drawer
 export { default as Drawer } from "./components/drawer/Drawer.svelte"

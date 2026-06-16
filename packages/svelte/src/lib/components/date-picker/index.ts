@@ -1,3 +1,4 @@
-export { default as DatePicker } from "./DatePicker.svelte"
+// `DatePicker` atom intentionally NOT re-exported — use `DatePickerField`.
+// Internal consumers can deep-import "./DatePicker.svelte" directly.
 export { default as DatePickerField } from "./DatePickerField.svelte"
-export type { DatePickerProps, DatePickerFieldProps } from "./types.js"
+export type { DatePickerFieldProps } from "./types.js"

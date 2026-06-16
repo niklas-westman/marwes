@@ -243,8 +243,10 @@ export { StatTile } from "./components/stat-tile"
 export type { StatTileProps } from "./components/stat-tile"
 
 /* DatePicker */
-export { DatePicker, DatePickerField } from "./components/date-picker"
-export type { DatePickerProps, DatePickerFieldProps } from "./components/date-picker"
+// The `DatePicker` atom is intentionally NOT exported from the public entry —
+// use `DatePickerField` instead.
+export { DatePickerField } from "./components/date-picker"
+export type { DatePickerFieldProps } from "./components/date-picker"
 
 /* Drawer */
 export { Drawer } from "./components/drawer"
