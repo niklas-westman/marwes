@@ -1,5 +1,6 @@
-export { Input } from "./input"
-export type { InputProps } from "./input"
+// `Input` (the atom) is intentionally NOT re-exported here.
+// Use `InputField` (or a purpose variant) instead. Internal consumers
+// can deep-import "./input" directly.
 
 // `Select` (the atom) is intentionally NOT re-exported here.
 // Use `SelectField` (or `DropdownField`) instead. Internal consumers

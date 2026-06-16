@@ -1,4 +1,4 @@
-export { default as Input } from "./Input.svelte"
+// `Input` atom intentionally NOT re-exported — use `InputField` (or a purpose variant).
 export { default as InputField } from "./InputField.svelte"
 export { default as InputOtp } from "./InputOtp.svelte"
 // `RichText` (the atom) is intentionally NOT re-exported here.
@@ -19,7 +19,6 @@ export { default as SelectField } from "./SelectField.svelte"
 // `Textarea` atom intentionally NOT re-exported — use `TextareaField`.
 export { default as TextareaField } from "./TextareaField.svelte"
 export type {
-  InputProps,
   InputFieldProps,
   InputOtpProps,
   RichTextFieldProps,

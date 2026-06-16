@@ -2,7 +2,6 @@ import {
   Button,
   ButtonVariant,
   IconName,
-  Input,
   SegmentedControl,
   Text,
   TextVariant,
@@ -10,7 +9,8 @@ import {
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for the read-only command display.
+// Atoms are no longer publicly exported; deep-import for the read-only command display.
+import { Input } from "../../../../packages/react/src/components/input/input"
 import { Textarea } from "../../../../packages/react/src/components/input/textarea"
 
 import { cardShellStyles } from "../styles/theme-utils"

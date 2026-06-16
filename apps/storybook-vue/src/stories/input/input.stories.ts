@@ -1,8 +1,9 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import type { InputProps } from "@marwes-ui/vue"
-import { Input, Paragraph } from "@marwes-ui/vue"
+import { Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Input, type InputProps } from "../../../../../packages/vue/src/components/input/input"
 
 const meta = {
   title: "Input/Atom/Input",

@@ -85,7 +85,7 @@ export type {
 } from "./components/spinner/types.js"
 
 // Input
-export { default as Input } from "./components/input/Input.svelte"
+// `Input` atom intentionally NOT exported — use `InputField` (or a purpose variant).
 export { default as InputField } from "./components/input/InputField.svelte"
 export { default as PasswordField } from "./components/input/PasswordField.svelte"
 export { default as EmailField } from "./components/input/EmailField.svelte"
@@ -104,7 +104,6 @@ export type {
   DateOfBirthFieldProps,
   DropdownFieldProps,
   EmailFieldProps,
-  InputProps,
   InputFieldProps,
   InputOtpProps,
   PasswordFieldProps,
