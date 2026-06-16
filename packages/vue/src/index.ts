@@ -106,11 +106,11 @@ export type {
 export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 
 /* Input */
+// `RichText` atom intentionally NOT exported — use `RichTextField`.
 export {
   Input,
   Select,
   Textarea,
-  // RichText atom intentionally NOT exported — use RichTextField.
   InputField,
   InputOtp,
   SelectField,
