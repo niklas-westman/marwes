@@ -11,7 +11,7 @@ import type { TextOptions, TextRenderKit } from "./text-types"
 
 export function textRecipe(opts: TextOptions, theme: ResolvedTheme): TextRenderKit {
   const variant: TextVariant = opts.variant ?? "caption"
-  const tag = opts.as ?? "span"
+  const tag = opts.headingLevel ? (`h${opts.headingLevel}` as const) : (opts.as ?? "span")
   const className = ["mw-text", `mw-text--${variant}`].filter(Boolean).join(" ")
   const typo = theme.typography.text[variant]
 

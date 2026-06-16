@@ -15,7 +15,7 @@ export type TextProps = TextOptions & {
   className?: string
 }
 
-const textPropKeys = ["variant", "as", "id", "className"] as const
+const textPropKeys = ["variant", "as", "headingLevel", "id", "className"] as const
 
 export const Text = defineComponent(
   (props: TextProps, { slots }) => {

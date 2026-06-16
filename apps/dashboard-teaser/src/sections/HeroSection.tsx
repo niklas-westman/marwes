@@ -75,7 +75,9 @@ function HeroSection(): JSX.Element {
         <TextBox>
           <TopSection>
             <Badge variant="warning">Work in progress</Badge>
-            <Text variant={TextVariant.display}>Design with intention</Text>
+            <Text variant={TextVariant.display} headingLevel={1}>
+              Design with intention
+            </Text>
           </TopSection>
           <Paragraph>Designed and developed with care. Built by craft. Open to all.</Paragraph>
         </TextBox>
