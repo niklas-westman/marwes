@@ -248,8 +248,8 @@ export { StatTile } from "./components/stat-tile"
 export type { StatTileProps } from "./components/stat-tile"
 
 /* DatePicker */
-export { DatePicker } from "./components/date-picker"
-export type { DatePickerProps } from "./components/date-picker"
+export { DatePicker, DatePickerField } from "./components/date-picker"
+export type { DatePickerProps, DatePickerFieldProps } from "./components/date-picker"
 
 /* Drawer */
 export { Drawer } from "./components/drawer"

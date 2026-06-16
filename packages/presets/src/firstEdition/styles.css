@@ -51,6 +51,7 @@
 @import "./molecules/accordion-field.css";
 @import "./molecules/checkbox-field.css";
 @import "./molecules/checkbox-group-field.css";
+@import "./molecules/date-picker-field.css";
 @import "./molecules/dialog-modal.css";
 @import "./molecules/input-field.css";
 @import "./molecules/radio-group-field.css";
