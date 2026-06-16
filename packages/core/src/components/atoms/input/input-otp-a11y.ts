@@ -29,7 +29,9 @@ export function resolveInputOtpA11y(options: InputOtpOptions): InputOtpA11yProps
     a11yProps.required = true
   }
 
-  if (options.ariaLabel) {
+  if (options.ariaLabelledBy) {
+    a11yProps.ariaLabelledBy = options.ariaLabelledBy
+  } else if (options.ariaLabel) {
     a11yProps.ariaLabel = options.ariaLabel
   }
 

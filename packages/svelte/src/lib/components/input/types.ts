@@ -58,6 +58,7 @@ export interface InputOtpProps {
   required?: boolean
   invalid?: boolean
   ariaLabel?: string
+  ariaLabelledBy?: string
   onvaluechange?: (value: string) => void
   class?: string
 }

@@ -89,6 +89,10 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
     recipeOptions.ariaLabel = props.ariaLabel
   }
 
+  if (props.ariaLabelledBy) {
+    recipeOptions.ariaLabelledBy = props.ariaLabelledBy
+  }
+
   const kit = createInputOtpRecipe(recipeOptions)
 
   const className = cx(kit.className, props.className)
@@ -140,6 +144,7 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
           readOnly={kit.a11y.readOnly}
           required={kit.a11y.required}
           aria-label={kit.a11y.ariaLabel}
+          aria-labelledby={kit.a11y.ariaLabelledBy}
           aria-invalid={kit.a11y.ariaInvalid}
           aria-describedby={kit.a11y.ariaDescribedBy}
           value={kit.displayValue}

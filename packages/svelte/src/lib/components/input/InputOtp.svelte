@@ -26,6 +26,7 @@
     required,
     invalid: invalidProp,
     ariaLabel,
+    ariaLabelledBy,
     onvaluechange,
     class: className,
   }: InputOtpProps = $props();
@@ -76,6 +77,7 @@
     if (required) opts.required = true;
     if (a11yIds.describedBy) opts.describedBy = a11yIds.describedBy;
     if (ariaLabel) opts.ariaLabel = ariaLabel;
+    if (ariaLabelledBy) opts.ariaLabelledBy = ariaLabelledBy;
     return opts;
   });
 
@@ -126,6 +128,7 @@
       readonly={kit.a11y.readOnly}
       required={kit.a11y.required}
       aria-label={kit.a11y.ariaLabel}
+      aria-labelledby={kit.a11y.ariaLabelledBy}
       aria-invalid={kit.a11y.ariaInvalid}
       aria-describedby={kit.a11y.ariaDescribedBy}
       value={kit.displayValue}

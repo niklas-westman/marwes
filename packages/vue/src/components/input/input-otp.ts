@@ -36,6 +36,7 @@ const inputOtpPropKeys = [
   "invalid",
   "ariaDescribedBy",
   "ariaLabel",
+  "ariaLabelledBy",
   "onValueChange",
   "className",
 ] as const
@@ -105,6 +106,10 @@ export const InputOtp = defineComponent(
         recipeOptions.ariaLabel = props.ariaLabel
       }
 
+      if (props.ariaLabelledBy) {
+        recipeOptions.ariaLabelledBy = props.ariaLabelledBy
+      }
+
       return createInputOtpRecipe(recipeOptions)
     })
 
@@ -166,6 +171,7 @@ export const InputOtp = defineComponent(
               readOnly: kit.value.a11y.readOnly,
               required: kit.value.a11y.required,
               "aria-label": kit.value.a11y.ariaLabel,
+              "aria-labelledby": kit.value.a11y.ariaLabelledBy,
               "aria-invalid": kit.value.a11y.ariaInvalid,
               "aria-describedby": kit.value.a11y.ariaDescribedBy,
               value: kit.value.displayValue,

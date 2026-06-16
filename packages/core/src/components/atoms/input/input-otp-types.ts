@@ -17,6 +17,8 @@ export type InputOtpOptions = {
   invalid?: boolean
   describedBy?: string
   ariaLabel?: string
+  /** ID of an element whose text labels the OTP input. Wins over `ariaLabel` if both are set. */
+  ariaLabelledBy?: string
 }
 
 export type InputOtpA11yProps = {
@@ -30,6 +32,7 @@ export type InputOtpA11yProps = {
   maxLength: number
   pattern: string
   ariaLabel?: string
+  ariaLabelledBy?: string
   ariaInvalid?: true
   ariaDescribedBy?: string
 }
