@@ -4,8 +4,9 @@ export type { InputProps } from "./input"
 export { Select } from "./select"
 export type { SelectProps, SelectAppearance, SelectOption } from "./select"
 
-export { Textarea } from "./textarea"
-export type { TextareaProps } from "./textarea"
+// `Textarea` (the atom) is intentionally NOT re-exported here.
+// Use `TextareaField` instead. Internal consumers can deep-import
+// "./textarea" directly.
 
 // `RichText` (the atom) is intentionally NOT re-exported here.
 // Use `RichTextField` instead. Internal consumers can deep-import

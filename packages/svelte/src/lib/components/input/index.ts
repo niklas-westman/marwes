@@ -16,7 +16,7 @@ export { default as URLField } from "./URLField.svelte"
 export { default as CurrencyField } from "./CurrencyField.svelte"
 export { default as Select } from "./Select.svelte"
 export { default as SelectField } from "./SelectField.svelte"
-export { default as Textarea } from "./Textarea.svelte"
+// `Textarea` atom intentionally NOT re-exported — use `TextareaField`.
 export { default as TextareaField } from "./TextareaField.svelte"
 export type {
   InputProps,
@@ -35,7 +35,6 @@ export type {
   SelectFieldProps,
   SelectFieldVariant,
   SelectOption,
-  TextareaProps,
   TextareaFieldProps,
   URLFieldProps,
   ZipCodeFieldProps,

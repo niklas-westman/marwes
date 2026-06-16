@@ -194,9 +194,9 @@ export type TextComponent = typeof import("./components/text/Text.svelte").defau
 export type { TextProps } from "./components/text/types.js"
 
 // Textarea
-export { default as Textarea } from "./components/input/Textarea.svelte"
+// `Textarea` atom intentionally NOT exported — use `TextareaField`.
 export { default as TextareaField } from "./components/input/TextareaField.svelte"
-export type { TextareaProps, TextareaFieldProps } from "./components/input/types.js"
+export type { TextareaFieldProps } from "./components/input/types.js"
 
 // Select
 export { default as Select } from "./components/input/Select.svelte"

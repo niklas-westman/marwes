@@ -117,11 +117,11 @@ export type {
 } from "./components/button"
 
 /* Input */
-// `RichText` atom intentionally NOT exported — use `RichTextField`.
+// `RichText` and `Textarea` atoms intentionally NOT exported —
+// use `RichTextField` / `TextareaField`.
 export {
   Input,
   Select,
-  Textarea,
   InputField,
   InputOtp,
   SelectField,
@@ -142,7 +142,6 @@ export type {
   SelectProps,
   SelectAppearance,
   SelectOption,
-  TextareaProps,
   InputFieldProps,
   InputOtpProps,
   SelectFieldProps,

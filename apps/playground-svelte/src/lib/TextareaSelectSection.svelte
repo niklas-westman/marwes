@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { Select, Textarea, TextareaField, SelectField } from "@marwes-ui/svelte";
+  import { TextareaField, SelectField } from "@marwes-ui/svelte";
+  // Atoms are no longer publicly exported; deep-import for playground demo.
+  import Select from "../../../../packages/svelte/src/lib/components/input/Select.svelte";
+  import Textarea from "../../../../packages/svelte/src/lib/components/input/Textarea.svelte";
 
   let textareaValue = $state("");
   let selectValue = $state("");

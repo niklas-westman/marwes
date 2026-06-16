@@ -6,11 +6,12 @@ import {
   SegmentedControl,
   Text,
   TextVariant,
-  Textarea,
 } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for the read-only command display.
+import { Textarea } from "../../../../packages/react/src/components/input/textarea"
 
 import { cardShellStyles } from "../styles/theme-utils"
 import {
