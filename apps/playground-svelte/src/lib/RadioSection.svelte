@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Radio, RadioGroupField } from "@marwes-ui/svelte";
+  import { RadioGroupField } from "@marwes-ui/svelte";
+  // Atom is no longer publicly exported; deep-import for playground demo.
+  import Radio from "../../../../packages/svelte/src/lib/components/radio/Radio.svelte";
 
   let selected = $state("svelte");
 </script>

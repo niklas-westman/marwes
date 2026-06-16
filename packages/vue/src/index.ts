@@ -303,15 +303,15 @@ export type {
 } from "./components/accordion"
 
 /* Radio */
+// The `Radio` atom is intentionally NOT exported from the public entry —
+// use `RadioGroupField` (or a purpose variant) instead.
 export {
-  Radio,
   RadioGroupField,
   YesNoRadioGroup,
   RatingRadioGroup,
   OptionRadioGroup,
 } from "./components/radio"
 export type {
-  RadioProps,
   RadioGroupFieldProps,
   RadioGroupFieldOption,
   YesNoRadioGroupProps,

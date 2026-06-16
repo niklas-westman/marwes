@@ -235,7 +235,8 @@ export type {
 } from "./components/switch/types.js"
 
 // Radio
-export { default as Radio } from "./components/radio/Radio.svelte"
+// The `Radio` atom is intentionally NOT exported from the public entry —
+// use `RadioGroupField` (or a purpose variant) instead.
 export { default as RadioGroupField } from "./components/radio/RadioGroupField.svelte"
 export { default as OptionRadioGroup } from "./components/radio/OptionRadioGroup.svelte"
 export { default as YesNoRadioGroup } from "./components/radio/YesNoRadioGroup.svelte"
@@ -245,7 +246,6 @@ export type {
   RatingRadioGroupProps,
   RadioGroupFieldOption,
   RadioGroupFieldProps,
-  RadioProps,
   YesNoRadioGroupProps,
 } from "./components/radio/types.js"
 

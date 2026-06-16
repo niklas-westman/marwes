@@ -1,7 +1,8 @@
 import { storybookA11yPolicy, storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
-import { Radio } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Radio } from "../../../../../packages/react/src/components/radio/radio"
 
 const meta: Meta<typeof Radio> = {
   title: "Radio/Atom",

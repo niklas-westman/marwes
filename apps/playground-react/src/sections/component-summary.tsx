@@ -11,14 +11,14 @@ import {
   InputField,
   Paragraph,
   PrimaryButton,
-  Radio,
   SecondaryButton,
   Tab,
   TextButton,
   Toast,
 } from "@marwes-ui/react"
 import { useState } from "react"
-// Atom is no longer publicly exported; deep-import for the playground summary.
+// Atoms are no longer publicly exported; deep-import for the playground summary.
+import { Radio } from "../../../../packages/react/src/components/radio/radio"
 import { Switch } from "../../../../packages/react/src/components/switch/switch"
 
 import {

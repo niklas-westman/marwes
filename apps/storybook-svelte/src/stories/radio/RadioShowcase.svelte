@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Paragraph, Radio } from "@marwes-ui/svelte"
+  import { Paragraph } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import Radio from "../../../../../packages/svelte/src/lib/components/radio/Radio.svelte"
 
   interface Props {
     showcase: "all-states" | "radio-group"

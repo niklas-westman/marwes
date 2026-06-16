@@ -4,7 +4,6 @@ import {
   CheckboxGroupField,
   InputOtp,
   Card as MwCard,
-  Radio,
   RadioGroupField,
   SwitchField,
   Text,
@@ -12,6 +11,8 @@ import {
 } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for SingleRadioField's custom layout.
+import { Radio } from "../../../../../packages/react/src/components/radio/radio"
 
 import type { ComponentDisplayOptions } from "../playground-settings"
 import { CardTitle, Card as ShowcaseCard } from "./shared"

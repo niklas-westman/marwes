@@ -308,8 +308,8 @@ export type {
 } from "./components/accordion"
 
 /* Radio */
-export { Radio } from "./components/radio"
-export type { RadioProps } from "./components/radio"
+// The `Radio` atom is intentionally NOT exported from the public entry —
+// use `RadioGroupField` (or a purpose variant) instead.
 
 /* RadioGroupField */
 export { RadioGroupField } from "./components/radio"
