@@ -60,6 +60,7 @@ export function Button(props: ButtonProps) {
         type={kit.a11y.type}
         disabled={kit.a11y.disabled}
         aria-label={kit.a11y.ariaLabel}
+        aria-labelledby={kit.a11y.ariaLabelledBy}
         aria-busy={kit.a11y.ariaBusy}
         aria-disabled={kit.a11y.ariaDisabled}
         aria-pressed={kit.a11y.ariaPressed}
@@ -82,6 +83,7 @@ export function Button(props: ButtonProps) {
       role={kit.a11y.role}
       tabIndex={kit.a11y.tabIndex}
       aria-label={kit.a11y.ariaLabel}
+      aria-labelledby={kit.a11y.ariaLabelledBy}
       aria-busy={kit.a11y.ariaBusy}
       aria-disabled={kit.a11y.ariaDisabled}
       aria-pressed={kit.a11y.ariaPressed}
