@@ -19,6 +19,8 @@ export interface DatePickerProps
       | "nextYearLabel"
       | "cancelLabel"
       | "applyLabel"
+      | "ariaLabel"
+      | "ariaLabelledBy"
       | "calendarLabel"
       | "dataAttributes"
     > {
@@ -45,6 +47,8 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
     nextYearLabel,
     cancelLabel,
     applyLabel,
+    ariaLabel,
+    ariaLabelledBy,
     calendarLabel,
     dataAttributes,
     onPreviousYear,
@@ -67,6 +71,8 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
     ...(nextYearLabel !== undefined ? { nextYearLabel } : {}),
     ...(cancelLabel !== undefined ? { cancelLabel } : {}),
     ...(applyLabel !== undefined ? { applyLabel } : {}),
+    ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+    ...(ariaLabelledBy !== undefined ? { ariaLabelledBy } : {}),
     ...(calendarLabel !== undefined ? { calendarLabel } : {}),
     ...(dataAttributes !== undefined ? { dataAttributes } : {}),
   })
@@ -77,7 +83,8 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
       {...nativeProps}
       {...kit.dataAttributes}
       className={mergedClassName}
-      aria-label={kit.labels.calendar}
+      aria-label={kit.a11y.ariaLabel}
+      aria-labelledby={kit.a11y.ariaLabelledBy}
     >
       <header className={kit.slots.headerClassName}>
         <div className={kit.slots.navGroupClassName}>
