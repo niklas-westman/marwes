@@ -9,6 +9,13 @@ import { Text } from "../text"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
+/**
+ * Props for the `InputOtp` field.
+ *
+ * NOTE: `InputOtp` is a complete field — it renders its own `<label>`,
+ * helper text, and error region. Do not wrap it in `InputField`; use it
+ * directly. The `label` prop is required for accessibility.
+ */
 export type InputOtpProps = Omit<InputOtpOptions, "describedBy"> & {
   label: string
   helperText?: string
@@ -26,6 +33,24 @@ function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0
 }
 
+/**
+ * InputOtp (Field) — a self-contained one-time-password field.
+ *
+ * Despite the lack of an `InputOtpField` sibling, this IS the field —
+ * it renders the label, the OTP cells, and helper/error regions in one
+ * component. Use it directly; do not nest it inside `InputField`.
+ *
+ * @example
+ * ```tsx
+ * <InputOtp
+ *   label="Verification code"
+ *   length={6}
+ *   value={code}
+ *   onValueChange={setCode}
+ *   helperText="Enter the 6-digit code from your email"
+ * />
+ * ```
+ */
 export function InputOtp(props: InputOtpProps): React.ReactElement {
   const reactId = React.useId()
   const id = props.id ?? `mw-input-otp-${reactId}`
