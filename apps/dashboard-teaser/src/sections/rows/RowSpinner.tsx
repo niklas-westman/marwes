@@ -114,7 +114,13 @@ function RowSpinner({ options }: RowSpinnerProps): JSX.Element {
         {options.showLabels && <Text variant={TextVariant.overline}>Spinner</Text>}
         <SpinnerRow>
           {VARIANTS.map(({ key, label }) => (
-            <SpinnerItem key={key} type="button" onClick={() => setActiveVariant(key)}>
+            <SpinnerItem
+              key={key}
+              type="button"
+              aria-label={`Select ${label} spinner`}
+              aria-pressed={key === activeVariant}
+              onClick={() => setActiveVariant(key)}
+            >
               <Spinner variant={key} />
               {options.showLabels && <SpinnerLabel>{label}</SpinnerLabel>}
             </SpinnerItem>
