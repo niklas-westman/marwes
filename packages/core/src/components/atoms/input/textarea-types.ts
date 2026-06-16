@@ -27,6 +27,8 @@ export type TextareaOptions = {
 
   /** Accessible name for standalone textareas. TextareaField should use visible `label`. */
   ariaLabel?: string
+  /** ID of an element whose text labels the textarea. Wins over `ariaLabel` if both are set. */
+  ariaLabelledBy?: string
   label?: string
 }
 
@@ -45,6 +47,7 @@ export type TextareaA11yProps = {
   cols?: number
 
   ariaLabel?: string
+  ariaLabelledBy?: string
   ariaInvalid?: true
   ariaDescribedBy?: string
 }

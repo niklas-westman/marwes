@@ -70,6 +70,7 @@ export function Select(props: SelectProps) {
       disabled={kit.a11y.disabled}
       required={kit.a11y.required}
       aria-label={kit.a11y.ariaLabel}
+      aria-labelledby={kit.a11y.ariaLabelledBy}
       aria-invalid={kit.a11y.ariaInvalid}
       aria-describedby={kit.a11y.ariaDescribedBy}
       value={value}
