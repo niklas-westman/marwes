@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
-import { Checkbox } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import Checkbox from "../../../../../packages/svelte/src/lib/components/checkbox/Checkbox.svelte"
 import CheckboxShowcase from "./CheckboxShowcase.svelte"
 
 const meta = {

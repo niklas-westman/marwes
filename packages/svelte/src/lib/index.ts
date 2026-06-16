@@ -210,11 +210,11 @@ export type {
 } from "./components/input/types.js"
 
 // Checkbox
-export { default as Checkbox } from "./components/checkbox/Checkbox.svelte"
+// The `Checkbox` atom is intentionally NOT exported from the public entry —
+// use `CheckboxField` (or `CheckboxGroupField`) instead.
 export { default as CheckboxField } from "./components/checkbox/CheckboxField.svelte"
 export { default as CheckboxGroupField } from "./components/checkbox/CheckboxGroupField.svelte"
 export type {
-  CheckboxProps,
   CheckboxFieldProps,
   CheckboxGroupFieldProps,
   CheckboxGroupFieldOption,

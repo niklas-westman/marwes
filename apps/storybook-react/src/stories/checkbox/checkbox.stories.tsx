@@ -1,7 +1,9 @@
 import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
-import { Checkbox, Paragraph } from "@marwes-ui/react"
+import { Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Checkbox } from "../../../../../packages/react/src/components/checkbox/checkbox"
 
 const meta: Meta<typeof Checkbox> = {
   title: "Checkbox/Atom",

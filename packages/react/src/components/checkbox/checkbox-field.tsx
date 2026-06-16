@@ -1,8 +1,8 @@
 import { buildCheckboxFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Checkbox } from "."
-import type { CheckboxProps } from "."
 import { Text } from "../text"
+import { Checkbox } from "./checkbox"
+import type { CheckboxProps } from "./checkbox"
 
 export type CheckboxFieldProps = {
   /** Optional: if omitted, we generate one via useId(). */

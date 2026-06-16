@@ -1,5 +1,6 @@
-export { Checkbox } from "./checkbox"
-export type { CheckboxProps } from "./checkbox"
+// `Checkbox` (the atom) is intentionally NOT re-exported here.
+// Use `CheckboxField` (or `CheckboxGroupField`) instead. Internal
+// consumers can deep-import from "./checkbox" directly.
 
 export { CheckboxField } from "./checkbox-field"
 export type { CheckboxFieldProps } from "./checkbox-field"

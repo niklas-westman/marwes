@@ -186,8 +186,8 @@ export type {
 export { AvatarSize, AvatarType } from "@marwes-ui/core"
 
 /* Checkbox */
-export { Checkbox } from "./components/checkbox"
-export type { CheckboxProps } from "./components/checkbox"
+// The `Checkbox` atom is intentionally NOT exported from the public entry —
+// use `CheckboxField` or `CheckboxGroupField` instead.
 
 /* Divider */
 export { Divider } from "./components/divider"

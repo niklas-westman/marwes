@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Checkbox, Paragraph } from "@marwes-ui/svelte"
+  import { Paragraph } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import Checkbox from "../../../../../packages/svelte/src/lib/components/checkbox/Checkbox.svelte"
 
   interface Props {
     showcase:
