@@ -97,7 +97,7 @@ export { default as DateOfBirthField } from "./components/input/DateOfBirthField
 export { default as ZipCodeField } from "./components/input/ZipCodeField.svelte"
 export { default as DropdownField } from "./components/input/DropdownField.svelte"
 export { default as InputOtp } from "./components/input/InputOtp.svelte"
-export { default as RichText } from "./components/input/RichText.svelte"
+// `RichText` atom intentionally NOT exported from the public entry — use `RichTextField`.
 export { default as RichTextField } from "./components/input/RichTextField.svelte"
 export type {
   CurrencyFieldProps,
@@ -109,7 +109,6 @@ export type {
   InputOtpProps,
   PasswordFieldProps,
   PhoneFieldProps,
-  RichTextProps,
   RichTextFieldProps,
   SearchFieldProps,
   URLFieldProps,

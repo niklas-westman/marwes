@@ -1,7 +1,9 @@
 export { default as Input } from "./Input.svelte"
 export { default as InputField } from "./InputField.svelte"
 export { default as InputOtp } from "./InputOtp.svelte"
-export { default as RichText } from "./RichText.svelte"
+// `RichText` (the atom) is intentionally NOT re-exported here.
+// Use `RichTextField` instead. Internal consumers can deep-import
+// "./RichText.svelte" directly.
 export { default as RichTextField } from "./RichTextField.svelte"
 export { default as DropdownField } from "./DropdownField.svelte"
 export { default as SearchField } from "./SearchField.svelte"
@@ -20,7 +22,6 @@ export type {
   InputProps,
   InputFieldProps,
   InputOtpProps,
-  RichTextProps,
   RichTextFieldProps,
   CurrencyFieldProps,
   DateOfBirthFieldProps,

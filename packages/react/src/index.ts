@@ -121,7 +121,7 @@ export {
   Input,
   Select,
   Textarea,
-  RichText,
+  // RichText atom intentionally NOT exported — use RichTextField.
   InputField,
   InputOtp,
   SelectField,
@@ -143,7 +143,6 @@ export type {
   SelectAppearance,
   SelectOption,
   TextareaProps,
-  RichTextProps,
   InputFieldProps,
   InputOtpProps,
   SelectFieldProps,
