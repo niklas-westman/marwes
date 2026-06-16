@@ -16,19 +16,19 @@ import type {
 } from "@marwes-ui/core"
 import * as React from "react"
 
-export interface SegmentedControlItem {
-  value: string
+export interface SegmentedControlItem<T extends string = string> {
+  value: T
   label?: React.ReactNode
   icon?: React.ReactNode
   disabled?: boolean
   ariaLabel?: string
 }
 
-export interface SegmentedControlProps {
-  items: SegmentedControlItem[]
-  value?: string
-  defaultValue?: string
-  onValueChange?: (value: string) => void
+export interface SegmentedControlProps<T extends string = string> {
+  items: SegmentedControlItem<T>[]
+  value?: T
+  defaultValue?: T
+  onValueChange?: (value: T) => void
   variant?: SegmentedControlVariant
   size?: SegmentedControlSize
   disabled?: boolean
@@ -41,13 +41,15 @@ export interface SegmentedControlProps {
   style?: React.CSSProperties
 }
 
-function toItemState(item: SegmentedControlItem): SegmentedControlItemState {
+function toItemState<T extends string>(item: SegmentedControlItem<T>): SegmentedControlItemState {
   const state: SegmentedControlItemState = { value: item.value }
   if (item.disabled) state.disabled = true
   return state
 }
 
-export function SegmentedControl(props: SegmentedControlProps): React.ReactElement {
+export function SegmentedControl<T extends string = string>(
+  props: SegmentedControlProps<T>,
+): React.ReactElement {
   const {
     items,
     value: controlledValue,
@@ -85,7 +87,8 @@ export function SegmentedControl(props: SegmentedControlProps): React.ReactEleme
       if (!resolved || resolved === resolvedValue) return
 
       if (!isControlled) setInternalValue(resolved)
-      onValueChange?.(resolved)
+      // `resolved` always traces back to one of `items[i].value: T`, so this cast is safe.
+      onValueChange?.(resolved as T)
     },
     [itemStates, isControlled, resolvedValue, onValueChange],
   )

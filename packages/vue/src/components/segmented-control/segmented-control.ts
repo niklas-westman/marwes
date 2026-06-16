@@ -21,17 +21,17 @@ import {
 } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
-export interface SegmentedControlItemVue {
-  value: string
+export interface SegmentedControlItemVue<T extends string = string> {
+  value: T
   label?: string
   icon?: VNodeChild
   disabled?: boolean
   ariaLabel?: string
 }
 
-export interface SegmentedControlPropsVue {
-  items: SegmentedControlItemVue[]
-  modelValue?: string
+export interface SegmentedControlPropsVue<T extends string = string> {
+  items: SegmentedControlItemVue<T>[]
+  modelValue?: T
   variant?: SegmentedControlVariant
   size?: SegmentedControlSize
   disabled?: boolean

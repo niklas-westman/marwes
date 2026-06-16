@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T extends string = string">
   import {
     createSegmentedControlRecipe,
     createSegmentedControlItemRecipe,
@@ -24,7 +24,7 @@
     class: className,
     id,
     style,
-  }: SegmentedControlProps = $props();
+  }: SegmentedControlProps<T> = $props();
 
   const itemStates: SegmentedControlItemState[] = $derived(
     items.map((item) => ({ value: item.value, ...(item.disabled ? { disabled: true } : {}) }))
@@ -51,7 +51,8 @@
     if (controlledValue === undefined) {
       internalValue = resolved;
     }
-    onvaluechange?.(resolved);
+    // `resolved` always traces back to one of `items[i].value: T`, so this cast is safe.
+    onvaluechange?.(resolved as T);
   }
 
   function handleKeydown(e: KeyboardEvent): void {

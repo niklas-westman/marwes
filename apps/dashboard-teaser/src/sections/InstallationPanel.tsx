@@ -134,16 +134,18 @@ function SvelteIcon(): JSX.Element {
   )
 }
 
-const frameworkItems: SegmentedControlItem[] = [
+const frameworkItems: SegmentedControlItem<Framework>[] = [
   { value: "react", icon: <ReactIcon />, label: "React" },
   { value: "vue", icon: <VueIcon />, label: "Vue" },
   { value: "svelte", icon: <SvelteIcon />, label: "Svelte" },
 ]
 
-const packageManagerItems: SegmentedControlItem[] = packageManagers.map((packageManager) => ({
-  value: packageManager,
-  label: packageManager,
-}))
+const packageManagerItems: SegmentedControlItem<PackageManager>[] = packageManagers.map(
+  (packageManager) => ({
+    value: packageManager,
+    label: packageManager,
+  }),
+)
 
 function InstallationPanel(): JSX.Element {
   const [activeTab, setActiveTab] = useState<Framework>("react")
@@ -156,7 +158,7 @@ function InstallationPanel(): JSX.Element {
         <SegmentedControl
           items={frameworkItems}
           value={activeTab}
-          onValueChange={(v) => setActiveTab(v as Framework)}
+          onValueChange={setActiveTab}
           variant="inverse"
           size="md"
           ariaLabel="Framework"
@@ -169,7 +171,7 @@ function InstallationPanel(): JSX.Element {
         <SegmentedControl
           items={packageManagerItems}
           value={packageManager}
-          onValueChange={(v) => setPackageManager(v as PackageManager)}
+          onValueChange={setPackageManager}
           variant="inverse"
           size="sm"
           ariaLabel="Package manager"

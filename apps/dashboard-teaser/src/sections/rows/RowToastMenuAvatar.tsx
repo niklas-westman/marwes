@@ -82,7 +82,7 @@ const ToastList = styled.div`
   gap: ${({ theme }) => theme.spacing.sp16};
 `
 
-const toastVariantItems: SegmentedControlItem[] = [
+const toastVariantItems: SegmentedControlItem<ToastVariant>[] = [
   { value: "subtle", label: "Label" },
   { value: "outline", label: "Outline" },
   { value: "rich", label: "Rich" },
@@ -155,7 +155,7 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
           items={toastVariantItems}
           value={toastVariant}
           onValueChange={(v) => {
-            setToastVariant(v as ToastVariant)
+            setToastVariant(v)
             resetToasts()
           }}
           variant="inverse"
