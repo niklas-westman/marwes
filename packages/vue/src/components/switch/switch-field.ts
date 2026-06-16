@@ -60,7 +60,7 @@ export const SwitchField = defineComponent(
     const mergedSwitchProps = computed<SwitchProps>(() => {
       const {
         ariaLabel: _ignoredAriaLabel,
-        ariaLabelledby: _ignoredAriaLabelledby,
+        ariaLabelledBy: _ignoredAriaLabelledby,
         ariaDescribedBy: _ignoredAriaDescribedBy,
         onCheckedChange: originalOnCheckedChange,
         ...restSwitchProps
@@ -68,7 +68,7 @@ export const SwitchField = defineComponent(
       const nextSwitchProps: SwitchProps = {
         ...restSwitchProps,
         id: id.value,
-        ariaLabelledby: a11yIds.value.labelId,
+        ariaLabelledBy: a11yIds.value.labelId,
       }
 
       if (props.modelValue !== undefined) {

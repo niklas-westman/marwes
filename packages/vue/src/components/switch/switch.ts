@@ -18,7 +18,7 @@ const switchPropKeys = [
   "disabled",
   "ariaLabel",
   "label",
-  "ariaLabelledby",
+  "ariaLabelledBy",
   "ariaDescribedBy",
   "className",
   "onCheckedChange",
@@ -38,7 +38,7 @@ export const Switch = defineComponent(
       if (props.disabled !== undefined) opts.disabled = props.disabled
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
       if (props.label !== undefined) opts.label = props.label
-      if (props.ariaLabelledby !== undefined) opts.ariaLabelledby = props.ariaLabelledby
+      if (props.ariaLabelledBy !== undefined) opts.ariaLabelledBy = props.ariaLabelledBy
       if (props.ariaDescribedBy !== undefined) opts.ariaDescribedBy = props.ariaDescribedBy
       return createSwitchRecipe(opts)
     })
@@ -64,7 +64,7 @@ export const Switch = defineComponent(
           "aria-checked": a11y.ariaChecked,
           "aria-disabled": a11y.ariaDisabled,
           "aria-label": a11y.ariaLabel,
-          "aria-labelledby": a11y.ariaLabelledby,
+          "aria-labelledby": a11y.ariaLabelledBy,
           "aria-describedby": a11y.ariaDescribedBy,
           onClick: (event: MouseEvent) => {
             props.onClick?.(event)

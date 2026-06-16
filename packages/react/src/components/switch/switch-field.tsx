@@ -51,7 +51,7 @@ export function SwitchField(props: SwitchFieldProps): React.ReactElement {
   )
   const {
     ariaLabel: _ignoredAriaLabel,
-    ariaLabelledby: _ignoredAriaLabelledby,
+    ariaLabelledBy: _ignoredAriaLabelledby,
     ariaDescribedBy: _ignoredAriaDescribedBy,
     children: _ignoredChildren,
     ...switchProps
@@ -63,7 +63,7 @@ export function SwitchField(props: SwitchFieldProps): React.ReactElement {
         <Switch
           {...switchProps}
           id={id}
-          ariaLabelledby={labelId}
+          ariaLabelledBy={labelId}
           {...(describedBy ? { ariaDescribedBy: describedBy } : {})}
         />
 

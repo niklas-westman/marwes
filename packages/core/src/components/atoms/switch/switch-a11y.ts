@@ -9,7 +9,7 @@ export function resolveSwitchA11y(opts: SwitchOptions): SwitchA11yProps {
   if (opts.disabled) a11y.ariaDisabled = true
   const accessibleLabel = opts.ariaLabel ?? opts.label
   if (accessibleLabel) a11y.ariaLabel = accessibleLabel
-  if (opts.ariaLabelledby) a11y.ariaLabelledby = opts.ariaLabelledby
+  if (opts.ariaLabelledBy) a11y.ariaLabelledBy = opts.ariaLabelledBy
   if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
 
   return a11y

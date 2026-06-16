@@ -39,7 +39,7 @@
   aria-checked={kit.a11y.ariaChecked}
   aria-disabled={kit.a11y.ariaDisabled}
   aria-label={kit.a11y.ariaLabel}
-  aria-labelledby={kit.a11y.ariaLabelledby}
+  aria-labelledby={kit.a11y.ariaLabelledBy}
   aria-describedby={kit.a11y.ariaDescribedBy}
   class={mergedClass}
   style={mergedStyle}

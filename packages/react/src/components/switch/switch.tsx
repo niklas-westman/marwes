@@ -36,7 +36,7 @@ export function Switch(props: SwitchProps): React.ReactElement {
       aria-checked={a11y.ariaChecked}
       aria-disabled={a11y.ariaDisabled}
       aria-label={a11y.ariaLabel}
-      aria-labelledby={a11y.ariaLabelledby}
+      aria-labelledby={a11y.ariaLabelledBy}
       aria-describedby={a11y.ariaDescribedBy}
       className={[kit.className, className].filter(Boolean).join(" ")}
       style={kit.vars}
