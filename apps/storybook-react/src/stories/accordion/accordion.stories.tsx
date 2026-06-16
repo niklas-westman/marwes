@@ -1,7 +1,8 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Accordion } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Accordion } from "../../../../../packages/react/src/components/accordion/accordion"
 
 const meta: Meta<typeof Accordion> = {
   title: "Accordion/Atom",

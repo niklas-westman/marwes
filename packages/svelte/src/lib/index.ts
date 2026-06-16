@@ -327,13 +327,13 @@ export type {
 } from "./components/dialog/types.js"
 
 // Accordion
-export { default as Accordion } from "./components/accordion/Accordion.svelte"
+// The `Accordion` atom (single collapsible panel) is intentionally NOT exported —
+// use `AccordionField` (groups) or a purpose variant.
 export { default as AccordionField } from "./components/accordion/AccordionField.svelte"
 export { default as FAQAccordion } from "./components/accordion/FAQAccordion.svelte"
 export { default as SettingsAccordion } from "./components/accordion/SettingsAccordion.svelte"
 export { default as SectionsAccordion } from "./components/accordion/SectionsAccordion.svelte"
 export type {
-  AccordionProps,
   AccordionFieldItem,
   AccordionFieldProps,
   FAQAccordionProps,

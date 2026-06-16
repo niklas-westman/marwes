@@ -283,8 +283,8 @@ export { Tooltip, TooltipGroup } from "./components/tooltip"
 export type { TooltipProps, TooltipGroupProps } from "./components/tooltip"
 
 /* Accordion */
-export { Accordion } from "./components/accordion"
-export type { AccordionProps } from "./components/accordion"
+// The `Accordion` atom (single collapsible panel) is intentionally NOT exported —
+// use `AccordionField` (groups) or a purpose variant.
 
 /* AccordionField */
 export { AccordionField } from "./components/accordion"

@@ -1,8 +1,11 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import type { AccordionProps } from "@marwes-ui/vue"
-import { Accordion } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import {
+  Accordion,
+  type AccordionProps,
+} from "../../../../../packages/vue/src/components/accordion/accordion"
 
 const meta = {
   title: "Accordion/Atom",

@@ -1,6 +1,5 @@
 import { BadgeVariant } from "@marwes-ui/core"
 import {
-  Accordion,
   Badge,
   Card,
   CheckboxField,
@@ -18,6 +17,7 @@ import {
 } from "@marwes-ui/react"
 import { useState } from "react"
 // Atoms are no longer publicly exported; deep-import for the playground summary.
+import { Accordion } from "../../../../packages/react/src/components/accordion/accordion"
 import { Radio } from "../../../../packages/react/src/components/radio/radio"
 import { Switch } from "../../../../packages/react/src/components/switch/switch"
 

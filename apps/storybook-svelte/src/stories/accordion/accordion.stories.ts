@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Accordion } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import Accordion from "../../../../../packages/svelte/src/lib/components/accordion/Accordion.svelte"
 import AccordionShowcase from "./AccordionShowcase.svelte"
 
 const meta = {
