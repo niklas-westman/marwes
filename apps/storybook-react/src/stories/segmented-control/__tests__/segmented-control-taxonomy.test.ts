@@ -19,6 +19,12 @@ describe("React segmented-control story taxonomy", () => {
     )
   })
 
+  it("uses Molecule title for SegmentedControlField story", () => {
+    expect(readStoryFile("segmented-control-field.stories.tsx")).toContain(
+      'title: "SegmentedControl/Molecule/SegmentedControlField"',
+    )
+  })
+
   it("has an Introduction.mdx with correct title", () => {
     expect(readStoryFile("Introduction.mdx")).toContain('title="SegmentedControl/Introduction"')
   })
