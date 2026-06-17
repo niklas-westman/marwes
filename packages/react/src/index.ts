@@ -123,6 +123,7 @@ export type {
 export {
   InputField,
   InputOtp,
+  InputOtpField,
   SelectField,
   TextareaField,
   RichTextField,
@@ -141,6 +142,7 @@ export type {
   SelectOption,
   InputFieldProps,
   InputOtpProps,
+  InputOtpFieldProps,
   SelectFieldProps,
   SelectFieldVariant,
   TextareaFieldProps,

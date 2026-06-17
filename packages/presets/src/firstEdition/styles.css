@@ -56,6 +56,7 @@
 @import "./molecules/pagination-field.css";
 @import "./molecules/segmented-control-field.css";
 @import "./molecules/input-field.css";
+@import "./molecules/input-otp-field.css";
 @import "./molecules/radio-group-field.css";
 @import "./molecules/slider-field.css";
 @import "./molecules/switch-field.css";

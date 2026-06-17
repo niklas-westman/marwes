@@ -1,0 +1,26 @@
+/**
+ * InputOtpField (Molecule)
+ *
+ * Layout for label + InputOtp atom + helper/error.
+ * Mirrors the existing `.mw-input-otp__label / __error / __helper` styles
+ * that used to live on the field-shaped InputOtp atom; those classes now
+ * belong to the molecule.
+ */
+
+.mw-input-otp-field {
+  display: grid;
+  gap: var(--mw-density-field-gap);
+}
+
+.mw-input-otp-field__label {
+  display: block;
+  text-align: left;
+}
+
+.mw-input-otp-field__helper {
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-input-otp-field__error {
+  color: var(--mw-color-danger, #c4302b);
+}

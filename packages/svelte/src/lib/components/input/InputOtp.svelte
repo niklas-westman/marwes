@@ -1,22 +1,18 @@
 <script lang="ts">
-  import {
-    buildInputFieldA11yIds,
-    createInputOtpRecipe,
-    sanitizeInputOtpValue,
-  } from "@marwes-ui/core";
+  import { createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core";
   import type { InputOtpOptions } from "@marwes-ui/core";
   import { cssVarsToStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
-  import Text from "../text/Text.svelte";
   import type { InputOtpProps } from "./types.js";
 
+  /**
+   * InputOtp (Atom) — bare OTP cells. Renders the visual cells and a hidden
+   * native `<input>` that captures keyboard entry. Pair with `InputOtpField`
+   * for label + helper/error wiring.
+   */
   let {
     id: userProvidedId,
     name,
-    label,
-    helperText,
-    error,
-    ariaDescribedBy,
     value: controlledValue,
     defaultValue,
     length: lengthProp,
@@ -24,9 +20,10 @@
     disabled,
     readOnly,
     required,
-    invalid: invalidProp,
+    invalid,
     ariaLabel,
     ariaLabelledBy,
+    describedBy,
     onvaluechange,
     class: className,
   }: InputOtpProps = $props();
@@ -35,13 +32,6 @@
   const fieldId = $derived(userProvidedId ?? `mw-input-otp-${uniqueId}`);
   const otpLength = $derived(Math.max(1, lengthProp ?? 6));
 
-  function hasTextContent(text: string | undefined): boolean {
-    return text !== undefined && text.trim().length > 0;
-  }
-
-  const hasHelperText = $derived(hasTextContent(helperText));
-  const hasError = $derived(hasTextContent(error));
-  const isInvalid = $derived(hasError || invalidProp === true);
   const isControlled = $derived(controlledValue !== undefined);
 
   function getInitialUncontrolledValue(): string {
@@ -54,28 +44,19 @@
     sanitizeInputOtpValue(isControlled ? controlledValue : uncontrolledValue, otpLength)
   );
 
-  const a11yIds = $derived(
-    buildInputFieldA11yIds({
-      id: fieldId,
-      hasHelperText,
-      hasError,
-      externalDescribedBy: ariaDescribedBy,
-    })
-  );
-
   const recipeOptions = $derived.by((): InputOtpOptions => {
     const opts: InputOtpOptions = {
       id: fieldId,
       value: currentValue,
       length: otpLength,
-      invalid: isInvalid,
     };
     if (name) opts.name = name;
     if (placeholderCharacter) opts.placeholderCharacter = placeholderCharacter;
     if (disabled) opts.disabled = true;
     if (readOnly) opts.readOnly = true;
     if (required) opts.required = true;
-    if (a11yIds.describedBy) opts.describedBy = a11yIds.describedBy;
+    if (invalid) opts.invalid = true;
+    if (describedBy) opts.describedBy = describedBy;
     if (ariaLabel) opts.ariaLabel = ariaLabel;
     if (ariaLabelledBy) opts.ariaLabelledBy = ariaLabelledBy;
     return opts;
@@ -98,13 +79,9 @@
   class={mergedClass}
   style={mergedStyle}
   data-component="input-otp"
-  data-invalid={isInvalid ? "true" : undefined}
+  data-invalid={invalid ? "true" : undefined}
   data-disabled={disabled ? "true" : undefined}
 >
-  <label class="mw-input-otp__label" for={fieldId}>
-    <Text variant="label">{label}</Text>
-  </label>
-
   <div class="mw-input-otp__cells">
     {#each kit.displayCells as cell (cell.key)}
       <span
@@ -135,14 +112,4 @@
       oninput={handleChange}
     />
   </div>
-
-  {#if hasError}
-    <div class="mw-input-otp__error" id={a11yIds.errorId} aria-live="polite">
-      <Text variant="caption">{error}</Text>
-    </div>
-  {:else if hasHelperText}
-    <div class="mw-input-otp__helper" id={a11yIds.helperTextId}>
-      <Text variant="caption">{helperText}</Text>
-    </div>
-  {/if}
 </div>

@@ -1,44 +1,37 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import { Paragraph } from "@marwes-ui/vue"
+import { InputOtpField, Paragraph } from "@marwes-ui/vue"
+import type { InputOtpFieldProps } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
-// Atom is no longer the public field — `InputOtpField` is. We deep-import the
-// bare atom here for documentation of the cells-only render.
-import {
-  InputOtp,
-  type InputOtpProps,
-} from "../../../../../packages/vue/src/components/input/input-otp"
 
 const meta = {
-  title: "Input/Atom/InputOtp",
-  component: InputOtp as unknown as object,
+  title: "Input/Molecule/InputOtpField",
+  component: InputOtpField as unknown as object,
   parameters: {
     ...storybookA11yPolicy.smoke,
     layout: "centered",
   },
   tags: ["autodocs"],
   args: {
-    length: 6,
-    ariaLabel: "Verification code",
+    label: "Verification code",
+    helperText: "Enter the 6-digit code sent to your email",
+    inputOtp: { length: 6 },
   },
-} satisfies Meta<InputOtpProps>
+} satisfies Meta<InputOtpFieldProps>
 
 export default meta
 
-type Story = StoryObj<InputOtpProps>
+type Story = StoryObj<InputOtpFieldProps>
 
 export const Basic: Story = {
   render: (args) => ({
-    components: { InputOtp, Paragraph },
+    components: { InputOtpField },
     setup() {
       return { args }
     },
     template: `
       <div style="width: 320px;">
-        <InputOtp v-bind="args" />
-        <Paragraph style="margin-top: 16px; font-size: 12px; color: #666;">
-          Bare atom — no label / helper / error. Use InputOtpField for labeled forms.
-        </Paragraph>
+        <InputOtpField v-bind="args" />
       </div>
     `,
   }),
@@ -46,14 +39,14 @@ export const Basic: Story = {
 
 export const Controlled: Story = {
   render: (args) => ({
-    components: { InputOtp, Paragraph },
+    components: { InputOtpField, Paragraph },
     setup() {
       const value = ref("")
       return { args, value }
     },
     template: `
       <div style="width: 320px;">
-        <InputOtp v-bind="args" v-model="value" />
+        <InputOtpField :label="args.label" :helperText="args.helperText" :inputOtp="{ ...(args.inputOtp ?? {}), modelValue: value, 'onUpdate:modelValue': (v) => value = v }" />
         <Paragraph style="margin-top: 16px; font-size: 14px; color: #666;">
           Current value: {{ value || "(empty)" }}
         </Paragraph>
@@ -64,17 +57,17 @@ export const Controlled: Story = {
 
 export const Disabled: Story = {
   args: {
-    disabled: true,
-    modelValue: "123456",
+    helperText: "This code has already been submitted",
+    inputOtp: { length: 6, disabled: true, modelValue: "123456" },
   },
   render: (args) => ({
-    components: { InputOtp },
+    components: { InputOtpField },
     setup() {
       return { args }
     },
     template: `
       <div style="width: 320px;">
-        <InputOtp v-bind="args" />
+        <InputOtpField v-bind="args" />
       </div>
     `,
   }),
@@ -82,17 +75,17 @@ export const Disabled: Story = {
 
 export const Invalid: Story = {
   args: {
-    modelValue: "1234",
-    invalid: true,
+    error: "Code expired",
+    inputOtp: { length: 6, modelValue: "1234" },
   },
   render: (args) => ({
-    components: { InputOtp },
+    components: { InputOtpField },
     setup() {
       return { args }
     },
     template: `
       <div style="width: 320px;">
-        <InputOtp v-bind="args" />
+        <InputOtpField v-bind="args" />
       </div>
     `,
   }),

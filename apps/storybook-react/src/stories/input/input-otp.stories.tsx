@@ -1,10 +1,13 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import { InputOtp, Paragraph } from "@marwes-ui/react"
+import { Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
+// Atom is no longer the public field — `InputOtpField` is. We deep-import the
+// bare atom here for documentation of the cells-only render.
+import { InputOtp } from "../../../../../packages/react/src/components/input/input-otp"
 
 const meta: Meta<typeof InputOtp> = {
-  title: "Input/Molecule/InputOtp",
+  title: "Input/Atom/InputOtp",
   component: InputOtp,
   parameters: {
     ...storybookA11yPolicy.smoke,
@@ -12,9 +15,8 @@ const meta: Meta<typeof InputOtp> = {
   },
   tags: ["autodocs"],
   args: {
-    label: "Verification code",
-    helperText: "Enter the 6-digit code sent to your email",
     length: 6,
+    ariaLabel: "Verification code",
   },
 }
 
@@ -26,6 +28,9 @@ export const Basic: Story = {
   render: (args) => (
     <div style={{ width: "320px" }}>
       <InputOtp {...args} />
+      <Paragraph style={{ marginTop: "16px", fontSize: "12px", color: "#666" }}>
+        Bare atom — no label / helper / error. Use `InputOtpField` for labeled forms.
+      </Paragraph>
     </div>
   ),
 }
@@ -33,7 +38,6 @@ export const Basic: Story = {
 export const Controlled: Story = {
   render: (args) => {
     const [value, setValue] = useState("")
-
     return (
       <div style={{ width: "320px" }}>
         <InputOtp {...args} value={value} onValueChange={setValue} />
@@ -49,23 +53,12 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     value: "123456",
-    helperText: "This code has already been submitted",
   },
-  render: (args) => (
-    <div style={{ width: "320px" }}>
-      <InputOtp {...args} />
-    </div>
-  ),
 }
 
 export const Invalid: Story = {
   args: {
     value: "1234",
-    error: "Code expired",
+    invalid: true,
   },
-  render: (args) => (
-    <div style={{ width: "320px" }}>
-      <InputOtp {...args} />
-    </div>
-  ),
 }

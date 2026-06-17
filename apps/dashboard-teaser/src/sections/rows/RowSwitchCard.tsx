@@ -2,7 +2,7 @@ import {
   Badge,
   CheckboxField,
   CheckboxGroupField,
-  InputOtp,
+  InputOtpField,
   Card as MwCard,
   RadioGroupField,
   SwitchField,
@@ -217,14 +217,16 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       </FirstSectionCard>
       <OtpCard $basis="23.75rem" $height="11.5rem" $responsiveOrder={5}>
         {options.showLabels && <Text variant={TextVariant.overline}>One-Time Password</Text>}
-        <InputOtp
+        <InputOtpField
           label="Verification code"
-          length={6}
           helperText={
             options.showHelperText ? "Enter the 6-digit code sent to your email" : undefined
           }
-          value={otpValue}
-          onValueChange={setOtpValue}
+          inputOtp={{
+            length: 6,
+            value: otpValue,
+            onValueChange: setOtpValue,
+          }}
         />
       </OtpCard>
       <FirstSectionCard $basis="8.25rem" $height="11.5rem" $responsiveOrder={6}>

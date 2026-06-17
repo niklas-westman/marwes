@@ -42,13 +42,16 @@ export interface InputFieldProps {
   class?: string
 }
 
+/**
+ * Props for the bare `InputOtp` atom (Svelte).
+ *
+ * The atom renders only the OTP cells + hidden input. Use `InputOtpField`
+ * for labeled forms; reach for the atom directly only when you need a
+ * custom layout.
+ */
 export interface InputOtpProps {
   id?: string
   name?: string
-  label: string
-  helperText?: string
-  error?: string
-  ariaDescribedBy?: string
   value?: string
   defaultValue?: string
   length?: number
@@ -59,7 +62,25 @@ export interface InputOtpProps {
   invalid?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  /** ID(s) of elements that describe the input. Pre-merged by InputOtpField. */
+  describedBy?: string
   onvaluechange?: (value: string) => void
+  class?: string
+}
+
+export interface InputOtpFieldProps {
+  /** Optional: if omitted, a stable id is generated. */
+  id?: string
+  /** Field label (required for accessibility). */
+  label: string
+  /** Optional helper text shown below the cells. */
+  helperText?: string
+  /** Optional error message. */
+  error?: string
+  /** Props forwarded to the bare InputOtp atom. */
+  inputOtp?: Omit<InputOtpProps, "id" | "ariaLabel" | "ariaLabelledBy" | "describedBy">
+  /** Additional aria-describedby IDs to merge with internal helper/error IDs. */
+  ariaDescribedBy?: string
   class?: string
 }
 

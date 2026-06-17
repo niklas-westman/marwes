@@ -1,9 +1,11 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import { InputOtp } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+// Atom is no longer the public field — `InputOtpField` is. We deep-import the
+// bare atom here for documentation of the cells-only render.
+import InputOtp from "../../../../../packages/svelte/src/lib/components/input/InputOtp.svelte"
 
 const meta = {
-  title: "Input/Molecule/InputOtp",
+  title: "Input/Atom/InputOtp",
   component: InputOtp,
   parameters: {
     ...storybookA11yPolicy.smoke,
@@ -11,9 +13,8 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    label: "Verification code",
-    helperText: "Enter the 6-digit code sent to your email",
     length: 6,
+    ariaLabel: "Verification code",
   },
 } satisfies Meta<typeof InputOtp>
 
@@ -21,8 +22,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
-
-export const Basic: Story = {}
 
 export const Controlled: Story = {
   args: { value: "123456" },
@@ -33,20 +32,9 @@ export const Disabled: Story = {
 }
 
 export const Invalid: Story = {
-  args: { error: "Invalid code" },
-}
-
-export const WithError: Story = {
-  args: {
-    value: "1234",
-    error: "Code expired",
-  },
+  args: { invalid: true, value: "1234" },
 }
 
 export const CustomLength: Story = {
-  args: {
-    label: "PIN",
-    helperText: "Enter your 4-digit PIN",
-    length: 4,
-  },
+  args: { length: 4, ariaLabel: "PIN" },
 }

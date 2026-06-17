@@ -112,6 +112,7 @@ export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 export {
   InputField,
   InputOtp,
+  InputOtpField,
   SelectField,
   TextareaField,
   RichTextField,
@@ -130,6 +131,7 @@ export type {
   SelectOption,
   InputFieldProps,
   InputOtpProps,
+  InputOtpFieldProps,
   SelectFieldProps,
   SelectFieldVariant,
   TextareaFieldProps,

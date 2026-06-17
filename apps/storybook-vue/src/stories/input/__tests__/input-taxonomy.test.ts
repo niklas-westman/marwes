@@ -45,12 +45,19 @@ describe("Vue input story taxonomy", () => {
     expect(selectStory).toMatch(/export const\s+Basic\s*:/)
   })
 
-  it("uses Molecule title for InputOtp story", () => {
+  it("uses Atom title for bare InputOtp story", () => {
     const inputOtpStory = readStoryFile("input-otp.stories.ts")
 
-    expect(inputOtpStory).toContain('title: "Input/Molecule/InputOtp"')
+    expect(inputOtpStory).toContain('title: "Input/Atom/InputOtp"')
     expect(inputOtpStory).toContain("component: InputOtp")
     expect(inputOtpStory).toMatch(/export const\s+Basic\s*:/)
+  })
+
+  it("uses Molecule title for InputOtpField story", () => {
+    const inputOtpFieldStory = readStoryFile("input-otp-field.stories.ts")
+
+    expect(inputOtpFieldStory).toContain('title: "Input/Molecule/InputOtpField"')
+    expect(inputOtpFieldStory).toContain("component: InputOtpField")
   })
 
   it("uses Molecule title for InputField story", () => {

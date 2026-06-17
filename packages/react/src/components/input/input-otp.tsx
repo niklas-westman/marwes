@@ -1,63 +1,36 @@
-import {
-  buildInputFieldA11yIds,
-  createInputOtpRecipe,
-  sanitizeInputOtpValue,
-} from "@marwes-ui/core"
+import { createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core"
 import type { CssVars, InputOtpOptions } from "@marwes-ui/core"
 import * as React from "react"
-import { Text } from "../text"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
 /**
- * Props for the `InputOtp` field.
+ * Props for the bare `InputOtp` atom.
  *
- * NOTE: `InputOtp` is a complete field — it renders its own `<label>`,
- * helper text, and error region. Do not wrap it in `InputField`; use it
- * directly. The `label` prop is required for accessibility.
+ * The atom renders only the OTP cells + hidden input — no label, helper,
+ * or error region. Use `InputOtpField` for labeled forms; reach for the
+ * atom directly only when you need a custom layout.
  */
 export type InputOtpProps = Omit<InputOtpOptions, "describedBy"> & {
-  label: string
-  helperText?: string
-  error?: string
-  ariaDescribedBy?: string
   onValueChange?: (value: string) => void
   className?: string
+  /** ID(s) of elements that describe the input. Pre-merged by `InputOtpField`. */
+  describedBy?: string
 }
 
 function cx(...parts: Array<string | false | undefined>): string {
   return parts.filter(Boolean).join(" ")
 }
 
-function hasTextContent(value: string | undefined): boolean {
-  return value !== undefined && value.trim().length > 0
-}
-
 /**
- * InputOtp (Field) — a self-contained one-time-password field.
- *
- * Despite the lack of an `InputOtpField` sibling, this IS the field —
- * it renders the label, the OTP cells, and helper/error regions in one
- * component. Use it directly; do not nest it inside `InputField`.
- *
- * @example
- * ```tsx
- * <InputOtp
- *   label="Verification code"
- *   length={6}
- *   value={code}
- *   onValueChange={setCode}
- *   helperText="Enter the 6-digit code from your email"
- * />
- * ```
+ * InputOtp (Atom) — bare OTP cells. Renders the visual cells and a hidden
+ * native `<input>` that captures keyboard entry. Pair with `InputOtpField`
+ * for label + helper/error wiring, or wire a `<label htmlFor>` yourself.
  */
 export function InputOtp(props: InputOtpProps): React.ReactElement {
   const reactId = React.useId()
   const id = props.id ?? `mw-input-otp-${reactId}`
   const otpLength = Math.max(1, props.length ?? 6)
-  const hasHelperText = hasTextContent(props.helperText)
-  const hasError = hasTextContent(props.error)
-  const invalid = hasError || props.invalid === true
   const isControlled = props.value !== undefined
   const [uncontrolledValue, setUncontrolledValue] = React.useState(() => {
     return sanitizeInputOtpValue(props.defaultValue, otpLength)
@@ -68,55 +41,21 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
     otpLength,
   )
 
-  const {
-    helperTextId,
-    errorId,
-    describedBy: mergedDescribedBy,
-  } = buildInputFieldA11yIds({
-    id,
-    hasHelperText,
-    hasError,
-    externalDescribedBy: props.ariaDescribedBy,
-  })
-
   const recipeOptions: InputOtpOptions = {
     id,
     value: currentValue,
     length: otpLength,
-    invalid,
   }
 
-  if (props.name) {
-    recipeOptions.name = props.name
-  }
-
-  if (props.placeholderCharacter) {
-    recipeOptions.placeholderCharacter = props.placeholderCharacter
-  }
-
-  if (props.disabled) {
-    recipeOptions.disabled = true
-  }
-
-  if (props.readOnly) {
-    recipeOptions.readOnly = true
-  }
-
-  if (props.required) {
-    recipeOptions.required = true
-  }
-
-  if (mergedDescribedBy) {
-    recipeOptions.describedBy = mergedDescribedBy
-  }
-
-  if (props.ariaLabel) {
-    recipeOptions.ariaLabel = props.ariaLabel
-  }
-
-  if (props.ariaLabelledBy) {
-    recipeOptions.ariaLabelledBy = props.ariaLabelledBy
-  }
+  if (props.name) recipeOptions.name = props.name
+  if (props.placeholderCharacter) recipeOptions.placeholderCharacter = props.placeholderCharacter
+  if (props.disabled) recipeOptions.disabled = true
+  if (props.readOnly) recipeOptions.readOnly = true
+  if (props.required) recipeOptions.required = true
+  if (props.invalid) recipeOptions.invalid = true
+  if (props.describedBy) recipeOptions.describedBy = props.describedBy
+  if (props.ariaLabel) recipeOptions.ariaLabel = props.ariaLabel
+  if (props.ariaLabelledBy) recipeOptions.ariaLabelledBy = props.ariaLabelledBy
 
   const kit = createInputOtpRecipe(recipeOptions)
 
@@ -125,11 +64,9 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const nextValue = sanitizeInputOtpValue(event.target.value, otpLength)
-
     if (!isControlled) {
       setUncontrolledValue(nextValue)
     }
-
     props.onValueChange?.(nextValue)
   }
 
@@ -138,13 +75,9 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
       className={className}
       style={style}
       data-component="input-otp"
-      data-invalid={invalid ? "true" : undefined}
+      data-invalid={props.invalid ? "true" : undefined}
       data-disabled={props.disabled ? "true" : undefined}
     >
-      <label className="mw-input-otp__label" htmlFor={id}>
-        <Text variant="label">{props.label}</Text>
-      </label>
-
       <div className="mw-input-otp__cells">
         {kit.displayCells.map((displayCell) => (
           <span
@@ -176,16 +109,6 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
           onChange={handleChange}
         />
       </div>
-
-      {hasError ? (
-        <div className="mw-input-otp__error" id={errorId} aria-live="polite">
-          <Text variant="caption">{props.error}</Text>
-        </div>
-      ) : hasHelperText ? (
-        <div className="mw-input-otp__helper" id={helperTextId}>
-          <Text variant="caption">{props.helperText}</Text>
-        </div>
-      ) : null}
     </div>
   )
 }
