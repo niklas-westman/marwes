@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Pagination } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import Pagination from "../../../../../packages/svelte/src/lib/components/pagination/Pagination.svelte"
 </script>
 
 <div style="display: flex; flex-direction: column; gap: 24px;">

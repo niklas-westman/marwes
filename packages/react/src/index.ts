@@ -411,8 +411,10 @@ export { SegmentedControl } from "./components/segmented-control"
 export type { SegmentedControlProps, SegmentedControlItem } from "./components/segmented-control"
 
 /* Pagination */
-export { Pagination, PaginationField } from "./components/pagination"
-export type { PaginationProps, PaginationFieldProps } from "./components/pagination"
+// The `Pagination` atom is intentionally NOT exported from the public entry —
+// use `PaginationField` instead.
+export { PaginationField } from "./components/pagination"
+export type { PaginationFieldProps } from "./components/pagination"
 
 /* SkipLink */
 export { SkipLink } from "./components/skip-link"

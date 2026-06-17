@@ -1,8 +1,9 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { PaginationItemAriaLabelOptions } from "@marwes-ui/core"
-import { Pagination } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent, h, ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Pagination } from "../../../../../packages/vue/src/components/pagination/pagination"
 
 const meta = {
   title: "Pagination/Atom",

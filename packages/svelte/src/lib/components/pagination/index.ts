@@ -1,3 +1,3 @@
-export { default as Pagination } from "./Pagination.svelte"
+// `Pagination` atom intentionally NOT re-exported — use `PaginationField`.
 export { default as PaginationField } from "./PaginationField.svelte"
-export type { PaginationProps, PaginationFieldProps } from "./types.js"
+export type { PaginationFieldProps } from "./types.js"

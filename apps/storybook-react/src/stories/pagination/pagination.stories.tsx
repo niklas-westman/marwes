@@ -1,8 +1,11 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Pagination } from "@marwes-ui/react"
-import type { PaginationProps } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import {
+  Pagination,
+  type PaginationProps,
+} from "../../../../../packages/react/src/components/pagination/pagination"
 
 const meta: Meta<typeof Pagination> = {
   title: "Pagination/Atom",

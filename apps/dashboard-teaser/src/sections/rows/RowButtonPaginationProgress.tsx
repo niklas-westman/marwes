@@ -1,6 +1,8 @@
-import { Button, ButtonVariant, Pagination, ProgressBar, Text, TextVariant } from "@marwes-ui/react"
+import { Button, ButtonVariant, ProgressBar, Text, TextVariant } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for inline Pagination demo.
+import { Pagination } from "../../../../../packages/react/src/components/pagination/pagination"
 
 import type { ComponentDisplayOptions } from "../playground-settings"
 import { FlexAreaCard, ShowcaseFlexRow } from "./shared"

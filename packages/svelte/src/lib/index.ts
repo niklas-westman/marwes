@@ -368,12 +368,10 @@ export type {
 } from "./components/segmented-control/types.js"
 
 // Pagination
-export { default as Pagination } from "./components/pagination/Pagination.svelte"
+// The `Pagination` atom is intentionally NOT exported from the public entry —
+// use `PaginationField` instead.
 export { default as PaginationField } from "./components/pagination/PaginationField.svelte"
-export type {
-  PaginationProps,
-  PaginationFieldProps,
-} from "./components/pagination/types.js"
+export type { PaginationFieldProps } from "./components/pagination/types.js"
 
 // SkipLink
 export { default as SkipLink } from "./components/skip-link/SkipLink.svelte"
