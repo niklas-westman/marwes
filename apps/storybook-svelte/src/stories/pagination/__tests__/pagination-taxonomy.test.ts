@@ -13,6 +13,12 @@ describe("Svelte pagination story taxonomy", () => {
     expect(readStoryFile("pagination.stories.ts")).toContain('title: "Pagination/Atom"')
   })
 
+  it("uses Molecule title for PaginationField story", () => {
+    expect(readStoryFile("pagination-field.stories.ts")).toContain(
+      'title: "Pagination/Molecule/PaginationField"',
+    )
+  })
+
   it("has an Introduction.mdx with correct title", () => {
     expect(readStoryFile("Introduction.mdx")).toContain('title="Pagination/Introduction"')
   })

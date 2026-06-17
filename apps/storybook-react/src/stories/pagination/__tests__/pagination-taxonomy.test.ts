@@ -13,6 +13,12 @@ describe("React pagination story taxonomy", () => {
     expect(readStoryFile("pagination.stories.tsx")).toContain('title: "Pagination/Atom"')
   })
 
+  it("uses Molecule title for PaginationField story", () => {
+    expect(readStoryFile("pagination-field.stories.tsx")).toContain(
+      'title: "Pagination/Molecule/PaginationField"',
+    )
+  })
+
   it("has an Introduction.mdx with correct title", () => {
     expect(readStoryFile("Introduction.mdx")).toContain('title="Pagination/Introduction"')
   })
