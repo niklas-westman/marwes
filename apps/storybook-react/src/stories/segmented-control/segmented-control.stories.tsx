@@ -1,8 +1,13 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Icon, IconName, SegmentedControl } from "@marwes-ui/react"
-import type { SegmentedControlItem, SegmentedControlProps } from "@marwes-ui/react"
+import { Icon, IconName } from "@marwes-ui/react"
+import type { SegmentedControlItem } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import {
+  SegmentedControl,
+  type SegmentedControlProps,
+} from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
 const meta: Meta<typeof SegmentedControl> = {
   title: "SegmentedControl/Atom",

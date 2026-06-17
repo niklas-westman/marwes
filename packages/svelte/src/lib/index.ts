@@ -361,10 +361,10 @@ export type {
 } from "./components/tab/types.js"
 
 // Segmented Control
-export { default as SegmentedControl } from "./components/segmented-control/SegmentedControl.svelte"
+// The `SegmentedControl` atom is intentionally NOT exported from the public entry —
+// use `SegmentedControlField` instead.
 export { default as SegmentedControlField } from "./components/segmented-control/SegmentedControlField.svelte"
 export type {
-  SegmentedControlProps,
   SegmentedControlItem,
   SegmentedControlFieldProps,
 } from "./components/segmented-control/types.js"

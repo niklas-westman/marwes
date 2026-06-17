@@ -398,9 +398,10 @@ export type {
 } from "./components/tab"
 
 /* Segmented Control */
-export { SegmentedControl, SegmentedControlField } from "./components/segmented-control"
+// The `SegmentedControl` atom is intentionally NOT exported from the public entry —
+// use `SegmentedControlField` instead.
+export { SegmentedControlField } from "./components/segmented-control"
 export type {
-  SegmentedControlProps,
   SegmentedControlItem,
   SegmentedControlFieldProps,
 } from "./components/segmented-control"

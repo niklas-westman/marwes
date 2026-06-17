@@ -1,6 +1,8 @@
-import { Icon, IconName, SegmentedControl } from "@marwes-ui/react"
+import { Icon, IconName } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for theme toggle.
+import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
 
 import { dashboardRadius } from "../styles/theme-utils"
 

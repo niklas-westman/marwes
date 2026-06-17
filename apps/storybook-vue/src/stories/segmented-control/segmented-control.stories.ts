@@ -1,8 +1,9 @@
 import { storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
 import type { SegmentedControlItem } from "@marwes-ui/vue"
-import { SegmentedControl } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { defineComponent, h, ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { SegmentedControl } from "../../../../../packages/vue/src/components/segmented-control/segmented-control"
 
 const meta = {
   title: "SegmentedControl/Atom",

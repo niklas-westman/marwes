@@ -1,7 +1,6 @@
-export { default as SegmentedControl } from "./SegmentedControl.svelte"
+// `SegmentedControl` atom intentionally NOT re-exported — use `SegmentedControlField`.
 export { default as SegmentedControlField } from "./SegmentedControlField.svelte"
 export type {
-  SegmentedControlProps,
   SegmentedControlItem,
   SegmentedControlFieldProps,
 } from "./types.js"

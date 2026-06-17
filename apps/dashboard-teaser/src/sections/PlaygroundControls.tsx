@@ -1,7 +1,9 @@
-import { SegmentedControl, Text, TextVariant } from "@marwes-ui/react"
+import { Text, TextVariant } from "@marwes-ui/react"
 import type { Density, SegmentedControlItem } from "@marwes-ui/react"
 import { type Dispatch, type SetStateAction, useId } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for the Style row.
+import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
 // Atom is no longer publicly exported; deep-import for ToggleControlRow's custom layout.
 import { Switch } from "../../../../packages/react/src/components/switch/switch"
 

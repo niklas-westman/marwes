@@ -1,7 +1,9 @@
-import { Icon, IconName, SegmentedControl, Text, TextVariant } from "@marwes-ui/react"
+import { Icon, IconName, Text, TextVariant } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for the showcase row.
+import { SegmentedControl } from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
 import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 

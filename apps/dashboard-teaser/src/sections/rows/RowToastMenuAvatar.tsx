@@ -7,7 +7,6 @@ import {
   ErrorToast,
   IconName,
   InfoToast,
-  SegmentedControl,
   SuccessToast,
   Text,
   TextVariant,
@@ -17,6 +16,8 @@ import {
 import type { BreadcrumbItem, ContextMenuEntry, SegmentedControlItem } from "@marwes-ui/react"
 import { useState } from "react"
 import styled from "styled-components"
+// Atom is no longer publicly exported; deep-import for the toast variant picker.
+import { SegmentedControl } from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
 import type { ComponentDisplayOptions } from "../playground-settings"
 import { Card, FlexAreaCard, ShowcaseFlexRow, ShowcaseSectionLabel } from "./shared"

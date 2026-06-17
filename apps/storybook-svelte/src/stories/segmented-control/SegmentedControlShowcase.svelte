@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { SegmentedControl } from "@marwes-ui/svelte"
   import type { SegmentedControlItem } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import SegmentedControl from "../../../../../packages/svelte/src/lib/components/segmented-control/SegmentedControl.svelte"
 
   const twoItems: SegmentedControlItem[] = [
     { value: "compact", label: "Compact" },
