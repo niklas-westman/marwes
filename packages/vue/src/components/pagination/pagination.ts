@@ -49,6 +49,8 @@ export interface PaginationPropsVue {
   nextLabel?: string
   lastLabel?: string
   ariaLabel?: string
+  ariaLabelledBy?: string
+  ariaDescribedBy?: string
   getItemAriaLabel?: PaginationGetItemAriaLabel
   className?: string
   id?: string
@@ -71,6 +73,8 @@ const propKeys = [
   "nextLabel",
   "lastLabel",
   "ariaLabel",
+  "ariaLabelledBy",
+  "ariaDescribedBy",
   "getItemAriaLabel",
   "className",
   "id",
@@ -248,6 +252,8 @@ export const Pagination = defineComponent(
         ...(props.showFirstLast !== undefined ? { showFirstLast: props.showFirstLast } : {}),
         ...(props.disabled !== undefined ? { disabled: props.disabled } : {}),
         ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
+        ...(props.ariaLabelledBy !== undefined ? { ariaLabelledBy: props.ariaLabelledBy } : {}),
+        ...(props.ariaDescribedBy !== undefined ? { ariaDescribedBy: props.ariaDescribedBy } : {}),
         firstLabel,
         previousLabel,
         nextLabel,
@@ -362,6 +368,8 @@ export const Pagination = defineComponent(
           class: className,
           style: [rootKit.vars, attrs.style],
           "aria-label": rootKit.a11y.ariaLabel,
+          "aria-labelledby": rootKit.a11y.ariaLabelledBy,
+          "aria-describedby": rootKit.a11y.ariaDescribedBy,
           "data-component": "pagination",
           "data-control-display": rootKit.controlDisplay,
         },

@@ -41,6 +41,7 @@ export interface PaginationProps
   lastLabel?: string
   ariaLabel?: string
   ariaLabelledBy?: string
+  ariaDescribedBy?: string
   getItemAriaLabel?: PaginationGetItemAriaLabel
 }
 
@@ -64,6 +65,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     lastLabel = "Last",
     ariaLabel,
     ariaLabelledBy,
+    ariaDescribedBy,
     getItemAriaLabel,
     className,
     id,
@@ -105,6 +107,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     ...(disabled !== undefined ? { disabled } : {}),
     ...(ariaLabel !== undefined ? { ariaLabel } : {}),
     ...(ariaLabelledBy !== undefined ? { ariaLabelledBy } : {}),
+    ...(ariaDescribedBy !== undefined ? { ariaDescribedBy } : {}),
     firstLabel,
     previousLabel,
     nextLabel,
@@ -230,6 +233,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
       style={{ ...rootKit.vars, ...style } as React.CSSProperties}
       aria-label={rootKit.a11y.ariaLabel}
       aria-labelledby={rootKit.a11y.ariaLabelledBy}
+      aria-describedby={rootKit.a11y.ariaDescribedBy}
       data-component="pagination"
       data-control-display={rootKit.controlDisplay}
     >

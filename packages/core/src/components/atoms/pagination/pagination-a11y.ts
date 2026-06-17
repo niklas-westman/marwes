@@ -19,6 +19,7 @@ export function resolvePaginationA11y(opts: PaginationOptions): PaginationA11yPr
   } else {
     a11y.ariaLabel = opts.ariaLabel ?? "Pagination"
   }
+  if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
 
   if (opts.disabled) a11y.ariaDisabled = true
   return a11y

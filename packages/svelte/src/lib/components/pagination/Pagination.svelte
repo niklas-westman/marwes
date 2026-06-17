@@ -34,6 +34,8 @@
     nextLabel = "Next",
     lastLabel = "Last",
     ariaLabel,
+    ariaLabelledBy,
+    ariaDescribedBy,
     getItemAriaLabel,
     onpagechange,
     class: className,
@@ -196,6 +198,8 @@
       ...(showFirstLast !== undefined ? { showFirstLast } : {}),
       ...(disabled !== undefined ? { disabled } : {}),
       ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+      ...(ariaLabelledBy !== undefined ? { ariaLabelledBy } : {}),
+      ...(ariaDescribedBy !== undefined ? { ariaDescribedBy } : {}),
       firstLabel,
       previousLabel,
       nextLabel,
@@ -285,6 +289,8 @@
   class={mergedClass}
   style={rootStyle}
   aria-label={rootKit.a11y.ariaLabel}
+  aria-labelledby={rootKit.a11y.ariaLabelledBy}
+  aria-describedby={rootKit.a11y.ariaDescribedBy}
   data-component="pagination"
   data-control-display={rootKit.controlDisplay}
 >

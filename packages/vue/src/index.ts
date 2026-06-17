@@ -402,8 +402,8 @@ export { SegmentedControl } from "./components/segmented-control"
 export type { SegmentedControlProps, SegmentedControlItem } from "./components/segmented-control"
 
 /* Pagination */
-export { Pagination } from "./components/pagination"
-export type { PaginationProps } from "./components/pagination"
+export { Pagination, PaginationField } from "./components/pagination"
+export type { PaginationProps, PaginationFieldProps } from "./components/pagination"
 
 /* SkipLink */
 export { SkipLink } from "./components/skip-link"
