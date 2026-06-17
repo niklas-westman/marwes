@@ -18,8 +18,9 @@ export type { SelectAppearance, SelectOption } from "./select"
 export { InputField } from "./input-field"
 export type { InputFieldProps } from "./input-field"
 
-export { InputOtp } from "./input-otp"
-export type { InputOtpProps } from "./input-otp"
+// `InputOtp` (the bare atom — cells-only render) is intentionally NOT
+// re-exported here. Use `InputOtpField` instead. Internal consumers can
+// deep-import "./input-otp" directly.
 
 export { InputOtpField } from "./input-otp-field"
 export type { InputOtpFieldProps } from "./input-otp-field"

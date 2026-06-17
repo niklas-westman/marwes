@@ -1,6 +1,7 @@
 // `Input` atom intentionally NOT re-exported — use `InputField` (or a purpose variant).
 export { default as InputField } from "./InputField.svelte"
-export { default as InputOtp } from "./InputOtp.svelte"
+// `InputOtp` (the bare atom — cells-only render) is intentionally NOT
+// re-exported here. Use `InputOtpField` instead.
 export { default as InputOtpField } from "./InputOtpField.svelte"
 // `RichText` (the atom) is intentionally NOT re-exported here.
 // Use `RichTextField` instead. Internal consumers can deep-import
@@ -21,7 +22,6 @@ export { default as SelectField } from "./SelectField.svelte"
 export { default as TextareaField } from "./TextareaField.svelte"
 export type {
   InputFieldProps,
-  InputOtpProps,
   InputOtpFieldProps,
   RichTextFieldProps,
   CurrencyFieldProps,

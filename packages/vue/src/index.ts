@@ -106,12 +106,12 @@ export type {
 export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 
 /* Input */
-// `Input`, `RichText`, `Textarea`, `Select` atoms intentionally NOT exported —
-// use `InputField` / `RichTextField` / `TextareaField` / `SelectField`
-// (or a purpose variant like `DropdownField`, `EmailField`, `PhoneField`, etc.).
+// `Input`, `RichText`, `Textarea`, `Select`, `InputOtp` atoms intentionally NOT
+// exported — use `InputField` / `RichTextField` / `TextareaField` / `SelectField`
+// / `InputOtpField` (or a purpose variant like `DropdownField`, `EmailField`,
+// `PhoneField`, etc.).
 export {
   InputField,
-  InputOtp,
   InputOtpField,
   SelectField,
   TextareaField,
@@ -130,7 +130,6 @@ export type {
   SelectAppearance,
   SelectOption,
   InputFieldProps,
-  InputOtpProps,
   InputOtpFieldProps,
   SelectFieldProps,
   SelectFieldVariant,
