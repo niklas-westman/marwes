@@ -398,8 +398,12 @@ export type {
 } from "./components/tab"
 
 /* Segmented Control */
-export { SegmentedControl } from "./components/segmented-control"
-export type { SegmentedControlProps, SegmentedControlItem } from "./components/segmented-control"
+export { SegmentedControl, SegmentedControlField } from "./components/segmented-control"
+export type {
+  SegmentedControlProps,
+  SegmentedControlItem,
+  SegmentedControlFieldProps,
+} from "./components/segmented-control"
 
 /* Pagination */
 // The `Pagination` atom is intentionally NOT exported from the public entry —

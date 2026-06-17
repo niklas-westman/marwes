@@ -19,6 +19,7 @@
     disabled,
     ariaLabel,
     ariaLabelledBy,
+    ariaDescribedBy,
     fullWidth,
     label,
     class: className,
@@ -75,7 +76,7 @@
   }
 
   const trackKit = $derived(
-    createSegmentedControlRecipe({ value: resolvedValue, variant, size, disabled, ariaLabel, ariaLabelledBy, fullWidth, label })
+    createSegmentedControlRecipe({ value: resolvedValue, variant, size, disabled, ariaLabel, ariaLabelledBy, ariaDescribedBy, fullWidth, label })
   );
   const mergedClass = $derived(mergeClass(trackKit.className, className));
 </script>
@@ -86,6 +87,7 @@
   role={trackKit.a11y.role}
   aria-label={trackKit.a11y.ariaLabel}
   aria-labelledby={trackKit.a11y.ariaLabelledBy}
+  aria-describedby={trackKit.a11y.ariaDescribedBy}
   aria-disabled={trackKit.a11y.ariaDisabled}
   onkeydown={handleKeydown}
   style={style}

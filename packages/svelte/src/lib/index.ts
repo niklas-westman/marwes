@@ -362,9 +362,11 @@ export type {
 
 // Segmented Control
 export { default as SegmentedControl } from "./components/segmented-control/SegmentedControl.svelte"
+export { default as SegmentedControlField } from "./components/segmented-control/SegmentedControlField.svelte"
 export type {
   SegmentedControlProps,
   SegmentedControlItem,
+  SegmentedControlFieldProps,
 } from "./components/segmented-control/types.js"
 
 // Pagination

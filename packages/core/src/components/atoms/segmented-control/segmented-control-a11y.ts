@@ -21,6 +21,7 @@ export function resolveSegmentedControlA11y(
     const accessibleLabel = opts.ariaLabel ?? opts.label
     if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   }
+  if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
   if (opts.disabled) a11y.ariaDisabled = true
 
   return a11y

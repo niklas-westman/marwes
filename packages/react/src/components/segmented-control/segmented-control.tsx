@@ -34,6 +34,7 @@ export interface SegmentedControlProps<T extends string = string> {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  ariaDescribedBy?: string
   /** Stretch the control to fill its container. Defaults to inline width. */
   fullWidth?: boolean
   className?: string
@@ -60,6 +61,7 @@ export function SegmentedControl<T extends string = string>(
     disabled,
     ariaLabel,
     ariaLabelledBy,
+    ariaDescribedBy,
     fullWidth,
     className,
     id,
@@ -134,6 +136,7 @@ export function SegmentedControl<T extends string = string>(
     disabled,
     ariaLabel,
     ariaLabelledBy,
+    ariaDescribedBy,
     fullWidth,
   })
   const trackClassName = [trackKit.className, className].filter(Boolean).join(" ")
@@ -145,6 +148,7 @@ export function SegmentedControl<T extends string = string>(
       role={trackKit.a11y.role}
       aria-label={trackKit.a11y.ariaLabel}
       aria-labelledby={trackKit.a11y.ariaLabelledBy}
+      aria-describedby={trackKit.a11y.ariaDescribedBy}
       aria-disabled={trackKit.a11y.ariaDisabled}
       onKeyDown={handleKeyDown}
       style={style}

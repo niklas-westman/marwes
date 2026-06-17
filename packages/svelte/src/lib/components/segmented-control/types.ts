@@ -19,9 +19,29 @@ export interface SegmentedControlProps<T extends string = string> {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  ariaDescribedBy?: string
   fullWidth?: boolean
   label?: string
   class?: string
   id?: string
   style?: string
+}
+
+export interface SegmentedControlFieldProps<T extends string = string> {
+  /** Optional: if omitted, a stable id is generated. */
+  id?: string
+  /** Field label (required for accessibility). */
+  label: string
+  /** Optional description text. */
+  description?: string
+  /** Optional error message. */
+  error?: string
+  /** Props forwarded to the SegmentedControl atom. */
+  segmentedControl: Omit<
+    SegmentedControlProps<T>,
+    "ariaLabel" | "ariaLabelledBy" | "ariaDescribedBy"
+  >
+  /** Additional aria-describedby IDs to merge with internal description/error IDs. */
+  ariaDescribedBy?: string
+  class?: string
 }

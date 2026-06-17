@@ -17,6 +17,8 @@ export interface SegmentedControlOptions {
   ariaLabel?: string | undefined
   /** ID of an element whose text labels the group. Wins over `ariaLabel` if both are set. */
   ariaLabelledBy?: string | undefined
+  /** ID(s) of elements that describe the group (helper text, errors). */
+  ariaDescribedBy?: string | undefined
   label?: string | undefined
   /** Visual variant */
   variant?: SegmentedControlVariant | undefined
@@ -42,6 +44,7 @@ export interface SegmentedControlA11yProps {
   role: "radiogroup"
   ariaLabel?: string
   ariaLabelledBy?: string
+  ariaDescribedBy?: string
   ariaDisabled?: true
 }
 
