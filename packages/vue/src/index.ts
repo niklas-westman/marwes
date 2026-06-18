@@ -222,8 +222,13 @@ export { Spacings } from "@marwes-ui/core"
 export type { SpacingSize } from "@marwes-ui/core"
 
 /* Heading */
-export { H1, H2, H3, createHeadingComponent } from "./components/heading"
-export type { HeadingProps, HeadingLevel } from "./components/heading"
+// `createHeadingComponent` is intentionally NOT exported — it's an internal
+// factory used by H1/H2/H3, type-constrained to levels 1-3, so consumers
+// can't use it to mint anything they don't already have via H1/H2/H3.
+// `HeadingLevel` lives in `@marwes-ui/core` for consumers that need the
+// literal union directly.
+export { H1, H2, H3 } from "./components/heading"
+export type { HeadingProps } from "./components/heading"
 
 /* Paragraph */
 export { Paragraph } from "./components/paragraph"
