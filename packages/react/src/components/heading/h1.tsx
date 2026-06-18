@@ -42,6 +42,13 @@ export type H1Props = Omit<HeadingOptions, "level"> & {
  * Semantic top-level heading rendered as `<h1>`.
  * Supports visual size override for cases where semantic and visual hierarchy differ.
  *
+ * @remarks
+ * Marwes officially styles H1-H3 only. For semantic H4-H6 (deep section
+ * nesting, accessibility outlines), render `<Text headingLevel={4..6}
+ * variant="..." />` — it produces the correct heading tag while letting
+ * the consumer pick the visual variant. Type your wrappers against
+ * `SemanticHeadingLevel` from `@marwes-ui/core`.
+ *
  * @example Basic usage
  * ```tsx
  * <H1>Page Title</H1>

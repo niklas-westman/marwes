@@ -42,6 +42,10 @@ export type H3Props = Omit<HeadingOptions, "level"> & {
  * Semantic subsection heading rendered as `<h3>`.
  * Supports visual size override for cases where semantic and visual hierarchy differ.
  *
+ * @remarks
+ * Marwes officially styles H1-H3 only — H3 is the deepest blessed rung.
+ * For H4-H6, use `<Text headingLevel={4..6} variant="..." />`.
+ *
  * @example Basic usage
  * ```tsx
  * <H3>Subsection Title</H3>

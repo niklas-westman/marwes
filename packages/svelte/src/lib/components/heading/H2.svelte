@@ -1,3 +1,9 @@
+<!--
+  H2 (Heading Level 2) — semantic section heading rendered as `<h2>`.
+
+  @remarks
+  For semantic H4-H6, use `<Text headingLevel={4..6} variant="..." />`.
+-->
 <script lang="ts">
   import { headingRecipe } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
