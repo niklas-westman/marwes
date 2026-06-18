@@ -204,6 +204,7 @@ export type {
   HeadingRenderKit,
   HeadingLevel,
   HeadingSize,
+  SemanticHeadingLevel,
   SliderOptions,
   SliderRenderKit,
   ParagraphOptions,

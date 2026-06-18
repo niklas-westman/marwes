@@ -132,6 +132,7 @@ export type {
   HeadingRenderKit,
   HeadingLevel,
   HeadingSize,
+  SemanticHeadingLevel,
 } from "./heading"
 export type {
   ParagraphOptions,

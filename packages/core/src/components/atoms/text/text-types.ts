@@ -5,6 +5,7 @@
 
 import type { CssVars } from "../../../shared/css-vars"
 import type { TextVariant } from "../../../theme/text-variant"
+import type { SemanticHeadingLevel } from "../heading/heading-types"
 
 export type TextAs = "span" | "p" | "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 
@@ -28,7 +29,7 @@ export interface TextOptions {
    * `Heading` component is preferred when the visual size IS a heading size;
    * use `headingLevel` on `Text` when the visual variant is display/overline/etc.
    */
-  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6
+  headingLevel?: SemanticHeadingLevel
 
   /**
    * Optional ID.
