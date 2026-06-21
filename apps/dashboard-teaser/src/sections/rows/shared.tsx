@@ -17,7 +17,6 @@ const Card = styled.div<{
   gap: ${({ theme }) => theme.spacing.sp16};
   width: ${(p) => p.$width ?? "auto"};
   min-width: 0;
-  min-height: ${(p) => p.$height ?? "auto"};
 
   ${({ theme }) => theme.media.wideDesktopAndAbove} {
     width: ${(p) => p.$desktopWidth ?? p.$width ?? "auto"};
@@ -64,10 +63,13 @@ const FlexAreaCard = styled(Card)<{
 }>`
   flex: ${(p) => `${p.$grow ?? 1} 1 ${p.$basis ?? "0"}`};
   max-width: ${(p) => p.$maxWidth ?? "none"};
-  min-height: ${(p) => p.$minHeight ?? p.$height ?? "auto"};
   order: ${(p) => p.$order ?? 0};
   align-self: stretch;
   width: auto;
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    min-height: ${(p) => p.$minHeight ?? p.$height ?? "auto"};
+  }
 
   @container (max-width: 54rem) {
     flex-basis: calc((100% - var(--showcase-row-gap)) / 2);

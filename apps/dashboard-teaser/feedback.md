@@ -191,22 +191,50 @@ So this doc doesn't read as "everything is broken":
 
 ## 7. Prioritized recommendations
 
-In rough order of bang-per-buck:
+In rough order of bang-per-buck. Status as of branch `dashboard-teaser` (113 commits ahead of `main`):
 
-1. **Fix Switch's `ariaLabelledby` casing** to match the rest of the library. ~10 minutes, removes a real paper cut.
-2. **Add accessible names to `RowSpinner` picker buttons** in this app (consumer-side fix, ~5 min). Separately, consider a library-side dev warning for unnamed interactive elements.
-3. **Make `SegmentedControl<T extends string>` (and similar) generic.** Kills 8+ `as` casts in this app alone with zero runtime impact.
-4. **Add `fullWidth` to `SegmentedControl`.** Retires 6 width-100% workarounds.
-5. **Add `headingLevel` to `Text`** (or ship a `Heading` component). Unblocks proper document outline in this app and any other consumer.
-6. **Audit class-selector overrides** in this consumer (4 files) and decide per case: ship a prop, expose a token, or fix the default.
-7. **Ship a generic `Field`/`LabeledControl` primitive**, or extend the `*Field` family to cover SegmentedControl/Select. Removes `ToggleControlRow`-style boilerplate.
-8. **Ship a `SkipLink` primitive** (low effort, every consumer needs it).
-9. **Re-export key a11y props on adapter `Props`** so IDEs surface them in autocomplete.
+1. ✅ **Fix Switch's `ariaLabelledby` casing** to match the rest of the library. Renamed across core, React, Vue, Svelte adapters + consumer.
+2. ✅ **Add accessible names to `RowSpinner` picker buttons** in this app. Each variant button now carries an `ariaLabel`.
+3. ✅ **Make `SegmentedControl<T extends string>` (and similar) generic.** Threads literal value types through `items`, `value`, and `onValueChange`. 8+ `as` casts removed in dashboard-teaser. (Vue ships type-level generic only — `defineComponent` can't infer `T` at the value level.)
+4. ✅ **Add `fullWidth` to `SegmentedControl`.** Three styled-wrapper workarounds in dashboard-teaser retired.
+5. ✅ **Add `headingLevel` to `Text`.** `<Text headingLevel={2}>` now renders `<h2>` while keeping the visual variant. Document outline restored.
+6. 🚧 **Audit class-selector overrides** in this consumer (4 files). Not yet addressed — left for a follow-up sweep once the molecule API stabilises.
+7. ✅ **Ship a generic `Field`/`LabeledControl` primitive — or extend the `*Field` family.** Took option B (extend the family). Shipped: `DatePickerField`, `PaginationField`, `SegmentedControlField`, and split `InputOtp` into bare atom + `InputOtpField`. Across React/Vue/Svelte. Bare form-control atoms (Input, Select, Textarea, RichText, Checkbox, Radio, Switch, Slider, Accordion, DatePicker, Pagination, SegmentedControl, InputOtp) are now hidden from the public API surface — consumers must use the `*Field` molecules. Atoms remain accessible via deep imports for advanced cases.
+8. ✅ **Ship a `SkipLink` primitive.** Visually-hidden anchor that's revealed on focus. ~40 lines including types + recipe + React adapter.
+9. ✅ **Re-export key a11y props on adapter `Props`.** `ariaLabelledBy` + `ariaDescribedBy` now show up on Input, Textarea, Select, InputOtp, DatePicker, SegmentedControl, Pagination at the adapter level.
 
-Items 1–3 are mostly mechanical and unblock real consumer cleanup in a single PR each. Items 4–7 are larger and should be planned with the broader component roadmap.
+---
+
+## 8. Outstanding from the follow-up work
+
+Surfaced while resolving sections 1–7. Not blockers, but worth tracking.
+
+### 8.1 New molecules have no Storybook stories yet
+
+[`PaginationField`](../../packages/react/src/components/pagination/pagination-field.tsx), [`SegmentedControlField`](../../packages/react/src/components/segmented-control/segmented-control-field.tsx), and [`DatePickerField`](../../packages/react/src/components/date-picker/date-picker-field.tsx) are shipped and exported from `@marwes-ui/react` but have **no entries in storybook-react**. Confirmed by querying `localhost:6006/index.json` against the running storybook — only the atom families (`pagination-atom-*`, `segmentedcontrol-atom-*`, etc.) appear; no `*-molecule-*field` siblings for these three.
+
+The architecture-check script enforces cross-framework export parity but doesn't validate that a story exists for every public component. Two fixes possible:
+- Add the missing stories. Pattern already exists in [packages/storybook-react/src/Input/Molecule/InputOtpField.stories.tsx](../../packages/storybook-react/src/Input/Molecule/InputOtpField.stories.tsx).
+- Extend `check-adapter-architecture` to flag publicly-exported components without stories.
+
+Same gap exists in storybook-vue / storybook-svelte for the same three molecules.
+
+### 8.2 Class-selector spacing overrides (carried over from section 7 item 6)
+
+Still in place across `RowAccordionInput`, `RowSwitchCard`, `RowToastMenuAvatar`, `PlaygroundControls`. The molecule rework changes which selectors are stable — revisit once the field-API surface settles.
+
+### 8.3 `Spinner` variant prop kept intentionally permissive
+
+During the atom-audit sweep we considered locking `Spinner`'s `variant` prop to a closed union. Discovered on contact with code that [Button](../../packages/react/src/components/button/Button.tsx) forwards `loading.spinnerVariant` through `<ButtonSpinner>` — locking would break that path. Decision: keep the `??` defaults pattern, add JSDoc explaining the intentional permissiveness. Documented at [packages/react/src/components/spinner/variants.tsx](../../packages/react/src/components/spinner/variants.tsx). Not a bug — a deliberate non-fix worth recording so future audits don't re-open it.
+
+### 8.4 Vue `SegmentedControl<T>` generic is type-level only
+
+Vue's `defineComponent` runtime can't infer the `T` parameter on a generic component the way React function components can. The interface exposes `<T extends string>`, but consumers must annotate at the call site. React and Svelte (which uses `<script lang="ts" generics="T extends string">`) infer correctly. Documented in [packages/vue/src/components/segmented-control/types.ts](../../packages/vue/src/components/segmented-control/types.ts).
 
 ---
 
 ## How to verify these claims
 
 Every file:line reference in this doc opens directly in the editor. Cross-reference against the latest `main` — the dashboard-teaser is the source of truth for "what real consumers actually do." If a finding no longer reproduces because the library has moved, that's a win; please update this doc.
+
+Runtime verification of the resolution work was done via Playwright at the dashboard surface (full screenshot run at `/tmp/verify-shots/dashboard-*.png`) and at the storybook-react surface (14 stories across atoms + molecules, screenshots at `/tmp/verify-shots/sb-*.png`). Both passed with zero console errors.

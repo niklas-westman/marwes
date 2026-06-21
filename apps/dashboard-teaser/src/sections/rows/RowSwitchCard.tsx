@@ -48,8 +48,11 @@ const FirstSectionCard = styled(ShowcaseCard)<{
   flex: ${(p) => `${p.$grow ?? 0} 1 ${p.$basis}`};
   max-width: ${(p) => p.$basis};
   width: auto;
-  min-height: ${(p) => p.$height ?? "auto"};
   order: ${(p) => p.$responsiveOrder};
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    min-height: ${(p) => p.$height ?? "auto"};
+  }
 
   @container (max-width: 58rem) {
     flex-basis: var(--first-section-card-basis);

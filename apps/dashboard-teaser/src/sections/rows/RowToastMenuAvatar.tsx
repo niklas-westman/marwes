@@ -65,12 +65,18 @@ const RightStack = styled.div`
 
 const AvatarCard = styled(Card)`
   flex: 0 1 auto;
-  min-height: 9rem;
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    min-height: 9rem;
+  }
 `
 
 const BreadcrumbCard = styled(Card)`
   flex: 1 1 18.75rem;
-  min-height: 18.75rem;
+
+  ${({ theme }) => theme.media.wideDesktopAndAbove} {
+    min-height: 18.75rem;
+  }
 
   .mw-breadcrumb {
     max-width: 100%;

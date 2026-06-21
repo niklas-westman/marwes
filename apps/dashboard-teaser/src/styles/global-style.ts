@@ -22,6 +22,36 @@ const GlobalStyle = createGlobalStyle`
   #root {
     min-height: 100%;
   }
+
+  [data-dashboard-reduce-motion="true"],
+  [data-dashboard-reduce-motion="true"] *,
+  [data-dashboard-reduce-motion="true"] *::before,
+  [data-dashboard-reduce-motion="true"] *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+
+  [data-dashboard-loose-spacing="true"] {
+    letter-spacing: 0.03em;
+    word-spacing: 0.06em;
+  }
+
+  [data-dashboard-loose-spacing="true"] :where(
+    .mw-text,
+    .mw-heading,
+    .mw-p,
+    button,
+    input,
+    select,
+    textarea,
+    a,
+    p,
+    li
+  ) {
+    letter-spacing: 0.03em !important;
+    word-spacing: 0.06em;
+  }
 `
 
 export { GlobalStyle }

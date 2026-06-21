@@ -1,11 +1,14 @@
-import { Text, TextVariant } from "@marwes-ui/react"
+import {
+  SegmentedControlField,
+  SelectField,
+  SliderField,
+  SwitchField,
+  Text,
+  TextVariant,
+} from "@marwes-ui/react"
 import type { Density, SegmentedControlItem } from "@marwes-ui/react"
 import { type Dispatch, type SetStateAction, useId } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for the Style row.
-import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
-// Atom is no longer publicly exported; deep-import for ToggleControlRow's custom layout.
-import { Switch } from "../../../../packages/react/src/components/switch/switch"
 
 import {
   type ComponentDisplayOptions,
@@ -38,38 +41,39 @@ const ControlSection = styled.section`
   gap: ${({ theme }) => `calc(${theme.spacing.sp8} + ${theme.spacing.sp4})`};
 `
 
-const SectionLabel = styled(Text).attrs({ variant: TextVariant.overline })`
+const SectionHeader = styled(Text).attrs({ variant: TextVariant.overline })`
   color: ${({ theme }) => theme.color.textMuted};
 `
 
-const FieldRow = styled.label`
+// Visually hides the *Field molecule's internal label slot. The SectionHeader
+// above the field already carries the visible label; the field still wires
+// aria-labelledby via the hidden label so screen readers get it.
+const HiddenFieldLabel = styled.div`
+  .mw-segmented-control-field__label,
+  .mw-switch-field__label,
+  .mw-slider-field__header,
+  .mw-input-field__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+`
+
+const ColorPickerRow = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: ${({ theme }) => theme.spacing.sp12};
   align-items: center;
-  min-width: 0;
   color: ${({ theme }) => theme.color.textMuted};
-  font: inherit;
 `
 
-const FieldLabel = styled.span`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`
-
-const SelectControl = styled.select`
-  width: 8.5rem;
-  min-width: 0;
-  border: 0.0625rem solid ${({ theme }) => theme.color.border};
-  border-radius: ${({ theme }) => `calc(${theme.ui.radius} * 1.5)`};
-  background: ${({ theme }) => theme.color.background};
-  color: ${({ theme }) => theme.color.text};
-  padding: ${({ theme }) => `${theme.spacing.sp4} ${theme.spacing.sp8}`};
-  font: inherit;
-`
-
-const ColorInput = styled.input`
+const ColorSwatchInput = styled.input`
   width: 3rem;
   height: 1.75rem;
   border: 0.0625rem solid ${({ theme }) => theme.color.border};
@@ -88,57 +92,66 @@ const ColorInput = styled.input`
   }
 `
 
-const RangeRow = styled.div`
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: ${({ theme }) => theme.spacing.sp12};
-  align-items: center;
-  color: ${({ theme }) => theme.color.textMuted};
-`
+type ColorPickerFieldProps = {
+  label: string
+  value: string
+  onValueChange: (value: string) => void
+}
 
-const RangeInput = styled.input`
-  width: 100%;
-  accent-color: ${({ theme }) => theme.color.primary.base};
-`
+function ColorPickerField({ label, value, onValueChange }: ColorPickerFieldProps): JSX.Element {
+  const labelId = useId()
 
-const ToggleRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.spacing.sp12};
-  color: ${({ theme }) => theme.color.textMuted};
+  return (
+    <ColorPickerRow>
+      <span id={labelId}>{label}</span>
+      <ColorSwatchInput
+        type="color"
+        value={value}
+        aria-labelledby={labelId}
+        onChange={(event) => onValueChange(event.target.value)}
+      />
+    </ColorPickerRow>
+  )
+}
 
-  .mw-switch {
-    flex-shrink: 0;
-  }
-`
-
-const styleItems: SegmentedControlItem[] = [
+const styleItems: SegmentedControlItem<PlaygroundStyle>[] = [
   { value: "marwes", label: "Marwes" },
   { value: "cyber", label: "Cyber" },
   { value: "mono", label: "Mono" },
 ]
 
-type ToggleControlRowProps = {
-  label: string
-  checked: boolean
-  onCheckedChange: (checked: boolean) => void
-}
+const fontOptions: Array<{ value: PlaygroundFont; label: string }> = [
+  { value: "default", label: "Theme default" },
+  { value: "instrument", label: "Instrument Sans" },
+  { value: "mono", label: "Fira Code" },
+  { value: "nunito", label: "Nunito" },
+  { value: "editorial", label: "Playfair Display" },
+]
 
-function ToggleControlRow({ label, checked, onCheckedChange }: ToggleControlRowProps): JSX.Element {
-  const labelId = useId()
+const densityOptions: Array<{ value: Density; label: string }> = [
+  { value: "compact", label: "Compact" },
+  { value: "comfortable", label: "Comfortable" },
+  { value: "spacious", label: "Spacious" },
+]
 
-  return (
-    <ToggleRow>
-      <span id={labelId}>{label}</span>
-      <Switch checked={checked} ariaLabelledBy={labelId} onCheckedChange={onCheckedChange} />
-    </ToggleRow>
-  )
-}
+const colorVisionOptions: Array<{ value: PlaygroundColorVision; label: string }> = [
+  { value: "normal", label: "Normal" },
+  { value: "protanopia", label: "Protanopia" },
+  { value: "deuteranopia", label: "Deuteranopia" },
+  { value: "tritanopia", label: "Tritanopia" },
+]
+
+const fontStyleItems: SegmentedControlItem<"default" | "dyslexic">[] = [
+  { value: "default", label: "Default" },
+  { value: "dyslexic", label: "Dyslexic" },
+]
+
+const letterSpacingItems: SegmentedControlItem<"default" | "loose">[] = [
+  { value: "default", label: "Default" },
+  { value: "loose", label: "Loose" },
+]
 
 function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsProps): JSX.Element {
-  const styleLabelId = useId()
-
   const updateColor = (key: keyof PlaygroundColorSettings, value: string): void => {
     onSettingsChange((current) => ({
       ...current,
@@ -146,9 +159,9 @@ function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsPr
     }))
   }
 
-  const updateAccessibility = (
-    key: keyof PlaygroundAccessibilitySettings,
-    value: PlaygroundAccessibilitySettings[typeof key],
+  const updateAccessibility = <K extends keyof PlaygroundAccessibilitySettings>(
+    key: K,
+    value: PlaygroundAccessibilitySettings[K],
   ): void => {
     onSettingsChange((current) => ({
       ...current,
@@ -166,175 +179,179 @@ function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsPr
   return (
     <ControlsPanel aria-label="Playground controls">
       <ControlSection>
-        <SectionLabel id={styleLabelId}>Style</SectionLabel>
-        <SegmentedControl
-          items={styleItems}
-          value={settings.style}
-          onValueChange={(value) =>
-            onSettingsChange((current) => applyPlaygroundStyle(current, value as PlaygroundStyle))
-          }
-          variant="inverse"
-          size="sm"
-          ariaLabelledBy={styleLabelId}
-          style={{ width: "100%" }}
+        <SectionHeader>Style</SectionHeader>
+        <HiddenFieldLabel>
+          <SegmentedControlField<PlaygroundStyle>
+            label="Style"
+            segmentedControl={{
+              items: styleItems,
+              value: settings.style,
+              onValueChange: (value) =>
+                onSettingsChange((current) => applyPlaygroundStyle(current, value)),
+              variant: "inverse",
+              size: "sm",
+              fullWidth: true,
+            }}
+          />
+        </HiddenFieldLabel>
+      </ControlSection>
+
+      <ControlSection>
+        <SectionHeader>Typography</SectionHeader>
+        <SelectField
+          label="Font"
+          select={{
+            options: fontOptions,
+            value: settings.font,
+            onValueChange: (value) =>
+              onSettingsChange((current) => ({ ...current, font: value as PlaygroundFont })),
+          }}
         />
       </ControlSection>
 
       <ControlSection>
-        <SectionLabel>Typography</SectionLabel>
-        <FieldRow>
-          <FieldLabel>Font</FieldLabel>
-          <SelectControl
-            value={settings.font}
-            onChange={(event) =>
-              onSettingsChange((current) => ({
-                ...current,
-                font: event.target.value as PlaygroundFont,
-              }))
-            }
-          >
-            <option value="default">Theme default</option>
-            <option value="instrument">Instrument Sans</option>
-            <option value="mono">Fira Code</option>
-            <option value="nunito">Nunito</option>
-            <option value="editorial">Playfair Display</option>
-          </SelectControl>
-        </FieldRow>
+        <SectionHeader>Colors</SectionHeader>
+        <ColorPickerField
+          label="Primary"
+          value={settings.colors.primary}
+          onValueChange={(value) => updateColor("primary", value)}
+        />
+        <ColorPickerField
+          label="Danger"
+          value={settings.colors.danger}
+          onValueChange={(value) => updateColor("danger", value)}
+        />
+        <ColorPickerField
+          label="Success"
+          value={settings.colors.success}
+          onValueChange={(value) => updateColor("success", value)}
+        />
+        <ColorPickerField
+          label="Warning"
+          value={settings.colors.warning}
+          onValueChange={(value) => updateColor("warning", value)}
+        />
       </ControlSection>
 
       <ControlSection>
-        <SectionLabel>Colours</SectionLabel>
-        <FieldRow>
-          <FieldLabel>Primary</FieldLabel>
-          <ColorInput
-            type="color"
-            value={settings.colors.primary}
-            onChange={(event) => updateColor("primary", event.target.value)}
+        <SectionHeader>Radius (px)</SectionHeader>
+        <HiddenFieldLabel>
+          <SliderField
+            label="Radius"
+            showEdgeValues
+            slider={{
+              min: 0,
+              max: 48,
+              value: settings.radius,
+              onValueChange: (value) =>
+                onSettingsChange((current) => ({ ...current, radius: value })),
+            }}
           />
-        </FieldRow>
-        <FieldRow>
-          <FieldLabel>Danger</FieldLabel>
-          <ColorInput
-            type="color"
-            value={settings.colors.danger}
-            onChange={(event) => updateColor("danger", event.target.value)}
-          />
-        </FieldRow>
-        <FieldRow>
-          <FieldLabel>Success</FieldLabel>
-          <ColorInput
-            type="color"
-            value={settings.colors.success}
-            onChange={(event) => updateColor("success", event.target.value)}
-          />
-        </FieldRow>
-        <FieldRow>
-          <FieldLabel>Warning</FieldLabel>
-          <ColorInput
-            type="color"
-            value={settings.colors.warning}
-            onChange={(event) => updateColor("warning", event.target.value)}
-          />
-        </FieldRow>
+        </HiddenFieldLabel>
       </ControlSection>
 
       <ControlSection>
-        <SectionLabel>Accessibility</SectionLabel>
-        <ToggleControlRow
-          label="High contrast"
-          checked={settings.accessibility.highContrast}
-          onCheckedChange={(checked) => updateAccessibility("highContrast", checked)}
+        <SectionHeader>Component props</SectionHeader>
+        <SelectField
+          label="Density"
+          select={{
+            options: densityOptions,
+            value: settings.density,
+            onValueChange: (value) =>
+              onSettingsChange((current) => ({ ...current, density: value as Density })),
+          }}
         />
-        <ToggleControlRow
-          label="Reduce motion"
-          checked={settings.accessibility.reduceMotion}
-          onCheckedChange={(checked) => updateAccessibility("reduceMotion", checked)}
-        />
-        <ToggleControlRow
-          label="Dyslexic font"
-          checked={settings.accessibility.dyslexicFont}
-          onCheckedChange={(checked) => updateAccessibility("dyslexicFont", checked)}
-        />
-        <ToggleControlRow
-          label="Loose spacing"
-          checked={settings.accessibility.looseSpacing}
-          onCheckedChange={(checked) => updateAccessibility("looseSpacing", checked)}
-        />
-        <FieldRow>
-          <FieldLabel>Color vision</FieldLabel>
-          <SelectControl
-            value={settings.accessibility.colorVision}
-            onChange={(event) =>
-              updateAccessibility("colorVision", event.target.value as PlaygroundColorVision)
-            }
-          >
-            <option value="normal">Normal</option>
-            <option value="protanopia">Protanopia</option>
-            <option value="deuteranopia">Deuteranopia</option>
-            <option value="tritanopia">Tritanopia</option>
-          </SelectControl>
-        </FieldRow>
-      </ControlSection>
-
-      <ControlSection>
-        <SectionLabel>Radius (px)</SectionLabel>
-        <RangeRow>
-          <span>0</span>
-          <RangeInput
-            type="range"
-            aria-label="Radius"
-            min={0}
-            max={48}
-            value={settings.radius}
-            onChange={(event) =>
-              onSettingsChange((current) => ({
-                ...current,
-                radius: Number(event.target.value),
-              }))
-            }
-          />
-          <span>48</span>
-        </RangeRow>
-      </ControlSection>
-
-      <ControlSection>
-        <SectionLabel>Component props</SectionLabel>
-        <FieldRow>
-          <FieldLabel>Density</FieldLabel>
-          <SelectControl
-            value={settings.density}
-            onChange={(event) =>
-              onSettingsChange((current) => ({
-                ...current,
-                density: event.target.value as Density,
-              }))
-            }
-          >
-            <option value="compact">Compact</option>
-            <option value="comfortable">Comfortable</option>
-            <option value="spacious">Spacious</option>
-          </SelectControl>
-        </FieldRow>
-        <ToggleControlRow
+        <SwitchField
           label="Show labels"
-          checked={settings.componentOptions.showLabels}
-          onCheckedChange={(checked) => updateOption("showLabels", checked)}
+          switch={{
+            checked: settings.componentOptions.showLabels,
+            onCheckedChange: (value) => updateOption("showLabels", value),
+          }}
         />
-        <ToggleControlRow
+        <SwitchField
           label="Show descriptions"
-          checked={settings.componentOptions.showDescriptions}
-          onCheckedChange={(checked) => updateOption("showDescriptions", checked)}
+          switch={{
+            checked: settings.componentOptions.showDescriptions,
+            onCheckedChange: (value) => updateOption("showDescriptions", value),
+          }}
         />
-        <ToggleControlRow
+        <SwitchField
           label="Show icons"
-          checked={settings.componentOptions.showIcons}
-          onCheckedChange={(checked) => updateOption("showIcons", checked)}
+          switch={{
+            checked: settings.componentOptions.showIcons,
+            onCheckedChange: (value) => updateOption("showIcons", value),
+          }}
         />
-        <ToggleControlRow
+        <SwitchField
           label="Show helper text"
-          checked={settings.componentOptions.showHelperText}
-          onCheckedChange={(checked) => updateOption("showHelperText", checked)}
+          switch={{
+            checked: settings.componentOptions.showHelperText,
+            onCheckedChange: (value) => updateOption("showHelperText", value),
+          }}
         />
+      </ControlSection>
+
+      <ControlSection>
+        <SectionHeader>A11y</SectionHeader>
+        <SwitchField
+          label="High contrast"
+          switch={{
+            checked: settings.accessibility.highContrast,
+            onCheckedChange: (value) => updateAccessibility("highContrast", value),
+          }}
+        />
+        <SwitchField
+          label="Reduce motion"
+          switch={{
+            checked: settings.accessibility.reduceMotion,
+            onCheckedChange: (value) => updateAccessibility("reduceMotion", value),
+          }}
+        />
+      </ControlSection>
+
+      <ControlSection>
+        <SectionHeader>Font style</SectionHeader>
+        <HiddenFieldLabel>
+          <SegmentedControlField<"default" | "dyslexic">
+            label="Font style"
+            segmentedControl={{
+              items: fontStyleItems,
+              value: settings.accessibility.dyslexicFont ? "dyslexic" : "default",
+              onValueChange: (value) => updateAccessibility("dyslexicFont", value === "dyslexic"),
+              fullWidth: true,
+            }}
+          />
+        </HiddenFieldLabel>
+      </ControlSection>
+
+      <ControlSection>
+        <SectionHeader>Letter spacing</SectionHeader>
+        <HiddenFieldLabel>
+          <SegmentedControlField<"default" | "loose">
+            label="Letter spacing"
+            segmentedControl={{
+              items: letterSpacingItems,
+              value: settings.accessibility.looseSpacing ? "loose" : "default",
+              onValueChange: (value) => updateAccessibility("looseSpacing", value === "loose"),
+              fullWidth: true,
+            }}
+          />
+        </HiddenFieldLabel>
+      </ControlSection>
+
+      <ControlSection>
+        <SectionHeader>Colour-blindness</SectionHeader>
+        <HiddenFieldLabel>
+          <SelectField
+            label="Colour-blindness"
+            select={{
+              options: colorVisionOptions,
+              value: settings.accessibility.colorVision,
+              onValueChange: (value) =>
+                updateAccessibility("colorVision", value as PlaygroundColorVision),
+            }}
+          />
+        </HiddenFieldLabel>
       </ControlSection>
     </ControlsPanel>
   )
