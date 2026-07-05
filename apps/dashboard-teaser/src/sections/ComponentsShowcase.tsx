@@ -1,11 +1,8 @@
 import styled from "styled-components"
 
-import { Drawer, Icon, IconName, MarwesProvider, Text, TextVariant } from "@marwes-ui/react"
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react"
-import { CustomizeFab } from "../components/CustomizeFab"
-import { useIsCompactBreakpoint, useIsMobileBreakpoint } from "../hooks/use-breakpoint"
+import { MarwesProvider, Text, TextVariant } from "@marwes-ui/react"
+import type { Dispatch, SetStateAction } from "react"
 import { dashboardRadius, dashboardRowStyles, responsiveShellPadding } from "../styles/theme-utils"
-import { PlaygroundControls } from "./PlaygroundControls"
 import { createDashboardThemeInput } from "./playground-settings"
 import type { PlaygroundColorVision, PlaygroundSettings } from "./playground-settings"
 import { RowAccordionInput } from "./rows/RowAccordionInput"
@@ -22,15 +19,13 @@ const ShowcaseContainer = styled.section`
   padding: 0 ${({ theme }) => responsiveShellPadding(theme)};
 `
 
-const ShowcaseLayout = styled.div<{ $sidebarVisible: boolean }>`
+const ShowcaseLayout = styled.div`
   width: 100%;
   max-width: ${({ theme }) =>
     `calc(${theme.breakpoint.wideDesktop}px - (${theme.spacing.sp72} * 2))`};
   margin: 0 auto;
   display: grid;
-  grid-template-columns: ${(p) =>
-    p.$sidebarVisible ? "15.25rem minmax(0, 1fr)" : "minmax(0, 1fr)"};
-  gap: ${({ theme }) => `calc(${theme.spacing.sp32} + ${theme.spacing.sp4})`};
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
 `
 
@@ -61,6 +56,17 @@ const PreviewThemeScope = styled.div`
     background: transparent !important;
   }
 
+  /* Cap radius on components whose shape gets weird at large radii. The radius
+     slider still scales smaller components (Button, Badge, Input, etc.) up to 48px;
+     these two stop scaling at the value below. */
+  .mw-card {
+    --mw-card-radius: min(calc(var(--mw-ui-radius, 4px) * 2), 20px);
+  }
+
+  .mw-accordion {
+    border-radius: min(var(--mw-ui-radius, 6px), 12px);
+  }
+
   &[data-dashboard-color-vision="protanopia"] > [data-marwes-theme="true"] {
     filter: url("#dashboard-cvd-protanopia");
   }
@@ -74,52 +80,8 @@ const PreviewThemeScope = styled.div`
   }
 `
 
-const ControlsColumn = styled.div`
-  position: sticky;
-  top: ${({ theme }) => theme.spacing.sp24};
-  padding-top: ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sp16};
-`
-
-const HideSidebarButton = styled.button`
-  align-self: flex-end;
-  display: inline-flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sp4};
-  border: 0;
-  background: transparent;
-  padding: ${({ theme }) => `${theme.spacing.sp4} ${theme.spacing.sp8}`};
-  color: ${({ theme }) => theme.color.textMuted};
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.75rem;
-  border-radius: ${({ theme }) => `calc(${theme.ui.radius} * 1.5)`};
-
-  &:hover {
-    color: ${({ theme }) => theme.color.text};
-    background: ${({ theme }) => theme.color.surface};
-  }
-
-  &:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.color.primary.base};
-    outline-offset: 2px;
-  }
-`
-
-const DrawerPanelScope = styled.div<{ $isMobile: boolean }>`
-  .mw-drawer__panel {
-    ${(p) => (p.$isMobile ? "width: 100vw; max-width: 100vw;" : "")}
-  }
-`
-
-const Row = styled.div<{ $desktopHeight: string }>`
+const Row = styled.div`
   ${dashboardRowStyles}
-
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    min-height: ${(p) => p.$desktopHeight};
-  }
 `
 
 type ComponentsShowcaseProps = {
@@ -166,106 +128,47 @@ function getColorVisionAttribute(
   return colorVision === "normal" ? undefined : colorVision
 }
 
-function ComponentsShowcase({ settings, onSettingsChange }: ComponentsShowcaseProps): JSX.Element {
+function ComponentsShowcase({ settings }: ComponentsShowcaseProps): JSX.Element {
   const { componentOptions } = settings
   const previewThemeInput = createDashboardThemeInput(settings)
   const colorVisionAttribute = getColorVisionAttribute(settings.accessibility.colorVision)
 
-  const isCompact = useIsCompactBreakpoint()
-  const isMobile = useIsMobileBreakpoint()
-  const [sidebarHidden, setSidebarHidden] = useState(false)
-  const [drawerOpen, setDrawerOpen] = useState(false)
-
-  // Close the drawer when we cross out of the compact range so the inline
-  // sidebar takes over cleanly.
-  useEffect(() => {
-    if (!isCompact && drawerOpen) setDrawerOpen(false)
-  }, [isCompact, drawerOpen])
-
-  // Esc-to-close. The library Drawer doesn't ship a key handler.
-  useEffect(() => {
-    if (!drawerOpen) return
-    const onKey = (event: KeyboardEvent): void => {
-      if (event.key === "Escape") setDrawerOpen(false)
-    }
-    document.addEventListener("keydown", onKey)
-    return () => document.removeEventListener("keydown", onKey)
-  }, [drawerOpen])
-
-  const sidebarVisible = !isCompact && !sidebarHidden
-  const showFab = isCompact || sidebarHidden
-
-  const handleFabClick = (): void => {
-    if (isCompact) {
-      setDrawerOpen(true)
-    } else {
-      setSidebarHidden(false)
-    }
-  }
-
   return (
-    <ShowcaseContainer>
+    <ShowcaseContainer id="components" data-dashboard-section="components">
       <ColorVisionFilters />
-      <ShowcaseLayout $sidebarVisible={sidebarVisible}>
-        {sidebarVisible && (
-          <ControlsColumn>
-            <HideSidebarButton type="button" onClick={() => setSidebarHidden(true)}>
-              <Icon name={IconName.X} decorative size={14} />
-              Hide
-            </HideSidebarButton>
-            <PlaygroundControls settings={settings} onSettingsChange={onSettingsChange} />
-          </ControlsColumn>
-        )}
+      <ShowcaseLayout>
         <ContentGrid>
           <Text variant={TextVariant.overline}>Components</Text>
           <PreviewThemeScope data-dashboard-color-vision={colorVisionAttribute}>
             <MarwesProvider theme={previewThemeInput}>
-              <Row $desktopHeight="32.25rem">
+              <Row>
                 <RowSwitchCard options={componentOptions} />
               </Row>
-              <Row $desktopHeight="19.375rem">
+              <Row>
                 <RowAccordionInput options={componentOptions} />
               </Row>
-              <Row $desktopHeight="29.5rem">
+              <Row>
                 <RowToastMenuAvatar options={componentOptions} />
               </Row>
-              <Row $desktopHeight="12.625rem">
+              <Row>
                 <RowAvatarBreadcrumbDialog options={componentOptions} />
               </Row>
-              <Row $desktopHeight="13.5rem">
+              <Row>
                 <RowBanner options={componentOptions} />
               </Row>
-              <Row $desktopHeight="9rem">
+              <Row>
                 <RowButtonPaginationProgress options={componentOptions} />
               </Row>
-              <Row $desktopHeight="15.75rem">
+              <Row>
                 <RowSegmented />
               </Row>
-              <Row $desktopHeight="10.25rem">
+              <Row>
                 <RowSpinner options={componentOptions} />
               </Row>
             </MarwesProvider>
           </PreviewThemeScope>
         </ContentGrid>
       </ShowcaseLayout>
-
-      {showFab && <CustomizeFab onClick={handleFabClick} />}
-
-      {isCompact && drawerOpen && (
-        <DrawerPanelScope $isMobile={isMobile}>
-          <Drawer
-            placement="left"
-            size={isMobile ? "large" : "medium"}
-            modal={isMobile}
-            showScrim={isMobile}
-            dismissible
-            onClose={() => setDrawerOpen(false)}
-            title="Playground"
-          >
-            <PlaygroundControls settings={settings} onSettingsChange={onSettingsChange} />
-          </Drawer>
-        </DrawerPanelScope>
-      )}
     </ShowcaseContainer>
   )
 }

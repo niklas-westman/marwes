@@ -45,7 +45,7 @@ function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps):
             : undefined}
         </MwCard>
       </LeftCard>
-      <RightCard $basis="18.125rem" $grow={0} $minHeight="12.625rem">
+      <RightCard $basis="18.125rem" $minHeight="12.625rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Dialog &amp; Drawer</Text>}
 
         <ShowcaseStack>

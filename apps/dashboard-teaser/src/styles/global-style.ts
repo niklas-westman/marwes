@@ -1,5 +1,11 @@
 import { createGlobalStyle } from "styled-components"
 
+// theme.font.primary returns `var(--mw-font-primary)`. That CSS variable is
+// defined inside MarwesProvider, which lives below <body>. Outside the provider
+// the var resolves to nothing, so fall back to the Marwes default stack: the
+// same stack Marwes core ships as theme default.
+const marwesFontStack = "'Instrument Sans', Inter, system-ui, sans-serif"
+
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     box-sizing: border-box;
@@ -10,13 +16,23 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
+  html, body {
+    font-family: var(--mw-font-primary, ${marwesFontStack});
+  }
+
   body {
-    font-family: ${({ theme }) => theme.font.primary};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: ${({ theme }) => theme.color.background};
     color: ${({ theme }) => theme.color.text};
     transition: background 0.2s, color 0.2s;
+  }
+
+  /* Browsers reset font on form controls; pull the Marwes font through. */
+  button, input, select, textarea, optgroup {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
   }
 
   #root {

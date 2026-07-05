@@ -25,7 +25,7 @@ const FirstSectionFlex = styled.div`
   width: 100%;
   min-width: 0;
   gap: var(--first-section-gap);
-  align-items: flex-start;
+  align-items: stretch;
 
   > * {
     min-width: 0;
@@ -45,14 +45,9 @@ const FirstSectionCard = styled(ShowcaseCard)<{
   $grow?: number
   $responsiveOrder: number
 }>`
-  flex: ${(p) => `${p.$grow ?? 0} 1 ${p.$basis}`};
-  max-width: ${(p) => p.$basis};
+  flex: ${(p) => `${p.$grow ?? 1} 1 ${p.$basis}`};
   width: auto;
   order: ${(p) => p.$responsiveOrder};
-
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    min-height: ${(p) => p.$height ?? "auto"};
-  }
 
   @container (max-width: 58rem) {
     flex-basis: var(--first-section-card-basis);
@@ -62,7 +57,6 @@ const FirstSectionCard = styled(ShowcaseCard)<{
   @container (max-width: 38rem) {
     flex-basis: 100%;
     max-width: 100%;
-    min-height: auto;
   }
 `
 

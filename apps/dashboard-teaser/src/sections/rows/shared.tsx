@@ -64,12 +64,7 @@ const FlexAreaCard = styled(Card)<{
   flex: ${(p) => `${p.$grow ?? 1} 1 ${p.$basis ?? "0"}`};
   max-width: ${(p) => p.$maxWidth ?? "none"};
   order: ${(p) => p.$order ?? 0};
-  align-self: stretch;
   width: auto;
-
-  ${({ theme }) => theme.media.wideDesktopAndAbove} {
-    min-height: ${(p) => p.$minHeight ?? p.$height ?? "auto"};
-  }
 
   @container (max-width: 54rem) {
     flex-basis: calc((100% - var(--showcase-row-gap)) / 2);
@@ -78,7 +73,6 @@ const FlexAreaCard = styled(Card)<{
 
   @container (max-width: 38rem) {
     flex-basis: 100%;
-    min-height: auto;
   }
 `
 

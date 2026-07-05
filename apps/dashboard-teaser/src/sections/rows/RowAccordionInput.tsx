@@ -85,7 +85,7 @@ function RowAccordionInput({ options }: RowAccordionInputProps): JSX.Element {
           onOpenItemsChange={setOpenItems}
         />
       </AccordionCard>
-      <InputCard $basis="21.5rem" $grow={0} $minHeight="19.375rem">
+      <InputCard $basis="21.5rem" $minHeight="19.375rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Input fields</Text>}
         <ShowcaseStack>
           <PurposeSelect>

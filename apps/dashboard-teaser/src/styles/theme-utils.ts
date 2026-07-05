@@ -18,6 +18,7 @@ const cardShellStyles = css`
 
 const dashboardRowStyles = css`
   display: flex;
+  align-items: stretch;
   gap: ${({ theme }) => theme.spacing.sp24};
   width: 100%;
 

@@ -70,7 +70,7 @@ const LinkRow = styled.div`
 
 function HeroSection(): JSX.Element {
   return (
-    <HeroContainer>
+    <HeroContainer id="hero" data-dashboard-section="hero">
       <TextColumn>
         <TextBox>
           <TopSection>

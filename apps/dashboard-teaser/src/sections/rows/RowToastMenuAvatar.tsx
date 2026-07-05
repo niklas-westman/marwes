@@ -156,7 +156,7 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
 
   return (
     <ToastMosaicRow>
-      <ToastCard $basis="22rem" $grow={0} $minHeight="29.5rem">
+      <ToastCard $basis="22rem" $minHeight="29.5rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Toast</Text>}
         <SegmentedControl
           items={toastVariantItems}
@@ -181,7 +181,7 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
           )}
         </ToastList>
       </ToastCard>
-      <MenuCard $basis="17.25rem" $grow={0} $minHeight="29.5rem">
+      <MenuCard $basis="17.25rem" $minHeight="29.5rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Context menu</Text>}
         <ContextMenu ariaLabel="File actions" items={resolvedContextMenuItems} />
       </MenuCard>

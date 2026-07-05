@@ -83,7 +83,7 @@ function RowSpinner({ options }: RowSpinnerProps): JSX.Element {
 
   return (
     <ShowcaseFlexRow>
-      <LeftCard $basis="20.0625rem" $grow={0} $minHeight="10.25rem">
+      <LeftCard $basis="20.0625rem" $minHeight="10.25rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Spinner</Text>}
         <ButtonRow>
           <SpinnerButtonPreview
