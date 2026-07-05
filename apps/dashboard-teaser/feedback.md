@@ -214,7 +214,7 @@ Surfaced while resolving sections 1–7. Not blockers, but worth tracking.
 [`PaginationField`](../../packages/react/src/components/pagination/pagination-field.tsx), [`SegmentedControlField`](../../packages/react/src/components/segmented-control/segmented-control-field.tsx), and [`DatePickerField`](../../packages/react/src/components/date-picker/date-picker-field.tsx) are shipped and exported from `@marwes-ui/react` but have **no entries in storybook-react**. Confirmed by querying `localhost:6006/index.json` against the running storybook — only the atom families (`pagination-atom-*`, `segmentedcontrol-atom-*`, etc.) appear; no `*-molecule-*field` siblings for these three.
 
 The architecture-check script enforces cross-framework export parity but doesn't validate that a story exists for every public component. Two fixes possible:
-- Add the missing stories. Pattern already exists in [packages/storybook-react/src/Input/Molecule/InputOtpField.stories.tsx](../../packages/storybook-react/src/Input/Molecule/InputOtpField.stories.tsx).
+- Add the missing stories. Pattern already exists in [apps/storybook-react/src/stories/input/input-otp-field.stories.tsx](../../apps/storybook-react/src/stories/input/input-otp-field.stories.tsx).
 - Extend `check-adapter-architecture` to flag publicly-exported components without stories.
 
 Same gap exists in storybook-vue / storybook-svelte for the same three molecules.
@@ -229,7 +229,7 @@ During the atom-audit sweep we considered locking `Spinner`'s `variant` prop to 
 
 ### 8.4 Vue `SegmentedControl<T>` generic is type-level only
 
-Vue's `defineComponent` runtime can't infer the `T` parameter on a generic component the way React function components can. The interface exposes `<T extends string>`, but consumers must annotate at the call site. React and Svelte (which uses `<script lang="ts" generics="T extends string">`) infer correctly. Documented in [packages/vue/src/components/segmented-control/types.ts](../../packages/vue/src/components/segmented-control/types.ts).
+Vue's `defineComponent` runtime can't infer the `T` parameter on a generic component the way React function components can. The interface exposes `<T extends string>`, but consumers must annotate at the call site. React and Svelte (which uses `<script lang="ts" generics="T extends string">`) infer correctly. Documented in [packages/vue/src/components/segmented-control/segmented-control.ts](../../packages/vue/src/components/segmented-control/segmented-control.ts).
 
 ---
 
