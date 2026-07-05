@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/svelte"
 import InputOtp from "../../../../../packages/svelte/src/lib/components/input/InputOtp.svelte"
 
 const meta = {
-  title: "Input/Atom/InputOtp",
+  title: "Input/Molecule/InputOtp",
   component: InputOtp,
   parameters: {
     ...storybookA11yPolicy.smoke,
@@ -21,7 +21,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Basic: Story = {}
 
 export const Controlled: Story = {
   args: { value: "123456" },

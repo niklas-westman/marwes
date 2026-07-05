@@ -8,13 +8,13 @@ import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { runInputOtpContract } from "../../../../../../tests/contracts/input-otp.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
-import { InputOtp, type InputOtpProps } from "../input-otp"
+import { InputOtpField, type InputOtpFieldProps } from "../input-otp-field"
 
-function renderWithProvider(props: InputOtpProps) {
+function renderWithProvider(props: InputOtpFieldProps) {
   render(
     defineComponent({
       setup() {
-        return () => h(MarwesProvider, null, { default: () => h(InputOtp, props) })
+        return () => h(MarwesProvider, null, { default: () => h(InputOtpField, props) })
       },
     }),
   )
@@ -26,11 +26,13 @@ runInputOtpContract("vue", {
       label: args.label ?? "Verification code",
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
-      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
-      ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
-      ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
-      ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
-    } as InputOtpProps
+      inputOtp: {
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
+      },
+    } as InputOtpFieldProps
 
     renderWithProvider(props)
   },
@@ -41,10 +43,10 @@ runInputOtpContract("vue", {
     return screen.getByText(text)
   },
   queryHelperRegion() {
-    return document.querySelector(".mw-input-otp__helper")
+    return document.querySelector(".mw-input-otp-field__helper")
   },
   queryErrorRegion() {
-    return document.querySelector(".mw-input-otp__error")
+    return document.querySelector(".mw-input-otp-field__error")
   },
   queryOtpCells() {
     return Array.from(document.querySelectorAll(".mw-input-otp__cell")) as HTMLElement[]
@@ -83,7 +85,7 @@ describe("Vue InputOtp", () => {
 
     renderWithProvider({
       label: "Verification code",
-      onValueChange,
+      inputOtp: { onValueChange },
     })
 
     const inputElement = screen.getByRole("textbox", { name: /verification code/i })

@@ -76,7 +76,7 @@
   <table class={kit.slots.gridClassName} aria-label={kit.monthLabel}>
     <thead>
       <tr class="mw-date-picker__weekdays">
-        {#each kit.weekdayLabels as weekday (weekday)}
+        {#each kit.weekdayLabels as weekday, weekdayIndex (weekdayIndex)}
           <th class={kit.slots.weekdayClassName} scope="col">{weekday}</th>
         {/each}
       </tr>

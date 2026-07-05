@@ -7,7 +7,7 @@ import { useState } from "react"
 import { InputOtp } from "../../../../../packages/react/src/components/input/input-otp"
 
 const meta: Meta<typeof InputOtp> = {
-  title: "Input/Atom/InputOtp",
+  title: "Input/Molecule/InputOtp",
   component: InputOtp,
   parameters: {
     ...storybookA11yPolicy.smoke,

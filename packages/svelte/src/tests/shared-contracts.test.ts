@@ -903,10 +903,10 @@ runInputOtpContract("svelte", {
     return screen.getByText(text)
   },
   queryHelperRegion() {
-    return document.querySelector(".mw-input-otp__helper")
+    return document.querySelector(".mw-input-otp-field__helper")
   },
   queryErrorRegion() {
-    return document.querySelector(".mw-input-otp__error")
+    return document.querySelector(".mw-input-otp-field__error")
   },
   queryOtpCells() {
     return Array.from(document.querySelectorAll(".mw-input-otp__cell")) as HTMLElement[]

@@ -1,6 +1,6 @@
 import { SwitchSize, storybookA11yPolicy, storybookLayout } from "@marwes-ui/core"
-import { Switch } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+import Switch from "../../../../../packages/svelte/src/lib/components/switch/Switch.svelte"
 import SwitchShowcase from "./SwitchShowcase.svelte"
 
 const meta = {

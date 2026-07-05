@@ -23,35 +23,42 @@
     "react": [
       "packages/react/src/components/pagination/__tests__/pagination.test.tsx",
       "packages/react/src/components/pagination/index.ts",
+      "packages/react/src/components/pagination/pagination-field.tsx",
       "packages/react/src/components/pagination/pagination.tsx"
     ],
     "vue": [
       "packages/vue/src/components/pagination/__tests__/pagination.test.ts",
       "packages/vue/src/components/pagination/index.ts",
+      "packages/vue/src/components/pagination/pagination-field.ts",
       "packages/vue/src/components/pagination/pagination.ts"
     ],
     "svelte": [
       "packages/svelte/src/lib/components/pagination/index.ts",
       "packages/svelte/src/lib/components/pagination/Pagination.svelte",
+      "packages/svelte/src/lib/components/pagination/PaginationField.svelte",
       "packages/svelte/src/lib/components/pagination/types.ts"
     ],
     "storybookReact": [
       "apps/storybook-react/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
       "apps/storybook-react/src/stories/pagination/Introduction.mdx",
+      "apps/storybook-react/src/stories/pagination/pagination-field.stories.tsx",
       "apps/storybook-react/src/stories/pagination/pagination.stories.tsx"
     ],
     "storybookVue": [
       "apps/storybook-vue/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
       "apps/storybook-vue/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/pagination/Introduction.mdx",
+      "apps/storybook-vue/src/stories/pagination/pagination-field.stories.ts",
       "apps/storybook-vue/src/stories/pagination/pagination.stories.ts"
     ],
     "storybookSvelte": [
       "apps/storybook-svelte/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
       "apps/storybook-svelte/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
       "apps/storybook-svelte/src/stories/pagination/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/pagination/pagination-field.stories.ts",
       "apps/storybook-svelte/src/stories/pagination/pagination.stories.ts",
+      "apps/storybook-svelte/src/stories/pagination/PaginationFieldPreview.svelte",
       "apps/storybook-svelte/src/stories/pagination/PaginationNarrowContainer.svelte",
       "apps/storybook-svelte/src/stories/pagination/PaginationPreview.svelte",
       "apps/storybook-svelte/src/stories/pagination/PaginationShowcase.svelte"

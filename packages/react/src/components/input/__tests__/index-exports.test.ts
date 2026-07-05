@@ -8,12 +8,8 @@ import * as publicApi from "../../../index"
 
 describe("input barrel exports", () => {
   it("exports the complete input domain surface", () => {
-    expect(inputComponents.Input).toBeDefined()
-    expect(inputComponents.Select).toBeDefined()
-    expect(inputComponents.Textarea).toBeDefined()
-    expect(inputComponents.RichText).toBeDefined()
     expect(inputComponents.InputField).toBeDefined()
-    expect(inputComponents.InputOtp).toBeDefined()
+    expect(inputComponents.InputOtpField).toBeDefined()
     expect(inputComponents.SelectField).toBeDefined()
     expect(inputComponents.TextareaField).toBeDefined()
     expect(inputComponents.RichTextField).toBeDefined()
@@ -29,12 +25,8 @@ describe("input barrel exports", () => {
   })
 
   it("re-exports the same input symbols from package root", () => {
-    expect(publicApi.Input).toBe(inputComponents.Input)
-    expect(publicApi.Select).toBe(inputComponents.Select)
-    expect(publicApi.Textarea).toBe(inputComponents.Textarea)
-    expect(publicApi.RichText).toBe(inputComponents.RichText)
     expect(publicApi.InputField).toBe(inputComponents.InputField)
-    expect(publicApi.InputOtp).toBe(inputComponents.InputOtp)
+    expect(publicApi.InputOtpField).toBe(inputComponents.InputOtpField)
     expect(publicApi.SelectField).toBe(inputComponents.SelectField)
     expect(publicApi.TextareaField).toBe(inputComponents.TextareaField)
     expect(publicApi.RichTextField).toBe(inputComponents.RichTextField)

@@ -24,7 +24,7 @@ export interface TextOptions {
 
   /**
    * Render as a heading element (h1–h6) while keeping the visual variant.
-   * Wins over `as` when both are set. Use this to give the document outline
+   * Wins over `as` when both are set. Use this to give the page outline
    * a semantic level without coupling it to the visual size. The dedicated
    * `Heading` component is preferred when the visual size IS a heading size;
    * use `headingLevel` on `Text` when the visual variant is display/overline/etc.

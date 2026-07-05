@@ -5,9 +5,9 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import * as React from "react"
 import { describe, expect, it } from "vitest"
-import { Slider } from ".."
 import { runSliderContract } from "../../../../../../tests/contracts/slider.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Slider } from "../slider"
 import { SliderField } from "../slider-field"
 
 function renderWithProvider(ui: React.ReactElement) {

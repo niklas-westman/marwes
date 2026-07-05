@@ -10,7 +10,7 @@ import {
 } from "../../../../../packages/vue/src/components/input/input-otp"
 
 const meta = {
-  title: "Input/Atom/InputOtp",
+  title: "Input/Molecule/InputOtp",
   component: InputOtp as unknown as object,
   parameters: {
     ...storybookA11yPolicy.smoke,

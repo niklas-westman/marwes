@@ -22,34 +22,41 @@
     "presets": ["packages/presets/src/firstEdition/segmented-control.css"],
     "react": [
       "packages/react/src/components/segmented-control/index.ts",
+      "packages/react/src/components/segmented-control/segmented-control-field.tsx",
       "packages/react/src/components/segmented-control/segmented-control.tsx"
     ],
     "vue": [
       "packages/vue/src/components/segmented-control/index.ts",
+      "packages/vue/src/components/segmented-control/segmented-control-field.ts",
       "packages/vue/src/components/segmented-control/segmented-control.ts"
     ],
     "svelte": [
       "packages/svelte/src/lib/components/segmented-control/index.ts",
       "packages/svelte/src/lib/components/segmented-control/SegmentedControl.svelte",
+      "packages/svelte/src/lib/components/segmented-control/SegmentedControlField.svelte",
       "packages/svelte/src/lib/components/segmented-control/types.ts"
     ],
     "storybookReact": [
       "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
       "apps/storybook-react/src/stories/segmented-control/Introduction.mdx",
+      "apps/storybook-react/src/stories/segmented-control/segmented-control-field.stories.tsx",
       "apps/storybook-react/src/stories/segmented-control/segmented-control.stories.tsx"
     ],
     "storybookVue": [
       "apps/storybook-vue/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
       "apps/storybook-vue/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/segmented-control/Introduction.mdx",
+      "apps/storybook-vue/src/stories/segmented-control/segmented-control-field.stories.ts",
       "apps/storybook-vue/src/stories/segmented-control/segmented-control.stories.ts"
     ],
     "storybookSvelte": [
       "apps/storybook-svelte/src/stories/segmented-control/__tests__/segmented-control-introduction-docs.test.ts",
       "apps/storybook-svelte/src/stories/segmented-control/__tests__/segmented-control-taxonomy.test.ts",
       "apps/storybook-svelte/src/stories/segmented-control/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/segmented-control/segmented-control-field.stories.ts",
       "apps/storybook-svelte/src/stories/segmented-control/segmented-control.stories.ts",
+      "apps/storybook-svelte/src/stories/segmented-control/SegmentedControlFieldPreview.svelte",
       "apps/storybook-svelte/src/stories/segmented-control/SegmentedControlPreview.svelte",
       "apps/storybook-svelte/src/stories/segmented-control/SegmentedControlShowcase.svelte"
     ],

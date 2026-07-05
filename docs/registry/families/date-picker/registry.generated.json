@@ -23,35 +23,45 @@
     "react": [
       "packages/react/src/components/date-picker/__tests__/date-picker.test.tsx",
       "packages/react/src/components/date-picker/__tests__/index-exports.test.tsx",
+      "packages/react/src/components/date-picker/date-picker-field.tsx",
       "packages/react/src/components/date-picker/date-picker.tsx",
       "packages/react/src/components/date-picker/index.ts"
     ],
     "vue": [
       "packages/vue/src/components/date-picker/__tests__/date-picker.test.ts",
       "packages/vue/src/components/date-picker/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/date-picker/date-picker-field.ts",
       "packages/vue/src/components/date-picker/date-picker.ts",
       "packages/vue/src/components/date-picker/index.ts"
     ],
     "svelte": [
       "packages/svelte/src/lib/components/date-picker/DatePicker.svelte",
+      "packages/svelte/src/lib/components/date-picker/DatePickerField.svelte",
       "packages/svelte/src/lib/components/date-picker/index.ts",
       "packages/svelte/src/lib/components/date-picker/types.ts"
     ],
     "storybookReact": [
+      "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-field-taxonomy.test.ts",
       "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
       "apps/storybook-react/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
+      "apps/storybook-react/src/stories/date-picker/date-picker-field.stories.tsx",
       "apps/storybook-react/src/stories/date-picker/date-picker.stories.tsx.disabled",
       "apps/storybook-react/src/stories/date-picker/Introduction.mdx.disabled"
     ],
     "storybookVue": [
+      "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-field-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-introduction-docs.test.ts.disabled",
       "apps/storybook-vue/src/stories/date-picker/__tests__/date-picker-taxonomy.test.ts.disabled",
+      "apps/storybook-vue/src/stories/date-picker/date-picker-field.stories.ts",
       "apps/storybook-vue/src/stories/date-picker/date-picker.stories.ts.disabled",
       "apps/storybook-vue/src/stories/date-picker/Introduction.mdx.disabled"
     ],
     "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/date-picker/__tests__/date-picker-field-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/date-picker/date-picker-field.stories.ts",
       "apps/storybook-svelte/src/stories/date-picker/date-picker.stories.ts.disabled",
       "apps/storybook-svelte/src/stories/date-picker/DatePickerDemo.svelte",
+      "apps/storybook-svelte/src/stories/date-picker/DatePickerFieldPreview.svelte",
       "apps/storybook-svelte/src/stories/date-picker/Introduction.mdx.disabled"
     ],
     "contracts": ["tests/contracts/date-picker.contract.ts"]
