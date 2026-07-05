@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.34.4+sha512.8768be55200ae3f2226b6527fcca2687e14bc4e5f12d7721a0f25da3df47915177058648db4177baf348120fa0ba2752d8d8d93f6beaf1fe64ae18da8de961af",
   "engines": {
     "node": ">=20"
   },
@@ -148,22 +148,5 @@
   },
   "dependencies": {
     "styled-components": "6.3.11"
-  },
-  "pnpm": {
-    "overrides": {
-      "@babel/core@<=7.29.0": "7.29.7",
-      "@vitest/browser@>=4.0.17 <4.1.6": "4.1.8",
-      "brace-expansion@>=5.0.0 <5.0.6": "5.0.6",
-      "devalue@>=5.6.3 <=5.8.0": "5.8.1",
-      "js-cookie@<=3.0.5": "3.0.7",
-      "js-yaml@<3.15.0": "3.15.0",
-      "js-yaml@>=4.0.0 <=4.1.1": "4.2.0",
-      "minimatch@>=9.0.0 <9.0.7": "9.0.7",
-      "postcss@<8.5.10": "8.5.10",
-      "qs@>=6.11.1 <=6.15.1": "6.15.2",
-      "svelte@<=5.55.6": "5.56.3",
-      "vitest@>=4.0.0 <4.1.0": "4.1.8",
-      "ws@>=8.0.0 <8.21.0": "8.21.0"
-    }
   }
 }

@@ -3,14 +3,14 @@ pre-commit:
   jobs:
     - name: biome-staged
       glob: "*.{js,jsx,ts,tsx,json,jsonc,css,md}"
-      run: pnpm exec biome check --write --no-errors-on-unmatched {staged_files}
+      run: corepack pnpm exec biome check --write --no-errors-on-unmatched {staged_files}
       stage_fixed: true
 
 pre-push:
   jobs:
     - name: repo-check
-      run: pnpm check
+      run: corepack pnpm check
     - name: design-check
-      run: pnpm design:check
+      run: corepack pnpm design:check
     - name: cohesive-check
-      run: pnpm cohesive:check:all
+      run: corepack pnpm cohesive:check:all
