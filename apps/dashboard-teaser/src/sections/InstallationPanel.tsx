@@ -10,10 +10,8 @@ import { SegmentedControl } from "../../../../packages/react/src/components/segm
 import { cardShellStyles } from "../styles/theme-utils"
 import {
   type Framework,
-  type PackageManager,
   createAgenticInstallPrompt,
   createExistingAppInstallCommand,
-  packageManagers,
 } from "./installation-recipes"
 
 const PanelContainer = styled.div`
@@ -135,16 +133,8 @@ const frameworkItems: SegmentedControlItem<Framework>[] = [
   { value: "svelte", icon: <SvelteIcon />, label: "Svelte" },
 ]
 
-const packageManagerItems: SegmentedControlItem<PackageManager>[] = packageManagers.map(
-  (packageManager) => ({
-    value: packageManager,
-    label: packageManager,
-  }),
-)
-
 function InstallationPanel(): JSX.Element {
   const [activeTab, setActiveTab] = useState<Framework>("react")
-  const [packageManager, setPackageManager] = useState<PackageManager>("pnpm")
 
   return (
     <PanelContainer>
@@ -162,23 +152,10 @@ function InstallationPanel(): JSX.Element {
       </InputSection>
 
       <InputSection>
-        <InputLabel>Package manager</InputLabel>
-        <SegmentedControl
-          items={packageManagerItems}
-          value={packageManager}
-          onValueChange={setPackageManager}
-          variant="inverse"
-          size="sm"
-          ariaLabel="Package manager"
-          fullWidth
-        />
-      </InputSection>
-
-      <InputSection>
         <InputLabel>Add to existing app</InputLabel>
         <FieldRow>
           <CommandInput
-            value={createExistingAppInstallCommand(activeTab, packageManager)}
+            value={createExistingAppInstallCommand(activeTab)}
             readOnly
             ariaLabel="Existing app install command"
           />
@@ -195,7 +172,7 @@ function InstallationPanel(): JSX.Element {
         <InputLabel>Install with AI</InputLabel>
         <FieldRow $align="flex-start">
           <PromptTextarea
-            value={createAgenticInstallPrompt(activeTab, packageManager)}
+            value={createAgenticInstallPrompt(activeTab)}
             readOnly
             resize="none"
             rows={4}

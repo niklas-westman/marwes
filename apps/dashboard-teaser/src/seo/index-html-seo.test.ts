@@ -83,6 +83,6 @@ describe("dashboard teaser HTML SEO output", () => {
     expect(rootText).toContain("typed themes")
     expect(rootText).toContain("adjustable")
     expect(rootText).toContain("accessibility")
-    expect(links).toEqual(["Documentation", "Storybook", "GitHub"])
+    expect(links).toEqual(["Documentation", "GitHub"])
   })
 })

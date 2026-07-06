@@ -63,7 +63,6 @@ const dashboardSeo = {
   },
   links: [
     { href: "https://github.com/niklas-westman/marwes/tree/main/docs", label: "Documentation" },
-    { href: "https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/", label: "Storybook" },
     { href: "https://github.com/niklas-westman/marwes", label: "GitHub" },
   ],
   robots: "index,follow,max-image-preview:large",

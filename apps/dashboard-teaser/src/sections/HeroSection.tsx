@@ -95,9 +95,6 @@ function HeroSection(): JSX.Element {
           >
             Documentation
           </LinkButton>
-          <LinkButton href="#" iconRight={IconName.ArrowUpRight}>
-            Storybook
-          </LinkButton>
           <LinkButton
             href="https://github.com/niklas-westman/marwes"
             iconRight={IconName.ArrowUpRight}
