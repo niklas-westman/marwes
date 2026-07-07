@@ -19,8 +19,14 @@ import styled from "styled-components"
 // Atom is no longer publicly exported; deep-import for the toast variant picker.
 import { SegmentedControl } from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
+import { CodeIconButton } from "../../components/CodeIconButton"
+import { CodeSnippetModal } from "../../components/CodeSnippetModal"
 import type { ComponentDisplayOptions } from "../playground-settings"
+import { avatarSnippets } from "./avatar-snippets"
+import { breadcrumbSnippets } from "./breadcrumb-snippets"
+import { contextMenuSnippets } from "./context-menu-snippets"
 import { Card, FlexAreaCard, ShowcaseFlexRow, ShowcaseSectionLabel } from "./shared"
+import { toastSnippets } from "./toast-snippets"
 
 type ToastVariant = "subtle" | "outline" | "rich"
 
@@ -128,6 +134,10 @@ type RowToastMenuAvatarProps = {
 function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
   const [toastVariant, setToastVariant] = useState<ToastVariant>("subtle")
   const [dismissedToasts, setDismissedToasts] = useState<Set<string>>(new Set())
+  const [toastCodeOpen, setToastCodeOpen] = useState(false)
+  const [menuCodeOpen, setMenuCodeOpen] = useState(false)
+  const [avatarCodeOpen, setAvatarCodeOpen] = useState(false)
+  const [breadcrumbCodeOpen, setBreadcrumbCodeOpen] = useState(false)
   const resolvedContextMenuItems = options.showIcons
     ? contextMenuItems
     : contextMenuItems.map((item) =>
@@ -158,6 +168,10 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
     <ToastMosaicRow>
       <ToastCard $basis="22rem" $minHeight="29.5rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Toast</Text>}
+        <CodeIconButton
+          ariaLabel="View Toast code example"
+          onClick={() => setToastCodeOpen(true)}
+        />
         <SegmentedControl
           items={toastVariantItems}
           value={toastVariant}
@@ -183,11 +197,19 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
       </ToastCard>
       <MenuCard $basis="17.25rem" $minHeight="29.5rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Context menu</Text>}
+        <CodeIconButton
+          ariaLabel="View Context menu code example"
+          onClick={() => setMenuCodeOpen(true)}
+        />
         <ContextMenu ariaLabel="File actions" items={resolvedContextMenuItems} />
       </MenuCard>
       <RightStack>
         <AvatarCard>
           {options.showLabels && <ShowcaseSectionLabel>Avatar</ShowcaseSectionLabel>}
+          <CodeIconButton
+            ariaLabel="View Avatar code example"
+            onClick={() => setAvatarCodeOpen(true)}
+          />
           <AvatarRow>
             <AvatarGroup
               items={[
@@ -206,10 +228,37 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
         </AvatarCard>
         <BreadcrumbCard>
           {options.showLabels && <Text variant={TextVariant.overline}>Breadcrumb</Text>}
-
+          <CodeIconButton
+            ariaLabel="View Breadcrumb code example"
+            onClick={() => setBreadcrumbCodeOpen(true)}
+          />
           <Breadcrumb homeHref="#" items={breadcrumbItems} />
         </BreadcrumbCard>
       </RightStack>
+      <CodeSnippetModal
+        open={toastCodeOpen}
+        onOpenChange={setToastCodeOpen}
+        title="Toast"
+        snippets={toastSnippets}
+      />
+      <CodeSnippetModal
+        open={menuCodeOpen}
+        onOpenChange={setMenuCodeOpen}
+        title="Context menu"
+        snippets={contextMenuSnippets}
+      />
+      <CodeSnippetModal
+        open={avatarCodeOpen}
+        onOpenChange={setAvatarCodeOpen}
+        title="Avatar"
+        snippets={avatarSnippets}
+      />
+      <CodeSnippetModal
+        open={breadcrumbCodeOpen}
+        onOpenChange={setBreadcrumbCodeOpen}
+        title="Breadcrumb"
+        snippets={breadcrumbSnippets}
+      />
     </ToastMosaicRow>
   )
 }

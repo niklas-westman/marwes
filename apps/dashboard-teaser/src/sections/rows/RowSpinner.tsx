@@ -2,8 +2,11 @@ import { Button, ButtonVariant, Spinner, Text, TextVariant } from "@marwes-ui/re
 import { useState } from "react"
 import styled from "styled-components"
 
+import { CodeIconButton } from "../../components/CodeIconButton"
+import { CodeSnippetModal } from "../../components/CodeSnippetModal"
 import type { ComponentDisplayOptions } from "../playground-settings"
 import { FlexAreaCard, ShowcaseFlexRow } from "./shared"
+import { spinnerSnippets } from "./spinner-snippets"
 
 const LeftCard = styled(FlexAreaCard)`
   @container (max-width: 54rem) {
@@ -80,11 +83,17 @@ type RowSpinnerProps = {
 
 function RowSpinner({ options }: RowSpinnerProps): JSX.Element {
   const [activeVariant, setActiveVariant] = useState<SpinnerVariantKey>("ring")
+  const [leftCodeOpen, setLeftCodeOpen] = useState(false)
+  const [rightCodeOpen, setRightCodeOpen] = useState(false)
 
   return (
     <ShowcaseFlexRow>
       <LeftCard $basis="20.0625rem" $minHeight="10.25rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Spinner</Text>}
+        <CodeIconButton
+          ariaLabel="View Spinner (loading button) code example"
+          onClick={() => setLeftCodeOpen(true)}
+        />
         <ButtonRow>
           <SpinnerButtonPreview
             variant={ButtonVariant.primary}
@@ -112,6 +121,10 @@ function RowSpinner({ options }: RowSpinnerProps): JSX.Element {
       </LeftCard>
       <RightCard $basis="30rem" $minHeight="10.25rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Spinner</Text>}
+        <CodeIconButton
+          ariaLabel="View Spinner variants code example"
+          onClick={() => setRightCodeOpen(true)}
+        />
         <SpinnerRow>
           {VARIANTS.map(({ key, label }) => (
             <SpinnerItem
@@ -127,6 +140,18 @@ function RowSpinner({ options }: RowSpinnerProps): JSX.Element {
           ))}
         </SpinnerRow>
       </RightCard>
+      <CodeSnippetModal
+        open={leftCodeOpen}
+        onOpenChange={setLeftCodeOpen}
+        title="Spinner"
+        snippets={spinnerSnippets}
+      />
+      <CodeSnippetModal
+        open={rightCodeOpen}
+        onOpenChange={setRightCodeOpen}
+        title="Spinner"
+        snippets={spinnerSnippets}
+      />
     </ShowcaseFlexRow>
   )
 }

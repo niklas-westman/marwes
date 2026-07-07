@@ -10,7 +10,6 @@
   --mw-drawer-text: color-mix(in srgb, var(--mw-color-text) 68%, var(--mw-color-background));
   --mw-drawer-muted: var(--mw-color-text-muted, var(--mw-drawer-text));
   --mw-drawer-radius: calc(var(--mw-ui-radius, 4px) * 3);
-  --mw-drawer-close-radius: calc(var(--mw-ui-radius, 4px) * 2);
   --mw-drawer-shadow: 0 24px 60px color-mix(in srgb, var(--mw-color-text) 18%, transparent);
   --mw-drawer-scrim: color-mix(in srgb, var(--mw-color-text) 42%, transparent);
   --mw-drawer-motion-duration: 180ms;
@@ -124,15 +123,20 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: none;
-  border-radius: var(--mw-drawer-close-radius);
+  box-sizing: border-box;
+  border: 1px solid color-mix(in srgb, var(--mw-drawer-title) 15%, transparent);
+  border-radius: 4px;
   background: transparent;
-  color: var(--mw-drawer-muted);
+  color: var(--mw-drawer-title);
   cursor: pointer;
 }
 
 .mw-drawer__close:hover {
   background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.mw-drawer__close:active {
+  background: color-mix(in srgb, currentColor 12%, transparent);
 }
 
 .mw-drawer__close:focus-visible {

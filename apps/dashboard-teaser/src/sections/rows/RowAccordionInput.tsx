@@ -11,7 +11,11 @@ import styled from "styled-components"
 // Atom is no longer publicly exported; deep-import for PurposeSelect's custom layout.
 import { Select } from "../../../../../packages/react/src/components/input/select"
 
+import { CodeIconButton } from "../../components/CodeIconButton"
+import { CodeSnippetModal } from "../../components/CodeSnippetModal"
 import type { ComponentDisplayOptions } from "../playground-settings"
+import { accordionSnippets } from "./accordion-snippets"
+import { inputSnippets } from "./input-snippets"
 import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
 const AccordionCard = styled(FlexAreaCard)`
@@ -55,11 +59,17 @@ function RowAccordionInput({ options }: RowAccordionInputProps): JSX.Element {
   const [currencyValue, setCurrencyValue] = useState("")
   const [emailValue, setEmailValue] = useState("")
   const [phoneValue, setPhoneValue] = useState("")
+  const [accordionCodeOpen, setAccordionCodeOpen] = useState(false)
+  const [inputCodeOpen, setInputCodeOpen] = useState(false)
 
   return (
     <ShowcaseFlexRow>
       <AccordionCard $basis="36rem" $minHeight="19.375rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Accordion</Text>}
+        <CodeIconButton
+          ariaLabel="View Accordion code example"
+          onClick={() => setAccordionCodeOpen(true)}
+        />
         <AccordionField
           label=""
           items={[
@@ -87,6 +97,10 @@ function RowAccordionInput({ options }: RowAccordionInputProps): JSX.Element {
       </AccordionCard>
       <InputCard $basis="21.5rem" $minHeight="19.375rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Input fields</Text>}
+        <CodeIconButton
+          ariaLabel="View Input fields code example"
+          onClick={() => setInputCodeOpen(true)}
+        />
         <ShowcaseStack>
           <PurposeSelect>
             {options.showLabels && <Text variant={TextVariant.overline}>Purpose</Text>}
@@ -137,6 +151,18 @@ function RowAccordionInput({ options }: RowAccordionInputProps): JSX.Element {
           )}
         </ShowcaseStack>
       </InputCard>
+      <CodeSnippetModal
+        open={accordionCodeOpen}
+        onOpenChange={setAccordionCodeOpen}
+        title="Accordion"
+        snippets={accordionSnippets}
+      />
+      <CodeSnippetModal
+        open={inputCodeOpen}
+        onOpenChange={setInputCodeOpen}
+        title="Input fields"
+        snippets={inputSnippets}
+      />
     </ShowcaseFlexRow>
   )
 }

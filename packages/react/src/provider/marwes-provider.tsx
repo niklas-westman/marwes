@@ -64,7 +64,7 @@ export function MarwesProvider({
   variableStrategy = "inline",
   children,
 }: MarwesProviderProps) {
-  const rootRef = React.useRef<HTMLDivElement>(null)
+  const [providerElement, setProviderElement] = React.useState<HTMLDivElement | null>(null)
   const [internalPreference, setInternalPreference] = React.useState<ThemePreference>(
     defaultPreference ?? defaultMode ?? MwThemeMode.light,
   )
@@ -137,10 +137,10 @@ export function MarwesProvider({
 
   React.useEffect(() => {
     if (variableStrategy === "style-tag") return
-    if (rootRef.current) {
-      applyThemeToElement(rootRef.current, resolved)
+    if (providerElement) {
+      applyThemeToElement(providerElement, resolved)
     }
-  }, [resolved, variableStrategy])
+  }, [providerElement, resolved, variableStrategy])
 
   React.useEffect(() => {
     if (target === "provider") return
@@ -148,7 +148,7 @@ export function MarwesProvider({
     const apply = () => {
       applyModeAttribute({
         target,
-        providerElement: rootRef.current,
+        providerElement: null,
         mode: activeMode,
         attribute,
       })
@@ -175,14 +175,24 @@ export function MarwesProvider({
       setMode,
       setPreference,
       toggleMode,
+      providerElement,
     }),
-    [activeMode, activePreference, resolved, setMode, setPreference, systemMode, toggleMode],
+    [
+      activeMode,
+      activePreference,
+      providerElement,
+      resolved,
+      setMode,
+      setPreference,
+      systemMode,
+      toggleMode,
+    ],
   )
 
   return (
     <MarwesContext.Provider value={contextValue}>
       <div
-        ref={rootRef}
+        ref={setProviderElement}
         className={`mw-theme--${resolved.mode}`}
         data-marwes-theme="true"
         data-marwes-mode={resolved.mode}

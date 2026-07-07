@@ -5,6 +5,9 @@ import styled from "styled-components"
 // Atom is no longer publicly exported; deep-import for the showcase row.
 import { SegmentedControl } from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
+import { CodeIconButton } from "../../components/CodeIconButton"
+import { CodeSnippetModal } from "../../components/CodeSnippetModal"
+import { segmentedSnippets } from "./segmented-snippets"
 import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
 const ItemCard = styled(FlexAreaCard)``
@@ -90,6 +93,8 @@ function RowSegmented(): JSX.Element {
     defaultThree: "compact",
     defaultIcon: "light",
   })
+  const [inverseCodeOpen, setInverseCodeOpen] = useState(false)
+  const [defaultCodeOpen, setDefaultCodeOpen] = useState(false)
 
   const set = (key: string, value: string): void => {
     setState((prev) => ({ ...prev, [key]: value }))
@@ -99,6 +104,10 @@ function RowSegmented(): JSX.Element {
     <ShowcaseFlexRow>
       <ItemCard $basis="24rem" $minHeight="15.75rem">
         <Text variant={TextVariant.overline}>Segmented button – Inverse</Text>
+        <CodeIconButton
+          ariaLabel="View Segmented (inverse) code example"
+          onClick={() => setInverseCodeOpen(true)}
+        />
         <ShowcaseStack>
           <SegmentedControl
             items={inverseTwo}
@@ -128,6 +137,10 @@ function RowSegmented(): JSX.Element {
       </ItemCard>
       <ItemCard $basis="24rem" $minHeight="15.75rem">
         <Text variant={TextVariant.overline}>Segmented button – Default</Text>
+        <CodeIconButton
+          ariaLabel="View Segmented (default) code example"
+          onClick={() => setDefaultCodeOpen(true)}
+        />
         <ShowcaseStack>
           <SegmentedControl
             items={defaultTwo}
@@ -152,6 +165,18 @@ function RowSegmented(): JSX.Element {
           />
         </ShowcaseStack>
       </ItemCard>
+      <CodeSnippetModal
+        open={inverseCodeOpen}
+        onOpenChange={setInverseCodeOpen}
+        title="Segmented button – Inverse"
+        snippets={segmentedSnippets}
+      />
+      <CodeSnippetModal
+        open={defaultCodeOpen}
+        onOpenChange={setDefaultCodeOpen}
+        title="Segmented button – Default"
+        snippets={segmentedSnippets}
+      />
     </ShowcaseFlexRow>
   )
 }

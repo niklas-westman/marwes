@@ -3,6 +3,7 @@ import { useState } from "react"
 import { ThemeProvider as StyledThemeProvider } from "styled-components"
 
 import { Footer } from "./components/Footer"
+import { FrameworkPreferenceProvider } from "./components/FrameworkPreference"
 import { Header } from "./components/Header"
 import { MainContent, PageWrapper } from "./components/PageLayout"
 import { ComponentsShowcase } from "./sections/ComponentsShowcase"
@@ -27,7 +28,7 @@ function App(): JSX.Element {
   const shellThemeInput = createDashboardShellThemeInput(playgroundSettings)
 
   return (
-    <>
+    <FrameworkPreferenceProvider>
       <MarwesProvider theme={shellThemeInput}>
         {(mwTheme) => (
           <StyledThemeProvider theme={mwTheme}>
@@ -56,7 +57,7 @@ function App(): JSX.Element {
           </StyledThemeProvider>
         )}
       </MarwesProvider>
-    </>
+    </FrameworkPreferenceProvider>
   )
 }
 

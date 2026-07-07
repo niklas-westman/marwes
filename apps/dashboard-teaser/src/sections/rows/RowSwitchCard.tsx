@@ -14,8 +14,16 @@ import styled from "styled-components"
 // Atom is no longer publicly exported; deep-import for SingleRadioField's custom layout.
 import { Radio } from "../../../../../packages/react/src/components/radio/radio"
 
+import { CodeIconButton } from "../../components/CodeIconButton"
+import { CodeSnippetModal } from "../../components/CodeSnippetModal"
 import type { ComponentDisplayOptions } from "../playground-settings"
+import { badgeSnippets } from "./badge-snippets"
+import { cardSnippets } from "./card-snippets"
+import { checkboxSnippets } from "./checkbox-snippets"
+import { otpSnippets } from "./otp-snippets"
+import { radioSnippets } from "./radio-snippets"
 import { CardTitle, Card as ShowcaseCard } from "./shared"
+import { switchSnippets } from "./switch-snippets"
 
 const FirstSectionFlex = styled.div`
   --first-section-gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
@@ -125,6 +133,12 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
   const [radioValue, setRadioValue] = useState("1")
   const [radioGroupValue, setRadioGroupValue] = useState("1")
   const [otpValue, setOtpValue] = useState("")
+  const [switchCodeOpen, setSwitchCodeOpen] = useState(false)
+  const [checkboxCodeOpen, setCheckboxCodeOpen] = useState(false)
+  const [radioCodeOpen, setRadioCodeOpen] = useState(false)
+  const [cardCodeOpen, setCardCodeOpen] = useState(false)
+  const [otpCodeOpen, setOtpCodeOpen] = useState(false)
+  const [badgeCodeOpen, setBadgeCodeOpen] = useState(false)
 
   const toggleInlineCheck = (index: number): void => {
     setInlineChecks((prev) => prev.map((v, i) => (i === index ? !v : v)))
@@ -134,6 +148,10 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
     <FirstSectionFlex>
       <FirstSectionCard $basis="24rem" $height="15.125rem" $responsiveOrder={1}>
         {options.showLabels && <Text variant={TextVariant.overline}>Switch</Text>}
+        <CodeIconButton
+          ariaLabel="View Switch code example"
+          onClick={() => setSwitchCodeOpen(true)}
+        />
         <DemoArea>
           <SwitchField label="Label" switch={{ checked: switchA, onCheckedChange: setSwitchA }} />
           <SwitchField label="Label" switch={{ checked: switchB, onCheckedChange: setSwitchB }} />
@@ -141,6 +159,10 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       </FirstSectionCard>
       <CheckboxShowcaseCard $basis="15.625rem" $height="19.25rem" $responsiveOrder={2}>
         {options.showLabels && <Text variant={TextVariant.overline}>Checkbox</Text>}
+        <CodeIconButton
+          ariaLabel="View Checkbox code example"
+          onClick={() => setCheckboxCodeOpen(true)}
+        />
         <CardTitle>Size</CardTitle>
         <InlineCheckboxes>
           <CheckboxField
@@ -179,6 +201,10 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       </CheckboxShowcaseCard>
       <FirstSectionCard $basis="15.625rem" $height="19.25rem" $responsiveOrder={3}>
         {options.showLabels && <Text variant={TextVariant.overline}>Radio</Text>}
+        <CodeIconButton
+          ariaLabel="View Radio code example"
+          onClick={() => setRadioCodeOpen(true)}
+        />
         <SingleRadioField htmlFor="demo-radio-single-1">
           <Radio
             id="demo-radio-single-1"
@@ -206,6 +232,7 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       </FirstSectionCard>
       <FirstSectionCard $basis="23.75rem" $height="15.625rem" $responsiveOrder={4}>
         {options.showLabels && <Text variant={TextVariant.overline}>Card</Text>}
+        <CodeIconButton ariaLabel="View Card code example" onClick={() => setCardCodeOpen(true)} />
         <MwCard title="Card title">
           {options.showDescriptions
             ? "Card description text goes here. This provides more context about the card content."
@@ -214,6 +241,7 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       </FirstSectionCard>
       <OtpCard $basis="23.75rem" $height="11.5rem" $responsiveOrder={5}>
         {options.showLabels && <Text variant={TextVariant.overline}>One-Time Password</Text>}
+        <CodeIconButton ariaLabel="View OTP code example" onClick={() => setOtpCodeOpen(true)} />
         <InputOtpField
           label="Verification code"
           helperText={
@@ -228,6 +256,10 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       </OtpCard>
       <FirstSectionCard $basis="8.25rem" $height="11.5rem" $responsiveOrder={6}>
         {options.showLabels && <Text variant={TextVariant.overline}>Badge</Text>}
+        <CodeIconButton
+          ariaLabel="View Badge code example"
+          onClick={() => setBadgeCodeOpen(true)}
+        />
         <BadgeRow>
           <Badge>Badge</Badge>
           <Badge variant="info">Badge</Badge>
@@ -236,6 +268,42 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
           <Badge variant="error">Badge</Badge>
         </BadgeRow>
       </FirstSectionCard>
+      <CodeSnippetModal
+        open={switchCodeOpen}
+        onOpenChange={setSwitchCodeOpen}
+        title="Switch"
+        snippets={switchSnippets}
+      />
+      <CodeSnippetModal
+        open={checkboxCodeOpen}
+        onOpenChange={setCheckboxCodeOpen}
+        title="Checkbox"
+        snippets={checkboxSnippets}
+      />
+      <CodeSnippetModal
+        open={radioCodeOpen}
+        onOpenChange={setRadioCodeOpen}
+        title="Radio"
+        snippets={radioSnippets}
+      />
+      <CodeSnippetModal
+        open={cardCodeOpen}
+        onOpenChange={setCardCodeOpen}
+        title="Card"
+        snippets={cardSnippets}
+      />
+      <CodeSnippetModal
+        open={otpCodeOpen}
+        onOpenChange={setOtpCodeOpen}
+        title="One-Time Password"
+        snippets={otpSnippets}
+      />
+      <CodeSnippetModal
+        open={badgeCodeOpen}
+        onOpenChange={setBadgeCodeOpen}
+        title="Badge"
+        snippets={badgeSnippets}
+      />
     </FirstSectionFlex>
   )
 }

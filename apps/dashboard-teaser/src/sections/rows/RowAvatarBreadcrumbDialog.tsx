@@ -11,7 +11,11 @@ import {
 import { useState } from "react"
 import styled from "styled-components"
 
+import { CodeIconButton } from "../../components/CodeIconButton"
+import { CodeSnippetModal } from "../../components/CodeSnippetModal"
 import type { ComponentDisplayOptions } from "../playground-settings"
+import { cardSnippets } from "./card-snippets"
+import { dialogDrawerSnippets } from "./dialog-drawer-snippets"
 import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
 
 const LeftCard = styled(FlexAreaCard)`
@@ -33,12 +37,14 @@ type RowAvatarBreadcrumbDialogProps = {
 function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps): JSX.Element {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [cardCodeOpen, setCardCodeOpen] = useState(false)
+  const [dialogDrawerCodeOpen, setDialogDrawerCodeOpen] = useState(false)
 
   return (
     <ShowcaseFlexRow>
       <LeftCard $basis="36rem" $minHeight="12.625rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Card</Text>}
-
+        <CodeIconButton ariaLabel="View Card code example" onClick={() => setCardCodeOpen(true)} />
         <MwCard title="Card title">
           {options.showDescriptions
             ? "Card description text goes here. This provides more context about the card content."
@@ -47,7 +53,10 @@ function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps):
       </LeftCard>
       <RightCard $basis="18.125rem" $minHeight="12.625rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Dialog &amp; Drawer</Text>}
-
+        <CodeIconButton
+          ariaLabel="View Dialog & Drawer code example"
+          onClick={() => setDialogDrawerCodeOpen(true)}
+        />
         <ShowcaseStack>
           <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>
             Open dialog →
@@ -67,7 +76,6 @@ function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps):
             ? "This is a dialog component from the Marwes design system."
             : undefined
         }
-        portalTarget={null}
         footer={
           <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(false)}>
             Close
@@ -98,6 +106,19 @@ function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps):
           <p>Drawer content goes here. Use it for filters, detail panels, or secondary flows.</p>
         </Drawer>
       )}
+
+      <CodeSnippetModal
+        open={cardCodeOpen}
+        onOpenChange={setCardCodeOpen}
+        title="Card"
+        snippets={cardSnippets}
+      />
+      <CodeSnippetModal
+        open={dialogDrawerCodeOpen}
+        onOpenChange={setDialogDrawerCodeOpen}
+        title="Dialog & Drawer"
+        snippets={dialogDrawerSnippets}
+      />
     </ShowcaseFlexRow>
   )
 }

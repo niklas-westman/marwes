@@ -10,6 +10,7 @@ const Card = styled.div<{
   $desktopHeight?: string
 }>`
   ${cardShellStyles}
+  position: relative;
   box-sizing: border-box;
   padding: ${({ theme }) => theme.spacing.sp24};
   display: flex;

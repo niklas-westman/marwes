@@ -1,5 +1,6 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
+import { MarwesContext } from "../../provider/marwes-context"
 import { Dialog, type DialogProps } from "./dialog"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -88,6 +89,7 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
   const isControlled = open !== undefined
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen)
   const resolvedOpen = isControlled ? open : internalOpen
+  const marwesContext = React.useContext(MarwesContext)
   const overlayRef = React.useRef<HTMLDivElement>(null)
   const surfaceRef = React.useRef<HTMLDivElement>(null)
   const lastFocusedElementRef = React.useRef<HTMLElement | null>(null)
@@ -237,5 +239,6 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     return modalMarkup
   }
 
-  return createPortal(modalMarkup, portalTarget ?? document.body)
+  const resolvedTarget = portalTarget ?? marwesContext?.providerElement ?? document.body
+  return createPortal(modalMarkup, resolvedTarget)
 }
