@@ -2,6 +2,8 @@
 
 Private repo tooling for keeping Marwes aligned with Figma.
 
+Website: [marwes.io](https://marwes.io)
+
 Figma is the source of truth. This package owns the local sync and validation
 loop that proves the generated `.figma` artifacts, registry metadata, theme
 tokens, preset CSS, framework surfaces, and Reflection visual baselines still

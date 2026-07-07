@@ -2,6 +2,8 @@
 
 Vite-style starter wrapper for Marwes UI.
 
+Website: [marwes.io](https://marwes.io)
+
 ```bash
 pnpm create marwes@latest my-app --template react-ts
 pnpm create marwes@latest my-app --template vue-ts

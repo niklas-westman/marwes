@@ -13,7 +13,7 @@ Svelte 5 components for the Marwes design system with default styling, typed the
 
 Svelte 5 • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
-[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[Website](https://marwes.io) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -46,25 +46,51 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Install
 
-For an existing app, the recommended setup path is the Marwes CLI:
+The Marwes CLI sets up an existing Svelte app in one command. Every path below leaves you with the same result: components that render with default Marwes styling and no separate CSS setup.
+
+For deeper setup guides, visit [marwes.io](https://marwes.io).
+
+### Recommended: with the CLI
+
+1. Open a terminal at the root of your Svelte app.
+
+2. Run the installer:
+
+   ```bash
+   pnpm dlx @marwes-ui/cli init --adapter svelte
+   ```
+
+3. The CLI installs `@marwes-ui/svelte` (with `svelte` as a peer) and wraps your app root with `MarwesProvider`.
+
+4. Start using components — the default Marwes CSS is loaded for you. Jump to the [Quick Start](#quick-start) below.
+
+### With AI: agentic mode
+
+Use this when you want an AI coding agent (Claude Code, Cursor, etc.) to drive the setup. It runs the same install flow, then runs `doctor` and prints the setup boundaries the agent should follow:
 
 ```bash
-pnpm dlx @marwes-ui/cli init --adapter svelte
+pnpm dlx @marwes-ui/cli init --adapter svelte --agentic
 ```
 
-For a new Vite app:
+Also works with `npx`, `yarn dlx`, and `bunx`.
+
+### New Vite app
+
+If you don't have an app yet, scaffold one with Marwes preinstalled:
 
 ```bash
 pnpm create marwes@latest my-app --template svelte-ts
 ```
 
-Manual install:
+### Manual install
+
+Prefer to wire things up yourself:
 
 ```bash
 pnpm add @marwes-ui/svelte
 ```
 
-No preset CSS import is needed. `@marwes-ui/svelte` depends on `@marwes-ui/presets` and loads the default Marwes CSS automatically.
+Then wrap your app root in `MarwesProvider` — see the [Quick Start](#quick-start) below. No preset CSS import is needed; `@marwes-ui/svelte` loads the default Marwes CSS automatically.
 
 ## Quick Start
 

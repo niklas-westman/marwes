@@ -2,6 +2,8 @@
 
 Public installation tooling for Marwes UI.
 
+Website: [marwes.io](https://marwes.io)
+
 ## Existing Apps
 
 ```bash
