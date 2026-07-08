@@ -107,7 +107,7 @@ describe("playground settings", () => {
     })
   })
 
-  it("forwards user color, tone, and radius picks to the shell theme", () => {
+  it("ignores preset-affected fields on the shell theme so the picker only reshapes the showcase", () => {
     const shell = createDashboardShellThemeInput({
       ...defaultPlaygroundSettings,
       style: "cyber",
@@ -120,15 +120,11 @@ describe("playground settings", () => {
       },
     })
 
+    // Shell locks to Marwes identity regardless of preview picks.
     expect(shell).toMatchObject({
-      tone: "digital",
-      color: {
-        primary: "#123456",
-        danger: "#aa0000",
-        success: "#00aa00",
-        warning: "#ffaa00",
-      },
-      ui: { radius: 12 },
+      tone: "default",
+      color: { primary: "#2F31FC" },
+      ui: { radius: 4 },
     })
   })
 

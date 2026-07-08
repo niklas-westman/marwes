@@ -5,6 +5,14 @@ export type { ColorInput, ColorRole, SecondaryColorRole } from "./color-resolve"
 export { TextVariant } from "./text-variant"
 export type { ToneName } from "./tone"
 
+/**
+ * Personality is an optional visual identity axis. It adds signature visual
+ * effects (shadows, glow, outlines) on top of the token layer without
+ * changing colors or typography. Default is "flat" — no additional CSS is
+ * applied, so existing themes remain unchanged.
+ */
+export type PersonalityName = "flat" | "glow" | "print" | "soft" | "outlined"
+
 export type Density = "compact" | "comfortable" | "spacious"
 
 /**
@@ -206,6 +214,7 @@ export interface ThemeInputColor {
 export interface ThemeInput {
   mode?: ThemeMode
   tone?: ToneName
+  personality?: PersonalityName
   color?: Partial<ThemeInputColor>
   font?: Partial<Theme["font"]>
   ui?: Partial<Theme["ui"]>

@@ -43,7 +43,9 @@
   font-family: var(--mw-font-primary, inherit);
   font-size: 14px;
   line-height: 16px;
-  width: auto;
+  /* Fill wrapper so the absolutely-positioned chevron aligns with the
+     visible input edge when consumers size .mw-select__control. */
+  width: 100%;
   min-width: 0;
   max-width: 100%;
   max-inline-size: 100%;

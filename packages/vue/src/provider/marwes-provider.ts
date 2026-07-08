@@ -203,6 +203,7 @@ export const MarwesProvider = defineComponent({
           class: `mw-theme--${resolved.value.mode}`,
           "data-marwes-theme": "true",
           "data-marwes-mode": resolved.value.mode,
+          "data-marwes-personality": resolved.value.personality,
           style: variableStrategy.value === "inline" ? themeToRootStyle(resolved.value) : undefined,
         },
         slots.default?.({ mwTheme: mwTheme.value } satisfies MarwesProviderSlotProps),

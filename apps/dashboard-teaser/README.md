@@ -7,7 +7,11 @@ The canonical URL uses:
 
 - `VITE_PUBLIC_SITE_ORIGIN` when set.
 - `VITE_BASE_PATH` when set.
-- `https://d3hobet9plpuvm.cloudfront.net/dashboard-teaser/latest/` as the current fallback.
+- `https://marwes.io/` as the production default.
+
+`robots.txt` and `sitemap.xml` live in `public/` and ship at `marwes.io/robots.txt` and
+`marwes.io/sitemap.xml`. Update `sitemap.xml`'s `<lastmod>` on significant content
+changes.
 
 Validation:
 
@@ -16,6 +20,3 @@ pnpm --filter "./apps/dashboard-teaser" test
 pnpm --filter "./apps/dashboard-teaser" typecheck
 pnpm --filter "./apps/dashboard-teaser" build
 ```
-
-`robots.txt` and `sitemap.xml` are intentionally not app-owned yet. Add them only after
-the dashboard teaser deployment origin and site-root ownership are confirmed.

@@ -60,6 +60,7 @@ export type {
   ThemeVariableStrategy,
 } from "@marwes-ui/core"
 export type { ToneName } from "@marwes-ui/core"
+export type { PersonalityName } from "@marwes-ui/core"
 
 // ======= ATOMS =======
 

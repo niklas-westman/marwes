@@ -62,3 +62,6 @@
 @import "./molecules/switch-field.css";
 @import "./molecules/tab-group.css";
 @import "./molecules/toast-container.css";
+
+/* Personality signatures — opt-in visual identity, no-op unless selected. */
+@import "./personality.css";

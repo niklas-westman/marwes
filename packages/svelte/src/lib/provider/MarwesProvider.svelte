@@ -191,6 +191,7 @@
   class={`mw-theme--${resolved.mode}`}
   data-marwes-theme="true"
   data-marwes-mode={resolved.mode}
+  data-marwes-personality={resolved.personality}
   style={rootStyleString}
 >
   {@render children?.({ mwTheme })}

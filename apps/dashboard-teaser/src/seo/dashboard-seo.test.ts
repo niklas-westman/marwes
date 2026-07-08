@@ -16,9 +16,7 @@ describe("dashboardSeo", () => {
   })
 
   it("resolves canonical and asset URLs from the configured origin and base path", () => {
-    expect(resolveDashboardSeo().canonicalUrl).toBe(
-      "https://d3hobet9plpuvm.cloudfront.net/dashboard-teaser/latest/",
-    )
+    expect(resolveDashboardSeo().canonicalUrl).toBe("https://marwes.io/")
     expect(
       resolveDashboardSeo({
         basePath: "custom/base",

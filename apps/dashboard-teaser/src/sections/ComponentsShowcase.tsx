@@ -2,7 +2,9 @@ import styled from "styled-components"
 
 import { MarwesProvider, Text, TextVariant } from "@marwes-ui/react"
 import type { Dispatch, SetStateAction } from "react"
-import { dashboardRadius, dashboardRowStyles, responsiveShellPadding } from "../styles/theme-utils"
+
+import { ThemePicker } from "../components/ThemePicker"
+import { dashboardRowStyles, responsiveShellPadding } from "../styles/theme-utils"
 import { createDashboardThemeInput } from "./playground-settings"
 import type { PlaygroundColorVision, PlaygroundSettings } from "./playground-settings"
 import { RowAccordionInput } from "./rows/RowAccordionInput"
@@ -13,6 +15,12 @@ import { RowSegmented } from "./rows/RowSegmented"
 import { RowSpinner } from "./rows/RowSpinner"
 import { RowSwitchCard } from "./rows/RowSwitchCard"
 import { RowToastMenuAvatar } from "./rows/RowToastMenuAvatar"
+import {
+  type ThemePresetId,
+  applyThemePreset,
+  getActivePresetId,
+  themePresets,
+} from "./theme-presets"
 
 const ShowcaseContainer = styled.section`
   width: 100%;
@@ -27,6 +35,7 @@ const ShowcaseLayout = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
+  gap: ${({ theme }) => `clamp(${theme.spacing.sp24}, 3vw, ${theme.spacing.sp32})`};
 `
 
 const ContentGrid = styled.div`
@@ -34,14 +43,32 @@ const ContentGrid = styled.div`
   min-width: 0;
   container-type: inline-size;
   background: ${({ theme }) => theme.color.surface};
-  border-radius: ${({ theme }) => dashboardRadius(theme, 8)};
+  /* Fixed radius — dashboard chrome, not part of the previewed theme. */
+  border-radius: 2rem;
   padding: ${({ theme }) => `clamp(${theme.spacing.sp16}, 3vw, ${theme.spacing.sp32})`};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
 
   ${({ theme }) => theme.media.mobileAndBelow} {
-    border-radius: ${({ theme }) => dashboardRadius(theme, 3)};
+    border-radius: 1.5rem;
+  }
+`
+
+const ShowcaseHead = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.spacing.sp16};
+  flex-wrap: wrap;
+`
+
+const NowViewing = styled(Text).attrs({ variant: TextVariant.caption })`
+  color: ${({ theme }) => theme.color.textMuted};
+
+  strong {
+    color: ${({ theme }) => theme.color.text};
+    font-weight: 600;
   }
 `
 
@@ -54,6 +81,22 @@ const PreviewThemeScope = styled.div`
     flex-direction: column;
     gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
     background: transparent !important;
+  }
+
+  /* Morph tokens between preset switches. Outline is left untouched so the
+     focus ring stays instant. */
+  > [data-marwes-theme="true"],
+  > [data-marwes-theme="true"] * {
+    transition: background-color 240ms ease, border-color 240ms ease,
+      color 240ms ease, fill 240ms ease, stroke 240ms ease,
+      border-radius 240ms ease, box-shadow 240ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    > [data-marwes-theme="true"],
+    > [data-marwes-theme="true"] * {
+      transition: none;
+    }
   }
 
   /* Cap radius on components whose shape gets weird at large radii. The radius
@@ -128,17 +171,36 @@ function getColorVisionAttribute(
   return colorVision === "normal" ? undefined : colorVision
 }
 
-function ComponentsShowcase({ settings }: ComponentsShowcaseProps): JSX.Element {
+function ComponentsShowcase({ settings, onSettingsChange }: ComponentsShowcaseProps): JSX.Element {
   const { componentOptions } = settings
   const previewThemeInput = createDashboardThemeInput(settings)
   const colorVisionAttribute = getColorVisionAttribute(settings.accessibility.colorVision)
+  const activePresetId = getActivePresetId(settings) ?? "marwes"
+  const activePreset =
+    themePresets.find((preset) => preset.id === activePresetId) ?? themePresets[0]
+
+  const handleThemePresetChange = (nextId: ThemePresetId): void => {
+    const preset = themePresets.find((p) => p.id === nextId)
+    if (!preset) return
+    onSettingsChange((prev) => applyThemePreset(prev, preset))
+  }
 
   return (
     <ShowcaseContainer id="components" data-dashboard-section="components">
       <ColorVisionFilters />
       <ShowcaseLayout>
+        <ThemePicker
+          activePresetId={activePresetId}
+          currentMode={settings.mode}
+          onSelect={handleThemePresetChange}
+        />
         <ContentGrid>
-          <Text variant={TextVariant.overline}>Components</Text>
+          <ShowcaseHead>
+            <Text variant={TextVariant.overline}>Components</Text>
+            <NowViewing>
+              Now viewing <strong>{activePreset.name}</strong> — {activePreset.description}
+            </NowViewing>
+          </ShowcaseHead>
           <PreviewThemeScope data-dashboard-color-vision={colorVisionAttribute}>
             <MarwesProvider theme={previewThemeInput}>
               <Row>

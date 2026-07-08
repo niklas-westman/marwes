@@ -31,7 +31,7 @@ describe("firstEdition drawer css contract", () => {
     expect(css).toContain("--mw-drawer-surface: var(--mw-color-surface")
     expect(css).toContain("--mw-drawer-border: var(--mw-color-border-subtle")
     expect(css).toContain("--mw-drawer-title: var(--mw-color-text);")
-    expect(css).toContain("--mw-drawer-radius: calc(var(--mw-ui-radius")
+    expect(css).toContain("--mw-drawer-radius: min(calc(var(--mw-ui-radius")
     expect(css).toContain("font-family: var(--mw-font-primary, inherit);")
     expect(css).toContain("outline: 2px solid var(--mw-color-focus);")
   })

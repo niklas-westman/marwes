@@ -31,14 +31,19 @@ describe("dashboard teaser HTML SEO output", () => {
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute("href")).toBe(
       resolvedSeo.canonicalUrl,
     )
-    expect(document.querySelector('link[rel="icon"]')?.getAttribute("href")).toBe(
-      "https://d3hobet9plpuvm.cloudfront.net/dashboard-teaser/latest/assets/marwes-icon.svg",
+    expect(
+      document.querySelector('link[rel="icon"][type="image/svg+xml"]')?.getAttribute("href"),
+    ).toBe("https://marwes.io/favicon.svg")
+    expect(document.querySelector('link[rel="icon"][type="image/png"]')?.getAttribute("href")).toBe(
+      "https://marwes.io/favicon-32.png",
     )
+    expect(getMetaByName("theme-color")).toBe(dashboardSeo.themeColor)
   })
 
   it("renders Open Graph and Twitter preview metadata", () => {
     expect(getMetaByProperty("og:type")).toBe("website")
     expect(getMetaByProperty("og:site_name")).toBe(dashboardSeo.siteName)
+    expect(getMetaByProperty("og:locale")).toBe(dashboardSeo.locale)
     expect(getMetaByProperty("og:title")).toBe(dashboardSeo.socialTitle)
     expect(getMetaByProperty("og:description")).toBe(dashboardSeo.socialDescription)
     expect(getMetaByProperty("og:url")).toBe(resolvedSeo.canonicalUrl)

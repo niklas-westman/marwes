@@ -6,6 +6,7 @@ import { Input } from "../../../../packages/react/src/components/input/input"
 import { Textarea } from "../../../../packages/react/src/components/input/textarea"
 import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
 
+import { SegmentedControlScroll } from "../components/SegmentedControlScroll"
 import { cardShellStyles } from "../styles/theme-utils"
 import { frameworkItems } from "./framework-tabs"
 import {
@@ -85,15 +86,17 @@ function InstallationPanel(): JSX.Element {
     <PanelContainer>
       <InputSection>
         <PanelTitle>Installation</PanelTitle>
-        <SegmentedControl
-          items={frameworkItems}
-          value={activeTab}
-          onValueChange={setActiveTab}
-          variant="inverse"
-          size="md"
-          ariaLabel="Framework"
-          fullWidth
-        />
+        <SegmentedControlScroll>
+          <SegmentedControl
+            items={frameworkItems}
+            value={activeTab}
+            onValueChange={setActiveTab}
+            variant="inverse"
+            size="md"
+            ariaLabel="Framework"
+            fullWidth
+          />
+        </SegmentedControlScroll>
       </InputSection>
 
       <InputSection>

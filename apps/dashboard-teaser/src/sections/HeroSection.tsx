@@ -76,10 +76,14 @@ function HeroSection(): JSX.Element {
           <TopSection>
             <Badge variant="warning">Work in progress</Badge>
             <Text variant={TextVariant.display} headingLevel={1}>
-              Design with intention
+              One system, any brand.
             </Text>
           </TopSection>
-          <Paragraph>Designed and developed with care. Built by craft. Open to all.</Paragraph>
+          <Paragraph>
+            Marwes UI is a themeable component library for React, Vue, and Svelte that adopts your
+            brand. Every component is optimized for AI-assisted development and built with
+            accessibility from the start.
+          </Paragraph>
         </TextBox>
         <BadgeRow>
           <Badge>Framework-agnostic</Badge>

@@ -1,4 +1,10 @@
-import type { Density, ThemeInput, ThemeMode as ThemeModeValue, ToneName } from "@marwes-ui/react"
+import type {
+  Density,
+  PersonalityName,
+  ThemeInput,
+  ThemeMode as ThemeModeValue,
+  ToneName,
+} from "@marwes-ui/react"
 import { ThemeMode } from "@marwes-ui/react"
 
 type PlaygroundStyle = "marwes" | "cyber" | "mono"
@@ -27,6 +33,16 @@ type PlaygroundColorSettings = {
   warning: string
 }
 
+/**
+ * Preset-supplied `Partial<ThemeInputColor>` overlays, one per mode. Kept
+ * as a pair so the header light/dark toggle can swap the active variant
+ * without losing the preset selection.
+ */
+type PlaygroundColorOverridesByMode = {
+  light?: NonNullable<ThemeInput["color"]>
+  dark?: NonNullable<ThemeInput["color"]>
+}
+
 type PlaygroundSettings = {
   mode: ThemeModeValue
   style: PlaygroundStyle
@@ -34,8 +50,10 @@ type PlaygroundSettings = {
   colors: PlaygroundColorSettings
   radius: number
   density: Density
+  personality?: PersonalityName
   accessibility: PlaygroundAccessibilitySettings
   componentOptions: ComponentDisplayOptions
+  colorOverrides?: PlaygroundColorOverridesByMode
 }
 
 const defaultPlaygroundSettings: PlaygroundSettings = {
@@ -128,18 +146,21 @@ function applyPlaygroundStyle(
 }
 
 function createDashboardThemeInput(settings: PlaygroundSettings): ThemeInput {
-  const colorOverrides = createAccessibilityColorOverrides(settings)
+  const a11yOverrides = createAccessibilityColorOverrides(settings)
+  const presetOverrides = settings.colorOverrides?.[settings.mode] ?? {}
   const primaryFont = resolvePrimaryFont(settings)
 
   return {
     mode: settings.mode,
     tone: styleToneMap[settings.style],
+    personality: settings.personality ?? "flat",
     color: {
       primary: settings.colors.primary,
       danger: settings.colors.danger,
       success: settings.colors.success,
       warning: settings.colors.warning,
-      ...colorOverrides,
+      ...presetOverrides,
+      ...a11yOverrides,
     },
     ui: {
       radius: settings.radius,
@@ -149,21 +170,26 @@ function createDashboardThemeInput(settings: PlaygroundSettings): ThemeInput {
   }
 }
 
+/**
+ * The dashboard shell (header, hero, footer) is fixed to the Marwes identity
+ * regardless of which preview preset the user has selected. It only picks up
+ * two things from settings: the current mode (so the header light/dark
+ * toggle still works) and the a11y overrides (high contrast, dyslexic font).
+ * All other preset-affected fields — style/primary/radius/font — are
+ * intentionally ignored here so the picker only reshapes the showcase.
+ */
 function createDashboardShellThemeInput(settings: PlaygroundSettings): ThemeInput {
   const colorOverrides = createAccessibilityColorOverrides(settings)
   const primaryFont = settings.accessibility.dyslexicFont ? dyslexicFontStack : undefined
 
   return {
     mode: settings.mode,
-    tone: styleToneMap[settings.style],
+    tone: "default",
     color: {
-      primary: settings.colors.primary,
-      danger: settings.colors.danger,
-      success: settings.colors.success,
-      warning: settings.colors.warning,
+      primary: "#2F31FC",
       ...colorOverrides,
     },
-    ui: { radius: settings.radius },
+    ui: { radius: 4 },
     ...(primaryFont ? { font: { primary: primaryFont } } : {}),
   }
 }
@@ -178,6 +204,7 @@ export {
 }
 export type {
   PlaygroundAccessibilitySettings,
+  PlaygroundColorOverridesByMode,
   PlaygroundColorVision,
   ComponentDisplayOptions,
   PlaygroundColorSettings,

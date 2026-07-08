@@ -13,6 +13,7 @@ export type {
   TextTransform,
   TypographyStyle,
   TextTypographyStyle,
+  PersonalityName,
 } from "./theme/theme-types"
 export { ThemeMode } from "./theme/theme-types"
 export { TextVariant } from "./theme/text-variant"

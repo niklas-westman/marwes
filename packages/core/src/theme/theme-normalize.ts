@@ -96,6 +96,7 @@ const darkDefaultColorRoles = {
  */
 export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
   const mode = input.mode ?? ThemeMode.light
+  const personality = input.personality ?? "flat"
   const colorBase = mode === ThemeMode.dark ? darkThemeDefaults.color : lightThemeDefaults.color
   const defaultColorRoles = mode === ThemeMode.dark ? darkDefaultColorRoles : lightDefaultColorRoles
   const base = lightThemeDefaults
@@ -117,6 +118,7 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
 
   return {
     mode,
+    personality,
     color: {
       primary,
       secondary,

@@ -4,6 +4,7 @@ import type { TextVariant } from "./text-variant"
 import { type StatusColorTokens, ThemeMode } from "./theme-types"
 import type {
   Density,
+  PersonalityName,
   TextTypographyStyle,
   ThemeBreakpoints,
   ThemeMode as ThemeModeValue,
@@ -16,6 +17,7 @@ import type {
 
 export interface ResolvedTheme {
   mode: ThemeModeValue
+  personality: PersonalityName
   color: {
     primary: ColorRole
     secondary: SecondaryColorRole

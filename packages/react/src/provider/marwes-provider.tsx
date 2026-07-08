@@ -196,6 +196,7 @@ export function MarwesProvider({
         className={`mw-theme--${resolved.mode}`}
         data-marwes-theme="true"
         data-marwes-mode={resolved.mode}
+        data-marwes-personality={resolved.personality}
         style={rootStyle}
       >
         {renderedChildren}

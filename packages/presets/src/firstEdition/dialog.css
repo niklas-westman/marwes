@@ -9,7 +9,7 @@
     var(--mw-color-text, #141414) 65%,
     var(--mw-color-background, #ffffff)
   );
-  --mw-dialog-radius: calc(var(--mw-ui-radius, 4px) * 3);
+  --mw-dialog-radius: min(calc(var(--mw-ui-radius, 4px) * 3), 24px);
   --mw-dialog-close-radius: calc(var(--mw-ui-radius, 4px) * 2);
   --mw-dialog-width: 560px;
 

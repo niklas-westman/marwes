@@ -23,10 +23,12 @@ type DashboardSeoContract = {
   description: string
   image: DashboardSeoImage
   links: readonly DashboardSeoLink[]
+  locale: string
   robots: string
   siteName: string
   socialDescription: string
   socialTitle: string
+  themeColor: string
   title: string
 }
 
@@ -42,7 +44,7 @@ type JsonLdObject = {
 type JsonLdValue = JsonLdObject | JsonLdValue[] | boolean | number | string
 
 const dashboardSeo = {
-  basePath: "/dashboard-teaser/latest/",
+  basePath: "/",
   capabilities: [
     "Framework-agnostic core with React, Vue, and Svelte adapters",
     "AI-friendly semantic component contracts",
@@ -51,9 +53,9 @@ const dashboardSeo = {
     "Theme variables for plain CSS, CSS Modules, CSS-in-JS, and Tailwind-style config",
     "Accessibility-first primitives",
   ],
-  defaultProductionOrigin: "https://d3hobet9plpuvm.cloudfront.net",
+  defaultProductionOrigin: "https://marwes.io",
   description:
-    "Build AI-friendly frontend components with Marwes UI: framework-agnostic React, Vue, and Svelte adapters, static CSS, and adjustable typed themes.",
+    "Marwes UI is a themeable component library for React, Vue, and Svelte. Set your theme once and it adopts your brand. Optimized for AI-assisted development.",
   image: {
     alt: "Marwes UI dashboard teaser showing component previews and installation controls",
     height: 1080,
@@ -65,12 +67,14 @@ const dashboardSeo = {
     { href: "https://github.com/niklas-westman/marwes/tree/main/docs", label: "Documentation" },
     { href: "https://github.com/niklas-westman/marwes", label: "GitHub" },
   ],
+  locale: "en_US",
   robots: "index,follow,max-image-preview:large",
   siteName: "Marwes UI",
   socialDescription:
     "Framework-agnostic UI components with AI-readable contracts, static CSS, and typed theme variables for plain CSS, CSS Modules, and CSS-in-JS.",
-  socialTitle: "Marwes UI | AI-friendly frontend components",
-  title: "Marwes UI | AI-friendly framework-agnostic components",
+  socialTitle: "Marwes UI — One system, any brand.",
+  themeColor: "#2F31FC",
+  title: "Marwes UI — One system, any brand.",
 } as const satisfies DashboardSeoContract
 
 function normalizeOrigin(siteOrigin: string | undefined): string {
@@ -177,16 +181,20 @@ function renderDashboardSeoHead(seo: ResolvedDashboardSeo): string {
   const escapedCanonicalUrl = escapeHtml(seo.canonicalUrl)
   const escapedImageUrl = escapeHtml(seo.imageUrl)
   const escapedImageAlt = escapeHtml(seo.image.alt)
-  const escapedIconUrl = escapeHtml(new URL("assets/marwes-icon.svg", seo.canonicalUrl).toString())
+  const escapedSvgIconUrl = escapeHtml(new URL("favicon.svg", seo.canonicalUrl).toString())
+  const escapedPngIconUrl = escapeHtml(new URL("favicon-32.png", seo.canonicalUrl).toString())
 
   return [
-    `<link rel="icon" type="image/svg+xml" href="${escapedIconUrl}" />`,
+    `<link rel="icon" type="image/svg+xml" href="${escapedSvgIconUrl}" />`,
+    `<link rel="icon" type="image/png" sizes="32x32" href="${escapedPngIconUrl}" />`,
     `<title>${escapedTitle}</title>`,
     `<meta name="description" content="${escapedDescription}" />`,
     `<meta name="robots" content="${escapeHtml(seo.robots)}" />`,
+    `<meta name="theme-color" content="${escapeHtml(seo.themeColor)}" />`,
     `<link rel="canonical" href="${escapedCanonicalUrl}" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="${escapedSiteName}" />`,
+    `<meta property="og:locale" content="${escapeHtml(seo.locale)}" />`,
     `<meta property="og:title" content="${escapedSocialTitle}" />`,
     `<meta property="og:description" content="${escapedSocialDescription}" />`,
     `<meta property="og:url" content="${escapedCanonicalUrl}" />`,

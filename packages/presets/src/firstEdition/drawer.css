@@ -9,7 +9,7 @@
   --mw-drawer-title: var(--mw-color-text);
   --mw-drawer-text: color-mix(in srgb, var(--mw-color-text) 68%, var(--mw-color-background));
   --mw-drawer-muted: var(--mw-color-text-muted, var(--mw-drawer-text));
-  --mw-drawer-radius: calc(var(--mw-ui-radius, 4px) * 3);
+  --mw-drawer-radius: min(calc(var(--mw-ui-radius, 4px) * 3), 24px);
   --mw-drawer-shadow: 0 24px 60px color-mix(in srgb, var(--mw-color-text) 18%, transparent);
   --mw-drawer-scrim: color-mix(in srgb, var(--mw-color-text) 42%, transparent);
   --mw-drawer-motion-duration: 180ms;

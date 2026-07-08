@@ -4,7 +4,7 @@ import { defineConfig } from "vite"
 
 import { renderDashboardSeoHead, resolveDashboardSeo } from "./src/seo/dashboard-seo"
 
-const dashboardBasePath = process.env.VITE_BASE_PATH ?? "/dashboard-teaser/latest/"
+const dashboardBasePath = process.env.VITE_BASE_PATH ?? "/"
 const dashboardSeo = resolveDashboardSeo({
   basePath: dashboardBasePath,
   siteOrigin: process.env.VITE_PUBLIC_SITE_ORIGIN,
