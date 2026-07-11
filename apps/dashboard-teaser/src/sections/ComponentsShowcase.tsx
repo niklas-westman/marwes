@@ -8,12 +8,7 @@ import { ThemePicker } from "../components/ThemePicker"
 import { dashboardRowStyles, responsiveShellPadding } from "../theme/theme-utils"
 import type { PlaygroundColorVision, PlaygroundSettings } from "./playground-settings"
 import { rowsManifest } from "./rows/rows-manifest"
-import {
-  type ThemePresetId,
-  applyThemePreset,
-  getActivePresetId,
-  themePresets,
-} from "./theme-presets"
+import { type ThemePresetId, getActivePresetId, themePresets } from "./theme-presets"
 
 const ShowcaseContainer = styled.section`
   width: 100%;
@@ -110,6 +105,9 @@ const Row = styled.div`
 type ComponentsShowcaseProps = {
   settings: PlaygroundSettings
   onSettingsChange: Dispatch<SetStateAction<PlaygroundSettings>>
+  customBuilderOpen: boolean
+  onCustomBuilderOpenChange: (open: boolean) => void
+  onThemePresetSelect: (id: ThemePresetId) => void
 }
 
 function ColorVisionFilters(): JSX.Element {
@@ -151,18 +149,18 @@ function getColorVisionAttribute(
   return colorVision === "normal" ? undefined : colorVision
 }
 
-function ComponentsShowcase({ settings, onSettingsChange }: ComponentsShowcaseProps): JSX.Element {
+function ComponentsShowcase({
+  settings,
+  onSettingsChange,
+  customBuilderOpen,
+  onCustomBuilderOpenChange,
+  onThemePresetSelect,
+}: ComponentsShowcaseProps): JSX.Element {
   const { componentOptions } = settings
   const colorVisionAttribute = getColorVisionAttribute(settings.accessibility.colorVision)
   const activePresetId = getActivePresetId(settings) ?? "marwes"
   const activePreset =
     themePresets.find((preset) => preset.id === activePresetId) ?? themePresets[0]
-
-  const handleThemePresetChange = (nextId: ThemePresetId): void => {
-    const preset = themePresets.find((p) => p.id === nextId)
-    if (!preset) return
-    onSettingsChange((prev) => applyThemePreset(prev, preset))
-  }
 
   return (
     <ShowcaseContainer id="components" data-dashboard-section="components">
@@ -173,7 +171,9 @@ function ComponentsShowcase({ settings, onSettingsChange }: ComponentsShowcasePr
           currentMode={settings.mode}
           settings={settings}
           onSettingsChange={onSettingsChange}
-          onSelect={handleThemePresetChange}
+          customBuilderOpen={customBuilderOpen}
+          onCustomBuilderOpenChange={onCustomBuilderOpenChange}
+          onSelect={onThemePresetSelect}
         />
         <AccessibilityPanel settings={settings} onSettingsChange={onSettingsChange} />
 

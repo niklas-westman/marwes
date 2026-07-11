@@ -224,6 +224,10 @@ function applyThemePreset(settings: PlaygroundSettings, preset: ThemePreset): Pl
   }
 }
 
+function markCustom(settings: PlaygroundSettings): PlaygroundSettings {
+  return { ...settings, selectedPresetId: "custom" }
+}
+
 function resolveColorOverridesForMode(
   overrides: ThemePresetColorOverridesByMode | undefined,
   mode: ThemeModeValue,
@@ -279,6 +283,7 @@ export {
   applyThemePreset,
   equalColorOverridesByMode,
   getActivePresetId,
+  markCustom,
   resolveColorOverridesForMode,
   themePresets,
 }

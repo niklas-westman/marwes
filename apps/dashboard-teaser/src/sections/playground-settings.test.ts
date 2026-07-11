@@ -2,11 +2,8 @@ import { ThemeMode } from "@marwes-ui/react"
 import { describe, expect, it } from "vitest"
 
 import { dyslexicFontStack } from "./playground-fonts"
-import {
-  applyPlaygroundStyle,
-  createDashboardThemeInput,
-  defaultPlaygroundSettings,
-} from "./playground-settings"
+import { defaultPlaygroundSettings } from "./playground-settings"
+import { createDashboardThemeInput } from "./playground-theme-resolver"
 
 describe("playground settings", () => {
   it("defines accessibility defaults", () => {
@@ -46,29 +43,6 @@ describe("playground settings", () => {
         radius: 12,
         density: "compact",
       },
-    })
-  })
-
-  it("applies style presets without changing component options", () => {
-    const cyber = applyPlaygroundStyle(defaultPlaygroundSettings, "cyber")
-    const mono = applyPlaygroundStyle(defaultPlaygroundSettings, "mono")
-
-    expect(cyber).toMatchObject({
-      style: "cyber",
-      font: "Fira Code",
-      radius: 0,
-      componentOptions: defaultPlaygroundSettings.componentOptions,
-    })
-    expect(createDashboardThemeInput(cyber)).toMatchObject({
-      tone: "digital",
-      font: { primary: expect.stringContaining("Fira Code") },
-    })
-
-    expect(mono).toMatchObject({
-      style: "mono",
-      font: "Fira Code",
-      radius: 4,
-      componentOptions: defaultPlaygroundSettings.componentOptions,
     })
   })
 

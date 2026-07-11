@@ -5,28 +5,44 @@ import { Footer } from "./components/Footer"
 import { FrameworkPreferenceProvider } from "./components/FrameworkPreference"
 import { Header } from "./components/Header"
 import { MainContent, PageWrapper } from "./components/PageLayout"
+import { Reveal } from "./components/Reveal"
 import { usePlaygroundSettings } from "./hooks/use-playground-settings"
 import { ComponentsShowcase } from "./sections/ComponentsShowcase"
 import { HandoffCta } from "./sections/HandoffCta"
 import { HeroSection } from "./sections/HeroSection"
-import { createDashboardThemeInput } from "./sections/playground-settings"
+import { resolveDashboardTheme } from "./sections/playground-theme-resolver"
 import { GlobalStyle } from "./theme/global-style"
 
 function App(): JSX.Element {
-  const { settings, setSettings, activePreset, toggleTheme, openCustomBuilder } =
-    usePlaygroundSettings()
+  const {
+    settings,
+    setSettings,
+    activePreset,
+    customBuilderOpen,
+    toggleTheme,
+    selectThemePreset,
+    setCustomBuilderOpen,
+    openCustomBuilder,
+  } = usePlaygroundSettings()
 
   const isDark = settings.mode === ThemeMode.dark
-  const shellThemeInput = createDashboardThemeInput(settings)
+  const resolvedTheme = resolveDashboardTheme(settings, settings.mode, activePreset.personality)
 
   return (
     <FrameworkPreferenceProvider>
-      <MarwesProvider theme={shellThemeInput} fontLoading={{ googleFamilies: [settings.font] }}>
+      <MarwesProvider
+        theme={resolvedTheme.themeInput}
+        fontLoading={{
+          googleFamilies:
+            resolvedTheme.font.source === "google-fonts" ? [resolvedTheme.font.family] : [],
+        }}
+      >
         {(mwTheme) => (
           <StyledThemeProvider theme={mwTheme}>
             <>
               <GlobalStyle />
               <PageWrapper
+                data-dashboard-page="true"
                 data-dashboard-reduce-motion={
                   settings.accessibility.reduceMotion ? "true" : undefined
                 }
@@ -37,13 +53,25 @@ function App(): JSX.Element {
                 <SkipLink href="#main">Skip to main content</SkipLink>
                 <Header isDark={isDark} onToggleTheme={toggleTheme} />
                 <MainContent id="main">
-                  <HeroSection />
-                  <ComponentsShowcase settings={settings} onSettingsChange={setSettings} />
-                  <HandoffCta
-                    settings={settings}
-                    preset={activePreset}
-                    onOpenCustomBuilder={openCustomBuilder}
-                  />
+                  <Reveal>
+                    <HeroSection />
+                  </Reveal>
+                  <Reveal>
+                    <ComponentsShowcase
+                      settings={settings}
+                      onSettingsChange={setSettings}
+                      customBuilderOpen={customBuilderOpen}
+                      onCustomBuilderOpenChange={setCustomBuilderOpen}
+                      onThemePresetSelect={selectThemePreset}
+                    />
+                  </Reveal>
+                  <Reveal>
+                    <HandoffCta
+                      settings={settings}
+                      preset={activePreset}
+                      onOpenCustomBuilder={openCustomBuilder}
+                    />
+                  </Reveal>
                 </MainContent>
                 <Footer />
               </PageWrapper>

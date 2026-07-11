@@ -7,9 +7,6 @@ import type {
 } from "@marwes-ui/react"
 import { ThemeMode } from "@marwes-ui/react"
 
-import { createAccessibilityColorOverrides } from "./playground-a11y"
-import { dyslexicFontStack, resolveFontStack } from "./playground-fonts"
-
 type PlaygroundStyle = "marwes" | "cyber" | "mono"
 /**
  * A plain Google Fonts family name (e.g. "Instrument Sans", "Rubik").
@@ -104,53 +101,7 @@ const styleToneMap: Record<PlaygroundStyle, ToneName> = {
   mono: "default",
 }
 
-function resolvePrimaryFont(settings: PlaygroundSettings): string | undefined {
-  if (settings.accessibility.dyslexicFont) return dyslexicFontStack
-  if (!settings.font) return undefined
-  return resolveFontStack(settings.font)
-}
-
-function applyPlaygroundStyle(
-  settings: PlaygroundSettings,
-  style: PlaygroundStyle,
-): PlaygroundSettings {
-  if (style === "cyber") {
-    return { ...settings, style, font: "Fira Code", radius: 0 }
-  }
-
-  if (style === "mono") {
-    return { ...settings, style, font: "Fira Code", radius: 4 }
-  }
-
-  return { ...settings, style, font: "Instrument Sans", radius: 4 }
-}
-
-function createDashboardThemeInput(settings: PlaygroundSettings): ThemeInput {
-  const a11yOverrides = createAccessibilityColorOverrides(settings)
-  const presetOverrides = settings.colorOverrides?.[settings.mode] ?? {}
-  const primaryFont = resolvePrimaryFont(settings)
-
-  return {
-    mode: settings.mode,
-    tone: styleToneMap[settings.style],
-    personality: settings.personality ?? "flat",
-    color: {
-      primary: settings.colors.primary,
-      danger: settings.colors.danger,
-      success: settings.colors.success,
-      warning: settings.colors.warning,
-      ...presetOverrides,
-      ...a11yOverrides,
-    },
-    ui: {
-      radius: settings.radius,
-      density: settings.density,
-    },
-    ...(primaryFont ? { font: { primary: primaryFont } } : {}),
-  }
-}
-
-export { applyPlaygroundStyle, createDashboardThemeInput, defaultPlaygroundSettings, styleToneMap }
+export { defaultPlaygroundSettings, styleToneMap }
 export type {
   ComponentDisplayOptions,
   PlaygroundAccessibilitySettings,

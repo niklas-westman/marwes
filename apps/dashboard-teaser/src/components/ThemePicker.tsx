@@ -1,6 +1,5 @@
 import { Text, TextVariant, type ThemeMode as ThemeModeValue } from "@marwes-ui/react"
-import type { Dispatch, SetStateAction } from "react"
-import { useRef, useState } from "react"
+import { type Dispatch, type SetStateAction, Suspense, lazy } from "react"
 import styled from "styled-components"
 
 import type { PlaygroundSettings } from "../sections/playground-settings"
@@ -11,7 +10,10 @@ import {
   resolveSwatchColors,
 } from "../utils/swatch-colors"
 import { PresetCard } from "./PresetCard"
-import { ThemeBuilderDrawer, markCustom } from "./ThemeBuilderDrawer"
+
+const ThemeBuilderDrawer = lazy(() =>
+  import("./ThemeBuilderDrawer").then((m) => ({ default: m.ThemeBuilderDrawer })),
+)
 
 const ThemePickerRow = styled.div`
   display: flex;
@@ -22,7 +24,7 @@ const ThemePickerRow = styled.div`
 const ThemePickerGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
+  gap: ${({ theme }) => theme.spacing.sp12};
 
   ${({ theme }) => theme.media.desktopAndBelow} {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -38,31 +40,9 @@ type ThemePickerProps = {
   currentMode: ThemeModeValue
   settings: PlaygroundSettings
   onSettingsChange: Dispatch<SetStateAction<PlaygroundSettings>>
+  customBuilderOpen: boolean
+  onCustomBuilderOpenChange: (open: boolean) => void
   onSelect: (id: ThemePresetId) => void
-}
-
-/**
- * The subset of `PlaygroundSettings` that defines the *custom preset's
- * identity* — colors, radius, font, etc. `mode`, `accessibility`, and
- * `componentOptions` are intentionally excluded: those are global UI
- * togglers that must survive a round-trip through another preset, otherwise
- * re-entering custom would clobber the header light/dark choice.
- */
-type CustomPresetSnapshot = Pick<
-  PlaygroundSettings,
-  "style" | "font" | "radius" | "density" | "personality" | "colors" | "colorOverrides"
->
-
-function captureCustomPresetSnapshot(settings: PlaygroundSettings): CustomPresetSnapshot {
-  return {
-    style: settings.style,
-    font: settings.font,
-    radius: settings.radius,
-    density: settings.density,
-    personality: settings.personality,
-    colors: settings.colors,
-    colorOverrides: settings.colorOverrides,
-  }
 }
 
 function ThemePicker({
@@ -70,39 +50,26 @@ function ThemePicker({
   currentMode,
   settings,
   onSettingsChange,
+  customBuilderOpen,
+  onCustomBuilderOpenChange,
   onSelect,
 }: ThemePickerProps): JSX.Element {
-  const [customDrawerOpen, setCustomDrawerOpen] = useState(false)
-  const customSnapshotRef = useRef<CustomPresetSnapshot | null>(null)
   const customPreset = themePresets.find((preset) => preset.id === "custom")
 
   const handlePresetSelect = (id: ThemePresetId): void => {
-    if (activePresetId === "custom" && id !== "custom") {
-      customSnapshotRef.current = captureCustomPresetSnapshot(settings)
-    }
-
-    if (id === "custom" && customSnapshotRef.current) {
-      const snapshot = customSnapshotRef.current
-      onSettingsChange((current) => markCustom({ ...current, ...snapshot }))
-      setCustomDrawerOpen(true)
-      return
-    }
-
     onSelect(id)
-    setCustomDrawerOpen(id === "custom")
   }
 
   const resetCustom = (): void => {
     if (!customPreset) return
     onSettingsChange((current) => {
       const resetSettings = applyThemePreset(current, customPreset)
-      customSnapshotRef.current = captureCustomPresetSnapshot(resetSettings)
       return resetSettings
     })
   }
 
   return (
-    <ThemePickerRow data-dashboard-section="theme-picker">
+    <ThemePickerRow id="theme-picker" data-dashboard-section="theme-picker">
       <Text variant={TextVariant.overline}>Choose a theme</Text>
       <ThemePickerGrid role="radiogroup" aria-label="Choose a theme">
         {themePresets.map((preset) => {
@@ -124,20 +91,26 @@ function ThemePicker({
               isActive={isActive}
               swatchColors={swatchColors}
               onSelect={() => handlePresetSelect(preset.id)}
-              onCardClick={preset.id === "custom" ? () => setCustomDrawerOpen(true) : undefined}
+              onCardClick={
+                preset.id === "custom" && isActive
+                  ? () => onCustomBuilderOpenChange(true)
+                  : undefined
+              }
             />
           )
         })}
       </ThemePickerGrid>
 
-      {customDrawerOpen && (
-        <ThemeBuilderDrawer
-          settings={settings}
-          onSettingsChange={onSettingsChange}
-          customPreset={customPreset}
-          onClose={() => setCustomDrawerOpen(false)}
-          onReset={resetCustom}
-        />
+      {customBuilderOpen && (
+        <Suspense fallback={null}>
+          <ThemeBuilderDrawer
+            settings={settings}
+            onSettingsChange={onSettingsChange}
+            customPreset={customPreset}
+            onClose={() => onCustomBuilderOpenChange(false)}
+            onReset={resetCustom}
+          />
+        </Suspense>
       )}
     </ThemePickerRow>
   )

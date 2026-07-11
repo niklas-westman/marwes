@@ -1,11 +1,11 @@
 import type { ThemeMode as ThemeModeValue } from "@marwes-ui/react"
 import { ThemeMode } from "@marwes-ui/react"
 
-import { baselineColorsByMode, marwesTypography } from "./design-md-data"
+import { marwesTypography } from "./design-md-data"
 import type { TypographyMetric } from "./design-md-data"
-import { resolveFontStack } from "./playground-fonts"
 import type { PlaygroundSettings } from "./playground-settings"
-import { styleToneMap } from "./playground-settings"
+import { resolveDashboardTheme } from "./playground-theme-resolver"
+import type { ResolvedDashboardTheme } from "./playground-theme-resolver"
 import type { ThemePreset } from "./theme-presets"
 
 function yamlString(value: string): string {
@@ -161,24 +161,24 @@ function renderComponents(): string[] {
  */
 function renderMarwesExtension({
   settings,
-  preset,
+  resolvedTheme,
 }: {
   settings: PlaygroundSettings
-  preset: ThemePreset
+  resolvedTheme: ResolvedDashboardTheme
 }): string[] {
-  const tone = styleToneMap[settings.style]
-  const personality = settings.personality ?? preset.personality
   const defaultMode = settings.mode === ThemeMode.dark ? "dark" : "light"
-  const fontStack = resolveFontStack(settings.font)
   const usedWeights = Array.from(
     new Set(Object.values(marwesTypography).map((t) => t.fontWeight)),
   ).sort((a, b) => a - b)
-  const fontFallback = fontStack.replace(new RegExp(`^${escapeRegExp(settings.font)},\\s*`), "")
+  const fontFallback = resolvedTheme.font.primary.replace(
+    new RegExp(`^${escapeRegExp(resolvedTheme.font.family)},\\s*`),
+    "",
+  )
 
   return [
     "x-marwes:",
-    `  tone: ${tone}`,
-    `  personality: ${personality}`,
+    `  tone: ${resolvedTheme.tone}`,
+    `  personality: ${resolvedTheme.personality}`,
     `  density: ${settings.density}`,
     `  defaultMode: ${defaultMode}`,
     "  framework: react",
@@ -188,8 +188,8 @@ function renderMarwesExtension({
     "    algorithm: wcag-contrast",
     "    exportedForegroundTokensAreResolved: true",
     "  font:",
-    `    family: ${yamlString(settings.font)}`,
-    "    source: google-fonts",
+    `    family: ${yamlString(resolvedTheme.font.family)}`,
+    `    source: ${resolvedTheme.font.source}`,
     `    weights: [${usedWeights.join(", ")}]`,
     `    fallback: ${yamlString(fontFallback)}`,
     "    loadingRequired: true",
@@ -198,6 +198,12 @@ function renderMarwesExtension({
     "    width: 2px",
     "    style: solid",
     "    offset: 2px",
+    "  activeAccessibility:",
+    `    highContrast: ${settings.accessibility.highContrast}`,
+    `    reducedMotion: ${settings.accessibility.reduceMotion}`,
+    `    increasedSpacing: ${settings.accessibility.looseSpacing}`,
+    `    dyslexicFont: ${settings.accessibility.dyslexicFont}`,
+    `    colorVision: ${settings.accessibility.colorVision}`,
     "  recommendedAccessibilityDefaults:",
     "    reducedMotion: system",
     "    contrast: system",
@@ -226,28 +232,14 @@ function buildThemeInputSnapshot(
   preset: ThemePreset,
   mode: ThemeModeValue,
 ): ThemeInputSnapshot {
-  const baseline = baselineColorsByMode[mode]
-  const presetOverrides = (preset.colorOverrides?.[mode] ?? {}) as Record<string, string>
+  const resolvedTheme = resolveDashboardTheme(settings, mode, preset.personality)
   return {
     mode,
-    tone: styleToneMap[settings.style],
-    personality: settings.personality ?? preset.personality,
-    color: {
-      background: baseline.background,
-      surface: baseline.surface,
-      surfaceElevated: baseline.surfaceElevated,
-      text: baseline.text,
-      textMuted: baseline.textMuted,
-      border: baseline.border,
-      borderStrong: baseline.borderStrong,
-      primary: settings.colors.primary,
-      danger: settings.colors.danger,
-      success: settings.colors.success,
-      warning: settings.colors.warning,
-      ...presetOverrides,
-    },
-    ui: { radius: settings.radius, density: settings.density },
-    font: { primary: resolveFontStack(settings.font) },
+    tone: resolvedTheme.tone,
+    personality: resolvedTheme.personality,
+    color: resolvedTheme.color,
+    ui: resolvedTheme.ui,
+    font: { primary: resolvedTheme.font.primary },
   }
 }
 
@@ -309,9 +301,10 @@ type ProseContext = {
   settings: PlaygroundSettings
   preset: ThemePreset
   fontFamily: string
+  primaryColor: string
 }
 
-function renderProse({ settings, preset, fontFamily }: ProseContext): string {
+function renderProse({ settings, preset, fontFamily, primaryColor }: ProseContext): string {
   const modeLabel = settings.mode === ThemeMode.dark ? "dark" : "light"
   const personality = settings.personality ?? preset.personality
 
@@ -326,7 +319,7 @@ function renderProse({ settings, preset, fontFamily }: ProseContext): string {
   const colorsProse = [
     "## Colors",
     "",
-    `The palette is anchored by \`primary\` (${settings.colors.primary}) — reserved for the single most important action per screen. Semantic roles (\`danger\`, \`success\`, \`warning\`) carry outcome, not decoration. Surface and text roles adapt to ${modeLabel} mode so contrast is preserved when the header light/dark toggle flips.`,
+    `The palette is anchored by \`primary\` (${primaryColor}) — reserved for the single most important action per screen. Semantic roles (\`danger\`, \`success\`, \`warning\`) carry outcome, not decoration. Surface and text roles adapt to ${modeLabel} mode so contrast is preserved when the header light/dark toggle flips.`,
   ].join("\n")
 
   const typographyProse = [

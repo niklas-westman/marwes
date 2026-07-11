@@ -19,6 +19,7 @@ import styled from "styled-components"
 import { densityOptions, themeModeItems } from "../constants/control-options"
 import type { PlaygroundSettings } from "../sections/playground-settings"
 import type { ThemePreset, ThemePresetColorOverrides } from "../sections/theme-presets"
+import { markCustom } from "../sections/theme-presets"
 import { getNeutralSwatchDefaults, resolveSwatchColors } from "../utils/swatch-colors"
 import { ColorPickerField } from "./ColorPickerField"
 import { GoogleFontCombobox } from "./GoogleFontCombobox"
@@ -53,10 +54,6 @@ type ThemeBuilderDrawerProps = {
   customPreset: ThemePreset | undefined
   onClose: () => void
   onReset: () => void
-}
-
-function markCustom(settings: PlaygroundSettings): PlaygroundSettings {
-  return { ...settings, selectedPresetId: "custom" }
 }
 
 function ThemeBuilderDrawer({
@@ -113,6 +110,7 @@ function ThemeBuilderDrawer({
 
   return (
     <Drawer
+      id="dashboard-theme-builder"
       modal
       title="Theme builder"
       description="Build your own theme."
@@ -233,5 +231,5 @@ function ThemeBuilderDrawer({
   )
 }
 
-export { ThemeBuilderDrawer, markCustom }
+export { ThemeBuilderDrawer }
 export type { ThemeBuilderDrawerProps }

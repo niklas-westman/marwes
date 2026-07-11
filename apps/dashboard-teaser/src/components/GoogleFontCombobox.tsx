@@ -2,11 +2,10 @@ import { Icon, IconName } from "@marwes-ui/react"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
 import styled from "styled-components"
 
-import {
-  type GoogleFontEntry,
-  googleFontRegistry,
-  resolveFontStack,
-} from "../sections/playground-fonts"
+import { type GoogleFontEntry, googleFontRegistry } from "../sections/google-fonts-registry"
+import { registerFontCategories, resolveFontStack } from "../sections/playground-fonts"
+
+registerFontCategories(googleFontRegistry)
 
 /**
  * Curated fast-path — these families always appear at the top of the picker
@@ -135,6 +134,8 @@ const EmptyState = styled.div`
 `
 
 const featuredSet = new Set<string>(FEATURED_FAMILIES)
+const OPTION_BATCH_SIZE = 80
+const LOAD_MORE_THRESHOLD_PX = 200
 
 type ComboOption = {
   family: string
@@ -188,18 +189,16 @@ function GoogleFontCombobox({ value, onSelect }: GoogleFontComboboxProps): JSX.E
   usePreloadFeaturedFonts()
   const [query, setQuery] = useState("")
   const [activeIndex, setActiveIndex] = useState(0)
+  const [visibleCount, setVisibleCount] = useState(OPTION_BATCH_SIZE)
   const listboxId = useId()
   const listRef = useRef<HTMLDivElement | null>(null)
 
   const { featured, all } = useFilteredOptions(query)
   const flatOptions = useMemo(() => [...featured, ...all], [featured, all])
+  const visibleOptions = flatOptions.slice(0, visibleCount)
+  const visibleFeatured = visibleOptions.filter((option) => option.isFeatured)
+  const visibleAll = visibleOptions.filter((option) => !option.isFeatured)
   const totalCount = googleFontRegistry.length
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: `query` is the intended trigger — the effect body doesn't read it, but the dep is what makes React fire the reset when the user types.
-  useEffect(() => {
-    // Snap the active pointer back to the top on filter change.
-    setActiveIndex(0)
-  }, [query])
 
   useEffect(() => {
     // Scroll the active row into view when navigating with arrow keys.
@@ -212,10 +211,24 @@ function GoogleFontCombobox({ value, onSelect }: GoogleFontComboboxProps): JSX.E
     if (option) onSelect(option.family)
   }
 
+  const ensureVisible = (index: number): void => {
+    setVisibleCount((current) => {
+      if (index < current) return current
+      const nextBatchEnd = Math.ceil((index + 1) / OPTION_BATCH_SIZE) * OPTION_BATCH_SIZE
+      return Math.min(flatOptions.length, nextBatchEnd)
+    })
+  }
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (flatOptions.length === 0) return
+
     if (event.key === "ArrowDown") {
       event.preventDefault()
-      setActiveIndex((current) => Math.min(current + 1, flatOptions.length - 1))
+      setActiveIndex((current) => {
+        const next = Math.min(current + 1, flatOptions.length - 1)
+        ensureVisible(next)
+        return next
+      })
     } else if (event.key === "ArrowUp") {
       event.preventDefault()
       setActiveIndex((current) => Math.max(current - 1, 0))
@@ -224,7 +237,9 @@ function GoogleFontCombobox({ value, onSelect }: GoogleFontComboboxProps): JSX.E
       setActiveIndex(0)
     } else if (event.key === "End") {
       event.preventDefault()
-      setActiveIndex(Math.max(flatOptions.length - 1, 0))
+      const lastIndex = flatOptions.length - 1
+      ensureVisible(lastIndex)
+      setActiveIndex(lastIndex)
     } else if (event.key === "Enter") {
       event.preventDefault()
       commitSelection(activeIndex)
@@ -245,11 +260,15 @@ function GoogleFontCombobox({ value, onSelect }: GoogleFontComboboxProps): JSX.E
         // biome-ignore lint/a11y/useSemanticElements: WAI-ARIA combobox pattern requires role="option" on a button, not a native <option>.
         role="option"
         aria-selected={selected}
+        aria-posinset={index + 1}
+        aria-setsize={flatOptions.length}
+        tabIndex={-1}
         data-option-index={index}
         $active={active}
         $selected={selected}
         $preview={preview}
         onMouseEnter={() => setActiveIndex(index)}
+        onMouseDown={(event) => event.preventDefault()}
         onClick={() => onSelect(option.family)}
       >
         <span>{option.family}</span>
@@ -264,6 +283,20 @@ function GoogleFontCombobox({ value, onSelect }: GoogleFontComboboxProps): JSX.E
 
   const activeDescendantId =
     flatOptions.length > 0 ? `${listboxId}-option-${activeIndex}` : undefined
+
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setQuery(event.target.value)
+    setActiveIndex(0)
+    setVisibleCount(OPTION_BATCH_SIZE)
+  }
+
+  const handleListScroll = (event: React.UIEvent<HTMLDivElement>): void => {
+    const list = event.currentTarget
+    const distanceFromEnd = list.scrollHeight - list.scrollTop - list.clientHeight
+    if (distanceFromEnd > LOAD_MORE_THRESHOLD_PX) return
+
+    setVisibleCount((current) => Math.min(flatOptions.length, current + OPTION_BATCH_SIZE))
+  }
 
   return (
     <Wrapper>
@@ -281,22 +314,24 @@ function GoogleFontCombobox({ value, onSelect }: GoogleFontComboboxProps): JSX.E
           aria-activedescendant={activeDescendantId}
           placeholder={`Search ${totalCount.toLocaleString()} Google Fonts…`}
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={handleQueryChange}
           onKeyDown={handleKeyDown}
         />
       </SearchRow>
       {/* biome-ignore lint/a11y/useSemanticElements: WAI-ARIA combobox pattern uses a scrollable div with role="listbox", not a native <select>. */}
-      <ListScroller ref={listRef} id={listboxId} role="listbox">
-        {featured.length > 0 ? (
+      <ListScroller ref={listRef} id={listboxId} role="listbox" onScroll={handleListScroll}>
+        {visibleFeatured.length > 0 ? (
           <>
-            <GroupLabel>Featured</GroupLabel>
-            {featured.map((option, index) => renderOption(option, index))}
+            <GroupLabel aria-hidden="true">Featured</GroupLabel>
+            {visibleFeatured.map((option, index) => renderOption(option, index))}
           </>
         ) : null}
-        {all.length > 0 ? (
+        {visibleAll.length > 0 ? (
           <>
-            <GroupLabel>All Google Fonts</GroupLabel>
-            {all.map((option, offset) => renderOption(option, featured.length + offset))}
+            <GroupLabel aria-hidden="true">All Google Fonts</GroupLabel>
+            {visibleAll.map((option, offset) =>
+              renderOption(option, visibleFeatured.length + offset),
+            )}
           </>
         ) : null}
         {flatOptions.length === 0 ? (

@@ -13,7 +13,7 @@ const HeroContainer = styled.section`
   align-items: center;
 
   ${({ theme }) => theme.media.desktopAndAbove} {
-    height: 33rem;
+    min-height: ${({ theme }) => `calc(100svh - (${theme.spacing.sp64} + ${theme.spacing.sp4}))`};
   }
 
   ${({ theme }) => theme.media.desktopAndBelow} {
@@ -22,6 +22,7 @@ const HeroContainer = styled.section`
     gap: ${({ theme }) => theme.spacing.sp40};
     padding: ${({ theme }) => `calc(${theme.spacing.sp56} + ${theme.spacing.sp4})`}
       ${({ theme }) => theme.spacing.sp40} ${({ theme }) => theme.spacing.sp40};
+    min-height: ${({ theme }) => `calc(100svh - (${theme.spacing.sp64} + ${theme.spacing.sp4}))`};
   }
 
   ${({ theme }) => theme.media.mobileAndBelow} {
@@ -29,6 +30,7 @@ const HeroContainer = styled.section`
       ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`}
       ${({ theme }) => theme.spacing.sp32};
     gap: ${({ theme }) => theme.spacing.sp32};
+    min-height: ${({ theme }) => `calc(100svh - (${theme.spacing.sp64} + ${theme.spacing.sp4}))`};
   }
 `
 
@@ -82,7 +84,7 @@ function HeroSection(): JSX.Element {
           <Paragraph>
             Marwes UI is a themeable component library for React, Vue, and Svelte that adopts your
             brand. Every component is optimized for AI-assisted development and built with
-            accessibility from the start.
+            accessibility from the ground up.
           </Paragraph>
         </TextBox>
         <BadgeRow>

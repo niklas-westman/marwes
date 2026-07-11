@@ -28,6 +28,40 @@ const GlobalStyle = createGlobalStyle`
     transition: background 0.2s, color 0.2s;
   }
 
+  /* Smooth preset/mode swaps: transition color-related properties on all
+     descendants of the page. Layout properties are intentionally left alone
+     so hovers, focus rings, and drawers keep their component-owned timing. */
+  [data-dashboard-page] :where(*, *::before, *::after) {
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      fill 200ms ease,
+      stroke 200ms ease;
+  }
+
+  /* Scroll-triggered fade-up for major sections. */
+  [data-reveal="pending"] {
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+    transition: opacity 520ms ease-out, transform 520ms ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
   /* Browsers reset font on form controls; pull the Marwes font through. */
   button, input, select, textarea, optgroup {
     font-family: inherit;
@@ -46,6 +80,11 @@ const GlobalStyle = createGlobalStyle`
     animation: none !important;
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+
+  [data-dashboard-reduce-motion="true"] [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   [data-dashboard-loose-spacing="true"] {

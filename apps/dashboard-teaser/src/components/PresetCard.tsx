@@ -53,7 +53,7 @@ const ThemeCardField = styled.div`
 const CardSwatchStrip = styled.span`
   display: flex;
   gap: 5px;
-  height: 24px;
+  height: ${({ theme }) => theme.spacing.sp24};
 `
 
 const CardSwatch = styled.span<{ $color: string }>`
@@ -65,8 +65,8 @@ const CardSwatch = styled.span<{ $color: string }>`
 
 const CardCheckBadge = styled.span<{ $accent: string }>`
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: ${({ theme }) => theme.spacing.sp12};
+  right: ${({ theme }) => theme.spacing.sp12};
   width: 22px;
   height: 22px;
   background: ${({ $accent }) => $accent};

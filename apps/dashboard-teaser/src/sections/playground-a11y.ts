@@ -25,8 +25,11 @@ function createHighContrastColorOverrides(mode: ThemeModeValue): DashboardColorO
   }
 }
 
-function createAccessibilityColorOverrides(settings: PlaygroundSettings): DashboardColorOverrides {
-  return settings.accessibility.highContrast ? createHighContrastColorOverrides(settings.mode) : {}
+function createAccessibilityColorOverrides(
+  settings: PlaygroundSettings,
+  mode: ThemeModeValue = settings.mode,
+): DashboardColorOverrides {
+  return settings.accessibility.highContrast ? createHighContrastColorOverrides(mode) : {}
 }
 
 export { createAccessibilityColorOverrides }

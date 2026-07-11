@@ -1,4 +1,4 @@
-import { baselineColorsByMode, marwesTypography } from "./design-md-data"
+import { marwesTypography } from "./design-md-data"
 import {
   contrastForeground,
   renderComponents,
@@ -9,6 +9,7 @@ import {
   yamlString,
 } from "./design-md-renderer"
 import type { PlaygroundSettings } from "./playground-settings"
+import { resolveDashboardTheme } from "./playground-theme-resolver"
 import type { ThemePreset } from "./theme-presets"
 
 type DesignMdInput = {
@@ -23,29 +24,27 @@ type DesignMdInput = {
  * `npx @google/design.md lint`.
  */
 function generateDesignMd({ settings, preset }: DesignMdInput): string {
-  const mode = settings.mode
-  const baseline = baselineColorsByMode[mode]
-  const overrides = settings.colorOverrides?.[mode] ?? {}
-  const fontFamily = settings.font
+  const resolvedTheme = resolveDashboardTheme(settings, settings.mode, preset.personality)
+  const { color } = resolvedTheme
+  const fontFamily = resolvedTheme.font.family
 
   const colorTokens: Record<string, string> = {
-    primary: settings.colors.primary,
-    danger: settings.colors.danger,
-    success: settings.colors.success,
-    warning: settings.colors.warning,
-    background: (overrides.background as string | undefined) ?? baseline.background,
-    surface: (overrides.surface as string | undefined) ?? baseline.surface,
-    "surface-elevated":
-      (overrides.surfaceElevated as string | undefined) ?? baseline.surfaceElevated,
-    text: (overrides.text as string | undefined) ?? baseline.text,
-    "text-muted": (overrides.textMuted as string | undefined) ?? baseline.textMuted,
-    "text-on-primary": contrastForeground(settings.colors.primary),
-    "text-on-danger": contrastForeground(settings.colors.danger),
-    "text-on-success": contrastForeground(settings.colors.success),
-    "text-on-warning": contrastForeground(settings.colors.warning),
-    border: (overrides.border as string | undefined) ?? baseline.border,
-    "border-strong": (overrides.borderStrong as string | undefined) ?? baseline.borderStrong,
-    focus: baseline.focus,
+    primary: color.primary,
+    danger: color.danger,
+    success: color.success,
+    warning: color.warning,
+    background: color.background,
+    surface: color.surface,
+    "surface-elevated": color.surfaceElevated,
+    text: color.text,
+    "text-muted": color.textMuted,
+    "text-on-primary": contrastForeground(color.primary),
+    "text-on-danger": contrastForeground(color.danger),
+    "text-on-success": contrastForeground(color.success),
+    "text-on-warning": contrastForeground(color.warning),
+    border: color.border,
+    "border-strong": color.borderStrong,
+    focus: color.focus,
   }
 
   const radius = settings.radius
@@ -76,11 +75,11 @@ function generateDesignMd({ settings, preset }: DesignMdInput): string {
     ),
     "components:",
     ...renderComponents(),
-    ...renderMarwesExtension({ settings, preset }),
+    ...renderMarwesExtension({ settings, resolvedTheme }),
     "---",
   ].join("\n")
 
-  const prose = renderProse({ settings, preset, fontFamily })
+  const prose = renderProse({ settings, preset, fontFamily, primaryColor: color.primary })
   return `${yaml}\n\n${prose}\n`
 }
 
