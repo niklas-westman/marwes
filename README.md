@@ -11,6 +11,7 @@
 
 React • Vue • Svelte • Framework-agnostic core • Static CSS • Type-safe • A11y-first • Agent-readable
 
+[**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
 [Start Here](docs/start-here.md) • [Documentation](docs/README.md) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -492,6 +493,9 @@ The published Marwes packages are versioned as a fixed group. If a changeset inc
 | `@marwes-ui/presets` | Static CSS presets |
 | `@marwes-ui/react` | React adapter |
 | `@marwes-ui/vue` | Vue adapter |
+| `@marwes-ui/svelte` | Svelte adapter |
+| `@marwes-ui/cli` | Official installer for existing apps (`pnpm dlx @marwes-ui/cli init`) |
+| `create-marwes` | Vite-style starter for new apps (`pnpm create marwes@latest my-app`) |
 
 ---
 
