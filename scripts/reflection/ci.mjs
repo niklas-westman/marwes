@@ -43,8 +43,13 @@ run(strict ? "Strict cohesive Reflection contract check" : "Cohesive Reflection 
   "cohesive-check",
   "--",
   "--all",
-  "--require-baseline-receipts",
-  ...(strict ? ["--require-figma-frames"] : []),
+  // --require-baseline-receipts needs the raw Figma JSON exports
+  // (`.figma/marwes/_raw/*.json`) which are gitignored and >800 MB total —
+  // CI cannot satisfy this without a Figma-API-token fetch step. Gate it
+  // behind --strict so the strict CI job (which is expected to be run
+  // manually with the raw exports staged) still enforces it, while the
+  // default PR run stays warn-only for now.
+  ...(strict ? ["--require-baseline-receipts", "--require-figma-frames"] : []),
 ])
 
 if (!skipBrowserInstall) {
