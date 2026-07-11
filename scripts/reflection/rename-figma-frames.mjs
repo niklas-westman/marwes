@@ -100,7 +100,9 @@ function isAllowedOrigin(origin) {
   if (url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1")) {
     return true
   }
-  return url.protocol === "https:" && (url.hostname === "www.figma.com" || url.hostname === "figma.com")
+  return (
+    url.protocol === "https:" && (url.hostname === "www.figma.com" || url.hostname === "figma.com")
+  )
 }
 
 function createAcceptKey(key) {
