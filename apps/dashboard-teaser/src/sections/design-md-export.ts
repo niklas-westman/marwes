@@ -58,7 +58,7 @@ function generateDesignMd({ settings, preset }: DesignMdInput): string {
 
   const yaml = [
     "---",
-    "version: alpha",
+    "version: 1",
     `name: ${yamlString(preset.name)}`,
     `description: ${yamlString(preset.description)}`,
     "colors:",

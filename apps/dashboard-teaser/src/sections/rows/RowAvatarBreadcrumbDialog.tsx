@@ -3,7 +3,9 @@ import {
   ButtonVariant,
   DialogModal,
   Drawer,
-  Card as MwCard,
+  H1,
+  H2,
+  H3,
   Paragraph,
   Text,
   TextVariant,
@@ -13,9 +15,9 @@ import styled from "styled-components"
 
 import { SnippetButton } from "../../components/SnippetButton"
 import type { ComponentDisplayOptions } from "../playground-settings"
-import { cardSnippets } from "./card-snippets"
 import { dialogDrawerSnippets } from "./dialog-drawer-snippets"
 import { FlexAreaCard, ShowcaseFlexRow, ShowcaseStack } from "./shared"
+import { typographySnippets } from "./typography-snippets"
 
 const LeftCard = styled(FlexAreaCard)`
   @container (max-width: 54rem) {
@@ -29,6 +31,22 @@ const RightCard = styled(FlexAreaCard)`
   }
 `
 
+const TypographyGroups = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sp24};
+`
+
+const TypographyGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sp8};
+`
+
+const GroupLabel = styled(Text).attrs({ variant: TextVariant.caption })`
+  color: ${({ theme }) => theme.color.textMuted};
+`
+
 type RowAvatarBreadcrumbDialogProps = {
   options: ComponentDisplayOptions
 }
@@ -39,16 +57,37 @@ function RowAvatarBreadcrumbDialog({ options }: RowAvatarBreadcrumbDialogProps):
 
   return (
     <ShowcaseFlexRow>
-      <LeftCard $basis="36rem" $minHeight="12.625rem">
-        {options.showLabels && <Text variant={TextVariant.overline}>Card</Text>}
-        <SnippetButton title="Card" snippets={cardSnippets} />
-        <MwCard title="Card title">
-          {options.showDescriptions
-            ? "Card description text goes here. This provides more context about the card content."
-            : undefined}
-        </MwCard>
+      <LeftCard $basis="36rem" $minHeight="26rem">
+        {options.showLabels && <Text variant={TextVariant.overline}>Typography</Text>}
+        <SnippetButton title="Typography" snippets={typographySnippets} />
+        <TypographyGroups>
+          <TypographyGroup>
+            <GroupLabel>Display</GroupLabel>
+            <Text variant={TextVariant.display}>Display</Text>
+          </TypographyGroup>
+          <TypographyGroup>
+            <GroupLabel>Headings</GroupLabel>
+            <H1>Heading 1</H1>
+            <H2>Heading 2</H2>
+            <H3>Heading 3</H3>
+          </TypographyGroup>
+          <TypographyGroup>
+            <GroupLabel>Body</GroupLabel>
+            <Paragraph size="md">
+              Body paragraph text sample rendered at the theme&apos;s current font stack.
+            </Paragraph>
+            <Paragraph size="sm">Small body paragraph for secondary reading contexts.</Paragraph>
+          </TypographyGroup>
+          <TypographyGroup>
+            <GroupLabel>Labels &amp; captions</GroupLabel>
+            <Text variant={TextVariant.label}>Label default</Text>
+            <Text variant={TextVariant.labelSmall}>Label small</Text>
+            <Text variant={TextVariant.caption}>Caption</Text>
+            <Text variant={TextVariant.overline}>Overline</Text>
+          </TypographyGroup>
+        </TypographyGroups>
       </LeftCard>
-      <RightCard $basis="18.125rem" $minHeight="12.625rem">
+      <RightCard $basis="18.125rem" $minHeight="26rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Dialog &amp; Drawer</Text>}
         <SnippetButton title="Dialog & Drawer" snippets={dialogDrawerSnippets} />
         <ShowcaseStack>

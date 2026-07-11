@@ -42,7 +42,6 @@ function App(): JSX.Element {
             <>
               <GlobalStyle />
               <PageWrapper
-                data-dashboard-page="true"
                 data-dashboard-reduce-motion={
                   settings.accessibility.reduceMotion ? "true" : undefined
                 }

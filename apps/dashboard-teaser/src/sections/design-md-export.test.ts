@@ -75,7 +75,7 @@ describe("generateDesignMd", () => {
   it("includes name and version in frontmatter without duplicated Marwes prefix", () => {
     const output = generateDesignMd({ settings: defaultPlaygroundSettings, preset: marwesPreset })
     const { frontmatter } = splitFrontmatter(output)
-    expect(frontmatter).toMatch(/^version: alpha$/m)
+    expect(frontmatter).toMatch(/^version: 1$/m)
     expect(frontmatter).toMatch(/^name: "Marwes"$/m)
   })
 

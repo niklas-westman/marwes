@@ -18,13 +18,13 @@ const CtaSection = styled.section`
   ${({ theme }) => theme.media.desktopAndBelow} {
     padding: ${({ theme }) => `calc(${theme.spacing.sp56} + ${theme.spacing.sp4})`}
       ${({ theme }) => theme.spacing.sp40} ${({ theme }) => theme.spacing.sp40};
-    align-items: flex-start;
   }
 
   ${({ theme }) => theme.media.mobileAndBelow} {
-    padding: ${({ theme }) => theme.spacing.sp40}
+    padding: ${({ theme }) => theme.spacing.sp80}
       ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`}
       ${({ theme }) => theme.spacing.sp32};
+    align-items: flex-start;
   }
 `
 
@@ -87,12 +87,12 @@ function HandoffCta({ settings, preset, onOpenCustomBuilder }: HandoffCtaProps):
   return (
     <CtaSection id="handoff" data-dashboard-section="handoff">
       <CtaInner>
-        <Eyebrow>Ready to hand off</Eyebrow>
+        <Eyebrow>Take it to code</Eyebrow>
         <CtaTitle>
           Export <em>{preset.name}</em> as DESIGN.md
         </CtaTitle>
         <CtaText size="md">
-          Includes every color, radius, and font token for the theme you're currently viewing — plus
+          Includes every color, radius, and font token for the theme you're currently viewing, plus
           any accessibility settings you've turned on above. Follows the Google Labs DESIGN.md
           format so any coding agent can pick it up.
         </CtaText>
@@ -106,7 +106,7 @@ function HandoffCta({ settings, preset, onOpenCustomBuilder }: HandoffCtaProps):
           </Button>
           <Button
             variant={ButtonVariant.text}
-            iconRight={IconName.ArrowUpRight}
+            iconRight={IconName.Info}
             onClick={() => setModalOpen(true)}
           >
             Read more about theming
