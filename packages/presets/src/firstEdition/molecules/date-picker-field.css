@@ -19,10 +19,10 @@
 }
 
 .mw-date-picker-field__error {
-  color: var(--mw-color-danger, #c4302b);
+  color: var(--mw-color-danger-base, #c4302b);
 }
 
 .mw-date-picker-field--invalid .mw-date-picker {
-  outline: 1px solid var(--mw-color-danger, #c4302b);
+  outline: 1px solid var(--mw-color-danger-base, #c4302b);
   border-radius: var(--mw-ui-radius, 6px);
 }

@@ -19,5 +19,5 @@
 }
 
 .mw-segmented-control-field__error {
-  color: var(--mw-color-danger, #c4302b);
+  color: var(--mw-color-danger-base, #c4302b);
 }
