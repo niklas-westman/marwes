@@ -9,7 +9,7 @@ import type { ResolvedDashboardTheme } from "./playground-theme-resolver"
 import type { ThemePreset } from "./theme-presets"
 
 function yamlString(value: string): string {
-  return `"${value.replace(/"/g, '\\"')}"`
+  return `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`
 }
 
 function tsString(value: string): string {
