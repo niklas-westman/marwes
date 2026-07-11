@@ -1,5 +1,15 @@
 # @marwes-ui/react
 
+## 1.4.1
+
+### Patch Changes
+
+- [#42](https://github.com/niklas-westman/marwes/pull/42) [`af9416c`](https://github.com/niklas-westman/marwes/commit/af9416cafa45a0e75d108bfd0f1bd849f6084b4c) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Docs polish: root README now leads with the marwes.io hub link (matching every package README) and the Packages table lists all seven published packages — the previously missing `@marwes-ui/svelte`, `@marwes-ui/cli`, and `create-marwes` are now included with usage hints.
+
+- Updated dependencies [[`af9416c`](https://github.com/niklas-westman/marwes/commit/af9416cafa45a0e75d108bfd0f1bd849f6084b4c)]:
+  - @marwes-ui/core@1.4.1
+  - @marwes-ui/presets@1.4.1
+
 ## 1.4.0
 
 ### Minor Changes
