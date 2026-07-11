@@ -32,6 +32,11 @@
       "packages/vue/src/components/skeleton/index.ts",
       "packages/vue/src/components/skeleton/skeleton.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/skeleton/index.ts",
+      "packages/svelte/src/lib/components/skeleton/Skeleton.svelte",
+      "packages/svelte/src/lib/components/skeleton/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/skeleton/__tests__/skeleton-taxonomy.test.ts",
@@ -45,6 +50,14 @@
       "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
       "apps/storybook-vue/src/stories/skeleton/skeleton-molecules.stories.ts",
       "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/skeleton/__tests__/skeleton-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/skeleton/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/skeleton/skeleton-molecules.stories.ts",
+      "apps/storybook-svelte/src/stories/skeleton/skeleton.stories.ts",
+      "apps/storybook-svelte/src/stories/skeleton/SkeletonMolecules.svelte",
+      "apps/storybook-svelte/src/stories/skeleton/SkeletonShowcase.svelte"
     ],
     "contracts": ["tests/contracts/skeleton.contract.ts"]
   },
@@ -71,8 +84,7 @@
       ".figma/marwes/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/skeleton/skeleton_1921-34816.json",
-      ".figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json",
+      ".figma/marwes/pages/-skeleton/skeleton_1921-34816.json",
       ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json"
     ],
     "nodeReferences": {
@@ -88,8 +100,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": false,
     "figmaReferencesPresent": true

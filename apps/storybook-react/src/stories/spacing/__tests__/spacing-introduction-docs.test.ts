@@ -11,7 +11,8 @@ describe("React spacing introduction docs", () => {
     const introPath = path.resolve(__dirname, "../Introduction.mdx")
     const introDoc = readFileSync(introPath, "utf8")
 
-    expect(introDoc).toContain("Spacing / Spacer (Atom)")
+    expect(introDoc).toContain("Spacing (Atom)")
+    expect(introDoc).toContain("Spacer (Atom)")
     expect(introDoc).toContain("Spacings")
     expect(introDoc).toContain("Token Scale")
     expect(introDoc).toContain("Accessibility notes")

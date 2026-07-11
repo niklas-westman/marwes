@@ -38,6 +38,7 @@ graph TD
   Svelte --> Stories
   React --> Contracts
   Vue --> Contracts
+  Svelte --> Contracts
   Core --> Artifacts
   Core --> Registry
   Registry --> Artifacts
@@ -53,6 +54,7 @@ graph TD
 - `docs/reference/repo-map.md`
 - `docs/reference/testing.md`
 - `docs/reference/architecture.md`
+- `docs/reference/adapter-architecture.md`
 - `docs/reference/accessibility.md`
 - `docs/audits/status.md`
 - `docs/registry/README.md`
@@ -64,6 +66,7 @@ graph TD
 - `pnpm check:compass`
 - `pnpm check:repo-map`
 - `pnpm check:changed`
+- `pnpm check:adapter-architecture`
 - `pnpm check:adapter-boundaries`
 - `pnpm validate:family <family>`
 - `pnpm validate:packages`
@@ -90,7 +93,7 @@ When two sources disagree, resolve the conflict in this order:
 | Preset CSS for a family | React/Vue/Svelte stories, visual states, preset CSS tests, registry notes | `pnpm validate:family <family>` |
 | React adapter | Vue/Svelte adapter parity, shared contracts, Storybook coverage | `pnpm validate:family <family>` |
 | Vue adapter | React/Svelte adapter parity, shared contracts, Storybook coverage | `pnpm validate:family <family>` |
-| Svelte adapter | React/Vue adapter parity, shared contracts, Storybook Svelte coverage | `pnpm validate:family <family>` |
+| Svelte adapter | cross-framework adapter parity, shared contracts, Storybook Svelte coverage | `pnpm validate:family <family>` |
 | Purpose variant or semantic metadata | semantic registry, generated artifacts, registry family docs, Compass docs/API drift rule | `pnpm check:repo-map` |
 | Registry family docs | generated registry artifact and links | `pnpm check:repo-map` |
 | Audit findings | `docs/audits/status.md`, registry family status, reference accessibility docs if policy changed | `pnpm check:compass` |
@@ -99,7 +102,7 @@ When two sources disagree, resolve the conflict in this order:
 | Build or release plumbing | CI workflows, governance docs, release validation | `pnpm validate:release` |
 | Package-wide implementation | contributor guide, package docs, typecheck, builds, tests | `pnpm validate:packages` |
 | Long-lived branch smoke check | changed files, family scope, docs routing, package boundaries | `pnpm check:changed` locally, `pnpm check:changed -- --branch` before review |
-| Architecture guardrail | component adapter boundaries, core purity, preset ownership | `pnpm check:adapter-boundaries` |
+| Architecture guardrail | adapter architecture map, component adapter boundaries, core purity, preset ownership | `pnpm check:adapter-architecture` and `pnpm check:adapter-boundaries` |
 
 ## Repo map coverage
 
@@ -109,7 +112,7 @@ This file is guarded by:
 pnpm check:repo-map
 ```
 
-Internally, that command runs `pnpm check:compass` plus the generated-truth checks for semantics, trust artifacts, registry, parity summary, Storybook consistency, and adapter boundaries. Use `pnpm check:compass` when you want only the Compass/routing rules, including links and docs/API drift.
+Internally, that command runs `pnpm check:compass` plus the generated-truth checks for semantics, trust artifacts, registry, parity summary, Storybook consistency, adapter architecture, and adapter boundaries. Use `pnpm check:compass` when you want only the Compass/routing rules, including links and docs/API drift.
 
 The check verifies that the most important paths, commands, and routing phrases in this map still exist. It is intentionally lightweight; deeper architecture judgement still belongs in review.
 
@@ -126,6 +129,6 @@ When planning work completes:
 ## Recommended routing
 
 - Contributor: start with [Want to contribute?](../want-to-contribute.md), then [Architecture](./architecture.md), this repo map, and the relevant validation guide.
-- Component contributor: start with [Want to contribute?](../want-to-contribute.md), [Architecture](./architecture.md), this repo map, [Adding Components](../guides/adding-components.md), then [Family Validation](./family-validation.md).
+- Component contributor: start with [Want to contribute?](../want-to-contribute.md), [Architecture](./architecture.md), [Adapter Architecture](./adapter-architecture.md), this repo map, [Adding Components](../guides/adding-components.md), then [Family Validation](./family-validation.md).
 - Accessibility reviewer: start with [Accessibility support model](./accessibility.md), [Audit status](../audits/status.md), then the relevant family audit and [Component Registry](../registry/README.md) entry.
 - Release reviewer: start with [Governance](./governance.md), [Testing](./testing.md), `artifacts/component-registry.json`, and generated artifact checks.

@@ -1,0 +1,74 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "drawer",
+  "displayName": "Drawer",
+  "status": "shipped",
+  "summary": "Dialog-adjacent panel atom with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters.",
+  "philosophy": [
+    "Keep Drawer as a panel composition primitive while open state and lifecycle stay product-owned.",
+    "Keep dialog semantics in core so panel labeling, modal state, and data-component identity stay aligned across adapters.",
+    "Document focus management as a product/composition boundary until Marwes ships a managed DrawerShell."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a side panel for contextual details, navigation, filters, or secondary workflows.",
+      "The panel can provide a truthful aria-label or aria-labelledby reference.",
+      "The product owns open state, close behavior, and focus return around the drawer."
+    ],
+    "avoidWhen": [
+      "The interaction is a blocking confirmation; use Dialog instead.",
+      "The product cannot provide focus management for modal drawer usage.",
+      "The content is short inline help; use Tooltip or a simpler disclosure instead."
+    ]
+  },
+  "axe": {
+    "riskTier": "high",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Core and adapter tests for panel role, modal metadata, scrim rendering, dismissible behavior, size, and placement classes.",
+      "Storybook introduction and taxonomy tests in React, Vue, and Svelte apps."
+    ],
+    "manualReviewRequired": [
+      "Keyboard focus trap, Escape handling, and focus return in real product compositions.",
+      "Screen-reader announcement of drawer title/description in modal and non-modal contexts.",
+      "Visual review against the synced light and dark Figma drawer frames."
+    ],
+    "roadmapAnchors": [],
+    "notes": [
+      "Drawer is covered by the canonical family semantic registry with data-component=drawer.",
+      "The current atom does not claim to own the full modal lifecycle."
+    ]
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": [
+        "apps/storybook-react/src/stories/drawer/Introduction.mdx",
+        "apps/storybook-react/src/stories/drawer/drawer.stories.tsx"
+      ],
+      "vue": [
+        "apps/storybook-vue/src/stories/drawer/Introduction.mdx",
+        "apps/storybook-vue/src/stories/drawer/drawer.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/drawer/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/drawer/drawer.stories.ts"
+      ]
+    },
+    "preferredStates": [
+      "default",
+      "minimal",
+      "left",
+      "right",
+      "small",
+      "medium",
+      "large",
+      "scrim",
+      "footer",
+      "dismissible"
+    ]
+  },
+  "openQuestions": [
+    "Should Marwes add a managed DrawerShell that owns focus trap, Escape handling, and focus return?",
+    "Should Drawer expose purpose variants for filters, details, navigation, and checkout flows?"
+  ]
+}

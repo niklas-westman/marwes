@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "family": "input-otp",
+  "baselineRoot": "packages/design-governance/reflection-families/input-otp/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "input-otp.default",
+      "mode": "light",
+      "figmaNodeId": "5070:45305",
+      "figmaFrameName": "reflection/input-otp/default/light",
+      "exportScale": 1,
+      "viewport": "input-otp-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.light.png",
+      "portalPath": "/reflection/input-otp/default/light",
+      "source": {
+        "sourceFrameId": "1803:15024",
+        "componentNodeId": "1803:15034",
+        "componentName": "Input OTP",
+        "componentBounds": {
+          "width": 280,
+          "height": 80
+        },
+        "requiredBoundTokens": [
+          "font/family/Body",
+          "font/family/Caption",
+          "font/line-height/lh-16",
+          "font/size/fs-12",
+          "font/size/fs-14",
+          "font/weight/Medium",
+          "input/border",
+          "input/hint",
+          "input/label",
+          "input/placeholder",
+          "input/surface"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 3000,
+          "maxDiffPixelRatio": 0.035
+        },
+        "strict": true,
+        "toleranceReason": "Figma export contract for OTP fields. Allows Figma-vs-Chromium glyph rasterization and 1px rounded cell-border antialiasing drift after source node, variables, receipt, and frame dimensions pass."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1803:15024",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15024",
+        "outputFrameName": "reflection/input-otp/default/light",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Input OTP",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
+      }
+    },
+    {
+      "caseId": "input-otp.default",
+      "mode": "dark",
+      "figmaNodeId": "5070:45323",
+      "figmaFrameName": "reflection/input-otp/default/dark",
+      "exportScale": 1,
+      "viewport": "input-otp-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.dark.png",
+      "portalPath": "/reflection/input-otp/default/dark",
+      "source": {
+        "sourceFrameId": "1803:15155",
+        "componentNodeId": "1803:15165",
+        "componentName": "Input OTP",
+        "componentBounds": {
+          "width": 280,
+          "height": 80
+        },
+        "requiredBoundTokens": [
+          "font/family/Body",
+          "font/family/Caption",
+          "font/line-height/lh-16",
+          "font/size/fs-12",
+          "font/size/fs-14",
+          "font/weight/Medium",
+          "input/border",
+          "input/hint",
+          "input/label",
+          "input/placeholder",
+          "input/surface"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 3000,
+          "maxDiffPixelRatio": 0.035
+        },
+        "strict": true,
+        "toleranceReason": "Figma export contract for OTP fields. Allows Figma-vs-Chromium glyph rasterization and 1px rounded cell-border antialiasing drift after source node, variables, receipt, and frame dimensions pass."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1803:15155",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15155",
+        "outputFrameName": "reflection/input-otp/default/dark",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Input OTP",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        }
+      }
+    }
+  ]
+}

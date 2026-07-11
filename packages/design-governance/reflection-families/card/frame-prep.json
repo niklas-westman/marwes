@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "family": "card",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "outputPage": "Reflection Baselines",
+  "cases": [
+    {
+      "caseId": "card.default",
+      "viewport": "card-default",
+      "viewportSize": {
+        "width": 520,
+        "height": 300
+      },
+      "selector": {
+        "strategy": "rowChild",
+        "rowName": "Row/Default",
+        "rowOccurrence": 0,
+        "childName": "Card",
+        "childOccurrence": 0
+      },
+      "modes": {
+        "light": {
+          "sourceFrameId": "1364:11556",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1364-11556",
+          "outputFrameName": "reflection/card/default/light",
+          "framing": {
+            "background": "#ffffff",
+            "align": "center",
+            "padding": 0
+          }
+        },
+        "dark": {
+          "sourceFrameId": "1368:5891",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-5891",
+          "outputFrameName": "reflection/card/default/dark",
+          "framing": {
+            "background": "#0f0f0f",
+            "align": "center",
+            "padding": 0
+          }
+        }
+      }
+    }
+  ]
+}

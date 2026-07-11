@@ -27,10 +27,12 @@ export function runDateOfBirthFieldContract(
       await h.renderDateOfBirthField({ label: "Date of birth" })
 
       const input = h.getByLabelText(/date of birth/i)
+      const labelTextNode = h.getByText("Date of birth")
 
       expect(input.tagName).toBe("INPUT")
       expect(input).toHaveAttribute("type", "date")
       expect(input).toHaveAttribute("autocomplete", "bday")
+      expect(labelTextNode).toHaveClass("mw-text", "mw-text--label")
     })
 
     it("connects helper text via aria-describedby", async () => {
@@ -48,6 +50,7 @@ export function runDateOfBirthFieldContract(
       expect(helper).not.toBeNull()
       expect(helper?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(helper?.id ?? "")
+      expect(helperTextNode).toHaveClass("mw-text", "mw-text--caption")
       expect(input).not.toHaveAttribute("aria-invalid", "true")
     })
 
@@ -67,6 +70,7 @@ export function runDateOfBirthFieldContract(
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")
+      expect(errorTextNode).toHaveClass("mw-text", "mw-text--caption")
     })
 
     it("treats empty helper and error strings as absent", async () => {

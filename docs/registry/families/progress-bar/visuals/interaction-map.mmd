@@ -1,0 +1,10 @@
+flowchart LR
+  Value["value min max"] --> Normalize["normalize + clamp"]
+  Normalize --> A11y["progressbar a11y\naria-valuemin/max/now"]
+  Normalize --> Fill["fill width"]
+  A11y --> Label["visible or accessible label"]
+  Normalize --> Percent["optional percentage text"]
+
+  LabelChoice["showLabel=false"] --> AccessibleName["product must keep a truthful accessible name"]
+  Size["size\nsmall default"] --> Track["track classes"]
+  Disabled["disabled"] --> State["disabled metadata\nread-only display"]

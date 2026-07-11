@@ -1,0 +1,135 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "pagination",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md"],
+    "roadmap": [],
+    "core": [
+      "packages/core/src/components/atoms/pagination/index.ts",
+      "packages/core/src/components/atoms/pagination/pagination-a11y.ts",
+      "packages/core/src/components/atoms/pagination/pagination-recipe.ts",
+      "packages/core/src/components/atoms/pagination/pagination-types.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/pagination.css"],
+    "react": [
+      "packages/react/src/components/pagination/__tests__/pagination.test.tsx",
+      "packages/react/src/components/pagination/index.ts",
+      "packages/react/src/components/pagination/pagination-field.tsx",
+      "packages/react/src/components/pagination/pagination.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/pagination/__tests__/pagination.test.ts",
+      "packages/vue/src/components/pagination/index.ts",
+      "packages/vue/src/components/pagination/pagination-field.ts",
+      "packages/vue/src/components/pagination/pagination.ts"
+    ],
+    "svelte": [
+      "packages/svelte/src/lib/components/pagination/index.ts",
+      "packages/svelte/src/lib/components/pagination/Pagination.svelte",
+      "packages/svelte/src/lib/components/pagination/PaginationField.svelte",
+      "packages/svelte/src/lib/components/pagination/types.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/pagination/Introduction.mdx",
+      "apps/storybook-react/src/stories/pagination/pagination-field.stories.tsx",
+      "apps/storybook-react/src/stories/pagination/pagination.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/pagination/Introduction.mdx",
+      "apps/storybook-vue/src/stories/pagination/pagination-field.stories.ts",
+      "apps/storybook-vue/src/stories/pagination/pagination.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/pagination/__tests__/pagination-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/pagination/__tests__/pagination-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/pagination/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/pagination/pagination-field.stories.ts",
+      "apps/storybook-svelte/src/stories/pagination/pagination.stories.ts",
+      "apps/storybook-svelte/src/stories/pagination/PaginationFieldPreview.svelte",
+      "apps/storybook-svelte/src/stories/pagination/PaginationNarrowContainer.svelte",
+      "apps/storybook-svelte/src/stories/pagination/PaginationPreview.svelte",
+      "apps/storybook-svelte/src/stories/pagination/PaginationShowcase.svelte"
+    ],
+    "contracts": []
+  },
+  "semantics": {
+    "coverageLevel": "none",
+    "dataComponent": null,
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [],
+    "notes": ["No semantic registry source has been configured for this family yet."]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/pagination.json",
+      ".figma/marwes/components/partspaginationpage-item.json",
+      ".figma/marwes/components/partspaginationactive-page-item.json",
+      ".figma/marwes/components/partspaginationellipsis.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-pagination/overall-status_1730-4200.json",
+      ".figma/marwes/pages/-pagination/-pagination_1727-4104.json",
+      ".figma/marwes/pages/-pagination/-pagination-dark_1727-4253.json",
+      ".figma/marwes/pages/-pagination/component-container_1729-4143.json",
+      ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1384-12675.json",
+      ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json"
+    ],
+    "nodeReferences": {
+      "paginationComponent": "1727:3905",
+      "paginationPageItem": "1727:3897",
+      "paginationActivePageItem": "1727:3899",
+      "paginationEllipsis": "1727:3903",
+      "paginationLightFrame": "1727:4104",
+      "paginationDarkFrame": "1727:4253"
+    },
+    "figmaTokens": [
+      "pagination/active-surface",
+      "pagination/active-text",
+      "pagination/item-border",
+      "pagination/item-surface",
+      "pagination/item-text"
+    ],
+    "figmaStates": {
+      "baseVariants": ["with-prev-next", "without-prev-next", "page", "active-page", "ellipsis"],
+      "interactionStates": ["current", "disabled", "hover", "focus", "light", "dark"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "svelte": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "storybookSvelte": true,
+    "contractsPresent": true,
+    "auditDocPresent": false,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "No semantic registry source has been configured for this family yet.",
+    "Generated from docs/registry/families/pagination/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

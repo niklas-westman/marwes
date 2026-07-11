@@ -28,9 +28,17 @@
   const resolvedTooltipId = $derived(tooltipIdProp ?? `${groupId}-tooltip`);
 
   const isControlled = $derived(open !== undefined);
-  let internalOpen = $state(defaultOpen);
+  function getInitialOpen(): boolean {
+    return defaultOpen;
+  }
+
+  function getInitialTooltipMounted(): boolean {
+    return open ?? defaultOpen;
+  }
+
+  let internalOpen = $state(getInitialOpen());
   const resolvedOpen = $derived(isControlled ? (open as boolean) : internalOpen);
-  let isTooltipMounted = $state(resolvedOpen);
+  let isTooltipMounted = $state(getInitialTooltipMounted());
 
   $effect(() => {
     if (resolvedOpen) {

@@ -2,7 +2,7 @@ import { buildSwitchFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Switch, type SwitchProps } from "./switch"
 
 export type SwitchFieldProps = {
@@ -60,7 +60,7 @@ export const SwitchField = defineComponent(
     const mergedSwitchProps = computed<SwitchProps>(() => {
       const {
         ariaLabel: _ignoredAriaLabel,
-        ariaLabelledby: _ignoredAriaLabelledby,
+        ariaLabelledBy: _ignoredAriaLabelledby,
         ariaDescribedBy: _ignoredAriaDescribedBy,
         onCheckedChange: originalOnCheckedChange,
         ...restSwitchProps
@@ -68,7 +68,7 @@ export const SwitchField = defineComponent(
       const nextSwitchProps: SwitchProps = {
         ...restSwitchProps,
         id: id.value,
-        ariaLabelledby: a11yIds.value.labelId,
+        ariaLabelledBy: a11yIds.value.labelId,
       }
 
       if (props.modelValue !== undefined) {
@@ -104,13 +104,13 @@ export const SwitchField = defineComponent(
           h("div", { class: "mw-switch-field__row" }, [
             h(Switch, mergedSwitchProps.value),
             h("span", { class: "mw-switch-field__label", id: a11yIds.value.labelId }, [
-              h(Paragraph, { size: "md" }, { default: labelContent }),
+              h(Text, { variant: "label" }, { default: labelContent }),
             ]),
           ]),
 
           hasDescription.value
             ? h("div", { class: "mw-switch-field__description", id: a11yIds.value.descriptionId }, [
-                h(Paragraph, { size: "sm" }, { default: descriptionContent }),
+                h(Text, { variant: "caption" }, { default: descriptionContent }),
               ])
             : null,
 
@@ -122,7 +122,7 @@ export const SwitchField = defineComponent(
                   id: a11yIds.value.errorId,
                   "aria-live": "polite",
                 },
-                [h(Paragraph, { size: "sm" }, { default: errorContent })],
+                [h(Text, { variant: "caption" }, { default: errorContent })],
               )
             : null,
         ],

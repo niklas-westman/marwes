@@ -47,6 +47,17 @@
       "packages/vue/src/components/toast/toast.ts",
       "packages/vue/src/components/toast/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/toast/ErrorToast.svelte",
+      "packages/svelte/src/lib/components/toast/index.ts",
+      "packages/svelte/src/lib/components/toast/InfoToast.svelte",
+      "packages/svelte/src/lib/components/toast/SuccessToast.svelte",
+      "packages/svelte/src/lib/components/toast/Toast.svelte",
+      "packages/svelte/src/lib/components/toast/ToastContainer.svelte",
+      "packages/svelte/src/lib/components/toast/ToastProvider.svelte",
+      "packages/svelte/src/lib/components/toast/types.ts",
+      "packages/svelte/src/lib/components/toast/WarningToast.svelte"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/toast/__tests__/toast-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/toast/__tests__/toast-taxonomy.test.ts",
@@ -71,6 +82,23 @@
       "apps/storybook-vue/src/stories/toast/toast-matrix.stories.ts",
       "apps/storybook-vue/src/stories/toast/toast.stories.ts",
       "apps/storybook-vue/src/stories/toast/warning-toast.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/toast/__tests__/toast-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/toast/__tests__/toast-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/toast/error-toast.stories.ts",
+      "apps/storybook-svelte/src/stories/toast/info-toast.stories.ts",
+      "apps/storybook-svelte/src/stories/toast/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/toast/success-toast.stories.ts",
+      "apps/storybook-svelte/src/stories/toast/toast-container.stories.ts",
+      "apps/storybook-svelte/src/stories/toast/toast-matrix.stories.ts",
+      "apps/storybook-svelte/src/stories/toast/toast.stories.ts",
+      "apps/storybook-svelte/src/stories/toast/ToastContainerStory.svelte",
+      "apps/storybook-svelte/src/stories/toast/ToastDemo.svelte",
+      "apps/storybook-svelte/src/stories/toast/ToastDemoButtons.svelte",
+      "apps/storybook-svelte/src/stories/toast/ToastMatrix.svelte",
+      "apps/storybook-svelte/src/stories/toast/ToastShowcase.svelte",
+      "apps/storybook-svelte/src/stories/toast/warning-toast.stories.ts"
     ],
     "contracts": ["tests/contracts/toast.contract.ts"]
   },
@@ -118,28 +146,23 @@
     ],
     "pageReferences": [
       ".figma/marwes/pages/-toast/-toast-light_1365-12526.json",
-      ".figma/marwes/pages/-toast/-toast-dark_2276-56938.json",
-      ".figma/marwes/pages/-toast/component-container_1574-20451.json"
+      ".figma/marwes/pages/-toast/-toast-dark_2970-9564.json"
     ],
     "nodeReferences": {
       "toastComponentSet": "1365:11937",
       "toastLightFrame": "1365:12526",
-      "toastDarkFrame": "2276:56938",
-      "toastComponentContainer": "1574:20451"
+      "toastDarkFrame": "2970:9564"
     },
     "figmaTokens": [
-      "toast/subtle/surface",
-      "toast/subtle/border",
-      "toast/subtle/text",
-      "toast/subtle/action",
-      "toast/outline/surface",
-      "toast/outline/border",
-      "toast/outline/text",
-      "toast/outline/action",
-      "toast/rich/surface",
-      "toast/rich/border",
-      "toast/rich/text",
-      "toast/rich/action"
+      "status-display/subtle/surface",
+      "status-display/subtle/border",
+      "status-display/subtle/text",
+      "status-display/outline/surface",
+      "status-display/outline/border",
+      "status-display/outline/text",
+      "status-display/rich/surface",
+      "status-display/rich/border",
+      "status-display/rich/text"
     ],
     "figmaStates": {
       "baseVariants": [
@@ -159,8 +182,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

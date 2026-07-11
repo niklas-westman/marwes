@@ -1,0 +1,28 @@
+/**
+ * DatePickerField (Molecule)
+ *
+ * Layout for label + calendar + helper/error text
+ */
+
+.mw-date-picker-field {
+  display: grid;
+  gap: var(--mw-density-field-gap);
+}
+
+.mw-date-picker-field__label {
+  display: block;
+  text-align: left;
+}
+
+.mw-date-picker-field__helper {
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-date-picker-field__error {
+  color: var(--mw-color-danger-base, #c4302b);
+}
+
+.mw-date-picker-field--invalid .mw-date-picker {
+  outline: 1px solid var(--mw-color-danger-base, #c4302b);
+  border-radius: var(--mw-ui-radius, 6px);
+}

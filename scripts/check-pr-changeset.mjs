@@ -28,6 +28,7 @@ const fixedMarwesPackages = [
   "@marwes-ui/react",
   "@marwes-ui/presets",
   "@marwes-ui/vue",
+  "@marwes-ui/svelte",
 ]
 
 function git(args) {

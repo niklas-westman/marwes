@@ -1,0 +1,36 @@
+{
+  "baseline": "with-help-icon.chromium-linux.light.png",
+  "caseFingerprint": "477697848da92fb3dc5400566c960b7892977854bf8fd8c6c44666a7b2ee29c9",
+  "caseId": "tooltip.with-help-icon",
+  "createdAt": "2026-06-14T07:17:10.470Z",
+  "exportScale": 1,
+  "family": "tooltip",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/tooltip/with-help-icon/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5070:45371",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "pngByteLength": 2125,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "3afda7f4af82821da26268efa7b81d910f3a01e4cc07e52013f1b99badb82d9d",
+  "schemaVersion": 1,
+  "sourceFingerprint": "3eff7cba1c9cd6d4a9668f5eadff2d90e2b691fe645823252dba63908084767b",
+  "sourceFrameId": "1574:21179",
+  "sourceNodeId": "1574:21185",
+  "sourceNodeIds": ["1574:21185"],
+  "variablesFingerprint": "0bff6993e59da3d421b5bdae1d7f0a4b7c5f86ca73e9d6db30c4e9cccf30735c",
+  "viewport": "tooltip-with-help-icon",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

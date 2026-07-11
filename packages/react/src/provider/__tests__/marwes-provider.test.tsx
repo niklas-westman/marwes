@@ -2,7 +2,7 @@
  * React adapter: Tests the MarwesProvider component — theme context injection,
  * mode toggling, dark/light detection, and provider nesting behavior.
  */
-import { type ResolvedTheme, ThemeMode } from "@marwes-ui/core"
+import { type MwTheme, type ResolvedTheme, ThemeMode } from "@marwes-ui/core"
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import * as React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
@@ -406,6 +406,28 @@ describe("MarwesProvider — context", () => {
 
     expect(themes[0]?.mode).toBe(ThemeMode.dark)
     expect(themes[0]?.color.background).toBe("#0F0F0F")
+  })
+
+  it("passes CSS-provider mwTheme to render-prop children", () => {
+    const themes: MwTheme[] = []
+
+    render(
+      <MarwesProvider theme={{ breakpoint: { tablet: 1024 } }}>
+        {(mwTheme) => {
+          themes.push(mwTheme)
+          return <output>{mwTheme.spacing.sp16}</output>
+        }}
+      </MarwesProvider>,
+    )
+
+    expect(screen.getByText("var(--mw-spacing-sp-16)")).toBeInTheDocument()
+    expect(themes[0]?.color.textMuted).toBe("var(--mw-color-text-muted)")
+    expect(themes[0]?.typography.paragraph.sm.fontSize).toBe(
+      "var(--mw-typography-paragraph-sm-font-size)",
+    )
+    expect(themes[0]?.breakpoint.tablet).toBe(1024)
+    expect(themes[0]?.media.tabletAndAbove).toBe("@media (min-width: 1024px)")
+    expect(themes[0]?.media.tabletAndBelow).toBe("@media (max-width: 1023.98px)")
   })
 
   it("switches provider-owned mode through useThemeMode().toggleMode()", () => {

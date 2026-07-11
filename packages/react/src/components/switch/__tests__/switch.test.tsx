@@ -7,9 +7,10 @@ import type * as React from "react"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it } from "vitest"
-import { Switch, SwitchField } from ".."
 import { runSwitchContract } from "../../../../../../tests/contracts/switch.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Switch } from "../switch"
+import { SwitchField } from "../switch-field"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)

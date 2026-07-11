@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Accordion } from "@marwes-ui/svelte";
+  // Atom is no longer publicly exported; deep-import for playground demo.
+  import Accordion from "../../../../packages/svelte/src/lib/components/accordion/Accordion.svelte";
 
   let openItems = $state<Record<string, boolean>>({ item1: true, item2: false, item3: false });
 

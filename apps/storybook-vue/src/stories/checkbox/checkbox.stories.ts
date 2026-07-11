@@ -1,8 +1,12 @@
 import { storybookA11yPolicy, storybookCheckboxArgTypes, storybookLayout } from "@marwes-ui/core"
-import type { CheckboxProps } from "@marwes-ui/vue"
-import { Checkbox, Paragraph } from "@marwes-ui/vue"
+import { Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import {
+  Checkbox,
+  type CheckboxProps,
+} from "../../../../../packages/vue/src/components/checkbox/checkbox"
 
 const meta = {
   title: "Checkbox/Atom",

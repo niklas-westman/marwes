@@ -16,24 +16,16 @@
 }
 
 .mw-checkbox-field__description {
-  opacity: 0.75;
   margin-left: calc(
     var(--mw-density-checkbox-size) +
     var(--mw-spacing-sp-8) +
     var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
   );
-  font-size: var(--mw-density-font-size-sm);
+  color: var(--mw-color-text-muted, #595959);
 }
 
-@supports selector(:has(*)) {
-  .mw-checkbox-field__row:has(.mw-checkbox:focus-visible) {
-    outline: 2px solid var(--mw-color-focus);
-    outline-offset: 2px;
-  }
-
-  .mw-checkbox-field__row:has(.mw-checkbox:focus-visible) .mw-checkbox {
-    outline: none;
-  }
+.mw-checkbox-field__description .mw-text {
+  color: inherit;
 }
 
 .mw-checkbox-field__error {
@@ -42,12 +34,20 @@
     var(--mw-spacing-sp-8) +
     var(--mw-density-gap) /* checkbox size + margin + spacing to textfield */
   );
-  font-size: var(--mw-density-font-size-sm);
   color: var(--mw-color-danger-base, #d90429);
+}
+
+.mw-checkbox-field__error .mw-text {
+  color: inherit;
 }
 
 /* Optional state hooks */
 .mw-checkbox-field--disabled .mw-checkbox-field__label {
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.mw-checkbox-field--invalid .mw-checkbox-field__label .mw-text,
+.mw-checkbox-field--invalid .mw-checkbox-field__error .mw-text {
+  color: var(--mw-color-danger-base, #d90429);
 }

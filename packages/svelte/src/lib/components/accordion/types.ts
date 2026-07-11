@@ -29,3 +29,7 @@ export interface AccordionFieldProps {
   class?: string
   disabled?: boolean
 }
+
+export type FAQAccordionProps = Omit<AccordionFieldProps, "multiple" | "disabled">
+export type SettingsAccordionProps = Omit<AccordionFieldProps, "multiple" | "disabled">
+export type SectionsAccordionProps = Omit<AccordionFieldProps, "disabled">

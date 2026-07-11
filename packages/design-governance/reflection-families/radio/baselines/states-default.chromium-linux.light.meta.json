@@ -1,0 +1,36 @@
+{
+  "baseline": "radio/baselines/states-default.chromium-linux.light.png",
+  "caseFingerprint": "a930a22ffceb244cf2eb698e84aeb1539fc4ae20a38f8d825c34f65ee97e4697",
+  "caseId": "radio.states-default",
+  "createdAt": "2026-06-13T16:20:11.106Z",
+  "exportScale": 1,
+  "family": "radio",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/radio/states-default/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5056:44296",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 2071,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "531a865453837bab2ed1922cf02392b6436fcacc6720fe880f89ab0df156f6ec",
+  "schemaVersion": 1,
+  "sourceFingerprint": "c2717d8c66de9618681261e969bf85cba3910bf4da0b702162ba8e40019d2609",
+  "sourceFrameId": "1368:6734",
+  "sourceNodeId": "1368:6740",
+  "sourceNodeIds": ["1368:6740", "1368:6744", "1368:6751"],
+  "variablesFingerprint": "a429afc42a75d7f5f58a2a516930379bb984f0ff30f7dc03ed9d25547efabd67",
+  "viewport": "radio-states-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

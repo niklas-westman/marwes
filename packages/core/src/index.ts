@@ -2,14 +2,22 @@ export type {
   Theme,
   ThemeInput,
   ThemeInputColor,
+  ThemeBreakpointName,
+  ThemeBreakpoints,
   ThemePreference,
   ThemeVariableStrategy,
   ColorInput,
   ColorRole,
   SecondaryColorRole,
   Density,
+  TextTransform,
+  TypographyStyle,
+  TextTypographyStyle,
+  PersonalityName,
 } from "./theme/theme-types"
 export { ThemeMode } from "./theme/theme-types"
+export { TextVariant } from "./theme/text-variant"
+export { defaultThemeBreakpoints } from "./theme/theme-types"
 export type { SystemThemeMode } from "./theme/theme-mode"
 export {
   isThemeMode,
@@ -34,12 +42,22 @@ export type {
 export { themeModesToCSSRules, themeToCSSRule, themeToCSSVars } from "./theme/theme-css"
 export type {
   MwStyledTheme,
+  MwTheme,
+  MwThemeMedia,
   MwThemeVarName,
   MwThemeVarNames,
   MwThemeVarReference,
   MwThemeVars,
 } from "./theme/theme-vars"
-export { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "./theme/theme-vars"
+export {
+  createMwTheme,
+  createMwThemeMedia,
+  mwStyledTheme,
+  mwTheme,
+  mwThemeVarNames,
+  mwThemeVars,
+  mwVar,
+} from "./theme/theme-vars"
 
 // /* Button */
 // export { createButtonRecipe } from "./components/atoms/button";
@@ -131,6 +149,21 @@ export type {
   DialogOptions,
   DialogRenderKit,
   DialogSize,
+  DrawerOptions,
+  DrawerPlacement,
+  DrawerRenderKit,
+  DrawerSize,
+  ContextMenuActionItem,
+  ContextMenuDividerItem,
+  ContextMenuEntry,
+  ContextMenuOptions,
+  ContextMenuRenderKit,
+  BreadcrumbItem,
+  BreadcrumbOptions,
+  BreadcrumbRenderKit,
+  BreadcrumbItemRenderKit,
+  BreadcrumbHomeRenderKit,
+  BreadcrumbEntryRenderKit,
   SpinnerOptions,
   SpinnerRenderKit,
   SpinnerSize,
@@ -139,6 +172,10 @@ export type {
   SkeletonVariant,
   SkeletonAnimation,
   SkeletonDimension,
+  ProgressBarOptions,
+  ProgressBarRenderKit,
+  ProgressBarSize,
+  ProgressBarState,
   StatTileOptions,
   StatTileRenderKit,
   StatTileTone,
@@ -168,11 +205,24 @@ export type {
   HeadingRenderKit,
   HeadingLevel,
   HeadingSize,
+  SemanticHeadingLevel,
   SliderOptions,
   SliderRenderKit,
   ParagraphOptions,
   ParagraphRenderKit,
   ParagraphSize,
+  TextA11y,
+  TextAs,
+  TextOptions,
+  TextRenderKit,
+  PaginationOptions,
+  PaginationItem,
+  PaginationRenderKit,
+  PaginationListRenderKit,
+  PaginationListItemRenderKit,
+  PaginationControlRenderKit,
+  PaginationPageRenderKit,
+  PaginationEllipsisRenderKit,
   TooltipOptions,
   TooltipRenderKit,
 } from "./components/atoms"

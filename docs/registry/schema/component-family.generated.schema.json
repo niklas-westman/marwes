@@ -62,6 +62,12 @@
             "type": "string"
           }
         },
+        "svelte": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "storybookReact": {
           "type": "array",
           "items": {
@@ -69,6 +75,12 @@
           }
         },
         "storybookVue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storybookSvelte": {
           "type": "array",
           "items": {
             "type": "string"
@@ -188,10 +200,16 @@
         "vue": {
           "type": "boolean"
         },
+        "svelte": {
+          "type": "boolean"
+        },
         "storybookReact": {
           "type": "boolean"
         },
         "storybookVue": {
+          "type": "boolean"
+        },
+        "storybookSvelte": {
           "type": "boolean"
         },
         "contractsPresent": {

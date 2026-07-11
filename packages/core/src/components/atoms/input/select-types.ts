@@ -28,7 +28,11 @@ export type SelectOptions = {
   invalid?: boolean
   describedBy?: string
 
+  /** Accessible name for standalone selects. SelectField should use visible `label`. */
   ariaLabel?: string
+  /** ID of an element whose text labels the select. Wins over `ariaLabel` if both are set. */
+  ariaLabelledBy?: string
+  label?: string
 }
 
 export type SelectA11yProps = {
@@ -37,6 +41,7 @@ export type SelectA11yProps = {
   disabled?: true
   required?: true
   ariaLabel?: string
+  ariaLabelledBy?: string
   ariaInvalid?: true
   ariaDescribedBy?: string
 }

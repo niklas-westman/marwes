@@ -10,6 +10,7 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
   const size = opts.size ?? "md"
   const variant = opts.variant ?? "primary"
   const action = opts.action ?? (tag === "button" ? "button" : "navigate")
+  const hasAffordance = resolvedLoading.isLoading || Boolean(opts.iconLeft || opts.iconRight)
 
   return {
     tag,
@@ -39,6 +40,8 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
         "data-size": size,
       }),
       "data-error": opts.error ? "true" : undefined,
+      "data-has-affordance": hasAffordance ? "true" : undefined,
+      "data-icon-only": opts.iconOnly ? "true" : undefined,
       ...opts.dataAttributes,
     },
     vars: {},

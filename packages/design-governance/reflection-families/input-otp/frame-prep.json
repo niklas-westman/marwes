@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "family": "input-otp",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "outputPage": "Reflection Baselines",
+  "cases": [
+    {
+      "caseId": "input-otp.default",
+      "viewport": "input-otp-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "selector": {
+        "strategy": "rowChild",
+        "rowName": "Row/Default",
+        "rowOccurrence": 0,
+        "childName": "Input OTP",
+        "childOccurrence": 0
+      },
+      "modes": {
+        "light": {
+          "sourceFrameId": "1803:15024",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15024",
+          "outputFrameName": "reflection/input-otp/default/light",
+          "framing": {
+            "background": "#ffffff",
+            "align": "center",
+            "padding": 0
+          }
+        },
+        "dark": {
+          "sourceFrameId": "1803:15155",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1803-15155",
+          "outputFrameName": "reflection/input-otp/default/dark",
+          "framing": {
+            "background": "#0f0f0f",
+            "align": "center",
+            "padding": 0
+          }
+        }
+      }
+    }
+  ]
+}

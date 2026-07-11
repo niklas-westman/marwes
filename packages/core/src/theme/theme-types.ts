@@ -1,6 +1,17 @@
 // Re-export color role types so consumers import from one place
+import type { TextVariant } from "./text-variant"
+
 export type { ColorInput, ColorRole, SecondaryColorRole } from "./color-resolve"
+export { TextVariant } from "./text-variant"
 export type { ToneName } from "./tone"
+
+/**
+ * Personality is an optional visual identity axis. It adds signature visual
+ * effects (shadows, glow, outlines) on top of the token layer without
+ * changing colors or typography. Default is "flat" — no additional CSS is
+ * applied, so existing themes remain unchanged.
+ */
+export type PersonalityName = "flat" | "glow" | "print" | "soft" | "outlined"
 
 export type Density = "compact" | "comfortable" | "spacious"
 
@@ -12,14 +23,27 @@ export type UiVariant = "solid" | "soft" | "outline" | "ghost"
 
 export type IconStrokeWidth = "xs" | "sm" | "md" | "lg"
 export type IconSize = "xs" | "sm" | "md" | "lg"
-export type HeadingSize = "h1" | "h2" | "h3"
+export type HeadingSize = "display" | "h1" | "h2" | "h3"
 export type ParagraphSize = "sm" | "md" | "lg"
+export type TextTransform = "none" | "uppercase"
+
+export interface TypographyStyle {
+  fontSize: number
+  lineHeight: number
+  fontWeight: number
+  letterSpacing: number
+}
+
+export interface TextTypographyStyle extends TypographyStyle {
+  textTransform?: TextTransform
+}
 
 export type StatusColorTokens = {
   background: string
   text: string
   icon: string
   border: string
+  borderAccessible?: string
   borderStrong: string
 }
 
@@ -35,6 +59,15 @@ export const ThemeMode = {
 export type ThemeMode = (typeof ThemeMode)[keyof typeof ThemeMode]
 export type ThemePreference = ThemeMode | "system"
 export type ThemeVariableStrategy = "inline" | "style-tag"
+export type ThemeBreakpointName = "mobile" | "tablet" | "desktop" | "wideDesktop"
+export type ThemeBreakpoints = Record<ThemeBreakpointName, number>
+
+export const defaultThemeBreakpoints: ThemeBreakpoints = {
+  mobile: 640,
+  tablet: 900,
+  desktop: 1200,
+  wideDesktop: 1440,
+}
 
 export type Theme = {
   /**
@@ -50,7 +83,9 @@ export type Theme = {
     // Background & Surface
     background: string
     surface: string
+    surfacePrimary: string
     surfaceSubtle: string
+    surfaceBrand: string
     surfaceElevated: string
     surfaceDisabled: string
     surfaceInverted: string
@@ -62,13 +97,17 @@ export type Theme = {
     textDisabled: string
     textInverted: string
     textBrand: string
+    textLink: string
+    iconMuted: string
 
     // Borders
+    borderLow: string
     border: string
     borderSubtle: string
     borderStrong: string
     borderDisabled: string
     borderBrand: string
+    borderFull: string
 
     /**
      * Focus color used for focus-visible outlines on interactive elements.
@@ -96,25 +135,13 @@ export type Theme = {
     radius: number
     density: Density
   }
+  breakpoint: ThemeBreakpoints
   typography: {
-    h1: {
-      fontSize: number
-      lineHeight: number
-      fontWeight: number
-      letterSpacing: number
-    }
-    h2: {
-      fontSize: number
-      lineHeight: number
-      fontWeight: number
-      letterSpacing: number
-    }
-    h3: {
-      fontSize: number
-      lineHeight: number
-      fontWeight: number
-      letterSpacing: number
-    }
+    display: TypographyStyle
+    h1: TypographyStyle
+    h2: TypographyStyle
+    h3: TypographyStyle
+    text: Record<TextVariant, TextTypographyStyle>
     paragraph: {
       sm: {
         fontSize: number
@@ -152,7 +179,9 @@ export interface ThemeInputColor {
   // Surface and semantic tokens — not derived, configured directly
   background: string
   surface: string
+  surfacePrimary: string
   surfaceSubtle: string
+  surfaceBrand: string
   surfaceElevated: string
   surfaceDisabled: string
   surfaceInverted: string
@@ -161,10 +190,14 @@ export interface ThemeInputColor {
   textSubtle: string
   textDisabled: string
   textInverted: string
+  textLink: string
+  iconMuted: string
+  borderLow: string
   border: string
   borderSubtle: string
   borderStrong: string
   borderDisabled: string
+  borderFull: string
   focus: string
 
   // Removed in v3 — typed never so consumers get a descriptive TS error
@@ -181,13 +214,17 @@ export interface ThemeInputColor {
 export interface ThemeInput {
   mode?: ThemeMode
   tone?: ToneName
+  personality?: PersonalityName
   color?: Partial<ThemeInputColor>
   font?: Partial<Theme["font"]>
   ui?: Partial<Theme["ui"]>
+  breakpoint?: Partial<ThemeBreakpoints>
   typography?: Partial<{
+    display?: Partial<Theme["typography"]["display"]>
     h1?: Partial<Theme["typography"]["h1"]>
     h2?: Partial<Theme["typography"]["h2"]>
     h3?: Partial<Theme["typography"]["h3"]>
+    text?: Partial<Record<TextVariant, Partial<TextTypographyStyle>>>
     paragraph?: Partial<{
       sm?: Partial<Theme["typography"]["paragraph"]["sm"]>
       md?: Partial<Theme["typography"]["paragraph"]["md"]>

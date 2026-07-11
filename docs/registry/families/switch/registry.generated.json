@@ -42,6 +42,15 @@
       "packages/vue/src/components/switch/switch.ts",
       "packages/vue/src/components/switch/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/switch/FeatureToggle.svelte",
+      "packages/svelte/src/lib/components/switch/index.ts",
+      "packages/svelte/src/lib/components/switch/PermissionSwitch.svelte",
+      "packages/svelte/src/lib/components/switch/PreferenceSwitch.svelte",
+      "packages/svelte/src/lib/components/switch/Switch.svelte",
+      "packages/svelte/src/lib/components/switch/SwitchField.svelte",
+      "packages/svelte/src/lib/components/switch/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/switch/__tests__/switch-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/switch/__tests__/switch-taxonomy.test.ts",
@@ -63,6 +72,17 @@
       "apps/storybook-vue/src/stories/switch/story-helpers.ts",
       "apps/storybook-vue/src/stories/switch/switch-field.stories.ts",
       "apps/storybook-vue/src/stories/switch/switch.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/switch/__tests__/switch-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/switch/__tests__/switch-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/switch/feature-toggle.stories.ts",
+      "apps/storybook-svelte/src/stories/switch/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/switch/permission-switch.stories.ts",
+      "apps/storybook-svelte/src/stories/switch/preference-switch.stories.ts",
+      "apps/storybook-svelte/src/stories/switch/switch-field.stories.ts",
+      "apps/storybook-svelte/src/stories/switch/switch.stories.ts",
+      "apps/storybook-svelte/src/stories/switch/SwitchShowcase.svelte"
     ],
     "contracts": ["tests/contracts/switch.contract.ts"]
   },
@@ -139,8 +159,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

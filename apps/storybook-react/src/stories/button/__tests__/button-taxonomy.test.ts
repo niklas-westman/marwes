@@ -15,10 +15,14 @@ function readStoryFile(fileName: string): string {
 describe("React button story taxonomy", () => {
   it("uses Atom title for Button story", () => {
     const buttonStory = readStoryFile("button.stories.tsx")
+    const iconButtonStory = readStoryFile("icon-button.stories.tsx")
 
     expect(buttonStory).toContain('title: "Buttons/Atom/Button"')
     expect(buttonStory).toContain("component: Button")
     expect(buttonStory).toMatch(/export const\s+Basic\s*:/)
+    expect(iconButtonStory).toContain('title: "Button/Molecule/IconButton"')
+    expect(iconButtonStory).toContain("component: IconButton")
+    expect(iconButtonStory).toMatch(/export const\s+Basic\s*:/)
   })
 
   it("keeps boolean and object loading stories visually aligned", () => {
@@ -71,6 +75,7 @@ describe("React button story taxonomy", () => {
   it("does not use deprecated Buttons/General grouping", () => {
     const files = [
       "button.stories.tsx",
+      "icon-button.stories.tsx",
       "primary-button.stories.tsx",
       "secondary-button.stories.tsx",
       "text-button.stories.tsx",

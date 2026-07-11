@@ -1,5 +1,10 @@
-import { Switch, type SwitchFieldProps, type SwitchProps } from "@marwes-ui/react"
+import type { SwitchFieldProps } from "@marwes-ui/react"
 import * as React from "react"
+// Atom is no longer publicly exported; deep-import for story-helpers.
+import {
+  Switch,
+  type SwitchProps,
+} from "../../../../../packages/react/src/components/switch/switch"
 
 type SwitchFieldComponent<TProps extends SwitchFieldProps> = (props: TProps) => React.ReactElement
 

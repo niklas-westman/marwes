@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="ContextMenu/Introduction" />
+
+# ContextMenu Component
+
+Marwes provides ContextMenu as an atom for compact action lists. It renders a
+menu surface with button-backed menu items and visual dividers.
+
+## Component Architecture
+
+```
+ContextMenu (Atom)
+```
+
+## Recommended Usage
+
+```tsx
+import { ContextMenu, IconName } from "@marwes-ui/react"
+
+<ContextMenu
+  ariaLabel="File actions"
+  items={[
+    { value: "edit", label: "Edit", icon: IconName.Edit },
+    { value: "download", label: "Download", icon: IconName.Download },
+    { kind: "divider" },
+    { value: "delete", label: "Delete", icon: IconName.Trash, destructive: true },
+  ]}
+  onSelect={(value) => console.log(value)}
+/>
+```
+
+## Usage Notes
+
+- parent code owns opening, closing, focus return, and positioning
+- items render as real buttons with `role="menuitem"`
+- dividers render separator semantics
+- disabled items cannot trigger selection
+- destructive items expose a styleable `data-destructive` marker
+
+## Story Coverage
+
+- default Figma action group
+- destructive action
+- disabled action
+- compact grouped quick actions

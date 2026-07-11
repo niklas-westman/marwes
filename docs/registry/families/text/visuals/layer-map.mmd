@@ -1,0 +1,26 @@
+flowchart LR
+  Figma["Figma refs\ntypography/dashboard text"]
+  Core["@marwes-ui/core\ntext recipe + variant types"]
+  Presets["preset CSS\ntypography.css"]
+  React["@marwes-ui/react\nText"]
+  Vue["@marwes-ui/vue\nText"]
+  Svelte["@marwes-ui/svelte\nText"]
+  Stories["Storybook React + Vue + Svelte"]
+  Contracts["text shared contract"]
+  Registry["docs/registry/families/text"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Svelte --> Contracts
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

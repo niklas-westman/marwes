@@ -1,3 +1,10 @@
+<!--
+  H3 (Heading Level 3) — semantic subsection heading rendered as `<h3>`.
+
+  @remarks
+  H3 is the deepest blessed rung. For H4-H6, use
+  `<Text headingLevel={4..6} variant="..." />`.
+-->
 <script lang="ts">
   import { headingRecipe } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";

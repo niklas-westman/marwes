@@ -1,0 +1,123 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "breadcrumb",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md"],
+    "roadmap": [],
+    "core": [
+      "packages/core/src/components/atoms/breadcrumb/breadcrumb-a11y.ts",
+      "packages/core/src/components/atoms/breadcrumb/breadcrumb-recipe.ts",
+      "packages/core/src/components/atoms/breadcrumb/breadcrumb-types.ts",
+      "packages/core/src/components/atoms/breadcrumb/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/breadcrumb.css"],
+    "react": [
+      "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
+      "packages/react/src/components/breadcrumb/breadcrumb.tsx",
+      "packages/react/src/components/breadcrumb/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
+      "packages/vue/src/components/breadcrumb/breadcrumb.ts",
+      "packages/vue/src/components/breadcrumb/index.ts"
+    ],
+    "svelte": [
+      "packages/svelte/src/lib/components/breadcrumb/Breadcrumb.svelte",
+      "packages/svelte/src/lib/components/breadcrumb/index.ts",
+      "packages/svelte/src/lib/components/breadcrumb/types.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/breadcrumb/__tests__/breadcrumb-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/breadcrumb/__tests__/breadcrumb-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/breadcrumb/breadcrumb.stories.tsx",
+      "apps/storybook-react/src/stories/breadcrumb/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/breadcrumb/__tests__/breadcrumb-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/breadcrumb/__tests__/breadcrumb-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/breadcrumb/breadcrumb.stories.ts",
+      "apps/storybook-vue/src/stories/breadcrumb/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/breadcrumb/__tests__/breadcrumb-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/breadcrumb/__tests__/breadcrumb-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/breadcrumb/breadcrumb.stories.ts",
+      "apps/storybook-svelte/src/stories/breadcrumb/BreadcrumbButtonBacked.svelte",
+      "apps/storybook-svelte/src/stories/breadcrumb/BreadcrumbPreview.svelte",
+      "apps/storybook-svelte/src/stories/breadcrumb/BreadcrumbShowcase.svelte",
+      "apps/storybook-svelte/src/stories/breadcrumb/Introduction.mdx"
+    ],
+    "contracts": []
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "breadcrumb",
+    "canonicalAttributes": ["data-component"],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": [
+      "Breadcrumb exposes navigation hierarchy while routing, link resolution, and page ownership stay consumer-owned."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/breadcrumb.json",
+      ".figma/marwes/components/partsbreadcrumbbreadcrumb-item.json",
+      ".figma/marwes/components/partsbreadcrumbbreadcrumb-separator.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-breadcrumb/-breadcrumb_1574-27193.json",
+      ".figma/marwes/pages/-breadcrumb/-breadcrumb-dark_1574-27268.json",
+      ".figma/marwes/pages/-breadcrumb/component-container_1592-2744.json"
+    ],
+    "nodeReferences": {
+      "breadcrumbComponent": "1574:26965",
+      "breadcrumbItemComponent": "1574:26960",
+      "breadcrumbSeparatorComponent": "1574:26962",
+      "breadcrumbLightFrame": "1574:27193",
+      "breadcrumbDarkFrame": "1574:27268",
+      "breadcrumbContainer": "1592:2744"
+    },
+    "figmaTokens": [],
+    "figmaStates": {
+      "baseVariants": ["home", "link-item", "separator", "current-page"],
+      "interactionStates": ["light", "dark", "hover", "focus", "current"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "svelte": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "storybookSvelte": true,
+    "contractsPresent": true,
+    "auditDocPresent": false,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Breadcrumb exposes navigation hierarchy while routing, link resolution, and page ownership stay consumer-owned.",
+    "Generated from docs/registry/families/breadcrumb/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

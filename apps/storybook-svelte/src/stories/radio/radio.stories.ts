@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
-import { Radio } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import Radio from "../../../../../packages/svelte/src/lib/components/radio/Radio.svelte"
 import RadioShowcase from "./RadioShowcase.svelte"
 
 const meta = {

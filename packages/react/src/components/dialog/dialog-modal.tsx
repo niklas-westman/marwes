@@ -1,5 +1,6 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
+import { MarwesContext } from "../../provider/marwes-context"
 import { Dialog, type DialogProps } from "./dialog"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -43,6 +44,9 @@ export interface DialogFooterControls {
   close: () => void
 }
 
+export type DialogModalTone = "default" | "calm"
+export type DialogModalDivider = "visible" | "hidden"
+
 export interface DialogModalProps extends Omit<DialogProps, "footer" | "onClose"> {
   open?: boolean
   defaultOpen?: boolean
@@ -52,7 +56,18 @@ export interface DialogModalProps extends Omit<DialogProps, "footer" | "onClose"
   restoreFocus?: boolean
   portalTarget?: HTMLElement | null
   overlayClassName?: string
+  surfaceWidth?: string | number
+  tone?: DialogModalTone
+  divider?: DialogModalDivider
   footer?: React.ReactNode | ((controls: DialogFooterControls) => React.ReactNode)
+}
+
+type DialogModalStyle = React.CSSProperties & {
+  "--mw-dialog-surface-width"?: string
+}
+
+function toCSSDimension(value: string | number): string {
+  return typeof value === "number" ? `${value}px` : value
 }
 
 export function DialogModal(props: DialogModalProps): React.ReactElement | null {
@@ -65,12 +80,16 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     restoreFocus = true,
     portalTarget,
     overlayClassName,
+    surfaceWidth,
+    tone = "default",
+    divider = "visible",
     footer,
     ...dialogProps
   } = props
   const isControlled = open !== undefined
   const [internalOpen, setInternalOpen] = React.useState(defaultOpen)
   const resolvedOpen = isControlled ? open : internalOpen
+  const marwesContext = React.useContext(MarwesContext)
   const overlayRef = React.useRef<HTMLDivElement>(null)
   const surfaceRef = React.useRef<HTMLDivElement>(null)
   const lastFocusedElementRef = React.useRef<HTMLElement | null>(null)
@@ -177,10 +196,19 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     return null
   }
 
+  const modalStyle: DialogModalStyle | undefined =
+    surfaceWidth === undefined
+      ? undefined
+      : { "--mw-dialog-surface-width": toCSSDimension(surfaceWidth) }
+
   const modalMarkup = (
     <div
       ref={overlayRef}
       className={cx("mw-dialog-modal", overlayClassName)}
+      style={modalStyle}
+      data-surface-width={surfaceWidth === undefined ? undefined : "custom"}
+      data-tone={tone}
+      data-divider={divider}
       onClick={(event) => {
         if (!closeOnScrimClick) {
           return
@@ -211,5 +239,6 @@ export function DialogModal(props: DialogModalProps): React.ReactElement | null 
     return modalMarkup
   }
 
-  return createPortal(modalMarkup, portalTarget ?? document.body)
+  const resolvedTarget = portalTarget ?? marwesContext?.providerElement ?? document.body
+  return createPortal(modalMarkup, resolvedTarget)
 }

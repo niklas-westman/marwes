@@ -15,7 +15,12 @@ export function resolveInputA11y(opts: InputOptions): InputA11yProps {
   if (opts.autoComplete) a11y.autoComplete = opts.autoComplete
   if (opts.placeholder) a11y.placeholder = opts.placeholder
 
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  if (opts.ariaLabelledBy) {
+    a11y.ariaLabelledBy = opts.ariaLabelledBy
+  } else {
+    const accessibleLabel = opts.ariaLabel ?? opts.label
+    if (accessibleLabel) a11y.ariaLabel = accessibleLabel
+  }
   if (opts.invalid) a11y.ariaInvalid = true
   if (opts.describedBy) a11y.ariaDescribedBy = opts.describedBy
 

@@ -2,7 +2,7 @@ import { buildCheckboxFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Checkbox, type CheckboxProps } from "./checkbox"
 
 export type CheckboxFieldProps = {
@@ -91,13 +91,13 @@ export const CheckboxField = defineComponent(
         h("div", { class: "mw-checkbox-field__row" }, [
           h(Checkbox, mergedCheckboxProps.value),
           h("label", { class: "mw-checkbox-field__label", for: id.value }, [
-            h(Paragraph, { size: "md" }, { default: labelContent }),
+            h(Text, { variant: "label" }, { default: labelContent }),
           ]),
         ]),
 
         hasDescription.value
           ? h("div", { class: "mw-checkbox-field__description", id: ids.value.descriptionId }, [
-              h(Paragraph, { size: "sm" }, { default: descriptionContent }),
+              h(Text, { variant: "caption" }, { default: descriptionContent }),
             ])
           : null,
 
@@ -109,7 +109,7 @@ export const CheckboxField = defineComponent(
                 id: ids.value.errorId,
                 "aria-live": "polite",
               },
-              [h(Paragraph, { size: "sm" }, { default: errorContent })],
+              [h(Text, { variant: "caption" }, { default: errorContent })],
             )
           : null,
       ])

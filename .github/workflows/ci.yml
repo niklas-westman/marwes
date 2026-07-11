@@ -92,6 +92,10 @@ jobs:
             command: pnpm -r typecheck && pnpm test:typecheck:contracts
           - name: package tests
             command: pnpm test:packages
+          - name: design contracts
+            command: pnpm registry:check && pnpm colors:check && pnpm --filter @marwes-ui/presets test
+          - name: cohesive reflection
+            command: pnpm cohesive:ci
           - name: package build
             command: pnpm build:packages
           - name: app build
@@ -113,5 +117,22 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Cache Playwright browsers
+        if: matrix.name == 'cohesive reflection'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
       - name: Run ${{ matrix.name }}
         run: sh -lc "$CHECK_COMMAND"
+
+      - name: Upload Reflection artifacts
+        if: always() && matrix.name == 'cohesive reflection'
+        uses: actions/upload-artifact@v4
+        with:
+          name: reflection-artifacts
+          path: artifacts/reflection
+          if-no-files-found: ignore

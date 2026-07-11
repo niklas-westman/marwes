@@ -17,7 +17,8 @@ export function buildCheckboxA11y(props: CheckboxProps): CheckboxA11y {
   if (props.disabled) a11y.disabled = true
   if (props.required) a11y.required = true
 
-  if (props.ariaLabel) a11y.ariaLabel = props.ariaLabel
+  const accessibleLabel = props.ariaLabel ?? props.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (props.ariaLabelledBy) a11y.ariaLabelledBy = props.ariaLabelledBy
   if (props.ariaDescribedBy) a11y.ariaDescribedBy = props.ariaDescribedBy
 

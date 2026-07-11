@@ -20,18 +20,39 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px; /* off-scale — icon-to-label spacing */
+  gap: var(--mw-spacing-sp-4);
   height: var(--mw-density-height);
-  padding: 0 var(--mw-density-padding-x);
+  padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
-  border: 1px solid transparent;
+  border: 0;
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
   font-weight: 500;
-  line-height: 0;
+  line-height: var(--mw-typography-text-label-line-height);
+  letter-spacing: var(--mw-typography-text-label-letter-spacing);
+  min-inline-size: 0;
   cursor: pointer;
   user-select: none;
   transition: all 150ms ease;
+}
+
+.mw-btn__label {
+  display: block;
+  line-height: inherit;
+  letter-spacing: inherit;
+  min-inline-size: 0;
+}
+
+.mw-btn[data-has-affordance="true"] .mw-btn__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mw-btn[data-icon-only="true"] {
+  width: var(--mw-density-height);
+  min-width: var(--mw-density-height);
+  padding: 0;
 }
 
 /* FOCUS STATE - Figma spec: 2px white space + 2px Accessible blue outline */
@@ -60,6 +81,7 @@
   background: transparent;
   color: var(--mw-color-secondary-label);
   border-color: var(--mw-color-secondary-border);
+  box-shadow: inset 0 0 0 1px var(--mw-color-secondary-border);
 }
 
 .mw-btn--secondary:hover:not(:disabled) {
@@ -85,30 +107,46 @@
   background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
 }
 
-/* TEXT - Minimal text-only button, content-hugging (no fixed height).
-   Uses the same 6px icon-to-label spacing as every other button. */
+/* TEXT - Minimal text-only button, content-hugging (no fixed height). */
 .mw-btn.mw-btn--text {
+  position: relative;
+  isolation: isolate;
   background: transparent;
   color: var(--mw-color-text);
   border-color: transparent;
+  border-width: 0;
   height: auto;
-  padding: 0.25rem 0.5rem;
-  line-height: 1;
+  padding: 0;
   border-radius: var(--mw-ui-radius);
+  overflow: visible;
 }
 
-.mw-btn--text:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
+.mw-btn.mw-btn--text::before {
+  content: "";
+  position: absolute;
+  inset: -0.25rem -0.5rem;
+  z-index: -1;
+  border-radius: var(--mw-ui-radius);
+  background: transparent;
+  pointer-events: none;
 }
 
-.mw-btn--text:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-text) 12%, transparent);
+.mw-btn--text:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-border-full) 10%, transparent);
+}
+
+.mw-btn--text:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-border-full) 20%, transparent);
 }
 
 .mw-btn.mw-btn--text[data-action="navigate"] {
   padding: 0.125rem 0;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.mw-btn.mw-btn--text[data-action="navigate"]::before {
+  content: none;
 }
 
 /* SIZES */
@@ -142,6 +180,10 @@
   cursor: not-allowed;
 }
 
+.mw-btn.mw-btn--text:disabled {
+  color: var(--mw-color-text-disabled);
+}
+
 /* Dark mode disabled state: #FFFFFF 40% (middle of 20-60% range from Figma) */
 .mw-theme--dark .mw-btn:disabled {
   opacity: 0.4;
@@ -150,7 +192,7 @@
 /* ERROR STATE - Figma node: 1:1072 includes error state */
 .mw-btn[data-error="true"],
 .mw-btn--error {
-  border-color: var(--mw-color-danger-base);
+  border-color: var(--mw-color-status-error-border);
 }
 
 .mw-btn--primary[data-error="true"],
@@ -161,13 +203,14 @@
 
 .mw-btn--secondary[data-error="true"],
 .mw-btn--secondary.mw-btn--error {
-  color: var(--mw-color-danger-base);
-  border-color: var(--mw-color-danger-base);
+  color: var(--mw-color-status-error-text);
+  border-color: var(--mw-color-status-error-border);
+  box-shadow: inset 0 0 0 1px var(--mw-color-status-error-border);
 }
 
 .mw-btn--text[data-error="true"],
 .mw-btn--text.mw-btn--error {
-  color: var(--mw-color-danger-base);
+  color: var(--mw-color-status-error-text);
 }
 
 /* SUCCESS - Positive confirmation actions */
@@ -182,6 +225,21 @@
 }
 
 .mw-btn--success:active:not(:disabled) {
+  opacity: 0.95;
+}
+
+/* DANGER - Destructive confirmation actions */
+.mw-btn--danger {
+  background: var(--mw-color-danger-base);
+  color: var(--mw-color-danger-label);
+  border-color: var(--mw-color-danger-base);
+}
+
+.mw-btn--danger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.mw-btn--danger:active:not(:disabled) {
   opacity: 0.95;
 }
 
@@ -206,8 +264,9 @@
 /* Dark mode: Error state for Secondary button (red outline on dark background) */
 .mw-theme--dark .mw-btn--secondary[data-error="true"],
 .mw-theme--dark .mw-btn--secondary.mw-btn--error {
-  border-color: var(--mw-color-danger-base);
-  color: var(--mw-color-danger-base);
+  border-color: var(--mw-color-status-error-border);
+  color: var(--mw-color-status-error-text);
+  box-shadow: inset 0 0 0 1px var(--mw-color-status-error-border);
 }
 
 /* Dark mode: Error state for Primary button */

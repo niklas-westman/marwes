@@ -10,7 +10,7 @@ flowchart LR
   Requirement[Requirement in spec] --> Plan[Implementation plan]
   Plan --> Core[Core changes]
   Core --> Presets[Preset CSS changes]
-  Presets --> Adapters[React and Vue adapter changes]
+  Presets --> Adapters[React, Vue, and Svelte adapter changes]
   Adapters --> Stories[Storybook and tests]
   Stories --> Docs[Docs and changelog updates]
 ```
@@ -22,15 +22,15 @@ Marwes is a component system that prioritizes:
 - Consistent accessibility behavior
 - Framework-agnostic core logic
 
-## 2. Current Status (2026-04-09)
-- Repository shape: pnpm monorepo with `core`, `presets`, `react`, `vue`, Storybook apps, and a React playground
-- Adapter support: React and Vue are both first-class packages
+## 2. Current Status (2026-06-11)
+- Repository shape: pnpm monorepo with `core`, `presets`, `react`, `vue`, `svelte`, Storybook apps, and a React playground
+- Adapter support: React, Vue, and Svelte are first-class packages
 - Current focus: keep docs, Storybook coverage, and implementation aligned with the V3 Figma component set
 - Component family status is tracked through the registry docs and generated registry artifacts.
 
 ## 3. Core Principles
 - Simple surface API, strong internal consistency
-- Core is framework agnostic (no React, no Vue, no browser runtime behavior)
+- Core is framework agnostic (no React, Vue, Svelte, or browser runtime behavior)
 - Presets are static CSS (`.mw-*` classes and `--mw-*` vars)
 - Accessibility behavior is authored in core
 - Semantic metadata is source-owned in core for covered families
@@ -44,7 +44,7 @@ Marwes uses three layers:
    - A11y mappings
 2. `@marwes-ui/presets`
    - Static CSS and preset defaults
-3. Framework adapters (`@marwes-ui/react`, `@marwes-ui/vue`)
+3. Framework adapters (`@marwes-ui/react`, `@marwes-ui/vue`, `@marwes-ui/svelte`)
    - Thin adapters that apply core RenderKit output
    - Own browser runtime effects such as provider theme DOM sync and font loading
 
@@ -74,7 +74,7 @@ Adapter requirements:
 ## 5. Active Scope
 ### In Scope
 - Core theme system and preset CSS
-- React and Vue adapter parity for shipped components
+- React, Vue, and Svelte adapter parity for shipped components
 - Storybook and playground validation
 - Continued alignment with the synced V3 Figma references
 
@@ -91,7 +91,7 @@ Every non-trivial change must follow this sequence:
 2. **Acceptance criteria**
    - Each requirement includes testable outcomes.
 3. **Implementation mapping**
-   - Identify impacted files across core, presets, React, and Vue.
+   - Identify impacted files across core, presets, React, Vue, and Svelte.
 4. **Validation**
    - Typecheck/build and targeted behavior checks.
 5. **Documentation + changelog**
@@ -162,7 +162,7 @@ Use this format when resolving an open decision:
 
 ## 11.1 Semantic protocol requirements
 - Canonical semantic vocabulary is defined in `@marwes-ui/core`
-- Covered families must not invent divergent React/Vue semantic values
+- Covered families must not invent divergent React, Vue, or Svelte semantic values
 - `data-component` and purpose-level semantics are part of the public contract for covered families
 - Family-local data attributes may exist, but are not automatically canonical protocol fields
 - The canonical reference for semantic metadata is `docs/reference/ai-metadata.md`
@@ -170,6 +170,107 @@ Use this format when resolving an open decision:
 ## 12. Component Requirements
 
 > Requirement entries are kept as a traceable record of why work was started. Some entries describe an original problem statement for work that is now complete. Use the acceptance checkboxes and decision log to understand current status.
+
+### REQ-DRAWER-001: Drawer Component
+- **Figma reference**: use `.figma/marwes/components/drawer.json` plus `.figma/marwes/pages/-drawer/-drawer_1609-15651.json` and `.figma/marwes/pages/-drawer/-drawer-dark_1610-15934.json`.
+- **Problem**: Drawer behavior is needed by product compositions such as `apps/dashboard-teaser`, but it must be provided as a real Marwes component instead of an app-local fork.
+- **Scope**:
+  - Add a framework-agnostic core Drawer recipe and a11y contract.
+  - Add firstEdition preset CSS for the drawer panel, scrim, header, content, dividers, footer, and close affordance.
+  - Expose Drawer through React, Vue, and Svelte adapters.
+  - Add React, Vue, and Svelte Storybook coverage.
+  - Replace dashboard-teaser local drawer usage with the React Drawer export.
+  - Support drawer sizes `small`, `medium`, and `large` mapped to the Figma widths `320px`, `400px`, and `560px`.
+  - Support left/right placement, optional scrim, optional footer, and dismissible close behavior.
+- **Non-goals**:
+  - Adding focus trapping or portal management in core.
+  - Moving framework lifecycle behavior into `@marwes-ui/core`.
+  - Hardcoding visual tokens in adapters.
+- **Acceptance criteria**:
+  - [ ] Core Drawer recipe returns stable `.mw-drawer*` classes, semantic data attributes, size/placement state, and dialog a11y metadata.
+  - [ ] Preset CSS uses `--mw-*` variables seeded from theme CSS variables for surface, text, border, focus, radius, and font behavior.
+  - [ ] React, Vue, and Svelte adapters render the core recipe output without duplicating core a11y logic.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with size, footer, scrim, placement, and dark-mode-relevant states.
+  - [ ] Dashboard teaser consumes the React Drawer export and no longer owns a local drawer implementation.
+- **Validation**:
+  - Unit: core recipe tests; preset CSS contract tests; React/Vue/Svelte adapter tests where supported.
+  - Integration/manual: Storybook visual checks and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/drawer/*`
+  - `packages/presets/src/firstEdition/drawer.css`
+  - `packages/react/src/components/drawer/*`
+  - `packages/vue/src/components/drawer/*`
+  - `packages/svelte/src/lib/components/drawer/*`
+  - `apps/storybook-react/src/stories/drawer/*`
+  - `apps/storybook-vue/src/stories/drawer/*`
+  - `apps/storybook-svelte/src/stories/drawer/*`
+  - `apps/dashboard-teaser/*`
+
+### REQ-CONTEXT-MENU-001: Context Menu Component
+- **Figma reference**: use `.figma/marwes/components/context-menu.json`, `.figma/marwes/components/partscontext-menucontext-menu-item.json`, `.figma/marwes/pages/-context-menu/-context-menu_1574-24029.json`, and `.figma/marwes/pages/-context-menu/-context-menu-dark_1574-24160.json`.
+- **Problem**: Context menu visuals are currently mocked in `apps/dashboard-teaser`, but they need to ship as a reusable Marwes component with consistent semantics, CSS, and framework parity.
+- **Scope**:
+  - Add a framework-agnostic core ContextMenu recipe with item and divider render kits.
+  - Add firstEdition preset CSS for the menu shell, items, icons, dividers, focus, hover, disabled, and destructive states.
+  - Expose ContextMenu through React, Vue, and Svelte adapters.
+  - Add React, Vue, and Svelte Storybook coverage.
+  - Replace dashboard-teaser local context menu markup with the React ContextMenu export.
+- **Non-goals**:
+  - Popover positioning, portal management, or open-state management.
+  - Moving keyboard or lifecycle behavior into `@marwes-ui/core`.
+  - Hardcoding visual tokens in adapters.
+- **Acceptance criteria**:
+  - [ ] Core ContextMenu recipe returns stable `.mw-context-menu*` classes, semantic data attributes, menu/menuitem a11y metadata, and divider render kits.
+  - [ ] Preset CSS maps the Figma menu dimensions, spacing, border, radius, typography, icon sizing, divider treatment, and light/dark surfaces to `--mw-*` variables.
+  - [ ] React, Vue, and Svelte adapters render button-backed menu items and disabled items cannot trigger selection.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with default, destructive, disabled, and compact grouped examples.
+  - [ ] Dashboard teaser consumes the React ContextMenu export and no longer owns local context menu styling.
+- **Validation**:
+  - Unit: core recipe tests; React/Vue adapter tests; Svelte type/build coverage.
+  - Integration/manual: Storybook visual check and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/context-menu/*`
+  - `packages/presets/src/firstEdition/context-menu.css`
+  - `packages/react/src/components/context-menu/*`
+  - `packages/vue/src/components/context-menu/*`
+  - `packages/svelte/src/lib/components/context-menu/*`
+  - `apps/storybook-react/src/stories/context-menu/*`
+  - `apps/storybook-vue/src/stories/context-menu/*`
+  - `apps/storybook-svelte/src/stories/context-menu/*`
+  - `apps/dashboard-teaser/*`
+
+### REQ-BREADCRUMB-001: Breadcrumb Component
+- **Figma reference**: use `.figma/marwes/components/breadcrumb.json`, `.figma/marwes/components/partsbreadcrumbbreadcrumb-item.json`, `.figma/marwes/components/partsbreadcrumbbreadcrumb-separator.json`, `.figma/marwes/pages/-breadcrumb/-breadcrumb_1574-27193.json`, and `.figma/marwes/pages/-breadcrumb/-breadcrumb-dark_1574-27268.json`.
+- **Problem**: Breadcrumb visuals are currently mocked in `apps/dashboard-teaser`, but they need to ship as a reusable Marwes component with consistent hierarchy semantics, CSS, and framework parity.
+- **Scope**:
+  - Add a framework-agnostic core Breadcrumb recipe with root, list, item, separator, home, link, and current-page render metadata.
+  - Add firstEdition preset CSS for Figma typography, icon sizing, chevron separator spacing, light/dark token mapping, hover, and focus states.
+  - Expose Breadcrumb through React, Vue, and Svelte adapters.
+  - Add React, Vue, and Svelte Storybook coverage.
+  - Replace dashboard-teaser local breadcrumb markup with the React Breadcrumb export.
+- **Non-goals**:
+  - Owning routing, URL generation, or router integration.
+  - Moving framework click handling into `@marwes-ui/core`.
+  - Hardcoding visual tokens in adapters.
+- **Acceptance criteria**:
+  - [ ] Core Breadcrumb recipe returns stable `.mw-breadcrumb*` classes, semantic data attributes, list semantics, link/current item a11y metadata, and separator metadata.
+  - [ ] Preset CSS maps Figma's 14px home icon, 12px chevrons, 24px separator slots, 12px label typography, link/current/muted colors, and focus treatment to `--mw-*` variables.
+  - [ ] React, Vue, and Svelte adapters render the core recipe output without duplicating core hierarchy logic.
+  - [ ] Storybook coverage exists for React, Vue, and Svelte with default, no-home, button-backed, and state-comparison examples where supported.
+  - [ ] Dashboard teaser consumes the React Breadcrumb export and no longer owns local breadcrumb styling.
+- **Validation**:
+  - Unit: core recipe tests; preset CSS contract tests; React/Vue adapter tests.
+  - Integration/manual: Storybook visual check and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/breadcrumb/*`
+  - `packages/presets/src/firstEdition/breadcrumb.css`
+  - `packages/react/src/components/breadcrumb/*`
+  - `packages/vue/src/components/breadcrumb/*`
+  - `packages/svelte/src/lib/components/breadcrumb/*`
+  - `apps/storybook-react/src/stories/breadcrumb/*`
+  - `apps/storybook-vue/src/stories/breadcrumb/*`
+  - `apps/storybook-svelte/src/stories/breadcrumb/*`
+  - `apps/dashboard-teaser/*`
 
 ### REQ-VUE-001: Vue Adapter Package (`@marwes-ui/vue`)
 - **Problem**: Marwes core and presets are framework-agnostic, but only a React adapter exists, which blocks Vue users from consuming the same components and behaviors.
@@ -851,6 +952,39 @@ Use this format when resolving an open decision:
   - `apps/storybook-vue/src/stories/slider/*`
   - `docs/audits/slider-family-accessibility.md`
 
+### REQ-PROGRESS-BAR-001: ProgressBar Component
+- **Figma reference**: use `.figma/marwes/components/progress-bar.json`, `.figma/marwes/pages/-progress-bar/-progress-bar_1727-3932.json`, `.figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json`, and the dashboard item instance `.figma/marwes/pages/-dashboard/item_2705-11253.json`.
+- **Problem**: Product examples need determinate progress display, but `SliderField` is an adjustable input and should not be used as a fake progress bar.
+- **Scope**:
+  - Add a framework-agnostic core ProgressBar recipe and progressbar a11y contract.
+  - Add firstEdition preset CSS for the label row, percentage text, small/default tracks, fill, disabled, and visual state treatments.
+  - Expose ProgressBar through React, Vue, and Svelte adapters.
+  - Add Storybook coverage and contract tests across supported adapters.
+  - Replace dashboard-teaser SliderField usage with the React ProgressBar export.
+- **Non-goals**:
+  - Adding animated loading behavior or indeterminate progress.
+  - Making ProgressBar adjustable or keyboard interactive.
+  - Moving visual styling into framework adapters.
+- **Acceptance criteria**:
+  - [x] Core ProgressBar normalizes `min`, `max`, and `value`, clamps out-of-range values, and exposes a percentage CSS variable.
+  - [x] ProgressBar renders `role="progressbar"` with value metadata and a truthful accessible name.
+  - [x] Preset CSS maps the synced Figma small/default track sizes and state colors through theme variables.
+  - [x] React, Vue, and Svelte adapters render the core recipe output without owning progress logic.
+  - [x] Dashboard teaser uses ProgressBar instead of SliderField for determinate progress display.
+- **Validation**:
+  - Unit: shared ProgressBar contract through React and Vue adapter tests; Svelte adapter tests.
+  - Integration/manual: ProgressBar Storybook visual checks and dashboard-teaser browser check.
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/progress-bar/*`
+  - `packages/presets/src/firstEdition/progress-bar.css`
+  - `packages/react/src/components/progress-bar/*`
+  - `packages/vue/src/components/progress-bar/*`
+  - `packages/svelte/src/lib/components/progress-bar/*`
+  - `apps/storybook-react/src/stories/progress-bar/*`
+  - `apps/storybook-vue/src/stories/progress-bar/*`
+  - `apps/storybook-svelte/src/stories/progress-bar/*`
+  - `apps/dashboard-teaser/src/sections/rows/RowButtonPaginationProgress.tsx`
+
 ### REQ-DIALOG-001: Dialog Family Accessibility Contract
 - **Problem**: Marwes already ships `Dialog`, `DialogModal`, and purpose dialog wrappers, but the accessibility contract for modal semantics, focus lifecycle, dismissal behavior, and the boundary between the raw shell and the modal wrapper has not been recorded explicitly in the canonical spec or shared across React and Vue through a dedicated modal contract.
 - **Scope**:
@@ -1138,3 +1272,43 @@ Use this format when resolving an open decision:
   - `apps/storybook-svelte/`
   - `apps/playground-svelte/`
   - `implementation-svelte.md`
+
+### REQ-BANNER-001: Banner component
+
+- **Status**: implemented
+- **Problem**: Marwes needed a Banner atom for inline, page-level status messaging that supports multiple semantic intents with optional icon, CTA action, and dismissal.
+- **Scope**:
+  - Single token-driven component with five variants: neutral, info, success, warning, error
+  - Horizontal layout with optional leading icon, message text, CTA action slot, and dismiss button
+  - Accessibility: `role="status"` + `aria-live="polite"` for neutral/info/success; `role="alert"` + `aria-live="assertive"` for warning/error
+  - Full light and dark mode support using existing status color tokens
+  - Core recipe exposes `BannerRenderKit` with structured slots (root, content, icon, message, action, dismiss)
+- **Non-goals**:
+  - Multi-line or stacked banner layouts (use Toast or Dialog for complex flows)
+  - Built-in auto-dismiss timer (Banners are persistent; use Toast for transient messages)
+  - Animated entry/exit transitions at the core layer
+- **Acceptance criteria**:
+  - [x] Core recipe returns structured `BannerRenderKit` with correct a11y props per variant
+  - [x] Preset CSS matches Figma tokens for all five variants in light and dark mode
+  - [x] React adapter renders correct structure with `onDismiss`, `action`, `icon` props
+  - [x] Vue adapter emits `dismiss` event and uses named slots (`#action`, `#icon`)
+  - [x] Svelte adapter uses snippet slots and `ondismiss` callback
+  - [x] All adapters share the same visual and behavioral contract
+  - [x] Tests cover variant rendering, a11y roles, slot visibility, dismiss interaction
+  - [x] Stories demonstrate all variants, dark mode, with/without icon and CTA
+- **Validation**:
+  - Unit: `packages/react/src/components/banner/__tests__/`, `packages/vue/src/components/banner/__tests__/`
+  - Visual: Storybook stories in React, Vue, and Svelte apps
+- **Figma references**:
+  - `.figma/marwes/components/banner.json`
+  - `.figma/marwes/pages/-banner/-banner_1593-5094.json` (light)
+  - `.figma/marwes/pages/-banner/-banner-dark_2444-2179.json` (dark)
+- **Files**:
+  - `packages/core/src/components/atoms/banner/`
+  - `packages/presets/src/firstEdition/banner.css`
+  - `packages/react/src/components/banner/`
+  - `packages/vue/src/components/banner/`
+  - `packages/svelte/src/lib/components/banner/`
+  - `apps/storybook-react/src/stories/banner/`
+  - `apps/storybook-vue/src/stories/banner/`
+  - `apps/storybook-svelte/src/stories/banner/`

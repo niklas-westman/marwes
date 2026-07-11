@@ -1,0 +1,60 @@
+{
+  "$schema": "../../schema/component-family.meta.schema.json",
+  "family": "banner",
+  "displayName": "Banner",
+  "status": "shipped",
+  "summary": "Inline page-level status messaging component with five semantic intents, optional icon, CTA action slot, and dismiss button.",
+  "philosophy": [
+    "Banner is for persistent, page-level status messages. Use Toast for transient feedback.",
+    "Keep the component token-driven — variant controls surface, border, and icon color through CSS custom properties.",
+    "Keep a11y roles honest: warning/error get assertive alert role, info/success/neutral get polite status role.",
+    "Keep the API surface small — icon, message, action, dismiss — matching the Figma component properties directly."
+  ],
+  "usage": {
+    "useWhen": [
+      "The UI needs a persistent, page-level message about system state, feature announcements, or required actions.",
+      "The intent maps to one of the five semantic variants: neutral, info, success, warning, error.",
+      "The message needs an optional CTA and/or dismiss action."
+    ],
+    "avoidWhen": [
+      "The message is transient and should auto-dismiss (use Toast instead).",
+      "The message requires user confirmation or a blocking flow (use Dialog instead).",
+      "The message applies to a specific form field rather than the page (use field-level validation instead)."
+    ]
+  },
+  "axe": {
+    "riskTier": "low",
+    "auditStatus": "queued",
+    "automationCovers": [
+      "Variant-specific role and aria-live assignment in core recipe.",
+      "Dismiss button aria-label in all adapters.",
+      "React, Vue, and Svelte adapter tests for a11y attributes, slot visibility, and dismiss interaction."
+    ],
+    "manualReviewRequired": [
+      "Whether banner messages are concise enough for screen reader announcement.",
+      "Whether error/warning banners actually warrant assertive live-region behavior in context."
+    ],
+    "roadmapAnchors": [],
+    "notes": []
+  },
+  "visuals": {
+    "canonicalStories": {
+      "react": ["apps/storybook-react/src/stories/banner/banner.stories.tsx"],
+      "vue": ["apps/storybook-vue/src/stories/banner/banner.stories.ts"],
+      "svelte": ["apps/storybook-svelte/src/stories/banner/banner.stories.ts"]
+    },
+    "preferredStates": [
+      "neutral",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "with-icon",
+      "with-action",
+      "dismissible",
+      "light",
+      "dark"
+    ]
+  },
+  "openQuestions": []
+}

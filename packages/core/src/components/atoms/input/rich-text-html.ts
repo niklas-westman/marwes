@@ -41,7 +41,7 @@ export function normalizeRichTextHtml(rawHtml: string | undefined): string {
     return escapeRichTextHtml(trimmedHtml)
   }
 
-  const normalizedHtml = trimmedHtml
+  let normalizedHtml = trimmedHtml
     .replace(/<b(?:\s[^>]*)?>/gi, "<strong>")
     .replace(/<\/b>/gi, "</strong>")
     .replace(/<i(?:\s[^>]*)?>/gi, "<em>")
@@ -53,10 +53,22 @@ export function normalizeRichTextHtml(rawHtml: string | undefined): string {
     .replace(openingEmphasisPattern, "<em>")
     .replace(openingUnderlinePattern, "<u>")
     .replace(lineBreakPattern, "<br>")
-    .replace(disallowedTagPattern, "")
-    .replace(unsupportedAnglePattern, "&lt;")
-    .replace(/\s+/g, " ")
-    .trim()
+
+  // Strip disallowed tags in a stability loop so nested / re-gluing patterns
+  // like `<scr<script>ipt>` can't survive. Each iteration removes matches;
+  // when a full pass finds none, the string is safe to advance.
+  let previous: string
+  do {
+    previous = normalizedHtml
+    normalizedHtml = normalizedHtml.replace(disallowedTagPattern, "")
+  } while (normalizedHtml !== previous)
+
+  // After the removal loop stabilises, any remaining `<` that doesn't open
+  // an allowed tag is escaped to `&lt;`. This substitution can only make
+  // output safer, so a single pass suffices.
+  normalizedHtml = normalizedHtml.replace(unsupportedAnglePattern, "&lt;")
+
+  normalizedHtml = normalizedHtml.replace(/\s+/g, " ").trim()
 
   return isRichTextHtmlEmpty(normalizedHtml) ? "" : normalizedHtml
 }

@@ -41,6 +41,15 @@
       "packages/vue/src/components/dialog/index.ts",
       "packages/vue/src/components/dialog/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/dialog/ConfirmDialog.svelte",
+      "packages/svelte/src/lib/components/dialog/DestructiveDialog.svelte",
+      "packages/svelte/src/lib/components/dialog/Dialog.svelte",
+      "packages/svelte/src/lib/components/dialog/DialogModal.svelte",
+      "packages/svelte/src/lib/components/dialog/index.ts",
+      "packages/svelte/src/lib/components/dialog/InfoDialog.svelte",
+      "packages/svelte/src/lib/components/dialog/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
@@ -60,6 +69,21 @@
       "apps/storybook-vue/src/stories/dialog/dialog.stories.ts",
       "apps/storybook-vue/src/stories/dialog/info-dialog.stories.ts",
       "apps/storybook-vue/src/stories/dialog/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/dialog/__tests__/dialog-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/dialog/__tests__/dialog-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/dialog/confirm-dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/ConfirmDialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/destructive-dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/DestructiveDialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/dialog-modal.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/DialogAtomStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/DialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/info-dialog.stories.ts",
+      "apps/storybook-svelte/src/stories/dialog/InfoDialogStory.svelte",
+      "apps/storybook-svelte/src/stories/dialog/Introduction.mdx"
     ],
     "contracts": ["tests/contracts/dialog.contract.ts", "tests/contracts/dialog-modal.contract.ts"]
   },
@@ -105,30 +129,17 @@
       ".figma/marwes/pages/-dialog/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-dialog/dialog_1609-15459.json",
       ".figma/marwes/pages/-dialog/-dialog_1609-15527.json",
-      ".figma/marwes/pages/-dialog/-dialog-dark_1615-17130.json",
-      ".figma/marwes/pages/-dialog/dialog_1935-14085.json",
-      ".figma/marwes/pages/-dialog/frame-1_1935-14109.json",
+      ".figma/marwes/pages/-dialog/-dialog-dark_3017-37102.json",
       ".figma/marwes/pages/-dialog/icons-interface-x_1595-13879.json"
     ],
     "nodeReferences": {
       "dialogComponent": "1609:15459",
       "dialogLightFrame": "1609:15527",
-      "dialogDarkFrame": "1615:17130",
+      "dialogDarkFrame": "3017:37102",
       "closeIcon": "1595:13879"
     },
-    "figmaTokens": [
-      "card/surface",
-      "card/border",
-      "card/title",
-      "card/body",
-      "text/primary",
-      "text/secondary",
-      "border/default",
-      "surface/secondary",
-      "focus/ring"
-    ],
+    "figmaTokens": ["text/primary", "text/secondary"],
     "figmaStates": {
       "baseVariants": [
         "dialog-shell",
@@ -149,8 +160,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

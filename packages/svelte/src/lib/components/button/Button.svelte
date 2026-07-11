@@ -19,7 +19,9 @@
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 
   const resolvedVariant = $derived((options.variant ?? "primary") as ButtonVariant);
-  const isFilledVariant = $derived(resolvedVariant === "primary" || resolvedVariant === "success");
+  const isFilledVariant = $derived(
+    resolvedVariant === "primary" || resolvedVariant === "success" || resolvedVariant === "danger"
+  );
 
   const visibleLabel = $derived(
     kit.loading.isLoading && kit.loading.loadingLabel !== undefined
@@ -43,9 +45,11 @@
     <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
   {/if}
   {#if visibleLabel}
-    {visibleLabel}
-  {:else}
-    {@render children?.()}
+    <span class="mw-btn__label">{visibleLabel}</span>
+  {:else if children}
+    <span class="mw-btn__label">
+      {@render children()}
+    </span>
   {/if}
   {#if !kit.loading.isLoading && options.iconRight}
     <Icon name={options.iconRight} size="xs" strokeWidth="sm" decorative />

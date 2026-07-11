@@ -1,0 +1,36 @@
+{
+  "baseline": "states-default.chromium-linux.light.png",
+  "caseFingerprint": "1381ad8f3e5e003fabe74dfe359817f7d48d9288d400038884d5004980064a3a",
+  "caseId": "switch.states-default",
+  "createdAt": "2026-06-13T16:20:11.926Z",
+  "exportScale": 1,
+  "family": "switch",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/switch/states-default/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5056:44368",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 2243,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "78170b2c140c21ce1f75d29f96af218d074b6d53d2766d5b4c8182c6220cffe0",
+  "schemaVersion": 1,
+  "sourceFingerprint": "6402b084ed4dd64c200036495ece8a933a03353dce7bfd768b6dac965bc9a0b2",
+  "sourceFrameId": "1364:11442",
+  "sourceNodeId": "1364:11446",
+  "sourceNodeIds": ["1364:11446", "1371:12724", "1371:12728"],
+  "variablesFingerprint": "5f8490ed569de87c74261dc93fd4eaa85cfad3f482b00a11aa5220a0498e57df",
+  "viewport": "switch-states-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

@@ -26,6 +26,8 @@ describe("createSpacingRecipe", () => {
   })
 
   it("keeps bracket-key spacing tokens available for backward compatibility", () => {
+    expect(Spacings.sp12).toBe("sp-12")
+    expect(Spacings["sp-12"]).toBe("sp-12")
     expect(Spacings.sp24).toBe("sp-24")
     expect(Spacings["sp-24"]).toBe("sp-24")
   })

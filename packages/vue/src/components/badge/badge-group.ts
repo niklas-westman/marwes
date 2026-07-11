@@ -1,7 +1,7 @@
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 
 export interface BadgeGroupProps {
   /** Visible label for the badge group. */
@@ -37,7 +37,7 @@ export const BadgeGroup = defineComponent(
         },
         [
           h("legend", { class: "mw-badge-group__label", id: labelId.value }, [
-            h(Paragraph, { size: "sm" }, { default: () => [props.label] }),
+            h(Text, { variant: "caption" }, { default: () => [props.label] }),
           ]),
           h("div", { class: "mw-badge-group__items" }, slots.default?.()),
         ],

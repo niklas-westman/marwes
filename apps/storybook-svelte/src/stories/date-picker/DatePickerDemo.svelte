@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { DatePicker } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import DatePicker from "../../../../../packages/svelte/src/lib/components/date-picker/DatePicker.svelte"
   import type { DatePickerDay } from "@marwes-ui/core"
 
   const WEEKDAY_LABELS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]

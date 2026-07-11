@@ -4,12 +4,12 @@
  * are available from the package root.
  */
 import { describe, expect, it } from "vitest"
+import type { MwTheme } from "../lib/index.js"
 import * as publicApi from "../lib/index.js"
 
 describe("Public API exports", () => {
   describe("Component exports", () => {
     const expectedComponents = [
-      "Accordion",
       "AccordionField",
       "FAQAccordion",
       "SettingsAccordion",
@@ -26,6 +26,7 @@ describe("Public API exports", () => {
       "PriorityBadge",
       "NotificationBadge",
       "Button",
+      "IconButton",
       "PrimaryButton",
       "SecondaryButton",
       "TextButton",
@@ -52,25 +53,25 @@ describe("Public API exports", () => {
       "ProductCard",
       "ProfileCard",
       "StatCard",
-      "Checkbox",
       "CheckboxField",
       "CheckboxGroupField",
-      "DatePicker",
+      "DatePickerField",
       "Dialog",
       "DialogModal",
       "ConfirmDialog",
       "DestructiveDialog",
       "InfoDialog",
+      "Drawer",
       "Divider",
       "H1",
       "H2",
       "H3",
       "Paragraph",
+      "Text",
+      "TypographyText",
       "Icon",
-      "Input",
       "InputField",
-      "InputOtp",
-      "RichText",
+      "InputOtpField",
       "RichTextField",
       "EmailField",
       "PasswordField",
@@ -81,17 +82,14 @@ describe("Public API exports", () => {
       "DateOfBirthField",
       "ZipCodeField",
       "DropdownField",
-      "Select",
       "SelectField",
-      "Textarea",
       "TextareaField",
-      "Radio",
       "RadioGroupField",
       "OptionRadioGroup",
       "YesNoRadioGroup",
       "RatingRadioGroup",
+      "ProgressBar",
       "Skeleton",
-      "Slider",
       "SliderField",
       "VolumeSlider",
       "BrightnessSlider",
@@ -102,7 +100,6 @@ describe("Public API exports", () => {
       "ButtonSpinner",
       "EmptyStateSpinner",
       "StatTile",
-      "Switch",
       "SwitchField",
       "FeatureToggle",
       "PreferenceSwitch",
@@ -168,6 +165,7 @@ describe("Public API exports", () => {
       "IconName",
       "Spacings",
       "SwitchSize",
+      "TextVariant",
       "ThemeMode",
     ]
 
@@ -179,8 +177,21 @@ describe("Public API exports", () => {
       expect(publicApi.createFontStack).toBeDefined()
     })
 
+    it("exports mwTheme", () => {
+      const exportedTheme: MwTheme = publicApi.mwTheme
+
+      expect(publicApi.mwTheme).toBeDefined()
+      expect(exportedTheme.spacing.sp16).toBe("var(--mw-spacing-sp-16)")
+      expect(publicApi.mwTheme.media.desktopAndAbove).toBe("@media (min-width: 1200px)")
+    })
+
     it("exports mwThemeVars", () => {
       expect(publicApi.mwThemeVars).toBeDefined()
+    })
+
+    it("exports createMwTheme helpers", () => {
+      expect(publicApi.createMwTheme).toBeDefined()
+      expect(publicApi.createMwThemeMedia).toBeDefined()
     })
 
     it("exports mwVar", () => {

@@ -6,7 +6,7 @@ import {
 } from "./color-resolve"
 import type { ResolvedTheme } from "./theme-css"
 import { darkThemeDefaults, lightThemeDefaults } from "./theme-defaults"
-import { type ThemeInput, ThemeMode } from "./theme-types"
+import { type ThemeInput, ThemeMode, defaultThemeBreakpoints } from "./theme-types"
 import { resolveTone } from "./tone"
 
 const lightDefaultColorRoles = {
@@ -96,6 +96,7 @@ const darkDefaultColorRoles = {
  */
 export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
   const mode = input.mode ?? ThemeMode.light
+  const personality = input.personality ?? "flat"
   const colorBase = mode === ThemeMode.dark ? darkThemeDefaults.color : lightThemeDefaults.color
   const defaultColorRoles = mode === ThemeMode.dark ? darkDefaultColorRoles : lightDefaultColorRoles
   const base = lightThemeDefaults
@@ -117,6 +118,7 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
 
   return {
     mode,
+    personality,
     color: {
       primary,
       secondary,
@@ -126,7 +128,9 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
       info,
       background: input.color?.background ?? colorBase.background,
       surface: input.color?.surface ?? colorBase.surface,
+      surfacePrimary: input.color?.surfacePrimary ?? colorBase.surfacePrimary,
       surfaceSubtle: input.color?.surfaceSubtle ?? colorBase.surfaceSubtle,
+      surfaceBrand: input.color?.surfaceBrand ?? colorBase.surfaceBrand,
       surfaceElevated: input.color?.surfaceElevated ?? colorBase.surfaceElevated,
       surfaceDisabled: input.color?.surfaceDisabled ?? colorBase.surfaceDisabled,
       surfaceInverted: input.color?.surfaceInverted ?? colorBase.surfaceInverted,
@@ -136,20 +140,62 @@ export function resolveThemeInput(input: ThemeInput): ResolvedTheme {
       textDisabled: input.color?.textDisabled ?? colorBase.textDisabled,
       textInverted: input.color?.textInverted ?? colorBase.textInverted,
       textBrand: colorBase.textBrand,
+      textLink: input.color?.textLink ?? colorBase.textLink,
+      iconMuted: input.color?.iconMuted ?? colorBase.iconMuted,
+      borderLow: input.color?.borderLow ?? colorBase.borderLow,
       border: input.color?.border ?? colorBase.border,
       borderSubtle: input.color?.borderSubtle ?? colorBase.borderSubtle,
       borderStrong: input.color?.borderStrong ?? colorBase.borderStrong,
       borderDisabled: input.color?.borderDisabled ?? colorBase.borderDisabled,
       borderBrand: colorBase.borderBrand,
+      borderFull: input.color?.borderFull ?? colorBase.borderFull,
       focus: input.color?.focus ?? colorBase.focus,
       status: colorBase.status,
     },
     font: { ...base.font, ...tone.font, ...input.font },
     ui: { ...base.ui, ...tone.ui, ...input.ui },
+    breakpoint: { ...defaultThemeBreakpoints, ...input.breakpoint },
     typography: {
+      display: {
+        ...base.typography.display,
+        ...tone.typography?.display,
+        ...input.typography?.display,
+      },
       h1: { ...base.typography.h1, ...tone.typography?.h1, ...input.typography?.h1 },
       h2: { ...base.typography.h2, ...tone.typography?.h2, ...input.typography?.h2 },
       h3: { ...base.typography.h3, ...tone.typography?.h3, ...input.typography?.h3 },
+      text: {
+        display: {
+          ...base.typography.text.display,
+          ...tone.typography?.text?.display,
+          ...input.typography?.text?.display,
+        },
+        label: {
+          ...base.typography.text.label,
+          ...tone.typography?.text?.label,
+          ...input.typography?.text?.label,
+        },
+        "label-small": {
+          ...base.typography.text["label-small"],
+          ...tone.typography?.text?.["label-small"],
+          ...input.typography?.text?.["label-small"],
+        },
+        caption: {
+          ...base.typography.text.caption,
+          ...tone.typography?.text?.caption,
+          ...input.typography?.text?.caption,
+        },
+        overline: {
+          ...base.typography.text.overline,
+          ...tone.typography?.text?.overline,
+          ...input.typography?.text?.overline,
+        },
+        micro: {
+          ...base.typography.text.micro,
+          ...tone.typography?.text?.micro,
+          ...input.typography?.text?.micro,
+        },
+      },
       paragraph: {
         sm: {
           ...base.typography.paragraph.sm,

@@ -1,5 +1,6 @@
-import { Switch } from "@marwes-ui/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for playground demo.
+import { Switch } from "../../../../packages/react/src/components/switch/switch"
 import { ComponentRow, PreviewSection, SectionDescription, SectionTitle } from "./section.styles"
 
 function SwitchesSection(): JSX.Element {

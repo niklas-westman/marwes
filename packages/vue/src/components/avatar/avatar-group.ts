@@ -11,6 +11,7 @@ export type AvatarGroupProps = {
   overflowCount?: number
   overflowLabel?: string
   ariaLabel?: string
+  label?: string
   className?: string
   dataAttributes?: Record<string, string>
 }
@@ -20,6 +21,7 @@ const avatarGroupPropKeys = [
   "overflowCount",
   "overflowLabel",
   "ariaLabel",
+  "label",
   "className",
   "dataAttributes",
 ] as const
@@ -29,7 +31,9 @@ export const AvatarGroup = defineComponent(
     const attrs = useAttrs()
     const nativeAriaLabel =
       typeof attrs["aria-label"] === "string" ? (attrs["aria-label"] as string) : undefined
-    const groupLabel = computed(() => props.ariaLabel ?? nativeAriaLabel ?? "Avatar group")
+    const groupLabel = computed(
+      () => props.ariaLabel ?? props.label ?? nativeAriaLabel ?? "Avatar group",
+    )
     const wrapperClass = computed(() =>
       mergeClassNames("mw-avatar-group", props.className, attrs.class),
     )

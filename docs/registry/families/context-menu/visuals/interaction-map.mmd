@@ -1,0 +1,11 @@
+flowchart LR
+  Shell["ContextMenu shell\nrole=menu"] --> Items["item list"]
+  Items --> Action["menu item\nrole=menuitem\nbutton-backed"]
+  Items --> Divider["divider\nrole=separator"]
+  Action --> Enabled["enabled action\nonSelect"]
+  Action --> Disabled["disabled\naria-disabled=true\nno selection"]
+  Action --> Destructive["destructive metadata\nvisual emphasis"]
+
+  Product["product-owned trigger"] --> Shell
+  Product --> Positioning["product-owned positioning"]
+  Product --> FocusReturn["product-owned focus return"]

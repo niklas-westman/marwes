@@ -29,11 +29,12 @@
         "upload",
         "verify"
       ],
-      "frameworks": ["react", "vue"],
+      "frameworks": ["react", "vue", "svelte"],
       "sourcePaths": {
         "core": "packages/core/src/components/atoms/button",
         "react": "packages/react/src/components/button",
         "vue": "packages/vue/src/components/button",
+        "svelte": "packages/svelte/src/lib/components/button",
         "presetCss": "packages/presets/src/firstEdition/button.css"
       }
     },
@@ -45,12 +46,30 @@
       "canonicalAttributes": ["data-component", "data-variant"],
       "semanticAttributes": ["data-component", "data-variant"],
       "purposeWrappers": ["notification", "priority", "status"],
-      "frameworks": ["react", "vue"],
+      "frameworks": ["react", "vue", "svelte"],
       "sourcePaths": {
         "core": "packages/core/src/components/atoms/badge",
         "react": "packages/react/src/components/badge",
         "vue": "packages/vue/src/components/badge",
+        "svelte": "packages/svelte/src/lib/components/badge",
         "presetCss": "packages/presets/src/firstEdition/badge.css"
+      }
+    },
+    {
+      "name": "Banner",
+      "family": "banner",
+      "component": "banner",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-variant"],
+      "semanticAttributes": ["data-component", "data-variant"],
+      "purposeWrappers": ["error-banner", "info-banner", "success-banner", "warning-banner"],
+      "frameworks": ["react", "vue", "svelte"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/banner",
+        "react": "packages/react/src/components/banner",
+        "vue": "packages/vue/src/components/banner",
+        "svelte": "packages/svelte/src/lib/components/banner",
+        "presetCss": "packages/presets/src/firstEdition/banner.css"
       }
     },
     {
@@ -61,11 +80,12 @@
       "canonicalAttributes": ["data-component", "data-size"],
       "semanticAttributes": ["data-component", "data-size"],
       "purposeWrappers": ["presence", "profile", "team"],
-      "frameworks": ["react", "vue"],
+      "frameworks": ["react", "vue", "svelte"],
       "sourcePaths": {
         "core": "packages/core/src/components/atoms/avatar",
         "react": "packages/react/src/components/avatar",
         "vue": "packages/vue/src/components/avatar",
+        "svelte": "packages/svelte/src/lib/components/avatar",
         "presetCss": "packages/presets/src/firstEdition/avatar.css"
       }
     },
@@ -77,11 +97,12 @@
       "canonicalAttributes": ["data-component", "data-variant", "data-intent"],
       "semanticAttributes": ["data-component", "data-variant", "data-intent"],
       "purposeWrappers": ["error-toast", "info-toast", "success-toast", "warning-toast"],
-      "frameworks": ["react", "vue"],
+      "frameworks": ["react", "vue", "svelte"],
       "sourcePaths": {
         "core": "packages/core/src/components/atoms/toast",
         "react": "packages/react/src/components/toast",
         "vue": "packages/vue/src/components/toast",
+        "svelte": "packages/svelte/src/lib/components/toast",
         "presetCss": null
       }
     },
@@ -93,12 +114,64 @@
       "canonicalAttributes": ["data-component", "data-size", "data-intent"],
       "semanticAttributes": ["data-component", "data-intent", "data-size"],
       "purposeWrappers": ["confirm-dialog", "destructive-dialog", "info-dialog"],
-      "frameworks": ["react", "vue"],
+      "frameworks": ["react", "vue", "svelte"],
       "sourcePaths": {
         "core": "packages/core/src/components/atoms/dialog",
         "react": "packages/react/src/components/dialog",
         "vue": "packages/vue/src/components/dialog",
+        "svelte": "packages/svelte/src/lib/components/dialog",
         "presetCss": null
+      }
+    },
+    {
+      "name": "Drawer",
+      "family": "drawer",
+      "component": "drawer",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-size"],
+      "semanticAttributes": ["data-component", "data-size"],
+      "purposeWrappers": [],
+      "frameworks": ["react", "vue", "svelte"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/drawer",
+        "react": "packages/react/src/components/drawer",
+        "vue": "packages/vue/src/components/drawer",
+        "svelte": "packages/svelte/src/lib/components/drawer",
+        "presetCss": "packages/presets/src/firstEdition/drawer.css"
+      }
+    },
+    {
+      "name": "ContextMenu",
+      "family": "context-menu",
+      "component": "context-menu",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component", "data-destructive"],
+      "semanticAttributes": ["data-component", "data-destructive"],
+      "purposeWrappers": [],
+      "frameworks": ["react", "vue", "svelte"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/context-menu",
+        "react": "packages/react/src/components/context-menu",
+        "vue": "packages/vue/src/components/context-menu",
+        "svelte": "packages/svelte/src/lib/components/context-menu",
+        "presetCss": "packages/presets/src/firstEdition/context-menu.css"
+      }
+    },
+    {
+      "name": "Breadcrumb",
+      "family": "breadcrumb",
+      "component": "breadcrumb",
+      "defaultLayer": "atom",
+      "canonicalAttributes": ["data-component"],
+      "semanticAttributes": ["data-component"],
+      "purposeWrappers": [],
+      "frameworks": ["react", "vue", "svelte"],
+      "sourcePaths": {
+        "core": "packages/core/src/components/atoms/breadcrumb",
+        "react": "packages/react/src/components/breadcrumb",
+        "vue": "packages/vue/src/components/breadcrumb",
+        "svelte": "packages/svelte/src/lib/components/breadcrumb",
+        "presetCss": "packages/presets/src/firstEdition/breadcrumb.css"
       }
     }
   ]

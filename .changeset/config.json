@@ -16,11 +16,12 @@
       "@marwes-ui/svelte"
     ]
   ],
-  "linked": [],
+  "linked": [["@marwes-ui/cli", "create-marwes"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
+    "dashboard-teaser",
     "playground-react",
     "playground-svelte",
     "storybook-react",

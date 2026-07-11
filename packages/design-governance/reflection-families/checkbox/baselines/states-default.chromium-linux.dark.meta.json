@@ -1,0 +1,36 @@
+{
+  "baseline": "states-default.chromium-linux.dark.png",
+  "caseFingerprint": "fd3c7343eb72677911eb1c25511bc590ad70b16f796ce00f675363fd6159c5ac",
+  "caseId": "checkbox.states-default",
+  "createdAt": "2026-06-13T16:20:10.255Z",
+  "exportScale": 1,
+  "family": "checkbox",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/checkbox/states-default/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5049:43855",
+  "mode": "dark",
+  "origin": "receipt-backfill",
+  "pngByteLength": 2186,
+  "pngDimensions": {
+    "height": 220,
+    "width": 520
+  },
+  "pngSha256": "c92409063986cfb36be1ab3fb8333a4ae1e4dca2fcd92f39a39a2a8cd5b89811",
+  "schemaVersion": 1,
+  "sourceFingerprint": "a020c18337e9964bfc370888d287eb904ab42f81b94a27debfea5d18b95c8c3f",
+  "sourceFrameId": "2542:28177",
+  "sourceNodeId": "2542:28183",
+  "sourceNodeIds": ["2542:28183", "2542:28187", "2542:28188", "2542:28189"],
+  "variablesFingerprint": "2f7dd46d50222be268411e28a04c09431bf438ac831424078dbc1cfcaa948893",
+  "viewport": "checkbox-states-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 520
+  }
+}

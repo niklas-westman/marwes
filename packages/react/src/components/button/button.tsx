@@ -7,7 +7,13 @@ import { ButtonSpinner } from "../spinner"
 type StyleWithVars = React.CSSProperties & CssVars
 
 function isFilledButtonVariant(variant: ButtonVariant): boolean {
-  return variant === "primary" || variant === "success"
+  return variant === "primary" || variant === "success" || variant === "danger"
+}
+
+function hasRenderableLabel(label: React.ReactNode): boolean {
+  if (label === undefined || label === null || label === false) return false
+  if (typeof label === "string") return label.length > 0
+  return true
 }
 
 export type ButtonProps = ButtonOptions & {
@@ -39,7 +45,9 @@ export function Button(props: ButtonProps) {
       ) : props.iconLeft ? (
         <Icon name={props.iconLeft} size="xs" strokeWidth="sm" decorative />
       ) : null}
-      {visibleLabel}
+      {hasRenderableLabel(visibleLabel) ? (
+        <span className="mw-btn__label">{visibleLabel}</span>
+      ) : null}
       {!resolvedLoading.isLoading && props.iconRight ? (
         <Icon name={props.iconRight} size="xs" strokeWidth="sm" decorative />
       ) : null}
@@ -52,6 +60,7 @@ export function Button(props: ButtonProps) {
         type={kit.a11y.type}
         disabled={kit.a11y.disabled}
         aria-label={kit.a11y.ariaLabel}
+        aria-labelledby={kit.a11y.ariaLabelledBy}
         aria-busy={kit.a11y.ariaBusy}
         aria-disabled={kit.a11y.ariaDisabled}
         aria-pressed={kit.a11y.ariaPressed}
@@ -74,6 +83,7 @@ export function Button(props: ButtonProps) {
       role={kit.a11y.role}
       tabIndex={kit.a11y.tabIndex}
       aria-label={kit.a11y.ariaLabel}
+      aria-labelledby={kit.a11y.ariaLabelledBy}
       aria-busy={kit.a11y.ariaBusy}
       aria-disabled={kit.a11y.ariaDisabled}
       aria-pressed={kit.a11y.ariaPressed}

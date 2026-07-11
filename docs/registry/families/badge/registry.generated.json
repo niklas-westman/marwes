@@ -43,6 +43,15 @@
       "packages/vue/src/components/badge/index.ts",
       "packages/vue/src/components/badge/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/badge/Badge.svelte",
+      "packages/svelte/src/lib/components/badge/BadgeGroup.svelte",
+      "packages/svelte/src/lib/components/badge/index.ts",
+      "packages/svelte/src/lib/components/badge/NotificationBadge.svelte",
+      "packages/svelte/src/lib/components/badge/PriorityBadge.svelte",
+      "packages/svelte/src/lib/components/badge/StatusBadge.svelte",
+      "packages/svelte/src/lib/components/badge/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/badge/__tests__/badge-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/badge/__tests__/badge-taxonomy.test.ts",
@@ -62,6 +71,21 @@
       "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts",
       "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
       "apps/storybook-vue/src/stories/badge/status-badge.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/badge/__tests__/badge-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/badge/AllNotifications.svelte",
+      "apps/storybook-svelte/src/stories/badge/AllPriorities.svelte",
+      "apps/storybook-svelte/src/stories/badge/AllStatuses.svelte",
+      "apps/storybook-svelte/src/stories/badge/badge-group.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/badge.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/BadgeDarkGallery.svelte",
+      "apps/storybook-svelte/src/stories/badge/BadgeGallery.svelte",
+      "apps/storybook-svelte/src/stories/badge/BadgeGroupStory.svelte",
+      "apps/storybook-svelte/src/stories/badge/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/badge/notification-badge.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/priority-badge.stories.ts",
+      "apps/storybook-svelte/src/stories/badge/status-badge.stories.ts"
     ],
     "contracts": ["tests/contracts/badge.contract.ts"]
   },
@@ -88,7 +112,7 @@
     "notes": ["Badge needs base family identity normalized before full parity governance."]
   },
   "design": {
-    "componentJsons": [".figma/marwes/components/checkboxbadge.json"],
+    "componentJsons": [".figma/marwes/components/badge.json"],
     "curatedReferences": [
       ".figma/INDEX.md",
       ".figma/NODE_REFERENCE.md",
@@ -102,16 +126,16 @@
       ".figma/marwes/pages/-badge/-badge_1364-11603.json",
       ".figma/marwes/pages/-badge/-badge-dark_2276-56582.json",
       ".figma/marwes/pages/-badge/component-container_1369-6125.json",
-      ".figma/marwes/pages/cover/badges_1825-30440.json"
+      ".figma/marwes/pages/------playground---dashboard/badges_2832-30424.json"
     ],
     "nodeReferences": {
       "badgeLightFrame": "1364:11603",
       "badgeDarkFrame": "2276:56582",
       "badgeComponentContainer": "1369:6125",
-      "checkboxBadgeComponent": "1364:7721",
-      "badgeCoverFrame": "1825:30440"
+      "badgeComponent": "1364:7721",
+      "badgeDashboardFrame": "2832:30424"
     },
-    "figmaTokens": ["badge/surface", "badge/border", "badge/label"],
+    "figmaTokens": ["status-display/surface", "status-display/border", "status-display/text"],
     "figmaStates": {
       "baseVariants": [
         "neutral",
@@ -130,8 +154,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

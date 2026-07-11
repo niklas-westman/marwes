@@ -2,12 +2,13 @@ import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Radio } from "./radio"
 
 export interface RadioGroupFieldOption {
   value: string
   label: string
+  description?: string
   disabled?: boolean
 }
 
@@ -106,14 +107,14 @@ export const RadioGroupField = defineComponent(
         },
         [
           h("div", { class: "mw-radio-group-field__label", id: a11yIds.value.labelId }, [
-            h(Paragraph, { size: "sm" }, { default: labelContent }),
+            h(Text, { variant: "label" }, { default: labelContent }),
           ]),
 
           hasDescription.value
             ? h(
                 "div",
                 { class: "mw-radio-group-field__description", id: a11yIds.value.descriptionId },
-                [h(Paragraph, { size: "sm" }, { default: descriptionContent })],
+                [h(Text, { variant: "caption" }, { default: descriptionContent })],
               )
             : null,
 
@@ -129,12 +130,18 @@ export const RadioGroupField = defineComponent(
             },
             props.options.map((option) => {
               const optionId = `${id.value}-option-${option.value}`
+              const optionLabelId = `${optionId}-label`
+              const optionDescriptionId = `${optionId}-description`
+              const hasOptionDescription = hasTextContent(option.description)
               const isOptionDisabled = props.disabled || option.disabled || false
 
               return h(
                 "label",
                 {
-                  class: "mw-radio-group-field__option",
+                  class: mergeClassNames(
+                    "mw-radio-group-field__option",
+                    hasOptionDescription && "mw-radio-group-field__option--with-description",
+                  ),
                   for: optionId,
                   key: option.value,
                 },
@@ -143,6 +150,8 @@ export const RadioGroupField = defineComponent(
                     id: optionId,
                     name: props.name,
                     value: option.value,
+                    ariaLabelledBy: optionLabelId,
+                    ...(hasOptionDescription ? { ariaDescribedBy: optionDescriptionId } : {}),
                     checked: selectedValue.value === option.value,
                     disabled: isOptionDisabled,
                     invalid: hasError.value,
@@ -153,7 +162,28 @@ export const RadioGroupField = defineComponent(
                       }
                     },
                   }),
-                  h(Paragraph, { size: "sm" }, { default: () => [option.label] }),
+                  h("span", { class: "mw-radio-group-field__option-content" }, [
+                    h(
+                      Text,
+                      {
+                        id: optionLabelId,
+                        variant: "label",
+                        className: "mw-radio-group-field__option-label",
+                      },
+                      { default: () => [option.label] },
+                    ),
+                    hasOptionDescription
+                      ? h(
+                          Text,
+                          {
+                            id: optionDescriptionId,
+                            variant: "label-small",
+                            className: "mw-radio-group-field__option-description",
+                          },
+                          { default: () => [option.description] },
+                        )
+                      : null,
+                  ]),
                 ],
               )
             }),
@@ -167,7 +197,7 @@ export const RadioGroupField = defineComponent(
                   id: a11yIds.value.errorId,
                   "aria-live": "polite",
                 },
-                [h(Paragraph, { size: "sm" }, { default: errorContent })],
+                [h(Text, { variant: "caption" }, { default: errorContent })],
               )
             : null,
         ],

@@ -41,6 +41,15 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).ui.radius).toBe(4)
   })
 
+  it("resolves default breakpoints", () => {
+    expect(resolveThemeInput({}).breakpoint).toEqual({
+      mobile: 640,
+      tablet: 900,
+      desktop: 1200,
+      wideDesktop: 1440,
+    })
+  })
+
   it("default font.primary contains Instrument Sans", () => {
     expect(resolveThemeInput({}).font.primary).toContain("Instrument Sans")
   })
@@ -57,11 +66,32 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).color.textMuted).toBe("#595959")
   })
 
+  it("default link and muted icon tokens follow the source semantic tokens", () => {
+    expect(resolveThemeInput({}).color.textLink).toBe("#2527CA")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.textLink).toBe("#8182FC")
+    expect(resolveThemeInput({}).color.iconMuted).toBe("#A3A3A3")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.iconMuted).toBe("#595959")
+  })
+
+  it("default low border follows the source alpha border token", () => {
+    expect(resolveThemeInput({}).color.borderLow).toBe("#00000026")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.borderLow).toBe("#FFFFFF26")
+  })
+
+  it("default surfaceBrand follows the source brand surface token", () => {
+    expect(resolveThemeInput({}).color.surfaceBrand).toBe("#EEEEFF")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.surfaceBrand).toBe("#090A32")
+  })
+
   it("default status borderStrong follows the latest border data", () => {
     expect(resolveThemeInput({}).color.status.info.borderStrong).toBe("#5859FC")
     expect(resolveThemeInput({ mode: ThemeMode.dark }).color.status.info.borderStrong).toBe(
       "#252599",
     )
+  })
+
+  it("default typography.display.fontSize is 44", () => {
+    expect(resolveThemeInput({}).typography.display.fontSize).toBe(44)
   })
 
   it("default typography.h1.fontSize is 32", () => {
@@ -164,6 +194,12 @@ describe("resolveThemeInput — surface overrides", () => {
     )
   })
 
+  it("surfacePrimary override", () => {
+    expect(resolveThemeInput({ color: { surfacePrimary: "#FAFAFA" } }).color.surfacePrimary).toBe(
+      "#FAFAFA",
+    )
+  })
+
   it("textSubtle override", () => {
     expect(resolveThemeInput({ color: { textSubtle: "#777777" } }).color.textSubtle).toBe("#777777")
   })
@@ -171,6 +207,12 @@ describe("resolveThemeInput — surface overrides", () => {
   it("borderStrong override", () => {
     expect(resolveThemeInput({ color: { borderStrong: "#101010" } }).color.borderStrong).toBe(
       "#101010",
+    )
+  })
+
+  it("borderLow override", () => {
+    expect(resolveThemeInput({ color: { borderLow: "#0000001A" } }).color.borderLow).toBe(
+      "#0000001A",
     )
   })
 })
@@ -189,6 +231,15 @@ describe("resolveThemeInput — font / ui / typography overrides", () => {
     expect(resolveThemeInput({ ui: { radius: 8 } }).ui.radius).toBe(8)
   })
 
+  it("breakpoint override merges with defaults", () => {
+    expect(resolveThemeInput({ breakpoint: { tablet: 1024 } }).breakpoint).toEqual({
+      mobile: 640,
+      tablet: 1024,
+      desktop: 1200,
+      wideDesktop: 1440,
+    })
+  })
+
   it("typography.h1.fontSize override", () => {
     expect(resolveThemeInput({ typography: { h1: { fontSize: 48 } } }).typography.h1.fontSize).toBe(
       48,
@@ -199,6 +250,29 @@ describe("resolveThemeInput — font / ui / typography overrides", () => {
     expect(
       resolveThemeInput({ typography: { h1: { fontSize: 48 } } }).typography.h1.lineHeight,
     ).toBe(1.1875)
+  })
+
+  it("typography.text.micro.fontSize override", () => {
+    expect(
+      resolveThemeInput({ typography: { text: { micro: { fontSize: 10 } } } }).typography.text.micro
+        .fontSize,
+    ).toBe(10)
+  })
+
+  it("typography.text label overrides", () => {
+    const result = resolveThemeInput({
+      typography: {
+        text: {
+          label: { fontSize: 15 },
+          "label-small": { lineHeight: 1.1 },
+        },
+      },
+    })
+
+    expect(result.typography.text.label.fontSize).toBe(15)
+    expect(result.typography.text.label.fontWeight).toBe(500)
+    expect(result.typography.text["label-small"].fontSize).toBe(12)
+    expect(result.typography.text["label-small"].lineHeight).toBe(1.1)
   })
 
   it("typography.paragraph.sm.fontSize override", () => {

@@ -1,0 +1,118 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "context-menu",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md"],
+    "roadmap": [],
+    "core": [
+      "packages/core/src/components/atoms/context-menu/context-menu-a11y.ts",
+      "packages/core/src/components/atoms/context-menu/context-menu-recipe.ts",
+      "packages/core/src/components/atoms/context-menu/context-menu-types.ts",
+      "packages/core/src/components/atoms/context-menu/index.ts"
+    ],
+    "presets": ["packages/presets/src/firstEdition/context-menu.css"],
+    "react": [
+      "packages/react/src/components/context-menu/__tests__/context-menu.test.tsx",
+      "packages/react/src/components/context-menu/context-menu.tsx",
+      "packages/react/src/components/context-menu/index.ts"
+    ],
+    "vue": [
+      "packages/vue/src/components/context-menu/__tests__/context-menu.test.ts",
+      "packages/vue/src/components/context-menu/context-menu.ts",
+      "packages/vue/src/components/context-menu/index.ts"
+    ],
+    "svelte": [
+      "packages/svelte/src/lib/components/context-menu/ContextMenu.svelte",
+      "packages/svelte/src/lib/components/context-menu/index.ts",
+      "packages/svelte/src/lib/components/context-menu/types.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/context-menu/context-menu.stories.tsx",
+      "apps/storybook-react/src/stories/context-menu/Introduction.mdx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/context-menu/context-menu.stories.ts",
+      "apps/storybook-vue/src/stories/context-menu/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/context-menu/__tests__/context-menu-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/context-menu/__tests__/context-menu-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/context-menu/context-menu.stories.ts",
+      "apps/storybook-svelte/src/stories/context-menu/Introduction.mdx"
+    ],
+    "contracts": []
+  },
+  "semantics": {
+    "coverageLevel": "canonical",
+    "dataComponent": "context-menu",
+    "canonicalAttributes": ["data-component", "data-destructive"],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/semantics/family-semantics.ts",
+      "packages/core/src/semantics/purpose-semantics.ts"
+    ],
+    "notes": [
+      "ContextMenu exposes a menu surface and button-backed menu items while popover/open-state orchestration stays adapter-owned."
+    ]
+  },
+  "design": {
+    "componentJsons": [
+      ".figma/marwes/components/context-menu.json",
+      ".figma/marwes/components/partscontext-menucontext-menu-item.json"
+    ],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md"
+    ],
+    "pageReferences": [
+      ".figma/marwes/pages/-context-menu/-context-menu_1574-24029.json",
+      ".figma/marwes/pages/-context-menu/-context-menu-dark_1574-24160.json",
+      ".figma/marwes/pages/-context-menu/component-container_2967-6148.json"
+    ],
+    "nodeReferences": {
+      "contextMenuComponent": "1574:23952",
+      "contextMenuItemComponent": "1574:23946",
+      "contextMenuLightFrame": "1574:24029",
+      "contextMenuDarkFrame": "1574:24160",
+      "contextMenuContainer": "2967:6148"
+    },
+    "figmaTokens": [],
+    "figmaStates": {
+      "baseVariants": ["default", "grouped", "quick-actions"],
+      "interactionStates": ["light", "dark", "disabled", "destructive", "divider"]
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "svelte": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "storybookSvelte": true,
+    "contractsPresent": true,
+    "auditDocPresent": false,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "ContextMenu exposes a menu surface and button-backed menu items while popover/open-state orchestration stays adapter-owned.",
+    "Generated from docs/registry/families/context-menu/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

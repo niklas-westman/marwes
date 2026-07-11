@@ -1,10 +1,9 @@
 <script lang="ts">
   import { mergeStyle } from "../../internal/css-vars.js";
   import Spinner from "./Spinner.svelte";
-  import type { SpinnerProps } from "./types.js";
+  import type { EmptyStateSpinnerProps } from "./types.js";
 
-  type Props = SpinnerProps;
-  let { dataAttributes, ...props }: Props = $props();
+  let { dataAttributes, ...props }: EmptyStateSpinnerProps = $props();
 </script>
 
 <Spinner

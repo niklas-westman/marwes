@@ -4,10 +4,8 @@
  */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
-import ContentTabs from "../lib/components/tab/ContentTabs.svelte"
-import NavigationTabs from "../lib/components/tab/NavigationTabs.svelte"
-import SettingsTabs from "../lib/components/tab/SettingsTabs.svelte"
-import TabGroup from "../lib/components/tab/TabGroup.svelte"
+import TabGroupContractFixture from "./type-fixtures/TabGroupContractFixture.svelte"
+import TabPurposeFixture from "./type-fixtures/TabPurposeFixture.svelte"
 
 describe("TabGroup", () => {
   const defaultTabs = [
@@ -16,7 +14,7 @@ describe("TabGroup", () => {
   ]
 
   it("renders a tablist", () => {
-    const { container } = render(TabGroup, {
+    const { container } = render(TabGroupContractFixture, {
       props: { label: "Test tabs", tabs: defaultTabs },
     })
     const tablist = container.querySelector('[role="tablist"]')
@@ -24,7 +22,7 @@ describe("TabGroup", () => {
   })
 
   it("renders tab buttons", () => {
-    const { container } = render(TabGroup, {
+    const { container } = render(TabGroupContractFixture, {
       props: { label: "Test tabs", tabs: defaultTabs },
     })
     const tabs = container.querySelectorAll('[role="tab"]')
@@ -32,7 +30,7 @@ describe("TabGroup", () => {
   })
 
   it("renders tab panels", () => {
-    const { container } = render(TabGroup, {
+    const { container } = render(TabGroupContractFixture, {
       props: { label: "Test tabs", tabs: defaultTabs },
     })
     const panels = container.querySelectorAll('[role="tabpanel"]')
@@ -40,7 +38,7 @@ describe("TabGroup", () => {
   })
 
   it("selects the first tab by default", () => {
-    const { container } = render(TabGroup, {
+    const { container } = render(TabGroupContractFixture, {
       props: { label: "Test tabs", tabs: defaultTabs },
     })
     const firstTab = container.querySelector('[role="tab"]')
@@ -48,7 +46,7 @@ describe("TabGroup", () => {
   })
 
   it("includes mw-tab-group class", () => {
-    const { container } = render(TabGroup, {
+    const { container } = render(TabGroupContractFixture, {
       props: { label: "Test tabs", tabs: defaultTabs },
     })
     const el = container.querySelector(".mw-tab-group")
@@ -56,7 +54,7 @@ describe("TabGroup", () => {
   })
 
   it("renders tab labels", () => {
-    const { container } = render(TabGroup, {
+    const { container } = render(TabGroupContractFixture, {
       props: { label: "Test tabs", tabs: defaultTabs },
     })
     const tabs = container.querySelectorAll('[role="tab"]')
@@ -65,12 +63,12 @@ describe("TabGroup", () => {
   })
 
   it.each([
-    [NavigationTabs, "navigation-tabs"],
-    [ContentTabs, "content-tabs"],
-    [SettingsTabs, "settings-tabs"],
-  ])("places purpose metadata on the tab group root", (Component, purpose) => {
-    const { container } = render(Component, {
-      props: { label: "Test tabs", tabs: defaultTabs },
+    ["navigation", "navigation-tabs"],
+    ["content", "content-tabs"],
+    ["settings", "settings-tabs"],
+  ] as const)("places purpose metadata on the tab group root", (kind, purpose) => {
+    const { container } = render(TabPurposeFixture, {
+      props: { kind, label: "Test tabs", tabs: defaultTabs },
     })
 
     const group = container.querySelector(".mw-tab-group")

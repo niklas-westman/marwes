@@ -2,6 +2,7 @@
   import { IconName, buildInputFieldA11yIds, resolveSelectMode } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
+  import Text from "../text/Text.svelte";
   import Select from "./Select.svelte";
   import type { SelectFieldProps, SelectProps } from "./types.js";
 
@@ -83,6 +84,7 @@
     select = { options: [] },
     ariaDescribedBy,
     value = $bindable(getInitialSelectValue(select)),
+    variant,
     class: className,
   }: SelectFieldProps = $props();
 
@@ -103,6 +105,7 @@
       "mw-input-field",
       "mw-input-field--select",
       mode === "marwes" && "mw-input-field--select-marwes",
+      variant === "date" && "mw-input-field--select-date",
       disabled && "mw-input-field--disabled",
       invalid && "mw-input-field--invalid",
       className
@@ -276,7 +279,7 @@
 
 <div class={wrapperClass}>
   <label class="mw-input-field__label" for={fieldId}>
-    <p class="mw-p mw-p--md">{label}</p>
+    <Text variant="label">{label}</Text>
   </label>
   <div class="mw-input-field__input-wrapper">
     {#if mode === "native"}
@@ -384,12 +387,12 @@
   </div>
   {#if hasHelperText && !hasError}
     <div class="mw-input-field__helper" id={a11yIds.helperTextId}>
-      <p class="mw-p mw-p--sm">{helperText}</p>
+      <Text variant="caption">{helperText}</Text>
     </div>
   {/if}
   {#if hasError}
     <div class="mw-input-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

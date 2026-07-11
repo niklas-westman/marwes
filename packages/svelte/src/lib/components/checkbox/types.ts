@@ -20,6 +20,14 @@ export interface CheckboxFieldProps {
   class?: string
 }
 
+export interface CheckboxGroupFieldOption {
+  value: string
+  label: string
+  description?: string
+  disabled?: boolean
+  indeterminate?: boolean
+}
+
 export interface CheckboxGroupFieldProps {
   id?: string
   label: string

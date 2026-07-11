@@ -6,6 +6,7 @@ export { default as InfoDialog } from "./InfoDialog.svelte"
 export type {
   ConfirmDialogProps,
   DestructiveDialogProps,
+  DialogFooterControls,
   DialogModalProps,
   DialogProps,
   InfoDialogProps,

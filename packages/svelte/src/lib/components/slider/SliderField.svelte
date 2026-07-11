@@ -1,6 +1,7 @@
 <script lang="ts">
   import { buildSliderFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import Slider from "./Slider.svelte";
   import type { SliderFieldProps, SliderProps } from "./types.js";
 
@@ -54,23 +55,23 @@
 <div class={wrapperClass} data-label-position={labelPosition} {...dataAttributes}>
   <div class="mw-slider-field__header">
     <div class="mw-slider-field__label" id={a11yIds.labelId}>
-      <p class="mw-p mw-p--md">{label}</p>
+      <Text variant="label">{label}</Text>
     </div>
   </div>
 
   {#if hasDescription && !hasError}
     <div class="mw-slider-field__description" id={a11yIds.descriptionId}>
-      <p class="mw-p mw-p--sm">{descriptionText}</p>
+      <Text variant="caption">{descriptionText}</Text>
     </div>
   {/if}
 
   {#if labelPosition === "top" && showEdgeValues}
     <div class="mw-slider-field__values-row">
       <span class="mw-slider-field__edge-value mw-slider-field__edge-value--min">
-        <p class="mw-p mw-p--sm">{minEdgeValue}</p>
+        <Text variant="caption">{minEdgeValue}</Text>
       </span>
       <span class="mw-slider-field__edge-value mw-slider-field__edge-value--max">
-        <p class="mw-p mw-p--sm">{maxEdgeValue}</p>
+        <Text variant="caption">{maxEdgeValue}</Text>
       </span>
     </div>
   {/if}
@@ -78,7 +79,7 @@
   <div class="mw-slider-field__control-row">
     {#if labelPosition === "inline" && showEdgeValues}
       <span class="mw-slider-field__edge-value mw-slider-field__edge-value--min">
-        <p class="mw-p mw-p--sm">{minEdgeValue}</p>
+        <Text variant="caption">{minEdgeValue}</Text>
       </span>
     {/if}
 
@@ -96,20 +97,20 @@
 
     {#if labelPosition === "inline" && showEdgeValues}
       <span class="mw-slider-field__edge-value mw-slider-field__edge-value--max">
-        <p class="mw-p mw-p--sm">{maxEdgeValue}</p>
+        <Text variant="caption">{maxEdgeValue}</Text>
       </span>
     {/if}
   </div>
 
   {#if hasDescription && hasError}
     <div class="mw-slider-field__description" id={a11yIds.descriptionId}>
-      <p class="mw-p mw-p--sm">{descriptionText}</p>
+      <Text variant="caption">{descriptionText}</Text>
     </div>
   {/if}
 
   {#if hasError}
     <div class="mw-slider-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

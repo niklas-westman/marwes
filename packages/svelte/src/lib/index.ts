@@ -1,10 +1,11 @@
 // @marwes-ui/svelte — main public API
-// CSS is NOT imported here. Users import from @marwes-ui/presets explicitly.
+import "@marwes-ui/presets/firstEdition/styles.css"
 
 // Provider
 export { default as MarwesProvider } from "./provider/MarwesProvider.svelte"
 export type {
   MarwesProviderProps,
+  MarwesProviderSnippetProps,
   MarwesContextState,
   MarwesContextValue,
 } from "./provider/types.js"
@@ -19,6 +20,7 @@ export type { MarwesThemeScriptOptions, MarwesThemeStyleOptions } from "./ssr.js
 
 // Button
 export { default as Button } from "./components/button/Button.svelte"
+export { default as IconButton } from "./components/button/IconButton.svelte"
 export { default as PrimaryButton } from "./components/button/PrimaryButton.svelte"
 export { default as SecondaryButton } from "./components/button/SecondaryButton.svelte"
 export { default as TextButton } from "./components/button/TextButton.svelte"
@@ -41,7 +43,32 @@ export { default as SearchButton } from "./components/button/SearchButton.svelte
 export { default as FilterButton } from "./components/button/FilterButton.svelte"
 export { default as SortButton } from "./components/button/SortButton.svelte"
 export { default as DropdownButton } from "./components/button/DropdownButton.svelte"
-export type { ButtonProps } from "./components/button/types.js"
+export type {
+  ButtonProps,
+  CancelButtonProps,
+  CloseButtonProps,
+  ConfirmButtonProps,
+  CopyButtonProps,
+  CreateButtonProps,
+  DestructiveButtonProps,
+  DownloadButtonProps,
+  DropdownButtonProps,
+  EditButtonProps,
+  FilterButtonProps,
+  IconButtonProps,
+  LinkButtonProps,
+  PrimaryButtonProps,
+  RefreshButtonProps,
+  SaveButtonProps,
+  SearchButtonProps,
+  SecondaryButtonProps,
+  SortButtonProps,
+  SubmitButtonProps,
+  SuccessButtonProps,
+  TextButtonProps,
+  UploadButtonProps,
+  VerifyButtonProps,
+} from "./components/button/types.js"
 
 // Icon
 export { default as Icon } from "./components/icon/Icon.svelte"
@@ -51,10 +78,14 @@ export type { IconProps } from "./components/icon/types.js"
 export { default as Spinner } from "./components/spinner/Spinner.svelte"
 export { default as ButtonSpinner } from "./components/spinner/ButtonSpinner.svelte"
 export { default as EmptyStateSpinner } from "./components/spinner/EmptyStateSpinner.svelte"
-export type { SpinnerProps, ButtonSpinnerProps } from "./components/spinner/types.js"
+export type {
+  SpinnerProps,
+  ButtonSpinnerProps,
+  EmptyStateSpinnerProps,
+} from "./components/spinner/types.js"
 
 // Input
-export { default as Input } from "./components/input/Input.svelte"
+// `Input` atom intentionally NOT exported — use `InputField` (or a purpose variant).
 export { default as InputField } from "./components/input/InputField.svelte"
 export { default as PasswordField } from "./components/input/PasswordField.svelte"
 export { default as EmailField } from "./components/input/EmailField.svelte"
@@ -65,15 +96,24 @@ export { default as CurrencyField } from "./components/input/CurrencyField.svelt
 export { default as DateOfBirthField } from "./components/input/DateOfBirthField.svelte"
 export { default as ZipCodeField } from "./components/input/ZipCodeField.svelte"
 export { default as DropdownField } from "./components/input/DropdownField.svelte"
-export { default as InputOtp } from "./components/input/InputOtp.svelte"
-export { default as RichText } from "./components/input/RichText.svelte"
+// `InputOtp` (the bare atom — cells-only render) is intentionally NOT
+// exported from the public entry. Use `InputOtpField` instead.
+export { default as InputOtpField } from "./components/input/InputOtpField.svelte"
+// `RichText` atom intentionally NOT exported from the public entry — use `RichTextField`.
 export { default as RichTextField } from "./components/input/RichTextField.svelte"
 export type {
-  InputProps,
+  CurrencyFieldProps,
+  DateOfBirthFieldProps,
+  DropdownFieldProps,
+  EmailFieldProps,
   InputFieldProps,
-  InputOtpProps,
-  RichTextProps,
+  InputOtpFieldProps,
+  PasswordFieldProps,
+  PhoneFieldProps,
   RichTextFieldProps,
+  SearchFieldProps,
+  URLFieldProps,
+  ZipCodeFieldProps,
 } from "./components/input/types.js"
 
 // Badge
@@ -82,18 +122,56 @@ export { default as BadgeGroup } from "./components/badge/BadgeGroup.svelte"
 export { default as StatusBadge } from "./components/badge/StatusBadge.svelte"
 export { default as PriorityBadge } from "./components/badge/PriorityBadge.svelte"
 export { default as NotificationBadge } from "./components/badge/NotificationBadge.svelte"
-export type { BadgeProps, BadgeGroupProps } from "./components/badge/types.js"
+export type {
+  BadgeProps,
+  BadgeGroupProps,
+  StatusBadgeProps,
+  PriorityBadgeProps,
+  NotificationBadgeProps,
+} from "./components/badge/types.js"
+
+// Banner
+export { default as Banner } from "./components/banner/Banner.svelte"
+export { default as InfoBanner } from "./components/banner/InfoBanner.svelte"
+export { default as SuccessBanner } from "./components/banner/SuccessBanner.svelte"
+export { default as WarningBanner } from "./components/banner/WarningBanner.svelte"
+export { default as ErrorBanner } from "./components/banner/ErrorBanner.svelte"
+export { BannerVariant } from "@marwes-ui/core"
+export type {
+  BannerProps,
+  InfoBannerProps,
+  SuccessBannerProps,
+  WarningBannerProps,
+  ErrorBannerProps,
+} from "./components/banner/types.js"
 
 // Card
 export { default as Card } from "./components/card/Card.svelte"
 export { default as ProductCard } from "./components/card/ProductCard.svelte"
 export { default as ProfileCard } from "./components/card/ProfileCard.svelte"
 export { default as StatCard } from "./components/card/StatCard.svelte"
-export type { CardProps } from "./components/card/types.js"
+export type {
+  CardProps,
+  ProductCardProps,
+  ProfileCardProps,
+  StatCardProps,
+} from "./components/card/types.js"
 
 // Divider
 export { default as Divider } from "./components/divider/Divider.svelte"
 export type { DividerProps } from "./components/divider/types.js"
+
+// ContextMenu
+export { default as ContextMenu } from "./components/context-menu/ContextMenu.svelte"
+export type {
+  ContextMenuActionItem,
+  ContextMenuEntry,
+  ContextMenuProps,
+} from "./components/context-menu/types.js"
+
+// Breadcrumb
+export { default as Breadcrumb } from "./components/breadcrumb/Breadcrumb.svelte"
+export type { BreadcrumbItem, BreadcrumbProps } from "./components/breadcrumb/types.js"
 
 // Spacing
 export { default as Spacing } from "./components/spacing/Spacing.svelte"
@@ -110,41 +188,66 @@ export type { H1Props, H2Props, H3Props } from "./components/heading/types.js"
 export { default as Paragraph } from "./components/paragraph/Paragraph.svelte"
 export type { ParagraphProps } from "./components/paragraph/types.js"
 
+// Text
+export { default as Text } from "./components/text/Text.svelte"
+export { default as TypographyText } from "./components/text/Text.svelte"
+export type TextComponent = typeof import("./components/text/Text.svelte").default
+export type { TextProps } from "./components/text/types.js"
+
 // Textarea
-export { default as Textarea } from "./components/input/Textarea.svelte"
+// `Textarea` atom intentionally NOT exported — use `TextareaField`.
 export { default as TextareaField } from "./components/input/TextareaField.svelte"
-export type { TextareaProps, TextareaFieldProps } from "./components/input/types.js"
+export type { TextareaFieldProps } from "./components/input/types.js"
 
 // Select
-export { default as Select } from "./components/input/Select.svelte"
+// `Select` atom intentionally NOT exported — use `SelectField` or `DropdownField`.
 export { default as SelectField } from "./components/input/SelectField.svelte"
-export type { SelectProps, SelectFieldProps } from "./components/input/types.js"
+export type {
+  SelectAppearance,
+  SelectOption,
+  SelectFieldProps,
+  SelectFieldVariant,
+} from "./components/input/types.js"
 
 // Checkbox
-export { default as Checkbox } from "./components/checkbox/Checkbox.svelte"
+// The `Checkbox` atom is intentionally NOT exported from the public entry —
+// use `CheckboxField` (or `CheckboxGroupField`) instead.
 export { default as CheckboxField } from "./components/checkbox/CheckboxField.svelte"
 export { default as CheckboxGroupField } from "./components/checkbox/CheckboxGroupField.svelte"
 export type {
-  CheckboxProps,
   CheckboxFieldProps,
   CheckboxGroupFieldProps,
+  CheckboxGroupFieldOption,
 } from "./components/checkbox/types.js"
 
 // Switch
-export { default as Switch } from "./components/switch/Switch.svelte"
+// The `Switch` atom is intentionally NOT exported from the public entry —
+// use `SwitchField` (or a purpose variant) instead.
 export { default as SwitchField } from "./components/switch/SwitchField.svelte"
 export { default as FeatureToggle } from "./components/switch/FeatureToggle.svelte"
 export { default as PreferenceSwitch } from "./components/switch/PreferenceSwitch.svelte"
 export { default as PermissionSwitch } from "./components/switch/PermissionSwitch.svelte"
-export type { SwitchProps, SwitchFieldProps } from "./components/switch/types.js"
+export type {
+  SwitchFieldProps,
+  FeatureToggleProps,
+  PreferenceSwitchProps,
+  PermissionSwitchProps,
+} from "./components/switch/types.js"
 
 // Radio
-export { default as Radio } from "./components/radio/Radio.svelte"
+// The `Radio` atom is intentionally NOT exported from the public entry —
+// use `RadioGroupField` (or a purpose variant) instead.
 export { default as RadioGroupField } from "./components/radio/RadioGroupField.svelte"
 export { default as OptionRadioGroup } from "./components/radio/OptionRadioGroup.svelte"
 export { default as YesNoRadioGroup } from "./components/radio/YesNoRadioGroup.svelte"
 export { default as RatingRadioGroup } from "./components/radio/RatingRadioGroup.svelte"
-export type { RadioProps, RadioGroupFieldProps } from "./components/radio/types.js"
+export type {
+  OptionRadioGroupProps,
+  RatingRadioGroupProps,
+  RadioGroupFieldOption,
+  RadioGroupFieldProps,
+  YesNoRadioGroupProps,
+} from "./components/radio/types.js"
 
 // Avatar
 export { default as Avatar } from "./components/avatar/Avatar.svelte"
@@ -153,15 +256,33 @@ export { default as AvatarGroup } from "./components/avatar/AvatarGroup.svelte"
 export { default as ProfileAvatar } from "./components/avatar/ProfileAvatar.svelte"
 export { default as PresenceAvatar } from "./components/avatar/PresenceAvatar.svelte"
 export { default as TeamAvatarGroup } from "./components/avatar/TeamAvatarGroup.svelte"
-export type { AvatarProps } from "./components/avatar/types.js"
+export type {
+  AvatarProps,
+  AvatarBadgeProps,
+  AvatarGroupItem,
+  AvatarGroupProps,
+  PresenceAvatarProps,
+  ProfileAvatarProps,
+  TeamAvatarGroupProps,
+} from "./components/avatar/types.js"
 
 // DatePicker
-export { default as DatePicker } from "./components/date-picker/DatePicker.svelte"
-export type { DatePickerProps } from "./components/date-picker/types.js"
+// The `DatePicker` atom is intentionally NOT exported from the public entry —
+// use `DatePickerField` instead.
+export { default as DatePickerField } from "./components/date-picker/DatePickerField.svelte"
+export type { DatePickerFieldProps } from "./components/date-picker/types.js"
+
+// Drawer
+export { default as Drawer } from "./components/drawer/Drawer.svelte"
+export type { DrawerPlacement, DrawerProps, DrawerSize } from "./components/drawer/types.js"
 
 // Skeleton
 export { default as Skeleton } from "./components/skeleton/Skeleton.svelte"
 export type { SkeletonProps } from "./components/skeleton/types.js"
+
+// ProgressBar
+export { default as ProgressBar } from "./components/progress-bar/ProgressBar.svelte"
+export type { ProgressBarProps } from "./components/progress-bar/types.js"
 
 // StatTile
 export { default as StatTile } from "./components/stat-tile/StatTile.svelte"
@@ -201,6 +322,7 @@ export { default as ConfirmDialog } from "./components/dialog/ConfirmDialog.svel
 export { default as DestructiveDialog } from "./components/dialog/DestructiveDialog.svelte"
 export { default as InfoDialog } from "./components/dialog/InfoDialog.svelte"
 export type {
+  DialogFooterControls,
   DialogProps,
   DialogModalProps,
   ConfirmDialogProps,
@@ -209,15 +331,18 @@ export type {
 } from "./components/dialog/types.js"
 
 // Accordion
-export { default as Accordion } from "./components/accordion/Accordion.svelte"
+// The `Accordion` atom (single collapsible panel) is intentionally NOT exported —
+// use `AccordionField` (groups) or a purpose variant.
 export { default as AccordionField } from "./components/accordion/AccordionField.svelte"
 export { default as FAQAccordion } from "./components/accordion/FAQAccordion.svelte"
 export { default as SettingsAccordion } from "./components/accordion/SettingsAccordion.svelte"
 export { default as SectionsAccordion } from "./components/accordion/SectionsAccordion.svelte"
 export type {
-  AccordionProps,
   AccordionFieldItem,
   AccordionFieldProps,
+  FAQAccordionProps,
+  SectionsAccordionProps,
+  SettingsAccordionProps,
 } from "./components/accordion/types.js"
 
 // Tab
@@ -237,13 +362,38 @@ export type {
   SettingsTabsProps,
 } from "./components/tab/types.js"
 
+// Segmented Control
+// The `SegmentedControl` atom is intentionally NOT exported from the public entry —
+// use `SegmentedControlField` instead.
+export { default as SegmentedControlField } from "./components/segmented-control/SegmentedControlField.svelte"
+export type {
+  SegmentedControlItem,
+  SegmentedControlFieldProps,
+} from "./components/segmented-control/types.js"
+
+// Pagination
+// The `Pagination` atom is intentionally NOT exported from the public entry —
+// use `PaginationField` instead.
+export { default as PaginationField } from "./components/pagination/PaginationField.svelte"
+export type { PaginationFieldProps } from "./components/pagination/types.js"
+
+// SkipLink
+export { default as SkipLink } from "./components/skip-link/SkipLink.svelte"
+export type { SkipLinkProps } from "./components/skip-link/types.js"
+
 // Slider
-export { default as Slider } from "./components/slider/Slider.svelte"
+// The `Slider` atom is intentionally NOT exported from the public entry —
+// use `SliderField` (or a purpose variant) instead.
 export { default as SliderField } from "./components/slider/SliderField.svelte"
 export { default as VolumeSlider } from "./components/slider/VolumeSlider.svelte"
 export { default as BrightnessSlider } from "./components/slider/BrightnessSlider.svelte"
 export { default as RadiusSlider } from "./components/slider/RadiusSlider.svelte"
-export type { SliderProps, SliderFieldProps } from "./components/slider/types.js"
+export type {
+  SliderFieldProps,
+  VolumeSliderProps,
+  BrightnessSliderProps,
+  RadiusSliderProps,
+} from "./components/slider/types.js"
 
 // Core re-exports
 export {
@@ -259,11 +409,15 @@ export {
   mwFontFallbacks,
   mwGoogleFontFamilies,
   mwStyledTheme,
+  mwTheme,
   mwThemeVarNames,
   mwThemeVars,
   mwVar,
+  createMwTheme,
+  createMwThemeMedia,
   Spacings,
   SwitchSize,
+  TextVariant,
   ThemeMode,
 } from "@marwes-ui/core"
 
@@ -276,6 +430,8 @@ export type {
   MwFontFallback,
   MwGoogleFontFamily,
   MwStyledTheme,
+  MwTheme,
+  MwThemeMedia,
   MwThemeVarName,
   MwThemeVarNames,
   MwThemeVarReference,
@@ -283,10 +439,13 @@ export type {
   ResolvedTheme,
   SpacingSize,
   Theme,
+  ThemeBreakpointName,
+  ThemeBreakpoints,
   ThemeInput,
   ThemeModeAttribute,
   ThemeModeRootTarget,
   ThemePreference,
+  TextAs,
   ThemeVariableStrategy,
   ToneName,
 } from "@marwes-ui/core"

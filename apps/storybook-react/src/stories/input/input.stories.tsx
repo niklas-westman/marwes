@@ -1,7 +1,9 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import { Input, Paragraph } from "@marwes-ui/react"
+import { Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Input } from "../../../../../packages/react/src/components/input/input"
 
 const meta: Meta<typeof Input> = {
   title: "Input/Atom/Input",

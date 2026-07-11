@@ -144,6 +144,7 @@
       "link": { "light": "#2527CA", "dark": "#8182FC" }
     },
     "border": {
+      "low": { "light": "#00000026", "dark": "#FFFFFF26" },
       "default": { "light": "#D8D8D8", "dark": "#474747" },
       "medium": { "light": "#C2C2C2", "dark": "#595959" },
       "strong": { "light": "#A3A3A3", "dark": "#A3A3A3" },

@@ -2,13 +2,14 @@ import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Textarea, type TextareaProps } from "./textarea"
 
 export type TextareaFieldProps = {
   id?: string
   label: string
   helperText?: string
+  counterText?: string
   error?: string
   textarea: TextareaProps
   ariaDescribedBy?: string
@@ -19,6 +20,7 @@ const textareaFieldPropKeys = [
   "id",
   "label",
   "helperText",
+  "counterText",
   "error",
   "textarea",
   "ariaDescribedBy",
@@ -40,6 +42,7 @@ export const TextareaField = defineComponent(
     )
 
     const hasHelperText = computed(() => hasTextContent(props.helperText))
+    const hasCounterText = computed(() => hasTextContent(props.counterText))
     const hasError = computed(() => hasTextContent(props.error))
 
     const a11yIds = computed(() =>
@@ -92,21 +95,31 @@ export const TextareaField = defineComponent(
 
     const labelContent = () => slots.label?.() ?? [props.label]
     const helperContent = () => slots.helper?.() ?? (props.helperText ? [props.helperText] : [])
+    const counterContent = () => (props.counterText ? [props.counterText] : [])
     const errorContent = () => slots.error?.() ?? (props.error ? [props.error] : [])
 
     return () =>
       h("div", { class: wrapperClass.value }, [
         h("label", { class: "mw-input-field__label", for: id.value }, [
-          h(Paragraph, { size: "md" }, { default: labelContent }),
+          h(Text, { variant: "label" }, { default: labelContent }),
         ]),
 
         h("div", { class: "mw-input-field__input-wrapper" }, [
           h(Textarea, mergedTextareaProps.value),
         ]),
 
-        hasHelperText.value && !hasError.value
-          ? h("div", { class: "mw-input-field__helper", id: a11yIds.value.helperTextId }, [
-              h(Paragraph, { size: "sm" }, { default: helperContent }),
+        (hasHelperText.value || hasCounterText.value) && !hasError.value
+          ? h("div", { class: "mw-input-field__meta" }, [
+              hasHelperText.value
+                ? h("div", { class: "mw-input-field__helper", id: a11yIds.value.helperTextId }, [
+                    h(Text, { variant: "caption" }, { default: helperContent }),
+                  ])
+                : h("span", { "aria-hidden": "true" }),
+              hasCounterText.value
+                ? h("div", { class: "mw-input-field__counter" }, [
+                    h(Text, { variant: "caption" }, { default: counterContent }),
+                  ])
+                : null,
             ])
           : null,
 
@@ -118,7 +131,7 @@ export const TextareaField = defineComponent(
                 id: a11yIds.value.errorId,
                 "aria-live": "polite",
               },
-              [h(Paragraph, { size: "sm" }, { default: errorContent })],
+              [h(Text, { variant: "caption" }, { default: errorContent })],
             )
           : null,
       ])

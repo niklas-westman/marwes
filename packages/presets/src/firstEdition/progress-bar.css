@@ -1,0 +1,108 @@
+/*
+ * ProgressBar Component Styles
+ *
+ * Figma references:
+ * - .figma/marwes/components/progress-bar.json
+ * - .figma/marwes/pages/-progress-bar/-progress-bar_1727-3932.json
+ * - .figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json
+ */
+
+.mw-progress-bar {
+  --mw-progress-bar-value-percentage: 0%;
+  --mw-progress-bar-width: 240px;
+  --mw-progress-bar-track-height: 8px;
+  --mw-progress-bar-gap: 8px;
+  --mw-progress-bar-track-color: color-mix(in srgb, var(--mw-color-text, #141414) 15%, transparent);
+  --mw-progress-bar-fill-color: var(--mw-color-primary-base, #2f31fc);
+  --mw-progress-bar-label-color: var(--mw-color-text, #141414);
+  --mw-progress-bar-percentage-color: var(--mw-color-text-muted, #595959);
+  --mw-progress-bar-focus-ring: var(--mw-color-focus, #2f31fc);
+
+  display: grid;
+  gap: var(--mw-progress-bar-gap);
+  width: var(--mw-progress-bar-width);
+  max-width: 100%;
+  color: var(--mw-progress-bar-label-color);
+  font-family: var(--mw-font-primary, inherit);
+}
+
+.mw-progress-bar--small {
+  --mw-progress-bar-track-height: 4px;
+}
+
+.mw-progress-bar__label-row {
+  display: flex;
+  align-items: start;
+  min-width: 0;
+  gap: 8px;
+}
+
+.mw-progress-bar__label,
+.mw-progress-bar__percentage {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.mw-progress-bar__label {
+  min-width: 0;
+  flex: 1 1 auto;
+  color: var(--mw-progress-bar-label-color);
+}
+
+.mw-progress-bar__percentage {
+  flex: 0 0 auto;
+  color: var(--mw-progress-bar-percentage-color);
+  text-align: right;
+}
+
+.mw-progress-bar__track {
+  position: relative;
+  width: 100%;
+  height: var(--mw-progress-bar-track-height);
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--mw-progress-bar-track-color);
+}
+
+.mw-progress-bar__fill {
+  display: block;
+  width: var(--mw-progress-bar-value-percentage);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--mw-progress-bar-fill-color);
+  transition: width 180ms ease, background-color 140ms ease;
+}
+
+.mw-progress-bar:hover,
+.mw-progress-bar--state-hover {
+  --mw-progress-bar-fill-color: var(--mw-color-primary-hover, #2527ca);
+}
+
+.mw-progress-bar:active,
+.mw-progress-bar--state-pressed {
+  --mw-progress-bar-fill-color: var(--mw-color-primary-pressed, #1b1d97);
+}
+
+.mw-progress-bar--state-focus .mw-progress-bar__track {
+  box-shadow: 0 0 0 2px var(--mw-color-surface, #ffffff), 0 0 0 4px
+    var(--mw-progress-bar-focus-ring);
+}
+
+.mw-progress-bar--disabled {
+  --mw-progress-bar-track-color: var(--mw-color-border-subtle, #f5f5f5);
+  --mw-progress-bar-fill-color: var(--mw-color-primary-disabled, #8182fc);
+  --mw-progress-bar-label-color: var(--mw-color-text-muted, #737373);
+  --mw-progress-bar-percentage-color: var(--mw-color-text-muted, #737373);
+
+  pointer-events: none;
+}
+
+.mw-theme--dark .mw-progress-bar {
+  --mw-progress-bar-track-color: color-mix(in srgb, var(--mw-color-text, #f5f5f5) 18%, transparent);
+}
+
+.mw-theme--dark .mw-progress-bar--disabled {
+  --mw-progress-bar-track-color: color-mix(in srgb, var(--mw-color-text, #f5f5f5) 10%, transparent);
+}

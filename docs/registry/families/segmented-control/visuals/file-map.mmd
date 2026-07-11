@@ -1,0 +1,24 @@
+flowchart TD
+  Registry["docs/registry/families/segmented-control"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/segmented-control/"]
+  Core --> CoreFiles["segmented-control-types.ts\nsegmented-control-a11y.ts\nsegmented-control-recipe.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> CSS["segmented-control.css"]
+
+  React["packages/react/src/components/segmented-control/"]
+  React --> ReactFiles["segmented-control.tsx\nindex.ts"]
+
+  Vue["packages/vue/src/components/segmented-control/"]
+  Vue --> VueFiles["segmented-control.ts\nindex.ts"]
+
+  Svelte["packages/svelte/src/lib/components/segmented-control/"]
+  Svelte --> SvelteFiles["SegmentedControl.svelte\ntypes.ts\nindex.ts"]
+
+  StoriesR["apps/storybook-react/src/stories/segmented-control/"]
+  StoriesV["apps/storybook-vue/src/stories/segmented-control/"]
+  StoriesS["apps/storybook-svelte/src/stories/segmented-control/"]

@@ -1,0 +1,45 @@
+/*
+ * Skip Link Styles
+ *
+ * Visually hidden anchor that becomes visible on keyboard focus.
+ * Provides keyboard-only users a way to jump to a landmark
+ * (typically <main>) without tabbing through the header.
+ */
+
+.mw-skip-link {
+  position: absolute;
+  inset-inline-start: var(--mw-spacing-sp8, 8px);
+  inset-block-start: var(--mw-spacing-sp8, 8px);
+  z-index: 1000;
+
+  /* Visually hidden but focusable */
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+
+  background: var(--mw-color-surface-primary, #ffffff);
+  color: var(--mw-color-text, #141414);
+  border: 1px solid var(--mw-color-border, #d8d8d8);
+  border-radius: var(--mw-ui-radius, 6px);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mw-skip-link:focus-visible,
+.mw-skip-link:focus {
+  /* Reveal on focus */
+  inline-size: auto;
+  block-size: auto;
+  padding: var(--mw-spacing-sp8, 8px) var(--mw-spacing-sp16, 16px);
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  outline: 2px solid var(--mw-color-focus, #2f31fc);
+  outline-offset: 2px;
+}

@@ -1,7 +1,9 @@
 import type { InputOptions, RichTextOptions, SelectOptions, TextareaOptions } from "@marwes-ui/core"
 import type { Snippet } from "svelte"
 
-export type { SelectOption } from "@marwes-ui/core"
+export type { SelectAppearance, SelectOption } from "@marwes-ui/core"
+
+export type SelectFieldVariant = "default" | "date"
 
 export interface InputProps extends Omit<InputOptions, "describedBy"> {
   value?: string
@@ -40,13 +42,16 @@ export interface InputFieldProps {
   class?: string
 }
 
+/**
+ * Props for the bare `InputOtp` atom (Svelte).
+ *
+ * The atom renders only the OTP cells + hidden input. Use `InputOtpField`
+ * for labeled forms; reach for the atom directly only when you need a
+ * custom layout.
+ */
 export interface InputOtpProps {
   id?: string
   name?: string
-  label: string
-  helperText?: string
-  error?: string
-  ariaDescribedBy?: string
   value?: string
   defaultValue?: string
   length?: number
@@ -56,7 +61,26 @@ export interface InputOtpProps {
   required?: boolean
   invalid?: boolean
   ariaLabel?: string
+  ariaLabelledBy?: string
+  /** ID(s) of elements that describe the input. Pre-merged by InputOtpField. */
+  describedBy?: string
   onvaluechange?: (value: string) => void
+  class?: string
+}
+
+export interface InputOtpFieldProps {
+  /** Optional: if omitted, a stable id is generated. */
+  id?: string
+  /** Field label (required for accessibility). */
+  label: string
+  /** Optional helper text shown below the cells. */
+  helperText?: string
+  /** Optional error message. */
+  error?: string
+  /** Props forwarded to the bare InputOtp atom. */
+  inputOtp?: Omit<InputOtpProps, "id" | "ariaLabel" | "ariaLabelledBy" | "describedBy">
+  /** Additional aria-describedby IDs to merge with internal helper/error IDs. */
+  ariaDescribedBy?: string
   class?: string
 }
 
@@ -91,6 +115,7 @@ export interface SelectFieldProps {
   select?: SelectProps
   ariaDescribedBy?: string
   value?: string
+  variant?: SelectFieldVariant
   class?: string
 }
 
@@ -106,9 +131,46 @@ export interface TextareaFieldProps {
   id?: string
   label: string
   helperText?: string
+  counterText?: string
   error?: string
   textarea?: Omit<TextareaProps, "value">
   ariaDescribedBy?: string
   value?: string
   class?: string
 }
+
+export type DropdownFieldProps = Omit<SelectFieldProps, "select"> & {
+  select: Omit<SelectProps, "appearance"> & {
+    native?: boolean
+  }
+}
+
+export type SearchFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type" | "inputMode">
+}
+
+export type PasswordFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type">
+}
+
+export type EmailFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type" | "inputMode" | "autoComplete">
+}
+
+export type DateOfBirthFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type" | "inputMode" | "autoComplete">
+}
+
+export type ZipCodeFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type" | "inputMode" | "autoComplete">
+}
+
+export type PhoneFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type" | "inputMode" | "autoComplete">
+}
+
+export type URLFieldProps = Omit<InputFieldProps, "input"> & {
+  input?: Omit<InputFieldProps["input"], "type" | "inputMode" | "autoComplete">
+}
+
+export type CurrencyFieldProps = InputFieldProps & { currency?: string }

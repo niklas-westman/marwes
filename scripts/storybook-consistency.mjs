@@ -180,19 +180,25 @@ function shouldIgnoreComponentStemForStoryCoverage(config, stem) {
   )
 }
 
-function getStoryBearingComponentStems(config, componentFiles, family) {
+function getStoryBearingComponentStems(config, frameworkMap, family) {
   const canonicalComponentStems = getFamilyConfig(config, family)?.canonicalComponentStems
 
   if (canonicalComponentStems) {
     return new Set(canonicalComponentStems)
   }
 
-  return new Set(
-    componentFiles
+  const exportedComponentStems = new Set(frameworkMap.exportSummary.valueExports.map(toKebabCase))
+  const configuredExportBackedStems = Object.keys(
+    getFamilyConfig(config, family)?.titleByStem ?? {},
+  ).filter((stem) => exportedComponentStems.has(stem))
+
+  return new Set([
+    ...frameworkMap.componentFiles
       .map((path) => getStemWithoutExtension(path))
       .filter((stem) => stem !== "types")
       .filter((stem) => !shouldIgnoreComponentStemForStoryCoverage(config, stem)),
-  )
+    ...configuredExportBackedStems,
+  ])
 }
 
 function extractMetaTitle(content) {
@@ -272,6 +278,10 @@ function extractIndexExportSummary(content) {
     }
 
     valueExports.push(...exportNames)
+  }
+
+  for (const match of content.matchAll(/export\s+(?:interface|type)\s+([A-Za-z0-9_]+)/g)) {
+    typeExports.push(match[1])
   }
 
   return {
@@ -377,11 +387,7 @@ function shouldCompareRenderMode(config, family, stem, exportName) {
 function buildFrameworkCoverageWarnings(config, map, framework) {
   const frameworkMap = getFamilyMapFramework(map, framework)
   const warnings = []
-  const componentStems = getStoryBearingComponentStems(
-    config,
-    frameworkMap.componentFiles,
-    map.family,
-  )
+  const componentStems = getStoryBearingComponentStems(config, frameworkMap, map.family)
   const storyStems = new Set(frameworkMap.storyFiles.map((storyFile) => storyFile.stem))
   const storyOnly = isStoryOnlyFamily(config, map.family)
 
@@ -469,7 +475,7 @@ function buildCrossFrameworkExportWarnings(config, map) {
   const baselineFramework = "react"
   const baselineMap = getFamilyMapFramework(map, baselineFramework)
 
-  for (const framework of ["vue"]) {
+  for (const framework of frameworksInOrder.filter((name) => name !== baselineFramework)) {
     const frameworkMap = getFamilyMapFramework(map, framework)
 
     for (const baselineValueExport of baselineMap.exportSummary.valueExports) {
@@ -551,19 +557,11 @@ function buildCrossFrameworkWarnings(config, map) {
   const warnings = []
   const baselineFramework = "react"
   const baselineMap = getFamilyMapFramework(map, baselineFramework)
-  const baselineStems = getStoryBearingComponentStems(
-    config,
-    baselineMap.componentFiles,
-    map.family,
-  )
+  const baselineStems = getStoryBearingComponentStems(config, baselineMap, map.family)
 
   for (const framework of frameworksInOrder.filter((name) => name !== baselineFramework)) {
     const frameworkMap = getFamilyMapFramework(map, framework)
-    const frameworkStems = getStoryBearingComponentStems(
-      config,
-      frameworkMap.componentFiles,
-      map.family,
-    )
+    const frameworkStems = getStoryBearingComponentStems(config, frameworkMap, map.family)
 
     if (!isStoryOnlyFamily(config, map.family)) {
       for (const baselineStem of baselineStems) {
@@ -574,13 +572,11 @@ function buildCrossFrameworkWarnings(config, map) {
         }
       }
 
-      if (framework !== "svelte") {
-        for (const frameworkStem of frameworkStems) {
-          if (!baselineStems.has(frameworkStem)) {
-            warnings.push(
-              `${frameworkMap.label} component stem "${frameworkStem}" has no matching ${baselineMap.label} component file`,
-            )
-          }
+      for (const frameworkStem of frameworkStems) {
+        if (!baselineStems.has(frameworkStem)) {
+          warnings.push(
+            `${frameworkMap.label} component stem "${frameworkStem}" has no matching ${baselineMap.label} component file`,
+          )
         }
       }
     }

@@ -1,8 +1,9 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import type { SelectProps } from "@marwes-ui/vue"
-import { Paragraph, Select } from "@marwes-ui/vue"
+import { Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { h, ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Select, type SelectProps } from "../../../../../packages/vue/src/components/input/select"
 
 const options = [
   { value: "starter", label: "Starter" },

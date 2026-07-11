@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Paragraph, Radio, RadioGroupField } from "@marwes-ui/svelte"
+  import { Paragraph, RadioGroupField } from "@marwes-ui/svelte"
+  import Radio from "../../../../../packages/svelte/src/lib/components/radio/Radio.svelte"
 
   interface Props {
     name: string

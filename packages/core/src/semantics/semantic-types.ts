@@ -19,7 +19,17 @@ export type SemanticAttributeName = (typeof canonicalSemanticAttributeNames)[num
 export const semanticLayers = ["atom", "molecule", "purpose"] as const
 export type SemanticLayer = (typeof semanticLayers)[number]
 
-export const semanticFamilies = ["button", "badge", "avatar", "toast", "dialog"] as const
+export const semanticFamilies = [
+  "button",
+  "badge",
+  "banner",
+  "avatar",
+  "toast",
+  "dialog",
+  "drawer",
+  "context-menu",
+  "breadcrumb",
+] as const
 export type SemanticFamily = (typeof semanticFamilies)[number]
 
 export const semanticIntents = [
@@ -71,6 +81,13 @@ export const toastPurposes = [
   "info-toast",
 ] as const
 
+export const bannerPurposes = [
+  "info-banner",
+  "success-banner",
+  "warning-banner",
+  "error-banner",
+] as const
+
 export const dialogPurposes = ["confirm-dialog", "destructive-dialog", "info-dialog"] as const
 
 export const semanticPurposes = [
@@ -78,6 +95,7 @@ export const semanticPurposes = [
   ...badgePurposes,
   ...avatarPurposes,
   ...toastPurposes,
+  ...bannerPurposes,
   ...dialogPurposes,
 ] as const
 export type SemanticPurpose = (typeof semanticPurposes)[number]

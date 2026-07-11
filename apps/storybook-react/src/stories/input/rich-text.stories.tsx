@@ -1,7 +1,9 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import { Paragraph, RichText } from "@marwes-ui/react"
+import { Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { RichText } from "../../../../../packages/react/src/components/input/rich-text"
 
 const meta: Meta<typeof RichText> = {
   title: "Input/Atom/RichText",

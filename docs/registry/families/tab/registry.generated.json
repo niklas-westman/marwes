@@ -46,6 +46,16 @@
       "packages/vue/src/components/tab/tab.ts",
       "packages/vue/src/components/tab/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/tab/ContentTabs.svelte",
+      "packages/svelte/src/lib/components/tab/index.ts",
+      "packages/svelte/src/lib/components/tab/NavigationTabs.svelte",
+      "packages/svelte/src/lib/components/tab/SettingsTabs.svelte",
+      "packages/svelte/src/lib/components/tab/Tab.svelte",
+      "packages/svelte/src/lib/components/tab/TabGroup.svelte",
+      "packages/svelte/src/lib/components/tab/TabPanel.svelte",
+      "packages/svelte/src/lib/components/tab/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/tab/__tests__/tab-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/tab/__tests__/tab-taxonomy.test.ts",
@@ -65,6 +75,18 @@
       "apps/storybook-vue/src/stories/tab/settings-tabs.stories.ts",
       "apps/storybook-vue/src/stories/tab/tab-group.stories.ts",
       "apps/storybook-vue/src/stories/tab/tab.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/tab/__tests__/tab-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/tab/__tests__/tab-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/tab/content-tabs.stories.ts",
+      "apps/storybook-svelte/src/stories/tab/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/tab/navigation-tabs.stories.ts",
+      "apps/storybook-svelte/src/stories/tab/settings-tabs.stories.ts",
+      "apps/storybook-svelte/src/stories/tab/tab-group.stories.ts",
+      "apps/storybook-svelte/src/stories/tab/tab.stories.ts",
+      "apps/storybook-svelte/src/stories/tab/TabAtomPreview.svelte",
+      "apps/storybook-svelte/src/stories/tab/TabShowcase.svelte"
     ],
     "contracts": ["tests/contracts/tab.contract.ts"]
   },
@@ -108,8 +130,6 @@
       ".figma/marwes/pages/-tab/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-tab/tab_1364-7729.json",
-      ".figma/marwes/pages/-tab/tab-group_1737-9904.json",
       ".figma/marwes/pages/-tab/-tab_1364-11703.json",
       ".figma/marwes/pages/-tab/-tab-dark_1368-6067.json",
       ".figma/marwes/pages/-tab/component-container_1574-21105.json",
@@ -131,8 +151,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

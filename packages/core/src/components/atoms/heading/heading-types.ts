@@ -7,8 +7,28 @@
 import type { CssVars } from "../../../shared/css-vars"
 import type { HeadingSize } from "../../../theme/theme-types"
 
-/** Semantic heading level. */
+/**
+ * Heading levels styled by the design system.
+ *
+ * Marwes officially ships visual styling for H1-H3 only. The `Heading`
+ * recipe and the `H1`/`H2`/`H3` adapters are scoped to this ladder.
+ *
+ * For semantic-only H4-H6 (deep section nesting, accessibility outlines),
+ * see {@link SemanticHeadingLevel} and the `Text` component's `headingLevel`
+ * prop — `<Text headingLevel={4} variant="..." />` renders an `<h4>` while
+ * letting the consumer pick the visual variant.
+ */
 export type HeadingLevel = 1 | 2 | 3
+
+/**
+ * Every HTML heading level the design system acknowledges semantically.
+ *
+ * Wider than {@link HeadingLevel} (which is the styled subset). Use this
+ * when typing a consumer-side wrapper that needs to accept all six rungs
+ * of the HTML heading ladder — e.g. a `MyH4` wrapper built around
+ * `<Text headingLevel={4} />`.
+ */
+export type SemanticHeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 
 /** Public props the adapter can pass into core. */
 export type HeadingOptions = {

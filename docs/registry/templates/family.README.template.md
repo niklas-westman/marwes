@@ -55,6 +55,7 @@ Example:
 | --- | --- | --- |
 | React Storybook | `apps/storybook-react/src/stories/<family>/...` | canonical React runtime visual source |
 | Vue Storybook | `apps/storybook-vue/src/stories/<family>/...` | canonical Vue runtime visual source |
+| Svelte Storybook | `apps/storybook-svelte/src/stories/<family>/...` | canonical Svelte runtime visual source |
 | Figma showcase | `.figma/marwes/pages/...` | curated design baseline |
 
 ## Figma references
@@ -94,10 +95,13 @@ flowchart LR
   Core --> Presets[Preset CSS]
   Core --> React[React adapter]
   Core --> Vue[Vue adapter]
+  Core --> Svelte[Svelte adapter]
   React --> Storybook[Storybook]
   Vue --> Storybook
+  Svelte --> Storybook
   React --> Contracts[Contracts]
   Vue --> Contracts
+  Svelte --> Contracts
   Core --> Registry[Registry]
   Storybook --> Registry
   Contracts --> Registry
@@ -165,7 +169,7 @@ Call out the one to three files or decisions most likely to matter during mainte
 This family should follow the same repo tree order:
 
 ```text
-spec/decision → core → preset CSS → React adapter → React stories/tests → Vue adapter → Vue stories/tests → contracts → registry
+spec/decision → core → preset CSS → React adapter → React stories/tests → Vue adapter → Vue stories/tests → Svelte adapter → Svelte stories/tests → contracts → registry
 ```
 
 Use a table with path + purpose.
@@ -176,6 +180,7 @@ Make sure to include, when relevant:
 - preset CSS
 - React adapter and wrappers
 - Vue adapter and wrappers
+- Svelte adapter and wrappers
 - Storybook intros and story files
 - shared contracts
 - AXE docs and audit docs
@@ -183,12 +188,13 @@ Make sure to include, when relevant:
 
 ## Adapter parity expectations
 
-Document only family-specific parity expectations here. Do not duplicate generic React/Vue parity rules unless this family has special behavior.
+Document only family-specific parity expectations here. Do not duplicate generic React/Vue/Svelte parity rules unless this family has special behavior.
 
 | Surface | Expectation | Validation |
 | --- | --- | --- |
 | React adapter | `<family-specific prop/event/semantic expectation or n/a>` | `pnpm validate:family <family>` |
 | Vue adapter | `<matching expectation or documented framework-specific difference>` | `pnpm validate:family <family>` |
+| Svelte adapter | `<matching expectation or documented framework-specific difference>` | `pnpm validate:family <family>` |
 | Storybook | `<paired story/doc expectation>` | `pnpm storybook:consistency -- --family <family>` |
 
 If drift repeats, promote the repeated expectation into a focused test or generator check before adding more prose.

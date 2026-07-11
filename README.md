@@ -70,7 +70,7 @@ Marwes is shaped for teams building with human designers, frontend engineers, an
 - **RenderKit output is structured** so adapters receive predictable `tag`, `className`, `vars`, and `a11y` fields instead of opaque component internals.
 - **Generated component registries** document package exports, stories, tests, accessibility notes, and implementation files in a format agents can search and verify.
 - **Design tokens stay named and typed** so Figma-to-code changes can land in theme keys and CSS variables instead of scattered one-off values.
-- **Framework boundaries are strict** which lets agents update core behavior once and have React, Vue, and future adapters inherit the same contract.
+- **Framework boundaries are strict** which lets agents update core behavior once and have React, Vue, and Svelte adapters inherit the same contract.
 
 The goal is not "AI magic". The goal is a component system with enough structure that AI can make useful changes with less context, fewer assumptions, and better verification paths.
 
@@ -81,10 +81,10 @@ The goal is not "AI magic". The goal is a component system with enough structure
 Marwes is accessible because accessibility is part of the component contract, not a checklist added after rendering.
 
 - **Core owns a11y logic** through typed recipes and helpers that produce roles, ARIA state, label wiring, description wiring, invalid state, and semantic metadata.
-- **React and Vue stay thin** so both adapters apply the same core contract to native DOM elements instead of inventing separate accessibility behavior per framework.
+- **React, Vue, and Svelte adapters stay thin** so every framework applies the same core contract to native DOM elements instead of inventing separate accessibility behavior per framework.
 - **Native controls come first** for buttons, inputs, selects, checkboxes, radios, textareas, and form fields, with ARIA added only where a pattern needs explicit wiring.
 - **Field components wire labels, helper text, and errors** into `for`, `id`, `aria-describedby`, `aria-invalid`, and polite error announcements.
-- **Storybook a11y smoke checks** run through the Storybook a11y addon for the current promoted families in both React and Vue.
+- **Storybook a11y smoke checks** run through the Storybook a11y addon for the current promoted families in React, Vue, and Svelte.
 
 Example: an invalid field is not just styled red. The component contract also wires the accessible name, description, and invalid state:
 
@@ -250,7 +250,7 @@ const panelStyle = {
 </style>
 ```
 
-**That's it.** React and Vue consume the same core recipes, preset CSS, theme tokens, and accessibility contracts.
+**That's it.** React, Vue, and Svelte consume the same core recipes, preset CSS, theme tokens, and accessibility contracts.
 
 ---
 
@@ -260,8 +260,8 @@ What makes Marwes different? **Complete separation of concerns:**
 
 ```
 ┌─────────────────────────────────────┐
-│   @marwes-ui/react (Thin Adapter)  │  ← ~10 lines per component
-│   Apply RenderKit to React elements │
+│   @marwes-ui/react / vue / svelte  │  ← Thin adapters
+│   Apply RenderKit to framework DOM │
 ├─────────────────────────────────────┤
 │   @marwes-ui/presets (Static CSS)  │  ← Zero runtime, CDN-friendly
 │   Design tokens + .mw-* classes     │
@@ -284,13 +284,12 @@ What makes Marwes different? **Complete separation of concerns:**
 
 **Available now:**
 
-- Buttons, purpose buttons, and semantic button variants
-- Input family: `Input`, `Select`, `Textarea`, `RichText`, and field wrappers
-- Checkbox family: `Checkbox`, `CheckboxField`, `CheckboxGroupField`
-- Radio family: `Radio`, `RadioGroupField`, purpose radio groups
-- `Switch`, `Accordion`, `Badge`, `Card`, `Toast`, `Slider`, `Spacing`
-- Typography: `H1`, `H2`, `H3`, `Paragraph`
-- Utilities and primitives: `Icon`, `Divider`
+- Actions and feedback: `Button`, purpose buttons, `Badge`, `Banner`, `Toast`
+- Navigation and disclosure: `Breadcrumb`, `Pagination`, `Tabs`, `Accordion`, `Drawer`, `Dialog`, `ContextMenu`, `Tooltip`
+- Form and choice controls: `Input`, `Select`, `Textarea`, `RichText`, `Checkbox`, `Radio`, `Switch`, `Slider`, `SegmentedControl`
+- Status and loading: `Avatar`, `ProgressBar`, `Spinner`, `Skeleton`, `StatTile`
+- Layout and typography: `Card`, `Spacing`, `Divider`, `Icon`, `H1`, `H2`, `H3`, `Paragraph`, `Text`
+- Date and specialized inputs: `DatePicker`, `InputOtp`, purpose field wrappers
 
 [👉 **Browse all components in Storybook**](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
 
@@ -328,7 +327,7 @@ The theme object is consequential across the component system:
 
 - `color.primary`, semantic colors, surface, text, border, and focus values become `--mw-color-*` CSS variables.
 - `font`, `ui.radius`, `ui.density`, and typography values become shared type, radius, and sizing variables.
-- React and Vue use the same `ThemeInput` shape.
+- React, Vue, and Svelte use the same `ThemeInput` shape.
 - Preset CSS consumes those variables, so component visuals follow the provider theme without adapter-specific styling.
 
 Use the same provider-scoped variables in custom styling:
@@ -469,7 +468,7 @@ pnpm changeset add --empty
 
 CI enforces this only for `packages/**`. Changes to Storybook, playgrounds, docs, workflows, or root tooling do not require a changeset unless they also touch publishable packages.
 
-The published Marwes packages are versioned as a fixed group. If a changeset includes any of `@marwes-ui/core`, `@marwes-ui/react`, `@marwes-ui/presets`, or `@marwes-ui/vue`, include all four in that same changeset.
+The published Marwes packages are versioned as a fixed group. If a changeset includes any of `@marwes-ui/core`, `@marwes-ui/react`, `@marwes-ui/presets`, `@marwes-ui/vue`, or `@marwes-ui/svelte`, include all five in that same changeset.
 
 **Repo structure:**
 
@@ -477,8 +476,10 @@ The published Marwes packages are versioned as a fixed group. If a changeset inc
 - `packages/presets` — Design tokens and static CSS
 - `packages/react` — React adapter
 - `packages/vue` — Vue adapter
+- `packages/svelte` — Svelte adapter
 - `apps/storybook-react` — React component documentation
 - `apps/storybook-vue` — Vue component documentation
+- `apps/storybook-svelte` — Svelte component documentation
 - `apps/playground-react` — Integration testing and manual verification
 
 ---

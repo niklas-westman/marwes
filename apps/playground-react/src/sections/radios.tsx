@@ -1,5 +1,6 @@
-import { Radio } from "@marwes-ui/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for playground demo.
+import { Radio } from "../../../../packages/react/src/components/radio/radio"
 import { ComponentRow, PreviewSection, SectionDescription, SectionTitle } from "./section.styles"
 
 const OPTIONS = ["Small", "Medium", "Large"] as const

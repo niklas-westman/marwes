@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process"
 import {
   existsSync,
   mkdirSync,
@@ -220,8 +221,10 @@ function buildGeneratedFamilyRegistry(
       presets: existingPaths(source.presetPaths),
       react: listFilesRecursively(source.reactDir),
       vue: listFilesRecursively(source.vueDir),
+      svelte: listFilesRecursively(source.svelteDir),
       storybookReact: listFilesRecursively(source.storybookReactDir),
       storybookVue: listFilesRecursively(source.storybookVueDir),
+      storybookSvelte: listFilesRecursively(source.storybookSvelteDir),
       contracts: existingPaths(source.contractPaths),
     },
     semantics,
@@ -239,8 +242,10 @@ function buildGeneratedFamilyRegistry(
     coverage: {
       react: pathExists(source.reactDir),
       vue: pathExists(source.vueDir),
+      svelte: pathExists(source.svelteDir),
       storybookReact: pathExists(source.storybookReactDir),
       storybookVue: pathExists(source.storybookVueDir),
+      storybookSvelte: pathExists(source.storybookSvelteDir),
       contractsPresent: source.contractPaths.every((contractPath) => pathExists(contractPath)),
       auditDocPresent: source.familyAuditDocPath ? pathExists(source.familyAuditDocPath) : false,
       figmaReferencesPresent: figmaReferencePaths.length > 0,
@@ -335,5 +340,24 @@ if (mode === "check") {
   }
 } else {
   const familyLabel = discoveredFamilies.length === 1 ? "family" : "families"
+
+  // Format generated JSON with biome
+  const formatResult = spawnSync(
+    "pnpm",
+    [
+      "exec",
+      "biome",
+      "check",
+      "--write",
+      "--no-errors-on-unmatched",
+      "docs/registry/families/",
+      "artifacts/component-registry.json",
+    ],
+    { cwd: repoRoot, stdio: "pipe" },
+  )
+  if (formatResult.status !== 0) {
+    console.warn("⚠ biome format step failed (non-blocking)")
+  }
+
   console.log(`✓ Generated component registry for ${discoveredFamilies.length} ${familyLabel}`)
 }

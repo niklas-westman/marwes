@@ -1,7 +1,7 @@
 import { IconName, buildInputFieldA11yIds, resolveSelectMode } from "@marwes-ui/core"
 import * as React from "react"
 import { Icon } from "../icon"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Select } from "./select"
 import type { SelectProps } from "./select"
 import { SelectArrowIcon } from "./select-arrow-icon"
@@ -414,7 +414,7 @@ export function SelectField(props: SelectFieldProps): React.ReactElement {
   return (
     <div className={wrapperClass}>
       <label className="mw-input-field__label" htmlFor={id}>
-        <Paragraph size="md">{props.label}</Paragraph>
+        <Text variant="label">{props.label}</Text>
       </label>
 
       <div className="mw-input-field__input-wrapper">
@@ -427,13 +427,13 @@ export function SelectField(props: SelectFieldProps): React.ReactElement {
 
       {hasHelperText && !hasError && (
         <div className="mw-input-field__helper" id={helperTextId}>
-          <Paragraph size="sm">{props.helperText}</Paragraph>
+          <Text variant="caption">{props.helperText}</Text>
         </div>
       )}
 
       {hasError && (
         <div className="mw-input-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </div>

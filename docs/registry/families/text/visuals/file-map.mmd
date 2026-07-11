@@ -1,0 +1,22 @@
+flowchart TD
+  Registry["docs/registry/families/text"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/text/"]
+  Core --> CoreFiles["text-recipe.ts\ntext-types.ts"]
+  Theme["packages/core/src/theme/"]
+  Theme --> Variants["text-variant.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["typography.css"]
+
+  React["packages/react/src/components/text/"]
+  Vue["packages/vue/src/components/text/"]
+  Svelte["packages/svelte/src/lib/components/text/"]
+
+  StoriesR["apps/storybook-react/src/stories/text/"]
+  StoriesV["apps/storybook-vue/src/stories/text/"]
+  StoriesS["apps/storybook-svelte/src/stories/text/"]
+  Contracts["tests/contracts/text.contract.ts"]

@@ -40,6 +40,13 @@
       "packages/vue/src/components/spinner/spinner.ts",
       "packages/vue/src/components/spinner/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/spinner/ButtonSpinner.svelte",
+      "packages/svelte/src/lib/components/spinner/EmptyStateSpinner.svelte",
+      "packages/svelte/src/lib/components/spinner/index.ts",
+      "packages/svelte/src/lib/components/spinner/Spinner.svelte",
+      "packages/svelte/src/lib/components/spinner/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
@@ -55,6 +62,17 @@
       "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts",
       "apps/storybook-vue/src/stories/spinner/Introduction.mdx",
       "apps/storybook-vue/src/stories/spinner/spinner.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/spinner/__tests__/spinner-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/spinner/__tests__/spinner-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/spinner/button-spinner.stories.ts",
+      "apps/storybook-svelte/src/stories/spinner/ButtonSpinnerStory.svelte",
+      "apps/storybook-svelte/src/stories/spinner/empty-state-spinner.stories.ts",
+      "apps/storybook-svelte/src/stories/spinner/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/spinner/spinner.stories.ts",
+      "apps/storybook-svelte/src/stories/spinner/SpinnerGallery.svelte",
+      "apps/storybook-svelte/src/stories/spinner/SpinnerTreatments.svelte"
     ],
     "contracts": ["tests/contracts/spinner.contract.ts"]
   },
@@ -108,8 +126,7 @@
       ".figma/marwes/pages/-spinner/component-container_1737-10631.json",
       ".figma/marwes/pages/-spinner/-spinner_1737-10635.json",
       ".figma/marwes/pages/-spinner/-spinner-dark_1780-1543.json",
-      ".figma/marwes/pages/-spinner/tinospinner_1766-153.json",
-      ".figma/marwes/pages/cover/spinnerdots-round_1825-30933.json"
+      ".figma/marwes/pages/-spinner/tinospinner_1766-153.json"
     ],
     "nodeReferences": {
       "spinnerComponentContainer": "1737:10631",
@@ -124,8 +141,7 @@
       "spinnerCrossComponent": "1780:1342",
       "newSpinnerComponentSet": "1766:127",
       "spinnerAnimationSet": "1767:153",
-      "tinoSpinnerSection": "1766:153",
-      "spinnerCoverDotsRoundFrame": "1825:30933"
+      "tinoSpinnerSection": "1766:153"
     },
     "figmaTokens": [],
     "figmaStates": {
@@ -156,8 +172,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

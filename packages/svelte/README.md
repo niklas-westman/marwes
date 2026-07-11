@@ -13,7 +13,7 @@ Svelte 5 components for the Marwes design system with default styling, typed the
 
 Svelte 5 • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
-[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[Website](https://marwes.io) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -28,7 +28,7 @@ Marwes gives Svelte apps a ready design-system base without requiring custom CSS
 - **Runes-first**: built entirely on Svelte 5 runes (`$props`, `$state`, `$derived`, `$effect`, `$bindable`) — no legacy stores or lifecycle hooks.
 - **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
 - **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
-- **Shared core contracts**: every Svelte component is backed by the same framework-agnostic recipes, a11y mapping, and theme shape used by React and Vue.
+- **Shared core contracts**: every Svelte component is backed by the same framework-agnostic recipes, a11y mapping, and theme shape used across adapters.
 
 ## Package Map
 
@@ -46,11 +46,51 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Install
 
+The Marwes CLI sets up an existing Svelte app in one command. Every path below leaves you with the same result: components that render with default Marwes styling and no separate CSS setup.
+
+For deeper setup guides, visit [marwes.io](https://marwes.io).
+
+### Recommended: with the CLI
+
+1. Open a terminal at the root of your Svelte app.
+
+2. Run the installer:
+
+   ```bash
+   pnpm dlx @marwes-ui/cli init --adapter svelte
+   ```
+
+3. The CLI installs `@marwes-ui/svelte` (with `svelte` as a peer) and wraps your app root with `MarwesProvider`.
+
+4. Start using components — the default Marwes CSS is loaded for you. Jump to the [Quick Start](#quick-start) below.
+
+### With AI: agentic mode
+
+Use this when you want an AI coding agent (Claude Code, Cursor, etc.) to drive the setup. It runs the same install flow, then runs `doctor` and prints the setup boundaries the agent should follow:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter svelte --agentic
+```
+
+Also works with `npx`, `yarn dlx`, and `bunx`.
+
+### New Vite app
+
+If you don't have an app yet, scaffold one with Marwes preinstalled:
+
+```bash
+pnpm create marwes@latest my-app --template svelte-ts
+```
+
+### Manual install
+
+Prefer to wire things up yourself:
+
 ```bash
 pnpm add @marwes-ui/svelte
 ```
 
-No preset CSS import is needed. `@marwes-ui/svelte` depends on `@marwes-ui/presets` and loads the default Marwes CSS automatically.
+Then wrap your app root in `MarwesProvider` — see the [Quick Start](#quick-start) below. No preset CSS import is needed; `@marwes-ui/svelte` loads the default Marwes CSS automatically.
 
 ## Quick Start
 
@@ -463,7 +503,7 @@ Marwes Svelte components are accessible because the adapter renders a shared cor
 - Svelte components prefer native DOM controls first: `button`, `input`, `select`, `textarea`, `hr`, and standard form wiring.
 - Field components connect visible labels, helper text, and errors through `id`, `for`, `aria-describedby`, `aria-invalid`, and polite error announcements.
 - Coordinated widgets carry explicit contracts: tabs wire `tablist`/`tab`/`tabpanel`, dialogs own dialog semantics, toasts expose live-region behavior, and purpose buttons expose risk metadata.
-- Storybook accessibility smoke checks run through the Storybook a11y addon for the promoted Svelte families, and shared contract tests keep Svelte aligned with React and Vue.
+- Storybook accessibility smoke checks run through the Storybook a11y addon for the promoted Svelte families, and shared contract tests keep Svelte aligned across adapters.
 
 Example:
 

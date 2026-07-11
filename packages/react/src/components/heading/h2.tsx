@@ -42,6 +42,10 @@ export type H2Props = Omit<HeadingOptions, "level"> & {
  * Semantic section heading rendered as `<h2>`.
  * Supports visual size override for cases where semantic and visual hierarchy differ.
  *
+ * @remarks
+ * Marwes officially styles H1-H3 only. For semantic H4-H6, use
+ * `<Text headingLevel={4..6} variant="..." />`.
+ *
  * @example Basic usage
  * ```tsx
  * <H2>Section Title</H2>

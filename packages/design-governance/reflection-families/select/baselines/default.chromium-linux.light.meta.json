@@ -1,0 +1,36 @@
+{
+  "baseline": "default.chromium-linux.light.png",
+  "caseFingerprint": "c39827de8b55b6e6d83d964970b2d9885bc983db22bd7aadfe291be6b6381ce7",
+  "caseId": "select.default",
+  "createdAt": "2026-06-14T07:17:10.199Z",
+  "exportScale": 1,
+  "family": "select",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/select/default/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5070:45341",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "pngByteLength": 1932,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "39c3af27ff4dc47b728f4e1983146e7c69f3644f794c5be66eda55d304e2829d",
+  "schemaVersion": 1,
+  "sourceFingerprint": "9c209a47c08e1b50e5916dbef8b6357c0be4faf764dc1b9d8b1c5fac360b8fce",
+  "sourceFrameId": "1364:11817",
+  "sourceNodeId": "1364:11867",
+  "sourceNodeIds": ["1364:11867"],
+  "variablesFingerprint": "2c5ffa842039b5a0d6e526cefb4d6de070ad4fc677ecd5f98a75c51e88c225a3",
+  "viewport": "select-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

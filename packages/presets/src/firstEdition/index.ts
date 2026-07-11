@@ -2,6 +2,16 @@ import type { ThemeInput } from "@marwes-ui/core"
 import "@fontsource/instrument-sans/400.css"
 import "@fontsource/instrument-sans/500.css"
 import "@fontsource/instrument-sans/600.css"
+import "@fontsource/instrument-sans/700.css"
+
+export {
+  cyberPreset,
+  editorialPreset,
+  marwesPreset,
+  nordicPreset,
+  sunsetPreset,
+  themePresets,
+} from "./presets"
 
 // Explicit ThemeInput for consumers that still want to import the preset object.
 // MarwesProvider uses the same first edition baseline when no theme is provided.

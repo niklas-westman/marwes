@@ -1,0 +1,36 @@
+{
+  "baseline": "destructive.chromium-linux.light.png",
+  "caseFingerprint": "c8ecc623c1721aae21cf55ccde9b164abfbe0ba222e6a27484b6849a77340e54",
+  "caseId": "button.destructive",
+  "createdAt": "2026-06-13T16:20:09.657Z",
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/button/destructive/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "TODO_REFLECTION_BUTTON_DESTRUCTIVE_LIGHT_FRAME",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 1844,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "f9aa321bedb84c48696d340aa79c904038362bca9e2fb2130900d971b13e9336",
+  "schemaVersion": 1,
+  "sourceFingerprint": "6ced3087343f43789ced6e66bf730868bc9f5356b2a713b3340c0f4c4606d11d",
+  "sourceFrameId": "1606:14324",
+  "sourceNodeId": "1364:11356",
+  "sourceNodeIds": ["1364:11356"],
+  "variablesFingerprint": "f1ed6ef8afd188699855bcecc128428e6ceae873ff296d05453299ba49717684",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

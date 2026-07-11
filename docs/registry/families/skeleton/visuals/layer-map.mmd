@@ -1,0 +1,26 @@
+flowchart LR
+  Figma["Figma refs\nskeleton baseline"]
+  Core["@marwes-ui/core\nrecipe + a11y + types"]
+  Presets["preset CSS\nskeleton.css"]
+  React["@marwes-ui/react\nSkeleton"]
+  Vue["@marwes-ui/vue\nSkeleton"]
+  Svelte["@marwes-ui/svelte\nSkeleton"]
+  Stories["Storybook React + Vue + Svelte"]
+  Contracts["skeleton shared contract"]
+  Registry["docs/registry/families/skeleton"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Svelte --> Contracts
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

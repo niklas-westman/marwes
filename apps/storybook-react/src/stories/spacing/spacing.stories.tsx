@@ -67,6 +67,7 @@ export const AllSizes: Story = {
           ["sp-2", "2px"],
           ["sp-4", "4px"],
           ["sp-8", "8px"],
+          ["sp-12", "12px"],
           ["sp-16", "16px"],
           ["sp-24", "24px"],
           ["sp-32", "32px"],

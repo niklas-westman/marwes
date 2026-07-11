@@ -1,22 +1,21 @@
-import {
-  type InputOtpOptions,
-  buildInputFieldA11yIds,
-  createInputOtpRecipe,
-  sanitizeInputOtpValue,
-} from "@marwes-ui/core"
+import { type InputOtpOptions, createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
 
+/**
+ * Props for the bare `InputOtp` atom (Vue).
+ *
+ * The atom renders only the OTP cells + hidden input — no label, helper,
+ * or error region. Use `InputOtpField` for labeled forms; reach for the
+ * atom directly only when you need a custom layout.
+ */
 export type InputOtpProps = Omit<InputOtpOptions, "describedBy"> & {
-  label: string
-  helperText?: string
-  error?: string
-  ariaDescribedBy?: string
   modelValue?: string
   onValueChange?: (value: string) => void
   className?: string
+  /** ID(s) of elements that describe the input. Pre-merged by `InputOtpField`. */
+  describedBy?: string
 }
 
 const inputOtpPropKeys = [
@@ -25,25 +24,24 @@ const inputOtpPropKeys = [
   "value",
   "modelValue",
   "defaultValue",
-  "label",
-  "helperText",
-  "error",
   "length",
   "placeholderCharacter",
   "disabled",
   "readOnly",
   "required",
   "invalid",
-  "ariaDescribedBy",
+  "describedBy",
   "ariaLabel",
+  "ariaLabelledBy",
   "onValueChange",
   "className",
 ] as const
 
-function hasTextContent(value: string | undefined): boolean {
-  return value !== undefined && value.trim().length > 0
-}
-
+/**
+ * InputOtp (Atom) — bare OTP cells. Renders the visual cells and a hidden
+ * native `<input>` that captures keyboard entry. Pair with `InputOtpField`
+ * for label + helper/error wiring.
+ */
 export const InputOtp = defineComponent(
   (props: InputOtpProps, { emit }) => {
     const localInputId = createLocalId("mw-input-otp")
@@ -56,54 +54,23 @@ export const InputOtp = defineComponent(
       return sanitizeInputOtpValue(sourceValue, otpLength.value)
     })
 
-    const hasHelperText = computed(() => hasTextContent(props.helperText))
-    const hasError = computed(() => hasTextContent(props.error))
-    const invalid = computed(() => hasError.value || props.invalid === true)
-
-    const a11yIds = computed(() =>
-      buildInputFieldA11yIds({
-        id: id.value,
-        hasHelperText: hasHelperText.value,
-        hasError: hasError.value,
-        externalDescribedBy: props.ariaDescribedBy,
-      }),
-    )
-
     const kit = computed(() => {
       const recipeOptions: InputOtpOptions = {
         id: id.value,
         value: currentValue.value,
         length: otpLength.value,
-        invalid: invalid.value,
       }
 
-      if (props.name) {
-        recipeOptions.name = props.name
-      }
-
-      if (props.placeholderCharacter) {
+      if (props.name) recipeOptions.name = props.name
+      if (props.placeholderCharacter)
         recipeOptions.placeholderCharacter = props.placeholderCharacter
-      }
-
-      if (props.disabled) {
-        recipeOptions.disabled = true
-      }
-
-      if (props.readOnly) {
-        recipeOptions.readOnly = true
-      }
-
-      if (props.required) {
-        recipeOptions.required = true
-      }
-
-      if (a11yIds.value.describedBy) {
-        recipeOptions.describedBy = a11yIds.value.describedBy
-      }
-
-      if (props.ariaLabel) {
-        recipeOptions.ariaLabel = props.ariaLabel
-      }
+      if (props.disabled) recipeOptions.disabled = true
+      if (props.readOnly) recipeOptions.readOnly = true
+      if (props.required) recipeOptions.required = true
+      if (props.invalid) recipeOptions.invalid = true
+      if (props.describedBy) recipeOptions.describedBy = props.describedBy
+      if (props.ariaLabel) recipeOptions.ariaLabel = props.ariaLabel
+      if (props.ariaLabelledBy) recipeOptions.ariaLabelledBy = props.ariaLabelledBy
 
       return createInputOtpRecipe(recipeOptions)
     })
@@ -130,14 +97,10 @@ export const InputOtp = defineComponent(
           class: wrapperClass.value,
           style: kit.value.vars,
           "data-component": "input-otp",
-          "data-invalid": invalid.value ? "true" : undefined,
+          "data-invalid": props.invalid ? "true" : undefined,
           "data-disabled": props.disabled ? "true" : undefined,
         },
         [
-          h("label", { class: "mw-input-otp__label", for: id.value }, [
-            h(Paragraph, { size: "md" }, { default: () => [props.label] }),
-          ]),
-
           h("div", { class: "mw-input-otp__cells" }, [
             ...kit.value.displayCells.map((displayCell) =>
               h(
@@ -166,6 +129,7 @@ export const InputOtp = defineComponent(
               readOnly: kit.value.a11y.readOnly,
               required: kit.value.a11y.required,
               "aria-label": kit.value.a11y.ariaLabel,
+              "aria-labelledby": kit.value.a11y.ariaLabelledBy,
               "aria-invalid": kit.value.a11y.ariaInvalid,
               "aria-describedby": kit.value.a11y.ariaDescribedBy,
               value: kit.value.displayValue,
@@ -173,22 +137,6 @@ export const InputOtp = defineComponent(
               onChange: (event: Event) => emit("change", event),
             }),
           ]),
-
-          hasError.value
-            ? h(
-                "div",
-                {
-                  class: "mw-input-otp__error",
-                  id: a11yIds.value.errorId,
-                  "aria-live": "polite",
-                },
-                [h(Paragraph, { size: "sm" }, { default: () => [props.error ?? ""] })],
-              )
-            : hasHelperText.value
-              ? h("div", { class: "mw-input-otp__helper", id: a11yIds.value.helperTextId }, [
-                  h(Paragraph, { size: "sm" }, { default: () => [props.helperText ?? ""] }),
-                ])
-              : null,
         ],
       )
   },

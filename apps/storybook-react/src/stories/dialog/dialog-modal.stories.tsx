@@ -11,6 +11,9 @@ const meta: Meta<typeof DialogModal> = {
   },
   argTypes: {
     size: { control: "select", options: ["small", "medium", "large"] },
+    surfaceWidth: { control: "text" },
+    tone: { control: "select", options: ["default", "calm"] },
+    divider: { control: "select", options: ["visible", "hidden"] },
   },
 }
 
@@ -58,6 +61,26 @@ export const LockedDismissal: Story = {
     <DialogModal {...args} portalTarget={null} footer={<ConfirmButton>Continue</ConfirmButton>}>
       <Paragraph>
         The migration runs in the background and will notify you when it is safe to continue.
+      </Paragraph>
+    </DialogModal>
+  ),
+}
+
+export const CalmSurface: Story = {
+  args: {
+    open: true,
+    title: "Review export",
+    description: "Confirm the file settings before the export starts.",
+    surfaceWidth: "640px",
+    tone: "calm",
+    divider: "hidden",
+    size: "medium",
+  },
+  render: (args) => (
+    <DialogModal {...args} portalTarget={null} footer={<ConfirmButton>Export</ConfirmButton>}>
+      <Paragraph>
+        The custom surface width, calmer scrim, and hidden dividers are controlled by DialogModal
+        props.
       </Paragraph>
     </DialogModal>
   ),

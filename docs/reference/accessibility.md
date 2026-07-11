@@ -14,7 +14,7 @@ It sits between:
 
 Marwes already has strong accessibility architecture:
 - a11y logic is source-owned in `@marwes-ui/core`
-- React and Vue adapters stay thin
+- React, Vue, and Svelte adapters stay thin
 - shared contracts already cover many shipped families
 - the registry and audit docs describe family posture in much more detail than before
 
@@ -74,7 +74,7 @@ Core recipes and a11y helpers prove:
 - canonical semantic metadata for governed families
 
 ### 2. Shared cross-adapter contracts
-Shared contract files under `tests/contracts/` prove the same behavior across React and Vue for many shipped families.
+Shared contract files under `tests/contracts/` prove the same behavior across React, Vue, and Svelte for many shipped families.
 
 What these contracts commonly cover:
 - native semantics stay intact where Marwes is native-first
@@ -84,7 +84,7 @@ What these contracts commonly cover:
 - canonical `data-*` metadata for governed semantic families
 
 ### 3. Adapter-level DOM behavior
-React and Vue tests prove:
+React, Vue, and Svelte tests prove:
 - adapter props reach the DOM honestly
 - runtime state changes and callbacks behave as expected
 - thin wrappers stay aligned with core contracts
@@ -92,7 +92,7 @@ React and Vue tests prove:
 ### 4. Storybook documentation and taxonomy checks
 Storybook tests prove:
 - docs pages mention the intended public surface
-- React and Vue story structure stays aligned
+- React, Vue, and Svelte story structure stays aligned
 - taxonomy remains consistent across atom, molecule, and purpose layers
 
 ### 5. Registry-backed posture tracking
@@ -123,9 +123,9 @@ Storybook accessibility tooling now has an explicit repo policy, but it is **not
 Current honest posture:
 - Storybook previews default automated accessibility checks to `off` until a story is intentionally promoted
 - the first smoke set is configured with `a11y.test = "error"`
-- `pnpm test:storybook:a11y` runs the current smoke set in both Storybook apps
+- `pnpm test:storybook:a11y` runs the current smoke set in all three Storybook apps
 - `pnpm check` now includes that smoke-set command, so the first Storybook accessibility gate is part of normal trust validation
-- current smoke-set families are Button, Checkbox, Radio, Toast, and Spinner in both Storybook apps
+- current smoke-set families are Button, Checkbox, Radio, Toast, and Spinner in React, Vue, and Svelte Storybook apps
 - broader repo-wide gating and exemption tracking still remain follow-up work
 - this support document should not imply that every story is already hard-failing on accessibility regressions in CI
 

@@ -190,9 +190,11 @@ export function shouldLoadGoogleFont(name: string, config: FontLoadingConfig = "
 }
 
 interface TypographyForWeightExtraction {
+  display?: { fontWeight: number }
   h1: { fontWeight: number }
   h2: { fontWeight: number }
   h3: { fontWeight: number }
+  text?: Record<string, { fontWeight: number }>
 }
 
 /**
@@ -202,8 +204,14 @@ interface TypographyForWeightExtraction {
  */
 export function extractUsedWeights(typography: TypographyForWeightExtraction): number[] {
   const weights = new Set([400, 500])
+  if (typography.display) weights.add(typography.display.fontWeight)
   weights.add(typography.h1.fontWeight)
   weights.add(typography.h2.fontWeight)
   weights.add(typography.h3.fontWeight)
+
+  for (const textStyle of Object.values(typography.text ?? {})) {
+    weights.add(textStyle.fontWeight)
+  }
+
   return [...weights].sort((a, b) => a - b)
 }

@@ -1,11 +1,12 @@
 import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Checkbox, type CheckboxProps } from "./checkbox"
 
 export interface CheckboxGroupFieldOption {
   value: string
   label: React.ReactNode
+  description?: React.ReactNode
   disabled?: boolean
   indeterminate?: boolean
 }
@@ -120,27 +121,35 @@ export function CheckboxGroupField(props: CheckboxGroupFieldProps): React.ReactE
       {...props.dataAttributes}
     >
       <legend className="mw-checkbox-group-field__label" id={labelId}>
-        <Paragraph size="md">{props.label}</Paragraph>
+        <Text variant="label">{props.label}</Text>
       </legend>
 
       {hasDescription && (
         <div className="mw-checkbox-group-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
+          <Text variant="caption">{props.description}</Text>
         </div>
       )}
 
       <div className="mw-checkbox-group-field__options">
         {props.options.map((option, index) => {
           const optionId = `${id}-option-${index}`
+          const optionLabelId = `${optionId}-label`
+          const optionDescriptionId = `${optionId}-description`
+          const hasOptionDescription = hasContent(option.description)
           const isOptionDisabled = props.disabled || option.disabled || false
           const checkboxProps: CheckboxProps = {
             ...(props.checkbox ?? {}),
             id: optionId,
             value: option.value,
+            ariaLabelledBy: optionLabelId,
             checked: selectedValueSet.has(option.value),
             disabled: isOptionDisabled,
             invalid: isInvalid,
             onCheckedChange: () => handleToggle(option.value),
+          }
+
+          if (hasOptionDescription) {
+            checkboxProps.ariaDescribedBy = optionDescriptionId
           }
 
           if (props.name !== undefined) {
@@ -154,11 +163,31 @@ export function CheckboxGroupField(props: CheckboxGroupFieldProps): React.ReactE
           return (
             <label
               key={option.value}
-              className="mw-checkbox-group-field__option"
+              className={cx(
+                "mw-checkbox-group-field__option",
+                hasOptionDescription && "mw-checkbox-group-field__option--with-description",
+              )}
               htmlFor={optionId}
             >
               <Checkbox {...checkboxProps} />
-              <Paragraph size="md">{option.label}</Paragraph>
+              <span className="mw-checkbox-group-field__option-content">
+                <Text
+                  id={optionLabelId}
+                  variant="label"
+                  className="mw-checkbox-group-field__option-label"
+                >
+                  {option.label}
+                </Text>
+                {hasOptionDescription && (
+                  <Text
+                    id={optionDescriptionId}
+                    variant="caption"
+                    className="mw-checkbox-group-field__option-description"
+                  >
+                    {option.description}
+                  </Text>
+                )}
+              </span>
             </label>
           )
         })}
@@ -166,7 +195,7 @@ export function CheckboxGroupField(props: CheckboxGroupFieldProps): React.ReactE
 
       {hasError && (
         <div className="mw-checkbox-group-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </fieldset>

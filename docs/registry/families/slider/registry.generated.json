@@ -44,6 +44,15 @@
       "packages/vue/src/components/slider/slider.ts",
       "packages/vue/src/components/slider/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/slider/BrightnessSlider.svelte",
+      "packages/svelte/src/lib/components/slider/index.ts",
+      "packages/svelte/src/lib/components/slider/RadiusSlider.svelte",
+      "packages/svelte/src/lib/components/slider/Slider.svelte",
+      "packages/svelte/src/lib/components/slider/SliderField.svelte",
+      "packages/svelte/src/lib/components/slider/types.ts",
+      "packages/svelte/src/lib/components/slider/VolumeSlider.svelte"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/slider/__tests__/slider-taxonomy.test.ts",
@@ -63,6 +72,16 @@
       "apps/storybook-vue/src/stories/slider/slider-field.stories.ts",
       "apps/storybook-vue/src/stories/slider/slider.stories.ts",
       "apps/storybook-vue/src/stories/slider/volume-slider.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/slider/__tests__/slider-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/slider/__tests__/slider-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/slider/brightness-slider.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/slider/radius-slider.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/slider-field.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/slider.stories.ts",
+      "apps/storybook-svelte/src/stories/slider/volume-slider.stories.ts"
     ],
     "contracts": ["tests/contracts/slider.contract.ts"]
   },
@@ -105,23 +124,17 @@
       ".figma/marwes/components/_index.json",
       ".figma/marwes/manifest.json",
       ".figma/marwes/README.md",
-      ".figma/marwes/pages/-v2-slider/README.md"
+      ".figma/marwes/pages/-slider/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-v2-slider/slider_1926-3827.json",
-      ".figma/marwes/pages/-v2-slider/slider-field_1926-3720.json",
-      ".figma/marwes/pages/-v2-slider/-slider_1921-33210.json",
-      ".figma/marwes/pages/-v2-slider/-slider-dark_2010-12058.json",
-      ".figma/marwes/pages/-v2-slider/component-container_1574-26984.json",
-      ".figma/marwes/pages/-v2-slider/range-field_2010-12026.json"
+      ".figma/marwes/pages/slider-archive/slider_1926-3827.json",
+      ".figma/marwes/pages/slider-archive/slider-field_1926-3720.json",
+      ".figma/marwes/pages/-slider/-slider_2462-11678.json",
+      ".figma/marwes/pages/-slider/-slider_2464-13677.json"
     ],
     "nodeReferences": {
       "sliderComponentSet": "1926:3827",
-      "sliderFieldComponentSet": "1926:3720",
-      "sliderLightFrame": "1921:33210",
-      "sliderDarkFrame": "2010:12058",
-      "sliderComponentContainer": "1574:26984",
-      "sliderRangeField": "2010:12026"
+      "sliderFieldComponentSet": "1926:3720"
     },
     "figmaTokens": [],
     "figmaStates": {
@@ -143,8 +156,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

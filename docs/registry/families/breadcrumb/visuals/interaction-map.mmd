@@ -1,0 +1,11 @@
+flowchart LR
+  Items["items + optional home"] --> Nav["nav\naria-label"]
+  Nav --> List["ol\nrole=list"]
+  List --> Crumbs["breadcrumb items"]
+  Crumbs --> Link["link or button-backed action"]
+  Crumbs --> Current["current page\naria-current=page"]
+  List --> Separator["separator\naria-hidden=true"]
+
+  Product["product-owned routing"] --> Items
+  Product --> Hrefs["href resolution"]
+  Product --> CurrentPage["current page selection"]

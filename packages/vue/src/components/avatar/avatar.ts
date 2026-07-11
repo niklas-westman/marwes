@@ -22,6 +22,7 @@ const avatarPropKeys = [
   "iconName",
   "decorative",
   "ariaLabel",
+  "label",
   "className",
   "dataAttributes",
 ] as const
@@ -76,6 +77,9 @@ export const Avatar = defineComponent(
       const resolvedAriaLabel = props.ariaLabel ?? ariaLabelFromAttrs
       if (resolvedAriaLabel !== undefined) {
         avatarOptions.ariaLabel = resolvedAriaLabel
+      }
+      if (props.label !== undefined) {
+        avatarOptions.label = props.label
       }
 
       return createAvatarRecipe(avatarOptions)

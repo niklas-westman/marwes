@@ -1,7 +1,15 @@
 import type { ColorRole, SecondaryColorRole } from "./color-resolve"
 import { densityToCSSVars } from "./density"
+import type { TextVariant } from "./text-variant"
 import { type StatusColorTokens, ThemeMode } from "./theme-types"
-import type { Density, ThemeMode as ThemeModeValue } from "./theme-types"
+import type {
+  Density,
+  PersonalityName,
+  TextTypographyStyle,
+  ThemeBreakpoints,
+  ThemeMode as ThemeModeValue,
+  TypographyStyle,
+} from "./theme-types"
 
 // ─── ResolvedTheme ────────────────────────────────────────────────────────────
 // Post-derivation theme shape: color fields hold resolved ColorRole objects,
@@ -9,6 +17,7 @@ import type { Density, ThemeMode as ThemeModeValue } from "./theme-types"
 
 export interface ResolvedTheme {
   mode: ThemeModeValue
+  personality: PersonalityName
   color: {
     primary: ColorRole
     secondary: SecondaryColorRole
@@ -18,7 +27,9 @@ export interface ResolvedTheme {
     info: ColorRole // always mirrors primary (D3)
     background: string
     surface: string
+    surfacePrimary: string
     surfaceSubtle: string
+    surfaceBrand: string
     surfaceElevated: string
     surfaceDisabled: string
     surfaceInverted: string
@@ -28,11 +39,15 @@ export interface ResolvedTheme {
     textDisabled: string
     textInverted: string
     textBrand: string
+    textLink: string
+    iconMuted: string
+    borderLow: string
     border: string
     borderSubtle: string
     borderStrong: string
     borderDisabled: string
     borderBrand: string
+    borderFull: string
     focus: string
     status: {
       success: StatusColorTokens
@@ -50,10 +65,13 @@ export interface ResolvedTheme {
     radius: number
     density: Density
   }
+  breakpoint: ThemeBreakpoints
   typography: {
-    h1: { fontSize: number; lineHeight: number; fontWeight: number; letterSpacing: number }
-    h2: { fontSize: number; lineHeight: number; fontWeight: number; letterSpacing: number }
-    h3: { fontSize: number; lineHeight: number; fontWeight: number; letterSpacing: number }
+    display: TypographyStyle
+    h1: TypographyStyle
+    h2: TypographyStyle
+    h3: TypographyStyle
+    text: Record<TextVariant, TextTypographyStyle>
     paragraph: {
       sm: { fontSize: number; lineHeight: number }
       md: { fontSize: number; lineHeight: number }
@@ -81,7 +99,29 @@ function statusColorVars(role: string, tokens: StatusColorTokens): Record<string
     [`--mw-color-status-${role}-text`]: tokens.text,
     [`--mw-color-status-${role}-icon`]: tokens.icon,
     [`--mw-color-status-${role}-border`]: tokens.border,
+    ...(tokens.borderAccessible
+      ? { [`--mw-color-status-${role}-border-accessible`]: tokens.borderAccessible }
+      : {}),
     [`--mw-color-status-${role}-border-strong`]: tokens.borderStrong,
+  }
+}
+
+function typographyStyleVars(prefix: string, style: TypographyStyle): Record<string, string> {
+  return {
+    [`${prefix}-font-size`]: `${style.fontSize}px`,
+    [`${prefix}-line-height`]: `${style.lineHeight}`,
+    [`${prefix}-font-weight`]: `${style.fontWeight}`,
+    [`${prefix}-letter-spacing`]: `${style.letterSpacing}px`,
+  }
+}
+
+function textTypographyStyleVars(
+  variant: TextVariant,
+  style: TextTypographyStyle,
+): Record<string, string> {
+  return {
+    ...typographyStyleVars(`--mw-typography-text-${variant}`, style),
+    [`--mw-typography-text-${variant}-transform`]: style.textTransform ?? "none",
   }
 }
 
@@ -89,7 +129,7 @@ function statusColorVars(role: string, tokens: StatusColorTokens): Record<string
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 108 entries total. `variant` is excluded — it is deprecated.
+ * Returns 149 entries total. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -110,10 +150,12 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-secondary-border": color.secondary.border,
     "--mw-color-secondary-border-disabled": color.secondary.borderDisabled,
 
-    // Surface / semantic neutrals (16)
+    // Surface / semantic neutrals (24)
     "--mw-color-background": color.background,
     "--mw-color-surface": color.surface,
+    "--mw-color-surface-primary": color.surfacePrimary,
     "--mw-color-surface-subtle": color.surfaceSubtle,
+    "--mw-color-surface-brand": color.surfaceBrand,
     "--mw-color-surface-elevated": color.surfaceElevated,
     "--mw-color-surface-disabled": color.surfaceDisabled,
     "--mw-color-surface-inverted": color.surfaceInverted,
@@ -123,14 +165,18 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-text-disabled": color.textDisabled,
     "--mw-color-text-inverted": color.textInverted,
     "--mw-color-text-brand": color.textBrand,
+    "--mw-color-text-link": color.textLink,
+    "--mw-color-icon-muted": color.iconMuted,
+    "--mw-color-border-low": color.borderLow,
     "--mw-color-border": color.border,
     "--mw-color-border-subtle": color.borderSubtle,
     "--mw-color-border-strong": color.borderStrong,
     "--mw-color-border-disabled": color.borderDisabled,
     "--mw-color-border-brand": color.borderBrand,
+    "--mw-color-border-full": color.borderFull,
     "--mw-color-focus": color.focus,
 
-    // Status role tokens (4 × 5 = 20)
+    // Status role tokens (4 × 5 + optional accessible warning border = 21)
     ...statusColorVars("success", color.status.success),
     ...statusColorVars("warning", color.status.warning),
     ...statusColorVars("error", color.status.error),
@@ -147,21 +193,17 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     // Density (10)
     ...densityToCSSVars(ui.density),
 
-    // Typography — headings (3 × 4 = 12)
-    "--mw-typography-h1-font-size": `${typography.h1.fontSize}px`,
-    "--mw-typography-h1-line-height": `${typography.h1.lineHeight}`,
-    "--mw-typography-h1-font-weight": `${typography.h1.fontWeight}`,
-    "--mw-typography-h1-letter-spacing": `${typography.h1.letterSpacing}px`,
-
-    "--mw-typography-h2-font-size": `${typography.h2.fontSize}px`,
-    "--mw-typography-h2-line-height": `${typography.h2.lineHeight}`,
-    "--mw-typography-h2-font-weight": `${typography.h2.fontWeight}`,
-    "--mw-typography-h2-letter-spacing": `${typography.h2.letterSpacing}px`,
-
-    "--mw-typography-h3-font-size": `${typography.h3.fontSize}px`,
-    "--mw-typography-h3-line-height": `${typography.h3.lineHeight}`,
-    "--mw-typography-h3-font-weight": `${typography.h3.fontWeight}`,
-    "--mw-typography-h3-letter-spacing": `${typography.h3.letterSpacing}px`,
+    // Typography
+    ...typographyStyleVars("--mw-typography-display", typography.display),
+    ...typographyStyleVars("--mw-typography-h1", typography.h1),
+    ...typographyStyleVars("--mw-typography-h2", typography.h2),
+    ...typographyStyleVars("--mw-typography-h3", typography.h3),
+    ...textTypographyStyleVars("display", typography.text.display),
+    ...textTypographyStyleVars("label", typography.text.label),
+    ...textTypographyStyleVars("label-small", typography.text["label-small"]),
+    ...textTypographyStyleVars("caption", typography.text.caption),
+    ...textTypographyStyleVars("overline", typography.text.overline),
+    ...textTypographyStyleVars("micro", typography.text.micro),
 
     // Typography — paragraph (3 × 2 = 6)
     "--mw-typography-paragraph-sm-font-size": `${typography.paragraph.sm.fontSize}px`,

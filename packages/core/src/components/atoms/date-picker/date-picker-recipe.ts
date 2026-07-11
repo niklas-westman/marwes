@@ -101,6 +101,11 @@ function createDayKit(day: DatePickerDay): DatePickerDayRenderKit {
 export function createDatePickerRecipe(opts: DatePickerOptions = {}): DatePickerRenderKit {
   const device = resolveDevice(opts.device)
   const weeks = opts.weeks ?? defaultWeeks
+  const calendarLabel = opts.ariaLabel ?? opts.calendarLabel ?? "Choose date"
+  const a11y: DatePickerRenderKit["a11y"] = opts.ariaLabelledBy
+    ? { ariaLabelledBy: opts.ariaLabelledBy }
+    : { ariaLabel: calendarLabel }
+  if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
 
   return {
     className: ["mw-date-picker", `mw-date-picker--${device}`].join(" "),
@@ -109,6 +114,7 @@ export function createDatePickerRecipe(opts: DatePickerOptions = {}): DatePicker
       "data-component": "date-picker",
       "data-device": device,
     },
+    a11y,
     monthLabel: opts.monthLabel ?? "March 2026",
     weekdayLabels: opts.weekdayLabels ?? defaultWeekdayLabels,
     weeks,
@@ -127,7 +133,7 @@ export function createDatePickerRecipe(opts: DatePickerOptions = {}): DatePicker
       footerButtonClassName: "mw-date-picker__footer-button",
     },
     labels: {
-      calendar: opts.calendarLabel ?? "Choose date",
+      calendar: calendarLabel,
       previousYear: opts.previousYearLabel ?? "Previous year",
       previousMonth: opts.previousMonthLabel ?? "Previous month",
       nextMonth: opts.nextMonthLabel ?? "Next month",

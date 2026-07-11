@@ -27,6 +27,19 @@ describe("firstEdition tab css contract", () => {
     expect(css).toContain(
       "border-bottom: 1px solid color-mix(in srgb, var(--mw-color-text, #141414) 20%, transparent);",
     )
+    expect(css).toContain("display: flex;")
+    expect(css).toContain("width: 100%;")
+    expect(css).toContain("overflow-x: auto;")
+    expect(css).not.toContain("display: inline-flex;")
+    expect(css).not.toContain("width: fit-content;")
+  })
+
+  it("keeps visible tab group labels on the shared text typography contract", () => {
+    const css = readFileSync(tabGroupCssPath, "utf8")
+
+    expect(css).toContain(".mw-tab-group__header .mw-text")
+    expect(css).not.toContain(".mw-tab-group__header .mw-p")
+    expect(css).not.toContain(".mw-tab-group__label .mw-p")
   })
 
   it("renders focus across the full tab hit area", () => {

@@ -56,9 +56,9 @@ describe("createSwitchRecipe", () => {
     expect(kit.a11y.ariaLabel).toBeUndefined()
   })
 
-  it("ariaLabelledby is passed through", () => {
-    const kit = createSwitchRecipe({ ariaLabelledby: "switch-label" })
-    expect(kit.a11y.ariaLabelledby).toBe("switch-label")
+  it("ariaLabelledBy is passed through", () => {
+    const kit = createSwitchRecipe({ ariaLabelledBy: "switch-label" })
+    expect(kit.a11y.ariaLabelledBy).toBe("switch-label")
   })
 
   it("ariaDescribedBy is passed through", () => {

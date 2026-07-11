@@ -1,0 +1,26 @@
+flowchart LR
+  Figma["Figma refs\nbanner variants"]
+  Core["@marwes-ui/core\nrecipe + a11y + types"]
+  Presets["preset CSS\nbanner.css"]
+  React["@marwes-ui/react\nBanner + purpose variants"]
+  Vue["@marwes-ui/vue\nBanner + purpose variants"]
+  Svelte["@marwes-ui/svelte\nBanner + purpose variants"]
+  Stories["Storybook React + Vue + Svelte"]
+  Contracts["shared banner contract"]
+  Registry["docs/registry/families/banner"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  React --> Contracts
+  Vue --> Contracts
+  Svelte --> Contracts
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry
+  Contracts --> Registry

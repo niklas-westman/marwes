@@ -3,7 +3,7 @@
   "targets": {
     "marwes": {
       "label": "Marwes",
-      "figmaFile": "https://www.figma.com/design/VTv3dNTvt7R5EytQF47XbB/Marwes",
+      "figmaFile": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes",
       "projectSlug": "marwes",
       "liveDir": ".figma/marwes",
       "archiveDir": ".figma/archive/generated-syncs/marwes",

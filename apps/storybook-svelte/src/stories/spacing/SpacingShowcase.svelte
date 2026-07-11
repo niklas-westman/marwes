@@ -17,6 +17,7 @@
     { size: "sp-2" as const, label: "2px" },
     { size: "sp-4" as const, label: "4px" },
     { size: "sp-8" as const, label: "8px" },
+    { size: "sp-12" as const, label: "12px" },
     { size: "sp-16" as const, label: "16px" },
     { size: "sp-24" as const, label: "24px" },
     { size: "sp-32" as const, label: "32px" },

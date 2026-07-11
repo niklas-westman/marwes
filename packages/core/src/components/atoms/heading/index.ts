@@ -10,4 +10,5 @@ export type {
   HeadingOptions,
   HeadingA11y,
   HeadingRenderKit,
+  SemanticHeadingLevel,
 } from "./heading-types"

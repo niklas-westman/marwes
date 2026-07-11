@@ -1,5 +1,6 @@
 import type {
   FontLoadingConfig,
+  MwTheme,
   ResolvedTheme,
   ThemeInput,
   ThemeMode,
@@ -8,6 +9,10 @@ import type {
 } from "@marwes-ui/core"
 import type { Snippet } from "svelte"
 import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime.js"
+
+export interface MarwesProviderSnippetProps {
+  mwTheme: MwTheme
+}
 
 export interface MarwesProviderProps {
   theme?: ThemeInput
@@ -24,7 +29,7 @@ export interface MarwesProviderProps {
   attribute?: ThemeAttribute
   disableTransitionOnChange?: boolean
   variableStrategy?: ThemeVariableStrategy
-  children?: Snippet
+  children?: Snippet<[MarwesProviderSnippetProps?]>
 }
 
 export interface MarwesContextState {

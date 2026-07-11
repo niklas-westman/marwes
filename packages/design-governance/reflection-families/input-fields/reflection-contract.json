@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "family": "input-fields",
+  "baselineRoot": "packages/design-governance/reflection-families/input-fields/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "input-fields.default",
+      "mode": "light",
+      "figmaNodeId": "5059:45081",
+      "figmaFrameName": "reflection/input-fields/default/light",
+      "exportScale": 1,
+      "viewport": "input-fields-default",
+      "viewportSize": {
+        "width": 560,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.light.png",
+      "portalPath": "/reflection/input-fields/default/light",
+      "source": {
+        "componentNodeId": "1364:11382",
+        "componentName": "Text field",
+        "componentBounds": {
+          "width": 460,
+          "height": 80
+        },
+        "requiredBoundTokens": [
+          "font/family/body",
+          "font/family/caption",
+          "font/line-height/lh-16",
+          "font/size/fs-12",
+          "font/size/fs-14",
+          "font/weight/medium",
+          "input/border",
+          "input/hint",
+          "input/label",
+          "input/placeholder",
+          "input/surface",
+          "sp-4",
+          "sp-8"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 900,
+          "maxDiffPixelRatio": 0.0074
+        },
+        "strict": true,
+        "toleranceReason": "Allows only accumulated Figma-PNG versus Chromium drift across input label, placeholder text, helper text, input border, and field surface after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1364:11372",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1364-11372",
+        "outputFrameName": "reflection/input-fields/default/light",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Text field",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
+      }
+    },
+    {
+      "caseId": "input-fields.default",
+      "mode": "dark",
+      "figmaNodeId": "5059:45088",
+      "figmaFrameName": "reflection/input-fields/default/dark",
+      "exportScale": 1,
+      "viewport": "input-fields-default",
+      "viewportSize": {
+        "width": 560,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "default.chromium-linux.dark.png",
+      "portalPath": "/reflection/input-fields/default/dark",
+      "source": {
+        "componentNodeId": "1368:5954",
+        "componentName": "Text field",
+        "componentBounds": {
+          "width": 460,
+          "height": 80
+        },
+        "requiredBoundTokens": [
+          "font/family/body",
+          "font/family/caption",
+          "font/line-height/lh-16",
+          "font/size/fs-12",
+          "font/size/fs-14",
+          "font/weight/medium",
+          "input/border",
+          "input/hint",
+          "input/label",
+          "input/placeholder",
+          "input/surface",
+          "sp-4",
+          "sp-8"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 900,
+          "maxDiffPixelRatio": 0.0074
+        },
+        "strict": true,
+        "toleranceReason": "Allows only accumulated Figma-PNG versus Chromium drift across input label, placeholder text, helper text, input border, and field surface after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1368:5944",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-5944",
+        "outputFrameName": "reflection/input-fields/default/dark",
+        "selector": {
+          "strategy": "rowChild",
+          "rowName": "Row/Default",
+          "rowOccurrence": 0,
+          "childName": "Text field",
+          "childOccurrence": 0
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        }
+      }
+    }
+  ]
+}

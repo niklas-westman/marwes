@@ -1,0 +1,11 @@
+flowchart LR
+  Variant["variant\nlabel caption overline micro body"] --> Recipe["Text recipe"]
+  As["as\nspan p div"] --> Recipe
+  Recipe --> ClassName["typography class + CSS vars"]
+  Recipe --> Native["native text element"]
+  Native --> Inline["inline label/caption support"]
+  Native --> Block["supporting copy when p/div is chosen"]
+
+  Product["product chooses semantic element"] --> As
+  Product --> Structure["Heading and Paragraph own document hierarchy"]
+  FieldFamilies["Input and form families"] --> Inline

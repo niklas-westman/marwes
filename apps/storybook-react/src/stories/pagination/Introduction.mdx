@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Pagination/Introduction" />
+
+# Pagination
+
+Marwes provides `Pagination` for navigating finite page sets while keeping page
+windowing, ellipses, and active-page semantics consistent across frameworks.
+
+## When to use
+
+- Tables, collections, and search results split into pages
+- Compact navigation where direct page jumps matter
+- Known finite page counts
+
+## When to use something else
+
+- **Infinite scroll** — when content is continuously loaded
+- **Stepper** — when pages represent a fixed task flow
+- **Tabs** — when the selection controls visible panel content
+
+## Usage
+
+```tsx
+import { Pagination } from "@marwes-ui/react"
+
+<Pagination
+  page={page}
+  pageCount={10}
+  onPageChange={setPage}
+  siblingCount={2}
+/>
+```
+
+## Accessibility
+
+- Uses a labelled `nav` landmark
+- Uses list semantics for page items
+- Marks the active page with `aria-current="page"`
+- Disables previous/next at the collection boundaries
+- Supports optional first/last controls for large page ranges
+- Supports custom item aria labels with `getItemAriaLabel`
+- Adapts control labels and visible page items to narrow containers by default
+- Supports `controlDisplay="auto" | "label" | "icon"` for responsive or explicit previous/next controls
+- Supports hiding previous/next controls when the surrounding UI provides them

@@ -1,0 +1,36 @@
+{
+  "baseline": "expanded.chromium-linux.dark.png",
+  "caseFingerprint": "699e6e67ce781cc7b0d707035ce9e8ab27ddf38cf4b39b393cd2b78401bb5a92",
+  "caseId": "accordion.expanded",
+  "createdAt": "2026-06-13T16:20:08.598Z",
+  "exportScale": 1,
+  "family": "accordion",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/accordion/expanded/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "3872:42151",
+  "mode": "dark",
+  "origin": "receipt-backfill",
+  "pngByteLength": 7906,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "449a318fc09218a48c9dd6d6652d03a9cf0d7eadd05a7c56d5da4a6332f38a4c",
+  "schemaVersion": 1,
+  "sourceFingerprint": "02a26719a583137fd014fb720a8d0fb59e22f296318431c7128e6777fcf53638",
+  "sourceFrameId": "2276:47132",
+  "sourceNodeId": "3872:42152",
+  "sourceNodeIds": ["3872:42152"],
+  "variablesFingerprint": "643a376e07efcdbefa2dd859e61eb36e21936e7553c26df676f6dd7137e51a1c",
+  "viewport": "accordion-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

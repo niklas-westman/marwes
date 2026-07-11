@@ -5,6 +5,7 @@
       "family": "button",
       "react": true,
       "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -13,6 +14,16 @@
       "family": "badge",
       "react": true,
       "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "banner",
+      "react": true,
+      "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -21,6 +32,7 @@
       "family": "avatar",
       "react": true,
       "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -29,6 +41,7 @@
       "family": "toast",
       "react": true,
       "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true
@@ -37,6 +50,34 @@
       "family": "dialog",
       "react": true,
       "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "drawer",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "context-menu",
+      "react": true,
+      "vue": true,
+      "svelte": true,
+      "metadataParity": true,
+      "contractCoverage": true,
+      "storyCoverage": true
+    },
+    {
+      "family": "breadcrumb",
+      "react": true,
+      "vue": true,
+      "svelte": true,
       "metadataParity": true,
       "contractCoverage": true,
       "storyCoverage": true

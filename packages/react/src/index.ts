@@ -1,7 +1,7 @@
 import "@marwes-ui/presets/firstEdition/styles.css"
 
 export { MarwesProvider } from "./provider/marwes-provider"
-export type { MarwesProviderProps } from "./provider/marwes-provider"
+export type { MarwesProviderChildren, MarwesProviderProps } from "./provider/marwes-provider"
 export { useTheme } from "./provider/use-theme"
 export { useThemeMode } from "./provider/use-theme-mode"
 export type { ThemeModeContextValue } from "./provider/use-theme-mode"
@@ -23,9 +23,13 @@ export {
   mwFontFallbacks,
   mwGoogleFontFamilies,
   mwStyledTheme,
+  mwTheme,
   mwThemeVarNames,
   mwThemeVars,
   mwVar,
+  createMwTheme,
+  createMwThemeMedia,
+  TextVariant,
   ThemeMode,
 } from "@marwes-ui/core"
 
@@ -39,12 +43,16 @@ export type {
   MwFontFallback,
   MwGoogleFontFamily,
   MwStyledTheme,
+  MwTheme,
+  MwThemeMedia,
   MwThemeVarName,
   MwThemeVarNames,
   MwThemeVarReference,
   MwThemeVars,
   ResolvedTheme,
   Theme,
+  ThemeBreakpointName,
+  ThemeBreakpoints,
   ThemeInput,
   ThemeModeAttribute,
   ThemeModeRootTarget,
@@ -52,12 +60,13 @@ export type {
   ThemeVariableStrategy,
 } from "@marwes-ui/core"
 export type { ToneName } from "@marwes-ui/core"
+export type { PersonalityName } from "@marwes-ui/core"
 
 // ======= ATOMS =======
 
 /* Button */
-export { Button } from "./components/button"
-export type { ButtonProps } from "./components/button"
+export { Button, IconButton } from "./components/button"
+export type { ButtonProps, IconButtonProps } from "./components/button"
 export { ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/core"
 export {
   DestructiveButton,
@@ -109,13 +118,13 @@ export type {
 } from "./components/button"
 
 /* Input */
+// `Input`, `RichText`, `Textarea`, `Select`, `InputOtp` atoms intentionally NOT
+// exported — use `InputField` / `RichTextField` / `TextareaField` / `SelectField`
+// / `InputOtpField` (or a purpose variant like `DropdownField`, `EmailField`,
+// `PhoneField`, etc.).
 export {
-  Input,
-  Select,
-  Textarea,
-  RichText,
   InputField,
-  InputOtp,
+  InputOtpField,
   SelectField,
   TextareaField,
   RichTextField,
@@ -130,15 +139,12 @@ export {
   CurrencyField,
 } from "./components/input"
 export type {
-  InputProps,
-  SelectProps,
   SelectAppearance,
   SelectOption,
-  TextareaProps,
-  RichTextProps,
   InputFieldProps,
-  InputOtpProps,
+  InputOtpFieldProps,
   SelectFieldProps,
+  SelectFieldVariant,
   TextareaFieldProps,
   RichTextFieldProps,
   DropdownFieldProps,
@@ -178,12 +184,26 @@ export type {
 export { AvatarSize, AvatarType } from "@marwes-ui/core"
 
 /* Checkbox */
-export { Checkbox } from "./components/checkbox"
-export type { CheckboxProps } from "./components/checkbox"
+// The `Checkbox` atom is intentionally NOT exported from the public entry —
+// use `CheckboxField` or `CheckboxGroupField` instead.
 
 /* Divider */
 export { Divider } from "./components/divider"
 export type { DividerProps } from "./components/divider"
+
+/* ContextMenu */
+export { ContextMenu } from "./components/context-menu"
+export type { ContextMenuProps } from "./components/context-menu"
+export type {
+  ContextMenuActionItem,
+  ContextMenuDividerItem,
+  ContextMenuEntry,
+} from "@marwes-ui/core"
+
+/* Breadcrumb */
+export { Breadcrumb } from "./components/breadcrumb"
+export type { BreadcrumbProps } from "./components/breadcrumb"
+export type { BreadcrumbItem } from "@marwes-ui/core"
 
 /* Spinner */
 export { Spinner, ButtonSpinner, EmptyStateSpinner } from "./components/spinner"
@@ -196,6 +216,10 @@ export type {
 /* Skeleton */
 export { Skeleton } from "./components/skeleton"
 export type { SkeletonProps } from "./components/skeleton"
+
+/* ProgressBar */
+export { ProgressBar } from "./components/progress-bar"
+export type { ProgressBarProps } from "./components/progress-bar"
 
 /* Spacing */
 export { Spacer, Spacing } from "./components/spacing"
@@ -211,13 +235,24 @@ export type { H1Props, H2Props, H3Props } from "./components/heading"
 export { Paragraph } from "./components/paragraph"
 export type { ParagraphProps } from "./components/paragraph"
 
+/* Text */
+export { Text, TypographyText } from "./components/text"
+export type { TextComponent, TextProps } from "./components/text"
+export type { TextAs } from "@marwes-ui/core"
+
 /* StatTile */
 export { StatTile } from "./components/stat-tile"
 export type { StatTileProps } from "./components/stat-tile"
 
 /* DatePicker */
-export { DatePicker } from "./components/date-picker"
-export type { DatePickerProps } from "./components/date-picker"
+// The `DatePicker` atom is intentionally NOT exported from the public entry —
+// use `DatePickerField` instead.
+export { DatePickerField } from "./components/date-picker"
+export type { DatePickerFieldProps } from "./components/date-picker"
+
+/* Drawer */
+export { Drawer } from "./components/drawer"
+export type { DrawerPlacement, DrawerProps, DrawerSize } from "./components/drawer"
 
 /* Card */
 export { Card, ProductCard, ProfileCard, StatCard } from "./components/card"
@@ -257,8 +292,8 @@ export { Tooltip, TooltipGroup } from "./components/tooltip"
 export type { TooltipProps, TooltipGroupProps } from "./components/tooltip"
 
 /* Accordion */
-export { Accordion } from "./components/accordion"
-export type { AccordionProps } from "./components/accordion"
+// The `Accordion` atom (single collapsible panel) is intentionally NOT exported —
+// use `AccordionField` (groups) or a purpose variant.
 
 /* AccordionField */
 export { AccordionField } from "./components/accordion"
@@ -273,8 +308,8 @@ export type {
 } from "./components/accordion"
 
 /* Radio */
-export { Radio } from "./components/radio"
-export type { RadioProps } from "./components/radio"
+// The `Radio` atom is intentionally NOT exported from the public entry —
+// use `RadioGroupField` (or a purpose variant) instead.
 
 /* RadioGroupField */
 export { RadioGroupField } from "./components/radio"
@@ -309,16 +344,28 @@ export type {
   NotificationBadgeProps,
 } from "./components/badge"
 
+/* Banner */
+export { Banner, InfoBanner, SuccessBanner, WarningBanner, ErrorBanner } from "./components/banner"
+export type {
+  BannerProps,
+  InfoBannerProps,
+  SuccessBannerProps,
+  WarningBannerProps,
+  ErrorBannerProps,
+} from "./components/banner"
+export { BannerVariant } from "@marwes-ui/core"
+
 /* Switch */
+// The `Switch` atom is intentionally NOT exported from the public entry —
+// use `SwitchField` (or a purpose variant) instead. Atom files remain
+// importable internally via deep paths under packages/react/src/components/switch/.
 export {
-  Switch,
   SwitchField,
   FeatureToggle,
   PreferenceSwitch,
   PermissionSwitch,
 } from "./components/switch"
 export type {
-  SwitchProps,
   SwitchFieldProps,
   FeatureToggleProps,
   PreferenceSwitchProps,
@@ -327,15 +374,15 @@ export type {
 export { SwitchSize } from "@marwes-ui/core"
 
 /* Slider */
+// The `Slider` atom is intentionally NOT exported from the public entry —
+// use `SliderField` (or a purpose variant) instead.
 export {
-  Slider,
   SliderField,
   VolumeSlider,
   BrightnessSlider,
   RadiusSlider,
 } from "./components/slider"
 export type {
-  SliderProps,
   SliderFieldProps,
   VolumeSliderProps,
   BrightnessSliderProps,
@@ -360,6 +407,25 @@ export type {
   ContentTabsProps,
   SettingsTabsProps,
 } from "./components/tab"
+
+/* Segmented Control */
+// The `SegmentedControl` atom is intentionally NOT exported from the public entry —
+// use `SegmentedControlField` instead.
+export { SegmentedControlField } from "./components/segmented-control"
+export type {
+  SegmentedControlItem,
+  SegmentedControlFieldProps,
+} from "./components/segmented-control"
+
+/* Pagination */
+// The `Pagination` atom is intentionally NOT exported from the public entry —
+// use `PaginationField` instead.
+export { PaginationField } from "./components/pagination"
+export type { PaginationFieldProps } from "./components/pagination"
+
+/* SkipLink */
+export { SkipLink } from "./components/skip-link"
+export type { SkipLinkProps } from "./components/skip-link"
 
 /* Dialog */
 export {

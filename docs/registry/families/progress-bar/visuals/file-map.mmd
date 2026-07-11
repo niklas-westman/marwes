@@ -1,0 +1,20 @@
+flowchart TD
+  Registry["docs/registry/families/progress-bar"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/progress-bar/"]
+  Core --> CoreFiles["progress-bar-a11y.ts\nprogress-bar-recipe.ts\nprogress-bar-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["progress-bar.css"]
+
+  React["packages/react/src/components/progress-bar/"]
+  Vue["packages/vue/src/components/progress-bar/"]
+  Svelte["packages/svelte/src/lib/components/progress-bar/"]
+
+  StoriesR["apps/storybook-react/src/stories/progress-bar/"]
+  StoriesV["apps/storybook-vue/src/stories/progress-bar/"]
+  StoriesS["apps/storybook-svelte/src/stories/progress-bar/"]
+  Contracts["tests/contracts/progress-bar.contract.ts"]

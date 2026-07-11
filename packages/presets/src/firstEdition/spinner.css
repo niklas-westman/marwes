@@ -14,7 +14,7 @@
 
 .mw-spinner {
   --mw-spinner-size: 24px;
-  --mw-spinner-track-color: var(--mw-color-text-muted, #a3a3a3);
+  --mw-spinner-track-color: #a3a3a3;
   --mw-spinner-indicator-color: var(--mw-color-primary-base, #2f31fc);
   --mw-spinner-rotation-duration: 800ms;
 

@@ -43,6 +43,7 @@
   rows={kit.a11y.rows}
   cols={kit.a11y.cols}
   aria-label={kit.a11y.ariaLabel}
+  aria-labelledby={kit.a11y.ariaLabelledBy}
   aria-invalid={kit.a11y.ariaInvalid}
   aria-describedby={kit.a11y.ariaDescribedBy}
   {value}

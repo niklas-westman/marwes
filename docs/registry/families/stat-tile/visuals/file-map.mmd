@@ -1,0 +1,20 @@
+flowchart TD
+  Registry["docs/registry/families/stat-tile"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/stat-tile/"]
+  Core --> CoreFiles["stat-tile-a11y.ts\nstat-tile-recipe.ts\nstat-tile-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["stat-tile.css"]
+
+  React["packages/react/src/components/stat-tile/"]
+  Vue["packages/vue/src/components/stat-tile/"]
+  Svelte["packages/svelte/src/lib/components/stat-tile/"]
+
+  StoriesR["apps/storybook-react/src/stories/stat-tile/"]
+  StoriesV["apps/storybook-vue/src/stories/stat-tile/"]
+  StoriesS["apps/storybook-svelte/src/stories/stat-tile/"]
+  Contracts["tests/contracts/stat-tile.contract.ts"]

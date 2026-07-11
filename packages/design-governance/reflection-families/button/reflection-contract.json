@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "baselineRoot": "packages/design-governance/reflection-families/button/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "button.basic",
+      "mode": "light",
+      "figmaNodeId": "TODO_REFLECTION_BUTTON_BASIC_LIGHT_FRAME",
+      "figmaFrameName": "reflection/button/basic/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "basic.chromium-linux.light.png",
+      "portalPath": "/reflection/button/basic/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button.json",
+        "componentNodeId": "1362:7481",
+        "componentName": "Type=Primary button, Icon=None",
+        "componentBounds": {
+          "width": 66,
+          "height": 40
+        },
+        "requiredBoundTokens": [
+          "button/gap",
+          "button/paddingH",
+          "button/paddingV",
+          "button/primary/label",
+          "button/primary/surface",
+          "button/radius",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 60,
+          "maxDiffPixelRatio": 0.0008
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text antialiasing drift after component bounds, frame size, colors, spacing, radius, and tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "button.secondary",
+      "mode": "light",
+      "figmaNodeId": "TODO_REFLECTION_BUTTON_SECONDARY_LIGHT_FRAME",
+      "figmaFrameName": "reflection/button/secondary/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "secondary.chromium-linux.light.png",
+      "portalPath": "/reflection/button/secondary/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button.json",
+        "componentNodeId": "1362:7495",
+        "componentName": "Type=Secondary button, Icon=None",
+        "componentBounds": {
+          "width": 66,
+          "height": 40
+        },
+        "requiredBoundTokens": [
+          "button/gap",
+          "button/paddingH",
+          "button/paddingV",
+          "button/radius",
+          "button/secondary/label",
+          "button/secondary/outline",
+          "button/secondary/surface",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 75,
+          "maxDiffPixelRatio": 0.001
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text and inset-stroke antialiasing drift after component bounds, frame size, colors, spacing, radius, and tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "button.text",
+      "mode": "light",
+      "figmaNodeId": "TODO_REFLECTION_BUTTON_TEXT_LIGHT_FRAME",
+      "figmaFrameName": "reflection/button/text/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "text.chromium-linux.light.png",
+      "portalPath": "/reflection/button/text/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button.json",
+        "componentNodeId": "1362:7509",
+        "componentName": "Type=Text button, Icon=None",
+        "componentBounds": {
+          "width": 34,
+          "height": 16
+        },
+        "requiredBoundTokens": [
+          "button/text/label",
+          "button/text/overlay",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium",
+          "sp-0",
+          "sp-4"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 75,
+          "maxDiffPixelRatio": 0.001
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text antialiasing drift after component bounds, frame size, colors, and tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "button.destructive",
+      "mode": "light",
+      "figmaNodeId": "TODO_REFLECTION_BUTTON_DESTRUCTIVE_LIGHT_FRAME",
+      "figmaFrameName": "reflection/button/destructive/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "destructive.chromium-linux.light.png",
+      "portalPath": "/reflection/button/destructive/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button-destructive.json",
+        "componentNodeId": "1364:11356",
+        "componentName": "Icon direction=Right",
+        "componentBounds": {
+          "width": 91,
+          "height": 36
+        },
+        "requiredBoundTokens": [
+          "button/destructive/icon",
+          "button/destructive/label",
+          "button/destructive/surface",
+          "button/primary/overlay",
+          "button/radius",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium",
+          "icon/size",
+          "sp-16"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 450,
+          "maxDiffPixelRatio": 0.0055
+        },
+        "strict": true,
+        "toleranceReason": "Temporary narrow tolerance for the current externally imported destructive baseline PNG until the top-level Reflection Baselines Figma frame id is supplied; local source-node bounds and tokens remain strict."
+      }
+    }
+  ]
+}

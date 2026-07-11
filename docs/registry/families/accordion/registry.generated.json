@@ -44,6 +44,15 @@
       "packages/vue/src/components/accordion/index.ts",
       "packages/vue/src/components/accordion/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/accordion/Accordion.svelte",
+      "packages/svelte/src/lib/components/accordion/AccordionField.svelte",
+      "packages/svelte/src/lib/components/accordion/FAQAccordion.svelte",
+      "packages/svelte/src/lib/components/accordion/index.ts",
+      "packages/svelte/src/lib/components/accordion/SectionsAccordion.svelte",
+      "packages/svelte/src/lib/components/accordion/SettingsAccordion.svelte",
+      "packages/svelte/src/lib/components/accordion/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/accordion/__tests__/accordion-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/accordion/__tests__/accordion-taxonomy.test.ts",
@@ -63,6 +72,17 @@
       "apps/storybook-vue/src/stories/accordion/Introduction.mdx",
       "apps/storybook-vue/src/stories/accordion/sections-accordion.stories.ts",
       "apps/storybook-vue/src/stories/accordion/settings-accordion.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/accordion/__tests__/accordion-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/accordion/accordion-field.stories.ts",
+      "apps/storybook-svelte/src/stories/accordion/accordion.stories.ts",
+      "apps/storybook-svelte/src/stories/accordion/AccordionFieldControlled.svelte",
+      "apps/storybook-svelte/src/stories/accordion/AccordionShowcase.svelte",
+      "apps/storybook-svelte/src/stories/accordion/faq-accordion.stories.ts",
+      "apps/storybook-svelte/src/stories/accordion/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/accordion/sections-accordion.stories.ts",
+      "apps/storybook-svelte/src/stories/accordion/settings-accordion.stories.ts"
     ],
     "contracts": ["tests/contracts/accordion.contract.ts"]
   },
@@ -137,8 +157,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

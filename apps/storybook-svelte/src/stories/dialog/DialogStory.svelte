@@ -8,6 +8,9 @@
     dismissible?: boolean
     closeOnEscape?: boolean
     closeOnScrimClick?: boolean
+    surfaceWidth?: string | number
+    tone?: "default" | "calm"
+    divider?: "visible" | "hidden"
   }
 
   let {
@@ -17,6 +20,9 @@
     dismissible,
     closeOnEscape,
     closeOnScrimClick,
+    surfaceWidth,
+    tone,
+    divider,
   }: Props = $props()
 
   let open = $state(true)
@@ -30,6 +36,9 @@
   {...(dismissible !== undefined ? { dismissible } : {})}
   {...(closeOnEscape !== undefined ? { closeOnEscape } : {})}
   {...(closeOnScrimClick !== undefined ? { closeOnScrimClick } : {})}
+  {...(surfaceWidth !== undefined ? { surfaceWidth } : {})}
+  {...(tone !== undefined ? { tone } : {})}
+  {...(divider !== undefined ? { divider } : {})}
 >
   {#if dismissible === false}
     {#snippet footer()}

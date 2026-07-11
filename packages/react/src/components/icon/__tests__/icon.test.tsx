@@ -25,7 +25,7 @@ runIconContract("react", {
   async renderIcon(args = {}) {
     const iconProps = {
       name: "search" as const,
-      ...(args.ariaLabel !== undefined ? { "aria-label": args.ariaLabel } : {}),
+      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
       ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
       ...(args.size !== undefined ? { size: args.size } : {}),
       ...(args.strokeWidth !== undefined ? { strokeWidth: args.strokeWidth } : {}),

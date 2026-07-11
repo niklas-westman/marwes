@@ -32,11 +32,15 @@
   const showToolbar = $derived(!options.readOnly);
 
   let editorElement: HTMLDivElement | undefined = $state(undefined);
-  let uncontrolledHtml = $state(normalizeRichTextHtml(defaultValue));
-  let isEditorEmpty = $state(isRichTextHtmlEmpty(isControlled ? normalizeRichTextHtml(controlledValue) : uncontrolledHtml));
+  function getInitialUncontrolledHtml(): string {
+    return normalizeRichTextHtml(defaultValue);
+  }
+
+  let uncontrolledHtml = $state(getInitialUncontrolledHtml());
   let activeFormats = $state<RichTextFormat[]>([]);
 
   const editorHtml = $derived(isControlled ? normalizeRichTextHtml(controlledValue) : uncontrolledHtml);
+  const isEditorEmpty = $derived(isRichTextHtmlEmpty(editorHtml));
 
   const formatLabels: Record<RichTextFormat, string> = {
     bold: "Bold",
@@ -46,9 +50,7 @@
 
   function syncEditorState(nextHtml: string): string {
     const normalized = normalizeRichTextHtml(nextHtml);
-    const empty = isRichTextHtmlEmpty(normalized);
     if (!isControlled) uncontrolledHtml = normalized;
-    isEditorEmpty = empty;
     onvaluechange?.(normalized);
     return normalized;
   }
@@ -113,7 +115,6 @@
     if (!editorElement) return;
     const normalizedDom = normalizeRichTextHtml(editorElement.innerHTML);
     if (normalizedDom !== editorHtml) editorElement.innerHTML = editorHtml;
-    isEditorEmpty = isRichTextHtmlEmpty(editorHtml);
   });
 
   $effect(() => {
@@ -154,7 +155,7 @@
     data-empty={isEditorEmpty ? "true" : undefined}
     data-placeholder={options.placeholder}
     id={kit.a11y.id}
-    role={kit.a11y.role}
+    role="textbox"
     tabindex={kit.a11y.tabIndex}
     aria-label={kit.a11y.ariaLabel}
     aria-labelledby={kit.a11y.ariaLabelledBy}

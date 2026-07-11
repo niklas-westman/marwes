@@ -1,6 +1,6 @@
 import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Textarea } from "./textarea"
 import type { TextareaProps } from "./textarea"
 
@@ -8,6 +8,7 @@ export type TextareaFieldProps = {
   id?: string
   label: string
   helperText?: string
+  counterText?: string
   error?: string
   textarea: TextareaProps
   ariaDescribedBy?: string
@@ -26,6 +27,7 @@ export function TextareaField(props: TextareaFieldProps): React.ReactElement {
   const id = props.id ?? `mw-textarea-${reactId}`
 
   const hasHelperText = hasTextContent(props.helperText)
+  const hasCounterText = hasTextContent(props.counterText)
   const hasError = hasTextContent(props.error)
 
   const {
@@ -64,22 +66,34 @@ export function TextareaField(props: TextareaFieldProps): React.ReactElement {
   return (
     <div className={wrapperClass}>
       <label className="mw-input-field__label" htmlFor={id}>
-        <Paragraph size="md">{props.label}</Paragraph>
+        <Text variant="label">{props.label}</Text>
       </label>
 
       <div className="mw-input-field__input-wrapper">
         <Textarea {...textareaProps} />
       </div>
 
-      {hasHelperText && !hasError && (
-        <div className="mw-input-field__helper" id={helperTextId}>
-          <Paragraph size="sm">{props.helperText}</Paragraph>
+      {(hasHelperText || hasCounterText) && !hasError && (
+        <div className="mw-input-field__meta">
+          {hasHelperText ? (
+            <div className="mw-input-field__helper" id={helperTextId}>
+              <Text variant="caption">{props.helperText}</Text>
+            </div>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+
+          {hasCounterText && (
+            <div className="mw-input-field__counter">
+              <Text variant="caption">{props.counterText}</Text>
+            </div>
+          )}
         </div>
       )}
 
       {hasError && (
         <div className="mw-input-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </div>

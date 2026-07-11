@@ -1,13 +1,12 @@
 /*
  * Badge Component Styles
  * Validated against:
- * - .figma/marwes/components/checkboxbadge.json
+ * - .figma/marwes/components/badge.json
  * - .figma/marwes/pages/-badge/-badge_1364-11603.json
  * - .figma/marwes/pages/-badge/-badge-dark_2276-56582.json
  * - .figma/marwes/pages/-badge/component-container_1369-6125.json
  *
- * The live sync uses exact semantic badge tones rather than generic color-mix()
- * derivations, especially for the remaining semantic tones and dark-mode surfaces.
+ * The live sync follows status-display/* bindings in Figma.
  */
 
 .mw-badge {
@@ -38,32 +37,32 @@
    ============================================ */
 
 .mw-badge--neutral {
-  --mw-badge-surface: var(--mw-color-surface-subtle, #f5f5f5);
-  --mw-badge-border: var(--mw-color-border-subtle, #d8d8d8);
+  --mw-badge-surface: var(--mw-color-surface-primary, #ffffff);
+  --mw-badge-border: var(--mw-color-border-low, #00000026);
   --mw-badge-label: var(--mw-color-text-muted, #595959);
 }
 
 .mw-badge--info {
   --mw-badge-surface: var(--mw-color-status-info-background, #eeeeff);
-  --mw-badge-border: var(--mw-color-status-info-border-strong, #5859fc);
+  --mw-badge-border: var(--mw-color-status-info-border, #ababfd);
   --mw-badge-label: var(--mw-color-status-info-text, #1b1d97);
 }
 
 .mw-badge--success {
   --mw-badge-surface: var(--mw-color-status-success-background, #e6f4ed);
-  --mw-badge-border: var(--mw-color-status-success-border-strong, #2e9970);
+  --mw-badge-border: var(--mw-color-status-success-border, #90caad);
   --mw-badge-label: var(--mw-color-status-success-text, #006633);
 }
 
 .mw-badge--warning {
   --mw-badge-surface: var(--mw-color-status-warning-background, #fff8e6);
-  --mw-badge-border: var(--mw-color-status-warning-border-strong, #e46f00);
+  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);
   --mw-badge-label: var(--mw-color-status-warning-text, #b45309);
 }
 
 .mw-badge--error {
   --mw-badge-surface: var(--mw-color-status-error-background, #ffe8eb);
-  --mw-badge-border: var(--mw-color-status-error-border-strong, #ff2847);
+  --mw-badge-border: var(--mw-color-status-error-border, #ff8a95);
   --mw-badge-label: var(--mw-color-status-error-text, #a8031f);
 }
 
@@ -72,36 +71,40 @@
    ============================================ */
 
 .mw-theme--dark .mw-badge--neutral {
-  --mw-badge-surface: var(--mw-color-surface-subtle);
-  --mw-badge-border: var(--mw-color-border-subtle);
+  --mw-badge-surface: var(--mw-color-surface-primary);
+  --mw-badge-border: var(--mw-color-border-low, #ffffff26);
   --mw-badge-label: var(--mw-color-text-muted);
 }
 
 .mw-theme--dark .mw-badge--info {
   --mw-badge-surface: var(--mw-color-status-info-background, #040519);
-  --mw-badge-border: var(--mw-color-status-info-border-strong, #252599);
+  --mw-badge-border: var(--mw-color-status-info-border, #8182fc);
   --mw-badge-label: var(--mw-color-status-info-text, #ababfd);
 }
 
 .mw-theme--dark .mw-badge--success {
   --mw-badge-surface: var(--mw-color-status-success-background, #001a0c);
-  --mw-badge-border: var(--mw-color-status-success-border-strong, #006d48);
+  --mw-badge-border: var(--mw-color-status-success-border, #5db189);
   --mw-badge-label: var(--mw-color-status-success-text, #90caad);
 }
 
 .mw-theme--dark .mw-badge--warning {
   --mw-badge-surface: var(--mw-color-status-warning-background, #221004);
-  --mw-badge-border: var(--mw-color-status-warning-border-strong, #b45308);
+  --mw-badge-border: var(--mw-color-status-warning-border, #b45309);
   --mw-badge-label: var(--mw-color-status-warning-text, #fcc94a);
 }
 
 .mw-theme--dark .mw-badge--error {
   --mw-badge-surface: var(--mw-color-status-error-background, #240006);
-  --mw-badge-border: var(--mw-color-status-error-border-strong, #ff2847);
+  --mw-badge-border: var(--mw-color-status-error-border, #ff2847);
   --mw-badge-label: var(--mw-color-status-error-text, #ff5566);
 }
 
 .mw-badge-group__items {
   display: inline-flex;
   gap: var(--mw-spacing-sp-4);
+}
+
+.mw-badge-group__label .mw-text {
+  color: inherit;
 }

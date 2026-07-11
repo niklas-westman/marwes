@@ -1,5 +1,6 @@
-export { Accordion } from "./accordion"
-export type { AccordionProps } from "./accordion"
+// `Accordion` (the atom — a single collapsible panel) is intentionally NOT
+// re-exported here. Use `AccordionField` (for groups) or a purpose variant
+// instead. Internal consumers can deep-import from "./accordion" directly.
 
 export { AccordionField } from "./accordion-field"
 export type { AccordionFieldProps, AccordionFieldItem } from "./accordion-field"

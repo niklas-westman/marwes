@@ -1,0 +1,30 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Drawer/Introduction" />
+
+# Drawer
+
+Drawer is a side-panel shell for secondary workflows such as filters, details,
+forms, and navigation. It uses the same core/preset/adapter contract as Dialog,
+but maps Figma drawer sizes to `small`, `medium`, and `large`.
+
+Use the raw Drawer when parent code owns open state and any focus-management
+policy. The component provides the panel structure, a11y attributes, optional scrim,
+optional footer, and dismiss affordance.
+
+```tsx
+import { CancelButton, ConfirmButton, Drawer, Paragraph } from "@marwes-ui/react"
+
+<Drawer
+  title="Drawer title"
+  description="Use for forms, detail panels, navigation, filters, or any secondary workflow."
+  footer={
+    <>
+      <CancelButton>Cancel</CancelButton>
+      <ConfirmButton>Apply</ConfirmButton>
+    </>
+  }
+>
+  <Paragraph>Drawer content goes here.</Paragraph>
+</Drawer>
+```

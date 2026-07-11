@@ -1,0 +1,18 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Pagination/Introduction" />
+
+# Pagination
+
+Marwes provides `Pagination` for navigating finite page sets while keeping page
+windowing, ellipses, and active-page semantics consistent across frameworks.
+
+## Component Reference
+
+Use `modelValue` with `update:modelValue` in Vue, or provide `defaultPage` for
+uncontrolled usage.
+
+Use `showFirstLast` for large ranges, `getItemAriaLabel` for localized control
+labels, and the default adaptive behavior for narrow containers. Use
+`controlDisplay="auto" | "label" | "icon"` to let previous/next labels collapse
+responsively or to force a specific control treatment.

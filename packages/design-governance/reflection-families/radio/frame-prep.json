@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "family": "radio",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "outputPage": "Reflection Baselines",
+  "cases": [
+    {
+      "caseId": "radio.states-default",
+      "viewport": "radio-states-default",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      },
+      "selector": {
+        "strategy": "rowContent",
+        "rowName": "Row/Default",
+        "rowOccurrence": 0,
+        "childName": "Radio button Field"
+      },
+      "modes": {
+        "light": {
+          "sourceFrameId": "1368:6734",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-6734",
+          "outputFrameName": "reflection/radio/states-default/light",
+          "framing": {
+            "background": "#ffffff",
+            "align": "center",
+            "padding": 0
+          }
+        },
+        "dark": {
+          "sourceFrameId": "2276:51787",
+          "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2276-51787",
+          "outputFrameName": "reflection/radio/states-default/dark",
+          "framing": {
+            "background": "#0f0f0f",
+            "align": "center",
+            "padding": 0
+          }
+        }
+      }
+    }
+  ]
+}

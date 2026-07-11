@@ -8,16 +8,17 @@
 [data-marwes-theme] {
   /* ── Spacing scale ──────────────────────────────────────────────────────────
      Named after the actual pixel values to stay aligned with Figma.
-     sp-0 → 0px | sp-2 → 2px | sp-4 → 4px | sp-8 → 8px | sp-16 → 16px
-     sp-24 → 24px | sp-32 → 32px | sp-40 → 40px | sp-48 → 48px
-     sp-56 → 56px | sp-64 → 64px | sp-72 → 72px | sp-80 → 80px
-     sp-88 → 88px | sp-96 → 96px | sp-104 → 104px | sp-112 → 112px
-     sp-120 → 120px
+     sp-0 → 0px | sp-2 → 2px | sp-4 → 4px | sp-8 → 8px | sp-12 → 12px
+     sp-16 → 16px | sp-24 → 24px | sp-32 → 32px | sp-40 → 40px
+     sp-48 → 48px | sp-56 → 56px | sp-64 → 64px | sp-72 → 72px
+     sp-80 → 80px | sp-88 → 88px | sp-96 → 96px | sp-104 → 104px
+     sp-112 → 112px | sp-120 → 120px
   */
   --mw-spacing-sp-0: 0px;
   --mw-spacing-sp-2: 2px;
   --mw-spacing-sp-4: 4px;
   --mw-spacing-sp-8: 8px;
+  --mw-spacing-sp-12: 12px;
   --mw-spacing-sp-16: 16px;
   --mw-spacing-sp-24: 24px;
   --mw-spacing-sp-32: 32px;

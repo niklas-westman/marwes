@@ -19,12 +19,12 @@ export const compassConfig = {
   routeModel: [
     {
       intent: "Contribute to Marwes",
-      docs: "docs/start-here.md → docs/want-to-contribute.md → docs/reference/repo-map.md",
+      docs: "docs/start-here.md → docs/want-to-contribute.md → docs/reference/adapter-architecture.md → docs/reference/repo-map.md",
       command: "pnpm check:changed",
     },
     {
       intent: "Change a component",
-      docs: "docs/start-here.md → docs/reference/repo-map.md → docs/reference/family-validation.md",
+      docs: "docs/start-here.md → docs/reference/adapter-architecture.md → docs/reference/repo-map.md → docs/reference/family-validation.md",
       command: "pnpm validate:family <family>",
     },
     {
@@ -50,6 +50,7 @@ export const compassConfig = {
       "docs/reference/repo-map.md",
       "docs/reference/testing.md",
       "docs/reference/architecture.md",
+      "docs/reference/adapter-architecture.md",
       "docs/reference/accessibility.md",
       "docs/audits/status.md",
       "docs/registry/README.md",
@@ -59,6 +60,7 @@ export const compassConfig = {
       "compass",
       "check:compass",
       "check:changed",
+      "check:adapter-architecture",
       "check:adapter-boundaries",
       "check:repo-map",
       "validate:family",

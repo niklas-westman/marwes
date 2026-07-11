@@ -43,7 +43,7 @@
 
 import { buildAccordionFieldA11yIds } from "@marwes-ui/core"
 import * as React from "react"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Accordion } from "./accordion"
 
 export interface AccordionFieldItem {
@@ -163,7 +163,7 @@ export function AccordionField(props: AccordionFieldProps): React.ReactElement {
       {...props.dataAttributes}
     >
       <legend className="mw-accordion-field__label" id={labelId}>
-        <Paragraph size="md">{props.label}</Paragraph>
+        <Text variant="label">{props.label}</Text>
       </legend>
 
       <div className="mw-accordion-field__items">
@@ -188,13 +188,13 @@ export function AccordionField(props: AccordionFieldProps): React.ReactElement {
 
       {hasDescription && (
         <div className="mw-accordion-field__description" id={descriptionId}>
-          <Paragraph size="sm">{props.description}</Paragraph>
+          <Text variant="caption">{props.description}</Text>
         </div>
       )}
 
       {hasError && (
         <div className="mw-accordion-field__error" id={errorId} aria-live="polite">
-          <Paragraph size="sm">{props.error}</Paragraph>
+          <Text variant="caption">{props.error}</Text>
         </div>
       )}
     </fieldset>

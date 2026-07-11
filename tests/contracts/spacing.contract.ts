@@ -9,6 +9,7 @@ export type SpacingSize =
   | "sp-2"
   | "sp-4"
   | "sp-8"
+  | "sp-12"
   | "sp-16"
   | "sp-24"
   | "sp-32"

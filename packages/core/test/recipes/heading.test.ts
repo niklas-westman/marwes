@@ -42,4 +42,15 @@ describe("headingRecipe", () => {
     expect(renderKit.vars["--mw-heading-weight"]).toBe("700")
     expect(renderKit.vars["--mw-heading-letter-spacing"]).toBe("-0.96px")
   })
+
+  it("supports display as a visual heading size", () => {
+    const renderKit = headingRecipe({ level: 1, size: "display" }, testTheme)
+
+    expect(renderKit.tag).toBe("h1")
+    expect(renderKit.className).toContain("mw-heading--display")
+    expect(renderKit.vars["--mw-heading-size"]).toBe("44px")
+    expect(renderKit.vars["--mw-heading-line-height"]).toBe("1.1818181818")
+    expect(renderKit.vars["--mw-heading-weight"]).toBe("700")
+    expect(renderKit.vars["--mw-heading-letter-spacing"]).toBe("-1.32px")
+  })
 })

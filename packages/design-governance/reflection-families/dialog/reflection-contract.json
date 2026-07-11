@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "family": "dialog",
+  "baselineRoot": "packages/design-governance/reflection-families/dialog/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "cases": [
+    {
+      "caseId": "dialog.medium",
+      "mode": "light",
+      "figmaNodeId": "5049:43943",
+      "figmaFrameName": "reflection/dialog/medium/light",
+      "exportScale": 1,
+      "viewport": "dialog-medium",
+      "viewportSize": {
+        "width": 720,
+        "height": 380
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "medium.chromium-linux.light.png",
+      "portalPath": "/reflection/dialog/medium/light",
+      "source": {
+        "componentNodeId": "1609:15569",
+        "componentName": "Dialog",
+        "componentBounds": {
+          "width": 560,
+          "height": 234
+        },
+        "requiredBoundTokens": [
+          "border/low",
+          "button/gap",
+          "button/paddingh",
+          "button/paddingv",
+          "button/primary/label",
+          "button/primary/overlay",
+          "button/primary/surface",
+          "button/radius",
+          "button/secondary/label",
+          "button/secondary/outline",
+          "button/secondary/overlay",
+          "button/secondary/surface",
+          "dialog/width",
+          "divider/subtle",
+          "font/family/body",
+          "font/family/title",
+          "font/line-height/lh-16",
+          "font/line-height/lh-18",
+          "font/size/fs-14",
+          "font/size/fs-16",
+          "font/weight/medium",
+          "font/weight/regular",
+          "font/weight/semi bold",
+          "icon-btn/icon",
+          "icon-btn/outline",
+          "icon-btn/size",
+          "icon-btn/surface",
+          "icon/size",
+          "sp-12",
+          "sp-16",
+          "sp-24",
+          "sp-4",
+          "sp-8",
+          "surface/raised",
+          "text/primary",
+          "text/secondary"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 1400,
+          "maxDiffPixelRatio": 0.0052
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium dialog text, buttons, dividers, icon button, border, and surface antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1609:15527",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1609-15527",
+        "outputFrameName": "reflection/dialog/medium/light",
+        "selector": {
+          "strategy": "directNode",
+          "sourceNodeId": "1609:15569"
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        },
+        "sourceNodeId": "1609:15569",
+        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1609-15569"
+      }
+    },
+    {
+      "caseId": "dialog.medium",
+      "mode": "dark",
+      "figmaNodeId": "5049:43969",
+      "figmaFrameName": "reflection/dialog/medium/dark",
+      "exportScale": 1,
+      "viewport": "dialog-medium",
+      "viewportSize": {
+        "width": 720,
+        "height": 380
+      },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#0f0f0f",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "medium.chromium-linux.dark.png",
+      "portalPath": "/reflection/dialog/medium/dark",
+      "source": {
+        "componentNodeId": "3017:37117",
+        "componentName": "Dialog",
+        "componentBounds": {
+          "width": 560,
+          "height": 234
+        },
+        "requiredBoundTokens": [
+          "border/low",
+          "button/gap",
+          "button/paddingh",
+          "button/paddingv",
+          "button/primary/label",
+          "button/primary/overlay",
+          "button/primary/surface",
+          "button/radius",
+          "button/secondary/label",
+          "button/secondary/outline",
+          "button/secondary/overlay",
+          "button/secondary/surface",
+          "dialog/width",
+          "divider/subtle",
+          "font/family/body",
+          "font/family/title",
+          "font/line-height/lh-16",
+          "font/line-height/lh-18",
+          "font/size/fs-14",
+          "font/size/fs-16",
+          "font/weight/medium",
+          "font/weight/regular",
+          "font/weight/semi bold",
+          "icon-btn/icon",
+          "icon-btn/outline",
+          "icon-btn/size",
+          "icon-btn/surface",
+          "icon/size",
+          "sp-12",
+          "sp-16",
+          "sp-24",
+          "sp-4",
+          "sp-8",
+          "surface/raised",
+          "text/primary",
+          "text/secondary"
+        ]
+      },
+      "comparison": {
+        "threshold": {
+          "maxDiffPixels": 1400,
+          "maxDiffPixelRatio": 0.0052
+        },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium dialog text, buttons, dividers, icon button, border, and surface antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "3017:37102",
+        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=3017-37102",
+        "outputFrameName": "reflection/dialog/medium/dark",
+        "selector": {
+          "strategy": "directNode",
+          "sourceNodeId": "3017:37117"
+        },
+        "framing": {
+          "background": "#0f0f0f",
+          "align": "center",
+          "padding": 0
+        },
+        "sourceNodeId": "3017:37117",
+        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=3017-37117"
+      }
+    }
+  ]
+}

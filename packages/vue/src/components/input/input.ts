@@ -27,6 +27,8 @@ const inputPropKeys = [
   "invalid",
   "describedBy",
   "ariaLabel",
+  "ariaLabelledBy",
+  "label",
   "onValueChange",
   "className",
 ] as const
@@ -60,6 +62,7 @@ export const Input = defineComponent(
         readOnly: renderKit.a11y.readOnly,
         required: renderKit.a11y.required,
         "aria-label": renderKit.a11y.ariaLabel,
+        "aria-labelledby": renderKit.a11y.ariaLabelledBy,
         "aria-invalid": renderKit.a11y.ariaInvalid,
         "aria-describedby": renderKit.a11y.ariaDescribedBy,
         value: inputValue,

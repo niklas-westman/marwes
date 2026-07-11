@@ -1,0 +1,10 @@
+flowchart TD
+  Figma[".figma/marwes/components/pagination.json"] --> Core["packages/core/src/components/atoms/pagination"]
+  Core --> Preset["packages/presets/src/firstEdition/pagination.css"]
+  Preset --> React["packages/react/src/components/pagination"]
+  Preset --> Vue["packages/vue/src/components/pagination"]
+  Preset --> Svelte["packages/svelte/src/lib/components/pagination"]
+  React --> ReactStories["apps/storybook-react/src/stories/pagination"]
+  Vue --> VueStories["apps/storybook-vue/src/stories/pagination"]
+  Svelte --> SvelteStories["apps/storybook-svelte/src/stories/pagination"]
+  React --> Dashboard["apps/dashboard-teaser"]

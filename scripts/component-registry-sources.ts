@@ -25,8 +25,10 @@ export interface RegistryFamilySource {
   presetPaths: string[]
   reactDir: string
   vueDir: string
+  svelteDir: string
   storybookReactDir: string
   storybookVueDir: string
+  storybookSvelteDir: string
   contractPaths: string[]
   auditIndexPath: string
   familyAuditDocPath: string | null
@@ -41,8 +43,10 @@ interface RegistryFamilyPathOverrides {
   presetPaths?: string[]
   reactDir?: string
   vueDir?: string
+  svelteDir?: string
   storybookReactDir?: string
   storybookVueDir?: string
+  storybookSvelteDir?: string
 }
 
 interface CreateRegistryFamilySourceOptions {
@@ -86,8 +90,10 @@ function buildDefaultFamilyPaths(
     presetPaths: [`packages/presets/src/firstEdition/${family}.css`],
     reactDir: `packages/react/src/components/${family}`,
     vueDir: `packages/vue/src/components/${family}`,
+    svelteDir: `packages/svelte/src/lib/components/${family}`,
     storybookReactDir: `apps/storybook-react/src/stories/${family}`,
     storybookVueDir: `apps/storybook-vue/src/stories/${family}`,
+    storybookSvelteDir: `apps/storybook-svelte/src/stories/${family}`,
   }
 }
 
@@ -139,10 +145,8 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       ],
       pageReferences: [
         ".figma/marwes/pages/-avatar/component-container_1574-27051.json",
-        ".figma/marwes/pages/-avatar/component-container_1574-27408.json",
         ".figma/marwes/pages/-avatar/-avatar_1574-27460.json",
         ".figma/marwes/pages/-avatar/-avatar-dark_1574-27570.json",
-        ".figma/marwes/pages/cover/avatar-group_1825-30447.json",
       ],
       nodeReferences: {
         avatarComponentSet: "1574:27371",
@@ -150,8 +154,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         avatarGroupComponent: "1574:27395",
         avatarLightFrame: "1574:27460",
         avatarDarkFrame: "1574:27570",
-        avatarComponentContainer: "1574:27408",
-        avatarCoverGroupFrame: "1825:30447",
       },
       figmaTokens: [],
       figmaStates: {
@@ -176,7 +178,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
     family: "badge",
     contractPaths: ["tests/contracts/badge.contract.ts"],
     figma: {
-      componentJsons: [".figma/marwes/components/checkboxbadge.json"],
+      componentJsons: [".figma/marwes/components/badge.json"],
       curatedReferences: [
         ".figma/INDEX.md",
         ".figma/NODE_REFERENCE.md",
@@ -190,16 +192,16 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-badge/-badge_1364-11603.json",
         ".figma/marwes/pages/-badge/-badge-dark_2276-56582.json",
         ".figma/marwes/pages/-badge/component-container_1369-6125.json",
-        ".figma/marwes/pages/cover/badges_1825-30440.json",
+        ".figma/marwes/pages/------playground---dashboard/badges_2832-30424.json",
       ],
       nodeReferences: {
         badgeLightFrame: "1364:11603",
         badgeDarkFrame: "2276:56582",
         badgeComponentContainer: "1369:6125",
-        checkboxBadgeComponent: "1364:7721",
-        badgeCoverFrame: "1825:30440",
+        badgeComponent: "1364:7721",
+        badgeDashboardFrame: "2832:30424",
       },
-      figmaTokens: ["badge/surface", "badge/border", "badge/label"],
+      figmaTokens: ["status-display/surface", "status-display/border", "status-display/text"],
       figmaStates: {
         baseVariants: [
           "neutral",
@@ -216,12 +218,11 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
-  button: createRegistryFamilySource({
-    family: "button",
-    contractPaths: ["tests/contracts/button.contract.ts"],
-    familyAuditDocPath: "docs/audits/button-family-accessibility.md",
+  banner: createRegistryFamilySource({
+    family: "banner",
+    contractPaths: [],
     figma: {
-      componentJsons: [".figma/marwes/components/button.json"],
+      componentJsons: [".figma/marwes/components/banner.json"],
       curatedReferences: [
         ".figma/INDEX.md",
         ".figma/NODE_REFERENCE.md",
@@ -231,11 +232,57 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/cover/buttons_1825-30427.json",
-        ".figma/marwes/pages/cover/buttons_1825-30431.json",
-        ".figma/marwes/pages/cover/buttons_1825-30435.json",
+        ".figma/marwes/pages/-banner/-banner_1593-5094.json",
+        ".figma/marwes/pages/-banner/-banner-dark_2444-2179.json",
+        ".figma/marwes/pages/-banner/overall-status_1730-4164.json",
+        ".figma/marwes/pages/-banner/examples_1593-7192.json",
+      ],
+      nodeReferences: {
+        bannerComponent: "1593:5080",
+        bannerLightFrame: "1593:5094",
+        bannerDarkFrame: "2444:2179",
+      },
+      figmaTokens: ["banner/surface", "banner/border", "banner/icon"],
+      figmaStates: {
+        baseVariants: ["neutral", "info", "success", "warning", "error"],
+        interactionStates: [
+          "light",
+          "dark",
+          "with-icon",
+          "without-icon",
+          "with-cta",
+          "dismissible",
+        ],
+      },
+    },
+  }),
+  button: createRegistryFamilySource({
+    family: "button",
+    contractPaths: ["tests/contracts/button.contract.ts"],
+    familyAuditDocPath: "docs/audits/button-family-accessibility.md",
+    figma: {
+      componentJsons: [
+        ".figma/marwes/components/button.json",
+        ".figma/marwes/components/button-destructive.json",
+        ".figma/marwes/components/button-success.json",
+        ".figma/marwes/components/button-group.json",
+        ".figma/marwes/components/icon-button.json",
+      ],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/------playground---dashboard/buttons_2832-30431.json",
         ".figma/marwes/pages/-button/component-container_1364-11870.json",
+        ".figma/marwes/pages/-button/-button_1371-11172.json",
+        ".figma/marwes/pages/-button/-button-dark_1371-11537.json",
         ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json",
+        ".figma/marwes/pages/-button/-purpose-buttons-dark_1371-9188.json",
       ],
       nodeReferences: {
         baseLightFrame: "1371:11172",
@@ -244,19 +291,14 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         purposeDarkFrame: "1371:9188",
       },
       figmaTokens: [
-        "Primary/Surface",
-        "Primary/Label",
-        "Secondary/Label",
-        "Secondary/Outline",
-        "Text/Label",
-        "action/primary/default",
-        "action/primary/label",
-        "action/secondary/default",
-        "action/secondary/label",
-        "action/destructive/default",
-        "action/destructive/label",
-        "action/success/default",
-        "action/success/label",
+        "button/primary/surface",
+        "button/primary/label",
+        "button/secondary/label",
+        "button/secondary/outline",
+        "button/text/label",
+        "button/gap",
+        "button/paddingH",
+        "button/paddingV",
       ],
       figmaStates: {
         baseVariants: ["primary", "secondary", "neutral", "text"],
@@ -308,14 +350,12 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-card/-card_1364-11556.json",
         ".figma/marwes/pages/-card/component-container_1371-13326.json",
         ".figma/marwes/pages/-card/-card-dark_1368-5891.json",
-        ".figma/marwes/pages/cover/card_1825-30426.json",
       ],
       nodeReferences: {
         cardComponent: "1364:7718",
         cardLightFrame: "1364:11556",
         cardDarkFrame: "1368:5891",
         cardComponentContainer: "1371:13326",
-        cardCoverFrame: "1825:30426",
       },
       figmaTokens: ["card/surface", "card/border", "card/title", "card/body"],
       figmaStates: {
@@ -387,20 +427,16 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-checkbox/component-container_1369-4657.json",
         ".figma/marwes/pages/-checkbox/component-container_1369-6165.json",
         ".figma/marwes/pages/-checkbox/-checkbox_1369-4700.json",
-        ".figma/marwes/pages/-checkbox/-checkbox-dark_1369-4905.json",
-        ".figma/marwes/pages/-checkbox/checkbox_1893-32830.json",
-        ".figma/marwes/pages/-checkbox/checkbox_1893-32839.json",
-        ".figma/marwes/pages/cover/checkbox-group_1825-30425.json",
+        ".figma/marwes/pages/-checkbox/-checkbox-dark_2542-28177.json",
       ],
       nodeReferences: {
         checkboxComponentSet: "1369:4628",
         checkboxFieldComponentSet: "1364:5566",
         checkboxGroupComponent: "1369:4673",
         checkboxLightFrame: "1369:4700",
-        checkboxDarkFrame: "1369:4905",
+        checkboxDarkFrame: "2542:28177",
         checkboxComponentContainer: "1369:4657",
         checkboxGroupComponentContainer: "1369:6165",
-        checkboxGroupCoverFrame: "1825:30425",
       },
       figmaTokens: [
         "Checkbox/Surface",
@@ -479,23 +515,16 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-radio-button/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-radio-button/radio-button_1368-6733.json",
         ".figma/marwes/pages/-radio-button/-radio-button_1368-6734.json",
         ".figma/marwes/pages/-radio-button/-radio-button-dark_2276-51787.json",
-        ".figma/marwes/pages/-radio-button/component-container_1371-13445.json",
-        ".figma/marwes/pages/-radio-button/component-container_1571-19716.json",
-        ".figma/marwes/pages/-radio-button/component-container_1571-19757.json",
-        ".figma/marwes/pages/cover/radio-group-example_1825-30421.json",
+        ".figma/marwes/pages/-radio-button/-radio-button-dark_2969-11557.json",
+        ".figma/marwes/pages/-radio-button/-radio-button_2969-10998.json",
       ],
       nodeReferences: {
         radioButtonComponentSet: "1368:6733",
         radioGroupComponent: "1368:6450",
         radioLightFrame: "1368:6734",
         radioDarkFrame: "2276:51787",
-        radioCombinedComponentContainer: "1371:13445",
-        radioStateComponentContainer: "1571:19716",
-        radioGroupComponentContainer: "1571:19757",
-        radioGroupCoverFrame: "1825:30421",
       },
       figmaTokens: ["radio/surface", "radio/border", "radio/dot", "radio/label"],
       figmaStates: {
@@ -625,7 +654,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-input-fields/-input-fields-dark_1368-5944.json",
         ".figma/marwes/pages/-input-fields/-input-types-overview_1364-11817.json",
         ".figma/marwes/pages/-input-fields/-input-types-overview-dark_1368-6014.json",
-        ".figma/marwes/pages/-input-fields/dropdown_1384-13225.json",
         ".figma/marwes/pages/-input-otp/-input-otp_1803-15024.json",
         ".figma/marwes/pages/-input-otp/-input-otp-dark_1803-15155.json",
       ],
@@ -653,11 +681,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         "input/value",
         "input/placeholder",
         "input/hint",
-        "dropdown/item-surface",
-        "dropdown/list-surface",
-        "dropdown/list-border",
-        "dropdown/item-label",
-        "dropdown/item-check",
       ],
       figmaStates: {
         baseVariants: [
@@ -705,30 +728,17 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-dialog/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-dialog/dialog_1609-15459.json",
         ".figma/marwes/pages/-dialog/-dialog_1609-15527.json",
-        ".figma/marwes/pages/-dialog/-dialog-dark_1615-17130.json",
-        ".figma/marwes/pages/-dialog/dialog_1935-14085.json",
-        ".figma/marwes/pages/-dialog/frame-1_1935-14109.json",
+        ".figma/marwes/pages/-dialog/-dialog-dark_3017-37102.json",
         ".figma/marwes/pages/-dialog/icons-interface-x_1595-13879.json",
       ],
       nodeReferences: {
         dialogComponent: "1609:15459",
         dialogLightFrame: "1609:15527",
-        dialogDarkFrame: "1615:17130",
+        dialogDarkFrame: "3017:37102",
         closeIcon: "1595:13879",
       },
-      figmaTokens: [
-        "card/surface",
-        "card/border",
-        "card/title",
-        "card/body",
-        "text/primary",
-        "text/secondary",
-        "border/default",
-        "surface/secondary",
-        "focus/ring",
-      ],
+      figmaTokens: ["text/primary", "text/secondary"],
       figmaStates: {
         baseVariants: [
           "dialog-shell",
@@ -784,7 +794,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         dividerLightFrame: "1574:24658",
         dividerDarkFrame: "1574:24738",
       },
-      figmaTokens: ["divider/default"],
+      figmaTokens: [],
       figmaStates: {
         baseVariants: ["horizontal-divider"],
         interactionStates: [
@@ -793,6 +803,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
           "sp-48",
           "sp-32",
           "sp-16",
+          "sp-12",
           "sp-8",
           "sp-1",
           "light",
@@ -838,8 +849,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-typography/README.md",
         ".figma/marwes/components/component-heading.json",
         ".figma/marwes/pages/-banner/component-heading_1932-7061.json",
-        ".figma/marwes/pages/-banner/component-heading_1935-7184.json",
-        ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15754.json",
         ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15800.json",
         ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15833.json",
       ],
@@ -862,7 +871,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         instrumentSansDarkSection: "1368:5717",
         componentHeadingComponent: "1918:15754",
       },
-      figmaTokens: ["Heading/H1", "Heading/H2", "Heading/H3"],
+      figmaTokens: [],
       figmaStates: {
         baseVariants: ["h1", "h2", "h3"],
         interactionStates: ["light", "dark", "typography-scale", "documentation-scaffold"],
@@ -1006,7 +1015,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         instrumentSansLightSection: "1368:5698",
         instrumentSansDarkSection: "1368:5717",
       },
-      figmaTokens: ["Body/Medium", "Body/Default", "Body/16 Paragraph", "P - Paragraph"],
+      figmaTokens: [],
       figmaStates: {
         baseVariants: ["paragraph", "body-default", "body-medium"],
         interactionStates: ["sm", "md", "lg", "light", "dark", "typography-scale", "long-form"],
@@ -1107,8 +1116,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-tab/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-tab/tab_1364-7729.json",
-        ".figma/marwes/pages/-tab/tab-group_1737-9904.json",
         ".figma/marwes/pages/-tab/-tab_1364-11703.json",
         ".figma/marwes/pages/-tab/-tab-dark_1368-6067.json",
         ".figma/marwes/pages/-tab/component-container_1574-21105.json",
@@ -1337,23 +1344,17 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/components/_index.json",
         ".figma/marwes/manifest.json",
         ".figma/marwes/README.md",
-        ".figma/marwes/pages/-v2-slider/README.md",
+        ".figma/marwes/pages/-slider/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-v2-slider/slider_1926-3827.json",
-        ".figma/marwes/pages/-v2-slider/slider-field_1926-3720.json",
-        ".figma/marwes/pages/-v2-slider/-slider_1921-33210.json",
-        ".figma/marwes/pages/-v2-slider/-slider-dark_2010-12058.json",
-        ".figma/marwes/pages/-v2-slider/component-container_1574-26984.json",
-        ".figma/marwes/pages/-v2-slider/range-field_2010-12026.json",
+        ".figma/marwes/pages/slider-archive/slider_1926-3827.json",
+        ".figma/marwes/pages/slider-archive/slider-field_1926-3720.json",
+        ".figma/marwes/pages/-slider/-slider_2462-11678.json",
+        ".figma/marwes/pages/-slider/-slider_2464-13677.json",
       ],
       nodeReferences: {
         sliderComponentSet: "1926:3827",
         sliderFieldComponentSet: "1926:3720",
-        sliderLightFrame: "1921:33210",
-        sliderDarkFrame: "2010:12058",
-        sliderComponentContainer: "1574:26984",
-        sliderRangeField: "2010:12026",
       },
       figmaTokens: [],
       figmaStates: {
@@ -1399,8 +1400,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/skeleton/skeleton_1921-34816.json",
-        ".figma/marwes/pages/-v2-skeleton/skeleton_1921-34816.json",
+        ".figma/marwes/pages/-skeleton/skeleton_1921-34816.json",
         ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json",
       ],
       nodeReferences: {
@@ -1411,6 +1411,57 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       figmaStates: {
         baseVariants: ["text", "circular", "rectangular"],
         interactionStates: ["pulse", "wave", "none", "decorative", "status", "custom-size"],
+      },
+    },
+  }),
+  "progress-bar": createRegistryFamilySource({
+    family: "progress-bar",
+    contractPaths: ["tests/contracts/progress-bar.contract.ts"],
+    semantics: {
+      coverageLevel: "family-local",
+      dataComponent: "progress-bar",
+      canonicalAttributes: [],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: [
+        "packages/core/src/components/atoms/progress-bar/progress-bar-recipe.ts",
+      ],
+      notes: [
+        "ProgressBar is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+        "The atom emits data-component=progress-bar plus local size, state, and disabled attributes from core.",
+      ],
+    },
+    figma: {
+      componentJsons: [".figma/marwes/components/progress-bar.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-progress-bar/-progress-bar_1727-3932.json",
+        ".figma/marwes/pages/-progress-bar/-progress-bar-dark_1727-4018.json",
+      ],
+      nodeReferences: {
+        progressBarComponent: "1727:3852",
+        progressBarLightFrame: "1727:3932",
+        progressBarDarkFrame: "1727:4018",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["progress-bar", "small", "default"],
+        interactionStates: [
+          "default",
+          "hover",
+          "pressed",
+          "disabled",
+          "focus",
+          "label",
+          "percentage",
+        ],
       },
     },
   }),
@@ -1468,7 +1519,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-spinner/-spinner_1737-10635.json",
         ".figma/marwes/pages/-spinner/-spinner-dark_1780-1543.json",
         ".figma/marwes/pages/-spinner/tinospinner_1766-153.json",
-        ".figma/marwes/pages/cover/spinnerdots-round_1825-30933.json",
       ],
       nodeReferences: {
         spinnerComponentContainer: "1737:10631",
@@ -1484,7 +1534,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         newSpinnerComponentSet: "1766:127",
         spinnerAnimationSet: "1767:153",
         tinoSpinnerSection: "1766:153",
-        spinnerCoverDotsRoundFrame: "1825:30933",
       },
       figmaTokens: [],
       figmaStates: {
@@ -1531,7 +1580,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
     figma: {
       componentJsons: [
         ".figma/marwes/components/date-picker.json",
-        ".figma/marwes/components/date-picker-item.json",
+        ".figma/marwes/components/partsdate-picker-item.json",
         ".figma/marwes/components/date-picker-field.json",
         ".figma/marwes/components/icons-interface-calendar.json",
       ],
@@ -1545,18 +1594,12 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-v2-date-picker/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-v2-date-picker/date-picker_1814-988.json",
-        ".figma/marwes/pages/-v2-date-picker/date-picker_1814-1203.json",
-        ".figma/marwes/pages/-v2-date-picker/date-picker_1814-1206.json",
         ".figma/marwes/pages/-v2-date-picker/date-picker_1918-16141.json",
         ".figma/marwes/pages/-v2-date-picker/-date-picker_1807-17542.json",
         ".figma/marwes/pages/-v2-date-picker/-date-picker-dark_1807-17615.json",
         ".figma/marwes/pages/-v2-date-picker/partsdate-picker-item_1807-16918.json",
       ],
       nodeReferences: {
-        datePickerComponentSet: "1814:988",
-        datePickerDesktop: "1814:989",
-        datePickerMobile: "1814:1123",
         datePickerItemComponentSet: "1814:1221",
         datePickerField: "1807:17191",
       },
@@ -1602,30 +1645,173 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/components/_index.json",
         ".figma/marwes/manifest.json",
         ".figma/marwes/README.md",
-        ".figma/marwes/pages/-v2-stat-tile/README.md",
+        ".figma/marwes/pages/-stat-tile/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6857.json",
-        ".figma/marwes/pages/-v2-stat-tile/stat-tile_1411-6920.json",
-        ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27384.json",
-        ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27391.json",
-        ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27405.json",
-        ".figma/marwes/pages/-v2-stat-tile/stat-tile_2512-27412.json",
-        ".figma/marwes/pages/-v2-stat-tile/partsstat-tiletrend_2695-25437.json",
+        ".figma/marwes/pages/-stat-tile/-badge_3008-4750.json",
+        ".figma/marwes/pages/-stat-tile/-badge-dark_3008-4890.json",
       ],
       nodeReferences: {
         statTileComponent: "1411:6857",
-        statTileNeutralInstance: "1411:6920",
-        statTileBrandInstance: "2512:27384",
-        statTileSuccessInstance: "2512:27391",
-        statTileWarningInstance: "2512:27405",
-        statTileDangerInstance: "2512:27412",
         statTileTrendComponentSet: "2695:25437",
       },
       figmaTokens: [],
       figmaStates: {
         baseVariants: ["neutral", "brand", "success", "warning", "danger"],
         interactionStates: ["positive", "negative", "label", "value", "subtitle", "trend"],
+      },
+    },
+  }),
+  "context-menu": createRegistryFamilySource({
+    family: "context-menu",
+    contractPaths: [],
+    figma: {
+      componentJsons: [
+        ".figma/marwes/components/context-menu.json",
+        ".figma/marwes/components/partscontext-menucontext-menu-item.json",
+      ],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-context-menu/-context-menu_1574-24029.json",
+        ".figma/marwes/pages/-context-menu/-context-menu-dark_1574-24160.json",
+        ".figma/marwes/pages/-context-menu/component-container_2967-6148.json",
+      ],
+      nodeReferences: {
+        contextMenuComponent: "1574:23952",
+        contextMenuItemComponent: "1574:23946",
+        contextMenuLightFrame: "1574:24029",
+        contextMenuDarkFrame: "1574:24160",
+        contextMenuContainer: "2967:6148",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["default", "grouped", "quick-actions"],
+        interactionStates: ["light", "dark", "disabled", "destructive", "divider"],
+      },
+    },
+  }),
+  breadcrumb: createRegistryFamilySource({
+    family: "breadcrumb",
+    contractPaths: [],
+    figma: {
+      componentJsons: [
+        ".figma/marwes/components/breadcrumb.json",
+        ".figma/marwes/components/partsbreadcrumbbreadcrumb-item.json",
+        ".figma/marwes/components/partsbreadcrumbbreadcrumb-separator.json",
+      ],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-breadcrumb/-breadcrumb_1574-27193.json",
+        ".figma/marwes/pages/-breadcrumb/-breadcrumb-dark_1574-27268.json",
+        ".figma/marwes/pages/-breadcrumb/component-container_1592-2744.json",
+      ],
+      nodeReferences: {
+        breadcrumbComponent: "1574:26965",
+        breadcrumbItemComponent: "1574:26960",
+        breadcrumbSeparatorComponent: "1574:26962",
+        breadcrumbLightFrame: "1574:27193",
+        breadcrumbDarkFrame: "1574:27268",
+        breadcrumbContainer: "1592:2744",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["home", "link-item", "separator", "current-page"],
+        interactionStates: ["light", "dark", "hover", "focus", "current"],
+      },
+    },
+  }),
+  drawer: createRegistryFamilySource({
+    family: "drawer",
+    contractPaths: [],
+    figma: {
+      componentJsons: [".figma/marwes/components/drawer.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+        ".figma/marwes/pages/-drawer/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-drawer/-drawer_1609-15651.json",
+        ".figma/marwes/pages/-drawer/-drawer-dark_3017-37492.json",
+        ".figma/marwes/pages/-drawer/component-container_2967-7341.json",
+      ],
+      nodeReferences: {
+        drawerComponentSet: "3017:37258",
+        drawerLightFrame: "1609:15651",
+        drawerDarkFrame: "3017:37492",
+        drawerContainer: "2967:7341",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["default", "minimal", "small", "medium", "large", "left", "right"],
+        interactionStates: ["open", "closed", "modal", "scrim", "footer", "dismissible"],
+      },
+    },
+  }),
+  text: createRegistryFamilySource({
+    family: "text",
+    contractPaths: ["tests/contracts/text.contract.ts"],
+    pathOverrides: {
+      presetPaths: ["packages/presets/src/firstEdition/typography.css"],
+    },
+    semantics: {
+      coverageLevel: "family-local",
+      dataComponent: null,
+      canonicalAttributes: [],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: [
+        "packages/core/src/components/atoms/text/text-recipe.ts",
+        "packages/core/src/components/atoms/text/text-types.ts",
+        "packages/core/src/theme/text-variant.ts",
+      ],
+      notes: [
+        "Text is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+        "The atom emits typography classes and native inline/block text elements without adding Marwes data-component metadata.",
+      ],
+    },
+    figma: {
+      componentJsons: [],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/------playground---dashboard/text_2832-29644.json",
+        ".figma/marwes/pages/------playground---dashboard/row-1-typography-text-inputs_2832-29277.json",
+        ".figma/marwes/pages/-dashboard-teaser/text-box_3088-24118.json",
+      ],
+      nodeReferences: {
+        dashboardTextFrame: "2832:29644",
+        typographyInputsRow: "2832:29277",
+        dashboardTeaserTextBox: "3088:24118",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: ["label", "caption", "overline", "micro", "body"],
+        interactionStates: ["span", "p", "div", "light", "dark"],
       },
     },
   }),
@@ -1651,28 +1837,23 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       ],
       pageReferences: [
         ".figma/marwes/pages/-toast/-toast-light_1365-12526.json",
-        ".figma/marwes/pages/-toast/-toast-dark_2276-56938.json",
-        ".figma/marwes/pages/-toast/component-container_1574-20451.json",
+        ".figma/marwes/pages/-toast/-toast-dark_2970-9564.json",
       ],
       nodeReferences: {
         toastComponentSet: "1365:11937",
         toastLightFrame: "1365:12526",
-        toastDarkFrame: "2276:56938",
-        toastComponentContainer: "1574:20451",
+        toastDarkFrame: "2970:9564",
       },
       figmaTokens: [
-        "toast/subtle/surface",
-        "toast/subtle/border",
-        "toast/subtle/text",
-        "toast/subtle/action",
-        "toast/outline/surface",
-        "toast/outline/border",
-        "toast/outline/text",
-        "toast/outline/action",
-        "toast/rich/surface",
-        "toast/rich/border",
-        "toast/rich/text",
-        "toast/rich/action",
+        "status-display/subtle/surface",
+        "status-display/subtle/border",
+        "status-display/subtle/text",
+        "status-display/outline/surface",
+        "status-display/outline/border",
+        "status-display/outline/text",
+        "status-display/rich/surface",
+        "status-display/rich/border",
+        "status-display/rich/text",
       ],
       figmaStates: {
         baseVariants: [
@@ -1725,8 +1906,6 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/pages/-tooltip/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/-tooltip/tooltip_1364-7739.json",
-        ".figma/marwes/pages/-tooltip/tooltip-group_1574-21100.json",
         ".figma/marwes/pages/-tooltip/component-container_1574-21156.json",
         ".figma/marwes/pages/-tooltip/-tooltip-group_1574-21179.json",
         ".figma/marwes/pages/-tooltip/-tooltip-group-dark_1574-21235.json",
@@ -1742,6 +1921,93 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       figmaStates: {
         baseVariants: ["tooltip", "tooltip-group"],
         interactionStates: ["open", "closed", "hover", "focus", "escape-dismiss", "light", "dark"],
+      },
+    },
+  }),
+  "segmented-control": createRegistryFamilySource({
+    family: "segmented-control",
+    contractPaths: [],
+    figma: {
+      componentJsons: [".figma/marwes/components/segmented-control.json"],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-segmented-control/-segmented-control_1571-19406.json",
+        ".figma/marwes/pages/-segmented-control/-segmented-control_2702-10336.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29116.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29118.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29119.json",
+        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29120.json",
+      ],
+      nodeReferences: {
+        segmentedControlComponentSet: "1571:19333",
+        segmentedControlShowcaseFrame: "1571:19406",
+      },
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: [
+          "2-segments",
+          "3-segments",
+          "4-segments",
+          "icon",
+          "no-icon",
+          "inverse",
+          "default",
+        ],
+        interactionStates: ["active", "inactive", "disabled", "hover", "focus"],
+      },
+    },
+  }),
+  pagination: createRegistryFamilySource({
+    family: "pagination",
+    contractPaths: [],
+    figma: {
+      componentJsons: [
+        ".figma/marwes/components/pagination.json",
+        ".figma/marwes/components/partspaginationpage-item.json",
+        ".figma/marwes/components/partspaginationactive-page-item.json",
+        ".figma/marwes/components/partspaginationellipsis.json",
+      ],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [
+        ".figma/marwes/pages/-pagination/overall-status_1730-4200.json",
+        ".figma/marwes/pages/-pagination/-pagination_1727-4104.json",
+        ".figma/marwes/pages/-pagination/-pagination-dark_1727-4253.json",
+        ".figma/marwes/pages/-pagination/component-container_1729-4143.json",
+        ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1384-12675.json",
+        ".figma/marwes/pages/-v3-components-checklist/must-have-skeleton-needed-as-component-in-figma-though-nice_1896-33145.json",
+      ],
+      nodeReferences: {
+        paginationComponent: "1727:3905",
+        paginationPageItem: "1727:3897",
+        paginationActivePageItem: "1727:3899",
+        paginationEllipsis: "1727:3903",
+        paginationLightFrame: "1727:4104",
+        paginationDarkFrame: "1727:4253",
+      },
+      figmaTokens: [
+        "pagination/active-surface",
+        "pagination/active-text",
+        "pagination/item-border",
+        "pagination/item-surface",
+        "pagination/item-text",
+      ],
+      figmaStates: {
+        baseVariants: ["with-prev-next", "without-prev-next", "page", "active-page", "ellipsis"],
+        interactionStates: ["current", "disabled", "hover", "focus", "light", "dark"],
       },
     },
   }),

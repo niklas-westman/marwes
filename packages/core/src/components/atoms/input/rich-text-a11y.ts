@@ -8,7 +8,8 @@ export function resolveRichTextA11y(opts: RichTextOptions): RichTextA11yProps {
   }
 
   if (opts.id) a11y.id = opts.id
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.labelledBy) a11y.ariaLabelledBy = opts.labelledBy
   if (opts.describedBy) a11y.ariaDescribedBy = opts.describedBy
   if (opts.invalid) a11y.ariaInvalid = true

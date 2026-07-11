@@ -19,11 +19,6 @@
   transition: opacity 0.2s ease;
   text-align: left;
   font: inherit;
-
-  p {
-    line-height: 1;
-    font-size: var(--mw-density-font-size);
-  }
 }
 
 .mw-input-field__input-wrapper {
@@ -60,7 +55,7 @@
 
   &:hover {
     color: var(--mw-color-text, #141414);
-    background: var(--mw-color-surface, #f5f5f5);
+    background: var(--mw-color-surface-primary, #ffffff);
   }
 
   &:focus {
@@ -100,7 +95,7 @@
 
   &:hover {
     color: var(--mw-color-text, #141414);
-    background: var(--mw-color-surface, #f5f5f5);
+    background: var(--mw-color-surface-primary, #ffffff);
   }
 
   &:focus {
@@ -134,7 +129,7 @@
 .mw-input-field__input-wrapper:has(.mw-input-field__leading-symbol) {
   border: 1px solid var(--mw-color-border);
   border-radius: var(--mw-ui-radius);
-  background: var(--mw-color-surface);
+  background: var(--mw-color-surface-primary);
   transition: border-color 150ms ease, outline 150ms ease;
 }
 
@@ -225,13 +220,36 @@
 }
 
 .mw-input-field__helper {
-  font-size: 0.875em;
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-input-field__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mw-spacing-sp-8);
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-input-field__meta .mw-input-field__helper,
+.mw-input-field__meta .mw-input-field__counter {
+  min-width: 0;
+}
+
+.mw-input-field__counter {
+  flex-shrink: 0;
   color: var(--mw-color-text-muted, #595959);
 }
 
 .mw-input-field__error {
-  font-size: 0.875em;
-  color: var(--mw-color-danger-base, #d90429);
+  color: var(--mw-color-status-error-text, #d90429);
+}
+
+.mw-input-field__label .mw-text,
+.mw-input-field__helper .mw-text,
+.mw-input-field__counter .mw-text,
+.mw-input-field__error .mw-text {
+  color: inherit;
 }
 
 /* State modifiers */
@@ -250,8 +268,8 @@
   cursor: default;
 }
 
-.mw-input-field--invalid .mw-input-field__label .mw-p,
-.mw-input-field--invalid .mw-input-field__error .mw-p {
+.mw-input-field--invalid .mw-input-field__label .mw-text,
+.mw-input-field--invalid .mw-input-field__error .mw-text {
   /* Label styling when field has error - could add red accent if needed  */
   color: var(--mw-color-danger-base, #d90429);
 }

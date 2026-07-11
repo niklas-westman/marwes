@@ -1,6 +1,7 @@
 <script lang="ts">
   import { buildInputFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import Textarea from "./Textarea.svelte";
   import type { TextareaFieldProps, TextareaProps } from "./types.js";
 
@@ -8,6 +9,7 @@
     id: userProvidedId,
     label,
     helperText,
+    counterText,
     error,
     textarea = {},
     ariaDescribedBy,
@@ -23,6 +25,7 @@
   }
 
   const hasHelperText = $derived(hasTextContent(helperText));
+  const hasCounterText = $derived(hasTextContent(counterText));
   const hasError = $derived(hasTextContent(error));
   const invalid = $derived(hasError || textarea.invalid || false);
   const disabled = $derived(textarea.disabled || false);
@@ -39,19 +42,31 @@
 
 <div class={wrapperClass}>
   <label class="mw-input-field__label" for={fieldId}>
-    <p class="mw-p mw-p--md">{label}</p>
+    <Text variant="label">{label}</Text>
   </label>
   <div class="mw-input-field__input-wrapper">
     <Textarea {...textarea} id={fieldId} {invalid} describedBy={a11yIds.describedBy ?? undefined} bind:value />
   </div>
-  {#if hasHelperText && !hasError}
-    <div class="mw-input-field__helper" id={a11yIds.helperTextId}>
-      <p class="mw-p mw-p--sm">{helperText}</p>
+  {#if (hasHelperText || hasCounterText) && !hasError}
+    <div class="mw-input-field__meta">
+      {#if hasHelperText}
+        <div class="mw-input-field__helper" id={a11yIds.helperTextId}>
+          <Text variant="caption">{helperText}</Text>
+        </div>
+      {:else}
+        <span aria-hidden="true"></span>
+      {/if}
+
+      {#if hasCounterText}
+        <div class="mw-input-field__counter">
+          <Text variant="caption">{counterText}</Text>
+        </div>
+      {/if}
     </div>
   {/if}
   {#if hasError}
     <div class="mw-input-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

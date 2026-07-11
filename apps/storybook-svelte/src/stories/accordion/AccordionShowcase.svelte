@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Accordion } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import Accordion from "../../../../../packages/svelte/src/lib/components/accordion/Accordion.svelte"
 
   interface Props {
     showcase: "interactive" | "list"

@@ -12,10 +12,10 @@ const pkgDir = resolve(fileURLToPath(new URL("..", import.meta.url)))
 const spinnerCssPath = resolve(pkgDir, "src/firstEdition/spinner.css")
 
 describe("firstEdition spinner css contract", () => {
-  it("seeds track and indicator colors from semantic theme variables", () => {
+  it("seeds indicator color from semantic theme variable and a fixed track color", () => {
     const css = readFileSync(spinnerCssPath, "utf8")
 
-    expect(css).toContain("--mw-spinner-track-color: var(--mw-color-text-muted, #a3a3a3);")
+    expect(css).toContain("--mw-spinner-track-color: #a3a3a3;")
     expect(css).toContain("--mw-spinner-indicator-color: var(--mw-color-primary-base, #2f31fc);")
   })
 

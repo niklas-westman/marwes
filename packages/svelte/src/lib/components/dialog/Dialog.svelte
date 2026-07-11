@@ -63,6 +63,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <section
   id={dialogId}
   class={mergedClass}

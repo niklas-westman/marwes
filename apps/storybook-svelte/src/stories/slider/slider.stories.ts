@@ -1,6 +1,7 @@
 import { storybookA11yPolicy, storybookLayout, storybookSliderArgTypes } from "@marwes-ui/core"
-import { Slider } from "@marwes-ui/svelte"
 import type { Meta, StoryObj } from "@storybook/svelte"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import Slider from "../../../../../packages/svelte/src/lib/components/slider/Slider.svelte"
 
 const meta = {
   title: "Slider/Atom",
@@ -12,6 +13,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: storybookSliderArgTypes,
   args: {
+    ariaLabel: "Value",
     value: 50,
     min: 0,
     max: 100,

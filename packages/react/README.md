@@ -13,7 +13,7 @@ React components for the Marwes design system with default styling, typed theme 
 
 React 18+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
-[Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[Website](https://marwes.io) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -44,11 +44,51 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Install
 
+The Marwes CLI sets up an existing React app in one command. Every path below leaves you with the same result: components that render with default Marwes styling and no separate CSS setup.
+
+For deeper setup guides, visit [marwes.io](https://marwes.io).
+
+### Recommended: with the CLI
+
+1. Open a terminal at the root of your React app.
+
+2. Run the installer:
+
+   ```bash
+   pnpm dlx @marwes-ui/cli init --adapter react
+   ```
+
+3. The CLI installs `@marwes-ui/react` (with `react` and `react-dom` as peers) and wraps your app root with `MarwesProvider`.
+
+4. Start using components — the default Marwes CSS is loaded for you. Jump to the [Quick Start](#quick-start) below.
+
+### With AI: agentic mode
+
+Use this when you want an AI coding agent (Claude Code, Cursor, etc.) to drive the setup. It runs the same install flow, then runs `doctor` and prints the setup boundaries the agent should follow:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter react --agentic
+```
+
+Also works with `npx`, `yarn dlx`, and `bunx`.
+
+### New Vite app
+
+If you don't have an app yet, scaffold one with Marwes preinstalled:
+
+```bash
+pnpm create marwes@latest my-app --template react-ts
+```
+
+### Manual install
+
+Prefer to wire things up yourself:
+
 ```bash
 pnpm add @marwes-ui/react react react-dom
 ```
 
-No preset CSS import is needed. `@marwes-ui/react` depends on `@marwes-ui/presets` and loads the default Marwes CSS automatically.
+Then wrap your app root in `MarwesProvider` — see the [Quick Start](#quick-start) below. No preset CSS import is needed; `@marwes-ui/react` loads the default Marwes CSS automatically.
 
 ## Quick Start
 

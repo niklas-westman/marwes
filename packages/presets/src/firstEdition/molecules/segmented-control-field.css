@@ -1,0 +1,23 @@
+/**
+ * SegmentedControlField (Molecule)
+ *
+ * Layout for label + (description) + segmented control + (error).
+ */
+
+.mw-segmented-control-field {
+  display: grid;
+  gap: var(--mw-density-field-gap);
+}
+
+.mw-segmented-control-field__label {
+  display: block;
+  text-align: left;
+}
+
+.mw-segmented-control-field__description {
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-segmented-control-field__error {
+  color: var(--mw-color-danger-base, #c4302b);
+}

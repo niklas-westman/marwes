@@ -1,7 +1,9 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import { Paragraph, Textarea } from "@marwes-ui/react"
+import { Paragraph } from "@marwes-ui/react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Textarea } from "../../../../../packages/react/src/components/input/textarea"
 
 const meta: Meta<typeof Textarea> = {
   title: "Input/Atom/Textarea",

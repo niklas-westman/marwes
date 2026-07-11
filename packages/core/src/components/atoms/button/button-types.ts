@@ -24,6 +24,7 @@ export type ButtonSize = (typeof ButtonSize)[keyof typeof ButtonSize]
  * @property neutral - Low-chroma outlined buttons for neutral utility actions.
  * @property text - Minimal text-like buttons for tertiary or inline actions.
  * @property success - Positive emphasis buttons for confirm-style actions.
+ * @property danger - Destructive emphasis buttons for irreversible actions.
  *
  * @example
  * ```tsx
@@ -39,6 +40,7 @@ export const ButtonVariant = {
   neutral: "neutral",
   text: "text",
   success: "success",
+  danger: "danger",
 } as const
 export type ButtonVariant = (typeof ButtonVariant)[keyof typeof ButtonVariant]
 
@@ -112,7 +114,11 @@ export type ButtonOptions = {
   toggle?: boolean
   pressed?: boolean
 
+  /** Accessible name. Use `label` as a consumer-friendly alias for standalone/icon-only buttons. */
   ariaLabel?: string
+  /** ID of an element whose text labels the button. Wins over `ariaLabel`/`label` if set. */
+  ariaLabelledBy?: string
+  label?: string
   hasVisibleText?: boolean
 
   ariaExpanded?: boolean
@@ -134,6 +140,7 @@ export type ButtonOptions = {
 
 export type ButtonA11yProps = {
   ariaLabel?: string
+  ariaLabelledBy?: string
   ariaBusy?: boolean
   ariaDisabled?: boolean
   ariaPressed?: boolean

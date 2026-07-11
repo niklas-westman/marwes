@@ -9,6 +9,9 @@
     showFooter = true,
     closeOnEscape,
     closeOnScrimClick,
+    surfaceWidth,
+    tone,
+    divider,
     includeInput = false,
     onopenchange,
   }: {
@@ -19,6 +22,9 @@
     showFooter?: boolean;
     closeOnEscape?: boolean;
     closeOnScrimClick?: boolean;
+    surfaceWidth?: string | number;
+    tone?: "default" | "calm";
+    divider?: "visible" | "hidden";
     includeInput?: boolean;
     onopenchange?: (open: boolean) => void;
   } = $props();
@@ -35,6 +41,9 @@
     {dismissible}
     {closeOnEscape}
     {closeOnScrimClick}
+    {surfaceWidth}
+    {tone}
+    {divider}
     {onopenchange}
   >
     {#if includeInput}
@@ -57,6 +66,9 @@
     {dismissible}
     {closeOnEscape}
     {closeOnScrimClick}
+    {surfaceWidth}
+    {tone}
+    {divider}
     {onopenchange}
   >
     {#if includeInput}

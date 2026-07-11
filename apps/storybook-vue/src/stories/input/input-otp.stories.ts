@@ -1,8 +1,13 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import type { InputOtpProps } from "@marwes-ui/vue"
-import { InputOtp, Paragraph } from "@marwes-ui/vue"
+import { Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer the public field — `InputOtpField` is. We deep-import the
+// bare atom here for documentation of the cells-only render.
+import {
+  InputOtp,
+  type InputOtpProps,
+} from "../../../../../packages/vue/src/components/input/input-otp"
 
 const meta = {
   title: "Input/Molecule/InputOtp",
@@ -13,9 +18,8 @@ const meta = {
   },
   tags: ["autodocs"],
   args: {
-    label: "Verification code",
-    helperText: "Enter the 6-digit code sent to your email",
     length: 6,
+    ariaLabel: "Verification code",
   },
 } satisfies Meta<InputOtpProps>
 
@@ -25,13 +29,16 @@ type Story = StoryObj<InputOtpProps>
 
 export const Basic: Story = {
   render: (args) => ({
-    components: { InputOtp },
+    components: { InputOtp, Paragraph },
     setup() {
       return { args }
     },
     template: `
       <div style="width: 320px;">
         <InputOtp v-bind="args" />
+        <Paragraph style="margin-top: 16px; font-size: 12px; color: #666;">
+          Bare atom — no label / helper / error. Use InputOtpField for labeled forms.
+        </Paragraph>
       </div>
     `,
   }),
@@ -59,7 +66,6 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     modelValue: "123456",
-    helperText: "This code has already been submitted",
   },
   render: (args) => ({
     components: { InputOtp },
@@ -77,7 +83,7 @@ export const Disabled: Story = {
 export const Invalid: Story = {
   args: {
     modelValue: "1234",
-    error: "Code expired",
+    invalid: true,
   },
   render: (args) => ({
     components: { InputOtp },

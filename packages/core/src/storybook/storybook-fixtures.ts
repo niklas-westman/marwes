@@ -18,6 +18,11 @@ export const storybookA11yPolicy = {
 export const storybookIconNames = [...iconNames]
 export const storybookOptionalIconNames = [undefined, ...storybookIconNames]
 
+const storybookButtonVariantArgType = {
+  control: "select",
+  options: ["primary", "secondary", "neutral", "text", "success", "danger"],
+} as const
+
 export const storybookButtonIconArgTypes = {
   iconLeft: {
     control: "select",
@@ -34,6 +39,18 @@ export const storybookButtonIconArgTypes = {
 
 export const storybookButtonGeneralArgTypes = {
   ...storybookButtonIconArgTypes,
+  variant: storybookButtonVariantArgType,
+} as const
+
+export const storybookIconButtonArgTypes = {
+  icon: {
+    control: "select",
+    options: storybookIconNames,
+  },
+  variant: storybookButtonVariantArgType,
+  disabled: {
+    control: "boolean",
+  },
 } as const
 
 export const storybookButtonPurposeArgTypes = {
@@ -120,6 +137,28 @@ export const storybookSkeletonArgTypes = {
   },
 } as const
 
+export const storybookProgressBarArgTypes = {
+  label: { control: "text" },
+  value: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  min: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  max: { control: { type: "number", min: -1000, max: 1000, step: 1 } },
+  size: {
+    control: "inline-radio",
+    options: ["small", "default"],
+    description: "Figma track size: small is 4px, default is 8px",
+  },
+  state: {
+    control: "select",
+    options: ["default", "hover", "pressed", "focus"],
+    description: "Visual state for documentation and visual QA",
+  },
+  disabled: { control: "boolean" },
+  showLabel: { control: "boolean" },
+  showPercentage: { control: "boolean" },
+  valueLabel: { control: "text" },
+  ariaLabel: { control: "text" },
+} as const
+
 export const storybookStatTileArgTypes = {
   tone: {
     control: "select",
@@ -164,6 +203,7 @@ export const storybookSpacingArgTypes = {
       "sp-2",
       "sp-4",
       "sp-8",
+      "sp-12",
       "sp-16",
       "sp-24",
       "sp-32",
@@ -179,7 +219,7 @@ export const storybookSpacingArgTypes = {
       "sp-112",
       "sp-120",
     ],
-    description: "Size variant (sp-0=0 … sp-24=24 … sp-80=80 … sp-120=120px)",
+    description: "Size variant (sp-0=0 … sp-12=12 … sp-24=24 … sp-120=120px)",
   },
   scale: {
     control: { type: "number", min: 1, max: 8, step: 0.5 },
@@ -238,7 +278,7 @@ export const storybookDocsDescription = {
   linkButton:
     "LinkButton locks navigation semantics, renders as an anchor, and keeps the canonical text treatment. Use Button for intentional visual deviations.",
   destructiveButton:
-    "DestructiveButton locks destructive semantics, uses the canonical primary + error treatment, and requires confirmation by default. Use Button for intentional exceptions.",
+    "DestructiveButton locks destructive semantics, uses the canonical danger treatment, and requires confirmation by default. Use Button for intentional exceptions.",
   submitButton:
     "SubmitButton locks form-submit semantics, always renders as a button, and keeps the canonical primary treatment.",
   saveButton:

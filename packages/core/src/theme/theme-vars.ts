@@ -1,5 +1,18 @@
+import type { ResolvedTheme } from "./theme-css"
+import { type ThemeBreakpoints, defaultThemeBreakpoints } from "./theme-types"
+
 export type MwThemeVarName = `--mw-${string}`
 export type MwThemeVarReference = `var(${MwThemeVarName})` | `var(${MwThemeVarName}, ${string})`
+export type MwThemeMedia = {
+  mobileAndAbove: string
+  tabletAndAbove: string
+  desktopAndAbove: string
+  wideDesktopAndAbove: string
+  mobileAndBelow: string
+  tabletAndBelow: string
+  desktopAndBelow: string
+  wideDesktopAndBelow: string
+}
 
 /**
  * Wraps a Marwes CSS custom property name in `var(...)`, with an optional fallback.
@@ -12,6 +25,23 @@ export function mwVar<const TName extends MwThemeVarName>(
 ): `var(${TName}, ${string})`
 export function mwVar(name: MwThemeVarName, fallback?: string): string {
   return fallback === undefined ? `var(${name})` : `var(${name}, ${fallback})`
+}
+
+export function createMwThemeMedia(breakpoint: ThemeBreakpoints): MwThemeMedia {
+  return {
+    mobileAndAbove: `@media (min-width: ${breakpoint.mobile}px)`,
+    tabletAndAbove: `@media (min-width: ${breakpoint.tablet}px)`,
+    desktopAndAbove: `@media (min-width: ${breakpoint.desktop}px)`,
+    wideDesktopAndAbove: `@media (min-width: ${breakpoint.wideDesktop}px)`,
+    mobileAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.mobile)}px)`,
+    tabletAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.tablet)}px)`,
+    desktopAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.desktop)}px)`,
+    wideDesktopAndBelow: `@media (max-width: ${formatMaxBreakpoint(breakpoint.wideDesktop)}px)`,
+  }
+}
+
+function formatMaxBreakpoint(value: number): string {
+  return `${Number((value - 0.02).toFixed(2))}`
 }
 
 /**
@@ -72,7 +102,9 @@ export const mwThemeVarNames = {
     },
     background: "--mw-color-background",
     surface: "--mw-color-surface",
+    surfacePrimary: "--mw-color-surface-primary",
     surfaceSubtle: "--mw-color-surface-subtle",
+    surfaceBrand: "--mw-color-surface-brand",
     surfaceElevated: "--mw-color-surface-elevated",
     surfaceDisabled: "--mw-color-surface-disabled",
     surfaceInverted: "--mw-color-surface-inverted",
@@ -82,11 +114,15 @@ export const mwThemeVarNames = {
     textDisabled: "--mw-color-text-disabled",
     textInverted: "--mw-color-text-inverted",
     textBrand: "--mw-color-text-brand",
+    textLink: "--mw-color-text-link",
+    iconMuted: "--mw-color-icon-muted",
+    borderLow: "--mw-color-border-low",
     border: "--mw-color-border",
     borderSubtle: "--mw-color-border-subtle",
     borderStrong: "--mw-color-border-strong",
     borderDisabled: "--mw-color-border-disabled",
     borderBrand: "--mw-color-border-brand",
+    borderFull: "--mw-color-border-full",
     focus: "--mw-color-focus",
     status: {
       success: {
@@ -101,6 +137,7 @@ export const mwThemeVarNames = {
         text: "--mw-color-status-warning-text",
         icon: "--mw-color-status-warning-icon",
         border: "--mw-color-status-warning-border",
+        borderAccessible: "--mw-color-status-warning-border-accessible",
         borderStrong: "--mw-color-status-warning-border-strong",
       },
       error: {
@@ -124,6 +161,7 @@ export const mwThemeVarNames = {
     sp2: "--mw-spacing-sp-2",
     sp4: "--mw-spacing-sp-4",
     sp8: "--mw-spacing-sp-8",
+    sp12: "--mw-spacing-sp-12",
     sp16: "--mw-spacing-sp-16",
     sp24: "--mw-spacing-sp-24",
     sp32: "--mw-spacing-sp-32",
@@ -160,6 +198,12 @@ export const mwThemeVarNames = {
     fontSizeSm: "--mw-density-font-size-sm",
   },
   typography: {
+    display: {
+      fontSize: "--mw-typography-display-font-size",
+      lineHeight: "--mw-typography-display-line-height",
+      fontWeight: "--mw-typography-display-font-weight",
+      letterSpacing: "--mw-typography-display-letter-spacing",
+    },
     h1: {
       fontSize: "--mw-typography-h1-font-size",
       lineHeight: "--mw-typography-h1-line-height",
@@ -177,6 +221,50 @@ export const mwThemeVarNames = {
       lineHeight: "--mw-typography-h3-line-height",
       fontWeight: "--mw-typography-h3-font-weight",
       letterSpacing: "--mw-typography-h3-letter-spacing",
+    },
+    text: {
+      display: {
+        fontSize: "--mw-typography-text-display-font-size",
+        lineHeight: "--mw-typography-text-display-line-height",
+        fontWeight: "--mw-typography-text-display-font-weight",
+        letterSpacing: "--mw-typography-text-display-letter-spacing",
+        textTransform: "--mw-typography-text-display-transform",
+      },
+      label: {
+        fontSize: "--mw-typography-text-label-font-size",
+        lineHeight: "--mw-typography-text-label-line-height",
+        fontWeight: "--mw-typography-text-label-font-weight",
+        letterSpacing: "--mw-typography-text-label-letter-spacing",
+        textTransform: "--mw-typography-text-label-transform",
+      },
+      "label-small": {
+        fontSize: "--mw-typography-text-label-small-font-size",
+        lineHeight: "--mw-typography-text-label-small-line-height",
+        fontWeight: "--mw-typography-text-label-small-font-weight",
+        letterSpacing: "--mw-typography-text-label-small-letter-spacing",
+        textTransform: "--mw-typography-text-label-small-transform",
+      },
+      caption: {
+        fontSize: "--mw-typography-text-caption-font-size",
+        lineHeight: "--mw-typography-text-caption-line-height",
+        fontWeight: "--mw-typography-text-caption-font-weight",
+        letterSpacing: "--mw-typography-text-caption-letter-spacing",
+        textTransform: "--mw-typography-text-caption-transform",
+      },
+      overline: {
+        fontSize: "--mw-typography-text-overline-font-size",
+        lineHeight: "--mw-typography-text-overline-line-height",
+        fontWeight: "--mw-typography-text-overline-font-weight",
+        letterSpacing: "--mw-typography-text-overline-letter-spacing",
+        textTransform: "--mw-typography-text-overline-transform",
+      },
+      micro: {
+        fontSize: "--mw-typography-text-micro-font-size",
+        lineHeight: "--mw-typography-text-micro-line-height",
+        fontWeight: "--mw-typography-text-micro-font-weight",
+        letterSpacing: "--mw-typography-text-micro-letter-spacing",
+        textTransform: "--mw-typography-text-micro-transform",
+      },
     },
     paragraph: {
       sm: {
@@ -253,7 +341,9 @@ export const mwThemeVars = {
     },
     background: "var(--mw-color-background)",
     surface: "var(--mw-color-surface)",
+    surfacePrimary: "var(--mw-color-surface-primary)",
     surfaceSubtle: "var(--mw-color-surface-subtle)",
+    surfaceBrand: "var(--mw-color-surface-brand)",
     surfaceElevated: "var(--mw-color-surface-elevated)",
     surfaceDisabled: "var(--mw-color-surface-disabled)",
     surfaceInverted: "var(--mw-color-surface-inverted)",
@@ -263,11 +353,15 @@ export const mwThemeVars = {
     textDisabled: "var(--mw-color-text-disabled)",
     textInverted: "var(--mw-color-text-inverted)",
     textBrand: "var(--mw-color-text-brand)",
+    textLink: "var(--mw-color-text-link)",
+    iconMuted: "var(--mw-color-icon-muted)",
+    borderLow: "var(--mw-color-border-low)",
     border: "var(--mw-color-border)",
     borderSubtle: "var(--mw-color-border-subtle)",
     borderStrong: "var(--mw-color-border-strong)",
     borderDisabled: "var(--mw-color-border-disabled)",
     borderBrand: "var(--mw-color-border-brand)",
+    borderFull: "var(--mw-color-border-full)",
     focus: "var(--mw-color-focus)",
     status: {
       success: {
@@ -282,6 +376,7 @@ export const mwThemeVars = {
         text: "var(--mw-color-status-warning-text)",
         icon: "var(--mw-color-status-warning-icon)",
         border: "var(--mw-color-status-warning-border)",
+        borderAccessible: "var(--mw-color-status-warning-border-accessible)",
         borderStrong: "var(--mw-color-status-warning-border-strong)",
       },
       error: {
@@ -305,6 +400,7 @@ export const mwThemeVars = {
     sp2: "var(--mw-spacing-sp-2)",
     sp4: "var(--mw-spacing-sp-4)",
     sp8: "var(--mw-spacing-sp-8)",
+    sp12: "var(--mw-spacing-sp-12)",
     sp16: "var(--mw-spacing-sp-16)",
     sp24: "var(--mw-spacing-sp-24)",
     sp32: "var(--mw-spacing-sp-32)",
@@ -341,6 +437,12 @@ export const mwThemeVars = {
     fontSizeSm: "var(--mw-density-font-size-sm)",
   },
   typography: {
+    display: {
+      fontSize: "var(--mw-typography-display-font-size)",
+      lineHeight: "var(--mw-typography-display-line-height)",
+      fontWeight: "var(--mw-typography-display-font-weight)",
+      letterSpacing: "var(--mw-typography-display-letter-spacing)",
+    },
     h1: {
       fontSize: "var(--mw-typography-h1-font-size)",
       lineHeight: "var(--mw-typography-h1-line-height)",
@@ -358,6 +460,50 @@ export const mwThemeVars = {
       lineHeight: "var(--mw-typography-h3-line-height)",
       fontWeight: "var(--mw-typography-h3-font-weight)",
       letterSpacing: "var(--mw-typography-h3-letter-spacing)",
+    },
+    text: {
+      display: {
+        fontSize: "var(--mw-typography-text-display-font-size)",
+        lineHeight: "var(--mw-typography-text-display-line-height)",
+        fontWeight: "var(--mw-typography-text-display-font-weight)",
+        letterSpacing: "var(--mw-typography-text-display-letter-spacing)",
+        textTransform: "var(--mw-typography-text-display-transform)",
+      },
+      label: {
+        fontSize: "var(--mw-typography-text-label-font-size)",
+        lineHeight: "var(--mw-typography-text-label-line-height)",
+        fontWeight: "var(--mw-typography-text-label-font-weight)",
+        letterSpacing: "var(--mw-typography-text-label-letter-spacing)",
+        textTransform: "var(--mw-typography-text-label-transform)",
+      },
+      "label-small": {
+        fontSize: "var(--mw-typography-text-label-small-font-size)",
+        lineHeight: "var(--mw-typography-text-label-small-line-height)",
+        fontWeight: "var(--mw-typography-text-label-small-font-weight)",
+        letterSpacing: "var(--mw-typography-text-label-small-letter-spacing)",
+        textTransform: "var(--mw-typography-text-label-small-transform)",
+      },
+      caption: {
+        fontSize: "var(--mw-typography-text-caption-font-size)",
+        lineHeight: "var(--mw-typography-text-caption-line-height)",
+        fontWeight: "var(--mw-typography-text-caption-font-weight)",
+        letterSpacing: "var(--mw-typography-text-caption-letter-spacing)",
+        textTransform: "var(--mw-typography-text-caption-transform)",
+      },
+      overline: {
+        fontSize: "var(--mw-typography-text-overline-font-size)",
+        lineHeight: "var(--mw-typography-text-overline-line-height)",
+        fontWeight: "var(--mw-typography-text-overline-font-weight)",
+        letterSpacing: "var(--mw-typography-text-overline-letter-spacing)",
+        textTransform: "var(--mw-typography-text-overline-transform)",
+      },
+      micro: {
+        fontSize: "var(--mw-typography-text-micro-font-size)",
+        lineHeight: "var(--mw-typography-text-micro-line-height)",
+        fontWeight: "var(--mw-typography-text-micro-font-weight)",
+        letterSpacing: "var(--mw-typography-text-micro-letter-spacing)",
+        textTransform: "var(--mw-typography-text-micro-transform)",
+      },
     },
     paragraph: {
       sm: {
@@ -377,11 +523,36 @@ export const mwThemeVars = {
 } as const
 
 /**
- * Plain ThemeProvider-friendly object for styled-components and Emotion.
- * It mirrors `mwThemeVars` without adding a dependency on any CSS-in-JS library.
+ * Creates a ThemeProvider-friendly object for styled-components, Emotion, and other CSS providers.
+ * Token values are CSS custom property references; media helpers are derived from the resolved theme.
  */
-export const mwStyledTheme = mwThemeVars
+export function createMwTheme(theme: ResolvedTheme): MwTheme {
+  return {
+    ...mwThemeVars,
+    breakpoint: theme.breakpoint,
+    media: createMwThemeMedia(theme.breakpoint),
+  }
+}
+
+/**
+ * Static CSS-provider theme using default Marwes breakpoint values.
+ * Use provider-rendered `mwTheme` when consumers need breakpoint overrides.
+ */
+export const mwTheme: MwTheme = {
+  ...mwThemeVars,
+  breakpoint: defaultThemeBreakpoints,
+  media: createMwThemeMedia(defaultThemeBreakpoints),
+}
+
+/**
+ * @deprecated Use `mwTheme`. This alias is kept for existing styled-provider consumers.
+ */
+export const mwStyledTheme = mwTheme
 
 export type MwThemeVarNames = typeof mwThemeVarNames
 export type MwThemeVars = typeof mwThemeVars
+export type MwTheme = MwThemeVars & {
+  breakpoint: ThemeBreakpoints
+  media: MwThemeMedia
+}
 export type MwStyledTheme = typeof mwStyledTheme

@@ -18,6 +18,7 @@ Buttons are organized as Atom -> Variant wrappers -> Purpose wrappers to make St
 
 ```
 Button (Atom)
+IconButton (Atom)
      ↓
 Variant Wrappers
   ├─ PrimaryButton
@@ -46,20 +47,23 @@ Purpose Wrappers
   └─ RefreshButton
 ```
 
-## Atom: Button
+## Atom: Button and IconButton
 
 Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`).
 It is also the explicit escape hatch when you want purpose semantics with a non-canonical visual treatment.
 When the anchor path is used with `href`, Marwes preserves native link semantics instead of forcing `role="button"`.
+Use `IconButton` when the visible affordance is only an icon; it locks the square control sizing and requires an accessible label.
 
 ```tsx
-import { Button } from "@marwes-ui/react"
+import { Button, IconButton } from "@marwes-ui/react"
 
 <Button variant="primary" action="button">Base Button</Button>
 <Button variant="secondary" action="navigate" href="/dashboard">
   Go to dashboard
 </Button>
 <Button action="cancel" variant="success">Cancel</Button>
+<IconButton icon="x" ariaLabel="Close" />
+<IconButton icon="trash" ariaLabel="Delete" variant="danger" action="delete" />
 ```
 
 ## Recommended: Purpose Buttons

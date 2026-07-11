@@ -117,6 +117,16 @@
       "frameworks": ["react", "vue"]
     },
     {
+      "name": "error-banner",
+      "family": "banner",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "error-banner",
+        "data-intent": "error"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
       "name": "error-toast",
       "family": "toast",
       "layer": "purpose",
@@ -133,6 +143,16 @@
       "attributes": {
         "data-purpose": "filter",
         "data-action": "button"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "info-banner",
+      "family": "banner",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "info-banner",
+        "data-intent": "info"
       },
       "frameworks": ["react", "vue"]
     },
@@ -274,6 +294,16 @@
       "frameworks": ["react", "vue"]
     },
     {
+      "name": "success-banner",
+      "family": "banner",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "success-banner",
+        "data-intent": "success"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
       "name": "success-toast",
       "family": "toast",
       "layer": "purpose",
@@ -310,6 +340,16 @@
         "data-purpose": "verify",
         "data-action": "button",
         "data-outcome": "positive"
+      },
+      "frameworks": ["react", "vue"]
+    },
+    {
+      "name": "warning-banner",
+      "family": "banner",
+      "layer": "purpose",
+      "attributes": {
+        "data-purpose": "warning-banner",
+        "data-intent": "warning"
       },
       "frameworks": ["react", "vue"]
     },

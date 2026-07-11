@@ -4,13 +4,13 @@
  */
 import { render } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
-import InputOtp from "../lib/components/input/InputOtp.svelte"
 import RichText from "../lib/components/input/RichText.svelte"
-import RichTextField from "../lib/components/input/RichTextField.svelte"
+import InputOtpContractFixture from "./type-fixtures/InputOtpContractFixture.svelte"
+import RichTextFieldContractFixture from "./type-fixtures/RichTextFieldContractFixture.svelte"
 
 describe("InputOtp", () => {
   it("renders with a label", () => {
-    const { container } = render(InputOtp, {
+    const { container } = render(InputOtpContractFixture, {
       props: { label: "Verification code" },
     })
     const label = container.querySelector("label")
@@ -18,7 +18,7 @@ describe("InputOtp", () => {
   })
 
   it("renders OTP input container", () => {
-    const { container } = render(InputOtp, {
+    const { container } = render(InputOtpContractFixture, {
       props: { label: "Code", length: 6 },
     })
     const el = container.querySelector(".mw-input-otp")
@@ -29,7 +29,7 @@ describe("InputOtp", () => {
   })
 
   it("renders with specified length attribute", () => {
-    const { container } = render(InputOtp, {
+    const { container } = render(InputOtpContractFixture, {
       props: { label: "PIN", length: 4 },
     })
     const el = container.querySelector(".mw-input-otp")
@@ -37,7 +37,7 @@ describe("InputOtp", () => {
   })
 
   it("includes mw-input-otp class", () => {
-    const { container } = render(InputOtp, {
+    const { container } = render(InputOtpContractFixture, {
       props: { label: "Code" },
     })
     const el = container.querySelector(".mw-input-otp")
@@ -45,14 +45,14 @@ describe("InputOtp", () => {
   })
 
   it("shows error text", () => {
-    const { container } = render(InputOtp, {
+    const { container } = render(InputOtpContractFixture, {
       props: { label: "Code", error: "Invalid code" },
     })
     expect(container.textContent).toContain("Invalid code")
   })
 
   it("shows helper text", () => {
-    const { container } = render(InputOtp, {
+    const { container } = render(InputOtpContractFixture, {
       props: { label: "Code", helperText: "Enter 6 digits" },
     })
     expect(container.textContent).toContain("Enter 6 digits")
@@ -87,7 +87,7 @@ describe("RichText", () => {
 
 describe("RichTextField", () => {
   it("renders with a label", () => {
-    const { container } = render(RichTextField, {
+    const { container } = render(RichTextFieldContractFixture, {
       props: { label: "Description", editor: {} },
     })
     // RichTextField renders the label text
@@ -95,7 +95,7 @@ describe("RichTextField", () => {
   })
 
   it("shows error text", () => {
-    const { container } = render(RichTextField, {
+    const { container } = render(RichTextFieldContractFixture, {
       props: { label: "Description", error: "Required", editor: {} },
     })
     expect(container.textContent).toContain("Required")

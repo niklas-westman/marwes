@@ -1,0 +1,77 @@
+/**
+ * CSS contract: verifies the firstEdition drawer stylesheet.
+ */
+import { readFileSync } from "node:fs"
+import { resolve } from "node:path"
+import { fileURLToPath } from "node:url"
+import { describe, expect, it } from "vitest"
+
+const pkgDir = resolve(fileURLToPath(new URL("..", import.meta.url)))
+const drawerCssPath = resolve(pkgDir, "src/firstEdition/drawer.css")
+const stylesCssPath = resolve(pkgDir, "src/firstEdition/styles.css")
+
+describe("firstEdition drawer css contract", () => {
+  it("imports drawer css from the preset entrypoint", () => {
+    const css = readFileSync(stylesCssPath, "utf8")
+
+    expect(css).toContain('@import "./drawer.css";')
+  })
+
+  it("keeps Figma drawer widths as component variables", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain("--mw-drawer-width-small: 320px;")
+    expect(css).toContain("--mw-drawer-width-medium: 400px;")
+    expect(css).toContain("--mw-drawer-width-large: 560px;")
+  })
+
+  it("maps drawer color and radius styling to theme variables", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain("--mw-drawer-surface: var(--mw-color-surface")
+    expect(css).toContain("--mw-drawer-border: var(--mw-color-border-subtle")
+    expect(css).toContain("--mw-drawer-title: var(--mw-color-text);")
+    expect(css).toContain("--mw-drawer-radius: min(calc(var(--mw-ui-radius")
+    expect(css).toContain("font-family: var(--mw-font-primary, inherit);")
+    expect(css).toContain("outline: 2px solid var(--mw-color-focus);")
+  })
+
+  it("keeps panel, scrim, and slot selectors stable", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain(".mw-drawer__scrim")
+    expect(css).toContain(".mw-drawer__panel")
+    expect(css).toContain(".mw-drawer__header")
+    expect(css).toContain(".mw-drawer__content")
+    expect(css).toContain(".mw-drawer__footer")
+  })
+
+  it("adds side-aware entrance motion with reduced-motion support", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain("--mw-drawer-motion-easing: cubic-bezier(0.22, 0.72, 0.2, 1);")
+    expect(css).toContain("@keyframes mw-drawer-slide-in-right")
+    expect(css).toContain("transform: translateX(100%);")
+    expect(css).toContain("@keyframes mw-drawer-slide-in-left")
+    expect(css).toContain("transform: translateX(-100%);")
+    expect(css).toContain("@keyframes mw-drawer-scrim-in")
+    expect(css).toContain("@media (prefers-reduced-motion: reduce)")
+  })
+
+  it("keeps mobile drawers full screen with a sticky top-right close area", () => {
+    const css = readFileSync(drawerCssPath, "utf8")
+
+    expect(css).toContain("@media (max-width: 640px)")
+    expect(css).toContain("width: 100vw;")
+    expect(css).toContain("height: 100dvh;")
+    expect(css).toContain("border: none;")
+    expect(css).toContain("border-radius: 0;")
+    expect(css).toContain("box-shadow: none;")
+    expect(css).toContain(
+      ".mw-drawer--left .mw-drawer__panel,\n  .mw-drawer--right .mw-drawer__panel",
+    )
+    expect(css).toContain("position: sticky;")
+    expect(css).toContain("top: 0;")
+    expect(css).toContain("justify-content: center;")
+  })
+})

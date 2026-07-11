@@ -5,8 +5,20 @@ import { fieldWhyPurposeComponents } from "@marwes-ui/core"
 
 # Input Components
 
-Marwes provides input-domain components organized in a clear Atom → Molecule → Purpose
-progression for text-based data entry.
+Marwes provides purpose-specific field components that encapsulate best practices
+and automatically set AI-friendly metadata. Each field variant is optimized for
+its specific use case with appropriate semantic HTML attributes.
+
+Input domain groups everything related to text-like data entry in one place,
+using a clear Atom -> Molecule -> Purpose progression.
+
+### Field naming
+
+Components that wrap raw input-domain atoms with label, helper text, and error semantics
+are called **Fields** (e.g. `InputField`, `SelectField`, `TextareaField`, `RichTextField`, `DropdownField`, `SearchField`, `EmailField`).
+The suffix signals that the component provides full field-level UX — accessible labelling,
+validation display, and AI-friendly `data-purpose` attributes — so you don't have to wire
+those concerns yourself.
 
 ## Input Architecture
 

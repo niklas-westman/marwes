@@ -23,7 +23,8 @@ Go here:
 
 1. [Want to contribute?](./want-to-contribute.md)
 2. [Architecture](./reference/architecture.md)
-3. [Repo Map](./reference/repo-map.md)
+3. [Adapter Architecture](./reference/adapter-architecture.md)
+4. [Repo Map](./reference/repo-map.md)
 
 Run before handing off:
 
@@ -36,7 +37,7 @@ Move to `pnpm validate:family <family>`, `pnpm check:repo-map`, or `pnpm validat
 Stop if:
 
 - you are unsure whether logic belongs in core, presets, adapters, stories, or app code
-- React and Vue parity might drift
+- React, Vue, and Svelte parity might drift
 - the change would create a package API from a one-off example need
 
 ## I want to change a component
@@ -44,8 +45,9 @@ Stop if:
 Go here:
 
 1. [Architecture](./reference/architecture.md)
-2. [Repo Map](./reference/repo-map.md)
-3. [Family Validation](./reference/family-validation.md)
+2. [Adapter Architecture](./reference/adapter-architecture.md)
+3. [Repo Map](./reference/repo-map.md)
+4. [Family Validation](./reference/family-validation.md)
 
 Run:
 
@@ -61,7 +63,7 @@ pnpm validate:family card
 
 Stop if:
 
-- React and Vue behavior drift apart
+- React, Vue, and Svelte behavior drift apart
 - adapter code starts owning logic that belongs in core
 - visual language moves into adapters instead of preset CSS
 
@@ -143,6 +145,7 @@ pnpm compass
 
 - [Want to contribute?](./want-to-contribute.md) — contributor-friendly build guide
 - [Architecture](./reference/architecture.md) — the core principle
+- [Adapter Architecture](./reference/adapter-architecture.md) — cross-framework adapter ruleset
 - [Repo Map](./reference/repo-map.md) — how all threads connect
 - [Testing](./reference/testing.md) — which validation gate to choose
 - [Docs index](./README.md) — full documentation index

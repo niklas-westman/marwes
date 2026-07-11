@@ -11,8 +11,8 @@
  */
 
 .mw-radio {
-  --mw-radio-surface: var(--mw-color-surface);
-  --mw-radio-border: var(--mw-color-border-subtle);
+  --mw-radio-surface: var(--mw-color-surface-subtle);
+  --mw-radio-border: var(--mw-color-border-low);
   --mw-radio-dot: var(--mw-color-primary-base, #2f31fc);
 
   /* Reset native appearance */
@@ -27,7 +27,7 @@
   height: 18px;
   border-radius: 50%;
   margin: 0;
-  border: 1.5px solid var(--mw-radio-border);
+  border: 1px solid var(--mw-radio-border);
   background: var(--mw-radio-surface);
 
   cursor: pointer;
@@ -66,7 +66,11 @@
    ============================================ */
 
 .mw-radio:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--mw-radio-border) 60%, var(--mw-radio-dot));
+  border-color: var(--mw-color-border-strong);
+}
+
+.mw-radio:active:not(:disabled) {
+  border-color: var(--mw-color-border-brand);
 }
 
 /* ============================================
@@ -86,6 +90,7 @@
 .mw-radio--disabled {
   cursor: not-allowed;
   opacity: 0.2;
+  color: var(--mw-color-text-disabled);
 }
 
 /* ============================================
@@ -107,7 +112,7 @@
    ============================================ */
 
 .mw-theme--dark .mw-radio {
-  --mw-radio-surface: var(--mw-color-surface);
+  --mw-radio-surface: var(--mw-color-surface-primary);
   --mw-radio-border: var(--mw-color-border-subtle);
 }
 

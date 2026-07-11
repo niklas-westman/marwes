@@ -29,11 +29,13 @@ export function resolveSpinnerA11y(options: SpinnerOptions = {}): SpinnerA11yPro
     }
   }
 
-  if (options.ariaLabel) {
+  const accessibleLabel = options.ariaLabel ?? options.label
+
+  if (accessibleLabel) {
     return {
       ...(options.id ? { id: options.id } : {}),
       role: "status",
-      ariaLabel: options.ariaLabel,
+      ariaLabel: accessibleLabel,
       ariaLive: "polite",
     }
   }
@@ -43,7 +45,7 @@ export function resolveSpinnerA11y(options: SpinnerOptions = {}): SpinnerA11yPro
   if (__DEV__ && options.decorative === false) {
     console.warn(
       "[marwes] Spinner: decorative={false} was passed without ariaLabel. " +
-        "The spinner stays hidden from assistive technology unless ariaLabel is also provided.",
+        "The spinner stays hidden from assistive technology unless ariaLabel or label is also provided.",
     )
   }
 

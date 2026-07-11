@@ -32,6 +32,7 @@ export function runBadgeGroupContract(
       const labelElement = document.getElementById(labelledBy)
       expect(labelElement).not.toBeNull()
       expect(labelElement?.textContent).toContain("Status")
+      expect(labelElement?.querySelector(".mw-text")).toHaveClass("mw-text--caption")
     })
   })
 }

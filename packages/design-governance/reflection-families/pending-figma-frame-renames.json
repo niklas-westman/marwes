@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "sourcePage": "Test",
+  "sourcePageId": "2865:5875",
+  "viewportSize": {
+    "width": 390,
+    "height": 220
+  },
+  "purpose": "Rename these top-level Figma test frames to the required Reflection convention before exporting PNG baselines.",
+  "notes": [
+    "This file is intentionally not an active Reflection contract. Active contracts remain in reflection-families/<family>/reflection-contract.json.",
+    "Required names follow reflection/<family>/<case>/<mode>.",
+    "Button interaction case names are inferred from grid order and overlay treatment because the current Figma frame names are duplicated."
+  ],
+  "families": {
+    "accordion": [
+      {
+        "caseId": "accordion.expanded",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:40079",
+            "currentName": "Accordion",
+            "requiredName": "reflection/accordion/expanded/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42151",
+            "currentName": "Accordion",
+            "requiredName": "reflection/accordion/expanded/dark"
+          }
+        }
+      }
+    ],
+    "badge": [
+      {
+        "caseId": "badge.neutral",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:40087",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/neutral/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42153",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/neutral/dark"
+          }
+        }
+      },
+      {
+        "caseId": "badge.primary",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41918",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/primary/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42155",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/primary/dark"
+          }
+        }
+      },
+      {
+        "caseId": "badge.success",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41930",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/success/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42157",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/success/dark"
+          }
+        }
+      },
+      {
+        "caseId": "badge.warning",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41942",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/warning/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42159",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/warning/dark"
+          }
+        }
+      },
+      {
+        "caseId": "badge.destructive",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41954",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/destructive/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42162",
+            "currentName": "Badge",
+            "requiredName": "reflection/badge/destructive/dark"
+          }
+        }
+      }
+    ],
+    "button": [
+      {
+        "caseId": "button.primary-right",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41814",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42166",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.primary-right-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41967",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42168",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.primary-right-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42013",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42170",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.primary-right-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42059",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42172",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.primary-right-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42105",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42174",
+            "currentName": "Primary button",
+            "requiredName": "reflection/button/primary-right-critical/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.secondary-right",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41834",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42176",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.secondary-right-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41969",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42178",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.secondary-right-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42015",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42180",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.secondary-right-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42061",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42182",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.secondary-right-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42107",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42184",
+            "currentName": "Secondary button",
+            "requiredName": "reflection/button/secondary-right-critical/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.text-right",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41850",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42186",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.text-right-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41971",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42188",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.text-right-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42017",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42190",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.text-right-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42063",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42192",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.text-right-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42109",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42194",
+            "currentName": "Text button",
+            "requiredName": "reflection/button/text-right-critical/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.success-right",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41866",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42196",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.success-right-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41973",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42198",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.success-right-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42019",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42200",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.success-right-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42065",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42202",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.success-right-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42111",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42204",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-critical/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.success-right-muted",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41913",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-muted/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42164",
+            "currentName": "Success button",
+            "requiredName": "reflection/button/success-right-muted/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.destructive",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41879",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42206",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.destructive-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41975",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42208",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.destructive-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42021",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42210",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.destructive-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42067",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42212",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.destructive-muted",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42113",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-muted/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42214",
+            "currentName": "Destructive button",
+            "requiredName": "reflection/button/destructive-muted/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41889",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42216",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41977",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42218",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42023",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42220",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42069",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42222",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42115",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42224",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-critical/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-copy",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41898",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42226",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-copy-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41979",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42229",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-copy-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42025",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42232",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-copy-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42071",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42235",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.link-copy-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42117",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42238",
+            "currentName": "Link button",
+            "requiredName": "reflection/button/link-copy-critical/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.refresh",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41905",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42241",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.refresh-hover",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:41982",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-hover/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42245",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-hover/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.refresh-pressed",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42028",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-pressed/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42249",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-pressed/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.refresh-focus",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42074",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-focus/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42253",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-focus/dark"
+          }
+        }
+      },
+      {
+        "caseId": "button.refresh-critical",
+        "requiredFrameNames": {
+          "light": {
+            "figmaNodeId": "3872:42120",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-critical/light"
+          },
+          "dark": {
+            "figmaNodeId": "3872:42257",
+            "currentName": "Refresh button",
+            "requiredName": "reflection/button/refresh-critical/dark"
+          }
+        }
+      }
+    ]
+  }
+}

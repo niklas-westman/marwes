@@ -29,18 +29,11 @@ export type IconProps = {
    * Common props
    */
   className?: string
-  "aria-label"?: string
+  ariaLabel?: string
   decorative?: boolean
 }
 
-export function Icon({
-  name,
-  size,
-  strokeWidth,
-  className,
-  "aria-label": ariaLabel,
-  decorative,
-}: IconProps) {
+export function Icon({ name, size, strokeWidth, className, ariaLabel, decorative }: IconProps) {
   const px = resolveIconSize(size ?? "sm")
   const sw = resolveIconStrokeWidth(strokeWidth ?? "md")
 

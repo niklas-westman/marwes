@@ -1,6 +1,7 @@
 <script lang="ts">
   import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import type { CheckboxGroupFieldProps } from "./types.js";
 
   let {
@@ -24,27 +25,38 @@
   const hasError = $derived(hasTextContent(error));
 
   const a11yIds = $derived(
-    buildCheckboxGroupFieldA11yIds({ id: fieldId, hasDescription, hasError, externalDescribedBy: ariaDescribedBy })
+    buildCheckboxGroupFieldA11yIds({
+      id: fieldId,
+      hasDescription,
+      hasError,
+      externalDescribedBy: ariaDescribedBy,
+    })
   );
 
   const wrapperClass = $derived(mergeClass("mw-checkbox-group-field", className));
 </script>
 
-<fieldset class={wrapperClass} aria-labelledby={a11yIds.labelId} aria-describedby={a11yIds.describedBy} aria-invalid={hasError ? true : undefined}>
+<!-- svelte-ignore a11y_role_supports_aria_props_implicit -->
+<fieldset
+  class={wrapperClass}
+  aria-labelledby={a11yIds.labelId}
+  aria-describedby={a11yIds.describedBy}
+  aria-invalid={hasError ? true : undefined}
+>
   <legend class="mw-checkbox-group-field__label" id={a11yIds.labelId}>
-    <p class="mw-p mw-p--md">{label}</p>
+    <Text variant="label">{label}</Text>
   </legend>
+  {#if hasDescription}
+    <div class="mw-checkbox-group-field__description" id={a11yIds.descriptionId}>
+      <Text variant="caption">{description}</Text>
+    </div>
+  {/if}
   <div class="mw-checkbox-group-field__options">
     {@render children?.()}
   </div>
-  {#if hasDescription && !hasError}
-    <div class="mw-checkbox-group-field__description" id={a11yIds.descriptionId}>
-      <p class="mw-p mw-p--sm">{description}</p>
-    </div>
-  {/if}
   {#if hasError}
     <div class="mw-checkbox-group-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </fieldset>

@@ -1,0 +1,36 @@
+{
+  "baseline": "three-segments.chromium-linux.dark.png",
+  "caseFingerprint": "5e1dbaa9f0049746665c9f7d7df6bf437954bc97ef8a0b58639c970a86434366",
+  "caseId": "segmented-control.three-segments",
+  "createdAt": "2026-06-13T16:20:11.562Z",
+  "exportScale": 1,
+  "family": "segmented-control",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/segmented-control/three-segments/dark",
+  "framing": {
+    "align": "center",
+    "background": "#0f0f0f",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5056:44352",
+  "mode": "dark",
+  "origin": "receipt-backfill",
+  "pngByteLength": 3025,
+  "pngDimensions": {
+    "height": 220,
+    "width": 520
+  },
+  "pngSha256": "9142358f70c1223313e9aad7dac57c83209af863ce8f3415acaf8b81c47ea50e",
+  "schemaVersion": 1,
+  "sourceFingerprint": "d3e83f3fb0c8abf887c73adcf8a558f866a4d0a1fe0b0ab412064fec6731a061",
+  "sourceFrameId": "2702:10336",
+  "sourceNodeId": "2702:10358",
+  "sourceNodeIds": ["2702:10358"],
+  "variablesFingerprint": "b0e4f8a6eb38400322f420d5ec1618450867f91380400ac8a5f512cf6dea8950",
+  "viewport": "segmented-control-three-segments",
+  "viewportSize": {
+    "height": 220,
+    "width": 520
+  }
+}

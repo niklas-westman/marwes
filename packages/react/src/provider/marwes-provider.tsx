@@ -1,5 +1,6 @@
 import type {
   FontLoadingConfig,
+  MwTheme,
   ResolvedTheme,
   ThemeInput,
   ThemeMode,
@@ -8,6 +9,7 @@ import type {
 } from "@marwes-ui/core"
 import {
   ThemeMode as MwThemeMode,
+  createMwTheme,
   nextThemeMode,
   resolveThemeInput,
   resolveThemePreference,
@@ -25,6 +27,8 @@ import {
 } from "./theme-mode-runtime"
 import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime"
 
+export type MarwesProviderChildren = React.ReactNode | ((mwTheme: MwTheme) => React.ReactNode)
+
 export type MarwesProviderProps = {
   theme?: ThemeInput
   defaultPreference?: ThemePreference
@@ -40,7 +44,7 @@ export type MarwesProviderProps = {
   attribute?: ThemeAttribute
   disableTransitionOnChange?: boolean
   variableStrategy?: ThemeVariableStrategy
-  children: React.ReactNode
+  children: MarwesProviderChildren
 }
 
 export function MarwesProvider({
@@ -60,7 +64,7 @@ export function MarwesProvider({
   variableStrategy = "inline",
   children,
 }: MarwesProviderProps) {
-  const rootRef = React.useRef<HTMLDivElement>(null)
+  const [providerElement, setProviderElement] = React.useState<HTMLDivElement | null>(null)
   const [internalPreference, setInternalPreference] = React.useState<ThemePreference>(
     defaultPreference ?? defaultMode ?? MwThemeMode.light,
   )
@@ -124,6 +128,8 @@ export function MarwesProvider({
     () => resolveThemeInput({ ...(theme ?? {}), mode: activeMode }),
     [activeMode, theme],
   )
+  const mwTheme = React.useMemo(() => createMwTheme(resolved), [resolved])
+  const renderedChildren = typeof children === "function" ? children(mwTheme) : children
   const rootStyle = React.useMemo(() => {
     if (variableStrategy === "style-tag") return undefined
     return themeToRootStyle(resolved) as React.CSSProperties
@@ -131,10 +137,10 @@ export function MarwesProvider({
 
   React.useEffect(() => {
     if (variableStrategy === "style-tag") return
-    if (rootRef.current) {
-      applyThemeToElement(rootRef.current, resolved)
+    if (providerElement) {
+      applyThemeToElement(providerElement, resolved)
     }
-  }, [resolved, variableStrategy])
+  }, [providerElement, resolved, variableStrategy])
 
   React.useEffect(() => {
     if (target === "provider") return
@@ -142,7 +148,7 @@ export function MarwesProvider({
     const apply = () => {
       applyModeAttribute({
         target,
-        providerElement: rootRef.current,
+        providerElement: null,
         mode: activeMode,
         attribute,
       })
@@ -169,20 +175,31 @@ export function MarwesProvider({
       setMode,
       setPreference,
       toggleMode,
+      providerElement,
     }),
-    [activeMode, activePreference, resolved, setMode, setPreference, systemMode, toggleMode],
+    [
+      activeMode,
+      activePreference,
+      providerElement,
+      resolved,
+      setMode,
+      setPreference,
+      systemMode,
+      toggleMode,
+    ],
   )
 
   return (
     <MarwesContext.Provider value={contextValue}>
       <div
-        ref={rootRef}
+        ref={setProviderElement}
         className={`mw-theme--${resolved.mode}`}
         data-marwes-theme="true"
         data-marwes-mode={resolved.mode}
+        data-marwes-personality={resolved.personality}
         style={rootStyle}
       >
-        {children}
+        {renderedChildren}
       </div>
     </MarwesContext.Provider>
   )

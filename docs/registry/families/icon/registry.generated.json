@@ -37,6 +37,11 @@
       "packages/vue/src/components/icon/icon.ts",
       "packages/vue/src/components/icon/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/icon/Icon.svelte",
+      "packages/svelte/src/lib/components/icon/index.ts",
+      "packages/svelte/src/lib/components/icon/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/icon/__tests__/icon-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/icon/__tests__/icon-taxonomy.test.ts",
@@ -48,6 +53,12 @@
       "apps/storybook-vue/src/stories/icon/__tests__/icon-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/icon/icon.stories.ts",
       "apps/storybook-vue/src/stories/icon/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/icon/__tests__/icon-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/icon/icon.stories.ts",
+      "apps/storybook-svelte/src/stories/icon/IconGallery.svelte",
+      "apps/storybook-svelte/src/stories/icon/Introduction.mdx"
     ],
     "contracts": ["tests/contracts/icon.contract.ts"]
   },
@@ -130,8 +141,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

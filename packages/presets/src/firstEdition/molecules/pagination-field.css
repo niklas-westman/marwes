@@ -1,0 +1,23 @@
+/**
+ * PaginationField (Molecule)
+ *
+ * Layout for label + (description) + pagination + (error).
+ */
+
+.mw-pagination-field {
+  display: grid;
+  gap: var(--mw-density-field-gap);
+}
+
+.mw-pagination-field__label {
+  display: block;
+  text-align: left;
+}
+
+.mw-pagination-field__description {
+  color: var(--mw-color-text-muted, #595959);
+}
+
+.mw-pagination-field__error {
+  color: var(--mw-color-danger-base, #c4302b);
+}

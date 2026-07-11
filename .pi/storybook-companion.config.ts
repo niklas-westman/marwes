@@ -96,6 +96,9 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
         "notification-badge": "Badge/Purpose/Notification",
       },
     },
+    banner: {
+      canonicalComponentStems: ["banner"],
+    },
     accordion: {
       titleByStem: {
         accordion: "Accordion/Atom",

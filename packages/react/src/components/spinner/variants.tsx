@@ -8,6 +8,15 @@ export type ButtonSpinnerProps = SpinnerProps & {
   inverted?: boolean
 }
 
+/**
+ * ButtonSpinner — purpose variant of Spinner for in-button loading states.
+ *
+ * Defaults (`variant="classic"`, `size="xs"`, `decorative=true`) are
+ * intentionally overridable: the `Button` atom forwards
+ * `loading.spinnerVariant` through this prop. If you want a different
+ * loading look, just override the prop; use the base `Spinner` directly
+ * only when you need to escape the button-loading data-attributes.
+ */
 export function ButtonSpinner(props: ButtonSpinnerProps): React.ReactElement {
   const { inverted = false, style, dataAttributes, ...spinnerProps } = props
 
@@ -37,6 +46,12 @@ export function ButtonSpinner(props: ButtonSpinnerProps): React.ReactElement {
 
 export type EmptyStateSpinnerProps = SpinnerProps
 
+/**
+ * EmptyStateSpinner — purpose variant of Spinner for empty/loading-state regions.
+ *
+ * Defaults (`variant="dots-round"`, `size="lg"`, `decorative=true`) are
+ * intentionally overridable — same rationale as `ButtonSpinner`.
+ */
 export function EmptyStateSpinner(props: EmptyStateSpinnerProps): React.ReactElement {
   return (
     <Spinner

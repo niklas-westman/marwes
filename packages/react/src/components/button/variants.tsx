@@ -118,9 +118,8 @@ export function DestructiveButton(props: DestructiveButtonProps) {
     <Button
       {...forwardedProps}
       as="button"
-      variant={ButtonVariant.primary}
+      variant={ButtonVariant.danger}
       action={ButtonAction.delete}
-      error
       confirmation={confirmation}
       dataAttributes={createPurposeButtonDataAttributes(
         "destructive",

@@ -13,6 +13,7 @@ const tabPropKeys = [
   "selected",
   "disabled",
   "ariaLabel",
+  "label",
   "ariaControls",
   "className",
   "onClick",
@@ -28,6 +29,7 @@ export const Tab = defineComponent(
       if (props.selected !== undefined) opts.selected = props.selected
       if (props.disabled !== undefined) opts.disabled = props.disabled
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
+      if (props.label !== undefined) opts.label = props.label
       if (props.ariaControls !== undefined) opts.ariaControls = props.ariaControls
       return createTabRecipe(opts)
     })

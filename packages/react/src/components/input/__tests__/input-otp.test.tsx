@@ -8,7 +8,7 @@ import type * as React from "react"
 import { describe, expect, it, vi } from "vitest"
 import { runInputOtpContract } from "../../../../../../tests/contracts/input-otp.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
-import { InputOtp } from "../input-otp"
+import { InputOtpField } from "../input-otp-field"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
@@ -20,13 +20,15 @@ runInputOtpContract("react", {
       label: args.label ?? "Verification code",
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
-      ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
-      ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
-      ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
-      ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
+      inputOtp: {
+        ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
+      },
     }
 
-    renderWithProvider(<InputOtp {...inputOtpProps} />)
+    renderWithProvider(<InputOtpField {...inputOtpProps} />)
   },
   getByRole(role, options) {
     return screen.getByRole(role, options) as HTMLInputElement
@@ -35,10 +37,10 @@ runInputOtpContract("react", {
     return screen.getByText(text)
   },
   queryHelperRegion() {
-    return document.querySelector(".mw-input-otp__helper")
+    return document.querySelector(".mw-input-otp-field__helper")
   },
   queryErrorRegion() {
-    return document.querySelector(".mw-input-otp__error")
+    return document.querySelector(".mw-input-otp-field__error")
   },
   queryOtpCells() {
     return Array.from(document.querySelectorAll(".mw-input-otp__cell")) as HTMLElement[]
@@ -51,7 +53,10 @@ runInputOtpContract("react", {
 describe("React InputOtp", () => {
   it("renders six OTP cells with label and helper text", () => {
     renderWithProvider(
-      <InputOtp label="Verification code" helperText="Enter the 6-digit code sent to your email" />,
+      <InputOtpField
+        label="Verification code"
+        helperText="Enter the 6-digit code sent to your email"
+      />,
     )
 
     const inputElement = screen.getByRole("textbox", { name: /verification code/i })
@@ -74,7 +79,7 @@ describe("React InputOtp", () => {
     const onValueChange = vi.fn()
     const user = userEvent.setup()
 
-    renderWithProvider(<InputOtp label="Verification code" onValueChange={onValueChange} />)
+    renderWithProvider(<InputOtpField label="Verification code" inputOtp={{ onValueChange }} />)
 
     const inputElement = screen.getByRole("textbox", { name: /verification code/i })
 
@@ -95,7 +100,7 @@ describe("React InputOtp", () => {
   })
 
   it("marks the hidden input invalid and wires the error region", () => {
-    renderWithProvider(<InputOtp label="Verification code" error="Code expired" />)
+    renderWithProvider(<InputOtpField label="Verification code" error="Code expired" />)
 
     const inputElement = screen.getByRole("textbox", { name: /verification code/i })
     const errorElement = screen.getByText("Code expired")

@@ -23,6 +23,7 @@ import {
   DropdownButton,
   EditButton,
   FilterButton,
+  IconButton,
   LinkButton,
   PrimaryButton,
   RefreshButton,
@@ -141,6 +142,8 @@ describe("React adapter specifics: Button", () => {
     expect(spinnerElement?.getAttribute("style")).toContain(
       "--mw-spinner-indicator-color: currentColor",
     )
+    expect(buttonElement).toHaveAttribute("data-has-affordance", "true")
+    expect(buttonElement.querySelector(".mw-btn__label")).toHaveTextContent("Saving")
     expect(buttonElement.querySelector(".mw-icon")).toBeNull()
   })
 
@@ -181,6 +184,12 @@ describe("React adapter specifics: Button", () => {
     expect(screen.queryByText("Create order")).toBeNull()
     expect(spinnerElement?.getAttribute("data-variant")).toBe("dual")
     expect(buttonElement.querySelector(".mw-icon")).toBeNull()
+  })
+
+  it("lets IconButton use label as the accessible name", () => {
+    renderWithProvider(<IconButton icon="x" label="Close" />)
+
+    expect(screen.getByRole("button", { name: /close/i })).toHaveAttribute("aria-label", "Close")
   })
 
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {
@@ -254,5 +263,16 @@ describe("React adapter specifics: Button", () => {
     const button = screen.getByRole("button", { name: /styled/i })
     expect(button).toHaveClass("custom-class")
     expect(button.className).toContain("mw-btn")
+  })
+
+  it("renders IconButton as an accessible square icon-only control", () => {
+    renderWithProvider(<IconButton icon="x" ariaLabel="Close" />)
+
+    const button = screen.getByRole("button", { name: /close/i })
+
+    expect(button).toHaveClass("mw-btn--neutral")
+    expect(button).toHaveAttribute("data-icon-only", "true")
+    expect(button.querySelector(".mw-btn__label")).toBeNull()
+    expect(button.querySelector("svg")).not.toBeNull()
   })
 })

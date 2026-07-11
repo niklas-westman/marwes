@@ -16,7 +16,8 @@ export interface SwitchOptions {
   disabled?: boolean
   /** Required when no visible label text is provided */
   ariaLabel?: string
-  ariaLabelledby?: string
+  label?: string
+  ariaLabelledBy?: string
   ariaDescribedBy?: string
 }
 
@@ -25,7 +26,7 @@ export interface SwitchA11yProps {
   ariaChecked: boolean
   ariaDisabled?: true
   ariaLabel?: string
-  ariaLabelledby?: string
+  ariaLabelledBy?: string
   ariaDescribedBy?: string
 }
 

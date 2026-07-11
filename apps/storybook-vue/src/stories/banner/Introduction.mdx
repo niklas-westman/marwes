@@ -1,0 +1,86 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Banner/Introduction" />
+
+# Banner
+
+A persistent, page-level status message component for inline announcements,
+system updates, or required actions.
+
+## Usage
+
+```vue
+<script setup lang="ts">
+import { Banner, Button } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <!-- Basic info banner -->
+  <Banner variant="info">
+    Your account has been updated successfully.
+  </Banner>
+
+  <!-- With CTA action -->
+  <Banner variant="warning">
+    Your subscription expires in 3 days.
+    <template #action>
+      <Button size="sm">Review</Button>
+    </template>
+  </Banner>
+
+  <!-- Dismissible with callback -->
+  <Banner variant="success" @dismiss="visible = false">
+    Changes saved.
+  </Banner>
+
+  <!-- Without icon -->
+  <Banner variant="neutral" :show-icon="false">
+    Maintenance scheduled for tonight.
+  </Banner>
+</template>
+```
+
+## Variants
+
+| Variant | Use for | a11y role |
+| --- | --- | --- |
+| `neutral` | General announcements | `status` (polite) |
+| `info` | Informational messages | `status` (polite) |
+| `success` | Positive confirmations | `status` (polite) |
+| `warning` | Caution, upcoming deadlines | `alert` (assertive) |
+| `error` | Errors, critical issues | `alert` (assertive) |
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `BannerVariant` | `"neutral"` | Visual intent |
+| `show-icon` | `boolean` | `true` | Show leading icon |
+| `dismissible` | `boolean` | `true` | Show close button |
+| `aria-label` | `string` | — | Accessible label for the banner region |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| `default` | Banner message content |
+| `#action` | CTA action content |
+| `#icon` | Custom icon (defaults to info circle) |
+
+## Events
+
+| Event | Description |
+| --- | --- |
+| `@dismiss` | Emitted when dismiss button is clicked |
+
+## When to use
+
+- **Banner**: Persistent page-level messages that stay until dismissed
+- **Toast**: Transient feedback that auto-dismisses
+- **Dialog**: Blocking confirmations that require user action
+
+## Figma
+
+Single token-driven component. Color → Banner states · Toggle Show icon / Show CTA / Show Close.
+
+Reference: `.figma/marwes/components/banner.json`

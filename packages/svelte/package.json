@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": true,
   "main": "./dist/index.js",
   "files": ["dist", "README.md", "CHANGELOG.md"],
   "svelte": "./dist/index.js",
@@ -35,7 +35,8 @@
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@marwes-ui/core": "workspace:*"
+    "@marwes-ui/core": "workspace:*",
+    "@marwes-ui/presets": "workspace:*"
   },
   "peerDependencies": {
     "svelte": "^5.20.0"
@@ -46,10 +47,10 @@
     "@testing-library/svelte": "^5.0.0",
     "jsdom": "26.1.0",
     "rimraf": "6.1.2",
-    "svelte": "^5.20.0",
+    "svelte": "5.56.3",
     "svelte-check": "^4.0.0",
     "typescript": "5.9.3",
     "vite": "^6.0.0",
-    "vitest": "4.0.18"
+    "vitest": "4.1.8"
   }
 }

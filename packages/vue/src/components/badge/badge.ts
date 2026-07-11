@@ -10,7 +10,14 @@ export type BadgeProps = BadgeOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const badgePropKeys = ["variant", "ariaLabel", "className", "id", "dataAttributes"] as const
+const badgePropKeys = [
+  "variant",
+  "ariaLabel",
+  "label",
+  "className",
+  "id",
+  "dataAttributes",
+] as const
 
 export const Badge = defineComponent(
   (props: BadgeProps, { slots }) => {
@@ -20,6 +27,7 @@ export const Badge = defineComponent(
       const opts: BadgeOptions = {}
       if (props.variant !== undefined) opts.variant = props.variant
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
+      if (props.label !== undefined) opts.label = props.label
       return createBadgeRecipe(opts)
     })
 

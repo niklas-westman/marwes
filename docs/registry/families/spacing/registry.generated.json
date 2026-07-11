@@ -35,6 +35,12 @@
       "packages/vue/src/components/spacing/index.ts",
       "packages/vue/src/components/spacing/spacing.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/spacing/index.ts",
+      "packages/svelte/src/lib/components/spacing/Spacer.svelte",
+      "packages/svelte/src/lib/components/spacing/Spacing.svelte",
+      "packages/svelte/src/lib/components/spacing/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/spacing/__tests__/spacing-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/spacing/__tests__/spacing-taxonomy.test.ts",
@@ -46,6 +52,12 @@
       "apps/storybook-vue/src/stories/spacing/__tests__/spacing-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/spacing/Introduction.mdx",
       "apps/storybook-vue/src/stories/spacing/spacing.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/spacing/__tests__/spacing-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/spacing/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/spacing/spacing.stories.ts",
+      "apps/storybook-svelte/src/stories/spacing/SpacingShowcase.svelte"
     ],
     "contracts": ["tests/contracts/spacing.contract.ts"]
   },
@@ -86,8 +98,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

@@ -1,5 +1,6 @@
-import { Accordion } from "@marwes-ui/react"
 import { useState } from "react"
+// Atom is no longer publicly exported; deep-import for playground demo.
+import { Accordion } from "../../../../packages/react/src/components/accordion/accordion"
 import { PreviewSection, SectionDescription, SectionTitle } from "./section.styles"
 
 const FAQ = [

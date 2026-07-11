@@ -11,6 +11,9 @@ const meta = {
   },
   argTypes: {
     size: { control: "select", options: ["small", "medium", "large"] },
+    surfaceWidth: { control: "text" },
+    tone: { control: "select", options: ["default", "calm"] },
+    divider: { control: "select", options: ["visible", "hidden"] },
   },
 } satisfies Meta<typeof DialogStory>
 
@@ -33,5 +36,16 @@ export const LockedDismissal: Story = {
     closeOnEscape: false,
     closeOnScrimClick: false,
     size: "small",
+  },
+}
+
+export const CalmSurface: Story = {
+  args: {
+    title: "Review export",
+    description: "Confirm the file settings before the export starts.",
+    surfaceWidth: "640px",
+    tone: "calm",
+    divider: "hidden",
+    size: "medium",
   },
 }

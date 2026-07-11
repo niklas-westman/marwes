@@ -10,7 +10,8 @@ export function resolveTabA11y(opts: TabOptions): TabA11yProps {
   }
 
   if (opts.disabled) a11y.ariaDisabled = true
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.ariaControls) a11y.ariaControls = opts.ariaControls
 
   return a11y

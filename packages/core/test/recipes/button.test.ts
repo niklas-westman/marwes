@@ -49,6 +49,39 @@ describe("createButtonRecipe", () => {
     expect(kit.a11y.ariaDisabled).toBeUndefined()
     expect(kit.a11y.disabled).toBeUndefined()
     expect(kit.blockClick).toBe(false)
+    expect(kit.dataAttributes?.["data-has-affordance"]).toBe("true")
+  })
+
+  it("marks buttons with icons as having an affordance for label layout", () => {
+    const kit = createButtonRecipe({
+      as: "button",
+      iconLeft: "plus",
+    })
+
+    expect(kit.dataAttributes?.["data-has-affordance"]).toBe("true")
+  })
+
+  it("marks icon-only buttons for square control styling", () => {
+    const kit = createButtonRecipe({
+      as: "button",
+      ariaLabel: "Close",
+      iconOnly: true,
+      iconLeft: "x",
+    })
+
+    expect(kit.dataAttributes?.["data-icon-only"]).toBe("true")
+  })
+
+  it("uses label as an accessible-name alias for icon-only buttons", () => {
+    const kit = createButtonRecipe({
+      as: "button",
+      label: "Close",
+      iconOnly: true,
+      iconLeft: "x",
+    })
+
+    expect(kit.a11y.ariaLabel).toBe("Close")
+    expect(kit.a11y.title).toBe("Close")
   })
 
   it("builds anchor render kit and blocks navigation when loading disables interaction", () => {

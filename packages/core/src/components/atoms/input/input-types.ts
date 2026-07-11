@@ -24,7 +24,11 @@ export type InputOptions = {
   invalid?: boolean
   describedBy?: string
 
+  /** Accessible name for standalone inputs. Field components should use visible `label`. */
   ariaLabel?: string
+  /** ID of an element whose text labels the input. Wins over `ariaLabel` if both are set. */
+  ariaLabelledBy?: string
+  label?: string
 }
 
 export type InputA11yProps = {
@@ -41,6 +45,7 @@ export type InputA11yProps = {
   placeholder?: string
 
   ariaLabel?: string
+  ariaLabelledBy?: string
   ariaInvalid?: true
   ariaDescribedBy?: string
 }

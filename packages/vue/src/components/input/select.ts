@@ -4,7 +4,7 @@ import type {
   CssVars,
   SelectOptions,
 } from "@marwes-ui/core"
-import { createSelectRecipe, resolveSelectMode } from "@marwes-ui/core"
+import { createSelectRecipe } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -55,6 +55,8 @@ const selectPropKeys = [
   "invalid",
   "describedBy",
   "ariaLabel",
+  "ariaLabelledBy",
+  "label",
   "onValueChange",
   "className",
 ] as const
@@ -63,7 +65,6 @@ export const Select = defineComponent(
   (props: SelectProps, { emit }) => {
     const attrs = useAttrs()
     const kit = computed(() => createSelectRecipe(props))
-    const mode = computed(() => resolveSelectMode(props))
     const uncontrolledValue = ref(getInitialSelectValue(props))
     const currentValue = computed(() => props.modelValue ?? props.value ?? uncontrolledValue.value)
     const placeholderSelected = computed(
@@ -90,6 +91,7 @@ export const Select = defineComponent(
           disabled: renderKit.a11y.disabled,
           required: renderKit.a11y.required,
           "aria-label": renderKit.a11y.ariaLabel,
+          "aria-labelledby": renderKit.a11y.ariaLabelledBy,
           "aria-invalid": renderKit.a11y.ariaInvalid,
           "aria-describedby": renderKit.a11y.ariaDescribedBy,
           value: currentValue.value,
@@ -126,10 +128,6 @@ export const Select = defineComponent(
           ),
         ],
       )
-
-      if (mode.value === "native") {
-        return selectElement
-      }
 
       return h("span", { class: "mw-select__control" }, [
         selectElement,

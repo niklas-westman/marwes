@@ -5,9 +5,9 @@
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { describe, expect, it } from "vitest"
 import { defineComponent, h, ref } from "vue"
-import { Slider, type SliderProps } from ".."
 import { runSliderContract } from "../../../../../../tests/contracts/slider.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Slider, type SliderProps } from "../slider"
 import { SliderField, type SliderFieldProps } from "../slider-field"
 
 function renderWithProvider(child: () => unknown) {

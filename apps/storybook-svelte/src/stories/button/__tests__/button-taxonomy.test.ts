@@ -14,10 +14,14 @@ function readStoryFile(fileName: string): string {
 describe("Svelte button story taxonomy", () => {
   it("uses Atom title for Button story", () => {
     const buttonStory = readStoryFile("button.stories.ts")
+    const iconButtonStory = readStoryFile("icon-button.stories.ts")
 
     expect(buttonStory).toContain('title: "Buttons/Atom/Button"')
     expect(buttonStory).toContain("component: Button")
     expect(buttonStory).toMatch(/export const\s+Basic\s*:/)
+    expect(iconButtonStory).toContain('title: "Button/Molecule/IconButton"')
+    expect(iconButtonStory).toContain("component: IconButton")
+    expect(iconButtonStory).toMatch(/export const\s+Basic\s*:/)
   })
 
   it("keeps SuccessButton under the purpose taxonomy", () => {

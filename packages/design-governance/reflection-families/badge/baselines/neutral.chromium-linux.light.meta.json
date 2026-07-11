@@ -1,0 +1,36 @@
+{
+  "baseline": "neutral.chromium-linux.light.png",
+  "caseFingerprint": "4f2b21b782b0008f926b8d820d8e6a5310599ebacc2c153d526046db9b744145",
+  "caseId": "badge.neutral",
+  "createdAt": "2026-06-13T16:20:08.677Z",
+  "exportScale": 1,
+  "family": "badge",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/badge/neutral/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "3872:40087",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 3339,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "21ef629c0c309e3984fdea0b49966eb6c514ed897a7edd77c54fbf969454b354",
+  "schemaVersion": 1,
+  "sourceFingerprint": "e506a5f12343950a87603a54584af180e9e60fb3d6afae8a1c5f4f91e8da7866",
+  "sourceFrameId": "1364:11603",
+  "sourceNodeId": "3872:40088",
+  "sourceNodeIds": ["3872:40088"],
+  "variablesFingerprint": "a7cf1539726f4ac6de4c71d7a943abdfbdb5c036ee2f5a2cd6521cd07e653baa",
+  "viewport": "badge-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

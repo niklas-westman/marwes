@@ -72,6 +72,7 @@ export const AllSizes: Story = {
         { size: "sp-2", pixels: "2px" },
         { size: "sp-4", pixels: "4px" },
         { size: "sp-8", pixels: "8px" },
+        { size: "sp-12", pixels: "12px" },
         { size: "sp-16", pixels: "16px" },
         { size: "sp-24", pixels: "24px" },
         { size: "sp-32", pixels: "32px" },

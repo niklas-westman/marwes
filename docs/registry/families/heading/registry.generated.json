@@ -36,6 +36,13 @@
       "packages/vue/src/components/heading/heading-variants.ts",
       "packages/vue/src/components/heading/index.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/heading/H1.svelte",
+      "packages/svelte/src/lib/components/heading/H2.svelte",
+      "packages/svelte/src/lib/components/heading/H3.svelte",
+      "packages/svelte/src/lib/components/heading/index.ts",
+      "packages/svelte/src/lib/components/heading/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/heading/__tests__/heading-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/heading/__tests__/heading-taxonomy.test.ts",
@@ -47,6 +54,12 @@
       "apps/storybook-vue/src/stories/heading/__tests__/heading-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/heading/heading.stories.ts",
       "apps/storybook-vue/src/stories/heading/Introduction.mdx"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/heading/__tests__/heading-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/heading/heading.stories.ts",
+      "apps/storybook-svelte/src/stories/heading/HeadingShowcase.svelte",
+      "apps/storybook-svelte/src/stories/heading/Introduction.mdx"
     ],
     "contracts": ["tests/contracts/heading.contract.ts"]
   },
@@ -80,8 +93,6 @@
       ".figma/marwes/pages/-typography/README.md",
       ".figma/marwes/components/component-heading.json",
       ".figma/marwes/pages/-banner/component-heading_1932-7061.json",
-      ".figma/marwes/pages/-banner/component-heading_1935-7184.json",
-      ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15754.json",
       ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15800.json",
       ".figma/marwes/pages/additional-to-this-file/component-heading_1918-15833.json"
     ],
@@ -104,7 +115,7 @@
       "instrumentSansDarkSection": "1368:5717",
       "componentHeadingComponent": "1918:15754"
     },
-    "figmaTokens": ["Heading/H1", "Heading/H2", "Heading/H3"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["h1", "h2", "h3"],
       "interactionStates": ["light", "dark", "typography-scale", "documentation-scaffold"]
@@ -113,8 +124,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

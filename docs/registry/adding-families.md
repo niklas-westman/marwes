@@ -106,7 +106,7 @@ Update:
 Add the new family to the registry source map so the generator can discover:
 - core files
 - preset CSS
-- React/Vue directories
+- React/Vue/Svelte directories
 - Storybook directories
 - contracts
 - audit doc path

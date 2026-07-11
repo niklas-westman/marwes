@@ -1,20 +1,29 @@
-export { Input } from "./input"
-export type { InputProps } from "./input"
+// `Input` (the atom) is intentionally NOT re-exported here.
+// Use `InputField` (or a purpose variant) instead. Internal consumers
+// can deep-import "./input" directly.
 
-export { Select } from "./select"
-export type { SelectProps, SelectAppearance, SelectOption } from "./select"
+// `Select` (the atom) is intentionally NOT re-exported here.
+// Use `SelectField` (or `DropdownField`) instead. Internal consumers
+// can deep-import "./select" directly.
+export type { SelectAppearance, SelectOption } from "./select"
 
-export { Textarea } from "./textarea"
-export type { TextareaProps } from "./textarea"
+// `Textarea` (the atom) is intentionally NOT re-exported here.
+// Use `TextareaField` instead. Internal consumers can deep-import
+// "./textarea" directly.
 
-export { RichText } from "./rich-text"
-export type { RichTextProps } from "./rich-text"
+// `RichText` (the atom) is intentionally NOT re-exported here.
+// Use `RichTextField` instead. Internal consumers can deep-import
+// "./rich-text" directly.
 
 export { InputField } from "./input-field"
 export type { InputFieldProps } from "./input-field"
 
-export { InputOtp } from "./input-otp"
-export type { InputOtpProps } from "./input-otp"
+// `InputOtp` (the bare atom — cells-only render) is intentionally NOT
+// re-exported here. Use `InputOtpField` instead. Internal consumers can
+// deep-import "./input-otp" directly.
+
+export { InputOtpField } from "./input-otp-field"
+export type { InputOtpFieldProps } from "./input-otp-field"
 
 export { SelectField } from "./select-field"
 export type { SelectFieldProps, SelectFieldVariant } from "./select-field"

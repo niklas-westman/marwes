@@ -2,7 +2,7 @@ import { buildSliderFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Slider, type SliderProps } from "./slider"
 
 export type SliderFieldLabelPosition = "top" | "inline"
@@ -113,7 +113,7 @@ export const SliderField = defineComponent(
       return h(
         "span",
         { class: `mw-slider-field__edge-value mw-slider-field__edge-value--${position}` },
-        [h(Paragraph, { size: "sm" }, { default: () => [value] })],
+        [h(Text, { variant: "caption" }, { default: () => [value] })],
       )
     }
 
@@ -128,13 +128,13 @@ export const SliderField = defineComponent(
         [
           h("div", { class: "mw-slider-field__header" }, [
             h("div", { class: "mw-slider-field__label", id: a11yIds.value.labelId }, [
-              h(Paragraph, { size: "md" }, { default: labelContent }),
+              h(Text, { variant: "label" }, { default: labelContent }),
             ]),
           ]),
 
           hasDescription.value
             ? h("div", { class: "mw-slider-field__description", id: a11yIds.value.descriptionId }, [
-                h(Paragraph, { size: "sm" }, { default: descriptionContent }),
+                h(Text, { variant: "caption" }, { default: descriptionContent }),
               ])
             : null,
 
@@ -168,7 +168,7 @@ export const SliderField = defineComponent(
                   id: a11yIds.value.errorId,
                   "aria-live": "polite",
                 },
-                [h(Paragraph, { size: "sm" }, { default: errorContent })],
+                [h(Text, { variant: "caption" }, { default: errorContent })],
               )
             : null,
         ],

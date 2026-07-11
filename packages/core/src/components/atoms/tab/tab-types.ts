@@ -9,6 +9,7 @@ export interface TabOptions {
   disabled?: boolean
   /** For icon-only tabs that have no visible label */
   ariaLabel?: string
+  label?: string
   /** id of the associated tabpanel this tab controls */
   ariaControls?: string
 }

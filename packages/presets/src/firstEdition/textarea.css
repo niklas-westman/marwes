@@ -4,17 +4,20 @@
  */
 
 .mw-textarea {
-  min-height: calc(var(--mw-density-height) * 3);
+  box-sizing: border-box;
+  min-height: 100px;
   padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
-  background: var(--mw-color-surface);
+  background: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
-  width: 260px;
-  line-height: 1.5;
-  resize: var(--mw-textarea-resize, vertical);
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 16px;
+  resize: var(--mw-textarea-resize, none);
   transition: border-color 150ms ease, outline 150ms ease;
 }
 
@@ -59,5 +62,5 @@
 }
 
 .mw-theme--dark .mw-textarea {
-  background: var(--mw-color-surface);
+  background: var(--mw-color-surface-primary);
 }

@@ -1,0 +1,32 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="SkipLink/Introduction" />
+
+# SkipLink
+
+`SkipLink` is a visually hidden anchor that becomes visible on keyboard focus,
+letting keyboard-only users jump directly to a target landmark (typically
+`<main>`) without tabbing through the header on every page visit.
+
+## When to use
+
+- Top of every page that has a persistent header or navigation
+- Any page with significant non-content chrome above the main region
+
+## Usage
+
+```svelte
+<script lang="ts">
+  import { SkipLink } from "@marwes-ui/svelte"
+</script>
+
+<SkipLink href="#main">Skip to main content</SkipLink>
+<Header />
+<main id="main">...</main>
+```
+
+## Accessibility
+
+- Visually hidden via clip-path until focused; revealed on focus-visible
+- Renders as a native `<a>` so it's keyboard-focusable and screen-reader-discoverable
+- The target landmark must own the matching `id` (e.g. `<main id="main">`)

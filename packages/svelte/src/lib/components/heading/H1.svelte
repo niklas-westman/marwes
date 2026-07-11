@@ -1,3 +1,13 @@
+<!--
+  H1 (Heading Level 1) — semantic top-level heading rendered as `<h1>`.
+
+  @remarks
+  Marwes officially styles H1-H3 only. For semantic H4-H6 (deep section
+  nesting, accessibility outlines), render
+  `<Text headingLevel={4} variant="..." />` — it produces the correct
+  heading tag while letting the consumer pick the visual variant.
+  Type your wrappers against `SemanticHeadingLevel` from `@marwes-ui/core`.
+-->
 <script lang="ts">
   import { headingRecipe } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";

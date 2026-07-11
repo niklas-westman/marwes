@@ -6,12 +6,13 @@
  */
 import { describe, expect, it } from "vitest"
 import { lightThemeDefaults } from "../../src/theme/theme-defaults"
-import { ThemeMode } from "../../src/theme/theme-types"
+import { TextVariant, ThemeMode } from "../../src/theme/theme-types"
 import type {
   ColorInput,
   ColorRole,
   SecondaryColorRole,
   Theme,
+  ThemeBreakpoints,
   ThemeInput,
   ThemeInputColor,
 } from "../../src/theme/theme-types"
@@ -82,14 +83,24 @@ describe("ThemeInputColor", () => {
   it("accepts plain string for surface fields", () => {
     const color: Partial<ThemeInputColor> = {
       background: "#FFFFFF",
+      surfacePrimary: "#FFFFFF",
+      surfaceBrand: "#EEEEFF",
       surfaceElevated: "#FFFFFF",
       textSubtle: "#595959",
+      textLink: "#2527CA",
+      iconMuted: "#A3A3A3",
+      borderLow: "#00000026",
       borderStrong: "#A3A3A3",
       focus: "#2F31FC",
     }
     expect(color.background).toBe("#FFFFFF")
+    expect(color.surfacePrimary).toBe("#FFFFFF")
+    expect(color.surfaceBrand).toBe("#EEEEFF")
     expect(color.surfaceElevated).toBe("#FFFFFF")
     expect(color.textSubtle).toBe("#595959")
+    expect(color.textLink).toBe("#2527CA")
+    expect(color.iconMuted).toBe("#A3A3A3")
+    expect(color.borderLow).toBe("#00000026")
     expect(color.borderStrong).toBe("#A3A3A3")
   })
 })
@@ -134,6 +145,17 @@ describe("ThemeInputColor — deprecated never fields", () => {
   })
 })
 
+describe("TextVariant", () => {
+  it("exposes runtime text variant values", () => {
+    expect(TextVariant.display).toBe("display")
+    expect(TextVariant.label).toBe("label")
+    expect(TextVariant.labelSmall).toBe("label-small")
+    expect(TextVariant.caption).toBe("caption")
+    expect(TextVariant.overline).toBe("overline")
+    expect(TextVariant.micro).toBe("micro")
+  })
+})
+
 describe("ThemeInput", () => {
   it("accepts a minimal theme with just primary color", () => {
     const input: ThemeInput = { color: { primary: "#5B8CFF" } }
@@ -165,5 +187,30 @@ describe("ThemeInput", () => {
   it("accepts empty object (all fields optional)", () => {
     const input: ThemeInput = {}
     expect(input.mode).toBeUndefined()
+  })
+
+  it("accepts partial breakpoint overrides", () => {
+    const input: ThemeInput = { breakpoint: { tablet: 1024 } }
+    expect(input.breakpoint?.tablet).toBe(1024)
+  })
+
+  it("rejects unknown breakpoint names", () => {
+    const input: ThemeInput = {
+      breakpoint: {
+        // @ts-expect-error — breakpoint names are mobile/tablet/desktop/wideDesktop only.
+        laptop: 1100,
+      },
+    }
+    expect(input.breakpoint).toBeDefined()
+  })
+
+  it("exposes the breakpoint contract", () => {
+    const breakpoints: ThemeBreakpoints = {
+      mobile: 640,
+      tablet: 900,
+      desktop: 1200,
+      wideDesktop: 1440,
+    }
+    expect(breakpoints.wideDesktop).toBe(1440)
   })
 })

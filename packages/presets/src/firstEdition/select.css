@@ -21,7 +21,7 @@
   display: inline-flex;
   align-items: center;
   width: auto;
-  min-width: 96px;
+  min-width: 0;
   max-width: 100%;
   max-inline-size: 100%;
 }
@@ -33,17 +33,20 @@
   field-sizing: fixed;
   box-sizing: border-box;
   display: block;
-  min-height: 34px;
-  padding: 8px 32px 8px 12px; /* off-scale — no token */
+  height: 32px;
+  min-height: 32px;
+  padding: 0 calc(var(--mw-spacing-sp-12) + 16px + var(--mw-spacing-sp-4)) 0 var(--mw-spacing-sp-12);
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
-  background-color: var(--mw-color-surface);
+  background-color: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: 14px;
   line-height: 16px;
-  width: auto;
-  min-width: 96px;
+  /* Fill wrapper so the absolutely-positioned chevron aligns with the
+     visible input edge when consumers size .mw-select__control. */
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   max-inline-size: 100%;
   white-space: nowrap;
@@ -55,8 +58,10 @@
 .mw-select__control-icon {
   position: absolute;
   top: 50%;
-  right: 12px;
+  right: var(--mw-spacing-sp-12);
   transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
   pointer-events: none;
   color: var(--mw-color-text-muted);
 }
@@ -66,10 +71,9 @@
 }
 
 .mw-select--native {
-  appearance: auto;
-  -webkit-appearance: menulist;
-  -moz-appearance: menulist;
-  padding-right: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .mw-input-field__input-wrapper .mw-select__control {
@@ -88,12 +92,14 @@
   inline-size: 100%;
   min-inline-size: 0;
   max-inline-size: 100%;
-  min-height: 42px;
-  padding: 12px 40px 12px 16px; /* off-scale — no token */
+  height: var(--mw-density-height);
+  min-height: var(--mw-density-height);
+  padding: 0 calc(var(--mw-density-padding-x) + var(--mw-density-icon-size) + var(--mw-density-gap))
+    0 var(--mw-density-padding-x);
 }
 
-.mw-input-field__input-wrapper .mw-select--native {
-  padding: 12px; /* off-scale — native select keeps browser arrow padding */
+.mw-input-field__input-wrapper .mw-select__control-icon {
+  right: var(--mw-density-padding-x);
 }
 
 .mw-input-field__input-wrapper .mw-select-field__control {
@@ -129,7 +135,7 @@
   padding: 8px 12px; /* off-scale — no token */
   border-radius: var(--mw-ui-radius);
   border: 1px solid var(--mw-color-border);
-  background-color: var(--mw-color-surface);
+  background-color: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: 14px;
@@ -302,10 +308,6 @@
   color: var(--mw-color-text-disabled);
 }
 
-.mw-theme--dark .mw-select {
-  background-color: var(--mw-color-surface-elevated);
-}
-
 .mw-select-field__trigger:disabled .mw-select-field__trigger-icon {
   color: var(--mw-color-text-disabled);
 }
@@ -344,17 +346,10 @@
   opacity: 1;
 }
 
-.mw-input-field--select-date .mw-input-field__label p {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16px;
-}
-
-.mw-input-field--select-date .mw-input-field__helper p,
-.mw-input-field--select-date .mw-input-field__error p {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+.mw-input-field--select-date .mw-input-field__label .mw-text,
+.mw-input-field--select-date .mw-input-field__helper .mw-text,
+.mw-input-field--select-date .mw-input-field__error .mw-text {
+  color: inherit;
 }
 
 .mw-input-field--select-date .mw-select-field__trigger {

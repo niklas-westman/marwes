@@ -2,12 +2,13 @@ import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Checkbox, type CheckboxProps } from "./checkbox"
 
 export interface CheckboxGroupFieldOption {
   value: string
   label: string
+  description?: string
   disabled?: boolean
   indeterminate?: boolean
 }
@@ -155,14 +156,14 @@ export const CheckboxGroupField = defineComponent(
         },
         [
           h("legend", { class: "mw-checkbox-group-field__label", id: a11yIds.value.labelId }, [
-            h(Paragraph, { size: "md" }, { default: labelContent }),
+            h(Text, { variant: "label" }, { default: labelContent }),
           ]),
 
           hasDescription.value
             ? h(
                 "div",
                 { class: "mw-checkbox-group-field__description", id: a11yIds.value.descriptionId },
-                [h(Paragraph, { size: "sm" }, { default: descriptionContent })],
+                [h(Text, { variant: "caption" }, { default: descriptionContent })],
               )
             : null,
 
@@ -171,12 +172,17 @@ export const CheckboxGroupField = defineComponent(
             { class: "mw-checkbox-group-field__options" },
             props.options.map((option, index) => {
               const optionId = `${id.value}-option-${index}`
+              const optionLabelId = `${optionId}-label`
+              const optionDescriptionId = `${optionId}-description`
+              const hasOptionDescription = hasTextContent(option.description)
               const isOptionDisabled = props.disabled || option.disabled || false
               const isChecked = selectedValues.value.includes(option.value)
               const checkboxProps: Record<string, unknown> = {
                 ...(props.checkbox ?? {}),
                 id: optionId,
                 value: option.value,
+                ariaLabelledBy: optionLabelId,
+                ...(hasOptionDescription ? { ariaDescribedBy: optionDescriptionId } : {}),
                 checked: isChecked,
                 disabled: isOptionDisabled,
                 invalid: hasError.value,
@@ -198,13 +204,37 @@ export const CheckboxGroupField = defineComponent(
               return h(
                 "label",
                 {
-                  class: "mw-checkbox-group-field__option",
+                  class: mergeClassNames(
+                    "mw-checkbox-group-field__option",
+                    hasOptionDescription && "mw-checkbox-group-field__option--with-description",
+                  ),
                   for: optionId,
                   key: option.value,
                 },
                 [
                   h(Checkbox, checkboxProps),
-                  h(Paragraph, { size: "md" }, { default: () => [option.label] }),
+                  h("span", { class: "mw-checkbox-group-field__option-content" }, [
+                    h(
+                      Text,
+                      {
+                        id: optionLabelId,
+                        variant: "label",
+                        className: "mw-checkbox-group-field__option-label",
+                      },
+                      { default: () => [option.label] },
+                    ),
+                    hasOptionDescription
+                      ? h(
+                          Text,
+                          {
+                            id: optionDescriptionId,
+                            variant: "caption",
+                            className: "mw-checkbox-group-field__option-description",
+                          },
+                          { default: () => [option.description] },
+                        )
+                      : null,
+                  ]),
                 ],
               )
             }),
@@ -218,7 +248,7 @@ export const CheckboxGroupField = defineComponent(
                   id: a11yIds.value.errorId,
                   "aria-live": "polite",
                 },
-                [h(Paragraph, { size: "sm" }, { default: errorContent })],
+                [h(Text, { variant: "caption" }, { default: errorContent })],
               )
             : null,
         ],

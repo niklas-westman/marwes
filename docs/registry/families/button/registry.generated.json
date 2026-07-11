@@ -26,6 +26,7 @@
       "packages/react/src/components/button/__tests__/index-exports.test.tsx",
       "packages/react/src/components/button/__tests__/purpose-button-locking.test.tsx",
       "packages/react/src/components/button/button.tsx",
+      "packages/react/src/components/button/icon-button.tsx",
       "packages/react/src/components/button/index.ts",
       "packages/react/src/components/button/variants.tsx"
     ],
@@ -34,8 +35,37 @@
       "packages/vue/src/components/button/__tests__/index-exports.test.ts",
       "packages/vue/src/components/button/__tests__/purpose-button-locking.test.ts",
       "packages/vue/src/components/button/button.ts",
+      "packages/vue/src/components/button/icon-button.ts",
       "packages/vue/src/components/button/index.ts",
       "packages/vue/src/components/button/variants.ts"
+    ],
+    "svelte": [
+      "packages/svelte/src/lib/components/button/Button.svelte",
+      "packages/svelte/src/lib/components/button/CancelButton.svelte",
+      "packages/svelte/src/lib/components/button/CloseButton.svelte",
+      "packages/svelte/src/lib/components/button/ConfirmButton.svelte",
+      "packages/svelte/src/lib/components/button/CopyButton.svelte",
+      "packages/svelte/src/lib/components/button/CreateButton.svelte",
+      "packages/svelte/src/lib/components/button/DestructiveButton.svelte",
+      "packages/svelte/src/lib/components/button/DownloadButton.svelte",
+      "packages/svelte/src/lib/components/button/DropdownButton.svelte",
+      "packages/svelte/src/lib/components/button/EditButton.svelte",
+      "packages/svelte/src/lib/components/button/FilterButton.svelte",
+      "packages/svelte/src/lib/components/button/IconButton.svelte",
+      "packages/svelte/src/lib/components/button/index.ts",
+      "packages/svelte/src/lib/components/button/LinkButton.svelte",
+      "packages/svelte/src/lib/components/button/PrimaryButton.svelte",
+      "packages/svelte/src/lib/components/button/RefreshButton.svelte",
+      "packages/svelte/src/lib/components/button/SaveButton.svelte",
+      "packages/svelte/src/lib/components/button/SearchButton.svelte",
+      "packages/svelte/src/lib/components/button/SecondaryButton.svelte",
+      "packages/svelte/src/lib/components/button/SortButton.svelte",
+      "packages/svelte/src/lib/components/button/SubmitButton.svelte",
+      "packages/svelte/src/lib/components/button/SuccessButton.svelte",
+      "packages/svelte/src/lib/components/button/TextButton.svelte",
+      "packages/svelte/src/lib/components/button/types.ts",
+      "packages/svelte/src/lib/components/button/UploadButton.svelte",
+      "packages/svelte/src/lib/components/button/VerifyButton.svelte"
     ],
     "storybookReact": [
       "apps/storybook-react/src/stories/button/__tests__/button-introduction-docs.test.ts",
@@ -51,6 +81,7 @@
       "apps/storybook-react/src/stories/button/dropdown-button.stories.tsx",
       "apps/storybook-react/src/stories/button/edit-button.stories.tsx",
       "apps/storybook-react/src/stories/button/filter-button.stories.tsx",
+      "apps/storybook-react/src/stories/button/icon-button.stories.tsx",
       "apps/storybook-react/src/stories/button/Introduction.mdx",
       "apps/storybook-react/src/stories/button/link-button.stories.tsx",
       "apps/storybook-react/src/stories/button/primary-button.stories.tsx",
@@ -79,6 +110,7 @@
       "apps/storybook-vue/src/stories/button/dropdown-button.stories.ts",
       "apps/storybook-vue/src/stories/button/edit-button.stories.ts",
       "apps/storybook-vue/src/stories/button/filter-button.stories.ts",
+      "apps/storybook-vue/src/stories/button/icon-button.stories.ts",
       "apps/storybook-vue/src/stories/button/Introduction.mdx",
       "apps/storybook-vue/src/stories/button/link-button.stories.ts",
       "apps/storybook-vue/src/stories/button/primary-button.stories.ts",
@@ -92,6 +124,35 @@
       "apps/storybook-vue/src/stories/button/text-button.stories.ts",
       "apps/storybook-vue/src/stories/button/upload-button.stories.ts",
       "apps/storybook-vue/src/stories/button/verify-button.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/button/__tests__/button-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/button/__tests__/button-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/button/button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/cancel-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/close-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/confirm-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/copy-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/create-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/destructive-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/download-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/dropdown-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/edit-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/filter-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/icon-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/button/link-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/primary-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/refresh-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/save-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/search-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/secondary-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/sort-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/submit-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/success-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/text-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/upload-button.stories.ts",
+      "apps/storybook-svelte/src/stories/button/verify-button.stories.ts"
     ],
     "contracts": ["tests/contracts/button.contract.ts"]
   },
@@ -211,7 +272,13 @@
     "notes": ["Button already has the strongest base semantic surface in core."]
   },
   "design": {
-    "componentJsons": [".figma/marwes/components/button.json"],
+    "componentJsons": [
+      ".figma/marwes/components/button.json",
+      ".figma/marwes/components/button-destructive.json",
+      ".figma/marwes/components/button-success.json",
+      ".figma/marwes/components/button-group.json",
+      ".figma/marwes/components/icon-button.json"
+    ],
     "curatedReferences": [
       ".figma/INDEX.md",
       ".figma/NODE_REFERENCE.md",
@@ -221,11 +288,12 @@
       ".figma/marwes/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/cover/buttons_1825-30427.json",
-      ".figma/marwes/pages/cover/buttons_1825-30431.json",
-      ".figma/marwes/pages/cover/buttons_1825-30435.json",
+      ".figma/marwes/pages/------playground---dashboard/buttons_2832-30431.json",
       ".figma/marwes/pages/-button/component-container_1364-11870.json",
-      ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json"
+      ".figma/marwes/pages/-button/-button_1371-11172.json",
+      ".figma/marwes/pages/-button/-button-dark_1371-11537.json",
+      ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json",
+      ".figma/marwes/pages/-button/-purpose-buttons-dark_1371-9188.json"
     ],
     "nodeReferences": {
       "baseLightFrame": "1371:11172",
@@ -234,19 +302,14 @@
       "purposeDarkFrame": "1371:9188"
     },
     "figmaTokens": [
-      "Primary/Surface",
-      "Primary/Label",
-      "Secondary/Label",
-      "Secondary/Outline",
-      "Text/Label",
-      "action/primary/default",
-      "action/primary/label",
-      "action/secondary/default",
-      "action/secondary/label",
-      "action/destructive/default",
-      "action/destructive/label",
-      "action/success/default",
-      "action/success/label"
+      "button/primary/surface",
+      "button/primary/label",
+      "button/secondary/label",
+      "button/secondary/outline",
+      "button/text/label",
+      "button/gap",
+      "button/paddingH",
+      "button/paddingV"
     ],
     "figmaStates": {
       "baseVariants": ["primary", "secondary", "neutral", "text"],
@@ -256,8 +319,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

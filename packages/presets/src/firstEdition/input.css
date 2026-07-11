@@ -6,15 +6,18 @@
  */
 
 .mw-input {
+  box-sizing: border-box;
   height: var(--mw-density-height);
   padding: 0 var(--mw-density-padding-x);
   border-radius: var(--mw-ui-radius);
-  border: 1px solid var(--mw-color-border);
-  background: var(--mw-color-surface);
+  border: 1px solid var(--mw-color-border-low);
+  background: var(--mw-color-surface-primary);
   color: var(--mw-color-text);
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
-  width: 260px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   transition: border-color 150ms ease, outline 150ms ease;
 }
 
@@ -69,5 +72,5 @@
 
 /* Dark mode input styles */
 .mw-theme--dark .mw-input {
-  background: var(--mw-color-surface);
+  background: var(--mw-color-surface-primary);
 }

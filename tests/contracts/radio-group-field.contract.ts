@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest"
 export type RadioGroupFieldOptionContract = {
   value: string
   label: string
+  description?: string
   disabled?: boolean
 }
 
@@ -65,8 +66,8 @@ export function runRadioGroupFieldContract(
 
       const optionLabelText = harness.getByText("Alpha")
 
-      expect(optionLabelText).toHaveClass("mw-p")
-      expect(optionLabelText).toHaveClass("mw-p--sm")
+      expect(optionLabelText).toHaveClass("mw-text")
+      expect(optionLabelText).toHaveClass("mw-text--label")
     })
 
     it("renders the group label with the canonical radio label typography", async () => {
@@ -77,8 +78,36 @@ export function runRadioGroupFieldContract(
 
       const groupLabelText = harness.getByText("Pick one")
 
-      expect(groupLabelText).toHaveClass("mw-p")
-      expect(groupLabelText).toHaveClass("mw-p--sm")
+      expect(groupLabelText).toHaveClass("mw-text")
+      expect(groupLabelText).toHaveClass("mw-text--label")
+    })
+
+    it("renders the group description with the canonical helper typography", async () => {
+      await harness.renderRadioGroup({
+        label: "Pick one",
+        description: "Choose your favorite",
+        options: defaultOptions,
+      })
+
+      const descriptionText = harness.getByText("Choose your favorite")
+
+      expect(descriptionText).toHaveClass("mw-text")
+      expect(descriptionText).toHaveClass("mw-text--caption")
+    })
+
+    it("renders option descriptions with the canonical small label typography", async () => {
+      await harness.renderRadioGroup({
+        label: "Pick one",
+        options: [{ value: "a", label: "Alpha", description: "Primary option" }],
+      })
+
+      const optionDescriptionText = harness.getByText("Primary option")
+
+      expect(optionDescriptionText).toHaveClass("mw-text")
+      expect(optionDescriptionText).toHaveClass("mw-text--label-small")
+      expect(harness.getByRole("radio", { name: /alpha/i })).toHaveAccessibleDescription(
+        "Primary option",
+      )
     })
 
     it("uncontrolled: applies defaultValue and switches selection", async () => {

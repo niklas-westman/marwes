@@ -2,7 +2,7 @@ import { buildAccordionFieldA11yIds } from "@marwes-ui/core"
 import { type VNodeChild, computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
-import { Paragraph } from "../paragraph"
+import { Text } from "../text"
 import { Accordion } from "./accordion"
 
 export interface AccordionFieldItem {
@@ -128,7 +128,7 @@ export const AccordionField = defineComponent(
         },
         [
           h("legend", { class: "mw-accordion-field__label", id: a11yIds.value.labelId }, [
-            h(Paragraph, { size: "md" }, { default: () => [props.label] }),
+            h(Text, { variant: "label" }, { default: () => [props.label] }),
           ]),
 
           h(
@@ -159,7 +159,7 @@ export const AccordionField = defineComponent(
             ? h(
                 "div",
                 { class: "mw-accordion-field__description", id: a11yIds.value.descriptionId },
-                [h(Paragraph, { size: "sm" }, { default: () => [props.description] })],
+                [h(Text, { variant: "caption" }, { default: () => [props.description] })],
               )
             : null,
 
@@ -171,7 +171,7 @@ export const AccordionField = defineComponent(
                   id: a11yIds.value.errorId,
                   "aria-live": "polite",
                 },
-                [h(Paragraph, { size: "sm" }, { default: () => [props.error] })],
+                [h(Text, { variant: "caption" }, { default: () => [props.error] })],
               )
             : null,
         ],

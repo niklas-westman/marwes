@@ -8,6 +8,7 @@ const spinnerPropKeys = [
   "size",
   "decorative",
   "ariaLabel",
+  "label",
   "id",
   "className",
   "dataAttributes",

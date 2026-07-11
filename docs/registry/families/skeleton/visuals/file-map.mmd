@@ -1,0 +1,20 @@
+flowchart TD
+  Registry["docs/registry/families/skeleton"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/skeleton/"]
+  Core --> CoreFiles["skeleton-a11y.ts\nskeleton-recipe.ts\nskeleton-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["skeleton.css"]
+
+  React["packages/react/src/components/skeleton/"]
+  Vue["packages/vue/src/components/skeleton/"]
+  Svelte["packages/svelte/src/lib/components/skeleton/"]
+
+  StoriesR["apps/storybook-react/src/stories/skeleton/"]
+  StoriesV["apps/storybook-vue/src/stories/skeleton/"]
+  StoriesS["apps/storybook-svelte/src/stories/skeleton/"]
+  Contracts["tests/contracts/skeleton.contract.ts"]

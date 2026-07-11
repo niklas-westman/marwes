@@ -27,8 +27,21 @@ export interface DatePickerOptions {
   nextYearLabel?: string
   cancelLabel?: string
   applyLabel?: string
+  /** Accessible name for the calendar landmark. Alias for `calendarLabel`. */
+  ariaLabel?: string
+  /** ID of an element whose text labels the calendar landmark. Wins over `ariaLabel`/`calendarLabel`. */
+  ariaLabelledBy?: string
+  /** ID(s) of elements that describe the calendar (helper text, errors). */
+  ariaDescribedBy?: string
+  /** @deprecated Use `ariaLabel` instead. */
   calendarLabel?: string
   dataAttributes?: Record<string, string>
+}
+
+export interface DatePickerA11yProps {
+  ariaLabel?: string
+  ariaLabelledBy?: string
+  ariaDescribedBy?: string
 }
 
 export interface DatePickerDataAttributes extends Record<string, string> {
@@ -48,6 +61,7 @@ export interface DatePickerDayRenderKit {
 export interface DatePickerRenderKit {
   className: string
   dataAttributes: DatePickerDataAttributes
+  a11y: DatePickerA11yProps
   monthLabel: string
   weekdayLabels: readonly string[]
   weeks: readonly (readonly DatePickerDay[])[]

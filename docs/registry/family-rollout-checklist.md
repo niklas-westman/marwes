@@ -89,37 +89,58 @@ Every family snapshot should try to include:
 
 ## Current registry status
 
+### Human README present
+
 | Family | Registry page | Semantic coverage | Audit status | Notes |
 | --- | --- | --- | --- | --- |
+| Accordion | Done | Family-local | First pass complete | grouped-disclosure baseline with shared contract coverage |
+| Avatar | Done | Canonical | Queued | identity baseline with atom, molecule, and purpose contract coverage |
+| Badge | Done | Canonical | Queued | compact-status baseline with atom, grouping, and purpose contract coverage |
+| Banner | Done | Canonical | Queued | single-atom status message family with role/status mapping |
+| Breadcrumb | Done | Canonical | Queued | navigation hierarchy baseline with current-page semantics |
 | Button | Done | Canonical | Queued | good baseline simple family |
-| Input | Done | Family-local | First pass complete | best complex family example |
+| Card | Done | Family-local | Queued | passive-surface baseline with local purpose wrappers |
+| Checkbox | Done | None | First pass complete | native-checkbox baseline with atom, single-field, and grouped shared contract coverage |
+| ContextMenu | Done | Canonical | Queued | custom menu surface with product-owned trigger and positioning |
+| DatePicker | Done | Family-local | Queued | date-entry baseline with calendar/day-state metadata |
 | Dialog | Done | Canonical | First pass complete | best shell-vs-modal example |
-| Tab | Done | Family-local | First pass complete | strong coordinated-widget baseline with shared contract coverage |
-| Switch | Done | Family-local | First pass complete | clear field-wiring baseline with shared contract coverage |
-| Accordion | Done | Family-local | First pass complete | strong grouped-disclosure baseline with shared contract coverage |
-| Tooltip | Done | Family-local | First pass complete | clear contextual-help baseline with shared contract coverage |
-| Slider | Done | Family-local | First pass complete | strong native-range baseline with shared contract and field-wiring coverage |
-| Avatar | Done | Canonical | Queued | strong canonical identity baseline with atom, molecule, and purpose contract coverage |
-| Toast | Done | Canonical | Queued | strong canonical live-region baseline with provider/container delivery coverage |
-| Badge | Done | Canonical | Queued | strong canonical compact-status baseline with atom, grouping, and purpose contract coverage |
-| Spinner | Done | Family-local | Queued | strong indeterminate-loading baseline with atom, context-wrapper, and button-integration coverage |
-| Card | Done | Family-local | Queued | clear passive-surface baseline with local purpose wrappers and strong visual-state teaching coverage |
-| Divider | Done | Family-local | Queued | strong semantic-separator baseline with shared contract coverage and clear horizontal-vs-vertical guidance |
-| Heading | Done | None | Queued | strong native-heading baseline with shared contract coverage, shared typography preset usage, and an explicit Figma typography-vs-scaffold clarification |
-| Checkbox | Done | None | First pass complete | strong native-checkbox baseline with atom, single-field, and grouped shared contract coverage, field-helper-backed molecules, and explicit Figma atom-vs-field distinction |
-| Radio | Done | Family-local | First pass complete | strong native single-selection baseline with grouped field-helper wiring, thin purpose wrappers, and shared raw-atom plus grouped-field contract coverage |
-| Paragraph | Done | None | Queued | strong native body-copy baseline with shared typography preset usage, shared contract coverage, and an explicit Figma typography-vs-runtime-size clarification |
-| Icon | Done | None | Queued | strong named-SVG baseline with shared decorative-vs-labelled contract coverage, gallery-led discovery, and an explicit Figma-vs-runtime inventory clarification |
-| Spacing | Done | Family-local | Queued | strong decorative layout-baseline family with explicit token vocabulary, local metadata, and an honest no-Figma-family clarification |
+| Divider | Done | Family-local | Queued | semantic-separator baseline with horizontal-vs-vertical guidance |
+| Drawer | Done | Canonical | Queued | dialog-adjacent panel baseline with product-owned focus lifecycle |
+| Heading | Done | None | Queued | native-heading baseline with shared typography preset usage |
+| Icon | Done | None | Queued | named-SVG baseline with decorative-vs-labelled contract coverage |
+| Input | Done | Family-local | First pass complete | best complex family example |
+| Pagination | Done | Family-local | Queued | native navigation baseline from the current component wave |
+| Paragraph | Done | None | Queued | native body-copy baseline with shared typography preset usage |
+| ProgressBar | Done | Family-local | First pass complete | read-only determinate progress baseline with shared contract coverage |
+| Radio | Done | Family-local | First pass complete | native single-selection baseline with grouped field-helper wiring |
+| SegmentedControl | Done | Family-local | Queued | compact single-selection control from the current component wave |
+| Skeleton | Done | Family-local | Queued | passive loading-placeholder baseline |
+| Slider | Done | Family-local | First pass complete | native-range baseline with shared contract and field-wiring coverage |
+| Spacing | Done | Family-local | Queued | decorative layout-baseline family with explicit token vocabulary |
+| Spinner | Done | Family-local | Queued | indeterminate-loading baseline with atom, context-wrapper, and button integration |
+| StatTile | Done | Family-local | Queued | passive metric-tile baseline |
+| Switch | Done | Family-local | First pass complete | field-wiring baseline with shared contract coverage |
+| Tab | Done | Family-local | First pass complete | coordinated-widget baseline with shared contract coverage |
+| Text | Done | Family-local | Queued | native typography baseline for label/caption/support copy |
+| Toast | Done | Canonical | Queued | live-region baseline with provider/container delivery coverage |
+| Tooltip | Done | Family-local | First pass complete | contextual-help baseline with shared contract coverage |
+
+### Partial or missing registry coverage
+
+None. Every shipped registry family currently has:
+- a human `README.md`
+- authored `registry.meta.json`
+- generated `registry.generated.json`
+- standard `visuals/layer-map.mmd`, `visuals/file-map.mmd`, and `visuals/interaction-map.mmd`
 
 ## Suggested next family queue
 
-No immediate next family is queued in the current shipped package set.
+No shipped-family registry coverage gaps remain.
 
-Why this status is useful:
-- spacing completes the remaining foundational atom family in the current rollout queue
-- the registry now covers every currently shipped family under `packages/react/src/components/` and `packages/vue/src/components/`
-- the next session should either reassess backlog priorities for future shipped families or tighten shared registry governance and verification work
+The next useful queue is quality hardening:
+1. promote repeated adapter parity issues into shared contracts
+2. add dedicated family audit docs for queued families when they become accessibility priorities
+3. use `pnpm validate:family <family>` before touching runtime behavior
 
 ## Session start checklist
 
@@ -130,7 +151,7 @@ When starting a new registry-family session, do this first:
 - [ ] read `docs/registry/adding-families.md`
 - [ ] read the target family’s audit doc if it exists
 - [ ] read the target family’s Figma refs from `.figma/`
-- [ ] inspect the current family file tree across core, presets, React, Vue, Storybook, and contracts
+- [ ] inspect the current family file tree across core, presets, React, Vue, Svelte, Storybook, and contracts
 - [ ] decide whether the family semantic coverage is `canonical`, `family-local`, or `none`
 
 ## Per-family build workflow
@@ -146,7 +167,7 @@ Use this sequence for every new registry family.
 
 ### 2. Family source config
 - [ ] add the family to `scripts/component-registry-sources.ts`
-- [ ] include core, preset, React, Vue, Storybook, contract, audit, and Figma refs
+- [ ] include core, preset, React, Vue, Svelte, Storybook, contract, audit, and Figma refs
 - [ ] include semantic source config when the family is not in the central semantic registry
 
 ### 3. Human page

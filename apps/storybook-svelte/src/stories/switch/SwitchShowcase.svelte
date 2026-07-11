@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { Switch } from "@marwes-ui/svelte"
+  // Atom is no longer publicly exported; deep-import for story documentation.
+  import Switch from "../../../../../packages/svelte/src/lib/components/switch/Switch.svelte"
   import { SwitchSize } from "@marwes-ui/core"
 
   interface Props {

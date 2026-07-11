@@ -113,8 +113,9 @@ describe("Vue purpose button locking", () => {
     expect(destructiveButton).not.toHaveAttribute("variant")
     expect(destructiveButton).not.toHaveAttribute("action")
     expect(destructiveButton).toHaveAttribute("data-action", "delete")
-    expect(destructiveButton).toHaveAttribute("data-variant", "primary")
-    expect(destructiveButton).toHaveClass("mw-btn--error")
+    expect(destructiveButton).toHaveAttribute("data-variant", "danger")
+    expect(destructiveButton).toHaveClass("mw-btn--danger")
+    expect(destructiveButton).not.toHaveClass("mw-btn--error")
 
     const submitButton = screen.getByRole("button", { name: /submit/i })
     expect(submitButton.tagName).toBe("BUTTON")

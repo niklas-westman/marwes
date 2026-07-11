@@ -1,0 +1,13 @@
+flowchart LR
+  Intent["variant prop\nneutral info success warning error"] --> A11y["resolveBannerA11y"]
+  A11y --> Polite["neutral info success\nrole=status\naria-live=polite"]
+  A11y --> Assertive["warning error\nrole=alert\naria-live=assertive"]
+
+  Intent --> Layout["Banner render kit"]
+  Layout --> Icon["optional icon slot"]
+  Layout --> Message["message content"]
+  Layout --> Action["optional action slot"]
+  Layout --> Dismiss["optional dismiss button"]
+
+  Dismiss --> Callback["onDismiss callback"]
+  Action --> Product["product-owned action behavior"]

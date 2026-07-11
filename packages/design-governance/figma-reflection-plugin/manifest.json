@@ -1,0 +1,40 @@
+{
+  "name": "Marwes Reflection Frame Prep",
+  "id": "marwes-reflection-frame-prep",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": [
+      "http://localhost",
+      "ws://localhost",
+      "ws://localhost:9243",
+      "ws://localhost:9244",
+      "ws://localhost:9245",
+      "ws://localhost:9246",
+      "ws://localhost:9247",
+      "ws://localhost:9248",
+      "ws://localhost:9249",
+      "ws://localhost:9250",
+      "ws://localhost:9251",
+      "ws://localhost:9252"
+    ],
+    "devAllowedDomains": [
+      "http://localhost",
+      "ws://localhost",
+      "ws://localhost:9243",
+      "ws://localhost:9244",
+      "ws://localhost:9245",
+      "ws://localhost:9246",
+      "ws://localhost:9247",
+      "ws://localhost:9248",
+      "ws://localhost:9249",
+      "ws://localhost:9250",
+      "ws://localhost:9251",
+      "ws://localhost:9252"
+    ],
+    "reasoning": "Connects to a local Marwes Reflection frame preparation command over WebSocket."
+  }
+}

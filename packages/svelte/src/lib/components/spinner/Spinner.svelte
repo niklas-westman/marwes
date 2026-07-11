@@ -10,6 +10,7 @@
     size,
     decorative,
     ariaLabel,
+    label,
     id,
     class: className,
     style,
@@ -22,6 +23,7 @@
       ...(size !== undefined ? { size } : {}),
       ...(decorative !== undefined ? { decorative } : {}),
       ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+      ...(label !== undefined ? { label } : {}),
       ...(id !== undefined ? { id } : {}),
     })
   );

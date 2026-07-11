@@ -1,0 +1,180 @@
+/*
+ * Pagination Styles
+ * Figma refs: 1727:3905, 1727:3897, 1727:3899, 1727:3903
+ */
+
+.mw-pagination {
+  --mw-pagination-active-bg: var(--mw-color-primary-base, #2f31fc);
+  --mw-pagination-active-text: var(--mw-color-primary-label, #ffffff);
+  --mw-pagination-text: var(--mw-color-text-muted, #595959);
+  --mw-pagination-hover-text: var(--mw-color-text, #141414);
+  --mw-pagination-border: color-mix(in srgb, var(--mw-color-text, #000000) 12%, transparent);
+  --mw-pagination-hover-bg: color-mix(in srgb, var(--mw-color-text, #000000) 5%, transparent);
+  --mw-pagination-focus: var(--mw-color-focus, #2f31fc);
+  --mw-pagination-size: 32px;
+  --mw-pagination-radius: 8px;
+  --mw-pagination-gap: 2px;
+  --mw-pagination-section-gap: 12px;
+  --mw-pagination-list-width: 0px;
+
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mw-pagination-section-gap);
+  max-width: 100%;
+  min-width: 0;
+  color: var(--mw-pagination-text);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.mw-pagination--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.mw-pagination__list {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mw-pagination-gap);
+  min-width: var(--mw-pagination-list-width);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mw-pagination__list-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.mw-pagination__control,
+.mw-pagination__page {
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--mw-pagination-text);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mw-pagination__control {
+  gap: 4px;
+  min-width: 0;
+  min-height: 16px;
+  padding: 0;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.mw-pagination__control-label {
+  max-width: 12rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.mw-pagination__control-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  line-height: 0;
+}
+
+.mw-pagination__page,
+.mw-pagination__ellipsis {
+  min-width: var(--mw-pagination-size);
+  height: var(--mw-pagination-size);
+  border-radius: var(--mw-pagination-radius);
+}
+
+.mw-pagination__page {
+  border: 1px solid transparent;
+  padding-inline: 8px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.mw-pagination__page--selected {
+  background: var(--mw-pagination-active-bg);
+  color: var(--mw-pagination-active-text);
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.mw-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mw-pagination-text);
+  font-weight: 500;
+  line-height: 16px;
+  user-select: none;
+}
+
+.mw-pagination__control:hover:not(:disabled):not(.mw-pagination__control--disabled),
+.mw-pagination__page:hover:not(:disabled):not(.mw-pagination__page--disabled):not(
+    .mw-pagination__page--selected
+  ) {
+  color: var(--mw-pagination-hover-text);
+}
+
+.mw-pagination__page:hover:not(:disabled):not(.mw-pagination__page--disabled):not(
+    .mw-pagination__page--selected
+  ) {
+  background: var(--mw-pagination-hover-bg);
+  border-color: var(--mw-pagination-border);
+}
+
+.mw-pagination__control--disabled,
+.mw-pagination__control:disabled,
+.mw-pagination__page--disabled,
+.mw-pagination__page:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  color: var(--mw-color-text-disabled);
+}
+
+.mw-pagination__control:focus-visible,
+.mw-pagination__page:focus-visible {
+  outline: 2px solid var(--mw-pagination-focus);
+  outline-offset: 2px;
+}
+
+.mw-pagination__control * {
+  pointer-events: none;
+}
+
+.mw-pagination[data-control-display="icon"] .mw-pagination__control {
+  width: var(--mw-pagination-size);
+  min-width: var(--mw-pagination-size);
+  min-height: var(--mw-pagination-size);
+  gap: 0;
+}
+
+.mw-pagination[data-control-display="icon"] .mw-pagination__list {
+  min-width: 0;
+}
+
+.mw-pagination[data-control-display="icon"] .mw-pagination__control-label {
+  max-width: 0;
+  opacity: 0;
+}

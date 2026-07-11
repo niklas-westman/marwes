@@ -1,0 +1,20 @@
+flowchart TD
+  Registry["docs/registry/families/date-picker"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/date-picker/"]
+  Core --> CoreFiles["date-picker-a11y.ts\ndate-picker-recipe.ts\ndate-picker-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["date-picker.css"]
+
+  React["packages/react/src/components/date-picker/"]
+  Vue["packages/vue/src/components/date-picker/"]
+  Svelte["packages/svelte/src/lib/components/date-picker/"]
+
+  StoriesR["apps/storybook-react/src/stories/date-picker/*.disabled"]
+  StoriesV["apps/storybook-vue/src/stories/date-picker/*.disabled"]
+  StoriesS["apps/storybook-svelte/src/stories/date-picker/"]
+  Contracts["tests/contracts/date-picker.contract.ts"]

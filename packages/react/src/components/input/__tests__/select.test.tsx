@@ -43,6 +43,20 @@ runSelectContract("react", {
 })
 
 describe("Select", () => {
+  it("lets standalone selects use label as the accessible name", () => {
+    renderWithProvider(
+      <Select
+        label="Plan"
+        options={[
+          { value: "starter", label: "Starter" },
+          { value: "growth", label: "Growth" },
+        ]}
+      />,
+    )
+
+    expect(screen.getByRole("combobox", { name: /plan/i })).toHaveAttribute("aria-label", "Plan")
+  })
+
   it("defaults to Marwes appearance and marks placeholder state", () => {
     const { container } = renderWithProvider(
       <Select
@@ -97,7 +111,7 @@ describe("Select", () => {
 
     expect(select.tagName).toBe("SELECT")
     expect(select).toHaveClass("mw-select--native")
-    expect(container.querySelector(".mw-select__control-icon")).toBeNull()
+    expect(container.querySelector(".mw-select__control-icon")).not.toBeNull()
   })
 
   it("supports the native boolean alias", () => {

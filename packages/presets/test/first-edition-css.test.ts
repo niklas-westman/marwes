@@ -21,6 +21,7 @@ describe("firstEdition styles.css", () => {
     expect(css).toContain('@import "./icon.css";')
     expect(css).toContain('@import "./checkbox.css";')
     expect(css).toContain('@import "./divider.css";')
+    expect(css).toContain('@import "./pagination.css";')
     expect(css).toContain('@import "./typography.css";')
     expect(css).toContain('@import "./molecules/checkbox-field.css";')
     expect(css).toContain('@import "./molecules/input-field.css";')

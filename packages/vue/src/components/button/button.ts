@@ -11,7 +11,11 @@ import { Icon } from "../icon"
 import { ButtonSpinner } from "../spinner"
 
 function isFilledButtonVariant(variant: ButtonVariant): boolean {
-  return variant === "primary" || variant === "success"
+  return variant === "primary" || variant === "success" || variant === "danger"
+}
+
+function hasSlotChildren(slotChildren: ReturnType<typeof getDefaultSlotChildren>): boolean {
+  return slotChildren !== undefined && slotChildren.length > 0
 }
 
 export type ButtonProps = ButtonOptions & {
@@ -30,6 +34,7 @@ const buttonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "label",
   "hasVisibleText",
   "ariaExpanded",
   "ariaControls",
@@ -75,9 +80,9 @@ export const Button = defineComponent(
       }
 
       if (resolvedLoading.isLoading && resolvedLoading.loadingLabel !== undefined) {
-        content.push(resolvedLoading.loadingLabel)
-      } else if (slotChildren) {
-        content.push(...slotChildren)
+        content.push(h("span", { class: "mw-btn__label" }, resolvedLoading.loadingLabel))
+      } else if (hasSlotChildren(slotChildren)) {
+        content.push(h("span", { class: "mw-btn__label" }, slotChildren))
       }
 
       if (!resolvedLoading.isLoading && props.iconRight) {

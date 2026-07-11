@@ -5,13 +5,12 @@ import "@testing-library/jest-dom/vitest"
 import { fireEvent, render, screen } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import { runRadioGroupFieldContract } from "../../../../tests/contracts/radio-group-field.contract"
-import OptionRadioGroup from "../lib/components/radio/OptionRadioGroup.svelte"
-import RatingRadioGroup from "../lib/components/radio/RatingRadioGroup.svelte"
-import YesNoRadioGroup from "../lib/components/radio/YesNoRadioGroup.svelte"
+import RadioGroupFieldContractFixture from "./type-fixtures/RadioGroupFieldContractFixture.svelte"
+import RadioVariantFixture from "./type-fixtures/RadioVariantFixture.svelte"
 
 runRadioGroupFieldContract("svelte", {
   renderRadioGroup(args = {}) {
-    render(OptionRadioGroup, {
+    render(RadioGroupFieldContractFixture, {
       props: {
         name: args.name ?? "choices",
         label: args.label ?? "Pick one",
@@ -47,7 +46,7 @@ runRadioGroupFieldContract("svelte", {
 
 describe("OptionRadioGroup structure: svelte", () => {
   it("does not render a native fieldset border container", () => {
-    const { container } = render(OptionRadioGroup, {
+    const { container } = render(RadioGroupFieldContractFixture, {
       props: {
         name: "theme",
         label: "Theme",
@@ -66,29 +65,17 @@ describe("OptionRadioGroup structure: svelte", () => {
 })
 
 describe("Radio option label typography: svelte", () => {
-  it("uses the canonical small paragraph typography for YesNoRadioGroup option labels", () => {
-    render(YesNoRadioGroup, {
-      props: {
-        name: "accept",
-        label: "Accept?",
-      },
-    })
+  it("uses the canonical label typography for YesNoRadioGroup option labels", () => {
+    render(RadioVariantFixture, { props: { component: "yes-no" } })
 
-    expect(screen.getByText("Yes")).toHaveClass("mw-p", "mw-p--sm")
-    expect(screen.getByText("No")).toHaveClass("mw-p", "mw-p--sm")
+    expect(screen.getByText("Yes")).toHaveClass("mw-text", "mw-text--label")
+    expect(screen.getByText("No")).toHaveClass("mw-text", "mw-text--label")
   })
 
-  it("uses the canonical small paragraph typography for RatingRadioGroup option labels", () => {
-    render(RatingRadioGroup, {
-      props: {
-        name: "rating",
-        label: "Rating",
-        min: 1,
-        max: 2,
-      },
-    })
+  it("uses the canonical label typography for RatingRadioGroup option labels", () => {
+    render(RadioVariantFixture, { props: { component: "rating" } })
 
-    expect(screen.getByText("1")).toHaveClass("mw-p", "mw-p--sm")
-    expect(screen.getByText("2")).toHaveClass("mw-p", "mw-p--sm")
+    expect(screen.getByText("1")).toHaveClass("mw-text", "mw-text--label")
+    expect(screen.getByText("2")).toHaveClass("mw-text", "mw-text--label")
   })
 })

@@ -1,5 +1,6 @@
 import type {
   FontLoadingConfig,
+  MwTheme,
   ResolvedTheme,
   ThemeInput,
   ThemeMode,
@@ -8,6 +9,7 @@ import type {
 } from "@marwes-ui/core"
 import {
   ThemeMode as MwThemeMode,
+  createMwTheme,
   nextThemeMode,
   resolveThemeInput,
   resolveThemePreference,
@@ -40,6 +42,10 @@ export type MarwesProviderProps = {
   attribute?: ThemeAttribute
   disableTransitionOnChange?: boolean
   variableStrategy?: ThemeVariableStrategy
+}
+
+export type MarwesProviderSlotProps = {
+  mwTheme: MwTheme
 }
 
 export const MarwesProvider = defineComponent({
@@ -92,6 +98,7 @@ export const MarwesProvider = defineComponent({
     const resolved = computed<ResolvedTheme>(() =>
       resolveThemeInput({ ...(props.theme ?? {}), mode: activeMode.value }),
     )
+    const mwTheme = computed<MwTheme>(() => createMwTheme(resolved.value))
 
     const rootRef = ref<HTMLElement | null>(null)
 
@@ -196,9 +203,10 @@ export const MarwesProvider = defineComponent({
           class: `mw-theme--${resolved.value.mode}`,
           "data-marwes-theme": "true",
           "data-marwes-mode": resolved.value.mode,
+          "data-marwes-personality": resolved.value.personality,
           style: variableStrategy.value === "inline" ? themeToRootStyle(resolved.value) : undefined,
         },
-        slots.default?.(),
+        slots.default?.({ mwTheme: mwTheme.value } satisfies MarwesProviderSlotProps),
       )
   },
 })

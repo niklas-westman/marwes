@@ -1,0 +1,13 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="ProgressBar/Introduction" />
+
+# ProgressBar Component
+
+`ProgressBar` is a determinate progress indicator. It is not an input; use `Slider` or `SliderField` for adjustable values.
+
+The component supports the Figma label row, percentage text, small 4px track, and default 8px track.
+
+## Accessibility
+
+The root uses `role="progressbar"` with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`. Pass `ariaLabel` when the visible label is hidden.

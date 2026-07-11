@@ -20,4 +20,12 @@ describe("createInputRecipe", () => {
     expect(kit.a11y.ariaLabel).toBe("Email")
     expect(kit.a11y.ariaDescribedBy).toBe("email-help")
   })
+
+  it("uses label as an accessible-name alias", () => {
+    const kit = createInputRecipe({
+      label: "Search",
+    })
+
+    expect(kit.a11y.ariaLabel).toBe("Search")
+  })
 })

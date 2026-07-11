@@ -1,8 +1,8 @@
 import { storybookA11yPolicy, storybookLayout, storybookRadioArgTypes } from "@marwes-ui/core"
-import type { RadioProps } from "@marwes-ui/vue"
-import { Radio } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import { Radio, type RadioProps } from "../../../../../packages/vue/src/components/radio/radio"
 
 const meta = {
   title: "Radio/Atom",

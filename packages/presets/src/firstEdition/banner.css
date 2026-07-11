@@ -1,0 +1,190 @@
+/*
+ * Banner Component Styles
+ * Figma:
+ * - .figma/marwes/components/banner.json (component definition)
+ * - .figma/marwes/pages/-banner/-banner_1593-5094.json (light)
+ * - .figma/marwes/pages/-banner/-banner-dark_2444-2179.json (dark)
+ *
+ * Single token-driven component. Color → Banner states.
+ * Supports: info, success, warning, error, neutral.
+ */
+
+.mw-banner {
+  --mw-banner-surface: var(--mw-color-surface-primary, #ffffff);
+  --mw-banner-border: var(--mw-color-border-low, #000000);
+  --mw-banner-icon: var(--mw-color-text-muted, #595959);
+  --mw-banner-text: var(--mw-color-text, #141414);
+
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--mw-spacing-sp-8, 8px) 12px var(--mw-spacing-sp-8, 8px) 20px;
+  border: 0;
+  border-bottom: 1px solid var(--mw-banner-border);
+  border-radius: 0;
+  background: var(--mw-banner-surface);
+}
+
+/* Content area: icon + message */
+.mw-banner__content {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: var(--mw-spacing-sp-8);
+  padding-right: var(--mw-spacing-sp-8);
+}
+
+/* Leading icon */
+.mw-banner__icon {
+  display: flex;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--mw-banner-icon);
+}
+
+.mw-banner__icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Message text */
+.mw-banner__message {
+  min-width: 0;
+  flex: 1;
+  color: var(--mw-banner-text);
+  font-family: var(--mw-font-primary, inherit);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.42px;
+}
+
+/* CTA action slot */
+.mw-banner__action {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* Dismiss/close button */
+.mw-banner__dismiss {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--mw-color-text-muted, #595959);
+  cursor: pointer;
+}
+
+.mw-banner__dismiss:hover {
+  background: var(--mw-color-surface-subtle, rgba(0, 0, 0, 0.04));
+}
+
+.mw-banner__dismiss:focus-visible {
+  outline: 2px solid var(--mw-color-focus, #2f31fc);
+  outline-offset: 2px;
+}
+
+.mw-banner__dismiss::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline x1='18' y1='6' x2='6' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='6' y1='6' x2='18' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cline x1='18' y1='6' x2='6' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='6' y1='6' x2='18' y2='18' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* ============================================
+   LIGHT VARIANTS
+   ============================================ */
+
+.mw-banner--neutral {
+  --mw-banner-surface: var(--mw-color-surface, #ffffff);
+  --mw-banner-border: var(--mw-color-border, #000000);
+  --mw-banner-icon: var(--mw-color-text-muted, #595959);
+  --mw-banner-text: var(--mw-color-text, #141414);
+}
+
+.mw-banner--info {
+  --mw-banner-surface: var(--mw-color-status-info-background, #eeeeff);
+  --mw-banner-border: var(--mw-color-status-info-border, #ababfd);
+  --mw-banner-icon: var(--mw-color-status-info-icon, #2527ca);
+  --mw-banner-text: var(--mw-color-text, #141414);
+}
+
+.mw-banner--success {
+  --mw-banner-surface: var(--mw-color-status-success-background, #e6f4ed);
+  --mw-banner-border: var(--mw-color-status-success-border, #90caad);
+  --mw-banner-icon: var(--mw-color-status-success-icon, #006d48);
+  --mw-banner-text: var(--mw-color-text, #141414);
+}
+
+.mw-banner--warning {
+  --mw-banner-surface: var(--mw-color-status-warning-background, #fff8e6);
+  --mw-banner-border: var(--mw-color-status-warning-border, #fde08a);
+  --mw-banner-icon: var(--mw-color-status-warning-icon, #d97706);
+  --mw-banner-text: var(--mw-color-text, #141414);
+}
+
+.mw-banner--error {
+  --mw-banner-surface: var(--mw-color-status-error-background, #ffe8eb);
+  --mw-banner-border: var(--mw-color-status-error-border, #ff8a95);
+  --mw-banner-icon: var(--mw-color-status-error-icon, #d90429);
+  --mw-banner-text: var(--mw-color-text, #141414);
+}
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
+.mw-theme--dark .mw-banner--neutral {
+  --mw-banner-surface: var(--mw-color-surface, #0f0f0f);
+  --mw-banner-border: var(--mw-color-border, #ffffff);
+  --mw-banner-icon: var(--mw-color-text-muted, #a3a3a3);
+  --mw-banner-text: var(--mw-color-text, #f9fafb);
+}
+
+.mw-theme--dark .mw-banner--info {
+  --mw-banner-surface: var(--mw-color-status-info-background, #040519);
+  --mw-banner-border: var(--mw-color-status-info-border, #8182fc);
+  --mw-banner-icon: var(--mw-color-border-brand, #5859fc);
+  --mw-banner-text: var(--mw-color-text, #f9fafb);
+}
+
+.mw-theme--dark .mw-banner--success {
+  --mw-banner-surface: var(--mw-color-status-success-background, #001a0c);
+  --mw-banner-border: var(--mw-color-status-success-border, #006d48);
+  --mw-banner-icon: var(--mw-color-status-success-icon, #5db189);
+  --mw-banner-text: var(--mw-color-text, #f9fafb);
+}
+
+.mw-theme--dark .mw-banner--warning {
+  --mw-banner-surface: var(--mw-color-status-warning-background, #221004);
+  --mw-banner-border: var(--mw-color-status-warning-border, #b45309);
+  --mw-banner-icon: var(--mw-color-status-warning-icon, #f9b21a);
+  --mw-banner-text: var(--mw-color-text, #f9fafb);
+}
+
+.mw-theme--dark .mw-banner--error {
+  --mw-banner-surface: var(--mw-color-status-error-background, #240006);
+  --mw-banner-border: var(--mw-color-status-error-border, #ff2847);
+  --mw-banner-icon: var(--mw-color-status-error-icon, #ff2847);
+  --mw-banner-text: var(--mw-color-text, #f9fafb);
+}

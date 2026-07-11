@@ -1,0 +1,21 @@
+flowchart TD
+  Registry["docs/registry/families/drawer"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/drawer/"]
+  Core --> CoreFiles["drawer-a11y.ts\ndrawer-recipe.ts\ndrawer-types.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> Css["drawer.css"]
+
+  React["packages/react/src/components/drawer/"]
+  Vue["packages/vue/src/components/drawer/"]
+  Svelte["packages/svelte/src/lib/components/drawer/"]
+
+  StoriesR["apps/storybook-react/src/stories/drawer/"]
+  StoriesV["apps/storybook-vue/src/stories/drawer/"]
+  StoriesS["apps/storybook-svelte/src/stories/drawer/"]
+
+  Figma[".figma/marwes/components/drawer.json\n.figma/marwes/pages/-drawer/"]

@@ -11,3 +11,10 @@
 <MarwesProvider theme={{ mode: "dark" }}>
   <p>Dark mode</p>
 </MarwesProvider>
+
+<!-- Children snippet receives CSS-provider mwTheme -->
+<MarwesProvider theme={{ breakpoint: { tablet: 1024 } }}>
+  {#snippet children({ mwTheme })}
+    <p>{mwTheme.spacing.sp16} {mwTheme.media.tabletAndAbove}</p>
+  {/snippet}
+</MarwesProvider>

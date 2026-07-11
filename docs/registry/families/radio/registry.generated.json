@@ -44,6 +44,15 @@
       "packages/vue/src/components/radio/radio.ts",
       "packages/vue/src/components/radio/variants.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/radio/index.ts",
+      "packages/svelte/src/lib/components/radio/OptionRadioGroup.svelte",
+      "packages/svelte/src/lib/components/radio/Radio.svelte",
+      "packages/svelte/src/lib/components/radio/RadioGroupField.svelte",
+      "packages/svelte/src/lib/components/radio/RatingRadioGroup.svelte",
+      "packages/svelte/src/lib/components/radio/types.ts",
+      "packages/svelte/src/lib/components/radio/YesNoRadioGroup.svelte"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/radio/__tests__/radio-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/radio/__tests__/radio-taxonomy.test.ts",
@@ -63,6 +72,18 @@
       "apps/storybook-vue/src/stories/radio/radio.stories.ts",
       "apps/storybook-vue/src/stories/radio/rating-radio-group.stories.ts",
       "apps/storybook-vue/src/stories/radio/yes-no-radio-group.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/radio/__tests__/radio-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/radio/__tests__/radio-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/radio/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/radio/option-radio-group.stories.ts",
+      "apps/storybook-svelte/src/stories/radio/radio-group-field.stories.ts",
+      "apps/storybook-svelte/src/stories/radio/radio.stories.ts",
+      "apps/storybook-svelte/src/stories/radio/RadioGroupFieldStory.svelte",
+      "apps/storybook-svelte/src/stories/radio/RadioShowcase.svelte",
+      "apps/storybook-svelte/src/stories/radio/rating-radio-group.stories.ts",
+      "apps/storybook-svelte/src/stories/radio/yes-no-radio-group.stories.ts"
     ],
     "contracts": ["tests/contracts/radio.contract.ts"]
   },
@@ -109,23 +130,16 @@
       ".figma/marwes/pages/-radio-button/README.md"
     ],
     "pageReferences": [
-      ".figma/marwes/pages/-radio-button/radio-button_1368-6733.json",
       ".figma/marwes/pages/-radio-button/-radio-button_1368-6734.json",
       ".figma/marwes/pages/-radio-button/-radio-button-dark_2276-51787.json",
-      ".figma/marwes/pages/-radio-button/component-container_1371-13445.json",
-      ".figma/marwes/pages/-radio-button/component-container_1571-19716.json",
-      ".figma/marwes/pages/-radio-button/component-container_1571-19757.json",
-      ".figma/marwes/pages/cover/radio-group-example_1825-30421.json"
+      ".figma/marwes/pages/-radio-button/-radio-button-dark_2969-11557.json",
+      ".figma/marwes/pages/-radio-button/-radio-button_2969-10998.json"
     ],
     "nodeReferences": {
       "radioButtonComponentSet": "1368:6733",
       "radioGroupComponent": "1368:6450",
       "radioLightFrame": "1368:6734",
-      "radioDarkFrame": "2276:51787",
-      "radioCombinedComponentContainer": "1371:13445",
-      "radioStateComponentContainer": "1571:19716",
-      "radioGroupComponentContainer": "1571:19757",
-      "radioGroupCoverFrame": "1825:30421"
+      "radioDarkFrame": "2276:51787"
     },
     "figmaTokens": ["radio/surface", "radio/border", "radio/dot", "radio/label"],
     "figmaStates": {
@@ -149,8 +163,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

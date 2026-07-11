@@ -42,6 +42,18 @@ export function runButtonContract(adapterName: string, h: ButtonContractHarness)
       expect(clicks).toBe(1)
     })
 
+    it("renders visible text inside the button label slot", async () => {
+      await h.renderPrimary({
+        text: "Save",
+      })
+
+      const button = h.getByRole("button", { name: /save/i })
+      const label = button.querySelector(".mw-btn__label")
+
+      expect(label).not.toBeNull()
+      expect(label).toHaveTextContent("Save")
+    })
+
     it("loading PrimaryButton is busy and disabled", async () => {
       await h.renderPrimary({
         text: "Saving",

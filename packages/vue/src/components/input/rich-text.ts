@@ -32,6 +32,7 @@ const richTextPropKeys = [
   "describedBy",
   "labelledBy",
   "ariaLabel",
+  "label",
   "allowedFormats",
   "onValueChange",
   "className",

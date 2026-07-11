@@ -1,0 +1,22 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="ProgressBar/Introduction" />
+
+# ProgressBar Component
+
+`ProgressBar` is a determinate progress indicator for completion states, uploads, imports, and dashboard summaries. It is not an input; use `Slider` or `SliderField` when users need to change a value.
+
+The atom follows the synced Figma progress-bar reference with an optional label row, optional percentage text, and small/default track sizes.
+
+```tsx
+import { ProgressBar } from "@marwes-ui/react"
+
+<ProgressBar label="Progress" value={60} size="small" />
+<ProgressBar label="Deployment" value={8} max={10} valueLabel="8 of 10 steps complete" />
+```
+
+## Accessibility
+
+The rendered root uses `role="progressbar"` with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`. Visible labels are wired through `aria-labelledby` when an `id` is provided; otherwise the label text is exposed as `aria-label`.
+
+Use `showLabel={false}` only when nearby UI already names the progress value, and pass `ariaLabel` for the hidden-label case.

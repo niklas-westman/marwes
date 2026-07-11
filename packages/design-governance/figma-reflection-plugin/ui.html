@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 12px;
+        color: var(--figma-color-text, #1f1f1f);
+        background: var(--figma-color-bg, #ffffff);
+      }
+
+      strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        line-height: 16px;
+      }
+
+      #status {
+        margin: 0;
+        color: var(--figma-color-text-secondary, #6b6b6b);
+        font-size: 11px;
+        line-height: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <strong>Marwes Reflection Frame Prep</strong>
+    <p id="status">Starting...</p>
+
+    <script>
+      var PORT_START = 9243
+      var PORT_END = 9252
+      var connections = []
+      var pendingRequests = {}
+      var fileInfo = null
+      var lastError = null
+      var isScanning = false
+
+      function setStatus(message) {
+        document.getElementById("status").textContent = message
+      }
+
+      function postToPlugin(message) {
+        parent.postMessage({ pluginMessage: message }, "*")
+      }
+
+      function send(socket, message) {
+        if (socket.readyState === 1) {
+          socket.send(JSON.stringify(message))
+        }
+      }
+
+      function broadcast(message) {
+        connections.forEach(function (connection) {
+          send(connection.socket, message)
+        })
+      }
+
+      function connectedTo(port) {
+        return connections.some(function (connection) {
+          return connection.port === port && connection.socket.readyState === 1
+        })
+      }
+
+      function removeConnection(port) {
+        connections = connections.filter(function (connection) {
+          return connection.port !== port
+        })
+      }
+
+      function sendCached(socket) {
+        if (fileInfo) send(socket, { type: "FILE_INFO", data: fileInfo })
+        if (lastError) send(socket, { type: "ERROR", error: lastError })
+      }
+
+      function handleSocketMessage(socket, event) {
+        var message
+        try {
+          message = JSON.parse(event.data)
+        } catch (_error) {
+          return
+        }
+
+        if (!message.id || !message.method) return
+
+        if (message.method === "GET_FILE_INFO") {
+          send(socket, {
+            id: message.id,
+            result: { success: true, fileInfo: fileInfo },
+          })
+          return
+        }
+
+        if (message.method === "PREPARE_REFLECTION_FRAMES") {
+          pendingRequests[message.id] = socket
+          postToPlugin({
+            type: "PREPARE_REFLECTION_FRAMES",
+            requestId: message.id,
+            params: message.params || {},
+          })
+          return
+        }
+
+        if (message.method === "INSPECT_SOURCE_FRAME_REGISTRY") {
+          pendingRequests[message.id] = socket
+          postToPlugin({
+            type: "INSPECT_SOURCE_FRAME_REGISTRY",
+            requestId: message.id,
+            params: message.params || {},
+          })
+          return
+        }
+
+        if (message.method === "EXPORT_REFLECTION_FRAMES") {
+          pendingRequests[message.id] = socket
+          postToPlugin({
+            type: "EXPORT_REFLECTION_FRAMES",
+            requestId: message.id,
+            params: message.params || {},
+          })
+          return
+        }
+
+        send(socket, { id: message.id, error: "Unknown method: " + message.method })
+      }
+
+      function connect(port) {
+        if (connectedTo(port)) return
+
+        var socket = new WebSocket("ws://localhost:" + port)
+        var timeout = setTimeout(function () {
+          if (socket.readyState !== 1) socket.close()
+        }, 2500)
+
+        socket.onopen = function () {
+          clearTimeout(timeout)
+          connections.push({ port: port, socket: socket })
+          setStatus("Connected on port " + port)
+          sendCached(socket)
+          postToPlugin({ type: "GET_FILE_INFO" })
+        }
+
+        socket.onmessage = function (event) {
+          handleSocketMessage(socket, event)
+        }
+
+        socket.onclose = function () {
+          clearTimeout(timeout)
+          removeConnection(port)
+          if (connections.length === 0) setStatus("Waiting for prepare command...")
+        }
+
+        socket.onerror = function () {
+          clearTimeout(timeout)
+        }
+      }
+
+      function scan() {
+        if (isScanning) return
+        isScanning = true
+
+        for (var port = PORT_START; port <= PORT_END; port += 1) {
+          connect(port)
+        }
+
+        setTimeout(function () {
+          isScanning = false
+        }, 2600)
+      }
+
+      window.onmessage = function (event) {
+        var message = event.data.pluginMessage
+        if (!message || !message.type) return
+
+        if (message.type === "FILE_INFO") {
+          fileInfo = message.data
+          broadcast({ type: "FILE_INFO", data: fileInfo })
+          return
+        }
+
+        if (message.type === "ERROR") {
+          lastError = message.error || "Unknown Reflection frame prep error"
+          broadcast({ type: "ERROR", error: lastError })
+          setStatus("Error: " + lastError)
+          return
+        }
+
+        if (message.type === "PREPARE_REFLECTION_FRAMES_RESULT") {
+          var socket = pendingRequests[message.requestId]
+          delete pendingRequests[message.requestId]
+
+          if (!socket) return
+          if (message.success) {
+            send(socket, { id: message.requestId, result: message.data })
+          } else {
+            send(socket, {
+              id: message.requestId,
+              error: message.error || "Reflection frame prep failed",
+              result: message.data,
+            })
+          }
+          return
+        }
+
+        if (message.type === "INSPECT_SOURCE_FRAME_REGISTRY_RESULT") {
+          var registrySocket = pendingRequests[message.requestId]
+          delete pendingRequests[message.requestId]
+
+          if (!registrySocket) return
+          if (message.success) {
+            send(registrySocket, { id: message.requestId, result: message.data })
+          } else {
+            send(registrySocket, {
+              id: message.requestId,
+              error: message.error || "Source frame registry inspection failed",
+              result: message.data,
+            })
+          }
+          return
+        }
+
+        if (message.type === "EXPORT_REFLECTION_FRAMES_RESULT") {
+          var exportSocket = pendingRequests[message.requestId]
+          delete pendingRequests[message.requestId]
+
+          if (!exportSocket) return
+          if (message.success) {
+            send(exportSocket, { id: message.requestId, result: message.data })
+          } else {
+            send(exportSocket, {
+              id: message.requestId,
+              error: message.error || "Reflection frame export failed",
+              result: message.data,
+            })
+          }
+          return
+        }
+
+        if (message.type === "STATUS") {
+          setStatus(message.message)
+          broadcast({ type: "STATUS", message: message.message })
+        }
+      }
+
+      setStatus("Waiting for prepare command...")
+      scan()
+      setInterval(scan, 2000)
+    </script>
+  </body>
+</html>

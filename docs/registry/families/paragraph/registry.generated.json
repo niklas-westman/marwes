@@ -32,6 +32,11 @@
       "packages/vue/src/components/paragraph/index.ts",
       "packages/vue/src/components/paragraph/paragraph.ts"
     ],
+    "svelte": [
+      "packages/svelte/src/lib/components/paragraph/index.ts",
+      "packages/svelte/src/lib/components/paragraph/Paragraph.svelte",
+      "packages/svelte/src/lib/components/paragraph/types.ts"
+    ],
     "storybookReact": [
       "apps/storybook-react/src/stories/paragraph/__tests__/paragraph-introduction-docs.test.ts",
       "apps/storybook-react/src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts",
@@ -43,6 +48,12 @@
       "apps/storybook-vue/src/stories/paragraph/__tests__/paragraph-taxonomy.test.ts",
       "apps/storybook-vue/src/stories/paragraph/Introduction.mdx",
       "apps/storybook-vue/src/stories/paragraph/paragraph.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/paragraph/__tests__/paragraph-taxonomy-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/paragraph/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/paragraph/paragraph.stories.ts",
+      "apps/storybook-svelte/src/stories/paragraph/ParagraphShowcase.svelte"
     ],
     "contracts": ["tests/contracts/paragraph.contract.ts"]
   },
@@ -94,7 +105,7 @@
       "instrumentSansLightSection": "1368:5698",
       "instrumentSansDarkSection": "1368:5717"
     },
-    "figmaTokens": ["Body/Medium", "Body/Default", "Body/16 Paragraph", "P - Paragraph"],
+    "figmaTokens": [],
     "figmaStates": {
       "baseVariants": ["paragraph", "body-default", "body-medium"],
       "interactionStates": ["sm", "md", "lg", "light", "dark", "typography-scale", "long-form"]
@@ -103,8 +114,10 @@
   "coverage": {
     "react": true,
     "vue": true,
+    "svelte": true,
     "storybookReact": true,
     "storybookVue": true,
+    "storybookSvelte": true,
     "contractsPresent": true,
     "auditDocPresent": true,
     "figmaReferencesPresent": true

@@ -2,6 +2,7 @@
   import { buildRichTextFieldA11yIds } from "@marwes-ui/core";
   import type { RichTextOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import Text from "../text/Text.svelte";
   import RichText from "./RichText.svelte";
   import type { RichTextFieldProps } from "./types.js";
 
@@ -57,7 +58,7 @@
       el?.focus();
     }}
   >
-    <p class="mw-p mw-p--md">{label}</p>
+    <Text variant="label">{label}</Text>
   </button>
 
   <div class="mw-input-field__input-wrapper">
@@ -72,13 +73,13 @@
 
   {#if hasHelperText && !hasError}
     <div class="mw-input-field__helper" id={a11yIds.helperTextId}>
-      <p class="mw-p mw-p--sm">{helperText}</p>
+      <Text variant="caption">{helperText}</Text>
     </div>
   {/if}
 
   {#if hasError}
     <div class="mw-input-field__error" id={a11yIds.errorId} aria-live="polite">
-      <p class="mw-p mw-p--sm">{error}</p>
+      <Text variant="caption">{error}</Text>
     </div>
   {/if}
 </div>

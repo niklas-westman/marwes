@@ -1,0 +1,21 @@
+flowchart LR
+  Figma["Figma refs\nbreadcrumb + item + separator"]
+  Core["@marwes-ui/core\nrecipe + a11y + types"]
+  Presets["preset CSS\nbreadcrumb.css"]
+  React["@marwes-ui/react\nBreadcrumb"]
+  Vue["@marwes-ui/vue\nBreadcrumb"]
+  Svelte["@marwes-ui/svelte\nBreadcrumb"]
+  Stories["Storybook React + Vue + Svelte"]
+  Registry["docs/registry/families/breadcrumb"]
+
+  Figma --> Core
+  Core --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  Figma --> Registry
+  Core --> Registry
+  Stories --> Registry

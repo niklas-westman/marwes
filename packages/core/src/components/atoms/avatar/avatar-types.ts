@@ -24,6 +24,7 @@ export interface AvatarOptions {
   iconName?: IconName
   decorative?: boolean
   ariaLabel?: string
+  label?: string
 }
 
 export interface AvatarA11yProps {

@@ -8,10 +8,10 @@
 
 .mw-checkbox {
   /* Component-level CSS variables (overridden by modifiers) */
-  --mw-checkbox-size: var(--mw-density-checkbox-size);
+  --mw-checkbox-size: 16px;
   --mw-checkbox-radius: var(--mw-ui-radius);
-  --mw-checkbox-border: var(--mw-color-border);
-  --mw-checkbox-bg: var(--mw-color-surface);
+  --mw-checkbox-border: var(--mw-color-border-subtle);
+  --mw-checkbox-bg: var(--mw-color-surface, var(--mw-color-surface-primary));
   --mw-checkbox-checked-bg: var(--mw-color-primary-base);
   --mw-checkbox-check: var(--mw-color-primary-label);
 
@@ -28,8 +28,8 @@
   place-content: center;
 
   /* Visual styling - aligned with Figma design */
-  border-radius: max(2px, calc(var(--mw-checkbox-radius) * 0.4));
-  border: 1px solid var(--mw-checkbox-border);
+  border-radius: 3px;
+  border: 1.5px solid var(--mw-checkbox-border);
   background: var(--mw-checkbox-bg);
 
   /* Interaction */
@@ -37,8 +37,7 @@
   vertical-align: middle;
   transition: all 150ms ease;
 
-  /* Space Protection */
-  margin: var(--mw-density-field-gap);
+  margin: 0;
 
   /* Typography */
   font-family: var(--mw-font-primary, inherit);
@@ -53,7 +52,7 @@
 }
 
 .mw-checkbox--md {
-  --mw-checkbox-size: 18px;
+  --mw-checkbox-size: 16px;
 }
 
 .mw-checkbox--lg {
@@ -142,6 +141,7 @@
 .mw-checkbox--disabled {
   cursor: not-allowed;
   opacity: 0.2;
+  color: var(--mw-color-text-disabled);
 }
 
 /* ============================================
@@ -150,7 +150,7 @@
 
 .mw-checkbox--invalid,
 .mw-checkbox[aria-invalid="true"] {
-  border-color: var(--mw-color-danger-base);
+  border-color: var(--mw-color-status-error-text, var(--mw-color-danger-base));
 }
 
 .mw-checkbox:checked.mw-checkbox--invalid,

@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { Checkbox, CheckboxField, Switch, SwitchField } from "@marwes-ui/svelte";
+  import { CheckboxField, SwitchField } from "@marwes-ui/svelte";
+  // Atoms are no longer publicly exported; deep-import for playground demo.
+  import Checkbox from "../../../../packages/svelte/src/lib/components/checkbox/Checkbox.svelte";
+  import Switch from "../../../../packages/svelte/src/lib/components/switch/Switch.svelte";
 
   let accepted = $state(false);
   let notifications = $state(true);

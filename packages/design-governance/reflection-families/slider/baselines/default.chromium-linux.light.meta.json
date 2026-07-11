@@ -1,0 +1,36 @@
+{
+  "baseline": "default.chromium-linux.light.png",
+  "caseFingerprint": "3cf2f7d0c319c70e5cabcd9a54d63d13f54050ae30f5e834700f9f7a6b6d008b",
+  "caseId": "slider.default",
+  "createdAt": "2026-06-13T16:20:11.629Z",
+  "exportScale": 1,
+  "family": "slider",
+  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFrameName": "reflection/slider/default/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "5059:45128",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 1385,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "3e23bc379fe1de349ead678efdc119448932d1043e32608b29af603c0fcb8852",
+  "schemaVersion": 1,
+  "sourceFingerprint": "40da7e531b153161a38d5a181cfda21b72d4331f62f31a830c7129499f63ed69",
+  "sourceFrameId": "2462:11678",
+  "sourceNodeId": "2462:12273",
+  "sourceNodeIds": ["2462:12273"],
+  "variablesFingerprint": "e89c2f8267365df6093e3eec9dbc7b02f33127cd0ccf2abcedc136555203a11a",
+  "viewport": "slider-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

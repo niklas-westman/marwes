@@ -1,8 +1,12 @@
 import { storybookA11yPolicy } from "@marwes-ui/core"
-import type { RichTextProps } from "@marwes-ui/vue"
-import { Paragraph, RichText } from "@marwes-ui/vue"
+import { Paragraph } from "@marwes-ui/vue"
 import type { Meta, StoryObj } from "@storybook/vue3-vite"
 import { ref } from "vue"
+// Atom is no longer publicly exported; deep-import for story documentation.
+import {
+  RichText,
+  type RichTextProps,
+} from "../../../../../packages/vue/src/components/input/rich-text"
 
 const meta = {
   title: "Input/Atom/RichText",
