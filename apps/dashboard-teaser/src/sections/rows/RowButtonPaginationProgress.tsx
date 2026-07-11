@@ -1,11 +1,10 @@
 import { Button, ButtonVariant, ProgressBar, Text, TextVariant } from "@marwes-ui/react"
-import { useState } from "react"
+import { memo, useState } from "react"
 import styled from "styled-components"
 // Atom is no longer publicly exported; deep-import for inline Pagination demo.
 import { Pagination } from "../../../../../packages/react/src/components/pagination/pagination"
 
-import { CodeIconButton } from "../../components/CodeIconButton"
-import { CodeSnippetModal } from "../../components/CodeSnippetModal"
+import { SnippetButton } from "../../components/SnippetButton"
 import type { ComponentDisplayOptions } from "../playground-settings"
 import { buttonSnippets } from "./button-snippets"
 import { paginationSnippets } from "./pagination-snippets"
@@ -35,18 +34,12 @@ type RowButtonPaginationProgressProps = {
 
 function RowButtonPaginationProgress({ options }: RowButtonPaginationProgressProps): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1)
-  const [buttonCodeOpen, setButtonCodeOpen] = useState(false)
-  const [paginationCodeOpen, setPaginationCodeOpen] = useState(false)
-  const [progressCodeOpen, setProgressCodeOpen] = useState(false)
 
   return (
     <ShowcaseFlexRow>
       <ItemCard $basis="15rem" $minHeight="9rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Button</Text>}
-        <CodeIconButton
-          ariaLabel="View Button code example"
-          onClick={() => setButtonCodeOpen(true)}
-        />
+        <SnippetButton title="Button" snippets={buttonSnippets} />
         <ButtonRow>
           <Button>Label →</Button>
           <Button variant={ButtonVariant.secondary}>Label →</Button>
@@ -55,10 +48,7 @@ function RowButtonPaginationProgress({ options }: RowButtonPaginationProgressPro
       </ItemCard>
       <ItemCard $basis="15rem" $minHeight="9rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Pagination</Text>}
-        <CodeIconButton
-          ariaLabel="View Pagination code example"
-          onClick={() => setPaginationCodeOpen(true)}
-        />
+        <SnippetButton title="Pagination" snippets={paginationSnippets} />
         <Pagination
           page={currentPage}
           pageCount={10}
@@ -69,32 +59,12 @@ function RowButtonPaginationProgress({ options }: RowButtonPaginationProgressPro
       </ItemCard>
       <ProgressCard $basis="15rem" $minHeight="9rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Progress bar</Text>}
-        <CodeIconButton
-          ariaLabel="View Progress bar code example"
-          onClick={() => setProgressCodeOpen(true)}
-        />
+        <SnippetButton title="Progress bar" snippets={progressSnippets} />
         <ProgressBar label="Progress" value={60} size="small" />
       </ProgressCard>
-      <CodeSnippetModal
-        open={buttonCodeOpen}
-        onOpenChange={setButtonCodeOpen}
-        title="Button"
-        snippets={buttonSnippets}
-      />
-      <CodeSnippetModal
-        open={paginationCodeOpen}
-        onOpenChange={setPaginationCodeOpen}
-        title="Pagination"
-        snippets={paginationSnippets}
-      />
-      <CodeSnippetModal
-        open={progressCodeOpen}
-        onOpenChange={setProgressCodeOpen}
-        title="Progress bar"
-        snippets={progressSnippets}
-      />
     </ShowcaseFlexRow>
   )
 }
 
-export { RowButtonPaginationProgress }
+const MemoizedRowButtonPaginationProgress = memo(RowButtonPaginationProgress)
+export { MemoizedRowButtonPaginationProgress as RowButtonPaginationProgress }

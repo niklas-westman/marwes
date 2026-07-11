@@ -1,0 +1,66 @@
+/**
+ * Personality signatures
+ *
+ * Opt-in visual identity effects layered on top of the token layer. Selected
+ * via `personality` on ThemeInput, which lands on the MarwesProvider wrapper
+ * as `data-marwes-personality="<value>"`. All rules reference design-system
+ * CSS variables so they follow the active palette automatically — no
+ * literal colors here.
+ *
+ * The default "flat" personality intentionally ships no rules; the wrapper
+ * still gets `data-marwes-personality="flat"` but there is nothing for the
+ * selector to match, so default themes stay byte-identical.
+ */
+
+/* ─── glow ────────────────────────────────────────────────────────────────
+ * Neon glow on primary interactives. Reads primary via `--mw-color-primary-base`
+ * (falls back to currentColor if a consumer bypasses the token layer).
+ */
+[data-marwes-personality="glow"] .mw-btn--primary,
+[data-marwes-personality="glow"] .mw-switch[data-checked="true"] .mw-switch__thumb,
+[data-marwes-personality="glow"] .mw-switch[aria-checked="true"] .mw-switch__thumb {
+  box-shadow: 0 0 12px
+    color-mix(in srgb, var(--mw-color-primary-base, currentColor) 55%, transparent);
+}
+
+/* ─── print ───────────────────────────────────────────────────────────────
+ * Hard-offset shadow evocative of print/editorial. Hover/active add a subtle
+ * translate to make the effect tactile. Motion is skipped for users who
+ * requested reduced motion.
+ */
+[data-marwes-personality="print"] .mw-btn--primary {
+  box-shadow: 3px 3px 0 var(--mw-color-text, currentColor);
+}
+
+@media (not (prefers-reduced-motion: reduce)) {
+  [data-marwes-personality="print"] .mw-btn--primary:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--mw-color-text, currentColor);
+  }
+
+  [data-marwes-personality="print"] .mw-btn--primary:active:not(:disabled) {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--mw-color-text, currentColor);
+  }
+}
+
+/* ─── soft ────────────────────────────────────────────────────────────────
+ * Blurred elevation under cards. Preserves the existing 1px inset border so
+ * the card outline stays intact, then layers the outer glow on top.
+ */
+[data-marwes-personality="soft"] .mw-card {
+  box-shadow: inset 0 0 0 1px var(--mw-card-border, transparent), 0 12px 32px -18px
+    color-mix(in srgb, var(--mw-color-primary-base, #000) 55%, transparent);
+}
+
+/* ─── outlined ────────────────────────────────────────────────────────────
+ * Crisp muted outline on primary actions — subtle presence without heavy
+ * shadow. Uses inset shadow so it respects the button's border-radius.
+ */
+[data-marwes-personality="outlined"] .mw-btn--primary {
+  box-shadow: inset 0 0 0 1px var(--mw-color-border-strong, currentColor);
+}
+
+/* ─── flat ────────────────────────────────────────────────────────────────
+ * No rules. The default personality intentionally ships no additional CSS.
+ */

@@ -6,10 +6,19 @@ import {
   Text,
   TextVariant,
 } from "@marwes-ui/react"
-import type { Density, SegmentedControlItem } from "@marwes-ui/react"
-import { type Dispatch, type SetStateAction, useId } from "react"
+import type { Density } from "@marwes-ui/react"
+import type { Dispatch, SetStateAction } from "react"
 import styled from "styled-components"
 
+import { ColorPickerField } from "../components/ColorPickerField"
+import {
+  colorVisionOptions,
+  densityOptions,
+  fontOptions,
+  fontStyleItems,
+  letterSpacingItems,
+  styleItems,
+} from "../constants/control-options"
 import {
   type ComponentDisplayOptions,
   type PlaygroundAccessibilitySettings,
@@ -64,92 +73,6 @@ const HiddenFieldLabel = styled.div`
     border: 0;
   }
 `
-
-const ColorPickerRow = styled.div`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: ${({ theme }) => theme.spacing.sp12};
-  align-items: center;
-  color: ${({ theme }) => theme.color.textMuted};
-`
-
-const ColorSwatchInput = styled.input`
-  width: 3rem;
-  height: 1.75rem;
-  border: 0.0625rem solid ${({ theme }) => theme.color.border};
-  border-radius: ${({ theme }) => `calc(${theme.ui.radius} * 1.5)`};
-  background: transparent;
-  padding: ${({ theme }) => theme.spacing.sp2};
-  cursor: pointer;
-
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-
-  &::-webkit-color-swatch {
-    border: none;
-    border-radius: ${({ theme }) => theme.spacing.sp2};
-  }
-`
-
-type ColorPickerFieldProps = {
-  label: string
-  value: string
-  onValueChange: (value: string) => void
-}
-
-function ColorPickerField({ label, value, onValueChange }: ColorPickerFieldProps): JSX.Element {
-  const labelId = useId()
-
-  return (
-    <ColorPickerRow>
-      <span id={labelId}>{label}</span>
-      <ColorSwatchInput
-        type="color"
-        value={value}
-        aria-labelledby={labelId}
-        onChange={(event) => onValueChange(event.target.value)}
-      />
-    </ColorPickerRow>
-  )
-}
-
-const styleItems: SegmentedControlItem<PlaygroundStyle>[] = [
-  { value: "marwes", label: "Marwes" },
-  { value: "cyber", label: "Cyber" },
-  { value: "mono", label: "Mono" },
-]
-
-const fontOptions: Array<{ value: PlaygroundFont; label: string }> = [
-  { value: "default", label: "Theme default" },
-  { value: "instrument", label: "Instrument Sans" },
-  { value: "mono", label: "Fira Code" },
-  { value: "nunito", label: "Nunito" },
-  { value: "editorial", label: "Playfair Display" },
-]
-
-const densityOptions: Array<{ value: Density; label: string }> = [
-  { value: "compact", label: "Compact" },
-  { value: "comfortable", label: "Comfortable" },
-  { value: "spacious", label: "Spacious" },
-]
-
-const colorVisionOptions: Array<{ value: PlaygroundColorVision; label: string }> = [
-  { value: "normal", label: "Normal" },
-  { value: "protanopia", label: "Protanopia" },
-  { value: "deuteranopia", label: "Deuteranopia" },
-  { value: "tritanopia", label: "Tritanopia" },
-]
-
-const fontStyleItems: SegmentedControlItem<"default" | "dyslexic">[] = [
-  { value: "default", label: "Default" },
-  { value: "dyslexic", label: "Dyslexic" },
-]
-
-const letterSpacingItems: SegmentedControlItem<"default" | "loose">[] = [
-  { value: "default", label: "Default" },
-  { value: "loose", label: "Loose" },
-]
 
 function PlaygroundControls({ settings, onSettingsChange }: PlaygroundControlsProps): JSX.Element {
   const updateColor = (key: keyof PlaygroundColorSettings, value: string): void => {
