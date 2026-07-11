@@ -17,6 +17,7 @@ const directVisualAssignment =
 
 const intentionalDirectVisualValues = new Set([
   "molecules/dialog-modal.css:14:  background: rgba(0, 0, 0, 0.6);",
+  "spinner.css:17:  --mw-spinner-track-color: #a3a3a3;",
 ])
 
 function listCssFiles(dir: string): string[] {
