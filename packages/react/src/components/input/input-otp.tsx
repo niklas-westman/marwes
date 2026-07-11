@@ -55,6 +55,7 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
   if (props.invalid) recipeOptions.invalid = true
   if (props.describedBy) recipeOptions.describedBy = props.describedBy
   if (props.ariaLabel) recipeOptions.ariaLabel = props.ariaLabel
+  if (props.label) recipeOptions.label = props.label
   if (props.ariaLabelledBy) recipeOptions.ariaLabelledBy = props.ariaLabelledBy
 
   const kit = createInputOtpRecipe(recipeOptions)

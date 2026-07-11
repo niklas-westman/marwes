@@ -31,8 +31,9 @@ export function resolveInputOtpA11y(options: InputOtpOptions): InputOtpA11yProps
 
   if (options.ariaLabelledBy) {
     a11yProps.ariaLabelledBy = options.ariaLabelledBy
-  } else if (options.ariaLabel) {
-    a11yProps.ariaLabel = options.ariaLabel
+  } else {
+    const accessibleLabel = options.ariaLabel ?? options.label
+    if (accessibleLabel) a11yProps.ariaLabel = accessibleLabel
   }
 
   if (options.invalid) {

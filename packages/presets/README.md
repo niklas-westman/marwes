@@ -1,4 +1,4 @@
-Static preset CSS and theme exports for Marwes React, Vue, and custom adapter projects.
+Static preset CSS and theme exports for Marwes React, Vue, Svelte, and custom adapter projects.
 
 <div align="center">
 
@@ -9,11 +9,12 @@ Static preset CSS and theme exports for Marwes React, Vue, and custom adapter pr
 
 # Marwes Design System - Presets
 
-**Static default CSS and preset theme exports for Marwes React and Vue apps.**
+**Static default CSS and preset theme exports for Marwes React, Vue, and Svelte apps.**
 
 Static `.mw-*` CSS • CSS variables • Default Marwes visuals • No runtime CSS-in-JS
 
-[Website](https://marwes.io) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
+[React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [Docs](https://github.com/niklas-westman/marwes/tree/main/docs) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -21,7 +22,7 @@ Static `.mw-*` CSS • CSS variables • Default Marwes visuals • No runtime C
 
 ## Why Use It
 
-Most apps install `@marwes-ui/react` or `@marwes-ui/vue`, and those adapters load the default preset automatically. Install presets directly when you need the standalone CSS path, the explicit `firstEditionTheme` object, or preset CSS in a custom adapter.
+Most apps install `@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte`, and those adapters load the default preset automatically. Install presets directly when you need the standalone CSS path, the explicit `firstEditionTheme` object, or preset CSS in a custom adapter.
 
 Presets gives Marwes its default visual layer:
 
@@ -39,6 +40,7 @@ Presets are the static visual layer, not the normal app entry point.
 | --- | --- |
 | `@marwes-ui/react` | You are building a React app. |
 | `@marwes-ui/vue` | You are building a Vue app. |
+| `@marwes-ui/svelte` | You are building a Svelte app. |
 | `@marwes-ui/core` | You need framework-agnostic recipes, theme utilities, accessibility contracts, or adapter/tooling APIs. |
 | `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
@@ -52,7 +54,7 @@ pnpm add @marwes-ui/presets
 
 ## Normal App Setup
 
-React and Vue apps normally import only the adapter:
+React, Vue, and Svelte apps normally import only the adapter:
 
 ```tsx
 import { Button, ButtonVariant, MarwesProvider } from "@marwes-ui/react"
@@ -81,18 +83,26 @@ The default preset styles these Marwes families today:
 - Accordion and accordion fields
 - Avatar and avatar groups
 - Badge and contextual badge variants
-- Button and purpose button variants
+- Banner and info/success/warning/error banner variants
+- Breadcrumb
+- Button (including `danger` variant), icon button, and purpose button variants
 - Card variants
 - Checkbox, checkbox fields, and checkbox groups
-- Dialog and dialog modal
+- Context menu
+- Dialog, dialog modal, and drawer
 - Divider
 - Icon
 - Input, textarea, select, rich text, OTP, and field variants
-- Paragraph and heading typography
+- Pagination field
+- Paragraph, heading, and text typography
+- Progress bar
 - Radio and radio groups
+- Segmented control field
+- Skeleton
 - Slider and slider fields
-- Spacing and spacer primitives
+- Spacing and spacer primitives (including the `sp-12` spacing token)
 - Spinner variants
+- Stat tile
 - Switch and switch fields
 - Tab groups and panels
 - Toast and toast container

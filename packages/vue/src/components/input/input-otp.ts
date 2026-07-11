@@ -32,6 +32,7 @@ const inputOtpPropKeys = [
   "invalid",
   "describedBy",
   "ariaLabel",
+  "label",
   "ariaLabelledBy",
   "onValueChange",
   "className",
@@ -70,6 +71,7 @@ export const InputOtp = defineComponent(
       if (props.invalid) recipeOptions.invalid = true
       if (props.describedBy) recipeOptions.describedBy = props.describedBy
       if (props.ariaLabel) recipeOptions.ariaLabel = props.ariaLabel
+      if (props.label) recipeOptions.label = props.label
       if (props.ariaLabelledBy) recipeOptions.ariaLabelledBy = props.ariaLabelledBy
 
       return createInputOtpRecipe(recipeOptions)

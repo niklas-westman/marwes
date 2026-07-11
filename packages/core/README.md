@@ -13,7 +13,8 @@ Framework-agnostic Marwes design system recipes, theme utilities, accessibility 
 
 Pure TypeScript • No framework dependency • Typed RenderKit • Shared ThemeInput • AI-readable contracts
 
-[Website](https://marwes.io) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
+[React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/) • [Docs](https://github.com/niklas-westman/marwes/tree/main/docs) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -190,13 +191,16 @@ RenderKit includes:
 
 Core currently powers these component families:
 
-- Buttons and semantic button purposes
+- Buttons (including `danger` variant), icon buttons, and semantic button purposes
 - Inputs, textareas, selects, rich text, OTP, and field wrappers
 - Checkbox and radio families
-- Switches and sliders
-- Cards, typography, icons, avatars, dividers, and spacing
+- Switches, sliders, segmented control fields, and pagination fields
+- Cards, typography (headings, paragraph, text), icons, avatars, dividers, and spacing (with the `sp-12` token)
+- Breadcrumbs and stat tiles
+- Skeletons and progress bars
 - Badges and contextual badge variants
-- Toasts, tooltips, dialogs, tabs, accordions, and spinners
+- Banners (info, success, warning, error)
+- Toasts, tooltips, context menus, dialogs, drawers, tabs, accordions, and spinners
 
 React, Vue, and Svelte expose the public components. Core exposes the shared recipes, types, enum objects, semantic utilities, and theme helpers that keep those adapters consistent.
 

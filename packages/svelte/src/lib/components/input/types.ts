@@ -61,6 +61,7 @@ export interface InputOtpProps {
   required?: boolean
   invalid?: boolean
   ariaLabel?: string
+  label?: string
   ariaLabelledBy?: string
   /** ID(s) of elements that describe the input. Pre-merged by InputOtpField. */
   describedBy?: string
@@ -78,7 +79,7 @@ export interface InputOtpFieldProps {
   /** Optional error message. */
   error?: string
   /** Props forwarded to the bare InputOtp atom. */
-  inputOtp?: Omit<InputOtpProps, "id" | "ariaLabel" | "ariaLabelledBy" | "describedBy">
+  inputOtp?: Omit<InputOtpProps, "id" | "ariaLabel" | "label" | "ariaLabelledBy" | "describedBy">
   /** Additional aria-describedby IDs to merge with internal helper/error IDs. */
   ariaDescribedBy?: string
   class?: string
