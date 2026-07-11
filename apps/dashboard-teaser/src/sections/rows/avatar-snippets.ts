@@ -10,14 +10,14 @@ export function Example() {
           { initials: "MO" },
           { initials: "MO" },
           { initials: "MO" },
-          { type: "icon", ariaLabel: "Guest member" },
+          { type: "icon", label: "Guest member" },
         ]}
         overflowCount={3}
       />
       <AvatarBadge initials="MO" statusLabel="Online" />
       <Avatar src="/avatar.png" alt="User" />
       <Avatar initials="MO" size="small" />
-      <Avatar type="icon" ariaLabel="User icon fallback" />
+      <Avatar type="icon" label="User icon fallback" />
     </>
   )
 }
@@ -33,14 +33,14 @@ import { Avatar, AvatarBadge, AvatarGroup } from "@marwes-ui/vue"
       { initials: 'MO' },
       { initials: 'MO' },
       { initials: 'MO' },
-      { type: 'icon', ariaLabel: 'Guest member' },
+      { type: 'icon', label: 'Guest member' },
     ]"
     :overflow-count="3"
   />
   <AvatarBadge initials="MO" status-label="Online" />
   <Avatar src="/avatar.png" alt="User" />
   <Avatar initials="MO" size="small" />
-  <Avatar type="icon" aria-label="User icon fallback" />
+  <Avatar type="icon" label="User icon fallback" />
 </template>
 `
 
@@ -53,14 +53,14 @@ const svelte = `<script lang="ts">
     { initials: "MO" },
     { initials: "MO" },
     { initials: "MO" },
-    { type: "icon", ariaLabel: "Guest member" },
+    { type: "icon", label: "Guest member" },
   ]}
   overflowCount={3}
 />
 <AvatarBadge initials="MO" statusLabel="Online" />
 <Avatar src="/avatar.png" alt="User" />
 <Avatar initials="MO" size="small" />
-<Avatar type="icon" ariaLabel="User icon fallback" />
+<Avatar type="icon" label="User icon fallback" />
 `
 
 const avatarSnippets: Record<Framework, string> = { react, vue, svelte }

@@ -11,6 +11,8 @@ export interface ButtonProps extends ButtonOptions {
 export interface IconButtonProps
   extends Omit<ButtonProps, "children" | "hasVisibleText" | "iconLeft" | "iconOnly" | "iconRight"> {
   icon: IconName
+  /** Accessible name — required for icon-only buttons. Prefer `label`; `ariaLabel` also accepted. */
+  label?: string
   ariaLabel?: string
   variant?: ButtonVariant
 }

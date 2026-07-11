@@ -13,7 +13,8 @@ React components for the Marwes design system with default styling, typed theme 
 
 React 18+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
-[Website](https://marwes.io) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [React Storybook](https://storybook-react.marwes.io/latest/) • [GitHub](https://github.com/niklas-westman/marwes)
+[**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
+[React Storybook](https://storybook-react.marwes.io/latest/) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [GitHub](https://github.com/niklas-westman/marwes)
 
 </div>
 
@@ -44,51 +45,37 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Install
 
-The Marwes CLI sets up an existing React app in one command. Every path below leaves you with the same result: components that render with default Marwes styling and no separate CSS setup.
+The Marwes CLI is the official installation path. It installs `@marwes-ui/react` (with `react` and `react-dom` as peers), wraps your app root with `MarwesProvider`, and leaves you ready to render components with default Marwes styling — no separate CSS setup.
 
-For deeper setup guides, visit [marwes.io](https://marwes.io).
+For full setup guides, theme customization, and the theme builder, visit [marwes.io](https://marwes.io).
 
-### Recommended: with the CLI
+### Existing React app
 
-1. Open a terminal at the root of your React app.
-
-2. Run the installer:
-
-   ```bash
-   pnpm dlx @marwes-ui/cli init --adapter react
-   ```
-
-3. The CLI installs `@marwes-ui/react` (with `react` and `react-dom` as peers) and wraps your app root with `MarwesProvider`.
-
-4. Start using components — the default Marwes CSS is loaded for you. Jump to the [Quick Start](#quick-start) below.
-
-### With AI: agentic mode
-
-Use this when you want an AI coding agent (Claude Code, Cursor, etc.) to drive the setup. It runs the same install flow, then runs `doctor` and prints the setup boundaries the agent should follow:
+Run at the root of your project:
 
 ```bash
-pnpm dlx @marwes-ui/cli init --adapter react --agentic
+pnpm dlx @marwes-ui/cli init --adapter react
 ```
 
-Also works with `npx`, `yarn dlx`, and `bunx`.
+Also works with `npx @marwes-ui/cli`, `yarn dlx @marwes-ui/cli`, and `bunx @marwes-ui/cli`.
 
 ### New Vite app
 
-If you don't have an app yet, scaffold one with Marwes preinstalled:
+Scaffold a fresh Vite starter with Marwes preinstalled:
 
 ```bash
 pnpm create marwes@latest my-app --template react-ts
 ```
 
-### Manual install
+### AI-assisted setup
 
-Prefer to wire things up yourself:
+Add `--agentic` to hand setup to an AI coding agent (Claude Code, Cursor, etc.). The CLI runs the normal install, then runs `doctor` and prints the guardrails the agent should follow:
 
 ```bash
-pnpm add @marwes-ui/react react react-dom
+pnpm dlx @marwes-ui/cli init --adapter react --agentic
 ```
 
-Then wrap your app root in `MarwesProvider` — see the [Quick Start](#quick-start) below. No preset CSS import is needed; `@marwes-ui/react` loads the default Marwes CSS automatically.
+After install, jump to the [Quick Start](#quick-start) below.
 
 ## Quick Start
 
@@ -105,8 +92,8 @@ import {
 export function App() {
   return (
     <MarwesProvider>
-      <Input placeholder="Email" ariaLabel="Email" />
-      <Checkbox ariaLabel="Subscribe" />
+      <Input placeholder="Email" label="Email" />
+      <Checkbox label="Subscribe" />
       <Button variant={ButtonVariant.secondary}>Preview</Button>
       <SubmitButton>Save</SubmitButton>
     </MarwesProvider>
@@ -239,7 +226,7 @@ Provider and hooks:
 - `useToast`
 
 Actions and buttons:
-- `Button`
+- `Button`, `IconButton`
 - `PrimaryButton`, `SecondaryButton`, `TextButton`, `SuccessButton`
 - `SubmitButton`, `CancelButton`, `CreateButton`, `DestructiveButton`
 - `LinkButton`, `SaveButton`, `ConfirmButton`, `VerifyButton`
@@ -256,21 +243,26 @@ Forms and inputs:
 - `Radio`, `RadioGroupField`, `YesNoRadioGroup`, `RatingRadioGroup`, `OptionRadioGroup`
 - `Switch`, `SwitchField`, `FeatureToggle`, `PreferenceSwitch`, `PermissionSwitch`
 - `Slider`, `SliderField`, `VolumeSlider`, `BrightnessSlider`, `RadiusSlider`
+- `SegmentedControlField`, `PaginationField`
 
 Content and layout:
 - `Card`, `ProductCard`, `ProfileCard`, `StatCard`
-- `H1`, `H2`, `H3`, `Paragraph`
+- `H1`, `H2`, `H3`, `Paragraph`, `Text`, `TypographyText`
 - `Spacer`, `Spacing`, `Divider`
+- `Breadcrumb`
 - `Icon`
 - `Avatar`, `AvatarBadge`, `AvatarGroup`, `ProfileAvatar`, `PresenceAvatar`, `TeamAvatarGroup`
+- `StatTile`, `Skeleton`
 
 Feedback and overlays:
 - `Badge`, `BadgeGroup`, `StatusBadge`, `PriorityBadge`, `NotificationBadge`
+- `Banner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`, `ErrorBanner`
+- `ProgressBar`
 - `Spinner`, `ButtonSpinner`, `EmptyStateSpinner`
 - `Toast`, `ToastContainer`, `ToastProvider`
 - `SuccessToast`, `ErrorToast`, `WarningToast`, `InfoToast`
-- `Tooltip`, `TooltipGroup`
-- `Dialog`, `DialogModal`, `ConfirmDialog`, `DestructiveDialog`, `InfoDialog`
+- `Tooltip`, `TooltipGroup`, `ContextMenu`
+- `Dialog`, `DialogModal`, `Drawer`, `ConfirmDialog`, `DestructiveDialog`, `InfoDialog`
 - `Accordion`, `AccordionField`, `FAQAccordion`, `SettingsAccordion`, `SectionsAccordion`
 - `Tab`, `TabGroup`, `TabPanel`, `NavigationTabs`, `ContentTabs`, `SettingsTabs`
 

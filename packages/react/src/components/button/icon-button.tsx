@@ -7,6 +7,8 @@ export type IconButtonProps = Omit<
   "children" | "hasVisibleText" | "iconLeft" | "iconOnly" | "iconRight"
 > & {
   icon: IconName
+  /** Accessible name — required for icon-only buttons. Prefer `label`; `ariaLabel` also accepted. */
+  label?: string
   ariaLabel?: string
 }
 

@@ -17,7 +17,8 @@ export type InputOtpOptions = {
   invalid?: boolean
   describedBy?: string
   ariaLabel?: string
-  /** ID of an element whose text labels the OTP input. Wins over `ariaLabel` if both are set. */
+  label?: string
+  /** ID of an element whose text labels the OTP input. Wins over `ariaLabel` and `label` if set. */
   ariaLabelledBy?: string
 }
 

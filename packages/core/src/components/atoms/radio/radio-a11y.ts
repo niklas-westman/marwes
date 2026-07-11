@@ -8,7 +8,8 @@ export function buildRadioA11y(opts: RadioOptions): RadioA11y {
   if (opts.value) a11y.value = opts.value
   if (opts.disabled) a11y.disabled = true
   if (opts.required) a11y.required = true
-  if (opts.ariaLabel) a11y.ariaLabel = opts.ariaLabel
+  const accessibleLabel = opts.ariaLabel ?? opts.label
+  if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.ariaLabelledBy) a11y.ariaLabelledBy = opts.ariaLabelledBy
   if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
   if (opts.invalid) a11y.ariaInvalid = true

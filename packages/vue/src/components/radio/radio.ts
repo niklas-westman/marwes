@@ -21,6 +21,7 @@ const radioPropKeys = [
   "name",
   "value",
   "ariaLabel",
+  "label",
   "ariaLabelledBy",
   "ariaDescribedBy",
   "onCheckedChange",
@@ -44,6 +45,7 @@ export const Radio = defineComponent(
       if (props.name !== undefined) opts.name = props.name
       if (props.value !== undefined) opts.value = props.value
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
+      if (props.label !== undefined) opts.label = props.label
       if (props.ariaLabelledBy !== undefined) opts.ariaLabelledBy = props.ariaLabelledBy
       if (props.ariaDescribedBy !== undefined) opts.ariaDescribedBy = props.ariaDescribedBy
       return radioRecipe(opts)

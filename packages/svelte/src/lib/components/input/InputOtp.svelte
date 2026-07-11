@@ -22,6 +22,7 @@
     required,
     invalid,
     ariaLabel,
+    label,
     ariaLabelledBy,
     describedBy,
     onvaluechange,
@@ -58,6 +59,7 @@
     if (invalid) opts.invalid = true;
     if (describedBy) opts.describedBy = describedBy;
     if (ariaLabel) opts.ariaLabel = ariaLabel;
+    if (label) opts.label = label;
     if (ariaLabelledBy) opts.ariaLabelledBy = ariaLabelledBy;
     return opts;
   });

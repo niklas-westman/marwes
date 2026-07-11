@@ -15,6 +15,7 @@ export interface RadioOptions {
   value?: string
 
   ariaLabel?: string
+  label?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
 }
