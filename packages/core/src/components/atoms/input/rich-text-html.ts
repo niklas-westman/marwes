@@ -55,10 +55,14 @@ export function normalizeRichTextHtml(rawHtml: string | undefined): string {
     .replace(lineBreakPattern, "<br>")
 
   // Strip disallowed tags in a stability loop so nested / re-gluing patterns
-  // like `<scr<script>ipt>` can't survive a single-pass replace.
+  // like `<scr<script>ipt>` can't survive a single-pass replace. The loop
+  // runs until a full replace pass produces no further changes, so any
+  // dangling `<script` (or similar) has already been converted to `&lt;`
+  // by unsupportedAnglePattern before the loop exits.
   let previous: string
   do {
     previous = normalizedHtml
+    // lgtm[js/incomplete-multi-character-sanitization]
     normalizedHtml = normalizedHtml
       .replace(disallowedTagPattern, "")
       .replace(unsupportedAnglePattern, "&lt;")
