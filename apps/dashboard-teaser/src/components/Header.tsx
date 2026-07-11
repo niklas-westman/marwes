@@ -4,7 +4,7 @@ import styled from "styled-components"
 // Atom is no longer publicly exported; deep-import for theme toggle.
 import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
 
-import { dashboardRadius } from "../styles/theme-utils"
+import { dashboardRadius } from "../theme/theme-utils"
 
 const HeaderContainer = styled.header`
   width: 100%;

@@ -45,7 +45,7 @@ type ThemePreset = {
   colorOverrides?: ThemePresetColorOverridesByMode
 }
 
-const themePresets: readonly ThemePreset[] = [
+const themePresets: readonly [ThemePreset, ...ThemePreset[]] = [
   {
     id: "marwes",
     name: "Marwes",

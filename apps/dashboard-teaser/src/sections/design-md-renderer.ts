@@ -3,8 +3,9 @@ import { ThemeMode } from "@marwes-ui/react"
 
 import { baselineColorsByMode, marwesTypography } from "./design-md-data"
 import type { TypographyMetric } from "./design-md-data"
+import { resolveFontStack } from "./playground-fonts"
 import type { PlaygroundSettings } from "./playground-settings"
-import { resolveFontStack, styleToneMap } from "./playground-settings"
+import { styleToneMap } from "./playground-settings"
 import type { ThemePreset } from "./theme-presets"
 
 function yamlString(value: string): string {

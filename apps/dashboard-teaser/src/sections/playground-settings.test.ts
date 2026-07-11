@@ -1,12 +1,11 @@
 import { ThemeMode } from "@marwes-ui/react"
 import { describe, expect, it } from "vitest"
 
+import { dyslexicFontStack } from "./playground-fonts"
 import {
   applyPlaygroundStyle,
-  createDashboardShellThemeInput,
   createDashboardThemeInput,
   defaultPlaygroundSettings,
-  dyslexicFontStack,
 } from "./playground-settings"
 
 describe("playground settings", () => {
@@ -56,7 +55,7 @@ describe("playground settings", () => {
 
     expect(cyber).toMatchObject({
       style: "cyber",
-      font: "mono",
+      font: "Fira Code",
       radius: 0,
       componentOptions: defaultPlaygroundSettings.componentOptions,
     })
@@ -67,21 +66,21 @@ describe("playground settings", () => {
 
     expect(mono).toMatchObject({
       style: "mono",
-      font: "mono",
+      font: "Fira Code",
       radius: 4,
       componentOptions: defaultPlaygroundSettings.componentOptions,
     })
   })
 
-  it("applies high contrast color overrides to preview and shell themes", () => {
-    const lightPreview = createDashboardThemeInput({
+  it("applies high contrast color overrides to the theme", () => {
+    const lightTheme = createDashboardThemeInput({
       ...defaultPlaygroundSettings,
       accessibility: {
         ...defaultPlaygroundSettings.accessibility,
         highContrast: true,
       },
     })
-    const darkShell = createDashboardShellThemeInput({
+    const darkTheme = createDashboardThemeInput({
       ...defaultPlaygroundSettings,
       mode: ThemeMode.dark,
       accessibility: {
@@ -90,56 +89,26 @@ describe("playground settings", () => {
       },
     })
 
-    expect(lightPreview.color).toMatchObject({
+    expect(lightTheme.color).toMatchObject({
       textMuted: "#141414",
       textSubtle: "#141414",
       iconMuted: "#141414",
       border: "#141414",
       borderStrong: "#141414",
     })
-    expect(darkShell.color).toMatchObject({
+    expect(darkTheme.color).toMatchObject({
       textMuted: "#FFFFFF",
       textSubtle: "#FFFFFF",
       iconMuted: "#FFFFFF",
       border: "#FFFFFF",
       borderStrong: "#FFFFFF",
-      primary: defaultPlaygroundSettings.colors.primary,
-    })
-  })
-
-  it("ignores preset-affected fields on the shell theme so the picker only reshapes the showcase", () => {
-    const shell = createDashboardShellThemeInput({
-      ...defaultPlaygroundSettings,
-      style: "cyber",
-      radius: 12,
-      colors: {
-        primary: "#123456",
-        danger: "#aa0000",
-        success: "#00aa00",
-        warning: "#ffaa00",
-      },
-    })
-
-    // Shell locks to Marwes identity regardless of preview picks.
-    expect(shell).toMatchObject({
-      tone: "default",
-      color: { primary: "#2F31FC" },
-      ui: { radius: 4 },
     })
   })
 
   it("lets dyslexic font override normal font choices", () => {
     const theme = createDashboardThemeInput({
       ...defaultPlaygroundSettings,
-      font: "mono",
-      accessibility: {
-        ...defaultPlaygroundSettings.accessibility,
-        dyslexicFont: true,
-      },
-    })
-    const shellTheme = createDashboardShellThemeInput({
-      ...defaultPlaygroundSettings,
-      font: "mono",
+      font: "Fira Code",
       accessibility: {
         ...defaultPlaygroundSettings.accessibility,
         dyslexicFont: true,
@@ -147,22 +116,17 @@ describe("playground settings", () => {
     })
 
     expect(theme.font).toEqual({ primary: dyslexicFontStack })
-    expect(shellTheme.font).toEqual({ primary: dyslexicFontStack })
   })
 
-  it("keeps normal font behavior when dyslexic font is off", () => {
-    expect(createDashboardThemeInput(defaultPlaygroundSettings).font).toBeUndefined()
+  it("resolves the selected family into a full CSS stack", () => {
+    expect(createDashboardThemeInput(defaultPlaygroundSettings).font).toEqual({
+      primary: expect.stringContaining("Instrument Sans"),
+    })
     expect(
       createDashboardThemeInput({
         ...defaultPlaygroundSettings,
-        font: "mono",
+        font: "Fira Code",
       }).font,
     ).toEqual({ primary: expect.stringContaining("Fira Code") })
-    expect(
-      createDashboardShellThemeInput({
-        ...defaultPlaygroundSettings,
-        font: "mono",
-      }).font,
-    ).toBeUndefined()
   })
 })

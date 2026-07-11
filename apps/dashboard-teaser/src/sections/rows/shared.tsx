@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 import { Text, TextVariant } from "@marwes-ui/react"
-import { cardShellStyles } from "../../styles/theme-utils"
+import { cardShellStyles } from "../../theme/theme-utils"
 
 const Card = styled.div<{
   $width?: string

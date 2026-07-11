@@ -7,9 +7,22 @@ import type {
 } from "@marwes-ui/react"
 import { ThemeMode } from "@marwes-ui/react"
 
+import { createAccessibilityColorOverrides } from "./playground-a11y"
+import { dyslexicFontStack, resolveFontStack } from "./playground-fonts"
+
 type PlaygroundStyle = "marwes" | "cyber" | "mono"
-type PlaygroundFont = "default" | "instrument" | "mono" | "nunito" | "editorial"
-type PlaygroundColorVision = "normal" | "protanopia" | "deuteranopia" | "tritanopia"
+/**
+ * A plain Google Fonts family name (e.g. "Instrument Sans", "Rubik").
+ * The dashboard combobox writes any family from the shipped
+ * `google-fonts.json` list into this field.
+ */
+type PlaygroundFont = string
+type PlaygroundColorVision =
+  | "normal"
+  | "protanopia"
+  | "deuteranopia"
+  | "tritanopia"
+  | "achromatopsia"
 
 type ComponentDisplayOptions = {
   showLabels: boolean
@@ -44,6 +57,7 @@ type PlaygroundColorOverridesByMode = {
 }
 
 type PlaygroundSettings = {
+  selectedPresetId?: string
   mode: ThemeModeValue
   style: PlaygroundStyle
   font: PlaygroundFont
@@ -57,9 +71,10 @@ type PlaygroundSettings = {
 }
 
 const defaultPlaygroundSettings: PlaygroundSettings = {
+  selectedPresetId: "marwes",
   mode: ThemeMode.light,
   style: "marwes",
-  font: "default",
+  font: "Instrument Sans",
   colors: {
     primary: "#2F31FC",
     danger: "#D90429",
@@ -83,51 +98,16 @@ const defaultPlaygroundSettings: PlaygroundSettings = {
   },
 }
 
-const fontStacks: Record<Exclude<PlaygroundFont, "default">, string> = {
-  instrument: "Instrument Sans, system-ui, -apple-system, sans-serif",
-  mono: "Fira Code, ui-monospace, monospace",
-  nunito: "Nunito, system-ui, sans-serif",
-  editorial: "Playfair Display, Georgia, serif",
-}
-
 const styleToneMap: Record<PlaygroundStyle, ToneName> = {
   marwes: "default",
   cyber: "digital",
   mono: "default",
 }
 
-const dyslexicFontStack = "Atkinson Hyperlegible, ui-sans-serif, system-ui, sans-serif"
-
-type DashboardColorOverrides = NonNullable<ThemeInput["color"]>
-
-const highContrastNeutralByMode: Record<ThemeModeValue, string> = {
-  [ThemeMode.light]: "#141414",
-  [ThemeMode.dark]: "#FFFFFF",
-}
-
-function createHighContrastColorOverrides(mode: ThemeModeValue): DashboardColorOverrides {
-  const foreground = highContrastNeutralByMode[mode]
-
-  return {
-    textMuted: foreground,
-    textSubtle: foreground,
-    iconMuted: foreground,
-    borderLow: foreground,
-    border: foreground,
-    borderSubtle: foreground,
-    borderStrong: foreground,
-    borderFull: foreground,
-  }
-}
-
-function createAccessibilityColorOverrides(settings: PlaygroundSettings): DashboardColorOverrides {
-  return settings.accessibility.highContrast ? createHighContrastColorOverrides(settings.mode) : {}
-}
-
 function resolvePrimaryFont(settings: PlaygroundSettings): string | undefined {
   if (settings.accessibility.dyslexicFont) return dyslexicFontStack
-  if (settings.font === "default") return undefined
-  return fontStacks[settings.font]
+  if (!settings.font) return undefined
+  return resolveFontStack(settings.font)
 }
 
 function applyPlaygroundStyle(
@@ -135,14 +115,14 @@ function applyPlaygroundStyle(
   style: PlaygroundStyle,
 ): PlaygroundSettings {
   if (style === "cyber") {
-    return { ...settings, style, font: "mono", radius: 0 }
+    return { ...settings, style, font: "Fira Code", radius: 0 }
   }
 
   if (style === "mono") {
-    return { ...settings, style, font: "mono", radius: 4 }
+    return { ...settings, style, font: "Fira Code", radius: 4 }
   }
 
-  return { ...settings, style, font: "default", radius: 4 }
+  return { ...settings, style, font: "Instrument Sans", radius: 4 }
 }
 
 function createDashboardThemeInput(settings: PlaygroundSettings): ThemeInput {
@@ -170,44 +150,13 @@ function createDashboardThemeInput(settings: PlaygroundSettings): ThemeInput {
   }
 }
 
-/**
- * The dashboard shell (header, hero, footer) is fixed to the Marwes identity
- * regardless of which preview preset the user has selected. It only picks up
- * two things from settings: the current mode (so the header light/dark
- * toggle still works) and the a11y overrides (high contrast, dyslexic font).
- * All other preset-affected fields — style/primary/radius/font — are
- * intentionally ignored here so the picker only reshapes the showcase.
- */
-function createDashboardShellThemeInput(settings: PlaygroundSettings): ThemeInput {
-  const colorOverrides = createAccessibilityColorOverrides(settings)
-  const primaryFont = settings.accessibility.dyslexicFont ? dyslexicFontStack : undefined
-
-  return {
-    mode: settings.mode,
-    tone: "default",
-    color: {
-      primary: "#2F31FC",
-      ...colorOverrides,
-    },
-    ui: { radius: 4 },
-    ...(primaryFont ? { font: { primary: primaryFont } } : {}),
-  }
-}
-
-export {
-  applyPlaygroundStyle,
-  createDashboardShellThemeInput,
-  createDashboardThemeInput,
-  defaultPlaygroundSettings,
-  dyslexicFontStack,
-  fontStacks,
-}
+export { applyPlaygroundStyle, createDashboardThemeInput, defaultPlaygroundSettings, styleToneMap }
 export type {
+  ComponentDisplayOptions,
   PlaygroundAccessibilitySettings,
   PlaygroundColorOverridesByMode,
-  PlaygroundColorVision,
-  ComponentDisplayOptions,
   PlaygroundColorSettings,
+  PlaygroundColorVision,
   PlaygroundFont,
   PlaygroundSettings,
   PlaygroundStyle,

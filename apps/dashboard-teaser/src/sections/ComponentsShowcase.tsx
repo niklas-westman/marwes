@@ -1,20 +1,13 @@
 import styled from "styled-components"
 
-import { MarwesProvider, Text, TextVariant } from "@marwes-ui/react"
+import { Text, TextVariant } from "@marwes-ui/react"
 import type { Dispatch, SetStateAction } from "react"
 
+import { AccessibilityPanel } from "../components/AccessibilityPanel"
 import { ThemePicker } from "../components/ThemePicker"
-import { dashboardRowStyles, responsiveShellPadding } from "../styles/theme-utils"
-import { createDashboardThemeInput } from "./playground-settings"
+import { dashboardRowStyles, responsiveShellPadding } from "../theme/theme-utils"
 import type { PlaygroundColorVision, PlaygroundSettings } from "./playground-settings"
-import { RowAccordionInput } from "./rows/RowAccordionInput"
-import { RowAvatarBreadcrumbDialog } from "./rows/RowAvatarBreadcrumbDialog"
-import { RowBanner } from "./rows/RowBanner"
-import { RowButtonPaginationProgress } from "./rows/RowButtonPaginationProgress"
-import { RowSegmented } from "./rows/RowSegmented"
-import { RowSpinner } from "./rows/RowSpinner"
-import { RowSwitchCard } from "./rows/RowSwitchCard"
-import { RowToastMenuAvatar } from "./rows/RowToastMenuAvatar"
+import { rowsManifest } from "./rows/rows-manifest"
 import {
   type ThemePresetId,
   applyThemePreset,
@@ -57,10 +50,8 @@ const ContentGrid = styled.div`
 
 const ShowcaseHead = styled.div`
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.spacing.sp16};
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sp4};
 `
 
 const NowViewing = styled(Text).attrs({ variant: TextVariant.caption })`
@@ -72,32 +63,17 @@ const NowViewing = styled(Text).attrs({ variant: TextVariant.caption })`
   }
 `
 
+const ShowcaseSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sp8};
+`
+
 const PreviewThemeScope = styled.div`
+  display: flex;
   min-width: 0;
-
-  > [data-marwes-theme="true"] {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
-    background: transparent !important;
-  }
-
-  /* Morph tokens between preset switches. Outline is left untouched so the
-     focus ring stays instant. */
-  > [data-marwes-theme="true"],
-  > [data-marwes-theme="true"] * {
-    transition: background-color 240ms ease, border-color 240ms ease,
-      color 240ms ease, fill 240ms ease, stroke 240ms ease,
-      border-radius 240ms ease, box-shadow 240ms ease;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    > [data-marwes-theme="true"],
-    > [data-marwes-theme="true"] * {
-      transition: none;
-    }
-  }
+  flex-direction: column;
+  gap: ${({ theme }) => `clamp(${theme.spacing.sp16}, 2vw, ${theme.spacing.sp24})`};
 
   /* Cap radius on components whose shape gets weird at large radii. The radius
      slider still scales smaller components (Button, Badge, Input, etc.) up to 48px;
@@ -110,16 +86,20 @@ const PreviewThemeScope = styled.div`
     border-radius: min(var(--mw-ui-radius, 6px), 12px);
   }
 
-  &[data-dashboard-color-vision="protanopia"] > [data-marwes-theme="true"] {
+  &[data-dashboard-color-vision="protanopia"] {
     filter: url("#dashboard-cvd-protanopia");
   }
 
-  &[data-dashboard-color-vision="deuteranopia"] > [data-marwes-theme="true"] {
+  &[data-dashboard-color-vision="deuteranopia"] {
     filter: url("#dashboard-cvd-deuteranopia");
   }
 
-  &[data-dashboard-color-vision="tritanopia"] > [data-marwes-theme="true"] {
+  &[data-dashboard-color-vision="tritanopia"] {
     filter: url("#dashboard-cvd-tritanopia");
+  }
+
+  &[data-dashboard-color-vision="achromatopsia"] {
+    filter: grayscale(1);
   }
 `
 
@@ -173,7 +153,6 @@ function getColorVisionAttribute(
 
 function ComponentsShowcase({ settings, onSettingsChange }: ComponentsShowcaseProps): JSX.Element {
   const { componentOptions } = settings
-  const previewThemeInput = createDashboardThemeInput(settings)
   const colorVisionAttribute = getColorVisionAttribute(settings.accessibility.colorVision)
   const activePresetId = getActivePresetId(settings) ?? "marwes"
   const activePreset =
@@ -192,44 +171,34 @@ function ComponentsShowcase({ settings, onSettingsChange }: ComponentsShowcasePr
         <ThemePicker
           activePresetId={activePresetId}
           currentMode={settings.mode}
+          settings={settings}
+          onSettingsChange={onSettingsChange}
           onSelect={handleThemePresetChange}
         />
-        <ContentGrid>
+        <AccessibilityPanel settings={settings} onSettingsChange={onSettingsChange} />
+
+        <ShowcaseSection data-dashboard-section="components-showcase">
           <ShowcaseHead>
             <Text variant={TextVariant.overline}>Components</Text>
             <NowViewing>
               Now viewing <strong>{activePreset.name}</strong> — {activePreset.description}
             </NowViewing>
           </ShowcaseHead>
-          <PreviewThemeScope data-dashboard-color-vision={colorVisionAttribute}>
-            <MarwesProvider theme={previewThemeInput}>
-              <Row>
-                <RowSwitchCard options={componentOptions} />
-              </Row>
-              <Row>
-                <RowAccordionInput options={componentOptions} />
-              </Row>
-              <Row>
-                <RowToastMenuAvatar options={componentOptions} />
-              </Row>
-              <Row>
-                <RowAvatarBreadcrumbDialog options={componentOptions} />
-              </Row>
-              <Row>
-                <RowBanner options={componentOptions} />
-              </Row>
-              <Row>
-                <RowButtonPaginationProgress options={componentOptions} />
-              </Row>
-              <Row>
-                <RowSegmented />
-              </Row>
-              <Row>
-                <RowSpinner options={componentOptions} />
-              </Row>
-            </MarwesProvider>
-          </PreviewThemeScope>
-        </ContentGrid>
+
+          <ContentGrid>
+            <PreviewThemeScope data-dashboard-color-vision={colorVisionAttribute}>
+              {rowsManifest.map((entry) => (
+                <Row key={entry.id}>
+                  {entry.needsOptions ? (
+                    <entry.Component options={componentOptions} />
+                  ) : (
+                    <entry.Component />
+                  )}
+                </Row>
+              ))}
+            </PreviewThemeScope>
+          </ContentGrid>
+        </ShowcaseSection>
       </ShowcaseLayout>
     </ShowcaseContainer>
   )

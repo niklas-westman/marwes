@@ -7,7 +7,7 @@ import { Textarea } from "../../../../packages/react/src/components/input/textar
 import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
 
 import { SegmentedControlScroll } from "../components/SegmentedControlScroll"
-import { cardShellStyles } from "../styles/theme-utils"
+import { cardShellStyles } from "../theme/theme-utils"
 import { frameworkItems } from "./framework-tabs"
 import {
   type Framework,
@@ -100,7 +100,7 @@ function InstallationPanel(): JSX.Element {
       </InputSection>
 
       <InputSection>
-        <InputLabel>Add to existing app</InputLabel>
+        <InputLabel>Install</InputLabel>
         <FieldRow>
           <CommandInput
             value={createExistingAppInstallCommand(activeTab)}
