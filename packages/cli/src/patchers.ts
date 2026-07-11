@@ -226,7 +226,7 @@ function ensureSvelteScript(scriptBlocks: readonly string[]): string {
     return script
   }
 
-  return script.replace(/<script([^>]*)>/, `<script$1>\n${importLine}`)
+  return script.replace(/<script([^>]*)>/i, `<script$1>\n${importLine}`)
 }
 
 async function patchSvelte(cwd: string, dryRun: boolean): Promise<PatchResult> {

@@ -90,14 +90,17 @@ function readJson(path) {
 }
 
 function isAllowedOrigin(origin) {
-  return (
-    !origin ||
-    origin === "null" ||
-    origin.startsWith("http://localhost") ||
-    origin.startsWith("http://127.0.0.1") ||
-    origin.startsWith("https://www.figma.com") ||
-    origin.startsWith("https://figma.com")
-  )
+  if (!origin || origin === "null") return true
+  let url
+  try {
+    url = new URL(origin)
+  } catch {
+    return false
+  }
+  if (url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1")) {
+    return true
+  }
+  return url.protocol === "https:" && (url.hostname === "www.figma.com" || url.hostname === "figma.com")
 }
 
 function createAcceptKey(key) {
