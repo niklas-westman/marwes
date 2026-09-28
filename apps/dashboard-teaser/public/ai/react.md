@@ -1,0 +1,795 @@
+# AI implementation instructions
+
+> Import and use real Marwes components from `@marwes-ui/react`.
+> Do not invent `mw-*` replacement components or custom elements; use the adapter's documented public exports.
+
+React components for the Marwes design system with default styling, typed theme tokens, accessibility contracts, and AI-readable semantics.
+
+<div align="center">
+
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/cover-v3.png" width="100%" style="border-radius: 40px;">
+
+<br>
+<br>
+
+# Marwes Design System - React
+
+**React components with default Marwes styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
+
+React 18+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
+
+[**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
+[React Storybook](https://storybook-react.marwes.io/latest/) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [GitHub](https://github.com/niklas-westman/marwes)
+
+</div>
+
+---
+
+## Why Use It
+
+Marwes is built for teams and AI-assisted workflows that need a component system that is easy to install, easy to theme, and hard to misuse.
+
+- **One package for React apps**: components, provider, default preset CSS, theme helpers, and typed props.
+- **Beautiful defaults**: install the adapter, wrap your app, and start building without a separate CSS setup.
+- **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
+- **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
+- **Shared core contracts**: every React component is backed by the same framework-agnostic recipes, a11y mapping, and theme shape.
+
+## Package Map
+
+For a React app, install this package first. It includes the React adapter, loads the default preset CSS, and re-exports the core theme helpers you normally need.
+
+| Package | Use it when |
+| --- | --- |
+| `@marwes-ui/react` | You are building a React app. |
+| `@marwes-ui/vue` | You are building a Vue app instead. |
+| `@marwes-ui/svelte` | You are building a Svelte app instead. |
+| `@marwes-ui/core` | You are building adapters, tests, tooling, or framework-agnostic integrations. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
+
+This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
+
+## Requirements
+
+- React and React DOM 18 or newer
+- Node.js 20 or newer for package installation, application builds, and the CLI
+- A modern browser with CSS custom-property support
+- A Vite starter layout for automatic provider patching; custom layouts use the printed manual setup
+
+## Install
+
+The Marwes CLI is the official installation path. It installs `@marwes-ui/react` (with `react` and `react-dom` as peers), wraps your app root with `MarwesProvider`, and leaves you ready to render components with default Marwes styling — no separate CSS setup.
+
+For full setup guides, theme customization, and the theme builder, visit [marwes.io](https://marwes.io).
+
+### Existing React app
+
+Run at the root of your project:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter react
+```
+
+Also works with `npx @marwes-ui/cli`, `yarn dlx @marwes-ui/cli`, and `bunx @marwes-ui/cli`.
+
+Verify the patched app and its production build:
+
+```bash
+pnpm dlx @marwes-ui/cli doctor --run-build
+```
+
+Automatic provider patching supports known Vite starter layouts. A `manual-action-required` result means the package was installed but the CLI could not safely identify the app root; apply the complete provider example printed by the CLI and rerun the doctor command.
+
+### New Vite app
+
+Scaffold a fresh Vite starter with Marwes preinstalled:
+
+```bash
+pnpm create marwes@latest my-app --template react-ts
+```
+
+### AI-assisted setup
+
+Add `--agentic` to hand setup to an AI coding agent (Claude Code, Cursor, etc.). The CLI runs the normal install, then runs `doctor` and prints the guardrails the agent should follow:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter react --agentic
+```
+
+After install, jump to the [Quick Start](#quick-start) below.
+
+## Quick Start
+
+```tsx
+import {
+  Button,
+  ButtonVariant,
+  CheckboxField,
+  EmailField,
+  MarwesProvider,
+  SubmitButton,
+} from "@marwes-ui/react"
+
+export function App() {
+  return (
+    <MarwesProvider>
+      <EmailField label="Email" input={{ placeholder: "you@example.com" }} />
+      <CheckboxField label="Subscribe" />
+      <Button variant={ButtonVariant.secondary}>Preview</Button>
+      <SubmitButton>Save</SubmitButton>
+    </MarwesProvider>
+  )
+}
+```
+
+## Style App-Owned UI
+
+Marwes components pick up provider tokens automatically. Your own React styling can use the same tokens by importing `mwThemeVars`. This example uses styled-components, but the same values work in Emotion, vanilla-extract, inline style objects, CSS Modules, and plain CSS.
+
+```tsx
+import { Button, ButtonVariant, MarwesProvider, mwThemeVars } from "@marwes-ui/react"
+import styled from "styled-components"
+
+const AppShell = styled.main`
+  min-height: 100dvh;
+  padding: ${mwThemeVars.spacing.sp24};
+  color: ${mwThemeVars.color.text};
+  background: ${mwThemeVars.color.background};
+`
+
+const FeaturePanel = styled.section`
+  padding: ${mwThemeVars.spacing.sp24};
+  background: ${mwThemeVars.color.surface};
+  border: 1px solid ${mwThemeVars.color.border};
+  border-radius: ${mwThemeVars.ui.radius};
+`
+
+const PrimaryCallout = styled.aside`
+  background: ${mwThemeVars.color.primary.base};
+  color: ${mwThemeVars.color.primary.label};
+`
+
+export function App() {
+  return (
+    <MarwesProvider>
+      <AppShell>
+        <PrimaryCallout>Launch workspace</PrimaryCallout>
+        <FeaturePanel>
+          <Button variant={ButtonVariant.primary}>Save</Button>
+        </FeaturePanel>
+      </AppShell>
+    </MarwesProvider>
+  )
+}
+```
+
+Plain CSS and CSS Modules can use the raw custom properties directly:
+
+```css
+.app-shell {
+  min-height: 100dvh;
+  padding: var(--mw-spacing-sp-24);
+  color: var(--mw-color-text);
+  background: var(--mw-color-background);
+}
+```
+
+## Use Typed Components
+
+Import components, enums, and prop types from the same package. The values line up with the same core recipes and preset CSS.
+
+```tsx
+import {
+  BadgeVariant,
+  Button,
+  ButtonSize,
+  ButtonVariant,
+  Card,
+  H1,
+  InputField,
+  Paragraph,
+  Spacer,
+  Spacings,
+  StatusBadge,
+  SubmitButton,
+  type ButtonProps,
+  type H1Props,
+  type InputFieldProps,
+  type ParagraphProps,
+} from "@marwes-ui/react"
+
+const primaryAction: ButtonProps = {
+  variant: ButtonVariant.primary,
+  size: ButtonSize.md,
+  children: "Create project",
+}
+
+const emailField: InputFieldProps = {
+  label: "Email",
+  helperText: "Used for project notifications.",
+  input: {
+    type: "email",
+    placeholder: "you@example.com",
+  },
+}
+
+const titleProps: H1Props = {
+  size: "h2",
+}
+
+const descriptionProps: ParagraphProps = {
+  size: "md",
+}
+
+export function ProjectPanel() {
+  return (
+    <Card title="Project setup">
+      <StatusBadge variant={BadgeVariant.success}>Ready</StatusBadge>
+      <Spacer spacing={Spacings.sp16} />
+      <H1 {...titleProps}>Launch workspace</H1>
+      <Paragraph {...descriptionProps}>
+        Components share theme tokens, typed variants, spacing, and semantic metadata.
+      </Paragraph>
+      <InputField {...emailField} />
+      <Spacer spacing={Spacings.sp24} />
+      <Button {...primaryAction} />
+      <SubmitButton>Save changes</SubmitButton>
+    </Card>
+  )
+}
+```
+
+For icon-only actions, use `IconButton` and name the button with `label`, `ariaLabel`, or `ariaLabelledBy`. An `ariaLabel` on a nested `Icon` names the image, not the interactive button.
+
+<!-- BEGIN GENERATED PUBLIC COMPONENTS -->
+## Available Components
+
+Generated from the public root export of `@marwes-ui/react`. Do not edit this inventory by hand.
+
+### Framework
+
+- `MarwesProvider`, `MarwesThemeScript`, `MarwesThemeStyle`, `SkipLink`
+
+### Accordion
+
+- `AccordionField`, `FAQAccordion`, `SectionsAccordion`, `SettingsAccordion`
+
+### Avatar
+
+- `Avatar`, `AvatarBadge`, `AvatarGroup`, `PresenceAvatar`, `ProfileAvatar`, `TeamAvatarGroup`
+
+### Badge
+
+- `Badge`, `BadgeGroup`, `NotificationBadge`, `PriorityBadge`, `StatusBadge`
+
+### Banner
+
+- `Banner`, `ErrorBanner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`
+
+### Breadcrumb
+
+- `Breadcrumb`
+
+### Button
+
+- `Button`, `CancelButton`, `CloseButton`, `ConfirmButton`, `CopyButton`, `CreateButton`
+- `DestructiveButton`, `DownloadButton`, `DropdownButton`, `EditButton`, `FilterButton`, `IconButton`
+- `LinkButton`, `PrimaryButton`, `RefreshButton`, `SaveButton`, `SearchButton`, `SecondaryButton`
+- `SortButton`, `SubmitButton`, `SuccessButton`, `TextButton`, `UploadButton`, `VerifyButton`
+
+### Card
+
+- `Card`, `ProductCard`, `ProfileCard`, `StatCard`
+
+### Checkbox
+
+- `CheckboxField`, `CheckboxGroupField`
+
+### Context Menu
+
+- `ContextMenu`
+
+### Date Picker
+
+- `DatePickerField`
+
+### Dialog
+
+- `ConfirmDialog`, `DestructiveDialog`, `Dialog`, `DialogModal`, `InfoDialog`
+
+### Divider
+
+- `Divider`
+
+### Drawer
+
+- `Drawer`
+
+### Heading
+
+- `H1`, `H2`, `H3`
+
+### Icon
+
+- `Icon`
+
+### Input
+
+- `CurrencyField`, `DateOfBirthField`, `DropdownField`, `EmailField`, `InputField`, `InputOtpField`
+- `PasswordField`, `PhoneField`, `RichTextField`, `SearchField`, `SelectField`, `TextareaField`
+- `URLField`, `ZipCodeField`
+
+### Pagination
+
+- `PaginationField`
+
+### Paragraph
+
+- `Paragraph`
+
+### Progress Bar
+
+- `ProgressBar`
+
+### Radio
+
+- `OptionRadioGroup`, `RadioGroupField`, `RatingRadioGroup`, `YesNoRadioGroup`
+
+### Segmented Control
+
+- `SegmentedControlField`
+
+### Skeleton
+
+- `Skeleton`
+
+### Slider
+
+- `BrightnessSlider`, `RadiusSlider`, `SliderField`, `VolumeSlider`
+
+### Spacing
+
+- `Spacer`, `Spacing`
+
+### Spinner
+
+- `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
+
+### Stat Tile
+
+- `StatTile`
+
+### Switch
+
+- `FeatureToggle`, `PermissionSwitch`, `PreferenceSwitch`, `SwitchField`
+
+### Tab
+
+- `ContentTabs`, `NavigationTabs`, `SettingsTabs`, `Tab`, `TabGroup`, `TabPanel`
+
+### Text
+
+- `Text`, `TypographyText`
+
+### Toast
+
+- `ErrorToast`, `InfoToast`, `SuccessToast`, `Toast`, `ToastContainer`, `ToastProvider`
+- `WarningToast`
+
+### Tooltip
+
+- `Tooltip`, `TooltipGroup`
+
+<!-- END GENERATED PUBLIC COMPONENTS -->
+
+## Theme In Seconds
+
+The default Marwes theme is already active. If you already have a good-looking design library or brand system, pass a small typed `ThemeInput` override instead of rebuilding component CSS.
+
+```tsx
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
+
+const brandTheme = {
+  color: {
+    primary: "#2457FF",
+    danger: "#D90429",
+    success: "#15803D",
+    warning: "#D97706",
+    background: "#F8FAFC",
+    surface: "#FFFFFF",
+    surfaceElevated: "#FFFFFF",
+    text: "#111827",
+    textMuted: "#4B5563",
+    border: "#D1D5DB",
+    focus: "#2457FF",
+  },
+  font: {
+    primary: mwAvailableFonts.Poppins,
+    secondary: mwAvailableFonts.Lora,
+  },
+  ui: {
+    radius: 10,
+    density: "comfortable",
+  },
+} satisfies ThemeInput
+
+export function App() {
+  return (
+    <MarwesProvider theme={brandTheme}>
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
+
+Marwes is designed to look great from the beginning. Start with the default preset, then override only the colors, fonts, radius, or density that belong to your product. Unspecified values keep the polished Marwes defaults.
+
+## Light And Dark Mode
+
+MarwesProvider can own the active mode for the app. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals, then read or change the active mode with `useThemeMode()` anywhere under the provider. Every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+
+```tsx
+import { Button, ButtonVariant, MarwesProvider, ThemeMode, useThemeMode } from "@marwes-ui/react"
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
+    </Button>
+  )
+}
+
+export function App() {
+  return (
+    <MarwesProvider defaultMode={ThemeMode.light}>
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+`defaultMode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+### System And Persisted Preference
+
+`mode` is always the rendered visual mode: `ThemeMode.light` or `ThemeMode.dark`. `preference` is the app or user choice: `ThemeMode.light`, `ThemeMode.dark`, or `"system"`. Use `preference` and `defaultPreference` when your UI needs a system option; keep using `mode`, `defaultMode`, and `onModeChange` when you only need concrete light/dark compatibility.
+
+```tsx
+import { Button, ButtonVariant, MarwesProvider, ThemeMode, useThemeMode } from "@marwes-ui/react"
+
+function ThemeMenu() {
+  const { mode, preference, systemMode, isSystem, setPreference, setMode } = useThemeMode()
+
+  return (
+    <div>
+      <p>
+        Rendering {mode}; preference is {preference}; system is {systemMode}.
+      </p>
+      <Button variant={ButtonVariant.secondary} onClick={() => setPreference("system")}>
+        Use system
+      </Button>
+      <Button variant={ButtonVariant.secondary} onClick={() => setMode(ThemeMode.dark)}>
+        Use dark
+      </Button>
+      {isSystem ? "Following system" : null}
+    </div>
+  )
+}
+
+export function App() {
+  return (
+    <MarwesProvider
+      defaultPreference="system"
+      storageKey="marwes-theme"
+      enableSystem
+    >
+      <ThemeMenu />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+`useThemeMode().mode` never returns `"system"`; it is always the concrete mode Marwes rendered. `useThemeMode().preference` returns the active app/user preference, and `setPreference("system")` is the system-capable setter. `setMode(mode)` remains a concrete light/dark convenience.
+
+`storageKey` is opt-in and defaults to `false`. Storage reads and writes are failure-safe, so private browsing or unavailable storage will fall back to normal provider state. `enableSystem` defaults to `true`; set it to `false` to avoid `matchMedia` detection and resolve `"system"` through the light fallback.
+
+This layer does not provide SSR no-flash behavior. Server output can still render the fallback mode before the client applies a stored or system preference. Use it for client-side preference and persistence, not for a no-flash SSR guarantee.
+
+### Root Target Sync
+
+By default Marwes keeps theme state scoped to the provider element. If your app shell also needs the resolved mode on `html` or `body`, set `target` and `attribute`:
+
+```tsx
+<MarwesProvider
+  defaultPreference="system"
+  storageKey="marwes-theme"
+  target="html"
+  attribute="class"
+  disableTransitionOnChange
+>
+  <AppShell />
+</MarwesProvider>
+```
+
+`target` can be `"provider"`, `"html"`, or `"body"`. `attribute` can be `"class"`, `"data-theme"`, or `"data-mode"`. Class mode only adds the active `light` / `dark` class and removes the opposite one; unrelated classes are preserved. The provider root still keeps `mw-theme--light` / `mw-theme--dark` and provider-scoped `--mw-*` variables in every target mode.
+
+Use one global-target provider per app shell. If multiple providers target `html` or `body`, deciding which provider owns that global element is app-owned behavior.
+
+### Tailwind And shadcn Compatibility
+
+Marwes is compatible with Tailwind and shadcn-style dark variants through `target="html" attribute="class"`. App-owned Tailwind tokens can also reference Marwes `--mw-*` variables when rendered inside the provider subtree.
+
+```tsx
+<MarwesProvider
+  defaultPreference="system"
+  storageKey="marwes-theme"
+  target="html"
+  attribute="class"
+>
+  <AppShell />
+</MarwesProvider>
+```
+
+Read the [Tailwind and shadcn integration guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/tailwind-shadcn-integration.md) for Tailwind v3/v4 examples, token mapping, provider-scoped variable limits, and the SSR no-flash boundary.
+
+### Next.js App Router SSR
+
+Use `MarwesThemeStyle`, `MarwesThemeScript`, and `variableStrategy="style-tag"` when a server-rendered app needs the correct light or dark variables before hydration. This is opt-in; normal React apps keep inline provider variables by default.
+
+Read the [theme SSR no-flash guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/theme-ssr-no-flash.md) for Next.js App Router setup, CSP nonces, `suppressHydrationWarning`, custom light/dark themes, and stored/system preference behavior.
+
+For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
+
+```tsx
+import { useState } from "react"
+import {
+  Button,
+  ButtonVariant,
+  MarwesProvider,
+  ThemeMode,
+  type ThemeInput,
+  useThemeMode,
+} from "@marwes-ui/react"
+
+const themeByMode = {
+  [ThemeMode.light]: https://github.com/niklas-westman/marwes/blob/main/packages/react/{
+    color: {
+      primary: "#2457FF",
+      background: "#F8FAFC",
+      surface: "#FFFFFF",
+      text: "#111827",
+      border: "#D1D5DB",
+      focus: "#2457FF",
+    },
+  },
+  [ThemeMode.dark]: https://github.com/niklas-westman/marwes/blob/main/packages/react/{
+    color: {
+      primary: "#8BA2FF",
+      background: "#0B1020",
+      surface: "#111827",
+      text: "#F8FAFC",
+      border: "#334155",
+      focus: "#93C5FD",
+    },
+  },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function ThemeToggle() {
+  const { mode, toggleMode } = useThemeMode()
+
+  return (
+    <Button variant={ButtonVariant.secondary} onClick={toggleMode}>
+      Use {mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark} mode
+    </Button>
+  )
+}
+
+export function App() {
+  const [mode, setMode] = useState<ThemeMode>(ThemeMode.light)
+
+  return (
+    <MarwesProvider mode={mode} theme={themeByMode[mode]} onModeChange={setMode}>
+      <ThemeToggle />
+      <AppShell />
+    </MarwesProvider>
+  )
+}
+```
+
+Mode-specific defaults fill every omitted token, so each override can stay small. `theme={{ mode: ThemeMode.dark }}` is still enough for the default dark baseline.
+
+## Custom Styling Tokens
+
+`MarwesProvider` resolves `ThemeInput` into `--mw-*` CSS variables. Marwes components and preset CSS consume those variables automatically. The custom styling token helpers let app-owned styles use the same provider-scoped values instead of hard-coding colors, spacing, radius, typography, or duplicated `var(...)` strings.
+
+Use the helpers by purpose:
+
+- `mwThemeVars` is the default styling helper. It returns CSS `var(...)` references for styled-components, Emotion, vanilla-extract, inline style values, and config files.
+- `mwThemeVarNames` returns raw custom property names for assigning provider-scoped overrides in style objects or tooling.
+- `mwVar()` wraps custom or advanced `--mw-*` names when the named token object does not cover a specialized case.
+- `mwTheme` is a plain object that mirrors `mwThemeVars` for styled-components or Emotion `ThemeProvider` usage. `mwStyledTheme` remains as a deprecated compatibility alias.
+
+```tsx
+import type { ReactNode } from "react"
+import { mwTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/react"
+import styled, { ThemeProvider } from "styled-components"
+
+const Panel = styled.section`
+  padding: ${mwThemeVars.spacing.sp24};
+  color: ${mwThemeVars.color.text};
+  background: ${mwThemeVars.color.surface};
+  border-radius: ${mwThemeVars.ui.radius};
+`
+
+const InlinePanel = () => (
+  <div
+    style={{
+      [mwThemeVarNames.color.focus]: "#FF00AA",
+      color: mwThemeVars.color.text,
+      outlineColor: mwVar("--mw-color-focus", "#2457FF"),
+    }}
+  />
+)
+
+const AppTheme = ({ children }: { children: ReactNode }) => (
+  <ThemeProvider theme={mwTheme}>{children}</ThemeProvider>
+)
+```
+
+`mwTheme`, `mwStyledTheme`, and `mwThemeVars` contain CSS `var(--mw-*)` references, not resolved color or spacing values. They are correct inside styled CSS evaluated below `MarwesProvider`, but JavaScript reads or aliases taken from `props.theme` can resolve against the wrong element and return an empty value. Use `useTheme()` for JavaScript logic, charts, runtime aliases, or bridges that need concrete values.
+
+Plain CSS and CSS Modules do not need a JavaScript bridge:
+
+```css
+.panel {
+  padding: var(--mw-spacing-sp-24);
+  color: var(--mw-color-text);
+  border-radius: var(--mw-ui-radius);
+}
+```
+
+This enables React apps to keep custom panels, local layouts, third-party CSS-in-JS components, and design-tool integrations visually tied to the same active theme as Marwes components. Changing `MarwesProvider theme={...}` updates both preset components and app-owned styles.
+
+Keep the APIs separate:
+- Use `Spacings.sp24` for Marwes spacing props such as `<Spacer spacing={Spacings.sp24} />`.
+- Use `mwThemeVars.spacing.sp24` for custom CSS values.
+- Use `mwThemeVarNames.spacing.sp24` when assigning or inspecting a CSS custom property name.
+- Use `useTheme()` when React logic needs resolved runtime values such as `"#2457FF"`.
+
+## Google Fonts DX
+
+Most Google Font use cases only need `mwAvailableFonts`; no `fontLoading` prop is needed.
+
+```tsx
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/react"
+
+const fontTheme = {
+  font: {
+    primary: mwAvailableFonts.Poppins,
+    secondary: mwAvailableFonts.Lora,
+  },
+} satisfies ThemeInput
+
+<MarwesProvider
+  theme={fontTheme}
+>
+  <App />
+</MarwesProvider>
+```
+
+For self-hosted or licensed fonts, use `BrandSans`, `BrandSerif`, `BrandMono`, or `createFontStack()`.
+
+## Semantic Buttons
+
+Prefer purpose components for common actions. They lock UX intent and emit AI-readable metadata, so the component is not just "a button with red styling" but a known action with known risk.
+
+```tsx
+import {
+  CancelButton,
+  CreateButton,
+  DestructiveButton,
+  SubmitButton,
+} from "@marwes-ui/react"
+
+<CancelButton>Cancel</CancelButton>
+<CreateButton>Create</CreateButton>
+<SubmitButton>Save</SubmitButton>
+<DestructiveButton>Delete</DestructiveButton>
+```
+
+That matters for agentic workflows. A human, test, or AI agent can inspect the DOM and see that a destructive button requires confirmation before activation:
+
+```html
+<button
+  data-component="button"
+  data-purpose="destructive"
+  data-action="delete"
+  data-destructive="true"
+  data-confirmation-required="true"
+>
+  Delete
+</button>
+```
+
+An agent can then follow a safer rule: if `data-confirmation-required="true"`, ask the user before clicking. A test can assert the same behavior without guessing from the label "Delete" or from a red color.
+
+Use raw `Button` props when you intentionally need a custom combination.
+
+```tsx
+import { Button, ButtonAction, ButtonSize, ButtonVariant } from "@marwes-ui/react"
+
+<Button
+  action={ButtonAction.submit}
+  size={ButtonSize.md}
+  variant={ButtonVariant.primary}
+>
+  Submit
+</Button>
+```
+
+## Why It Is Accessible
+
+Marwes React components are accessible because the adapter renders a shared core contract, not because each component hand-rolls ARIA in isolation.
+
+- Core recipes produce typed `a11y` output for roles, labels, described-by wiring, invalid state, disabled state, and semantic metadata.
+- React components prefer native DOM controls first: `button`, `input`, `select`, `textarea`, `hr`, and standard form wiring.
+- Field components connect visible labels, helper text, and errors through `id`, `htmlFor`, `aria-describedby`, `aria-invalid`, and polite error announcements.
+- Coordinated widgets carry explicit contracts: tabs wire `tablist`/`tab`/`tabpanel`, dialogs own dialog semantics, toasts expose live-region behavior, and purpose buttons expose risk metadata.
+- Storybook accessibility smoke checks run through the Storybook a11y addon for the promoted React families, and shared contract tests keep React aligned with Vue.
+
+Example:
+
+```tsx
+import { InputField, type InputFieldProps } from "@marwes-ui/react"
+
+const receiptEmailField = {
+  label: "Email",
+  helperText: "Used for receipts.",
+  error: "Enter a valid email.",
+  input: { type: "email", placeholder: "you@example.com" },
+} satisfies InputFieldProps
+
+<InputField {...receiptEmailField} />
+```
+
+That contract resolves to DOM wiring like:
+
+```html
+<label for="email">Email</label>
+<input
+  id="email"
+  type="email"
+  aria-describedby="email-helper email-error"
+  aria-invalid="true"
+>
+<p id="email-helper">Used for receipts.</p>
+<p id="email-error" aria-live="polite">Enter a valid email.</p>
+```
+
+The important part is that the same label, helper, error, and invalid contract is tested at the shared contract layer and then applied by the React adapter.
+
+## Package Boundaries
+
+- `@marwes-ui/core` owns recipes, theme resolution, a11y mapping, and semantic metadata.
+- `@marwes-ui/presets` owns default preset CSS.
+- `@marwes-ui/react` owns React rendering and provider behavior.
+
+## Scripts
+
+```bash
+pnpm --filter @marwes-ui/react build
+pnpm --filter @marwes-ui/react typecheck
+pnpm --filter @marwes-ui/react test
+```
+
+## Related Docs
+
+- [Docs index](https://github.com/niklas-westman/marwes/tree/main/docs)
+- [Architecture](https://github.com/niklas-westman/marwes/blob/main/docs/reference/architecture.md)
+- [Figma to Marwes](https://github.com/niklas-westman/marwes/blob/main/docs/guides/figma-to-marwes.md)

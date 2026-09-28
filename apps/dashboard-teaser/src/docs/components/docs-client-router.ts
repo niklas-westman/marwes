@@ -1,8 +1,17 @@
 import { parseComponentDocsPageModel } from "./component-docs-app"
 import type { ComponentDocsPageModel } from "./component-docs-model"
+import { parseGetStartedPageModel } from "./get-started-app"
+import type { GetStartedPageModel } from "./get-started-model"
+import { parseIntroductionPageModel } from "./introduction-app"
+import type { IntroductionPageModel } from "./introduction-model"
+
+type DocsPage =
+  | { kind: "component"; model: ComponentDocsPageModel }
+  | { kind: "get-started"; model: GetStartedPageModel }
+  | { kind: "introduction"; model: IntroductionPageModel }
 
 interface CachedDocsPage {
-  model: ComponentDocsPageModel
+  page: DocsPage
   title: string
   description: string
   canonical: string
@@ -10,7 +19,7 @@ interface CachedDocsPage {
 }
 
 interface DocsClientRouterOptions {
-  renderModel: (model: ComponentDocsPageModel) => void
+  renderPage: (page: DocsPage) => void
 }
 
 const pageCache = new Map<string, CachedDocsPage>()
@@ -23,14 +32,44 @@ function readHeadFrom(source: Document): { title: string; description: string; c
   }
 }
 
-function readModelFrom(source: Document): ComponentDocsPageModel | null {
-  const embedded = source.getElementById("component-docs-model")
-  if (!embedded?.textContent) return null
-  try {
-    return parseComponentDocsPageModel(JSON.parse(embedded.textContent))
-  } catch {
-    return null
+function readPageFrom(source: Document): DocsPage | null {
+  const componentSource = source.getElementById("component-docs-model")
+  if (componentSource?.textContent) {
+    try {
+      return {
+        kind: "component",
+        model: parseComponentDocsPageModel(JSON.parse(componentSource.textContent)),
+      }
+    } catch {
+      return null
+    }
   }
+
+  const getStartedSource = source.getElementById("get-started-model")
+  if (getStartedSource?.textContent) {
+    try {
+      return {
+        kind: "get-started",
+        model: parseGetStartedPageModel(JSON.parse(getStartedSource.textContent)),
+      }
+    } catch {
+      return null
+    }
+  }
+
+  const introductionSource = source.getElementById("introduction-model")
+  if (introductionSource?.textContent) {
+    try {
+      return {
+        kind: "introduction",
+        model: parseIntroductionPageModel(JSON.parse(introductionSource.textContent)),
+      }
+    } catch {
+      return null
+    }
+  }
+
+  return null
 }
 
 function applyHead(head: { title: string; description: string; canonical: string }): void {
@@ -94,30 +133,30 @@ async function loadPage(pathname: string, href: string): Promise<CachedDocsPage 
 
   const html = await response.text()
   const parsedDocument = new DOMParser().parseFromString(html, "text/html")
-  const model = readModelFrom(parsedDocument)
-  if (!model) return null
+  const page = readPageFrom(parsedDocument)
+  if (!page) return null
 
-  const page: CachedDocsPage = { model, ...readHeadFrom(parsedDocument) }
-  pageCache.set(pathname, page)
-  return page
+  const cachedPage: CachedDocsPage = { page, ...readHeadFrom(parsedDocument) }
+  pageCache.set(pathname, cachedPage)
+  return cachedPage
 }
 
-function attachDocsClientRouter({ renderModel }: DocsClientRouterOptions): void {
+function attachDocsClientRouter({ renderPage }: DocsClientRouterOptions): void {
   if (typeof window === "undefined") return
 
   history.scrollRestoration = "manual"
   const announcer = createRouteAnnouncer()
 
-  const initialModel = readModelFrom(document)
-  if (initialModel) {
-    pageCache.set(window.location.pathname, { model: initialModel, ...readHeadFrom(document) })
+  const initialPage = readPageFrom(document)
+  if (initialPage) {
+    pageCache.set(window.location.pathname, { page: initialPage, ...readHeadFrom(document) })
   }
 
   async function navigate(url: URL, { push }: { push: boolean }): Promise<void> {
     const outgoingPathname = window.location.pathname
-    const page = await loadPage(url.pathname, url.href)
+    const cachedPage = await loadPage(url.pathname, url.href)
 
-    if (!page) {
+    if (!cachedPage) {
       window.location.href = url.href
       return
     }
@@ -128,10 +167,10 @@ function attachDocsClientRouter({ renderModel }: DocsClientRouterOptions): void 
       history.pushState({}, "", url.href)
     }
 
-    renderModel(page.model)
-    applyHead(page)
-    window.scrollTo({ left: 0, top: push ? 0 : (page.scrollY ?? 0), behavior: "instant" })
-    focusMainContentAndAnnounce(announcer, page.title)
+    renderPage(cachedPage.page)
+    applyHead(cachedPage)
+    window.scrollTo({ left: 0, top: push ? 0 : (cachedPage.scrollY ?? 0), behavior: "instant" })
+    focusMainContentAndAnnounce(announcer, cachedPage.title)
   }
 
   document.addEventListener("click", (event) => {
@@ -140,7 +179,7 @@ function attachDocsClientRouter({ renderModel }: DocsClientRouterOptions): void 
 
     const target = event.target
     if (!(target instanceof Element)) return
-    const link = target.closest("a[data-docs-family]")
+    const link = target.closest("a[data-docs-soft-nav]")
     if (!(link instanceof HTMLAnchorElement)) return
     if (link.target && link.target !== "_self") return
 
@@ -163,4 +202,5 @@ function attachDocsClientRouter({ renderModel }: DocsClientRouterOptions): void 
   })
 }
 
-export { attachDocsClientRouter }
+export { attachDocsClientRouter, readPageFrom }
+export type { DocsPage }

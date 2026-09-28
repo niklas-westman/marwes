@@ -7,14 +7,10 @@ interface PublicApiExport {
   kind: PublicApiExportKind
 }
 
-type DocsSectionId =
-  | "what-this-family-solves"
-  | "recommended-components"
-  | "public-imports"
-  | "examples"
-  | "accessibility"
-  | "theming"
-  | "resources"
+// Component-docs pages use a fixed set of ids; other docs page kinds (e.g.
+// get-started guides) define their own section ids, so this stays a plain
+// string rather than a literal union scoped to one page kind.
+type DocsSectionId = string
 
 interface FrameworkDocsEntry {
   framework: DocsFramework

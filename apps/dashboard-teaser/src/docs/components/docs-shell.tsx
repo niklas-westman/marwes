@@ -360,22 +360,29 @@ function ThemeControl(): JSX.Element {
 }
 
 const headerLinks = [
-  ["Get started", "/docs/get-started/react/"],
-  ["Components", "/docs/components/"],
-  ["Theming", "/docs/theming/"],
-  ["Accessibility", "/docs/accessibility/"],
-  ["Troubleshoot", "/docs/troubleshooting/"],
+  ["Get started", "/docs/get-started/react/", true],
+  ["Components", "/docs/components/", false],
+  ["Theming", "/docs/theming/", false],
+  ["Accessibility", "/docs/accessibility/", false],
+  ["Troubleshoot", "/docs/troubleshooting/", false],
 ] as const
 
-function HeaderLinks({ onNavigate }: { onNavigate?: () => void }): JSX.Element {
+function HeaderLinks({
+  currentPath,
+  onNavigate,
+}: {
+  currentPath: string
+  onNavigate?: () => void
+}): JSX.Element {
   return (
     <>
-      {headerLinks.map(([label, path]) => (
+      {headerLinks.map(([label, path, softNav]) => (
         <a
           key={label}
           href={siteHref(path)}
-          aria-current={label === "Components" ? "page" : undefined}
+          aria-current={path === currentPath ? "page" : undefined}
           onClick={onNavigate}
+          data-docs-soft-nav={softNav ? true : undefined}
         >
           {label}
         </a>
@@ -384,27 +391,48 @@ function HeaderLinks({ onNavigate }: { onNavigate?: () => void }): JSX.Element {
   )
 }
 
-function DocumentationRail({ activeFamily }: { activeFamily: string }): JSX.Element {
+function DocumentationRail({ currentPath }: { currentPath: string }): JSX.Element {
   return (
     <LeftRail aria-label="Documentation navigation">
       <RailInner>
         <RailTitle>Documentation</RailTitle>
-        <RailLink href={siteHref("/docs/get-started/react/")}>Introduction</RailLink>
-        <RailLink href={siteHref("/docs/get-started/react/")}>Get started</RailLink>
-        <RailLink href={siteHref("/docs/components/")}>Components</RailLink>
+        <RailLink
+          href={siteHref("/docs/introduction/")}
+          aria-current={currentPath === "/docs/introduction/" ? "page" : undefined}
+          $active={currentPath === "/docs/introduction/"}
+          data-docs-soft-nav
+        >
+          Introduction
+        </RailLink>
+        <RailLink
+          href={siteHref("/docs/get-started/react/")}
+          aria-current={currentPath === "/docs/get-started/react/" ? "page" : undefined}
+          $active={currentPath === "/docs/get-started/react/"}
+          data-docs-soft-nav
+        >
+          Get started
+        </RailLink>
+        <RailLink
+          href={siteHref("/docs/components/")}
+          aria-current={currentPath === "/docs/components/" ? "page" : undefined}
+          $active={currentPath === "/docs/components/"}
+        >
+          Components
+        </RailLink>
         {componentGroups.map((group) => (
           <RailGroup key={group.label}>
             <RailGroupLabel>{group.label}</RailGroupLabel>
             {group.items.map((item) => {
               const familySlug = item.toLowerCase().replaceAll(" ", "-")
-              const active = familySlug === activeFamily.toLowerCase()
+              const familyPath = `/docs/components/${familySlug}/`
+              const active = familyPath === currentPath
               return (
                 <RailLink
                   key={item}
                   $active={active}
-                  href={siteHref(`/docs/components/${familySlug}/`)}
+                  href={siteHref(familyPath)}
                   aria-current={active ? "page" : undefined}
-                  data-docs-family={familySlug}
+                  data-docs-soft-nav
                 >
                   {item}
                 </RailLink>
@@ -412,21 +440,39 @@ function DocumentationRail({ activeFamily }: { activeFamily: string }): JSX.Elem
             })}
           </RailGroup>
         ))}
-        <RailLink href={siteHref("/docs/theming/")}>Theming</RailLink>
-        <RailLink href={siteHref("/docs/accessibility/")}>Accessibility</RailLink>
-        <RailLink href={siteHref("/docs/troubleshooting/")}>Troubleshoot</RailLink>
+        <RailLink
+          href={siteHref("/docs/theming/")}
+          aria-current={currentPath === "/docs/theming/" ? "page" : undefined}
+          $active={currentPath === "/docs/theming/"}
+        >
+          Theming
+        </RailLink>
+        <RailLink
+          href={siteHref("/docs/accessibility/")}
+          aria-current={currentPath === "/docs/accessibility/" ? "page" : undefined}
+          $active={currentPath === "/docs/accessibility/"}
+        >
+          Accessibility
+        </RailLink>
+        <RailLink
+          href={siteHref("/docs/troubleshooting/")}
+          aria-current={currentPath === "/docs/troubleshooting/" ? "page" : undefined}
+          $active={currentPath === "/docs/troubleshooting/"}
+        >
+          Troubleshoot
+        </RailLink>
       </RailInner>
     </LeftRail>
   )
 }
 
 interface DocsShellProps {
-  family: string
+  currentPath: string
   sections: DocsSection[]
   children: ReactNode
 }
 
-function DocsShell({ family, sections, children }: DocsShellProps): JSX.Element {
+function DocsShell({ currentPath, sections, children }: DocsShellProps): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const mobileMenuControlRef = useRef<HTMLSpanElement>(null)
   const sectionIds = useMemo(() => sections.map(({ id }) => id), [sections])
@@ -454,7 +500,7 @@ function DocsShell({ family, sections, children }: DocsShellProps): JSX.Element 
           <MarwesLogo />
         </LogoLink>
         <MainNavigation aria-label="Primary">
-          <HeaderLinks />
+          <HeaderLinks currentPath={currentPath} />
         </MainNavigation>
         <HeaderActions>
           <ThemeControl />
@@ -470,10 +516,10 @@ function DocsShell({ family, sections, children }: DocsShellProps): JSX.Element 
         </HeaderActions>
       </SiteHeader>
       <MobileNavigation id="mobile-docs-navigation" $open={mobileMenuOpen} aria-label="Mobile">
-        <HeaderLinks onNavigate={() => setMobileMenuOpen(false)} />
+        <HeaderLinks currentPath={currentPath} onNavigate={() => setMobileMenuOpen(false)} />
       </MobileNavigation>
       <DocsGrid>
-        <DocumentationRail activeFamily={family} />
+        <DocumentationRail currentPath={currentPath} />
         <Main id="main-content">
           <Content>
             <CompactPageNavigation>

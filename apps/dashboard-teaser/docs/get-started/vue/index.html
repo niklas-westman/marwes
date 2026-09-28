@@ -8,14 +8,42 @@
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="https://marwes.io/docs/get-started/vue/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/src/docs/docs.css" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
   </head>
-  <body>
-    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
-    <main class="docs-shell">
-      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
-      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Get started with Vue</h1><p>Install Marwes for Vue and render your first accessible component.</p></header>
-      <section><h2>1. Install with the official CLI</h2><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli init --adapter vue</code></pre><p>The CLI installs <code>@marwes-ui/vue</code>, wires the provider for supported Vite layouts, and runs diagnostics.</p></section><section><h2>2. Render a public component</h2><p>This is the same canonical fixture that the repository typechecks for Vue.</p><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Get started with Vue</h1><p>Install Marwes for Vue and render your first accessible component.</p></header><section id="install"><h2>1. Install with the official CLI</h2><p>The CLI installs @marwes-ui/vue, wires the provider for supported Vite layouts, and runs diagnostics.</p><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli init --adapter vue</code></pre></section><section id="render"><h2>2. Render a public component</h2><p>This is the same canonical fixture that the repository typechecks for Vue.</p><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
 import { ref } from &quot;vue&quot;
 import {
   Button,
@@ -45,9 +73,11 @@ const subscribed = ref(false)
     &lt;Button :variant=&quot;ButtonVariant.secondary&quot;&gt;Preview&lt;/Button&gt;
     &lt;SubmitButton&gt;Save&lt;/SubmitButton&gt;
   &lt;/MarwesProvider&gt;
-&lt;/template&gt;</code></pre></section><section><h2>3. Verify the app</h2><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli doctor --run-build</code></pre><p>A successful doctor run confirms the adapter import, rendered provider, and production build.</p></section><aside><strong>Manual fallback:</strong> install <code>@marwes-ui/vue</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside>
-    </main>
-    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
-    <script type="module" src="/src/docs/docs-main.ts"></script>
+&lt;/template&gt;</code></pre></section><section id="verify"><h2>3. Verify the app</h2><p>A successful doctor run confirms the adapter import, rendered provider, and production build.</p><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli doctor --run-build</code></pre></section><aside><strong>Manual fallback:</strong> install <code>@marwes-ui/vue</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#install">Install</a><a href="#render">Render</a><a href="#verify">Verify</a></nav></aside>
+      </div>
+    </div>
+    <script id="get-started-model" type="application/json">{"schemaVersion":1,"framework":"vue","packageName":"@marwes-ui/vue","title":"Get started with Vue","summary":"Install Marwes for Vue and render your first accessible component.","steps":[{"id":"install","title":"Install with the official CLI","description":"The CLI installs @marwes-ui/vue, wires the provider for supported Vite layouts, and runs diagnostics.","code":{"language":"shell","content":"pnpm dlx @marwes-ui/cli init --adapter vue"}},{"id":"render","title":"Render a public component","description":"This is the same canonical fixture that the repository typechecks for Vue.","code":{"language":"vue","content":"\u003cscript setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport {\n  Button,\n  ButtonVariant,\n  CheckboxField,\n  EmailField,\n  MarwesProvider,\n  SubmitButton,\n} from \"@marwes-ui/vue\"\n\nconst email = ref(\"\")\nconst subscribed = ref(false)\n\u003c/script>\n\n\u003ctemplate>\n  \u003cMarwesProvider>\n    \u003cEmailField\n      v-model=\"email\"\n      label=\"Email\"\n      :input=\"{ placeholder: 'you@example.com' }\"\n    />\n    \u003cCheckboxField\n      v-model=\"subscribed\"\n      label=\"Send me product updates\"\n      :checkbox=\"{}\"\n    />\n    \u003cButton :variant=\"ButtonVariant.secondary\">Preview\u003c/Button>\n    \u003cSubmitButton>Save\u003c/SubmitButton>\n  \u003c/MarwesProvider>\n\u003c/template>"}},{"id":"verify","title":"Verify the app","description":"A successful doctor run confirms the adapter import, rendered provider, and production build.","code":{"language":"shell","content":"pnpm dlx @marwes-ui/cli doctor --run-build"}}],"sections":[{"id":"install","label":"Install"},{"id":"render","label":"Render"},{"id":"verify","label":"Verify"}]}</script>
+    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
   </body>
 </html>

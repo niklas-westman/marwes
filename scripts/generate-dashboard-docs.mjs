@@ -822,10 +822,6 @@ function getThemingCopy(family) {
 function getStaticBody(route) {
   const routePath = route.path
   if (routePath === "/docs/components/") return renderCatalog(route.families)
-  if (routePath.startsWith("/docs/get-started/")) {
-    const framework = routePath.split("/").filter(Boolean).at(-1)
-    return renderGetStarted(framework)
-  }
   if (routePath === "/docs/theming/") return renderTheming()
   if (routePath === "/docs/accessibility/") return renderAccessibility()
   if (routePath === "/docs/compatibility/") return renderCompatibility()
@@ -1030,15 +1026,137 @@ function renderComponentStaticBody(model) {
   return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><div class="component-static-intents">${intentCards}</div><section id="recommended-components"><h2>Recommended public components</h2><p>${escapeHtml(model.recommendationDescription)}</p><div class="component-static-grid">${recommendations}</div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid">${publicApiInventories}</div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p>${examples}</section><section id="accessibility"><h2>Accessibility requirements</h2><ul>${accessibility}</ul></section><section id="theming"><h2>Theming</h2><p>${escapeHtml(model.theming)} See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul>${resources}</ul></section>`
 }
 
-function renderGetStarted(framework) {
+function buildGetStartedPageModel(framework) {
   const packageName = frameworkPackages[framework]
+  const codeLanguage = framework === "react" ? "tsx" : framework
 
-  return [
-    `<section><h2>1. Install with the official CLI</h2>${renderCode(`pnpm dlx @marwes-ui/cli init --adapter ${framework}`, "shell")}<p>The CLI installs <code>${packageName}</code>, wires the provider for supported Vite layouts, and runs diagnostics.</p></section>`,
-    `<section><h2>2. Render a public component</h2><p>This is the same canonical fixture that the repository typechecks for ${titleCase(framework)}.</p>${renderCode(getStartedExamples[framework], framework === "react" ? "tsx" : framework)}</section>`,
-    `<section><h2>3. Verify the app</h2>${renderCode("pnpm dlx @marwes-ui/cli doctor --run-build", "shell")}<p>A successful doctor run confirms the adapter import, rendered provider, and production build.</p></section>`,
-    `<aside><strong>Manual fallback:</strong> install <code>${packageName}</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside>`,
-  ].join("")
+  return {
+    schemaVersion: 1,
+    framework,
+    packageName,
+    title: `Get started with ${titleCase(framework)}`,
+    summary: `Install Marwes for ${titleCase(framework)} and render your first accessible component.`,
+    steps: [
+      {
+        id: "install",
+        title: "Install with the official CLI",
+        description: `The CLI installs ${packageName}, wires the provider for supported Vite layouts, and runs diagnostics.`,
+        code: { language: "shell", content: `pnpm dlx @marwes-ui/cli init --adapter ${framework}` },
+      },
+      {
+        id: "render",
+        title: "Render a public component",
+        description: `This is the same canonical fixture that the repository typechecks for ${titleCase(framework)}.`,
+        code: { language: codeLanguage, content: getStartedExamples[framework] },
+      },
+      {
+        id: "verify",
+        title: "Verify the app",
+        description:
+          "A successful doctor run confirms the adapter import, rendered provider, and production build.",
+        code: { language: "shell", content: "pnpm dlx @marwes-ui/cli doctor --run-build" },
+      },
+    ],
+    sections: [
+      { id: "install", label: "Install" },
+      { id: "render", label: "Render" },
+      { id: "verify", label: "Verify" },
+    ],
+  }
+}
+
+function buildIntroductionPageModel() {
+  return {
+    schemaVersion: 1,
+    title: "Introduction",
+    summary:
+      "Build one branded, accessible UI language across React, Vue, and Svelte. One core, thin framework adapters, and a single theme boundary.",
+    topics: [
+      {
+        id: "what-marwes-is",
+        title: "What Marwes is",
+        description:
+          "Marwes is a framework-agnostic design system: a pure TypeScript core with thin React, Vue, and Svelte adapters built from the same contracts. Every adapter ships static preset CSS and CSS variables, with no CSS-in-JS runtime required.",
+      },
+      {
+        id: "how-its-organized",
+        title: "How it's organized",
+        description:
+          "Each component family ships one recommended public component, purpose wrappers where relevant, and a base primitive as a deliberate escape hatch. The same contract compiles across React, Vue, and Svelte, and generated public API artifacts keep export names and import paths stable.",
+      },
+      {
+        id: "accessible-by-contract",
+        title: "Accessible by contract",
+        description:
+          "Core owns semantic contracts through typed recipes: roles, ARIA state, label wiring, and invalid state. Adapters apply that contract to real DOM elements instead of inventing separate accessibility behavior per framework. Consumers remain responsible for truthful labels and page-level structure.",
+      },
+      {
+        id: "theming-through-one-provider",
+        title: "Theming through one provider",
+        description:
+          "Wrap the app once in the framework provider and pass a theme. Resolved theme values flow through CSS variables, so there is no second stylesheet or CSS-in-JS runtime to reconcile.",
+      },
+    ],
+    links: [
+      {
+        label: "Get started",
+        href: "/docs/get-started/react/",
+        description: "Install the CLI and render your first accessible component.",
+      },
+      {
+        label: "Components",
+        href: "/docs/components/",
+        description: "Browse every component family and its recommended public API.",
+      },
+      {
+        label: "Theming",
+        href: "/docs/theming/",
+        description: "Wrap once, provide a theme, and brand every Marwes component.",
+      },
+      {
+        label: "Accessibility",
+        href: "/docs/accessibility/",
+        description: "Understand the accessibility contract shared by every component.",
+      },
+    ],
+    sections: [
+      { id: "what-marwes-is", label: "What Marwes is" },
+      { id: "how-its-organized", label: "How it's organized" },
+      { id: "accessible-by-contract", label: "Accessible by contract" },
+      { id: "theming-through-one-provider", label: "Theming" },
+      { id: "where-to-go-next", label: "Where to go next" },
+    ],
+  }
+}
+
+function renderIntroductionStaticBody(model) {
+  const topics = model.topics
+    .map(
+      (topic) =>
+        `<section id="${topic.id}"><h2>${escapeHtml(topic.title)}</h2><p>${escapeHtml(topic.description)}</p></section>`,
+    )
+    .join("")
+  const links = model.links
+    .map(
+      (link) =>
+        `<li><a href="${escapeHtml(link.href)}"><strong>${escapeHtml(link.label)}</strong></a> — ${escapeHtml(link.description)}</li>`,
+    )
+    .join("")
+
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header>${topics}<section id="where-to-go-next"><h2>Where to go next</h2><p>Pick a framework and render the first component.</p><ul>${links}</ul></section>`
+}
+
+function renderGetStartedStaticBody(model) {
+  const steps = model.steps
+    .map(
+      (step, index) =>
+        `<section id="${step.id}"><h2>${index + 1}. ${escapeHtml(step.title)}</h2><p>${escapeHtml(step.description)}</p>${
+          step.code ? renderCode(step.code.content, step.code.language) : ""
+        }</section>`,
+    )
+    .join("")
+
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header>${steps}<aside><strong>Manual fallback:</strong> install <code>${escapeHtml(model.packageName)}</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside>`
 }
 
 function renderCatalog(families) {
@@ -1293,12 +1411,7 @@ function serializeEmbeddedJson(value) {
     .replaceAll("\u2029", "\\u2029")
 }
 
-function renderComponentHtml(route, model) {
-  const canonical = `https://marwes.io${route.path}`
-  const onThisPage = model.sections
-    .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
-    .join("")
-  const staticCss = `
+const staticDocsCss = `
     #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
     #root[data-static-docs] * { box-sizing: border-box; }
     #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
@@ -1327,6 +1440,12 @@ function renderComponentHtml(route, model) {
     @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
   `
 
+function renderComponentHtml(route, model) {
+  const canonical = `https://marwes.io${route.path}`
+  const onThisPage = model.sections
+    .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
+    .join("")
+
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -1338,7 +1457,7 @@ function renderComponentHtml(route, model) {
     <link rel="canonical" href="${canonical}" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
-    <style>${staticCss}</style>
+    <style>${staticDocsCss}</style>
   </head>
   <body style="margin:0">
     <div id="root" data-static-docs>
@@ -1350,15 +1469,91 @@ function renderComponentHtml(route, model) {
       </div>
     </div>
     <script id="component-docs-model" type="application/json">${serializeEmbeddedJson(model)}</script>
-    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
   </body>
 </html>
 `
 }
 
-function renderHtml(route, componentPageModels) {
+function renderGetStartedHtml(route, model) {
+  const canonical = `https://marwes.io${route.path}`
+  const onThisPage = model.sections
+    .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
+    .join("")
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${escapeHtml(route.title)} — Marwes UI</title>
+    <meta name="description" content="${escapeHtml(route.description)}" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="${canonical}" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>${staticDocsCss}</style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      ${renderNavigation()}
+      <div class="component-static-layout">
+        <main id="main-content">${renderGetStartedStaticBody(model)}</main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong>${onThisPage}</nav></aside>
+      </div>
+    </div>
+    <script id="get-started-model" type="application/json">${serializeEmbeddedJson(model)}</script>
+    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
+  </body>
+</html>
+`
+}
+
+function renderIntroductionHtml(route, model) {
+  const canonical = `https://marwes.io${route.path}`
+  const onThisPage = model.sections
+    .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
+    .join("")
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${escapeHtml(route.title)} — Marwes UI</title>
+    <meta name="description" content="${escapeHtml(route.description)}" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="${canonical}" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>${staticDocsCss}</style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      ${renderNavigation()}
+      <div class="component-static-layout">
+        <main id="main-content">${renderIntroductionStaticBody(model)}</main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong>${onThisPage}</nav></aside>
+      </div>
+    </div>
+    <script id="introduction-model" type="application/json">${serializeEmbeddedJson(model)}</script>
+    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
+  </body>
+</html>
+`
+}
+
+function renderHtml(route, componentPageModels, getStartedPageModels, introductionPageModel) {
   const componentModel = route.family ? componentPageModels.get(route.family.family) : undefined
   if (componentModel) return renderComponentHtml(route, componentModel)
+
+  if (route.path === "/docs/introduction/") return renderIntroductionHtml(route, introductionPageModel)
+
+  const getStartedMatch = route.path.match(/^\/docs\/get-started\/([a-z]+)\/$/)
+  const getStartedModel = getStartedMatch ? getStartedPageModels.get(getStartedMatch[1]) : undefined
+  if (getStartedModel) return renderGetStartedHtml(route, getStartedModel)
 
   const canonical = `https://marwes.io${route.path}`
   const body = route.kind === "family" ? renderFamilyBody(route.family) : getStaticBody(route)
@@ -1482,6 +1677,19 @@ const componentPageModels = new Map(
   }),
 )
 
+const getStartedPageModels = new Map(
+  Object.keys(frameworkPackages).map((framework) => [framework, buildGetStartedPageModel(framework)]),
+)
+const getStartedPageModelPaths = Object.fromEntries(
+  Object.keys(frameworkPackages).map((framework) => [
+    framework,
+    path.join(appRoot, "src/docs/generated", `get-started-${framework}-page.json`),
+  ]),
+)
+
+const introductionPageModel = buildIntroductionPageModel()
+const introductionPageModelPath = path.join(appRoot, "src/docs/generated", "introduction-page.json")
+
 const routes = [
   ...staticRoutes.map(([routePath, title, description]) => ({
     description,
@@ -1501,16 +1709,23 @@ const routes = [
 const manifest = {
   schemaVersion: 1,
   familyCount: families.length,
-  routes: routes.map(({ family, families: routeFamilies, ...route }) => ({
-    ...route,
-    ...(family
-      ? {
-          family: family.family,
-          ...(componentPageModels.has(family.family) ? { renderer: "component-docs" } : {}),
-        }
-      : {}),
-    ...(routeFamilies ? { familyCount: routeFamilies.length } : {}),
-  })),
+  routes: routes.map(({ family, families: routeFamilies, ...route }) => {
+    const getStartedMatch = route.path.match(/^\/docs\/get-started\/([a-z]+)\/$/)
+    return {
+      ...route,
+      ...(family
+        ? {
+            family: family.family,
+            ...(componentPageModels.has(family.family) ? { renderer: "component-docs" } : {}),
+          }
+        : {}),
+      ...(getStartedMatch && getStartedPageModels.has(getStartedMatch[1])
+        ? { renderer: "get-started" }
+        : {}),
+      ...(route.path === "/docs/introduction/" ? { renderer: "introduction" } : {}),
+      ...(routeFamilies ? { familyCount: routeFamilies.length } : {}),
+    }
+  }),
 }
 const failures = []
 await assertOrWrite(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, failures)
@@ -1521,13 +1736,29 @@ for (const [family, model] of componentPageModels) {
     failures,
   )
 }
+for (const [framework, model] of getStartedPageModels) {
+  await assertOrWrite(
+    getStartedPageModelPaths[framework],
+    `${JSON.stringify(model, null, 2)}\n`,
+    failures,
+  )
+}
+await assertOrWrite(
+  introductionPageModelPath,
+  `${JSON.stringify(introductionPageModel, null, 2)}\n`,
+  failures,
+)
 
 const expectedHtmlPaths = new Set()
 for (const route of routes) {
   const relative = route.path.replace(/^\//, "")
   const filePath = path.join(appRoot, relative, "index.html")
   expectedHtmlPaths.add(filePath)
-  await assertOrWrite(filePath, renderHtml(route, componentPageModels), failures)
+  await assertOrWrite(
+    filePath,
+    renderHtml(route, componentPageModels, getStartedPageModels, introductionPageModel),
+    failures,
+  )
 }
 
 for (const filePath of await listGeneratedHtmlFiles(path.join(appRoot, "docs"))) {

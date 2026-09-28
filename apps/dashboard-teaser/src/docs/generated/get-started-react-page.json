@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "framework": "react",
+  "packageName": "@marwes-ui/react",
+  "title": "Get started with React",
+  "summary": "Install Marwes for React and render your first accessible component.",
+  "steps": [
+    {
+      "id": "install",
+      "title": "Install with the official CLI",
+      "description": "The CLI installs @marwes-ui/react, wires the provider for supported Vite layouts, and runs diagnostics.",
+      "code": {
+        "language": "shell",
+        "content": "pnpm dlx @marwes-ui/cli init --adapter react"
+      }
+    },
+    {
+      "id": "render",
+      "title": "Render a public component",
+      "description": "This is the same canonical fixture that the repository typechecks for React.",
+      "code": {
+        "language": "tsx",
+        "content": "import {\n  Button,\n  ButtonVariant,\n  CheckboxField,\n  EmailField,\n  MarwesProvider,\n  SubmitButton,\n} from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function App() {\n  const [email, setEmail] = useState(\"\")\n  const [subscribed, setSubscribed] = useState(false)\n\n  return (\n    <MarwesProvider>\n      <EmailField\n        label=\"Email\"\n        input={{ value: email, onValueChange: setEmail, placeholder: \"you@example.com\" }}\n      />\n      <CheckboxField\n        label=\"Send me product updates\"\n        checkbox={{ checked: subscribed, onCheckedChange: setSubscribed }}\n      />\n      <Button variant={ButtonVariant.secondary}>Preview</Button>\n      <SubmitButton>Save</SubmitButton>\n    </MarwesProvider>\n  )\n}"
+      }
+    },
+    {
+      "id": "verify",
+      "title": "Verify the app",
+      "description": "A successful doctor run confirms the adapter import, rendered provider, and production build.",
+      "code": {
+        "language": "shell",
+        "content": "pnpm dlx @marwes-ui/cli doctor --run-build"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "install",
+      "label": "Install"
+    },
+    {
+      "id": "render",
+      "label": "Render"
+    },
+    {
+      "id": "verify",
+      "label": "Verify"
+    }
+  ]
+}

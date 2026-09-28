@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction — Marwes UI</title>
+    <meta name="description" content="What Marwes is, how it's organized, and where to go next." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/introduction/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Introduction</h1><p>Build one branded, accessible UI language across React, Vue, and Svelte. One core, thin framework adapters, and a single theme boundary.</p></header><section id="what-marwes-is"><h2>What Marwes is</h2><p>Marwes is a framework-agnostic design system: a pure TypeScript core with thin React, Vue, and Svelte adapters built from the same contracts. Every adapter ships static preset CSS and CSS variables, with no CSS-in-JS runtime required.</p></section><section id="how-its-organized"><h2>How it's organized</h2><p>Each component family ships one recommended public component, purpose wrappers where relevant, and a base primitive as a deliberate escape hatch. The same contract compiles across React, Vue, and Svelte, and generated public API artifacts keep export names and import paths stable.</p></section><section id="accessible-by-contract"><h2>Accessible by contract</h2><p>Core owns semantic contracts through typed recipes: roles, ARIA state, label wiring, and invalid state. Adapters apply that contract to real DOM elements instead of inventing separate accessibility behavior per framework. Consumers remain responsible for truthful labels and page-level structure.</p></section><section id="theming-through-one-provider"><h2>Theming through one provider</h2><p>Wrap the app once in the framework provider and pass a theme. Resolved theme values flow through CSS variables, so there is no second stylesheet or CSS-in-JS runtime to reconcile.</p></section><section id="where-to-go-next"><h2>Where to go next</h2><p>Pick a framework and render the first component.</p><ul><li><a href="/docs/get-started/react/"><strong>Get started</strong></a> — Install the CLI and render your first accessible component.</li><li><a href="/docs/components/"><strong>Components</strong></a> — Browse every component family and its recommended public API.</li><li><a href="/docs/theming/"><strong>Theming</strong></a> — Wrap once, provide a theme, and brand every Marwes component.</li><li><a href="/docs/accessibility/"><strong>Accessibility</strong></a> — Understand the accessibility contract shared by every component.</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-marwes-is">What Marwes is</a><a href="#how-its-organized">How it's organized</a><a href="#accessible-by-contract">Accessible by contract</a><a href="#theming-through-one-provider">Theming</a><a href="#where-to-go-next">Where to go next</a></nav></aside>
+      </div>
+    </div>
+    <script id="introduction-model" type="application/json">{"schemaVersion":1,"title":"Introduction","summary":"Build one branded, accessible UI language across React, Vue, and Svelte. One core, thin framework adapters, and a single theme boundary.","topics":[{"id":"what-marwes-is","title":"What Marwes is","description":"Marwes is a framework-agnostic design system: a pure TypeScript core with thin React, Vue, and Svelte adapters built from the same contracts. Every adapter ships static preset CSS and CSS variables, with no CSS-in-JS runtime required."},{"id":"how-its-organized","title":"How it's organized","description":"Each component family ships one recommended public component, purpose wrappers where relevant, and a base primitive as a deliberate escape hatch. The same contract compiles across React, Vue, and Svelte, and generated public API artifacts keep export names and import paths stable."},{"id":"accessible-by-contract","title":"Accessible by contract","description":"Core owns semantic contracts through typed recipes: roles, ARIA state, label wiring, and invalid state. Adapters apply that contract to real DOM elements instead of inventing separate accessibility behavior per framework. Consumers remain responsible for truthful labels and page-level structure."},{"id":"theming-through-one-provider","title":"Theming through one provider","description":"Wrap the app once in the framework provider and pass a theme. Resolved theme values flow through CSS variables, so there is no second stylesheet or CSS-in-JS runtime to reconcile."}],"links":[{"label":"Get started","href":"/docs/get-started/react/","description":"Install the CLI and render your first accessible component."},{"label":"Components","href":"/docs/components/","description":"Browse every component family and its recommended public API."},{"label":"Theming","href":"/docs/theming/","description":"Wrap once, provide a theme, and brand every Marwes component."},{"label":"Accessibility","href":"/docs/accessibility/","description":"Understand the accessibility contract shared by every component."}],"sections":[{"id":"what-marwes-is","label":"What Marwes is"},{"id":"how-its-organized","label":"How it's organized"},{"id":"accessible-by-contract","label":"Accessible by contract"},{"id":"theming-through-one-provider","label":"Theming"},{"id":"where-to-go-next","label":"Where to go next"}]}</script>
+    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
+  </body>
+</html>

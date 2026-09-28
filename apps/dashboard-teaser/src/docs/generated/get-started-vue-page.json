@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "framework": "vue",
+  "packageName": "@marwes-ui/vue",
+  "title": "Get started with Vue",
+  "summary": "Install Marwes for Vue and render your first accessible component.",
+  "steps": [
+    {
+      "id": "install",
+      "title": "Install with the official CLI",
+      "description": "The CLI installs @marwes-ui/vue, wires the provider for supported Vite layouts, and runs diagnostics.",
+      "code": {
+        "language": "shell",
+        "content": "pnpm dlx @marwes-ui/cli init --adapter vue"
+      }
+    },
+    {
+      "id": "render",
+      "title": "Render a public component",
+      "description": "This is the same canonical fixture that the repository typechecks for Vue.",
+      "code": {
+        "language": "vue",
+        "content": "<script setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport {\n  Button,\n  ButtonVariant,\n  CheckboxField,\n  EmailField,\n  MarwesProvider,\n  SubmitButton,\n} from \"@marwes-ui/vue\"\n\nconst email = ref(\"\")\nconst subscribed = ref(false)\n</script>\n\n<template>\n  <MarwesProvider>\n    <EmailField\n      v-model=\"email\"\n      label=\"Email\"\n      :input=\"{ placeholder: 'you@example.com' }\"\n    />\n    <CheckboxField\n      v-model=\"subscribed\"\n      label=\"Send me product updates\"\n      :checkbox=\"{}\"\n    />\n    <Button :variant=\"ButtonVariant.secondary\">Preview</Button>\n    <SubmitButton>Save</SubmitButton>\n  </MarwesProvider>\n</template>"
+      }
+    },
+    {
+      "id": "verify",
+      "title": "Verify the app",
+      "description": "A successful doctor run confirms the adapter import, rendered provider, and production build.",
+      "code": {
+        "language": "shell",
+        "content": "pnpm dlx @marwes-ui/cli doctor --run-build"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "install",
+      "label": "Install"
+    },
+    {
+      "id": "render",
+      "label": "Render"
+    },
+    {
+      "id": "verify",
+      "label": "Verify"
+    }
+  ]
+}

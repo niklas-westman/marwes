@@ -136,7 +136,7 @@ describe("static consumer documentation routes", () => {
       expect(html).toContain("document.documentElement.classList.add(mode)")
       expect(html).toContain('class="component-static-skip" href="#main-content"')
       expect(html).toContain('id="component-docs-model" type="application/json"')
-      expect(html).toContain("/src/docs/components/component-docs-main.tsx")
+      expect(html).toContain("/src/docs/components/docs-page-main.tsx")
     }
   })
 })

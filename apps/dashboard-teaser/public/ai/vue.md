@@ -1,0 +1,779 @@
+# AI implementation instructions
+
+> Import and use real Marwes components from `@marwes-ui/vue`.
+> Do not invent `mw-*` replacement components or custom elements; use the adapter's documented public exports.
+
+Vue 3 components for the Marwes design system with default styling, typed theme tokens, accessibility contracts, and AI-readable semantics.
+
+<div align="center">
+
+<img alt="Marwes Design System" src="https://raw.githubusercontent.com/niklas-westman/marwes/main/.github/assets/cover-v3.png" width="100%" style="border-radius: 40px;">
+
+<br>
+<br>
+
+# Marwes Design System - Vue
+
+**Vue 3 components with default Marwes styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
+
+Vue 3.4+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
+
+[**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
+[Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [GitHub](https://github.com/niklas-westman/marwes)
+
+</div>
+
+---
+
+## Why Use It
+
+Marwes gives Vue apps a ready design-system base without requiring custom CSS setup or local component forks.
+
+- **One package for Vue apps**: components, provider, default preset CSS, theme helpers, and typed props.
+- **Vue-native binding**: common controls support `v-model` while preserving Marwes semantic contracts.
+- **Consequential theming**: a `ThemeInput` object changes colors, fonts, radius, density, typography, and component visuals through shared CSS variables.
+- **Purpose components**: `SubmitButton`, `CancelButton`, and `DestructiveButton` make intent machine-readable so tests, audits, and AI agents can handle actions safely.
+- **Shared core contracts**: every Vue component is backed by the same framework-agnostic recipes, a11y mapping, and theme shape.
+
+## Package Map
+
+For a Vue app, install this package first. It includes the Vue adapter, loads the default preset CSS, and re-exports the core theme helpers you normally need.
+
+| Package | Use it when |
+| --- | --- |
+| `@marwes-ui/vue` | You are building a Vue app. |
+| `@marwes-ui/react` | You are building a React app instead. |
+| `@marwes-ui/svelte` | You are building a Svelte app instead. |
+| `@marwes-ui/core` | You are building adapters, tests, tooling, or framework-agnostic integrations. |
+| `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
+
+This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
+
+## Requirements
+
+- Vue 3.4 or newer
+- Node.js 20 or newer for package installation, application builds, and the CLI
+- A modern browser with CSS custom-property support
+- A Vite starter layout for automatic provider patching; custom layouts use the printed manual setup
+
+## Install
+
+The Marwes CLI is the official installation path. It installs `@marwes-ui/vue` (with `vue` as a peer), wraps your app root with `MarwesProvider`, and leaves you ready to render components with default Marwes styling — no separate CSS setup.
+
+For full setup guides, theme customization, and the theme builder, visit [marwes.io](https://marwes.io).
+
+### Existing Vue app
+
+Run at the root of your project:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter vue
+```
+
+Also works with `npx @marwes-ui/cli`, `yarn dlx @marwes-ui/cli`, and `bunx @marwes-ui/cli`.
+
+Verify the patched app and its production build:
+
+```bash
+pnpm dlx @marwes-ui/cli doctor --run-build
+```
+
+Automatic provider patching supports known Vite starter layouts. A `manual-action-required` result means the package was installed but the CLI could not safely identify the app root; apply the complete provider example printed by the CLI and rerun the doctor command.
+
+### New Vite app
+
+Scaffold a fresh Vite starter with Marwes preinstalled:
+
+```bash
+pnpm create marwes@latest my-app --template vue-ts
+```
+
+### AI-assisted setup
+
+Add `--agentic` to hand setup to an AI coding agent (Claude Code, Cursor, etc.). The CLI runs the normal install, then runs `doctor` and prints the guardrails the agent should follow:
+
+```bash
+pnpm dlx @marwes-ui/cli init --adapter vue --agentic
+```
+
+After install, jump to the [Quick Start](#quick-start) below.
+
+## Quick Start
+
+```vue
+<script setup lang="ts">
+import { Button, ButtonVariant, CheckboxField, EmailField, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
+</script>
+
+<template>
+  <MarwesProvider>
+    <EmailField label="Email" :input="{ placeholder: 'you@example.com' }" />
+    <CheckboxField label="Subscribe" />
+    <Button :variant="ButtonVariant.secondary">Preview</Button>
+    <SubmitButton>Save</SubmitButton>
+  </MarwesProvider>
+</template>
+```
+
+## Style App-Owned UI
+
+Marwes components pick up provider tokens automatically. Your own Vue styling can use the same tokens through scoped CSS, CSS Modules, or `mwThemeVars` in script-driven style objects.
+
+```vue
+<script setup lang="ts">
+import { Button, ButtonVariant, MarwesProvider, mwThemeVars } from "@marwes-ui/vue"
+
+const panelStyle = {
+  padding: mwThemeVars.spacing.sp24,
+  background: mwThemeVars.color.surface,
+  color: mwThemeVars.color.text,
+  borderColor: mwThemeVars.color.border,
+}
+</script>
+
+<template>
+  <MarwesProvider>
+    <main class="app-shell">
+      <aside class="primary-callout">Launch workspace</aside>
+      <section class="feature-panel" :style="panelStyle">
+        <Button :variant="ButtonVariant.primary">Save</Button>
+      </section>
+    </main>
+  </MarwesProvider>
+</template>
+
+<style scoped>
+.app-shell {
+  min-height: 100dvh;
+  padding: var(--mw-spacing-sp-24);
+  color: var(--mw-color-text);
+  background: var(--mw-color-background);
+}
+
+.feature-panel {
+  border: 1px solid var(--mw-color-border);
+  border-radius: var(--mw-ui-radius);
+}
+
+.primary-callout {
+  background: var(--mw-color-primary-base);
+  color: var(--mw-color-primary-label);
+}
+</style>
+```
+
+## Use Typed Components
+
+Import components, enum objects, and prop types from the same package. The values line up with the same core recipes and preset CSS.
+
+```vue
+<script setup lang="ts">
+import {
+  BadgeVariant,
+  Button,
+  ButtonSize,
+  ButtonVariant,
+  Card,
+  H1,
+  InputField,
+  Paragraph,
+  Spacer,
+  Spacings,
+  StatusBadge,
+  SubmitButton,
+  type ButtonProps,
+  type HeadingProps,
+  type InputFieldProps,
+  type ParagraphProps,
+} from "@marwes-ui/vue"
+
+const primaryAction: ButtonProps = {
+  variant: ButtonVariant.primary,
+  size: ButtonSize.md,
+}
+
+const emailField: InputFieldProps = {
+  label: "Email",
+  helperText: "Used for project notifications.",
+  input: {
+    type: "email",
+    placeholder: "you@example.com",
+  },
+}
+
+const titleProps: HeadingProps = {
+  size: "h2",
+}
+
+const descriptionProps: ParagraphProps = {
+  size: "md",
+}
+</script>
+
+<template>
+  <Card>
+    <template #title>Project setup</template>
+    <StatusBadge :variant="BadgeVariant.success">Ready</StatusBadge>
+    <Spacer :spacing="Spacings.sp16" />
+    <H1 v-bind="titleProps">Launch workspace</H1>
+    <Paragraph v-bind="descriptionProps">
+      Components share theme tokens, typed variants, spacing, and semantic metadata.
+    </Paragraph>
+    <InputField v-bind="emailField" />
+    <Spacer :spacing="Spacings.sp24" />
+    <Button v-bind="primaryAction">Create project</Button>
+    <SubmitButton>Save changes</SubmitButton>
+  </Card>
+</template>
+```
+
+For icon-only actions, use `IconButton` and name the button with `label`, `ariaLabel`, or `ariaLabelledBy`. An `ariaLabel` on a nested `Icon` names the image, not the interactive button.
+
+<!-- BEGIN GENERATED PUBLIC COMPONENTS -->
+## Available Components
+
+Generated from the public root export of `@marwes-ui/vue`. Do not edit this inventory by hand.
+
+### Framework
+
+- `MarwesProvider`, `SkipLink`
+
+### Accordion
+
+- `AccordionField`, `FAQAccordion`, `SectionsAccordion`, `SettingsAccordion`
+
+### Avatar
+
+- `Avatar`, `AvatarBadge`, `AvatarGroup`, `PresenceAvatar`, `ProfileAvatar`, `TeamAvatarGroup`
+
+### Badge
+
+- `Badge`, `BadgeGroup`, `NotificationBadge`, `PriorityBadge`, `StatusBadge`
+
+### Banner
+
+- `Banner`, `ErrorBanner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`
+
+### Breadcrumb
+
+- `Breadcrumb`
+
+### Button
+
+- `Button`, `CancelButton`, `CloseButton`, `ConfirmButton`, `CopyButton`, `CreateButton`
+- `DestructiveButton`, `DownloadButton`, `DropdownButton`, `EditButton`, `FilterButton`, `IconButton`
+- `LinkButton`, `PrimaryButton`, `RefreshButton`, `SaveButton`, `SearchButton`, `SecondaryButton`
+- `SortButton`, `SubmitButton`, `SuccessButton`, `TextButton`, `UploadButton`, `VerifyButton`
+
+### Card
+
+- `Card`, `ProductCard`, `ProfileCard`, `StatCard`
+
+### Checkbox
+
+- `CheckboxField`, `CheckboxGroupField`
+
+### Context Menu
+
+- `ContextMenu`
+
+### Date Picker
+
+- `DatePickerField`
+
+### Dialog
+
+- `ConfirmDialog`, `DestructiveDialog`, `Dialog`, `DialogModal`, `InfoDialog`
+
+### Divider
+
+- `Divider`
+
+### Drawer
+
+- `Drawer`
+
+### Heading
+
+- `H1`, `H2`, `H3`
+
+### Icon
+
+- `Icon`
+
+### Input
+
+- `CurrencyField`, `DateOfBirthField`, `DropdownField`, `EmailField`, `InputField`, `InputOtpField`
+- `PasswordField`, `PhoneField`, `RichTextField`, `SearchField`, `SelectField`, `TextareaField`
+- `URLField`, `ZipCodeField`
+
+### Pagination
+
+- `PaginationField`
+
+### Paragraph
+
+- `Paragraph`
+
+### Progress Bar
+
+- `ProgressBar`
+
+### Radio
+
+- `OptionRadioGroup`, `RadioGroupField`, `RatingRadioGroup`, `YesNoRadioGroup`
+
+### Segmented Control
+
+- `SegmentedControlField`
+
+### Skeleton
+
+- `Skeleton`
+
+### Slider
+
+- `BrightnessSlider`, `RadiusSlider`, `SliderField`, `VolumeSlider`
+
+### Spacing
+
+- `Spacer`, `Spacing`
+
+### Spinner
+
+- `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
+
+### Stat Tile
+
+- `StatTile`
+
+### Switch
+
+- `FeatureToggle`, `PermissionSwitch`, `PreferenceSwitch`, `SwitchField`
+
+### Tab
+
+- `ContentTabs`, `NavigationTabs`, `SettingsTabs`, `Tab`, `TabGroup`, `TabPanel`
+
+### Text
+
+- `Text`, `TypographyText`
+
+### Toast
+
+- `ErrorToast`, `InfoToast`, `SuccessToast`, `Toast`, `ToastContainer`, `ToastProvider`
+- `WarningToast`
+
+### Tooltip
+
+- `Tooltip`, `TooltipGroup`
+
+<!-- END GENERATED PUBLIC COMPONENTS -->
+
+## Theme In Seconds
+
+The default Marwes theme is already active. If you already have a good-looking design library or brand system, pass a small typed `ThemeInput` override instead of rebuilding component CSS.
+
+```vue
+<script setup lang="ts">
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/vue"
+
+const brandTheme = {
+  color: {
+    primary: "#2457FF",
+    danger: "#D90429",
+    success: "#15803D",
+    warning: "#D97706",
+    background: "#F8FAFC",
+    surface: "#FFFFFF",
+    surfaceElevated: "#FFFFFF",
+    text: "#111827",
+    textMuted: "#4B5563",
+    border: "#D1D5DB",
+    focus: "#2457FF",
+  },
+  font: {
+    primary: mwAvailableFonts.Poppins,
+    secondary: mwAvailableFonts.Lora,
+  },
+  ui: {
+    radius: 10,
+    density: "comfortable",
+  },
+} satisfies ThemeInput
+</script>
+
+<template>
+  <MarwesProvider :theme="brandTheme">
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+The provider resolves `ThemeInput` into `--mw-*` CSS variables. Preset CSS consumes those variables across the full component system.
+
+Marwes is designed to look great from the beginning. Start with the default preset, then override only the colors, fonts, radius, or density that belong to your product. Unspecified values keep the polished Marwes defaults.
+
+## Light And Dark Mode
+
+MarwesProvider can own the active mode for the app. Use `ThemeMode.light` and `ThemeMode.dark` instead of string literals, then read or change the active mode with `useThemeMode()` anywhere under the provider. Every component under the provider receives the matching `--mw-*` variables and `mw-theme--light` / `mw-theme--dark` class.
+
+```vue
+<script setup lang="ts">
+import { Button, ButtonVariant, ThemeMode, useThemeMode } from "@marwes-ui/vue"
+
+const { mode, toggleMode } = useThemeMode()
+</script>
+
+<template>
+  <Button :variant="ButtonVariant.secondary" @click="toggleMode">
+    Use {{ mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark }} mode
+  </Button>
+</template>
+```
+
+```vue
+<script setup lang="ts">
+import { MarwesProvider, ThemeMode } from "@marwes-ui/vue"
+import ThemeToggle from "./theme-toggle.vue"
+</script>
+
+<template>
+  <MarwesProvider :default-mode="ThemeMode.light">
+    <ThemeToggle />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+`default-mode` sets the initial uncontrolled mode. `toggleMode()` updates the provider, so Marwes components, preset CSS, and custom app styles that use `--mw-*` variables all move together without duplicating local theme state.
+
+### System And Persisted Preference
+
+`mode` is always the rendered visual mode: `ThemeMode.light` or `ThemeMode.dark`. `preference` is the app or user choice: `ThemeMode.light`, `ThemeMode.dark`, or `"system"`. Use `preference` and `default-preference` when your UI needs a system option; keep using `mode`, `default-mode`, and `on-mode-change` when you only need concrete light/dark compatibility.
+
+```vue
+<script setup lang="ts">
+import { Button, ButtonVariant, ThemeMode, useThemeMode } from "@marwes-ui/vue"
+
+const { mode, preference, systemMode, isSystem, setPreference, setMode } = useThemeMode()
+</script>
+
+<template>
+  <p>Rendering {{ mode }}; preference is {{ preference }}; system is {{ systemMode }}.</p>
+  <Button :variant="ButtonVariant.secondary" @click="setPreference('system')">
+    Use system
+  </Button>
+  <Button :variant="ButtonVariant.secondary" @click="setMode(ThemeMode.dark)">
+    Use dark
+  </Button>
+  <span v-if="isSystem">Following system</span>
+</template>
+```
+
+```vue
+<script setup lang="ts">
+import { MarwesProvider } from "@marwes-ui/vue"
+import ThemeMenu from "./theme-menu.vue"
+</script>
+
+<template>
+  <MarwesProvider default-preference="system" storage-key="marwes-theme" enable-system>
+    <ThemeMenu />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+`useThemeMode().mode` never returns `"system"`; it is always the concrete mode Marwes rendered. `useThemeMode().preference` returns the active app/user preference, and `setPreference("system")` is the system-capable setter. `setMode(mode)` remains a concrete light/dark convenience.
+
+`storage-key` is opt-in and defaults to `false`. Storage reads and writes are failure-safe, so private browsing or unavailable storage will fall back to normal provider state. `enable-system` defaults to `true`; set it to `false` to avoid `matchMedia` detection and resolve `"system"` through the light fallback.
+
+This layer does not provide SSR no-flash behavior. Server output can still render the fallback mode before the client applies a stored or system preference. Use it for client-side preference and persistence, not for a no-flash SSR guarantee.
+
+### Root Target Sync
+
+By default Marwes keeps theme state scoped to the provider element. If your app shell also needs the resolved mode on `html` or `body`, set `target` and `attribute`:
+
+```vue
+<template>
+  <MarwesProvider
+    default-preference="system"
+    storage-key="marwes-theme"
+    target="html"
+    attribute="class"
+    disable-transition-on-change
+  >
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+`target` can be `"provider"`, `"html"`, or `"body"`. `attribute` can be `"class"`, `"data-theme"`, or `"data-mode"`. Class mode only adds the active `light` / `dark` class and removes the opposite one; unrelated classes are preserved. The provider root still keeps `mw-theme--light` / `mw-theme--dark` and provider-scoped `--mw-*` variables in every target mode.
+
+Use one global-target provider per app shell. If multiple providers target `html` or `body`, deciding which provider owns that global element is app-owned behavior.
+
+### Tailwind And shadcn Compatibility
+
+Marwes is compatible with Tailwind and shadcn-style dark variants through `target="html" attribute="class"`. App-owned Tailwind tokens can also reference Marwes `--mw-*` variables when rendered inside the provider subtree.
+
+```vue
+<template>
+  <MarwesProvider
+    default-preference="system"
+    storage-key="marwes-theme"
+    target="html"
+    attribute="class"
+  >
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+Read the [Tailwind and shadcn integration guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/tailwind-shadcn-integration.md) for Tailwind v3/v4 examples, token mapping, provider-scoped variable limits, and the SSR no-flash boundary.
+
+### Nuxt SSR
+
+Use `createMarwesThemeStyle()`, `createMarwesThemeScript()`, and `variable-strategy="style-tag"` when a server-rendered app needs the correct light or dark variables before hydration. This is opt-in; normal Vue apps keep inline provider variables by default.
+
+Read the [theme SSR no-flash guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/theme-ssr-no-flash.md) for Nuxt setup, CSP nonces, hydration warning guidance, custom light/dark themes, and stored/system preference behavior.
+
+For a simple brand pass, override shared values once and let Marwes fill the rest. If your product needs different brand colors in light and dark mode, control `mode` and switch between two small `ThemeInput` override objects:
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { MarwesProvider, ThemeMode, type ThemeInput } from "@marwes-ui/vue"
+import ThemeToggle from "./theme-toggle.vue"
+
+const mode = ref<ThemeMode>(ThemeMode.light)
+
+const themeByMode = {
+  [ThemeMode.light]: https://github.com/niklas-westman/marwes/blob/main/packages/vue/{
+    color: {
+      primary: "#2457FF",
+      background: "#F8FAFC",
+      surface: "#FFFFFF",
+      text: "#111827",
+      border: "#D1D5DB",
+      focus: "#2457FF",
+    },
+  },
+  [ThemeMode.dark]: https://github.com/niklas-westman/marwes/blob/main/packages/vue/{
+    color: {
+      primary: "#8BA2FF",
+      background: "#0B1020",
+      surface: "#111827",
+      text: "#F8FAFC",
+      border: "#334155",
+      focus: "#93C5FD",
+    },
+  },
+} satisfies Record<ThemeMode, ThemeInput>
+
+function setMode(nextMode: ThemeMode) {
+  mode.value = nextMode
+}
+</script>
+
+<template>
+  <MarwesProvider :mode="mode" :theme="themeByMode[mode]" :on-mode-change="setMode">
+    <ThemeToggle />
+    <AppShell />
+  </MarwesProvider>
+</template>
+```
+
+Mode-specific defaults fill every omitted token, so each override can stay small. `:theme="{ mode: ThemeMode.dark }"` is still enough for the default dark baseline.
+
+## Custom Styling Tokens
+
+`MarwesProvider` resolves `ThemeInput` into `--mw-*` CSS variables. Marwes components and preset CSS consume those variables automatically. The custom styling token helpers let app-owned Vue styles, script-driven style objects, and build-time config use the same provider-scoped values instead of hard-coding colors, spacing, radius, typography, or duplicated `var(...)` strings.
+
+Vue style blocks and CSS Modules can consume provider variables directly:
+
+```vue
+<template>
+  <section class="panel">
+    <slot />
+  </section>
+</template>
+
+<style scoped>
+.panel {
+  padding: var(--mw-spacing-sp-24);
+  color: var(--mw-color-text);
+  background: var(--mw-color-surface);
+  border-radius: var(--mw-ui-radius);
+}
+</style>
+```
+
+For script-driven style objects, composables, renderer bridges, or config files, import the same core helpers through the Vue package:
+
+- `mwThemeVars` is the default styling helper. It returns CSS `var(...)` references for style objects, CSS-in-JS integrations, vanilla-extract, and config files.
+- `mwThemeVarNames` returns raw custom property names for assigning provider-scoped overrides in style objects or tooling.
+- `mwVar()` wraps custom or advanced `--mw-*` names when the named token object does not cover a specialized case.
+- `mwTheme` mirrors `mwThemeVars` as a plain object for shared CSS-in-JS integrations that expect a theme object. `mwStyledTheme` remains as a deprecated compatibility alias.
+
+```ts
+import { mwTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/vue"
+
+const panelStyle = {
+  padding: mwThemeVars.spacing.sp24,
+  color: mwThemeVars.color.text,
+  outlineColor: mwVar("--mw-color-focus", "#2457FF"),
+}
+
+const focusOverride = {
+  [mwThemeVarNames.color.focus]: https://github.com/niklas-westman/marwes/blob/main/packages/vue/"#FF00AA",
+}
+
+const cssInJsTheme = mwTheme
+```
+
+`mwTheme`, `mwStyledTheme`, and `mwThemeVars` contain CSS `var(--mw-*)` references, not resolved color or spacing values. They are correct inside CSS evaluated below `MarwesProvider`, but JavaScript reads or aliases can resolve against the wrong element and return an empty value. Use `useTheme()` for JavaScript logic, charts, runtime aliases, or bridges that need concrete values.
+
+This enables Vue apps to keep scoped CSS, dynamic `:style` bindings, custom layout wrappers, and design-tool integrations visually tied to the same active theme as Marwes components. Changing `MarwesProvider :theme="..."` updates both preset components and app-owned styles.
+
+Keep the APIs separate:
+- Use `Spacings.sp24` for Marwes spacing props such as `<Spacer :spacing="Spacings.sp24" />`.
+- Use `mwThemeVars.spacing.sp24` for custom CSS values.
+- Use `mwThemeVarNames.spacing.sp24` when assigning or inspecting a CSS custom property name.
+- Use `useTheme()` when Vue logic needs resolved runtime values such as `"#2457FF"`.
+
+## Vue Binding Conventions
+
+- Text-like controls support `v-model` through `modelValue` and `update:modelValue`.
+- Inputs also expose `onValueChange` when callback-style wiring is useful.
+- Checkboxes support `v-model` and `onCheckedChange`.
+
+Prefer `v-model` in normal Vue app code unless you specifically need callback-style wiring.
+
+## Google Fonts DX
+
+Most Google Font use cases only need `mwAvailableFonts`; no `fontLoading` prop is needed.
+
+```vue
+<script setup lang="ts">
+import { MarwesProvider, mwAvailableFonts, type ThemeInput } from "@marwes-ui/vue"
+
+const theme = {
+  font: {
+    primary: mwAvailableFonts.Poppins,
+    secondary: mwAvailableFonts.Lora,
+  },
+} satisfies ThemeInput
+</script>
+
+<template>
+  <MarwesProvider :theme="theme">
+    <App />
+  </MarwesProvider>
+</template>
+```
+
+For self-hosted or licensed fonts, use `BrandSans`, `BrandSerif`, `BrandMono`, or `createFontStack()`.
+
+## Purpose Components
+
+Prefer purpose components for common actions. They lock UX intent and emit AI-readable metadata, so the component is not just "a button with red styling" but a known action with known risk.
+
+```vue
+<script setup lang="ts">
+import {
+  CancelButton,
+  CreateButton,
+  DestructiveButton,
+  SubmitButton,
+} from "@marwes-ui/vue"
+</script>
+
+<template>
+  <CancelButton>Cancel</CancelButton>
+  <CreateButton>Create</CreateButton>
+  <SubmitButton>Save</SubmitButton>
+  <DestructiveButton>Delete</DestructiveButton>
+</template>
+```
+
+That matters for agentic workflows. A human, test, or AI agent can inspect the DOM and see that a destructive button requires confirmation before activation:
+
+```html
+<button
+  data-component="button"
+  data-purpose="destructive"
+  data-action="delete"
+  data-destructive="true"
+  data-confirmation-required="true"
+>
+  Delete
+</button>
+```
+
+An agent can then follow a safer rule: if `data-confirmation-required="true"`, ask the user before clicking. A test can assert the same behavior without guessing from the label "Delete" or from a red color.
+
+## Why It Is Accessible
+
+Marwes Vue components are accessible because the adapter renders a shared core contract, not because each component hand-rolls ARIA in isolation.
+
+- Core recipes produce typed `a11y` output for roles, labels, described-by wiring, invalid state, disabled state, and semantic metadata.
+- Vue components prefer native DOM controls first: `button`, `input`, `select`, `textarea`, `hr`, and standard form wiring.
+- Field components connect visible labels, helper text, and errors through `id`, `for`, `aria-describedby`, `aria-invalid`, and polite error announcements.
+- Coordinated widgets carry explicit contracts: tabs wire `tablist`/`tab`/`tabpanel`, dialogs own dialog semantics, toasts expose live-region behavior, and purpose buttons expose risk metadata.
+- Storybook accessibility smoke checks run through the Storybook a11y addon for the promoted Vue families, and shared contract tests keep Vue aligned with React.
+
+Example:
+
+```vue
+<script setup lang="ts">
+import { InputField, type InputFieldProps } from "@marwes-ui/vue"
+
+const receiptEmailField = {
+  label: "Email",
+  helperText: "Used for receipts.",
+  error: "Enter a valid email.",
+  input: { type: "email", placeholder: "you@example.com" },
+} satisfies InputFieldProps
+</script>
+
+<template>
+  <InputField v-bind="receiptEmailField" />
+</template>
+```
+
+That contract resolves to DOM wiring like:
+
+```html
+<label for="email">Email</label>
+<input
+  id="email"
+  type="email"
+  aria-describedby="email-helper email-error"
+  aria-invalid="true"
+>
+<p id="email-helper">Used for receipts.</p>
+<p id="email-error" aria-live="polite">Enter a valid email.</p>
+```
+
+The important part is that the same label, helper, error, and invalid contract is tested at the shared contract layer and then applied by the Vue adapter.
+
+## Package Boundaries
+
+- `@marwes-ui/core` owns recipes, theme resolution, a11y mapping, and semantic metadata.
+- `@marwes-ui/presets` owns default preset CSS.
+- `@marwes-ui/vue` owns Vue rendering and provider behavior.
+
+## Scripts
+
+```bash
+pnpm --filter @marwes-ui/vue build
+pnpm --filter @marwes-ui/vue typecheck
+pnpm --filter @marwes-ui/vue test
+```
+
+## Related Docs
+
+- [Docs index](https://github.com/niklas-westman/marwes/tree/main/docs)
+- [Architecture](https://github.com/niklas-westman/marwes/blob/main/docs/reference/architecture.md)
+- [Figma to Marwes](https://github.com/niklas-westman/marwes/blob/main/docs/guides/figma-to-marwes.md)

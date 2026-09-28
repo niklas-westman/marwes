@@ -3,22 +3,32 @@
   "familyCount": 31,
   "routes": [
     {
+      "description": "What Marwes is, how it's organized, and where to go next.",
+      "kind": "guide",
+      "path": "/docs/introduction/",
+      "title": "Introduction",
+      "renderer": "introduction"
+    },
+    {
       "description": "Install Marwes for React and render your first accessible component.",
       "kind": "guide",
       "path": "/docs/get-started/react/",
-      "title": "Get started with React"
+      "title": "Get started with React",
+      "renderer": "get-started"
     },
     {
       "description": "Install Marwes for Vue and render your first accessible component.",
       "kind": "guide",
       "path": "/docs/get-started/vue/",
-      "title": "Get started with Vue"
+      "title": "Get started with Vue",
+      "renderer": "get-started"
     },
     {
       "description": "Install Marwes for Svelte and render your first accessible component.",
       "kind": "guide",
       "path": "/docs/get-started/svelte/",
-      "title": "Get started with Svelte"
+      "title": "Get started with Svelte",
+      "renderer": "get-started"
     },
     {
       "description": "Find the right public Marwes component by family, framework, export, or use case.",

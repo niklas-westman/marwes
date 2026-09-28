@@ -1,0 +1,49 @@
+# Marwes UI
+
+> Marwes UI is a themeable, accessibility-first component library for React, Vue, and Svelte.
+
+## Instructions for AI coding agents
+
+- Import and use real Marwes components from `@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte` for the selected framework.
+- Do not invent `mw-*` replacement components or custom elements. Use the public exports documented by the matching Marwes adapter.
+- The complete registry documents 31 component families. The canonical cross-family semantic subset contains 9: avatar, badge, banner, breadcrumb, button, context-menu, dialog, drawer, toast.
+- Use the complete component registry for family discovery and the canonical artifacts for shared semantic and purpose contracts.
+
+## Package documentation
+
+- [Marwes React](https://marwes.io/ai/react.md): React components, provider setup, theming, and usage examples.
+- [Marwes Svelte](https://marwes.io/ai/svelte.md): Svelte components, provider setup, theming, and usage examples.
+- [Marwes Vue](https://marwes.io/ai/vue.md): Vue components, provider setup, theming, and usage examples.
+
+## Machine-readable resources
+
+- [AI resource index](https://marwes.io/ai/index.json): Schema-versioned resource records and publication guidance.
+- [Public consumer API](https://marwes.io/ai/v1/public-api.json): The canonical React, Vue, and Svelte root exports available to consumer applications.
+- [Canonical component manifest](https://marwes.io/ai/v1/component-manifest.json): The canonical semantic component subset and its framework source paths.
+- [Component family registry](https://marwes.io/ai/v1/component-registry.json): The complete registry of shipped component families and their coverage.
+- [Design provenance](https://marwes.io/ai/v1/design-provenance.json): Figma and source provenance for the canonical semantic component subset.
+- [Framework parity](https://marwes.io/ai/v1/framework-parity.json): React, Vue, and Svelte parity for the canonical semantic component subset.
+- [Purpose registry](https://marwes.io/ai/v1/purpose-registry.json): Machine-readable purpose component semantics and framework support.
+
+## Consumer documentation
+
+- [Introduction](https://marwes.io/docs/introduction/): What Marwes is, how it's organized, and where to go next.
+- [Get started with React](https://marwes.io/docs/get-started/react/): Install Marwes for React and render your first accessible component.
+- [Get started with Vue](https://marwes.io/docs/get-started/vue/): Install Marwes for Vue and render your first accessible component.
+- [Get started with Svelte](https://marwes.io/docs/get-started/svelte/): Install Marwes for Svelte and render your first accessible component.
+- [Component catalog](https://marwes.io/docs/components/): Find the right public Marwes component by family, framework, export, or use case.
+- [Theming](https://marwes.io/docs/theming/): Wrap once, provide a theme, and brand every Marwes component.
+- [Accessibility](https://marwes.io/docs/accessibility/): Understand the accessibility contract shared by Marwes components.
+- [Next.js integration](https://marwes.io/docs/integrations/next/): Use Marwes with Next.js while preserving SSR-safe theme behavior.
+- [Nuxt integration](https://marwes.io/docs/integrations/nuxt/): Use Marwes with Nuxt and install the provider at the application boundary.
+- [SvelteKit integration](https://marwes.io/docs/integrations/sveltekit/): Use Marwes with SvelteKit without causing a light or dark mode flash.
+- [Compatibility](https://marwes.io/docs/compatibility/): Supported frameworks, runtimes, browsers, and package boundaries.
+- [Troubleshooting](https://marwes.io/docs/troubleshooting/): Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.
+- [AI and agent usage](https://marwes.io/docs/ai/): Give coding agents canonical, machine-readable Marwes documentation.
+- [Contributing](https://marwes.io/docs/contributing/): Contribute to Marwes without confusing internal atoms with its public consumer API.
+
+## Live Storybook catalogs
+
+- [react Storybook catalog](https://storybook-react.marwes.io/latest/index.json): Live machine-readable component stories.
+- [vue Storybook catalog](https://storybook-vue.marwes.io/latest/index.json): Live machine-readable component stories.
+- [svelte Storybook catalog](https://storybook-svelte.marwes.io/latest/index.json): Live machine-readable component stories.
