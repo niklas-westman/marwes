@@ -404,6 +404,7 @@ function DocumentationRail({ activeFamily }: { activeFamily: string }): JSX.Elem
                   $active={active}
                   href={siteHref(`/docs/components/${familySlug}/`)}
                   aria-current={active ? "page" : undefined}
+                  data-docs-family={familySlug}
                 >
                   {item}
                 </RailLink>
