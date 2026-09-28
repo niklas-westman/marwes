@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI and agent usage — Marwes UI</title>
+    <meta name="description" content="Give coding agents canonical, machine-readable Marwes documentation." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/ai/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>AI and agent usage</h1><p>Give coding agents canonical, machine-readable Marwes documentation.</p></header>
+      <section><h2>Machine-readable entrypoints</h2><p>Start agents at <a href="/llms.txt"><code>/llms.txt</code></a>, then choose the framework guide and public API inventory.</p><ul><li>/ai/react.md</li><li>/ai/vue.md</li><li>/ai/svelte.md</li><li>/ai/index.json</li><li>/ai/v1/public-api.json</li><li>/ai/v1/component-registry.json</li></ul><p>Agents should import real Marwes components from the chosen adapter root. They must not recreate Marwes as local <code>mw-*</code> classes.</p></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

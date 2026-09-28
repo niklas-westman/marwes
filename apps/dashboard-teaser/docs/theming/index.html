@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theming — Marwes UI</title>
+    <meta name="description" content="Wrap once, provide a theme, and brand every Marwes component." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/theming/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Theming</h1><p>Wrap once, provide a theme, and brand every Marwes component.</p></header>
+      <section><h2>One provider, one theme boundary</h2><p>Marwes components consume resolved theme values from the framework provider and ship static preset CSS. There is no CSS-in-JS runtime in the component packages.</p><pre data-language="tsx"><code>const theme = { color: { primary: &quot;#5558ff&quot; } }
+
+&lt;MarwesProvider theme={theme}&gt;
+  &lt;App /&gt;
+&lt;/MarwesProvider&gt;</code></pre><aside><strong>React consumers:</strong> use <code>useTheme()</code> when JavaScript needs resolved values. The styled theme contains CSS variable references whose definitions live below the document root.</aside></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

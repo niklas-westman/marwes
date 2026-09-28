@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "family": "skeleton",
+  "title": "Skeleton",
+  "summary": "Loading-placeholder component with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React, Vue, and Svelte behavior.",
+  "useWhen": [
+    "The UI needs a lightweight placeholder for loading text, avatar/media circles, or rectangular content blocks.",
+    "The product already owns the surrounding loading context and the skeleton can stay decorative.",
+    "React, Vue, and Svelte consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
+  ],
+  "avoidWhen": [
+    "The experience needs determinate progress, percentage tracking, or an indeterminate activity indicator instead of structural placeholders.",
+    "The implementation cannot provide a truthful ariaLabel when a standalone skeleton region must announce loading status.",
+    "The product needs a layout-specific skeleton composition that should live as an adapter/story composition rather than core component API."
+  ],
+  "recommendationDescription": "Match the placeholder shape to the loading content and let the surrounding region own loading status.",
+  "recommendedComponents": [
+    {
+      "name": "Skeleton",
+      "description": "Decorative loading structure for text, media and blocks"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Skeleton"
+        },
+        {
+          "kind": "type",
+          "name": "SkeletonProps"
+        }
+      ],
+      "example": "import { Skeleton } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return <Skeleton ariaLabel=\"Loading profile\" variant=\"rectangular\" width=\"100%\" height={120} />\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Skeleton"
+        },
+        {
+          "kind": "type",
+          "name": "SkeletonProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { Skeleton } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Skeleton\n    aria-label=\"Loading profile\"\n    variant=\"rectangular\"\n    width=\"100%\"\n    :height=\"120\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Skeleton"
+        },
+        {
+          "kind": "type",
+          "name": "SkeletonProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Skeleton } from \"@marwes-ui/svelte\"\n</script>\n\n<Skeleton\n  ariaLabel=\"Loading profile\"\n  variant=\"rectangular\"\n  width=\"100%\"\n  height={120}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep structural skeletons decorative unless the loading region needs an announced status label.",
+      "title": "Loading context"
+    },
+    {
+      "description": "Verify the surrounding region communicates loading without repeated or noisy announcements.",
+      "title": "Screen-reader review"
+    },
+    {
+      "description": "Product-level decisions about when a skeleton is decorative versus when a loading region needs an announced status label.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Visual review against the synced Figma page after V3 Skeleton design-system sources become more complete.",
+      "title": "Manual review 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Skeleton uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/skeleton/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

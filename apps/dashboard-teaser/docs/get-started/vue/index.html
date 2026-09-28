@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get started with Vue — Marwes UI</title>
+    <meta name="description" content="Install Marwes for Vue and render your first accessible component." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/get-started/vue/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Get started with Vue</h1><p>Install Marwes for Vue and render your first accessible component.</p></header>
+      <section><h2>1. Install with the official CLI</h2><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli init --adapter vue</code></pre><p>The CLI installs <code>@marwes-ui/vue</code>, wires the provider for supported Vite layouts, and runs diagnostics.</p></section><section><h2>2. Render a public component</h2><p>This is the same canonical fixture that the repository typechecks for Vue.</p><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref } from &quot;vue&quot;
+import {
+  Button,
+  ButtonVariant,
+  CheckboxField,
+  EmailField,
+  MarwesProvider,
+  SubmitButton,
+} from &quot;@marwes-ui/vue&quot;
+
+const email = ref(&quot;&quot;)
+const subscribed = ref(false)
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;MarwesProvider&gt;
+    &lt;EmailField
+      v-model=&quot;email&quot;
+      label=&quot;Email&quot;
+      :input=&quot;{ placeholder: 'you@example.com' }&quot;
+    /&gt;
+    &lt;CheckboxField
+      v-model=&quot;subscribed&quot;
+      label=&quot;Send me product updates&quot;
+      :checkbox=&quot;{}&quot;
+    /&gt;
+    &lt;Button :variant=&quot;ButtonVariant.secondary&quot;&gt;Preview&lt;/Button&gt;
+    &lt;SubmitButton&gt;Save&lt;/SubmitButton&gt;
+  &lt;/MarwesProvider&gt;
+&lt;/template&gt;</code></pre></section><section><h2>3. Verify the app</h2><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli doctor --run-build</code></pre><p>A successful doctor run confirms the adapter import, rendered provider, and production build.</p></section><aside><strong>Manual fallback:</strong> install <code>@marwes-ui/vue</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "family": "dialog",
+  "title": "Dialog",
+  "summary": "High-risk modal family with a non-modal shell, canonical modal overlay layer, and stable purpose-dialog wrappers.",
+  "useWhen": [
+    "A workflow needs a named dialog shell or a canonical modal overlay with consistent focus and dismissal behavior.",
+    "The product flow maps clearly to confirm, destructive, or informational dialog intent.",
+    "The team wants React and Vue modal behavior to stay aligned through shared contracts."
+  ],
+  "avoidWhen": [
+    "A lower-weight surface such as a tooltip or other non-modal help pattern is the more honest interaction model.",
+    "Parent code cannot own a shell modal boundary intentionally when using the Dialog modal escape hatch.",
+    "The team needs background-isolation guarantees that go beyond the currently shipped modal hardening level."
+  ],
+  "recommendationDescription": "Choose the purpose wrapper that matches the meaning; use DialogModal as the deliberate primitive escape hatch.",
+  "recommendedComponents": [
+    {
+      "name": "ConfirmDialog",
+      "description": "Confirm a reversible action with cancel and confirm controls"
+    },
+    {
+      "name": "DestructiveDialog",
+      "description": "Confirm an irreversible or destructive action with explicit warning intent"
+    },
+    {
+      "name": "InfoDialog",
+      "description": "Present information with a single acknowledgement control"
+    },
+    {
+      "name": "DialogModal",
+      "description": "Base portaled dialog for custom footer content; the deliberate escape hatch"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ConfirmDialog"
+        },
+        {
+          "kind": "type",
+          "name": "ConfirmDialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "DestructiveDialog"
+        },
+        {
+          "kind": "type",
+          "name": "DestructiveDialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "Dialog"
+        },
+        {
+          "kind": "type",
+          "name": "DialogFooterControls"
+        },
+        {
+          "kind": "component",
+          "name": "DialogModal"
+        },
+        {
+          "kind": "type",
+          "name": "DialogModalProps"
+        },
+        {
+          "kind": "type",
+          "name": "DialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "InfoDialog"
+        },
+        {
+          "kind": "type",
+          "name": "InfoDialogProps"
+        }
+      ],
+      "example": "import { Button, ButtonVariant, DialogModal, Drawer, Paragraph } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [dialogOpen, setDialogOpen] = useState(false)\n  const [drawerOpen, setDrawerOpen] = useState(false)\n\n  return (\n    <>\n      <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>\n        Open dialog →\n      </Button>\n      <Button variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(true)}>\n        Open drawer →\n      </Button>\n\n      <DialogModal\n        open={dialogOpen}\n        onOpenChange={setDialogOpen}\n        title=\"Dialog title\"\n        description=\"This is a dialog component.\"\n        footer={\n          <Button variant={ButtonVariant.primary} onClick={() => setDialogOpen(false)}>\n            Close\n          </Button>\n        }\n      >\n        <Paragraph>Dialog content goes here.</Paragraph>\n      </DialogModal>\n\n      {drawerOpen && (\n        <Drawer\n          modal\n          title=\"Drawer\"\n          size=\"medium\"\n          placement=\"right\"\n          onClose={() => setDrawerOpen(false)}\n          footer={\n            <Button variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(false)}>\n              Close drawer\n            </Button>\n          }\n        >\n          <p>Drawer content goes here.</p>\n        </Drawer>\n      )}\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ConfirmDialog"
+        },
+        {
+          "kind": "type",
+          "name": "ConfirmDialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "DestructiveDialog"
+        },
+        {
+          "kind": "type",
+          "name": "DestructiveDialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "Dialog"
+        },
+        {
+          "kind": "type",
+          "name": "DialogFooterControls"
+        },
+        {
+          "kind": "component",
+          "name": "DialogModal"
+        },
+        {
+          "kind": "type",
+          "name": "DialogModalProps"
+        },
+        {
+          "kind": "type",
+          "name": "DialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "InfoDialog"
+        },
+        {
+          "kind": "type",
+          "name": "InfoDialogProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { Button, DialogModal, Drawer, Paragraph } from \"@marwes-ui/vue\"\n\nconst dialogOpen = ref(false)\nconst drawerOpen = ref(false)\n</script>\n\n<template>\n  <Button variant=\"primary\" @click=\"dialogOpen = true\">Open dialog →</Button>\n  <Button variant=\"secondary\" @click=\"drawerOpen = true\">Open drawer →</Button>\n\n  <DialogModal\n    v-model:open=\"dialogOpen\"\n    title=\"Dialog title\"\n    description=\"This is a dialog component.\"\n  >\n    <Paragraph>Dialog content goes here.</Paragraph>\n    <template #footer>\n      <Button variant=\"primary\" @click=\"dialogOpen = false\">Close</Button>\n    </template>\n  </DialogModal>\n\n  <Drawer\n    v-if=\"drawerOpen\"\n    modal\n    title=\"Drawer\"\n    size=\"medium\"\n    placement=\"right\"\n    @close=\"drawerOpen = false\"\n  >\n    <p>Drawer content goes here.</p>\n    <template #footer>\n      <Button variant=\"secondary\" @click=\"drawerOpen = false\">Close drawer</Button>\n    </template>\n  </Drawer>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ConfirmDialog"
+        },
+        {
+          "kind": "type",
+          "name": "ConfirmDialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "DestructiveDialog"
+        },
+        {
+          "kind": "type",
+          "name": "DestructiveDialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "Dialog"
+        },
+        {
+          "kind": "type",
+          "name": "DialogFooterControls"
+        },
+        {
+          "kind": "component",
+          "name": "DialogModal"
+        },
+        {
+          "kind": "type",
+          "name": "DialogModalProps"
+        },
+        {
+          "kind": "type",
+          "name": "DialogProps"
+        },
+        {
+          "kind": "component",
+          "name": "InfoDialog"
+        },
+        {
+          "kind": "type",
+          "name": "InfoDialogProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Button, DialogModal, Drawer, Paragraph } from \"@marwes-ui/svelte\"\n\n  let dialogOpen = $state(false)\n  let drawerOpen = $state(false)\n</script>\n\n<Button variant=\"primary\" onclick={() => (dialogOpen = true)}>Open dialog →</Button>\n<Button variant=\"secondary\" onclick={() => (drawerOpen = true)}>Open drawer →</Button>\n\n<DialogModal\n  bind:open={dialogOpen}\n  title=\"Dialog title\"\n  description=\"This is a dialog component.\"\n>\n  <Paragraph>Dialog content goes here.</Paragraph>\n  {#snippet footer()}\n    <Button variant=\"primary\" onclick={() => (dialogOpen = false)}>Close</Button>\n  {/snippet}\n</DialogModal>\n\n{#if drawerOpen}\n  <Drawer\n    modal\n    title=\"Drawer\"\n    size=\"medium\"\n    placement=\"right\"\n    onclose={() => (drawerOpen = false)}\n  >\n    <p>Drawer content goes here.</p>\n    {#snippet footer()}\n      <Button variant=\"secondary\" onclick={() => (drawerOpen = false)}>Close drawer</Button>\n    {/snippet}\n  </Drawer>\n{/if}"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep restoreFocus enabled so closing a dialog returns focus to its trigger.",
+      "title": "Focus return on close"
+    },
+    {
+      "description": "Verify closeOnEscape and closeOnScrimClick match the real risk of losing unsaved input.",
+      "title": "Escape and scrim behavior"
+    },
+    {
+      "description": "Test focus entry, focus return, dismissal, and escape-key behavior in context.",
+      "title": "Focus and escape review"
+    },
+    {
+      "description": "Real browser and assistive-technology validation for modal flows.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Future background-isolation hardening such as inert or equivalent sibling management.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Advanced parent-managed modal-shell compositions that use the Dialog modal escape hatch intentionally.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Dialog uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/dialog/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

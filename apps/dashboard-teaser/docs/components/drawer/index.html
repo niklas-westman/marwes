@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drawer — Marwes UI</title>
+    <meta name="description" content="Dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters. Public imports, usage guidance, accessibility requirements, and framework references." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/components/drawer/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Drawer</h1><p>Dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters.</p></header><div class="component-static-intents"><article id="what-this-family-solves"><h2>What this family solves</h2><p>Dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters.</p></article><article><h2>Use when</h2><ul><li>The UI needs a side panel for contextual details, navigation, filters, or secondary workflows.</li><li>The panel can provide a truthful aria-label or aria-labelledby reference.</li><li>The product owns open state, close behavior, and focus return around the drawer.</li></ul></article><article><h2>Avoid when</h2><ul><li>The interaction is a blocking confirmation; use Dialog instead.</li><li>The product cannot provide focus management for modal drawer usage.</li><li>The content is short inline help; use Tooltip or a simpler disclosure instead.</li></ul></article></div><section id="recommended-components"><h2>Recommended public components</h2><p>Mount Drawer conditionally when open and choose the placement that matches the surrounding layout.</p><div class="component-static-grid"><article><h3>Drawer</h3><p>Presentational slide-in panel the consumer mounts conditionally when open</p></article></div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid"><article data-framework-inventory="react"><h3>React — <code>@marwes-ui/react</code></h3><h4>Component</h4><p><code>Drawer</code></p><h4>Types</h4><p><code>DrawerPlacement</code>, <code>DrawerProps</code>, <code>DrawerSize</code></p></article><article data-framework-inventory="vue"><h3>Vue — <code>@marwes-ui/vue</code></h3><h4>Component</h4><p><code>Drawer</code></p><h4>Types</h4><p><code>DrawerPlacement</code>, <code>DrawerProps</code>, <code>DrawerSize</code></p></article><article data-framework-inventory="svelte"><h3>Svelte — <code>@marwes-ui/svelte</code></h3><h4>Component</h4><p><code>Drawer</code></p><h4>Types</h4><p><code>DrawerPlacement</code>, <code>DrawerProps</code>, <code>DrawerSize</code></p></article></div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p><article><h3>React</h3><pre data-language="tsx"><code>import { Button, ButtonVariant, DialogModal, Drawer, Paragraph } from &quot;@marwes-ui/react&quot;
+import { useState } from &quot;react&quot;
+
+export function Example() {
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  return (
+    &lt;&gt;
+      &lt;Button variant={ButtonVariant.primary} onClick={() =&gt; setDialogOpen(true)}&gt;
+        Open dialog →
+      &lt;/Button&gt;
+      &lt;Button variant={ButtonVariant.secondary} onClick={() =&gt; setDrawerOpen(true)}&gt;
+        Open drawer →
+      &lt;/Button&gt;
+
+      &lt;DialogModal
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        title=&quot;Dialog title&quot;
+        description=&quot;This is a dialog component.&quot;
+        footer={
+          &lt;Button variant={ButtonVariant.primary} onClick={() =&gt; setDialogOpen(false)}&gt;
+            Close
+          &lt;/Button&gt;
+        }
+      &gt;
+        &lt;Paragraph&gt;Dialog content goes here.&lt;/Paragraph&gt;
+      &lt;/DialogModal&gt;
+
+      {drawerOpen &amp;&amp; (
+        &lt;Drawer
+          modal
+          title=&quot;Drawer&quot;
+          size=&quot;medium&quot;
+          placement=&quot;right&quot;
+          onClose={() =&gt; setDrawerOpen(false)}
+          footer={
+            &lt;Button variant={ButtonVariant.secondary} onClick={() =&gt; setDrawerOpen(false)}&gt;
+              Close drawer
+            &lt;/Button&gt;
+          }
+        &gt;
+          &lt;p&gt;Drawer content goes here.&lt;/p&gt;
+        &lt;/Drawer&gt;
+      )}
+    &lt;/&gt;
+  )
+}</code></pre></article><article><h3>Vue</h3><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref } from &quot;vue&quot;
+import { Button, DialogModal, Drawer, Paragraph } from &quot;@marwes-ui/vue&quot;
+
+const dialogOpen = ref(false)
+const drawerOpen = ref(false)
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;Button variant=&quot;primary&quot; @click=&quot;dialogOpen = true&quot;&gt;Open dialog →&lt;/Button&gt;
+  &lt;Button variant=&quot;secondary&quot; @click=&quot;drawerOpen = true&quot;&gt;Open drawer →&lt;/Button&gt;
+
+  &lt;DialogModal
+    v-model:open=&quot;dialogOpen&quot;
+    title=&quot;Dialog title&quot;
+    description=&quot;This is a dialog component.&quot;
+  &gt;
+    &lt;Paragraph&gt;Dialog content goes here.&lt;/Paragraph&gt;
+    &lt;template #footer&gt;
+      &lt;Button variant=&quot;primary&quot; @click=&quot;dialogOpen = false&quot;&gt;Close&lt;/Button&gt;
+    &lt;/template&gt;
+  &lt;/DialogModal&gt;
+
+  &lt;Drawer
+    v-if=&quot;drawerOpen&quot;
+    modal
+    title=&quot;Drawer&quot;
+    size=&quot;medium&quot;
+    placement=&quot;right&quot;
+    @close=&quot;drawerOpen = false&quot;
+  &gt;
+    &lt;p&gt;Drawer content goes here.&lt;/p&gt;
+    &lt;template #footer&gt;
+      &lt;Button variant=&quot;secondary&quot; @click=&quot;drawerOpen = false&quot;&gt;Close drawer&lt;/Button&gt;
+    &lt;/template&gt;
+  &lt;/Drawer&gt;
+&lt;/template&gt;</code></pre></article><article><h3>Svelte</h3><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import { Button, DialogModal, Drawer, Paragraph } from &quot;@marwes-ui/svelte&quot;
+
+  let dialogOpen = $state(false)
+  let drawerOpen = $state(false)
+&lt;/script&gt;
+
+&lt;Button variant=&quot;primary&quot; onclick={() =&gt; (dialogOpen = true)}&gt;Open dialog →&lt;/Button&gt;
+&lt;Button variant=&quot;secondary&quot; onclick={() =&gt; (drawerOpen = true)}&gt;Open drawer →&lt;/Button&gt;
+
+&lt;DialogModal
+  bind:open={dialogOpen}
+  title=&quot;Dialog title&quot;
+  description=&quot;This is a dialog component.&quot;
+&gt;
+  &lt;Paragraph&gt;Dialog content goes here.&lt;/Paragraph&gt;
+  {#snippet footer()}
+    &lt;Button variant=&quot;primary&quot; onclick={() =&gt; (dialogOpen = false)}&gt;Close&lt;/Button&gt;
+  {/snippet}
+&lt;/DialogModal&gt;
+
+{#if drawerOpen}
+  &lt;Drawer
+    modal
+    title=&quot;Drawer&quot;
+    size=&quot;medium&quot;
+    placement=&quot;right&quot;
+    onclose={() =&gt; (drawerOpen = false)}
+  &gt;
+    &lt;p&gt;Drawer content goes here.&lt;/p&gt;
+    {#snippet footer()}
+      &lt;Button variant=&quot;secondary&quot; onclick={() =&gt; (drawerOpen = false)}&gt;Close drawer&lt;/Button&gt;
+    {/snippet}
+  &lt;/Drawer&gt;
+{/if}</code></pre></article></section><section id="accessibility"><h2>Accessibility requirements</h2><ul><li><strong>Conditional mounting:</strong> Mount Drawer only while open; do not leave a hidden instance competing for focus.</li><li><strong>Placement and modal behavior:</strong> Verify the chosen placement and modal behavior match how the surrounding page is used.</li><li><strong>Focus and escape review:</strong> Test focus entry, focus return, dismissal, and escape-key behavior in context.</li><li><strong>Manual review boundary:</strong> Keyboard focus trap, Escape handling, and focus return in real product compositions.</li><li><strong>Manual review 2:</strong> Screen-reader announcement of drawer title/description in modal and non-modal contexts.</li><li><strong>Manual review 3:</strong> Visual review against the synced light and dark Figma drawer frames.</li></ul></section><section id="theming"><h2>Theming</h2><p>Drawer uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet. See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul><li><a href="https://storybook-react.marwes.io/latest/">React Storybook</a> — Explore React variants</li><li><a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a> — Explore Vue variants</li><li><a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a> — Explore Svelte variants</li><li><a href="https://www.npmjs.com/package/@marwes-ui/react">React npm package</a> — Install @marwes-ui/react</li><li><a href="https://www.npmjs.com/package/@marwes-ui/vue">Vue npm package</a> — Install @marwes-ui/vue</li><li><a href="https://www.npmjs.com/package/@marwes-ui/svelte">Svelte npm package</a> — Install @marwes-ui/svelte</li><li><a href="https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/drawer/README.md">Source and registry evidence</a> — Review the canonical family sources</li><li><a href="/ai/v1/public-api.json">Public API inventory</a> — Inspect the complete machine-readable API</li><li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a> — Get help or suggest a change</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-this-family-solves">What this family solves</a><a href="#recommended-components">Recommended components</a><a href="#public-imports">Public imports</a><a href="#examples">Examples</a><a href="#accessibility">Accessibility</a><a href="#theming">Theming</a><a href="#resources">Resources</a></nav></aside>
+      </div>
+    </div>
+    <script id="component-docs-model" type="application/json">{"schemaVersion":1,"family":"drawer","title":"Drawer","summary":"Dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters.","useWhen":["The UI needs a side panel for contextual details, navigation, filters, or secondary workflows.","The panel can provide a truthful aria-label or aria-labelledby reference.","The product owns open state, close behavior, and focus return around the drawer."],"avoidWhen":["The interaction is a blocking confirmation; use Dialog instead.","The product cannot provide focus management for modal drawer usage.","The content is short inline help; use Tooltip or a simpler disclosure instead."],"recommendationDescription":"Mount Drawer conditionally when open and choose the placement that matches the surrounding layout.","recommendedComponents":[{"name":"Drawer","description":"Presentational slide-in panel the consumer mounts conditionally when open"}],"frameworks":[{"framework":"react","packageName":"@marwes-ui/react","exports":[{"kind":"component","name":"Drawer"},{"kind":"type","name":"DrawerPlacement"},{"kind":"type","name":"DrawerProps"},{"kind":"type","name":"DrawerSize"}],"example":"import { Button, ButtonVariant, DialogModal, Drawer, Paragraph } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [dialogOpen, setDialogOpen] = useState(false)\n  const [drawerOpen, setDrawerOpen] = useState(false)\n\n  return (\n    \u003c>\n      \u003cButton variant={ButtonVariant.primary} onClick={() => setDialogOpen(true)}>\n        Open dialog →\n      \u003c/Button>\n      \u003cButton variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(true)}>\n        Open drawer →\n      \u003c/Button>\n\n      \u003cDialogModal\n        open={dialogOpen}\n        onOpenChange={setDialogOpen}\n        title=\"Dialog title\"\n        description=\"This is a dialog component.\"\n        footer={\n          \u003cButton variant={ButtonVariant.primary} onClick={() => setDialogOpen(false)}>\n            Close\n          \u003c/Button>\n        }\n      >\n        \u003cParagraph>Dialog content goes here.\u003c/Paragraph>\n      \u003c/DialogModal>\n\n      {drawerOpen && (\n        \u003cDrawer\n          modal\n          title=\"Drawer\"\n          size=\"medium\"\n          placement=\"right\"\n          onClose={() => setDrawerOpen(false)}\n          footer={\n            \u003cButton variant={ButtonVariant.secondary} onClick={() => setDrawerOpen(false)}>\n              Close drawer\n            \u003c/Button>\n          }\n        >\n          \u003cp>Drawer content goes here.\u003c/p>\n        \u003c/Drawer>\n      )}\n    \u003c/>\n  )\n}"},{"framework":"vue","packageName":"@marwes-ui/vue","exports":[{"kind":"component","name":"Drawer"},{"kind":"type","name":"DrawerPlacement"},{"kind":"type","name":"DrawerProps"},{"kind":"type","name":"DrawerSize"}],"example":"\u003cscript setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { Button, DialogModal, Drawer, Paragraph } from \"@marwes-ui/vue\"\n\nconst dialogOpen = ref(false)\nconst drawerOpen = ref(false)\n\u003c/script>\n\n\u003ctemplate>\n  \u003cButton variant=\"primary\" @click=\"dialogOpen = true\">Open dialog →\u003c/Button>\n  \u003cButton variant=\"secondary\" @click=\"drawerOpen = true\">Open drawer →\u003c/Button>\n\n  \u003cDialogModal\n    v-model:open=\"dialogOpen\"\n    title=\"Dialog title\"\n    description=\"This is a dialog component.\"\n  >\n    \u003cParagraph>Dialog content goes here.\u003c/Paragraph>\n    \u003ctemplate #footer>\n      \u003cButton variant=\"primary\" @click=\"dialogOpen = false\">Close\u003c/Button>\n    \u003c/template>\n  \u003c/DialogModal>\n\n  \u003cDrawer\n    v-if=\"drawerOpen\"\n    modal\n    title=\"Drawer\"\n    size=\"medium\"\n    placement=\"right\"\n    @close=\"drawerOpen = false\"\n  >\n    \u003cp>Drawer content goes here.\u003c/p>\n    \u003ctemplate #footer>\n      \u003cButton variant=\"secondary\" @click=\"drawerOpen = false\">Close drawer\u003c/Button>\n    \u003c/template>\n  \u003c/Drawer>\n\u003c/template>"},{"framework":"svelte","packageName":"@marwes-ui/svelte","exports":[{"kind":"component","name":"Drawer"},{"kind":"type","name":"DrawerPlacement"},{"kind":"type","name":"DrawerProps"},{"kind":"type","name":"DrawerSize"}],"example":"\u003cscript lang=\"ts\">\n  import { Button, DialogModal, Drawer, Paragraph } from \"@marwes-ui/svelte\"\n\n  let dialogOpen = $state(false)\n  let drawerOpen = $state(false)\n\u003c/script>\n\n\u003cButton variant=\"primary\" onclick={() => (dialogOpen = true)}>Open dialog →\u003c/Button>\n\u003cButton variant=\"secondary\" onclick={() => (drawerOpen = true)}>Open drawer →\u003c/Button>\n\n\u003cDialogModal\n  bind:open={dialogOpen}\n  title=\"Dialog title\"\n  description=\"This is a dialog component.\"\n>\n  \u003cParagraph>Dialog content goes here.\u003c/Paragraph>\n  {#snippet footer()}\n    \u003cButton variant=\"primary\" onclick={() => (dialogOpen = false)}>Close\u003c/Button>\n  {/snippet}\n\u003c/DialogModal>\n\n{#if drawerOpen}\n  \u003cDrawer\n    modal\n    title=\"Drawer\"\n    size=\"medium\"\n    placement=\"right\"\n    onclose={() => (drawerOpen = false)}\n  >\n    \u003cp>Drawer content goes here.\u003c/p>\n    {#snippet footer()}\n      \u003cButton variant=\"secondary\" onclick={() => (drawerOpen = false)}>Close drawer\u003c/Button>\n    {/snippet}\n  \u003c/Drawer>\n{/if}"}],"accessibility":[{"description":"Mount Drawer only while open; do not leave a hidden instance competing for focus.","title":"Conditional mounting"},{"description":"Verify the chosen placement and modal behavior match how the surrounding page is used.","title":"Placement and modal behavior"},{"description":"Test focus entry, focus return, dismissal, and escape-key behavior in context.","title":"Focus and escape review"},{"description":"Keyboard focus trap, Escape handling, and focus return in real product compositions.","title":"Manual review boundary"},{"description":"Screen-reader announcement of drawer title/description in modal and non-modal contexts.","title":"Manual review 2"},{"description":"Visual review against the synced light and dark Figma drawer frames.","title":"Manual review 3"}],"sections":[{"id":"what-this-family-solves","label":"What this family solves"},{"id":"recommended-components","label":"Recommended components"},{"id":"public-imports","label":"Public imports"},{"id":"examples","label":"Examples"},{"id":"accessibility","label":"Accessibility"},{"id":"theming","label":"Theming"},{"id":"resources","label":"Resources"}],"theming":"Drawer uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.","resources":[{"title":"React Storybook","description":"Explore React variants","href":"https://storybook-react.marwes.io/latest/","kind":"storybook"},{"title":"Vue Storybook","description":"Explore Vue variants","href":"https://storybook-vue.marwes.io/latest/","kind":"storybook"},{"title":"Svelte Storybook","description":"Explore Svelte variants","href":"https://storybook-svelte.marwes.io/latest/","kind":"storybook"},{"title":"React npm package","description":"Install @marwes-ui/react","href":"https://www.npmjs.com/package/@marwes-ui/react","kind":"npm"},{"title":"Vue npm package","description":"Install @marwes-ui/vue","href":"https://www.npmjs.com/package/@marwes-ui/vue","kind":"npm"},{"title":"Svelte npm package","description":"Install @marwes-ui/svelte","href":"https://www.npmjs.com/package/@marwes-ui/svelte","kind":"npm"},{"title":"Source and registry evidence","description":"Review the canonical family sources","href":"https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/drawer/README.md","kind":"source"},{"title":"Public API inventory","description":"Inspect the complete machine-readable API","href":"/ai/v1/public-api.json","kind":"source"},{"title":"Report an issue","description":"Get help or suggest a change","href":"https://github.com/niklas-westman/marwes/issues/new","kind":"issue"}]}</script>
+    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+  </body>
+</html>

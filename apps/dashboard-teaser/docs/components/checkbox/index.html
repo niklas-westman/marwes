@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkbox — Marwes UI</title>
+    <meta name="description" content="Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior. Public imports, usage guidance, accessibility requirements, and framework references." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/components/checkbox/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Checkbox</h1><p>Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior.</p></header><div class="component-static-intents"><article id="what-this-family-solves"><h2>What this family solves</h2><p>Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior.</p></article><article><h2>Use when</h2><ul><li>The UI needs one or more native checkbox controls with optional description or error support.</li><li>The product wants the canonical labeled path for a single checkbox or a multi-select checkbox group without rebuilding the field wiring manually.</li><li>The team wants React and Vue checkbox behavior to stay aligned through one core recipe, shared field helpers, and shared contract files.</li></ul></article><article><h2>Avoid when</h2><ul><li>A switch, radio group, or always-on content toggle would be the more honest interaction model.</li><li>The layout only needs a decorative checkmark treatment and does not represent a real form control.</li><li>The team expects a purpose-wrapper or semantic-metadata layer that the current CheckboxField family does not ship.</li></ul></article></div><section id="recommended-components"><h2>Recommended public components</h2><p>Use CheckboxField for a single choice and CheckboxGroupField when several related checkboxes share one label.</p><div class="component-static-grid"><article><h3>CheckboxField</h3><p>Single checkbox with connected label, description and error</p></article><article><h3>CheckboxGroupField</h3><p>Fieldset of related checkboxes with grouped label and select-all indeterminate state</p></article></div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid"><article data-framework-inventory="react"><h3>React — <code>@marwes-ui/react</code></h3><h4>Components</h4><p><code>CheckboxField</code>, <code>CheckboxGroupField</code></p><h4>Types</h4><p><code>CheckboxFieldProps</code>, <code>CheckboxGroupFieldOption</code>, <code>CheckboxGroupFieldProps</code></p></article><article data-framework-inventory="vue"><h3>Vue — <code>@marwes-ui/vue</code></h3><h4>Components</h4><p><code>CheckboxField</code>, <code>CheckboxGroupField</code></p><h4>Types</h4><p><code>CheckboxFieldProps</code>, <code>CheckboxGroupFieldOption</code>, <code>CheckboxGroupFieldProps</code></p></article><article data-framework-inventory="svelte"><h3>Svelte — <code>@marwes-ui/svelte</code></h3><h4>Components</h4><p><code>CheckboxField</code>, <code>CheckboxGroupField</code></p><h4>Types</h4><p><code>CheckboxFieldProps</code>, <code>CheckboxGroupFieldOption</code>, <code>CheckboxGroupFieldProps</code></p></article></div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p><article><h3>React</h3><pre data-language="tsx"><code>import { CheckboxField, CheckboxGroupField } from &quot;@marwes-ui/react&quot;
+import { useState } from &quot;react&quot;
+
+export function Example() {
+  const [checked, setChecked] = useState(false)
+  const [values, setValues] = useState&lt;string[]&gt;([&quot;1&quot;])
+
+  return (
+    &lt;&gt;
+      &lt;CheckboxField label=&quot;Label&quot; checkbox={{ checked, onCheckedChange: setChecked }} /&gt;
+      &lt;CheckboxGroupField
+        label=&quot;Group label&quot;
+        options={[
+          { value: &quot;1&quot;, label: &quot;Label&quot; },
+          { value: &quot;2&quot;, label: &quot;Label&quot; },
+          { value: &quot;3&quot;, label: &quot;Label&quot; },
+        ]}
+        value={values}
+        onChange={setValues}
+      /&gt;
+    &lt;/&gt;
+  )
+}</code></pre></article><article><h3>Vue</h3><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref } from &quot;vue&quot;
+import { CheckboxField, CheckboxGroupField } from &quot;@marwes-ui/vue&quot;
+
+const checked = ref(false)
+const values = ref&lt;string[]&gt;([&quot;1&quot;])
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;CheckboxField
+    label=&quot;Label&quot;
+    :checkbox=&quot;{ checked, onCheckedChange: (v) =&gt; (checked = v) }&quot;
+  /&gt;
+  &lt;CheckboxGroupField
+    label=&quot;Group label&quot;
+    :options=&quot;[
+      { value: '1', label: 'Label' },
+      { value: '2', label: 'Label' },
+      { value: '3', label: 'Label' },
+    ]&quot;
+    v-model=&quot;values&quot;
+  /&gt;
+&lt;/template&gt;</code></pre></article><article><h3>Svelte</h3><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import { CheckboxField, CheckboxGroupField } from &quot;@marwes-ui/svelte&quot;
+
+  let checked = $state(false)
+  let groupOne = $state(true)
+  let groupTwo = $state(false)
+  let groupThree = $state(false)
+&lt;/script&gt;
+
+&lt;CheckboxField
+  label=&quot;Label&quot;
+  bind:checked
+/&gt;
+&lt;CheckboxGroupField label=&quot;Group label&quot; description=&quot;Select all that apply&quot;&gt;
+  &lt;CheckboxField label=&quot;First option&quot; bind:checked={groupOne} /&gt;
+  &lt;CheckboxField label=&quot;Second option&quot; bind:checked={groupTwo} /&gt;
+  &lt;CheckboxField label=&quot;Third option&quot; bind:checked={groupThree} /&gt;
+&lt;/CheckboxGroupField&gt;</code></pre></article></section><section id="accessibility"><h2>Accessibility requirements</h2><ul><li><strong>Indeterminate state:</strong> Verify indeterminate select-all checkboxes announce their mixed state correctly.</li><li><strong>Group and item labeling:</strong> Keep individual checkbox labels distinct from the surrounding group label in CheckboxGroupField.</li><li><strong>Connected field wiring:</strong> Use the public Field component so labels, helper text, errors, and invalid state stay connected.</li><li><strong>Manual review boundary:</strong> Product-level judgment about when a select-all checkbox should become indeterminate and whether that behavior stays truthful in real flows.</li><li><strong>Manual review 2:</strong> Real browser review for focus visibility and appearance consistency because the family resets native checkbox appearance heavily in CSS.</li><li><strong>Manual review 3:</strong> Whether label, helper text, and error wording stay clear when groups get long or validation messages become more complex.</li></ul></section><section id="theming"><h2>Theming</h2><p>Checkbox uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet. See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul><li><a href="https://storybook-react.marwes.io/latest/">React Storybook</a> — Explore React variants</li><li><a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a> — Explore Vue variants</li><li><a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a> — Explore Svelte variants</li><li><a href="https://www.npmjs.com/package/@marwes-ui/react">React npm package</a> — Install @marwes-ui/react</li><li><a href="https://www.npmjs.com/package/@marwes-ui/vue">Vue npm package</a> — Install @marwes-ui/vue</li><li><a href="https://www.npmjs.com/package/@marwes-ui/svelte">Svelte npm package</a> — Install @marwes-ui/svelte</li><li><a href="https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/checkbox/README.md">Source and registry evidence</a> — Review the canonical family sources</li><li><a href="/ai/v1/public-api.json">Public API inventory</a> — Inspect the complete machine-readable API</li><li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a> — Get help or suggest a change</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-this-family-solves">What this family solves</a><a href="#recommended-components">Recommended components</a><a href="#public-imports">Public imports</a><a href="#examples">Examples</a><a href="#accessibility">Accessibility</a><a href="#theming">Theming</a><a href="#resources">Resources</a></nav></aside>
+      </div>
+    </div>
+    <script id="component-docs-model" type="application/json">{"schemaVersion":1,"family":"checkbox","title":"Checkbox","summary":"Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior.","useWhen":["The UI needs one or more native checkbox controls with optional description or error support.","The product wants the canonical labeled path for a single checkbox or a multi-select checkbox group without rebuilding the field wiring manually.","The team wants React and Vue checkbox behavior to stay aligned through one core recipe, shared field helpers, and shared contract files."],"avoidWhen":["A switch, radio group, or always-on content toggle would be the more honest interaction model.","The layout only needs a decorative checkmark treatment and does not represent a real form control.","The team expects a purpose-wrapper or semantic-metadata layer that the current CheckboxField family does not ship."],"recommendationDescription":"Use CheckboxField for a single choice and CheckboxGroupField when several related checkboxes share one label.","recommendedComponents":[{"name":"CheckboxField","description":"Single checkbox with connected label, description and error"},{"name":"CheckboxGroupField","description":"Fieldset of related checkboxes with grouped label and select-all indeterminate state"}],"frameworks":[{"framework":"react","packageName":"@marwes-ui/react","exports":[{"kind":"component","name":"CheckboxField"},{"kind":"type","name":"CheckboxFieldProps"},{"kind":"component","name":"CheckboxGroupField"},{"kind":"type","name":"CheckboxGroupFieldOption"},{"kind":"type","name":"CheckboxGroupFieldProps"}],"example":"import { CheckboxField, CheckboxGroupField } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [checked, setChecked] = useState(false)\n  const [values, setValues] = useState\u003cstring[]>([\"1\"])\n\n  return (\n    \u003c>\n      \u003cCheckboxField label=\"Label\" checkbox={{ checked, onCheckedChange: setChecked }} />\n      \u003cCheckboxGroupField\n        label=\"Group label\"\n        options={[\n          { value: \"1\", label: \"Label\" },\n          { value: \"2\", label: \"Label\" },\n          { value: \"3\", label: \"Label\" },\n        ]}\n        value={values}\n        onChange={setValues}\n      />\n    \u003c/>\n  )\n}"},{"framework":"vue","packageName":"@marwes-ui/vue","exports":[{"kind":"component","name":"CheckboxField"},{"kind":"type","name":"CheckboxFieldProps"},{"kind":"component","name":"CheckboxGroupField"},{"kind":"type","name":"CheckboxGroupFieldOption"},{"kind":"type","name":"CheckboxGroupFieldProps"}],"example":"\u003cscript setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { CheckboxField, CheckboxGroupField } from \"@marwes-ui/vue\"\n\nconst checked = ref(false)\nconst values = ref\u003cstring[]>([\"1\"])\n\u003c/script>\n\n\u003ctemplate>\n  \u003cCheckboxField\n    label=\"Label\"\n    :checkbox=\"{ checked, onCheckedChange: (v) => (checked = v) }\"\n  />\n  \u003cCheckboxGroupField\n    label=\"Group label\"\n    :options=\"[\n      { value: '1', label: 'Label' },\n      { value: '2', label: 'Label' },\n      { value: '3', label: 'Label' },\n    ]\"\n    v-model=\"values\"\n  />\n\u003c/template>"},{"framework":"svelte","packageName":"@marwes-ui/svelte","exports":[{"kind":"component","name":"CheckboxField"},{"kind":"type","name":"CheckboxFieldProps"},{"kind":"component","name":"CheckboxGroupField"},{"kind":"type","name":"CheckboxGroupFieldOption"},{"kind":"type","name":"CheckboxGroupFieldProps"}],"example":"\u003cscript lang=\"ts\">\n  import { CheckboxField, CheckboxGroupField } from \"@marwes-ui/svelte\"\n\n  let checked = $state(false)\n  let groupOne = $state(true)\n  let groupTwo = $state(false)\n  let groupThree = $state(false)\n\u003c/script>\n\n\u003cCheckboxField\n  label=\"Label\"\n  bind:checked\n/>\n\u003cCheckboxGroupField label=\"Group label\" description=\"Select all that apply\">\n  \u003cCheckboxField label=\"First option\" bind:checked={groupOne} />\n  \u003cCheckboxField label=\"Second option\" bind:checked={groupTwo} />\n  \u003cCheckboxField label=\"Third option\" bind:checked={groupThree} />\n\u003c/CheckboxGroupField>"}],"accessibility":[{"description":"Verify indeterminate select-all checkboxes announce their mixed state correctly.","title":"Indeterminate state"},{"description":"Keep individual checkbox labels distinct from the surrounding group label in CheckboxGroupField.","title":"Group and item labeling"},{"description":"Use the public Field component so labels, helper text, errors, and invalid state stay connected.","title":"Connected field wiring"},{"description":"Product-level judgment about when a select-all checkbox should become indeterminate and whether that behavior stays truthful in real flows.","title":"Manual review boundary"},{"description":"Real browser review for focus visibility and appearance consistency because the family resets native checkbox appearance heavily in CSS.","title":"Manual review 2"},{"description":"Whether label, helper text, and error wording stay clear when groups get long or validation messages become more complex.","title":"Manual review 3"}],"sections":[{"id":"what-this-family-solves","label":"What this family solves"},{"id":"recommended-components","label":"Recommended components"},{"id":"public-imports","label":"Public imports"},{"id":"examples","label":"Examples"},{"id":"accessibility","label":"Accessibility"},{"id":"theming","label":"Theming"},{"id":"resources","label":"Resources"}],"theming":"Checkbox uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.","resources":[{"title":"React Storybook","description":"Explore React variants","href":"https://storybook-react.marwes.io/latest/","kind":"storybook"},{"title":"Vue Storybook","description":"Explore Vue variants","href":"https://storybook-vue.marwes.io/latest/","kind":"storybook"},{"title":"Svelte Storybook","description":"Explore Svelte variants","href":"https://storybook-svelte.marwes.io/latest/","kind":"storybook"},{"title":"React npm package","description":"Install @marwes-ui/react","href":"https://www.npmjs.com/package/@marwes-ui/react","kind":"npm"},{"title":"Vue npm package","description":"Install @marwes-ui/vue","href":"https://www.npmjs.com/package/@marwes-ui/vue","kind":"npm"},{"title":"Svelte npm package","description":"Install @marwes-ui/svelte","href":"https://www.npmjs.com/package/@marwes-ui/svelte","kind":"npm"},{"title":"Source and registry evidence","description":"Review the canonical family sources","href":"https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/checkbox/README.md","kind":"source"},{"title":"Public API inventory","description":"Inspect the complete machine-readable API","href":"/ai/v1/public-api.json","kind":"source"},{"title":"Report an issue","description":"Get help or suggest a change","href":"https://github.com/niklas-westman/marwes/issues/new","kind":"issue"}]}</script>
+    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+  </body>
+</html>

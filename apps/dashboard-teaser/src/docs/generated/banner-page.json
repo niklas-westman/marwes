@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "family": "banner",
+  "title": "Banner",
+  "summary": "Inline page-level status messaging component with five semantic intents, optional icon, CTA action slot, and dismiss button.",
+  "useWhen": [
+    "The UI needs a persistent, page-level message about system state, feature announcements, or required actions.",
+    "The intent maps to one of the five semantic variants: neutral, info, success, warning, error.",
+    "The message needs an optional CTA and/or dismiss action."
+  ],
+  "avoidWhen": [
+    "The message is transient and should auto-dismiss (use Toast instead).",
+    "The message requires user confirmation or a blocking flow (use Dialog instead).",
+    "The message applies to a specific form field rather than the page (use field-level validation instead)."
+  ],
+  "recommendationDescription": "Choose a semantic banner intent so persistent page-level messages remain consistent and understandable.",
+  "recommendedComponents": [
+    {
+      "name": "InfoBanner",
+      "description": "Persistent informational page-level messaging"
+    },
+    {
+      "name": "SuccessBanner",
+      "description": "Confirmation of a completed product outcome"
+    },
+    {
+      "name": "WarningBanner",
+      "description": "Important caution before a problem occurs"
+    },
+    {
+      "name": "ErrorBanner",
+      "description": "Actionable page-level failure messaging"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Banner"
+        },
+        {
+          "kind": "type",
+          "name": "BannerProps"
+        },
+        {
+          "kind": "enum",
+          "name": "BannerVariant"
+        },
+        {
+          "kind": "component",
+          "name": "ErrorBanner"
+        },
+        {
+          "kind": "type",
+          "name": "ErrorBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "InfoBanner"
+        },
+        {
+          "kind": "type",
+          "name": "InfoBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "SuccessBanner"
+        },
+        {
+          "kind": "type",
+          "name": "SuccessBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "WarningBanner"
+        },
+        {
+          "kind": "type",
+          "name": "WarningBannerProps"
+        }
+      ],
+      "example": "import { InfoBanner } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return <InfoBanner>A new dashboard version is available. Refresh when you are ready.</InfoBanner>\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Banner"
+        },
+        {
+          "kind": "type",
+          "name": "BannerProps"
+        },
+        {
+          "kind": "enum",
+          "name": "BannerVariant"
+        },
+        {
+          "kind": "component",
+          "name": "ErrorBanner"
+        },
+        {
+          "kind": "type",
+          "name": "ErrorBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "InfoBanner"
+        },
+        {
+          "kind": "type",
+          "name": "InfoBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "SuccessBanner"
+        },
+        {
+          "kind": "type",
+          "name": "SuccessBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "WarningBanner"
+        },
+        {
+          "kind": "type",
+          "name": "WarningBannerProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { InfoBanner } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <InfoBanner>\n    A new dashboard version is available. Refresh when you are ready.\n  </InfoBanner>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Banner"
+        },
+        {
+          "kind": "type",
+          "name": "BannerProps"
+        },
+        {
+          "kind": "enum",
+          "name": "BannerVariant"
+        },
+        {
+          "kind": "component",
+          "name": "ErrorBanner"
+        },
+        {
+          "kind": "type",
+          "name": "ErrorBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "InfoBanner"
+        },
+        {
+          "kind": "type",
+          "name": "InfoBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "SuccessBanner"
+        },
+        {
+          "kind": "type",
+          "name": "SuccessBannerProps"
+        },
+        {
+          "kind": "component",
+          "name": "WarningBanner"
+        },
+        {
+          "kind": "type",
+          "name": "WarningBannerProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { InfoBanner } from \"@marwes-ui/svelte\"\n</script>\n\n<InfoBanner>\n  A new dashboard version is available. Refresh when you are ready.\n</InfoBanner>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep the message concise and make any call to action describe its result.",
+      "title": "Concise message"
+    },
+    {
+      "description": "Choose live-region urgency based on the real message; not every warning or error is assertive.",
+      "title": "Keyboard and screen-reader review"
+    },
+    {
+      "description": "Whether banner messages are concise enough for screen reader announcement.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Whether error/warning banners actually warrant assertive live-region behavior in context.",
+      "title": "Manual review 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Banner uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/banner/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

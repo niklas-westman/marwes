@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "family": "progress-bar",
+  "title": "ProgressBar",
+  "summary": "Determinate progress component with optional label and percentage text, small/default Figma track sizes, and shared progressbar semantics across adapters.",
+  "useWhen": [
+    "The UI needs to communicate determinate completion, upload, import, or setup progress.",
+    "A visible label and percentage should be displayed together with a compact track.",
+    "React, Vue, and Svelte consumers need the same read-only progress semantics."
+  ],
+  "avoidWhen": [
+    "The user should adjust the value; use SliderField instead.",
+    "The state is indeterminate; use Spinner or a loading-specific composition instead.",
+    "The surrounding UI cannot provide a truthful accessible name when the visible label is hidden."
+  ],
+  "recommendationDescription": "Use ProgressBar for measurable completion and keep Slider for values the user can change.",
+  "recommendedComponents": [
+    {
+      "name": "ProgressBar",
+      "description": "Read-only determinate progress with shared semantics"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ProgressBar"
+        },
+        {
+          "kind": "type",
+          "name": "ProgressBarProps"
+        }
+      ],
+      "example": "import { ProgressBar } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return <ProgressBar label=\"Progress\" value={60} size=\"small\" />\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ProgressBar"
+        },
+        {
+          "kind": "type",
+          "name": "ProgressBarProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ProgressBar } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <ProgressBar label=\"Progress\" :value=\"60\" size=\"small\" />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ProgressBar"
+        },
+        {
+          "kind": "type",
+          "name": "ProgressBarProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { ProgressBar } from \"@marwes-ui/svelte\"\n</script>\n\n<ProgressBar label=\"Progress\" value={60} size=\"small\" />"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Provide a truthful label whenever the visible label is hidden.",
+      "title": "Accessible progress name"
+    },
+    {
+      "description": "Verify changing progress values are announced appropriately for the duration of the product flow.",
+      "title": "Progress announcement review"
+    },
+    {
+      "description": "Visual review against the synced light and dark Figma progress-bar frames.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Product-level review when hiding the visible label so the accessible name remains truthful.",
+      "title": "Manual review 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Progress Bar uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/progress-bar/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

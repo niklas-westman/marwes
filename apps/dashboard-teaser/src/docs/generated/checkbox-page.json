@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "family": "checkbox",
+  "title": "Checkbox",
+  "summary": "Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior.",
+  "useWhen": [
+    "The UI needs one or more native checkbox controls with optional description or error support.",
+    "The product wants the canonical labeled path for a single checkbox or a multi-select checkbox group without rebuilding the field wiring manually.",
+    "The team wants React and Vue checkbox behavior to stay aligned through one core recipe, shared field helpers, and shared contract files."
+  ],
+  "avoidWhen": [
+    "A switch, radio group, or always-on content toggle would be the more honest interaction model.",
+    "The layout only needs a decorative checkmark treatment and does not represent a real form control.",
+    "The team expects a purpose-wrapper or semantic-metadata layer that the current CheckboxField family does not ship."
+  ],
+  "recommendationDescription": "Use CheckboxField for a single choice and CheckboxGroupField when several related checkboxes share one label.",
+  "recommendedComponents": [
+    {
+      "name": "CheckboxField",
+      "description": "Single checkbox with connected label, description and error"
+    },
+    {
+      "name": "CheckboxGroupField",
+      "description": "Fieldset of related checkboxes with grouped label and select-all indeterminate state"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "CheckboxField"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "CheckboxGroupField"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxGroupFieldOption"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxGroupFieldProps"
+        }
+      ],
+      "example": "import { CheckboxField, CheckboxGroupField } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [checked, setChecked] = useState(false)\n  const [values, setValues] = useState<string[]>([\"1\"])\n\n  return (\n    <>\n      <CheckboxField label=\"Label\" checkbox={{ checked, onCheckedChange: setChecked }} />\n      <CheckboxGroupField\n        label=\"Group label\"\n        options={[\n          { value: \"1\", label: \"Label\" },\n          { value: \"2\", label: \"Label\" },\n          { value: \"3\", label: \"Label\" },\n        ]}\n        value={values}\n        onChange={setValues}\n      />\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "CheckboxField"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "CheckboxGroupField"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxGroupFieldOption"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxGroupFieldProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { CheckboxField, CheckboxGroupField } from \"@marwes-ui/vue\"\n\nconst checked = ref(false)\nconst values = ref<string[]>([\"1\"])\n</script>\n\n<template>\n  <CheckboxField\n    label=\"Label\"\n    :checkbox=\"{ checked, onCheckedChange: (v) => (checked = v) }\"\n  />\n  <CheckboxGroupField\n    label=\"Group label\"\n    :options=\"[\n      { value: '1', label: 'Label' },\n      { value: '2', label: 'Label' },\n      { value: '3', label: 'Label' },\n    ]\"\n    v-model=\"values\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "CheckboxField"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "CheckboxGroupField"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxGroupFieldOption"
+        },
+        {
+          "kind": "type",
+          "name": "CheckboxGroupFieldProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { CheckboxField, CheckboxGroupField } from \"@marwes-ui/svelte\"\n\n  let checked = $state(false)\n  let groupOne = $state(true)\n  let groupTwo = $state(false)\n  let groupThree = $state(false)\n</script>\n\n<CheckboxField\n  label=\"Label\"\n  bind:checked\n/>\n<CheckboxGroupField label=\"Group label\" description=\"Select all that apply\">\n  <CheckboxField label=\"First option\" bind:checked={groupOne} />\n  <CheckboxField label=\"Second option\" bind:checked={groupTwo} />\n  <CheckboxField label=\"Third option\" bind:checked={groupThree} />\n</CheckboxGroupField>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Verify indeterminate select-all checkboxes announce their mixed state correctly.",
+      "title": "Indeterminate state"
+    },
+    {
+      "description": "Keep individual checkbox labels distinct from the surrounding group label in CheckboxGroupField.",
+      "title": "Group and item labeling"
+    },
+    {
+      "description": "Use the public Field component so labels, helper text, errors, and invalid state stay connected.",
+      "title": "Connected field wiring"
+    },
+    {
+      "description": "Product-level judgment about when a select-all checkbox should become indeterminate and whether that behavior stays truthful in real flows.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Real browser review for focus visibility and appearance consistency because the family resets native checkbox appearance heavily in CSS.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Whether label, helper text, and error wording stay clear when groups get long or validation messages become more complex.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Checkbox uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/checkbox/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

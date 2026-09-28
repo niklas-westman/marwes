@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Troubleshooting — Marwes UI</title>
+    <meta name="description" content="Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/troubleshooting/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Troubleshooting</h1><p>Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.</p></header>
+      <section><h2>Common setup failures</h2><div class="docs-stack"><article><h3>No styling</h3><p>Import from the adapter root. It loads the static preset CSS; do not add a second stylesheet.</p></article><article><h3>Provider at the wrong level</h3><p>Render MarwesProvider once above every Marwes component.</p></article><article><h3>Wrong import</h3><p>Use @marwes-ui/react, @marwes-ui/vue, or @marwes-ui/svelte — never a different adapter or a deep path.</p></article><article><h3>Theme values are empty</h3><p>CSS references such as var(--mw-*) resolve only inside the provider boundary. Use useTheme() when JavaScript needs resolved values.</p></article><article><h3>Light/dark flash during SSR</h3><p>Install the framework theme script before hydration and keep the server and client preference policy aligned.</p></article><article><h3>Fonts blocked by CSP</h3><p>Allow the configured font origin or self-host the selected font. Keep font loading consistent with the CSP.</p></article><article><h3>Peer version mismatch</h3><p>Check the adapter package peerDependencies and align framework and renderer versions.</p></article><article><h3>Partial CLI setup</h3><p>Follow the printed provider example, then rerun pnpm dlx @marwes-ui/cli doctor --run-build. Exit code 2 means installation succeeded but manual wiring remains.</p></article></div><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli doctor --run-build</code></pre></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

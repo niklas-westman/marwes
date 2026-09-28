@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessibility — Marwes UI</title>
+    <meta name="description" content="Understand the accessibility contract shared by Marwes components." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/accessibility/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Accessibility</h1><p>Understand the accessibility contract shared by Marwes components.</p></header>
+      <section><h2>Accessible by contract, verified in context</h2><p>Marwes supplies component semantics, keyboard behavior, and accessible state wiring. Consumers still own truthful labels, page structure, focus return around overlays, and product-level testing.</p><ul><li>Give every icon-only button an accessible name through the adapter's ariaLabel API.</li><li>Preserve visible focus indicators and test keyboard order.</li><li>Connect validation messages and descriptions to their fields.</li><li>Test real workflows with browser accessibility tooling and assistive technology.</li></ul></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

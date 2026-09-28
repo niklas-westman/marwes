@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compatibility — Marwes UI</title>
+    <meta name="description" content="Supported frameworks, runtimes, browsers, and package boundaries." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/compatibility/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Compatibility</h1><p>Supported frameworks, runtimes, browsers, and package boundaries.</p></header>
+      <section><h2>Supported consumer boundary</h2><p>Use one public adapter package for React, Vue, or Svelte. The adapter imports the static preset stylesheet and exposes the provider, components, helpers, and public types.</p><table><thead><tr><th>Framework</th><th>Package</th><th>Peer requirement</th><th>Setup</th></tr></thead><tbody><tr><td>React</td><td><code>@marwes-ui/react</code></td><td>React and React DOM 18 or newer</td><td><a href="/docs/get-started/react/">Get started</a></td></tr><tr><td>Vue</td><td><code>@marwes-ui/vue</code></td><td>Vue 3.4 or newer</td><td><a href="/docs/get-started/vue/">Get started</a></td></tr><tr><td>Svelte</td><td><code>@marwes-ui/svelte</code></td><td>Svelte 5.20 or newer</td><td><a href="/docs/get-started/svelte/">Get started</a></td></tr></tbody></table><h3>Runtime requirements</h3><ul><li>Node.js 20 or newer for installation, builds, and the CLI.</li><li>A current evergreen browser with standard CSS custom property support.</li><li>The framework and renderer peer versions declared by the selected adapter package.</li><li>A known Vite starter layout for automatic provider patching; other build systems use the documented manual provider setup.</li></ul><p>Direct imports from <code>@marwes-ui/core</code>, <code>@marwes-ui/presets</code>, or package-internal paths are not part of the consumer setup.</p></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paragraph — Marwes UI</title>
+    <meta name="description" content="Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract. Public imports, usage guidance, accessibility requirements, and framework references." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/components/paragraph/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Paragraph</h1><p>Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract.</p></header><div class="component-static-intents"><article id="what-this-family-solves"><h2>What this family solves</h2><p>Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract.</p></article><article><h2>Use when</h2><ul><li>The UI needs real body copy, supporting text, or longer reading content that should remain plain paragraph text.</li><li>The product wants React and Vue paragraph behavior to stay aligned through one core recipe, one shared typography preset, and one shared contract.</li><li>The layout needs explicit control over surrounding spacing while still reusing Marwes typography defaults.</li></ul></article><article><h2>Avoid when</h2><ul><li>The content should be a real heading, label, caption, list item, or other more specific semantic element.</li><li>The surface only needs visually styled text and cannot honestly be represented as a paragraph block.</li><li>The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current Paragraph family does not ship.</li></ul></article></div><section id="recommended-components"><h2>Recommended public components</h2><p>Use Paragraph for body copy and reserve Text for shorter labels, captions, and overlines.</p><div class="component-static-grid"><article><h3>Paragraph</h3><p>Body copy at a small, medium, or large reading size</p></article></div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid"><article data-framework-inventory="react"><h3>React — <code>@marwes-ui/react</code></h3><h4>Component</h4><p><code>Paragraph</code></p><h4>Type</h4><p><code>ParagraphProps</code></p></article><article data-framework-inventory="vue"><h3>Vue — <code>@marwes-ui/vue</code></h3><h4>Component</h4><p><code>Paragraph</code></p><h4>Type</h4><p><code>ParagraphProps</code></p></article><article data-framework-inventory="svelte"><h3>Svelte — <code>@marwes-ui/svelte</code></h3><h4>Component</h4><p><code>Paragraph</code></p><h4>Type</h4><p><code>ParagraphProps</code></p></article></div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p><article><h3>React</h3><pre data-language="tsx"><code>import { H1, H2, H3, Paragraph, Text, TextVariant } from &quot;@marwes-ui/react&quot;
+
+export function Example() {
+  return (
+    &lt;&gt;
+      &lt;Text variant={TextVariant.display}&gt;Display&lt;/Text&gt;
+
+      &lt;H1&gt;Heading 1&lt;/H1&gt;
+      &lt;H2&gt;Heading 2&lt;/H2&gt;
+      &lt;H3&gt;Heading 3&lt;/H3&gt;
+
+      &lt;Paragraph size=&quot;md&quot;&gt;Body paragraph text.&lt;/Paragraph&gt;
+      &lt;Paragraph size=&quot;sm&quot;&gt;Small body paragraph.&lt;/Paragraph&gt;
+
+      &lt;Text variant={TextVariant.label}&gt;Label default&lt;/Text&gt;
+      &lt;Text variant={TextVariant.labelSmall}&gt;Label small&lt;/Text&gt;
+      &lt;Text variant={TextVariant.caption}&gt;Caption&lt;/Text&gt;
+      &lt;Text variant={TextVariant.overline}&gt;Overline&lt;/Text&gt;
+    &lt;/&gt;
+  )
+}</code></pre></article><article><h3>Vue</h3><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { H1, H2, H3, Paragraph, Text, TextVariant } from &quot;@marwes-ui/vue&quot;
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;Text :variant=&quot;TextVariant.display&quot;&gt;Display&lt;/Text&gt;
+
+  &lt;H1&gt;Heading 1&lt;/H1&gt;
+  &lt;H2&gt;Heading 2&lt;/H2&gt;
+  &lt;H3&gt;Heading 3&lt;/H3&gt;
+
+  &lt;Paragraph size=&quot;md&quot;&gt;Body paragraph text.&lt;/Paragraph&gt;
+  &lt;Paragraph size=&quot;sm&quot;&gt;Small body paragraph.&lt;/Paragraph&gt;
+
+  &lt;Text :variant=&quot;TextVariant.label&quot;&gt;Label default&lt;/Text&gt;
+  &lt;Text :variant=&quot;TextVariant.labelSmall&quot;&gt;Label small&lt;/Text&gt;
+  &lt;Text :variant=&quot;TextVariant.caption&quot;&gt;Caption&lt;/Text&gt;
+  &lt;Text :variant=&quot;TextVariant.overline&quot;&gt;Overline&lt;/Text&gt;
+&lt;/template&gt;</code></pre></article><article><h3>Svelte</h3><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import { H1, H2, H3, Paragraph, Text, TextVariant } from &quot;@marwes-ui/svelte&quot;
+&lt;/script&gt;
+
+&lt;Text variant={TextVariant.display}&gt;Display&lt;/Text&gt;
+
+&lt;H1&gt;Heading 1&lt;/H1&gt;
+&lt;H2&gt;Heading 2&lt;/H2&gt;
+&lt;H3&gt;Heading 3&lt;/H3&gt;
+
+&lt;Paragraph size=&quot;md&quot;&gt;Body paragraph text.&lt;/Paragraph&gt;
+&lt;Paragraph size=&quot;sm&quot;&gt;Small body paragraph.&lt;/Paragraph&gt;
+
+&lt;Text variant={TextVariant.label}&gt;Label default&lt;/Text&gt;
+&lt;Text variant={TextVariant.labelSmall}&gt;Label small&lt;/Text&gt;
+&lt;Text variant={TextVariant.caption}&gt;Caption&lt;/Text&gt;
+&lt;Text variant={TextVariant.overline}&gt;Overline&lt;/Text&gt;</code></pre></article></section><section id="accessibility"><h2>Accessibility requirements</h2><ul><li><strong>Paragraph vs Text usage:</strong> Keep body copy in Paragraph and reserve Text for shorter labels and captions.</li><li><strong>Readability review:</strong> Verify color contrast and line length stay readable at every supported size.</li><li><strong>Manual review boundary:</strong> Product-level judgment about whether Paragraph is being used for real body copy instead of replacing headings, labels, or other richer structure.</li><li><strong>Manual review 2:</strong> Readability review for long-form content, especially line length, spacing, and visual hierarchy in real layouts.</li><li><strong>Manual review 3:</strong> Whether teams use size variants for reading emphasis rather than as a shortcut for semantic structure.</li></ul></section><section id="theming"><h2>Theming</h2><p>Paragraph uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet. See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul><li><a href="https://storybook-react.marwes.io/latest/">React Storybook</a> — Explore React variants</li><li><a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a> — Explore Vue variants</li><li><a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a> — Explore Svelte variants</li><li><a href="https://www.npmjs.com/package/@marwes-ui/react">React npm package</a> — Install @marwes-ui/react</li><li><a href="https://www.npmjs.com/package/@marwes-ui/vue">Vue npm package</a> — Install @marwes-ui/vue</li><li><a href="https://www.npmjs.com/package/@marwes-ui/svelte">Svelte npm package</a> — Install @marwes-ui/svelte</li><li><a href="https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/paragraph/README.md">Source and registry evidence</a> — Review the canonical family sources</li><li><a href="/ai/v1/public-api.json">Public API inventory</a> — Inspect the complete machine-readable API</li><li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a> — Get help or suggest a change</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-this-family-solves">What this family solves</a><a href="#recommended-components">Recommended components</a><a href="#public-imports">Public imports</a><a href="#examples">Examples</a><a href="#accessibility">Accessibility</a><a href="#theming">Theming</a><a href="#resources">Resources</a></nav></aside>
+      </div>
+    </div>
+    <script id="component-docs-model" type="application/json">{"schemaVersion":1,"family":"paragraph","title":"Paragraph","summary":"Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract.","useWhen":["The UI needs real body copy, supporting text, or longer reading content that should remain plain paragraph text.","The product wants React and Vue paragraph behavior to stay aligned through one core recipe, one shared typography preset, and one shared contract.","The layout needs explicit control over surrounding spacing while still reusing Marwes typography defaults."],"avoidWhen":["The content should be a real heading, label, caption, list item, or other more specific semantic element.","The surface only needs visually styled text and cannot honestly be represented as a paragraph block.","The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current Paragraph family does not ship."],"recommendationDescription":"Use Paragraph for body copy and reserve Text for shorter labels, captions, and overlines.","recommendedComponents":[{"name":"Paragraph","description":"Body copy at a small, medium, or large reading size"}],"frameworks":[{"framework":"react","packageName":"@marwes-ui/react","exports":[{"kind":"component","name":"Paragraph"},{"kind":"type","name":"ParagraphProps"}],"example":"import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    \u003c>\n      \u003cText variant={TextVariant.display}>Display\u003c/Text>\n\n      \u003cH1>Heading 1\u003c/H1>\n      \u003cH2>Heading 2\u003c/H2>\n      \u003cH3>Heading 3\u003c/H3>\n\n      \u003cParagraph size=\"md\">Body paragraph text.\u003c/Paragraph>\n      \u003cParagraph size=\"sm\">Small body paragraph.\u003c/Paragraph>\n\n      \u003cText variant={TextVariant.label}>Label default\u003c/Text>\n      \u003cText variant={TextVariant.labelSmall}>Label small\u003c/Text>\n      \u003cText variant={TextVariant.caption}>Caption\u003c/Text>\n      \u003cText variant={TextVariant.overline}>Overline\u003c/Text>\n    \u003c/>\n  )\n}"},{"framework":"vue","packageName":"@marwes-ui/vue","exports":[{"kind":"component","name":"Paragraph"},{"kind":"type","name":"ParagraphProps"}],"example":"\u003cscript setup lang=\"ts\">\nimport { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/vue\"\n\u003c/script>\n\n\u003ctemplate>\n  \u003cText :variant=\"TextVariant.display\">Display\u003c/Text>\n\n  \u003cH1>Heading 1\u003c/H1>\n  \u003cH2>Heading 2\u003c/H2>\n  \u003cH3>Heading 3\u003c/H3>\n\n  \u003cParagraph size=\"md\">Body paragraph text.\u003c/Paragraph>\n  \u003cParagraph size=\"sm\">Small body paragraph.\u003c/Paragraph>\n\n  \u003cText :variant=\"TextVariant.label\">Label default\u003c/Text>\n  \u003cText :variant=\"TextVariant.labelSmall\">Label small\u003c/Text>\n  \u003cText :variant=\"TextVariant.caption\">Caption\u003c/Text>\n  \u003cText :variant=\"TextVariant.overline\">Overline\u003c/Text>\n\u003c/template>"},{"framework":"svelte","packageName":"@marwes-ui/svelte","exports":[{"kind":"component","name":"Paragraph"},{"kind":"type","name":"ParagraphProps"}],"example":"\u003cscript lang=\"ts\">\n  import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/svelte\"\n\u003c/script>\n\n\u003cText variant={TextVariant.display}>Display\u003c/Text>\n\n\u003cH1>Heading 1\u003c/H1>\n\u003cH2>Heading 2\u003c/H2>\n\u003cH3>Heading 3\u003c/H3>\n\n\u003cParagraph size=\"md\">Body paragraph text.\u003c/Paragraph>\n\u003cParagraph size=\"sm\">Small body paragraph.\u003c/Paragraph>\n\n\u003cText variant={TextVariant.label}>Label default\u003c/Text>\n\u003cText variant={TextVariant.labelSmall}>Label small\u003c/Text>\n\u003cText variant={TextVariant.caption}>Caption\u003c/Text>\n\u003cText variant={TextVariant.overline}>Overline\u003c/Text>"}],"accessibility":[{"description":"Keep body copy in Paragraph and reserve Text for shorter labels and captions.","title":"Paragraph vs Text usage"},{"description":"Verify color contrast and line length stay readable at every supported size.","title":"Readability review"},{"description":"Product-level judgment about whether Paragraph is being used for real body copy instead of replacing headings, labels, or other richer structure.","title":"Manual review boundary"},{"description":"Readability review for long-form content, especially line length, spacing, and visual hierarchy in real layouts.","title":"Manual review 2"},{"description":"Whether teams use size variants for reading emphasis rather than as a shortcut for semantic structure.","title":"Manual review 3"}],"sections":[{"id":"what-this-family-solves","label":"What this family solves"},{"id":"recommended-components","label":"Recommended components"},{"id":"public-imports","label":"Public imports"},{"id":"examples","label":"Examples"},{"id":"accessibility","label":"Accessibility"},{"id":"theming","label":"Theming"},{"id":"resources","label":"Resources"}],"theming":"Paragraph uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.","resources":[{"title":"React Storybook","description":"Explore React variants","href":"https://storybook-react.marwes.io/latest/","kind":"storybook"},{"title":"Vue Storybook","description":"Explore Vue variants","href":"https://storybook-vue.marwes.io/latest/","kind":"storybook"},{"title":"Svelte Storybook","description":"Explore Svelte variants","href":"https://storybook-svelte.marwes.io/latest/","kind":"storybook"},{"title":"React npm package","description":"Install @marwes-ui/react","href":"https://www.npmjs.com/package/@marwes-ui/react","kind":"npm"},{"title":"Vue npm package","description":"Install @marwes-ui/vue","href":"https://www.npmjs.com/package/@marwes-ui/vue","kind":"npm"},{"title":"Svelte npm package","description":"Install @marwes-ui/svelte","href":"https://www.npmjs.com/package/@marwes-ui/svelte","kind":"npm"},{"title":"Source and registry evidence","description":"Review the canonical family sources","href":"https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/paragraph/README.md","kind":"source"},{"title":"Public API inventory","description":"Inspect the complete machine-readable API","href":"/ai/v1/public-api.json","kind":"source"},{"title":"Report an issue","description":"Get help or suggest a change","href":"https://github.com/niklas-westman/marwes/issues/new","kind":"issue"}]}</script>
+    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+  </body>
+</html>

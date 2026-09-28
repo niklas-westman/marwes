@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast — Marwes UI</title>
+    <meta name="description" content="Canonical transient-feedback family with a Toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent. Public imports, usage guidance, accessibility requirements, and framework references." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/components/toast/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Toast</h1><p>Canonical transient-feedback family with a Toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent.</p></header><div class="component-static-intents"><article id="what-this-family-solves"><h2>What this family solves</h2><p>Canonical transient-feedback family with a Toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent.</p></article><article><h2>Use when</h2><ul><li>The UI needs transient, non-blocking feedback with a clear semantic intent such as success, error, warning, or info.</li><li>The product flow benefits from ToastContainer or ToastProvider for stacked placement and queue management.</li><li>The team wants React and Vue toast semantics to stay aligned through the central semantic registry and one shared contract file.</li></ul></article><article><h2>Avoid when</h2><ul><li>The message is blocking, requires user decision-making, or should really be a dialog rather than a toast.</li><li>The implementation cannot provide appropriate live-region urgency or sane dismissal timing for the message severity.</li><li>The team expects a richer notification center or persistent inbox pattern that goes beyond the current toast family scope.</li></ul></article></div><section id="recommended-components"><h2>Recommended public components</h2><p>Choose a semantic toast intent so transient status messages remain consistent and understandable.</p><div class="component-static-grid"><article><h3>InfoToast</h3><p>Persistent informational toast messaging</p></article><article><h3>SuccessToast</h3><p>Confirmation of a completed outcome</p></article><article><h3>WarningToast</h3><p>Important caution before a problem occurs</p></article><article><h3>ErrorToast</h3><p>Actionable failure messaging with assertive urgency</p></article></div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid"><article data-framework-inventory="react"><h3>React — <code>@marwes-ui/react</code></h3><h4>Components</h4><p><code>ErrorToast</code>, <code>InfoToast</code>, <code>SuccessToast</code>, <code>Toast</code>, <code>ToastContainer</code>, <code>ToastProvider</code>, <code>WarningToast</code></p><h4>Types</h4><p><code>ErrorToastProps</code>, <code>InfoToastProps</code>, <code>ManagedToast</code>, <code>ShowToastOptions</code>, <code>SuccessToastProps</code>, <code>ToastContainerProps</code>, <code>ToastController</code>, <code>ToastProps</code>, <code>ToastProviderProps</code>, <code>WarningToastProps</code></p><h4>Helper</h4><p><code>useToast</code></p></article><article data-framework-inventory="vue"><h3>Vue — <code>@marwes-ui/vue</code></h3><h4>Components</h4><p><code>ErrorToast</code>, <code>InfoToast</code>, <code>SuccessToast</code>, <code>Toast</code>, <code>ToastContainer</code>, <code>ToastProvider</code>, <code>WarningToast</code></p><h4>Types</h4><p><code>ErrorToastProps</code>, <code>InfoToastProps</code>, <code>ManagedToast</code>, <code>ShowToastOptions</code>, <code>SuccessToastProps</code>, <code>ToastContainerProps</code>, <code>ToastController</code>, <code>ToastProps</code>, <code>ToastProviderProps</code>, <code>WarningToastProps</code></p><h4>Helper</h4><p><code>useToast</code></p></article><article data-framework-inventory="svelte"><h3>Svelte — <code>@marwes-ui/svelte</code></h3><h4>Components</h4><p><code>ErrorToast</code>, <code>InfoToast</code>, <code>SuccessToast</code>, <code>Toast</code>, <code>ToastContainer</code>, <code>ToastProvider</code>, <code>WarningToast</code></p><h4>Types</h4><p><code>ErrorToastProps</code>, <code>InfoToastProps</code>, <code>ManagedToast</code>, <code>ShowToastOptions</code>, <code>SuccessToastProps</code>, <code>ToastContainerProps</code>, <code>ToastController</code>, <code>ToastProps</code>, <code>ToastProviderProps</code>, <code>WarningToastProps</code></p><h4>Helper</h4><p><code>useToast</code></p></article></div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p><article><h3>React</h3><pre data-language="tsx"><code>import { ErrorToast, InfoToast, SuccessToast, Toast, WarningToast } from &quot;@marwes-ui/react&quot;
+import { useState } from &quot;react&quot;
+
+export function Example() {
+  const [dismissed, setDismissed] = useState&lt;Set&lt;string&gt;&gt;(new Set())
+  const dismiss = (id: string) =&gt; setDismissed((prev) =&gt; new Set([...prev, id]))
+
+  return (
+    &lt;&gt;
+      {!dismissed.has(&quot;neutral&quot;) &amp;&amp; (
+        &lt;Toast variant=&quot;subtle&quot; onDismiss={() =&gt; dismiss(&quot;neutral&quot;)}&gt;
+          Neutral message
+        &lt;/Toast&gt;
+      )}
+      {!dismissed.has(&quot;info&quot;) &amp;&amp; (
+        &lt;InfoToast variant=&quot;subtle&quot; onDismiss={() =&gt; dismiss(&quot;info&quot;)}&gt;
+          Meeting starts in 10 min
+        &lt;/InfoToast&gt;
+      )}
+      {!dismissed.has(&quot;success&quot;) &amp;&amp; (
+        &lt;SuccessToast variant=&quot;subtle&quot; onDismiss={() =&gt; dismiss(&quot;success&quot;)}&gt;
+          Your email is verified
+        &lt;/SuccessToast&gt;
+      )}
+      {!dismissed.has(&quot;warning&quot;) &amp;&amp; (
+        &lt;WarningToast variant=&quot;subtle&quot; onDismiss={() =&gt; dismiss(&quot;warning&quot;)}&gt;
+          Connection unstable
+        &lt;/WarningToast&gt;
+      )}
+      {!dismissed.has(&quot;error&quot;) &amp;&amp; (
+        &lt;ErrorToast variant=&quot;subtle&quot; onDismiss={() =&gt; dismiss(&quot;error&quot;)}&gt;
+          Something went wrong
+        &lt;/ErrorToast&gt;
+      )}
+    &lt;/&gt;
+  )
+}</code></pre></article><article><h3>Vue</h3><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref } from &quot;vue&quot;
+import { ErrorToast, InfoToast, SuccessToast, Toast, WarningToast } from &quot;@marwes-ui/vue&quot;
+
+const dismissed = ref&lt;Set&lt;string&gt;&gt;(new Set())
+const dismiss = (id: string) =&gt; (dismissed.value = new Set([...dismissed.value, id]))
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;Toast v-if=&quot;!dismissed.has('neutral')&quot; variant=&quot;subtle&quot; @dismiss=&quot;dismiss('neutral')&quot;&gt;
+    Neutral message
+  &lt;/Toast&gt;
+  &lt;InfoToast v-if=&quot;!dismissed.has('info')&quot; variant=&quot;subtle&quot; @dismiss=&quot;dismiss('info')&quot;&gt;
+    Meeting starts in 10 min
+  &lt;/InfoToast&gt;
+  &lt;SuccessToast v-if=&quot;!dismissed.has('success')&quot; variant=&quot;subtle&quot; @dismiss=&quot;dismiss('success')&quot;&gt;
+    Your email is verified
+  &lt;/SuccessToast&gt;
+  &lt;WarningToast v-if=&quot;!dismissed.has('warning')&quot; variant=&quot;subtle&quot; @dismiss=&quot;dismiss('warning')&quot;&gt;
+    Connection unstable
+  &lt;/WarningToast&gt;
+  &lt;ErrorToast v-if=&quot;!dismissed.has('error')&quot; variant=&quot;subtle&quot; @dismiss=&quot;dismiss('error')&quot;&gt;
+    Something went wrong
+  &lt;/ErrorToast&gt;
+&lt;/template&gt;</code></pre></article><article><h3>Svelte</h3><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import { ErrorToast, InfoToast, SuccessToast, Toast, WarningToast } from &quot;@marwes-ui/svelte&quot;
+
+  let dismissed = $state&lt;Set&lt;string&gt;&gt;(new Set())
+  const dismiss = (id: string) =&gt; (dismissed = new Set([...dismissed, id]))
+&lt;/script&gt;
+
+{#if !dismissed.has(&quot;neutral&quot;)}
+  &lt;Toast variant=&quot;subtle&quot; ondismiss={() =&gt; dismiss(&quot;neutral&quot;)}&gt;Neutral message&lt;/Toast&gt;
+{/if}
+{#if !dismissed.has(&quot;info&quot;)}
+  &lt;InfoToast variant=&quot;subtle&quot; ondismiss={() =&gt; dismiss(&quot;info&quot;)}&gt;Meeting starts in 10 min&lt;/InfoToast&gt;
+{/if}
+{#if !dismissed.has(&quot;success&quot;)}
+  &lt;SuccessToast variant=&quot;subtle&quot; ondismiss={() =&gt; dismiss(&quot;success&quot;)}&gt;Your email is verified&lt;/SuccessToast&gt;
+{/if}
+{#if !dismissed.has(&quot;warning&quot;)}
+  &lt;WarningToast variant=&quot;subtle&quot; ondismiss={() =&gt; dismiss(&quot;warning&quot;)}&gt;Connection unstable&lt;/WarningToast&gt;
+{/if}
+{#if !dismissed.has(&quot;error&quot;)}
+  &lt;ErrorToast variant=&quot;subtle&quot; ondismiss={() =&gt; dismiss(&quot;error&quot;)}&gt;Something went wrong&lt;/ErrorToast&gt;
+{/if}</code></pre></article></section><section id="accessibility"><h2>Accessibility requirements</h2><ul><li><strong>Matched announcement urgency:</strong> Match ariaLive urgency to the message; reserve assertive announcements for real failures.</li><li><strong>Readable dismiss timing:</strong> Keep a toast visible long enough to read and let people dismiss it before it disappears.</li><li><strong>Manual review boundary:</strong> Real browser and assistive-technology validation for repeated toast announcement timing, interruption feel, and urgency calibration.</li><li><strong>Manual review 2:</strong> Product-level judgment about when the default 4000ms duration is sufficient versus when critical or actionable toasts should stay visible with duration null or a longer explicit timeout.</li><li><strong>Manual review 3:</strong> Any future expansion beyond the current transient feedback and simple queue model.</li></ul></section><section id="theming"><h2>Theming</h2><p>Toast uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet. See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul><li><a href="https://storybook-react.marwes.io/latest/">React Storybook</a> — Explore React variants</li><li><a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a> — Explore Vue variants</li><li><a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a> — Explore Svelte variants</li><li><a href="https://www.npmjs.com/package/@marwes-ui/react">React npm package</a> — Install @marwes-ui/react</li><li><a href="https://www.npmjs.com/package/@marwes-ui/vue">Vue npm package</a> — Install @marwes-ui/vue</li><li><a href="https://www.npmjs.com/package/@marwes-ui/svelte">Svelte npm package</a> — Install @marwes-ui/svelte</li><li><a href="https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/toast/README.md">Source and registry evidence</a> — Review the canonical family sources</li><li><a href="/ai/v1/public-api.json">Public API inventory</a> — Inspect the complete machine-readable API</li><li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a> — Get help or suggest a change</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-this-family-solves">What this family solves</a><a href="#recommended-components">Recommended components</a><a href="#public-imports">Public imports</a><a href="#examples">Examples</a><a href="#accessibility">Accessibility</a><a href="#theming">Theming</a><a href="#resources">Resources</a></nav></aside>
+      </div>
+    </div>
+    <script id="component-docs-model" type="application/json">{"schemaVersion":1,"family":"toast","title":"Toast","summary":"Canonical transient-feedback family with a Toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent.","useWhen":["The UI needs transient, non-blocking feedback with a clear semantic intent such as success, error, warning, or info.","The product flow benefits from ToastContainer or ToastProvider for stacked placement and queue management.","The team wants React and Vue toast semantics to stay aligned through the central semantic registry and one shared contract file."],"avoidWhen":["The message is blocking, requires user decision-making, or should really be a dialog rather than a toast.","The implementation cannot provide appropriate live-region urgency or sane dismissal timing for the message severity.","The team expects a richer notification center or persistent inbox pattern that goes beyond the current toast family scope."],"recommendationDescription":"Choose a semantic toast intent so transient status messages remain consistent and understandable.","recommendedComponents":[{"name":"InfoToast","description":"Persistent informational toast messaging"},{"name":"SuccessToast","description":"Confirmation of a completed outcome"},{"name":"WarningToast","description":"Important caution before a problem occurs"},{"name":"ErrorToast","description":"Actionable failure messaging with assertive urgency"}],"frameworks":[{"framework":"react","packageName":"@marwes-ui/react","exports":[{"kind":"component","name":"ErrorToast"},{"kind":"type","name":"ErrorToastProps"},{"kind":"component","name":"InfoToast"},{"kind":"type","name":"InfoToastProps"},{"kind":"type","name":"ManagedToast"},{"kind":"type","name":"ShowToastOptions"},{"kind":"component","name":"SuccessToast"},{"kind":"type","name":"SuccessToastProps"},{"kind":"component","name":"Toast"},{"kind":"component","name":"ToastContainer"},{"kind":"type","name":"ToastContainerProps"},{"kind":"type","name":"ToastController"},{"kind":"type","name":"ToastProps"},{"kind":"component","name":"ToastProvider"},{"kind":"type","name":"ToastProviderProps"},{"kind":"helper","name":"useToast"},{"kind":"component","name":"WarningToast"},{"kind":"type","name":"WarningToastProps"}],"example":"import { ErrorToast, InfoToast, SuccessToast, Toast, WarningToast } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [dismissed, setDismissed] = useState\u003cSet\u003cstring>>(new Set())\n  const dismiss = (id: string) => setDismissed((prev) => new Set([...prev, id]))\n\n  return (\n    \u003c>\n      {!dismissed.has(\"neutral\") && (\n        \u003cToast variant=\"subtle\" onDismiss={() => dismiss(\"neutral\")}>\n          Neutral message\n        \u003c/Toast>\n      )}\n      {!dismissed.has(\"info\") && (\n        \u003cInfoToast variant=\"subtle\" onDismiss={() => dismiss(\"info\")}>\n          Meeting starts in 10 min\n        \u003c/InfoToast>\n      )}\n      {!dismissed.has(\"success\") && (\n        \u003cSuccessToast variant=\"subtle\" onDismiss={() => dismiss(\"success\")}>\n          Your email is verified\n        \u003c/SuccessToast>\n      )}\n      {!dismissed.has(\"warning\") && (\n        \u003cWarningToast variant=\"subtle\" onDismiss={() => dismiss(\"warning\")}>\n          Connection unstable\n        \u003c/WarningToast>\n      )}\n      {!dismissed.has(\"error\") && (\n        \u003cErrorToast variant=\"subtle\" onDismiss={() => dismiss(\"error\")}>\n          Something went wrong\n        \u003c/ErrorToast>\n      )}\n    \u003c/>\n  )\n}"},{"framework":"vue","packageName":"@marwes-ui/vue","exports":[{"kind":"component","name":"ErrorToast"},{"kind":"type","name":"ErrorToastProps"},{"kind":"component","name":"InfoToast"},{"kind":"type","name":"InfoToastProps"},{"kind":"type","name":"ManagedToast"},{"kind":"type","name":"ShowToastOptions"},{"kind":"component","name":"SuccessToast"},{"kind":"type","name":"SuccessToastProps"},{"kind":"component","name":"Toast"},{"kind":"component","name":"ToastContainer"},{"kind":"type","name":"ToastContainerProps"},{"kind":"type","name":"ToastController"},{"kind":"type","name":"ToastProps"},{"kind":"component","name":"ToastProvider"},{"kind":"type","name":"ToastProviderProps"},{"kind":"helper","name":"useToast"},{"kind":"component","name":"WarningToast"},{"kind":"type","name":"WarningToastProps"}],"example":"\u003cscript setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { ErrorToast, InfoToast, SuccessToast, Toast, WarningToast } from \"@marwes-ui/vue\"\n\nconst dismissed = ref\u003cSet\u003cstring>>(new Set())\nconst dismiss = (id: string) => (dismissed.value = new Set([...dismissed.value, id]))\n\u003c/script>\n\n\u003ctemplate>\n  \u003cToast v-if=\"!dismissed.has('neutral')\" variant=\"subtle\" @dismiss=\"dismiss('neutral')\">\n    Neutral message\n  \u003c/Toast>\n  \u003cInfoToast v-if=\"!dismissed.has('info')\" variant=\"subtle\" @dismiss=\"dismiss('info')\">\n    Meeting starts in 10 min\n  \u003c/InfoToast>\n  \u003cSuccessToast v-if=\"!dismissed.has('success')\" variant=\"subtle\" @dismiss=\"dismiss('success')\">\n    Your email is verified\n  \u003c/SuccessToast>\n  \u003cWarningToast v-if=\"!dismissed.has('warning')\" variant=\"subtle\" @dismiss=\"dismiss('warning')\">\n    Connection unstable\n  \u003c/WarningToast>\n  \u003cErrorToast v-if=\"!dismissed.has('error')\" variant=\"subtle\" @dismiss=\"dismiss('error')\">\n    Something went wrong\n  \u003c/ErrorToast>\n\u003c/template>"},{"framework":"svelte","packageName":"@marwes-ui/svelte","exports":[{"kind":"component","name":"ErrorToast"},{"kind":"type","name":"ErrorToastProps"},{"kind":"component","name":"InfoToast"},{"kind":"type","name":"InfoToastProps"},{"kind":"type","name":"ManagedToast"},{"kind":"type","name":"ShowToastOptions"},{"kind":"component","name":"SuccessToast"},{"kind":"type","name":"SuccessToastProps"},{"kind":"component","name":"Toast"},{"kind":"component","name":"ToastContainer"},{"kind":"type","name":"ToastContainerProps"},{"kind":"type","name":"ToastController"},{"kind":"type","name":"ToastProps"},{"kind":"component","name":"ToastProvider"},{"kind":"type","name":"ToastProviderProps"},{"kind":"helper","name":"useToast"},{"kind":"component","name":"WarningToast"},{"kind":"type","name":"WarningToastProps"}],"example":"\u003cscript lang=\"ts\">\n  import { ErrorToast, InfoToast, SuccessToast, Toast, WarningToast } from \"@marwes-ui/svelte\"\n\n  let dismissed = $state\u003cSet\u003cstring>>(new Set())\n  const dismiss = (id: string) => (dismissed = new Set([...dismissed, id]))\n\u003c/script>\n\n{#if !dismissed.has(\"neutral\")}\n  \u003cToast variant=\"subtle\" ondismiss={() => dismiss(\"neutral\")}>Neutral message\u003c/Toast>\n{/if}\n{#if !dismissed.has(\"info\")}\n  \u003cInfoToast variant=\"subtle\" ondismiss={() => dismiss(\"info\")}>Meeting starts in 10 min\u003c/InfoToast>\n{/if}\n{#if !dismissed.has(\"success\")}\n  \u003cSuccessToast variant=\"subtle\" ondismiss={() => dismiss(\"success\")}>Your email is verified\u003c/SuccessToast>\n{/if}\n{#if !dismissed.has(\"warning\")}\n  \u003cWarningToast variant=\"subtle\" ondismiss={() => dismiss(\"warning\")}>Connection unstable\u003c/WarningToast>\n{/if}\n{#if !dismissed.has(\"error\")}\n  \u003cErrorToast variant=\"subtle\" ondismiss={() => dismiss(\"error\")}>Something went wrong\u003c/ErrorToast>\n{/if}"}],"accessibility":[{"description":"Match ariaLive urgency to the message; reserve assertive announcements for real failures.","title":"Matched announcement urgency"},{"description":"Keep a toast visible long enough to read and let people dismiss it before it disappears.","title":"Readable dismiss timing"},{"description":"Real browser and assistive-technology validation for repeated toast announcement timing, interruption feel, and urgency calibration.","title":"Manual review boundary"},{"description":"Product-level judgment about when the default 4000ms duration is sufficient versus when critical or actionable toasts should stay visible with duration null or a longer explicit timeout.","title":"Manual review 2"},{"description":"Any future expansion beyond the current transient feedback and simple queue model.","title":"Manual review 3"}],"sections":[{"id":"what-this-family-solves","label":"What this family solves"},{"id":"recommended-components","label":"Recommended components"},{"id":"public-imports","label":"Public imports"},{"id":"examples","label":"Examples"},{"id":"accessibility","label":"Accessibility"},{"id":"theming","label":"Theming"},{"id":"resources","label":"Resources"}],"theming":"Toast uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.","resources":[{"title":"React Storybook","description":"Explore React variants","href":"https://storybook-react.marwes.io/latest/","kind":"storybook"},{"title":"Vue Storybook","description":"Explore Vue variants","href":"https://storybook-vue.marwes.io/latest/","kind":"storybook"},{"title":"Svelte Storybook","description":"Explore Svelte variants","href":"https://storybook-svelte.marwes.io/latest/","kind":"storybook"},{"title":"React npm package","description":"Install @marwes-ui/react","href":"https://www.npmjs.com/package/@marwes-ui/react","kind":"npm"},{"title":"Vue npm package","description":"Install @marwes-ui/vue","href":"https://www.npmjs.com/package/@marwes-ui/vue","kind":"npm"},{"title":"Svelte npm package","description":"Install @marwes-ui/svelte","href":"https://www.npmjs.com/package/@marwes-ui/svelte","kind":"npm"},{"title":"Source and registry evidence","description":"Review the canonical family sources","href":"https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/toast/README.md","kind":"source"},{"title":"Public API inventory","description":"Inspect the complete machine-readable API","href":"/ai/v1/public-api.json","kind":"source"},{"title":"Report an issue","description":"Get help or suggest a change","href":"https://github.com/niklas-westman/marwes/issues/new","kind":"issue"}]}</script>
+    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+  </body>
+</html>

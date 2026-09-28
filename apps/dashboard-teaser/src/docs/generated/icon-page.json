@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "family": "icon",
+  "title": "Icon",
+  "summary": "Named SVG icon family with one Icon component, a generated runtime inventory, gallery-driven Storybook discovery, and shared React/Vue contract coverage for decorative versus labelled behavior.",
+  "useWhen": [
+    "The UI needs a named decorative or labelled icon alongside text, controls, or status copy.",
+    "The product wants React and Vue icon behavior to stay aligned through the shared icon registry, size scale, stroke-width scale, and contract coverage.",
+    "Teams need a searchable gallery for the shipped icon inventory before placing icons into larger families like buttons, tabs, inputs, or tooltips."
+  ],
+  "avoidWhen": [
+    "The icon would be carrying the only accessible meaning of an interaction without a parent control label or its own explicit aria-label.",
+    "A richer component such as Button, IconButton, TooltipGroup, Avatar, or Toast is the more honest family surface for the job.",
+    "The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current Icon family does not ship."
+  ],
+  "recommendationDescription": "Mark every icon decorative or give it a truthful ariaLabel; never leave both unset.",
+  "recommendedComponents": [
+    {
+      "name": "Icon",
+      "description": "Decorative or informative glyph from the shared icon set"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Icon"
+        },
+        {
+          "kind": "enum",
+          "name": "IconName"
+        },
+        {
+          "kind": "type",
+          "name": "IconProps"
+        }
+      ],
+      "example": "import { Icon } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return <Icon name=\"search\" ariaLabel=\"Search\" />\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Icon"
+        },
+        {
+          "kind": "enum",
+          "name": "IconName"
+        },
+        {
+          "kind": "type",
+          "name": "IconProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { Icon } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Icon name=\"search\" aria-label=\"Search\" />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Icon"
+        },
+        {
+          "kind": "enum",
+          "name": "IconName"
+        },
+        {
+          "kind": "type",
+          "name": "IconProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Icon } from \"@marwes-ui/svelte\"\n</script>\n\n<Icon name=\"search\" aria-label=\"Search\" />"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Mark every icon decorative or give it a truthful ariaLabel; never leave both unset.",
+      "title": "Decorative vs informative"
+    },
+    {
+      "description": "Verify decorative icons are never the only carrier of required information.",
+      "title": "Icon-only information review"
+    },
+    {
+      "description": "Give every icon-only control an accessible name through its public naming prop.",
+      "title": "Icon-only control naming"
+    },
+    {
+      "description": "Product-level review that icon-only buttons, tabs, tooltip triggers, and other parent controls always get an accessible name from the parent surface or an explicit label.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Visual review that the current runtime stroke-based icon rendering still feels aligned with the locally synced Figma inventory and category galleries.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Architectural review of whether the adapters should eventually converge on createIconRecipe and icon.css, or whether the unused recipe-layer affordances should be trimmed.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Icon uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/icon/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

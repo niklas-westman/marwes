@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "family": "badge",
+  "title": "Badge",
+  "summary": "Canonical compact-status family with a Badge component, a BadgeGroup composition, and thin purpose-badge wrappers for status, priority, and notification contexts.",
+  "useWhen": [
+    "The UI needs a compact, non-interactive status label, priority marker, or notification count with stable semantics.",
+    "The product flow maps clearly to StatusBadge, PriorityBadge, or NotificationBadge and benefits from canonical purpose metadata.",
+    "The team wants grouped badge presentation to stay aligned across React, Vue, and Svelte through BadgeGroup and one shared contract."
+  ],
+  "avoidWhen": [
+    "The surface is really an interactive chip, filter token, dismissible tag, or pill button rather than a passive badge.",
+    "The implementation cannot provide truthful surrounding context or an ariaLabel for numeric-only badge content.",
+    "The team expects a richer color-intent matrix such as the Figma-only brand row that is not currently part of the shipped API."
+  ],
+  "recommendationDescription": "Choose the purpose wrapper that matches the meaning; use Badge as the deliberate primitive escape hatch.",
+  "recommendedComponents": [
+    {
+      "name": "StatusBadge",
+      "description": "Passive state labels with explicit status semantics"
+    },
+    {
+      "name": "PriorityBadge",
+      "description": "Compact priority labels for ordered work"
+    },
+    {
+      "name": "NotificationBadge",
+      "description": "Notification counts with an accessible numeric label"
+    },
+    {
+      "name": "BadgeGroup",
+      "description": "A labeled collection of related passive badges"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Badge"
+        },
+        {
+          "kind": "component",
+          "name": "BadgeGroup"
+        },
+        {
+          "kind": "type",
+          "name": "BadgeGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "BadgeProps"
+        },
+        {
+          "kind": "enum",
+          "name": "BadgeVariant"
+        },
+        {
+          "kind": "component",
+          "name": "NotificationBadge"
+        },
+        {
+          "kind": "type",
+          "name": "NotificationBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "PriorityBadge"
+        },
+        {
+          "kind": "type",
+          "name": "PriorityBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "StatusBadge"
+        },
+        {
+          "kind": "type",
+          "name": "StatusBadgeProps"
+        }
+      ],
+      "example": "import { BadgeGroup, NotificationBadge, StatusBadge } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <BadgeGroup label=\"Account status\">\n      <StatusBadge variant=\"success\">Active</StatusBadge>\n      <NotificationBadge variant=\"info\" ariaLabel=\"3 unread messages\">\n        3\n      </NotificationBadge>\n    </BadgeGroup>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Badge"
+        },
+        {
+          "kind": "component",
+          "name": "BadgeGroup"
+        },
+        {
+          "kind": "type",
+          "name": "BadgeGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "BadgeProps"
+        },
+        {
+          "kind": "enum",
+          "name": "BadgeVariant"
+        },
+        {
+          "kind": "component",
+          "name": "NotificationBadge"
+        },
+        {
+          "kind": "type",
+          "name": "NotificationBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "PriorityBadge"
+        },
+        {
+          "kind": "type",
+          "name": "PriorityBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "StatusBadge"
+        },
+        {
+          "kind": "type",
+          "name": "StatusBadgeProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { BadgeGroup, NotificationBadge, StatusBadge } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <BadgeGroup label=\"Account status\">\n    <StatusBadge variant=\"success\">Active</StatusBadge>\n    <NotificationBadge variant=\"info\" aria-label=\"3 unread messages\">3</NotificationBadge>\n  </BadgeGroup>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Badge"
+        },
+        {
+          "kind": "component",
+          "name": "BadgeGroup"
+        },
+        {
+          "kind": "type",
+          "name": "BadgeGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "BadgeProps"
+        },
+        {
+          "kind": "enum",
+          "name": "BadgeVariant"
+        },
+        {
+          "kind": "component",
+          "name": "NotificationBadge"
+        },
+        {
+          "kind": "type",
+          "name": "NotificationBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "PriorityBadge"
+        },
+        {
+          "kind": "type",
+          "name": "PriorityBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "StatusBadge"
+        },
+        {
+          "kind": "type",
+          "name": "StatusBadgeProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { BadgeGroup, NotificationBadge, StatusBadge } from \"@marwes-ui/svelte\"\n</script>\n\n<BadgeGroup label=\"Account status\">\n  <StatusBadge variant=\"success\">Active</StatusBadge>\n  <NotificationBadge variant=\"info\" ariaLabel=\"3 unread messages\">3</NotificationBadge>\n</BadgeGroup>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep badge text concise and provide ariaLabel when numeric content needs fuller context.",
+      "title": "Truthful label"
+    },
+    {
+      "description": "Verify grouped badges retain enough visible or surrounding context in the finished product.",
+      "title": "Screen-reader review"
+    },
+    {
+      "description": "Product-level wording quality for numeric-only notification badges and short status labels.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Whether grouped badges always have enough visible labeling or surrounding context in real layouts.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Any future attempt to grow the family into interactive chips or to ship the current Figma-only brand tone.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Badge uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/badge/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

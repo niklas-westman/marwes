@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "family": "segmented-control",
+  "title": "Segmented Control",
+  "summary": "Single-select segmented toggle family with radiogroup semantics, keyboard navigation, and three visual variants (default, inverse, pill).",
+  "useWhen": [
+    "The UI needs a compact single-select toggle between 2–4 options with no associated panel content.",
+    "Theme switching, view density controls, framework selectors, or similar compact option sets.",
+    "The team wants React, Vue, and Svelte segmented behavior to stay aligned through shared core recipes."
+  ],
+  "avoidWhen": [
+    "The selection controls associated panel content — use TabGroup instead.",
+    "There are more than 4 options — consider a dropdown or radio group.",
+    "A binary on/off toggle is more appropriate — use SwitchField instead.",
+    "The options need rich content or descriptions — use a radio group field."
+  ],
+  "recommendationDescription": "Use SegmentedControlField when a small set of mutually exclusive views or filters should stay visible at once.",
+  "recommendedComponents": [
+    {
+      "name": "SegmentedControlField",
+      "description": "Labeled set of mutually exclusive views or filters"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "SegmentedControlField"
+        },
+        {
+          "kind": "type",
+          "name": "SegmentedControlFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SegmentedControlItem"
+        }
+      ],
+      "example": "import { Icon, IconName, SegmentedControlField } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [density, setDensity] = useState(\"compact\")\n  const [mode, setMode] = useState(\"compact\")\n  const [theme, setTheme] = useState(\"light\")\n\n  return (\n    <>\n      <SegmentedControlField\n        label=\"View density\"\n        segmentedControl={{\n          items: [\n            { value: \"compact\", label: \"Compact\" },\n            { value: \"wide\", label: \"Wide\" },\n          ],\n          value: density,\n          onValueChange: setDensity,\n          variant: \"inverse\",\n          fullWidth: true,\n        }}\n      />\n      <SegmentedControlField\n        label=\"View mode\"\n        segmentedControl={{\n          items: [\n            {\n              value: \"compact\",\n              icon: <Icon name={IconName.Star} decorative size={12} />,\n              label: \"Compact\",\n            },\n            {\n              value: \"wide\",\n              icon: <Icon name={IconName.Settings} decorative size={12} />,\n              label: \"Wide\",\n            },\n            {\n              value: \"rich\",\n              icon: <Icon name={IconName.Star} decorative size={12} />,\n              label: \"Rich\",\n            },\n          ],\n          value: mode,\n          onValueChange: setMode,\n          variant: \"inverse\",\n          fullWidth: true,\n        }}\n      />\n      <SegmentedControlField\n        label=\"Theme\"\n        segmentedControl={{\n          items: [\n            {\n              value: \"light\",\n              icon: <Icon name={IconName.Sun} decorative size={12} />,\n              ariaLabel: \"Light\",\n            },\n            {\n              value: \"dark\",\n              icon: <Icon name={IconName.Moon} decorative size={12} />,\n              ariaLabel: \"Dark\",\n            },\n          ],\n          value: theme,\n          onValueChange: setTheme,\n          variant: \"inverse\",\n          size: \"sm\",\n        }}\n      />\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "SegmentedControlField"
+        },
+        {
+          "kind": "type",
+          "name": "SegmentedControlFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SegmentedControlItem"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { h } from \"vue\"\nimport { Icon, IconName, SegmentedControlField } from \"@marwes-ui/vue\"\n\nconst modeItems = [\n  { value: \"compact\", icon: h(Icon, { name: IconName.Star, decorative: true, size: 12 }), label: \"Compact\" },\n  { value: \"wide\", icon: h(Icon, { name: IconName.Settings, decorative: true, size: 12 }), label: \"Wide\" },\n  { value: \"rich\", icon: h(Icon, { name: IconName.Star, decorative: true, size: 12 }), label: \"Rich\" },\n]\n\nconst themeItems = [\n  { value: \"light\", icon: h(Icon, { name: IconName.Sun, decorative: true, size: 12 }), ariaLabel: \"Light\" },\n  { value: \"dark\", icon: h(Icon, { name: IconName.Moon, decorative: true, size: 12 }), ariaLabel: \"Dark\" },\n]\n</script>\n\n<template>\n  <SegmentedControlField\n    label=\"View density\"\n    :segmented-control=\"{ items: [\n      { value: 'compact', label: 'Compact' },\n      { value: 'wide', label: 'Wide' },\n    ], variant: 'inverse', fullWidth: true }\"\n  />\n  <SegmentedControlField label=\"View mode\" :segmented-control=\"{ items: modeItems, variant: 'inverse', fullWidth: true }\" />\n  <SegmentedControlField label=\"Theme\" :segmented-control=\"{ items: themeItems, variant: 'inverse', size: 'sm' }\" />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "SegmentedControlField"
+        },
+        {
+          "kind": "type",
+          "name": "SegmentedControlFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SegmentedControlItem"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { SegmentedControlField } from \"@marwes-ui/svelte\"\n\n  let density = $state(\"compact\")\n  let mode = $state(\"compact\")\n  let theme = $state(\"light\")\n</script>\n\n<SegmentedControlField\n  label=\"View density\"\n  segmentedControl={{ items: [\n    { value: \"compact\", label: \"Compact\" },\n    { value: \"wide\", label: \"Wide\" },\n  ], value: density, onvaluechange: (value) => (density = value), variant: \"inverse\", fullWidth: true }}\n/>\n<SegmentedControlField\n  label=\"View mode\"\n  segmentedControl={{ items: [\n    { value: \"compact\", label: \"Compact\" },\n    { value: \"wide\", label: \"Wide\" },\n    { value: \"rich\", label: \"Rich\" },\n  ], value: mode, onvaluechange: (value) => (mode = value), variant: \"inverse\", fullWidth: true }}\n/>\n<SegmentedControlField\n  label=\"Theme\"\n  segmentedControl={{ items: [\n    { value: \"light\", ariaLabel: \"Light\" },\n    { value: \"dark\", ariaLabel: \"Dark\" },\n  ], value: theme, onvaluechange: (value) => (theme = value), variant: \"inverse\", size: \"sm\" }}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Give every icon-only segment a truthful ariaLabel since no visible text label exists.",
+      "title": "Icon-only segment naming"
+    },
+    {
+      "description": "Verify arrow-key navigation moves focus between segments the same way pointer input does.",
+      "title": "Keyboard segment navigation"
+    },
+    {
+      "description": "Use the public Field component so labels, helper text, errors, and invalid state stay connected.",
+      "title": "Connected field wiring"
+    },
+    {
+      "description": "Real browser and assistive-technology validation for radio-group announcement patterns.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Focus visibility and roving tabindex feel across screen readers.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "High-contrast mode appearance of the active pill indicator.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Segmented Control uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/segmented-control/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

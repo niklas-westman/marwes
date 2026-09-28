@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuxt integration — Marwes UI</title>
+    <meta name="description" content="Use Marwes with Nuxt and install the provider at the application boundary." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/integrations/nuxt/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Nuxt integration</h1><p>Use Marwes with Nuxt and install the provider at the application boundary.</p></header>
+      <section><h2>Nuxt setup</h2><p>Register a client-safe application provider and keep theme preference initialization consistent between the rendered HTML and hydration.</p><ol><li>Complete the <a href="/docs/get-started/vue/">Vue setup</a>.</li><li>Render one provider at the application boundary.</li><li>Keep server and browser theme initialization aligned.</li><li>Run <code>pnpm dlx @marwes-ui/cli doctor --run-build</code>.</li></ol><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import {
+  MarwesProvider,
+  createMarwesThemeScript,
+  createMarwesThemeStyle,
+} from &quot;@marwes-ui/vue&quot;
+
+useHead({
+  htmlAttrs: { &quot;data-allow-mismatch&quot;: &quot;class&quot; },
+  style: [{ innerHTML: createMarwesThemeStyle({ target: &quot;html&quot;, attribute: &quot;class&quot; }) }],
+  script: [{
+    innerHTML: createMarwesThemeScript({
+      storageKey: &quot;marwes-theme&quot;,
+      defaultPreference: &quot;system&quot;,
+      target: &quot;html&quot;,
+      attribute: &quot;class&quot;,
+    }),
+  }],
+})
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;MarwesProvider
+    default-preference=&quot;system&quot;
+    storage-key=&quot;marwes-theme&quot;
+    target=&quot;html&quot;
+    attribute=&quot;class&quot;
+    variable-strategy=&quot;style-tag&quot;
+  &gt;
+    &lt;NuxtPage /&gt;
+  &lt;/MarwesProvider&gt;
+&lt;/template&gt;</code></pre><aside><strong>CSP:</strong> pass the request nonce to generated style and script entries when your policy requires one. Never concatenate untrusted values into generated head markup.</aside></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

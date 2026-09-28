@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "title": "Button",
+  "summary": "Semantic-first action family with a base Button component, visual wrappers, and purpose wrappers for canonical workflows.",
+  "useWhen": [
+    "The UI needs a canonical action trigger with clear semantic intent.",
+    "A product flow matches one of the purpose wrappers such as submit, cancel, save, or destructive.",
+    "The implementation should stay aligned across React, Vue, and Svelte through the shared core contract."
+  ],
+  "avoidWhen": [
+    "A plain navigational link with native link semantics is the better fit than an action button.",
+    "The design is only trying to mimic a button visually without needing button semantics.",
+    "The product team cannot explain the action intent clearly enough to choose a stable purpose or action."
+  ],
+  "recommendationDescription": "Purpose-first buttons make action intent explicit; use the base Button as the deliberate escape hatch.",
+  "recommendedComponents": [
+    {
+      "name": "PrimaryButton",
+      "description": "Default high-emphasis product action"
+    },
+    {
+      "name": "SecondaryButton",
+      "description": "Supporting action with reduced emphasis"
+    },
+    {
+      "name": "SubmitButton",
+      "description": "Form submission with locked action semantics"
+    },
+    {
+      "name": "DestructiveButton",
+      "description": "Destructive action with explicit intent"
+    },
+    {
+      "name": "LinkButton",
+      "description": "Button styling with honest link semantics"
+    },
+    {
+      "name": "IconButton",
+      "description": "Compact icon action with a required accessible name"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Button"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonAction"
+        },
+        {
+          "kind": "type",
+          "name": "ButtonProps"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonSize"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonVariant"
+        },
+        {
+          "kind": "component",
+          "name": "CancelButton"
+        },
+        {
+          "kind": "type",
+          "name": "CancelButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CloseButton"
+        },
+        {
+          "kind": "type",
+          "name": "CloseButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "ConfirmButton"
+        },
+        {
+          "kind": "type",
+          "name": "ConfirmButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CopyButton"
+        },
+        {
+          "kind": "type",
+          "name": "CopyButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CreateButton"
+        },
+        {
+          "kind": "type",
+          "name": "CreateButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DestructiveButton"
+        },
+        {
+          "kind": "type",
+          "name": "DestructiveButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DownloadButton"
+        },
+        {
+          "kind": "type",
+          "name": "DownloadButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DropdownButton"
+        },
+        {
+          "kind": "type",
+          "name": "DropdownButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "EditButton"
+        },
+        {
+          "kind": "type",
+          "name": "EditButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "FilterButton"
+        },
+        {
+          "kind": "type",
+          "name": "FilterButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "IconButton"
+        },
+        {
+          "kind": "type",
+          "name": "IconButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "LinkButton"
+        },
+        {
+          "kind": "type",
+          "name": "LinkButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "PrimaryButton"
+        },
+        {
+          "kind": "type",
+          "name": "PrimaryButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "RefreshButton"
+        },
+        {
+          "kind": "type",
+          "name": "RefreshButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SaveButton"
+        },
+        {
+          "kind": "type",
+          "name": "SaveButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SearchButton"
+        },
+        {
+          "kind": "type",
+          "name": "SearchButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SecondaryButton"
+        },
+        {
+          "kind": "type",
+          "name": "SecondaryButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SortButton"
+        },
+        {
+          "kind": "type",
+          "name": "SortButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SubmitButton"
+        },
+        {
+          "kind": "type",
+          "name": "SubmitButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SuccessButton"
+        },
+        {
+          "kind": "type",
+          "name": "SuccessButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "TextButton"
+        },
+        {
+          "kind": "type",
+          "name": "TextButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "UploadButton"
+        },
+        {
+          "kind": "type",
+          "name": "UploadButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "VerifyButton"
+        },
+        {
+          "kind": "type",
+          "name": "VerifyButtonProps"
+        }
+      ],
+      "example": "import { Button, ButtonVariant } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <>\n      <Button>Label →</Button>\n      <Button variant={ButtonVariant.secondary}>Label →</Button>\n      <Button variant={ButtonVariant.text}>Label →</Button>\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Button"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonAction"
+        },
+        {
+          "kind": "type",
+          "name": "ButtonProps"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonSize"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonVariant"
+        },
+        {
+          "kind": "component",
+          "name": "CancelButton"
+        },
+        {
+          "kind": "type",
+          "name": "CancelButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CloseButton"
+        },
+        {
+          "kind": "type",
+          "name": "CloseButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "ConfirmButton"
+        },
+        {
+          "kind": "type",
+          "name": "ConfirmButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CopyButton"
+        },
+        {
+          "kind": "type",
+          "name": "CopyButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CreateButton"
+        },
+        {
+          "kind": "type",
+          "name": "CreateButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DestructiveButton"
+        },
+        {
+          "kind": "type",
+          "name": "DestructiveButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DownloadButton"
+        },
+        {
+          "kind": "type",
+          "name": "DownloadButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DropdownButton"
+        },
+        {
+          "kind": "type",
+          "name": "DropdownButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "EditButton"
+        },
+        {
+          "kind": "type",
+          "name": "EditButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "FilterButton"
+        },
+        {
+          "kind": "type",
+          "name": "FilterButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "IconButton"
+        },
+        {
+          "kind": "type",
+          "name": "IconButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "LinkButton"
+        },
+        {
+          "kind": "type",
+          "name": "LinkButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "PrimaryButton"
+        },
+        {
+          "kind": "type",
+          "name": "PrimaryButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "RefreshButton"
+        },
+        {
+          "kind": "type",
+          "name": "RefreshButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SaveButton"
+        },
+        {
+          "kind": "type",
+          "name": "SaveButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SearchButton"
+        },
+        {
+          "kind": "type",
+          "name": "SearchButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SecondaryButton"
+        },
+        {
+          "kind": "type",
+          "name": "SecondaryButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SortButton"
+        },
+        {
+          "kind": "type",
+          "name": "SortButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SubmitButton"
+        },
+        {
+          "kind": "type",
+          "name": "SubmitButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SuccessButton"
+        },
+        {
+          "kind": "type",
+          "name": "SuccessButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "TextButton"
+        },
+        {
+          "kind": "type",
+          "name": "TextButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "UploadButton"
+        },
+        {
+          "kind": "type",
+          "name": "UploadButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "VerifyButton"
+        },
+        {
+          "kind": "type",
+          "name": "VerifyButtonProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { Button } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Button>Label →</Button>\n  <Button variant=\"secondary\">Label →</Button>\n  <Button variant=\"text\">Label →</Button>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Button"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonAction"
+        },
+        {
+          "kind": "type",
+          "name": "ButtonProps"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonSize"
+        },
+        {
+          "kind": "enum",
+          "name": "ButtonVariant"
+        },
+        {
+          "kind": "component",
+          "name": "CancelButton"
+        },
+        {
+          "kind": "type",
+          "name": "CancelButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CloseButton"
+        },
+        {
+          "kind": "type",
+          "name": "CloseButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "ConfirmButton"
+        },
+        {
+          "kind": "type",
+          "name": "ConfirmButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CopyButton"
+        },
+        {
+          "kind": "type",
+          "name": "CopyButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "CreateButton"
+        },
+        {
+          "kind": "type",
+          "name": "CreateButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DestructiveButton"
+        },
+        {
+          "kind": "type",
+          "name": "DestructiveButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DownloadButton"
+        },
+        {
+          "kind": "type",
+          "name": "DownloadButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "DropdownButton"
+        },
+        {
+          "kind": "type",
+          "name": "DropdownButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "EditButton"
+        },
+        {
+          "kind": "type",
+          "name": "EditButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "FilterButton"
+        },
+        {
+          "kind": "type",
+          "name": "FilterButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "IconButton"
+        },
+        {
+          "kind": "type",
+          "name": "IconButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "LinkButton"
+        },
+        {
+          "kind": "type",
+          "name": "LinkButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "PrimaryButton"
+        },
+        {
+          "kind": "type",
+          "name": "PrimaryButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "RefreshButton"
+        },
+        {
+          "kind": "type",
+          "name": "RefreshButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SaveButton"
+        },
+        {
+          "kind": "type",
+          "name": "SaveButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SearchButton"
+        },
+        {
+          "kind": "type",
+          "name": "SearchButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SecondaryButton"
+        },
+        {
+          "kind": "type",
+          "name": "SecondaryButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SortButton"
+        },
+        {
+          "kind": "type",
+          "name": "SortButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SubmitButton"
+        },
+        {
+          "kind": "type",
+          "name": "SubmitButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "SuccessButton"
+        },
+        {
+          "kind": "type",
+          "name": "SuccessButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "TextButton"
+        },
+        {
+          "kind": "type",
+          "name": "TextButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "UploadButton"
+        },
+        {
+          "kind": "type",
+          "name": "UploadButtonProps"
+        },
+        {
+          "kind": "component",
+          "name": "VerifyButton"
+        },
+        {
+          "kind": "type",
+          "name": "VerifyButtonProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Button } from \"@marwes-ui/svelte\"\n</script>\n\n<Button>Label →</Button>\n<Button variant=\"secondary\">Label →</Button>\n<Button variant=\"text\">Label →</Button>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Provide a truthful accessible name and preserve Marwes focus indicators.",
+      "title": "Accessible action names"
+    },
+    {
+      "description": "Verify keyboard behavior and screen-reader output in the finished product flow.",
+      "title": "Keyboard and screen-reader review"
+    },
+    {
+      "description": "Give every icon-only control an accessible name through its public naming prop.",
+      "title": "Icon-only controls"
+    },
+    {
+      "description": "Product-level choice between navigation links and action buttons.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Cases where a plain inline text link is the more honest UI than a button-family surface.",
+      "title": "Manual review 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Button uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/button/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

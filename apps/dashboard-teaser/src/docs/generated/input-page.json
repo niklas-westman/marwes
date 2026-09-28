@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 1,
+  "family": "input",
+  "title": "Input",
+  "summary": "Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.",
+  "useWhen": [
+    "The UI needs text-like data entry with shared label, helper, error, and validation patterns.",
+    "The product flow should benefit from purpose-level field wrappers such as SearchField, PasswordField, or DropdownField.",
+    "The implementation should stay aligned across React, Vue, and Svelte through shared field helpers and contracts."
+  ],
+  "avoidWhen": [
+    "A different family such as checkbox, radio, or switch is the more honest control type.",
+    "A custom dropdown visual is being chosen without testing the Marwes-default interaction path and native fallback behavior.",
+    "The team is not prepared to manually review rich-text editing behavior in real browser and assistive-technology combinations."
+  ],
+  "recommendationDescription": "Purpose-first fields cover common text-entry and selection use cases.",
+  "recommendedComponents": [
+    {
+      "name": "InputField",
+      "description": "Base text input with validation"
+    },
+    {
+      "name": "EmailField",
+      "description": "Email input with semantic browser attributes"
+    },
+    {
+      "name": "PasswordField",
+      "description": "Password input with visibility toggle"
+    },
+    {
+      "name": "SearchField",
+      "description": "Search input with clear action"
+    },
+    {
+      "name": "SelectField",
+      "description": "Dropdown select with native feel"
+    },
+    {
+      "name": "TextareaField",
+      "description": "Multi-line text input"
+    },
+    {
+      "name": "InputOtpField",
+      "description": "One-time passcode input"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "CurrencyField"
+        },
+        {
+          "kind": "type",
+          "name": "CurrencyFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "DateOfBirthField"
+        },
+        {
+          "kind": "type",
+          "name": "DateOfBirthFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "DropdownField"
+        },
+        {
+          "kind": "type",
+          "name": "DropdownFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "EmailField"
+        },
+        {
+          "kind": "type",
+          "name": "EmailFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "InputField"
+        },
+        {
+          "kind": "type",
+          "name": "InputFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "InputOtpField"
+        },
+        {
+          "kind": "type",
+          "name": "InputOtpFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "PasswordField"
+        },
+        {
+          "kind": "type",
+          "name": "PasswordFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "PhoneField"
+        },
+        {
+          "kind": "type",
+          "name": "PhoneFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "RichTextField"
+        },
+        {
+          "kind": "type",
+          "name": "RichTextFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "SearchField"
+        },
+        {
+          "kind": "type",
+          "name": "SearchFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SelectAppearance"
+        },
+        {
+          "kind": "component",
+          "name": "SelectField"
+        },
+        {
+          "kind": "type",
+          "name": "SelectFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SelectFieldVariant"
+        },
+        {
+          "kind": "type",
+          "name": "SelectOption"
+        },
+        {
+          "kind": "component",
+          "name": "TextareaField"
+        },
+        {
+          "kind": "type",
+          "name": "TextareaFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "URLField"
+        },
+        {
+          "kind": "type",
+          "name": "URLFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "ZipCodeField"
+        },
+        {
+          "kind": "type",
+          "name": "ZipCodeFieldProps"
+        }
+      ],
+      "example": "import { CurrencyField, EmailField, PhoneField } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [amount, setAmount] = useState(\"\")\n  const [email, setEmail] = useState(\"\")\n  const [phone, setPhone] = useState(\"\")\n\n  return (\n    <>\n      <CurrencyField\n        label=\"Amount\"\n        currency=\"USD\"\n        input={{ placeholder: \"0.00\", value: amount, onValueChange: setAmount }}\n      />\n      <EmailField\n        label=\"Email\"\n        input={{ placeholder: \"you@example.com\", value: email, onValueChange: setEmail }}\n      />\n      <PhoneField\n        label=\"Phone\"\n        input={{ placeholder: \"+1 (555) 000-0000\", value: phone, onValueChange: setPhone }}\n      />\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "CurrencyField"
+        },
+        {
+          "kind": "type",
+          "name": "CurrencyFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "DateOfBirthField"
+        },
+        {
+          "kind": "type",
+          "name": "DateOfBirthFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "DropdownField"
+        },
+        {
+          "kind": "type",
+          "name": "DropdownFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "EmailField"
+        },
+        {
+          "kind": "type",
+          "name": "EmailFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "InputField"
+        },
+        {
+          "kind": "type",
+          "name": "InputFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "InputOtpField"
+        },
+        {
+          "kind": "type",
+          "name": "InputOtpFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "PasswordField"
+        },
+        {
+          "kind": "type",
+          "name": "PasswordFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "PhoneField"
+        },
+        {
+          "kind": "type",
+          "name": "PhoneFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "RichTextField"
+        },
+        {
+          "kind": "type",
+          "name": "RichTextFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "SearchField"
+        },
+        {
+          "kind": "type",
+          "name": "SearchFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SelectAppearance"
+        },
+        {
+          "kind": "component",
+          "name": "SelectField"
+        },
+        {
+          "kind": "type",
+          "name": "SelectFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SelectFieldVariant"
+        },
+        {
+          "kind": "type",
+          "name": "SelectOption"
+        },
+        {
+          "kind": "component",
+          "name": "TextareaField"
+        },
+        {
+          "kind": "type",
+          "name": "TextareaFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "URLField"
+        },
+        {
+          "kind": "type",
+          "name": "URLFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "ZipCodeField"
+        },
+        {
+          "kind": "type",
+          "name": "ZipCodeFieldProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { CurrencyField, EmailField, PhoneField } from \"@marwes-ui/vue\"\n\nconst amount = ref(\"\")\nconst email = ref(\"\")\nconst phone = ref(\"\")\n</script>\n\n<template>\n  <CurrencyField\n    v-model=\"amount\"\n    label=\"Amount\"\n    currency=\"USD\"\n    :input=\"{ placeholder: '0.00' }\"\n  />\n  <EmailField\n    v-model=\"email\"\n    label=\"Email\"\n    :input=\"{ placeholder: 'you@example.com' }\"\n  />\n  <PhoneField\n    v-model=\"phone\"\n    label=\"Phone\"\n    :input=\"{ placeholder: '+1 (555) 000-0000' }\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "CurrencyField"
+        },
+        {
+          "kind": "type",
+          "name": "CurrencyFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "DateOfBirthField"
+        },
+        {
+          "kind": "type",
+          "name": "DateOfBirthFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "DropdownField"
+        },
+        {
+          "kind": "type",
+          "name": "DropdownFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "EmailField"
+        },
+        {
+          "kind": "type",
+          "name": "EmailFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "InputField"
+        },
+        {
+          "kind": "type",
+          "name": "InputFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "InputOtpField"
+        },
+        {
+          "kind": "type",
+          "name": "InputOtpFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "PasswordField"
+        },
+        {
+          "kind": "type",
+          "name": "PasswordFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "PhoneField"
+        },
+        {
+          "kind": "type",
+          "name": "PhoneFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "RichTextField"
+        },
+        {
+          "kind": "type",
+          "name": "RichTextFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "SearchField"
+        },
+        {
+          "kind": "type",
+          "name": "SearchFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SelectAppearance"
+        },
+        {
+          "kind": "component",
+          "name": "SelectField"
+        },
+        {
+          "kind": "type",
+          "name": "SelectFieldProps"
+        },
+        {
+          "kind": "type",
+          "name": "SelectFieldVariant"
+        },
+        {
+          "kind": "type",
+          "name": "SelectOption"
+        },
+        {
+          "kind": "component",
+          "name": "TextareaField"
+        },
+        {
+          "kind": "type",
+          "name": "TextareaFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "URLField"
+        },
+        {
+          "kind": "type",
+          "name": "URLFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "ZipCodeField"
+        },
+        {
+          "kind": "type",
+          "name": "ZipCodeFieldProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { CurrencyField, EmailField, PhoneField } from \"@marwes-ui/svelte\"\n\n  let amount = $state(\"\")\n  let email = $state(\"\")\n  let phone = $state(\"\")\n</script>\n\n<CurrencyField\n  label=\"Amount\"\n  currency=\"USD\"\n  value={amount}\n  input={{\n    placeholder: \"0.00\",\n    oninput: (event: Event & { currentTarget: HTMLInputElement }) =>\n      (amount = event.currentTarget.value),\n  }}\n/>\n<EmailField\n  label=\"Email\"\n  value={email}\n  input={{\n    placeholder: \"you@example.com\",\n    oninput: (event: Event & { currentTarget: HTMLInputElement }) =>\n      (email = event.currentTarget.value),\n  }}\n/>\n<PhoneField\n  label=\"Phone\"\n  value={phone}\n  input={{\n    placeholder: \"+1 (555) 000-0000\",\n    oninput: (event: Event & { currentTarget: HTMLInputElement }) =>\n      (phone = event.currentTarget.value),\n  }}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Provide a truthful accessible name and preserve Marwes focus indicators.",
+      "title": "Accessible names"
+    },
+    {
+      "description": "Verify keyboard behavior and screen-reader output in the finished product flow.",
+      "title": "Keyboard and screen-reader review"
+    },
+    {
+      "description": "Use the public Field component so labels, helper text, errors, and invalid state stay connected.",
+      "title": "Field relationships"
+    },
+    {
+      "description": "RichTextField editing behavior in supported browser and assistive-technology combinations.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Edge-case custom dropdown interaction if the explicit custom path remains shipped.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Future design alignment when a dedicated RichTextField Figma node becomes available.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Input uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/input/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

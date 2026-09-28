@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ContextMenu — Marwes UI</title>
+    <meta name="description" content="Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling. Public imports, usage guidance, accessibility requirements, and framework references." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/components/context-menu/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>ContextMenu</h1><p>Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling.</p></header><div class="component-static-intents"><article id="what-this-family-solves"><h2>What this family solves</h2><p>Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling.</p></article><article><h2>Use when</h2><ul><li>The UI needs a compact grouped list of secondary actions.</li><li>Actions benefit from leading icons and a small menu surface.</li><li>The product already owns the trigger, popover positioning, and menu visibility state.</li></ul></article><article><h2>Avoid when</h2><ul><li>The UI needs a full popover primitive with collision-aware positioning.</li><li>The choices are form values rather than commands; use a select or dropdown field instead.</li><li>The menu would contain complex forms or long-form content rather than short actions.</li></ul></article></div><section id="recommended-components"><h2>Recommended public components</h2><p>Use ContextMenu for a list of contextual actions; position and visibility are the consumer's responsibility.</p><div class="component-static-grid"><article><h3>ContextMenu</h3><p>Inline action list the consumer composes for placement and visibility</p></article></div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid"><article data-framework-inventory="react"><h3>React — <code>@marwes-ui/react</code></h3><h4>Component</h4><p><code>ContextMenu</code></p><h4>Types</h4><p><code>ContextMenuActionItem</code>, <code>ContextMenuDividerItem</code>, <code>ContextMenuEntry</code>, <code>ContextMenuProps</code></p></article><article data-framework-inventory="vue"><h3>Vue — <code>@marwes-ui/vue</code></h3><h4>Component</h4><p><code>ContextMenu</code></p><h4>Types</h4><p><code>ContextMenuActionItem</code>, <code>ContextMenuDividerItem</code>, <code>ContextMenuEntry</code>, <code>ContextMenuProps</code></p></article><article data-framework-inventory="svelte"><h3>Svelte — <code>@marwes-ui/svelte</code></h3><h4>Component</h4><p><code>ContextMenu</code></p><h4>Types</h4><p><code>ContextMenuActionItem</code>, <code>ContextMenuEntry</code>, <code>ContextMenuProps</code></p></article></div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p><article><h3>React</h3><pre data-language="tsx"><code>import { ContextMenu, IconName } from &quot;@marwes-ui/react&quot;
+
+export function Example() {
+  return (
+    &lt;ContextMenu
+      ariaLabel=&quot;File actions&quot;
+      items={[
+        { value: &quot;edit&quot;, label: &quot;Edit&quot;, icon: IconName.Edit },
+        { value: &quot;preview&quot;, label: &quot;Preview&quot;, icon: IconName.Eye },
+        { value: &quot;download&quot;, label: &quot;Download&quot;, icon: IconName.Download },
+        { kind: &quot;divider&quot; },
+        { value: &quot;bookmark&quot;, label: &quot;Bookmark&quot;, icon: IconName.Bookmark },
+        { value: &quot;report&quot;, label: &quot;Report&quot;, icon: IconName.Flag },
+        { kind: &quot;divider&quot; },
+        { value: &quot;delete&quot;, label: &quot;Delete&quot;, icon: IconName.Trash, destructive: true },
+      ]}
+    /&gt;
+  )
+}</code></pre></article><article><h3>Vue</h3><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { ContextMenu, IconName } from &quot;@marwes-ui/vue&quot;
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;ContextMenu
+    aria-label=&quot;File actions&quot;
+    :items=&quot;[
+      { value: 'edit', label: 'Edit', icon: IconName.Edit },
+      { value: 'preview', label: 'Preview', icon: IconName.Eye },
+      { value: 'download', label: 'Download', icon: IconName.Download },
+      { kind: 'divider' },
+      { value: 'bookmark', label: 'Bookmark', icon: IconName.Bookmark },
+      { value: 'report', label: 'Report', icon: IconName.Flag },
+      { kind: 'divider' },
+      { value: 'delete', label: 'Delete', icon: IconName.Trash, destructive: true },
+    ]&quot;
+  /&gt;
+&lt;/template&gt;</code></pre></article><article><h3>Svelte</h3><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import { ContextMenu, IconName } from &quot;@marwes-ui/svelte&quot;
+&lt;/script&gt;
+
+&lt;ContextMenu
+  ariaLabel=&quot;File actions&quot;
+  items={[
+    { value: &quot;edit&quot;, label: &quot;Edit&quot;, icon: IconName.Edit },
+    { value: &quot;preview&quot;, label: &quot;Preview&quot;, icon: IconName.Eye },
+    { value: &quot;download&quot;, label: &quot;Download&quot;, icon: IconName.Download },
+    { kind: &quot;divider&quot; },
+    { value: &quot;bookmark&quot;, label: &quot;Bookmark&quot;, icon: IconName.Bookmark },
+    { value: &quot;report&quot;, label: &quot;Report&quot;, icon: IconName.Flag },
+    { kind: &quot;divider&quot; },
+    { value: &quot;delete&quot;, label: &quot;Delete&quot;, icon: IconName.Trash, destructive: true },
+  ]}
+/&gt;</code></pre></article></section><section id="accessibility"><h2>Accessibility requirements</h2><ul><li><strong>Consumer-composed interaction:</strong> Compose real focus management, outside-click dismissal, and positioning around this primitive.</li><li><strong>Destructive action distinction:</strong> Give every destructive action an explicit visual and semantic distinction from safe actions.</li><li><strong>Focus and escape review:</strong> Test focus entry, focus return, dismissal, and escape-key behavior in context.</li><li><strong>Manual review boundary:</strong> End-to-end product composition where a trigger opens the menu and returns focus after close.</li><li><strong>Manual review 2:</strong> Keyboard behavior for any future managed popover/menu-button composition.</li><li><strong>Manual review 3:</strong> Visual review against the light and dark Figma context-menu frames.</li></ul></section><section id="theming"><h2>Theming</h2><p>Context Menu uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet. See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul><li><a href="https://storybook-react.marwes.io/latest/">React Storybook</a> — Explore React variants</li><li><a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a> — Explore Vue variants</li><li><a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a> — Explore Svelte variants</li><li><a href="https://www.npmjs.com/package/@marwes-ui/react">React npm package</a> — Install @marwes-ui/react</li><li><a href="https://www.npmjs.com/package/@marwes-ui/vue">Vue npm package</a> — Install @marwes-ui/vue</li><li><a href="https://www.npmjs.com/package/@marwes-ui/svelte">Svelte npm package</a> — Install @marwes-ui/svelte</li><li><a href="https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/context-menu/README.md">Source and registry evidence</a> — Review the canonical family sources</li><li><a href="/ai/v1/public-api.json">Public API inventory</a> — Inspect the complete machine-readable API</li><li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a> — Get help or suggest a change</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-this-family-solves">What this family solves</a><a href="#recommended-components">Recommended components</a><a href="#public-imports">Public imports</a><a href="#examples">Examples</a><a href="#accessibility">Accessibility</a><a href="#theming">Theming</a><a href="#resources">Resources</a></nav></aside>
+      </div>
+    </div>
+    <script id="component-docs-model" type="application/json">{"schemaVersion":1,"family":"context-menu","title":"ContextMenu","summary":"Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling.","useWhen":["The UI needs a compact grouped list of secondary actions.","Actions benefit from leading icons and a small menu surface.","The product already owns the trigger, popover positioning, and menu visibility state."],"avoidWhen":["The UI needs a full popover primitive with collision-aware positioning.","The choices are form values rather than commands; use a select or dropdown field instead.","The menu would contain complex forms or long-form content rather than short actions."],"recommendationDescription":"Use ContextMenu for a list of contextual actions; position and visibility are the consumer's responsibility.","recommendedComponents":[{"name":"ContextMenu","description":"Inline action list the consumer composes for placement and visibility"}],"frameworks":[{"framework":"react","packageName":"@marwes-ui/react","exports":[{"kind":"component","name":"ContextMenu"},{"kind":"type","name":"ContextMenuActionItem"},{"kind":"type","name":"ContextMenuDividerItem"},{"kind":"type","name":"ContextMenuEntry"},{"kind":"type","name":"ContextMenuProps"}],"example":"import { ContextMenu, IconName } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    \u003cContextMenu\n      ariaLabel=\"File actions\"\n      items={[\n        { value: \"edit\", label: \"Edit\", icon: IconName.Edit },\n        { value: \"preview\", label: \"Preview\", icon: IconName.Eye },\n        { value: \"download\", label: \"Download\", icon: IconName.Download },\n        { kind: \"divider\" },\n        { value: \"bookmark\", label: \"Bookmark\", icon: IconName.Bookmark },\n        { value: \"report\", label: \"Report\", icon: IconName.Flag },\n        { kind: \"divider\" },\n        { value: \"delete\", label: \"Delete\", icon: IconName.Trash, destructive: true },\n      ]}\n    />\n  )\n}"},{"framework":"vue","packageName":"@marwes-ui/vue","exports":[{"kind":"component","name":"ContextMenu"},{"kind":"type","name":"ContextMenuActionItem"},{"kind":"type","name":"ContextMenuDividerItem"},{"kind":"type","name":"ContextMenuEntry"},{"kind":"type","name":"ContextMenuProps"}],"example":"\u003cscript setup lang=\"ts\">\nimport { ContextMenu, IconName } from \"@marwes-ui/vue\"\n\u003c/script>\n\n\u003ctemplate>\n  \u003cContextMenu\n    aria-label=\"File actions\"\n    :items=\"[\n      { value: 'edit', label: 'Edit', icon: IconName.Edit },\n      { value: 'preview', label: 'Preview', icon: IconName.Eye },\n      { value: 'download', label: 'Download', icon: IconName.Download },\n      { kind: 'divider' },\n      { value: 'bookmark', label: 'Bookmark', icon: IconName.Bookmark },\n      { value: 'report', label: 'Report', icon: IconName.Flag },\n      { kind: 'divider' },\n      { value: 'delete', label: 'Delete', icon: IconName.Trash, destructive: true },\n    ]\"\n  />\n\u003c/template>"},{"framework":"svelte","packageName":"@marwes-ui/svelte","exports":[{"kind":"component","name":"ContextMenu"},{"kind":"type","name":"ContextMenuActionItem"},{"kind":"type","name":"ContextMenuEntry"},{"kind":"type","name":"ContextMenuProps"}],"example":"\u003cscript lang=\"ts\">\n  import { ContextMenu, IconName } from \"@marwes-ui/svelte\"\n\u003c/script>\n\n\u003cContextMenu\n  ariaLabel=\"File actions\"\n  items={[\n    { value: \"edit\", label: \"Edit\", icon: IconName.Edit },\n    { value: \"preview\", label: \"Preview\", icon: IconName.Eye },\n    { value: \"download\", label: \"Download\", icon: IconName.Download },\n    { kind: \"divider\" },\n    { value: \"bookmark\", label: \"Bookmark\", icon: IconName.Bookmark },\n    { value: \"report\", label: \"Report\", icon: IconName.Flag },\n    { kind: \"divider\" },\n    { value: \"delete\", label: \"Delete\", icon: IconName.Trash, destructive: true },\n  ]}\n/>"}],"accessibility":[{"description":"Compose real focus management, outside-click dismissal, and positioning around this primitive.","title":"Consumer-composed interaction"},{"description":"Give every destructive action an explicit visual and semantic distinction from safe actions.","title":"Destructive action distinction"},{"description":"Test focus entry, focus return, dismissal, and escape-key behavior in context.","title":"Focus and escape review"},{"description":"End-to-end product composition where a trigger opens the menu and returns focus after close.","title":"Manual review boundary"},{"description":"Keyboard behavior for any future managed popover/menu-button composition.","title":"Manual review 2"},{"description":"Visual review against the light and dark Figma context-menu frames.","title":"Manual review 3"}],"sections":[{"id":"what-this-family-solves","label":"What this family solves"},{"id":"recommended-components","label":"Recommended components"},{"id":"public-imports","label":"Public imports"},{"id":"examples","label":"Examples"},{"id":"accessibility","label":"Accessibility"},{"id":"theming","label":"Theming"},{"id":"resources","label":"Resources"}],"theming":"Context Menu uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.","resources":[{"title":"React Storybook","description":"Explore React variants","href":"https://storybook-react.marwes.io/latest/","kind":"storybook"},{"title":"Vue Storybook","description":"Explore Vue variants","href":"https://storybook-vue.marwes.io/latest/","kind":"storybook"},{"title":"Svelte Storybook","description":"Explore Svelte variants","href":"https://storybook-svelte.marwes.io/latest/","kind":"storybook"},{"title":"React npm package","description":"Install @marwes-ui/react","href":"https://www.npmjs.com/package/@marwes-ui/react","kind":"npm"},{"title":"Vue npm package","description":"Install @marwes-ui/vue","href":"https://www.npmjs.com/package/@marwes-ui/vue","kind":"npm"},{"title":"Svelte npm package","description":"Install @marwes-ui/svelte","href":"https://www.npmjs.com/package/@marwes-ui/svelte","kind":"npm"},{"title":"Source and registry evidence","description":"Review the canonical family sources","href":"https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/context-menu/README.md","kind":"source"},{"title":"Public API inventory","description":"Inspect the complete machine-readable API","href":"/ai/v1/public-api.json","kind":"source"},{"title":"Report an issue","description":"Get help or suggest a change","href":"https://github.com/niklas-westman/marwes/issues/new","kind":"issue"}]}</script>
+    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+  </body>
+</html>

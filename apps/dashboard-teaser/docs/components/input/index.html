@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input — Marwes UI</title>
+    <meta name="description" content="Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text. Public imports, usage guidance, accessibility requirements, and framework references." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/components/input/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
+    <style>
+    #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
+    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
+    #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
+    #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
+    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
+    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
+    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
+    #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
+    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
+    #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
+    #root[data-static-docs] pre { max-height: 24rem; overflow: auto; padding: 1rem; border-radius: .5rem; background: #f5f5f5; }
+    #root[data-static-docs] code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    html.dark #root[data-static-docs] { background: #0f0f0f; color: #f7f7f7; color-scheme: dark; }
+    html.dark #root[data-static-docs] a { color: #ababfd; }
+    html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
+    html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
+    html.dark #root[data-static-docs] pre { background: #191919; }
+    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
+    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+  </style>
+  </head>
+  <body style="margin:0">
+    <div id="root" data-static-docs>
+      <a class="component-static-skip" href="#main-content">Skip to main content</a>
+      <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+      <div class="component-static-layout">
+        <main id="main-content"><header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>Input</h1><p>Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.</p></header><div class="component-static-intents"><article id="what-this-family-solves"><h2>What this family solves</h2><p>Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.</p></article><article><h2>Use when</h2><ul><li>The UI needs text-like data entry with shared label, helper, error, and validation patterns.</li><li>The product flow should benefit from purpose-level field wrappers such as SearchField, PasswordField, or DropdownField.</li><li>The implementation should stay aligned across React, Vue, and Svelte through shared field helpers and contracts.</li></ul></article><article><h2>Avoid when</h2><ul><li>A different family such as checkbox, radio, or switch is the more honest control type.</li><li>A custom dropdown visual is being chosen without testing the Marwes-default interaction path and native fallback behavior.</li><li>The team is not prepared to manually review rich-text editing behavior in real browser and assistive-technology combinations.</li></ul></article></div><section id="recommended-components"><h2>Recommended public components</h2><p>Purpose-first fields cover common text-entry and selection use cases.</p><div class="component-static-grid"><article><h3>InputField</h3><p>Base text input with validation</p></article><article><h3>EmailField</h3><p>Email input with semantic browser attributes</p></article><article><h3>PasswordField</h3><p>Password input with visibility toggle</p></article><article><h3>SearchField</h3><p>Search input with clear action</p></article><article><h3>SelectField</h3><p>Dropdown select with native feel</p></article><article><h3>TextareaField</h3><p>Multi-line text input</p></article><article><h3>InputOtpField</h3><p>One-time passcode input</p></article></div></section><section id="public-imports"><h2>Public imports</h2><p>Choose an adapter in the verified examples. The inventory below reflects each framework package exactly.</p><div class="component-static-grid"><article data-framework-inventory="react"><h3>React — <code>@marwes-ui/react</code></h3><h4>Components</h4><p><code>CurrencyField</code>, <code>DateOfBirthField</code>, <code>DropdownField</code>, <code>EmailField</code>, <code>InputField</code>, <code>InputOtpField</code>, <code>PasswordField</code>, <code>PhoneField</code>, <code>RichTextField</code>, <code>SearchField</code>, <code>SelectField</code>, <code>TextareaField</code>, <code>URLField</code>, <code>ZipCodeField</code></p><h4>Types</h4><p><code>CurrencyFieldProps</code>, <code>DateOfBirthFieldProps</code>, <code>DropdownFieldProps</code>, <code>EmailFieldProps</code>, <code>InputFieldProps</code>, <code>InputOtpFieldProps</code>, <code>PasswordFieldProps</code>, <code>PhoneFieldProps</code>, <code>RichTextFieldProps</code>, <code>SearchFieldProps</code>, <code>SelectAppearance</code>, <code>SelectFieldProps</code>, <code>SelectFieldVariant</code>, <code>SelectOption</code>, <code>TextareaFieldProps</code>, <code>URLFieldProps</code>, <code>ZipCodeFieldProps</code></p></article><article data-framework-inventory="vue"><h3>Vue — <code>@marwes-ui/vue</code></h3><h4>Components</h4><p><code>CurrencyField</code>, <code>DateOfBirthField</code>, <code>DropdownField</code>, <code>EmailField</code>, <code>InputField</code>, <code>InputOtpField</code>, <code>PasswordField</code>, <code>PhoneField</code>, <code>RichTextField</code>, <code>SearchField</code>, <code>SelectField</code>, <code>TextareaField</code>, <code>URLField</code>, <code>ZipCodeField</code></p><h4>Types</h4><p><code>CurrencyFieldProps</code>, <code>DateOfBirthFieldProps</code>, <code>DropdownFieldProps</code>, <code>EmailFieldProps</code>, <code>InputFieldProps</code>, <code>InputOtpFieldProps</code>, <code>PasswordFieldProps</code>, <code>PhoneFieldProps</code>, <code>RichTextFieldProps</code>, <code>SearchFieldProps</code>, <code>SelectAppearance</code>, <code>SelectFieldProps</code>, <code>SelectFieldVariant</code>, <code>SelectOption</code>, <code>TextareaFieldProps</code>, <code>URLFieldProps</code>, <code>ZipCodeFieldProps</code></p></article><article data-framework-inventory="svelte"><h3>Svelte — <code>@marwes-ui/svelte</code></h3><h4>Components</h4><p><code>CurrencyField</code>, <code>DateOfBirthField</code>, <code>DropdownField</code>, <code>EmailField</code>, <code>InputField</code>, <code>InputOtpField</code>, <code>PasswordField</code>, <code>PhoneField</code>, <code>RichTextField</code>, <code>SearchField</code>, <code>SelectField</code>, <code>TextareaField</code>, <code>URLField</code>, <code>ZipCodeField</code></p><h4>Types</h4><p><code>CurrencyFieldProps</code>, <code>DateOfBirthFieldProps</code>, <code>DropdownFieldProps</code>, <code>EmailFieldProps</code>, <code>InputFieldProps</code>, <code>InputOtpFieldProps</code>, <code>PasswordFieldProps</code>, <code>PhoneFieldProps</code>, <code>RichTextFieldProps</code>, <code>SearchFieldProps</code>, <code>SelectAppearance</code>, <code>SelectFieldProps</code>, <code>SelectFieldVariant</code>, <code>SelectOption</code>, <code>TextareaFieldProps</code>, <code>URLFieldProps</code>, <code>ZipCodeFieldProps</code></p></article></div></section><section id="examples"><h2>Verified minimal examples</h2><p>These examples come from the same fixtures verified by the repository checks.</p><article><h3>React</h3><pre data-language="tsx"><code>import { CurrencyField, EmailField, PhoneField } from &quot;@marwes-ui/react&quot;
+import { useState } from &quot;react&quot;
+
+export function Example() {
+  const [amount, setAmount] = useState(&quot;&quot;)
+  const [email, setEmail] = useState(&quot;&quot;)
+  const [phone, setPhone] = useState(&quot;&quot;)
+
+  return (
+    &lt;&gt;
+      &lt;CurrencyField
+        label=&quot;Amount&quot;
+        currency=&quot;USD&quot;
+        input={{ placeholder: &quot;0.00&quot;, value: amount, onValueChange: setAmount }}
+      /&gt;
+      &lt;EmailField
+        label=&quot;Email&quot;
+        input={{ placeholder: &quot;you@example.com&quot;, value: email, onValueChange: setEmail }}
+      /&gt;
+      &lt;PhoneField
+        label=&quot;Phone&quot;
+        input={{ placeholder: &quot;+1 (555) 000-0000&quot;, value: phone, onValueChange: setPhone }}
+      /&gt;
+    &lt;/&gt;
+  )
+}</code></pre></article><article><h3>Vue</h3><pre data-language="vue"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { ref } from &quot;vue&quot;
+import { CurrencyField, EmailField, PhoneField } from &quot;@marwes-ui/vue&quot;
+
+const amount = ref(&quot;&quot;)
+const email = ref(&quot;&quot;)
+const phone = ref(&quot;&quot;)
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;CurrencyField
+    v-model=&quot;amount&quot;
+    label=&quot;Amount&quot;
+    currency=&quot;USD&quot;
+    :input=&quot;{ placeholder: '0.00' }&quot;
+  /&gt;
+  &lt;EmailField
+    v-model=&quot;email&quot;
+    label=&quot;Email&quot;
+    :input=&quot;{ placeholder: 'you@example.com' }&quot;
+  /&gt;
+  &lt;PhoneField
+    v-model=&quot;phone&quot;
+    label=&quot;Phone&quot;
+    :input=&quot;{ placeholder: '+1 (555) 000-0000' }&quot;
+  /&gt;
+&lt;/template&gt;</code></pre></article><article><h3>Svelte</h3><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import { CurrencyField, EmailField, PhoneField } from &quot;@marwes-ui/svelte&quot;
+
+  let amount = $state(&quot;&quot;)
+  let email = $state(&quot;&quot;)
+  let phone = $state(&quot;&quot;)
+&lt;/script&gt;
+
+&lt;CurrencyField
+  label=&quot;Amount&quot;
+  currency=&quot;USD&quot;
+  value={amount}
+  input={{
+    placeholder: &quot;0.00&quot;,
+    oninput: (event: Event &amp; { currentTarget: HTMLInputElement }) =&gt;
+      (amount = event.currentTarget.value),
+  }}
+/&gt;
+&lt;EmailField
+  label=&quot;Email&quot;
+  value={email}
+  input={{
+    placeholder: &quot;you@example.com&quot;,
+    oninput: (event: Event &amp; { currentTarget: HTMLInputElement }) =&gt;
+      (email = event.currentTarget.value),
+  }}
+/&gt;
+&lt;PhoneField
+  label=&quot;Phone&quot;
+  value={phone}
+  input={{
+    placeholder: &quot;+1 (555) 000-0000&quot;,
+    oninput: (event: Event &amp; { currentTarget: HTMLInputElement }) =&gt;
+      (phone = event.currentTarget.value),
+  }}
+/&gt;</code></pre></article></section><section id="accessibility"><h2>Accessibility requirements</h2><ul><li><strong>Accessible names:</strong> Provide a truthful accessible name and preserve Marwes focus indicators.</li><li><strong>Keyboard and screen-reader review:</strong> Verify keyboard behavior and screen-reader output in the finished product flow.</li><li><strong>Field relationships:</strong> Use the public Field component so labels, helper text, errors, and invalid state stay connected.</li><li><strong>Manual review boundary:</strong> RichTextField editing behavior in supported browser and assistive-technology combinations.</li><li><strong>Manual review 2:</strong> Edge-case custom dropdown interaction if the explicit custom path remains shipped.</li><li><strong>Manual review 3:</strong> Future design alignment when a dedicated RichTextField Figma node becomes available.</li></ul></section><section id="theming"><h2>Theming</h2><p>Input uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet. See the <a href="/docs/theming/">theming guide</a> for configuration and token details.</p></section><section id="resources"><h2>Resources</h2><ul><li><a href="https://storybook-react.marwes.io/latest/">React Storybook</a> — Explore React variants</li><li><a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a> — Explore Vue variants</li><li><a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a> — Explore Svelte variants</li><li><a href="https://www.npmjs.com/package/@marwes-ui/react">React npm package</a> — Install @marwes-ui/react</li><li><a href="https://www.npmjs.com/package/@marwes-ui/vue">Vue npm package</a> — Install @marwes-ui/vue</li><li><a href="https://www.npmjs.com/package/@marwes-ui/svelte">Svelte npm package</a> — Install @marwes-ui/svelte</li><li><a href="https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/input/README.md">Source and registry evidence</a> — Review the canonical family sources</li><li><a href="/ai/v1/public-api.json">Public API inventory</a> — Inspect the complete machine-readable API</li><li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a> — Get help or suggest a change</li></ul></section></main>
+        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong><a href="#what-this-family-solves">What this family solves</a><a href="#recommended-components">Recommended components</a><a href="#public-imports">Public imports</a><a href="#examples">Examples</a><a href="#accessibility">Accessibility</a><a href="#theming">Theming</a><a href="#resources">Resources</a></nav></aside>
+      </div>
+    </div>
+    <script id="component-docs-model" type="application/json">{"schemaVersion":1,"family":"input","title":"Input","summary":"Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.","useWhen":["The UI needs text-like data entry with shared label, helper, error, and validation patterns.","The product flow should benefit from purpose-level field wrappers such as SearchField, PasswordField, or DropdownField.","The implementation should stay aligned across React, Vue, and Svelte through shared field helpers and contracts."],"avoidWhen":["A different family such as checkbox, radio, or switch is the more honest control type.","A custom dropdown visual is being chosen without testing the Marwes-default interaction path and native fallback behavior.","The team is not prepared to manually review rich-text editing behavior in real browser and assistive-technology combinations."],"recommendationDescription":"Purpose-first fields cover common text-entry and selection use cases.","recommendedComponents":[{"name":"InputField","description":"Base text input with validation"},{"name":"EmailField","description":"Email input with semantic browser attributes"},{"name":"PasswordField","description":"Password input with visibility toggle"},{"name":"SearchField","description":"Search input with clear action"},{"name":"SelectField","description":"Dropdown select with native feel"},{"name":"TextareaField","description":"Multi-line text input"},{"name":"InputOtpField","description":"One-time passcode input"}],"frameworks":[{"framework":"react","packageName":"@marwes-ui/react","exports":[{"kind":"component","name":"CurrencyField"},{"kind":"type","name":"CurrencyFieldProps"},{"kind":"component","name":"DateOfBirthField"},{"kind":"type","name":"DateOfBirthFieldProps"},{"kind":"component","name":"DropdownField"},{"kind":"type","name":"DropdownFieldProps"},{"kind":"component","name":"EmailField"},{"kind":"type","name":"EmailFieldProps"},{"kind":"component","name":"InputField"},{"kind":"type","name":"InputFieldProps"},{"kind":"component","name":"InputOtpField"},{"kind":"type","name":"InputOtpFieldProps"},{"kind":"component","name":"PasswordField"},{"kind":"type","name":"PasswordFieldProps"},{"kind":"component","name":"PhoneField"},{"kind":"type","name":"PhoneFieldProps"},{"kind":"component","name":"RichTextField"},{"kind":"type","name":"RichTextFieldProps"},{"kind":"component","name":"SearchField"},{"kind":"type","name":"SearchFieldProps"},{"kind":"type","name":"SelectAppearance"},{"kind":"component","name":"SelectField"},{"kind":"type","name":"SelectFieldProps"},{"kind":"type","name":"SelectFieldVariant"},{"kind":"type","name":"SelectOption"},{"kind":"component","name":"TextareaField"},{"kind":"type","name":"TextareaFieldProps"},{"kind":"component","name":"URLField"},{"kind":"type","name":"URLFieldProps"},{"kind":"component","name":"ZipCodeField"},{"kind":"type","name":"ZipCodeFieldProps"}],"example":"import { CurrencyField, EmailField, PhoneField } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [amount, setAmount] = useState(\"\")\n  const [email, setEmail] = useState(\"\")\n  const [phone, setPhone] = useState(\"\")\n\n  return (\n    \u003c>\n      \u003cCurrencyField\n        label=\"Amount\"\n        currency=\"USD\"\n        input={{ placeholder: \"0.00\", value: amount, onValueChange: setAmount }}\n      />\n      \u003cEmailField\n        label=\"Email\"\n        input={{ placeholder: \"you@example.com\", value: email, onValueChange: setEmail }}\n      />\n      \u003cPhoneField\n        label=\"Phone\"\n        input={{ placeholder: \"+1 (555) 000-0000\", value: phone, onValueChange: setPhone }}\n      />\n    \u003c/>\n  )\n}"},{"framework":"vue","packageName":"@marwes-ui/vue","exports":[{"kind":"component","name":"CurrencyField"},{"kind":"type","name":"CurrencyFieldProps"},{"kind":"component","name":"DateOfBirthField"},{"kind":"type","name":"DateOfBirthFieldProps"},{"kind":"component","name":"DropdownField"},{"kind":"type","name":"DropdownFieldProps"},{"kind":"component","name":"EmailField"},{"kind":"type","name":"EmailFieldProps"},{"kind":"component","name":"InputField"},{"kind":"type","name":"InputFieldProps"},{"kind":"component","name":"InputOtpField"},{"kind":"type","name":"InputOtpFieldProps"},{"kind":"component","name":"PasswordField"},{"kind":"type","name":"PasswordFieldProps"},{"kind":"component","name":"PhoneField"},{"kind":"type","name":"PhoneFieldProps"},{"kind":"component","name":"RichTextField"},{"kind":"type","name":"RichTextFieldProps"},{"kind":"component","name":"SearchField"},{"kind":"type","name":"SearchFieldProps"},{"kind":"type","name":"SelectAppearance"},{"kind":"component","name":"SelectField"},{"kind":"type","name":"SelectFieldProps"},{"kind":"type","name":"SelectFieldVariant"},{"kind":"type","name":"SelectOption"},{"kind":"component","name":"TextareaField"},{"kind":"type","name":"TextareaFieldProps"},{"kind":"component","name":"URLField"},{"kind":"type","name":"URLFieldProps"},{"kind":"component","name":"ZipCodeField"},{"kind":"type","name":"ZipCodeFieldProps"}],"example":"\u003cscript setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { CurrencyField, EmailField, PhoneField } from \"@marwes-ui/vue\"\n\nconst amount = ref(\"\")\nconst email = ref(\"\")\nconst phone = ref(\"\")\n\u003c/script>\n\n\u003ctemplate>\n  \u003cCurrencyField\n    v-model=\"amount\"\n    label=\"Amount\"\n    currency=\"USD\"\n    :input=\"{ placeholder: '0.00' }\"\n  />\n  \u003cEmailField\n    v-model=\"email\"\n    label=\"Email\"\n    :input=\"{ placeholder: 'you@example.com' }\"\n  />\n  \u003cPhoneField\n    v-model=\"phone\"\n    label=\"Phone\"\n    :input=\"{ placeholder: '+1 (555) 000-0000' }\"\n  />\n\u003c/template>"},{"framework":"svelte","packageName":"@marwes-ui/svelte","exports":[{"kind":"component","name":"CurrencyField"},{"kind":"type","name":"CurrencyFieldProps"},{"kind":"component","name":"DateOfBirthField"},{"kind":"type","name":"DateOfBirthFieldProps"},{"kind":"component","name":"DropdownField"},{"kind":"type","name":"DropdownFieldProps"},{"kind":"component","name":"EmailField"},{"kind":"type","name":"EmailFieldProps"},{"kind":"component","name":"InputField"},{"kind":"type","name":"InputFieldProps"},{"kind":"component","name":"InputOtpField"},{"kind":"type","name":"InputOtpFieldProps"},{"kind":"component","name":"PasswordField"},{"kind":"type","name":"PasswordFieldProps"},{"kind":"component","name":"PhoneField"},{"kind":"type","name":"PhoneFieldProps"},{"kind":"component","name":"RichTextField"},{"kind":"type","name":"RichTextFieldProps"},{"kind":"component","name":"SearchField"},{"kind":"type","name":"SearchFieldProps"},{"kind":"type","name":"SelectAppearance"},{"kind":"component","name":"SelectField"},{"kind":"type","name":"SelectFieldProps"},{"kind":"type","name":"SelectFieldVariant"},{"kind":"type","name":"SelectOption"},{"kind":"component","name":"TextareaField"},{"kind":"type","name":"TextareaFieldProps"},{"kind":"component","name":"URLField"},{"kind":"type","name":"URLFieldProps"},{"kind":"component","name":"ZipCodeField"},{"kind":"type","name":"ZipCodeFieldProps"}],"example":"\u003cscript lang=\"ts\">\n  import { CurrencyField, EmailField, PhoneField } from \"@marwes-ui/svelte\"\n\n  let amount = $state(\"\")\n  let email = $state(\"\")\n  let phone = $state(\"\")\n\u003c/script>\n\n\u003cCurrencyField\n  label=\"Amount\"\n  currency=\"USD\"\n  value={amount}\n  input={{\n    placeholder: \"0.00\",\n    oninput: (event: Event & { currentTarget: HTMLInputElement }) =>\n      (amount = event.currentTarget.value),\n  }}\n/>\n\u003cEmailField\n  label=\"Email\"\n  value={email}\n  input={{\n    placeholder: \"you@example.com\",\n    oninput: (event: Event & { currentTarget: HTMLInputElement }) =>\n      (email = event.currentTarget.value),\n  }}\n/>\n\u003cPhoneField\n  label=\"Phone\"\n  value={phone}\n  input={{\n    placeholder: \"+1 (555) 000-0000\",\n    oninput: (event: Event & { currentTarget: HTMLInputElement }) =>\n      (phone = event.currentTarget.value),\n  }}\n/>"}],"accessibility":[{"description":"Provide a truthful accessible name and preserve Marwes focus indicators.","title":"Accessible names"},{"description":"Verify keyboard behavior and screen-reader output in the finished product flow.","title":"Keyboard and screen-reader review"},{"description":"Use the public Field component so labels, helper text, errors, and invalid state stay connected.","title":"Field relationships"},{"description":"RichTextField editing behavior in supported browser and assistive-technology combinations.","title":"Manual review boundary"},{"description":"Edge-case custom dropdown interaction if the explicit custom path remains shipped.","title":"Manual review 2"},{"description":"Future design alignment when a dedicated RichTextField Figma node becomes available.","title":"Manual review 3"}],"sections":[{"id":"what-this-family-solves","label":"What this family solves"},{"id":"recommended-components","label":"Recommended components"},{"id":"public-imports","label":"Public imports"},{"id":"examples","label":"Examples"},{"id":"accessibility","label":"Accessibility"},{"id":"theming","label":"Theming"},{"id":"resources","label":"Resources"}],"theming":"Input uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.","resources":[{"title":"React Storybook","description":"Explore React variants","href":"https://storybook-react.marwes.io/latest/","kind":"storybook"},{"title":"Vue Storybook","description":"Explore Vue variants","href":"https://storybook-vue.marwes.io/latest/","kind":"storybook"},{"title":"Svelte Storybook","description":"Explore Svelte variants","href":"https://storybook-svelte.marwes.io/latest/","kind":"storybook"},{"title":"React npm package","description":"Install @marwes-ui/react","href":"https://www.npmjs.com/package/@marwes-ui/react","kind":"npm"},{"title":"Vue npm package","description":"Install @marwes-ui/vue","href":"https://www.npmjs.com/package/@marwes-ui/vue","kind":"npm"},{"title":"Svelte npm package","description":"Install @marwes-ui/svelte","href":"https://www.npmjs.com/package/@marwes-ui/svelte","kind":"npm"},{"title":"Source and registry evidence","description":"Review the canonical family sources","href":"https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/input/README.md","kind":"source"},{"title":"Public API inventory","description":"Inspect the complete machine-readable API","href":"/ai/v1/public-api.json","kind":"source"},{"title":"Report an issue","description":"Get help or suggest a change","href":"https://github.com/niklas-westman/marwes/issues/new","kind":"issue"}]}</script>
+    <script type="module" src="/src/docs/components/component-docs-main.tsx"></script>
+  </body>
+</html>

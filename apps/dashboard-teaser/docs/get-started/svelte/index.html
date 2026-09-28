@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get started with Svelte — Marwes UI</title>
+    <meta name="description" content="Install Marwes for Svelte and render your first accessible component." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/get-started/svelte/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Get started with Svelte</h1><p>Install Marwes for Svelte and render your first accessible component.</p></header>
+      <section><h2>1. Install with the official CLI</h2><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli init --adapter svelte</code></pre><p>The CLI installs <code>@marwes-ui/svelte</code>, wires the provider for supported Vite layouts, and runs diagnostics.</p></section><section><h2>2. Render a public component</h2><p>This is the same canonical fixture that the repository typechecks for Svelte.</p><pre data-language="svelte"><code>&lt;script lang=&quot;ts&quot;&gt;
+  import {
+    Button,
+    ButtonVariant,
+    CheckboxField,
+    EmailField,
+    MarwesProvider,
+    SubmitButton,
+  } from &quot;@marwes-ui/svelte&quot;
+
+  let email = $state(&quot;&quot;)
+  let subscribed = $state(false)
+&lt;/script&gt;
+
+&lt;MarwesProvider&gt;
+  &lt;EmailField
+    label=&quot;Email&quot;
+    value={email}
+    input={{
+      placeholder: &quot;you@example.com&quot;,
+      oninput: (event: Event &amp; { currentTarget: HTMLInputElement }) =&gt;
+        (email = event.currentTarget.value),
+    }}
+  /&gt;
+  &lt;CheckboxField
+    label=&quot;Send me product updates&quot;
+    bind:checked={subscribed}
+  /&gt;
+  &lt;Button variant={ButtonVariant.secondary}&gt;Preview&lt;/Button&gt;
+  &lt;SubmitButton&gt;Save&lt;/SubmitButton&gt;
+&lt;/MarwesProvider&gt;</code></pre></section><section><h2>3. Verify the app</h2><pre data-language="shell"><code>pnpm dlx @marwes-ui/cli doctor --run-build</code></pre><p>A successful doctor run confirms the adapter import, rendered provider, and production build.</p></section><aside><strong>Manual fallback:</strong> install <code>@marwes-ui/svelte</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

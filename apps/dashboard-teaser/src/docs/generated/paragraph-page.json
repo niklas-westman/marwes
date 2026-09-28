@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "family": "paragraph",
+  "title": "Paragraph",
+  "summary": "Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract.",
+  "useWhen": [
+    "The UI needs real body copy, supporting text, or longer reading content that should remain plain paragraph text.",
+    "The product wants React and Vue paragraph behavior to stay aligned through one core recipe, one shared typography preset, and one shared contract.",
+    "The layout needs explicit control over surrounding spacing while still reusing Marwes typography defaults."
+  ],
+  "avoidWhen": [
+    "The content should be a real heading, label, caption, list item, or other more specific semantic element.",
+    "The surface only needs visually styled text and cannot honestly be represented as a paragraph block.",
+    "The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current Paragraph family does not ship."
+  ],
+  "recommendationDescription": "Use Paragraph for body copy and reserve Text for shorter labels, captions, and overlines.",
+  "recommendedComponents": [
+    {
+      "name": "Paragraph",
+      "description": "Body copy at a small, medium, or large reading size"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Paragraph"
+        },
+        {
+          "kind": "type",
+          "name": "ParagraphProps"
+        }
+      ],
+      "example": "import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <>\n      <Text variant={TextVariant.display}>Display</Text>\n\n      <H1>Heading 1</H1>\n      <H2>Heading 2</H2>\n      <H3>Heading 3</H3>\n\n      <Paragraph size=\"md\">Body paragraph text.</Paragraph>\n      <Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n      <Text variant={TextVariant.label}>Label default</Text>\n      <Text variant={TextVariant.labelSmall}>Label small</Text>\n      <Text variant={TextVariant.caption}>Caption</Text>\n      <Text variant={TextVariant.overline}>Overline</Text>\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Paragraph"
+        },
+        {
+          "kind": "type",
+          "name": "ParagraphProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Text :variant=\"TextVariant.display\">Display</Text>\n\n  <H1>Heading 1</H1>\n  <H2>Heading 2</H2>\n  <H3>Heading 3</H3>\n\n  <Paragraph size=\"md\">Body paragraph text.</Paragraph>\n  <Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n  <Text :variant=\"TextVariant.label\">Label default</Text>\n  <Text :variant=\"TextVariant.labelSmall\">Label small</Text>\n  <Text :variant=\"TextVariant.caption\">Caption</Text>\n  <Text :variant=\"TextVariant.overline\">Overline</Text>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Paragraph"
+        },
+        {
+          "kind": "type",
+          "name": "ParagraphProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/svelte\"\n</script>\n\n<Text variant={TextVariant.display}>Display</Text>\n\n<H1>Heading 1</H1>\n<H2>Heading 2</H2>\n<H3>Heading 3</H3>\n\n<Paragraph size=\"md\">Body paragraph text.</Paragraph>\n<Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n<Text variant={TextVariant.label}>Label default</Text>\n<Text variant={TextVariant.labelSmall}>Label small</Text>\n<Text variant={TextVariant.caption}>Caption</Text>\n<Text variant={TextVariant.overline}>Overline</Text>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep body copy in Paragraph and reserve Text for shorter labels and captions.",
+      "title": "Paragraph vs Text usage"
+    },
+    {
+      "description": "Verify color contrast and line length stay readable at every supported size.",
+      "title": "Readability review"
+    },
+    {
+      "description": "Product-level judgment about whether Paragraph is being used for real body copy instead of replacing headings, labels, or other richer structure.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Readability review for long-form content, especially line length, spacing, and visual hierarchy in real layouts.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Whether teams use size variants for reading emphasis rather than as a shortcut for semantic structure.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Paragraph uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/paragraph/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

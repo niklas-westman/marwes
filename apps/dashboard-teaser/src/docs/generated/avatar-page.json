@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "family": "avatar",
+  "title": "Avatar",
+  "summary": "Canonical identity family with a base Avatar component, two scoped compositions, and thin semantic wrappers for profile, presence, and team contexts.",
+  "useWhen": [
+    "The UI needs a person or member identity surface with stable size, content-type, and semantic behavior.",
+    "The product flow maps clearly to ProfileAvatar, PresenceAvatar, or TeamAvatarGroup and benefits from canonical purpose metadata.",
+    "The team wants React and Vue avatar behavior to stay aligned through shared contracts and the central semantic registry."
+  ],
+  "avoidWhen": [
+    "The surface really needs an interactive profile menu, upload flow, or editable identity control rather than a static avatar family member.",
+    "The implementation cannot provide truthful alt text or aria labeling for a non-decorative identity surface.",
+    "The team expects avatar-group layouts beyond the current stacked medium pattern and overflow counter defined by the shipped family."
+  ],
+  "recommendationDescription": "Choose the purpose wrapper that matches the meaning; use Avatar as the deliberate primitive escape hatch.",
+  "recommendedComponents": [
+    {
+      "name": "ProfileAvatar",
+      "description": "A person's identity image, initials, or icon fallback"
+    },
+    {
+      "name": "PresenceAvatar",
+      "description": "An avatar with an online, away, or offline status indicator"
+    },
+    {
+      "name": "TeamAvatarGroup",
+      "description": "A compact overlapping group of members with an overflow count"
+    },
+    {
+      "name": "Avatar",
+      "description": "Base avatar for custom contexts; the deliberate escape hatch"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Avatar"
+        },
+        {
+          "kind": "component",
+          "name": "AvatarBadge"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "AvatarGroup"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarGroupItem"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarProps"
+        },
+        {
+          "kind": "enum",
+          "name": "AvatarSize"
+        },
+        {
+          "kind": "enum",
+          "name": "AvatarType"
+        },
+        {
+          "kind": "component",
+          "name": "PresenceAvatar"
+        },
+        {
+          "kind": "type",
+          "name": "PresenceAvatarProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProfileAvatar"
+        },
+        {
+          "kind": "type",
+          "name": "ProfileAvatarProps"
+        },
+        {
+          "kind": "component",
+          "name": "TeamAvatarGroup"
+        },
+        {
+          "kind": "type",
+          "name": "TeamAvatarGroupProps"
+        }
+      ],
+      "example": "import { Avatar, AvatarBadge, AvatarGroup } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <>\n      <AvatarGroup\n        items={[\n          { initials: \"MO\" },\n          { initials: \"MO\" },\n          { initials: \"MO\" },\n          { type: \"icon\", label: \"Guest member\" },\n        ]}\n        overflowCount={3}\n      />\n      <AvatarBadge initials=\"MO\" statusLabel=\"Online\" />\n      <Avatar src=\"/avatar.png\" alt=\"User\" />\n      <Avatar initials=\"MO\" size=\"small\" />\n      <Avatar type=\"icon\" label=\"User icon fallback\" />\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Avatar"
+        },
+        {
+          "kind": "component",
+          "name": "AvatarBadge"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "AvatarGroup"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarGroupItem"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarProps"
+        },
+        {
+          "kind": "enum",
+          "name": "AvatarSize"
+        },
+        {
+          "kind": "enum",
+          "name": "AvatarType"
+        },
+        {
+          "kind": "component",
+          "name": "PresenceAvatar"
+        },
+        {
+          "kind": "type",
+          "name": "PresenceAvatarProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProfileAvatar"
+        },
+        {
+          "kind": "type",
+          "name": "ProfileAvatarProps"
+        },
+        {
+          "kind": "component",
+          "name": "TeamAvatarGroup"
+        },
+        {
+          "kind": "type",
+          "name": "TeamAvatarGroupProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { Avatar, AvatarBadge, AvatarGroup } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <AvatarGroup\n    :items=\"[\n      { initials: 'MO' },\n      { initials: 'MO' },\n      { initials: 'MO' },\n      { type: 'icon', label: 'Guest member' },\n    ]\"\n    :overflow-count=\"3\"\n  />\n  <AvatarBadge initials=\"MO\" status-label=\"Online\" />\n  <Avatar src=\"/avatar.png\" alt=\"User\" />\n  <Avatar initials=\"MO\" size=\"small\" />\n  <Avatar type=\"icon\" label=\"User icon fallback\" />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Avatar"
+        },
+        {
+          "kind": "component",
+          "name": "AvatarBadge"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarBadgeProps"
+        },
+        {
+          "kind": "component",
+          "name": "AvatarGroup"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarGroupItem"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "AvatarProps"
+        },
+        {
+          "kind": "enum",
+          "name": "AvatarSize"
+        },
+        {
+          "kind": "enum",
+          "name": "AvatarType"
+        },
+        {
+          "kind": "component",
+          "name": "PresenceAvatar"
+        },
+        {
+          "kind": "type",
+          "name": "PresenceAvatarProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProfileAvatar"
+        },
+        {
+          "kind": "type",
+          "name": "ProfileAvatarProps"
+        },
+        {
+          "kind": "component",
+          "name": "TeamAvatarGroup"
+        },
+        {
+          "kind": "type",
+          "name": "TeamAvatarGroupProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Avatar, AvatarBadge, AvatarGroup } from \"@marwes-ui/svelte\"\n</script>\n\n<AvatarGroup\n  items={[\n    { initials: \"MO\" },\n    { initials: \"MO\" },\n    { initials: \"MO\" },\n    { type: \"icon\", label: \"Guest member\" },\n  ]}\n  overflowCount={3}\n/>\n<AvatarBadge initials=\"MO\" statusLabel=\"Online\" />\n<Avatar src=\"/avatar.png\" alt=\"User\" />\n<Avatar initials=\"MO\" size=\"small\" />\n<Avatar type=\"icon\" label=\"User icon fallback\" />"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Provide real alt text for photographic avatars and mark decorative fallbacks appropriately.",
+      "title": "Truthful alt text"
+    },
+    {
+      "description": "Give every status indicator on AvatarBadge a truthful statusLabel, not just a colored dot.",
+      "title": "Status labeling"
+    },
+    {
+      "description": "Product-level quality of alt text, aria labels, status labels, and overflow wording.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Dev-time warning for image avatars without alt or ariaLabel is now implemented in avatar-a11y.ts.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Any future expansion beyond the current non-interactive avatar, badge, and group scope.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Avatar uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/avatar/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}
