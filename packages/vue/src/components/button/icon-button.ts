@@ -6,12 +6,9 @@ import { Button, type ButtonProps } from "./button"
 
 export type IconButtonProps = Omit<
   ButtonProps,
-  "iconLeft" | "iconRight" | "iconOnly" | "hasVisibleText"
+  "hasVisibleText" | "iconLeft" | "iconOnly" | "iconRight"
 > & {
   icon: IconName
-  /** Accessible name — required for icon-only buttons. Prefer `label`; `ariaLabel` also accepted. */
-  label?: string
-  ariaLabel?: string
 }
 
 const iconButtonPropKeys = [
@@ -25,6 +22,7 @@ const iconButtonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "ariaLabelledBy",
   "label",
   "ariaExpanded",
   "ariaControls",
@@ -37,7 +35,7 @@ const iconButtonPropKeys = [
   "icon",
 ] as const
 
-export const IconButton = defineComponent(
+const IconButtonImplementation = defineComponent(
   (rawProps) => {
     const attrs = useAttrs()
 
@@ -69,3 +67,8 @@ export const IconButton = defineComponent(
     props: [...iconButtonPropKeys],
   },
 )
+
+/** Vue component type that preserves IconButton's public props at call sites. */
+export const IconButton = IconButtonImplementation as unknown as new () => {
+  $props: IconButtonProps
+}

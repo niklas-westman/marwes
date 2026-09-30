@@ -8,9 +8,7 @@ import {
 
 # Accordion Components
 
-Marwes provides an accordion system with three layers:
-**purpose components** for common patterns, **AccordionField** for custom item lists,
-and the raw **Accordion** atom for advanced control.
+Marwes consumers use **purpose components** for common patterns and **AccordionField** for custom item lists. The raw **Accordion** atom is internal implementation evidence.
 
 ## Recommended: Purpose Components
 
@@ -100,17 +98,7 @@ For custom accordion layouts that don't fit a purpose component:
 
 ## Low-level: Accordion (Atom)
 
-Use the raw `Accordion` atom for standalone disclosure panels:
-
-```svelte
-<script>
-  import { Accordion } from "@marwes-ui/svelte"
-</script>
-
-<Accordion title="Shipping details">
-  Orders ship within 2-3 business days.
-</Accordion>
-```
+`Accordion` is not exported from `@marwes-ui/svelte` and must not be deep-imported. Use `AccordionField` for custom items; it owns open state, group labeling, descriptions, and error wiring.
 
 ## Component Reference
 
@@ -128,7 +116,7 @@ Use the raw `Accordion` atom for standalone disclosure panels:
 
 ### Atom
 
-**`Accordion`** — Low-level disclosure panel with trigger + content
+**`Accordion`** — Internal disclosure atom shown for implementation evidence; not a consumer import.
 
 ## Story Coverage
 

@@ -15,7 +15,7 @@ import { runButtonSemanticsContract } from "../../../../../../tests/contracts/bu
 import { runButtonContract } from "../../../../../../tests/contracts/button.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Button } from "../button"
-import { IconButton } from "../icon-button"
+import { IconButton, type IconButtonProps } from "../icon-button"
 import {
   CancelButton,
   CloseButton,
@@ -204,6 +204,46 @@ describe("Vue adapter specifics: Button", () => {
     renderWithProvider(IconButton, { icon: "x", label: "Close" })
 
     expect(screen.getByRole("button", { name: /close/i })).toHaveAttribute("aria-label", "Close")
+  })
+
+  it("lets IconButton use an external accessible label", () => {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () => [
+                h("span", { id: "close-label" }, "Close"),
+                h(IconButton, { icon: "x", ariaLabelledBy: "close-label" }),
+              ],
+            })
+        },
+      }),
+    )
+
+    expect(screen.getByRole("button", { name: "Close" })).toHaveAttribute(
+      "aria-labelledby",
+      "close-label",
+    )
+  })
+
+  it("keeps unnamed IconButtonProps backward compatible at compile time", () => {
+    const unnamedIconButton: IconButtonProps = { icon: "x" }
+    expect(unnamedIconButton).toBeDefined()
+    const namedIconButtons: IconButtonProps[] = [
+      { icon: "x", label: "Close" },
+      { icon: "x", ariaLabel: "Close" },
+      { icon: "x", ariaLabelledBy: "close-label" },
+    ]
+    expect(namedIconButtons).toHaveLength(3)
+  })
+
+  it("keeps unnamed IconButton backward compatible at the Vue component call site", () => {
+    const unnamedIconButton = h(IconButton, { icon: "x" })
+    expect(unnamedIconButton).toBeDefined()
+    expect(h(IconButton, { icon: "x", label: "Close" })).toBeDefined()
+    expect(h(IconButton, { icon: "x", ariaLabel: "Close" })).toBeDefined()
+    expect(h(IconButton, { icon: "x", ariaLabelledBy: "close-label" })).toBeDefined()
   })
 
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {

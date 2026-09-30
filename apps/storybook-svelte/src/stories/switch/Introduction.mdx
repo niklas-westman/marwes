@@ -8,9 +8,7 @@ import {
 
 # Switch Components
 
-Marwes provides a switch system with three layers:
-**purpose components** for common toggle use cases, **SwitchField** for standard
-field composition, and the raw **Switch** atom for custom layouts.
+Marwes consumers use **purpose components** for common toggle use cases and **SwitchField** for standard field composition. The raw **Switch** atom is internal implementation evidence.
 
 ## Recommended: Purpose Components
 
@@ -90,31 +88,11 @@ For a single labeled switch with optional description and error text:
 
 ## Low-level: Switch (Atom)
 
-Use the raw `Switch` atom when you need a custom layout:
-
-```svelte
-<script>
-  import { Switch } from "@marwes-ui/svelte"
-  let enabled = $state(false)
-</script>
-
-<div style="display: flex; align-items: center; gap: 12px;">
-  <Switch
-    checked={enabled}
-    oncheckedchange={(v) => enabled = v}
-    size="wide"
-    ariaLabel="Enable notifications"
-  />
-  <span>Enable notifications</span>
-</div>
-```
-
-> **Note:** When using `Switch` directly, you are responsible for providing an accessible name
-> and managing checked state.
+`Switch` is not exported from `@marwes-ui/svelte` and must not be deep-imported. Use `SwitchField` and pass size or state through its nested `switch` prop.
 
 ## Size API
 
-`Switch` supports three Figma-matched sizes. `compact` remains the default.
+The public `SwitchField` supports three Figma-matched sizes through `switch.size`. `compact` remains the default.
 
 - `compact` - 24×16 track with 12px thumb
 - `wide` - 30×16 track with 12px thumb
@@ -122,12 +100,12 @@ Use the raw `Switch` atom when you need a custom layout:
 
 ```svelte
 <script>
-  import { Switch } from "@marwes-ui/svelte"
+  import { SwitchField } from "@marwes-ui/svelte"
 </script>
 
-<Switch size="compact" ariaLabel="Compact switch" />
-<Switch size="wide" ariaLabel="Wide switch" />
-<Switch size="rich" ariaLabel="Rich switch" />
+<SwitchField label="Compact" switch={{ size: "compact" }} />
+<SwitchField label="Wide" switch={{ size: "wide" }} />
+<SwitchField label="Rich" switch={{ size: "rich" }} />
 ```
 
 ## Component Reference
@@ -146,7 +124,7 @@ Use the raw `Switch` atom when you need a custom layout:
 
 ### Atom
 
-**`Switch`** — Low-level `<button role="switch">`
+**`Switch`** — Internal `<button role="switch">` implementation; not a consumer import.
 
 ## Story Coverage
 

@@ -21,4 +21,16 @@ describe("installation recipes", () => {
     expect(prompt).not.toContain("pnpm add")
     expect(prompt).not.toContain("@marwes-ui/presets/firstEdition/styles.css")
   })
+
+  it.each(["react", "vue", "svelte"] as const)(
+    "gives %s agents the matching canonical documentation and public import boundary",
+    (framework) => {
+      const prompt = createAgenticInstallPrompt(framework)
+
+      expect(prompt).toContain("https://marwes.io/llms.txt")
+      expect(prompt).toContain(`https://marwes.io/ai/${framework}.md`)
+      expect(prompt).toContain(`@marwes-ui/${framework}`)
+      expect(prompt).toContain("do not invent mw-* replacements or use private deep imports")
+    },
+  )
 })

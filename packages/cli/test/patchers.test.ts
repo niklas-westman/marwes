@@ -3,6 +3,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 import { patchProject } from "../src/patchers"
+import type { Adapter } from "../src/recipes"
 
 const tempDirs: string[] = []
 
@@ -18,6 +19,43 @@ afterEach(async () => {
 })
 
 describe("project patchers", () => {
+  it.each<[Adapter, string, string]>([
+    [
+      "react",
+      "src/main.tsx",
+      'import * as Marwes from "@marwes-ui/react"; render(<Marwes.MarwesProvider><App /></Marwes.MarwesProvider>)',
+    ],
+    [
+      "react",
+      "src/main.tsx",
+      'import { MarwesProvider } from "@marwes-ui/react"; import React from "react"; React.createElement(MarwesProvider, null)',
+    ],
+    [
+      "vue",
+      "src/App.vue",
+      '<script setup>import { MarwesProvider } from "@marwes-ui/vue"</script><template><marwes-provider><App /></marwes-provider></template>',
+    ],
+    [
+      "vue",
+      "src/App.vue",
+      '<script>import { MarwesProvider as Provider } from "@marwes-ui/vue"; import { h as render } from "vue"; export default { render: () => render(Provider, null) }</script>',
+    ],
+    [
+      "svelte",
+      "src/App.svelte",
+      '<script>import { MarwesProvider as Provider } from "@marwes-ui/svelte";</script><Provider><App /></Provider>',
+    ],
+  ])("leaves valid %s provider wiring untouched", async (adapter, relativeFile, source) => {
+    const cwd = await makeProject()
+    const file = join(cwd, relativeFile)
+    await writeFile(file, source)
+    await expect(patchProject(cwd, adapter, false)).resolves.toMatchObject({
+      status: "already-configured",
+      changed: false,
+    })
+    await expect(readFile(file, "utf8")).resolves.toBe(source)
+  })
+
   it("dry-runs the React Vite entrypoint patch without writing", async () => {
     const cwd = await makeProject()
     const file = join(cwd, "src/main.tsx")
@@ -40,6 +78,7 @@ describe("project patchers", () => {
     const result = await patchProject(cwd, "react", true)
 
     expect(result.changed).toBe(true)
+    expect(result.status).toBe("applied")
     await expect(readFile(file, "utf8")).resolves.not.toContain("MarwesProvider")
   })
 
@@ -55,6 +94,7 @@ describe("project patchers", () => {
     const source = await readFile(file, "utf8")
 
     expect(result.changed).toBe(true)
+    expect(result.status).toBe("applied")
     expect(source).toContain('import { MarwesProvider } from "@marwes-ui/react"')
     expect(source).toContain("<MarwesProvider>")
   })
@@ -68,6 +108,7 @@ describe("project patchers", () => {
     const source = await readFile(file, "utf8")
 
     expect(result.changed).toBe(true)
+    expect(result.status).toBe("applied")
     expect(source).toContain('import { MarwesProvider } from "@marwes-ui/vue"')
     expect(source).toContain("<MarwesProvider>")
   })
@@ -81,8 +122,41 @@ describe("project patchers", () => {
     const source = await readFile(file, "utf8")
 
     expect(result.changed).toBe(true)
+    expect(result.status).toBe("applied")
     expect(source).toContain('import { MarwesProvider } from "@marwes-ui/svelte"')
     expect(source).toContain("<MarwesProvider>")
     expect(source.indexOf("</MarwesProvider>")).toBeLessThan(source.indexOf("<style>"))
+  })
+
+  it("distinguishes an already configured app from an unsupported structure", async () => {
+    const cwd = await makeProject()
+    await writeFile(
+      join(cwd, "src/main.tsx"),
+      'import { MarwesProvider } from "@marwes-ui/react"\nrender(<MarwesProvider><App /></MarwesProvider>)',
+    )
+
+    await expect(patchProject(cwd, "react", false)).resolves.toMatchObject({
+      status: "already-configured",
+      changed: false,
+    })
+
+    const otherCwd = await makeProject()
+    await expect(patchProject(otherCwd, "react", false)).resolves.toMatchObject({
+      status: "manual-action-required",
+      searchedFiles: ["src/main.tsx", "src/main.jsx"],
+    })
+  })
+
+  it("recognizes an aliased provider as already configured", async () => {
+    const cwd = await makeProject()
+    await writeFile(
+      join(cwd, "src/main.tsx"),
+      'import { MarwesProvider as Provider } from "@marwes-ui/react"\nrender(<Provider><App /></Provider>)',
+    )
+
+    await expect(patchProject(cwd, "react", false)).resolves.toMatchObject({
+      status: "already-configured",
+      changed: false,
+    })
   })
 })

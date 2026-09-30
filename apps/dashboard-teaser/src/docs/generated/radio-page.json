@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "family": "radio",
+  "title": "Radio",
+  "summary": "Native single-selection family with a RadioGroupField component, a canonical RadioGroupField path, and thin purpose-radio wrappers for common one-of-many choices.",
+  "useWhen": [
+    "The UI needs one mutually exclusive choice from a small peer set, with optional description or error support.",
+    "The product flow maps clearly to YesNoRadioGroup, RatingRadioGroup, or OptionRadioGroup and benefits from self-documenting purpose metadata.",
+    "The team wants React and Vue radio behavior to stay aligned through one core recipe, shared field helpers, and the existing radio contract."
+  ],
+  "avoidWhen": [
+    "Multiple selections are allowed and CheckboxField or CheckboxGroupField is the more honest interaction model.",
+    "A binary on/off toggle is being modeled and SwitchField is the clearer product contract.",
+    "The layout cannot supply honest group labeling, shared names, and single-selection behavior for RadioGroupField usage outside RadioGroupField."
+  ],
+  "recommendationDescription": "Choose the purpose wrapper that matches the meaning; use RadioGroupField as the deliberate primitive escape hatch.",
+  "recommendedComponents": [
+    {
+      "name": "YesNoRadioGroup",
+      "description": "Binary yes/no choice with explicit semantics"
+    },
+    {
+      "name": "RatingRadioGroup",
+      "description": "Numeric rating scale generated as an accessible radio group"
+    },
+    {
+      "name": "OptionRadioGroup",
+      "description": "General labeled option selection with purpose metadata"
+    },
+    {
+      "name": "RadioGroupField",
+      "description": "Base radio group for custom option sets; the deliberate escape hatch"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "OptionRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "OptionRadioGroupProps"
+        },
+        {
+          "kind": "component",
+          "name": "RadioGroupField"
+        },
+        {
+          "kind": "type",
+          "name": "RadioGroupFieldOption"
+        },
+        {
+          "kind": "type",
+          "name": "RadioGroupFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "RatingRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "RatingRadioGroupProps"
+        },
+        {
+          "kind": "component",
+          "name": "YesNoRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "YesNoRadioGroupProps"
+        }
+      ],
+      "example": "import { RadioGroupField } from \"@marwes-ui/react\"\nimport { useState } from \"react\"\n\nexport function Example() {\n  const [value, setValue] = useState(\"1\")\n\n  return (\n    <RadioGroupField\n      name=\"options\"\n      label=\"Group label\"\n      options={[\n        { value: \"1\", label: \"Label\" },\n        { value: \"2\", label: \"Label\" },\n        { value: \"3\", label: \"Label\" },\n      ]}\n      value={value}\n      onChange={setValue}\n    />\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "OptionRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "OptionRadioGroupProps"
+        },
+        {
+          "kind": "component",
+          "name": "RadioGroupField"
+        },
+        {
+          "kind": "type",
+          "name": "RadioGroupFieldOption"
+        },
+        {
+          "kind": "type",
+          "name": "RadioGroupFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "RatingRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "RatingRadioGroupProps"
+        },
+        {
+          "kind": "component",
+          "name": "YesNoRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "YesNoRadioGroupProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ref } from \"vue\"\nimport { RadioGroupField } from \"@marwes-ui/vue\"\n\nconst value = ref(\"1\")\n</script>\n\n<template>\n  <RadioGroupField\n    name=\"options\"\n    label=\"Group label\"\n    :options=\"[\n      { value: '1', label: 'Label' },\n      { value: '2', label: 'Label' },\n      { value: '3', label: 'Label' },\n    ]\"\n    v-model=\"value\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "OptionRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "OptionRadioGroupProps"
+        },
+        {
+          "kind": "component",
+          "name": "RadioGroupField"
+        },
+        {
+          "kind": "type",
+          "name": "RadioGroupFieldOption"
+        },
+        {
+          "kind": "type",
+          "name": "RadioGroupFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "RatingRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "RatingRadioGroupProps"
+        },
+        {
+          "kind": "component",
+          "name": "YesNoRadioGroup"
+        },
+        {
+          "kind": "type",
+          "name": "YesNoRadioGroupProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { OptionRadioGroup } from \"@marwes-ui/svelte\"\n\n  let value = $state(\"1\")\n</script>\n\n<OptionRadioGroup\n  name=\"options\"\n  label=\"Group label\"\n  options={[\n    { value: \"1\", label: \"Label\" },\n    { value: \"2\", label: \"Label\" },\n    { value: \"3\", label: \"Label\" },\n  ]}\n  {value}\n  onchange={(nextValue) => (value = nextValue)}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep radio group semantics honest; never build a single-choice control from checkboxes.",
+      "title": "Honest group semantics"
+    },
+    {
+      "description": "Verify keyboard arrow-key navigation moves focus and selection together within the group.",
+      "title": "Keyboard navigation"
+    },
+    {
+      "description": "Use the public Field component so labels, helper text, errors, and invalid state stay connected.",
+      "title": "Connected field wiring"
+    },
+    {
+      "description": "Real browser review for focus visibility and pressed or hover affordances because the family heavily restyles a native radio with appearance: none.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Product-level judgment about whether required messaging, helper text, and error text remain clear for real grouped choice flows.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "RadioGroupField usage outside RadioGroupField still depends on consumer-owned radiogroup naming and state management, so bespoke layouts deserve spot checks.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Radio uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/radio/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

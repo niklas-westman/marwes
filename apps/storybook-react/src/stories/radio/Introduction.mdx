@@ -8,9 +8,7 @@ import {
 
 # Radio Components
 
-Marwes provides a radio system with three layers:
-**purpose components** for common patterns, **RadioGroupField** for custom option lists,
-and the raw **Radio** atom for advanced control.
+Marwes consumers use **purpose components** for common patterns and **RadioGroupField** for custom option lists. The raw **Radio** atom is internal implementation evidence and is not a public package export.
 
 ## Recommended: Purpose Components
 
@@ -122,35 +120,7 @@ const [method, setMethod] = React.useState("standard")
 
 ## Low-level: Radio (Atom)
 
-Use the raw `Radio` atom only when you need fully custom layout (tables, list rows, custom wrappers):
-
-```tsx
-import { Radio } from "@marwes-ui/react"
-
-const [selected, setSelected] = React.useState("a")
-
-<div role="radiogroup" aria-label="Preference">
-  {options.map(({ value, label }) => (
-    <label key={value}>
-      <Radio
-        name="preference"
-        value={value}
-        checked={selected === value}
-        onCheckedChange={(checked) => {
-          if (checked) setSelected(value)
-        }}
-      />
-      {label}
-    </label>
-  ))}
-</div>
-```
-
-> **Note:** When using `Radio` directly, you are responsible for:
-> - Wrapping in a `role="radiogroup"` container
-> - Providing `aria-label` or `aria-labelledby` on the group
-> - Managing selection state
-> - Wiring labels with `htmlFor`/`id` or wrapping in `<label>`
+`Radio` is not exported from `@marwes-ui/react` and must not be deep-imported. `RadioGroupField` is the public escape hatch for custom option sets and supplies group labeling, descriptions, errors, and state wiring.
 
 ---
 
@@ -174,5 +144,4 @@ Provides: `role="radiogroup"`, label, description, error, state management
 
 ### Atom
 
-**`Radio`** — Low-level native `<input type="radio">`
-Use when you need fully custom layout or grouping
+**`Radio`** — Internal atom shown in Storybook for implementation evidence; not a consumer import.

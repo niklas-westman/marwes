@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
 export const Basic: Story = {
   args: {
     icon: "x",
-    ariaLabel: "Close",
+    label: "Close",
     variant: "neutral",
   },
   render: (args) => ({

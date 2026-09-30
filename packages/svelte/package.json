@@ -1,6 +1,20 @@
 {
   "name": "@marwes-ui/svelte",
   "version": "1.4.1",
+  "description": "Accessible, themeable Marwes components for Svelte with static preset CSS and purpose-first APIs.",
+  "homepage": "https://marwes.io/docs/get-started/svelte/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niklas-westman/marwes.git",
+    "directory": "packages/svelte"
+  },
+  "bugs": {
+    "url": "https://github.com/niklas-westman/marwes/issues"
+  },
+  "keywords": ["marwes", "svelte", "components", "design-system", "accessibility"],
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -51,6 +65,6 @@
     "svelte-check": "^4.0.0",
     "typescript": "5.9.3",
     "vite": "^6.0.0",
-    "vitest": "4.1.8"
+    "vitest": "4.1.11"
   }
 }

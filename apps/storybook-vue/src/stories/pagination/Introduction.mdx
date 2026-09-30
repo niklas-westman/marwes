@@ -4,13 +4,28 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Pagination
 
-Marwes provides `Pagination` for navigating finite page sets while keeping page
-windowing, ellipses, and active-page semantics consistent across frameworks.
+Marwes provides the public `PaginationField` for navigating finite page sets while keeping labels, helper text, windowing, ellipses, and active-page semantics consistent. The raw `Pagination` story is internal implementation evidence.
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue"
+import { PaginationField } from "@marwes-ui/vue"
+
+const page = ref(1)
+</script>
+
+<template>
+  <PaginationField
+    label="Search results"
+    description="Page through your filtered results."
+    :pagination="{ pageCount: 10, modelValue: page, 'onUpdate:modelValue': (value) => page = value }"
+  />
+</template>
+```
 
 ## Component Reference
 
-Use `modelValue` with `update:modelValue` in Vue, or provide `defaultPage` for
-uncontrolled usage.
+Use `modelValue` with `update:modelValue` inside the nested `pagination` prop, or provide `defaultPage` for uncontrolled usage.
 
 Use `showFirstLast` for large ranges, `getItemAriaLabel` for localized control
 labels, and the default adaptive behavior for narrow containers. Use

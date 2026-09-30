@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next.js integration — Marwes UI</title>
+    <meta name="description" content="Use Marwes with Next.js while preserving SSR-safe theme behavior." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href="https://marwes.io/docs/integrations/next/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs.css" />
+  </head>
+  <body>
+    <header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>
+    <main class="docs-shell">
+      <nav class="docs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/docs/components/">Docs</a></nav>
+      <header class="docs-intro"><p class="docs-eyebrow">Marwes documentation</p><h1>Next.js integration</h1><p>Use Marwes with Next.js while preserving SSR-safe theme behavior.</p></header>
+      <section><h2>Next setup</h2><p>Place the provider in a client boundary near the application root. Emit the Marwes theme script before hydration when the theme follows system or stored preference.</p><ol><li>Complete the <a href="/docs/get-started/react/">React setup</a>.</li><li>Render one provider at the application boundary.</li><li>Keep server and browser theme initialization aligned.</li><li>Run <code>pnpm dlx @marwes-ui/cli doctor --run-build</code>.</li></ol><pre data-language="tsx"><code>// app/providers.tsx
+&quot;use client&quot;
+
+import { MarwesProvider } from &quot;@marwes-ui/react&quot;
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;MarwesProvider
+      defaultPreference=&quot;system&quot;
+      storageKey=&quot;marwes-theme&quot;
+      target=&quot;html&quot;
+      attribute=&quot;class&quot;
+      variableStrategy=&quot;style-tag&quot;
+    &gt;
+      {children}
+    &lt;/MarwesProvider&gt;
+  )
+}
+
+// app/layout.tsx
+import { MarwesThemeScript, MarwesThemeStyle } from &quot;@marwes-ui/react&quot;
+import { Providers } from &quot;./providers&quot;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;html lang=&quot;en&quot; suppressHydrationWarning&gt;
+      &lt;head&gt;
+        &lt;MarwesThemeStyle target=&quot;html&quot; attribute=&quot;class&quot; /&gt;
+        &lt;MarwesThemeScript
+          storageKey=&quot;marwes-theme&quot;
+          defaultPreference=&quot;system&quot;
+          target=&quot;html&quot;
+          attribute=&quot;class&quot;
+        /&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;Providers&gt;{children}&lt;/Providers&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}</code></pre><aside><strong>CSP:</strong> pass the request nonce to generated style and script entries when your policy requires one. Never concatenate untrusted values into generated head markup.</aside></section>
+    </main>
+    <footer class="docs-footer"><p>Build one branded, accessible UI language across React, Vue, and Svelte.</p><a href="https://github.com/niklas-westman/marwes">GitHub</a></footer>
+    <script type="module" src="/src/docs/docs-main.ts"></script>
+  </body>
+</html>

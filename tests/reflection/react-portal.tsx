@@ -1,7 +1,6 @@
 import { IconName } from "@marwes-ui/core"
 import type { ContextMenuEntry } from "@marwes-ui/core"
 import {
-  Accordion,
   Badge,
   BadgeVariant,
   Card,
@@ -11,14 +10,9 @@ import {
   Dialog,
   Divider,
   InputField,
-  InputOtp,
   PrimaryButton,
-  Radio,
   RadioGroupField,
   SecondaryButton,
-  SegmentedControl,
-  Select,
-  Slider,
   SwitchField,
   Text,
   TextButton,
@@ -30,6 +24,12 @@ import type { ReactNode } from "react"
 import { flushSync } from "react-dom"
 import { createRoot } from "react-dom/client"
 import type { ReflectionPortalMountInput } from "reflection-check"
+import { Accordion } from "../../packages/react/src/components/accordion/accordion"
+import { InputOtp } from "../../packages/react/src/components/input/input-otp"
+import { Select } from "../../packages/react/src/components/input/select"
+import { Radio } from "../../packages/react/src/components/radio/radio"
+import { SegmentedControl } from "../../packages/react/src/components/segmented-control/segmented-control"
+import { Slider } from "../../packages/react/src/components/slider/slider"
 
 type PortalCase = {
   render: () => ReactNode

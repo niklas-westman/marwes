@@ -3,10 +3,10 @@
   "family": "skeleton",
   "displayName": "Skeleton",
   "status": "shipped",
-  "summary": "Loading-placeholder atom with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React/Vue adapter contract.",
+  "summary": "Loading-placeholder component with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React, Vue, and Svelte behavior.",
   "philosophy": [
     "Keep Skeleton as a low-level loading placeholder atom rather than a layout-specific card or list skeleton family.",
-    "Keep the three synced baseline shapes source-owned in core so React and Vue render the same dimensions, radius rules, metadata, and accessibility behavior.",
+    "Keep the three synced baseline shapes source-owned in core so React, Vue, and Svelte render the same dimensions, radius rules, metadata, and accessibility behavior.",
     "Keep visual treatment in preset CSS through stable mw-skeleton classes and theme-relative variables instead of adapter-owned styling.",
     "Keep the atom decorative by default, with explicit ariaLabel opt-in for standalone status usage."
   ],
@@ -14,7 +14,7 @@
     "useWhen": [
       "The UI needs a lightweight placeholder for loading text, avatar/media circles, or rectangular content blocks.",
       "The product already owns the surrounding loading context and the skeleton can stay decorative.",
-      "React and Vue consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
+      "React, Vue, and Svelte consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
     ],
     "avoidWhen": [
       "The experience needs determinate progress, percentage tracking, or an indeterminate activity indicator instead of structural placeholders.",
@@ -49,6 +49,10 @@
       "vue": [
         "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
         "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/skeleton/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/skeleton/skeleton.stories.ts"
       ]
     },
     "preferredStates": [

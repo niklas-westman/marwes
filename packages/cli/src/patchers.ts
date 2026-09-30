@@ -1,12 +1,15 @@
 import { access, readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
+import { hasConfiguredProvider } from "./provider-detection"
 import type { Adapter } from "./recipes"
 
 export type PatchResult = {
   adapter: Adapter
+  status: "applied" | "already-configured" | "manual-action-required"
   changed: boolean
   dryRun: boolean
   file?: string
+  searchedFiles?: string[]
   message: string
 }
 
@@ -75,8 +78,10 @@ async function patchReact(cwd: string, dryRun: boolean): Promise<PatchResult> {
   if (!relativeFile) {
     return {
       adapter: "react",
+      status: "manual-action-required",
       changed: false,
       dryRun,
+      searchedFiles: candidates,
       message: "No React Vite entrypoint found. Expected src/main.tsx or src/main.jsx.",
     }
   }
@@ -84,9 +89,10 @@ async function patchReact(cwd: string, dryRun: boolean): Promise<PatchResult> {
   const file = join(cwd, relativeFile)
   const source = await readFile(file, "utf8")
 
-  if (source.includes("MarwesProvider")) {
+  if (hasConfiguredProvider(source, "react")) {
     return {
       adapter: "react",
+      status: "already-configured",
       changed: false,
       dryRun,
       file: relativeFile,
@@ -94,9 +100,22 @@ async function patchReact(cwd: string, dryRun: boolean): Promise<PatchResult> {
     }
   }
 
+  if (source.includes("MarwesProvider")) {
+    return {
+      adapter: "react",
+      status: "manual-action-required",
+      changed: false,
+      dryRun,
+      file: relativeFile,
+      message:
+        "React entrypoint references MarwesProvider but not with a verified @marwes-ui/react import and render.",
+    }
+  }
+
   if (!source.includes("<App />")) {
     return {
       adapter: "react",
+      status: "manual-action-required",
       changed: false,
       dryRun,
       file: relativeFile,
@@ -113,6 +132,7 @@ async function patchReact(cwd: string, dryRun: boolean): Promise<PatchResult> {
 
   return {
     adapter: "react",
+    status: changed ? "applied" : "already-configured",
     changed,
     dryRun,
     file: relativeFile,
@@ -145,16 +165,19 @@ async function patchVue(cwd: string, dryRun: boolean): Promise<PatchResult> {
   if (!(await fileExists(file))) {
     return {
       adapter: "vue",
+      status: "manual-action-required",
       changed: false,
       dryRun,
+      searchedFiles: [relativeFile],
       message: "No Vue starter component found. Expected src/App.vue.",
     }
   }
 
   const source = await readFile(file, "utf8")
-  if (source.includes("<MarwesProvider")) {
+  if (hasConfiguredProvider(source, "vue")) {
     return {
       adapter: "vue",
+      status: "already-configured",
       changed: false,
       dryRun,
       file: relativeFile,
@@ -162,10 +185,23 @@ async function patchVue(cwd: string, dryRun: boolean): Promise<PatchResult> {
     }
   }
 
+  if (source.includes("MarwesProvider")) {
+    return {
+      adapter: "vue",
+      status: "manual-action-required",
+      changed: false,
+      dryRun,
+      file: relativeFile,
+      message:
+        "Vue starter references MarwesProvider but not with a verified @marwes-ui/vue import and render.",
+    }
+  }
+
   const templateMatch = source.match(/<template>([\s\S]*?)<\/template>/)
   if (!templateMatch) {
     return {
       adapter: "vue",
+      status: "manual-action-required",
       changed: false,
       dryRun,
       file: relativeFile,
@@ -177,6 +213,7 @@ async function patchVue(cwd: string, dryRun: boolean): Promise<PatchResult> {
   if (!innerTemplate) {
     return {
       adapter: "vue",
+      status: "manual-action-required",
       changed: false,
       dryRun,
       file: relativeFile,
@@ -197,6 +234,7 @@ async function patchVue(cwd: string, dryRun: boolean): Promise<PatchResult> {
 
   return {
     adapter: "vue",
+    status: changed ? "applied" : "already-configured",
     changed,
     dryRun,
     file: relativeFile,
@@ -236,20 +274,35 @@ async function patchSvelte(cwd: string, dryRun: boolean): Promise<PatchResult> {
   if (!(await fileExists(file))) {
     return {
       adapter: "svelte",
+      status: "manual-action-required",
       changed: false,
       dryRun,
+      searchedFiles: [relativeFile],
       message: "No Svelte starter component found. Expected src/App.svelte.",
     }
   }
 
   const source = await readFile(file, "utf8")
-  if (source.includes("<MarwesProvider")) {
+  if (hasConfiguredProvider(source, "svelte")) {
     return {
       adapter: "svelte",
+      status: "already-configured",
       changed: false,
       dryRun,
       file: relativeFile,
       message: "Svelte starter component already contains MarwesProvider.",
+    }
+  }
+
+  if (source.includes("MarwesProvider")) {
+    return {
+      adapter: "svelte",
+      status: "manual-action-required",
+      changed: false,
+      dryRun,
+      file: relativeFile,
+      message:
+        "Svelte starter references MarwesProvider but not with a verified @marwes-ui/svelte import and render.",
     }
   }
 
@@ -260,6 +313,7 @@ async function patchSvelte(cwd: string, dryRun: boolean): Promise<PatchResult> {
   if (!body) {
     return {
       adapter: "svelte",
+      status: "manual-action-required",
       changed: false,
       dryRun,
       file: relativeFile,
@@ -283,6 +337,7 @@ async function patchSvelte(cwd: string, dryRun: boolean): Promise<PatchResult> {
 
   return {
     adapter: "svelte",
+    status: changed ? "applied" : "already-configured",
     changed,
     dryRun,
     file: relativeFile,

@@ -1,6 +1,20 @@
 {
   "name": "@marwes-ui/cli",
   "version": "0.1.0",
+  "description": "Official Marwes installer and diagnostics CLI for React, Vue, and Svelte applications.",
+  "homepage": "https://marwes.io/docs/troubleshooting/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niklas-westman/marwes.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/niklas-westman/marwes/issues"
+  },
+  "keywords": ["marwes", "cli", "installer", "design-system", "doctor"],
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -36,6 +50,6 @@
     "rimraf": "6.1.2",
     "tsup": "8.5.1",
     "typescript": "5.9.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.11"
   }
 }

@@ -1,9 +1,9 @@
-import { DialogModal } from "@marwes-ui/react"
+import { DialogModal, SegmentedControlField } from "@marwes-ui/react"
 import styled from "styled-components"
 
-import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
 import { frameworkItems } from "../sections/framework-tabs"
 import type { Framework } from "../sections/installation-recipes"
+import { ClipboardButton } from "./ClipboardButton"
 import { useFrameworkPreference } from "./FrameworkPreference"
 
 const Body = styled.div`
@@ -27,6 +27,11 @@ const CodeBlock = styled.pre`
   max-height: min(24rem, 60vh);
   overflow: auto;
   white-space: pre;
+`
+
+const CodeToolbar = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `
 
 type CodeSnippetModalProps = {
@@ -53,15 +58,20 @@ function CodeSnippetModal({
       ariaLabel={`${title} code example`}
     >
       <Body>
-        <SegmentedControl
-          items={frameworkItems}
-          value={framework}
-          onValueChange={setFramework}
-          variant="inverse"
-          size="md"
-          ariaLabel="Framework"
-          fullWidth
+        <SegmentedControlField
+          label="Framework"
+          segmentedControl={{
+            items: frameworkItems,
+            value: framework,
+            onValueChange: setFramework,
+            variant: "inverse",
+            size: "md",
+            fullWidth: true,
+          }}
         />
+        <CodeToolbar>
+          <ClipboardButton value={snippets[framework]} label={`${framework} code example`} />
+        </CodeToolbar>
         <CodeBlock>
           <code>{snippets[framework]}</code>
         </CodeBlock>

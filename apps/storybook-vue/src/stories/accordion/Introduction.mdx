@@ -8,9 +8,7 @@ import {
 
 # Accordion Components
 
-Marwes provides an accordion system with three layers:
-**purpose components** for common patterns, **AccordionField** for custom item lists,
-and the raw **Accordion** atom for advanced control.
+Marwes consumers use **purpose components** for common patterns and **AccordionField** for custom item lists. The raw **Accordion** atom is internal implementation evidence.
 
 ## Recommended: Purpose Components
 
@@ -130,28 +128,7 @@ const openItems = ref(["shipping"])
 
 ## Low-level: Accordion (Atom)
 
-Use the raw `Accordion` atom when you need fully custom layout or standalone disclosure:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { Accordion } from "@marwes-ui/vue"
-
-const open = ref(false)
-</script>
-
-<template>
-  <Accordion id="shipping-faq" :open="open" @toggle="open = !open">
-    <template #title>Shipping details</template>
-    Orders ship within 2-3 business days.
-  </Accordion>
-</template>
-```
-
-> **Note:** When using `Accordion` directly, you are responsible for:
-> - Managing open/closed state
-> - Coordinating single-open behavior across multiple items
-> - Providing accessible group semantics if used in a list
+`Accordion` is not exported from `@marwes-ui/vue` and must not be deep-imported. Use `AccordionField` for custom items; it owns open state, group labeling, descriptions, and error wiring.
 
 ---
 
@@ -175,8 +152,7 @@ Provides: `<fieldset>`, label, description, error, state management
 
 ### Atom
 
-**`Accordion`** — Low-level disclosure panel with trigger + content
-Use when you need fully custom layout or standalone disclosure
+**`Accordion`** — Internal disclosure atom shown for implementation evidence; not a consumer import.
 
 ## Story Coverage
 

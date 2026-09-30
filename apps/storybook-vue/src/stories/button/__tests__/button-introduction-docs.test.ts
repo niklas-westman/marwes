@@ -60,5 +60,7 @@ describe("Vue button introduction docs", () => {
     expect(introDoc).toContain("disableWhileLoading")
     expect(introDoc).toContain("loadingLabel")
     expect(introDoc).toContain("SpinnerVariants")
+    expect(introDoc).toContain("Do not rely on an `ariaLabel` placed on a nested `Icon`")
+    expect(introDoc).toContain('<IconButton icon="x" label="Close" />')
   })
 })

@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "allowJs": true,
+    "checkJs": true,
+    "types": ["svelte"],
+    "paths": {
+      "@marwes-ui/core": ["./packages/core/src/index.ts"],
+      "@marwes-ui/presets": ["./packages/presets/src/index.ts"],
+      "@marwes-ui/presets/firstEdition": ["./packages/presets/src/firstEdition/index.ts"],
+      "@marwes-ui/svelte": ["./packages/svelte/src/lib/index.ts"]
+    }
+  },
+  "include": ["src/fixtures/**/*.svelte"]
+}

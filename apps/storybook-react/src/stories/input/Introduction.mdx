@@ -15,7 +15,7 @@ and automatically set AI-friendly metadata. Each field variant is optimized for
 its specific use case with appropriate semantic HTML attributes.
 
 Input domain groups everything related to text-like data entry in one place,
-using a clear Atom -> Molecule -> Purpose progression.
+using a clear Field -> Purpose progression for consumers. Atom stories are retained only as internal implementation evidence.
 
 ### Field naming
 
@@ -28,7 +28,7 @@ those concerns yourself.
 ## Input Architecture
 
 ```
-Atoms
+Internal atoms (not package exports)
   ├─ Input
   ├─ Select
   ├─ Textarea
@@ -54,65 +54,19 @@ Purpose Variants (Input-based)
 
 ## Atom: Input
 
-Use `Input` directly when you need full layout control without label/helper/error wrappers:
-
-```tsx
-import { Input } from "@marwes-ui/react"
-
-<Input
-  type="text"
-  placeholder="Type here"
-  value={value}
-  onValueChange={setValue}
-/>
-```
+`Input` is not exported from `@marwes-ui/react`. Use `InputField` or a purpose field such as `EmailField`; do not deep-import the atom.
 
 ## Atom: Select
 
-Use `Select` for the compact select atom. Set `native={true}` when you explicitly want the browser's built-in dropdown chrome:
-
-```tsx
-import { Select } from "@marwes-ui/react"
-
-<Select
-  placeholder="Choose a country"
-  options={[
-    { value: "se", label: "Sweden" },
-    { value: "us", label: "United States" },
-  ]}
-  value={country}
-  onValueChange={setCountry}
-/>
-```
+`Select` is not exported from `@marwes-ui/react`. Use `SelectField` or `DropdownField`; pass native/custom presentation through the field's nested `select` prop.
 
 ## Atom: Textarea
 
-Use `Textarea` when you need multiline freeform text entry without label/helper/error wrappers:
-
-```tsx
-import { Textarea } from "@marwes-ui/react"
-
-<Textarea
-  rows={4}
-  placeholder="Add more detail"
-  value={value}
-  onValueChange={setValue}
-/>
-```
+`Textarea` is not exported from `@marwes-ui/react`. Use `TextareaField`, which includes visible labeling and validation wiring.
 
 ## Atom: RichText
 
-Use `RichText` when the authored content itself needs inline emphasis such as bold, italic, or underline. Use `Textarea` when the content should stay plain text.
-
-```tsx
-import { RichText } from "@marwes-ui/react"
-
-<RichText
-  placeholder="Write a formatted update"
-  value={html}
-  onValueChange={setHtml}
-/>
-```
+`RichText` is not exported from `@marwes-ui/react`. Use `RichTextField` when authored content needs inline emphasis, or `TextareaField` when it should remain plain text.
 
 ### Why use RichText?
 

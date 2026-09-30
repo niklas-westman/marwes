@@ -18,7 +18,7 @@ and the raw **Badge** atom for standalone use.
 Use purpose-built components that automatically set AI-friendly metadata:
 
 ```tsx
-import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/react"
+import { BadgeVariant, StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/react"
 
 // Operational status — auto-sets data-purpose="status"
 <StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>
@@ -57,7 +57,7 @@ import { StatusBadge, PriorityBadge, NotificationBadge } from "@marwes-ui/react"
 For grouping related badges with accessible label association, use `BadgeGroup`:
 
 ```tsx
-import { BadgeGroup, Badge } from "@marwes-ui/react"
+import { Badge, BadgeGroup, BadgeVariant } from "@marwes-ui/react"
 
 <BadgeGroup label="Tags">
   <Badge variant={BadgeVariant.info}>Frontend</Badge>
@@ -78,7 +78,7 @@ import { BadgeGroup, Badge } from "@marwes-ui/react"
 Use the raw `Badge` atom for standalone badges or when building custom compositions:
 
 ```tsx
-import { Badge } from "@marwes-ui/react"
+import { Badge, BadgeVariant } from "@marwes-ui/react"
 
 <Badge variant={BadgeVariant.success}>Active</Badge>
 <Badge variant={BadgeVariant.error} ariaLabel="critical status">!</Badge>

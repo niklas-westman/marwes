@@ -1,0 +1,86 @@
+{
+  "componentGroups": [
+    {
+      "label": "Foundations",
+      "items": ["Icon"]
+    },
+    {
+      "label": "Actions",
+      "items": ["Button"]
+    },
+    {
+      "label": "Data display",
+      "items": ["Avatar", "Badge", "Card", "Progress bar", "Skeleton", "Stat tile"]
+    },
+    {
+      "label": "Data entry",
+      "items": [
+        "Checkbox",
+        "Date picker",
+        "Input",
+        "Radio",
+        "Segmented control",
+        "Slider",
+        "Switch"
+      ]
+    },
+    {
+      "label": "Layout",
+      "items": ["Accordion", "Divider", "Spacing", "Tab"]
+    },
+    {
+      "label": "Navigation",
+      "items": ["Breadcrumb", "Pagination"]
+    },
+    {
+      "label": "Feedback",
+      "items": ["Banner", "Spinner", "Toast"]
+    },
+    {
+      "label": "Overlays",
+      "items": ["Context menu", "Dialog", "Drawer", "Tooltip"]
+    },
+    {
+      "label": "Typography",
+      "items": ["Heading", "Paragraph", "Text"]
+    }
+  ],
+  "documentationLinks": [
+    {
+      "label": "Introduction",
+      "path": "/docs/introduction/"
+    },
+    {
+      "label": "Get started",
+      "path": "/docs/get-started/react/"
+    },
+    {
+      "label": "Components",
+      "path": "/docs/components/"
+    },
+    {
+      "label": "Theming",
+      "path": "/docs/theming/"
+    },
+    {
+      "label": "Accessibility",
+      "path": "/docs/accessibility/"
+    },
+    {
+      "label": "Compatibility",
+      "path": "/docs/compatibility/"
+    },
+    {
+      "label": "Troubleshoot",
+      "path": "/docs/troubleshooting/"
+    },
+    {
+      "label": "AI and agents",
+      "path": "/docs/ai/"
+    },
+    {
+      "label": "Contributing",
+      "path": "/docs/contributing/"
+    }
+  ]
+}

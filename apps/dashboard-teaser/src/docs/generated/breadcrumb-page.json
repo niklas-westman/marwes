@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "family": "breadcrumb",
+  "title": "Breadcrumb",
+  "summary": "Navigation hierarchy component with optional home entry, current-page metadata, hidden separators, and shared nav/list semantics across adapters.",
+  "useWhen": [
+    "A page needs to show its location inside a broader hierarchy.",
+    "The current page should be announced as the current breadcrumb item.",
+    "React, Vue, and Svelte consumers need the same nav/list/separator semantics."
+  ],
+  "avoidWhen": [
+    "The UI needs primary site navigation rather than location context.",
+    "The hierarchy cannot identify a truthful current page.",
+    "Routing behavior, link resolution, or page ownership is still unclear."
+  ],
+  "recommendationDescription": "Use Breadcrumb to show where the current page sits within the site hierarchy.",
+  "recommendedComponents": [
+    {
+      "name": "Breadcrumb",
+      "description": "Labeled trail of the current page's location in the site hierarchy"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Breadcrumb"
+        },
+        {
+          "kind": "type",
+          "name": "BreadcrumbItem"
+        },
+        {
+          "kind": "type",
+          "name": "BreadcrumbProps"
+        }
+      ],
+      "example": "import { Breadcrumb } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <Breadcrumb\n      homeHref=\"/\"\n      items={[\n        { label: \"Label\", href: \"/section\" },\n        { label: \"Label\", href: \"/section/child\" },\n        { label: \"Current page\" },\n      ]}\n    />\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Breadcrumb"
+        },
+        {
+          "kind": "type",
+          "name": "BreadcrumbItem"
+        },
+        {
+          "kind": "type",
+          "name": "BreadcrumbProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { Breadcrumb } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Breadcrumb\n    home-href=\"/\"\n    :items=\"[\n      { label: 'Label', href: '/section' },\n      { label: 'Label', href: '/section/child' },\n      { label: 'Current page' },\n    ]\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Breadcrumb"
+        },
+        {
+          "kind": "type",
+          "name": "BreadcrumbItem"
+        },
+        {
+          "kind": "type",
+          "name": "BreadcrumbProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Breadcrumb } from \"@marwes-ui/svelte\"\n</script>\n\n<Breadcrumb\n  homeHref=\"/\"\n  items={[\n    { label: \"Label\", href: \"/section\" },\n    { label: \"Label\", href: \"/section/child\" },\n    { label: \"Current page\" },\n  ]}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep the current page marked once so aria-current reflects the real location, not just the last item by default.",
+      "title": "Accurate current page"
+    },
+    {
+      "description": "Keep link labels short and honest; avoid truncating text in a way that hides the real destination.",
+      "title": "Honest link labels"
+    },
+    {
+      "description": "Visual review against the synced light and dark Figma breadcrumb frames.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Product-level review that the current item, page title, and URL hierarchy match.",
+      "title": "Manual review 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Breadcrumb uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/breadcrumb/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

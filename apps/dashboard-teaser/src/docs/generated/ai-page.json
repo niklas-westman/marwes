@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "title": "AI and agent usage",
+  "summary": "Give coding agents canonical, machine-readable Marwes documentation.",
+  "heading": "Machine-readable entrypoints",
+  "description": "Start agents at /llms.txt, then choose the framework guide and public API inventory.",
+  "entrypoint": "/llms.txt",
+  "resources": [
+    "/ai/react.md",
+    "/ai/vue.md",
+    "/ai/svelte.md",
+    "/ai/index.json",
+    "/ai/v1/public-api.json",
+    "/ai/v1/component-registry.json"
+  ],
+  "footnote": "Agents should import real Marwes components from the chosen adapter root. They must not recreate Marwes as local mw-* classes.",
+  "sections": [
+    {
+      "id": "ai",
+      "label": "AI and agents"
+    }
+  ]
+}

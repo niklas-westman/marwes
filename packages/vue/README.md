@@ -38,10 +38,18 @@ For a Vue app, install this package first. It includes the Vue adapter, loads th
 | --- | --- |
 | `@marwes-ui/vue` | You are building a Vue app. |
 | `@marwes-ui/react` | You are building a React app instead. |
+| `@marwes-ui/svelte` | You are building a Svelte app instead. |
 | `@marwes-ui/core` | You are building adapters, tests, tooling, or framework-agnostic integrations. |
 | `@marwes-ui/presets` | You need standalone preset CSS or preset theme exports. |
 
 This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
+
+## Requirements
+
+- Vue 3.4 or newer
+- Node.js 20 or newer for package installation, application builds, and the CLI
+- A modern browser with CSS custom-property support
+- A Vite starter layout for automatic provider patching; custom layouts use the printed manual setup
 
 ## Install
 
@@ -58,6 +66,14 @@ pnpm dlx @marwes-ui/cli init --adapter vue
 ```
 
 Also works with `npx @marwes-ui/cli`, `yarn dlx @marwes-ui/cli`, and `bunx @marwes-ui/cli`.
+
+Verify the patched app and its production build:
+
+```bash
+pnpm dlx @marwes-ui/cli doctor --run-build
+```
+
+Automatic provider patching supports known Vite starter layouts. A `manual-action-required` result means the package was installed but the CLI could not safely identify the app root; apply the complete provider example printed by the CLI and rerun the doctor command.
 
 ### New Vite app
 
@@ -81,17 +97,13 @@ After install, jump to the [Quick Start](#quick-start) below.
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue"
-import { Button, ButtonVariant, Checkbox, Input, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
-
-const email = ref("")
-const subscribed = ref(false)
+import { Button, ButtonVariant, CheckboxField, EmailField, MarwesProvider, SubmitButton } from "@marwes-ui/vue"
 </script>
 
 <template>
   <MarwesProvider>
-    <Input v-model="email" placeholder="Email" label="Email" />
-    <Checkbox v-model="subscribed" label="Subscribe" />
+    <EmailField label="Email" :input="{ placeholder: 'you@example.com' }" />
+    <CheckboxField label="Subscribe" />
     <Button :variant="ButtonVariant.secondary">Preview</Button>
     <SubmitButton>Save</SubmitButton>
   </MarwesProvider>
@@ -210,60 +222,148 @@ const descriptionProps: ParagraphProps = {
 </template>
 ```
 
+For icon-only actions, use `IconButton` and name the button with `label`, `ariaLabel`, or `ariaLabelledBy`. An `ariaLabel` on a nested `Icon` names the image, not the interactive button.
+
+<!-- BEGIN GENERATED PUBLIC COMPONENTS -->
 ## Available Components
 
-Provider and hooks:
-- `MarwesProvider`
-- `useTheme`
-- `useToast`
+Generated from the public root export of `@marwes-ui/vue`. Do not edit this inventory by hand.
 
-Actions and buttons:
-- `Button`, `IconButton`
-- `PrimaryButton`, `SecondaryButton`, `TextButton`, `SuccessButton`
-- `SubmitButton`, `CancelButton`, `CreateButton`, `DestructiveButton`
-- `LinkButton`, `SaveButton`, `ConfirmButton`, `VerifyButton`
-- `EditButton`, `CloseButton`, `RefreshButton`
-- `UploadButton`, `DownloadButton`, `CopyButton`
-- `SearchButton`, `FilterButton`, `SortButton`, `DropdownButton`
+### Framework
 
-Forms and inputs:
-- `Input`, `Textarea`, `Select`, `RichText`, `InputOtp`
-- `InputField`, `TextareaField`, `SelectField`, `RichTextField`
-- `DropdownField`, `SearchField`, `PasswordField`, `EmailField`
-- `DateOfBirthField`, `ZipCodeField`, `PhoneField`, `URLField`, `CurrencyField`
-- `Checkbox`, `CheckboxField`, `CheckboxGroupField`
-- `Radio`, `RadioGroupField`, `YesNoRadioGroup`, `RatingRadioGroup`, `OptionRadioGroup`
-- `Switch`, `SwitchField`, `FeatureToggle`, `PreferenceSwitch`, `PermissionSwitch`
-- `Slider`, `SliderField`, `VolumeSlider`, `BrightnessSlider`, `RadiusSlider`
-- `SegmentedControlField`, `PaginationField`
+- `MarwesProvider`, `SkipLink`
 
-Content and layout:
-- `Card`, `ProductCard`, `ProfileCard`, `StatCard`
-- `H1`, `H2`, `H3`, `Paragraph`, `Text`, `TypographyText`
-- `Spacer`, `Spacing`, `Divider`
+### Accordion
+
+- `AccordionField`, `FAQAccordion`, `SectionsAccordion`, `SettingsAccordion`
+
+### Avatar
+
+- `Avatar`, `AvatarBadge`, `AvatarGroup`, `PresenceAvatar`, `ProfileAvatar`, `TeamAvatarGroup`
+
+### Badge
+
+- `Badge`, `BadgeGroup`, `NotificationBadge`, `PriorityBadge`, `StatusBadge`
+
+### Banner
+
+- `Banner`, `ErrorBanner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`
+
+### Breadcrumb
+
 - `Breadcrumb`
+
+### Button
+
+- `Button`, `CancelButton`, `CloseButton`, `ConfirmButton`, `CopyButton`, `CreateButton`
+- `DestructiveButton`, `DownloadButton`, `DropdownButton`, `EditButton`, `FilterButton`, `IconButton`
+- `LinkButton`, `PrimaryButton`, `RefreshButton`, `SaveButton`, `SearchButton`, `SecondaryButton`
+- `SortButton`, `SubmitButton`, `SuccessButton`, `TextButton`, `UploadButton`, `VerifyButton`
+
+### Card
+
+- `Card`, `ProductCard`, `ProfileCard`, `StatCard`
+
+### Checkbox
+
+- `CheckboxField`, `CheckboxGroupField`
+
+### Context Menu
+
+- `ContextMenu`
+
+### Date Picker
+
+- `DatePickerField`
+
+### Dialog
+
+- `ConfirmDialog`, `DestructiveDialog`, `Dialog`, `DialogModal`, `InfoDialog`
+
+### Divider
+
+- `Divider`
+
+### Drawer
+
+- `Drawer`
+
+### Heading
+
+- `H1`, `H2`, `H3`
+
+### Icon
+
 - `Icon`
-- `Avatar`, `AvatarBadge`, `AvatarGroup`, `ProfileAvatar`, `PresenceAvatar`, `TeamAvatarGroup`
-- `StatTile`, `Skeleton`
 
-Feedback and overlays:
-- `Badge`, `BadgeGroup`, `StatusBadge`, `PriorityBadge`, `NotificationBadge`
-- `Banner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`, `ErrorBanner`
+### Input
+
+- `CurrencyField`, `DateOfBirthField`, `DropdownField`, `EmailField`, `InputField`, `InputOtpField`
+- `PasswordField`, `PhoneField`, `RichTextField`, `SearchField`, `SelectField`, `TextareaField`
+- `URLField`, `ZipCodeField`
+
+### Pagination
+
+- `PaginationField`
+
+### Paragraph
+
+- `Paragraph`
+
+### Progress Bar
+
 - `ProgressBar`
-- `Spinner`, `ButtonSpinner`, `EmptyStateSpinner`
-- `Toast`, `ToastContainer`, `ToastProvider`
-- `SuccessToast`, `ErrorToast`, `WarningToast`, `InfoToast`
-- `Tooltip`, `TooltipGroup`, `ContextMenu`
-- `Dialog`, `DialogModal`, `Drawer`, `ConfirmDialog`, `DestructiveDialog`, `InfoDialog`
-- `Accordion`, `AccordionField`, `FAQAccordion`, `SettingsAccordion`, `SectionsAccordion`
-- `Tab`, `TabGroup`, `TabPanel`, `NavigationTabs`, `ContentTabs`, `SettingsTabs`
 
-Typed tokens and helpers:
-- `ThemeInput`, `ThemeMode`, `Density`, `ToneName`
-- `mwAvailableFonts`, `mwGoogleFontFamilies`, `mwFontFallbacks`, `createFontStack`
-- `mwThemeVars`, `mwThemeVarNames`, `mwStyledTheme`, `mwVar`
-- `ButtonVariant`, `ButtonSize`, `ButtonAction`
-- `BadgeVariant`, `AvatarSize`, `AvatarType`, `SwitchSize`, `IconName`, `Spacings`
+### Radio
+
+- `OptionRadioGroup`, `RadioGroupField`, `RatingRadioGroup`, `YesNoRadioGroup`
+
+### Segmented Control
+
+- `SegmentedControlField`
+
+### Skeleton
+
+- `Skeleton`
+
+### Slider
+
+- `BrightnessSlider`, `RadiusSlider`, `SliderField`, `VolumeSlider`
+
+### Spacing
+
+- `Spacer`, `Spacing`
+
+### Spinner
+
+- `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
+
+### Stat Tile
+
+- `StatTile`
+
+### Switch
+
+- `FeatureToggle`, `PermissionSwitch`, `PreferenceSwitch`, `SwitchField`
+
+### Tab
+
+- `ContentTabs`, `NavigationTabs`, `SettingsTabs`, `Tab`, `TabGroup`, `TabPanel`
+
+### Text
+
+- `Text`, `TypographyText`
+
+### Toast
+
+- `ErrorToast`, `InfoToast`, `SuccessToast`, `Toast`, `ToastContainer`, `ToastProvider`
+- `WarningToast`
+
+### Tooltip
+
+- `Tooltip`, `TooltipGroup`
+
+<!-- END GENERATED PUBLIC COMPONENTS -->
 
 ## Theme In Seconds
 
@@ -509,10 +609,10 @@ For script-driven style objects, composables, renderer bridges, or config files,
 - `mwThemeVars` is the default styling helper. It returns CSS `var(...)` references for style objects, CSS-in-JS integrations, vanilla-extract, and config files.
 - `mwThemeVarNames` returns raw custom property names for assigning provider-scoped overrides in style objects or tooling.
 - `mwVar()` wraps custom or advanced `--mw-*` names when the named token object does not cover a specialized case.
-- `mwStyledTheme` mirrors `mwThemeVars` as a plain object for shared CSS-in-JS integrations that expect a theme object.
+- `mwTheme` mirrors `mwThemeVars` as a plain object for shared CSS-in-JS integrations that expect a theme object. `mwStyledTheme` remains as a deprecated compatibility alias.
 
 ```ts
-import { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/vue"
+import { mwTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/vue"
 
 const panelStyle = {
   padding: mwThemeVars.spacing.sp24,
@@ -524,8 +624,10 @@ const focusOverride = {
   [mwThemeVarNames.color.focus]: "#FF00AA",
 }
 
-const cssInJsTheme = mwStyledTheme
+const cssInJsTheme = mwTheme
 ```
+
+`mwTheme`, `mwStyledTheme`, and `mwThemeVars` contain CSS `var(--mw-*)` references, not resolved color or spacing values. They are correct inside CSS evaluated below `MarwesProvider`, but JavaScript reads or aliases can resolve against the wrong element and return an empty value. Use `useTheme()` for JavaScript logic, charts, runtime aliases, or bridges that need concrete values.
 
 This enables Vue apps to keep scoped CSS, dynamic `:style` bindings, custom layout wrappers, and design-tool integrations visually tied to the same active theme as Marwes components. Changing `MarwesProvider :theme="..."` updates both preset components and app-owned styles.
 

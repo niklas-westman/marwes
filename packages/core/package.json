@@ -1,6 +1,20 @@
 {
   "name": "@marwes-ui/core",
   "version": "1.4.1",
+  "description": "Framework-agnostic Marwes UI contracts, theme primitives, accessibility helpers, and component recipes.",
+  "homepage": "https://marwes.io/docs/contributing/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niklas-westman/marwes.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/niklas-westman/marwes/issues"
+  },
+  "keywords": ["marwes", "design-system", "typescript", "accessibility", "ui"],
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -33,6 +47,6 @@
     "tsup": "8.5.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.11"
   }
 }

@@ -571,6 +571,32 @@ describe("MarwesProvider — theme preference", () => {
     expect(screen.getByText("dark:system:dark:system")).toBeInTheDocument()
   })
 
+  it("defaults system preference to light when matchMedia is unavailable", () => {
+    Object.defineProperty(window, "matchMedia", {
+      value: undefined,
+      configurable: true,
+      writable: true,
+    })
+
+    const { container } = render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(
+              MarwesProvider,
+              { defaultPreference: "system" },
+              {
+                default: () => h(ThemePreferenceConsumer),
+              },
+            )
+        },
+      }),
+    )
+
+    expect(container.firstElementChild).toHaveClass("mw-theme--light")
+    expect(screen.getByText("light:system:light:system")).toBeInTheDocument()
+  })
+
   it("lets controlled preference win over concrete mode and theme.mode", () => {
     mockSystemMode(ThemeMode.dark)
 

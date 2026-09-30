@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "family": "slider",
+  "title": "Slider",
+  "summary": "Continuous-value input family with a native range slider component, a canonical SliderField path, and thin purpose-slider wrappers.",
+  "useWhen": [
+    "The UI needs a continuous or stepped numeric control with visible labeling, optional description, and optional error support.",
+    "The product flow maps clearly to VolumeSlider, BrightnessSlider, or RadiusSlider and benefits from self-documenting purpose metadata.",
+    "The team wants React and Vue slider behavior to stay aligned through one native-first core recipe and one shared contract file."
+  ],
+  "avoidWhen": [
+    "A different control such as radio, segmented control, tabs, or direct numeric input is the more honest interaction model.",
+    "The implementation cannot own visible labeling or described-by wiring while using the SliderField escape hatch.",
+    "The team expects dual-thumb ranges, non-native slider semantics, or richer value presentation that this family does not currently define."
+  ],
+  "recommendationDescription": "Choose the purpose wrapper that matches the meaning; use SliderField as the deliberate primitive escape hatch.",
+  "recommendedComponents": [
+    {
+      "name": "VolumeSlider",
+      "description": "Preconfigured 0-100 volume control with a value tooltip"
+    },
+    {
+      "name": "BrightnessSlider",
+      "description": "Preconfigured 0-100 brightness control with a value tooltip"
+    },
+    {
+      "name": "RadiusSlider",
+      "description": "Preconfigured size control with sensible pixel bounds"
+    },
+    {
+      "name": "SliderField",
+      "description": "Base slider for custom numeric ranges; the deliberate escape hatch"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "BrightnessSlider"
+        },
+        {
+          "kind": "type",
+          "name": "BrightnessSliderProps"
+        },
+        {
+          "kind": "component",
+          "name": "RadiusSlider"
+        },
+        {
+          "kind": "type",
+          "name": "RadiusSliderProps"
+        },
+        {
+          "kind": "component",
+          "name": "SliderField"
+        },
+        {
+          "kind": "type",
+          "name": "SliderFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "VolumeSlider"
+        },
+        {
+          "kind": "type",
+          "name": "VolumeSliderProps"
+        }
+      ],
+      "example": "import { SliderField } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <SliderField\n      label=\"Volume\"\n      description=\"Adjust media volume\"\n      slider={{ min: 0, max: 100, step: 1, defaultValue: 40 }}\n    />\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "BrightnessSlider"
+        },
+        {
+          "kind": "type",
+          "name": "BrightnessSliderProps"
+        },
+        {
+          "kind": "component",
+          "name": "RadiusSlider"
+        },
+        {
+          "kind": "type",
+          "name": "RadiusSliderProps"
+        },
+        {
+          "kind": "component",
+          "name": "SliderField"
+        },
+        {
+          "kind": "type",
+          "name": "SliderFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "VolumeSlider"
+        },
+        {
+          "kind": "type",
+          "name": "VolumeSliderProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { SliderField } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <SliderField\n    label=\"Volume\"\n    description=\"Adjust media volume\"\n    :slider=\"{ min: 0, max: 100, step: 1, defaultValue: 40 }\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "BrightnessSlider"
+        },
+        {
+          "kind": "type",
+          "name": "BrightnessSliderProps"
+        },
+        {
+          "kind": "component",
+          "name": "RadiusSlider"
+        },
+        {
+          "kind": "type",
+          "name": "RadiusSliderProps"
+        },
+        {
+          "kind": "component",
+          "name": "SliderField"
+        },
+        {
+          "kind": "type",
+          "name": "SliderFieldProps"
+        },
+        {
+          "kind": "component",
+          "name": "VolumeSlider"
+        },
+        {
+          "kind": "type",
+          "name": "VolumeSliderProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { SliderField } from \"@marwes-ui/svelte\"\n</script>\n\n<SliderField\n  label=\"Volume\"\n  description=\"Adjust media volume\"\n  slider={{ min: 0, max: 100, step: 1, defaultValue: 40 }}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Provide clear min and max value labels so the numeric range is understood without a screen.",
+      "title": "Value range labeling"
+    },
+    {
+      "description": "Verify keyboard arrow-key, Home, and End behavior sets the value the same way pointer input does.",
+      "title": "Keyboard range control"
+    },
+    {
+      "description": "Use the public Field component so labels, helper text, errors, and invalid state stay connected.",
+      "title": "Connected field wiring"
+    },
+    {
+      "description": "Real browser and assistive-technology validation for announcement quality, focus feel, and native range interaction expectations.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Future decisions about which slider stories should join stricter automated accessibility gates.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Whether future keyboard-proof coverage should go beyond the current native smoke-contract boundary.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Slider uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/slider/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

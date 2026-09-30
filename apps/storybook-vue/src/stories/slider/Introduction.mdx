@@ -8,9 +8,7 @@ import {
 
 # Slider Component
 
-Marwes provides a slider system with two layers:
-**SliderField** for labeled form usage with edge values, description, and error text,
-and the raw **Slider** atom for custom layouts.
+Marwes consumers use **SliderField** for labeled form usage and purpose wrappers for common meanings. The raw **Slider** atom is internal implementation evidence.
 
 ## Component Architecture
 
@@ -85,17 +83,7 @@ const radius = ref(24)
 
 ## Low-level Usage
 
-Use `Slider` directly when you need a custom composition or when surrounding labels are already handled elsewhere.
-
-```vue
-<script setup lang="ts">
-import { Slider } from "@marwes-ui/vue"
-</script>
-
-<template>
-  <Slider :min="0" :max="100" :default-value="50" aria-label="Volume" show-touch-area />
-</template>
-```
+`Slider` is not exported from `@marwes-ui/vue` and must not be deep-imported. Use `SliderField` and pass range behavior through its nested `slider` prop.
 
 ## Supported Atom Features
 
@@ -109,8 +97,8 @@ import { Slider } from "@marwes-ui/vue"
 
 ## Accessibility Notes
 
-- `Slider` renders a native `type="range"` control
-- prefer `SliderField` when the slider needs a visible label, helper text, or error text
+- `SliderField` renders a native `type="range"` control through its internal atom
+- always provide a visible label; use helper and error text when relevant
 - provide `ariaLabel` when there is no visible label nearby
 - use `ariaLabelledBy` and `ariaDescribedBy` when the slider is connected to external text
 - use `ariaValueText` when the raw numeric value needs a more descriptive spoken label
@@ -133,8 +121,7 @@ Purpose wrappers encode common slider meanings on top of `SliderField`.
 **`SliderField`** - Recommended field wrapper with label, helper/error messaging,
 and visible min/max values
 
-**`Slider`** - Low-level horizontal range input with native keyboard behavior,
-PDF-aligned hover/pressed/focus states, and optional tooltip and touch area visuals
+**`Slider`** - Internal range atom shown for implementation evidence; not a consumer import.
 
 ## Story Coverage
 

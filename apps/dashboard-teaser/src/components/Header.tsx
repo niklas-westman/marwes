@@ -1,35 +1,89 @@
-import { Icon, IconName } from "@marwes-ui/react"
+import { Icon, IconName, SegmentedControlField } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for theme toggle.
-import { SegmentedControl } from "../../../../packages/react/src/components/segmented-control/segmented-control"
-
-import { dashboardRadius } from "../theme/theme-utils"
 
 const HeaderContainer = styled.header`
+  position: sticky;
+  z-index: 20;
+  top: 0;
   width: 100%;
-  height: ${({ theme }) => `calc(${theme.spacing.sp64} + ${theme.spacing.sp4})`};
+  max-width: ${({ theme }) => theme.breakpoint.wideDesktop}px;
+  margin: 0 auto;
+  height: 4.25rem;
+  box-sizing: border-box;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: ${({ theme }) => theme.spacing.sp16} ${({ theme }) => theme.spacing.sp80};
-  border-radius: ${({ theme }) => dashboardRadius(theme, 4)};
+  background: color-mix(in srgb, ${({ theme }) => theme.color.background} 92%, transparent);
+  backdrop-filter: blur(1rem);
 
   ${({ theme }) => theme.media.mobileAndBelow} {
     padding: ${({ theme }) => theme.spacing.sp16}
       ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`};
-    border-radius: 0;
   }
 `
 
-const LogoWrapper = styled.div`
+const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sp24};
+
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    gap: ${({ theme }) => theme.spacing.sp16};
+  }
+`
+
+const LogoWrapper = styled.a`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sp16};
+  color: inherit;
+`
+
+const PrimaryNav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sp24};
+
+  a {
+    color: ${({ theme }) => theme.color.textMuted};
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a[aria-current="page"] {
+    color: ${({ theme }) => theme.color.text};
+  }
+
+  a[aria-current="page"] {
+    font-weight: 700;
+  }
+
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    a:first-child {
+      display: none;
+    }
+  }
 `
 
 const ThemeControlWrapper = styled.div`
   display: flex;
+
+  .mw-segmented-control-field__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 `
 
 const MarwesLogoSvg = styled.svg`
@@ -54,9 +108,16 @@ const themeItems: SegmentedControlItem[] = [
 interface HeaderProps {
   isDark: boolean
   onToggleTheme: () => void
+  currentPath?: string
+  docs?: boolean
 }
 
-function Header({ isDark, onToggleTheme }: HeaderProps): JSX.Element {
+function Header({
+  isDark,
+  onToggleTheme,
+  currentPath = "/",
+  docs = false,
+}: HeaderProps): JSX.Element {
   const currentTheme: ThemeValue = isDark ? "dark" : "light"
 
   const handleChange = (value: string): void => {
@@ -66,20 +127,39 @@ function Header({ isDark, onToggleTheme }: HeaderProps): JSX.Element {
   }
 
   return (
-    <HeaderContainer>
-      <LogoWrapper>
+    <HeaderContainer data-site-header data-docs-header={docs || undefined}>
+      <LogoWrapper href={import.meta.env.BASE_URL} aria-label="Marwes homepage">
         <MarwesLogo />
       </LogoWrapper>
-      <ThemeControlWrapper>
-        <SegmentedControl
-          items={themeItems}
-          value={currentTheme}
-          onValueChange={handleChange}
-          variant="inverse"
-          size="md"
-          ariaLabel="Theme mode"
-        />
-      </ThemeControlWrapper>
+      <HeaderActions>
+        <PrimaryNav aria-label="Main">
+          <a
+            href={import.meta.env.BASE_URL}
+            aria-current={currentPath === "/" ? "page" : undefined}
+          >
+            Home
+          </a>
+          <a
+            href={`${import.meta.env.BASE_URL}docs/introduction/`}
+            aria-current={currentPath.startsWith("/docs/") ? "page" : undefined}
+            data-docs-soft-nav={docs || undefined}
+          >
+            Docs
+          </a>
+        </PrimaryNav>
+        <ThemeControlWrapper>
+          <SegmentedControlField
+            label="Theme mode"
+            segmentedControl={{
+              items: themeItems,
+              value: currentTheme,
+              onValueChange: handleChange,
+              variant: "inverse",
+              size: "sm",
+            }}
+          />
+        </ThemeControlWrapper>
+      </HeaderActions>
     </HeaderContainer>
   )
 }
@@ -123,4 +203,4 @@ function MarwesLogo(): JSX.Element {
   )
 }
 
-export { Header }
+export { Header, MarwesLogo }

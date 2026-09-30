@@ -1,8 +1,9 @@
 import { readFile, readdir } from "node:fs/promises"
-import { join } from "node:path"
+import { basename, extname, join } from "node:path"
 import type { CommandRunner } from "./command-runner"
 import { defaultCommandRunner } from "./command-runner"
 import { detectPackageManager, formatShellCommand, runScriptCommand } from "./package-manager"
+import { hasConfiguredProvider } from "./provider-detection"
 import { type Adapter, type PackageManager, adapters, getAdapterRecipe, isAdapter } from "./recipes"
 
 export type DoctorLevel = "pass" | "warn" | "fail"
@@ -36,7 +37,14 @@ type PackageJson = {
   optionalDependencies?: Record<string, string>
 }
 
+type SourceFile = {
+  path: string
+  source: string
+}
+
 const sourceExtensions = new Set([".ts", ".tsx", ".js", ".jsx", ".vue", ".svelte", ".css"])
+const sourceDirectories = ["src", "app", "pages"]
+const knownRootFile = /^(?:main|app|layout|index|root)\.(?:ts|tsx|js|jsx|vue|svelte)$/i
 
 function dependencyVersion(packageJson: PackageJson, packageName: string): string | undefined {
   return (
@@ -60,7 +68,7 @@ async function collectSourceFiles(directory: string): Promise<string[]> {
     const path = join(directory, entry.name)
 
     if (entry.isDirectory()) {
-      if (entry.name === "node_modules" || entry.name === "dist" || entry.name === ".git") {
+      if (["node_modules", "dist", ".git", ".next", ".svelte-kit"].includes(entry.name)) {
         continue
       }
 
@@ -68,13 +76,33 @@ async function collectSourceFiles(directory: string): Promise<string[]> {
       continue
     }
 
-    const extension = entry.name.slice(entry.name.lastIndexOf("."))
-    if (sourceExtensions.has(extension)) {
+    if (sourceExtensions.has(extname(entry.name))) {
       files.push(path)
     }
   }
 
   return files
+}
+
+async function readProjectSources(cwd: string): Promise<SourceFile[]> {
+  const paths = new Set<string>()
+
+  for (const directory of sourceDirectories) {
+    for (const file of await collectSourceFiles(join(cwd, directory))) {
+      paths.add(file)
+    }
+  }
+
+  const rootEntries = await readdir(cwd, { withFileTypes: true }).catch(() => [])
+  for (const entry of rootEntries) {
+    if (entry.isFile() && knownRootFile.test(entry.name)) {
+      paths.add(join(cwd, entry.name))
+    }
+  }
+
+  return Promise.all(
+    [...paths].map(async (path) => ({ path, source: await readFile(path, "utf8") })),
+  )
 }
 
 function detectInstalledAdapter(packageJson: PackageJson): Adapter | undefined {
@@ -83,17 +111,23 @@ function detectInstalledAdapter(packageJson: PackageJson): Adapter | undefined {
   )
 }
 
-async function sourceContains(cwd: string, needle: string): Promise<boolean> {
-  const sourceFiles = await collectSourceFiles(join(cwd, "src"))
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
 
-  for (const file of sourceFiles) {
-    const source = await readFile(file, "utf8")
-    if (source.includes(needle)) {
-      return true
-    }
-  }
+function providerSetupFile(
+  sources: readonly SourceFile[],
+  adapter: Adapter,
+): SourceFile | undefined {
+  return sources.find((file) => hasConfiguredProvider(file.source, adapter))
+}
 
-  return false
+function sourceContains(sources: readonly SourceFile[], needle: string): boolean {
+  return sources.some((file) => file.source.includes(needle))
+}
+
+function sourceMatches(sources: readonly SourceFile[], pattern: RegExp): boolean {
+  return sources.some((file) => pattern.test(file.source))
 }
 
 function formatItem(item: DoctorItem): string {
@@ -109,7 +143,9 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
   const runner = options.runner ?? defaultCommandRunner
   const packageJson = await readPackageJson(cwd)
   const adapter = options.adapter ?? detectInstalledAdapter(packageJson)
+  const sources = await readProjectSources(cwd)
   const items: DoctorItem[] = []
+  let commandFailureCode: number | undefined
 
   if (!adapter) {
     items.push({
@@ -132,14 +168,20 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
       }
     }
 
-    const hasProvider = await sourceContains(cwd, "MarwesProvider")
+    const providerFile = providerSetupFile(sources, adapter)
+    const providerMentioned = sourceContains(sources, "MarwesProvider")
     items.push(
-      hasProvider
-        ? { level: "pass", message: "MarwesProvider is referenced in app source." }
+      providerFile
+        ? {
+            level: "pass",
+            message: `MarwesProvider is imported from ${recipe.packageName} and rendered in ${basename(providerFile.path)}.`,
+          }
         : {
-            level: "warn",
-            message: "MarwesProvider was not found in app source.",
-            fix: `Wrap the app root with MarwesProvider from ${recipe.packageName}.`,
+            level: "fail",
+            message: providerMentioned
+              ? `MarwesProvider is not both imported from ${recipe.packageName} and rendered in the same app entry file.`
+              : "MarwesProvider was not rendered in app source.",
+            fix: `Wrap the app root with MarwesProvider from ${recipe.packageName}. Checked src/, app/, pages/, and known root entry files.`,
           },
     )
   }
@@ -152,9 +194,20 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
         fix: "App projects should import from the public adapter package instead.",
       })
     }
+
+    const escapedPackage = escapeRegExp(internalPackage)
+    if (
+      sourceMatches(sources, new RegExp(`(?:from\\s*|import\\s*)["']${escapedPackage}(?:["'/])`))
+    ) {
+      items.push({
+        level: "warn",
+        message: `Direct source import from ${internalPackage} found.`,
+        fix: "Import consumer APIs from the framework adapter package instead.",
+      })
+    }
   }
 
-  if (await sourceContains(cwd, "@marwes-ui/presets/firstEdition/styles.css")) {
+  if (sourceMatches(sources, /["']@marwes-ui\/presets\/[^"']*styles\.css["']/)) {
     items.push({
       level: "warn",
       message: "Manual Marwes preset stylesheet import found.",
@@ -164,23 +217,30 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
 
   if (options.runBuild) {
     const packageManager = options.packageManager ?? (await detectPackageManager(cwd))
-    const scriptName = packageJson.scripts?.typecheck
-      ? "typecheck"
-      : packageJson.scripts?.build
-        ? "build"
-        : undefined
-
-    if (!scriptName) {
-      items.push({ level: "warn", message: "No typecheck or build script found to run." })
-    } else {
+    if (!packageJson.scripts?.build) {
+      items.push({
+        level: "fail",
+        message: "No build script found to run.",
+        fix: "Add a production build script to package.json, then rerun marwes doctor --run-build.",
+      })
+    }
+    const scripts = [
+      ...(packageJson.scripts?.typecheck ? ["typecheck"] : []),
+      ...(packageJson.scripts?.build ? ["build"] : []),
+    ]
+    for (const scriptName of scripts) {
       const command = runScriptCommand(packageManager, scriptName)
       write(`Running ${formatShellCommand(command)}`)
       const exitCode = await runner(command, { cwd })
+      if (exitCode !== 0) {
+        commandFailureCode = exitCode
+      }
       items.push(
         exitCode === 0
           ? { level: "pass", message: `${scriptName} completed successfully.` }
-          : { level: "fail", message: `${scriptName} failed.` },
+          : { level: "fail", message: `${scriptName} failed with exit code ${exitCode}.` },
       )
+      if (exitCode !== 0) break
     }
   }
 
@@ -188,7 +248,7 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
     write(formatItem(item))
   }
 
-  const exitCode = items.some((item) => item.level === "fail") ? 1 : 0
+  const exitCode = commandFailureCode ?? (items.some((item) => item.level === "fail") ? 1 : 0)
   return { ...(adapter ? { adapter } : {}), items, exitCode }
 }
 

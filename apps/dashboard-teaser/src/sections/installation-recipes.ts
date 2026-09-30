@@ -22,6 +22,8 @@ export function createAgenticInstallPrompt(framework: Framework): string {
     "Run this in the project root:",
     createAgenticInstallCommand(framework),
     "",
+    `Read https://marwes.io/llms.txt and https://marwes.io/ai/${framework}.md for the official setup and public API.`,
+    `Use real public components from @marwes-ui/${framework}; do not invent mw-* replacements or use private deep imports.`,
     "Follow the CLI output. If automatic patching is skipped, apply the manual provider instructions it prints.",
   ].join("\n")
 }

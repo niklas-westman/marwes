@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "family": "heading",
+  "title": "Heading",
+  "summary": "Native-semantic typography family with three heading components backed by one core recipe, one shared typography preset, and a shared React/Vue contract.",
+  "useWhen": [
+    "The UI needs a real page, section, or subsection heading and document outline should stay explicit.",
+    "The product wants React and Vue heading behavior to stay aligned through one core recipe and one shared contract.",
+    "Semantic level and visual size may need to diverge intentionally while still keeping the native heading tag."
+  ],
+  "avoidWhen": [
+    "The layout only needs visually larger text and does not benefit from real heading semantics.",
+    "The surface is really a richer hero, banner, or section-header composition rather than a plain heading component.",
+    "The team expects a family-local metadata layer or purpose-wrapper vocabulary that the current heading family does not ship."
+  ],
+  "recommendationDescription": "Choose the heading level that matches real document structure; use size only to change visual weight without changing that structure.",
+  "recommendedComponents": [
+    {
+      "name": "H1",
+      "description": "Top-level page heading"
+    },
+    {
+      "name": "H2",
+      "description": "Major section heading"
+    },
+    {
+      "name": "H3",
+      "description": "Subsection heading"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "H1"
+        },
+        {
+          "kind": "type",
+          "name": "H1Props"
+        },
+        {
+          "kind": "component",
+          "name": "H2"
+        },
+        {
+          "kind": "type",
+          "name": "H2Props"
+        },
+        {
+          "kind": "component",
+          "name": "H3"
+        },
+        {
+          "kind": "type",
+          "name": "H3Props"
+        }
+      ],
+      "example": "import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <>\n      <Text variant={TextVariant.display}>Display</Text>\n\n      <H1>Heading 1</H1>\n      <H2>Heading 2</H2>\n      <H3>Heading 3</H3>\n\n      <Paragraph size=\"md\">Body paragraph text.</Paragraph>\n      <Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n      <Text variant={TextVariant.label}>Label default</Text>\n      <Text variant={TextVariant.labelSmall}>Label small</Text>\n      <Text variant={TextVariant.caption}>Caption</Text>\n      <Text variant={TextVariant.overline}>Overline</Text>\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "H1"
+        },
+        {
+          "kind": "component",
+          "name": "H2"
+        },
+        {
+          "kind": "component",
+          "name": "H3"
+        },
+        {
+          "kind": "type",
+          "name": "HeadingProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Text :variant=\"TextVariant.display\">Display</Text>\n\n  <H1>Heading 1</H1>\n  <H2>Heading 2</H2>\n  <H3>Heading 3</H3>\n\n  <Paragraph size=\"md\">Body paragraph text.</Paragraph>\n  <Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n  <Text :variant=\"TextVariant.label\">Label default</Text>\n  <Text :variant=\"TextVariant.labelSmall\">Label small</Text>\n  <Text :variant=\"TextVariant.caption\">Caption</Text>\n  <Text :variant=\"TextVariant.overline\">Overline</Text>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "H1"
+        },
+        {
+          "kind": "type",
+          "name": "H1Props"
+        },
+        {
+          "kind": "component",
+          "name": "H2"
+        },
+        {
+          "kind": "type",
+          "name": "H2Props"
+        },
+        {
+          "kind": "component",
+          "name": "H3"
+        },
+        {
+          "kind": "type",
+          "name": "H3Props"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/svelte\"\n</script>\n\n<Text variant={TextVariant.display}>Display</Text>\n\n<H1>Heading 1</H1>\n<H2>Heading 2</H2>\n<H3>Heading 3</H3>\n\n<Paragraph size=\"md\">Body paragraph text.</Paragraph>\n<Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n<Text variant={TextVariant.label}>Label default</Text>\n<Text variant={TextVariant.labelSmall}>Label small</Text>\n<Text variant={TextVariant.caption}>Caption</Text>\n<Text variant={TextVariant.overline}>Overline</Text>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep heading levels sequential in the real document outline; use size only to change visual weight.",
+      "title": "Sequential heading levels"
+    },
+    {
+      "description": "Verify screen-reader users can navigate the page by heading level alone.",
+      "title": "Heading navigation review"
+    },
+    {
+      "description": "Product-level judgment about choosing the correct heading level for the real document outline.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Whether size overrides are used sparingly and do not flatten the content hierarchy.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Whether heading ids and anchor-link patterns stay useful and consistent in real documentation or product flows.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Heading uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/heading/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

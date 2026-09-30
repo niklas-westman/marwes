@@ -25,6 +25,11 @@ function isDev(): boolean {
 
 const __DEV__ = isDev()
 
+function nonEmptyName(value: string | undefined): string | undefined {
+  const normalized = value?.trim()
+  return normalized ? normalized : undefined
+}
+
 export function resolveButtonA11y(
   opts: ButtonOptions,
   resolvedLoading: ResolvedButtonLoading,
@@ -36,18 +41,19 @@ export function resolveButtonA11y(
   const tag: "button" | "a" = opts.as === "a" || !!opts.href ? "a" : "button"
   const isDisabled =
     !!opts.disabled || (resolvedLoading.isLoading && resolvedLoading.disableWhileLoading)
+  const ariaLabelledBy = nonEmptyName(opts.ariaLabelledBy)
+  const ariaLabel = nonEmptyName(opts.ariaLabel) ?? nonEmptyName(opts.label)
+  const loadingAccessibleLabel = resolvedLoading.isLoading
+    ? nonEmptyName(resolvedLoading.loadingLabel)
+    : undefined
 
   if (__DEV__) {
     const iconOnly = opts.iconOnly || opts.hasVisibleText === false
-    const accessibleLabel = opts.ariaLabel ?? opts.label
-    const loadingAccessibleLabel = resolvedLoading.isLoading
-      ? resolvedLoading.loadingLabel
-      : undefined
 
-    if (iconOnly && !accessibleLabel && !loadingAccessibleLabel) {
+    if (iconOnly && !ariaLabelledBy && !ariaLabel && !loadingAccessibleLabel) {
       // Development warning for accessibility
       console.warn(
-        "[marwes] Icon-only Button requires ariaLabel, label, or loadingLabel while loading.",
+        "[marwes] Icon-only Button requires label, ariaLabel, ariaLabelledBy, or loadingLabel while loading.",
       )
     }
   }
@@ -55,12 +61,8 @@ export function resolveButtonA11y(
   // Build common props without assigning `undefined` (exactOptionalPropertyTypes-safe)
   const common: ButtonA11yProps = {}
 
-  if (opts.ariaLabelledBy) {
-    common.ariaLabelledBy = opts.ariaLabelledBy
-  } else {
-    const accessibleLabel = opts.ariaLabel ?? opts.label
-    if (accessibleLabel) common.ariaLabel = accessibleLabel
-  }
+  if (ariaLabelledBy) common.ariaLabelledBy = ariaLabelledBy
+  else if (ariaLabel) common.ariaLabel = ariaLabel
   if (resolvedLoading.isLoading) common.ariaBusy = true
   if (isDisabled) common.ariaDisabled = true
 

@@ -100,6 +100,12 @@ export interface ResolvedButtonLoading {
   loadingLabel?: string
 }
 
+/** Accessible-name contract for controls that never render visible text. */
+export type AccessibleButtonName =
+  | { label: string; ariaLabel?: string; ariaLabelledBy?: string }
+  | { label?: string; ariaLabel: string; ariaLabelledBy?: string }
+  | { label?: string; ariaLabel?: string; ariaLabelledBy: string }
+
 export type ButtonOptions = {
   as?: "button" | "a"
   href?: string

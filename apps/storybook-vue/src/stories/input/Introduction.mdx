@@ -15,11 +15,11 @@ and automatically set AI-friendly metadata. Each field variant is optimized for
 its specific use case with appropriate semantic HTML attributes.
 
 Input domain groups everything related to text-like data entry in one place,
-using a clear Atom -> Molecule -> Purpose progression.
+using a clear Field -> Purpose progression for consumers. Atom stories are retained only as internal implementation evidence.
 
 ### Field naming
 
-Components that wrap the raw `Input` atom with label, helper text, and error semantics
+Components that provide input behavior with label, helper text, and error semantics
 are called **Fields** (e.g. `InputField`, `SelectField`, `TextareaField`, `RichTextField`, `DropdownField`, `SearchField`, `EmailField`).
 The suffix signals that the component provides full field-level UX — accessible labelling,
 validation display, and AI-friendly `data-purpose` attributes — so you don't have to wire
@@ -28,7 +28,7 @@ those concerns yourself.
 ## Input Architecture
 
 ```
-Atoms
+Internal atoms (not package exports)
   ├─ Input
   ├─ Select
   ├─ Textarea
@@ -54,89 +54,19 @@ Purpose Variants (Input-based)
 
 ## Atom: Input
 
-Use `Input` directly when you need full layout control without label/helper/error wrappers:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { Input } from "@marwes-ui/vue"
-
-const value = ref("")
-</script>
-
-<template>
-  <Input
-    type="text"
-    placeholder="Type here"
-    v-model="value"
-  />
-</template>
-```
+`Input` is not exported from `@marwes-ui/vue`. Use `InputField` or a purpose field such as `EmailField`; do not deep-import the atom.
 
 ## Atom: Select
 
-Use `Select` for the compact select atom. Set `native` to `true` when you explicitly want the browser's built-in dropdown chrome:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { Select } from "@marwes-ui/vue"
-
-const country = ref("")
-</script>
-
-<template>
-  <Select
-    placeholder="Choose a country"
-    :options="[
-      { value: 'se', label: 'Sweden' },
-      { value: 'us', label: 'United States' }
-    ]"
-    v-model="country"
-  />
-</template>
-```
+`Select` is not exported from `@marwes-ui/vue`. Use `SelectField` or `DropdownField`; pass native/custom presentation through the field's nested `select` prop.
 
 ## Atom: Textarea
 
-Use `Textarea` when you need multiline freeform text entry without field-level wrapper UI:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { Textarea } from "@marwes-ui/vue"
-
-const value = ref("")
-</script>
-
-<template>
-  <Textarea
-    rows="4"
-    placeholder="Add more detail"
-    v-model="value"
-  />
-</template>
-```
+`Textarea` is not exported from `@marwes-ui/vue`. Use `TextareaField`, which includes visible labeling and validation wiring.
 
 ## Atom: RichText
 
-Use `RichText` when the authored content itself needs inline emphasis such as bold, italic, or underline. Use `Textarea` when the content should stay plain text.
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { RichText } from "@marwes-ui/vue"
-
-const html = ref("")
-</script>
-
-<template>
-  <RichText
-    placeholder="Write a formatted update"
-    v-model="html"
-  />
-</template>
-```
+`RichText` is not exported from `@marwes-ui/vue`. Use `RichTextField` when authored content needs inline emphasis, or `TextareaField` when it should remain plain text.
 
 ### Why use RichText?
 

@@ -75,6 +75,9 @@ jobs:
       - name: actionlint
         uses: devops-actions/actionlint@v0.1.10
 
+      - name: Release authentication contract
+        run: node --test scripts/test-release-workflow.mjs
+
   validate:
     name: validate / ${{ matrix.name }}
     runs-on: ubuntu-latest
@@ -92,6 +95,8 @@ jobs:
             command: pnpm -r typecheck && pnpm test:typecheck:contracts
           - name: package tests
             command: pnpm test:packages
+          - name: dashboard tests
+            command: pnpm --filter dashboard-teaser test
           - name: design contracts
             command: pnpm registry:check && pnpm colors:check && pnpm --filter @marwes-ui/presets test
           - name: cohesive reflection
@@ -136,3 +141,31 @@ jobs:
           name: reflection-artifacts
           path: artifacts/reflection
           if-no-files-found: ignore
+
+  consumer-smoke:
+    name: consumer smoke / ${{ matrix.framework }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [react, vue, svelte]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Test packed ${{ matrix.framework }} consumer
+        run: pnpm consumer:smoke --framework ${{ matrix.framework }}

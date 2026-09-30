@@ -3,7 +3,7 @@
  * PrimaryButton, SecondaryButton, DestructiveButton, ConfirmButton,
  * and CancelButton class and attribute defaults.
  */
-import { render } from "@testing-library/svelte"
+import { render, within } from "@testing-library/svelte"
 import { describe, expect, it } from "vitest"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import ConfirmButton from "../lib/components/button/ConfirmButton.svelte"
@@ -11,6 +11,7 @@ import DestructiveButton from "../lib/components/button/DestructiveButton.svelte
 import IconButton from "../lib/components/button/IconButton.svelte"
 import PrimaryButton from "../lib/components/button/PrimaryButton.svelte"
 import SecondaryButton from "../lib/components/button/SecondaryButton.svelte"
+import type { IconButtonProps } from "../lib/components/button/types"
 import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
 
 describe("BadgeGroup", () => {
@@ -66,6 +67,28 @@ describe("Button purpose variants", () => {
     const { container } = render(IconButton, { props: { icon: "x", label: "Close" } })
     const btn = container.querySelector("button")
     expect(btn?.getAttribute("aria-label")).toBe("Close")
+  })
+
+  it("keeps unnamed IconButtonProps backward compatible at compile time", () => {
+    const unnamedIconButton: IconButtonProps = { icon: "x" }
+    expect(unnamedIconButton).toBeDefined()
+    const namedIconButtons: IconButtonProps[] = [
+      { icon: "x", label: "Close" },
+      { icon: "x", ariaLabel: "Close" },
+      { icon: "x", ariaLabelledBy: "close-label" },
+    ]
+    expect(namedIconButtons).toHaveLength(3)
+  })
+
+  it("IconButton accepts an external accessible label", () => {
+    const { container } = render(IconButton, {
+      props: { icon: "x", ariaLabelledBy: "close-label" },
+    })
+    container.insertAdjacentHTML("afterbegin", '<span id="close-label">Close</span>')
+
+    expect(
+      within(container).getByRole("button", { name: "Close" }).getAttribute("aria-labelledby"),
+    ).toBe("close-label")
   })
 
   it("ConfirmButton renders as a button", () => {

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "family": "context-menu",
+  "title": "ContextMenu",
+  "summary": "Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling.",
+  "useWhen": [
+    "The UI needs a compact grouped list of secondary actions.",
+    "Actions benefit from leading icons and a small menu surface.",
+    "The product already owns the trigger, popover positioning, and menu visibility state."
+  ],
+  "avoidWhen": [
+    "The UI needs a full popover primitive with collision-aware positioning.",
+    "The choices are form values rather than commands; use a select or dropdown field instead.",
+    "The menu would contain complex forms or long-form content rather than short actions."
+  ],
+  "recommendationDescription": "Use ContextMenu for a list of contextual actions; position and visibility are the consumer's responsibility.",
+  "recommendedComponents": [
+    {
+      "name": "ContextMenu",
+      "description": "Inline action list the consumer composes for placement and visibility"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ContextMenu"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuActionItem"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuDividerItem"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuEntry"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuProps"
+        }
+      ],
+      "example": "import { ContextMenu, IconName } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <ContextMenu\n      ariaLabel=\"File actions\"\n      items={[\n        { value: \"edit\", label: \"Edit\", icon: IconName.Edit },\n        { value: \"preview\", label: \"Preview\", icon: IconName.Eye },\n        { value: \"download\", label: \"Download\", icon: IconName.Download },\n        { kind: \"divider\" },\n        { value: \"bookmark\", label: \"Bookmark\", icon: IconName.Bookmark },\n        { value: \"report\", label: \"Report\", icon: IconName.Flag },\n        { kind: \"divider\" },\n        { value: \"delete\", label: \"Delete\", icon: IconName.Trash, destructive: true },\n      ]}\n    />\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ContextMenu"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuActionItem"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuDividerItem"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuEntry"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ContextMenu, IconName } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <ContextMenu\n    aria-label=\"File actions\"\n    :items=\"[\n      { value: 'edit', label: 'Edit', icon: IconName.Edit },\n      { value: 'preview', label: 'Preview', icon: IconName.Eye },\n      { value: 'download', label: 'Download', icon: IconName.Download },\n      { kind: 'divider' },\n      { value: 'bookmark', label: 'Bookmark', icon: IconName.Bookmark },\n      { value: 'report', label: 'Report', icon: IconName.Flag },\n      { kind: 'divider' },\n      { value: 'delete', label: 'Delete', icon: IconName.Trash, destructive: true },\n    ]\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "ContextMenu"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuActionItem"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuEntry"
+        },
+        {
+          "kind": "type",
+          "name": "ContextMenuProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { ContextMenu, IconName } from \"@marwes-ui/svelte\"\n</script>\n\n<ContextMenu\n  ariaLabel=\"File actions\"\n  items={[\n    { value: \"edit\", label: \"Edit\", icon: IconName.Edit },\n    { value: \"preview\", label: \"Preview\", icon: IconName.Eye },\n    { value: \"download\", label: \"Download\", icon: IconName.Download },\n    { kind: \"divider\" },\n    { value: \"bookmark\", label: \"Bookmark\", icon: IconName.Bookmark },\n    { value: \"report\", label: \"Report\", icon: IconName.Flag },\n    { kind: \"divider\" },\n    { value: \"delete\", label: \"Delete\", icon: IconName.Trash, destructive: true },\n  ]}\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Compose real focus management, outside-click dismissal, and positioning around this primitive.",
+      "title": "Consumer-composed interaction"
+    },
+    {
+      "description": "Give every destructive action an explicit visual and semantic distinction from safe actions.",
+      "title": "Destructive action distinction"
+    },
+    {
+      "description": "Test focus entry, focus return, dismissal, and escape-key behavior in context.",
+      "title": "Focus and escape review"
+    },
+    {
+      "description": "End-to-end product composition where a trigger opens the menu and returns focus after close.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Keyboard behavior for any future managed popover/menu-button composition.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Visual review against the light and dark Figma context-menu frames.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Context Menu uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/context-menu/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

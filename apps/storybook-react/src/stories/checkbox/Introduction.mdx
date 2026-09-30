@@ -4,12 +4,12 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Checkbox Components
 
-Checkbox stories are organized with a simple two-layer structure to keep discovery fast.
+Consumers use the public Field components. The atom story remains only as internal implementation evidence.
 
 ## Checkbox Architecture
 
 ```
-Checkbox (Atom)
+Checkbox (Atom, internal)
      ↓        ↓
 CheckboxField (Molecule)
 CheckboxGroupField (Molecule)
@@ -17,16 +17,7 @@ CheckboxGroupField (Molecule)
 
 ## Atom: Checkbox
 
-Use `Checkbox` for low-level control when you manage label/layout yourself.
-
-```tsx
-import { Checkbox } from "@marwes-ui/react"
-
-<label>
-  <Checkbox ariaLabel="Accept terms" />
-  Accept terms
-</label>
-```
+`Checkbox` is not exported from `@marwes-ui/react`. Do not deep-import it. Use `CheckboxField` for one choice or `CheckboxGroupField` for a group; both own the visible label and accessibility wiring.
 
 ## Molecule: CheckboxField
 

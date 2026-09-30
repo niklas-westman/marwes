@@ -15,6 +15,7 @@ import {
 export { runCreate, type CreateOptions, type CreateResult } from "./create"
 export { runDoctor, type DoctorItem, type DoctorOptions, type DoctorResult } from "./doctor"
 export { runInit, type InitOptions, type InitResult } from "./init"
+export type { PatchResult } from "./patchers"
 export {
   adapters,
   createAgenticInitCommand,
@@ -47,8 +48,68 @@ Options:
   --pm <${supportedPackageManagersLabel()}>
   --agentic
   --dry-run
-  --no-install
+  --no-install                      Record dependencies but skip installation
   --no-patch
+`)
+}
+
+function wantsHelp(args: readonly string[]): boolean {
+  return args.includes("--help") || args.includes("-h") || args[0] === "help"
+}
+
+function writeInitHelp(write: (message: string) => void): void {
+  write(`marwes init --adapter <${supportedAdaptersLabel()}>
+
+Install a framework adapter, wire MarwesProvider into a standard Vite app, then run doctor.
+
+Options:
+  --adapter <${supportedAdaptersLabel()}>  Required framework adapter
+  --pm <${supportedPackageManagersLabel()}>       Package manager override
+  --agentic                         Print AI-agent boundary rules
+  --dry-run                         Show changes without writing or installing
+  --no-install                      Skip dependency installation
+  --no-patch                        Skip automatic provider wiring
+  --yes                             Accept defaults
+  --help                            Show this help
+`)
+}
+
+function writeDoctorHelp(write: (message: string) => void): void {
+  write(`marwes doctor [--adapter <${supportedAdaptersLabel()}>] [--run-build]
+
+Verify dependencies, adapter imports, provider rendering, and optional project compilation.
+
+Options:
+  --adapter <${supportedAdaptersLabel()}>  Framework adapter override
+  --pm <${supportedPackageManagersLabel()}>       Package manager override
+  --run-build                       Run optional typecheck, then the required production build
+  --help                            Show this help
+`)
+}
+
+function writeAiPromptHelp(write: (message: string) => void): void {
+  write(`marwes ai-prompt --adapter <${supportedAdaptersLabel()}>
+
+Print a framework-specific setup prompt for an AI coding agent.
+
+Options:
+  --adapter <${supportedAdaptersLabel()}>  Required framework adapter
+  --pm <${supportedPackageManagersLabel()}>       Package manager used in the prompt
+  --help                            Show this help
+`)
+}
+
+function writeCreateHelp(write: (message: string) => void): void {
+  write(`create-marwes <name> --template <${supportedTemplatesLabel()}>
+
+Create a new Vite app and configure its Marwes adapter.
+
+Options:
+  --template <${supportedTemplatesLabel()}>
+  --pm <${supportedPackageManagersLabel()}>
+  --dry-run
+  --no-install
+  --help
 `)
 }
 
@@ -66,6 +127,11 @@ export async function runMarwesCli(argv: string[], options: CliOptions = {}): Pr
   }
 
   if (command === "init") {
+    if (wantsHelp(args)) {
+      writeInitHelp(write)
+      return 0
+    }
+
     const parsed = parseArgs({
       args,
       options: {
@@ -110,6 +176,11 @@ export async function runMarwesCli(argv: string[], options: CliOptions = {}): Pr
   }
 
   if (command === "doctor") {
+    if (wantsHelp(args)) {
+      writeDoctorHelp(write)
+      return 0
+    }
+
     const parsed = parseArgs({
       args,
       options: {
@@ -143,6 +214,11 @@ export async function runMarwesCli(argv: string[], options: CliOptions = {}): Pr
   }
 
   if (command === "ai-prompt") {
+    if (wantsHelp(args)) {
+      writeAiPromptHelp(write)
+      return 0
+    }
+
     const parsed = parseArgs({
       args,
       options: {
@@ -176,6 +252,11 @@ export async function runCreateMarwesCli(
   options: CliOptions = {},
 ): Promise<number> {
   const write = options.write ?? ((message: string) => console.log(message))
+  if (wantsHelp(argv)) {
+    writeCreateHelp(write)
+    return 0
+  }
+
   const parsed = parseArgs({
     args: argv,
     options: {

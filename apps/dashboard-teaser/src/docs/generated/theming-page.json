@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "title": "Theming",
+  "summary": "Wrap once, provide a theme, and brand every Marwes component.",
+  "heading": "One provider, one theme boundary",
+  "description": "Marwes components consume resolved theme values from the framework provider and ship static preset CSS. There is no CSS-in-JS runtime in the component packages.",
+  "code": {
+    "language": "tsx",
+    "content": "const theme = { color: { primary: \"#5558ff\" } }\n\n<MarwesProvider theme={theme}>\n  <App />\n</MarwesProvider>"
+  },
+  "calloutTitle": "React consumers",
+  "calloutBody": "Use useTheme() when JavaScript needs resolved values. The styled theme contains CSS variable references whose definitions live below the document root.",
+  "sections": [
+    {
+      "id": "theming",
+      "label": "Theming"
+    }
+  ]
+}

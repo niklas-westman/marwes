@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "family": "card",
+  "title": "Card",
+  "summary": "Family-local surface-container family with a Card component and thin purpose-card wrappers for product, profile, and stat summaries.",
+  "useWhen": [
+    "The UI needs a bordered content surface with optional title and flexible body composition.",
+    "The product flow clearly maps to ProductCard, ProfileCard, or StatCard and benefits from local purpose metadata.",
+    "The team wants React, Vue, and Svelte card rendering to stay aligned through one simple core recipe and shared Storybook teaching surfaces."
+  ],
+  "avoidWhen": [
+    "The surface is really an interactive tile, navigation link, or button-like control that should own explicit interactive semantics.",
+    "The layout needs richer substructure such as actions, dismiss behavior, notifications, or multi-region shells beyond the current card component contract.",
+    "The team expects the exploratory notification-card design material to be part of the shipped Card family today."
+  ],
+  "recommendationDescription": "Prefer a purpose card for known summaries and keep every Card passive unless it contains honest interactive controls.",
+  "recommendedComponents": [
+    {
+      "name": "ProductCard",
+      "description": "Passive product summary surface"
+    },
+    {
+      "name": "ProfileCard",
+      "description": "Passive person or account summary surface"
+    },
+    {
+      "name": "StatCard",
+      "description": "Passive metric and supporting context surface"
+    },
+    {
+      "name": "Card",
+      "description": "Flexible surface when no purpose wrapper fits"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Card"
+        },
+        {
+          "kind": "type",
+          "name": "CardProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProductCard"
+        },
+        {
+          "kind": "type",
+          "name": "ProductCardProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProfileCard"
+        },
+        {
+          "kind": "type",
+          "name": "ProfileCardProps"
+        },
+        {
+          "kind": "component",
+          "name": "StatCard"
+        },
+        {
+          "kind": "type",
+          "name": "StatCardProps"
+        }
+      ],
+      "example": "import { ProductCard } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <ProductCard title=\"Analytics workspace\">\n      Monitor product adoption, conversion, and retention in one place.\n    </ProductCard>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Card"
+        },
+        {
+          "kind": "type",
+          "name": "CardProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProductCard"
+        },
+        {
+          "kind": "type",
+          "name": "ProductCardProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProfileCard"
+        },
+        {
+          "kind": "type",
+          "name": "ProfileCardProps"
+        },
+        {
+          "kind": "component",
+          "name": "StatCard"
+        },
+        {
+          "kind": "type",
+          "name": "StatCardProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { ProductCard } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <ProductCard title=\"Analytics workspace\">\n    Monitor product adoption, conversion, and retention in one place.\n  </ProductCard>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Card"
+        },
+        {
+          "kind": "type",
+          "name": "CardProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProductCard"
+        },
+        {
+          "kind": "type",
+          "name": "ProductCardProps"
+        },
+        {
+          "kind": "component",
+          "name": "ProfileCard"
+        },
+        {
+          "kind": "type",
+          "name": "ProfileCardProps"
+        },
+        {
+          "kind": "component",
+          "name": "StatCard"
+        },
+        {
+          "kind": "type",
+          "name": "StatCardProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { ProductCard } from \"@marwes-ui/svelte\"\n</script>\n\n<ProductCard title=\"Analytics workspace\">\n  Monitor product adoption, conversion, and retention in one place.\n</ProductCard>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep the card passive unless nested links or buttons provide the actual interaction semantics.",
+      "title": "Passive semantics"
+    },
+    {
+      "description": "Verify heading structure and reading order in the finished card composition.",
+      "title": "Keyboard and screen-reader review"
+    },
+    {
+      "description": "Product-level judgment about when a card should stay passive versus becoming a real interactive control with button or link semantics.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Whether purpose-card wrappers stay honest summaries instead of absorbing richer behavior that belongs in a different family.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Any future expansion toward notification-card or richer shell patterns beyond the current simple surface container.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Card uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/card/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

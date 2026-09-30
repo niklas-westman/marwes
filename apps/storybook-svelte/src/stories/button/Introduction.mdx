@@ -50,7 +50,7 @@ Purpose Wrappers
 ## Atom: Button and IconButton
 
 Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode.
-Use `IconButton` when the visible affordance is only an icon; it locks the square control sizing and requires an accessible label.
+Use `IconButton` when the visible affordance is only an icon; it locks the square control sizing and requires an accessible name through `label`, `ariaLabel`, or `ariaLabelledBy`. Prefer `label` for direct names. Do not rely on an `ariaLabel` placed on a nested `Icon`: that names the image, not the interactive button.
 
 ```svelte
 <script>
@@ -61,8 +61,8 @@ Use `IconButton` when the visible affordance is only an icon; it locks the squar
 <Button variant="secondary" action="navigate" href="/dashboard" as="a">
   Go to dashboard
 </Button>
-<IconButton icon="x" ariaLabel="Close" />
-<IconButton icon="trash" ariaLabel="Delete" variant="danger" action="delete" />
+<IconButton icon="x" label="Close" />
+<IconButton icon="trash" label="Delete" variant="danger" action="delete" />
 ```
 
 ## Recommended: Purpose Buttons

@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "familyCount": 31,
+  "routes": [
+    {
+      "description": "What Marwes is, how it's organized, and where to go next.",
+      "kind": "guide",
+      "path": "/docs/introduction/",
+      "title": "Introduction",
+      "renderer": "introduction"
+    },
+    {
+      "description": "Install Marwes for React and render your first accessible component.",
+      "kind": "guide",
+      "path": "/docs/get-started/react/",
+      "title": "Get started with React",
+      "renderer": "get-started"
+    },
+    {
+      "description": "Install Marwes for Vue and render your first accessible component.",
+      "kind": "guide",
+      "path": "/docs/get-started/vue/",
+      "title": "Get started with Vue",
+      "renderer": "get-started"
+    },
+    {
+      "description": "Install Marwes for Svelte and render your first accessible component.",
+      "kind": "guide",
+      "path": "/docs/get-started/svelte/",
+      "title": "Get started with Svelte",
+      "renderer": "get-started"
+    },
+    {
+      "description": "Find the right public Marwes component by family, framework, export, or use case.",
+      "kind": "guide",
+      "path": "/docs/components/",
+      "title": "Component catalog",
+      "renderer": "catalog",
+      "familyCount": 31
+    },
+    {
+      "description": "Wrap once, provide a theme, and brand every Marwes component.",
+      "kind": "guide",
+      "path": "/docs/theming/",
+      "title": "Theming",
+      "renderer": "theming"
+    },
+    {
+      "description": "Understand the accessibility contract shared by Marwes components.",
+      "kind": "guide",
+      "path": "/docs/accessibility/",
+      "title": "Accessibility",
+      "renderer": "accessibility"
+    },
+    {
+      "description": "Use Marwes with Next.js while preserving SSR-safe theme behavior.",
+      "kind": "guide",
+      "path": "/docs/integrations/next/",
+      "title": "Next.js integration"
+    },
+    {
+      "description": "Use Marwes with Nuxt and install the provider at the application boundary.",
+      "kind": "guide",
+      "path": "/docs/integrations/nuxt/",
+      "title": "Nuxt integration"
+    },
+    {
+      "description": "Use Marwes with SvelteKit without causing a light or dark mode flash.",
+      "kind": "guide",
+      "path": "/docs/integrations/sveltekit/",
+      "title": "SvelteKit integration"
+    },
+    {
+      "description": "Supported frameworks, runtimes, browsers, and package boundaries.",
+      "kind": "guide",
+      "path": "/docs/compatibility/",
+      "title": "Compatibility",
+      "renderer": "compatibility"
+    },
+    {
+      "description": "Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.",
+      "kind": "guide",
+      "path": "/docs/troubleshooting/",
+      "title": "Troubleshooting",
+      "renderer": "troubleshooting"
+    },
+    {
+      "description": "Give coding agents canonical, machine-readable Marwes documentation.",
+      "kind": "guide",
+      "path": "/docs/ai/",
+      "title": "AI and agent usage",
+      "renderer": "ai"
+    },
+    {
+      "description": "Contribute to Marwes without confusing internal atoms with its public consumer API.",
+      "kind": "guide",
+      "path": "/docs/contributing/",
+      "title": "Contributing",
+      "renderer": "contributing"
+    },
+    {
+      "description": "Grouped disclosure family with a low-level accordion component, a canonical AccordionField path, and thin purpose-accordion wrappers. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/accordion/",
+      "title": "Accordion",
+      "family": "accordion",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Canonical identity family with a base Avatar component, two scoped compositions, and thin semantic wrappers for profile, presence, and team contexts. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/avatar/",
+      "title": "Avatar",
+      "family": "avatar",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Canonical compact-status family with a Badge component, a BadgeGroup composition, and thin purpose-badge wrappers for status, priority, and notification contexts. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/badge/",
+      "title": "Badge",
+      "family": "badge",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Inline page-level status messaging component with five semantic intents, optional icon, CTA action slot, and dismiss button. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/banner/",
+      "title": "Banner",
+      "family": "banner",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Navigation hierarchy component with optional home entry, current-page metadata, hidden separators, and shared nav/list semantics across adapters. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/breadcrumb/",
+      "title": "Breadcrumb",
+      "family": "breadcrumb",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Semantic-first action family with a base Button component, visual wrappers, and purpose wrappers for canonical workflows. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/button/",
+      "title": "Button",
+      "family": "button",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Family-local surface-container family with a Card component and thin purpose-card wrappers for product, profile, and stat summaries. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/card/",
+      "title": "Card",
+      "family": "card",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/checkbox/",
+      "title": "Checkbox",
+      "family": "checkbox",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/context-menu/",
+      "title": "ContextMenu",
+      "family": "context-menu",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Calendar selection surface synced from the V2 Date Picker component, with device metadata, day-state contracts, and shared React/Vue adapters. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/date-picker/",
+      "title": "Date Picker",
+      "family": "date-picker",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "High-risk modal family with a non-modal shell, canonical modal overlay layer, and stable purpose-dialog wrappers. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/dialog/",
+      "title": "Dialog",
+      "family": "dialog",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Family-local baseline separator family with a single Divider component for horizontal and vertical content separation. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/divider/",
+      "title": "Divider",
+      "family": "divider",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/drawer/",
+      "title": "Drawer",
+      "family": "drawer",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Native-semantic typography family with three heading components backed by one core recipe, one shared typography preset, and a shared React/Vue contract. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/heading/",
+      "title": "Heading",
+      "family": "heading",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Named SVG icon family with one Icon component, a generated runtime inventory, gallery-driven Storybook discovery, and shared React/Vue contract coverage for decorative versus labelled behavior. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/icon/",
+      "title": "Icon",
+      "family": "icon",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/input/",
+      "title": "Input",
+      "family": "input",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Finite page navigation with shared item-window generation, ellipsis rendering, current-page semantics, and React/Vue/Svelte adapters. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/pagination/",
+      "title": "Pagination",
+      "family": "pagination",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/paragraph/",
+      "title": "Paragraph",
+      "family": "paragraph",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Determinate progress component with optional label and percentage text, small/default Figma track sizes, and shared progressbar semantics across adapters. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/progress-bar/",
+      "title": "ProgressBar",
+      "family": "progress-bar",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Native single-selection family with a RadioGroupField component, a canonical RadioGroupField path, and thin purpose-radio wrappers for common one-of-many choices. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/radio/",
+      "title": "Radio",
+      "family": "radio",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Single-select segmented toggle family with radiogroup semantics, keyboard navigation, and three visual variants (default, inverse, pill). Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/segmented-control/",
+      "title": "Segmented Control",
+      "family": "segmented-control",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Loading-placeholder component with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React, Vue, and Svelte behavior. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/skeleton/",
+      "title": "Skeleton",
+      "family": "skeleton",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Continuous-value input family with a native range slider component, a canonical SliderField path, and thin purpose-slider wrappers. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/slider/",
+      "title": "Slider",
+      "family": "slider",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Family-local layout-spacing family with one decorative Spacing component backed by a token scale, a scale multiplier escape hatch, and shared React/Vue adapter parity. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/spacing/",
+      "title": "Spacing",
+      "family": "spacing",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Family-local loading-indicator family with a core Spinner component, adapter-owned context wrappers, and button-loading integration built on the same component contract. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/spinner/",
+      "title": "Spinner",
+      "family": "spinner",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Compact KPI tile synced from the V2 Stat Tile Figma component, with tone treatments, optional trend metadata, and shared React/Vue adapter contracts. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/stat-tile/",
+      "title": "Stat Tile",
+      "family": "stat-tile",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Binary toggle family with a button-backed switch component, a canonical SwitchField path, and thin purpose-switch wrappers. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/switch/",
+      "title": "Switch",
+      "family": "switch",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Coordinated tabs family with a low-level tab component, a canonical TabGroup path, and thin purpose-tab wrappers. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/tab/",
+      "title": "Tab",
+      "family": "tab",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Non-heading typography component for labels, captions, overline, microcopy, and supporting body text where consumers choose the native element. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/text/",
+      "title": "Text",
+      "family": "text",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Canonical transient-feedback family with a Toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/toast/",
+      "title": "Toast",
+      "family": "toast",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Contextual-help family with a standalone tooltip component, a canonical TooltipGroup path, and an explicit non-interactive scope boundary. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/tooltip/",
+      "title": "Tooltip",
+      "family": "tooltip",
+      "renderer": "component-docs"
+    }
+  ]
+}

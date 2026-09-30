@@ -10,7 +10,7 @@ and automatically set AI-friendly metadata. Each field variant is optimized for
 its specific use case with appropriate semantic HTML attributes.
 
 Input domain groups everything related to text-like data entry in one place,
-using a clear Atom -> Molecule -> Purpose progression.
+using a clear Field -> Purpose progression for consumers. Atom stories are retained only as internal implementation evidence.
 
 ### Field naming
 
@@ -23,7 +23,7 @@ those concerns yourself.
 ## Input Architecture
 
 ```
-Atoms
+Internal atoms (not package exports)
   ├─ Input
   ├─ RichText
   ├─ Select
@@ -126,24 +126,14 @@ The recommended molecule for most form inputs:
 
 ## Low-level: Atoms
 
-Use atoms when you need full control:
-
-```svelte
-<script>
-  import { Input, Select, Textarea } from "@marwes-ui/svelte"
-</script>
-
-<Input placeholder="Raw input" />
-<Select options={[{ value: "a", label: "A" }]} />
-<Textarea placeholder="Raw textarea" />
-```
+`Input`, `Select`, `Textarea`, and `RichText` are not exported from `@marwes-ui/svelte`. They remain in Storybook as internal implementation evidence. Use their public Field equivalents and do not deep-import atoms.
 
 ### Select Native vs Custom
 
 Select defaults to the Marwes visual treatment (custom chevron icon). Use `native={true}` for browser dropdown chrome:
 
 ```svelte
-<Select options={options} native />
+<SelectField label="Country" select={{ options, native: true }} />
 ```
 
 ## Component Reference

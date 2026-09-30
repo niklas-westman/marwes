@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "family": "text",
+  "title": "Text",
+  "summary": "Non-heading typography component for labels, captions, overline, microcopy, and supporting body text where consumers choose the native element.",
+  "useWhen": [
+    "The UI needs label, caption, overline, microcopy, or compact supporting text.",
+    "The caller needs to choose span, p, or div while reusing Marwes typography variants.",
+    "React, Vue, and Svelte consumers need the same typography class and native-element contract."
+  ],
+  "avoidWhen": [
+    "The text creates page or section hierarchy; use Heading.",
+    "The text is long-form body copy; use Paragraph.",
+    "The text is part of an input state that should use the field component's built-in label, helper, or error slots."
+  ],
+  "recommendationDescription": "Use Text for shorter labels, captions, and overlines; use Paragraph for body copy and Heading for document structure.",
+  "recommendedComponents": [
+    {
+      "name": "Text",
+      "description": "Inline or block text across display, label, caption, and overline variants"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Text"
+        },
+        {
+          "kind": "type",
+          "name": "TextAs"
+        },
+        {
+          "kind": "type",
+          "name": "TextComponent"
+        },
+        {
+          "kind": "type",
+          "name": "TextProps"
+        },
+        {
+          "kind": "component",
+          "name": "TypographyText"
+        }
+      ],
+      "example": "import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <>\n      <Text variant={TextVariant.display}>Display</Text>\n\n      <H1>Heading 1</H1>\n      <H2>Heading 2</H2>\n      <H3>Heading 3</H3>\n\n      <Paragraph size=\"md\">Body paragraph text.</Paragraph>\n      <Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n      <Text variant={TextVariant.label}>Label default</Text>\n      <Text variant={TextVariant.labelSmall}>Label small</Text>\n      <Text variant={TextVariant.caption}>Caption</Text>\n      <Text variant={TextVariant.overline}>Overline</Text>\n    </>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Text"
+        },
+        {
+          "kind": "type",
+          "name": "TextAs"
+        },
+        {
+          "kind": "type",
+          "name": "TextComponent"
+        },
+        {
+          "kind": "type",
+          "name": "TextProps"
+        },
+        {
+          "kind": "component",
+          "name": "TypographyText"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Text :variant=\"TextVariant.display\">Display</Text>\n\n  <H1>Heading 1</H1>\n  <H2>Heading 2</H2>\n  <H3>Heading 3</H3>\n\n  <Paragraph size=\"md\">Body paragraph text.</Paragraph>\n  <Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n  <Text :variant=\"TextVariant.label\">Label default</Text>\n  <Text :variant=\"TextVariant.labelSmall\">Label small</Text>\n  <Text :variant=\"TextVariant.caption\">Caption</Text>\n  <Text :variant=\"TextVariant.overline\">Overline</Text>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Text"
+        },
+        {
+          "kind": "type",
+          "name": "TextAs"
+        },
+        {
+          "kind": "type",
+          "name": "TextProps"
+        },
+        {
+          "kind": "component",
+          "name": "TypographyText"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { H1, H2, H3, Paragraph, Text, TextVariant } from \"@marwes-ui/svelte\"\n</script>\n\n<Text variant={TextVariant.display}>Display</Text>\n\n<H1>Heading 1</H1>\n<H2>Heading 2</H2>\n<H3>Heading 3</H3>\n\n<Paragraph size=\"md\">Body paragraph text.</Paragraph>\n<Paragraph size=\"sm\">Small body paragraph.</Paragraph>\n\n<Text variant={TextVariant.label}>Label default</Text>\n<Text variant={TextVariant.labelSmall}>Label small</Text>\n<Text variant={TextVariant.caption}>Caption</Text>\n<Text variant={TextVariant.overline}>Overline</Text>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Use headingLevel only when the text is genuinely part of the document outline at that depth.",
+      "title": "Intentional heading depth"
+    },
+    {
+      "description": "Keep variant a visual choice and as/headingLevel the semantic choice; do not conflate the two.",
+      "title": "Visual vs semantic separation"
+    },
+    {
+      "description": "Typography visual review against current dashboard and typography-adjacent Figma refs.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Product-level review that Text is not used to fake heading hierarchy or long-form paragraph structure.",
+      "title": "Manual review 2"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Text uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/text/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

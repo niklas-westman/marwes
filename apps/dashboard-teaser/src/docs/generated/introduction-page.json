@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "title": "Introduction",
+  "summary": "Build one branded, accessible UI language across React, Vue, and Svelte. One core, thin framework adapters, and a single theme boundary.",
+  "topics": [
+    {
+      "id": "what-marwes-is",
+      "title": "What Marwes is",
+      "description": "Marwes is a framework-agnostic design system: a pure TypeScript core with thin React, Vue, and Svelte adapters built from the same contracts. Every adapter ships static preset CSS and CSS variables, with no CSS-in-JS runtime required."
+    },
+    {
+      "id": "how-its-organized",
+      "title": "How it's organized",
+      "description": "Each component family ships one recommended public component, purpose wrappers where relevant, and a base primitive as a deliberate escape hatch. The same contract compiles across React, Vue, and Svelte, and generated public API artifacts keep export names and import paths stable."
+    },
+    {
+      "id": "accessible-by-contract",
+      "title": "Accessible by contract",
+      "description": "Core owns semantic contracts through typed recipes: roles, ARIA state, label wiring, and invalid state. Adapters apply that contract to real DOM elements instead of inventing separate accessibility behavior per framework. Consumers remain responsible for truthful labels and page-level structure."
+    },
+    {
+      "id": "theming-through-one-provider",
+      "title": "Theming through one provider",
+      "description": "Wrap the app once in the framework provider and pass a theme. Resolved theme values flow through CSS variables, so there is no second stylesheet or CSS-in-JS runtime to reconcile."
+    }
+  ],
+  "links": [
+    {
+      "label": "Get started",
+      "href": "/docs/get-started/react/",
+      "description": "Install the CLI and render your first accessible component."
+    },
+    {
+      "label": "Components",
+      "href": "/docs/components/",
+      "description": "Browse every component family and its recommended public API."
+    },
+    {
+      "label": "Theming",
+      "href": "/docs/theming/",
+      "description": "Wrap once, provide a theme, and brand every Marwes component."
+    },
+    {
+      "label": "Accessibility",
+      "href": "/docs/accessibility/",
+      "description": "Understand the accessibility contract shared by every component."
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-marwes-is",
+      "label": "What Marwes is"
+    },
+    {
+      "id": "how-its-organized",
+      "label": "How it's organized"
+    },
+    {
+      "id": "accessible-by-contract",
+      "label": "Accessible by contract"
+    },
+    {
+      "id": "theming-through-one-provider",
+      "label": "Theming"
+    },
+    {
+      "id": "where-to-go-next",
+      "label": "Where to go next"
+    }
+  ]
+}

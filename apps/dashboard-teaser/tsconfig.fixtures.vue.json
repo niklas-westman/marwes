@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "types": ["vue"],
+    "paths": {
+      "@marwes-ui/core": ["./packages/core/src/index.ts"],
+      "@marwes-ui/presets": ["./packages/presets/src/index.ts"],
+      "@marwes-ui/presets/firstEdition": ["./packages/presets/src/firstEdition/index.ts"],
+      "@marwes-ui/vue": ["./packages/vue/src/index.ts"]
+    }
+  },
+  "include": ["src/fixtures/**/*.vue"]
+}

@@ -1,6 +1,6 @@
 # Theme SSR No-Flash Setup
 
-Use this guide when a server-rendered Marwes app needs the correct light or dark variables before React or Vue hydrates.
+Use this guide when a server-rendered Marwes app needs the correct light or dark variables before React, Vue, or Svelte hydrates.
 
 Normal Marwes apps do not need this setup. The default provider strategy is still `variableStrategy="inline"`, which keeps the resolved `--mw-*` variables directly on the provider root.
 
@@ -108,6 +108,51 @@ useHead({
 
 Vue 3.5+ supports `data-allow-mismatch` for expected hydration differences. Use `data-allow-mismatch="class"` on `<html>` when Nuxt reports an expected root class mismatch from the pre-hydration script.
 
+## SvelteKit
+
+Create the deterministic CSS and script in the root layout and place them in `svelte:head` before the provider renders:
+
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script lang="ts">
+  import {
+    MarwesProvider,
+    createMarwesThemeScript,
+    createMarwesThemeStyle,
+  } from "@marwes-ui/svelte"
+
+  let { children } = $props()
+
+  const themeCss = createMarwesThemeStyle({ target: "html", attribute: "class" })
+  const themeScript = createMarwesThemeScript({
+    storageKey: "marwes-theme",
+    defaultPreference: "system",
+    target: "html",
+    attribute: "class",
+  })
+
+  const themeHead = `<style>${themeCss}</style><script>${themeScript}<\/script>`
+</script>
+
+<svelte:head>
+  {@html themeHead}
+</svelte:head>
+
+<MarwesProvider
+  defaultPreference="system"
+  storageKey="marwes-theme"
+  target="html"
+  attribute="class"
+  variableStrategy="style-tag"
+>
+  {@render children()}
+</MarwesProvider>
+```
+
+The values returned by the Marwes helpers escape unsafe script delimiters and are deterministic. Do not append untrusted input to `themeHead`. If your CSP uses nonces, pass the request nonce to both generated tags; this normally means producing `themeHead` from trusted server layout data rather than a module-level constant.
+
+The pre-hydration script updates the `html` class before the provider is painted. If SvelteKit reports an expected class mismatch, keep the server default and client preference policy identical before suppressing or ignoring the warning.
+
 ## Custom Light And Dark Themes
 
 Pass matching light and dark theme inputs to the style helper when your brand tokens differ by mode:
@@ -143,7 +188,7 @@ The React helpers accept a `nonce` prop:
 <MarwesThemeScript nonce={nonce} />
 ```
 
-The Vue helpers return strings for framework head APIs. Pass the nonce through the head entry your framework renders:
+The Vue and Svelte helpers return strings for framework head APIs. Pass the nonce through the head entry your framework renders:
 
 ```ts
 {
@@ -171,4 +216,5 @@ Use all of these together for SSR no-flash behavior:
 - Prefer `target="html" attribute="class"` when the script runs in the document head.
 - Add `suppressHydrationWarning` to `<html>` for React/Next-style hydration.
 - Add `data-allow-mismatch="class"` to `<html>` for Vue/Nuxt root class mismatches.
+- Render the generated CSS and script in `svelte:head` before the root `MarwesProvider` for SvelteKit.
 - Pass CSP nonces to inline style/script entries when your app uses nonce-based CSP.

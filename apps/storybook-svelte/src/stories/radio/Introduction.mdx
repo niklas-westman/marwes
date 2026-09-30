@@ -8,9 +8,7 @@ import {
 
 # Radio Components
 
-Marwes provides a radio system with three layers:
-**purpose components** for common patterns, **RadioGroupField** for custom option lists,
-and the raw **Radio** atom for advanced control.
+Marwes consumers use **purpose components** for common patterns and **RadioGroupField** for custom option lists. The raw **Radio** atom is internal implementation evidence.
 
 ## Recommended: Purpose Components
 
@@ -74,19 +72,18 @@ For custom option lists that don't fit a purpose component:
 
 ```svelte
 <script>
-  import { Radio, RadioGroupField } from "@marwes-ui/svelte"
+  import { RadioGroupField } from "@marwes-ui/svelte"
 </script>
 
-<RadioGroupField label="Shipping method" description="Choose how you'd like your order delivered.">
-  <label class="mw-radio-group-field__option">
-    <Radio name="shipping" value="standard" checked />
-    <span class="mw-p mw-p--md">Standard (5-7 days)</span>
-  </label>
-  <label class="mw-radio-group-field__option">
-    <Radio name="shipping" value="express" />
-    <span class="mw-p mw-p--md">Express (2-3 days)</span>
-  </label>
-</RadioGroupField>
+<RadioGroupField
+  name="shipping"
+  label="Shipping method"
+  description="Choose how you'd like your order delivered."
+  options={[
+    { value: "standard", label: "Standard (5-7 days)" },
+    { value: "express", label: "Express (2-3 days)" },
+  ]}
+/>
 ```
 
 ### RadioGroupField Features
@@ -97,25 +94,7 @@ For custom option lists that don't fit a purpose component:
 
 ## Low-level: Radio (Atom)
 
-Use the raw `Radio` atom for fully custom layouts:
-
-```svelte
-<script>
-  import { Radio } from "@marwes-ui/svelte"
-  let selected = $state("a")
-</script>
-
-<div role="radiogroup" aria-label="Preference">
-  <label>
-    <Radio name="pref" value="a" checked={selected === "a"} onchange={() => selected = "a"} />
-    Option A
-  </label>
-  <label>
-    <Radio name="pref" value="b" checked={selected === "b"} onchange={() => selected = "b"} />
-    Option B
-  </label>
-</div>
-```
+`Radio` is not exported from `@marwes-ui/svelte` and must not be deep-imported. `RadioGroupField` is the public escape hatch for custom option sets.
 
 ## Component Reference
 
@@ -133,7 +112,7 @@ Use the raw `Radio` atom for fully custom layouts:
 
 ### Atom
 
-**`Radio`** — Low-level native `<input type="radio">`
+**`Radio`** — Internal native input shown for implementation evidence; not a consumer import.
 
 ## Story Coverage
 

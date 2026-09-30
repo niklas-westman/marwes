@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "name": "Marwes UI AI resources",
+  "description": "Deterministic package documentation and machine-readable trust artifacts for Marwes UI.",
+  "instructions": [
+    "Import and use real Marwes components from @marwes-ui/react, @marwes-ui/vue, or @marwes-ui/svelte for the selected framework.",
+    "Do not invent mw-* replacement components or custom elements. Use the public exports documented by the matching Marwes adapter.",
+    "Treat the complete component registry and the canonical semantic subset as different scopes; only the named canonical families share the cross-family semantic protocol."
+  ],
+  "registry": {
+    "componentFamilyCount": 31,
+    "componentFamilies": [
+      "accordion",
+      "avatar",
+      "badge",
+      "banner",
+      "breadcrumb",
+      "button",
+      "card",
+      "checkbox",
+      "context-menu",
+      "date-picker",
+      "dialog",
+      "divider",
+      "drawer",
+      "heading",
+      "icon",
+      "input",
+      "pagination",
+      "paragraph",
+      "progress-bar",
+      "radio",
+      "segmented-control",
+      "skeleton",
+      "slider",
+      "spacing",
+      "spinner",
+      "stat-tile",
+      "switch",
+      "tab",
+      "text",
+      "toast",
+      "tooltip"
+    ],
+    "canonicalSemanticFamilyCount": 9,
+    "canonicalSemanticFamilies": [
+      "avatar",
+      "badge",
+      "banner",
+      "breadcrumb",
+      "button",
+      "context-menu",
+      "dialog",
+      "drawer",
+      "toast"
+    ],
+    "note": "31 component families are documented in the complete registry. 9 of those families currently belong to the canonical cross-family semantic protocol."
+  },
+  "resources": [
+    {
+      "id": "package-react",
+      "kind": "package-readme",
+      "title": "Marwes React",
+      "description": "React components, provider setup, theming, and usage examples.",
+      "path": "/ai/react.md",
+      "mediaType": "text/plain",
+      "scope": "framework-guide",
+      "framework": "react"
+    },
+    {
+      "id": "package-svelte",
+      "kind": "package-readme",
+      "title": "Marwes Svelte",
+      "description": "Svelte components, provider setup, theming, and usage examples.",
+      "path": "/ai/svelte.md",
+      "mediaType": "text/plain",
+      "scope": "framework-guide",
+      "framework": "svelte"
+    },
+    {
+      "id": "package-vue",
+      "kind": "package-readme",
+      "title": "Marwes Vue",
+      "description": "Vue components, provider setup, theming, and usage examples.",
+      "path": "/ai/vue.md",
+      "mediaType": "text/plain",
+      "scope": "framework-guide",
+      "framework": "vue"
+    },
+    {
+      "id": "artifact-public-api",
+      "kind": "artifact",
+      "title": "Public consumer API",
+      "description": "The canonical React, Vue, and Svelte root exports available to consumer applications.",
+      "path": "/ai/v1/public-api.json",
+      "mediaType": "application/json",
+      "scope": "public-consumer-api",
+      "schemaVersion": 1
+    },
+    {
+      "id": "artifact-component-manifest",
+      "kind": "artifact",
+      "title": "Canonical component manifest",
+      "description": "The canonical semantic component subset and its framework source paths.",
+      "path": "/ai/v1/component-manifest.json",
+      "mediaType": "application/json",
+      "scope": "canonical-semantic-subset",
+      "schemaVersion": 1
+    },
+    {
+      "id": "artifact-component-registry",
+      "kind": "artifact",
+      "title": "Component family registry",
+      "description": "The complete registry of shipped component families and their coverage.",
+      "path": "/ai/v1/component-registry.json",
+      "mediaType": "application/json",
+      "scope": "complete-component-registry",
+      "schemaVersion": 1
+    },
+    {
+      "id": "artifact-design-provenance",
+      "kind": "artifact",
+      "title": "Design provenance",
+      "description": "Figma and source provenance for the canonical semantic component subset.",
+      "path": "/ai/v1/design-provenance.json",
+      "mediaType": "application/json",
+      "scope": "canonical-semantic-subset",
+      "schemaVersion": 1
+    },
+    {
+      "id": "artifact-framework-parity",
+      "kind": "artifact",
+      "title": "Framework parity",
+      "description": "React, Vue, and Svelte parity for the canonical semantic component subset.",
+      "path": "/ai/v1/framework-parity.json",
+      "mediaType": "application/json",
+      "scope": "canonical-semantic-subset",
+      "schemaVersion": 1
+    },
+    {
+      "id": "artifact-purpose-registry",
+      "kind": "artifact",
+      "title": "Purpose registry",
+      "description": "Machine-readable purpose component semantics and framework support.",
+      "path": "/ai/v1/purpose-registry.json",
+      "mediaType": "application/json",
+      "scope": "canonical-semantic-subset",
+      "schemaVersion": 1
+    }
+  ],
+  "documentation": [
+    {
+      "path": "/docs/introduction/",
+      "title": "Introduction",
+      "description": "What Marwes is, how it's organized, and where to go next.",
+      "url": "https://marwes.io/docs/introduction/"
+    },
+    {
+      "path": "/docs/get-started/react/",
+      "title": "Get started with React",
+      "description": "Install Marwes for React and render your first accessible component.",
+      "url": "https://marwes.io/docs/get-started/react/"
+    },
+    {
+      "path": "/docs/get-started/vue/",
+      "title": "Get started with Vue",
+      "description": "Install Marwes for Vue and render your first accessible component.",
+      "url": "https://marwes.io/docs/get-started/vue/"
+    },
+    {
+      "path": "/docs/get-started/svelte/",
+      "title": "Get started with Svelte",
+      "description": "Install Marwes for Svelte and render your first accessible component.",
+      "url": "https://marwes.io/docs/get-started/svelte/"
+    },
+    {
+      "path": "/docs/components/",
+      "title": "Component catalog",
+      "description": "Find the right public Marwes component by family, framework, export, or use case.",
+      "url": "https://marwes.io/docs/components/"
+    },
+    {
+      "path": "/docs/theming/",
+      "title": "Theming",
+      "description": "Wrap once, provide a theme, and brand every Marwes component.",
+      "url": "https://marwes.io/docs/theming/"
+    },
+    {
+      "path": "/docs/accessibility/",
+      "title": "Accessibility",
+      "description": "Understand the accessibility contract shared by Marwes components.",
+      "url": "https://marwes.io/docs/accessibility/"
+    },
+    {
+      "path": "/docs/integrations/next/",
+      "title": "Next.js integration",
+      "description": "Use Marwes with Next.js while preserving SSR-safe theme behavior.",
+      "url": "https://marwes.io/docs/integrations/next/"
+    },
+    {
+      "path": "/docs/integrations/nuxt/",
+      "title": "Nuxt integration",
+      "description": "Use Marwes with Nuxt and install the provider at the application boundary.",
+      "url": "https://marwes.io/docs/integrations/nuxt/"
+    },
+    {
+      "path": "/docs/integrations/sveltekit/",
+      "title": "SvelteKit integration",
+      "description": "Use Marwes with SvelteKit without causing a light or dark mode flash.",
+      "url": "https://marwes.io/docs/integrations/sveltekit/"
+    },
+    {
+      "path": "/docs/compatibility/",
+      "title": "Compatibility",
+      "description": "Supported frameworks, runtimes, browsers, and package boundaries.",
+      "url": "https://marwes.io/docs/compatibility/"
+    },
+    {
+      "path": "/docs/troubleshooting/",
+      "title": "Troubleshooting",
+      "description": "Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.",
+      "url": "https://marwes.io/docs/troubleshooting/"
+    },
+    {
+      "path": "/docs/ai/",
+      "title": "AI and agent usage",
+      "description": "Give coding agents canonical, machine-readable Marwes documentation.",
+      "url": "https://marwes.io/docs/ai/"
+    },
+    {
+      "path": "/docs/contributing/",
+      "title": "Contributing",
+      "description": "Contribute to Marwes without confusing internal atoms with its public consumer API.",
+      "url": "https://marwes.io/docs/contributing/"
+    }
+  ],
+  "storybooks": [
+    {
+      "framework": "react",
+      "url": "https://storybook-react.marwes.io/latest/",
+      "catalogUrl": "https://storybook-react.marwes.io/latest/index.json",
+      "mediaType": "application/json",
+      "scope": "component-catalog"
+    },
+    {
+      "framework": "vue",
+      "url": "https://storybook-vue.marwes.io/latest/",
+      "catalogUrl": "https://storybook-vue.marwes.io/latest/index.json",
+      "mediaType": "application/json",
+      "scope": "component-catalog"
+    },
+    {
+      "framework": "svelte",
+      "url": "https://storybook-svelte.marwes.io/latest/",
+      "catalogUrl": "https://storybook-svelte.marwes.io/latest/index.json",
+      "mediaType": "application/json",
+      "scope": "component-catalog"
+    }
+  ]
+}

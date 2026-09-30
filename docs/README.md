@@ -77,6 +77,7 @@ graph TD
 ### Reference
 Long-lived, canonical project docs.
 
+- [Consumer compatibility](./reference/compatibility.md) — supported framework peers, Node requirement, browser baseline, and package boundaries
 - [Architecture](./reference/architecture.md) — package boundaries, data flow, and repo structure
 - [Adapter Architecture](./reference/adapter-architecture.md) — role-identical adapter map and cross-framework ruleset
 - [Repo Map](./reference/repo-map.md) — thread model, authority order, and change matrix
@@ -94,6 +95,9 @@ Long-lived, canonical project docs.
 ### Guides
 Practical how-to documents.
 
+- [Consumer troubleshooting](./guides/consumer-troubleshooting.md) — styling, provider, imports, runtime theme values, SSR, CSP, peers, and partial CLI setup
+- [Theme SSR no-flash setup](./guides/theme-ssr-no-flash.md) — Next.js, Nuxt, and SvelteKit pre-hydration theme setup
+- [AI discovery deployment](./guides/ai-discovery-deployment.md) — manual dashboard and Storybook AWS deployment, cache policy, invalidation, and live checks
 - [Adding Components](./guides/adding-components.md) — step-by-step workflow for introducing a new component
 - [Figma to Marwes](./guides/figma-to-marwes.md) — design-to-code mapping and token workflow
 - [Tailwind and shadcn Integration](./guides/tailwind-shadcn-integration.md) — root dark variants and app-owned Tailwind tokens using Marwes variables

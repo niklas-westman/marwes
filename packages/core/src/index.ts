@@ -140,6 +140,7 @@ export {
 export * from "./storybook"
 
 export type {
+  AccessibleButtonName,
   AvatarOptions,
   AvatarRenderKit,
   ButtonOptions,

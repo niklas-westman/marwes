@@ -1,6 +1,5 @@
 <script lang="ts">
   import {
-    Accordion,
     Badge,
     BadgeVariant,
     Card,
@@ -10,15 +9,10 @@
     DestructiveButton,
     Divider,
     InputField,
-    InputOtp,
     MarwesProvider,
     OptionRadioGroup,
     PrimaryButton,
-    Radio,
     SecondaryButton,
-    Select,
-    SegmentedControl,
-    Slider,
     SwitchField,
     Text,
     TextButton,
@@ -28,6 +22,12 @@
   } from "@marwes-ui/svelte";
   import { IconName } from "@marwes-ui/core";
   import type { ContextMenuEntry } from "@marwes-ui/core";
+  import Accordion from "../../packages/svelte/src/lib/components/accordion/Accordion.svelte";
+  import InputOtp from "../../packages/svelte/src/lib/components/input/InputOtp.svelte";
+  import Select from "../../packages/svelte/src/lib/components/input/Select.svelte";
+  import Radio from "../../packages/svelte/src/lib/components/radio/Radio.svelte";
+  import SegmentedControl from "../../packages/svelte/src/lib/components/segmented-control/SegmentedControl.svelte";
+  import Slider from "../../packages/svelte/src/lib/components/slider/Slider.svelte";
 
   let { path }: { path: string } = $props();
   const mode = $derived(path.endsWith("/dark") ? ThemeMode.dark : ThemeMode.light);

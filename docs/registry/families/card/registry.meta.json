@@ -14,7 +14,7 @@
     "useWhen": [
       "The UI needs a bordered content surface with optional title and flexible body composition.",
       "The product flow clearly maps to ProductCard, ProfileCard, or StatCard and benefits from local purpose metadata.",
-      "The team wants React and Vue card rendering to stay aligned through one simple core recipe and shared Storybook teaching surfaces."
+      "The team wants React, Vue, and Svelte card rendering to stay aligned through one simple core recipe and shared Storybook teaching surfaces."
     ],
     "avoidWhen": [
       "The surface is really an interactive tile, navigation link, or button-like control that should own explicit interactive semantics.",
@@ -59,6 +59,13 @@
         "apps/storybook-vue/src/stories/card/product-card.stories.ts",
         "apps/storybook-vue/src/stories/card/profile-card.stories.ts",
         "apps/storybook-vue/src/stories/card/stat-card.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/card/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/card/card.stories.ts",
+        "apps/storybook-svelte/src/stories/card/product-card.stories.ts",
+        "apps/storybook-svelte/src/stories/card/profile-card.stories.ts",
+        "apps/storybook-svelte/src/stories/card/stat-card.stories.ts"
       ]
     },
     "preferredStates": [

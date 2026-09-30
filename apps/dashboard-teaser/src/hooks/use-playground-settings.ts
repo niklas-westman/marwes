@@ -1,6 +1,6 @@
 import { ThemeMode } from "@marwes-ui/react"
 import type { Dispatch, SetStateAction } from "react"
-import { useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import { type PlaygroundSettings, defaultPlaygroundSettings } from "../sections/playground-settings"
 import {
@@ -11,6 +11,7 @@ import {
   markCustom,
   themePresets,
 } from "../sections/theme-presets"
+import { getInitialThemeMode, siteThemeStorageKey } from "../theme/site-theme"
 
 type UsePlaygroundSettingsResult = {
   settings: PlaygroundSettings
@@ -46,9 +47,22 @@ function captureCustomPresetSnapshot(settings: PlaygroundSettings): CustomPreset
  * setter and the derived preset through the page tree.
  */
 function usePlaygroundSettings(): UsePlaygroundSettingsResult {
-  const [settings, setSettings] = useState(defaultPlaygroundSettings)
+  const [settings, setSettings] = useState(() => ({
+    ...defaultPlaygroundSettings,
+    mode: getInitialThemeMode(),
+  }))
   const [customBuilderOpen, setCustomBuilderOpenState] = useState(false)
   const customSnapshotRef = useRef<CustomPresetSnapshot | null>(null)
+
+  useEffect(() => {
+    document.documentElement.dataset.marwesMode = settings.mode
+    document.documentElement.style.colorScheme = settings.mode
+    try {
+      localStorage.setItem(siteThemeStorageKey, settings.mode)
+    } catch {
+      // Theme selection remains usable when storage is unavailable.
+    }
+  }, [settings.mode])
 
   const toggleTheme = useCallback((): void => {
     setSettings((current) => ({

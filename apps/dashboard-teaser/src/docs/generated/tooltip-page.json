@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "family": "tooltip",
+  "title": "Tooltip",
+  "summary": "Contextual-help family with a standalone tooltip component, a canonical TooltipGroup path, and an explicit non-interactive scope boundary.",
+  "useWhen": [
+    "The UI needs short, non-interactive contextual help tied to an icon trigger or a placement-owned tooltip bubble.",
+    "The product flow benefits from TooltipGroup's built-in trigger naming and hover or focus reveal behavior.",
+    "The team wants React and Vue tooltip behavior to stay aligned through one shared contract file."
+  ],
+  "avoidWhen": [
+    "The content needs links, buttons, forms, or any other focusable interactive elements.",
+    "The UI really needs a popover, dialog, or other richer overlay rather than short contextual help.",
+    "The team expects collision detection, delay tuning, or a general-purpose overlay API that this family does not define."
+  ],
+  "recommendationDescription": "Use TooltipGroup for supplementary help text triggered by hover or keyboard focus.",
+  "recommendedComponents": [
+    {
+      "name": "TooltipGroup",
+      "description": "Self-contained trigger and tooltip content with hover and keyboard focus support"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Tooltip"
+        },
+        {
+          "kind": "component",
+          "name": "TooltipGroup"
+        },
+        {
+          "kind": "type",
+          "name": "TooltipGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "TooltipProps"
+        }
+      ],
+      "example": "import { TooltipGroup } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <TooltipGroup\n      content=\"Your profile is visible to workspace members.\"\n      triggerLabel=\"About profile visibility\"\n    />\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Tooltip"
+        },
+        {
+          "kind": "component",
+          "name": "TooltipGroup"
+        },
+        {
+          "kind": "type",
+          "name": "TooltipGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "TooltipProps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { TooltipGroup } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <TooltipGroup\n    content=\"Your profile is visible to workspace members.\"\n    trigger-label=\"About profile visibility\"\n  />\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Tooltip"
+        },
+        {
+          "kind": "component",
+          "name": "TooltipGroup"
+        },
+        {
+          "kind": "type",
+          "name": "TooltipGroupProps"
+        },
+        {
+          "kind": "type",
+          "name": "TooltipProps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { TooltipGroup } from \"@marwes-ui/svelte\"\n</script>\n\n<TooltipGroup\n  content=\"Your profile is visible to workspace members.\"\n  triggerLabel=\"About profile visibility\"\n/>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep tooltip content supplementary; never put required information only inside a tooltip.",
+      "title": "Supplementary content only"
+    },
+    {
+      "description": "Verify the trigger is reachable and dismissible by keyboard, not only by pointer hover.",
+      "title": "Keyboard reachable dismissal"
+    },
+    {
+      "description": "Test focus entry, focus return, dismissal, and escape-key behavior in context.",
+      "title": "Focus and escape review"
+    },
+    {
+      "description": "Real browser and assistive-technology validation for tooltip announcement timing and keyboard feel.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "Future decisions about which tooltip stories should join stricter automated accessibility gates.",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Whether clearly interactive tooltip content should eventually trigger dev-time warnings.",
+      "title": "Manual review 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Tooltip uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/tooltip/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

@@ -14,7 +14,7 @@
     "useWhen": [
       "The UI needs text-like data entry with shared label, helper, error, and validation patterns.",
       "The product flow should benefit from purpose-level field wrappers such as SearchField, PasswordField, or DropdownField.",
-      "The implementation should stay aligned across React and Vue through shared field helpers and contracts."
+      "The implementation should stay aligned across React, Vue, and Svelte through shared field helpers and contracts."
     ],
     "avoidWhen": [
       "A different family such as checkbox, radio, or switch is the more honest control type.",

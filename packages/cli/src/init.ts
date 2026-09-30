@@ -4,6 +4,7 @@ import { type DoctorResult, runDoctor } from "./doctor"
 import { detectPackageManager, formatShellCommand, installCommand } from "./package-manager"
 import { type PatchResult, patchProject } from "./patchers"
 import { type Adapter, type PackageManager, getAdapterRecipe } from "./recipes"
+import { setupGuidance } from "./setup-guidance"
 
 export type InitOptions = {
   adapter: Adapter
@@ -19,6 +20,7 @@ export type InitOptions = {
 }
 
 export type InitResult = {
+  status: "complete" | "manual-action-required" | "failed"
   adapter: Adapter
   packageManager: PackageManager
   installCommand: string
@@ -29,25 +31,8 @@ export type InitResult = {
   exitCode: number
 }
 
-function providerGuidance(adapter: Adapter): string {
-  const recipe = getAdapterRecipe(adapter)
-  return `Manual follow-up: wrap the app root with ${recipe.providerImport} from ${recipe.packageName}.`
-}
-
 function shouldPrintProviderGuidance(patch: PatchResult | undefined): boolean {
-  if (!patch || patch.changed) {
-    return false
-  }
-
-  return !patch.message.toLowerCase().includes("already")
-}
-
-function writeAgenticBoundaryRules(adapter: Adapter, write: (message: string) => void): void {
-  const recipe = getAdapterRecipe(adapter)
-  write("Agentic rules:")
-  write(`- Import Marwes APIs only from ${recipe.packageName}.`)
-  write("- Do not install @marwes-ui/core or @marwes-ui/presets directly.")
-  write("- Do not add a separate Marwes stylesheet import.")
+  return patch?.status === "manual-action-required"
 }
 
 export async function runInit(options: InitOptions): Promise<InitResult> {
@@ -78,7 +63,12 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
   } else {
     exitCode = await runner(command, { cwd })
     if (exitCode !== 0) {
+      write("Marwes init status: failed.")
+      write(
+        `Marwes init failed: installation command exited with code ${exitCode}. Provider patching and doctor were not run.`,
+      )
       return {
+        status: "failed",
         adapter: options.adapter,
         packageManager,
         installCommand: commandLabel,
@@ -96,34 +86,67 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
     patch = await patchProject(cwd, options.adapter, dryRun)
     const patchLabel = patch.file ? `${patch.file}: ${patch.message}` : patch.message
     write(dryRun && patch.changed ? `[dry-run] ${patchLabel}` : patchLabel)
+    if (patch.searchedFiles?.length) {
+      write(`Files searched: ${patch.searchedFiles.join(", ")}`)
+    }
   }
 
   let doctor: DoctorResult | undefined
-  if (agentic) {
-    if (shouldPrintProviderGuidance(patch) || noPatch) {
-      write(providerGuidance(options.adapter))
-    }
-
-    writeAgenticBoundaryRules(options.adapter, write)
-
-    if (dryRun) {
-      write(`[dry-run] marwes doctor --adapter ${options.adapter}`)
-    } else {
-      write("Marwes doctor:")
-      doctor = await runDoctor({
-        adapter: options.adapter,
-        cwd,
-        packageManager,
-        runner,
-        write,
-      })
-      exitCode = doctor.exitCode
-    }
+  if (dryRun) {
+    write(`[dry-run] marwes doctor --adapter ${options.adapter}`)
+  } else {
+    write("Marwes doctor:")
+    doctor = await runDoctor({
+      adapter: options.adapter,
+      cwd,
+      packageManager,
+      runner,
+      write,
+    })
   }
 
-  write("Marwes init complete.")
+  const providerFailure =
+    doctor?.items.some(
+      (item) => item.level === "fail" && item.message.startsWith("MarwesProvider"),
+    ) === true
+  const otherFailure =
+    doctor?.items.some(
+      (item) => item.level === "fail" && !item.message.startsWith("MarwesProvider"),
+    ) === true
+  const needsManualAction = providerFailure && (shouldPrintProviderGuidance(patch) || noPatch)
+  const status: InitResult["status"] = otherFailure
+    ? "failed"
+    : needsManualAction
+      ? "manual-action-required"
+      : doctor && doctor.exitCode !== 0
+        ? "failed"
+        : "complete"
+
+  if (needsManualAction) {
+    write(
+      `Manual follow-up: wrap the app root with ${recipe.providerImport} from ${recipe.packageName}.`,
+    )
+    write("Automatic patching currently supports the standard Vite app layout.")
+  }
+  if (agentic || needsManualAction || status === "complete") {
+    for (const line of setupGuidance(options.adapter, agentic || needsManualAction)) write(line)
+  }
+
+  exitCode =
+    status === "manual-action-required" ? 2 : status === "failed" ? (doctor?.exitCode ?? 1) : 0
+  write(dryRun ? `[dry-run] Planned init status: ${status}.` : `Marwes init status: ${status}.`)
+  write(
+    dryRun
+      ? "[dry-run] Marwes init plan complete. No installation, file changes, or doctor checks performed."
+      : status === "complete"
+        ? "Marwes init complete."
+        : status === "manual-action-required"
+          ? "Marwes provider wiring requires manual action (exit code 2)."
+          : "Marwes init failed.",
+  )
 
   return {
+    status,
     adapter: options.adapter,
     packageManager,
     installCommand: commandLabel,
