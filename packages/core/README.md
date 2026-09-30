@@ -152,10 +152,10 @@ Use these helpers when custom styling needs to stay connected to the active prov
 - `mwThemeVars` is the default custom styling API. It returns CSS `var(...)` references such as `"var(--mw-spacing-sp-24)"`.
 - `mwThemeVarNames` returns raw custom property names such as `"--mw-spacing-sp-24"` for assignment, inspection, tests, and bridge packages.
 - `mwVar()` wraps a custom `--mw-*` property name in `var(...)`, with optional fallback support.
-- `mwStyledTheme` mirrors `mwThemeVars` as a plain object for styled-components and Emotion theme providers.
+- `mwTheme` mirrors `mwThemeVars` as a plain object for styled-components and Emotion theme providers. `mwStyledTheme` remains as a deprecated compatibility alias.
 
 ```ts
-import { mwStyledTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/core"
+import { mwTheme, mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/core"
 
 mwThemeVars.spacing.sp24 // "var(--mw-spacing-sp-24)"
 mwThemeVars.color.text // "var(--mw-color-text)"
@@ -164,10 +164,12 @@ mwThemeVars.ui.radius // "var(--mw-ui-radius)"
 
 mwThemeVarNames.spacing.sp24 // "--mw-spacing-sp-24"
 mwVar("--mw-color-text", "#141414") // "var(--mw-color-text, #141414)"
-mwStyledTheme.spacing.sp24 // "var(--mw-spacing-sp-24)"
+mwTheme.spacing.sp24 // "var(--mw-spacing-sp-24)"
 ```
 
 This enables one theme contract across plain CSS, CSS Modules, CSS-in-JS, vanilla-extract, Tailwind-style config files, inline style objects, React, Vue, Svelte, and future adapters. Because the helpers only expose CSS variable references and names, they remain framework-agnostic and follow any `ThemeInput` resolved by the provider.
+
+`mwTheme`, `mwStyledTheme`, and `mwThemeVars` are CSS-reference objects, not resolved runtime themes. Values such as `"var(--mw-color-primary-base)"` are intended for CSS evaluation inside the provider scope and can be empty when JavaScript tries to resolve them from `:root`. Never use these helpers as the source for JavaScript color calculations, aliases, charts, or design-tool bridges. Use the adapter's `useTheme()` hook when logic needs concrete values such as `"#2457FF"`.
 
 Keep the APIs separate:
 - `Spacings.sp24` returns `"sp-24"` for Marwes component props.
@@ -264,7 +266,8 @@ Theme:
 - `createMarwesThemeStyle`
 - `mwThemeVars`
 - `mwThemeVarNames`
-- `mwStyledTheme`
+- `mwTheme`
+- `mwStyledTheme` (deprecated compatibility alias)
 - `mwVar`
 - `lightThemeDefaults`
 - `darkThemeDefaults`

@@ -3,13 +3,12 @@ import {
   CurrencyField,
   EmailField,
   PhoneField,
+  SelectField,
   Text,
   TextVariant,
 } from "@marwes-ui/react"
 import { memo, useState } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for PurposeSelect's custom layout.
-import { Select } from "../../../../../packages/react/src/components/input/select"
 
 import { SnippetButton } from "../../components/SnippetButton"
 import type { ComponentDisplayOptions } from "../playground-settings"
@@ -93,16 +92,17 @@ function RowAccordionInput({ options }: RowAccordionInputProps): JSX.Element {
         <SnippetButton title="Input fields" snippets={inputSnippets} />
         <ShowcaseStack>
           <PurposeSelect>
-            {options.showLabels && <Text variant={TextVariant.overline}>Purpose</Text>}
-            <Select
+            <SelectField
               label="Purpose"
-              options={[
-                { value: "currency", label: "Currency field" },
-                { value: "email", label: "Email field" },
-                { value: "phone", label: "Phone field" },
-              ]}
-              value={selectedField}
-              onValueChange={(v) => setSelectedField(v as FieldType)}
+              select={{
+                options: [
+                  { value: "currency", label: "Currency field" },
+                  { value: "email", label: "Email field" },
+                  { value: "phone", label: "Phone field" },
+                ],
+                value: selectedField,
+                onValueChange: (v) => setSelectedField(v as FieldType),
+              }}
             />
           </PurposeSelect>
           {selectedField === "currency" && (

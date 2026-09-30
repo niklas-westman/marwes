@@ -22,6 +22,7 @@ const warning = resolveColorRole("#B45309")
 
 const fixture: ResolvedTheme = {
   mode: ThemeMode.light,
+  personality: "flat",
   color: {
     primary,
     secondary: resolveSecondaryRole(primary),

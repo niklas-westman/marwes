@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "title": "Component catalog",
+  "summary": "Find the right public Marwes component by family, framework, export, or use case.",
+  "entries": [
+    {
+      "family": "accordion",
+      "displayName": "Accordion",
+      "summary": "Grouped disclosure family with a low-level accordion component, a canonical AccordionField path, and thin purpose-accordion wrappers.",
+      "recommended": "AccordionField",
+      "alsoAvailable": ["FAQAccordion", "SectionsAccordion", "SettingsAccordion"],
+      "searchTerms": "accordion accordion grouped disclosure family with a low-level accordion component, a canonical accordionfield path, and thin purpose-accordion wrappers. accordionfield faqaccordion sectionsaccordion settingsaccordion accordionfield faqaccordion sectionsaccordion settingsaccordion accordionfield faqaccordion sectionsaccordion settingsaccordion accordion field faqaccordion sections accordion settings accordion accordion field faqaccordion sections accordion settings accordion accordion field faqaccordion sections accordion settings accordion react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs collapsible sections with grouped labeling, optional description, and optional error support. the product flow maps clearly to faqaccordion, settingsaccordion, or sectionsaccordion and benefits from self-documenting purpose metadata. the team wants react and vue accordion behavior to stay aligned through shared core helpers and one contract file."
+    },
+    {
+      "family": "avatar",
+      "displayName": "Avatar",
+      "summary": "Canonical identity family with a base Avatar component, two scoped compositions, and thin semantic wrappers for profile, presence, and team contexts.",
+      "recommended": "ProfileAvatar",
+      "alsoAvailable": [
+        "Avatar",
+        "AvatarBadge",
+        "AvatarGroup",
+        "PresenceAvatar",
+        "TeamAvatarGroup"
+      ],
+      "searchTerms": "avatar avatar canonical identity family with a base avatar component, two scoped compositions, and thin semantic wrappers for profile, presence, and team contexts. avatar avatarbadge avatargroup presenceavatar profileavatar teamavatargroup avatar avatarbadge avatargroup presenceavatar profileavatar teamavatargroup avatar avatarbadge avatargroup presenceavatar profileavatar teamavatargroup avatar avatar badge avatar group presence avatar profile avatar team avatar group avatar avatar badge avatar group presence avatar profile avatar team avatar group avatar avatar badge avatar group presence avatar profile avatar team avatar group react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a person or member identity surface with stable size, content-type, and semantic behavior. the product flow maps clearly to profileavatar, presenceavatar, or teamavatargroup and benefits from canonical purpose metadata. the team wants react and vue avatar behavior to stay aligned through shared contracts and the central semantic registry."
+    },
+    {
+      "family": "badge",
+      "displayName": "Badge",
+      "summary": "Canonical compact-status family with a Badge component, a BadgeGroup composition, and thin purpose-badge wrappers for status, priority, and notification contexts.",
+      "recommended": "StatusBadge",
+      "alsoAvailable": ["Badge", "BadgeGroup", "NotificationBadge", "PriorityBadge"],
+      "searchTerms": "badge badge canonical compact-status family with a badge component, a badgegroup composition, and thin purpose-badge wrappers for status, priority, and notification contexts. badge badgegroup notificationbadge prioritybadge statusbadge badge badgegroup notificationbadge prioritybadge statusbadge badge badgegroup notificationbadge prioritybadge statusbadge badge badge group notification badge priority badge status badge badge badge group notification badge priority badge status badge badge badge group notification badge priority badge status badge react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a compact, non-interactive status label, priority marker, or notification count with stable semantics. the product flow maps clearly to statusbadge, prioritybadge, or notificationbadge and benefits from canonical purpose metadata. the team wants grouped badge presentation to stay aligned across react, vue, and svelte through badgegroup and one shared contract."
+    },
+    {
+      "family": "banner",
+      "displayName": "Banner",
+      "summary": "Inline page-level status messaging component with five semantic intents, optional icon, CTA action slot, and dismiss button.",
+      "recommended": "InfoBanner",
+      "alsoAvailable": ["Banner", "ErrorBanner", "SuccessBanner", "WarningBanner"],
+      "searchTerms": "banner banner inline page-level status messaging component with five semantic intents, optional icon, cta action slot, and dismiss button. banner errorbanner infobanner successbanner warningbanner banner errorbanner infobanner successbanner warningbanner banner errorbanner infobanner successbanner warningbanner banner error banner info banner success banner warning banner banner error banner info banner success banner warning banner banner error banner info banner success banner warning banner react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a persistent, page-level message about system state, feature announcements, or required actions. the intent maps to one of the five semantic variants: neutral, info, success, warning, error. the message needs an optional cta and/or dismiss action."
+    },
+    {
+      "family": "breadcrumb",
+      "displayName": "Breadcrumb",
+      "summary": "Navigation hierarchy component with optional home entry, current-page metadata, hidden separators, and shared nav/list semantics across adapters.",
+      "recommended": "Breadcrumb",
+      "alsoAvailable": [],
+      "searchTerms": "breadcrumb breadcrumb navigation hierarchy component with optional home entry, current-page metadata, hidden separators, and shared nav/list semantics across adapters. breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb breadcrumb react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte a page needs to show its location inside a broader hierarchy. the current page should be announced as the current breadcrumb item. react, vue, and svelte consumers need the same nav/list/separator semantics."
+    },
+    {
+      "family": "button",
+      "displayName": "Button",
+      "summary": "Semantic-first action family with a base Button component, visual wrappers, and purpose wrappers for canonical workflows.",
+      "recommended": "PrimaryButton",
+      "alsoAvailable": [
+        "Button",
+        "CancelButton",
+        "CloseButton",
+        "ConfirmButton",
+        "CopyButton",
+        "CreateButton",
+        "DestructiveButton",
+        "DownloadButton",
+        "DropdownButton",
+        "EditButton",
+        "FilterButton",
+        "IconButton",
+        "LinkButton",
+        "RefreshButton",
+        "SaveButton",
+        "SearchButton",
+        "SecondaryButton",
+        "SortButton",
+        "SubmitButton",
+        "SuccessButton",
+        "TextButton",
+        "UploadButton",
+        "VerifyButton"
+      ],
+      "searchTerms": "button button semantic-first action family with a base button component, visual wrappers, and purpose wrappers for canonical workflows. button cancelbutton closebutton confirmbutton copybutton createbutton destructivebutton downloadbutton dropdownbutton editbutton filterbutton iconbutton linkbutton primarybutton refreshbutton savebutton searchbutton secondarybutton sortbutton submitbutton successbutton textbutton uploadbutton verifybutton button cancelbutton closebutton confirmbutton copybutton createbutton destructivebutton downloadbutton dropdownbutton editbutton filterbutton iconbutton linkbutton primarybutton refreshbutton savebutton searchbutton secondarybutton sortbutton submitbutton successbutton textbutton uploadbutton verifybutton button cancelbutton closebutton confirmbutton copybutton createbutton destructivebutton downloadbutton dropdownbutton editbutton filterbutton iconbutton linkbutton primarybutton refreshbutton savebutton searchbutton secondarybutton sortbutton submitbutton successbutton textbutton uploadbutton verifybutton button cancel button close button confirm button copy button create button destructive button download button dropdown button edit button filter button icon button link button primary button refresh button save button search button secondary button sort button submit button success button text button upload button verify button button cancel button close button confirm button copy button create button destructive button download button dropdown button edit button filter button icon button link button primary button refresh button save button search button secondary button sort button submit button success button text button upload button verify button button cancel button close button confirm button copy button create button destructive button download button dropdown button edit button filter button icon button link button primary button refresh button save button search button secondary button sort button submit button success button text button upload button verify button react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a canonical action trigger with clear semantic intent. a product flow matches one of the purpose wrappers such as submit, cancel, save, or destructive. the implementation should stay aligned across react, vue, and svelte through the shared core contract."
+    },
+    {
+      "family": "card",
+      "displayName": "Card",
+      "summary": "Family-local surface-container family with a Card component and thin purpose-card wrappers for product, profile, and stat summaries.",
+      "recommended": "ProductCard",
+      "alsoAvailable": ["Card", "ProfileCard", "StatCard"],
+      "searchTerms": "card card family-local surface-container family with a card component and thin purpose-card wrappers for product, profile, and stat summaries. card productcard profilecard statcard card productcard profilecard statcard card productcard profilecard statcard card product card profile card stat card card product card profile card stat card card product card profile card stat card react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a bordered content surface with optional title and flexible body composition. the product flow clearly maps to productcard, profilecard, or statcard and benefits from local purpose metadata. the team wants react, vue, and svelte card rendering to stay aligned through one simple core recipe and shared storybook teaching surfaces."
+    },
+    {
+      "family": "checkbox",
+      "displayName": "Checkbox",
+      "summary": "Native checkbox family with one CheckboxField component, two field-level compositions, and shared React/Vue contracts for component and grouped multi-select behavior.",
+      "recommended": "CheckboxField",
+      "alsoAvailable": ["CheckboxGroupField"],
+      "searchTerms": "checkbox checkbox native checkbox family with one checkboxfield component, two field-level compositions, and shared react/vue contracts for component and grouped multi-select behavior. checkboxfield checkboxgroupfield checkboxfield checkboxgroupfield checkboxfield checkboxgroupfield checkbox field checkbox group field checkbox field checkbox group field checkbox field checkbox group field react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs one or more native checkbox controls with optional description or error support. the product wants the canonical labeled path for a single checkbox or a multi-select checkbox group without rebuilding the field wiring manually. the team wants react and vue checkbox behavior to stay aligned through one core recipe, shared field helpers, and shared contract files."
+    },
+    {
+      "family": "context-menu",
+      "displayName": "ContextMenu",
+      "summary": "Compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling.",
+      "recommended": "ContextMenu",
+      "alsoAvailable": [],
+      "searchTerms": "contextmenu context-menu compact action-list component with a menu shell, button-backed items, icon slots, dividers, disabled state, and destructive action styling. contextmenu contextmenu contextmenu context menu context menu context menu react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a compact grouped list of secondary actions. actions benefit from leading icons and a small menu surface. the product already owns the trigger, popover positioning, and menu visibility state."
+    },
+    {
+      "family": "date-picker",
+      "displayName": "Date Picker",
+      "summary": "Calendar selection surface synced from the V2 Date Picker component, with device metadata, day-state contracts, and shared React/Vue adapters.",
+      "recommended": "DatePickerField",
+      "alsoAvailable": [],
+      "searchTerms": "date picker date-picker calendar selection surface synced from the v2 date picker component, with device metadata, day-state contracts, and shared react/vue adapters. datepickerfield datepickerfield datepickerfield date picker field date picker field date picker field react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a calendar panel for choosing a date or reviewing a date range. the product already owns date math, month navigation state, and selected date state. react and vue consumers should receive the same day-state anatomy and data metadata."
+    },
+    {
+      "family": "dialog",
+      "displayName": "Dialog",
+      "summary": "High-risk modal family with a non-modal shell, canonical modal overlay layer, and stable purpose-dialog wrappers.",
+      "recommended": "DialogModal",
+      "alsoAvailable": ["ConfirmDialog", "DestructiveDialog", "Dialog", "InfoDialog"],
+      "searchTerms": "dialog dialog high-risk modal family with a non-modal shell, canonical modal overlay layer, and stable purpose-dialog wrappers. confirmdialog destructivedialog dialog dialogmodal infodialog confirmdialog destructivedialog dialog dialogmodal infodialog confirmdialog destructivedialog dialog dialogmodal infodialog confirm dialog destructive dialog dialog dialog modal info dialog confirm dialog destructive dialog dialog dialog modal info dialog confirm dialog destructive dialog dialog dialog modal info dialog react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte a workflow needs a named dialog shell or a canonical modal overlay with consistent focus and dismissal behavior. the product flow maps clearly to confirm, destructive, or informational dialog intent. the team wants react and vue modal behavior to stay aligned through shared contracts."
+    },
+    {
+      "family": "divider",
+      "displayName": "Divider",
+      "summary": "Family-local baseline separator family with a single Divider component for horizontal and vertical content separation.",
+      "recommended": "Divider",
+      "alsoAvailable": [],
+      "searchTerms": "divider divider family-local baseline separator family with a single divider component for horizontal and vertical content separation. divider divider divider divider divider divider react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a semantic separator between related sections or inline groups of content. the product wants one small separator primitive with a clear size scale and horizontal or vertical orientation. the team wants react, vue, and svelte divider behavior to stay aligned through one shared contract and one core recipe."
+    },
+    {
+      "family": "drawer",
+      "displayName": "Drawer",
+      "summary": "Dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters.",
+      "recommended": "Drawer",
+      "alsoAvailable": [],
+      "searchTerms": "drawer drawer dialog-adjacent panel component with left/right placement, size variants, optional scrim, optional footer, and shared dialog semantics across adapters. drawer drawer drawer drawer drawer drawer react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a side panel for contextual details, navigation, filters, or secondary workflows. the panel can provide a truthful aria-label or aria-labelledby reference. the product owns open state, close behavior, and focus return around the drawer."
+    },
+    {
+      "family": "heading",
+      "displayName": "Heading",
+      "summary": "Native-semantic typography family with three heading components backed by one core recipe, one shared typography preset, and a shared React/Vue contract.",
+      "recommended": "H1",
+      "alsoAvailable": ["H2", "H3"],
+      "searchTerms": "heading heading native-semantic typography family with three heading components backed by one core recipe, one shared typography preset, and a shared react/vue contract. h1 h2 h3 h1 h2 h3 h1 h2 h3 h1 h2 h3 h1 h2 h3 h1 h2 h3 react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a real page, section, or subsection heading and document outline should stay explicit. the product wants react and vue heading behavior to stay aligned through one core recipe and one shared contract. semantic level and visual size may need to diverge intentionally while still keeping the native heading tag."
+    },
+    {
+      "family": "icon",
+      "displayName": "Icon",
+      "summary": "Named SVG icon family with one Icon component, a generated runtime inventory, gallery-driven Storybook discovery, and shared React/Vue contract coverage for decorative versus labelled behavior.",
+      "recommended": "Icon",
+      "alsoAvailable": [],
+      "searchTerms": "icon icon named svg icon family with one icon component, a generated runtime inventory, gallery-driven storybook discovery, and shared react/vue contract coverage for decorative versus labelled behavior. icon icon icon icon icon icon react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a named decorative or labelled icon alongside text, controls, or status copy. the product wants react and vue icon behavior to stay aligned through the shared icon registry, size scale, stroke-width scale, and contract coverage. teams need a searchable gallery for the shipped icon inventory before placing icons into larger families like buttons, tabs, inputs, or tooltips."
+    },
+    {
+      "family": "input",
+      "displayName": "Input",
+      "summary": "Broad text-entry family spanning native text controls, Marwes-default select fields, OTP entry, and manual-review-heavy rich text.",
+      "recommended": "InputField",
+      "alsoAvailable": [
+        "CurrencyField",
+        "DateOfBirthField",
+        "DropdownField",
+        "EmailField",
+        "InputOtpField",
+        "PasswordField",
+        "PhoneField",
+        "RichTextField",
+        "SearchField",
+        "SelectField",
+        "TextareaField",
+        "URLField",
+        "ZipCodeField"
+      ],
+      "searchTerms": "input input broad text-entry family spanning native text controls, marwes-default select fields, otp entry, and manual-review-heavy rich text. currencyfield dateofbirthfield dropdownfield emailfield inputfield inputotpfield passwordfield phonefield richtextfield searchfield selectfield textareafield urlfield zipcodefield currencyfield dateofbirthfield dropdownfield emailfield inputfield inputotpfield passwordfield phonefield richtextfield searchfield selectfield textareafield urlfield zipcodefield currencyfield dateofbirthfield dropdownfield emailfield inputfield inputotpfield passwordfield phonefield richtextfield searchfield selectfield textareafield urlfield zipcodefield currency field date of birth field dropdown field email field input field input otp field password field phone field rich text field search field select field textarea field urlfield zip code field currency field date of birth field dropdown field email field input field input otp field password field phone field rich text field search field select field textarea field urlfield zip code field currency field date of birth field dropdown field email field input field input otp field password field phone field rich text field search field select field textarea field urlfield zip code field react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs text-like data entry with shared label, helper, error, and validation patterns. the product flow should benefit from purpose-level field wrappers such as searchfield, passwordfield, or dropdownfield. the implementation should stay aligned across react, vue, and svelte through shared field helpers and contracts."
+    },
+    {
+      "family": "pagination",
+      "displayName": "Pagination",
+      "summary": "Finite page navigation with shared item-window generation, ellipsis rendering, current-page semantics, and React/Vue/Svelte adapters.",
+      "recommended": "PaginationField",
+      "alsoAvailable": [],
+      "searchTerms": "pagination pagination finite page navigation with shared item-window generation, ellipsis rendering, current-page semantics, and react/vue/svelte adapters. paginationfield paginationfield paginationfield pagination field pagination field pagination field react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte a finite collection is split across known pages. users need direct page jumps in addition to previous and next controls. the interface should show a compact page range with ellipses."
+    },
+    {
+      "family": "paragraph",
+      "displayName": "Paragraph",
+      "summary": "Native paragraph-text family with one Paragraph component backed by a shared typography preset, theme defaults, and a shared React/Vue contract.",
+      "recommended": "Paragraph",
+      "alsoAvailable": [],
+      "searchTerms": "paragraph paragraph native paragraph-text family with one paragraph component backed by a shared typography preset, theme defaults, and a shared react/vue contract. paragraph paragraph paragraph paragraph paragraph paragraph react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs real body copy, supporting text, or longer reading content that should remain plain paragraph text. the product wants react and vue paragraph behavior to stay aligned through one core recipe, one shared typography preset, and one shared contract. the layout needs explicit control over surrounding spacing while still reusing marwes typography defaults."
+    },
+    {
+      "family": "progress-bar",
+      "displayName": "ProgressBar",
+      "summary": "Determinate progress component with optional label and percentage text, small/default Figma track sizes, and shared progressbar semantics across adapters.",
+      "recommended": "ProgressBar",
+      "alsoAvailable": [],
+      "searchTerms": "progressbar progress-bar determinate progress component with optional label and percentage text, small/default figma track sizes, and shared progressbar semantics across adapters. progressbar progressbar progressbar progress bar progress bar progress bar react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs to communicate determinate completion, upload, import, or setup progress. a visible label and percentage should be displayed together with a compact track. react, vue, and svelte consumers need the same read-only progress semantics."
+    },
+    {
+      "family": "radio",
+      "displayName": "Radio",
+      "summary": "Native single-selection family with a RadioGroupField component, a canonical RadioGroupField path, and thin purpose-radio wrappers for common one-of-many choices.",
+      "recommended": "RadioGroupField",
+      "alsoAvailable": ["OptionRadioGroup", "RatingRadioGroup", "YesNoRadioGroup"],
+      "searchTerms": "radio radio native single-selection family with a radiogroupfield component, a canonical radiogroupfield path, and thin purpose-radio wrappers for common one-of-many choices. optionradiogroup radiogroupfield ratingradiogroup yesnoradiogroup optionradiogroup radiogroupfield ratingradiogroup yesnoradiogroup optionradiogroup radiogroupfield ratingradiogroup yesnoradiogroup option radio group radio group field rating radio group yes no radio group option radio group radio group field rating radio group yes no radio group option radio group radio group field rating radio group yes no radio group react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs one mutually exclusive choice from a small peer set, with optional description or error support. the product flow maps clearly to yesnoradiogroup, ratingradiogroup, or optionradiogroup and benefits from self-documenting purpose metadata. the team wants react and vue radio behavior to stay aligned through one core recipe, shared field helpers, and the existing radio contract."
+    },
+    {
+      "family": "segmented-control",
+      "displayName": "Segmented Control",
+      "summary": "Single-select segmented toggle family with radiogroup semantics, keyboard navigation, and three visual variants (default, inverse, pill).",
+      "recommended": "SegmentedControlField",
+      "alsoAvailable": [],
+      "searchTerms": "segmented control segmented-control single-select segmented toggle family with radiogroup semantics, keyboard navigation, and three visual variants (default, inverse, pill). segmentedcontrolfield segmentedcontrolfield segmentedcontrolfield segmented control field segmented control field segmented control field react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a compact single-select toggle between 2–4 options with no associated panel content. theme switching, view density controls, framework selectors, or similar compact option sets. the team wants react, vue, and svelte segmented behavior to stay aligned through shared core recipes."
+    },
+    {
+      "family": "skeleton",
+      "displayName": "Skeleton",
+      "summary": "Loading-placeholder component with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React, Vue, and Svelte behavior.",
+      "recommended": "Skeleton",
+      "alsoAvailable": [],
+      "searchTerms": "skeleton skeleton loading-placeholder component with text, circular, and rectangular shapes mapped from the synced figma skeleton page into one core recipe and shared react, vue, and svelte behavior. skeleton skeleton skeleton skeleton skeleton skeleton react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a lightweight placeholder for loading text, avatar/media circles, or rectangular content blocks. the product already owns the surrounding loading context and the skeleton can stay decorative. react, vue, and svelte consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
+    },
+    {
+      "family": "slider",
+      "displayName": "Slider",
+      "summary": "Continuous-value input family with a native range slider component, a canonical SliderField path, and thin purpose-slider wrappers.",
+      "recommended": "SliderField",
+      "alsoAvailable": ["BrightnessSlider", "RadiusSlider", "VolumeSlider"],
+      "searchTerms": "slider slider continuous-value input family with a native range slider component, a canonical sliderfield path, and thin purpose-slider wrappers. brightnessslider radiusslider sliderfield volumeslider brightnessslider radiusslider sliderfield volumeslider brightnessslider radiusslider sliderfield volumeslider brightness slider radius slider slider field volume slider brightness slider radius slider slider field volume slider brightness slider radius slider slider field volume slider react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a continuous or stepped numeric control with visible labeling, optional description, and optional error support. the product flow maps clearly to volumeslider, brightnessslider, or radiusslider and benefits from self-documenting purpose metadata. the team wants react and vue slider behavior to stay aligned through one native-first core recipe and one shared contract file."
+    },
+    {
+      "family": "spacing",
+      "displayName": "Spacing",
+      "summary": "Family-local layout-spacing family with one decorative Spacing component backed by a token scale, a scale multiplier escape hatch, and shared React/Vue adapter parity.",
+      "recommended": "Spacer",
+      "alsoAvailable": ["Spacing"],
+      "searchTerms": "spacing spacing family-local layout-spacing family with one decorative spacing component backed by a token scale, a scale multiplier escape hatch, and shared react/vue adapter parity. spacer spacing spacer spacing spacer spacing spacer spacing spacer spacing spacer spacing react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the layout needs an explicit decorative vertical gap between elements and the team wants that gap to come from the shared spacing token scale. the product wants react and vue spacing behavior to stay aligned through one core recipe and one shared token vocabulary. the surrounding composition benefits from a visible spacer primitive instead of many one-off margins spread across sibling elements."
+    },
+    {
+      "family": "spinner",
+      "displayName": "Spinner",
+      "summary": "Family-local loading-indicator family with a core Spinner component, adapter-owned context wrappers, and button-loading integration built on the same component contract.",
+      "recommended": "Spinner",
+      "alsoAvailable": ["ButtonSpinner", "EmptyStateSpinner"],
+      "searchTerms": "spinner spinner family-local loading-indicator family with a core spinner component, adapter-owned context wrappers, and button-loading integration built on the same component contract. buttonspinner emptystatespinner spinner buttonspinner emptystatespinner spinner buttonspinner emptystatespinner spinner button spinner empty state spinner spinner button spinner empty state spinner spinner button spinner empty state spinner spinner react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs an indeterminate loading indicator for inline button loading, centered empty states, or standalone async feedback. the product flow already matches buttonspinner or emptystatespinner and benefits from the wrapper defaults for size, visual treatment, and local metadata. the team wants react, vue, and svelte spinner behavior to stay aligned through one core svg recipe, one preset css contract, and shared adapter contracts."
+    },
+    {
+      "family": "stat-tile",
+      "displayName": "Stat Tile",
+      "summary": "Compact KPI tile synced from the V2 Stat Tile Figma component, with tone treatments, optional trend metadata, and shared React/Vue adapter contracts.",
+      "recommended": "StatTile",
+      "alsoAvailable": [],
+      "searchTerms": "stat tile stat-tile compact kpi tile synced from the v2 stat tile figma component, with tone treatments, optional trend metadata, and shared react/vue adapter contracts. stattile stattile stattile stat tile stat tile stat tile react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a compact kpi summary with label, value, optional trend, and optional subtitle. the metric fits one of the synced neutral, brand, success, warning, or danger tone treatments. react and vue consumers should receive the same dashboard metric anatomy and metadata."
+    },
+    {
+      "family": "switch",
+      "displayName": "Switch",
+      "summary": "Binary toggle family with a button-backed switch component, a canonical SwitchField path, and thin purpose-switch wrappers.",
+      "recommended": "SwitchField",
+      "alsoAvailable": ["FeatureToggle", "PermissionSwitch", "PreferenceSwitch"],
+      "searchTerms": "switch switch binary toggle family with a button-backed switch component, a canonical switchfield path, and thin purpose-switch wrappers. featuretoggle permissionswitch preferenceswitch switchfield featuretoggle permissionswitch preferenceswitch switchfield featuretoggle permissionswitch preferenceswitch switchfield feature toggle permission switch preference switch switch field feature toggle permission switch preference switch switch field feature toggle permission switch preference switch switch field react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a binary on/off control with visible labeling and optional description or error support. the product flow maps clearly to featuretoggle, preferenceswitch, or permissionswitch and benefits from self-documenting purpose metadata. the team wants react and vue switch behavior to stay aligned through shared core helpers and one contract file."
+    },
+    {
+      "family": "tab",
+      "displayName": "Tab",
+      "summary": "Coordinated tabs family with a low-level tab component, a canonical TabGroup path, and thin purpose-tab wrappers.",
+      "recommended": "NavigationTabs",
+      "alsoAvailable": ["ContentTabs", "SettingsTabs", "Tab", "TabGroup", "TabPanel"],
+      "searchTerms": "tab tab coordinated tabs family with a low-level tab component, a canonical tabgroup path, and thin purpose-tab wrappers. contenttabs navigationtabs settingstabs tab tabgroup tabpanel contenttabs navigationtabs settingstabs tab tabgroup tabpanel contenttabs navigationtabs settingstabs tab tabgroup tabpanel content tabs navigation tabs settings tabs tab tab group tab panel content tabs navigation tabs settings tabs tab tab group tab panel content tabs navigation tabs settings tabs tab tab group tab panel react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs a named tablist with built-in keyboard movement and tab-to-panel wiring. the product flow maps clearly to navigationtabs, contenttabs, or settingstabs and benefits from self-documenting purpose metadata. the team wants react and vue tabs behavior to stay aligned through shared core helpers and one contract file."
+    },
+    {
+      "family": "text",
+      "displayName": "Text",
+      "summary": "Non-heading typography component for labels, captions, overline, microcopy, and supporting body text where consumers choose the native element.",
+      "recommended": "Text",
+      "alsoAvailable": ["TypographyText"],
+      "searchTerms": "text text non-heading typography component for labels, captions, overline, microcopy, and supporting body text where consumers choose the native element. text typographytext text typographytext text typographytext text typography text text typography text text typography text react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs label, caption, overline, microcopy, or compact supporting text. the caller needs to choose span, p, or div while reusing marwes typography variants. react, vue, and svelte consumers need the same typography class and native-element contract."
+    },
+    {
+      "family": "toast",
+      "displayName": "Toast",
+      "summary": "Canonical transient-feedback family with a Toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent.",
+      "recommended": "InfoToast",
+      "alsoAvailable": [
+        "ErrorToast",
+        "SuccessToast",
+        "Toast",
+        "ToastContainer",
+        "ToastProvider",
+        "WarningToast"
+      ],
+      "searchTerms": "toast toast canonical transient-feedback family with a toast component, adapter-owned delivery layers, and thin purpose-toast wrappers for common message intent. errortoast infotoast successtoast toast toastcontainer toastprovider warningtoast errortoast infotoast successtoast toast toastcontainer toastprovider warningtoast errortoast infotoast successtoast toast toastcontainer toastprovider warningtoast error toast info toast success toast toast toast container toast provider warning toast error toast info toast success toast toast toast container toast provider warning toast error toast info toast success toast toast toast container toast provider warning toast react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs transient, non-blocking feedback with a clear semantic intent such as success, error, warning, or info. the product flow benefits from toastcontainer or toastprovider for stacked placement and queue management. the team wants react and vue toast semantics to stay aligned through the central semantic registry and one shared contract file."
+    },
+    {
+      "family": "tooltip",
+      "displayName": "Tooltip",
+      "summary": "Contextual-help family with a standalone tooltip component, a canonical TooltipGroup path, and an explicit non-interactive scope boundary.",
+      "recommended": "TooltipGroup",
+      "alsoAvailable": ["Tooltip"],
+      "searchTerms": "tooltip tooltip contextual-help family with a standalone tooltip component, a canonical tooltipgroup path, and an explicit non-interactive scope boundary. tooltip tooltipgroup tooltip tooltipgroup tooltip tooltipgroup tooltip tooltip group tooltip tooltip group tooltip tooltip group react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs short, non-interactive contextual help tied to an icon trigger or a placement-owned tooltip bubble. the product flow benefits from tooltipgroup's built-in trigger naming and hover or focus reveal behavior. the team wants react and vue tooltip behavior to stay aligned through one shared contract file."
+    }
+  ],
+  "sections": [
+    {
+      "id": "components",
+      "label": "Components"
+    }
+  ]
+}

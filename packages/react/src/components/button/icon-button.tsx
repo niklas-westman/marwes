@@ -1,16 +1,20 @@
-import type { ButtonOptions, IconName } from "@marwes-ui/core"
+import type { AccessibleButtonName, ButtonOptions, IconName } from "@marwes-ui/core"
 import { ButtonVariant } from "@marwes-ui/core"
 import { Button, type ButtonProps } from "./button"
 
 export type IconButtonProps = Omit<
   ButtonProps,
-  "children" | "hasVisibleText" | "iconLeft" | "iconOnly" | "iconRight"
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "children"
+  | "hasVisibleText"
+  | "iconLeft"
+  | "iconOnly"
+  | "iconRight"
+  | "label"
 > & {
   icon: IconName
-  /** Accessible name — required for icon-only buttons. Prefer `label`; `ariaLabel` also accepted. */
-  label?: string
-  ariaLabel?: string
-}
+} & AccessibleButtonName
 
 export function IconButton(props: IconButtonProps) {
   const { icon, variant = ButtonVariant.neutral, ...buttonProps } = props

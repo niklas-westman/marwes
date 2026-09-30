@@ -1,4 +1,5 @@
 import { DocsPageShellRoot } from "./docs-page-shell-root"
+import { DocsShell } from "./docs-shell"
 import type { IntroductionPageModel } from "./introduction-model"
 import { IntroductionPage } from "./introduction-page"
 
@@ -39,7 +40,9 @@ function readEmbeddedIntroductionPageModel(
 function IntroductionApp({ model }: { model: IntroductionPageModel }): JSX.Element {
   return (
     <DocsPageShellRoot>
-      <IntroductionPage model={model} />
+      <DocsShell currentPath="/docs/introduction/" sections={model.sections}>
+        <IntroductionPage model={model} />
+      </DocsShell>
     </DocsPageShellRoot>
   )
 }

@@ -1,4 +1,4 @@
-import type { ButtonOptions, IconName } from "@marwes-ui/core"
+import type { AccessibleButtonName, ButtonOptions, IconName } from "@marwes-ui/core"
 import { ButtonVariant } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
 import { omitAttrs } from "../../internal/render-utils"
@@ -6,13 +6,16 @@ import { Button, type ButtonProps } from "./button"
 
 export type IconButtonProps = Omit<
   ButtonProps,
-  "iconLeft" | "iconRight" | "iconOnly" | "hasVisibleText"
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "hasVisibleText"
+  | "iconLeft"
+  | "iconOnly"
+  | "iconRight"
+  | "label"
 > & {
   icon: IconName
-  /** Accessible name — required for icon-only buttons. Prefer `label`; `ariaLabel` also accepted. */
-  label?: string
-  ariaLabel?: string
-}
+} & AccessibleButtonName
 
 const iconButtonPropKeys = [
   "as",
@@ -25,6 +28,7 @@ const iconButtonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "ariaLabelledBy",
   "label",
   "ariaExpanded",
   "ariaControls",
@@ -37,7 +41,7 @@ const iconButtonPropKeys = [
   "icon",
 ] as const
 
-export const IconButton = defineComponent(
+const IconButtonImplementation = defineComponent(
   (rawProps) => {
     const attrs = useAttrs()
 
@@ -69,3 +73,8 @@ export const IconButton = defineComponent(
     props: [...iconButtonPropKeys],
   },
 )
+
+/** Vue component type that preserves the accessible-name union at call sites. */
+export const IconButton = IconButtonImplementation as unknown as new () => {
+  $props: IconButtonProps
+}

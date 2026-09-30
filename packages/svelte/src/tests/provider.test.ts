@@ -42,4 +42,30 @@ describe("MarwesProvider", () => {
     const { getByText } = render(ProviderThemeSnippetFixture)
     expect(getByText("var(--mw-spacing-sp-16):@media (min-width: 1024px)")).not.toBeNull()
   })
+
+  it("defaults system preference to light when matchMedia is unavailable", () => {
+    const originalMatchMedia = window.matchMedia
+    Object.defineProperty(window, "matchMedia", {
+      value: undefined,
+      configurable: true,
+      writable: true,
+    })
+
+    try {
+      const { container, unmount } = render(MarwesProvider, {
+        props: { defaultPreference: "system" },
+      })
+      const wrapper = container.querySelector("[data-marwes-theme]")
+
+      expect(wrapper?.classList.contains("mw-theme--light")).toBe(true)
+      expect(wrapper?.getAttribute("data-marwes-mode")).toBe("light")
+      unmount()
+    } finally {
+      Object.defineProperty(window, "matchMedia", {
+        value: originalMatchMedia,
+        configurable: true,
+        writable: true,
+      })
+    }
+  })
 })

@@ -1,4 +1,4 @@
-import type { ButtonOptions, ButtonVariant, IconName } from "@marwes-ui/core"
+import type { AccessibleButtonName, ButtonOptions, ButtonVariant, IconName } from "@marwes-ui/core"
 import type { Snippet } from "svelte"
 
 export interface ButtonProps extends ButtonOptions {
@@ -8,14 +8,20 @@ export interface ButtonProps extends ButtonOptions {
   style?: string
 }
 
-export interface IconButtonProps
-  extends Omit<ButtonProps, "children" | "hasVisibleText" | "iconLeft" | "iconOnly" | "iconRight"> {
+export type IconButtonProps = Omit<
+  ButtonProps,
+  | "ariaLabel"
+  | "ariaLabelledBy"
+  | "children"
+  | "hasVisibleText"
+  | "iconLeft"
+  | "iconOnly"
+  | "iconRight"
+  | "label"
+> & {
   icon: IconName
-  /** Accessible name — required for icon-only buttons. Prefer `label`; `ariaLabel` also accepted. */
-  label?: string
-  ariaLabel?: string
   variant?: ButtonVariant
-}
+} & AccessibleButtonName
 
 export type PrimaryButtonProps = Omit<ButtonProps, "variant" | "as">
 export type SecondaryButtonProps = Omit<ButtonProps, "variant" | "as">

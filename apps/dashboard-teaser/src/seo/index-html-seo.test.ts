@@ -70,24 +70,46 @@ describe("dashboard teaser HTML SEO output", () => {
 
   it("keeps semantic body content available before React executes", () => {
     const root = document.getElementById("root")
-    const rootText = root?.textContent?.toLowerCase() ?? ""
+    const rootText = (root?.textContent?.toLowerCase() ?? "").replace(/\s+/g, " ")
     const links = [...document.querySelectorAll("#root a")].map((link) => link.textContent)
 
     expect(root?.querySelectorAll("h1")).toHaveLength(1)
-    expect(rootText).toContain("marwes ui")
-    expect(rootText).toContain("framework-agnostic")
-    expect(rootText).toContain("ai-friendly")
+    expect(rootText).toContain("one system, any brand")
     expect(rootText).toContain("react")
     expect(rootText).toContain("vue")
     expect(rootText).toContain("svelte")
-    expect(rootText).toContain("static css")
-    expect(rootText).toContain("css variable")
-    expect(rootText).toContain("css modules")
-    expect(rootText).toContain("css-in-js")
-    expect(rootText).toContain("tailwind-style")
-    expect(rootText).toContain("typed themes")
-    expect(rootText).toContain("adjustable")
+    expect(rootText).toContain("static preset css")
+    expect(rootText).toContain("type-safe")
     expect(rootText).toContain("accessibility")
-    expect(links).toEqual(["Documentation", "GitHub"])
+    expect(links).toEqual([
+      "Get started with React",
+      "Get started with Vue",
+      "Get started with Svelte",
+      "Browse components",
+      "Theme your app",
+      "Troubleshoot",
+      "AI overview",
+      "React AI guide",
+      "Vue AI guide",
+      "Svelte AI guide",
+      "React Storybook",
+      "Vue Storybook",
+      "Svelte Storybook",
+      "GitHub",
+    ])
+    expect(document.querySelector('a[href="/docs/components/"]')).not.toBeNull()
+    expect(document.querySelector('a[href="/llms.txt"]')).not.toBeNull()
+    expect(document.querySelector('a[href="/ai/react.md"]')).not.toBeNull()
+    expect(document.querySelector('a[href="/ai/vue.md"]')).not.toBeNull()
+    expect(document.querySelector('a[href="/ai/svelte.md"]')).not.toBeNull()
+    expect(
+      document.querySelector('a[href="https://storybook-react.marwes.io/latest/"]'),
+    ).not.toBeNull()
+    expect(
+      document.querySelector('a[href="https://storybook-vue.marwes.io/latest/"]'),
+    ).not.toBeNull()
+    expect(
+      document.querySelector('a[href="https://storybook-svelte.marwes.io/latest/"]'),
+    ).not.toBeNull()
   })
 })

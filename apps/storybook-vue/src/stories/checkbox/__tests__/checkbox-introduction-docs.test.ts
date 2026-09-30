@@ -7,12 +7,13 @@ import path from "node:path"
 import { describe, expect, it } from "vitest"
 
 describe("Vue checkbox introduction docs", () => {
-  it("documents atom and molecule layers", () => {
+  it("documents public fields and keeps the atom internal", () => {
     const introPath = path.resolve(__dirname, "../Introduction.mdx")
     const introDoc = readFileSync(introPath, "utf8")
 
-    expect(introDoc).toContain("Checkbox (Atom)")
+    expect(introDoc).toContain("Checkbox (Atom, internal)")
     expect(introDoc).toContain("CheckboxField (Molecule)")
     expect(introDoc).toContain("CheckboxGroupField (Molecule)")
+    expect(introDoc).not.toContain('import { Checkbox } from "@marwes-ui/vue"')
   })
 })

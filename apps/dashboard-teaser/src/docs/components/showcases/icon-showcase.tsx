@@ -9,9 +9,7 @@ function IconShowcase(): JSX.Element {
         <h3>Decorative, next to visible text</h3>
         <p>The icon adds no independent meaning, so it stays hidden from assistive technology.</p>
         <ButtonRow>
-          <PrimaryButton>
-            <Icon name={IconName.Plus} decorative size="sm" /> Create item
-          </PrimaryButton>
+          <PrimaryButton iconLeft={IconName.Plus}>Create item</PrimaryButton>
         </ButtonRow>
       </ShowcaseCard>
       <ShowcaseCard>

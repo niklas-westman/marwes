@@ -3,7 +3,7 @@
  * state normalization, and anchor-mode interaction blocking.
  * No DOM or framework involved; adapter tests verify the rendered result.
  */
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 import { SpinnerVariants, createButtonRecipe } from "../../src/components/atoms"
 
 describe("createButtonRecipe", () => {
@@ -82,6 +82,52 @@ describe("createButtonRecipe", () => {
 
     expect(kit.a11y.ariaLabel).toBe("Close")
     expect(kit.a11y.title).toBe("Close")
+  })
+
+  it("accepts ariaLabelledBy as an accessible name for icon-only buttons", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+    const kit = createButtonRecipe({
+      as: "button",
+      ariaLabelledBy: "close-label",
+      iconOnly: true,
+      iconLeft: "x",
+    })
+
+    expect(kit.a11y.ariaLabelledBy).toBe("close-label")
+    expect(warn).not.toHaveBeenCalled()
+    warn.mockRestore()
+  })
+
+  it("warns when an icon-only button only has empty accessible-name values", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+    createButtonRecipe({
+      as: "button",
+      ariaLabel: " ",
+      ariaLabelledBy: " ",
+      iconOnly: true,
+      iconLeft: "x",
+      label: "",
+    })
+
+    expect(warn).toHaveBeenCalledOnce()
+    warn.mockRestore()
+  })
+
+  it("falls back to label when ariaLabel is empty", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+
+    const kit = createButtonRecipe({
+      ariaLabel: "",
+      iconOnly: true,
+      iconLeft: "x",
+      label: "Close",
+    })
+
+    expect(kit.a11y.ariaLabel).toBe("Close")
+    expect(warn).not.toHaveBeenCalled()
+    warn.mockRestore()
   })
 
   it("builds anchor render kit and blocks navigation when loading disables interaction", () => {

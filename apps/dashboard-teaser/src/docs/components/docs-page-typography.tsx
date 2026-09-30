@@ -1,8 +1,21 @@
+import type { ReactNode } from "react"
+import { useContext } from "react"
 import styled from "styled-components"
+import { DocsInlineNavigationContext } from "./docs-inline-navigation"
 
-const Hero = styled.header`
+const HeroHeader = styled.header`
   padding-bottom: ${({ theme }) => theme.spacing.sp40};
 `
+
+function Hero({ children }: { children: ReactNode }): JSX.Element {
+  const navigation = useContext(DocsInlineNavigationContext)
+  return (
+    <HeroHeader>
+      {children}
+      {navigation}
+    </HeroHeader>
+  )
+}
 
 const Eyebrow = styled.p`
   margin: 0 0 ${({ theme }) => theme.spacing.sp8};
@@ -48,6 +61,21 @@ const SectionDescription = styled.p`
   line-height: 1.55;
 `
 
+const Callout = styled.aside`
+  margin-top: ${({ theme }) => theme.spacing.sp40};
+  padding: ${({ theme }) => theme.spacing.sp24};
+  border-radius: ${({ theme }) => theme.spacing.sp12};
+  background: ${({ theme }) => theme.color.surfaceBrand};
+  color: ${({ theme }) => theme.color.textBrand};
+  font-size: 0.8125rem;
+  line-height: 1.55;
+
+  strong {
+    display: block;
+    margin-bottom: ${({ theme }) => theme.spacing.sp4};
+  }
+`
+
 const PageFooter = styled.footer`
   display: flex;
   align-items: center;
@@ -64,4 +92,14 @@ const PageFooter = styled.footer`
   }
 `
 
-export { Eyebrow, Hero, Lead, PageFooter, PageTitle, Section, SectionDescription, SectionHeading }
+export {
+  Callout,
+  Eyebrow,
+  Hero,
+  Lead,
+  PageFooter,
+  PageTitle,
+  Section,
+  SectionDescription,
+  SectionHeading,
+}

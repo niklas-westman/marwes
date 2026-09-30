@@ -562,7 +562,7 @@
         "summary": "Canonical compact-status family with a raw Badge atom, a BadgeGroup molecule, and thin purpose-badge wrappers for status, priority, and notification contexts.",
         "philosophy": [
           "Teach purpose badges first when the meaning is known and keep raw Badge as the deliberate primitive and escape hatch.",
-          "Keep canonical badge semantics in core so React and Vue emit the same data-component, data-purpose, and data-variant contract.",
+          "Keep canonical badge semantics in core so React, Vue, and Svelte emit the same data-component, data-purpose, and data-variant contract.",
           "Keep BadgeGroup structural and labeled rather than turning it into an interactive filter-chip or token-input system.",
           "Keep the shipped variant set honest to code and docs even though the current Figma page still shows an extra brand row that Marwes does not ship."
         ],
@@ -570,7 +570,7 @@
           "useWhen": [
             "The UI needs a compact, non-interactive status label, priority marker, or notification count with stable semantics.",
             "The product flow maps clearly to StatusBadge, PriorityBadge, or NotificationBadge and benefits from canonical purpose metadata.",
-            "The team wants grouped badge presentation to stay aligned across React and Vue through BadgeGroup and one shared contract file."
+            "The team wants grouped badge presentation to stay aligned across React, Vue, and Svelte through BadgeGroup and one shared contract."
           ],
           "avoidWhen": [
             "The surface is really an interactive chip, filter token, dismissible tag, or pill button rather than a passive badge.",
@@ -617,6 +617,14 @@
               "apps/storybook-vue/src/stories/badge/status-badge.stories.ts",
               "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
               "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/badge/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/badge/badge.stories.ts",
+              "apps/storybook-svelte/src/stories/badge/badge-group.stories.ts",
+              "apps/storybook-svelte/src/stories/badge/status-badge.stories.ts",
+              "apps/storybook-svelte/src/stories/badge/priority-badge.stories.ts",
+              "apps/storybook-svelte/src/stories/badge/notification-badge.stories.ts"
             ]
           },
           "preferredStates": [
@@ -1247,7 +1255,7 @@
         "summary": "Semantic-first action family with a base Button atom, visual wrappers, and purpose wrappers for canonical workflows.",
         "philosophy": [
           "Teach purpose wrappers first and keep the base Button as the deliberate escape hatch.",
-          "Keep semantics and accessibility rules in core so React and Vue emit the same contract.",
+          "Keep semantics and accessibility rules in core so React, Vue, and Svelte emit the same contract.",
           "Use button names and wrappers to make intent self-documenting in product code.",
           "Treat AXE follow-up work as governance hardening, not as a reason to replace the Button architecture."
         ],
@@ -1255,7 +1263,7 @@
           "useWhen": [
             "The UI needs a canonical action trigger with clear semantic intent.",
             "A product flow matches one of the purpose wrappers such as submit, cancel, save, or destructive.",
-            "The implementation should stay aligned across React and Vue through the shared core contract."
+            "The implementation should stay aligned across React, Vue, and Svelte through the shared core contract."
           ],
           "avoidWhen": [
             "A plain navigational link with native link semantics is the better fit than an action button.",
@@ -1267,7 +1275,7 @@
           "riskTier": "medium",
           "auditStatus": "first-pass-complete",
           "automationCovers": [
-            "Shared React and Vue contract coverage through tests/contracts/button.contract.ts.",
+            "Shared React, Vue, and Svelte contract coverage through tests/contracts/button.contract.ts.",
             "Loading-state semantics such as aria-busy and disabled behavior.",
             "Native link semantics for active LinkButton paths and disabled/loading anchor fallback behavior.",
             "Dev-time warning for icon-only buttons without an accessible name path.",
@@ -1662,7 +1670,7 @@
           "useWhen": [
             "The UI needs a bordered content surface with optional title and flexible body composition.",
             "The product flow clearly maps to ProductCard, ProfileCard, or StatCard and benefits from local purpose metadata.",
-            "The team wants React and Vue card rendering to stay aligned through one simple core recipe and shared Storybook teaching surfaces."
+            "The team wants React, Vue, and Svelte card rendering to stay aligned through one simple core recipe and shared Storybook teaching surfaces."
           ],
           "avoidWhen": [
             "The surface is really an interactive tile, navigation link, or button-like control that should own explicit interactive semantics.",
@@ -1707,6 +1715,13 @@
               "apps/storybook-vue/src/stories/card/product-card.stories.ts",
               "apps/storybook-vue/src/stories/card/profile-card.stories.ts",
               "apps/storybook-vue/src/stories/card/stat-card.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/card/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/card/card.stories.ts",
+              "apps/storybook-svelte/src/stories/card/product-card.stories.ts",
+              "apps/storybook-svelte/src/stories/card/profile-card.stories.ts",
+              "apps/storybook-svelte/src/stories/card/stat-card.stories.ts"
             ]
           },
           "preferredStates": [
@@ -2840,7 +2855,7 @@
         "summary": "Family-local baseline separator family with a single Divider atom for horizontal and vertical content separation.",
         "philosophy": [
           "Keep Divider as a single-purpose atom and avoid turning it into a family of decorated or text-embedded separators by default.",
-          "Keep the semantic <hr> baseline and source-owned size mapping in core so React and Vue stay aligned.",
+          "Keep the semantic <hr> baseline and source-owned size mapping in core so React, Vue, and Svelte stay aligned.",
           "Treat the current Figma page as a horizontal spacing reference, while the shipped vertical orientation remains a deliberate code-level extension.",
           "Keep local divider metadata honest: the atom emits stable data-component, data-size, and data-orientation values from core, but Divider is not part of the wave-1 central semantic registry."
         ],
@@ -2848,7 +2863,7 @@
           "useWhen": [
             "The UI needs a semantic separator between related sections or inline groups of content.",
             "The product wants one small separator primitive with a clear size scale and horizontal or vertical orientation.",
-            "The team wants React and Vue divider behavior to stay aligned through one shared contract and one core recipe."
+            "The team wants React, Vue, and Svelte divider behavior to stay aligned through one shared contract and one core recipe."
           ],
           "avoidWhen": [
             "The layout only needs whitespace and does not benefit from an actual semantic separator.",
@@ -2887,6 +2902,10 @@
             "vue": [
               "apps/storybook-vue/src/stories/divider/Introduction.mdx",
               "apps/storybook-vue/src/stories/divider/divider.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/divider/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/divider/divider.stories.ts"
             ]
           },
           "preferredStates": [
@@ -3731,7 +3750,7 @@
           "useWhen": [
             "The UI needs text-like data entry with shared label, helper, error, and validation patterns.",
             "The product flow should benefit from purpose-level field wrappers such as SearchField, PasswordField, or DropdownField.",
-            "The implementation should stay aligned across React and Vue through shared field helpers and contracts."
+            "The implementation should stay aligned across React, Vue, and Svelte through shared field helpers and contracts."
           ],
           "avoidWhen": [
             "A different family such as checkbox, radio, or switch is the more honest control type.",
@@ -5279,10 +5298,10 @@
         "family": "skeleton",
         "displayName": "Skeleton",
         "status": "shipped",
-        "summary": "Loading-placeholder atom with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React/Vue adapter contract.",
+        "summary": "Loading-placeholder component with text, circular, and rectangular shapes mapped from the synced Figma Skeleton page into one core recipe and shared React, Vue, and Svelte behavior.",
         "philosophy": [
           "Keep Skeleton as a low-level loading placeholder atom rather than a layout-specific card or list skeleton family.",
-          "Keep the three synced baseline shapes source-owned in core so React and Vue render the same dimensions, radius rules, metadata, and accessibility behavior.",
+          "Keep the three synced baseline shapes source-owned in core so React, Vue, and Svelte render the same dimensions, radius rules, metadata, and accessibility behavior.",
           "Keep visual treatment in preset CSS through stable mw-skeleton classes and theme-relative variables instead of adapter-owned styling.",
           "Keep the atom decorative by default, with explicit ariaLabel opt-in for standalone status usage."
         ],
@@ -5290,7 +5309,7 @@
           "useWhen": [
             "The UI needs a lightweight placeholder for loading text, avatar/media circles, or rectangular content blocks.",
             "The product already owns the surrounding loading context and the skeleton can stay decorative.",
-            "React and Vue consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
+            "React, Vue, and Svelte consumers should receive the same placeholder dimensions, shape variants, animation choices, and accessibility contract."
           ],
           "avoidWhen": [
             "The experience needs determinate progress, percentage tracking, or an indeterminate activity indicator instead of structural placeholders.",
@@ -5325,6 +5344,10 @@
             "vue": [
               "apps/storybook-vue/src/stories/skeleton/Introduction.mdx",
               "apps/storybook-vue/src/stories/skeleton/skeleton.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/skeleton/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/skeleton/skeleton.stories.ts"
             ]
           },
           "preferredStates": [
@@ -5946,7 +5969,7 @@
         "summary": "Family-local loading-indicator family with a core Spinner atom, adapter-owned context wrappers, and button-loading integration built on the same atom contract.",
         "philosophy": [
           "Keep Spinner as a small loading atom that stays decorative by default and only becomes an announced status surface when product code opts in with ariaLabel.",
-          "Keep the seven synced visual styles and size scale source-owned in core so React and Vue render the same spinner geometry and metadata.",
+          "Keep the seven synced visual styles and size scale source-owned in core so React, Vue, and Svelte render the same spinner geometry and metadata.",
           "Keep ButtonSpinner and EmptyStateSpinner thin adapter-owned context wrappers rather than turning the core atom into a matrix of loading situations.",
           "Keep spinner semantics family-local and honest: the atom emits stable local metadata today, but Spinner is not part of the wave-1 central semantic registry."
         ],
@@ -5954,7 +5977,7 @@
           "useWhen": [
             "The UI needs an indeterminate loading indicator for inline button loading, centered empty states, or standalone async feedback.",
             "The product flow already matches ButtonSpinner or EmptyStateSpinner and benefits from the wrapper defaults for size, visual treatment, and local metadata.",
-            "The team wants React and Vue spinner behavior to stay aligned through one core SVG recipe, one preset CSS contract, and one shared adapter contract file."
+            "The team wants React, Vue, and Svelte spinner behavior to stay aligned through one core SVG recipe, one preset CSS contract, and shared adapter contracts."
           ],
           "avoidWhen": [
             "The experience needs determinate progress, percentage tracking, or skeleton structure rather than an indeterminate spinner.",
@@ -5998,6 +6021,12 @@
               "apps/storybook-vue/src/stories/spinner/spinner.stories.ts",
               "apps/storybook-vue/src/stories/spinner/button-spinner.stories.ts",
               "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/spinner/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/spinner/spinner.stories.ts",
+              "apps/storybook-svelte/src/stories/spinner/button-spinner.stories.ts",
+              "apps/storybook-svelte/src/stories/spinner/empty-state-spinner.stories.ts"
             ]
           },
           "preferredStates": [

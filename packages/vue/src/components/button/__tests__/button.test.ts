@@ -15,7 +15,7 @@ import { runButtonSemanticsContract } from "../../../../../../tests/contracts/bu
 import { runButtonContract } from "../../../../../../tests/contracts/button.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Button } from "../button"
-import { IconButton } from "../icon-button"
+import { IconButton, type IconButtonProps } from "../icon-button"
 import {
   CancelButton,
   CloseButton,
@@ -204,6 +204,39 @@ describe("Vue adapter specifics: Button", () => {
     renderWithProvider(IconButton, { icon: "x", label: "Close" })
 
     expect(screen.getByRole("button", { name: /close/i })).toHaveAttribute("aria-label", "Close")
+  })
+
+  it("lets IconButton use an external accessible label", () => {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () => [
+                h("span", { id: "close-label" }, "Close"),
+                h(IconButton, { icon: "x", ariaLabelledBy: "close-label" }),
+              ],
+            })
+        },
+      }),
+    )
+
+    expect(screen.getByRole("button", { name: "Close" })).toHaveAttribute(
+      "aria-labelledby",
+      "close-label",
+    )
+  })
+
+  it("requires an accessible name in IconButtonProps", () => {
+    // @ts-expect-error — icon-only buttons require label, ariaLabel, or ariaLabelledBy.
+    const unnamedIconButton: IconButtonProps = { icon: "x" }
+    expect(unnamedIconButton).toBeDefined()
+  })
+
+  it("requires an accessible name at the Vue component call site", () => {
+    // @ts-expect-error — IconButton's public component props require an accessible name.
+    const unnamedIconButton = h(IconButton, { icon: "x" })
+    expect(unnamedIconButton).toBeDefined()
   })
 
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {

@@ -7,12 +7,12 @@
 
 # Marwes Design System
 
-**An AI-adapted component system for React, Vue, and Svelte with beautiful defaults, zero runtime CSS, and accessibility baked in.**
+**Build one branded, accessible UI language across React, Vue, and Svelte. Install one adapter, wrap once, and theme every component.**
 
 React • Vue • Svelte • Framework-agnostic core • Static CSS • Type-safe • A11y-first • Agent-readable
 
 [**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
-[Start Here](docs/start-here.md) • [Documentation](docs/README.md) • [React Storybook](https://storybook-react.marwes.io/latest/) • [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Svelte Storybook](https://storybook-svelte.marwes.io/latest/)
+[React setup](https://marwes.io/docs/get-started/react/) • [Vue setup](https://marwes.io/docs/get-started/vue/) • [Svelte setup](https://marwes.io/docs/get-started/svelte/) • [Component catalog](https://marwes.io/docs/components/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -38,9 +38,9 @@ Stable component contracts, semantic actions, generated registries, and explicit
 
 A11y isn't bolted on. Core owns semantic contracts, adapters apply them to real DOM, and Storybook a11y smoke checks catch regressions in the promoted families.
 
-### 🚀 **Zero Runtime CSS**
+### 🚀 **Static Preset CSS**
 
-No CSS-in-JS overhead. Static CSS with CSS variables. Ship less JavaScript, load faster.
+Static preset CSS and CSS variables, with no CSS-in-JS runtime required by Marwes.
 
 </td>
 <td width="50%">
@@ -118,140 +118,47 @@ The honest boundary: automation gives strong coverage for contracts and smoke-te
 
 ## 🚀 Installation
 
-Marwes ships framework adapters separately. Install the adapter for your app; the default first edition preset CSS is included by the adapter.
-
-### React
-
-Install the React adapter:
+Use the CLI from the root of an existing Vite app. It installs the selected adapter, wires `MarwesProvider`, and runs the setup checks:
 
 ```bash
-pnpm add @marwes-ui/react
+pnpm dlx @marwes-ui/cli init --adapter react
+pnpm dlx @marwes-ui/cli init --adapter vue
+pnpm dlx @marwes-ui/cli init --adapter svelte
 ```
 
-If React is not already installed in your app, install the peer dependencies too:
+Verify the result, including a production build:
 
 ```bash
-pnpm add react react-dom
+pnpm dlx @marwes-ui/cli doctor --run-build
 ```
 
-Wrap your app with `MarwesProvider`:
+For a new app, use the official Vite scaffolder:
+
+```bash
+pnpm create marwes@latest my-app --template react-ts
+pnpm create marwes@latest my-app --template vue-ts
+pnpm create marwes@latest my-app --template svelte-ts
+```
+
+The CLI's automatic provider patching targets known Vite starter layouts. If it reports `manual-action-required`, follow the complete provider example it prints and then rerun `doctor --run-build`.
+
+Manual installation is the fallback path: add exactly one adapter package, keep the framework peer dependency in a supported version, and render your app below that adapter's `MarwesProvider`. The adapter already includes the default preset CSS; do not add a second Marwes stylesheet.
 
 ```tsx
-import { MarwesProvider, Button } from "@marwes-ui/react"
+import { MarwesProvider, PrimaryButton } from "@marwes-ui/react"
 
-function App() {
+export function App() {
   return (
     <MarwesProvider>
-      <Button variant="primary">
-        Click me
-      </Button>
+      <PrimaryButton>Continue</PrimaryButton>
     </MarwesProvider>
   )
 }
 ```
 
-Use the same provider theme in app-owned React styling:
-
-```tsx
-import { mwThemeVars } from "@marwes-ui/react"
-import styled from "styled-components"
-
-const AppShell = styled.main`
-  min-height: 100dvh;
-  padding: ${mwThemeVars.spacing.sp24};
-  color: ${mwThemeVars.color.text};
-  background: ${mwThemeVars.color.background};
-`
-
-const FeaturePanel = styled.section`
-  background: ${mwThemeVars.color.surface};
-  border: 1px solid ${mwThemeVars.color.border};
-  border-radius: ${mwThemeVars.ui.radius};
-`
-
-const PrimaryCallout = styled.aside`
-  background: ${mwThemeVars.color.primary.base};
-  color: ${mwThemeVars.color.primary.label};
-`
-```
-
-### Vue
-
-Install the Vue adapter:
-
-```bash
-pnpm add @marwes-ui/vue
-```
-
-If Vue is not already installed in your app, install the peer dependency too:
-
-```bash
-pnpm add vue
-```
-
-Wrap your Vue template with `MarwesProvider`:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { Button, Input, MarwesProvider } from "@marwes-ui/vue"
-
-const email = ref("")
-</script>
-
-<template>
-  <MarwesProvider>
-    <Button variant="primary">Save</Button>
-    <Input v-model="email" placeholder="Email" ariaLabel="Email" />
-  </MarwesProvider>
-</template>
-```
-
-Use the same provider theme in app-owned Vue styling:
-
-```vue
-<script setup lang="ts">
-import { Button, MarwesProvider, mwThemeVars } from "@marwes-ui/vue"
-
-const panelStyle = {
-  background: mwThemeVars.color.surface,
-  color: mwThemeVars.color.text,
-  borderColor: mwThemeVars.color.border,
-}
-</script>
-
-<template>
-  <MarwesProvider>
-    <main class="app-shell">
-      <section class="primary-callout">Launch workspace</section>
-      <section class="feature-panel" :style="panelStyle">
-        <Button variant="primary">Save</Button>
-      </section>
-    </main>
-  </MarwesProvider>
-</template>
-
-<style scoped>
-.app-shell {
-  min-height: 100dvh;
-  padding: var(--mw-spacing-sp-24);
-  color: var(--mw-color-text);
-  background: var(--mw-color-background);
-}
-
-.feature-panel {
-  border: 1px solid var(--mw-color-border);
-  border-radius: var(--mw-ui-radius);
-}
-
-.primary-callout {
-  background: var(--mw-color-primary-base);
-  color: var(--mw-color-primary-label);
-}
-</style>
-```
-
-**That's it.** React, Vue, and Svelte consume the same core recipes, preset CSS, theme tokens, and accessibility contracts.
+- [React setup](https://marwes.io/docs/get-started/react/)
+- [Vue setup](https://marwes.io/docs/get-started/vue/)
+- [Svelte setup](https://marwes.io/docs/get-started/svelte/)
 
 ---
 
@@ -264,7 +171,7 @@ What makes Marwes different? **Complete separation of concerns:**
 │   @marwes-ui/react / vue / svelte  │  ← Thin adapters
 │   Apply RenderKit to framework DOM │
 ├─────────────────────────────────────┤
-│   @marwes-ui/presets (Static CSS)  │  ← Zero runtime, CDN-friendly
+│   @marwes-ui/presets (Static CSS)  │  ← No CSS-in-JS runtime
 │   Design tokens + .mw-* classes     │
 ├─────────────────────────────────────┤
 │   @marwes-ui/core (Pure Logic)     │  ← Framework-agnostic TypeScript
@@ -275,24 +182,17 @@ What makes Marwes different? **Complete separation of concerns:**
 **Why this matters:**
 
 - Core has **zero runtime dependencies** (not even React types)
-- Adapters are **community-contributable** (~100 lines each)
-- CSS ships **optimized and static** (no JS bundle bloat)
+- Adapter boundaries are explicit and use the same core contracts
+- CSS ships as a static preset driven by provider-scoped variables
 - Logic is **testable without frameworks**
 
 ---
 
 ## 🧩 Components
 
-**Available now:**
+The public consumer API is Field/Purpose-first. Use `InputField`, `CheckboxField`, `RadioGroupField`, `SwitchField`, `SliderField`, `AccordionField`, `DatePickerField`, `PaginationField`, and `SegmentedControlField` rather than importing their internal atoms.
 
-- Actions and feedback: `Button`, purpose buttons, `Badge`, `Banner`, `Toast`
-- Navigation and disclosure: `Breadcrumb`, `Pagination`, `Tabs`, `Accordion`, `Drawer`, `Dialog`, `ContextMenu`, `Tooltip`
-- Form and choice controls: `Input`, `Select`, `Textarea`, `RichText`, `Checkbox`, `Radio`, `Switch`, `Slider`, `SegmentedControl`
-- Status and loading: `Avatar`, `ProgressBar`, `Spinner`, `Skeleton`, `StatTile`
-- Layout and typography: `Card`, `Spacing`, `Divider`, `Icon`, `H1`, `H2`, `H3`, `Paragraph`, `Text`
-- Date and specialized inputs: `DatePicker`, `InputOtp`, purpose field wrappers
-
-[👉 **Browse all components in Storybook**](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
+[Browse the framework-aware component catalog](https://marwes.io/docs/components/) or inspect the interactive [React](https://storybook-react.marwes.io/latest/), [Vue](https://storybook-vue.marwes.io/latest/), and [Svelte](https://storybook-svelte.marwes.io/latest/) Storybooks.
 
 ---
 
@@ -409,6 +309,7 @@ The provider turns that object into CSS variables consumed by the preset styles.
 
 | Guide | Description |
 | --- | --- |
+| [Contributor start here](docs/start-here.md) | Single starting point for repository work and contribution routing |
 | [Docs index](docs/README.md) | Best starting point for understanding the repo |
 | [Architecture](docs/reference/architecture.md) | Package boundaries, RenderKit flow, and repo structure |
 | [Specification](docs/reference/spec.md) | Formal requirements and decisions |
@@ -521,6 +422,6 @@ See [LICENSE](LICENSE) for details.
 
 **Built with care for teams who value quality, accessibility, and performance.**
 
-[⭐ Star on GitHub](https://github.com/niklas-westman/marwes) • [📖 Docs](docs/README.md) • [🎨 Storybook](https://d3hobet9plpuvm.cloudfront.net/storybook-react/latest/)
+[⭐ Star on GitHub](https://github.com/niklas-westman/marwes) • [📖 Docs](docs/README.md) • [🎨 Storybook](https://storybook-react.marwes.io/latest/)
 
 </div>

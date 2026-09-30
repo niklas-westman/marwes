@@ -52,7 +52,7 @@ Purpose Wrappers
 Use the base `Button` atom when you need full control over `action`, `variant`, and rendering mode (`button` vs `a`).
 It is also the explicit escape hatch when you want purpose semantics with a non-canonical visual treatment.
 When the anchor path is used with `href`, Marwes preserves native link semantics instead of forcing `role="button"`.
-Use `IconButton` when the visible affordance is only an icon; it locks the square control sizing and requires an accessible label.
+Use `IconButton` when the visible affordance is only an icon; it locks the square control sizing and requires an accessible name through `label`, `ariaLabel`, or `ariaLabelledBy`. Prefer `label` for direct names. Do not rely on an `ariaLabel` placed on a nested `Icon`: that names the image, not the interactive button.
 
 ```vue
 <script setup lang="ts">
@@ -65,8 +65,8 @@ import { Button, IconButton } from "@marwes-ui/vue"
     Go to dashboard
   </Button>
   <Button action="cancel" variant="success">Cancel</Button>
-  <IconButton icon="x" ariaLabel="Close" />
-  <IconButton icon="trash" ariaLabel="Delete" variant="danger" action="delete" />
+  <IconButton icon="x" label="Close" />
+  <IconButton icon="trash" label="Delete" variant="danger" action="delete" />
 </template>
 ```
 
@@ -221,7 +221,6 @@ Use the object form when you need explicit control over loading behavior:
 
 ```vue
 <script setup lang="ts">
-import { SpinnerVariants } from "@marwes-ui/core"
 import { Button } from "@marwes-ui/vue"
 </script>
 
@@ -230,7 +229,7 @@ import { Button } from "@marwes-ui/vue"
     :loading="{
       isLoading: true,
       loadingLabel: 'Saving…',
-      spinnerVariant: SpinnerVariants.dual,
+      spinnerVariant: 'dual',
     }"
   >
     Save
@@ -242,7 +241,7 @@ The structured loading object supports:
 
 - `isLoading` — explicit loading state
 - `disableWhileLoading` — defaults to `true`
-- `spinnerVariant` — defaults to `SpinnerVariants.classic`
+- `spinnerVariant` — defaults to `"classic"`
 - `loadingLabel` — replaces the visible label while loading
 
 ### Non-blocking loading

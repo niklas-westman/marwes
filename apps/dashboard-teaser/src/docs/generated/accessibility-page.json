@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "title": "Accessibility",
+  "summary": "Understand the accessibility contract shared by Marwes components.",
+  "heading": "Accessible by contract, verified in context",
+  "description": "Marwes supplies component semantics, keyboard behavior, and accessible state wiring. Consumers still own truthful labels, page structure, focus return around overlays, and product-level testing.",
+  "requirements": [
+    "Give every icon-only button an accessible name through the adapter's ariaLabel API.",
+    "Preserve visible focus indicators and test keyboard order.",
+    "Connect validation messages and descriptions to their fields.",
+    "Test real workflows with browser accessibility tooling and assistive technology."
+  ],
+  "sections": [
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    }
+  ]
+}

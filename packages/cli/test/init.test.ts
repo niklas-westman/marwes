@@ -26,7 +26,28 @@ afterEach(async () => {
   await Promise.all(tempDirs.splice(0).map((path) => rm(path, { recursive: true, force: true })))
 })
 
-describe("init agentic mode", () => {
+describe("init", () => {
+  it("runs doctor after a regular init", async () => {
+    const cwd = await makeProject()
+    await writeReactProject(cwd, {
+      "@marwes-ui/react": "1.3.0",
+      react: "19.2.4",
+      "react-dom": "19.2.4",
+    })
+    const output: string[] = []
+
+    const result = await runInit({
+      adapter: "react",
+      noInstall: true,
+      cwd,
+      write: (message) => output.push(message),
+    })
+
+    expect(result.status).toBe("complete")
+    expect(result.doctor?.exitCode).toBe(0)
+    expect(output.join("\n")).toContain("Marwes doctor:")
+  })
+
   it("runs install, patches the app, then runs doctor", async () => {
     const cwd = await makeProject()
     await writeReactProject(cwd, {
@@ -49,6 +70,7 @@ describe("init agentic mode", () => {
     })
 
     expect(result.exitCode).toBe(0)
+    expect(result.status).toBe("complete")
     expect(result.doctor?.exitCode).toBe(0)
     expect(commands).toHaveLength(1)
     expect(commands[0]).toMatchObject({
@@ -78,6 +100,7 @@ describe("init agentic mode", () => {
     })
 
     expect(result.exitCode).toBe(1)
+    expect(result.status).toBe("failed")
     expect(result.doctor).toBeUndefined()
     expect(output.join("\n")).not.toContain("Marwes doctor:")
   })
@@ -118,9 +141,42 @@ describe("init agentic mode", () => {
     })
 
     expect(result.patchSkipped).toBe(true)
-    expect(result.exitCode).toBe(0)
+    expect(result.exitCode).toBe(2)
+    expect(result.status).toBe("manual-action-required")
     expect(output.join("\n")).toContain(
       "Manual follow-up: wrap the app root with MarwesProvider from @marwes-ui/react.",
     )
+    expect(output.join("\n")).toContain("https://marwes.io/docs/get-started/react/")
+  })
+
+  it("returns exit code 2 with searched files and a complete guide for an unknown structure", async () => {
+    const cwd = await makeProject()
+    await writeFile(
+      join(cwd, "package.json"),
+      JSON.stringify({
+        dependencies: {
+          "@marwes-ui/react": "1.3.0",
+          react: "19.2.4",
+          "react-dom": "19.2.4",
+        },
+      }),
+    )
+    const output: string[] = []
+
+    const result = await runInit({
+      adapter: "react",
+      noInstall: true,
+      cwd,
+      write: (message) => output.push(message),
+    })
+
+    expect(result.status).toBe("manual-action-required")
+    expect(result.exitCode).toBe(2)
+    expect(result.patch).toMatchObject({
+      status: "manual-action-required",
+      searchedFiles: ["src/main.tsx", "src/main.jsx"],
+    })
+    expect(output.join("\n")).toContain("Files searched: src/main.tsx, src/main.jsx")
+    expect(output.join("\n")).toContain("Complete React provider example:")
   })
 })

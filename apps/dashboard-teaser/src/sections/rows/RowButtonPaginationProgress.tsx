@@ -1,8 +1,13 @@
-import { Button, ButtonVariant, ProgressBar, Text, TextVariant } from "@marwes-ui/react"
+import {
+  Button,
+  ButtonVariant,
+  PaginationField,
+  ProgressBar,
+  Text,
+  TextVariant,
+} from "@marwes-ui/react"
 import { memo, useState } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for inline Pagination demo.
-import { Pagination } from "../../../../../packages/react/src/components/pagination/pagination"
 
 import { SnippetButton } from "../../components/SnippetButton"
 import type { ComponentDisplayOptions } from "../playground-settings"
@@ -47,14 +52,16 @@ function RowButtonPaginationProgress({ options }: RowButtonPaginationProgressPro
         </ButtonRow>
       </ItemCard>
       <ItemCard $basis="15rem" $minHeight="9rem">
-        {options.showLabels && <Text variant={TextVariant.overline}>Pagination</Text>}
         <SnippetButton title="Pagination" snippets={paginationSnippets} />
-        <Pagination
-          page={currentPage}
-          pageCount={10}
-          controlDisplay="label"
-          maxVisibleItems={5}
-          onPageChange={setCurrentPage}
+        <PaginationField
+          label="Pagination"
+          pagination={{
+            page: currentPage,
+            pageCount: 10,
+            controlDisplay: "label",
+            maxVisibleItems: 5,
+            onPageChange: setCurrentPage,
+          }}
         />
       </ItemCard>
       <ProgressCard $basis="15rem" $minHeight="9rem">

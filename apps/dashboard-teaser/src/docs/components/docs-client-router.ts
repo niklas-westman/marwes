@@ -1,14 +1,35 @@
+import { parseAccessibilityPageModel } from "./accessibility-app"
+import type { AccessibilityPageModel } from "./accessibility-model"
+import { parseAiPageModel } from "./ai-app"
+import type { AiPageModel } from "./ai-model"
+import { parseCatalogPageModel } from "./catalog-app"
+import type { CatalogPageModel } from "./catalog-model"
+import { parseCompatibilityPageModel } from "./compatibility-app"
+import type { CompatibilityPageModel } from "./compatibility-model"
 import { parseComponentDocsPageModel } from "./component-docs-app"
 import type { ComponentDocsPageModel } from "./component-docs-model"
+import { parseContributingPageModel } from "./contributing-app"
+import type { ContributingPageModel } from "./contributing-model"
 import { parseGetStartedPageModel } from "./get-started-app"
 import type { GetStartedPageModel } from "./get-started-model"
 import { parseIntroductionPageModel } from "./introduction-app"
 import type { IntroductionPageModel } from "./introduction-model"
+import { parseThemingPageModel } from "./theming-app"
+import type { ThemingPageModel } from "./theming-model"
+import { parseTroubleshootingPageModel } from "./troubleshooting-app"
+import type { TroubleshootingPageModel } from "./troubleshooting-model"
 
 type DocsPage =
   | { kind: "component"; model: ComponentDocsPageModel }
   | { kind: "get-started"; model: GetStartedPageModel }
   | { kind: "introduction"; model: IntroductionPageModel }
+  | { kind: "catalog"; model: CatalogPageModel }
+  | { kind: "theming"; model: ThemingPageModel }
+  | { kind: "accessibility"; model: AccessibilityPageModel }
+  | { kind: "troubleshooting"; model: TroubleshootingPageModel }
+  | { kind: "compatibility"; model: CompatibilityPageModel }
+  | { kind: "ai"; model: AiPageModel }
+  | { kind: "contributing"; model: ContributingPageModel }
 
 interface CachedDocsPage {
   page: DocsPage
@@ -24,6 +45,27 @@ interface DocsClientRouterOptions {
 
 const pageCache = new Map<string, CachedDocsPage>()
 
+const modelReaders: Array<{
+  elementId: string
+  kind: DocsPage["kind"]
+  parse: (source: unknown) => DocsPage["model"]
+}> = [
+  { elementId: "component-docs-model", kind: "component", parse: parseComponentDocsPageModel },
+  { elementId: "get-started-model", kind: "get-started", parse: parseGetStartedPageModel },
+  { elementId: "introduction-model", kind: "introduction", parse: parseIntroductionPageModel },
+  { elementId: "catalog-model", kind: "catalog", parse: parseCatalogPageModel },
+  { elementId: "theming-model", kind: "theming", parse: parseThemingPageModel },
+  { elementId: "accessibility-model", kind: "accessibility", parse: parseAccessibilityPageModel },
+  {
+    elementId: "troubleshooting-model",
+    kind: "troubleshooting",
+    parse: parseTroubleshootingPageModel,
+  },
+  { elementId: "compatibility-model", kind: "compatibility", parse: parseCompatibilityPageModel },
+  { elementId: "ai-model", kind: "ai", parse: parseAiPageModel },
+  { elementId: "contributing-model", kind: "contributing", parse: parseContributingPageModel },
+]
+
 function readHeadFrom(source: Document): { title: string; description: string; canonical: string } {
   return {
     title: source.title,
@@ -33,37 +75,13 @@ function readHeadFrom(source: Document): { title: string; description: string; c
 }
 
 function readPageFrom(source: Document): DocsPage | null {
-  const componentSource = source.getElementById("component-docs-model")
-  if (componentSource?.textContent) {
-    try {
-      return {
-        kind: "component",
-        model: parseComponentDocsPageModel(JSON.parse(componentSource.textContent)),
-      }
-    } catch {
-      return null
-    }
-  }
+  for (const reader of modelReaders) {
+    const element = source.getElementById(reader.elementId)
+    if (!element?.textContent) continue
 
-  const getStartedSource = source.getElementById("get-started-model")
-  if (getStartedSource?.textContent) {
     try {
-      return {
-        kind: "get-started",
-        model: parseGetStartedPageModel(JSON.parse(getStartedSource.textContent)),
-      }
-    } catch {
-      return null
-    }
-  }
-
-  const introductionSource = source.getElementById("introduction-model")
-  if (introductionSource?.textContent) {
-    try {
-      return {
-        kind: "introduction",
-        model: parseIntroductionPageModel(JSON.parse(introductionSource.textContent)),
-      }
+      const model = reader.parse(JSON.parse(element.textContent))
+      return { kind: reader.kind, model } as DocsPage
     } catch {
       return null
     }

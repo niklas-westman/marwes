@@ -1,53 +1,16 @@
-import {
-  Icon,
-  IconButton,
-  IconName,
-  SegmentedControlField,
-  SkipLink,
-  ThemeMode,
-  useThemeMode,
-} from "@marwes-ui/react"
-import type { SegmentedControlItem } from "@marwes-ui/react"
+import { SkipLink, ThemeMode, useThemeMode } from "@marwes-ui/react"
 import type { ReactNode } from "react"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo } from "react"
 import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
-import { MarwesLogo } from "../../components/Header"
+import { Header } from "../../components/Header"
 import type { DocsSection } from "./component-docs-model"
+import { DocsInlineNavigationContext } from "./docs-inline-navigation"
+import navigation from "./docs-navigation.json"
 import { docsScrollOffset, useDocsScrollspy } from "./use-docs-scrollspy"
 
-const componentGroups = [
-  { label: "Foundations", items: ["Icon"] },
-  { label: "Actions", items: ["Button"] },
-  {
-    label: "Data display",
-    items: ["Avatar", "Badge", "Card", "Progress bar", "Skeleton", "Stat tile"],
-  },
-  {
-    label: "Data entry",
-    items: ["Checkbox", "Date picker", "Input", "Radio", "Segmented control", "Slider", "Switch"],
-  },
-  { label: "Layout", items: ["Accordion", "Divider", "Spacing", "Tab"] },
-  { label: "Navigation", items: ["Breadcrumb", "Pagination"] },
-  { label: "Feedback", items: ["Banner", "Spinner", "Toast"] },
-  { label: "Overlays", items: ["Context menu", "Dialog", "Drawer", "Tooltip"] },
-  { label: "Typography", items: ["Heading", "Paragraph", "Text"] },
-] as const
-
-const themeItems: SegmentedControlItem[] = [
-  {
-    value: ThemeMode.light,
-    icon: <Icon name={IconName.Sun} decorative size={14} />,
-    ariaLabel: "Light mode",
-  },
-  {
-    value: ThemeMode.dark,
-    icon: <Icon name={IconName.Moon} decorative size={14} />,
-    ariaLabel: "Dark mode",
-  },
-]
-
+const { componentGroups, documentationLinks } = navigation
 function siteHref(path: string): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`
 }
@@ -74,122 +37,28 @@ const Page = styled.div`
   color: ${({ theme }) => theme.color.text};
 `
 
-const SiteHeader = styled.header`
-  position: sticky;
-  z-index: 20;
-  top: 0;
-  display: grid;
-  grid-template-columns: minmax(9rem, 1fr) auto minmax(9rem, 1fr);
-  align-items: center;
-  min-height: ${({ theme }) => `calc(${theme.spacing.sp64} + ${theme.spacing.sp4})`};
-  padding: 0 ${({ theme }) => theme.spacing.sp32};
+const BrowseNavigation = styled.details`
+  display: none;
   border-bottom: 0.0625rem solid ${({ theme }) => theme.color.borderLow};
-  background: color-mix(in srgb, ${({ theme }) => theme.color.background} 92%, transparent);
-  backdrop-filter: blur(1rem);
+  background: ${({ theme }) => theme.color.surface};
 
-  ${({ theme }) => theme.media.desktopAndBelow} {
-    grid-template-columns: 1fr auto;
-    padding: 0 ${({ theme }) => theme.spacing.sp24};
-  }
-`
-
-const LogoLink = styled.a`
-  display: inline-flex;
-  width: fit-content;
-  color: ${({ theme }) => theme.color.text};
-`
-
-const MainNavigation = styled.nav`
-  display: flex;
-  align-items: stretch;
-  height: 100%;
-  gap: ${({ theme }) => theme.spacing.sp24};
-
-  a {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    min-height: ${({ theme }) => `calc(${theme.spacing.sp64} + ${theme.spacing.sp4})`};
-    color: ${({ theme }) => theme.color.textMuted};
+  summary {
+    padding: ${({ theme }) => theme.spacing.sp12} ${({ theme }) => theme.spacing.sp24};
     font-size: 0.8125rem;
-    font-weight: 500;
-    text-decoration: none;
+    line-height: 1.0625rem;
+    font-weight: 600;
+    cursor: pointer;
   }
 
-  a:hover,
-  a[aria-current="page"] {
-    color: ${({ theme }) => theme.color.text};
-  }
-
-  a[aria-current="page"]::after {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 0.125rem;
-    background: ${({ theme }) => theme.color.primary.base};
-    content: "";
-  }
-
-  ${({ theme }) => theme.media.desktopAndBelow} {
-    display: none;
-  }
-`
-
-const HeaderActions = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sp8};
-
-  .mw-segmented-control-field__label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-`
-
-const MobileMenuButton = styled(IconButton)`
-  display: none;
-
-  ${({ theme }) => theme.media.desktopAndBelow} {
-    display: inline-flex;
-  }
-`
-
-const MobileNavigation = styled.nav<{ $open: boolean }>`
-  display: none;
-
-  ${({ theme }) => theme.media.desktopAndBelow} {
-    position: fixed;
-    z-index: 19;
-    top: ${({ theme }) => `calc(${theme.spacing.sp64} + ${theme.spacing.sp4})`};
-    right: 0;
-    left: 0;
-    display: ${({ $open }) => ($open ? "grid" : "none")};
-    gap: ${({ theme }) => theme.spacing.sp4};
+  nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: ${({ theme }) => theme.spacing.sp16};
     padding: ${({ theme }) => theme.spacing.sp16} ${({ theme }) => theme.spacing.sp24};
-    border-bottom: 0.0625rem solid ${({ theme }) => theme.color.border};
-    background: ${({ theme }) => theme.color.surfaceElevated};
+  }
 
-    a {
-      padding: ${({ theme }) => theme.spacing.sp12};
-      border-radius: ${({ theme }) => theme.spacing.sp8};
-      color: ${({ theme }) => theme.color.text};
-      text-decoration: none;
-    }
-
-    a[aria-current="page"] {
-      background: ${({ theme }) => theme.color.surfaceBrand};
-      color: ${({ theme }) => theme.color.textBrand};
-      font-weight: 600;
-    }
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    display: block;
   }
 `
 
@@ -197,19 +66,21 @@ const DocsGrid = styled.div`
   display: grid;
   grid-template-columns: 15.5rem minmax(0, 1fr) 11.5rem;
   width: 100%;
-  max-width: 100rem;
-  margin: 0 auto;
+  max-width: ${({ theme }) => theme.breakpoint.wideDesktop}px;
+  margin: ${({ theme }) => theme.spacing.sp16} auto;
 
   ${({ theme }) => theme.media.desktopAndBelow} {
     grid-template-columns: minmax(0, 1fr);
+    padding: 0 ${({ theme }) => theme.spacing.sp16};
   }
 `
 
 const LeftRail = styled.aside`
   min-height: calc(100vh - 4.25rem);
-  padding: ${({ theme }) => theme.spacing.sp24};
-  border-right: 0.0625rem solid ${({ theme }) => theme.color.borderLow};
-  background: ${({ theme }) => theme.color.surface};
+  padding: ${({ theme }) => theme.spacing.sp16}
+    ${({ theme }) => theme.spacing.sp16}
+    ${({ theme }) => theme.spacing.sp16}
+    ${({ theme }) => theme.spacing.sp80};
 
   ${({ theme }) => theme.media.desktopAndBelow} {
     display: none;
@@ -263,51 +134,49 @@ const RailGroupLabel = styled.p`
 
 const Main = styled.main`
   min-width: 0;
-  padding: ${({ theme }) => theme.spacing.sp48};
-
-  ${({ theme }) => theme.media.wideDesktopAndBelow} {
-    padding: ${({ theme }) => theme.spacing.sp40} ${({ theme }) => theme.spacing.sp32};
-  }
-
-  ${({ theme }) => theme.media.mobileAndBelow} {
-    padding: ${({ theme }) => theme.spacing.sp32} ${({ theme }) => theme.spacing.sp24};
-  }
+  background: ${({ theme }) => theme.color.surface};
+  border-radius: 2rem;
+  padding: ${({ theme }) => `clamp(${theme.spacing.sp16}, 3vw, ${theme.spacing.sp32})`};
 `
 
 const Content = styled.div`
   width: 100%;
   max-width: 62rem;
   margin: 0 auto;
+  animation: docs-content-enter 180ms ease-out both;
+
+  @keyframes docs-content-enter {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `
 
 const RightRail = styled.aside`
-  padding: ${({ theme }) => theme.spacing.sp32} ${({ theme }) => theme.spacing.sp16};
-  border-left: 0.0625rem solid ${({ theme }) => theme.color.borderLow};
+  padding: ${({ theme }) => theme.spacing.sp16};
 
   ${({ theme }) => theme.media.desktopAndBelow} {
     display: none;
   }
 `
 
-const CompactPageNavigation = styled.details`
+const CompactPageNavigation = styled.nav`
   display: none;
-  margin-bottom: ${({ theme }) => theme.spacing.sp24};
-  padding: ${({ theme }) => theme.spacing.sp12};
-  border: 0.0625rem solid ${({ theme }) => theme.color.borderLow};
-  border-radius: ${({ theme }) => theme.spacing.sp8};
-  background: ${({ theme }) => theme.color.surface};
+  margin-top: ${({ theme }) => theme.spacing.sp24};
 
-  summary {
+  > p {
+    margin: 0 0 ${({ theme }) => theme.spacing.sp8};
     color: ${({ theme }) => theme.color.text};
     font-size: 0.8125rem;
     font-weight: 700;
-    cursor: pointer;
   }
 
-  nav {
+  > div {
     display: grid;
     gap: ${({ theme }) => theme.spacing.sp4};
-    margin-top: ${({ theme }) => theme.spacing.sp8};
   }
 
   ${({ theme }) => theme.media.desktopAndBelow} {
@@ -342,83 +211,22 @@ const PageLink = styled.a<{ $active: boolean }>`
   }
 `
 
-function ThemeControl(): JSX.Element {
-  const { mode, setMode } = useThemeMode()
-  return (
-    <SegmentedControlField
-      label="Theme mode"
-      segmentedControl={{
-        items: themeItems,
-        value: mode,
-        onValueChange: (value) =>
-          setMode(value === ThemeMode.dark ? ThemeMode.dark : ThemeMode.light),
-        variant: "inverse",
-        size: "sm",
-      }}
-    />
-  )
-}
-
-const headerLinks = [
-  ["Get started", "/docs/get-started/react/", true],
-  ["Components", "/docs/components/", false],
-  ["Theming", "/docs/theming/", false],
-  ["Accessibility", "/docs/accessibility/", false],
-  ["Troubleshoot", "/docs/troubleshooting/", false],
-] as const
-
-function HeaderLinks({
-  currentPath,
-  onNavigate,
-}: {
-  currentPath: string
-  onNavigate?: () => void
-}): JSX.Element {
-  return (
-    <>
-      {headerLinks.map(([label, path, softNav]) => (
-        <a
-          key={label}
-          href={siteHref(path)}
-          aria-current={path === currentPath ? "page" : undefined}
-          onClick={onNavigate}
-          data-docs-soft-nav={softNav ? true : undefined}
-        >
-          {label}
-        </a>
-      ))}
-    </>
-  )
-}
-
 function DocumentationRail({ currentPath }: { currentPath: string }): JSX.Element {
   return (
     <LeftRail aria-label="Documentation navigation">
       <RailInner>
         <RailTitle>Documentation</RailTitle>
-        <RailLink
-          href={siteHref("/docs/introduction/")}
-          aria-current={currentPath === "/docs/introduction/" ? "page" : undefined}
-          $active={currentPath === "/docs/introduction/"}
-          data-docs-soft-nav
-        >
-          Introduction
-        </RailLink>
-        <RailLink
-          href={siteHref("/docs/get-started/react/")}
-          aria-current={currentPath === "/docs/get-started/react/" ? "page" : undefined}
-          $active={currentPath === "/docs/get-started/react/"}
-          data-docs-soft-nav
-        >
-          Get started
-        </RailLink>
-        <RailLink
-          href={siteHref("/docs/components/")}
-          aria-current={currentPath === "/docs/components/" ? "page" : undefined}
-          $active={currentPath === "/docs/components/"}
-        >
-          Components
-        </RailLink>
+        {documentationLinks.map(({ label, path }) => (
+          <RailLink
+            key={path}
+            href={siteHref(path)}
+            aria-current={currentPath === path ? "page" : undefined}
+            $active={currentPath === path}
+            data-docs-soft-nav
+          >
+            {label}
+          </RailLink>
+        ))}
         {componentGroups.map((group) => (
           <RailGroup key={group.label}>
             <RailGroupLabel>{group.label}</RailGroupLabel>
@@ -440,27 +248,6 @@ function DocumentationRail({ currentPath }: { currentPath: string }): JSX.Elemen
             })}
           </RailGroup>
         ))}
-        <RailLink
-          href={siteHref("/docs/theming/")}
-          aria-current={currentPath === "/docs/theming/" ? "page" : undefined}
-          $active={currentPath === "/docs/theming/"}
-        >
-          Theming
-        </RailLink>
-        <RailLink
-          href={siteHref("/docs/accessibility/")}
-          aria-current={currentPath === "/docs/accessibility/" ? "page" : undefined}
-          $active={currentPath === "/docs/accessibility/"}
-        >
-          Accessibility
-        </RailLink>
-        <RailLink
-          href={siteHref("/docs/troubleshooting/")}
-          aria-current={currentPath === "/docs/troubleshooting/" ? "page" : undefined}
-          $active={currentPath === "/docs/troubleshooting/"}
-        >
-          Troubleshoot
-        </RailLink>
       </RailInner>
     </LeftRail>
   )
@@ -473,75 +260,87 @@ interface DocsShellProps {
 }
 
 function DocsShell({ currentPath, sections, children }: DocsShellProps): JSX.Element {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const mobileMenuControlRef = useRef<HTMLSpanElement>(null)
+  const { mode, setMode } = useThemeMode()
   const sectionIds = useMemo(() => sections.map(({ id }) => id), [sections])
   const { activeSection, selectSection } = useDocsScrollspy(sectionIds)
-
-  useEffect(() => {
-    if (!mobileMenuOpen) return
-    const closeOnEscape = (event: KeyboardEvent): void => {
-      if (event.key !== "Escape") return
-      setMobileMenuOpen(false)
-      window.requestAnimationFrame(() =>
-        mobileMenuControlRef.current?.querySelector<HTMLButtonElement>("button")?.focus(),
-      )
-    }
-    window.addEventListener("keydown", closeOnEscape)
-    return () => window.removeEventListener("keydown", closeOnEscape)
-  }, [mobileMenuOpen])
 
   return (
     <Page>
       <DocsMotionStyle />
       <SkipLink href="#main-content">Skip to main content</SkipLink>
-      <SiteHeader data-docs-header>
-        <LogoLink href={import.meta.env.BASE_URL} aria-label="Marwes homepage">
-          <MarwesLogo />
-        </LogoLink>
-        <MainNavigation aria-label="Primary">
-          <HeaderLinks currentPath={currentPath} />
-        </MainNavigation>
-        <HeaderActions>
-          <ThemeControl />
-          <span ref={mobileMenuControlRef}>
-            <MobileMenuButton
-              icon={mobileMenuOpen ? IconName.X : IconName.Menu}
-              ariaLabel={mobileMenuOpen ? "Close documentation menu" : "Open documentation menu"}
-              ariaExpanded={mobileMenuOpen}
-              ariaControls="mobile-docs-navigation"
-              onClick={() => setMobileMenuOpen((open) => !open)}
-            />
-          </span>
-        </HeaderActions>
-      </SiteHeader>
-      <MobileNavigation id="mobile-docs-navigation" $open={mobileMenuOpen} aria-label="Mobile">
-        <HeaderLinks currentPath={currentPath} onNavigate={() => setMobileMenuOpen(false)} />
-      </MobileNavigation>
+      <Header
+        docs
+        currentPath={currentPath}
+        isDark={mode === ThemeMode.dark}
+        onToggleTheme={() => setMode(mode === ThemeMode.dark ? ThemeMode.light : ThemeMode.dark)}
+      />
+      <BrowseNavigation key={currentPath}>
+        <summary>Browse docs</summary>
+        <nav aria-label="Browse documentation">
+          <div>
+            <RailGroupLabel>Documentation</RailGroupLabel>
+            {documentationLinks.map(({ label, path }) => (
+              <RailLink
+                key={path}
+                href={siteHref(path)}
+                $active={currentPath === path}
+                aria-current={currentPath === path ? "page" : undefined}
+                data-docs-soft-nav
+              >
+                {label}
+              </RailLink>
+            ))}
+          </div>
+          {componentGroups.map((group) => (
+            <div key={group.label}>
+              <RailGroupLabel>{group.label}</RailGroupLabel>
+              {group.items.map((item) => {
+                const path = `/docs/components/${item.toLowerCase().replaceAll(" ", "-")}/`
+                return (
+                  <RailLink
+                    key={path}
+                    href={siteHref(path)}
+                    $active={currentPath === path}
+                    aria-current={currentPath === path ? "page" : undefined}
+                    data-docs-soft-nav
+                  >
+                    {item}
+                  </RailLink>
+                )
+              })}
+            </div>
+          ))}
+        </nav>
+      </BrowseNavigation>
       <DocsGrid>
         <DocumentationRail currentPath={currentPath} />
         <Main id="main-content">
-          <Content>
-            <CompactPageNavigation>
-              <summary>On this page</summary>
-              <nav aria-label="On this page (compact)">
-                {sections.map((section) => {
-                  const active = activeSection === section.id
-                  return (
-                    <PageLink
-                      key={section.id}
-                      href={`#${section.id}`}
-                      $active={active}
-                      aria-current={active ? "location" : undefined}
-                      onClick={() => selectSection(section.id)}
-                    >
-                      {section.label}
-                    </PageLink>
-                  )
-                })}
-              </nav>
-            </CompactPageNavigation>
-            {children}
+          <Content key={currentPath}>
+            <DocsInlineNavigationContext.Provider
+              value={
+                <CompactPageNavigation aria-label="On this page (compact)">
+                  <p>On this page</p>
+                  <div>
+                    {sections.map((section) => {
+                      const active = activeSection === section.id
+                      return (
+                        <PageLink
+                          key={section.id}
+                          href={`#${section.id}`}
+                          $active={active}
+                          aria-current={active ? "location" : undefined}
+                          onClick={() => selectSection(section.id)}
+                        >
+                          {section.label}
+                        </PageLink>
+                      )
+                    })}
+                  </div>
+                </CompactPageNavigation>
+              }
+            >
+              {children}
+            </DocsInlineNavigationContext.Provider>
           </Content>
         </Main>
         <RightRail>

@@ -10,8 +10,10 @@ import {
   SectionDescription,
   SectionHeading,
 } from "./docs-page-typography"
-import { DocsShell, siteHref } from "./docs-shell"
+import { siteHref } from "./docs-shell"
 import type { IntroductionPageModel } from "./introduction-model"
+
+const softNavHrefs = new Set(["/docs/get-started/react/", "/docs/components/"])
 
 const LinkGrid = styled.div`
   display: grid;
@@ -50,7 +52,7 @@ const LinkCard = styled.a`
 
 function IntroductionPage({ model }: { model: IntroductionPageModel }): JSX.Element {
   return (
-    <DocsShell currentPath="/docs/introduction/" sections={model.sections}>
+    <>
       <Hero>
         <Eyebrow>Marwes documentation</Eyebrow>
         <PageTitle>{model.title}</PageTitle>
@@ -69,7 +71,11 @@ function IntroductionPage({ model }: { model: IntroductionPageModel }): JSX.Elem
         <SectionDescription>Pick a framework and render the first component.</SectionDescription>
         <LinkGrid>
           {model.links.map((link) => (
-            <LinkCard key={link.href} href={siteHref(link.href)}>
+            <LinkCard
+              key={link.href}
+              href={siteHref(link.href)}
+              data-docs-soft-nav={softNavHrefs.has(link.href) ? true : undefined}
+            >
               <strong>{link.label}</strong>
               <span>{link.description}</span>
             </LinkCard>
@@ -79,9 +85,11 @@ function IntroductionPage({ model }: { model: IntroductionPageModel }): JSX.Elem
 
       <PageFooter>
         <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")}>Browse all components</a>
+        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
+          Browse all components
+        </a>
       </PageFooter>
-    </DocsShell>
+    </>
   )
 }
 

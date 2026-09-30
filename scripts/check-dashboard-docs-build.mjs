@@ -110,6 +110,32 @@ for (const route of manifest.routes) {
       failures.push(`${route.path}: missing generic component docs entrypoint`)
     }
   }
+
+  if (route.renderer === "catalog") {
+    if (!html.includes('id="catalog-model" type="application/json"')) {
+      failures.push(`${route.path}: missing embedded catalog model`)
+    }
+    if (!html.includes("/assets/docs-page-main-")) {
+      failures.push(`${route.path}: missing generic component docs entrypoint`)
+    }
+  }
+
+  for (const kind of [
+    "theming",
+    "accessibility",
+    "troubleshooting",
+    "compatibility",
+    "ai",
+    "contributing",
+  ]) {
+    if (route.renderer !== kind) continue
+    if (!html.includes(`id="${kind}-model" type="application/json"`)) {
+      failures.push(`${route.path}: missing embedded ${kind} model`)
+    }
+    if (!html.includes("/assets/docs-page-main-")) {
+      failures.push(`${route.path}: missing generic component docs entrypoint`)
+    }
+  }
 }
 
 try {

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "title": "Troubleshooting",
+  "summary": "Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.",
+  "heading": "Common setup failures",
+  "issues": [
+    {
+      "title": "No styling",
+      "description": "Import from the adapter root. It loads the static preset CSS; do not add a second stylesheet."
+    },
+    {
+      "title": "Provider at the wrong level",
+      "description": "Render MarwesProvider once above every Marwes component."
+    },
+    {
+      "title": "Wrong import",
+      "description": "Use @marwes-ui/react, @marwes-ui/vue, or @marwes-ui/svelte — never a different adapter or a deep path."
+    },
+    {
+      "title": "Theme values are empty",
+      "description": "CSS references such as var(--mw-*) resolve only inside the provider boundary. Use useTheme() when JavaScript needs resolved values."
+    },
+    {
+      "title": "Light/dark flash during SSR",
+      "description": "Install the framework theme script before hydration and keep the server and client preference policy aligned."
+    },
+    {
+      "title": "Fonts blocked by CSP",
+      "description": "Allow the configured font origin or self-host the selected font. Keep font loading consistent with the CSP."
+    },
+    {
+      "title": "Peer version mismatch",
+      "description": "Check the adapter package peerDependencies and align framework and renderer versions."
+    },
+    {
+      "title": "Partial CLI setup",
+      "description": "Follow the printed provider example, then rerun pnpm dlx @marwes-ui/cli doctor --run-build. Exit code 2 means installation succeeded but manual wiring remains."
+    }
+  ],
+  "code": {
+    "language": "shell",
+    "content": "pnpm dlx @marwes-ui/cli doctor --run-build"
+  },
+  "sections": [
+    {
+      "id": "troubleshooting",
+      "label": "Troubleshooting"
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   "summary": "Family-local loading-indicator family with a core Spinner atom, adapter-owned context wrappers, and button-loading integration built on the same atom contract.",
   "philosophy": [
     "Keep Spinner as a small loading atom that stays decorative by default and only becomes an announced status surface when product code opts in with ariaLabel.",
-    "Keep the seven synced visual styles and size scale source-owned in core so React and Vue render the same spinner geometry and metadata.",
+    "Keep the seven synced visual styles and size scale source-owned in core so React, Vue, and Svelte render the same spinner geometry and metadata.",
     "Keep ButtonSpinner and EmptyStateSpinner thin adapter-owned context wrappers rather than turning the core atom into a matrix of loading situations.",
     "Keep spinner semantics family-local and honest: the atom emits stable local metadata today, but Spinner is not part of the wave-1 central semantic registry."
   ],
@@ -14,7 +14,7 @@
     "useWhen": [
       "The UI needs an indeterminate loading indicator for inline button loading, centered empty states, or standalone async feedback.",
       "The product flow already matches ButtonSpinner or EmptyStateSpinner and benefits from the wrapper defaults for size, visual treatment, and local metadata.",
-      "The team wants React and Vue spinner behavior to stay aligned through one core SVG recipe, one preset CSS contract, and one shared adapter contract file."
+      "The team wants React, Vue, and Svelte spinner behavior to stay aligned through one core SVG recipe, one preset CSS contract, and shared adapter contracts."
     ],
     "avoidWhen": [
       "The experience needs determinate progress, percentage tracking, or skeleton structure rather than an indeterminate spinner.",
@@ -58,6 +58,12 @@
         "apps/storybook-vue/src/stories/spinner/spinner.stories.ts",
         "apps/storybook-vue/src/stories/spinner/button-spinner.stories.ts",
         "apps/storybook-vue/src/stories/spinner/empty-state-spinner.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/spinner/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/spinner/spinner.stories.ts",
+        "apps/storybook-svelte/src/stories/spinner/button-spinner.stories.ts",
+        "apps/storybook-svelte/src/stories/spinner/empty-state-spinner.stories.ts"
       ]
     },
     "preferredStates": [

@@ -1,0 +1,2 @@
+/* Load the same preset and fonts before the static docs become visible. */
+@import "@marwes-ui/presets/firstEdition/styles.css";

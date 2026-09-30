@@ -36,6 +36,8 @@ describe("doctor", () => {
       [
         'import "@marwes-ui/presets/firstEdition/styles.css"',
         'import { MarwesProvider } from "@marwes-ui/react"',
+        "",
+        "export const Root = () => <MarwesProvider><App /></MarwesProvider>",
       ].join("\n"),
     )
 
@@ -45,6 +47,91 @@ describe("doctor", () => {
     expect(result.exitCode).toBe(0)
     expect(messages).toContain("@marwes-ui/core is installed directly.")
     expect(messages).toContain("Manual Marwes preset stylesheet import found.")
+  })
+
+  it("fails when the provider is imported but not rendered", async () => {
+    const cwd = await makeProject()
+    await writeFile(
+      join(cwd, "package.json"),
+      JSON.stringify({
+        dependencies: {
+          "@marwes-ui/react": "1.3.0",
+          react: "19.2.4",
+          "react-dom": "19.2.4",
+        },
+      }),
+    )
+    await writeFile(
+      join(cwd, "src/main.tsx"),
+      'import { MarwesProvider } from "@marwes-ui/react"\nrender(<App />)',
+    )
+
+    const result = await runDoctor({ cwd, write: () => undefined })
+
+    expect(result.exitCode).toBe(1)
+    expect(result.items).toContainEqual(
+      expect.objectContaining({
+        level: "fail",
+        message: expect.stringContaining("not both imported"),
+      }),
+    )
+  })
+
+  it("finds a correctly rendered provider in an app directory", async () => {
+    const cwd = await makeProject()
+    await mkdir(join(cwd, "app"), { recursive: true })
+    await writeFile(
+      join(cwd, "package.json"),
+      JSON.stringify({
+        dependencies: {
+          "@marwes-ui/react": "1.3.0",
+          react: "19.2.4",
+          "react-dom": "19.2.4",
+        },
+      }),
+    )
+    await writeFile(
+      join(cwd, "app/layout.tsx"),
+      'import { MarwesProvider as Provider } from "@marwes-ui/react"\nexport const Layout = () => <Provider><App /></Provider>',
+    )
+
+    const result = await runDoctor({ cwd, write: () => undefined })
+
+    expect(result.exitCode).toBe(0)
+    expect(result.items).toContainEqual(
+      expect.objectContaining({ level: "pass", message: expect.stringContaining("layout.tsx") }),
+    )
+  })
+
+  it("preserves the underlying build failure code", async () => {
+    const cwd = await makeProject()
+    await writeFile(
+      join(cwd, "package.json"),
+      JSON.stringify({
+        scripts: { typecheck: "tsc --noEmit" },
+        dependencies: {
+          "@marwes-ui/react": "1.3.0",
+          react: "19.2.4",
+          "react-dom": "19.2.4",
+        },
+      }),
+    )
+    await writeFile(
+      join(cwd, "src/main.tsx"),
+      'import { MarwesProvider } from "@marwes-ui/react"\nrender(<MarwesProvider><App /></MarwesProvider>)',
+    )
+
+    const result = await runDoctor({
+      cwd,
+      runBuild: true,
+      runner: async () => 7,
+      write: () => undefined,
+    })
+
+    expect(result.exitCode).toBe(7)
+    expect(result.items).toContainEqual(
+      expect.objectContaining({ level: "fail", message: "typecheck failed with exit code 7." }),
+    )
   })
 
   it("fails when no adapter package is installed", async () => {

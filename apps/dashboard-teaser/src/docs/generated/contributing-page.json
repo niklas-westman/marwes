@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "title": "Contributing",
+  "summary": "Contribute to Marwes without confusing internal atoms with its public consumer API.",
+  "heading": "Preserve the consumer contract",
+  "description": "Registry metadata describes implementation evidence. The public API artifact owns consumer export names and import paths. Raw atoms may exist internally but must not appear in consumer examples.",
+  "secondaryDescription": "Before opening a change, run the repository consumer docs check and the focused framework validation.",
+  "code": {
+    "language": "shell",
+    "content": "pnpm docs:consumer-check"
+  },
+  "externalLink": {
+    "href": "https://github.com/niklas-westman/marwes/blob/main/CONTRIBUTING.md",
+    "label": "Read the repository contribution guide"
+  },
+  "sections": [
+    {
+      "id": "contributing",
+      "label": "Contributing"
+    }
+  ]
+}

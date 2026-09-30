@@ -18,6 +18,12 @@
   user-select: none;
 }
 
+/* Native legends sit outside the fieldset grid, so its gap does not apply.
+ * Div-based group labels already receive that gap (Svelte). */
+legend.mw-accordion-field__label {
+  margin-block-end: var(--mw-density-field-gap, 8px);
+}
+
 .mw-accordion-field__items {
   display: grid;
   gap: var(--mw-density-gap, 8px);

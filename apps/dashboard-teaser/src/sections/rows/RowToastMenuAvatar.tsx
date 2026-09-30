@@ -7,6 +7,7 @@ import {
   ErrorToast,
   IconName,
   InfoToast,
+  SegmentedControlField,
   SuccessToast,
   Text,
   TextVariant,
@@ -16,8 +17,6 @@ import {
 import type { BreadcrumbItem, ContextMenuEntry, SegmentedControlItem } from "@marwes-ui/react"
 import { memo, useState } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for the toast variant picker.
-import { SegmentedControl } from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
 import { SnippetButton } from "../../components/SnippetButton"
 import type { ComponentDisplayOptions } from "../playground-settings"
@@ -164,15 +163,17 @@ function RowToastMenuAvatar({ options }: RowToastMenuAvatarProps): JSX.Element {
       <ToastCard $basis="22rem" $minHeight="29.5rem">
         {options.showLabels && <Text variant={TextVariant.overline}>Toast</Text>}
         <SnippetButton title="Toast" snippets={toastSnippets} />
-        <SegmentedControl
-          items={toastVariantItems}
-          value={toastVariant}
-          onValueChange={(v) => {
-            setToastVariant(v)
-            resetToasts()
+        <SegmentedControlField
+          label="Toast variant"
+          segmentedControl={{
+            items: toastVariantItems,
+            value: toastVariant,
+            onValueChange: (v) => {
+              setToastVariant(v)
+              resetToasts()
+            },
+            variant: "inverse",
           }}
-          variant="inverse"
-          ariaLabel="Toast variant"
         />
         <ToastList>
           {visibleToasts.map(({ id, Component, message }) => (

@@ -45,6 +45,13 @@ For a Svelte app, install this package first. It includes the Svelte adapter, lo
 
 This split keeps installation simple for app teams while giving humans and AI agents clear package boundaries: adapters render, core defines contracts, presets style.
 
+## Requirements
+
+- Svelte 5.20 or newer
+- Node.js 20 or newer for package installation, application builds, and the CLI
+- A modern browser with CSS custom-property support
+- A Vite starter layout for automatic provider patching; custom layouts use the printed manual setup
+
 ## Install
 
 The Marwes CLI is the official installation path. It installs `@marwes-ui/svelte` (with `svelte` as a peer), wraps your app root with `MarwesProvider`, and leaves you ready to render components with default Marwes styling — no separate CSS setup.
@@ -60,6 +67,14 @@ pnpm dlx @marwes-ui/cli init --adapter svelte
 ```
 
 Also works with `npx @marwes-ui/cli`, `yarn dlx @marwes-ui/cli`, and `bunx @marwes-ui/cli`.
+
+Verify the patched app and its production build:
+
+```bash
+pnpm dlx @marwes-ui/cli doctor --run-build
+```
+
+Automatic provider patching supports known Vite starter layouts. A `manual-action-required` result means the package was installed but the CLI could not safely identify the app root; apply the complete provider example printed by the CLI and rerun the doctor command.
 
 ### New Vite app
 
@@ -86,19 +101,16 @@ After install, jump to the [Quick Start](#quick-start) below.
   import {
     Button,
     ButtonVariant,
-    Checkbox,
-    Input,
+    CheckboxField,
+    EmailField,
     MarwesProvider,
     SubmitButton,
   } from "@marwes-ui/svelte"
-
-  let email = $state("")
-  let subscribed = $state(false)
 </script>
 
 <MarwesProvider>
-  <Input bind:value={email} placeholder="Email" label="Email" />
-  <Checkbox bind:checked={subscribed} label="Subscribe" />
+  <EmailField label="Email" input={{ placeholder: "you@example.com" }} />
+  <CheckboxField label="Subscribe" />
   <Button variant={ButtonVariant.secondary}>Preview</Button>
   <SubmitButton>Save</SubmitButton>
 </MarwesProvider>
@@ -189,60 +201,148 @@ Import components, enums, and prop types from the same package. The values line 
 </Card>
 ```
 
+For icon-only actions, use `IconButton` and name the button with `label`, `ariaLabel`, or `ariaLabelledBy`. An `ariaLabel` on a nested `Icon` names the image, not the interactive button.
+
+<!-- BEGIN GENERATED PUBLIC COMPONENTS -->
 ## Available Components
 
-Provider and hooks:
-- `MarwesProvider`
-- `useTheme`
-- `useToast`
+Generated from the public root export of `@marwes-ui/svelte`. Do not edit this inventory by hand.
 
-Actions and buttons:
-- `Button`, `IconButton`
-- `PrimaryButton`, `SecondaryButton`, `TextButton`, `SuccessButton`
-- `SubmitButton`, `CancelButton`, `CreateButton`, `DestructiveButton`
-- `LinkButton`, `SaveButton`, `ConfirmButton`, `VerifyButton`
-- `EditButton`, `CloseButton`, `RefreshButton`
-- `UploadButton`, `DownloadButton`, `CopyButton`
-- `SearchButton`, `FilterButton`, `SortButton`, `DropdownButton`
+### Framework
 
-Forms and inputs:
-- `Input`, `Textarea`, `Select`, `RichText`, `InputOtp`
-- `InputField`, `TextareaField`, `SelectField`, `RichTextField`
-- `DropdownField`, `SearchField`, `PasswordField`, `EmailField`
-- `DateOfBirthField`, `ZipCodeField`, `PhoneField`, `URLField`, `CurrencyField`
-- `Checkbox`, `CheckboxField`, `CheckboxGroupField`
-- `Radio`, `RadioGroupField`, `YesNoRadioGroup`, `RatingRadioGroup`, `OptionRadioGroup`
-- `Switch`, `SwitchField`, `FeatureToggle`, `PreferenceSwitch`, `PermissionSwitch`
-- `Slider`, `SliderField`, `VolumeSlider`, `BrightnessSlider`, `RadiusSlider`
-- `SegmentedControlField`, `PaginationField`
+- `MarwesProvider`, `SkipLink`
 
-Content and layout:
-- `Card`, `ProductCard`, `ProfileCard`, `StatCard`
-- `H1`, `H2`, `H3`, `Paragraph`, `Text`, `TypographyText`
-- `Spacer`, `Spacing`, `Divider`
+### Accordion
+
+- `AccordionField`, `FAQAccordion`, `SectionsAccordion`, `SettingsAccordion`
+
+### Avatar
+
+- `Avatar`, `AvatarBadge`, `AvatarGroup`, `PresenceAvatar`, `ProfileAvatar`, `TeamAvatarGroup`
+
+### Badge
+
+- `Badge`, `BadgeGroup`, `NotificationBadge`, `PriorityBadge`, `StatusBadge`
+
+### Banner
+
+- `Banner`, `ErrorBanner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`
+
+### Breadcrumb
+
 - `Breadcrumb`
+
+### Button
+
+- `Button`, `CancelButton`, `CloseButton`, `ConfirmButton`, `CopyButton`, `CreateButton`
+- `DestructiveButton`, `DownloadButton`, `DropdownButton`, `EditButton`, `FilterButton`, `IconButton`
+- `LinkButton`, `PrimaryButton`, `RefreshButton`, `SaveButton`, `SearchButton`, `SecondaryButton`
+- `SortButton`, `SubmitButton`, `SuccessButton`, `TextButton`, `UploadButton`, `VerifyButton`
+
+### Card
+
+- `Card`, `ProductCard`, `ProfileCard`, `StatCard`
+
+### Checkbox
+
+- `CheckboxField`, `CheckboxGroupField`
+
+### Context Menu
+
+- `ContextMenu`
+
+### Date Picker
+
+- `DatePickerField`
+
+### Dialog
+
+- `ConfirmDialog`, `DestructiveDialog`, `Dialog`, `DialogModal`, `InfoDialog`
+
+### Divider
+
+- `Divider`
+
+### Drawer
+
+- `Drawer`
+
+### Heading
+
+- `H1`, `H2`, `H3`
+
+### Icon
+
 - `Icon`
-- `Avatar`, `AvatarBadge`, `AvatarGroup`, `ProfileAvatar`, `PresenceAvatar`, `TeamAvatarGroup`
-- `StatTile`, `Skeleton`
 
-Feedback and overlays:
-- `Badge`, `BadgeGroup`, `StatusBadge`, `PriorityBadge`, `NotificationBadge`
-- `Banner`, `InfoBanner`, `SuccessBanner`, `WarningBanner`, `ErrorBanner`
+### Input
+
+- `CurrencyField`, `DateOfBirthField`, `DropdownField`, `EmailField`, `InputField`, `InputOtpField`
+- `PasswordField`, `PhoneField`, `RichTextField`, `SearchField`, `SelectField`, `TextareaField`
+- `URLField`, `ZipCodeField`
+
+### Pagination
+
+- `PaginationField`
+
+### Paragraph
+
+- `Paragraph`
+
+### Progress Bar
+
 - `ProgressBar`
-- `Spinner`, `ButtonSpinner`, `EmptyStateSpinner`
-- `Toast`, `ToastContainer`, `ToastProvider`
-- `SuccessToast`, `ErrorToast`, `WarningToast`, `InfoToast`
-- `Tooltip`, `TooltipGroup`, `ContextMenu`
-- `Dialog`, `DialogModal`, `Drawer`, `ConfirmDialog`, `DestructiveDialog`, `InfoDialog`
-- `Accordion`, `AccordionField`, `FAQAccordion`, `SettingsAccordion`, `SectionsAccordion`
-- `Tab`, `TabGroup`, `TabPanel`, `NavigationTabs`, `ContentTabs`, `SettingsTabs`
 
-Typed tokens and helpers:
-- `ThemeInput`, `ThemeMode`, `Density`, `ToneName`
-- `mwAvailableFonts`, `mwGoogleFontFamilies`, `mwFontFallbacks`, `createFontStack`
-- `mwThemeVars`, `mwThemeVarNames`, `mwStyledTheme`, `mwVar`
-- `ButtonVariant`, `ButtonSize`, `ButtonAction`
-- `BadgeVariant`, `AvatarSize`, `AvatarType`, `SwitchSize`, `IconName`, `Spacings`
+### Radio
+
+- `OptionRadioGroup`, `RadioGroupField`, `RatingRadioGroup`, `YesNoRadioGroup`
+
+### Segmented Control
+
+- `SegmentedControlField`
+
+### Skeleton
+
+- `Skeleton`
+
+### Slider
+
+- `BrightnessSlider`, `RadiusSlider`, `SliderField`, `VolumeSlider`
+
+### Spacing
+
+- `Spacer`, `Spacing`
+
+### Spinner
+
+- `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
+
+### Stat Tile
+
+- `StatTile`
+
+### Switch
+
+- `FeatureToggle`, `PermissionSwitch`, `PreferenceSwitch`, `SwitchField`
+
+### Tab
+
+- `ContentTabs`, `NavigationTabs`, `SettingsTabs`, `Tab`, `TabGroup`, `TabPanel`
+
+### Text
+
+- `Text`, `TypographyText`
+
+### Toast
+
+- `ErrorToast`, `InfoToast`, `SuccessToast`, `Toast`, `ToastContainer`, `ToastProvider`
+- `WarningToast`
+
+### Tooltip
+
+- `Tooltip`, `TooltipGroup`
+
+<!-- END GENERATED PUBLIC COMPONENTS -->
 
 ## Theme In Seconds
 
@@ -371,10 +471,10 @@ By default Marwes keeps theme state scoped to the provider element. If your app 
 
 ### SvelteKit SSR
 
-Use `createMarwesThemeStyle()` and `createMarwesThemeScript()` when a server-rendered app needs the correct light or dark variables before hydration. Import from the `/ssr` subpath:
+Use `createMarwesThemeStyle()` and `createMarwesThemeScript()` when a server-rendered app needs the correct light or dark variables before hydration. Both helpers are available from the adapter root:
 
 ```ts
-import { createMarwesThemeScript, createMarwesThemeStyle } from "@marwes-ui/svelte/ssr"
+import { createMarwesThemeScript, createMarwesThemeStyle } from "@marwes-ui/svelte"
 ```
 
 Read the [theme SSR no-flash guide](https://github.com/niklas-westman/marwes/blob/main/docs/guides/theme-ssr-no-flash.md) for SvelteKit setup, CSP nonces, custom light/dark themes, and stored/system preference behavior.
@@ -411,6 +511,8 @@ const panelStyle = `
   outline-color: ${mwVar("--mw-color-focus", "#2457FF")};
 `
 ```
+
+`mwTheme`, `mwStyledTheme`, and `mwThemeVars` contain CSS `var(--mw-*)` references, not resolved color or spacing values. They are correct inside CSS evaluated below `MarwesProvider`, but JavaScript reads or aliases can resolve against the wrong element and return an empty value. Use `useTheme()` for JavaScript logic, charts, runtime aliases, or bridges that need concrete values.
 
 Keep the APIs separate:
 - Use `Spacings.sp24` for Marwes spacing props such as `<Spacer spacing={Spacings.sp24} />`.

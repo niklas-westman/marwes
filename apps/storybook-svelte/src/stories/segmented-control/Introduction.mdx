@@ -4,8 +4,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Segmented Control
 
-Marwes provides a single `SegmentedControl` component for compact single-select
-toggles between 2–4 options.
+Marwes provides the public `SegmentedControlField` for compact single-select toggles between 2–4 options. The raw `SegmentedControl` story is internal implementation evidence.
 
 ## When to use
 
@@ -37,18 +36,21 @@ toggles between 2–4 options.
 
 ## Usage
 
-```tsx
-import { SegmentedControl } from "@marwes-ui/react"
+```svelte
+<script lang="ts">
+import { SegmentedControlField } from "@marwes-ui/svelte"
 
-<SegmentedControl
-  items={[
-    { value: "light", icon: <SunIcon />, ariaLabel: "Light mode" },
-    { value: "dark", icon: <MoonIcon />, ariaLabel: "Dark mode" },
-  ]}
-  value={theme}
-  onValueChange={setTheme}
-  variant="pill"
-  ariaLabel="Theme mode"
+let theme = $state("light")
+</script>
+
+<SegmentedControlField
+  label="Theme mode"
+  segmentedControl={{
+    items: [{ value: "light", label: "Light" }, { value: "dark", label: "Dark" }],
+    value: theme,
+    onvaluechange: (value) => theme = value,
+    variant: "pill",
+  }}
 />
 ```
 
@@ -62,7 +64,7 @@ import { SegmentedControl } from "@marwes-ui/react"
 
 ## Component Reference
 
-**`SegmentedControl`** — The single component for all segmented toggle patterns.
+**`SegmentedControlField`** — The public labeled component for segmented toggle patterns.
 
 Props:
 - `items` — Array of `{ value, label?, icon?, disabled?, ariaLabel? }`

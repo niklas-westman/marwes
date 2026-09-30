@@ -192,6 +192,26 @@ describe("React adapter specifics: Button", () => {
     expect(screen.getByRole("button", { name: /close/i })).toHaveAttribute("aria-label", "Close")
   })
 
+  it("lets IconButton use an external accessible label", () => {
+    renderWithProvider(
+      <>
+        <span id="close-label">Close</span>
+        <IconButton icon="x" ariaLabelledBy="close-label" />
+      </>,
+    )
+
+    expect(screen.getByRole("button", { name: "Close" })).toHaveAttribute(
+      "aria-labelledby",
+      "close-label",
+    )
+  })
+
+  it("requires an accessible name for IconButton at compile time", () => {
+    // @ts-expect-error — icon-only buttons require label, ariaLabel, or ariaLabelledBy.
+    const unnamedIconButton = <IconButton icon="x" />
+    expect(unnamedIconButton).toBeDefined()
+  })
+
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {
     const onClick = vi.fn()
 

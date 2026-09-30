@@ -54,11 +54,17 @@ After scaffold:
 
 ```bash
 cd my-app
-pnpm install   # if you passed --no-install
+pnpm install   # if you passed --no-install; the Marwes adapter is already in package.json
 pnpm dev
 ```
 
 Start building with Marwes components. See the adapter README on npm (`@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte`) for the full component list and theming guide.
+
+Verify the generated app before continuing:
+
+```bash
+pnpm dlx @marwes-ui/cli doctor --run-build
+```
 
 For the theme builder, brand-token customization, and full setup guides, visit [marwes.io](https://marwes.io).
 
@@ -68,8 +74,9 @@ For the theme builder, brand-token customization, and full setup guides, visit [
 | ----------------- | ------- |
 | `--template`      | One of `react-ts`, `vue-ts`, `svelte-ts` (required). |
 | `--pm`            | Force a package manager: `pnpm`, `npm`, `yarn`, or `bun`. |
-| `--no-install`    | Skip dependency install after scaffolding. |
+| `--no-install`    | Record the Marwes adapter in `package.json`, but skip installation. |
 | `--dry-run`       | Print planned actions without writing to disk. |
+| `--help`          | Show focused command help. |
 
 ## Existing App?
 

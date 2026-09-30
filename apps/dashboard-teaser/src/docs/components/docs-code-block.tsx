@@ -44,7 +44,7 @@ const CodeLine = styled.div`
   }
 `
 
-function GetStartedCodeBlock({ code, label }: { code: string; label: string }): JSX.Element {
+function DocsCodeBlock({ code, label }: { code: string; label: string }): JSX.Element {
   return (
     <CodeCard>
       <Toolbar>
@@ -62,4 +62,4 @@ function GetStartedCodeBlock({ code, label }: { code: string; label: string }): 
   )
 }
 
-export { GetStartedCodeBlock }
+export { DocsCodeBlock }

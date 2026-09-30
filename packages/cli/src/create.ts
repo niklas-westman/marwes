@@ -1,9 +1,16 @@
+import { readFile, writeFile } from "node:fs/promises"
 import { resolve } from "node:path"
 import type { CommandRunner } from "./command-runner"
 import { defaultCommandRunner } from "./command-runner"
 import { runInit } from "./init"
 import { createViteCommand, detectPackageManager, formatShellCommand } from "./package-manager"
-import { type MarwesTemplate, type PackageManager, adapterFromTemplate } from "./recipes"
+import {
+  type Adapter,
+  type MarwesTemplate,
+  type PackageManager,
+  adapterFromTemplate,
+  getAdapterRecipe,
+} from "./recipes"
 
 export type CreateOptions = {
   projectName: string
@@ -22,10 +29,40 @@ export type CreateResult = {
   exitCode: number
 }
 
+const safeProjectPathPattern = /^[a-zA-Z0-9][a-zA-Z0-9._-]*(?:\/[a-zA-Z0-9][a-zA-Z0-9._-]*)*$/
+
+export function isSafeProjectPath(projectName: string): boolean {
+  return safeProjectPathPattern.test(projectName)
+}
+
+async function stageAdapterDependency(cwd: string, adapter: Adapter): Promise<void> {
+  const packageJsonPath = resolve(cwd, "package.json")
+  const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8"))
+  const packageName = getAdapterRecipe(adapter).packageName
+  const dependencies = packageJson.dependencies ?? {}
+
+  if (!(packageName in dependencies) && !(packageName in (packageJson.devDependencies ?? {}))) {
+    packageJson.dependencies = { ...dependencies, [packageName]: "latest" }
+    await writeFile(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`)
+  }
+}
+
 export async function runCreate(options: CreateOptions): Promise<CreateResult> {
   const cwd = options.cwd ?? process.cwd()
   const write = options.write ?? ((message: string) => console.log(message))
   const runner = options.runner ?? defaultCommandRunner
+
+  if (!isSafeProjectPath(options.projectName)) {
+    write(
+      "Invalid project name. Use a relative path made from letters, numbers, dots, dashes, underscores, and forward slashes.",
+    )
+    return {
+      projectName: options.projectName,
+      template: options.template,
+      exitCode: 1,
+    }
+  }
+
   const packageManager = options.packageManager ?? (await detectPackageManager(cwd))
   const command = createViteCommand(packageManager, options.projectName, options.template)
   const adapter = adapterFromTemplate(options.template)
@@ -51,6 +88,13 @@ export async function runCreate(options: CreateOptions): Promise<CreateResult> {
       template: options.template,
       exitCode: createExitCode,
     }
+  }
+
+  if (options.noInstall) {
+    await stageAdapterDependency(targetCwd, adapter)
+    write(
+      `Recorded ${getAdapterRecipe(adapter).packageName} in package.json. Run ${packageManager} install before starting the app.`,
+    )
   }
 
   const initResult = await runInit({

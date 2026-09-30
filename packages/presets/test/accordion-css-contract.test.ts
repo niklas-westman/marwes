@@ -26,6 +26,15 @@ describe("firstEdition accordion css contract", () => {
 })
 
 describe("firstEdition accordion field css contract", () => {
+  it("spaces the native legend independently of the fieldset grid gap", () => {
+    const css = readFileSync(accordionFieldCssPath, "utf8")
+    const labelRule = css.match(/legend\.mw-accordion-field__label\s*\{([^}]+)\}/)?.[1]
+    const sharedLabelRule = css.match(/\n\.mw-accordion-field__label\s*\{([^}]+)\}/)?.[1]
+
+    expect(labelRule).toContain("margin-block-end: var(--mw-density-field-gap, 8px)")
+    expect(sharedLabelRule).not.toContain("margin-block-end")
+  })
+
   it("targets text typography classes for field labels, descriptions, and errors", () => {
     const css = readFileSync(accordionFieldCssPath, "utf8")
 

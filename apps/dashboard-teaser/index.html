@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--dashboard-seo-head-->
     <style>
+      html { background: #fff; color: #141414; }
+      html.dark { background: #0f0f0f; color: #f7f7f7; }
       .js #root > .seo-fallback {
         display: none;
       }
     </style>
     <script>
       document.documentElement.classList.add("js")
+      let mode = "light"
+      try {
+        mode = localStorage.getItem("marwes-site-theme") === "dark" ? "dark" : "light"
+      } catch {}
+      document.documentElement.dataset.marwesMode = mode
+      document.documentElement.classList.add(mode)
+      document.documentElement.style.colorScheme = mode
     </script>
   </head>
   <body>
@@ -19,19 +28,25 @@
         <section aria-labelledby="marwes-static-title">
           <h1 id="marwes-static-title">One system, any brand.</h1>
           <p>
-            Marwes UI is a themeable component library for React, Vue, and Svelte that adopts
-            your brand. Every component is optimized for AI-assisted development and built with accessibility from the ground up.
+            Marwes UI is a themeable component library for React, Vue, and Svelte that adopts your
+            brand. Every component is optimized for AI-assisted development and built with
+            accessibility from the ground up.
           </p>
-          <ul>
-            <li>Framework-agnostic core with React, Vue, and Svelte adapters</li>
-            <li>AI-friendly semantic component contracts</li>
-            <li>Static CSS and CSS variable styling</li>
-            <li>Adjustable typed themes for brand systems</li>
-            <li>Theme variables for plain CSS, CSS Modules, CSS-in-JS, and Tailwind-style config</li>
-            <li>Accessibility-first primitives</li>
-          </ul>
+          <p>Framework-agnostic. Static preset CSS. Type-safe. A11y-first. Agent-readable.</p>
           <nav aria-label="Marwes links">
-            <a href="https://github.com/niklas-westman/marwes/tree/main/docs">Documentation</a>
+            <a href="/docs/get-started/react/">Get started with React</a>
+            <a href="/docs/get-started/vue/">Get started with Vue</a>
+            <a href="/docs/get-started/svelte/">Get started with Svelte</a>
+            <a href="/docs/components/">Browse components</a>
+            <a href="/docs/theming/">Theme your app</a>
+            <a href="/docs/troubleshooting/">Troubleshoot</a>
+            <a href="/llms.txt">AI overview</a>
+            <a href="/ai/react.md">React AI guide</a>
+            <a href="/ai/vue.md">Vue AI guide</a>
+            <a href="/ai/svelte.md">Svelte AI guide</a>
+            <a href="https://storybook-react.marwes.io/latest/">React Storybook</a>
+            <a href="https://storybook-vue.marwes.io/latest/">Vue Storybook</a>
+            <a href="https://storybook-svelte.marwes.io/latest/">Svelte Storybook</a>
             <a href="https://github.com/niklas-westman/marwes">GitHub</a>
           </nav>
         </section>

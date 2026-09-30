@@ -5,9 +5,7 @@ import { switchPurposeComponentReference, switchWhyPurposeComponents } from "@ma
 
 # Switch Components
 
-Marwes provides a switch system with three layers:
-**purpose components** for common toggle use cases, **SwitchField** for standard
-field composition, and the raw **Switch** atom for custom layouts.
+Marwes consumers use **purpose components** for common toggle use cases and **SwitchField** for standard field composition. The raw **Switch** atom is internal implementation evidence.
 
 ## Recommended: Purpose Components
 
@@ -98,32 +96,11 @@ const enabled = ref(false)
 
 ## Low-level: Switch (Atom)
 
-Use the raw `Switch` atom when you need a custom layout or non-standard composition:
-
-```vue
-<script setup lang="ts">
-  import { ref } from "vue"
-  import { Switch, SwitchSize } from "@marwes-ui/vue"
-
-const enabled = ref(false)
-</script>
-
-<template>
-  <div style="display: flex; align-items: center; gap: 12px;">
-    <Switch v-model="enabled" :size="SwitchSize.wide" ariaLabel="Enable notifications" />
-    <span>Enable notifications</span>
-  </div>
-</template>
-```
-
-> **Note:** When using `Switch` directly, you are responsible for:
-> - Providing an accessible name via visible content, `ariaLabel`, or `aria-labelledby`
-> - Wiring any supporting text through `aria-describedby`
-> - Managing checked state in the parent
+`Switch` is not exported from `@marwes-ui/vue` and must not be deep-imported. Use `SwitchField` and pass size or state through its nested `switch` prop.
 
 ## Size API
 
-`Switch` supports three Figma-matched sizes. `compact` remains the default.
+The public `SwitchField` supports three Figma-matched sizes through `switch.size`. `compact` remains the default.
 
 - `compact` - 24×16 track with 12px thumb
 - `wide` - 30×16 track with 12px thumb
@@ -131,13 +108,13 @@ const enabled = ref(false)
 
 ```vue
 <script setup lang="ts">
-import { SwitchSize } from "@marwes-ui/vue"
+import { SwitchField, SwitchSize } from "@marwes-ui/vue"
 </script>
 
 <template>
-  <Switch :size="SwitchSize.compact" ariaLabel="Compact switch" />
-  <Switch :size="SwitchSize.wide" ariaLabel="Wide switch" />
-  <Switch :size="SwitchSize.rich" ariaLabel="Rich switch" />
+  <SwitchField label="Compact" :switch="{ size: SwitchSize.compact }" />
+  <SwitchField label="Wide" :switch="{ size: SwitchSize.wide }" />
+  <SwitchField label="Rich" :switch="{ size: SwitchSize.rich }" />
 </template>
 ```
 
@@ -157,7 +134,7 @@ import { SwitchSize } from "@marwes-ui/vue"
 
 ### Atom
 
-**`Switch`** - Low-level `<button role="switch">`
+**`Switch`** - Internal `<button role="switch">` implementation; not a consumer import.
 
 - `Switch (Atom)`
 - `SwitchField (Molecule)`

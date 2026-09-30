@@ -11,8 +11,6 @@ import {
 } from "@marwes-ui/react"
 import { memo, useState } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for SingleRadioField's custom layout.
-import { Radio } from "../../../../../packages/react/src/components/radio/radio"
 
 import { SnippetButton } from "../../components/SnippetButton"
 import type { ComponentDisplayOptions } from "../playground-settings"
@@ -76,17 +74,6 @@ const CheckboxShowcaseCard = styled(FirstSectionCard)`
     min-height: 1.5rem;
     height: 1.5rem;
   }
-`
-
-const SingleRadioField = styled.label`
-  display: inline-flex;
-  min-height: 1.5rem;
-  padding-top: 0.1875rem;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sp8};
-  box-sizing: content-box;
-  cursor: pointer;
-  user-select: none;
 `
 
 const DemoArea = styled.div`
@@ -189,18 +176,13 @@ function RowSwitchCard({ options }: RowSwitchCardProps): JSX.Element {
       <FirstSectionCard $basis="15.625rem" $height="19.25rem" $responsiveOrder={3}>
         {options.showLabels && <Text variant={TextVariant.overline}>Radio</Text>}
         <SnippetButton title="Radio" snippets={radioSnippets} />
-        <SingleRadioField htmlFor="demo-radio-single-1">
-          <Radio
-            id="demo-radio-single-1"
-            name="demo-radio-single"
-            value="1"
-            checked={radioValue === "1"}
-            onCheckedChange={(checked) => {
-              if (checked) setRadioValue("1")
-            }}
-          />
-          <Text variant={TextVariant.label}>Label</Text>
-        </SingleRadioField>
+        <RadioGroupField
+          name="demo-radio-single"
+          label="Single option"
+          options={[{ value: "1", label: "Label" }]}
+          value={radioValue}
+          onChange={setRadioValue}
+        />
         <RadioGroupField
           name="demo-radio-group"
           label="Group label"

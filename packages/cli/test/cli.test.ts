@@ -43,4 +43,35 @@ describe("CLI entrypoints", () => {
     expect(output.join("\n")).toContain("create vite")
     expect(output.join("\n")).toContain("marwes init --adapter svelte")
   })
+
+  it("rejects project paths that could escape the working directory", async () => {
+    const output: string[] = []
+    const exitCode = await runCreateMarwesCli(
+      ["../outside", "--template", "react-ts", "--dry-run"],
+      { write: (message) => output.push(message) },
+    )
+
+    expect(exitCode).toBe(1)
+    expect(output.join("\n")).toContain("Invalid project name")
+  })
+
+  it.each(["init", "doctor", "ai-prompt"])("prints %s subcommand help", async (command) => {
+    const output: string[] = []
+    const exitCode = await runMarwesCli([command, "--help"], {
+      write: (message) => output.push(message),
+    })
+
+    expect(exitCode).toBe(0)
+    expect(output.join("\n")).toContain(`marwes ${command}`)
+  })
+
+  it("prints create-marwes help", async () => {
+    const output: string[] = []
+    const exitCode = await runCreateMarwesCli(["--help"], {
+      write: (message) => output.push(message),
+    })
+
+    expect(exitCode).toBe(0)
+    expect(output.join("\n")).toContain("create-marwes <name>")
+  })
 })

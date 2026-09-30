@@ -252,7 +252,7 @@ Use the helper that matches the job:
 - `mwThemeVars` returns CSS `var(...)` references for app-owned CSS-in-JS, style objects, vanilla-extract, and config files.
 - `mwThemeVarNames` returns raw custom property names for assigning overrides or inspecting the preset CSS contract.
 - `mwVar()` wraps custom or advanced `--mw-*` names with optional fallback support.
-- `mwStyledTheme` mirrors `mwThemeVars` as a plain theme object for styled-components and Emotion integrations.
+- `mwTheme` mirrors `mwThemeVars` as a plain theme object for styled-components and Emotion integrations. `mwStyledTheme` remains as a deprecated compatibility alias.
 
 ```ts
 import { mwThemeVarNames, mwThemeVars, mwVar } from "@marwes-ui/core"

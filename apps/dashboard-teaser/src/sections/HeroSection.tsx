@@ -1,7 +1,9 @@
 import { Badge, IconName, LinkButton, Paragraph, Text, TextVariant } from "@marwes-ui/react"
+import { useState } from "react"
 import styled from "styled-components"
 
 import { InstallationPanel } from "./InstallationPanel"
+import type { Framework } from "./installation-recipes"
 
 const HeroContainer = styled.section`
   width: 100%;
@@ -71,12 +73,13 @@ const LinkRow = styled.div`
 `
 
 function HeroSection(): JSX.Element {
+  const [framework, setFramework] = useState<Framework>("react")
+
   return (
     <HeroContainer id="hero" data-dashboard-section="hero">
       <TextColumn>
         <TextBox>
           <TopSection>
-            <Badge variant="warning">Work in progress</Badge>
             <Text variant={TextVariant.display} headingLevel={1}>
               One system, any brand.
             </Text>
@@ -89,18 +92,16 @@ function HeroSection(): JSX.Element {
         </TextBox>
         <BadgeRow>
           <Badge>Framework-agnostic</Badge>
-          <Badge>Static CSS</Badge>
+          <Badge>Static preset CSS</Badge>
           <Badge>Type-safe</Badge>
           <Badge>A11y-first</Badge>
           <Badge>Agent-readable</Badge>
         </BadgeRow>
         <LinkRow>
-          <LinkButton
-            href="https://github.com/niklas-westman/marwes/tree/main/docs"
-            iconRight={IconName.ArrowUpRight}
-          >
-            Documentation
-          </LinkButton>
+          <LinkButton href={`/docs/get-started/${framework}/`}>Get started</LinkButton>
+          <LinkButton href="/docs/components/">Browse components</LinkButton>
+          <LinkButton href="/docs/theming/">Theme your app</LinkButton>
+          <LinkButton href="/docs/troubleshooting/">Troubleshoot</LinkButton>
           <LinkButton
             href="https://github.com/niklas-westman/marwes"
             iconRight={IconName.ArrowUpRight}
@@ -109,7 +110,7 @@ function HeroSection(): JSX.Element {
           </LinkButton>
         </LinkRow>
       </TextColumn>
-      <InstallationPanel />
+      <InstallationPanel activeTab={framework} onFrameworkChange={setFramework} />
     </HeroContainer>
   )
 }

@@ -1,9 +1,7 @@
-import { Icon, IconName, Text, TextVariant } from "@marwes-ui/react"
+import { Icon, IconName, SegmentedControlField, Text, TextVariant } from "@marwes-ui/react"
 import type { SegmentedControlItem } from "@marwes-ui/react"
 import { memo, useState } from "react"
 import styled from "styled-components"
-// Atom is no longer publicly exported; deep-import for the showcase row.
-import { SegmentedControl } from "../../../../../packages/react/src/components/segmented-control/segmented-control"
 
 import { SnippetButton } from "../../components/SnippetButton"
 import { segmentedSnippets } from "./segmented-snippets"
@@ -102,29 +100,35 @@ function RowSegmented(): JSX.Element {
         <Text variant={TextVariant.overline}>Segmented button – Inverse</Text>
         <SnippetButton title="Segmented button – Inverse" snippets={segmentedSnippets} />
         <ShowcaseStack>
-          <SegmentedControl
-            items={inverseTwo}
-            value={state.inverseTwo}
-            onValueChange={(v) => set("inverseTwo", v)}
-            variant="inverse"
-            ariaLabel="View density inverse"
-            fullWidth
+          <SegmentedControlField
+            label="View density"
+            segmentedControl={{
+              items: inverseTwo,
+              value: state.inverseTwo,
+              onValueChange: (v) => set("inverseTwo", v),
+              variant: "inverse",
+              fullWidth: true,
+            }}
           />
-          <SegmentedControl
-            items={inverseThree}
-            value={state.inverseThree}
-            onValueChange={(v) => set("inverseThree", v)}
-            variant="inverse"
-            ariaLabel="View mode inverse"
-            fullWidth
+          <SegmentedControlField
+            label="View mode"
+            segmentedControl={{
+              items: inverseThree,
+              value: state.inverseThree,
+              onValueChange: (v) => set("inverseThree", v),
+              variant: "inverse",
+              fullWidth: true,
+            }}
           />
-          <SegmentedControl
-            items={inverseIcon}
-            value={state.inverseIcon}
-            onValueChange={(v) => set("inverseIcon", v)}
-            variant="inverse"
-            size="sm"
-            ariaLabel="Icon toggle inverse"
+          <SegmentedControlField
+            label="Theme"
+            segmentedControl={{
+              items: inverseIcon,
+              value: state.inverseIcon,
+              onValueChange: (v) => set("inverseIcon", v),
+              variant: "inverse",
+              size: "sm",
+            }}
           />
         </ShowcaseStack>
       </ItemCard>
@@ -132,26 +136,32 @@ function RowSegmented(): JSX.Element {
         <Text variant={TextVariant.overline}>Segmented button – Default</Text>
         <SnippetButton title="Segmented button – Default" snippets={segmentedSnippets} />
         <ShowcaseStack>
-          <SegmentedControl
-            items={defaultTwo}
-            value={state.defaultTwo}
-            onValueChange={(v) => set("defaultTwo", v)}
-            ariaLabel="View density"
-            fullWidth
+          <SegmentedControlField
+            label="View density"
+            segmentedControl={{
+              items: defaultTwo,
+              value: state.defaultTwo,
+              onValueChange: (v) => set("defaultTwo", v),
+              fullWidth: true,
+            }}
           />
-          <SegmentedControl
-            items={defaultThree}
-            value={state.defaultThree}
-            onValueChange={(v) => set("defaultThree", v)}
-            ariaLabel="View mode"
-            fullWidth
+          <SegmentedControlField
+            label="View mode"
+            segmentedControl={{
+              items: defaultThree,
+              value: state.defaultThree,
+              onValueChange: (v) => set("defaultThree", v),
+              fullWidth: true,
+            }}
           />
-          <SegmentedControl
-            items={defaultIcon}
-            value={state.defaultIcon}
-            onValueChange={(v) => set("defaultIcon", v)}
-            size="sm"
-            ariaLabel="Icon toggle"
+          <SegmentedControlField
+            label="Theme"
+            segmentedControl={{
+              items: defaultIcon,
+              value: state.defaultIcon,
+              onValueChange: (v) => set("defaultIcon", v),
+              size: "sm",
+            }}
           />
         </ShowcaseStack>
       </ItemCard>

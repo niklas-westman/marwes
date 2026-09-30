@@ -5,11 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate:ai": "node ../../scripts/generate-ai-docs.mjs",
+    "generate:docs": "node ../../scripts/generate-dashboard-docs.mjs",
+    "check:ai": "node ../../scripts/generate-ai-docs.mjs --check",
+    "check:docs": "node ../../scripts/generate-dashboard-docs.mjs --check",
+    "check:docs-build": "node ../../scripts/check-dashboard-docs-build.mjs",
     "typecheck": "tsc -b --noEmit",
     "check:button-variants": "node ../../scripts/check-dashboard-button-variants.mjs",
     "test:seo": "vitest run --config vitest.config.ts",
     "test": "pnpm check:button-variants && pnpm test:seo",
-    "build": "pnpm check:button-variants && tsc -b --noEmit && vite build",
+    "build": "pnpm check:ai && pnpm check:docs && pnpm check:button-variants && tsc -b --noEmit && vite build && pnpm check:docs-build",
     "preview": "vite preview"
   },
   "dependencies": {

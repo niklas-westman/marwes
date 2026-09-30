@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "title": "Compatibility",
+  "summary": "Supported frameworks, runtimes, browsers, and package boundaries.",
+  "heading": "Supported consumer boundary",
+  "description": "Use one public adapter package for React, Vue, or Svelte. The adapter imports the static preset stylesheet and exposes the provider, components, helpers, and public types.",
+  "requirements": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "peerRequirement": "React and React DOM 18 or newer",
+      "getStartedHref": "/docs/get-started/react/"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "peerRequirement": "Vue 3.4 or newer",
+      "getStartedHref": "/docs/get-started/vue/"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "peerRequirement": "Svelte 5.20 or newer",
+      "getStartedHref": "/docs/get-started/svelte/"
+    }
+  ],
+  "runtimeRequirements": [
+    "Node.js 20 or newer for installation, builds, and the CLI.",
+    "A current evergreen browser with standard CSS custom property support.",
+    "The framework and renderer peer versions declared by the selected adapter package.",
+    "A known Vite starter layout for automatic provider patching; other build systems use the documented manual provider setup."
+  ],
+  "footnote": "Direct imports from @marwes-ui/core, @marwes-ui/presets, or package-internal paths are not part of the consumer setup.",
+  "sections": [
+    {
+      "id": "compatibility",
+      "label": "Compatibility"
+    }
+  ]
+}

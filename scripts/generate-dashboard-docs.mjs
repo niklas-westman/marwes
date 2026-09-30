@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { execFileSync } from "node:child_process"
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -8,6 +9,14 @@ import { dashboardDocsGuides } from "./dashboard-doc-routes.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const appRoot = path.join(repoRoot, "apps/dashboard-teaser")
+const docsNavigation = JSON.parse(
+  await readFile(path.join(appRoot, "src/docs/components/docs-navigation.json"), "utf8"),
+)
+const headerSource = await readFile(path.join(appRoot, "src/components/Header.tsx"), "utf8")
+const logoPaths = [...headerSource.matchAll(/<path\s+d="([^"]+)"\s+fill="currentColor"\s*\/>/gu)]
+  .map(([, d]) => `<path d="${d}" fill="currentColor"/>`)
+  .join("")
+if (!logoPaths) throw new Error("Missing shared Marwes logo paths")
 const registryPath = path.join(repoRoot, "artifacts/component-registry.json")
 const publicApiPath = path.join(repoRoot, "artifacts/public-api.json")
 const manifestPath = path.join(appRoot, "src/docs/generated/docs-routes.json")
@@ -173,10 +182,14 @@ const progressBarRecommendedComponents = [
 ]
 
 const checkboxRecommendedComponents = [
-  { name: "CheckboxField", description: "Single checkbox with connected label, description and error" },
+  {
+    name: "CheckboxField",
+    description: "Single checkbox with connected label, description and error",
+  },
   {
     name: "CheckboxGroupField",
-    description: "Fieldset of related checkboxes with grouped label and select-all indeterminate state",
+    description:
+      "Fieldset of related checkboxes with grouped label and select-all indeterminate state",
   },
 ]
 
@@ -197,7 +210,10 @@ const radioRecommendedComponents = [
 ]
 
 const switchRecommendedComponents = [
-  { name: "FeatureToggle", description: "Enable or disable a feature with explicit toggle semantics" },
+  {
+    name: "FeatureToggle",
+    description: "Enable or disable a feature with explicit toggle semantics",
+  },
   { name: "PreferenceSwitch", description: "Persisted user preference toggle" },
   { name: "PermissionSwitch", description: "Grant or revoke a permission with explicit intent" },
   {
@@ -208,7 +224,10 @@ const switchRecommendedComponents = [
 
 const sliderRecommendedComponents = [
   { name: "VolumeSlider", description: "Preconfigured 0-100 volume control with a value tooltip" },
-  { name: "BrightnessSlider", description: "Preconfigured 0-100 brightness control with a value tooltip" },
+  {
+    name: "BrightnessSlider",
+    description: "Preconfigured 0-100 brightness control with a value tooltip",
+  },
   { name: "RadiusSlider", description: "Preconfigured size control with sensible pixel bounds" },
   {
     name: "SliderField",
@@ -279,7 +298,10 @@ const spacingRecommendedComponents = [
 ]
 
 const statTileRecommendedComponents = [
-  { name: "StatTile", description: "Single labeled metric with an optional trend and semantic tone" },
+  {
+    name: "StatTile",
+    description: "Single labeled metric with an optional trend and semantic tone",
+  },
 ]
 
 const textRecommendedComponents = [
@@ -313,7 +335,10 @@ const contextMenuRecommendedComponents = [
 ]
 
 const dialogRecommendedComponents = [
-  { name: "ConfirmDialog", description: "Confirm a reversible action with cancel and confirm controls" },
+  {
+    name: "ConfirmDialog",
+    description: "Confirm a reversible action with cancel and confirm controls",
+  },
   {
     name: "DestructiveDialog",
     description: "Confirm an irreversible or destructive action with explicit warning intent",
@@ -389,7 +414,8 @@ const componentPagePresentation = {
   },
   pagination: {
     recommendedComponents: paginationRecommendedComponents,
-    recommendationDescription: "Use PaginationField for page-based navigation through a paged data set.",
+    recommendationDescription:
+      "Use PaginationField for page-based navigation through a paged data set.",
   },
   accordion: {
     recommendedComponents: accordionRecommendedComponents,
@@ -821,13 +847,6 @@ function getThemingCopy(family) {
 
 function getStaticBody(route) {
   const routePath = route.path
-  if (routePath === "/docs/components/") return renderCatalog(route.families)
-  if (routePath === "/docs/theming/") return renderTheming()
-  if (routePath === "/docs/accessibility/") return renderAccessibility()
-  if (routePath === "/docs/compatibility/") return renderCompatibility()
-  if (routePath === "/docs/troubleshooting/") return renderTroubleshooting()
-  if (routePath === "/docs/ai/") return renderAi()
-  if (routePath === "/docs/contributing/") return renderContributing()
   if (routePath.startsWith("/docs/integrations/")) {
     return renderIntegration(routePath.split("/").filter(Boolean).at(-1))
   }
@@ -853,7 +872,11 @@ function buildAccessibilityRequirements(family) {
       "Keyboard segment navigation",
       "Connected field wiring",
     ],
-    "date-picker": ["Distinguishable date states", "Keyboard date navigation", "Connected field wiring"],
+    "date-picker": [
+      "Distinguishable date states",
+      "Keyboard date navigation",
+      "Connected field wiring",
+    ],
     pagination: ["Visible current page", "Keyboard page access", "Connected field wiring"],
     accordion: ["Intentional open behavior", "State announcement", "Connected field wiring"],
     "context-menu": [
@@ -865,7 +888,11 @@ function buildAccessibilityRequirements(family) {
     drawer: ["Conditional mounting", "Placement and modal behavior", "Focus and escape review"],
     tab: ["Connected tab and panel ids", "Keyboard tab navigation"],
     toast: ["Matched announcement urgency", "Readable dismiss timing"],
-    tooltip: ["Supplementary content only", "Keyboard reachable dismissal", "Focus and escape review"],
+    tooltip: [
+      "Supplementary content only",
+      "Keyboard reachable dismissal",
+      "Focus and escape review",
+    ],
     avatar: ["Truthful alt text", "Status labeling"],
     breadcrumb: ["Accurate current page", "Honest link labels"],
     heading: ["Sequential heading levels", "Heading navigation review"],
@@ -1159,98 +1186,252 @@ function renderGetStartedStaticBody(model) {
   return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header>${steps}<aside><strong>Manual fallback:</strong> install <code>${escapeHtml(model.packageName)}</code>, render <code>MarwesProvider</code> once at the application boundary, and import components only from the package root.</aside>`
 }
 
-function renderCatalog(families) {
-  const cards = families
-    .map((family) => {
-      const exports = Object.values(family.exports).flatMap((entry) => entry.names)
-      const recommended = canonicalExports[family.family]
-      const alsoAvailable = [...new Set(exports)].filter((name) => name !== recommended)
-      const search = [
-        family.displayName,
-        family.family,
-        family.summary,
-        ...exports,
-        ...exports.map(humanizeIdentifier),
-        ...Object.keys(frameworkPackages),
-        ...Object.values(frameworkPackages),
-        ...family.useWhen,
-      ]
-        .join(" ")
-        .toLowerCase()
-      return `<li class="docs-card" data-component-card data-search="${escapeHtml(search)}"><h2><a href="/docs/components/${family.family}/">${escapeHtml(family.displayName)}</a></h2><p>${escapeHtml(family.summary)}</p><p><strong>Recommended:</strong> ${escapeHtml(recommended || "See family guidance")}</p>${alsoAvailable.length > 0 ? `<p><strong>Also public:</strong> ${escapeHtml(alsoAvailable.join(", "))}</p>` : ""}</li>`
-    })
+function buildCatalogEntry(family) {
+  const exports = Object.values(family.exports).flatMap((entry) => entry.names)
+  const recommended = canonicalExports[family.family] ?? ""
+  const alsoAvailable = [...new Set(exports)].filter((name) => name !== recommended)
+  const searchTerms = [
+    family.displayName,
+    family.family,
+    family.summary,
+    ...exports,
+    ...exports.map(humanizeIdentifier),
+    ...Object.keys(frameworkPackages),
+    ...Object.values(frameworkPackages),
+    ...family.useWhen,
+  ]
+    .join(" ")
+    .toLowerCase()
+
+  return {
+    family: family.family,
+    displayName: family.displayName,
+    summary: family.summary,
+    recommended,
+    alsoAvailable,
+    searchTerms,
+  }
+}
+
+function buildCatalogPageModel(families) {
+  return {
+    schemaVersion: 1,
+    title: "Component catalog",
+    summary: "Find the right public Marwes component by family, framework, export, or use case.",
+    entries: families.map(buildCatalogEntry),
+    sections: [{ id: "components", label: "Components" }],
+  }
+}
+
+function renderCatalogStaticBody(model) {
+  const cards = model.entries
+    .map(
+      (entry) =>
+        `<li class="component-static-card"><h2><a href="/docs/components/${entry.family}/">${escapeHtml(entry.displayName)}</a></h2><p>${escapeHtml(entry.summary)}</p><p><strong>Recommended:</strong> ${escapeHtml(entry.recommended || "See family guidance")}</p>${entry.alsoAvailable.length > 0 ? `<p><strong>Also public:</strong> ${escapeHtml(entry.alsoAvailable.join(", "))}</p>` : ""}</li>`,
+    )
     .join("")
 
-  return `<section aria-labelledby="component-search-title"><h2 id="component-search-title">Search all ${families.length} families</h2><label for="component-search">Family, export, or use case</label><input id="component-search" type="search" data-component-search autocomplete="off" placeholder="Try email field, pagination, or icon button" /><p data-component-count aria-live="polite">${families.length} component families</p><ul class="docs-grid" data-component-list>${cards}</ul><p data-component-empty hidden>No matching component family. Try a broader use case or export name.</p></section>`
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="components"><label for="component-search">Family, export, or use case</label><input id="component-search" type="search" disabled autocomplete="off" placeholder="Try email field, pagination, or icon button" /><p>${model.entries.length} component families</p><ul class="component-static-grid">${cards}</ul></section>`
 }
 
-function renderTheming() {
-  return `<section><h2>One provider, one theme boundary</h2><p>Marwes components consume resolved theme values from the framework provider and ship static preset CSS. There is no CSS-in-JS runtime in the component packages.</p>${renderCode(`const theme = { color: { primary: "#5558ff" } }\n\n<MarwesProvider theme={theme}>\n  <App />\n</MarwesProvider>`, "tsx")}<aside><strong>React consumers:</strong> use <code>useTheme()</code> when JavaScript needs resolved values. The styled theme contains CSS variable references whose definitions live below the document root.</aside></section>`
+function buildThemingPageModel() {
+  return {
+    schemaVersion: 1,
+    title: "Theming",
+    summary: "Wrap once, provide a theme, and brand every Marwes component.",
+    heading: "One provider, one theme boundary",
+    description:
+      "Marwes components consume resolved theme values from the framework provider and ship static preset CSS. There is no CSS-in-JS runtime in the component packages.",
+    code: {
+      language: "tsx",
+      content:
+        'const theme = { color: { primary: "#5558ff" } }\n\n<MarwesProvider theme={theme}>\n  <App />\n</MarwesProvider>',
+    },
+    calloutTitle: "React consumers",
+    calloutBody:
+      "Use useTheme() when JavaScript needs resolved values. The styled theme contains CSS variable references whose definitions live below the document root.",
+    sections: [{ id: "theming", label: "Theming" }],
+  }
 }
 
-function renderAccessibility() {
-  return `<section><h2>Accessible by contract, verified in context</h2><p>Marwes supplies component semantics, keyboard behavior, and accessible state wiring. Consumers still own truthful labels, page structure, focus return around overlays, and product-level testing.</p>${renderList(["Give every icon-only button an accessible name through the adapter's ariaLabel API.", "Preserve visible focus indicators and test keyboard order.", "Connect validation messages and descriptions to their fields.", "Test real workflows with browser accessibility tooling and assistive technology."])}</section>`
+function renderThemingStaticBody(model) {
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="theming"><h2>${escapeHtml(model.heading)}</h2><p>${escapeHtml(model.description)}</p>${renderCode(model.code.content, model.code.language)}</section><aside><strong>${escapeHtml(model.calloutTitle)}:</strong> ${escapeHtml(model.calloutBody)}</aside>`
 }
 
-function renderCompatibility() {
-  const requirements = {
+function buildAccessibilityPageModel() {
+  return {
+    schemaVersion: 1,
+    title: "Accessibility",
+    summary: "Understand the accessibility contract shared by Marwes components.",
+    heading: "Accessible by contract, verified in context",
+    description:
+      "Marwes supplies component semantics, keyboard behavior, and accessible state wiring. Consumers still own truthful labels, page structure, focus return around overlays, and product-level testing.",
+    requirements: [
+      "Give every icon-only button an accessible name through the adapter's ariaLabel API.",
+      "Preserve visible focus indicators and test keyboard order.",
+      "Connect validation messages and descriptions to their fields.",
+      "Test real workflows with browser accessibility tooling and assistive technology.",
+    ],
+    sections: [{ id: "accessibility", label: "Accessibility" }],
+  }
+}
+
+function renderAccessibilityStaticBody(model) {
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="accessibility"><h2>${escapeHtml(model.heading)}</h2><p>${escapeHtml(model.description)}</p>${renderList(model.requirements)}</section>`
+}
+
+function buildTroubleshootingPageModel() {
+  return {
+    schemaVersion: 1,
+    title: "Troubleshooting",
+    summary:
+      "Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.",
+    heading: "Common setup failures",
+    issues: [
+      {
+        title: "No styling",
+        description:
+          "Import from the adapter root. It loads the static preset CSS; do not add a second stylesheet.",
+      },
+      {
+        title: "Provider at the wrong level",
+        description: "Render MarwesProvider once above every Marwes component.",
+      },
+      {
+        title: "Wrong import",
+        description:
+          "Use @marwes-ui/react, @marwes-ui/vue, or @marwes-ui/svelte — never a different adapter or a deep path.",
+      },
+      {
+        title: "Theme values are empty",
+        description:
+          "CSS references such as var(--mw-*) resolve only inside the provider boundary. Use useTheme() when JavaScript needs resolved values.",
+      },
+      {
+        title: "Light/dark flash during SSR",
+        description:
+          "Install the framework theme script before hydration and keep the server and client preference policy aligned.",
+      },
+      {
+        title: "Fonts blocked by CSP",
+        description:
+          "Allow the configured font origin or self-host the selected font. Keep font loading consistent with the CSP.",
+      },
+      {
+        title: "Peer version mismatch",
+        description:
+          "Check the adapter package peerDependencies and align framework and renderer versions.",
+      },
+      {
+        title: "Partial CLI setup",
+        description:
+          "Follow the printed provider example, then rerun pnpm dlx @marwes-ui/cli doctor --run-build. Exit code 2 means installation succeeded but manual wiring remains.",
+      },
+    ],
+    code: { language: "shell", content: "pnpm dlx @marwes-ui/cli doctor --run-build" },
+    sections: [{ id: "troubleshooting", label: "Troubleshooting" }],
+  }
+}
+
+function renderTroubleshootingStaticBody(model) {
+  const issues = model.issues
+    .map(
+      (issue) =>
+        `<article><h3>${escapeHtml(issue.title)}</h3><p>${escapeHtml(issue.description)}</p></article>`,
+    )
+    .join("")
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="troubleshooting"><h2>${escapeHtml(model.heading)}</h2><div class="component-static-grid">${issues}</div>${renderCode(model.code.content, model.code.language)}</section>`
+}
+
+function buildCompatibilityPageModel() {
+  const peerRequirements = {
     react: "React and React DOM 18 or newer",
     vue: "Vue 3.4 or newer",
     svelte: "Svelte 5.20 or newer",
   }
-  return `<section><h2>Supported consumer boundary</h2><p>Use one public adapter package for React, Vue, or Svelte. The adapter imports the static preset stylesheet and exposes the provider, components, helpers, and public types.</p><table><thead><tr><th>Framework</th><th>Package</th><th>Peer requirement</th><th>Setup</th></tr></thead><tbody>${Object.entries(
-    frameworkPackages,
-  )
+  return {
+    schemaVersion: 1,
+    title: "Compatibility",
+    summary: "Supported frameworks, runtimes, browsers, and package boundaries.",
+    heading: "Supported consumer boundary",
+    description:
+      "Use one public adapter package for React, Vue, or Svelte. The adapter imports the static preset stylesheet and exposes the provider, components, helpers, and public types.",
+    requirements: Object.entries(frameworkPackages).map(([framework, packageName]) => ({
+      framework,
+      packageName,
+      peerRequirement: peerRequirements[framework],
+      getStartedHref: `/docs/get-started/${framework}/`,
+    })),
+    runtimeRequirements: [
+      "Node.js 20 or newer for installation, builds, and the CLI.",
+      "A current evergreen browser with standard CSS custom property support.",
+      "The framework and renderer peer versions declared by the selected adapter package.",
+      "A known Vite starter layout for automatic provider patching; other build systems use the documented manual provider setup.",
+    ],
+    footnote:
+      "Direct imports from @marwes-ui/core, @marwes-ui/presets, or package-internal paths are not part of the consumer setup.",
+    sections: [{ id: "compatibility", label: "Compatibility" }],
+  }
+}
+
+function renderCompatibilityStaticBody(model) {
+  const rows = model.requirements
     .map(
-      ([framework, packageName]) =>
-        `<tr><td>${titleCase(framework)}</td><td><code>${packageName}</code></td><td>${requirements[framework]}</td><td><a href="/docs/get-started/${framework}/">Get started</a></td></tr>`,
+      (requirement) =>
+        `<tr><td>${titleCase(requirement.framework)}</td><td><code>${escapeHtml(requirement.packageName)}</code></td><td>${escapeHtml(requirement.peerRequirement)}</td><td><a href="${escapeHtml(requirement.getStartedHref)}">Get started</a></td></tr>`,
     )
-    .join(
-      "",
-    )}</tbody></table><h3>Runtime requirements</h3><ul><li>Node.js 20 or newer for installation, builds, and the CLI.</li><li>A current evergreen browser with standard CSS custom property support.</li><li>The framework and renderer peer versions declared by the selected adapter package.</li><li>A known Vite starter layout for automatic provider patching; other build systems use the documented manual provider setup.</li></ul><p>Direct imports from <code>@marwes-ui/core</code>, <code>@marwes-ui/presets</code>, or package-internal paths are not part of the consumer setup.</p></section>`
+    .join("")
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="compatibility"><h2>${escapeHtml(model.heading)}</h2><p>${escapeHtml(model.description)}</p><table><thead><tr><th>Framework</th><th>Package</th><th>Peer requirement</th><th>Setup</th></tr></thead><tbody>${rows}</tbody></table><h3>Runtime requirements</h3>${renderList(model.runtimeRequirements)}<p>${escapeHtml(model.footnote)}</p></section>`
 }
 
-function renderTroubleshooting() {
-  const items = [
-    [
-      "No styling",
-      "Import from the adapter root. It loads the static preset CSS; do not add a second stylesheet.",
+function buildAiPageModel() {
+  return {
+    schemaVersion: 1,
+    title: "AI and agent usage",
+    summary: "Give coding agents canonical, machine-readable Marwes documentation.",
+    heading: "Machine-readable entrypoints",
+    description:
+      "Start agents at /llms.txt, then choose the framework guide and public API inventory.",
+    entrypoint: "/llms.txt",
+    resources: [
+      "/ai/react.md",
+      "/ai/vue.md",
+      "/ai/svelte.md",
+      "/ai/index.json",
+      "/ai/v1/public-api.json",
+      "/ai/v1/component-registry.json",
     ],
-    ["Provider at the wrong level", "Render MarwesProvider once above every Marwes component."],
-    [
-      "Wrong import",
-      "Use @marwes-ui/react, @marwes-ui/vue, or @marwes-ui/svelte — never a different adapter or a deep path.",
-    ],
-    [
-      "Theme values are empty",
-      "CSS references such as var(--mw-*) resolve only inside the provider boundary. Use useTheme() when JavaScript needs resolved values.",
-    ],
-    [
-      "Light/dark flash during SSR",
-      "Install the framework theme script before hydration and keep the server and client preference policy aligned.",
-    ],
-    [
-      "Fonts blocked by CSP",
-      "Allow the configured font origin or self-host the selected font. Keep font loading consistent with the CSP.",
-    ],
-    [
-      "Peer version mismatch",
-      "Check the adapter package peerDependencies and align framework and renderer versions.",
-    ],
-    [
-      "Partial CLI setup",
-      "Follow the printed provider example, then rerun pnpm dlx @marwes-ui/cli doctor --run-build. Exit code 2 means installation succeeded but manual wiring remains.",
-    ],
-  ]
-  return `<section><h2>Common setup failures</h2><div class="docs-stack">${items.map(([title, copy]) => `<article><h3>${title}</h3><p>${copy}</p></article>`).join("")}</div>${renderCode("pnpm dlx @marwes-ui/cli doctor --run-build", "shell")}</section>`
+    footnote:
+      "Agents should import real Marwes components from the chosen adapter root. They must not recreate Marwes as local mw-* classes.",
+    sections: [{ id: "ai", label: "AI and agents" }],
+  }
 }
 
-function renderAi() {
-  return `<section><h2>Machine-readable entrypoints</h2><p>Start agents at <a href="/llms.txt"><code>/llms.txt</code></a>, then choose the framework guide and public API inventory.</p>${renderList(["/ai/react.md", "/ai/vue.md", "/ai/svelte.md", "/ai/index.json", "/ai/v1/public-api.json", "/ai/v1/component-registry.json"])}<p>Agents should import real Marwes components from the chosen adapter root. They must not recreate Marwes as local <code>mw-*</code> classes.</p></section>`
+function renderAiStaticBody(model) {
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="ai"><h2>${escapeHtml(model.heading)}</h2><p>Start agents at <a href="${escapeHtml(model.entrypoint)}"><code>${escapeHtml(model.entrypoint)}</code></a>, then choose the framework guide and public API inventory.</p>${renderList(model.resources)}<p>${escapeHtml(model.footnote)}</p></section>`
 }
 
-function renderContributing() {
-  return `<section><h2>Preserve the consumer contract</h2><p>Registry metadata describes implementation evidence. The public API artifact owns consumer export names and import paths. Raw atoms may exist internally but must not appear in consumer examples.</p><p>Before opening a change, run the repository consumer docs check and the focused framework validation.</p>${renderCode("pnpm docs:consumer-check", "shell")}<p><a href="https://github.com/niklas-westman/marwes/blob/main/CONTRIBUTING.md">Read the repository contribution guide</a></p></section>`
+function buildContributingPageModel() {
+  return {
+    schemaVersion: 1,
+    title: "Contributing",
+    summary: "Contribute to Marwes without confusing internal atoms with its public consumer API.",
+    heading: "Preserve the consumer contract",
+    description:
+      "Registry metadata describes implementation evidence. The public API artifact owns consumer export names and import paths. Raw atoms may exist internally but must not appear in consumer examples.",
+    secondaryDescription:
+      "Before opening a change, run the repository consumer docs check and the focused framework validation.",
+    code: { language: "shell", content: "pnpm docs:consumer-check" },
+    externalLink: {
+      href: "https://github.com/niklas-westman/marwes/blob/main/CONTRIBUTING.md",
+      label: "Read the repository contribution guide",
+    },
+    sections: [{ id: "contributing", label: "Contributing" }],
+  }
+}
+
+function renderContributingStaticBody(model) {
+  return `<header class="component-static-intro"><p class="component-static-eyebrow">Marwes documentation</p><h1>${escapeHtml(model.title)}</h1><p>${escapeHtml(model.summary)}</p></header><section id="contributing"><h2>${escapeHtml(model.heading)}</h2><p>${escapeHtml(model.description)}</p><p>${escapeHtml(model.secondaryDescription)}</p>${renderCode(model.code.content, model.code.language)}<p><a href="${escapeHtml(model.externalLink.href)}">${escapeHtml(model.externalLink.label)}</a></p></section>`
 }
 
 function renderIntegration(integration) {
@@ -1400,8 +1581,27 @@ function renderFamilyBody(family) {
   return `<section><h2>What this family solves</h2><p>${escapeHtml(family.summary)}</p></section><div class="docs-columns"><section><h2>Use when</h2>${renderList(family.useWhen)}</section><section><h2>Avoid when</h2>${renderList(family.avoidWhen)}</section></div><section><h2>Public imports</h2><p>Import only from the adapter root. Field- and purpose-level exports are the recommended consumer API.</p><div class="docs-stack">${imports}</div><h3>Public prop types</h3><ul>${propTypes}</ul><p>The complete typed inventory is published at <a href="/ai/v1/public-api.json"><code>/ai/v1/public-api.json</code></a>.</p></section>${exampleSection}<section><h2>Accessibility requirements</h2>${renderList(family.accessibility)}</section><section><h2>Theming</h2><p>${escapeHtml(family.theming)}</p></section><section><h2>Reference links</h2><ul>${storybooks}<li><a href="https://github.com/niklas-westman/marwes/blob/main/${family.sourcePath}">Source and registry evidence</a></li>${packageLinks}<li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a></li></ul></section>`
 }
 
-function renderNavigation() {
-  return `<header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>`
+function renderDocsNavigationLinks(currentPath) {
+  const link = (label, href) =>
+    `<a href="${href}"${href === currentPath ? ' aria-current="page"' : ""}>${escapeHtml(label)}</a>`
+  const guides = docsNavigation.documentationLinks
+    .map(({ label, path }) => link(label, path))
+    .join("")
+  const groups = docsNavigation.componentGroups
+    .map(
+      ({ label, items }) =>
+        `<div class="component-static-nav-group"><p>${escapeHtml(label)}</p>${items.map((item) => link(item, `/docs/components/${item.toLowerCase().replaceAll(" ", "-")}/`)).join("")}</div>`,
+    )
+    .join("")
+  return `<div class="component-static-nav-group"><p>Documentation</p>${guides}</div>${groups}`
+}
+
+function renderNavigation(currentPath) {
+  if (!currentPath) {
+    return `<header class="docs-header"><a class="docs-brand" href="/">Marwes UI</a><nav aria-label="Documentation"><a href="/docs/get-started/react/">Get started</a><a href="/docs/components/">Components</a><a href="/docs/theming/">Theming</a><a href="/docs/accessibility/">Accessibility</a><a href="/docs/troubleshooting/">Troubleshoot</a></nav></header>`
+  }
+  const links = renderDocsNavigationLinks(currentPath)
+  return `<header class="docs-header" data-site-header data-docs-header><a class="docs-brand" href="/" aria-label="Marwes homepage"><svg width="98" height="20" viewBox="0 0 98 20" fill="none" role="img" aria-label="Marwes">${logoPaths}</svg></a><div class="component-static-header-right"><nav aria-label="Main"><a href="/">Home</a><a href="/docs/introduction/" aria-current="page">Docs</a></nav><span class="component-static-theme" aria-hidden="true"><span>☀</span><span>☾</span></span></div></header><details class="component-static-browse"><summary>Browse docs</summary><nav aria-label="Browse documentation">${links}</nav></details>`
 }
 
 function serializeEmbeddedJson(value) {
@@ -1413,19 +1613,41 @@ function serializeEmbeddedJson(value) {
 
 const staticDocsCss = `
     #root[data-static-docs] { min-height: 100vh; background: #fff; color: #141414; font-family: "Instrument Sans", Inter, system-ui, sans-serif; }
-    #root[data-static-docs] * { box-sizing: border-box; }
+    #root[data-static-docs] *, #root[data-static-docs] *::before, #root[data-static-docs] *::after { box-sizing: border-box; margin: 0; }
     #root[data-static-docs] a { color: #2527ca; text-underline-offset: .2em; }
     #root[data-static-docs] .component-static-skip { position: fixed; z-index: 100; top: .5rem; left: .5rem; padding: .75rem 1rem; border-radius: .5rem; background: #fff; transform: translateY(calc(-100% - 1rem)); }
     #root[data-static-docs] .component-static-skip:focus { transform: translateY(0); }
-    #root[data-static-docs] > header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.3125rem; padding: 0 2rem; border-bottom: 1px solid #d8d8d8; }
-    #root[data-static-docs] > header nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: minmax(0, 1fr) 12rem; width: min(76rem, calc(100% - 3rem)); margin: 0 auto; }
-    #root[data-static-docs] main { min-width: 0; padding: 3rem; }
-    #root[data-static-docs] .component-static-toc { padding: 3rem 1rem; border-left: 1px solid #d8d8d8; }
+    #root[data-static-docs] > header { position: sticky; z-index: 20; top: 0; display: flex; align-items: center; justify-content: space-between; height: 4.25rem; max-width: 90rem; margin: 0 auto; padding: 1rem 5rem; border-bottom: 1px solid #d8d8d8; background: #fff; }
+    #root[data-static-docs] .component-static-header-right { display: flex; align-items: center; gap: 1.5rem; }
+    #root[data-static-docs] .docs-brand { display: flex; color: inherit; }
+    #root[data-static-docs] > header nav { display: flex; gap: 1.5rem; }
+    #root[data-static-docs] > header nav a { color: #545454; font-size: .875rem; font-weight: 500; text-decoration: none; }
+    #root[data-static-docs] > header nav a[aria-current] { color: inherit; }
+    #root[data-static-docs] .component-static-theme { display: flex; align-items: center; gap: .125rem; height: 2.125rem; padding: .1875rem; border-radius: .375rem; background: #f8f8f8; }
+    #root[data-static-docs] .component-static-theme span { display: grid; place-items: center; width: 1.75rem; height: 1.75rem; font-size: .875rem; }
+    #root[data-static-docs] .component-static-theme span:first-child { background: #141414; color: #fff; border-radius: .25rem; }
+    #root[data-static-docs] .component-static-layout { display: grid; grid-template-columns: 15.5rem minmax(0, 1fr) 11.5rem; width: 100%; max-width: 90rem; margin: 1rem auto; }
+    #root[data-static-docs] .component-static-left { padding: 1rem 1rem 1rem 5rem; }
+    #root[data-static-docs] .component-static-left nav { position: sticky; top: 6rem; max-height: calc(100vh - 6rem); overflow-y: auto; }
+    #root[data-static-docs] .component-static-nav-group { margin-bottom: .75rem; }
+    #root[data-static-docs] .component-static-nav-group p { font-size: .75rem; font-weight: 600; margin-bottom: .125rem; }
+    #root[data-static-docs] .component-static-nav-group a { display: flex; align-items: center; min-height: 2rem; padding: .25rem .5rem; font-size: .75rem; line-height: 1.35; text-decoration: none; color: #545454; border-left: 2px solid transparent; }
+    #root[data-static-docs] .component-static-nav-group a[aria-current] { border-color: #2f31fc; color: #1b1d97; background: #eeeeff; }
+    #root[data-static-docs] .component-static-browse { display: none; border-bottom: 1px solid #d8d8d8; background: #f5f5f5; }
+    #root[data-static-docs] .component-static-browse summary { padding: .75rem 1.5rem; font-size: .8125rem; line-height: 17px; font-weight: 600; cursor: pointer; }
+    #root[data-static-docs] .component-static-browse nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1rem; padding: 1rem 1.5rem; }
+    #root[data-static-docs] main { min-width: 0; background: #f8f8f8; border-radius: 2rem; padding: clamp(1rem, 3vw, 2rem); }
+    #root[data-static-docs] .component-static-content { width: 100%; max-width: 62rem; margin: 0 auto; }
+    #root[data-static-docs] .component-static-compact { display: none; margin-top: 1.5rem; }
+    #root[data-static-docs] .component-static-compact > p { margin-bottom: .5rem; font-size: .8125rem; font-weight: 700; }
+    #root[data-static-docs] .component-static-compact > div { display: grid; gap: .25rem; }
+    #root[data-static-docs] .component-static-compact a { padding: .25rem 0 .25rem .5rem; border-left: 2px solid #d8d8d8; color: #545454; font-size: .6875rem; line-height: 1.35; text-decoration: none; }
+    #root[data-static-docs] .component-static-toc { padding: 1rem; font-size: .6875rem; }
     #root[data-static-docs] .component-static-toc nav { position: sticky; top: 6rem; display: grid; gap: .5rem; }
     #root[data-static-docs] .component-static-intro { padding-bottom: 2.5rem; }
-    #root[data-static-docs] .component-static-eyebrow { color: #2f31fc; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-    #root[data-static-docs] h1 { margin: .5rem 0; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1; }
+    #root[data-static-docs] .component-static-eyebrow { margin-bottom: .5rem; color: #1b1d97; font-size: .6875rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    #root[data-static-docs] h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+    #root[data-static-docs] .component-static-intro > p:not(.component-static-eyebrow) { max-width: 48rem; margin-top: .75rem; color: #545454; font-size: 1rem; line-height: 1.65; }
     #root[data-static-docs] section { margin-top: 2.5rem; scroll-margin-top: 5.8125rem; }
     #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
     #root[data-static-docs] article { min-width: 0; padding: 1rem; border: 1px solid #d8d8d8; border-radius: .75rem; }
@@ -1436,15 +1658,22 @@ const staticDocsCss = `
     html.dark #root[data-static-docs] > header, html.dark #root[data-static-docs] .component-static-toc { border-color: #333; }
     html.dark #root[data-static-docs] article { border-color: #454545; background: #292929; }
     html.dark #root[data-static-docs] pre { background: #191919; }
-    @media (max-width: 64rem) { #root[data-static-docs] .component-static-layout { display: block; } #root[data-static-docs] .component-static-toc { display: none; } }
-    @media (max-width: 46rem) { #root[data-static-docs] > header { align-items: flex-start; flex-direction: column; padding: 1rem 1.5rem; } #root[data-static-docs] main { padding: 2rem 1.5rem; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
+    html.dark #root[data-static-docs] > header { background: #0f0f0f; }
+    html.dark #root[data-static-docs] main, html.dark #root[data-static-docs] .component-static-browse, html.dark #root[data-static-docs] .component-static-compact, html.dark #root[data-static-docs] .component-static-theme { background: #191919; border-color: #333; }
+    html.dark #root[data-static-docs] .component-static-theme span:first-child { background: transparent; color: inherit; }
+    html.dark #root[data-static-docs] .component-static-theme span:last-child { background: #f7f7f7; color: #141414; border-radius: .25rem; }
+    html.dark #root[data-static-docs] .component-static-intro > p:not(.component-static-eyebrow), html.dark #root[data-static-docs] .component-static-compact a, html.dark #root[data-static-docs] .component-static-nav-group a, html.dark #root[data-static-docs] > header nav a { color: #c4c4c4; }
+    @media (max-width: 1199.98px) { #root[data-static-docs] .component-static-layout { display: block; padding: 0 1rem; } #root[data-static-docs] .component-static-toc, #root[data-static-docs] .component-static-left { display: none; } #root[data-static-docs] .component-static-browse, #root[data-static-docs] .component-static-compact { display: block; } }
+    @media (max-width: 639.98px) { #root[data-static-docs] > header { padding: 1rem 1.25rem; } #root[data-static-docs] .component-static-header-right { gap: 1rem; } #root[data-static-docs] > header nav a:first-child { display: none; } #root[data-static-docs] .component-static-intents, #root[data-static-docs] .component-static-grid { grid-template-columns: 1fr; } }
   `
 
-function renderComponentHtml(route, model) {
+function renderStaticDocsPage({ route, model, modelElementId, mainHtml }) {
   const canonical = `https://marwes.io${route.path}`
   const onThisPage = model.sections
     .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
     .join("")
+  const inlineNavigation = `<nav class="component-static-compact" aria-label="On this page (compact)"><p>On this page</p><div>${onThisPage}</div></nav>`
+  const contentHtml = mainHtml.replace("</header>", `${inlineNavigation}</header>`)
 
   return `<!doctype html>
 <html lang="en">
@@ -1456,100 +1685,139 @@ function renderComponentHtml(route, model) {
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="${canonical}" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/docs/docs-static.css" />
     <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
     <style>${staticDocsCss}</style>
   </head>
   <body style="margin:0">
     <div id="root" data-static-docs>
       <a class="component-static-skip" href="#main-content">Skip to main content</a>
-      ${renderNavigation()}
+      ${renderNavigation(route.path)}
       <div class="component-static-layout">
-        <main id="main-content">${renderComponentStaticBody(model)}</main>
+        <aside class="component-static-left" aria-label="Documentation navigation"><nav>${renderDocsNavigationLinks(route.path)}</nav></aside>
+        <main id="main-content"><div class="component-static-content">${contentHtml}</div></main>
         <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong>${onThisPage}</nav></aside>
       </div>
     </div>
-    <script id="component-docs-model" type="application/json">${serializeEmbeddedJson(model)}</script>
+    <script id="${modelElementId}" type="application/json">${serializeEmbeddedJson(model)}</script>
     <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
   </body>
 </html>
 `
+}
+
+function renderComponentHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "component-docs-model",
+    mainHtml: renderComponentStaticBody(model),
+  })
 }
 
 function renderGetStartedHtml(route, model) {
-  const canonical = `https://marwes.io${route.path}`
-  const onThisPage = model.sections
-    .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
-    .join("")
-
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${escapeHtml(route.title)} — Marwes UI</title>
-    <meta name="description" content="${escapeHtml(route.description)}" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <link rel="canonical" href="${canonical}" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
-    <style>${staticDocsCss}</style>
-  </head>
-  <body style="margin:0">
-    <div id="root" data-static-docs>
-      <a class="component-static-skip" href="#main-content">Skip to main content</a>
-      ${renderNavigation()}
-      <div class="component-static-layout">
-        <main id="main-content">${renderGetStartedStaticBody(model)}</main>
-        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong>${onThisPage}</nav></aside>
-      </div>
-    </div>
-    <script id="get-started-model" type="application/json">${serializeEmbeddedJson(model)}</script>
-    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
-  </body>
-</html>
-`
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "get-started-model",
+    mainHtml: renderGetStartedStaticBody(model),
+  })
 }
 
 function renderIntroductionHtml(route, model) {
-  const canonical = `https://marwes.io${route.path}`
-  const onThisPage = model.sections
-    .map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`)
-    .join("")
-
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${escapeHtml(route.title)} — Marwes UI</title>
-    <meta name="description" content="${escapeHtml(route.description)}" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
-    <link rel="canonical" href="${canonical}" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <script>(()=>{let mode="light";try{mode=localStorage.getItem("marwes-site-theme")==="dark"?"dark":"light"}catch{}document.documentElement.dataset.marwesMode=mode;document.documentElement.classList.add(mode);document.documentElement.style.colorScheme=mode})()</script>
-    <style>${staticDocsCss}</style>
-  </head>
-  <body style="margin:0">
-    <div id="root" data-static-docs>
-      <a class="component-static-skip" href="#main-content">Skip to main content</a>
-      ${renderNavigation()}
-      <div class="component-static-layout">
-        <main id="main-content">${renderIntroductionStaticBody(model)}</main>
-        <aside class="component-static-toc"><nav aria-label="On this page"><strong>On this page</strong>${onThisPage}</nav></aside>
-      </div>
-    </div>
-    <script id="introduction-model" type="application/json">${serializeEmbeddedJson(model)}</script>
-    <script type="module" src="/src/docs/components/docs-page-main.tsx"></script>
-  </body>
-</html>
-`
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "introduction-model",
+    mainHtml: renderIntroductionStaticBody(model),
+  })
 }
 
-function renderHtml(route, componentPageModels, getStartedPageModels, introductionPageModel) {
+function renderCatalogHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "catalog-model",
+    mainHtml: renderCatalogStaticBody(model),
+  })
+}
+
+function renderThemingHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "theming-model",
+    mainHtml: renderThemingStaticBody(model),
+  })
+}
+
+function renderAccessibilityHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "accessibility-model",
+    mainHtml: renderAccessibilityStaticBody(model),
+  })
+}
+
+function renderTroubleshootingHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "troubleshooting-model",
+    mainHtml: renderTroubleshootingStaticBody(model),
+  })
+}
+
+function renderCompatibilityHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "compatibility-model",
+    mainHtml: renderCompatibilityStaticBody(model),
+  })
+}
+
+function renderAiHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "ai-model",
+    mainHtml: renderAiStaticBody(model),
+  })
+}
+
+function renderContributingHtml(route, model) {
+  return renderStaticDocsPage({
+    route,
+    model,
+    modelElementId: "contributing-model",
+    mainHtml: renderContributingStaticBody(model),
+  })
+}
+
+const singlePageRenderers = {
+  introduction: renderIntroductionHtml,
+  catalog: renderCatalogHtml,
+  theming: renderThemingHtml,
+  accessibility: renderAccessibilityHtml,
+  troubleshooting: renderTroubleshootingHtml,
+  compatibility: renderCompatibilityHtml,
+  ai: renderAiHtml,
+  contributing: renderContributingHtml,
+}
+
+function renderHtml(route, componentPageModels, getStartedPageModels, singlePageModels) {
   const componentModel = route.family ? componentPageModels.get(route.family.family) : undefined
   if (componentModel) return renderComponentHtml(route, componentModel)
 
-  if (route.path === "/docs/introduction/") return renderIntroductionHtml(route, introductionPageModel)
+  const singlePageEntry = Object.entries(singlePageRoutePaths).find(
+    ([, path]) => path === route.path,
+  )
+  if (singlePageEntry) {
+    const [key] = singlePageEntry
+    return singlePageRenderers[key](route, singlePageModels[key])
+  }
 
   const getStartedMatch = route.path.match(/^\/docs\/get-started\/([a-z]+)\/$/)
   const getStartedModel = getStartedMatch ? getStartedPageModels.get(getStartedMatch[1]) : undefined
@@ -1678,7 +1946,10 @@ const componentPageModels = new Map(
 )
 
 const getStartedPageModels = new Map(
-  Object.keys(frameworkPackages).map((framework) => [framework, buildGetStartedPageModel(framework)]),
+  Object.keys(frameworkPackages).map((framework) => [
+    framework,
+    buildGetStartedPageModel(framework),
+  ]),
 )
 const getStartedPageModelPaths = Object.fromEntries(
   Object.keys(frameworkPackages).map((framework) => [
@@ -1687,8 +1958,36 @@ const getStartedPageModelPaths = Object.fromEntries(
   ]),
 )
 
-const introductionPageModel = buildIntroductionPageModel()
-const introductionPageModelPath = path.join(appRoot, "src/docs/generated", "introduction-page.json")
+const singlePageModels = {
+  introduction: buildIntroductionPageModel(),
+  catalog: buildCatalogPageModel(families),
+  theming: buildThemingPageModel(),
+  accessibility: buildAccessibilityPageModel(),
+  troubleshooting: buildTroubleshootingPageModel(),
+  compatibility: buildCompatibilityPageModel(),
+  ai: buildAiPageModel(),
+  contributing: buildContributingPageModel(),
+}
+const singlePageModelPaths = {
+  introduction: path.join(appRoot, "src/docs/generated", "introduction-page.json"),
+  catalog: path.join(appRoot, "src/docs/generated", "catalog-page.json"),
+  theming: path.join(appRoot, "src/docs/generated", "theming-page.json"),
+  accessibility: path.join(appRoot, "src/docs/generated", "accessibility-page.json"),
+  troubleshooting: path.join(appRoot, "src/docs/generated", "troubleshooting-page.json"),
+  compatibility: path.join(appRoot, "src/docs/generated", "compatibility-page.json"),
+  ai: path.join(appRoot, "src/docs/generated", "ai-page.json"),
+  contributing: path.join(appRoot, "src/docs/generated", "contributing-page.json"),
+}
+const singlePageRoutePaths = {
+  introduction: "/docs/introduction/",
+  catalog: "/docs/components/",
+  theming: "/docs/theming/",
+  accessibility: "/docs/accessibility/",
+  troubleshooting: "/docs/troubleshooting/",
+  compatibility: "/docs/compatibility/",
+  ai: "/docs/ai/",
+  contributing: "/docs/contributing/",
+}
 
 const routes = [
   ...staticRoutes.map(([routePath, title, description]) => ({
@@ -1722,7 +2021,12 @@ const manifest = {
       ...(getStartedMatch && getStartedPageModels.has(getStartedMatch[1])
         ? { renderer: "get-started" }
         : {}),
-      ...(route.path === "/docs/introduction/" ? { renderer: "introduction" } : {}),
+      ...(() => {
+        const singlePageEntry = Object.entries(singlePageRoutePaths).find(
+          ([, path]) => path === route.path,
+        )
+        return singlePageEntry ? { renderer: singlePageEntry[0] } : {}
+      })(),
       ...(routeFamilies ? { familyCount: routeFamilies.length } : {}),
     }
   }),
@@ -1743,11 +2047,15 @@ for (const [framework, model] of getStartedPageModels) {
     failures,
   )
 }
-await assertOrWrite(
-  introductionPageModelPath,
-  `${JSON.stringify(introductionPageModel, null, 2)}\n`,
-  failures,
-)
+for (const [key, model] of Object.entries(singlePageModels)) {
+  const filePath = singlePageModelPaths[key]
+  const content = execFileSync(
+    path.join(repoRoot, "node_modules/.bin/biome"),
+    ["format", "--stdin-file-path", filePath],
+    { input: `${JSON.stringify(model, null, 2)}\n`, encoding: "utf8", cwd: repoRoot },
+  )
+  await assertOrWrite(filePath, content, failures)
+}
 
 const expectedHtmlPaths = new Set()
 for (const route of routes) {
@@ -1756,7 +2064,7 @@ for (const route of routes) {
   expectedHtmlPaths.add(filePath)
   await assertOrWrite(
     filePath,
-    renderHtml(route, componentPageModels, getStartedPageModels, introductionPageModel),
+    renderHtml(route, componentPageModels, getStartedPageModels, singlePageModels),
     failures,
   )
 }

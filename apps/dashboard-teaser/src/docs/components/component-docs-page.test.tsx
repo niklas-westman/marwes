@@ -66,9 +66,10 @@ describe("InputDocsApp", () => {
       }),
     ).toHaveTextContent("What this family solves")
     expect(
-      within(
-        screen.getByRole("navigation", { name: "On this page (compact)", hidden: true }),
-      ).getByRole("link", { current: "location", hidden: true }),
+      within(screen.getByLabelText("On this page (compact)")).getByRole("link", {
+        current: "location",
+        hidden: true,
+      }),
     ).toHaveTextContent("What this family solves")
     expect(screen.getByRole("heading", { name: "Recommended public components" })).toBeVisible()
     const publicApi = screen.getByLabelText("Selected framework public API inventory")
@@ -80,6 +81,18 @@ describe("InputDocsApp", () => {
         .join(", "),
     )
     expect(publicApi).toHaveTextContent("@marwes-ui/react")
+  })
+
+  it("places compact page navigation after the intro without a disclosure toggle", () => {
+    render(<InputDocsApp />)
+    const navigation = screen.getByLabelText("On this page (compact)")
+    const hero = screen.getByRole("heading", { level: 1, name: "Input" }).closest("header")
+    expect(navigation.parentElement).toBe(hero)
+    expect(navigation.previousElementSibling?.tagName).toBe("P")
+    expect(navigation.closest("details")).toBeNull()
+    expect(within(navigation).getAllByRole("link", { hidden: true })).toHaveLength(
+      inputDocsModel.sections.length,
+    )
   })
 
   it("updates the scroll indicator immediately when a page link is selected", async () => {
@@ -112,14 +125,24 @@ describe("InputDocsApp", () => {
     expect(screen.getByRole("tabpanel")).toHaveTextContent("@marwes-ui/svelte")
   })
 
-  it("exposes the responsive menu with an accessible expanded state", async () => {
+  it("provides a native Browse docs disclosure with every component family", async () => {
     const user = userEvent.setup()
     render(<InputDocsApp />)
 
-    const openButton = screen.getByTitle("Open documentation menu")
-    expect(openButton).toHaveAttribute("aria-expanded", "false")
-    await user.click(openButton)
-    expect(screen.getByTitle("Close documentation menu")).toHaveAttribute("aria-expanded", "true")
+    const summary = screen.getByText("Browse docs")
+    const disclosure = summary.closest("details")
+    expect(disclosure).not.toHaveAttribute("open")
+    await user.click(summary)
+    expect(disclosure).toHaveAttribute("open")
+    const navigation = screen.getByLabelText("Browse documentation")
+    expect(
+      within(navigation).getByRole("link", { name: "Progress bar", hidden: true }),
+    ).toHaveAttribute("href", "/docs/components/progress-bar/")
+    expect(
+      within(navigation).getByRole("link", { name: "AI and agents", hidden: true }),
+    ).toBeInTheDocument()
+    expect(within(navigation).getAllByRole("link", { hidden: true })).toHaveLength(40)
+    expect(screen.queryByTitle("Open documentation menu")).not.toBeInTheDocument()
   })
 
   it("uses the prepaint theme as the first provider mode", () => {

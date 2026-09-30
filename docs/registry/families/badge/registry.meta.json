@@ -6,7 +6,7 @@
   "summary": "Canonical compact-status family with a raw Badge atom, a BadgeGroup molecule, and thin purpose-badge wrappers for status, priority, and notification contexts.",
   "philosophy": [
     "Teach purpose badges first when the meaning is known and keep raw Badge as the deliberate primitive and escape hatch.",
-    "Keep canonical badge semantics in core so React and Vue emit the same data-component, data-purpose, and data-variant contract.",
+    "Keep canonical badge semantics in core so React, Vue, and Svelte emit the same data-component, data-purpose, and data-variant contract.",
     "Keep BadgeGroup structural and labeled rather than turning it into an interactive filter-chip or token-input system.",
     "Keep the shipped variant set honest to code and docs even though the current Figma page still shows an extra brand row that Marwes does not ship."
   ],
@@ -14,7 +14,7 @@
     "useWhen": [
       "The UI needs a compact, non-interactive status label, priority marker, or notification count with stable semantics.",
       "The product flow maps clearly to StatusBadge, PriorityBadge, or NotificationBadge and benefits from canonical purpose metadata.",
-      "The team wants grouped badge presentation to stay aligned across React and Vue through BadgeGroup and one shared contract file."
+      "The team wants grouped badge presentation to stay aligned across React, Vue, and Svelte through BadgeGroup and one shared contract."
     ],
     "avoidWhen": [
       "The surface is really an interactive chip, filter token, dismissible tag, or pill button rather than a passive badge.",
@@ -61,6 +61,14 @@
         "apps/storybook-vue/src/stories/badge/status-badge.stories.ts",
         "apps/storybook-vue/src/stories/badge/priority-badge.stories.ts",
         "apps/storybook-vue/src/stories/badge/notification-badge.stories.ts"
+      ],
+      "svelte": [
+        "apps/storybook-svelte/src/stories/badge/Introduction.mdx",
+        "apps/storybook-svelte/src/stories/badge/badge.stories.ts",
+        "apps/storybook-svelte/src/stories/badge/badge-group.stories.ts",
+        "apps/storybook-svelte/src/stories/badge/status-badge.stories.ts",
+        "apps/storybook-svelte/src/stories/badge/priority-badge.stories.ts",
+        "apps/storybook-svelte/src/stories/badge/notification-badge.stories.ts"
       ]
     },
     "preferredStates": [

@@ -4,8 +4,7 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Pagination
 
-Marwes provides `Pagination` for navigating finite page sets while keeping page
-windowing, ellipses, and active-page semantics consistent across frameworks.
+Marwes provides the public `PaginationField` for navigating finite page sets while keeping labels, helper text, windowing, ellipses, and active-page semantics consistent across frameworks. The raw `Pagination` story is internal implementation evidence.
 
 ## When to use
 
@@ -22,13 +21,12 @@ windowing, ellipses, and active-page semantics consistent across frameworks.
 ## Usage
 
 ```tsx
-import { Pagination } from "@marwes-ui/react"
+import { PaginationField } from "@marwes-ui/react"
 
-<Pagination
-  page={page}
-  pageCount={10}
-  onPageChange={setPage}
-  siblingCount={2}
+<PaginationField
+  label="Search results"
+  description="Page through your filtered results."
+  pagination={{ page, pageCount: 10, onPageChange: setPage, siblingCount: 2 }}
 />
 ```
 

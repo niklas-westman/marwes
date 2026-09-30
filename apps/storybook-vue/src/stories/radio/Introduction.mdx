@@ -5,9 +5,7 @@ import { radioPurposeComponentReference, radioWhyPurposeComponents } from "@marw
 
 # Radio Components
 
-Marwes provides a radio system with three layers:
-**purpose components** for common patterns, **RadioGroupField** for custom option lists,
-and the raw **Radio** atom for advanced control.
+Marwes consumers use **purpose components** for common patterns and **RadioGroupField** for custom option lists. The raw **Radio** atom is internal implementation evidence.
 
 ## Recommended: Purpose Components
 
@@ -93,35 +91,4 @@ const method = ref("standard")
 
 ## Low-level: Radio Atom
 
-Use the raw `Radio` atom when you need fully custom layout:
-
-```vue
-<script setup lang="ts">
-import { ref } from "vue"
-import { Radio } from "@marwes-ui/vue"
-
-const selected = ref("a")
-const options = [
-  { value: "a", label: "Option A" },
-  { value: "b", label: "Option B" },
-]
-</script>
-
-<template>
-  <div role="radiogroup" aria-label="Preference">
-    <label
-      v-for="option in options"
-      :key="option.value"
-      style="display: flex; gap: 8px;"
-    >
-      <Radio
-        name="preference"
-        :value="option.value"
-        :checked="selected === option.value"
-        @checked-change="(checked) => checked && (selected = option.value)"
-      />
-      {{ option.label }}
-    </label>
-  </div>
-</template>
-```
+`Radio` is not exported from `@marwes-ui/vue` and must not be deep-imported. `RadioGroupField` is the public escape hatch for custom option sets and supplies group labeling, descriptions, errors, and state wiring.

@@ -14,7 +14,7 @@ import {
   SectionDescription,
   SectionHeading,
 } from "./docs-page-typography"
-import { DocsShell, siteHref } from "./docs-shell"
+import { siteHref } from "./docs-shell"
 import { FrameworkCodeExample } from "./framework-code-example"
 
 const IntentGrid = styled.section`
@@ -208,7 +208,7 @@ function ComponentDocsPage({
   Showcase?: ComponentType
 }): JSX.Element {
   return (
-    <DocsShell currentPath={`/docs/components/${model.family}/`} sections={model.sections}>
+    <>
       <Hero>
         <Eyebrow>Marwes documentation</Eyebrow>
         <PageTitle>{model.title}</PageTitle>
@@ -338,9 +338,11 @@ function ComponentDocsPage({
 
       <PageFooter>
         <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")}>Browse all components</a>
+        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
+          Browse all components
+        </a>
       </PageFooter>
-    </DocsShell>
+    </>
   )
 }
 

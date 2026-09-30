@@ -18,5 +18,8 @@ describe("Svelte button introduction docs", () => {
     ]) {
       expect(introDoc).toContain(value)
     }
+
+    expect(introDoc).toContain("Do not rely on an `ariaLabel` placed on a nested `Icon`")
+    expect(introDoc).toContain('<IconButton icon="x" label="Close" />')
   })
 })

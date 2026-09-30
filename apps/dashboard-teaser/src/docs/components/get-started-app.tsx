@@ -1,4 +1,5 @@
 import { DocsPageShellRoot } from "./docs-page-shell-root"
+import { DocsShell } from "./docs-shell"
 import type { GetStartedPageModel } from "./get-started-model"
 import { GetStartedPage } from "./get-started-page"
 
@@ -38,7 +39,9 @@ function readEmbeddedGetStartedPageModel(documentRoot: Document = document): Get
 function GetStartedApp({ model }: { model: GetStartedPageModel }): JSX.Element {
   return (
     <DocsPageShellRoot>
-      <GetStartedPage model={model} />
+      <DocsShell currentPath={`/docs/get-started/${model.framework}/`} sections={model.sections}>
+        <GetStartedPage model={model} />
+      </DocsShell>
     </DocsPageShellRoot>
   )
 }

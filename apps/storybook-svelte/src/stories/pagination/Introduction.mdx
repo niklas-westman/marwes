@@ -4,13 +4,24 @@ import { Meta } from "@storybook/addon-docs/blocks"
 
 # Pagination
 
-Marwes provides `Pagination` for navigating finite page sets while keeping page
-windowing, ellipses, and active-page semantics consistent across frameworks.
+Marwes provides the public `PaginationField` for navigating finite page sets while keeping labels, helper text, windowing, ellipses, and active-page semantics consistent. The raw `Pagination` story is internal implementation evidence.
+
+```svelte
+<script lang="ts">
+  import { PaginationField } from "@marwes-ui/svelte"
+  let page = $state(1)
+</script>
+
+<PaginationField
+  label="Search results"
+  description="Page through your filtered results."
+  pagination={{ pageCount: 10, page, onpagechange: (value) => page = value }}
+/>
+```
 
 ## Component Reference
 
-Use `bind:page` in Svelte for two-way page state, or pass `defaultPage` for an
-uncontrolled starting page.
+Pass `page` and `onpagechange` through the nested `pagination` prop, or use `defaultPage` for an uncontrolled starting page. This is the public equivalent of `bind:page` on the internal atom.
 
 Use `showFirstLast` for large ranges, `getItemAriaLabel` for localized control
 labels, and the default adaptive behavior for narrow containers. Use

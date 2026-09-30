@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename)
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  staticDirs: [{ from: "../public", to: "/" }],
   addons: [
     "@chromatic-com/storybook",
     "@storybook/addon-a11y",

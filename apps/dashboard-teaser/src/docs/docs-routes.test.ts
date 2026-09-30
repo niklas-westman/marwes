@@ -1,7 +1,10 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
+import { JSDOM } from "jsdom"
 
 import { describe, expect, it } from "vitest"
+
+import navigation from "./components/docs-navigation.json"
 
 type DocsManifest = {
   familyCount: number
@@ -76,10 +79,61 @@ describe("static consumer documentation routes", () => {
   it("keeps the catalog content present before JavaScript runs", async () => {
     const html = await readFile(path.join(appRoot, "docs/components/index.html"), "utf8")
 
-    expect(html.match(/data-component-card/g)).toHaveLength(31)
+    expect(html.match(/component-static-card/g)).toHaveLength(31)
     expect(html).toContain("PaginationField")
     expect(html).toContain("InputField")
-    expect(html).toContain("data-component-search")
+    expect(html).toContain('id="component-search"')
+    expect(html).toContain('id="catalog-model" type="application/json"')
+  })
+
+  it("keeps the complete mobile docs navigation available without JavaScript", async () => {
+    const html = await readFile(path.join(appRoot, "docs/get-started/react/index.html"), "utf8")
+    const document = new JSDOM(html).window.document
+    const browse = document.querySelector(".component-static-browse")
+    if (!browse) throw new Error("Missing static mobile documentation navigation")
+    const expectedPaths = [
+      ...navigation.documentationLinks.map(({ path }) => path),
+      ...navigation.componentGroups.flatMap(({ items }) =>
+        items.map((item) => `/docs/components/${item.toLowerCase().replaceAll(" ", "-")}/`),
+      ),
+    ]
+
+    expect(browse?.querySelector("summary")?.textContent).toBe("Browse docs")
+    expect([...browse.querySelectorAll("a")].map((link) => link.getAttribute("href"))).toEqual(
+      expectedPaths,
+    )
+    expect(document.querySelector('[data-site-header] svg[aria-label="Marwes"]')).not.toBeNull()
+    expect(document.querySelector('link[rel="stylesheet"]')?.getAttribute("href")).toBe(
+      "/src/docs/docs-static.css",
+    )
+  })
+
+  it("renders expanded page contents after the static intro on every shared-shell route", async () => {
+    const manifest = await readManifest()
+    for (const route of manifest.routes) {
+      const html = await readFile(path.join(appRoot, route.path, "index.html"), "utf8")
+      const document = new JSDOM(html).window.document
+      if (!document.querySelector("[data-static-docs]")) continue
+      const navigation = document.querySelector(".component-static-compact")
+      expect(navigation?.tagName).toBe("NAV")
+      expect(navigation?.parentElement?.className).toBe("component-static-intro")
+      expect(navigation?.previousElementSibling?.tagName).toBe("P")
+      expect(navigation?.closest("details")).toBeNull()
+      expect(navigation?.querySelectorAll("a").length).toBeGreaterThan(0)
+    }
+  })
+
+  it("preserves the styled navigation on the static integration guides", async () => {
+    for (const framework of ["next", "nuxt", "sveltekit"]) {
+      const html = await readFile(
+        path.join(appRoot, `docs/integrations/${framework}/index.html`),
+        "utf8",
+      )
+      const document = new JSDOM(html).window.document
+      expect(document.querySelector(".docs-header > .docs-brand")?.textContent).toBe("Marwes UI")
+      expect(document.querySelector(".component-static-browse")).toBeNull()
+      expect(document.querySelector('link[href="/src/docs/docs.css"]')).not.toBeNull()
+    }
   })
 
   it("keeps canonical component pages complete before JavaScript runs", async () => {

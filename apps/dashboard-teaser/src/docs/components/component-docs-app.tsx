@@ -7,6 +7,7 @@ import type {
 } from "./component-docs-model"
 import { ComponentDocsPage } from "./component-docs-page"
 import { DocsPageShellRoot, getInitialThemeMode } from "./docs-page-shell-root"
+import { DocsShell } from "./docs-shell"
 import { getFamilyShowcase } from "./family-showcases"
 
 interface LegacyFrameworkDocsEntry extends Omit<FrameworkDocsEntry, "exports"> {
@@ -79,7 +80,9 @@ function ComponentDocsApp({
 
   return (
     <DocsPageShellRoot>
-      <ComponentDocsPage model={model} Showcase={ResolvedShowcase} />
+      <DocsShell currentPath={`/docs/components/${model.family}/`} sections={model.sections}>
+        <ComponentDocsPage model={model} Showcase={ResolvedShowcase} />
+      </DocsShell>
     </DocsPageShellRoot>
   )
 }

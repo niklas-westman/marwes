@@ -1,5 +1,6 @@
 export { ButtonAction, ButtonSize, ButtonVariant } from "./button-types"
 export type {
+  AccessibleButtonName,
   ButtonA11yProps,
   ButtonLoadingOptions,
   ButtonOptions,

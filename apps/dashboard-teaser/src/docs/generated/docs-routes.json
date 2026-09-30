@@ -35,19 +35,22 @@
       "kind": "guide",
       "path": "/docs/components/",
       "title": "Component catalog",
+      "renderer": "catalog",
       "familyCount": 31
     },
     {
       "description": "Wrap once, provide a theme, and brand every Marwes component.",
       "kind": "guide",
       "path": "/docs/theming/",
-      "title": "Theming"
+      "title": "Theming",
+      "renderer": "theming"
     },
     {
       "description": "Understand the accessibility contract shared by Marwes components.",
       "kind": "guide",
       "path": "/docs/accessibility/",
-      "title": "Accessibility"
+      "title": "Accessibility",
+      "renderer": "accessibility"
     },
     {
       "description": "Use Marwes with Next.js while preserving SSR-safe theme behavior.",
@@ -71,25 +74,29 @@
       "description": "Supported frameworks, runtimes, browsers, and package boundaries.",
       "kind": "guide",
       "path": "/docs/compatibility/",
-      "title": "Compatibility"
+      "title": "Compatibility",
+      "renderer": "compatibility"
     },
     {
       "description": "Diagnose missing styles, provider wiring, imports, SSR, fonts, and partial CLI setup.",
       "kind": "guide",
       "path": "/docs/troubleshooting/",
-      "title": "Troubleshooting"
+      "title": "Troubleshooting",
+      "renderer": "troubleshooting"
     },
     {
       "description": "Give coding agents canonical, machine-readable Marwes documentation.",
       "kind": "guide",
       "path": "/docs/ai/",
-      "title": "AI and agent usage"
+      "title": "AI and agent usage",
+      "renderer": "ai"
     },
     {
       "description": "Contribute to Marwes without confusing internal atoms with its public consumer API.",
       "kind": "guide",
       "path": "/docs/contributing/",
-      "title": "Contributing"
+      "title": "Contributing",
+      "renderer": "contributing"
     },
     {
       "description": "Grouped disclosure family with a low-level accordion component, a canonical AccordionField path, and thin purpose-accordion wrappers. Public imports, usage guidance, accessibility requirements, and framework references.",

@@ -1,17 +1,10 @@
-import { MarwesProvider, ThemeMode, useThemeMode } from "@marwes-ui/react"
+import { MarwesProvider, useThemeMode } from "@marwes-ui/react"
 import type { ReactNode } from "react"
 import { useEffect, useLayoutEffect } from "react"
 import { ThemeProvider as StyledThemeProvider } from "styled-components"
 
 import { GlobalStyle } from "../../theme/global-style"
-
-function getInitialThemeMode(): ThemeMode {
-  if (typeof document === "undefined") return ThemeMode.light
-  const root = document.documentElement
-  return root.dataset.marwesMode === ThemeMode.dark || root.classList.contains("dark")
-    ? ThemeMode.dark
-    : ThemeMode.light
-}
+import { getInitialThemeMode, siteThemeStorageKey } from "../../theme/site-theme"
 
 function SiteThemeMetadata(): null {
   const { mode } = useThemeMode()
@@ -46,7 +39,7 @@ function DocsPageShellRoot({ children }: { children: ReactNode }): JSX.Element {
   return (
     <MarwesProvider
       defaultMode={getInitialThemeMode()}
-      storageKey="marwes-site-theme"
+      storageKey={siteThemeStorageKey}
       target="html"
       disableTransitionOnChange
     >

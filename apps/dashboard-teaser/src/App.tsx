@@ -12,6 +12,7 @@ import { HandoffCta } from "./sections/HandoffCta"
 import { HeroSection } from "./sections/HeroSection"
 import { resolveDashboardTheme } from "./sections/playground-theme-resolver"
 import { GlobalStyle } from "./theme/global-style"
+import { siteThemeStorageKey } from "./theme/site-theme"
 
 function App(): JSX.Element {
   const {
@@ -32,6 +33,10 @@ function App(): JSX.Element {
     <FrameworkPreferenceProvider>
       <MarwesProvider
         theme={resolvedTheme.themeInput}
+        mode={settings.mode}
+        storageKey={siteThemeStorageKey}
+        target="html"
+        disableTransitionOnChange
         fontLoading={{
           googleFamilies:
             resolvedTheme.font.source === "google-fonts" ? [resolvedTheme.font.family] : [],

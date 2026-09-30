@@ -1,6 +1,20 @@
 {
   "name": "create-marwes",
   "version": "0.1.0",
+  "description": "Create a new Vite application configured with the Marwes UI component library.",
+  "homepage": "https://marwes.io/docs/get-started/react/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niklas-westman/marwes.git",
+    "directory": "packages/create-marwes"
+  },
+  "bugs": {
+    "url": "https://github.com/niklas-westman/marwes/issues"
+  },
+  "keywords": ["marwes", "vite", "scaffold", "design-system", "components"],
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -32,6 +46,6 @@
     "rimraf": "6.1.2",
     "tsup": "8.5.1",
     "typescript": "5.9.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.11"
   }
 }
