@@ -5,7 +5,6 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
@@ -111,13 +110,6 @@ function CompatibilityPage({ model }: { model: CompatibilityPageModel }): JSX.El
         </RequirementList>
         <SectionDescription>{model.footnote}</SectionDescription>
       </Section>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

@@ -4,13 +4,11 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
   SectionHeading,
 } from "./docs-page-typography"
-import { siteHref } from "./docs-shell"
 import type { ThemingPageModel } from "./theming-model"
 
 function ThemingPage({ model }: { model: ThemingPageModel }): JSX.Element {
@@ -32,13 +30,6 @@ function ThemingPage({ model }: { model: ThemingPageModel }): JSX.Element {
         <strong>{model.calloutTitle}</strong>
         {model.calloutBody}
       </Callout>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

@@ -4,13 +4,11 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
   SectionHeading,
 } from "./docs-page-typography"
-import { siteHref } from "./docs-shell"
 
 function ContributingPage({ model }: { model: ContributingPageModel }): JSX.Element {
   return (
@@ -30,13 +28,6 @@ function ContributingPage({ model }: { model: ContributingPageModel }): JSX.Elem
           <a href={model.externalLink.href}>{model.externalLink.label}</a>
         </SectionDescription>
       </Section>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

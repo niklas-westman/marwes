@@ -95,6 +95,17 @@ describe("InputDocsApp", () => {
     )
   })
 
+  it("renders one shared footer outside the page content panel", () => {
+    render(<InputDocsApp />)
+    const footer = screen.getByRole("contentinfo")
+    expect(footer.closest("main")).toBeNull()
+    expect(screen.getAllByText("Marwes — /mɑːr.wɛz/")).toHaveLength(1)
+    expect(within(footer).getByRole("link", { name: "Browse all components" })).toHaveAttribute(
+      "href",
+      "/docs/components/",
+    )
+  })
+
   it("updates the scroll indicator immediately when a page link is selected", async () => {
     const user = userEvent.setup()
     render(<InputDocsApp />)

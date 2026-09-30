@@ -1,16 +1,7 @@
 import styled from "styled-components"
 
 import { DocsCodeBlock } from "./docs-code-block"
-import {
-  Eyebrow,
-  Hero,
-  Lead,
-  PageFooter,
-  PageTitle,
-  Section,
-  SectionHeading,
-} from "./docs-page-typography"
-import { siteHref } from "./docs-shell"
+import { Eyebrow, Hero, Lead, PageTitle, Section, SectionHeading } from "./docs-page-typography"
 import type { TroubleshootingPageModel } from "./troubleshooting-model"
 
 const IssueGrid = styled.div`
@@ -64,13 +55,6 @@ function TroubleshootingPage({ model }: { model: TroubleshootingPageModel }): JS
         </IssueGrid>
         <DocsCodeBlock code={model.code.content} label="Doctor build check" />
       </Section>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

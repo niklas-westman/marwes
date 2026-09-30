@@ -83,7 +83,6 @@ const PageFooter = styled.footer`
   gap: ${({ theme }) => theme.spacing.sp16};
   margin-top: ${({ theme }) => theme.spacing.sp64};
   padding-top: ${({ theme }) => theme.spacing.sp24};
-  border-top: 0.0625rem solid ${({ theme }) => theme.color.borderLow};
   color: ${({ theme }) => theme.color.textMuted};
   font-size: 0.75rem;
 

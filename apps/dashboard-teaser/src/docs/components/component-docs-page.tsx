@@ -8,7 +8,6 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
@@ -335,13 +334,6 @@ function ComponentDocsPage({
           ))}
         </ResourceGrid>
       </Section>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

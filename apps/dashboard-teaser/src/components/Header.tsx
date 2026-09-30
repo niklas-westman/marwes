@@ -16,7 +16,6 @@ const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: ${({ theme }) => theme.spacing.sp16} ${({ theme }) => theme.spacing.sp80};
-  border-bottom: 0.0625rem solid ${({ theme }) => theme.color.borderLow};
   background: color-mix(in srgb, ${({ theme }) => theme.color.background} 92%, transparent);
   backdrop-filter: blur(1rem);
 
@@ -58,6 +57,10 @@ const PrimaryNav = styled.nav`
   a:hover,
   a[aria-current="page"] {
     color: ${({ theme }) => theme.color.text};
+  }
+
+  a[aria-current="page"] {
+    font-weight: 700;
   }
 
   ${({ theme }) => theme.media.mobileAndBelow} {

@@ -4,7 +4,6 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
@@ -82,13 +81,6 @@ function IntroductionPage({ model }: { model: IntroductionPageModel }): JSX.Elem
           ))}
         </LinkGrid>
       </Section>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

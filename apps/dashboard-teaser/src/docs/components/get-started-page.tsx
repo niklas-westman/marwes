@@ -4,13 +4,11 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
   SectionHeading,
 } from "./docs-page-typography"
-import { siteHref } from "./docs-shell"
 import type { GetStartedPageModel } from "./get-started-model"
 
 const frameworkTitleByFramework: Record<GetStartedPageModel["framework"], string> = {
@@ -48,13 +46,6 @@ function GetStartedPage({ model }: { model: GetStartedPageModel }): JSX.Element 
         Install <code>{model.packageName}</code>, render <code>MarwesProvider</code> once at the
         application boundary, and import components only from the package root.
       </Callout>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

@@ -5,13 +5,11 @@ import {
   Eyebrow,
   Hero,
   Lead,
-  PageFooter,
   PageTitle,
   Section,
   SectionDescription,
   SectionHeading,
 } from "./docs-page-typography"
-import { siteHref } from "./docs-shell"
 
 const ResourceList = styled.ul`
   display: grid;
@@ -52,13 +50,6 @@ function AiPage({ model }: { model: AiPageModel }): JSX.Element {
         </ResourceList>
         <SectionDescription>{model.footnote}</SectionDescription>
       </Section>
-
-      <PageFooter>
-        <span>Marwes — /mɑːr.wɛz/</span>
-        <a href={siteHref("/docs/components/")} data-docs-soft-nav>
-          Browse all components
-        </a>
-      </PageFooter>
     </>
   )
 }

@@ -8,6 +8,7 @@ import { Header } from "../../components/Header"
 import type { DocsSection } from "./component-docs-model"
 import { DocsInlineNavigationContext } from "./docs-inline-navigation"
 import navigation from "./docs-navigation.json"
+import { PageFooter } from "./docs-page-typography"
 import { docsScrollOffset, useDocsScrollspy } from "./use-docs-scrollspy"
 
 const { componentGroups, documentationLinks } = navigation
@@ -160,6 +161,19 @@ const RightRail = styled.aside`
 
   ${({ theme }) => theme.media.desktopAndBelow} {
     display: none;
+  }
+`
+
+const FooterContainer = styled.div`
+  width: 100%;
+  max-width: ${({ theme }) => theme.breakpoint.wideDesktop}px;
+  margin: 0 auto;
+  padding: 0 ${({ theme }) => theme.spacing.sp80}
+    ${({ theme }) => theme.spacing.sp24};
+
+  ${({ theme }) => theme.media.mobileAndBelow} {
+    padding: 0 ${({ theme }) => `calc(${theme.spacing.sp16} + ${theme.spacing.sp4})`}
+      ${({ theme }) => theme.spacing.sp24};
   }
 `
 
@@ -363,6 +377,14 @@ function DocsShell({ currentPath, sections, children }: DocsShellProps): JSX.Ele
           </OnThisPage>
         </RightRail>
       </DocsGrid>
+      <FooterContainer>
+        <PageFooter>
+          <span>Marwes — /mɑːr.wɛz/</span>
+          <a href={siteHref("/docs/components/")} data-docs-soft-nav>
+            Browse all components
+          </a>
+        </PageFooter>
+      </FooterContainer>
     </Page>
   )
 }
