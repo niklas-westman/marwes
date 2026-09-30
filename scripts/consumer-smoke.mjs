@@ -5,6 +5,7 @@ import { cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/pr
 import { tmpdir } from "node:os"
 import { dirname, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import { createPackedOverrides, readPackedManifest } from "./consumer-smoke-packages.mjs"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const fixtureRoot = join(repoRoot, "scripts", "fixtures", "consumer-smoke")
@@ -205,6 +206,14 @@ async function main() {
     for (const packageName of packageNames) {
       tarballs.set(packageName, await packPackage(packageName, tarballDirectory))
     }
+    const packedPackages = new Map(
+      [...tarballs].map(([name, tarball]) => [
+        name,
+        { tarball, manifest: readPackedManifest(tarball) },
+      ]),
+    )
+    // Validate published dependency versions before redirecting unpublished siblings locally.
+    const packedOverrides = createPackedOverrides(packedPackages)
 
     const packageJsonPath = join(appDirectory, "package.json")
     const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8"))
@@ -219,10 +228,19 @@ async function main() {
       ...packageJson.devDependencies,
       ...config.devDependencies,
     }
+    packageJson.pnpm = { ...packageJson.pnpm, overrides: packedOverrides }
     await writeFile(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`)
 
     await assertConsumerImports(appDirectory, config.adapter)
     run("pnpm", ["install", "--ignore-workspace", "--no-frozen-lockfile"], { cwd: appDirectory })
+    for (const [name, { manifest }] of packedPackages) {
+      const installed = JSON.parse(
+        await readFile(join(appDirectory, "node_modules", name, "package.json"), "utf8"),
+      )
+      if (installed.name !== name || installed.version !== manifest.version) {
+        throw new Error(`Installed ${name} does not match its packed version ${manifest.version}`)
+      }
+    }
     run("pnpm", config.typecheck, { cwd: appDirectory })
     run("pnpm", ["test"], { cwd: appDirectory })
     run("pnpm", ["build"], { cwd: appDirectory })

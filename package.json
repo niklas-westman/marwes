@@ -68,7 +68,7 @@
     "consumer-docs:generate": "node ./scripts/generate-public-api.mjs && node ./scripts/generate-consumer-docs.mjs && node ./scripts/generate-dashboard-docs.mjs && node ./scripts/generate-ai-docs.mjs",
     "consumer-docs:check": "node ./scripts/generate-consumer-docs.mjs --check && node ./scripts/generate-dashboard-docs.mjs --check",
     "docs:consumer-check": "node ./scripts/check-consumer-surface.mjs",
-    "consumer:smoke": "node ./scripts/consumer-smoke.mjs",
+    "consumer:smoke": "node --test ./scripts/test-consumer-smoke-packages.mjs && node ./scripts/consumer-smoke.mjs",
     "site:crawlability:check": "node ./scripts/check-site-crawlability.mjs",
     "site:crawlability:build-check": "pnpm --filter ./apps/dashboard-teaser --filter ./apps/storybook-react --filter ./apps/storybook-vue --filter ./apps/storybook-svelte build && pnpm site:crawlability:check",
     "site:smoke": "node ./scripts/smoke-site.mjs",
