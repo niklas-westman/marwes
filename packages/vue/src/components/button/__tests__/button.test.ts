@@ -227,16 +227,23 @@ describe("Vue adapter specifics: Button", () => {
     )
   })
 
-  it("requires an accessible name in IconButtonProps", () => {
-    // @ts-expect-error — icon-only buttons require label, ariaLabel, or ariaLabelledBy.
+  it("keeps unnamed IconButtonProps backward compatible at compile time", () => {
     const unnamedIconButton: IconButtonProps = { icon: "x" }
     expect(unnamedIconButton).toBeDefined()
+    const namedIconButtons: IconButtonProps[] = [
+      { icon: "x", label: "Close" },
+      { icon: "x", ariaLabel: "Close" },
+      { icon: "x", ariaLabelledBy: "close-label" },
+    ]
+    expect(namedIconButtons).toHaveLength(3)
   })
 
-  it("requires an accessible name at the Vue component call site", () => {
-    // @ts-expect-error — IconButton's public component props require an accessible name.
+  it("keeps unnamed IconButton backward compatible at the Vue component call site", () => {
     const unnamedIconButton = h(IconButton, { icon: "x" })
     expect(unnamedIconButton).toBeDefined()
+    expect(h(IconButton, { icon: "x", label: "Close" })).toBeDefined()
+    expect(h(IconButton, { icon: "x", ariaLabel: "Close" })).toBeDefined()
+    expect(h(IconButton, { icon: "x", ariaLabelledBy: "close-label" })).toBeDefined()
   })
 
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {

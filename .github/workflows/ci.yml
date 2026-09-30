@@ -75,6 +75,9 @@ jobs:
       - name: actionlint
         uses: devops-actions/actionlint@v0.1.10
 
+      - name: Release authentication contract
+        run: node --test scripts/test-release-workflow.mjs
+
   validate:
     name: validate / ${{ matrix.name }}
     runs-on: ubuntu-latest

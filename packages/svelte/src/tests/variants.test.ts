@@ -69,10 +69,15 @@ describe("Button purpose variants", () => {
     expect(btn?.getAttribute("aria-label")).toBe("Close")
   })
 
-  it("requires an accessible name in IconButtonProps", () => {
-    // @ts-expect-error — icon-only buttons require label, ariaLabel, or ariaLabelledBy.
+  it("keeps unnamed IconButtonProps backward compatible at compile time", () => {
     const unnamedIconButton: IconButtonProps = { icon: "x" }
     expect(unnamedIconButton).toBeDefined()
+    const namedIconButtons: IconButtonProps[] = [
+      { icon: "x", label: "Close" },
+      { icon: "x", ariaLabel: "Close" },
+      { icon: "x", ariaLabelledBy: "close-label" },
+    ]
+    expect(namedIconButtons).toHaveLength(3)
   })
 
   it("IconButton accepts an external accessible label", () => {

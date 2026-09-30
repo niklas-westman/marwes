@@ -206,10 +206,12 @@ describe("React adapter specifics: Button", () => {
     )
   })
 
-  it("requires an accessible name for IconButton at compile time", () => {
-    // @ts-expect-error — icon-only buttons require label, ariaLabel, or ariaLabelledBy.
+  it("keeps unnamed IconButton props backward compatible at compile time", () => {
     const unnamedIconButton = <IconButton icon="x" />
     expect(unnamedIconButton).toBeDefined()
+    expect(<IconButton icon="x" label="Close" />).toBeDefined()
+    expect(<IconButton icon="x" ariaLabel="Close" />).toBeDefined()
+    expect(<IconButton icon="x" ariaLabelledBy="close-label" />).toBeDefined()
   })
 
   it("keeps button interaction enabled when disableWhileLoading is false", async () => {

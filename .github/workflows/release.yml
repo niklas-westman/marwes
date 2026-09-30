@@ -40,33 +40,37 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      # Install Node.js with dependency caching (NO registry-url to avoid conflicts)
+      # npm exchanges the GitHub OIDC identity during publishing; no npm token is needed.
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
-          cache: pnpm
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Verify trusted publishing prerequisites
+        run: |
+          node --version
+          npm --version
+          pnpm --version
+          node <<'NODE'
+          const { execFileSync } = require("node:child_process")
+          const version = execFileSync("npm", ["--version"], { encoding: "utf8" }).trim()
+          const [major, minor, patch] = version.split(".").map(Number)
+          if (!(major > 11 || (major === 11 && (minor > 5 || (minor === 5 && patch >= 1))))) {
+            console.error(`::error::npm >= 11.5.1 is required for trusted publishing; found ${version}`)
+            process.exit(1)
+          }
+          NODE
 
       # Fail with clear setup guidance before npm or Changesets produce indirect auth errors
       - name: Validate release secrets
         env:
           CHANGESETS_PR_TOKEN: ${{ secrets.CHANGESETS_PR_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ -z "$CHANGESETS_PR_TOKEN" ]; then
             echo "::error::CHANGESETS_PR_TOKEN is required so generated release PRs trigger CI."
             exit 1
           fi
-
-          if [ -z "$NPM_TOKEN" ]; then
-            echo "::error::NPM_TOKEN is required to publish packages."
-            exit 1
-          fi
-
-      # Configure npm authentication manually
-      - name: Configure npm auth
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       # Install all project dependencies using exact versions from pnpm-lock.yaml
       - name: Install
@@ -79,10 +83,6 @@ jobs:
           name: dist
           path: packages
 
-      # Verify npm authentication works
-      - name: Verify npm auth
-        run: npm whoami
-
       # Create release PR or publish packages to npm using changesets
       - name: Create Release PR or Publish
         uses: changesets/action@v1
@@ -94,4 +94,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CHANGESETS_PR_TOKEN }}
           # Release PR pushes happen after CI already passed in this workflow.
           LEFTHOOK: 0
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

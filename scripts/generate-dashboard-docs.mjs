@@ -136,7 +136,7 @@ const buttonRecommendedComponents = [
   { name: "SubmitButton", description: "Form submission with locked action semantics" },
   { name: "DestructiveButton", description: "Destructive action with explicit intent" },
   { name: "LinkButton", description: "Button styling with honest link semantics" },
-  { name: "IconButton", description: "Compact icon action with a required accessible name" },
+  { name: "IconButton", description: "Compact icon action with explicit accessible naming" },
 ]
 
 const badgeRecommendedComponents = [

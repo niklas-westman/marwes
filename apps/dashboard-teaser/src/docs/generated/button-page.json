@@ -37,7 +37,7 @@
     },
     {
       "name": "IconButton",
-      "description": "Compact icon action with a required accessible name"
+      "description": "Compact icon action with explicit accessible naming"
     }
   ],
   "frameworks": [
