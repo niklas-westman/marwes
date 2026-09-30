@@ -1,5 +1,17 @@
 # @marwes-ui/core
 
+## 1.5.0
+
+### Minor Changes
+
+- [#44](https://github.com/niklas-westman/marwes/pull/44) [`6dbb453`](https://github.com/niklas-westman/marwes/commit/6dbb45356374cc50cb40204fd1dac5effc243b53) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Improve `IconButton` accessible-name support through `label`, `ariaLabel`, or `ariaLabelledBy`, align external-label behavior across adapters, and document the boundary between CSS-variable theme helpers and resolved `useTheme()` values. Preserve optional naming props for backward compatibility, keep the runtime warning for unnamed icon-only buttons, and export an opt-in `AccessibleButtonName` helper for consumers that want a stricter naming contract.
+
+### Patch Changes
+
+- [#44](https://github.com/niklas-westman/marwes/pull/44) [`6dbb453`](https://github.com/niklas-westman/marwes/commit/6dbb45356374cc50cb40204fd1dac5effc243b53) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Publish generated public component inventories, Field- and Purpose-first setup guidance, consistent package metadata, and framework-specific links to the canonical Marwes consumer documentation.
+
+- [#44](https://github.com/niklas-westman/marwes/pull/44) [`6dbb453`](https://github.com/niklas-westman/marwes/commit/6dbb45356374cc50cb40204fd1dac5effc243b53) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Restore density-aware spacing between AccordionField group labels and accordion items in React and Vue. Native fieldset legends do not receive the fieldset's grid gap; the shared preset now applies that spacing explicitly while preserving Svelte's existing grid-based label spacing.
+
 ## 1.4.1
 
 ### Patch Changes
