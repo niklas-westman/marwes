@@ -1,6 +1,6 @@
 {
   "name": "@marwes-ui/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Official Marwes installer and diagnostics CLI for React, Vue, and Svelte applications.",
   "homepage": "https://marwes.io/docs/troubleshooting/",
   "repository": {
