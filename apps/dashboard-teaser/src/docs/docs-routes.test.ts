@@ -120,6 +120,10 @@ describe("static consumer documentation routes", () => {
       expect(navigation?.previousElementSibling?.tagName).toBe("P")
       expect(navigation?.closest("details")).toBeNull()
       expect(navigation?.querySelectorAll("a").length).toBeGreaterThan(0)
+      const footer = document.querySelector(".component-static-footer")
+      expect(footer?.closest("main")).toBeNull()
+      expect(footer?.parentElement?.id).toBe("root")
+      expect(footer?.textContent).toContain("Marwes — /mɑːr.wɛz/")
     }
   })
 
