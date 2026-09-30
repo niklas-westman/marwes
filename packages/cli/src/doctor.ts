@@ -3,6 +3,7 @@ import { basename, extname, join } from "node:path"
 import type { CommandRunner } from "./command-runner"
 import { defaultCommandRunner } from "./command-runner"
 import { detectPackageManager, formatShellCommand, runScriptCommand } from "./package-manager"
+import { hasConfiguredProvider } from "./provider-detection"
 import { type Adapter, type PackageManager, adapters, getAdapterRecipe, isAdapter } from "./recipes"
 
 export type DoctorLevel = "pass" | "warn" | "fail"
@@ -114,38 +115,11 @@ function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 }
 
-function importedProviderNames(source: string, packageName: string): string[] {
-  const names: string[] = []
-  const importPattern = new RegExp(
-    `import\\s*\\{([^}]*)\\}\\s*from\\s*["']${escapeRegExp(packageName)}["']`,
-    "g",
-  )
-
-  for (const match of source.matchAll(importPattern)) {
-    for (const binding of (match[1] ?? "").split(",")) {
-      const provider = binding.trim().match(/^MarwesProvider(?:\s+as\s+([A-Za-z_$][\w$]*))?$/)
-      if (provider) {
-        names.push(provider[1] ?? "MarwesProvider")
-      }
-    }
-  }
-
-  return names
-}
-
-function rendersComponent(source: string, componentName: string): boolean {
-  return new RegExp(`<\\s*${escapeRegExp(componentName)}(?:\\s|/?>)`).test(source)
-}
-
 function providerSetupFile(
   sources: readonly SourceFile[],
-  packageName: string,
+  adapter: Adapter,
 ): SourceFile | undefined {
-  return sources.find((file) =>
-    importedProviderNames(file.source, packageName).some((name) =>
-      rendersComponent(file.source, name),
-    ),
-  )
+  return sources.find((file) => hasConfiguredProvider(file.source, adapter))
 }
 
 function sourceContains(sources: readonly SourceFile[], needle: string): boolean {
@@ -194,7 +168,7 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
       }
     }
 
-    const providerFile = providerSetupFile(sources, recipe.packageName)
+    const providerFile = providerSetupFile(sources, adapter)
     const providerMentioned = sourceContains(sources, "MarwesProvider")
     items.push(
       providerFile
@@ -243,15 +217,18 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
 
   if (options.runBuild) {
     const packageManager = options.packageManager ?? (await detectPackageManager(cwd))
-    const scriptName = packageJson.scripts?.typecheck
-      ? "typecheck"
-      : packageJson.scripts?.build
-        ? "build"
-        : undefined
-
-    if (!scriptName) {
-      items.push({ level: "warn", message: "No typecheck or build script found to run." })
-    } else {
+    if (!packageJson.scripts?.build) {
+      items.push({
+        level: "fail",
+        message: "No build script found to run.",
+        fix: "Add a production build script to package.json, then rerun marwes doctor --run-build.",
+      })
+    }
+    const scripts = [
+      ...(packageJson.scripts?.typecheck ? ["typecheck"] : []),
+      ...(packageJson.scripts?.build ? ["build"] : []),
+    ]
+    for (const scriptName of scripts) {
       const command = runScriptCommand(packageManager, scriptName)
       write(`Running ${formatShellCommand(command)}`)
       const exitCode = await runner(command, { cwd })
@@ -263,6 +240,7 @@ export async function runDoctor(options: DoctorOptions = {}): Promise<DoctorResu
           ? { level: "pass", message: `${scriptName} completed successfully.` }
           : { level: "fail", message: `${scriptName} failed with exit code ${exitCode}.` },
       )
+      if (exitCode !== 0) break
     }
   }
 

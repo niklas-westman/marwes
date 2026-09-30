@@ -1,5 +1,6 @@
 import { access, readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
+import { hasConfiguredProvider } from "./provider-detection"
 import type { Adapter } from "./recipes"
 
 export type PatchResult = {
@@ -63,26 +64,6 @@ async function writeIfNeeded(path: string, source: string, dryRun: boolean): Pro
   return true
 }
 
-function hasConfiguredProvider(source: string, packageName: string): boolean {
-  const escapedPackage = packageName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  const importPattern = new RegExp(
-    `import\\s*\\{([^}]*)\\}\\s*from\\s*["']${escapedPackage}["']`,
-    "g",
-  )
-
-  for (const match of source.matchAll(importPattern)) {
-    for (const binding of (match[1] ?? "").split(",")) {
-      const provider = binding.trim().match(/^MarwesProvider(?:\s+as\s+([A-Za-z_$][\w$]*))?$/)
-      const localName = provider?.[1] ?? (provider ? "MarwesProvider" : undefined)
-      if (localName && new RegExp(`<\\s*${localName}(?:\\s|/?>)`).test(source)) {
-        return true
-      }
-    }
-  }
-
-  return false
-}
-
 async function patchReact(cwd: string, dryRun: boolean): Promise<PatchResult> {
   const candidates = ["src/main.tsx", "src/main.jsx"]
   let relativeFile: string | undefined
@@ -108,7 +89,7 @@ async function patchReact(cwd: string, dryRun: boolean): Promise<PatchResult> {
   const file = join(cwd, relativeFile)
   const source = await readFile(file, "utf8")
 
-  if (hasConfiguredProvider(source, "@marwes-ui/react")) {
+  if (hasConfiguredProvider(source, "react")) {
     return {
       adapter: "react",
       status: "already-configured",
@@ -193,7 +174,7 @@ async function patchVue(cwd: string, dryRun: boolean): Promise<PatchResult> {
   }
 
   const source = await readFile(file, "utf8")
-  if (hasConfiguredProvider(source, "@marwes-ui/vue")) {
+  if (hasConfiguredProvider(source, "vue")) {
     return {
       adapter: "vue",
       status: "already-configured",
@@ -302,7 +283,7 @@ async function patchSvelte(cwd: string, dryRun: boolean): Promise<PatchResult> {
   }
 
   const source = await readFile(file, "utf8")
-  if (hasConfiguredProvider(source, "@marwes-ui/svelte")) {
+  if (hasConfiguredProvider(source, "svelte")) {
     return {
       adapter: "svelte",
       status: "already-configured",

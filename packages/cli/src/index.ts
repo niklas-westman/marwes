@@ -82,7 +82,7 @@ Verify dependencies, adapter imports, provider rendering, and optional project c
 Options:
   --adapter <${supportedAdaptersLabel()}>  Framework adapter override
   --pm <${supportedPackageManagersLabel()}>       Package manager override
-  --run-build                       Run typecheck, or build when no typecheck exists
+  --run-build                       Run optional typecheck, then the required production build
   --help                            Show this help
 `)
 }

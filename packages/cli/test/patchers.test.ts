@@ -3,6 +3,7 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 import { patchProject } from "../src/patchers"
+import type { Adapter } from "../src/recipes"
 
 const tempDirs: string[] = []
 
@@ -18,6 +19,43 @@ afterEach(async () => {
 })
 
 describe("project patchers", () => {
+  it.each<[Adapter, string, string]>([
+    [
+      "react",
+      "src/main.tsx",
+      'import * as Marwes from "@marwes-ui/react"; render(<Marwes.MarwesProvider><App /></Marwes.MarwesProvider>)',
+    ],
+    [
+      "react",
+      "src/main.tsx",
+      'import { MarwesProvider } from "@marwes-ui/react"; import React from "react"; React.createElement(MarwesProvider, null)',
+    ],
+    [
+      "vue",
+      "src/App.vue",
+      '<script setup>import { MarwesProvider } from "@marwes-ui/vue"</script><template><marwes-provider><App /></marwes-provider></template>',
+    ],
+    [
+      "vue",
+      "src/App.vue",
+      '<script>import { MarwesProvider as Provider } from "@marwes-ui/vue"; import { h as render } from "vue"; export default { render: () => render(Provider, null) }</script>',
+    ],
+    [
+      "svelte",
+      "src/App.svelte",
+      '<script>import { MarwesProvider as Provider } from "@marwes-ui/svelte";</script><Provider><App /></Provider>',
+    ],
+  ])("leaves valid %s provider wiring untouched", async (adapter, relativeFile, source) => {
+    const cwd = await makeProject()
+    const file = join(cwd, relativeFile)
+    await writeFile(file, source)
+    await expect(patchProject(cwd, adapter, false)).resolves.toMatchObject({
+      status: "already-configured",
+      changed: false,
+    })
+    await expect(readFile(file, "utf8")).resolves.toBe(source)
+  })
+
   it("dry-runs the React Vite entrypoint patch without writing", async () => {
     const cwd = await makeProject()
     const file = join(cwd, "src/main.tsx")

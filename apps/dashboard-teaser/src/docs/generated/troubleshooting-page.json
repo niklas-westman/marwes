@@ -34,7 +34,7 @@
     },
     {
       "title": "Partial CLI setup",
-      "description": "Follow the printed provider example, then rerun pnpm dlx @marwes-ui/cli doctor --run-build. Exit code 2 means installation succeeded but manual wiring remains."
+      "description": "Follow the printed provider example, then rerun pnpm dlx @marwes-ui/cli doctor --run-build. An init result labelled manual-action-required uses exit code 2; command failures can also preserve an underlying exit code 2, so read the printed status."
     }
   ],
   "code": {

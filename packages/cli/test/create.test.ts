@@ -42,5 +42,8 @@ describe("create", () => {
     expect(result.exitCode).toBe(0)
     expect(packageJson.dependencies["@marwes-ui/react"]).toBe("latest")
     expect(output.join("\n")).toContain("Run pnpm install before starting the app")
+    expect(output.join("\n")).toContain("Marwes setup guidance:")
+    expect(output.join("\n")).toContain("Default preset CSS loads automatically")
+    expect(output.join("\n")).toContain("https://marwes.io/docs/theming/")
   })
 })

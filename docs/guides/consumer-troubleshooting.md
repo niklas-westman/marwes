@@ -66,10 +66,10 @@ Check [Consumer compatibility](../reference/compatibility.md), then align the ap
 
 ## `marwes init` reports partial setup
 
-Exit code `2` means the adapter installation succeeded but the CLI could not safely patch the provider into an unknown layout. Read the listed files that were inspected, apply the complete framework-specific provider example printed by the CLI, and rerun:
+When `init` prints `manual-action-required`, exit code `2` means provider wiring still needs attention. Read the listed files that were inspected, apply the complete framework-specific provider example printed by the CLI, and rerun:
 
 ```bash
 pnpm dlx @marwes-ui/cli doctor --run-build
 ```
 
-An installation or build failure uses the underlying non-zero error code and must be resolved before the setup is considered complete.
+An installation, typecheck, or build failure preserves the underlying non-zero error code, which can also be `2`. Read the printed failure status rather than treating every exit code `2` as successful installation. `doctor --run-build` runs typecheck when present and then requires a production build; a missing build script is a failure.

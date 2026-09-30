@@ -30,4 +30,6 @@ From the app root, run:
 pnpm dlx @marwes-ui/cli doctor --run-build
 ```
 
-A successful run confirms the adapter dependency, a rendered `MarwesProvider`, valid import boundaries, and the app's production build. Exit code `2` means installation completed but provider wiring still requires the manual action printed by the CLI.
+A successful run verifies adapter dependencies, recognised provider import/render syntax, and the app's production build after optional typecheck. Provider detection is a static source check, not proof that every component is wrapped at runtime. Import-boundary findings remain warnings and must be reviewed even when the command succeeds. A missing build script fails `--run-build` verification.
+
+When `init` or `create` prints `manual-action-required`, exit code `2` means provider wiring needs the printed manual step. Installation, typecheck, or build failures preserve their underlying non-zero code, which can also be `2`; read the printed outcome rather than the code alone.

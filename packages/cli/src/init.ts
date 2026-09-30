@@ -4,6 +4,7 @@ import { type DoctorResult, runDoctor } from "./doctor"
 import { detectPackageManager, formatShellCommand, installCommand } from "./package-manager"
 import { type PatchResult, patchProject } from "./patchers"
 import { type Adapter, type PackageManager, getAdapterRecipe } from "./recipes"
+import { setupGuidance } from "./setup-guidance"
 
 export type InitOptions = {
   adapter: Adapter
@@ -30,67 +31,8 @@ export type InitResult = {
   exitCode: number
 }
 
-function providerGuidance(adapter: Adapter): string[] {
-  const recipe = getAdapterRecipe(adapter)
-  const examples: Record<Adapter, string> = {
-    react: [
-      'import { createRoot } from "react-dom/client"',
-      'import { MarwesProvider } from "@marwes-ui/react"',
-      'import App from "./App"',
-      "",
-      'createRoot(document.getElementById("root")!).render(',
-      "  <MarwesProvider>",
-      "    <App />",
-      "  </MarwesProvider>,",
-      ")",
-    ].join("\n"),
-    vue: [
-      '<script setup lang="ts">',
-      'import { MarwesProvider } from "@marwes-ui/vue"',
-      "</script>",
-      "",
-      "<template>",
-      "  <MarwesProvider>",
-      "    <main>Your app</main>",
-      "  </MarwesProvider>",
-      "</template>",
-    ].join("\n"),
-    svelte: [
-      '<script lang="ts">',
-      '  import { MarwesProvider } from "@marwes-ui/svelte"',
-      "</script>",
-      "",
-      "<MarwesProvider>",
-      "  <main>Your app</main>",
-      "</MarwesProvider>",
-    ].join("\n"),
-  }
-
-  return [
-    `Manual follow-up: wrap the app root with ${recipe.providerImport} from ${recipe.packageName}.`,
-    "Automatic patching currently supports the standard Vite app layout.",
-    `Complete ${recipe.displayName} provider example:`,
-    examples[adapter],
-    `Setup guide: https://marwes.io/docs/get-started/${adapter}/`,
-  ]
-}
-
 function shouldPrintProviderGuidance(patch: PatchResult | undefined): boolean {
   return patch?.status === "manual-action-required"
-}
-
-function writeProviderGuidance(adapter: Adapter, write: (message: string) => void): void {
-  for (const line of providerGuidance(adapter)) {
-    write(line)
-  }
-}
-
-function writeAgenticBoundaryRules(adapter: Adapter, write: (message: string) => void): void {
-  const recipe = getAdapterRecipe(adapter)
-  write("Agentic rules:")
-  write(`- Import Marwes APIs only from ${recipe.packageName}.`)
-  write("- Do not install @marwes-ui/core or @marwes-ui/presets directly.")
-  write("- Do not add a separate Marwes stylesheet import.")
 }
 
 export async function runInit(options: InitOptions): Promise<InitResult> {
@@ -121,6 +63,10 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
   } else {
     exitCode = await runner(command, { cwd })
     if (exitCode !== 0) {
+      write("Marwes init status: failed.")
+      write(
+        `Marwes init failed: installation command exited with code ${exitCode}. Provider patching and doctor were not run.`,
+      )
       return {
         status: "failed",
         adapter: options.adapter,
@@ -146,10 +92,6 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
   }
 
   let doctor: DoctorResult | undefined
-  if (agentic) {
-    writeAgenticBoundaryRules(options.adapter, write)
-  }
-
   if (dryRun) {
     write(`[dry-run] marwes doctor --adapter ${options.adapter}`)
   } else {
@@ -181,17 +123,26 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
         : "complete"
 
   if (needsManualAction) {
-    writeProviderGuidance(options.adapter, write)
+    write(
+      `Manual follow-up: wrap the app root with ${recipe.providerImport} from ${recipe.packageName}.`,
+    )
+    write("Automatic patching currently supports the standard Vite app layout.")
+  }
+  if (agentic || needsManualAction || status === "complete") {
+    for (const line of setupGuidance(options.adapter, agentic || needsManualAction)) write(line)
   }
 
   exitCode =
     status === "manual-action-required" ? 2 : status === "failed" ? (doctor?.exitCode ?? 1) : 0
+  write(dryRun ? `[dry-run] Planned init status: ${status}.` : `Marwes init status: ${status}.`)
   write(
-    status === "complete"
-      ? "Marwes init complete."
-      : status === "manual-action-required"
-        ? "Marwes packages are installed, but provider wiring requires manual action."
-        : "Marwes init failed.",
+    dryRun
+      ? "[dry-run] Marwes init plan complete. No installation, file changes, or doctor checks performed."
+      : status === "complete"
+        ? "Marwes init complete."
+        : status === "manual-action-required"
+          ? "Marwes provider wiring requires manual action (exit code 2)."
+          : "Marwes init failed.",
   )
 
   return {

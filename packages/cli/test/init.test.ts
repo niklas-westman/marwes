@@ -1,9 +1,12 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
+import ts from "typescript"
 import { afterEach, describe, expect, it } from "vitest"
 import { runInit } from "../src/init"
 import type { ShellCommand } from "../src/package-manager"
+import { type Adapter, getAdapterRecipe } from "../src/recipes"
+import { setupGuidance } from "../src/setup-guidance"
 
 const tempDirs: string[] = []
 
@@ -19,6 +22,18 @@ async function writeReactProject(cwd: string, dependencies: Record<string, strin
   await writeFile(
     join(cwd, "src/main.tsx"),
     ['import App from "./App"', "", "createRoot(root).render(<App />)", ""].join("\n"),
+  )
+}
+
+async function writeAdapterProject(cwd: string, adapter: Adapter): Promise<void> {
+  const dependencies = Object.fromEntries(
+    getAdapterRecipe(adapter).installPackages.map((name) => [name, "latest"]),
+  )
+  if (adapter === "react") return writeReactProject(cwd, dependencies)
+  await writeFile(join(cwd, "package.json"), JSON.stringify({ dependencies }))
+  await writeFile(
+    join(cwd, adapter === "vue" ? "src/App.vue" : "src/App.svelte"),
+    adapter === "vue" ? "<template><main>Your app</main></template>" : "<main>Your app</main>",
   )
 }
 
@@ -103,6 +118,161 @@ describe("init", () => {
     expect(result.status).toBe("failed")
     expect(result.doctor).toBeUndefined()
     expect(output.join("\n")).not.toContain("Marwes doctor:")
+  })
+
+  it("labels install failure code 2 as failed, not manual provider wiring", async () => {
+    const cwd = await makeProject()
+    const output: string[] = []
+    const result = await runInit({
+      adapter: "react",
+      cwd,
+      runner: async () => 2,
+      write: (message) => output.push(message),
+    })
+    expect(result.status).toBe("failed")
+    expect(result.exitCode).toBe(2)
+    expect(result.doctor).toBeUndefined()
+    expect(output.join("\n")).toContain(
+      "Marwes init failed: installation command exited with code 2",
+    )
+    expect(output.join("\n")).toContain("Marwes init status: failed.")
+    expect(output.join("\n")).not.toContain("manual action")
+  })
+
+  for (const adapter of ["react", "vue", "svelte"] as const) {
+    for (const agentic of [false, true]) {
+      it(`prints ${agentic ? "full agentic" : "concise"} guidance after successful ${adapter} setup`, async () => {
+        const cwd = await makeProject()
+        await writeAdapterProject(cwd, adapter)
+        const output: string[] = []
+        const result = await runInit({
+          adapter,
+          cwd,
+          noInstall: true,
+          agentic,
+          write: (message) => output.push(message),
+        })
+        const text = output.join("\n")
+        expect(result.status).toBe("complete")
+        expect(text).toContain("Marwes init status: complete.")
+        expect(text).toContain(`Import Marwes APIs only from @marwes-ui/${adapter}.`)
+        expect(text).toContain("Default preset CSS loads automatically")
+        expect(text).toContain(
+          "Do not install or import @marwes-ui/core or @marwes-ui/presets directly",
+        )
+        expect(text).toContain("scoped to the provider and its descendants, not :root")
+        expect(text).toContain("CSS var(...) references, not concrete JavaScript values")
+        expect(text).toContain("useTheme() only in a child component below MarwesProvider")
+        expect(text).toContain("https://marwes.io/docs/theming/")
+        expect(text).toContain(
+          `https://marwes.io/docs/integrations/${{ react: "next", vue: "nuxt", svelte: "sveltekit" }[adapter]}/`,
+        )
+        expect(text.includes("Complete ")).toBe(agentic)
+        if (agentic) {
+          expect(text).toContain(
+            `import { MarwesProvider, type ThemeInput } from "@marwes-ui/${adapter}"`,
+          )
+          expect(text).toContain(
+            'const brandTheme = { color: { primary: "#2457FF" } } satisfies ThemeInput',
+          )
+          expect(text).toContain(adapter === "vue" ? ':theme="brandTheme"' : "theme={brandTheme}")
+          expect(text).toContain("https://marwes.io/llms.txt")
+          expect(text).toContain(`https://marwes.io/ai/${adapter}.md`)
+          expect(text).toContain("https://marwes.io/ai/v1/public-api.json")
+          expect(text).toContain(`import { PrimaryButton } from "@marwes-ui/${adapter}"`)
+          expect(text).toContain("not invented mw-* replacement classes")
+          expect(text).not.toContain("Manual follow-up")
+        }
+        if (adapter === "vue") expect(text).toContain("not a ref")
+        if (adapter === "svelte") expect(text).toContain("destructuring .theme takes a snapshot")
+      })
+    }
+
+    it(`prints full ${adapter} guidance when manual wiring is required`, async () => {
+      const cwd = await makeProject()
+      await writeAdapterProject(cwd, adapter)
+      const output: string[] = []
+      const result = await runInit({
+        adapter,
+        cwd,
+        noInstall: true,
+        noPatch: true,
+        write: (message) => output.push(message),
+      })
+      expect(result.status).toBe("manual-action-required")
+      expect(result.exitCode).toBe(2)
+      expect(output.join("\n")).toContain("Marwes init status: manual-action-required.")
+      expect(output.join("\n")).toContain(
+        `Complete ${getAdapterRecipe(adapter).displayName} provider example:`,
+      )
+      expect(output.join("\n")).toContain("satisfies ThemeInput")
+    })
+  }
+
+  it("reports dry-run plans without claiming installation or changing files", async () => {
+    const cwd = await makeProject()
+    await writeAdapterProject(cwd, "react")
+    const before = await readFile(join(cwd, "src/main.tsx"), "utf8")
+    const output: string[] = []
+    const result = await runInit({
+      adapter: "react",
+      cwd,
+      dryRun: true,
+      agentic: true,
+      runner: async () => {
+        throw new Error("dry-run must not execute commands")
+      },
+      write: (message) => output.push(message),
+    })
+    expect(result.exitCode).toBe(0)
+    expect(result.doctor).toBeUndefined()
+    expect(await readFile(join(cwd, "src/main.tsx"), "utf8")).toBe(before)
+    expect(output.join("\n")).toContain("No installation, file changes, or doctor checks performed")
+    expect(output.join("\n")).not.toContain("Marwes init complete.")
+    expect(output.join("\n")).not.toContain("Marwes init status:")
+    expect(output.join("\n")).toContain("[dry-run] Planned init status: complete.")
+    expect(output.join("\n")).toContain("satisfies ThemeInput")
+  })
+
+  it("typechecks printed theme declarations against every source adapter API", () => {
+    const repoRoot = new URL("../../../", import.meta.url).pathname
+    const config = ts.readConfigFile(join(repoRoot, "tsconfig.base.json"), ts.sys.readFile)
+    const options = {
+      ...ts.parseJsonConfigFileContent(config.config, ts.sys, repoRoot).options,
+      noEmit: true,
+    }
+    const sources = new Map<string, string>()
+    for (const adapter of ["react", "vue", "svelte"] as const) {
+      const lines = setupGuidance(adapter, true)
+      const example = lines[lines.findIndex((line) => line.startsWith("Complete ")) + 1] ?? ""
+      const script =
+        adapter === "react"
+          ? example.replace('import App from "./App"', "const App = () => null")
+          : (example.match(/<script[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? "")
+      sources.set(join(repoRoot, `packages/cli/test/printed-${adapter}.tsx`), script)
+    }
+    const host = ts.createCompilerHost(options)
+    const getSourceFile = host.getSourceFile.bind(host)
+    host.getSourceFile = (filename, languageVersion, ...rest) =>
+      sources.has(filename)
+        ? ts.createSourceFile(
+            filename,
+            sources.get(filename) ?? "",
+            languageVersion,
+            true,
+            ts.ScriptKind.TSX,
+          )
+        : getSourceFile(filename, languageVersion, ...rest)
+    const program = ts.createProgram([...sources.keys()], options, host)
+    const errors = [...sources.keys()].flatMap((filename) => {
+      const file = program.getSourceFile(filename)
+      return file
+        ? [...program.getSyntacticDiagnostics(file), ...program.getSemanticDiagnostics(file)]
+        : []
+    })
+    expect(errors.map((error) => ts.flattenDiagnosticMessageText(error.messageText, "\n"))).toEqual(
+      [],
+    )
   })
 
   it("returns the doctor failure code in agentic mode", async () => {
