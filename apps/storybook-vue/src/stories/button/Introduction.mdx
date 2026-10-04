@@ -244,6 +244,10 @@ The structured loading object supports:
 - `spinnerVariant` — defaults to `"classic"`
 - `loadingLabel` — replaces the visible label while loading
 
+Use `SpinnerVariants` from `@marwes-ui/core` for autocomplete when choosing
+`spinnerVariant`. Loading disables interaction by default; set `disableWhileLoading`
+to `false` only when repeated interaction is intentional.
+
 ### Non-blocking loading
 
 For refresh-style actions, keep the button interactive while still showing loading feedback:
@@ -390,7 +394,7 @@ Locks: `variant="neutral"`
 Locks: `variant="secondary"`, default chevron-down icon
 
 **`DestructiveButton`** — Destructive actions  
-Locks: `action="delete"`, `variant="primary"`, error styling, `as="button"`
+Locks: `action="delete"`, `variant="danger"`, `as="button"`
 
 **`LinkButton`** — Navigation links  
 Locks: `action="navigate"`, `variant="text"`, `as="a"`  
@@ -403,3 +407,17 @@ Locks: `action="cancel"`, `variant="neutral"`
 Locks: `variant="neutral"`, default refresh icon
 
 **Skipped until implemented** — `BackButton`, `NextButton`, `MessageButton`, `ShareButton`, `LoginButton`, `LogoutButton`, `HelpButton`, `SettingsButton`
+
+## Native form behavior
+
+`PrimaryButton`, `SecondaryButton`, and `TextButton` choose a visual style. They
+default to `type="button"`, so clicking them inside a form does not submit it.
+Set `type="submit"` to submit or `type="reset"` to restore the form's initial values.
+
+`SubmitButton` and `SaveButton` already submit through their fixed `action="submit"`.
+Form actions (`action="submit"` or `action="reset"`) take precedence over `type`.
+An explicit non-form action keeps its semantic metadata; otherwise `data-action`
+follows the resolved native type. Anchors ignore `type`.
+
+Use `PrimaryButton` with `type="submit"` when choosing visual emphasis, and
+`SubmitButton` when the component name should express a fixed submit purpose.

@@ -9,7 +9,7 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
 
   const size = opts.size ?? "md"
   const variant = opts.variant ?? "primary"
-  const action = opts.action ?? (tag === "button" ? "button" : "navigate")
+  const action = opts.action ?? (tag === "button" ? (a11y.type ?? "button") : "navigate")
   const hasAffordance = resolvedLoading.isLoading || Boolean(opts.iconLeft || opts.iconRight)
 
   return {

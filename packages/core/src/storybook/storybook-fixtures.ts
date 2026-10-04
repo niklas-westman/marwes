@@ -40,6 +40,12 @@ export const storybookButtonIconArgTypes = {
 export const storybookButtonGeneralArgTypes = {
   ...storybookButtonIconArgTypes,
   variant: storybookButtonVariantArgType,
+  type: {
+    control: "select",
+    options: ["button", "submit", "reset"],
+    description:
+      'Native form behavior; defaults to "button". Form actions (submit/reset) take precedence. Ignored for anchors.',
+  },
 } as const
 
 export const storybookIconButtonArgTypes = {
@@ -275,6 +281,8 @@ export const storybookSliderArgTypes = {
 } as const
 
 export const storybookDocsDescription = {
+  primaryButton:
+    'PrimaryButton controls visual emphasis and defaults to type="button". Set type="submit" for a form, or use SubmitButton for a fixed submit purpose.',
   linkButton:
     "LinkButton locks navigation semantics, renders as an anchor, and keeps the canonical text treatment. Use Button for intentional visual deviations.",
   destructiveButton:

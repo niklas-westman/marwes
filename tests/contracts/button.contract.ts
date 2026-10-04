@@ -10,6 +10,8 @@ import { describe, expect, it } from "vitest"
 export type ButtonContractHarness = {
   renderPrimary(args?: {
     text?: string
+    type?: "button" | "submit" | "reset"
+    ariaLabelledBy?: string
     disabled?: boolean
     loading?: boolean
     onClick?: () => void
@@ -37,9 +39,25 @@ export function runButtonContract(adapterName: string, h: ButtonContractHarness)
       })
 
       const button = h.getByRole("button", { name: /save/i })
+      expect(button).toHaveAttribute("type", "button")
       await h.click(button)
 
       expect(clicks).toBe(1)
+    })
+
+    it.each(["submit", "reset"] as const)("PrimaryButton supports native type=%s", async (type) => {
+      await h.renderPrimary({ text: "Form action", type })
+
+      const button = h.getByRole("button", { name: /form action/i })
+      expect(button).toHaveAttribute("type", type)
+      expect(button).toHaveAttribute("data-action", type)
+    })
+
+    it("forwards ariaLabelledBy through the variant wrapper", async () => {
+      await h.renderPrimary({ text: "Continue", ariaLabelledBy: "external-label" })
+
+      const button = h.getByRole("button", { name: /continue/i })
+      expect(button).toHaveAttribute("aria-labelledby", "external-label")
     })
 
     it("renders visible text inside the button label slot", async () => {

@@ -568,8 +568,15 @@ function collectAliasNames(variableEntry) {
   return [...aliases]
 }
 
-function cssVarForTokenName(tokenName) {
+function cssVarForTokenName(tokenName, componentTokenName) {
   const token = normalizeTokenName(tokenName)
+
+  // Figma's status-display warning outline is #B45309 in both modes,
+  // exposed by the accessible border role rather than the generic status border.
+  if (componentTokenName === "status-display/border" && token === "status/warning/border") {
+    return "--mw-color-status-warning-border-accessible"
+  }
+
   const statusMatch = token.match(/^status\/(success|warning|error|info)\/(.+)$/)
 
   if (statusMatch) {
@@ -607,7 +614,7 @@ function cssVarForTokenName(tokenName) {
     ["button/primary/label", "--mw-color-primary-label"],
     ["button/secondary/label", "--mw-color-secondary-label"],
     ["button/secondary/outline", "--mw-color-secondary-border"],
-    ["button/text/label", "--mw-color-primary-base"],
+    ["button/text/label", "--mw-color-text"],
   ])
 
   const buttonMapped = buttonMap.get(token)
@@ -714,7 +721,7 @@ function checkRuntimeTokenParity(target, registry) {
     const unsupportedAliases = []
 
     for (const alias of collectAliasNames(variable)) {
-      const expectedCssVar = cssVarForTokenName(alias)
+      const expectedCssVar = cssVarForTokenName(alias, variable.normalizedName)
       if (!expectedCssVar) {
         unsupportedAliases.push(alias)
         continue

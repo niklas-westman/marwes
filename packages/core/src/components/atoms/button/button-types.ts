@@ -109,6 +109,8 @@ export type AccessibleButtonName =
 export type ButtonOptions = {
   as?: "button" | "a"
   href?: string
+  /** Native form behavior. Defaults to "button"; submit/reset actions take precedence. Ignored for anchors. */
+  type?: "button" | "submit" | "reset"
 
   size?: ButtonSize
   variant?: ButtonVariant

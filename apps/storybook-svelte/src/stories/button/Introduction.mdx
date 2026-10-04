@@ -115,6 +115,10 @@ Use visual wrappers when you want a stable visual pattern without purpose semant
 <Button loading={{ isLoading: true, loadingLabel: "Saving…" }}>Save</Button>
 ```
 
+Use `SpinnerVariants` from `@marwes-ui/core` for autocomplete when choosing
+`spinnerVariant`. Loading disables interaction by default; set `disableWhileLoading`
+to `false` only when repeated interaction is intentional.
+
 ## Variant vs Action
 
 ### `variant` — Visual Style
@@ -176,3 +180,17 @@ Use visual wrappers when you want a stable visual pattern without purpose semant
 **`LinkButton`** — Navigation links (`action="navigate"`, `as="a"`)
 
 **`CloseButton`** / **`RefreshButton`** — Neutral utility actions
+
+## Native form behavior
+
+`PrimaryButton`, `SecondaryButton`, and `TextButton` choose a visual style. They
+default to `type="button"`, so clicking them inside a form does not submit it.
+Set `type="submit"` to submit or `type="reset"` to restore the form's initial values.
+
+`SubmitButton` and `SaveButton` already submit through their fixed `action="submit"`.
+Form actions (`action="submit"` or `action="reset"`) take precedence over `type`.
+An explicit non-form action keeps its semantic metadata; otherwise `data-action`
+follows the resolved native type. Anchors ignore `type`.
+
+Use `PrimaryButton` with `type="submit"` when choosing visual emphasis, and
+`SubmitButton` when the component name should express a fixed submit purpose.

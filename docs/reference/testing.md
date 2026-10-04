@@ -108,6 +108,14 @@ pnpm cohesive:check:all            # static Figma/Reflection contract check for 
 pnpm cohesive:ci                   # CI visual gate: contract check + portal screenshots + review
 ```
 
+Security validation tests the locally patched `braces@3.0.3` used by Changesets
+before auditing dependencies. The patch rejects brace and parenthesis nesting
+beyond 256 levels to mitigate [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm).
+The raw audit still reports this version, so the validator permits only this
+advisory after the regression tests pass. Remove both the patch and its advisory
+exception when a patched upstream release is available. The existing esbuild
+development-tool exceptions remain separate.
+
 ### Changed-scope behavior
 
 `pnpm check:changed` is optimized for daily work on long-lived branches. By default it validates the local worktree; when the worktree is clean, it validates the latest commit. Use `--branch` or `--base <ref>` when you intentionally want the full branch range.
@@ -207,6 +215,15 @@ known Figma-PNG versus Chromium text rasterization differences after
 `pnpm cohesive:check -- --family button` proves frame size, baseline PNG size,
 source nodes, component bounds, and variables. Do not use `reflection update`
 for these Figma truth baselines; the PNGs must be exported from Figma.
+
+On 2026-10-04, Niklas accepted a release exception for `button.text` in the
+native button form-type and warning-badge update. Each adapter reports 47 passing
+comparisons and one text-button failure: the saved Figma baseline is blue
+(`#2F31FC`), while the stored Figma token and runtime use dark text (`#141414`).
+The warning badges pass in both themes across React, Vue, and Svelte. This
+exception leaves checks and thresholds intact and covers only that comparison
+for this update. Export a fresh Figma reference and rerun Reflection to close it;
+other release gates still apply.
 
 Pre-push runs `pnpm cohesive:check:all` as a fast static gate. Pull request CI
 runs `pnpm cohesive:ci`, which requires committed baseline receipts, runs the

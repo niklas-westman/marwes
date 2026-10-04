@@ -26,6 +26,7 @@ export type ButtonProps = ButtonOptions & {
 const buttonPropKeys = [
   "as",
   "href",
+  "type",
   "size",
   "variant",
   "disabled",
