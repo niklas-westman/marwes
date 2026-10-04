@@ -1,6 +1,7 @@
 ---
 "@marwes-ui/core": patch
 "@marwes-ui/react": patch
+"@marwes-ui/presets": patch
 "@marwes-ui/vue": patch
 "@marwes-ui/svelte": patch
 ---
