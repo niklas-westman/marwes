@@ -1,5 +1,16 @@
 # create-marwes
 
+## 0.3.0
+
+### Minor Changes
+
+- [#46](https://github.com/niklas-westman/marwes/pull/46) [`8b7d824`](https://github.com/niklas-westman/marwes/commit/8b7d824cfa0f8190952a45ed48030b1bac90b19d) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Republish `create-marwes` now that npm trusted publishing (OIDC) is configured for it. No functional changes.
+
+### Patch Changes
+
+- Updated dependencies [[`8b7d824`](https://github.com/niklas-westman/marwes/commit/8b7d824cfa0f8190952a45ed48030b1bac90b19d)]:
+  - @marwes-ui/cli@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "create-marwes",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Create a new Vite application configured with the Marwes UI component library.",
   "homepage": "https://marwes.io/docs/get-started/react/",
   "repository": {
