@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import "@testing-library/jest-dom/vitest"
-import { cleanup, fireEvent, render, screen } from "@testing-library/react"
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
@@ -25,26 +25,31 @@ describe("dashboard custom builder flow", () => {
     const user = userEvent.setup()
     render(<App />)
 
-    await user.click(screen.getByRole("button", { name: "Read more about theming" }))
-    expect(screen.getByRole("dialog", { name: "Building your own theme" })).toBeInTheDocument()
+    const themingButton = screen.getByRole("button", { name: "Read more about theming" })
+    await user.click(themingButton)
+    const handoffModal = screen.getByRole("dialog", { name: "Building your own theme" })
+    expect(handoffModal).toBeInTheDocument()
 
-    await user.click(screen.getByRole("button", { name: "Open the Custom preset" }))
+    await user.click(within(handoffModal).getByRole("button", { name: "Open the Custom preset" }))
 
     expect(
       screen.queryByRole("dialog", { name: "Building your own theme" }),
     ).not.toBeInTheDocument()
-    expect(await screen.findByRole("dialog", { name: /theme builder/i })).toBeInTheDocument()
+    const builder = await screen.findByRole("dialog", { name: /theme builder/i })
+    expect(builder).toBeInTheDocument()
     expect(screen.getByRole("radio", { name: /Custom/i })).toBeChecked()
     expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalled()
 
-    const primaryInput = screen.getByLabelText("Primary")
+    const primaryInput = within(builder).getByLabelText("Primary")
     fireEvent.input(primaryInput, { target: { value: "#123456" } })
     expect(primaryInput).toHaveValue("#123456")
-    await user.click(screen.getByRole("button", { name: "Confirm" }))
+    await user.click(within(builder).getByRole("button", { name: "Confirm" }))
 
-    await user.click(screen.getByRole("button", { name: "Read more about theming" }))
-    await user.click(screen.getByRole("button", { name: "Open the Custom preset" }))
+    await user.click(themingButton)
+    const reopenedModal = screen.getByRole("dialog", { name: "Building your own theme" })
+    await user.click(within(reopenedModal).getByRole("button", { name: "Open the Custom preset" }))
 
-    expect(await screen.findByLabelText("Primary")).toHaveValue("#123456")
+    const reopenedBuilder = await screen.findByRole("dialog", { name: /theme builder/i })
+    expect(within(reopenedBuilder).getByLabelText("Primary")).toHaveValue("#123456")
   })
 })
