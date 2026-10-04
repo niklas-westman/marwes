@@ -14,6 +14,7 @@ export type IconButtonProps = Omit<
 const iconButtonPropKeys = [
   "as",
   "href",
+  "type",
   "size",
   "variant",
   "disabled",

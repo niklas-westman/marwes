@@ -1454,6 +1454,7 @@
             "apps/storybook-svelte/src/stories/button/Introduction.mdx",
             "apps/storybook-svelte/src/stories/button/link-button.stories.ts",
             "apps/storybook-svelte/src/stories/button/primary-button.stories.ts",
+            "apps/storybook-svelte/src/stories/button/PrimaryButtonForm.svelte",
             "apps/storybook-svelte/src/stories/button/refresh-button.stories.ts",
             "apps/storybook-svelte/src/stories/button/save-button.stories.ts",
             "apps/storybook-svelte/src/stories/button/search-button.stories.ts",

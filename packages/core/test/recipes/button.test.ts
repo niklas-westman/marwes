@@ -7,6 +7,38 @@ import { describe, expect, it, vi } from "vitest"
 import { SpinnerVariants, createButtonRecipe } from "../../src/components/atoms"
 
 describe("createButtonRecipe", () => {
+  it.each(["button", "submit", "reset"] as const)("supports native type=%s", (type) => {
+    const kit = createButtonRecipe({ type })
+
+    expect(kit.a11y.type).toBe(type)
+    expect(kit.dataAttributes?.["data-action"]).toBe(type)
+  })
+
+  it.each(["submit", "reset"] as const)(
+    "preserves the %s action over a conflicting type",
+    (action) => {
+      const kit = createButtonRecipe({ action, type: "button" })
+
+      expect(kit.a11y.type).toBe(action)
+      expect(kit.dataAttributes?.["data-action"]).toBe(action)
+    },
+  )
+
+  it("keeps explicit purpose metadata when a native type is provided", () => {
+    const kit = createButtonRecipe({ action: "create", type: "submit" })
+
+    expect(kit.a11y.type).toBe("submit")
+    expect(kit.dataAttributes?.["data-action"]).toBe("create")
+  })
+
+  it("ignores native type for navigation links", () => {
+    const kit = createButtonRecipe({ href: "/docs", type: "submit" })
+
+    expect(kit.tag).toBe("a")
+    expect(kit.a11y.type).toBeUndefined()
+    expect(kit.dataAttributes?.["data-action"]).toBe("navigate")
+  })
+
   it("builds button render kit with default metadata", () => {
     const kit = createButtonRecipe({
       as: "button",

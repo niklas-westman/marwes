@@ -13,6 +13,7 @@ type PurposeButtonForbiddenProp = "variant" | "action" | "as"
 const buttonPropKeys = [
   "as",
   "href",
+  "type",
   "size",
   "variant",
   "disabled",
@@ -21,6 +22,7 @@ const buttonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "ariaLabelledBy",
   "label",
   "hasVisibleText",
   "ariaExpanded",
@@ -39,6 +41,7 @@ const buttonPropKeys = [
 const purposeButtonPropKeys = [
   "as",
   "href",
+  "type",
   "size",
   "disabled",
   "loading",
@@ -46,6 +49,7 @@ const purposeButtonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "ariaLabelledBy",
   "label",
   "hasVisibleText",
   "ariaExpanded",
@@ -61,6 +65,7 @@ const purposeButtonPropKeys = [
 ] as const
 
 const fixedModePurposeButtonPropKeys = [
+  "type",
   "size",
   "disabled",
   "loading",
@@ -68,6 +73,7 @@ const fixedModePurposeButtonPropKeys = [
   "toggle",
   "pressed",
   "ariaLabel",
+  "ariaLabelledBy",
   "label",
   "hasVisibleText",
   "ariaExpanded",

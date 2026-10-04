@@ -142,6 +142,21 @@
           "sp-4"
         ]
       },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1606:14324",
+        "sourceNodeId": "1362:7509",
+        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes?node-id=1362-7509",
+        "outputFrameName": "reflection/button/text/light",
+        "selector": {
+          "strategy": "directNode"
+        },
+        "framing": {
+          "background": "#ffffff",
+          "align": "center",
+          "padding": 0
+        }
+      },
       "comparison": {
         "threshold": {
           "maxDiffPixels": 75,

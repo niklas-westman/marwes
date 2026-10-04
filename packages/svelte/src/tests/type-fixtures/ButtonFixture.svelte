@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button } from "@marwes-ui/svelte"
+  import { Button, PrimaryButton } from "@marwes-ui/svelte"
 </script>
 
 <!-- Basic usage -->
@@ -16,3 +16,7 @@
 
 <!-- Disabled -->
 <Button disabled>Disabled</Button>
+
+<!-- Native form behavior -->
+<PrimaryButton type="submit">Submit</PrimaryButton>
+<Button type="reset">Reset</Button>

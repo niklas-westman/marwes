@@ -32,6 +32,7 @@ import {
   SaveButton,
   SearchButton,
   SortButton,
+  SubmitButton,
   UploadButton,
   VerifyButton,
 } from "../variants"
@@ -59,6 +60,8 @@ function renderWithProvider(
 runButtonContract("vue", {
   async renderPrimary(args = {}) {
     const props = {
+      ...(args.type !== undefined ? { type: args.type } : {}),
+      ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.loading !== undefined ? { loading: args.loading } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),
@@ -329,4 +332,17 @@ describe("Vue adapter specifics: Button", () => {
     expect(button.querySelector(".mw-btn__label")).toBeNull()
     expect(button.querySelector("svg")).not.toBeNull()
   })
+})
+
+describe("Vue wrapper accessible names", () => {
+  it.each([SaveButton, SubmitButton])(
+    "forwards ariaLabelledBy through purpose wrappers",
+    (component) => {
+      renderWithProvider(component, { ariaLabelledBy: "external-label" }, "Continue")
+      expect(screen.getByRole("button", { name: "Continue" })).toHaveAttribute(
+        "aria-labelledby",
+        "external-label",
+      )
+    },
+  )
 })

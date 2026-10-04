@@ -208,6 +208,15 @@ known Figma-PNG versus Chromium text rasterization differences after
 source nodes, component bounds, and variables. Do not use `reflection update`
 for these Figma truth baselines; the PNGs must be exported from Figma.
 
+On 2026-10-04, Niklas accepted a release exception for `button.text` in the
+native button form-type and warning-badge update. Each adapter reports 47 passing
+comparisons and one text-button failure: the saved Figma baseline is blue
+(`#2F31FC`), while the stored Figma token and runtime use dark text (`#141414`).
+The warning badges pass in both themes across React, Vue, and Svelte. This
+exception leaves checks and thresholds intact and covers only that comparison
+for this update. Export a fresh Figma reference and rerun Reflection to close it;
+other release gates still apply.
+
 Pre-push runs `pnpm cohesive:check:all` as a fast static gate. Pull request CI
 runs `pnpm cohesive:ci`, which requires committed baseline receipts, runs the
 portal screenshot comparison, and uploads `artifacts/reflection/` for review

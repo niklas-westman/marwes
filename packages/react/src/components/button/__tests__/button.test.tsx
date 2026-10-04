@@ -44,6 +44,8 @@ function renderWithProvider(ui: React.ReactElement) {
 runButtonContract("react", {
   async renderPrimary(args = {}) {
     const buttonProps = {
+      ...(args.type !== undefined ? { type: args.type } : {}),
+      ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.loading !== undefined ? { loading: args.loading } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),

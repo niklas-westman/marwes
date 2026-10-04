@@ -72,7 +72,11 @@ export function resolveButtonA11y(
 
   if (tag === "button") {
     const nativeButtonType =
-      opts.action === "submit" ? "submit" : opts.action === "reset" ? "reset" : "button"
+      opts.action === "submit"
+        ? "submit"
+        : opts.action === "reset"
+          ? "reset"
+          : (opts.type ?? "button")
 
     const a11y: ButtonA11yProps = { ...common, type: nativeButtonType }
     if (isDisabled) a11y.disabled = true

@@ -385,6 +385,8 @@ runButtonContract("svelte", {
     renderWithText(
       PrimaryButton,
       {
+        ...(args.type !== undefined ? { type: args.type } : {}),
+        ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.loading !== undefined ? { loading: args.loading } : {}),
         ...(args.onClick !== undefined ? { onclick: args.onClick } : {}),
