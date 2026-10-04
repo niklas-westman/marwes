@@ -3,6 +3,10 @@ import { spawnSync } from "node:child_process"
 
 const ignoredDevAdvisories = new Map([
   [
+    "GHSA-vfj7-8cjw-p6xm",
+    "braces 3.0.3 is locally patched to reject nesting beyond 256 levels; regression tests run before this audit. Remove the patch and exception when an upstream fix is available.",
+  ],
+  [
     "GHSA-gv7w-rqvm-qjhr",
     "esbuild binary integrity advisory in dev/build tooling; esbuild 0.28.1 currently breaks Storybook browser a11y runs.",
   ],
@@ -27,6 +31,13 @@ function printCommandOutput(result) {
   if (result.stderr.trim()) {
     console.error(result.stderr.trim())
   }
+}
+
+const bracesRegression = runPnpm(["exec", "node", "--test", "scripts/test-braces-security.mjs"])
+printCommandOutput(bracesRegression)
+if (bracesRegression.status !== 0) {
+  console.error("\nSecurity validation failed: braces nesting mitigation is not active.")
+  process.exit(bracesRegression.status ?? 1)
 }
 
 const prodAudit = runPnpm(["audit", "--prod"])

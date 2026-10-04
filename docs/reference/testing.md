@@ -108,6 +108,14 @@ pnpm cohesive:check:all            # static Figma/Reflection contract check for 
 pnpm cohesive:ci                   # CI visual gate: contract check + portal screenshots + review
 ```
 
+Security validation tests the locally patched `braces@3.0.3` used by Changesets
+before auditing dependencies. The patch rejects brace and parenthesis nesting
+beyond 256 levels to mitigate [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm).
+The raw audit still reports this version, so the validator permits only this
+advisory after the regression tests pass. Remove both the patch and its advisory
+exception when a patched upstream release is available. The existing esbuild
+development-tool exceptions remain separate.
+
 ### Changed-scope behavior
 
 `pnpm check:changed` is optimized for daily work on long-lived branches. By default it validates the local worktree; when the worktree is clean, it validates the latest commit. Use `--branch` or `--base <ref>` when you intentionally want the full branch range.

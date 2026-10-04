@@ -13,7 +13,7 @@ overrides:
   brace-expansion@<1.1.21: 1.1.21
   brace-expansion@>=3.0.0 <5.0.12: 5.0.12
   browserslist@<=4.28.6: 4.28.7
-  devalue@<5.9.2: 5.9.2
+  devalue@>=5.0.0 <5.9.3: 5.9.3
   js-cookie@<=3.0.5: 3.0.7
   js-yaml@>=3.0.0 <3.15.2: 3.15.2
   js-yaml@>=4.0.0 <4.3.2: 4.3.2
@@ -24,6 +24,11 @@ overrides:
   svelte@<=5.55.6: 5.56.3
   vitest@>=4.0.0 <4.1.11: 4.1.11
   ws@>=8.0.0 <8.21.0: 8.21.0
+
+patchedDependencies:
+  braces@3.0.3:
+    hash: 3f8f5edfa398c282a067c3a544014888eee6421de89060450f52f24f3145dd56
+    path: patches/braces@3.0.3.patch
 
 importers:
 
@@ -2871,8 +2876,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  devalue@5.9.2:
-    resolution: {integrity: sha512-po4PAY5c53tw5XMocSnf8A/5OHhbbUftpr93aEN6BBoAdntUmK7vu7wOATqvt7cXO7m1Cl4gMVn6p7n6n4mj0w==}
+  devalue@5.9.3:
+    resolution: {integrity: sha512-xRumYOCUZN/EesqHEU3WOXanOZNvfZFZ/o1AHVFDX1yI0UAkZkOgDXt341CzKoBVIkgQba55/+DjGBKrIoKcHw==}
 
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
@@ -7066,7 +7071,7 @@ snapshots:
     dependencies:
       balanced-match: 4.0.4
 
-  braces@3.0.3:
+  braces@3.0.3(patch_hash=3f8f5edfa398c282a067c3a544014888eee6421de89060450f52f24f3145dd56):
     dependencies:
       fill-range: 7.1.1
 
@@ -7273,7 +7278,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  devalue@5.9.2: {}
+  devalue@5.9.3: {}
 
   dir-glob@3.0.1:
     dependencies:
@@ -8188,7 +8193,7 @@ snapshots:
 
   micromatch@4.0.8:
     dependencies:
-      braces: 3.0.3
+      braces: 3.0.3(patch_hash=3f8f5edfa398c282a067c3a544014888eee6421de89060450f52f24f3145dd56)
       picomatch: 2.3.2
 
   min-indent@1.0.1: {}
@@ -8945,7 +8950,7 @@ snapshots:
       aria-query: 5.3.1
       axobject-query: 4.1.0
       clsx: 2.1.1
-      devalue: 5.9.2
+      devalue: 5.9.3
       esm-env: 1.2.2
       esrap: 2.2.11(@typescript-eslint/types@8.54.0)
       is-reference: 3.0.3
