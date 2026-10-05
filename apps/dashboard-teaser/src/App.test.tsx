@@ -1,11 +1,25 @@
 // @vitest-environment jsdom
 
 import "@testing-library/jest-dom/vitest"
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react"
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 import { App } from "./App"
+
+const drawerImport = vi.hoisted(() => {
+  let release: () => void = () => {}
+  const ready = new Promise<void>((resolve) => {
+    release = resolve
+  })
+  return { ready, release }
+})
+
+// Hold the lazy module pending so the handoff cannot depend on import speed.
+vi.mock("./components/ThemeBuilderDrawer", async (importOriginal) => {
+  await drawerImport.ready
+  return importOriginal<typeof import("./components/ThemeBuilderDrawer")>()
+})
 
 describe("dashboard custom builder flow", () => {
   beforeEach(() => {
@@ -35,7 +49,12 @@ describe("dashboard custom builder flow", () => {
     expect(
       screen.queryByRole("dialog", { name: "Building your own theme" }),
     ).not.toBeInTheDocument()
-    const builder = await screen.findByRole("dialog", { name: /theme builder/i })
+    expect(screen.queryByRole("dialog", { name: /theme builder/i })).not.toBeInTheDocument()
+    await act(async () => {
+      drawerImport.release()
+      await import("./components/ThemeBuilderDrawer")
+    })
+    const builder = screen.getByRole("dialog", { name: /theme builder/i })
     expect(builder).toBeInTheDocument()
     expect(screen.getByRole("radio", { name: /Custom/i })).toBeChecked()
     expect(HTMLElement.prototype.scrollIntoView).toHaveBeenCalled()

@@ -1,5 +1,19 @@
 # @marwes-ui/svelte
 
+## 1.5.1
+
+### Patch Changes
+
+- [#48](https://github.com/niklas-westman/marwes/pull/48) [`d46cf44`](https://github.com/niklas-westman/marwes/commit/d46cf445819c13def85c504c055dcf1d30a30e5c) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Refresh development dependency security: require devalue 5.9.3 for Svelte tooling and patch braces to reject excessive pattern nesting in release tooling. Published component APIs are unchanged by this dependency maintenance.
+
+- [#48](https://github.com/niklas-westman/marwes/pull/48) [`d46cf44`](https://github.com/niklas-westman/marwes/commit/d46cf445819c13def85c504c055dcf1d30a30e5c) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Support native `type="submit"` and `type="reset"` on Button and visual button wrappers. Buttons still default to `type="button"`; existing submit/reset actions retain precedence. Clarify form behavior in Storybook and forward `ariaLabelledBy` through Vue button wrappers.
+
+- [#48](https://github.com/niklas-westman/marwes/pull/48) [`d46cf44`](https://github.com/niklas-westman/marwes/commit/d46cf445819c13def85c504c055dcf1d30a30e5c) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Use the accessible warning border token for warning badges in light and dark themes, matching the Figma border color while preserving theme customization.
+
+- Updated dependencies [[`d46cf44`](https://github.com/niklas-westman/marwes/commit/d46cf445819c13def85c504c055dcf1d30a30e5c), [`d46cf44`](https://github.com/niklas-westman/marwes/commit/d46cf445819c13def85c504c055dcf1d30a30e5c), [`d46cf44`](https://github.com/niklas-westman/marwes/commit/d46cf445819c13def85c504c055dcf1d30a30e5c)]:
+  - @marwes-ui/core@1.5.1
+  - @marwes-ui/presets@1.5.1
+
 ## 1.5.0
 
 ### Minor Changes

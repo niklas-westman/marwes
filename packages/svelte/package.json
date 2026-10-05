@@ -1,6 +1,6 @@
 {
   "name": "@marwes-ui/svelte",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Accessible, themeable Marwes components for Svelte with static preset CSS and purpose-first APIs.",
   "homepage": "https://marwes.io/docs/get-started/svelte/",
   "repository": {
