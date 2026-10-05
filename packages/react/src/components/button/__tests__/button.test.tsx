@@ -48,6 +48,7 @@ runButtonContract("react", {
       ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.loading !== undefined ? { loading: args.loading } : {}),
+      ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),
     }
 
@@ -57,6 +58,8 @@ runButtonContract("react", {
     const linkProps = {
       href: args.href,
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.loading !== undefined ? { loading: args.loading } : {}),
+      ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),
     }
 

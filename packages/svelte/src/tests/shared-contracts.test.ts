@@ -389,6 +389,7 @@ runButtonContract("svelte", {
         ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.loading !== undefined ? { loading: args.loading } : {}),
+        ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
         ...(args.onClick !== undefined ? { onclick: args.onClick } : {}),
       },
       args.text ?? "Primary",
@@ -400,6 +401,8 @@ runButtonContract("svelte", {
       {
         href: args.href,
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.loading !== undefined ? { loading: args.loading } : {}),
+        ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
         ...(args.onClick !== undefined ? { onclick: args.onClick } : {}),
       },
       args.text,
@@ -409,7 +412,12 @@ runButtonContract("svelte", {
     return screen.getByRole(role, options)
   },
   async click(element) {
-    if (element instanceof HTMLInputElement && element.disabled) return
+    // fireEvent dispatches even on disabled controls; real browsers do not
+    if (
+      (element instanceof HTMLInputElement || element instanceof HTMLButtonElement) &&
+      element.disabled
+    )
+      return
     await fireEvent.click(element)
   },
 })

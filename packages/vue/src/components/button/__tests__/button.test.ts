@@ -64,6 +64,7 @@ runButtonContract("vue", {
       ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.loading !== undefined ? { loading: args.loading } : {}),
+      ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),
     }
     renderWithProvider(PrimaryButton, props, args.text ?? "Primary")
@@ -72,6 +73,8 @@ runButtonContract("vue", {
     const props = {
       href: args.href,
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.loading !== undefined ? { loading: args.loading } : {}),
+      ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
       ...(args.onClick ? { onClick: args.onClick } : {}),
     }
     renderWithProvider(LinkButton, props, args.text)

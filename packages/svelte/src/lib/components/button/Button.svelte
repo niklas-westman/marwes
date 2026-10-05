@@ -23,10 +23,8 @@
     resolvedVariant === "primary" || resolvedVariant === "success" || resolvedVariant === "danger"
   );
 
-  const visibleLabel = $derived(
-    kit.loading.isLoading && kit.loading.loadingLabel !== undefined
-      ? kit.loading.loadingLabel
-      : undefined
+  const loadingLabelOverride = $derived(
+    kit.loading.isLoading ? kit.loading.loadingLabel : undefined
   );
 
   function handleClick(e: MouseEvent): void {
@@ -44,8 +42,10 @@
   {:else if options.iconLeft}
     <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
   {/if}
-  {#if visibleLabel}
-    <span class="mw-btn__label">{visibleLabel}</span>
+  {#if loadingLabelOverride !== undefined}
+    {#if loadingLabelOverride}
+      <span class="mw-btn__label">{loadingLabelOverride}</span>
+    {/if}
   {:else if children}
     <span class="mw-btn__label">
       {@render children()}
