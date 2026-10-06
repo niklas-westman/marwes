@@ -4,8 +4,9 @@
  * - id is optional; falls back to React.useId() for aria wiring.
  */
 
-import { createAccordionRecipe } from "@marwes-ui/core"
+import { createAccordionRecipe, toAccordionHtmlAttributes } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export interface AccordionProps {
   /** Unique id for aria wiring. Defaults to React.useId() when omitted. */
@@ -43,9 +44,8 @@ export function Accordion(props: AccordionProps): React.ReactElement {
         id={a11y.triggerId}
         type="button"
         className="mw-accordion__trigger"
-        aria-expanded={a11y.ariaExpanded}
+        {...toReactAttributes(toAccordionHtmlAttributes(a11y))}
         aria-controls={a11y.panelId}
-        aria-disabled={a11y.ariaDisabled}
         disabled={disabled}
         onClick={handleTriggerClick}
       >

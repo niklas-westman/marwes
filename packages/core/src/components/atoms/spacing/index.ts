@@ -7,3 +7,5 @@ export type {
   SpacingDataAttributes,
   SpacingRenderKit,
 } from "./spacing.types"
+export { toSpacingHtmlAttributes } from "./spacing-html-attributes"
+export type { SpacingHtmlAttributes } from "./spacing-html-attributes"

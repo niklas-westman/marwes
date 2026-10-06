@@ -1,4 +1,4 @@
-import { textRecipe } from "@marwes-ui/core"
+import { textRecipe, toTextHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, TextAs, TextOptions, TextVariant } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import {
@@ -33,7 +33,7 @@ export const Text = defineComponent(
         renderKit.tag,
         {
           ...passthroughAttrs,
-          id: renderKit.a11y.id,
+          ...toTextHtmlAttributes(renderKit.a11y),
           class: className,
           style,
         },

@@ -1,10 +1,5 @@
 <script lang="ts">
-  import {
-    iconRegistry,
-    resolveIconA11y,
-    resolveIconSize,
-    resolveIconStrokeWidth,
-  } from "@marwes-ui/core";
+  import { iconRegistry, resolveIconA11y, resolveIconSize, resolveIconStrokeWidth, toIconHtmlAttributes } from "@marwes-ui/core";
   import { svgAttrsToKebab } from "../../internal/svg-attrs.js";
   import type { IconProps } from "./types.js";
 
@@ -39,9 +34,7 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     class={className}
-    aria-hidden={a11y.ariaHidden ? "true" : undefined}
-    aria-label={a11y.ariaLabel}
-    role={a11y.role}
+    {...toIconHtmlAttributes(a11y)}
     focusable="false"
   >
     {#each def.nodes as node}

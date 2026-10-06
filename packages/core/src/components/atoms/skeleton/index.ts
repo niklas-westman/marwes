@@ -1,3 +1,5 @@
 export * from "./skeleton-a11y"
 export * from "./skeleton-recipe"
 export * from "./skeleton-types"
+export { toSkeletonHtmlAttributes } from "./skeleton-html-attributes"
+export type { SkeletonHtmlAttributes } from "./skeleton-html-attributes"

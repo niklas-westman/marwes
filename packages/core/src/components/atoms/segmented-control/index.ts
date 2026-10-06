@@ -20,3 +20,11 @@ export type {
   SegmentedControlVariant,
   SegmentedControlSize,
 } from "./segmented-control-types"
+export {
+  toSegmentedControlHtmlAttributes,
+  toSegmentedControlItemHtmlAttributes,
+} from "./segmented-control-html-attributes"
+export type {
+  SegmentedControlHtmlAttributes,
+  SegmentedControlItemHtmlAttributes,
+} from "./segmented-control-html-attributes"

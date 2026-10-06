@@ -1,4 +1,9 @@
-import { type DialogOptions, IconName, createDialogRecipe } from "@marwes-ui/core"
+import {
+  type DialogOptions,
+  IconName,
+  createDialogRecipe,
+  toDialogHtmlAttributes,
+} from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
@@ -116,11 +121,7 @@ export const Dialog = defineComponent(
           ...kit.value.dataAttributes,
           id: id.value,
           class: mergeClassNames(kit.value.className, props.className, attrs.class),
-          role: kit.value.a11y.role,
-          "aria-modal": kit.value.a11y.ariaModal ? "true" : undefined,
-          "aria-label": kit.value.a11y.ariaLabel,
-          "aria-labelledby": kit.value.a11y.ariaLabelledBy,
-          "aria-describedby": kit.value.a11y.ariaDescribedBy,
+          ...toDialogHtmlAttributes(kit.value.a11y),
           tabindex: -1,
         },
         [

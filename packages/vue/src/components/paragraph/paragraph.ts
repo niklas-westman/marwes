@@ -1,4 +1,4 @@
-import { paragraphRecipe } from "@marwes-ui/core"
+import { paragraphRecipe, toParagraphHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, ParagraphOptions, ParagraphSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import {
@@ -32,7 +32,7 @@ export const Paragraph = defineComponent(
         "p",
         {
           ...passthroughAttrs,
-          id: renderKit.a11y.id,
+          ...toParagraphHtmlAttributes(renderKit.a11y),
           class: className,
           style,
         },

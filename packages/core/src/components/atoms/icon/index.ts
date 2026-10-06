@@ -9,3 +9,5 @@ export * from "./icon-a11y"
 export type { IconPreset } from "./icon-preset"
 
 export * from "./icon-recipe"
+export { toIconHtmlAttributes } from "./icon-html-attributes"
+export type { IconHtmlAttributes } from "./icon-html-attributes"

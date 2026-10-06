@@ -1,4 +1,4 @@
-import { createToastRecipe } from "@marwes-ui/core"
+import { createToastRecipe, toToastHtmlAttributes } from "@marwes-ui/core"
 import type { ToastOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -62,8 +62,7 @@ export const Toast = defineComponent(
           ...(props.dataAttributes ?? {}),
           id: props.id,
           class: className,
-          role: a11y.role,
-          "aria-live": a11y.ariaLive,
+          ...toToastHtmlAttributes(a11y),
           "aria-atomic": "true",
         },
         children,

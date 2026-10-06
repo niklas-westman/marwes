@@ -4,6 +4,7 @@
     createTabRecipe,
     moveTabSelection,
     resolveTabValue,
+    toTabHtmlAttributes,
   } from "@marwes-ui/core";
   import type { TabGroupItemState } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -98,13 +99,8 @@
       <button
         id={a11yIds.tabIds[tab.value]}
         type="button"
-        role={kit.a11y.role}
         class={kit.className}
-        aria-selected={kit.a11y.ariaSelected}
-        aria-disabled={kit.a11y.ariaDisabled}
-        aria-controls={kit.a11y.ariaControls}
-        aria-label={kit.a11y.ariaLabel}
-        tabindex={kit.a11y.tabIndex}
+        {...toTabHtmlAttributes(kit.a11y)}
         disabled={tab.disabled}
         onclick={() => !tab.disabled && selectTab(tab.value)}
       >

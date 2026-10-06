@@ -8,6 +8,8 @@ import {
   createSegmentedControlRecipe,
   moveSegmentedControlSelection,
   resolveSegmentedControlValue,
+  toSegmentedControlHtmlAttributes,
+  toSegmentedControlItemHtmlAttributes,
 } from "@marwes-ui/core"
 import type {
   SegmentedControlItemState,
@@ -15,6 +17,7 @@ import type {
   SegmentedControlVariant,
 } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export interface SegmentedControlItem<T extends string = string> {
   value: T
@@ -145,11 +148,7 @@ export function SegmentedControl<T extends string = string>(
     <div
       id={id}
       className={trackClassName}
-      role={trackKit.a11y.role}
-      aria-label={trackKit.a11y.ariaLabel}
-      aria-labelledby={trackKit.a11y.ariaLabelledBy}
-      aria-describedby={trackKit.a11y.ariaDescribedBy}
-      aria-disabled={trackKit.a11y.ariaDisabled}
+      {...toReactAttributes(toSegmentedControlHtmlAttributes(trackKit.a11y))}
       onKeyDown={handleKeyDown}
       style={style}
     >
@@ -170,11 +169,7 @@ export function SegmentedControl<T extends string = string>(
             key={item.value}
             type="button"
             className={itemKit.className}
-            role={itemKit.a11y.role}
-            aria-checked={itemKit.a11y.ariaChecked}
-            aria-disabled={itemKit.a11y.ariaDisabled}
-            aria-label={itemKit.a11y.ariaLabel}
-            tabIndex={itemKit.a11y.tabIndex}
+            {...toReactAttributes(toSegmentedControlItemHtmlAttributes(itemKit.a11y))}
             disabled={isItemDisabled}
             data-value={item.value}
             onClick={() => selectItem(item.value)}

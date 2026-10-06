@@ -3,6 +3,7 @@ import {
   type StatTileTone,
   type StatTileTrendDirection,
   createStatTileRecipe,
+  toStatTileTrendHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -63,7 +64,7 @@ export const StatTile = defineComponent(
                     {
                       ...kit.trendDataAttributes,
                       class: kit.slots.trendClassName,
-                      "aria-label": kit.a11y.trendAriaLabel,
+                      ...toStatTileTrendHtmlAttributes(kit.a11y),
                     },
                     [
                       kit.trendIcon

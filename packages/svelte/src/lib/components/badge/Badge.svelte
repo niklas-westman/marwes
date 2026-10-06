@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createBadgeRecipe } from "@marwes-ui/core";
+  import { createBadgeRecipe, toBadgeHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { BadgeProps } from "./types.js";
 
@@ -18,7 +18,7 @@
 <span
   {id}
   class={mergedClass}
-  aria-label={kit.a11y.ariaLabel}
+  {...toBadgeHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
   {...dataAttributes}
 >

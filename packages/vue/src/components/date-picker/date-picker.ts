@@ -3,6 +3,7 @@ import {
   type DatePickerDevice,
   type DatePickerOptions,
   createDatePickerRecipe,
+  toDatePickerHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -85,9 +86,7 @@ export const DatePicker = defineComponent(
           ...passthroughAttrs,
           ...kit.dataAttributes,
           class: mergeClassNames(kit.className, props.className, attrs.class),
-          "aria-label": kit.a11y.ariaLabel,
-          "aria-labelledby": kit.a11y.ariaLabelledBy,
-          "aria-describedby": kit.a11y.ariaDescribedBy,
+          ...toDatePickerHtmlAttributes(kit.a11y),
         },
         [
           h("header", { class: kit.slots.headerClassName }, [

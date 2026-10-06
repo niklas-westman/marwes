@@ -46,3 +46,17 @@ export type {
   PaginationReservedItemCountOptions,
   PaginationResolvedControlDisplay,
 } from "./pagination-types"
+export {
+  toPaginationHtmlAttributes,
+  toPaginationListHtmlAttributes,
+  toPaginationControlHtmlAttributes,
+  toPaginationPageHtmlAttributes,
+  toPaginationEllipsisHtmlAttributes,
+} from "./pagination-html-attributes"
+export type {
+  PaginationHtmlAttributes,
+  PaginationListHtmlAttributes,
+  PaginationControlHtmlAttributes,
+  PaginationPageHtmlAttributes,
+  PaginationEllipsisHtmlAttributes,
+} from "./pagination-html-attributes"

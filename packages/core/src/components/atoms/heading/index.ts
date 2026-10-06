@@ -12,3 +12,5 @@ export type {
   HeadingRenderKit,
   SemanticHeadingLevel,
 } from "./heading-types"
+export { toHeadingHtmlAttributes } from "./heading-html-attributes"
+export type { HeadingHtmlAttributes } from "./heading-html-attributes"

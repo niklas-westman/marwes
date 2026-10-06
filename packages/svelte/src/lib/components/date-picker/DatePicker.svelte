@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createDatePickerRecipe } from "@marwes-ui/core";
+  import { createDatePickerRecipe, toDatePickerHtmlAttributes } from "@marwes-ui/core";
   import type { DatePickerOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { DatePickerProps } from "./types.js";
@@ -56,9 +56,7 @@
 
 <section
   class={mergedClass}
-  aria-label={kit.a11y.ariaLabel}
-  aria-labelledby={kit.a11y.ariaLabelledBy}
-  aria-describedby={kit.a11y.ariaDescribedBy}
+  {...toDatePickerHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
 >
   <header class={kit.slots.headerClassName}>

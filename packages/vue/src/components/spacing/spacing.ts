@@ -1,4 +1,4 @@
-import { createSpacingRecipe } from "@marwes-ui/core"
+import { createSpacingRecipe, toSpacingHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, SpacingOptions, SpacingSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -33,7 +33,7 @@ export const Spacing = defineComponent(
 
       return h("div", {
         ...passthroughAttrs,
-        ...renderKit.a11y,
+        ...toSpacingHtmlAttributes(renderKit.a11y),
         ...renderKit.dataAttributes,
         class: className,
         style,

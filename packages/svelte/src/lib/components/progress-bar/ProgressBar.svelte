@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createProgressBarRecipe } from "@marwes-ui/core";
+  import { createProgressBarRecipe, toProgressBarHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { ProgressBarProps } from "./types.js";
@@ -20,16 +20,7 @@
 <div
   class={mergedClass}
   style={mergedStyle}
-  id={kit.a11y.id}
-  role={kit.a11y.role}
-  aria-valuemin={kit.a11y.ariaValueMin}
-  aria-valuemax={kit.a11y.ariaValueMax}
-  aria-valuenow={kit.a11y.ariaValueNow}
-  aria-valuetext={kit.a11y.ariaValueText}
-  aria-label={kit.a11y.ariaLabel}
-  aria-labelledby={kit.a11y.ariaLabelledBy}
-  aria-describedby={kit.a11y.ariaDescribedBy}
-  aria-disabled={kit.a11y.ariaDisabled ? "true" : undefined}
+  {...toProgressBarHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
   {...dataAttributes}
 >

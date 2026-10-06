@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createStatTileRecipe } from "@marwes-ui/core";
+  import { createStatTileRecipe, toStatTileTrendHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { StatTileProps } from "./types.js";
 
@@ -27,7 +27,7 @@
     {#if trendValue}
       <span
         class={kit.slots.trendClassName}
-        aria-label={kit.a11y.trendAriaLabel}
+        {...toStatTileTrendHtmlAttributes(kit.a11y)}
         {...kit.trendDataAttributes}
       >
         {#if kit.trendIcon}

@@ -1,4 +1,9 @@
-import { type DrawerOptions, IconName, createDrawerRecipe } from "@marwes-ui/core"
+import {
+  type DrawerOptions,
+  IconName,
+  createDrawerRecipe,
+  toDrawerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
@@ -145,11 +150,7 @@ export const Drawer = defineComponent(
               id: id.value,
               class: mergeClassNames(kit.value.panel.className, props.panelClassName),
               style: kit.value.panel.vars,
-              role: kit.value.panel.a11y.role,
-              "aria-modal": kit.value.panel.a11y.ariaModal ? "true" : undefined,
-              "aria-label": kit.value.panel.a11y.ariaLabel,
-              "aria-labelledby": kit.value.panel.a11y.ariaLabelledBy,
-              "aria-describedby": kit.value.panel.a11y.ariaDescribedBy,
+              ...toDrawerHtmlAttributes(kit.value.panel.a11y),
               tabindex: -1,
             },
             [

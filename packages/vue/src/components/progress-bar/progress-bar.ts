@@ -1,4 +1,9 @@
-import { type CssVars, type ProgressBarOptions, createProgressBarRecipe } from "@marwes-ui/core"
+import {
+  type CssVars,
+  type ProgressBarOptions,
+  createProgressBarRecipe,
+  toProgressBarHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
@@ -70,16 +75,7 @@ export const ProgressBar = defineComponent(
           ...passthroughAttrs,
           ...kit.dataAttributes,
           ...(props.dataAttributes ?? {}),
-          id: kit.a11y.id,
-          role: kit.a11y.role,
-          "aria-valuemin": kit.a11y.ariaValueMin,
-          "aria-valuemax": kit.a11y.ariaValueMax,
-          "aria-valuenow": kit.a11y.ariaValueNow,
-          "aria-valuetext": kit.a11y.ariaValueText,
-          "aria-label": kit.a11y.ariaLabel,
-          "aria-labelledby": kit.a11y.ariaLabelledBy,
-          "aria-describedby": kit.a11y.ariaDescribedBy,
-          "aria-disabled": kit.a11y.ariaDisabled ? "true" : undefined,
+          ...toProgressBarHtmlAttributes(kit.a11y),
           class: mergeClassNames(kit.className, props.className, attrs.class),
           style: mergeStyles(kit.vars as CssVars, attrs.style),
         },

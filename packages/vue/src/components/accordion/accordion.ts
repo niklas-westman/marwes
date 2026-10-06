@@ -1,4 +1,4 @@
-import { createAccordionRecipe } from "@marwes-ui/core"
+import { createAccordionRecipe, toAccordionHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -43,9 +43,8 @@ export const Accordion = defineComponent(
             id: a11y.triggerId,
             type: "button",
             class: "mw-accordion__trigger",
-            "aria-expanded": a11y.ariaExpanded,
+            ...toAccordionHtmlAttributes(a11y),
             "aria-controls": a11y.panelId,
-            "aria-disabled": a11y.ariaDisabled,
             disabled: props.disabled,
             onClick: handleTriggerClick,
           },

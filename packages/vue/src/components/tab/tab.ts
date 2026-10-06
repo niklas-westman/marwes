@@ -1,4 +1,4 @@
-import { createTabRecipe } from "@marwes-ui/core"
+import { createTabRecipe, toTabHtmlAttributes } from "@marwes-ui/core"
 import type { TabOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -49,12 +49,7 @@ export const Tab = defineComponent(
           type: "button",
           class: className,
           style,
-          role: a11y.role,
-          "aria-selected": a11y.ariaSelected,
-          "aria-disabled": a11y.ariaDisabled,
-          "aria-label": a11y.ariaLabel,
-          "aria-controls": a11y.ariaControls,
-          tabindex: a11y.tabIndex,
+          ...toTabHtmlAttributes(a11y),
           disabled: props.disabled ? true : undefined,
           onClick: (event: MouseEvent) => {
             props.onClick?.(event)

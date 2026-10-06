@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createAvatarRecipe } from "@marwes-ui/core";
+  import { createAvatarRecipe, toAvatarHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
   import type { AvatarProps } from "./types.js";
@@ -20,9 +20,7 @@
 <span
   class={mergedClass}
   {style}
-  role={kit.a11y.role}
-  aria-hidden={isDecorative ? "true" : undefined}
-  aria-label={kit.a11y.ariaLabel}
+  {...toAvatarHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
   {...dataAttributes}
 >

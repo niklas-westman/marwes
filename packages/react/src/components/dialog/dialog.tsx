@@ -1,5 +1,11 @@
-import { type DialogOptions, IconName, createDialogRecipe } from "@marwes-ui/core"
+import {
+  type DialogOptions,
+  IconName,
+  createDialogRecipe,
+  toDialogHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -74,11 +80,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
     <section
       id={id}
       className={cx(kit.className, props.className)}
-      role={kit.a11y.role}
-      {...(kit.a11y.ariaModal ? { "aria-modal": "true" } : {})}
-      {...(kit.a11y.ariaLabel ? { "aria-label": kit.a11y.ariaLabel } : {})}
-      {...(kit.a11y.ariaLabelledBy ? { "aria-labelledby": kit.a11y.ariaLabelledBy } : {})}
-      {...(kit.a11y.ariaDescribedBy ? { "aria-describedby": kit.a11y.ariaDescribedBy } : {})}
+      {...toReactAttributes(toDialogHtmlAttributes(kit.a11y))}
       tabIndex={-1}
       {...kit.dataAttributes}
     >

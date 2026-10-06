@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { textRecipe } from "@marwes-ui/core";
+  import { textRecipe, toTextHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import { useTheme } from "../../provider/use-theme.js";
@@ -18,6 +18,6 @@
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 </script>
 
-<svelte:element this={kit.tag} id={kit.a11y.id} class={mergedClass} style={mergedStyle}>
+<svelte:element this={kit.tag} {...toTextHtmlAttributes(kit.a11y)} class={mergedClass} style={mergedStyle}>
   {@render children?.()}
 </svelte:element>

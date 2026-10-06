@@ -5,6 +5,7 @@ import {
   resolveIconA11y,
   resolveIconSize,
   resolveIconStrokeWidth,
+  toIconHtmlAttributes,
 } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
 
@@ -57,9 +58,7 @@ export const Icon = defineComponent(
           "stroke-linecap": "round",
           "stroke-linejoin": "round",
           class: [props.className, attrs.class],
-          "aria-hidden": a11y.ariaHidden ? "true" : undefined,
-          "aria-label": a11y.ariaLabel,
-          role: a11y.role,
+          ...toIconHtmlAttributes(a11y),
           focusable: "false",
         },
         iconDefinition.nodes.map((iconNode) => h(iconNode.tag, iconNode.attrs)),

@@ -1,4 +1,4 @@
-import { headingRecipe } from "@marwes-ui/core"
+import { headingRecipe, toHeadingHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, HeadingOptions, HeadingSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import {
@@ -37,8 +37,7 @@ export function createHeadingComponent<L extends HeadingLevel>(level: L) {
           tagName,
           {
             ...passthroughAttrs,
-            id: renderKit.a11y.id,
-            "aria-label": renderKit.a11y.ariaLabel,
+            ...toHeadingHtmlAttributes(renderKit.a11y),
             class: className,
             style,
           },

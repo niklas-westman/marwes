@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createSpacingRecipe } from "@marwes-ui/core";
+  import { createSpacingRecipe, toSpacingHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { SpacingProps } from "./types.js";
@@ -18,6 +18,6 @@
 <div
   class={mergedClass}
   style={mergedStyle}
-  aria-hidden={kit.a11y["aria-hidden"]}
+  {...toSpacingHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
 ></div>

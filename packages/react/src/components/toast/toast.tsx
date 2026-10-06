@@ -1,6 +1,7 @@
-import { createToastRecipe } from "@marwes-ui/core"
+import { createToastRecipe, toToastHtmlAttributes } from "@marwes-ui/core"
 import type { ToastOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 function cx(...parts: Array<string | false | undefined>): string {
   return parts.filter(Boolean).join(" ")
@@ -29,9 +30,7 @@ export function Toast(props: ToastProps): React.ReactElement {
     <div
       id={id}
       className={cx(kit.className, className)}
-      role={a11y.role}
-      aria-live={a11y.ariaLive}
-      aria-atomic="true"
+      {...toReactAttributes(toToastHtmlAttributes(a11y))}
       {...kit.dataAttributes}
       {...dataAttributes}
     >

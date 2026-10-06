@@ -1,6 +1,7 @@
-import { IconName, createBannerRecipe } from "@marwes-ui/core"
+import { IconName, createBannerRecipe, toBannerHtmlAttributes } from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 export type BannerProps = BannerOptions & {
@@ -29,9 +30,7 @@ export function Banner(props: BannerProps): React.ReactElement {
     <div
       id={id}
       className={[kit.root.className, className].filter(Boolean).join(" ")}
-      role={kit.root.a11y.role}
-      aria-label={kit.root.a11y.ariaLabel}
-      aria-live={kit.root.a11y.ariaLive}
+      {...toReactAttributes(toBannerHtmlAttributes(kit.root.a11y))}
       {...kit.root.dataAttributes}
       {...dataAttributes}
     >

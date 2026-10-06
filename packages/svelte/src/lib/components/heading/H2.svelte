@@ -5,7 +5,7 @@
   For semantic H4-H6, use `<Text headingLevel={4..6} variant="..." />`.
 -->
 <script lang="ts">
-  import { headingRecipe } from "@marwes-ui/core";
+  import { headingRecipe, toHeadingHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import { useTheme } from "../../provider/use-theme.js";
@@ -24,6 +24,6 @@
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 </script>
 
-<h2 id={kit.a11y.id} aria-label={kit.a11y.ariaLabel} class={mergedClass} style={mergedStyle}>
+<h2 {...toHeadingHtmlAttributes(kit.a11y)} class={mergedClass} style={mergedStyle}>
   {@render children?.()}
 </h2>

@@ -4,3 +4,5 @@ export { buildTabGroupA11yIds, moveTabSelection, resolveTabValue } from "./tab-g
 export type { TabNavigationDirection } from "./tab-group-a11y"
 export type { TabGroupA11yIds, TabGroupItemState } from "./tab-group-types"
 export type { TabOptions, TabRenderKit, TabA11yProps } from "./tab-types"
+export { toTabHtmlAttributes } from "./tab-html-attributes"
+export type { TabHtmlAttributes } from "./tab-html-attributes"

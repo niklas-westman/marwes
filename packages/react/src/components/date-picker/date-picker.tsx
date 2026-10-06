@@ -3,8 +3,10 @@ import {
   type DatePickerDevice,
   type DatePickerOptions,
   createDatePickerRecipe,
+  toDatePickerHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export interface DatePickerProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "children" | "onSelect">,
@@ -86,9 +88,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
       {...nativeProps}
       {...kit.dataAttributes}
       className={mergedClassName}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-describedby={kit.a11y.ariaDescribedBy}
+      {...toReactAttributes(toDatePickerHtmlAttributes(kit.a11y))}
     >
       <header className={kit.slots.headerClassName}>
         <div className={kit.slots.navGroupClassName}>

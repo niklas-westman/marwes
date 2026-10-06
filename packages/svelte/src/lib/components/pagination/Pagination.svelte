@@ -1,16 +1,5 @@
 <script lang="ts">
-  import {
-    IconName,
-    clampPaginationPage,
-    createPaginationControlRecipe,
-    createPaginationEllipsisRecipe,
-    createPaginationListItemRecipe,
-    createPaginationListRecipe,
-    createPaginationPageRecipe,
-    createPaginationRecipe,
-    resolvePaginationAdaptiveProfile,
-    resolvePaginationItemAriaLabel,
-  } from "@marwes-ui/core";
+  import { IconName, clampPaginationPage, createPaginationControlRecipe, createPaginationEllipsisRecipe, createPaginationListItemRecipe, createPaginationListRecipe, createPaginationPageRecipe, createPaginationRecipe, resolvePaginationAdaptiveProfile, resolvePaginationItemAriaLabel, toPaginationControlHtmlAttributes, toPaginationHtmlAttributes, toPaginationPageHtmlAttributes, toPaginationListHtmlAttributes, toPaginationEllipsisHtmlAttributes } from "@marwes-ui/core";
   import { onMount } from "svelte";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -288,9 +277,7 @@
   bind:this={rootElement}
   class={mergedClass}
   style={rootStyle}
-  aria-label={rootKit.a11y.ariaLabel}
-  aria-labelledby={rootKit.a11y.ariaLabelledBy}
-  aria-describedby={rootKit.a11y.ariaDescribedBy}
+  {...toPaginationHtmlAttributes(rootKit.a11y)}
   data-component="pagination"
   data-control-display={rootKit.controlDisplay}
 >
@@ -298,8 +285,7 @@
     <button
       type="button"
       class={firstKit.className}
-      aria-label={firstKit.a11y.ariaLabel}
-      aria-disabled={firstKit.a11y.ariaDisabled}
+      {...toPaginationControlHtmlAttributes(firstKit.a11y)}
       disabled={firstDisabled}
       onclick={() => selectPage(1)}
     >
@@ -314,8 +300,7 @@
     <button
       type="button"
       class={previousKit.className}
-      aria-label={previousKit.a11y.ariaLabel}
-      aria-disabled={previousKit.a11y.ariaDisabled}
+      {...toPaginationControlHtmlAttributes(previousKit.a11y)}
       disabled={previousDisabled}
       onclick={() => selectPage(resolvedPage - 1)}
     >
@@ -326,12 +311,12 @@
     </button>
   {/if}
 
-  <ul class={listKit.className} role={listKit.a11y.role}>
+  <ul class={listKit.className} {...toPaginationListHtmlAttributes(listKit.a11y)}>
     {#each rootKit.items as item (item.key)}
       <li class={listItemKit.className}>
         {#if item.type !== "page"}
           {@const ellipsisKit = createPaginationEllipsisRecipe()}
-          <span class={ellipsisKit.className} aria-hidden={ellipsisKit.a11y.ariaHidden}>
+          <span class={ellipsisKit.className} {...toPaginationEllipsisHtmlAttributes(ellipsisKit.a11y)}>
             ...
           </span>
         {:else}
@@ -352,9 +337,7 @@
           <button
             type="button"
             class={pageKit.className}
-            aria-label={pageKit.a11y.ariaLabel}
-            aria-current={pageKit.a11y.ariaCurrent}
-            aria-disabled={pageKit.a11y.ariaDisabled}
+            {...toPaginationPageHtmlAttributes(pageKit.a11y)}
             disabled={disabled}
             onclick={() => selectPage(item.page)}
           >
@@ -369,8 +352,7 @@
     <button
       type="button"
       class={nextKit.className}
-      aria-label={nextKit.a11y.ariaLabel}
-      aria-disabled={nextKit.a11y.ariaDisabled}
+      {...toPaginationControlHtmlAttributes(nextKit.a11y)}
       disabled={nextDisabled}
       onclick={() => selectPage(resolvedPage + 1)}
     >
@@ -385,8 +367,7 @@
     <button
       type="button"
       class={lastKit.className}
-      aria-label={lastKit.a11y.ariaLabel}
-      aria-disabled={lastKit.a11y.ariaDisabled}
+      {...toPaginationControlHtmlAttributes(lastKit.a11y)}
       disabled={lastDisabled}
       onclick={() => selectPage(pageCount)}
     >

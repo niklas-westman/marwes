@@ -1,4 +1,9 @@
-import { type CssVars, type TooltipOptions, createTooltipRecipe } from "@marwes-ui/core"
+import {
+  type CssVars,
+  type TooltipOptions,
+  createTooltipRecipe,
+  toTooltipHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
@@ -35,10 +40,9 @@ export const Tooltip = defineComponent(
           ...passthroughAttrs,
           ...renderKit.dataAttributes,
           ...(props.dataAttributes ?? {}),
-          id: renderKit.a11y.id,
           class: className,
           style,
-          role: renderKit.a11y.role,
+          ...toTooltipHtmlAttributes(renderKit.a11y),
         },
         slots.default?.(),
       )

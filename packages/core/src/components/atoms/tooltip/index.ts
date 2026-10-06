@@ -6,3 +6,5 @@ export type {
   TooltipDataAttributes,
   TooltipRenderKit,
 } from "./tooltip-types"
+export { toTooltipHtmlAttributes } from "./tooltip-html-attributes"
+export type { TooltipHtmlAttributes } from "./tooltip-html-attributes"

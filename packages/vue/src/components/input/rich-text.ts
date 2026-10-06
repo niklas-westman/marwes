@@ -4,6 +4,7 @@ import {
   normalizeRichTextHtml,
   resolveRichTextAllowedFormats,
   richTextCommandByFormat,
+  toRichTextHtmlAttributes,
 } from "@marwes-ui/core"
 import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, ref, useAttrs, watch } from "vue"
@@ -404,17 +405,7 @@ export const RichText = defineComponent(
             "data-rich-text-editor": "true",
             "data-empty": isEditorEmpty.value ? "true" : undefined,
             "data-placeholder": props.placeholder,
-            id: renderKit.a11y.id,
-            role: renderKit.a11y.role,
-            tabindex: renderKit.a11y.tabIndex,
-            "aria-label": renderKit.a11y.ariaLabel,
-            "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-            "aria-describedby": renderKit.a11y.ariaDescribedBy,
-            "aria-invalid": renderKit.a11y.ariaInvalid,
-            "aria-disabled": renderKit.a11y.ariaDisabled,
-            "aria-readonly": renderKit.a11y.ariaReadOnly,
-            "aria-required": renderKit.a11y.ariaRequired,
-            "aria-multiline": renderKit.a11y.ariaMultiline,
+            ...toRichTextHtmlAttributes(renderKit.a11y),
             contenteditable: !props.disabled && !props.readOnly,
             onInput: () => {
               syncEditorState(editorElement.value?.innerHTML ?? "")

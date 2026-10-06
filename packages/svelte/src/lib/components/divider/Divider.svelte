@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createDividerRecipe } from "@marwes-ui/core";
+  import { createDividerRecipe, toDividerHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { DividerProps } from "./types.js";
@@ -18,8 +18,6 @@
 <hr
   class={mergedClass}
   style={mergedStyle}
-  id={kit.a11y.id}
-  role={kit.a11y.role}
-  aria-orientation={kit.a11y["aria-orientation"]}
+  {...toDividerHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
 />

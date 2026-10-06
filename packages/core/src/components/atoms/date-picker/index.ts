@@ -10,3 +10,5 @@ export type {
   DatePickerOptions,
   DatePickerRenderKit,
 } from "./date-picker-types"
+export { toDatePickerHtmlAttributes } from "./date-picker-html-attributes"
+export type { DatePickerHtmlAttributes } from "./date-picker-html-attributes"

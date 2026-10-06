@@ -3,8 +3,10 @@ import {
   type AvatarRenderContent,
   type CssVars,
   createAvatarRecipe,
+  toAvatarHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -93,9 +95,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
       {...dataAttributes}
       className={mergedClassName}
       style={mergedStyle}
-      role={kit.a11y.role}
-      aria-hidden={isDecorative ? "true" : undefined}
-      aria-label={kit.a11y.ariaLabel}
+      {...toReactAttributes(toAvatarHtmlAttributes(kit.a11y))}
     >
       {renderAvatarContent(kit.content, isOuterShellAccessible, isDecorative)}
     </span>

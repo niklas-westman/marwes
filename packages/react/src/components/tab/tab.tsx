@@ -4,9 +4,10 @@
  * - Applies strict a11y fields and modifier classes.
  */
 
-import { createTabRecipe } from "@marwes-ui/core"
+import { createTabRecipe, toTabHtmlAttributes } from "@marwes-ui/core"
 import type { TabOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export type TabProps = TabOptions & {
   children?: React.ReactNode
@@ -25,12 +26,7 @@ export function Tab(props: TabProps): React.ReactElement {
       id={id}
       className={[kit.className, className].filter(Boolean).join(" ")}
       style={Object.keys(kit.vars).length > 0 ? kit.vars : undefined}
-      role={a11y.role}
-      aria-selected={a11y.ariaSelected}
-      aria-disabled={a11y.ariaDisabled}
-      aria-label={a11y.ariaLabel}
-      aria-controls={a11y.ariaControls}
-      tabIndex={a11y.tabIndex}
+      {...toReactAttributes(toTabHtmlAttributes(a11y))}
       disabled={coreProps.disabled}
       onClick={onClick}
       type="button"

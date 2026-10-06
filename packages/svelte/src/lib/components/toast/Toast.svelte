@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createToastRecipe } from "@marwes-ui/core";
+  import { createToastRecipe, toToastHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { ToastProps } from "./types.js";
 
@@ -21,8 +21,7 @@
 <div
   {id}
   class={mergedClass}
-  role={kit.a11y.role}
-  aria-live={kit.a11y.ariaLive}
+  {...toToastHtmlAttributes(kit.a11y)}
   aria-atomic="true"
   {...kit.dataAttributes}
   {...dataAttributes}

@@ -4,6 +4,7 @@ import {
   type CssVars,
   avatarOptionKeys,
   createAvatarRecipe,
+  toAvatarHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -94,9 +95,7 @@ export const Avatar = defineComponent(
           ...(props.dataAttributes ?? {}),
           class: className,
           style,
-          role: renderKit.a11y.role,
-          "aria-hidden": isDecorative ? "true" : undefined,
-          "aria-label": renderKit.a11y.ariaLabel,
+          ...toAvatarHtmlAttributes(renderKit.a11y),
         },
         renderAvatarContent(renderKit.content, isOuterShellAccessible, isDecorative),
       )

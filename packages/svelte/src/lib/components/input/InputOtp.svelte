@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core";
+  import { createInputOtpRecipe, sanitizeInputOtpValue, toInputOtpHtmlAttributes } from "@marwes-ui/core";
   import type { InputOtpOptions } from "@marwes-ui/core";
   import { cssVarsToStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -95,21 +95,9 @@
     {/each}
 
     <input
-      id={kit.a11y.id}
       class="mw-input-otp__input"
       type="text"
-      name={kit.a11y.name}
-      inputmode={kit.a11y.inputMode}
-      autocomplete={kit.a11y.autoComplete}
-      maxlength={kit.a11y.maxLength}
-      pattern={kit.a11y.pattern}
-      disabled={kit.a11y.disabled}
-      readonly={kit.a11y.readOnly}
-      required={kit.a11y.required}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-invalid={kit.a11y.ariaInvalid}
-      aria-describedby={kit.a11y.ariaDescribedBy}
+      {...toInputOtpHtmlAttributes(kit.a11y)}
       value={kit.displayValue}
       oninput={handleChange}
     />

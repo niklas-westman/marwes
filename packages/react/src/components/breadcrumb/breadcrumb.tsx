@@ -1,6 +1,15 @@
-import { IconName, createBreadcrumbRecipe } from "@marwes-ui/core"
+import {
+  IconName,
+  createBreadcrumbRecipe,
+  toBreadcrumbHomeHtmlAttributes,
+  toBreadcrumbHtmlAttributes,
+  toBreadcrumbItemHtmlAttributes,
+  toBreadcrumbListHtmlAttributes,
+  toBreadcrumbSeparatorHtmlAttributes,
+} from "@marwes-ui/core"
 import type { BreadcrumbItem, BreadcrumbOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -46,13 +55,19 @@ export function Breadcrumb(props: BreadcrumbProps): React.ReactElement {
       {...restProps}
       {...kit.dataAttributes}
       className={cx(kit.className, className)}
-      aria-label={kit.a11y.ariaLabel}
+      {...toReactAttributes(toBreadcrumbHtmlAttributes(kit.a11y))}
     >
-      <ol className={kit.list.className} role={kit.list.a11y.role}>
+      <ol
+        className={kit.list.className}
+        {...toReactAttributes(toBreadcrumbListHtmlAttributes(kit.list.a11y))}
+      >
         {kit.items.map((item, index) => (
           <li key={item.key} className={item.className} {...item.dataAttributes}>
             {index > 0 && (
-              <span className={kit.separator.className} aria-hidden={kit.separator.a11y.ariaHidden}>
+              <span
+                className={kit.separator.className}
+                {...toReactAttributes(toBreadcrumbSeparatorHtmlAttributes(kit.separator.a11y))}
+              >
                 <Icon name={IconName.ChevronRight} decorative size={12} />
               </span>
             )}
@@ -69,12 +84,12 @@ export function Breadcrumb(props: BreadcrumbProps): React.ReactElement {
 }
 
 function renderHomeItem(
-  item: ReturnType<typeof createBreadcrumbRecipe>["items"][number],
+  item: Extract<ReturnType<typeof createBreadcrumbRecipe>["items"][number], { kind: "home" }>,
   onHomeClick: BreadcrumbProps["onHomeClick"],
 ): React.ReactElement {
   const commonProps = {
     className: item.actionClassName,
-    "aria-label": item.a11y.ariaLabel,
+    ...toReactAttributes(toBreadcrumbHomeHtmlAttributes(item.a11y)),
     "aria-current": item.current ? ("page" as const) : undefined,
   }
 
@@ -121,8 +136,7 @@ function BreadcrumbAction({ item, onItemSelect }: BreadcrumbActionProps): React.
   }
   const commonProps = {
     className: item.actionClassName,
-    "aria-label": item.a11y.ariaLabel,
-    "aria-current": item.a11y.ariaCurrent,
+    ...toReactAttributes(toBreadcrumbItemHtmlAttributes(item.a11y)),
   }
 
   if (item.current) {

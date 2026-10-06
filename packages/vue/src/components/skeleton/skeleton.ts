@@ -1,4 +1,9 @@
-import { type CssVars, type SkeletonOptions, createSkeletonRecipe } from "@marwes-ui/core"
+import {
+  type CssVars,
+  type SkeletonOptions,
+  createSkeletonRecipe,
+  toSkeletonHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
@@ -57,11 +62,7 @@ export const Skeleton = defineComponent(
         ...(props.dataAttributes ?? {}),
         class: mergeClassNames(skeletonRenderKit.className, props.className, attrs.class),
         style: mergeStyles(skeletonRenderKit.vars as CssVars, attrs.style),
-        role: skeletonRenderKit.a11y.role,
-        id: skeletonRenderKit.a11y.id,
-        "aria-hidden": skeletonRenderKit.a11y.ariaHidden ? "true" : undefined,
-        "aria-label": skeletonRenderKit.a11y.ariaLabel,
-        "aria-live": skeletonRenderKit.a11y.ariaLive,
+        ...toSkeletonHtmlAttributes(skeletonRenderKit.a11y),
       })
     }
   },

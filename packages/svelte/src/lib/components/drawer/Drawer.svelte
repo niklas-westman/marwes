@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconName, createDrawerRecipe } from "@marwes-ui/core";
+  import { IconName, createDrawerRecipe, toDrawerHtmlAttributes } from "@marwes-ui/core";
   import type { DrawerOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -83,11 +83,7 @@
   <div
     id={drawerId}
     class={mergedPanelClass}
-    role={kit.panel.a11y.role}
-    aria-modal={kit.panel.a11y.ariaModal ? "true" : undefined}
-    aria-label={kit.panel.a11y.ariaLabel}
-    aria-labelledby={kit.panel.a11y.ariaLabelledBy}
-    aria-describedby={kit.panel.a11y.ariaDescribedBy}
+    {...toDrawerHtmlAttributes(kit.panel.a11y)}
     tabindex={-1}
     {...kit.panel.dataAttributes}
   >

@@ -1,4 +1,4 @@
-import { badgeOptionKeys, createBadgeRecipe } from "@marwes-ui/core"
+import { badgeOptionKeys, createBadgeRecipe, toBadgeHtmlAttributes } from "@marwes-ui/core"
 import type { BadgeOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -40,7 +40,7 @@ export const Badge = defineComponent(
           id: props.id,
           class: className,
           style,
-          "aria-label": a11y.ariaLabel,
+          ...toBadgeHtmlAttributes(a11y),
         },
         slots.default?.(),
       )

@@ -1,4 +1,9 @@
-import { type InputOtpOptions, createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core"
+import {
+  type InputOtpOptions,
+  createInputOtpRecipe,
+  sanitizeInputOtpValue,
+  toInputOtpHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
@@ -119,21 +124,9 @@ export const InputOtp = defineComponent(
               ),
             ),
             h("input", {
-              id: kit.value.a11y.id,
               class: "mw-input-otp__input",
               type: "text",
-              name: kit.value.a11y.name,
-              inputMode: kit.value.a11y.inputMode,
-              autoComplete: kit.value.a11y.autoComplete,
-              maxLength: kit.value.a11y.maxLength,
-              pattern: kit.value.a11y.pattern,
-              disabled: kit.value.a11y.disabled,
-              readOnly: kit.value.a11y.readOnly,
-              required: kit.value.a11y.required,
-              "aria-label": kit.value.a11y.ariaLabel,
-              "aria-labelledby": kit.value.a11y.ariaLabelledBy,
-              "aria-invalid": kit.value.a11y.ariaInvalid,
-              "aria-describedby": kit.value.a11y.ariaDescribedBy,
+              ...toInputOtpHtmlAttributes(kit.value.a11y),
               value: kit.value.displayValue,
               onInput: handleInput,
               onChange: (event: Event) => emit("change", event),

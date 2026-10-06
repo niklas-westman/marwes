@@ -1,4 +1,9 @@
-import { createContextMenuRecipe } from "@marwes-ui/core"
+import {
+  createContextMenuRecipe,
+  toContextMenuDividerHtmlAttributes,
+  toContextMenuHtmlAttributes,
+  toContextMenuItemHtmlAttributes,
+} from "@marwes-ui/core"
 import type { ContextMenuActionItem, ContextMenuEntry, ContextMenuOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -45,8 +50,7 @@ export const ContextMenu = defineComponent(
           ...passthroughAttrs,
           ...renderKit.dataAttributes,
           class: mergeClassNames(renderKit.className, props.className, attrs.class),
-          role: renderKit.a11y.role,
-          "aria-label": renderKit.a11y.ariaLabel,
+          ...toContextMenuHtmlAttributes(renderKit.a11y),
         },
         renderKit.items.map((item) => {
           if (item.kind === "divider") {
@@ -54,8 +58,7 @@ export const ContextMenu = defineComponent(
               key: item.key,
               ...item.dataAttributes,
               class: item.className,
-              role: item.a11y.role,
-              "aria-orientation": item.a11y.ariaOrientation,
+              ...toContextMenuDividerHtmlAttributes(item.a11y),
             })
           }
 
@@ -64,10 +67,7 @@ export const ContextMenu = defineComponent(
             {
               key: item.key,
               ...item.dataAttributes,
-              type: item.a11y.type,
-              role: item.a11y.role,
-              disabled: item.a11y.disabled,
-              "aria-disabled": item.a11y.ariaDisabled,
+              ...toContextMenuItemHtmlAttributes(item.a11y),
               class: item.className,
               onClick: () => {
                 if (item.item.disabled) return

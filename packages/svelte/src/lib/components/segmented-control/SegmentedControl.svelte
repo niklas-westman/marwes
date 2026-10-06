@@ -4,6 +4,8 @@
     createSegmentedControlItemRecipe,
     moveSegmentedControlSelection,
     resolveSegmentedControlValue,
+    toSegmentedControlHtmlAttributes,
+    toSegmentedControlItemHtmlAttributes,
   } from "@marwes-ui/core";
   import type { SegmentedControlItemState } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -84,11 +86,7 @@
 <div
   {id}
   class={mergedClass}
-  role={trackKit.a11y.role}
-  aria-label={trackKit.a11y.ariaLabel}
-  aria-labelledby={trackKit.a11y.ariaLabelledBy}
-  aria-describedby={trackKit.a11y.ariaDescribedBy}
-  aria-disabled={trackKit.a11y.ariaDisabled}
+  {...toSegmentedControlHtmlAttributes(trackKit.a11y)}
   onkeydown={handleKeydown}
   style={style}
 >
@@ -105,11 +103,7 @@
     <button
       type="button"
       class={itemKit.className}
-      role={itemKit.a11y.role}
-      aria-checked={itemKit.a11y.ariaChecked}
-      aria-disabled={itemKit.a11y.ariaDisabled}
-      aria-label={itemKit.a11y.ariaLabel}
-      tabindex={itemKit.a11y.tabIndex}
+      {...toSegmentedControlItemHtmlAttributes(itemKit.a11y)}
       disabled={isItemDisabled}
       data-value={item.value}
       onclick={() => !isItemDisabled && selectItem(item.value)}

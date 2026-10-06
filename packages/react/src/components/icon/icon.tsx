@@ -5,8 +5,10 @@ import {
   resolveIconA11y,
   resolveIconSize,
   resolveIconStrokeWidth,
+  toIconHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type IconName = keyof typeof iconRegistry
 
@@ -44,6 +46,7 @@ export function Icon({ name, size, strokeWidth, className, ariaLabel, decorative
   })
 
   return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: aria-label, aria-hidden and role come from the spread a11y attributes
     <svg
       width={px}
       height={px}
@@ -54,9 +57,7 @@ export function Icon({ name, size, strokeWidth, className, ariaLabel, decorative
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
-      aria-hidden={a11y.ariaHidden ? "true" : undefined}
-      aria-label={a11y.ariaLabel}
-      role={a11y.role}
+      {...toReactAttributes(toIconHtmlAttributes(a11y))}
       focusable="false"
     >
       {def.nodes.map((iconNode, nodeIndex) => {

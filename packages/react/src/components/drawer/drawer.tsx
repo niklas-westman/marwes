@@ -1,5 +1,11 @@
-import { type DrawerOptions, IconName, createDrawerRecipe } from "@marwes-ui/core"
+import {
+  type DrawerOptions,
+  IconName,
+  createDrawerRecipe,
+  toDrawerHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -92,15 +98,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
         id={id}
         className={cx(kit.panel.className, props.panelClassName)}
         style={kit.panel.vars}
-        role={kit.panel.a11y.role}
-        {...(kit.panel.a11y.ariaModal ? { "aria-modal": "true" } : {})}
-        {...(kit.panel.a11y.ariaLabel ? { "aria-label": kit.panel.a11y.ariaLabel } : {})}
-        {...(kit.panel.a11y.ariaLabelledBy
-          ? { "aria-labelledby": kit.panel.a11y.ariaLabelledBy }
-          : {})}
-        {...(kit.panel.a11y.ariaDescribedBy
-          ? { "aria-describedby": kit.panel.a11y.ariaDescribedBy }
-          : {})}
+        {...toReactAttributes(toDrawerHtmlAttributes(kit.panel.a11y))}
         tabIndex={-1}
         {...kit.panel.dataAttributes}
       >

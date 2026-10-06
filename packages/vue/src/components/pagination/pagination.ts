@@ -9,6 +9,11 @@ import {
   createPaginationRecipe,
   resolvePaginationAdaptiveProfile,
   resolvePaginationItemAriaLabel,
+  toPaginationControlHtmlAttributes,
+  toPaginationEllipsisHtmlAttributes,
+  toPaginationHtmlAttributes,
+  toPaginationListHtmlAttributes,
+  toPaginationPageHtmlAttributes,
 } from "@marwes-ui/core"
 import type {
   IconName as IconNameType,
@@ -346,8 +351,7 @@ export const Pagination = defineComponent(
           {
             type: "button",
             class: kit.className,
-            "aria-label": kit.a11y.ariaLabel,
-            "aria-disabled": kit.a11y.ariaDisabled,
+            ...toPaginationControlHtmlAttributes(kit.a11y),
             disabled: controlDisabled,
             onClick: () => selectPage(targetPage),
           },
@@ -367,9 +371,7 @@ export const Pagination = defineComponent(
           ref: rootElement,
           class: className,
           style: [rootKit.vars, attrs.style],
-          "aria-label": rootKit.a11y.ariaLabel,
-          "aria-labelledby": rootKit.a11y.ariaLabelledBy,
-          "aria-describedby": rootKit.a11y.ariaDescribedBy,
+          ...toPaginationHtmlAttributes(rootKit.a11y),
           "data-component": "pagination",
           "data-control-display": rootKit.controlDisplay,
         },
@@ -391,7 +393,7 @@ export const Pagination = defineComponent(
             "ul",
             {
               class: listKit.className,
-              role: listKit.a11y.role,
+              ...toPaginationListHtmlAttributes(listKit.a11y),
             },
             rootKit.items.map((item) => {
               if (item.type !== "page") {
@@ -401,7 +403,7 @@ export const Pagination = defineComponent(
                     "span",
                     {
                       class: ellipsisKit.className,
-                      "aria-hidden": ellipsisKit.a11y.ariaHidden,
+                      ...toPaginationEllipsisHtmlAttributes(ellipsisKit.a11y),
                     },
                     "...",
                   ),
@@ -429,9 +431,7 @@ export const Pagination = defineComponent(
                   {
                     type: "button",
                     class: pageKit.className,
-                    "aria-label": pageKit.a11y.ariaLabel,
-                    "aria-current": pageKit.a11y.ariaCurrent,
-                    "aria-disabled": pageKit.a11y.ariaDisabled,
+                    ...toPaginationPageHtmlAttributes(pageKit.a11y),
                     disabled: props.disabled,
                     onClick: () => selectPage(item.page),
                   },

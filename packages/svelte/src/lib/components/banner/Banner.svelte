@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createBannerRecipe } from "@marwes-ui/core";
+  import { createBannerRecipe, toBannerHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { BannerProps } from "./types.js";
 
@@ -24,9 +24,7 @@
 <div
   {id}
   class={mergedClass}
-  role={kit.root.a11y.role}
-  aria-label={kit.root.a11y.ariaLabel}
-  aria-live={kit.root.a11y.ariaLive}
+  {...toBannerHtmlAttributes(kit.root.a11y)}
   {...kit.root.dataAttributes}
   {...dataAttributes}
 >

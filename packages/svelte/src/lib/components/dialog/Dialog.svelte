@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconName, createDialogRecipe } from "@marwes-ui/core";
+  import { IconName, createDialogRecipe, toDialogHtmlAttributes } from "@marwes-ui/core";
   import type { DialogOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -67,11 +67,7 @@
 <section
   id={dialogId}
   class={mergedClass}
-  role={kit.a11y.role}
-  aria-modal={kit.a11y.ariaModal ? "true" : undefined}
-  aria-label={kit.a11y.ariaLabel}
-  aria-labelledby={kit.a11y.ariaLabelledBy}
-  aria-describedby={kit.a11y.ariaDescribedBy}
+  {...toDialogHtmlAttributes(kit.a11y)}
   tabindex={-1}
   {...kit.dataAttributes}
 >

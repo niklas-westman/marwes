@@ -3,8 +3,10 @@ import {
   type StatTileTone,
   type StatTileTrendDirection,
   createStatTileRecipe,
+  toStatTileTrendHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export interface StatTileProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "children" | "title">,
@@ -45,7 +47,7 @@ export function StatTile(props: StatTileProps): React.ReactElement {
           <span
             {...kit.trendDataAttributes}
             className={kit.slots.trendClassName}
-            aria-label={kit.a11y.trendAriaLabel}
+            {...toReactAttributes(toStatTileTrendHtmlAttributes(kit.a11y))}
           >
             {kit.trendIcon ? (
               <span className={kit.slots.trendIconClassName} aria-hidden="true">

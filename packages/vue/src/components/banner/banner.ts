@@ -1,4 +1,4 @@
-import { bannerOptionKeys, createBannerRecipe } from "@marwes-ui/core"
+import { bannerOptionKeys, createBannerRecipe, toBannerHtmlAttributes } from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -77,9 +77,7 @@ export const Banner = defineComponent(
           ...renderKit.root.dataAttributes,
           id: props.id,
           class: className,
-          role: renderKit.root.a11y.role,
-          "aria-label": renderKit.root.a11y.ariaLabel,
-          "aria-live": renderKit.root.a11y.ariaLive,
+          ...toBannerHtmlAttributes(renderKit.root.a11y),
         },
         rootChildren,
       )
