@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest"
 export interface AvatarGroupContractHarness {
   renderAvatarGroup(args?: {
     ariaLabel?: string
+    label?: string
     overflowCount?: number
   }): Promise<void> | void
   getByRole(role: "group" | "img", options: { name: RegExp }): HTMLElement
@@ -45,6 +46,21 @@ export function runAvatarGroupContract(
 
       const group = harness.getByRole("group", { name: /avatar group/i })
       expect(group).toBeInTheDocument()
+    })
+
+    it("accepts label as an alias for ariaLabel and lets ariaLabel win", async () => {
+      await harness.renderAvatarGroup({ label: "Team" })
+      expect(harness.getByRole("group", { name: /team/i })).toBeInTheDocument()
+    })
+
+    it("prefers ariaLabel over label", async () => {
+      await harness.renderAvatarGroup({ ariaLabel: "Project members", label: "Team" })
+      expect(harness.getByRole("group", { name: /project members/i })).toBeInTheDocument()
+    })
+
+    it("falls back to a default group name", async () => {
+      await harness.renderAvatarGroup()
+      expect(harness.getByRole("group", { name: /avatar group/i })).toBeInTheDocument()
     })
   })
 }

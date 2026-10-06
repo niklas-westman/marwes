@@ -1,4 +1,8 @@
-import { type AvatarOptions, createAvatarRecipe } from "@marwes-ui/core"
+import {
+  type AvatarOptions,
+  createAvatarBadgeRecipe,
+  toAvatarBadgeHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Avatar, type AvatarProps } from "./avatar"
@@ -43,23 +47,6 @@ function buildAvatarOptions(props: AvatarBadgeProps, nativeAriaLabel?: string): 
   return avatarOptions
 }
 
-function resolveAvatarBadgeLabel(
-  avatarOptions: AvatarOptions,
-  statusLabel: string,
-): string | undefined {
-  const avatarKit = createAvatarRecipe(avatarOptions)
-
-  if (avatarKit.a11y.ariaHidden) {
-    return undefined
-  }
-
-  if (avatarKit.content.type === "image") {
-    return avatarKit.content.alt ? `${avatarKit.content.alt}, ${statusLabel}` : statusLabel
-  }
-
-  return avatarKit.a11y.ariaLabel ? `${avatarKit.a11y.ariaLabel}, ${statusLabel}` : statusLabel
-}
-
 export const AvatarBadge = defineComponent(
   (props: AvatarBadgeProps) => {
     const attrs = useAttrs()
@@ -67,19 +54,17 @@ export const AvatarBadge = defineComponent(
       typeof attrs["aria-label"] === "string" ? (attrs["aria-label"] as string) : undefined
 
     const avatarOptions = computed(() => buildAvatarOptions(props, nativeAriaLabel))
-    const avatarKit = computed(() => createAvatarRecipe(avatarOptions.value))
+    const badgeKit = computed(() =>
+      createAvatarBadgeRecipe({
+        ...avatarOptions.value,
+        ...(props.statusLabel !== undefined ? { statusLabel: props.statusLabel } : {}),
+      }),
+    )
     const wrapperClass = computed(() =>
-      mergeClassNames(
-        "mw-avatar-badge",
-        `mw-avatar-badge--${avatarKit.value.dataAttributes["data-size"]}`,
-        props.className,
-        attrs.class,
-      ),
+      mergeClassNames(badgeKit.value.className, props.className, attrs.class),
     )
 
     return () => {
-      const resolvedStatusLabel = props.statusLabel ?? "Online"
-      const accessibleLabel = resolveAvatarBadgeLabel(avatarOptions.value, resolvedStatusLabel)
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "aria-label"])
 
       const innerAvatarProps: AvatarProps = {
@@ -106,12 +91,8 @@ export const AvatarBadge = defineComponent(
           ...(props.dataAttributes ?? {}),
           class: wrapperClass.value,
           style: attrs.style,
-          "data-component": "avatar-badge",
-          "data-size": avatarKit.value.dataAttributes["data-size"],
-          "data-status": "online",
-          role: props.decorative ? undefined : "img",
-          "aria-hidden": props.decorative ? "true" : undefined,
-          "aria-label": props.decorative ? undefined : accessibleLabel,
+          ...badgeKit.value.dataAttributes,
+          ...toAvatarBadgeHtmlAttributes(badgeKit.value.a11y),
         },
         [
           h(Avatar, innerAvatarProps),

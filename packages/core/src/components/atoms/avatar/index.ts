@@ -10,5 +10,28 @@ export type {
 export { resolveAvatarA11y } from "./avatar-a11y"
 export { createAvatarRecipe } from "./avatar-recipe"
 export { avatarOptionKeys } from "./avatar-option-keys"
-export { toAvatarHtmlAttributes } from "./avatar-html-attributes"
-export type { AvatarHtmlAttributes } from "./avatar-html-attributes"
+export {
+  toAvatarBadgeHtmlAttributes,
+  toAvatarGroupCounterHtmlAttributes,
+  toAvatarGroupHtmlAttributes,
+  toAvatarHtmlAttributes,
+} from "./avatar-html-attributes"
+export type {
+  AvatarBadgeHtmlAttributes,
+  AvatarGroupCounterHtmlAttributes,
+  AvatarGroupHtmlAttributes,
+  AvatarHtmlAttributes,
+} from "./avatar-html-attributes"
+export { createAvatarGroupRecipe } from "./avatar-group-recipe"
+export { createAvatarBadgeRecipe } from "./avatar-badge-recipe"
+export type {
+  AvatarGroupA11yProps,
+  AvatarGroupCounterA11yProps,
+  AvatarGroupOptions,
+  AvatarGroupRenderKit,
+} from "./avatar-group-types"
+export type {
+  AvatarBadgeA11yProps,
+  AvatarBadgeOptions,
+  AvatarBadgeRenderKit,
+} from "./avatar-badge-types"

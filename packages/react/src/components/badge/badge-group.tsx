@@ -19,7 +19,9 @@
  * ```
  */
 
+import { createBadgeGroupRecipe, toBadgeGroupHtmlAttributes } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Text } from "../text"
 
 export interface BadgeGroupProps {
@@ -46,13 +48,17 @@ function cx(...parts: Array<string | false | undefined>): string {
 export function BadgeGroup(props: BadgeGroupProps): React.ReactElement {
   const reactId = React.useId()
   const id = props.id ?? `mw-badge-group-${reactId}`
-  const labelId = `${id}-label`
+  const kit = createBadgeGroupRecipe({ id })
 
-  const className = cx("mw-badge-group", props.className)
+  const className = cx(kit.className, props.className)
 
   return (
-    <fieldset className={className} aria-labelledby={labelId} {...props.dataAttributes}>
-      <legend className="mw-badge-group__label" id={labelId}>
+    <fieldset
+      className={className}
+      {...toReactAttributes(toBadgeGroupHtmlAttributes(kit.a11y))}
+      {...props.dataAttributes}
+    >
+      <legend className="mw-badge-group__label" id={kit.labelId}>
         <Text variant="caption">{props.label}</Text>
       </legend>
       <div className="mw-badge-group__items">{props.children}</div>

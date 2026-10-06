@@ -17,6 +17,7 @@ runAvatarGroupContract("react", {
     renderWithProvider(
       <AvatarGroup
         {...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {})}
+        {...(args.label !== undefined ? { label: args.label } : {})}
         items={[
           { id: "mw", initials: "MW" },
           { id: "nk", initials: "NK" },

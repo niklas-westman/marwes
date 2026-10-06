@@ -1,4 +1,10 @@
+import {
+  createAvatarGroupRecipe,
+  toAvatarGroupCounterHtmlAttributes,
+  toAvatarGroupHtmlAttributes,
+} from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Avatar, type AvatarProps } from "./avatar"
 
 export interface AvatarGroupItem extends Omit<AvatarProps, "size" | "className" | "style"> {
@@ -11,6 +17,8 @@ export interface AvatarGroupProps
   overflowCount?: number
   overflowLabel?: string
   ariaLabel?: string
+  /** Alias for `ariaLabel`. */
+  label?: string
   dataAttributes?: Record<string, string>
 }
 
@@ -20,6 +28,7 @@ export function AvatarGroup(props: AvatarGroupProps): React.ReactElement {
     overflowCount,
     overflowLabel,
     ariaLabel,
+    label,
     className,
     dataAttributes,
     ...nativeFieldsetProps
@@ -29,18 +38,23 @@ export function AvatarGroup(props: AvatarGroupProps): React.ReactElement {
     typeof nativeFieldsetProps["aria-label"] === "string"
       ? nativeFieldsetProps["aria-label"]
       : undefined
-  const groupLabel = ariaLabel ?? nativeAriaLabel ?? "Avatar group"
-  const mergedClassName = ["mw-avatar-group", className].filter(Boolean).join(" ")
-  const shouldRenderOverflowCounter = overflowCount !== undefined && overflowCount > 0
-  const resolvedOverflowLabel = overflowLabel ?? `${overflowCount} more people`
+  const kit = createAvatarGroupRecipe({
+    ...(overflowCount !== undefined ? { overflowCount } : {}),
+    ...(overflowLabel !== undefined ? { overflowLabel } : {}),
+    ...((ariaLabel ?? nativeAriaLabel) !== undefined
+      ? { ariaLabel: (ariaLabel ?? nativeAriaLabel) as string }
+      : {}),
+    ...(label !== undefined ? { label } : {}),
+  })
+  const mergedClassName = [kit.className, className].filter(Boolean).join(" ")
 
   return (
     <fieldset
       {...nativeFieldsetProps}
       {...dataAttributes}
       className={mergedClassName}
-      data-component="avatar-group"
-      aria-label={groupLabel}
+      {...kit.dataAttributes}
+      {...toReactAttributes(toAvatarGroupHtmlAttributes(kit.a11y))}
     >
       {items.map((item, itemIndex) => (
         <span
@@ -51,9 +65,12 @@ export function AvatarGroup(props: AvatarGroupProps): React.ReactElement {
         </span>
       ))}
 
-      {shouldRenderOverflowCounter ? (
-        <span aria-label={resolvedOverflowLabel} className="mw-avatar-group__counter" role="img">
-          +{overflowCount}
+      {kit.counter.visible ? (
+        <span
+          className="mw-avatar-group__counter"
+          {...toReactAttributes(toAvatarGroupCounterHtmlAttributes(kit.counter.a11y))}
+        >
+          {kit.counter.text}
         </span>
       ) : null}
     </fieldset>
