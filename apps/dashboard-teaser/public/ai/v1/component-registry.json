@@ -109,6 +109,7 @@
           ],
           "core": [
             "packages/core/src/components/atoms/accordion/accordion-a11y.ts",
+            "packages/core/src/components/atoms/accordion/accordion-html-attributes.ts",
             "packages/core/src/components/atoms/accordion/accordion-recipe.ts",
             "packages/core/src/components/atoms/accordion/accordion-types.ts",
             "packages/core/src/components/atoms/accordion/index.ts"
@@ -369,6 +370,12 @@
           "roadmap": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
           "core": [
             "packages/core/src/components/atoms/avatar/avatar-a11y.ts",
+            "packages/core/src/components/atoms/avatar/avatar-badge-recipe.ts",
+            "packages/core/src/components/atoms/avatar/avatar-badge-types.ts",
+            "packages/core/src/components/atoms/avatar/avatar-group-recipe.ts",
+            "packages/core/src/components/atoms/avatar/avatar-group-types.ts",
+            "packages/core/src/components/atoms/avatar/avatar-html-attributes.ts",
+            "packages/core/src/components/atoms/avatar/avatar-option-keys.ts",
             "packages/core/src/components/atoms/avatar/avatar-recipe.ts",
             "packages/core/src/components/atoms/avatar/avatar-types.ts",
             "packages/core/src/components/atoms/avatar/index.ts"
@@ -666,6 +673,10 @@
           ],
           "core": [
             "packages/core/src/components/atoms/badge/badge-a11y.ts",
+            "packages/core/src/components/atoms/badge/badge-group-recipe.ts",
+            "packages/core/src/components/atoms/badge/badge-group-types.ts",
+            "packages/core/src/components/atoms/badge/badge-html-attributes.ts",
+            "packages/core/src/components/atoms/badge/badge-option-keys.ts",
             "packages/core/src/components/atoms/badge/badge-recipe.ts",
             "packages/core/src/components/atoms/badge/badge-types.ts",
             "packages/core/src/components/atoms/badge/index.ts"
@@ -902,6 +913,8 @@
           "roadmap": [],
           "core": [
             "packages/core/src/components/atoms/banner/banner-a11y.ts",
+            "packages/core/src/components/atoms/banner/banner-html-attributes.ts",
+            "packages/core/src/components/atoms/banner/banner-option-keys.ts",
             "packages/core/src/components/atoms/banner/banner-recipe.ts",
             "packages/core/src/components/atoms/banner/banner-types.ts",
             "packages/core/src/components/atoms/banner/index.ts"
@@ -1130,17 +1143,20 @@
           "roadmap": [],
           "core": [
             "packages/core/src/components/atoms/breadcrumb/breadcrumb-a11y.ts",
+            "packages/core/src/components/atoms/breadcrumb/breadcrumb-html-attributes.ts",
             "packages/core/src/components/atoms/breadcrumb/breadcrumb-recipe.ts",
             "packages/core/src/components/atoms/breadcrumb/breadcrumb-types.ts",
             "packages/core/src/components/atoms/breadcrumb/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/breadcrumb.css"],
           "react": [
+            "packages/react/src/components/breadcrumb/__tests__/breadcrumb-contract.test.tsx",
             "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
             "packages/react/src/components/breadcrumb/breadcrumb.tsx",
             "packages/react/src/components/breadcrumb/index.ts"
           ],
           "vue": [
+            "packages/vue/src/components/breadcrumb/__tests__/breadcrumb-contract.test.ts",
             "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
             "packages/vue/src/components/breadcrumb/breadcrumb.ts",
             "packages/vue/src/components/breadcrumb/index.ts"
@@ -1326,7 +1342,9 @@
           "roadmap": ["AXE_ROADMAP.md#button-semantics-cleanup"],
           "core": [
             "packages/core/src/components/atoms/button/button-a11y.ts",
+            "packages/core/src/components/atoms/button/button-html-attributes.ts",
             "packages/core/src/components/atoms/button/button-loading.ts",
+            "packages/core/src/components/atoms/button/button-option-keys.ts",
             "packages/core/src/components/atoms/button/button-recipe.ts",
             "packages/core/src/components/atoms/button/button-types.ts",
             "packages/core/src/components/atoms/button/index.ts"
@@ -2010,6 +2028,7 @@
           ],
           "core": [
             "packages/core/src/components/atoms/checkbox/checkbox-a11y.ts",
+            "packages/core/src/components/atoms/checkbox/checkbox-html-attributes.ts",
             "packages/core/src/components/atoms/checkbox/checkbox-recipe.ts",
             "packages/core/src/components/atoms/checkbox/checkbox-types.ts",
             "packages/core/src/components/atoms/checkbox/index.ts"
@@ -2265,17 +2284,20 @@
           "roadmap": [],
           "core": [
             "packages/core/src/components/atoms/context-menu/context-menu-a11y.ts",
+            "packages/core/src/components/atoms/context-menu/context-menu-html-attributes.ts",
             "packages/core/src/components/atoms/context-menu/context-menu-recipe.ts",
             "packages/core/src/components/atoms/context-menu/context-menu-types.ts",
             "packages/core/src/components/atoms/context-menu/index.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/context-menu.css"],
           "react": [
+            "packages/react/src/components/context-menu/__tests__/context-menu-contract.test.tsx",
             "packages/react/src/components/context-menu/__tests__/context-menu.test.tsx",
             "packages/react/src/components/context-menu/context-menu.tsx",
             "packages/react/src/components/context-menu/index.ts"
           ],
           "vue": [
+            "packages/vue/src/components/context-menu/__tests__/context-menu-contract.test.ts",
             "packages/vue/src/components/context-menu/__tests__/context-menu.test.ts",
             "packages/vue/src/components/context-menu/context-menu.ts",
             "packages/vue/src/components/context-menu/index.ts"
@@ -2453,6 +2475,7 @@
           "roadmap": [],
           "core": [
             "packages/core/src/components/atoms/date-picker/date-picker-a11y.ts",
+            "packages/core/src/components/atoms/date-picker/date-picker-html-attributes.ts",
             "packages/core/src/components/atoms/date-picker/date-picker-recipe.ts",
             "packages/core/src/components/atoms/date-picker/date-picker-types.ts",
             "packages/core/src/components/atoms/date-picker/index.ts"
@@ -2674,6 +2697,7 @@
           "roadmap": ["AXE_ROADMAP.md#dialog-family", "AXE_ROADMAP.md#4a--dialog-modal-hardening"],
           "core": [
             "packages/core/src/components/atoms/dialog/dialog-a11y.ts",
+            "packages/core/src/components/atoms/dialog/dialog-html-attributes.ts",
             "packages/core/src/components/atoms/dialog/dialog-recipe.ts",
             "packages/core/src/components/atoms/dialog/dialog-types.ts",
             "packages/core/src/components/atoms/dialog/index.ts"
@@ -2946,6 +2970,7 @@
             "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
           ],
           "core": [
+            "packages/core/src/components/atoms/divider/divider-html-attributes.ts",
             "packages/core/src/components/atoms/divider/divider-recipe.ts",
             "packages/core/src/components/atoms/divider/divider-types.ts",
             "packages/core/src/components/atoms/divider/index.ts"
@@ -3157,6 +3182,7 @@
           "roadmap": [],
           "core": [
             "packages/core/src/components/atoms/drawer/drawer-a11y.ts",
+            "packages/core/src/components/atoms/drawer/drawer-html-attributes.ts",
             "packages/core/src/components/atoms/drawer/drawer-recipe.ts",
             "packages/core/src/components/atoms/drawer/drawer-types.ts",
             "packages/core/src/components/atoms/drawer/index.ts"
@@ -3361,6 +3387,7 @@
           ],
           "core": [
             "packages/core/src/components/atoms/heading/heading-a11y.ts",
+            "packages/core/src/components/atoms/heading/heading-html-attributes.ts",
             "packages/core/src/components/atoms/heading/heading-recipe.ts",
             "packages/core/src/components/atoms/heading/heading-types.ts",
             "packages/core/src/components/atoms/heading/index.ts"
@@ -3587,6 +3614,7 @@
           ],
           "core": [
             "packages/core/src/components/atoms/icon/icon-a11y.ts",
+            "packages/core/src/components/atoms/icon/icon-html-attributes.ts",
             "packages/core/src/components/atoms/icon/icon-names.ts",
             "packages/core/src/components/atoms/icon/icon-preset.ts",
             "packages/core/src/components/atoms/icon/icon-recipe.ts",
@@ -3829,20 +3857,30 @@
           "core": [
             "packages/core/src/components/atoms/input/index.ts",
             "packages/core/src/components/atoms/input/input-a11y.ts",
+            "packages/core/src/components/atoms/input/input-field-a11y.ts",
+            "packages/core/src/components/atoms/input/input-field-html-attributes.ts",
+            "packages/core/src/components/atoms/input/input-field-types.ts",
+            "packages/core/src/components/atoms/input/input-html-attributes.ts",
             "packages/core/src/components/atoms/input/input-otp-a11y.ts",
+            "packages/core/src/components/atoms/input/input-otp-html-attributes.ts",
             "packages/core/src/components/atoms/input/input-otp-recipe.ts",
             "packages/core/src/components/atoms/input/input-otp-types.ts",
             "packages/core/src/components/atoms/input/input-recipe.ts",
             "packages/core/src/components/atoms/input/input-types.ts",
             "packages/core/src/components/atoms/input/rich-text-a11y.ts",
+            "packages/core/src/components/atoms/input/rich-text-html-attributes.ts",
             "packages/core/src/components/atoms/input/rich-text-html.ts",
             "packages/core/src/components/atoms/input/rich-text-recipe.ts",
             "packages/core/src/components/atoms/input/rich-text-styles.ts",
             "packages/core/src/components/atoms/input/rich-text-types.ts",
             "packages/core/src/components/atoms/input/select-a11y.ts",
+            "packages/core/src/components/atoms/input/select-combobox-a11y.ts",
+            "packages/core/src/components/atoms/input/select-combobox-html-attributes.ts",
+            "packages/core/src/components/atoms/input/select-html-attributes.ts",
             "packages/core/src/components/atoms/input/select-recipe.ts",
             "packages/core/src/components/atoms/input/select-types.ts",
             "packages/core/src/components/atoms/input/textarea-a11y.ts",
+            "packages/core/src/components/atoms/input/textarea-html-attributes.ts",
             "packages/core/src/components/atoms/input/textarea-recipe.ts",
             "packages/core/src/components/atoms/input/textarea-types.ts"
           ],
@@ -3887,10 +3925,12 @@
             "packages/vue/src/components/input/__tests__/currency-field.test.ts",
             "packages/vue/src/components/input/__tests__/date-of-birth-field.test.ts",
             "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",
+            "packages/vue/src/components/input/__tests__/field-variants.test.ts",
             "packages/vue/src/components/input/__tests__/index-exports.test.ts",
             "packages/vue/src/components/input/__tests__/input-field.test.ts",
             "packages/vue/src/components/input/__tests__/input-otp.test.ts",
             "packages/vue/src/components/input/__tests__/input.test.ts",
+            "packages/vue/src/components/input/__tests__/prop-key-gaps.test.ts",
             "packages/vue/src/components/input/__tests__/rich-text-field.test.ts",
             "packages/vue/src/components/input/__tests__/rich-text.test.ts",
             "packages/vue/src/components/input/__tests__/select-field.test.ts",
@@ -4257,17 +4297,20 @@
           "core": [
             "packages/core/src/components/atoms/pagination/index.ts",
             "packages/core/src/components/atoms/pagination/pagination-a11y.ts",
+            "packages/core/src/components/atoms/pagination/pagination-html-attributes.ts",
             "packages/core/src/components/atoms/pagination/pagination-recipe.ts",
             "packages/core/src/components/atoms/pagination/pagination-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/pagination.css"],
           "react": [
+            "packages/react/src/components/pagination/__tests__/pagination-contract.test.tsx",
             "packages/react/src/components/pagination/__tests__/pagination.test.tsx",
             "packages/react/src/components/pagination/index.ts",
             "packages/react/src/components/pagination/pagination-field.tsx",
             "packages/react/src/components/pagination/pagination.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/pagination/__tests__/pagination-contract.test.ts",
             "packages/vue/src/components/pagination/__tests__/pagination.test.ts",
             "packages/vue/src/components/pagination/index.ts",
             "packages/vue/src/components/pagination/pagination-field.ts",
@@ -4485,6 +4528,7 @@
           ],
           "core": [
             "packages/core/src/components/atoms/paragraph/index.ts",
+            "packages/core/src/components/atoms/paragraph/paragraph-html-attributes.ts",
             "packages/core/src/components/atoms/paragraph/paragraph-recipe.ts",
             "packages/core/src/components/atoms/paragraph/paragraph-types.ts"
           ],
@@ -4702,6 +4746,7 @@
           "core": [
             "packages/core/src/components/atoms/progress-bar/index.ts",
             "packages/core/src/components/atoms/progress-bar/progress-bar-a11y.ts",
+            "packages/core/src/components/atoms/progress-bar/progress-bar-html-attributes.ts",
             "packages/core/src/components/atoms/progress-bar/progress-bar-recipe.ts",
             "packages/core/src/components/atoms/progress-bar/progress-bar-types.ts"
           ],
@@ -4925,6 +4970,7 @@
           "core": [
             "packages/core/src/components/atoms/radio/index.ts",
             "packages/core/src/components/atoms/radio/radio-a11y.ts",
+            "packages/core/src/components/atoms/radio/radio-html-attributes.ts",
             "packages/core/src/components/atoms/radio/radio-recipe.ts",
             "packages/core/src/components/atoms/radio/radio-types.ts"
           ],
@@ -5176,16 +5222,19 @@
           "core": [
             "packages/core/src/components/atoms/segmented-control/index.ts",
             "packages/core/src/components/atoms/segmented-control/segmented-control-a11y.ts",
+            "packages/core/src/components/atoms/segmented-control/segmented-control-html-attributes.ts",
             "packages/core/src/components/atoms/segmented-control/segmented-control-recipe.ts",
             "packages/core/src/components/atoms/segmented-control/segmented-control-types.ts"
           ],
           "presets": ["packages/presets/src/firstEdition/segmented-control.css"],
           "react": [
+            "packages/react/src/components/segmented-control/__tests__/segmented-control-contract.test.tsx",
             "packages/react/src/components/segmented-control/index.ts",
             "packages/react/src/components/segmented-control/segmented-control-field.tsx",
             "packages/react/src/components/segmented-control/segmented-control.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/segmented-control/__tests__/segmented-control-contract.test.ts",
             "packages/vue/src/components/segmented-control/index.ts",
             "packages/vue/src/components/segmented-control/segmented-control-field.ts",
             "packages/vue/src/components/segmented-control/segmented-control.ts"
@@ -5384,6 +5433,7 @@
           "core": [
             "packages/core/src/components/atoms/skeleton/index.ts",
             "packages/core/src/components/atoms/skeleton/skeleton-a11y.ts",
+            "packages/core/src/components/atoms/skeleton/skeleton-html-attributes.ts",
             "packages/core/src/components/atoms/skeleton/skeleton-recipe.ts",
             "packages/core/src/components/atoms/skeleton/skeleton-types.ts"
           ],
@@ -5592,6 +5642,7 @@
           "core": [
             "packages/core/src/components/atoms/slider/index.ts",
             "packages/core/src/components/atoms/slider/slider-a11y.ts",
+            "packages/core/src/components/atoms/slider/slider-html-attributes.ts",
             "packages/core/src/components/atoms/slider/slider-recipe.ts",
             "packages/core/src/components/atoms/slider/slider-types.ts"
           ],
@@ -5857,6 +5908,7 @@
           ],
           "core": [
             "packages/core/src/components/atoms/spacing/index.ts",
+            "packages/core/src/components/atoms/spacing/spacing-html-attributes.ts",
             "packages/core/src/components/atoms/spacing/spacing.recipe.ts",
             "packages/core/src/components/atoms/spacing/spacing.types.ts"
           ],
@@ -6074,6 +6126,7 @@
           "core": [
             "packages/core/src/components/atoms/spinner/index.ts",
             "packages/core/src/components/atoms/spinner/spinner-a11y.ts",
+            "packages/core/src/components/atoms/spinner/spinner-html-attributes.ts",
             "packages/core/src/components/atoms/spinner/spinner-recipe.ts",
             "packages/core/src/components/atoms/spinner/spinner-svg.ts",
             "packages/core/src/components/atoms/spinner/spinner-types.ts"
@@ -6336,6 +6389,7 @@
           "core": [
             "packages/core/src/components/atoms/stat-tile/index.ts",
             "packages/core/src/components/atoms/stat-tile/stat-tile-a11y.ts",
+            "packages/core/src/components/atoms/stat-tile/stat-tile-html-attributes.ts",
             "packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts",
             "packages/core/src/components/atoms/stat-tile/stat-tile-types.ts"
           ],
@@ -6547,6 +6601,7 @@
           "core": [
             "packages/core/src/components/atoms/switch/index.ts",
             "packages/core/src/components/atoms/switch/switch-a11y.ts",
+            "packages/core/src/components/atoms/switch/switch-html-attributes.ts",
             "packages/core/src/components/atoms/switch/switch-recipe.ts",
             "packages/core/src/components/atoms/switch/switch-types.ts"
           ],
@@ -6808,6 +6863,7 @@
             "packages/core/src/components/atoms/tab/tab-a11y.ts",
             "packages/core/src/components/atoms/tab/tab-group-a11y.ts",
             "packages/core/src/components/atoms/tab/tab-group-types.ts",
+            "packages/core/src/components/atoms/tab/tab-html-attributes.ts",
             "packages/core/src/components/atoms/tab/tab-recipe.ts",
             "packages/core/src/components/atoms/tab/tab-types.ts"
           ],
@@ -7057,6 +7113,7 @@
           "roadmap": [],
           "core": [
             "packages/core/src/components/atoms/text/index.ts",
+            "packages/core/src/components/atoms/text/text-html-attributes.ts",
             "packages/core/src/components/atoms/text/text-recipe.ts",
             "packages/core/src/components/atoms/text/text-types.ts"
           ],
@@ -7269,6 +7326,7 @@
             "packages/core/src/components/atoms/toast/index.ts",
             "packages/core/src/components/atoms/toast/toast-a11y.ts",
             "packages/core/src/components/atoms/toast/toast-container-types.ts",
+            "packages/core/src/components/atoms/toast/toast-html-attributes.ts",
             "packages/core/src/components/atoms/toast/toast-recipe.ts",
             "packages/core/src/components/atoms/toast/toast-types.ts"
           ],
@@ -7541,6 +7599,7 @@
           "core": [
             "packages/core/src/components/atoms/tooltip/index.ts",
             "packages/core/src/components/atoms/tooltip/tooltip-a11y.ts",
+            "packages/core/src/components/atoms/tooltip/tooltip-html-attributes.ts",
             "packages/core/src/components/atoms/tooltip/tooltip-recipe.ts",
             "packages/core/src/components/atoms/tooltip/tooltip-types.ts"
           ],

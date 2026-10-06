@@ -18,6 +18,7 @@
     ],
     "core": [
       "packages/core/src/components/atoms/spacing/index.ts",
+      "packages/core/src/components/atoms/spacing/spacing-html-attributes.ts",
       "packages/core/src/components/atoms/spacing/spacing.recipe.ts",
       "packages/core/src/components/atoms/spacing/spacing.types.ts"
     ],

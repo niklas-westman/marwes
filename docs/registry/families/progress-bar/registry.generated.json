@@ -16,6 +16,7 @@
     "core": [
       "packages/core/src/components/atoms/progress-bar/index.ts",
       "packages/core/src/components/atoms/progress-bar/progress-bar-a11y.ts",
+      "packages/core/src/components/atoms/progress-bar/progress-bar-html-attributes.ts",
       "packages/core/src/components/atoms/progress-bar/progress-bar-recipe.ts",
       "packages/core/src/components/atoms/progress-bar/progress-bar-types.ts"
     ],

@@ -15,6 +15,7 @@
     "roadmap": [],
     "core": [
       "packages/core/src/components/atoms/text/index.ts",
+      "packages/core/src/components/atoms/text/text-html-attributes.ts",
       "packages/core/src/components/atoms/text/text-recipe.ts",
       "packages/core/src/components/atoms/text/text-types.ts"
     ],

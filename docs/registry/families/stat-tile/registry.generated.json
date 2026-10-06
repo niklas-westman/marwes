@@ -16,6 +16,7 @@
     "core": [
       "packages/core/src/components/atoms/stat-tile/index.ts",
       "packages/core/src/components/atoms/stat-tile/stat-tile-a11y.ts",
+      "packages/core/src/components/atoms/stat-tile/stat-tile-html-attributes.ts",
       "packages/core/src/components/atoms/stat-tile/stat-tile-recipe.ts",
       "packages/core/src/components/atoms/stat-tile/stat-tile-types.ts"
     ],

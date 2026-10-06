@@ -16,16 +16,19 @@
     "core": [
       "packages/core/src/components/atoms/segmented-control/index.ts",
       "packages/core/src/components/atoms/segmented-control/segmented-control-a11y.ts",
+      "packages/core/src/components/atoms/segmented-control/segmented-control-html-attributes.ts",
       "packages/core/src/components/atoms/segmented-control/segmented-control-recipe.ts",
       "packages/core/src/components/atoms/segmented-control/segmented-control-types.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/segmented-control.css"],
     "react": [
+      "packages/react/src/components/segmented-control/__tests__/segmented-control-contract.test.tsx",
       "packages/react/src/components/segmented-control/index.ts",
       "packages/react/src/components/segmented-control/segmented-control-field.tsx",
       "packages/react/src/components/segmented-control/segmented-control.tsx"
     ],
     "vue": [
+      "packages/vue/src/components/segmented-control/__tests__/segmented-control-contract.test.ts",
       "packages/vue/src/components/segmented-control/index.ts",
       "packages/vue/src/components/segmented-control/segmented-control-field.ts",
       "packages/vue/src/components/segmented-control/segmented-control.ts"

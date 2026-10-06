@@ -16,17 +16,20 @@
     "core": [
       "packages/core/src/components/atoms/pagination/index.ts",
       "packages/core/src/components/atoms/pagination/pagination-a11y.ts",
+      "packages/core/src/components/atoms/pagination/pagination-html-attributes.ts",
       "packages/core/src/components/atoms/pagination/pagination-recipe.ts",
       "packages/core/src/components/atoms/pagination/pagination-types.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/pagination.css"],
     "react": [
+      "packages/react/src/components/pagination/__tests__/pagination-contract.test.tsx",
       "packages/react/src/components/pagination/__tests__/pagination.test.tsx",
       "packages/react/src/components/pagination/index.ts",
       "packages/react/src/components/pagination/pagination-field.tsx",
       "packages/react/src/components/pagination/pagination.tsx"
     ],
     "vue": [
+      "packages/vue/src/components/pagination/__tests__/pagination-contract.test.ts",
       "packages/vue/src/components/pagination/__tests__/pagination.test.ts",
       "packages/vue/src/components/pagination/index.ts",
       "packages/vue/src/components/pagination/pagination-field.ts",

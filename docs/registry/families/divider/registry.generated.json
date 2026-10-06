@@ -17,6 +17,7 @@
       "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
     ],
     "core": [
+      "packages/core/src/components/atoms/divider/divider-html-attributes.ts",
       "packages/core/src/components/atoms/divider/divider-recipe.ts",
       "packages/core/src/components/atoms/divider/divider-types.ts",
       "packages/core/src/components/atoms/divider/index.ts"

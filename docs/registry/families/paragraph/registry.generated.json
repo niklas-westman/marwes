@@ -18,6 +18,7 @@
     ],
     "core": [
       "packages/core/src/components/atoms/paragraph/index.ts",
+      "packages/core/src/components/atoms/paragraph/paragraph-html-attributes.ts",
       "packages/core/src/components/atoms/paragraph/paragraph-recipe.ts",
       "packages/core/src/components/atoms/paragraph/paragraph-types.ts"
     ],

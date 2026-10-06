@@ -16,6 +16,7 @@
     "core": [
       "packages/core/src/components/atoms/skeleton/index.ts",
       "packages/core/src/components/atoms/skeleton/skeleton-a11y.ts",
+      "packages/core/src/components/atoms/skeleton/skeleton-html-attributes.ts",
       "packages/core/src/components/atoms/skeleton/skeleton-recipe.ts",
       "packages/core/src/components/atoms/skeleton/skeleton-types.ts"
     ],

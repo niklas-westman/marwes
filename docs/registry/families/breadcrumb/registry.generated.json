@@ -15,17 +15,20 @@
     "roadmap": [],
     "core": [
       "packages/core/src/components/atoms/breadcrumb/breadcrumb-a11y.ts",
+      "packages/core/src/components/atoms/breadcrumb/breadcrumb-html-attributes.ts",
       "packages/core/src/components/atoms/breadcrumb/breadcrumb-recipe.ts",
       "packages/core/src/components/atoms/breadcrumb/breadcrumb-types.ts",
       "packages/core/src/components/atoms/breadcrumb/index.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/breadcrumb.css"],
     "react": [
+      "packages/react/src/components/breadcrumb/__tests__/breadcrumb-contract.test.tsx",
       "packages/react/src/components/breadcrumb/__tests__/breadcrumb.test.tsx",
       "packages/react/src/components/breadcrumb/breadcrumb.tsx",
       "packages/react/src/components/breadcrumb/index.ts"
     ],
     "vue": [
+      "packages/vue/src/components/breadcrumb/__tests__/breadcrumb-contract.test.ts",
       "packages/vue/src/components/breadcrumb/__tests__/breadcrumb.test.ts",
       "packages/vue/src/components/breadcrumb/breadcrumb.ts",
       "packages/vue/src/components/breadcrumb/index.ts"
