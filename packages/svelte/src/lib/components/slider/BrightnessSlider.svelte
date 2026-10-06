@@ -17,12 +17,14 @@
     minValueLabel = "0",
     maxValueLabel = "100",
     dataAttributes,
+    value = $bindable(),
     ...rest
   }: BrightnessSliderProps = $props();
 </script>
 
 <SliderField
   {...rest}
+  bind:value
   {label}
   {minValueLabel}
   {maxValueLabel}

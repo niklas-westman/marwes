@@ -14,7 +14,7 @@
     input = {},
     ariaDescribedBy,
     leadingSymbol,
-    value = $bindable(""),
+    value = $bindable(input.defaultValue ?? ""),
     class: className,
   }: InputFieldProps = $props();
 
