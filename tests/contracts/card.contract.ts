@@ -2,6 +2,7 @@
  * Shared contract for the Card atom — data-component marker, title/body
  * rendering, headerless mode, and purpose card variants (Product, Profile, Stat).
  */
+import type { CardOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export interface CardContractHarness {
@@ -11,6 +12,23 @@ export interface CardContractHarness {
   renderStatCard(args?: { body?: string }): Promise<void> | void
   getCardElement(): HTMLElement | null
   getByText(text: string): HTMLElement
+  /** Renders the base component with raw core options. */
+  renderCardOptions(options: CardOptions): Promise<void> | void
+  getCardRoot(): HTMLElement
+}
+
+type CardOptionCase = {
+  options: CardOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core CardOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const cardOptionCases: Record<keyof CardOptions, CardOptionCase> = {
+  dataAttributes: {
+    options: { dataAttributes: { "data-purpose": "product-card" } },
+    expectRendered: (root) => expect(root).toHaveAttribute("data-purpose", "product-card"),
+  },
 }
 
 export function runCardContract(adapterName: string, harness: CardContractHarness): void {
@@ -67,6 +85,16 @@ export function runCardContract(adapterName: string, harness: CardContractHarnes
       const card = harness.getCardElement()
       expect(card).toHaveAttribute("data-component", "card")
       expect(card).toHaveAttribute("data-purpose", "stat-card")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(cardOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderCardOptions(optionCase.options)
+
+        const element = harness.getCardRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

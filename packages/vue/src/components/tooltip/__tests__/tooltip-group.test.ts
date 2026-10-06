@@ -25,6 +25,19 @@ function renderWithProvider(child: () => unknown) {
 }
 
 runTooltipContract("vue", {
+  renderTooltipOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Tooltip as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getTooltipRoot() {
+    return document.querySelector('[data-component="tooltip"]') as HTMLElement
+  },
   async renderTooltip(args = {}) {
     renderWithProvider(() =>
       h(

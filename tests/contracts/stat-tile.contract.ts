@@ -2,6 +2,7 @@
  * Shared contract for the StatTile atom — Figma baseline rendering
  * and tone/trend metadata.
  */
+import type { StatTileOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type StatTileContractHarness = {
@@ -15,6 +16,37 @@ export type StatTileContractHarness = {
   }): Promise<void> | void
   getStatTileElement(): HTMLElement
   getByText(text: string): HTMLElement
+  /** Renders the base component with raw core options. */
+  renderStatTileOptions(options: StatTileOptions): Promise<void> | void
+  getStatTileRoot(): HTMLElement
+}
+
+type StatTileOptionCase = {
+  options: StatTileOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core StatTileOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const statTileOptionCases: Record<keyof StatTileOptions, StatTileOptionCase> = {
+  tone: {
+    options: { tone: "success" },
+    expectRendered: (root) => {
+      expect(root).toHaveClass("mw-stat-tile--success")
+      expect(root).toHaveAttribute("data-tone", "success")
+    },
+  },
+  trendDirection: {
+    options: { trendDirection: "negative" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("data-trend", "negative")
+      expect(root.querySelector(".mw-stat-tile__trend--negative")).not.toBeNull()
+    },
+  },
+  dataAttributes: {
+    options: { dataAttributes: { "data-purpose": "revenue" } },
+    expectRendered: (root) => expect(root).toHaveAttribute("data-purpose", "revenue"),
+  },
 }
 
 export function runStatTileContract(adapterName: string, harness: StatTileContractHarness): void {
@@ -47,6 +79,16 @@ export function runStatTileContract(adapterName: string, harness: StatTileContra
       const trend = harness.getByText("12%").closest("[data-component='stat-tile-trend']")
       expect(trend).toHaveAttribute("aria-label", "Increased by 12%")
       expect(trend).toHaveAttribute("data-trend", "positive")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(statTileOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderStatTileOptions(optionCase.options)
+
+        const element = harness.getStatTileRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

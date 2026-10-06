@@ -8,6 +8,7 @@ import type * as React from "react"
 import { describe, expect, it } from "vitest"
 import { runTabContract } from "../../../../../../tests/contracts/tab.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Tab } from "../tab"
 import { TabGroup } from "../tab-group"
 
 function renderWithProvider(ui: React.ReactElement) {
@@ -15,6 +16,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runTabContract("react", {
+  renderTabOptions(options) {
+    renderWithProvider(<Tab {...options}>Overview</Tab>)
+  },
+  getTabRoot() {
+    return document.querySelector("button.mw-tab") as HTMLElement
+  },
   async renderTabGroup(args = {}) {
     const tabGroupProps = {
       ...(args.label !== undefined ? { label: args.label } : {}),

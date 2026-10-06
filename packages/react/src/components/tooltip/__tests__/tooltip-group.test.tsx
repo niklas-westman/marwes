@@ -16,6 +16,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runTooltipContract("react", {
+  renderTooltipOptions(options) {
+    renderWithProvider(<Tooltip {...options}>Hint</Tooltip>)
+  },
+  getTooltipRoot() {
+    return document.querySelector('[data-component="tooltip"]') as HTMLElement
+  },
   async renderTooltip(args = {}) {
     const tooltipProps = {
       ...(args.id !== undefined ? { id: args.id } : {}),

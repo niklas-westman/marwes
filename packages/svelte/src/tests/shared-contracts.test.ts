@@ -102,6 +102,7 @@ import Input from "../lib/components/input/Input.svelte"
 import RichText from "../lib/components/input/RichText.svelte"
 import Select from "../lib/components/input/Select.svelte"
 import Textarea from "../lib/components/input/Textarea.svelte"
+import Paragraph from "../lib/components/paragraph/Paragraph.svelte"
 import ProgressBar from "../lib/components/progress-bar/ProgressBar.svelte"
 import Radio from "../lib/components/radio/Radio.svelte"
 import Skeleton from "../lib/components/skeleton/Skeleton.svelte"
@@ -112,6 +113,7 @@ import EmptyStateSpinner from "../lib/components/spinner/EmptyStateSpinner.svelt
 import Spinner from "../lib/components/spinner/Spinner.svelte"
 import StatTile from "../lib/components/stat-tile/StatTile.svelte"
 import Switch from "../lib/components/switch/Switch.svelte"
+import Tab from "../lib/components/tab/Tab.svelte"
 import ErrorToast from "../lib/components/toast/ErrorToast.svelte"
 import InfoToast from "../lib/components/toast/InfoToast.svelte"
 import SuccessToast from "../lib/components/toast/SuccessToast.svelte"
@@ -138,6 +140,7 @@ import TabGroupContractFixture from "./type-fixtures/TabGroupContractFixture.sve
 import TextareaFieldContractFixture from "./type-fixtures/TextareaFieldContractFixture.svelte"
 import ToastProviderContractFixture from "./type-fixtures/ToastProviderContractFixture.svelte"
 import TypographyContractFixture from "./type-fixtures/TypographyContractFixture.svelte"
+import WithProviderFixture from "./type-fixtures/WithProviderFixture.svelte"
 import ZipCodeFieldContractFixture from "./type-fixtures/ZipCodeFieldContractFixture.svelte"
 
 type Props = Record<string, unknown>
@@ -235,6 +238,12 @@ async function dispatchKeyboard(text: string): Promise<void> {
 }
 
 runAccordionContract("svelte", {
+  renderAccordionOptions(options) {
+    render(Accordion, { props: { title: "Question", ...options } })
+  },
+  getAccordionRoot() {
+    return document.querySelector(".mw-accordion") as HTMLElement
+  },
   renderAccordion(args = {}) {
     renderWithText(
       Accordion,
@@ -563,6 +572,12 @@ runBannerContract("svelte", {
 })
 
 runCardContract("svelte", {
+  renderCardOptions(options) {
+    render(Card, { props: { ...options } })
+  },
+  getCardRoot() {
+    return document.querySelector('[data-component="card"]') as HTMLElement
+  },
   renderCard(args = {}) {
     renderWithText(
       Card,
@@ -1018,6 +1033,12 @@ runInputOtpContract("svelte", {
 })
 
 runParagraphContract("svelte", {
+  renderParagraphOptions(options) {
+    render(WithProviderFixture, { props: { Component: Paragraph, props: { ...options } } })
+  },
+  getParagraphRoot() {
+    return document.querySelector("p.mw-p") as HTMLElement
+  },
   renderParagraph(args) {
     render(TypographyContractFixture, {
       props: {
@@ -1282,6 +1303,12 @@ runSpacingContract("svelte", {
 })
 
 runStatTileContract("svelte", {
+  renderStatTileOptions(options) {
+    render(StatTile, { props: { label: "Revenue", value: "42", trendValue: "3%", ...options } })
+  },
+  getStatTileRoot() {
+    return document.querySelector('[data-component="stat-tile"]') as HTMLElement
+  },
   renderStatTile(args = {}) {
     render(StatTile, {
       props: {
@@ -1438,6 +1465,12 @@ runSwitchContract("svelte", {
 })
 
 runTabContract("svelte", {
+  renderTabOptions(options) {
+    render(Tab, { props: { ...options } })
+  },
+  getTabRoot() {
+    return document.querySelector("button.mw-tab") as HTMLElement
+  },
   renderTabGroup(args = {}) {
     render(TabGroupContractFixture, {
       props: {
@@ -1645,6 +1678,12 @@ runToastContract("svelte", {
 })
 
 runTooltipContract("svelte", {
+  renderTooltipOptions(options) {
+    render(Tooltip, { props: { ...options } })
+  },
+  getTooltipRoot() {
+    return document.querySelector('[data-component="tooltip"]') as HTMLElement
+  },
   renderTooltip(args = {}) {
     renderWithText(
       Tooltip,

@@ -32,6 +32,19 @@ function renderAccordion(
 }
 
 runAccordionContract("vue", {
+  renderAccordionOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Accordion as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getAccordionRoot() {
+    return document.querySelector(".mw-accordion") as HTMLElement
+  },
   async renderAccordion(args = {}) {
     render(
       defineComponent({
