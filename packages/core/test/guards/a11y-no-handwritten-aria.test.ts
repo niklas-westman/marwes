@@ -60,7 +60,7 @@ function findMarkersWithoutReason(path: string): string[] {
     .split("\n")
     .flatMap((line, index) => {
       const marker = line.match(allowMarker)
-      const reason = marker?.[1]?.replace(/-->|\*\/|\}/g, "").trim() ?? ""
+      const reason = marker?.[1]?.replace(/--!?>|\*\/|\}/g, "").trim() ?? ""
       return line.includes("a11y-allow") && reason.length < 12
         ? [`${relative(repoRoot, path)}:${index + 1}`]
         : []

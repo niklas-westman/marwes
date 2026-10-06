@@ -1,6 +1,7 @@
 ---
 "@marwes-ui/core": minor
 "@marwes-ui/react": minor
+"@marwes-ui/presets": minor
 "@marwes-ui/vue": minor
 "@marwes-ui/svelte": minor
 ---
