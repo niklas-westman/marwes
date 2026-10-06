@@ -1,9 +1,28 @@
 /**
  * Svelte adapter: tests Drawer base class, a11y wiring, variants, and close behavior.
  */
+import "@testing-library/jest-dom/vitest"
 import { fireEvent, render } from "@testing-library/svelte"
+import { createRawSnippet } from "svelte"
 import { describe, expect, it, vi } from "vitest"
+import { runDrawerContract } from "../../../../tests/contracts/drawer.contract"
 import Drawer from "../lib/components/drawer/Drawer.svelte"
+
+runDrawerContract("svelte", {
+  renderDrawerOptions(options) {
+    render(Drawer, {
+      props: {
+        title: "Title",
+        footer: createRawSnippet(() => ({ render: () => '<button type="button">Action</button>' })),
+        onclose: () => {},
+        ...options,
+      },
+    })
+  },
+  getDrawerRoot() {
+    return document.querySelector(".mw-drawer") as HTMLElement
+  },
+})
 
 describe("Drawer", () => {
   it("renders a panel with role dialog", () => {

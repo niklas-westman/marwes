@@ -7,6 +7,7 @@ import type * as React from "react"
 import { describe, expect, it } from "vitest"
 import { runDialogContract } from "../../../../../../tests/contracts/dialog.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Dialog } from "../dialog"
 import { ConfirmDialog, DestructiveDialog, InfoDialog } from "../variants"
 
 function renderWithProvider(ui: React.ReactElement) {
@@ -14,6 +15,21 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runDialogContract("react", {
+  renderDialogOptions(options) {
+    renderWithProvider(
+      <Dialog
+        title="Title"
+        footer={<button type="button">Action</button>}
+        onClose={() => {}}
+        {...(options as Record<string, unknown>)}
+      >
+        Body
+      </Dialog>,
+    )
+  },
+  getDialogRoot() {
+    return document.querySelector(".mw-dialog") as HTMLElement
+  },
   renderConfirm() {
     renderWithProvider(
       <ConfirmDialog

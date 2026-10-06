@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
 import { runDialogContract } from "../../../../../../tests/contracts/dialog.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Dialog } from "../dialog"
 import { ConfirmDialog, DestructiveDialog, InfoDialog } from "../variants"
 
 function renderWithProvider(component: unknown, props: Record<string, unknown>, content: string) {
@@ -26,6 +27,27 @@ function renderWithProvider(component: unknown, props: Record<string, unknown>, 
 }
 
 runDialogContract("vue", {
+  renderDialogOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(Dialog as never, {
+                  title: "Title",
+                  footer: "Action",
+                  onClose: () => {},
+                  ...options,
+                }),
+            })
+        },
+      }),
+    )
+  },
+  getDialogRoot() {
+    return document.querySelector(".mw-dialog") as HTMLElement
+  },
   renderConfirm() {
     renderWithProvider(
       ConfirmDialog,

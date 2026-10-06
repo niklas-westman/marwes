@@ -2,6 +2,7 @@
  * Shared contract for Text components — non-heading typography styles
  * for display, label, caption, overline, and micro text.
  */
+import type { TextOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type TextVariant = "display" | "label" | "label-small" | "caption" | "overline" | "micro"
@@ -15,6 +16,32 @@ export interface TextContractHarness {
     id?: string
   }): Promise<void> | void
   getByText(text: string): HTMLElement
+  /** Renders the base Text with raw core options. */
+  renderTextOptions(options: TextOptions): Promise<void> | void
+  getTextRoot(): HTMLElement
+}
+
+type TextOptionCase = {
+  options: TextOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core TextOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const textOptionCases: Record<keyof TextOptions, TextOptionCase> = {
+  variant: {
+    options: { variant: "label" },
+    expectRendered: (root) => expect(root).toHaveClass("mw-text--label"),
+  },
+  as: { options: { as: "p" }, expectRendered: (root) => expect(root.tagName).toBe("P") },
+  headingLevel: {
+    options: { headingLevel: 2 },
+    expectRendered: (root) => expect(root.tagName).toBe("H2"),
+  },
+  id: {
+    options: { id: "note" },
+    expectRendered: (root) => expect(root).toHaveAttribute("id", "note"),
+  },
 }
 
 export function runTextContract(adapterName: string, harness: TextContractHarness): void {
@@ -56,6 +83,16 @@ export function runTextContract(adapterName: string, harness: TextContractHarnes
       expect(displayElement.tagName).toBe("DIV")
       expect(displayElement.className).toContain("mw-text--display")
       expect(microElement.className).toContain("mw-text--micro")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(textOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderTextOptions(optionCase.options)
+
+        const element = harness.getTextRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

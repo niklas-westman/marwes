@@ -14,6 +14,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runTextContract("react", {
+  renderTextOptions(options) {
+    renderWithProvider(<Text {...options}>Text</Text>)
+  },
+  getTextRoot() {
+    return document.querySelector(".mw-text") as HTMLElement
+  },
   async renderText(args) {
     const textProps = {
       ...(args.variant !== undefined ? { variant: args.variant } : {}),

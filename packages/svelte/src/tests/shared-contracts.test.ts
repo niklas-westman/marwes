@@ -716,6 +716,14 @@ runDividerContract("svelte", {
 })
 
 runDialogContract("svelte", {
+  renderDialogOptions(options) {
+    render(Dialog, {
+      props: { title: "Title", footer: actionSnippet("Action"), onclose: () => {}, ...options },
+    })
+  },
+  getDialogRoot() {
+    return document.querySelector(".mw-dialog") as HTMLElement
+  },
   renderConfirm() {
     renderWithText(
       ConfirmDialog,

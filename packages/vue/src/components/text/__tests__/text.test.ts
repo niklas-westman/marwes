@@ -26,6 +26,12 @@ function renderWithProvider(props: Record<string, unknown> = {}, text?: string) 
 }
 
 runTextContract("vue", {
+  renderTextOptions(options) {
+    renderWithProvider({ ...options }, "Text")
+  },
+  getTextRoot() {
+    return document.querySelector(".mw-text") as HTMLElement
+  },
   async renderText(args) {
     const textProps = {
       ...(args.variant !== undefined ? { variant: args.variant } : {}),
