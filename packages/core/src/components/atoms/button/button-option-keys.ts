@@ -1,8 +1,9 @@
+import { defineOptionKeys } from "../../../shared/option-keys"
 import type { ButtonOptions } from "./button-types"
 
-// Exhaustive on purpose: adding a ButtonOptions field fails to compile until it is listed here,
-// which in turn feeds every adapter that needs a runtime list of option names (e.g. Vue props).
-const BUTTON_OPTION_KEY_SET = {
+// Feeds every adapter that needs a runtime list of option names (e.g. Vue props); adding a
+// ButtonOptions field fails to compile until it is listed here.
+export const buttonOptionKeys = defineOptionKeys<ButtonOptions>({
   as: true,
   href: true,
   type: true,
@@ -26,8 +27,4 @@ const BUTTON_OPTION_KEY_SET = {
   tooltip: true,
   confirmation: true,
   dataAttributes: true,
-} as const satisfies Record<keyof ButtonOptions, true>
-
-export const buttonOptionKeys = Object.keys(BUTTON_OPTION_KEY_SET) as ReadonlyArray<
-  keyof ButtonOptions
->
+})

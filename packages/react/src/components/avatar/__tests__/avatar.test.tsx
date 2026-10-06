@@ -13,6 +13,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runAvatarContract("react", {
+  renderAvatarOptions(options) {
+    renderWithProvider(<Avatar {...options} />)
+  },
+  getAvatarElement() {
+    return document.querySelector('[data-component="avatar"]') as HTMLElement
+  },
   async renderAvatar(args = {}) {
     const avatarProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

@@ -2,6 +2,7 @@ import {
   type AvatarOptions,
   type AvatarRenderContent,
   type CssVars,
+  avatarOptionKeys,
   createAvatarRecipe,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
@@ -13,19 +14,7 @@ export type AvatarProps = AvatarOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const avatarPropKeys = [
-  "size",
-  "type",
-  "initials",
-  "src",
-  "alt",
-  "iconName",
-  "decorative",
-  "ariaLabel",
-  "label",
-  "className",
-  "dataAttributes",
-] as const
+const avatarPropKeys = [...avatarOptionKeys, "className", "dataAttributes"] as const
 
 function renderAvatarContent(
   content: AvatarRenderContent,

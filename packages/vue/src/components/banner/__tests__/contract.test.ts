@@ -29,6 +29,14 @@ function renderBanner(props: Record<string, unknown>, slots?: Record<string, () 
 }
 
 runBannerContract("vue", {
+  renderBannerOptions(options, extras) {
+    renderBanner(
+      { ...options, children: "Banner message" },
+      extras?.withAction
+        ? { action: () => h("button", { type: "button" }, "Learn more") }
+        : undefined,
+    )
+  },
   renderDefault() {
     dismissHandler = vi.fn()
     renderBanner({ onDismiss: dismissHandler, children: "Default message" })
@@ -73,7 +81,7 @@ runBannerContract("vue", {
     return screen.queryByRole(role as never, options)
   },
   getRoot() {
-    return screen.getByRole("status") ?? screen.getByRole("alert")
+    return document.querySelector("[data-component='banner']") as HTMLElement
   },
   getDismissHandler() {
     return { called: dismissHandler.mock.calls.length > 0 }

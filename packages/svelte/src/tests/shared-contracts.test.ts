@@ -278,6 +278,12 @@ runAccordionContract("svelte", {
 })
 
 runAvatarContract("svelte", {
+  renderAvatarOptions(options) {
+    render(Avatar, { props: { ...options } })
+  },
+  getAvatarElement() {
+    return document.querySelector('[data-component="avatar"]') as HTMLElement
+  },
   renderAvatar(args = {}) {
     render(Avatar, {
       props: {
@@ -348,6 +354,12 @@ runAvatarGroupContract("svelte", {
 })
 
 runBadgeContract("svelte", {
+  renderBadge(options, text) {
+    renderWithText(Badge, { ...options }, text)
+  },
+  getBadgeElement() {
+    return document.querySelector('[data-component="badge"]') as HTMLElement
+  },
   renderStatus() {
     renderWithText(StatusBadge, { variant: "success" }, "Active")
   },
@@ -477,6 +489,12 @@ function renderBannerContract(args: Props = {}) {
 }
 
 runBannerContract("svelte", {
+  renderBannerOptions(options, extras) {
+    renderBannerContract({
+      ...options,
+      ...(extras?.withAction ? { action: actionSnippet("Learn more") } : {}),
+    })
+  },
   renderDefault() {
     renderBannerContract()
   },

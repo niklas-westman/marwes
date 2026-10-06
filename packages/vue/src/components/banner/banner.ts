@@ -1,4 +1,4 @@
-import { createBannerRecipe } from "@marwes-ui/core"
+import { bannerOptionKeys, createBannerRecipe } from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -8,15 +8,7 @@ export type BannerProps = BannerOptions & {
   id?: string
 }
 
-const bannerPropKeys = [
-  "variant",
-  "showIcon",
-  "showAction",
-  "dismissible",
-  "ariaLabel",
-  "className",
-  "id",
-] as const
+const bannerPropKeys = [...bannerOptionKeys, "className", "id"] as const
 
 export const Banner = defineComponent(
   (props: BannerProps, { slots, emit }) => {

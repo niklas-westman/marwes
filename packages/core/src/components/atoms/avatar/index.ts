@@ -9,3 +9,4 @@ export type {
 
 export { resolveAvatarA11y } from "./avatar-a11y"
 export { createAvatarRecipe } from "./avatar-recipe"
+export { avatarOptionKeys } from "./avatar-option-keys"

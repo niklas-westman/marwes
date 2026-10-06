@@ -14,6 +14,16 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runBannerContract("react", {
+  renderBannerOptions(options, extras) {
+    renderWithProvider(
+      <Banner
+        {...options}
+        {...(extras?.withAction ? { action: <button type="button">Learn more</button> } : {})}
+      >
+        Banner message
+      </Banner>,
+    )
+  },
   renderDefault() {
     dismissCalled = false
     const dismissHandler = () => {
@@ -58,7 +68,7 @@ runBannerContract("react", {
     return screen.queryByRole(role as never, options)
   },
   getRoot() {
-    return screen.getByRole("status") ?? screen.getByRole("alert")
+    return document.querySelector("[data-component='banner']") as HTMLElement
   },
   getDismissHandler() {
     return { called: dismissCalled }
