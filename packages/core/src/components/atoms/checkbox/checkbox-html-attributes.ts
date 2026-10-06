@@ -1,6 +1,6 @@
 import { defineHtmlAttributeMapper } from "../../../shared/html-attributes"
 import type { HtmlAttributesOf } from "../../../shared/html-attributes"
-import type { CheckboxA11y } from "./checkbox-types"
+import type { CheckboxA11y, CheckboxGroupFieldA11yProps } from "./checkbox-types"
 
 const checkboxHtmlAttributeNames = {
   type: "type",
@@ -25,3 +25,19 @@ export type CheckboxHtmlAttributes = HtmlAttributesOf<
 export const toCheckboxHtmlAttributes = defineHtmlAttributeMapper<CheckboxA11y>()(
   checkboxHtmlAttributeNames,
 )
+
+const checkboxGroupFieldHtmlAttributeNames = {
+  ariaLabelledBy: "aria-labelledby",
+  ariaDescribedBy: "aria-describedby",
+  ariaInvalid: "aria-invalid",
+  ariaRequired: "aria-required",
+} as const
+
+export type CheckboxGroupFieldHtmlAttributes = HtmlAttributesOf<
+  CheckboxGroupFieldA11yProps,
+  typeof checkboxGroupFieldHtmlAttributeNames
+>
+
+/** Translates resolved CheckboxGroupField wrapper a11y fields into HTML attribute names. */
+export const toCheckboxGroupFieldHtmlAttributes =
+  defineHtmlAttributeMapper<CheckboxGroupFieldA11yProps>()(checkboxGroupFieldHtmlAttributeNames)

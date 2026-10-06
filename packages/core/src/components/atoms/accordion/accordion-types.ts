@@ -26,3 +26,10 @@ export interface AccordionRenderKit {
   vars: Record<string, string>
   a11y: AccordionA11yProps
 }
+
+/** ARIA fields for the AccordionField wrapper element. */
+export interface AccordionFieldA11yProps {
+  ariaLabelledBy: string
+  ariaDescribedBy?: string
+  ariaInvalid?: true
+}

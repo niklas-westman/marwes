@@ -269,5 +269,15 @@ export function runRadioGroupFieldContract(
       expect(betaRadio).toBeDisabled()
       expect(gammaRadio).not.toBeDisabled()
     })
+
+    it("marks the group required through aria-required only when required", async () => {
+      await harness.renderRadioGroup({ required: true })
+      expect(harness.getByRole("radiogroup")).toHaveAttribute("aria-required", "true")
+    })
+
+    it("does not mark an optional group as required", async () => {
+      await harness.renderRadioGroup()
+      expect(harness.getByRole("radiogroup")).not.toHaveAttribute("aria-required")
+    })
   })
 }

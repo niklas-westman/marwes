@@ -3,7 +3,7 @@
  * - Avoid assigning `undefined` to optional fields (exactOptionalPropertyTypes).
  */
 
-import type { CheckboxA11y, CheckboxProps } from "./checkbox-types"
+import type { CheckboxA11y, CheckboxGroupFieldA11yProps, CheckboxProps } from "./checkbox-types"
 
 export function buildCheckboxA11y(props: CheckboxProps): CheckboxA11y {
   const a11y: CheckboxA11y = {
@@ -28,5 +28,18 @@ export function buildCheckboxA11y(props: CheckboxProps): CheckboxA11y {
 
   if (props.invalid) a11y.ariaInvalid = true
 
+  return a11y
+}
+
+export function resolveCheckboxGroupFieldA11y(args: {
+  labelId: string
+  describedBy?: string | undefined
+  invalid?: boolean | undefined
+  required?: boolean | undefined
+}): CheckboxGroupFieldA11yProps {
+  const a11y: CheckboxGroupFieldA11yProps = { ariaLabelledBy: args.labelId }
+  if (args.describedBy) a11y.ariaDescribedBy = args.describedBy
+  if (args.invalid) a11y.ariaInvalid = true
+  if (args.required) a11y.ariaRequired = true
   return a11y
 }

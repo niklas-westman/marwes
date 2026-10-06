@@ -1,4 +1,8 @@
-import { buildAccordionFieldA11yIds } from "@marwes-ui/core"
+import {
+  buildAccordionFieldA11yIds,
+  resolveAccordionFieldA11y,
+  toAccordionFieldHtmlAttributes,
+} from "@marwes-ui/core"
 import { type VNodeChild, computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
@@ -121,9 +125,13 @@ export const AccordionField = defineComponent(
         "fieldset",
         {
           class: wrapperClass.value,
-          "aria-labelledby": a11yIds.value.labelId,
-          "aria-describedby": a11yIds.value.describedBy,
-          "aria-invalid": hasError.value ? true : undefined,
+          ...toAccordionFieldHtmlAttributes(
+            resolveAccordionFieldA11y({
+              labelId: a11yIds.value.labelId,
+              describedBy: a11yIds.value.describedBy,
+              invalid: hasError.value,
+            }),
+          ),
           ...(props.dataAttributes ?? {}),
         },
         [

@@ -1,6 +1,6 @@
 import { defineHtmlAttributeMapper } from "../../../shared/html-attributes"
 import type { HtmlAttributesOf } from "../../../shared/html-attributes"
-import type { RadioA11y } from "./radio-types"
+import type { RadioA11y, RadioGroupFieldA11yProps } from "./radio-types"
 
 const radioHtmlAttributeNames = {
   type: "type",
@@ -19,3 +19,20 @@ export type RadioHtmlAttributes = HtmlAttributesOf<RadioA11y, typeof radioHtmlAt
 
 /** Translates resolved radio a11y fields into HTML attribute names. */
 export const toRadioHtmlAttributes = defineHtmlAttributeMapper<RadioA11y>()(radioHtmlAttributeNames)
+
+const radioGroupFieldHtmlAttributeNames = {
+  role: "role",
+  ariaLabelledBy: "aria-labelledby",
+  ariaDescribedBy: "aria-describedby",
+  ariaInvalid: "aria-invalid",
+  ariaRequired: "aria-required",
+} as const
+
+export type RadioGroupFieldHtmlAttributes = HtmlAttributesOf<
+  RadioGroupFieldA11yProps,
+  typeof radioGroupFieldHtmlAttributeNames
+>
+
+/** Translates resolved RadioGroupField wrapper a11y fields into HTML attribute names. */
+export const toRadioGroupFieldHtmlAttributes =
+  defineHtmlAttributeMapper<RadioGroupFieldA11yProps>()(radioGroupFieldHtmlAttributeNames)

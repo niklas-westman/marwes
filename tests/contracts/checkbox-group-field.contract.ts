@@ -21,6 +21,7 @@ export type CheckboxGroupFieldContractHarness = {
     value?: string[]
     onChange?: (value: string[]) => void
     disabled?: boolean
+    required?: boolean
     options?: CheckboxGroupFieldOptionContract[]
   }): Promise<void> | void
   getByRole(role: "group" | "checkbox", options: { name: RegExp }): HTMLElement
@@ -189,6 +190,19 @@ export function runCheckboxGroupFieldContract(
 
       const selectAll = h.getByRole("checkbox", { name: /select all/i }) as HTMLInputElement
       expect(selectAll.indeterminate).toBe(true)
+    })
+
+    it("marks the group required through aria-required only when required", async () => {
+      await h.renderCheckboxGroup({ required: true })
+      expect(h.getByRole("group", { name: /communication/i })).toHaveAttribute(
+        "aria-required",
+        "true",
+      )
+    })
+
+    it("does not mark an optional group as required", async () => {
+      await h.renderCheckboxGroup()
+      expect(h.getByRole("group", { name: /communication/i })).not.toHaveAttribute("aria-required")
     })
   })
 }

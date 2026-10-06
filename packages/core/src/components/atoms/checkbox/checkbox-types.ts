@@ -94,3 +94,11 @@ export type CheckboxRenderKit = {
   checked?: boolean
   defaultChecked?: boolean
 }
+
+/** ARIA fields for the CheckboxGroupField wrapper element. */
+export interface CheckboxGroupFieldA11yProps {
+  ariaLabelledBy: string
+  ariaDescribedBy?: string
+  ariaInvalid?: true
+  ariaRequired?: true
+}

@@ -652,6 +652,7 @@ runCheckboxGroupFieldContract("svelte", {
         label: args.label ?? "Communication preferences",
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
+        ...(args.required !== undefined ? { required: args.required } : {}),
         children: optionCheckboxSnippet({
           options,
           selected: args.value ?? args.defaultValue ?? [],

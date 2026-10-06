@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core";
+  import {
+    buildCheckboxGroupFieldA11yIds,
+    resolveCheckboxGroupFieldA11y,
+    toCheckboxGroupFieldHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Text from "../text/Text.svelte";
   import type { CheckboxGroupFieldProps } from "./types.js";
@@ -10,6 +14,8 @@
     description,
     error,
     ariaDescribedBy,
+    required,
+    disabled,
     children,
     class: className,
   }: CheckboxGroupFieldProps = $props();
@@ -33,15 +39,18 @@
     })
   );
 
-  const wrapperClass = $derived(mergeClass("mw-checkbox-group-field", className));
+  const wrapperClass = $derived(
+    mergeClass("mw-checkbox-group-field", disabled && "mw-checkbox-group-field--disabled", hasError && "mw-checkbox-group-field--invalid", className)
+  );
 </script>
 
 <!-- svelte-ignore a11y_role_supports_aria_props_implicit -->
 <fieldset
   class={wrapperClass}
-  aria-labelledby={a11yIds.labelId}
-  aria-describedby={a11yIds.describedBy}
-  aria-invalid={hasError ? true : undefined}
+  {...toCheckboxGroupFieldHtmlAttributes(
+    resolveCheckboxGroupFieldA11y({ labelId: a11yIds.labelId, describedBy: a11yIds.describedBy, invalid: hasError, required })
+  )}
+  disabled={disabled ? true : undefined}
 >
   <legend class="mw-checkbox-group-field__label" id={a11yIds.labelId}>
     <Text variant="label">{label}</Text>

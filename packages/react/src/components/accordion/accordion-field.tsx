@@ -41,8 +41,13 @@
  * ```
  */
 
-import { buildAccordionFieldA11yIds } from "@marwes-ui/core"
+import {
+  buildAccordionFieldA11yIds,
+  resolveAccordionFieldA11y,
+  toAccordionFieldHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Text } from "../text"
 import { Accordion } from "./accordion"
 
@@ -157,9 +162,11 @@ export function AccordionField(props: AccordionFieldProps): React.ReactElement {
   return (
     <fieldset
       className={wrapperClass}
-      aria-labelledby={labelId}
-      aria-describedby={describedBy}
-      aria-invalid={isInvalid ? true : undefined}
+      {...toReactAttributes(
+        toAccordionFieldHtmlAttributes(
+          resolveAccordionFieldA11y({ labelId, describedBy, invalid: isInvalid }),
+        ),
+      )}
       {...props.dataAttributes}
     >
       <legend className="mw-accordion-field__label" id={labelId}>

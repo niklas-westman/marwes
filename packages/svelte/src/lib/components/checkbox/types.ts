@@ -34,6 +34,8 @@ export interface CheckboxGroupFieldProps {
   description?: string
   error?: string
   ariaDescribedBy?: string
+  required?: boolean
+  disabled?: boolean
   children?: Snippet
   class?: string
 }
