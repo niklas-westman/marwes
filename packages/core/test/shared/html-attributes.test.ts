@@ -15,10 +15,12 @@ import {
 import { defineHtmlAttributeMapper } from "../../src/shared/html-attributes"
 
 describe("defineHtmlAttributeMapper", () => {
-  const mapper = defineHtmlAttributeMapper<{ ariaLabel?: string; tabIndex?: number }>()({
-    ariaLabel: "aria-label",
-    tabIndex: "tabindex",
-  })
+  const mapper = defineHtmlAttributeMapper<{ ariaLabel?: string; tabIndex?: number | undefined }>()(
+    {
+      ariaLabel: "aria-label",
+      tabIndex: "tabindex",
+    },
+  )
 
   it("renames fields and omits undefined but keeps falsy values", () => {
     expect(mapper({ ariaLabel: "Save", tabIndex: 0 })).toEqual({
