@@ -16,6 +16,7 @@ Make React, Vue and Svelte render the same DOM for the same options by moving mo
 
 **Icon (all adapters)**
 - Icon now renders through the core recipe. It gains the `mw-icon` base, size and colour classes, sets `--mw-icon-size` and `--mw-icon-stroke-width` inline, and adds `color` and `ariaHidden` props.
+- Dialog and Drawer close buttons keep their previous icon size: the preset lets the icon shrink inside the button, as it did before icons carried the `mw-icon` class.
 - Svelte `Icon` now throws for an unknown icon name, like React and Vue, instead of rendering nothing.
 
 **Fixes**
