@@ -10,6 +10,7 @@ export type DialogModalContractHarness = {
     description?: string
     ariaLabel?: string
     dismissible?: boolean
+    closeLabel?: string
     showFooter?: boolean
     closeOnEscape?: boolean
     closeOnScrimClick?: boolean
@@ -178,6 +179,15 @@ export function runDialogModalContract(
         expect(harness.queryByRole("dialog", { name: /invite teammate/i })).toBeNull()
         expect(document.activeElement).toBe(trigger)
       })
+    })
+
+    it("names the close button from closeLabel", async () => {
+      await harness.renderOpenDialogModal({
+        title: "Rename workspace",
+        closeLabel: "Stäng dialogen",
+      })
+
+      expect(harness.getByRole("button", { name: /stäng dialogen/i })).toBeInTheDocument()
     })
   })
 }

@@ -22,6 +22,7 @@ runToastContract("react", {
       <Toast
         {...(args?.ariaLive ? { ariaLive: args.ariaLive } : {})}
         {...(args?.dismissible ? { onDismiss: () => {} } : {})}
+        {...(args?.dismissLabel ? { dismissLabel: args.dismissLabel } : {})}
       >
         {args?.children ?? "Project saved."}
       </Toast>,

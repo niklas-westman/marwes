@@ -2,6 +2,7 @@ import {
   type DialogOptions,
   IconName,
   createDialogRecipe,
+  toDialogCloseButtonHtmlAttributes,
   toDialogHtmlAttributes,
 } from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
@@ -52,6 +53,7 @@ const dialogPropKeys = [
   "size",
   "showFooter",
   "dismissible",
+  "closeLabel",
   "modal",
   "ariaLabel",
   "ariaLabelledBy",
@@ -84,6 +86,7 @@ export const Dialog = defineComponent(
         showFooter: hasFooter.value,
         dismissible: dismissible.value,
         ...(props.modal !== undefined ? { modal: props.modal } : {}),
+        ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
       }
 
       if (props.dataAttributes) {
@@ -143,7 +146,7 @@ export const Dialog = defineComponent(
                         {
                           type: "button",
                           class: "mw-dialog__close",
-                          "aria-label": "Close dialog",
+                          ...toDialogCloseButtonHtmlAttributes(kit.value.closeButton.a11y),
                           onClick: () => props.onClose?.(),
                         },
                         [h(Icon, { name: IconName.X, decorative: true })],

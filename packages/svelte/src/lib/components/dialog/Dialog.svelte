@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { IconName, createDialogRecipe, toDialogHtmlAttributes } from "@marwes-ui/core";
+  import {
+    IconName,
+    createDialogRecipe,
+    toDialogHtmlAttributes,
+    toDialogCloseButtonHtmlAttributes,
+  } from "@marwes-ui/core";
   import type { DialogOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -17,6 +22,7 @@
     size,
     showFooter,
     dismissible,
+    closeLabel,
     modal,
     ariaLabel,
     ariaLabelledBy,
@@ -39,6 +45,7 @@
       dismissible: isDismissible,
     };
     if (modal !== undefined) opts.modal = modal;
+    if (closeLabel !== undefined) opts.closeLabel = closeLabel;
     if (dataAttributes !== undefined) opts.dataAttributes = dataAttributes;
     if (size !== undefined) opts.size = size;
     if (ariaLabel !== undefined) opts.ariaLabel = ariaLabel;
@@ -85,7 +92,7 @@
         <button
           type="button"
           class="mw-dialog__close"
-          aria-label="Close dialog"
+          {...toDialogCloseButtonHtmlAttributes(kit.closeButton.a11y)}
           onclick={handleClose}
         >
           <Icon name={IconName.X} decorative />

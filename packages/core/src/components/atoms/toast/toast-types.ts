@@ -13,6 +13,8 @@ export interface ToastOptions {
    * "assertive" → role="alert" (urgent/error toasts)
    */
   ariaLive?: "polite" | "assertive"
+  /** Accessible name of the dismiss button. Defaults to "Dismiss". */
+  dismissLabel?: string
 }
 
 export interface ToastA11yProps {
@@ -26,5 +28,11 @@ export interface ToastRenderKit {
   className: string
   vars: Record<string, string>
   a11y: ToastA11yProps
+  dismissButton: { a11y: ToastDismissButtonA11yProps }
   dataAttributes: Record<string, string>
+}
+
+/** ARIA fields for the dismiss button. */
+export interface ToastDismissButtonA11yProps {
+  ariaLabel: string
 }

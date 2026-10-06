@@ -24,6 +24,7 @@ export function createDialogRecipe(opts: DialogOptions = {}): DialogRenderKit {
     showFooter,
     showCloseButton,
     a11y: resolveDialogA11y(opts),
+    closeButton: { a11y: { ariaLabel: opts.closeLabel ?? "Close dialog" } },
     dataAttributes: {
       ...createFamilySemanticAttributes("dialog", {
         "data-size": size,

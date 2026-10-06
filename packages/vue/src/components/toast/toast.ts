@@ -1,4 +1,8 @@
-import { createToastRecipe, toToastHtmlAttributes } from "@marwes-ui/core"
+import {
+  createToastRecipe,
+  toToastDismissButtonHtmlAttributes,
+  toToastHtmlAttributes,
+} from "@marwes-ui/core"
 import type { ToastOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -13,6 +17,7 @@ export interface ToastProps extends ToastOptions {
 const toastPropKeys = [
   "variant",
   "ariaLive",
+  "dismissLabel",
   "onDismiss",
   "className",
   "id",
@@ -27,6 +32,7 @@ export const Toast = defineComponent(
       const opts: ToastOptions = {}
       if (props.variant !== undefined) opts.variant = props.variant
       if (props.ariaLive !== undefined) opts.ariaLive = props.ariaLive
+      if (props.dismissLabel !== undefined) opts.dismissLabel = props.dismissLabel
       return createToastRecipe(opts)
     })
 
@@ -48,7 +54,7 @@ export const Toast = defineComponent(
           ? h("button", {
               type: "button",
               class: "mw-toast__dismiss",
-              "aria-label": "Dismiss",
+              ...toToastDismissButtonHtmlAttributes(renderKit.dismissButton.a11y),
               onClick: () => props.onDismiss?.(),
             })
           : null,

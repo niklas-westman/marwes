@@ -2,6 +2,7 @@ import {
   type DrawerOptions,
   IconName,
   createDrawerRecipe,
+  toDrawerCloseButtonHtmlAttributes,
   toDrawerHtmlAttributes,
 } from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
@@ -54,6 +55,7 @@ const drawerPropKeys = [
   "placement",
   "showFooter",
   "dismissible",
+  "closeLabel",
   "modal",
   "showScrim",
   "ariaLabel",
@@ -90,6 +92,7 @@ export const Drawer = defineComponent(
       const drawerOptions: DrawerOptions = {
         showFooter: hasFooter.value,
         dismissible: dismissible.value,
+        ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
         ...(props.modal !== undefined ? { modal: props.modal } : {}),
         ...(props.showScrim !== undefined ? { showScrim: props.showScrim } : {}),
       }
@@ -172,7 +175,7 @@ export const Drawer = defineComponent(
                             {
                               type: "button",
                               class: "mw-drawer__close",
-                              "aria-label": "Close drawer",
+                              ...toDrawerCloseButtonHtmlAttributes(kit.value.closeButton.a11y),
                               onClick: close,
                             },
                             [h(Icon, { name: IconName.X, decorative: true })],

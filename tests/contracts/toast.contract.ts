@@ -21,6 +21,7 @@ export interface ToastContractHarness {
     children?: string
     ariaLive?: "polite" | "assertive"
     dismissible?: boolean
+    dismissLabel?: string
   }): Promise<void> | void
   renderSuccess(): Promise<void> | void
   renderError(): Promise<void> | void
@@ -278,5 +279,15 @@ export function runToastContract(adapterName: string, harness: ToastContractHarn
         expect(harness.getByRole("button", { name: /undo/i })).toBeInTheDocument()
       },
     )
+
+    it("names the dismiss button 'Dismiss' by default and from dismissLabel when set", async () => {
+      await harness.renderRawToast({ dismissible: true })
+      expect(harness.getByRole("button", { name: /^dismiss$/i })).toBeInTheDocument()
+    })
+
+    it("uses dismissLabel as the dismiss button name", async () => {
+      await harness.renderRawToast({ dismissible: true, dismissLabel: "Stäng meddelandet" })
+      expect(harness.getByRole("button", { name: /stäng meddelandet/i })).toBeInTheDocument()
+    })
   })
 }

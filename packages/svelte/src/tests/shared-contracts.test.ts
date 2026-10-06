@@ -748,6 +748,7 @@ runDialogModalContract("svelte", {
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
         ...(args.dismissible !== undefined ? { dismissible: args.dismissible } : {}),
+        ...(args.closeLabel !== undefined ? { closeLabel: args.closeLabel } : {}),
         ...(args.showFooter !== undefined ? { showFooter: args.showFooter } : {}),
         ...(args.closeOnEscape !== undefined ? { closeOnEscape: args.closeOnEscape } : {}),
         ...(args.closeOnScrimClick !== undefined
@@ -1484,6 +1485,7 @@ runToastContract("svelte", {
       {
         ...(args.ariaLive !== undefined ? { ariaLive: args.ariaLive } : {}),
         ...(args.dismissible ? { ondismiss: () => {} } : {}),
+        ...(args.dismissLabel ? { dismissLabel: args.dismissLabel } : {}),
       },
       args.children ?? "Project saved.",
     )

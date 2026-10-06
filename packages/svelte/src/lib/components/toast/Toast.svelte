@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { createToastRecipe, toToastHtmlAttributes } from "@marwes-ui/core";
+  import {
+    createToastRecipe,
+    toToastHtmlAttributes,
+    toToastDismissButtonHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { ToastProps } from "./types.js";
 
@@ -45,7 +49,7 @@
     <button
       type="button"
       class="mw-toast__dismiss"
-      aria-label="Dismiss"
+      {...toToastDismissButtonHtmlAttributes(kit.dismissButton.a11y)}
       onclick={ondismiss}
     ></button>
   {/if}

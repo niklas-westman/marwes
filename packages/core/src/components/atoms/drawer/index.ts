@@ -9,5 +9,8 @@ export type {
   DrawerScrimRenderKit,
   DrawerSize,
 } from "./drawer-types"
-export { toDrawerHtmlAttributes } from "./drawer-html-attributes"
-export type { DrawerHtmlAttributes } from "./drawer-html-attributes"
+export { toDrawerHtmlAttributes, toDrawerCloseButtonHtmlAttributes } from "./drawer-html-attributes"
+export type {
+  DrawerHtmlAttributes,
+  DrawerCloseButtonHtmlAttributes,
+} from "./drawer-html-attributes"

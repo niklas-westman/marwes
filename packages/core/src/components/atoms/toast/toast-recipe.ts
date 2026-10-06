@@ -19,6 +19,7 @@ export function createToastRecipe(opts: ToastOptions): ToastRenderKit {
     className: cx("mw-toast", `mw-toast--${variant}`),
     vars: {},
     a11y: resolveToastA11y(opts),
+    dismissButton: { a11y: { ariaLabel: opts.dismissLabel ?? "Dismiss" } },
     dataAttributes: createFamilySemanticAttributes("toast", {
       "data-variant": variant,
     }),

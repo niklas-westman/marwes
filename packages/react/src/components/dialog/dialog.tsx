@@ -2,6 +2,7 @@ import {
   type DialogOptions,
   IconName,
   createDialogRecipe,
+  toDialogCloseButtonHtmlAttributes,
   toDialogHtmlAttributes,
 } from "@marwes-ui/core"
 import * as React from "react"
@@ -48,6 +49,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
     showFooter: hasFooter,
     dismissible,
     ...(props.modal !== undefined ? { modal: props.modal } : {}),
+    ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
   }
 
   if (props.dataAttributes) {
@@ -101,7 +103,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
               <button
                 type="button"
                 className="mw-dialog__close"
-                aria-label="Close dialog"
+                {...toReactAttributes(toDialogCloseButtonHtmlAttributes(kit.closeButton.a11y))}
                 onClick={props.onClose}
               >
                 <Icon name={IconName.X} decorative />

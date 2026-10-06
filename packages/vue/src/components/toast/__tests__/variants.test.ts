@@ -41,6 +41,7 @@ runToastContract("vue", {
                   {
                     ...(args?.ariaLive ? { ariaLive: args.ariaLive } : {}),
                     ...(args?.dismissible ? { onDismiss: () => {} } : {}),
+                    ...(args?.dismissLabel ? { dismissLabel: args.dismissLabel } : {}),
                   },
                   {
                     default: () => args?.children ?? "Project saved.",

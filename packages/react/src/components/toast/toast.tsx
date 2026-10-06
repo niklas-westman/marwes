@@ -1,4 +1,8 @@
-import { createToastRecipe, toToastHtmlAttributes } from "@marwes-ui/core"
+import {
+  createToastRecipe,
+  toToastDismissButtonHtmlAttributes,
+  toToastHtmlAttributes,
+} from "@marwes-ui/core"
 import type { ToastOptions } from "@marwes-ui/core"
 import type * as React from "react"
 import { toReactAttributes } from "../../internal/react-attributes"
@@ -47,7 +51,7 @@ export function Toast(props: ToastProps): React.ReactElement {
         <button
           type="button"
           className="mw-toast__dismiss"
-          aria-label="Dismiss"
+          {...toReactAttributes(toToastDismissButtonHtmlAttributes(kit.dismissButton.a11y))}
           onClick={onDismiss}
         />
       )}

@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { IconName, createDrawerRecipe, toDrawerHtmlAttributes } from "@marwes-ui/core";
+  import {
+    IconName,
+    createDrawerRecipe,
+    toDrawerHtmlAttributes,
+    toDrawerCloseButtonHtmlAttributes,
+  } from "@marwes-ui/core";
   import type { DrawerOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -19,6 +24,7 @@
     placement,
     showFooter,
     dismissible,
+    closeLabel,
     modal,
     showScrim,
     ariaLabel,
@@ -42,6 +48,7 @@
       dismissible: isDismissible,
     };
     if (modal !== undefined) opts.modal = modal;
+    if (closeLabel !== undefined) opts.closeLabel = closeLabel;
     if (showScrim !== undefined) opts.showScrim = showScrim;
     if (dataAttributes !== undefined) opts.dataAttributes = dataAttributes;
     if (size !== undefined) opts.size = size;
@@ -101,7 +108,7 @@
           <button
             type="button"
             class="mw-drawer__close"
-            aria-label="Close drawer"
+            {...toDrawerCloseButtonHtmlAttributes(kit.closeButton.a11y)}
             onclick={handleClose}
           >
             <Icon name={IconName.X} decorative />

@@ -23,6 +23,7 @@ runDialogModalContract("react", {
       ...(args.description !== undefined ? { description: args.description } : {}),
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
       ...(args.dismissible !== undefined ? { dismissible: args.dismissible } : {}),
+      ...(args.closeLabel !== undefined ? { closeLabel: args.closeLabel } : {}),
       ...(args.closeOnEscape !== undefined ? { closeOnEscape: args.closeOnEscape } : {}),
       ...(args.closeOnScrimClick !== undefined
         ? { closeOnScrimClick: args.closeOnScrimClick }

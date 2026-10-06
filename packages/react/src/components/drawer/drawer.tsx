@@ -2,6 +2,7 @@ import {
   type DrawerOptions,
   IconName,
   createDrawerRecipe,
+  toDrawerCloseButtonHtmlAttributes,
   toDrawerHtmlAttributes,
 } from "@marwes-ui/core"
 import * as React from "react"
@@ -50,6 +51,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
     dismissible,
     ...(props.modal !== undefined ? { modal: props.modal } : {}),
     ...(props.showScrim !== undefined ? { showScrim: props.showScrim } : {}),
+    ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
   }
 
   if (props.dataAttributes) {
@@ -119,7 +121,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
                 <button
                   type="button"
                   className="mw-drawer__close"
-                  aria-label="Close drawer"
+                  {...toReactAttributes(toDrawerCloseButtonHtmlAttributes(kit.closeButton.a11y))}
                   onClick={props.onClose}
                 >
                   <Icon name={IconName.X} decorative />

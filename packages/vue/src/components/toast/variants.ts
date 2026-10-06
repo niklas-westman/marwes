@@ -7,6 +7,7 @@ import { Toast, type ToastProps } from "./toast"
 const toastPropKeys = definePropKeys<ToastProps>()([
   "variant",
   "ariaLive",
+  "dismissLabel",
   "onDismiss",
   "className",
   "id",

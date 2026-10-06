@@ -71,6 +71,7 @@ const dialogModalPropKeys = [
   "size",
   "showFooter",
   "dismissible",
+  "closeLabel",
   "ariaLabel",
   "ariaLabelledBy",
   "ariaDescribedBy",
