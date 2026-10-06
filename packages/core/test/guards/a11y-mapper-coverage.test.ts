@@ -59,10 +59,13 @@ const adapters = [
 ]
 
 // Mappers for sub-parts only some adapters render, or rendered through a shared wrapper.
+// Deprecated mappers kept for the public core API; adapters use the per-part mappers instead.
+const deprecatedMappers = ["toAccordionHtmlAttributes"]
+
 const mappersNotUsedByAdapter: Record<string, string[]> = {
-  react: [],
-  vue: [],
-  svelte: [],
+  react: deprecatedMappers,
+  vue: deprecatedMappers,
+  svelte: deprecatedMappers,
 }
 
 describe("a11y mapper coverage", () => {

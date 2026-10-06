@@ -1,4 +1,8 @@
-import { createAccordionRecipe, toAccordionHtmlAttributes } from "@marwes-ui/core"
+import {
+  createAccordionRecipe,
+  toAccordionPanelHtmlAttributes,
+  toAccordionTriggerHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -32,7 +36,6 @@ export const Accordion = defineComponent(
 
     return () => {
       const renderKit = kit.value
-      const a11y = renderKit.a11y
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
 
@@ -40,11 +43,9 @@ export const Accordion = defineComponent(
         h(
           "button",
           {
-            id: a11y.triggerId,
             type: "button",
             class: "mw-accordion__trigger",
-            ...toAccordionHtmlAttributes(a11y),
-            "aria-controls": a11y.panelId,
+            ...toAccordionTriggerHtmlAttributes(renderKit.trigger.a11y),
             disabled: props.disabled,
             onClick: handleTriggerClick,
           },
@@ -56,9 +57,7 @@ export const Accordion = defineComponent(
         h(
           "div",
           {
-            id: a11y.panelId,
-            role: "region",
-            "aria-labelledby": a11y.triggerId,
+            ...toAccordionPanelHtmlAttributes(renderKit.panel.a11y),
             class: "mw-accordion__panel",
             hidden: !props.open,
           },

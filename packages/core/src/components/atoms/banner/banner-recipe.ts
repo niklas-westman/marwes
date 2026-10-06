@@ -47,6 +47,7 @@ export function createBannerRecipe(opts: BannerOptions): BannerRenderKit {
       className: "mw-banner__dismiss",
       visible: dismissible,
       ariaLabel: "Dismiss banner",
+      a11y: { ariaLabel: "Dismiss banner" },
     },
   }
 }

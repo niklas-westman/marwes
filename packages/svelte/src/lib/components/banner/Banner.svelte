@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { createBannerRecipe, toBannerHtmlAttributes } from "@marwes-ui/core";
+  import {
+    createBannerRecipe,
+    toBannerHtmlAttributes,
+    toBannerDismissHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { BannerProps } from "./types.js";
 
@@ -60,7 +64,7 @@
     <button
       type="button"
       class={kit.dismiss.className}
-      aria-label={kit.dismiss.ariaLabel}
+      {...toBannerDismissHtmlAttributes(kit.dismiss.a11y)}
       onclick={ondismiss}
     ></button>
   {/if}

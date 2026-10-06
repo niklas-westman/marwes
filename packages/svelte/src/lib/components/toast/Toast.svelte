@@ -26,7 +26,6 @@
   {id}
   class={mergedClass}
   {...toToastHtmlAttributes(kit.a11y)}
-  aria-atomic="true"
   {...kit.dataAttributes}
   {...dataAttributes}
 >

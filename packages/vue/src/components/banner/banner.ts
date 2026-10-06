@@ -1,4 +1,9 @@
-import { bannerOptionKeys, createBannerRecipe, toBannerHtmlAttributes } from "@marwes-ui/core"
+import {
+  bannerOptionKeys,
+  createBannerRecipe,
+  toBannerDismissHtmlAttributes,
+  toBannerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -64,7 +69,7 @@ export const Banner = defineComponent(
           h("button", {
             type: "button",
             class: renderKit.dismiss.className,
-            "aria-label": renderKit.dismiss.ariaLabel,
+            ...toBannerDismissHtmlAttributes(renderKit.dismiss.a11y),
             onClick: () => emit("dismiss"),
           }),
         )

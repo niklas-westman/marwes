@@ -2,6 +2,8 @@ import type {
   AccordionA11yProps,
   AccordionFieldA11yProps,
   AccordionOptions,
+  AccordionPanelA11yProps,
+  AccordionTriggerA11yProps,
 } from "./accordion-types"
 
 export function resolveAccordionA11y(opts: AccordionOptions): AccordionA11yProps {
@@ -25,4 +27,20 @@ export function resolveAccordionFieldA11y(args: {
   if (args.describedBy) a11y.ariaDescribedBy = args.describedBy
   if (args.invalid) a11y.ariaInvalid = true
   return a11y
+}
+
+export function resolveAccordionPartsA11y(opts: AccordionOptions): {
+  trigger: AccordionTriggerA11yProps
+  panel: AccordionPanelA11yProps
+} {
+  const { triggerId, panelId, ariaExpanded, ariaDisabled } = resolveAccordionA11y(opts)
+
+  const trigger: AccordionTriggerA11yProps = {
+    id: triggerId,
+    ariaExpanded,
+    ariaControls: panelId,
+  }
+  if (ariaDisabled) trigger.ariaDisabled = true
+
+  return { trigger, panel: { id: panelId, role: "region", ariaLabelledBy: triggerId } }
 }

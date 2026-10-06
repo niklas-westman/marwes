@@ -1,7 +1,12 @@
 export { createBannerRecipe } from "./banner-recipe"
 export { resolveBannerA11y } from "./banner-a11y"
 export { BannerVariant } from "./banner-types"
-export type { BannerOptions, BannerRenderKit, BannerA11yProps } from "./banner-types"
+export type {
+  BannerA11yProps,
+  BannerDismissA11yProps,
+  BannerOptions,
+  BannerRenderKit,
+} from "./banner-types"
 export { bannerOptionKeys } from "./banner-option-keys"
-export { toBannerHtmlAttributes } from "./banner-html-attributes"
-export type { BannerHtmlAttributes } from "./banner-html-attributes"
+export { toBannerDismissHtmlAttributes, toBannerHtmlAttributes } from "./banner-html-attributes"
+export type { BannerDismissHtmlAttributes, BannerHtmlAttributes } from "./banner-html-attributes"

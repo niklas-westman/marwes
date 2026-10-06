@@ -1,4 +1,9 @@
-import { IconName, createBannerRecipe, toBannerHtmlAttributes } from "@marwes-ui/core"
+import {
+  IconName,
+  createBannerRecipe,
+  toBannerDismissHtmlAttributes,
+  toBannerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import type * as React from "react"
 import { toReactAttributes } from "../../internal/react-attributes"
@@ -47,7 +52,7 @@ export function Banner(props: BannerProps): React.ReactElement {
         <button
           type="button"
           className={kit.dismiss.className}
-          aria-label={kit.dismiss.ariaLabel}
+          {...toReactAttributes(toBannerDismissHtmlAttributes(kit.dismiss.a11y))}
           onClick={onDismiss}
         />
       )}
