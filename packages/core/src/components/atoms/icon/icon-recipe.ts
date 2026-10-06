@@ -14,10 +14,12 @@ export function createIconRecipe(opts: IconOptions): IconRenderKit {
   const px = resolveIconSize(opts.size ?? "sm")
   const sw = resolveIconStrokeWidth(opts.strokeWidth ?? "md")
   const color = opts.color ?? "currentColor"
+  // Pixel sizes have no preset class; the inline size variable carries them.
+  const sizeClass = typeof opts.size === "number" ? "custom" : (opts.size ?? "sm")
 
   return {
     tag: "svg",
-    className: ["mw-icon", `mw-icon--${px}`, `mw-icon--${color}`].join(" "),
+    className: ["mw-icon", `mw-icon--${sizeClass}`, `mw-icon--${color}`].join(" "),
     vars: {
       "--mw-icon-size": `${px}px`,
       "--mw-icon-stroke-width": String(sw),

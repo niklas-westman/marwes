@@ -10,5 +10,6 @@ export interface IconProps {
   color?: IconColor
   class?: string
   "aria-label"?: string
+  ariaHidden?: boolean
   decorative?: boolean
 }

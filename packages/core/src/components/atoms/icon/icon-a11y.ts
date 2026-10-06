@@ -22,8 +22,11 @@ function isDev(): boolean {
 const __DEV__ = isDev()
 
 export function resolveIconA11y(
-  options: Pick<IconOptions, "ariaLabel" | "decorative">,
+  options: Pick<IconOptions, "ariaLabel" | "ariaHidden" | "decorative">,
 ): IconA11yProps {
+  // Explicitly hidden wins over a label: the caller is saying assistive tech should skip it.
+  if (options.ariaHidden === true) return { ariaHidden: true }
+
   if (options.ariaLabel) {
     return {
       role: "img",
@@ -35,6 +38,13 @@ export function resolveIconA11y(
     console.warn(
       "[marwes] Icon: decorative={false} was passed without ariaLabel. " +
         "The icon stays hidden from assistive technology unless ariaLabel is also provided.",
+    )
+  }
+
+  if (__DEV__ && options.ariaHidden === false) {
+    console.warn(
+      "[marwes] Icon: ariaHidden={false} was passed without ariaLabel. " +
+        "An unlabelled icon stays hidden from assistive technology.",
     )
   }
 

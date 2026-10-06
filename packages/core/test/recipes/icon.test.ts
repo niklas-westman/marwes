@@ -30,8 +30,35 @@ describe("createIconRecipe", () => {
 
     expect(renderKit.a11y.role).toBe("img")
     expect(renderKit.a11y.ariaLabel).toBe("Search")
-    expect(renderKit.className).toContain("mw-icon--40")
+    expect(renderKit.className).toContain("mw-icon--lg")
     expect(renderKit.className).toContain("mw-icon--primary")
     expect(renderKit.vars["--mw-icon-stroke-width"]).toBe("4")
+  })
+
+  it("uses the preset size class for tokens and a custom marker for pixel sizes", () => {
+    expect(createIconRecipe({ name: IconName.Search }).className).toContain("mw-icon--sm")
+    expect(createIconRecipe({ name: IconName.Search, size: "xs" }).className).toContain(
+      "mw-icon--xs",
+    )
+
+    const custom = createIconRecipe({ name: IconName.Search, size: 14, strokeWidth: 1.5 })
+    expect(custom.className).toContain("mw-icon--custom")
+    expect(custom.vars["--mw-icon-size"]).toBe("14px")
+    expect(custom.vars["--mw-icon-stroke-width"]).toBe("1.5")
+    expect(custom.svg.width).toBe(14)
+  })
+
+  it("defaults the colour class to currentColor", () => {
+    expect(createIconRecipe({ name: IconName.Search }).className).toContain("mw-icon--currentColor")
+  })
+
+  it("hides the icon from assistive technology when ariaHidden is true, even with a label", () => {
+    const renderKit = createIconRecipe({
+      name: IconName.Search,
+      ariaLabel: "Search",
+      ariaHidden: true,
+    })
+
+    expect(renderKit.a11y).toEqual({ ariaHidden: true })
   })
 })
