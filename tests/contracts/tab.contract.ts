@@ -198,5 +198,38 @@ export function runTabContract(adapterName: string, harness: TabContractHarness)
       expect(overviewTab).toHaveAttribute("aria-selected", "true")
       expect(getControlledPanelElement(overviewTab)).toHaveTextContent("Overview panel")
     })
+
+    it("names an unlabelled tablist 'Tabs' instead of leaving it anonymous", async () => {
+      await harness.renderTabGroup({ defaultActiveTab: "overview" })
+
+      const tablist = harness.getByRole("tablist", { name: /tabs/i })
+
+      expect(tablist).toHaveAttribute("aria-label", "Tabs")
+      expect(tablist).not.toHaveAttribute("aria-labelledby")
+    })
+
+    it("hides inactive panels and keeps them labelled by their tab", async () => {
+      await harness.renderTabGroup({ label: "Account sections", defaultActiveTab: "overview" })
+
+      const settingsTab = harness.getByRole("tab", { name: /settings/i })
+      const settingsPanel = getControlledPanelElement(settingsTab)
+
+      expect(settingsPanel).not.toBeNull()
+      expect(settingsPanel).toHaveAttribute("hidden")
+      expect(settingsPanel).not.toHaveAttribute("tabindex")
+      expect(settingsPanel).toHaveAttribute("role", "tabpanel")
+      expect(settingsPanel).toHaveAttribute("aria-labelledby", settingsTab.id)
+    })
+
+    it("keeps only the selected enabled tab in the tab order", async () => {
+      await harness.renderTabGroup({ label: "Account sections", defaultActiveTab: "overview" })
+
+      expect(harness.getByRole("tab", { name: /overview/i })).toHaveAttribute("tabindex", "0")
+      expect(harness.getByRole("tab", { name: /settings/i })).toHaveAttribute("tabindex", "-1")
+
+      const analyticsTab = harness.getByRole("tab", { name: /analytics/i })
+      expect(analyticsTab).toHaveAttribute("tabindex", "-1")
+      expect(analyticsTab).toHaveAttribute("aria-disabled", "true")
+    })
   })
 }

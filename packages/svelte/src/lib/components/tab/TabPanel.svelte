@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolveTabPanelA11y, toTabPanelHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { TabPanelProps } from "./types.js";
 
@@ -13,13 +14,6 @@
   const mergedClass = $derived(mergeClass("mw-tab-group__panel", className));
 </script>
 
-<div
-  {id}
-  role="tabpanel"
-  aria-labelledby={tabId}
-  class={mergedClass}
-  hidden={hidden || undefined}
-  tabindex={hidden ? undefined : 0}
->
+<div {...toTabPanelHtmlAttributes(resolveTabPanelA11y({ id, tabId, hidden }))} class={mergedClass}>
   {@render children?.()}
 </div>

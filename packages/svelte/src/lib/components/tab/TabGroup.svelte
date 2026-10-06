@@ -5,6 +5,10 @@
     moveTabSelection,
     resolveTabValue,
     toTabHtmlAttributes,
+    resolveTabListA11y,
+    resolveTabPanelA11y,
+    toTabListHtmlAttributes,
+    toTabPanelHtmlAttributes,
   } from "@marwes-ui/core";
   import type { TabGroupItemState } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -86,10 +90,9 @@
 
   <div
     class="mw-tab-group__list"
-    role="tablist"
-    id={a11yIds.tabListId}
-    aria-labelledby={label ? labelId : undefined}
-    aria-label={!label ? ariaLabel : undefined}
+    {...toTabListHtmlAttributes(
+      resolveTabListA11y({ tabListId: a11yIds.tabListId, labelId: label ? labelId : undefined, ariaLabel })
+    )}
     tabindex={-1}
     onkeydown={handleKeydown}
   >
@@ -112,12 +115,10 @@
   {#each tabs as tab}
     {@const isActive = tab.value === activeValue}
     <div
-      id={a11yIds.panelIds[tab.value]}
-      role="tabpanel"
-      aria-labelledby={a11yIds.tabIds[tab.value]}
+      {...toTabPanelHtmlAttributes(
+        resolveTabPanelA11y({ id: a11yIds.panelIds[tab.value], tabId: a11yIds.tabIds[tab.value], hidden: !isActive })
+      )}
       class="mw-tab-group__panel"
-      tabindex={isActive ? 0 : undefined}
-      hidden={!isActive}
     >
       {#if isActive}
         {#if typeof tab.panel === "string"}

@@ -1,4 +1,9 @@
-import type { TabGroupA11yIds, TabGroupItemState } from "./tab-group-types"
+import type {
+  TabGroupA11yIds,
+  TabGroupItemState,
+  TabListA11yProps,
+  TabPanelA11yProps,
+} from "./tab-group-types"
 
 export type TabNavigationDirection = "next" | "previous" | "start" | "end"
 
@@ -73,4 +78,34 @@ export function moveTabSelection(
   const delta = direction === "next" ? 1 : -1
   const nextIndex = (currentIndex + delta + enabledItems.length) % enabledItems.length
   return enabledItems[nextIndex]?.value
+}
+
+const DEFAULT_TABLIST_LABEL = "Tabs"
+
+export function resolveTabListA11y(args: {
+  tabListId: string
+  /** Id of the visible label element, when the group renders one. */
+  labelId?: string | undefined
+  ariaLabel?: string | undefined
+}): TabListA11yProps {
+  const a11y: TabListA11yProps = { id: args.tabListId, role: "tablist" }
+
+  // A visible label names the tablist; otherwise fall back to ariaLabel, then a generic name.
+  if (args.labelId) a11y.ariaLabelledBy = args.labelId
+  else a11y.ariaLabel = args.ariaLabel ?? DEFAULT_TABLIST_LABEL
+
+  return a11y
+}
+
+export function resolveTabPanelA11y(args: {
+  id: string
+  tabId: string
+  hidden?: boolean | undefined
+}): TabPanelA11yProps {
+  const a11y: TabPanelA11yProps = { id: args.id, role: "tabpanel", ariaLabelledBy: args.tabId }
+
+  if (args.hidden) a11y.hidden = true
+  else a11y.tabIndex = 0
+
+  return a11y
 }
