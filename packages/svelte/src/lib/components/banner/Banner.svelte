@@ -10,6 +10,7 @@
     ondismiss,
     class: className,
     id,
+    dataAttributes,
     ...coreProps
   }: BannerProps = $props();
 
@@ -27,6 +28,7 @@
   aria-label={kit.root.a11y.ariaLabel}
   aria-live={kit.root.a11y.ariaLive}
   {...kit.root.dataAttributes}
+  {...dataAttributes}
 >
   <div class={kit.content.className}>
     {#if kit.icon.visible}

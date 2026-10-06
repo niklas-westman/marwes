@@ -3,7 +3,11 @@
   import Banner from "./Banner.svelte";
   import type { BannerProps } from "./types.js";
 
-  let { variant: _variant, ...props }: BannerProps = $props();
+  let { variant: _variant, dataAttributes, ...props }: BannerProps = $props();
 </script>
 
-<Banner {...props} variant="success" />
+<Banner
+  {...props}
+  variant="success"
+  dataAttributes={{ ...dataAttributes, ...createPurposeSemanticAttributes("success-banner") }}
+/>

@@ -6,6 +6,7 @@ import type * as React from "react"
 import { runBannerContract } from "../../../../../../tests/contracts/banner.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Banner } from "../banner"
+import { ErrorBanner, InfoBanner, SuccessBanner, WarningBanner } from "../variants"
 
 let dismissCalled = false
 
@@ -13,7 +14,18 @@ function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
 
+const reactPurposeBanners = {
+  info: InfoBanner,
+  success: SuccessBanner,
+  warning: WarningBanner,
+  error: ErrorBanner,
+}
+
 runBannerContract("react", {
+  renderPurposeBanner(intent) {
+    const PurposeBanner = reactPurposeBanners[intent]
+    renderWithProvider(<PurposeBanner>Purpose message</PurposeBanner>)
+  },
   renderBannerOptions(options, extras) {
     renderWithProvider(
       <Banner

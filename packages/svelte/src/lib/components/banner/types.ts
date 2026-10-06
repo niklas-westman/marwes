@@ -8,6 +8,8 @@ export interface BannerProps extends BannerOptions {
   ondismiss?: () => void
   class?: string
   id?: string
+  /** Extra data attributes for the root, e.g. purpose semantics from variant wrappers. */
+  dataAttributes?: Record<string, string | boolean | undefined>
 }
 
 export type InfoBannerProps = Omit<BannerProps, "variant">

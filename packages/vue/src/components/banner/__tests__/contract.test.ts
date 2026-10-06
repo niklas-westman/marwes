@@ -7,6 +7,7 @@ import { defineComponent, h } from "vue"
 import { runBannerContract } from "../../../../../../tests/contracts/banner.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Banner } from "../banner"
+import { ErrorBanner, InfoBanner, SuccessBanner, WarningBanner } from "../variants"
 
 let dismissHandler: ReturnType<typeof vi.fn>
 
@@ -28,7 +29,27 @@ function renderBanner(props: Record<string, unknown>, slots?: Record<string, () 
   )
 }
 
+const vuePurposeBanners = {
+  info: InfoBanner,
+  success: SuccessBanner,
+  warning: WarningBanner,
+  error: ErrorBanner,
+}
+
 runBannerContract("vue", {
+  renderPurposeBanner(intent) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(vuePurposeBanners[intent], null, { default: () => "Purpose message" }),
+            })
+        },
+      }),
+    )
+  },
   renderBannerOptions(options, extras) {
     renderBanner(
       { ...options, children: "Banner message" },

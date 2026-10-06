@@ -61,6 +61,10 @@ import NotificationBadge from "../lib/components/badge/NotificationBadge.svelte"
 import PriorityBadge from "../lib/components/badge/PriorityBadge.svelte"
 import StatusBadge from "../lib/components/badge/StatusBadge.svelte"
 import Banner from "../lib/components/banner/Banner.svelte"
+import ErrorBanner from "../lib/components/banner/ErrorBanner.svelte"
+import InfoBanner from "../lib/components/banner/InfoBanner.svelte"
+import SuccessBanner from "../lib/components/banner/SuccessBanner.svelte"
+import WarningBanner from "../lib/components/banner/WarningBanner.svelte"
 import BaseButton from "../lib/components/button/Button.svelte"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import CloseButton from "../lib/components/button/CloseButton.svelte"
@@ -488,7 +492,17 @@ function renderBannerContract(args: Props = {}) {
   )
 }
 
+const sveltePurposeBanners = {
+  info: InfoBanner,
+  success: SuccessBanner,
+  warning: WarningBanner,
+  error: ErrorBanner,
+}
+
 runBannerContract("svelte", {
+  renderPurposeBanner(intent) {
+    renderWithText(sveltePurposeBanners[intent], {}, "Purpose message")
+  },
   renderBannerOptions(options, extras) {
     renderBannerContract({
       ...options,

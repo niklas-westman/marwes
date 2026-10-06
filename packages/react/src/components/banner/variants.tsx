@@ -29,8 +29,7 @@ export function InfoBanner(props: InfoBannerProps): React.ReactElement {
     <Banner
       {...props}
       variant="info"
-      data-purpose={purposeAttrs["data-purpose"]}
-      data-intent={purposeAttrs["data-intent"]}
+      dataAttributes={{ ...props.dataAttributes, ...purposeAttrs }}
     />
   )
 }
@@ -55,8 +54,7 @@ export function SuccessBanner(props: SuccessBannerProps): React.ReactElement {
     <Banner
       {...props}
       variant="success"
-      data-purpose={purposeAttrs["data-purpose"]}
-      data-intent={purposeAttrs["data-intent"]}
+      dataAttributes={{ ...props.dataAttributes, ...purposeAttrs }}
     />
   )
 }
@@ -81,8 +79,7 @@ export function WarningBanner(props: WarningBannerProps): React.ReactElement {
     <Banner
       {...props}
       variant="warning"
-      data-purpose={purposeAttrs["data-purpose"]}
-      data-intent={purposeAttrs["data-intent"]}
+      dataAttributes={{ ...props.dataAttributes, ...purposeAttrs }}
     />
   )
 }
@@ -107,8 +104,7 @@ export function ErrorBanner(props: ErrorBannerProps): React.ReactElement {
     <Banner
       {...props}
       variant="error"
-      data-purpose={purposeAttrs["data-purpose"]}
-      data-intent={purposeAttrs["data-intent"]}
+      dataAttributes={{ ...props.dataAttributes, ...purposeAttrs }}
     />
   )
 }

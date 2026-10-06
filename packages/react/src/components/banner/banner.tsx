@@ -14,10 +14,12 @@ export type BannerProps = BannerOptions & {
   onDismiss?: () => void
   className?: string
   id?: string
+  /** Extra data attributes for the root, e.g. purpose semantics from variant wrappers. */
+  dataAttributes?: Record<string, string | boolean | undefined>
 }
 
 export function Banner(props: BannerProps): React.ReactElement {
-  const { children, action, icon, onDismiss, className, id, ...coreProps } = props
+  const { children, action, icon, onDismiss, className, id, dataAttributes, ...coreProps } = props
   const kit = createBannerRecipe({
     ...coreProps,
     showAction: coreProps.showAction ?? Boolean(action),
@@ -31,6 +33,7 @@ export function Banner(props: BannerProps): React.ReactElement {
       aria-label={kit.root.a11y.ariaLabel}
       aria-live={kit.root.a11y.ariaLive}
       {...kit.root.dataAttributes}
+      {...dataAttributes}
     >
       <div className={kit.content.className}>
         {kit.icon.visible && (

@@ -19,6 +19,8 @@ export interface BannerContractHarness {
     options: BannerOptions,
     extras?: { withAction?: boolean },
   ): Promise<void> | void
+  /** Renders InfoBanner, SuccessBanner, WarningBanner or ErrorBanner. */
+  renderPurposeBanner(intent: BannerPurposeIntent): Promise<void> | void
   clickDismiss(): Promise<void> | void
   getByRole(role: string, options?: { name?: string | RegExp }): HTMLElement
   getByText(text: string): HTMLElement
@@ -26,6 +28,8 @@ export interface BannerContractHarness {
   getRoot(): HTMLElement
   getDismissHandler(): { called: boolean }
 }
+
+export type BannerPurposeIntent = "info" | "success" | "warning" | "error"
 
 type BannerOptionCase = {
   options: BannerOptions
@@ -162,6 +166,21 @@ export function runBannerContract(adapterName: string, harness: BannerContractHa
         expect(root).toBeInTheDocument()
         optionCase.expectRendered(root)
       })
+    })
+
+    describe("purpose banners", () => {
+      it.each(["info", "success", "warning", "error"] as const)(
+        "%s banner emits canonical purpose semantics",
+        async (intent) => {
+          await harness.renderPurposeBanner(intent)
+
+          const root = harness.getRoot()
+          expect(root).toHaveAttribute("data-component", "banner")
+          expect(root).toHaveAttribute("data-variant", intent)
+          expect(root).toHaveAttribute("data-purpose", `${intent}-banner`)
+          expect(root).toHaveAttribute("data-intent", intent)
+        },
+      )
     })
   })
 }
