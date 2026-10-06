@@ -8,6 +8,7 @@
     size,
     strokeWidth,
     class: className,
+    // a11y-allow: destructuring rename of the aria-label prop, not an attribute being written
     "aria-label": ariaLabel,
     decorative,
   }: IconProps = $props();

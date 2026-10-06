@@ -69,6 +69,7 @@
 </script>
 
 <!-- svelte-ignore a11y_role_supports_aria_props -->
+<!-- a11y-allow: a div needs an explicit group role; React and Vue render a fieldset, which is an implicit group -->
 <div
   class={wrapperClass}
   role="group"

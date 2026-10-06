@@ -16,6 +16,7 @@
   const mergedClass = $derived(mergeClass(kit.className, className));
 </script>
 
+<!-- a11y-allow: Svelte-only passthrough prop; core Card has no a11y model for it -->
 <div {id} class={mergedClass} aria-disabled={ariaDisabled} {...kit.dataAttributes}>
   {#if title}
     <div class="mw-card__header">
