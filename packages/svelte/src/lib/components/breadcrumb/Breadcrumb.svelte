@@ -56,7 +56,6 @@
               class={item.actionClassName}
               href={item.href}
               {...toBreadcrumbHomeHtmlAttributes(item.a11y)}
-              aria-current={item.current ? "page" : undefined}
               onclick={() => onhomeclick?.()}
             >
               <Icon name={IconName.Home} decorative size={14} />
@@ -66,7 +65,6 @@
               type="button"
               class={item.actionClassName}
               {...toBreadcrumbHomeHtmlAttributes(item.a11y)}
-              aria-current={item.current ? "page" : undefined}
               onclick={() => onhomeclick?.()}
             >
               <Icon name={IconName.Home} decorative size={14} />
@@ -75,7 +73,6 @@
             <span
               class={item.actionClassName}
               {...toBreadcrumbHomeHtmlAttributes(item.a11y)}
-              aria-current={item.current ? "page" : undefined}
             >
               <Icon name={IconName.Home} decorative size={14} />
             </span>

@@ -90,7 +90,6 @@ function renderHomeItem(
   const commonProps = {
     className: item.actionClassName,
     ...toReactAttributes(toBreadcrumbHomeHtmlAttributes(item.a11y)),
-    "aria-current": item.current ? ("page" as const) : undefined,
   }
 
   if (item.href) {

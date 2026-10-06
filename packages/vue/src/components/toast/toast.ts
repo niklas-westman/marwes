@@ -69,7 +69,6 @@ export const Toast = defineComponent(
           id: props.id,
           class: className,
           ...toToastHtmlAttributes(a11y),
-          "aria-atomic": "true",
         },
         children,
       )

@@ -29,11 +29,26 @@ function listFiles(directory: string, extension: string): string[] {
 }
 
 function countHandwrittenAria(path: string): number {
-  return readFileSync(path, "utf8")
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => /(aria-[a-z]+|\brole)[=:"]/.test(line))
-    .filter((line) => !/Html\w*Attributes|^import |^\/\/|^\*|biome-ignore/.test(line)).length
+  return (
+    readFileSync(path, "utf8")
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => /(aria-[a-z]+|\brole)[=:"]/.test(line))
+      .filter((line) => !/Html\w*Attributes|^import |^\/\/|^\*|biome-ignore/.test(line))
+      // Reading a native aria-label from props/attrs to feed an option is not writing ARIA.
+      .filter(
+        (line) =>
+          !/typeof \w+\[?\.?"aria-label"\]|\["aria-label"\] as string|omitAttrs\(|getAttribute\(|hasAttribute\(/.test(
+            line,
+          ),
+      )
+      .filter(
+        (line) =>
+          !/^\? (props|nativeFieldsetProps|nativeSpanProps|nativeDivProps)\["aria-label"\]/.test(
+            line,
+          ),
+      ).length
+  )
 }
 
 const currentCounts: Record<string, number> = {}

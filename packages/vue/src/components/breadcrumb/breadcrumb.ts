@@ -107,7 +107,6 @@ function renderHomeItem(
   const commonProps = {
     class: item.actionClassName,
     ...toBreadcrumbHomeHtmlAttributes(item.a11y),
-    "aria-current": item.current ? "page" : undefined,
   }
   const icon = h(Icon, { name: IconName.Home, decorative: true, size: 14 })
 

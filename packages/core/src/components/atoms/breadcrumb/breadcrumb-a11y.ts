@@ -26,9 +26,13 @@ export function resolveBreadcrumbSeparatorA11y(): BreadcrumbSeparatorA11yProps {
   }
 }
 
-export function resolveBreadcrumbHomeA11y(homeLabel: string): BreadcrumbHomeA11yProps {
+export function resolveBreadcrumbHomeA11y(
+  homeLabel: string,
+  current = false,
+): BreadcrumbHomeA11yProps {
   return {
     ariaLabel: homeLabel,
+    ...(current ? { ariaCurrent: "page" as const } : {}),
   }
 }
 

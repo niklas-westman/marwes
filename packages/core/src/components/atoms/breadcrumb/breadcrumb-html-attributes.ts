@@ -66,6 +66,7 @@ export const toBreadcrumbItemHtmlAttributes = defineHtmlAttributeMapper<Breadcru
 
 const breadcrumbHomeHtmlAttributeNames = {
   ariaLabel: "aria-label",
+  ariaCurrent: "aria-current",
 } as const
 
 export type BreadcrumbHomeHtmlAttributes = HtmlAttributesOf<
