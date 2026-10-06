@@ -3,6 +3,11 @@ export function mergeIdRefs(...refs: Array<string | undefined | null | false>): 
   return filtered.length > 0 ? filtered.join(" ") : undefined
 }
 
+// Fields replace their helper text with the error text, so a hidden helper must not be referenced.
+function isHelperTextVisible(args: { hasHelperText: boolean; hasError: boolean }): boolean {
+  return args.hasHelperText && !args.hasError
+}
+
 export type InputFieldA11yIds = {
   helperTextId?: string
   errorId?: string
@@ -22,7 +27,7 @@ export function buildInputFieldA11yIds(args: {
   hasError: boolean
   externalDescribedBy?: string | undefined
 }): InputFieldA11yIds {
-  const helperTextId = args.hasHelperText ? `${args.id}-helper` : undefined
+  const helperTextId = isHelperTextVisible(args) ? `${args.id}-helper` : undefined
   const errorId = args.hasError ? `${args.id}-error` : undefined
   const describedBy = mergeIdRefs(args.externalDescribedBy, helperTextId, errorId)
   const result: InputFieldA11yIds = {}
@@ -39,7 +44,7 @@ export function buildRichTextFieldA11yIds(args: {
   externalDescribedBy?: string | undefined
 }): RichTextFieldA11yIds {
   const labelId = `${args.id}-label`
-  const helperTextId = args.hasHelperText ? `${args.id}-helper` : undefined
+  const helperTextId = isHelperTextVisible(args) ? `${args.id}-helper` : undefined
   const errorId = args.hasError ? `${args.id}-error` : undefined
   const describedBy = mergeIdRefs(args.externalDescribedBy, helperTextId, errorId)
   const result: RichTextFieldA11yIds = { labelId }

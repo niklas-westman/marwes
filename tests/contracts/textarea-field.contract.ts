@@ -104,5 +104,24 @@ export function runTextareaFieldContract(
       expect(h.queryHelperRegion()).toBeNull()
       expect(h.queryErrorRegion()).toBeNull()
     })
+
+    it("never references hidden helper text from aria-describedby when an error replaces it", async () => {
+      await h.renderTextareaField({
+        label: "Notes",
+        helperText: "A helpful hint",
+        error: "Something is wrong",
+      })
+
+      const control = h.getByLabelText(/notes/i)
+      const referencedIds = (control.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean)
+
+      expect(h.queryHelperRegion()).toBeNull()
+      expect(referencedIds.length).toBeGreaterThan(0)
+      for (const id of referencedIds) {
+        expect(document.getElementById(id)).not.toBeNull()
+      }
+    })
   })
 }
