@@ -20,6 +20,7 @@ function buildAvatarOptions(props: AvatarBadgeProps): AvatarOptions {
   if (props.alt !== undefined) avatarOptions.alt = props.alt
   if (props.iconName !== undefined) avatarOptions.iconName = props.iconName
   if (props.decorative !== undefined) avatarOptions.decorative = props.decorative
+  if (props.label !== undefined) avatarOptions.label = props.label
 
   const nativeAriaLabel = typeof props["aria-label"] === "string" ? props["aria-label"] : undefined
   const resolvedAriaLabel = props.ariaLabel ?? nativeAriaLabel
@@ -44,6 +45,7 @@ export function AvatarBadge(props: AvatarBadgeProps): React.ReactElement {
     alt,
     iconName,
     ariaLabel,
+    label,
     ...nativeSpanProps
   } = props
 
@@ -61,6 +63,7 @@ export function AvatarBadge(props: AvatarBadgeProps): React.ReactElement {
   if (alt !== undefined) innerAvatarProps.alt = alt
   if (iconName !== undefined) innerAvatarProps.iconName = iconName
   if (ariaLabel !== undefined) innerAvatarProps.ariaLabel = ariaLabel
+  if (label !== undefined) innerAvatarProps.label = label
 
   return (
     <span

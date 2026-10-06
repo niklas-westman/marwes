@@ -13,6 +13,9 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runAvatarGroupContract("react", {
+  renderAvatarGroupOptions(options) {
+    renderWithProvider(<AvatarGroup items={[{ initials: "MW" }]} {...options} />)
+  },
   async renderAvatarGroup(args = {}) {
     renderWithProvider(
       <AvatarGroup

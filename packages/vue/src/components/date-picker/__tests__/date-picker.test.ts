@@ -8,6 +8,9 @@ import { runDatePickerContract } from "../../../../../../tests/contracts/date-pi
 import { DatePicker } from "../date-picker"
 
 runDatePickerContract("vue", {
+  renderDatePickerOptions(options) {
+    render(DatePicker, { props: { ...options } })
+  },
   renderDatePicker({ onDaySelect, ...args } = {}) {
     render(DatePicker, {
       props: {

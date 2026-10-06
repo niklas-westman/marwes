@@ -22,6 +22,9 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runAvatarGroupContract("vue", {
+  renderAvatarGroupOptions(options) {
+    renderWithProvider(AvatarGroup, { items: [{ initials: "MW" }], ...options })
+  },
   async renderAvatarGroup(args = {}) {
     renderWithProvider(AvatarGroup, {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),

@@ -13,6 +13,9 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runAvatarBadgeContract("react", {
+  renderAvatarBadgeOptions(options) {
+    renderWithProvider(<AvatarBadge {...options} />)
+  },
   async renderAvatarBadge(args = {}) {
     const avatarBadgeProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

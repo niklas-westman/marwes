@@ -8,6 +8,9 @@ import { runDatePickerContract } from "../../../../../../tests/contracts/date-pi
 import { DatePicker } from "../date-picker"
 
 runDatePickerContract("react", {
+  renderDatePickerOptions(options) {
+    render(<DatePicker {...options} />)
+  },
   renderDatePicker({ onDaySelect, ...args } = {}) {
     render(
       <DatePicker

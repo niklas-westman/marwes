@@ -2,6 +2,7 @@
  * Shared contract for the DatePicker atom — calendar landmark naming, navigation button names,
  * grid name, day button semantics (selected, empty filler cells) and day selection.
  */
+import type { DatePickerOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export interface DatePickerContractHarness {
@@ -18,6 +19,8 @@ export interface DatePickerContractHarness {
     onDaySelect?: (date: string | undefined) => void
   }): Promise<void> | void
   click(element: HTMLElement): Promise<void> | void
+  /** Renders the base DatePicker with raw core options. */
+  renderDatePickerOptions(options: DatePickerOptions): Promise<void> | void
 }
 
 function getRoot(): HTMLElement {
@@ -28,6 +31,106 @@ function getDay(date: string): HTMLElement {
   return document.querySelector(
     `[data-component="date-picker-day"][data-date="${date}"]`,
   ) as HTMLElement
+}
+
+type DatePickerOptionCase = {
+  options: DatePickerOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+const aprilWeeks = [[{ label: "01", date: "2026-04-01" }]] as const
+
+// Exhaustive on purpose: a new core DatePickerOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const datePickerOptionCases: Record<keyof DatePickerOptions, DatePickerOptionCase> = {
+  monthLabel: {
+    options: { monthLabel: "April 2026" },
+    expectRendered: (root) =>
+      expect(root.querySelector("table")).toHaveAttribute("aria-label", "April 2026"),
+  },
+  weekdayLabels: {
+    options: { weekdayLabels: ["M", "T", "W", "T", "F", "S", "S"] },
+    expectRendered: (root) =>
+      expect([...root.querySelectorAll("th")].map((th) => th.textContent)).toEqual([
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S",
+        "S",
+      ]),
+  },
+  weeks: {
+    options: { weeks: aprilWeeks },
+    expectRendered: (root) => expect(root.querySelector('[data-date="2026-04-01"]')).not.toBeNull(),
+  },
+  device: {
+    options: { device: "mobile" },
+    expectRendered: (root) => expect(root).toHaveAttribute("data-device", "mobile"),
+  },
+  previousYearLabel: {
+    options: { previousYearLabel: "PY" },
+    expectRendered: (root) =>
+      expect(root.querySelectorAll(".mw-date-picker__nav-button")[0]).toHaveAttribute(
+        "aria-label",
+        "PY",
+      ),
+  },
+  previousMonthLabel: {
+    options: { previousMonthLabel: "PM" },
+    expectRendered: (root) =>
+      expect(root.querySelectorAll(".mw-date-picker__nav-button")[1]).toHaveAttribute(
+        "aria-label",
+        "PM",
+      ),
+  },
+  nextMonthLabel: {
+    options: { nextMonthLabel: "NM" },
+    expectRendered: (root) =>
+      expect(root.querySelectorAll(".mw-date-picker__nav-button")[2]).toHaveAttribute(
+        "aria-label",
+        "NM",
+      ),
+  },
+  nextYearLabel: {
+    options: { nextYearLabel: "NY" },
+    expectRendered: (root) =>
+      expect(root.querySelectorAll(".mw-date-picker__nav-button")[3]).toHaveAttribute(
+        "aria-label",
+        "NY",
+      ),
+  },
+  cancelLabel: {
+    options: { cancelLabel: "Reset" },
+    expectRendered: (root) =>
+      expect(root.querySelector(".mw-date-picker__footer-button")).toHaveTextContent("Reset"),
+  },
+  applyLabel: {
+    options: { applyLabel: "Apply" },
+    expectRendered: (root) =>
+      expect(root.querySelector(".mw-date-picker__footer")).toHaveTextContent("Apply"),
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Departure" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-label", "Departure"),
+  },
+  ariaLabelledBy: {
+    options: { ariaLabelledBy: "label-id" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-labelledby", "label-id"),
+  },
+  ariaDescribedBy: {
+    options: { ariaDescribedBy: "hint-id" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-describedby", "hint-id"),
+  },
+  calendarLabel: {
+    options: { calendarLabel: "Pick a day" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-label", "Pick a day"),
+  },
+  dataAttributes: {
+    options: { dataAttributes: { "data-track": "dp" } },
+    expectRendered: (root) => expect(root).toHaveAttribute("data-track", "dp"),
+  },
 }
 
 export function runDatePickerContract(
@@ -131,6 +234,16 @@ export function runDatePickerContract(
       await harness.click(getRoot().querySelector('[data-state="null"]') as HTMLElement)
 
       expect(chosen).toEqual(["2026-03-13"])
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(datePickerOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderDatePickerOptions(optionCase.options)
+
+        const root = getRoot()
+        expect(root).toBeInTheDocument()
+        optionCase.expectRendered(root)
+      })
     })
   })
 }

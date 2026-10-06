@@ -322,6 +322,9 @@ runAvatarContract("svelte", {
 })
 
 runAvatarBadgeContract("svelte", {
+  renderAvatarBadgeOptions(options) {
+    render(AvatarBadge, { props: { ...options } })
+  },
   renderAvatarBadge(args = {}) {
     render(AvatarBadge, {
       props: {
@@ -344,6 +347,9 @@ runAvatarBadgeContract("svelte", {
 })
 
 runAvatarGroupContract("svelte", {
+  renderAvatarGroupOptions(options) {
+    render(AvatarGroup, { props: { items: [{ initials: "MW" }], ...options } })
+  },
   renderAvatarGroup(args = {}) {
     render(AvatarGroup, {
       props: {
@@ -764,6 +770,9 @@ runDialogContract("svelte", {
 })
 
 runDatePickerContract("svelte", {
+  renderDatePickerOptions(options) {
+    render(DatePicker, { props: { ...options } })
+  },
   renderDatePicker({ onDaySelect, ...args } = {}) {
     render(DatePicker, {
       props: {
