@@ -29,6 +29,8 @@ export type SpacingContractHarness = {
   renderSpacing(args?: {
     size?: SpacingSize
     scale?: number
+    /** Extra native attributes the consumer passes through to the element. */
+    attributes?: Record<string, string>
   }): Promise<void> | void
   getSpacingElement(): HTMLElement | null
 }
@@ -57,6 +59,14 @@ export function runSpacingContract(adapterName: string, harness: SpacingContract
       expect(spacingElement?.style.getPropertyValue("--mw-spacing-value")).toBe(
         "calc(var(--mw-spacing-sp-32) * 2)",
       )
+    })
+
+    it("forwards native attributes to the spacing element", async () => {
+      await harness.renderSpacing({ attributes: { "data-track-id": "spacer-1" } })
+
+      const spacingElement = harness.getSpacingElement()
+      expect(spacingElement).toHaveAttribute("data-track-id", "spacer-1")
+      expect(spacingElement).toHaveAttribute("data-component", "spacing")
     })
   })
 }

@@ -7,15 +7,23 @@
   let {
     class: className,
     style,
-    ...options
+    size,
+    scale,
+    ...nativeProps
   }: SpacingProps = $props();
 
-  const kit = $derived(createSpacingRecipe(options));
+  const kit = $derived(
+    createSpacingRecipe({
+      ...(size !== undefined ? { size } : {}),
+      ...(scale !== undefined ? { scale } : {}),
+    })
+  );
   const mergedClass = $derived(mergeClass(kit.className, className));
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 </script>
 
 <div
+  {...nativeProps}
   class={mergedClass}
   style={mergedStyle}
   {...toSpacingHtmlAttributes(kit.a11y)}

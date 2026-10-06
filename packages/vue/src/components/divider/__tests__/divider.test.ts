@@ -27,6 +27,7 @@ runDividerContract("vue", {
       ...(args.size !== undefined ? { size: args.size } : {}),
       ...(args.orientation !== undefined ? { orientation: args.orientation } : {}),
       ...(args.id !== undefined ? { id: args.id } : {}),
+      ...args.attributes,
     }
 
     renderWithProvider(Divider, dividerProps)

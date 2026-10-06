@@ -66,7 +66,14 @@ export type SpacerProps = SpacingProps
  * ```
  */
 export const Spacing = React.forwardRef<HTMLDivElement, SpacingProps>((props, ref) => {
-  const { className: customClassName, scale, size, spacing, style: customStyle } = props
+  const {
+    className: customClassName,
+    scale,
+    size,
+    spacing,
+    style: customStyle,
+    ...nativeProps
+  } = props
   const resolvedSize = spacing ?? size
 
   const kit = createSpacingRecipe({
@@ -80,6 +87,7 @@ export const Spacing = React.forwardRef<HTMLDivElement, SpacingProps>((props, re
   return (
     <div
       ref={ref}
+      {...nativeProps}
       {...toSpacingHtmlAttributes(kit.a11y)}
       {...kit.dataAttributes}
       className={className}

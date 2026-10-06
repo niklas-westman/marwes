@@ -19,6 +19,7 @@ runSpacingContract("react", {
     const spacingProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),
       ...(args.scale !== undefined ? { scale: args.scale } : {}),
+      ...args.attributes,
     }
 
     renderWithProvider(<Spacing {...spacingProps} />)

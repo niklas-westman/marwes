@@ -73,9 +73,20 @@ export type DividerProps = DividerOptions &
  */
 
 export const Divider = React.forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
-  const { className: customClassName, style: customStyle, ...opts } = props
+  const {
+    className: customClassName,
+    style: customStyle,
+    size,
+    orientation,
+    id,
+    ...nativeProps
+  } = props
 
-  const kit = createDividerRecipe(opts)
+  const kit = createDividerRecipe({
+    ...(size !== undefined ? { size } : {}),
+    ...(orientation !== undefined ? { orientation } : {}),
+    ...(id !== undefined ? { id } : {}),
+  })
 
   const style = { ...(kit.vars as StyleWithVars), ...customStyle }
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
@@ -83,6 +94,7 @@ export const Divider = React.forwardRef<HTMLHRElement, DividerProps>((props, ref
   return (
     <hr
       ref={ref}
+      {...nativeProps}
       {...toDividerHtmlAttributes(kit.a11y)}
       {...kit.dataAttributes}
       className={className}

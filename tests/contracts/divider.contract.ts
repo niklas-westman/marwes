@@ -12,6 +12,8 @@ export type DividerContractHarness = {
     size?: DividerSize
     orientation?: DividerOrientation
     id?: string
+    /** Extra native attributes the consumer passes through to the element. */
+    attributes?: Record<string, string>
   }): Promise<void> | void
   getByRole(role: "separator"): HTMLElement
 }
@@ -42,6 +44,17 @@ export function runDividerContract(adapterName: string, harness: DividerContract
       expect(separatorElement).toHaveAttribute("data-size", "xl")
       expect(separatorElement.className).toContain("mw-divider--vertical")
       expect(separatorElement.className).toContain("mw-divider--xl")
+    })
+
+    it("forwards native attributes to the separator element", async () => {
+      await harness.renderDivider({
+        attributes: { "aria-label": "Section break", "data-track-id": "divider-1" },
+      })
+
+      const separatorElement = harness.getByRole("separator")
+      expect(separatorElement).toHaveAttribute("aria-label", "Section break")
+      expect(separatorElement).toHaveAttribute("data-track-id", "divider-1")
+      expect(separatorElement).toHaveAttribute("data-component", "divider")
     })
   })
 }

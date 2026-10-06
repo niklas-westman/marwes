@@ -676,8 +676,8 @@ runCheckboxGroupFieldContract("svelte", {
 })
 
 runDividerContract("svelte", {
-  renderDivider(args = {}) {
-    render(Divider, { props: args })
+  renderDivider({ attributes, ...args } = {}) {
+    render(Divider, { props: { ...args, ...attributes } })
   },
   getByRole(role) {
     return screen.getByRole(role)
@@ -1197,8 +1197,8 @@ runSelectComboboxContract("svelte", {
 })
 
 runSpacingContract("svelte", {
-  renderSpacing(args = {}) {
-    render(Spacing, { props: args })
+  renderSpacing({ attributes, ...args } = {}) {
+    render(Spacing, { props: { ...args, ...attributes } })
   },
   getSpacingElement() {
     return document.querySelector("[data-component='spacing']")
