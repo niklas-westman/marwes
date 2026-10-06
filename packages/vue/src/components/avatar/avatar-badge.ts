@@ -4,6 +4,7 @@ import {
   toAvatarBadgeHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Avatar, type AvatarProps } from "./avatar"
 
@@ -11,7 +12,7 @@ export type AvatarBadgeProps = AvatarProps & {
   statusLabel?: string
 }
 
-const avatarBadgePropKeys = [
+const avatarBadgePropKeys = definePropKeys<AvatarBadgeProps>()([
   "size",
   "type",
   "initials",
@@ -24,7 +25,7 @@ const avatarBadgePropKeys = [
   "className",
   "dataAttributes",
   "statusLabel",
-] as const
+])
 
 function buildAvatarOptions(props: AvatarBadgeProps, nativeAriaLabel?: string): AvatarOptions {
   const avatarOptions: AvatarOptions = {}

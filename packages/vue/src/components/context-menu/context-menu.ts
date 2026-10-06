@@ -6,6 +6,7 @@ import {
 } from "@marwes-ui/core"
 import type { ContextMenuActionItem, ContextMenuEntry, ContextMenuOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -15,13 +16,13 @@ export type ContextMenuProps = ContextMenuOptions & {
   className?: string
 }
 
-const contextMenuPropKeys = [
+const contextMenuPropKeys = definePropKeys<ContextMenuProps>()([
   "items",
   "ariaLabel",
   "dataAttributes",
   "onSelect",
   "className",
-] as const
+])
 
 export const ContextMenu = defineComponent(
   (props: ContextMenuProps, { emit }) => {

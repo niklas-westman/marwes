@@ -8,6 +8,7 @@ import {
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -45,7 +46,7 @@ export type DialogProps = DialogOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const dialogPropKeys = [
+const dialogPropKeys = definePropKeys<DialogProps>()([
   "id",
   "title",
   "description",
@@ -61,7 +62,7 @@ const dialogPropKeys = [
   "onClose",
   "className",
   "dataAttributes",
-] as const
+])
 
 export const Dialog = defineComponent(
   (props: DialogProps, { attrs, slots }) => {

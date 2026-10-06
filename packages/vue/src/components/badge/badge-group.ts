@@ -1,6 +1,7 @@
 import { createBadgeGroupRecipe, toBadgeGroupHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 
@@ -18,7 +19,12 @@ export interface BadgeGroupProps {
   dataAttributes?: Record<string, string>
 }
 
-const badgeGroupPropKeys = ["label", "className", "id", "dataAttributes"] as const
+const badgeGroupPropKeys = definePropKeys<BadgeGroupProps>()([
+  "label",
+  "className",
+  "id",
+  "dataAttributes",
+])
 
 export const BadgeGroup = defineComponent(
   (props: BadgeGroupProps, { slots }) => {

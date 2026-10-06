@@ -10,6 +10,7 @@ import {
 } from "@marwes-ui/core"
 import { type VNodeChild, computed, defineComponent, h, ref, watch } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Paragraph } from "../paragraph"
 import { Text } from "../text"
@@ -41,7 +42,7 @@ export type TabPanelProps = {
   className?: string
 }
 
-const tabGroupPropKeys = [
+const tabGroupPropKeys = definePropKeys<TabGroupProps>()([
   "id",
   "label",
   "ariaLabel",
@@ -50,9 +51,9 @@ const tabGroupPropKeys = [
   "defaultActiveTab",
   "dataAttributes",
   "className",
-] as const
+])
 
-const tabPanelPropKeys = ["id", "tabId", "hidden", "className"] as const
+const tabPanelPropKeys = definePropKeys<TabPanelProps>()(["id", "tabId", "hidden", "className"])
 
 function hasContent(value: VNodeChild | undefined): boolean {
   if (value === undefined || value === null || value === false) {

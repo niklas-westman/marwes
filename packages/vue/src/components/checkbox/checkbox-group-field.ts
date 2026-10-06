@@ -5,6 +5,7 @@ import {
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Checkbox, type CheckboxProps } from "./checkbox"
@@ -54,7 +55,7 @@ export interface CheckboxGroupFieldProps {
   modelValue?: string[]
 }
 
-const checkboxGroupFieldPropKeys = [
+const checkboxGroupFieldPropKeys = definePropKeys<CheckboxGroupFieldProps>()([
   "label",
   "options",
   "description",
@@ -69,7 +70,7 @@ const checkboxGroupFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

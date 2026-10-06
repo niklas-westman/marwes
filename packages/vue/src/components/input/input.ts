@@ -2,6 +2,7 @@ import type { CssVars, InputOptions } from "@marwes-ui/core"
 import { createInputRecipe, toInputHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type InputProps = InputOptions & {
@@ -10,7 +11,7 @@ export type InputProps = InputOptions & {
   className?: string
 }
 
-const inputPropKeys = [
+const inputPropKeys = definePropKeys<InputProps>()([
   "id",
   "name",
   "value",
@@ -31,7 +32,7 @@ const inputPropKeys = [
   "label",
   "onValueChange",
   "className",
-] as const
+])
 
 export const Input = defineComponent(
   (props: InputProps, { emit }) => {

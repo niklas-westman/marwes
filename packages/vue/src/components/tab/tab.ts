@@ -1,6 +1,7 @@
 import { createTabRecipe, toTabHtmlAttributes } from "@marwes-ui/core"
 import type { TabOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type TabProps = TabOptions & {
@@ -9,7 +10,7 @@ export type TabProps = TabOptions & {
   id?: string
 }
 
-const tabPropKeys = [
+const tabPropKeys = definePropKeys<TabProps>()([
   "selected",
   "disabled",
   "ariaLabel",
@@ -18,7 +19,7 @@ const tabPropKeys = [
   "className",
   "onClick",
   "id",
-] as const
+])
 
 export const Tab = defineComponent(
   (props: TabProps, { slots }) => {

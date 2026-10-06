@@ -1,6 +1,7 @@
 import { badgeOptionKeys, createBadgeRecipe, toBadgeHtmlAttributes } from "@marwes-ui/core"
 import type { BadgeOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type BadgeProps = BadgeOptions & {
@@ -10,7 +11,12 @@ export type BadgeProps = BadgeOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const badgePropKeys = [...badgeOptionKeys, "className", "id", "dataAttributes"] as const
+const badgePropKeys = definePropKeys<BadgeProps>()([
+  ...badgeOptionKeys,
+  "className",
+  "id",
+  "dataAttributes",
+])
 
 export const Badge = defineComponent(
   (props: BadgeProps, { slots }) => {

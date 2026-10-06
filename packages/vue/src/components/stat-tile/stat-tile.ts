@@ -6,6 +6,7 @@ import {
   toStatTileTrendHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface StatTileProps extends Pick<StatTileOptions, "dataAttributes"> {
@@ -18,7 +19,7 @@ export interface StatTileProps extends Pick<StatTileOptions, "dataAttributes"> {
   tone?: StatTileTone
 }
 
-const statTilePropKeys = [
+const statTilePropKeys = definePropKeys<StatTileProps>()([
   "className",
   "label",
   "value",
@@ -27,7 +28,7 @@ const statTilePropKeys = [
   "trendDirection",
   "tone",
   "dataAttributes",
-] as const
+])
 
 export const StatTile = defineComponent(
   (props: StatTileProps) => {

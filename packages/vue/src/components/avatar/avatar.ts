@@ -9,6 +9,7 @@ import {
   toAvatarInitialsHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -17,7 +18,11 @@ export type AvatarProps = AvatarOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const avatarPropKeys = [...avatarOptionKeys, "className", "dataAttributes"] as const
+const avatarPropKeys = definePropKeys<AvatarProps>()([
+  ...avatarOptionKeys,
+  "className",
+  "dataAttributes",
+])
 
 function renderAvatarContent(
   content: AvatarRenderContent,

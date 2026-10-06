@@ -1,4 +1,5 @@
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, watch } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Toast } from "./toast"
 import type { ManagedToast, ToastContainerProps } from "./toast-manager-types"
@@ -183,7 +184,15 @@ const ToastViewportItem = defineComponent({
 
 export const ToastContainer = defineComponent({
   name: "MarwesToastContainer",
-  props: ["toasts", "placement", "maxVisible", "className", "onDismiss"],
+  props: [
+    ...definePropKeys<ToastContainerProps>()([
+      "toasts",
+      "placement",
+      "maxVisible",
+      "className",
+      "onDismiss",
+    ]),
+  ],
   setup(rawProps) {
     const props = rawProps as ToastContainerProps
 

@@ -1,6 +1,7 @@
 import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { SegmentedControl, type SegmentedControlPropsVue } from "./segmented-control"
@@ -18,7 +19,7 @@ export type SegmentedControlFieldProps = {
   className?: string
 }
 
-const segmentedControlFieldPropKeys = [
+const segmentedControlFieldPropKeys = definePropKeys<SegmentedControlFieldProps>()([
   "id",
   "label",
   "description",
@@ -26,7 +27,7 @@ const segmentedControlFieldPropKeys = [
   "segmentedControl",
   "ariaDescribedBy",
   "className",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

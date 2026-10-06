@@ -1,5 +1,6 @@
 import type { VNodeChild } from "vue"
 import { Teleport, computed, defineComponent, h, nextTick, ref, watch } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { Dialog, type DialogProps } from "./dialog"
 
 function getFocusableElements(container: HTMLElement | null): HTMLElement[] {
@@ -64,7 +65,8 @@ function toCSSDimension(value: string | number | undefined): string | undefined 
   return typeof value === "number" ? `${value}px` : value
 }
 
-const dialogModalPropKeys = [
+// modal is forced on by DialogModal, so it is not a prop here
+const dialogModalPropKeys = definePropKeys<Omit<DialogModalProps, "modal">>()([
   "id",
   "title",
   "description",
@@ -88,7 +90,7 @@ const dialogModalPropKeys = [
   "tone",
   "divider",
   "footer",
-] as const
+])
 
 export const DialogModal = defineComponent(
   (props: DialogModalProps, { slots, emit }) => {

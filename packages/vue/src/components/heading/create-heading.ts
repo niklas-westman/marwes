@@ -1,6 +1,7 @@
 import { headingRecipe, toHeadingHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, HeadingOptions, HeadingSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import {
   getDefaultSlotChildren,
   mergeClassNames,
@@ -17,7 +18,7 @@ type HeadingBaseProps = Omit<HeadingOptions, "level"> & {
 export type HeadingLevel = 1 | 2 | 3
 type HeadingTag = `h${HeadingLevel}`
 
-const headingPropKeys = ["size", "id", "ariaLabel", "className"] as const
+const headingPropKeys = definePropKeys<HeadingBaseProps>()(["size", "id", "ariaLabel", "className"])
 
 export function createHeadingComponent<L extends HeadingLevel>(level: L) {
   const tagName = `h${level}` as HeadingTag

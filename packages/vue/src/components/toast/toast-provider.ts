@@ -1,5 +1,6 @@
 import { Fragment, defineComponent, h, inject, provide, shallowRef } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { ToastContainer } from "./toast-container"
 import type {
   ManagedToast,
@@ -11,7 +12,7 @@ import { toastContextKey } from "./toast-manager-types"
 
 export const ToastProvider = defineComponent({
   name: "MarwesToastProvider",
-  props: ["placement", "maxVisible", "defaultDuration"],
+  props: [...definePropKeys<ToastProviderProps>()(["placement", "maxVisible", "defaultDuration"])],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as ToastProviderProps
     const toasts = shallowRef<ManagedToast[]>([])

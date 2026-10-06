@@ -8,6 +8,7 @@ import {
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -46,7 +47,7 @@ export type DrawerProps = DrawerOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const drawerPropKeys = [
+const drawerPropKeys = definePropKeys<DrawerProps>()([
   "id",
   "title",
   "description",
@@ -65,7 +66,7 @@ const drawerPropKeys = [
   "className",
   "panelClassName",
   "dataAttributes",
-] as const
+])
 
 export const Drawer = defineComponent(
   (props: DrawerProps, { attrs, emit, slots }) => {

@@ -9,6 +9,7 @@ import {
 } from "@marwes-ui/core"
 import type { BreadcrumbItem, BreadcrumbOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -17,7 +18,7 @@ export type BreadcrumbProps = BreadcrumbOptions & {
   className?: string
 }
 
-const breadcrumbPropKeys = [
+const breadcrumbPropKeys = definePropKeys<BreadcrumbProps>()([
   "items",
   "ariaLabel",
   "showHome",
@@ -25,7 +26,7 @@ const breadcrumbPropKeys = [
   "homeLabel",
   "dataAttributes",
   "className",
-] as const
+])
 
 export const Breadcrumb = defineComponent(
   (props: BreadcrumbProps, { emit }) => {

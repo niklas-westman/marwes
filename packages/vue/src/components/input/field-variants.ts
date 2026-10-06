@@ -8,7 +8,7 @@ import type { SelectProps } from "./select"
 import { SelectField, type SelectFieldProps } from "./select-field"
 
 // Shared field prop keys (from InputFieldProps)
-const fieldPropKeys = [
+const fieldPropKeys = definePropKeys<InputFieldProps>()([
   "id",
   "label",
   "helperText",
@@ -20,17 +20,18 @@ const fieldPropKeys = [
   "showPasswordLabel",
   "hidePasswordLabel",
   "clearLabel",
-] as const
+])
 
-const dropdownFieldPropKeys = [
+const dropdownFieldPropKeys = definePropKeys<DropdownFieldProps>()([
   "id",
   "label",
   "helperText",
   "error",
   "select",
+  "variant",
   "ariaDescribedBy",
   "modelValue",
-] as const
+])
 
 export type DropdownFieldProps = Omit<SelectFieldProps, "select"> & {
   select: Omit<SelectProps, "appearance"> & {
@@ -102,7 +103,10 @@ export type PasswordFieldProps = Omit<InputFieldProps, "input"> & {
   autoComplete?: "current-password" | "new-password"
 }
 
-const passwordFieldPropKeys = [...fieldPropKeys, "autoComplete"] as const
+const passwordFieldPropKeys = definePropKeys<PasswordFieldProps>()([
+  ...fieldPropKeys,
+  "autoComplete",
+])
 
 export const PasswordField = defineComponent({
   name: "MarwesPasswordField",
@@ -302,7 +306,7 @@ export type CurrencyFieldProps = Omit<InputFieldProps, "input"> & {
   currency?: CurrencyCode | string
 }
 
-const currencyFieldPropKeys = [...fieldPropKeys, "currency"] as const
+const currencyFieldPropKeys = definePropKeys<CurrencyFieldProps>()([...fieldPropKeys, "currency"])
 
 export const CurrencyField = defineComponent({
   name: "MarwesCurrencyField",

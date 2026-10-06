@@ -5,6 +5,7 @@ import {
   toSpinnerHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SpinnerProps = SpinnerOptions & {
@@ -12,7 +13,7 @@ export type SpinnerProps = SpinnerOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const spinnerPropKeys = [
+const spinnerPropKeys = definePropKeys<SpinnerProps>()([
   "variant",
   "size",
   "decorative",
@@ -21,7 +22,7 @@ const spinnerPropKeys = [
   "id",
   "className",
   "dataAttributes",
-] as const
+])
 
 function renderSpinnerSvgNode(spinnerSvgNode: SpinnerSvgNode, nodeIndex: number) {
   return h(spinnerSvgNode.tag, {

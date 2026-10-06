@@ -11,6 +11,7 @@ import {
 import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, ref, useAttrs, watch } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -20,7 +21,7 @@ export type RichTextProps = RichTextOptions & {
   className?: string
 }
 
-const richTextPropKeys = [
+const richTextPropKeys = definePropKeys<RichTextProps>()([
   "id",
   "name",
   "value",
@@ -40,7 +41,7 @@ const richTextPropKeys = [
   "formatLabels",
   "onValueChange",
   "className",
-] as const
+])
 
 type RichTextCommandDocument = Document & {
   execCommand?: (commandId: string) => boolean

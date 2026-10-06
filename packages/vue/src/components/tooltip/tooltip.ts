@@ -5,6 +5,7 @@ import {
   toTooltipHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type TooltipProps = TooltipOptions & {
@@ -12,7 +13,7 @@ export type TooltipProps = TooltipOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const tooltipPropKeys = ["id", "className", "dataAttributes"] as const
+const tooltipPropKeys = definePropKeys<TooltipProps>()(["id", "className", "dataAttributes"])
 
 export const Tooltip = defineComponent(
   (props: TooltipProps, { slots }) => {

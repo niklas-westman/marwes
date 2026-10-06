@@ -1,6 +1,7 @@
 import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Pagination, type PaginationPropsVue as PaginationProps } from "./pagination"
@@ -15,7 +16,7 @@ export type PaginationFieldProps = {
   className?: string
 }
 
-const paginationFieldPropKeys = [
+const paginationFieldPropKeys = definePropKeys<PaginationFieldProps>()([
   "id",
   "label",
   "description",
@@ -23,7 +24,7 @@ const paginationFieldPropKeys = [
   "pagination",
   "ariaDescribedBy",
   "className",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

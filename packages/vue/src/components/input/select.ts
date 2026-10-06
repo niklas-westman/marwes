@@ -7,6 +7,7 @@ import type {
 import { createSelectRecipe, toSelectHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 import { SelectArrowIcon } from "./select-arrow-icon"
 
@@ -39,7 +40,7 @@ function getInitialSelectValue(props: SelectProps): string {
   return props.options[0]?.value ?? ""
 }
 
-const selectPropKeys = [
+const selectPropKeys = definePropKeys<SelectProps>()([
   "id",
   "name",
   "value",
@@ -59,7 +60,7 @@ const selectPropKeys = [
   "label",
   "onValueChange",
   "className",
-] as const
+])
 
 export const Select = defineComponent(
   (props: SelectProps, { emit }) => {

@@ -8,6 +8,7 @@ import {
   toIconHtmlAttributes,
 } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 
 type IconName = keyof typeof iconRegistry
 
@@ -20,14 +21,14 @@ export type IconProps = {
   decorative?: boolean
 }
 
-const iconPropKeys = [
+const iconPropKeys = definePropKeys<IconProps>()([
   "name",
   "size",
   "strokeWidth",
   "className",
   "ariaLabel",
   "decorative",
-] as const
+])
 
 export const Icon = defineComponent(
   (props: IconProps) => {

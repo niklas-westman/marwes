@@ -5,12 +5,13 @@ import {
   createPurposeSemanticAttributes,
 } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { omitAttrs } from "../../internal/render-utils"
 import { Button, type ButtonProps } from "./button"
 
 type PurposeButtonForbiddenProp = "variant" | "action" | "as"
 
-const buttonPropKeys = [
+const buttonPropKeys = definePropKeys<Omit<ButtonProps, "variant" | "as">, "variant" | "as">()([
   "as",
   "href",
   "type",
@@ -36,9 +37,9 @@ const buttonPropKeys = [
   "dataAttributes",
   "onClick",
   "className",
-] as const
+])
 
-const purposeButtonPropKeys = [
+const purposeButtonPropKeys = definePropKeys<Omit<ButtonProps, "variant" | "action">>()([
   "as",
   "href",
   "type",
@@ -62,9 +63,11 @@ const purposeButtonPropKeys = [
   "dataAttributes",
   "onClick",
   "className",
-] as const
+])
 
-const fixedModePurposeButtonPropKeys = [
+const fixedModePurposeButtonPropKeys = definePropKeys<
+  Omit<ButtonProps, "variant" | "action" | "as" | "href">
+>()([
   "type",
   "size",
   "disabled",
@@ -86,9 +89,12 @@ const fixedModePurposeButtonPropKeys = [
   "dataAttributes",
   "onClick",
   "className",
-] as const
+])
 
-const anchorPurposeButtonPropKeys = ["href", ...fixedModePurposeButtonPropKeys] as const
+const anchorPurposeButtonPropKeys = definePropKeys<LinkButtonProps>()([
+  "href",
+  ...fixedModePurposeButtonPropKeys,
+])
 
 function isDevelopmentEnvironment(): boolean {
   const nodeProcess = (

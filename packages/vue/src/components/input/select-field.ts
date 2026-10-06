@@ -10,6 +10,7 @@ import {
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, onBeforeUnmount, ref, watch } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { Text } from "../text"
@@ -29,7 +30,7 @@ export type SelectFieldProps = {
   variant?: SelectFieldVariant
 }
 
-const selectFieldPropKeys = [
+const selectFieldPropKeys = definePropKeys<SelectFieldProps>()([
   "id",
   "label",
   "helperText",
@@ -38,7 +39,7 @@ const selectFieldPropKeys = [
   "ariaDescribedBy",
   "modelValue",
   "variant",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

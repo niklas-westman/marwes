@@ -5,6 +5,7 @@ import {
   toProgressBarHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type ProgressBarProps = ProgressBarOptions & {
@@ -12,7 +13,7 @@ export type ProgressBarProps = ProgressBarOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const progressBarPropKeys = [
+const progressBarPropKeys = definePropKeys<ProgressBarProps>()([
   "id",
   "label",
   "value",
@@ -29,7 +30,7 @@ const progressBarPropKeys = [
   "ariaDescribedBy",
   "className",
   "dataAttributes",
-] as const
+])
 
 export const ProgressBar = defineComponent(
   (props: ProgressBarProps) => {

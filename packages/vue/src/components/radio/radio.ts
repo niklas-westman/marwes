@@ -1,6 +1,7 @@
 import { radioRecipe, toRadioHtmlAttributes } from "@marwes-ui/core"
 import type { RadioOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export type RadioProps = RadioOptions & {
@@ -10,7 +11,7 @@ export type RadioProps = RadioOptions & {
   className?: string
 }
 
-const radioPropKeys = [
+const radioPropKeys = definePropKeys<RadioProps>()([
   "checked",
   "modelValue",
   "defaultChecked",
@@ -27,7 +28,7 @@ const radioPropKeys = [
   "onCheckedChange",
   "onChange",
   "className",
-] as const
+])
 
 export const Radio = defineComponent(
   (props: RadioProps, { emit }) => {

@@ -4,6 +4,7 @@ import {
   toAvatarGroupHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Avatar, type AvatarProps } from "./avatar"
 
@@ -21,7 +22,7 @@ export type AvatarGroupProps = {
   dataAttributes?: Record<string, string>
 }
 
-const avatarGroupPropKeys = [
+const avatarGroupPropKeys = definePropKeys<AvatarGroupProps>()([
   "items",
   "overflowCount",
   "overflowLabel",
@@ -29,7 +30,7 @@ const avatarGroupPropKeys = [
   "label",
   "className",
   "dataAttributes",
-] as const
+])
 
 export const AvatarGroup = defineComponent(
   (props: AvatarGroupProps) => {

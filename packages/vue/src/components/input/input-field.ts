@@ -6,6 +6,7 @@ import {
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { Text } from "../text"
@@ -23,7 +24,7 @@ export type InputFieldProps = {
   leadingSymbol?: string
 } & InputFieldActionOptions
 
-const inputFieldPropKeys = [
+const inputFieldPropKeys = definePropKeys<InputFieldProps>()([
   "id",
   "label",
   "helperText",
@@ -35,7 +36,7 @@ const inputFieldPropKeys = [
   "showPasswordLabel",
   "hidePasswordLabel",
   "clearLabel",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

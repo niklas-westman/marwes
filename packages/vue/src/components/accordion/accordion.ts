@@ -5,6 +5,7 @@ import {
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface AccordionProps {
@@ -14,7 +15,7 @@ export interface AccordionProps {
   className?: string
 }
 
-const accordionPropKeys = ["id", "open", "disabled", "className"] as const
+const accordionPropKeys = definePropKeys<AccordionProps>()(["id", "open", "disabled", "className"])
 
 export const Accordion = defineComponent(
   (props: AccordionProps, { slots, emit }) => {

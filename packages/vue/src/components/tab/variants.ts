@@ -1,7 +1,8 @@
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { TabGroup, type TabGroupProps } from "./tab-group"
 
-const tabGroupPropKeys = [
+const tabGroupPropKeys = definePropKeys<TabGroupProps>()([
   "id",
   "label",
   "ariaLabel",
@@ -10,7 +11,7 @@ const tabGroupPropKeys = [
   "defaultActiveTab",
   "dataAttributes",
   "className",
-] as const
+])
 
 export type NavigationTabsProps = TabGroupProps
 

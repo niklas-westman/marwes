@@ -8,6 +8,7 @@ import {
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { Tooltip } from "./tooltip"
@@ -41,7 +42,7 @@ export type TooltipGroupProps = {
   onOpenChange?: (open: boolean) => void
 }
 
-const tooltipGroupPropKeys = [
+const tooltipGroupPropKeys = definePropKeys<TooltipGroupProps>()([
   "id",
   "content",
   "icon",
@@ -54,7 +55,7 @@ const tooltipGroupPropKeys = [
   "triggerClassName",
   "dataAttributes",
   "onOpenChange",
-] as const
+])
 
 export const TooltipGroup = defineComponent(
   (props: TooltipGroupProps, { attrs, slots, emit }) => {

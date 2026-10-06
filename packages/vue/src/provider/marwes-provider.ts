@@ -16,6 +16,7 @@ import {
   resolveThemePreference,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, onUnmounted, provide, ref, watch } from "vue"
+import { definePropKeys } from "../internal/prop-keys"
 import { marwesContextKey } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
 import {
@@ -36,20 +37,22 @@ export type MarwesProviderSlotProps = {
 export const MarwesProvider = defineComponent({
   name: "MarwesProvider",
   props: [
-    "theme",
-    "defaultPreference",
-    "preference",
-    "defaultMode",
-    "mode",
-    "fontLoading",
-    "onPreferenceChange",
-    "onModeChange",
-    "storageKey",
-    "enableSystem",
-    "target",
-    "attribute",
-    "disableTransitionOnChange",
-    "variableStrategy",
+    ...definePropKeys<MarwesProviderProps>()([
+      "theme",
+      "defaultPreference",
+      "preference",
+      "defaultMode",
+      "mode",
+      "fontLoading",
+      "onPreferenceChange",
+      "onModeChange",
+      "storageKey",
+      "enableSystem",
+      "target",
+      "attribute",
+      "disableTransitionOnChange",
+      "variableStrategy",
+    ]),
   ],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps

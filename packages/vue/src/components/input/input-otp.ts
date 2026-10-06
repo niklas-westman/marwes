@@ -6,6 +6,7 @@ import {
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 
 /**
@@ -23,7 +24,7 @@ export type InputOtpProps = Omit<InputOtpOptions, "describedBy"> & {
   describedBy?: string
 }
 
-const inputOtpPropKeys = [
+const inputOtpPropKeys = definePropKeys<InputOtpProps>()([
   "id",
   "name",
   "value",
@@ -41,7 +42,7 @@ const inputOtpPropKeys = [
   "ariaLabelledBy",
   "onValueChange",
   "className",
-] as const
+])
 
 /**
  * InputOtp (Atom) — bare OTP cells. Renders the visual cells and a hidden

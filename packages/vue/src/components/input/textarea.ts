@@ -2,6 +2,7 @@ import type { CssVars, TextareaOptions } from "@marwes-ui/core"
 import { createTextareaRecipe, toTextareaHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type TextareaProps = TextareaOptions & {
@@ -10,7 +11,7 @@ export type TextareaProps = TextareaOptions & {
   className?: string
 }
 
-const textareaPropKeys = [
+const textareaPropKeys = definePropKeys<TextareaProps>()([
   "id",
   "name",
   "value",
@@ -33,7 +34,7 @@ const textareaPropKeys = [
   "label",
   "onValueChange",
   "className",
-] as const
+])
 
 export const Textarea = defineComponent(
   (props: TextareaProps, { emit }) => {

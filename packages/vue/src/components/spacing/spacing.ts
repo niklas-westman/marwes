@@ -1,6 +1,7 @@
 import { createSpacingRecipe, toSpacingHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, SpacingOptions, SpacingSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SpacingProps = SpacingOptions & {
@@ -11,7 +12,7 @@ export type SpacingProps = SpacingOptions & {
 
 export type SpacerProps = SpacingProps
 
-const spacingPropKeys = ["size", "spacing", "scale", "className"] as const
+const spacingPropKeys = definePropKeys<SpacingProps>()(["size", "spacing", "scale", "className"])
 
 export const Spacing = defineComponent(
   (props: SpacingProps) => {

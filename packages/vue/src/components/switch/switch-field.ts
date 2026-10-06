@@ -1,6 +1,7 @@
 import { buildSwitchFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Switch, type SwitchProps } from "./switch"
@@ -16,7 +17,7 @@ export type SwitchFieldProps = {
   modelValue?: boolean
 }
 
-const switchFieldPropKeys = [
+const switchFieldPropKeys = definePropKeys<SwitchFieldProps>()([
   "id",
   "label",
   "description",
@@ -25,7 +26,7 @@ const switchFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

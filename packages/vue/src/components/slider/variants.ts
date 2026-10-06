@@ -1,4 +1,5 @@
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import type { SliderProps } from "./slider"
 import { SliderField, type SliderFieldProps } from "./slider-field"
 
@@ -13,7 +14,7 @@ type SliderFieldPurposeProps = Omit<
   maxValueLabel?: string
 }
 
-const sliderFieldPropKeys = [
+const sliderFieldPropKeys = definePropKeys<SliderFieldPurposeProps>()([
   "id",
   "label",
   "description",
@@ -23,10 +24,11 @@ const sliderFieldPropKeys = [
   "minValueLabel",
   "maxValueLabel",
   "orientation",
+  "labelPosition",
   "showEdgeValues",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 export type VolumeSliderProps = SliderFieldPurposeProps
 

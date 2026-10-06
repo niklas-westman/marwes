@@ -9,6 +9,7 @@ import {
   toDatePickerNavButtonHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface DatePickerProps
@@ -33,7 +34,7 @@ export interface DatePickerProps
   device?: DatePickerDevice
 }
 
-const datePickerPropKeys = [
+const datePickerPropKeys = definePropKeys<DatePickerProps>()([
   "className",
   "monthLabel",
   "weekdayLabels",
@@ -50,7 +51,7 @@ const datePickerPropKeys = [
   "ariaDescribedBy",
   "calendarLabel",
   "dataAttributes",
-] as const
+])
 
 export const DatePicker = defineComponent(
   (props: DatePickerProps, { emit }) => {

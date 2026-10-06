@@ -5,6 +5,7 @@ import {
 } from "@marwes-ui/core"
 import type { ToastOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface ToastProps extends ToastOptions {
@@ -14,7 +15,7 @@ export interface ToastProps extends ToastOptions {
   dataAttributes?: Record<string, string>
 }
 
-const toastPropKeys = [
+const toastPropKeys = definePropKeys<ToastProps>()([
   "variant",
   "ariaLive",
   "dismissLabel",
@@ -22,7 +23,7 @@ const toastPropKeys = [
   "className",
   "id",
   "dataAttributes",
-] as const
+])
 
 export const Toast = defineComponent(
   (props: ToastProps, { slots }) => {

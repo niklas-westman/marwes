@@ -5,6 +5,7 @@ import {
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Radio } from "./radio"
@@ -33,7 +34,7 @@ export interface RadioGroupFieldProps {
   modelValue?: string
 }
 
-const radioGroupFieldPropKeys = [
+const radioGroupFieldPropKeys = definePropKeys<RadioGroupFieldProps>()([
   "name",
   "label",
   "description",
@@ -48,7 +49,7 @@ const radioGroupFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

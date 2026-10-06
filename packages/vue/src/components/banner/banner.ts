@@ -6,6 +6,7 @@ import {
 } from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export type BannerProps = BannerOptions & {
@@ -13,7 +14,7 @@ export type BannerProps = BannerOptions & {
   id?: string
 }
 
-const bannerPropKeys = [...bannerOptionKeys, "className", "id"] as const
+const bannerPropKeys = definePropKeys<BannerProps>()([...bannerOptionKeys, "className", "id"])
 
 export const Banner = defineComponent(
   (props: BannerProps, { slots, emit }) => {

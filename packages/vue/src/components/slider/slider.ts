@@ -2,6 +2,7 @@ import type { CssVars, SliderOptions } from "@marwes-ui/core"
 import { createSliderRecipe, toSliderHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SliderProps = SliderOptions & {
@@ -15,7 +16,7 @@ type SliderOptionDraft = {
   [Key in keyof SliderOptions]?: SliderOptions[Key] | undefined
 }
 
-const sliderPropKeys = [
+const sliderPropKeys = definePropKeys<SliderProps>()([
   "id",
   "name",
   "min",
@@ -38,7 +39,7 @@ const sliderPropKeys = [
   "onValueChange",
   "onChange",
   "className",
-] as const
+])
 
 function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   const sliderOptions: SliderOptions = {}

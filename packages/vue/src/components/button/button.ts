@@ -1,6 +1,7 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
 import { buttonOptionKeys, createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import {
   getDefaultSlotChildren,
   mergeClassNames,
@@ -19,7 +20,7 @@ export type ButtonProps = ButtonOptions & {
   className?: string
 }
 
-const buttonPropKeys = [...buttonOptionKeys, "onClick", "className"] as const
+const buttonPropKeys = definePropKeys<ButtonProps>()([...buttonOptionKeys, "onClick", "className"])
 
 export const Button = defineComponent(
   (props: ButtonProps, { slots, emit }) => {

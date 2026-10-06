@@ -1,6 +1,7 @@
 import { checkboxRecipe, toCheckboxHtmlAttributes } from "@marwes-ui/core"
 import type { CheckboxProps as CoreCheckboxProps, CssVars } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, ref, useAttrs, watch } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type CheckboxProps = CoreCheckboxProps & {
@@ -10,7 +11,7 @@ export type CheckboxProps = CoreCheckboxProps & {
   className?: string
 }
 
-const checkboxPropKeys = [
+const checkboxPropKeys = definePropKeys<CheckboxProps>()([
   "size",
   "checked",
   "modelValue",
@@ -29,7 +30,7 @@ const checkboxPropKeys = [
   "onCheckedChange",
   "onChange",
   "className",
-] as const
+])
 
 export const Checkbox = defineComponent(
   (props: CheckboxProps, { emit }) => {

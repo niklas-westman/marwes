@@ -1,11 +1,12 @@
 import { type SkipLinkOptions, createSkipLinkRecipe } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 
 export type SkipLinkProps = Omit<SkipLinkOptions, "className"> & {
   className?: string
 }
 
-const skipLinkPropKeys = ["href", "className"] as const
+const skipLinkPropKeys = definePropKeys<SkipLinkProps>()(["href", "className"])
 
 export const SkipLink = defineComponent(
   (props: SkipLinkProps, { slots }) => {

@@ -1,6 +1,7 @@
 import { createSwitchRecipe, toSwitchHtmlAttributes } from "@marwes-ui/core"
 import type { SwitchOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SwitchProps = SwitchOptions & {
@@ -11,7 +12,7 @@ export type SwitchProps = SwitchOptions & {
   id?: string
 }
 
-const switchPropKeys = [
+const switchPropKeys = definePropKeys<SwitchProps>()([
   "size",
   "checked",
   "modelValue",
@@ -24,7 +25,7 @@ const switchPropKeys = [
   "onCheckedChange",
   "onClick",
   "id",
-] as const
+])
 
 export const Switch = defineComponent(
   (props: SwitchProps, { slots, emit }) => {

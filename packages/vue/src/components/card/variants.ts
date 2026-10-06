@@ -1,7 +1,8 @@
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { Card, type CardProps } from "./card"
 
-const cardPropKeys = ["className", "id", "dataAttributes"] as const
+const cardPropKeys = definePropKeys<CardProps>()(["className", "id", "dataAttributes"])
 
 export type ProductCardProps = CardProps
 

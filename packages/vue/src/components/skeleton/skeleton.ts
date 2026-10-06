@@ -5,6 +5,7 @@ import {
   toSkeletonHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SkeletonProps = SkeletonOptions & {
@@ -12,7 +13,7 @@ export type SkeletonProps = SkeletonOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const skeletonPropKeys = [
+const skeletonPropKeys = definePropKeys<SkeletonProps>()([
   "variant",
   "width",
   "height",
@@ -23,7 +24,7 @@ const skeletonPropKeys = [
   "id",
   "className",
   "dataAttributes",
-] as const
+])
 
 export const Skeleton = defineComponent(
   (props: SkeletonProps) => {

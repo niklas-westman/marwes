@@ -1,6 +1,7 @@
 import { textRecipe, toTextHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, TextAs, TextOptions, TextVariant } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import {
   getDefaultSlotChildren,
   mergeClassNames,
@@ -15,7 +16,13 @@ export type TextProps = TextOptions & {
   className?: string
 }
 
-const textPropKeys = ["variant", "as", "headingLevel", "id", "className"] as const
+const textPropKeys = definePropKeys<TextProps>()([
+  "variant",
+  "as",
+  "headingLevel",
+  "id",
+  "className",
+])
 
 export const Text = defineComponent(
   (props: TextProps, { slots }) => {

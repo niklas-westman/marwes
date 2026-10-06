@@ -5,6 +5,7 @@ import {
 } from "@marwes-ui/core"
 import { type VNodeChild, computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Accordion } from "./accordion"
@@ -32,7 +33,7 @@ export interface AccordionFieldProps {
   modelValue?: string[]
 }
 
-const accordionFieldPropKeys = [
+const accordionFieldPropKeys = definePropKeys<AccordionFieldProps>()([
   "label",
   "description",
   "error",
@@ -46,7 +47,7 @@ const accordionFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

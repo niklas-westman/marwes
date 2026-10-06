@@ -19,16 +19,20 @@ const avatarPropKeys = definePropKeys<ProfileAvatarProps>()([
   "dataAttributes",
 ])
 
-const avatarBadgePropKeys = [...avatarPropKeys, "statusLabel"] as const
+const avatarBadgePropKeys = definePropKeys<PresenceAvatarProps>()([
+  ...avatarPropKeys,
+  "statusLabel",
+])
 
-const avatarGroupPropKeys = [
+const avatarGroupPropKeys = definePropKeys<TeamAvatarGroupProps>()([
   "items",
+  "label",
   "overflowCount",
   "overflowLabel",
   "ariaLabel",
   "className",
   "dataAttributes",
-] as const
+])
 
 export type ProfileAvatarProps = AvatarProps
 
