@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest"
 export type SliderContractHarness = {
   renderSlider(args?: {
     ariaLabel?: string
+    label?: string
     min?: number
     max?: number
     step?: number
@@ -201,6 +202,18 @@ export function runSliderContract(adapterName: string, harness: SliderContractHa
       expect(slider).not.toHaveAttribute("aria-invalid", "true")
       expect(harness.queryDescriptionRegion()).toBeNull()
       expect(harness.queryErrorRegion()).toBeNull()
+    })
+
+    it("uses label as the accessible name when ariaLabel is absent", async () => {
+      await harness.renderSlider({ label: "Volume" })
+
+      expect(harness.getByRole("slider", { name: /volume/i })).toBeInTheDocument()
+    })
+
+    it("prefers ariaLabel over label", async () => {
+      await harness.renderSlider({ ariaLabel: "Master volume", label: "Volume" })
+
+      expect(harness.getByRole("slider", { name: /master volume/i })).toBeInTheDocument()
     })
   })
 }

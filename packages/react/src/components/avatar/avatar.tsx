@@ -57,6 +57,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
     iconName,
     decorative,
     ariaLabel,
+    label,
     ...nativeSpanProps
   } = props
 
@@ -71,6 +72,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
   if (alt !== undefined) avatarOptions.alt = alt
   if (iconName !== undefined) avatarOptions.iconName = iconName
   if (decorative !== undefined) avatarOptions.decorative = decorative
+  if (label !== undefined) avatarOptions.label = label
 
   const resolvedAriaLabel = ariaLabel ?? ariaLabelFromNativeProps
   if (resolvedAriaLabel !== undefined) {

@@ -38,6 +38,7 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
   if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
   if (options.ariaLabel !== undefined) sliderOptions.ariaLabel = options.ariaLabel
+  if (options.label !== undefined) sliderOptions.label = options.label
   if (options.ariaLabelledBy !== undefined) sliderOptions.ariaLabelledBy = options.ariaLabelledBy
   if (options.ariaDescribedBy !== undefined) sliderOptions.ariaDescribedBy = options.ariaDescribedBy
   if (options.ariaValueText !== undefined) sliderOptions.ariaValueText = options.ariaValueText
@@ -64,6 +65,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     showTouchArea,
     orientation,
     ariaLabel,
+    label,
     ariaLabelledBy,
     ariaDescribedBy,
     ariaValueText,
@@ -103,6 +105,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
       showTouchArea,
       orientation,
       ariaLabel,
+      label,
       ariaLabelledBy,
       ariaDescribedBy,
       ariaValueText,

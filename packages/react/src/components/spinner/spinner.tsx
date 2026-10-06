@@ -32,6 +32,7 @@ export function Spinner(props: SpinnerProps): React.ReactElement {
     size,
     decorative,
     ariaLabel,
+    label,
     id,
     ...nativeSpanProps
   } = props
@@ -47,6 +48,7 @@ export function Spinner(props: SpinnerProps): React.ReactElement {
     ...(size !== undefined ? { size } : {}),
     ...(decorative !== undefined ? { decorative } : {}),
     ...(resolvedAriaLabel !== undefined ? { ariaLabel: resolvedAriaLabel } : {}),
+    ...(label !== undefined ? { label } : {}),
     ...(id !== undefined ? { id } : {}),
   }
 

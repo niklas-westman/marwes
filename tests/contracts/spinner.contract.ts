@@ -24,6 +24,7 @@ export type SpinnerContractHarness = {
     size?: SpinnerSize | number
     decorative?: boolean
     ariaLabel?: string
+    label?: string
     id?: string
   }): Promise<void> | void
   getSpinnerElement(): HTMLElement
@@ -89,6 +90,18 @@ export function runSpinnerContract(adapterName: string, harness: SpinnerContract
       const spinner = harness.getSpinnerElement()
       expect(spinner).toHaveAttribute("aria-hidden", "true")
       expect(spinner).not.toHaveAttribute("role")
+    })
+
+    it("uses label as the accessible name when ariaLabel is absent", async () => {
+      await harness.renderSpinner({ label: "Loading orders" })
+
+      expect(harness.getByRole("status")).toHaveAttribute("aria-label", "Loading orders")
+    })
+
+    it("prefers ariaLabel over label", async () => {
+      await harness.renderSpinner({ ariaLabel: "Loading account", label: "Loading orders" })
+
+      expect(harness.getByRole("status")).toHaveAttribute("aria-label", "Loading account")
     })
   })
 }

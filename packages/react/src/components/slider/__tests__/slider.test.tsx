@@ -23,6 +23,7 @@ runSliderContract("react", {
         const [_renderTick, setRenderTick] = React.useState(0)
         const sliderProps = {
           ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+          ...(args.label !== undefined ? { label: args.label } : {}),
           ...(args.min !== undefined ? { min: args.min } : {}),
           ...(args.max !== undefined ? { max: args.max } : {}),
           ...(args.step !== undefined ? { step: args.step } : {}),
@@ -45,6 +46,7 @@ runSliderContract("react", {
 
     const sliderProps = {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.label !== undefined ? { label: args.label } : {}),
       ...(args.min !== undefined ? { min: args.min } : {}),
       ...(args.max !== undefined ? { max: args.max } : {}),
       ...(args.step !== undefined ? { step: args.step } : {}),

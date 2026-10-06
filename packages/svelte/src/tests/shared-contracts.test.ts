@@ -285,6 +285,7 @@ runAvatarContract("svelte", {
         ...(args.src !== undefined ? { src: args.src } : {}),
         ...(args.alt !== undefined ? { alt: args.alt } : {}),
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+        ...(args.label !== undefined ? { label: args.label } : {}),
         ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
       },
     })
@@ -1188,6 +1189,7 @@ runSliderContract("svelte", {
   renderSlider(args = {}) {
     const props = {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.label !== undefined ? { label: args.label } : {}),
       ...(args.min !== undefined ? { min: args.min } : {}),
       ...(args.max !== undefined ? { max: args.max } : {}),
       ...(args.step !== undefined ? { step: args.step } : {}),

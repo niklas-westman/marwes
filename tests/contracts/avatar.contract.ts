@@ -13,6 +13,7 @@ export interface AvatarContractHarness {
     src?: string
     alt?: string
     ariaLabel?: string
+    label?: string
     decorative?: boolean
   }): Promise<void> | void
   getByRole(role: "img", options: { name: RegExp }): HTMLElement
@@ -72,6 +73,18 @@ export function runAvatarContract(adapterName: string, harness: AvatarContractHa
       const avatarElement = harness.getByRole("img", { name: /alex morgan/i })
       expect(avatarElement).toBeInTheDocument()
       expect(avatarElement).toHaveAttribute("aria-label", "Alex Morgan")
+    })
+
+    it("uses label as the accessible name when ariaLabel is absent", async () => {
+      await harness.renderAvatar({ initials: "am", label: "Ann Marie" })
+
+      expect(harness.getByRole("img", { name: /ann marie/i })).toBeInTheDocument()
+    })
+
+    it("prefers ariaLabel over label", async () => {
+      await harness.renderAvatar({ initials: "am", ariaLabel: "Account owner", label: "Ann Marie" })
+
+      expect(harness.getByRole("img", { name: /account owner/i })).toBeInTheDocument()
     })
   })
 }

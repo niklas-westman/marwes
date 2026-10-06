@@ -29,6 +29,7 @@ runAvatarContract("vue", {
       ...(args.src !== undefined ? { src: args.src } : {}),
       ...(args.alt !== undefined ? { alt: args.alt } : {}),
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.label !== undefined ? { label: args.label } : {}),
       ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
     }
 
