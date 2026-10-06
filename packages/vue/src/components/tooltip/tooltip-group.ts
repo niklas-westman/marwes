@@ -1,4 +1,10 @@
-import { IconName, type IconNameType } from "@marwes-ui/core"
+import {
+  IconName,
+  type IconNameType,
+  resolveTooltipGroupA11y,
+  toTooltipGroupContentHtmlAttributes,
+  toTooltipTriggerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
 import { createLocalId } from "../../internal/id"
@@ -61,6 +67,13 @@ export const TooltipGroup = defineComponent(
     const isTooltipMounted = ref(resolvedOpen.value)
     const resolvedId = computed(() => props.id ?? localId)
     const resolvedTooltipId = computed(() => props.tooltipId ?? `${resolvedId.value}-tooltip`)
+    const groupA11y = computed(() =>
+      resolveTooltipGroupA11y({
+        tooltipId: resolvedTooltipId.value,
+        open: resolvedOpen.value,
+        triggerLabel: props.triggerLabel,
+      }),
+    )
     const content = computed<VNodeChild | undefined>(() => slots.default?.() ?? props.content)
 
     const updateOpen = (nextOpen: boolean): void => {
@@ -137,7 +150,7 @@ export const TooltipGroup = defineComponent(
                   id: resolvedTooltipId.value,
                   ...(props.tooltipClassName ? { className: props.tooltipClassName } : {}),
                   "data-state": resolvedOpen.value ? "open" : "closed",
-                  "aria-hidden": resolvedOpen.value ? undefined : "true",
+                  ...toTooltipGroupContentHtmlAttributes(groupA11y.value.content),
                 },
                 {
                   default: () => toChildren(content.value),
@@ -149,8 +162,7 @@ export const TooltipGroup = defineComponent(
             {
               type: "button",
               class: mergeClassNames("mw-tooltip-group__trigger", props.triggerClassName),
-              "aria-label": props.triggerLabel ?? "Show tooltip",
-              "aria-describedby": resolvedOpen.value ? resolvedTooltipId.value : undefined,
+              ...toTooltipTriggerHtmlAttributes(groupA11y.value.trigger),
             },
             [h(Icon, { name: props.icon ?? IconName.HelpCircle, decorative: true })],
           ),

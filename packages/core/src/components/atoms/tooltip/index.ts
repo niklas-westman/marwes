@@ -1,10 +1,24 @@
 export { createTooltipRecipe } from "./tooltip-recipe"
-export { resolveTooltipA11y } from "./tooltip-a11y"
+export {
+  DEFAULT_TOOLTIP_TRIGGER_LABEL,
+  resolveTooltipA11y,
+  resolveTooltipGroupA11y,
+} from "./tooltip-a11y"
 export type {
   TooltipOptions,
   TooltipA11yProps,
   TooltipDataAttributes,
+  TooltipGroupContentA11yProps,
+  TooltipTriggerA11yProps,
   TooltipRenderKit,
 } from "./tooltip-types"
-export { toTooltipHtmlAttributes } from "./tooltip-html-attributes"
-export type { TooltipHtmlAttributes } from "./tooltip-html-attributes"
+export {
+  toTooltipGroupContentHtmlAttributes,
+  toTooltipHtmlAttributes,
+  toTooltipTriggerHtmlAttributes,
+} from "./tooltip-html-attributes"
+export type {
+  TooltipGroupContentHtmlAttributes,
+  TooltipHtmlAttributes,
+  TooltipTriggerHtmlAttributes,
+} from "./tooltip-html-attributes"

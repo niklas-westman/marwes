@@ -33,7 +33,6 @@
   "packages/react/src/components/stat-tile/stat-tile.tsx": 1,
   "packages/react/src/components/switch/switch-field.tsx": 1,
   "packages/react/src/components/toast/toast.tsx": 2,
-  "packages/react/src/components/tooltip/tooltip-group.tsx": 3,
   "packages/svelte/src/lib/components/accordion/Accordion.svelte": 3,
   "packages/svelte/src/lib/components/accordion/AccordionField.svelte": 5,
   "packages/svelte/src/lib/components/avatar/Avatar.svelte": 1,
@@ -70,7 +69,7 @@
   "packages/svelte/src/lib/components/switch/SwitchField.svelte": 1,
   "packages/svelte/src/lib/components/toast/Toast.svelte": 3,
   "packages/svelte/src/lib/components/toast/ToastContainer.svelte": 1,
-  "packages/svelte/src/lib/components/tooltip/TooltipGroup.svelte": 4,
+  "packages/svelte/src/lib/components/tooltip/TooltipGroup.svelte": 1,
   "packages/vue/src/components/accordion/accordion-field.ts": 4,
   "packages/vue/src/components/accordion/accordion.ts": 4,
   "packages/vue/src/components/avatar/avatar-badge.ts": 6,
@@ -105,6 +104,5 @@
   "packages/vue/src/components/spinner/spinner.ts": 3,
   "packages/vue/src/components/stat-tile/stat-tile.ts": 1,
   "packages/vue/src/components/switch/switch-field.ts": 1,
-  "packages/vue/src/components/toast/toast.ts": 3,
-  "packages/vue/src/components/tooltip/tooltip-group.ts": 3
+  "packages/vue/src/components/toast/toast.ts": 3
 }

@@ -138,5 +138,15 @@ export function runTooltipContract(adapterName: string, harness: TooltipContract
       expect(tooltip).toHaveAttribute("id", "controlled-tooltip")
       expect(trigger).toHaveAttribute("aria-describedby", "controlled-tooltip")
     })
+
+    it("keeps the open tooltip exposed to assistive technology", async () => {
+      await harness.renderTooltipGroup({ content: "Helpful hint", defaultOpen: true })
+
+      expect(harness.getByRole("tooltip")).not.toHaveAttribute("aria-hidden")
+      expect(harness.getByRole("button", { name: /show tooltip/i })).toHaveAttribute(
+        "aria-describedby",
+        harness.getByRole("tooltip").id,
+      )
+    })
   })
 }
