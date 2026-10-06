@@ -1,10 +1,11 @@
 import type {
-  FontLoadingConfig,
+  MarwesProviderOptions,
   MwTheme,
   ResolvedTheme,
-  ThemeInput,
+  ThemeAttribute,
   ThemeMode,
   ThemePreference,
+  ThemeTarget,
   ThemeVariableStrategy,
 } from "@marwes-ui/core"
 import {
@@ -25,24 +26,8 @@ import {
   withoutModeTransitions,
   writeStoredThemePreference,
 } from "./theme-mode-runtime"
-import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime"
 
-export type MarwesProviderProps = {
-  theme?: ThemeInput
-  defaultPreference?: ThemePreference
-  preference?: ThemePreference
-  defaultMode?: ThemeMode
-  mode?: ThemeMode
-  fontLoading?: FontLoadingConfig
-  onPreferenceChange?: (preference: ThemePreference) => void
-  onModeChange?: (mode: ThemeMode) => void
-  storageKey?: string | false
-  enableSystem?: boolean
-  target?: ThemeTarget
-  attribute?: ThemeAttribute
-  disableTransitionOnChange?: boolean
-  variableStrategy?: ThemeVariableStrategy
-}
+export type MarwesProviderProps = MarwesProviderOptions
 
 export type MarwesProviderSlotProps = {
   mwTheme: MwTheme

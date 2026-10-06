@@ -1,10 +1,7 @@
 import { ThemeMode, isThemePreference } from "@marwes-ui/core"
-import type { ThemePreference } from "@marwes-ui/core"
+import type { ThemeAttribute, ThemePreference, ThemeTarget } from "@marwes-ui/core"
 
 const mediaQuery = "(prefers-color-scheme: dark)"
-
-export type ThemeTarget = "provider" | "html" | "body"
-export type ThemeAttribute = "class" | "data-theme" | "data-mode"
 
 export function getSystemThemeMode(): ThemeMode {
   if (typeof window === "undefined") return ThemeMode.light
