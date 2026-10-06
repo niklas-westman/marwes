@@ -10,6 +10,10 @@ export interface ToastDeliverySpec {
   children: string
   intent?: "neutral" | "info" | "success" | "warning" | "error" | "brand"
   duration?: number | null
+  /** Text for a custom icon slot. */
+  icon?: string
+  /** Label for a custom action button. */
+  action?: string
 }
 
 export interface ToastContractHarness {
@@ -262,5 +266,17 @@ export function runToastContract(adapterName: string, harness: ToastContractHarn
         vi.useRealTimers()
       }
     })
+
+    it.each(["neutral", "success", "error", "warning", "info"] as const)(
+      "container toast renders a custom icon and action for %s intent",
+      async (intent) => {
+        await harness.renderContainer({
+          toasts: [{ id: "t1", children: "Saved", intent, icon: "custom-icon", action: "Undo" }],
+        })
+
+        expect(harness.getByText("custom-icon")).toBeInTheDocument()
+        expect(harness.getByRole("button", { name: /undo/i })).toBeInTheDocument()
+      },
+    )
   })
 }

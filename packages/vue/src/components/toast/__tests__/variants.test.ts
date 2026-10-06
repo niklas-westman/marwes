@@ -77,8 +77,12 @@ runToastContract("vue", {
             h(MarwesProvider, null, {
               default: () =>
                 h(ToastContainer as never, {
-                  toasts: args.toasts.map((toast) => ({
+                  toasts: args.toasts.map(({ icon, action, ...toast }) => ({
                     ...toast,
+                    ...(icon !== undefined ? { icon: h("span", icon) } : {}),
+                    ...(action !== undefined
+                      ? { action: h("button", { type: "button" }, action) }
+                      : {}),
                   })),
                   ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
                   ...(args.onDismiss ? { onDismiss: args.onDismiss } : {}),

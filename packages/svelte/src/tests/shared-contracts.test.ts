@@ -1488,6 +1488,10 @@ runToastContract("svelte", {
           message: toast.children,
           ...(toast.intent !== undefined ? { intent: toast.intent } : {}),
           ...(toast.duration !== undefined ? { duration: toast.duration } : {}),
+          ...(toast.icon !== undefined
+            ? { icon: createRawSnippet(() => ({ render: () => `<span>${toast.icon}</span>` })) }
+            : {}),
+          ...(toast.action !== undefined ? { action: actionSnippet(toast.action) } : {}),
         })),
         ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
         ...(args.onDismiss !== undefined ? { ondismiss: args.onDismiss } : {}),

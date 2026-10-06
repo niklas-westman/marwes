@@ -42,8 +42,10 @@ runToastContract("react", {
   renderContainer(args) {
     renderWithProvider(
       <ToastContainer
-        toasts={args.toasts.map((toast) => ({
+        toasts={args.toasts.map(({ icon, action, ...toast }) => ({
           ...toast,
+          ...(icon !== undefined ? { icon: <span>{icon}</span> } : {}),
+          ...(action !== undefined ? { action: <button type="button">{action}</button> } : {}),
         }))}
         {...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {})}
         {...(args.onDismiss ? { onDismiss: args.onDismiss } : {})}
