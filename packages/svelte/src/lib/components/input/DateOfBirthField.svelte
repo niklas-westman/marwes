@@ -13,7 +13,7 @@
     class?: string;
   }
 
-  let { input, value = $bindable(), ...rest }: DateOfBirthFieldProps = $props();
+  let { input, value = $bindable(input?.defaultValue ?? ""), ...rest }: DateOfBirthFieldProps = $props();
   const enhancedInput = $derived({ ...input, type: "date" as const, autoComplete: "bday" });
 </script>
 <div data-purpose="date-of-birth">

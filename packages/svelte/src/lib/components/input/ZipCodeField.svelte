@@ -13,7 +13,7 @@
     class?: string;
   }
 
-  let { input, value = $bindable(), ...rest }: ZipCodeFieldProps = $props();
+  let { input, value = $bindable(input?.defaultValue ?? ""), ...rest }: ZipCodeFieldProps = $props();
   const enhancedInput = $derived({ ...input, type: "text" as const, inputMode: "numeric" as const, autoComplete: "postal-code" });
 </script>
 <div data-purpose="zip-code">
