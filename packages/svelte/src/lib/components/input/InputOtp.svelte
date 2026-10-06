@@ -52,7 +52,7 @@
       length: otpLength,
     };
     if (name) opts.name = name;
-    if (placeholderCharacter) opts.placeholderCharacter = placeholderCharacter;
+    if (placeholderCharacter !== undefined) opts.placeholderCharacter = placeholderCharacter;
     if (disabled) opts.disabled = true;
     if (readOnly) opts.readOnly = true;
     if (required) opts.required = true;

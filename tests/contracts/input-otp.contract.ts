@@ -12,6 +12,7 @@ export type InputOtpContractHarness = {
     disabled?: boolean
     readOnly?: boolean
     defaultValue?: string
+    placeholderCharacter?: string
     onValueChange?: (value: string) => void
   }): Promise<void> | void
   getByRole(role: "textbox", options: { name: RegExp }): HTMLInputElement
@@ -116,6 +117,32 @@ export function runInputOtpContract(adapterName: string, harness: InputOtpContra
       const input = harness.getByRole("textbox", { name: /read only verification code/i })
       expect(input).toHaveAttribute("readonly")
       expect(input).toHaveValue("1234")
+    })
+
+    it("renders a custom placeholder character in empty cells", async () => {
+      await harness.renderInputOtp({ placeholderCharacter: "_" })
+
+      expect(harness.queryOtpCells().map((cell) => cell.textContent)).toEqual([
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+        "_",
+      ])
+    })
+
+    it("treats an empty placeholder character as a request for blank cells", async () => {
+      await harness.renderInputOtp({ placeholderCharacter: "" })
+
+      expect(harness.queryOtpCells().map((cell) => cell.textContent)).toEqual([
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+      ])
     })
   })
 }

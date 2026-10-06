@@ -30,6 +30,9 @@ runInputOtpContract("vue", {
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
         ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.placeholderCharacter !== undefined
+          ? { placeholderCharacter: args.placeholderCharacter }
+          : {}),
         ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
       },
     } as InputOtpFieldProps

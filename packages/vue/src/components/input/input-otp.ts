@@ -63,7 +63,7 @@ export const InputOtp = defineComponent(
       }
 
       if (props.name) recipeOptions.name = props.name
-      if (props.placeholderCharacter)
+      if (props.placeholderCharacter !== undefined)
         recipeOptions.placeholderCharacter = props.placeholderCharacter
       if (props.disabled) recipeOptions.disabled = true
       if (props.readOnly) recipeOptions.readOnly = true
