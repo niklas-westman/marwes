@@ -38,6 +38,8 @@ export interface SegmentedControlProps<T extends string = string> {
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string
+  /** Fallback accessible name for the group when `ariaLabel` is not set. */
+  label?: string
   /** Stretch the control to fill its container. Defaults to inline width. */
   fullWidth?: boolean
   className?: string
@@ -65,6 +67,7 @@ export function SegmentedControl<T extends string = string>(
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    label,
     fullWidth,
     className,
     id,
@@ -140,6 +143,7 @@ export function SegmentedControl<T extends string = string>(
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    label,
     fullWidth,
   })
   const trackClassName = [trackKit.className, className].filter(Boolean).join(" ")
