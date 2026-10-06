@@ -6,7 +6,7 @@ import type * as React from "react"
 import { runSegmentedControlContract } from "../../../../../../tests/contracts/segmented-control.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Icon } from "../../icon"
-import { SegmentedControl } from "../segmented-control"
+import { SegmentedControl, type SegmentedControlProps } from "../segmented-control"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
@@ -16,7 +16,7 @@ runSegmentedControlContract("react", {
   renderSegmentedControlOptions(options) {
     renderWithProvider(
       <SegmentedControl
-        {...options}
+        {...(options as Omit<SegmentedControlProps, "items">)}
         items={[
           { value: "a", label: "Alpha" },
           { value: "b", label: "Beta" },
