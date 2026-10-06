@@ -15,6 +15,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSelectContract("react", {
+  renderSelectOptions(options) {
+    renderWithProvider(<Select {...options} />)
+  },
+  getSelectElement() {
+    return document.querySelector("select.mw-select") as HTMLSelectElement
+  },
   async renderSelect(args = {}) {
     const selectProps = {
       ariaLabel: args.ariaLabel ?? "Select",

@@ -2,6 +2,7 @@
  * Shared contract for the Slider atom — native range slider metadata,
  * uncontrolled value updates, controlled value source of truth, and disabled semantics.
  */
+import type { SliderOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type SliderContractHarness = {
@@ -38,6 +39,99 @@ export type SliderContractHarness = {
   queryDescriptionRegion(): HTMLElement | null
   queryErrorRegion(): HTMLElement | null
   changeValue(element: HTMLElement, nextValue: string): Promise<void>
+  /** Renders the base Slider with raw core options. */
+  renderSliderOptions(options: SliderOptions): Promise<void> | void
+  getSliderRoot(): HTMLElement
+  getSliderInput(): HTMLInputElement
+}
+
+type SliderOptionCase = {
+  options: SliderOptions
+  expectRendered: (parts: { root: HTMLElement; input: HTMLInputElement }) => void
+}
+
+// Exhaustive on purpose: a new core SliderOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const sliderOptionCases: Record<keyof SliderOptions, SliderOptionCase> = {
+  id: {
+    options: { id: "field-id" },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("id", "field-id"),
+  },
+  name: {
+    options: { name: "volume" },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("name", "volume"),
+  },
+  min: {
+    options: { min: 5 },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("min", "5"),
+  },
+  max: {
+    options: { max: 50 },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("max", "50"),
+  },
+  step: {
+    options: { step: 5 },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("step", "5"),
+  },
+  value: { options: { value: 30 }, expectRendered: ({ input }) => expect(input).toHaveValue("30") },
+  defaultValue: {
+    options: { defaultValue: 30 },
+    expectRendered: ({ input }) => expect(input).toHaveValue("30"),
+  },
+  disabled: {
+    options: { disabled: true },
+    expectRendered: ({ root, input }) => {
+      expect(input).toBeDisabled()
+      expect(root).toHaveClass("mw-slider--disabled")
+    },
+  },
+  required: {
+    options: { required: true },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("required"),
+  },
+  invalid: {
+    options: { invalid: true },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("aria-invalid", "true"),
+  },
+  showTooltip: {
+    options: { showTooltip: true },
+    expectRendered: ({ root }) => {
+      expect(root).toHaveAttribute("data-show-tooltip", "true")
+      expect(root.querySelector(".mw-slider__tooltip")).not.toBeNull()
+    },
+  },
+  showTouchArea: {
+    options: { showTouchArea: true },
+    expectRendered: ({ root }) => expect(root).toHaveAttribute("data-show-touch-area", "true"),
+  },
+  orientation: {
+    options: { orientation: "vertical" },
+    expectRendered: ({ root, input }) => {
+      expect(root).toHaveAttribute("data-orientation", "vertical")
+      expect(input).toHaveAttribute("aria-orientation", "vertical")
+    },
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Volume" },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("aria-label", "Volume"),
+  },
+  label: {
+    options: { label: "Volume" },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("aria-label", "Volume"),
+  },
+  ariaLabelledBy: {
+    options: { ariaLabelledBy: "label-id" },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("aria-labelledby", "label-id"),
+  },
+  ariaDescribedBy: {
+    options: { ariaDescribedBy: "hint-id" },
+    expectRendered: ({ input }) => expect(input).toHaveAttribute("aria-describedby", "hint-id"),
+  },
+  ariaValueText: {
+    options: { ariaValueText: "Thirty percent" },
+    expectRendered: ({ input }) =>
+      expect(input).toHaveAttribute("aria-valuetext", "Thirty percent"),
+  },
 }
 
 export function runSliderContract(adapterName: string, harness: SliderContractHarness): void {
@@ -214,6 +308,17 @@ export function runSliderContract(adapterName: string, harness: SliderContractHa
       await harness.renderSlider({ ariaLabel: "Master volume", label: "Volume" })
 
       expect(harness.getByRole("slider", { name: /master volume/i })).toBeInTheDocument()
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(sliderOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderSliderOptions(optionCase.options)
+
+        const root = harness.getSliderRoot()
+        const input = harness.getSliderInput()
+        expect(root).toBeInTheDocument()
+        optionCase.expectRendered({ root, input })
+      })
     })
   })
 }

@@ -588,6 +588,12 @@ runCardContract("svelte", {
 })
 
 runCheckboxContract("svelte", {
+  renderCheckboxOptions(options) {
+    render(Checkbox, { props: { ...options } })
+  },
+  getCheckboxElement() {
+    return document.querySelector("input.mw-checkbox") as HTMLInputElement
+  },
   renderCheckbox(args = {}) {
     render(Checkbox, {
       props: {
@@ -1037,6 +1043,12 @@ runProgressBarContract("svelte", {
 })
 
 runRadioContract("svelte", {
+  renderRadioOptions(options) {
+    render(Radio, { props: { ...options } })
+  },
+  getRadioElement() {
+    return document.querySelector("input.mw-radio") as HTMLInputElement
+  },
   renderRadio(args = {}) {
     render(Radio, {
       props: {
@@ -1144,6 +1156,12 @@ const defaultSelectOptions = [
 ]
 
 runSelectContract("svelte", {
+  renderSelectOptions(options) {
+    render(Select, { props: { ...options } })
+  },
+  getSelectElement() {
+    return document.querySelector("select.mw-select") as HTMLSelectElement
+  },
   renderSelect(args = {}) {
     render(Select, {
       props: {
@@ -1273,6 +1291,15 @@ runStatTileContract("svelte", {
 })
 
 runSliderContract("svelte", {
+  renderSliderOptions(options) {
+    render(Slider, { props: { ...options } })
+  },
+  getSliderRoot() {
+    return document.querySelector(".mw-slider") as HTMLElement
+  },
+  getSliderInput() {
+    return document.querySelector("input.mw-slider__native") as HTMLInputElement
+  },
   renderSlider(args = {}) {
     const props = {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
@@ -1344,6 +1371,12 @@ runSliderContract("svelte", {
 })
 
 runSwitchContract("svelte", {
+  renderSwitchOptions(options) {
+    render(Switch, { props: { ...options } })
+  },
+  getSwitchElement() {
+    return document.querySelector(".mw-switch") as HTMLElement
+  },
   renderSwitch(args = {}) {
     render(Switch, {
       props: {
@@ -1417,6 +1450,12 @@ runTabContract("svelte", {
 })
 
 runTextareaContract("svelte", {
+  renderTextareaOptions(options) {
+    render(Textarea, { props: { ...options } })
+  },
+  getTextareaElement() {
+    return document.querySelector("textarea.mw-textarea") as HTMLTextAreaElement
+  },
   renderTextarea(args = {}) {
     render(Textarea, {
       props: {

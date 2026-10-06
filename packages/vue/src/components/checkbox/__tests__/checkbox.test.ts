@@ -20,6 +20,19 @@ function renderWithProvider(props: CheckboxProps) {
 }
 
 runCheckboxContract("vue", {
+  renderCheckboxOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Checkbox as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getCheckboxElement() {
+    return document.querySelector("input.mw-checkbox") as HTMLInputElement
+  },
   async renderCheckbox(args = {}) {
     const props = {
       ariaLabel: args.ariaLabel ?? "Checkbox",

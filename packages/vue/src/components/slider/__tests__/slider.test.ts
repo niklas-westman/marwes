@@ -24,6 +24,22 @@ function renderWithProvider(child: () => unknown) {
 }
 
 runSliderContract("vue", {
+  renderSliderOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Slider as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getSliderRoot() {
+    return document.querySelector(".mw-slider") as HTMLElement
+  },
+  getSliderInput() {
+    return document.querySelector("input.mw-slider__native") as HTMLInputElement
+  },
   async renderSlider(args = {}) {
     if (args.value !== undefined) {
       const controlledValue = args.value

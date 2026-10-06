@@ -21,6 +21,12 @@ function renderWithProvider(component: Component, props: Record<string, unknown>
 }
 
 runSelectContract("vue", {
+  renderSelectOptions(options) {
+    renderWithProvider(Select, { ...options })
+  },
+  getSelectElement() {
+    return document.querySelector("select.mw-select") as HTMLSelectElement
+  },
   async renderSelect(args = {}) {
     const props = {
       ariaLabel: args.ariaLabel ?? "Select",

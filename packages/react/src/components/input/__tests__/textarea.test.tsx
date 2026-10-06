@@ -14,6 +14,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runTextareaContract("react", {
+  renderTextareaOptions(options) {
+    renderWithProvider(<Textarea {...options} />)
+  },
+  getTextareaElement() {
+    return document.querySelector("textarea.mw-textarea") as HTMLTextAreaElement
+  },
   async renderTextarea(args = {}) {
     const textareaProps = {
       ariaLabel: args.ariaLabel ?? "Textarea",
