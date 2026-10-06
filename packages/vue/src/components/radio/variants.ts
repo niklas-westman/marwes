@@ -1,7 +1,8 @@
 import { computed, defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { RadioGroupField, type RadioGroupFieldProps } from "./radio-group-field"
 
-const radioGroupFieldPropKeys = [
+const radioGroupFieldPropKeys = definePropKeys<OptionRadioGroupProps>()([
   "name",
   "label",
   "description",
@@ -16,7 +17,7 @@ const radioGroupFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 export type YesNoRadioGroupProps = Omit<RadioGroupFieldProps, "options"> & {
   yesLabel?: string

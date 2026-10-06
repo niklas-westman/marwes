@@ -1,9 +1,10 @@
 import type { CssVars } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeStyles } from "../../internal/render-utils"
 import { Spinner, type SpinnerProps } from "./spinner"
 
-const spinnerPropKeys = [
+const spinnerPropKeys = definePropKeys<EmptyStateSpinnerProps>()([
   "variant",
   "size",
   "decorative",
@@ -12,7 +13,7 @@ const spinnerPropKeys = [
   "id",
   "className",
   "dataAttributes",
-] as const
+])
 
 export type ButtonSpinnerProps = SpinnerProps & {
   inverted?: boolean

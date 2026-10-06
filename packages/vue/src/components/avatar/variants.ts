@@ -1,10 +1,11 @@
 import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { Avatar, type AvatarProps } from "./avatar"
 import { AvatarBadge, type AvatarBadgeProps } from "./avatar-badge"
 import { AvatarGroup, type AvatarGroupProps } from "./avatar-group"
 
-const avatarPropKeys = [
+const avatarPropKeys = definePropKeys<ProfileAvatarProps>()([
   "size",
   "type",
   "initials",
@@ -16,7 +17,7 @@ const avatarPropKeys = [
   "label",
   "className",
   "dataAttributes",
-] as const
+])
 
 const avatarBadgePropKeys = [...avatarPropKeys, "statusLabel"] as const
 

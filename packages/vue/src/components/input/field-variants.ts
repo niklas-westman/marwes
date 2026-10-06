@@ -1,6 +1,7 @@
 import { buildCurrencyHelperText, getCurrencySymbol, sanitizeCurrencyValue } from "@marwes-ui/core"
 import type { CurrencyCode } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import type { InputProps } from "./input"
 import { InputField, type InputFieldProps } from "./input-field"
 import type { SelectProps } from "./select"
