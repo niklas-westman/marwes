@@ -1,14 +1,10 @@
-import type { ButtonOptions, ButtonVariant, CssVars } from "@marwes-ui/core"
-import { createButtonRecipe } from "@marwes-ui/core"
+import type { ButtonOptions, CssVars } from "@marwes-ui/core"
+import { createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { Icon } from "../icon"
 import { ButtonSpinner } from "../spinner"
 
 type StyleWithVars = React.CSSProperties & CssVars
-
-function isFilledButtonVariant(variant: ButtonVariant): boolean {
-  return variant === "primary" || variant === "success" || variant === "danger"
-}
 
 function hasRenderableLabel(label: React.ReactNode): boolean {
   if (label === undefined || label === null || label === false) return false
@@ -25,10 +21,11 @@ export type ButtonProps = ButtonOptions & {
 export function Button(props: ButtonProps) {
   const kit = createButtonRecipe(props)
 
+  // React names the attribute tabIndex; the helper emits the HTML name
+  const { tabindex: tabIndex, ...htmlAttributes } = toButtonHtmlAttributes(kit.a11y)
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className
 
-  const resolvedVariant = (props.variant ?? "primary") as ButtonVariant
   const resolvedLoading = kit.loading
   const visibleLabel =
     resolvedLoading.isLoading && resolvedLoading.loadingLabel !== undefined
@@ -40,7 +37,7 @@ export function Button(props: ButtonProps) {
       {resolvedLoading.isLoading ? (
         <ButtonSpinner
           variant={resolvedLoading.spinnerVariant}
-          inverted={isFilledButtonVariant(resolvedVariant)}
+          inverted={resolvedLoading.spinnerInverted}
         />
       ) : props.iconLeft ? (
         <Icon name={props.iconLeft} size="xs" strokeWidth="sm" decorative />
@@ -57,16 +54,7 @@ export function Button(props: ButtonProps) {
   if (kit.tag === "button") {
     return (
       <button
-        type={kit.a11y.type}
-        disabled={kit.a11y.disabled}
-        aria-label={kit.a11y.ariaLabel}
-        aria-labelledby={kit.a11y.ariaLabelledBy}
-        aria-busy={kit.a11y.ariaBusy}
-        aria-disabled={kit.a11y.ariaDisabled}
-        aria-pressed={kit.a11y.ariaPressed}
-        aria-expanded={kit.a11y.ariaExpanded}
-        aria-controls={kit.a11y.ariaControls}
-        title={kit.a11y.title}
+        {...htmlAttributes}
         className={className}
         style={style}
         onClick={(e) => props.onClick?.(e)}
@@ -79,19 +67,11 @@ export function Button(props: ButtonProps) {
 
   return (
     <a
-      href={kit.a11y.href}
-      role={kit.a11y.role}
-      tabIndex={kit.a11y.tabIndex}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-busy={kit.a11y.ariaBusy}
-      aria-disabled={kit.a11y.ariaDisabled}
-      aria-pressed={kit.a11y.ariaPressed}
-      aria-expanded={kit.a11y.ariaExpanded}
-      aria-controls={kit.a11y.ariaControls}
-      title={kit.a11y.title}
+      {...htmlAttributes}
+      tabIndex={tabIndex}
       className={className}
       style={style}
+      // biome-ignore lint/a11y/useValidAnchor: href and role come from the spread a11y attributes; a disabled link intentionally has neither
       onClick={(e) => {
         if (kit.blockClick) {
           e.preventDefault()
