@@ -12,6 +12,7 @@ export interface SliderOptions {
   defaultValue?: number
   disabled?: boolean
   required?: boolean
+  invalid?: boolean
   showTooltip?: boolean
   showTouchArea?: boolean
   orientation?: SliderOrientation
@@ -31,6 +32,7 @@ export interface SliderA11yProps {
   step: number
   disabled?: true
   required?: true
+  ariaInvalid?: true
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string

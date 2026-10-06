@@ -11,6 +11,7 @@ const sliderHtmlAttributeNames = {
   step: "step",
   disabled: "disabled",
   required: "required",
+  ariaInvalid: "aria-invalid",
   ariaLabel: "aria-label",
   ariaLabelledBy: "aria-labelledby",
   ariaDescribedBy: "aria-describedby",

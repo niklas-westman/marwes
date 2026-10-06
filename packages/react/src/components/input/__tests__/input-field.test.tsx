@@ -3,6 +3,7 @@
  * and verifies adapter-specific rendering concerns.
  */
 import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import type * as React from "react"
 import { describe, expect, it } from "vitest"
 import { runInputFieldContract } from "../../../../../../tests/contracts/input-field.contract"
@@ -20,10 +21,27 @@ runInputFieldContract("react", {
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
-      input: {},
+      ...(args.leadingSymbol !== undefined ? { leadingSymbol: args.leadingSymbol } : {}),
+      ...(args.showPasswordLabel !== undefined
+        ? { showPasswordLabel: args.showPasswordLabel }
+        : {}),
+      ...(args.hidePasswordLabel !== undefined
+        ? { hidePasswordLabel: args.hidePasswordLabel }
+        : {}),
+      ...(args.clearLabel !== undefined ? { clearLabel: args.clearLabel } : {}),
+      input: {
+        ...(args.inputType !== undefined ? { type: args.inputType } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      },
     }
 
     renderWithProvider(<InputField {...fieldProps} />)
+  },
+  getButtonByName(name) {
+    return screen.getByRole("button", { name })
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
   },
   getByLabelText(text) {
     return screen.getByLabelText(text) as HTMLInputElement

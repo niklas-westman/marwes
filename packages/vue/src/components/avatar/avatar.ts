@@ -1,10 +1,12 @@
 import {
   type AvatarOptions,
   type AvatarRenderContent,
+  type AvatarRenderKit,
   type CssVars,
   avatarOptionKeys,
   createAvatarRecipe,
   toAvatarHtmlAttributes,
+  toAvatarInitialsHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -19,7 +21,7 @@ const avatarPropKeys = [...avatarOptionKeys, "className", "dataAttributes"] as c
 
 function renderAvatarContent(
   content: AvatarRenderContent,
-  isOuterShellAccessible: boolean,
+  initialsA11y: AvatarRenderKit["initialsA11y"],
   isDecorative: boolean,
 ) {
   if (content.type === "image") {
@@ -35,7 +37,7 @@ function renderAvatarContent(
       "span",
       {
         class: "mw-avatar__initials",
-        "aria-hidden": isOuterShellAccessible ? "true" : undefined,
+        ...toAvatarInitialsHtmlAttributes(initialsA11y),
       },
       content.initials,
     )
@@ -84,7 +86,6 @@ export const Avatar = defineComponent(
       ])
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
       const style = mergeStyles(renderKit.vars as CssVars, attrs.style)
-      const isOuterShellAccessible = renderKit.a11y.role === "img"
       const isDecorative = renderKit.a11y.ariaHidden === true
 
       return h(
@@ -97,7 +98,7 @@ export const Avatar = defineComponent(
           style,
           ...toAvatarHtmlAttributes(renderKit.a11y),
         },
-        renderAvatarContent(renderKit.content, isOuterShellAccessible, isDecorative),
+        renderAvatarContent(renderKit.content, renderKit.initialsA11y, isDecorative),
       )
     }
   },

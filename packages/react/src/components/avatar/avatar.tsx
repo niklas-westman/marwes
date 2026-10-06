@@ -1,9 +1,11 @@
 import {
   type AvatarOptions,
   type AvatarRenderContent,
+  type AvatarRenderKit,
   type CssVars,
   createAvatarRecipe,
   toAvatarHtmlAttributes,
+  toAvatarInitialsHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
 import { toReactAttributes } from "../../internal/react-attributes"
@@ -19,7 +21,7 @@ export interface AvatarProps
 
 function renderAvatarContent(
   content: AvatarRenderContent,
-  isOuterShellAccessible: boolean,
+  initialsA11y: AvatarRenderKit["initialsA11y"],
   isDecorative: boolean,
 ): React.ReactNode {
   if (content.type === "image") {
@@ -35,8 +37,8 @@ function renderAvatarContent(
   if (content.type === "initials") {
     return (
       <span
-        aria-hidden={isOuterShellAccessible ? "true" : undefined}
         className="mw-avatar__initials"
+        {...toReactAttributes(toAvatarInitialsHtmlAttributes(initialsA11y))}
       >
         {content.initials}
       </span>
@@ -85,7 +87,6 @@ export function Avatar(props: AvatarProps): React.ReactElement {
 
   const mergedClassName = [kit.className, className].filter(Boolean).join(" ")
   const mergedStyle = { ...(kit.vars as StyleWithVars), ...style }
-  const isOuterShellAccessible = kit.a11y.role === "img"
   const isDecorative = kit.a11y.ariaHidden === true
 
   return (
@@ -97,7 +98,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
       style={mergedStyle}
       {...toReactAttributes(toAvatarHtmlAttributes(kit.a11y))}
     >
-      {renderAvatarContent(kit.content, isOuterShellAccessible, isDecorative)}
+      {renderAvatarContent(kit.content, kit.initialsA11y, isDecorative)}
     </span>
   )
 }

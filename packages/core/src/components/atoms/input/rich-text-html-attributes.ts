@@ -1,6 +1,6 @@
 import { defineHtmlAttributeMapper } from "../../../shared/html-attributes"
 import type { HtmlAttributesOf } from "../../../shared/html-attributes"
-import type { RichTextA11yProps } from "./rich-text-types"
+import type { RichTextA11yProps, RichTextToolbarButtonA11yProps } from "./rich-text-types"
 
 const richTextHtmlAttributeNames = {
   id: "id",
@@ -25,3 +25,19 @@ export type RichTextHtmlAttributes = HtmlAttributesOf<
 export const toRichTextHtmlAttributes = defineHtmlAttributeMapper<RichTextA11yProps>()(
   richTextHtmlAttributeNames,
 )
+
+const richTextToolbarButtonHtmlAttributeNames = {
+  ariaLabel: "aria-label",
+  ariaPressed: "aria-pressed",
+} as const
+
+export type RichTextToolbarButtonHtmlAttributes = HtmlAttributesOf<
+  RichTextToolbarButtonA11yProps,
+  typeof richTextToolbarButtonHtmlAttributeNames
+>
+
+/** Translates resolved rich text toolbar button a11y fields into HTML attribute names. */
+export const toRichTextToolbarButtonHtmlAttributes =
+  defineHtmlAttributeMapper<RichTextToolbarButtonA11yProps>()(
+    richTextToolbarButtonHtmlAttributeNames,
+  )

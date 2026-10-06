@@ -35,6 +35,7 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.defaultValue !== undefined) sliderOptions.defaultValue = options.defaultValue
   if (options.disabled !== undefined) sliderOptions.disabled = options.disabled
   if (options.required !== undefined) sliderOptions.required = options.required
+  if (options.invalid !== undefined) sliderOptions.invalid = options.invalid
   if (options.showTooltip !== undefined) sliderOptions.showTooltip = options.showTooltip
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
   if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
@@ -62,6 +63,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     defaultValue,
     disabled,
     required,
+    invalid,
     showTooltip,
     showTouchArea,
     orientation,
@@ -102,6 +104,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
       value: currentValue,
       disabled,
       required,
+      invalid,
       showTooltip,
       showTouchArea,
       orientation,

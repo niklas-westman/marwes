@@ -1,4 +1,9 @@
-import { buildInputFieldA11yIds } from "@marwes-ui/core"
+import {
+  type InputFieldActionOptions,
+  buildInputFieldA11yIds,
+  resolveInputFieldActionsA11y,
+  toInputFieldActionHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
 import { mergeClassNames } from "../../internal/render-utils"
@@ -16,7 +21,7 @@ export type InputFieldProps = {
   modelValue?: string
   /** Optional leading text symbol displayed inside the input on the left (e.g. "$", "€", "kr"). */
   leadingSymbol?: string
-}
+} & InputFieldActionOptions
 
 const inputFieldPropKeys = [
   "id",
@@ -27,6 +32,9 @@ const inputFieldPropKeys = [
   "ariaDescribedBy",
   "modelValue",
   "leadingSymbol",
+  "showPasswordLabel",
+  "hidePasswordLabel",
+  "clearLabel",
 ] as const
 
 function hasTextContent(value: string | undefined): boolean {
@@ -40,6 +48,18 @@ export const InputField = defineComponent(
     const sourceInput = computed<InputProps>(() => props.input ?? {})
 
     const showPassword = ref(false)
+    const actionsA11y = computed(() =>
+      resolveInputFieldActionsA11y({
+        passwordVisible: showPassword.value,
+        ...(props.showPasswordLabel !== undefined
+          ? { showPasswordLabel: props.showPasswordLabel }
+          : {}),
+        ...(props.hidePasswordLabel !== undefined
+          ? { hidePasswordLabel: props.hidePasswordLabel }
+          : {}),
+        ...(props.clearLabel !== undefined ? { clearLabel: props.clearLabel } : {}),
+      }),
+    )
     const searchValue = ref(
       String(
         sourceInput.value.modelValue ??
@@ -161,7 +181,7 @@ export const InputField = defineComponent(
                   onClick: () => {
                     showPassword.value = !showPassword.value
                   },
-                  "aria-label": showPassword.value ? "Hide password" : "Show password",
+                  ...toInputFieldActionHtmlAttributes(actionsA11y.value.passwordToggle),
                   tabIndex: 0,
                 },
                 [
@@ -192,7 +212,7 @@ export const InputField = defineComponent(
                     emit("update:modelValue", "")
                     emit("value-change", "")
                   },
-                  "aria-label": "Clear search",
+                  ...toInputFieldActionHtmlAttributes(actionsA11y.value.clearButton),
                   tabIndex: 0,
                 },
                 [h(Icon, { name: "x", size: "xs", decorative: true })],

@@ -10,6 +10,7 @@ export type RichTextContractHarness = {
     disabled?: boolean
     readOnly?: boolean
     defaultValue?: string
+    formatLabels?: Partial<Record<"bold" | "italic" | "underline", string>>
     onValueChange?: (value: string) => void
   }): Promise<void> | void
   getByRole(role: "textbox", options: { name: RegExp }): HTMLDivElement
@@ -82,6 +83,32 @@ export function runRichTextContract(adapterName: string, h: RichTextContractHarn
       const editor = h.getByRole("textbox", { name: /read only details/i })
       expect(editor).toHaveAttribute("aria-readonly", "true")
       expect(editor).toHaveAttribute("contenteditable", "false")
+    })
+
+    it("names the formatting toolbar buttons and exposes them as toggle buttons", async () => {
+      await h.renderRichText({ ariaLabel: "About" })
+
+      const buttons = [...document.querySelectorAll<HTMLElement>(".mw-rich-text__toolbar-button")]
+      expect(buttons.map((button) => button.getAttribute("aria-label"))).toEqual([
+        "Bold",
+        "Italic",
+        "Underline",
+      ])
+      for (const button of buttons) {
+        expect(button).toHaveAttribute("aria-pressed", "false")
+      }
+    })
+
+    it("uses custom formatting button labels", async () => {
+      await h.renderRichText({
+        ariaLabel: "About",
+        formatLabels: { bold: "Fet", italic: "Kursiv", underline: "Understruken" },
+      })
+
+      const labels = [...document.querySelectorAll(".mw-rich-text__toolbar-button")].map((button) =>
+        button.getAttribute("aria-label"),
+      )
+      expect(labels).toEqual(["Fet", "Kursiv", "Understruken"])
     })
   })
 }

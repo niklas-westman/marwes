@@ -3,8 +3,10 @@ import {
   isRichTextHtmlEmpty,
   normalizeRichTextHtml,
   resolveRichTextAllowedFormats,
+  resolveRichTextToolbarButtonA11y,
   richTextCommandByFormat,
   toRichTextHtmlAttributes,
+  toRichTextToolbarButtonHtmlAttributes,
 } from "@marwes-ui/core"
 import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, onBeforeUnmount, onMounted, ref, useAttrs, watch } from "vue"
@@ -35,15 +37,10 @@ const richTextPropKeys = [
   "ariaLabel",
   "label",
   "allowedFormats",
+  "formatLabels",
   "onValueChange",
   "className",
 ] as const
-
-const formatLabels: Record<RichTextFormat, string> = {
-  bold: "Bold",
-  italic: "Italic",
-  underline: "Underline",
-}
 
 type RichTextCommandDocument = Document & {
   execCommand?: (commandId: string) => boolean
@@ -383,8 +380,13 @@ export const RichText = defineComponent(
                       class: "mw-rich-text__toolbar-button",
                       "data-format": format,
                       "data-active": isActive ? "true" : undefined,
-                      "aria-label": formatLabels[format],
-                      "aria-pressed": isActive,
+                      ...toRichTextToolbarButtonHtmlAttributes(
+                        resolveRichTextToolbarButtonA11y({
+                          format,
+                          active: isActive,
+                          labels: props.formatLabels,
+                        }),
+                      ),
                       disabled: props.disabled,
                       onMousedown: (event: MouseEvent) => {
                         event.preventDefault()

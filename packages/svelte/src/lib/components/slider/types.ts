@@ -7,6 +7,7 @@ export interface SliderProps extends Omit<SliderOptions, "ariaDescribedBy"> {
   class?: string
   style?: string | undefined
   ariaDescribedBy?: string | undefined
+  /** @deprecated Use `invalid`. */
   ariaInvalid?: boolean
 }
 

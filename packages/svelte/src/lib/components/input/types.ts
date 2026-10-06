@@ -1,4 +1,10 @@
-import type { InputOptions, RichTextOptions, SelectOptions, TextareaOptions } from "@marwes-ui/core"
+import type {
+  InputFieldActionOptions,
+  InputOptions,
+  RichTextOptions,
+  SelectOptions,
+  TextareaOptions,
+} from "@marwes-ui/core"
 import type { Snippet } from "svelte"
 
 export type { SelectAppearance, SelectOption } from "@marwes-ui/core"
@@ -14,7 +20,7 @@ export interface InputProps extends Omit<InputOptions, "describedBy"> {
   describedBy?: string | undefined
 }
 
-export interface InputFieldProps {
+export interface InputFieldProps extends InputFieldActionOptions {
   /** Optional: if omitted, a stable id is generated. */
   id?: string
 

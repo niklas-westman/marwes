@@ -36,6 +36,7 @@ runRichTextContract("vue", {
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
       ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      ...(args.formatLabels !== undefined ? { formatLabels: args.formatLabels } : {}),
       ...(args.onValueChange ? { "onUpdate:modelValue": args.onValueChange } : {}),
     }
 

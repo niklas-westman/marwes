@@ -1,4 +1,9 @@
-import type { RichTextA11yProps, RichTextOptions } from "./rich-text-types"
+import type {
+  RichTextA11yProps,
+  RichTextFormat,
+  RichTextOptions,
+  RichTextToolbarButtonA11yProps,
+} from "./rich-text-types"
 
 export function resolveRichTextA11y(opts: RichTextOptions): RichTextA11yProps {
   const a11y: RichTextA11yProps = {
@@ -18,4 +23,21 @@ export function resolveRichTextA11y(opts: RichTextOptions): RichTextA11yProps {
   if (opts.required) a11y.ariaRequired = true
 
   return a11y
+}
+
+const DEFAULT_FORMAT_LABELS: Record<RichTextFormat, string> = {
+  bold: "Bold",
+  italic: "Italic",
+  underline: "Underline",
+}
+
+export function resolveRichTextToolbarButtonA11y(args: {
+  format: RichTextFormat
+  active: boolean
+  labels?: Partial<Record<RichTextFormat, string>> | undefined
+}): RichTextToolbarButtonA11yProps {
+  return {
+    ariaLabel: args.labels?.[args.format] ?? DEFAULT_FORMAT_LABELS[args.format],
+    ariaPressed: args.active,
+  }
 }

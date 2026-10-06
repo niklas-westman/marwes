@@ -89,7 +89,7 @@
         id={fieldId}
         ariaLabelledBy={a11yIds.labelId}
         ariaDescribedBy={a11yIds.describedBy || undefined}
-        ariaInvalid={hasError}
+        invalid={hasError}
         style="width: 100%;"
         bind:value
       />

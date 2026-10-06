@@ -3,8 +3,10 @@ import {
   isRichTextHtmlEmpty,
   normalizeRichTextHtml,
   resolveRichTextAllowedFormats,
+  resolveRichTextToolbarButtonA11y,
   richTextCommandByFormat,
   toRichTextHtmlAttributes,
+  toRichTextToolbarButtonHtmlAttributes,
 } from "@marwes-ui/core"
 import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import * as React from "react"
@@ -17,12 +19,6 @@ type StyleWithVars = React.CSSProperties & CssVars
 export type RichTextProps = RichTextOptions & {
   onValueChange?: (value: string) => void
   className?: string
-}
-
-const formatLabels: Record<RichTextFormat, string> = {
-  bold: "Bold",
-  italic: "Italic",
-  underline: "Underline",
 }
 
 type RichTextCommandDocument = Document & {
@@ -386,8 +382,15 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
                 className="mw-rich-text__toolbar-button"
                 data-format={format}
                 data-active={isActive ? "true" : undefined}
-                aria-label={formatLabels[format]}
-                aria-pressed={isActive}
+                {...toReactAttributes(
+                  toRichTextToolbarButtonHtmlAttributes(
+                    resolveRichTextToolbarButtonA11y({
+                      format,
+                      active: isActive,
+                      labels: props.formatLabels,
+                    }),
+                  ),
+                )}
                 disabled={props.disabled}
                 onMouseDown={(event) => {
                   event.preventDefault()

@@ -16,6 +16,10 @@ const fieldPropKeys = [
   "input",
   "ariaDescribedBy",
   "modelValue",
+  "leadingSymbol",
+  "showPasswordLabel",
+  "hidePasswordLabel",
+  "clearLabel",
 ] as const
 
 const dropdownFieldPropKeys = [

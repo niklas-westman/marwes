@@ -3,6 +3,7 @@ export type {
   AvatarOptions,
   AvatarA11yProps,
   AvatarDataAttributes,
+  AvatarInitialsA11yProps,
   AvatarRenderContent,
   AvatarRenderKit,
 } from "./avatar-types"
@@ -15,12 +16,14 @@ export {
   toAvatarGroupCounterHtmlAttributes,
   toAvatarGroupHtmlAttributes,
   toAvatarHtmlAttributes,
+  toAvatarInitialsHtmlAttributes,
 } from "./avatar-html-attributes"
 export type {
   AvatarBadgeHtmlAttributes,
   AvatarGroupCounterHtmlAttributes,
   AvatarGroupHtmlAttributes,
   AvatarHtmlAttributes,
+  AvatarInitialsHtmlAttributes,
 } from "./avatar-html-attributes"
 export { createAvatarGroupRecipe } from "./avatar-group-recipe"
 export { createAvatarBadgeRecipe } from "./avatar-badge-recipe"

@@ -23,6 +23,8 @@ export type RichTextOptions = {
   ariaLabel?: string
   label?: string
   allowedFormats?: RichTextFormat[]
+  /** Accessible names of the toolbar buttons. Defaults to "Bold", "Italic" and "Underline". */
+  formatLabels?: Partial<Record<RichTextFormat, string>>
 }
 
 export type RichTextA11yProps = {
@@ -45,4 +47,10 @@ export type RichTextRenderKit = {
   vars: CssVars
   a11y: RichTextA11yProps
   dataAttributes: Record<string, string | boolean | undefined>
+}
+
+/** ARIA fields for a formatting toolbar button (a toggle button). */
+export type RichTextToolbarButtonA11yProps = {
+  ariaLabel: string
+  ariaPressed: boolean
 }

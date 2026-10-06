@@ -11,7 +11,10 @@
     input,
     ariaDescribedBy,
     leadingSymbol,
-    value = $bindable(""),
+    showPasswordLabel,
+    hidePasswordLabel,
+    clearLabel,
+    value = $bindable(input?.defaultValue ?? ""),
     class: className,
   }: InputFieldProps = $props()
 </script>
@@ -25,6 +28,9 @@
     {input}
     {ariaDescribedBy}
     {leadingSymbol}
+    {showPasswordLabel}
+    {hidePasswordLabel}
+    {clearLabel}
     class={className}
     bind:value
   />

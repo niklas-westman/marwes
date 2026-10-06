@@ -12,11 +12,13 @@
     style,
     ariaDescribedBy,
     ariaInvalid,
+    invalid,
     ...options
   }: SliderProps = $props();
 
   const kit = $derived(createSliderRecipe({
     ...options,
+    ...((invalid ?? ariaInvalid) !== undefined ? { invalid: invalid ?? ariaInvalid } : {}),
     ...(value !== undefined ? { value } : {}),
     ...(ariaDescribedBy ? { ariaDescribedBy } : {}),
   }));
@@ -38,7 +40,6 @@
       type="range"
       class={kit.inputClassName}
       {...htmlAttributes}
-      aria-invalid={ariaInvalid ? true : undefined}
       value={kit.value}
       oninput={handleInput}
     />

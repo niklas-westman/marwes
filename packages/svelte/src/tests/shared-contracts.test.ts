@@ -898,11 +898,28 @@ runInputContract("svelte", {
 })
 
 runInputFieldContract("svelte", {
+  getButtonByName(name) {
+    return screen.getByRole("button", { name })
+  },
+  async click(element) {
+    await fireEvent.click(element)
+  },
   renderInputField(args) {
     render(InputFieldContractFixture, {
       props: {
         label: args.label,
-        input: {},
+        input: {
+          ...(args.inputType !== undefined ? { type: args.inputType } : {}),
+          ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        },
+        ...(args.leadingSymbol !== undefined ? { leadingSymbol: args.leadingSymbol } : {}),
+        ...(args.showPasswordLabel !== undefined
+          ? { showPasswordLabel: args.showPasswordLabel }
+          : {}),
+        ...(args.hidePasswordLabel !== undefined
+          ? { hidePasswordLabel: args.hidePasswordLabel }
+          : {}),
+        ...(args.clearLabel !== undefined ? { clearLabel: args.clearLabel } : {}),
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
@@ -1080,6 +1097,7 @@ runRichTextContract("svelte", {
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
         ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.formatLabels !== undefined ? { formatLabels: args.formatLabels } : {}),
         ...(args.onValueChange !== undefined ? { onvaluechange: args.onValueChange } : {}),
       },
     })

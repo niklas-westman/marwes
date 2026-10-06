@@ -152,7 +152,7 @@ export const SliderField = defineComponent(
             h("div", { class: "mw-slider-field__slider" }, [
               h(Slider, {
                 ...mergedSliderProps.value,
-                "aria-invalid": hasError.value ? true : undefined,
+                invalid: hasError.value,
               }),
             ]),
             labelPosition.value === "inline" && showEdgeValues.value

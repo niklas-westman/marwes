@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { buildInputFieldA11yIds } from "@marwes-ui/core";
+  import { buildInputFieldA11yIds, resolveInputFieldActionsA11y, toInputFieldActionHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
   import Text from "../text/Text.svelte";
@@ -14,6 +14,9 @@
     input = {},
     ariaDescribedBy,
     leadingSymbol,
+    showPasswordLabel,
+    hidePasswordLabel,
+    clearLabel,
     value = $bindable(input.defaultValue ?? ""),
     class: className,
   }: InputFieldProps = $props();
@@ -37,6 +40,14 @@
   // Password visibility toggle
   const isPasswordField = $derived(inputType === "password");
   let showPassword = $state(false);
+  const actionsA11y = $derived(
+    resolveInputFieldActionsA11y({
+      passwordVisible: showPassword,
+      ...(showPasswordLabel !== undefined ? { showPasswordLabel } : {}),
+      ...(hidePasswordLabel !== undefined ? { hidePasswordLabel } : {}),
+      ...(clearLabel !== undefined ? { clearLabel } : {}),
+    })
+  );
   const effectiveInputType = $derived(
     isPasswordField && showPassword ? "text" as const : inputType
   );
@@ -100,7 +111,7 @@
         type="button"
         class="mw-input-field__toggle-password"
         onclick={togglePassword}
-        aria-label={showPassword ? "Hide password" : "Show password"}
+        {...toInputFieldActionHtmlAttributes(actionsA11y.passwordToggle)}
         tabindex={0}
       >
         <Icon name={showPassword ? "eyeOff" : "eye"} size="xs" decorative />
@@ -118,7 +129,7 @@
         type="button"
         class="mw-input-field__clear-search"
         onclick={clearSearch}
-        aria-label="Clear search"
+        {...toInputFieldActionHtmlAttributes(actionsA11y.clearButton)}
         tabindex={0}
       >
         <Icon name="x" size="xs" decorative />

@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event"
 /**
  * Vue adapter: Tests the Input Field component — wires the shared cross-adapter contract
  * and verifies adapter-specific rendering concerns.
@@ -26,9 +27,26 @@ runInputFieldContract("vue", {
       ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
       ...(args.error !== undefined ? { error: args.error } : {}),
       ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
-      input: {},
+      ...(args.leadingSymbol !== undefined ? { leadingSymbol: args.leadingSymbol } : {}),
+      ...(args.showPasswordLabel !== undefined
+        ? { showPasswordLabel: args.showPasswordLabel }
+        : {}),
+      ...(args.hidePasswordLabel !== undefined
+        ? { hidePasswordLabel: args.hidePasswordLabel }
+        : {}),
+      ...(args.clearLabel !== undefined ? { clearLabel: args.clearLabel } : {}),
+      input: {
+        ...(args.inputType !== undefined ? { type: args.inputType } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      },
     }
     renderWithProvider(props)
+  },
+  getButtonByName(name) {
+    return screen.getByRole("button", { name })
+  },
+  async click(element) {
+    await userEvent.setup().click(element)
   },
   getByLabelText(text) {
     return screen.getByLabelText(text) as HTMLInputElement

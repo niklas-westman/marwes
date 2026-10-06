@@ -41,7 +41,9 @@ export type {
   RichTextRenderKit,
   RichTextA11yProps,
   RichTextFormat,
+  RichTextToolbarButtonA11yProps,
 } from "./rich-text-types"
+export { resolveRichTextToolbarButtonA11y } from "./rich-text-a11y"
 
 export { createRichTextRecipe } from "./rich-text-recipe"
 export {
@@ -59,8 +61,14 @@ export { toSelectHtmlAttributes } from "./select-html-attributes"
 export type { SelectHtmlAttributes } from "./select-html-attributes"
 export { toInputOtpHtmlAttributes } from "./input-otp-html-attributes"
 export type { InputOtpHtmlAttributes } from "./input-otp-html-attributes"
-export { toRichTextHtmlAttributes } from "./rich-text-html-attributes"
-export type { RichTextHtmlAttributes } from "./rich-text-html-attributes"
+export {
+  toRichTextHtmlAttributes,
+  toRichTextToolbarButtonHtmlAttributes,
+} from "./rich-text-html-attributes"
+export type {
+  RichTextHtmlAttributes,
+  RichTextToolbarButtonHtmlAttributes,
+} from "./rich-text-html-attributes"
 export {
   getSelectListboxId,
   getSelectOptionId,
@@ -83,3 +91,7 @@ export type {
   SelectListboxA11yProps,
   SelectOptionA11yProps,
 } from "./select-types"
+export { resolveInputFieldActionsA11y } from "./input-field-a11y"
+export type { InputFieldActionA11yProps, InputFieldActionOptions } from "./input-field-types"
+export { toInputFieldActionHtmlAttributes } from "./input-field-html-attributes"
+export type { InputFieldActionHtmlAttributes } from "./input-field-html-attributes"

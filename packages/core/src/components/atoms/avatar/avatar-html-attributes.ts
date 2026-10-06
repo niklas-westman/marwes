@@ -2,7 +2,7 @@ import { defineHtmlAttributeMapper } from "../../../shared/html-attributes"
 import type { HtmlAttributesOf } from "../../../shared/html-attributes"
 import type { AvatarBadgeA11yProps } from "./avatar-badge-types"
 import type { AvatarGroupA11yProps, AvatarGroupCounterA11yProps } from "./avatar-group-types"
-import type { AvatarA11yProps } from "./avatar-types"
+import type { AvatarA11yProps, AvatarInitialsA11yProps } from "./avatar-types"
 
 const avatarHtmlAttributeNames = {
   role: "role",
@@ -61,4 +61,18 @@ export type AvatarBadgeHtmlAttributes = HtmlAttributesOf<
 /** Translates resolved avatar badge a11y fields into HTML attribute names. */
 export const toAvatarBadgeHtmlAttributes = defineHtmlAttributeMapper<AvatarBadgeA11yProps>()(
   avatarBadgeHtmlAttributeNames,
+)
+
+const avatarInitialsHtmlAttributeNames = {
+  ariaHidden: "aria-hidden",
+} as const
+
+export type AvatarInitialsHtmlAttributes = HtmlAttributesOf<
+  AvatarInitialsA11yProps,
+  typeof avatarInitialsHtmlAttributeNames
+>
+
+/** Translates resolved avatar initials a11y fields into HTML attribute names. */
+export const toAvatarInitialsHtmlAttributes = defineHtmlAttributeMapper<AvatarInitialsA11yProps>()(
+  avatarInitialsHtmlAttributeNames,
 )

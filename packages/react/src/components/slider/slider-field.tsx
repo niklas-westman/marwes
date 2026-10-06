@@ -116,7 +116,7 @@ export function SliderField(props: SliderFieldProps): React.ReactElement {
             id={id}
             ariaLabelledBy={labelId}
             {...(describedBy ? { ariaDescribedBy: describedBy } : {})}
-            aria-invalid={hasError ? true : undefined}
+            invalid={hasError}
             style={{ width: "100%", ...(sliderStyle ?? {}) }}
           />
         </div>

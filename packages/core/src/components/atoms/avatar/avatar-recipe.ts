@@ -98,11 +98,14 @@ export function createAvatarRecipe(options: AvatarOptions = {}): AvatarRenderKit
     "data-size": size,
   })
 
+  const a11y = resolveAvatarA11y(options, resolvedType, normalizedInitials)
+
   return {
     tag: "span",
     className: cx("mw-avatar", `mw-avatar--${size}`, `mw-avatar--${resolvedType}`),
     vars: {},
-    a11y: resolveAvatarA11y(options, resolvedType, normalizedInitials),
+    a11y,
+    initialsA11y: a11y.role === "img" ? { ariaHidden: true } : {},
     dataAttributes: {
       "data-component": familySemanticAttributes["data-component"] as "avatar",
       "data-size": familySemanticAttributes["data-size"] as AvatarSizeValue,

@@ -10,7 +10,15 @@ export type InputFieldContractHarness = {
     helperText?: string
     error?: string
     ariaDescribedBy?: string
+    inputType?: "text" | "password" | "search"
+    defaultValue?: string
+    leadingSymbol?: string
+    showPasswordLabel?: string
+    hidePasswordLabel?: string
+    clearLabel?: string
   }): Promise<void> | void
+  getButtonByName(name: RegExp): HTMLElement
+  click(element: HTMLElement): Promise<void> | void
   getByLabelText(text: RegExp): HTMLInputElement
   getByText(text: string): HTMLElement
   queryHelperRegion(): HTMLElement | null
@@ -93,6 +101,45 @@ export function runInputFieldContract(adapterName: string, h: InputFieldContract
       for (const id of referencedIds) {
         expect(document.getElementById(id)).not.toBeNull()
       }
+    })
+
+    it("names the password toggle and flips its name with the visibility state", async () => {
+      await h.renderInputField({ label: "Password", inputType: "password" })
+
+      await h.click(h.getButtonByName(/^show password$/i))
+      expect(h.getButtonByName(/^hide password$/i)).toBeInTheDocument()
+    })
+
+    it("uses custom password toggle labels", async () => {
+      await h.renderInputField({
+        label: "Password",
+        inputType: "password",
+        showPasswordLabel: "Visa lösenord",
+        hidePasswordLabel: "Dölj lösenord",
+      })
+
+      await h.click(h.getButtonByName(/visa lösenord/i))
+      expect(h.getButtonByName(/dölj lösenord/i)).toBeInTheDocument()
+    })
+
+    it("names the search clear button and accepts a custom label", async () => {
+      await h.renderInputField({ label: "Search", inputType: "search", defaultValue: "abc" })
+      expect(h.getButtonByName(/^clear search$/i)).toBeInTheDocument()
+    })
+
+    it("uses a custom clear label", async () => {
+      await h.renderInputField({
+        label: "Search",
+        inputType: "search",
+        defaultValue: "abc",
+        clearLabel: "Rensa sökning",
+      })
+      expect(h.getButtonByName(/rensa sökning/i)).toBeInTheDocument()
+    })
+
+    it("renders a leading symbol inside the field", async () => {
+      await h.renderInputField({ label: "Amount", leadingSymbol: "kr" })
+      expect(document.querySelector(".mw-input-field__leading-symbol")).toHaveTextContent("kr")
     })
   })
 }
