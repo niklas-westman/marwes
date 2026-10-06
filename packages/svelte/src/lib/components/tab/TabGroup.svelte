@@ -42,15 +42,10 @@
 
   let internalActive = $state<string | undefined>(undefined);
 
-  // Initialize internal state
-  $effect(() => {
-    if (internalActive === undefined) {
-      internalActive = resolveTabValue(itemStates, defaultActiveTab);
-    }
-  });
-
+  // The default is resolved during render (not in an effect) so server-rendered markup already
+  // carries the initial selection.
   const activeValue = $derived(
-    controlledActive !== undefined ? resolveTabValue(itemStates, controlledActive) : internalActive
+    resolveTabValue(itemStates, controlledActive !== undefined ? controlledActive : (internalActive ?? defaultActiveTab))
   );
 
   function selectTab(value: string): void {

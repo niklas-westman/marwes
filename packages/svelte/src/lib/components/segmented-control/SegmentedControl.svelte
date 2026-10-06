@@ -35,16 +35,13 @@
 
   let internalValue = $state<string | undefined>(undefined);
 
-  $effect(() => {
-    if (internalValue === undefined) {
-      internalValue = resolveSegmentedControlValue(itemStates, defaultValue);
-    }
-  });
-
+  // The default is resolved during render (not in an effect) so server-rendered markup already
+  // carries the initial selection.
   const resolvedValue = $derived(
-    controlledValue !== undefined
-      ? resolveSegmentedControlValue(itemStates, controlledValue)
-      : internalValue
+    resolveSegmentedControlValue(
+      itemStates,
+      controlledValue !== undefined ? controlledValue : (internalValue ?? defaultValue)
+    )
   );
 
   function selectItem(nextValue: string): void {

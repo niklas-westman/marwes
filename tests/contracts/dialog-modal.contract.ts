@@ -141,6 +141,41 @@ export function runDialogModalContract(
       expect(harness.getByRole("dialog", { name: /rename workspace/i })).toBeInTheDocument()
     })
 
+    it("does not request close on Escape when escape dismissal is disabled", async () => {
+      const emittedValues: boolean[] = []
+
+      await harness.renderOpenDialogModal({
+        title: "Rename workspace",
+        closeOnEscape: false,
+        includeInput: true,
+        onOpenChange: (open) => {
+          emittedValues.push(open)
+        },
+      })
+
+      await harness.keyboard("{Escape}")
+
+      expect(emittedValues).toEqual([])
+      expect(harness.getByRole("dialog", { name: /rename workspace/i })).toBeInTheDocument()
+    })
+
+    it("does not request close on scrim click when scrim dismissal is disabled", async () => {
+      const emittedValues: boolean[] = []
+
+      await harness.renderOpenDialogModal({
+        title: "Invite teammate",
+        closeOnScrimClick: false,
+        onOpenChange: (open) => {
+          emittedValues.push(open)
+        },
+      })
+
+      await harness.click(harness.getScrim())
+
+      expect(emittedValues).toEqual([])
+      expect(harness.getByRole("dialog", { name: /invite teammate/i })).toBeInTheDocument()
+    })
+
     it("exposes modal surface sizing, tone, and divider hooks", async () => {
       await harness.renderOpenDialogModal({
         title: "Resize modal",

@@ -2,9 +2,12 @@
  * Svelte adapter: Tests the Radio atom — radio input type, class,
  * checked state, name/value passthrough, disabled, and change callback.
  */
-import { fireEvent, render } from "@testing-library/svelte"
+import "@testing-library/jest-dom/vitest"
+import { fireEvent, render, screen } from "@testing-library/svelte"
 import { describe, expect, it, vi } from "vitest"
 import Radio from "../lib/components/radio/Radio.svelte"
+import RadioGroupFieldManualChildrenFixture from "./type-fixtures/RadioGroupFieldManualChildrenFixture.svelte"
+import WithProviderFixture from "./type-fixtures/WithProviderFixture.svelte"
 
 describe("Radio", () => {
   it("renders an input with type radio", () => {
@@ -49,5 +52,22 @@ describe("Radio", () => {
     const { container } = render(Radio, { props: { ariaLabel: "Option A" } })
     const input = container.querySelector("input")
     expect(input?.getAttribute("aria-label")).toBe("Option A")
+  })
+})
+
+describe("RadioGroupField with manually composed Radio children", () => {
+  it("disables every child radio when the group is disabled", () => {
+    render(WithProviderFixture, {
+      props: { Component: RadioGroupFieldManualChildrenFixture, props: { groupDisabled: true } },
+    })
+
+    for (const radio of screen.getAllByRole("radio")) expect(radio).toBeDisabled()
+  })
+
+  it("leaves child radios enabled when the group is not disabled, keeping per-radio disabled", () => {
+    render(WithProviderFixture, { props: { Component: RadioGroupFieldManualChildrenFixture } })
+
+    expect(screen.getByRole("radio", { name: "Alpha" })).toBeEnabled()
+    expect(screen.getByRole("radio", { name: "Beta" })).toBeDisabled()
   })
 })

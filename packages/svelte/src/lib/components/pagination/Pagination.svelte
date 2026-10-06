@@ -36,15 +36,11 @@
   let adaptiveProfile = $state<PaginationAdaptiveProfile | undefined>(undefined);
   let frame = 0;
 
+  // The default is resolved during render (not in an effect) so server-rendered markup already
+  // carries the initial page.
   const resolvedPage = $derived(
-    clampPaginationPage(page !== undefined ? page : internalPage, pageCount)
+    clampPaginationPage(page !== undefined ? page : (internalPage ?? defaultPage), pageCount)
   );
-
-  $effect(() => {
-    if (internalPage === undefined) {
-      internalPage = clampPaginationPage(defaultPage, pageCount);
-    }
-  });
 
   function selectPage(nextPage: number): void {
     if (disabled) return;

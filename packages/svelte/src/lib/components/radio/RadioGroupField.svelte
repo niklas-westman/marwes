@@ -5,6 +5,7 @@
     toRadioGroupFieldHtmlAttributes,
   } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import { provideRadioGroupContext } from "../../internal/radio-group-context.js";
   import Text from "../text/Text.svelte";
   import type { RadioGroupFieldProps } from "./types.js";
 
@@ -20,6 +21,12 @@
     children,
     class: className,
   }: RadioGroupFieldProps = $props();
+
+  provideRadioGroupContext({
+    get disabled() {
+      return disabled === true;
+    },
+  });
 
   const uniqueId = $props.id();
   const fieldId = $derived(userProvidedId ?? `mw-radio-group-${uniqueId}`);
