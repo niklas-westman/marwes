@@ -23,7 +23,7 @@ function renderAccordion(props: Partial<AccordionProps> = {}) {
 
 runAccordionContract("react", {
   renderAccordionOptions(options) {
-    renderWithProvider(
+    render(
       <Accordion title="Question" {...options}>
         Answer
       </Accordion>,
