@@ -13,6 +13,8 @@ export interface SegmentedControlContractItem {
 }
 
 export interface SegmentedControlContractHarness {
+  /** Renders one icon-only item (framework icon node, no label) named "Search". */
+  renderSegmentedControlIconOnlyItem(): Promise<void> | void
   renderSegmentedControlItems(items: readonly SegmentedControlContractItem[]): Promise<void> | void
   /** Renders the base component with raw core options. */
   renderSegmentedControlOptions(options: SegmentedControlOptions): Promise<void> | void
@@ -124,6 +126,15 @@ export function runSegmentedControlContract(
         const root = harness.getSegmentedControlRoot()
         itemCase.expectRendered(root.querySelectorAll<HTMLElement>('[role="radio"]'))
       })
+    })
+
+    it("marks an item with an icon and no label as icon-only", async () => {
+      await harness.renderSegmentedControlIconOnlyItem()
+
+      const radio = harness.getSegmentedControlRoot().querySelector('[role="radio"]')
+      expect(radio).toHaveClass("mw-segmented-control__item--icon-only")
+      expect(radio).toHaveAttribute("aria-label", "Search")
+      expect(radio?.querySelector("svg")).toBeInTheDocument()
     })
   })
 }

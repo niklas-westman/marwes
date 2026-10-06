@@ -11,8 +11,8 @@ export type { SelectAppearance, SelectOption } from "@marwes-ui/core"
 
 export type SelectFieldVariant = "default" | "date"
 
-export interface InputProps extends Omit<InputOptions, "describedBy"> {
-  value?: string
+export interface InputProps extends Omit<InputOptions, "describedBy" | "value"> {
+  value?: string | undefined
   oninput?: (e: Event & { currentTarget: HTMLInputElement }) => void
   class?: string
   style?: string | undefined
@@ -43,7 +43,7 @@ export interface InputFieldProps extends InputFieldActionOptions {
   leadingSymbol?: string
 
   /** The input value — supports bind:value. */
-  value?: string
+  value?: string | undefined
 
   class?: string
 }
@@ -58,7 +58,7 @@ export interface InputFieldProps extends InputFieldActionOptions {
 export interface InputOtpProps {
   id?: string
   name?: string
-  value?: string
+  value?: string | undefined
   defaultValue?: string
   length?: number
   placeholderCharacter?: string
@@ -105,8 +105,8 @@ export interface RichTextFieldProps {
   ariaDescribedBy?: string
 }
 
-export interface SelectProps extends Omit<SelectOptions, "describedBy"> {
-  value?: string
+export interface SelectProps extends Omit<SelectOptions, "describedBy" | "value"> {
+  value?: string | undefined
   onvaluechange?: (value: string) => void
   onchange?: (e: Event & { currentTarget: HTMLSelectElement }) => void
   class?: string
@@ -121,13 +121,13 @@ export interface SelectFieldProps {
   error?: string
   select?: SelectProps
   ariaDescribedBy?: string
-  value?: string
+  value?: string | undefined
   variant?: SelectFieldVariant
   class?: string
 }
 
-export interface TextareaProps extends Omit<TextareaOptions, "describedBy"> {
-  value?: string
+export interface TextareaProps extends Omit<TextareaOptions, "describedBy" | "value"> {
+  value?: string | undefined
   oninput?: (e: Event & { currentTarget: HTMLTextAreaElement }) => void
   class?: string
   style?: string | undefined
@@ -142,7 +142,7 @@ export interface TextareaFieldProps {
   error?: string
   textarea?: Omit<TextareaProps, "value">
   ariaDescribedBy?: string
-  value?: string
+  value?: string | undefined
   class?: string
 }
 

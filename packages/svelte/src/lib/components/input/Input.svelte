@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { HTMLInputAttributes } from "svelte/elements";
   import { createInputRecipe, toInputHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -35,6 +36,7 @@
   class={mergedClass}
   style={mergedStyle}
   {...htmlAttributes}
+  autocomplete={htmlAttributes.autocomplete as HTMLInputAttributes["autocomplete"]}
   {value}
   oninput={handleInput}
 />

@@ -17,7 +17,7 @@
   }: AvatarBadgeProps = $props();
 
   const badgeKit = $derived(
-    createAvatarBadgeRecipe({ ...avatarProps, decorative, ...(statusLabel !== undefined ? { statusLabel } : {}) })
+    createAvatarBadgeRecipe({ ...avatarProps, ...(decorative !== undefined ? { decorative } : {}), ...(statusLabel !== undefined ? { statusLabel } : {}) })
   );
   const mergedClass = $derived(mergeClass(badgeKit.className, className));
 </script>

@@ -5,6 +5,7 @@ import { render } from "@testing-library/react"
 import type * as React from "react"
 import { runSegmentedControlContract } from "../../../../../../tests/contracts/segmented-control.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Icon } from "../../icon"
 import { SegmentedControl } from "../segmented-control"
 
 function renderWithProvider(ui: React.ReactElement) {
@@ -20,6 +21,13 @@ runSegmentedControlContract("react", {
           { value: "a", label: "Alpha" },
           { value: "b", label: "Beta" },
         ]}
+      />,
+    )
+  },
+  renderSegmentedControlIconOnlyItem() {
+    renderWithProvider(
+      <SegmentedControl
+        items={[{ value: "a", icon: <Icon name="search" />, ariaLabel: "Search" }]}
       />,
     )
   },

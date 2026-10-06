@@ -896,12 +896,13 @@ runHeadingContract("svelte", {
 
 runIconContract("svelte", {
   renderIcon(args = {}) {
-    const { ariaLabel, ...rest } = args
+    const { ariaLabel, className, ...rest } = args
     render(Icon, {
       props: {
         name: "search",
         ...rest,
         ...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {}),
+        ...(className !== undefined ? { class: className } : {}),
       },
     })
   },

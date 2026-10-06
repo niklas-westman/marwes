@@ -111,7 +111,7 @@
     {@const isActive = tab.value === activeValue}
     <div
       {...toTabPanelHtmlAttributes(
-        resolveTabPanelA11y({ id: a11yIds.panelIds[tab.value], tabId: a11yIds.tabIds[tab.value], hidden: !isActive })
+        resolveTabPanelA11y({ id: a11yIds.panelIds[tab.value]!, tabId: a11yIds.tabIds[tab.value]!, hidden: !isActive })
       )}
       class="mw-tab-group__panel"
     >

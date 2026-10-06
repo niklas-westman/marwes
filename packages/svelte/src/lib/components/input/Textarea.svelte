@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { HTMLTextareaAttributes } from "svelte/elements";
   import { createTextareaRecipe, toTextareaHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -35,6 +36,7 @@
   class={mergedClass}
   style={mergedStyle}
   {...htmlAttributes}
+  autocomplete={htmlAttributes.autocomplete as HTMLTextareaAttributes["autocomplete"]}
   {value}
   oninput={handleInput}
 ></textarea>

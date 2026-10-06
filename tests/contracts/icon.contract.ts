@@ -6,7 +6,11 @@ import { type IconOptions, iconRegistry } from "@marwes-ui/core"
 import { describe, expect, it, vi } from "vitest"
 
 /** Raw core icon options; adapters map them onto their own prop names. */
-export type IconContractArgs = Partial<Omit<IconOptions, "name">> & { name?: IconOptions["name"] }
+export type IconContractArgs = Partial<Omit<IconOptions, "name">> & {
+  name?: IconOptions["name"]
+  /** Consumer class, not a core option; adapters map it to `className` or `class`. */
+  className?: string
+}
 
 export type IconContractHarness = {
   renderIcon(args?: IconContractArgs): Promise<void> | void
@@ -127,6 +131,15 @@ export function runIconContract(adapterName: string, harness: IconContractHarnes
       expect(svg).toHaveClass("mw-icon--custom")
       expect(svg).toHaveAttribute("width", "14")
       expect((svg as SVGElement).style.getPropertyValue("--mw-icon-size")).toBe("14px")
+    })
+
+    it("merges a consumer class with the preset classes", async () => {
+      await harness.renderIcon({ className: "custom-icon", size: "md" })
+
+      const svg = harness.querySvg()
+      expect(svg).toHaveClass("mw-icon")
+      expect(svg).toHaveClass("mw-icon--md")
+      expect(svg).toHaveClass("custom-icon")
     })
   })
 }

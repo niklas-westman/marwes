@@ -6,6 +6,7 @@ import { render } from "@testing-library/vue"
 import { defineComponent, h } from "vue"
 import { runSegmentedControlContract } from "../../../../../../tests/contracts/segmented-control.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Icon } from "../../icon"
 import { SegmentedControl } from "../segmented-control"
 
 const switcherItems = [
@@ -25,6 +26,23 @@ runSegmentedControlContract("vue", {
           return () =>
             h(MarwesProvider, null, {
               default: () => h(SegmentedControl as never, toVueProps(options)),
+            })
+        },
+      }),
+    )
+  },
+  renderSegmentedControlIconOnlyItem() {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(SegmentedControl as never, {
+                  items: [
+                    { value: "a", icon: h(Icon as never, { name: "search" }), ariaLabel: "Search" },
+                  ],
+                }),
             })
         },
       }),
