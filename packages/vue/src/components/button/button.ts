@@ -1,7 +1,6 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
-import { createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
+import { buttonOptionKeys, createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
-import { definePropKeys } from "../../internal/prop-keys"
 import {
   getDefaultSlotChildren,
   mergeClassNames,
@@ -20,33 +19,7 @@ export type ButtonProps = ButtonOptions & {
   className?: string
 }
 
-const buttonPropKeys = definePropKeys<ButtonProps>()([
-  "as",
-  "href",
-  "type",
-  "size",
-  "variant",
-  "disabled",
-  "loading",
-  "error",
-  "toggle",
-  "pressed",
-  "ariaLabel",
-  "ariaLabelledBy",
-  "label",
-  "hasVisibleText",
-  "ariaExpanded",
-  "ariaControls",
-  "iconLeft",
-  "iconRight",
-  "iconOnly",
-  "action",
-  "tooltip",
-  "confirmation",
-  "dataAttributes",
-  "onClick",
-  "className",
-])
+const buttonPropKeys = [...buttonOptionKeys, "onClick", "className"] as const
 
 export const Button = defineComponent(
   (props: ButtonProps, { slots, emit }) => {

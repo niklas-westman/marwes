@@ -79,6 +79,12 @@ runButtonContract("vue", {
     }
     renderWithProvider(LinkButton, props, args.text)
   },
+  renderButton(options, text) {
+    renderWithProvider(Button, { ...options }, text)
+  },
+  getButtonElement() {
+    return document.querySelector('[data-component="button"]') as HTMLElement
+  },
   getByRole(role, options) {
     return screen.getByRole(role, options)
   },

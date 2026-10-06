@@ -61,6 +61,7 @@ import NotificationBadge from "../lib/components/badge/NotificationBadge.svelte"
 import PriorityBadge from "../lib/components/badge/PriorityBadge.svelte"
 import StatusBadge from "../lib/components/badge/StatusBadge.svelte"
 import Banner from "../lib/components/banner/Banner.svelte"
+import BaseButton from "../lib/components/button/Button.svelte"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import CloseButton from "../lib/components/button/CloseButton.svelte"
 import ConfirmButton from "../lib/components/button/ConfirmButton.svelte"
@@ -408,6 +409,12 @@ runButtonContract("svelte", {
       },
       args.text,
     )
+  },
+  renderButton(options, text) {
+    renderWithText(BaseButton, { ...options }, text ?? "")
+  },
+  getButtonElement() {
+    return document.querySelector('[data-component="button"]') as HTMLElement
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)

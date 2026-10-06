@@ -65,6 +65,12 @@ runButtonContract("react", {
 
     renderWithProvider(<LinkButton {...linkProps}>{args.text}</LinkButton>)
   },
+  renderButton(options, text) {
+    renderWithProvider(<Button {...options}>{text}</Button>)
+  },
+  getButtonElement() {
+    return document.querySelector('[data-component="button"]') as HTMLElement
+  },
   getByRole(role, options) {
     return screen.getByRole(role, options)
   },

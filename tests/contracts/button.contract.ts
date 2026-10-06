@@ -6,6 +6,7 @@
  * loading options (loadingLabel, disableWhileLoading), custom data attributes,
  * anchor link rendering, and click suppression for disabled/loading controls.
  */
+import type { ButtonOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type ButtonContractLoading =
@@ -32,8 +33,143 @@ export type ButtonContractHarness = {
     dataAttributes?: ButtonContractDataAttributes
     onClick?: () => void
   }): Promise<void> | void
+  /** Renders the base Button with raw core options, bypassing variant wrappers. */
+  renderButton(options: ButtonOptions, text?: string): Promise<void> | void
+  getButtonElement(): HTMLElement
   getByRole(role: "button" | "link", options: { name: RegExp }): HTMLElement
   click(element: HTMLElement): Promise<void>
+}
+
+type ButtonOptionCase = {
+  options: ButtonOptions
+  text?: string
+  /** Why the option has no observable DOM effect; the case then only asserts it renders. */
+  noDomEffect?: string
+  expectRendered?: (button: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core ButtonOptions field fails to compile here until every
+// adapter's handling of it is described by a case, so no adapter can silently ignore it.
+const buttonOptionCases: Record<keyof ButtonOptions, ButtonOptionCase> = {
+  as: {
+    options: { as: "a" },
+    expectRendered: (button) => expect(button.tagName).toBe("A"),
+  },
+  href: {
+    options: { href: "/docs" },
+    expectRendered: (button) => {
+      expect(button.tagName).toBe("A")
+      expect(button).toHaveAttribute("href", "/docs")
+    },
+  },
+  type: {
+    options: { type: "reset" },
+    expectRendered: (button) => expect(button).toHaveAttribute("type", "reset"),
+  },
+  size: {
+    options: { size: "lg" },
+    expectRendered: (button) => {
+      expect(button).toHaveClass("mw-btn--lg")
+      expect(button).toHaveAttribute("data-size", "lg")
+    },
+  },
+  variant: {
+    options: { variant: "danger" },
+    expectRendered: (button) => {
+      expect(button).toHaveClass("mw-btn--danger")
+      expect(button).toHaveAttribute("data-variant", "danger")
+    },
+  },
+  disabled: {
+    options: { disabled: true },
+    expectRendered: (button) => {
+      expect(button).toBeDisabled()
+      expect(button).toHaveAttribute("aria-disabled", "true")
+    },
+  },
+  loading: {
+    options: { loading: true },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-busy", "true"),
+  },
+  error: {
+    options: { error: true },
+    expectRendered: (button) => {
+      expect(button).toHaveClass("mw-btn--error")
+      expect(button).toHaveAttribute("data-error", "true")
+    },
+  },
+  toggle: {
+    options: { toggle: true },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-pressed", "false"),
+  },
+  pressed: {
+    options: { toggle: true, pressed: true },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-pressed", "true"),
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Save draft" },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-label", "Save draft"),
+  },
+  ariaLabelledBy: {
+    options: { ariaLabelledBy: "external-label" },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-labelledby", "external-label"),
+  },
+  label: {
+    options: { label: "Save draft" },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-label", "Save draft"),
+  },
+  hasVisibleText: {
+    options: { hasVisibleText: false, ariaLabel: "Close" },
+    noDomEffect: "only drives a development warning for missing accessible names",
+  },
+  ariaExpanded: {
+    options: { ariaExpanded: true },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-expanded", "true"),
+  },
+  ariaControls: {
+    options: { ariaControls: "panel-1" },
+    expectRendered: (button) => expect(button).toHaveAttribute("aria-controls", "panel-1"),
+  },
+  iconLeft: {
+    options: { iconLeft: "plus" },
+    text: "Add",
+    expectRendered: (button) => {
+      expect(button.querySelector(":scope > svg")).not.toBeNull()
+      expect(button).toHaveAttribute("data-has-affordance", "true")
+    },
+  },
+  iconRight: {
+    options: { iconRight: "checkCircle" },
+    text: "Done",
+    expectRendered: (button) => {
+      expect(button.querySelector(":scope > svg")).not.toBeNull()
+      expect(button).toHaveAttribute("data-has-affordance", "true")
+    },
+  },
+  iconOnly: {
+    options: { iconOnly: true, iconLeft: "plus", label: "Add" },
+    text: "",
+    expectRendered: (button) => expect(button).toHaveAttribute("data-icon-only", "true"),
+  },
+  action: {
+    options: { action: "submit" },
+    expectRendered: (button) => {
+      expect(button).toHaveAttribute("data-action", "submit")
+      expect(button).toHaveAttribute("type", "submit")
+    },
+  },
+  tooltip: {
+    options: { tooltip: "Saves the draft" },
+    expectRendered: (button) => expect(button).toHaveAttribute("title", "Saves the draft"),
+  },
+  confirmation: {
+    options: { confirmation: true },
+    noDomEffect: "accepted by ButtonOptions but not read by the recipe today",
+  },
+  dataAttributes: {
+    options: { dataAttributes: { "data-track-id": "case" } },
+    expectRendered: (button) => expect(button).toHaveAttribute("data-track-id", "case"),
+  },
 }
 
 // Dispatches a native cancelable click so we can observe whether the adapter
@@ -338,6 +474,16 @@ export function runButtonContract(adapterName: string, h: ButtonContractHarness)
           document.removeEventListener("click", cancelNavigation)
         }
         expect(clicks).toBe(1)
+      })
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(buttonOptionCases))("%s", async (_optionName, optionCase) => {
+        await h.renderButton(optionCase.options, optionCase.text ?? "Case")
+
+        const button = h.getButtonElement()
+        expect(button).toBeInTheDocument()
+        optionCase.expectRendered?.(button)
       })
     })
   })
