@@ -4,7 +4,7 @@ import type {
   CssVars,
   SelectOptions,
 } from "@marwes-ui/core"
-import { createSelectRecipe } from "@marwes-ui/core"
+import { createSelectRecipe, toSelectHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -86,14 +86,7 @@ export const Select = defineComponent(
           class: className,
           style,
           "data-placeholder-selected": placeholderSelected.value ? "true" : undefined,
-          id: renderKit.a11y.id,
-          name: renderKit.a11y.name,
-          disabled: renderKit.a11y.disabled,
-          required: renderKit.a11y.required,
-          "aria-label": renderKit.a11y.ariaLabel,
-          "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-          "aria-invalid": renderKit.a11y.ariaInvalid,
-          "aria-describedby": renderKit.a11y.ariaDescribedBy,
+          ...toSelectHtmlAttributes(renderKit.a11y),
           value: currentValue.value,
           onChange: (event: Event) => {
             const target = event.target as HTMLSelectElement

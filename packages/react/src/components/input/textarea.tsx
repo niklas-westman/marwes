@@ -1,7 +1,8 @@
 import type { CssVars, TextareaOptions } from "@marwes-ui/core"
-import { createTextareaRecipe } from "@marwes-ui/core"
+import { createTextareaRecipe, toTextareaHtmlAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -22,24 +23,13 @@ export function Textarea(props: TextareaProps) {
     props.onValueChange?.(e.target.value)
   }
 
+  const htmlAttributes = toReactAttributes(toTextareaHtmlAttributes(kit.a11y))
+
   return (
     <textarea
+      {...htmlAttributes}
       className={className}
       style={style}
-      id={kit.a11y.id}
-      name={kit.a11y.name}
-      inputMode={kit.a11y.inputMode}
-      autoComplete={kit.a11y.autoComplete}
-      placeholder={kit.a11y.placeholder}
-      disabled={kit.a11y.disabled}
-      readOnly={kit.a11y.readOnly}
-      required={kit.a11y.required}
-      rows={kit.a11y.rows}
-      cols={kit.a11y.cols}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-invalid={kit.a11y.ariaInvalid}
-      aria-describedby={kit.a11y.ariaDescribedBy}
       value={props.value}
       defaultValue={props.defaultValue}
       onChange={handleChange}

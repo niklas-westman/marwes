@@ -51,3 +51,9 @@ export {
   richTextCommandByFormat,
 } from "./rich-text-html"
 export { resolveRichTextAllowedFormats } from "./rich-text-styles"
+export { toInputHtmlAttributes } from "./input-html-attributes"
+export type { InputHtmlAttributes } from "./input-html-attributes"
+export { toTextareaHtmlAttributes } from "./textarea-html-attributes"
+export type { TextareaHtmlAttributes } from "./textarea-html-attributes"
+export { toSelectHtmlAttributes } from "./select-html-attributes"
+export type { SelectHtmlAttributes } from "./select-html-attributes"

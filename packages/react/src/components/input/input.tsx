@@ -1,7 +1,8 @@
 import type { CssVars, InputOptions } from "@marwes-ui/core"
-import { createInputRecipe } from "@marwes-ui/core"
+import { createInputRecipe, toInputHtmlAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -23,23 +24,13 @@ export function Input(props: InputProps) {
     props.onValueChange?.(e.target.value)
   }
 
+  const htmlAttributes = toReactAttributes(toInputHtmlAttributes(kit.a11y))
+
   return (
     <input
+      {...htmlAttributes}
       className={className}
       style={style}
-      id={kit.a11y.id}
-      name={kit.a11y.name}
-      type={kit.a11y.type}
-      inputMode={kit.a11y.inputMode}
-      autoComplete={kit.a11y.autoComplete}
-      placeholder={kit.a11y.placeholder}
-      disabled={kit.a11y.disabled}
-      readOnly={kit.a11y.readOnly}
-      required={kit.a11y.required}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-invalid={kit.a11y.ariaInvalid}
-      aria-describedby={kit.a11y.ariaDescribedBy}
       value={props.value}
       defaultValue={props.defaultValue}
       onChange={handleChange}

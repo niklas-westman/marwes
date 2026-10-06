@@ -1,6 +1,7 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
 import { createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 import { ButtonSpinner } from "../spinner"
 
@@ -21,8 +22,7 @@ export type ButtonProps = ButtonOptions & {
 export function Button(props: ButtonProps) {
   const kit = createButtonRecipe(props)
 
-  // React names the attribute tabIndex; the helper emits the HTML name
-  const { tabindex: tabIndex, ...htmlAttributes } = toButtonHtmlAttributes(kit.a11y)
+  const htmlAttributes = toReactAttributes(toButtonHtmlAttributes(kit.a11y))
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className
 
@@ -68,7 +68,6 @@ export function Button(props: ButtonProps) {
   return (
     <a
       {...htmlAttributes}
-      tabIndex={tabIndex}
       className={className}
       style={style}
       // biome-ignore lint/a11y/useValidAnchor: href and role come from the spread a11y attributes; a disabled link intentionally has neither

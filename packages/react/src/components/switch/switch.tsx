@@ -1,6 +1,7 @@
-import { createSwitchRecipe } from "@marwes-ui/core"
+import { createSwitchRecipe, toSwitchHtmlAttributes } from "@marwes-ui/core"
 import type { SwitchOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export type SwitchProps = SwitchOptions & {
   /** Label text rendered next to the toggle */
@@ -27,17 +28,14 @@ export function Switch(props: SwitchProps): React.ReactElement {
     onCheckedChange?.(!a11y.ariaChecked)
   }
 
+  const htmlAttributes = toReactAttributes(toSwitchHtmlAttributes(a11y))
+
   return (
     <button
+      {...htmlAttributes}
       id={id}
       type="button"
-      role={a11y.role}
       disabled={isDisabled}
-      aria-checked={a11y.ariaChecked}
-      aria-disabled={a11y.ariaDisabled}
-      aria-label={a11y.ariaLabel}
-      aria-labelledby={a11y.ariaLabelledBy}
-      aria-describedby={a11y.ariaDescribedBy}
       className={[kit.className, className].filter(Boolean).join(" ")}
       style={kit.vars}
       onClick={handleClick}

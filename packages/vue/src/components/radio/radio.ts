@@ -1,4 +1,4 @@
-import { radioRecipe } from "@marwes-ui/core"
+import { radioRecipe, toRadioHtmlAttributes } from "@marwes-ui/core"
 import type { RadioOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -61,15 +61,7 @@ export const Radio = defineComponent(
         ...passthroughAttrs,
         type: "radio",
         class: className,
-        id: a11y.id,
-        name: a11y.name,
-        value: a11y.value,
-        disabled: a11y.disabled === true,
-        required: a11y.required === true,
-        "aria-label": a11y.ariaLabel,
-        "aria-labelledby": a11y.ariaLabelledBy,
-        "aria-describedby": a11y.ariaDescribedBy,
-        "aria-invalid": a11y.ariaInvalid === true ? true : undefined,
+        ...toRadioHtmlAttributes(a11y),
         checked: renderKit.checked ?? renderKit.defaultChecked,
         onChange: (event: Event) => {
           props.onChange?.(event)

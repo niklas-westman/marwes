@@ -1,5 +1,5 @@
 import type { CssVars, SliderOptions } from "@marwes-ui/core"
-import { createSliderRecipe } from "@marwes-ui/core"
+import { createSliderRecipe, toSliderHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -151,20 +151,8 @@ export const Slider = defineComponent(
           h("div", { class: "mw-slider__control" }, [
             h("input", {
               ...passthroughAttrs,
-              type: renderKit.a11y.type,
+              ...toSliderHtmlAttributes(renderKit.a11y),
               class: renderKit.inputClassName,
-              id: renderKit.a11y.id,
-              name: renderKit.a11y.name,
-              min: renderKit.a11y.min,
-              max: renderKit.a11y.max,
-              step: renderKit.a11y.step,
-              disabled: renderKit.a11y.disabled === true,
-              required: renderKit.a11y.required === true,
-              "aria-label": renderKit.a11y.ariaLabel,
-              "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-              "aria-describedby": renderKit.a11y.ariaDescribedBy,
-              "aria-valuetext": renderKit.a11y.ariaValueText,
-              "aria-orientation": renderKit.a11y.ariaOrientation,
               value: currentValue.value,
               onInput: (event: Event) => {
                 const target = event.target as HTMLInputElement

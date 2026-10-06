@@ -1,5 +1,5 @@
 import type { CssVars, InputOptions } from "@marwes-ui/core"
-import { createInputRecipe } from "@marwes-ui/core"
+import { createInputRecipe, toInputHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -52,19 +52,7 @@ export const Input = defineComponent(
         ...passthroughAttrs,
         class: className,
         style,
-        id: renderKit.a11y.id,
-        name: renderKit.a11y.name,
-        type: renderKit.a11y.type,
-        inputMode: renderKit.a11y.inputMode,
-        autoComplete: renderKit.a11y.autoComplete,
-        placeholder: renderKit.a11y.placeholder,
-        disabled: renderKit.a11y.disabled,
-        readOnly: renderKit.a11y.readOnly,
-        required: renderKit.a11y.required,
-        "aria-label": renderKit.a11y.ariaLabel,
-        "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-        "aria-invalid": renderKit.a11y.ariaInvalid,
-        "aria-describedby": renderKit.a11y.ariaDescribedBy,
+        ...toInputHtmlAttributes(renderKit.a11y),
         value: inputValue,
         onInput: (event: Event) => {
           const target = event.target as HTMLInputElement

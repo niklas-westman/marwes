@@ -1,4 +1,4 @@
-import { createSwitchRecipe } from "@marwes-ui/core"
+import { createSwitchRecipe, toSwitchHtmlAttributes } from "@marwes-ui/core"
 import type { SwitchOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
@@ -60,12 +60,7 @@ export const Switch = defineComponent(
           class: className,
           style,
           disabled: isDisabled,
-          role: a11y.role,
-          "aria-checked": a11y.ariaChecked,
-          "aria-disabled": a11y.ariaDisabled,
-          "aria-label": a11y.ariaLabel,
-          "aria-labelledby": a11y.ariaLabelledBy,
-          "aria-describedby": a11y.ariaDescribedBy,
+          ...toSwitchHtmlAttributes(a11y),
           onClick: (event: MouseEvent) => {
             props.onClick?.(event)
 

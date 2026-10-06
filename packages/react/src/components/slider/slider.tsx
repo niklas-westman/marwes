@@ -1,7 +1,8 @@
 import type { CssVars, SliderOptions } from "@marwes-ui/core"
-import { createSliderRecipe } from "@marwes-ui/core"
+import { createSliderRecipe, toSliderHtmlAttributes } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -128,25 +129,15 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     onValueChange?.(nextValue)
   }
 
+  const htmlAttributes = toReactAttributes(toSliderHtmlAttributes(kit.a11y))
+
   return (
     <div className={className} style={style} {...kit.dataAttributes}>
       <div className="mw-slider__control">
         <input
+          {...htmlAttributes}
           {...inputProps}
           ref={ref}
-          type={kit.a11y.type}
-          id={kit.a11y.id}
-          name={kit.a11y.name}
-          min={kit.a11y.min}
-          max={kit.a11y.max}
-          step={kit.a11y.step}
-          disabled={kit.a11y.disabled === true}
-          required={kit.a11y.required === true}
-          aria-label={kit.a11y.ariaLabel}
-          aria-labelledby={kit.a11y.ariaLabelledBy}
-          aria-describedby={kit.a11y.ariaDescribedBy}
-          aria-valuetext={kit.a11y.ariaValueText}
-          aria-orientation={kit.a11y.ariaOrientation}
           className={kit.inputClassName}
           value={currentValue}
           onChange={handleChange}
