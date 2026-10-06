@@ -3,7 +3,10 @@ import {
   type DatePickerDevice,
   type DatePickerOptions,
   createDatePickerRecipe,
+  toDatePickerDayHtmlAttributes,
+  toDatePickerGridHtmlAttributes,
   toDatePickerHtmlAttributes,
+  toDatePickerNavButtonHtmlAttributes,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
@@ -96,7 +99,7 @@ export const DatePicker = defineComponent(
                 {
                   type: "button",
                   class: kit.slots.navButtonClassName,
-                  "aria-label": kit.labels.previousYear,
+                  ...toDatePickerNavButtonHtmlAttributes(kit.nav.previousYear),
                   onClick: () => emit("previousYear"),
                 },
                 "«",
@@ -106,7 +109,7 @@ export const DatePicker = defineComponent(
                 {
                   type: "button",
                   class: kit.slots.navButtonClassName,
-                  "aria-label": kit.labels.previousMonth,
+                  ...toDatePickerNavButtonHtmlAttributes(kit.nav.previousMonth),
                   onClick: () => emit("previousMonth"),
                 },
                 "‹",
@@ -119,7 +122,7 @@ export const DatePicker = defineComponent(
                 {
                   type: "button",
                   class: kit.slots.navButtonClassName,
-                  "aria-label": kit.labels.nextMonth,
+                  ...toDatePickerNavButtonHtmlAttributes(kit.nav.nextMonth),
                   onClick: () => emit("nextMonth"),
                 },
                 "›",
@@ -129,66 +132,69 @@ export const DatePicker = defineComponent(
                 {
                   type: "button",
                   class: kit.slots.navButtonClassName,
-                  "aria-label": kit.labels.nextYear,
+                  ...toDatePickerNavButtonHtmlAttributes(kit.nav.nextYear),
                   onClick: () => emit("nextYear"),
                 },
                 "»",
               ),
             ]),
           ]),
-          h("table", { class: kit.slots.gridClassName, "aria-label": kit.monthLabel }, [
-            h("thead", [
+          h(
+            "table",
+            { class: kit.slots.gridClassName, ...toDatePickerGridHtmlAttributes(kit.grid.a11y) },
+            [
+              h("thead", [
+                h(
+                  "tr",
+                  { class: "mw-date-picker__weekdays" },
+                  kit.weekdayLabels.map((weekday) =>
+                    h(
+                      "th",
+                      { key: weekday, class: kit.slots.weekdayClassName, scope: "col" },
+                      weekday,
+                    ),
+                  ),
+                ),
+              ]),
               h(
-                "tr",
-                { class: "mw-date-picker__weekdays" },
-                kit.weekdayLabels.map((weekday) =>
+                "tbody",
+                kit.weeks.map((week, weekIndex) =>
                   h(
-                    "th",
-                    { key: weekday, class: kit.slots.weekdayClassName, scope: "col" },
-                    weekday,
+                    "tr",
+                    {
+                      key: week.map((day) => day.date ?? day.label).join("-"),
+                      class: kit.slots.weekClassName,
+                    },
+                    week.map((day: DatePickerDay, dayIndex: number) => {
+                      const dayKit = kit.dayKits[weekIndex]?.[dayIndex]
+                      if (!dayKit) return null
+                      return h(
+                        "td",
+                        {
+                          key: day.date ?? `${weekIndex}-${dayIndex}`,
+                          class: kit.slots.cellClassName,
+                        },
+                        [
+                          h(
+                            "button",
+                            {
+                              type: "button",
+                              ...dayKit.dataAttributes,
+                              class: dayKit.className,
+                              ...toDatePickerDayHtmlAttributes(dayKit.a11y),
+                              disabled: dayKit.disabled,
+                              onClick: () => emit("daySelect", day),
+                            },
+                            day.label,
+                          ),
+                        ],
+                      )
+                    }),
                   ),
                 ),
               ),
-            ]),
-            h(
-              "tbody",
-              kit.weeks.map((week, weekIndex) =>
-                h(
-                  "tr",
-                  {
-                    key: week.map((day) => day.date ?? day.label).join("-"),
-                    class: kit.slots.weekClassName,
-                  },
-                  week.map((day: DatePickerDay, dayIndex: number) => {
-                    const dayKit = kit.dayKits[weekIndex]?.[dayIndex]
-                    if (!dayKit) return null
-                    return h(
-                      "td",
-                      {
-                        key: day.date ?? `${weekIndex}-${dayIndex}`,
-                        class: kit.slots.cellClassName,
-                      },
-                      [
-                        h(
-                          "button",
-                          {
-                            type: "button",
-                            ...dayKit.dataAttributes,
-                            class: dayKit.className,
-                            "aria-label": dayKit.ariaLabel,
-                            "aria-pressed": dayKit.selected ? "true" : undefined,
-                            disabled: dayKit.disabled,
-                            onClick: () => emit("daySelect", day),
-                          },
-                          day.label,
-                        ),
-                      ],
-                    )
-                  }),
-                ),
-              ),
-            ),
-          ]),
+            ],
+          ),
           h("footer", { class: kit.slots.footerClassName }, [
             h(
               "button",

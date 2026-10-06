@@ -1,4 +1,4 @@
-import { resolveDatePickerDayLabel } from "./date-picker-a11y"
+import { resolveDatePickerDayA11y, resolveDatePickerDayLabel } from "./date-picker-a11y"
 import type {
   DatePickerDay,
   DatePickerDayRenderKit,
@@ -92,6 +92,7 @@ function createDayKit(day: DatePickerDay): DatePickerDayRenderKit {
       ...(day.isToday ? { "data-today": "true" } : {}),
     },
     ariaLabel: resolveDatePickerDayLabel(day),
+    a11y: resolveDatePickerDayA11y(day, { selected, isEmpty }),
     disabled,
     selected,
     isEmpty,
@@ -115,6 +116,13 @@ export function createDatePickerRecipe(opts: DatePickerOptions = {}): DatePicker
       "data-device": device,
     },
     a11y,
+    nav: {
+      previousYear: { ariaLabel: opts.previousYearLabel ?? "Previous year" },
+      previousMonth: { ariaLabel: opts.previousMonthLabel ?? "Previous month" },
+      nextMonth: { ariaLabel: opts.nextMonthLabel ?? "Next month" },
+      nextYear: { ariaLabel: opts.nextYearLabel ?? "Next year" },
+    },
+    grid: { a11y: { ariaLabel: opts.monthLabel ?? "March 2026" } },
     monthLabel: opts.monthLabel ?? "March 2026",
     weekdayLabels: opts.weekdayLabels ?? defaultWeekdayLabels,
     weeks,

@@ -1,5 +1,11 @@
 <script lang="ts">
-  import { createDatePickerRecipe, toDatePickerHtmlAttributes } from "@marwes-ui/core";
+  import {
+    createDatePickerRecipe,
+    toDatePickerHtmlAttributes,
+    toDatePickerDayHtmlAttributes,
+    toDatePickerGridHtmlAttributes,
+    toDatePickerNavButtonHtmlAttributes,
+  } from "@marwes-ui/core";
   import type { DatePickerOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { DatePickerProps } from "./types.js";
@@ -61,17 +67,17 @@
 >
   <header class={kit.slots.headerClassName}>
     <div class={kit.slots.navGroupClassName}>
-      <button type="button" class={kit.slots.navButtonClassName} aria-label={kit.labels.previousYear} onclick={onpreviousyear}>«</button>
-      <button type="button" class={kit.slots.navButtonClassName} aria-label={kit.labels.previousMonth} onclick={onpreviousmonth}>‹</button>
+      <button type="button" class={kit.slots.navButtonClassName} {...toDatePickerNavButtonHtmlAttributes(kit.nav.previousYear)} onclick={onpreviousyear}>«</button>
+      <button type="button" class={kit.slots.navButtonClassName} {...toDatePickerNavButtonHtmlAttributes(kit.nav.previousMonth)} onclick={onpreviousmonth}>‹</button>
     </div>
     <div class={kit.slots.monthLabelClassName}>{kit.monthLabel}</div>
     <div class={kit.slots.navGroupClassName}>
-      <button type="button" class={kit.slots.navButtonClassName} aria-label={kit.labels.nextMonth} onclick={onnextmonth}>›</button>
-      <button type="button" class={kit.slots.navButtonClassName} aria-label={kit.labels.nextYear} onclick={onnextyear}>»</button>
+      <button type="button" class={kit.slots.navButtonClassName} {...toDatePickerNavButtonHtmlAttributes(kit.nav.nextMonth)} onclick={onnextmonth}>›</button>
+      <button type="button" class={kit.slots.navButtonClassName} {...toDatePickerNavButtonHtmlAttributes(kit.nav.nextYear)} onclick={onnextyear}>»</button>
     </div>
   </header>
 
-  <table class={kit.slots.gridClassName} aria-label={kit.monthLabel}>
+  <table class={kit.slots.gridClassName} {...toDatePickerGridHtmlAttributes(kit.grid.a11y)}>
     <thead>
       <tr class="mw-date-picker__weekdays">
         {#each kit.weekdayLabels as weekday, weekdayIndex (weekdayIndex)}
@@ -89,8 +95,7 @@
                 <button
                   type="button"
                   class={dayKit.className}
-                  aria-label={dayKit.ariaLabel}
-                  aria-pressed={dayKit.selected ? "true" : undefined}
+                  {...toDatePickerDayHtmlAttributes(dayKit.a11y)}
                   disabled={dayKit.disabled}
                   onclick={() => ondayselect?.(day)}
                   {...dayKit.dataAttributes}

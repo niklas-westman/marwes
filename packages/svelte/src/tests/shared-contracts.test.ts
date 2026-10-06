@@ -22,6 +22,7 @@ import { runCheckboxFieldContract } from "../../../../tests/contracts/checkbox-f
 import { runCheckboxGroupFieldContract } from "../../../../tests/contracts/checkbox-group-field.contract"
 import { runCheckboxContract } from "../../../../tests/contracts/checkbox.contract"
 import { runDateOfBirthFieldContract } from "../../../../tests/contracts/date-of-birth-field.contract"
+import { runDatePickerContract } from "../../../../tests/contracts/date-picker.contract"
 import { runDialogModalContract } from "../../../../tests/contracts/dialog-modal.contract"
 import { runDialogContract } from "../../../../tests/contracts/dialog.contract"
 import { runDividerContract } from "../../../../tests/contracts/divider.contract"
@@ -90,6 +91,7 @@ import StatCard from "../lib/components/card/StatCard.svelte"
 import Checkbox from "../lib/components/checkbox/Checkbox.svelte"
 import CheckboxField from "../lib/components/checkbox/CheckboxField.svelte"
 import CheckboxGroupField from "../lib/components/checkbox/CheckboxGroupField.svelte"
+import DatePicker from "../lib/components/date-picker/DatePicker.svelte"
 import ConfirmDialog from "../lib/components/dialog/ConfirmDialog.svelte"
 import DestructiveDialog from "../lib/components/dialog/DestructiveDialog.svelte"
 import Dialog from "../lib/components/dialog/Dialog.svelte"
@@ -720,6 +722,20 @@ runDialogContract("svelte", {
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)
+  },
+})
+
+runDatePickerContract("svelte", {
+  renderDatePicker({ onDaySelect, ...args } = {}) {
+    render(DatePicker, {
+      props: {
+        ...args,
+        ...(onDaySelect ? { ondayselect: (day: { date?: string }) => onDaySelect(day.date) } : {}),
+      },
+    })
+  },
+  async click(element) {
+    await fireEvent.click(element)
   },
 })
 

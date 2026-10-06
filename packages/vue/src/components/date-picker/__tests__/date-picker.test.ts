@@ -4,7 +4,22 @@
  */
 import { cleanup, fireEvent, render, screen } from "@testing-library/vue"
 import { afterEach, describe, expect, it, vi } from "vitest"
+import { runDatePickerContract } from "../../../../../../tests/contracts/date-picker.contract"
 import { DatePicker } from "../date-picker"
+
+runDatePickerContract("vue", {
+  renderDatePicker({ onDaySelect, ...args } = {}) {
+    render(DatePicker, {
+      props: {
+        ...args,
+        ...(onDaySelect ? { onDaySelect: (day: { date?: string }) => onDaySelect(day.date) } : {}),
+      },
+    })
+  },
+  async click(element) {
+    await fireEvent.click(element)
+  },
+})
 
 afterEach(cleanup)
 

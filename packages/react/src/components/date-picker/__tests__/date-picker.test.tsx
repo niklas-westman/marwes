@@ -4,7 +4,22 @@
  */
 import { fireEvent, render, screen } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
+import { runDatePickerContract } from "../../../../../../tests/contracts/date-picker.contract"
 import { DatePicker } from "../date-picker"
+
+runDatePickerContract("react", {
+  renderDatePicker({ onDaySelect, ...args } = {}) {
+    render(
+      <DatePicker
+        {...args}
+        {...(onDaySelect ? { onDaySelect: (day) => onDaySelect(day.date) } : {})}
+      />,
+    )
+  },
+  async click(element) {
+    await fireEvent.click(element)
+  },
+})
 
 describe("DatePicker", () => {
   it("renders the shared date picker contract", () => {
