@@ -8,6 +8,7 @@ import type * as React from "react"
 import { describe, expect, it, vi } from "vitest"
 import { runInputOtpContract } from "../../../../../../tests/contracts/input-otp.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { InputOtp } from "../input-otp"
 import { InputOtpField } from "../input-otp-field"
 
 function renderWithProvider(ui: React.ReactElement) {
@@ -15,6 +16,15 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runInputOtpContract("react", {
+  renderInputOtpOptions(options) {
+    renderWithProvider(<InputOtp {...options} />)
+  },
+  getInputOtpParts() {
+    return {
+      root: document.querySelector(".mw-input-otp") as HTMLElement,
+      input: document.querySelector("input.mw-input-otp__input") as HTMLInputElement,
+    }
+  },
   async renderInputOtp(args = {}) {
     const inputOtpProps = {
       label: args.label ?? "Verification code",

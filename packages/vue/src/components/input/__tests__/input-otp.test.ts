@@ -8,6 +8,7 @@ import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
 import { runInputOtpContract } from "../../../../../../tests/contracts/input-otp.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { InputOtp } from "../input-otp"
 import { InputOtpField, type InputOtpFieldProps } from "../input-otp-field"
 
 function renderWithProvider(props: InputOtpFieldProps) {
@@ -21,6 +22,22 @@ function renderWithProvider(props: InputOtpFieldProps) {
 }
 
 runInputOtpContract("vue", {
+  renderInputOtpOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(InputOtp as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getInputOtpParts() {
+    return {
+      root: document.querySelector(".mw-input-otp") as HTMLElement,
+      input: document.querySelector("input.mw-input-otp__input") as HTMLInputElement,
+    }
+  },
   async renderInputOtp(args = {}) {
     const props = {
       label: args.label ?? "Verification code",

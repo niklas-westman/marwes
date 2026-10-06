@@ -99,6 +99,7 @@ import InfoDialog from "../lib/components/dialog/InfoDialog.svelte"
 import Divider from "../lib/components/divider/Divider.svelte"
 import Icon from "../lib/components/icon/Icon.svelte"
 import Input from "../lib/components/input/Input.svelte"
+import InputOtp from "../lib/components/input/InputOtp.svelte"
 import RichText from "../lib/components/input/RichText.svelte"
 import Select from "../lib/components/input/Select.svelte"
 import Textarea from "../lib/components/input/Textarea.svelte"
@@ -1004,6 +1005,15 @@ runDateOfBirthFieldContract("svelte", {
 })
 
 runInputOtpContract("svelte", {
+  renderInputOtpOptions(options) {
+    render(WithProviderFixture, { props: { Component: InputOtp, props: { ...options } } })
+  },
+  getInputOtpParts() {
+    return {
+      root: document.querySelector(".mw-input-otp") as HTMLElement,
+      input: document.querySelector("input.mw-input-otp__input") as HTMLInputElement,
+    }
+  },
   renderInputOtp(args = {}) {
     render(InputOtpContractFixture, {
       props: {
@@ -1143,6 +1153,15 @@ runRadioGroupFieldContract("svelte", {
 })
 
 runRichTextContract("svelte", {
+  renderRichTextOptions(options) {
+    render(RichText, { props: { ...options } })
+  },
+  getRichTextParts() {
+    return {
+      root: document.querySelector(".mw-rich-text") as HTMLElement,
+      editor: document.querySelector('[role="textbox"]') as HTMLElement,
+    }
+  },
   renderRichText(args = {}) {
     render(RichText, {
       props: {
@@ -1596,6 +1615,12 @@ runZipCodeFieldContract("svelte", {
 })
 
 runToastContract("svelte", {
+  renderToastOptions(options) {
+    renderWithText(Toast, { ondismiss: () => {}, ...options }, "Saved")
+  },
+  getToastRoot() {
+    return document.querySelector('[data-component="toast"]') as HTMLElement
+  },
   renderRawToast(args = {}) {
     renderWithText(
       Toast,
@@ -1633,6 +1658,7 @@ runToastContract("svelte", {
           ...(toast.action !== undefined ? { action: actionSnippet(toast.action) } : {}),
         })),
         ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
+        ...(args.placement !== undefined ? { placement: args.placement } : {}),
         ...(args.onDismiss !== undefined ? { ondismiss: args.onDismiss } : {}),
       },
     })

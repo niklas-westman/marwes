@@ -17,6 +17,16 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runToastContract("react", {
+  renderToastOptions(options) {
+    renderWithProvider(
+      <Toast onDismiss={() => {}} {...options}>
+        Saved
+      </Toast>,
+    )
+  },
+  getToastRoot() {
+    return document.querySelector('[data-component="toast"]') as HTMLElement
+  },
   renderRawToast(args) {
     renderWithProvider(
       <Toast
@@ -49,6 +59,7 @@ runToastContract("react", {
           ...(action !== undefined ? { action: <button type="button">{action}</button> } : {}),
         }))}
         {...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {})}
+        {...(args.placement !== undefined ? { placement: args.placement } : {})}
         {...(args.onDismiss ? { onDismiss: args.onDismiss } : {})}
       />,
     )

@@ -29,6 +29,22 @@ function renderVariantWithProvider(component: unknown, children: string) {
 }
 
 runToastContract("vue", {
+  renderToastOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(Toast as never, { onDismiss: () => {}, ...options }, { default: () => "Saved" }),
+            })
+        },
+      }),
+    )
+  },
+  getToastRoot() {
+    return document.querySelector('[data-component="toast"]') as HTMLElement
+  },
   async renderRawToast(args) {
     render(
       defineComponent({
@@ -86,6 +102,7 @@ runToastContract("vue", {
                       : {}),
                   })),
                   ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
+                  ...(args.placement !== undefined ? { placement: args.placement } : {}),
                   ...(args.onDismiss ? { onDismiss: args.onDismiss } : {}),
                 }),
             })

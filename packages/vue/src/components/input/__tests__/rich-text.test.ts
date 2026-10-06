@@ -30,6 +30,22 @@ function renderWithProvider(component: Component, props: Record<string, unknown>
 }
 
 runRichTextContract("vue", {
+  renderRichTextOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(RichText as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getRichTextParts() {
+    return {
+      root: document.querySelector(".mw-rich-text") as HTMLElement,
+      editor: document.querySelector('[role="textbox"]') as HTMLElement,
+    }
+  },
   async renderRichText(args = {}) {
     const props = {
       ariaLabel: args.ariaLabel ?? "Rich text",
