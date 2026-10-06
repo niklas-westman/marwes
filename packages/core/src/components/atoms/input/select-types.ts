@@ -64,3 +64,31 @@ export function resolveSelectMode(args: Pick<SelectOptions, "native" | "appearan
 
   return args.appearance ?? "marwes"
 }
+
+/** ARIA fields for the custom (non-native) select trigger, which acts as a combobox. */
+export interface SelectComboboxA11yProps {
+  role: "combobox"
+  ariaControls: string
+  ariaExpanded: boolean
+  ariaHaspopup: "listbox"
+  ariaLabel?: string
+  ariaLabelledBy?: string
+  ariaDescribedBy?: string
+  ariaInvalid?: true
+  ariaRequired?: true
+  ariaActivedescendant?: string
+}
+
+export interface SelectListboxA11yProps {
+  id: string
+  role: "listbox"
+  tabIndex: -1
+}
+
+export interface SelectOptionA11yProps {
+  id: string
+  role: "option"
+  ariaSelected: boolean
+  ariaDisabled?: true
+  tabIndex: -1
+}

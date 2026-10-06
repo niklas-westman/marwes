@@ -1147,6 +1147,9 @@ runSelectFieldContract("svelte", {
           ...(args.select?.native !== undefined ? { native: args.select.native } : {}),
           ...(args.select?.name !== undefined ? { name: args.select.name } : {}),
           ...(args.select?.disabled !== undefined ? { disabled: args.select.disabled } : {}),
+          ...(args.select?.ariaLabelledBy !== undefined
+            ? { ariaLabelledBy: args.select.ariaLabelledBy }
+            : {}),
         },
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),

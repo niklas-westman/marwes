@@ -61,3 +61,25 @@ export { toInputOtpHtmlAttributes } from "./input-otp-html-attributes"
 export type { InputOtpHtmlAttributes } from "./input-otp-html-attributes"
 export { toRichTextHtmlAttributes } from "./rich-text-html-attributes"
 export type { RichTextHtmlAttributes } from "./rich-text-html-attributes"
+export {
+  getSelectListboxId,
+  getSelectOptionId,
+  resolveSelectComboboxA11y,
+  resolveSelectOptionA11y,
+} from "./select-combobox-a11y"
+export type { SelectComboboxA11yOptions } from "./select-combobox-a11y"
+export {
+  toSelectComboboxHtmlAttributes,
+  toSelectListboxHtmlAttributes,
+  toSelectOptionHtmlAttributes,
+} from "./select-combobox-html-attributes"
+export type {
+  SelectComboboxHtmlAttributes,
+  SelectListboxHtmlAttributes,
+  SelectOptionHtmlAttributes,
+} from "./select-combobox-html-attributes"
+export type {
+  SelectComboboxA11yProps,
+  SelectListboxA11yProps,
+  SelectOptionA11yProps,
+} from "./select-types"

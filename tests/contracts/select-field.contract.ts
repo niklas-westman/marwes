@@ -14,6 +14,7 @@ export type SelectFieldContractHarness = {
       native?: boolean
       name?: string
       disabled?: boolean
+      ariaLabelledBy?: string
     }
   }): Promise<void> | void
   getByRole(role: "combobox", options: { name: RegExp }): HTMLElement
@@ -121,6 +122,22 @@ export function runSelectFieldContract(adapterName: string, h: SelectFieldContra
       for (const id of referencedIds) {
         expect(document.getElementById(id)).not.toBeNull()
       }
+    })
+
+    it("custom select labels the combobox by an external element instead of a generated name", async () => {
+      await h.renderSelectField({ label: "Country", select: { ariaLabelledBy: "external-label" } })
+
+      const control = h.getByRole("combobox", { name: /.*/ })
+      expect(control).toHaveAttribute("aria-labelledby", "external-label")
+      expect(control).not.toHaveAttribute("aria-label")
+    })
+
+    it("custom select generates its accessible name from the field label by default", async () => {
+      await h.renderSelectField({ label: "Country" })
+
+      const control = h.getByRole("combobox", { name: /country/i })
+      expect(control).toHaveAttribute("aria-label", "Country")
+      expect(control).not.toHaveAttribute("aria-labelledby")
     })
   })
 }
