@@ -860,7 +860,7 @@ runInputContract("svelte", {
         ariaLabel: args.ariaLabel ?? "Input",
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         ...(args.onValueChange !== undefined
           ? {
               oninput: (event: Event & { currentTarget: HTMLInputElement }) =>
@@ -1006,7 +1006,7 @@ runRadioContract("svelte", {
       props: {
         ariaLabel: args.ariaLabel ?? "Radio",
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
-        ...(args.defaultChecked !== undefined ? { checked: args.defaultChecked } : {}),
+        ...(args.defaultChecked !== undefined ? { defaultChecked: args.defaultChecked } : {}),
         ...(args.onCheckedChange !== undefined ? { oncheckedchange: args.onCheckedChange } : {}),
       },
     })
@@ -1112,7 +1112,7 @@ runSelectContract("svelte", {
       props: {
         ariaLabel: args.ariaLabel ?? "Select",
         options: args.options ?? defaultSelectOptions,
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.required !== undefined ? { required: args.required } : {}),
         ...(args.placeholder !== undefined ? { placeholder: args.placeholder } : {}),
@@ -1241,7 +1241,7 @@ runSliderContract("svelte", {
       ...(args.max !== undefined ? { max: args.max } : {}),
       ...(args.step !== undefined ? { step: args.step } : {}),
       ...(args.value !== undefined ? { value: args.value } : {}),
-      ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+      ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
       ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
@@ -1274,9 +1274,9 @@ runSliderContract("svelte", {
           ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
           ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
           ...(args.onValueChange !== undefined ? { onvaluechange: args.onValueChange } : {}),
+          ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         },
         ...(args.value !== undefined ? { value: args.value } : {}),
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
@@ -1383,7 +1383,7 @@ runTextareaContract("svelte", {
         ariaLabel: args.ariaLabel ?? "Textarea",
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         ...(args.onValueChange !== undefined
           ? {
               oninput: (event: Event & { currentTarget: HTMLTextAreaElement }) =>

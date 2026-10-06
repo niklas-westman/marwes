@@ -4,7 +4,8 @@
   import type { RadioProps } from "./types.js";
 
   let {
-    checked = $bindable(false),
+    defaultChecked,
+    checked = $bindable(defaultChecked ?? false),
     onchange,
     oncheckedchange,
     class: className,

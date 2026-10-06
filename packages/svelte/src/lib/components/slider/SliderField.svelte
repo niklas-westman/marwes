@@ -18,7 +18,7 @@
     labelPosition = "top",
     showEdgeValues = true,
     dataAttributes,
-    value = $bindable(50),
+    value = $bindable(),
     class: className,
   }: SliderFieldProps = $props();
 

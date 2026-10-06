@@ -5,7 +5,8 @@
   import type { TextareaProps } from "./types.js";
 
   let {
-    value = $bindable(""),
+    defaultValue,
+    value = $bindable(defaultValue ?? ""),
     oninput,
     class: className,
     style,

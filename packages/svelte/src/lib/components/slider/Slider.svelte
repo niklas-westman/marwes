@@ -5,7 +5,7 @@
   import type { SliderProps } from "./types.js";
 
   let {
-    value = $bindable(50),
+    value = $bindable(),
     oninput,
     onvaluechange,
     class: className,
@@ -17,7 +17,7 @@
 
   const kit = $derived(createSliderRecipe({
     ...options,
-    value,
+    ...(value !== undefined ? { value } : {}),
     ...(ariaDescribedBy ? { ariaDescribedBy } : {}),
   }));
   const mergedClass = $derived(mergeClass(kit.className, className));

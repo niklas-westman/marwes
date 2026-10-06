@@ -5,7 +5,8 @@
   import type { InputProps } from "./types.js";
 
   let {
-    value = $bindable(""),
+    defaultValue,
+    value = $bindable(defaultValue ?? ""),
     oninput,
     class: className,
     style,

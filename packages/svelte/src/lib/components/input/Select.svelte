@@ -4,7 +4,8 @@
   import type { SelectProps } from "./types.js";
 
   let {
-    value = $bindable(""),
+    defaultValue,
+    value = $bindable(defaultValue ?? ""),
     onchange,
     onvaluechange,
     class: className,
