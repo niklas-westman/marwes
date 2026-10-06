@@ -22,6 +22,9 @@ function renderWithProvider(props: SelectFieldProps) {
 }
 
 runSelectFieldContract("vue", {
+  queryProxyInput() {
+    return document.querySelector<HTMLInputElement>(".mw-select-field__proxy-input")
+  },
   async renderSelectField(args) {
     const props = {
       label: args.label,

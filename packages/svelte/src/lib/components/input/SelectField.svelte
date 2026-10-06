@@ -343,6 +343,7 @@
             class="mw-select-field__proxy-input"
             name={select.name}
             type="hidden"
+            disabled={select.disabled}
             {value}
             readonly
           />

@@ -16,6 +16,9 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSelectFieldContract("react", {
+  queryProxyInput() {
+    return document.querySelector<HTMLInputElement>(".mw-select-field__proxy-input")
+  },
   async renderSelectField(args) {
     const fieldProps = {
       label: args.label,

@@ -435,6 +435,7 @@ export const SelectField = defineComponent(
                         class: "mw-select-field__proxy-input",
                         name: sourceSelect.value.name,
                         type: "hidden",
+                        disabled: sourceSelect.value.disabled,
                         value: currentValue.value,
                         readonly: true,
                       })

@@ -12,12 +12,16 @@ export type SelectFieldContractHarness = {
     ariaDescribedBy?: string
     select?: {
       native?: boolean
+      name?: string
+      disabled?: boolean
     }
   }): Promise<void> | void
   getByRole(role: "combobox", options: { name: RegExp }): HTMLElement
   getByText(text: string): HTMLElement
   queryHelperRegion(): HTMLElement | null
   queryErrorRegion(): HTMLElement | null
+  /** The hidden input a custom (non-native) select uses to take part in form submission. */
+  queryProxyInput(): HTMLInputElement | null
 }
 
 export function runSelectFieldContract(adapterName: string, h: SelectFieldContractHarness): void {
@@ -83,6 +87,21 @@ export function runSelectFieldContract(adapterName: string, h: SelectFieldContra
       expect(control).toHaveAttribute("aria-describedby", "external-help")
       expect(h.queryHelperRegion()).toBeNull()
       expect(h.queryErrorRegion()).toBeNull()
+    })
+
+    it("custom select takes part in form submission through a named hidden input", async () => {
+      await h.renderSelectField({ label: "Country", select: { name: "country" } })
+
+      const proxy = h.queryProxyInput()
+      expect(proxy).not.toBeNull()
+      expect(proxy).toHaveAttribute("name", "country")
+      expect(proxy).not.toBeDisabled()
+    })
+
+    it("disabled custom select does not submit its value", async () => {
+      await h.renderSelectField({ label: "Country", select: { name: "country", disabled: true } })
+
+      expect(h.queryProxyInput()).toBeDisabled()
     })
   })
 }

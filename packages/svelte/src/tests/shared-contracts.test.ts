@@ -1135,6 +1135,9 @@ runSelectContract("svelte", {
 })
 
 runSelectFieldContract("svelte", {
+  queryProxyInput() {
+    return document.querySelector<HTMLInputElement>(".mw-select-field__proxy-input")
+  },
   renderSelectField(args) {
     render(SelectFieldContractFixture, {
       props: {
@@ -1142,6 +1145,8 @@ runSelectFieldContract("svelte", {
         select: {
           options: defaultSelectOptions,
           ...(args.select?.native !== undefined ? { native: args.select.native } : {}),
+          ...(args.select?.name !== undefined ? { name: args.select.name } : {}),
+          ...(args.select?.disabled !== undefined ? { disabled: args.select.disabled } : {}),
         },
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),

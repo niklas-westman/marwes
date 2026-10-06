@@ -307,6 +307,7 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
           className="mw-select-field__proxy-input"
           name={select.name}
           type="hidden"
+          disabled={select.disabled}
           value={value}
           readOnly
         />
