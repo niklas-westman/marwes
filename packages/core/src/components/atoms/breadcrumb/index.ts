@@ -19,3 +19,17 @@ export type {
   BreadcrumbRenderKit,
   BreadcrumbSeparatorA11yProps,
 } from "./breadcrumb-types"
+export {
+  toBreadcrumbHtmlAttributes,
+  toBreadcrumbListHtmlAttributes,
+  toBreadcrumbSeparatorHtmlAttributes,
+  toBreadcrumbItemHtmlAttributes,
+  toBreadcrumbHomeHtmlAttributes,
+} from "./breadcrumb-html-attributes"
+export type {
+  BreadcrumbHtmlAttributes,
+  BreadcrumbListHtmlAttributes,
+  BreadcrumbSeparatorHtmlAttributes,
+  BreadcrumbItemHtmlAttributes,
+  BreadcrumbHomeHtmlAttributes,
+} from "./breadcrumb-html-attributes"

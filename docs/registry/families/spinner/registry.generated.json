@@ -19,6 +19,7 @@
     "core": [
       "packages/core/src/components/atoms/spinner/index.ts",
       "packages/core/src/components/atoms/spinner/spinner-a11y.ts",
+      "packages/core/src/components/atoms/spinner/spinner-html-attributes.ts",
       "packages/core/src/components/atoms/spinner/spinner-recipe.ts",
       "packages/core/src/components/atoms/spinner/spinner-svg.ts",
       "packages/core/src/components/atoms/spinner/spinner-types.ts"

@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
 import { runTabContract } from "../../../../../../tests/contracts/tab.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Tab } from "../tab"
 import { TabGroup, type TabGroupProps } from "../tab-group"
 
 function renderTabGroup(props: TabGroupProps & Record<string, unknown>) {
@@ -24,6 +25,18 @@ function renderTabGroup(props: TabGroupProps & Record<string, unknown>) {
 }
 
 runTabContract("vue", {
+  renderTabOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () => h(MarwesProvider, null, { default: () => h(Tab as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getTabRoot() {
+    return document.querySelector("button.mw-tab") as HTMLElement
+  },
   async renderTabGroup(args = {}) {
     renderTabGroup({
       ...(args.label !== undefined ? { label: args.label } : {}),

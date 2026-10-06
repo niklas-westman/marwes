@@ -15,17 +15,20 @@
     "roadmap": [],
     "core": [
       "packages/core/src/components/atoms/context-menu/context-menu-a11y.ts",
+      "packages/core/src/components/atoms/context-menu/context-menu-html-attributes.ts",
       "packages/core/src/components/atoms/context-menu/context-menu-recipe.ts",
       "packages/core/src/components/atoms/context-menu/context-menu-types.ts",
       "packages/core/src/components/atoms/context-menu/index.ts"
     ],
     "presets": ["packages/presets/src/firstEdition/context-menu.css"],
     "react": [
+      "packages/react/src/components/context-menu/__tests__/context-menu-contract.test.tsx",
       "packages/react/src/components/context-menu/__tests__/context-menu.test.tsx",
       "packages/react/src/components/context-menu/context-menu.tsx",
       "packages/react/src/components/context-menu/index.ts"
     ],
     "vue": [
+      "packages/vue/src/components/context-menu/__tests__/context-menu-contract.test.ts",
       "packages/vue/src/components/context-menu/__tests__/context-menu.test.ts",
       "packages/vue/src/components/context-menu/context-menu.ts",
       "packages/vue/src/components/context-menu/index.ts"

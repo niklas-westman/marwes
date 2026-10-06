@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createContextMenuRecipe } from "@marwes-ui/core";
+  import { createContextMenuRecipe, toContextMenuItemHtmlAttributes, toContextMenuHtmlAttributes, toContextMenuDividerHtmlAttributes } from "@marwes-ui/core";
   import Icon from "../icon/Icon.svelte";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { ContextMenuProps } from "./types.js";
@@ -22,21 +22,17 @@
   const mergedClass = $derived(mergeClass(kit.className, className));
 </script>
 
-<div class={mergedClass} role={kit.a11y.role} aria-label={kit.a11y.ariaLabel} {...kit.dataAttributes}>
+<div class={mergedClass} {...toContextMenuHtmlAttributes(kit.a11y)} {...kit.dataAttributes}>
   {#each kit.items as item (item.key)}
     {#if item.kind === "divider"}
       <div
         class={item.className}
-        role={item.a11y.role}
-        aria-orientation={item.a11y.ariaOrientation}
+        {...toContextMenuDividerHtmlAttributes(item.a11y)}
         {...item.dataAttributes}
       ></div>
     {:else}
       <button
-        type={item.a11y.type}
-        role={item.a11y.role}
-        disabled={item.a11y.disabled}
-        aria-disabled={item.a11y.ariaDisabled}
+        {...toContextMenuItemHtmlAttributes(item.a11y)}
         class={item.className}
         onclick={() => {
           if (item.item.disabled) return;

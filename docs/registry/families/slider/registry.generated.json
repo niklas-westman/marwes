@@ -19,6 +19,7 @@
     "core": [
       "packages/core/src/components/atoms/slider/index.ts",
       "packages/core/src/components/atoms/slider/slider-a11y.ts",
+      "packages/core/src/components/atoms/slider/slider-html-attributes.ts",
       "packages/core/src/components/atoms/slider/slider-recipe.ts",
       "packages/core/src/components/atoms/slider/slider-types.ts"
     ],

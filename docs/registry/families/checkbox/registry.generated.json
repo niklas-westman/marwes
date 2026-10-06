@@ -18,6 +18,7 @@
     ],
     "core": [
       "packages/core/src/components/atoms/checkbox/checkbox-a11y.ts",
+      "packages/core/src/components/atoms/checkbox/checkbox-html-attributes.ts",
       "packages/core/src/components/atoms/checkbox/checkbox-recipe.ts",
       "packages/core/src/components/atoms/checkbox/checkbox-types.ts",
       "packages/core/src/components/atoms/checkbox/index.ts"

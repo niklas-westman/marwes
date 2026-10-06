@@ -4,6 +4,7 @@
 import { fireEvent, render, screen } from "@testing-library/vue"
 import { describe, expect, it, vi } from "vitest"
 import { defineComponent, h } from "vue"
+import { runDrawerContract } from "../../../../../../tests/contracts/drawer.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Drawer } from "../drawer"
 
@@ -19,6 +20,30 @@ function renderWithProvider(child: () => unknown) {
     }),
   )
 }
+
+runDrawerContract("vue", {
+  renderDrawerOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(Drawer as never, {
+                  title: "Title",
+                  footer: "Action",
+                  onClose: () => {},
+                  ...options,
+                }),
+            })
+        },
+      }),
+    )
+  },
+  getDrawerRoot() {
+    return document.querySelector(".mw-drawer") as HTMLElement
+  },
+})
 
 describe("Vue Drawer", () => {
   it("uses the visible title and description as the accessible name and description", () => {

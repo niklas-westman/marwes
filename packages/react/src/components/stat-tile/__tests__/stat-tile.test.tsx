@@ -16,6 +16,12 @@ const defaultProps = {
 } satisfies StatTileProps
 
 runStatTileContract("react", {
+  renderStatTileOptions(options) {
+    render(<StatTile label="Revenue" value="42" trendValue="3%" {...options} />)
+  },
+  getStatTileRoot() {
+    return document.querySelector('[data-component="stat-tile"]') as HTMLElement
+  },
   renderStatTile(args = {}) {
     render(<StatTile {...defaultProps} {...args} />)
   },

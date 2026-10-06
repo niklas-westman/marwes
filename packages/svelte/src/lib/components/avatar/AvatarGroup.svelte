@@ -1,4 +1,9 @@
 <script lang="ts">
+  import {
+    createAvatarGroupRecipe,
+    toAvatarGroupCounterHtmlAttributes,
+    toAvatarGroupHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Avatar from "./Avatar.svelte";
   import type { AvatarProps } from "./types.js";
@@ -27,16 +32,21 @@
     class: className,
   }: AvatarGroupProps = $props();
 
-  const mergedClass = $derived(mergeClass("mw-avatar-group", className));
-  const groupLabel = $derived(ariaLabel ?? label ?? "Avatar group");
-  const shouldRenderOverflow = $derived(overflowCount !== undefined && overflowCount > 0);
-  const resolvedOverflowLabel = $derived(overflowLabel ?? `${overflowCount} more people`);
+  const kit = $derived(
+    createAvatarGroupRecipe({
+      ...(overflowCount !== undefined ? { overflowCount } : {}),
+      ...(overflowLabel !== undefined ? { overflowLabel } : {}),
+      ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+      ...(label !== undefined ? { label } : {}),
+    })
+  );
+  const mergedClass = $derived(mergeClass(kit.className, className));
 </script>
 
 <fieldset
   class={mergedClass}
-  data-component="avatar-group"
-  aria-label={groupLabel}
+  {...kit.dataAttributes}
+  {...toAvatarGroupHtmlAttributes(kit.a11y)}
   {...dataAttributes}
 >
   {#each items as item, i}
@@ -45,9 +55,9 @@
     </span>
   {/each}
 
-  {#if shouldRenderOverflow}
-    <span aria-label={resolvedOverflowLabel} class="mw-avatar-group__counter" role="img">
-      +{overflowCount}
+  {#if kit.counter.visible}
+    <span class="mw-avatar-group__counter" {...toAvatarGroupCounterHtmlAttributes(kit.counter.a11y)}>
+      {kit.counter.text}
     </span>
   {/if}
 </fieldset>

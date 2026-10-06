@@ -1,5 +1,10 @@
-import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core"
+import {
+  buildCheckboxGroupFieldA11yIds,
+  resolveCheckboxGroupFieldA11y,
+  toCheckboxGroupFieldHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Text } from "../text"
 import { Checkbox, type CheckboxProps } from "./checkbox"
 
@@ -113,10 +118,16 @@ export function CheckboxGroupField(props: CheckboxGroupFieldProps): React.ReactE
   return (
     <fieldset
       className={wrapperClass}
-      aria-labelledby={labelId}
-      aria-describedby={describedBy}
-      aria-invalid={isInvalid ? true : undefined}
-      aria-required={props.required ? true : undefined}
+      {...toReactAttributes(
+        toCheckboxGroupFieldHtmlAttributes(
+          resolveCheckboxGroupFieldA11y({
+            labelId,
+            describedBy,
+            invalid: isInvalid,
+            required: props.required,
+          }),
+        ),
+      )}
       disabled={props.disabled ? true : undefined}
       {...props.dataAttributes}
     >

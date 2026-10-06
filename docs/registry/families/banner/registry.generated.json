@@ -15,6 +15,8 @@
     "roadmap": [],
     "core": [
       "packages/core/src/components/atoms/banner/banner-a11y.ts",
+      "packages/core/src/components/atoms/banner/banner-html-attributes.ts",
+      "packages/core/src/components/atoms/banner/banner-option-keys.ts",
       "packages/core/src/components/atoms/banner/banner-recipe.ts",
       "packages/core/src/components/atoms/banner/banner-types.ts",
       "packages/core/src/components/atoms/banner/index.ts"

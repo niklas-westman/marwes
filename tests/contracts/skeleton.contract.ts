@@ -3,6 +3,7 @@
  * circular/rectangular Figma variants, accessible status mode with custom dimensions,
  * and static (no animation) skeletons.
  */
+import type { SkeletonOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type SkeletonVariant = "text" | "circular" | "rectangular"
@@ -21,6 +22,60 @@ export type SkeletonContractHarness = {
   }): Promise<void> | void
   getSkeletonElement(): HTMLElement
   getByRole(role: "status"): HTMLElement
+  /** Renders the base Skeleton with raw core options. */
+  renderSkeletonOptions(options: SkeletonOptions): Promise<void> | void
+  getSkeletonRoot(): HTMLElement
+}
+
+type SkeletonOptionCase = {
+  options: SkeletonOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core SkeletonOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const skeletonOptionCases: Record<keyof SkeletonOptions, SkeletonOptionCase> = {
+  variant: {
+    options: { variant: "circular" },
+    expectRendered: (root) => {
+      expect(root).toHaveClass("mw-skeleton--circular")
+      expect(root).toHaveAttribute("data-variant", "circular")
+    },
+  },
+  width: {
+    options: { width: 80 },
+    expectRendered: (root) =>
+      expect(root.style.getPropertyValue("--mw-skeleton-width")).toBe("80px"),
+  },
+  height: {
+    options: { height: "2rem" },
+    expectRendered: (root) =>
+      expect(root.style.getPropertyValue("--mw-skeleton-height")).toBe("2rem"),
+  },
+  radius: {
+    options: { radius: 8 },
+    expectRendered: (root) =>
+      expect(root.style.getPropertyValue("--mw-skeleton-radius")).toBe("8px"),
+  },
+  animation: {
+    options: { animation: "wave" },
+    expectRendered: (root) => expect(root).toHaveClass("mw-skeleton--wave"),
+  },
+  decorative: {
+    options: { decorative: true },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-hidden", "true"),
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Loading profile" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("role", "status")
+      expect(root).toHaveAttribute("aria-label", "Loading profile")
+    },
+  },
+  id: {
+    options: { id: "skel" },
+    expectRendered: (root) => expect(root).toHaveAttribute("id", "skel"),
+  },
 }
 
 export function runSkeletonContract(adapterName: string, harness: SkeletonContractHarness): void {
@@ -84,6 +139,16 @@ export function runSkeletonContract(adapterName: string, harness: SkeletonContra
       expect(skeleton).toHaveAttribute("data-animation", "none")
       expect(skeleton.className).not.toContain("mw-skeleton--pulse")
       expect(skeleton.className).not.toContain("mw-skeleton--wave")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(skeletonOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderSkeletonOptions(optionCase.options)
+
+        const element = harness.getSkeletonRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

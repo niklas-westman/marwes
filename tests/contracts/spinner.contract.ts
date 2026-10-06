@@ -5,6 +5,7 @@
  * variant class names, size tokens, custom pixel sizes, inner SVG hiding,
  * and explicit decorative flag handling.
  */
+import type { SpinnerOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type SpinnerVariant =
@@ -24,10 +25,54 @@ export type SpinnerContractHarness = {
     size?: SpinnerSize | number
     decorative?: boolean
     ariaLabel?: string
+    label?: string
     id?: string
   }): Promise<void> | void
   getSpinnerElement(): HTMLElement
   getByRole(role: "status"): HTMLElement
+  /** Renders the base Spinner with raw core options. */
+  renderSpinnerOptions(options: SpinnerOptions): Promise<void> | void
+  getSpinnerRoot(): HTMLElement
+}
+
+type SpinnerOptionCase = {
+  options: SpinnerOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core SpinnerOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const spinnerOptionCases: Record<keyof SpinnerOptions, SpinnerOptionCase> = {
+  variant: {
+    options: { variant: "ring" },
+    expectRendered: (root) => expect(root).toHaveClass("mw-spinner--ring"),
+  },
+  size: {
+    options: { size: 56 },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("data-size", "custom")
+      expect(root).toHaveStyle({ "--mw-spinner-size": "56px" })
+    },
+  },
+  decorative: {
+    options: { decorative: true },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-hidden", "true"),
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Loading orders" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("role", "status")
+      expect(root).toHaveAttribute("aria-label", "Loading orders")
+    },
+  },
+  label: {
+    options: { label: "Loading orders" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-label", "Loading orders"),
+  },
+  id: {
+    options: { id: "spin" },
+    expectRendered: (root) => expect(root).toHaveAttribute("id", "spin"),
+  },
 }
 
 export function runSpinnerContract(adapterName: string, harness: SpinnerContractHarness): void {
@@ -89,6 +134,28 @@ export function runSpinnerContract(adapterName: string, harness: SpinnerContract
       const spinner = harness.getSpinnerElement()
       expect(spinner).toHaveAttribute("aria-hidden", "true")
       expect(spinner).not.toHaveAttribute("role")
+    })
+
+    it("uses label as the accessible name when ariaLabel is absent", async () => {
+      await harness.renderSpinner({ label: "Loading orders" })
+
+      expect(harness.getByRole("status")).toHaveAttribute("aria-label", "Loading orders")
+    })
+
+    it("prefers ariaLabel over label", async () => {
+      await harness.renderSpinner({ ariaLabel: "Loading account", label: "Loading orders" })
+
+      expect(harness.getByRole("status")).toHaveAttribute("aria-label", "Loading account")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(spinnerOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderSpinnerOptions(optionCase.options)
+
+        const element = harness.getSpinnerRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

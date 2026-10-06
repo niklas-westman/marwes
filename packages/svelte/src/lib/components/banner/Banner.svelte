@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { createBannerRecipe } from "@marwes-ui/core";
+  import {
+    createBannerRecipe,
+    toBannerHtmlAttributes,
+    toBannerDismissHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { BannerProps } from "./types.js";
 
@@ -10,6 +14,7 @@
     ondismiss,
     class: className,
     id,
+    dataAttributes,
     ...coreProps
   }: BannerProps = $props();
 
@@ -23,10 +28,9 @@
 <div
   {id}
   class={mergedClass}
-  role={kit.root.a11y.role}
-  aria-label={kit.root.a11y.ariaLabel}
-  aria-live={kit.root.a11y.ariaLive}
+  {...toBannerHtmlAttributes(kit.root.a11y)}
   {...kit.root.dataAttributes}
+  {...dataAttributes}
 >
   <div class={kit.content.className}>
     {#if kit.icon.visible}
@@ -60,7 +64,7 @@
     <button
       type="button"
       class={kit.dismiss.className}
-      aria-label={kit.dismiss.ariaLabel}
+      {...toBannerDismissHtmlAttributes(kit.dismiss.a11y)}
       onclick={ondismiss}
     ></button>
   {/if}

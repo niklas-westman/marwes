@@ -1,5 +1,11 @@
-import { type SpinnerOptions, type SpinnerSvgNode, createSpinnerRecipe } from "@marwes-ui/core"
+import {
+  type SpinnerOptions,
+  type SpinnerSvgNode,
+  createSpinnerRecipe,
+  toSpinnerHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SpinnerProps = SpinnerOptions & {
@@ -7,7 +13,7 @@ export type SpinnerProps = SpinnerOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const spinnerPropKeys = [
+const spinnerPropKeys = definePropKeys<SpinnerProps>()([
   "variant",
   "size",
   "decorative",
@@ -16,7 +22,7 @@ const spinnerPropKeys = [
   "id",
   "className",
   "dataAttributes",
-] as const
+])
 
 function renderSpinnerSvgNode(spinnerSvgNode: SpinnerSvgNode, nodeIndex: number) {
   return h(spinnerSvgNode.tag, {
@@ -63,11 +69,7 @@ export const Spinner = defineComponent(
           ...(props.dataAttributes ?? {}),
           class: mergeClassNames(spinnerRenderKit.className, props.className, attrs.class),
           style: mergeStyles(spinnerRenderKit.vars, attrs.style),
-          role: spinnerRenderKit.a11y.role,
-          id: spinnerRenderKit.a11y.id,
-          "aria-hidden": spinnerRenderKit.a11y.ariaHidden ? "true" : undefined,
-          "aria-label": spinnerRenderKit.a11y.ariaLabel,
-          "aria-live": spinnerRenderKit.a11y.ariaLive,
+          ...toSpinnerHtmlAttributes(spinnerRenderKit.a11y),
         },
         [
           h(

@@ -15,6 +15,15 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSliderContract("react", {
+  renderSliderOptions(options) {
+    renderWithProvider(<Slider {...options} />)
+  },
+  getSliderRoot() {
+    return document.querySelector(".mw-slider") as HTMLElement
+  },
+  getSliderInput() {
+    return document.querySelector("input.mw-slider__native") as HTMLInputElement
+  },
   async renderSlider(args = {}) {
     if (args.value !== undefined) {
       const controlledValue = args.value
@@ -23,6 +32,7 @@ runSliderContract("react", {
         const [_renderTick, setRenderTick] = React.useState(0)
         const sliderProps = {
           ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+          ...(args.label !== undefined ? { label: args.label } : {}),
           ...(args.min !== undefined ? { min: args.min } : {}),
           ...(args.max !== undefined ? { max: args.max } : {}),
           ...(args.step !== undefined ? { step: args.step } : {}),
@@ -45,6 +55,7 @@ runSliderContract("react", {
 
     const sliderProps = {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.label !== undefined ? { label: args.label } : {}),
       ...(args.min !== undefined ? { min: args.min } : {}),
       ...(args.max !== undefined ? { max: args.max } : {}),
       ...(args.step !== undefined ? { step: args.step } : {}),

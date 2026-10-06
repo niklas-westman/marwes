@@ -1,10 +1,14 @@
 import {
   type AvatarOptions,
   type AvatarRenderContent,
+  type AvatarRenderKit,
   type CssVars,
   createAvatarRecipe,
+  toAvatarHtmlAttributes,
+  toAvatarInitialsHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -17,7 +21,7 @@ export interface AvatarProps
 
 function renderAvatarContent(
   content: AvatarRenderContent,
-  isOuterShellAccessible: boolean,
+  initialsA11y: AvatarRenderKit["initialsA11y"],
   isDecorative: boolean,
 ): React.ReactNode {
   if (content.type === "image") {
@@ -33,8 +37,8 @@ function renderAvatarContent(
   if (content.type === "initials") {
     return (
       <span
-        aria-hidden={isOuterShellAccessible ? "true" : undefined}
         className="mw-avatar__initials"
+        {...toReactAttributes(toAvatarInitialsHtmlAttributes(initialsA11y))}
       >
         {content.initials}
       </span>
@@ -57,6 +61,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
     iconName,
     decorative,
     ariaLabel,
+    label,
     ...nativeSpanProps
   } = props
 
@@ -71,6 +76,7 @@ export function Avatar(props: AvatarProps): React.ReactElement {
   if (alt !== undefined) avatarOptions.alt = alt
   if (iconName !== undefined) avatarOptions.iconName = iconName
   if (decorative !== undefined) avatarOptions.decorative = decorative
+  if (label !== undefined) avatarOptions.label = label
 
   const resolvedAriaLabel = ariaLabel ?? ariaLabelFromNativeProps
   if (resolvedAriaLabel !== undefined) {
@@ -81,7 +87,6 @@ export function Avatar(props: AvatarProps): React.ReactElement {
 
   const mergedClassName = [kit.className, className].filter(Boolean).join(" ")
   const mergedStyle = { ...(kit.vars as StyleWithVars), ...style }
-  const isOuterShellAccessible = kit.a11y.role === "img"
   const isDecorative = kit.a11y.ariaHidden === true
 
   return (
@@ -91,11 +96,9 @@ export function Avatar(props: AvatarProps): React.ReactElement {
       {...dataAttributes}
       className={mergedClassName}
       style={mergedStyle}
-      role={kit.a11y.role}
-      aria-hidden={isDecorative ? "true" : undefined}
-      aria-label={kit.a11y.ariaLabel}
+      {...toReactAttributes(toAvatarHtmlAttributes(kit.a11y))}
     >
-      {renderAvatarContent(kit.content, isOuterShellAccessible, isDecorative)}
+      {renderAvatarContent(kit.content, kit.initialsA11y, isDecorative)}
     </span>
   )
 }

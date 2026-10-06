@@ -18,6 +18,19 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runProgressBarContract("vue", {
+  renderProgressBarOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(ProgressBar as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getProgressBarRoot() {
+    return document.querySelector('[data-component="progress-bar"]') as HTMLElement
+  },
   async renderProgressBar(args = {}) {
     renderWithProvider(ProgressBar, args)
   },

@@ -3,11 +3,15 @@ import {
   isRichTextHtmlEmpty,
   normalizeRichTextHtml,
   resolveRichTextAllowedFormats,
+  resolveRichTextToolbarButtonA11y,
   richTextCommandByFormat,
+  toRichTextHtmlAttributes,
+  toRichTextToolbarButtonHtmlAttributes,
 } from "@marwes-ui/core"
 import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -15,12 +19,6 @@ type StyleWithVars = React.CSSProperties & CssVars
 export type RichTextProps = RichTextOptions & {
   onValueChange?: (value: string) => void
   className?: string
-}
-
-const formatLabels: Record<RichTextFormat, string> = {
-  bold: "Bold",
-  italic: "Italic",
-  underline: "Underline",
 }
 
 type RichTextCommandDocument = Document & {
@@ -384,8 +382,15 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
                 className="mw-rich-text__toolbar-button"
                 data-format={format}
                 data-active={isActive ? "true" : undefined}
-                aria-label={formatLabels[format]}
-                aria-pressed={isActive}
+                {...toReactAttributes(
+                  toRichTextToolbarButtonHtmlAttributes(
+                    resolveRichTextToolbarButtonA11y({
+                      format,
+                      active: isActive,
+                      labels: props.formatLabels,
+                    }),
+                  ),
+                )}
                 disabled={props.disabled}
                 onMouseDown={(event) => {
                   event.preventDefault()
@@ -407,17 +412,7 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
         data-rich-text-editor
         data-empty={isEditorEmpty ? "true" : undefined}
         data-placeholder={props.placeholder}
-        id={kit.a11y.id}
-        role={kit.a11y.role}
-        tabIndex={kit.a11y.tabIndex}
-        aria-label={kit.a11y.ariaLabel}
-        aria-labelledby={kit.a11y.ariaLabelledBy}
-        aria-describedby={kit.a11y.ariaDescribedBy}
-        aria-invalid={kit.a11y.ariaInvalid}
-        aria-disabled={kit.a11y.ariaDisabled}
-        aria-readonly={kit.a11y.ariaReadOnly}
-        aria-required={kit.a11y.ariaRequired}
-        aria-multiline={kit.a11y.ariaMultiline}
+        {...toReactAttributes(toRichTextHtmlAttributes(kit.a11y))}
         contentEditable={!props.disabled && !props.readOnly}
         suppressContentEditableWarning
         onInput={handleInput}

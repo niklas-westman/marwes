@@ -1,10 +1,11 @@
 import type {
-  FontLoadingConfig,
+  MarwesProviderOptions,
   MwTheme,
   ResolvedTheme,
-  ThemeInput,
+  ThemeAttribute,
   ThemeMode,
   ThemePreference,
+  ThemeTarget,
   ThemeVariableStrategy,
 } from "@marwes-ui/core"
 import {
@@ -15,6 +16,7 @@ import {
   resolveThemePreference,
 } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, onUnmounted, provide, ref, watch } from "vue"
+import { definePropKeys } from "../internal/prop-keys"
 import { marwesContextKey } from "./marwes-context"
 import { applyThemeToElement, loadThemeFonts, themeToRootStyle } from "./runtime-theme"
 import {
@@ -25,24 +27,8 @@ import {
   withoutModeTransitions,
   writeStoredThemePreference,
 } from "./theme-mode-runtime"
-import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime"
 
-export type MarwesProviderProps = {
-  theme?: ThemeInput
-  defaultPreference?: ThemePreference
-  preference?: ThemePreference
-  defaultMode?: ThemeMode
-  mode?: ThemeMode
-  fontLoading?: FontLoadingConfig
-  onPreferenceChange?: (preference: ThemePreference) => void
-  onModeChange?: (mode: ThemeMode) => void
-  storageKey?: string | false
-  enableSystem?: boolean
-  target?: ThemeTarget
-  attribute?: ThemeAttribute
-  disableTransitionOnChange?: boolean
-  variableStrategy?: ThemeVariableStrategy
-}
+export type MarwesProviderProps = MarwesProviderOptions
 
 export type MarwesProviderSlotProps = {
   mwTheme: MwTheme
@@ -51,20 +37,22 @@ export type MarwesProviderSlotProps = {
 export const MarwesProvider = defineComponent({
   name: "MarwesProvider",
   props: [
-    "theme",
-    "defaultPreference",
-    "preference",
-    "defaultMode",
-    "mode",
-    "fontLoading",
-    "onPreferenceChange",
-    "onModeChange",
-    "storageKey",
-    "enableSystem",
-    "target",
-    "attribute",
-    "disableTransitionOnChange",
-    "variableStrategy",
+    ...definePropKeys<MarwesProviderProps>()([
+      "theme",
+      "defaultPreference",
+      "preference",
+      "defaultMode",
+      "mode",
+      "fontLoading",
+      "onPreferenceChange",
+      "onModeChange",
+      "storageKey",
+      "enableSystem",
+      "target",
+      "attribute",
+      "disableTransitionOnChange",
+      "variableStrategy",
+    ]),
   ],
   setup(rawProps, { slots }) {
     const props = rawProps as unknown as MarwesProviderProps

@@ -4,10 +4,11 @@
  * - Supports size override for visual/semantic mismatch.
  */
 
-import { headingRecipe } from "@marwes-ui/core"
+import { headingRecipe, toHeadingHtmlAttributes } from "@marwes-ui/core"
 import type { HeadingOptions, HeadingSize } from "@marwes-ui/core"
 import type { CssVars } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { useTheme } from "../../provider/use-theme"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -66,7 +67,11 @@ export function H2(props: H2Props): React.ReactElement {
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
   return (
-    <h2 id={kit.a11y.id} aria-label={kit.a11y.ariaLabel} className={className} style={style}>
+    <h2
+      {...toReactAttributes(toHeadingHtmlAttributes(kit.a11y))}
+      className={className}
+      style={style}
+    >
       {children}
     </h2>
   )

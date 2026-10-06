@@ -166,12 +166,17 @@ export type ButtonA11yProps = {
   tabIndex?: 0 | -1
 }
 
+export interface ButtonRenderLoading extends ResolvedButtonLoading {
+  /** Filled variants sit on a solid background, so the spinner must contrast against it. */
+  spinnerInverted: boolean
+}
+
 export type ButtonRenderKit = {
   tag: "button" | "a"
   className: string
   vars: CssVars
   a11y: ButtonA11yProps
-  loading: ResolvedButtonLoading
+  loading: ButtonRenderLoading
   blockClick: boolean
   dataAttributes?: Record<string, string | boolean | undefined>
 }

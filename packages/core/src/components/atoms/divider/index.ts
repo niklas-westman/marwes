@@ -12,3 +12,5 @@ export type {
   DividerDataAttributes,
   DividerRenderKit,
 } from "./divider-types"
+export { toDividerHtmlAttributes } from "./divider-html-attributes"
+export type { DividerHtmlAttributes } from "./divider-html-attributes"

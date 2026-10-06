@@ -13,6 +13,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSkeletonContract("react", {
+  renderSkeletonOptions(options) {
+    renderWithProvider(<Skeleton {...options} />)
+  },
+  getSkeletonRoot() {
+    return document.querySelector('[data-component="skeleton"]') as HTMLElement
+  },
   async renderSkeleton(args = {}) {
     renderWithProvider(<Skeleton {...args} />)
   },

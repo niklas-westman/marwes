@@ -1,6 +1,7 @@
 import type { ButtonOptions, IconName } from "@marwes-ui/core"
 import { ButtonVariant } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { omitAttrs } from "../../internal/render-utils"
 import { Button, type ButtonProps } from "./button"
 
@@ -11,7 +12,7 @@ export type IconButtonProps = Omit<
   icon: IconName
 }
 
-const iconButtonPropKeys = [
+const iconButtonPropKeys = definePropKeys<IconButtonProps>()([
   "as",
   "href",
   "type",
@@ -34,7 +35,7 @@ const iconButtonPropKeys = [
   "onClick",
   "className",
   "icon",
-] as const
+])
 
 const IconButtonImplementation = defineComponent(
   (rawProps) => {

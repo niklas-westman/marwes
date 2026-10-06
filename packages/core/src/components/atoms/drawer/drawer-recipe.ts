@@ -39,6 +39,7 @@ export function createDrawerRecipe(opts: DrawerOptions = {}): DrawerRenderKit {
     showFooter,
     showCloseButton,
     showScrim,
+    closeButton: { a11y: { ariaLabel: opts.closeLabel ?? "Close drawer" } },
     dataAttributes: rootDataAttributes,
     panel: {
       tag: "div",

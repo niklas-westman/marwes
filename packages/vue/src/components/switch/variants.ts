@@ -1,7 +1,8 @@
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { SwitchField, type SwitchFieldProps } from "./switch-field"
 
-const switchFieldPropKeys = [
+const switchFieldPropKeys = definePropKeys<SwitchFieldProps>()([
   "id",
   "label",
   "description",
@@ -10,7 +11,7 @@ const switchFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 export type FeatureToggleProps = SwitchFieldProps
 

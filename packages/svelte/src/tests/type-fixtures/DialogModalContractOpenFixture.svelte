@@ -6,6 +6,7 @@
     description,
     ariaLabel,
     dismissible,
+    closeLabel,
     showFooter = true,
     closeOnEscape,
     closeOnScrimClick,
@@ -19,6 +20,7 @@
     description?: string;
     ariaLabel?: string;
     dismissible?: boolean;
+    closeLabel?: string;
     showFooter?: boolean;
     closeOnEscape?: boolean;
     closeOnScrimClick?: boolean;
@@ -39,6 +41,7 @@
     {description}
     {ariaLabel}
     {dismissible}
+    {closeLabel}
     {closeOnEscape}
     {closeOnScrimClick}
     {surfaceWidth}
@@ -64,6 +67,7 @@
     {description}
     {ariaLabel}
     {dismissible}
+    {closeLabel}
     {closeOnEscape}
     {closeOnScrimClick}
     {surfaceWidth}

@@ -266,6 +266,35 @@ What still needs manual review:
 - whether timeout choices are sufficient for message length and action complexity
 - whether product teams keep toast non-blocking instead of turning it into a mini-dialog
 
+## How ARIA reaches the DOM
+
+Adapters write no ARIA by hand. Every `aria-*` and `role` attribute comes from core:
+
+1. **Core resolves it.** Each family has typed a11y fields in `packages/core/src/components/atoms/<family>/*-types.ts`
+   (for example `DialogA11yProps`, or per-part types such as `DatePickerDayA11yProps` and
+   `TabPanelA11yProps`). State-dependent rules live in the family's `*-a11y.ts` resolver.
+2. **Core maps it.** `to<Name>HtmlAttributes` in the family's `*-html-attributes.ts` translates those fields
+   to HTML attribute names. The names table must cover every field, so a new field does not compile
+   until it is mapped. A field mapped to `false` is deliberately not an attribute.
+3. **Adapters spread it.** React uses `toReactAttributes(...)` for the few camelCase attributes; Vue and
+   Svelte spread the result directly.
+4. **Labels are options.** Default names ("Close dialog", "Show password") live in core and can be
+   overridden with a flat `*Label` option (`closeLabel`, `dismissLabel`, `showPasswordLabel`, ...).
+
+Adding a field or a component part:
+
+- add the field to the a11y type, resolve it in core, and add it to the mapper table
+- cover it in the family's shared contract in `tests/contracts/`
+- run `pnpm --filter @marwes-ui/core test`
+
+Two guards enforce this in `packages/core/test/guards/`:
+
+- `a11y-mapper-coverage.test.ts`: every a11y type has a mapper, and every mapper is used by React, Vue and
+  Svelte
+- `a11y-no-handwritten-aria.test.ts`: adapters contain no hand-written ARIA. Static decorative literals
+  (`aria-hidden="true"`, `aria-live="polite"`, `role="presentation"`) are allowed. Anything else needs an
+  `a11y-allow: <reason>` comment on or just above the line, explaining why core cannot own it.
+
 ## Manual-review-heavy areas
 
 These areas deserve elevated caution even when automated checks pass.

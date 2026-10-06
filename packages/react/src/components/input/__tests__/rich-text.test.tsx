@@ -24,12 +24,22 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runRichTextContract("react", {
+  renderRichTextOptions(options) {
+    renderWithProvider(<RichText {...options} />)
+  },
+  getRichTextParts() {
+    return {
+      root: document.querySelector(".mw-rich-text") as HTMLElement,
+      editor: document.querySelector('[role="textbox"]') as HTMLElement,
+    }
+  },
   async renderRichText(args = {}) {
     const richTextProps = {
       ariaLabel: args.ariaLabel ?? "Rich text",
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
       ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+      ...(args.formatLabels !== undefined ? { formatLabels: args.formatLabels } : {}),
       ...(args.onValueChange ? { onValueChange: args.onValueChange } : {}),
     }
 

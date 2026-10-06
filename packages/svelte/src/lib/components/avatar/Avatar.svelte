@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createAvatarRecipe } from "@marwes-ui/core";
+  import { createAvatarRecipe, toAvatarHtmlAttributes, toAvatarInitialsHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
   import type { AvatarProps } from "./types.js";
@@ -14,15 +14,12 @@
   const kit = $derived(createAvatarRecipe(options));
   const mergedClass = $derived(mergeClass(kit.className, className));
   const isDecorative = $derived(kit.a11y.ariaHidden === true);
-  const isOuterAccessible = $derived(kit.a11y.role === "img");
 </script>
 
 <span
   class={mergedClass}
   {style}
-  role={kit.a11y.role}
-  aria-hidden={isDecorative ? "true" : undefined}
-  aria-label={kit.a11y.ariaLabel}
+  {...toAvatarHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
   {...dataAttributes}
 >
@@ -33,10 +30,7 @@
       alt={isDecorative ? "" : (kit.content.alt ?? "")}
     />
   {:else if kit.content.type === "initials"}
-    <span
-      aria-hidden={isOuterAccessible ? "true" : undefined}
-      class="mw-avatar__initials"
-    >
+    <span class="mw-avatar__initials" {...toAvatarInitialsHtmlAttributes(kit.initialsA11y)}>
       {kit.content.initials}
     </span>
   {:else}

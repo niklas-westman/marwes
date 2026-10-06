@@ -43,6 +43,19 @@ function renderSwitchFieldWithProvider(props: SwitchFieldProps) {
 }
 
 runSwitchContract("vue", {
+  renderSwitchOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Switch as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getSwitchElement() {
+    return document.querySelector(".mw-switch") as HTMLElement
+  },
   async renderSwitch(args = {}) {
     renderSwitchWithProvider({
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),

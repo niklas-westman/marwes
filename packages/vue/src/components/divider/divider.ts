@@ -1,6 +1,7 @@
-import { createDividerRecipe } from "@marwes-ui/core"
+import { createDividerRecipe, toDividerHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, DividerOptions, DividerOrientation, DividerSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type DividerProps = DividerOptions & {
@@ -9,7 +10,7 @@ export type DividerProps = DividerOptions & {
   className?: string
 }
 
-const dividerPropKeys = ["size", "orientation", "id", "className"] as const
+const dividerPropKeys = definePropKeys<DividerProps>()(["size", "orientation", "id", "className"])
 
 export const Divider = defineComponent(
   (props: DividerProps) => {
@@ -24,7 +25,7 @@ export const Divider = defineComponent(
 
       return h("hr", {
         ...passthroughAttrs,
-        ...renderKit.a11y,
+        ...toDividerHtmlAttributes(renderKit.a11y),
         ...renderKit.dataAttributes,
         class: className,
         style,

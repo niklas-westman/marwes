@@ -5,7 +5,7 @@ export interface TooltipProps extends TooltipOptions {
   children?: Snippet
   class?: string
   style?: string
-  dataAttributes?: Record<string, string>
+  dataAttributes?: Record<string, string | boolean | undefined>
 }
 
 export interface TooltipGroupProps {
@@ -18,7 +18,7 @@ export interface TooltipGroupProps {
   tooltipId?: string
   tooltipClass?: string
   triggerClass?: string
-  dataAttributes?: Record<string, string>
+  dataAttributes?: Record<string, string | boolean | undefined>
   class?: string
   id?: string
 }

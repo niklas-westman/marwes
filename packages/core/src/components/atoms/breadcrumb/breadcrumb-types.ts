@@ -36,6 +36,7 @@ export interface BreadcrumbItemA11yProps {
 
 export interface BreadcrumbHomeA11yProps {
   ariaLabel: string
+  ariaCurrent?: "page"
 }
 
 export interface BreadcrumbBaseItemRenderKit {

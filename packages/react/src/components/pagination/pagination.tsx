@@ -9,6 +9,11 @@ import {
   createPaginationRecipe,
   resolvePaginationAdaptiveProfile,
   resolvePaginationItemAriaLabel,
+  toPaginationControlHtmlAttributes,
+  toPaginationEllipsisHtmlAttributes,
+  toPaginationHtmlAttributes,
+  toPaginationListHtmlAttributes,
+  toPaginationPageHtmlAttributes,
 } from "@marwes-ui/core"
 import type {
   IconName as IconNameType,
@@ -19,6 +24,7 @@ import type {
   PaginationResolvedControlDisplay,
 } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 export interface PaginationProps
@@ -212,8 +218,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
       <button
         type="button"
         className={kit.className}
-        aria-label={kit.a11y.ariaLabel}
-        aria-disabled={kit.a11y.ariaDisabled}
+        {...toReactAttributes(toPaginationControlHtmlAttributes(kit.a11y))}
         disabled={controlDisabled}
         onClick={() => selectPage(targetPage)}
       >
@@ -231,9 +236,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
       id={id}
       className={rootClassName}
       style={{ ...rootKit.vars, ...style } as React.CSSProperties}
-      aria-label={rootKit.a11y.ariaLabel}
-      aria-labelledby={rootKit.a11y.ariaLabelledBy}
-      aria-describedby={rootKit.a11y.ariaDescribedBy}
+      {...toReactAttributes(toPaginationHtmlAttributes(rootKit.a11y))}
       data-component="pagination"
       data-control-display={rootKit.controlDisplay}
     >
@@ -248,14 +251,20 @@ export function Pagination(props: PaginationProps): React.ReactElement {
           previousLabel,
           IconName.ChevronLeft,
         )}
-      <ul className={listKit.className} role={listKit.a11y.role}>
+      <ul
+        className={listKit.className}
+        {...toReactAttributes(toPaginationListHtmlAttributes(listKit.a11y))}
+      >
         {rootKit.items.map((item) => {
           if (item.type !== "page") {
             const ellipsisKit = createPaginationEllipsisRecipe()
 
             return (
               <li key={item.key} className={listItemKit.className}>
-                <span className={ellipsisKit.className} aria-hidden={ellipsisKit.a11y.ariaHidden}>
+                <span
+                  className={ellipsisKit.className}
+                  {...toReactAttributes(toPaginationEllipsisHtmlAttributes(ellipsisKit.a11y))}
+                >
                   ...
                 </span>
               </li>
@@ -282,9 +291,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
               <button
                 type="button"
                 className={pageKit.className}
-                aria-label={pageKit.a11y.ariaLabel}
-                aria-current={pageKit.a11y.ariaCurrent}
-                aria-disabled={pageKit.a11y.ariaDisabled}
+                {...toReactAttributes(toPaginationPageHtmlAttributes(pageKit.a11y))}
                 disabled={disabled}
                 onClick={() => selectPage(item.page)}
               >

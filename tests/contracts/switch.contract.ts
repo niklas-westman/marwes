@@ -2,6 +2,7 @@
  * Shared contract for the Switch atom — aria-checked reflection,
  * onCheckedChange callback, disabled suppression, and label wiring via aria-labelledby.
  */
+import type { SwitchOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type SwitchContractHarness = {
@@ -24,6 +25,53 @@ export type SwitchContractHarness = {
   queryDescriptionRegion(): HTMLElement | null
   queryErrorRegion(): HTMLElement | null
   click(element: HTMLElement): Promise<void>
+  /** Renders the base Switch with raw core options. */
+  renderSwitchOptions(options: SwitchOptions): Promise<void> | void
+  getSwitchElement(): HTMLElement
+}
+
+type SwitchOptionCase = {
+  options: SwitchOptions
+  expectRendered: (switchElement: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core SwitchOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const switchOptionCases: Record<keyof SwitchOptions, SwitchOptionCase> = {
+  size: {
+    options: { size: "wide" },
+    expectRendered: (el) => expect(el).toHaveClass("mw-switch--wide"),
+  },
+  checked: {
+    options: { checked: true },
+    expectRendered: (el) => {
+      expect(el).toHaveAttribute("aria-checked", "true")
+      expect(el).toHaveClass("mw-switch--checked")
+    },
+  },
+  disabled: {
+    options: { disabled: true },
+    expectRendered: (el) => {
+      expect(el).toHaveAttribute("aria-disabled", "true")
+      expect(el).toHaveClass("mw-switch--disabled")
+    },
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Notifications" },
+    expectRendered: (el) => expect(el).toHaveAttribute("aria-label", "Notifications"),
+  },
+  label: {
+    options: { label: "Notifications" },
+    expectRendered: (el) => expect(el).toHaveAttribute("aria-label", "Notifications"),
+  },
+  ariaLabelledBy: {
+    options: { ariaLabelledBy: "label-id" },
+    expectRendered: (el) => expect(el).toHaveAttribute("aria-labelledby", "label-id"),
+  },
+  ariaDescribedBy: {
+    options: { ariaDescribedBy: "hint-id" },
+    expectRendered: (el) => expect(el).toHaveAttribute("aria-describedby", "hint-id"),
+  },
 }
 
 export function runSwitchContract(adapterName: string, harness: SwitchContractHarness): void {
@@ -148,6 +196,16 @@ export function runSwitchContract(adapterName: string, harness: SwitchContractHa
       expect(switchControl).toHaveAttribute("aria-describedby", "external-help")
       expect(harness.queryDescriptionRegion()).toBeNull()
       expect(harness.queryErrorRegion()).toBeNull()
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(switchOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderSwitchOptions(optionCase.options)
+
+        const element = harness.getSwitchElement()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

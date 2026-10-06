@@ -2,6 +2,7 @@
  * Shared contract for Banner component — verifies cross-adapter behavioral parity
  * for variant rendering, a11y roles, icon/dismiss/action visibility, and dismiss interaction.
  */
+import type { BannerOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export interface BannerContractHarness {
@@ -13,12 +14,57 @@ export interface BannerContractHarness {
   renderNonDismissible(): Promise<void> | void
   renderWithAction(): Promise<void> | void
   renderWithAriaLabel(): Promise<void> | void
+  /** Renders the base Banner with raw core options; `withAction` also supplies action content. */
+  renderBannerOptions(
+    options: BannerOptions,
+    extras?: { withAction?: boolean },
+  ): Promise<void> | void
+  /** Renders InfoBanner, SuccessBanner, WarningBanner or ErrorBanner. */
+  renderPurposeBanner(intent: BannerPurposeIntent): Promise<void> | void
   clickDismiss(): Promise<void> | void
   getByRole(role: string, options?: { name?: string | RegExp }): HTMLElement
   getByText(text: string): HTMLElement
   queryByRole(role: string, options?: { name?: string | RegExp }): HTMLElement | null
   getRoot(): HTMLElement
   getDismissHandler(): { called: boolean }
+}
+
+export type BannerPurposeIntent = "info" | "success" | "warning" | "error"
+
+type BannerOptionCase = {
+  options: BannerOptions
+  withAction?: boolean
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core BannerOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const bannerOptionCases: Record<keyof BannerOptions, BannerOptionCase> = {
+  variant: {
+    options: { variant: "error" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("data-variant", "error")
+      expect(root).toHaveAttribute("role", "alert")
+    },
+  },
+  showIcon: {
+    options: { showIcon: false },
+    expectRendered: (root) => expect(root.querySelector(".mw-banner__icon")).toBeNull(),
+  },
+  showAction: {
+    // explicit false must win even when action content is supplied
+    options: { showAction: false },
+    withAction: true,
+    expectRendered: (root) => expect(root.querySelector(".mw-banner__action")).toBeNull(),
+  },
+  dismissible: {
+    options: { dismissible: false },
+    expectRendered: (root) => expect(root.querySelector(".mw-banner__dismiss")).toBeNull(),
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Important notice" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-label", "Important notice"),
+  },
 }
 
 export function runBannerContract(adapterName: string, harness: BannerContractHarness): void {
@@ -108,6 +154,33 @@ export function runBannerContract(adapterName: string, harness: BannerContractHa
 
       const root = harness.getRoot()
       expect(root).toHaveAttribute("aria-label", "Important notice")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(bannerOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderBannerOptions(optionCase.options, {
+          withAction: optionCase.withAction === true,
+        })
+
+        const root = harness.getRoot()
+        expect(root).toBeInTheDocument()
+        optionCase.expectRendered(root)
+      })
+    })
+
+    describe("purpose banners", () => {
+      it.each(["info", "success", "warning", "error"] as const)(
+        "%s banner emits canonical purpose semantics",
+        async (intent) => {
+          await harness.renderPurposeBanner(intent)
+
+          const root = harness.getRoot()
+          expect(root).toHaveAttribute("data-component", "banner")
+          expect(root).toHaveAttribute("data-variant", intent)
+          expect(root).toHaveAttribute("data-purpose", `${intent}-banner`)
+          expect(root).toHaveAttribute("data-intent", intent)
+        },
+      )
     })
   })
 }

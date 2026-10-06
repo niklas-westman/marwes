@@ -7,6 +7,7 @@
 
 import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import type { BannerProps } from "./banner"
 import { Banner } from "./banner"
 
@@ -15,14 +16,15 @@ export type SuccessBannerProps = Omit<BannerProps, "variant">
 export type WarningBannerProps = Omit<BannerProps, "variant">
 export type ErrorBannerProps = Omit<BannerProps, "variant">
 
-const bannerVariantPropKeys = [
+// variant is forced by each purpose banner, so it is not a prop here
+const bannerVariantPropKeys = definePropKeys<Omit<BannerProps, "variant">>()([
   "showIcon",
   "showAction",
   "dismissible",
   "ariaLabel",
   "className",
   "id",
-] as const
+])
 
 function createPurposeBanner(name: string, variant: string, purpose: string) {
   return defineComponent(

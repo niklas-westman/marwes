@@ -1,12 +1,13 @@
 import type { SliderOptions } from "@marwes-ui/core"
 
-export interface SliderProps extends Omit<SliderOptions, "ariaDescribedBy"> {
-  value?: number
+export interface SliderProps extends Omit<SliderOptions, "ariaDescribedBy" | "value"> {
+  value?: number | undefined
   oninput?: (e: Event & { currentTarget: HTMLInputElement }) => void
   onvaluechange?: (value: number) => void
   class?: string
   style?: string | undefined
   ariaDescribedBy?: string | undefined
+  /** @deprecated Use `invalid`. */
   ariaInvalid?: boolean
 }
 
@@ -23,7 +24,7 @@ export interface SliderFieldProps {
   labelPosition?: "top" | "inline"
   showEdgeValues?: boolean
   dataAttributes?: Record<string, string>
-  value?: number
+  value?: number | undefined
   class?: string
 }
 

@@ -1,6 +1,15 @@
-import { IconName, createBreadcrumbRecipe } from "@marwes-ui/core"
+import {
+  IconName,
+  createBreadcrumbRecipe,
+  toBreadcrumbHomeHtmlAttributes,
+  toBreadcrumbHtmlAttributes,
+  toBreadcrumbItemHtmlAttributes,
+  toBreadcrumbListHtmlAttributes,
+  toBreadcrumbSeparatorHtmlAttributes,
+} from "@marwes-ui/core"
 import type { BreadcrumbItem, BreadcrumbOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -9,7 +18,7 @@ export type BreadcrumbProps = BreadcrumbOptions & {
   className?: string
 }
 
-const breadcrumbPropKeys = [
+const breadcrumbPropKeys = definePropKeys<BreadcrumbProps>()([
   "items",
   "ariaLabel",
   "showHome",
@@ -17,7 +26,7 @@ const breadcrumbPropKeys = [
   "homeLabel",
   "dataAttributes",
   "className",
-] as const
+])
 
 export const Breadcrumb = defineComponent(
   (props: BreadcrumbProps, { emit }) => {
@@ -43,13 +52,13 @@ export const Breadcrumb = defineComponent(
           ...passthroughAttrs,
           ...renderKit.dataAttributes,
           class: mergeClassNames(renderKit.className, props.className, attrs.class),
-          "aria-label": renderKit.a11y.ariaLabel,
+          ...toBreadcrumbHtmlAttributes(renderKit.a11y),
         },
         h(
           "ol",
           {
             class: renderKit.list.className,
-            role: renderKit.list.a11y.role,
+            ...toBreadcrumbListHtmlAttributes(renderKit.list.a11y),
           },
           renderKit.items.map((item, index) =>
             h(
@@ -65,7 +74,7 @@ export const Breadcrumb = defineComponent(
                       "span",
                       {
                         class: renderKit.separator.className,
-                        "aria-hidden": renderKit.separator.a11y.ariaHidden,
+                        ...toBreadcrumbSeparatorHtmlAttributes(renderKit.separator.a11y),
                       },
                       h(Icon, { name: IconName.ChevronRight, decorative: true, size: 12 }),
                     )
@@ -92,11 +101,13 @@ export const Breadcrumb = defineComponent(
 
 type BreadcrumbRenderItem = ReturnType<typeof createBreadcrumbRecipe>["items"][number]
 
-function renderHomeItem(item: BreadcrumbRenderItem, onHomeClick: () => void) {
+function renderHomeItem(
+  item: Extract<BreadcrumbRenderItem, { kind: "home" }>,
+  onHomeClick: () => void,
+) {
   const commonProps = {
     class: item.actionClassName,
-    "aria-label": item.a11y.ariaLabel,
-    "aria-current": item.current ? "page" : undefined,
+    ...toBreadcrumbHomeHtmlAttributes(item.a11y),
   }
   const icon = h(Icon, { name: IconName.Home, decorative: true, size: 14 })
 
@@ -123,8 +134,7 @@ function renderActionItem(
   }
   const commonProps = {
     class: item.actionClassName,
-    "aria-label": item.a11y.ariaLabel,
-    "aria-current": item.a11y.ariaCurrent,
+    ...toBreadcrumbItemHtmlAttributes(item.a11y),
   }
 
   if (item.current) {

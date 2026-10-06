@@ -18,3 +18,13 @@ export type {
   ContextMenuRenderKit,
   ContextMenuActionItemRenderKit,
 } from "./context-menu-types"
+export {
+  toContextMenuHtmlAttributes,
+  toContextMenuItemHtmlAttributes,
+  toContextMenuDividerHtmlAttributes,
+} from "./context-menu-html-attributes"
+export type {
+  ContextMenuHtmlAttributes,
+  ContextMenuItemHtmlAttributes,
+  ContextMenuDividerHtmlAttributes,
+} from "./context-menu-html-attributes"

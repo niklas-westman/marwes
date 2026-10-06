@@ -149,6 +149,8 @@
       {#if toast.intent === "success"}
         <SuccessToast
           id={toast.id}
+          {...(toast.icon ? { icon: toast.icon } : {})}
+          {...(toast.action ? { action: toast.action } : {})}
           {...(toast.class ? { class: toast.class } : {})}
           {...(toast.variant ? { variant: toast.variant } : {})}
           {...(toast.ariaLive ? { ariaLive: toast.ariaLive } : {})}
@@ -160,6 +162,8 @@
       {:else if toast.intent === "error"}
         <ErrorToast
           id={toast.id}
+          {...(toast.icon ? { icon: toast.icon } : {})}
+          {...(toast.action ? { action: toast.action } : {})}
           {...(toast.class ? { class: toast.class } : {})}
           {...(toast.variant ? { variant: toast.variant } : {})}
           {...(toast.ariaLive ? { ariaLive: toast.ariaLive } : {})}
@@ -171,6 +175,8 @@
       {:else if toast.intent === "warning"}
         <WarningToast
           id={toast.id}
+          {...(toast.icon ? { icon: toast.icon } : {})}
+          {...(toast.action ? { action: toast.action } : {})}
           {...(toast.class ? { class: toast.class } : {})}
           {...(toast.variant ? { variant: toast.variant } : {})}
           {...(toast.ariaLive ? { ariaLive: toast.ariaLive } : {})}
@@ -182,6 +188,8 @@
       {:else if toast.intent === "info"}
         <InfoToast
           id={toast.id}
+          {...(toast.icon ? { icon: toast.icon } : {})}
+          {...(toast.action ? { action: toast.action } : {})}
           {...(toast.class ? { class: toast.class } : {})}
           {...(toast.variant ? { variant: toast.variant } : {})}
           {...(toast.ariaLive ? { ariaLive: toast.ariaLive } : {})}
@@ -193,6 +201,8 @@
       {:else}
         <Toast
           id={toast.id}
+          {...(toast.icon ? { icon: toast.icon } : {})}
+          {...(toast.action ? { action: toast.action } : {})}
           {...(toast.class ? { class: toast.class } : {})}
           {...(toast.variant ? { variant: toast.variant } : {})}
           {...(toast.ariaLive ? { ariaLive: toast.ariaLive } : {})}

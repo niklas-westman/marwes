@@ -2,9 +2,14 @@ import {
   type TabGroupItemState,
   buildTabGroupA11yIds,
   moveTabSelection,
+  resolveTabListA11y,
+  resolveTabPanelA11y,
   resolveTabValue,
+  toTabListHtmlAttributes,
+  toTabPanelHtmlAttributes,
 } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Paragraph } from "../paragraph"
 import { Text } from "../text"
 import { Tab } from "./tab"
@@ -85,12 +90,12 @@ function renderPanelContent(children: React.ReactNode): React.ReactNode {
 export function TabPanel(props: TabPanelProps): React.ReactElement {
   return (
     <div
-      id={props.id}
-      role="tabpanel"
-      aria-labelledby={props.tabId}
+      {...toReactAttributes(
+        toTabPanelHtmlAttributes(
+          resolveTabPanelA11y({ id: props.id, tabId: props.tabId, hidden: props.hidden }),
+        ),
+      )}
       className={cx("mw-tab-group__panel", props.className)}
-      hidden={props.hidden}
-      tabIndex={props.hidden ? undefined : 0}
     >
       {renderPanelContent(props.children)}
     </div>
@@ -200,11 +205,16 @@ export function TabGroup(props: TabGroupProps): React.ReactElement {
       )}
 
       <div
-        id={a11yIds.tabListId}
         className="mw-tab-group__list"
-        role="tablist"
-        aria-label={hasLabel ? undefined : (props.ariaLabel ?? "Tabs")}
-        aria-labelledby={hasLabel ? a11yIds.labelId : undefined}
+        {...toReactAttributes(
+          toTabListHtmlAttributes(
+            resolveTabListA11y({
+              tabListId: a11yIds.tabListId,
+              labelId: hasLabel ? a11yIds.labelId : undefined,
+              ariaLabel: props.ariaLabel,
+            }),
+          ),
+        )}
         onKeyDown={handleKeyDown}
       >
         {props.tabs.map((tab) => {

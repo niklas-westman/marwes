@@ -4,9 +4,10 @@ import type {
   CssVars,
   SelectOptions,
 } from "@marwes-ui/core"
-import { createSelectRecipe } from "@marwes-ui/core"
+import { createSelectRecipe, toSelectHtmlAttributes } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { SelectArrowIcon } from "./select-arrow-icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -60,19 +61,14 @@ export function Select(props: SelectProps) {
     props.onValueChange?.(nextValue)
   }
 
+  const htmlAttributes = toReactAttributes(toSelectHtmlAttributes(kit.a11y))
+
   const selectElement = (
     <select
+      {...htmlAttributes}
       className={className}
       style={style}
       data-placeholder-selected={placeholderSelected ? "true" : undefined}
-      id={kit.a11y.id}
-      name={kit.a11y.name}
-      disabled={kit.a11y.disabled}
-      required={kit.a11y.required}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-invalid={kit.a11y.ariaInvalid}
-      aria-describedby={kit.a11y.ariaDescribedBy}
       value={value}
       onChange={handleChange}
     >

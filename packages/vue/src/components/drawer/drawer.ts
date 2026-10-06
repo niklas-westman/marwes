@@ -1,7 +1,14 @@
-import { type DrawerOptions, IconName, createDrawerRecipe } from "@marwes-ui/core"
+import {
+  type DrawerOptions,
+  IconName,
+  createDrawerRecipe,
+  toDrawerCloseButtonHtmlAttributes,
+  toDrawerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -40,7 +47,7 @@ export type DrawerProps = DrawerOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const drawerPropKeys = [
+const drawerPropKeys = definePropKeys<DrawerProps>()([
   "id",
   "title",
   "description",
@@ -49,6 +56,7 @@ const drawerPropKeys = [
   "placement",
   "showFooter",
   "dismissible",
+  "closeLabel",
   "modal",
   "showScrim",
   "ariaLabel",
@@ -58,7 +66,7 @@ const drawerPropKeys = [
   "className",
   "panelClassName",
   "dataAttributes",
-] as const
+])
 
 export const Drawer = defineComponent(
   (props: DrawerProps, { attrs, emit, slots }) => {
@@ -85,6 +93,7 @@ export const Drawer = defineComponent(
       const drawerOptions: DrawerOptions = {
         showFooter: hasFooter.value,
         dismissible: dismissible.value,
+        ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
         ...(props.modal !== undefined ? { modal: props.modal } : {}),
         ...(props.showScrim !== undefined ? { showScrim: props.showScrim } : {}),
       }
@@ -145,11 +154,7 @@ export const Drawer = defineComponent(
               id: id.value,
               class: mergeClassNames(kit.value.panel.className, props.panelClassName),
               style: kit.value.panel.vars,
-              role: kit.value.panel.a11y.role,
-              "aria-modal": kit.value.panel.a11y.ariaModal ? "true" : undefined,
-              "aria-label": kit.value.panel.a11y.ariaLabel,
-              "aria-labelledby": kit.value.panel.a11y.ariaLabelledBy,
-              "aria-describedby": kit.value.panel.a11y.ariaDescribedBy,
+              ...toDrawerHtmlAttributes(kit.value.panel.a11y),
               tabindex: -1,
             },
             [
@@ -171,7 +176,7 @@ export const Drawer = defineComponent(
                             {
                               type: "button",
                               class: "mw-drawer__close",
-                              "aria-label": "Close drawer",
+                              ...toDrawerCloseButtonHtmlAttributes(kit.value.closeButton.a11y),
                               onClick: close,
                             },
                             [h(Icon, { name: IconName.X, decorative: true })],

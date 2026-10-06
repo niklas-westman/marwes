@@ -19,6 +19,7 @@
     "core": [
       "packages/core/src/components/atoms/radio/index.ts",
       "packages/core/src/components/atoms/radio/radio-a11y.ts",
+      "packages/core/src/components/atoms/radio/radio-html-attributes.ts",
       "packages/core/src/components/atoms/radio/radio-recipe.ts",
       "packages/core/src/components/atoms/radio/radio-types.ts"
     ],

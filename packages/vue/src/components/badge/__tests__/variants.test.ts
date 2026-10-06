@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest"
 import { defineComponent, h } from "vue"
 import { runBadgeContract } from "../../../../../../tests/contracts/badge.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
+import { Badge } from "../badge"
 import { NotificationBadge, PriorityBadge, StatusBadge } from "../variants"
 
 function renderWithProvider(component: unknown, props: Record<string, unknown>) {
@@ -29,6 +30,12 @@ function renderWithProvider(component: unknown, props: Record<string, unknown>) 
 }
 
 runBadgeContract("vue", {
+  renderBadge(options, text) {
+    renderWithProvider(Badge, { ...options, children: text })
+  },
+  getBadgeElement() {
+    return document.querySelector('[data-component="badge"]') as HTMLElement
+  },
   renderStatus() {
     renderWithProvider(StatusBadge, { variant: BadgeVariant.success, children: "Active" })
   },

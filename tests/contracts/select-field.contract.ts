@@ -12,12 +12,17 @@ export type SelectFieldContractHarness = {
     ariaDescribedBy?: string
     select?: {
       native?: boolean
+      name?: string
+      disabled?: boolean
+      ariaLabelledBy?: string
     }
   }): Promise<void> | void
   getByRole(role: "combobox", options: { name: RegExp }): HTMLElement
   getByText(text: string): HTMLElement
   queryHelperRegion(): HTMLElement | null
   queryErrorRegion(): HTMLElement | null
+  /** The hidden input a custom (non-native) select uses to take part in form submission. */
+  queryProxyInput(): HTMLInputElement | null
 }
 
 export function runSelectFieldContract(adapterName: string, h: SelectFieldContractHarness): void {
@@ -83,6 +88,56 @@ export function runSelectFieldContract(adapterName: string, h: SelectFieldContra
       expect(control).toHaveAttribute("aria-describedby", "external-help")
       expect(h.queryHelperRegion()).toBeNull()
       expect(h.queryErrorRegion()).toBeNull()
+    })
+
+    it("custom select takes part in form submission through a named hidden input", async () => {
+      await h.renderSelectField({ label: "Country", select: { name: "country" } })
+
+      const proxy = h.queryProxyInput()
+      expect(proxy).not.toBeNull()
+      expect(proxy).toHaveAttribute("name", "country")
+      expect(proxy).not.toBeDisabled()
+    })
+
+    it("disabled custom select does not submit its value", async () => {
+      await h.renderSelectField({ label: "Country", select: { name: "country", disabled: true } })
+
+      expect(h.queryProxyInput()).toBeDisabled()
+    })
+
+    it("never references hidden helper text from aria-describedby when an error replaces it", async () => {
+      await h.renderSelectField({
+        label: "Country",
+        helperText: "A helpful hint",
+        error: "Something is wrong",
+      })
+
+      const control = h.getByRole("combobox", { name: /country/i })
+      const referencedIds = (control.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean)
+
+      expect(h.queryHelperRegion()).toBeNull()
+      expect(referencedIds.length).toBeGreaterThan(0)
+      for (const id of referencedIds) {
+        expect(document.getElementById(id)).not.toBeNull()
+      }
+    })
+
+    it("custom select labels the combobox by an external element instead of a generated name", async () => {
+      await h.renderSelectField({ label: "Country", select: { ariaLabelledBy: "external-label" } })
+
+      const control = h.getByRole("combobox", { name: /.*/ })
+      expect(control).toHaveAttribute("aria-labelledby", "external-label")
+      expect(control).not.toHaveAttribute("aria-label")
+    })
+
+    it("custom select generates its accessible name from the field label by default", async () => {
+      await h.renderSelectField({ label: "Country" })
+
+      const control = h.getByRole("combobox", { name: /country/i })
+      expect(control).toHaveAttribute("aria-label", "Country")
+      expect(control).not.toHaveAttribute("aria-labelledby")
     })
   })
 }

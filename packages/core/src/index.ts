@@ -18,6 +18,11 @@ export type {
 export { ThemeMode } from "./theme/theme-types"
 export { TextVariant } from "./theme/text-variant"
 export { defaultThemeBreakpoints } from "./theme/theme-types"
+export type {
+  MarwesProviderOptions,
+  ThemeAttribute,
+  ThemeTarget,
+} from "./theme/provider-options"
 export type { SystemThemeMode } from "./theme/theme-mode"
 export {
   isThemeMode,

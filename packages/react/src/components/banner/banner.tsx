@@ -1,6 +1,12 @@
-import { IconName, createBannerRecipe } from "@marwes-ui/core"
+import {
+  IconName,
+  createBannerRecipe,
+  toBannerDismissHtmlAttributes,
+  toBannerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 export type BannerProps = BannerOptions & {
@@ -14,10 +20,12 @@ export type BannerProps = BannerOptions & {
   onDismiss?: () => void
   className?: string
   id?: string
+  /** Extra data attributes for the root, e.g. purpose semantics from variant wrappers. */
+  dataAttributes?: Record<string, string | boolean | undefined>
 }
 
 export function Banner(props: BannerProps): React.ReactElement {
-  const { children, action, icon, onDismiss, className, id, ...coreProps } = props
+  const { children, action, icon, onDismiss, className, id, dataAttributes, ...coreProps } = props
   const kit = createBannerRecipe({
     ...coreProps,
     showAction: coreProps.showAction ?? Boolean(action),
@@ -27,10 +35,9 @@ export function Banner(props: BannerProps): React.ReactElement {
     <div
       id={id}
       className={[kit.root.className, className].filter(Boolean).join(" ")}
-      role={kit.root.a11y.role}
-      aria-label={kit.root.a11y.ariaLabel}
-      aria-live={kit.root.a11y.ariaLive}
+      {...toReactAttributes(toBannerHtmlAttributes(kit.root.a11y))}
       {...kit.root.dataAttributes}
+      {...dataAttributes}
     >
       <div className={kit.content.className}>
         {kit.icon.visible && (
@@ -45,7 +52,7 @@ export function Banner(props: BannerProps): React.ReactElement {
         <button
           type="button"
           className={kit.dismiss.className}
-          aria-label={kit.dismiss.ariaLabel}
+          {...toReactAttributes(toBannerDismissHtmlAttributes(kit.dismiss.a11y))}
           onClick={onDismiss}
         />
       )}

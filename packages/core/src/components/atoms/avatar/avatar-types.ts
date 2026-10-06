@@ -33,6 +33,12 @@ export interface AvatarA11yProps {
   ariaLabel?: string
 }
 
+/** ARIA fields for the initials text inside the avatar shell. */
+export interface AvatarInitialsA11yProps {
+  /** Set when the shell is already a labelled image, so the text is not announced twice. */
+  ariaHidden?: true
+}
+
 export interface AvatarDataAttributes extends Record<string, string> {
   "data-component": "avatar"
   "data-size": AvatarSize
@@ -52,6 +58,7 @@ export interface AvatarRenderKit {
   className: string
   vars: CssVars
   a11y: AvatarA11yProps
+  initialsA11y: AvatarInitialsA11yProps
   dataAttributes: AvatarDataAttributes
   content: AvatarRenderContent
 }

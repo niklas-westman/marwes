@@ -1,5 +1,10 @@
-import { type AvatarOptions, createAvatarRecipe } from "@marwes-ui/core"
+import {
+  type AvatarOptions,
+  createAvatarBadgeRecipe,
+  toAvatarBadgeHtmlAttributes,
+} from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Avatar, type AvatarProps } from "./avatar"
 
 export interface AvatarBadgeProps extends AvatarProps {
@@ -15,6 +20,7 @@ function buildAvatarOptions(props: AvatarBadgeProps): AvatarOptions {
   if (props.alt !== undefined) avatarOptions.alt = props.alt
   if (props.iconName !== undefined) avatarOptions.iconName = props.iconName
   if (props.decorative !== undefined) avatarOptions.decorative = props.decorative
+  if (props.label !== undefined) avatarOptions.label = props.label
 
   const nativeAriaLabel = typeof props["aria-label"] === "string" ? props["aria-label"] : undefined
   const resolvedAriaLabel = props.ariaLabel ?? nativeAriaLabel
@@ -25,28 +31,11 @@ function buildAvatarOptions(props: AvatarBadgeProps): AvatarOptions {
   return avatarOptions
 }
 
-function resolveAvatarBadgeLabel(
-  avatarOptions: AvatarOptions,
-  statusLabel: string,
-): string | undefined {
-  const avatarKit = createAvatarRecipe(avatarOptions)
-
-  if (avatarKit.a11y.ariaHidden) {
-    return undefined
-  }
-
-  if (avatarKit.content.type === "image") {
-    return avatarKit.content.alt ? `${avatarKit.content.alt}, ${statusLabel}` : statusLabel
-  }
-
-  return avatarKit.a11y.ariaLabel ? `${avatarKit.a11y.ariaLabel}, ${statusLabel}` : statusLabel
-}
-
 export function AvatarBadge(props: AvatarBadgeProps): React.ReactElement {
   const {
     className,
     dataAttributes,
-    statusLabel = "Online",
+    statusLabel,
     decorative,
     style,
     size,
@@ -56,16 +45,16 @@ export function AvatarBadge(props: AvatarBadgeProps): React.ReactElement {
     alt,
     iconName,
     ariaLabel,
+    label,
     ...nativeSpanProps
   } = props
 
   const avatarOptions = buildAvatarOptions(props)
-  const avatarKit = createAvatarRecipe(avatarOptions)
-  const accessibleLabel = resolveAvatarBadgeLabel(avatarOptions, statusLabel)
-  const resolvedSize = avatarKit.dataAttributes["data-size"]
-  const mergedClassName = ["mw-avatar-badge", `mw-avatar-badge--${resolvedSize}`, className]
-    .filter(Boolean)
-    .join(" ")
+  const badgeKit = createAvatarBadgeRecipe({
+    ...avatarOptions,
+    ...(statusLabel !== undefined ? { statusLabel } : {}),
+  })
+  const mergedClassName = [badgeKit.className, className].filter(Boolean).join(" ")
   const innerAvatarProps: AvatarProps = { decorative: true }
   if (size !== undefined) innerAvatarProps.size = size
   if (type !== undefined) innerAvatarProps.type = type
@@ -74,6 +63,7 @@ export function AvatarBadge(props: AvatarBadgeProps): React.ReactElement {
   if (alt !== undefined) innerAvatarProps.alt = alt
   if (iconName !== undefined) innerAvatarProps.iconName = iconName
   if (ariaLabel !== undefined) innerAvatarProps.ariaLabel = ariaLabel
+  if (label !== undefined) innerAvatarProps.label = label
 
   return (
     <span
@@ -81,12 +71,8 @@ export function AvatarBadge(props: AvatarBadgeProps): React.ReactElement {
       {...dataAttributes}
       className={mergedClassName}
       style={style}
-      data-component="avatar-badge"
-      data-size={resolvedSize}
-      data-status="online"
-      role={decorative ? undefined : "img"}
-      aria-hidden={decorative ? "true" : undefined}
-      aria-label={decorative ? undefined : accessibleLabel}
+      {...badgeKit.dataAttributes}
+      {...toReactAttributes(toAvatarBadgeHtmlAttributes(badgeKit.a11y))}
     >
       <Avatar {...innerAvatarProps} />
       <span aria-hidden="true" className="mw-avatar-badge__indicator" />

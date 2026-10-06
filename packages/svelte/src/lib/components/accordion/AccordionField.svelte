@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { buildAccordionFieldA11yIds } from "@marwes-ui/core";
+  import {
+    buildAccordionFieldA11yIds,
+    resolveAccordionFieldA11y,
+    toAccordionFieldHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Text from "../text/Text.svelte";
   import Accordion from "./Accordion.svelte";
@@ -65,12 +69,13 @@
 </script>
 
 <!-- svelte-ignore a11y_role_supports_aria_props -->
+<!-- a11y-allow: a div needs an explicit group role; React and Vue render a fieldset, which is an implicit group -->
 <div
   class={wrapperClass}
   role="group"
-  aria-labelledby={a11yIds.labelId}
-  aria-describedby={a11yIds.describedBy}
-  aria-invalid={hasError ? true : undefined}
+  {...toAccordionFieldHtmlAttributes(
+    resolveAccordionFieldA11y({ labelId: a11yIds.labelId, describedBy: a11yIds.describedBy, invalid: hasError })
+  )}
 >
   <div class="mw-accordion-field__label" id={a11yIds.labelId}>
     <Text variant="label">{label}</Text>

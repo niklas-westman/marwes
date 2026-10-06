@@ -13,8 +13,15 @@ import {
   TypographyText,
 } from "../lib/components/text/index.js"
 import TextContractFixture from "./type-fixtures/TextContractFixture.svelte"
+import WithProviderFixture from "./type-fixtures/WithProviderFixture.svelte"
 
 runTextContract("svelte", {
+  renderTextOptions(options) {
+    render(WithProviderFixture, { props: { Component: Text, props: { ...options } } })
+  },
+  getTextRoot() {
+    return document.querySelector(".mw-text") as HTMLElement
+  },
   async renderText(args) {
     render(TextContractFixture, { props: args })
   },

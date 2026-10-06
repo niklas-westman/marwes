@@ -29,6 +29,22 @@ function renderVariantWithProvider(component: unknown, children: string) {
 }
 
 runToastContract("vue", {
+  renderToastOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(Toast as never, { onDismiss: () => {}, ...options }, { default: () => "Saved" }),
+            })
+        },
+      }),
+    )
+  },
+  getToastRoot() {
+    return document.querySelector('[data-component="toast"]') as HTMLElement
+  },
   async renderRawToast(args) {
     render(
       defineComponent({
@@ -41,6 +57,7 @@ runToastContract("vue", {
                   {
                     ...(args?.ariaLive ? { ariaLive: args.ariaLive } : {}),
                     ...(args?.dismissible ? { onDismiss: () => {} } : {}),
+                    ...(args?.dismissLabel ? { dismissLabel: args.dismissLabel } : {}),
                   },
                   {
                     default: () => args?.children ?? "Project saved.",
@@ -77,10 +94,15 @@ runToastContract("vue", {
             h(MarwesProvider, null, {
               default: () =>
                 h(ToastContainer as never, {
-                  toasts: args.toasts.map((toast) => ({
+                  toasts: args.toasts.map(({ icon, action, ...toast }) => ({
                     ...toast,
+                    ...(icon !== undefined ? { icon: h("span", icon) } : {}),
+                    ...(action !== undefined
+                      ? { action: h("button", { type: "button" }, action) }
+                      : {}),
                   })),
                   ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
+                  ...(args.placement !== undefined ? { placement: args.placement } : {}),
                   ...(args.onDismiss ? { onDismiss: args.onDismiss } : {}),
                 }),
             })

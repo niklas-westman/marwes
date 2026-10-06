@@ -1,7 +1,8 @@
 import type { CssVars, SliderOptions } from "@marwes-ui/core"
-import { createSliderRecipe } from "@marwes-ui/core"
+import { createSliderRecipe, toSliderHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type SliderProps = SliderOptions & {
@@ -15,7 +16,7 @@ type SliderOptionDraft = {
   [Key in keyof SliderOptions]?: SliderOptions[Key] | undefined
 }
 
-const sliderPropKeys = [
+const sliderPropKeys = definePropKeys<SliderProps>()([
   "id",
   "name",
   "min",
@@ -26,6 +27,7 @@ const sliderPropKeys = [
   "defaultValue",
   "disabled",
   "required",
+  "invalid",
   "showTooltip",
   "showTouchArea",
   "orientation",
@@ -37,7 +39,7 @@ const sliderPropKeys = [
   "onValueChange",
   "onChange",
   "className",
-] as const
+])
 
 function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   const sliderOptions: SliderOptions = {}
@@ -51,6 +53,7 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.defaultValue !== undefined) sliderOptions.defaultValue = options.defaultValue
   if (options.disabled !== undefined) sliderOptions.disabled = options.disabled
   if (options.required !== undefined) sliderOptions.required = options.required
+  if (options.invalid !== undefined) sliderOptions.invalid = options.invalid
   if (options.showTooltip !== undefined) sliderOptions.showTooltip = options.showTooltip
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
   if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
@@ -120,6 +123,7 @@ export const Slider = defineComponent(
           value: currentValue.value,
           disabled: props.disabled,
           required: props.required,
+          invalid: props.invalid,
           showTooltip: props.showTooltip,
           showTouchArea: props.showTouchArea,
           orientation: props.orientation,
@@ -151,20 +155,8 @@ export const Slider = defineComponent(
           h("div", { class: "mw-slider__control" }, [
             h("input", {
               ...passthroughAttrs,
-              type: renderKit.a11y.type,
+              ...toSliderHtmlAttributes(renderKit.a11y),
               class: renderKit.inputClassName,
-              id: renderKit.a11y.id,
-              name: renderKit.a11y.name,
-              min: renderKit.a11y.min,
-              max: renderKit.a11y.max,
-              step: renderKit.a11y.step,
-              disabled: renderKit.a11y.disabled === true,
-              required: renderKit.a11y.required === true,
-              "aria-label": renderKit.a11y.ariaLabel,
-              "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-              "aria-describedby": renderKit.a11y.ariaDescribedBy,
-              "aria-valuetext": renderKit.a11y.ariaValueText,
-              "aria-orientation": renderKit.a11y.ariaOrientation,
               value: currentValue.value,
               onInput: (event: Event) => {
                 const target = event.target as HTMLInputElement

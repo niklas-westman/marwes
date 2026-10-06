@@ -1,34 +1,17 @@
 import type {
-  FontLoadingConfig,
+  MarwesProviderOptions,
   MwTheme,
   ResolvedTheme,
-  ThemeInput,
   ThemeMode,
   ThemePreference,
-  ThemeVariableStrategy,
 } from "@marwes-ui/core"
 import type { Snippet } from "svelte"
-import type { ThemeAttribute, ThemeTarget } from "./theme-mode-runtime.js"
 
 export interface MarwesProviderSnippetProps {
   mwTheme: MwTheme
 }
 
-export interface MarwesProviderProps {
-  theme?: ThemeInput
-  defaultPreference?: ThemePreference
-  preference?: ThemePreference
-  defaultMode?: ThemeMode
-  mode?: ThemeMode
-  fontLoading?: FontLoadingConfig
-  onPreferenceChange?: (preference: ThemePreference) => void
-  onModeChange?: (mode: ThemeMode) => void
-  storageKey?: string | false
-  enableSystem?: boolean
-  target?: ThemeTarget
-  attribute?: ThemeAttribute
-  disableTransitionOnChange?: boolean
-  variableStrategy?: ThemeVariableStrategy
+export interface MarwesProviderProps extends MarwesProviderOptions {
   children?: Snippet<[MarwesProviderSnippetProps?]>
 }
 

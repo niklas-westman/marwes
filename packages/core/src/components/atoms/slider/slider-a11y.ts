@@ -44,6 +44,7 @@ export function resolveSliderA11y(opts: SliderOptions): SliderA11yProps {
   if (opts.name) a11y.name = opts.name
   if (opts.disabled) a11y.disabled = true
   if (opts.required) a11y.required = true
+  if (opts.invalid) a11y.ariaInvalid = true
   const accessibleLabel = opts.ariaLabel ?? opts.label
   if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   if (opts.ariaLabelledBy) a11y.ariaLabelledBy = opts.ariaLabelledBy

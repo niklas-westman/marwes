@@ -1,5 +1,14 @@
 <script lang="ts">
-  import { IconName, buildInputFieldA11yIds, resolveSelectMode } from "@marwes-ui/core";
+  import {
+    IconName,
+    buildInputFieldA11yIds,
+    resolveSelectComboboxA11y,
+    resolveSelectMode,
+    resolveSelectOptionA11y,
+    toSelectComboboxHtmlAttributes,
+    toSelectListboxHtmlAttributes,
+    toSelectOptionHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
   import Text from "../text/Text.svelte";
@@ -126,12 +135,24 @@
   );
   const placeholderSelected = $derived(select.placeholder !== undefined && value === "");
   const displayText = $derived(placeholderSelected ? (select.placeholder ?? "") : (selectedOption?.label ?? ""));
-  const accessibleName = $derived(
-    select.ariaLabel ?? (hasTextContent(label) ? label : undefined) ?? (hasTextContent(displayText) ? displayText : undefined)
-  );
 
   let open = $state(false);
   let activeIndex = $state(-1);
+
+  const comboboxA11y = $derived(
+    resolveSelectComboboxA11y({
+      id: fieldId,
+      open,
+      activeIndex,
+      label,
+      displayText,
+      ariaLabel: select.ariaLabel,
+      ariaLabelledBy: select.ariaLabelledBy,
+      describedBy: a11yIds.describedBy,
+      invalid,
+      required: select.required,
+    })
+  );
   let controlElement = $state<HTMLDivElement | undefined>(undefined);
   let triggerElement = $state<HTMLButtonElement | undefined>(undefined);
 
@@ -299,15 +320,7 @@
             invalid && "is-invalid",
             open && "mw-select-field__trigger--open"
           )}
-          role="combobox"
-          aria-controls={`${fieldId}-listbox`}
-          aria-expanded={open ? "true" : "false"}
-          aria-haspopup="listbox"
-          aria-label={accessibleName}
-          aria-describedby={a11yIds.describedBy}
-          aria-invalid={invalid ? "true" : undefined}
-          aria-required={select.required ? "true" : undefined}
-          aria-activedescendant={open && activeIndex !== -1 ? `${fieldId}-option-${activeIndex}` : undefined}
+          {...toSelectComboboxHtmlAttributes(comboboxA11y.trigger)}
           disabled={disabled}
           data-placeholder-selected={placeholderSelected ? "true" : undefined}
           onclick={() => {
@@ -343,28 +356,27 @@
             class="mw-select-field__proxy-input"
             name={select.name}
             type="hidden"
+            disabled={select.disabled}
             {value}
             readonly
           />
         {/if}
 
         {#if open}
-          <div class="mw-select-field__list" id={`${fieldId}-listbox`} role="listbox" tabindex="-1">
+          <div class="mw-select-field__list" {...toSelectListboxHtmlAttributes(comboboxA11y.listbox)}>
             {#each select.options as option, optionIndex (option.value)}
               {@const selected = option.value === value}
               {@const active = optionIndex === activeIndex}
               <div
-                id={`${fieldId}-option-${optionIndex}`}
                 class={mergeClass(
                   "mw-select-field__option",
                   active && "mw-select-field__option--active",
                   selected && "mw-select-field__option--selected",
                   option.disabled && "mw-select-field__option--disabled"
                 )}
-                role="option"
-                aria-selected={selected ? "true" : "false"}
-                aria-disabled={option.disabled ? "true" : undefined}
-                tabindex="-1"
+                {...toSelectOptionHtmlAttributes(
+                  resolveSelectOptionA11y({ fieldId, index: optionIndex, selected, disabled: option.disabled })
+                )}
                 onclick={() => selectOptionAtIndex(optionIndex)}
                 onkeydown={(event) => handleOptionKeydown(event, optionIndex)}
                 onmousedown={(event) => event.preventDefault()}

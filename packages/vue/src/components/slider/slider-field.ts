@@ -1,6 +1,7 @@
 import { buildSliderFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Slider, type SliderProps } from "./slider"
@@ -22,7 +23,7 @@ export type SliderFieldProps = {
   modelValue?: number
 }
 
-const sliderFieldPropKeys = [
+const sliderFieldPropKeys = definePropKeys<SliderFieldProps>()([
   "id",
   "label",
   "description",
@@ -35,7 +36,7 @@ const sliderFieldPropKeys = [
   "showEdgeValues",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0
@@ -152,7 +153,7 @@ export const SliderField = defineComponent(
             h("div", { class: "mw-slider-field__slider" }, [
               h(Slider, {
                 ...mergedSliderProps.value,
-                "aria-invalid": hasError.value ? true : undefined,
+                invalid: hasError.value,
               }),
             ]),
             labelPosition.value === "inline" && showEdgeValues.value

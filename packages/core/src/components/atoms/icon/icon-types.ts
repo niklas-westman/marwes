@@ -17,8 +17,10 @@ export const iconNames = iconNamesList
 
 export type IconOptions = {
   name: IconNameType
-  size?: IconSize
-  strokeWidth?: IconStrokeWidth
+  /** Scale token, or an explicit pixel size. */
+  size?: IconSize | number
+  /** Scale token, or an explicit numeric stroke width. */
+  strokeWidth?: IconStrokeWidth | number
   color?: IconColor
 
   // Accessibility

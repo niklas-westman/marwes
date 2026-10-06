@@ -17,12 +17,14 @@
     minValueLabel = "0px",
     maxValueLabel = "48px",
     dataAttributes,
+    value = $bindable(),
     ...rest
   }: RadiusSliderProps = $props();
 </script>
 
 <SliderField
   {...rest}
+  bind:value
   {label}
   {minValueLabel}
   {maxValueLabel}

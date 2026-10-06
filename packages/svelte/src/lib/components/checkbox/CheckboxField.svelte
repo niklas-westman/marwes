@@ -12,7 +12,7 @@
     error,
     checkbox = {},
     ariaDescribedBy,
-    checked = $bindable(false),
+    checked = $bindable(checkbox.defaultChecked ?? false),
     class: className,
   }: CheckboxFieldProps = $props();
 

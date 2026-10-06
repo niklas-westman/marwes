@@ -2,6 +2,7 @@
  * Shared contract for the Accordion atom — trigger/panel wiring,
  * disabled toggle suppression, labeled groups, and description text connection.
  */
+import type { AccordionOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type AccordionContractItem = {
@@ -34,6 +35,9 @@ export type AccordionContractHarness = {
   getAllByRole(role: "button"): HTMLElement[]
   getByText(text: string): HTMLElement
   click(element: HTMLElement): Promise<void>
+  /** Renders the base component with raw core options. */
+  renderAccordionOptions(options: AccordionOptions): Promise<void> | void
+  getAccordionRoot(): HTMLElement
 }
 
 const defaultItems: AccordionContractItem[] = [
@@ -41,6 +45,37 @@ const defaultItems: AccordionContractItem[] = [
   { value: "billing", title: "Billing", content: "Billing details" },
   { value: "returns", title: "Returns", content: "Returns policy" },
 ]
+
+type AccordionOptionCase = {
+  options: AccordionOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core AccordionOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const accordionOptionCases: Record<keyof AccordionOptions, AccordionOptionCase> = {
+  id: {
+    options: { id: "faq" },
+    expectRendered: (root) => {
+      expect(root.querySelector("#faq-trigger")).not.toBeNull()
+      expect(root.querySelector("#faq-panel")).not.toBeNull()
+    },
+  },
+  open: {
+    options: { id: "faq", open: true },
+    expectRendered: (root) => {
+      expect(root).toHaveClass("mw-accordion--open")
+      expect(root.querySelector("#faq-trigger")).toHaveAttribute("aria-expanded", "true")
+    },
+  },
+  disabled: {
+    options: { id: "faq", disabled: true },
+    expectRendered: (root) => {
+      expect(root).toHaveClass("mw-accordion--disabled")
+      expect(root.querySelector("#faq-trigger")).toHaveAttribute("aria-disabled", "true")
+    },
+  },
+}
 
 export function runAccordionContract(adapterName: string, harness: AccordionContractHarness): void {
   describe(`Accordion contract: ${adapterName}`, () => {
@@ -221,6 +256,16 @@ export function runAccordionContract(adapterName: string, harness: AccordionCont
 
       expect(group).toHaveAttribute("aria-describedby", "external-help")
       expect(group).not.toHaveAttribute("aria-invalid", "true")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(accordionOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderAccordionOptions(optionCase.options)
+
+        const element = harness.getAccordionRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

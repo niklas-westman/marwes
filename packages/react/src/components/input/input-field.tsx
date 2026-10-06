@@ -1,11 +1,17 @@
-import { buildInputFieldA11yIds } from "@marwes-ui/core"
+import {
+  type InputFieldActionOptions,
+  buildInputFieldA11yIds,
+  resolveInputFieldActionsA11y,
+  toInputFieldActionHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 import { Text } from "../text"
 import { Input } from "./input"
 import type { InputProps } from "./input"
 
-export type InputFieldProps = {
+export type InputFieldProps = InputFieldActionOptions & {
   /** Optional: if omitted, we generate one via useId(). */
   id?: string
 
@@ -132,6 +138,16 @@ export function InputField(props: InputFieldProps): React.ReactElement {
   // Password visibility toggle
   const isPasswordField = props.input.type === "password"
   const [showPassword, setShowPassword] = React.useState(false)
+  const actionsA11y = resolveInputFieldActionsA11y({
+    passwordVisible: showPassword,
+    ...(props.showPasswordLabel !== undefined
+      ? { showPasswordLabel: props.showPasswordLabel }
+      : {}),
+    ...(props.hidePasswordLabel !== undefined
+      ? { hidePasswordLabel: props.hidePasswordLabel }
+      : {}),
+    ...(props.clearLabel !== undefined ? { clearLabel: props.clearLabel } : {}),
+  })
 
   // Search clear button - track if search has value
   const isSearchField = props.input.type === "search"
@@ -234,7 +250,7 @@ export function InputField(props: InputFieldProps): React.ReactElement {
             type="button"
             className="mw-input-field__toggle-password"
             onClick={handleTogglePassword}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            {...toReactAttributes(toInputFieldActionHtmlAttributes(actionsA11y.passwordToggle))}
             tabIndex={0}
           >
             <Icon name={showPassword ? "eyeOff" : "eye"} size="xs" decorative />
@@ -252,7 +268,7 @@ export function InputField(props: InputFieldProps): React.ReactElement {
             type="button"
             className="mw-input-field__clear-search"
             onClick={handleClearSearch}
-            aria-label="Clear search"
+            {...toReactAttributes(toInputFieldActionHtmlAttributes(actionsA11y.clearButton))}
             tabIndex={0}
           >
             <Icon name="x" size="xs" decorative />

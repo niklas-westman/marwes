@@ -1,6 +1,12 @@
-import { type InputOtpOptions, createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core"
+import {
+  type InputOtpOptions,
+  createInputOtpRecipe,
+  sanitizeInputOtpValue,
+  toInputOtpHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 
 /**
@@ -18,7 +24,7 @@ export type InputOtpProps = Omit<InputOtpOptions, "describedBy"> & {
   describedBy?: string
 }
 
-const inputOtpPropKeys = [
+const inputOtpPropKeys = definePropKeys<InputOtpProps>()([
   "id",
   "name",
   "value",
@@ -36,7 +42,7 @@ const inputOtpPropKeys = [
   "ariaLabelledBy",
   "onValueChange",
   "className",
-] as const
+])
 
 /**
  * InputOtp (Atom) — bare OTP cells. Renders the visual cells and a hidden
@@ -63,7 +69,7 @@ export const InputOtp = defineComponent(
       }
 
       if (props.name) recipeOptions.name = props.name
-      if (props.placeholderCharacter)
+      if (props.placeholderCharacter !== undefined)
         recipeOptions.placeholderCharacter = props.placeholderCharacter
       if (props.disabled) recipeOptions.disabled = true
       if (props.readOnly) recipeOptions.readOnly = true
@@ -119,21 +125,9 @@ export const InputOtp = defineComponent(
               ),
             ),
             h("input", {
-              id: kit.value.a11y.id,
               class: "mw-input-otp__input",
               type: "text",
-              name: kit.value.a11y.name,
-              inputMode: kit.value.a11y.inputMode,
-              autoComplete: kit.value.a11y.autoComplete,
-              maxLength: kit.value.a11y.maxLength,
-              pattern: kit.value.a11y.pattern,
-              disabled: kit.value.a11y.disabled,
-              readOnly: kit.value.a11y.readOnly,
-              required: kit.value.a11y.required,
-              "aria-label": kit.value.a11y.ariaLabel,
-              "aria-labelledby": kit.value.a11y.ariaLabelledBy,
-              "aria-invalid": kit.value.a11y.ariaInvalid,
-              "aria-describedby": kit.value.a11y.ariaDescribedBy,
+              ...toInputOtpHtmlAttributes(kit.value.a11y),
               value: kit.value.displayValue,
               onInput: handleInput,
               onChange: (event: Event) => emit("change", event),

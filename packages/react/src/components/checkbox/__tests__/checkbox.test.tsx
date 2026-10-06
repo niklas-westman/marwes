@@ -14,6 +14,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runCheckboxContract("react", {
+  renderCheckboxOptions(options) {
+    renderWithProvider(<Checkbox {...options} />)
+  },
+  getCheckboxElement() {
+    return document.querySelector("input.mw-checkbox") as HTMLInputElement
+  },
   async renderCheckbox(args = {}) {
     const checkboxProps = {
       ariaLabel: args.ariaLabel ?? "Checkbox",

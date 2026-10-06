@@ -24,6 +24,22 @@ function renderWithProvider(child: () => unknown) {
 }
 
 runSliderContract("vue", {
+  renderSliderOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Slider as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getSliderRoot() {
+    return document.querySelector(".mw-slider") as HTMLElement
+  },
+  getSliderInput() {
+    return document.querySelector("input.mw-slider__native") as HTMLInputElement
+  },
   async renderSlider(args = {}) {
     if (args.value !== undefined) {
       const controlledValue = args.value
@@ -35,6 +51,7 @@ runSliderContract("vue", {
             h(Slider, {
               key: renderTick.value,
               ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+              ...(args.label !== undefined ? { label: args.label } : {}),
               ...(args.min !== undefined ? { min: args.min } : {}),
               ...(args.max !== undefined ? { max: args.max } : {}),
               ...(args.step !== undefined ? { step: args.step } : {}),
@@ -57,6 +74,7 @@ runSliderContract("vue", {
     renderWithProvider(() =>
       h(Slider, {
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+        ...(args.label !== undefined ? { label: args.label } : {}),
         ...(args.min !== undefined ? { min: args.min } : {}),
         ...(args.max !== undefined ? { max: args.max } : {}),
         ...(args.step !== undefined ? { step: args.step } : {}),

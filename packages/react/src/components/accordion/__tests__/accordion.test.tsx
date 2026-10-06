@@ -22,6 +22,16 @@ function renderAccordion(props: Partial<AccordionProps> = {}) {
 }
 
 runAccordionContract("react", {
+  renderAccordionOptions(options) {
+    render(
+      <Accordion title="Question" {...options}>
+        Answer
+      </Accordion>,
+    )
+  },
+  getAccordionRoot() {
+    return document.querySelector(".mw-accordion") as HTMLElement
+  },
   async renderAccordion(args = {}) {
     const accordionProps: AccordionProps = {
       title: args.title ?? "Shipping details",

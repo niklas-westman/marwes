@@ -106,7 +106,7 @@ export function createBreadcrumbRecipe(options: BreadcrumbOptions = {}): Breadcr
                 items.length === 0 && "mw-breadcrumb__current",
               ),
               vars: {},
-              a11y: resolveBreadcrumbHomeA11y(homeLabel),
+              a11y: resolveBreadcrumbHomeA11y(homeLabel, items.length === 0),
               dataAttributes: {
                 "data-component": "breadcrumb",
                 "data-part": "home",

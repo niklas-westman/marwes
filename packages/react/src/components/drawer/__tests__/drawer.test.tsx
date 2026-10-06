@@ -4,12 +4,31 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import type * as React from "react"
 import { describe, expect, it, vi } from "vitest"
+import { runDrawerContract } from "../../../../../../tests/contracts/drawer.contract"
 import { MarwesProvider } from "../../../provider/marwes-provider"
 import { Drawer } from "../drawer"
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(<MarwesProvider>{ui}</MarwesProvider>)
 }
+
+runDrawerContract("react", {
+  renderDrawerOptions(options) {
+    renderWithProvider(
+      <Drawer
+        title="Title"
+        footer={<button type="button">Action</button>}
+        onClose={() => {}}
+        {...(options as Record<string, unknown>)}
+      >
+        Body
+      </Drawer>,
+    )
+  },
+  getDrawerRoot() {
+    return document.querySelector(".mw-drawer") as HTMLElement
+  },
+})
 
 describe("Drawer", () => {
   it("uses the visible title and description as the accessible name and description", () => {

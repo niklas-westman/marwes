@@ -1,6 +1,12 @@
-import { createBannerRecipe } from "@marwes-ui/core"
+import {
+  bannerOptionKeys,
+  createBannerRecipe,
+  toBannerDismissHtmlAttributes,
+  toBannerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { BannerOptions } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export type BannerProps = BannerOptions & {
@@ -8,15 +14,7 @@ export type BannerProps = BannerOptions & {
   id?: string
 }
 
-const bannerPropKeys = [
-  "variant",
-  "showIcon",
-  "showAction",
-  "dismissible",
-  "ariaLabel",
-  "className",
-  "id",
-] as const
+const bannerPropKeys = definePropKeys<BannerProps>()([...bannerOptionKeys, "className", "id"])
 
 export const Banner = defineComponent(
   (props: BannerProps, { slots, emit }) => {
@@ -72,7 +70,7 @@ export const Banner = defineComponent(
           h("button", {
             type: "button",
             class: renderKit.dismiss.className,
-            "aria-label": renderKit.dismiss.ariaLabel,
+            ...toBannerDismissHtmlAttributes(renderKit.dismiss.a11y),
             onClick: () => emit("dismiss"),
           }),
         )
@@ -85,9 +83,7 @@ export const Banner = defineComponent(
           ...renderKit.root.dataAttributes,
           id: props.id,
           class: className,
-          role: renderKit.root.a11y.role,
-          "aria-label": renderKit.root.a11y.ariaLabel,
-          "aria-live": renderKit.root.a11y.ariaLive,
+          ...toBannerHtmlAttributes(renderKit.root.a11y),
         },
         rootChildren,
       )

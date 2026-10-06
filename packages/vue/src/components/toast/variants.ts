@@ -1,16 +1,18 @@
 import { IconName, createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { Icon } from "../icon"
 import { Toast, type ToastProps } from "./toast"
 
-const toastPropKeys = [
+const toastPropKeys = definePropKeys<ToastProps>()([
   "variant",
   "ariaLive",
+  "dismissLabel",
   "onDismiss",
   "className",
   "id",
   "dataAttributes",
-] as const
+])
 
 function createPurposeToast(args: {
   name: string

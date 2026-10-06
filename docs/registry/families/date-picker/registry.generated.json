@@ -15,6 +15,7 @@
     "roadmap": [],
     "core": [
       "packages/core/src/components/atoms/date-picker/date-picker-a11y.ts",
+      "packages/core/src/components/atoms/date-picker/date-picker-html-attributes.ts",
       "packages/core/src/components/atoms/date-picker/date-picker-recipe.ts",
       "packages/core/src/components/atoms/date-picker/date-picker-types.ts",
       "packages/core/src/components/atoms/date-picker/index.ts"

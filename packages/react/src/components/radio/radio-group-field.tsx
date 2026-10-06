@@ -65,8 +65,13 @@
  * ```
  */
 
-import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core"
+import {
+  buildRadioGroupFieldA11yIds,
+  resolveRadioGroupFieldA11y,
+  toRadioGroupFieldHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Text } from "../text"
 import { Radio } from "./radio"
 
@@ -174,11 +179,16 @@ export function RadioGroupField(props: RadioGroupFieldProps): React.ReactElement
       )}
 
       <div
-        role="radiogroup"
-        aria-labelledby={labelId}
-        aria-describedby={describedBy}
-        aria-invalid={isInvalid ? true : undefined}
-        aria-required={props.required ? true : undefined}
+        {...toReactAttributes(
+          toRadioGroupFieldHtmlAttributes(
+            resolveRadioGroupFieldA11y({
+              labelId,
+              describedBy,
+              invalid: isInvalid,
+              required: props.required,
+            }),
+          ),
+        )}
         className="mw-radio-group-field__options"
       >
         {props.options.map(({ value, label, description, disabled: optionDisabled }) => {

@@ -1,3 +1,5 @@
 export * from "./progress-bar-a11y"
 export * from "./progress-bar-recipe"
 export * from "./progress-bar-types"
+export { toProgressBarHtmlAttributes } from "./progress-bar-html-attributes"
+export type { ProgressBarHtmlAttributes } from "./progress-bar-html-attributes"

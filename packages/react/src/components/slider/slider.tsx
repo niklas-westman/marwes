@@ -1,7 +1,8 @@
 import type { CssVars, SliderOptions } from "@marwes-ui/core"
-import { createSliderRecipe } from "@marwes-ui/core"
+import { createSliderRecipe, toSliderHtmlAttributes } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -34,10 +35,12 @@ function buildSliderOptions(options: SliderOptionDraft): SliderOptions {
   if (options.defaultValue !== undefined) sliderOptions.defaultValue = options.defaultValue
   if (options.disabled !== undefined) sliderOptions.disabled = options.disabled
   if (options.required !== undefined) sliderOptions.required = options.required
+  if (options.invalid !== undefined) sliderOptions.invalid = options.invalid
   if (options.showTooltip !== undefined) sliderOptions.showTooltip = options.showTooltip
   if (options.showTouchArea !== undefined) sliderOptions.showTouchArea = options.showTouchArea
   if (options.orientation !== undefined) sliderOptions.orientation = options.orientation
   if (options.ariaLabel !== undefined) sliderOptions.ariaLabel = options.ariaLabel
+  if (options.label !== undefined) sliderOptions.label = options.label
   if (options.ariaLabelledBy !== undefined) sliderOptions.ariaLabelledBy = options.ariaLabelledBy
   if (options.ariaDescribedBy !== undefined) sliderOptions.ariaDescribedBy = options.ariaDescribedBy
   if (options.ariaValueText !== undefined) sliderOptions.ariaValueText = options.ariaValueText
@@ -60,10 +63,12 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     defaultValue,
     disabled,
     required,
+    invalid,
     showTooltip,
     showTouchArea,
     orientation,
     ariaLabel,
+    label,
     ariaLabelledBy,
     ariaDescribedBy,
     ariaValueText,
@@ -99,10 +104,12 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
       value: currentValue,
       disabled,
       required,
+      invalid,
       showTooltip,
       showTouchArea,
       orientation,
       ariaLabel,
+      label,
       ariaLabelledBy,
       ariaDescribedBy,
       ariaValueText,
@@ -125,25 +132,15 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>((props, re
     onValueChange?.(nextValue)
   }
 
+  const htmlAttributes = toReactAttributes(toSliderHtmlAttributes(kit.a11y))
+
   return (
     <div className={className} style={style} {...kit.dataAttributes}>
       <div className="mw-slider__control">
         <input
+          {...htmlAttributes}
           {...inputProps}
           ref={ref}
-          type={kit.a11y.type}
-          id={kit.a11y.id}
-          name={kit.a11y.name}
-          min={kit.a11y.min}
-          max={kit.a11y.max}
-          step={kit.a11y.step}
-          disabled={kit.a11y.disabled === true}
-          required={kit.a11y.required === true}
-          aria-label={kit.a11y.ariaLabel}
-          aria-labelledby={kit.a11y.ariaLabelledBy}
-          aria-describedby={kit.a11y.ariaDescribedBy}
-          aria-valuetext={kit.a11y.ariaValueText}
-          aria-orientation={kit.a11y.ariaOrientation}
           className={kit.inputClassName}
           value={currentValue}
           onChange={handleChange}

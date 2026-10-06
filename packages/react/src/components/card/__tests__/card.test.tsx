@@ -15,6 +15,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runCardContract("react", {
+  renderCardOptions(options) {
+    renderWithProvider(<Card {...options} />)
+  },
+  getCardRoot() {
+    return document.querySelector('[data-component="card"]') as HTMLElement
+  },
   renderCard(args = {}) {
     renderWithProvider(
       <Card {...(args.title !== undefined ? { title: args.title } : {})}>

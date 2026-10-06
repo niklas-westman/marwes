@@ -1,6 +1,11 @@
-import { buildCheckboxGroupFieldA11yIds } from "@marwes-ui/core"
+import {
+  buildCheckboxGroupFieldA11yIds,
+  resolveCheckboxGroupFieldA11y,
+  toCheckboxGroupFieldHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Checkbox, type CheckboxProps } from "./checkbox"
@@ -50,7 +55,7 @@ export interface CheckboxGroupFieldProps {
   modelValue?: string[]
 }
 
-const checkboxGroupFieldPropKeys = [
+const checkboxGroupFieldPropKeys = definePropKeys<CheckboxGroupFieldProps>()([
   "label",
   "options",
   "description",
@@ -65,7 +70,7 @@ const checkboxGroupFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0
@@ -147,10 +152,14 @@ export const CheckboxGroupField = defineComponent(
         "fieldset",
         {
           class: wrapperClass.value,
-          "aria-labelledby": a11yIds.value.labelId,
-          "aria-describedby": a11yIds.value.describedBy,
-          "aria-invalid": hasError.value ? true : undefined,
-          "aria-required": props.required ? true : undefined,
+          ...toCheckboxGroupFieldHtmlAttributes(
+            resolveCheckboxGroupFieldA11y({
+              labelId: a11yIds.value.labelId,
+              describedBy: a11yIds.value.describedBy,
+              invalid: hasError.value,
+              required: props.required,
+            }),
+          ),
           disabled: props.disabled ? true : undefined,
           ...(props.dataAttributes ?? {}),
         },

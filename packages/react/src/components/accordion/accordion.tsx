@@ -4,8 +4,13 @@
  * - id is optional; falls back to React.useId() for aria wiring.
  */
 
-import { createAccordionRecipe } from "@marwes-ui/core"
+import {
+  createAccordionRecipe,
+  toAccordionPanelHtmlAttributes,
+  toAccordionTriggerHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export interface AccordionProps {
   /** Unique id for aria wiring. Defaults to React.useId() when omitted. */
@@ -30,7 +35,6 @@ export function Accordion(props: AccordionProps): React.ReactElement {
   if (open !== undefined) opts.open = open
   if (disabled !== undefined) opts.disabled = disabled
   const kit = createAccordionRecipe(opts)
-  const { a11y } = kit
 
   function handleTriggerClick(): void {
     if (disabled) return
@@ -40,12 +44,9 @@ export function Accordion(props: AccordionProps): React.ReactElement {
   return (
     <div className={[kit.className, className].filter(Boolean).join(" ")}>
       <button
-        id={a11y.triggerId}
         type="button"
         className="mw-accordion__trigger"
-        aria-expanded={a11y.ariaExpanded}
-        aria-controls={a11y.panelId}
-        aria-disabled={a11y.ariaDisabled}
+        {...toReactAttributes(toAccordionTriggerHtmlAttributes(kit.trigger.a11y))}
         disabled={disabled}
         onClick={handleTriggerClick}
       >
@@ -53,8 +54,7 @@ export function Accordion(props: AccordionProps): React.ReactElement {
         <span className="mw-accordion__icon" aria-hidden="true" />
       </button>
       <section
-        id={a11y.panelId}
-        aria-labelledby={a11y.triggerId}
+        {...toReactAttributes(toAccordionPanelHtmlAttributes(kit.panel.a11y))}
         className="mw-accordion__panel"
         hidden={!open}
       >

@@ -1,4 +1,10 @@
+import {
+  createAvatarGroupRecipe,
+  toAvatarGroupCounterHtmlAttributes,
+  toAvatarGroupHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Avatar, type AvatarProps } from "./avatar"
 
@@ -16,7 +22,7 @@ export type AvatarGroupProps = {
   dataAttributes?: Record<string, string>
 }
 
-const avatarGroupPropKeys = [
+const avatarGroupPropKeys = definePropKeys<AvatarGroupProps>()([
   "items",
   "overflowCount",
   "overflowLabel",
@@ -24,24 +30,24 @@ const avatarGroupPropKeys = [
   "label",
   "className",
   "dataAttributes",
-] as const
+])
 
 export const AvatarGroup = defineComponent(
   (props: AvatarGroupProps) => {
     const attrs = useAttrs()
     const nativeAriaLabel =
       typeof attrs["aria-label"] === "string" ? (attrs["aria-label"] as string) : undefined
-    const groupLabel = computed(
-      () => props.ariaLabel ?? props.label ?? nativeAriaLabel ?? "Avatar group",
-    )
+    const kit = computed(() => {
+      const ariaLabel = props.ariaLabel ?? nativeAriaLabel
+      return createAvatarGroupRecipe({
+        ...(props.overflowCount !== undefined ? { overflowCount: props.overflowCount } : {}),
+        ...(props.overflowLabel !== undefined ? { overflowLabel: props.overflowLabel } : {}),
+        ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+        ...(props.label !== undefined ? { label: props.label } : {}),
+      })
+    })
     const wrapperClass = computed(() =>
-      mergeClassNames("mw-avatar-group", props.className, attrs.class),
-    )
-    const shouldRenderOverflowCounter = computed(
-      () => props.overflowCount !== undefined && props.overflowCount > 0,
-    )
-    const resolvedOverflowLabel = computed(
-      () => props.overflowLabel ?? `${props.overflowCount} more people`,
+      mergeClassNames(kit.value.className, props.className, attrs.class),
     )
 
     return () => {
@@ -53,8 +59,8 @@ export const AvatarGroup = defineComponent(
           ...passthroughAttrs,
           ...(props.dataAttributes ?? {}),
           class: wrapperClass.value,
-          "data-component": "avatar-group",
-          "aria-label": groupLabel.value,
+          ...kit.value.dataAttributes,
+          ...toAvatarGroupHtmlAttributes(kit.value.a11y),
         },
         [
           ...props.items.map((item, itemIndex) =>
@@ -72,15 +78,14 @@ export const AvatarGroup = defineComponent(
               ],
             ),
           ),
-          shouldRenderOverflowCounter.value
+          kit.value.counter.visible
             ? h(
                 "span",
                 {
                   class: "mw-avatar-group__counter",
-                  role: "img",
-                  "aria-label": resolvedOverflowLabel.value,
+                  ...toAvatarGroupCounterHtmlAttributes(kit.value.counter.a11y),
                 },
-                `+${props.overflowCount}`,
+                kit.value.counter.text,
               )
             : null,
         ],

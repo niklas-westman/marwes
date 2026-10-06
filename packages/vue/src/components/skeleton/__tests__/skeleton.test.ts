@@ -22,6 +22,19 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runSkeletonContract("vue", {
+  renderSkeletonOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Skeleton as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getSkeletonRoot() {
+    return document.querySelector('[data-component="skeleton"]') as HTMLElement
+  },
   async renderSkeleton(args = {}) {
     renderWithProvider(Skeleton, args)
   },

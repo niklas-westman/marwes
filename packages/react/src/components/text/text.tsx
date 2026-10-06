@@ -3,9 +3,10 @@
  * - Renders non-heading typography styles without creating document outline.
  */
 
-import { textRecipe } from "@marwes-ui/core"
+import { textRecipe, toTextHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, TextAs, TextOptions, TextVariant } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { useTheme } from "../../provider/use-theme"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -49,7 +50,7 @@ export function Text(props: TextProps): React.ReactElement {
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
   return (
-    <Tag id={kit.a11y.id} className={className} style={style}>
+    <Tag {...toReactAttributes(toTextHtmlAttributes(kit.a11y))} className={className} style={style}>
       {children}
     </Tag>
   )

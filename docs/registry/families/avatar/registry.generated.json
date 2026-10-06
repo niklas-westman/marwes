@@ -15,6 +15,12 @@
     "roadmap": ["AXE_ROADMAP.md#pr-8--dev-time-warnings-expansion", "AXE_ROADMAP.md#avatar"],
     "core": [
       "packages/core/src/components/atoms/avatar/avatar-a11y.ts",
+      "packages/core/src/components/atoms/avatar/avatar-badge-recipe.ts",
+      "packages/core/src/components/atoms/avatar/avatar-badge-types.ts",
+      "packages/core/src/components/atoms/avatar/avatar-group-recipe.ts",
+      "packages/core/src/components/atoms/avatar/avatar-group-types.ts",
+      "packages/core/src/components/atoms/avatar/avatar-html-attributes.ts",
+      "packages/core/src/components/atoms/avatar/avatar-option-keys.ts",
       "packages/core/src/components/atoms/avatar/avatar-recipe.ts",
       "packages/core/src/components/atoms/avatar/avatar-types.ts",
       "packages/core/src/components/atoms/avatar/index.ts"

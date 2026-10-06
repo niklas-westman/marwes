@@ -1,5 +1,11 @@
-import { type CssVars, type SkeletonOptions, createSkeletonRecipe } from "@marwes-ui/core"
+import {
+  type CssVars,
+  type SkeletonOptions,
+  createSkeletonRecipe,
+  toSkeletonHtmlAttributes,
+} from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -53,11 +59,7 @@ export function Skeleton(props: SkeletonProps): React.ReactElement {
       {...dataAttributes}
       className={mergedClassName}
       style={mergedStyle}
-      role={renderKit.a11y.role}
-      id={renderKit.a11y.id}
-      aria-hidden={renderKit.a11y.ariaHidden ? "true" : undefined}
-      aria-label={renderKit.a11y.ariaLabel}
-      aria-live={renderKit.a11y.ariaLive}
+      {...toReactAttributes(toSkeletonHtmlAttributes(renderKit.a11y))}
     />
   )
 }

@@ -1,6 +1,12 @@
-import { createContextMenuRecipe } from "@marwes-ui/core"
+import {
+  createContextMenuRecipe,
+  toContextMenuDividerHtmlAttributes,
+  toContextMenuHtmlAttributes,
+  toContextMenuItemHtmlAttributes,
+} from "@marwes-ui/core"
 import type { ContextMenuActionItem, ContextMenuEntry, ContextMenuOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -33,8 +39,7 @@ export function ContextMenu(props: ContextMenuProps): React.ReactElement {
       {...restProps}
       {...kit.dataAttributes}
       className={cx(kit.className, className)}
-      role={kit.a11y.role}
-      aria-label={kit.a11y.ariaLabel}
+      {...toReactAttributes(toContextMenuHtmlAttributes(kit.a11y))}
     >
       {kit.items.map((item) => {
         if (item.kind === "divider") {
@@ -42,8 +47,7 @@ export function ContextMenu(props: ContextMenuProps): React.ReactElement {
             <div
               key={item.key}
               className={item.className}
-              role={item.a11y.role}
-              aria-orientation={item.a11y.ariaOrientation}
+              {...toReactAttributes(toContextMenuDividerHtmlAttributes(item.a11y))}
               {...item.dataAttributes}
             />
           )
@@ -52,10 +56,7 @@ export function ContextMenu(props: ContextMenuProps): React.ReactElement {
         return (
           <button
             key={item.key}
-            type={item.a11y.type}
-            role={item.a11y.role}
-            disabled={item.a11y.disabled}
-            aria-disabled={item.a11y.ariaDisabled}
+            {...toReactAttributes(toContextMenuItemHtmlAttributes(item.a11y))}
             className={item.className}
             onClick={() => {
               if (item.item.disabled) return

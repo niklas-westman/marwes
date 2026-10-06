@@ -1,7 +1,17 @@
 import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveButtonA11y } from "./button-a11y"
 import { resolveButtonLoading } from "./button-loading"
-import type { ButtonOptions, ButtonRenderKit } from "./button-types"
+import type { ButtonOptions, ButtonRenderKit, ButtonVariant } from "./button-types"
+
+// Exhaustive on purpose: adding a ButtonVariant fails to compile until it is classified here.
+const BUTTON_VARIANT_IS_FILLED: Record<ButtonVariant, boolean> = {
+  primary: true,
+  secondary: false,
+  neutral: false,
+  text: false,
+  success: true,
+  danger: true,
+}
 
 export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
   const resolvedLoading = resolveButtonLoading(opts.loading)
@@ -15,7 +25,7 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
   return {
     tag,
     blockClick,
-    loading: resolvedLoading,
+    loading: { ...resolvedLoading, spinnerInverted: BUTTON_VARIANT_IS_FILLED[variant] },
     a11y: {
       ...a11y,
       title:

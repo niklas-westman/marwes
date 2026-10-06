@@ -4,6 +4,11 @@
     createTabRecipe,
     moveTabSelection,
     resolveTabValue,
+    toTabHtmlAttributes,
+    resolveTabListA11y,
+    resolveTabPanelA11y,
+    toTabListHtmlAttributes,
+    toTabPanelHtmlAttributes,
   } from "@marwes-ui/core";
   import type { TabGroupItemState } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
@@ -37,15 +42,10 @@
 
   let internalActive = $state<string | undefined>(undefined);
 
-  // Initialize internal state
-  $effect(() => {
-    if (internalActive === undefined) {
-      internalActive = resolveTabValue(itemStates, defaultActiveTab);
-    }
-  });
-
+  // The default is resolved during render (not in an effect) so server-rendered markup already
+  // carries the initial selection.
   const activeValue = $derived(
-    controlledActive !== undefined ? resolveTabValue(itemStates, controlledActive) : internalActive
+    resolveTabValue(itemStates, controlledActive !== undefined ? controlledActive : (internalActive ?? defaultActiveTab))
   );
 
   function selectTab(value: string): void {
@@ -85,10 +85,9 @@
 
   <div
     class="mw-tab-group__list"
-    role="tablist"
-    id={a11yIds.tabListId}
-    aria-labelledby={label ? labelId : undefined}
-    aria-label={!label ? ariaLabel : undefined}
+    {...toTabListHtmlAttributes(
+      resolveTabListA11y({ tabListId: a11yIds.tabListId, labelId: label ? labelId : undefined, ariaLabel })
+    )}
     tabindex={-1}
     onkeydown={handleKeydown}
   >
@@ -98,13 +97,8 @@
       <button
         id={a11yIds.tabIds[tab.value]}
         type="button"
-        role={kit.a11y.role}
         class={kit.className}
-        aria-selected={kit.a11y.ariaSelected}
-        aria-disabled={kit.a11y.ariaDisabled}
-        aria-controls={kit.a11y.ariaControls}
-        aria-label={kit.a11y.ariaLabel}
-        tabindex={kit.a11y.tabIndex}
+        {...toTabHtmlAttributes(kit.a11y)}
         disabled={tab.disabled}
         onclick={() => !tab.disabled && selectTab(tab.value)}
       >
@@ -116,12 +110,10 @@
   {#each tabs as tab}
     {@const isActive = tab.value === activeValue}
     <div
-      id={a11yIds.panelIds[tab.value]}
-      role="tabpanel"
-      aria-labelledby={a11yIds.tabIds[tab.value]}
+      {...toTabPanelHtmlAttributes(
+        resolveTabPanelA11y({ id: a11yIds.panelIds[tab.value]!, tabId: a11yIds.tabIds[tab.value]!, hidden: !isActive })
+      )}
       class="mw-tab-group__panel"
-      tabindex={isActive ? 0 : undefined}
-      hidden={!isActive}
     >
       {#if isActive}
         {#if typeof tab.panel === "string"}

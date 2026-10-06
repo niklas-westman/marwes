@@ -54,7 +54,19 @@ describe("createButtonRecipe", () => {
       isLoading: false,
       disableWhileLoading: true,
       spinnerVariant: SpinnerVariants.classic,
+      spinnerInverted: true,
     })
+  })
+
+  it.each([
+    ["primary", true],
+    ["success", true],
+    ["danger", true],
+    ["secondary", false],
+    ["neutral", false],
+    ["text", false],
+  ] as const)("resolves spinnerInverted for %s as %s", (variant, expected) => {
+    expect(createButtonRecipe({ variant, loading: true }).loading.spinnerInverted).toBe(expected)
   })
 
   it("normalizes object loading without forcing disabled state when opted out", () => {
@@ -74,6 +86,7 @@ describe("createButtonRecipe", () => {
       disableWhileLoading: false,
       spinnerVariant: SpinnerVariants.dual,
       loadingLabel: "Saving…",
+      spinnerInverted: true,
     })
 
     // Button stays interactive — no disabled/aria-disabled attributes

@@ -4,7 +4,10 @@
     isRichTextHtmlEmpty,
     normalizeRichTextHtml,
     resolveRichTextAllowedFormats,
+    resolveRichTextToolbarButtonA11y,
     richTextCommandByFormat,
+    toRichTextHtmlAttributes,
+    toRichTextToolbarButtonHtmlAttributes,
   } from "@marwes-ui/core";
   import type { RichTextFormat, RichTextOptions } from "@marwes-ui/core";
   import { cssVarsToStyle } from "../../internal/css-vars.js";
@@ -42,11 +45,6 @@
   const editorHtml = $derived(isControlled ? normalizeRichTextHtml(controlledValue) : uncontrolledHtml);
   const isEditorEmpty = $derived(isRichTextHtmlEmpty(editorHtml));
 
-  const formatLabels: Record<RichTextFormat, string> = {
-    bold: "Bold",
-    italic: "Italic",
-    underline: "Underline",
-  };
 
   function syncEditorState(nextHtml: string): string {
     const normalized = normalizeRichTextHtml(nextHtml);
@@ -136,8 +134,9 @@
           class="mw-rich-text__toolbar-button"
           data-format={format}
           data-active={isActive ? "true" : undefined}
-          aria-label={formatLabels[format]}
-          aria-pressed={isActive}
+          {...toRichTextToolbarButtonHtmlAttributes(
+            resolveRichTextToolbarButtonA11y({ format, active: isActive, labels: options.formatLabels })
+          )}
           disabled={options.disabled}
           onmousedown={(e) => e.preventDefault()}
           onclick={() => toggleFormat(format)}
@@ -154,17 +153,7 @@
     data-rich-text-editor
     data-empty={isEditorEmpty ? "true" : undefined}
     data-placeholder={options.placeholder}
-    id={kit.a11y.id}
-    role="textbox"
-    tabindex={kit.a11y.tabIndex}
-    aria-label={kit.a11y.ariaLabel}
-    aria-labelledby={kit.a11y.ariaLabelledBy}
-    aria-describedby={kit.a11y.ariaDescribedBy}
-    aria-invalid={kit.a11y.ariaInvalid}
-    aria-disabled={kit.a11y.ariaDisabled}
-    aria-readonly={kit.a11y.ariaReadOnly}
-    aria-required={kit.a11y.ariaRequired}
-    aria-multiline={kit.a11y.ariaMultiline}
+    {...toRichTextHtmlAttributes(kit.a11y)}
     contenteditable={!options.disabled && !options.readOnly}
     oninput={handleInput}
     onkeydown={handleKeyDown}

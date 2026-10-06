@@ -20,6 +20,18 @@ function renderWithProvider(props: RadioProps) {
 }
 
 runRadioContract("vue", {
+  renderRadioOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () => h(MarwesProvider, null, { default: () => h(Radio as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getRadioElement() {
+    return document.querySelector("input.mw-radio") as HTMLInputElement
+  },
   async renderRadio(args = {}) {
     const props = {
       ariaLabel: args.ariaLabel ?? "Radio",

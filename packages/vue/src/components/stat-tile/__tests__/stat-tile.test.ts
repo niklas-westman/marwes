@@ -4,7 +4,9 @@
  */
 import { cleanup, render, screen } from "@testing-library/vue"
 import { afterEach } from "vitest"
+import { defineComponent, h } from "vue"
 import { runStatTileContract } from "../../../../../../tests/contracts/stat-tile.contract"
+import { MarwesProvider } from "../../../provider/marwes-provider"
 import { StatTile, type StatTileProps } from "../stat-tile"
 
 afterEach(cleanup)
@@ -16,6 +18,27 @@ const defaultProps = {
 } satisfies StatTileProps
 
 runStatTileContract("vue", {
+  renderStatTileOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(StatTile as never, {
+                  label: "Revenue",
+                  value: "42",
+                  trendValue: "3%",
+                  ...options,
+                }),
+            })
+        },
+      }),
+    )
+  },
+  getStatTileRoot() {
+    return document.querySelector('[data-component="stat-tile"]') as HTMLElement
+  },
   renderStatTile(args = {}) {
     render(StatTile, { props: { ...defaultProps, ...args } })
   },

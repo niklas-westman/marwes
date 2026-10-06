@@ -22,6 +22,19 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runSpinnerContract("vue", {
+  renderSpinnerOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Spinner as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getSpinnerRoot() {
+    return document.querySelector('[data-component="spinner"]') as HTMLElement
+  },
   async renderSpinner(args = {}) {
     renderWithProvider(Spinner, args)
   },

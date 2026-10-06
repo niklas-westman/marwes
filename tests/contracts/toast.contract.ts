@@ -3,6 +3,7 @@
  * semantics, dismiss button accessibility, and purpose toast variants
  * (Success, Error, Warning, Info) with canonical semantic attributes.
  */
+import type { ToastOptions } from "@marwes-ui/core"
 import { describe, expect, it, vi } from "vitest"
 
 export interface ToastDeliverySpec {
@@ -10,6 +11,10 @@ export interface ToastDeliverySpec {
   children: string
   intent?: "neutral" | "info" | "success" | "warning" | "error" | "brand"
   duration?: number | null
+  /** Text for a custom icon slot. */
+  icon?: string
+  /** Label for a custom action button. */
+  action?: string
 }
 
 export interface ToastContractHarness {
@@ -17,6 +22,7 @@ export interface ToastContractHarness {
     children?: string
     ariaLive?: "polite" | "assertive"
     dismissible?: boolean
+    dismissLabel?: string
   }): Promise<void> | void
   renderSuccess(): Promise<void> | void
   renderError(): Promise<void> | void
@@ -25,6 +31,7 @@ export interface ToastContractHarness {
   renderContainer(args: {
     toasts: ToastDeliverySpec[]
     maxVisible?: number
+    placement?: "top-right" | "top-left" | "bottom-right" | "bottom-left"
     onDismiss?: (id: string) => void
   }): Promise<void> | void
   renderProvider(args: {
@@ -41,6 +48,41 @@ export interface ToastContractHarness {
   focus(element: HTMLElement): Promise<void> | void
   blur(element: HTMLElement): Promise<void> | void
   advanceTime(ms: number): Promise<void> | void
+  /** Renders the base Toast with raw core options and a dismiss handler. */
+  renderToastOptions(options: ToastOptions): Promise<void> | void
+  getToastRoot(): HTMLElement
+}
+
+type ToastOptionCase = {
+  options: ToastOptions
+  expectRendered: (toast: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core ToastOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const toastOptionCases: Record<keyof ToastOptions, ToastOptionCase> = {
+  variant: {
+    options: { variant: "rich" },
+    expectRendered: (toast) => {
+      expect(toast).toHaveClass("mw-toast--rich")
+      expect(toast).toHaveAttribute("data-variant", "rich")
+    },
+  },
+  ariaLive: {
+    options: { ariaLive: "assertive" },
+    expectRendered: (toast) => {
+      expect(toast).toHaveAttribute("role", "alert")
+      expect(toast).toHaveAttribute("aria-live", "assertive")
+    },
+  },
+  dismissLabel: {
+    options: { dismissLabel: "Stäng meddelandet" },
+    expectRendered: (toast) =>
+      expect(toast.querySelector(".mw-toast__dismiss")).toHaveAttribute(
+        "aria-label",
+        "Stäng meddelandet",
+      ),
+  },
 }
 
 export function runToastContract(adapterName: string, harness: ToastContractHarness): void {
@@ -261,6 +303,49 @@ export function runToastContract(adapterName: string, harness: ToastContractHarn
       } finally {
         vi.useRealTimers()
       }
+    })
+
+    it.each(["neutral", "success", "error", "warning", "info"] as const)(
+      "container toast renders a custom icon and action for %s intent",
+      async (intent) => {
+        await harness.renderContainer({
+          toasts: [{ id: "t1", children: "Saved", intent, icon: "custom-icon", action: "Undo" }],
+        })
+
+        expect(harness.getByText("custom-icon")).toBeInTheDocument()
+        expect(harness.getByRole("button", { name: /undo/i })).toBeInTheDocument()
+      },
+    )
+
+    it("names the dismiss button 'Dismiss' by default and from dismissLabel when set", async () => {
+      await harness.renderRawToast({ dismissible: true })
+      expect(harness.getByRole("button", { name: /^dismiss$/i })).toBeInTheDocument()
+    })
+
+    it("uses dismissLabel as the dismiss button name", async () => {
+      await harness.renderRawToast({ dismissible: true, dismissLabel: "Stäng meddelandet" })
+      expect(harness.getByRole("button", { name: /stäng meddelandet/i })).toBeInTheDocument()
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(toastOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderToastOptions(optionCase.options)
+
+        const element = harness.getToastRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
+    })
+
+    it("ToastContainer places the stack from the placement option", async () => {
+      await harness.renderContainer({
+        placement: "bottom-left",
+        toasts: [{ id: "toast-1", children: "Draft saved.", duration: null }],
+      })
+
+      expect(document.querySelector(".mw-toast-container")).toHaveClass(
+        "mw-toast-container--bottom-left",
+      )
     })
   })
 }

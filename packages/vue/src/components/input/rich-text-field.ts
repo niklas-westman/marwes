@@ -1,6 +1,7 @@
 import { buildRichTextFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { RichText, type RichTextProps } from "./rich-text"
@@ -15,7 +16,7 @@ export type RichTextFieldProps = {
   modelValue?: string
 }
 
-const richTextFieldPropKeys = [
+const richTextFieldPropKeys = definePropKeys<RichTextFieldProps>()([
   "id",
   "label",
   "helperText",
@@ -23,7 +24,7 @@ const richTextFieldPropKeys = [
   "editor",
   "ariaDescribedBy",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

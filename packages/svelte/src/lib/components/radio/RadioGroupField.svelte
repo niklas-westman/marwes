@@ -1,6 +1,11 @@
 <script lang="ts">
-  import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core";
+  import {
+    buildRadioGroupFieldA11yIds,
+    resolveRadioGroupFieldA11y,
+    toRadioGroupFieldHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
+  import { provideRadioGroupContext } from "../../internal/radio-group-context.js";
   import Text from "../text/Text.svelte";
   import type { RadioGroupFieldProps } from "./types.js";
 
@@ -16,6 +21,12 @@
     children,
     class: className,
   }: RadioGroupFieldProps = $props();
+
+  provideRadioGroupContext({
+    get disabled() {
+      return disabled === true;
+    },
+  });
 
   const uniqueId = $props.id();
   const fieldId = $derived(userProvidedId ?? `mw-radio-group-${uniqueId}`);
@@ -58,11 +69,9 @@
   {/if}
 
   <div
-    role="radiogroup"
-    aria-labelledby={a11yIds.labelId}
-    aria-describedby={a11yIds.describedBy}
-    aria-invalid={hasError ? true : undefined}
-    aria-required={required ? true : undefined}
+    {...toRadioGroupFieldHtmlAttributes(
+      resolveRadioGroupFieldA11y({ labelId: a11yIds.labelId, describedBy: a11yIds.describedBy, invalid: hasError, required })
+    )}
     class="mw-radio-group-field__options"
   >
     {@render children?.()}

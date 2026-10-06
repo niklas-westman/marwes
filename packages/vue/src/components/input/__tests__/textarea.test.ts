@@ -20,6 +20,12 @@ function renderWithProvider(component: Component, props: Record<string, unknown>
 }
 
 runTextareaContract("vue", {
+  renderTextareaOptions(options) {
+    renderWithProvider(Textarea, { ...options })
+  },
+  getTextareaElement() {
+    return document.querySelector("textarea.mw-textarea") as HTMLTextAreaElement
+  },
   async renderTextarea(args = {}) {
     const props = {
       ariaLabel: args.ariaLabel ?? "Textarea",

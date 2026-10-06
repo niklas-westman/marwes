@@ -1,6 +1,7 @@
-import { createBadgeRecipe } from "@marwes-ui/core"
+import { createBadgeRecipe, toBadgeHtmlAttributes } from "@marwes-ui/core"
 import type { BadgeOptions } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export type BadgeProps = BadgeOptions & {
   children?: React.ReactNode
@@ -18,7 +19,7 @@ export function Badge(props: BadgeProps): React.ReactElement {
     <span
       id={id}
       className={[kit.className, className].filter(Boolean).join(" ")}
-      aria-label={kit.a11y.ariaLabel}
+      {...toReactAttributes(toBadgeHtmlAttributes(kit.a11y))}
       {...kit.dataAttributes}
       {...dataAttributes}
     >

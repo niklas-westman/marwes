@@ -9,6 +9,8 @@ export interface DialogOptions {
   size?: DialogSize
   showFooter?: boolean
   dismissible?: boolean
+  /** Accessible name of the close button. Defaults to "Close dialog". */
+  closeLabel?: string
   modal?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
@@ -32,5 +34,11 @@ export interface DialogRenderKit {
   showFooter: boolean
   showCloseButton: boolean
   a11y: DialogA11yProps
+  closeButton: { a11y: DialogCloseButtonA11yProps }
   dataAttributes: Record<string, string | boolean | undefined>
+}
+
+/** ARIA fields for the close button. */
+export interface DialogCloseButtonA11yProps {
+  ariaLabel: string
 }

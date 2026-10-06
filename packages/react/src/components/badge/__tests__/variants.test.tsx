@@ -16,6 +16,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runBadgeContract("react", {
+  renderBadge(options, text) {
+    renderWithProvider(<Badge {...options}>{text}</Badge>)
+  },
+  getBadgeElement() {
+    return document.querySelector('[data-component="badge"]') as HTMLElement
+  },
   renderStatus() {
     renderWithProvider(<StatusBadge variant={BadgeVariant.success}>Active</StatusBadge>)
   },

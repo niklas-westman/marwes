@@ -1,5 +1,12 @@
-import { IconName, type IconNameType } from "@marwes-ui/core"
+import {
+  IconName,
+  type IconNameType,
+  resolveTooltipGroupA11y,
+  toTooltipGroupContentHtmlAttributes,
+  toTooltipTriggerHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 import { Tooltip } from "./tooltip"
 
@@ -27,7 +34,7 @@ export function TooltipGroup(props: TooltipGroupProps): React.ReactElement {
   const {
     content,
     icon = IconName.HelpCircle,
-    triggerLabel = "Show tooltip",
+    triggerLabel,
     open,
     defaultOpen = false,
     onOpenChange,
@@ -80,6 +87,12 @@ export function TooltipGroup(props: TooltipGroupProps): React.ReactElement {
     [isControlled, onOpenChange, resolvedOpen],
   )
 
+  const groupA11y = resolveTooltipGroupA11y({
+    tooltipId: resolvedTooltipId,
+    open: resolvedOpen,
+    triggerLabel,
+  })
+
   return (
     <span
       {...nativeSpanProps}
@@ -126,7 +139,7 @@ export function TooltipGroup(props: TooltipGroupProps): React.ReactElement {
           id={resolvedTooltipId}
           className={tooltipClassName}
           data-state={resolvedOpen ? "open" : "closed"}
-          aria-hidden={resolvedOpen ? undefined : "true"}
+          {...toReactAttributes(toTooltipGroupContentHtmlAttributes(groupA11y.content))}
         >
           {content}
         </Tooltip>
@@ -135,8 +148,7 @@ export function TooltipGroup(props: TooltipGroupProps): React.ReactElement {
       <button
         type="button"
         className={cx("mw-tooltip-group__trigger", triggerClassName)}
-        aria-label={triggerLabel}
-        aria-describedby={resolvedOpen ? resolvedTooltipId : undefined}
+        {...toReactAttributes(toTooltipTriggerHtmlAttributes(groupA11y.trigger))}
       >
         <Icon name={icon} decorative />
       </button>

@@ -24,13 +24,7 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 
 runIconContract("vue", {
   async renderIcon(args = {}) {
-    const iconProps = {
-      name: "search",
-      ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
-      ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
-      ...(args.size !== undefined ? { size: args.size } : {}),
-      ...(args.strokeWidth !== undefined ? { strokeWidth: args.strokeWidth } : {}),
-    }
+    const iconProps = { name: "search", ...args }
 
     renderWithProvider(Icon, iconProps)
   },

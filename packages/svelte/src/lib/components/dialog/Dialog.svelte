@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { IconName, createDialogRecipe } from "@marwes-ui/core";
+  import {
+    IconName,
+    createDialogRecipe,
+    toDialogHtmlAttributes,
+    toDialogCloseButtonHtmlAttributes,
+  } from "@marwes-ui/core";
   import type { DialogOptions } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -17,6 +22,7 @@
     size,
     showFooter,
     dismissible,
+    closeLabel,
     modal,
     ariaLabel,
     ariaLabelledBy,
@@ -39,6 +45,7 @@
       dismissible: isDismissible,
     };
     if (modal !== undefined) opts.modal = modal;
+    if (closeLabel !== undefined) opts.closeLabel = closeLabel;
     if (dataAttributes !== undefined) opts.dataAttributes = dataAttributes;
     if (size !== undefined) opts.size = size;
     if (ariaLabel !== undefined) opts.ariaLabel = ariaLabel;
@@ -67,11 +74,7 @@
 <section
   id={dialogId}
   class={mergedClass}
-  role={kit.a11y.role}
-  aria-modal={kit.a11y.ariaModal ? "true" : undefined}
-  aria-label={kit.a11y.ariaLabel}
-  aria-labelledby={kit.a11y.ariaLabelledBy}
-  aria-describedby={kit.a11y.ariaDescribedBy}
+  {...toDialogHtmlAttributes(kit.a11y)}
   tabindex={-1}
   {...kit.dataAttributes}
 >
@@ -89,7 +92,7 @@
         <button
           type="button"
           class="mw-dialog__close"
-          aria-label="Close dialog"
+          {...toDialogCloseButtonHtmlAttributes(kit.closeButton.a11y)}
           onclick={handleClose}
         >
           <Icon name={IconName.X} decorative />

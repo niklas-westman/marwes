@@ -1,6 +1,7 @@
-import { checkboxRecipe } from "@marwes-ui/core"
+import { checkboxRecipe, toCheckboxHtmlAttributes } from "@marwes-ui/core"
 import type { CheckboxProps as CoreCheckboxProps, CssVars } from "@marwes-ui/core"
 import { computed, defineComponent, h, onMounted, ref, useAttrs, watch } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, mergeStyles, omitAttrs } from "../../internal/render-utils"
 
 export type CheckboxProps = CoreCheckboxProps & {
@@ -10,7 +11,7 @@ export type CheckboxProps = CoreCheckboxProps & {
   className?: string
 }
 
-const checkboxPropKeys = [
+const checkboxPropKeys = definePropKeys<CheckboxProps>()([
   "size",
   "checked",
   "modelValue",
@@ -29,7 +30,7 @@ const checkboxPropKeys = [
   "onCheckedChange",
   "onChange",
   "className",
-] as const
+])
 
 export const Checkbox = defineComponent(
   (props: CheckboxProps, { emit }) => {
@@ -75,16 +76,7 @@ export const Checkbox = defineComponent(
         type: "checkbox",
         class: className,
         style,
-        id: a11y.id,
-        name: a11y.name,
-        value: a11y.value,
-        disabled: a11y.disabled === true,
-        required: a11y.required === true,
-        "aria-label": a11y.ariaLabel,
-        "aria-labelledby": a11y.ariaLabelledBy,
-        "aria-describedby": a11y.ariaDescribedBy,
-        "aria-checked": a11y.ariaChecked,
-        "aria-invalid": a11y.ariaInvalid === true ? true : undefined,
+        ...toCheckboxHtmlAttributes(a11y),
         checked: renderKit.checked ?? renderKit.defaultChecked,
         onChange: (event: Event) => {
           props.onChange?.(event)

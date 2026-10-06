@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createSpinnerRecipe } from "@marwes-ui/core";
+  import { createSpinnerRecipe, toSpinnerHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import { svgAttrsToKebab } from "../../internal/svg-attrs.js";
@@ -35,11 +35,7 @@
 <span
   class={mergedClass}
   style={mergedStyle}
-  role={kit.a11y.role}
-  id={kit.a11y.id}
-  aria-hidden={kit.a11y.ariaHidden ? "true" : undefined}
-  aria-label={kit.a11y.ariaLabel}
-  aria-live={kit.a11y.ariaLive}
+  {...toSpinnerHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
   {...dataAttributes}
 >

@@ -17,6 +17,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSwitchContract("react", {
+  renderSwitchOptions(options) {
+    renderWithProvider(<Switch {...options} />)
+  },
+  getSwitchElement() {
+    return document.querySelector(".mw-switch") as HTMLElement
+  },
   async renderSwitch(args = {}) {
     const switchProps = {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),

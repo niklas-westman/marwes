@@ -1,6 +1,7 @@
-import type { ButtonOptions, ButtonVariant, CssVars } from "@marwes-ui/core"
-import { createButtonRecipe } from "@marwes-ui/core"
+import type { ButtonOptions, CssVars } from "@marwes-ui/core"
+import { buttonOptionKeys, createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import {
   getDefaultSlotChildren,
   mergeClassNames,
@@ -9,10 +10,6 @@ import {
 } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { ButtonSpinner } from "../spinner"
-
-function isFilledButtonVariant(variant: ButtonVariant): boolean {
-  return variant === "primary" || variant === "success" || variant === "danger"
-}
 
 function hasSlotChildren(slotChildren: ReturnType<typeof getDefaultSlotChildren>): boolean {
   return slotChildren !== undefined && slotChildren.length > 0
@@ -23,33 +20,7 @@ export type ButtonProps = ButtonOptions & {
   className?: string
 }
 
-const buttonPropKeys = [
-  "as",
-  "href",
-  "type",
-  "size",
-  "variant",
-  "disabled",
-  "loading",
-  "error",
-  "toggle",
-  "pressed",
-  "ariaLabel",
-  "ariaLabelledBy",
-  "label",
-  "hasVisibleText",
-  "ariaExpanded",
-  "ariaControls",
-  "iconLeft",
-  "iconRight",
-  "iconOnly",
-  "action",
-  "tooltip",
-  "confirmation",
-  "dataAttributes",
-  "onClick",
-  "className",
-] as const
+const buttonPropKeys = definePropKeys<ButtonProps>()([...buttonOptionKeys, "onClick", "className"])
 
 export const Button = defineComponent(
   (props: ButtonProps, { slots, emit }) => {
@@ -61,18 +32,18 @@ export const Button = defineComponent(
       const renderKit = kit.value
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
+      const htmlAttributes = toButtonHtmlAttributes(renderKit.a11y)
       const style = mergeStyles(renderKit.vars as CssVars, attrs.style)
 
       const slotChildren = getDefaultSlotChildren(slots)
       const content = []
-      const resolvedVariant = (props.variant ?? "primary") as ButtonVariant
       const resolvedLoading = renderKit.loading
 
       if (resolvedLoading.isLoading) {
         content.push(
           h(ButtonSpinner, {
             variant: resolvedLoading.spinnerVariant,
-            inverted: isFilledButtonVariant(resolvedVariant),
+            inverted: resolvedLoading.spinnerInverted,
           }),
         )
       } else if (props.iconLeft) {
@@ -99,16 +70,7 @@ export const Button = defineComponent(
           {
             ...passthroughAttrs,
             ...renderKit.dataAttributes,
-            type: renderKit.a11y.type,
-            disabled: renderKit.a11y.disabled,
-            "aria-label": renderKit.a11y.ariaLabel,
-            "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-            "aria-busy": renderKit.a11y.ariaBusy,
-            "aria-disabled": renderKit.a11y.ariaDisabled,
-            "aria-pressed": renderKit.a11y.ariaPressed,
-            "aria-expanded": renderKit.a11y.ariaExpanded,
-            "aria-controls": renderKit.a11y.ariaControls,
-            title: renderKit.a11y.title,
+            ...htmlAttributes,
             class: className,
             style,
             onClick: (event: MouseEvent) => {
@@ -124,17 +86,7 @@ export const Button = defineComponent(
         {
           ...passthroughAttrs,
           ...renderKit.dataAttributes,
-          href: renderKit.a11y.href,
-          role: renderKit.a11y.role,
-          tabindex: renderKit.a11y.tabIndex,
-          "aria-label": renderKit.a11y.ariaLabel,
-          "aria-labelledby": renderKit.a11y.ariaLabelledBy,
-          "aria-busy": renderKit.a11y.ariaBusy,
-          "aria-disabled": renderKit.a11y.ariaDisabled,
-          "aria-pressed": renderKit.a11y.ariaPressed,
-          "aria-expanded": renderKit.a11y.ariaExpanded,
-          "aria-controls": renderKit.a11y.ariaControls,
-          title: renderKit.a11y.title,
+          ...htmlAttributes,
           class: className,
           style,
           onClick: (event: MouseEvent) => {

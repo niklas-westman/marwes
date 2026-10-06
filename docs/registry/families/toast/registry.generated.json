@@ -20,6 +20,7 @@
       "packages/core/src/components/atoms/toast/index.ts",
       "packages/core/src/components/atoms/toast/toast-a11y.ts",
       "packages/core/src/components/atoms/toast/toast-container-types.ts",
+      "packages/core/src/components/atoms/toast/toast-html-attributes.ts",
       "packages/core/src/components/atoms/toast/toast-recipe.ts",
       "packages/core/src/components/atoms/toast/toast-types.ts"
     ],

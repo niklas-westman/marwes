@@ -2,6 +2,7 @@
  * Shared contract for the Paragraph atom — native paragraph rendering
  * with default styling, size variants, and id metadata.
  */
+import type { ParagraphOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type ParagraphSize = "sm" | "md" | "lg"
@@ -13,6 +14,24 @@ export type ParagraphContractHarness = {
     id?: string
   }): Promise<void> | void
   getByText(text: string): HTMLElement
+  /** Renders the base component with raw core options. */
+  renderParagraphOptions(options: ParagraphOptions): Promise<void> | void
+  getParagraphRoot(): HTMLElement
+}
+
+type ParagraphOptionCase = {
+  options: ParagraphOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core ParagraphOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const paragraphOptionCases: Record<keyof ParagraphOptions, ParagraphOptionCase> = {
+  size: { options: { size: "lg" }, expectRendered: (root) => expect(root).toHaveClass("mw-p--lg") },
+  id: {
+    options: { id: "intro" },
+    expectRendered: (root) => expect(root).toHaveAttribute("id", "intro"),
+  },
 }
 
 export function runParagraphContract(adapterName: string, harness: ParagraphContractHarness): void {
@@ -37,6 +56,16 @@ export function runParagraphContract(adapterName: string, harness: ParagraphCont
       const paragraphElement = harness.getByText("Lead paragraph")
       expect(paragraphElement).toHaveAttribute("id", "lead-text")
       expect(paragraphElement.className).toContain("mw-p--lg")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(paragraphOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderParagraphOptions(optionCase.options)
+
+        const element = harness.getParagraphRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

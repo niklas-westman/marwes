@@ -4,7 +4,7 @@
  * - Inserts a fixed vertical gap driven by the --mw-spacing-* token scale.
  */
 
-import { createSpacingRecipe } from "@marwes-ui/core"
+import { createSpacingRecipe, toSpacingHtmlAttributes } from "@marwes-ui/core"
 import type { SpacingOptions, SpacingSize } from "@marwes-ui/core"
 import type { CssVars } from "@marwes-ui/core"
 import * as React from "react"
@@ -66,7 +66,14 @@ export type SpacerProps = SpacingProps
  * ```
  */
 export const Spacing = React.forwardRef<HTMLDivElement, SpacingProps>((props, ref) => {
-  const { className: customClassName, scale, size, spacing, style: customStyle } = props
+  const {
+    className: customClassName,
+    scale,
+    size,
+    spacing,
+    style: customStyle,
+    ...nativeProps
+  } = props
   const resolvedSize = spacing ?? size
 
   const kit = createSpacingRecipe({
@@ -77,7 +84,16 @@ export const Spacing = React.forwardRef<HTMLDivElement, SpacingProps>((props, re
   const style = { ...(kit.vars as StyleWithVars), ...customStyle }
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
-  return <div ref={ref} {...kit.a11y} {...kit.dataAttributes} className={className} style={style} />
+  return (
+    <div
+      ref={ref}
+      {...nativeProps}
+      {...toSpacingHtmlAttributes(kit.a11y)}
+      {...kit.dataAttributes}
+      className={className}
+      style={style}
+    />
+  )
 })
 
 Spacing.displayName = "Spacing"

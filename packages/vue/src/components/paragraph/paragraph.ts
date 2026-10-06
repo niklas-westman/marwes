@@ -1,6 +1,7 @@
-import { paragraphRecipe } from "@marwes-ui/core"
+import { paragraphRecipe, toParagraphHtmlAttributes } from "@marwes-ui/core"
 import type { CssVars, ParagraphOptions, ParagraphSize } from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import {
   getDefaultSlotChildren,
   mergeClassNames,
@@ -14,7 +15,7 @@ export type ParagraphProps = ParagraphOptions & {
   className?: string
 }
 
-const paragraphPropKeys = ["size", "id", "className"] as const
+const paragraphPropKeys = definePropKeys<ParagraphProps>()(["size", "id", "className"])
 
 export const Paragraph = defineComponent(
   (props: ParagraphProps, { slots }) => {
@@ -32,7 +33,7 @@ export const Paragraph = defineComponent(
         "p",
         {
           ...passthroughAttrs,
-          id: renderKit.a11y.id,
+          ...toParagraphHtmlAttributes(renderKit.a11y),
           class: className,
           style,
         },

@@ -21,6 +21,7 @@
       "packages/core/src/components/atoms/tab/tab-a11y.ts",
       "packages/core/src/components/atoms/tab/tab-group-a11y.ts",
       "packages/core/src/components/atoms/tab/tab-group-types.ts",
+      "packages/core/src/components/atoms/tab/tab-html-attributes.ts",
       "packages/core/src/components/atoms/tab/tab-recipe.ts",
       "packages/core/src/components/atoms/tab/tab-types.ts"
     ],

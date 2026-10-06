@@ -17,11 +17,22 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runToastContract("react", {
+  renderToastOptions(options) {
+    renderWithProvider(
+      <Toast onDismiss={() => {}} {...options}>
+        Saved
+      </Toast>,
+    )
+  },
+  getToastRoot() {
+    return document.querySelector('[data-component="toast"]') as HTMLElement
+  },
   renderRawToast(args) {
     renderWithProvider(
       <Toast
         {...(args?.ariaLive ? { ariaLive: args.ariaLive } : {})}
         {...(args?.dismissible ? { onDismiss: () => {} } : {})}
+        {...(args?.dismissLabel ? { dismissLabel: args.dismissLabel } : {})}
       >
         {args?.children ?? "Project saved."}
       </Toast>,
@@ -42,10 +53,13 @@ runToastContract("react", {
   renderContainer(args) {
     renderWithProvider(
       <ToastContainer
-        toasts={args.toasts.map((toast) => ({
+        toasts={args.toasts.map(({ icon, action, ...toast }) => ({
           ...toast,
+          ...(icon !== undefined ? { icon: <span>{icon}</span> } : {}),
+          ...(action !== undefined ? { action: <button type="button">{action}</button> } : {}),
         }))}
         {...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {})}
+        {...(args.placement !== undefined ? { placement: args.placement } : {})}
         {...(args.onDismiss ? { onDismiss: args.onDismiss } : {})}
       />,
     )

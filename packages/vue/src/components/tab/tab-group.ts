@@ -2,10 +2,15 @@ import {
   type TabGroupItemState,
   buildTabGroupA11yIds,
   moveTabSelection,
+  resolveTabListA11y,
+  resolveTabPanelA11y,
   resolveTabValue,
+  toTabListHtmlAttributes,
+  toTabPanelHtmlAttributes,
 } from "@marwes-ui/core"
 import { type VNodeChild, computed, defineComponent, h, ref, watch } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Paragraph } from "../paragraph"
 import { Text } from "../text"
@@ -37,7 +42,7 @@ export type TabPanelProps = {
   className?: string
 }
 
-const tabGroupPropKeys = [
+const tabGroupPropKeys = definePropKeys<TabGroupProps>()([
   "id",
   "label",
   "ariaLabel",
@@ -46,9 +51,9 @@ const tabGroupPropKeys = [
   "defaultActiveTab",
   "dataAttributes",
   "className",
-] as const
+])
 
-const tabPanelPropKeys = ["id", "tabId", "hidden", "className"] as const
+const tabPanelPropKeys = definePropKeys<TabPanelProps>()(["id", "tabId", "hidden", "className"])
 
 function hasContent(value: VNodeChild | undefined): boolean {
   if (value === undefined || value === null || value === false) {
@@ -118,12 +123,10 @@ export const TabPanel = defineComponent(
         "div",
         {
           ...attrs,
-          id: props.id,
-          role: "tabpanel",
-          "aria-labelledby": props.tabId,
+          ...toTabPanelHtmlAttributes(
+            resolveTabPanelA11y({ id: props.id, tabId: props.tabId, hidden: props.hidden }),
+          ),
           class: mergeClassNames("mw-tab-group__panel", props.className, attrs.class),
-          hidden: props.hidden,
-          tabindex: props.hidden ? undefined : 0,
         },
         slots.default?.(),
       )
@@ -257,11 +260,14 @@ export const TabGroup = defineComponent(
           h(
             "div",
             {
-              id: a11yIds.value.tabListId,
               class: "mw-tab-group__list",
-              role: "tablist",
-              "aria-label": hasLabel.value ? undefined : (props.ariaLabel ?? "Tabs"),
-              "aria-labelledby": hasLabel.value ? a11yIds.value.labelId : undefined,
+              ...toTabListHtmlAttributes(
+                resolveTabListA11y({
+                  tabListId: a11yIds.value.tabListId,
+                  labelId: hasLabel.value ? a11yIds.value.labelId : undefined,
+                  ariaLabel: props.ariaLabel,
+                }),
+              ),
               onKeydown: handleKeydown,
             },
             props.tabs.map((tab) =>

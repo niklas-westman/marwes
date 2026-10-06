@@ -1,7 +1,14 @@
-import { type DialogOptions, IconName, createDialogRecipe } from "@marwes-ui/core"
+import {
+  type DialogOptions,
+  IconName,
+  createDialogRecipe,
+  toDialogCloseButtonHtmlAttributes,
+  toDialogHtmlAttributes,
+} from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 
@@ -39,7 +46,7 @@ export type DialogProps = DialogOptions & {
   dataAttributes?: Record<string, string>
 }
 
-const dialogPropKeys = [
+const dialogPropKeys = definePropKeys<DialogProps>()([
   "id",
   "title",
   "description",
@@ -47,6 +54,7 @@ const dialogPropKeys = [
   "size",
   "showFooter",
   "dismissible",
+  "closeLabel",
   "modal",
   "ariaLabel",
   "ariaLabelledBy",
@@ -54,7 +62,7 @@ const dialogPropKeys = [
   "onClose",
   "className",
   "dataAttributes",
-] as const
+])
 
 export const Dialog = defineComponent(
   (props: DialogProps, { attrs, slots }) => {
@@ -79,6 +87,7 @@ export const Dialog = defineComponent(
         showFooter: hasFooter.value,
         dismissible: dismissible.value,
         ...(props.modal !== undefined ? { modal: props.modal } : {}),
+        ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
       }
 
       if (props.dataAttributes) {
@@ -116,11 +125,7 @@ export const Dialog = defineComponent(
           ...kit.value.dataAttributes,
           id: id.value,
           class: mergeClassNames(kit.value.className, props.className, attrs.class),
-          role: kit.value.a11y.role,
-          "aria-modal": kit.value.a11y.ariaModal ? "true" : undefined,
-          "aria-label": kit.value.a11y.ariaLabel,
-          "aria-labelledby": kit.value.a11y.ariaLabelledBy,
-          "aria-describedby": kit.value.a11y.ariaDescribedBy,
+          ...toDialogHtmlAttributes(kit.value.a11y),
           tabindex: -1,
         },
         [
@@ -142,7 +147,7 @@ export const Dialog = defineComponent(
                         {
                           type: "button",
                           class: "mw-dialog__close",
-                          "aria-label": "Close dialog",
+                          ...toDialogCloseButtonHtmlAttributes(kit.value.closeButton.a11y),
                           onClick: () => props.onClose?.(),
                         },
                         [h(Icon, { name: IconName.X, decorative: true })],

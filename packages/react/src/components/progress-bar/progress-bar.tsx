@@ -1,6 +1,12 @@
-import { type CssVars, type ProgressBarOptions, createProgressBarRecipe } from "@marwes-ui/core"
+import {
+  type CssVars,
+  type ProgressBarOptions,
+  createProgressBarRecipe,
+  toProgressBarHtmlAttributes,
+} from "@marwes-ui/core"
 import type * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -66,16 +72,7 @@ export function ProgressBar(props: ProgressBarProps): React.ReactElement {
       {...nativeDivProps}
       {...kit.dataAttributes}
       {...dataAttributes}
-      id={kit.a11y.id}
-      role={kit.a11y.role}
-      aria-valuemin={kit.a11y.ariaValueMin}
-      aria-valuemax={kit.a11y.ariaValueMax}
-      aria-valuenow={kit.a11y.ariaValueNow}
-      aria-valuetext={kit.a11y.ariaValueText}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-describedby={kit.a11y.ariaDescribedBy}
-      aria-disabled={kit.a11y.ariaDisabled ? "true" : undefined}
+      {...toReactAttributes(toProgressBarHtmlAttributes(kit.a11y))}
       className={mergedClassName}
       style={mergedStyle}
     >

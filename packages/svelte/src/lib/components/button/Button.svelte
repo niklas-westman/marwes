@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type ButtonVariant, createButtonRecipe } from "@marwes-ui/core";
+  import { createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -15,18 +15,12 @@
   }: ButtonProps = $props();
 
   const kit = $derived(createButtonRecipe(options));
+  const htmlAttributes = $derived(toButtonHtmlAttributes(kit.a11y));
   const mergedClass = $derived(mergeClass(kit.className, className));
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 
-  const resolvedVariant = $derived((options.variant ?? "primary") as ButtonVariant);
-  const isFilledVariant = $derived(
-    resolvedVariant === "primary" || resolvedVariant === "success" || resolvedVariant === "danger"
-  );
-
-  const visibleLabel = $derived(
-    kit.loading.isLoading && kit.loading.loadingLabel !== undefined
-      ? kit.loading.loadingLabel
-      : undefined
+  const loadingLabelOverride = $derived(
+    kit.loading.isLoading ? kit.loading.loadingLabel : undefined
   );
 
   function handleClick(e: MouseEvent): void {
@@ -40,12 +34,14 @@
 
 {#snippet buttonContent()}
   {#if kit.loading.isLoading}
-    <ButtonSpinner variant={kit.loading.spinnerVariant} inverted={isFilledVariant} />
+    <ButtonSpinner variant={kit.loading.spinnerVariant} inverted={kit.loading.spinnerInverted} />
   {:else if options.iconLeft}
     <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
   {/if}
-  {#if visibleLabel}
-    <span class="mw-btn__label">{visibleLabel}</span>
+  {#if loadingLabelOverride !== undefined}
+    {#if loadingLabelOverride}
+      <span class="mw-btn__label">{loadingLabelOverride}</span>
+    {/if}
   {:else if children}
     <span class="mw-btn__label">
       {@render children()}
@@ -58,16 +54,7 @@
 
 {#if kit.tag === "button"}
   <button
-    type={kit.a11y.type}
-    disabled={kit.a11y.disabled}
-    aria-label={kit.a11y.ariaLabel}
-    aria-labelledby={kit.a11y.ariaLabelledBy}
-    aria-busy={kit.a11y.ariaBusy}
-    aria-disabled={kit.a11y.ariaDisabled}
-    aria-pressed={kit.a11y.ariaPressed}
-    aria-expanded={kit.a11y.ariaExpanded}
-    aria-controls={kit.a11y.ariaControls}
-    title={kit.a11y.title}
+    {...htmlAttributes}
     class={mergedClass}
     style={mergedStyle}
     onclick={handleClick}
@@ -77,17 +64,7 @@
   </button>
 {:else}
   <a
-    href={kit.a11y.href}
-    role={kit.a11y.role}
-    tabindex={kit.a11y.tabIndex}
-    aria-label={kit.a11y.ariaLabel}
-    aria-labelledby={kit.a11y.ariaLabelledBy}
-    aria-busy={kit.a11y.ariaBusy}
-    aria-disabled={kit.a11y.ariaDisabled}
-    aria-pressed={kit.a11y.ariaPressed}
-    aria-expanded={kit.a11y.ariaExpanded}
-    aria-controls={kit.a11y.ariaControls}
-    title={kit.a11y.title}
+    {...htmlAttributes}
     class={mergedClass}
     style={mergedStyle}
     onclick={handleClick}

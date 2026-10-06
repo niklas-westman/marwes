@@ -29,6 +29,19 @@ function renderWithProvider(
 }
 
 runParagraphContract("vue", {
+  renderParagraphOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Paragraph as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getParagraphRoot() {
+    return document.querySelector("p.mw-p") as HTMLElement
+  },
   async renderParagraph(args) {
     const paragraphProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

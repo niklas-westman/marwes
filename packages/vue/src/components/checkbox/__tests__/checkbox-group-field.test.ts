@@ -34,6 +34,7 @@ runCheckboxGroupFieldContract("Vue", {
       ...(args.value !== undefined ? { value: args.value } : {}),
       ...(args.onChange !== undefined ? { onChange: args.onChange } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+      ...(args.required !== undefined ? { required: args.required } : {}),
       options: args.options ?? [
         { value: "email", label: "Email" },
         { value: "sms", label: "SMS" },

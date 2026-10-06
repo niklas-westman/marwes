@@ -22,6 +22,12 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runAvatarContract("vue", {
+  renderAvatarOptions(options) {
+    renderWithProvider(Avatar, { ...options })
+  },
+  getAvatarElement() {
+    return document.querySelector('[data-component="avatar"]') as HTMLElement
+  },
   async renderAvatar(args = {}) {
     const avatarProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),
@@ -29,6 +35,7 @@ runAvatarContract("vue", {
       ...(args.src !== undefined ? { src: args.src } : {}),
       ...(args.alt !== undefined ? { alt: args.alt } : {}),
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.label !== undefined ? { label: args.label } : {}),
       ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
     }
 

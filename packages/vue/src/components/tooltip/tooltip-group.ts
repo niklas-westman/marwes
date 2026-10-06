@@ -1,7 +1,14 @@
-import { IconName, type IconNameType } from "@marwes-ui/core"
+import {
+  IconName,
+  type IconNameType,
+  resolveTooltipGroupA11y,
+  toTooltipGroupContentHtmlAttributes,
+  toTooltipTriggerHtmlAttributes,
+} from "@marwes-ui/core"
 import type { VNodeChild } from "vue"
 import { computed, defineComponent, h, ref, useAttrs, watch } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { Tooltip } from "./tooltip"
@@ -35,7 +42,7 @@ export type TooltipGroupProps = {
   onOpenChange?: (open: boolean) => void
 }
 
-const tooltipGroupPropKeys = [
+const tooltipGroupPropKeys = definePropKeys<TooltipGroupProps>()([
   "id",
   "content",
   "icon",
@@ -48,7 +55,7 @@ const tooltipGroupPropKeys = [
   "triggerClassName",
   "dataAttributes",
   "onOpenChange",
-] as const
+])
 
 export const TooltipGroup = defineComponent(
   (props: TooltipGroupProps, { attrs, slots, emit }) => {
@@ -61,6 +68,13 @@ export const TooltipGroup = defineComponent(
     const isTooltipMounted = ref(resolvedOpen.value)
     const resolvedId = computed(() => props.id ?? localId)
     const resolvedTooltipId = computed(() => props.tooltipId ?? `${resolvedId.value}-tooltip`)
+    const groupA11y = computed(() =>
+      resolveTooltipGroupA11y({
+        tooltipId: resolvedTooltipId.value,
+        open: resolvedOpen.value,
+        triggerLabel: props.triggerLabel,
+      }),
+    )
     const content = computed<VNodeChild | undefined>(() => slots.default?.() ?? props.content)
 
     const updateOpen = (nextOpen: boolean): void => {
@@ -137,7 +151,7 @@ export const TooltipGroup = defineComponent(
                   id: resolvedTooltipId.value,
                   ...(props.tooltipClassName ? { className: props.tooltipClassName } : {}),
                   "data-state": resolvedOpen.value ? "open" : "closed",
-                  "aria-hidden": resolvedOpen.value ? undefined : "true",
+                  ...toTooltipGroupContentHtmlAttributes(groupA11y.value.content),
                 },
                 {
                   default: () => toChildren(content.value),
@@ -149,8 +163,7 @@ export const TooltipGroup = defineComponent(
             {
               type: "button",
               class: mergeClassNames("mw-tooltip-group__trigger", props.triggerClassName),
-              "aria-label": props.triggerLabel ?? "Show tooltip",
-              "aria-describedby": resolvedOpen.value ? resolvedTooltipId.value : undefined,
+              ...toTooltipTriggerHtmlAttributes(groupA11y.value.trigger),
             },
             [h(Icon, { name: props.icon ?? IconName.HelpCircle, decorative: true })],
           ),

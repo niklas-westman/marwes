@@ -1,6 +1,11 @@
-import { createInputOtpRecipe, sanitizeInputOtpValue } from "@marwes-ui/core"
+import {
+  createInputOtpRecipe,
+  sanitizeInputOtpValue,
+  toInputOtpHtmlAttributes,
+} from "@marwes-ui/core"
 import type { CssVars, InputOtpOptions } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -48,7 +53,8 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
   }
 
   if (props.name) recipeOptions.name = props.name
-  if (props.placeholderCharacter) recipeOptions.placeholderCharacter = props.placeholderCharacter
+  if (props.placeholderCharacter !== undefined)
+    recipeOptions.placeholderCharacter = props.placeholderCharacter
   if (props.disabled) recipeOptions.disabled = true
   if (props.readOnly) recipeOptions.readOnly = true
   if (props.required) recipeOptions.required = true
@@ -91,21 +97,9 @@ export function InputOtp(props: InputOtpProps): React.ReactElement {
         ))}
 
         <input
-          id={kit.a11y.id}
           className="mw-input-otp__input"
           type="text"
-          name={kit.a11y.name}
-          inputMode={kit.a11y.inputMode}
-          autoComplete={kit.a11y.autoComplete}
-          maxLength={kit.a11y.maxLength}
-          pattern={kit.a11y.pattern}
-          disabled={kit.a11y.disabled}
-          readOnly={kit.a11y.readOnly}
-          required={kit.a11y.required}
-          aria-label={kit.a11y.ariaLabel}
-          aria-labelledby={kit.a11y.ariaLabelledBy}
-          aria-invalid={kit.a11y.ariaInvalid}
-          aria-describedby={kit.a11y.ariaDescribedBy}
+          {...toReactAttributes(toInputOtpHtmlAttributes(kit.a11y))}
           value={kit.displayValue}
           onChange={handleChange}
         />

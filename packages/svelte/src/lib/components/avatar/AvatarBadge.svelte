@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createAvatarRecipe } from "@marwes-ui/core";
+  import { createAvatarBadgeRecipe, toAvatarBadgeHtmlAttributes } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Avatar from "./Avatar.svelte";
   import type { AvatarProps } from "./types.js";
@@ -10,36 +10,22 @@
 
   let {
     class: className,
-    statusLabel = "Online",
+    statusLabel,
     decorative,
     dataAttributes,
     ...avatarProps
   }: AvatarBadgeProps = $props();
 
-  const kit = $derived(createAvatarRecipe(avatarProps));
-  const resolvedSize = $derived(kit.dataAttributes["data-size"]);
-
-  const accessibleLabel = $derived.by(() => {
-    if (kit.a11y.ariaHidden) return undefined;
-    if (kit.content.type === "image") {
-      return kit.content.alt ? `${kit.content.alt}, ${statusLabel}` : statusLabel;
-    }
-    return kit.a11y.ariaLabel ? `${kit.a11y.ariaLabel}, ${statusLabel}` : statusLabel;
-  });
-
-  const mergedClass = $derived(
-    mergeClass("mw-avatar-badge", `mw-avatar-badge--${resolvedSize}`, className)
+  const badgeKit = $derived(
+    createAvatarBadgeRecipe({ ...avatarProps, ...(decorative !== undefined ? { decorative } : {}), ...(statusLabel !== undefined ? { statusLabel } : {}) })
   );
+  const mergedClass = $derived(mergeClass(badgeKit.className, className));
 </script>
 
 <span
   class={mergedClass}
-  data-component="avatar-badge"
-  data-size={resolvedSize}
-  data-status="online"
-  role={decorative ? undefined : "img"}
-  aria-hidden={decorative ? "true" : undefined}
-  aria-label={decorative ? undefined : accessibleLabel}
+  {...badgeKit.dataAttributes}
+  {...toAvatarBadgeHtmlAttributes(badgeKit.a11y)}
   {...dataAttributes}
 >
   <Avatar {...avatarProps} decorative />

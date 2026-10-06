@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createSwitchRecipe } from "@marwes-ui/core";
+  import { createSwitchRecipe, toSwitchHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { SwitchProps } from "./types.js";
@@ -20,6 +20,7 @@
     ...(ariaDescribedBy ? { ariaDescribedBy } : {}),
     ...(ariaLabel ? { ariaLabel } : {}),
   }));
+  const htmlAttributes = $derived(toSwitchHtmlAttributes(kit.a11y));
   const mergedClass = $derived(mergeClass(kit.className, className));
   const mergedStyle = $derived(cssVarsToStyle(kit.vars));
   const isDisabled = $derived(kit.a11y.ariaDisabled === true);
@@ -34,13 +35,8 @@
 <button
   {id}
   type="button"
-  role={kit.a11y.role}
+  {...htmlAttributes}
   disabled={isDisabled}
-  aria-checked={kit.a11y.ariaChecked}
-  aria-disabled={kit.a11y.ariaDisabled}
-  aria-label={kit.a11y.ariaLabel}
-  aria-labelledby={kit.a11y.ariaLabelledBy}
-  aria-describedby={kit.a11y.ariaDescribedBy}
   class={mergedClass}
   style={mergedStyle}
   onclick={handleClick}

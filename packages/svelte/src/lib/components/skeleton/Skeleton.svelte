@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createSkeletonRecipe } from "@marwes-ui/core";
+  import { createSkeletonRecipe, toSkeletonHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { SkeletonProps } from "./types.js";
@@ -19,11 +19,7 @@
 <span
   class={mergedClass}
   style={mergedStyle}
-  id={kit.a11y.id}
-  role={kit.a11y.role}
-  aria-hidden={kit.a11y.ariaHidden ? "true" : undefined}
-  aria-label={kit.a11y.ariaLabel}
-  aria-live={kit.a11y.ariaLive}
+  {...toSkeletonHtmlAttributes(kit.a11y)}
   {...kit.dataAttributes}
   {...dataAttributes}
 ></span>

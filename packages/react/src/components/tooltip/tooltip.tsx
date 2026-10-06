@@ -1,5 +1,11 @@
-import { type CssVars, type TooltipOptions, createTooltipRecipe } from "@marwes-ui/core"
+import {
+  type CssVars,
+  type TooltipOptions,
+  createTooltipRecipe,
+  toTooltipHtmlAttributes,
+} from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type StyleWithVars = React.CSSProperties & CssVars
 
@@ -27,10 +33,9 @@ export function Tooltip(props: TooltipProps): React.ReactElement {
       {...nativeSpanProps}
       {...kit.dataAttributes}
       {...dataAttributes}
-      id={kit.a11y.id}
       className={mergedClassName}
       style={mergedStyle}
-      role={kit.a11y.role}
+      {...toReactAttributes(toTooltipHtmlAttributes(kit.a11y))}
     >
       {children}
     </span>

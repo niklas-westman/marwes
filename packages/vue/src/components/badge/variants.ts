@@ -1,15 +1,16 @@
 import { createPurposeSemanticAttributes } from "@marwes-ui/core"
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { Badge, type BadgeProps } from "./badge"
 
-const badgePropKeys = [
+const badgePropKeys = definePropKeys<BadgeProps>()([
   "variant",
   "ariaLabel",
   "label",
   "className",
   "id",
   "dataAttributes",
-] as const
+])
 
 // ============================================================================
 // STATUS BADGE - Operational/lifecycle status

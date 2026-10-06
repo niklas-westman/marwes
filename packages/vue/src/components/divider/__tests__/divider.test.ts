@@ -22,11 +22,25 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runDividerContract("vue", {
+  renderDividerOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Divider as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getDividerRoot() {
+    return document.querySelector('[data-component="divider"]') as HTMLElement
+  },
   async renderDivider(args = {}) {
     const dividerProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),
       ...(args.orientation !== undefined ? { orientation: args.orientation } : {}),
       ...(args.id !== undefined ? { id: args.id } : {}),
+      ...args.attributes,
     }
 
     renderWithProvider(Divider, dividerProps)

@@ -22,6 +22,9 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runAvatarBadgeContract("vue", {
+  renderAvatarBadgeOptions(options) {
+    renderWithProvider(AvatarBadge, { ...options })
+  },
   async renderAvatarBadge(args = {}) {
     const avatarBadgeProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

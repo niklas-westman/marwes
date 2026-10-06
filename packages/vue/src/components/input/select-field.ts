@@ -1,6 +1,16 @@
-import { IconName, buildInputFieldA11yIds, resolveSelectMode } from "@marwes-ui/core"
+import {
+  IconName,
+  buildInputFieldA11yIds,
+  resolveSelectComboboxA11y,
+  resolveSelectMode,
+  resolveSelectOptionA11y,
+  toSelectComboboxHtmlAttributes,
+  toSelectListboxHtmlAttributes,
+  toSelectOptionHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, onBeforeUnmount, ref, watch } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Icon } from "../icon"
 import { Text } from "../text"
@@ -20,7 +30,7 @@ export type SelectFieldProps = {
   variant?: SelectFieldVariant
 }
 
-const selectFieldPropKeys = [
+const selectFieldPropKeys = definePropKeys<SelectFieldProps>()([
   "id",
   "label",
   "helperText",
@@ -29,7 +39,7 @@ const selectFieldPropKeys = [
   "ariaDescribedBy",
   "modelValue",
   "variant",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0
@@ -159,11 +169,20 @@ export const SelectField = defineComponent(
         ? (sourceSelect.value.placeholder ?? "")
         : (selectedOption.value?.label ?? ""),
     )
-    const accessibleName = computed(
-      () =>
-        sourceSelect.value.ariaLabel ??
-        (hasTextContent(props.label) ? props.label : undefined) ??
-        (hasTextContent(displayText.value) ? displayText.value : undefined),
+
+    const comboboxA11y = computed(() =>
+      resolveSelectComboboxA11y({
+        id: id.value,
+        open: open.value,
+        activeIndex: activeIndex.value,
+        label: props.label,
+        displayText: displayText.value,
+        ariaLabel: sourceSelect.value.ariaLabel,
+        ariaLabelledBy: sourceSelect.value.ariaLabelledBy,
+        describedBy: a11yIds.value.describedBy,
+        invalid: invalid.value,
+        required: sourceSelect.value.required,
+      }),
     )
 
     const wrapperClass = computed(() =>
@@ -399,18 +418,7 @@ export const SelectField = defineComponent(
                         invalid.value && "is-invalid",
                         open.value && "mw-select-field__trigger--open",
                       ),
-                      role: "combobox",
-                      "aria-controls": `${id.value}-listbox`,
-                      "aria-expanded": open.value ? "true" : "false",
-                      "aria-haspopup": "listbox",
-                      "aria-label": accessibleName.value,
-                      "aria-describedby": a11yIds.value.describedBy,
-                      "aria-invalid": invalid.value ? "true" : undefined,
-                      "aria-required": sourceSelect.value.required ? "true" : undefined,
-                      "aria-activedescendant":
-                        open.value && activeIndex.value !== -1
-                          ? `${id.value}-option-${activeIndex.value}`
-                          : undefined,
+                      ...toSelectComboboxHtmlAttributes(comboboxA11y.value.trigger),
                       disabled: disabled.value,
                       "data-placeholder-selected": placeholderSelected.value ? "true" : undefined,
                       onClick: () => {
@@ -435,6 +443,7 @@ export const SelectField = defineComponent(
                         class: "mw-select-field__proxy-input",
                         name: sourceSelect.value.name,
                         type: "hidden",
+                        disabled: sourceSelect.value.disabled,
                         value: currentValue.value,
                         readonly: true,
                       })
@@ -444,8 +453,7 @@ export const SelectField = defineComponent(
                         "div",
                         {
                           class: "mw-select-field__list",
-                          id: `${id.value}-listbox`,
-                          role: "listbox",
+                          ...toSelectListboxHtmlAttributes(comboboxA11y.value.listbox),
                         },
                         sourceSelect.value.options.map((option, optionIndex) => {
                           const selected = option.value === currentValue.value
@@ -454,7 +462,6 @@ export const SelectField = defineComponent(
                           return h(
                             "div",
                             {
-                              id: `${id.value}-option-${optionIndex}`,
                               key: option.value,
                               class: mergeClassNames(
                                 "mw-select-field__option",
@@ -462,9 +469,14 @@ export const SelectField = defineComponent(
                                 selected && "mw-select-field__option--selected",
                                 option.disabled && "mw-select-field__option--disabled",
                               ),
-                              role: "option",
-                              "aria-selected": selected ? "true" : "false",
-                              "aria-disabled": option.disabled ? "true" : undefined,
+                              ...toSelectOptionHtmlAttributes(
+                                resolveSelectOptionA11y({
+                                  fieldId: id.value,
+                                  index: optionIndex,
+                                  selected,
+                                  disabled: option.disabled,
+                                }),
+                              ),
                               onClick: () => selectOptionAtIndex(optionIndex),
                               onMousedown: (event: MouseEvent) => event.preventDefault(),
                               onMouseenter: () => {

@@ -18,7 +18,7 @@
     labelPosition = "top",
     showEdgeValues = true,
     dataAttributes,
-    value = $bindable(50),
+    value = $bindable(),
     class: className,
   }: SliderFieldProps = $props();
 
@@ -89,7 +89,7 @@
         id={fieldId}
         ariaLabelledBy={a11yIds.labelId}
         ariaDescribedBy={a11yIds.describedBy || undefined}
-        ariaInvalid={hasError}
+        invalid={hasError}
         style="width: 100%;"
         bind:value
       />

@@ -5,9 +5,10 @@
  * - Sets `indeterminate` via DOM property (not an HTML attribute).
  */
 
-import { checkboxRecipe } from "@marwes-ui/core"
+import { checkboxRecipe, toCheckboxHtmlAttributes } from "@marwes-ui/core"
 import type { CheckboxProps as CoreCheckboxProps } from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export type CheckboxProps = CoreCheckboxProps & {
   /**
@@ -107,22 +108,15 @@ export function Checkbox(props: CheckboxProps): React.ReactElement {
 
   const { a11y } = kit
 
+  const htmlAttributes = toReactAttributes(toCheckboxHtmlAttributes(a11y))
+
   return (
     <input
+      {...htmlAttributes}
       ref={inputRef}
       type="checkbox"
       className={kit.className}
       style={kit.vars}
-      id={a11y.id}
-      name={a11y.name}
-      value={a11y.value}
-      disabled={a11y.disabled === true}
-      required={a11y.required === true}
-      aria-label={a11y.ariaLabel}
-      aria-labelledby={a11y.ariaLabelledBy}
-      aria-describedby={a11y.ariaDescribedBy}
-      aria-checked={a11y.ariaChecked}
-      aria-invalid={a11y.ariaInvalid === true ? true : undefined}
       checked={kit.checked}
       defaultChecked={kit.defaultChecked}
       onChange={handleChange}

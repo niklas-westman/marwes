@@ -9,3 +9,5 @@ export type {
   ParagraphA11y,
   ParagraphRenderKit,
 } from "./paragraph-types"
+export { toParagraphHtmlAttributes } from "./paragraph-html-attributes"
+export type { ParagraphHtmlAttributes } from "./paragraph-html-attributes"

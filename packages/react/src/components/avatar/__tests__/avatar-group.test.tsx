@@ -13,10 +13,14 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runAvatarGroupContract("react", {
+  renderAvatarGroupOptions(options) {
+    renderWithProvider(<AvatarGroup items={[{ initials: "MW" }]} {...options} />)
+  },
   async renderAvatarGroup(args = {}) {
     renderWithProvider(
       <AvatarGroup
         {...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {})}
+        {...(args.label !== undefined ? { label: args.label } : {})}
         items={[
           { id: "mw", initials: "MW" },
           { id: "nk", initials: "NK" },

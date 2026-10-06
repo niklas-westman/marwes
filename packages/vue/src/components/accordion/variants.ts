@@ -1,7 +1,8 @@
 import { defineComponent, h } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { AccordionField, type AccordionFieldProps } from "./accordion-field"
 
-const accordionFieldPropKeys = [
+const accordionFieldPropKeys = definePropKeys<AccordionFieldProps>()([
   "label",
   "description",
   "error",
@@ -15,7 +16,7 @@ const accordionFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 export type FAQAccordionProps = Omit<AccordionFieldProps, "multiple">
 

@@ -1,6 +1,11 @@
-import { createAccordionRecipe } from "@marwes-ui/core"
+import {
+  createAccordionRecipe,
+  toAccordionPanelHtmlAttributes,
+  toAccordionTriggerHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface AccordionProps {
@@ -10,7 +15,7 @@ export interface AccordionProps {
   className?: string
 }
 
-const accordionPropKeys = ["id", "open", "disabled", "className"] as const
+const accordionPropKeys = definePropKeys<AccordionProps>()(["id", "open", "disabled", "className"])
 
 export const Accordion = defineComponent(
   (props: AccordionProps, { slots, emit }) => {
@@ -32,7 +37,6 @@ export const Accordion = defineComponent(
 
     return () => {
       const renderKit = kit.value
-      const a11y = renderKit.a11y
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
 
@@ -40,12 +44,9 @@ export const Accordion = defineComponent(
         h(
           "button",
           {
-            id: a11y.triggerId,
             type: "button",
             class: "mw-accordion__trigger",
-            "aria-expanded": a11y.ariaExpanded,
-            "aria-controls": a11y.panelId,
-            "aria-disabled": a11y.ariaDisabled,
+            ...toAccordionTriggerHtmlAttributes(renderKit.trigger.a11y),
             disabled: props.disabled,
             onClick: handleTriggerClick,
           },
@@ -57,9 +58,7 @@ export const Accordion = defineComponent(
         h(
           "div",
           {
-            id: a11y.panelId,
-            role: "region",
-            "aria-labelledby": a11y.triggerId,
+            ...toAccordionPanelHtmlAttributes(renderKit.panel.a11y),
             class: "mw-accordion__panel",
             hidden: !props.open,
           },

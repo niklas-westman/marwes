@@ -1,5 +1,12 @@
-import { type DrawerOptions, IconName, createDrawerRecipe } from "@marwes-ui/core"
+import {
+  type DrawerOptions,
+  IconName,
+  createDrawerRecipe,
+  toDrawerCloseButtonHtmlAttributes,
+  toDrawerHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 
 function cx(...parts: Array<string | false | undefined>): string {
@@ -44,6 +51,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
     dismissible,
     ...(props.modal !== undefined ? { modal: props.modal } : {}),
     ...(props.showScrim !== undefined ? { showScrim: props.showScrim } : {}),
+    ...(props.closeLabel !== undefined ? { closeLabel: props.closeLabel } : {}),
   }
 
   if (props.dataAttributes) {
@@ -92,15 +100,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
         id={id}
         className={cx(kit.panel.className, props.panelClassName)}
         style={kit.panel.vars}
-        role={kit.panel.a11y.role}
-        {...(kit.panel.a11y.ariaModal ? { "aria-modal": "true" } : {})}
-        {...(kit.panel.a11y.ariaLabel ? { "aria-label": kit.panel.a11y.ariaLabel } : {})}
-        {...(kit.panel.a11y.ariaLabelledBy
-          ? { "aria-labelledby": kit.panel.a11y.ariaLabelledBy }
-          : {})}
-        {...(kit.panel.a11y.ariaDescribedBy
-          ? { "aria-describedby": kit.panel.a11y.ariaDescribedBy }
-          : {})}
+        {...toReactAttributes(toDrawerHtmlAttributes(kit.panel.a11y))}
         tabIndex={-1}
         {...kit.panel.dataAttributes}
       >
@@ -121,7 +121,7 @@ export function Drawer(props: DrawerProps): React.ReactElement {
                 <button
                   type="button"
                   className="mw-drawer__close"
-                  aria-label="Close drawer"
+                  {...toReactAttributes(toDrawerCloseButtonHtmlAttributes(kit.closeButton.a11y))}
                   onClick={props.onClose}
                 >
                   <Icon name={IconName.X} decorative />

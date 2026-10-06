@@ -1,5 +1,15 @@
-import { IconName, buildInputFieldA11yIds, resolveSelectMode } from "@marwes-ui/core"
+import {
+  IconName,
+  buildInputFieldA11yIds,
+  resolveSelectComboboxA11y,
+  resolveSelectMode,
+  resolveSelectOptionA11y,
+  toSelectComboboxHtmlAttributes,
+  toSelectListboxHtmlAttributes,
+  toSelectOptionHtmlAttributes,
+} from "@marwes-ui/core"
 import * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
 import { Text } from "../text"
 import { Select } from "./select"
@@ -100,7 +110,6 @@ type MarwesSelectFieldControlProps = {
 
 function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.ReactElement {
   const { id, label, select } = props
-  const listboxId = `${id}-listbox`
   const isControlled = select.value !== undefined
   const [internalValue, setInternalValue] = React.useState(() => getInitialSelectValue(select))
   const value = isControlled ? (select.value ?? "") : internalValue
@@ -116,10 +125,18 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
     (select.placeholder === undefined ? select.options[0] : undefined)
   const placeholderSelected = select.placeholder !== undefined && value === ""
   const displayText = placeholderSelected ? select.placeholder : (selectedOption?.label ?? "")
-  const accessibleName =
-    select.ariaLabel ??
-    (hasTextContent(label) ? label : undefined) ??
-    (hasTextContent(displayText) ? displayText : undefined)
+  const comboboxA11y = resolveSelectComboboxA11y({
+    id,
+    open,
+    activeIndex,
+    label,
+    displayText,
+    ariaLabel: select.ariaLabel,
+    ariaLabelledBy: select.ariaLabelledBy,
+    describedBy: select.describedBy,
+    invalid: select.invalid,
+    required: select.required,
+  })
 
   React.useEffect(() => {
     if (!open) {
@@ -275,17 +292,7 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
           select.invalid && "is-invalid",
           open && "mw-select-field__trigger--open",
         )}
-        role="combobox"
-        aria-controls={listboxId}
-        aria-expanded={open}
-        aria-haspopup="listbox"
-        aria-label={accessibleName}
-        aria-describedby={select.describedBy}
-        aria-invalid={select.invalid ? "true" : undefined}
-        aria-required={select.required ? "true" : undefined}
-        aria-activedescendant={
-          open && activeIndex !== -1 ? `${id}-option-${activeIndex}` : undefined
-        }
+        {...toReactAttributes(toSelectComboboxHtmlAttributes(comboboxA11y.trigger))}
         disabled={select.disabled}
         data-placeholder-selected={placeholderSelected ? "true" : undefined}
         onClick={() => {
@@ -307,6 +314,7 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
           className="mw-select-field__proxy-input"
           name={select.name}
           type="hidden"
+          disabled={select.disabled}
           value={value}
           readOnly
         />
@@ -314,14 +322,16 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
 
       {open ? (
         <>
-          <div className="mw-select-field__list" id={listboxId} role="listbox" tabIndex={-1}>
+          <div
+            className="mw-select-field__list"
+            {...toReactAttributes(toSelectListboxHtmlAttributes(comboboxA11y.listbox))}
+          >
             {select.options.map((option, optionIndex) => {
               const selected = option.value === value
               const active = optionIndex === activeIndex
 
               return (
                 <div
-                  id={`${id}-option-${optionIndex}`}
                   key={option.value}
                   className={cx(
                     "mw-select-field__option",
@@ -329,10 +339,16 @@ function MarwesSelectFieldControl(props: MarwesSelectFieldControlProps): React.R
                     selected && "mw-select-field__option--selected",
                     option.disabled && "mw-select-field__option--disabled",
                   )}
-                  role="option"
-                  aria-selected={selected}
-                  aria-disabled={option.disabled ? "true" : undefined}
-                  tabIndex={-1}
+                  {...toReactAttributes(
+                    toSelectOptionHtmlAttributes(
+                      resolveSelectOptionA11y({
+                        fieldId: id,
+                        index: optionIndex,
+                        selected,
+                        disabled: option.disabled,
+                      }),
+                    ),
+                  )}
                   onClick={() => selectOptionAtIndex(optionIndex)}
                   onKeyDown={(event) => {
                     if (option.disabled) {

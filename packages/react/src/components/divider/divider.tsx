@@ -6,7 +6,7 @@
  * - Figma reference: component 1574:21053
  */
 
-import { createDividerRecipe } from "@marwes-ui/core"
+import { createDividerRecipe, toDividerHtmlAttributes } from "@marwes-ui/core"
 import type { DividerOptions, DividerOrientation, DividerSize } from "@marwes-ui/core"
 import type { CssVars } from "@marwes-ui/core"
 import * as React from "react"
@@ -73,14 +73,34 @@ export type DividerProps = DividerOptions &
  */
 
 export const Divider = React.forwardRef<HTMLHRElement, DividerProps>((props, ref) => {
-  const { className: customClassName, style: customStyle, ...opts } = props
+  const {
+    className: customClassName,
+    style: customStyle,
+    size,
+    orientation,
+    id,
+    ...nativeProps
+  } = props
 
-  const kit = createDividerRecipe(opts)
+  const kit = createDividerRecipe({
+    ...(size !== undefined ? { size } : {}),
+    ...(orientation !== undefined ? { orientation } : {}),
+    ...(id !== undefined ? { id } : {}),
+  })
 
   const style = { ...(kit.vars as StyleWithVars), ...customStyle }
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
-  return <hr ref={ref} {...kit.a11y} {...kit.dataAttributes} className={className} style={style} />
+  return (
+    <hr
+      ref={ref}
+      {...nativeProps}
+      {...toDividerHtmlAttributes(kit.a11y)}
+      {...kit.dataAttributes}
+      className={className}
+      style={style}
+    />
+  )
 })
 
 Divider.displayName = "Divider"

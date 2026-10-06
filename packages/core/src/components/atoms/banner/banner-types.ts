@@ -59,5 +59,11 @@ export interface BannerRenderKit {
     className: string
     visible: boolean
     ariaLabel: string
+    a11y: BannerDismissA11yProps
   }
+}
+
+/** ARIA fields for the banner dismiss button. */
+export interface BannerDismissA11yProps {
+  ariaLabel: string
 }

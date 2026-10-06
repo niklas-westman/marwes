@@ -1,6 +1,11 @@
-import { buildRadioGroupFieldA11yIds } from "@marwes-ui/core"
+import {
+  buildRadioGroupFieldA11yIds,
+  resolveRadioGroupFieldA11y,
+  toRadioGroupFieldHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, ref } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { Radio } from "./radio"
@@ -29,7 +34,7 @@ export interface RadioGroupFieldProps {
   modelValue?: string
 }
 
-const radioGroupFieldPropKeys = [
+const radioGroupFieldPropKeys = definePropKeys<RadioGroupFieldProps>()([
   "name",
   "label",
   "description",
@@ -44,7 +49,7 @@ const radioGroupFieldPropKeys = [
   "ariaDescribedBy",
   "dataAttributes",
   "modelValue",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0
@@ -121,11 +126,14 @@ export const RadioGroupField = defineComponent(
           h(
             "div",
             {
-              role: "radiogroup",
-              "aria-labelledby": a11yIds.value.labelId,
-              "aria-describedby": a11yIds.value.describedBy,
-              "aria-invalid": hasError.value ? true : undefined,
-              "aria-required": props.required ? true : undefined,
+              ...toRadioGroupFieldHtmlAttributes(
+                resolveRadioGroupFieldA11y({
+                  labelId: a11yIds.value.labelId,
+                  describedBy: a11yIds.value.describedBy,
+                  invalid: hasError.value,
+                  required: props.required,
+                }),
+              ),
               class: "mw-radio-group-field__options",
             },
             props.options.map((option) => {

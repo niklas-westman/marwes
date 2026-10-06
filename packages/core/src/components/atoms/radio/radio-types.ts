@@ -41,3 +41,12 @@ export interface RadioRenderKit {
   checked?: boolean
   defaultChecked?: boolean
 }
+
+/** ARIA fields for the RadioGroupField wrapper element. */
+export interface RadioGroupFieldA11yProps {
+  role: "radiogroup"
+  ariaLabelledBy: string
+  ariaDescribedBy?: string
+  ariaInvalid?: true
+  ariaRequired?: true
+}

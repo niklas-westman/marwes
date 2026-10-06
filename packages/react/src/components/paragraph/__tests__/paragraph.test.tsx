@@ -13,6 +13,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runParagraphContract("react", {
+  renderParagraphOptions(options) {
+    renderWithProvider(<Paragraph {...options}>Text</Paragraph>)
+  },
+  getParagraphRoot() {
+    return document.querySelector("p.mw-p") as HTMLElement
+  },
   async renderParagraph(args) {
     const paragraphProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

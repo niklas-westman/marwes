@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { createAccordionRecipe } from "@marwes-ui/core";
+  import {
+    createAccordionRecipe,
+    toAccordionPanelHtmlAttributes,
+    toAccordionTriggerHtmlAttributes,
+  } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { AccordionProps } from "./types.js";
 
@@ -31,12 +35,9 @@
 
 <div class={mergedClass}>
   <button
-    id={kit.a11y.triggerId}
     type="button"
     class="mw-accordion__trigger"
-    aria-expanded={kit.a11y.ariaExpanded}
-    aria-controls={kit.a11y.panelId}
-    aria-disabled={kit.a11y.ariaDisabled}
+    {...toAccordionTriggerHtmlAttributes(kit.trigger.a11y)}
     {disabled}
     onclick={handleTriggerClick}
   >
@@ -44,8 +45,7 @@
     <span class="mw-accordion__icon" aria-hidden="true"></span>
   </button>
   <section
-    id={kit.a11y.panelId}
-    aria-labelledby={kit.a11y.triggerId}
+    {...toAccordionPanelHtmlAttributes(kit.panel.a11y)}
     class="mw-accordion__panel"
     hidden={!open}
   >

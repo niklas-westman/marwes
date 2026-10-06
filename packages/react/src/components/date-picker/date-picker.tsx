@@ -3,8 +3,13 @@ import {
   type DatePickerDevice,
   type DatePickerOptions,
   createDatePickerRecipe,
+  toDatePickerDayHtmlAttributes,
+  toDatePickerGridHtmlAttributes,
+  toDatePickerHtmlAttributes,
+  toDatePickerNavButtonHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 export interface DatePickerProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "children" | "onSelect">,
@@ -86,16 +91,14 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
       {...nativeProps}
       {...kit.dataAttributes}
       className={mergedClassName}
-      aria-label={kit.a11y.ariaLabel}
-      aria-labelledby={kit.a11y.ariaLabelledBy}
-      aria-describedby={kit.a11y.ariaDescribedBy}
+      {...toReactAttributes(toDatePickerHtmlAttributes(kit.a11y))}
     >
       <header className={kit.slots.headerClassName}>
         <div className={kit.slots.navGroupClassName}>
           <button
             type="button"
             className={kit.slots.navButtonClassName}
-            aria-label={kit.labels.previousYear}
+            {...toReactAttributes(toDatePickerNavButtonHtmlAttributes(kit.nav.previousYear))}
             onClick={onPreviousYear}
           >
             «
@@ -103,7 +106,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
           <button
             type="button"
             className={kit.slots.navButtonClassName}
-            aria-label={kit.labels.previousMonth}
+            {...toReactAttributes(toDatePickerNavButtonHtmlAttributes(kit.nav.previousMonth))}
             onClick={onPreviousMonth}
           >
             ‹
@@ -114,7 +117,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
           <button
             type="button"
             className={kit.slots.navButtonClassName}
-            aria-label={kit.labels.nextMonth}
+            {...toReactAttributes(toDatePickerNavButtonHtmlAttributes(kit.nav.nextMonth))}
             onClick={onNextMonth}
           >
             ›
@@ -122,14 +125,17 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
           <button
             type="button"
             className={kit.slots.navButtonClassName}
-            aria-label={kit.labels.nextYear}
+            {...toReactAttributes(toDatePickerNavButtonHtmlAttributes(kit.nav.nextYear))}
             onClick={onNextYear}
           >
             »
           </button>
         </div>
       </header>
-      <table className={kit.slots.gridClassName} aria-label={kit.monthLabel}>
+      <table
+        className={kit.slots.gridClassName}
+        {...toReactAttributes(toDatePickerGridHtmlAttributes(kit.grid.a11y))}
+      >
         <thead>
           <tr className="mw-date-picker__weekdays">
             {kit.weekdayLabels.map((weekday) => (
@@ -157,8 +163,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
                       type="button"
                       {...dayKit.dataAttributes}
                       className={dayKit.className}
-                      aria-label={dayKit.ariaLabel}
-                      aria-pressed={dayKit.selected ? "true" : undefined}
+                      {...toReactAttributes(toDatePickerDayHtmlAttributes(dayKit.a11y))}
                       disabled={dayKit.disabled}
                       onClick={() => onDaySelect?.(day)}
                     >

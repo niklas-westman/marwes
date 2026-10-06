@@ -6,3 +6,5 @@ export type {
   SliderDataAttributes,
   SliderRenderKit,
 } from "./slider-types"
+export { toSliderHtmlAttributes } from "./slider-html-attributes"
+export type { SliderHtmlAttributes } from "./slider-html-attributes"

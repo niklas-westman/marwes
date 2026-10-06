@@ -14,6 +14,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runRadioContract("react", {
+  renderRadioOptions(options) {
+    renderWithProvider(<Radio {...options} />)
+  },
+  getRadioElement() {
+    return document.querySelector("input.mw-radio") as HTMLInputElement
+  },
   async renderRadio(args = {}) {
     const radioProps = {
       ariaLabel: args.ariaLabel ?? "Radio",

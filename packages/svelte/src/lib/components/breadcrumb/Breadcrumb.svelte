@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { IconName, createBreadcrumbRecipe } from "@marwes-ui/core";
+  import { IconName, createBreadcrumbRecipe, toBreadcrumbItemHtmlAttributes, toBreadcrumbHomeHtmlAttributes, toBreadcrumbHtmlAttributes, toBreadcrumbListHtmlAttributes, toBreadcrumbSeparatorHtmlAttributes } from "@marwes-ui/core";
   import Icon from "../icon/Icon.svelte";
   import { mergeClass } from "../../internal/merge-class.js";
   import type { BreadcrumbItem, BreadcrumbProps } from "./types.js";
@@ -40,12 +40,12 @@
   }
 </script>
 
-<nav class={mergedClass} aria-label={kit.a11y.ariaLabel} {...kit.dataAttributes}>
-  <ol class={kit.list.className} role={kit.list.a11y.role}>
+<nav class={mergedClass} {...toBreadcrumbHtmlAttributes(kit.a11y)} {...kit.dataAttributes}>
+  <ol class={kit.list.className} {...toBreadcrumbListHtmlAttributes(kit.list.a11y)}>
     {#each kit.items as item, index (item.key)}
       <li class={item.className} {...item.dataAttributes}>
         {#if index > 0}
-          <span class={kit.separator.className} aria-hidden={kit.separator.a11y.ariaHidden}>
+          <span class={kit.separator.className} {...toBreadcrumbSeparatorHtmlAttributes(kit.separator.a11y)}>
             <Icon name={IconName.ChevronRight} decorative size={12} />
           </span>
         {/if}
@@ -55,8 +55,7 @@
             <a
               class={item.actionClassName}
               href={item.href}
-              aria-label={item.a11y.ariaLabel}
-              aria-current={item.current ? "page" : undefined}
+              {...toBreadcrumbHomeHtmlAttributes(item.a11y)}
               onclick={() => onhomeclick?.()}
             >
               <Icon name={IconName.Home} decorative size={14} />
@@ -65,8 +64,7 @@
             <button
               type="button"
               class={item.actionClassName}
-              aria-label={item.a11y.ariaLabel}
-              aria-current={item.current ? "page" : undefined}
+              {...toBreadcrumbHomeHtmlAttributes(item.a11y)}
               onclick={() => onhomeclick?.()}
             >
               <Icon name={IconName.Home} decorative size={14} />
@@ -74,8 +72,7 @@
           {:else}
             <span
               class={item.actionClassName}
-              aria-label={item.a11y.ariaLabel}
-              aria-current={item.current ? "page" : undefined}
+              {...toBreadcrumbHomeHtmlAttributes(item.a11y)}
             >
               <Icon name={IconName.Home} decorative size={14} />
             </span>
@@ -83,8 +80,7 @@
         {:else if item.current}
           <span
             class={item.actionClassName}
-            aria-label={item.a11y.ariaLabel}
-            aria-current={item.a11y.ariaCurrent}
+            {...toBreadcrumbItemHtmlAttributes(item.a11y)}
           >
             {item.label}
           </span>
@@ -92,8 +88,7 @@
           <a
             class={item.actionClassName}
             href={item.href}
-            aria-label={item.a11y.ariaLabel}
-            aria-current={item.a11y.ariaCurrent}
+            {...toBreadcrumbItemHtmlAttributes(item.a11y)}
             onclick={() => onitemselect?.(item.value ?? item.label, sourceItem(item))}
           >
             {item.label}
@@ -102,8 +97,7 @@
           <button
             type="button"
             class={item.actionClassName}
-            aria-label={item.a11y.ariaLabel}
-            aria-current={item.a11y.ariaCurrent}
+            {...toBreadcrumbItemHtmlAttributes(item.a11y)}
             onclick={() => onitemselect?.(item.value ?? item.label, sourceItem(item))}
           >
             {item.label}

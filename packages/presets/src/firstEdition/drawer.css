@@ -131,6 +131,12 @@
   cursor: pointer;
 }
 
+/* The close icon shrinks into the button's content box (width minus border and default button
+   padding), as it did before icons carried the preset `.mw-icon` base class. */
+.mw-drawer__close .mw-icon {
+  flex-shrink: 1;
+}
+
 .mw-drawer__close:hover {
   background: color-mix(in srgb, currentColor 8%, transparent);
 }

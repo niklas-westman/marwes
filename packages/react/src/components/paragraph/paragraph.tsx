@@ -4,10 +4,11 @@
  * - Supports size variants: sm/md/lg.
  */
 
-import { paragraphRecipe } from "@marwes-ui/core"
+import { paragraphRecipe, toParagraphHtmlAttributes } from "@marwes-ui/core"
 import type { ParagraphOptions, ParagraphSize } from "@marwes-ui/core"
 import type { CssVars } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 import { useTheme } from "../../provider/use-theme"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -67,7 +68,11 @@ export function Paragraph(props: ParagraphProps): React.ReactElement {
   const className = customClassName ? `${kit.className} ${customClassName}` : kit.className
 
   return (
-    <p id={kit.a11y.id} className={className} style={style}>
+    <p
+      {...toReactAttributes(toParagraphHtmlAttributes(kit.a11y))}
+      className={className}
+      style={style}
+    >
       {children}
     </p>
   )

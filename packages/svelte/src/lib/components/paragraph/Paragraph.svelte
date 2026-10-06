@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { paragraphRecipe } from "@marwes-ui/core";
+  import { paragraphRecipe, toParagraphHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import { useTheme } from "../../provider/use-theme.js";
@@ -18,6 +18,6 @@
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
 </script>
 
-<p id={kit.a11y.id} class={mergedClass} style={mergedStyle}>
+<p {...toParagraphHtmlAttributes(kit.a11y)} class={mergedClass} style={mergedStyle}>
   {@render children?.()}
 </p>

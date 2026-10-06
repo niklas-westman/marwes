@@ -11,6 +11,8 @@ export interface DrawerOptions {
   placement?: DrawerPlacement
   showFooter?: boolean
   dismissible?: boolean
+  /** Accessible name of the close button. Defaults to "Close drawer". */
+  closeLabel?: string
   modal?: boolean
   showScrim?: boolean
   ariaLabel?: string
@@ -51,7 +53,13 @@ export interface DrawerRenderKit {
   showFooter: boolean
   showCloseButton: boolean
   showScrim: boolean
+  closeButton: { a11y: DrawerCloseButtonA11yProps }
   panel: DrawerPanelRenderKit
   scrim: DrawerScrimRenderKit
   dataAttributes: Record<string, string | boolean | undefined>
+}
+
+/** ARIA fields for the close button. */
+export interface DrawerCloseButtonA11yProps {
+  ariaLabel: string
 }

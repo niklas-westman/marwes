@@ -44,6 +44,23 @@ export interface DatePickerA11yProps {
   ariaDescribedBy?: string
 }
 
+/** ARIA fields for a month/year navigation button. */
+export interface DatePickerNavButtonA11yProps {
+  ariaLabel: string
+}
+
+/** ARIA fields for the calendar grid (the table of days). */
+export interface DatePickerGridA11yProps {
+  ariaLabel: string
+}
+
+/** ARIA fields for one day button. Empty filler cells are hidden from assistive technology. */
+export interface DatePickerDayA11yProps {
+  ariaLabel?: string
+  ariaPressed?: true
+  ariaHidden?: true
+}
+
 export interface DatePickerDataAttributes extends Record<string, string> {
   "data-component": "date-picker"
   "data-device": DatePickerDevice
@@ -53,6 +70,7 @@ export interface DatePickerDayRenderKit {
   className: string
   dataAttributes: Record<string, string>
   ariaLabel: string
+  a11y: DatePickerDayA11yProps
   disabled: boolean
   selected: boolean
   isEmpty: boolean
@@ -62,6 +80,13 @@ export interface DatePickerRenderKit {
   className: string
   dataAttributes: DatePickerDataAttributes
   a11y: DatePickerA11yProps
+  nav: {
+    previousYear: DatePickerNavButtonA11yProps
+    previousMonth: DatePickerNavButtonA11yProps
+    nextMonth: DatePickerNavButtonA11yProps
+    nextYear: DatePickerNavButtonA11yProps
+  }
+  grid: { a11y: DatePickerGridA11yProps }
   monthLabel: string
   weekdayLabels: readonly string[]
   weeks: readonly (readonly DatePickerDay[])[]

@@ -1,12 +1,13 @@
 import {
+  type IconColor,
   type IconSize,
   type IconStrokeWidth,
-  iconRegistry,
-  resolveIconA11y,
-  resolveIconSize,
-  resolveIconStrokeWidth,
+  createIconRecipe,
+  type iconRegistry,
+  toIconHtmlAttributes,
 } from "@marwes-ui/core"
 import type * as React from "react"
+import { toReactAttributes } from "../../internal/react-attributes"
 
 type IconName = keyof typeof iconRegistry
 
@@ -15,51 +16,65 @@ export type IconProps = {
 
   /**
    * Icon scale token ("xs"|"sm"|"md"|"lg") or an explicit pixel size.
-   * Defaults to system.theme.icon.size
+   * Defaults to "sm".
    */
   size?: IconSize | number
 
   /**
    * Stroke-width token ("xs"|"sm"|"md"|"lg") or an explicit numeric stroke width.
-   * Defaults to system.theme.icon.strokeWidth
+   * Defaults to "md".
    */
   strokeWidth?: IconStrokeWidth | number
+
+  /** Stroke colour token. Defaults to "currentColor". */
+  color?: IconColor
 
   /**
    * Common props
    */
   className?: string
   ariaLabel?: string
+  ariaHidden?: boolean
   decorative?: boolean
 }
 
-export function Icon({ name, size, strokeWidth, className, ariaLabel, decorative }: IconProps) {
-  const px = resolveIconSize(size ?? "sm")
-  const sw = resolveIconStrokeWidth(strokeWidth ?? "md")
-
-  const def = iconRegistry[name]
-  const a11y = resolveIconA11y({
+export function Icon({
+  name,
+  size,
+  strokeWidth,
+  color,
+  className,
+  ariaLabel,
+  ariaHidden,
+  decorative,
+}: IconProps) {
+  const kit = createIconRecipe({
+    name,
+    ...(size !== undefined ? { size } : {}),
+    ...(strokeWidth !== undefined ? { strokeWidth } : {}),
+    ...(color !== undefined ? { color } : {}),
     ...(ariaLabel !== undefined ? { ariaLabel } : {}),
+    ...(ariaHidden !== undefined ? { ariaHidden } : {}),
     ...(decorative !== undefined ? { decorative } : {}),
   })
 
   return (
+    // biome-ignore lint/a11y/noSvgWithoutTitle: aria-label, aria-hidden and role come from the spread a11y attributes
     <svg
-      width={px}
-      height={px}
-      viewBox={def.viewBox}
+      width={kit.svg.width}
+      height={kit.svg.height}
+      viewBox={kit.svg.viewBox}
       fill="none"
       stroke="currentColor"
-      strokeWidth={sw}
+      strokeWidth={kit.vars["--mw-icon-stroke-width"]}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={className}
-      aria-hidden={a11y.ariaHidden ? "true" : undefined}
-      aria-label={a11y.ariaLabel}
-      role={a11y.role}
+      className={[kit.className, className].filter(Boolean).join(" ")}
+      style={kit.vars as React.CSSProperties}
+      {...toReactAttributes(toIconHtmlAttributes(kit.a11y))}
       focusable="false"
     >
-      {def.nodes.map((iconNode, nodeIndex) => {
+      {kit.svg.nodes.map((iconNode, nodeIndex) => {
         const TagName = iconNode.tag
         // biome-ignore lint/suspicious/noArrayIndexKey: Icon nodes are static and never reordered
         return <TagName key={nodeIndex} {...(iconNode.attrs as React.SVGAttributes<SVGElement>)} />

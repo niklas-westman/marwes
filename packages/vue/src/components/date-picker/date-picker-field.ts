@@ -1,6 +1,7 @@
 import { buildInputFieldA11yIds } from "@marwes-ui/core"
 import { computed, defineComponent, h } from "vue"
 import { createLocalId } from "../../internal/id"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames } from "../../internal/render-utils"
 import { Text } from "../text"
 import { DatePicker, type DatePickerProps } from "./date-picker"
@@ -15,7 +16,7 @@ export type DatePickerFieldProps = {
   className?: string
 }
 
-const datePickerFieldPropKeys = [
+const datePickerFieldPropKeys = definePropKeys<DatePickerFieldProps>()([
   "id",
   "label",
   "helperText",
@@ -23,7 +24,7 @@ const datePickerFieldPropKeys = [
   "datePicker",
   "ariaDescribedBy",
   "className",
-] as const
+])
 
 function hasTextContent(value: string | undefined): boolean {
   return value !== undefined && value.trim().length > 0

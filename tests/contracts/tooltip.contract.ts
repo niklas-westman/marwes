@@ -3,6 +3,7 @@
  * trigger label naming, default trigger label fallback, hover-open with
  * aria-describedby wiring, and keyboard Escape dismissal.
  */
+import type { TooltipOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type TooltipContractHarness = {
@@ -26,6 +27,26 @@ export type TooltipContractHarness = {
   click(element: HTMLElement): Promise<void>
   tab(): Promise<void>
   keyboard(text: string): Promise<void>
+  /** Renders the base component with raw core options. */
+  renderTooltipOptions(options: TooltipOptions): Promise<void> | void
+  getTooltipRoot(): HTMLElement
+}
+
+type TooltipOptionCase = {
+  options: TooltipOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core TooltipOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const tooltipOptionCases: Record<keyof TooltipOptions, TooltipOptionCase> = {
+  id: {
+    options: { id: "tip" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("id", "tip")
+      expect(root).toHaveAttribute("role", "tooltip")
+    },
+  },
 }
 
 export function runTooltipContract(adapterName: string, harness: TooltipContractHarness): void {
@@ -137,6 +158,26 @@ export function runTooltipContract(adapterName: string, harness: TooltipContract
       expect(emittedValues).toContain(false)
       expect(tooltip).toHaveAttribute("id", "controlled-tooltip")
       expect(trigger).toHaveAttribute("aria-describedby", "controlled-tooltip")
+    })
+
+    it("keeps the open tooltip exposed to assistive technology", async () => {
+      await harness.renderTooltipGroup({ content: "Helpful hint", defaultOpen: true })
+
+      expect(harness.getByRole("tooltip")).not.toHaveAttribute("aria-hidden")
+      expect(harness.getByRole("button", { name: /show tooltip/i })).toHaveAttribute(
+        "aria-describedby",
+        harness.getByRole("tooltip").id,
+      )
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(tooltipOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderTooltipOptions(optionCase.options)
+
+        const element = harness.getTooltipRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

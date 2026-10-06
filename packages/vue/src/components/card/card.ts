@@ -1,5 +1,6 @@
 import { createCardRecipe } from "@marwes-ui/core"
 import { defineComponent, h, useAttrs } from "vue"
+import { definePropKeys } from "../../internal/prop-keys"
 import { mergeClassNames, omitAttrs } from "../../internal/render-utils"
 
 export interface CardProps {
@@ -9,7 +10,7 @@ export interface CardProps {
   dataAttributes?: Record<string, string>
 }
 
-const cardPropKeys = ["className", "id", "dataAttributes"] as const
+const cardPropKeys = definePropKeys<CardProps>()(["className", "id", "dataAttributes"])
 
 export const Card = defineComponent(
   (props: CardProps, { slots }) => {

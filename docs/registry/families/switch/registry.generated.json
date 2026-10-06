@@ -19,6 +19,7 @@
     "core": [
       "packages/core/src/components/atoms/switch/index.ts",
       "packages/core/src/components/atoms/switch/switch-a11y.ts",
+      "packages/core/src/components/atoms/switch/switch-html-attributes.ts",
       "packages/core/src/components/atoms/switch/switch-recipe.ts",
       "packages/core/src/components/atoms/switch/switch-types.ts"
     ],

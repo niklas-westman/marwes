@@ -8,3 +8,5 @@ export type {
   StatTileTone,
   StatTileTrendDirection,
 } from "./stat-tile-types"
+export { toStatTileTrendHtmlAttributes } from "./stat-tile-html-attributes"
+export type { StatTileTrendHtmlAttributes } from "./stat-tile-html-attributes"

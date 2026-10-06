@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { IconName } from "@marwes-ui/core";
+  import {
+    IconName,
+    resolveTooltipGroupA11y,
+    toTooltipGroupContentHtmlAttributes,
+    toTooltipTriggerHtmlAttributes,
+  } from "@marwes-ui/core";
   import type { IconNameType } from "@marwes-ui/core";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -11,7 +16,7 @@
   let {
     content,
     icon = IconName.HelpCircle,
-    triggerLabel = "Show tooltip",
+    triggerLabel,
     open,
     defaultOpen = false,
     onopenchange,
@@ -59,6 +64,9 @@
     onopenchange?.(nextOpen);
   }
 
+  const groupA11y = $derived(
+    resolveTooltipGroupA11y({ tooltipId: resolvedTooltipId, open: resolvedOpen, triggerLabel })
+  );
   const mergedClass = $derived(mergeClass("mw-tooltip-group", className));
   const mergedTriggerClass = $derived(mergeClass("mw-tooltip-group__trigger", triggerClass));
 </script>
@@ -86,7 +94,7 @@
       {...(tooltipClass ? { class: tooltipClass } : {})}
       dataAttributes={{
         "data-state": resolvedOpen ? "open" : "closed",
-        ...(resolvedOpen ? {} : { "aria-hidden": "true" }),
+        ...toTooltipGroupContentHtmlAttributes(groupA11y.content),
       }}
     >
       {#if typeof content === "string"}
@@ -100,8 +108,7 @@
   <button
     type="button"
     class={mergedTriggerClass}
-    aria-label={triggerLabel}
-    aria-describedby={resolvedOpen ? resolvedTooltipId : undefined}
+    {...toTooltipTriggerHtmlAttributes(groupA11y.trigger)}
   >
     <Icon name={icon} decorative />
   </button>

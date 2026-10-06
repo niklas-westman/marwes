@@ -11,6 +11,7 @@ import {
   buildCurrencyHelperText,
   buildInputFieldA11yIds,
   buildRadioGroupFieldA11yIds,
+  buildRichTextFieldA11yIds,
   getCurrencySymbol,
   mergeIdRefs,
   sanitizeCurrencyValue,
@@ -22,7 +23,21 @@ describe("field helpers", () => {
     expect(mergeIdRefs(undefined, null, false)).toBeUndefined()
   })
 
-  it("buildInputFieldA11yIds merges external and internal ids", () => {
+  it("buildInputFieldA11yIds merges external and helper ids", () => {
+    expect(
+      buildInputFieldA11yIds({
+        id: "email",
+        hasHelperText: true,
+        hasError: false,
+        externalDescribedBy: "external",
+      }),
+    ).toEqual({
+      helperTextId: "email-helper",
+      describedBy: "external email-helper",
+    })
+  })
+
+  it("buildInputFieldA11yIds drops the helper id when an error replaces the helper text", () => {
     expect(
       buildInputFieldA11yIds({
         id: "email",
@@ -31,9 +46,16 @@ describe("field helpers", () => {
         externalDescribedBy: "external",
       }),
     ).toEqual({
-      helperTextId: "email-helper",
       errorId: "email-error",
-      describedBy: "external email-helper email-error",
+      describedBy: "external email-error",
+    })
+  })
+
+  it("buildRichTextFieldA11yIds drops the helper id when an error replaces the helper text", () => {
+    expect(buildRichTextFieldA11yIds({ id: "bio", hasHelperText: true, hasError: true })).toEqual({
+      labelId: "bio-label",
+      errorId: "bio-error",
+      describedBy: "bio-error",
     })
   })
 

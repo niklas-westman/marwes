@@ -22,6 +22,7 @@ import { runCheckboxFieldContract } from "../../../../tests/contracts/checkbox-f
 import { runCheckboxGroupFieldContract } from "../../../../tests/contracts/checkbox-group-field.contract"
 import { runCheckboxContract } from "../../../../tests/contracts/checkbox.contract"
 import { runDateOfBirthFieldContract } from "../../../../tests/contracts/date-of-birth-field.contract"
+import { runDatePickerContract } from "../../../../tests/contracts/date-picker.contract"
 import { runDialogModalContract } from "../../../../tests/contracts/dialog-modal.contract"
 import { runDialogContract } from "../../../../tests/contracts/dialog.contract"
 import { runDividerContract } from "../../../../tests/contracts/divider.contract"
@@ -61,6 +62,11 @@ import NotificationBadge from "../lib/components/badge/NotificationBadge.svelte"
 import PriorityBadge from "../lib/components/badge/PriorityBadge.svelte"
 import StatusBadge from "../lib/components/badge/StatusBadge.svelte"
 import Banner from "../lib/components/banner/Banner.svelte"
+import ErrorBanner from "../lib/components/banner/ErrorBanner.svelte"
+import InfoBanner from "../lib/components/banner/InfoBanner.svelte"
+import SuccessBanner from "../lib/components/banner/SuccessBanner.svelte"
+import WarningBanner from "../lib/components/banner/WarningBanner.svelte"
+import BaseButton from "../lib/components/button/Button.svelte"
 import CancelButton from "../lib/components/button/CancelButton.svelte"
 import CloseButton from "../lib/components/button/CloseButton.svelte"
 import ConfirmButton from "../lib/components/button/ConfirmButton.svelte"
@@ -85,6 +91,7 @@ import StatCard from "../lib/components/card/StatCard.svelte"
 import Checkbox from "../lib/components/checkbox/Checkbox.svelte"
 import CheckboxField from "../lib/components/checkbox/CheckboxField.svelte"
 import CheckboxGroupField from "../lib/components/checkbox/CheckboxGroupField.svelte"
+import DatePicker from "../lib/components/date-picker/DatePicker.svelte"
 import ConfirmDialog from "../lib/components/dialog/ConfirmDialog.svelte"
 import DestructiveDialog from "../lib/components/dialog/DestructiveDialog.svelte"
 import Dialog from "../lib/components/dialog/Dialog.svelte"
@@ -92,9 +99,11 @@ import InfoDialog from "../lib/components/dialog/InfoDialog.svelte"
 import Divider from "../lib/components/divider/Divider.svelte"
 import Icon from "../lib/components/icon/Icon.svelte"
 import Input from "../lib/components/input/Input.svelte"
+import InputOtp from "../lib/components/input/InputOtp.svelte"
 import RichText from "../lib/components/input/RichText.svelte"
 import Select from "../lib/components/input/Select.svelte"
 import Textarea from "../lib/components/input/Textarea.svelte"
+import Paragraph from "../lib/components/paragraph/Paragraph.svelte"
 import ProgressBar from "../lib/components/progress-bar/ProgressBar.svelte"
 import Radio from "../lib/components/radio/Radio.svelte"
 import Skeleton from "../lib/components/skeleton/Skeleton.svelte"
@@ -105,6 +114,7 @@ import EmptyStateSpinner from "../lib/components/spinner/EmptyStateSpinner.svelt
 import Spinner from "../lib/components/spinner/Spinner.svelte"
 import StatTile from "../lib/components/stat-tile/StatTile.svelte"
 import Switch from "../lib/components/switch/Switch.svelte"
+import Tab from "../lib/components/tab/Tab.svelte"
 import ErrorToast from "../lib/components/toast/ErrorToast.svelte"
 import InfoToast from "../lib/components/toast/InfoToast.svelte"
 import SuccessToast from "../lib/components/toast/SuccessToast.svelte"
@@ -131,6 +141,7 @@ import TabGroupContractFixture from "./type-fixtures/TabGroupContractFixture.sve
 import TextareaFieldContractFixture from "./type-fixtures/TextareaFieldContractFixture.svelte"
 import ToastProviderContractFixture from "./type-fixtures/ToastProviderContractFixture.svelte"
 import TypographyContractFixture from "./type-fixtures/TypographyContractFixture.svelte"
+import WithProviderFixture from "./type-fixtures/WithProviderFixture.svelte"
 import ZipCodeFieldContractFixture from "./type-fixtures/ZipCodeFieldContractFixture.svelte"
 
 type Props = Record<string, unknown>
@@ -228,6 +239,12 @@ async function dispatchKeyboard(text: string): Promise<void> {
 }
 
 runAccordionContract("svelte", {
+  renderAccordionOptions(options) {
+    render(Accordion, { props: { title: "Question", ...options } })
+  },
+  getAccordionRoot() {
+    return document.querySelector(".mw-accordion") as HTMLElement
+  },
   renderAccordion(args = {}) {
     renderWithText(
       Accordion,
@@ -277,6 +294,12 @@ runAccordionContract("svelte", {
 })
 
 runAvatarContract("svelte", {
+  renderAvatarOptions(options) {
+    render(Avatar, { props: { ...options } })
+  },
+  getAvatarElement() {
+    return document.querySelector('[data-component="avatar"]') as HTMLElement
+  },
   renderAvatar(args = {}) {
     render(Avatar, {
       props: {
@@ -285,6 +308,7 @@ runAvatarContract("svelte", {
         ...(args.src !== undefined ? { src: args.src } : {}),
         ...(args.alt !== undefined ? { alt: args.alt } : {}),
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+        ...(args.label !== undefined ? { label: args.label } : {}),
         ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
       },
     })
@@ -298,6 +322,9 @@ runAvatarContract("svelte", {
 })
 
 runAvatarBadgeContract("svelte", {
+  renderAvatarBadgeOptions(options) {
+    render(AvatarBadge, { props: { ...options } })
+  },
   renderAvatarBadge(args = {}) {
     render(AvatarBadge, {
       props: {
@@ -320,10 +347,14 @@ runAvatarBadgeContract("svelte", {
 })
 
 runAvatarGroupContract("svelte", {
+  renderAvatarGroupOptions(options) {
+    render(AvatarGroup, { props: { items: [{ initials: "MW" }], ...options } })
+  },
   renderAvatarGroup(args = {}) {
     render(AvatarGroup, {
       props: {
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+        ...(args.label !== undefined ? { label: args.label } : {}),
         items: [
           { id: "mw", initials: "MW" },
           { id: "nk", initials: "NK" },
@@ -346,6 +377,12 @@ runAvatarGroupContract("svelte", {
 })
 
 runBadgeContract("svelte", {
+  renderBadge(options, text) {
+    renderWithText(Badge, { ...options }, text)
+  },
+  getBadgeElement() {
+    return document.querySelector('[data-component="badge"]') as HTMLElement
+  },
   renderStatus() {
     renderWithText(StatusBadge, { variant: "success" }, "Active")
   },
@@ -389,6 +426,7 @@ runButtonContract("svelte", {
         ...(args.ariaLabelledBy !== undefined ? { ariaLabelledBy: args.ariaLabelledBy } : {}),
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.loading !== undefined ? { loading: args.loading } : {}),
+        ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
         ...(args.onClick !== undefined ? { onclick: args.onClick } : {}),
       },
       args.text ?? "Primary",
@@ -400,16 +438,29 @@ runButtonContract("svelte", {
       {
         href: args.href,
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
+        ...(args.loading !== undefined ? { loading: args.loading } : {}),
+        ...(args.dataAttributes !== undefined ? { dataAttributes: args.dataAttributes } : {}),
         ...(args.onClick !== undefined ? { onclick: args.onClick } : {}),
       },
       args.text,
     )
   },
+  renderButton(options, text) {
+    renderWithText(BaseButton, { ...options }, text ?? "")
+  },
+  getButtonElement() {
+    return document.querySelector('[data-component="button"]') as HTMLElement
+  },
   getByRole(role, options) {
     return screen.getByRole(role, options)
   },
   async click(element) {
-    if (element instanceof HTMLInputElement && element.disabled) return
+    // fireEvent dispatches even on disabled controls; real browsers do not
+    if (
+      (element instanceof HTMLInputElement || element instanceof HTMLButtonElement) &&
+      element.disabled
+    )
+      return
     await fireEvent.click(element)
   },
 })
@@ -460,7 +511,23 @@ function renderBannerContract(args: Props = {}) {
   )
 }
 
+const sveltePurposeBanners = {
+  info: InfoBanner,
+  success: SuccessBanner,
+  warning: WarningBanner,
+  error: ErrorBanner,
+}
+
 runBannerContract("svelte", {
+  renderPurposeBanner(intent) {
+    renderWithText(sveltePurposeBanners[intent], {}, "Purpose message")
+  },
+  renderBannerOptions(options, extras) {
+    renderBannerContract({
+      ...options,
+      ...(extras?.withAction ? { action: actionSnippet("Learn more") } : {}),
+    })
+  },
   renderDefault() {
     renderBannerContract()
   },
@@ -512,6 +579,12 @@ runBannerContract("svelte", {
 })
 
 runCardContract("svelte", {
+  renderCardOptions(options) {
+    render(Card, { props: { ...options } })
+  },
+  getCardRoot() {
+    return document.querySelector('[data-component="card"]') as HTMLElement
+  },
   renderCard(args = {}) {
     renderWithText(
       Card,
@@ -537,6 +610,12 @@ runCardContract("svelte", {
 })
 
 runCheckboxContract("svelte", {
+  renderCheckboxOptions(options) {
+    render(Checkbox, { props: { ...options } })
+  },
+  getCheckboxElement() {
+    return document.querySelector("input.mw-checkbox") as HTMLInputElement
+  },
   renderCheckbox(args = {}) {
     render(Checkbox, {
       props: {
@@ -602,6 +681,7 @@ runCheckboxGroupFieldContract("svelte", {
         label: args.label ?? "Communication preferences",
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
+        ...(args.required !== undefined ? { required: args.required } : {}),
         children: optionCheckboxSnippet({
           options,
           selected: args.value ?? args.defaultValue ?? [],
@@ -628,8 +708,14 @@ runCheckboxGroupFieldContract("svelte", {
 })
 
 runDividerContract("svelte", {
-  renderDivider(args = {}) {
-    render(Divider, { props: args })
+  renderDividerOptions(options) {
+    render(Divider, { props: { ...options } })
+  },
+  getDividerRoot() {
+    return document.querySelector('[data-component="divider"]') as HTMLElement
+  },
+  renderDivider({ attributes, ...args } = {}) {
+    render(Divider, { props: { ...args, ...attributes } })
   },
   getByRole(role) {
     return screen.getByRole(role)
@@ -637,6 +723,14 @@ runDividerContract("svelte", {
 })
 
 runDialogContract("svelte", {
+  renderDialogOptions(options) {
+    render(Dialog, {
+      props: { title: "Title", footer: actionSnippet("Action"), onclose: () => {}, ...options },
+    })
+  },
+  getDialogRoot() {
+    return document.querySelector(".mw-dialog") as HTMLElement
+  },
   renderConfirm() {
     renderWithText(
       ConfirmDialog,
@@ -675,6 +769,23 @@ runDialogContract("svelte", {
   },
 })
 
+runDatePickerContract("svelte", {
+  renderDatePickerOptions(options) {
+    render(DatePicker, { props: { ...options } })
+  },
+  renderDatePicker({ onDaySelect, ...args } = {}) {
+    render(DatePicker, {
+      props: {
+        ...args,
+        ...(onDaySelect ? { ondayselect: (day: { date?: string }) => onDaySelect(day.date) } : {}),
+      },
+    })
+  },
+  async click(element) {
+    await fireEvent.click(element)
+  },
+})
+
 runDialogModalContract("svelte", {
   renderOpenDialogModal(args = {}) {
     render(DialogModalContractOpenFixture, {
@@ -683,6 +794,7 @@ runDialogModalContract("svelte", {
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
         ...(args.dismissible !== undefined ? { dismissible: args.dismissible } : {}),
+        ...(args.closeLabel !== undefined ? { closeLabel: args.closeLabel } : {}),
         ...(args.showFooter !== undefined ? { showFooter: args.showFooter } : {}),
         ...(args.closeOnEscape !== undefined ? { closeOnEscape: args.closeOnEscape } : {}),
         ...(args.closeOnScrimClick !== undefined
@@ -784,13 +896,13 @@ runHeadingContract("svelte", {
 
 runIconContract("svelte", {
   renderIcon(args = {}) {
+    const { ariaLabel, className, ...rest } = args
     render(Icon, {
       props: {
         name: "search",
-        ...(args.ariaLabel !== undefined ? { "aria-label": args.ariaLabel } : {}),
-        ...(args.decorative !== undefined ? { decorative: args.decorative } : {}),
-        ...(args.size !== undefined ? { size: args.size } : {}),
-        ...(args.strokeWidth !== undefined ? { strokeWidth: args.strokeWidth } : {}),
+        ...rest,
+        ...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {}),
+        ...(className !== undefined ? { class: className } : {}),
       },
     })
   },
@@ -812,7 +924,7 @@ runInputContract("svelte", {
         ariaLabel: args.ariaLabel ?? "Input",
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         ...(args.onValueChange !== undefined
           ? {
               oninput: (event: Event & { currentTarget: HTMLInputElement }) =>
@@ -831,11 +943,28 @@ runInputContract("svelte", {
 })
 
 runInputFieldContract("svelte", {
+  getButtonByName(name) {
+    return screen.getByRole("button", { name })
+  },
+  async click(element) {
+    await fireEvent.click(element)
+  },
   renderInputField(args) {
     render(InputFieldContractFixture, {
       props: {
         label: args.label,
-        input: {},
+        input: {
+          ...(args.inputType !== undefined ? { type: args.inputType } : {}),
+          ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        },
+        ...(args.leadingSymbol !== undefined ? { leadingSymbol: args.leadingSymbol } : {}),
+        ...(args.showPasswordLabel !== undefined
+          ? { showPasswordLabel: args.showPasswordLabel }
+          : {}),
+        ...(args.hidePasswordLabel !== undefined
+          ? { hidePasswordLabel: args.hidePasswordLabel }
+          : {}),
+        ...(args.clearLabel !== undefined ? { clearLabel: args.clearLabel } : {}),
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
@@ -885,6 +1014,15 @@ runDateOfBirthFieldContract("svelte", {
 })
 
 runInputOtpContract("svelte", {
+  renderInputOtpOptions(options) {
+    render(WithProviderFixture, { props: { Component: InputOtp, props: { ...options } } })
+  },
+  getInputOtpParts() {
+    return {
+      root: document.querySelector(".mw-input-otp") as HTMLElement,
+      input: document.querySelector("input.mw-input-otp__input") as HTMLInputElement,
+    }
+  },
   renderInputOtp(args = {}) {
     render(InputOtpContractFixture, {
       props: {
@@ -894,6 +1032,9 @@ runInputOtpContract("svelte", {
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
         ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.placeholderCharacter !== undefined
+          ? { placeholderCharacter: args.placeholderCharacter }
+          : {}),
         ...(args.onValueChange !== undefined ? { onvaluechange: args.onValueChange } : {}),
       },
     })
@@ -919,6 +1060,12 @@ runInputOtpContract("svelte", {
 })
 
 runParagraphContract("svelte", {
+  renderParagraphOptions(options) {
+    render(WithProviderFixture, { props: { Component: Paragraph, props: { ...options } } })
+  },
+  getParagraphRoot() {
+    return document.querySelector("p.mw-p") as HTMLElement
+  },
   renderParagraph(args) {
     render(TypographyContractFixture, {
       props: {
@@ -935,6 +1082,12 @@ runParagraphContract("svelte", {
 })
 
 runProgressBarContract("svelte", {
+  renderProgressBarOptions(options) {
+    render(ProgressBar, { props: { ...options } })
+  },
+  getProgressBarRoot() {
+    return document.querySelector('[data-component="progress-bar"]') as HTMLElement
+  },
   renderProgressBar(args = {}) {
     render(ProgressBar, { props: args })
   },
@@ -950,12 +1103,18 @@ runProgressBarContract("svelte", {
 })
 
 runRadioContract("svelte", {
+  renderRadioOptions(options) {
+    render(Radio, { props: { ...options } })
+  },
+  getRadioElement() {
+    return document.querySelector("input.mw-radio") as HTMLInputElement
+  },
   renderRadio(args = {}) {
     render(Radio, {
       props: {
         ariaLabel: args.ariaLabel ?? "Radio",
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
-        ...(args.defaultChecked !== undefined ? { checked: args.defaultChecked } : {}),
+        ...(args.defaultChecked !== undefined ? { defaultChecked: args.defaultChecked } : {}),
         ...(args.onCheckedChange !== undefined ? { oncheckedchange: args.onCheckedChange } : {}),
       },
     })
@@ -1003,6 +1162,15 @@ runRadioGroupFieldContract("svelte", {
 })
 
 runRichTextContract("svelte", {
+  renderRichTextOptions(options) {
+    render(RichText, { props: { ...options } })
+  },
+  getRichTextParts() {
+    return {
+      root: document.querySelector(".mw-rich-text") as HTMLElement,
+      editor: document.querySelector('[role="textbox"]') as HTMLElement,
+    }
+  },
   renderRichText(args = {}) {
     render(RichText, {
       props: {
@@ -1010,6 +1178,7 @@ runRichTextContract("svelte", {
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
         ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
+        ...(args.formatLabels !== undefined ? { formatLabels: args.formatLabels } : {}),
         ...(args.onValueChange !== undefined ? { onvaluechange: args.onValueChange } : {}),
       },
     })
@@ -1056,12 +1225,18 @@ const defaultSelectOptions = [
 ]
 
 runSelectContract("svelte", {
+  renderSelectOptions(options) {
+    render(Select, { props: { ...options } })
+  },
+  getSelectElement() {
+    return document.querySelector("select.mw-select") as HTMLSelectElement
+  },
   renderSelect(args = {}) {
     render(Select, {
       props: {
         ariaLabel: args.ariaLabel ?? "Select",
         options: args.options ?? defaultSelectOptions,
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.required !== undefined ? { required: args.required } : {}),
         ...(args.placeholder !== undefined ? { placeholder: args.placeholder } : {}),
@@ -1084,6 +1259,9 @@ runSelectContract("svelte", {
 })
 
 runSelectFieldContract("svelte", {
+  queryProxyInput() {
+    return document.querySelector<HTMLInputElement>(".mw-select-field__proxy-input")
+  },
   renderSelectField(args) {
     render(SelectFieldContractFixture, {
       props: {
@@ -1091,6 +1269,11 @@ runSelectFieldContract("svelte", {
         select: {
           options: defaultSelectOptions,
           ...(args.select?.native !== undefined ? { native: args.select.native } : {}),
+          ...(args.select?.name !== undefined ? { name: args.select.name } : {}),
+          ...(args.select?.disabled !== undefined ? { disabled: args.select.disabled } : {}),
+          ...(args.select?.ariaLabelledBy !== undefined
+            ? { ariaLabelledBy: args.select.ariaLabelledBy }
+            : {}),
         },
         ...(args.helperText !== undefined ? { helperText: args.helperText } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
@@ -1141,8 +1324,14 @@ runSelectComboboxContract("svelte", {
 })
 
 runSpacingContract("svelte", {
-  renderSpacing(args = {}) {
-    render(Spacing, { props: args })
+  renderSpacingOptions(options) {
+    render(Spacing, { props: { ...options } })
+  },
+  getSpacingRoot() {
+    return document.querySelector('[data-component="spacing"]') as HTMLElement
+  },
+  renderSpacing({ attributes, ...args } = {}) {
+    render(Spacing, { props: { ...args, ...attributes } })
   },
   getSpacingElement() {
     return document.querySelector("[data-component='spacing']")
@@ -1150,6 +1339,12 @@ runSpacingContract("svelte", {
 })
 
 runStatTileContract("svelte", {
+  renderStatTileOptions(options) {
+    render(StatTile, { props: { label: "Revenue", value: "42", trendValue: "3%", ...options } })
+  },
+  getStatTileRoot() {
+    return document.querySelector('[data-component="stat-tile"]') as HTMLElement
+  },
   renderStatTile(args = {}) {
     render(StatTile, {
       props: {
@@ -1177,14 +1372,24 @@ runStatTileContract("svelte", {
 })
 
 runSliderContract("svelte", {
+  renderSliderOptions(options) {
+    render(Slider, { props: { ...options } })
+  },
+  getSliderRoot() {
+    return document.querySelector(".mw-slider") as HTMLElement
+  },
+  getSliderInput() {
+    return document.querySelector("input.mw-slider__native") as HTMLInputElement
+  },
   renderSlider(args = {}) {
     const props = {
       ...(args.ariaLabel !== undefined ? { ariaLabel: args.ariaLabel } : {}),
+      ...(args.label !== undefined ? { label: args.label } : {}),
       ...(args.min !== undefined ? { min: args.min } : {}),
       ...(args.max !== undefined ? { max: args.max } : {}),
       ...(args.step !== undefined ? { step: args.step } : {}),
       ...(args.value !== undefined ? { value: args.value } : {}),
-      ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+      ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
       ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
       ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
       ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
@@ -1217,9 +1422,9 @@ runSliderContract("svelte", {
           ...(args.showTooltip !== undefined ? { showTooltip: args.showTooltip } : {}),
           ...(args.ariaValueText !== undefined ? { ariaValueText: args.ariaValueText } : {}),
           ...(args.onValueChange !== undefined ? { onvaluechange: args.onValueChange } : {}),
+          ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         },
         ...(args.value !== undefined ? { value: args.value } : {}),
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
         ...(args.description !== undefined ? { description: args.description } : {}),
         ...(args.error !== undefined ? { error: args.error } : {}),
         ...(args.ariaDescribedBy !== undefined ? { ariaDescribedBy: args.ariaDescribedBy } : {}),
@@ -1247,6 +1452,12 @@ runSliderContract("svelte", {
 })
 
 runSwitchContract("svelte", {
+  renderSwitchOptions(options) {
+    render(Switch, { props: { ...options } })
+  },
+  getSwitchElement() {
+    return document.querySelector(".mw-switch") as HTMLElement
+  },
   renderSwitch(args = {}) {
     render(Switch, {
       props: {
@@ -1290,6 +1501,12 @@ runSwitchContract("svelte", {
 })
 
 runTabContract("svelte", {
+  renderTabOptions(options) {
+    render(Tab, { props: { ...options } })
+  },
+  getTabRoot() {
+    return document.querySelector("button.mw-tab") as HTMLElement
+  },
   renderTabGroup(args = {}) {
     render(TabGroupContractFixture, {
       props: {
@@ -1320,13 +1537,19 @@ runTabContract("svelte", {
 })
 
 runTextareaContract("svelte", {
+  renderTextareaOptions(options) {
+    render(Textarea, { props: { ...options } })
+  },
+  getTextareaElement() {
+    return document.querySelector("textarea.mw-textarea") as HTMLTextAreaElement
+  },
   renderTextarea(args = {}) {
     render(Textarea, {
       props: {
         ariaLabel: args.ariaLabel ?? "Textarea",
         ...(args.disabled !== undefined ? { disabled: args.disabled } : {}),
         ...(args.readOnly !== undefined ? { readOnly: args.readOnly } : {}),
-        ...(args.defaultValue !== undefined ? { value: args.defaultValue } : {}),
+        ...(args.defaultValue !== undefined ? { defaultValue: args.defaultValue } : {}),
         ...(args.onValueChange !== undefined
           ? {
               oninput: (event: Event & { currentTarget: HTMLTextAreaElement }) =>
@@ -1401,12 +1624,19 @@ runZipCodeFieldContract("svelte", {
 })
 
 runToastContract("svelte", {
+  renderToastOptions(options) {
+    renderWithText(Toast, { ondismiss: () => {}, ...options }, "Saved")
+  },
+  getToastRoot() {
+    return document.querySelector('[data-component="toast"]') as HTMLElement
+  },
   renderRawToast(args = {}) {
     renderWithText(
       Toast,
       {
         ...(args.ariaLive !== undefined ? { ariaLive: args.ariaLive } : {}),
         ...(args.dismissible ? { ondismiss: () => {} } : {}),
+        ...(args.dismissLabel ? { dismissLabel: args.dismissLabel } : {}),
       },
       args.children ?? "Project saved.",
     )
@@ -1431,8 +1661,13 @@ runToastContract("svelte", {
           message: toast.children,
           ...(toast.intent !== undefined ? { intent: toast.intent } : {}),
           ...(toast.duration !== undefined ? { duration: toast.duration } : {}),
+          ...(toast.icon !== undefined
+            ? { icon: createRawSnippet(() => ({ render: () => `<span>${toast.icon}</span>` })) }
+            : {}),
+          ...(toast.action !== undefined ? { action: actionSnippet(toast.action) } : {}),
         })),
         ...(args.maxVisible !== undefined ? { maxVisible: args.maxVisible } : {}),
+        ...(args.placement !== undefined ? { placement: args.placement } : {}),
         ...(args.onDismiss !== undefined ? { ondismiss: args.onDismiss } : {}),
       },
     })
@@ -1486,6 +1721,12 @@ runToastContract("svelte", {
 })
 
 runTooltipContract("svelte", {
+  renderTooltipOptions(options) {
+    render(Tooltip, { props: { ...options } })
+  },
+  getTooltipRoot() {
+    return document.querySelector('[data-component="tooltip"]') as HTMLElement
+  },
   renderTooltip(args = {}) {
     renderWithText(
       Tooltip,
@@ -1558,6 +1799,12 @@ runTooltipContract("svelte", {
 })
 
 runSkeletonContract("svelte", {
+  renderSkeletonOptions(options) {
+    render(Skeleton, { props: { ...options } })
+  },
+  getSkeletonRoot() {
+    return document.querySelector('[data-component="skeleton"]') as HTMLElement
+  },
   renderSkeleton(args = {}) {
     render(Skeleton, { props: args })
   },
@@ -1570,6 +1817,12 @@ runSkeletonContract("svelte", {
 })
 
 runSpinnerContract("svelte", {
+  renderSpinnerOptions(options) {
+    render(Spinner, { props: { ...options } })
+  },
+  getSpinnerRoot() {
+    return document.querySelector('[data-component="spinner"]') as HTMLElement
+  },
   renderSpinner(args = {}) {
     render(Spinner, { props: args })
   },

@@ -19,3 +19,5 @@ export type {
 
 export { resolveSpinnerA11y } from "./spinner-a11y"
 export { createSpinnerRecipe } from "./spinner-recipe"
+export { toSpinnerHtmlAttributes } from "./spinner-html-attributes"
+export type { SpinnerHtmlAttributes } from "./spinner-html-attributes"

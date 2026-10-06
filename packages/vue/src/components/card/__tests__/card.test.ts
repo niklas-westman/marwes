@@ -28,6 +28,18 @@ function renderWithProvider(
 }
 
 runCardContract("vue", {
+  renderCardOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () => h(MarwesProvider, null, { default: () => h(Card as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getCardRoot() {
+    return document.querySelector('[data-component="card"]') as HTMLElement
+  },
   renderCard(args = {}) {
     renderWithProvider(
       Card,
