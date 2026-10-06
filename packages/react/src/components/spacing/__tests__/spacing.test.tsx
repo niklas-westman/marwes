@@ -15,6 +15,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSpacingContract("react", {
+  renderSpacingOptions(options) {
+    renderWithProvider(<Spacing {...options} />)
+  },
+  getSpacingRoot() {
+    return document.querySelector('[data-component="spacing"]') as HTMLElement
+  },
   renderSpacing(args = {}) {
     const spacingProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

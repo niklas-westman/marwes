@@ -2,6 +2,7 @@
  * Shared contract for the Divider atom — horizontal separator default,
  * vertical orientation, size variant, and optional id.
  */
+import type { DividerOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type DividerSize = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"
@@ -16,6 +17,37 @@ export type DividerContractHarness = {
     attributes?: Record<string, string>
   }): Promise<void> | void
   getByRole(role: "separator"): HTMLElement
+  /** Renders the base Divider with raw core options. */
+  renderDividerOptions(options: DividerOptions): Promise<void> | void
+  getDividerRoot(): HTMLElement
+}
+
+type DividerOptionCase = {
+  options: DividerOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core DividerOptions field fails to compile until every adapter's
+// handling of it is described by a case.
+const dividerOptionCases: Record<keyof DividerOptions, DividerOptionCase> = {
+  size: {
+    options: { size: "xl" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("data-size", "xl")
+      expect(root).toHaveClass("mw-divider--xl")
+    },
+  },
+  orientation: {
+    options: { orientation: "vertical" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("aria-orientation", "vertical")
+      expect(root).toHaveClass("mw-divider--vertical")
+    },
+  },
+  id: {
+    options: { id: "rule" },
+    expectRendered: (root) => expect(root).toHaveAttribute("id", "rule"),
+  },
 }
 
 export function runDividerContract(adapterName: string, harness: DividerContractHarness): void {
@@ -55,6 +87,16 @@ export function runDividerContract(adapterName: string, harness: DividerContract
       expect(separatorElement).toHaveAttribute("aria-label", "Section break")
       expect(separatorElement).toHaveAttribute("data-track-id", "divider-1")
       expect(separatorElement).toHaveAttribute("data-component", "divider")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(dividerOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderDividerOptions(optionCase.options)
+
+        const element = harness.getDividerRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

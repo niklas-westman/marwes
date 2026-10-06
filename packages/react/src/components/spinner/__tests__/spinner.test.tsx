@@ -13,6 +13,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runSpinnerContract("react", {
+  renderSpinnerOptions(options) {
+    renderWithProvider(<Spinner {...options} />)
+  },
+  getSpinnerRoot() {
+    return document.querySelector('[data-component="spinner"]') as HTMLElement
+  },
   async renderSpinner(args = {}) {
     renderWithProvider(<Spinner {...args} />)
   },

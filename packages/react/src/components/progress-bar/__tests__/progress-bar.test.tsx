@@ -9,6 +9,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runProgressBarContract("react", {
+  renderProgressBarOptions(options) {
+    renderWithProvider(<ProgressBar {...options} />)
+  },
+  getProgressBarRoot() {
+    return document.querySelector('[data-component="progress-bar"]') as HTMLElement
+  },
   async renderProgressBar(args = {}) {
     renderWithProvider(<ProgressBar {...args} />)
   },

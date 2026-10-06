@@ -2,6 +2,7 @@
  * Shared contract for the ProgressBar atom — determinate progress semantics,
  * Figma small/default track sizes, label/percentage visibility, and disabled styling metadata.
  */
+import type { ProgressBarOptions } from "@marwes-ui/core"
 import { describe, expect, it } from "vitest"
 
 export type ProgressBarSize = "small" | "default"
@@ -23,6 +24,82 @@ export type ProgressBarContractHarness = {
     ariaLabel?: string
   }): Promise<void> | void
   getProgressBarElement(): HTMLElement
+  /** Renders the base ProgressBar with raw core options. */
+  renderProgressBarOptions(options: ProgressBarOptions): Promise<void> | void
+  getProgressBarRoot(): HTMLElement
+}
+
+type ProgressBarOptionCase = {
+  options: ProgressBarOptions
+  expectRendered: (root: HTMLElement) => void
+}
+
+// Exhaustive on purpose: a new core ProgressBarOptions field fails to compile until every
+// adapter's handling of it is described by a case.
+const progressBarOptionCases: Record<keyof ProgressBarOptions, ProgressBarOptionCase> = {
+  id: {
+    options: { id: "upload" },
+    expectRendered: (root) => expect(root).toHaveAttribute("id", "upload"),
+  },
+  label: {
+    options: { label: "Uploading" },
+    expectRendered: (root) =>
+      expect(root.querySelector(".mw-progress-bar__label")).toHaveTextContent("Uploading"),
+  },
+  value: {
+    options: { value: 40 },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-valuenow", "40"),
+  },
+  min: {
+    options: { min: 10, value: 20 },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-valuemin", "10"),
+  },
+  max: {
+    options: { max: 200 },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-valuemax", "200"),
+  },
+  size: {
+    options: { size: "small" },
+    expectRendered: (root) => expect(root).toHaveClass("mw-progress-bar--small"),
+  },
+  state: {
+    options: { state: "pressed" },
+    expectRendered: (root) => expect(root).toHaveClass("mw-progress-bar--state-pressed"),
+  },
+  disabled: {
+    options: { disabled: true },
+    expectRendered: (root) => {
+      expect(root).toHaveClass("mw-progress-bar--disabled")
+      expect(root).toHaveAttribute("aria-disabled", "true")
+    },
+  },
+  showLabel: {
+    options: { showLabel: false },
+    expectRendered: (root) => expect(root.querySelector(".mw-progress-bar__label")).toBeNull(),
+  },
+  showPercentage: {
+    options: { showPercentage: false },
+    expectRendered: (root) => expect(root.querySelector(".mw-progress-bar__percentage")).toBeNull(),
+  },
+  valueLabel: {
+    options: { valueLabel: "3 of 5" },
+    expectRendered: (root) => {
+      expect(root).toHaveAttribute("aria-valuetext", "3 of 5")
+      expect(root.querySelector(".mw-progress-bar__percentage")).toHaveTextContent("3 of 5")
+    },
+  },
+  ariaLabel: {
+    options: { ariaLabel: "Upload progress" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-label", "Upload progress"),
+  },
+  ariaLabelledBy: {
+    options: { ariaLabelledBy: "label-id" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-labelledby", "label-id"),
+  },
+  ariaDescribedBy: {
+    options: { ariaDescribedBy: "hint-id" },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-describedby", "hint-id"),
+  },
 }
 
 export function runProgressBarContract(
@@ -88,6 +165,16 @@ export function runProgressBarContract(
       expect(progressBar).toHaveAttribute("data-state", "pressed")
       expect(progressBar.className).toContain("mw-progress-bar--disabled")
       expect(progressBar.className).toContain("mw-progress-bar--state-pressed")
+    })
+
+    describe("every core option reaches the DOM", () => {
+      it.each(Object.entries(progressBarOptionCases))("%s", async (_optionName, optionCase) => {
+        await harness.renderProgressBarOptions(optionCase.options)
+
+        const element = harness.getProgressBarRoot()
+        expect(element).toBeInTheDocument()
+        optionCase.expectRendered?.(element)
+      })
     })
   })
 }

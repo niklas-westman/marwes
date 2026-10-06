@@ -13,6 +13,12 @@ function renderWithProvider(ui: React.ReactElement) {
 }
 
 runDividerContract("react", {
+  renderDividerOptions(options) {
+    renderWithProvider(<Divider {...options} />)
+  },
+  getDividerRoot() {
+    return document.querySelector('[data-component="divider"]') as HTMLElement
+  },
   async renderDivider(args = {}) {
     const dividerProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),

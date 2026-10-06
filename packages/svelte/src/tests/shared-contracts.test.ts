@@ -686,6 +686,12 @@ runCheckboxGroupFieldContract("svelte", {
 })
 
 runDividerContract("svelte", {
+  renderDividerOptions(options) {
+    render(Divider, { props: { ...options } })
+  },
+  getDividerRoot() {
+    return document.querySelector('[data-component="divider"]') as HTMLElement
+  },
   renderDivider({ attributes, ...args } = {}) {
     render(Divider, { props: { ...args, ...attributes } })
   },
@@ -1028,6 +1034,12 @@ runParagraphContract("svelte", {
 })
 
 runProgressBarContract("svelte", {
+  renderProgressBarOptions(options) {
+    render(ProgressBar, { props: { ...options } })
+  },
+  getProgressBarRoot() {
+    return document.querySelector('[data-component="progress-bar"]') as HTMLElement
+  },
   renderProgressBar(args = {}) {
     render(ProgressBar, { props: args })
   },
@@ -1255,6 +1267,12 @@ runSelectComboboxContract("svelte", {
 })
 
 runSpacingContract("svelte", {
+  renderSpacingOptions(options) {
+    render(Spacing, { props: { ...options } })
+  },
+  getSpacingRoot() {
+    return document.querySelector('[data-component="spacing"]') as HTMLElement
+  },
   renderSpacing({ attributes, ...args } = {}) {
     render(Spacing, { props: { ...args, ...attributes } })
   },
@@ -1699,6 +1717,12 @@ runTooltipContract("svelte", {
 })
 
 runSkeletonContract("svelte", {
+  renderSkeletonOptions(options) {
+    render(Skeleton, { props: { ...options } })
+  },
+  getSkeletonRoot() {
+    return document.querySelector('[data-component="skeleton"]') as HTMLElement
+  },
   renderSkeleton(args = {}) {
     render(Skeleton, { props: args })
   },
@@ -1711,6 +1735,12 @@ runSkeletonContract("svelte", {
 })
 
 runSpinnerContract("svelte", {
+  renderSpinnerOptions(options) {
+    render(Spinner, { props: { ...options } })
+  },
+  getSpinnerRoot() {
+    return document.querySelector('[data-component="spinner"]') as HTMLElement
+  },
   renderSpinner(args = {}) {
     render(Spinner, { props: args })
   },

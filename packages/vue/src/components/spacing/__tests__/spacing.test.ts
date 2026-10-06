@@ -24,6 +24,19 @@ function renderWithProvider(component: unknown, props: Record<string, unknown> =
 }
 
 runSpacingContract("vue", {
+  renderSpacingOptions(options) {
+    render(
+      defineComponent({
+        setup() {
+          return () =>
+            h(MarwesProvider, null, { default: () => h(Spacing as never, { ...options }) })
+        },
+      }),
+    )
+  },
+  getSpacingRoot() {
+    return document.querySelector('[data-component="spacing"]') as HTMLElement
+  },
   renderSpacing(args = {}) {
     const spacingProps = {
       ...(args.size !== undefined ? { size: args.size } : {}),
