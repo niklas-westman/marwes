@@ -156,12 +156,15 @@ export const MarwesProvider = defineComponent({
       }
     }
 
-    onMounted(() => {
+    function syncStoredPreference() {
       const storedPreference = readStoredThemePreference(storageKey.value)
       if (storedPreference !== undefined && !isPreferenceControlled.value) {
         internalPreference.value = storedPreference
       }
+    }
 
+    onMounted(() => {
+      syncStoredPreference()
       syncSystemThemeSubscription()
       syncThemeToRuntime()
       syncTargetModeAttribute()
@@ -172,6 +175,8 @@ export const MarwesProvider = defineComponent({
     watch([resolved, variableStrategy], syncThemeToRuntime)
     watch([activeMode, target, attribute, disableTransitionOnChange], syncTargetModeAttribute)
     watch([activePreference, enableSystem], syncSystemThemeSubscription)
+    // onMounted covers the first read; this follows later storageKey or controlled-state changes
+    watch([storageKey, isPreferenceControlled], syncStoredPreference)
 
     provide(marwesContextKey, {
       theme: resolved,
