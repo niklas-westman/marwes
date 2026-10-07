@@ -56,6 +56,15 @@ function uniqueSorted(files) {
   return [...new Set(files)].sort((left, right) => left.localeCompare(right))
 }
 
+// Shared contracts that cover cross-cutting adapter behavior rather than a component family,
+// so they have no family to validate.
+const nonFamilyContractNames = new Set(["provider-behavior"])
+
+function contractFamilyMatch(path) {
+  const match = path.match(/^tests\/contracts\/([^/.]+)\.contract\.ts$/)
+  return match && !nonFamilyContractNames.has(match[1]) ? match : null
+}
+
 function normalizeFamilyName(family) {
   const aliases = {
     "currency-field": "input",
@@ -140,7 +149,6 @@ function familyFromPath(path) {
     /^apps\/storybook-react\/src\/stories\/([^/]+)\//,
     /^apps\/storybook-vue\/src\/stories\/([^/]+)\//,
     /^apps\/storybook-svelte\/src\/stories\/([^/]+)\//,
-    /^tests\/contracts\/([^/.]+)\.contract\.ts$/,
     /^docs\/registry\/families\/([^/]+)/,
     /^docs\/audits\/([^/]+)-family-accessibility\.md$/,
   ]
@@ -150,7 +158,8 @@ function familyFromPath(path) {
     if (match) return normalizeFamilyName(match[1])
   }
 
-  return null
+  const contractMatch = contractFamilyMatch(path)
+  return contractMatch ? normalizeFamilyName(contractMatch[1]) : null
 }
 
 function implementationFamilyFromPath(path) {
@@ -165,7 +174,6 @@ function implementationFamilyFromPath(path) {
     /^apps\/storybook-react\/src\/stories\/([^/]+)\//,
     /^apps\/storybook-vue\/src\/stories\/([^/]+)\//,
     /^apps\/storybook-svelte\/src\/stories\/([^/]+)\//,
-    /^tests\/contracts\/([^/.]+)\.contract\.ts$/,
   ]
 
   for (const pattern of patterns) {
@@ -173,7 +181,8 @@ function implementationFamilyFromPath(path) {
     if (match) return normalizeFamilyName(match[1])
   }
 
-  return null
+  const contractMatch = contractFamilyMatch(path)
+  return contractMatch ? normalizeFamilyName(contractMatch[1]) : null
 }
 
 function existingBiomeTargets(files) {
