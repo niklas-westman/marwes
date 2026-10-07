@@ -1,6 +1,6 @@
 {
   "name": "@marwes-ui/react",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Accessible, themeable Marwes components for React with static preset CSS and purpose-first APIs.",
   "homepage": "https://marwes.io/docs/get-started/react/",
   "repository": {
