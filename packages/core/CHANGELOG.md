@@ -1,5 +1,11 @@
 # @marwes-ui/core
 
+## 1.6.1
+
+### Patch Changes
+
+- [#53](https://github.com/niklas-westman/marwes/pull/53) [`fdf87a5`](https://github.com/niklas-westman/marwes/commit/fdf87a5f227c5b513c39b65b37d2968710d21efc) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Vue `MarwesProvider` now re-reads the stored theme preference when `storageKey` changes after mount, matching the React and Svelte providers. Adds a shared provider behavior contract that all three adapters run.
+
 ## 1.6.0
 
 ### Minor Changes
