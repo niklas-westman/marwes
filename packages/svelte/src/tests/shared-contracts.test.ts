@@ -6,7 +6,7 @@
  */
 import "@testing-library/jest-dom/vitest"
 import { fireEvent, render, screen, waitFor } from "@testing-library/svelte"
-import { createRawSnippet } from "svelte"
+import { createRawSnippet, flushSync } from "svelte"
 import { vi } from "vitest"
 import { runAccordionContract } from "../../../../tests/contracts/accordion.contract"
 import { runAvatarBadgeContract } from "../../../../tests/contracts/avatar-badge.contract"
@@ -33,6 +33,7 @@ import { runInputOtpContract } from "../../../../tests/contracts/input-otp.contr
 import { runInputContract } from "../../../../tests/contracts/input.contract"
 import { runParagraphContract } from "../../../../tests/contracts/paragraph.contract"
 import { runProgressBarContract } from "../../../../tests/contracts/progress-bar.contract"
+import { runProviderBehaviorContract } from "../../../../tests/contracts/provider-behavior.contract"
 import { runRadioGroupFieldContract } from "../../../../tests/contracts/radio-group-field.contract"
 import { runRadioContract } from "../../../../tests/contracts/radio.contract"
 import { runRichTextFieldContract } from "../../../../tests/contracts/rich-text-field.contract"
@@ -123,6 +124,7 @@ import ToastContainer from "../lib/components/toast/ToastContainer.svelte"
 import WarningToast from "../lib/components/toast/WarningToast.svelte"
 import Tooltip from "../lib/components/tooltip/Tooltip.svelte"
 import TooltipGroup from "../lib/components/tooltip/TooltipGroup.svelte"
+import ProviderBehaviorFixture from "./provider-behavior-fixture.svelte"
 import AccordionFieldContractFixture from "./type-fixtures/AccordionFieldContractFixture.svelte"
 import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
 import CheckboxFieldContractFixture from "./type-fixtures/CheckboxFieldContractFixture.svelte"
@@ -1843,5 +1845,26 @@ runSpinnerVariantsContract("svelte", {
   },
   getByRole(role, options) {
     return screen.getByRole(role, options)
+  },
+})
+
+let renderedProvider: ReturnType<typeof render> | undefined
+
+runProviderBehaviorContract("svelte", {
+  renderProvider(props) {
+    renderedProvider = render(ProviderBehaviorFixture, { props })
+    flushSync()
+  },
+  async rerenderProvider(props) {
+    await renderedProvider?.rerender(props)
+    flushSync()
+  },
+  unmountProvider() {
+    renderedProvider?.unmount()
+    renderedProvider = undefined
+  },
+  applyChange(change) {
+    change()
+    flushSync()
   },
 })
