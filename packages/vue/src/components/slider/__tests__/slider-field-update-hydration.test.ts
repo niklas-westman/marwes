@@ -14,5 +14,4 @@ runFieldWiringUpdatesContract("vue", "SliderField", {
     ...(helper ? { description: helper } : {}),
   })),
   getControl: (label) => screen.getByRole("slider", { name: label }),
-  marksErrorAsInvalid: true,
 })

@@ -11,5 +11,4 @@ runFieldWiringUpdatesContract("react", "SliderField", {
     <SliderField {...props} slider={{}} {...(helper ? { description: helper } : {})} />
   )),
   getControl: (label) => screen.getByRole("slider", { name: label }),
-  marksErrorAsInvalid: true,
 })

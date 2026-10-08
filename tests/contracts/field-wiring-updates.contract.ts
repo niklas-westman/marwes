@@ -22,8 +22,6 @@ export interface FieldWiringHarness {
   hydrate(props: FieldWiringProps): Promise<string[]>
   /** Finds the control by role and accessible name, which proves the label is wired to it. */
   getControl(label: string): HTMLElement
-  /** False for roles that do not support aria-invalid, such as switch. */
-  marksErrorAsInvalid: boolean
 }
 
 function describedByIds(control: HTMLElement): string[] {
@@ -52,9 +50,7 @@ function expectWiring(h: FieldWiringHarness, props: FieldWiringProps): void {
   if (props.error) {
     expect(describedByText(control)).toContain(props.error)
 
-    if (h.marksErrorAsInvalid) {
-      expect(control).toHaveAttribute("aria-invalid", "true")
-    }
+    expect(control).toHaveAttribute("aria-invalid", "true")
   } else {
     // Some fields show the error instead of the helper text, so helper is only required without one.
     if (props.helper) {

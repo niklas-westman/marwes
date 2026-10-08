@@ -11,5 +11,4 @@ runFieldWiringUpdatesContract("react", "InputField", {
     <InputField {...props} input={{}} {...(helper ? { helperText: helper } : {})} />
   )),
   getControl: (label) => screen.getByRole("textbox", { name: label }),
-  marksErrorAsInvalid: true,
 })

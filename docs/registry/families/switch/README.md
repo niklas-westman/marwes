@@ -187,7 +187,7 @@ flowchart LR
 
   SwitchField["SwitchField"] --> LabelWiring["visible label via aria-labelledby"]
   SwitchField --> DescribedBy["description + error ids merge into aria-describedby"]
-  SwitchField --> ErrorPolicy["error text supports description\nwithout aria-invalid"]
+  SwitchField --> ErrorPolicy["error text supports description\nand sets aria-invalid"]
 
   Purpose["FeatureToggle / PreferenceSwitch / PermissionSwitch"] --> Semantics["family-local data-purpose metadata"]
   Purpose --> SwitchField
@@ -209,7 +209,7 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 - **Teach `SwitchField` first.** It is the canonical labeled path for product toggles because it guarantees visible-label, description, and error wiring.
 - **Keep the raw atom deliberately small.** `Switch` should stay useful for custom layouts without pretending it owns field semantics on its own.
 - **Keep the button-backed switch model explicit.** Marwes intentionally uses a button-backed `role="switch"` primitive rather than hiding that contract in adapter details.
-- **Treat error text as described-by support, not invalid semantics.** The family currently links error content through `aria-describedby` without claiming `aria-invalid`.
+- **Expose an error as both description and invalid state.** `SwitchField` links error content through `aria-describedby` and sets `aria-invalid="true"` on the switch while an error is shown (`Switch` takes an `invalid` option for the same purpose).
 - **Keep purpose wrappers thin and honest.** They add family-local `data-purpose` metadata without becoming a second switch implementation or a central semantic-registry entry.
 
 ## AXE / accessibility posture

@@ -14,6 +14,8 @@ export interface SwitchOptions {
   size?: SwitchSize
   checked?: boolean
   disabled?: boolean
+  /** Marks the switch as having an error via aria-invalid. */
+  invalid?: boolean
   /** Required when no visible label text is provided */
   ariaLabel?: string
   label?: string
@@ -25,6 +27,7 @@ export interface SwitchA11yProps {
   role: "switch"
   ariaChecked: boolean
   ariaDisabled?: true
+  ariaInvalid?: true
   ariaLabel?: string
   ariaLabelledBy?: string
   ariaDescribedBy?: string

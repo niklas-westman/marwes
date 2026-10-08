@@ -51,6 +51,7 @@
     <Switch
       {...switchProps}
       id={fieldId}
+      invalid={hasError}
       ariaDescribedBy={a11yIds.describedBy}
       ariaLabelledBy={a11yIds.labelId}
     />

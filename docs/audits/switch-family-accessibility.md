@@ -166,7 +166,7 @@ This Switch-family audit should ideally end with clear answers to these question
 
 - [x] Is the button-backed `role="switch"` model still the intended Marwes baseline?
 - [x] What exact checked-change contract should React and Vue both guarantee?
-- [x] Should switch error text remain described-by-only without `aria-invalid`?
+- [x] Should switch error text remain described-by-only without `aria-invalid`? (Reversed 2026-10-08, see Decision C.)
 - [ ] Which Switch-family stories should later be part of automated accessibility gates?
 
 ### 9. Verification
@@ -294,7 +294,7 @@ Current state before follow-up fix:
 Status after follow-up fix:
 - the shared contract now asserts visible-label naming for `SwitchField`
 - the shared contract now asserts description and error ids appear in `aria-describedby`
-- the contract also records that switch error text does not imply `aria-invalid`
+- the contract also records that switch error text does not imply `aria-invalid` (superseded 2026-10-08: the contract now asserts `aria-invalid="true"` when an error is shown)
 
 #### Risk 4. Purpose wrappers had no package-level test coverage
 Confirmed in:
@@ -356,6 +356,11 @@ Reasoning from the first pass:
 - the current family links error text into `aria-describedby`
 - it does not apply `aria-invalid`, which is consistent with the button-backed switch model
 - this should remain a deliberate policy unless the component model changes later
+
+Superseded 2026-10-08:
+- `aria-invalid` is a supported state of `role="switch"` (it inherits from `checkbox` in the ARIA role model, and axe-core's `aria-allowed-attr` accepts it), so the earlier reasoning did not hold
+- `Checkbox`, `CheckboxGroupField` and `Slider` already expose invalid state, and a switch error that is only described left assistive technology without the invalid state
+- `Switch` now takes an `invalid` option that sets `aria-invalid="true"`, and `SwitchField` sets it whenever error text is shown; the shared contract asserts it
 
 ### Recommended first fixes from the Switch audit
 

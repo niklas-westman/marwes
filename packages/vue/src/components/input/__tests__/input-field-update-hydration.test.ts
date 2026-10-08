@@ -14,5 +14,4 @@ runFieldWiringUpdatesContract("vue", "InputField", {
     ...(helper ? { helperText: helper } : {}),
   })),
   getControl: (label) => screen.getByRole("textbox", { name: label }),
-  marksErrorAsInvalid: true,
 })

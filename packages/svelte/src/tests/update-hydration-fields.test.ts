@@ -46,7 +46,6 @@ runFieldWiringUpdatesContract("svelte", "InputField", {
     nestedKey: "input",
   }),
   getControl: (label) => screen.getByRole("textbox", { name: label }),
-  marksErrorAsInvalid: true,
 })
 
 runFieldWiringUpdatesContract("svelte", "TextareaField", {
@@ -57,7 +56,6 @@ runFieldWiringUpdatesContract("svelte", "TextareaField", {
     nestedKey: "textarea",
   }),
   getControl: (label) => screen.getByRole("textbox", { name: label }),
-  marksErrorAsInvalid: true,
 })
 
 runFieldWiringUpdatesContract("svelte", "CheckboxField", {
@@ -67,7 +65,6 @@ runFieldWiringUpdatesContract("svelte", "CheckboxField", {
     helperKey: "description",
   }),
   getControl: (label) => screen.getByRole("checkbox", { name: label }),
-  marksErrorAsInvalid: true,
 })
 
 runFieldWiringUpdatesContract("svelte", "SwitchField", {
@@ -78,7 +75,6 @@ runFieldWiringUpdatesContract("svelte", "SwitchField", {
     nestedKey: "switch",
   }),
   getControl: (label) => screen.getByRole("switch", { name: label }),
-  marksErrorAsInvalid: false,
 })
 
 runFieldWiringUpdatesContract("svelte", "SliderField", {
@@ -89,5 +85,4 @@ runFieldWiringUpdatesContract("svelte", "SliderField", {
     nestedKey: "slider",
   }),
   getControl: (label) => screen.getByRole("slider", { name: label }),
-  marksErrorAsInvalid: true,
 })

@@ -11,5 +11,4 @@ runFieldWiringUpdatesContract("react", "TextareaField", {
     <TextareaField {...props} textarea={{}} {...(helper ? { helperText: helper } : {})} />
   )),
   getControl: (label) => screen.getByRole("textbox", { name: label }),
-  marksErrorAsInvalid: true,
 })

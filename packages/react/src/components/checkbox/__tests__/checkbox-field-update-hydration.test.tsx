@@ -11,5 +11,4 @@ runFieldWiringUpdatesContract("react", "CheckboxField", {
     <CheckboxField {...props} checkbox={{}} {...(helper ? { description: helper } : {})} />
   )),
   getControl: (label) => screen.getByRole("checkbox", { name: label }),
-  marksErrorAsInvalid: true,
 })

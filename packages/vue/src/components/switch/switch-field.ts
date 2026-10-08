@@ -80,6 +80,10 @@ export const SwitchField = defineComponent(
         nextSwitchProps.ariaDescribedBy = a11yIds.value.describedBy
       }
 
+      if (invalid.value) {
+        nextSwitchProps.invalid = true
+      }
+
       nextSwitchProps.onCheckedChange = (nextChecked: boolean) => {
         originalOnCheckedChange?.(nextChecked)
         emit("update:modelValue", nextChecked)

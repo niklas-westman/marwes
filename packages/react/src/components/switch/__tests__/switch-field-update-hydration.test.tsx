@@ -11,5 +11,4 @@ runFieldWiringUpdatesContract("react", "SwitchField", {
     <SwitchField {...props} switch={{}} {...(helper ? { description: helper } : {})} />
   )),
   getControl: (label) => screen.getByRole("switch", { name: label }),
-  marksErrorAsInvalid: false,
 })
