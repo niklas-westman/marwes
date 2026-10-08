@@ -24,6 +24,7 @@
     "react": [
       "packages/react/src/components/pagination/__tests__/pagination-contract.test.tsx",
       "packages/react/src/components/pagination/__tests__/pagination.test.tsx",
+      "packages/react/src/components/pagination/__tests__/update-hydration.test.tsx",
       "packages/react/src/components/pagination/index.ts",
       "packages/react/src/components/pagination/pagination-field.tsx",
       "packages/react/src/components/pagination/pagination.tsx"
@@ -31,6 +32,7 @@
     "vue": [
       "packages/vue/src/components/pagination/__tests__/pagination-contract.test.ts",
       "packages/vue/src/components/pagination/__tests__/pagination.test.ts",
+      "packages/vue/src/components/pagination/__tests__/update-hydration.test.ts",
       "packages/vue/src/components/pagination/index.ts",
       "packages/vue/src/components/pagination/pagination-field.ts",
       "packages/vue/src/components/pagination/pagination.ts"

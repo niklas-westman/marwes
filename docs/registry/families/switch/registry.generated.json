@@ -28,7 +28,9 @@
       "packages/presets/src/firstEdition/molecules/switch-field.css"
     ],
     "react": [
+      "packages/react/src/components/switch/__tests__/switch-field-update-hydration.test.tsx",
       "packages/react/src/components/switch/__tests__/switch.test.tsx",
+      "packages/react/src/components/switch/__tests__/update-hydration.test.tsx",
       "packages/react/src/components/switch/__tests__/variants.test.tsx",
       "packages/react/src/components/switch/index.ts",
       "packages/react/src/components/switch/switch-field.tsx",
@@ -37,7 +39,9 @@
     ],
     "vue": [
       "packages/vue/src/components/switch/__tests__/callback-single-fire.test.ts",
+      "packages/vue/src/components/switch/__tests__/switch-field-update-hydration.test.ts",
       "packages/vue/src/components/switch/__tests__/switch.test.ts",
+      "packages/vue/src/components/switch/__tests__/update-hydration.test.ts",
       "packages/vue/src/components/switch/__tests__/variants.test.ts",
       "packages/vue/src/components/switch/index.ts",
       "packages/vue/src/components/switch/switch-field.ts",

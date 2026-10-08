@@ -29,6 +29,7 @@
     ],
     "react": [
       "packages/react/src/components/radio/__tests__/radio-group-field.test.tsx",
+      "packages/react/src/components/radio/__tests__/radio-group-update-hydration.test.tsx",
       "packages/react/src/components/radio/__tests__/radio.test.tsx",
       "packages/react/src/components/radio/__tests__/variants.test.tsx",
       "packages/react/src/components/radio/index.ts",
@@ -39,6 +40,7 @@
     "vue": [
       "packages/vue/src/components/radio/__tests__/callback-single-fire.test.ts",
       "packages/vue/src/components/radio/__tests__/radio-group-field.test.ts",
+      "packages/vue/src/components/radio/__tests__/radio-group-update-hydration.test.ts",
       "packages/vue/src/components/radio/__tests__/radio.test.ts",
       "packages/vue/src/components/radio/__tests__/variants.test.ts",
       "packages/vue/src/components/radio/index.ts",
