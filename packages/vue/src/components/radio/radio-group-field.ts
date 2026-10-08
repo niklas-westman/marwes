@@ -93,7 +93,6 @@ export const RadioGroupField = defineComponent(
         internalValue.value = nextValue
       }
 
-      props.onChange?.(nextValue)
       emit("update:modelValue", nextValue)
       emit("change", nextValue)
     }

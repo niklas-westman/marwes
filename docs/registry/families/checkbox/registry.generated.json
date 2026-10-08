@@ -38,6 +38,7 @@
       "packages/react/src/components/checkbox/index.ts"
     ],
     "vue": [
+      "packages/vue/src/components/checkbox/__tests__/callback-single-fire.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",

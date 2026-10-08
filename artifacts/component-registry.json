@@ -2048,6 +2048,7 @@
             "packages/react/src/components/checkbox/index.ts"
           ],
           "vue": [
+            "packages/vue/src/components/checkbox/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
@@ -3923,6 +3924,7 @@
             "packages/react/src/components/input/textarea.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/input/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/input/__tests__/currency-field.test.ts",
             "packages/vue/src/components/input/__tests__/date-of-birth-field.test.ts",
             "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",
@@ -4990,6 +4992,7 @@
             "packages/react/src/components/radio/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/radio/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/radio/__tests__/radio-group-field.test.ts",
             "packages/vue/src/components/radio/__tests__/radio.test.ts",
             "packages/vue/src/components/radio/__tests__/variants.test.ts",
@@ -5662,6 +5665,7 @@
             "packages/react/src/components/slider/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/slider/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/slider/__tests__/slider-field.test.ts",
             "packages/vue/src/components/slider/__tests__/slider.test.ts",
             "packages/vue/src/components/slider/__tests__/variants.test.ts",
@@ -6620,6 +6624,7 @@
             "packages/react/src/components/switch/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/switch/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/switch/__tests__/switch.test.ts",
             "packages/vue/src/components/switch/__tests__/variants.test.ts",
             "packages/vue/src/components/switch/index.ts",
@@ -7617,6 +7622,7 @@
             "packages/react/src/components/tooltip/tooltip.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/tooltip/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/tooltip/__tests__/index-exports.test.ts",
             "packages/vue/src/components/tooltip/__tests__/tooltip-group.test.ts",
             "packages/vue/src/components/tooltip/__tests__/tooltip.test.ts",

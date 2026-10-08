@@ -79,9 +79,7 @@ export const Checkbox = defineComponent(
         ...toCheckboxHtmlAttributes(a11y),
         checked: renderKit.checked ?? renderKit.defaultChecked,
         onChange: (event: Event) => {
-          props.onChange?.(event)
           const target = event.target as HTMLInputElement
-          props.onCheckedChange?.(target.checked)
           emit("update:modelValue", target.checked)
           emit("checked-change", target.checked)
           emit("change", event)

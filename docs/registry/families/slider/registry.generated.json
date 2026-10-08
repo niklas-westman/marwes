@@ -37,6 +37,7 @@
       "packages/react/src/components/slider/variants.tsx"
     ],
     "vue": [
+      "packages/vue/src/components/slider/__tests__/callback-single-fire.test.ts",
       "packages/vue/src/components/slider/__tests__/slider-field.test.ts",
       "packages/vue/src/components/slider/__tests__/slider.test.ts",
       "packages/vue/src/components/slider/__tests__/variants.test.ts",

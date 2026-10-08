@@ -37,15 +37,6 @@ async function hydrateFromServerMarkup(
   return capture.stop()
 }
 
-// Vue consumers listen through v-model; the onValueChange prop is also fired by the component's
-// own value-change event, so the idiomatic listener is what the contracts drive.
-export function toValueModelProps({
-  onValueChange,
-  ...props
-}: { onValueChange?: (value: string) => void } & object): Record<string, unknown> {
-  return { ...props, ...(onValueChange ? { "onUpdate:modelValue": onValueChange } : {}) }
-}
-
 export function createUpdateHydrationHarness<Props extends object>(
   component: Component,
   toVueProps: (props: Props) => Record<string, unknown> = (props) =>

@@ -166,12 +166,10 @@ export const Slider = defineComponent(
                   uncontrolledValue.value = nextValue
                 }
 
-                props.onValueChange?.(nextValue)
                 emit("update:modelValue", nextValue)
                 emit("value-change", nextValue)
               },
               onChange: (event: Event) => {
-                props.onChange?.(event)
                 emit("change", event)
               },
             }),

@@ -97,7 +97,6 @@ export const Select = defineComponent(
               uncontrolledValue.value = nextValue
             }
 
-            props.onValueChange?.(nextValue)
             emit("update:modelValue", nextValue)
             emit("value-change", nextValue)
             emit("change", event)

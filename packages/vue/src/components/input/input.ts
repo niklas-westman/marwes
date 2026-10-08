@@ -58,7 +58,6 @@ export const Input = defineComponent(
         onInput: (event: Event) => {
           const target = event.target as HTMLInputElement
           const nextValue = target.value
-          props.onValueChange?.(nextValue)
           emit("update:modelValue", nextValue)
           emit("value-change", nextValue)
         },

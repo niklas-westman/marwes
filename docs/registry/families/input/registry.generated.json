@@ -86,6 +86,7 @@
       "packages/react/src/components/input/textarea.tsx"
     ],
     "vue": [
+      "packages/vue/src/components/input/__tests__/callback-single-fire.test.ts",
       "packages/vue/src/components/input/__tests__/currency-field.test.ts",
       "packages/vue/src/components/input/__tests__/date-of-birth-field.test.ts",
       "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",

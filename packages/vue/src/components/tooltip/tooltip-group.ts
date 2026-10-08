@@ -86,7 +86,6 @@ export const TooltipGroup = defineComponent(
         internalOpen.value = nextOpen
       }
 
-      props.onOpenChange?.(nextOpen)
       emit("update:open", nextOpen)
       emit("open-change", nextOpen)
     }
