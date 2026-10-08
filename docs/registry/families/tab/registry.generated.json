@@ -32,6 +32,7 @@
     "react": [
       "packages/react/src/components/tab/__tests__/tab-group.test.tsx",
       "packages/react/src/components/tab/__tests__/tab.test.tsx",
+      "packages/react/src/components/tab/__tests__/update-hydration.test.tsx",
       "packages/react/src/components/tab/__tests__/variants.test.tsx",
       "packages/react/src/components/tab/index.ts",
       "packages/react/src/components/tab/tab-group.tsx",
@@ -41,6 +42,7 @@
     "vue": [
       "packages/vue/src/components/tab/__tests__/tab-group.test.ts",
       "packages/vue/src/components/tab/__tests__/tab.test.ts",
+      "packages/vue/src/components/tab/__tests__/update-hydration.test.ts",
       "packages/vue/src/components/tab/__tests__/variants.test.ts",
       "packages/vue/src/components/tab/index.ts",
       "packages/vue/src/components/tab/tab-group.ts",

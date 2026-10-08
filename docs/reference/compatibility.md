@@ -5,7 +5,7 @@ Use one framework adapter and import consumer components from that package's roo
 | Adapter | Framework peer requirement | Setup guide |
 | --- | --- | --- |
 | `@marwes-ui/react` | React and React DOM 18 or newer | [React](https://marwes.io/docs/get-started/react/) |
-| `@marwes-ui/vue` | Vue 3.4 or newer | [Vue](https://marwes.io/docs/get-started/vue/) |
+| `@marwes-ui/vue` | Vue 3.5 or newer | [Vue](https://marwes.io/docs/get-started/vue/) |
 | `@marwes-ui/svelte` | Svelte 5.20 or newer | [Svelte](https://marwes.io/docs/get-started/svelte/) |
 
 Package installation, application builds, and the CLI require Node.js 20 or newer. Automatic `marwes init` provider patching targets known Vite starter layouts. Other bundlers and custom app layouts can use the packages, but provider wiring is a manual step.

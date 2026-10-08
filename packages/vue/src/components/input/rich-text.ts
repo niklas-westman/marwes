@@ -241,7 +241,6 @@ export const RichText = defineComponent(
         internalHtml.value = normalizedHtml
       }
 
-      props.onValueChange?.(normalizedHtml)
       emit("update:modelValue", normalizedHtml)
       emit("value-change", normalizedHtml)
 

@@ -97,7 +97,6 @@ export const Select = defineComponent(
               uncontrolledValue.value = nextValue
             }
 
-            props.onValueChange?.(nextValue)
             emit("update:modelValue", nextValue)
             emit("value-change", nextValue)
             emit("change", event)
@@ -108,7 +107,13 @@ export const Select = defineComponent(
             ? [
                 h(
                   "option",
-                  { value: "", disabled: props.required ? true : undefined },
+                  {
+                    value: "",
+                    disabled: props.required ? true : undefined,
+                    // Server-rendered markup carries the selection on options; Vue does not
+                    // restore a select's value prop during hydration.
+                    selected: currentValue.value === "",
+                  },
                   props.placeholder,
                 ),
               ]
@@ -116,7 +121,12 @@ export const Select = defineComponent(
           ...props.options.map((option) =>
             h(
               "option",
-              { key: option.value, value: option.value, disabled: option.disabled },
+              {
+                key: option.value,
+                value: option.value,
+                disabled: option.disabled,
+                selected: option.value === currentValue.value,
+              },
               option.label,
             ),
           ),

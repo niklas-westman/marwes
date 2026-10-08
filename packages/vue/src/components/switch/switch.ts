@@ -70,7 +70,6 @@ export const Switch = defineComponent(
             }
 
             const nextChecked = !a11y.ariaChecked
-            props.onCheckedChange?.(nextChecked)
             emit("update:modelValue", nextChecked)
             emit("checked-change", nextChecked)
           },

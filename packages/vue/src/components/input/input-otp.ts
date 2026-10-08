@@ -93,7 +93,6 @@ export const InputOtp = defineComponent(
         uncontrolledValue.value = nextValue
       }
 
-      props.onValueChange?.(nextValue)
       emit("update:modelValue", nextValue)
       emit("value-change", nextValue)
     }

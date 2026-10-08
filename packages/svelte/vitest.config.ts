@@ -29,5 +29,6 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: [],
+    globalSetup: ["./src/tests/support/ssr-render-server.ts"],
   },
 })

@@ -2048,6 +2048,7 @@
             "packages/react/src/components/checkbox/index.ts"
           ],
           "vue": [
+            "packages/vue/src/components/checkbox/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
@@ -3906,6 +3907,7 @@
             "packages/react/src/components/input/__tests__/select.test.tsx",
             "packages/react/src/components/input/__tests__/textarea-field.test.tsx",
             "packages/react/src/components/input/__tests__/textarea.test.tsx",
+            "packages/react/src/components/input/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/zip-code-field.test.tsx",
             "packages/react/src/components/input/field-variants.tsx",
             "packages/react/src/components/input/index.ts",
@@ -3922,6 +3924,7 @@
             "packages/react/src/components/input/textarea.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/input/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/input/__tests__/currency-field.test.ts",
             "packages/vue/src/components/input/__tests__/date-of-birth-field.test.ts",
             "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",
@@ -3937,6 +3940,7 @@
             "packages/vue/src/components/input/__tests__/select.test.ts",
             "packages/vue/src/components/input/__tests__/textarea-field.test.ts",
             "packages/vue/src/components/input/__tests__/textarea.test.ts",
+            "packages/vue/src/components/input/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/zip-code-field.test.ts",
             "packages/vue/src/components/input/field-variants.ts",
             "packages/vue/src/components/input/index.ts",
@@ -4988,6 +4992,7 @@
             "packages/react/src/components/radio/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/radio/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/radio/__tests__/radio-group-field.test.ts",
             "packages/vue/src/components/radio/__tests__/radio.test.ts",
             "packages/vue/src/components/radio/__tests__/variants.test.ts",
@@ -5660,6 +5665,7 @@
             "packages/react/src/components/slider/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/slider/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/slider/__tests__/slider-field.test.ts",
             "packages/vue/src/components/slider/__tests__/slider.test.ts",
             "packages/vue/src/components/slider/__tests__/variants.test.ts",
@@ -6618,6 +6624,7 @@
             "packages/react/src/components/switch/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/switch/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/switch/__tests__/switch.test.ts",
             "packages/vue/src/components/switch/__tests__/variants.test.ts",
             "packages/vue/src/components/switch/index.ts",
@@ -6874,6 +6881,7 @@
           "react": [
             "packages/react/src/components/tab/__tests__/tab-group.test.tsx",
             "packages/react/src/components/tab/__tests__/tab.test.tsx",
+            "packages/react/src/components/tab/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/tab/__tests__/variants.test.tsx",
             "packages/react/src/components/tab/index.ts",
             "packages/react/src/components/tab/tab-group.tsx",
@@ -6883,6 +6891,7 @@
           "vue": [
             "packages/vue/src/components/tab/__tests__/tab-group.test.ts",
             "packages/vue/src/components/tab/__tests__/tab.test.ts",
+            "packages/vue/src/components/tab/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/tab/__tests__/variants.test.ts",
             "packages/vue/src/components/tab/index.ts",
             "packages/vue/src/components/tab/tab-group.ts",
@@ -7613,6 +7622,7 @@
             "packages/react/src/components/tooltip/tooltip.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/tooltip/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/tooltip/__tests__/index-exports.test.ts",
             "packages/vue/src/components/tooltip/__tests__/tooltip-group.test.ts",
             "packages/vue/src/components/tooltip/__tests__/tooltip.test.ts",

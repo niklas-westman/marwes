@@ -60,7 +60,6 @@ export const Textarea = defineComponent(
         onInput: (event: Event) => {
           const target = event.target as HTMLTextAreaElement
           const nextValue = target.value
-          props.onValueChange?.(nextValue)
           emit("update:modelValue", nextValue)
           emit("value-change", nextValue)
         },
