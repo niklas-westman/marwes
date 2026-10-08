@@ -21,11 +21,12 @@ const PanelContainer = styled.div`
   background: ${({ theme }) => theme.color.background};
 
   ${({ theme }) => theme.media.desktopAndBelow} {
-    width: 100%;
+    width: 75%;
   }
 
   ${({ theme }) => theme.media.mobileAndBelow} {
     padding: ${({ theme }) => theme.spacing.sp24};
+    width: 100%;
   }
 `
 

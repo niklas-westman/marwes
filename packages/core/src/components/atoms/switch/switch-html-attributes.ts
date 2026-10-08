@@ -6,6 +6,7 @@ const switchHtmlAttributeNames = {
   role: "role",
   ariaChecked: "aria-checked",
   ariaDisabled: "aria-disabled",
+  ariaInvalid: "aria-invalid",
   ariaLabel: "aria-label",
   ariaLabelledBy: "aria-labelledby",
   ariaDescribedBy: "aria-describedby",

@@ -29,9 +29,11 @@
       "packages/presets/src/firstEdition/molecules/checkbox-group-field.css"
     ],
     "react": [
+      "packages/react/src/components/checkbox/__tests__/checkbox-field-update-hydration.test.tsx",
       "packages/react/src/components/checkbox/__tests__/checkbox-field.test.tsx",
       "packages/react/src/components/checkbox/__tests__/checkbox-group-field.test.tsx",
       "packages/react/src/components/checkbox/__tests__/checkbox.test.tsx",
+      "packages/react/src/components/checkbox/__tests__/update-hydration.test.tsx",
       "packages/react/src/components/checkbox/checkbox-field.tsx",
       "packages/react/src/components/checkbox/checkbox-group-field.tsx",
       "packages/react/src/components/checkbox/checkbox.tsx",
@@ -39,9 +41,11 @@
     ],
     "vue": [
       "packages/vue/src/components/checkbox/__tests__/callback-single-fire.test.ts",
+      "packages/vue/src/components/checkbox/__tests__/checkbox-field-update-hydration.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
+      "packages/vue/src/components/checkbox/__tests__/update-hydration.test.ts",
       "packages/vue/src/components/checkbox/checkbox-field.ts",
       "packages/vue/src/components/checkbox/checkbox-group-field.ts",
       "packages/vue/src/components/checkbox/checkbox.ts",

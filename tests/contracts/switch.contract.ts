@@ -68,6 +68,10 @@ const switchOptionCases: Record<keyof SwitchOptions, SwitchOptionCase> = {
     options: { ariaLabelledBy: "label-id" },
     expectRendered: (el) => expect(el).toHaveAttribute("aria-labelledby", "label-id"),
   },
+  invalid: {
+    options: { invalid: true },
+    expectRendered: (el) => expect(el).toHaveAttribute("aria-invalid", "true"),
+  },
   ariaDescribedBy: {
     options: { ariaDescribedBy: "hint-id" },
     expectRendered: (el) => expect(el).toHaveAttribute("aria-describedby", "hint-id"),
@@ -164,7 +168,7 @@ export function runSwitchContract(adapterName: string, harness: SwitchContractHa
       expect(describedBy.split(/\s+/)).toContain(description?.id ?? "")
     })
 
-    it("connects error text through aria-describedby", async () => {
+    it("connects error text through aria-describedby and marks the switch invalid", async () => {
       await harness.renderSwitchField({
         label: "Workspace lock",
         error: "Workspace lock must remain enabled.",
@@ -180,7 +184,7 @@ export function runSwitchContract(adapterName: string, harness: SwitchContractHa
       expect(error).not.toBeNull()
       expect(error?.id).toBeTruthy()
       expect(describedBy.split(/\s+/)).toContain(error?.id ?? "")
-      expect(switchControl).not.toHaveAttribute("aria-invalid", "true")
+      expect(switchControl).toHaveAttribute("aria-invalid", "true")
     })
 
     it("treats empty description and error text as absent", async () => {

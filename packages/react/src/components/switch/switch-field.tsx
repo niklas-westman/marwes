@@ -63,6 +63,7 @@ export function SwitchField(props: SwitchFieldProps): React.ReactElement {
         <Switch
           {...switchProps}
           id={id}
+          invalid={invalid}
           ariaLabelledBy={labelId}
           {...(describedBy ? { ariaDescribedBy: describedBy } : {})}
         />

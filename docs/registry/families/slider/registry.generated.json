@@ -28,8 +28,10 @@
       "packages/presets/src/firstEdition/molecules/slider-field.css"
     ],
     "react": [
+      "packages/react/src/components/slider/__tests__/slider-field-update-hydration.test.tsx",
       "packages/react/src/components/slider/__tests__/slider-field.test.tsx",
       "packages/react/src/components/slider/__tests__/slider.test.tsx",
+      "packages/react/src/components/slider/__tests__/update-hydration.test.tsx",
       "packages/react/src/components/slider/__tests__/variants.test.tsx",
       "packages/react/src/components/slider/index.ts",
       "packages/react/src/components/slider/slider-field.tsx",
@@ -38,8 +40,10 @@
     ],
     "vue": [
       "packages/vue/src/components/slider/__tests__/callback-single-fire.test.ts",
+      "packages/vue/src/components/slider/__tests__/slider-field-update-hydration.test.ts",
       "packages/vue/src/components/slider/__tests__/slider-field.test.ts",
       "packages/vue/src/components/slider/__tests__/slider.test.ts",
+      "packages/vue/src/components/slider/__tests__/update-hydration.test.ts",
       "packages/vue/src/components/slider/__tests__/variants.test.ts",
       "packages/vue/src/components/slider/index.ts",
       "packages/vue/src/components/slider/slider-field.ts",

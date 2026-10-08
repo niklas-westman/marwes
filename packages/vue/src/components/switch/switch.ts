@@ -17,6 +17,7 @@ const switchPropKeys = definePropKeys<SwitchProps>()([
   "checked",
   "modelValue",
   "disabled",
+  "invalid",
   "ariaLabel",
   "label",
   "ariaLabelledBy",
@@ -37,6 +38,7 @@ export const Switch = defineComponent(
       const checked = props.modelValue ?? props.checked
       if (checked !== undefined) opts.checked = checked
       if (props.disabled !== undefined) opts.disabled = props.disabled
+      if (props.invalid !== undefined) opts.invalid = props.invalid
       if (props.ariaLabel !== undefined) opts.ariaLabel = props.ariaLabel
       if (props.label !== undefined) opts.label = props.label
       if (props.ariaLabelledBy !== undefined) opts.ariaLabelledBy = props.ariaLabelledBy

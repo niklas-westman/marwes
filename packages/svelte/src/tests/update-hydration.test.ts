@@ -9,7 +9,11 @@ import { runSelectUpdatesContract } from "../../../../tests/contracts/select-upd
 import { runTabUpdatesContract } from "../../../../tests/contracts/tab-updates.contract"
 import Input from "../lib/components/input/Input.svelte"
 import Select from "../lib/components/input/Select.svelte"
-import { hydrateFromServerMarkup, unmountHydratedApps } from "./support/hydrate-from-server"
+import { unmountHydratedApps } from "./support/hydrate-from-server"
+import {
+  type SvelteComponent,
+  createUpdateHydrationHarness,
+} from "./support/update-hydration-harness"
 import TabGroupContractFixture from "./type-fixtures/TabGroupContractFixture.svelte"
 
 afterEach(async () => {
@@ -17,42 +21,8 @@ afterEach(async () => {
   document.body.innerHTML = ""
 })
 
-type SvelteComponent = Parameters<typeof render>[0]
-
-function createHarness<Props extends object>(options: {
-  component: SvelteComponent
-  componentPath: string
-  toSvelteProps: (props: Props) => Record<string, unknown>
-}) {
-  let rerenderComponent: ((props: Record<string, unknown>) => Promise<void>) | undefined
-
-  return {
-    render(props: Props) {
-      rerenderComponent = render(options.component, {
-        props: options.toSvelteProps(props),
-      }).rerender
-    },
-    async rerender(props: Props) {
-      await rerenderComponent?.(options.toSvelteProps(props))
-    },
-    hydrate(props: Props) {
-      const clientProps = options.toSvelteProps(props)
-      const serverProps = Object.fromEntries(
-        Object.entries(clientProps).filter(([, value]) => typeof value !== "function"),
-      )
-
-      return hydrateFromServerMarkup({
-        componentPath: options.componentPath,
-        component: options.component as never,
-        serverProps,
-        clientProps,
-      })
-    },
-  }
-}
-
 runInputUpdatesContract("svelte", {
-  ...createHarness({
+  ...createUpdateHydrationHarness({
     component: Input as SvelteComponent,
     componentPath: "/src/lib/components/input/Input.svelte",
     toSvelteProps: ({ onValueChange, ...props }) => ({
@@ -78,7 +48,7 @@ runInputUpdatesContract("svelte", {
 })
 
 runSelectUpdatesContract("svelte", {
-  ...createHarness({
+  ...createUpdateHydrationHarness({
     component: Select as SvelteComponent,
     componentPath: "/src/lib/components/input/Select.svelte",
     toSvelteProps: ({ onValueChange, ...props }) => ({
@@ -97,7 +67,7 @@ runSelectUpdatesContract("svelte", {
 })
 
 runTabUpdatesContract("svelte", {
-  ...createHarness({
+  ...createUpdateHydrationHarness({
     component: TabGroupContractFixture as SvelteComponent,
     componentPath: "/src/tests/type-fixtures/TabGroupContractFixture.svelte",
     toSvelteProps: ({ onActiveTabChange, ...props }) => ({

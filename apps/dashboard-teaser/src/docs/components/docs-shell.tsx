@@ -12,6 +12,7 @@ import { PageFooter } from "./docs-page-typography"
 import { docsScrollOffset, useDocsScrollspy } from "./use-docs-scrollspy"
 
 const { componentGroups, documentationLinks } = navigation
+const getStartedBasePath = "/docs/get-started/"
 function siteHref(path: string): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`
 }
@@ -225,6 +226,12 @@ const PageLink = styled.a<{ $active: boolean }>`
   }
 `
 
+// Get started has one page per framework but a single navigation entry.
+function isDocumentationLinkActive(currentPath: string, linkPath: string): boolean {
+  if (linkPath.startsWith(getStartedBasePath)) return currentPath.startsWith(getStartedBasePath)
+  return currentPath === linkPath
+}
+
 function DocumentationRail({ currentPath }: { currentPath: string }): JSX.Element {
   return (
     <LeftRail aria-label="Documentation navigation">
@@ -234,8 +241,8 @@ function DocumentationRail({ currentPath }: { currentPath: string }): JSX.Elemen
           <RailLink
             key={path}
             href={siteHref(path)}
-            aria-current={currentPath === path ? "page" : undefined}
-            $active={currentPath === path}
+            aria-current={isDocumentationLinkActive(currentPath, path) ? "page" : undefined}
+            $active={isDocumentationLinkActive(currentPath, path)}
             data-docs-soft-nav
           >
             {label}
@@ -297,8 +304,8 @@ function DocsShell({ currentPath, sections, children }: DocsShellProps): JSX.Ele
               <RailLink
                 key={path}
                 href={siteHref(path)}
-                $active={currentPath === path}
-                aria-current={currentPath === path ? "page" : undefined}
+                $active={isDocumentationLinkActive(currentPath, path)}
+                aria-current={isDocumentationLinkActive(currentPath, path) ? "page" : undefined}
                 data-docs-soft-nav
               >
                 {label}

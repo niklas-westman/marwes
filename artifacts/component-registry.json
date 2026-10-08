@@ -119,6 +119,7 @@
             "packages/presets/src/firstEdition/molecules/accordion-field.css"
           ],
           "react": [
+            "packages/react/src/components/accordion/__tests__/accordion-field-update-hydration.test.tsx",
             "packages/react/src/components/accordion/__tests__/accordion-field.test.tsx",
             "packages/react/src/components/accordion/__tests__/accordion.test.tsx",
             "packages/react/src/components/accordion/__tests__/variants.test.tsx",
@@ -128,6 +129,7 @@
             "packages/react/src/components/accordion/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/accordion/__tests__/accordion-field-update-hydration.test.ts",
             "packages/vue/src/components/accordion/__tests__/accordion-field.test.ts",
             "packages/vue/src/components/accordion/__tests__/accordion.test.ts",
             "packages/vue/src/components/accordion/__tests__/variants.test.ts",
@@ -2039,9 +2041,11 @@
             "packages/presets/src/firstEdition/molecules/checkbox-group-field.css"
           ],
           "react": [
+            "packages/react/src/components/checkbox/__tests__/checkbox-field-update-hydration.test.tsx",
             "packages/react/src/components/checkbox/__tests__/checkbox-field.test.tsx",
             "packages/react/src/components/checkbox/__tests__/checkbox-group-field.test.tsx",
             "packages/react/src/components/checkbox/__tests__/checkbox.test.tsx",
+            "packages/react/src/components/checkbox/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/checkbox/checkbox-field.tsx",
             "packages/react/src/components/checkbox/checkbox-group-field.tsx",
             "packages/react/src/components/checkbox/checkbox.tsx",
@@ -2049,9 +2053,11 @@
           ],
           "vue": [
             "packages/vue/src/components/checkbox/__tests__/callback-single-fire.test.ts",
+            "packages/vue/src/components/checkbox/__tests__/checkbox-field-update-hydration.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
+            "packages/vue/src/components/checkbox/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/checkbox/checkbox-field.ts",
             "packages/vue/src/components/checkbox/checkbox-group-field.ts",
             "packages/vue/src/components/checkbox/checkbox.ts",
@@ -3898,6 +3904,7 @@
             "packages/react/src/components/input/__tests__/date-of-birth-field.test.tsx",
             "packages/react/src/components/input/__tests__/dropdown-field.test.tsx",
             "packages/react/src/components/input/__tests__/index-exports.test.ts",
+            "packages/react/src/components/input/__tests__/input-field-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/input-field.test.tsx",
             "packages/react/src/components/input/__tests__/input-otp.test.tsx",
             "packages/react/src/components/input/__tests__/input.test.tsx",
@@ -3905,7 +3912,9 @@
             "packages/react/src/components/input/__tests__/rich-text.test.tsx",
             "packages/react/src/components/input/__tests__/select-field.test.tsx",
             "packages/react/src/components/input/__tests__/select.test.tsx",
+            "packages/react/src/components/input/__tests__/textarea-field-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/textarea-field.test.tsx",
+            "packages/react/src/components/input/__tests__/textarea-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/textarea.test.tsx",
             "packages/react/src/components/input/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/zip-code-field.test.tsx",
@@ -3930,6 +3939,7 @@
             "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",
             "packages/vue/src/components/input/__tests__/field-variants.test.ts",
             "packages/vue/src/components/input/__tests__/index-exports.test.ts",
+            "packages/vue/src/components/input/__tests__/input-field-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/input-field.test.ts",
             "packages/vue/src/components/input/__tests__/input-otp.test.ts",
             "packages/vue/src/components/input/__tests__/input.test.ts",
@@ -3938,7 +3948,9 @@
             "packages/vue/src/components/input/__tests__/rich-text.test.ts",
             "packages/vue/src/components/input/__tests__/select-field.test.ts",
             "packages/vue/src/components/input/__tests__/select.test.ts",
+            "packages/vue/src/components/input/__tests__/textarea-field-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/textarea-field.test.ts",
+            "packages/vue/src/components/input/__tests__/textarea-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/textarea.test.ts",
             "packages/vue/src/components/input/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/zip-code-field.test.ts",
@@ -4309,6 +4321,7 @@
           "react": [
             "packages/react/src/components/pagination/__tests__/pagination-contract.test.tsx",
             "packages/react/src/components/pagination/__tests__/pagination.test.tsx",
+            "packages/react/src/components/pagination/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/pagination/index.ts",
             "packages/react/src/components/pagination/pagination-field.tsx",
             "packages/react/src/components/pagination/pagination.tsx"
@@ -4316,6 +4329,7 @@
           "vue": [
             "packages/vue/src/components/pagination/__tests__/pagination-contract.test.ts",
             "packages/vue/src/components/pagination/__tests__/pagination.test.ts",
+            "packages/vue/src/components/pagination/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/pagination/index.ts",
             "packages/vue/src/components/pagination/pagination-field.ts",
             "packages/vue/src/components/pagination/pagination.ts"
@@ -4984,6 +4998,7 @@
           ],
           "react": [
             "packages/react/src/components/radio/__tests__/radio-group-field.test.tsx",
+            "packages/react/src/components/radio/__tests__/radio-group-update-hydration.test.tsx",
             "packages/react/src/components/radio/__tests__/radio.test.tsx",
             "packages/react/src/components/radio/__tests__/variants.test.tsx",
             "packages/react/src/components/radio/index.ts",
@@ -4994,6 +5009,7 @@
           "vue": [
             "packages/vue/src/components/radio/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/radio/__tests__/radio-group-field.test.ts",
+            "packages/vue/src/components/radio/__tests__/radio-group-update-hydration.test.ts",
             "packages/vue/src/components/radio/__tests__/radio.test.ts",
             "packages/vue/src/components/radio/__tests__/variants.test.ts",
             "packages/vue/src/components/radio/index.ts",
@@ -5234,12 +5250,14 @@
           "presets": ["packages/presets/src/firstEdition/segmented-control.css"],
           "react": [
             "packages/react/src/components/segmented-control/__tests__/segmented-control-contract.test.tsx",
+            "packages/react/src/components/segmented-control/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/segmented-control/index.ts",
             "packages/react/src/components/segmented-control/segmented-control-field.tsx",
             "packages/react/src/components/segmented-control/segmented-control.tsx"
           ],
           "vue": [
             "packages/vue/src/components/segmented-control/__tests__/segmented-control-contract.test.ts",
+            "packages/vue/src/components/segmented-control/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/segmented-control/index.ts",
             "packages/vue/src/components/segmented-control/segmented-control-field.ts",
             "packages/vue/src/components/segmented-control/segmented-control.ts"
@@ -5656,8 +5674,10 @@
             "packages/presets/src/firstEdition/molecules/slider-field.css"
           ],
           "react": [
+            "packages/react/src/components/slider/__tests__/slider-field-update-hydration.test.tsx",
             "packages/react/src/components/slider/__tests__/slider-field.test.tsx",
             "packages/react/src/components/slider/__tests__/slider.test.tsx",
+            "packages/react/src/components/slider/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/slider/__tests__/variants.test.tsx",
             "packages/react/src/components/slider/index.ts",
             "packages/react/src/components/slider/slider-field.tsx",
@@ -5666,8 +5686,10 @@
           ],
           "vue": [
             "packages/vue/src/components/slider/__tests__/callback-single-fire.test.ts",
+            "packages/vue/src/components/slider/__tests__/slider-field-update-hydration.test.ts",
             "packages/vue/src/components/slider/__tests__/slider-field.test.ts",
             "packages/vue/src/components/slider/__tests__/slider.test.ts",
+            "packages/vue/src/components/slider/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/slider/__tests__/variants.test.ts",
             "packages/vue/src/components/slider/index.ts",
             "packages/vue/src/components/slider/slider-field.ts",
@@ -6616,7 +6638,9 @@
             "packages/presets/src/firstEdition/molecules/switch-field.css"
           ],
           "react": [
+            "packages/react/src/components/switch/__tests__/switch-field-update-hydration.test.tsx",
             "packages/react/src/components/switch/__tests__/switch.test.tsx",
+            "packages/react/src/components/switch/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/switch/__tests__/variants.test.tsx",
             "packages/react/src/components/switch/index.ts",
             "packages/react/src/components/switch/switch-field.tsx",
@@ -6625,7 +6649,9 @@
           ],
           "vue": [
             "packages/vue/src/components/switch/__tests__/callback-single-fire.test.ts",
+            "packages/vue/src/components/switch/__tests__/switch-field-update-hydration.test.ts",
             "packages/vue/src/components/switch/__tests__/switch.test.ts",
+            "packages/vue/src/components/switch/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/switch/__tests__/variants.test.ts",
             "packages/vue/src/components/switch/index.ts",
             "packages/vue/src/components/switch/switch-field.ts",

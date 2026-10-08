@@ -1,6 +1,17 @@
-import { Badge, IconName, LinkButton, Paragraph, Text, TextVariant } from "@marwes-ui/react"
-import { useState } from "react"
-import styled from "styled-components"
+import {
+  Badge,
+  BadgeVariant,
+  Icon,
+  IconName,
+  LinkButton,
+  Paragraph,
+  Text,
+  TextVariant,
+} from "@marwes-ui/react"
+import { useEffect, useState } from "react"
+import styled, { keyframes } from "styled-components"
+
+import { version as latestCoreVersion } from "../../../../packages/core/package.json"
 
 import { InstallationPanel } from "./InstallationPanel"
 import type { Framework } from "./installation-recipes"
@@ -13,6 +24,7 @@ const HeroContainer = styled.section`
   gap: ${({ theme }) => `calc(${theme.spacing.sp4} + ${theme.spacing.sp2})`};
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   ${({ theme }) => theme.media.desktopAndAbove} {
     min-height: ${({ theme }) => `calc(100svh - (${theme.spacing.sp64} + ${theme.spacing.sp4}))`};
@@ -72,14 +84,73 @@ const LinkRow = styled.div`
   flex-wrap: wrap;
 `
 
+const nudgeDown = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(0.375rem); }
+`
+
+const ScrollIndicator = styled.a<{ $hidden: boolean }>`
+  position: absolute;
+  bottom: ${({ theme }) => theme.spacing.sp16};
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sp4};
+  color: ${({ theme }) => theme.color.textMuted};
+  font-size: 0.75rem;
+  text-decoration: none;
+  opacity: ${({ $hidden }) => ($hidden ? 0 : 1)};
+  pointer-events: ${({ $hidden }) => ($hidden ? "none" : "auto")};
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.color.text};
+  }
+
+  & > span:last-child {
+    display: inline-flex;
+    animation: ${nudgeDown} 1.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    & > span:last-child {
+      animation: none;
+    }
+  }
+
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    display: none;
+  }
+`
+
+function useHasScrolled(thresholdPx: number): boolean {
+  const [hasScrolled, setHasScrolled] = useState(false)
+
+  useEffect(() => {
+    const update = (): void => setHasScrolled(window.scrollY > thresholdPx)
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    return () => window.removeEventListener("scroll", update)
+  }, [thresholdPx])
+
+  return hasScrolled
+}
+
 function HeroSection(): JSX.Element {
   const [framework, setFramework] = useState<Framework>("react")
+  const hasScrolled = useHasScrolled(80)
 
   return (
     <HeroContainer id="hero" data-dashboard-section="hero">
       <TextColumn>
         <TextBox>
           <TopSection>
+            <BadgeRow>
+              <Badge variant={BadgeVariant.warning}>Work in progress</Badge>
+              <Badge variant={BadgeVariant.info}>v{latestCoreVersion}</Badge>
+            </BadgeRow>
             <Text variant={TextVariant.display} headingLevel={1}>
               One system, any brand.
             </Text>
@@ -111,6 +182,12 @@ function HeroSection(): JSX.Element {
         </LinkRow>
       </TextColumn>
       <InstallationPanel activeTab={framework} onFrameworkChange={setFramework} />
+      <ScrollIndicator href="#components" $hidden={hasScrolled} tabIndex={hasScrolled ? -1 : 0}>
+        <span>Explore the components</span>
+        <span>
+          <Icon name={IconName.ArrowDown} decorative size={20} />
+        </span>
+      </ScrollIndicator>
     </HeroContainer>
   )
 }
