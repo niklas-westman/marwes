@@ -16,7 +16,7 @@ Vue 3 components for the Marwes design system with default styling, typed theme 
 
 **Vue 3 components with default Marwes styling, typed theme tokens, accessibility contracts, and AI-readable semantics built in.**
 
-Vue 3.4+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
+Vue 3.5+ • TypeScript-first • Default CSS included • ThemeInput • Google Fonts DX • Purpose components
 
 [**marwes.io**](https://marwes.io) — official site, theme builder, and install guides
 [Vue Storybook](https://storybook-vue.marwes.io/latest/) • [Documentation](https://github.com/niklas-westman/marwes/tree/main/docs) • [GitHub](https://github.com/niklas-westman/marwes)
@@ -51,7 +51,7 @@ This split keeps installation simple for app teams while giving humans and AI ag
 
 ## Requirements
 
-- Vue 3.4 or newer
+- Vue 3.5 or newer
 - Node.js 20 or newer for package installation, application builds, and the CLI
 - A modern browser with CSS custom-property support
 - A Vite starter layout for automatic provider patching; custom layouts use the printed manual setup

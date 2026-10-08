@@ -3906,6 +3906,7 @@
             "packages/react/src/components/input/__tests__/select.test.tsx",
             "packages/react/src/components/input/__tests__/textarea-field.test.tsx",
             "packages/react/src/components/input/__tests__/textarea.test.tsx",
+            "packages/react/src/components/input/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/zip-code-field.test.tsx",
             "packages/react/src/components/input/field-variants.tsx",
             "packages/react/src/components/input/index.ts",
@@ -3937,6 +3938,7 @@
             "packages/vue/src/components/input/__tests__/select.test.ts",
             "packages/vue/src/components/input/__tests__/textarea-field.test.ts",
             "packages/vue/src/components/input/__tests__/textarea.test.ts",
+            "packages/vue/src/components/input/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/zip-code-field.test.ts",
             "packages/vue/src/components/input/field-variants.ts",
             "packages/vue/src/components/input/index.ts",
@@ -6874,6 +6876,7 @@
           "react": [
             "packages/react/src/components/tab/__tests__/tab-group.test.tsx",
             "packages/react/src/components/tab/__tests__/tab.test.tsx",
+            "packages/react/src/components/tab/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/tab/__tests__/variants.test.tsx",
             "packages/react/src/components/tab/index.ts",
             "packages/react/src/components/tab/tab-group.tsx",
@@ -6883,6 +6886,7 @@
           "vue": [
             "packages/vue/src/components/tab/__tests__/tab-group.test.ts",
             "packages/vue/src/components/tab/__tests__/tab.test.ts",
+            "packages/vue/src/components/tab/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/tab/__tests__/variants.test.ts",
             "packages/vue/src/components/tab/index.ts",
             "packages/vue/src/components/tab/tab-group.ts",

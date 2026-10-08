@@ -1,5 +1,5 @@
 import { Fragment, defineComponent, h, inject, provide, shallowRef } from "vue"
-import { createLocalId } from "../../internal/id"
+import { createRuntimeId } from "../../internal/id"
 import { definePropKeys } from "../../internal/prop-keys"
 import { ToastContainer } from "./toast-container"
 import type {
@@ -32,7 +32,7 @@ export const ToastProvider = defineComponent({
     }
 
     function show(toast: ShowToastOptions): string {
-      const id = createLocalId("mw-toast")
+      const id = createRuntimeId("mw-toast")
       toasts.value = [
         ...toasts.value,
         {
