@@ -1,6 +1,6 @@
 {
   "name": "@marwes-ui/presets",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Static Marwes preset CSS, theme defaults, and font assets for the public framework adapters.",
   "homepage": "https://marwes.io/docs/theming/",
   "repository": {

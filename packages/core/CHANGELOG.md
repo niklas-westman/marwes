@@ -1,5 +1,11 @@
 # @marwes-ui/core
 
+## 1.7.1
+
+### Patch Changes
+
+- [#57](https://github.com/niklas-westman/marwes/pull/57) [`89b5389`](https://github.com/niklas-westman/marwes/commit/89b5389a7f18b2daf53921daa86529d338486eaf) Thanks [@niklas-westman](https://github.com/niklas-westman)! - `SwitchField` now sets `aria-invalid="true"` on the switch while an error is shown, so assistive technology announces the invalid state the same way it does for `Checkbox` and `Slider`. Previously the error text was only linked through `aria-describedby`. `Switch` accepts a new optional `invalid` option for the same purpose.
+
 ## 1.7.0
 
 ### Minor Changes
