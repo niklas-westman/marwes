@@ -48,7 +48,8 @@ export function toValueModelProps({
 
 export function createUpdateHydrationHarness<Props extends object>(
   component: Component,
-  toVueProps: (props: Props) => Record<string, unknown> = (props) => ({ ...props }),
+  toVueProps: (props: Props) => Record<string, unknown> = (props) =>
+    ({ ...props }) as Record<string, unknown>,
 ) {
   const currentProps = shallowRef<Props | undefined>(undefined)
 
