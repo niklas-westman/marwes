@@ -119,6 +119,10 @@ const ScrollIndicator = styled.a<{ $hidden: boolean }>`
       animation: none;
     }
   }
+
+  ${({ theme }) => theme.media.desktopAndBelow} {
+    display: none;
+  }
 `
 
 function useHasScrolled(thresholdPx: number): boolean {
