@@ -1,5 +1,18 @@
 # @marwes-ui/presets
 
+## 1.7.0
+
+### Minor Changes
+
+- [#55](https://github.com/niklas-westman/marwes/pull/55) [`24218f3`](https://github.com/niklas-westman/marwes/commit/24218f31a0b0065fa3a6bcc43347d54fcc4552ae) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Vue: generate component ids with `useId()` so server-rendered markup hydrates without id mismatches, and keep the server-rendered selection of `Select` through hydration. The Vue peer dependency minimum is now 3.5 (was 3.4). Adds shared update and hydration contracts for Input, Select and TabGroup across React, Vue and Svelte.
+
+### Patch Changes
+
+- [#55](https://github.com/niklas-westman/marwes/pull/55) [`24218f3`](https://github.com/niklas-westman/marwes/commit/24218f31a0b0065fa3a6bcc43347d54fcc4552ae) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Vue: change callbacks passed as props (`onValueChange`, `onChange`, `onCheckedChange`, `onOpenChange`) on Input, Textarea, Select, InputOtp, RichText, Slider, Radio, RadioGroupField, Checkbox, Switch and TooltipGroup now run once per change instead of twice (four times for RadioGroupField).
+
+- Updated dependencies [[`24218f3`](https://github.com/niklas-westman/marwes/commit/24218f31a0b0065fa3a6bcc43347d54fcc4552ae), [`24218f3`](https://github.com/niklas-westman/marwes/commit/24218f31a0b0065fa3a6bcc43347d54fcc4552ae)]:
+  - @marwes-ui/core@1.7.0
+
 ## 1.6.1
 
 ### Patch Changes

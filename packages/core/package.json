@@ -1,6 +1,6 @@
 {
   "name": "@marwes-ui/core",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Framework-agnostic Marwes UI contracts, theme primitives, accessibility helpers, and component recipes.",
   "homepage": "https://marwes.io/docs/contributing/",
   "repository": {

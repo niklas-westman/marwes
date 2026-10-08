@@ -1,6 +1,6 @@
 {
   "name": "@marwes-ui/vue",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Accessible, themeable Marwes components for Vue with static preset CSS and purpose-first APIs.",
   "homepage": "https://marwes.io/docs/get-started/vue/",
   "repository": {
