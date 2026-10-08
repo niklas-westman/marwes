@@ -41,7 +41,9 @@ export default async function setup(project: TestProject): Promise<() => Promise
       const output = render(component.default, { props })
       response.end(output.body)
     } catch (error) {
+      console.error("SSR render server error:", error)
       response.statusCode = 500
+      // Test-only server on localhost: the body is what surfaces the cause in the failing test.
       response.end(String(error))
     }
   })
