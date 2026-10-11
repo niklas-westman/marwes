@@ -63,6 +63,7 @@ export interface ResolvedTheme {
   }
   ui: {
     radius: number
+    radiusButton?: number
     density: Density
   }
   breakpoint: ThemeBreakpoints
@@ -187,8 +188,9 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-font-secondary": font.secondary,
     "--mw-font-mono": font.mono,
 
-    // UI (1)
+    // UI (2)
     "--mw-ui-radius": `${ui.radius}px`,
+    "--mw-ui-radius-button": `${ui.radiusButton ?? ui.radius}px`,
 
     // Density (10)
     ...densityToCSSVars(ui.density),

@@ -17,6 +17,13 @@ describe("firstEdition button css contract", () => {
     expect(css).toContain("color: var(--mw-color-primary-label);")
   })
 
+  it("reads the button radius theme option and falls back to the global radius", () => {
+    const css = readFileSync(buttonCssPath, "utf8")
+
+    expect(css).toContain("border-radius: var(--mw-ui-radius-button, var(--mw-ui-radius));")
+    expect(css).not.toMatch(/border-radius: var\(--mw-ui-radius\);/)
+  })
+
   it("provides a first-class danger variant for destructive actions", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 

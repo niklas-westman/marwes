@@ -311,6 +311,16 @@ describe("themeToCSSVars — font / ui", () => {
   it("ui-radius appends px", () => {
     expect(themeToCSSVars(fixture)["--mw-ui-radius"]).toBe("4px")
   })
+
+  it("ui-radius-button follows ui.radius when radiusButton is omitted", () => {
+    expect(themeToCSSVars(fixture)["--mw-ui-radius-button"]).toBe("4px")
+  })
+
+  it("ui-radius-button uses radiusButton without changing ui-radius", () => {
+    const vars = themeToCSSVars({ ...fixture, ui: { ...fixture.ui, radiusButton: 90 } })
+    expect(vars["--mw-ui-radius-button"]).toBe("90px")
+    expect(vars["--mw-ui-radius"]).toBe("4px")
+  })
 })
 
 describe("themeToCSSVars — typography", () => {
@@ -420,8 +430,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 148 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(148)
+  it("emits exactly 149 CSS variables", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(149)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

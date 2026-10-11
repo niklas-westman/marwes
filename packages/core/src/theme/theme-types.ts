@@ -133,6 +133,8 @@ export type Theme = {
   }
   ui: {
     radius: number
+    /** Button corner radius in px. Falls back to `radius` when omitted. */
+    radiusButton?: number
     density: Density
   }
   breakpoint: ThemeBreakpoints
