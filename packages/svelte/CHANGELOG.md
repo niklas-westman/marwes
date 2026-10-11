@@ -1,5 +1,17 @@
 # @marwes-ui/svelte
 
+## 1.10.0
+
+### Minor Changes
+
+- [#64](https://github.com/niklas-westman/marwes/pull/64) [`73b7b97`](https://github.com/niklas-westman/marwes/commit/73b7b974c8951f2562ad94ebff2e1587f8cf0762) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Add the `fullWidth` option to `Button` and every button component. When true the button fills the width of its container instead of hugging its content, and renders the class `mw-btn--full-width` and `data-full-width="true"`. Without the option nothing changes.
+
+### Patch Changes
+
+- Updated dependencies [[`73b7b97`](https://github.com/niklas-westman/marwes/commit/73b7b974c8951f2562ad94ebff2e1587f8cf0762)]:
+  - @marwes-ui/core@1.10.0
+  - @marwes-ui/presets@1.10.0
+
 ## 1.9.0
 
 ### Minor Changes
