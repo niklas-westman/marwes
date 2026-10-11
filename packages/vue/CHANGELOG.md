@@ -1,5 +1,17 @@
 # @marwes-ui/vue
 
+## 1.8.0
+
+### Minor Changes
+
+- [#59](https://github.com/niklas-westman/marwes/pull/59) [`7aba648`](https://github.com/niklas-westman/marwes/commit/7aba648dc08c1950330629b455eb3c1f9b76c6b5) Thanks [@niklas-westman](https://github.com/niklas-westman)! - Add the `Stack` layout family: `Stack` and `StackItem` in React, Vue and Svelte. `Stack` is a flex container with `direction` (`row` | `column`), `gap` / `rowGap` / `columnGap`, `padding` / `paddingX` / `paddingY` / per-side padding, `alignItems` (`start` | `center` | `end`; cross-axis stretch is declared as child `fill`), `justifyContent`, `wrap` and `as`. `StackItem` is a declared child with `horizontalSizing` / `verticalSizing` (`fix` | `hug` | `fill`). Gap and padding accept only `Spacings` tokens and resolve to `var(--mw-spacing-<token>)`; values outside the allowed sets throw a `TypeError`. Every resolved value is emitted as a `data-*` attribute so layout can be verified against design auto layout. The firstEdition preset gains `stack.css`. No existing component changes.
+
+### Patch Changes
+
+- Updated dependencies [[`7aba648`](https://github.com/niklas-westman/marwes/commit/7aba648dc08c1950330629b455eb3c1f9b76c6b5)]:
+  - @marwes-ui/core@1.8.0
+  - @marwes-ui/presets@1.8.0
+
 ## 1.7.1
 
 ### Patch Changes
