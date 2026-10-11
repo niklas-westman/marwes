@@ -161,6 +161,7 @@ mwThemeVars.spacing.sp24 // "var(--mw-spacing-sp-24)"
 mwThemeVars.color.text // "var(--mw-color-text)"
 mwThemeVars.color.primary.base // "var(--mw-color-primary-base)"
 mwThemeVars.ui.radius // "var(--mw-ui-radius)"
+mwThemeVars.ui.radiusButton // "var(--mw-ui-radius-button)"
 
 mwThemeVarNames.spacing.sp24 // "--mw-spacing-sp-24"
 mwVar("--mw-color-text", "#141414") // "var(--mw-color-text, #141414)"

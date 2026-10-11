@@ -1362,6 +1362,33 @@ Use this format when resolving an open decision:
   - `apps/storybook-{react,vue,svelte}/src/stories/stack/*`
   - `docs/registry/families/stack/*`, `docs/audits/stack-family-accessibility.md`
 
+### REQ-THEME-001: Button radius theme option
+
+- **Status**: implemented
+- **Problem**: `ui.radius` is one global corner radius. An application that wants pill-shaped buttons and rounded-rectangle inputs (for example Sourcer: buttons 90, inputs 8) cannot express it through `ThemeInput` and would have to override Marwes in its own CSS.
+- **Scope**:
+  - `ThemeInput.ui.radiusButton` (optional number, px) and the resolved `Theme.ui.radiusButton`
+  - CSS variable `--mw-ui-radius-button`, emitted by `themeToCSSVars` as `ui.radiusButton ?? ui.radius`
+  - `mwThemeVars.ui.radiusButton` and `mwThemeVarNames.ui.radiusButton`
+  - The firstEdition button stylesheet reads `var(--mw-ui-radius-button, var(--mw-ui-radius))`
+- **Non-goals**:
+  - Radius options for other components (inputs, cards and so on); add each only when a consumer needs it
+  - Changing the default look: without `radiusButton`, buttons render exactly as before
+  - A per-button `shape` prop
+- **Acceptance criteria**:
+  - [x] `radiusButton` omitted: `--mw-ui-radius-button` equals `--mw-ui-radius` for every tone and override
+  - [x] `radiusButton` set: only `--mw-ui-radius-button` changes
+  - [x] `mwThemeVars.ui.radiusButton` is `var(--mw-ui-radius-button)`
+  - [x] The button stylesheet uses the variable for the button, the text-button surface and its state layer, with the old variable as fallback
+  - [x] The design-governance token map resolves `button/radius` to `--mw-ui-radius-button`
+- **Validation**:
+  - Unit: `packages/core/test/theme/theme-css.test.ts`, `theme-vars.test.ts`, `resolve-theme-input.test.ts`, `packages/presets/test/button-css-contract.test.ts`
+- **Files expected to change**:
+  - `packages/core/src/theme/theme-types.ts`, `theme-css.ts`, `theme-vars.ts`
+  - `packages/presets/src/firstEdition/button.css`
+  - `packages/design-governance/src/validate.mjs`
+  - `docs/guides/mw-theme-css-provider.md`, `packages/core/README.md`
+
 ### DEC-016 - Stack value guard throws a TypeError
 - Date: 2026-10-11
 - Decision:
@@ -1432,3 +1459,14 @@ Use this format when resolving an open decision:
   - `packages/core/src/components/atoms/stack/stack.types.ts`, `stack.values.ts`
   - `packages/presets/src/firstEdition/stack.css`
   - `docs/registry/families/stack/README.md`, Storybook introductions and Alignment stories
+
+### DEC-023 - Button radius is a theme option, not a per-button prop
+- Date: 2026-10-11
+- Decision:
+  - `ThemeInput.ui.radiusButton` sets the corner radius of buttons; it falls back to `ui.radius`. There is no per-button shape prop.
+- Rationale:
+  - Shape is a brand decision made once per application, like `ui.radius`; an application sets it in its theme and every button follows, with no app CSS on Marwes internals.
+  - A theme option keeps design (a Penpot token `mw-ui-radius-button`) and code (`--mw-ui-radius-button`) on one name.
+  - Other radius options are not added speculatively.
+- Impacted docs/files:
+  - `packages/core/src/theme/*`, `packages/presets/src/firstEdition/button.css`
