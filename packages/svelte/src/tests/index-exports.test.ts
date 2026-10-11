@@ -96,6 +96,8 @@ describe("Public API exports", () => {
       "RadiusSlider",
       "Spacer",
       "Spacing",
+      "Stack",
+      "StackItem",
       "Spinner",
       "ButtonSpinner",
       "EmptyStateSpinner",

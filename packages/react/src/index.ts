@@ -227,6 +227,31 @@ export type { SpacerProps, SpacingProps } from "./components/spacing"
 export { Spacings } from "@marwes-ui/core"
 export type { SpacingSize } from "@marwes-ui/core"
 
+/* Stack */
+export { Stack, StackItem } from "./components/stack"
+export type { StackItemProps, StackProps } from "./components/stack"
+export {
+  stackAlignItemsValues,
+  stackAsValues,
+  stackDirections,
+  stackItemAsValues,
+  stackJustifyContentValues,
+  stackSizings,
+  stackWraps,
+} from "@marwes-ui/core"
+export type {
+  StackAlignItems,
+  StackAs,
+  StackDirection,
+  StackItemAs,
+  StackItemOptions,
+  StackItemSizingOptions,
+  StackJustifyContent,
+  StackOptions,
+  StackSizing,
+  StackWrap,
+} from "@marwes-ui/core"
+
 /* Heading */
 export { H1, H2, H3 } from "./components/heading"
 export type { H1Props, H2Props, H3Props } from "./components/heading"
