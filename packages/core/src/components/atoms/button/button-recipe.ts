@@ -40,6 +40,7 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
       `mw-btn--${size}`,
       `mw-btn--${variant}`,
       opts.error ? "mw-btn--error" : "",
+      opts.fullWidth ? "mw-btn--full-width" : "",
     ]
       .filter(Boolean)
       .join(" "),
@@ -50,6 +51,7 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
         "data-size": size,
       }),
       "data-error": opts.error ? "true" : undefined,
+      "data-full-width": opts.fullWidth ? "true" : undefined,
       "data-has-affordance": hasAffordance ? "true" : undefined,
       "data-icon-only": opts.iconOnly ? "true" : undefined,
       ...opts.dataAttributes,

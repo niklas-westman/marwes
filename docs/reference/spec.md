@@ -1389,6 +1389,29 @@ Use this format when resolving an open decision:
   - `packages/design-governance/src/validate.mjs`
   - `docs/guides/mw-theme-css-provider.md`, `packages/core/README.md`
 
+### REQ-BUTTON-001: Button full-width option
+
+- **Status**: implemented
+- **Problem**: A form action usually fills its container (design auto layout `fill`). `Button` always hugs its content, so an application has to put `width: 100%` in its own CSS on a Marwes element. `SegmentedControl` already has `fullWidth`; `Button` does not.
+- **Scope**:
+  - `ButtonOptions.fullWidth` (optional boolean), accepted by every button component in React, Vue and Svelte through the shared recipe
+  - Class `mw-btn--full-width` and attribute `data-full-width="true"`, emitted only when the option is true
+  - The firstEdition button stylesheet sets `width: 100%` for the class
+- **Non-goals**:
+  - Any other width option (fixed or minimum widths)
+  - Changing buttons that do not set the option
+- **Acceptance criteria**:
+  - [x] Unset: no class and no attribute; rendering is unchanged
+  - [x] Set: the class and `data-full-width="true"` are present in React, Vue and Svelte (shared button contract)
+  - [x] The button stylesheet fills the container for the class
+- **Validation**:
+  - Unit: `packages/core/test/recipes/button.test.ts`, `packages/presets/test/button-css-contract.test.ts`
+  - Integration: `tests/contracts/button.contract.ts`
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/button/button-types.ts`, `button-option-keys.ts`, `button-recipe.ts`
+  - `packages/presets/src/firstEdition/button.css`
+  - `tests/contracts/button.contract.ts`
+
 ### DEC-016 - Stack value guard throws a TypeError
 - Date: 2026-10-11
 - Decision:
@@ -1470,3 +1493,13 @@ Use this format when resolving an open decision:
   - Other radius options are not added speculatively.
 - Impacted docs/files:
   - `packages/core/src/theme/*`, `packages/presets/src/firstEdition/button.css`
+
+### DEC-024 - Button fullWidth follows SegmentedControl, with a data attribute
+- Date: 2026-10-11
+- Decision:
+  - `Button` gets a boolean `fullWidth`, named like `SegmentedControl.fullWidth`, rendered as the class `mw-btn--full-width` and `data-full-width="true"`.
+- Rationale:
+  - One name for the same idea across components; applications stop putting width on Marwes elements.
+  - The data attribute lets design verification read the declared sizing, as Stack does.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/button/*`, `packages/presets/src/firstEdition/button.css`
