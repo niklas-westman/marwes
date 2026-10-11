@@ -1,0 +1,97 @@
+import { Meta } from "@storybook/addon-docs/blocks"
+
+<Meta title="Stack/Introduction" />
+
+# Stack Component
+
+`Stack` is Marwes' one layout primitive. It expresses a design auto-layout board as a flex
+container whose gap and padding accept only `Spacings` tokens, so a page's layout can be compared
+with the design one value at a time.
+
+## Component Architecture
+
+```
+Stack (Atom)
+StackItem (Atom)
+```
+
+- **`Stack`** — the flex container (a board). Direction, gap, padding, alignment, justification
+  and wrap are declared as props.
+- **`StackItem`** — a declared child (a layout child). It carries horizontal and vertical sizing:
+  `fix`, `hug` or `fill`. A nested `Stack` carries the same sizing props.
+
+## Recommended Usage
+
+```svelte
+<script lang="ts">
+  import { Paragraph, PrimaryButton, Stack, StackItem } from "@marwes-ui/svelte"
+</script>
+
+<Stack direction="row" gap="sp-16" padding="sp-24" alignItems="center">
+  <StackItem horizontalSizing="fill">
+    <Paragraph>Grows to fill the row</Paragraph>
+  </StackItem>
+  <StackItem>
+    <PrimaryButton>Save</PrimaryButton>
+  </StackItem>
+</Stack>
+```
+
+Defaults: `direction="column"`, `alignItems="start"`, `justifyContent="start"`, `wrap="nowrap"`,
+gap and padding `sp-0`, sizing `hug`/`hug`, `as="div"`.
+
+Precedence: `rowGap ?? gap`, `columnGap ?? gap`, and each padding side resolves as
+`side ?? axis ?? padding` (`paddingX` for left/right, `paddingY` for top/bottom).
+
+## Penpot mapping
+
+| Penpot board / child | Stack prop | Data attribute | CSS |
+|---|---|---|---|
+| `flex.dir` row / column | `direction` | `data-direction` | `flex-direction` |
+| `flex.rowGap` | `rowGap` (or `gap`) | `data-row-gap` | `row-gap: var(--mw-stack-row-gap)` |
+| `flex.columnGap` | `columnGap` (or `gap`) | `data-column-gap` | `column-gap: var(--mw-stack-column-gap)` |
+| `flex.*Padding` | `paddingTop` / `paddingRight` / `paddingBottom` / `paddingLeft` (or `paddingX`, `paddingY`, `padding`) | `data-padding-*` | `padding` from `var(--mw-stack-padding-*)` |
+| `flex.alignItems` | `alignItems` | `data-align-items` | `align-items: flex-start / center / flex-end / stretch` |
+| `flex.justifyContent` | `justifyContent` | `data-justify-content` | `justify-content: flex-start / center / flex-end / space-*` |
+| `flex.wrap` | `wrap` | `data-wrap` | `flex-wrap` |
+| `layoutChild.horizontalSizing` fix / auto / fill | `horizontalSizing` fix / hug / fill | `data-horizontal-sizing` | main axis `flex`, cross axis `align-self` |
+| `layoutChild.verticalSizing` fix / auto / fill | `verticalSizing` fix / hug / fill | `data-vertical-sizing` | main axis `flex`, cross axis `align-self` |
+
+The main-axis gap is `rowGap` for a column and `columnGap` for a row; the other gap only applies
+with `wrap`. Penpot `row-reverse`, `column-reverse` and justify `stretch` are not supported yet.
+
+## Verification rules
+
+- **Only StackItem or Stack children are governed.** The direct children of a governed Stack must
+  be `StackItem` or a nested `Stack`. Bare children keep their intrinsic size but are not layout
+  children and fail governed verification.
+- **`fix` is declared-only.** `fix` renders like `hug`: the size is owned by the child Marwes
+  component's own token-driven size. There are no width or height props. A design fix size that
+  differs from the rendered rect is a design decision, never accepted as hug.
+- **Sizing has no effect outside a Stack parent.** Sizing attributes on an element whose parent is
+  not a Stack are ignored.
+- **data-* attributes are claims.** A verifier must confirm each `data-*` value against computed
+  CSS. Only the `--mw-stack-*` vars are protected from consumer style; other style or class
+  overrides are detectable as a divergence.
+- **Token name and rendered px are separate checks.** The design token is compared with the
+  `data-*` token name, and the design px with the computed px, because a theme can redefine
+  `--mw-spacing-*`.
+- **No sp-6.** There is no `--mw-spacing-sp-6` token. It is never mapped silently to a nearby token.
+- **No arbitrary px.** Gap and padding accept only `Spacings` tokens; any other value throws a
+  `TypeError`, as do unknown enum values and `as` values.
+
+## Accessibility
+
+- `Stack` and `StackItem` are presentational containers with no role of their own.
+- Use `as` for real structure: `as="nav"`, `as="aside"`, `as="section"` and the other landmarks
+  need an `aria-label` when a page has more than one of the same kind.
+- A Stack rendered `as="ul"` or `as="ol"` must contain `StackItem as="li"` children.
+- Visual order follows DOM order; reverse directions are not offered, so reading order and visual
+  order stay the same.
+
+## Story Coverage
+
+- Default, Directions, Gap, Padding, Alignment, Justify and Wrap
+- ChildSizing for row and column parents (fix, hug and fill on both axes)
+- Nested stacks with declared sizing
+- StackItem defaults, sizing and list items
