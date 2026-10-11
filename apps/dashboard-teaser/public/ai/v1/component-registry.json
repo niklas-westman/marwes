@@ -6324,6 +6324,230 @@
       }
     },
     {
+      "family": "stack",
+      "readmePath": "docs/registry/families/stack/README.md",
+      "metaPath": "docs/registry/families/stack/registry.meta.json",
+      "generatedPath": "docs/registry/families/stack/registry.generated.json",
+      "visualPaths": [
+        "docs/registry/families/stack/visuals/file-map.mmd",
+        "docs/registry/families/stack/visuals/interaction-map.mmd",
+        "docs/registry/families/stack/visuals/layer-map.mmd"
+      ],
+      "previewPaths": [],
+      "meta": {
+        "family": "stack",
+        "displayName": "Stack",
+        "status": "in-progress",
+        "summary": "Code-owned layout family with one flex container (Stack) and one declared child (StackItem) whose gap and padding accept only spacing tokens, emitting every resolved layout value as data attributes so design auto layout can be verified against the DOM one-to-one, with React, Vue and Svelte parity proven by a shared contract.",
+        "philosophy": [
+          "Express page layout through one primitive so a design auto-layout board maps to exactly one Stack and each layout child maps to exactly one StackItem or nested Stack.",
+          "Keep gap and padding on the shared Spacings vocabulary only: there is no scale, no calc, no px and no width or height prop, and any value outside the allowed sets throws a TypeError (Icon precedent).",
+          "Treat every data-* attribute as a claim, not proof: a verifier must confirm each declared value against computed CSS, and only the --mw-stack-* vars are structurally protected because the adapters merge kit vars last.",
+          "Stay honest about provenance: Stack is code-owned with no Figma provenance, family-local rather than in the wave-1 semantic registry, and has no reflection contract or baselines."
+        ],
+        "usage": {
+          "useWhen": [
+            "A page or section needs a flex layout whose direction, gap, padding, alignment, justification and wrap should match a design auto-layout board value for value.",
+            "Children need declared horizontal or vertical sizing (fix, hug or fill) that a verifier can compare with design layout-child sizing.",
+            "The layout container also carries structure, such as a landmark or a list, through `as` (section, nav, header, footer, main, aside, ul, ol)."
+          ],
+          "avoidWhen": [
+            "The layout needs a spacing value that is not a Spacings token (for example sp-6 or an arbitrary px); that is a token decision, not a Stack escape hatch.",
+            "The layout needs reverse directions, justify stretch, alignSelf, alignContent, min/max sizes, margins or absolute positioning, which are deferred.",
+            "A two-dimensional grid is the honest structure, or a single decorative vertical gap is all that is needed (use Spacing)."
+          ]
+        },
+        "axe": {
+          "riskTier": "low",
+          "auditStatus": "in-progress",
+          "automationCovers": [
+            "Core recipe tests for defaults, gap and padding precedence, every enum value, token-only vars and the TypeError guard for tokens, enums and `as`.",
+            "Preset CSS contract tests that map every declared value to its flex declaration, cover child sizing for both parent directions and both axes, scope every selector to .mw-stack or .mw-stack-item and reject px literals.",
+            "The shared tests/contracts/stack.contract.ts run by React, Vue and Svelte, including attribute passthrough, recipe-owned data-component, ul/li lists, nested sizing and protected --mw-stack-* vars.",
+            "Storybook taxonomy, introduction-docs and a11y smoke runs in all three Storybooks."
+          ],
+          "manualReviewRequired": [
+            "Landmark naming when `as` renders nav, aside, section, header, footer or main: a page with more than one landmark of the same kind needs a consumer aria-label.",
+            "List structure when `as` is ul or ol: every direct child must be StackItem as=\"li\".",
+            "Layout verification against computed CSS: data-* values are claims and a consumer style or className can diverge from them.",
+            "Owner sign-off on the in-progress family audit before auditStatus moves on."
+          ],
+          "roadmapAnchors": [
+            "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+            "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+          ],
+          "notes": [
+            "Invalid tokens, enum values and `as` throw in dev and test in all three adapters. In production React unmounts to the nearest error boundary, Svelte aborts the mount, and Vue routes the error through handleError and logs it with console.error.",
+            "fix and hug render identically: fix is declared-only and means the size is owned by the child component's token-driven size, so its geometry must be verified against the design size separately.",
+            "Sizing attributes on an element whose parent is not a Stack have no effect and are ignored by the verifier.",
+            "Bare direct children of a governed Stack (not StackItem or Stack) are not layout children and fail governed verification.",
+            "docs/audits/stack-family-accessibility.md records the in-progress audit."
+          ]
+        },
+        "visuals": {
+          "canonicalStories": {
+            "react": [
+              "apps/storybook-react/src/stories/stack/Introduction.mdx",
+              "apps/storybook-react/src/stories/stack/stack.stories.tsx",
+              "apps/storybook-react/src/stories/stack/stack-item.stories.tsx"
+            ],
+            "vue": [
+              "apps/storybook-vue/src/stories/stack/Introduction.mdx",
+              "apps/storybook-vue/src/stories/stack/stack.stories.ts",
+              "apps/storybook-vue/src/stories/stack/stack-item.stories.ts"
+            ],
+            "svelte": [
+              "apps/storybook-svelte/src/stories/stack/Introduction.mdx",
+              "apps/storybook-svelte/src/stories/stack/stack.stories.ts",
+              "apps/storybook-svelte/src/stories/stack/stack-item.stories.ts"
+            ]
+          },
+          "preferredStates": [
+            "default",
+            "directions",
+            "gap",
+            "padding",
+            "alignment",
+            "justify",
+            "wrap",
+            "child-sizing",
+            "nested",
+            "list-items"
+          ]
+        },
+        "openQuestions": [
+          "sp-6 is bound in the design Spacings but has no --mw-spacing-sp-6 token. Should Marwes add sp-6 as a separate token decision, or should consumer designs move to sp-4 or sp-8? It is never mapped silently.",
+          "Should row-reverse and column-reverse be added once Penpot's rendering of justify start/end on reverse boards is verified and pinned in the preset CSS contract?",
+          "Marwes emits fix|hug|fill while some collectors normalise to fixed|hug|fill. Should consumers map fixed to fix, or should Marwes emit fixed?",
+          "Are alignSelf, min/max sizes, margins, absolute positioning or board alignContent needed by current consumer pages, or can they stay deferred?",
+          "Should the family status become shipped on merge (the spacing precedent) or stay in-progress until the release?"
+        ]
+      },
+      "generated": {
+        "family": "stack",
+        "generationStatus": "generated",
+        "links": {
+          "referenceDocs": [
+            "docs/reference/architecture.md",
+            "docs/reference/spec.md",
+            "docs/reference/ai-metadata.md",
+            "docs/reference/testing.md",
+            "docs/reference/governance.md"
+          ],
+          "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+          "audits": ["docs/audits/README.md", "docs/audits/stack-family-accessibility.md"],
+          "roadmap": [
+            "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+            "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+          ],
+          "core": [
+            "packages/core/src/components/atoms/stack/index.ts",
+            "packages/core/src/components/atoms/stack/stack-item.recipe.ts",
+            "packages/core/src/components/atoms/stack/stack.recipe.ts",
+            "packages/core/src/components/atoms/stack/stack.types.ts",
+            "packages/core/src/components/atoms/stack/stack.values.ts"
+          ],
+          "presets": [
+            "packages/presets/src/firstEdition/stack.css",
+            "packages/presets/src/firstEdition/tokens.css"
+          ],
+          "react": [
+            "packages/react/src/components/stack/__tests__/stack.test.tsx",
+            "packages/react/src/components/stack/index.ts",
+            "packages/react/src/components/stack/stack-item.tsx",
+            "packages/react/src/components/stack/stack.tsx"
+          ],
+          "vue": [
+            "packages/vue/src/components/stack/__tests__/stack.test.ts",
+            "packages/vue/src/components/stack/index.ts",
+            "packages/vue/src/components/stack/stack-item.ts",
+            "packages/vue/src/components/stack/stack.ts"
+          ],
+          "svelte": [
+            "packages/svelte/src/lib/components/stack/index.ts",
+            "packages/svelte/src/lib/components/stack/Stack.svelte",
+            "packages/svelte/src/lib/components/stack/StackItem.svelte",
+            "packages/svelte/src/lib/components/stack/types.ts"
+          ],
+          "storybookReact": [
+            "apps/storybook-react/src/stories/stack/__tests__/stack-introduction-docs.test.ts",
+            "apps/storybook-react/src/stories/stack/__tests__/stack-taxonomy.test.ts",
+            "apps/storybook-react/src/stories/stack/Introduction.mdx",
+            "apps/storybook-react/src/stories/stack/stack-item.stories.tsx",
+            "apps/storybook-react/src/stories/stack/stack.stories.tsx"
+          ],
+          "storybookVue": [
+            "apps/storybook-vue/src/stories/stack/__tests__/stack-introduction-docs.test.ts",
+            "apps/storybook-vue/src/stories/stack/__tests__/stack-taxonomy.test.ts",
+            "apps/storybook-vue/src/stories/stack/Introduction.mdx",
+            "apps/storybook-vue/src/stories/stack/stack-item.stories.ts",
+            "apps/storybook-vue/src/stories/stack/stack.stories.ts"
+          ],
+          "storybookSvelte": [
+            "apps/storybook-svelte/src/stories/stack/__tests__/stack-introduction-docs.test.ts",
+            "apps/storybook-svelte/src/stories/stack/__tests__/stack-taxonomy.test.ts",
+            "apps/storybook-svelte/src/stories/stack/Introduction.mdx",
+            "apps/storybook-svelte/src/stories/stack/stack-item.stories.ts",
+            "apps/storybook-svelte/src/stories/stack/stack.stories.ts",
+            "apps/storybook-svelte/src/stories/stack/StackShowcase.svelte"
+          ],
+          "contracts": ["tests/contracts/stack.contract.ts"]
+        },
+        "semantics": {
+          "coverageLevel": "family-local",
+          "dataComponent": "stack",
+          "canonicalAttributes": [],
+          "allowedPurposes": [],
+          "purposeAttributes": {},
+          "sourceOfTruthPaths": [
+            "packages/core/src/components/atoms/stack/stack.recipe.ts",
+            "packages/core/src/components/atoms/stack/stack-item.recipe.ts",
+            "packages/core/src/components/atoms/stack/stack.types.ts",
+            "packages/core/src/components/atoms/stack/stack.values.ts",
+            "packages/presets/src/firstEdition/stack.css"
+          ],
+          "notes": [
+            "Stack is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+            "Stack is code-owned with no Figma provenance: it emits data-component=stack or stack-item plus every resolved layout value as data-* attributes so a verifier can compare design auto layout with the rendered DOM one-to-one."
+          ]
+        },
+        "design": {
+          "componentJsons": [],
+          "curatedReferences": [
+            ".figma/INDEX.md",
+            ".figma/NODE_REFERENCE.md",
+            ".figma/nodes.json",
+            ".figma/marwes/components/_index.json",
+            ".figma/marwes/manifest.json",
+            ".figma/marwes/README.md"
+          ],
+          "pageReferences": [],
+          "nodeReferences": {},
+          "figmaTokens": [],
+          "figmaStates": {
+            "baseVariants": [],
+            "interactionStates": []
+          }
+        },
+        "coverage": {
+          "react": true,
+          "vue": true,
+          "svelte": true,
+          "storybookReact": true,
+          "storybookVue": true,
+          "storybookSvelte": true,
+          "contractsPresent": true,
+          "auditDocPresent": true,
+          "figmaReferencesPresent": true
+        },
+        "notes": [
+          "Stack is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+          "Stack is code-owned with no Figma provenance: it emits data-component=stack or stack-item plus every resolved layout value as data-* attributes so a verifier can compare design auto layout with the rendered DOM one-to-one.",
+          "Generated from docs/registry/families/stack/registry.meta.json and scripts/generate-component-registry.ts."
+        ]
+      }
+    },
+    {
       "family": "stat-tile",
       "readmePath": "docs/registry/families/stat-tile/README.md",
       "metaPath": "docs/registry/families/stat-tile/registry.meta.json",

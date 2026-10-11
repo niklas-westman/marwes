@@ -1438,6 +1438,132 @@
           "family": "spinner"
         },
         {
+          "name": "Stack",
+          "kind": "component",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackAlignItems",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackAlignItemsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackAs",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackAsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackDirection",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackDirections",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackItem",
+          "kind": "component",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemAs",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackItemAsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemProps",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemSizingOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackJustifyContent",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackJustifyContentValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackProps",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackSizing",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackSizings",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "StackWrap",
+          "kind": "type",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
+          "name": "stackWraps",
+          "kind": "helper",
+          "importPath": "@marwes-ui/react",
+          "family": "stack"
+        },
+        {
           "name": "StatCard",
           "kind": "component",
           "importPath": "@marwes-ui/react",
@@ -3285,6 +3411,132 @@
           "kind": "type",
           "importPath": "@marwes-ui/vue",
           "family": "spinner"
+        },
+        {
+          "name": "Stack",
+          "kind": "component",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackAlignItems",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackAlignItemsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackAs",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackAsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackDirection",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackDirections",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackItem",
+          "kind": "component",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemAs",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackItemAsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemProps",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemSizingOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackJustifyContent",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackJustifyContentValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackProps",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackSizing",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackSizings",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "StackWrap",
+          "kind": "type",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
+        },
+        {
+          "name": "stackWraps",
+          "kind": "helper",
+          "importPath": "@marwes-ui/vue",
+          "family": "stack"
         },
         {
           "name": "StatCard",
@@ -5150,6 +5402,132 @@
           "kind": "type",
           "importPath": "@marwes-ui/svelte",
           "family": "spinner"
+        },
+        {
+          "name": "Stack",
+          "kind": "component",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackAlignItems",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackAlignItemsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackAs",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackAsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackDirection",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackDirections",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackItem",
+          "kind": "component",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemAs",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackItemAsValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemProps",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackItemSizingOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackJustifyContent",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackJustifyContentValues",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackOptions",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackProps",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackSizing",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackSizings",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "StackWrap",
+          "kind": "type",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
+        },
+        {
+          "name": "stackWraps",
+          "kind": "helper",
+          "importPath": "@marwes-ui/svelte",
+          "family": "stack"
         },
         {
           "name": "StatCard",

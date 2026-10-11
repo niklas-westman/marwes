@@ -338,6 +338,10 @@ Generated from the public root export of `@marwes-ui/vue`. Do not edit this inve
 
 - `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
 
+### Stack
+
+- `Stack`, `StackItem`
+
 ### Stat Tile
 
 - `StatTile`

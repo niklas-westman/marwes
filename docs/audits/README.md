@@ -68,6 +68,7 @@ For current blocker/manual-review status across all families, use [Audit Status]
 | Paragraph | Later | First pass complete | [paragraph-family-accessibility.md](./paragraph-family-accessibility.md) |
 | Icon | Later | First pass complete | [icon-family-accessibility.md](./icon-family-accessibility.md) |
 | Spacing | Later | First pass complete | [spacing-family-accessibility.md](./spacing-family-accessibility.md) |
+| Stack | Later | In progress | [stack-family-accessibility.md](./stack-family-accessibility.md) |
 
 ## How to use these audits
 

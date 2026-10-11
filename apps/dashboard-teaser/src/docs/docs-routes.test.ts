@@ -31,8 +31,8 @@ describe("static consumer documentation routes", () => {
     const paths = manifest.routes.map((route) => route.path)
 
     expect(manifest.schemaVersion).toBe(1)
-    expect(manifest.familyCount).toBe(31)
-    expect(manifest.routes.filter((route) => route.family)).toHaveLength(31)
+    expect(manifest.familyCount).toBe(32)
+    expect(manifest.routes.filter((route) => route.family)).toHaveLength(32)
     expect(paths).toEqual(
       expect.arrayContaining([
         "/docs/get-started/react/",
@@ -79,7 +79,7 @@ describe("static consumer documentation routes", () => {
   it("keeps the catalog content present before JavaScript runs", async () => {
     const html = await readFile(path.join(appRoot, "docs/components/index.html"), "utf8")
 
-    expect(html.match(/component-static-card/g)).toHaveLength(31)
+    expect(html.match(/component-static-card/g)).toHaveLength(32)
     expect(html).toContain("PaginationField")
     expect(html).toContain("InputField")
     expect(html).toContain('id="component-search"')
@@ -146,7 +146,7 @@ describe("static consumer documentation routes", () => {
       (route) => route.renderer === "component-docs",
     )
 
-    expect(componentDocsRoutes).toHaveLength(31)
+    expect(componentDocsRoutes).toHaveLength(32)
     for (const route of componentDocsRoutes) {
       const family = route.family
       if (!family) throw new Error(`Component docs route is missing a family: ${route.path}`)

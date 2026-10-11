@@ -168,6 +168,7 @@ function collectSvelteFamilyTests() {
     "skeleton",
     "slider",
     "spinner",
+    "stack",
     "switch",
     "tab",
     "textarea",

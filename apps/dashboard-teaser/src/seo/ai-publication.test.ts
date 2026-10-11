@@ -53,7 +53,7 @@ describe("dashboard AI publication", () => {
   it("distinguishes the complete family registry from canonical semantic coverage", () => {
     const index = JSON.parse(readPublicFile("ai/index.json"))
 
-    expect(index.registry.componentFamilyCount).toBe(31)
+    expect(index.registry.componentFamilyCount).toBe(32)
     expect(index.registry.canonicalSemanticFamilyCount).toBe(9)
     expect(index.registry.canonicalSemanticFamilies).toEqual([
       "avatar",

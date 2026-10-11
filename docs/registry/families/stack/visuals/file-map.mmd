@@ -1,0 +1,27 @@
+flowchart TD
+  Registry["docs/registry/families/stack"]
+  Registry --> Meta["registry.meta.json"]
+  Registry --> Generated["registry.generated.json"]
+  Registry --> Visuals["visuals/*.mmd"]
+
+  Core["packages/core/src/components/atoms/stack/"]
+  Core --> CoreFiles["stack.recipe.ts stack-item.recipe.ts stack.types.ts stack.values.ts"]
+
+  Presets["packages/presets/src/firstEdition/"]
+  Presets --> StackCss["stack.css"]
+  Presets --> TokensCss["tokens.css"]
+
+  React["packages/react/src/components/stack/"]
+  React --> ReactFiles["stack.tsx stack-item.tsx index.ts"]
+
+  Vue["packages/vue/src/components/stack/"]
+  Vue --> VueFiles["stack.ts stack-item.ts index.ts"]
+
+  Svelte["packages/svelte/src/lib/components/stack/"]
+  Svelte --> SvelteFiles["Stack.svelte StackItem.svelte types.ts index.ts"]
+
+  Contract["tests/contracts/stack.contract.ts"]
+  StoriesR["apps/storybook-react/src/stories/stack/"]
+  StoriesV["apps/storybook-vue/src/stories/stack/"]
+  StoriesS["apps/storybook-svelte/src/stories/stack/"]
+  Audit["docs/audits/stack-family-accessibility.md"]

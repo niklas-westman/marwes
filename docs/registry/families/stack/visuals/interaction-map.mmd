@@ -1,0 +1,17 @@
+flowchart LR
+  Board["Design board\nflex dir, gaps, paddings, align, justify, wrap"] --> StackProps["Stack props\nSpacings tokens + enums"]
+  Child["Design layout child\nhorizontal/vertical sizing fix, auto, fill"] --> ItemProps["StackItem or nested Stack\nfix, hug, fill"]
+
+  StackProps --> Guard["value guard\nTypeError outside allowed sets"]
+  ItemProps --> Guard
+  Guard --> Recipe["createStackRecipe / createStackItemRecipe"]
+
+  Recipe --> Vars["--mw-stack-* vars\nvar(--mw-spacing-<token>)"]
+  Recipe --> Data["data-component + every resolved data-* value"]
+
+  Vars --> Css["stack.css\nflex, gaps, padding, child sizing"]
+  Data --> Css
+  Css --> Dom["React / Vue / Svelte DOM"]
+  Data --> Dom
+
+  Dom --> Verifier["verifier\ndata-* claims vs computed CSS\ntoken name vs px as separate checks"]

@@ -322,6 +322,10 @@ Generated from the public root export of `@marwes-ui/svelte`. Do not edit this i
 
 - `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
 
+### Stack
+
+- `Stack`, `StackItem`
+
 ### Stat Tile
 
 - `StatTile`
