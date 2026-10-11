@@ -26,7 +26,7 @@
     },
     {
       "label": "Layout",
-      "items": ["Accordion", "Divider", "Spacing", "Tab"]
+      "items": ["Accordion", "Divider", "Spacing", "Stack", "Tab"]
     },
     {
       "label": "Navigation",
