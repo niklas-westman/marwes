@@ -50,6 +50,7 @@ describe("theme variable helpers", () => {
   it("exposes typography, font, ui, and density CSS variable references", () => {
     expect(mwThemeVars.font.primary).toBe("var(--mw-font-primary)")
     expect(mwThemeVars.ui.radius).toBe("var(--mw-ui-radius)")
+    expect(mwThemeVars.ui.radiusButton).toBe("var(--mw-ui-radius-button)")
     expect(mwThemeVars.density.height).toBe("var(--mw-density-height)")
     expect(mwThemeVars.typography.display.fontSize).toBe("var(--mw-typography-display-font-size)")
     expect(mwThemeVars.typography.h1.fontSize).toBe("var(--mw-typography-h1-font-size)")

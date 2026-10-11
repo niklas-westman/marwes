@@ -609,7 +609,7 @@ function cssVarForTokenName(tokenName, componentTokenName) {
     ["button/gap", "--mw-spacing-sp-4"],
     ["button/paddingh", "--mw-density-padding-x"],
     ["button/paddingv", "--mw-density-padding-y"],
-    ["button/radius", "--mw-ui-radius"],
+    ["button/radius", "--mw-ui-radius-button"],
     ["button/primary/surface", "--mw-color-primary-base"],
     ["button/primary/label", "--mw-color-primary-label"],
     ["button/secondary/label", "--mw-color-secondary-label"],

@@ -184,6 +184,7 @@ export const mwThemeVarNames = {
   },
   ui: {
     radius: "--mw-ui-radius",
+    radiusButton: "--mw-ui-radius-button",
   },
   density: {
     height: "--mw-density-height",
@@ -423,6 +424,7 @@ export const mwThemeVars = {
   },
   ui: {
     radius: "var(--mw-ui-radius)",
+    radiusButton: "var(--mw-ui-radius-button)",
   },
   density: {
     height: "var(--mw-density-height)",

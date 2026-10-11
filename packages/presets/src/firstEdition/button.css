@@ -23,7 +23,7 @@
   gap: var(--mw-spacing-sp-4);
   height: var(--mw-density-height);
   padding: var(--mw-density-padding-y) var(--mw-density-padding-x);
-  border-radius: var(--mw-ui-radius);
+  border-radius: var(--mw-ui-radius-button, var(--mw-ui-radius));
   border: 0;
   font-family: var(--mw-font-primary, inherit);
   font-size: var(--mw-density-font-size);
@@ -117,7 +117,7 @@
   border-width: 0;
   height: auto;
   padding: 0;
-  border-radius: var(--mw-ui-radius);
+  border-radius: var(--mw-ui-radius-button, var(--mw-ui-radius));
   overflow: visible;
 }
 
@@ -126,7 +126,7 @@
   position: absolute;
   inset: -0.25rem -0.5rem;
   z-index: -1;
-  border-radius: var(--mw-ui-radius);
+  border-radius: var(--mw-ui-radius-button, var(--mw-ui-radius));
   background: transparent;
   pointer-events: none;
 }

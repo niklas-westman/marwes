@@ -227,6 +227,13 @@ describe("resolveThemeInput — font / ui / typography overrides", () => {
     expect(result.font.secondary).toBe("Helvetica")
   })
 
+  it("ui.radiusButton is optional and passes through without changing ui.radius", () => {
+    expect(resolveThemeInput({}).ui.radiusButton).toBeUndefined()
+    const result = resolveThemeInput({ ui: { radius: 8, radiusButton: 90 } })
+    expect(result.ui.radius).toBe(8)
+    expect(result.ui.radiusButton).toBe(90)
+  })
+
   it("ui.radius override", () => {
     expect(resolveThemeInput({ ui: { radius: 8 } }).ui.radius).toBe(8)
   })

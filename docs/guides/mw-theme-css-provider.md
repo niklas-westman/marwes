@@ -202,6 +202,7 @@ This table is generated from the current `mwTheme` object. Update it when `packa
 | `font.secondary` | `var(--mw-font-secondary)` |
 | `font.mono` | `var(--mw-font-mono)` |
 | `ui.radius` | `var(--mw-ui-radius)` |
+| `ui.radiusButton` | `var(--mw-ui-radius-button)` |
 | `density.height` | `var(--mw-density-height)` |
 | `density.paddingX` | `var(--mw-density-padding-x)` |
 | `density.paddingY` | `var(--mw-density-padding-y)` |
