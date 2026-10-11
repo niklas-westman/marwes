@@ -1,0 +1,145 @@
+/**
+ * Stack family: one flex layout primitive whose declared values map one-to-one to
+ * design auto layout. Every selector is rooted in .mw-stack or .mw-stack-item.
+ * Gap and padding come only from --mw-stack-* vars, which the recipe sets to
+ * var(--mw-spacing-<token>).
+ */
+
+.mw-stack {
+  display: flex;
+  box-sizing: border-box;
+  min-width: 0;
+  row-gap: var(--mw-stack-row-gap);
+  column-gap: var(--mw-stack-column-gap);
+  padding: var(--mw-stack-padding-top) var(--mw-stack-padding-right) var(--mw-stack-padding-bottom)
+    var(--mw-stack-padding-left);
+}
+
+.mw-stack[data-direction="row"] {
+  flex-direction: row;
+}
+
+.mw-stack[data-direction="column"] {
+  flex-direction: column;
+}
+
+.mw-stack[data-align-items="start"] {
+  align-items: flex-start;
+}
+
+.mw-stack[data-align-items="center"] {
+  align-items: center;
+}
+
+.mw-stack[data-align-items="end"] {
+  align-items: flex-end;
+}
+
+.mw-stack[data-align-items="stretch"] {
+  align-items: stretch;
+}
+
+.mw-stack[data-justify-content="start"] {
+  justify-content: flex-start;
+}
+
+.mw-stack[data-justify-content="center"] {
+  justify-content: center;
+}
+
+.mw-stack[data-justify-content="end"] {
+  justify-content: flex-end;
+}
+
+.mw-stack[data-justify-content="space-between"] {
+  justify-content: space-between;
+}
+
+.mw-stack[data-justify-content="space-around"] {
+  justify-content: space-around;
+}
+
+.mw-stack[data-justify-content="space-evenly"] {
+  justify-content: space-evenly;
+}
+
+.mw-stack[data-wrap="nowrap"] {
+  flex-wrap: nowrap;
+}
+
+.mw-stack[data-wrap="wrap"] {
+  flex-wrap: wrap;
+}
+
+.mw-stack-item {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+}
+
+/*
+ * Child sizing. Only declared children (StackItem or a nested Stack) are governed;
+ * sizing attributes have no effect when the parent is not a .mw-stack.
+ * "fix" renders like "hug": the size is owned by the child component's own tokens.
+ */
+
+/* Row parent: horizontal is the main axis. */
+.mw-stack[data-direction="row"] > :is(.mw-stack-item, .mw-stack)[data-horizontal-sizing="fill"] {
+  flex: 1 1 0;
+}
+
+.mw-stack[data-direction="row"]
+  > :is(.mw-stack-item, .mw-stack):is(
+    [data-horizontal-sizing="hug"],
+    [data-horizontal-sizing="fix"]
+  ) {
+  flex: 0 0 auto;
+}
+
+.mw-stack[data-direction="row"] > :is(.mw-stack-item, .mw-stack)[data-vertical-sizing="fill"] {
+  align-self: stretch;
+}
+
+.mw-stack[data-direction="row"]
+  > :is(.mw-stack-item, .mw-stack):is([data-vertical-sizing="hug"], [data-vertical-sizing="fix"]) {
+  align-self: auto;
+  height: fit-content;
+}
+
+/* Column parent: vertical is the main axis. */
+.mw-stack[data-direction="column"] > :is(.mw-stack-item, .mw-stack)[data-vertical-sizing="fill"] {
+  flex: 1 1 0;
+}
+
+.mw-stack[data-direction="column"]
+  > :is(.mw-stack-item, .mw-stack):is([data-vertical-sizing="hug"], [data-vertical-sizing="fix"]) {
+  flex: 0 0 auto;
+}
+
+.mw-stack[data-direction="column"] > :is(.mw-stack-item, .mw-stack)[data-horizontal-sizing="fill"] {
+  align-self: stretch;
+}
+
+.mw-stack[data-direction="column"]
+  > :is(.mw-stack-item, .mw-stack):is(
+    [data-horizontal-sizing="hug"],
+    [data-horizontal-sizing="fix"]
+  ) {
+  align-self: auto;
+  width: fit-content;
+}
+
+/* Inside a StackItem: hug keeps content at its own size, fill stretches it. */
+.mw-stack-item:is([data-horizontal-sizing="hug"], [data-horizontal-sizing="fix"]) {
+  align-items: flex-start;
+}
+
+.mw-stack-item[data-horizontal-sizing="fill"] {
+  align-items: stretch;
+}
+
+.mw-stack-item[data-vertical-sizing="fill"] > * {
+  flex: 1 1 auto;
+}
