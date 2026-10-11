@@ -1,0 +1,124 @@
+{
+  "$schema": "../../schema/component-family.generated.schema.json",
+  "family": "stack",
+  "generationStatus": "generated",
+  "links": {
+    "referenceDocs": [
+      "docs/reference/architecture.md",
+      "docs/reference/spec.md",
+      "docs/reference/ai-metadata.md",
+      "docs/reference/testing.md",
+      "docs/reference/governance.md"
+    ],
+    "guides": ["docs/guides/adding-components.md", "docs/guides/figma-to-marwes.md"],
+    "audits": ["docs/audits/README.md", "docs/audits/stack-family-accessibility.md"],
+    "roadmap": [
+      "AXE_ROADMAP.md#phase-5--add-a-first-class-accessibility-support-model",
+      "AXE_ROADMAP.md#p3--follow-up-family-and-system-work"
+    ],
+    "core": [
+      "packages/core/src/components/atoms/stack/index.ts",
+      "packages/core/src/components/atoms/stack/stack-item.recipe.ts",
+      "packages/core/src/components/atoms/stack/stack.recipe.ts",
+      "packages/core/src/components/atoms/stack/stack.types.ts",
+      "packages/core/src/components/atoms/stack/stack.values.ts"
+    ],
+    "presets": [
+      "packages/presets/src/firstEdition/stack.css",
+      "packages/presets/src/firstEdition/tokens.css"
+    ],
+    "react": [
+      "packages/react/src/components/stack/__tests__/stack.test.tsx",
+      "packages/react/src/components/stack/index.ts",
+      "packages/react/src/components/stack/stack-item.tsx",
+      "packages/react/src/components/stack/stack.tsx"
+    ],
+    "vue": [
+      "packages/vue/src/components/stack/__tests__/stack.test.ts",
+      "packages/vue/src/components/stack/index.ts",
+      "packages/vue/src/components/stack/stack-item.ts",
+      "packages/vue/src/components/stack/stack.ts"
+    ],
+    "svelte": [
+      "packages/svelte/src/lib/components/stack/index.ts",
+      "packages/svelte/src/lib/components/stack/Stack.svelte",
+      "packages/svelte/src/lib/components/stack/StackItem.svelte",
+      "packages/svelte/src/lib/components/stack/types.ts"
+    ],
+    "storybookReact": [
+      "apps/storybook-react/src/stories/stack/__tests__/stack-introduction-docs.test.ts",
+      "apps/storybook-react/src/stories/stack/__tests__/stack-taxonomy.test.ts",
+      "apps/storybook-react/src/stories/stack/Introduction.mdx",
+      "apps/storybook-react/src/stories/stack/stack-item.stories.tsx",
+      "apps/storybook-react/src/stories/stack/stack.stories.tsx"
+    ],
+    "storybookVue": [
+      "apps/storybook-vue/src/stories/stack/__tests__/stack-introduction-docs.test.ts",
+      "apps/storybook-vue/src/stories/stack/__tests__/stack-taxonomy.test.ts",
+      "apps/storybook-vue/src/stories/stack/Introduction.mdx",
+      "apps/storybook-vue/src/stories/stack/stack-item.stories.ts",
+      "apps/storybook-vue/src/stories/stack/stack.stories.ts"
+    ],
+    "storybookSvelte": [
+      "apps/storybook-svelte/src/stories/stack/__tests__/stack-introduction-docs.test.ts",
+      "apps/storybook-svelte/src/stories/stack/__tests__/stack-taxonomy.test.ts",
+      "apps/storybook-svelte/src/stories/stack/Introduction.mdx",
+      "apps/storybook-svelte/src/stories/stack/stack-item.stories.ts",
+      "apps/storybook-svelte/src/stories/stack/stack.stories.ts",
+      "apps/storybook-svelte/src/stories/stack/StackShowcase.svelte"
+    ],
+    "contracts": ["tests/contracts/stack.contract.ts"]
+  },
+  "semantics": {
+    "coverageLevel": "family-local",
+    "dataComponent": "stack",
+    "canonicalAttributes": [],
+    "allowedPurposes": [],
+    "purposeAttributes": {},
+    "sourceOfTruthPaths": [
+      "packages/core/src/components/atoms/stack/stack.recipe.ts",
+      "packages/core/src/components/atoms/stack/stack-item.recipe.ts",
+      "packages/core/src/components/atoms/stack/stack.types.ts",
+      "packages/core/src/components/atoms/stack/stack.values.ts",
+      "packages/presets/src/firstEdition/stack.css"
+    ],
+    "notes": [
+      "Stack is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+      "Stack is code-owned with no Figma provenance: it emits data-component=stack or stack-item plus every resolved layout value as data-* attributes so a verifier can compare design auto layout with the rendered DOM one-to-one."
+    ]
+  },
+  "design": {
+    "componentJsons": [],
+    "curatedReferences": [
+      ".figma/INDEX.md",
+      ".figma/NODE_REFERENCE.md",
+      ".figma/nodes.json",
+      ".figma/marwes/components/_index.json",
+      ".figma/marwes/manifest.json",
+      ".figma/marwes/README.md"
+    ],
+    "pageReferences": [],
+    "nodeReferences": {},
+    "figmaTokens": [],
+    "figmaStates": {
+      "baseVariants": [],
+      "interactionStates": []
+    }
+  },
+  "coverage": {
+    "react": true,
+    "vue": true,
+    "svelte": true,
+    "storybookReact": true,
+    "storybookVue": true,
+    "storybookSvelte": true,
+    "contractsPresent": true,
+    "auditDocPresent": true,
+    "figmaReferencesPresent": true
+  },
+  "notes": [
+    "Stack is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+    "Stack is code-owned with no Figma provenance: it emits data-component=stack or stack-item plus every resolved layout value as data-* attributes so a verifier can compare design auto layout with the rendered DOM one-to-one.",
+    "Generated from docs/registry/families/stack/registry.meta.json and scripts/generate-component-registry.ts."
+  ]
+}

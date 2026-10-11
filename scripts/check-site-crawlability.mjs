@@ -290,8 +290,8 @@ async function assertAiResources(indexContent, llmsContent) {
   const publicApi = parseJson(publicApiContent, "apps/dashboard-teaser/dist/ai/v1/public-api.json")
   const families = registry?.families
   const components = manifest?.components
-  if (!Array.isArray(families) || families.length !== 31) {
-    report("component-registry.json: families must contain all 31 registry families")
+  if (!Array.isArray(families) || families.length !== 32) {
+    report("component-registry.json: families must contain all 32 registry families")
   }
   if (!Array.isArray(components) || components.length === 0) {
     report("component-manifest.json: components must contain the canonical semantic subset")
@@ -299,7 +299,7 @@ async function assertAiResources(indexContent, llmsContent) {
   }
   if (Array.isArray(families) && components.length >= families.length) {
     report(
-      "component-manifest.json: canonical semantic components must remain a subset of the 31 registry families",
+      "component-manifest.json: canonical semantic components must remain a subset of the 32 registry families",
     )
   }
 

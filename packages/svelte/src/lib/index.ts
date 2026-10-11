@@ -178,6 +178,32 @@ export { default as Spacing } from "./components/spacing/Spacing.svelte"
 export { default as Spacer } from "./components/spacing/Spacer.svelte"
 export type { SpacingProps, SpacerProps } from "./components/spacing/types.js"
 
+// Stack
+export { default as Stack } from "./components/stack/Stack.svelte"
+export { default as StackItem } from "./components/stack/StackItem.svelte"
+export type { StackItemProps, StackProps } from "./components/stack/types.js"
+export {
+  stackAlignItemsValues,
+  stackAsValues,
+  stackDirections,
+  stackItemAsValues,
+  stackJustifyContentValues,
+  stackSizings,
+  stackWraps,
+} from "@marwes-ui/core"
+export type {
+  StackAlignItems,
+  StackAs,
+  StackDirection,
+  StackItemAs,
+  StackItemOptions,
+  StackItemSizingOptions,
+  StackJustifyContent,
+  StackOptions,
+  StackSizing,
+  StackWrap,
+} from "@marwes-ui/core"
+
 // Heading
 export { default as H1 } from "./components/heading/H1.svelte"
 export { default as H2 } from "./components/heading/H2.svelte"

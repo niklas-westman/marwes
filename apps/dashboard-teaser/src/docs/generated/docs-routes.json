@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "familyCount": 31,
+  "familyCount": 32,
   "routes": [
     {
       "description": "What Marwes is, how it's organized, and where to go next.",
@@ -36,7 +36,7 @@
       "path": "/docs/components/",
       "title": "Component catalog",
       "renderer": "catalog",
-      "familyCount": 31
+      "familyCount": 32
     },
     {
       "description": "Wrap once, provide a theme, and brand every Marwes component.",
@@ -296,6 +296,14 @@
       "path": "/docs/components/spinner/",
       "title": "Spinner",
       "family": "spinner",
+      "renderer": "component-docs"
+    },
+    {
+      "description": "Code-owned layout family with one flex container (Stack) and one declared child (StackItem) whose gap and padding accept only spacing tokens, emitting every resolved layout value as data attributes so design auto layout can be verified against the DOM one-to-one, with React, Vue and Svelte parity proven by a shared contract. Public imports, usage guidance, accessibility requirements, and framework references.",
+      "kind": "family",
+      "path": "/docs/components/stack/",
+      "title": "Stack",
+      "family": "stack",
       "renderer": "component-docs"
     },
     {

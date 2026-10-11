@@ -221,6 +221,31 @@ export type { SpacerProps, SpacingProps } from "./components/spacing"
 export { Spacings } from "@marwes-ui/core"
 export type { SpacingSize } from "@marwes-ui/core"
 
+/* Stack */
+export { Stack, StackItem } from "./components/stack"
+export type { StackItemProps, StackProps } from "./components/stack"
+export {
+  stackAlignItemsValues,
+  stackAsValues,
+  stackDirections,
+  stackItemAsValues,
+  stackJustifyContentValues,
+  stackSizings,
+  stackWraps,
+} from "@marwes-ui/core"
+export type {
+  StackAlignItems,
+  StackAs,
+  StackDirection,
+  StackItemAs,
+  StackItemOptions,
+  StackItemSizingOptions,
+  StackJustifyContent,
+  StackOptions,
+  StackSizing,
+  StackWrap,
+} from "@marwes-ui/core"
+
 /* Heading */
 // `createHeadingComponent` is intentionally NOT exported — it's an internal
 // factory used by H1/H2/H3, type-constrained to levels 1-3, so consumers

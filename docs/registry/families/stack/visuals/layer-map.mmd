@@ -1,0 +1,30 @@
+flowchart LR
+  Figma["No Figma provenance\ncode-owned family"]
+  Spec["docs/reference/spec.md\nREQ-STACK-001"]
+  Core["@marwes-ui/core\nstack recipe + stack-item recipe + value sets"]
+  Tokens["preset tokens\nfirstEdition tokens.css --mw-spacing-*"]
+  Presets["preset CSS\nstack.css"]
+  React["@marwes-ui/react\nStack + StackItem"]
+  Vue["@marwes-ui/vue\nStack + StackItem"]
+  Svelte["@marwes-ui/svelte\nStack + StackItem"]
+  Contract["tests/contracts/stack.contract.ts"]
+  Stories["Storybook React + Vue + Svelte"]
+  Registry["docs/registry/families/stack"]
+
+  Figma --> Registry
+  Spec --> Core
+  Tokens --> Core
+  Core --> Presets
+  Tokens --> Presets
+  Core --> React
+  Core --> Vue
+  Core --> Svelte
+  Contract --> React
+  Contract --> Vue
+  Contract --> Svelte
+  React --> Stories
+  Vue --> Stories
+  Svelte --> Stories
+  Spec --> Registry
+  Core --> Registry
+  Stories --> Registry

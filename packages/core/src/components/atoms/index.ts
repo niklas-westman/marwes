@@ -66,6 +66,7 @@ export * from "./paragraph"
 export * from "./text"
 export * from "./tab"
 export * from "./spacing"
+export * from "./stack"
 
 export type { ButtonOptions, ButtonRenderKit } from "./button"
 export type { CheckboxProps, CheckboxRenderKit } from "./checkbox"

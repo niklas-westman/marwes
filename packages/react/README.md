@@ -350,6 +350,10 @@ Generated from the public root export of `@marwes-ui/react`. Do not edit this in
 
 - `ButtonSpinner`, `EmptyStateSpinner`, `Spinner`
 
+### Stack
+
+- `Stack`, `StackItem`
+
 ### Stat Tile
 
 - `StatTile`

@@ -46,6 +46,7 @@ import { runSliderContract } from "../../../../tests/contracts/slider.contract"
 import { runSpacingContract } from "../../../../tests/contracts/spacing.contract"
 import { runSpinnerVariantsContract } from "../../../../tests/contracts/spinner-variants.contract"
 import { runSpinnerContract } from "../../../../tests/contracts/spinner.contract"
+import { runStackContract } from "../../../../tests/contracts/stack.contract"
 import { runStatTileContract } from "../../../../tests/contracts/stat-tile.contract"
 import { runSwitchContract } from "../../../../tests/contracts/switch.contract"
 import { runTabContract } from "../../../../tests/contracts/tab.contract"
@@ -113,6 +114,8 @@ import Spacing from "../lib/components/spacing/Spacing.svelte"
 import ButtonSpinner from "../lib/components/spinner/ButtonSpinner.svelte"
 import EmptyStateSpinner from "../lib/components/spinner/EmptyStateSpinner.svelte"
 import Spinner from "../lib/components/spinner/Spinner.svelte"
+import Stack from "../lib/components/stack/Stack.svelte"
+import StackItem from "../lib/components/stack/StackItem.svelte"
 import StatTile from "../lib/components/stat-tile/StatTile.svelte"
 import Switch from "../lib/components/switch/Switch.svelte"
 import Tab from "../lib/components/tab/Tab.svelte"
@@ -125,6 +128,7 @@ import WarningToast from "../lib/components/toast/WarningToast.svelte"
 import Tooltip from "../lib/components/tooltip/Tooltip.svelte"
 import TooltipGroup from "../lib/components/tooltip/TooltipGroup.svelte"
 import ProviderBehaviorFixture from "./provider-behavior-fixture.svelte"
+import StackFixture from "./stack-fixture.svelte"
 import AccordionFieldContractFixture from "./type-fixtures/AccordionFieldContractFixture.svelte"
 import BadgeGroupContractFixture from "./type-fixtures/BadgeGroupContractFixture.svelte"
 import CheckboxFieldContractFixture from "./type-fixtures/CheckboxFieldContractFixture.svelte"
@@ -1337,6 +1341,44 @@ runSpacingContract("svelte", {
   },
   getSpacingElement() {
     return document.querySelector("[data-component='spacing']")
+  },
+})
+
+function toSvelteStyle(style: Record<string, string> | undefined): string | undefined {
+  if (!style) return undefined
+  return Object.entries(style)
+    .map(([property, value]) => `${property}: ${value}`)
+    .join("; ")
+}
+
+runStackContract("svelte", {
+  renderStack({ options = {}, attributes = {}, style, children }) {
+    const serialisedStyle = toSvelteStyle(style)
+    render(Stack, {
+      props: {
+        ...options,
+        ...attributes,
+        ...(serialisedStyle ? { style: serialisedStyle } : {}),
+        ...(children !== undefined
+          ? { children: createRawSnippet(() => ({ render: () => `<span>${children}</span>` })) }
+          : {}),
+      },
+    })
+  },
+  renderStackItem({ options = {}, attributes = {} }) {
+    render(StackItem, { props: { ...options, ...attributes } })
+  },
+  renderList() {
+    render(StackFixture, { props: { mode: "list" } })
+  },
+  renderNested(sizing) {
+    render(StackFixture, { props: { mode: "nested", ...sizing } })
+  },
+  getStack() {
+    return document.querySelector('[data-component="stack"]') as HTMLElement
+  },
+  getStackItem() {
+    return document.querySelector('[data-component="stack-item"]') as HTMLElement
   },
 })
 

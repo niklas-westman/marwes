@@ -248,6 +248,14 @@
       "searchTerms": "spinner spinner family-local loading-indicator family with a core spinner component, adapter-owned context wrappers, and button-loading integration built on the same component contract. buttonspinner emptystatespinner spinner buttonspinner emptystatespinner spinner buttonspinner emptystatespinner spinner button spinner empty state spinner spinner button spinner empty state spinner spinner button spinner empty state spinner spinner react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte the ui needs an indeterminate loading indicator for inline button loading, centered empty states, or standalone async feedback. the product flow already matches buttonspinner or emptystatespinner and benefits from the wrapper defaults for size, visual treatment, and local metadata. the team wants react, vue, and svelte spinner behavior to stay aligned through one core svg recipe, one preset css contract, and shared adapter contracts."
     },
     {
+      "family": "stack",
+      "displayName": "Stack",
+      "summary": "Code-owned layout family with one flex container (Stack) and one declared child (StackItem) whose gap and padding accept only spacing tokens, emitting every resolved layout value as data attributes so design auto layout can be verified against the DOM one-to-one, with React, Vue and Svelte parity proven by a shared contract.",
+      "recommended": "Stack",
+      "alsoAvailable": ["StackItem"],
+      "searchTerms": "stack stack code-owned layout family with one flex container (stack) and one declared child (stackitem) whose gap and padding accept only spacing tokens, emitting every resolved layout value as data attributes so design auto layout can be verified against the dom one-to-one, with react, vue and svelte parity proven by a shared contract. stack stackitem stack stackitem stack stackitem stack stack item stack stack item stack stack item react vue svelte @marwes-ui/react @marwes-ui/vue @marwes-ui/svelte a page or section needs a flex layout whose direction, gap, padding, alignment, justification and wrap should match a design auto-layout board value for value. children need declared horizontal or vertical sizing (fix, hug or fill) that a verifier can compare with design layout-child sizing. the layout container also carries structure, such as a landmark or a list, through `as` (section, nav, header, footer, main, aside, ul, ol)."
+    },
+    {
       "family": "stat-tile",
       "displayName": "Stat Tile",
       "summary": "Compact KPI tile synced from the V2 Stat Tile Figma component, with tone treatments, optional trend metadata, and shared React/Vue adapter contracts.",

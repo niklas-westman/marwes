@@ -30,6 +30,7 @@ Detailed audit files remain evidence/history. Use this file to quickly see wheth
 | Radio | Complete / manual-review boundary | No | group announcement and validation timing | [audit](./radio-family-accessibility.md) |
 | Slider | Complete / follow-up queued | No | pointer/keyboard behavior across devices | [audit](./slider-family-accessibility.md) |
 | Spacing | Complete / manual-review boundary | No | purely layout-oriented; app composition still matters | [audit](./spacing-family-accessibility.md) |
+| Stack | In progress | No | landmark naming via `as`, ul/ol need li items; owner sign-off pending | [audit](./stack-family-accessibility.md) |
 | Spinner | Complete / manual-review boundary | No | loading announcement timing and interruption quality | [audit](./spinner-family-accessibility.md) |
 | Switch | Complete / follow-up queued | No | exact Vue dual-support callback semantics | [audit](./switch-family-accessibility.md) |
 | Tab | Complete / follow-up queued | No | cross-framework keyboard parity and contract coverage | [audit](./tab-family-accessibility.md) |

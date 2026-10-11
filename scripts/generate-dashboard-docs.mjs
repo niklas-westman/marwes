@@ -60,6 +60,7 @@ const canonicalExports = {
   slider: "SliderField",
   spacing: "Spacer",
   spinner: "Spinner",
+  stack: "Stack",
   "stat-tile": "StatTile",
   switch: "SwitchField",
   tab: "NavigationTabs",
@@ -96,6 +97,7 @@ const fixtureNamesByFamily = {
   slider: "slider",
   spacing: "spacing",
   spinner: "spinner",
+  stack: "stack",
   "stat-tile": "stat-tile",
   switch: "switch",
   tab: "tab",
@@ -297,6 +299,18 @@ const spacingRecommendedComponents = [
   },
 ]
 
+const stackRecommendedComponents = [
+  {
+    name: "Stack",
+    description:
+      "Flex layout container with token-only gap and padding that mirrors design auto layout",
+  },
+  {
+    name: "StackItem",
+    description: "Declared Stack child carrying fix, hug, or fill sizing on each axis",
+  },
+]
+
 const statTileRecommendedComponents = [
   {
     name: "StatTile",
@@ -481,6 +495,11 @@ const componentPagePresentation = {
     recommendedComponents: spacingRecommendedComponents,
     recommendationDescription:
       "Use Spacing tokens instead of hardcoded margins to keep vertical rhythm consistent.",
+  },
+  stack: {
+    recommendedComponents: stackRecommendedComponents,
+    recommendationDescription:
+      "Express each design auto-layout board as one Stack and each layout child as a StackItem or nested Stack.",
   },
   "stat-tile": {
     recommendedComponents: statTileRecommendedComponents,
@@ -770,6 +789,10 @@ function getAccessibility(family) {
       "Use Spacing tokens instead of hardcoded margins so vertical rhythm stays consistent and decorative.",
       "Verify Spacing never becomes the only separation between two genuinely distinct regions; use real structure instead.",
     ],
+    stack: [
+      "Keep Stack presentational; it adds no role, so use as only for real structure such as a landmark or a list.",
+      "Give each landmark rendered through as an aria-label when a page has more than one of the same kind, and use StackItem as li inside a ul or ol Stack.",
+    ],
     "stat-tile": [
       "Keep the trend direction and tone semantically accurate; do not use tone as decoration alone.",
       "Verify the auto-built trend announcement reads correctly to screen readers.",
@@ -899,6 +922,7 @@ function buildAccessibilityRequirements(family) {
     icon: ["Decorative vs informative", "Icon-only information review", "Icon-only control naming"],
     paragraph: ["Paragraph vs Text usage", "Readability review"],
     spacing: ["Token-driven rhythm", "Real structure over spacing"],
+    stack: ["Presentational container", "Landmark and list structure"],
     "stat-tile": ["Accurate trend semantics", "Trend announcement review"],
     text: ["Intentional heading depth", "Visual vs semantic separation"],
     badge: ["Truthful label", "Screen-reader review"],

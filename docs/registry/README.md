@@ -124,6 +124,7 @@ Human-readable registry pages currently exist for:
 - [Slider registry](./families/slider/README.md)
 - [Spacing registry](./families/spacing/README.md)
 - [Spinner registry](./families/spinner/README.md)
+- [Stack registry](./families/stack/README.md)
 - [StatTile registry](./families/stat-tile/README.md)
 - [Switch registry](./families/switch/README.md)
 - [Tab registry](./families/tab/README.md)

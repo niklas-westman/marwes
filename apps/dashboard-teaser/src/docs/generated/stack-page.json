@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "family": "stack",
+  "title": "Stack",
+  "summary": "Code-owned layout family with one flex container (Stack) and one declared child (StackItem) whose gap and padding accept only spacing tokens, emitting every resolved layout value as data attributes so design auto layout can be verified against the DOM one-to-one, with React, Vue and Svelte parity proven by a shared contract.",
+  "useWhen": [
+    "A page or section needs a flex layout whose direction, gap, padding, alignment, justification and wrap should match a design auto-layout board value for value.",
+    "Children need declared horizontal or vertical sizing (fix, hug or fill) that a verifier can compare with design layout-child sizing.",
+    "The layout container also carries structure, such as a landmark or a list, through `as` (section, nav, header, footer, main, aside, ul, ol)."
+  ],
+  "avoidWhen": [
+    "The layout needs a spacing value that is not a Spacings token (for example sp-6 or an arbitrary px); that is a token decision, not a Stack escape hatch.",
+    "The layout needs reverse directions, justify stretch, alignSelf, alignContent, min/max sizes, margins or absolute positioning, which are deferred.",
+    "A two-dimensional grid is the honest structure, or a single decorative vertical gap is all that is needed (use Spacing)."
+  ],
+  "recommendationDescription": "Express each design auto-layout board as one Stack and each layout child as a StackItem or nested Stack.",
+  "recommendedComponents": [
+    {
+      "name": "Stack",
+      "description": "Flex layout container with token-only gap and padding that mirrors design auto layout"
+    },
+    {
+      "name": "StackItem",
+      "description": "Declared Stack child carrying fix, hug, or fill sizing on each axis"
+    }
+  ],
+  "frameworks": [
+    {
+      "framework": "react",
+      "packageName": "@marwes-ui/react",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Stack"
+        },
+        {
+          "kind": "type",
+          "name": "StackAlignItems"
+        },
+        {
+          "kind": "helper",
+          "name": "stackAlignItemsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackAs"
+        },
+        {
+          "kind": "helper",
+          "name": "stackAsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackDirection"
+        },
+        {
+          "kind": "helper",
+          "name": "stackDirections"
+        },
+        {
+          "kind": "component",
+          "name": "StackItem"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemAs"
+        },
+        {
+          "kind": "helper",
+          "name": "stackItemAsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemProps"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemSizingOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackJustifyContent"
+        },
+        {
+          "kind": "helper",
+          "name": "stackJustifyContentValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackProps"
+        },
+        {
+          "kind": "type",
+          "name": "StackSizing"
+        },
+        {
+          "kind": "helper",
+          "name": "stackSizings"
+        },
+        {
+          "kind": "type",
+          "name": "StackWrap"
+        },
+        {
+          "kind": "helper",
+          "name": "stackWraps"
+        }
+      ],
+      "example": "import { Paragraph, PrimaryButton, Stack, StackItem } from \"@marwes-ui/react\"\n\nexport function Example() {\n  return (\n    <Stack direction=\"row\" gap=\"sp-16\" padding=\"sp-24\" alignItems=\"center\">\n      <StackItem horizontalSizing=\"fill\">\n        <Paragraph>Grows to fill the row</Paragraph>\n      </StackItem>\n      <StackItem>\n        <PrimaryButton>Save</PrimaryButton>\n      </StackItem>\n    </Stack>\n  )\n}"
+    },
+    {
+      "framework": "vue",
+      "packageName": "@marwes-ui/vue",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Stack"
+        },
+        {
+          "kind": "type",
+          "name": "StackAlignItems"
+        },
+        {
+          "kind": "helper",
+          "name": "stackAlignItemsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackAs"
+        },
+        {
+          "kind": "helper",
+          "name": "stackAsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackDirection"
+        },
+        {
+          "kind": "helper",
+          "name": "stackDirections"
+        },
+        {
+          "kind": "component",
+          "name": "StackItem"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemAs"
+        },
+        {
+          "kind": "helper",
+          "name": "stackItemAsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemProps"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemSizingOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackJustifyContent"
+        },
+        {
+          "kind": "helper",
+          "name": "stackJustifyContentValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackProps"
+        },
+        {
+          "kind": "type",
+          "name": "StackSizing"
+        },
+        {
+          "kind": "helper",
+          "name": "stackSizings"
+        },
+        {
+          "kind": "type",
+          "name": "StackWrap"
+        },
+        {
+          "kind": "helper",
+          "name": "stackWraps"
+        }
+      ],
+      "example": "<script setup lang=\"ts\">\nimport { Paragraph, PrimaryButton, Stack, StackItem } from \"@marwes-ui/vue\"\n</script>\n\n<template>\n  <Stack direction=\"row\" gap=\"sp-16\" padding=\"sp-24\" align-items=\"center\">\n    <StackItem horizontal-sizing=\"fill\">\n      <Paragraph>Grows to fill the row</Paragraph>\n    </StackItem>\n    <StackItem>\n      <PrimaryButton>Save</PrimaryButton>\n    </StackItem>\n  </Stack>\n</template>"
+    },
+    {
+      "framework": "svelte",
+      "packageName": "@marwes-ui/svelte",
+      "exports": [
+        {
+          "kind": "component",
+          "name": "Stack"
+        },
+        {
+          "kind": "type",
+          "name": "StackAlignItems"
+        },
+        {
+          "kind": "helper",
+          "name": "stackAlignItemsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackAs"
+        },
+        {
+          "kind": "helper",
+          "name": "stackAsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackDirection"
+        },
+        {
+          "kind": "helper",
+          "name": "stackDirections"
+        },
+        {
+          "kind": "component",
+          "name": "StackItem"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemAs"
+        },
+        {
+          "kind": "helper",
+          "name": "stackItemAsValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemProps"
+        },
+        {
+          "kind": "type",
+          "name": "StackItemSizingOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackJustifyContent"
+        },
+        {
+          "kind": "helper",
+          "name": "stackJustifyContentValues"
+        },
+        {
+          "kind": "type",
+          "name": "StackOptions"
+        },
+        {
+          "kind": "type",
+          "name": "StackProps"
+        },
+        {
+          "kind": "type",
+          "name": "StackSizing"
+        },
+        {
+          "kind": "helper",
+          "name": "stackSizings"
+        },
+        {
+          "kind": "type",
+          "name": "StackWrap"
+        },
+        {
+          "kind": "helper",
+          "name": "stackWraps"
+        }
+      ],
+      "example": "<script lang=\"ts\">\n  import { Paragraph, PrimaryButton, Stack, StackItem } from \"@marwes-ui/svelte\"\n</script>\n\n<Stack direction=\"row\" gap=\"sp-16\" padding=\"sp-24\" alignItems=\"center\">\n  <StackItem horizontalSizing=\"fill\">\n    <Paragraph>Grows to fill the row</Paragraph>\n  </StackItem>\n  <StackItem>\n    <PrimaryButton>Save</PrimaryButton>\n  </StackItem>\n</Stack>"
+    }
+  ],
+  "accessibility": [
+    {
+      "description": "Keep Stack presentational; it adds no role, so use as only for real structure such as a landmark or a list.",
+      "title": "Presentational container"
+    },
+    {
+      "description": "Give each landmark rendered through as an aria-label when a page has more than one of the same kind, and use StackItem as li inside a ul or ol Stack.",
+      "title": "Landmark and list structure"
+    },
+    {
+      "description": "Landmark naming when `as` renders nav, aside, section, header, footer or main: a page with more than one landmark of the same kind needs a consumer aria-label.",
+      "title": "Manual review boundary"
+    },
+    {
+      "description": "List structure when `as` is ul or ol: every direct child must be StackItem as=\"li\".",
+      "title": "Manual review 2"
+    },
+    {
+      "description": "Layout verification against computed CSS: data-* values are claims and a consumer style or className can diverge from them.",
+      "title": "Manual review 3"
+    },
+    {
+      "description": "Owner sign-off on the in-progress family audit before auditStatus moves on.",
+      "title": "Manual review 4"
+    }
+  ],
+  "sections": [
+    {
+      "id": "what-this-family-solves",
+      "label": "What this family solves"
+    },
+    {
+      "id": "recommended-components",
+      "label": "Recommended components"
+    },
+    {
+      "id": "public-imports",
+      "label": "Public imports"
+    },
+    {
+      "id": "examples",
+      "label": "Examples"
+    },
+    {
+      "id": "accessibility",
+      "label": "Accessibility"
+    },
+    {
+      "id": "theming",
+      "label": "Theming"
+    },
+    {
+      "id": "resources",
+      "label": "Resources"
+    }
+  ],
+  "theming": "Stack uses Marwes preset CSS and theme variables. Customize it through the theme passed to MarwesProvider; do not add a second component stylesheet.",
+  "resources": [
+    {
+      "title": "React Storybook",
+      "description": "Explore React variants",
+      "href": "https://storybook-react.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Vue Storybook",
+      "description": "Explore Vue variants",
+      "href": "https://storybook-vue.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "Svelte Storybook",
+      "description": "Explore Svelte variants",
+      "href": "https://storybook-svelte.marwes.io/latest/",
+      "kind": "storybook"
+    },
+    {
+      "title": "React npm package",
+      "description": "Install @marwes-ui/react",
+      "href": "https://www.npmjs.com/package/@marwes-ui/react",
+      "kind": "npm"
+    },
+    {
+      "title": "Vue npm package",
+      "description": "Install @marwes-ui/vue",
+      "href": "https://www.npmjs.com/package/@marwes-ui/vue",
+      "kind": "npm"
+    },
+    {
+      "title": "Svelte npm package",
+      "description": "Install @marwes-ui/svelte",
+      "href": "https://www.npmjs.com/package/@marwes-ui/svelte",
+      "kind": "npm"
+    },
+    {
+      "title": "Source and registry evidence",
+      "description": "Review the canonical family sources",
+      "href": "https://github.com/niklas-westman/marwes/blob/main/docs/registry/families/stack/README.md",
+      "kind": "source"
+    },
+    {
+      "title": "Public API inventory",
+      "description": "Inspect the complete machine-readable API",
+      "href": "/ai/v1/public-api.json",
+      "kind": "source"
+    },
+    {
+      "title": "Report an issue",
+      "description": "Get help or suggest a change",
+      "href": "https://github.com/niklas-westman/marwes/issues/new",
+      "kind": "issue"
+    }
+  ]
+}

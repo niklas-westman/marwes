@@ -142,6 +142,18 @@ Keep this mapping in PR description (or add temporarily to this file for major w
 - DEC-006: Should rich text formatting extend `Textarea` / `TextareaField` or ship as a separate input-family component pair?
   - Status: Resolved (see Decision Log)
   - Lean: Separate `RichText` + `RichTextField`
+- DEC-012: Should Marwes add an `sp-6` spacing token? Design Spacings bind `sp-6`, but `tokens.css` has no `--mw-spacing-sp-6` (code scale 0, 2, 4, 8, 12, 16, 24, 32 … 120).
+  - Status: Open
+  - Lean: Treat as a separate token decision; Stack never maps `sp-6` to a nearby token silently
+- DEC-013: Should Stack support `row-reverse` and `column-reverse`?
+  - Status: Open
+  - Lean: Defer until Penpot's rendering of justify start/end on reverse boards is verified against CSS `flex-start` vs `start` and pinned in the preset CSS contract
+- DEC-014: Should Stack support layout-child `alignSelf`, min/max sizes, margins, absolute positioning or board `alignContent`?
+  - Status: Open
+  - Lean: Defer until a consumer page needs one
+- DEC-015: Should Stack sizing emit `fix` or `fixed`?
+  - Status: Open
+  - Lean: Keep `fix | hug | fill`; consumers that normalise to `fixed` map it to `fix`
 
 ## 10. Decision Log
 Use this format when resolving an open decision:
@@ -1312,3 +1324,111 @@ Use this format when resolving an open decision:
   - `apps/storybook-react/src/stories/banner/`
   - `apps/storybook-vue/src/stories/banner/`
   - `apps/storybook-svelte/src/stories/banner/`
+
+### REQ-STACK-001: Stack layout family
+
+- **Status**: implemented (family audit in progress)
+- **Problem**: Pages need one layout primitive whose declared values map one-to-one to design auto layout (Penpot board flex and layout-child sizing) so a design-governance verifier can compare design and rendered DOM by declared values.
+- **Scope**:
+  - `Stack` flex container: `direction` (`row` | `column`), `gap` / `rowGap` / `columnGap`, `padding` / `paddingX` / `paddingY` / per-side padding, `alignItems`, `justifyContent`, `wrap`, `as`, and its own `horizontalSizing` / `verticalSizing` when nested
+  - `StackItem` declared child with `horizontalSizing` / `verticalSizing` (`fix` | `hug` | `fill`) and `as` (`div` | `li`)
+  - Gap and padding accept only `Spacings` tokens and resolve to `--mw-stack-*` vars that are exactly `var(--mw-spacing-<token>)`
+  - Every resolved value, defaults included, is emitted as a `data-*` attribute
+  - React, Vue and Svelte adapters with a shared contract
+- **Non-goals**:
+  - `alignItems` `stretch`: Penpot stretch is expressed as cross-axis `fill` on each child (DEC-022)
+  - Reverse directions, justify `stretch`, `alignSelf`, `alignContent`, min/max sizes, margins and absolute positioning (DEC-013, DEC-014)
+  - Width or height props, a scale multiplier, calc or arbitrary px values
+  - Figma provenance, reflection contracts or baselines (code-owned family, spacing precedent)
+  - Changes to any existing component, prop, type, preset CSS or shared helper
+- **Acceptance criteria**:
+  - [x] Defaults resolve to column / start / start / nowrap / hug / hug and `sp-0`
+  - [x] `alignItems` is `start` | `center` | `end`; `stretch` throws, and a hug or fix child always fits its content on the cross axis (DEC-022)
+  - [x] `rowGap ?? gap`, `columnGap ?? gap`, and `side ?? axis ?? padding` precedence
+  - [x] Unknown tokens, enum values and `as` throw a `TypeError` in all three adapters
+  - [x] Preset CSS maps every declared value, scopes every selector to `.mw-stack` / `.mw-stack-item`, and contains no px
+  - [x] Kit vars are merged after consumer style in every adapter, so `--mw-stack-*` cannot be overridden
+  - [x] Consumer attributes pass through; `data-component` stays recipe-owned
+  - [x] Storybook stories and introductions in React, Vue and Svelte document the Penpot mapping and verifier rules
+- **Validation**:
+  - Unit: `packages/core/test/recipes/stack.test.ts`, `packages/presets/test/stack-css-contract.test.ts`
+  - Integration: `tests/contracts/stack.contract.ts` enrolled by React, Vue and Svelte
+  - Manual: computed-style checks of the ChildSizing and Nested stories in each Storybook
+- **Files expected to change**:
+  - `packages/core/src/components/atoms/stack/*`
+  - `packages/presets/src/firstEdition/stack.css`, `styles.css`
+  - `packages/react/src/components/stack/*`, `packages/vue/src/components/stack/*`, `packages/svelte/src/lib/components/stack/*`
+  - `tests/contracts/stack.contract.ts`
+  - `apps/storybook-{react,vue,svelte}/src/stories/stack/*`
+  - `docs/registry/families/stack/*`, `docs/audits/stack-family-accessibility.md`
+
+### DEC-016 - Stack value guard throws a TypeError
+- Date: 2026-10-11
+- Decision:
+  - `createStackRecipe` and `createStackItemRecipe` throw `TypeError("Stack <prop> must be one of <allowed>, got <value>")` for a gap or padding outside `Spacings`, an enum value outside its set, or an unknown `as`.
+- Rationale:
+  - Layout must stay on the shared token vocabulary; silently falling back would hide a design mismatch. `createIconRecipe` already throws for an unknown icon (`packages/core/src/components/atoms/icon/icon-recipe.ts`).
+  - In production React unmounts to the nearest error boundary, Svelte aborts the mount, and Vue routes the error through `handleError` and logs it.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/stack/stack.values.ts`
+  - `tests/contracts/stack.contract.ts`
+
+### DEC-017 - Stack kit vars are merged last
+- Date: 2026-10-11
+- Decision:
+  - Every adapter merges the `--mw-stack-*` vars after the consumer style (React `{ ...style, ...kit.vars }`, Vue `[attrs.style, kit.vars]`, Svelte `mergeStyle(style, cssVarsToStyle(kit.vars))`).
+- Rationale:
+  - The token-backed vars must not be overridable. Other style keys still pass through, and divergence is caught by the verifier comparing `data-*` with computed CSS. Pagination keeps its consumer-wins order; the shared Vue `mergeStyles` helper is unchanged.
+- Impacted docs/files:
+  - `packages/{react,vue,svelte}` stack adapters
+
+### DEC-018 - Stack is code-owned and family-local
+- Date: 2026-10-11
+- Decision:
+  - Stack has no Figma provenance, is not part of the wave-1 semantic registry, and has no reflection contract or baselines (spacing precedent).
+- Rationale:
+  - The family is a code-owned layout capability; claiming design provenance or semantic-registry coverage would overstate its governance.
+- Impacted docs/files:
+  - `docs/registry/families/stack/*`
+  - `scripts/component-registry-sources.ts`
+
+### DEC-019 - Stack alignItems defaults to start
+- Date: 2026-10-11
+- Decision:
+  - `alignItems` defaults to `start`, not `stretch`.
+- Rationale:
+  - Matches a new Penpot board's default and keeps Marwes components at their token-driven size.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/stack/stack.recipe.ts`
+
+### DEC-020 - Stack always emits sizing attributes
+- Date: 2026-10-11
+- Decision:
+  - Stack and StackItem always emit `data-horizontal-sizing` and `data-vertical-sizing` (default `hug`). On an element whose parent is not a Stack these attributes have no effect and are ignored by the verifier.
+- Rationale:
+  - Every nested board stays unambiguous for a verifier.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/stack/*`
+  - `packages/presets/src/firstEdition/stack.css`
+
+### DEC-021 - Stack does not render as form
+- Date: 2026-10-11
+- Decision:
+  - `form` is not an allowed `as` value for Stack.
+- Rationale:
+  - A form carries submission behaviour and semantics beyond layout; consumers wrap a Stack in their own form element.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/stack/stack.values.ts`
+
+### DEC-022 - Stack alignItems has no stretch; Penpot stretch is child fill
+- Date: 2026-10-11
+- Decision:
+  - `StackAlignItems` is `start` | `center` | `end`. A Penpot board with `alignItems` stretch is expressed as cross-axis `fill` on each child (`verticalSizing` in a row, `horizontalSizing` in a column). The parent keeps `start` or another explicit value.
+- Rationale:
+  - Hug and fix children get `fit-content` on the cross axis, and CSS stretch only applies to an auto cross size. A parent `align-items: stretch` therefore changed nothing for declared children, so `data-align-items="stretch"` claimed a layout the page never showed.
+  - Letting a stretch parent override hug (the alternative) would make a child's `data-*-sizing="hug"` claim false. Putting stretching on the child keeps one declared value per rendered size.
+  - A Penpot child under a stretch board that is not fill is a design mismatch for the verifier, never silently accepted.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/stack/stack.types.ts`, `stack.values.ts`
+  - `packages/presets/src/firstEdition/stack.css`
+  - `docs/registry/families/stack/README.md`, Storybook introductions and Alignment stories

@@ -6,7 +6,7 @@
 
 - Import and use real Marwes components from `@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte` for the selected framework.
 - Do not invent `mw-*` replacement components or custom elements. Use the public exports documented by the matching Marwes adapter.
-- The complete registry documents 31 component families. The canonical cross-family semantic subset contains 9: avatar, badge, banner, breadcrumb, button, context-menu, dialog, drawer, toast.
+- The complete registry documents 32 component families. The canonical cross-family semantic subset contains 9: avatar, badge, banner, breadcrumb, button, context-menu, dialog, drawer, toast.
 - Use the complete component registry for family discovery and the canonical artifacts for shared semantic and purpose contracts.
 
 ## Package documentation

@@ -208,6 +208,13 @@ export const storybookCompanionConfig: StorybookCompanionConfig = {
     spacing: {
       canonicalComponentStems: ["spacing"],
     },
+    stack: {
+      canonicalComponentStems: ["stack", "stack-item"],
+      titleByStem: {
+        stack: "Stack/Atom",
+        "stack-item": "Stack/Item",
+      },
+    },
     // Temporarily hidden from all Storybooks until Datepicker is ready for review.
     "date-picker": {
       excluded: true,

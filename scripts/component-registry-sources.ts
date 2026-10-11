@@ -1066,6 +1066,52 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       },
     },
   }),
+  stack: createRegistryFamilySource({
+    family: "stack",
+    contractPaths: ["tests/contracts/stack.contract.ts"],
+    pathOverrides: {
+      presetPaths: [
+        "packages/presets/src/firstEdition/stack.css",
+        "packages/presets/src/firstEdition/tokens.css",
+      ],
+    },
+    semantics: {
+      coverageLevel: "family-local",
+      dataComponent: "stack",
+      canonicalAttributes: [],
+      allowedPurposes: [],
+      purposeAttributes: {},
+      sourceOfTruthPaths: [
+        "packages/core/src/components/atoms/stack/stack.recipe.ts",
+        "packages/core/src/components/atoms/stack/stack-item.recipe.ts",
+        "packages/core/src/components/atoms/stack/stack.types.ts",
+        "packages/core/src/components/atoms/stack/stack.values.ts",
+        "packages/presets/src/firstEdition/stack.css",
+      ],
+      notes: [
+        "Stack is not part of the wave-1 canonical semantic registry in @marwes-ui/core.",
+        "Stack is code-owned with no Figma provenance: it emits data-component=stack or stack-item plus every resolved layout value as data-* attributes so a verifier can compare design auto layout with the rendered DOM one-to-one.",
+      ],
+    },
+    figma: {
+      componentJsons: [],
+      curatedReferences: [
+        ".figma/INDEX.md",
+        ".figma/NODE_REFERENCE.md",
+        ".figma/nodes.json",
+        ".figma/marwes/components/_index.json",
+        ".figma/marwes/manifest.json",
+        ".figma/marwes/README.md",
+      ],
+      pageReferences: [],
+      nodeReferences: {},
+      figmaTokens: [],
+      figmaStates: {
+        baseVariants: [],
+        interactionStates: [],
+      },
+    },
+  }),
   tab: createRegistryFamilySource({
     family: "tab",
     contractPaths: ["tests/contracts/tab.contract.ts"],
