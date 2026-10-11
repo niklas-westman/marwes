@@ -23,6 +23,10 @@
   flex-direction: column;
 }
 
+/*
+ * There is no stretch value: cross-axis stretching is declared on each child as fill, so
+ * a hug or fix child never renders at a size its data-*-sizing does not claim.
+ */
 .mw-stack[data-align-items="start"] {
   align-items: flex-start;
 }
@@ -33,10 +37,6 @@
 
 .mw-stack[data-align-items="end"] {
   align-items: flex-end;
-}
-
-.mw-stack[data-align-items="stretch"] {
-  align-items: stretch;
 }
 
 .mw-stack[data-justify-content="start"] {

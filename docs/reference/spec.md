@@ -1336,12 +1336,14 @@ Use this format when resolving an open decision:
   - Every resolved value, defaults included, is emitted as a `data-*` attribute
   - React, Vue and Svelte adapters with a shared contract
 - **Non-goals**:
+  - `alignItems` `stretch`: Penpot stretch is expressed as cross-axis `fill` on each child (DEC-022)
   - Reverse directions, justify `stretch`, `alignSelf`, `alignContent`, min/max sizes, margins and absolute positioning (DEC-013, DEC-014)
   - Width or height props, a scale multiplier, calc or arbitrary px values
   - Figma provenance, reflection contracts or baselines (code-owned family, spacing precedent)
   - Changes to any existing component, prop, type, preset CSS or shared helper
 - **Acceptance criteria**:
   - [x] Defaults resolve to column / start / start / nowrap / hug / hug and `sp-0`
+  - [x] `alignItems` is `start` | `center` | `end`; `stretch` throws, and a hug or fix child always fits its content on the cross axis (DEC-022)
   - [x] `rowGap ?? gap`, `columnGap ?? gap`, and `side ?? axis ?? padding` precedence
   - [x] Unknown tokens, enum values and `as` throw a `TypeError` in all three adapters
   - [x] Preset CSS maps every declared value, scopes every selector to `.mw-stack` / `.mw-stack-item`, and contains no px
@@ -1417,3 +1419,16 @@ Use this format when resolving an open decision:
   - A form carries submission behaviour and semantics beyond layout; consumers wrap a Stack in their own form element.
 - Impacted docs/files:
   - `packages/core/src/components/atoms/stack/stack.values.ts`
+
+### DEC-022 - Stack alignItems has no stretch; Penpot stretch is child fill
+- Date: 2026-10-11
+- Decision:
+  - `StackAlignItems` is `start` | `center` | `end`. A Penpot board with `alignItems` stretch is expressed as cross-axis `fill` on each child (`verticalSizing` in a row, `horizontalSizing` in a column). The parent keeps `start` or another explicit value.
+- Rationale:
+  - Hug and fix children get `fit-content` on the cross axis, and CSS stretch only applies to an auto cross size. A parent `align-items: stretch` therefore changed nothing for declared children, so `data-align-items="stretch"` claimed a layout the page never showed.
+  - Letting a stretch parent override hug (the alternative) would make a child's `data-*-sizing="hug"` claim false. Putting stretching on the child keeps one declared value per rendered size.
+  - A Penpot child under a stretch board that is not fill is a design mismatch for the verifier, never silently accepted.
+- Impacted docs/files:
+  - `packages/core/src/components/atoms/stack/stack.types.ts`, `stack.values.ts`
+  - `packages/presets/src/firstEdition/stack.css`
+  - `docs/registry/families/stack/README.md`, Storybook introductions and Alignment stories

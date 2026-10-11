@@ -62,7 +62,6 @@ const flexStartMapping: Record<string, string> = {
   start: "flex-start",
   center: "center",
   end: "flex-end",
-  stretch: "stretch",
   "space-between": "space-between",
   "space-around": "space-around",
   "space-evenly": "space-evenly",
@@ -138,6 +137,22 @@ describe("firstEdition stack css contract", () => {
       expect(findRule(rules, `${parent} ${child}${hugOrFix(axis.cross)}`)?.body).toBe(
         `align-self: auto; ${axis.crossSize}: fit-content;`,
       )
+    })
+
+    it("has no parent-level stretch, so a hug or fix child always fits its content", () => {
+      expect(findRule(rules, '.mw-stack[data-align-items="stretch"]')).toBeUndefined()
+      const stackRules = rules.filter((rule) =>
+        splitSelectorList(rule.selector).some((selector) => /^\.mw-stack(?![\w-])/.test(selector)),
+      )
+      for (const rule of stackRules) {
+        expect(rule.body).not.toContain("align-items: stretch;")
+      }
+      for (const axis of axes) {
+        const parent = `.mw-stack[data-direction="${axis.direction}"] >`
+        expect(findRule(rules, `${parent} ${child}${hugOrFix(axis.cross)}`)?.body).toContain(
+          `${axis.crossSize}: fit-content;`,
+        )
+      }
     })
 
     it("aligns StackItem content by its declared sizing", () => {

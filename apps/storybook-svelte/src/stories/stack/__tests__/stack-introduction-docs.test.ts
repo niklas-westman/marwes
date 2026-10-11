@@ -17,6 +17,7 @@ describe("Svelte stack introduction docs", () => {
       "Only StackItem or Stack children are governed",
       "`fix` is declared-only",
       "Sizing has no effect outside a Stack parent",
+      "Penpot stretch is child fill",
       "data-* attributes are claims",
       "Token name and rendered px are separate checks",
       "No sp-6",

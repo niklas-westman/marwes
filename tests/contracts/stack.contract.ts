@@ -425,6 +425,12 @@ export function runStackContract(adapterName: string, harness: StackContractHarn
         )
       })
 
+      it("throws a TypeError for alignItems stretch, which is declared per child as fill", async () => {
+        await expectRenderToThrowTypeError(() =>
+          harness.renderStack({ options: { alignItems: "stretch" } as unknown as StackOptions }),
+        )
+      })
+
       it("throws a TypeError for an invalid as", async () => {
         await expectRenderToThrowTypeError(() =>
           harness.renderStack({ options: { as: "script" } as unknown as StackOptions }),

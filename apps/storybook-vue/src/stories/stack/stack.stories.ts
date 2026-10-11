@@ -160,6 +160,9 @@ export const Padding: Story = {
   }),
 }
 
+/**
+ * alignItems has no stretch: cross-axis stretching is child fill sizing (see ChildSizing).
+ */
 export const Alignment: Story = {
   render: () => ({
     components,

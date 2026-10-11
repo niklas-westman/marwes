@@ -194,7 +194,7 @@ Source copy: [`visuals/interaction-map.mmd`](./visuals/interaction-map.mmd)
 | `flex.rowGap` | `rowGap` (or `gap`) | `data-row-gap` | `row-gap: var(--mw-stack-row-gap)` |
 | `flex.columnGap` | `columnGap` (or `gap`) | `data-column-gap` | `column-gap: var(--mw-stack-column-gap)` |
 | `flex.topPadding` … `leftPadding` | `paddingTop` … `paddingLeft` (or `paddingY` / `paddingX` / `padding`) | `data-padding-*` | `padding` from `var(--mw-stack-padding-*)` |
-| `flex.alignItems` | `alignItems` (default `start`) | `data-align-items` | `flex-start` / `center` / `flex-end` / `stretch` |
+| `flex.alignItems` | `alignItems` (default `start`) | `data-align-items` | `flex-start` / `center` / `flex-end`; Penpot stretch is child `fill`, rule (g) |
 | `flex.justifyContent` | `justifyContent` | `data-justify-content` | `flex-start` / `center` / `flex-end` / `space-*` |
 | `flex.wrap` | `wrap` | `data-wrap` | `flex-wrap` |
 | `layoutChild.horizontalSizing` fix / auto / fill | `horizontalSizing` fix / hug / fill | `data-horizontal-sizing` | main axis `flex: 1 1 0` or `0 0 auto`; cross axis `align-self: stretch` or `auto` + `fit-content` |
@@ -218,6 +218,11 @@ Unsupported for now: Penpot `row-reverse`, `column-reverse`, justify `stretch`, 
 - **(e) `fix` is declared-only.** It renders like `hug`; a design fix size that differs from the DOM
   rect beyond tolerance is a design decision, never accepted as hug.
 - **(f) No sp-6.** It has no code token and is never mapped to the nearest token silently.
+- **(g) Penpot stretch is child fill.** `alignItems` has no `stretch`. A Penpot board with
+  `alignItems` stretch is verified as cross-axis `fill` on every child (`verticalSizing` in a row,
+  `horizontalSizing` in a column) with the parent at `start` or another explicit value. A Penpot
+  child that is not fill under a stretch board is a design mismatch, never accepted. This keeps
+  one declared value per rendered size: a hug or fix child never renders stretched (DEC-022).
 
 ## Philosophy
 

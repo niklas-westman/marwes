@@ -53,7 +53,7 @@ Precedence: `rowGap ?? gap`, `columnGap ?? gap`, and each padding side resolves 
 | `flex.rowGap` | `rowGap` (or `gap`) | `data-row-gap` | `row-gap: var(--mw-stack-row-gap)` |
 | `flex.columnGap` | `columnGap` (or `gap`) | `data-column-gap` | `column-gap: var(--mw-stack-column-gap)` |
 | `flex.*Padding` | `paddingTop` / `paddingRight` / `paddingBottom` / `paddingLeft` (or `paddingX`, `paddingY`, `padding`) | `data-padding-*` | `padding` from `var(--mw-stack-padding-*)` |
-| `flex.alignItems` | `alignItems` | `data-align-items` | `align-items: flex-start / center / flex-end / stretch` |
+| `flex.alignItems` | `alignItems` | `data-align-items` | `align-items: flex-start / center / flex-end` (stretch: child `fill`, see below) |
 | `flex.justifyContent` | `justifyContent` | `data-justify-content` | `justify-content: flex-start / center / flex-end / space-*` |
 | `flex.wrap` | `wrap` | `data-wrap` | `flex-wrap` |
 | `layoutChild.horizontalSizing` fix / auto / fill | `horizontalSizing` fix / hug / fill | `data-horizontal-sizing` | main axis `flex`, cross axis `align-self` |
@@ -70,6 +70,11 @@ with `wrap`. Penpot `row-reverse`, `column-reverse` and justify `stretch` are no
 - **`fix` is declared-only.** `fix` renders like `hug`: the size is owned by the child Marwes
   component's own token-driven size. There are no width or height props. A design fix size that
   differs from the rendered rect is a design decision, never accepted as hug.
+- **Penpot stretch is child fill.** `alignItems` has no `stretch`. A Penpot board with
+  `alignItems` stretch is expressed as cross-axis `fill` on each child (`verticalSizing="fill"` in a
+  row, `horizontalSizing="fill"` in a column), and the parent takes the `start` default or another
+  explicit value. A hug or fix child therefore never renders stretched, so every sizing claim
+  matches its rendered size.
 - **Sizing has no effect outside a Stack parent.** Sizing attributes on an element whose parent is
   not a Stack are ignored.
 - **data-* attributes are claims.** A verifier must confirm each `data-*` value against computed

@@ -139,6 +139,9 @@ describe("createStackRecipe", () => {
     expect(() =>
       createStackRecipe({ justifyContent: "stretch" } as unknown as StackOptions),
     ).toThrow(TypeError)
+    expect(() => createStackRecipe({ alignItems: "stretch" } as unknown as StackOptions)).toThrow(
+      "Stack alignItems must be one of start, center, end, got stretch",
+    )
     expect(() => createStackRecipe({ as: "script" } as unknown as StackOptions)).toThrow(TypeError)
     expect(() => createStackRecipe({ as: "form" } as unknown as StackOptions)).toThrow(TypeError)
   })

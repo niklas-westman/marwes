@@ -16,12 +16,7 @@ import type {
 
 export const stackDirections: readonly StackDirection[] = ["row", "column"]
 
-export const stackAlignItemsValues: readonly StackAlignItems[] = [
-  "start",
-  "center",
-  "end",
-  "stretch",
-]
+export const stackAlignItemsValues: readonly StackAlignItems[] = ["start", "center", "end"]
 
 export const stackJustifyContentValues: readonly StackJustifyContent[] = [
   "start",

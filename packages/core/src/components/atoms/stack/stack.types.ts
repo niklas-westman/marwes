@@ -12,8 +12,12 @@ import type { Spacings } from "../spacing"
 /** Main axis of the stack. Reverse directions are intentionally not supported yet. */
 export type StackDirection = "row" | "column"
 
-/** Cross-axis alignment of the stack's children. */
-export type StackAlignItems = "start" | "center" | "end" | "stretch"
+/**
+ * Cross-axis alignment of the stack's children.
+ * There is no "stretch": cross-axis stretching is declared per child as fill sizing, so a
+ * child's data-*-sizing claim always matches its rendered size (REQ-STACK-001, DEC-022).
+ */
+export type StackAlignItems = "start" | "center" | "end"
 
 /** Main-axis distribution of the stack's children. */
 export type StackJustifyContent =

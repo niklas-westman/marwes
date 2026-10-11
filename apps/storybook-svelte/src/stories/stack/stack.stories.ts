@@ -95,6 +95,9 @@ export const Gap: Story = showcaseStory("gap")
 
 export const Padding: Story = showcaseStory("padding")
 
+/**
+ * alignItems has no stretch: cross-axis stretching is child fill sizing (see ChildSizing).
+ */
 export const Alignment: Story = showcaseStory("alignment")
 
 export const Justify: Story = showcaseStory("justify")
