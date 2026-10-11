@@ -106,6 +106,16 @@ describe("createButtonRecipe", () => {
     expect(kit.dataAttributes?.["data-has-affordance"]).toBe("true")
   })
 
+  it("adds the full-width class and data attribute only when fullWidth is set", () => {
+    const hugging = createButtonRecipe({ as: "button" })
+    const filling = createButtonRecipe({ as: "button", fullWidth: true })
+
+    expect(hugging.className).not.toContain("mw-btn--full-width")
+    expect(hugging.dataAttributes?.["data-full-width"]).toBeUndefined()
+    expect(filling.className).toContain("mw-btn--full-width")
+    expect(filling.dataAttributes?.["data-full-width"]).toBe("true")
+  })
+
   it("marks icon-only buttons for square control styling", () => {
     const kit = createButtonRecipe({
       as: "button",

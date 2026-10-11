@@ -98,6 +98,13 @@ const buttonOptionCases: Record<keyof ButtonOptions, ButtonOptionCase> = {
       expect(button).toHaveAttribute("data-error", "true")
     },
   },
+  fullWidth: {
+    options: { fullWidth: true },
+    expectRendered: (button) => {
+      expect(button).toHaveClass("mw-btn--full-width")
+      expect(button).toHaveAttribute("data-full-width", "true")
+    },
+  },
   toggle: {
     options: { toggle: true },
     expectRendered: (button) => expect(button).toHaveAttribute("aria-pressed", "false"),

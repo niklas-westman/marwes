@@ -118,6 +118,8 @@ export type ButtonOptions = {
   disabled?: boolean
   loading?: boolean | ButtonLoadingOptions
   error?: boolean
+  /** Fills the width of its container instead of hugging its content. */
+  fullWidth?: boolean
 
   toggle?: boolean
   pressed?: boolean

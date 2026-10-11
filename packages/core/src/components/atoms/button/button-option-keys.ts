@@ -12,6 +12,7 @@ export const buttonOptionKeys = defineOptionKeys<ButtonOptions>({
   disabled: true,
   loading: true,
   error: true,
+  fullWidth: true,
   toggle: true,
   pressed: true,
   ariaLabel: true,

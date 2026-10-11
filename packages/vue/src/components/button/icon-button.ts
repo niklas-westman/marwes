@@ -21,6 +21,7 @@ const iconButtonPropKeys = definePropKeys<IconButtonProps>()([
   "disabled",
   "loading",
   "error",
+  "fullWidth",
   "toggle",
   "pressed",
   "ariaLabel",

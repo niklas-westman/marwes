@@ -189,6 +189,10 @@
   opacity: 0.4;
 }
 
+.mw-btn--full-width {
+  width: 100%;
+}
+
 /* ERROR STATE - Figma node: 1:1072 includes error state */
 .mw-btn[data-error="true"],
 .mw-btn--error {

@@ -24,6 +24,12 @@ describe("firstEdition button css contract", () => {
     expect(css).not.toMatch(/border-radius: var\(--mw-ui-radius\);/)
   })
 
+  it("fills the container width for the full-width option", () => {
+    const css = readFileSync(buttonCssPath, "utf8")
+
+    expect(css).toMatch(/\.mw-btn--full-width \{\s*width: 100%;\s*\}/)
+  })
+
   it("provides a first-class danger variant for destructive actions", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 
