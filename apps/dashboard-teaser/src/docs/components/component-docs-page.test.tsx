@@ -19,6 +19,7 @@ import {
   parseComponentDocsPageModel,
   readEmbeddedComponentDocsPageModel,
 } from "./component-docs-app"
+import docsNavigation from "./docs-navigation.json"
 import { getFamilyShowcase } from "./family-showcases"
 import BadgeShowcase from "./showcases/badge-showcase"
 import BannerShowcase from "./showcases/banner-showcase"
@@ -152,7 +153,12 @@ describe("InputDocsApp", () => {
     expect(
       within(navigation).getByRole("link", { name: "AI and agents", hidden: true }),
     ).toBeInTheDocument()
-    expect(within(navigation).getAllByRole("link", { hidden: true })).toHaveLength(40)
+    const expectedLinkCount =
+      docsNavigation.documentationLinks.length +
+      docsNavigation.componentGroups.flatMap(({ items }) => items).length
+    expect(within(navigation).getAllByRole("link", { hidden: true })).toHaveLength(
+      expectedLinkCount,
+    )
     expect(screen.queryByTitle("Open documentation menu")).not.toBeInTheDocument()
   })
 
