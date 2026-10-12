@@ -85,6 +85,8 @@ jobs:
     env:
       CI: true
       CHECK_COMMAND: ${{ matrix.command }}
+      # Repository variable; set to "true" to make Reflection visual diffs block again.
+      REFLECTION_VISUAL_BLOCKING: ${{ vars.REFLECTION_VISUAL_BLOCKING }}
     strategy:
       fail-fast: false
       matrix:

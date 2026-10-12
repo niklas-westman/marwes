@@ -1605,6 +1605,26 @@ function renderFamilyBody(family) {
   return `<section><h2>What this family solves</h2><p>${escapeHtml(family.summary)}</p></section><div class="docs-columns"><section><h2>Use when</h2>${renderList(family.useWhen)}</section><section><h2>Avoid when</h2>${renderList(family.avoidWhen)}</section></div><section><h2>Public imports</h2><p>Import only from the adapter root. Field- and purpose-level exports are the recommended consumer API.</p><div class="docs-stack">${imports}</div><h3>Public prop types</h3><ul>${propTypes}</ul><p>The complete typed inventory is published at <a href="/ai/v1/public-api.json"><code>/ai/v1/public-api.json</code></a>.</p></section>${exampleSection}<section><h2>Accessibility requirements</h2>${renderList(family.accessibility)}</section><section><h2>Theming</h2><p>${escapeHtml(family.theming)}</p></section><section><h2>Reference links</h2><ul>${storybooks}<li><a href="https://github.com/niklas-westman/marwes/blob/main/${family.sourcePath}">Source and registry evidence</a></li>${packageLinks}<li><a href="https://github.com/niklas-westman/marwes/issues/new">Report an issue</a></li></ul></section>`
 }
 
+function assertNavigationMatchesFamilies(componentFamilies) {
+  const navigationSlugs = docsNavigation.componentGroups
+    .flatMap(({ items }) => items)
+    .map((item) => item.toLowerCase().replaceAll(" ", "-"))
+  const familySlugs = componentFamilies.map(({ family }) => family)
+  const missingFromNavigation = familySlugs.filter((slug) => !navigationSlugs.includes(slug))
+  const unknownInNavigation = navigationSlugs.filter((slug) => !familySlugs.includes(slug))
+  if (missingFromNavigation.length === 0 && unknownInNavigation.length === 0) return
+
+  const problems = [
+    missingFromNavigation.length > 0 &&
+      `component families missing from the docs sidebar: ${missingFromNavigation.join(", ")}`,
+    unknownInNavigation.length > 0 &&
+      `sidebar entries without a component family: ${unknownInNavigation.join(", ")}`,
+  ].filter(Boolean)
+  throw new Error(
+    `${problems.join("; ")}. Update componentGroups in apps/dashboard-teaser/src/docs/components/docs-navigation.json.`,
+  )
+}
+
 function renderDocsNavigationLinks(currentPath) {
   const link = (label, href) =>
     `<a href="${href}"${href === currentPath ? ' aria-current="page"' : ""}>${escapeHtml(label)}</a>`
@@ -1941,6 +1961,8 @@ const families = registry.families.map(({ family, meta, readmePath }) => ({
   theming: getThemingCopy(family),
   useWhen: (meta?.usage?.useWhen ?? []).map(consumerizeText),
 }))
+
+assertNavigationMatchesFamilies(families)
 
 for (const family of families) {
   const fixtureName = fixtureNamesByFamily[family.family]
