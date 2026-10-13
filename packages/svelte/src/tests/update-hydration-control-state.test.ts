@@ -48,6 +48,10 @@ for (const name of ["InputOtpField", "RichTextField"] as const) {
         name === "RichTextField"
           ? normalizeRichTextHtml(screen.getByRole("textbox", { name: "Notes" }).innerHTML)
           : (screen.getByRole("textbox", { name: "Notes" }) as HTMLInputElement).value,
+      async blur() {
+        if (name === "RichTextField")
+          await fireEvent.blur(screen.getByRole("textbox", { name: "Notes" }))
+      },
       async setUserValue(value) {
         const control = screen.getByRole("textbox", { name: "Notes" }) as HTMLInputElement
         if (
