@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest"
 export interface SelectUpdatesProps {
   ariaLabel: string
   options: Array<{ value: string; label: string }>
+  defaultValue?: string
   value?: string
   disabled?: boolean
   onValueChange?: (value: string) => void
@@ -35,6 +36,22 @@ const options = [
 
 export function runSelectUpdatesContract(adapterName: string, h: SelectUpdatesHarness): void {
   describe(`Select updates contract: ${adapterName}`, () => {
+    it("keeps an uncontrolled default and changes selection after hydration", async () => {
+      const changes: string[] = []
+      expect(
+        await h.hydrate({
+          ariaLabel,
+          options,
+          defaultValue: "growth",
+          onValueChange: (value) => changes.push(value),
+        }),
+      ).toEqual([])
+      expect(h.getSelect()).toHaveValue("growth")
+      await h.selectOption(h.getSelect(), "scale")
+      expect(h.getSelect()).toHaveValue("scale")
+      expect(changes).toEqual(["scale"])
+    })
+
     it("reflects a controlled value update without reporting a change", async () => {
       const changes: string[] = []
       const onValueChange = (value: string): void => {

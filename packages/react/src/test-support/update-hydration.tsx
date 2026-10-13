@@ -74,6 +74,7 @@ export function createUpdateHydrationHarness<Props>(
 
   return {
     render(props: Props) {
+      hydratedRoot = undefined
       rendered = render(withProvider(renderUi(props)))
     },
     rerender(props: Props) {

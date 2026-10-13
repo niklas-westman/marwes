@@ -5,6 +5,7 @@
 import { describe, expect, it } from "vitest"
 
 export interface AccordionFieldUpdatesProps {
+  defaultOpenItems?: string[]
   label: string
   items: Array<{ value: string; title: string; content: string; disabled?: boolean }>
   multiple?: boolean
@@ -59,6 +60,22 @@ export function runAccordionFieldUpdatesContract(
   h: AccordionFieldUpdatesHarness,
 ): void {
   describe(`AccordionField updates contract: ${adapterName}`, () => {
+    it("keeps uncontrolled defaults and updates after hydration", async () => {
+      const changes: string[][] = []
+      expect(
+        await h.hydrate({
+          ...base,
+          items,
+          defaultOpenItems: ["billing"],
+          onOpenItemsChange: (value) => changes.push(value),
+        }),
+      ).toEqual([])
+      expect(h.getTrigger("Billing")).toHaveAttribute("aria-expanded", "true")
+      await h.click(h.getTrigger("Billing"))
+      expect(h.getTrigger("Billing")).toHaveAttribute("aria-expanded", "false")
+      expect(changes).toEqual([[]])
+    })
+
     it("moves the open panel on a controlled update without reporting a change", async () => {
       const changes: string[][] = []
       const onOpenItemsChange = (openItems: string[]): void => {

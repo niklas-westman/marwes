@@ -63,3 +63,10 @@ describe("initially-open modal server probes", () => {
     })
   }
 })
+
+it("includes the RichText value in initial server HTML", () => {
+  const output = render(Host, {
+    props: { componentName: "RichTextField", componentProps: hydrationSmokeProps("RichTextField") },
+  })
+  expect(output.body).toContain("Server notes")
+})

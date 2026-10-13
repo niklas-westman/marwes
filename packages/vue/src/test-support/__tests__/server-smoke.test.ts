@@ -103,3 +103,7 @@ describe("initially-open modal server probes", () => {
     })
   }
 })
+
+it("includes the RichText value in initial server HTML", async () => {
+  expect(await renderComponent("RichTextField")).toContain("Server notes")
+})
