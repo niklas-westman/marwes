@@ -25,6 +25,7 @@ import type {
 } from "@marwes-ui/core"
 import * as React from "react"
 import { toReactAttributes } from "../../internal/react-attributes"
+import { useClientLayoutEffect } from "../../internal/use-client-layout-effect"
 import { Icon } from "../icon"
 
 export interface PaginationProps
@@ -360,7 +361,7 @@ function useAdaptivePaginationProfile(
 ): PaginationAdaptiveProfile | undefined {
   const [profile, setProfile] = React.useState<PaginationAdaptiveProfile | undefined>(undefined)
 
-  React.useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const root = rootRef.current
     if (!opts.adaptive || !root || typeof window === "undefined") {
       setProfile(undefined)

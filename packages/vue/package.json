@@ -43,7 +43,8 @@
     "test": "NODE_ENV=test vitest run",
     "clean": "rimraf dist",
     "lint": "biome lint .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "test:ssr": "NODE_ENV=test vitest run --config vitest.ssr.config.ts"
   },
   "dependencies": {
     "@marwes-ui/core": "workspace:*",

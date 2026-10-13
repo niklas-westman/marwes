@@ -12,6 +12,7 @@ import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { toReactAttributes } from "../../internal/react-attributes"
+import { useClientLayoutEffect } from "../../internal/use-client-layout-effect"
 import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -250,7 +251,7 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
     setActiveFormats(getActiveFormatsFromSelection(editorElementRef.current))
   }, [])
 
-  React.useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const editorElement = editorElementRef.current
 
     if (!editorElement) {

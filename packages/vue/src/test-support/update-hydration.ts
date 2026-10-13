@@ -14,6 +14,7 @@ import {
 } from "vue"
 import { renderToString } from "vue/server-renderer"
 import { captureConsoleIssues } from "../../../../tests/contracts/support/console-issues"
+import { trackHydrationNodes } from "../../../../tests/contracts/support/hydration-nodes"
 import { MarwesProvider } from "../provider/marwes-provider"
 
 const hydratedApps: App[] = []
@@ -34,30 +35,46 @@ function rootComponent(component: Component, getProps: () => Record<string, unkn
 
 async function hydrateFromServerMarkup(
   component: Component,
-  props: Record<string, unknown>,
+  getProps: () => Record<string, unknown>,
+  onServerIssues: (issues: string[]) => void,
 ): Promise<string[]> {
-  const root = rootComponent(component, () => props)
+  const root = rootComponent(component, getProps)
   const container = document.createElement("div")
-  container.innerHTML = await renderToString(createSSRApp(root))
+  const serverCapture = captureConsoleIssues()
+  try {
+    container.innerHTML = await renderToString(createSSRApp(root))
+  } finally {
+    onServerIssues(serverCapture.stop())
+  }
   document.body.append(container)
+  const checkNodes = trackHydrationNodes(container)
   const capture = captureConsoleIssues()
   try {
     const app = createSSRApp(root)
     hydratedApps.push(app)
     app.mount(container)
     await nextTick()
+    capture.issues.push(...checkNodes())
     return capture.issues
   } finally {
     capture.stop()
   }
 }
 
+export interface UpdateHydrationHarness<Props> {
+  render(props: Props): void
+  rerender(props: Props): Promise<void>
+  hydrate(props: Props): Promise<string[]>
+  getServerIssues(): string[]
+}
+
 export function createUpdateHydrationHarness<Props extends object>(
   component: Component,
   toVueProps: (props: Props) => Record<string, unknown> = (props) =>
     ({ ...props }) as Record<string, unknown>,
-) {
+): UpdateHydrationHarness<Props> {
   const currentProps = shallowRef<Props | undefined>(undefined)
+  let serverIssues: string[] = []
 
   return {
     render(props: Props) {
@@ -68,6 +85,16 @@ export function createUpdateHydrationHarness<Props extends object>(
       currentProps.value = props
       await nextTick()
     },
-    hydrate: (props: Props) => hydrateFromServerMarkup(component, toVueProps(props)),
+    hydrate: (props: Props) => {
+      currentProps.value = props
+      return hydrateFromServerMarkup(
+        component,
+        () => toVueProps(currentProps.value as Props),
+        (issues) => {
+          serverIssues = issues
+        },
+      )
+    },
+    getServerIssues: () => [...serverIssues],
   }
 }

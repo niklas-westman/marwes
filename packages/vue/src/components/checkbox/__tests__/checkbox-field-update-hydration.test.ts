@@ -3,15 +3,19 @@
  */
 import { screen } from "@testing-library/vue"
 import type { Component } from "vue"
+import type { FieldWiringProps } from "../../../../../../tests/contracts/field-wiring-updates.contract"
 import { runFieldWiringUpdatesContract } from "../../../../../../tests/contracts/field-wiring-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { CheckboxField } from "../checkbox-field"
 
 runFieldWiringUpdatesContract("vue", "CheckboxField", {
-  ...createUpdateHydrationHarness(CheckboxField as Component, ({ helper, ...props }) => ({
-    ...props,
-    checkbox: {},
-    ...(helper ? { description: helper } : {}),
-  })),
+  ...createUpdateHydrationHarness(
+    CheckboxField as Component,
+    ({ helper, ...props }: FieldWiringProps) => ({
+      ...props,
+      checkbox: {},
+      ...(helper ? { description: helper } : {}),
+    }),
+  ),
   getControl: (label) => screen.getByRole("checkbox", { name: label }),
 })

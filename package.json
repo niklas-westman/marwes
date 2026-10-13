@@ -133,7 +133,8 @@
     "changeset:check": "node ./scripts/check-pr-changeset.mjs",
     "version-packages": "changeset version && pnpm format:release-artifacts",
     "format:release-artifacts": "biome format --write .changeset/config.json apps/*/package.json apps/*/CHANGELOG.md packages/*/package.json packages/*/CHANGELOG.md",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "test:ssr:packages": "pnpm --filter @marwes-ui/react test:ssr && pnpm --filter @marwes-ui/vue test:ssr && pnpm --filter @marwes-ui/svelte test:ssr"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
