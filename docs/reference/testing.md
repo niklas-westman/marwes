@@ -429,3 +429,9 @@ For strict component baselines, follow
 - [AI Metadata Protocol](./ai-metadata.md)
 - [Governance](./governance.md)
 - [Adding Components](../guides/adding-components.md)
+
+### SSR production verification
+
+Run `pnpm test:ssr:packages` for Node-only public component rendering. Under Node 24.15+ in the 24 series, run `pnpm consumer:ssr --framework next --themes` (or `nuxt`, `sveltekit`, `react18`, `react19`) for packed production apps and Chromium evidence. Reports and full diagnostics are saved under `.cache/ssr/<framework>/`. Known blocked scenarios remain visible; `--strict-probes` fails on them too. Use `--reuse` only for local debugging of an already-built consumer, never as current-source evidence in CI.
+
+See [SSR verification evidence](../audits/ssr-verification.md) for exact tested versions, blockers, CSP scope and the separate support decisions. These tests do not declare general SSR support.
