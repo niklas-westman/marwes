@@ -1,10 +1,11 @@
 import { screen, within } from "@testing-library/react"
+import type { FieldWiringProps } from "../../../../../../tests/contracts/field-wiring-updates.contract"
 import { runGroupFieldWiringUpdatesContract } from "../../../../../../tests/contracts/group-field-wiring-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { SegmentedControlField } from "../segmented-control-field"
 
 runGroupFieldWiringUpdatesContract("react", "SegmentedControlField", {
-  ...createUpdateHydrationHarness(({ helper, ...props }) => (
+  ...createUpdateHydrationHarness(({ helper, ...props }: FieldWiringProps) => (
     <SegmentedControlField
       {...props}
       segmentedControl={{

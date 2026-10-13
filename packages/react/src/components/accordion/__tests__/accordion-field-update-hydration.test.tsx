@@ -3,12 +3,15 @@
  */
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import type { AccordionFieldUpdatesProps } from "../../../../../../tests/contracts/accordion-field-updates.contract"
 import { runAccordionFieldUpdatesContract } from "../../../../../../tests/contracts/accordion-field-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { AccordionField } from "../accordion-field"
 
 runAccordionFieldUpdatesContract("react", {
-  ...createUpdateHydrationHarness((props) => <AccordionField {...props} />),
+  ...createUpdateHydrationHarness((props: AccordionFieldUpdatesProps) => (
+    <AccordionField {...props} />
+  )),
   getTrigger: (title) => screen.getByRole("button", { name: title }),
   getAllTriggers: () => screen.getAllByRole("button"),
   async click(element) {

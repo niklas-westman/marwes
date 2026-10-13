@@ -3,12 +3,13 @@
  */
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import type { RadioGroupUpdatesProps } from "../../../../../../tests/contracts/radio-group-updates.contract"
 import { runRadioGroupUpdatesContract } from "../../../../../../tests/contracts/radio-group-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { RadioGroupField } from "../radio-group-field"
 
 runRadioGroupUpdatesContract("react", {
-  ...createUpdateHydrationHarness(({ onValueChange, ...props }) => (
+  ...createUpdateHydrationHarness(({ onValueChange, ...props }: RadioGroupUpdatesProps) => (
     <RadioGroupField {...props} {...(onValueChange ? { onChange: onValueChange } : {})} />
   )),
   getRadio: (label) => screen.getByRole("radio", { name: label }) as HTMLInputElement,

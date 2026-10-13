@@ -3,12 +3,13 @@
  */
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import type { TabUpdatesProps } from "../../../../../../tests/contracts/tab-updates.contract"
 import { runTabUpdatesContract } from "../../../../../../tests/contracts/tab-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { TabGroup } from "../tab-group"
 
 runTabUpdatesContract("react", {
-  ...createUpdateHydrationHarness((props) => <TabGroup {...props} />),
+  ...createUpdateHydrationHarness((props: TabUpdatesProps) => <TabGroup {...props} />),
   getTab: (name) => screen.getByRole("tab", { name }),
   getAllTabs: () => screen.getAllByRole("tab"),
   getVisiblePanels: () => screen.queryAllByRole("tabpanel"),
