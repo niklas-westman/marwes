@@ -46,6 +46,17 @@ export function runSegmentedControlUpdatesContract(
   h: SegmentedControlUpdatesHarness,
 ): void {
   describe(`SegmentedControl updates contract: ${adapterName}`, () => {
+    it("hydrates its uncontrolled initial selection and changes after hydration", async () => {
+      const changes: string[] = []
+      expect(
+        await h.hydrate({ ariaLabel, items, onValueChange: (value) => changes.push(value) }),
+      ).toEqual([])
+      expect(h.isSelected(h.getItem("List"))).toBe(true)
+      await h.click(h.getItem("Board"))
+      expect(h.isSelected(h.getItem("Board"))).toBe(true)
+      expect(changes).toEqual(["board"])
+    })
+
     it("moves the selection on a controlled update without reporting a change", async () => {
       const changes: string[] = []
       const onValueChange = (value: string): void => {

@@ -43,6 +43,8 @@
   let activeFormats = $state<RichTextFormat[]>([]);
 
   const editorHtml = $derived(isControlled ? normalizeRichTextHtml(controlledValue) : uncontrolledHtml);
+  function getInitialEditorHtml(): string { return editorHtml; }
+  const initialEditorHtml = getInitialEditorHtml();
   const isEditorEmpty = $derived(isRichTextHtmlEmpty(editorHtml));
 
 
@@ -158,8 +160,8 @@
     oninput={handleInput}
     onkeydown={handleKeyDown}
     onfocus={refreshActiveFormats}
-    onblur={() => { syncEditorState(editorElement?.innerHTML ?? ""); activeFormats = []; }}
-  ></div>
+    onblur={() => { const nextHtml = normalizeRichTextHtml(editorElement?.innerHTML ?? ""); if (nextHtml !== editorHtml) syncEditorState(nextHtml); activeFormats = []; }}
+  >{@html initialEditorHtml}</div>
 
   {#if options.name}
     <input type="hidden" name={options.name} value={editorHtml} disabled={options.disabled} />

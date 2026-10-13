@@ -1,0 +1,41 @@
+name: Production SSR (Reusable)
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  ssr-consumers:
+    name: production SSR / ${{ matrix.framework }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        framework: [next, nuxt, sveltekit, react18, react19]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.15.0
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Install Chromium
+        run: pnpm --filter storybook-react exec playwright install --with-deps chromium
+      - name: Verify packed production app, hydration and theme
+        run: pnpm consumer:ssr --framework ${{ matrix.framework }} --themes
+      - name: Save SSR evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ssr-${{ matrix.framework }}
+          path: .cache/ssr/${{ matrix.framework }}/
+          include-hidden-files: true
+          retention-days: 14

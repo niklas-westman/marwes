@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest"
 
 export interface InputUpdatesProps {
   ariaLabel: string
+  defaultValue?: string
   value?: string
   disabled?: boolean
   onValueChange?: (value: string) => void
@@ -28,6 +29,21 @@ const ariaLabel = "Email"
 
 export function runInputUpdatesContract(adapterName: string, h: InputUpdatesHarness): void {
   describe(`Input updates contract: ${adapterName}`, () => {
+    it("keeps an uncontrolled default and edits it after hydration", async () => {
+      const changes: string[] = []
+      expect(
+        await h.hydrate({
+          ariaLabel,
+          defaultValue: "Default",
+          onValueChange: (value) => changes.push(value),
+        }),
+      ).toEqual([])
+      expect(h.getTextbox()).toHaveValue("Default")
+      await h.type(h.getTextbox(), "!")
+      expect(h.getTextbox()).toHaveValue("Default!")
+      expect(changes).toEqual(["Default!"])
+    })
+
     it("reflects a controlled value update without reporting a change", async () => {
       const changes: string[] = []
       const onValueChange = (value: string): void => {
