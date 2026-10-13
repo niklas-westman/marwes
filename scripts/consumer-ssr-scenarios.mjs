@@ -18,8 +18,8 @@ export function themeScenarios() {
 // The test response supplies nonces to framework bootstraps. Marwes helper tags
 // must already carry their fixture nonce; this does not claim framework CSP setup.
 export function nonceFrameworkBootstraps(html) {
-  return html.replace(/<script\b([^>]*)>/g, (tag, attributes) =>
-    /\bnonce=/.test(attributes) ? tag : `<script nonce="ssr-fixture"${attributes}>`,
+  return html.replace(/<script\b([^>]*)>/gi, (tag, attributes) =>
+    /\bnonce=/i.test(attributes) ? tag : `<script nonce="ssr-fixture"${attributes}>`,
   )
 }
 export const scriptNoncePolicy = "script-src 'self' 'nonce-ssr-fixture'; object-src 'none'"

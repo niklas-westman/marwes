@@ -22,6 +22,18 @@ test("CSP fixture preserves explicit helper nonces and only adds missing bootstr
   assert.ok(result.endsWith("<style>css</style>"))
 })
 
+for (const tagName of ["SCRIPT", "ScRiPt"]) {
+  test(`CSP fixture handles ${tagName} tags and preserves uppercase nonce attributes`, () => {
+    const html = `<${tagName} type="module">boot()</${tagName}><${tagName} NONCE="helper">theme()</${tagName}>`
+    const result = nonceFrameworkBootstraps(html)
+    assert.equal(
+      result,
+      `<script nonce="ssr-fixture" type="module">boot()</${tagName}><${tagName} NONCE="helper">theme()</${tagName}>`,
+    )
+    assert.equal(nonceFrameworkBootstraps(result), result)
+  })
+}
+
 test("known blockers stay visible, unrelated regressions fail", async () => {
   const { isKnownBlocked } = await import("./consumer-ssr-scenarios.mjs")
   const flash = {
