@@ -160,7 +160,7 @@
     oninput={handleInput}
     onkeydown={handleKeyDown}
     onfocus={refreshActiveFormats}
-    onblur={() => { syncEditorState(editorElement?.innerHTML ?? ""); activeFormats = []; }}
+    onblur={() => { const nextHtml = normalizeRichTextHtml(editorElement?.innerHTML ?? ""); if (nextHtml !== editorHtml) syncEditorState(nextHtml); activeFormats = []; }}
   >{@html initialEditorHtml}</div>
 
   {#if options.name}

@@ -437,7 +437,8 @@ export const RichText = defineComponent(
             },
             onFocus: refreshActiveFormats,
             onBlur: () => {
-              syncEditorState(editorElement.value?.innerHTML ?? "")
+              const nextHtml = normalizeRichTextHtml(editorElement.value?.innerHTML ?? "")
+              if (nextHtml !== editorHtml.value) syncEditorState(nextHtml)
               activeFormats.value = []
             },
           }),

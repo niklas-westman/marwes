@@ -226,7 +226,7 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
   useRenderKitDebug(kit, "RichText")
 
   const editorHtml = isControlled ? normalizedControlledValue : uncontrolledHtml
-  const initialEditorHtml = React.useRef(editorHtml)
+  const initialEditorMarkup = React.useRef({ __html: editorHtml })
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className
   const showToolbar = !props.readOnly
@@ -418,12 +418,13 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
         contentEditable={!props.disabled && !props.readOnly}
         suppressContentEditableWarning
         // biome-ignore lint/security/noDangerouslySetInnerHtml: Seed the existing HTML editor once for SSR; later edits stay under its cursor-preserving DOM synchronization.
-        dangerouslySetInnerHTML={{ __html: initialEditorHtml.current }}
+        dangerouslySetInnerHTML={initialEditorMarkup.current}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         onFocus={refreshActiveFormats}
         onBlur={() => {
-          syncEditorState(editorElementRef.current?.innerHTML ?? "")
+          const nextHtml = normalizeRichTextHtml(editorElementRef.current?.innerHTML ?? "")
+          if (nextHtml !== editorHtml) syncEditorState(nextHtml)
           setActiveFormats([])
         }}
       />

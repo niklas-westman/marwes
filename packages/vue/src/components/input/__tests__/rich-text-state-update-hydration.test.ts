@@ -16,6 +16,9 @@ runTextValueUpdatesContract(
     })),
     getControl: () => screen.getByRole("textbox", { name: "Notes" }),
     getValue: () => screen.getByRole("textbox", { name: "Notes" }).innerHTML,
+    async blur() {
+      await fireEvent.blur(screen.getByRole("textbox", { name: "Notes" }))
+    },
     async setUserValue(value) {
       const control = screen.getByRole("textbox", { name: "Notes" }) as HTMLInputElement
       if (

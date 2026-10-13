@@ -13,6 +13,7 @@ export interface TextValueUpdatesHarness {
   hydrate(props: TextValueUpdatesProps): Promise<string[]>
   getControl(): HTMLElement
   getValue(): string
+  blur?(): Promise<void>
   setUserValue(value: string): Promise<void>
 }
 export function runTextValueUpdatesContract(
@@ -43,6 +44,10 @@ export function runTextValueUpdatesContract(
       await h.setUserValue(values.updated)
       expect(changes).toEqual([values.updated])
       expect(h.getValue()).toBe(values.updated)
+      if (h.blur) {
+        await h.blur()
+        expect(changes).toEqual([values.updated])
+      }
     })
     for (const flag of ["disabled", "readOnly"] as const) {
       it(`preserves ${flag} and allows editing after re-enabling`, async () => {
