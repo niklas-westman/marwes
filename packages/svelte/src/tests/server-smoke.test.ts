@@ -37,3 +37,29 @@ describe("Node server component smoke", () => {
     expect(new Set(outputs).size).toBe(1)
   })
 })
+
+describe("initially-open modal server probes", () => {
+  for (const componentName of [
+    "DialogModal",
+    "ConfirmDialog",
+    "DestructiveDialog",
+    "InfoDialog",
+  ] as const) {
+    it(`renders ${componentName} inline on the server`, () => {
+      const output = render(Host, {
+        props: { componentName, componentProps: { open: true, title: "Initial modal" } },
+      })
+      expect(output.body).toContain('role="dialog"')
+      console.info(
+        JSON.stringify({
+          adapter: "svelte",
+          scenario: componentName,
+          initialOpen: true,
+          serverContent: true,
+          status: "verified-server-render",
+          portal: false,
+        }),
+      )
+    })
+  }
+})

@@ -5,7 +5,7 @@ This audit tracks evidence for a future support decision. It is not an SSR suppo
 ## Delivery tracker
 
 - [x] Node server smoke and hydrated rerender/identity tracking.
-- [ ] Overlay lifecycle contracts and initially-open probes.
+- [x] Overlay lifecycle contracts and initially-open Node probes; browser integration remains pending.
 - [ ] Remaining control state contracts.
 - [ ] Packed production Next.js/Nuxt/SvelteKit consumers and React 18/19 checks.
 - [ ] Theme/browser evidence and dedicated CI matrix.
@@ -19,3 +19,11 @@ Hydration harnesses retain controls and generated IDs and can update the hydrate
 ## Remaining product decisions
 
 Initially-open modal semantics must be verified per adapter. Do not standardize render/portal policy without a separate decision. Existing Reflection text-button baseline differences remain a separate visual gate.
+
+## Overlay evidence
+
+Hydrated modal tests cover DialogModal and all purpose variants, focus/Tab/Escape/scrim, scroll and focus restoration. React and Vue exercise inline/default/custom portal targets; Svelte currently exposes inline rendering only. Presentation contracts conditionally mount Dialog, Drawer and ContextMenu without assuming an open prop. Tooltip and toast have dedicated hydrated lifecycle contracts.
+
+The contracts reproduced two source bugs: Vue passed a slot object to Teleport instead of child nodes, leaving portals empty; Svelte ToastContainer did not clear pending timers on destruction and invoked dismiss callbacks after unmount. Both are fixed with regression evidence.
+
+Initially-open Node probes record distinct current behavior: React omits modal content on the server (blocked pending first-client-render verification/render-policy decision), Vue emits separate teleport output requiring target integration, and Svelte renders inline modal markup. No adapter behavior is standardized by this work. Browser probes in the production consumers determine the final scenario classification.

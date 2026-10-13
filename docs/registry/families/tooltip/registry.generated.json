@@ -27,6 +27,7 @@
     "react": [
       "packages/react/src/components/tooltip/__tests__/index-exports.test.tsx",
       "packages/react/src/components/tooltip/__tests__/tooltip-group.test.tsx",
+      "packages/react/src/components/tooltip/__tests__/tooltip-update-hydration.test.tsx",
       "packages/react/src/components/tooltip/__tests__/tooltip.test.tsx",
       "packages/react/src/components/tooltip/index.ts",
       "packages/react/src/components/tooltip/tooltip-group.tsx",
@@ -36,6 +37,7 @@
       "packages/vue/src/components/tooltip/__tests__/callback-single-fire.test.ts",
       "packages/vue/src/components/tooltip/__tests__/index-exports.test.ts",
       "packages/vue/src/components/tooltip/__tests__/tooltip-group.test.ts",
+      "packages/vue/src/components/tooltip/__tests__/tooltip-update-hydration.test.ts",
       "packages/vue/src/components/tooltip/__tests__/tooltip.test.ts",
       "packages/vue/src/components/tooltip/index.ts",
       "packages/vue/src/components/tooltip/tooltip-group.ts",

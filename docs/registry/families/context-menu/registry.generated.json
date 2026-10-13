@@ -24,12 +24,14 @@
     "react": [
       "packages/react/src/components/context-menu/__tests__/context-menu-contract.test.tsx",
       "packages/react/src/components/context-menu/__tests__/context-menu.test.tsx",
+      "packages/react/src/components/context-menu/__tests__/presentation-update-hydration.test.tsx",
       "packages/react/src/components/context-menu/context-menu.tsx",
       "packages/react/src/components/context-menu/index.ts"
     ],
     "vue": [
       "packages/vue/src/components/context-menu/__tests__/context-menu-contract.test.ts",
       "packages/vue/src/components/context-menu/__tests__/context-menu.test.ts",
+      "packages/vue/src/components/context-menu/__tests__/presentation-update-hydration.test.ts",
       "packages/vue/src/components/context-menu/context-menu.ts",
       "packages/vue/src/components/context-menu/index.ts"
     ],

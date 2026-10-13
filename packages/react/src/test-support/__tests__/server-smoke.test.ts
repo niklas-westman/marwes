@@ -75,3 +75,34 @@ describe("Node server component smoke", () => {
     expect(new Set(results).size).toBe(1)
   })
 })
+
+describe("initially-open modal server probes", () => {
+  for (const name of ["DialogModal", "ConfirmDialog", "DestructiveDialog", "InfoDialog"] as const) {
+    it(`records ${name} server content and portal output`, async () => {
+      const capture = captureConsoleIssues()
+      try {
+        const markup = renderToString(
+          createElement(
+            MarwesProvider,
+            null,
+            createElement(components[name], { open: true, title: "Initial modal" }),
+          ),
+        )
+        expect(markup).not.toContain('role="dialog"')
+        console.info(
+          JSON.stringify({
+            adapter: "react",
+            scenario: name,
+            initialOpen: true,
+            serverContent: false,
+            status: "blocked",
+            reason: "Server omits open modal content; first client render creates a portal",
+          }),
+        )
+        expect(capture.issues).toEqual([])
+      } finally {
+        capture.stop()
+      }
+    })
+  }
+})

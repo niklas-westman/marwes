@@ -253,13 +253,7 @@ export const DialogModal = defineComponent(
         return modalMarkup
       }
 
-      return h(
-        Teleport,
-        { to: props.portalTarget ?? "body" },
-        {
-          default: () => modalMarkup,
-        },
-      )
+      return h(Teleport, { to: props.portalTarget ?? "body" }, [modalMarkup])
     }
   },
   {

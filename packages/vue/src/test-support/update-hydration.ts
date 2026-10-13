@@ -19,10 +19,12 @@ import { MarwesProvider } from "../provider/marwes-provider"
 
 const hydratedApps: App[] = []
 
-afterEach(() => {
+export function unmountHydratedApps(): void {
   for (const app of hydratedApps.splice(0)) app.unmount()
   document.body.innerHTML = ""
-})
+}
+
+afterEach(unmountHydratedApps)
 
 function rootComponent(component: Component, getProps: () => Record<string, unknown>): Component {
   return defineComponent({
