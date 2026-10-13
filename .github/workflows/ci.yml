@@ -96,7 +96,7 @@ jobs:
           - name: typecheck
             command: pnpm -r typecheck && pnpm test:typecheck:contracts
           - name: package tests
-            command: pnpm test:packages
+            command: pnpm test:packages && pnpm test:ssr:packages && node --test scripts/test-consumer-ssr-scenarios.mjs
           - name: dashboard tests
             command: pnpm --filter dashboard-teaser test
           - name: design contracts
@@ -171,3 +171,6 @@ jobs:
 
       - name: Test packed ${{ matrix.framework }} consumer
         run: pnpm consumer:smoke --framework ${{ matrix.framework }}
+
+  ssr-consumers:
+    uses: ./.github/workflows/_ssr.yml

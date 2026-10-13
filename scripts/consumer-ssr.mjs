@@ -10,6 +10,12 @@ import { tmpdir } from "node:os"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { createPackedOverrides, readPackedManifest } from "./consumer-smoke-packages.mjs"
+import {
+  isKnownBlocked,
+  nonceFrameworkBootstraps,
+  scriptNoncePolicy,
+  themeScenarios,
+} from "./consumer-ssr-scenarios.mjs"
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const framework = process.argv[process.argv.indexOf("--framework") + 1]
@@ -204,6 +210,7 @@ server.stderr.on("data", (chunk) => {
   serverLog += chunk
 })
 const scenarios = []
+const themeEvidence = []
 let browser
 let failures = 0
 async function scenario(
@@ -232,9 +239,9 @@ async function scenario(
     await action(page, context)
     assert.deepEqual(issues, [], "Browser warnings/errors must not be filtered")
   } catch (error) {
-    status = probe ? "blocked" : "failed"
     reason = String(error)
-    if (!probe) failures += 1
+    status = probe && isKnownBlocked({ framework, name, reason, issues }) ? "blocked" : "failed"
+    if (status === "failed") failures += 1
     await page
       .screenshot({ path: join(artifactRoot, `${name}.png`), fullPage: true })
       .catch(() => {})
@@ -283,6 +290,17 @@ try {
     await trigger.click()
     const dialog = page.getByRole("dialog", { name: "SSR modal" })
     await dialog.waitFor()
+    assert.equal(
+      await dialog.evaluate(
+        (element, adapter) =>
+          adapter === "nuxt"
+            ? Boolean(element.closest("#teleports"))
+            : Boolean(element.closest("[data-marwes-theme]")),
+        framework,
+      ),
+      true,
+      "Modal must remain in its configured portal/theme scope",
+    )
     await page.getByRole("textbox", { name: "Modal input" }).evaluate(
       (element) =>
         new Promise((resolve, reject) => {
@@ -347,6 +365,96 @@ try {
     },
     { probe: true },
   )
+  if (process.argv.includes("--themes")) {
+    const colors = new Map()
+    for (const config of themeScenarios()) {
+      await scenario(
+        config.name,
+        async (page) => {
+          let release
+          const gate = new Promise((resolve) => {
+            release = resolve
+          })
+          await page.route("**/*", async (route) => {
+            if (route.request().resourceType() === "script") await gate
+            await route.continue().catch(() => {})
+          })
+          try {
+            await page.goto(`${url}/${config.preference}/${config.strategy}`, {
+              waitUntil: "commit",
+            })
+            const sample = page.getByTestId("theme-sample")
+            await sample.waitFor()
+            await page.waitForFunction(
+              () =>
+                getComputedStyle(document.querySelector('[data-testid="theme-sample"]'))
+                  .backgroundColor !== "rgba(0, 0, 0, 0)",
+            )
+            const read = () =>
+              sample.evaluate((element) => {
+                const style = getComputedStyle(element)
+                return {
+                  background: style.backgroundColor,
+                  text: style.color,
+                  mode: document.documentElement.classList.contains("dark") ? "dark" : "light",
+                }
+              })
+            const before = await read()
+            assert.equal(
+              await page.getByTestId("hydrated").textContent(),
+              "server",
+              "Modules must be paused before hydration",
+            )
+            const nonceHead = await page
+              .locator("head script[nonce], head style[nonce]")
+              .evaluateAll((elements) =>
+                elements.map((element) => ({ tag: element.tagName, nonce: element.nonce })),
+              )
+            assert.ok(nonceHead.some((tag) => tag.tag === "SCRIPT" && tag.nonce === "ssr-fixture"))
+            assert.ok(nonceHead.some((tag) => tag.tag === "STYLE" && tag.nonce === "ssr-fixture"))
+            release()
+            await page.getByTestId("hydrated").filter({ hasText: "ready" }).waitFor()
+            const after = await read()
+            themeEvidence.push({ ...config, before, after, nonceHead })
+            assert.equal(after.mode, config.expectedMode)
+            const key = `${config.strategy}-${config.expectedMode}`
+            if (!config.storedPreference && config.preference !== "system") colors.set(key, after)
+            assert.deepEqual(
+              after,
+              colors.get(key),
+              "Client colors must match the resolved preference",
+            )
+            assert.deepEqual(before, after, "Theme colors must remain stable across hydration")
+          } finally {
+            release()
+          }
+        },
+        { ...config, probe: true },
+      )
+    }
+    await scenario("head-script-nonce", async (page) => {
+      await page.route("**/*", async (route) => {
+        if (!route.request().isNavigationRequest()) return route.continue()
+        const response = await route.fetch()
+        const html = await response.text()
+        assert.ok(
+          /<script[^>]*nonce="ssr-fixture"/.test(html),
+          "Theme helper must provide its own nonce",
+        )
+        await route.fulfill({
+          response,
+          body: nonceFrameworkBootstraps(html),
+          headers: { ...response.headers(), "content-security-policy": scriptNoncePolicy },
+        })
+      })
+      await page.goto(`${url}/dark/style-tag`)
+      await page.getByTestId("hydrated").filter({ hasText: "ready" }).waitFor()
+      assert.equal(
+        await page.evaluate(() => document.documentElement.classList.contains("dark")),
+        true,
+      )
+    })
+  }
 } catch (error) {
   failures += 1
   scenarios.push({ name: "setup", status: "failed", reason: String(error) })
@@ -369,6 +477,7 @@ try {
         manifest: JSON.parse(await readFile(join(artifactRoot, "manifest.json"), "utf8")),
         failures,
         scenarios,
+        themeEvidence,
       },
       null,
       2,
