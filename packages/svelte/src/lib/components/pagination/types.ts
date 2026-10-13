@@ -18,6 +18,7 @@ export interface PaginationProps {
   lastLabel?: string
   ariaLabel?: string
   ariaLabelledBy?: string
+  invalid?: boolean
   ariaDescribedBy?: string
   getItemAriaLabel?: PaginationGetItemAriaLabel
   onpagechange?: (page: number) => void

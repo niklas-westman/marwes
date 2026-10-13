@@ -55,6 +55,7 @@ export interface PaginationPropsVue {
   lastLabel?: string
   ariaLabel?: string
   ariaLabelledBy?: string
+  invalid?: boolean
   ariaDescribedBy?: string
   getItemAriaLabel?: PaginationGetItemAriaLabel
   className?: string
@@ -80,6 +81,7 @@ const propKeys = [
   "ariaLabel",
   "ariaLabelledBy",
   "ariaDescribedBy",
+  "invalid",
   "getItemAriaLabel",
   "className",
   "id",
@@ -259,6 +261,7 @@ export const Pagination = defineComponent(
         ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
         ...(props.ariaLabelledBy !== undefined ? { ariaLabelledBy: props.ariaLabelledBy } : {}),
         ...(props.ariaDescribedBy !== undefined ? { ariaDescribedBy: props.ariaDescribedBy } : {}),
+        ...(props.invalid !== undefined ? { invalid: props.invalid } : {}),
         firstLabel,
         previousLabel,
         nextLabel,

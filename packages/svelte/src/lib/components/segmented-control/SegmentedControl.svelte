@@ -22,6 +22,7 @@
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    invalid,
     fullWidth,
     label,
     class: className,
@@ -75,7 +76,7 @@
   }
 
   const trackKit = $derived(
-    createSegmentedControlRecipe({ value: resolvedValue, variant, size, disabled, ariaLabel, ariaLabelledBy, ariaDescribedBy, fullWidth, label })
+    createSegmentedControlRecipe({ value: resolvedValue, variant, size, disabled, ariaLabel, ariaLabelledBy, ariaDescribedBy, invalid, fullWidth, label })
   );
   const mergedClass = $derived(mergeClass(trackKit.className, className));
 </script>

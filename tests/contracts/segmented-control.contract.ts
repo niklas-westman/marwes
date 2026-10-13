@@ -79,6 +79,10 @@ const segmentedControlOptionCases: Record<
     options: { ariaLabelledBy: "layout-heading" },
     expectRendered: (root) => expect(root).toHaveAttribute("aria-labelledby", "layout-heading"),
   },
+  invalid: {
+    options: { invalid: true },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-invalid", "true"),
+  },
   ariaDescribedBy: {
     options: { ariaDescribedBy: "layout-help" },
     expectRendered: (root) => expect(root).toHaveAttribute("aria-describedby", "layout-help"),

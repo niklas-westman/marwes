@@ -87,6 +87,7 @@ export function SegmentedControlField<T extends string = string>(
 
       <SegmentedControl
         {...(props.segmentedControl as SegmentedControlProps<T>)}
+        invalid={hasError || props.segmentedControl.invalid === true}
         ariaLabelledBy={labelId}
         {...(mergedDescribedBy ? { ariaDescribedBy: mergedDescribedBy } : {})}
       />

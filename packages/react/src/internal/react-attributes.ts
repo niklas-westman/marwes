@@ -4,6 +4,7 @@ const REACT_ATTRIBUTE_NAMES = {
   readonly: "readOnly",
   autocomplete: "autoComplete",
   inputmode: "inputMode",
+  maxlength: "maxLength",
 } as const
 
 type ReactAttributeNames = typeof REACT_ATTRIBUTE_NAMES

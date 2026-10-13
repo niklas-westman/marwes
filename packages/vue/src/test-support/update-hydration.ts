@@ -3,12 +3,23 @@
  */
 import { render } from "@testing-library/vue"
 import { afterEach } from "vitest"
-import { type Component, createSSRApp, defineComponent, h, nextTick, shallowRef } from "vue"
+import {
+  type App,
+  type Component,
+  createSSRApp,
+  defineComponent,
+  h,
+  nextTick,
+  shallowRef,
+} from "vue"
 import { renderToString } from "vue/server-renderer"
 import { captureConsoleIssues } from "../../../../tests/contracts/support/console-issues"
 import { MarwesProvider } from "../provider/marwes-provider"
 
+const hydratedApps: App[] = []
+
 afterEach(() => {
+  for (const app of hydratedApps.splice(0)) app.unmount()
   document.body.innerHTML = ""
 })
 
@@ -29,12 +40,16 @@ async function hydrateFromServerMarkup(
   const container = document.createElement("div")
   container.innerHTML = await renderToString(createSSRApp(root))
   document.body.append(container)
-
   const capture = captureConsoleIssues()
-  createSSRApp(root).mount(container)
-  await nextTick()
-
-  return capture.stop()
+  try {
+    const app = createSSRApp(root)
+    hydratedApps.push(app)
+    app.mount(container)
+    await nextTick()
+    return capture.issues
+  } finally {
+    capture.stop()
+  }
 }
 
 export function createUpdateHydrationHarness<Props extends object>(

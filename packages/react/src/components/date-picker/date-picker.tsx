@@ -27,6 +27,7 @@ export interface DatePickerProps
       | "ariaLabel"
       | "ariaLabelledBy"
       | "ariaDescribedBy"
+      | "invalid"
       | "calendarLabel"
       | "dataAttributes"
     > {
@@ -56,6 +57,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    invalid,
     calendarLabel,
     dataAttributes,
     onPreviousYear,
@@ -81,6 +83,7 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
     ...(ariaLabel !== undefined ? { ariaLabel } : {}),
     ...(ariaLabelledBy !== undefined ? { ariaLabelledBy } : {}),
     ...(ariaDescribedBy !== undefined ? { ariaDescribedBy } : {}),
+    ...(invalid !== undefined ? { invalid } : {}),
     ...(calendarLabel !== undefined ? { calendarLabel } : {}),
     ...(dataAttributes !== undefined ? { dataAttributes } : {}),
   })
@@ -138,11 +141,14 @@ export function DatePicker(props: DatePickerProps): React.ReactElement {
       >
         <thead>
           <tr className="mw-date-picker__weekdays">
-            {kit.weekdayLabels.map((weekday) => (
-              <th key={weekday} className={kit.slots.weekdayClassName} scope="col">
-                {weekday}
-              </th>
-            ))}
+            {kit.weekdayLabels.map((weekday, weekdayIndex) => {
+              return (
+                // biome-ignore lint/suspicious/noArrayIndexKey: Weekday columns have fixed positions; localized abbreviations can repeat.
+                <th key={weekdayIndex} className={kit.slots.weekdayClassName} scope="col">
+                  {weekday}
+                </th>
+              )
+            })}
           </tr>
         </thead>
         <tbody>

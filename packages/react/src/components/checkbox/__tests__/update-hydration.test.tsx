@@ -3,6 +3,7 @@
  */
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { runCheckboxIndeterminateUpdatesContract } from "../../../../../../tests/contracts/checkbox-indeterminate-updates.contract"
 import { runToggleUpdatesContract } from "../../../../../../tests/contracts/toggle-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { Checkbox } from "../checkbox"
@@ -14,4 +15,9 @@ runToggleUpdatesContract("react", "Checkbox", {
   async click(element) {
     await userEvent.setup().click(element)
   },
+})
+
+runCheckboxIndeterminateUpdatesContract("react", {
+  ...createUpdateHydrationHarness((props) => <Checkbox {...props} />),
+  getCheckbox: () => screen.getByRole("checkbox") as HTMLInputElement,
 })

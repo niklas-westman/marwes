@@ -43,6 +43,7 @@
     const props: DatePickerProps = {
       ...datePicker,
       ariaLabelledBy: labelId,
+      invalid: hasError || datePicker?.invalid === true,
     };
     if (a11yIds.describedBy) {
       props.ariaDescribedBy = a11yIds.describedBy;

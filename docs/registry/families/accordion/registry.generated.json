@@ -29,6 +29,7 @@
     ],
     "react": [
       "packages/react/src/components/accordion/__tests__/accordion-field-update-hydration.test.tsx",
+      "packages/react/src/components/accordion/__tests__/accordion-field-wiring-update-hydration.test.tsx",
       "packages/react/src/components/accordion/__tests__/accordion-field.test.tsx",
       "packages/react/src/components/accordion/__tests__/accordion.test.tsx",
       "packages/react/src/components/accordion/__tests__/variants.test.tsx",
@@ -39,6 +40,7 @@
     ],
     "vue": [
       "packages/vue/src/components/accordion/__tests__/accordion-field-update-hydration.test.ts",
+      "packages/vue/src/components/accordion/__tests__/accordion-field-wiring-update-hydration.test.ts",
       "packages/vue/src/components/accordion/__tests__/accordion-field.test.ts",
       "packages/vue/src/components/accordion/__tests__/accordion.test.ts",
       "packages/vue/src/components/accordion/__tests__/variants.test.ts",

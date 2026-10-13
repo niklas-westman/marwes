@@ -28,6 +28,10 @@ export default async function setup(project: TestProject): Promise<() => Promise
     logLevel: "error",
   })
 
+  // Loading the public component host compiles the export graph before tests start their timers.
+  // Otherwise parallel hydration suites can time out behind the first cold SSR request.
+  await vite.ssrLoadModule("/src/tests/type-fixtures/HydrationComponentHost.svelte")
+
   const httpServer = createHttpServer(async (request, response) => {
     let body = ""
     for await (const chunk of request) {

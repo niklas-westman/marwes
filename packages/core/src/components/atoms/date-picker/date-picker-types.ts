@@ -31,6 +31,7 @@ export interface DatePickerOptions {
   ariaLabel?: string
   /** ID of an element whose text labels the calendar landmark. Wins over `ariaLabel`/`calendarLabel`. */
   ariaLabelledBy?: string
+  invalid?: boolean
   /** ID(s) of elements that describe the calendar (helper text, errors). */
   ariaDescribedBy?: string
   /** @deprecated Use `ariaLabel` instead. */
@@ -41,6 +42,7 @@ export interface DatePickerOptions {
 export interface DatePickerA11yProps {
   ariaLabel?: string
   ariaLabelledBy?: string
+  ariaInvalid?: boolean
   ariaDescribedBy?: string
 }
 

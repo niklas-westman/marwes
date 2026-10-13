@@ -43,6 +43,7 @@
     const props: PaginationProps = {
       ...pagination,
       ariaLabelledBy: labelId,
+      invalid: hasError || pagination.invalid === true,
     } as PaginationProps;
     if (a11yIds.describedBy) {
       props.ariaDescribedBy = a11yIds.describedBy;

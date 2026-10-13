@@ -53,3 +53,12 @@ import { Pagination } from "@marwes-ui/react"
 - `siblingCount` and `boundaryCount` control the visible page window.
 - The dashboard teaser consumes this public React component instead of owning a
   local styled copy.
+
+## Field error and hydration contract
+
+The field wrapper exposes `aria-invalid="true"` on its navigation landmark while an error
+is present, and removes that state when the error is cleared. An explicitly
+invalid nested control remains invalid after the field error is removed.
+Core resolves the `invalid` option and each adapter applies the shared HTML mapping.
+The visible label and description/error references are update- and hydration-tested
+in React, Vue and Svelte. This coverage does not declare official SSR support.

@@ -47,6 +47,7 @@
     const sc: SegmentedControlProps<T> = {
       ...segmentedControl,
       ariaLabelledBy: labelId,
+      invalid: hasError || segmentedControl.invalid === true,
     } as SegmentedControlProps<T>;
     if (a11yIds.describedBy) {
       sc.ariaDescribedBy = a11yIds.describedBy;

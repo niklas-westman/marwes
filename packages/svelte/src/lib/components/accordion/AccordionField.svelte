@@ -81,7 +81,7 @@
     <Text variant="label">{label}</Text>
   </div>
 
-  {#if hasDescription && !hasError}
+  {#if hasDescription}
     <div class="mw-accordion-field__description" id={a11yIds.descriptionId}>
       <Text variant="caption">{description}</Text>
     </div>

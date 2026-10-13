@@ -11,6 +11,7 @@ const datePickerHtmlAttributeNames = {
   ariaLabel: "aria-label",
   ariaLabelledBy: "aria-labelledby",
   ariaDescribedBy: "aria-describedby",
+  ariaInvalid: "aria-invalid",
 } as const
 
 export type DatePickerHtmlAttributes = HtmlAttributesOf<

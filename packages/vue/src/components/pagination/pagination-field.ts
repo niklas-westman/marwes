@@ -65,6 +65,7 @@ export const PaginationField = defineComponent(
       const paginationProps: PaginationProps = {
         ...(props.pagination as PaginationProps),
         ariaLabelledBy: labelId.value,
+        invalid: hasError.value || props.pagination.invalid === true,
       }
       if (a11yIds.value.describedBy) {
         paginationProps.ariaDescribedBy = a11yIds.value.describedBy

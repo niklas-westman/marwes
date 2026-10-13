@@ -22,6 +22,7 @@ export function resolveSegmentedControlA11y(
     if (accessibleLabel) a11y.ariaLabel = accessibleLabel
   }
   if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
+  if (opts.invalid) a11y.ariaInvalid = true
   if (opts.disabled) a11y.ariaDisabled = true
 
   return a11y

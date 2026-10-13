@@ -39,6 +39,7 @@ export interface SegmentedControlPropsVue<T extends string = string> {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  invalid?: boolean
   ariaDescribedBy?: string
   fullWidth?: boolean
   label?: string
@@ -56,6 +57,7 @@ const propKeys = [
   "ariaLabel",
   "ariaLabelledBy",
   "ariaDescribedBy",
+  "invalid",
   "fullWidth",
   "label",
   "className",
@@ -151,6 +153,7 @@ export const SegmentedControl = defineComponent(
         ariaLabel: props.ariaLabel,
         ariaLabelledBy: props.ariaLabelledBy,
         ariaDescribedBy: props.ariaDescribedBy,
+        invalid: props.invalid,
         fullWidth: props.fullWidth,
         label: props.label,
       })

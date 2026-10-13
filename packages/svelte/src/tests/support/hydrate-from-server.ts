@@ -1,4 +1,4 @@
-import { hydrate, unmount } from "svelte"
+import { hydrate, tick, unmount } from "svelte"
 import { inject } from "vitest"
 import { captureConsoleIssues } from "../../../../../tests/contracts/support/console-issues"
 
@@ -38,11 +38,15 @@ export async function hydrateFromServerMarkup(options: {
   document.body.append(container)
 
   const capture = captureConsoleIssues()
-  hydratedApps.push(
-    hydrate(options.component, { target: container, props: options.clientProps } as never),
-  )
-
-  return capture.stop()
+  try {
+    hydratedApps.push(
+      hydrate(options.component, { target: container, props: options.clientProps } as never),
+    )
+    await tick()
+    return capture.issues
+  } finally {
+    capture.stop()
+  }
 }
 
 export async function unmountHydratedApps(): Promise<void> {

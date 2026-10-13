@@ -373,3 +373,11 @@ Files:
 3. wire the contract into React and Vue adapter tests
 4. align the public item API around canonical `content`
 5. run targeted verification and record the next findings in this doc
+
+## 2026-10-13: description/error wiring update
+
+Svelte AccordionField now keeps its description rendered when an error is present,
+matching React, Vue and the shared core described-by contract. Previously the error
+hid the description while `aria-describedby` still referenced its id. The shared
+group wiring update/hydration contract guards both targets, accessible group naming,
+invalid-state toggling and one shared error for multiple accordion triggers.

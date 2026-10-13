@@ -19,6 +19,7 @@ export interface SegmentedControlProps<T extends string = string> {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  invalid?: boolean
   ariaDescribedBy?: string
   fullWidth?: boolean
   label?: string

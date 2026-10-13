@@ -168,6 +168,30 @@ pnpm dev:playground
 pnpm test:storybook:a11y
 ```
 
+### Update and hydration contracts
+
+Shared contracts in `tests/contracts/*-updates.contract.ts` test controlled updates,
+disabled transitions and server-rendered state after hydration in all three adapters.
+Field wiring checks cover every field wrapper and purpose input: accessible naming,
+existing label/description targets, error addition/removal, invalid state and unique ids.
+Group contracts also check multiple member controls and one shared error. Combobox field
+contracts verify the selection, hidden form value, callbacks and listbox/active-option
+targets after opening a hydrated field. Checkbox checks its native indeterminate property;
+Pagination checks disabled buttons before and after hydration.
+
+Each adapter also has a `hydration-smoke.test` suite with representative props for every
+public component export (including purpose variants). An inventory assertion fails when
+a new component has no smoke case. The smoke tests capture hydration warnings/errors;
+React also captures recoverable hydration errors. The hydration harnesses restore console spies
+on thrown hydration errors and unmount hydrated applications. Svelte waits for hydration
+effects and precompiles the public export graph before starting test timers.
+
+This is contract-tested hydration, **not an official SSR support declaration**. The
+smoke cases render overlays closed; portal creation, focus return and closed-server to
+open-client transitions need separate contracts. Framework-app build coverage for Next.js,
+Nuxt and SvelteKit remains a separate product decision. React 18's server-render-only
+`useLayoutEffect` warnings are outside the hydration capture window.
+
 ### Reflection visual evidence
 
 Marwes uses `reflection-check` for Figma-backed component visual evidence through

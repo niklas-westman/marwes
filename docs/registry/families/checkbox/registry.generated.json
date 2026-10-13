@@ -31,6 +31,7 @@
     "react": [
       "packages/react/src/components/checkbox/__tests__/checkbox-field-update-hydration.test.tsx",
       "packages/react/src/components/checkbox/__tests__/checkbox-field.test.tsx",
+      "packages/react/src/components/checkbox/__tests__/checkbox-group-field-wiring-update-hydration.test.tsx",
       "packages/react/src/components/checkbox/__tests__/checkbox-group-field.test.tsx",
       "packages/react/src/components/checkbox/__tests__/checkbox.test.tsx",
       "packages/react/src/components/checkbox/__tests__/update-hydration.test.tsx",
@@ -43,6 +44,7 @@
       "packages/vue/src/components/checkbox/__tests__/callback-single-fire.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-field-update-hydration.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
+      "packages/vue/src/components/checkbox/__tests__/checkbox-group-field-wiring-update-hydration.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
       "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
       "packages/vue/src/components/checkbox/__tests__/update-hydration.test.ts",

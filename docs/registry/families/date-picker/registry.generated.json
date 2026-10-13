@@ -22,15 +22,19 @@
     ],
     "presets": ["packages/presets/src/firstEdition/date-picker.css"],
     "react": [
+      "packages/react/src/components/date-picker/__tests__/date-picker-field-wiring-update-hydration.test.tsx",
       "packages/react/src/components/date-picker/__tests__/date-picker.test.tsx",
       "packages/react/src/components/date-picker/__tests__/index-exports.test.tsx",
+      "packages/react/src/components/date-picker/__tests__/weekday-labels.test.tsx",
       "packages/react/src/components/date-picker/date-picker-field.tsx",
       "packages/react/src/components/date-picker/date-picker.tsx",
       "packages/react/src/components/date-picker/index.ts"
     ],
     "vue": [
+      "packages/vue/src/components/date-picker/__tests__/date-picker-field-wiring-update-hydration.test.ts",
       "packages/vue/src/components/date-picker/__tests__/date-picker.test.ts",
       "packages/vue/src/components/date-picker/__tests__/index-exports.test.ts",
+      "packages/vue/src/components/date-picker/__tests__/weekday-labels.test.ts",
       "packages/vue/src/components/date-picker/date-picker-field.ts",
       "packages/vue/src/components/date-picker/date-picker.ts",
       "packages/vue/src/components/date-picker/index.ts"

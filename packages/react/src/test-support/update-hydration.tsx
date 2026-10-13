@@ -29,17 +29,19 @@ async function hydrateFromServerMarkup(ui: React.ReactElement): Promise<string[]
   const container = document.createElement("div")
   container.innerHTML = renderToString(element)
   document.body.append(container)
-
   const capture = captureConsoleIssues()
-  await act(async () => {
-    hydratedRoots.push(
-      hydrateRoot(container, element, {
-        onRecoverableError: (error) => capture.issues.push(String(error)),
-      }),
-    )
-  })
-
-  return capture.stop()
+  try {
+    await act(async () => {
+      hydratedRoots.push(
+        hydrateRoot(container, element, {
+          onRecoverableError: (error) => capture.issues.push(String(error)),
+        }),
+      )
+    })
+    return capture.issues
+  } finally {
+    capture.stop()
+  }
 }
 
 export function createUpdateHydrationHarness<Props>(

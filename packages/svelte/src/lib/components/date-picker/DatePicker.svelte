@@ -24,6 +24,7 @@
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    invalid,
     calendarLabel,
     dataAttributes,
     onpreviousyear,
@@ -50,6 +51,7 @@
     if (applyLabel !== undefined) opts.applyLabel = applyLabel;
     if (ariaLabel !== undefined) opts.ariaLabel = ariaLabel;
     if (ariaLabelledBy !== undefined) opts.ariaLabelledBy = ariaLabelledBy;
+    if (invalid !== undefined) opts.invalid = invalid;
     if (ariaDescribedBy !== undefined) opts.ariaDescribedBy = ariaDescribedBy;
     if (calendarLabel !== undefined) opts.calendarLabel = calendarLabel;
     if (dataAttributes !== undefined) opts.dataAttributes = dataAttributes;

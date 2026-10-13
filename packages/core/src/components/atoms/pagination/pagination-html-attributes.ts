@@ -12,6 +12,7 @@ const paginationHtmlAttributeNames = {
   ariaLabel: "aria-label",
   ariaLabelledBy: "aria-labelledby",
   ariaDescribedBy: "aria-describedby",
+  ariaInvalid: "aria-invalid",
   ariaDisabled: "aria-disabled",
 } as const
 
