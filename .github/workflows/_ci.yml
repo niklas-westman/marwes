@@ -1,6 +1,6 @@
 name: CI (Reusable)
-# Reusable workflow that runs linting, type checking, tests, and builds
-# Called by both ci.yml and release.yml to avoid duplication
+# Single source of truth for validation. Called by ci.yml (pull requests) and
+# release.yml (main), so both always run the same checks.
 
 on:
   workflow_call:
@@ -10,63 +10,70 @@ on:
         required: false
         type: boolean
         default: false
+      heavy:
+        description: 'Run reflection, consumer smoke and production SSR (false for docs-only changes)'
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: read
 
 jobs:
-  ci:
-    name: lint-typecheck-test-build
+  static:
+    name: static checks
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     env:
       CI: true
-
     steps:
-      # Clone the repository code to the runner
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Validate GitHub Actions workflow files (syntax + common config issues)
+      # Validate workflow files and the release authentication contract
       - name: actionlint
         uses: devops-actions/actionlint@v0.1.10
 
-      # Install pnpm package manager (reads version from packageManager field in package.json)
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - name: Release authentication contract
+        run: node --test scripts/test-release-workflow.mjs
 
-      # Install Node.js runtime environment with pnpm store caching
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      # Install all project dependencies using the exact versions from pnpm-lock.yaml
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Setup workspace
+        uses: ./.github/actions/setup
 
       - name: Dependency patch regressions
         run: node --test scripts/test-braces-security.mjs
 
-      # Run code linting and formatting checks using Biome
       - name: Biome
         run: pnpm biome check .
 
-      # Keep docs, generated truth, parity, Storybook consistency, and adapter boundaries aligned
+      # Docs, generated truth, parity, Storybook consistency and adapter boundaries
       - name: Repo Map integrity
         run: pnpm check:repo-map
 
-      # Run TypeScript type checking across all workspace packages
       - name: Typecheck
         run: pnpm -r typecheck
 
-      # Validate shared adapter contracts compile against current public APIs
+      # Shared adapter contracts compile against current public APIs
       - name: Contract typecheck
         run: pnpm test:typecheck:contracts
 
-      # Run package tests across core, presets, React, and Vue
-      - name: Test
+      - name: Design contracts
+        run: pnpm registry:check && pnpm colors:check && pnpm --filter @marwes-ui/presets test
+
+  test:
+    name: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+
+      - name: Package tests
         run: pnpm test:packages
 
       - name: Node-only public SSR smoke
@@ -75,11 +82,29 @@ jobs:
       - name: SSR scenario regressions
         run: node --test scripts/test-consumer-ssr-scenarios.mjs
 
-      # Build all workspace packages for production
-      - name: Build
-        run: pnpm -r build
+      - name: Dashboard tests
+        run: pnpm --filter dashboard-teaser test
 
-      # Upload build artifacts for use in subsequent jobs (only in release workflow)
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+
+      - name: Build packages
+        run: pnpm build:packages
+
+      - name: Build apps
+        run: pnpm build:apps
+
+      # Reused by the release job to avoid rebuilding
       - name: Upload build artifacts
         if: inputs.upload-build
         uses: actions/upload-artifact@v4
@@ -90,33 +115,60 @@ jobs:
             packages/*/package.json
           retention-days: 1
 
+  reflection:
+    name: cohesive reflection
+    if: inputs.heavy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: true
+      # Repository variable; set to "true" to make Reflection visual diffs block again.
+      REFLECTION_VISUAL_BLOCKING: ${{ vars.REFLECTION_VISUAL_BLOCKING }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Run cohesive reflection
+        run: pnpm cohesive:ci
+
+      - name: Upload Reflection artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reflection-artifacts
+          path: artifacts/reflection
+          if-no-files-found: ignore
+
   consumer-smoke:
     name: consumer smoke / ${{ matrix.framework }}
+    if: inputs.heavy
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         framework: [react, vue, svelte]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - name: Setup workspace
+        uses: ./.github/actions/setup
 
       - name: Test packed ${{ matrix.framework }} consumer
         run: pnpm consumer:smoke --framework ${{ matrix.framework }}
 
   ssr-consumers:
+    if: inputs.heavy
     uses: ./.github/workflows/_ssr.yml
