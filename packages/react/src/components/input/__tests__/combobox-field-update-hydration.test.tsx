@@ -1,5 +1,6 @@
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import type { ComboboxFieldUpdatesProps } from "../../../../../../tests/contracts/combobox-field-updates.contract"
 import { runComboboxFieldUpdatesContract } from "../../../../../../tests/contracts/combobox-field-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { DropdownField } from "../field-variants"
@@ -11,7 +12,7 @@ const options = [
 ]
 
 runComboboxFieldUpdatesContract("react", "SelectField", {
-  ...createUpdateHydrationHarness(({ label, ...select }) => (
+  ...createUpdateHydrationHarness(({ label, ...select }: ComboboxFieldUpdatesProps) => (
     <SelectField label={label} select={{ ...select, options, name: "country" }} />
   )),
   getCombobox: (label) => screen.getByRole("combobox", { name: label }),
@@ -22,7 +23,7 @@ runComboboxFieldUpdatesContract("react", "SelectField", {
 })
 
 runComboboxFieldUpdatesContract("react", "DropdownField", {
-  ...createUpdateHydrationHarness(({ label, ...select }) => (
+  ...createUpdateHydrationHarness(({ label, ...select }: ComboboxFieldUpdatesProps) => (
     <DropdownField label={label} select={{ ...select, options, name: "country" }} />
   )),
   getCombobox: (label) => screen.getByRole("combobox", { name: label }),

@@ -1,10 +1,11 @@
 import { screen } from "@testing-library/react"
+import type { FieldWiringProps } from "../../../../../../tests/contracts/field-wiring-updates.contract"
 import { runFieldWiringUpdatesContract } from "../../../../../../tests/contracts/field-wiring-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { SelectField } from "../select-field"
 
 runFieldWiringUpdatesContract("react", "SelectField", {
-  ...createUpdateHydrationHarness(({ helper, ...props }) => (
+  ...createUpdateHydrationHarness(({ helper, ...props }: FieldWiringProps) => (
     <SelectField
       {...props}
       select={{

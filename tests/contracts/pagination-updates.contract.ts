@@ -5,6 +5,7 @@
 import { describe, expect, it } from "vitest"
 
 export interface PaginationUpdatesProps {
+  defaultPage?: number
   ariaLabel: string
   pageCount: number
   disabled?: boolean
@@ -32,6 +33,17 @@ export function runPaginationUpdatesContract(
   h: PaginationUpdatesHarness,
 ): void {
   describe(`Pagination updates contract: ${adapterName}`, () => {
+    it("keeps uncontrolled defaults and updates after hydration", async () => {
+      const changes: number[] = []
+      expect(
+        await h.hydrate({ ...base, defaultPage: 4, onPageChange: (page) => changes.push(page) }),
+      ).toEqual([])
+      expect(h.getCurrentPage()).toHaveTextContent("4")
+      await h.clickPage("5")
+      expect(h.getCurrentPage()).toHaveTextContent("5")
+      expect(changes).toEqual([5])
+    })
+
     it("moves the current page on a controlled update without reporting a change", async () => {
       const changes: number[] = []
       const onPageChange = (page: number): void => {

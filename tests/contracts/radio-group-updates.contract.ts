@@ -6,6 +6,7 @@
 import { describe, expect, it } from "vitest"
 
 export interface RadioGroupUpdatesProps {
+  defaultValue?: string
   name: string
   label: string
   options: Array<{ value: string; label: string; disabled?: boolean }>
@@ -47,6 +48,22 @@ export function runRadioGroupUpdatesContract(
   h: RadioGroupUpdatesHarness,
 ): void {
   describe(`RadioGroupField updates contract: ${adapterName}`, () => {
+    it("keeps uncontrolled defaults and updates after hydration", async () => {
+      const changes: string[] = []
+      expect(
+        await h.hydrate({
+          ...base,
+          options,
+          defaultValue: options[1]?.value ?? "",
+          onValueChange: (value) => changes.push(value),
+        }),
+      ).toEqual([])
+      expect(h.getRadio(options[1]?.label ?? "")).toBeChecked()
+      await h.click(h.getRadio(options[0]?.label ?? ""))
+      expect(h.getRadio(options[0]?.label ?? "")).toBeChecked()
+      expect(changes).toEqual([options[0]?.value])
+    })
+
     it("moves the checked radio on a controlled update without reporting a change", async () => {
       const changes: string[] = []
       const onValueChange = (value: string): void => {

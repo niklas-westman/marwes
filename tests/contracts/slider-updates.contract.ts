@@ -8,6 +8,7 @@ export interface SliderUpdatesProps {
   ariaLabel: string
   min: number
   max: number
+  defaultValue?: number
   value?: number
   disabled?: boolean
   onValueChange?: (value: number) => void
@@ -31,6 +32,21 @@ const base = { ariaLabel: "Radius", min: 0, max: 100 }
 
 export function runSliderUpdatesContract(adapterName: string, h: SliderUpdatesHarness): void {
   describe(`Slider updates contract: ${adapterName}`, () => {
+    it("keeps an uncontrolled default and edits after hydration", async () => {
+      const changes: number[] = []
+      expect(
+        await h.hydrate({
+          ...base,
+          defaultValue: 30,
+          onValueChange: (value) => changes.push(value),
+        }),
+      ).toEqual([])
+      expect(h.getSlider()).toHaveValue("30")
+      await h.setValue(h.getSlider(), 60)
+      expect(h.getSlider()).toHaveValue("60")
+      expect(changes).toEqual([60])
+    })
+
     it("reflects a controlled value update without reporting a change", async () => {
       const changes: number[] = []
       const onValueChange = (value: number): void => {

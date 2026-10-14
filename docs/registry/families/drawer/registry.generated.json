@@ -23,11 +23,13 @@
     "presets": ["packages/presets/src/firstEdition/drawer.css"],
     "react": [
       "packages/react/src/components/drawer/__tests__/drawer.test.tsx",
+      "packages/react/src/components/drawer/__tests__/presentation-update-hydration.test.tsx",
       "packages/react/src/components/drawer/drawer.tsx",
       "packages/react/src/components/drawer/index.ts"
     ],
     "vue": [
       "packages/vue/src/components/drawer/__tests__/drawer.test.ts",
+      "packages/vue/src/components/drawer/__tests__/presentation-update-hydration.test.ts",
       "packages/vue/src/components/drawer/drawer.ts",
       "packages/vue/src/components/drawer/index.ts"
     ],

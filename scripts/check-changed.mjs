@@ -1,6 +1,7 @@
 import { execFileSync, spawnSync } from "node:child_process"
 import { existsSync } from "node:fs"
 import process from "node:process"
+import { normalizeFamilyName } from "./changed-scope-families.mjs"
 
 const args = new Map()
 for (let index = 2; index < process.argv.length; index += 1) {
@@ -63,24 +64,6 @@ const nonFamilyContractNames = new Set(["provider-behavior"])
 function contractFamilyMatch(path) {
   const match = path.match(/^tests\/contracts\/([^/.]+)\.contract\.ts$/)
   return match && !nonFamilyContractNames.has(match[1]) ? match : null
-}
-
-function normalizeFamilyName(family) {
-  const aliases = {
-    "currency-field": "input",
-    "date-of-birth-field": "input",
-    "dropdown-field": "input",
-    "input-field": "input",
-    "input-otp": "input",
-    "rich-text": "input",
-    select: "input",
-    "select-field": "input",
-    textarea: "input",
-    "textarea-field": "input",
-    "zip-code-field": "input",
-  }
-
-  return aliases[family] ?? family
 }
 
 function localChangedFiles() {
@@ -262,6 +245,21 @@ if (biomeTargets.length > 0) {
     ["exec", "biome", "check", ...biomeTargets],
     "changed files should stay formatted/linted",
   )
+}
+
+if (
+  files.some((file) =>
+    [
+      "scripts/check-changed.mjs",
+      "scripts/changed-scope-families.mjs",
+      "scripts/test-changed-scope-families.mjs",
+    ].includes(file),
+  )
+) {
+  run("Changed-scope family routing regressions", "node", [
+    "--test",
+    "scripts/test-changed-scope-families.mjs",
+  ])
 }
 
 if (docsChanged) {

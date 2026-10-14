@@ -3,12 +3,13 @@
  */
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import type { ToggleUpdatesProps } from "../../../../../../tests/contracts/toggle-updates.contract"
 import { runToggleUpdatesContract } from "../../../../../../tests/contracts/toggle-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { Switch } from "../switch"
 
 runToggleUpdatesContract("react", "Switch", {
-  ...createUpdateHydrationHarness((props) => <Switch {...props} />),
+  ...createUpdateHydrationHarness((props: ToggleUpdatesProps) => <Switch {...props} />),
   getControl: () => screen.getByRole("switch"),
   isChecked: (control) => control.getAttribute("aria-checked") === "true",
   async click(element) {

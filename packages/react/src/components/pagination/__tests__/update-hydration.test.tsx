@@ -3,12 +3,13 @@
  */
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import type { PaginationUpdatesProps } from "../../../../../../tests/contracts/pagination-updates.contract"
 import { runPaginationUpdatesContract } from "../../../../../../tests/contracts/pagination-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { Pagination } from "../pagination"
 
 runPaginationUpdatesContract("react", {
-  ...createUpdateHydrationHarness((props) => <Pagination {...props} />),
+  ...createUpdateHydrationHarness((props: PaginationUpdatesProps) => <Pagination {...props} />),
   getCurrentPage: () => document.querySelector<HTMLElement>('[aria-current="page"]'),
   async clickPage(label) {
     const button = screen.getAllByRole("button").find((item) => item.textContent?.trim() === label)

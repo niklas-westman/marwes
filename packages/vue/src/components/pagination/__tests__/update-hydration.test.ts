@@ -4,15 +4,19 @@
 import userEvent from "@testing-library/user-event"
 import { screen } from "@testing-library/vue"
 import type { Component } from "vue"
+import type { PaginationUpdatesProps } from "../../../../../../tests/contracts/pagination-updates.contract"
 import { runPaginationUpdatesContract } from "../../../../../../tests/contracts/pagination-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { Pagination } from "../pagination"
 
 runPaginationUpdatesContract("vue", {
-  ...createUpdateHydrationHarness(Pagination as Component, ({ page, ...props }) => ({
-    ...props,
-    ...(page !== undefined ? { modelValue: page } : {}),
-  })),
+  ...createUpdateHydrationHarness(
+    Pagination as Component,
+    ({ page, ...props }: PaginationUpdatesProps) => ({
+      ...props,
+      ...(page !== undefined ? { modelValue: page } : {}),
+    }),
+  ),
   getCurrentPage: () => document.querySelector<HTMLElement>('[aria-current="page"]'),
   async clickPage(label) {
     const button = screen.getAllByRole("button").find((item) => item.textContent?.trim() === label)

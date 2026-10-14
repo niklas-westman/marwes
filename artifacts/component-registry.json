@@ -2047,6 +2047,7 @@
             "packages/react/src/components/checkbox/__tests__/checkbox-field.test.tsx",
             "packages/react/src/components/checkbox/__tests__/checkbox-group-field-wiring-update-hydration.test.tsx",
             "packages/react/src/components/checkbox/__tests__/checkbox-group-field.test.tsx",
+            "packages/react/src/components/checkbox/__tests__/checkbox-group-state-update-hydration.test.tsx",
             "packages/react/src/components/checkbox/__tests__/checkbox.test.tsx",
             "packages/react/src/components/checkbox/__tests__/update-hydration.test.tsx",
             "packages/react/src/components/checkbox/checkbox-field.tsx",
@@ -2060,6 +2061,7 @@
             "packages/vue/src/components/checkbox/__tests__/checkbox-field.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-group-field-wiring-update-hydration.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox-group-field.test.ts",
+            "packages/vue/src/components/checkbox/__tests__/checkbox-group-state-update-hydration.test.ts",
             "packages/vue/src/components/checkbox/__tests__/checkbox.test.ts",
             "packages/vue/src/components/checkbox/__tests__/update-hydration.test.ts",
             "packages/vue/src/components/checkbox/checkbox-field.ts",
@@ -2304,12 +2306,14 @@
           "react": [
             "packages/react/src/components/context-menu/__tests__/context-menu-contract.test.tsx",
             "packages/react/src/components/context-menu/__tests__/context-menu.test.tsx",
+            "packages/react/src/components/context-menu/__tests__/presentation-update-hydration.test.tsx",
             "packages/react/src/components/context-menu/context-menu.tsx",
             "packages/react/src/components/context-menu/index.ts"
           ],
           "vue": [
             "packages/vue/src/components/context-menu/__tests__/context-menu-contract.test.ts",
             "packages/vue/src/components/context-menu/__tests__/context-menu.test.ts",
+            "packages/vue/src/components/context-menu/__tests__/presentation-update-hydration.test.ts",
             "packages/vue/src/components/context-menu/context-menu.ts",
             "packages/vue/src/components/context-menu/index.ts"
           ],
@@ -2494,6 +2498,7 @@
           "presets": ["packages/presets/src/firstEdition/date-picker.css"],
           "react": [
             "packages/react/src/components/date-picker/__tests__/date-picker-field-wiring-update-hydration.test.tsx",
+            "packages/react/src/components/date-picker/__tests__/date-picker-state-update-hydration.test.tsx",
             "packages/react/src/components/date-picker/__tests__/date-picker.test.tsx",
             "packages/react/src/components/date-picker/__tests__/index-exports.test.tsx",
             "packages/react/src/components/date-picker/__tests__/weekday-labels.test.tsx",
@@ -2503,6 +2508,7 @@
           ],
           "vue": [
             "packages/vue/src/components/date-picker/__tests__/date-picker-field-wiring-update-hydration.test.ts",
+            "packages/vue/src/components/date-picker/__tests__/date-picker-state-update-hydration.test.ts",
             "packages/vue/src/components/date-picker/__tests__/date-picker.test.ts",
             "packages/vue/src/components/date-picker/__tests__/index-exports.test.ts",
             "packages/vue/src/components/date-picker/__tests__/weekday-labels.test.ts",
@@ -2722,8 +2728,10 @@
             "packages/presets/src/firstEdition/molecules/dialog-modal.css"
           ],
           "react": [
+            "packages/react/src/components/dialog/__tests__/dialog-modal-update-hydration.test.tsx",
             "packages/react/src/components/dialog/__tests__/dialog-modal.test.tsx",
             "packages/react/src/components/dialog/__tests__/dialog.test.tsx",
+            "packages/react/src/components/dialog/__tests__/presentation-update-hydration.test.tsx",
             "packages/react/src/components/dialog/__tests__/variants.test.tsx",
             "packages/react/src/components/dialog/dialog-modal.tsx",
             "packages/react/src/components/dialog/dialog.tsx",
@@ -2731,8 +2739,10 @@
             "packages/react/src/components/dialog/variants.tsx"
           ],
           "vue": [
+            "packages/vue/src/components/dialog/__tests__/dialog-modal-update-hydration.test.ts",
             "packages/vue/src/components/dialog/__tests__/dialog-modal.test.ts",
             "packages/vue/src/components/dialog/__tests__/dialog.test.ts",
+            "packages/vue/src/components/dialog/__tests__/presentation-update-hydration.test.ts",
             "packages/vue/src/components/dialog/__tests__/variants.test.ts",
             "packages/vue/src/components/dialog/dialog-modal.ts",
             "packages/vue/src/components/dialog/dialog.ts",
@@ -3205,11 +3215,13 @@
           "presets": ["packages/presets/src/firstEdition/drawer.css"],
           "react": [
             "packages/react/src/components/drawer/__tests__/drawer.test.tsx",
+            "packages/react/src/components/drawer/__tests__/presentation-update-hydration.test.tsx",
             "packages/react/src/components/drawer/drawer.tsx",
             "packages/react/src/components/drawer/index.ts"
           ],
           "vue": [
             "packages/vue/src/components/drawer/__tests__/drawer.test.ts",
+            "packages/vue/src/components/drawer/__tests__/presentation-update-hydration.test.ts",
             "packages/vue/src/components/drawer/drawer.ts",
             "packages/vue/src/components/drawer/index.ts"
           ],
@@ -3916,16 +3928,19 @@
             "packages/react/src/components/input/__tests__/dropdown-field-wiring-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/dropdown-field.test.tsx",
             "packages/react/src/components/input/__tests__/email-field-wiring-update-hydration.test.tsx",
+            "packages/react/src/components/input/__tests__/hydrated-rerender.test.tsx",
             "packages/react/src/components/input/__tests__/index-exports.test.ts",
             "packages/react/src/components/input/__tests__/input-field-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/input-field.test.tsx",
             "packages/react/src/components/input/__tests__/input-otp-field-wiring-update-hydration.test.tsx",
+            "packages/react/src/components/input/__tests__/input-otp-state-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/input-otp.test.tsx",
             "packages/react/src/components/input/__tests__/input.test.tsx",
             "packages/react/src/components/input/__tests__/password-field-wiring-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/phone-field-wiring-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/rich-text-field-wiring-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/rich-text-field.test.tsx",
+            "packages/react/src/components/input/__tests__/rich-text-state-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/rich-text.test.tsx",
             "packages/react/src/components/input/__tests__/search-field-wiring-update-hydration.test.tsx",
             "packages/react/src/components/input/__tests__/select-field-wiring-update-hydration.test.tsx",
@@ -3964,10 +3979,12 @@
             "packages/vue/src/components/input/__tests__/dropdown-field.test.ts",
             "packages/vue/src/components/input/__tests__/email-field-wiring-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/field-variants.test.ts",
+            "packages/vue/src/components/input/__tests__/hydrated-rerender.test.ts",
             "packages/vue/src/components/input/__tests__/index-exports.test.ts",
             "packages/vue/src/components/input/__tests__/input-field-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/input-field.test.ts",
             "packages/vue/src/components/input/__tests__/input-otp-field-wiring-update-hydration.test.ts",
+            "packages/vue/src/components/input/__tests__/input-otp-state-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/input-otp.test.ts",
             "packages/vue/src/components/input/__tests__/input.test.ts",
             "packages/vue/src/components/input/__tests__/password-field-wiring-update-hydration.test.ts",
@@ -3975,6 +3992,7 @@
             "packages/vue/src/components/input/__tests__/prop-key-gaps.test.ts",
             "packages/vue/src/components/input/__tests__/rich-text-field-wiring-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/rich-text-field.test.ts",
+            "packages/vue/src/components/input/__tests__/rich-text-state-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/rich-text.test.ts",
             "packages/vue/src/components/input/__tests__/search-field-wiring-update-hydration.test.ts",
             "packages/vue/src/components/input/__tests__/select-field-wiring-update-hydration.test.ts",
@@ -7635,6 +7653,7 @@
           ],
           "react": [
             "packages/react/src/components/toast/__tests__/toast-container.test.tsx",
+            "packages/react/src/components/toast/__tests__/toast-update-hydration.test.tsx",
             "packages/react/src/components/toast/__tests__/variants.test.tsx",
             "packages/react/src/components/toast/index.ts",
             "packages/react/src/components/toast/toast-container.tsx",
@@ -7645,6 +7664,7 @@
           ],
           "vue": [
             "packages/vue/src/components/toast/__tests__/toast-container.test.ts",
+            "packages/vue/src/components/toast/__tests__/toast-update-hydration.test.ts",
             "packages/vue/src/components/toast/__tests__/variants.test.ts",
             "packages/vue/src/components/toast/index.ts",
             "packages/vue/src/components/toast/toast-container.ts",
@@ -7906,6 +7926,7 @@
           "react": [
             "packages/react/src/components/tooltip/__tests__/index-exports.test.tsx",
             "packages/react/src/components/tooltip/__tests__/tooltip-group.test.tsx",
+            "packages/react/src/components/tooltip/__tests__/tooltip-update-hydration.test.tsx",
             "packages/react/src/components/tooltip/__tests__/tooltip.test.tsx",
             "packages/react/src/components/tooltip/index.ts",
             "packages/react/src/components/tooltip/tooltip-group.tsx",
@@ -7915,6 +7936,7 @@
             "packages/vue/src/components/tooltip/__tests__/callback-single-fire.test.ts",
             "packages/vue/src/components/tooltip/__tests__/index-exports.test.ts",
             "packages/vue/src/components/tooltip/__tests__/tooltip-group.test.ts",
+            "packages/vue/src/components/tooltip/__tests__/tooltip-update-hydration.test.ts",
             "packages/vue/src/components/tooltip/__tests__/tooltip.test.ts",
             "packages/vue/src/components/tooltip/index.ts",
             "packages/vue/src/components/tooltip/tooltip-group.ts",

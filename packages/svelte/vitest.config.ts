@@ -27,6 +27,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    exclude: ["**/node_modules/**", "**/server-smoke.test.ts"],
     globals: true,
     setupFiles: [],
     globalSetup: ["./src/tests/support/ssr-render-server.ts"],

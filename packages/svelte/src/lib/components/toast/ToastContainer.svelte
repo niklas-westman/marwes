@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import { mergeClass } from "../../internal/merge-class.js";
   import ErrorToast from "./ErrorToast.svelte";
   import InfoToast from "./InfoToast.svelte";
@@ -33,6 +34,11 @@
   };
 
   const timerStates = new Map<string, TimerState>();
+
+  onDestroy(() => {
+    for (const state of timerStates.values()) clearDismissTimer(state);
+    timerStates.clear();
+  });
 
   function getTimerState(toast: ManagedToast): TimerState {
     let state = timerStates.get(toast.id);

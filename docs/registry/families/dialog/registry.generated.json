@@ -25,8 +25,10 @@
       "packages/presets/src/firstEdition/molecules/dialog-modal.css"
     ],
     "react": [
+      "packages/react/src/components/dialog/__tests__/dialog-modal-update-hydration.test.tsx",
       "packages/react/src/components/dialog/__tests__/dialog-modal.test.tsx",
       "packages/react/src/components/dialog/__tests__/dialog.test.tsx",
+      "packages/react/src/components/dialog/__tests__/presentation-update-hydration.test.tsx",
       "packages/react/src/components/dialog/__tests__/variants.test.tsx",
       "packages/react/src/components/dialog/dialog-modal.tsx",
       "packages/react/src/components/dialog/dialog.tsx",
@@ -34,8 +36,10 @@
       "packages/react/src/components/dialog/variants.tsx"
     ],
     "vue": [
+      "packages/vue/src/components/dialog/__tests__/dialog-modal-update-hydration.test.ts",
       "packages/vue/src/components/dialog/__tests__/dialog-modal.test.ts",
       "packages/vue/src/components/dialog/__tests__/dialog.test.ts",
+      "packages/vue/src/components/dialog/__tests__/presentation-update-hydration.test.ts",
       "packages/vue/src/components/dialog/__tests__/variants.test.ts",
       "packages/vue/src/components/dialog/dialog-modal.ts",
       "packages/vue/src/components/dialog/dialog.ts",
