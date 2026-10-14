@@ -65,3 +65,45 @@ describe("Node server component smoke", () => {
     expect(new Set(results).size).toBe(1)
   })
 })
+
+describe("initially-open modal server probes", () => {
+  for (const name of ["DialogModal", "ConfirmDialog", "DestructiveDialog", "InfoDialog"] as const) {
+    it(`records ${name} server content and portal output`, async () => {
+      const capture = captureConsoleIssues()
+      try {
+        const context: { teleports?: Record<string, string> } = {}
+        const Host = defineComponent({
+          setup: () => () =>
+            h(MarwesProvider, null, {
+              default: () =>
+                h(components[name] as never, {
+                  open: true,
+                  title: "Initial modal",
+                  portalTarget: "#modal-portal-target",
+                }),
+            }),
+        })
+        const markup = await renderToString(createSSRApp(Host), context)
+        expect(markup).toContain("teleport")
+        expect(context.teleports?.["#modal-portal-target"]).toContain('role="dialog"')
+        console.info(
+          JSON.stringify({
+            adapter: "vue",
+            scenario: name,
+            initialOpen: true,
+            status: "requires-integration",
+            reason: "SSR teleport output must be inserted into its target",
+            targets: Object.keys(context.teleports ?? {}),
+          }),
+        )
+        expect(capture.issues).toEqual([])
+      } finally {
+        capture.stop()
+      }
+    })
+  }
+})
+
+it("includes the RichText value in initial server HTML", async () => {
+  expect(await renderComponent("RichTextField")).toContain("Server notes")
+})

@@ -14,12 +14,14 @@ type HydratedRoot = ReturnType<typeof hydrateRoot>
 
 const hydratedRoots: HydratedRoot[] = []
 
-afterEach(() => {
+export function unmountHydratedApps(): void {
   for (const root of hydratedRoots.splice(0)) {
     act(() => root.unmount())
   }
   document.body.innerHTML = ""
-})
+}
+
+afterEach(unmountHydratedApps)
 
 function withProvider(ui: React.ReactElement): React.ReactElement {
   return <MarwesProvider>{ui}</MarwesProvider>
@@ -72,6 +74,7 @@ export function createUpdateHydrationHarness<Props>(
 
   return {
     render(props: Props) {
+      hydratedRoot = undefined
       rendered = render(withProvider(renderUi(props)))
     },
     rerender(props: Props) {

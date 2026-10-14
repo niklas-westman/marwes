@@ -13,6 +13,7 @@ export interface TabUpdatesItem {
 }
 
 export interface TabUpdatesProps {
+  defaultActiveTab?: string
   ariaLabel: string
   tabs: TabUpdatesItem[]
   activeTab?: string
@@ -67,6 +68,22 @@ function expectOnlyTabActive(h: TabUpdatesHarness, activeLabel: string, activePa
 
 export function runTabUpdatesContract(adapterName: string, h: TabUpdatesHarness): void {
   describe(`Tab updates contract: ${adapterName}`, () => {
+    it("keeps uncontrolled defaults and updates after hydration", async () => {
+      const changes: string[] = []
+      expect(
+        await h.hydrate({
+          ariaLabel,
+          tabs: tabs(),
+          defaultActiveTab: "analytics",
+          onActiveTabChange: (value) => changes.push(value),
+        }),
+      ).toEqual([])
+      expectOnlyTabActive(h, "Analytics", "Analytics panel")
+      await h.click(h.getTab("Settings"))
+      expectOnlyTabActive(h, "Settings", "Settings panel")
+      expect(changes).toEqual(["settings"])
+    })
+
     it("moves selection, roving tabindex and visible panel together on a controlled update", async () => {
       const changes: string[] = []
       const onActiveTabChange = (value: string): void => {

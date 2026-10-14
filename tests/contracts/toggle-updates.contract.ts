@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest"
 
 export interface ToggleUpdatesProps {
   ariaLabel: string
+  defaultChecked?: boolean
   checked?: boolean
   disabled?: boolean
   onCheckedChange?: (checked: boolean) => void
@@ -33,6 +34,23 @@ export function runToggleUpdatesContract(
   h: ToggleUpdatesHarness,
 ): void {
   describe(`${controlName} updates contract: ${adapterName}`, () => {
+    if (controlName === "Checkbox") {
+      it("hydrates an uncontrolled checked default and changes natively", async () => {
+        const changes: boolean[] = []
+        expect(
+          await h.hydrate({
+            ariaLabel,
+            defaultChecked: true,
+            onCheckedChange: (checked) => changes.push(checked),
+          }),
+        ).toEqual([])
+        expect(h.isChecked(h.getControl())).toBe(true)
+        await h.click(h.getControl())
+        expect(h.isChecked(h.getControl())).toBe(false)
+        expect(changes).toEqual([false])
+      })
+    }
+
     it("reflects a controlled checked update without reporting a change", async () => {
       const changes: boolean[] = []
       const onCheckedChange = (checked: boolean): void => {

@@ -233,6 +233,8 @@ export const RichText = defineComponent(
     )
     const showToolbar = computed(() => !props.readOnly)
 
+    const initialEditorHtml = editorHtml.value
+
     function syncEditorState(nextHtml: string): string {
       const normalizedHtml = normalizeRichTextHtml(nextHtml)
       isEditorEmpty.value = isRichTextHtmlEmpty(normalizedHtml)
@@ -405,6 +407,7 @@ export const RichText = defineComponent(
             ref: editorElement,
             class: "mw-rich-text__editor",
             "data-rich-text-editor": "true",
+            innerHTML: initialEditorHtml,
             "data-empty": isEditorEmpty.value ? "true" : undefined,
             "data-placeholder": props.placeholder,
             ...toRichTextHtmlAttributes(renderKit.a11y),
@@ -434,7 +437,8 @@ export const RichText = defineComponent(
             },
             onFocus: refreshActiveFormats,
             onBlur: () => {
-              syncEditorState(editorElement.value?.innerHTML ?? "")
+              const nextHtml = normalizeRichTextHtml(editorElement.value?.innerHTML ?? "")
+              if (nextHtml !== editorHtml.value) syncEditorState(nextHtml)
               activeFormats.value = []
             },
           }),

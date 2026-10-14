@@ -101,7 +101,10 @@ export const RichTextField = defineComponent(
           h(RichText, {
             ...editorProps.value,
             "onUpdate:modelValue": (value: string) => emit("update:modelValue", value),
-            "onValue-change": (value: string) => emit("value-change", value),
+            onValueChange: (value: string) => {
+              props.editor.onValueChange?.(value)
+              emit("value-change", value)
+            },
           }),
         ]),
 
