@@ -13,6 +13,7 @@ import type { TestProject } from "vitest/node"
 interface RenderRequest {
   componentPath: string
   props: Record<string, unknown>
+  reactive?: boolean
 }
 
 export default async function setup(project: TestProject): Promise<() => Promise<void>> {
@@ -28,6 +29,10 @@ export default async function setup(project: TestProject): Promise<() => Promise
     logLevel: "error",
   })
 
+  // Loading the public component host compiles the export graph before tests start their timers.
+  // Otherwise parallel hydration suites can time out behind the first cold SSR request.
+  await vite.ssrLoadModule("/src/tests/type-fixtures/HydrationComponentHost.svelte")
+
   const httpServer = createHttpServer(async (request, response) => {
     let body = ""
     for await (const chunk of request) {
@@ -35,10 +40,15 @@ export default async function setup(project: TestProject): Promise<() => Promise
     }
 
     try {
-      const { componentPath, props } = JSON.parse(body) as RenderRequest
+      const { componentPath, props, reactive } = JSON.parse(body) as RenderRequest
       const component = await vite.ssrLoadModule(componentPath)
       const { render } = await vite.ssrLoadModule("svelte/server")
-      const output = render(component.default, { props })
+      const host = reactive
+        ? await vite.ssrLoadModule("/src/tests/type-fixtures/ReactiveHydrationHost.svelte")
+        : component
+      const output = render(host.default, {
+        props: reactive ? { component: component.default, componentProps: props } : props,
+      })
       response.end(output.body)
     } catch (error) {
       console.error("SSR render server error:", error)

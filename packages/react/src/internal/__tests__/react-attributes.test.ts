@@ -9,8 +9,15 @@ describe("toReactAttributes", () => {
         readonly: true,
         autocomplete: "email",
         inputmode: "numeric",
+        maxlength: 6,
       }),
-    ).toEqual({ tabIndex: -1, readOnly: true, autoComplete: "email", inputMode: "numeric" })
+    ).toEqual({
+      tabIndex: -1,
+      readOnly: true,
+      autoComplete: "email",
+      inputMode: "numeric",
+      maxLength: 6,
+    })
   })
 
   it("keeps aria and other names untouched", () => {

@@ -1,4 +1,5 @@
 import { render } from "@testing-library/svelte"
+import { tick } from "svelte"
 import { hydrateFromServerMarkup } from "./hydrate-from-server"
 
 export type SvelteComponent = Parameters<typeof render>[0]
@@ -30,6 +31,7 @@ export function createUpdateHydrationHarness<Props extends object>(options: {
     },
     hydrate(props: Props) {
       const clientProps = options.toSvelteProps(props)
+      renderedKeys = Object.keys(clientProps)
       const serverProps = Object.fromEntries(
         Object.entries(clientProps).filter(([, value]) => typeof value !== "function"),
       )
@@ -39,6 +41,12 @@ export function createUpdateHydrationHarness<Props extends object>(options: {
         component: options.component as never,
         serverProps,
         clientProps,
+        onHydrated: (update) => {
+          rerenderComponent = async (props) => {
+            update({ ...clientProps, ...props })
+            await tick()
+          }
+        },
       })
     },
   }

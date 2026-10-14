@@ -107,6 +107,7 @@ export function createDatePickerRecipe(opts: DatePickerOptions = {}): DatePicker
     ? { ariaLabelledBy: opts.ariaLabelledBy }
     : { ariaLabel: calendarLabel }
   if (opts.ariaDescribedBy) a11y.ariaDescribedBy = opts.ariaDescribedBy
+  if (opts.invalid) a11y.ariaInvalid = true
 
   return {
     className: ["mw-date-picker", `mw-date-picker--${device}`].join(" "),

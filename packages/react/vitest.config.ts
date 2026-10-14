@@ -25,6 +25,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    exclude: ["**/node_modules/**", "**/server-smoke.test.ts"],
     setupFiles: ["./vitest.setup.ts"],
     include: ["src/**/__tests__/*.test.ts", "src/**/__tests__/*.test.tsx"],
     restoreMocks: true,

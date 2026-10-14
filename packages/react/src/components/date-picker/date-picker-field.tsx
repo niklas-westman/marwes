@@ -76,6 +76,7 @@ export function DatePickerField(props: DatePickerFieldProps): React.ReactElement
 
       <DatePicker
         {...props.datePicker}
+        invalid={hasError || props.datePicker?.invalid === true}
         ariaLabelledBy={labelId}
         {...(mergedDescribedBy ? { ariaDescribedBy: mergedDescribedBy } : {})}
       />

@@ -4,15 +4,19 @@
 import userEvent from "@testing-library/user-event"
 import { screen } from "@testing-library/vue"
 import type { Component } from "vue"
+import type { TabUpdatesProps } from "../../../../../../tests/contracts/tab-updates.contract"
 import { runTabUpdatesContract } from "../../../../../../tests/contracts/tab-updates.contract"
 import { createUpdateHydrationHarness } from "../../../test-support/update-hydration"
 import { TabGroup } from "../tab-group"
 
 runTabUpdatesContract("vue", {
-  ...createUpdateHydrationHarness(TabGroup as Component, ({ onActiveTabChange, ...props }) => ({
-    ...props,
-    ...(onActiveTabChange ? { "onUpdate:activeTab": onActiveTabChange } : {}),
-  })),
+  ...createUpdateHydrationHarness(
+    TabGroup as Component,
+    ({ onActiveTabChange, ...props }: TabUpdatesProps) => ({
+      ...props,
+      ...(onActiveTabChange ? { "onUpdate:activeTab": onActiveTabChange } : {}),
+    }),
+  ),
   getTab: (name) => screen.getByRole("tab", { name }),
   getAllTabs: () => screen.getAllByRole("tab"),
   getVisiblePanels: () => screen.queryAllByRole("tabpanel"),

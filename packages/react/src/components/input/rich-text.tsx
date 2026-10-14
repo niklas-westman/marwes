@@ -12,6 +12,7 @@ import type { CssVars, RichTextFormat, RichTextOptions } from "@marwes-ui/core"
 import * as React from "react"
 import { useRenderKitDebug } from "../../hooks/use-renderkit-debug"
 import { toReactAttributes } from "../../internal/react-attributes"
+import { useClientLayoutEffect } from "../../internal/use-client-layout-effect"
 import { Icon } from "../icon"
 
 type StyleWithVars = React.CSSProperties & CssVars
@@ -225,6 +226,7 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
   useRenderKitDebug(kit, "RichText")
 
   const editorHtml = isControlled ? normalizedControlledValue : uncontrolledHtml
+  const initialEditorMarkup = React.useRef({ __html: editorHtml })
   const style = kit.vars as StyleWithVars
   const className = props.className ? `${kit.className} ${props.className}` : kit.className
   const showToolbar = !props.readOnly
@@ -250,7 +252,7 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
     setActiveFormats(getActiveFormatsFromSelection(editorElementRef.current))
   }, [])
 
-  React.useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const editorElement = editorElementRef.current
 
     if (!editorElement) {
@@ -415,11 +417,14 @@ export const RichText = React.forwardRef<HTMLDivElement, RichTextProps>((props, 
         {...toReactAttributes(toRichTextHtmlAttributes(kit.a11y))}
         contentEditable={!props.disabled && !props.readOnly}
         suppressContentEditableWarning
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Seed the existing HTML editor once for SSR; later edits stay under its cursor-preserving DOM synchronization.
+        dangerouslySetInnerHTML={initialEditorMarkup.current}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
         onFocus={refreshActiveFormats}
         onBlur={() => {
-          syncEditorState(editorElementRef.current?.innerHTML ?? "")
+          const nextHtml = normalizeRichTextHtml(editorElementRef.current?.innerHTML ?? "")
+          if (nextHtml !== editorHtml) syncEditorState(nextHtml)
           setActiveFormats([])
         }}
       />

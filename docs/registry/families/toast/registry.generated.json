@@ -30,6 +30,7 @@
     ],
     "react": [
       "packages/react/src/components/toast/__tests__/toast-container.test.tsx",
+      "packages/react/src/components/toast/__tests__/toast-update-hydration.test.tsx",
       "packages/react/src/components/toast/__tests__/variants.test.tsx",
       "packages/react/src/components/toast/index.ts",
       "packages/react/src/components/toast/toast-container.tsx",
@@ -40,6 +41,7 @@
     ],
     "vue": [
       "packages/vue/src/components/toast/__tests__/toast-container.test.ts",
+      "packages/vue/src/components/toast/__tests__/toast-update-hydration.test.ts",
       "packages/vue/src/components/toast/__tests__/variants.test.ts",
       "packages/vue/src/components/toast/index.ts",
       "packages/vue/src/components/toast/toast-container.ts",

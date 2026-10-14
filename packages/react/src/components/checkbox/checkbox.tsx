@@ -1,3 +1,4 @@
+import { useClientLayoutEffect } from "../../internal/use-client-layout-effect"
 /**
  * React adapter for Marwes Checkbox.
  * - Renders a native <input type="checkbox"> using the core render kit.
@@ -95,7 +96,7 @@ export function Checkbox(props: CheckboxProps): React.ReactElement {
   const inputRef = React.useRef<HTMLInputElement | null>(null)
 
   // Keep DOM property in sync.
-  React.useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const el = inputRef.current
     if (!el) return
     el.indeterminate = kit.indeterminate

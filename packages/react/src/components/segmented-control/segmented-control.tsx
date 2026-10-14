@@ -37,6 +37,7 @@ export interface SegmentedControlProps<T extends string = string> {
   disabled?: boolean
   ariaLabel?: string
   ariaLabelledBy?: string
+  invalid?: boolean
   ariaDescribedBy?: string
   /** Fallback accessible name for the group when `ariaLabel` is not set. */
   label?: string
@@ -67,6 +68,7 @@ export function SegmentedControl<T extends string = string>(
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    invalid,
     label,
     fullWidth,
     className,
@@ -143,6 +145,7 @@ export function SegmentedControl<T extends string = string>(
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    invalid,
     label,
     fullWidth,
   })

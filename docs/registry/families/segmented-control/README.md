@@ -222,3 +222,12 @@ pnpm build
 - Should purpose variants (e.g. `ThemeToggle`, `ViewDensityToggle`) be added as thin wrappers?
 - Should the family support an animated sliding indicator for the active pill?
 - When should the first formal accessibility audit be scheduled?
+
+## Field error and hydration contract
+
+The field wrapper exposes `aria-invalid="true"` on its radiogroup while an error
+is present, and removes that state when the error is cleared. An explicitly
+invalid nested control remains invalid after the field error is removed.
+Core resolves the `invalid` option and each adapter applies the shared HTML mapping.
+The visible label and description/error references are update- and hydration-tested
+in React, Vue and Svelte. This coverage does not declare official SSR support.

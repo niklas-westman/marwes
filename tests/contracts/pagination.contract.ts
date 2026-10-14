@@ -92,6 +92,10 @@ const paginationOptionCases: Record<keyof PaginationOptions, PaginationOptionCas
     options: { pageCount: 5, ariaLabelledBy: "results-heading" },
     expectRendered: (root) => expect(root).toHaveAttribute("aria-labelledby", "results-heading"),
   },
+  invalid: {
+    options: { pageCount: 5, invalid: true },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-invalid", "true"),
+  },
   ariaDescribedBy: {
     options: { pageCount: 5, ariaDescribedBy: "results-help" },
     expectRendered: (root) => expect(root).toHaveAttribute("aria-describedby", "results-help"),

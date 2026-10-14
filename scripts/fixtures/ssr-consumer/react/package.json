@@ -1,0 +1,17 @@
+{
+  "name": "marwes-ssr-react-matrix",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build && vite build --ssr src/app.jsx --outDir dist-server",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "vite": "7.3.6",
+    "@vitejs/plugin-react": "5.1.3"
+  }
+}

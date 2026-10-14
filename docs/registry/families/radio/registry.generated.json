@@ -28,6 +28,7 @@
       "packages/presets/src/firstEdition/molecules/radio-group-field.css"
     ],
     "react": [
+      "packages/react/src/components/radio/__tests__/radio-group-field-wiring-update-hydration.test.tsx",
       "packages/react/src/components/radio/__tests__/radio-group-field.test.tsx",
       "packages/react/src/components/radio/__tests__/radio-group-update-hydration.test.tsx",
       "packages/react/src/components/radio/__tests__/radio.test.tsx",
@@ -39,6 +40,7 @@
     ],
     "vue": [
       "packages/vue/src/components/radio/__tests__/callback-single-fire.test.ts",
+      "packages/vue/src/components/radio/__tests__/radio-group-field-wiring-update-hydration.test.ts",
       "packages/vue/src/components/radio/__tests__/radio-group-field.test.ts",
       "packages/vue/src/components/radio/__tests__/radio-group-update-hydration.test.ts",
       "packages/vue/src/components/radio/__tests__/radio.test.ts",

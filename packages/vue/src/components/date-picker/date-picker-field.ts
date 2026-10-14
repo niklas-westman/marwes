@@ -69,6 +69,7 @@ export const DatePickerField = defineComponent(
       const datePickerProps: DatePickerProps = {
         ...(props.datePicker ?? {}),
         ariaLabelledBy: labelId.value,
+        invalid: hasError.value || props.datePicker?.invalid === true,
       }
       if (a11yIds.value.describedBy) {
         datePickerProps.ariaDescribedBy = a11yIds.value.describedBy

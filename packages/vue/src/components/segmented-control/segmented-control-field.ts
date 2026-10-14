@@ -68,6 +68,7 @@ export const SegmentedControlField = defineComponent(
       const sc: SegmentedControlPropsVue = {
         ...(props.segmentedControl as SegmentedControlPropsVue),
         ariaLabelledBy: labelId.value,
+        invalid: hasError.value || props.segmentedControl.invalid === true,
       }
       if (a11yIds.value.describedBy) {
         sc.ariaDescribedBy = a11yIds.value.describedBy

@@ -168,6 +168,30 @@ pnpm dev:playground
 pnpm test:storybook:a11y
 ```
 
+### Update and hydration contracts
+
+Shared contracts in `tests/contracts/*-updates.contract.ts` test controlled updates,
+disabled transitions and server-rendered state after hydration in all three adapters.
+Field wiring checks cover every field wrapper and purpose input: accessible naming,
+existing label/description targets, error addition/removal, invalid state and unique ids.
+Group contracts also check multiple member controls and one shared error. Combobox field
+contracts verify the selection, hidden form value, callbacks and listbox/active-option
+targets after opening a hydrated field. Checkbox checks its native indeterminate property;
+Pagination checks disabled buttons before and after hydration.
+
+Each adapter also has a `hydration-smoke.test` suite with representative props for every
+public component export (including purpose variants). An inventory assertion fails when
+a new component has no smoke case. The smoke tests capture hydration warnings/errors;
+React also captures recoverable hydration errors. The hydration harnesses restore console spies
+on thrown hydration errors and unmount hydrated applications. Svelte waits for hydration
+effects and precompiles the public export graph before starting test timers.
+
+This is contract-tested hydration, **not an official SSR support declaration**. The
+smoke cases render overlays closed; portal creation, focus return and closed-server to
+open-client transitions need separate contracts. Framework-app build coverage for Next.js,
+Nuxt and SvelteKit remains a separate product decision. React 18's server-render-only
+`useLayoutEffect` warnings are outside the hydration capture window.
+
 ### Reflection visual evidence
 
 Marwes uses `reflection-check` for Figma-backed component visual evidence through
@@ -405,3 +429,9 @@ For strict component baselines, follow
 - [AI Metadata Protocol](./ai-metadata.md)
 - [Governance](./governance.md)
 - [Adding Components](../guides/adding-components.md)
+
+### SSR production verification
+
+Run `pnpm test:ssr:packages` for Node-only public component rendering. Under Node 24.15+ in the 24 series, run `pnpm consumer:ssr --framework next --themes` (or `nuxt`, `sveltekit`, `react18`, `react19`) for packed production apps and Chromium evidence. Reports and full diagnostics are saved under `.cache/ssr/<framework>/`. Known blocked scenarios remain visible; `--strict-probes` fails on them too. Use `--reuse` only for local debugging of an already-built consumer, never as current-source evidence in CI.
+
+See [SSR verification evidence](../audits/ssr-verification.md) for exact tested versions, blockers, CSP scope and the separate support decisions. These tests do not declare general SSR support.

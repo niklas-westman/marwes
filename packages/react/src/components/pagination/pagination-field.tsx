@@ -82,6 +82,7 @@ export function PaginationField(props: PaginationFieldProps): React.ReactElement
 
       <Pagination
         {...props.pagination}
+        invalid={hasError || props.pagination.invalid === true}
         ariaLabelledBy={labelId}
         {...(mergedDescribedBy ? { ariaDescribedBy: mergedDescribedBy } : {})}
       />

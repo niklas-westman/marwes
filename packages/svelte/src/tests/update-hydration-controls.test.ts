@@ -1,3 +1,4 @@
+import { runCheckboxIndeterminateUpdatesContract } from "../../../../tests/contracts/checkbox-indeterminate-updates.contract"
 /**
  * Svelte adapter: wires the shared update and hydration contracts for the Tier 1 controls.
  */
@@ -144,6 +145,7 @@ runPaginationUpdatesContract("svelte", {
     const button = screen.getAllByRole("button").find((item) => item.textContent?.trim() === label)
     if (!button) throw new Error(`No page button labelled ${label}`)
 
+    if ((button as HTMLButtonElement).disabled) return
     await fireEvent.click(button)
   },
 })
@@ -182,4 +184,13 @@ runRadioGroupUpdatesContract("svelte", {
 
     await fireEvent.click(element)
   },
+})
+
+runCheckboxIndeterminateUpdatesContract("svelte", {
+  ...createUpdateHydrationHarness({
+    component: Checkbox as SvelteComponent,
+    componentPath: "/src/lib/components/checkbox/Checkbox.svelte",
+    toSvelteProps: toSvelteToggleProps,
+  }),
+  getCheckbox: () => screen.getByRole("checkbox") as HTMLInputElement,
 })

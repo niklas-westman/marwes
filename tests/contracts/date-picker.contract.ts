@@ -119,6 +119,10 @@ const datePickerOptionCases: Record<keyof DatePickerOptions, DatePickerOptionCas
     options: { ariaLabelledBy: "label-id" },
     expectRendered: (root) => expect(root).toHaveAttribute("aria-labelledby", "label-id"),
   },
+  invalid: {
+    options: { invalid: true },
+    expectRendered: (root) => expect(root).toHaveAttribute("aria-invalid", "true"),
+  },
   ariaDescribedBy: {
     options: { ariaDescribedBy: "hint-id" },
     expectRendered: (root) => expect(root).toHaveAttribute("aria-describedby", "hint-id"),

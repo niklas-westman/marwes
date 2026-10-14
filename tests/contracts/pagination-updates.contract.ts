@@ -5,8 +5,10 @@
 import { describe, expect, it } from "vitest"
 
 export interface PaginationUpdatesProps {
+  defaultPage?: number
   ariaLabel: string
   pageCount: number
+  disabled?: boolean
   page?: number
   onPageChange?: (page: number) => void
 }
@@ -31,6 +33,17 @@ export function runPaginationUpdatesContract(
   h: PaginationUpdatesHarness,
 ): void {
   describe(`Pagination updates contract: ${adapterName}`, () => {
+    it("keeps uncontrolled defaults and updates after hydration", async () => {
+      const changes: number[] = []
+      expect(
+        await h.hydrate({ ...base, defaultPage: 4, onPageChange: (page) => changes.push(page) }),
+      ).toEqual([])
+      expect(h.getCurrentPage()).toHaveTextContent("4")
+      await h.clickPage("5")
+      expect(h.getCurrentPage()).toHaveTextContent("5")
+      expect(changes).toEqual([5])
+    })
+
     it("moves the current page on a controlled update without reporting a change", async () => {
       const changes: number[] = []
       const onPageChange = (page: number): void => {
@@ -44,6 +57,35 @@ export function runPaginationUpdatesContract(
 
       expect(h.getCurrentPage()).toHaveTextContent("5")
       expect(changes).toEqual([])
+    })
+
+    it("blocks page changes while disabled, including after hydration", async () => {
+      const changes: number[] = []
+      const props = { ...base, page: 4, onPageChange: (page: number) => changes.push(page) }
+      await h.render(props)
+      await h.rerender({ ...props, disabled: true })
+      await h.clickPage("5")
+      expect(h.getCurrentPage()).toHaveTextContent("4")
+      expect(changes).toEqual([])
+      await h.rerender({ ...props, disabled: false })
+      await h.clickPage("5")
+      expect(changes).toEqual([5])
+    })
+
+    it("preserves disabled buttons and the current page after hydration", async () => {
+      const changes: number[] = []
+      expect(
+        await h.hydrate({
+          ...base,
+          page: 4,
+          disabled: true,
+          onPageChange: (page) => changes.push(page),
+        }),
+      ).toEqual([])
+      expect(h.getCurrentPage()).toHaveTextContent("4")
+      await h.clickPage("5")
+      expect(changes).toEqual([])
+      for (const button of document.querySelectorAll("button")) expect(button).toBeDisabled()
     })
 
     it("keeps the server-rendered current page and stays interactive after hydration", async () => {

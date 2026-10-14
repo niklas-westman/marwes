@@ -1,7 +1,6 @@
 /**
- * Shared contract for single-control field wrappers (InputField, TextareaField, CheckboxField,
- * SwitchField, SliderField) — label-to-control naming, aria-describedby targets, error toggling and
- * generated ids surviving hydration.
+ * Shared contract for field wrappers — accessible naming, description targets, error toggling
+ * and generated ids surviving hydration. Group and combobox contracts extend this wiring shape.
  */
 import { describe, expect, it } from "vitest"
 
@@ -42,6 +41,14 @@ function expectGeneratedIdsAreUnique(): void {
 
 function expectWiring(h: FieldWiringHarness, props: FieldWiringProps): void {
   const control = h.getControl(props.label)
+
+  for (const element of document.querySelectorAll("[aria-describedby], [aria-labelledby]")) {
+    for (const attribute of ["aria-describedby", "aria-labelledby"]) {
+      for (const id of (element.getAttribute(attribute) ?? "").split(/\s+/).filter(Boolean)) {
+        expect(document.getElementById(id), `${attribute} target #${id}`).not.toBeNull()
+      }
+    }
+  }
 
   for (const id of describedByIds(control)) {
     expect(document.getElementById(id), `aria-describedby target #${id}`).not.toBeNull()

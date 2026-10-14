@@ -25,6 +25,7 @@ export interface DatePickerFieldProps {
   /** Props forwarded to the DatePicker atom. */
   datePicker?: Omit<DatePickerProps, "ariaLabel" | "ariaLabelledBy" | "calendarLabel">
   /** Additional aria-describedby IDs to merge with internal helper/error IDs. */
+  invalid?: boolean
   ariaDescribedBy?: string
   class?: string
 }

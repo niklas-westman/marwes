@@ -27,6 +27,7 @@ export interface DatePickerProps
     | "ariaLabel"
     | "ariaLabelledBy"
     | "ariaDescribedBy"
+    | "invalid"
     | "calendarLabel"
     | "dataAttributes"
   > {
@@ -49,6 +50,7 @@ const datePickerPropKeys = definePropKeys<DatePickerProps>()([
   "ariaLabel",
   "ariaLabelledBy",
   "ariaDescribedBy",
+  "invalid",
   "calendarLabel",
   "dataAttributes",
 ])
@@ -75,6 +77,7 @@ export const DatePicker = defineComponent(
         ...(props.ariaLabel !== undefined ? { ariaLabel: props.ariaLabel } : {}),
         ...(props.ariaLabelledBy !== undefined ? { ariaLabelledBy: props.ariaLabelledBy } : {}),
         ...(props.ariaDescribedBy !== undefined ? { ariaDescribedBy: props.ariaDescribedBy } : {}),
+        ...(props.invalid !== undefined ? { invalid: props.invalid } : {}),
         ...(props.calendarLabel !== undefined ? { calendarLabel: props.calendarLabel } : {}),
         ...(props.dataAttributes !== undefined ? { dataAttributes: props.dataAttributes } : {}),
       }),
@@ -148,10 +151,10 @@ export const DatePicker = defineComponent(
                 h(
                   "tr",
                   { class: "mw-date-picker__weekdays" },
-                  kit.weekdayLabels.map((weekday) =>
+                  kit.weekdayLabels.map((weekday, weekdayIndex) =>
                     h(
                       "th",
-                      { key: weekday, class: kit.slots.weekdayClassName, scope: "col" },
+                      { key: weekdayIndex, class: kit.slots.weekdayClassName, scope: "col" },
                       weekday,
                     ),
                   ),

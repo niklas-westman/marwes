@@ -25,6 +25,7 @@ import type {
 } from "@marwes-ui/core"
 import * as React from "react"
 import { toReactAttributes } from "../../internal/react-attributes"
+import { useClientLayoutEffect } from "../../internal/use-client-layout-effect"
 import { Icon } from "../icon"
 
 export interface PaginationProps
@@ -47,6 +48,7 @@ export interface PaginationProps
   lastLabel?: string
   ariaLabel?: string
   ariaLabelledBy?: string
+  invalid?: boolean
   ariaDescribedBy?: string
   getItemAriaLabel?: PaginationGetItemAriaLabel
 }
@@ -72,6 +74,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     ariaLabel,
     ariaLabelledBy,
     ariaDescribedBy,
+    invalid,
     getItemAriaLabel,
     className,
     id,
@@ -114,6 +117,7 @@ export function Pagination(props: PaginationProps): React.ReactElement {
     ...(ariaLabel !== undefined ? { ariaLabel } : {}),
     ...(ariaLabelledBy !== undefined ? { ariaLabelledBy } : {}),
     ...(ariaDescribedBy !== undefined ? { ariaDescribedBy } : {}),
+    ...(invalid !== undefined ? { invalid } : {}),
     firstLabel,
     previousLabel,
     nextLabel,
@@ -357,7 +361,7 @@ function useAdaptivePaginationProfile(
 ): PaginationAdaptiveProfile | undefined {
   const [profile, setProfile] = React.useState<PaginationAdaptiveProfile | undefined>(undefined)
 
-  React.useLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     const root = rootRef.current
     if (!opts.adaptive || !root || typeof window === "undefined") {
       setProfile(undefined)
