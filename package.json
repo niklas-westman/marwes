@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@10.34.4+sha512.8768be55200ae3f2226b6527fcca2687e14bc4e5f12d7721a0f25da3df47915177058648db4177baf348120fa0ba2752d8d8d93f6beaf1fe64ae18da8de961af",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "prepare": "lefthook install",
@@ -135,7 +135,19 @@
     "format:release-artifacts": "biome format --write .changeset/config.json apps/*/package.json apps/*/CHANGELOG.md packages/*/package.json packages/*/CHANGELOG.md",
     "release": "changeset publish",
     "test:ssr:packages": "pnpm --filter @marwes-ui/react test:ssr && pnpm --filter @marwes-ui/vue test:ssr && pnpm --filter @marwes-ui/svelte test:ssr",
-    "consumer:ssr": "node ./scripts/consumer-ssr.mjs"
+    "consumer:ssr": "node ./scripts/consumer-ssr.mjs",
+    "governance:verify": "node packages/design-governance/src/cli.mjs verify",
+    "governance:review": "node packages/design-governance/src/cli.mjs review",
+    "governance:ui": "node packages/design-governance/src/cli.mjs ui",
+    "governance:report": "node packages/design-governance/src/cli.mjs report",
+    "governance:source:stage": "node packages/design-governance/src/cli.mjs source-stage",
+    "governance:source:apply": "node packages/design-governance/src/cli.mjs source-apply",
+    "governance:source:preview": "node packages/design-governance/src/cli.mjs source-stage-preview",
+    "governance:source:recover": "node packages/design-governance/src/cli.mjs source-recover",
+    "governance:inventory": "node packages/design-governance/src/cli.mjs inventory",
+    "governance:provider": "node packages/design-governance/src/cli.mjs provider",
+    "reflection:text:prepare": "node packages/design-governance/src/tooling/prepare-text-diagnostics.mjs",
+    "reflection:figma:export-source-svg": "node packages/design-governance/src/tooling/export-figma-source-svg.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -153,14 +165,14 @@
     "lefthook": "2.1.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "reflection-check": "0.0.7",
+    "reflection-check": "0.6.0",
     "rimraf": "6.1.2",
     "svelte": "5.56.3",
     "svelte-check": "4.4.8",
     "tsup": "8.5.1",
     "typescript": "5.9.3",
     "vitest": "4.1.11",
-    "vue": "3.5.28",
+    "vue": "3.5.42",
     "vue-tsc": "3.3.11"
   },
   "dependencies": {
