@@ -16,7 +16,7 @@ describe("firstEdition dialog css contract", () => {
 
     expect(css).not.toContain("min-height: 64px;")
     expect(css).not.toContain("min-height: 72px;")
-    expect(css).not.toContain("gap: 16px;")
+    expect(css).toMatch(/\.mw-dialog__header\s*\{[^}]*gap: 16px;/)
     expect(css).toContain(".mw-dialog__description,\n.mw-dialog__content .mw-p")
     expect(css).toContain("letter-spacing: -0.48px;")
   })
