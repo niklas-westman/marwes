@@ -1,0 +1,1524 @@
+{
+  "schemaVersion": 1,
+  "family": "divider",
+  "fileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "capture": {
+    "version": "2364166174019930436",
+    "lastModified": "2026-06-12T11:55:29Z",
+    "provenance": "inherited-pinned-offline-capture; not a new Figma capture or approval"
+  },
+  "hashes": {
+    "raw": "5693d3a00e466b5ee72cd654a2f35ad9391ee40faa627fbc3134d571e2da0c3f",
+    "manifest": "53ac3b15f5b1c239a20ebeb5d977347ba70f28ba5a9fddf9271cd800c45f167e",
+    "variables": "1d36b50927b018026e0484efadaf8ec1fe8d8820ef11581c19849f7d92ecad8e"
+  },
+  "nodes": {
+    "1574:25834": {
+      "id": "1574:25834",
+      "name": "Divider",
+      "type": "INSTANCE",
+      "scrollBehavior": "SCROLLS",
+      "boundVariables": {
+        "paddingTop": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:82:1313"
+        },
+        "paddingBottom": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:82:1313"
+        }
+      },
+      "explicitVariableModes": {
+        "VariableCollectionId:5:923": "437:2",
+        "VariableCollectionId:2459:36738": "2459:4"
+      },
+      "componentId": "1574:21053",
+      "overrides": [
+        {
+          "id": "1574:25834",
+          "overriddenFields": [
+            "explicitVariableModes",
+            "height",
+            "width"
+          ]
+        }
+      ],
+      "children": [
+        {
+          "id": "I1574:25834;1574:21054",
+          "name": "Line",
+          "type": "RECTANGLE",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:2459:36739"
+              }
+            ]
+          },
+          "blendMode": "PASS_THROUGH",
+          "fills": [
+            {
+              "opacity": 0.20000000298023224,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:2459:36739"
+                }
+              }
+            }
+          ],
+          "fillGeometry": [
+            {
+              "path": "M0 0L480 0L480 1L0 1L0 0Z",
+              "windingRule": "NONZERO"
+            }
+          ],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": -2407,
+            "y": -643.5,
+            "width": 480,
+            "height": 1
+          },
+          "absoluteRenderBounds": {
+            "x": -2407,
+            "y": -643.5,
+            "width": 480,
+            "height": 1
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "size": {
+            "x": 480,
+            "y": 1
+          },
+          "layoutAlign": "STRETCH",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "FIXED",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        }
+      ],
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": true,
+      "background": [],
+      "fills": [],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "backgroundColor": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      },
+      "layoutMode": "VERTICAL",
+      "counterAxisSizingMode": "FIXED",
+      "itemSpacing": 8,
+      "layoutWrap": "NO_WRAP",
+      "fillGeometry": [
+        {
+          "path": "M0 0L480 0L480 1L0 1L0 0Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "strokeGeometry": [],
+      "absoluteBoundingBox": {
+        "x": -2407,
+        "y": -643.5,
+        "width": 480,
+        "height": 1
+      },
+      "absoluteRenderBounds": {
+        "x": -2407,
+        "y": -643.5,
+        "width": 480,
+        "height": 1
+      },
+      "constraints": {
+        "vertical": "TOP",
+        "horizontal": "LEFT"
+      },
+      "relativeTransform": [
+        [
+          1,
+          0,
+          144
+        ],
+        [
+          0,
+          1,
+          32.5
+        ]
+      ],
+      "size": {
+        "x": 480,
+        "y": 1
+      },
+      "layoutAlign": "INHERIT",
+      "layoutGrow": 0,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "effects": [],
+      "interactions": [],
+      "complexStrokeProperties": {
+        "strokeType": "BASIC"
+      }
+    },
+    "1574:21053": {
+      "id": "1574:21053",
+      "name": "Divider",
+      "type": "COMPONENT",
+      "scrollBehavior": "SCROLLS",
+      "boundVariables": {
+        "paddingTop": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:82:1313"
+        },
+        "paddingBottom": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:82:1313"
+        }
+      },
+      "explicitVariableModes": {
+        "VariableCollectionId:5:923": "5:14",
+        "VariableCollectionId:2459:36738": "2459:4"
+      },
+      "children": [
+        {
+          "id": "1574:21054",
+          "name": "Line",
+          "type": "RECTANGLE",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:2459:36739"
+              }
+            ]
+          },
+          "blendMode": "PASS_THROUGH",
+          "fills": [
+            {
+              "opacity": 0.20000000298023224,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:2459:36739"
+                }
+              }
+            }
+          ],
+          "fillGeometry": [
+            {
+              "path": "M0 0L624 0L624 1L0 1L0 0Z",
+              "windingRule": "NONZERO"
+            }
+          ],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": -2541,
+            "y": -1662.5,
+            "width": 624,
+            "height": 1
+          },
+          "absoluteRenderBounds": {
+            "x": -2541,
+            "y": -1662.5,
+            "width": 624,
+            "height": 1
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              23
+            ]
+          ],
+          "size": {
+            "x": 624,
+            "y": 1
+          },
+          "layoutAlign": "STRETCH",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "FIXED",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        }
+      ],
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": true,
+      "background": [],
+      "fills": [],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "backgroundColor": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      },
+      "layoutMode": "VERTICAL",
+      "counterAxisSizingMode": "FIXED",
+      "paddingTop": 23,
+      "paddingBottom": 23,
+      "itemSpacing": 8,
+      "layoutWrap": "NO_WRAP",
+      "fillGeometry": [
+        {
+          "path": "M0 0L624 0L624 47L0 47L0 0Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "strokeGeometry": [],
+      "absoluteBoundingBox": {
+        "x": -2541,
+        "y": -1685.5,
+        "width": 624,
+        "height": 47
+      },
+      "absoluteRenderBounds": {
+        "x": -2541,
+        "y": -1685.5,
+        "width": 624,
+        "height": 47
+      },
+      "constraints": {
+        "vertical": "TOP",
+        "horizontal": "LEFT"
+      },
+      "relativeTransform": [
+        [
+          1,
+          0,
+          48
+        ],
+        [
+          0,
+          1,
+          456.5
+        ]
+      ],
+      "size": {
+        "x": 624,
+        "y": 47
+      },
+      "layoutAlign": "STRETCH",
+      "layoutGrow": 0,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG",
+      "effects": [],
+      "interactions": [],
+      "complexStrokeProperties": {
+        "strokeType": "BASIC"
+      }
+    },
+    "1574:25868": {
+      "id": "1574:25868",
+      "name": "Divider",
+      "type": "INSTANCE",
+      "scrollBehavior": "SCROLLS",
+      "boundVariables": {
+        "paddingTop": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:82:1313"
+        },
+        "paddingBottom": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:82:1313"
+        }
+      },
+      "explicitVariableModes": {
+        "VariableCollectionId:5:923": "437:2",
+        "VariableCollectionId:2459:36738": "2459:4"
+      },
+      "componentId": "1574:21053",
+      "overrides": [
+        {
+          "id": "1574:25868",
+          "overriddenFields": [
+            "explicitVariableModes",
+            "height",
+            "width"
+          ]
+        }
+      ],
+      "children": [
+        {
+          "id": "I1574:25868;1574:21054",
+          "name": "Line",
+          "type": "RECTANGLE",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:2459:36739"
+              }
+            ]
+          },
+          "blendMode": "PASS_THROUGH",
+          "fills": [
+            {
+              "opacity": 0.20000000298023224,
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:2459:36739"
+                }
+              }
+            }
+          ],
+          "fillGeometry": [
+            {
+              "path": "M0 0L480 0L480 1L0 1L0 0Z",
+              "windingRule": "NONZERO"
+            }
+          ],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": -1639,
+            "y": -643.5,
+            "width": 480,
+            "height": 1
+          },
+          "absoluteRenderBounds": {
+            "x": -1639,
+            "y": -643.5,
+            "width": 480,
+            "height": 1
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "size": {
+            "x": 480,
+            "y": 1
+          },
+          "layoutAlign": "STRETCH",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "FILL",
+          "layoutSizingVertical": "FIXED",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        }
+      ],
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": true,
+      "background": [],
+      "fills": [],
+      "strokes": [],
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "backgroundColor": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      },
+      "layoutMode": "VERTICAL",
+      "counterAxisSizingMode": "FIXED",
+      "itemSpacing": 8,
+      "layoutWrap": "NO_WRAP",
+      "fillGeometry": [
+        {
+          "path": "M0 0L480 0L480 1L0 1L0 0Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "strokeGeometry": [],
+      "absoluteBoundingBox": {
+        "x": -1639,
+        "y": -643.5,
+        "width": 480,
+        "height": 1
+      },
+      "absoluteRenderBounds": {
+        "x": -1639,
+        "y": -643.5,
+        "width": 480,
+        "height": 1
+      },
+      "constraints": {
+        "vertical": "TOP",
+        "horizontal": "LEFT"
+      },
+      "relativeTransform": [
+        [
+          1,
+          0,
+          144
+        ],
+        [
+          0,
+          1,
+          32.5
+        ]
+      ],
+      "size": {
+        "x": 480,
+        "y": 1
+      },
+      "layoutAlign": "INHERIT",
+      "layoutGrow": 0,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "effects": [],
+      "interactions": [],
+      "complexStrokeProperties": {
+        "strokeType": "BASIC"
+      }
+    }
+  },
+  "inheritedModes": {
+    "1574:25834": {
+      "VariableCollectionId:1358:5072": "1358:1",
+      "VariableCollectionId:2276:28206": "2276:15",
+      "VariableCollectionId:2276:28207": "2276:23",
+      "VariableCollectionId:2276:28208": "2276:32",
+      "VariableCollectionId:5:923": "437:2",
+      "VariableCollectionId:2459:36738": "2459:4"
+    },
+    "1574:21053": {
+      "VariableCollectionId:1358:5072": "1358:1",
+      "VariableCollectionId:5:923": "5:14",
+      "VariableCollectionId:2459:36738": "2459:4"
+    },
+    "1574:25868": {
+      "VariableCollectionId:1358:5072": "1358:2",
+      "VariableCollectionId:2276:28206": "2276:15",
+      "VariableCollectionId:2276:28207": "2276:23",
+      "VariableCollectionId:2276:28208": "2276:32",
+      "VariableCollectionId:5:923": "437:2",
+      "VariableCollectionId:2459:36738": "2459:4"
+    }
+  },
+  "variables": [
+    {
+      "id": "VariableID:5:925",
+      "key": "2a954fbf0e2e79e3d3957f73bbc68241908b5b54",
+      "name": "sp-0",
+      "path": "sp-0",
+      "tokenName": "sp-0",
+      "collectionId": "VariableCollectionId:5:924",
+      "variableCollectionId": "VariableCollectionId:5:924",
+      "collectionName": "Spacings",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": 0
+      },
+      "valuesByModeId": {
+        "5:12": 0
+      },
+      "rawValuesByMode": {
+        "5:12": 0
+      }
+    },
+    {
+      "id": "VariableID:82:1313",
+      "key": "90fc5df4c44b942eeea8143a0916f27c17f112df",
+      "name": "size",
+      "path": "size",
+      "tokenName": "size",
+      "collectionId": "VariableCollectionId:5:923",
+      "variableCollectionId": "VariableCollectionId:5:923",
+      "collectionName": "Divider",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "description": "",
+      "hiddenFromPublishing": true,
+      "valuesByMode": {
+        "sp-80": 39,
+        "sp-64": 31,
+        "sp-48": 23,
+        "sp-32": 15,
+        "sp-16": 7,
+        "sp-8": 3,
+        "sp-1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:925",
+          "name": "sp-0"
+        }
+      },
+      "valuesByModeId": {
+        "5:11": 39,
+        "5:13": 31,
+        "5:14": 23,
+        "5:15": 15,
+        "437:0": 7,
+        "437:1": 3,
+        "437:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:925",
+          "name": "sp-0"
+        }
+      },
+      "rawValuesByMode": {
+        "5:11": 39,
+        "5:13": 31,
+        "5:14": 23,
+        "5:15": 15,
+        "437:0": 7,
+        "437:1": 3,
+        "437:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:925"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5066",
+      "key": "cdc731f64be6201c46c391ab355e3c0d50a83e67",
+      "name": "Black/Alpha/60",
+      "path": "Black/Alpha/60",
+      "tokenName": "Black/Alpha/60",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#00000099"
+      },
+      "valuesByModeId": {
+        "1358:0": "#00000099"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.6000000238418579
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5067",
+      "key": "aba3b30ee0a9f88396fa0ce20e2bf26f1024235b",
+      "name": "Black/Alpha/40",
+      "path": "Black/Alpha/40",
+      "tokenName": "Black/Alpha/40",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#00000066"
+      },
+      "valuesByModeId": {
+        "1358:0": "#00000066"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.4000000059604645
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5068",
+      "key": "d27a91c8c182037b4eb2961008cc6098867452fe",
+      "name": "Black/Alpha/20",
+      "path": "Black/Alpha/20",
+      "tokenName": "Black/Alpha/20",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#00000033"
+      },
+      "valuesByModeId": {
+        "1358:0": "#00000033"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.20000000298023224
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5069",
+      "key": "749fefc75ed1652c3eab30aadab91015c8cfb90b",
+      "name": "White/Alpha/60",
+      "path": "White/Alpha/60",
+      "tokenName": "White/Alpha/60",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff99"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff99"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 0.6000000238418579
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5070",
+      "key": "b68401ec82989f36bc4f396aa1359f5a6a384a3f",
+      "name": "White/Alpha/40",
+      "path": "White/Alpha/40",
+      "tokenName": "White/Alpha/40",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff66"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff66"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 0.4000000059604645
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5071",
+      "key": "12f710a19e51111d5988a892fe30532ddaf4a680",
+      "name": "White/Alpha/20",
+      "path": "White/Alpha/20",
+      "tokenName": "White/Alpha/20",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff33"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff33"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 0.20000000298023224
+        }
+      }
+    },
+    {
+      "id": "VariableID:1364:359",
+      "key": "55a7bdb1f947b64419528a0108e39f241c0c4f6b",
+      "name": "divider/subtle",
+      "path": "divider/subtle",
+      "tokenName": "divider/subtle",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Horizontal rule / separator line — default weight. Translucent to work on any surface.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5068",
+          "name": "Black/Alpha/20"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5071",
+          "name": "White/Alpha/20"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5068",
+          "name": "Black/Alpha/20"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5071",
+          "name": "White/Alpha/20"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5068"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5071"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1364:360",
+      "key": "d7f8e31f2adc6f461216dbe73ccc6465b3ccb65c",
+      "name": "divider/medium",
+      "path": "divider/medium",
+      "tokenName": "divider/medium",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Horizontal rule / separator line — stronger weight for section breaks.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5067",
+          "name": "Black/Alpha/40"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5070",
+          "name": "White/Alpha/40"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5067",
+          "name": "Black/Alpha/40"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5070",
+          "name": "White/Alpha/40"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5067"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5070"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1364:2558",
+      "key": "8f0a5513bc6ee6906bb578566b94fc02660a2457",
+      "name": "Transparent/Full",
+      "path": "Transparent/Full",
+      "tokenName": "Transparent/Full",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "Fully transparent — rgba(0,0,0,0). Use for invisible fills where a bound variable is required.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#00000000"
+      },
+      "valuesByModeId": {
+        "1358:0": "#00000000"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0
+        }
+      }
+    },
+    {
+      "id": "VariableID:2459:36736",
+      "key": "8873d5d8b4ab88e204aaba82542854b63128543c",
+      "name": "divider/strong",
+      "path": "divider/strong",
+      "tokenName": "divider/strong",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Divider line — full opacity. Pure black (light) / pure white (dark). Use for maximum contrast dividers on image or brand surfaces.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5066",
+          "name": "Black/Alpha/60"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5069",
+          "name": "White/Alpha/60"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5066",
+          "name": "Black/Alpha/60"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5069",
+          "name": "White/Alpha/60"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5066"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5069"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2459:36737",
+      "key": "ad2a23d459f63ef08e7e333f82f092b206859ec2",
+      "name": "divider/none",
+      "path": "divider/none",
+      "tokenName": "divider/none",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Divider line — invisible. Transparent fill. Use when spacing is needed but the line should not be visible (Low mode in Border collection).",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:2558",
+          "name": "Transparent/Full"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:2558",
+          "name": "Transparent/Full"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:2558",
+          "name": "Transparent/Full"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:2558",
+          "name": "Transparent/Full"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:2558"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:2558"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2459:36739",
+      "key": "1003c3eb248da8efdf5355c3559a0efbb5fae6dd",
+      "name": "color",
+      "path": "color",
+      "tokenName": "color",
+      "collectionId": "VariableCollectionId:2459:36738",
+      "variableCollectionId": "VariableCollectionId:2459:36738",
+      "collectionName": "Border",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL",
+        "STROKE_COLOR"
+      ],
+      "description": "Divider line colour. Switch modes to control opacity: Full=60%, High=40%, Medium=20%, Low=transparent. Light/Dark awareness comes from the Semantic divider/* tokens this aliases.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Full": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2459:36736",
+          "name": "divider/strong"
+        },
+        "High": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:360",
+          "name": "divider/medium"
+        },
+        "Medium": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:359",
+          "name": "divider/subtle"
+        },
+        "Low": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2459:36737",
+          "name": "divider/none"
+        }
+      },
+      "valuesByModeId": {
+        "2459:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2459:36736",
+          "name": "divider/strong"
+        },
+        "2459:3": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:360",
+          "name": "divider/medium"
+        },
+        "2459:4": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:359",
+          "name": "divider/subtle"
+        },
+        "2459:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2459:36737",
+          "name": "divider/none"
+        }
+      },
+      "rawValuesByMode": {
+        "2459:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2459:36736"
+        },
+        "2459:3": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:360"
+        },
+        "2459:4": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1364:359"
+        },
+        "2459:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2459:36737"
+        }
+      }
+    }
+  ],
+  "collections": [
+    {
+      "id": "VariableCollectionId:5:923",
+      "key": "881335a88f7c3ee0275ba8921b2710e7e0f3e11a",
+      "name": "Divider",
+      "defaultModeId": "5:11",
+      "modes": [
+        {
+          "id": "5:11",
+          "modeId": "5:11",
+          "name": "sp-80"
+        },
+        {
+          "id": "5:13",
+          "modeId": "5:13",
+          "name": "sp-64"
+        },
+        {
+          "id": "5:14",
+          "modeId": "5:14",
+          "name": "sp-48"
+        },
+        {
+          "id": "5:15",
+          "modeId": "5:15",
+          "name": "sp-32"
+        },
+        {
+          "id": "437:0",
+          "modeId": "437:0",
+          "name": "sp-16"
+        },
+        {
+          "id": "437:1",
+          "modeId": "437:1",
+          "name": "sp-8"
+        },
+        {
+          "id": "437:2",
+          "modeId": "437:2",
+          "name": "sp-1"
+        }
+      ],
+      "variableIds": [
+        "VariableID:82:1313"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:5:924",
+      "key": "d95298da14dbd0e0cbe300f084dcbe13804c2e49",
+      "name": "Spacings",
+      "defaultModeId": "5:12",
+      "modes": [
+        {
+          "id": "5:12",
+          "modeId": "5:12",
+          "name": "Default"
+        }
+      ],
+      "variableIds": [
+        "VariableID:5:925",
+        "VariableID:5:926",
+        "VariableID:5:927",
+        "VariableID:2702:10036",
+        "VariableID:5:928",
+        "VariableID:5:929",
+        "VariableID:5:930",
+        "VariableID:5:931",
+        "VariableID:5:932",
+        "VariableID:5:933",
+        "VariableID:5:934",
+        "VariableID:5:935",
+        "VariableID:5:936",
+        "VariableID:5:937",
+        "VariableID:5:938"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:1358:5009",
+      "key": "d99b32bc754df64ba3ddf642db0a28c04b08744a",
+      "name": "Primitives",
+      "defaultModeId": "1358:0",
+      "modes": [
+        {
+          "id": "1358:0",
+          "modeId": "1358:0",
+          "name": "Brand colours"
+        }
+      ],
+      "variableIds": [
+        "VariableID:1358:5010",
+        "VariableID:1358:5011",
+        "VariableID:1358:5012",
+        "VariableID:1358:5013",
+        "VariableID:1358:5014",
+        "VariableID:1358:5015",
+        "VariableID:1358:5016",
+        "VariableID:1358:5017",
+        "VariableID:1358:5018",
+        "VariableID:1358:5019",
+        "VariableID:1358:5020",
+        "VariableID:1358:5021",
+        "VariableID:1358:5022",
+        "VariableID:1358:5023",
+        "VariableID:1358:5024",
+        "VariableID:1358:5025",
+        "VariableID:1366:12673",
+        "VariableID:1358:5026",
+        "VariableID:1358:5027",
+        "VariableID:1358:5028",
+        "VariableID:1358:5029",
+        "VariableID:1358:5030",
+        "VariableID:1358:5031",
+        "VariableID:1358:5032",
+        "VariableID:1358:5033",
+        "VariableID:1358:5034",
+        "VariableID:1358:5035",
+        "VariableID:1358:5036",
+        "VariableID:1358:5037",
+        "VariableID:1358:5038",
+        "VariableID:1358:5039",
+        "VariableID:1358:5040",
+        "VariableID:1358:5041",
+        "VariableID:1358:5042",
+        "VariableID:1358:5043",
+        "VariableID:1358:5044",
+        "VariableID:1358:5045",
+        "VariableID:1358:5046",
+        "VariableID:1358:5047",
+        "VariableID:1358:5048",
+        "VariableID:1358:5049",
+        "VariableID:1358:5050",
+        "VariableID:1358:5051",
+        "VariableID:1358:5052",
+        "VariableID:1358:5053",
+        "VariableID:1358:5054",
+        "VariableID:1358:5055",
+        "VariableID:1358:5056",
+        "VariableID:1358:5057",
+        "VariableID:1358:5058",
+        "VariableID:1358:5059",
+        "VariableID:1358:5060",
+        "VariableID:1366:12674",
+        "VariableID:1358:5061",
+        "VariableID:1358:5062",
+        "VariableID:1358:5063",
+        "VariableID:1358:5064",
+        "VariableID:1358:5065",
+        "VariableID:1364:2553",
+        "VariableID:1364:2552",
+        "VariableID:1358:5066",
+        "VariableID:1358:5067",
+        "VariableID:1358:7218",
+        "VariableID:1358:7219",
+        "VariableID:1358:7220",
+        "VariableID:1358:7221",
+        "VariableID:1358:7222",
+        "VariableID:1358:7223",
+        "VariableID:1358:7224",
+        "VariableID:1358:7225",
+        "VariableID:1358:7226",
+        "VariableID:1358:7227",
+        "VariableID:1358:7228",
+        "VariableID:1358:7229",
+        "VariableID:1358:7230",
+        "VariableID:1358:7231",
+        "VariableID:1358:7232",
+        "VariableID:1358:7233",
+        "VariableID:1358:7234",
+        "VariableID:1358:7235",
+        "VariableID:1358:7236",
+        "VariableID:1358:7237",
+        "VariableID:1358:7238",
+        "VariableID:1358:7239",
+        "VariableID:1364:2557",
+        "VariableID:1364:2556",
+        "VariableID:1364:2558",
+        "VariableID:1358:5069",
+        "VariableID:1358:5070",
+        "VariableID:2873:23634",
+        "VariableID:2873:23635",
+        "VariableID:2873:29620",
+        "VariableID:2973:40041",
+        "VariableID:1358:5071",
+        "VariableID:2973:40040",
+        "VariableID:1364:2555",
+        "VariableID:1364:2554",
+        "VariableID:3008:35264",
+        "VariableID:3038:37629",
+        "VariableID:3038:37630",
+        "VariableID:3038:37631",
+        "VariableID:3038:37632",
+        "VariableID:3038:37633",
+        "VariableID:3038:37634",
+        "VariableID:3038:37635",
+        "VariableID:3038:37636",
+        "VariableID:3038:37637",
+        "VariableID:3038:37638",
+        "VariableID:3038:37639",
+        "VariableID:3038:37640",
+        "VariableID:3038:37641",
+        "VariableID:3038:37642",
+        "VariableID:3038:37643",
+        "VariableID:3038:37644",
+        "VariableID:3038:37645",
+        "VariableID:3038:37646",
+        "VariableID:3038:37647",
+        "VariableID:3038:37648",
+        "VariableID:3038:37649",
+        "VariableID:3038:37650",
+        "VariableID:3038:37651",
+        "VariableID:3038:37652",
+        "VariableID:3038:37653",
+        "VariableID:3038:37654",
+        "VariableID:3038:37655",
+        "VariableID:3038:37656",
+        "VariableID:3038:37657",
+        "VariableID:3038:37658",
+        "VariableID:3038:37659",
+        "VariableID:3038:37660",
+        "VariableID:3791:34835",
+        "VariableID:1358:5068",
+        "VariableID:2973:40039",
+        "VariableID:1364:2551",
+        "VariableID:1364:2550"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:1358:5072",
+      "key": "2b04736802e4abd4457049e93c59c15cf3c7785d",
+      "name": "Semantic",
+      "defaultModeId": "1358:1",
+      "modes": [
+        {
+          "id": "1358:1",
+          "modeId": "1358:1",
+          "name": "Light"
+        },
+        {
+          "id": "1358:2",
+          "modeId": "1358:2",
+          "name": "Dark"
+        }
+      ],
+      "variableIds": [
+        "VariableID:1358:5073",
+        "VariableID:1358:5074",
+        "VariableID:1358:5075",
+        "VariableID:1358:5076",
+        "VariableID:1358:5077",
+        "VariableID:1358:5078",
+        "VariableID:1358:5079",
+        "VariableID:1358:5080",
+        "VariableID:1358:5082",
+        "VariableID:3872:693",
+        "VariableID:1358:5081",
+        "VariableID:1358:5083",
+        "VariableID:1358:5084",
+        "VariableID:1358:7195",
+        "VariableID:1358:7196",
+        "VariableID:1358:7197",
+        "VariableID:2015:6467",
+        "VariableID:1358:5096",
+        "VariableID:1358:7199",
+        "VariableID:3872:38045",
+        "VariableID:1366:12675",
+        "VariableID:3872:690",
+        "VariableID:1358:7198",
+        "VariableID:1358:5095",
+        "VariableID:3872:41008",
+        "VariableID:2973:32379",
+        "VariableID:1358:5097",
+        "VariableID:1358:5098",
+        "VariableID:1358:7191",
+        "VariableID:1358:7192",
+        "VariableID:1358:7193",
+        "VariableID:1358:7194",
+        "VariableID:2973:35488",
+        "VariableID:1358:5099",
+        "VariableID:1358:5107",
+        "VariableID:1358:5108",
+        "VariableID:1358:5109",
+        "VariableID:1358:5110",
+        "VariableID:1366:12677",
+        "VariableID:1358:5100",
+        "VariableID:1358:5101",
+        "VariableID:1358:5102",
+        "VariableID:1358:5103",
+        "VariableID:1358:5104",
+        "VariableID:1358:5105",
+        "VariableID:1358:5106",
+        "VariableID:1358:7189",
+        "VariableID:1358:7190",
+        "VariableID:2459:36740",
+        "VariableID:2459:36736",
+        "VariableID:1364:360",
+        "VariableID:1364:359",
+        "VariableID:1364:361",
+        "VariableID:1358:7187",
+        "VariableID:1358:7188",
+        "VariableID:1364:362",
+        "VariableID:1921:33741",
+        "VariableID:2459:36737",
+        "VariableID:2973:35489",
+        "VariableID:2973:35564",
+        "VariableID:3038:40942",
+        "VariableID:3038:40943",
+        "VariableID:3038:40944",
+        "VariableID:3038:40945",
+        "VariableID:3038:40946",
+        "VariableID:3794:38994",
+        "VariableID:3794:38995",
+        "VariableID:3794:38996",
+        "VariableID:3865:27529",
+        "VariableID:3865:27530",
+        "VariableID:3865:27531",
+        "VariableID:3865:27532",
+        "VariableID:3865:27533",
+        "VariableID:3865:27534",
+        "VariableID:3865:27535",
+        "VariableID:3865:27536",
+        "VariableID:3865:28207",
+        "VariableID:3865:28208",
+        "VariableID:3865:28211",
+        "VariableID:3865:28209",
+        "VariableID:3865:28210",
+        "VariableID:3865:28212",
+        "VariableID:3865:28214",
+        "VariableID:3865:28215",
+        "VariableID:3865:28216",
+        "VariableID:3865:28217",
+        "VariableID:3872:42551",
+        "VariableID:3872:42552"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:2459:36738",
+      "key": "5769d18226ed72aaa4fd7fd4d679b487df788578",
+      "name": "Border",
+      "defaultModeId": "2459:2",
+      "modes": [
+        {
+          "id": "2459:2",
+          "modeId": "2459:2",
+          "name": "Full"
+        },
+        {
+          "id": "2459:3",
+          "modeId": "2459:3",
+          "name": "High"
+        },
+        {
+          "id": "2459:4",
+          "modeId": "2459:4",
+          "name": "Medium"
+        },
+        {
+          "id": "2459:5",
+          "modeId": "2459:5",
+          "name": "Low"
+        }
+      ],
+      "variableIds": [
+        "VariableID:2459:36739"
+      ]
+    }
+  ],
+  "components": {
+    "1574:21053": {
+      "key": "1dd3f8bd070933684f77d556d482387ce89c8d62",
+      "name": "Divider",
+      "description": "Horizontal rule for visual separation. Supports spacing scale: sp-1 through sp-80.",
+      "remote": false,
+      "documentationLinks": []
+    }
+  },
+  "styles": {},
+  "missingDependencies": [],
+  "missingOptionalFrames": [
+    "5049:43995",
+    "5049:43999"
+  ],
+  "variantInventory": []
+}

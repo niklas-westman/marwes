@@ -1,11 +1,17 @@
 {
-  "baseline": "destructive.chromium-linux.light.png",
-  "caseFingerprint": "c8ecc623c1721aae21cf55ccde9b164abfbe0ba222e6a27484b6849a77340e54",
+  "baseline": "destructive.chromium-linux.light.webp",
+  "caseFingerprint": "2e71e3e8f2e4476d2c49cb145ca289955e7061342503ec60be6ac1c016d0b536",
   "caseId": "button.destructive",
-  "createdAt": "2026-06-13T16:20:09.657Z",
+  "createdAt": "2026-10-15T16:35:20.617Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "b36d7260ba67a8618d38863b3c3dac5ff4e94788670e78ece97ed8feeb88ce9e",
+    "sourceByteLength": 1952,
+    "sourceFormat": "png",
+    "sourceSha256": "5d74fe00de1ffe12c26ec5c85039fa3303f0df08efead29a7ba0df34cc3bee86"
+  },
   "exportScale": 1,
   "family": "button",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "figmaFrameName": "reflection/button/destructive/light",
   "framing": {
     "align": "center",
@@ -13,21 +19,22 @@
     "padding": 0,
     "rootSelector": "#reflection-root"
   },
-  "generatedFrameId": "TODO_REFLECTION_BUTTON_DESTRUCTIVE_LIGHT_FRAME",
-  "mode": "light",
-  "origin": "receipt-backfill",
-  "pngByteLength": 1844,
-  "pngDimensions": {
+  "generatedFrameId": "6007:14792",
+  "imageByteLength": 436,
+  "imageDimensions": {
     "height": 220,
     "width": 390
   },
-  "pngSha256": "f9aa321bedb84c48696d340aa79c904038362bca9e2fb2130900d971b13e9336",
-  "schemaVersion": 1,
-  "sourceFingerprint": "6ced3087343f43789ced6e66bf730868bc9f5356b2a713b3340c0f4c4606d11d",
+  "imageFormat": "webp",
+  "imageSha256": "03072b23c885b885cd1e65e4c0eb64eeb2ae4980b0d01060058d3b5456e4da58",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "9026f01ca1b8839f28aef6e3cd7bba3a9f83ec603f774899458a6ec82a99dbeb",
   "sourceFrameId": "1606:14324",
   "sourceNodeId": "1364:11356",
   "sourceNodeIds": ["1364:11356"],
-  "variablesFingerprint": "f1ed6ef8afd188699855bcecc128428e6ceae873ff296d05453299ba49717684",
+  "variablesFingerprint": "89ab7e541c83561f097188d68dcc4dcc691e60cfead4b0d5ca70f66ed9810c24",
   "viewport": "button-default",
   "viewportSize": {
     "height": 220,

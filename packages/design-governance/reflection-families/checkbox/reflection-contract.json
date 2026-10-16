@@ -3,12 +3,12 @@
   "family": "checkbox",
   "baselineRoot": "packages/design-governance/reflection-families/checkbox/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "checkbox.states-default",
       "mode": "light",
-      "figmaNodeId": "5049:43829",
+      "figmaNodeId": "6007:14307",
       "figmaFrameName": "reflection/checkbox/states-default/light",
       "exportScale": 1,
       "viewport": "checkbox-states-default",
@@ -66,7 +66,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1369:4700",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1369-4700",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1369-4700",
         "outputFrameName": "reflection/checkbox/states-default/light",
         "selector": {
           "strategy": "rowContent",
@@ -84,7 +84,7 @@
     {
       "caseId": "checkbox.states-default",
       "mode": "dark",
-      "figmaNodeId": "5049:43855",
+      "figmaNodeId": "6007:14328",
       "figmaFrameName": "reflection/checkbox/states-default/dark",
       "exportScale": 1,
       "viewport": "checkbox-states-default",
@@ -142,7 +142,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "2542:28177",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2542-28177",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=2542-28177",
         "outputFrameName": "reflection/checkbox/states-default/dark",
         "selector": {
           "strategy": "rowContent",
@@ -157,5 +157,6 @@
         }
       }
     }
-  ]
+  ],
+  "structuralContract": "structural-contract.json"
 }

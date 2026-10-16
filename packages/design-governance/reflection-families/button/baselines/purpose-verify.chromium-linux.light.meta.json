@@ -1,0 +1,43 @@
+{
+  "baseline": "purpose-verify.chromium-linux.light.webp",
+  "caseFingerprint": "ac6e6efbc7b7067c39e31b449bdd08519ac7083694fba494e1f1bbf794868273",
+  "caseId": "button.purpose-verify",
+  "createdAt": "2026-10-15T16:35:24.270Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "7ffdf7cec498ba3e7151c68b3accb265ee47d2fc7e632330742205a2b81f5b48",
+    "sourceByteLength": 2087,
+    "sourceFormat": "png",
+    "sourceSha256": "136542b18d7299f7807b0752e66293dd025c80c9fa16b538e339bb8ffafbc753"
+  },
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "figmaFrameName": "reflection/button/purpose-verify/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "6020:15694",
+  "imageByteLength": 478,
+  "imageDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "imageFormat": "webp",
+  "imageSha256": "fec05e36a073947e2e5f3e0df2e1feff83e2b4663ed649029844e1c91b077e87",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "4c707eb8f50531ac431ce6e5702a837c0644d09a9f70804274ccb5fba72c7275",
+  "sourceFrameId": "1371:8933",
+  "sourceNodeId": "1362:7490",
+  "sourceNodeIds": ["1362:7490", "3978:38823"],
+  "variablesFingerprint": "d2537d45e2768f9913472a324d501b9afad6c3c64ed4e7987b9417388fc4cd63",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

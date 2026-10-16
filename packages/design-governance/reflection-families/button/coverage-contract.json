@@ -1,0 +1,3981 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "sourceCaptureVersion": "2410234809276115335",
+  "items": [
+    {
+      "itemId": "design.primary.default.md.right.light",
+      "label": "primary · default · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11483"
+      },
+      "caseId": "button.basic-icon-right",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.primary.default.md.left.light",
+      "label": "primary · default · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11489"
+      },
+      "caseId": "button.basic-icon-left",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.primary.default.md.none.light",
+      "label": "primary · default · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11495"
+      },
+      "caseId": "button.basic",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.primary.hover.md.right.light",
+      "label": "primary · hover · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "hover",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11509"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-hover"
+    },
+    {
+      "itemId": "design.primary.hover.md.left.light",
+      "label": "primary · hover · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "hover",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11510"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-hover"
+    },
+    {
+      "itemId": "design.primary.hover.md.none.light",
+      "label": "primary · hover · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "hover",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11511"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-hover"
+    },
+    {
+      "itemId": "design.primary.pressed.md.right.light",
+      "label": "primary · pressed · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11525"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-pressed"
+    },
+    {
+      "itemId": "design.primary.pressed.md.left.light",
+      "label": "primary · pressed · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11526"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-pressed"
+    },
+    {
+      "itemId": "design.primary.pressed.md.none.light",
+      "label": "primary · pressed · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11527"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-pressed"
+    },
+    {
+      "itemId": "design.primary.disabled.md.right.light",
+      "label": "primary · disabled · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11541"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-disabled"
+    },
+    {
+      "itemId": "design.primary.disabled.md.left.light",
+      "label": "primary · disabled · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11542"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-disabled"
+    },
+    {
+      "itemId": "design.primary.disabled.md.none.light",
+      "label": "primary · disabled · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11543"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-disabled"
+    },
+    {
+      "itemId": "design.secondary.default.md.right.light",
+      "label": "secondary · default · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11244"
+      },
+      "caseId": "button.secondary-icon-right",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.secondary.default.md.left.light",
+      "label": "secondary · default · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11245"
+      },
+      "caseId": "button.secondary-icon-left",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.secondary.default.md.none.light",
+      "label": "secondary · default · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11246"
+      },
+      "caseId": "button.secondary",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.secondary.hover.md.right.light",
+      "label": "secondary · hover · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "hover",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11254"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-hover"
+    },
+    {
+      "itemId": "design.secondary.hover.md.left.light",
+      "label": "secondary · hover · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "hover",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11255"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-hover"
+    },
+    {
+      "itemId": "design.secondary.hover.md.none.light",
+      "label": "secondary · hover · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "hover",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11256"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-hover"
+    },
+    {
+      "itemId": "design.secondary.pressed.md.right.light",
+      "label": "secondary · pressed · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11264"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-pressed"
+    },
+    {
+      "itemId": "design.secondary.pressed.md.left.light",
+      "label": "secondary · pressed · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11265"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-pressed"
+    },
+    {
+      "itemId": "design.secondary.pressed.md.none.light",
+      "label": "secondary · pressed · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11266"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-pressed"
+    },
+    {
+      "itemId": "design.secondary.disabled.md.right.light",
+      "label": "secondary · disabled · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11274"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-disabled"
+    },
+    {
+      "itemId": "design.secondary.disabled.md.left.light",
+      "label": "secondary · disabled · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11275"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-disabled"
+    },
+    {
+      "itemId": "design.secondary.disabled.md.none.light",
+      "label": "secondary · disabled · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11276"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-disabled"
+    },
+    {
+      "itemId": "design.text.default.md.right.light",
+      "label": "text · default · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "default",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11365"
+      },
+      "caseId": "button.text-icon-right",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.text.default.md.left.light",
+      "label": "text · default · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "default",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11366"
+      },
+      "caseId": "button.text-icon-left",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.text.default.md.none.light",
+      "label": "text · default · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "default",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11367"
+      },
+      "caseId": "button.text",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.text.hover.md.right.light",
+      "label": "text · hover · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "hover",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11349"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-right-hover"
+    },
+    {
+      "itemId": "design.text.hover.md.left.light",
+      "label": "text · hover · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "hover",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11350"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-left-hover"
+    },
+    {
+      "itemId": "design.text.hover.md.none.light",
+      "label": "text · hover · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "hover",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11351"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-hover"
+    },
+    {
+      "itemId": "design.text.pressed.md.right.light",
+      "label": "text · pressed · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "pressed",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11333"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-right-pressed"
+    },
+    {
+      "itemId": "design.text.pressed.md.left.light",
+      "label": "text · pressed · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "pressed",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11334"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-left-pressed"
+    },
+    {
+      "itemId": "design.text.pressed.md.none.light",
+      "label": "text · pressed · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "pressed",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11335"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-pressed"
+    },
+    {
+      "itemId": "design.text.disabled.md.right.light",
+      "label": "text · disabled · md · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "disabled",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11317"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-right-disabled"
+    },
+    {
+      "itemId": "design.text.disabled.md.left.light",
+      "label": "text · disabled · md · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "disabled",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11318"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-left-disabled"
+    },
+    {
+      "itemId": "design.text.disabled.md.none.light",
+      "label": "text · disabled · md · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "disabled",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11319"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-disabled"
+    },
+    {
+      "itemId": "design.primary.default.md.right.dark",
+      "label": "primary · default · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11637"
+      },
+      "caseId": "button.basic-icon-right",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.primary.default.md.left.dark",
+      "label": "primary · default · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11638"
+      },
+      "caseId": "button.basic-icon-left",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.primary.default.md.none.dark",
+      "label": "primary · default · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11639"
+      },
+      "caseId": "button.basic",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.primary.hover.md.right.dark",
+      "label": "primary · hover · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "hover",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11621"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-hover"
+    },
+    {
+      "itemId": "design.primary.hover.md.left.dark",
+      "label": "primary · hover · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "hover",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11622"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-hover"
+    },
+    {
+      "itemId": "design.primary.hover.md.none.dark",
+      "label": "primary · hover · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "hover",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11623"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-hover"
+    },
+    {
+      "itemId": "design.primary.pressed.md.right.dark",
+      "label": "primary · pressed · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11605"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-pressed"
+    },
+    {
+      "itemId": "design.primary.pressed.md.left.dark",
+      "label": "primary · pressed · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11606"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-pressed"
+    },
+    {
+      "itemId": "design.primary.pressed.md.none.dark",
+      "label": "primary · pressed · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11607"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-pressed"
+    },
+    {
+      "itemId": "design.primary.disabled.md.right.dark",
+      "label": "primary · disabled · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11573"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-disabled"
+    },
+    {
+      "itemId": "design.primary.disabled.md.left.dark",
+      "label": "primary · disabled · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11574"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-disabled"
+    },
+    {
+      "itemId": "design.primary.disabled.md.none.dark",
+      "label": "primary · disabled · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11575"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-disabled"
+    },
+    {
+      "itemId": "design.secondary.default.md.right.dark",
+      "label": "secondary · default · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11609"
+      },
+      "caseId": "button.secondary-icon-right",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.secondary.default.md.left.dark",
+      "label": "secondary · default · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11610"
+      },
+      "caseId": "button.secondary-icon-left",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.secondary.default.md.none.dark",
+      "label": "secondary · default · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11611"
+      },
+      "caseId": "button.secondary",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.secondary.hover.md.right.dark",
+      "label": "secondary · hover · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "hover",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11619"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-hover"
+    },
+    {
+      "itemId": "design.secondary.hover.md.left.dark",
+      "label": "secondary · hover · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "hover",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11620"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-hover"
+    },
+    {
+      "itemId": "design.secondary.hover.md.none.dark",
+      "label": "secondary · hover · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "hover",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11621"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-hover"
+    },
+    {
+      "itemId": "design.secondary.pressed.md.right.dark",
+      "label": "secondary · pressed · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11629"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-pressed"
+    },
+    {
+      "itemId": "design.secondary.pressed.md.left.dark",
+      "label": "secondary · pressed · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11630"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-pressed"
+    },
+    {
+      "itemId": "design.secondary.pressed.md.none.dark",
+      "label": "secondary · pressed · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "pressed",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11631"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-pressed"
+    },
+    {
+      "itemId": "design.secondary.disabled.md.right.dark",
+      "label": "secondary · disabled · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1371:11639"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-disabled"
+    },
+    {
+      "itemId": "design.secondary.disabled.md.left.dark",
+      "label": "secondary · disabled · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1371:11640"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-disabled"
+    },
+    {
+      "itemId": "design.secondary.disabled.md.none.dark",
+      "label": "secondary · disabled · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "disabled",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1371:11641"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-disabled"
+    },
+    {
+      "itemId": "design.text.default.md.right.dark",
+      "label": "text · default · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "default",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11445"
+      },
+      "caseId": "button.text-icon-right",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.text.default.md.left.dark",
+      "label": "text · default · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "default",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11446"
+      },
+      "caseId": "button.text-icon-left",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.text.default.md.none.dark",
+      "label": "text · default · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "default",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11447"
+      },
+      "caseId": "button.text",
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.text.hover.md.right.dark",
+      "label": "text · hover · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "hover",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11461"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-right-hover"
+    },
+    {
+      "itemId": "design.text.hover.md.left.dark",
+      "label": "text · hover · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "hover",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11462"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-left-hover"
+    },
+    {
+      "itemId": "design.text.hover.md.none.dark",
+      "label": "text · hover · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "hover",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11463"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-hover"
+    },
+    {
+      "itemId": "design.text.pressed.md.right.dark",
+      "label": "text · pressed · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "pressed",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11413"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-right-pressed"
+    },
+    {
+      "itemId": "design.text.pressed.md.left.dark",
+      "label": "text · pressed · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "pressed",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11414"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-left-pressed"
+    },
+    {
+      "itemId": "design.text.pressed.md.none.dark",
+      "label": "text · pressed · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "pressed",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11415"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-pressed"
+    },
+    {
+      "itemId": "design.text.disabled.md.right.dark",
+      "label": "text · disabled · md · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "disabled",
+        "size": "md",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1461:11397"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-right-disabled"
+    },
+    {
+      "itemId": "design.text.disabled.md.left.dark",
+      "label": "text · disabled · md · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "disabled",
+        "size": "md",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1461:11398"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-icon-left-disabled"
+    },
+    {
+      "itemId": "design.text.disabled.md.none.dark",
+      "label": "text · disabled · md · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "disabled",
+        "size": "md",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1461:11399"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-disabled"
+    },
+    {
+      "itemId": "design.primary.default.sm.right.light",
+      "label": "primary · default · sm · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "sm",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14342"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-sm"
+    },
+    {
+      "itemId": "design.primary.default.sm.left.light",
+      "label": "primary · default · sm · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "sm",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14343"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-sm"
+    },
+    {
+      "itemId": "design.primary.default.sm.none.light",
+      "label": "primary · default · sm · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "sm",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14344"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-sm"
+    },
+    {
+      "itemId": "design.primary.default.lg.right.light",
+      "label": "primary · default · lg · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "lg",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14730"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-lg"
+    },
+    {
+      "itemId": "design.primary.default.lg.left.light",
+      "label": "primary · default · lg · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "lg",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14731"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-lg"
+    },
+    {
+      "itemId": "design.primary.default.lg.none.light",
+      "label": "primary · default · lg · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "lg",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14732"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-lg"
+    },
+    {
+      "itemId": "design.secondary.default.sm.right.light",
+      "label": "secondary · default · sm · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "sm",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14396"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-sm"
+    },
+    {
+      "itemId": "design.secondary.default.sm.left.light",
+      "label": "secondary · default · sm · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "sm",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14397"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-sm"
+    },
+    {
+      "itemId": "design.secondary.default.sm.none.light",
+      "label": "secondary · default · sm · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "sm",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14398"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-sm"
+    },
+    {
+      "itemId": "design.secondary.default.lg.right.light",
+      "label": "secondary · default · lg · icon right",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "lg",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14797"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-lg"
+    },
+    {
+      "itemId": "design.secondary.default.lg.left.light",
+      "label": "secondary · default · lg · icon left",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "lg",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14798"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-lg"
+    },
+    {
+      "itemId": "design.secondary.default.lg.none.light",
+      "label": "secondary · default · lg · icon none",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "lg",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14799"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-lg"
+    },
+    {
+      "itemId": "design.primary.default.sm.right.dark",
+      "label": "primary · default · sm · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "sm",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14860"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-sm"
+    },
+    {
+      "itemId": "design.primary.default.sm.left.dark",
+      "label": "primary · default · sm · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "sm",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14861"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-sm"
+    },
+    {
+      "itemId": "design.primary.default.sm.none.dark",
+      "label": "primary · default · sm · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "sm",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14862"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-sm"
+    },
+    {
+      "itemId": "design.primary.default.lg.right.dark",
+      "label": "primary · default · lg · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "lg",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14880"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-right-lg"
+    },
+    {
+      "itemId": "design.primary.default.lg.left.dark",
+      "label": "primary · default · lg · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "lg",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14881"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-icon-left-lg"
+    },
+    {
+      "itemId": "design.primary.default.lg.none.dark",
+      "label": "primary · default · lg · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "default",
+        "size": "lg",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14882"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.basic-lg"
+    },
+    {
+      "itemId": "design.secondary.default.sm.right.dark",
+      "label": "secondary · default · sm · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "sm",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14894"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-sm"
+    },
+    {
+      "itemId": "design.secondary.default.sm.left.dark",
+      "label": "secondary · default · sm · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "sm",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14895"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-sm"
+    },
+    {
+      "itemId": "design.secondary.default.sm.none.dark",
+      "label": "secondary · default · sm · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "sm",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14896"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-sm"
+    },
+    {
+      "itemId": "design.secondary.default.lg.right.dark",
+      "label": "secondary · default · lg · icon right",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "lg",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1606:14914"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-right-lg"
+    },
+    {
+      "itemId": "design.secondary.default.lg.left.dark",
+      "label": "secondary · default · lg · icon left",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "lg",
+        "icon": "left"
+      },
+      "source": {
+        "nodeId": "1606:14915"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-icon-left-lg"
+    },
+    {
+      "itemId": "design.secondary.default.lg.none.dark",
+      "label": "secondary · default · lg · icon none",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "default",
+        "size": "lg",
+        "icon": "none"
+      },
+      "source": {
+        "nodeId": "1606:14916"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-lg"
+    },
+    {
+      "itemId": "design.danger.default.sm.right.light",
+      "label": "danger · default · sm · icon right",
+      "mode": "light",
+      "caseId": "button.destructive",
+      "dimensions": {
+        "variant": "danger",
+        "state": "default",
+        "size": "sm",
+        "icon": "right"
+      },
+      "source": {
+        "nodeId": "1364:11356"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.primary.focus.light",
+      "label": "primary · focus",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "focus"
+      },
+      "source": {
+        "nodeId": "1461:11495",
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap. Ordinary Primary control source 1461:11495 composes with the independent focus rule and image source 3977:38660; theme-bound Figma capture frame 6047:15464. Rule mappings and real adapter fixtures are enrolled as button.standard-focus-example. Exact staged proof and owner review remain pending; references are not promoted."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.standard-focus-example"
+    },
+    {
+      "itemId": "public.primary.loading.light",
+      "label": "primary · loading",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "loading"
+      },
+      "source": {
+        "nodeId": "1780:2692",
+        "availability": "needs-mapping",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Direct Primary loading design exists on Spinner page: light 1780:2692 (Loading…, 112×40), dark 1780:2744 (Loading, 103×40), Classic Spinner 1737:10526. Primary surface/label bind 2276:28215/2276:28216. Matching independent mappings, adapter fixtures, Figma references and receipts remain unenrolled."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.primary.error.light",
+      "label": "primary · error",
+      "mode": "light",
+      "dimensions": {
+        "variant": "primary",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3872:42106"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.primary-error"
+    },
+    {
+      "itemId": "public.secondary.focus.light",
+      "label": "secondary · focus",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.secondary.loading.light",
+      "label": "secondary · loading",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "loading"
+      },
+      "source": {
+        "nodeId": "1780:2719"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-loading"
+    },
+    {
+      "itemId": "public.secondary.error.light",
+      "label": "secondary · error",
+      "mode": "light",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3872:42503"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-error"
+    },
+    {
+      "itemId": "public.neutral.focus.light",
+      "label": "neutral · focus",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.neutral.loading.light",
+      "label": "neutral · loading",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated neutral loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.neutral.error.light",
+      "label": "neutral · error",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43050"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-error"
+    },
+    {
+      "itemId": "public.text.focus.light",
+      "label": "text · focus",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.text.loading.light",
+      "label": "text · loading",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated text loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.text.error.light",
+      "label": "text · error",
+      "mode": "light",
+      "dimensions": {
+        "variant": "text",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3872:42110"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-error"
+    },
+    {
+      "itemId": "public.success.focus.light",
+      "label": "success · focus",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.success.loading.light",
+      "label": "success · loading",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated success loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.success.error.light",
+      "label": "success · error",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3872:42112"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-error"
+    },
+    {
+      "itemId": "public.danger.focus.light",
+      "label": "danger · focus",
+      "mode": "light",
+      "dimensions": {
+        "variant": "danger",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.danger.loading.light",
+      "label": "danger · loading",
+      "mode": "light",
+      "dimensions": {
+        "variant": "danger",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated danger loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.danger.error.light",
+      "label": "danger · error",
+      "mode": "light",
+      "dimensions": {
+        "variant": "danger",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3872:42114"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-error"
+    },
+    {
+      "itemId": "public.neutral.default.light",
+      "label": "neutral · default",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "default"
+      },
+      "source": {
+        "nodeId": "3873:43029"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-default"
+    },
+    {
+      "itemId": "public.neutral.hover.light",
+      "label": "neutral · hover",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "hover"
+      },
+      "source": {
+        "nodeId": "3873:43035"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-hover"
+    },
+    {
+      "itemId": "public.neutral.pressed.light",
+      "label": "neutral · pressed",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "pressed"
+      },
+      "source": {
+        "nodeId": "3873:43040"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-pressed"
+    },
+    {
+      "itemId": "public.neutral.disabled.light",
+      "label": "neutral · disabled",
+      "mode": "light",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "disabled"
+      },
+      "source": {
+        "nodeId": "3873:43045"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-disabled"
+    },
+    {
+      "itemId": "public.success.default.light",
+      "label": "success · default",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "default"
+      },
+      "source": {
+        "nodeId": "3872:41874"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-default"
+    },
+    {
+      "itemId": "public.success.hover.light",
+      "label": "success · hover",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "hover"
+      },
+      "source": {
+        "nodeId": "3872:41974"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-hover"
+    },
+    {
+      "itemId": "public.success.pressed.light",
+      "label": "success · pressed",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "pressed"
+      },
+      "source": {
+        "nodeId": "3872:42020"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-pressed"
+    },
+    {
+      "itemId": "public.success.disabled.light",
+      "label": "success · disabled",
+      "mode": "light",
+      "dimensions": {
+        "variant": "success",
+        "state": "disabled"
+      },
+      "source": {
+        "nodeId": "3872:42066"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-disabled"
+    },
+    {
+      "itemId": "public.danger.hover.light",
+      "label": "danger · hover",
+      "mode": "light",
+      "dimensions": {
+        "variant": "danger",
+        "state": "hover"
+      },
+      "source": {
+        "nodeId": "3872:41976"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-hover"
+    },
+    {
+      "itemId": "public.danger.pressed.light",
+      "label": "danger · pressed",
+      "mode": "light",
+      "dimensions": {
+        "variant": "danger",
+        "state": "pressed"
+      },
+      "source": {
+        "nodeId": "3872:42022"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-pressed"
+    },
+    {
+      "itemId": "public.danger.disabled.light",
+      "label": "danger · disabled",
+      "mode": "light",
+      "dimensions": {
+        "variant": "danger",
+        "state": "disabled"
+      },
+      "source": {
+        "nodeId": "3872:42068"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-disabled"
+    },
+    {
+      "itemId": "public.xs-size.light",
+      "label": "xs-size",
+      "mode": "light",
+      "dimensions": {
+        "feature": "xs-size"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Button size collection 1593:4566 defines sm/md/lg only, and no XS or extra-small Button selection was found across the pinned Button/Icon button masters or document node/component properties. Request an explicit XS mode or approved token/layout rule; do not alias XS to sm or derive expectations from runtime CSS. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.icon-only.light",
+      "label": "IconButton · neutral · default · md · icon only",
+      "mode": "light",
+      "dimensions": {
+        "feature": "icon-only",
+        "component": "IconButton",
+        "variant": "neutral",
+        "state": "default",
+        "size": "md",
+        "iconArrangement": "icon-only"
+      },
+      "source": {
+        "nodeId": "3875:60969",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Minimum public icon-only feature coverage explicitly selects neutral/md IconButton (master 1595:13935). Existing exact case exercises Button iconOnly via the real IconButton wrapper; other variant/size combinations are not certified by this row."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.icon-only-neutral-default"
+    },
+    {
+      "itemId": "public.both-icons.light",
+      "label": "both-icons",
+      "mode": "light",
+      "dimensions": {
+        "feature": "both-icons"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated two-icon Button composition or approved two-icon layout rule was found. Generic Button set 1362:7513 offers Right/Left/None; Success 3873:42711, Destructive 3873:42718 and Ghost 3873:42868 offer Left/Right with Show icon, without a Both selection. Request independent padding, icon size and two-gap authority. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.full-width.light",
+      "label": "full-width",
+      "mode": "light",
+      "dimensions": {
+        "feature": "full-width"
+      },
+      "source": {
+        "availability": "needs-mapping",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Fill layout source exists: vertical group 1594:7408 has a 320px fill-parent Primary child 1594:7410; horizontal group 1594:7332 instead uses remaining-space growth. Decide and record standalone fullWidth applicability plus exact theme selection before enrollment. Proposed scope is the vertical fill-parent rule in a 320px container. Missing fixtures do not establish absent design."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.toggle.light",
+      "label": "toggle",
+      "mode": "light",
+      "dimensions": {
+        "feature": "toggle"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Filter intent 1371:9063 / 3978:39121 mentions toggling, but no persistent selected/unselected Button appearance or approved rule was found in the Button masters. States collection 2276:28206 contains Default/Hover/Pressed/Disabled/Error; pointer Pressed is not persistent aria-pressed selection. Request a persistent toggle visual rule. Visual review is skipped pending design; behavior obligations remain."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.submit.light",
+      "label": "submit",
+      "mode": "light",
+      "dimensions": {
+        "feature": "submit"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.behavior-submit"
+    },
+    {
+      "itemId": "public.reset.light",
+      "label": "reset",
+      "mode": "light",
+      "dimensions": {
+        "feature": "reset"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.behavior-reset"
+    },
+    {
+      "itemId": "public.navigation.light",
+      "label": "navigation",
+      "mode": "light",
+      "dimensions": {
+        "feature": "navigation"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.purpose-navigation"
+    },
+    {
+      "itemId": "public.keyboard-activation.light",
+      "label": "keyboard-activation",
+      "mode": "light",
+      "dimensions": {
+        "feature": "keyboard-activation"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.basic"
+    },
+    {
+      "itemId": "public.disabled-interaction.light",
+      "label": "disabled-interaction",
+      "mode": "light",
+      "dimensions": {
+        "feature": "disabled-interaction"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.basic-disabled"
+    },
+    {
+      "itemId": "public.accessible-name.light",
+      "label": "accessible-name",
+      "mode": "light",
+      "dimensions": {
+        "feature": "accessible-name"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.basic"
+    },
+    {
+      "itemId": "purpose.destructive.light",
+      "label": "Purpose: destructive",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "destructive"
+      },
+      "source": {
+        "nodeId": "3870:26915"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-destructive"
+    },
+    {
+      "itemId": "purpose.create.light",
+      "label": "Purpose: create",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "create"
+      },
+      "source": {
+        "nodeId": "3978:38817"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-create"
+    },
+    {
+      "itemId": "purpose.submit.light",
+      "label": "Purpose: submit",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "submit"
+      },
+      "source": {
+        "nodeId": "3978:38799"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-submit"
+    },
+    {
+      "itemId": "purpose.cancel.light",
+      "label": "Purpose: cancel",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "cancel"
+      },
+      "source": {
+        "nodeId": "3978:38786"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-cancel"
+    },
+    {
+      "itemId": "purpose.navigation.light",
+      "label": "Purpose: navigation",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "navigation"
+      },
+      "source": {
+        "nodeId": "3873:42981"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-navigation"
+    },
+    {
+      "itemId": "purpose.save.light",
+      "label": "Purpose: save",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "save"
+      },
+      "source": {
+        "nodeId": "3978:38811"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-save"
+    },
+    {
+      "itemId": "purpose.confirm.light",
+      "label": "Purpose: confirm",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "confirm"
+      },
+      "source": {
+        "nodeId": "3870:26925"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-confirm"
+    },
+    {
+      "itemId": "purpose.verify.light",
+      "label": "Purpose: verify",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "verify"
+      },
+      "source": {
+        "nodeId": "3978:38823"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-verify"
+    },
+    {
+      "itemId": "purpose.edit.light",
+      "label": "Purpose: edit",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "edit"
+      },
+      "source": {
+        "nodeId": "3978:38840"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-edit"
+    },
+    {
+      "itemId": "purpose.close.light",
+      "label": "Purpose: close",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "close"
+      },
+      "source": {
+        "nodeId": "3978:38903"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-close"
+    },
+    {
+      "itemId": "purpose.refresh.light",
+      "label": "Purpose: refresh",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "refresh"
+      },
+      "source": {
+        "nodeId": "3978:38909"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-refresh"
+    },
+    {
+      "itemId": "purpose.upload.light",
+      "label": "Purpose: upload",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "upload"
+      },
+      "source": {
+        "nodeId": "3978:38849"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-upload"
+    },
+    {
+      "itemId": "purpose.download.light",
+      "label": "Purpose: download",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "download"
+      },
+      "source": {
+        "nodeId": "3978:38858"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-download"
+    },
+    {
+      "itemId": "purpose.copy.light",
+      "label": "Purpose: copy",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "copy"
+      },
+      "source": {
+        "nodeId": "3978:38867"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-copy"
+    },
+    {
+      "itemId": "purpose.search.light",
+      "label": "Purpose: search",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "search"
+      },
+      "source": {
+        "nodeId": "3978:38920"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-search"
+    },
+    {
+      "itemId": "purpose.filter.light",
+      "label": "Purpose: filter",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "filter"
+      },
+      "source": {
+        "nodeId": "3978:38873"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-filter"
+    },
+    {
+      "itemId": "purpose.sort.light",
+      "label": "Purpose: sort",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "sort"
+      },
+      "source": {
+        "nodeId": "3978:38879"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-sort"
+    },
+    {
+      "itemId": "purpose.dropdown.light",
+      "label": "Purpose: dropdown",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "dropdown"
+      },
+      "source": {
+        "nodeId": "3978:38933"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-dropdown"
+    },
+    {
+      "itemId": "purpose.success.light",
+      "label": "Purpose: success",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "success"
+      },
+      "source": {
+        "nodeId": "3872:41874"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-default"
+    },
+    {
+      "itemId": "public.primary.focus.dark",
+      "label": "primary · focus",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "focus"
+      },
+      "source": {
+        "nodeId": "1461:11639",
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap. Ordinary Primary control source 1461:11639 composes with the independent focus rule and image source 3977:38660; theme-bound Figma capture frame 6047:15473. Rule mappings and real adapter fixtures are enrolled as button.standard-focus-example. Exact staged proof and owner review remain pending; references are not promoted."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.standard-focus-example"
+    },
+    {
+      "itemId": "public.primary.loading.dark",
+      "label": "primary · loading",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "loading"
+      },
+      "source": {
+        "nodeId": "1780:2744",
+        "availability": "needs-mapping",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Direct Primary loading design exists on Spinner page: light 1780:2692 (Loading…, 112×40), dark 1780:2744 (Loading, 103×40), Classic Spinner 1737:10526. Primary surface/label bind 2276:28215/2276:28216. Matching independent mappings, adapter fixtures, Figma references and receipts remain unenrolled."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.primary.error.dark",
+      "label": "primary · error",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "primary",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43600"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.primary-error"
+    },
+    {
+      "itemId": "public.secondary.focus.dark",
+      "label": "secondary · focus",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.secondary.loading.dark",
+      "label": "secondary · loading",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "loading"
+      },
+      "source": {
+        "nodeId": "1780:2767"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-loading"
+    },
+    {
+      "itemId": "public.secondary.error.dark",
+      "label": "secondary · error",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "secondary",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43610"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.secondary-error"
+    },
+    {
+      "itemId": "public.neutral.focus.dark",
+      "label": "neutral · focus",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.neutral.loading.dark",
+      "label": "neutral · loading",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated neutral loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.neutral.error.dark",
+      "label": "neutral · error",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43660"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-error"
+    },
+    {
+      "itemId": "public.text.focus.dark",
+      "label": "text · focus",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.text.loading.dark",
+      "label": "text · loading",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated text loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.text.error.dark",
+      "label": "text · error",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "text",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43620"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.text-error"
+    },
+    {
+      "itemId": "public.success.focus.dark",
+      "label": "success · focus",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.success.loading.dark",
+      "label": "success · loading",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated success loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.success.error.dark",
+      "label": "success · error",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43630"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-error"
+    },
+    {
+      "itemId": "public.danger.focus.dark",
+      "label": "danger · focus",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Approved standard focus rule (DC-009, Figma 1364:11348): 2px ring / 4px clear gap. Rule mapping, fixtures and proof still need enrollment."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.danger.loading.dark",
+      "label": "danger · loading",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "loading"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated danger loading selection or approved variant-specific visual composition was found in the pinned Button/Icon button catalogs and all 23 Classic Spinner instances. Existing loading Button compositions use Primary or Secondary; generic disable/prepend guidance 1737:10712 / 1780:1603 does not resolve this variant's Spinner paint, caption, geometry and state policy. Request an explicit composition rule. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.danger.error.dark",
+      "label": "danger · error",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "error"
+      },
+      "source": {
+        "nodeId": "3873:43640"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-error"
+    },
+    {
+      "itemId": "public.neutral.default.dark",
+      "label": "neutral · default",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "default"
+      },
+      "source": {
+        "nodeId": "3873:43652"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-default"
+    },
+    {
+      "itemId": "public.neutral.hover.dark",
+      "label": "neutral · hover",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "hover"
+      },
+      "source": {
+        "nodeId": "3873:43654"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-hover"
+    },
+    {
+      "itemId": "public.neutral.pressed.dark",
+      "label": "neutral · pressed",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "pressed"
+      },
+      "source": {
+        "nodeId": "3873:43656"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-pressed"
+    },
+    {
+      "itemId": "public.neutral.disabled.dark",
+      "label": "neutral · disabled",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "disabled"
+      },
+      "source": {
+        "nodeId": "3873:43658"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.neutral-disabled"
+    },
+    {
+      "itemId": "public.success.default.dark",
+      "label": "success · default",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "default"
+      },
+      "source": {
+        "nodeId": "3873:43622"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-default"
+    },
+    {
+      "itemId": "public.success.hover.dark",
+      "label": "success · hover",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "hover"
+      },
+      "source": {
+        "nodeId": "3873:43624"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-hover"
+    },
+    {
+      "itemId": "public.success.pressed.dark",
+      "label": "success · pressed",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "pressed"
+      },
+      "source": {
+        "nodeId": "3873:43626"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-pressed"
+    },
+    {
+      "itemId": "public.success.disabled.dark",
+      "label": "success · disabled",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "success",
+        "state": "disabled"
+      },
+      "source": {
+        "nodeId": "3873:43628"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-disabled"
+    },
+    {
+      "itemId": "public.danger.default.dark",
+      "label": "danger · default",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "default"
+      },
+      "source": {
+        "nodeId": "3873:43632"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-default"
+    },
+    {
+      "itemId": "public.danger.hover.dark",
+      "label": "danger · hover",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "hover"
+      },
+      "source": {
+        "nodeId": "3873:43634"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-hover"
+    },
+    {
+      "itemId": "public.danger.pressed.dark",
+      "label": "danger · pressed",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "pressed"
+      },
+      "source": {
+        "nodeId": "3873:43636"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-pressed"
+    },
+    {
+      "itemId": "public.danger.disabled.dark",
+      "label": "danger · disabled",
+      "mode": "dark",
+      "dimensions": {
+        "variant": "danger",
+        "state": "disabled"
+      },
+      "source": {
+        "nodeId": "3873:43638"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.danger-disabled"
+    },
+    {
+      "itemId": "public.xs-size.dark",
+      "label": "xs-size",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "xs-size"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Button size collection 1593:4566 defines sm/md/lg only, and no XS or extra-small Button selection was found across the pinned Button/Icon button masters or document node/component properties. Request an explicit XS mode or approved token/layout rule; do not alias XS to sm or derive expectations from runtime CSS. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.icon-only.dark",
+      "label": "IconButton · neutral · default · md · icon only",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "icon-only",
+        "component": "IconButton",
+        "variant": "neutral",
+        "state": "default",
+        "size": "md",
+        "iconArrangement": "icon-only"
+      },
+      "source": {
+        "nodeId": "3875:61055",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Minimum public icon-only feature coverage explicitly selects neutral/md IconButton (master 1595:13935). Existing exact case exercises Button iconOnly via the real IconButton wrapper; other variant/size combinations are not certified by this row."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.icon-only-neutral-default"
+    },
+    {
+      "itemId": "public.both-icons.dark",
+      "label": "both-icons",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "both-icons"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. No dedicated two-icon Button composition or approved two-icon layout rule was found. Generic Button set 1362:7513 offers Right/Left/None; Success 3873:42711, Destructive 3873:42718 and Ghost 3873:42868 offer Left/Right with Show icon, without a Both selection. Request independent padding, icon size and two-gap authority. Visual review is skipped pending design; required proof remains."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.full-width.dark",
+      "label": "full-width",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "full-width"
+      },
+      "source": {
+        "availability": "needs-mapping",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Fill layout source exists: vertical group 1594:7408 has a 320px fill-parent Primary child 1594:7410; horizontal group 1594:7332 instead uses remaining-space growth. Decide and record standalone fullWidth applicability plus exact theme selection before enrollment. Proposed scope is the vertical fill-parent rule in a 320px container. Missing fixtures do not establish absent design."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.toggle.dark",
+      "label": "toggle",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "toggle"
+      },
+      "source": {
+        "availability": "needs-design",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Filter intent 1371:9063 / 3978:39121 mentions toggling, but no persistent selected/unselected Button appearance or approved rule was found in the Button masters. States collection 2276:28206 contains Default/Hover/Pressed/Disabled/Error; pointer Pressed is not persistent aria-pressed selection. Request a persistent toggle visual rule. Visual review is skipped pending design; behavior obligations remain."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.submit.dark",
+      "label": "submit",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "submit"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.behavior-submit"
+    },
+    {
+      "itemId": "public.reset.dark",
+      "label": "reset",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "reset"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.behavior-reset"
+    },
+    {
+      "itemId": "public.navigation.dark",
+      "label": "navigation",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "navigation"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.purpose-navigation"
+    },
+    {
+      "itemId": "public.keyboard-activation.dark",
+      "label": "keyboard-activation",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "keyboard-activation"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.basic"
+    },
+    {
+      "itemId": "public.disabled-interaction.dark",
+      "label": "disabled-interaction",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "disabled-interaction"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.basic-disabled"
+    },
+    {
+      "itemId": "public.accessible-name.dark",
+      "label": "accessible-name",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "accessible-name"
+      },
+      "requiredProofs": ["behavior"],
+      "caseId": "button.basic"
+    },
+    {
+      "itemId": "purpose.destructive.dark",
+      "label": "Purpose: destructive",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "destructive"
+      },
+      "source": {
+        "nodeId": "3978:39059"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-destructive"
+    },
+    {
+      "itemId": "purpose.create.dark",
+      "label": "Purpose: create",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "create"
+      },
+      "source": {
+        "nodeId": "3978:39077"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-create"
+    },
+    {
+      "itemId": "purpose.submit.dark",
+      "label": "Purpose: submit",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "submit"
+      },
+      "source": {
+        "nodeId": "3978:39031"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-submit"
+    },
+    {
+      "itemId": "purpose.cancel.dark",
+      "label": "Purpose: cancel",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "cancel"
+      },
+      "source": {
+        "nodeId": "3978:39045"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-cancel"
+    },
+    {
+      "itemId": "purpose.navigation.dark",
+      "label": "Purpose: navigation",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "navigation"
+      },
+      "source": {
+        "nodeId": "3978:39152"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-navigation"
+    },
+    {
+      "itemId": "purpose.save.dark",
+      "label": "Purpose: save",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "save"
+      },
+      "source": {
+        "nodeId": "3978:39038"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-save"
+    },
+    {
+      "itemId": "purpose.confirm.dark",
+      "label": "Purpose: confirm",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "confirm"
+      },
+      "source": {
+        "nodeId": "3978:39052"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-confirm"
+    },
+    {
+      "itemId": "purpose.verify.dark",
+      "label": "Purpose: verify",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "verify"
+      },
+      "source": {
+        "nodeId": "3978:39066"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-verify"
+    },
+    {
+      "itemId": "purpose.edit.dark",
+      "label": "Purpose: edit",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "edit"
+      },
+      "source": {
+        "nodeId": "3978:39084"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-edit"
+    },
+    {
+      "itemId": "purpose.close.dark",
+      "label": "Purpose: close",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "close"
+      },
+      "source": {
+        "nodeId": "3978:39209"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-close"
+    },
+    {
+      "itemId": "purpose.refresh.dark",
+      "label": "Purpose: refresh",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "refresh"
+      },
+      "source": {
+        "nodeId": "3978:39216"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-refresh"
+    },
+    {
+      "itemId": "purpose.upload.dark",
+      "label": "Purpose: upload",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "upload"
+      },
+      "source": {
+        "nodeId": "3978:39091"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-upload"
+    },
+    {
+      "itemId": "purpose.download.dark",
+      "label": "Purpose: download",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "download"
+      },
+      "source": {
+        "nodeId": "3978:39098"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-download"
+    },
+    {
+      "itemId": "purpose.copy.dark",
+      "label": "Purpose: copy",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "copy"
+      },
+      "source": {
+        "nodeId": "3978:39105"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-copy"
+    },
+    {
+      "itemId": "purpose.search.dark",
+      "label": "Purpose: search",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "search"
+      },
+      "source": {
+        "nodeId": "3978:39116"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-search"
+    },
+    {
+      "itemId": "purpose.filter.dark",
+      "label": "Purpose: filter",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "filter"
+      },
+      "source": {
+        "nodeId": "3978:39123"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-filter"
+    },
+    {
+      "itemId": "purpose.sort.dark",
+      "label": "Purpose: sort",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "sort"
+      },
+      "source": {
+        "nodeId": "3978:39130"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-sort"
+    },
+    {
+      "itemId": "purpose.dropdown.dark",
+      "label": "Purpose: dropdown",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "dropdown"
+      },
+      "source": {
+        "nodeId": "3978:39137"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.purpose-dropdown"
+    },
+    {
+      "itemId": "purpose.success.dark",
+      "label": "Purpose: success",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "success"
+      },
+      "source": {
+        "nodeId": "3873:43622"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"],
+      "caseId": "button.success-default"
+    },
+    {
+      "itemId": "design.danger-default.light",
+      "label": "danger · default",
+      "mode": "light",
+      "caseId": "button.danger-default",
+      "dimensions": {
+        "variant": "danger",
+        "state": "default",
+        "size": "sm"
+      },
+      "source": {
+        "nodeId": "3872:41884"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-default.light",
+      "label": "neutral · default",
+      "mode": "light",
+      "caseId": "button.neutral-icon-left-default",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "default",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43064"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-hover.light",
+      "label": "neutral · hover",
+      "mode": "light",
+      "caseId": "button.neutral-icon-left-hover",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "hover",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43566"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-pressed.light",
+      "label": "neutral · pressed",
+      "mode": "light",
+      "caseId": "button.neutral-icon-left-pressed",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "pressed",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43128"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-disabled.light",
+      "label": "neutral · disabled",
+      "mode": "light",
+      "caseId": "button.neutral-icon-left-disabled",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "disabled",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43134"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-error.light",
+      "label": "neutral · error",
+      "mode": "light",
+      "caseId": "button.neutral-icon-left-error",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "error",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43140"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-default.dark",
+      "label": "neutral · default",
+      "mode": "dark",
+      "caseId": "button.neutral-icon-left-default",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "default",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43662"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-hover.dark",
+      "label": "neutral · hover",
+      "mode": "dark",
+      "caseId": "button.neutral-icon-left-hover",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "hover",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43664"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-pressed.dark",
+      "label": "neutral · pressed",
+      "mode": "dark",
+      "caseId": "button.neutral-icon-left-pressed",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "pressed",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43666"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-disabled.dark",
+      "label": "neutral · disabled",
+      "mode": "dark",
+      "caseId": "button.neutral-icon-left-disabled",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "disabled",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43668"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.neutral-icon-left-error.dark",
+      "label": "neutral · error",
+      "mode": "dark",
+      "caseId": "button.neutral-icon-left-error",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "error",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:43670"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.success-icon-left-default.light",
+      "label": "success · default",
+      "mode": "light",
+      "caseId": "button.success-icon-left-default",
+      "dimensions": {
+        "variant": "success",
+        "state": "default",
+        "size": "md"
+      },
+      "source": {
+        "nodeId": "3873:42712"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.danger-icon-left-default.light",
+      "label": "danger · default",
+      "mode": "light",
+      "caseId": "button.danger-icon-left-default",
+      "dimensions": {
+        "variant": "danger",
+        "state": "default",
+        "size": "sm"
+      },
+      "source": {
+        "nodeId": "3873:42719"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.icon-only-neutral-default.light",
+      "label": "IconButton · neutral · md · Default",
+      "mode": "light",
+      "caseId": "button.icon-only-neutral-default",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "default",
+        "size": "md",
+        "iconArrangement": "icon-only"
+      },
+      "source": {
+        "nodeId": "3875:60969"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.icon-only-neutral-default.dark",
+      "label": "IconButton · neutral · md · Default",
+      "mode": "dark",
+      "caseId": "button.icon-only-neutral-default",
+      "dimensions": {
+        "variant": "neutral",
+        "state": "default",
+        "size": "md",
+        "iconArrangement": "icon-only"
+      },
+      "source": {
+        "nodeId": "3875:61055"
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.destructive.focus.light",
+      "label": "destructive purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "destructive",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.create.focus.light",
+      "label": "create purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "create",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.submit.focus.light",
+      "label": "submit purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "submit",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.cancel.focus.light",
+      "label": "cancel purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "cancel",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.navigation.focus.light",
+      "label": "navigation purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "navigation",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.save.focus.light",
+      "label": "save purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "save",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.confirm.focus.light",
+      "label": "confirm purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "confirm",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.verify.focus.light",
+      "label": "verify purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "verify",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.edit.focus.light",
+      "label": "edit purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "edit",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.close.focus.light",
+      "label": "close purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "close",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.refresh.focus.light",
+      "label": "refresh purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "refresh",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.upload.focus.light",
+      "label": "upload purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "upload",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.download.focus.light",
+      "label": "download purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "download",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.copy.focus.light",
+      "label": "copy purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "copy",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.search.focus.light",
+      "label": "search purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "search",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.filter.focus.light",
+      "label": "filter purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "filter",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.sort.focus.light",
+      "label": "sort purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "sort",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.dropdown.focus.light",
+      "label": "dropdown purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "dropdown",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.success.focus.light",
+      "label": "success purpose wrapper · focus",
+      "mode": "light",
+      "dimensions": {
+        "purpose": "success",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.icon-only.focus.light",
+      "label": "IconButton · neutral · md · focus",
+      "mode": "light",
+      "dimensions": {
+        "feature": "icon-only",
+        "component": "IconButton",
+        "variant": "neutral",
+        "state": "focus",
+        "size": "md",
+        "iconArrangement": "icon-only"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied. Default IconButton authority is 3875:60969; do not reuse its unfocused screenshot as focused visual proof."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.destructive.focus.dark",
+      "label": "destructive purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "destructive",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.create.focus.dark",
+      "label": "create purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "create",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.submit.focus.dark",
+      "label": "submit purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "submit",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.cancel.focus.dark",
+      "label": "cancel purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "cancel",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.navigation.focus.dark",
+      "label": "navigation purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "navigation",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.save.focus.dark",
+      "label": "save purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "save",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.confirm.focus.dark",
+      "label": "confirm purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "confirm",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.verify.focus.dark",
+      "label": "verify purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "verify",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.edit.focus.dark",
+      "label": "edit purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "edit",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.close.focus.dark",
+      "label": "close purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "close",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.refresh.focus.dark",
+      "label": "refresh purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "refresh",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.upload.focus.dark",
+      "label": "upload purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "upload",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.download.focus.dark",
+      "label": "download purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "download",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.copy.focus.dark",
+      "label": "copy purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "copy",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.search.focus.dark",
+      "label": "search purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "search",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.filter.focus.dark",
+      "label": "filter purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "filter",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.sort.focus.dark",
+      "label": "sort purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "sort",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.dropdown.focus.dark",
+      "label": "dropdown purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "dropdown",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "purpose.success.focus.dark",
+      "label": "success purpose wrapper · focus",
+      "mode": "dark",
+      "dimensions": {
+        "purpose": "success",
+        "state": "focus"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "public.icon-only.focus.dark",
+      "label": "IconButton · neutral · md · focus",
+      "mode": "dark",
+      "dimensions": {
+        "feature": "icon-only",
+        "component": "IconButton",
+        "variant": "neutral",
+        "state": "focus",
+        "size": "md",
+        "iconArrangement": "icon-only"
+      },
+      "source": {
+        "availability": "rule-defined",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335. Approved standard focus rule (DC-009, Figma Standard 1364:11348 / Ring 1461:13442): 2px ring / 4px clear gap across Button variants, purpose wrappers and IconButton. Figma 3977:38650 intentionally delegates focus to CSS :focus-visible. Independent rule mapping, keyboard fixtures and proof still need enrollment; no reference approval is implied. Default IconButton authority is 3875:61055; do not reuse its unfocused screenshot as focused visual proof."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.icon-only-borderless-default.light",
+      "label": "IconButton · Border=False · default · md",
+      "mode": "light",
+      "dimensions": {
+        "component": "IconButton",
+        "state": "default",
+        "size": "md",
+        "iconArrangement": "icon-only",
+        "border": "false",
+        "sourceVariant": "Border=False"
+      },
+      "source": {
+        "nodeId": "3017:36466",
+        "availability": "needs-mapping",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335 includes authoritative IconButton master 3017:36466 (Border=False): 32×32, 8px padding, transparent icon-btn/surface fill 2276:28274 and no strokes; explicit States 2276:15 and Icon button size 2513:1. This required light selection needs explicit Semantic mode 1358:1 and source-node enrollment through staging. The known master is in compact variantInventory but its node subtree is not yet indexed. Public IconButton variant=text is an existing API-compatible candidate; independent token/state parity and the source-to-public-variant mapping remain unresolved. No runtime fixture, structural mapping or reference is enrolled. This is available source awaiting mapping, not a missing-design visual skip."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    },
+    {
+      "itemId": "design.icon-only-borderless-default.dark",
+      "label": "IconButton · Border=False · default · md",
+      "mode": "dark",
+      "dimensions": {
+        "component": "IconButton",
+        "state": "default",
+        "size": "md",
+        "iconArrangement": "icon-only",
+        "border": "false",
+        "sourceVariant": "Border=False"
+      },
+      "source": {
+        "nodeId": "3017:36466",
+        "availability": "needs-mapping",
+        "reason": "Pinned October 14 Figma capture nybMu3iJUnnOvWtuxjMG8b / 2410234809276115335 includes authoritative IconButton master 3017:36466 (Border=False): 32×32, 8px padding, transparent icon-btn/surface fill 2276:28274 and no strokes; explicit States 2276:15 and Icon button size 2513:1. This required dark selection needs explicit Semantic mode 1358:2 and source-node enrollment through staging. The known master is in compact variantInventory but its node subtree is not yet indexed. Public IconButton variant=text is an existing API-compatible candidate; independent token/state parity and the source-to-public-variant mapping remain unresolved. No runtime fixture, structural mapping or reference is enrolled. This is available source awaiting mapping, not a missing-design visual skip."
+      },
+      "requiredProofs": ["structural", "visual", "behavior"]
+    }
+  ]
+}

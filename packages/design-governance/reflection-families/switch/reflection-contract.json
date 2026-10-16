@@ -3,12 +3,12 @@
   "family": "switch",
   "baselineRoot": "packages/design-governance/reflection-families/switch/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "switch.states-default",
       "mode": "light",
-      "figmaNodeId": "5056:44368",
+      "figmaNodeId": "6007:14526",
       "figmaFrameName": "reflection/switch/states-default/light",
       "exportScale": 1,
       "viewport": "switch-states-default",
@@ -61,7 +61,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1364:11442",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1364-11442",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1364-11442",
         "outputFrameName": "reflection/switch/states-default/light",
         "selector": {
           "strategy": "rowContent",
@@ -79,7 +79,7 @@
     {
       "caseId": "switch.states-default",
       "mode": "dark",
-      "figmaNodeId": "5056:44381",
+      "figmaNodeId": "6007:14540",
       "figmaFrameName": "reflection/switch/states-default/dark",
       "exportScale": 1,
       "viewport": "switch-states-default",
@@ -134,7 +134,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1369:4001",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1369-4001",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1369-4001",
         "outputFrameName": "reflection/switch/states-default/dark",
         "selector": {
           "strategy": "rowContent",

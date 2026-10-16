@@ -3,7 +3,7 @@
   "family": "slider",
   "baselineRoot": "packages/design-governance/reflection-families/slider/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "slider.default",
@@ -49,7 +49,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "2462:11678",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2462-11678",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=2462-11678",
         "outputFrameName": "reflection/slider/default/light",
         "selector": {
           "strategy": "directNode",
@@ -61,7 +61,7 @@
           "padding": 0
         },
         "sourceNodeId": "2462:12273",
-        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2462-12273"
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=2462-12273"
       }
     },
     {
@@ -108,7 +108,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "2464:13677",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2464-13677",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=2464-13677",
         "outputFrameName": "reflection/slider/default/dark",
         "selector": {
           "strategy": "directNode",
@@ -120,7 +120,7 @@
           "padding": 0
         },
         "sourceNodeId": "2464:13689",
-        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2464-13689"
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=2464-13689"
       }
     }
   ]
