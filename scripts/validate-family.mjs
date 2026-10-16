@@ -82,6 +82,11 @@ function run(command, args) {
 function collectCoreRecipeTests() {
   const defaultRecipeTest = `test/recipes/${family}.test.ts`
   const familySpecificTests = {
+    button: [
+      "test/recipes/button.test.ts",
+      "test/recipes/button-purpose-icons.test.ts",
+      "test/recipes/button-html-attributes.test.ts",
+    ],
     input: [
       "test/recipes/input.test.ts",
       "test/recipes/select.test.ts",

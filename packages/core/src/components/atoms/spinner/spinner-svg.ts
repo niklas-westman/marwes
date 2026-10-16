@@ -22,26 +22,25 @@ function createRectNode(attrs: Record<string, string>): SpinnerSvgNode {
   }
 }
 
+// Canonical Figma Spinner/Classic 1737:10526; filled outlines 1784:465 and 1784:529.
 function createClassicNodes(): readonly SpinnerSvgNode[] {
   return [
-    createCircleNode({
-      cx: "12",
-      cy: "12",
-      r: "10",
-      fill: "none",
-      stroke: TRACK_COLOR,
-      strokeWidth: "2",
-    }),
-    createCircleNode({
-      cx: "12",
-      cy: "12",
-      r: "10",
-      fill: "none",
-      stroke: INDICATOR_COLOR,
-      strokeWidth: "2",
-      strokeLinecap: "round",
-      strokeDasharray: "15.7 47.1",
-    }),
+    {
+      tag: "path",
+      attrs: {
+        d: "M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22L12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24L12 22C17.5228 22 22 17.5228 22 12Z",
+        transform: "translate(0 0)",
+        fill: TRACK_COLOR,
+      },
+    },
+    {
+      tag: "path",
+      attrs: {
+        d: "M10.998 0C11.5514 2.52976e-05 12.0042 0.449531 11.958 1.00098L11.9102 1.46191C11.7784 2.53536 11.5025 3.58846 11.0869 4.5918L10.8477 5.13184C10.2592 6.37565 9.46039 7.51032 8.48535 8.48535L8.05762 8.89258C7.03807 9.8164 5.86561 10.5593 4.5918 11.0869L4.15918 11.2559C3.14218 11.6317 2.07978 11.8677 1.00098 11.958L0.898438 11.9609C0.394832 11.947 2.36891e-05 11.5167 0 10.998C2.41839e-08 10.4448 0.449559 10.0018 1 9.94629C1.84836 9.86096 2.68358 9.66695 3.48438 9.36914L3.8252 9.23535C4.88632 8.79582 5.86261 8.17681 6.71191 7.40723L7.06836 7.06836C7.88065 6.25606 8.54596 5.31065 9.03613 4.27441L9.23535 3.8252C9.60957 2.92169 9.84878 1.96946 9.94629 1C10.0018 0.44956 10.4448 0 10.998 0Z",
+        transform: "translate(12 12)",
+        fill: INDICATOR_COLOR,
+      },
+    },
   ]
 }
 

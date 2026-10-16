@@ -1,19 +1,7 @@
-/* ============================================
-   Button Component Styles - firstEdition
-   Based on Figma node: 1:1072 (Buttons)
-   
-   Design Specifications:
-   - States: default, hover, active, disabled, error
-   - Variants: primary, secondary, text
-   - Icon positions: left, right, none
-   - Focus: 2px #2f31fc outline + 2px offset
-   - Disabled: opacity 20% (light), 40% (dark)
-   
-   Figma Variants:
-   - Primary: 1:1080, 1:1085, 1:1090
-   - Secondary: 1:1095, 1:1100, 1:1105  
-   - Text: 1:1110, 1:1115, 1:1120
-   ============================================ */
+/* Button styles from the pinned Marwes governance capture (2026-10-14).
+   Structural contracts select exact instances and variable modes. State overlays
+   and disabled surface/label alpha are independent paints; never dim the whole
+   control to simulate them. Neutral corresponds to the approved Ghost design. */
 
 /* BASE */
 .mw-btn {
@@ -26,6 +14,9 @@
   border-radius: var(--mw-ui-radius-button, var(--mw-ui-radius));
   border: 0;
   font-family: var(--mw-font-primary, inherit);
+  /* Figma Confirm uses the fi ligature even with nonzero tracking. */
+  font-feature-settings: "liga" 1;
+  text-rendering: geometricPrecision;
   font-size: var(--mw-density-font-size);
   font-weight: 500;
   line-height: var(--mw-typography-text-label-line-height);
@@ -38,9 +29,21 @@
 
 .mw-btn__label {
   display: block;
+  text-align: left;
   line-height: inherit;
   letter-spacing: inherit;
   min-inline-size: 0;
+}
+
+/* Match captured Figma auto-width boxes: omit trailing tracking, then round up.
+   Preserve ordinary intrinsic sizing where calc-size is unavailable. */
+@supports (width: calc-size(fit-content, round(up, size, 1px))) {
+  .mw-btn__label {
+    width: calc-size(
+      fit-content,
+      round(up, size - var(--mw-typography-text-label-letter-spacing), 1px)
+    );
+  }
 }
 
 .mw-btn[data-has-affordance="true"] .mw-btn__label {
@@ -55,10 +58,34 @@
   padding: 0;
 }
 
-/* FOCUS STATE - Figma spec: 2px white space + 2px Accessible blue outline */
+/* Standard focus master 1364:11348: 2px INSIDE stroke on the outer
+   6px-radius frame. Its 6px inset leaves a 4px clear gap to the control.
+   A native offset outline expands the corners differently from this source. */
 .mw-btn:focus-visible {
-  outline: 2px solid var(--mw-color-focus);
-  outline-offset: 2px;
+  position: relative;
+  outline: none;
+}
+
+.mw-btn:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--mw-color-focus);
+  border-radius: 6px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* Preserve a native system-color focus cue when forced colors are active. */
+@media (forced-colors: active) {
+  .mw-btn:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 4px;
+  }
+
+  .mw-btn:focus-visible::after {
+    content: none;
+  }
 }
 
 /* PRIMARY - Solid filled button */
@@ -68,12 +95,40 @@
   border-color: var(--mw-color-primary-base);
 }
 
-.mw-btn--primary:hover:not(:disabled) {
-  opacity: 0.9;
+/* Figma keeps the surface and label opaque and paints a separate state overlay. */
+.mw-btn--primary,
+.mw-btn--success,
+.mw-btn--danger,
+.mw-btn--neutral,
+.mw-btn--secondary {
+  position: relative;
+  isolation: isolate;
 }
 
-.mw-btn--primary:active:not(:disabled) {
-  opacity: 0.95;
+.mw-btn--primary::before,
+.mw-btn--success::before,
+.mw-btn--danger::before,
+.mw-btn--neutral::before,
+.mw-btn--secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+}
+
+.mw-btn--primary:hover:not(:disabled)::before,
+.mw-btn--success:hover:not(:disabled)::before,
+.mw-btn--danger:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-white) 20%, transparent);
+}
+
+.mw-btn--primary:active:not(:disabled)::before,
+.mw-btn--success:active:not(:disabled)::before,
+.mw-btn--danger:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-black) 10%, transparent);
 }
 
 /* SECONDARY - Outlined button */
@@ -84,27 +139,44 @@
   box-shadow: inset 0 0 0 1px var(--mw-color-secondary-border);
 }
 
-.mw-btn--secondary:hover:not(:disabled) {
-  background: var(--mw-color-secondary-hover);
+/* Figma's outlined surface uses whole-pixel bounds. Round the intrinsic size
+   so fractional font advances do not leave the far stroke between pixels.
+   fit-content keeps constrained labels responsive; explicit widths and the
+   more specific icon-only rule retain control of their sizing. */
+@supports (width: calc-size(fit-content, round(nearest, size, 1px))) {
+  .mw-btn--secondary,
+  .mw-btn--neutral {
+    width: calc-size(fit-content, round(nearest, size, 1px));
+  }
 }
 
-.mw-btn--secondary:active:not(:disabled) {
-  background: var(--mw-color-secondary-pressed);
+.mw-btn--secondary:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-secondary-label) 10%, transparent);
+}
+
+.mw-btn--secondary:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-secondary-label) 20%, transparent);
 }
 
 /* NEUTRAL - Quiet outlined button for cancel/close/filter-style actions */
 .mw-btn--neutral {
   background: transparent;
   color: var(--mw-color-text);
-  border-color: color-mix(in srgb, var(--mw-color-text) 10%, transparent);
+  border-color: color-mix(in srgb, var(--mw-color-black) 15%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mw-color-black) 15%, transparent);
 }
 
-.mw-btn--neutral:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-text) 4%, transparent);
+.mw-btn--neutral:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-black) 10%, transparent);
 }
 
-.mw-btn--neutral:active:not(:disabled) {
-  background: color-mix(in srgb, var(--mw-color-text) 8%, transparent);
+.mw-btn--neutral:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-black) 20%, transparent);
+}
+
+.mw-btn--neutral .mw-icon {
+  width: 12px;
+  height: 12px;
 }
 
 /* TEXT - Minimal text-only button, content-hugging (no fixed height). */
@@ -140,13 +212,10 @@
 }
 
 .mw-btn.mw-btn--text[data-action="navigate"] {
-  padding: 0.125rem 0;
+  color: var(--mw-color-text-muted);
+  padding: 0;
   text-decoration: underline;
   text-underline-offset: 2px;
-}
-
-.mw-btn.mw-btn--text[data-action="navigate"]::before {
-  content: none;
 }
 
 /* SIZES */
@@ -156,10 +225,23 @@
   font-size: 12px;
 }
 
+/* Figma Button size collection, sm: 8px vertical / 12px horizontal, 14px label. */
 .mw-btn--sm {
-  height: 34px;
-  padding: 0 12px; /* off-scale — no token */
-  font-size: 13px;
+  height: 32px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+/* The destructive purpose component overrides sm content padding and icon gap. */
+.mw-btn--sm[data-purpose="destructive"] {
+  height: 36px;
+  padding: 10px 16px;
+  gap: 6px; /* Figma destructive content uses a literal 6px gap. */
+}
+
+.mw-btn--sm[data-purpose="destructive"] .mw-icon {
+  width: 12px;
+  height: 12px;
 }
 
 .mw-btn--md {
@@ -169,31 +251,46 @@
 }
 
 .mw-btn--lg {
-  height: 46px;
-  padding: 0 16px;
-  font-size: 15px;
+  height: 48px;
+  padding: 16px 24px;
+  font-size: 14px;
 }
 
-/* DISABLED STATE - Figma spec: opacity 20% (#000000 20% for light mode) */
-.mw-btn:disabled {
+/* IconButton has its own Figma size collection: md is 32, ordinary Button md is 40.
+   Captured Border=True selections use 15% contrast in both semantic modes. */
+.mw-btn--md[data-icon-only="true"] {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 8px;
+}
+
+.mw-theme--dark .mw-btn--neutral[data-icon-only="true"] {
+  border-color: color-mix(in srgb, var(--mw-color-white) 15%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mw-color-white) 15%, transparent);
+}
+
+/* Fallback disabled treatment; mapped variants use independent role paints below. */
+.mw-btn:disabled:not([aria-busy="true"]) {
   opacity: 0.2;
   cursor: not-allowed;
 }
 
-.mw-btn.mw-btn--text:disabled {
-  color: var(--mw-color-text-disabled);
+/* Fallback for unclassified variants in dark mode. */
+.mw-theme--dark .mw-btn:disabled:not([aria-busy="true"]) {
+  opacity: 0.4;
 }
 
-/* Dark mode disabled state: #FFFFFF 40% (middle of 20-60% range from Figma) */
-.mw-theme--dark .mw-btn:disabled {
-  opacity: 0.4;
+.mw-btn.mw-btn--text:disabled:not([aria-busy="true"]) {
+  opacity: 1;
+  color: var(--mw-color-text-disabled);
 }
 
 .mw-btn--full-width {
   width: 100%;
 }
 
-/* ERROR STATE - Figma node: 1:1072 includes error state */
+/* ERROR STATE - selected Component tokens / Error mode. */
 .mw-btn[data-error="true"],
 .mw-btn--error {
   border-color: var(--mw-color-status-error-border);
@@ -224,12 +321,9 @@
   border-color: var(--mw-color-success-base);
 }
 
-.mw-btn--success:hover:not(:disabled) {
-  opacity: 0.9;
-}
-
-.mw-btn--success:active:not(:disabled) {
-  opacity: 0.95;
+.mw-btn--success .mw-icon {
+  width: 12px;
+  height: 12px;
 }
 
 /* DANGER - Destructive confirmation actions */
@@ -239,30 +333,43 @@
   border-color: var(--mw-color-danger-base);
 }
 
-.mw-btn--danger:hover:not(:disabled) {
-  opacity: 0.9;
-}
-
-.mw-btn--danger:active:not(:disabled) {
-  opacity: 0.95;
-}
-
 /* ============================================
    DARK MODE OVERRIDES
    ============================================ */
 
-/* Dark mode: Primary button hover state uses opacity instead of lightening */
-.mw-theme--dark .mw-btn--primary:hover:not(:disabled) {
-  opacity: 0.8;
+/* Dark source state overlays are black on hover and white on press. */
+.mw-theme--dark .mw-btn--primary:hover:not(:disabled)::before,
+.mw-theme--dark .mw-btn--success:hover:not(:disabled)::before,
+.mw-theme--dark .mw-btn--danger:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-black) 20%, transparent);
 }
 
-.mw-theme--dark .mw-btn--primary:active:not(:disabled) {
-  opacity: 0.9;
+.mw-theme--dark .mw-btn--primary:active:not(:disabled)::before,
+.mw-theme--dark .mw-btn--success:active:not(:disabled)::before,
+.mw-theme--dark .mw-btn--danger:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-white) 20%, transparent);
+}
+
+.mw-theme--dark .mw-btn--secondary:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-white) 10%, transparent);
+}
+
+.mw-theme--dark .mw-btn--secondary:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-white) 20%, transparent);
 }
 
 /* Dark mode: Neutral button uses the softer ghost border from Figma */
 .mw-theme--dark .mw-btn--neutral {
-  border-color: color-mix(in srgb, var(--mw-color-text) 18%, transparent);
+  border-color: color-mix(in srgb, var(--mw-color-white) 30%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mw-color-white) 30%, transparent);
+}
+
+.mw-theme--dark .mw-btn--neutral:hover:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-white) 10%, transparent);
+}
+
+.mw-theme--dark .mw-btn--neutral:active:not(:disabled)::before {
+  background: color-mix(in srgb, var(--mw-color-white) 20%, transparent);
 }
 
 /* Dark mode: Error state for Secondary button (red outline on dark background) */
@@ -279,4 +386,76 @@
   background: var(--mw-color-danger-base);
   border-color: var(--mw-color-danger-base);
   color: var(--mw-color-danger-label);
+}
+
+/* Disabled role paints carry their own Figma alpha; do not attenuate the whole control again. */
+.mw-btn.mw-btn--primary:disabled:not([aria-busy="true"]) {
+  opacity: 1;
+  background: var(--mw-color-primary-disabled);
+  color: var(--mw-color-primary-label-disabled);
+}
+
+.mw-btn.mw-btn--secondary:disabled:not([aria-busy="true"]) {
+  opacity: 1;
+  color: var(--mw-color-secondary-label-disabled);
+  border-color: var(--mw-color-secondary-border-disabled);
+  box-shadow: inset 0 0 0 1px var(--mw-color-secondary-border-disabled);
+}
+
+.mw-btn.mw-btn--danger:disabled:not([aria-busy="true"]) {
+  opacity: 1;
+  background: var(--mw-color-danger-disabled);
+  border-color: var(--mw-color-danger-disabled);
+  color: var(--mw-color-danger-label-disabled);
+}
+
+/* Loading remains semantically disabled without borrowing disabled-state paints. */
+.mw-btn[aria-busy="true"] {
+  cursor: progress;
+}
+
+.mw-btn.mw-btn--success:disabled:not([aria-busy="true"]) {
+  opacity: 1;
+  background: var(--mw-color-success-disabled);
+  color: var(--mw-color-success-label-disabled);
+}
+
+/* Figma error labels and icons use distinct semantic paints. */
+.mw-btn--secondary[data-error="true"] .mw-icon,
+.mw-btn--secondary.mw-btn--error .mw-icon,
+.mw-btn--text[data-error="true"] .mw-icon,
+.mw-btn--text.mw-btn--error .mw-icon {
+  color: var(--mw-color-status-error-icon);
+}
+
+.mw-btn.mw-btn--neutral:disabled:not([aria-busy="true"]) {
+  opacity: 1;
+  color: var(--mw-color-text-disabled);
+}
+
+.mw-btn--neutral[data-error="true"],
+.mw-btn--neutral.mw-btn--error {
+  color: var(--mw-color-status-error-text);
+}
+
+.mw-btn--neutral[data-error="true"] .mw-icon,
+.mw-btn--neutral.mw-btn--error .mw-icon {
+  color: var(--mw-color-status-error-icon);
+}
+
+/* Pinned Spinner showcase: outlined loading uses neutral track and action indicator. */
+.mw-btn--secondary[aria-busy="true"] .mw-spinner--classic .mw-spinner__svg path:first-child {
+  fill: color-mix(in srgb, var(--mw-color-border-full) 40%, transparent);
+}
+
+.mw-btn--secondary[aria-busy="true"] .mw-spinner--classic .mw-spinner__svg path:last-child {
+  fill: var(--mw-color-primary-base);
+}
+
+.mw-theme--dark
+  .mw-btn--secondary[aria-busy="true"]
+  .mw-spinner--classic
+  .mw-spinner__svg
+  path:last-child {
+  fill: var(--mw-color-white);
 }

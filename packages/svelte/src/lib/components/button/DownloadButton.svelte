@@ -5,4 +5,4 @@
   type Props = Omit<ButtonProps, "variant" | "action">;
   let { dataAttributes, ...props }: Props = $props();
 </script>
-<Button {...props} variant="secondary" action="button" iconRight={props.iconRight ?? "download"} dataAttributes={{ ...dataAttributes, ...createPurposeSemanticAttributes("download"), "data-transfer": "download" }} />
+<Button {...props} variant="secondary" action="button" dataAttributes={{ ...dataAttributes, ...createPurposeSemanticAttributes("download"), "data-transfer": "download" }} />

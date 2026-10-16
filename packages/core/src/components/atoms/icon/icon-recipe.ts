@@ -1,4 +1,5 @@
 import { resolveIconA11y } from "./icon-a11y"
+import { refreshCwCanonicalNodes } from "./icon-canonical-geometry"
 import { iconRegistry } from "./icon-registry"
 import { resolveIconSize, resolveIconStrokeWidth } from "./icon-scales"
 import type { IconOptions, IconRenderKit } from "./icon-types"
@@ -27,7 +28,7 @@ export function createIconRecipe(opts: IconOptions): IconRenderKit {
     a11y: resolveIconA11y(opts),
     svg: {
       viewBox: def.viewBox,
-      nodes: def.nodes,
+      nodes: opts.name === "refreshCw" && sw === 2 ? refreshCwCanonicalNodes : def.nodes,
       width: px,
       height: px,
       type: "stroke",

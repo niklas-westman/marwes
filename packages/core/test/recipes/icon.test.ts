@@ -62,3 +62,37 @@ describe("createIconRecipe", () => {
     expect(renderKit.a11y).toEqual({ ariaHidden: true })
   })
 })
+
+describe("RefreshCw canonical stroke geometry", () => {
+  it.each(["sm", 2] as const)("uses the Figma outline at canonical width %s", (strokeWidth) => {
+    const kit = createIconRecipe({ name: IconName.RefreshCw, strokeWidth })
+    expect(kit.vars["--mw-icon-stroke-width"]).toBe("2")
+    expect(kit.svg.nodes).toHaveLength(1)
+    expect(kit.svg.nodes[0]?.attrs.fill).toBe("var(--mw-icon-color, currentColor)")
+    expect(kit.svg.nodes[0]?.attrs.stroke).toBe("none")
+  })
+
+  it.each(["xs", "md", "lg", 0, 1, 1.5, 3, 4] as const)(
+    "preserves configurable stroked geometry for explicit width %s",
+    (strokeWidth) => {
+      const kit = createIconRecipe({ name: IconName.RefreshCw, strokeWidth })
+      expect(kit.svg.nodes[0]?.tag).toBe("path")
+      expect(kit.svg.nodes[0]?.attrs.fill).toBeUndefined()
+      expect(kit.svg.nodes[0]?.attrs.stroke).toBeUndefined()
+      expect(kit.svg.nodes[0]?.attrs.d).toBe(
+        "M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2",
+      )
+      const expected = { xs: 1, md: 3, lg: 4 }
+      expect(kit.vars["--mw-icon-stroke-width"]).toBe(
+        String(typeof strokeWidth === "number" ? strokeWidth : expected[strokeWidth]),
+      )
+    },
+  )
+
+  it("keeps the public default stroke at md rather than silently selecting width 2", () => {
+    const kit = createIconRecipe({ name: IconName.RefreshCw })
+    expect(kit.vars["--mw-icon-stroke-width"]).toBe("3")
+    expect(kit.svg.nodes[0]?.attrs.stroke).toBeUndefined()
+    expect(kit.svg.nodes[0]?.attrs.fill).toBeUndefined()
+  })
+})
