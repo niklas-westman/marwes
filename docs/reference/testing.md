@@ -192,6 +192,46 @@ open-client transitions need separate contracts. Framework-app build coverage fo
 Nuxt and SvelteKit remains a separate product decision. React 18's server-render-only
 `useLayoutEffect` warnings are outside the hydration capture window.
 
+### Unified design governance evidence
+
+The private `@marwes-ui/design-governance` package owns Figma-derived structural
+assertions and Reflection 0.3.0 visual orchestration. From the repository root:
+
+```bash
+pnpm governance:status -- --family button --json
+pnpm governance:verify -- --family button --adapter all
+pnpm governance:review -- --family button
+pnpm governance:check -- --family button
+pnpm governance:ui
+pnpm governance:ci
+```
+
+Verification measures real adapter components against compact Figma JSON and
+variable snapshots. Reference PNGs remain a separate visual proof path. A failed
+measurement identifies the semantic part, source property, expected/actual value,
+delta and tolerance. Unsupported or unmapped required properties block proof;
+passing supported properties never establish universal pixel identity.
+
+Local combined reports are immutable under `.reflection/governance/<run-id>/`;
+CI uses `artifacts/reflection/governance/<run-id>/`. Status recomputes input
+freshness, and stale evidence blocks the gate. `review` displays evidence without
+recording acceptance. UI **Run validation** runs the same package core; a completed
+job means execution finished, not that every proof passed. See the
+[inspection guide](../guides/figma-governance-one.md) and
+[upgrade audit](../audits/figma-governance-one-upgrade.md).
+
+Focused governance tests:
+
+```bash
+pnpm --filter @marwes-ui/design-governance test
+pnpm --filter @marwes-ui/design-governance typecheck
+pnpm --filter @marwes-ui/design-governance test:browser
+pnpm --filter @marwes-ui/design-governance build:ui
+```
+
+Keep adapter behavior tests and the focused family source/token gates alongside
+this evidence. Never change references or tolerances to mask failed comparisons.
+
 ### Reflection visual evidence
 
 Marwes uses `reflection-check` for Figma-backed component visual evidence through
@@ -204,11 +244,11 @@ pnpm reflection:visual
 pnpm reflection:review
 ```
 
-Figma baselines are exported from the manifest:
+Legacy Figma export tooling reads the manifest. These write commands are not
+approval; use exact staged promotion for changes to active references:
 
 ```bash
 node scripts/reflection/export-figma-baselines.mjs --family button --dry-run
-node scripts/reflection/export-figma-baselines.mjs --family button
 ```
 
 Adapter-focused commands are also available:
@@ -221,7 +261,7 @@ pnpm reflection:visual:svelte
 
 Local runs write evidence to `.reflection/<adapter>/`. CI runs should use
 `pnpm reflection:ci`, which writes evidence to `artifacts/reflection/<adapter>/`.
-Approved baselines live under
+Figma reference baselines live under
 `packages/design-governance/reflection-families/<family>/baselines/`. The
 starter Button cases use the same Figma baseline image paths for React, Vue, and
 Svelte so each adapter is checked against the same visual standard.
@@ -246,14 +286,14 @@ comparisons and one text-button failure: the saved Figma baseline is blue
 (`#2F31FC`), while the stored Figma token and runtime use dark text (`#141414`).
 The warning badges pass in both themes across React, Vue, and Svelte. This
 exception leaves checks and thresholds intact and covers only that comparison
-for this update. Export a fresh Figma reference and rerun Reflection to close it;
-other release gates still apply.
+for this update. Stage a reconciled Figma reference, obtain exact approval and rerun Reflection
+to close it; other release gates still apply. This historical release exception
+is not approval for the governance upgrade or future runs.
 
-Pre-push runs `pnpm cohesive:check:all` as a fast static gate. Pull request CI
-runs `pnpm cohesive:ci`, which requires committed baseline receipts, runs the
-portal screenshot comparison, and uploads `artifacts/reflection/` for review
-evidence. `pnpm cohesive:ci:strict` additionally requires stable generated
-Figma frame ids and is only for strict provenance audits.
+Pre-push retains `pnpm cohesive:check:all` as a static gate. The canonical
+package gate is `pnpm governance:ci`; inspect combined proof artifacts alongside
+Reflection artifacts. Legacy `cohesive:*` commands are compatibility tooling,
+not a replacement for current structural coverage or input freshness.
 
 ## Recommended workflow
 
@@ -435,3 +475,12 @@ For strict component baselines, follow
 Run `pnpm test:ssr:packages` for Node-only public component rendering. Under Node 24.15+ in the 24 series, run `pnpm consumer:ssr --framework next --themes` (or `nuxt`, `sveltekit`, `react18`, `react19`) for packed production apps and Chromium evidence. Reports and full diagnostics are saved under `.cache/ssr/<framework>/`. Known blocked scenarios remain visible; `--strict-probes` fails on them too. Use `--reuse` only for local debugging of an already-built consumer, never as current-source evidence in CI.
 
 See [SSR verification evidence](../audits/ssr-verification.md) for exact tested versions, blockers, CSP scope and the separate support decisions. These tests do not declare general SSR support.
+
+### Optional text-rendering diagnostics
+
+Marwes pins `reflection-check@0.5.1` exactly. For independent outlined-source
+diagnostics, use [the preparation guide](../guides/reflection-text-diagnostics.md).
+Run doctor and visual checks using the generated isolated config; read the
+exact-run `text-diagnostics/record.json` and HTML report. These optional records
+do not change native visual results or family completion. Keep generated captures
+as local/CI artifacts; reference promotion still needs exact-stage owner approval.

@@ -22,6 +22,9 @@ optional references. These files live in the Codex root, not in this repository.
 
 Figma is the source of truth for Marwes design decisions.
 
+For governance operation, family parity, Reflection, or figma-governance-one work,
+use the repo-local [marwes-figma-governance skill](.agents/skills/marwes-figma-governance/SKILL.md).
+
 For Figma, registry, theme-token, preset-CSS, or component-family parity work,
 use the private workspace package:
 

@@ -5,213 +5,78 @@ uses `governance:*` commands. The older `design:*`, `figma:*`,
 `reflection:*`, and `cohesive:*` commands are still available as advanced
 building blocks.
 
-## Most Common Commands
+## Daily verification commands
 
-| Need | Command | What It Does |
+Run from the repository root with Node >=22. See the
+[figma-governance-one guide](../guides/figma-governance-one.md) for setup and
+interpretation of proof outcomes.
+
+| Need | Command | Expected result |
 | --- | --- | --- |
-| See current state | `pnpm governance:status` | Groups readiness, receipts, source nodes, generated-frame provenance, portal coverage, and latest visual reports. |
-| Refresh local Figma artifacts | `pnpm governance:sync -- --mode cache` | Rebuilds `.figma/marwes` from the local Figma cache and refreshes variables unless skipped. |
-| Prepare generated Figma frames | `pnpm governance:prepare -- --family badge --connect --dry-run --replace --accept-any-file` | Validates contract `prep` selectors and previews generated `reflection/*` frames in the open Figma file. |
-| Write and export generated frames | `pnpm governance:prepare -- --family badge --write --replace --accept-any-file --export-baselines` | Creates plugin-managed Figma frames, exports PNG baselines, writes receipt sidecars, and updates `generated-frames.json`. |
-| Ingest local exported PNGs | `pnpm governance:ingest -- --source /path/to/export --family badge --write` | Maps manual Figma PNG exports into active baselines and writes receipts. |
-| Backfill/check receipts | `pnpm governance:ingest -- --family badge --dry-run` | Verifies committed baseline PNG receipts without needing Figma. |
-| Check one family | `pnpm governance:check -- --family badge` | Checks the local source-node, variable, baseline, receipt, portal, and comparison contract. |
-| Run all portal visuals | `pnpm governance:visual` | Runs Reflection doctor, visual comparison, and review for React, Vue, and Svelte. |
-| CI-style local gate | `pnpm governance:ci -- --skip-browser-install` | Runs the package-owned local CI gate and writes CI-style artifacts. |
-| Strict provenance gate | `pnpm governance:ci:strict -- --skip-browser-install` | Adds required committed generated-frame provenance to the normal CI gate. |
-| Migrate legacy prep manifests | `pnpm governance:migrate-contracts -- --dry-run` | Moves `frame-prep.json` data into `reflection-contract.json` prep blocks. |
+| Inspect current evidence | `pnpm governance:status -- --family button --json` | Read-only catalog projection with freshness and separate proof/review states. |
+| Measure one family | `pnpm governance:verify -- --family button --adapter all` | New immutable structural and visual evidence for React, Vue and Svelte; failed/blocked proof exits nonzero. |
+| Inspect review evidence | `pnpm governance:review -- --family button` | Current evidence projection; does not author acceptance. |
+| Check source and compilation | `pnpm governance:check -- --family button` | Validates portable source integrity and compiles expectations; does not measure runtime components. |
+| Open local inspector | `pnpm governance:ui` | Prints the loopback URL for figma-governance-one. |
+| Run CI gate | `pnpm governance:ci` | Runs required verification and preserves failures/missing proof. |
+| Run legacy visual loop | `pnpm governance:visual` | Reflection doctor, visual and review across all adapters. |
+| Check legacy source/PNG integrity | `pnpm cohesive:check -- --family button --require-baseline-receipts` | Validates the existing source/PNG/receipt contract. |
 
-## Major Design Change Happy Path
+Choose `--adapter react`, `vue` or `svelte` to narrow a verification run. A scoped
+run is not evidence that all adapters or public variants passed. Use `--all` for
+an explicit all-family verification. Unknown selections/options fail.
+
+## Source and reference changes
+
+The commands below describe legacy bridge/export tooling. Their write options
+can modify active references and do not constitute design approval. Do not use
+an import/export command to bypass staged, exact human-approved promotion. See
+[staging boundaries](../guides/figma-governance-one.md#source-and-reference-promotion).
+
+Syncing the local cache is distinct from obtaining fresh live Figma evidence.
+Routine verification should use committed compact snapshots without MCP access.
+
+## Source staging and promotion
 
 ```bash
-pnpm governance:status
+pnpm governance:source:stage -- --family button --capture /path/to/capture.json
+pnpm governance:source:preview -- --stage <stage-id>
+pnpm governance:source:apply -- --family button --stage <stage-id> --approval /path/to/owner-approval.json
+pnpm governance:source:recover -- --family button --transaction <transaction-id>
+```
+
+Stage and transaction arguments are UUID identifiers, not paths. Apply requires
+exact owner-authored stage/hash/input/destination approval. Recovery repairs an
+interrupted transaction before another apply. These operations are disabled in
+CI. See the [capture and approval format](../guides/figma-governance-one.md#source-and-reference-promotion).
+
+## Legacy Figma bridge and export tooling
+
+These algorithms now live under `packages/design-governance/src/tooling/`;
+`scripts/reflection/` entry points are compatibility wrappers. They support
+inspection, Figma frame preparation and local export diagnostics. Active PNG or
+receipt writes through legacy commands are refused; use staged promotion.
+
+```bash
 pnpm governance:sync -- --mode cache
-pnpm governance:prepare -- --family <family> --connect --dry-run
-pnpm governance:prepare -- --family <family> --write --replace --export-baselines --accept-any-file
-pnpm governance:ingest -- --family <family> --dry-run
-pnpm governance:check -- --family <family>
-pnpm governance:visual
-pnpm governance:ci -- --skip-browser-install
-```
-
-Use `governance:ci:strict` only when stable generated Figma frame provenance is
-part of the acceptance criteria.
-
-## Figma Refresh Commands
-
-### `pnpm design:sync`
-
-Runs the design-governance sync wrapper for the configured target in
-`.pi/figma-sync.json`.
-
-Use:
-
-```bash
-pnpm design:sync -- --mode cache
-pnpm design:sync -- --mode remote
-```
-
-Prefer `--mode cache` when the Figma file was already fetched into
-`~/.figma-cache`. Use `--mode remote` only when a live Figma fetch is intended.
-
-### `pnpm figma:variables:sync`
-
-Refreshes `.figma/marwes/tokens/variables.json` through the Figma Desktop bridge
-plugin.
-
-Use:
-
-```bash
-pnpm figma:variables:sync -- --accept-any-file --no-refresh
-```
-
-Then open Figma Desktop and run:
-
-```text
-Plugins > Development > Marwes Figma Bridge
-```
-
-## Baseline PNG Commands
-
-### `pnpm reflection:figma:prepare-frames`
-
-This is the preferred path when the source catalog frames already exist in the
-Marwes Figma file. `pnpm governance:prepare` is the normal wrapper for this
-command. The low-level script reads each family contract's `prep` metadata,
-falls back to legacy `frame-prep.json` files during the migration window,
-connects to the local Figma Reflection Frame Prep plugin, clones the selected
-source content into clean fixed-size `reflection/<family>/<case>/<mode>` frames,
-and can export those generated frame ids as PNG baselines.
-
-Dry-run selector and placement validation:
-
-```bash
-pnpm reflection:figma:prepare-frames -- --family badge --connect --dry-run --replace --accept-any-file
-```
-
-Write plugin-managed frames:
-
-```bash
-pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file
-```
-
-Write frames and export baselines:
-
-```bash
-pnpm reflection:figma:prepare-frames -- --family badge --write --replace --accept-any-file --export-baselines
-```
-
-When `--export-baselines` writes PNGs, it also writes matching `.meta.json`
-receipts. Those receipts let the repo validate the Figma source node,
-variables, PNG hash, and viewport contract without a second Figma fetch.
-
-Inspect source-frame registry entries:
-
-```bash
-pnpm reflection:figma:prepare-frames -- --inspect-source-registry --connect --json
-```
-
-Create source info frames for registry audit:
-
-```bash
-pnpm reflection:figma:prepare-frames -- --write-info-frames --replace --accept-any-file
-```
-
-The normal workflow does not require a full Figma REST fetch after generated
-frames are written. Refresh `.figma/marwes` and `variables.json` at the start of
-a batch; treat post-generation remote fetches as optional strict provenance
-audits.
-
-### `pnpm reflection:figma:compile`
-
-This is the fallback/manual importer for PNGs exported from Figma outside the
-generated-frame bridge workflow.
-
-Dry-run a full export folder:
-
-```bash
-pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3
-```
-
-Dry-run one family:
-
-```bash
-pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --family badge
-```
-
-Write one active family:
-
-```bash
-pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write
-```
-
-Overwrite existing active baselines:
-
-```bash
-pnpm reflection:figma:compile -- --source /path/to/component-reflection-experiment/v3 --target active --family badge --write --force
-```
-
-When `--target active --write` is used, the compiler also writes receipt
-sidecars for the copied PNGs. The family must already have a matching
-`reflection-contract.json` case so the receipt can bind the PNG to the local
-source node and required variables.
-
-The compiler reads
-`packages/design-governance/reflection-families/pending-figma-frame-renames.json`.
-It maps duplicated Figma export filenames by the discovered grid order, verifies
-PNG dimensions, and writes normalized filenames such as:
-
-```text
-packages/design-governance/reflection-families/badge/baselines/warning.chromium-linux.dark.png
-```
-
-### `pnpm reflection:figma:receipts`
-
-Backfills or audits receipt sidecars for already committed baselines. It does
-not connect to Figma; it reads only local contracts, `.figma/marwes/_raw`, local
-variables, and PNG files.
-
-Dry-run all active families:
-
-```bash
-pnpm reflection:figma:receipts -- --all --dry-run
-```
-
-Write missing or stale receipts:
-
-```bash
-pnpm reflection:figma:receipts -- --all --write
-```
-
-### `pnpm reflection:figma:export`
-
-Strict export path for cases whose `reflection-contract.json` already has real
-top-level Figma frame node ids.
-
-Use:
-
-```bash
+pnpm governance:prepare -- --family badge --connect --dry-run --replace --accept-any-file
+pnpm reflection:figma:compile -- --source /path/to/export --family badge
+pnpm reflection:figma:receipts -- --family badge --dry-run
 pnpm reflection:figma:export -- --family badge --dry-run
-pnpm reflection:figma:export -- --family badge
-```
-
-This is provenance hardening. It is not required for the practical PNG compiler
-flow.
-
-### `pnpm reflection:figma:rename-frames`
-
-Optional Figma-file cleanup. It batch-renames Figma frames using the same
-pending rename map. It requires Figma Desktop and the local plugin.
-
-Use:
-
-```bash
 pnpm reflection:figma:rename-frames
-pnpm reflection:figma:rename-frames -- --write
+pnpm governance:migrate-contracts -- --dry-run
 ```
 
-This is not needed to place PNGs. It only makes the Figma file itself match the
-`reflection/<family>/<case>/<mode>` convention.
+The sync target is `.pi/figma-sync.json`. Cache mode uses previously captured
+Figma data; remote mode deliberately fetches live data. Variables/frame bridge
+operations require Figma Desktop with the development plugin from
+`packages/design-governance/figma-plugin/manifest.json`. Routine portable
+verification does not require that plugin or a live Figma request.
+
+Creating frames in Figma and promoting local source/reference files are separate
+operations. A generated frame ID, exported PNG or receipt does not grant human
+acceptance. Do not use legacy `--write`, `--force` or `--export-baselines` options
+to bypass the stage/apply workflow.
 
 ## Validation Commands
 
@@ -289,16 +154,16 @@ images.
 
 ## Common Workflows
 
-### Import A New Figma PNG Batch
+### Inspect a new Figma PNG batch
 
 ```bash
-pnpm reflection:figma:compile -- --source /path/to/export
-pnpm reflection:figma:compile -- --source /path/to/export --target active --family badge --write
+pnpm reflection:figma:compile -- --source /path/to/export --family badge
 pnpm reflection:figma:receipts -- --family badge --dry-run
-pnpm cohesive:check -- --family badge --require-baseline-receipts
-pnpm reflection:visual
-pnpm reflection:review
 ```
+
+Capture matching PNG/receipt/source files, stage them, inspect the exact preview
+and obtain owner approval before applying. Then rerun source checks and runtime
+verification. See the [inspection guide](../guides/figma-governance-one.md).
 
 ### Debug A Visual Failure
 
@@ -315,8 +180,9 @@ actual.png
 diff.png
 ```
 
-If the diff is real, fix runtime CSS/tokens/portal rendering. If the Figma truth
-changed intentionally, compile the new PNG baseline and rerun the checks.
+If the diff is real, fix runtime CSS/tokens/portal rendering. If Figma truth
+changed intentionally, stage the source/reference change, obtain exact approval
+and apply that stage before rerunning the checks.
 
 ### Check Whether Figma Tokens Still Match Runtime
 
@@ -347,7 +213,8 @@ cases, component CSS, theme variables, or adapter rendering.
 | `packages/design-governance/reflection-families/<family>/reflection-contract.json` | Static contract for one visual family. |
 | `packages/design-governance/reflection-families/<family>/baselines/` | Figma-exported PNG truth images. |
 | `packages/design-governance/reflection-families/pending-figma-frame-renames.json` | Map used by the PNG compiler and optional Figma frame renamer. |
-| `reflection.shared.ts` | Builds Reflection cases from family contracts. |
+| `packages/design-governance/src/runtime/reflection-config.ts` | Package-owned Reflection case/config builder. |
+| `reflection.shared.ts` | Thin compatibility export for root configs. |
 | `tests/reflection/*-portal*` | Adapter-specific component mount entries for Reflection portal routes. |
 | `.reflection/<adapter>/runs/` | Local Reflection run reports and visual artifacts. |
 | `artifacts/reflection/<adapter>/` | CI-style Reflection report output. |
