@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>figma-governance-one · Marwes</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#inspector">Skip to evidence</a>
+    <header>
+      <div class="brand">
+        <span class="mark" aria-hidden="true">m.</span>
+        <div>
+          <strong>figma-governance-one</strong
+          ><span class="sub">MARWES / DESIGN EVIDENCE</span>
+        </div>
+      </div>
+      <span class="local">● Local workspace</span>
+    </header>
+    <div class="workspace">
+      <aside>
+        <div class="section-label">COMPONENT FAMILIES</div>
+        <label class="search-label" for="search">Find a family</label
+        ><input id="search" type="search" placeholder="Search components…" />
+        <nav id="families" aria-label="Component families"></nav>
+        <p class="aside-note">
+          Figma truth → contract → runtime.<br />Every claim has a scope.
+        </p>
+      </aside>
+      <main id="inspector" tabindex="-1">
+        <div id="notice" role="status" aria-live="polite">
+          Loading governance catalog…
+        </div>
+        <div class="title-row">
+          <div>
+            <span class="section-label">EVIDENCE WORKSPACE</span>
+            <h1 id="family-name">Component evidence</h1>
+            <p id="family-summary">
+              Inspect independent design facts and captured runtime results.
+            </p>
+          </div>
+          <div class="report-actions">
+          <a id="open-report" hidden target="_blank" rel="noopener noreferrer">Open report</a>
+          <a id="export-report" hidden title="Export every required row and adapter from this exact run">Download HTML report</a>
+          <button id="run" disabled>
+            Run validation <span aria-hidden="true">↗</span>
+          </button>
+          </div>
+        </div>
+        <div class="filters">
+          <label
+            >Adapter<select id="adapter" aria-label="Adapter">
+              <option value="all">All adapters</option>
+              <option>react</option>
+              <option>vue</option>
+              <option>svelte</option>
+            </select></label
+          ><label
+            >Proof<select id="proof" aria-label="Proof">
+              <option value="all">All required proofs</option>
+              <option value="integrity">Integrity</option>
+              <option value="structural">Structural</option>
+              <option value="visual">Visual</option>
+              <option value="behavior">Behavior</option>
+              <option value="coverage">Coverage</option>
+            </select></label
+          ><label
+            >Result<select id="result" aria-label="Result">
+              <option value="all">All outcomes</option>
+              <option>passed</option>
+              <option>failed</option>
+              <option>blocked</option>
+              <option>unsupported</option>
+              <option>not-run</option>
+              <option>error</option>
+              <option>never-run</option>
+              <option>stale</option>
+            </select></label
+          ><label
+            >Mode<select id="mode" aria-label="Mode">
+              <option value="all">All modes</option>
+            </select></label
+          >
+        </div>
+        <section class="panel matrix-panel" aria-labelledby="matrix-heading">
+          <div class="panel-heading">
+            <h2 id="matrix-heading">Required design comparisons</h2>
+            <span id="case-count" class="muted"></span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr id="matrix-columns"></tr>
+              </thead>
+              <tbody id="matrix"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel" aria-labelledby="family-coverage-heading">
+          <div class="panel-heading">
+            <h2 id="family-coverage-heading">Family coverage</h2>
+            <span id="family-coverage-count" class="muted"></span>
+          </div>
+          <div id="family-coverage" class="panel-body"></div>
+        </section>
+        <section id="case-detail" hidden>
+          <div class="evidence-heading">
+            <h2 id="case-name"></h2>
+            <span id="run-id" class="mono muted"></span>
+          </div>
+          <div id="proofs" class="proofs"></div>
+          <div class="evidence-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Figma source</h2>
+                <span class="tag">Independent expectation</span>
+              </div>
+              <div id="source" class="panel-body"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>Runtime capture</h2>
+                <span class="tag">Exact run evidence</span>
+              </div>
+              <div id="capture" class="panel-body"></div>
+            </section>
+          </div>
+          <section class="panel measurements">
+            <div class="panel-heading">
+              <h2>Property comparisons</h2>
+              <span class="muted">Supported properties only</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Part / property</th>
+                    <th>Figma expected</th>
+                    <th>Runtime actual</th>
+                    <th>Delta</th>
+                    <th>Tolerance</th>
+                    <th>Outcome</th>
+                  </tr>
+                </thead>
+                <tbody id="measurements"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><h2>Coverage & review</h2></div>
+            <div id="coverage" class="panel-body"></div>
+          </section>
+        </section>
+        <footer>
+          Public variants outside registered cases are not verified. Structural
+          measurements establish scoped properties. They do not prove identical
+          pixels or replace human review.
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

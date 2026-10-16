@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "baselineRoot": "packages/design-governance/reflection-families/button/baselines",
+  "figmaProject": "marwes",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "cases": [
+    {
+      "caseId": "button.basic",
+      "mode": "light",
+      "figmaNodeId": "6007:14660",
+      "figmaFrameName": "reflection/button/basic/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": { "width": 390, "height": 220 },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "basic.chromium-linux.light.webp",
+      "portalPath": "/reflection/button/basic/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button.json",
+        "componentNodeId": "1362:7481",
+        "componentName": "Type=Primary button, Icon=None",
+        "componentBounds": { "width": 66, "height": 40 },
+        "requiredBoundTokens": [
+          "button/gap",
+          "button/padding-h",
+          "button/padding-v",
+          "button/primary/label",
+          "button/primary/surface",
+          "button/radius",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium"
+        ],
+        "sourceFrameId": "1371:11172",
+        "instanceNodeId": "1461:11495",
+        "componentNodeIds": ["1461:11495"]
+      },
+      "comparison": {
+        "threshold": { "maxDiffPixels": 60, "maxDiffPixelRatio": 0.0008 },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text antialiasing drift after component bounds, frame size, colors, spacing, radius, and tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceNodeId": "1461:11495",
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes?node-id=1461-11495",
+        "outputFrameName": "reflection/button/basic/light",
+        "selector": { "strategy": "directNode" },
+        "framing": { "background": "#ffffff", "align": "center", "padding": 0 },
+        "sourceFrameId": "1371:11172"
+      }
+    },
+    {
+      "caseId": "button.secondary",
+      "mode": "light",
+      "figmaNodeId": "6007:14685",
+      "figmaFrameName": "reflection/button/secondary/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": { "width": 390, "height": 220 },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "secondary.chromium-linux.light.webp",
+      "portalPath": "/reflection/button/secondary/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button.json",
+        "componentNodeId": "1362:7495",
+        "componentName": "Type=Secondary button, Icon=None",
+        "componentBounds": { "width": 66, "height": 40 },
+        "requiredBoundTokens": [
+          "button/gap",
+          "button/padding-h",
+          "button/padding-v",
+          "button/radius",
+          "button/secondary/label",
+          "button/secondary/outline",
+          "button/secondary/surface",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium"
+        ],
+        "sourceFrameId": "1371:11172",
+        "instanceNodeId": "1371:11246",
+        "componentNodeIds": ["1371:11246"]
+      },
+      "comparison": {
+        "threshold": { "maxDiffPixels": 75, "maxDiffPixelRatio": 0.001 },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text and inset-stroke antialiasing drift after component bounds, frame size, colors, spacing, radius, and tokens have passed cohesive static checks."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceNodeId": "1371:11246",
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes?node-id=1371-11246",
+        "outputFrameName": "reflection/button/secondary/light",
+        "selector": { "strategy": "directNode" },
+        "framing": { "background": "#ffffff", "align": "center", "padding": 0 },
+        "sourceFrameId": "1371:11172"
+      }
+    },
+    {
+      "caseId": "button.text",
+      "mode": "light",
+      "figmaNodeId": "6007:14710",
+      "figmaFrameName": "reflection/button/text/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": { "width": 390, "height": 220 },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "text.chromium-linux.light.webp",
+      "portalPath": "/reflection/button/text/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/button.json",
+        "componentNodeId": "1362:7509",
+        "componentName": "Type=Text button, Icon=None",
+        "componentBounds": { "width": 34, "height": 16 },
+        "requiredBoundTokens": [
+          "button/text/label",
+          "button/text/overlay",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium",
+          "sp-0",
+          "sp-4"
+        ],
+        "sourceFrameId": "1371:11172",
+        "instanceNodeId": "1461:11367",
+        "componentNodeIds": ["1461:11367"]
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceFrameId": "1371:11172",
+        "sourceNodeId": "1461:11367",
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes?node-id=1461-11367",
+        "outputFrameName": "reflection/button/text/light",
+        "selector": { "strategy": "directNode" },
+        "framing": { "background": "#ffffff", "align": "center", "padding": 0 }
+      },
+      "comparison": {
+        "threshold": { "maxDiffPixels": 75, "maxDiffPixelRatio": 0.001 },
+        "strict": true,
+        "toleranceReason": "Allows only small Figma-PNG versus Chromium text antialiasing drift after component bounds, frame size, colors, and tokens have passed cohesive static checks."
+      }
+    },
+    {
+      "caseId": "button.destructive",
+      "mode": "light",
+      "figmaNodeId": "6007:14792",
+      "figmaFrameName": "reflection/button/destructive/light",
+      "exportScale": 1,
+      "viewport": "button-default",
+      "viewportSize": { "width": 390, "height": 220 },
+      "framing": {
+        "rootSelector": "#reflection-root",
+        "background": "#ffffff",
+        "align": "center",
+        "padding": 0
+      },
+      "baseline": "destructive.chromium-linux.light.webp",
+      "portalPath": "/reflection/button/destructive/light",
+      "source": {
+        "componentJson": ".figma/marwes/components/destructive-button.json",
+        "componentNodeId": "1364:11356",
+        "componentName": "Icon direction=Right",
+        "componentBounds": { "width": 91, "height": 36 },
+        "requiredBoundTokens": [
+          "button/destructive/icon",
+          "button/destructive/label",
+          "button/destructive/surface",
+          "button/primary/overlay",
+          "button/radius",
+          "font/family/Body",
+          "font/line-height/lh-16",
+          "font/size/fs-14",
+          "font/weight/Medium",
+          "icon/size",
+          "sp-16"
+        ]
+      },
+      "comparison": {
+        "threshold": { "maxDiffPixels": 450, "maxDiffPixelRatio": 0.0055 },
+        "strict": true,
+        "toleranceReason": "Temporary narrow tolerance for the current externally imported destructive baseline PNG until the top-level Reflection Baselines Figma frame id is supplied; local source-node bounds and tokens remain strict."
+      },
+      "prep": {
+        "outputPage": "Reflection Baselines",
+        "sourceNodeId": "1364:11356",
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes?node-id=1364-11356",
+        "outputFrameName": "reflection/button/destructive/light",
+        "selector": { "strategy": "directNode" },
+        "framing": { "background": "#ffffff", "align": "center", "padding": 0 }
+      }
+    }
+  ],
+  "structuralContract": "structural-contract.json"
+}

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { resolve } from "node:path"
 import process from "node:process"
-import { validateBaselineReceipt } from "./baseline-receipts.mjs"
+import { readBaselineInfo, validateBaselineReceipt } from "./baseline-receipts.mjs"
 import { validateGeneratedFrameProvenance } from "./generated-frame-provenance.mjs"
 
 const repoRoot = process.cwd()
@@ -94,11 +94,8 @@ function findRawFigmaFile(target) {
   const rawDir = absolute(`${target.liveDir}/_raw`)
   if (!existsSync(rawDir)) return undefined
 
-  const rawFiles = readdirSync(rawDir)
-    .filter((file) => file.endsWith(".json"))
-    .map((file) => `${target.liveDir}/_raw/${file}`)
-
-  return rawFiles.find((path) => path.endsWith("_full.json")) ?? rawFiles[0]
+  const rawFile = `${target.liveDir}/_raw/${target.fileKey}_full.json`
+  return target.fileKey && pathExists(rawFile) ? rawFile : undefined
 }
 
 function loadVariableMap(variableMapPath) {
@@ -207,16 +204,7 @@ function readNodeBounds(node) {
 }
 
 function readPngDimensions(path) {
-  const buffer = readFileSync(absolute(path))
-  const signature = buffer.subarray(0, 8).toString("hex")
-  if (signature !== "89504e470d0a1a0a") {
-    throw new Error(`${path} is not a PNG`)
-  }
-
-  return {
-    width: buffer.readUInt32BE(16),
-    height: buffer.readUInt32BE(20),
-  }
+  return readBaselineInfo(absolute(path))
 }
 
 function listReflectionContracts() {
