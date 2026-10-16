@@ -88,7 +88,7 @@ export const ColorSwatch = defineComponent({
       const white: [number, number, number] = [255, 255, 255]
 
       return contrast(black, renderedBackground) >= contrast(white, renderedBackground)
-        ? "#141414"
+        ? "#000000"
         : "#FFFFFF"
     })
 

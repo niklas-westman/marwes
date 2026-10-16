@@ -34,6 +34,22 @@ describe("theme variable helpers", () => {
     expect(mwThemeVarNames.spacing.sp24).toBe("--mw-spacing-sp-24")
   })
 
+  it("keeps black/white foundation paints independent of semantic contrast and mode overrides", () => {
+    for (const mode of ["light", "dark"] as const) {
+      const theme = resolveThemeInput({
+        mode,
+        color: { primary: { base: "#FFFFFF", label: "#141414" }, borderFull: "#FF0000" },
+      })
+      const vars = themeToCSSVars(theme)
+      expect(vars["--mw-color-primary-label"]).toBe("#141414")
+      expect(vars["--mw-color-border-full"]).toBe("#FF0000")
+      expect(vars[mwThemeVarNames.color.black]).toBe("#000000")
+      expect(vars[mwThemeVarNames.color.white]).toBe("#FFFFFF")
+      expect(mwTheme.color.black).toBe("var(--mw-color-black)")
+      expect(mwTheme.color.white).toBe("var(--mw-color-white)")
+    }
+  })
+
   it("exposes color CSS variable references", () => {
     expect(mwTheme.color.textMuted).toBe("var(--mw-color-text-muted)")
     expect(mwTheme.color.textLink).toBe("var(--mw-color-text-link)")

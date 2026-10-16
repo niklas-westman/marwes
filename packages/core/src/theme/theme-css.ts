@@ -42,6 +42,7 @@ export interface ResolvedTheme {
     textLink: string
     iconMuted: string
     borderLow: string
+    borderMedium?: string
     border: string
     borderSubtle: string
     borderStrong: string
@@ -130,7 +131,7 @@ function textTypographyStyleVars(
 
 /**
  * Maps every field of a resolved theme to its CSS custom property name.
- * Returns 149 entries total. `variant` is excluded — it is deprecated.
+ * Includes invariant black/white foundation paints. `variant` is excluded — it is deprecated.
  * Density is emitted as 10 `--mw-density-*` vars via densityToCSSVars.
  *
  * Variable naming follows D11: --mw-color-{role}-{state}, --mw-font-*, etc.
@@ -139,6 +140,9 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
   const { color, font, ui, typography } = theme
 
   return {
+    // Figma foundation paints are invariant across semantic theme overrides.
+    "--mw-color-black": "#000000",
+    "--mw-color-white": "#FFFFFF",
     // Color roles: primary, danger, success, warning, info (5 × 6 = 30)
     ...colorRoleVars("primary", color.primary),
     ...colorRoleVars("danger", color.danger),
@@ -169,6 +173,10 @@ export function themeToCSSVars(theme: ResolvedTheme): Record<string, string> {
     "--mw-color-text-link": color.textLink,
     "--mw-color-icon-muted": color.iconMuted,
     "--mw-color-border-low": color.borderLow,
+    // Figma medium border is translucent, distinct from the legacy opaque default border.
+    "--mw-color-border-medium":
+      color.borderMedium ??
+      (theme.mode === "dark" ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.2)"),
     "--mw-color-border": color.border,
     "--mw-color-border-subtle": color.borderSubtle,
     "--mw-color-border-strong": color.borderStrong,

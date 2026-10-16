@@ -136,18 +136,19 @@
     },
     "text": {
       "primary": { "light": "#141414", "dark": "#F9FAFB" },
-      "secondary": { "light": "#595959", "dark": "#A3A3A3" },
-      "disabled": { "light": "#737373", "dark": "#595959" },
+      "secondary": { "light": "rgba(0,0,0,0.6)", "dark": "rgba(255,255,255,0.6)" },
+      "subtle": { "light": "#737373", "dark": "#595959" },
+      "disabled": { "light": "rgba(0,0,0,0.3)", "dark": "rgba(255,255,255,0.3)" },
       "inverse": { "light": "#FFFFFF", "dark": "#FFFFFF" },
       "onSurfaceDark": { "light": "#FFFFFF", "dark": "#141414" },
       "brand": { "light": "#2F31FC", "dark": "#8182FC" },
       "link": { "light": "#2527CA", "dark": "#8182FC" }
     },
     "border": {
-      "low": { "light": "#00000026", "dark": "#FFFFFF26" },
+      "low": { "light": "rgba(0, 0, 0, 0.15)", "dark": "rgba(255, 255, 255, 0.15)" },
       "default": { "light": "#D8D8D8", "dark": "#474747" },
-      "medium": { "light": "#C2C2C2", "dark": "#595959" },
-      "strong": { "light": "#A3A3A3", "dark": "#A3A3A3" },
+      "medium": { "light": "rgba(0, 0, 0, 0.2)", "dark": "rgba(255, 255, 255, 0.3)" },
+      "strong": { "light": "rgba(0, 0, 0, 0.4)", "dark": "rgba(255, 255, 255, 0.4)" },
       "full": { "light": "#000000", "dark": "#FFFFFF" },
       "brand": { "light": "#2F31FC", "dark": "#5859FC" },
       "error": { "light": "#D90429", "dark": "#FF2847" }
@@ -160,7 +161,7 @@
       "disabled": { "light": "#D4D4D4", "dark": "#474747" }
     },
     "focus": {
-      "ring": { "light": "#2F31FC", "dark": "#8182FC" },
+      "ring": { "light": "#2F31FC", "dark": "#ABABFD" },
       "ringOffset": { "light": "#FFFFFF", "dark": "#141414" }
     },
     "action": {
@@ -168,16 +169,20 @@
         "default": { "light": "#2F31FC", "dark": "#2F31FC" },
         "hover": { "light": "#2527CA", "dark": "#5859FC" },
         "active": { "light": "#1B1D97", "dark": "#8182FC" },
-        "disabled": { "light": "#8182FC", "dark": "#121365" },
-        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+        "disabled": { "light": "rgba(129,130,252,0.3)", "dark": "rgba(129,130,252,0.3)" },
+        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" },
+        "label-disabled": { "light": "rgba(255,255,255,0.6)", "dark": "rgba(255,255,255,0.3)" }
       },
+
       "secondary": {
-        "default": { "light": "#2F31FC", "dark": "#8182FC" },
+        "default": { "light": "#2F31FC", "dark": "#F9FAFB" },
         "hover": { "light": "#EEEEFF", "dark": "#090A32" },
         "active": { "light": "#D4D5FE", "dark": "#121365" },
-        "disabled": { "light": "#8182FC", "dark": "#121365" },
-        "label": { "light": "#2F31FC", "dark": "#8182FC" }
+        "disabled": { "light": "rgba(47,49,252,0.3)", "dark": "rgba(255,255,255,0.3)" },
+        "label": { "light": "#2F31FC", "dark": "#F9FAFB" },
+        "label-disabled": { "light": "rgba(47,49,252,0.3)", "dark": "rgba(255,255,255,0.3)" }
       },
+
       "ghost": {
         "hover": { "light": "#F5F5F5", "dark": "#595959" },
         "active": { "light": "#E8E8E8", "dark": "#737373" },
@@ -189,18 +194,21 @@
         "outline": { "light": "#141414", "dark": "#FFFFFF" }
       },
       "destructive": {
-        "default": { "light": "#D90429", "dark": "#FF002C" },
+        "default": { "light": "#D90429", "dark": "#D90429" },
         "hover": { "light": "#A8031F", "dark": "#FF2847" },
         "active": { "light": "#780215", "dark": "#FF5566" },
-        "disabled": { "light": "#FF8A95", "dark": "#48010D" },
-        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+        "disabled": { "light": "rgba(217,4,41,0.3)", "dark": "rgba(217,4,41,0.3)" },
+        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" },
+        "label-disabled": { "light": "rgba(255,255,255,0.3)", "dark": "rgba(255,255,255,0.3)" }
       },
+
       "success": {
-        "default": { "light": "#006D48", "dark": "#006D48" },
+        "default": { "light": "#00875A", "dark": "#00875A" },
         "hover": { "light": "#006633", "dark": "#006633" },
         "active": { "light": "#004D26", "dark": "#004D26" },
-        "disabled": { "light": "#90CAAD", "dark": "#90CAAD" },
-        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" }
+        "disabled": { "light": "rgba(0,135,90,0.3)", "dark": "rgba(0,135,90,0.3)" },
+        "label": { "light": "#FFFFFF", "dark": "#FFFFFF" },
+        "label-disabled": { "light": "rgba(255,255,255,0.3)", "dark": "rgba(255,255,255,0.3)" }
       }
     },
     "status": {
