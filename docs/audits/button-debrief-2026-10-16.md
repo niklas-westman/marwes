@@ -83,7 +83,6 @@ identical font substitutions, relax thresholds or turn diagnostic outlines into
 approved baselines. Any alternative text-acceptance policy needs an explicit
 separate decision; the present native failures remain failed.
 
-See [the Google Fonts audit](button-google-font-provenance-2026-10-16.md).
 
 ## Coverage left:70 required selections
 

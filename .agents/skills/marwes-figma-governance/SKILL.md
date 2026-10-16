@@ -37,7 +37,7 @@ Button enrollment on 2026-10-15 is 185 visual selections plus four behavior-only
 form fixtures (567 case/adapter results). The final staged run passes all 185
 structural and 189 behavior checks per adapter; visual totals are 132 passed,
 27 failed and 26 Pressed unsupported per adapter. Required coverage remains
-incomplete. Read `docs/audits/button-compliance-2026-10-15.md` for exact identities.
+incomplete. Exact identities are in the run reports.
 The Figma PNG exports use the pinned October 14 capture without a raw REST
 refresh. Niklas approved Neutral and Cancel/Copy/Filter/Sort/Close/Refresh mapping
 to Ghost, not reference promotion or run acceptance. Actual purpose defaults,
@@ -48,7 +48,7 @@ wrappers and IconButton on 2026-10-15: a 2px ring with a 4px clear gap. That lat
 preset/token change stales the checkpoint run; focus enrollment and fresh staged
 proof remain required. Increased-contrast focus has separate unresolved policy.
 
-Historical full-family checkpoint: `docs/audits/button-audit-2026-10-16.md` supersedes the
+The October 16 full-family checkpoint supersedes the
 historical October15 totals. Its0.5.1 staged run recorded139 visual passes,
 20 failures and26 Pressed unsupported per adapter,185 structural and189 behavior
 passes. A Button-only fixture layout-origin fix recovered seven selections per
@@ -58,7 +58,7 @@ Read exact run/stage identities from that audit before using these counts.
 Inspector Proof/Result filters retain the denominator; artifact roles control image
 selection and structural captures never establish visual proof. Next independent
 batch: primary focus light/dark using pinned source-rule composition and real Tab
-activation; see `docs/audits/button-focus-enrollment-2026-10-16.md`.
+activation.
 Loading stabilization is now supported by0.6.0; label-fidelity work remains.
 No stage promotion or owner acceptance has occurred.
 
@@ -67,9 +67,7 @@ WebP baselines natively. Reference conversion must preserve decoded RGBA bytes,
 source provenance and receipts through an approved stage. Old PNG removal is a
 separate approved cleanup after active WebP verification. Do not claim storage
 savings while both encodings remain. Reflection0.6.0 supports genuine held-pointer Pressed capture and case-level
-stabilization independent of interaction. Read
-`docs/audits/reflection-0.6.0-integration-2026-10-16.md` for the fresh diagnostic
-pilot and compatibility scope. The full diagnostic Pressed batch captures all26
+stabilization independent of interaction. The full diagnostic Pressed batch captures all26
 per adapter:23 visual passes and three failures, with no capture errors. Repeated
 loading RGBA is identical, but95/128 residual pixels still fail. Earlier canonical
 runs are stale after this upgrade.
@@ -93,8 +91,6 @@ sections of these maintained references:
   staging, approval schemas and crash recovery.
 - `docs/reference/testing.md`: required Reflection gates and visual review.
 - `docs/reference/design-governance-command-lexicon.md`: command boundaries.
-- `docs/audits/figma-governance-one-upgrade.md`: historical upgrade findings;
-  rerun status before treating any finding as current.
 
 Start with the affected scope:
 

@@ -109,7 +109,7 @@ historical evidence.
 
 The Reflection upgrade retained a pre-existing Button text light failure across
 all adapters; the upgrade itself did not approve it. See the
-[upgrade audit](../../docs/audits/figma-governance-one-upgrade.md).
+upgrade audit.
 
 Read the [inspection guide](../../docs/guides/figma-governance-one.md),
 [command lexicon](../../docs/reference/design-governance-command-lexicon.md) and

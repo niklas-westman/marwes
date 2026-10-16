@@ -44,14 +44,14 @@ run. The final staged run passes all 185 structural and 189 behavior checks per
 adapter; visual results per adapter are 132 passed, 27 failed and 26 unsupported
 Pressed captures. Coverage retains 231 required obligations, including 32 missing
 fixtures. A subsequent owner-approved shared focus update stales that run; its
-recorded results are historical. See the [checkpoint](../audits/button-compliance-2026-10-15.md)
-for exact run/stage hashes and failed gates. The 185 Figma PNG exports are bound to the pinned October 14 capture;
+recorded results are historical. Exact run and
+stage hashes are in the run reports. The 185 Figma PNG exports are bound to the pinned October 14 capture;
 the export did not refresh the raw REST source. Default purpose icons and Svelte
 purpose markers were corrected to exercise actual wrapper defaults. Niklas
 approved mapping Neutral and six wrappers to Ghost; that decision grants neither
 reference promotion nor run acceptance.
 
-The historical [October16 audit](../audits/button-audit-2026-10-16.md) supersedes those
+The historical October16 audit supersedes those
 historical totals. The staged0.5.1 all-adapter run recorded139 visual passes,
 20 failures and26 Pressed unsupported per adapter, with185 structural and189
 behavior passes each. A Button fixture-origin correction recovered seven
@@ -68,13 +68,10 @@ fixture, structural, visual, behavior, review and promotion status independently
 No family is marked complete by this document. Open design and integration
 questions live in the [decision queue](../audits/design-compliance-decisions.md).
 
-Required-selection research now covers the remaining 31 families:
-[foundations](../audits/required-inventory-foundations.md),
-[inputs and selection](../audits/required-inventory-inputs.md),
-[content and navigation](../audits/required-inventory-content-navigation.md), and
-[overlays](../audits/required-inventory-overlays.md). These drafts distinguish
-public API axes, available Figma selections and unresolved applicability. They
-do not enroll fixtures, approve exclusions or turn unknown required counts into
+Required-selection research for the remaining 31 families was drafted during
+this work and is not kept in the repository. It distinguished public API axes,
+available Figma selections and unresolved applicability. It enrolled no
+fixtures, approved no exclusions and did not turn unknown required counts into
 zero. Several active compact snapshots still identify the historical June
 capture and require staged October source replacement before certification.
 
@@ -95,19 +92,17 @@ required enrollment. Neither enrollment nor provider availability completes the
 external UI gate.
 
 The subsequent 0.5.0 upgrade adds optional text diagnostics without changing
-acceptance. See [integration evidence](../audits/reflection-0.5.0-integration-2026-10-16.md)
-and [operation](reflection-text-diagnostics.md). The external interactive UI
+acceptance. See [operation](reflection-text-diagnostics.md). The external interactive UI
 and canonical Pressed enrollment remain separate gates.
 
 Historical Reflection 0.5.1 adoption corrected the style-qualified
-font-family classification; fresh six-case verification is recorded in the
-[0.5.1 integration audit](../audits/reflection-0.5.1-integration-2026-10-16.md).
+font-family classification; a fresh six-case verification confirmed it.
 The converter retains source family/style and unknown authoring-font identity.
 Historical 0.5.0 diagnostic inferences are not current evidence. This correction
 does not change native visual acceptance, reference promotion or required coverage.
 
-Published0.6.0 is now pinned exactly. The [integration checkpoint](../audits/reflection-0.6.0-integration-2026-10-16.md)
-verifies real Pressed capture and independent loading stabilization on all three
+Published0.6.0 is now pinned exactly. The 0.6.0 integration
+verified real Pressed capture and independent loading stabilization on all three
 adapters, with repeated decoded-pixel equality. Previous canonical family runs
 are stale after the upgrade. Canonical Pressed guards remain pending until explicit
 policy enrollment and a fresh full-family run; diagnostics do not update coverage.
@@ -123,16 +118,16 @@ WebP conversion stages retain old PNG files. Actual committed-size savings
 require a separately approved cleanup after active WebP verification succeeds;
 no old canonical images have been deleted.
 
-The subsequent [Refresh checkpoint](../audits/button-refresh-2026-10-15.md)
+The subsequent Refresh correction
 records the canonical icon correction, preserved public color/stroke behavior,
 affected-adapter diagnostics and remaining independent font-source gap. It is
 selected-case diagnostic evidence, not a new passing family run.
 
-The [Refresh typography investigation](../audits/button-typography-2026-10-15.md)
+The Refresh typography investigation
 isolates a dominant native-text versus outlined-vector rendering discrepancy.
 It provides no justified font/CSS correction or waiver of the failed visual gate.
 
-A [portable HTML report](../audits/portable-html-report-2026-10-16.md) is available
+A portable HTML report is available
 from the existing inspector and `governance:report`. Add `--html` to the next full
 verification to retain its exact-run comparison table, missing rows, measurements,
 images and review state as an offline artifact. The current exported example is

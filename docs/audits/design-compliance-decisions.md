@@ -25,14 +25,14 @@ Refresh typography investigation completed: source glyphs closely match after
 alignment, inferred baseline and measured runtime baseline agree, and the exact
 Figma reference-frame SVG renders within the existing pixel thresholds. Actual
 HTML labels still fail (86/98 pixels); tested CSS and font-asset alternatives do
-not improve them. See [the typography diagnosis](button-typography-2026-10-15.md).
+not improve them. See the typography diagnosis.
 No runtime correction or acceptance exception is justified by this investigation.
 Future Reflection text-proof policy must remain separate from the current failed
 PNG gate and needs an explicit change to the approved completion rules.
 
 DC-010 implementation update: the canonical Refresh outline and public
 color/stroke compatibility are corrected and independently reviewed. See the
-[Refresh checkpoint](button-refresh-2026-10-15.md). The remaining whole-button
+Refresh checkpoint. The remaining whole-button
 failures are dominated by label pixels; source font names match but Figma's binary
 identity is unavailable. Obtain independent outlined glyphs or font bytes before
 choosing another rendering correction. No threshold exception or promotion is
@@ -56,7 +56,7 @@ Apply the existing Ghost source bindings, including button/text label/icon token
 rather than similarly named neutral variables. This resolves component mapping;
 it does not approve reference promotion or accept a validation run.
 
-The [Button source audit](button-source-authority-2026-10-15.md) records available
+The Button source audit records available
 state, purpose and loading selections. Those are enrollment opportunities, not
 missing-design claims. XS, both-icons, persistent toggle appearance and general
 focus/loading/full-width applicability still require explicit source policy.
@@ -66,7 +66,7 @@ Current enrollment is 185 visual selections and four behavior-only form fixtures
 14 capture; no raw REST refresh was performed. Final staged verification passes
 185 structural and 189 behavior checks per adapter; visuals have 132 passes,
 27 failures and 26 unsupported Pressed captures per adapter. The
-[checkpoint](button-compliance-2026-10-15.md) records exact identities and remaining
+checkpoint records exact identities and remaining
 coverage gaps. These results do not resolve any promotion decision.
 
 Niklas confirmed on 2026-10-15 that the external Reflection UI is not yet

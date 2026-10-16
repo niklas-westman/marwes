@@ -113,7 +113,7 @@ these component diagnostics only at device scale 1.
 Reflection 0.5.1 recognizes source-declared style-qualified font names. For
 Refresh, `Instrument Sans` + `Medium` maps to Chromium's internal `Instrument Sans
 Medium` name. Keep the classification and raw evidence visible; this is not
-font-binary equivalence. See [the verified patch results](../audits/reflection-0.5.1-integration-2026-10-16.md).
+font-binary equivalence. See the verified patch results.
 
 ## Conversion boundaries
 

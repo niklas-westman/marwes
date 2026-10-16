@@ -202,7 +202,7 @@ and an expiry; they do not silently turn missing proof into verified coverage.
 
 See [testing](../reference/testing.md), the
 [command lexicon](../reference/design-governance-command-lexicon.md) and the
-[upgrade audit](../audits/figma-governance-one-upgrade.md).
+upgrade audit.
 
 
 ## Portable exact-run HTML report

@@ -218,7 +218,7 @@ freshness, and stale evidence blocks the gate. `review` displays evidence withou
 recording acceptance. UI **Run validation** runs the same package core; a completed
 job means execution finished, not that every proof passed. See the
 [inspection guide](../guides/figma-governance-one.md) and
-[upgrade audit](../audits/figma-governance-one-upgrade.md).
+upgrade audit.
 
 Focused governance tests:
 
