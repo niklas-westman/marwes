@@ -102,6 +102,7 @@ export type Theme = {
 
     // Borders
     borderLow: string
+    borderMedium?: string
     border: string
     borderSubtle: string
     borderStrong: string
@@ -195,6 +196,7 @@ export interface ThemeInputColor {
   textLink: string
   iconMuted: string
   borderLow: string
+  borderMedium?: string
   border: string
   borderSubtle: string
   borderStrong: string

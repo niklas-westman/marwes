@@ -47,19 +47,24 @@ describe("@marwes-ui/presets package exports", () => {
       base: "#2F31FC",
       hover: "#2527CA",
       pressed: "#1B1D97",
-      disabled: "#8182FC",
+      disabled: "rgba(129,130,252,0.3)",
       label: "#FFFFFF",
-      labelDisabled: "rgba(255,255,255,0.5)",
+      labelDisabled: "rgba(255,255,255,0.6)",
     })
-    expect(firstEditionTheme.color?.success).toBe("#006633")
+    expect(firstEditionTheme.color?.success).toEqual({
+      base: "#00875A",
+      disabled: "rgba(0,135,90,0.3)",
+      label: "#FFFFFF",
+      labelDisabled: "rgba(255,255,255,0.3)",
+    })
     expect(firstEditionTheme.color?.warning).toBe("#B45309")
     expect(firstEditionTheme.color?.danger).toEqual({
       base: "#D90429",
       hover: "#A8031F",
       pressed: "#780215",
-      disabled: "#FF8A95",
+      disabled: "rgba(217,4,41,0.3)",
       label: "#FFFFFF",
-      labelDisabled: "rgba(255,255,255,0.5)",
+      labelDisabled: "rgba(255,255,255,0.3)",
     })
     expect(firstEditionTheme.font?.primary).toContain("Instrument Sans")
     expect(firstEditionTheme.ui?.radius).toBe(4)
@@ -73,7 +78,7 @@ describe("@marwes-ui/presets package exports", () => {
 
     expect(resolved.color.primary.base).toBe("#2F31FC")
     expect(resolved.color.primary.label).toBe("#FFFFFF")
-    expect(resolved.color.primary.labelDisabled).toBe("rgba(255,255,255,0.5)")
+    expect(resolved.color.primary.labelDisabled).toBe("rgba(255,255,255,0.6)")
   })
 
   it("matches the provider default first edition baseline", () => {

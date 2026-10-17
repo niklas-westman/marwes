@@ -306,7 +306,6 @@ export function VerifyButton(props: VerifyButtonProps) {
       as="button"
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
-      iconRight={forwardedProps.iconRight ?? IconName.CheckCircle}
       dataAttributes={createPurposeButtonDataAttributes("verify", forwardedProps.dataAttributes, {
         "data-verification": "true",
       })}
@@ -332,7 +331,6 @@ export function EditButton(props: EditButtonProps) {
       {...forwardedProps}
       action={ButtonAction.edit}
       variant={ButtonVariant.secondary}
-      iconRight={forwardedProps.iconRight ?? IconName.Edit}
       dataAttributes={createPurposeButtonDataAttributes("edit", forwardedProps.dataAttributes, {
         "data-edit": "true",
       })}
@@ -383,7 +381,6 @@ export function RefreshButton(props: RefreshButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.neutral}
-      iconRight={forwardedProps.iconRight ?? IconName.RefreshCw}
       dataAttributes={createPurposeButtonDataAttributes("refresh", forwardedProps.dataAttributes, {
         "data-refresh": "true",
       })}
@@ -409,7 +406,6 @@ export function UploadButton(props: UploadButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
-      iconRight={forwardedProps.iconRight ?? IconName.Upload}
       dataAttributes={createPurposeButtonDataAttributes("upload", forwardedProps.dataAttributes, {
         "data-transfer": "upload",
       })}
@@ -431,7 +427,6 @@ export function DownloadButton(props: DownloadButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.secondary}
-      iconRight={forwardedProps.iconRight ?? IconName.Download}
       dataAttributes={createPurposeButtonDataAttributes("download", forwardedProps.dataAttributes, {
         "data-transfer": "download",
       })}
@@ -474,7 +469,6 @@ export function SearchButton(props: SearchButtonProps) {
       {...forwardedProps}
       action={ButtonAction.button}
       variant={ButtonVariant.primary}
-      iconRight={forwardedProps.iconRight ?? IconName.Search}
       dataAttributes={createPurposeButtonDataAttributes("search", forwardedProps.dataAttributes, {
         "data-search": "true",
       })}

@@ -1,14 +1,10 @@
 .mw-dialog {
   --mw-dialog-surface: var(--mw-color-surface-elevated, #ffffff);
   --mw-dialog-border: var(--mw-color-border-subtle, #d8d8d8);
-  --mw-dialog-divider: var(--mw-color-border-subtle, #00000033);
+  --mw-dialog-divider: color-mix(in srgb, var(--mw-color-border-full) 20%, transparent);
   --mw-dialog-title: var(--mw-color-text, #141414);
   --mw-dialog-body: var(--mw-color-text-muted, #595959);
-  --mw-dialog-description: color-mix(
-    in srgb,
-    var(--mw-color-text, #141414) 65%,
-    var(--mw-color-background, #ffffff)
-  );
+  --mw-dialog-description: color-mix(in srgb, var(--mw-color-border-full) 60%, transparent);
   --mw-dialog-radius: min(calc(var(--mw-ui-radius, 4px) * 3), 24px);
   --mw-dialog-close-radius: calc(var(--mw-ui-radius, 4px) * 2);
   --mw-dialog-width: 560px;
@@ -45,7 +41,7 @@
 .mw-dialog__header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   padding: 16px 16px 16px 24px;
 }
 
@@ -73,17 +69,20 @@
   justify-content: center;
   flex-shrink: 0;
   box-sizing: border-box;
-  border: 1px solid color-mix(in srgb, var(--mw-dialog-title) 15%, transparent);
+  border: 0;
+  padding: 8px;
+  box-shadow: inset 0 0 0 1px var(--mw-color-border-low);
   border-radius: 4px;
   background: transparent;
   color: var(--mw-dialog-title);
   cursor: pointer;
 }
 
-/* The close icon shrinks into the button's content box (width minus border and default button
-   padding), as it did before icons carried the preset `.mw-icon` base class. */
+/* Figma close control: 32px surface, 8px padding and a 16px icon. */
 .mw-dialog__close .mw-icon {
-  flex-shrink: 1;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
 }
 
 .mw-dialog__close:hover {
@@ -132,13 +131,9 @@
 .mw-theme--dark .mw-dialog {
   --mw-dialog-surface: var(--mw-color-surface-elevated, #474747);
   --mw-dialog-border: var(--mw-color-border-subtle, #474747);
-  --mw-dialog-divider: var(--mw-color-border-subtle, #ffffff33);
+  --mw-dialog-divider: color-mix(in srgb, var(--mw-color-border-full) 20%, transparent);
   --mw-dialog-title: var(--mw-color-text, #f9fafb);
-  --mw-dialog-description: color-mix(
-    in srgb,
-    var(--mw-color-text, #f9fafb) 65%,
-    var(--mw-color-background, #141414)
-  );
+  --mw-dialog-description: color-mix(in srgb, var(--mw-color-border-full) 60%, transparent);
 }
 
 @media (max-width: 640px) {

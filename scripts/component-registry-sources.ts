@@ -263,8 +263,8 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
     figma: {
       componentJsons: [
         ".figma/marwes/components/button.json",
-        ".figma/marwes/components/button-destructive.json",
-        ".figma/marwes/components/button-success.json",
+        ".figma/marwes/components/destructive-button.json",
+        ".figma/marwes/components/success-button.json",
         ".figma/marwes/components/button-group.json",
         ".figma/marwes/components/icon-button.json",
       ],
@@ -277,18 +277,18 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         ".figma/marwes/README.md",
       ],
       pageReferences: [
-        ".figma/marwes/pages/------playground---dashboard/buttons_2832-30431.json",
+        ".figma/marwes/pages/-button/_page.json",
         ".figma/marwes/pages/-button/component-container_1364-11870.json",
         ".figma/marwes/pages/-button/-button_1371-11172.json",
         ".figma/marwes/pages/-button/-button-dark_1371-11537.json",
         ".figma/marwes/pages/-button/-purpose-buttons_1371-8933.json",
-        ".figma/marwes/pages/-button/-purpose-buttons-dark_1371-9188.json",
+        ".figma/marwes/pages/-button/-purpose-buttons-dark_3978-39020.json",
       ],
       nodeReferences: {
         baseLightFrame: "1371:11172",
         baseDarkFrame: "1371:11537",
         purposeLightFrame: "1371:8933",
-        purposeDarkFrame: "1371:9188",
+        purposeDarkFrame: "3978:39020",
       },
       figmaTokens: [
         "button/primary/surface",
@@ -297,8 +297,8 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         "button/secondary/outline",
         "button/text/label",
         "button/gap",
-        "button/paddingH",
-        "button/paddingV",
+        "button/padding-h",
+        "button/padding-v",
       ],
       figmaStates: {
         baseVariants: ["primary", "secondary", "neutral", "text"],
@@ -652,8 +652,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       pageReferences: [
         ".figma/marwes/pages/-input-fields/-input-fields_1364-11372.json",
         ".figma/marwes/pages/-input-fields/-input-fields-dark_1368-5944.json",
-        ".figma/marwes/pages/-input-fields/-input-types-overview_1364-11817.json",
-        ".figma/marwes/pages/-input-fields/-input-types-overview-dark_1368-6014.json",
+        ".figma/marwes/pages/-input-fields/_page.json",
         ".figma/marwes/pages/-input-otp/-input-otp_1803-15024.json",
         ".figma/marwes/pages/-input-otp/-input-otp-dark_1803-15155.json",
       ],
@@ -1238,13 +1237,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
         switchDarkFrame: "1369:4001",
         switchComponentContainer: "1371:12852",
       },
-      figmaTokens: [
-        "switch/track-on",
-        "switch/thumb-on",
-        "switch/track-off",
-        "switch/thumb-off",
-        "switch/label",
-      ],
+      figmaTokens: ["switch/track-on", "switch/thumb", "switch/track-off", "switch/label"],
       figmaStates: {
         baseVariants: ["switch", "switch-field", "feature-toggle", "preference", "permission"],
         interactionStates: [
@@ -1986,10 +1979,7 @@ export const registryFamilySources: Record<string, RegistryFamilySource> = {
       pageReferences: [
         ".figma/marwes/pages/-segmented-control/-segmented-control_1571-19406.json",
         ".figma/marwes/pages/-segmented-control/-segmented-control_2702-10336.json",
-        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29116.json",
-        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29118.json",
-        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29119.json",
-        ".figma/marwes/pages/------playground---dashboard/segmented-control_2832-29120.json",
+        ".figma/marwes/pages/-segmented-control/_page.json",
       ],
       nodeReferences: {
         segmentedControlComponentSet: "1571:19333",

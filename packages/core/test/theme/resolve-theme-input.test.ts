@@ -54,8 +54,8 @@ describe("resolveThemeInput — defaults", () => {
     expect(resolveThemeInput({}).font.primary).toContain("Instrument Sans")
   })
 
-  it("default success base follows the source status text token", () => {
-    expect(resolveThemeInput({}).color.success.base).toBe("#006633")
+  it("default success action follows the Figma Success Button surface", () => {
+    expect(resolveThemeInput({}).color.success.base).toBe("#00875A")
   })
 
   it("default warning base follows the source status text token", () => {
@@ -63,7 +63,7 @@ describe("resolveThemeInput — defaults", () => {
   })
 
   it("default muted text follows the source secondary text token", () => {
-    expect(resolveThemeInput({}).color.textMuted).toBe("#595959")
+    expect(resolveThemeInput({}).color.textMuted).toBe("rgba(0,0,0,0.6)")
   })
 
   it("default link and muted icon tokens follow the source semantic tokens", () => {
@@ -74,8 +74,10 @@ describe("resolveThemeInput — defaults", () => {
   })
 
   it("default low border follows the source alpha border token", () => {
-    expect(resolveThemeInput({}).color.borderLow).toBe("#00000026")
-    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.borderLow).toBe("#FFFFFF26")
+    expect(resolveThemeInput({}).color.borderLow).toBe("rgba(0, 0, 0, 0.15)")
+    expect(resolveThemeInput({ mode: ThemeMode.dark }).color.borderLow).toBe(
+      "rgba(255, 255, 255, 0.15)",
+    )
   })
 
   it("default surfaceBrand follows the source brand surface token", () => {
@@ -356,4 +358,16 @@ describe("resolveThemeInput — variant removed from ResolvedTheme.ui", () => {
     const result = resolveThemeInput({})
     expect("variant" in result.ui).toBe(false)
   })
+})
+
+it("keeps pinned Figma disabled text alpha distinct from the subtle gray role", () => {
+  const light = resolveThemeInput({ mode: ThemeMode.light })
+  const dark = resolveThemeInput({ mode: ThemeMode.dark })
+  // Figma text/disabled aliases Black/Alpha/30 and White/Alpha/30.
+  expect(light.color.textDisabled).toBe("rgba(0,0,0,0.3)")
+  expect(dark.color.textDisabled).toBe("rgba(255,255,255,0.3)")
+  expect(light.color.textMuted).toBe("rgba(0,0,0,0.6)")
+  expect(dark.color.textMuted).toBe("rgba(255,255,255,0.6)")
+  expect(light.color.textSubtle).toBe("#737373")
+  expect(dark.color.textSubtle).toBe("#595959")
 })

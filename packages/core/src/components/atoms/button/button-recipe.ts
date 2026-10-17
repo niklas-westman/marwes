@@ -1,5 +1,6 @@
 import { createFamilySemanticAttributes } from "../../../semantics"
 import { resolveButtonA11y } from "./button-a11y"
+import { resolveButtonIcons } from "./button-icons"
 import { resolveButtonLoading } from "./button-loading"
 import type { ButtonOptions, ButtonRenderKit, ButtonVariant } from "./button-types"
 
@@ -20,7 +21,8 @@ export function createButtonRecipe(opts: ButtonOptions): ButtonRenderKit {
   const size = opts.size ?? "md"
   const variant = opts.variant ?? "primary"
   const action = opts.action ?? (tag === "button" ? (a11y.type ?? "button") : "navigate")
-  const hasAffordance = resolvedLoading.isLoading || Boolean(opts.iconLeft || opts.iconRight)
+  const icons = resolveButtonIcons(opts)
+  const hasAffordance = resolvedLoading.isLoading || Boolean(icons.iconLeft || icons.iconRight)
 
   return {
     tag,

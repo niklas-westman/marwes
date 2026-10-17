@@ -21,20 +21,20 @@
     const luminance = ([r, g, b]: [number, number, number]) =>
       0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b)
 
+    const rgba = hexColor.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\)$/i)
     const raw = hexColor.replace("#", "")
-    const normalized =
-      raw.length === 3
-        ? raw.split("").map((c) => `${c}${c}`).join("")
-        : raw
-
-    if (!/^[0-9a-f]{6}([0-9a-f]{2})?$/i.test(normalized)) return "#141414"
-
-    const r = Number.parseInt(normalized.slice(0, 2), 16)
-    const g = Number.parseInt(normalized.slice(2, 4), 16)
-    const b = Number.parseInt(normalized.slice(4, 6), 16)
+    const normalized = raw.length === 3
+      ? raw.split("").map((c) => `${c}${c}`).join("") : raw
+    if (!rgba && !/^[0-9a-f]{6}([0-9a-f]{2})?$/i.test(normalized)) return "#141414"
+    const channels = rgba
+      ? [Number(rgba[1]), Number(rgba[2]), Number(rgba[3])]
+      : [0, 2, 4].map((offset) => Number.parseInt(normalized.slice(offset, offset + 2), 16))
+    const alpha = rgba ? Number(rgba[4] ?? 1)
+      : normalized.length === 8 ? Number.parseInt(normalized.slice(6, 8), 16) / 255 : 1
+    const [r, g, b] = channels.map((value) => Math.round(value * alpha + 255 * (1 - alpha)))
     const lum = luminance([r, g, b])
 
-    return lum > 0.179 ? "#141414" : "#FFFFFF"
+    return lum > 0.179 ? "#000000" : "#FFFFFF"
   }
 
   function copyToClipboard(text: string, type: "hex" | "var"): void {

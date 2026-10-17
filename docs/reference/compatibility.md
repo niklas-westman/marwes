@@ -12,6 +12,12 @@ Package installation, application builds, and the CLI require Node.js 20 or newe
 
 Marwes ships ES modules and static preset CSS backed by CSS custom properties. Consumer browsers must support the JavaScript output produced by the app's build tool and CSS custom properties. Theme preference uses `localStorage` and `matchMedia` when those APIs exist; their absence must not prevent the provider from rendering.
 
+Secondary buttons round their natural width to whole pixels where CSS
+`calc-size()` with `round()` is supported, matching the captured Figma outlined
+surface. Other browsers retain ordinary intrinsic sizing; the small fractional
+outline difference is not covered by the Chromium parity result. Explicit
+consumer widths and icon-only sizing remain authoritative.
+
 ## Package boundaries
 
 - Install one of `@marwes-ui/react`, `@marwes-ui/vue`, or `@marwes-ui/svelte` in an application.

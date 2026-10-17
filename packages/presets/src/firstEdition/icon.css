@@ -10,7 +10,7 @@
   width: var(--mw-icon-size, var(--mw-density-icon-size));
   height: var(--mw-icon-size, var(--mw-density-icon-size));
   fill: none;
-  stroke: currentColor;
+  stroke: var(--mw-icon-color, currentColor);
   stroke-width: var(--mw-icon-stroke-width);
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -35,19 +35,19 @@
 
 /* COLORS */
 .mw-icon--currentColor {
-  stroke: currentColor;
+  --mw-icon-color: currentColor;
 }
 
 .mw-icon--primary {
-  stroke: var(--mw-color-primary-base);
+  --mw-icon-color: var(--mw-color-primary-base);
 }
 
 .mw-icon--secondary {
-  stroke: var(--mw-color-secondary-base);
+  --mw-icon-color: var(--mw-color-secondary-base);
 }
 
 .mw-icon--muted {
-  stroke: var(--mw-color-text-muted);
+  --mw-icon-color: var(--mw-color-text-muted);
 }
 
 /* CONTEXT-SPECIFIC: Icon in Button */

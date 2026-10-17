@@ -38,7 +38,7 @@ export function runButtonSemanticsContract(
       expect(confirmButton).toHaveAttribute("data-purpose", "confirm")
       expect(confirmButton).toHaveAttribute("data-outcome", "positive")
       expect(confirmButton).toHaveClass("mw-btn--success")
-      expect(confirmButton.querySelector("svg")).toBeNull()
+      expect(confirmButton.querySelectorAll("svg")).toHaveLength(1)
 
       // VerifyButton: secondary with a verification icon
       const verifyButton = h.getByRole("button", { name: /verify/i })
@@ -90,13 +90,13 @@ export function runButtonSemanticsContract(
       expect(refreshButton).toHaveClass("mw-btn--neutral")
       expect(refreshButton.querySelector("svg")).not.toBeNull()
 
-      // DestructiveButton: first-class danger tone, no icon
+      // DestructiveButton: first-class danger tone with the Figma trailing X icon
       const destructiveButton = h.getByRole("button", { name: /delete/i })
       expect(destructiveButton).toHaveAttribute("data-action", "delete")
       expect(destructiveButton).toHaveAttribute("data-purpose", "destructive")
       expect(destructiveButton).toHaveClass("mw-btn--danger")
       expect(destructiveButton).not.toHaveClass("mw-btn--error")
-      expect(destructiveButton.querySelector("svg")).toBeNull()
+      expect(destructiveButton.querySelectorAll("svg")).toHaveLength(1)
     })
 
     // Wave 2: utility purpose buttons for data operations

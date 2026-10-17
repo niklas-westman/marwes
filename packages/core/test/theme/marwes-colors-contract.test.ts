@@ -27,16 +27,36 @@ type MarwesColorSource = {
       ModeValue
     >
     text: Record<
-      "primary" | "secondary" | "disabled" | "inverse" | "onSurfaceDark" | "brand" | "link",
+      | "primary"
+      | "secondary"
+      | "subtle"
+      | "disabled"
+      | "inverse"
+      | "onSurfaceDark"
+      | "brand"
+      | "link",
       ModeValue
     >
     icon: Record<"muted", ModeValue>
-    border: Record<"low" | "default" | "strong" | "brand", ModeValue>
+    border: Record<"low" | "medium" | "default" | "strong" | "brand", ModeValue>
     focus: Record<"ring", ModeValue>
     action: {
-      primary: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
-      secondary: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
-      destructive: Record<"default" | "hover" | "active" | "disabled" | "label", ModeValue>
+      primary: Record<
+        "default" | "hover" | "active" | "disabled" | "label" | "label-disabled",
+        ModeValue
+      >
+      secondary: Record<
+        "default" | "hover" | "active" | "disabled" | "label" | "label-disabled",
+        ModeValue
+      >
+      success: Record<
+        "default" | "hover" | "active" | "disabled" | "label" | "label-disabled",
+        ModeValue
+      >
+      destructive: Record<
+        "default" | "hover" | "active" | "disabled" | "label" | "label-disabled",
+        ModeValue
+      >
     }
     status: {
       success: Record<"background" | "text" | "icon" | "border", ModeValue>
@@ -101,7 +121,7 @@ describe("Marwes color source contract", () => {
 
     expectModeVar("--mw-color-text", colorSource.semantic.text.primary)
     expectModeVar("--mw-color-text-muted", colorSource.semantic.text.secondary)
-    expectModeVar("--mw-color-text-subtle", colorSource.semantic.text.disabled)
+    expectModeVar("--mw-color-text-subtle", colorSource.semantic.text.subtle)
     expectModeVar("--mw-color-text-disabled", colorSource.semantic.text.disabled)
     expectModeVar("--mw-color-text-inverted", {
       light: colorSource.semantic.text.inverse.light,
@@ -114,6 +134,7 @@ describe("Marwes color source contract", () => {
 
   it("maps border and focus CSS vars to docs/marwes-colors.json", () => {
     expectModeVar("--mw-color-border-low", colorSource.semantic.border.low)
+    expectModeVar("--mw-color-border-medium", colorSource.semantic.border.medium)
     expectModeVar("--mw-color-border", colorSource.semantic.border.default)
     expectModeVar("--mw-color-border-subtle", colorSource.semantic.border.default)
     expectModeVar("--mw-color-border-strong", colorSource.semantic.border.strong)
@@ -128,10 +149,18 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-primary-pressed", colorSource.semantic.action.primary.active)
     expectModeVar("--mw-color-primary-disabled", colorSource.semantic.action.primary.disabled)
     expectModeVar("--mw-color-primary-label", colorSource.semantic.action.primary.label)
+    expectModeVar(
+      "--mw-color-primary-label-disabled",
+      colorSource.semantic.action.primary["label-disabled"],
+    )
 
     expectModeVar("--mw-color-secondary-hover", colorSource.semantic.action.secondary.hover)
     expectModeVar("--mw-color-secondary-pressed", colorSource.semantic.action.secondary.active)
     expectModeVar("--mw-color-secondary-label", colorSource.semantic.action.secondary.label)
+    expectModeVar(
+      "--mw-color-secondary-label-disabled",
+      colorSource.semantic.action.secondary["label-disabled"],
+    )
     expectModeVar("--mw-color-secondary-border", colorSource.semantic.action.secondary.default)
     expectModeVar(
       "--mw-color-secondary-border-disabled",
@@ -143,10 +172,14 @@ describe("Marwes color source contract", () => {
     expectModeVar("--mw-color-danger-pressed", colorSource.semantic.action.destructive.active)
     expectModeVar("--mw-color-danger-disabled", colorSource.semantic.action.destructive.disabled)
     expectModeVar("--mw-color-danger-label", colorSource.semantic.action.destructive.label)
+    expectModeVar(
+      "--mw-color-danger-label-disabled",
+      colorSource.semantic.action.destructive["label-disabled"],
+    )
   })
 
   it("maps status role CSS vars to docs/marwes-colors.json", () => {
-    expectModeVar("--mw-color-success-base", colorSource.semantic.status.success.text)
+    expectModeVar("--mw-color-success-base", colorSource.semantic.action.success.default)
     expectModeVar("--mw-color-warning-base", colorSource.semantic.status.warning.text)
     expectModeVar("--mw-color-info-base", colorSource.semantic.status.info.icon)
 

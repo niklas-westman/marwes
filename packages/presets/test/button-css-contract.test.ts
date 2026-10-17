@@ -62,9 +62,13 @@ describe("firstEdition button css contract", () => {
     const css = readFileSync(buttonCssPath, "utf8")
 
     expect(css).toContain('.mw-btn.mw-btn--text[data-action="navigate"]')
-    expect(css).toContain('.mw-btn.mw-btn--text[data-action="navigate"]::before')
-    expect(css).toContain("content: none;")
-    expect(css).toContain("padding: 0.125rem 0;")
+    expect(css).toContain(".mw-btn.mw-btn--text::before")
+    const stateLayers = [...css.matchAll(/([^{}]*::before[^{}]*)\{([^{}]*)\}/g)]
+    expect(stateLayers.length).toBeGreaterThan(0)
+    for (const [, , declarations] of stateLayers) {
+      expect(declarations).not.toContain("content: none;")
+    }
+    expect(css).toContain("padding: 0;")
     expect(css).toContain("text-decoration: underline;")
     expect(css).toContain("text-underline-offset: 2px;")
   })

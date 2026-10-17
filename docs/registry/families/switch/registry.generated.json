@@ -139,13 +139,7 @@
       "switchDarkFrame": "1369:4001",
       "switchComponentContainer": "1371:12852"
     },
-    "figmaTokens": [
-      "switch/track-on",
-      "switch/thumb-on",
-      "switch/track-off",
-      "switch/thumb-off",
-      "switch/label"
-    ],
+    "figmaTokens": ["switch/track-on", "switch/thumb", "switch/track-off", "switch/label"],
     "figmaStates": {
       "baseVariants": ["switch", "switch-field", "feature-toggle", "preference", "permission"],
       "interactionStates": [

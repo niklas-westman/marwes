@@ -1,5 +1,5 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
-import { createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
+import { createButtonRecipe, resolveButtonIcons, toButtonHtmlAttributes } from "@marwes-ui/core"
 import type * as React from "react"
 import { toReactAttributes } from "../../internal/react-attributes"
 import { Icon } from "../icon"
@@ -21,6 +21,7 @@ export type ButtonProps = ButtonOptions & {
 
 export function Button(props: ButtonProps) {
   const kit = createButtonRecipe(props)
+  const icons = resolveButtonIcons(props)
 
   const htmlAttributes = toReactAttributes(toButtonHtmlAttributes(kit.a11y))
   const style = kit.vars as StyleWithVars
@@ -39,14 +40,14 @@ export function Button(props: ButtonProps) {
           variant={resolvedLoading.spinnerVariant}
           inverted={resolvedLoading.spinnerInverted}
         />
-      ) : props.iconLeft ? (
-        <Icon name={props.iconLeft} size="xs" strokeWidth="sm" decorative />
+      ) : icons.iconLeft ? (
+        <Icon name={icons.iconLeft} size="xs" strokeWidth="sm" decorative />
       ) : null}
       {hasRenderableLabel(visibleLabel) ? (
         <span className="mw-btn__label">{visibleLabel}</span>
       ) : null}
-      {!resolvedLoading.isLoading && props.iconRight ? (
-        <Icon name={props.iconRight} size="xs" strokeWidth="sm" decorative />
+      {!resolvedLoading.isLoading && icons.iconRight ? (
+        <Icon name={icons.iconRight} size="xs" strokeWidth="sm" decorative />
       ) : null}
     </>
   )
