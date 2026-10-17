@@ -1,0 +1,36 @@
+{
+  "baseline": "text.chromium-linux.light.png",
+  "caseFingerprint": "3f666e119c84cc8eef5c26dfbf349d920010b835c7259cb392b51d5a40c648b2",
+  "caseId": "button.text",
+  "createdAt": "2026-10-16T00:00:00.000Z",
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "figmaFrameName": "reflection/button/text/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "6007:14710",
+  "mode": "light",
+  "origin": "receipt-backfill",
+  "pngByteLength": 1413,
+  "pngDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "pngSha256": "d744d68cb6bf605ab62ab179fb83218646e37d5ab3ba0d51b631d4e86786b10d",
+  "schemaVersion": 1,
+  "sourceFingerprint": "fbc490e9616484cc450e7dda3f302539fc69b4fbbe58f0e68b5c8dadcc18c9af",
+  "sourceFrameId": "1371:11172",
+  "sourceNodeId": "1362:7509",
+  "sourceNodeIds": ["1362:7509", "1461:11367"],
+  "variablesFingerprint": "341599e4dd026198df3e0241fbb0f590469c51c49df595bb9df6057294ebe9c2",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

@@ -7,7 +7,7 @@ import {
   findNodeById,
   loadDesignSource,
   loadReflectionContracts,
-  readPngInfo,
+  readBaselineInfo,
   resolveBaselinePath,
   sourceNodeIdsForCase,
   stableStringify,
@@ -120,7 +120,7 @@ function checkBaseline({ contract, caseEntry, context }) {
 
   let png = "pass"
   try {
-    const info = readPngInfo(pngPath)
+    const info = readBaselineInfo(pngPath)
     const expected = caseEntry.viewportSize
     if (info.width !== expected?.width || info.height !== expected?.height) png = "fail"
   } catch (_error) {

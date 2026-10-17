@@ -9,6 +9,7 @@ export const compassConfig = {
   skippedDirectories: new Set([
     "node_modules",
     ".git",
+    ".reflection",
     "dist",
     "storybook-static",
     ".turbo",

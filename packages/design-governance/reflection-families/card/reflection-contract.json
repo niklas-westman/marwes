@@ -3,12 +3,12 @@
   "family": "card",
   "baselineRoot": "packages/design-governance/reflection-families/card/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "card.default",
       "mode": "light",
-      "figmaNodeId": "5049:43819",
+      "figmaNodeId": "6007:14400",
       "figmaFrameName": "reflection/card/default/light",
       "exportScale": 1,
       "viewport": "card-default",
@@ -57,7 +57,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1364:11556",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1364-11556",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1364-11556",
         "outputFrameName": "reflection/card/default/light",
         "selector": {
           "strategy": "rowChild",
@@ -76,7 +76,7 @@
     {
       "caseId": "card.default",
       "mode": "dark",
-      "figmaNodeId": "5049:43824",
+      "figmaNodeId": "6007:14405",
       "figmaFrameName": "reflection/card/default/dark",
       "exportScale": 1,
       "viewport": "card-default",
@@ -125,7 +125,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1368:5891",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1368-5891",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1368-5891",
         "outputFrameName": "reflection/card/default/dark",
         "selector": {
           "strategy": "rowChild",

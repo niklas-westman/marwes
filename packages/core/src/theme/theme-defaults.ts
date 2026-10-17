@@ -24,19 +24,20 @@ export const lightThemeDefaults: Theme = {
 
     // Text
     text: "#141414",
-    textMuted: "#595959",
+    textMuted: "rgba(0,0,0,0.6)",
     textSubtle: "#737373",
-    textDisabled: "#737373",
+    textDisabled: "rgba(0,0,0,0.3)",
     textInverted: "#FFFFFF",
     textBrand: "#2F31FC",
     textLink: "#2527CA",
     iconMuted: "#A3A3A3",
 
     // Borders
-    borderLow: "#00000026",
+    borderLow: "rgba(0, 0, 0, 0.15)",
+    borderMedium: "rgba(0, 0, 0, 0.2)",
     border: "#D8D8D8",
     borderSubtle: "#D8D8D8",
-    borderStrong: "#A3A3A3",
+    borderStrong: "rgba(0, 0, 0, 0.4)",
     borderDisabled: "#D8D8D8",
     borderBrand: "#2F31FC",
     borderFull: "#000000",
@@ -195,25 +196,26 @@ export const darkThemeDefaults: Theme = {
 
     // Text
     text: "#F9FAFB",
-    textMuted: "#A3A3A3",
+    textMuted: "rgba(255,255,255,0.6)",
     textSubtle: "#595959",
-    textDisabled: "#595959",
+    textDisabled: "rgba(255,255,255,0.3)",
     textInverted: "#141414",
     textBrand: "#8182FC",
     textLink: "#8182FC",
     iconMuted: "#595959",
 
     // Borders
-    borderLow: "#FFFFFF26",
+    borderLow: "rgba(255, 255, 255, 0.15)",
+    borderMedium: "rgba(255, 255, 255, 0.3)",
     border: "#474747",
     borderSubtle: "#474747",
-    borderStrong: "#A3A3A3",
+    borderStrong: "rgba(255, 255, 255, 0.4)",
     borderDisabled: "#474747",
     borderBrand: "#5859FC",
     borderFull: "#FFFFFF",
 
     // Focus
-    focus: "#8182FC",
+    focus: "#ABABFD",
 
     // Semantic colors
     danger: "#FF002C",

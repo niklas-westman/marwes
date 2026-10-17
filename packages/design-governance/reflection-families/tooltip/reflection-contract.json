@@ -3,12 +3,12 @@
   "family": "tooltip",
   "baselineRoot": "packages/design-governance/reflection-families/tooltip/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "tooltip.with-help-icon",
       "mode": "light",
-      "figmaNodeId": "5070:45371",
+      "figmaNodeId": "6007:14554",
       "figmaFrameName": "reflection/tooltip/with-help-icon/light",
       "exportScale": 1,
       "viewport": "tooltip-with-help-icon",
@@ -56,7 +56,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1574:21179",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-21179",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1574-21179",
         "outputFrameName": "reflection/tooltip/with-help-icon/light",
         "selector": {
           "strategy": "rowChild",
@@ -75,7 +75,7 @@
     {
       "caseId": "tooltip.with-help-icon",
       "mode": "dark",
-      "figmaNodeId": "5070:45382",
+      "figmaNodeId": "6007:14565",
       "figmaFrameName": "reflection/tooltip/with-help-icon/dark",
       "exportScale": 1,
       "viewport": "tooltip-with-help-icon",
@@ -123,7 +123,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1574:21235",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1574-21235",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1574-21235",
         "outputFrameName": "reflection/tooltip/with-help-icon/dark",
         "selector": {
           "strategy": "rowChild",

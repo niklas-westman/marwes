@@ -12,6 +12,26 @@
     "cohesive-check": "node src/cli.mjs cohesive-check",
     "suggest-tokens": "node src/cli.mjs suggest-tokens",
     "colors": "node src/cli.mjs colors",
-    "check": "node src/cli.mjs validate --all"
+    "check": "node src/cli.mjs validate --all",
+    "governance": "tsx src/cli/governance.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:browser": "vitest run --config vitest.browser.config.ts",
+    "build:ui": "node scripts/build-ui.mjs",
+    "prepare-text-diagnostics": "node src/tooling/prepare-text-diagnostics.mjs",
+    "export-source-svg": "node src/tooling/export-figma-source-svg.mjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.10",
+    "playwright": "1.60.0",
+    "reflection-check": "0.6.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vite": "8.0.16",
+    "vitest": "4.1.11",
+    "zod": "4.4.3"
   }
 }

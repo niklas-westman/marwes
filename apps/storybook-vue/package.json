@@ -14,7 +14,7 @@
   "dependencies": {
     "@marwes-ui/core": "workspace:*",
     "@marwes-ui/vue": "workspace:*",
-    "vue": "3.5.28"
+    "vue": "3.5.42"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "5.0.0",

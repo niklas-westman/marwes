@@ -1,0 +1,54 @@
+{
+  "baseline": "standard-focus-example.chromium-linux.light.webp",
+  "captureRequestHash": "h1fbe3d2a",
+  "caseFingerprint": "f7d050f21d48767e89cf768e6a32a3b177302092d1612e5e02e0c4b0ad8c30e9",
+  "caseId": "button.standard-focus-example",
+  "createdAt": "2026-10-16T16:30:07.187Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "f71a19a225992c7884d8409d60eb7e063dcd61302026e0240efe3d617c2d813f",
+    "sourceByteLength": 1852,
+    "sourceFormat": "png",
+    "sourceSha256": "b97915e4b0d0fa9452be128bc91d244cb0abde2a0f60ad5cdbaf17154add52b3"
+  },
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "figmaFrameName": "reflection/button/standard-focus-example-v1/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "6047:15464",
+  "imageByteLength": 400,
+  "imageDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "imageFormat": "webp",
+  "imageSha256": "fb9098e3e494a8326e6c9d1a5e891c8f546f03cd2cd7461092c023eecc801747",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "d9a9bee3e8b5ebb4b5e5ed01a89689325f593ed87441c704d41c25039ad227c0",
+  "sourceFrameId": "3977:38646",
+  "sourceNodeId": "1362:7481",
+  "sourceNodeIds": ["1362:7481", "1461:11495", "1364:11348", "3977:38650", "3977:38660"],
+  "variableModePolicy": {
+    "collectionModes": {
+      "VariableCollectionId:1358:5009": "1358:0",
+      "VariableCollectionId:1358:5072": "1358:1",
+      "VariableCollectionId:1358:7240": "1358:13"
+    },
+    "descendants": "override-declared-collections",
+    "schemaVersion": 1
+  },
+  "variableModePolicySha256": "32823818cdb78a6113b4319e6403c3f6426034e61b1fd865f04f2b8b76a8cc92",
+  "variablesFingerprint": "8f94a553bef355a0d3b9e55ea8b725ce92ad7a6231d1a470aa0ead813b86e1da",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

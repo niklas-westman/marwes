@@ -3,33 +3,57 @@ import type { ContextMenuEntry } from "@marwes-ui/core"
 import {
   Badge,
   BadgeVariant,
+  Button,
+  CancelButton,
   Card,
   CheckboxField,
+  CloseButton,
+  ConfirmButton,
   ContextMenu,
+  CopyButton,
+  CreateButton,
   DestructiveButton,
   Dialog,
   Divider,
+  DownloadButton,
+  DropdownButton,
+  EditButton,
+  FilterButton,
+  IconButton,
   InputField,
+  LinkButton,
   PrimaryButton,
   RadioGroupField,
+  RefreshButton,
+  SaveButton,
+  SearchButton,
   SecondaryButton,
+  SortButton,
+  SubmitButton,
+  SuccessButton,
   SwitchField,
   Text,
   TextButton,
   TextareaField,
   TooltipGroup,
+  UploadButton,
+  VerifyButton,
 } from "@marwes-ui/react"
 import { MarwesProvider, ThemeMode } from "@marwes-ui/react"
 import type { ReactNode } from "react"
 import { flushSync } from "react-dom"
 import { createRoot } from "react-dom/client"
 import type { ReflectionPortalMountInput } from "reflection-check"
+import { alignFigmaFrameOrigin } from "../../packages/design-governance/src/runtime/frame-position"
 import { Accordion } from "../../packages/react/src/components/accordion/accordion"
 import { InputOtp } from "../../packages/react/src/components/input/input-otp"
 import { Select } from "../../packages/react/src/components/input/select"
 import { Radio } from "../../packages/react/src/components/radio/radio"
 import { SegmentedControl } from "../../packages/react/src/components/segmented-control/segmented-control"
 import { Slider } from "../../packages/react/src/components/slider/slider"
+import { installButtonActivationOutput, recordButtonActivation } from "./support/button-activation"
+import { buttonFormKind } from "./support/button-form-events"
+import { ButtonFormReact } from "./support/button-form-react"
 
 type PortalCase = {
   render: () => ReactNode
@@ -268,17 +292,1080 @@ const portalCases: Record<string, PortalCase> = {
   "/reflection/badge/destructive/dark": {
     render: () => <Badge variant={BadgeVariant.error}>Badge</Badge>,
   },
+  "/reflection/button/basic-icon-right/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/standard-focus-example/light": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/standard-focus-example/dark": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
   "/reflection/button/basic/light": {
-    render: () => <PrimaryButton>Label</PrimaryButton>,
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/secondary-icon-right/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </SecondaryButton>
+    ),
   },
   "/reflection/button/secondary/light": {
-    render: () => <SecondaryButton>Label</SecondaryButton>,
+    render: () => <SecondaryButton onClick={recordButtonActivation}>Label</SecondaryButton>,
+  },
+  "/reflection/button/text-icon-right/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </TextButton>
+    ),
   },
   "/reflection/button/text/light": {
-    render: () => <TextButton>Label</TextButton>,
+    render: () => <TextButton onClick={recordButtonActivation}>Label</TextButton>,
+  },
+  "/reflection/button/basic-icon-right/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic/dark": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/secondary-icon-right/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary/dark": {
+    render: () => <SecondaryButton onClick={recordButtonActivation}>Label</SecondaryButton>,
+  },
+  "/reflection/button/text-icon-right/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text/dark": {
+    render: () => <TextButton onClick={recordButtonActivation}>Label</TextButton>,
+  },
+  "/reflection/button/basic-icon-right-hover/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-hover/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-hover/light": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/basic-icon-right-pressed/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-pressed/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-pressed/light": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/basic-icon-right-disabled/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-disabled/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-disabled/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} disabled>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-right-hover/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-hover/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-hover/light": {
+    render: () => <SecondaryButton onClick={recordButtonActivation}>Label</SecondaryButton>,
+  },
+  "/reflection/button/secondary-icon-right-pressed/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-pressed/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-pressed/light": {
+    render: () => <SecondaryButton onClick={recordButtonActivation}>Label</SecondaryButton>,
+  },
+  "/reflection/button/secondary-icon-right-disabled/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-disabled/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-disabled/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} disabled>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/text-icon-right-hover/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left-hover/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-hover/light": {
+    render: () => <TextButton onClick={recordButtonActivation}>Label</TextButton>,
+  },
+  "/reflection/button/text-icon-right-pressed/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left-pressed/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-pressed/light": {
+    render: () => <TextButton onClick={recordButtonActivation}>Label</TextButton>,
+  },
+  "/reflection/button/text-icon-right-disabled/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left-disabled/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-disabled/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} disabled>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/basic-icon-right-hover/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-hover/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-hover/dark": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/basic-icon-right-pressed/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-pressed/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-pressed/dark": {
+    render: () => <PrimaryButton onClick={recordButtonActivation}>Label</PrimaryButton>,
+  },
+  "/reflection/button/basic-icon-right-disabled/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-disabled/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-disabled/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} disabled>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-right-hover/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-hover/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-hover/dark": {
+    render: () => <SecondaryButton onClick={recordButtonActivation}>Label</SecondaryButton>,
+  },
+  "/reflection/button/secondary-icon-right-pressed/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-pressed/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-pressed/dark": {
+    render: () => <SecondaryButton onClick={recordButtonActivation}>Label</SecondaryButton>,
+  },
+  "/reflection/button/secondary-icon-right-disabled/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-disabled/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-disabled/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} disabled>
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/text-icon-right-hover/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left-hover/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-hover/dark": {
+    render: () => <TextButton onClick={recordButtonActivation}>Label</TextButton>,
+  },
+  "/reflection/button/text-icon-right-pressed/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left-pressed/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-pressed/dark": {
+    render: () => <TextButton onClick={recordButtonActivation}>Label</TextButton>,
+  },
+  "/reflection/button/text-icon-right-disabled/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-icon-left-disabled/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-disabled/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} disabled>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/basic-icon-right-sm/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="sm">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-sm/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="sm">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-sm/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} size="sm">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-right-lg/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="lg">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-lg/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="lg">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-lg/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} size="lg">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-right-sm/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="sm">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-sm/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="sm">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-sm/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} size="sm">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-right-lg/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="lg">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-lg/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="lg">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-lg/light": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} size="lg">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-right-sm/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="sm">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-sm/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="sm">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-sm/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} size="sm">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-right-lg/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="lg">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-icon-left-lg/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="lg">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/basic-lg/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} size="lg">
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-right-sm/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="sm">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-sm/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="sm">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-sm/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} size="sm">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-right-lg/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconRight={IconName.ArrowRight} size="lg">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-icon-left-lg/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="lg">
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-lg/dark": {
+    render: () => (
+      <SecondaryButton onClick={recordButtonActivation} size="lg">
+        Label
+      </SecondaryButton>
+    ),
   },
   "/reflection/button/destructive/light": {
-    render: () => <DestructiveButton>Delete</DestructiveButton>,
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size="sm" iconRight={IconName.X}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/success-default/light": {
+    render: () => <SuccessButton onClick={recordButtonActivation}>Confirm</SuccessButton>,
+  },
+  "/reflection/button/success-default/dark": {
+    render: () => <SuccessButton onClick={recordButtonActivation}>Confirm</SuccessButton>,
+  },
+  "/reflection/button/success-hover/light": {
+    render: () => <SuccessButton onClick={recordButtonActivation}>Confirm</SuccessButton>,
+  },
+  "/reflection/button/success-hover/dark": {
+    render: () => <SuccessButton onClick={recordButtonActivation}>Confirm</SuccessButton>,
+  },
+  "/reflection/button/success-pressed/light": {
+    render: () => <SuccessButton onClick={recordButtonActivation}>Confirm</SuccessButton>,
+  },
+  "/reflection/button/success-pressed/dark": {
+    render: () => <SuccessButton onClick={recordButtonActivation}>Confirm</SuccessButton>,
+  },
+  "/reflection/button/success-disabled/light": {
+    render: () => (
+      <SuccessButton onClick={recordButtonActivation} disabled={true}>
+        Confirm
+      </SuccessButton>
+    ),
+  },
+  "/reflection/button/success-disabled/dark": {
+    render: () => (
+      <SuccessButton onClick={recordButtonActivation} disabled={true}>
+        Confirm
+      </SuccessButton>
+    ),
+  },
+  "/reflection/button/success-error/light": {
+    render: () => (
+      <SuccessButton onClick={recordButtonActivation} error={true}>
+        Confirm
+      </SuccessButton>
+    ),
+  },
+  "/reflection/button/success-error/dark": {
+    render: () => (
+      <SuccessButton onClick={recordButtonActivation} error={true}>
+        Confirm
+      </SuccessButton>
+    ),
+  },
+  "/reflection/button/danger-default/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-default/dark": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-hover/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-hover/dark": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-pressed/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-pressed/dark": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-disabled/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"} disabled={true}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-disabled/dark": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"} disabled={true}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-error/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"} error={true}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/danger-error/dark": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"} error={true}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/primary-error/light": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/primary-error/dark": {
+    render: () => (
+      <PrimaryButton onClick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>
+        Label
+      </PrimaryButton>
+    ),
+  },
+  "/reflection/button/secondary-error/light": {
+    render: () => (
+      <SecondaryButton
+        onClick={recordButtonActivation}
+        error={true}
+        iconRight={IconName.ArrowRight}
+      >
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-error/dark": {
+    render: () => (
+      <SecondaryButton
+        onClick={recordButtonActivation}
+        error={true}
+        iconRight={IconName.ArrowRight}
+      >
+        Label
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/text-error/light": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/text-error/dark": {
+    render: () => (
+      <TextButton onClick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>
+        Label
+      </TextButton>
+    ),
+  },
+  "/reflection/button/purpose-submit/light": {
+    render: () => <SubmitButton onClick={recordButtonActivation}>Submit</SubmitButton>,
+  },
+  "/reflection/button/purpose-save/light": {
+    render: () => <SaveButton onClick={recordButtonActivation}>Save</SaveButton>,
+  },
+  "/reflection/button/purpose-confirm/light": {
+    render: () => <ConfirmButton onClick={recordButtonActivation}>Confirm</ConfirmButton>,
+  },
+  "/reflection/button/purpose-destructive/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/purpose-verify/light": {
+    render: () => <VerifyButton onClick={recordButtonActivation}>Verify</VerifyButton>,
+  },
+  "/reflection/button/purpose-create/light": {
+    render: () => <CreateButton onClick={recordButtonActivation}>Create</CreateButton>,
+  },
+  "/reflection/button/purpose-edit/light": {
+    render: () => <EditButton onClick={recordButtonActivation}>Edit</EditButton>,
+  },
+  "/reflection/button/purpose-upload/light": {
+    render: () => <UploadButton onClick={recordButtonActivation}>Upload</UploadButton>,
+  },
+  "/reflection/button/purpose-download/light": {
+    render: () => <DownloadButton onClick={recordButtonActivation}>Download</DownloadButton>,
+  },
+  "/reflection/button/purpose-search/light": {
+    render: () => <SearchButton onClick={recordButtonActivation}>Search</SearchButton>,
+  },
+  "/reflection/button/purpose-dropdown/light": {
+    render: () => <DropdownButton onClick={recordButtonActivation}>Options</DropdownButton>,
+  },
+  "/reflection/button/purpose-navigation/light": {
+    render: () => (
+      <LinkButton onClick={recordButtonActivation} href={"#governance-target"}>
+        Link
+      </LinkButton>
+    ),
+  },
+  "/reflection/button/purpose-submit/dark": {
+    render: () => <SubmitButton onClick={recordButtonActivation}>Submit</SubmitButton>,
+  },
+  "/reflection/button/purpose-save/dark": {
+    render: () => <SaveButton onClick={recordButtonActivation}>Save</SaveButton>,
+  },
+  "/reflection/button/purpose-confirm/dark": {
+    render: () => <ConfirmButton onClick={recordButtonActivation}>Confirm</ConfirmButton>,
+  },
+  "/reflection/button/purpose-destructive/dark": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/purpose-verify/dark": {
+    render: () => <VerifyButton onClick={recordButtonActivation}>Verify</VerifyButton>,
+  },
+  "/reflection/button/purpose-create/dark": {
+    render: () => <CreateButton onClick={recordButtonActivation}>Create</CreateButton>,
+  },
+  "/reflection/button/purpose-edit/dark": {
+    render: () => <EditButton onClick={recordButtonActivation}>Edit</EditButton>,
+  },
+  "/reflection/button/purpose-upload/dark": {
+    render: () => <UploadButton onClick={recordButtonActivation}>Upload</UploadButton>,
+  },
+  "/reflection/button/purpose-download/dark": {
+    render: () => <DownloadButton onClick={recordButtonActivation}>Download</DownloadButton>,
+  },
+  "/reflection/button/purpose-search/dark": {
+    render: () => <SearchButton onClick={recordButtonActivation}>Search</SearchButton>,
+  },
+  "/reflection/button/purpose-dropdown/dark": {
+    render: () => <DropdownButton onClick={recordButtonActivation}>Options</DropdownButton>,
+  },
+  "/reflection/button/purpose-navigation/dark": {
+    render: () => (
+      <LinkButton onClick={recordButtonActivation} href={"#governance-target"}>
+        Link
+      </LinkButton>
+    ),
+  },
+  "/reflection/button/secondary-loading/light": {
+    render: () => (
+      <SecondaryButton
+        onClick={recordButtonActivation}
+        loading={{ isLoading: true, loadingLabel: "Please wait" }}
+      >
+        Please wait
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/secondary-loading/dark": {
+    render: () => (
+      <SecondaryButton
+        onClick={recordButtonActivation}
+        loading={{ isLoading: true, loadingLabel: "Please wait" }}
+      >
+        Please wait
+      </SecondaryButton>
+    ),
+  },
+  "/reflection/button/neutral-default/light": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-hover/light": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-pressed/light": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-disabled/light": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"} disabled={true}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-error/light": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"} error={true}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-default/dark": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-hover/dark": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-pressed/dark": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-disabled/dark": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"} disabled={true}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-error/dark": {
+    render: () => (
+      <Button onClick={recordButtonActivation} variant={"neutral"} error={true}>
+        Cancel
+      </Button>
+    ),
+  },
+  "/reflection/button/neutral-icon-left-default/light": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/neutral-icon-left-hover/light": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/neutral-icon-left-pressed/light": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/neutral-icon-left-disabled/light": {
+    render: () => (
+      <RefreshButton onClick={recordButtonActivation} disabled={true}>
+        Refresh
+      </RefreshButton>
+    ),
+  },
+  "/reflection/button/neutral-icon-left-error/light": {
+    render: () => (
+      <RefreshButton onClick={recordButtonActivation} error={true}>
+        Refresh
+      </RefreshButton>
+    ),
+  },
+  "/reflection/button/neutral-icon-left-default/dark": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/neutral-icon-left-hover/dark": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/neutral-icon-left-pressed/dark": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/neutral-icon-left-disabled/dark": {
+    render: () => (
+      <RefreshButton onClick={recordButtonActivation} disabled={true}>
+        Refresh
+      </RefreshButton>
+    ),
+  },
+  "/reflection/button/neutral-icon-left-error/dark": {
+    render: () => (
+      <RefreshButton onClick={recordButtonActivation} error={true}>
+        Refresh
+      </RefreshButton>
+    ),
+  },
+  "/reflection/button/purpose-cancel/light": {
+    render: () => <CancelButton onClick={recordButtonActivation}>Cancel</CancelButton>,
+  },
+  "/reflection/button/purpose-copy/light": {
+    render: () => <CopyButton onClick={recordButtonActivation}>Copy</CopyButton>,
+  },
+  "/reflection/button/purpose-filter/light": {
+    render: () => <FilterButton onClick={recordButtonActivation}>Filter</FilterButton>,
+  },
+  "/reflection/button/purpose-sort/light": {
+    render: () => <SortButton onClick={recordButtonActivation}>Sort</SortButton>,
+  },
+  "/reflection/button/purpose-close/light": {
+    render: () => <CloseButton onClick={recordButtonActivation}>Close</CloseButton>,
+  },
+  "/reflection/button/purpose-refresh/light": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/purpose-cancel/dark": {
+    render: () => <CancelButton onClick={recordButtonActivation}>Cancel</CancelButton>,
+  },
+  "/reflection/button/purpose-copy/dark": {
+    render: () => <CopyButton onClick={recordButtonActivation}>Copy</CopyButton>,
+  },
+  "/reflection/button/purpose-filter/dark": {
+    render: () => <FilterButton onClick={recordButtonActivation}>Filter</FilterButton>,
+  },
+  "/reflection/button/purpose-sort/dark": {
+    render: () => <SortButton onClick={recordButtonActivation}>Sort</SortButton>,
+  },
+  "/reflection/button/purpose-close/dark": {
+    render: () => <CloseButton onClick={recordButtonActivation}>Close</CloseButton>,
+  },
+  "/reflection/button/purpose-refresh/dark": {
+    render: () => <RefreshButton onClick={recordButtonActivation}>Refresh</RefreshButton>,
+  },
+  "/reflection/button/success-icon-left-default/light": {
+    render: () => (
+      <SuccessButton onClick={recordButtonActivation} iconLeft={IconName.Check}>
+        Success
+      </SuccessButton>
+    ),
+  },
+  "/reflection/button/danger-icon-left-default/light": {
+    render: () => (
+      <DestructiveButton onClick={recordButtonActivation} iconLeft={IconName.X} size={"sm"}>
+        Delete
+      </DestructiveButton>
+    ),
+  },
+  "/reflection/button/icon-only-neutral-default/light": {
+    render: () => (
+      <IconButton
+        onClick={recordButtonActivation}
+        icon={IconName.X}
+        size="md"
+        variant="neutral"
+        ariaLabel="Close"
+      />
+    ),
+  },
+  "/reflection/button/icon-only-neutral-default/dark": {
+    render: () => (
+      <IconButton
+        onClick={recordButtonActivation}
+        icon={IconName.X}
+        size="md"
+        variant="neutral"
+        ariaLabel="Close"
+      />
+    ),
   },
   "/reflection/card/default/light": {
     render: () => (
@@ -422,7 +1509,10 @@ function themeModeForPath(path: string) {
 }
 
 export async function mountReflectionCase(input: ReflectionPortalMountInput) {
-  const portalCase = portalCases[input.path]
+  const formKind = buttonFormKind(input.path)
+  const portalCase = formKind
+    ? { render: () => <ButtonFormReact kind={formKind} /> }
+    : portalCases[input.path]
 
   if (!portalCase) {
     throw new Error(`Unknown React Reflection portal path: ${input.path}`)
@@ -439,6 +1529,18 @@ export async function mountReflectionCase(input: ReflectionPortalMountInput) {
   })
 
   await waitForMarwesTheme(input.root)
+  const stopActivation = input.path.startsWith("/reflection/button/")
+    ? installButtonActivationOutput(input.root)
+    : () => {}
+  const stopAligning = alignFigmaFrameOrigin(
+    input.root,
+    input.framing?.align,
+    input.path.startsWith("/reflection/button/"),
+  )
 
-  return () => root.unmount()
+  return () => {
+    stopActivation()
+    stopAligning()
+    root.unmount()
+  }
 }

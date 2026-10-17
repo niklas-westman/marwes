@@ -1,5 +1,10 @@
 import type { ButtonOptions, CssVars } from "@marwes-ui/core"
-import { buttonOptionKeys, createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core"
+import {
+  buttonOptionKeys,
+  createButtonRecipe,
+  resolveButtonIcons,
+  toButtonHtmlAttributes,
+} from "@marwes-ui/core"
 import { computed, defineComponent, h, useAttrs } from "vue"
 import { definePropKeys } from "../../internal/prop-keys"
 import {
@@ -30,6 +35,7 @@ export const Button = defineComponent(
 
     return () => {
       const renderKit = kit.value
+      const icons = resolveButtonIcons(props)
       const passthroughAttrs = omitAttrs(attrs as Record<string, unknown>, ["class", "style"])
       const className = mergeClassNames(renderKit.className, props.className, attrs.class)
       const htmlAttributes = toButtonHtmlAttributes(renderKit.a11y)
@@ -46,9 +52,9 @@ export const Button = defineComponent(
             inverted: resolvedLoading.spinnerInverted,
           }),
         )
-      } else if (props.iconLeft) {
+      } else if (icons.iconLeft) {
         content.push(
-          h(Icon, { name: props.iconLeft, size: "xs", strokeWidth: "sm", decorative: true }),
+          h(Icon, { name: icons.iconLeft, size: "xs", strokeWidth: "sm", decorative: true }),
         )
       }
 
@@ -58,9 +64,9 @@ export const Button = defineComponent(
         content.push(h("span", { class: "mw-btn__label" }, slotChildren))
       }
 
-      if (!resolvedLoading.isLoading && props.iconRight) {
+      if (!resolvedLoading.isLoading && icons.iconRight) {
         content.push(
-          h(Icon, { name: props.iconRight, size: "xs", strokeWidth: "sm", decorative: true }),
+          h(Icon, { name: icons.iconRight, size: "xs", strokeWidth: "sm", decorative: true }),
         )
       }
 

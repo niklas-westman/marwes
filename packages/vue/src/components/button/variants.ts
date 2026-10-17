@@ -417,7 +417,6 @@ export const VerifyButton = defineComponent({
           variant: ButtonVariant.secondary,
           as: "button",
           action: ButtonAction.button,
-          iconRight: props.iconRight ?? IconName.CheckCircle,
           dataAttributes: createPurposeButtonDataAttributes("verify", props.dataAttributes, {
             "data-verification": "true",
           }),
@@ -448,7 +447,6 @@ export const EditButton = defineComponent({
           ...props,
           action: ButtonAction.edit,
           variant: ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.Edit,
           dataAttributes: createPurposeButtonDataAttributes("edit", props.dataAttributes, {
             "data-edit": "true",
           }),
@@ -509,7 +507,6 @@ export const RefreshButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.neutral,
-          iconRight: props.iconRight ?? IconName.RefreshCw,
           dataAttributes: createPurposeButtonDataAttributes("refresh", props.dataAttributes, {
             "data-refresh": "true",
           }),
@@ -540,7 +537,6 @@ export const UploadButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.Upload,
           dataAttributes: createPurposeButtonDataAttributes("upload", props.dataAttributes, {
             "data-transfer": "upload",
           }),
@@ -571,7 +567,6 @@ export const DownloadButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.secondary,
-          iconRight: props.iconRight ?? IconName.Download,
           dataAttributes: createPurposeButtonDataAttributes("download", props.dataAttributes, {
             "data-transfer": "download",
           }),
@@ -632,7 +627,6 @@ export const SearchButton = defineComponent({
           ...props,
           action: ButtonAction.button,
           variant: ButtonVariant.primary,
-          iconRight: props.iconRight ?? IconName.Search,
           dataAttributes: createPurposeButtonDataAttributes("search", props.dataAttributes, {
             "data-search": "true",
           }),

@@ -1,0 +1,4656 @@
+{
+  "schemaVersion": 1,
+  "family": "select",
+  "fileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "capture": {
+    "version": "2364166174019930436",
+    "lastModified": "2026-06-12T11:55:29Z",
+    "provenance": "inherited-pinned-offline-capture; not a new Figma capture or approval"
+  },
+  "hashes": {
+    "raw": "5693d3a00e466b5ee72cd654a2f35ad9391ee40faa627fbc3134d571e2da0c3f",
+    "manifest": "53ac3b15f5b1c239a20ebeb5d977347ba70f28ba5a9fddf9271cd800c45f167e",
+    "variables": "1d36b50927b018026e0484efadaf8ec1fe8d8820ef11581c19849f7d92ecad8e"
+  },
+  "nodes": {
+    "1364:11867": {
+      "id": "1364:11867",
+      "name": "Select",
+      "type": "INSTANCE",
+      "scrollBehavior": "SCROLLS",
+      "boundVariables": {
+        "paddingLeft": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:929"
+        },
+        "paddingTop": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:928"
+        },
+        "paddingRight": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:929"
+        },
+        "paddingBottom": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:928"
+        },
+        "rectangleCornerRadii": {
+          "RECTANGLE_TOP_LEFT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_TOP_RIGHT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          }
+        },
+        "fills": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:2276:28229"
+          }
+        ],
+        "strokes": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:2276:28230"
+          }
+        ]
+      },
+      "componentId": "1364:7707",
+      "overrides": [
+        {
+          "id": "1364:11867",
+          "overriddenFields": [
+            "fills",
+            "height",
+            "primaryAxisSizingMode",
+            "strokes",
+            "width"
+          ]
+        }
+      ],
+      "children": [
+        {
+          "id": "I1364:11867;1364:7708",
+          "name": "Value",
+          "type": "TEXT",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:2276:28232"
+              }
+            ],
+            "lineHeight": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:910"
+              }
+            ],
+            "fontFamily": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:898"
+              }
+            ],
+            "fontSize": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:902"
+              }
+            ],
+            "fontStyle": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:917"
+              }
+            ]
+          },
+          "blendMode": "PASS_THROUGH",
+          "fills": [
+            {
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0.0784313753247261,
+                "g": 0.0784313753247261,
+                "b": 0.0784313753247261,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:2276:28232"
+                }
+              }
+            }
+          ],
+          "fillGeometry": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "OUTSIDE",
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": 3645,
+            "y": 1776,
+            "width": 44,
+            "height": 16
+          },
+          "absoluteRenderBounds": {
+            "x": 3645.60205078125,
+            "y": 1778.780029296875,
+            "width": 41.579833984375,
+            "height": 13.0899658203125
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              12
+            ],
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "size": {
+            "x": 44,
+            "y": 16
+          },
+          "layoutAlign": "INHERIT",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "characters": "Option",
+          "characterStyleOverrides": [],
+          "styleOverrideTable": {},
+          "lineTypes": [
+            "NONE"
+          ],
+          "lineIndentations": [
+            0
+          ],
+          "style": {
+            "fontFamily": "Instrument Sans",
+            "fontPostScriptName": "InstrumentSans-Medium",
+            "fontStyle": "Medium",
+            "fontWeight": 500,
+            "textAutoResize": "WIDTH_AND_HEIGHT",
+            "fontSize": 14,
+            "textAlignHorizontal": "LEFT",
+            "textAlignVertical": "TOP",
+            "letterSpacing": -0.42,
+            "lineHeightPx": 16,
+            "lineHeightPercent": 93.67681884765625,
+            "lineHeightPercentFontSize": 114.28571319580078,
+            "lineHeightUnit": "PIXELS"
+          },
+          "layoutVersion": 5,
+          "styles": {
+            "text": "1368:5654"
+          },
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        },
+        {
+          "id": "I1364:11867;1381:1632",
+          "name": "Arrows",
+          "type": "INSTANCE",
+          "scrollBehavior": "SCROLLS",
+          "componentId": "1:461",
+          "componentProperties": {
+            "Style": {
+              "value": "chevron-down",
+              "type": "VARIANT",
+              "boundVariables": {}
+            },
+            "Size": {
+              "value": "16px",
+              "type": "VARIANT",
+              "boundVariables": {}
+            }
+          },
+          "overrides": [],
+          "children": [
+            {
+              "id": "I1364:11867;1381:1632;1:462",
+              "name": "Union",
+              "type": "VECTOR",
+              "scrollBehavior": "SCROLLS",
+              "boundVariables": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1364:2572"
+                  }
+                ]
+              },
+              "blendMode": "PASS_THROUGH",
+              "fills": [
+                {
+                  "opacity": 0.30000001192092896,
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  },
+                  "boundVariables": {
+                    "color": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1364:2572"
+                    }
+                  }
+                }
+              ],
+              "vectorNetwork": {
+                "vertices": [
+                  {
+                    "position": {
+                      "x": 12.292926788330078,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 13.706993103027344,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 13.706993103027344,
+                      "y": 1.7069637775421143
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 7.706976890563965,
+                      "y": 7.706992149353027
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 6.292910575866699,
+                      "y": 7.706992149353027
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 0.29289406538009644,
+                      "y": 1.7069637775421143
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 0.29289406538009644,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 1.7069604396820068,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 6.999943733215332,
+                      "y": 5.585888385772705
+                    },
+                    "meta": 0
+                  }
+                ],
+                "segments": [
+                  {
+                    "start": 0,
+                    "startTangent": {
+                      "x": 0.3905249834060669,
+                      "y": -0.39052614569664
+                    },
+                    "endTangent": {
+                      "x": -0.3905249834060669,
+                      "y": -0.39052614569664
+                    },
+                    "end": 1,
+                    "meta": 0
+                  },
+                  {
+                    "start": 1,
+                    "startTangent": {
+                      "x": 0.39045029878616333,
+                      "y": 0.39053213596343994
+                    },
+                    "endTangent": {
+                      "x": 0.39050063490867615,
+                      "y": -0.39050090312957764
+                    },
+                    "end": 2,
+                    "meta": 0
+                  },
+                  {
+                    "start": 2,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 3,
+                    "meta": 0
+                  },
+                  {
+                    "start": 3,
+                    "startTangent": {
+                      "x": -0.3904998004436493,
+                      "y": 0.3905010223388672
+                    },
+                    "endTangent": {
+                      "x": 0.390531063079834,
+                      "y": 0.39045068621635437
+                    },
+                    "end": 4,
+                    "meta": 0
+                  },
+                  {
+                    "start": 4,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 5,
+                    "meta": 0
+                  },
+                  {
+                    "start": 5,
+                    "startTangent": {
+                      "x": -0.3905254006385803,
+                      "y": -0.39052608609199524
+                    },
+                    "endTangent": {
+                      "x": -0.3905254006385803,
+                      "y": 0.39052608609199524
+                    },
+                    "end": 6,
+                    "meta": 0
+                  },
+                  {
+                    "start": 6,
+                    "startTangent": {
+                      "x": 0.39052534103393555,
+                      "y": -0.39052614569664
+                    },
+                    "endTangent": {
+                      "x": -0.39052534103393555,
+                      "y": -0.39052614569664
+                    },
+                    "end": 7,
+                    "meta": 0
+                  },
+                  {
+                    "start": 7,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 8,
+                    "meta": 0
+                  },
+                  {
+                    "start": 8,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 0,
+                    "meta": 0
+                  }
+                ],
+                "regions": [
+                  {
+                    "loops": [
+                      [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                      ]
+                    ],
+                    "windingRule": "nonzero",
+                    "meta": 0
+                  }
+                ]
+              },
+              "fillGeometry": [
+                {
+                  "path": "M8.19528 0.195263C8.45564 -0.0650877 8.87765 -0.0650877 9.138 0.195263C9.3983 0.455618 9.39833 0.877642 9.138 1.13798L5.13798 5.13799C4.87765 5.39833 4.45563 5.3983 4.19527 5.13799L0.195263 1.13798C-0.0650876 0.877625 -0.0650876 0.455614 0.195263 0.195263C0.455613 -0.0650877 0.877623 -0.0650877 1.13797 0.195263L4.66663 3.72393L8.19528 0.195263Z",
+                  "windingRule": "NONZERO"
+                }
+              ],
+              "strokes": [],
+              "strokeWeight": 1,
+              "strokeAlign": "INSIDE",
+              "strokeGeometry": [],
+              "absoluteBoundingBox": {
+                "x": 3697.33349609375,
+                "y": 1781.3333740234375,
+                "width": 9.333232879638672,
+                "height": 5.333232879638672
+              },
+              "absoluteRenderBounds": {
+                "x": 3697.33349609375,
+                "y": 1781.3333740234375,
+                "width": 9.333251953125,
+                "height": 5.333251953125
+              },
+              "preserveRatio": true,
+              "targetAspectRatio": {
+                "x": 13.999849319458008,
+                "y": 7.99984884262085
+              },
+              "constraints": {
+                "vertical": "CENTER",
+                "horizontal": "SCALE"
+              },
+              "relativeTransform": [
+                [
+                  1,
+                  0,
+                  3.333383560180664
+                ],
+                [
+                  0,
+                  1,
+                  5.333383560180664
+                ]
+              ],
+              "size": {
+                "x": 9.333232879638672,
+                "y": 5.333232879638672
+              },
+              "effects": [],
+              "interactions": [],
+              "complexStrokeProperties": {
+                "strokeType": "BASIC"
+              }
+            }
+          ],
+          "blendMode": "PASS_THROUGH",
+          "clipsContent": true,
+          "background": [],
+          "fills": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "backgroundColor": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          },
+          "fillGeometry": [
+            {
+              "path": "M0 0L16 0L16 16L0 16L0 0Z",
+              "windingRule": "NONZERO"
+            }
+          ],
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": 3694,
+            "y": 1776,
+            "width": 16,
+            "height": 16
+          },
+          "absoluteRenderBounds": {
+            "x": 3694,
+            "y": 1776,
+            "width": 16,
+            "height": 16
+          },
+          "targetAspectRatio": {
+            "x": 24,
+            "y": 24
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              61
+            ],
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "size": {
+            "x": 16,
+            "y": 16
+          },
+          "layoutAlign": "INHERIT",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        }
+      ],
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "background": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28229"
+            }
+          }
+        }
+      ],
+      "fills": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28229"
+            }
+          }
+        }
+      ],
+      "strokes": [
+        {
+          "opacity": 0.15000000596046448,
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28230"
+            }
+          }
+        }
+      ],
+      "cornerRadius": 4,
+      "cornerSmoothing": 0,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "backgroundColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      },
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisSizingMode": "FIXED",
+      "counterAxisAlignItems": "CENTER",
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 8,
+      "paddingBottom": 8,
+      "itemSpacing": 4,
+      "layoutWrap": "NO_WRAP",
+      "fillGeometry": [
+        {
+          "path": "M0 4C0 1.79086 1.79086 0 4 0L85 0C87.2091 0 89 1.79086 89 4L89 28C89 30.2091 87.2091 32 85 32L4 32C1.79086 32 0 30.2091 0 28L0 4Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "strokeGeometry": [
+        {
+          "path": "M4 0L4 1L85 1L85 0L85 -1L4 -1L4 0ZM89 4L88 4L88 28L89 28L90 28L90 4L89 4ZM85 32L85 31L4 31L4 32L4 33L85 33L85 32ZM0 28L1 28L1 4L0 4L-1 4L-1 28L0 28ZM4 32L4 31C2.34315 31 1 29.6569 1 28L0 28L-1 28C-1 30.7614 1.23858 33 4 33L4 32ZM89 28L88 28C88 29.6569 86.6569 31 85 31L85 32L85 33C87.7614 33 90 30.7614 90 28L89 28ZM85 0L85 1C86.6569 1 88 2.34315 88 4L89 4L90 4C90 1.23858 87.7614 -1 85 -1L85 0ZM4 0L4 -1C1.23858 -1 -1 1.23858 -1 4L0 4L1 4C1 2.34315 2.34315 1 4 1L4 0Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "absoluteBoundingBox": {
+        "x": 3633,
+        "y": 1768,
+        "width": 89,
+        "height": 32
+      },
+      "absoluteRenderBounds": {
+        "x": 3633,
+        "y": 1768,
+        "width": 89,
+        "height": 32
+      },
+      "constraints": {
+        "vertical": "TOP",
+        "horizontal": "LEFT"
+      },
+      "relativeTransform": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          956
+        ]
+      ],
+      "size": {
+        "x": 89,
+        "y": 32
+      },
+      "layoutAlign": "INHERIT",
+      "layoutGrow": 0,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "effects": [],
+      "interactions": [],
+      "complexStrokeProperties": {
+        "strokeType": "BASIC"
+      }
+    },
+    "1364:7707": {
+      "id": "1364:7707",
+      "name": "Select",
+      "type": "COMPONENT",
+      "scrollBehavior": "SCROLLS",
+      "boundVariables": {
+        "paddingLeft": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:929"
+        },
+        "paddingTop": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:928"
+        },
+        "paddingRight": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:929"
+        },
+        "paddingBottom": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:928"
+        },
+        "rectangleCornerRadii": {
+          "RECTANGLE_TOP_LEFT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_TOP_RIGHT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          }
+        },
+        "fills": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:2276:28229"
+          }
+        ],
+        "strokes": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:2276:28230"
+          }
+        ]
+      },
+      "children": [
+        {
+          "id": "1364:7708",
+          "name": "Value",
+          "type": "TEXT",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:2276:28232"
+              }
+            ],
+            "lineHeight": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:910"
+              }
+            ],
+            "fontFamily": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:898"
+              }
+            ],
+            "fontSize": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:902"
+              }
+            ],
+            "fontStyle": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:917"
+              }
+            ]
+          },
+          "blendMode": "PASS_THROUGH",
+          "fills": [
+            {
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0.0784313753247261,
+                "g": 0.0784313753247261,
+                "b": 0.0784313753247261,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:2276:28232"
+                }
+              }
+            }
+          ],
+          "fillGeometry": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "OUTSIDE",
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": 5342,
+            "y": -2440,
+            "width": 44,
+            "height": 16
+          },
+          "absoluteRenderBounds": {
+            "x": 5342.60205078125,
+            "y": -2437.219970703125,
+            "width": 41.580078125,
+            "height": 13.090087890625
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              12
+            ],
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "size": {
+            "x": 44,
+            "y": 16
+          },
+          "layoutAlign": "INHERIT",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "characters": "Option",
+          "characterStyleOverrides": [],
+          "styleOverrideTable": {},
+          "lineTypes": [
+            "NONE"
+          ],
+          "lineIndentations": [
+            0
+          ],
+          "style": {
+            "fontFamily": "Instrument Sans",
+            "fontPostScriptName": "InstrumentSans-Medium",
+            "fontStyle": "Medium",
+            "fontWeight": 500,
+            "textAutoResize": "WIDTH_AND_HEIGHT",
+            "fontSize": 14,
+            "textAlignHorizontal": "LEFT",
+            "textAlignVertical": "TOP",
+            "letterSpacing": -0.42,
+            "lineHeightPx": 16,
+            "lineHeightPercent": 93.67681884765625,
+            "lineHeightPercentFontSize": 114.28571319580078,
+            "lineHeightUnit": "PIXELS"
+          },
+          "layoutVersion": 5,
+          "styles": {
+            "text": "1368:5654"
+          },
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        },
+        {
+          "id": "1381:1632",
+          "name": "Arrows",
+          "type": "INSTANCE",
+          "scrollBehavior": "SCROLLS",
+          "componentId": "1:461",
+          "componentProperties": {
+            "Style": {
+              "value": "chevron-down",
+              "type": "VARIANT",
+              "boundVariables": {}
+            },
+            "Size": {
+              "value": "16px",
+              "type": "VARIANT",
+              "boundVariables": {}
+            }
+          },
+          "overrides": [
+            {
+              "id": "1381:1632",
+              "overriddenFields": [
+                "fills"
+              ]
+            },
+            {
+              "id": "I1381:1632;1:462",
+              "overriddenFields": [
+                "cornerRadius",
+                "fills",
+                "strokeAlign",
+                "strokeCap",
+                "strokeJoin",
+                "strokeWeight"
+              ]
+            }
+          ],
+          "children": [
+            {
+              "id": "I1381:1632;1:462",
+              "name": "Union",
+              "type": "VECTOR",
+              "scrollBehavior": "SCROLLS",
+              "boundVariables": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1364:2572"
+                  }
+                ]
+              },
+              "blendMode": "PASS_THROUGH",
+              "fills": [
+                {
+                  "opacity": 0.30000001192092896,
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  },
+                  "boundVariables": {
+                    "color": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1364:2572"
+                    }
+                  }
+                }
+              ],
+              "vectorNetwork": {
+                "vertices": [
+                  {
+                    "position": {
+                      "x": 12.292926788330078,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 13.706993103027344,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 13.706993103027344,
+                      "y": 1.7069637775421143
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 7.706976890563965,
+                      "y": 7.706992149353027
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 6.292910575866699,
+                      "y": 7.706992149353027
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 0.29289406538009644,
+                      "y": 1.7069637775421143
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 0.29289406538009644,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 1.7069604396820068,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 6.999943733215332,
+                      "y": 5.585888385772705
+                    },
+                    "meta": 0
+                  }
+                ],
+                "segments": [
+                  {
+                    "start": 0,
+                    "startTangent": {
+                      "x": 0.3905249834060669,
+                      "y": -0.39052614569664
+                    },
+                    "endTangent": {
+                      "x": -0.3905249834060669,
+                      "y": -0.39052614569664
+                    },
+                    "end": 1,
+                    "meta": 0
+                  },
+                  {
+                    "start": 1,
+                    "startTangent": {
+                      "x": 0.39045029878616333,
+                      "y": 0.39053213596343994
+                    },
+                    "endTangent": {
+                      "x": 0.39050063490867615,
+                      "y": -0.39050090312957764
+                    },
+                    "end": 2,
+                    "meta": 0
+                  },
+                  {
+                    "start": 2,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 3,
+                    "meta": 0
+                  },
+                  {
+                    "start": 3,
+                    "startTangent": {
+                      "x": -0.3904998004436493,
+                      "y": 0.3905010223388672
+                    },
+                    "endTangent": {
+                      "x": 0.390531063079834,
+                      "y": 0.39045068621635437
+                    },
+                    "end": 4,
+                    "meta": 0
+                  },
+                  {
+                    "start": 4,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 5,
+                    "meta": 0
+                  },
+                  {
+                    "start": 5,
+                    "startTangent": {
+                      "x": -0.3905254006385803,
+                      "y": -0.39052608609199524
+                    },
+                    "endTangent": {
+                      "x": -0.3905254006385803,
+                      "y": 0.39052608609199524
+                    },
+                    "end": 6,
+                    "meta": 0
+                  },
+                  {
+                    "start": 6,
+                    "startTangent": {
+                      "x": 0.39052534103393555,
+                      "y": -0.39052614569664
+                    },
+                    "endTangent": {
+                      "x": -0.39052534103393555,
+                      "y": -0.39052614569664
+                    },
+                    "end": 7,
+                    "meta": 0
+                  },
+                  {
+                    "start": 7,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 8,
+                    "meta": 0
+                  },
+                  {
+                    "start": 8,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 0,
+                    "meta": 0
+                  }
+                ],
+                "regions": [
+                  {
+                    "loops": [
+                      [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                      ]
+                    ],
+                    "windingRule": "nonzero",
+                    "meta": 0
+                  }
+                ]
+              },
+              "fillGeometry": [
+                {
+                  "path": "M8.19528 0.195263C8.45564 -0.0650877 8.87765 -0.0650877 9.138 0.195263C9.3983 0.455618 9.39833 0.877642 9.138 1.13798L5.13798 5.13799C4.87765 5.39833 4.45563 5.3983 4.19527 5.13799L0.195263 1.13798C-0.0650876 0.877625 -0.0650876 0.455614 0.195263 0.195263C0.455613 -0.0650877 0.877623 -0.0650877 1.13797 0.195263L4.66663 3.72393L8.19528 0.195263Z",
+                  "windingRule": "NONZERO"
+                }
+              ],
+              "strokes": [],
+              "strokeWeight": 1,
+              "strokeAlign": "INSIDE",
+              "strokeGeometry": [],
+              "absoluteBoundingBox": {
+                "x": 5394.33349609375,
+                "y": -2434.66650390625,
+                "width": 9.333232879638672,
+                "height": 5.333232879638672
+              },
+              "absoluteRenderBounds": {
+                "x": 5394.33349609375,
+                "y": -2434.66650390625,
+                "width": 9.3330078125,
+                "height": 5.333251953125
+              },
+              "preserveRatio": true,
+              "targetAspectRatio": {
+                "x": 13.999849319458008,
+                "y": 7.99984884262085
+              },
+              "constraints": {
+                "vertical": "CENTER",
+                "horizontal": "SCALE"
+              },
+              "relativeTransform": [
+                [
+                  1,
+                  0,
+                  3.333383560180664
+                ],
+                [
+                  0,
+                  1,
+                  5.333383560180664
+                ]
+              ],
+              "size": {
+                "x": 9.333232879638672,
+                "y": 5.333232879638672
+              },
+              "effects": [],
+              "interactions": [],
+              "complexStrokeProperties": {
+                "strokeType": "BASIC"
+              }
+            }
+          ],
+          "blendMode": "PASS_THROUGH",
+          "clipsContent": true,
+          "background": [],
+          "fills": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "backgroundColor": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          },
+          "fillGeometry": [
+            {
+              "path": "M0 0L16 0L16 16L0 16L0 0Z",
+              "windingRule": "NONZERO"
+            }
+          ],
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": 5391,
+            "y": -2440,
+            "width": 16,
+            "height": 16
+          },
+          "absoluteRenderBounds": {
+            "x": 5391,
+            "y": -2440,
+            "width": 16,
+            "height": 16
+          },
+          "targetAspectRatio": {
+            "x": 24,
+            "y": 24
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              61
+            ],
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "size": {
+            "x": 16,
+            "y": 16
+          },
+          "layoutAlign": "INHERIT",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        }
+      ],
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "background": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28229"
+            }
+          }
+        }
+      ],
+      "fills": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28229"
+            }
+          }
+        }
+      ],
+      "strokes": [
+        {
+          "opacity": 0.15000000596046448,
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28230"
+            }
+          }
+        }
+      ],
+      "cornerRadius": 4,
+      "cornerSmoothing": 0,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "backgroundColor": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      },
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisSizingMode": "FIXED",
+      "counterAxisAlignItems": "CENTER",
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 8,
+      "paddingBottom": 8,
+      "itemSpacing": 4,
+      "layoutWrap": "NO_WRAP",
+      "fillGeometry": [
+        {
+          "path": "M0 4C0 1.79086 1.79086 0 4 0L85 0C87.2091 0 89 1.79086 89 4L89 28C89 30.2091 87.2091 32 85 32L4 32C1.79086 32 0 30.2091 0 28L0 4Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "strokeGeometry": [
+        {
+          "path": "M4 0L4 1L85 1L85 0L85 -1L4 -1L4 0ZM89 4L88 4L88 28L89 28L90 28L90 4L89 4ZM85 32L85 31L4 31L4 32L4 33L85 33L85 32ZM0 28L1 28L1 4L0 4L-1 4L-1 28L0 28ZM4 32L4 31C2.34315 31 1 29.6569 1 28L0 28L-1 28C-1 30.7614 1.23858 33 4 33L4 32ZM89 28L88 28C88 29.6569 86.6569 31 85 31L85 32L85 33C87.7614 33 90 30.7614 90 28L89 28ZM85 0L85 1C86.6569 1 88 2.34315 88 4L89 4L90 4C90 1.23858 87.7614 -1 85 -1L85 0ZM4 0L4 -1C1.23858 -1 -1 1.23858 -1 4L0 4L1 4C1 2.34315 2.34315 1 4 1L4 0Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "absoluteBoundingBox": {
+        "x": 5330,
+        "y": -2448,
+        "width": 89,
+        "height": 32
+      },
+      "absoluteRenderBounds": {
+        "x": 5330,
+        "y": -2448,
+        "width": 89,
+        "height": 32
+      },
+      "constraints": {
+        "vertical": "TOP",
+        "horizontal": "LEFT"
+      },
+      "relativeTransform": [
+        [
+          1,
+          0,
+          48
+        ],
+        [
+          0,
+          1,
+          436
+        ]
+      ],
+      "size": {
+        "x": 89,
+        "y": 32
+      },
+      "layoutAlign": "INHERIT",
+      "layoutGrow": 0,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "effects": [],
+      "interactions": [],
+      "complexStrokeProperties": {
+        "strokeType": "BASIC"
+      }
+    },
+    "1368:6027": {
+      "id": "1368:6027",
+      "name": "Select",
+      "type": "INSTANCE",
+      "scrollBehavior": "SCROLLS",
+      "boundVariables": {
+        "paddingLeft": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:929"
+        },
+        "paddingTop": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:928"
+        },
+        "paddingRight": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:929"
+        },
+        "paddingBottom": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:5:928"
+        },
+        "rectangleCornerRadii": {
+          "RECTANGLE_TOP_LEFT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_TOP_RIGHT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          },
+          "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:5:927"
+          }
+        },
+        "fills": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:2276:28229"
+          }
+        ],
+        "strokes": [
+          {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:2276:28230"
+          }
+        ]
+      },
+      "componentId": "1364:7707",
+      "overrides": [
+        {
+          "id": "1368:6027",
+          "overriddenFields": [
+            "fills",
+            "height",
+            "primaryAxisSizingMode",
+            "strokes",
+            "width"
+          ]
+        }
+      ],
+      "children": [
+        {
+          "id": "I1368:6027;1364:7708",
+          "name": "Value",
+          "type": "TEXT",
+          "scrollBehavior": "SCROLLS",
+          "boundVariables": {
+            "fills": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:2276:28232"
+              }
+            ],
+            "lineHeight": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:910"
+              }
+            ],
+            "fontFamily": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:898"
+              }
+            ],
+            "fontSize": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:902"
+              }
+            ],
+            "fontStyle": [
+              {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:5:917"
+              }
+            ]
+          },
+          "blendMode": "PASS_THROUGH",
+          "fills": [
+            {
+              "blendMode": "NORMAL",
+              "type": "SOLID",
+              "color": {
+                "r": 0.9764705896377563,
+                "g": 0.9803921580314636,
+                "b": 0.9843137264251709,
+                "a": 1
+              },
+              "boundVariables": {
+                "color": {
+                  "type": "VARIABLE_ALIAS",
+                  "id": "VariableID:2276:28232"
+                }
+              }
+            }
+          ],
+          "fillGeometry": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "OUTSIDE",
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": 4029,
+            "y": 1776,
+            "width": 44,
+            "height": 16
+          },
+          "absoluteRenderBounds": {
+            "x": 4029.60205078125,
+            "y": 1778.780029296875,
+            "width": 41.579833984375,
+            "height": 13.0899658203125
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              12
+            ],
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "size": {
+            "x": 44,
+            "y": 16
+          },
+          "layoutAlign": "INHERIT",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "HUG",
+          "layoutSizingVertical": "HUG",
+          "characters": "Option",
+          "characterStyleOverrides": [],
+          "styleOverrideTable": {},
+          "lineTypes": [
+            "NONE"
+          ],
+          "lineIndentations": [
+            0
+          ],
+          "style": {
+            "fontFamily": "Instrument Sans",
+            "fontPostScriptName": "InstrumentSans-Medium",
+            "fontStyle": "Medium",
+            "fontWeight": 500,
+            "textAutoResize": "WIDTH_AND_HEIGHT",
+            "fontSize": 14,
+            "textAlignHorizontal": "LEFT",
+            "textAlignVertical": "TOP",
+            "letterSpacing": -0.42,
+            "lineHeightPx": 16,
+            "lineHeightPercent": 93.67681884765625,
+            "lineHeightPercentFontSize": 114.28571319580078,
+            "lineHeightUnit": "PIXELS"
+          },
+          "layoutVersion": 5,
+          "styles": {
+            "text": "1368:5654"
+          },
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        },
+        {
+          "id": "I1368:6027;1381:1632",
+          "name": "Arrows",
+          "type": "INSTANCE",
+          "scrollBehavior": "SCROLLS",
+          "componentId": "1:461",
+          "componentProperties": {
+            "Style": {
+              "value": "chevron-down",
+              "type": "VARIANT",
+              "boundVariables": {}
+            },
+            "Size": {
+              "value": "16px",
+              "type": "VARIANT",
+              "boundVariables": {}
+            }
+          },
+          "overrides": [],
+          "children": [
+            {
+              "id": "I1368:6027;1381:1632;1:462",
+              "name": "Union",
+              "type": "VECTOR",
+              "scrollBehavior": "SCROLLS",
+              "boundVariables": {
+                "fills": [
+                  {
+                    "type": "VARIABLE_ALIAS",
+                    "id": "VariableID:1364:2572"
+                  }
+                ]
+              },
+              "blendMode": "PASS_THROUGH",
+              "fills": [
+                {
+                  "opacity": 0.30000001192092896,
+                  "blendMode": "NORMAL",
+                  "type": "SOLID",
+                  "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1,
+                    "a": 1
+                  },
+                  "boundVariables": {
+                    "color": {
+                      "type": "VARIABLE_ALIAS",
+                      "id": "VariableID:1364:2572"
+                    }
+                  }
+                }
+              ],
+              "vectorNetwork": {
+                "vertices": [
+                  {
+                    "position": {
+                      "x": 12.292926788330078,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 13.706993103027344,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 13.706993103027344,
+                      "y": 1.7069637775421143
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 7.706976890563965,
+                      "y": 7.706992149353027
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 6.292910575866699,
+                      "y": 7.706992149353027
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 0.29289406538009644,
+                      "y": 1.7069637775421143
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 0.29289406538009644,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 1.7069604396820068,
+                      "y": 0.2928946018218994
+                    },
+                    "meta": 0
+                  },
+                  {
+                    "position": {
+                      "x": 6.999943733215332,
+                      "y": 5.585888385772705
+                    },
+                    "meta": 0
+                  }
+                ],
+                "segments": [
+                  {
+                    "start": 0,
+                    "startTangent": {
+                      "x": 0.3905249834060669,
+                      "y": -0.39052614569664
+                    },
+                    "endTangent": {
+                      "x": -0.3905249834060669,
+                      "y": -0.39052614569664
+                    },
+                    "end": 1,
+                    "meta": 0
+                  },
+                  {
+                    "start": 1,
+                    "startTangent": {
+                      "x": 0.39045029878616333,
+                      "y": 0.39053213596343994
+                    },
+                    "endTangent": {
+                      "x": 0.39050063490867615,
+                      "y": -0.39050090312957764
+                    },
+                    "end": 2,
+                    "meta": 0
+                  },
+                  {
+                    "start": 2,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 3,
+                    "meta": 0
+                  },
+                  {
+                    "start": 3,
+                    "startTangent": {
+                      "x": -0.3904998004436493,
+                      "y": 0.3905010223388672
+                    },
+                    "endTangent": {
+                      "x": 0.390531063079834,
+                      "y": 0.39045068621635437
+                    },
+                    "end": 4,
+                    "meta": 0
+                  },
+                  {
+                    "start": 4,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 5,
+                    "meta": 0
+                  },
+                  {
+                    "start": 5,
+                    "startTangent": {
+                      "x": -0.3905254006385803,
+                      "y": -0.39052608609199524
+                    },
+                    "endTangent": {
+                      "x": -0.3905254006385803,
+                      "y": 0.39052608609199524
+                    },
+                    "end": 6,
+                    "meta": 0
+                  },
+                  {
+                    "start": 6,
+                    "startTangent": {
+                      "x": 0.39052534103393555,
+                      "y": -0.39052614569664
+                    },
+                    "endTangent": {
+                      "x": -0.39052534103393555,
+                      "y": -0.39052614569664
+                    },
+                    "end": 7,
+                    "meta": 0
+                  },
+                  {
+                    "start": 7,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 8,
+                    "meta": 0
+                  },
+                  {
+                    "start": 8,
+                    "startTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "endTangent": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "end": 0,
+                    "meta": 0
+                  }
+                ],
+                "regions": [
+                  {
+                    "loops": [
+                      [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                      ]
+                    ],
+                    "windingRule": "nonzero",
+                    "meta": 0
+                  }
+                ]
+              },
+              "fillGeometry": [
+                {
+                  "path": "M8.19528 0.195263C8.45564 -0.0650877 8.87765 -0.0650877 9.138 0.195263C9.3983 0.455618 9.39833 0.877642 9.138 1.13798L5.13798 5.13799C4.87765 5.39833 4.45563 5.3983 4.19527 5.13799L0.195263 1.13798C-0.0650876 0.877625 -0.0650876 0.455614 0.195263 0.195263C0.455613 -0.0650877 0.877623 -0.0650877 1.13797 0.195263L4.66663 3.72393L8.19528 0.195263Z",
+                  "windingRule": "NONZERO"
+                }
+              ],
+              "strokes": [],
+              "strokeWeight": 1,
+              "strokeAlign": "INSIDE",
+              "strokeGeometry": [],
+              "absoluteBoundingBox": {
+                "x": 4081.33349609375,
+                "y": 1781.3333740234375,
+                "width": 9.333232879638672,
+                "height": 5.333232879638672
+              },
+              "absoluteRenderBounds": {
+                "x": 4081.33349609375,
+                "y": 1781.3333740234375,
+                "width": 9.333251953125,
+                "height": 5.333251953125
+              },
+              "preserveRatio": true,
+              "targetAspectRatio": {
+                "x": 13.999849319458008,
+                "y": 7.99984884262085
+              },
+              "constraints": {
+                "vertical": "CENTER",
+                "horizontal": "SCALE"
+              },
+              "relativeTransform": [
+                [
+                  1,
+                  0,
+                  3.333383560180664
+                ],
+                [
+                  0,
+                  1,
+                  5.333383560180664
+                ]
+              ],
+              "size": {
+                "x": 9.333232879638672,
+                "y": 5.333232879638672
+              },
+              "effects": [],
+              "interactions": [],
+              "complexStrokeProperties": {
+                "strokeType": "BASIC"
+              }
+            }
+          ],
+          "blendMode": "PASS_THROUGH",
+          "clipsContent": true,
+          "background": [],
+          "fills": [],
+          "strokes": [],
+          "strokeWeight": 1,
+          "strokeAlign": "INSIDE",
+          "backgroundColor": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0
+          },
+          "fillGeometry": [
+            {
+              "path": "M0 0L16 0L16 16L0 16L0 0Z",
+              "windingRule": "NONZERO"
+            }
+          ],
+          "strokeGeometry": [],
+          "absoluteBoundingBox": {
+            "x": 4078,
+            "y": 1776,
+            "width": 16,
+            "height": 16
+          },
+          "absoluteRenderBounds": {
+            "x": 4078,
+            "y": 1776,
+            "width": 16,
+            "height": 16
+          },
+          "targetAspectRatio": {
+            "x": 24,
+            "y": 24
+          },
+          "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+          },
+          "relativeTransform": [
+            [
+              1,
+              0,
+              61
+            ],
+            [
+              0,
+              1,
+              8
+            ]
+          ],
+          "size": {
+            "x": 16,
+            "y": 16
+          },
+          "layoutAlign": "INHERIT",
+          "layoutGrow": 0,
+          "layoutSizingHorizontal": "FIXED",
+          "layoutSizingVertical": "FIXED",
+          "effects": [],
+          "interactions": [],
+          "complexStrokeProperties": {
+            "strokeType": "BASIC"
+          }
+        }
+      ],
+      "blendMode": "PASS_THROUGH",
+      "clipsContent": false,
+      "background": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 0.05882352963089943,
+            "g": 0.05882352963089943,
+            "b": 0.05882352963089943,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28229"
+            }
+          }
+        }
+      ],
+      "fills": [
+        {
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 0.05882352963089943,
+            "g": 0.05882352963089943,
+            "b": 0.05882352963089943,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28229"
+            }
+          }
+        }
+      ],
+      "strokes": [
+        {
+          "opacity": 0.15000000596046448,
+          "blendMode": "NORMAL",
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:2276:28230"
+            }
+          }
+        }
+      ],
+      "cornerRadius": 4,
+      "cornerSmoothing": 0,
+      "strokeWeight": 1,
+      "strokeAlign": "INSIDE",
+      "backgroundColor": {
+        "r": 0.05882352963089943,
+        "g": 0.05882352963089943,
+        "b": 0.05882352963089943,
+        "a": 1
+      },
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisSizingMode": "FIXED",
+      "counterAxisAlignItems": "CENTER",
+      "primaryAxisAlignItems": "SPACE_BETWEEN",
+      "paddingLeft": 12,
+      "paddingRight": 12,
+      "paddingTop": 8,
+      "paddingBottom": 8,
+      "itemSpacing": 4,
+      "layoutWrap": "NO_WRAP",
+      "fillGeometry": [
+        {
+          "path": "M0 4C0 1.79086 1.79086 0 4 0L85 0C87.2091 0 89 1.79086 89 4L89 28C89 30.2091 87.2091 32 85 32L4 32C1.79086 32 0 30.2091 0 28L0 4Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "strokeGeometry": [
+        {
+          "path": "M4 0L4 1L85 1L85 0L85 -1L4 -1L4 0ZM89 4L88 4L88 28L89 28L90 28L90 4L89 4ZM85 32L85 31L4 31L4 32L4 33L85 33L85 32ZM0 28L1 28L1 4L0 4L-1 4L-1 28L0 28ZM4 32L4 31C2.34315 31 1 29.6569 1 28L0 28L-1 28C-1 30.7614 1.23858 33 4 33L4 32ZM89 28L88 28C88 29.6569 86.6569 31 85 31L85 32L85 33C87.7614 33 90 30.7614 90 28L89 28ZM85 0L85 1C86.6569 1 88 2.34315 88 4L89 4L90 4C90 1.23858 87.7614 -1 85 -1L85 0ZM4 0L4 -1C1.23858 -1 -1 1.23858 -1 4L0 4L1 4C1 2.34315 2.34315 1 4 1L4 0Z",
+          "windingRule": "NONZERO"
+        }
+      ],
+      "absoluteBoundingBox": {
+        "x": 4017,
+        "y": 1768,
+        "width": 89,
+        "height": 32
+      },
+      "absoluteRenderBounds": {
+        "x": 4017,
+        "y": 1768,
+        "width": 89,
+        "height": 32
+      },
+      "constraints": {
+        "vertical": "TOP",
+        "horizontal": "LEFT"
+      },
+      "relativeTransform": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          956
+        ]
+      ],
+      "size": {
+        "x": 89,
+        "y": 32
+      },
+      "layoutAlign": "INHERIT",
+      "layoutGrow": 0,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "HUG",
+      "effects": [],
+      "interactions": [],
+      "complexStrokeProperties": {
+        "strokeType": "BASIC"
+      }
+    }
+  },
+  "inheritedModes": {
+    "1364:11867": {
+      "VariableCollectionId:1358:5072": "1358:1",
+      "VariableCollectionId:2276:28206": "2276:15",
+      "VariableCollectionId:2276:28207": "2276:23",
+      "VariableCollectionId:2276:28208": "2276:32"
+    },
+    "1364:7707": {
+      "VariableCollectionId:1358:5072": "1358:1"
+    },
+    "1368:6027": {
+      "VariableCollectionId:1358:5072": "1358:2",
+      "VariableCollectionId:2276:28206": "2276:15",
+      "VariableCollectionId:2276:28207": "2276:23",
+      "VariableCollectionId:2276:28208": "2276:32"
+    }
+  },
+  "variables": [
+    {
+      "id": "VariableID:5:898",
+      "key": "e7f23f0d11867d3907271ad08ae4bbda10466000",
+      "name": "font/family/Body",
+      "path": "font/family/Body",
+      "tokenName": "font/family/Body",
+      "collectionId": "VariableCollectionId:5:895",
+      "variableCollectionId": "VariableCollectionId:5:895",
+      "collectionName": "Typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": "Instrument Sans"
+      },
+      "valuesByModeId": {
+        "5:4": "Instrument Sans"
+      },
+      "rawValuesByMode": {
+        "5:4": "Instrument Sans"
+      }
+    },
+    {
+      "id": "VariableID:5:902",
+      "key": "5deed7a7ba22ed0069946ce119329f4270e1ff30",
+      "name": "font/size/fs-14",
+      "path": "font/size/fs-14",
+      "tokenName": "font/size/fs-14",
+      "collectionId": "VariableCollectionId:5:895",
+      "variableCollectionId": "VariableCollectionId:5:895",
+      "collectionName": "Typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "FONT_SIZE"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": 14
+      },
+      "valuesByModeId": {
+        "5:4": 14
+      },
+      "rawValuesByMode": {
+        "5:4": 14
+      }
+    },
+    {
+      "id": "VariableID:5:910",
+      "key": "7bfdd0f1f7e2aa4d0282839e4ff45cef29dab3b1",
+      "name": "font/line-height/lh-16",
+      "path": "font/line-height/lh-16",
+      "tokenName": "font/line-height/lh-16",
+      "collectionId": "VariableCollectionId:5:895",
+      "variableCollectionId": "VariableCollectionId:5:895",
+      "collectionName": "Typography",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "LINE_HEIGHT"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": 16
+      },
+      "valuesByModeId": {
+        "5:4": 16
+      },
+      "rawValuesByMode": {
+        "5:4": 16
+      }
+    },
+    {
+      "id": "VariableID:5:917",
+      "key": "0d6021e995e381c9e82a4260c3bec428847d43c2",
+      "name": "font/weight/Medium",
+      "path": "font/weight/Medium",
+      "tokenName": "font/weight/Medium",
+      "collectionId": "VariableCollectionId:5:895",
+      "variableCollectionId": "VariableCollectionId:5:895",
+      "collectionName": "Typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "FONT_STYLE"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": "Medium"
+      },
+      "valuesByModeId": {
+        "5:4": "Medium"
+      },
+      "rawValuesByMode": {
+        "5:4": "Medium"
+      }
+    },
+    {
+      "id": "VariableID:5:927",
+      "key": "481a1cf49b87881668f7b636846e505eb83f4ae6",
+      "name": "sp-4",
+      "path": "sp-4",
+      "tokenName": "sp-4",
+      "collectionId": "VariableCollectionId:5:924",
+      "variableCollectionId": "VariableCollectionId:5:924",
+      "collectionName": "Spacings",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": 4
+      },
+      "valuesByModeId": {
+        "5:12": 4
+      },
+      "rawValuesByMode": {
+        "5:12": 4
+      }
+    },
+    {
+      "id": "VariableID:5:928",
+      "key": "c7847e8d0ac01b054e6888815a6527e1776d3915",
+      "name": "sp-8",
+      "path": "sp-8",
+      "tokenName": "sp-8",
+      "collectionId": "VariableCollectionId:5:924",
+      "variableCollectionId": "VariableCollectionId:5:924",
+      "collectionName": "Spacings",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": 8
+      },
+      "valuesByModeId": {
+        "5:12": 8
+      },
+      "rawValuesByMode": {
+        "5:12": 8
+      }
+    },
+    {
+      "id": "VariableID:5:929",
+      "key": "753e497b044a6f5ff5b85bfc3859598dd740c0d1",
+      "name": "sp-12",
+      "path": "sp-12",
+      "tokenName": "sp-12",
+      "collectionId": "VariableCollectionId:5:924",
+      "variableCollectionId": "VariableCollectionId:5:924",
+      "collectionName": "Spacings",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "CORNER_RADIUS",
+        "WIDTH_HEIGHT",
+        "GAP",
+        "PARAGRAPH_SPACING",
+        "PARAGRAPH_INDENT"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": 12
+      },
+      "valuesByModeId": {
+        "5:12": 12
+      },
+      "rawValuesByMode": {
+        "5:12": 12
+      }
+    },
+    {
+      "id": "VariableID:1358:5014",
+      "key": "e32fb88ede2b6dc0d5ba90347dafabd57b8a65d1",
+      "name": "Blue/400",
+      "path": "Blue/400",
+      "tokenName": "Blue/400",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#5859fc"
+      },
+      "valuesByModeId": {
+        "1358:0": "#5859fc"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.3450980484485626,
+          "g": 0.3490196168422699,
+          "b": 0.9882352948188782,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5015",
+      "key": "d587e079dfee04ded8feea389c5e3a8a0e10ab7f",
+      "name": "Blue/500",
+      "path": "Blue/500",
+      "tokenName": "Blue/500",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#2f31fc"
+      },
+      "valuesByModeId": {
+        "1358:0": "#2f31fc"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.18431372940540314,
+          "g": 0.1921568661928177,
+          "b": 0.9882352948188782,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5021",
+      "key": "8374f6bb0539e5aab245df79ff1066f74b7f79f2",
+      "name": "Gray/0",
+      "path": "Gray/0",
+      "tokenName": "Gray/0",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5022",
+      "key": "0cf6b871623f747d6f78fb8792e184b6c19ecab7",
+      "name": "Gray/50",
+      "path": "Gray/50",
+      "tokenName": "Gray/50",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#f9fafb"
+      },
+      "valuesByModeId": {
+        "1358:0": "#f9fafb"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.9764705896377563,
+          "g": 0.9803921580314636,
+          "b": 0.9843137264251709,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5025",
+      "key": "1c4dd7662c8e1bf96933db5565a9f2f7a9fc4890",
+      "name": "Gray/300",
+      "path": "Gray/300",
+      "tokenName": "Gray/300",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#d4d4d4"
+      },
+      "valuesByModeId": {
+        "1358:0": "#d4d4d4"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.8313725590705872,
+          "g": 0.8313725590705872,
+          "b": 0.8313725590705872,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5029",
+      "key": "ec02e9ad48e66e8b7ec5001d9538d28ee837cf44",
+      "name": "Gray/700",
+      "path": "Gray/700",
+      "tokenName": "Gray/700",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#474747"
+      },
+      "valuesByModeId": {
+        "1358:0": "#474747"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.27843138575553894,
+          "g": 0.27843138575553894,
+          "b": 0.27843138575553894,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5031",
+      "key": "3c297381ba8619ff71de9755a7f5ed52c77ca1b0",
+      "name": "Gray/900",
+      "path": "Gray/900",
+      "tokenName": "Gray/900",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#141414"
+      },
+      "valuesByModeId": {
+        "1358:0": "#141414"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.0784313753247261,
+          "g": 0.0784313753247261,
+          "b": 0.0784313753247261,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5048",
+      "key": "663088b767175ed39b7f64563cb72a784f2fc8b7",
+      "name": "Red/400",
+      "path": "Red/400",
+      "tokenName": "Red/400",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ff2847"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ff2847"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 0.1568627506494522,
+          "b": 0.27843138575553894,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5050",
+      "key": "650a42173014bb546d45c04564d1d53a4703be96",
+      "name": "Red/600",
+      "path": "Red/600",
+      "tokenName": "Red/600",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#d90429"
+      },
+      "valuesByModeId": {
+        "1358:0": "#d90429"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.8509804010391235,
+          "g": 0.01568627543747425,
+          "b": 0.16078431904315948,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5067",
+      "key": "aba3b30ee0a9f88396fa0ce20e2bf26f1024235b",
+      "name": "Black/Alpha/40",
+      "path": "Black/Alpha/40",
+      "tokenName": "Black/Alpha/40",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#00000066"
+      },
+      "valuesByModeId": {
+        "1358:0": "#00000066"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.4000000059604645
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5070",
+      "key": "b68401ec82989f36bc4f396aa1359f5a6a384a3f",
+      "name": "White/Alpha/40",
+      "path": "White/Alpha/40",
+      "tokenName": "White/Alpha/40",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff66"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff66"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 0.4000000059604645
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5073",
+      "key": "0789a4eefaad466353d3194f9017093fbbb87947",
+      "name": "surface/primary",
+      "path": "surface/primary",
+      "tokenName": "surface/primary",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Main page/app background",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5021",
+          "name": "Gray/0"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7238",
+          "name": "Charcoal/900"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5021",
+          "name": "Gray/0"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7238",
+          "name": "Charcoal/900"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5021"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7238"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5075",
+      "key": "fa9fd67eb81fd3a52e50f56ea589dcfbdf0c7d9d",
+      "name": "surface/sunken",
+      "path": "surface/sunken",
+      "tokenName": "surface/sunken",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Recessed/input background",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7229",
+          "name": "Charcoal/50"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7239",
+          "name": "Charcoal/950"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7229",
+          "name": "Charcoal/50"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7239",
+          "name": "Charcoal/950"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7229"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7239"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5078",
+      "key": "af5f1872cf99fd4071492a9691ee26bd29e48292",
+      "name": "text/primary",
+      "path": "text/primary",
+      "tokenName": "text/primary",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "TEXT_FILL"
+      ],
+      "description": "Main body text — AAA contrast",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5031",
+          "name": "Gray/900"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5022",
+          "name": "Gray/50"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5031",
+          "name": "Gray/900"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5022",
+          "name": "Gray/50"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5031"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5022"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5080",
+      "key": "2820094b8dc5b0580a65c4f3713dccfd3db9eecb",
+      "name": "text/disabled",
+      "path": "text/disabled",
+      "tokenName": "text/disabled",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "TEXT_FILL"
+      ],
+      "description": "Disabled state text",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:3791:34835",
+          "name": "Black/Alpha/30"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40041",
+          "name": "White/Alpha/30"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:3791:34835",
+          "name": "Black/Alpha/30"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40041",
+          "name": "White/Alpha/30"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:3791:34835"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40041"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5095",
+      "key": "fbdf8e2291ada9446c795a82dc00d1f5cf212258",
+      "name": "border/low",
+      "path": "border/low",
+      "tokenName": "border/low",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Default border. Opacity-based: adapts to any surface. Light: Black/Alpha/15, Dark: White/Alpha/15.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40039",
+          "name": "Black/Alpha/15"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40040",
+          "name": "White/Alpha/15"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40039",
+          "name": "Black/Alpha/15"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40040",
+          "name": "White/Alpha/15"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40039"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40040"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5096",
+      "key": "35366414f1ba0f01834d625cd44cac5d6f2c532e",
+      "name": "border/strong",
+      "path": "border/strong",
+      "tokenName": "border/strong",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Emphasized border",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5067",
+          "name": "Black/Alpha/40"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5070",
+          "name": "White/Alpha/40"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5067",
+          "name": "Black/Alpha/40"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5070",
+          "name": "White/Alpha/40"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5067"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5070"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5098",
+      "key": "6959ccde439619bd7f544cf4b3733292f62f8f3c",
+      "name": "border/error",
+      "path": "border/error",
+      "tokenName": "border/error",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Error state border",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5050",
+          "name": "Red/600"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5048",
+          "name": "Red/400"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5050",
+          "name": "Red/600"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5048",
+          "name": "Red/400"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5050"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5048"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:5105",
+      "key": "830405d49d4dce1c86cffca23a8375049ff430a7",
+      "name": "status/error/icon",
+      "path": "status/error/icon",
+      "tokenName": "status/error/icon",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Error state icon",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5050",
+          "name": "Red/600"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5048",
+          "name": "Red/400"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5050",
+          "name": "Red/600"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5048",
+          "name": "Red/400"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5050"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5048"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7195",
+      "key": "896cc91e92bdf3cf276f6940c8076ba3a87259a0",
+      "name": "icon/default",
+      "path": "icon/default",
+      "tokenName": "icon/default",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Default icon colour",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5031",
+          "name": "Gray/900"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5022",
+          "name": "Gray/50"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5031",
+          "name": "Gray/900"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5022",
+          "name": "Gray/50"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5031"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5022"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7196",
+      "key": "ad09dc3d3816b22a796bde92b6bbd7a5df0bf702",
+      "name": "icon/muted",
+      "path": "icon/muted",
+      "tokenName": "icon/muted",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Decorative/secondary icon colour. Below WCAG AA — intentional for visual hierarchy. DO NOT use for interactive, informational, or standalone icons. Pair with a visible label or use icon/default instead. Alpha-based to match text/disabled and stay consistent across surfaces.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:3791:34835",
+          "name": "Black/Alpha/30"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40041",
+          "name": "White/Alpha/30"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:3791:34835",
+          "name": "Black/Alpha/30"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40041",
+          "name": "White/Alpha/30"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:3791:34835"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2973:40041"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7197",
+      "key": "16a0c7bfc71f1a31e9c841edf40bffb36086ec37",
+      "name": "icon/brand",
+      "path": "icon/brand",
+      "tokenName": "icon/brand",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Brand-coloured icon",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7246",
+          "name": "Primary/Core"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7245",
+          "name": "Primary/Dark"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7246",
+          "name": "Primary/Core"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7245",
+          "name": "Primary/Dark"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7246"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7245"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7199",
+      "key": "cc8676806fce67c6885ddc87caf28c6375fd9ddf",
+      "name": "icon/disabled",
+      "path": "icon/disabled",
+      "tokenName": "icon/disabled",
+      "collectionId": "VariableCollectionId:1358:5072",
+      "variableCollectionId": "VariableCollectionId:1358:5072",
+      "collectionName": "Semantic",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Disabled icon",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Light": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5025",
+          "name": "Gray/300"
+        },
+        "Dark": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5029",
+          "name": "Gray/700"
+        }
+      },
+      "valuesByModeId": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5025",
+          "name": "Gray/300"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5029",
+          "name": "Gray/700"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5025"
+        },
+        "1358:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5029"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7229",
+      "key": "c96ca6015957f833d55ea562dc16f890f5141483",
+      "name": "Charcoal/50",
+      "path": "Charcoal/50",
+      "tokenName": "Charcoal/50",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#f5f5f5"
+      },
+      "valuesByModeId": {
+        "1358:0": "#f5f5f5"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.9607843160629272,
+          "g": 0.9607843160629272,
+          "b": 0.9607843160629272,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7238",
+      "key": "c6109da95ef2be96d4aaf7ea8ce260f0348a6cef",
+      "name": "Charcoal/900",
+      "path": "Charcoal/900",
+      "tokenName": "Charcoal/900",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#0f0f0f"
+      },
+      "valuesByModeId": {
+        "1358:0": "#0f0f0f"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.05882352963089943,
+          "g": 0.05882352963089943,
+          "b": 0.05882352963089943,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7239",
+      "key": "9c68576a6e07f75dd57e4639b4897812965898a3",
+      "name": "Charcoal/950",
+      "path": "Charcoal/950",
+      "tokenName": "Charcoal/950",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#050505"
+      },
+      "valuesByModeId": {
+        "1358:0": "#050505"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0.019607843831181526,
+          "g": 0.019607843831181526,
+          "b": 0.019607843831181526,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7245",
+      "key": "46fb658af8897ec20bab299759cf7189527aa6e4",
+      "name": "Primary/Dark",
+      "path": "Primary/Dark",
+      "tokenName": "Primary/Dark",
+      "collectionId": "VariableCollectionId:1358:7240",
+      "variableCollectionId": "VariableCollectionId:1358:7240",
+      "collectionName": "Brand",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "Brand primary scale step 400 — aliases to the active brand hue",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Marwes (Blue)": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5014",
+          "name": "Blue/400"
+        }
+      },
+      "valuesByModeId": {
+        "1358:13": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5014",
+          "name": "Blue/400"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:13": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5014"
+        }
+      }
+    },
+    {
+      "id": "VariableID:1358:7246",
+      "key": "61d1692c9bc952573a16c7c48d403d29e1ec7356",
+      "name": "Primary/Core",
+      "path": "Primary/Core",
+      "tokenName": "Primary/Core",
+      "collectionId": "VariableCollectionId:1358:7240",
+      "variableCollectionId": "VariableCollectionId:1358:7240",
+      "collectionName": "Brand",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "Brand primary scale step 500 — aliases to the active brand hue",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Marwes (Blue)": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5015",
+          "name": "Blue/500"
+        }
+      },
+      "valuesByModeId": {
+        "1358:13": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5015",
+          "name": "Blue/500"
+        }
+      },
+      "rawValuesByMode": {
+        "1358:13": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5015"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2276:28229",
+      "key": "9076df364303fe27c4ec1d9176c39a6b8b6f8bbb",
+      "name": "input/surface",
+      "path": "input/surface",
+      "tokenName": "input/surface",
+      "collectionId": "VariableCollectionId:2276:28206",
+      "variableCollectionId": "VariableCollectionId:2276:28206",
+      "collectionName": "Component tokens – States",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Input field background. White by default, sunken/grey when disabled.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        },
+        "Hover": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        },
+        "Pressed": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        },
+        "Disabled": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5075",
+          "name": "surface/sunken"
+        },
+        "Error": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        }
+      },
+      "valuesByModeId": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5075",
+          "name": "surface/sunken"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073",
+          "name": "surface/primary"
+        }
+      },
+      "rawValuesByMode": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5075"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5073"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2276:28230",
+      "key": "b08e7e202de13040378ed428e88cf8d8bb467313",
+      "name": "input/border",
+      "path": "input/border",
+      "tokenName": "input/border",
+      "collectionId": "VariableCollectionId:2276:28206",
+      "variableCollectionId": "VariableCollectionId:2276:28206",
+      "collectionName": "Component tokens – States",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "description": "Input border. Thickens and colour-shifts on hover, focus, and error.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095",
+          "name": "border/low"
+        },
+        "Hover": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5096",
+          "name": "border/strong"
+        },
+        "Pressed": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095",
+          "name": "border/low"
+        },
+        "Disabled": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095",
+          "name": "border/low"
+        },
+        "Error": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5098",
+          "name": "border/error"
+        }
+      },
+      "valuesByModeId": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095",
+          "name": "border/low"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5096",
+          "name": "border/strong"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095",
+          "name": "border/low"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095",
+          "name": "border/low"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5098",
+          "name": "border/error"
+        }
+      },
+      "rawValuesByMode": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5096"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5095"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5098"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2276:28232",
+      "key": "0af43136c85172a8137bb6bfb9d855d32fd1540e",
+      "name": "input/value",
+      "path": "input/value",
+      "tokenName": "input/value",
+      "collectionId": "VariableCollectionId:2276:28206",
+      "variableCollectionId": "VariableCollectionId:2276:28206",
+      "collectionName": "Component tokens – States",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "TEXT_FILL"
+      ],
+      "description": "Input entered value text colour.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        },
+        "Hover": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        },
+        "Pressed": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        },
+        "Disabled": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5080",
+          "name": "text/disabled"
+        },
+        "Error": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        }
+      },
+      "valuesByModeId": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5080",
+          "name": "text/disabled"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078",
+          "name": "text/primary"
+        }
+      },
+      "rawValuesByMode": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5080"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5078"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2276:28236",
+      "key": "744490aa27b218e12f925dbc4dbfac6cc783e508",
+      "name": "input/icon-trailing",
+      "path": "input/icon-trailing",
+      "tokenName": "input/icon-trailing",
+      "collectionId": "VariableCollectionId:2276:28206",
+      "variableCollectionId": "VariableCollectionId:2276:28206",
+      "collectionName": "Component tokens – States",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "Trailing icon inside input (clear, reveal password, etc). Muted by default.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196",
+          "name": "icon/muted"
+        },
+        "Hover": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7195",
+          "name": "icon/default"
+        },
+        "Pressed": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196",
+          "name": "icon/muted"
+        },
+        "Disabled": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7199",
+          "name": "icon/disabled"
+        },
+        "Error": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5105",
+          "name": "status/error/icon"
+        }
+      },
+      "valuesByModeId": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196",
+          "name": "icon/muted"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7195",
+          "name": "icon/default"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196",
+          "name": "icon/muted"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7199",
+          "name": "icon/disabled"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5105",
+          "name": "status/error/icon"
+        }
+      },
+      "rawValuesByMode": {
+        "2276:15": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196"
+        },
+        "2276:16": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7195"
+        },
+        "2276:17": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196"
+        },
+        "2276:18": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7199"
+        },
+        "2276:20": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5105"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2973:40039",
+      "key": "a013ce738107a14b38a275d5bd63346437ece33a",
+      "name": "Black/Alpha/15",
+      "path": "Black/Alpha/15",
+      "tokenName": "Black/Alpha/15",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "Black at 15% opacity. Use for border/default opacity equivalent on light surfaces.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#00000026"
+      },
+      "valuesByModeId": {
+        "1358:0": "#00000026"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.15000000596046448
+        }
+      }
+    },
+    {
+      "id": "VariableID:2973:40040",
+      "key": "46bff7aac1853e6792001f4a97ff887dbd86f055",
+      "name": "White/Alpha/15",
+      "path": "White/Alpha/15",
+      "tokenName": "White/Alpha/15",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "White at 15% opacity. Use for border/default opacity equivalent on dark surfaces.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff26"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff26"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 0.15000000596046448
+        }
+      }
+    },
+    {
+      "id": "VariableID:2973:40041",
+      "key": "f94e952149fcf6b1d83a05a17bcfc23db572e5bd",
+      "name": "White/Alpha/30",
+      "path": "White/Alpha/30",
+      "tokenName": "White/Alpha/30",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "description": "White at 25% opacity. Use for border/medium opacity equivalent on dark surfaces.",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#ffffff4d"
+      },
+      "valuesByModeId": {
+        "1358:0": "#ffffff4d"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 0.30000001192092896
+        }
+      }
+    },
+    {
+      "id": "VariableID:3791:34835",
+      "key": "4bca69d14a47707bf59aac5ba86ae51beeb01934",
+      "name": "Black/Alpha/30",
+      "path": "Black/Alpha/30",
+      "tokenName": "Black/Alpha/30",
+      "collectionId": "VariableCollectionId:1358:5009",
+      "variableCollectionId": "VariableCollectionId:1358:5009",
+      "collectionName": "Primitives",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Brand colours": "#0000004d"
+      },
+      "valuesByModeId": {
+        "1358:0": "#0000004d"
+      },
+      "rawValuesByMode": {
+        "1358:0": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 0.30000001192092896
+        }
+      }
+    },
+    {
+      "id": "VariableID:44fd5903887a0236fee243c6d799d2c51b05a3f6/1344:455",
+      "key": "44fd5903887a0236fee243c6d799d2c51b05a3f6",
+      "name": "font/family/Body",
+      "path": "font/family/Body",
+      "tokenName": "font/family/Body",
+      "collectionId": "VariableCollectionId:e7744dccf99067425b72f680ad5c2431d892e7e1/1344:451",
+      "variableCollectionId": "VariableCollectionId:e7744dccf99067425b72f680ad5c2431d892e7e1/1344:451",
+      "collectionName": "Typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "hiddenFromPublishing": true,
+      "valuesByMode": {
+        "Tablet": "Instrument Sans"
+      },
+      "valuesByModeId": {
+        "1344:1": "Instrument Sans"
+      },
+      "rawValuesByMode": {
+        "1344:1": "Instrument Sans"
+      }
+    },
+    {
+      "id": "VariableID:58c4b05b2d61f7b068c7eb168bc25d0c778121a5/1344:475",
+      "key": "58c4b05b2d61f7b068c7eb168bc25d0c778121a5",
+      "name": "font/weight/Medium",
+      "path": "font/weight/Medium",
+      "tokenName": "font/weight/Medium",
+      "collectionId": "VariableCollectionId:e7744dccf99067425b72f680ad5c2431d892e7e1/1344:451",
+      "variableCollectionId": "VariableCollectionId:e7744dccf99067425b72f680ad5c2431d892e7e1/1344:451",
+      "collectionName": "Typography",
+      "resolvedType": "STRING",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "hiddenFromPublishing": true,
+      "valuesByMode": {
+        "Tablet": "Medium"
+      },
+      "valuesByModeId": {
+        "1344:1": "Medium"
+      },
+      "rawValuesByMode": {
+        "1344:1": "Medium"
+      }
+    },
+    {
+      "id": "VariableID:1364:2572",
+      "key": "790d4cc55f0ae5c6cd3674347a486461de59c344",
+      "name": "input/icon-trailing",
+      "path": "input/icon-trailing",
+      "tokenName": "input/icon-trailing",
+      "collectionId": "VariableCollectionId:1364:2564",
+      "variableCollectionId": "VariableCollectionId:1364:2564",
+      "collectionName": "Input field states",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "ALL_SCOPES"
+      ],
+      "description": "",
+      "hiddenFromPublishing": false,
+      "valuesByMode": {
+        "Default": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196",
+          "name": "icon/muted"
+        },
+        "Hover": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7195",
+          "name": "icon/default"
+        },
+        "Active": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7197",
+          "name": "icon/brand"
+        },
+        "Disabled": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7199",
+          "name": "icon/disabled"
+        },
+        "Focus": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7197",
+          "name": "icon/brand"
+        },
+        "Error": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5105",
+          "name": "status/error/icon"
+        }
+      },
+      "valuesByModeId": {
+        "1364:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196",
+          "name": "icon/muted"
+        },
+        "1364:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7195",
+          "name": "icon/default"
+        },
+        "1364:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7197",
+          "name": "icon/brand"
+        },
+        "1364:3": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7199",
+          "name": "icon/disabled"
+        },
+        "1364:4": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7197",
+          "name": "icon/brand"
+        },
+        "1364:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5105",
+          "name": "status/error/icon"
+        }
+      },
+      "rawValuesByMode": {
+        "1364:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7196"
+        },
+        "1364:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7195"
+        },
+        "1364:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7197"
+        },
+        "1364:3": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7199"
+        },
+        "1364:4": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:7197"
+        },
+        "1364:5": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:1358:5105"
+        }
+      }
+    }
+  ],
+  "collections": [
+    {
+      "id": "VariableCollectionId:5:895",
+      "key": "d4ce9d6ffdb10e9be32b15baaf9e8389fc3b4658",
+      "name": "Typography",
+      "defaultModeId": "5:4",
+      "modes": [
+        {
+          "id": "5:4",
+          "modeId": "5:4",
+          "name": "Default"
+        }
+      ],
+      "variableIds": [
+        "VariableID:5:897",
+        "VariableID:5:898",
+        "VariableID:5:899",
+        "VariableID:5:900",
+        "VariableID:5:901",
+        "VariableID:5:902",
+        "VariableID:5:903",
+        "VariableID:5:904",
+        "VariableID:5:905",
+        "VariableID:5:906",
+        "VariableID:5:907",
+        "VariableID:5:908",
+        "VariableID:5:909",
+        "VariableID:5:910",
+        "VariableID:5:911",
+        "VariableID:5:912",
+        "VariableID:5:913",
+        "VariableID:5:914",
+        "VariableID:5:915",
+        "VariableID:5:916",
+        "VariableID:5:917",
+        "VariableID:5:918",
+        "VariableID:5:919"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:5:924",
+      "key": "d95298da14dbd0e0cbe300f084dcbe13804c2e49",
+      "name": "Spacings",
+      "defaultModeId": "5:12",
+      "modes": [
+        {
+          "id": "5:12",
+          "modeId": "5:12",
+          "name": "Default"
+        }
+      ],
+      "variableIds": [
+        "VariableID:5:925",
+        "VariableID:5:926",
+        "VariableID:5:927",
+        "VariableID:2702:10036",
+        "VariableID:5:928",
+        "VariableID:5:929",
+        "VariableID:5:930",
+        "VariableID:5:931",
+        "VariableID:5:932",
+        "VariableID:5:933",
+        "VariableID:5:934",
+        "VariableID:5:935",
+        "VariableID:5:936",
+        "VariableID:5:937",
+        "VariableID:5:938"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:1358:5009",
+      "key": "d99b32bc754df64ba3ddf642db0a28c04b08744a",
+      "name": "Primitives",
+      "defaultModeId": "1358:0",
+      "modes": [
+        {
+          "id": "1358:0",
+          "modeId": "1358:0",
+          "name": "Brand colours"
+        }
+      ],
+      "variableIds": [
+        "VariableID:1358:5010",
+        "VariableID:1358:5011",
+        "VariableID:1358:5012",
+        "VariableID:1358:5013",
+        "VariableID:1358:5014",
+        "VariableID:1358:5015",
+        "VariableID:1358:5016",
+        "VariableID:1358:5017",
+        "VariableID:1358:5018",
+        "VariableID:1358:5019",
+        "VariableID:1358:5020",
+        "VariableID:1358:5021",
+        "VariableID:1358:5022",
+        "VariableID:1358:5023",
+        "VariableID:1358:5024",
+        "VariableID:1358:5025",
+        "VariableID:1366:12673",
+        "VariableID:1358:5026",
+        "VariableID:1358:5027",
+        "VariableID:1358:5028",
+        "VariableID:1358:5029",
+        "VariableID:1358:5030",
+        "VariableID:1358:5031",
+        "VariableID:1358:5032",
+        "VariableID:1358:5033",
+        "VariableID:1358:5034",
+        "VariableID:1358:5035",
+        "VariableID:1358:5036",
+        "VariableID:1358:5037",
+        "VariableID:1358:5038",
+        "VariableID:1358:5039",
+        "VariableID:1358:5040",
+        "VariableID:1358:5041",
+        "VariableID:1358:5042",
+        "VariableID:1358:5043",
+        "VariableID:1358:5044",
+        "VariableID:1358:5045",
+        "VariableID:1358:5046",
+        "VariableID:1358:5047",
+        "VariableID:1358:5048",
+        "VariableID:1358:5049",
+        "VariableID:1358:5050",
+        "VariableID:1358:5051",
+        "VariableID:1358:5052",
+        "VariableID:1358:5053",
+        "VariableID:1358:5054",
+        "VariableID:1358:5055",
+        "VariableID:1358:5056",
+        "VariableID:1358:5057",
+        "VariableID:1358:5058",
+        "VariableID:1358:5059",
+        "VariableID:1358:5060",
+        "VariableID:1366:12674",
+        "VariableID:1358:5061",
+        "VariableID:1358:5062",
+        "VariableID:1358:5063",
+        "VariableID:1358:5064",
+        "VariableID:1358:5065",
+        "VariableID:1364:2553",
+        "VariableID:1364:2552",
+        "VariableID:1358:5066",
+        "VariableID:1358:5067",
+        "VariableID:1358:7218",
+        "VariableID:1358:7219",
+        "VariableID:1358:7220",
+        "VariableID:1358:7221",
+        "VariableID:1358:7222",
+        "VariableID:1358:7223",
+        "VariableID:1358:7224",
+        "VariableID:1358:7225",
+        "VariableID:1358:7226",
+        "VariableID:1358:7227",
+        "VariableID:1358:7228",
+        "VariableID:1358:7229",
+        "VariableID:1358:7230",
+        "VariableID:1358:7231",
+        "VariableID:1358:7232",
+        "VariableID:1358:7233",
+        "VariableID:1358:7234",
+        "VariableID:1358:7235",
+        "VariableID:1358:7236",
+        "VariableID:1358:7237",
+        "VariableID:1358:7238",
+        "VariableID:1358:7239",
+        "VariableID:1364:2557",
+        "VariableID:1364:2556",
+        "VariableID:1364:2558",
+        "VariableID:1358:5069",
+        "VariableID:1358:5070",
+        "VariableID:2873:23634",
+        "VariableID:2873:23635",
+        "VariableID:2873:29620",
+        "VariableID:2973:40041",
+        "VariableID:1358:5071",
+        "VariableID:2973:40040",
+        "VariableID:1364:2555",
+        "VariableID:1364:2554",
+        "VariableID:3008:35264",
+        "VariableID:3038:37629",
+        "VariableID:3038:37630",
+        "VariableID:3038:37631",
+        "VariableID:3038:37632",
+        "VariableID:3038:37633",
+        "VariableID:3038:37634",
+        "VariableID:3038:37635",
+        "VariableID:3038:37636",
+        "VariableID:3038:37637",
+        "VariableID:3038:37638",
+        "VariableID:3038:37639",
+        "VariableID:3038:37640",
+        "VariableID:3038:37641",
+        "VariableID:3038:37642",
+        "VariableID:3038:37643",
+        "VariableID:3038:37644",
+        "VariableID:3038:37645",
+        "VariableID:3038:37646",
+        "VariableID:3038:37647",
+        "VariableID:3038:37648",
+        "VariableID:3038:37649",
+        "VariableID:3038:37650",
+        "VariableID:3038:37651",
+        "VariableID:3038:37652",
+        "VariableID:3038:37653",
+        "VariableID:3038:37654",
+        "VariableID:3038:37655",
+        "VariableID:3038:37656",
+        "VariableID:3038:37657",
+        "VariableID:3038:37658",
+        "VariableID:3038:37659",
+        "VariableID:3038:37660",
+        "VariableID:3791:34835",
+        "VariableID:1358:5068",
+        "VariableID:2973:40039",
+        "VariableID:1364:2551",
+        "VariableID:1364:2550"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:1358:5072",
+      "key": "2b04736802e4abd4457049e93c59c15cf3c7785d",
+      "name": "Semantic",
+      "defaultModeId": "1358:1",
+      "modes": [
+        {
+          "id": "1358:1",
+          "modeId": "1358:1",
+          "name": "Light"
+        },
+        {
+          "id": "1358:2",
+          "modeId": "1358:2",
+          "name": "Dark"
+        }
+      ],
+      "variableIds": [
+        "VariableID:1358:5073",
+        "VariableID:1358:5074",
+        "VariableID:1358:5075",
+        "VariableID:1358:5076",
+        "VariableID:1358:5077",
+        "VariableID:1358:5078",
+        "VariableID:1358:5079",
+        "VariableID:1358:5080",
+        "VariableID:1358:5082",
+        "VariableID:3872:693",
+        "VariableID:1358:5081",
+        "VariableID:1358:5083",
+        "VariableID:1358:5084",
+        "VariableID:1358:7195",
+        "VariableID:1358:7196",
+        "VariableID:1358:7197",
+        "VariableID:2015:6467",
+        "VariableID:1358:5096",
+        "VariableID:1358:7199",
+        "VariableID:3872:38045",
+        "VariableID:1366:12675",
+        "VariableID:3872:690",
+        "VariableID:1358:7198",
+        "VariableID:1358:5095",
+        "VariableID:3872:41008",
+        "VariableID:2973:32379",
+        "VariableID:1358:5097",
+        "VariableID:1358:5098",
+        "VariableID:1358:7191",
+        "VariableID:1358:7192",
+        "VariableID:1358:7193",
+        "VariableID:1358:7194",
+        "VariableID:2973:35488",
+        "VariableID:1358:5099",
+        "VariableID:1358:5107",
+        "VariableID:1358:5108",
+        "VariableID:1358:5109",
+        "VariableID:1358:5110",
+        "VariableID:1366:12677",
+        "VariableID:1358:5100",
+        "VariableID:1358:5101",
+        "VariableID:1358:5102",
+        "VariableID:1358:5103",
+        "VariableID:1358:5104",
+        "VariableID:1358:5105",
+        "VariableID:1358:5106",
+        "VariableID:1358:7189",
+        "VariableID:1358:7190",
+        "VariableID:2459:36740",
+        "VariableID:2459:36736",
+        "VariableID:1364:360",
+        "VariableID:1364:359",
+        "VariableID:1364:361",
+        "VariableID:1358:7187",
+        "VariableID:1358:7188",
+        "VariableID:1364:362",
+        "VariableID:1921:33741",
+        "VariableID:2459:36737",
+        "VariableID:2973:35489",
+        "VariableID:2973:35564",
+        "VariableID:3038:40942",
+        "VariableID:3038:40943",
+        "VariableID:3038:40944",
+        "VariableID:3038:40945",
+        "VariableID:3038:40946",
+        "VariableID:3794:38994",
+        "VariableID:3794:38995",
+        "VariableID:3794:38996",
+        "VariableID:3865:27529",
+        "VariableID:3865:27530",
+        "VariableID:3865:27531",
+        "VariableID:3865:27532",
+        "VariableID:3865:27533",
+        "VariableID:3865:27534",
+        "VariableID:3865:27535",
+        "VariableID:3865:27536",
+        "VariableID:3865:28207",
+        "VariableID:3865:28208",
+        "VariableID:3865:28211",
+        "VariableID:3865:28209",
+        "VariableID:3865:28210",
+        "VariableID:3865:28212",
+        "VariableID:3865:28214",
+        "VariableID:3865:28215",
+        "VariableID:3865:28216",
+        "VariableID:3865:28217",
+        "VariableID:3872:42551",
+        "VariableID:3872:42552"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:1358:7240",
+      "key": "c9e168881f0d5495336d829f29acf348084be276",
+      "name": "Brand",
+      "defaultModeId": "1358:13",
+      "modes": [
+        {
+          "id": "1358:13",
+          "modeId": "1358:13",
+          "name": "Marwes (Blue)"
+        }
+      ],
+      "variableIds": [
+        "VariableID:1358:7241",
+        "VariableID:1358:7242",
+        "VariableID:1358:7243",
+        "VariableID:1358:7244",
+        "VariableID:1358:7245",
+        "VariableID:1358:7246",
+        "VariableID:3008:32930",
+        "VariableID:3821:25909",
+        "VariableID:3821:25910",
+        "VariableID:3821:25911",
+        "VariableID:3821:25912"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:2276:28206",
+      "key": "5197050bb24ebc718ab2c27f3baa6f2d57dc055e",
+      "name": "Component tokens – States",
+      "defaultModeId": "2276:15",
+      "modes": [
+        {
+          "id": "2276:15",
+          "modeId": "2276:15",
+          "name": "Default"
+        },
+        {
+          "id": "2276:16",
+          "modeId": "2276:16",
+          "name": "Hover"
+        },
+        {
+          "id": "2276:17",
+          "modeId": "2276:17",
+          "name": "Pressed"
+        },
+        {
+          "id": "2276:18",
+          "modeId": "2276:18",
+          "name": "Disabled"
+        },
+        {
+          "id": "2276:20",
+          "modeId": "2276:20",
+          "name": "Error"
+        }
+      ],
+      "variableIds": [
+        "VariableID:2276:28252",
+        "VariableID:2276:28253",
+        "VariableID:2276:28254",
+        "VariableID:2276:28255",
+        "VariableID:2276:28256",
+        "VariableID:2276:28215",
+        "VariableID:2276:28264",
+        "VariableID:2276:28265",
+        "VariableID:2276:28266",
+        "VariableID:2276:28267",
+        "VariableID:2276:28216",
+        "VariableID:2276:28217",
+        "VariableID:3791:34834",
+        "VariableID:2276:28218",
+        "VariableID:2276:28219",
+        "VariableID:2276:28220",
+        "VariableID:2276:28221",
+        "VariableID:2276:28223",
+        "VariableID:3870:5571",
+        "VariableID:3870:5572",
+        "VariableID:3870:5573",
+        "VariableID:2276:28224",
+        "VariableID:3865:28213",
+        "VariableID:2276:28225",
+        "VariableID:2276:28226",
+        "VariableID:2276:28227",
+        "VariableID:2276:28228",
+        "VariableID:2276:28209",
+        "VariableID:2276:28210",
+        "VariableID:2276:28211",
+        "VariableID:2276:28212",
+        "VariableID:2276:28213",
+        "VariableID:2276:28214",
+        "VariableID:2276:28268",
+        "VariableID:2276:28269",
+        "VariableID:2276:28270",
+        "VariableID:2276:28271",
+        "VariableID:2276:28272",
+        "VariableID:2276:28273",
+        "VariableID:2276:28274",
+        "VariableID:2276:28275",
+        "VariableID:2513:32063",
+        "VariableID:2513:32064",
+        "VariableID:2276:28229",
+        "VariableID:2276:28276",
+        "VariableID:2276:28277",
+        "VariableID:2276:28278",
+        "VariableID:2276:28279",
+        "VariableID:2276:28280",
+        "VariableID:2276:28281",
+        "VariableID:2276:28230",
+        "VariableID:2276:28231",
+        "VariableID:2276:28232",
+        "VariableID:2276:28233",
+        "VariableID:2276:28234",
+        "VariableID:2276:28235",
+        "VariableID:2276:28236",
+        "VariableID:2276:28282",
+        "VariableID:2276:28283",
+        "VariableID:2276:28284",
+        "VariableID:2276:28285",
+        "VariableID:2276:28286",
+        "VariableID:2276:28237",
+        "VariableID:2276:28238",
+        "VariableID:2276:28239",
+        "VariableID:2276:28240",
+        "VariableID:2276:28241",
+        "VariableID:2276:28257",
+        "VariableID:2276:28247",
+        "VariableID:2276:28248",
+        "VariableID:2276:28249",
+        "VariableID:2276:28250",
+        "VariableID:2276:28251",
+        "VariableID:2276:28258",
+        "VariableID:2276:28259",
+        "VariableID:2276:28260",
+        "VariableID:2276:28261",
+        "VariableID:2276:28262",
+        "VariableID:2276:28263",
+        "VariableID:2696:26072",
+        "VariableID:2276:28242",
+        "VariableID:2276:28243",
+        "VariableID:2276:28244",
+        "VariableID:2276:28245",
+        "VariableID:2276:28246",
+        "VariableID:2696:26073",
+        "VariableID:2696:26074",
+        "VariableID:2696:26075",
+        "VariableID:2696:26078",
+        "VariableID:2696:26079",
+        "VariableID:2696:26080",
+        "VariableID:2696:26081",
+        "VariableID:2702:29002",
+        "VariableID:2702:29003",
+        "VariableID:2702:29004",
+        "VariableID:2702:29005",
+        "VariableID:2702:29006",
+        "VariableID:2702:29007",
+        "VariableID:2702:29008",
+        "VariableID:2702:29009",
+        "VariableID:3861:42736",
+        "VariableID:3872:42553",
+        "VariableID:3872:42554",
+        "VariableID:3872:42555",
+        "VariableID:3872:42556",
+        "VariableID:3872:42557",
+        "VariableID:3872:42558",
+        "VariableID:3872:42559",
+        "VariableID:3872:42560"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:e7744dccf99067425b72f680ad5c2431d892e7e1/1344:451",
+      "key": "e7744dccf99067425b72f680ad5c2431d892e7e1",
+      "name": "Typography",
+      "defaultModeId": "1344:1",
+      "modes": [
+        {
+          "id": "1344:1",
+          "modeId": "1344:1",
+          "name": "Tablet"
+        }
+      ],
+      "variableIds": [
+        "VariableID:50e20cdc2c50d1f9e9ae4cd21184d283b4e6145e/1344:454",
+        "VariableID:44fd5903887a0236fee243c6d799d2c51b05a3f6/1344:455",
+        "VariableID:ea4e2cd4a1820b57e4f6b42acdc3254e7dc18711/1344:456",
+        "VariableID:790d1d005b5c15ee634363ac76845350934065fd/1344:457",
+        "VariableID:18ab8479250be6e9deb54f13832747fc155872ee/1344:458",
+        "VariableID:6ea04431e11f990a3ebe75c04161839ae98917c6/1344:459",
+        "VariableID:cc15b5b4d113248041e123693cc304e7e65ea3e2/1344:460",
+        "VariableID:75537c4a188084a8d4c9ff9fd5f10f2f89f7688f/1344:463",
+        "VariableID:43841e0c6b774ab8c194cc451150ea996aa85741/1344:466",
+        "VariableID:58c4b05b2d61f7b068c7eb168bc25d0c778121a5/1344:475"
+      ]
+    },
+    {
+      "id": "VariableCollectionId:1364:2564",
+      "key": "a750bb29f0be505aa8e09924a02048f4453a490f",
+      "name": "Input field states",
+      "defaultModeId": "1364:0",
+      "modes": [
+        {
+          "id": "1364:0",
+          "modeId": "1364:0",
+          "name": "Default"
+        },
+        {
+          "id": "1364:1",
+          "modeId": "1364:1",
+          "name": "Hover"
+        },
+        {
+          "id": "1364:2",
+          "modeId": "1364:2",
+          "name": "Active"
+        },
+        {
+          "id": "1364:3",
+          "modeId": "1364:3",
+          "name": "Disabled"
+        },
+        {
+          "id": "1364:4",
+          "modeId": "1364:4",
+          "name": "Focus"
+        },
+        {
+          "id": "1364:5",
+          "modeId": "1364:5",
+          "name": "Error"
+        }
+      ],
+      "variableIds": []
+    }
+  ],
+  "components": {
+    "1364:7707": {
+      "key": "fd9d12ae8bf6120a0b34258160283625592c9b1e",
+      "name": "Select",
+      "description": "Text input. States: default, hover, active, focus, disabled, error. Supports label, hint, and leading/trailing icons.",
+      "remote": false,
+      "documentationLinks": []
+    },
+    "1:461": {
+      "key": "a3e6b290ea8700daf7e3e86d822ffebbcb491414",
+      "name": "Style=chevron-down, Size=16px",
+      "description": "",
+      "remote": false,
+      "componentSetId": "1:310",
+      "documentationLinks": []
+    }
+  },
+  "styles": {
+    "1368:5654": {
+      "key": "d738f6a05692c2c43766dbc2ad8c7e65579cd04b",
+      "name": "Label/Default",
+      "styleType": "TEXT",
+      "remote": false,
+      "description": "Buttons, form labels, navigation items, UI controls"
+    }
+  },
+  "missingDependencies": [
+    "node:1:461"
+  ],
+  "missingOptionalFrames": [
+    "5070:45341",
+    "5070:45347"
+  ],
+  "variantInventory": []
+}

@@ -3,12 +3,12 @@
   "family": "segmented-control",
   "baselineRoot": "packages/design-governance/reflection-families/segmented-control/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "segmented-control.three-segments",
       "mode": "light",
-      "figmaNodeId": "5056:44333",
+      "figmaNodeId": "6007:14494",
       "figmaFrameName": "reflection/segmented-control/three-segments/light",
       "exportScale": 1,
       "viewport": "segmented-control-three-segments",
@@ -64,7 +64,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1571:19406",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1571-19406",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1571-19406",
         "outputFrameName": "reflection/segmented-control/three-segments/light",
         "selector": {
           "strategy": "rowChild",
@@ -83,7 +83,7 @@
     {
       "caseId": "segmented-control.three-segments",
       "mode": "dark",
-      "figmaNodeId": "5056:44352",
+      "figmaNodeId": "6007:14510",
       "figmaFrameName": "reflection/segmented-control/three-segments/dark",
       "exportScale": 1,
       "viewport": "segmented-control-three-segments",
@@ -139,7 +139,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "2702:10336",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=2702-10336",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=2702-10336",
         "outputFrameName": "reflection/segmented-control/three-segments/dark",
         "selector": {
           "strategy": "rowChild",

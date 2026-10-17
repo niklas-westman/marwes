@@ -1,0 +1,9 @@
+# Captured or generated data. GitHub collapses these in pull request diffs and excludes them
+# from language statistics; review the code, not the capture.
+packages/design-governance/reflection-families/*/source/*.json linguist-generated=true
+packages/design-governance/reflection-families/*/baselines/* linguist-generated=true
+packages/design-governance/reflection-families/*/reflection-contract.json linguist-generated=true
+packages/design-governance/src/source/fixtures/legacy-button-png/** linguist-generated=true
+docs/registry/families/*/registry.generated.json linguist-generated=true
+artifacts/component-registry.json linguist-generated=true
+apps/dashboard-teaser/public/ai/v1/*.json linguist-generated=true

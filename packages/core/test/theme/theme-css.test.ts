@@ -430,8 +430,8 @@ describe("themeToCSSVars — density vars", () => {
 })
 
 describe("themeToCSSVars — total key count", () => {
-  it("emits exactly 149 CSS variables", () => {
-    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(149)
+  it("emits exactly 152 CSS variables including foundation paints and the medium border role", () => {
+    expect(Object.keys(themeToCSSVars(fixture)).length).toBe(152)
   })
 
   it("does not emit --mw-ui-density as a string var", () => {

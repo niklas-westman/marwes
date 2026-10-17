@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "fileKey": "nybMu3iJUnnOvWtuxjMG8b",
+    "captureDate": "2026-10-14",
+    "version": "2410234809276115335",
+    "lastModified": "2026-10-14T15:02:45Z",
+    "hashes": {
+      "raw": "e48c5db2a83f625cf98a1cca3980502c53802bba5b2250032ad4bdf879e34990",
+      "manifest": "eeaea34f958caac5e88771926df7fb522b088bfdc9df786426a87a13fdb9db92",
+      "variables": "3ee272e36529c1dfdc50f738e9cb7084340c04121bcddd78d30d7f949d96fd40"
+    },
+    "authority": "Pinned capture target; active compact snapshots and references require separately approved promotion."
+  },
+  "families": [
+    {
+      "family": "accordion",
+      "validationGroups": ["accordion"]
+    },
+    {
+      "family": "avatar",
+      "validationGroups": ["avatar"]
+    },
+    {
+      "family": "badge",
+      "validationGroups": ["badge"]
+    },
+    {
+      "family": "banner",
+      "validationGroups": ["banner"]
+    },
+    {
+      "family": "breadcrumb",
+      "validationGroups": ["breadcrumb"]
+    },
+    {
+      "family": "button",
+      "validationGroups": ["button"]
+    },
+    {
+      "family": "card",
+      "validationGroups": ["card"]
+    },
+    {
+      "family": "checkbox",
+      "validationGroups": ["checkbox"]
+    },
+    {
+      "family": "context-menu",
+      "validationGroups": ["context-menu"]
+    },
+    {
+      "family": "date-picker",
+      "validationGroups": ["date-picker"]
+    },
+    {
+      "family": "dialog",
+      "validationGroups": ["dialog"]
+    },
+    {
+      "family": "divider",
+      "validationGroups": ["divider"]
+    },
+    {
+      "family": "drawer",
+      "validationGroups": ["drawer"]
+    },
+    {
+      "family": "heading",
+      "validationGroups": ["heading"]
+    },
+    {
+      "family": "icon",
+      "validationGroups": ["icon"]
+    },
+    {
+      "family": "input",
+      "validationGroups": [
+        "input-fields",
+        "input-otp",
+        "input-types-overview",
+        "select",
+        "textarea"
+      ]
+    },
+    {
+      "family": "pagination",
+      "validationGroups": ["pagination"]
+    },
+    {
+      "family": "paragraph",
+      "validationGroups": ["paragraph"]
+    },
+    {
+      "family": "progress-bar",
+      "validationGroups": ["progress-bar"]
+    },
+    {
+      "family": "radio",
+      "validationGroups": ["radio"]
+    },
+    {
+      "family": "segmented-control",
+      "validationGroups": ["segmented-control"]
+    },
+    {
+      "family": "skeleton",
+      "validationGroups": ["skeleton"]
+    },
+    {
+      "family": "slider",
+      "validationGroups": ["slider"]
+    },
+    {
+      "family": "spacing",
+      "validationGroups": ["spacing"]
+    },
+    {
+      "family": "spinner",
+      "validationGroups": ["spinner"]
+    },
+    {
+      "family": "stack",
+      "validationGroups": ["stack"]
+    },
+    {
+      "family": "stat-tile",
+      "validationGroups": ["stat-tile"]
+    },
+    {
+      "family": "switch",
+      "validationGroups": ["switch"]
+    },
+    {
+      "family": "tab",
+      "validationGroups": ["tab"]
+    },
+    {
+      "family": "text",
+      "validationGroups": ["text"]
+    },
+    {
+      "family": "toast",
+      "validationGroups": ["toast"]
+    },
+    {
+      "family": "tooltip",
+      "validationGroups": ["tooltip"]
+    }
+  ]
+}

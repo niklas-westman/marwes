@@ -113,7 +113,7 @@
 
 .mw-theme--dark .mw-radio {
   --mw-radio-surface: var(--mw-color-surface-primary);
-  --mw-radio-border: var(--mw-color-border-subtle);
+  --mw-radio-border: var(--mw-color-border-low);
 }
 
 .mw-theme--dark .mw-radio:hover:not(:disabled) {
@@ -123,4 +123,9 @@
 .mw-theme--dark .mw-radio:disabled,
 .mw-theme--dark .mw-radio--disabled {
   opacity: 0.4;
+}
+
+.mw-radio:disabled,
+.mw-radio.mw-radio--disabled {
+  --mw-radio-border: var(--mw-color-border-medium);
 }

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "family": "textarea",
+  "fileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "snapshotSha256": "7ae17217a3ef130673d8a232120769f73fc1fada2c04a169265fb9a81292993f",
+  "hashes": {
+    "raw": "5693d3a00e466b5ee72cd654a2f35ad9391ee40faa627fbc3134d571e2da0c3f",
+    "manifest": "53ac3b15f5b1c239a20ebeb5d977347ba70f28ba5a9fddf9271cd800c45f167e",
+    "variables": "1d36b50927b018026e0484efadaf8ec1fe8d8820ef11581c19849f7d92ecad8e"
+  },
+  "capture": {
+    "version": "2364166174019930436",
+    "lastModified": "2026-06-12T11:55:29Z",
+    "provenance": "inherited-pinned-offline-capture; not a new Figma capture or approval"
+  }
+}

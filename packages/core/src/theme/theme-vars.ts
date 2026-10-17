@@ -50,6 +50,8 @@ function formatMaxBreakpoint(value: number): string {
  */
 export const mwThemeVarNames = {
   color: {
+    black: "--mw-color-black",
+    white: "--mw-color-white",
     primary: {
       base: "--mw-color-primary-base",
       hover: "--mw-color-primary-hover",
@@ -117,6 +119,7 @@ export const mwThemeVarNames = {
     textLink: "--mw-color-text-link",
     iconMuted: "--mw-color-icon-muted",
     borderLow: "--mw-color-border-low",
+    borderMedium: "--mw-color-border-medium",
     border: "--mw-color-border",
     borderSubtle: "--mw-color-border-subtle",
     borderStrong: "--mw-color-border-strong",
@@ -290,6 +293,8 @@ export const mwThemeVarNames = {
  */
 export const mwThemeVars = {
   color: {
+    black: "var(--mw-color-black)",
+    white: "var(--mw-color-white)",
     primary: {
       base: "var(--mw-color-primary-base)",
       hover: "var(--mw-color-primary-hover)",
@@ -357,6 +362,7 @@ export const mwThemeVars = {
     textLink: "var(--mw-color-text-link)",
     iconMuted: "var(--mw-color-icon-muted)",
     borderLow: "var(--mw-color-border-low)",
+    borderMedium: "var(--mw-color-border-medium)",
     border: "var(--mw-color-border)",
     borderSubtle: "var(--mw-color-border-subtle)",
     borderStrong: "var(--mw-color-border-strong)",

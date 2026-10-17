@@ -622,29 +622,34 @@ export const iconRegistry = {
       },
     ],
   },
+  // Figma 3870:26925: preserve the exported glyph geometry within its icon viewport.
   check: {
     viewBox: "0 0 24 24",
     nodes: [
       {
         tag: "polyline",
         attrs: {
+          transform: "translate(0 0.5)",
           points: "20 6 9 17 4 12",
         },
       },
     ],
   },
+  // Figma 3978:38823: preserve the exported glyph geometry within its icon viewport.
   checkCircle: {
     viewBox: "0 0 24 24",
     nodes: [
       {
         tag: "path",
         attrs: {
+          transform: "translate(12 12) scale(0.9545454545454546) translate(-12 -12)",
           d: "M22 11.08V12a10 10 0 1 1-5.93-9.14",
         },
       },
       {
         tag: "polyline",
         attrs: {
+          transform: "translate(12 12) scale(0.9545454545454546) translate(-12 -12)",
           points: "22 4 12 14.01 9 11.01",
         },
       },
@@ -1250,18 +1255,21 @@ export const iconRegistry = {
       },
     ],
   },
+  // Figma 3978:38840: preserve the exported glyph geometry within its icon viewport.
   edit: {
     viewBox: "0 0 24 24",
     nodes: [
       {
         tag: "path",
         attrs: {
+          transform: "translate(12 12) scale(0.9545454545454546) translate(-12 -12)",
           d: "M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34",
         },
       },
       {
         tag: "polygon",
         attrs: {
+          transform: "translate(12 12) scale(0.9545454545454546) translate(-12 -12)",
           points: "18 2 22 6 12 16 8 16 8 12 18 2",
         },
       },
@@ -3293,12 +3301,14 @@ export const iconRegistry = {
       },
     ],
   },
+  // Figma 3978:38920: preserve the exported glyph geometry within its icon viewport.
   search: {
     viewBox: "0 0 24 24",
     nodes: [
       {
         tag: "circle",
         attrs: {
+          transform: "translate(12 12) scale(1.05) translate(-12 -12)",
           cx: "11",
           cy: "11",
           r: "8",
@@ -3307,6 +3317,7 @@ export const iconRegistry = {
       {
         tag: "line",
         attrs: {
+          transform: "translate(12 12) scale(1.05) translate(-12 -12)",
           x1: "21",
           y1: "21",
           x2: "16.65",

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createButtonRecipe, toButtonHtmlAttributes } from "@marwes-ui/core";
+  import { createButtonRecipe, resolveButtonIcons, toButtonHtmlAttributes } from "@marwes-ui/core";
   import { cssVarsToStyle, mergeStyle } from "../../internal/css-vars.js";
   import { mergeClass } from "../../internal/merge-class.js";
   import Icon from "../icon/Icon.svelte";
@@ -15,6 +15,7 @@
   }: ButtonProps = $props();
 
   const kit = $derived(createButtonRecipe(options));
+  const icons = $derived(resolveButtonIcons(options));
   const htmlAttributes = $derived(toButtonHtmlAttributes(kit.a11y));
   const mergedClass = $derived(mergeClass(kit.className, className));
   const mergedStyle = $derived(mergeStyle(cssVarsToStyle(kit.vars), style));
@@ -35,8 +36,8 @@
 {#snippet buttonContent()}
   {#if kit.loading.isLoading}
     <ButtonSpinner variant={kit.loading.spinnerVariant} inverted={kit.loading.spinnerInverted} />
-  {:else if options.iconLeft}
-    <Icon name={options.iconLeft} size="xs" strokeWidth="sm" decorative />
+  {:else if icons.iconLeft}
+    <Icon name={icons.iconLeft} size="xs" strokeWidth="sm" decorative />
   {/if}
   {#if loadingLabelOverride !== undefined}
     {#if loadingLabelOverride}
@@ -47,8 +48,8 @@
       {@render children()}
     </span>
   {/if}
-  {#if !kit.loading.isLoading && options.iconRight}
-    <Icon name={options.iconRight} size="xs" strokeWidth="sm" decorative />
+  {#if !kit.loading.isLoading && icons.iconRight}
+    <Icon name={icons.iconRight} size="xs" strokeWidth="sm" decorative />
   {/if}
 {/snippet}
 

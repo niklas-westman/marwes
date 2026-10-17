@@ -3,12 +3,12 @@
   "family": "dialog",
   "baselineRoot": "packages/design-governance/reflection-families/dialog/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "dialog.medium",
       "mode": "light",
-      "figmaNodeId": "5049:43943",
+      "figmaNodeId": "6007:14349",
       "figmaFrameName": "reflection/dialog/medium/light",
       "exportScale": 1,
       "viewport": "dialog-medium",
@@ -81,7 +81,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "1609:15527",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1609-15527",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1609-15527",
         "outputFrameName": "reflection/dialog/medium/light",
         "selector": {
           "strategy": "directNode",
@@ -93,13 +93,13 @@
           "padding": 0
         },
         "sourceNodeId": "1609:15569",
-        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=1609-15569"
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=1609-15569"
       }
     },
     {
       "caseId": "dialog.medium",
       "mode": "dark",
-      "figmaNodeId": "5049:43969",
+      "figmaNodeId": "6007:14374",
       "figmaFrameName": "reflection/dialog/medium/dark",
       "exportScale": 1,
       "viewport": "dialog-medium",
@@ -172,7 +172,7 @@
       "prep": {
         "outputPage": "Reflection Baselines",
         "sourceFrameId": "3017:37102",
-        "sourceFrameUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=3017-37102",
+        "sourceFrameUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=3017-37102",
         "outputFrameName": "reflection/dialog/medium/dark",
         "selector": {
           "strategy": "directNode",
@@ -184,8 +184,9 @@
           "padding": 0
         },
         "sourceNodeId": "3017:37117",
-        "sourceNodeUrl": "https://www.figma.com/design/cvsN0jPGDAIKD3cDgfKAwH/Marwes--Copy-?node-id=3017-37117"
+        "sourceNodeUrl": "https://www.figma.com/design/nybMu3iJUnnOvWtuxjMG8b/Marwes--Copy-?node-id=3017-37117"
       }
     }
-  ]
+  ],
+  "structuralContract": "structural-contract.json"
 }

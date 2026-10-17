@@ -10,8 +10,8 @@
   /* Component-level CSS variables (overridden by modifiers) */
   --mw-checkbox-size: 16px;
   --mw-checkbox-radius: var(--mw-ui-radius);
-  --mw-checkbox-border: var(--mw-color-border-subtle);
-  --mw-checkbox-bg: var(--mw-color-surface, var(--mw-color-surface-primary));
+  --mw-checkbox-border: var(--mw-color-border-medium);
+  --mw-checkbox-bg: var(--mw-color-surface-primary);
   --mw-checkbox-checked-bg: var(--mw-color-primary-base);
   --mw-checkbox-check: var(--mw-color-primary-label);
 
@@ -29,7 +29,8 @@
 
   /* Visual styling - aligned with Figma design */
   border-radius: 3px;
-  border: 1.5px solid var(--mw-checkbox-border);
+  border: 0;
+  box-shadow: inset 0 0 0 1.5px var(--mw-checkbox-border);
   background: var(--mw-checkbox-bg);
 
   /* Interaction */
@@ -73,7 +74,7 @@
    ============================================ */
 
 .mw-checkbox:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--mw-color-border) 60%, var(--mw-color-primary-base));
+  --mw-checkbox-border: var(--mw-color-border-strong);
 }
 
 .mw-checkbox:checked:hover:not(:disabled) {
@@ -86,7 +87,7 @@
 
 .mw-checkbox:checked {
   background: var(--mw-checkbox-checked-bg);
-  border-color: var(--mw-checkbox-checked-bg);
+  box-shadow: none;
 }
 
 /* ============================================
@@ -95,7 +96,7 @@
 
 .mw-checkbox:indeterminate {
   background: var(--mw-checkbox-checked-bg);
-  border-color: var(--mw-checkbox-checked-bg);
+  box-shadow: none;
 }
 
 /* Checkmark / mixed mark */
@@ -169,13 +170,13 @@
   }
 */
 
-.mw-theme--dark .mw-checkbox:not(:checked) {
-  background: transparent;
+.mw-theme--dark .mw-checkbox:not(:checked):not(:indeterminate) {
+  background: var(--mw-checkbox-bg);
 }
 
 /* Dark mode: Hover state with subtle opacity */
 .mw-theme--dark .mw-checkbox:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--mw-color-text) 40%, var(--mw-color-primary-base));
+  --mw-checkbox-border: var(--mw-color-border-strong);
 }
 
 .mw-theme--dark .mw-checkbox:checked:hover:not(:disabled) {
@@ -211,4 +212,17 @@
 
 .mw-checkbox-field__description {
   font-family: var(--mw-font-primary, inherit);
+}
+
+.mw-checkbox:active:not(:disabled):not(:checked):not(:indeterminate) {
+  --mw-checkbox-border: var(--mw-color-border-brand);
+}
+
+.mw-checkbox:disabled:not(:checked):not(:indeterminate),
+.mw-checkbox--disabled:not(:checked):not(:indeterminate) {
+  --mw-checkbox-border: var(--mw-color-border-low);
+}
+
+.mw-checkbox:hover:not(:disabled):not(:checked):not(:indeterminate) {
+  background: var(--mw-color-surface);
 }

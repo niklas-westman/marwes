@@ -12,10 +12,12 @@
       "**/.turbo/**",
       "**/.storybook/**/storybook-static/**",
       "**/node_modules/**",
+      "**/fixtures/legacy-button-png/**",
       "**/tsconfig*.json",
       "**/*.svelte",
       "**/*.vue"
-    ]
+    ],
+    "maxSize": 8388608
   },
   "formatter": {
     "enabled": true,
@@ -57,6 +59,12 @@
             "useSemanticElements": "off"
           }
         }
+      }
+    },
+    {
+      "include": ["packages/design-governance/reflection-families/*/source/snapshot.json"],
+      "formatter": {
+        "enabled": false
       }
     }
   ]

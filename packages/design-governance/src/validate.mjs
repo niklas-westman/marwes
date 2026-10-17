@@ -89,7 +89,7 @@ function buildColorContract() {
     ["--mw-color-surface-inverted", "semantic.surface.inverse"],
     ["--mw-color-text", "semantic.text.primary"],
     ["--mw-color-text-muted", "semantic.text.secondary"],
-    ["--mw-color-text-subtle", "semantic.text.disabled"],
+    ["--mw-color-text-subtle", "semantic.text.subtle"],
     ["--mw-color-text-disabled", "semantic.text.disabled"],
     ["--mw-color-text-inverted", "semantic.text.inverse"],
     ["--mw-color-text-brand", "semantic.text.brand"],
@@ -99,9 +99,12 @@ function buildColorContract() {
     ["--mw-color-border", "semantic.border.default"],
     ["--mw-color-border-subtle", "semantic.border.default"],
     ["--mw-color-border-strong", "semantic.border.strong"],
+    ["--mw-color-border-medium", "semantic.border.medium"],
     ["--mw-color-border-full", "semantic.border.full"],
     ["--mw-color-border-disabled", "semantic.border.default"],
     ["--mw-color-border-brand", "semantic.border.brand"],
+    ["--mw-color-white", "semantic.surface.staticWhite"],
+    ["--mw-color-black", "primitives.gray.950"],
     ["--mw-color-focus", "semantic.focus.ring"],
     ["--mw-color-primary-base", "semantic.action.primary.default"],
     ["--mw-color-primary-hover", "semantic.action.primary.hover"],
@@ -608,7 +611,9 @@ function cssVarForTokenName(tokenName, componentTokenName) {
   const buttonMap = new Map([
     ["button/gap", "--mw-spacing-sp-4"],
     ["button/paddingh", "--mw-density-padding-x"],
+    ["button/padding-h", "--mw-density-padding-x"],
     ["button/paddingv", "--mw-density-padding-y"],
+    ["button/padding-v", "--mw-density-padding-y"],
     ["button/radius", "--mw-ui-radius-button"],
     ["button/primary/surface", "--mw-color-primary-base"],
     ["button/primary/label", "--mw-color-primary-label"],
@@ -635,7 +640,7 @@ function cssVarForTokenName(tokenName, componentTokenName) {
     ["icon/muted", "--mw-color-icon-muted"],
     ["border/low", "--mw-color-border-low"],
     ["border/default", "--mw-color-border"],
-    ["border/medium", "--mw-color-border-subtle"],
+    ["border/medium", "--mw-color-border-medium"],
     ["border/strong", "--mw-color-border-strong"],
     ["border/brand", "--mw-color-border-brand"],
     ["focus/ring", "--mw-color-focus"],
@@ -879,7 +884,10 @@ function main() {
 
   const target = readSyncTarget()
   const availableFamilies = listRegistryFamilies()
-  const selectedFamilies = allFamilies ? availableFamilies : [family]
+  // Reflection splits the public input family into dedicated visual fixtures.
+  // Keep the umbrella validation scope explicit in the emitted family report.
+  const aliases = { "input-fields": "input", "input-otp": "input" }
+  const selectedFamilies = allFamilies ? availableFamilies : [aliases[family] ?? family]
 
   for (const selectedFamily of selectedFamilies) {
     if (!availableFamilies.includes(selectedFamily)) {

@@ -3,7 +3,7 @@
   "family": "badge",
   "baselineRoot": "packages/design-governance/reflection-families/badge/baselines",
   "figmaProject": "marwes",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "cases": [
     {
       "caseId": "badge.neutral",
@@ -485,5 +485,6 @@
         "toleranceReason": "Allows only small Figma-PNG versus Chromium text and inset-stroke antialiasing drift after frame size, source-node bounds, mode background, and bound tokens have passed cohesive static checks."
       }
     }
-  ]
+  ],
+  "structuralContract": "structural-contract.json"
 }
