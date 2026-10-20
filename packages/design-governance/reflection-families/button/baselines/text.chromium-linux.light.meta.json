@@ -1,11 +1,17 @@
 {
-  "baseline": "text.chromium-linux.light.png",
-  "caseFingerprint": "dbd1e817320bd1a176731f1a36c65428be7b026adaa22d36556dfcffb95588f3",
+  "baseline": "text.chromium-linux.light.webp",
+  "caseFingerprint": "da8793c06b6c137d70533a69969d77f82d0283a0f032c015656d6f368f99f7d1",
   "caseId": "button.text",
-  "createdAt": "2026-06-13T16:20:09.582Z",
+  "createdAt": "2026-10-15T16:35:20.324Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "bd879ff30a72ddcc617094ac7e512fab76f4eea975f70b7048a3f275a00264d5",
+    "sourceByteLength": 1394,
+    "sourceFormat": "png",
+    "sourceSha256": "37f10343b469242af0a6ba579d7d085367be9a523dc3e9d5c35709facd821faa"
+  },
   "exportScale": 1,
   "family": "button",
-  "figmaFileKey": "cvsN0jPGDAIKD3cDgfKAwH",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
   "figmaFrameName": "reflection/button/text/light",
   "framing": {
     "align": "center",
@@ -13,21 +19,22 @@
     "padding": 0,
     "rootSelector": "#reflection-root"
   },
-  "generatedFrameId": "TODO_REFLECTION_BUTTON_TEXT_LIGHT_FRAME",
-  "mode": "light",
-  "origin": "receipt-backfill",
-  "pngByteLength": 1413,
-  "pngDimensions": {
+  "generatedFrameId": "6007:14710",
+  "imageByteLength": 242,
+  "imageDimensions": {
     "height": 220,
     "width": 390
   },
-  "pngSha256": "d744d68cb6bf605ab62ab179fb83218646e37d5ab3ba0d51b631d4e86786b10d",
-  "schemaVersion": 1,
-  "sourceFingerprint": "fa5a8b834ee59dc82ff0cd48006140f1a326767bfdd1335bc6186b848aa731b4",
-  "sourceFrameId": "1606:14324",
+  "imageFormat": "webp",
+  "imageSha256": "30fff34e1bfa7211fa6a2b9c7ad81604f323068ea6ccaa01a54550a0d37c0524",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "fbc490e9616484cc450e7dda3f302539fc69b4fbbe58f0e68b5c8dadcc18c9af",
+  "sourceFrameId": "1371:11172",
   "sourceNodeId": "1362:7509",
-  "sourceNodeIds": ["1362:7509"],
-  "variablesFingerprint": "664b3481b5a23a1e0698e88da72fa12fa108789af1d72a5975117e003db161b2",
+  "sourceNodeIds": ["1362:7509", "1461:11367"],
+  "variablesFingerprint": "341599e4dd026198df3e0241fbb0f590469c51c49df595bb9df6057294ebe9c2",
   "viewport": "button-default",
   "viewportSize": {
     "height": 220,

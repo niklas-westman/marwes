@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "family": "checkbox",
+  "toleranceReason": "0.02px style serialization; paint exact; scoped control geometry and default-state paints only",
+  "cases": [
+    {
+      "caseId": "checkbox.states-default",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "2541:7",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2541:33122": "2541:4",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "I2542:2249;2541:33316",
+          "part": "unchecked",
+          "selector": "#reflection-checkbox-unchecked",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "insetStrokeColor",
+              "sourceProperty": "strokes.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I2542:2256;2541:33487",
+          "part": "checked",
+          "selector": "#reflection-checkbox-checked",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I2542:2263;2541:33600",
+          "part": "mixed",
+          "selector": "#reflection-checkbox-mixed",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": [
+        "Field label, hint, focus, disabled and interaction-state geometry not yet structurally enrolled",
+        "Glyph and checkmark rasterization require visual evidence"
+      ]
+    },
+    {
+      "caseId": "checkbox.states-default",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "2541:7",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2541:33122": "2541:4",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "I2542:28187;2541:33316",
+          "part": "unchecked",
+          "selector": "#reflection-checkbox-unchecked",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "insetStrokeColor",
+              "sourceProperty": "strokes.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I2542:28188;2541:33487",
+          "part": "checked",
+          "selector": "#reflection-checkbox-checked",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I2542:28189;2541:33600",
+          "part": "mixed",
+          "selector": "#reflection-checkbox-mixed",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": [
+        "Field label, hint, focus, disabled and interaction-state geometry not yet structurally enrolled",
+        "Glyph and checkmark rasterization require visual evidence"
+      ]
+    }
+  ]
+}

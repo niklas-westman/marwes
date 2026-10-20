@@ -1,0 +1,43 @@
+{
+  "baseline": "purpose-cancel.chromium-linux.dark.webp",
+  "caseFingerprint": "1c137771146d592de1793dc9c06946f2495db837d64ddc0fead88ce37ec766d8",
+  "caseId": "button.purpose-cancel",
+  "createdAt": "2026-10-15T16:35:25.932Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "0f96dcdf586350f83ba2a67d712f235aa4eb5d501dc57dcfe1bbdb4a88449e49",
+    "sourceByteLength": 1938,
+    "sourceFormat": "png",
+    "sourceSha256": "7c9ccdd6172bb38abd3d0796579cb1a22f2811e78a34483f044142fc634e149e"
+  },
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "figmaFrameName": "reflection/button/purpose-cancel/dark",
+  "framing": {
+    "align": "center",
+    "background": "#000000",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "6020:16056",
+  "imageByteLength": 456,
+  "imageDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "imageFormat": "webp",
+  "imageSha256": "d4bef3b19885be38a536ee3336e3f0a04307077d9b8ef7868228ac431f6dd648",
+  "mode": "dark",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "053195710b1442f7005aa50de77bc225ed143d4cefa6b8c062a66888bd12fc1e",
+  "sourceFrameId": "3978:39020",
+  "sourceNodeId": "3873:42768",
+  "sourceNodeIds": ["3873:42768", "3978:39045"],
+  "variablesFingerprint": "b02955c405b3d56f763e233f26fa1df26236163e6d22acd357a1aee731baf95b",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}
