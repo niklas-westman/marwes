@@ -1,0 +1,10 @@
+{
+  "_note": "Families the adapter parity check skips. Carried over from the former Storybook companion config; each needs a reason.",
+  "excluded": {
+    "date-picker": "Not ready for review; was hidden from Storybook until then. Reason it is exempt from adapter parity was not recorded separately.",
+    "typography": "Carried over from the Storybook companion config; reason not recorded."
+  },
+  "exportParityExempt": {
+    "heading": "Carried over from the Storybook companion config; reason not recorded."
+  }
+}
