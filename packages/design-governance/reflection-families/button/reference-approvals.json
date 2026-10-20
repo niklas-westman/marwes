@@ -10,7 +10,7 @@
       "recordedBy": "Claude (assistant)",
       "at": "2026-10-16T19:24:51.552Z",
       "boundTo": "e48c5db2a83f625cf98a1cca3980502c53802bba5b2250032ad4bdf879e34990",
-      "note": "Niklas asked the assistant to \"write the file for me and specify what i need to manually apply when done\" for the stage promoting these references, then ran source-apply himself (stage 911804c9, applied 2026-10-16). The stage was rebuilt once after a lock-file fix with identical artifact hashes, with his \"OK\". Recorded by the assistant from that conversation; no separate signed approval exists."
+      "note": "Niklas asked the assistant to \"write the file for me and specify what i need to manually apply when done\" for the stage promoting these references, then ran source-apply himself (stage 911804c9, applied 2026-10-16). The stage was rebuilt once after a lock-file fix with identical artifact hashes, with his \"OK\". Recorded by the assistant from that conversation; no separate signed approval exists. The compact source was later re-serialized one entry per line; its parsed content is identical (verified)."
     }
   ]
 }

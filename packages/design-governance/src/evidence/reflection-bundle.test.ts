@@ -110,6 +110,7 @@ function evidence(cases: CaseReport[]): FamilyEvidence {
       EngineRun
     >,
     acceptedDeviations: new Map(),
+    caseSettings: new Map(),
     snapshots: { sync: snap, source: snap, requiredSet: snap },
     generatedAt: "2026-10-20T00:00:00.000Z",
     imageFor: () => undefined,

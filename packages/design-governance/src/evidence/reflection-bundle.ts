@@ -58,6 +58,7 @@ export interface FamilyEvidence {
   report: GovernanceReport
   engineRuns: Record<Adapter, EngineRun>
   acceptedDeviations: Map<string, string>
+  caseSettings: Map<string, { viewport?: string; threshold?: Record<string, number> }>
   approval?: ReferenceApproval
   snapshots: {
     sync: {
@@ -193,6 +194,7 @@ export function projectFamily(evidence: FamilyEvidence): {
       const reference = withVisual ? artifact("reference") : undefined
       const actual = withVisual ? artifact("actual") : undefined
       const diffArtifact = withVisual ? artifact("diff") : undefined
+      const settings = evidence.caseSettings.get(caseKey(row.caseId, row.mode))
       const accepted = withVisual
         ? evidence.acceptedDeviations.get(caseKey(row.caseId, row.mode))
         : undefined
@@ -203,6 +205,7 @@ export function projectFamily(evidence: FamilyEvidence): {
         subject: {
           ...requireValue(requirements.find((r) => r.id === item.itemId)).subject,
           adapter: row.adapter,
+          ...(withVisual && settings?.viewport ? { viewport: settings.viewport } : {}),
         },
         snapshotId: snapshotIds.source,
         runId: `${row.adapter}:${run.runId}`,
@@ -242,6 +245,7 @@ export function projectFamily(evidence: FamilyEvidence): {
                   direction: "lower-is-better" as const,
                   ...(check.maxDiffPixels !== undefined ? { passAt: check.maxDiffPixels } : {}),
                 },
+                ...(settings?.threshold ? { threshold: settings.threshold } : {}),
               },
             }
           : {}),
@@ -421,7 +425,7 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
   const sourceManifest = readJson<{
     fileKey: string
     snapshotSha256: string
-    hashes: { raw: string }
+    hashes: { raw: string; manifest: string }
     capture: { version: string; lastModified: string; provenance?: string }
   }>(join(directory, "source/manifest.json"))
   const sync = optionalJson<{
@@ -435,11 +439,17 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
     cases: {
       caseId: string
       mode: string
-      comparison?: { toleranceReason?: string; threshold?: { maxDiffPixels?: number } }
+      viewport?: string
+      comparison?: { toleranceReason?: string; threshold?: Record<string, number> }
     }[]
   }>(join(directory, "reflection-contract.json"))
   const accepted = new Map<string, string>()
+  const caseSettings: FamilyEvidence["caseSettings"] = new Map()
   for (const entry of contract.cases) {
+    caseSettings.set(caseKey(entry.caseId, entry.mode), {
+      ...(entry.viewport ? { viewport: entry.viewport } : {}),
+      ...(entry.comparison?.threshold ? { threshold: entry.comparison.threshold } : {}),
+    })
     const reason = entry.comparison?.toleranceReason
     if (reason?.startsWith("ACCEPTED TEXT-RASTER DEVIATION"))
       accepted.set(
@@ -463,6 +473,7 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
     report,
     engineRuns,
     acceptedDeviations: accepted,
+    caseSettings,
     ...(approval ? { approval: { ...approval } } : {}),
     snapshots: {
       sync: {
@@ -470,7 +481,7 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
         upstreamModifiedAt: sync?.lastModified ?? sourceManifest.capture.lastModified,
         version: sync?.version ?? sourceManifest.capture.version,
         ...(sync?.versionTag ? { versionTag: sync.versionTag } : {}),
-        sha256: sourceManifest.hashes.raw,
+        sha256: sourceManifest.hashes.manifest,
         fileKey: sourceManifest.fileKey,
         ...(sync
           ? {}
@@ -482,7 +493,9 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
         capturedAt: sync?.syncedAt ?? sourceManifest.capture.lastModified,
         upstreamModifiedAt: sourceManifest.capture.lastModified,
         version: sourceManifest.capture.version,
-        sha256: sourceManifest.snapshotSha256,
+        // The compact capture is derived from this raw export, so the raw hash names its content
+        // independently of how the compact file is serialized.
+        sha256: sourceManifest.hashes.raw,
         fileKey: sourceManifest.fileKey,
         ...(sourceManifest.capture.provenance ? { note: sourceManifest.capture.provenance } : {}),
       },
