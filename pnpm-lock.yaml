@@ -553,8 +553,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(@types/node@24.10.10)(esbuild@0.28.1)(tsx@4.21.0)
       reflection-projection:
-        specifier: 0.3.0
-        version: 0.3.0
+        specifier: 0.4.0
+        version: 0.4.0
       tsx:
         specifier: 4.21.0
         version: 4.21.0
@@ -4459,8 +4459,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  reflection-projection@0.3.0:
-    resolution: {integrity: sha512-xswhHaXClwyFfzT+zArXXIOg2TO7vUezhaMqV/ls2mrKKXk9I0+lfbL4o+xfCfRTaRUKXX8bgosx/ytZ243blg==}
+  reflection-projection@0.4.0:
+    resolution: {integrity: sha512-a1tgHxHLnCV5Li6200Sj6EaCIdbSugEIZhv6VTqtCWVgef71oZ3wDdCXx3EvN9LXiNglM/yYamLWsBxRfzaP0g==}
     engines: {node: '>=22'}
 
   regexp.prototype.flags@1.5.4:
@@ -9259,7 +9259,7 @@ snapshots:
       - tsx
       - yaml
 
-  reflection-projection@0.3.0:
+  reflection-projection@0.4.0:
     dependencies:
       zod: 4.4.3
 

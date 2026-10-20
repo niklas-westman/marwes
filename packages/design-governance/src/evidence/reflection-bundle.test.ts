@@ -1,4 +1,12 @@
-import { countComparisons, deriveReadiness, summarizeProjection } from "reflection-projection"
+import { mkdtempSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
+import {
+  countComparisons,
+  deriveReadiness,
+  standingDeviations,
+  summarizeProjection,
+} from "reflection-projection"
 import { describe, expect, it } from "vitest"
 import type { CoverageContract } from "../contracts/coverage.ts"
 import {
@@ -110,12 +118,35 @@ function evidence(cases: CaseReport[]): FamilyEvidence {
       Adapter,
       EngineRun
     >,
-    acceptedDeviations: new Map(),
+    acceptedDeviations: new Set(),
     caseSettings: new Map(),
     snapshots: { sync: snap, source: snap, requiredSet: snap },
     generatedAt: "2026-10-20T00:00:00.000Z",
     imageFor: () => undefined,
   }
+}
+
+const approval = {
+  id: "dc-011",
+  attestation: "delegated" as const,
+  by: "Niklas Westman",
+  recordedBy: "Claude (assistant)",
+  at: "2026-10-16T00:00:00.000Z",
+  comment: '"lets accept the 15"',
+  reason: "Label-only text rendering",
+}
+
+/** A reference image on disk, so a comparison carries the hash a decision binds to. */
+const withReference = (base: FamilyEvidence): FamilyEvidence => {
+  const file = join(mkdtempSync(join(tmpdir(), "marwes-ref-")), "reference.png")
+  writeFileSync(
+    file,
+    Buffer.from(
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
+      "base64",
+    ),
+  )
+  return { ...base, imageFor: (_row, role) => (role === "reference" ? file : undefined) }
 }
 
 const allAdapters = (caseId: string, visual: "passed" | "failed" = "passed") =>
@@ -169,16 +200,47 @@ describe("projectFamily", () => {
       expect(Object.keys(comparison.proof)).not.toContain("coverage")
   })
 
-  it("keeps an owner-accepted deviation visible on the comparison", () => {
-    const base = evidence(allAdapters("button.basic"))
-    const accepted = new Map([
-      [JSON.stringify(["button.basic", "light"]), "Owner-accepted deviation (DC-011)"],
-    ])
-    const { projection } = projectFamily({ ...base, acceptedDeviations: accepted })
+  it("imports an owner-accepted deviation as a decision that still holds, not as proof", () => {
+    const base = withReference(evidence(allAdapters("button.basic")))
+    const { projection } = projectFamily({
+      ...base,
+      bundleId: "bundle-a",
+      acceptedDeviations: new Set([JSON.stringify(["button.basic", "light"])]),
+      deviationApproval: approval,
+    })
+    const [standing] = standingDeviations(projection, "bundle-a")
+    expect(standing?.decision.kind).toBe("accept-deviation")
+    expect(standing?.decision.attestation).toBe("delegated")
+    // Only the item that requires a visual proof is covered, once per adapter.
+    expect(standing?.comparisonIds).toHaveLength(3)
+    expect(standing?.standing).toEqual({ state: "holds" })
+    // A deviation is review: the comparison keeps its own verdict.
     const visual = (projection.comparisons ?? []).find(
       (c) => c.requirementId === "design.primary.default",
     )
-    expect(visual?.limitations).toContain("Owner-accepted deviation (DC-011)")
+    expect(visual?.verdict.status).toBe("pass")
+  })
+
+  it("refuses an accepted deviation that has no owner record", () => {
+    const base = withReference(evidence(allAdapters("button.basic")))
+    expect(() =>
+      projectFamily({
+        ...base,
+        acceptedDeviations: new Set([JSON.stringify(["button.basic", "light"])]),
+      }),
+    ).toThrow(/deviation-approvals/)
+  })
+
+  it("counts a comparison that read a superseded capture as not proven", () => {
+    const base = evidence(allAdapters("button.basic"))
+    const { projection } = projectFamily({
+      ...base,
+      snapshots: { ...base.snapshots, source: { ...base.snapshots.source, superseded: true } },
+    })
+    expect(projection.snapshots?.find((s) => s.id === "button-source-capture")?.supersededBy).toBe(
+      "figma-sync",
+    )
+    expect(summarizeProjection(projection).proven).toBe(0)
   })
 
   it("records why integrity failed so a superseded source is not a bare failure", () => {

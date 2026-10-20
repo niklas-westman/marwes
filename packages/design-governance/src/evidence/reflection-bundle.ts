@@ -2,7 +2,8 @@ import { execFileSync } from "node:child_process"
 import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { basename, dirname, join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import type { Comparison, Projection, Requirement } from "reflection-projection"
+import { bindingForComparisons } from "reflection-projection"
+import type { Comparison, Decision, Projection, Requirement } from "reflection-projection"
 import type { BundleFileInput } from "reflection-projection/node"
 import type { CoverageContract, CoverageRequirement } from "../contracts/coverage.js"
 import {
@@ -48,6 +49,18 @@ export interface ReferenceApproval {
   boundTo?: string
 }
 
+/** The owner's acceptance of the raised pixel limits, as written in `deviation-approvals.json`. */
+export interface DeviationApproval {
+  id: string
+  attestation: "human" | "delegated"
+  by: string
+  recordedBy?: string
+  at: string
+  /** The owner's words, kept verbatim for a delegated record. */
+  comment: string
+  reason: string
+}
+
 /** Everything the mapping needs, already read from disk; the mapping itself does no I/O. */
 export interface FamilyEvidence {
   family: string
@@ -59,7 +72,12 @@ export interface FamilyEvidence {
   inventory: "full" | "executed-only"
   report: GovernanceReport
   engineRuns: Record<Adapter, EngineRun>
-  acceptedDeviations: Map<string, string>
+  /** Cases whose pixel limit the owner raised, keyed by case and mode. */
+  acceptedDeviations: Set<string>
+  /** Required whenever `acceptedDeviations` is not empty: who accepted it, and in whose words. */
+  deviationApproval?: DeviationApproval
+  /** Identity of the bundle the imported decision was made on. */
+  bundleId?: string
   caseSettings: Map<string, { viewport?: string; threshold?: Record<string, number> }>
   approval?: ReferenceApproval
   snapshots: {
@@ -80,6 +98,8 @@ export interface FamilyEvidence {
       sha256: string
       fileKey: string
       note?: string
+      /** The capture predates the full sync, so the proof read an older design. */
+      superseded?: boolean
     }
     /** Absent when the family keeps no required-set inventory of its own. */
     requiredSet?: { capturedAt: string; sha256: string; fileKey: string }
@@ -190,6 +210,7 @@ export function projectFamily(evidence: FamilyEvidence): {
   )
   const files: BundleFile[] = []
   const comparisons: Comparison[] = []
+  const acceptedComparisonIds: string[] = []
   // One comparison per requirement and adapter: several requirements may be proven by the same case
   // (a behavior-only item attaches to an existing visual case), and each needs its own proof.
   for (const item of coverage.items) {
@@ -214,9 +235,7 @@ export function projectFamily(evidence: FamilyEvidence): {
       const actual = withVisual ? artifact("actual") : undefined
       const diffArtifact = withVisual ? artifact("diff") : undefined
       const settings = evidence.caseSettings.get(caseKey(row.caseId, row.mode))
-      const accepted = withVisual
-        ? evidence.acceptedDeviations.get(caseKey(row.caseId, row.mode))
-        : undefined
+      const accepted = withVisual && evidence.acceptedDeviations.has(caseKey(row.caseId, row.mode))
       const integrityNote =
         row.outcomes.integrity === "failed"
           ? [
@@ -230,7 +249,6 @@ export function projectFamily(evidence: FamilyEvidence): {
       const limitations = [
         ...(row.limitations ?? []),
         ...integrityNote.map((entry) => `Integrity failed: ${entry}`),
-        ...(accepted ? [accepted] : []),
       ]
       comparisons.push({
         id,
@@ -246,6 +264,10 @@ export function projectFamily(evidence: FamilyEvidence): {
           ? {
               reference: {
                 artifact: reference,
+                // Hashed here so a decision bound to this comparison names the same file the bundle stores.
+                baselineSha256: hash(
+                  readFileSync(requireValue(evidence.imageFor(row, "reference"))),
+                ),
                 origin: "figma-export",
                 approval: evidence.approval
                   ? {
@@ -308,6 +330,7 @@ export function projectFamily(evidence: FamilyEvidence): {
           : {}),
         ...(limitations.length ? { limitations } : {}),
       })
+      if (accepted) acceptedComparisonIds.push(id)
     }
   }
   const runs: Projection["runs"] = adapters.map((adapter) => {
@@ -357,7 +380,9 @@ export function projectFamily(evidence: FamilyEvidence): {
         kind: "design-capture",
         role: "proof-source",
         label: `${evidence.label} source capture`,
-        ...source,
+        ...(({ superseded: _superseded, ...rest }) => rest)(source),
+        // The proof read this capture; once the full sync has moved on it proves an older design.
+        ...(source.superseded ? { supersededBy: ids.sync } : {}),
       },
       ...(requiredSet
         ? [
@@ -375,6 +400,28 @@ export function projectFamily(evidence: FamilyEvidence): {
     comparisons,
     runs,
     decisions: [],
+  }
+  if (acceptedComparisonIds.length) {
+    const approval = requireValue(
+      evidence.deviationApproval,
+      `${evidence.family} has owner-accepted deviations but no deviation-approvals.json record`,
+    )
+    // An accepted deviation is review, never proof: the comparisons keep their own outcome, and the decision
+    // says who accepted the raised limit and whether it still holds against this evidence.
+    const decision: Decision = {
+      id: approval.id,
+      kind: "accept-deviation",
+      bundleId: evidence.bundleId ?? `marwes-${evidence.family}-preview`,
+      by: approval.by,
+      at: approval.at,
+      attestation: approval.attestation,
+      ...(approval.recordedBy ? { recordedBy: approval.recordedBy } : {}),
+      scope: { family: evidence.family, comparisonIds: acceptedComparisonIds },
+      comment: approval.comment,
+      reason: approval.reason,
+      binding: bindingForComparisons({ requirements, comparisons }, acceptedComparisonIds),
+    }
+    projection.decisions = [decision]
   }
   return { projection, files }
 }
@@ -451,6 +498,8 @@ export interface BuildOptions {
   runId: string
   /** Local Figma sync manifest. `.figma/marwes` is untracked and overwritten by each sync. */
   figmaSyncManifest?: string
+  /** The bundle the evidence is being written into; imported decisions are made against it. */
+  bundleId?: string
 }
 
 /** Required items for a family without an inventory: one per executed case, in the layers it required. */
@@ -527,7 +576,7 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
       comparison?: { toleranceReason?: string; threshold?: Record<string, number> }
     }[]
   }>(join(directory, "reflection-contract.json"))
-  const accepted = new Map<string, string>()
+  const accepted = new Set<string>()
   const caseSettings: FamilyEvidence["caseSettings"] = new Map()
   for (const entry of contract.cases) {
     caseSettings.set(caseKey(entry.caseId, entry.mode), {
@@ -536,11 +585,11 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
     })
     const reason = entry.comparison?.toleranceReason
     if (reason?.startsWith("ACCEPTED TEXT-RASTER DEVIATION"))
-      accepted.set(
-        caseKey(entry.caseId, entry.mode),
-        `Owner-accepted deviation (DC-011): label-only text rendering difference; limit raised to ${entry.comparison?.threshold?.maxDiffPixels} px from the standard limit.`,
-      )
+      accepted.add(caseKey(entry.caseId, entry.mode))
   }
+  const deviationApproval = optionalJson<{ records: DeviationApproval[] }>(
+    join(directory, "deviation-approvals.json"),
+  )?.records[0]
   const approvals = optionalJson<{ records: (ReferenceApproval & { scope: string })[] }>(
     join(directory, "reference-approvals.json"),
   )
@@ -558,6 +607,8 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
     report,
     engineRuns,
     acceptedDeviations: accepted,
+    ...(deviationApproval ? { deviationApproval } : {}),
+    ...(options.bundleId ? { bundleId: options.bundleId } : {}),
     caseSettings,
     ...(approval ? { approval: { ...approval } } : {}),
     snapshots: {
@@ -584,6 +635,7 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
         // independently of how the compact file is serialized.
         sha256: sourceManifest.hashes.raw,
         fileKey: sourceManifest.fileKey,
+        ...(sync && !capturedWithSync ? { superseded: true } : {}),
         ...snapshotNote(sourceManifest.capture.provenance, capturedWithSync, sync?.version),
       },
       ...(existsSync(coveragePath)
@@ -626,7 +678,8 @@ export async function writeFamilyBundle(
   options: WriteOptions,
 ): Promise<{ directory: string; projection: Projection }> {
   const { writeBundle } = await import("reflection-projection/node")
-  const evidence = readFamilyEvidence(repoRoot, options)
+  const bundleId = `marwes-${options.release}-build-${options.build}`
+  const evidence = readFamilyEvidence(repoRoot, { ...options, bundleId })
   const { projection, files } = projectFamily(evidence)
   const inventoryPath = join(repoRoot, familyRoot, options.family, "coverage-contract.json")
   if (existsSync(inventoryPath))
@@ -645,7 +698,7 @@ export async function writeFamilyBundle(
   const release = {
     release: options.release,
     build: options.build,
-    bundleId: `marwes-${options.release}-build-${options.build}`,
+    bundleId,
     state: "candidate" as const,
     builtAt: evidence.generatedAt,
     ...(git(repoRoot, "rev-parse", "--abbrev-ref", "HEAD")
