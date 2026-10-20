@@ -33,6 +33,7 @@ export async function main(args = process.argv.slice(2)) {
         "--run",
         "--output",
         "--release",
+        "--build",
         "--figma-sync",
       ].includes(arg) ||
       !args[index + 1] ||
@@ -72,7 +73,7 @@ export async function main(args = process.argv.slice(2)) {
       label: bundleFamily.charAt(0).toUpperCase() + bundleFamily.slice(1),
       runId,
       release,
-      build: 1,
+      build: Number(options.get("--build") ?? 1),
       output,
       ...(figmaSync ? { figmaSyncManifest: resolve(repoRoot, figmaSync) } : {}),
     })

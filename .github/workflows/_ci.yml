@@ -162,6 +162,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # The bundle dates the required set from git history; a shallow clone would date it from HEAD.
+          fetch-depth: 0
 
       - name: Setup workspace
         uses: ./.github/actions/setup
@@ -185,6 +188,27 @@ jobs:
       - name: Summarise
         if: always()
         run: node scripts/governance-ci-summary.mjs
+
+      # The projection bundle is the unit a designer reviews. It is built from the run above, so it
+      # reports what this commit proved, including the visual checks that fail only on Linux text.
+      - name: Build the Reflection bundle
+        if: always() && steps.verify.outcome != 'skipped'
+        continue-on-error: true
+        run: |
+          pnpm --filter @marwes-ui/design-governance exec tsx src/cli/governance.ts bundle \
+            --family button \
+            --release "pr-${{ github.event.pull_request.number }}" \
+            --build "${{ github.run_number }}" \
+            --output "$GITHUB_WORKSPACE/artifacts/reflection/bundle/marwes-pr-${{ github.event.pull_request.number }}-build-${{ github.run_number }}"
+
+      - name: Upload the Reflection bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reflection-bundle
+          path: artifacts/reflection/bundle
+          retention-days: 14
+          if-no-files-found: ignore
 
       - name: Upload governance evidence
         if: always()
