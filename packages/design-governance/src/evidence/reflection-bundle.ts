@@ -114,14 +114,19 @@ const toProof = (outcome: ProofOutcome | undefined): Proof => {
 }
 
 /** Marwes folds coverage gaps into every case; coverage is not a proof layer and never forwarded. */
-export function proofOf(row: CaseReport): Record<Layer, Proof> {
-  return Object.fromEntries(layers.map((layer) => [layer, toProof(row.outcomes[layer])])) as Record<
-    Layer,
-    Proof
-  >
+export function proofOf(row: CaseReport, required: Layer[]): Partial<Record<Layer, Proof>> {
+  // A layer that did not run and is not required is left out, as the provider guide asks, so it
+  // cannot turn a comparison whose required layers passed into "not run".
+  return Object.fromEntries(
+    layers
+      .map((layer) => [layer, toProof(row.outcomes[layer])] as const)
+      .filter(
+        ([layer, proof]) => required.includes(layer) || proof === "passed" || proof === "failed",
+      ),
+  )
 }
 
-function verdictOf(required: Layer[], proof: Record<Layer, Proof>): Comparison["verdict"] {
+function verdictOf(required: Layer[], proof: Partial<Record<Layer, Proof>>): Comparison["verdict"] {
   if (required.some((layer) => proof[layer] === "failed"))
     return { status: "fail", severity: "blocking", failureClass: "proof-failed" }
   if (required.every((layer) => proof[layer] === "passed"))
@@ -194,7 +199,7 @@ export function projectFamily(evidence: FamilyEvidence): {
       if (!row) continue
       const withVisual = item.requiredProofs.includes("visual")
       const withStructural = item.requiredProofs.includes("structural")
-      const proof = proofOf(row)
+      const proof = proofOf(row, item.requiredProofs)
       const run = evidence.engineRuns[row.adapter]
       const check = run.checks.get(engineCheckId(row.adapter, row.caseId, row.mode))
       const id = `${item.itemId}/${row.adapter}`

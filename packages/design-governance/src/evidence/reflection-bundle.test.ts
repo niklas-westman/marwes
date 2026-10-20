@@ -1,4 +1,4 @@
-import { deriveReadiness, summarizeProjection } from "reflection-projection"
+import { countComparisons, deriveReadiness, summarizeProjection } from "reflection-projection"
 import { describe, expect, it } from "vitest"
 import type { CoverageContract } from "../contracts/coverage.ts"
 import {
@@ -201,5 +201,19 @@ describe("projectFamily", () => {
       "Integrity failed: Invalid compact source identity for button",
     )
     expect(own?.limitations?.join(" ")).not.toContain("Family coverage")
+  })
+
+  it("leaves out layers that did not run and were not required", () => {
+    const cases = allAdapters("button.basic").map((entry) => ({
+      ...entry,
+      outcomes: { ...entry.outcomes, structural: "not-run" as const, visual: "not-run" as const },
+    }))
+    const { projection } = projectFamily(evidence(cases))
+    const keyboard = (projection.comparisons ?? []).filter(
+      (c) => c.requirementId === "public.keyboard",
+    )
+    for (const comparison of keyboard)
+      expect(Object.keys(comparison.proof)).toEqual(["integrity", "behavior"])
+    expect(countComparisons(keyboard)).toMatchObject({ executed: 3, notRun: 0 })
   })
 })
