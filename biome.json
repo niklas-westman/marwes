@@ -12,6 +12,7 @@
       "**/.turbo/**",
       "**/.storybook/**/storybook-static/**",
       "**/node_modules/**",
+      "**/fixtures/legacy-button-png/**",
       "**/tsconfig*.json",
       "**/*.svelte",
       "**/*.vue"

@@ -285,6 +285,77 @@ async function copyExplicitVariableModes(sourceNode, targetNode) {
   }
 }
 
+function validateVariableModePolicy(policy) {
+  if (policy === undefined) return undefined
+  if (
+    !policy ||
+    typeof policy !== "object" ||
+    Array.isArray(policy) ||
+    Object.keys(policy).sort().join(",") !== "collectionModes,descendants,schemaVersion" ||
+    policy.schemaVersion !== 1 ||
+    policy.descendants !== "override-declared-collections" ||
+    !policy.collectionModes ||
+    typeof policy.collectionModes !== "object" ||
+    Array.isArray(policy.collectionModes)
+  )
+    throw new Error("Invalid variableModePolicy/v1")
+  const ids = Object.keys(policy.collectionModes).sort()
+  if (ids.length === 0 || ids.length > 16)
+    throw new Error("variableModePolicy needs 1–16 exact collections")
+  const modes = {}
+  for (let index = 0; index < ids.length; index += 1) {
+    const id = ids[index]
+    if (
+      !/^VariableCollectionId:\d+:\d+$/.test(id) ||
+      typeof policy.collectionModes[id] !== "string" ||
+      !/^\d+:\d+$/.test(policy.collectionModes[id])
+    )
+      throw new Error("Invalid explicit collection/mode identity")
+    modes[id] = policy.collectionModes[id]
+  }
+  return { schemaVersion: 1, descendants: "override-declared-collections", collectionModes: modes }
+}
+
+async function resolveVariableModePolicy(policy) {
+  const validated = validateVariableModePolicy(policy)
+  if (!validated) return undefined
+  const collections = {}
+  const ids = Object.keys(validated.collectionModes)
+  for (let index = 0; index < ids.length; index += 1) {
+    const id = ids[index]
+    const collection = await resolveVariableCollection(id)
+    if (
+      !collection ||
+      typeof collection !== "object" ||
+      collection.id !== id ||
+      !Array.isArray(collection.modes) ||
+      !collection.modes.some((mode) => mode.modeId === validated.collectionModes[id])
+    )
+      throw new Error(`Unavailable explicit collection/mode ${id}`)
+    collections[id] = collection
+  }
+  return { policy: validated, collections: collections }
+}
+
+async function applyVariableModePolicy(frame, plan) {
+  if (!plan) return
+  const ids = Object.keys(plan.policy.collectionModes)
+  function visit(node) {
+    if (typeof node.setExplicitVariableModeForCollection !== "function")
+      throw new Error(`Cannot enforce explicit variable modes on cloned node ${node.id}`)
+    for (let index = 0; index < ids.length; index += 1) {
+      const id = ids[index]
+      const mode = plan.policy.collectionModes[id]
+      node.setExplicitVariableModeForCollection(plan.collections[id], mode)
+      if (readExplicitVariableModes(node)[id] !== mode)
+        throw new Error(`Explicit variable mode readback failed on ${node.id}`)
+    }
+    if (node.children)
+      for (let index = 0; index < node.children.length; index += 1) visit(node.children[index])
+  }
+  visit(frame)
+}
+
 function summarizeNode(node, includeChildren) {
   const bounds = safeBounds(node)
   const explicitVariableModes = readExplicitVariableModes(node)
@@ -595,6 +666,7 @@ function buildPayload(record, frameId) {
     destinationPageName: record.destinationPage ? record.destinationPage.name : null,
     position: record.position,
     placementAnchor: record.placementAnchor || null,
+    variableModePolicy: record.variableModePlan ? record.variableModePlan.policy : undefined,
     requestHash: record.requestHash,
     sourceFingerprint: record.sourceFingerprint,
     figmaNodeId: frameId,
@@ -625,6 +697,12 @@ async function createOutputFrame(record) {
   const caseRoot = createCaseRoot(record.sourceSelection.nodes)
   await copyExplicitVariableModes(variableModeSource, caseRoot)
   frame.appendChild(caseRoot)
+  try {
+    await applyVariableModePolicy(frame, record.variableModePlan)
+  } catch (error) {
+    frame.remove()
+    throw error
+  }
   placeCaseRoot(frame, caseRoot, framing)
 
   frame.x = record.position.x
@@ -995,23 +1073,23 @@ function assignPositions(records) {
 function finalizeRecordRevision(record, existingIndex) {
   const diagnostics = buildSourceDiagnostics(record.sourceSelection)
   const sourceFingerprint = hashString(stableStringify(diagnostics))
-  const requestHash = hashString(
-    stableStringify({
-      prepVersion: prepVersion,
-      family: record.entry.family,
-      caseId: record.entry.caseId,
-      mode: record.entry.mode,
-      outputFrameName: record.entry.outputFrameName,
-      viewportSize: record.entry.viewportSize,
-      framing: record.entry.framing || {},
-      selector: record.entry.selector,
-      sourceFrameId: record.sourceSelection.sourceFrameId || null,
-      sourceNodeIds: record.sourceSelection.sourceNodeIds,
-      destinationPageId: record.destinationPage ? record.destinationPage.id : null,
-      position: record.position,
-      placementAnchor: record.placementAnchor || null,
-    }),
-  )
+  const request = {
+    prepVersion: prepVersion,
+    family: record.entry.family,
+    caseId: record.entry.caseId,
+    mode: record.entry.mode,
+    outputFrameName: record.entry.outputFrameName,
+    viewportSize: record.entry.viewportSize,
+    framing: record.entry.framing || {},
+    selector: record.entry.selector,
+    sourceFrameId: record.sourceSelection.sourceFrameId || null,
+    sourceNodeIds: record.sourceSelection.sourceNodeIds,
+    destinationPageId: record.destinationPage ? record.destinationPage.id : null,
+    position: record.position,
+    placementAnchor: record.placementAnchor || null,
+  }
+  if (record.variableModePlan) request.variableModePolicy = record.variableModePlan.policy
+  const requestHash = hashString(stableStringify(request))
 
   const existing = existingIndex[record.entry.outputFrameName] || []
   const unmanaged = existing.filter((item) => !item.pluginManaged)
@@ -1095,6 +1173,7 @@ function resultPayload(record, frameId) {
     sourceNodeId: record.sourceSelection.sourceNodeId,
     sourceNodeIds: record.sourceSelection.sourceNodeIds,
     viewportSize: record.entry.viewportSize,
+    variableModePolicy: record.variableModePlan ? record.variableModePlan.policy : undefined,
     requestHash: record.requestHash,
     sourceFingerprint: record.sourceFingerprint,
     diagnostics: record.diagnostics,
@@ -1143,12 +1222,14 @@ async function prepareReflectionFrames(params) {
         type: "STATUS",
         message: `Resolving ${entry.outputFrameName}...`,
       })
+      const variableModePlan = await resolveVariableModePolicy(entry.variableModePolicy)
       const sourceSelection = await selectSource(entry)
       const destinationPage = resolveDestinationPage(entry, sourceSelection, safeParams, dryRun)
 
       records.push({
         entry: entry,
         sourceSelection: sourceSelection,
+        variableModePlan: variableModePlan,
         destinationPage: destinationPage,
         replaceUnmanagedReflection: Boolean(safeParams.replaceUnmanagedReflection),
       })

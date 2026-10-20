@@ -5,6 +5,7 @@ import {
   mkdtempSync,
   readFileSync,
   readdirSync,
+  rmSync,
   writeFileSync,
 } from "node:fs"
 import { tmpdir } from "node:os"
@@ -56,5 +57,19 @@ export function createOfflineProofFixture(pinnedFamily = "button"): string {
   const registry = "docs/registry/families"
   mkdirSync(join(fixture, registry), { recursive: true })
   cpSync(join(repository, registry), join(fixture, registry), { recursive: true })
+  return fixture
+}
+
+/**
+ * Button with PNG references and PNG receipts, bound to the current pinned source. Promotion
+ * converted the real references to WebP, so only the conversion tests need this older shape.
+ */
+export function createLegacyPngButtonFixture(): string {
+  const fixture = createOfflineProofFixture()
+  const button = join(fixture, "packages/design-governance/reflection-families/button")
+  const legacy = join(import.meta.dirname, "fixtures/legacy-button-png")
+  rmSync(join(button, "baselines"), { recursive: true, force: true })
+  cpSync(join(legacy, "baselines"), join(button, "baselines"), { recursive: true })
+  cpSync(join(legacy, "reflection-contract.json"), join(button, "reflection-contract.json"))
   return fixture
 }
