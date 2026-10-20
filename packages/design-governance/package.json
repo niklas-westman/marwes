@@ -16,7 +16,8 @@
     "governance": "tsx src/cli/governance.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test:browser": "vitest run --config vitest.browser.config.ts"
+    "test:browser": "vitest run --config vitest.browser.config.ts",
+    "bundle": "tsx src/cli/governance.ts bundle"
   },
   "engines": {
     "node": ">=22.12.0"
@@ -25,6 +26,7 @@
     "@types/node": "24.10.10",
     "playwright": "1.60.0",
     "reflection-check": "0.7.0",
+    "reflection-projection": "0.3.0",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vite": "8.0.16",

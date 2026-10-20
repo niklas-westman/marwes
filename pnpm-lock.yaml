@@ -552,6 +552,9 @@ importers:
       reflection-check:
         specifier: 0.7.0
         version: 0.7.0(@types/node@24.10.10)(esbuild@0.28.1)(tsx@4.21.0)
+      reflection-projection:
+        specifier: 0.3.0
+        version: 0.3.0
       tsx:
         specifier: 4.21.0
         version: 4.21.0
@@ -4455,6 +4458,10 @@ packages:
     resolution: {integrity: sha512-r/E9drBkGhJfzEgWbDPzhGdZt2Td3ObWzOmQHDRE7ngFWh8iczlDKkyU3SNh64OIIE97xUfrFc3Kld9e4/gTow==}
     engines: {node: '>=22'}
     hasBin: true
+
+  reflection-projection@0.3.0:
+    resolution: {integrity: sha512-xswhHaXClwyFfzT+zArXXIOg2TO7vUezhaMqV/ls2mrKKXk9I0+lfbL4o+xfCfRTaRUKXX8bgosx/ytZ243blg==}
+    engines: {node: '>=22'}
 
   regexp.prototype.flags@1.5.4:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
@@ -9251,6 +9258,10 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  reflection-projection@0.3.0:
+    dependencies:
+      zod: 4.4.3
 
   regexp.prototype.flags@1.5.4:
     dependencies:

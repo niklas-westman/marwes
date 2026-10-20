@@ -23,9 +23,18 @@ export async function main(args = process.argv.slice(2)) {
       continue
     }
     if (
-      !["--family", "--adapter", "--stage", "--approval", "--capture", "--transaction"].includes(
-        arg,
-      ) ||
+      ![
+        "--family",
+        "--adapter",
+        "--stage",
+        "--approval",
+        "--capture",
+        "--transaction",
+        "--run",
+        "--output",
+        "--release",
+        "--figma-sync",
+      ].includes(arg) ||
       !args[index + 1] ||
       args[index + 1]?.startsWith("--")
     )
@@ -38,6 +47,47 @@ export async function main(args = process.argv.slice(2)) {
   if (command === "inventory") {
     const { projectStatus } = await import("../evidence/project-status.js")
     console.log(JSON.stringify(projectStatus(repoRoot), null, 2))
+    return
+  }
+  if (command === "bundle") {
+    const bundleFamily = requireValue(options.get("--family"), "bundle requires --family")
+    const { writeFamilyBundle } = await import("../evidence/reflection-bundle.js")
+    const { getCatalog: catalogOf } = await import("../evidence/store.js")
+    const runId =
+      options.get("--run") ??
+      requireValue(
+        catalogOf(repoRoot).families.find((item) => item.family === bundleFamily)?.runId ??
+          undefined,
+        `No run recorded for ${bundleFamily}; run governance verify first`,
+      )
+    const release =
+      options.get("--release") ?? `${bundleFamily}-${new Date().toISOString().slice(0, 10)}`
+    const output = resolve(
+      repoRoot,
+      options.get("--output") ?? `.reflection/bundles/${release}-build-1`,
+    )
+    const figmaSync = options.get("--figma-sync")
+    const built = await writeFamilyBundle(repoRoot, {
+      family: bundleFamily,
+      label: bundleFamily.charAt(0).toUpperCase() + bundleFamily.slice(1),
+      runId,
+      release,
+      build: 1,
+      output,
+      ...(figmaSync ? { figmaSyncManifest: resolve(repoRoot, figmaSync) } : {}),
+    })
+    console.log(
+      JSON.stringify(
+        {
+          bundle: built.directory,
+          runId,
+          requirements: built.projection.requirements?.length,
+          comparisons: built.projection.comparisons?.length,
+        },
+        null,
+        2,
+      ),
+    )
     return
   }
   const family = options.get("--family")
