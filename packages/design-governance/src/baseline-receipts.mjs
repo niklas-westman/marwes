@@ -107,9 +107,69 @@ export function readPngInfo(path) {
   return readPngInfoFromBuffer(readFileSync(path), path)
 }
 
+// Canonical references permit PNG and single-frame lossless WebP only.
+export function readBaselineInfoFromBuffer(buffer, label = "Baseline") {
+  if (buffer.subarray(0, 8).toString("hex") === "89504e470d0a1a0a") {
+    if (buffer.length < 24 || buffer.toString("ascii", 12, 16) !== "IHDR")
+      throw new Error(`${label} has no PNG dimensions`)
+    const info = readPngInfoFromBuffer(buffer, label)
+    if (!info.width || !info.height) throw new Error(`${label} has invalid dimensions`)
+    return { ...info, format: "png" }
+  }
+  if (
+    buffer.length < 20 ||
+    buffer.toString("ascii", 0, 4) !== "RIFF" ||
+    buffer.toString("ascii", 8, 12) !== "WEBP" ||
+    buffer.readUInt32LE(4) + 8 !== buffer.length
+  )
+    throw new Error(`${label} must be PNG or lossless WebP`)
+  let dimensions
+  for (let offset = 12; offset < buffer.length; ) {
+    if (offset + 8 > buffer.length) throw new Error(`${label} has truncated WebP chunks`)
+    const type = buffer.toString("ascii", offset, offset + 4)
+    const length = buffer.readUInt32LE(offset + 4)
+    const end = offset + 8 + length
+    if (end + (length % 2) > buffer.length) throw new Error(`${label} has truncated WebP data`)
+    if (type === "VP8 " || type === "ANIM" || type === "ANMF")
+      throw new Error(`${label} must be single-frame lossless WebP`)
+    if (type === "VP8L") {
+      if (dimensions || length < 5 || buffer[offset + 8] !== 0x2f)
+        throw new Error(`${label} has invalid lossless WebP data`)
+      const bits = buffer.readUInt32LE(offset + 9)
+      if (bits >>> 29) throw new Error(`${label} has unsupported WebP version`)
+      dimensions = { width: (bits & 0x3fff) + 1, height: ((bits >>> 14) & 0x3fff) + 1 }
+    }
+    offset = end + (length % 2)
+  }
+  if (!dimensions) throw new Error(`${label} has no lossless WebP image`)
+  return { ...dimensions, byteLength: buffer.length, sha256: sha256Buffer(buffer), format: "webp" }
+}
+
+export function readBaselineInfo(path) {
+  const info = readBaselineInfoFromBuffer(readFileSync(path), path)
+  if (!path.endsWith(`.${info.format}`))
+    throw new Error(`Baseline extension does not match ${info.format}: ${path}`)
+  return info
+}
+
+export function receiptImageIdentity(receipt) {
+  return receipt.schemaVersion === 2
+    ? {
+        sha256: receipt.imageSha256,
+        byteLength: receipt.imageByteLength,
+        dimensions: receipt.imageDimensions,
+      }
+    : {
+        sha256: receipt.pngSha256,
+        byteLength: receipt.pngByteLength,
+        dimensions: receipt.pngDimensions,
+      }
+}
+
 export function receiptPathForBaselinePath(path) {
-  if (!path.endsWith(".png")) throw new Error(`Baseline path must end with .png: ${path}`)
-  return path.replace(/\.png$/u, ".meta.json")
+  if (!/\.(png|webp)$/u.test(path))
+    throw new Error(`Baseline path must end with .png or .webp: ${path}`)
+  return path.replace(/\.(png|webp)$/u, ".meta.json")
 }
 
 export function extractFileKey(figmaFile) {
@@ -141,11 +201,8 @@ export function findRawFigmaFile(repoRoot, target) {
   const rawDir = absolute(repoRoot, `${target.liveDir}/_raw`)
   if (!existsSync(rawDir)) return undefined
 
-  const rawFiles = readdirSync(rawDir)
-    .filter((file) => file.endsWith(".json"))
-    .map((file) => `${target.liveDir}/_raw/${file}`)
-
-  return rawFiles.find((path) => path.endsWith("_full.json")) ?? rawFiles[0]
+  const rawFile = `${target.liveDir}/_raw/${target.fileKey}_full.json`
+  return target.fileKey && pathExists(repoRoot, rawFile) ? rawFile : undefined
 }
 
 export function loadDesignSource(repoRoot = defaultRepoRoot) {
@@ -382,7 +439,65 @@ export function computeVariablesFingerprint(variableSource, requiredBoundTokens 
   })
 }
 
+export function validateVariableModePolicy(policy) {
+  if (policy === undefined) return undefined
+  if (
+    !policy ||
+    typeof policy !== "object" ||
+    Array.isArray(policy) ||
+    Object.keys(policy).sort().join(",") !== "collectionModes,descendants,schemaVersion" ||
+    policy.schemaVersion !== 1 ||
+    policy.descendants !== "override-declared-collections" ||
+    !policy.collectionModes ||
+    typeof policy.collectionModes !== "object" ||
+    Array.isArray(policy.collectionModes)
+  )
+    throw new Error("Invalid variableModePolicy/v1")
+  const ids = Object.keys(policy.collectionModes).sort()
+  if (ids.length === 0 || ids.length > 16)
+    throw new Error("variableModePolicy needs 1–16 exact collections")
+  const modes = {}
+  for (let index = 0; index < ids.length; index += 1) {
+    const id = ids[index]
+    if (
+      !/^VariableCollectionId:\d+:\d+$/.test(id) ||
+      typeof policy.collectionModes[id] !== "string" ||
+      !/^\d+:\d+$/.test(policy.collectionModes[id])
+    )
+      throw new Error("Invalid explicit collection/mode identity")
+    modes[id] = policy.collectionModes[id]
+  }
+  return { schemaVersion: 1, descendants: "override-declared-collections", collectionModes: modes }
+}
+function caseVariableModePolicy(caseEntry) {
+  const policy = validateVariableModePolicy(caseEntry.prep?.variableModePolicy)
+  if (!policy) return undefined
+  const expected = caseEntry.collectionModes
+  if (!expected || typeof expected !== "object" || Array.isArray(expected))
+    throw new Error("Explicit mode policy requires independent case.collectionModes")
+  for (const [collectionId, modeId] of Object.entries(policy.collectionModes)) {
+    if (expected[collectionId] !== modeId)
+      throw new Error(`Explicit mode policy conflicts with case collectionModes: ${collectionId}`)
+  }
+  return policy
+}
+
+function acknowledgedModeCapture(caseEntry, captureMetadata) {
+  const policy = caseVariableModePolicy(caseEntry)
+  if (!policy) return undefined
+  const acknowledged = validateVariableModePolicy(captureMetadata?.variableModePolicy)
+  if (
+    stableStringify(acknowledged) !== stableStringify(policy) ||
+    captureMetadata?.figmaNodeId !== caseEntry.figmaNodeId ||
+    typeof captureMetadata?.requestHash !== "string" ||
+    !/^h[0-9a-f]{1,8}$/.test(captureMetadata.requestHash)
+  )
+    throw new Error("Explicit mode capture acknowledgment does not match case/policy")
+  return { policy, policySha256: sha256Json(policy), requestHash: captureMetadata.requestHash }
+}
+
 export function computeCaseFingerprint({ contract, caseEntry, sourceFrameId }) {
+  const policy = caseVariableModePolicy(caseEntry)
   return sha256Json({
     family: contract.family,
     figmaFileKey: contract.figmaFileKey,
@@ -397,6 +512,7 @@ export function computeCaseFingerprint({ contract, caseEntry, sourceFrameId }) {
     viewportSize: caseEntry.viewportSize,
     framing: caseEntry.framing ?? null,
     exportScale: caseEntry.exportScale ?? 1,
+    ...(policy ? { variableModePolicy: policy } : {}),
   })
 }
 
@@ -410,12 +526,16 @@ export function buildBaselineReceipt({
   origin,
   sourceFrameId,
   createdAt,
+  captureMetadata = /** @type {{variableModePolicy?: unknown, figmaNodeId?: string, requestHash?: string} | undefined} */ (
+    undefined
+  ),
 }) {
   if (!baselineReceiptOrigins.has(origin)) {
     throw new Error(`Unknown baseline receipt origin: ${origin}`)
   }
 
-  const png = readPngInfo(pngPath)
+  const modeCapture = acknowledgedModeCapture(caseEntry, captureMetadata)
+  const png = readBaselineInfo(pngPath)
   const expectedSize = caseEntry.viewportSize
   if (png.width !== expectedSize?.width || png.height !== expectedSize?.height) {
     throw new Error(
@@ -438,7 +558,7 @@ export function buildBaselineReceipt({
   })
 
   return {
-    schemaVersion: baselineReceiptSchemaVersion,
+    schemaVersion: png.format === "webp" ? 2 : baselineReceiptSchemaVersion,
     family: contract.family ?? caseEntry.family,
     caseId: caseEntry.caseId,
     mode: caseEntry.mode,
@@ -453,15 +573,28 @@ export function buildBaselineReceipt({
     viewportSize: caseEntry.viewportSize,
     framing: caseEntry.framing ?? null,
     exportScale: caseEntry.exportScale ?? 1,
-    pngSha256: png.sha256,
-    pngDimensions: {
-      width: png.width,
-      height: png.height,
-    },
-    pngByteLength: png.byteLength,
+    ...(png.format === "webp"
+      ? {
+          imageFormat: "webp",
+          imageSha256: png.sha256,
+          imageDimensions: { width: png.width, height: png.height },
+          imageByteLength: png.byteLength,
+        }
+      : {
+          pngSha256: png.sha256,
+          pngDimensions: { width: png.width, height: png.height },
+          pngByteLength: png.byteLength,
+        }),
     sourceFingerprint,
     variablesFingerprint,
     caseFingerprint,
+    ...(modeCapture
+      ? {
+          variableModePolicy: modeCapture.policy,
+          variableModePolicySha256: modeCapture.policySha256,
+          captureRequestHash: modeCapture.requestHash,
+        }
+      : {}),
     origin,
     createdAt: createdAt ?? new Date().toISOString(),
   }
@@ -492,9 +625,15 @@ export function compareReceipt(receipt, expectedReceipt) {
     "exportScale",
     "pngSha256",
     "pngByteLength",
+    "imageFormat",
+    "imageSha256",
+    "imageByteLength",
     "sourceFingerprint",
     "variablesFingerprint",
     "caseFingerprint",
+    "variableModePolicy",
+    "variableModePolicySha256",
+    "captureRequestHash",
   ]
 
   for (const field of exactFields) {
@@ -503,7 +642,13 @@ export function compareReceipt(receipt, expectedReceipt) {
     }
   }
 
-  for (const field of ["sourceNodeIds", "viewportSize", "framing", "pngDimensions"]) {
+  for (const field of [
+    "sourceNodeIds",
+    "viewportSize",
+    "framing",
+    "pngDimensions",
+    "imageDimensions",
+  ]) {
     if (stableStringify(receipt[field]) !== stableStringify(expectedReceipt[field])) {
       issues.push(`${field} mismatch`)
     }
@@ -520,6 +665,9 @@ export async function writeBaselineReceipt({
   pngPath,
   origin,
   sourceFrameId,
+  captureMetadata = /** @type {{variableModePolicy?: unknown, figmaNodeId?: string, requestHash?: string} | undefined} */ (
+    undefined
+  ),
 }) {
   const expected = buildBaselineReceipt({
     repoRoot,
@@ -530,6 +678,7 @@ export async function writeBaselineReceipt({
     pngPath,
     origin,
     sourceFrameId,
+    captureMetadata,
   })
   const receiptPath = receiptPathForBaselinePath(pngPath)
 
@@ -599,6 +748,11 @@ export function validateBaselineReceipt({
       pngPath,
       origin: receipt.origin,
       createdAt: receipt.createdAt,
+      captureMetadata: {
+        variableModePolicy: receipt.variableModePolicy,
+        requestHash: receipt.captureRequestHash,
+        figmaNodeId: receipt.generatedFrameId,
+      },
     })
   } catch (error) {
     return {
@@ -621,8 +775,8 @@ export function validateBaselineReceipt({
     status: "pass",
     receiptPath,
     details: [
-      `${receiptPath}: ${receipt.pngDimensions.width}x${receipt.pngDimensions.height}`,
-      `pngSha256: ${receipt.pngSha256.slice(0, 12)}`,
+      `${receiptPath}: ${receiptImageIdentity(receipt).dimensions.width}x${receiptImageIdentity(receipt).dimensions.height}`,
+      `imageSha256: ${receiptImageIdentity(receipt).sha256.slice(0, 12)}`,
       `sourceFingerprint: ${receipt.sourceFingerprint.slice(0, 12)}`,
       `variablesFingerprint: ${receipt.variablesFingerprint.slice(0, 12)}`,
     ],

@@ -15,7 +15,8 @@
       "**/tsconfig*.json",
       "**/*.svelte",
       "**/*.vue"
-    ]
+    ],
+    "maxSize": 4194304
   },
   "formatter": {
     "enabled": true,
@@ -57,6 +58,12 @@
             "useSemanticElements": "off"
           }
         }
+      }
+    },
+    {
+      "include": ["packages/design-governance/reflection-families/*/source/snapshot.json"],
+      "formatter": {
+        "enabled": false
       }
     }
   ]

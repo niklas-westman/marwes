@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 2,
+  "family": "button",
+  "toleranceReason": "Bounds allow 0.6px for Figma text advance versus browser subpixel layout; numeric styles allow 0.02px serialization; text and paint exact. Existing visual policy remains required.",
+  "cases": [
+    {
+      "caseId": "button.basic",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "2541:7",
+        "VariableCollectionId:1593:4566": "1593:5",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "1461:11495",
+          "part": "root",
+          "selector": ".mw-btn",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            { "property": "opacity", "sourceProperty": "opacity", "tolerance": 0 }
+          ]
+        },
+        {
+          "nodeId": "I1461:11495;1362:7482",
+          "part": "surface",
+          "selector": ".mw-btn",
+          "properties": [
+            { "property": "backgroundColor", "sourceProperty": "fills.0.color", "tolerance": 0 },
+            { "property": "borderRadius", "sourceProperty": "cornerRadius", "tolerance": 0.02 }
+          ]
+        },
+        {
+          "nodeId": "I1461:11495;1362:7483",
+          "part": "layout",
+          "selector": ".mw-btn",
+          "properties": [
+            { "property": "paddingTop", "sourceProperty": "paddingTop", "tolerance": 0.02 },
+            { "property": "paddingRight", "sourceProperty": "paddingRight", "tolerance": 0.02 },
+            { "property": "paddingBottom", "sourceProperty": "paddingBottom", "tolerance": 0.02 },
+            { "property": "paddingLeft", "sourceProperty": "paddingLeft", "tolerance": 0.02 },
+            { "property": "gap", "sourceProperty": "itemSpacing", "tolerance": 0.02 }
+          ]
+        },
+        {
+          "nodeId": "I1461:11495;1362:7484",
+          "part": "label",
+          "selector": ".mw-btn__label",
+          "properties": [
+            { "property": "text", "sourceProperty": "characters", "tolerance": 0 },
+            { "property": "fontFamily", "sourceProperty": "style.fontFamily", "tolerance": 0 },
+            { "property": "fontSize", "sourceProperty": "style.fontSize", "tolerance": 0.02 },
+            { "property": "fontWeight", "sourceProperty": "style.fontWeight", "tolerance": 0.02 },
+            { "property": "lineHeight", "sourceProperty": "style.lineHeightPx", "tolerance": 0.02 },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            { "property": "color", "sourceProperty": "fills.0.color", "tolerance": 0.02 },
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "relativeX",
+              "sourceProperty": "relativeTransform.0.2",
+              "tolerance": 0.6
+            },
+            { "property": "relativeY", "sourceProperty": "relativeTransform.1.2", "tolerance": 0.6 }
+          ]
+        },
+        {
+          "part": "overlay",
+          "nodeId": "I1461:11495;3791:34838",
+          "selector": ".mw-btn::before",
+          "properties": [
+            { "property": "backgroundColor", "sourceProperty": "fills.0.color", "tolerance": 0 }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "primary",
+      "state": "default"
+    },
+    {
+      "caseId": "button.secondary",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "2541:7",
+        "VariableCollectionId:1593:4566": "1593:5",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "1371:11246",
+          "part": "root",
+          "selector": ".mw-btn",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            { "property": "opacity", "sourceProperty": "opacity", "tolerance": 0 }
+          ]
+        },
+        {
+          "nodeId": "I1371:11246;1362:7496",
+          "part": "surface",
+          "selector": ".mw-btn",
+          "properties": [
+            { "property": "backgroundColor", "sourceProperty": "fills.0.color", "tolerance": 0 },
+            { "property": "borderRadius", "sourceProperty": "cornerRadius", "tolerance": 0.02 },
+            { "property": "insetStrokeWidth", "sourceProperty": "strokeWeight", "tolerance": 0.02 },
+            { "property": "insetStrokeColor", "sourceProperty": "strokes.0.color", "tolerance": 0 }
+          ]
+        },
+        {
+          "nodeId": "I1371:11246;1362:7497",
+          "part": "layout",
+          "selector": ".mw-btn",
+          "properties": [
+            { "property": "paddingTop", "sourceProperty": "paddingTop", "tolerance": 0.02 },
+            { "property": "paddingRight", "sourceProperty": "paddingRight", "tolerance": 0.02 },
+            { "property": "paddingBottom", "sourceProperty": "paddingBottom", "tolerance": 0.02 },
+            { "property": "paddingLeft", "sourceProperty": "paddingLeft", "tolerance": 0.02 },
+            { "property": "gap", "sourceProperty": "itemSpacing", "tolerance": 0.02 }
+          ]
+        },
+        {
+          "nodeId": "I1371:11246;1362:7498",
+          "part": "label",
+          "selector": ".mw-btn__label",
+          "properties": [
+            { "property": "text", "sourceProperty": "characters", "tolerance": 0 },
+            { "property": "fontFamily", "sourceProperty": "style.fontFamily", "tolerance": 0 },
+            { "property": "fontSize", "sourceProperty": "style.fontSize", "tolerance": 0.02 },
+            { "property": "fontWeight", "sourceProperty": "style.fontWeight", "tolerance": 0.02 },
+            { "property": "lineHeight", "sourceProperty": "style.lineHeightPx", "tolerance": 0.02 },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            { "property": "color", "sourceProperty": "fills.0.color", "tolerance": 0.02 },
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "relativeX",
+              "sourceProperty": "relativeTransform.0.2",
+              "tolerance": 0.6
+            },
+            { "property": "relativeY", "sourceProperty": "relativeTransform.1.2", "tolerance": 0.6 }
+          ]
+        },
+        {
+          "part": "overlay",
+          "nodeId": "I1371:11246;3791:34841",
+          "selector": ".mw-btn::before",
+          "properties": [
+            { "property": "backgroundColor", "sourceProperty": "fills.0.color", "tolerance": 0 }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "secondary",
+      "state": "default"
+    },
+    {
+      "caseId": "button.text",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "2541:7",
+        "VariableCollectionId:1593:4566": "1593:6",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "1461:11367",
+          "part": "root",
+          "selector": ".mw-btn",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            { "property": "opacity", "sourceProperty": "opacity", "tolerance": 0 }
+          ]
+        },
+        {
+          "nodeId": "I1461:11367;1362:7510",
+          "part": "surface",
+          "selector": ".mw-btn",
+          "properties": []
+        },
+        {
+          "nodeId": "I1461:11367;1362:7511",
+          "part": "layout",
+          "selector": ".mw-btn",
+          "properties": [{ "property": "gap", "sourceProperty": "itemSpacing", "tolerance": 0.02 }]
+        },
+        {
+          "nodeId": "I1461:11367;1362:7512",
+          "part": "label",
+          "selector": ".mw-btn__label",
+          "properties": [
+            { "property": "text", "sourceProperty": "characters", "tolerance": 0 },
+            { "property": "fontFamily", "sourceProperty": "style.fontFamily", "tolerance": 0 },
+            { "property": "fontSize", "sourceProperty": "style.fontSize", "tolerance": 0.02 },
+            { "property": "fontWeight", "sourceProperty": "style.fontWeight", "tolerance": 0.02 },
+            { "property": "lineHeight", "sourceProperty": "style.lineHeightPx", "tolerance": 0.02 },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            { "property": "color", "sourceProperty": "fills.0.color", "tolerance": 0.02 },
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "relativeX",
+              "sourceProperty": "relativeTransform.0.2",
+              "tolerance": 0.6
+            },
+            { "property": "relativeY", "sourceProperty": "relativeTransform.1.2", "tolerance": 0.6 }
+          ]
+        },
+        {
+          "part": "overlay",
+          "nodeId": "I1461:11367;3564:4325",
+          "selector": ".mw-btn::before",
+          "properties": [
+            { "property": "backgroundColor", "sourceProperty": "fills.0.color", "tolerance": 0 }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": [
+        "Glyph rasterization requires visual proof",
+        "Text button expanded pill/hit-area geometry requires visual proof"
+      ],
+      "publicVariant": "text",
+      "state": "default"
+    },
+    {
+      "caseId": "button.destructive",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "2541:7",
+        "VariableCollectionId:1593:4566": "1593:6",
+        "VariableCollectionId:2276:28206": "2276:15"
+      },
+      "parts": [
+        {
+          "nodeId": "1364:11356",
+          "part": "root",
+          "selector": ".mw-btn",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            { "property": "opacity", "sourceProperty": "opacity", "tolerance": 0 }
+          ]
+        },
+        {
+          "nodeId": "1364:11357",
+          "part": "surface",
+          "selector": ".mw-btn",
+          "properties": [
+            { "property": "backgroundColor", "sourceProperty": "fills.0.color", "tolerance": 0 },
+            { "property": "borderRadius", "sourceProperty": "cornerRadius", "tolerance": 0.02 }
+          ]
+        },
+        {
+          "nodeId": "1364:11357",
+          "part": "layout",
+          "selector": ".mw-btn",
+          "properties": [
+            { "property": "paddingTop", "sourceProperty": "paddingTop", "tolerance": 0.02 },
+            { "property": "paddingRight", "sourceProperty": "paddingRight", "tolerance": 0.02 },
+            { "property": "paddingBottom", "sourceProperty": "paddingBottom", "tolerance": 0.02 },
+            { "property": "paddingLeft", "sourceProperty": "paddingLeft", "tolerance": 0.02 },
+            { "property": "gap", "sourceProperty": "itemSpacing", "tolerance": 0.02 }
+          ]
+        },
+        {
+          "nodeId": "1364:11358",
+          "part": "label",
+          "selector": ".mw-btn__label",
+          "properties": [
+            { "property": "text", "sourceProperty": "characters", "tolerance": 0 },
+            { "property": "fontFamily", "sourceProperty": "style.fontFamily", "tolerance": 0 },
+            { "property": "fontSize", "sourceProperty": "style.fontSize", "tolerance": 0.02 },
+            { "property": "fontWeight", "sourceProperty": "style.fontWeight", "tolerance": 0.02 },
+            { "property": "lineHeight", "sourceProperty": "style.lineHeightPx", "tolerance": 0.02 },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            { "property": "color", "sourceProperty": "fills.0.color", "tolerance": 0.02 },
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.02
+            },
+            {
+              "property": "relativeX",
+              "sourceProperty": "relativeTransform.0.2",
+              "tolerance": 0.6
+            },
+            { "property": "relativeY", "sourceProperty": "relativeTransform.1.2", "tolerance": 0.6 }
+          ]
+        },
+        {
+          "nodeId": "1364:11356",
+          "part": "icon",
+          "selector": ".mw-btn .mw-icon",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "children.0.children.1.absoluteBoundingBox.width",
+              "tolerance": 0.02
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "children.0.children.1.absoluteBoundingBox.height",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": [
+        "Icon vector geometry requires existing visual proof",
+        "Glyph rasterization requires visual proof"
+      ],
+      "publicVariant": "danger",
+      "state": "default"
+    }
+  ]
+}

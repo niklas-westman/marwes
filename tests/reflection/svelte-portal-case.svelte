@@ -1,5 +1,26 @@
 <script lang="ts">
+  import { recordButtonActivation } from "./support/button-activation";
   import {
+    Button,
+    IconButton,
+    CancelButton,
+    CopyButton,
+    FilterButton,
+    SortButton,
+    CloseButton,
+    RefreshButton,
+    SuccessButton,
+    SubmitButton,
+    SaveButton,
+    ConfirmButton,
+    VerifyButton,
+    CreateButton,
+    EditButton,
+    UploadButton,
+    DownloadButton,
+    SearchButton,
+    DropdownButton,
+    LinkButton,
     Badge,
     BadgeVariant,
     Card,
@@ -82,18 +103,200 @@
     <Badge variant={BadgeVariant.warning}>Badge</Badge>
   {:else if path === "/reflection/badge/destructive/light" || path === "/reflection/badge/destructive/dark"}
     <Badge variant={BadgeVariant.error}>Badge</Badge>
-  {:else if path === "/reflection/button/basic/light"}
-    <PrimaryButton>Label</PrimaryButton>
-  {:else if path === "/reflection/button/secondary/light"}
-    <SecondaryButton>Label</SecondaryButton>
-  {:else if path === "/reflection/button/text/light"}
-    <TextButton>Label</TextButton>
+  {:else if path === "/reflection/button/basic-icon-right/light" || path === "/reflection/button/basic-icon-right/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-left/light" || path === "/reflection/button/basic-icon-left/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/standard-focus-example/light" || path === "/reflection/button/standard-focus-example/dark"}
+    <PrimaryButton onclick={recordButtonActivation}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic/light" || path === "/reflection/button/basic/dark"}
+    <PrimaryButton onclick={recordButtonActivation}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/secondary-icon-right/light" || path === "/reflection/button/secondary-icon-right/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-left/light" || path === "/reflection/button/secondary-icon-left/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary/light" || path === "/reflection/button/secondary/dark"}
+    <SecondaryButton onclick={recordButtonActivation}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/text-icon-right/light" || path === "/reflection/button/text-icon-right/dark"}
+    <TextButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</TextButton>
+  {:else if path === "/reflection/button/text-icon-left/light" || path === "/reflection/button/text-icon-left/dark"}
+    <TextButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</TextButton>
+  {:else if path === "/reflection/button/text/light" || path === "/reflection/button/text/dark"}
+    <TextButton onclick={recordButtonActivation}>Label</TextButton>
+  {:else if path === "/reflection/button/basic-icon-right-hover/light" || path === "/reflection/button/basic-icon-right-hover/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-left-hover/light" || path === "/reflection/button/basic-icon-left-hover/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-hover/light" || path === "/reflection/button/basic-hover/dark"}
+    <PrimaryButton onclick={recordButtonActivation}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-right-pressed/light" || path === "/reflection/button/basic-icon-right-pressed/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-left-pressed/light" || path === "/reflection/button/basic-icon-left-pressed/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-pressed/light" || path === "/reflection/button/basic-pressed/dark"}
+    <PrimaryButton onclick={recordButtonActivation}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-right-disabled/light" || path === "/reflection/button/basic-icon-right-disabled/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-left-disabled/light" || path === "/reflection/button/basic-icon-left-disabled/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-disabled/light" || path === "/reflection/button/basic-disabled/dark"}
+    <PrimaryButton onclick={recordButtonActivation} disabled>Label</PrimaryButton>
+  {:else if path === "/reflection/button/secondary-icon-right-hover/light" || path === "/reflection/button/secondary-icon-right-hover/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-left-hover/light" || path === "/reflection/button/secondary-icon-left-hover/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-hover/light" || path === "/reflection/button/secondary-hover/dark"}
+    <SecondaryButton onclick={recordButtonActivation}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-right-pressed/light" || path === "/reflection/button/secondary-icon-right-pressed/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-left-pressed/light" || path === "/reflection/button/secondary-icon-left-pressed/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-pressed/light" || path === "/reflection/button/secondary-pressed/dark"}
+    <SecondaryButton onclick={recordButtonActivation}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-right-disabled/light" || path === "/reflection/button/secondary-icon-right-disabled/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-left-disabled/light" || path === "/reflection/button/secondary-icon-left-disabled/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-disabled/light" || path === "/reflection/button/secondary-disabled/dark"}
+    <SecondaryButton onclick={recordButtonActivation} disabled>Label</SecondaryButton>
+  {:else if path === "/reflection/button/text-icon-right-hover/light" || path === "/reflection/button/text-icon-right-hover/dark"}
+    <TextButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</TextButton>
+  {:else if path === "/reflection/button/text-icon-left-hover/light" || path === "/reflection/button/text-icon-left-hover/dark"}
+    <TextButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</TextButton>
+  {:else if path === "/reflection/button/text-hover/light" || path === "/reflection/button/text-hover/dark"}
+    <TextButton onclick={recordButtonActivation}>Label</TextButton>
+  {:else if path === "/reflection/button/text-icon-right-pressed/light" || path === "/reflection/button/text-icon-right-pressed/dark"}
+    <TextButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight}>Label</TextButton>
+  {:else if path === "/reflection/button/text-icon-left-pressed/light" || path === "/reflection/button/text-icon-left-pressed/dark"}
+    <TextButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft}>Label</TextButton>
+  {:else if path === "/reflection/button/text-pressed/light" || path === "/reflection/button/text-pressed/dark"}
+    <TextButton onclick={recordButtonActivation}>Label</TextButton>
+  {:else if path === "/reflection/button/text-icon-right-disabled/light" || path === "/reflection/button/text-icon-right-disabled/dark"}
+    <TextButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} disabled>Label</TextButton>
+  {:else if path === "/reflection/button/text-icon-left-disabled/light" || path === "/reflection/button/text-icon-left-disabled/dark"}
+    <TextButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} disabled>Label</TextButton>
+  {:else if path === "/reflection/button/text-disabled/light" || path === "/reflection/button/text-disabled/dark"}
+    <TextButton onclick={recordButtonActivation} disabled>Label</TextButton>
+  {:else if path === "/reflection/button/basic-icon-right-sm/light" || path === "/reflection/button/basic-icon-right-sm/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} size="sm">Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-left-sm/light" || path === "/reflection/button/basic-icon-left-sm/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="sm">Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-sm/light" || path === "/reflection/button/basic-sm/dark"}
+    <PrimaryButton onclick={recordButtonActivation} size="sm">Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-right-lg/light" || path === "/reflection/button/basic-icon-right-lg/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} size="lg">Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-icon-left-lg/light" || path === "/reflection/button/basic-icon-left-lg/dark"}
+    <PrimaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="lg">Label</PrimaryButton>
+  {:else if path === "/reflection/button/basic-lg/light" || path === "/reflection/button/basic-lg/dark"}
+    <PrimaryButton onclick={recordButtonActivation} size="lg">Label</PrimaryButton>
+  {:else if path === "/reflection/button/secondary-icon-right-sm/light" || path === "/reflection/button/secondary-icon-right-sm/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} size="sm">Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-left-sm/light" || path === "/reflection/button/secondary-icon-left-sm/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="sm">Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-sm/light" || path === "/reflection/button/secondary-sm/dark"}
+    <SecondaryButton onclick={recordButtonActivation} size="sm">Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-right-lg/light" || path === "/reflection/button/secondary-icon-right-lg/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconRight={IconName.ArrowRight} size="lg">Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-icon-left-lg/light" || path === "/reflection/button/secondary-icon-left-lg/dark"}
+    <SecondaryButton onclick={recordButtonActivation} iconLeft={IconName.ArrowLeft} size="lg">Label</SecondaryButton>
+  {:else if path === "/reflection/button/secondary-lg/light" || path === "/reflection/button/secondary-lg/dark"}
+    <SecondaryButton onclick={recordButtonActivation} size="lg">Label</SecondaryButton>
   {:else if path === "/reflection/button/destructive/light"}
-    <DestructiveButton>Delete</DestructiveButton>
+    <DestructiveButton onclick={recordButtonActivation} size="sm" iconRight={IconName.X}>Delete</DestructiveButton>
   {:else if path === "/reflection/card/default/light" || path === "/reflection/card/default/dark"}
     <div style="width: 320px">
       <Card title="Card title">{cardBody}</Card>
     </div>
+  {:else if path === "/reflection/button/success-default/light" || path === "/reflection/button/success-default/dark"}
+    <SuccessButton onclick={recordButtonActivation}>Confirm</SuccessButton>
+  {:else if path === "/reflection/button/success-hover/light" || path === "/reflection/button/success-hover/dark"}
+    <SuccessButton onclick={recordButtonActivation}>Confirm</SuccessButton>
+  {:else if path === "/reflection/button/success-pressed/light" || path === "/reflection/button/success-pressed/dark"}
+    <SuccessButton onclick={recordButtonActivation}>Confirm</SuccessButton>
+  {:else if path === "/reflection/button/success-disabled/light" || path === "/reflection/button/success-disabled/dark"}
+    <SuccessButton onclick={recordButtonActivation} disabled={true}>Confirm</SuccessButton>
+  {:else if path === "/reflection/button/success-error/light" || path === "/reflection/button/success-error/dark"}
+    <SuccessButton onclick={recordButtonActivation} error={true}>Confirm</SuccessButton>
+  {:else if path === "/reflection/button/danger-default/light" || path === "/reflection/button/danger-default/dark"}
+    <DestructiveButton onclick={recordButtonActivation} size={"sm"}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/danger-hover/light" || path === "/reflection/button/danger-hover/dark"}
+    <DestructiveButton onclick={recordButtonActivation} size={"sm"}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/danger-pressed/light" || path === "/reflection/button/danger-pressed/dark"}
+    <DestructiveButton onclick={recordButtonActivation} size={"sm"}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/danger-disabled/light" || path === "/reflection/button/danger-disabled/dark"}
+    <DestructiveButton onclick={recordButtonActivation} size={"sm"} disabled={true}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/danger-error/light" || path === "/reflection/button/danger-error/dark"}
+    <DestructiveButton onclick={recordButtonActivation} size={"sm"} error={true}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/primary-error/light" || path === "/reflection/button/primary-error/dark"}
+    <PrimaryButton onclick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>Label</PrimaryButton>
+  {:else if path === "/reflection/button/secondary-error/light" || path === "/reflection/button/secondary-error/dark"}
+    <SecondaryButton onclick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>Label</SecondaryButton>
+  {:else if path === "/reflection/button/text-error/light" || path === "/reflection/button/text-error/dark"}
+    <TextButton onclick={recordButtonActivation} error={true} iconRight={IconName.ArrowRight}>Label</TextButton>
+  {:else if path === "/reflection/button/purpose-submit/light" || path === "/reflection/button/purpose-submit/dark"}
+    <SubmitButton onclick={recordButtonActivation}>Submit</SubmitButton>
+  {:else if path === "/reflection/button/purpose-save/light" || path === "/reflection/button/purpose-save/dark"}
+    <SaveButton onclick={recordButtonActivation}>Save</SaveButton>
+  {:else if path === "/reflection/button/purpose-confirm/light" || path === "/reflection/button/purpose-confirm/dark"}
+    <ConfirmButton onclick={recordButtonActivation}>Confirm</ConfirmButton>
+  {:else if path === "/reflection/button/purpose-destructive/light" || path === "/reflection/button/purpose-destructive/dark"}
+    <DestructiveButton onclick={recordButtonActivation} size={"sm"}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/purpose-verify/light" || path === "/reflection/button/purpose-verify/dark"}
+    <VerifyButton onclick={recordButtonActivation}>Verify</VerifyButton>
+  {:else if path === "/reflection/button/purpose-create/light" || path === "/reflection/button/purpose-create/dark"}
+    <CreateButton onclick={recordButtonActivation}>Create</CreateButton>
+  {:else if path === "/reflection/button/purpose-edit/light" || path === "/reflection/button/purpose-edit/dark"}
+    <EditButton onclick={recordButtonActivation}>Edit</EditButton>
+  {:else if path === "/reflection/button/purpose-upload/light" || path === "/reflection/button/purpose-upload/dark"}
+    <UploadButton onclick={recordButtonActivation}>Upload</UploadButton>
+  {:else if path === "/reflection/button/purpose-download/light" || path === "/reflection/button/purpose-download/dark"}
+    <DownloadButton onclick={recordButtonActivation}>Download</DownloadButton>
+  {:else if path === "/reflection/button/purpose-search/light" || path === "/reflection/button/purpose-search/dark"}
+    <SearchButton onclick={recordButtonActivation}>Search</SearchButton>
+  {:else if path === "/reflection/button/purpose-dropdown/light" || path === "/reflection/button/purpose-dropdown/dark"}
+    <DropdownButton onclick={recordButtonActivation}>Options</DropdownButton>
+  {:else if path === "/reflection/button/purpose-navigation/light" || path === "/reflection/button/purpose-navigation/dark"}
+    <LinkButton onclick={recordButtonActivation} href={"#governance-target"}>Link</LinkButton>
+  {:else if path === "/reflection/button/secondary-loading/light" || path === "/reflection/button/secondary-loading/dark"}
+    <SecondaryButton onclick={recordButtonActivation} loading={{ isLoading: true, loadingLabel: "Please wait" }}>Please wait</SecondaryButton>
+  {:else if path === "/reflection/button/neutral-default/light" || path === "/reflection/button/neutral-default/dark"}
+    <Button onclick={recordButtonActivation} variant={"neutral"}>Cancel</Button>
+  {:else if path === "/reflection/button/neutral-hover/light" || path === "/reflection/button/neutral-hover/dark"}
+    <Button onclick={recordButtonActivation} variant={"neutral"}>Cancel</Button>
+  {:else if path === "/reflection/button/neutral-pressed/light" || path === "/reflection/button/neutral-pressed/dark"}
+    <Button onclick={recordButtonActivation} variant={"neutral"}>Cancel</Button>
+  {:else if path === "/reflection/button/neutral-disabled/light" || path === "/reflection/button/neutral-disabled/dark"}
+    <Button onclick={recordButtonActivation} variant={"neutral"} disabled={true}>Cancel</Button>
+  {:else if path === "/reflection/button/neutral-error/light" || path === "/reflection/button/neutral-error/dark"}
+    <Button onclick={recordButtonActivation} variant={"neutral"} error={true}>Cancel</Button>
+  {:else if path === "/reflection/button/neutral-icon-left-default/light" || path === "/reflection/button/neutral-icon-left-default/dark"}
+    <RefreshButton onclick={recordButtonActivation}>Refresh</RefreshButton>
+  {:else if path === "/reflection/button/neutral-icon-left-hover/light" || path === "/reflection/button/neutral-icon-left-hover/dark"}
+    <RefreshButton onclick={recordButtonActivation}>Refresh</RefreshButton>
+  {:else if path === "/reflection/button/neutral-icon-left-pressed/light" || path === "/reflection/button/neutral-icon-left-pressed/dark"}
+    <RefreshButton onclick={recordButtonActivation}>Refresh</RefreshButton>
+  {:else if path === "/reflection/button/neutral-icon-left-disabled/light" || path === "/reflection/button/neutral-icon-left-disabled/dark"}
+    <RefreshButton onclick={recordButtonActivation} disabled={true}>Refresh</RefreshButton>
+  {:else if path === "/reflection/button/neutral-icon-left-error/light" || path === "/reflection/button/neutral-icon-left-error/dark"}
+    <RefreshButton onclick={recordButtonActivation} error={true}>Refresh</RefreshButton>
+  {:else if path === "/reflection/button/purpose-cancel/light" || path === "/reflection/button/purpose-cancel/dark"}
+    <CancelButton onclick={recordButtonActivation}>Cancel</CancelButton>
+  {:else if path === "/reflection/button/purpose-copy/light" || path === "/reflection/button/purpose-copy/dark"}
+    <CopyButton onclick={recordButtonActivation}>Copy</CopyButton>
+  {:else if path === "/reflection/button/purpose-filter/light" || path === "/reflection/button/purpose-filter/dark"}
+    <FilterButton onclick={recordButtonActivation}>Filter</FilterButton>
+  {:else if path === "/reflection/button/purpose-sort/light" || path === "/reflection/button/purpose-sort/dark"}
+    <SortButton onclick={recordButtonActivation}>Sort</SortButton>
+  {:else if path === "/reflection/button/purpose-close/light" || path === "/reflection/button/purpose-close/dark"}
+    <CloseButton onclick={recordButtonActivation}>Close</CloseButton>
+  {:else if path === "/reflection/button/purpose-refresh/light" || path === "/reflection/button/purpose-refresh/dark"}
+    <RefreshButton onclick={recordButtonActivation}>Refresh</RefreshButton>
+  {:else if path === "/reflection/button/success-icon-left-default/light" || path === "/reflection/button/success-icon-left-default/dark"}
+    <SuccessButton onclick={recordButtonActivation} iconLeft={IconName.Check}>Success</SuccessButton>
+  {:else if path === "/reflection/button/danger-icon-left-default/light" || path === "/reflection/button/danger-icon-left-default/dark"}
+    <DestructiveButton onclick={recordButtonActivation} iconLeft={IconName.X} size={"sm"}>Delete</DestructiveButton>
+  {:else if path === "/reflection/button/icon-only-neutral-default/light" || path === "/reflection/button/icon-only-neutral-default/dark"}
+    <IconButton onclick={recordButtonActivation} icon={IconName.X} size="md" variant="neutral" ariaLabel="Close" />
   {:else if path === "/reflection/checkbox/states-default/light" || path === "/reflection/checkbox/states-default/dark"}
     <div style="display: flex; align-items: center; gap: 16px">
       <CheckboxField id="reflection-checkbox-unchecked" label="Label" checkbox={{}} />

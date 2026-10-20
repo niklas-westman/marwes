@@ -11,10 +11,14 @@ function usage() {
   return [
     "Usage:",
     "  pnpm governance:status",
+    "  pnpm governance:inventory",
     "  pnpm governance:sync -- --mode cache",
     "  pnpm governance:prepare -- --family badge --connect --dry-run",
     "  pnpm governance:ingest -- --family badge --dry-run",
     "  pnpm governance:check -- --family badge",
+    "  pnpm governance:verify -- --family button --adapter all",
+    "  pnpm governance:review -- --family button",
+    "  pnpm governance:source:stage -- --family button --capture <manifest.json>",
     "  pnpm governance:visual",
     "  pnpm governance:ci -- --skip-browser-install",
     "  pnpm governance:migrate-contracts -- --dry-run",
@@ -85,10 +89,6 @@ function withDefaultAll(args) {
   return hasSelection(args) ? args : ["--all", ...args]
 }
 
-function withRequiredArg(args, name) {
-  return args.includes(name) ? args : [...args, name]
-}
-
 function runSync(args) {
   const mode = readOption(args, "--mode", "cache")
   const skipRaw = args.includes("--skip-raw")
@@ -126,15 +126,6 @@ function runSync(args) {
   }
 }
 
-function runCheck(args) {
-  const strict = args.includes("--strict")
-  const passthrough = args.filter((arg) => arg !== "--strict")
-  const selected = withDefaultAll(passthrough)
-  const withReceipts = withRequiredArg(selected, "--require-baseline-receipts")
-  const finalArgs = strict ? withRequiredArg(withReceipts, "--require-figma-frames") : withReceipts
-  runScript(resolve(packageRoot, "src/cohesive-check.mjs"), finalArgs)
-}
-
 function runIngest(args) {
   if (args.includes("--source")) {
     const withTarget = args.includes("--target") ? args : ["--target", "active", ...args]
@@ -164,13 +155,28 @@ function main() {
     return
   }
 
-  if (command === "sync") {
-    runSync(rest)
+  if (
+    [
+      "status",
+      "inventory",
+      "check",
+      "verify",
+      "review",
+      "ci",
+      "source-import",
+      "source-stage",
+      "source-stage-preview",
+      "source-apply",
+      "source-recover",
+    ].includes(command)
+  ) {
+    const pnpm = process.platform === "win32" ? "pnpm.cmd" : "pnpm"
+    runCommand(pnpm, ["--filter", "@marwes-ui/design-governance", "governance", command, ...rest])
     return
   }
 
-  if (command === "status") {
-    runScript(resolve(packageRoot, "src/governance-status.mjs"), rest)
+  if (command === "sync") {
+    runSync(rest)
     return
   }
 
@@ -184,18 +190,8 @@ function main() {
     return
   }
 
-  if (command === "check") {
-    runCheck(rest)
-    return
-  }
-
   if (command === "visual") {
     runVisual()
-    return
-  }
-
-  if (command === "ci") {
-    runScript(resolve(repoRoot, "scripts/reflection/ci.mjs"), rest)
     return
   }
 
