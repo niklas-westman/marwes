@@ -104,6 +104,7 @@ function evidence(cases: CaseReport[]): FamilyEvidence {
     projectId: "marwes",
     projectName: "Marwes",
     coverage,
+    inventory: "full",
     report,
     engineRuns: Object.fromEntries(adapters.map((a) => [a, engine(a)])) as Record<
       Adapter,
@@ -178,5 +179,27 @@ describe("projectFamily", () => {
       (c) => c.requirementId === "design.primary.default",
     )
     expect(visual?.limitations).toContain("Owner-accepted deviation (DC-011)")
+  })
+
+  it("records why integrity failed so a superseded source is not a bare failure", () => {
+    const base = allAdapters("button.basic")
+    const failing = base.map((entry) => ({
+      ...entry,
+      outcomes: { ...entry.outcomes, integrity: "failed" as const },
+      unsupported: [
+        "Error: Invalid compact source identity for button",
+        "Invalid compact source identity for button",
+        "Family coverage: x",
+      ],
+    }))
+    const { projection } = projectFamily(evidence(failing))
+    const own = (projection.comparisons ?? []).find(
+      (c) => c.requirementId === "design.primary.default",
+    )
+    expect(own?.proof.integrity).toBe("failed")
+    expect(own?.limitations).toContain(
+      "Integrity failed: Invalid compact source identity for button",
+    )
+    expect(own?.limitations?.join(" ")).not.toContain("Family coverage")
   })
 })

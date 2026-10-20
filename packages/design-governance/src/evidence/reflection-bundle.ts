@@ -54,7 +54,9 @@ export interface FamilyEvidence {
   label: string
   projectId: string
   projectName: string
-  coverage: CoverageContract
+  coverage: RequiredSet
+  /** `executed-only` when the family has no inventory: required items are then only what ran. */
+  inventory: "full" | "executed-only"
   report: GovernanceReport
   engineRuns: Record<Adapter, EngineRun>
   acceptedDeviations: Map<string, string>
@@ -79,7 +81,8 @@ export interface FamilyEvidence {
       fileKey: string
       note?: string
     }
-    requiredSet: { capturedAt: string; sha256: string; fileKey: string }
+    /** Absent when the family keeps no required-set inventory of its own. */
+    requiredSet?: { capturedAt: string; sha256: string; fileKey: string }
   }
   generatedAt: string
   /** Image file for one comparison and role, relative to nothing: an absolute path on disk or undefined. */
@@ -88,11 +91,21 @@ export interface FamilyEvidence {
 
 export type BundleFile = BundleFileInput
 
-const snapshotIds = {
-  sync: "figma-sync",
-  source: "button-source-capture",
-  requiredSet: "button-required-set",
-} as const
+export type RequiredItem = Omit<CoverageRequirement, "requiredProofs"> & {
+  requiredProofs: Requirement["requiredProofs"]
+}
+export interface RequiredSet {
+  family: string
+  figmaFileKey: string
+  items: RequiredItem[]
+}
+
+const snapshotIdsFor = (family: string) =>
+  ({
+    sync: "figma-sync",
+    source: `${family}-source-capture`,
+    requiredSet: `${family}-required-set`,
+  }) as const
 
 const toProof = (outcome: ProofOutcome | undefined): Proof => {
   if (outcome === "passed" || outcome === "failed" || outcome === "unsupported") return outcome
@@ -116,7 +129,7 @@ function verdictOf(required: Layer[], proof: Record<Layer, Proof>): Comparison["
   return { status: "skipped", severity: "info" }
 }
 
-function requirementOf(item: CoverageRequirement, family: string): Requirement {
+function requirementOf(item: RequiredItem, family: string): Requirement {
   const dimensions = item.dimensions ?? {}
   const { variant, state, ...rest } = dimensions
   const availability = item.source?.availability
@@ -147,7 +160,7 @@ function requirementOf(item: CoverageRequirement, family: string): Requirement {
     requiredProofs: item.requiredProofs,
     requiredImplementations: [...adapters],
     enrolled: Boolean(item.caseId),
-    design: { ...design, ...(item.caseId ? { snapshotId: snapshotIds.source } : {}) },
+    design: { ...design, ...(item.caseId ? { snapshotId: snapshotIdsFor(family).source } : {}) },
   }
 }
 
@@ -164,6 +177,7 @@ export function projectFamily(evidence: FamilyEvidence): {
   projection: Projection
   files: BundleFile[]
 } {
+  const ids = snapshotIdsFor(evidence.family)
   const { coverage, report } = evidence
   const requirements = coverage.items.map((item) => requirementOf(item, evidence.family))
   const rows = new Map(
@@ -198,7 +212,21 @@ export function projectFamily(evidence: FamilyEvidence): {
       const accepted = withVisual
         ? evidence.acceptedDeviations.get(caseKey(row.caseId, row.mode))
         : undefined
-      const limitations = [...(row.limitations ?? []), ...(accepted ? [accepted] : [])]
+      const integrityNote =
+        row.outcomes.integrity === "failed"
+          ? [
+              ...new Set(
+                row.unsupported
+                  .filter((entry) => !entry.startsWith("Family coverage"))
+                  .map((entry) => entry.replace(/^Error: /, "")),
+              ),
+            ]
+          : []
+      const limitations = [
+        ...(row.limitations ?? []),
+        ...integrityNote.map((entry) => `Integrity failed: ${entry}`),
+        ...(accepted ? [accepted] : []),
+      ]
       comparisons.push({
         id,
         requirementId: item.itemId,
@@ -207,7 +235,7 @@ export function projectFamily(evidence: FamilyEvidence): {
           adapter: row.adapter,
           ...(withVisual && settings?.viewport ? { viewport: settings.viewport } : {}),
         },
-        snapshotId: snapshotIds.source,
+        snapshotId: ids.source,
         runId: `${row.adapter}:${run.runId}`,
         ...(reference
           ? {
@@ -308,31 +336,35 @@ export function projectFamily(evidence: FamilyEvidence): {
       capabilities: [],
     },
     generatedAt: evidence.generatedAt,
-    inventory: "full",
+    inventory: evidence.inventory,
     scope: evidence.family,
     subjects: [{ id: evidence.family, kind: "component", label: evidence.label }],
     snapshots: [
       {
-        id: snapshotIds.sync,
+        id: ids.sync,
         kind: "design-sync",
         role: "full-sync",
         label: "Full design sync",
         ...sync,
       },
       {
-        id: snapshotIds.source,
+        id: ids.source,
         kind: "design-capture",
         role: "proof-source",
         label: `${evidence.label} source capture`,
         ...source,
       },
-      {
-        id: snapshotIds.requiredSet,
-        kind: "inventory",
-        role: "required-set",
-        label: `${evidence.label} required set`,
-        ...requiredSet,
-      },
+      ...(requiredSet
+        ? [
+            {
+              id: ids.requiredSet,
+              kind: "inventory",
+              role: "required-set",
+              label: `${evidence.label} required set`,
+              ...requiredSet,
+            },
+          ]
+        : []),
     ],
     requirements,
     comparisons,
@@ -416,10 +448,46 @@ export interface BuildOptions {
   figmaSyncManifest?: string
 }
 
+/** Required items for a family without an inventory: one per executed case, in the layers it required. */
+function executedItems(report: GovernanceReport): RequiredItem[] {
+  const seen = new Map<string, RequiredItem>()
+  for (const row of report.cases) {
+    const key = caseKey(row.caseId, row.mode)
+    if (seen.has(key)) continue
+    seen.set(key, {
+      itemId: `${row.caseId}.${row.mode}`,
+      label: `${row.caseId} · ${row.mode}`,
+      mode: row.mode,
+      caseId: row.caseId,
+      requiredProofs: (row.requiredProofs ?? layers).filter((layer): layer is Layer =>
+        layers.includes(layer as Layer),
+      ),
+    })
+  }
+  return [...seen.values()]
+}
+
+/** Say plainly when a capture predates the full sync, so a superseded source never reads as current. */
+function snapshotNote(
+  provenance: string | undefined,
+  capturedWithSync: boolean,
+  syncVersion: string | undefined,
+): { note: string } | Record<string, never> {
+  const parts = [
+    ...(provenance ? [provenance] : []),
+    ...(!capturedWithSync && syncVersion
+      ? [
+          `Not the current sync (${syncVersion}); capture date not recorded, the date shown is the design file's last modification.`,
+        ]
+      : []),
+  ]
+  return parts.length ? { note: parts.join(" ") } : {}
+}
+
 export function readFamilyEvidence(repoRoot: string, options: BuildOptions): FamilyEvidence {
   const { family } = options
   const directory = join(repoRoot, familyRoot, family)
-  const coverage = readJson<CoverageContract>(join(directory, "coverage-contract.json"))
+  const coveragePath = join(directory, "coverage-contract.json")
   const report = readReport(repoRoot, options.runId)
   const runRoot = join(evidenceRoot(repoRoot), options.runId)
   const sourceManifest = readJson<{
@@ -428,13 +496,24 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
     hashes: { raw: string; manifest: string }
     capture: { version: string; lastModified: string; provenance?: string }
   }>(join(directory, "source/manifest.json"))
+  const syncPath = options.figmaSyncManifest ?? join(repoRoot, ".figma/marwes/manifest.json")
   const sync = optionalJson<{
     syncedAt: string
     lastModified: string
     version: string
     versionTag?: string
     fileKey: string
-  }>(options.figmaSyncManifest ?? join(repoRoot, ".figma/marwes/manifest.json"))
+  }>(syncPath)
+  // A family with no inventory of its own can only say what ran, so its required items are the
+  // executed cases and the inventory is declared as a lower bound.
+  const coverage: RequiredSet = existsSync(coveragePath)
+    ? readJson<CoverageContract>(coveragePath)
+    : {
+        family,
+        figmaFileKey: sourceManifest.fileKey,
+        items: executedItems(report),
+      }
+  const capturedWithSync = Boolean(sync && sync.version === sourceManifest.capture.version)
   const contract = readJson<{
     cases: {
       caseId: string
@@ -470,6 +549,7 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
     projectId: "marwes",
     projectName: "Marwes",
     coverage,
+    inventory: existsSync(coveragePath) ? "full" : "executed-only",
     report,
     engineRuns,
     acceptedDeviations: accepted,
@@ -481,8 +561,8 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
         upstreamModifiedAt: sync?.lastModified ?? sourceManifest.capture.lastModified,
         version: sync?.version ?? sourceManifest.capture.version,
         ...(sync?.versionTag ? { versionTag: sync.versionTag } : {}),
-        sha256: sourceManifest.hashes.manifest,
-        fileKey: sourceManifest.fileKey,
+        sha256: sync ? hash(readFileSync(syncPath)) : sourceManifest.hashes.manifest,
+        fileKey: sync?.fileKey ?? sourceManifest.fileKey,
         ...(sync
           ? {}
           : {
@@ -490,20 +570,26 @@ export function readFamilyEvidence(repoRoot: string, options: BuildOptions): Fam
             }),
       },
       source: {
-        capturedAt: sync?.syncedAt ?? sourceManifest.capture.lastModified,
+        capturedAt: capturedWithSync
+          ? (sync?.syncedAt ?? sourceManifest.capture.lastModified)
+          : sourceManifest.capture.lastModified,
         upstreamModifiedAt: sourceManifest.capture.lastModified,
         version: sourceManifest.capture.version,
         // The compact capture is derived from this raw export, so the raw hash names its content
         // independently of how the compact file is serialized.
         sha256: sourceManifest.hashes.raw,
         fileKey: sourceManifest.fileKey,
-        ...(sourceManifest.capture.provenance ? { note: sourceManifest.capture.provenance } : {}),
+        ...snapshotNote(sourceManifest.capture.provenance, capturedWithSync, sync?.version),
       },
-      requiredSet: {
-        capturedAt: gitDate(repoRoot, join(familyRoot, family, "coverage-contract.json")),
-        sha256: hash(readFileSync(join(directory, "coverage-contract.json"))),
-        fileKey: coverage.figmaFileKey,
-      },
+      ...(existsSync(coveragePath)
+        ? {
+            requiredSet: {
+              capturedAt: gitDate(repoRoot, join(familyRoot, family, "coverage-contract.json")),
+              sha256: hash(readFileSync(coveragePath)),
+              fileKey: coverage.figmaFileKey,
+            },
+          }
+        : {}),
     },
     generatedAt: new Date().toISOString(),
     imageFor: (row, role) => {
@@ -537,15 +623,13 @@ export async function writeFamilyBundle(
   const { writeBundle } = await import("reflection-projection/node")
   const evidence = readFamilyEvidence(repoRoot, options)
   const { projection, files } = projectFamily(evidence)
-  const inventory = readFileSync(
-    join(repoRoot, familyRoot, options.family, "coverage-contract.json"),
-    "utf8",
-  )
-  files.push({
-    path: `source/${options.family}-required-set.json`,
-    kind: "source",
-    content: inventory,
-  })
+  const inventoryPath = join(repoRoot, familyRoot, options.family, "coverage-contract.json")
+  if (existsSync(inventoryPath))
+    files.push({
+      path: `source/${options.family}-required-set.json`,
+      kind: "source",
+      content: readFileSync(inventoryPath, "utf8"),
+    })
   const syncManifest = options.figmaSyncManifest ?? join(repoRoot, ".figma/marwes/manifest.json")
   if (existsSync(syncManifest))
     files.push({
@@ -564,7 +648,7 @@ export async function writeFamilyBundle(
       : {}),
     ...(git(repoRoot, "rev-parse", "HEAD") ? { commit: git(repoRoot, "rev-parse", "HEAD") } : {}),
     previousRelease: null,
-    snapshotIds: Object.values(snapshotIds),
+    snapshotIds: (projection.snapshots ?? []).map((snapshot) => snapshot.id),
   }
   const withRelease = { ...projection, release }
   await writeBundle({
