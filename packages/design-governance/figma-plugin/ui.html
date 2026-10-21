@@ -44,7 +44,8 @@
       var PORT_START = 9223
       var PORT_END = 9232
       var connections = []
-      var pendingRequests = {}
+      var pendingRequests = Object.create(null)
+      var sourceSvgRequests = Object.create(null)
       var fileInfo = null
       var variablesData = null
       var lastError = null
@@ -97,6 +98,20 @@
         }
 
         if (!message.id || !message.method) return
+
+        if (message.method === "EXPORT_SOURCE_SVG") {
+          if (typeof message.id !== "string" || !/^[A-Za-z0-9_.:-]{1,128}$/.test(message.id)) {
+            send(socket, { id: message.id, error: "Invalid source SVG request id" })
+            return
+          }
+          if (sourceSvgRequests[message.id] || pendingRequests[message.id]) {
+            send(socket, { id: message.id, error: "Duplicate pending request id" })
+            return
+          }
+          sourceSvgRequests[message.id] = socket
+          postToPlugin({ type: "EXPORT_SOURCE_SVG", requestId: message.id, params: message.params })
+          return
+        }
 
         if (message.method === "GET_FILE_INFO") {
           send(socket, {
@@ -181,6 +196,18 @@
       window.onmessage = function (event) {
         var message = event.data.pluginMessage
         if (!message || !message.type) return
+
+        if (message.type === "EXPORT_SOURCE_SVG_RESULT") {
+          var sourceSocket = sourceSvgRequests[message.requestId]
+          delete sourceSvgRequests[message.requestId]
+          if (!sourceSocket) return
+          send(sourceSocket, {
+            id: message.requestId,
+            result: message.data,
+            error: message.success ? undefined : message.error || "Source SVG export needs attention",
+          })
+          return
+        }
 
         if (message.type === "FILE_INFO") {
           fileInfo = message.data

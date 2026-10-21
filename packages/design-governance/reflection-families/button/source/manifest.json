@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "fileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "snapshotSha256": "6fc88c690c5d281d99940166763d1026d2a93c527906e7c515d9df29a45a914f",
+  "hashes": {
+    "raw": "e48c5db2a83f625cf98a1cca3980502c53802bba5b2250032ad4bdf879e34990",
+    "manifest": "eeaea34f958caac5e88771926df7fb522b088bfdc9df786426a87a13fdb9db92",
+    "variables": "3ee272e36529c1dfdc50f738e9cb7084340c04121bcddd78d30d7f949d96fd40"
+  },
+  "capture": {
+    "version": "2410234809276115335",
+    "lastModified": "2026-10-14T15:02:45Z",
+    "provenance": "fresh REST file capture and Figma Bridge variable export on 2026-10-14; not owner approval"
+  }
+}

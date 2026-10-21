@@ -1,0 +1,43 @@
+{
+  "baseline": "basic-icon-left.chromium-linux.light.webp",
+  "caseFingerprint": "0947f3570518892cb837afadf5bbdc22ed6cdb3dab33b9f4041c9871446a0a54",
+  "caseId": "button.basic-icon-left",
+  "createdAt": "2026-10-15T16:35:20.121Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "a58c7a1018c23aec779c04c43899511b5f9a7ad39d4af19a96a38d5039aea014",
+    "sourceByteLength": 1660,
+    "sourceFormat": "png",
+    "sourceSha256": "6aabc90ab2f112f9166130e25f6cce23d9561f3b055aaa8d9276a2cac1fe0f6f"
+  },
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "figmaFrameName": "reflection/button/basic-icon-left/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "6007:14651",
+  "imageByteLength": 364,
+  "imageDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "imageFormat": "webp",
+  "imageSha256": "e0a18dc3a65c7ac5dda1a7d3b7d9fe8f94fcb839487d84d68deec1a1734ba2de",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "f1e4c96e75a4b0b14b6b330ef083f9150226268793bf403568ea3f7642d8fe16",
+  "sourceFrameId": "1371:11172",
+  "sourceNodeId": "1362:7476",
+  "sourceNodeIds": ["1362:7476", "1461:11489"],
+  "variablesFingerprint": "8f94a553bef355a0d3b9e55ea8b725ce92ad7a6231d1a470aa0ead813b86e1da",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

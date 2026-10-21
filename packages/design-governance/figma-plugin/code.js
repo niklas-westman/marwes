@@ -400,8 +400,232 @@ async function sendRenameReflectionFrames(requestId, params) {
   }
 }
 
+// Source exports are read-only observations, never reference promotion or approval.
+const SOURCE_SVG_MAX_NODES = 16
+const SOURCE_SVG_MAX_BYTES = 2 * 1024 * 1024
+const SOURCE_SVG_MAX_TOTAL_BYTES = 8 * 1024 * 1024
+let sourceSvgRequestInProgress = false
+
+function sourceJsonValue(value) {
+  return JSON.parse(
+    JSON.stringify(value, (_key, entry) => (typeof entry === "symbol" ? { mixed: true } : entry)),
+  )
+}
+
+function sourceNodeMetadata(node) {
+  const texts = []
+  const stack = [node]
+  let visited = 0
+  while (stack.length > 0) {
+    const current = stack.pop()
+    visited += 1
+    if (visited > 512) throw new Error("Source subtree exceeds 512 nodes")
+    if (current.type === "TEXT") {
+      const text = { nodeId: current.id, name: current.name }
+      const properties = [
+        "characters",
+        "fontName",
+        "fontSize",
+        "fontWeight",
+        "lineHeight",
+        "letterSpacing",
+        "textAlignHorizontal",
+        "textAlignVertical",
+        "textCase",
+        "textDecoration",
+        "textAutoResize",
+        "paragraphSpacing",
+        "paragraphIndent",
+        "fills",
+        "boundVariables",
+        "absoluteBoundingBox",
+        "absoluteTransform",
+      ]
+      for (let index = 0; index < properties.length; index += 1) {
+        const property = properties[index]
+        if (typeof current[property] !== "undefined") text[property] = current[property]
+      }
+      if (typeof current.getStyledTextSegments === "function") {
+        text.styledSegments = current.getStyledTextSegments([
+          "fontName",
+          "fontSize",
+          "fontWeight",
+          "lineHeight",
+          "letterSpacing",
+          "textCase",
+          "textDecoration",
+          "fills",
+        ])
+      }
+      texts.push(sourceJsonValue(text))
+    }
+    if ("children" in current && current.children) {
+      for (let index = current.children.length - 1; index >= 0; index -= 1) {
+        stack.push(current.children[index])
+      }
+    }
+  }
+  return sourceJsonValue({
+    nodeId: node.id,
+    name: node.name,
+    type: node.type,
+    absoluteBoundingBox: node.absoluteBoundingBox || null,
+    absoluteRenderBounds: node.absoluteRenderBounds || null,
+    absoluteTransform: node.absoluteTransform || null,
+    width: typeof node.width === "number" ? node.width : null,
+    height: typeof node.height === "number" ? node.height : null,
+    explicitVariableModes: node.explicitVariableModes || null,
+    resolvedVariableModes: node.resolvedVariableModes || null,
+    textNodes: texts,
+  })
+}
+
+function decodeSourceSvg(bytes) {
+  // TextDecoder is unavailable in some Figma plugin runtimes. URI decoding
+  // handles UTF-8 (including supplementary characters) and rejects invalid bytes.
+  const encoded = []
+  for (let index = 0; index < bytes.length; index += 1) {
+    encoded.push(`%${bytes[index].toString(16).padStart(2, "0")}`)
+  }
+  return decodeURIComponent(encoded.join(""))
+}
+
+function validateSourceSvgRequest(requestId, params) {
+  if (typeof requestId !== "string" || !/^[A-Za-z0-9_.:-]{1,128}$/.test(requestId)) {
+    throw new Error("EXPORT_SOURCE_SVG requires a bounded nonempty requestId")
+  }
+  if (
+    !params ||
+    !Array.isArray(params.nodeIds) ||
+    params.nodeIds.length < 1 ||
+    params.nodeIds.length > SOURCE_SVG_MAX_NODES
+  ) {
+    throw new Error("EXPORT_SOURCE_SVG requires 1..16 explicit nodeIds")
+  }
+  const allowed = ["nodeIds", "expectedFileKey", "expectedFileName", "verifiedFileIdentity"]
+  if (Object.keys(params).some((key) => allowed.indexOf(key) === -1)) {
+    throw new Error("Unknown source SVG request parameter")
+  }
+  if (
+    typeof params.verifiedFileIdentity !== "undefined" &&
+    typeof params.verifiedFileIdentity !== "boolean"
+  ) {
+    throw new Error("verifiedFileIdentity must be boolean")
+  }
+  const unique = new Set()
+  for (let index = 0; index < params.nodeIds.length; index += 1) {
+    const nodeId = params.nodeIds[index]
+    if (
+      typeof nodeId !== "string" ||
+      nodeId.length > 256 ||
+      !/^I?\d+:\d+(?:;\d+:\d+)*$/.test(nodeId) ||
+      unique.has(nodeId)
+    ) {
+      throw new Error("Invalid or duplicate source nodeId")
+    }
+    unique.add(nodeId)
+  }
+  if (
+    typeof params.expectedFileKey !== "string" ||
+    !/^[A-Za-z0-9]{1,128}$/.test(params.expectedFileKey) ||
+    typeof params.expectedFileName !== "string" ||
+    params.expectedFileName.length < 1 ||
+    params.expectedFileName.length > 512
+  ) {
+    throw new Error("Expected file key and name are required")
+  }
+  if (figma.root.name !== params.expectedFileName) {
+    throw new Error("Connected file name does not match expectedFileName")
+  }
+  if (figma.fileKey && figma.fileKey !== params.expectedFileKey) {
+    throw new Error("Connected file key does not match expectedFileKey")
+  }
+  if (!figma.fileKey && params.verifiedFileIdentity !== true) {
+    throw new Error(
+      "File key unavailable; independently verify the open file and set verifiedFileIdentity",
+    )
+  }
+}
+
+async function sendSourceSvg(requestId, params) {
+  let ownsRequest = false
+  try {
+    validateSourceSvgRequest(requestId, params)
+    if (sourceSvgRequestInProgress) throw new Error("A source SVG export is already running")
+    sourceSvgRequestInProgress = true
+    ownsRequest = true
+    const result = {
+      success: true,
+      requestedFile: { fileKey: params.expectedFileKey, fileName: params.expectedFileName },
+      reportedFile: fileInfo(),
+      identityVerification: figma.fileKey ? "reported-key" : "caller-verified-file-name",
+      exportedAt: new Date().toISOString(),
+      exportSettings: {
+        format: "SVG",
+        svgOutlineText: true,
+        svgSimplifyStroke: false,
+        svgIdAttribute: true,
+      },
+      nodes: [],
+      errors: [],
+    }
+    let totalBytes = 0
+    for (let index = 0; index < params.nodeIds.length; index += 1) {
+      const nodeId = params.nodeIds[index]
+      try {
+        const node = await resolveNodeById(nodeId)
+        if (!node) throw new Error("Source node not found")
+        if (typeof node.exportAsync !== "function") throw new Error("Source node cannot export SVG")
+        const metadata = sourceNodeMetadata(node)
+        if (JSON.stringify(metadata).length > 512 * 1024)
+          throw new Error("Source metadata exceeds limit")
+        const bytes = await node.exportAsync(result.exportSettings)
+        if (!bytes || !bytes.length || bytes.length > SOURCE_SVG_MAX_BYTES) {
+          throw new Error("Source SVG is empty or exceeds 2 MiB limit")
+        }
+        if (totalBytes + bytes.length > SOURCE_SVG_MAX_TOTAL_BYTES) {
+          throw new Error("Source SVG batch exceeds 8 MiB limit")
+        }
+        const svg = decodeSourceSvg(bytes)
+        if (!/^\s*(?:<\?xml[^>]*>\s*)?<svg[\s>]/.test(svg))
+          throw new Error("Export did not return SVG")
+        totalBytes += bytes.length
+        result.nodes.push({
+          requestedNodeId: nodeId,
+          metadata: metadata,
+          svg: svg,
+          byteLength: bytes.length,
+        })
+      } catch (error) {
+        result.errors.push({ nodeId: nodeId, error: errorMessage(error) })
+      }
+    }
+    result.success = result.errors.length === 0
+    post({
+      type: "EXPORT_SOURCE_SVG_RESULT",
+      requestId: requestId,
+      success: result.success,
+      data: result,
+    })
+  } catch (error) {
+    post({
+      type: "EXPORT_SOURCE_SVG_RESULT",
+      requestId: requestId,
+      success: false,
+      error: errorMessage(error),
+    })
+  } finally {
+    if (ownsRequest) sourceSvgRequestInProgress = false
+  }
+}
+
 figma.ui.onmessage = (message) => {
   if (!message || !message.type) return
+
+  if (message.type === "EXPORT_SOURCE_SVG") {
+    sendSourceSvg(message.requestId, message.params)
+    return
+  }
 
   if (message.type === "GET_FILE_INFO") {
     sendFileInfo(message.requestId)

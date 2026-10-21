@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "cases": [
+    {
+      "caseId": "button.behavior-submit",
+      "mode": "light",
+      "portalPath": "/reflection/button/behavior-submit/light",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      }
+    },
+    {
+      "caseId": "button.behavior-submit",
+      "mode": "dark",
+      "portalPath": "/reflection/button/behavior-submit/dark",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      }
+    },
+    {
+      "caseId": "button.behavior-reset",
+      "mode": "light",
+      "portalPath": "/reflection/button/behavior-reset/light",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      }
+    },
+    {
+      "caseId": "button.behavior-reset",
+      "mode": "dark",
+      "portalPath": "/reflection/button/behavior-reset/dark",
+      "viewportSize": {
+        "width": 390,
+        "height": 220
+      }
+    }
+  ]
+}

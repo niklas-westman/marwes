@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "family": "button",
+  "records": [
+    {
+      "id": "dc-011-text-raster",
+      "attestation": "delegated",
+      "by": "Niklas Westman",
+      "recordedBy": "Claude (assistant)",
+      "at": "2026-10-16T00:00:00.000Z",
+      "comment": "\"lets accept the 15 - mark them clearly\" (Niklas, 2026-10-16, about the 15 Button visual rows that fail only by label-only text rendering differences). Recorded as DC-011 in the design compliance decisions.",
+      "reason": "Label-only text rasterization differs from the Figma reference by 3 to 53 px over the standard limit; hinting, subpixel launch flags, fonts and CSS changed nothing. Each row's limit was raised to the measured value plus 10 px. Not a reference approval and not an acceptance of any other row."
+    }
+  ]
+}

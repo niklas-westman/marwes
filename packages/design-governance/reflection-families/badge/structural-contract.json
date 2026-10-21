@@ -1,0 +1,1195 @@
+{
+  "schemaVersion": 1,
+  "family": "badge",
+  "toleranceReason": "Bounds allow 0.6px for Figma text advance versus browser subpixel layout; numeric styles allow 0.02px serialization; text and paint exact. Existing visual policy remains required.",
+  "cases": [
+    {
+      "caseId": "badge.neutral",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:2276:28207": "2276:23"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:40088",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:40088",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:40088",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:40088;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "neutral",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.neutral",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:2276:28207": "2276:23"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:42154",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42154",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42154",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:42154;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "neutral",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.primary",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:2276:28207": "2276:24"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:41921",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41921",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41921",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:41921;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "primary",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.primary",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:2276:28207": "2276:24"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:42156",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42156",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42156",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:42156;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "primary",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.success",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:2276:28207": "2276:25"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:41934",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41934",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41934",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:41934;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "success",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.success",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:2276:28207": "2276:25"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:42158",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42158",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42158",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:42158;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "success",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.warning",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:2276:28207": "2276:23"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:41943",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41943",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": []
+        },
+        {
+          "nodeId": "3872:41943",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:41947;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "warning",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.warning",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:2276:28207": "2276:23"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:42160",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42160",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": []
+        },
+        {
+          "nodeId": "3872:42160",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:42161;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "warning",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.destructive",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:2276:28207": "2276:27"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:41960",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41960",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:41960",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:41960;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "destructive",
+      "state": "default"
+    },
+    {
+      "caseId": "badge.destructive",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:2276:28207": "2276:27"
+      },
+      "parts": [
+        {
+          "nodeId": "3872:42163",
+          "part": "root",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42163",
+          "part": "surface",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3872:42163",
+          "part": "layout",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3872:42163;1364:7722",
+          "part": "label",
+          "selector": ".mw-badge",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": ["Glyph rasterization requires visual proof"],
+      "publicVariant": "destructive",
+      "state": "default"
+    }
+  ]
+}

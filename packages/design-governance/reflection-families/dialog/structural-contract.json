@@ -1,0 +1,765 @@
+{
+  "schemaVersion": 1,
+  "family": "dialog",
+  "toleranceReason": "Bounds allow 0.6px for Figma text advance versus browser subpixel layout; numeric styles allow 0.02px serialization; text and paint exact. Existing visual policy remains required.",
+  "cases": [
+    {
+      "caseId": "dialog.medium",
+      "mode": "light",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:1",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "1382:0",
+        "VariableCollectionId:1593:4566": "1593:6",
+        "VariableCollectionId:1609:15451": "1609:13",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2513:32272": "2513:1",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "1609:15569",
+          "part": "root",
+          "selector": ".mw-dialog",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "1609:15569",
+          "part": "surface",
+          "selector": ".mw-dialog",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "1609:15569",
+          "part": "layout",
+          "selector": ".mw-dialog",
+          "properties": []
+        },
+        {
+          "nodeId": "I1609:15569;1609:15461",
+          "part": "label",
+          "selector": ".mw-dialog__title",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15467",
+          "part": "description",
+          "selector": ".mw-dialog__description",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15460",
+          "part": "header",
+          "selector": ".mw-dialog__header",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15466",
+          "part": "content",
+          "selector": ".mw-dialog__content",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15469",
+          "part": "footer",
+          "selector": ".mw-dialog__footer",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15462",
+          "part": "close",
+          "selector": ".mw-dialog__close",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeColor",
+              "sourceProperty": "strokes.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15462;2513:32280",
+          "part": "close-icon",
+          "selector": ".mw-dialog__close .mw-icon",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15465",
+          "part": "header-divider",
+          "selector": ".mw-dialog__header-divider",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I1609:15569;1609:15468",
+          "part": "footer-divider",
+          "selector": ".mw-dialog__footer-divider",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": [
+        "Glyph rasterization requires visual proof",
+        "Multi-child content spacing, action-button interaction states and glyph/icon rasterization remain outside this structural case"
+      ],
+      "publicVariant": "medium",
+      "state": "default"
+    },
+    {
+      "caseId": "dialog.medium",
+      "mode": "dark",
+      "collectionModes": {
+        "VariableCollectionId:5:895": "5:4",
+        "VariableCollectionId:5:924": "5:12",
+        "VariableCollectionId:1358:5009": "1358:0",
+        "VariableCollectionId:1358:5072": "1358:2",
+        "VariableCollectionId:1358:7240": "1358:13",
+        "VariableCollectionId:1382:9136": "1382:0",
+        "VariableCollectionId:1593:4566": "1593:6",
+        "VariableCollectionId:1609:15451": "1609:13",
+        "VariableCollectionId:2276:28206": "2276:15",
+        "VariableCollectionId:2513:32272": "2513:1",
+        "VariableCollectionId:2276:28208": "2276:32"
+      },
+      "parts": [
+        {
+          "nodeId": "3017:37117",
+          "part": "root",
+          "selector": ".mw-dialog",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "3017:37117",
+          "part": "surface",
+          "selector": ".mw-dialog",
+          "properties": [
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "3017:37117",
+          "part": "layout",
+          "selector": ".mw-dialog",
+          "properties": []
+        },
+        {
+          "nodeId": "I3017:37117;1609:15461",
+          "part": "label",
+          "selector": ".mw-dialog__title",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "letterSpacing",
+              "sourceProperty": "style.letterSpacing",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15467",
+          "part": "description",
+          "selector": ".mw-dialog__description",
+          "properties": [
+            {
+              "property": "text",
+              "sourceProperty": "characters",
+              "tolerance": 0
+            },
+            {
+              "property": "fontFamily",
+              "sourceProperty": "style.fontFamily",
+              "tolerance": 0
+            },
+            {
+              "property": "fontSize",
+              "sourceProperty": "style.fontSize",
+              "tolerance": 0.02
+            },
+            {
+              "property": "fontWeight",
+              "sourceProperty": "style.fontWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "lineHeight",
+              "sourceProperty": "style.lineHeightPx",
+              "tolerance": 0.02
+            },
+            {
+              "property": "color",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15460",
+          "part": "header",
+          "selector": ".mw-dialog__header",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15466",
+          "part": "content",
+          "selector": ".mw-dialog__content",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15469",
+          "part": "footer",
+          "selector": ".mw-dialog__footer",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "gap",
+              "sourceProperty": "itemSpacing",
+              "tolerance": 0.02
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15462",
+          "part": "close",
+          "selector": ".mw-dialog__close",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "paddingTop",
+              "sourceProperty": "paddingTop",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingRight",
+              "sourceProperty": "paddingRight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingBottom",
+              "sourceProperty": "paddingBottom",
+              "tolerance": 0.02
+            },
+            {
+              "property": "paddingLeft",
+              "sourceProperty": "paddingLeft",
+              "tolerance": 0.02
+            },
+            {
+              "property": "borderRadius",
+              "sourceProperty": "cornerRadius",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeWidth",
+              "sourceProperty": "strokeWeight",
+              "tolerance": 0.02
+            },
+            {
+              "property": "insetStrokeColor",
+              "sourceProperty": "strokes.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15462;2513:32280",
+          "part": "close-icon",
+          "selector": ".mw-dialog__close .mw-icon",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15465",
+          "part": "header-divider",
+          "selector": ".mw-dialog__header-divider",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "nodeId": "I3017:37117;1609:15468",
+          "part": "footer-divider",
+          "selector": ".mw-dialog__footer-divider",
+          "properties": [
+            {
+              "property": "bounds.width",
+              "sourceProperty": "absoluteBoundingBox.width",
+              "tolerance": 0.6
+            },
+            {
+              "property": "bounds.height",
+              "sourceProperty": "absoluteBoundingBox.height",
+              "tolerance": 0.6
+            },
+            {
+              "property": "backgroundColor",
+              "sourceProperty": "fills.0.color",
+              "tolerance": 0
+            }
+          ]
+        }
+      ],
+      "unsupported": [],
+      "limitations": [
+        "Glyph rasterization requires visual proof",
+        "Multi-child content spacing, action-button interaction states and glyph/icon rasterization remain outside this structural case"
+      ],
+      "publicVariant": "medium",
+      "state": "default"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "baseline": "danger-hover.chromium-linux.light.webp",
+  "caseFingerprint": "f6f06cdc04eb6789faa023fcd565092ad7f044150c509607d398c71bd046411b",
+  "caseId": "button.danger-hover",
+  "createdAt": "2026-10-15T16:35:23.529Z",
+  "encodingConversion": {
+    "decodedRgbaSha256": "06fc3b6295e1e7826bad698d35513cb410c4345643b194265957591a3692a1e3",
+    "sourceByteLength": 1959,
+    "sourceFormat": "png",
+    "sourceSha256": "b6c56a93334564b0e53e21aa9be615d22e746b67d6278078275518db2a80bffb"
+  },
+  "exportScale": 1,
+  "family": "button",
+  "figmaFileKey": "nybMu3iJUnnOvWtuxjMG8b",
+  "figmaFrameName": "reflection/button/danger-hover/light",
+  "framing": {
+    "align": "center",
+    "background": "#ffffff",
+    "padding": 0,
+    "rootSelector": "#reflection-root"
+  },
+  "generatedFrameId": "6020:15546",
+  "imageByteLength": 442,
+  "imageDimensions": {
+    "height": 220,
+    "width": 390
+  },
+  "imageFormat": "webp",
+  "imageSha256": "969bf89c71ba4bea3da15c2c35624d0ab39ab97d14c3fb105caf8fbe0a7263f1",
+  "mode": "light",
+  "origin": "figma-bridge-export",
+  "schemaVersion": 2,
+  "sourceFingerprint": "35280743e0c021b6ac9a6c27b522bd77d94724721b0986089c7b4137576fe02f",
+  "sourceFrameId": "3872:41975",
+  "sourceNodeId": "1364:11356",
+  "sourceNodeIds": ["1364:11356", "3872:41976"],
+  "variablesFingerprint": "89ab7e541c83561f097188d68dcc4dcc691e60cfead4b0d5ca70f66ed9810c24",
+  "viewport": "button-default",
+  "viewportSize": {
+    "height": 220,
+    "width": 390
+  }
+}

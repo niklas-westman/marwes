@@ -150,6 +150,75 @@ jobs:
           path: artifacts/reflection
           if-no-files-found: ignore
 
+  governance:
+    # Report-only while Linux results are unknown: the step never fails the job, and the job runs
+    # on pull requests only so it cannot delay a release (release.yml reuses this workflow).
+    name: governance (report-only)
+    if: inputs.heavy && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      CI: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # The bundle dates the required set from git history; a shallow clone would date it from HEAD.
+          fetch-depth: 0
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install Reflection browser
+        run: pnpm reflection:install-browsers -- --with-deps chromium
+
+      - name: Verify Button against the pinned Figma capture
+        id: verify
+        continue-on-error: true
+        run: pnpm governance:verify -- --family button --adapter all
+
+      - name: Summarise
+        if: always()
+        run: node scripts/governance-ci-summary.mjs
+
+      # The projection bundle is the unit a designer reviews. It is built from the run above, so it
+      # reports what this commit proved, including the visual checks that fail only on Linux text.
+      - name: Build the Reflection bundle
+        if: always() && steps.verify.outcome != 'skipped'
+        continue-on-error: true
+        run: |
+          pnpm --filter @marwes-ui/design-governance exec tsx src/cli/governance.ts bundle \
+            --family button \
+            --release "pr-${{ github.event.pull_request.number }}" \
+            --build "${{ github.run_number }}" \
+            --output "$GITHUB_WORKSPACE/artifacts/reflection/bundle/marwes-pr-${{ github.event.pull_request.number }}-build-${{ github.run_number }}"
+
+      - name: Upload the Reflection bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reflection-bundle
+          path: artifacts/reflection/bundle
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Upload governance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-artifacts
+          path: artifacts/reflection/governance
+          retention-days: 7
+          if-no-files-found: ignore
+
   consumer-smoke:
     name: consumer smoke / ${{ matrix.framework }}
     if: inputs.heavy
